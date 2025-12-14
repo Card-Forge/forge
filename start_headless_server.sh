@@ -1,20 +1,11 @@
 #!/bin/bash
-# Forge Headless Launcher Script
-# Quick start script for ForgeHeadless game engine
+# Startup script for ForgeHeadlessServer (port 8080)
 
-# Get the directory where the script is located
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-PROJECT_DIR="$SCRIPT_DIR"
+echo "Starting ForgeHeadlessServer on port 8080..."
+echo "Press Ctrl+C to stop the server"
+echo ""
 
-# Path to the jar file
-JAR_PATH="$PROJECT_DIR/forge-gui-desktop/target/forge-gui-desktop-2.0.08-SNAPSHOT-jar-with-dependencies.jar"
-
-# Check if jar exists
-if [ ! -f "$JAR_PATH" ]; then
-    echo "Error: Jar file not found at $JAR_PATH"
-    echo "Please run 'mvn clean install -DskipTests' to build the project first."
-    exit 1
-fi
+cd "$(dirname "$0")"
 
 # Find Java 17 installation
 if [ -x "/opt/homebrew/opt/openjdk@17/bin/java" ]; then
@@ -35,5 +26,4 @@ else
     echo "WARNING: Java 17 not found, using system java (may fail)"
 fi
 
-# Run ForgeHeadless with any arguments passed to the script
-$JAVA_CMD -Xmx4096m -cp "$JAR_PATH" forge.view.ForgeHeadless "$@"
+$JAVA_CMD -cp forge-gui-desktop/target/forge-gui-desktop-2.0.08-SNAPSHOT-jar-with-dependencies.jar forge.view.ForgeHeadless "$@"

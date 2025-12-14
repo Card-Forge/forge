@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTG Game Viewer</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1a2e;
+            color: #eee;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        h1 { text-align: center; margin-bottom: 10px; color: #fff; }
+        .status { text-align: center; margin-bottom: 20px; color: #888; font-size: 14px; }
+        .status.connected { color: #4ade80; }
+        .status.error { color: #f87171; }
+
+        .game-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #16213e;
+            border-radius: 10px;
+        }
+        .game-info span { font-size: 18px; }
+        .phase { color: #fbbf24; font-weight: bold; }
+        .turn { color: #60a5fa; }
+
+        .battlefield-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .player-area {
+            background: #16213e;
+            border-radius: 10px;
+            padding: 15px;
+        }
+        .player-area.opponent { border-top: 3px solid #ef4444; }
+        .player-area.self { border-top: 3px solid #22c55e; }
+
+        .player-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+        }
+        .player-name { font-size: 20px; font-weight: bold; }
+        .life {
+            font-size: 28px;
+            font-weight: bold;
+            background: #7c3aed;
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+        .library-count { color: #888; font-size: 14px; }
+
+        .zone {
+            margin-bottom: 15px;
+        }
+        .zone-label {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .card {
+            background: #0f3460;
+            border: 2px solid #1e40af;
+            border-radius: 8px;
+            padding: 10px;
+            min-width: 120px;
+            max-width: 150px;
+            font-size: 12px;
+            transition: transform 0.2s;
+        }
+        .card:hover { transform: translateY(-3px); }
+        .card-name { font-weight: bold; margin-bottom: 5px; color: #fff; }
+        .card-type { color: #94a3b8; font-size: 10px; }
+        .card-pt {
+            color: #fbbf24;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        .card.tapped {
+            transform: rotate(6deg);
+            opacity: 0.7;
+            border-color: #6b7280;
+        }
+        .card.land { border-color: #84cc16; }
+        .card.creature { border-color: #22d3d8; }
+        .card.artifact { border-color: #a1a1aa; }
+        .card.enchantment { border-color: #c084fc; }
+        .card.instant { border-color: #f472b6; }
+        .card.sorcery { border-color: #fb923c; }
+
+        .hand-zone .card {
+            background: #1e3a5f;
+            border-color: #3b82f6;
+        }
+
+        .graveyard-zone .cards {
+            opacity: 0.6;
+        }
+
+        .stack-container {
+            background: #4c1d95;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .stack-container h3 { margin-bottom: 10px; color: #c4b5fd; }
+        .stack-item {
+            background: #5b21b6;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+        .stack-empty { color: #a78bfa; font-style: italic; }
+
+        .actions-container {
+            background: #16213e;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .actions-container h3 { margin-bottom: 15px; color: #fbbf24; }
+        .action {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: #1e3a5f;
+            border-radius: 5px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .action:hover { background: #2563eb; }
+        .action-index {
+            background: #3b82f6;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            min-width: 30px;
+            text-align: center;
+        }
+        .action-type {
+            color: #94a3b8;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+        .action-desc { flex: 1; }
+        .action.pass { background: #374151; }
+
+        .no-cards { color: #6b7280; font-style: italic; padding: 10px; }
+
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        .controls button {
+            background: #3b82f6;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .controls button:hover { background: #2563eb; }
+
+        .mana-cost {
+            color: #fbbf24;
+            font-size: 11px;
+        }
+    </style>
+</head>
+<body>
+    <h1>⚔️ MTG Game Viewer</h1>
+    <div id="status" class="status">Connecting...</div>
+
+    <div id="game-info" class="game-info">
+        <span class="turn">Turn: <span id="turn">-</span></span>
+        <span class="phase">Phase: <span id="phase">-</span></span>
+        <span>Active: <span id="active-player">-</span></span>
+    </div>
+
+    <div id="stack-container" class="stack-container" style="display: none;">
+        <h3>📚 Stack</h3>
+        <div id="stack"></div>
+    </div>
+
+    <div class="battlefield-container">
+        <div id="opponent-area" class="player-area opponent">
+            <div class="player-header">
+                <span class="player-name" id="opponent-name">Opponent</span>
+                <span class="life" id="opponent-life">20</span>
+            </div>
+            <div class="library-count">Library: <span id="opponent-library">0</span> cards</div>
+            <div class="zone battlefield-zone">
+                <div class="zone-label">Battlefield</div>
+                <div class="cards" id="opponent-battlefield"></div>
+            </div>
+            <div class="zone graveyard-zone">
+                <div class="zone-label">Graveyard</div>
+                <div class="cards" id="opponent-graveyard"></div>
+            </div>
+        </div>
+
+        <div id="self-area" class="player-area self">
+            <div class="player-header">
+                <span class="player-name" id="self-name">You</span>
+                <span class="life" id="self-life">20</span>
+            </div>
+            <div class="library-count">Library: <span id="self-library">0</span> cards</div>
+            <div class="zone battlefield-zone">
+                <div class="zone-label">Battlefield</div>
+                <div class="cards" id="self-battlefield"></div>
+            </div>
+            <div class="zone hand-zone">
+                <div class="zone-label">Hand</div>
+                <div class="cards" id="self-hand"></div>
+            </div>
+            <div class="zone graveyard-zone">
+                <div class="zone-label">Graveyard</div>
+                <div class="cards" id="self-graveyard"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="actions-container">
+        <h3>🎯 Available Actions</h3>
+        <div id="actions"></div>
+    </div>
+
+    <div class="controls">
+        <button onclick="refresh()">🔄 Refresh</button>
+        <button onclick="toggleAutoRefresh()">⏸️ Auto-refresh: <span id="auto-status">ON</span></button>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8081';
+        let autoRefresh = true;
+        let refreshInterval = null;
+        let cardDefinitions = {};
+
+        function getCardType(cardName) {
+            const def = cardDefinitions[cardName];
+            if (!def || !def.type) return '';
+            const type = def.type.toLowerCase();
+            if (type.includes('land')) return 'land';
+            if (type.includes('creature')) return 'creature';
+            if (type.includes('artifact')) return 'artifact';
+            if (type.includes('enchantment')) return 'enchantment';
+            if (type.includes('instant')) return 'instant';
+            if (type.includes('sorcery')) return 'sorcery';
+            return '';
+        }
+
+        function renderCard(card) {
+            const def = cardDefinitions[card.name] || {};
+            const cardType = getCardType(card.name);
+            const isTapped = card.tapped;
+
+            let html = `<div class="card ${cardType} ${isTapped ? 'tapped' : ''}">`;
+            html += `<div class="card-name">${card.name}</div>`;
+            if (def.mana_cost && def.mana_cost !== 'no cost') {
+                html += `<div class="mana-cost">${def.mana_cost}</div>`;
+            }
+            if (def.type) {
+                html += `<div class="card-type">${def.type}</div>`;
+            }
+            if (def.power && def.toughness) {
+                html += `<div class="card-pt">${def.power}/${def.toughness}</div>`;
+            }
+            html += '</div>';
+            return html;
+        }
+
+        function renderCards(cards, containerId) {
+            const container = document.getElementById(containerId);
+            if (!cards || cards.length === 0) {
+                container.innerHTML = '<div class="no-cards">Empty</div>';
+                return;
+            }
+            container.innerHTML = cards.map(renderCard).join('');
+        }
+
+        function renderStack(stack) {
+            const container = document.getElementById('stack-container');
+            const stackDiv = document.getElementById('stack');
+
+            if (!stack || stack.length === 0) {
+                container.style.display = 'none';
+                return;
+            }
+
+            container.style.display = 'block';
+            stackDiv.innerHTML = stack.map(item => `
+                <div class="stack-item">
+                    <strong>${item.card_name}</strong> - ${item.description}
+                    <br><small>Controller: ${item.controller}</small>
+                </div>
+            `).join('');
+        }
+
+        function renderActions(actions) {
+            const container = document.getElementById('actions');
+            if (!actions || !actions.actions || actions.actions.length === 0) {
+                container.innerHTML = '<div class="no-cards">No actions available</div>';
+                return;
+            }
+
+            container.innerHTML = actions.actions.map((action, idx) => {
+                const isPass = action.type === 'pass_priority';
+                let desc = action.card_name || '';
+                if (action.ability_description) {
+                    desc += ` - ${action.ability_description}`;
+                }
+                if (action.mana_cost && action.mana_cost !== 'no cost') {
+                    desc += ` (${action.mana_cost})`;
+                }
+
+                return `
+                    <div class="action ${isPass ? 'pass' : ''}" onclick="sendAction(${idx})">
+                        <span class="action-index">${idx}</span>
+                        <span class="action-type">${action.type.replace('_', ' ')}</span>
+                        <span class="action-desc">${desc}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        async function sendAction(index) {
+            try {
+                const response = await fetch(`${API_BASE}/action`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ index })
+                });
+                console.log('Action sent:', index);
+                setTimeout(refresh, 500);
+            } catch (e) {
+                console.error('Failed to send action:', e);
+            }
+        }
+
+        async function refresh() {
+            const status = document.getElementById('status');
+
+            try {
+                // Fetch game state
+                const stateRes = await fetch(`${API_BASE}/state`);
+                const state = await stateRes.json();
+
+                // Fetch input/actions
+                const inputRes = await fetch(`${API_BASE}/input`);
+                const input = await inputRes.json();
+
+                status.textContent = 'Connected ✓';
+                status.className = 'status connected';
+
+                // Store card definitions
+                if (state.card_definitions) {
+                    cardDefinitions = state.card_definitions;
+                }
+
+                // Update game info
+                document.getElementById('turn').textContent = state.turn || '-';
+                document.getElementById('phase').textContent = state.phase || '-';
+
+                // Find players (assume first is "us", second is opponent)
+                const players = state.players || [];
+                const self = players[0] || {};
+                const opponent = players[1] || {};
+
+                document.getElementById('active-player').textContent =
+                    state.activePlayerId === self.id ? self.name : opponent.name;
+
+                // Update opponent
+                document.getElementById('opponent-name').textContent = opponent.name || 'Opponent';
+                document.getElementById('opponent-life').textContent = opponent.life || 0;
+                document.getElementById('opponent-library').textContent = opponent.libraryCount || 0;
+                renderCards(opponent.battlefield, 'opponent-battlefield');
+                renderCards(opponent.graveyard, 'opponent-graveyard');
+
+                // Update self
+                document.getElementById('self-name').textContent = self.name || 'You';
+                document.getElementById('self-life').textContent = self.life || 0;
+                document.getElementById('self-library').textContent = self.libraryCount || 0;
+                renderCards(self.battlefield, 'self-battlefield');
+                renderCards(self.hand, 'self-hand');
+                renderCards(self.graveyard, 'self-graveyard');
+
+                // Update stack
+                renderStack(state.stack);
+
+                // Update actions
+                if (input.type === 'action' && input.data) {
+                    renderActions(input.data);
+                } else {
+                    document.getElementById('actions').innerHTML =
+                        '<div class="no-cards">Waiting for game...</div>';
+                }
+
+            } catch (e) {
+                status.textContent = 'Connection error - Is the server running on port 8081?';
+                status.className = 'status error';
+                console.error('Refresh error:', e);
+            }
+        }
+
+        function toggleAutoRefresh() {
+            autoRefresh = !autoRefresh;
+            document.getElementById('auto-status').textContent = autoRefresh ? 'ON' : 'OFF';
+
+            if (autoRefresh) {
+                startAutoRefresh();
+            } else {
+                stopAutoRefresh();
+            }
+        }
+
+        function startAutoRefresh() {
+            if (refreshInterval) clearInterval(refreshInterval);
+            refreshInterval = setInterval(refresh, 1000);
+        }
+
+        function stopAutoRefresh() {
+            if (refreshInterval) {
+                clearInterval(refreshInterval);
+                refreshInterval = null;
+            }
+        }
+
+        // Initial load
+        refresh();
+        startAutoRefresh();
+    </script>
+</body>
+</html>

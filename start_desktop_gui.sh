@@ -1,20 +1,10 @@
 #!/bin/bash
-# Forge Headless Launcher Script
-# Quick start script for ForgeHeadless game engine
+# Launch script for Forge Desktop GUI
 
-# Get the directory where the script is located
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-PROJECT_DIR="$SCRIPT_DIR"
+echo "Starting Forge Desktop GUI..."
+echo ""
 
-# Path to the jar file
-JAR_PATH="$PROJECT_DIR/forge-gui-desktop/target/forge-gui-desktop-2.0.08-SNAPSHOT-jar-with-dependencies.jar"
-
-# Check if jar exists
-if [ ! -f "$JAR_PATH" ]; then
-    echo "Error: Jar file not found at $JAR_PATH"
-    echo "Please run 'mvn clean install -DskipTests' to build the project first."
-    exit 1
-fi
+cd "$(dirname "$0")"
 
 # Find Java 17 installation
 if [ -x "/opt/homebrew/opt/openjdk@17/bin/java" ]; then
@@ -35,5 +25,19 @@ else
     echo "WARNING: Java 17 not found, using system java (may fail)"
 fi
 
-# Run ForgeHeadless with any arguments passed to the script
-$JAVA_CMD -Xmx4096m -cp "$JAR_PATH" forge.view.ForgeHeadless "$@"
+# Check if JAR exists
+JAR_PATH="forge-gui-desktop/target/forge-gui-desktop-2.0.08-SNAPSHOT-jar-with-dependencies.jar"
+if [ ! -f "$JAR_PATH" ]; then
+    echo "ERROR: JAR file not found at $JAR_PATH"
+    echo "Please build the project first with: mvn clean package -DskipTests"
+    exit 1
+fi
+
+echo "Launching Forge Desktop GUI..."
+echo ""
+
+# Change to target directory where JAR and resources (via symlink) are located
+cd forge-gui-desktop/target
+
+# Launch the desktop GUI
+$JAVA_CMD -Xmx4096m -Dio.netty.tryReflectionSetAccessible=true -Dfile.encoding=UTF-8 -jar forge-gui-desktop-2.0.08-SNAPSHOT-jar-with-dependencies.jar

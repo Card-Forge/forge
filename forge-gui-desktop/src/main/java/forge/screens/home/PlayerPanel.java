@@ -78,6 +78,7 @@ public class PlayerPanel extends FPanel {
     private FRadioButton radioHuman;
     private FRadioButton radioAi;
     private JCheckBoxMenuItem radioAiUseSimulation;
+    private JCheckBoxMenuItem radioAiUseHttpAgent;
     private FRadioButton radioOpen;
     private FCheckBox chkReady;
 
@@ -481,9 +482,18 @@ public class PlayerPanel extends FPanel {
     }
 
     public Set<AIOption> getAiOptions() {
-        return isSimulatedAi()
-                ? ImmutableSet.of(AIOption.USE_SIMULATION)
-                : Collections.emptySet();
+        boolean useSimulation = radioAi.isSelected() && radioAiUseSimulation.isSelected();
+        boolean useHttpAgent = radioAi.isSelected() && radioAiUseHttpAgent.isSelected();
+        
+        if (useSimulation && useHttpAgent) {
+            return ImmutableSet.of(AIOption.USE_SIMULATION, AIOption.HTTP_AGENT);
+        } else if (useSimulation) {
+            return ImmutableSet.of(AIOption.USE_SIMULATION);
+        } else if (useHttpAgent) {
+            return ImmutableSet.of(AIOption.HTTP_AGENT);
+        } else {
+            return Collections.emptySet();
+        }
     }
 
     private boolean isSimulatedAi() {
@@ -633,6 +643,11 @@ public class PlayerPanel extends FPanel {
         radioAiUseSimulation = new JCheckBoxMenuItem(localizer.getMessage("lblUseSimulation"));
         menu.add(radioAiUseSimulation);
         radioAiUseSimulation.addActionListener(e -> lobby.firePlayerChangeListener(index));
+        
+        radioAiUseHttpAgent = new JCheckBoxMenuItem("HTTP Agent");
+        menu.add(radioAiUseHttpAgent);
+        radioAiUseHttpAgent.addActionListener(e -> lobby.firePlayerChangeListener(index));
+        
         radioAi.setComponentPopupMenu(menu);
 
         radioHuman.addMouseListener(radioMouseAdapter(radioHuman, LobbySlotType.LOCAL));
@@ -824,7 +839,17 @@ public class PlayerPanel extends FPanel {
     }
 
     String getAiEndpoint() {
-        return txtAiEndpoint.getText();
+        String endpoint = txtAiEndpoint.getText();
+        // Return default if empty
+        if (endpoint == null || endpoint.trim().isEmpty()) {
+            return "http://localhost:8080";
+        }
+        // Add http:// prefix if missing
+        endpoint = endpoint.trim();
+        if (!endpoint.startsWith("http://") && !endpoint.startsWith("https://")) {
+            endpoint = "http://" + endpoint;
+        }
+        return endpoint;
     }
 
     public void setAiEndpoint(final String string) {

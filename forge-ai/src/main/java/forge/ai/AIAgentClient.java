@@ -96,6 +96,7 @@ public class AIAgentClient {
 
                 // Send request
                 String requestBody = gson.toJson(request.toJson());
+                System.out.println("AIAgentClient: Sending request body: " + requestBody);
                 try (OutputStream os = connection.getOutputStream()) {
                     os.write(requestBody.getBytes(StandardCharsets.UTF_8));
                 }
@@ -116,8 +117,9 @@ public class AIAgentClient {
                         sb.append(buffer, 0, read);
                     }
 
-                    JsonObject responseJson = JsonParser.parseString(sb.toString()).getAsJsonObject();
-                    System.out.println("AIAgentClient: Received valid JSON response");
+                        String responseBody = sb.toString();
+                    System.out.println("AIAgentClient: Received response: " + responseBody);
+                    JsonObject responseJson = JsonParser.parseString(responseBody).getAsJsonObject();
                     return AIAgentResponse.fromJson(responseJson);
                 }
 
@@ -240,15 +242,31 @@ public class AIAgentClient {
 
             JsonObject decision = json.getAsJsonObject("decision");
 
-            String type = decision.has("type") ? decision.get("type").getAsString() : "action";
-            int index = decision.has("index") ? decision.get("index").getAsInt() : -1;
+            String type = "action";
+            try {
+                if (decision.has("type") && !decision.get("type").isJsonNull()) {
+                    type = decision.get("type").getAsString();
+                }
+            } catch (Exception e) {
+                System.err.println("AIAgentClient: Error parsing type: " + e.getMessage());
+            }
+            int index = -1;
+            try {
+                if (decision.has("index") && !decision.get("index").isJsonNull()) {
+                    index = decision.get("index").getAsInt();
+                }
+            } catch (Exception e) {
+                System.err.println("AIAgentClient: Error parsing index: " + e.getMessage());
+            }
 
             int[] indices = null;
             if (decision.has("indices") && decision.get("indices").isJsonArray()) {
                 com.google.gson.JsonArray arr = decision.getAsJsonArray("indices");
                 indices = new int[arr.size()];
                 for (int i = 0; i < arr.size(); i++) {
-                    indices[i] = arr.get(i).getAsInt();
+                    if (!arr.get(i).isJsonNull()) {
+                        indices[i] = arr.get(i).getAsInt();
+                    }
                 }
             }
 

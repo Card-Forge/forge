@@ -397,24 +397,9 @@ public class VLobby implements ILobbyView {
 
     private UpdateLobbyPlayerEvent getSlot(final int index) {
         final PlayerPanel panel = getPlayerPanel(index);
-        UpdateLobbyPlayerEvent event = UpdateLobbyPlayerEvent.create(panel.getType(), panel.getPlayerName(),
+        return UpdateLobbyPlayerEvent.create(panel.getType(), panel.getPlayerName(),
                 panel.getAvatarIndex(), -1/* TODO panel.getSleeveIndex() */, panel.getTeam(), panel.isArchenemy(),
-                panel.isReady(), panel.isDevMode(), panel.getAiOptions());
-        return UpdateLobbyPlayerEvent.aiEndpointUpdate(panel.getAiEndpoint());
-        // Wait, I need to combine these or update the create method.
-        // UpdateLobbyPlayerEvent is immutable-ish?
-        // Let's check UpdateLobbyPlayerEvent.java again. It has multiple factory
-        // methods.
-        // I should probably add a new factory method that takes everything including
-        // aiEndpoint, or allow chaining updates.
-        // But getSlot returns a single event.
-        // Actually, `LobbySlot.apply` handles multiple fields if they are in the event.
-        // But `UpdateLobbyPlayerEvent` seems to be designed to carry only specific
-        // updates or a full set.
-        // The `create` method I used in `getSlot` takes many arguments.
-        // I should update `UpdateLobbyPlayerEvent.create` to accept `aiEndpoint` or
-        // create a new one.
-        // Let's look at `UpdateLobbyPlayerEvent.java` again.
+                panel.isReady(), panel.isDevMode(), panel.getAiOptions(), panel.getAiEndpoint());
     }
 
     /**

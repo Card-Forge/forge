@@ -22,7 +22,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import forge.StaticData;
 import forge.game.spellability.TargetRestrictions;
+import forge.item.PaperCard;
 
 public class PlayerControllerRemote extends PlayerControllerAi {
 
@@ -72,8 +74,6 @@ public class PlayerControllerRemote extends PlayerControllerAi {
 
     @Override
     public List<SpellAbility> chooseSpellAbilityToPlay() {
-        System.out.println("PlayerControllerRemote.chooseSpellAbilityToPlay called. Phase: "
-                + getGame().getPhaseHandler().getPhase() + ", Turn: " + getGame().getPhaseHandler().getTurn());
         if (aiAgentClient != null) {
             System.out.println("aiAgentClient is present. Preparing request...");
             try {
@@ -124,6 +124,9 @@ public class PlayerControllerRemote extends PlayerControllerAi {
                         action.addProperty("requires_targets", sa.usesTargeting());
                     }
 
+                    // Add legacy "card" field for compatibility with some agents
+                    action.addProperty("card", source != null ? source.getName() : "Unknown");
+                    
                     actionsList.add(action);
                 }
 
@@ -133,7 +136,7 @@ public class PlayerControllerRemote extends PlayerControllerAi {
                 passAction.addProperty("type", "pass_priority");
                 actionsList.add(passAction);
 
-                actionState.add("actions", actionsList);
+                actionState.add("possible_actions", actionsList);
 
                 JsonObject context = new JsonObject();
                 context.addProperty("requestType", "possible_actions");
@@ -431,14 +434,109 @@ public class PlayerControllerRemote extends PlayerControllerAi {
         return super.chooseEntitiesForEffect(optionList, min, max, delayedReveal, sa, title, targetedPlayer, params);
     }
 
+    private final java.util.Set<String> knownCardNames = new java.util.HashSet<>();
+
+    private JsonObject getCardDefinition(String cardName) {
+        JsonObject def = new JsonObject();
+        PaperCard pc = StaticData.instance().getCommonCards().getCard(cardName);
+        if (pc == null) {
+            // Try to find by name if not exact match (sometimes names vary slightly)
+            // But for now, just return basic info if not found
+            def.addProperty("name", cardName);
+            def.addProperty("error", "Card not found in DB");
+            return def;
+        }
+
+        def.addProperty("name", pc.getName());
+        def.addProperty("mana_cost", pc.getRules().getManaCost().toString());
+        def.addProperty("type", pc.getRules().getType().toString());
+        def.addProperty("oracle_text", pc.getRules().getOracleText());
+        
+        if (pc.getRules().getType().isCreature()) {
+            def.addProperty("power", pc.getRules().getPower().toString());
+            def.addProperty("toughness", pc.getRules().getToughness().toString());
+        }
+
+        return def;
+    }
+
+    private void addVisibleCardsToKnownSet(Game game) {
+        // Player 1 Zones (Our Agent)
+        for (Card c : player.getCardsIn(ZoneType.Hand)) knownCardNames.add(c.getName());
+        for (Card c : player.getCardsIn(ZoneType.Graveyard)) knownCardNames.add(c.getName());
+        for (Card c : player.getCardsIn(ZoneType.Battlefield)) knownCardNames.add(c.getName());
+        for (Card c : player.getCardsIn(ZoneType.Exile)) knownCardNames.add(c.getName());
+        for (Card c : player.getCardsIn(ZoneType.Command)) knownCardNames.add(c.getName());
+
+        // Player 2 Zones (Visible)
+        Player opponent = player.getSingleOpponent(); 
+        if (opponent != null) {
+            for (Card c : opponent.getCardsIn(ZoneType.Graveyard)) knownCardNames.add(c.getName());
+            for (Card c : opponent.getCardsIn(ZoneType.Battlefield)) knownCardNames.add(c.getName());
+            for (Card c : opponent.getCardsIn(ZoneType.Exile)) knownCardNames.add(c.getName());
+            for (Card c : opponent.getCardsIn(ZoneType.Command)) knownCardNames.add(c.getName());
+        }
+
+        // Stack
+        for (forge.game.spellability.SpellAbilityStackInstance stackItem : game.getStack()) {
+            Card source = stackItem.getSpellAbility().getHostCard();
+            if (source != null) {
+                knownCardNames.add(source.getName());
+            }
+        }
+    }
+
     private JsonObject extractGameState(Game game) {
+        // Update tracking of seen cards
+        addVisibleCardsToKnownSet(game);
+
         JsonObject state = new JsonObject();
+
+        // Add definitions for all known cards
+        JsonObject cardDefinitions = new JsonObject();
+        for (String cardName : knownCardNames) {
+            cardDefinitions.add(cardName, getCardDefinition(cardName));
+        }
+        state.add("card_definitions", cardDefinitions);
 
         // General Game Info
         state.addProperty("turn", game.getPhaseHandler().getTurn());
         state.addProperty("phase", game.getPhaseHandler().getPhase().toString());
         state.addProperty("activePlayerId", game.getPhaseHandler().getPlayerTurn().getId());
         state.addProperty("priorityPlayerId", game.getPhaseHandler().getPlayerTurn().getId()); // Approximate
+
+        // Combat
+        if (game.getPhaseHandler().getCombat() != null) {
+            JsonObject combatJson = new JsonObject();
+            Combat combat = game.getPhaseHandler().getCombat();
+
+            JsonArray attackers = new JsonArray();
+            for (Card attacker : combat.getAttackers()) {
+                JsonObject att = new JsonObject();
+                att.addProperty("name", attacker.getName());
+                att.addProperty("id", attacker.getId());
+                attackers.add(att);
+            }
+            combatJson.add("attackers", attackers);
+
+            JsonArray blockers = new JsonArray();
+            for (Card attacker : combat.getAttackers()) {
+                CardCollection blockingCards = combat.getBlockers(attacker);
+                if (blockingCards != null && !blockingCards.isEmpty()) {
+                    for (Card blocker : blockingCards) {
+                        JsonObject blk = new JsonObject();
+                        blk.addProperty("blocker_name", blocker.getName());
+                        blk.addProperty("blocker_id", blocker.getId());
+                        blk.addProperty("attacker_name", attacker.getName());
+                        blk.addProperty("attacker_id", attacker.getId());
+                        blockers.add(blk);
+                    }
+                }
+            }
+            combatJson.add("blockers", blockers);
+
+            state.add("combat", combatJson);
+        }
 
         // Stack - show what spells/abilities are on the stack
         JsonArray stackArray = new JsonArray();
@@ -467,11 +565,7 @@ public class PlayerControllerRemote extends PlayerControllerAi {
             // Hand
             JsonArray handArray = new JsonArray();
             for (Card c : p.getCardsIn(ZoneType.Hand)) {
-                JsonObject cardObj = new JsonObject();
-                cardObj.addProperty("name", c.getName());
-                cardObj.addProperty("id", c.getId());
-                cardObj.addProperty("zone", "Hand");
-                handArray.add(cardObj);
+                handArray.add(c.getName());
             }
             playerObj.add("hand", handArray);
 

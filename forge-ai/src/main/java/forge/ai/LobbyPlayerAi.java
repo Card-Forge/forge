@@ -15,6 +15,7 @@ public class LobbyPlayerAi extends LobbyPlayer implements IGameEntitiesFactory {
     private boolean rotateProfileEachGame;
     private boolean allowCheatShuffle;
     private boolean useSimulation;
+    private boolean useHttpAgent;
 
     public LobbyPlayerAi(String name, Set<AIOption> options) {
         this(name, options, null);
@@ -25,6 +26,9 @@ public class LobbyPlayerAi extends LobbyPlayer implements IGameEntitiesFactory {
         this.aiEndpoint = aiEndpoint;
         if (options != null && options.contains(AIOption.USE_SIMULATION)) {
             this.useSimulation = true;
+        }
+        if (options != null && options.contains(AIOption.HTTP_AGENT)) {
+            this.useHttpAgent = true;
         }
     }
 
@@ -54,9 +58,9 @@ public class LobbyPlayerAi extends LobbyPlayer implements IGameEntitiesFactory {
 
     private PlayerController createControllerFor(Player ai) {
         System.out.println("LobbyPlayerAi.createControllerFor called for: " + ai.getName());
-        System.out.println("aiEndpoint is: " + aiEndpoint);
-        if (aiEndpoint != null && !aiEndpoint.isEmpty()) {
-            System.out.println("Creating PlayerControllerRemote...");
+        System.out.println("useHttpAgent: " + useHttpAgent + ", aiEndpoint: " + aiEndpoint);
+        if (useHttpAgent && aiEndpoint != null && !aiEndpoint.isEmpty()) {
+            System.out.println("Creating PlayerControllerRemote with HTTP agent...");
             AIAgentClient client = new AIAgentClient(aiEndpoint);
             return new PlayerControllerRemote(ai.getGame(), ai, this, client);
         }

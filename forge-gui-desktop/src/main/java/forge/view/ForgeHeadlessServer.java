@@ -1113,7 +1113,7 @@ public class ForgeHeadlessServer {
                         // Add hand
                         final JsonArray hand = new JsonArray();
                         for (final Card c : agent.getCardsIn(ZoneType.Hand)) {
-                            hand.add(c.toString());
+                            hand.add(c.getName());
                         }
                         state.add("hand", hand);
 

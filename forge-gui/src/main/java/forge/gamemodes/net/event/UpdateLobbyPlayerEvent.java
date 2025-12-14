@@ -44,6 +44,13 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
                 aiOptions);
     }
 
+    public static UpdateLobbyPlayerEvent create(final LobbySlotType type, final String name, final int avatarIndex,
+            final int sleeveIndex, final int team, final boolean isArchenemy, final boolean isReady,
+            final boolean isDevMode, final Set<AIOption> aiOptions, final String aiEndpoint) {
+        return new UpdateLobbyPlayerEvent(type, name, avatarIndex, sleeveIndex, team, isArchenemy, isReady, isDevMode,
+                aiOptions, aiEndpoint);
+    }
+
     public static UpdateLobbyPlayerEvent deckUpdate(final Deck deck) {
         return new UpdateLobbyPlayerEvent(deck);
     }
@@ -159,6 +166,29 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
         this.isReady = isReady;
         this.isDevMode = isDevMode;
         this.aiOptions = aiOptions;
+    }
+
+    private UpdateLobbyPlayerEvent(
+            final LobbySlotType type,
+            final String name,
+            final int avatarIndex,
+            final int sleeveIndex,
+            final int team,
+            final boolean isArchenemy,
+            final boolean isReady,
+            final boolean isDevMode,
+            final Set<AIOption> aiOptions,
+            final String aiEndpoint) {
+        this.type = type;
+        this.name = name;
+        this.avatarIndex = avatarIndex;
+        this.sleeveIndex = sleeveIndex;
+        this.team = team;
+        this.isArchenemy = isArchenemy;
+        this.isReady = isReady;
+        this.isDevMode = isDevMode;
+        this.aiOptions = aiOptions;
+        this.aiEndpoint = aiEndpoint;
     }
 
     @Override

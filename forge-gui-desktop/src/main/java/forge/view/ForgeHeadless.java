@@ -9,6 +9,11 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 
 import forge.deck.Deck;
+import forge.deck.io.DeckSerializer;
+import forge.localinstance.properties.ForgeConstants;
+import forge.util.FileSection;
+import forge.util.FileUtil;
+import java.io.File;
 import forge.game.Game;
 import forge.game.GameRules;
 import forge.game.GameType;
@@ -21,6 +26,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.model.FModel;
 import forge.ai.ComputerUtilAbility;
+import forge.ai.ComputerUtilMana;
 import forge.ai.AIAgentClient;
 
 import forge.gui.GuiBase;
@@ -58,6 +64,11 @@ import forge.game.player.DelayedReveal;
 import java.util.Map;
 import java.util.UUID;
 
+import forge.StaticData;
+
+import forge.deck.DeckgenUtil;
+import forge.util.Aggregates;
+
 public class ForgeHeadless {
     // ANSI Color Constants
     public static final String ANSI_RESET = "\u001B[0m";
@@ -82,6 +93,9 @@ public class ForgeHeadless {
     private static volatile String aiAgentEndpoint = null;
     private static volatile String gameId = null;
     private static volatile AIAgentClient aiAgentClient = null;
+    private static volatile boolean condensedLogging = false;
+    private static volatile boolean useMyrDeck = false;
+    private static final java.util.Set<String> knownCardNames = new java.util.HashSet<>();
 
     public static void main(String[] args) {
         System.err.println("DEBUG: ForgeHeadless main started");
@@ -105,6 +119,10 @@ public class ForgeHeadless {
                 player2IsHuman = true;
             } else if (arg.equals("--verbose")) {
                 verboseLogging = true;
+            } else if (arg.equals("--condensed-log")) {
+                condensedLogging = true;
+            } else if (arg.equals("--use-myr")) {
+                useMyrDeck = true;
             } else if (arg.equals("--help")) {
                 printUsage();
                 System.exit(0);
@@ -136,22 +154,38 @@ public class ForgeHeadless {
         FModel.initialize(null, null);
 
         // Generate Decks
-        Deck deck1 = new Deck("Manual Test Deck");
-        for (int i = 0; i < 20; i++)
-            deck1.getMain().add(FModel.getMagicDb().getCommonCards().getCard("Mountain"));
-        for (int i = 0; i < 20; i++)
-            deck1.getMain().add(FModel.getMagicDb().getCommonCards().getCard("Shock"));
+        Deck deck1 = null;
+        if (useMyrDeck) {
+            System.out.println("Forcing use of 'Myr of Mirrodin' deck for Player 1");
+            deck1 = loadPreconstructedDeck("Myr of Mirrodin");
+            if (deck1 == null) {
+                System.err.println("WARNING: Could not load 'Myr of Mirrodin' deck. Falling back to random.");
+            }
+        }
+        
+        if (deck1 == null) {
+            deck1 = loadRandomPrecon();
+        }
+        
+        if (deck1 == null) {
+            System.err.println("FATAL ERROR: Could not load any preconstructed decks from " + ForgeConstants.QUEST_PRECON_DIR);
+            System.exit(1);
+        }
+        System.out.println("Loaded Deck 1: " + deck1.getName());
 
-        Deck deck2 = new Deck("AI Test Deck");
-        for (int i = 0; i < 60; i++)
-            deck2.getMain().add(FModel.getMagicDb().getCommonCards().getCard("Swamp"));
+        Deck deck2 = loadRandomPrecon();
+        if (deck2 == null) {
+            System.err.println("FATAL ERROR: Could not load any preconstructed decks from " + ForgeConstants.QUEST_PRECON_DIR);
+            System.exit(1);
+        }
+        System.out.println("Loaded Deck 2: " + deck2.getName());
 
         // Setup Players based on configuration
         List<RegisteredPlayer> players = new ArrayList<>();
 
         if (player1IsHuman) {
             RegisteredPlayer rp1 = new RegisteredPlayer(deck1).setPlayer(new HeadlessLobbyPlayer("Player 1"));
-            rp1.setStartingLife(1000);
+            // rp1.setStartingLife(1000); // Only for debugging
             players.add(rp1);
         } else {
             RegisteredPlayer rp1 = new RegisteredPlayer(deck1)
@@ -186,6 +220,11 @@ public class ForgeHeadless {
 
             // GET /state
             server.createContext("/state", exchange -> {
+                // Handle CORS preflight
+                if ("OPTIONS".equals(exchange.getRequestMethod())) {
+                    sendResponse(exchange, 204, "");
+                    return;
+                }
                 if (!"GET".equals(exchange.getRequestMethod())) {
                     sendResponse(exchange, 405, "Method Not Allowed");
                     return;
@@ -201,6 +240,11 @@ public class ForgeHeadless {
 
             // GET /input
             server.createContext("/input", exchange -> {
+                // Handle CORS preflight
+                if ("OPTIONS".equals(exchange.getRequestMethod())) {
+                    sendResponse(exchange, 204, "");
+                    return;
+                }
                 if (!"GET".equals(exchange.getRequestMethod())) {
                     sendResponse(exchange, 405, "Method Not Allowed");
                     return;
@@ -284,8 +328,103 @@ public class ForgeHeadless {
         }
     }
 
+    private static Deck generateRandomStandardDeck() {
+        try {
+            int count = Aggregates.randomInt(1, 3);
+            List<String> colors = new ArrayList<>();
+            for (int i = 1; i <= count; i++) {
+                colors.add("Random " + i);
+            }
+            Deck deck = DeckgenUtil.buildColorDeck(colors, FModel.getFormats().getStandard().getFilterPrinted(), true);
+
+            // Validate the deck was actually generated with cards
+            if (deck == null || deck.getMain().isEmpty()) {
+                System.err.println("Generated deck is null or empty!");
+                return null;
+            }
+
+            System.out.println("Successfully generated random deck with " + deck.getMain().countAll() + " cards");
+            return deck;
+        } catch (Exception e) {
+            System.err.println("Error generating random deck: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private static Deck loadPreconstructedDeck(String deckName) {
+        if (deckName == null) return null;
+        
+        File dir = new File(ForgeConstants.QUEST_PRECON_DIR);
+        if (!dir.exists() || !dir.isDirectory()) return null;
+        
+        // Simple search in top level
+        File[] files = dir.listFiles((d, name) -> name.endsWith(".dck"));
+        if (files != null) {
+            for (File f : files) {
+                if (f.getName().equalsIgnoreCase(deckName) || f.getName().equalsIgnoreCase(deckName + ".dck")) {
+                    return DeckSerializer.fromSections(FileSection.parseSections(FileUtil.readFile(f)));
+                }
+            }
+        }
+        return null;
+    }
+
+    private static Deck loadRandomPrecon() {
+        File dir = new File(ForgeConstants.QUEST_PRECON_DIR);
+        if (!dir.exists() || !dir.isDirectory()) {
+             System.err.println("Precon directory not found: " + dir.getAbsolutePath());
+             return null;
+        }
+        
+        // Recursive search for all .dck files
+        List<File> allDecks = new ArrayList<>();
+        findDeckFiles(dir, allDecks);
+        
+        if (allDecks.isEmpty()) {
+             System.err.println("No .dck files found in " + dir.getAbsolutePath());
+             return null;
+        }
+        
+        // Try up to 10 times to find a valid constructed deck (>= 60 cards)
+        for (int i = 0; i < 10; i++) {
+            File randomDeckFile = allDecks.get(Aggregates.randomInt(0, allDecks.size() - 1));
+            try {
+                Deck d = DeckSerializer.fromSections(FileSection.parseSections(FileUtil.readFile(randomDeckFile)));
+                // Ensure deck is a valid constructed deck (approx 60 cards)
+                // Exclude Draft/Sealed (40) and Commander (100)
+                if (d != null && d.getMain().countAll() >= 60 && d.getMain().countAll() <= 80) {
+                    d.setName(randomDeckFile.getName().replace(".dck", ""));
+                    return d;
+                }
+            } catch (Exception e) {
+                System.err.println("Error loading deck " + randomDeckFile.getName() + ": " + e.getMessage());
+            }
+        }
+        
+        // Fallback: just return the last attempted valid deck even if small, or null
+        return null;
+    }
+
+    private static void findDeckFiles(File dir, List<File> results) {
+        File[] files = dir.listFiles();
+        if (files != null) {
+            for (File f : files) {
+                if (f.isDirectory()) {
+                    findDeckFiles(f, results);
+                } else if (f.getName().endsWith(".dck")) {
+                    results.add(f);
+                }
+            }
+        }
+    }
+
     private static void sendResponse(HttpExchange exchange, int statusCode, String response) throws IOException {
         byte[] bytes = response.getBytes(StandardCharsets.UTF_8);
+        // Add CORS headers to allow browser access from file:// and other origins
+        exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
+        exchange.getResponseHeaders().set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+        exchange.getResponseHeaders().set("Access-Control-Allow-Headers", "Content-Type");
         exchange.getResponseHeaders().set("Content-Type", "application/json");
         exchange.sendResponseHeaders(statusCode, bytes.length);
         try (OutputStream os = exchange.getResponseBody()) {
@@ -318,6 +457,8 @@ public class ForgeHeadless {
         System.out.println("  --game-id <id>        Unique game ID for tracking (auto-generated if not provided)");
         System.out.println("\nOther Options:");
         System.out.println("  --verbose       Enable verbose logging of game events");
+        System.out.println("  --condensed-log Enable condensed logging (actions, state, decisions)");
+        System.out.println("  --use-myr       Force Player 1 to use 'Myr of Mirrodin' deck");
         System.out.println("  --help          Show this help message");
         System.out.println("\nHTTP Server running on port " + PORT);
         System.out.println("\nAI Agent Mode:");
@@ -341,8 +482,76 @@ public class ForgeHeadless {
         match.startGame(game);
     }
 
+    private static JsonObject getCardDefinition(String cardName) {
+        JsonObject def = new JsonObject();
+        PaperCard pc = StaticData.instance().getCommonCards().getCard(cardName);
+        if (pc == null) {
+            def.addProperty("name", cardName);
+            def.addProperty("error", "Card not found in DB");
+            return def;
+        }
+
+        def.addProperty("name", pc.getName());
+        def.addProperty("mana_cost", pc.getRules().getManaCost().toString());
+        def.addProperty("type", pc.getRules().getType().toString());
+        def.addProperty("oracle_text", pc.getRules().getOracleText());
+        
+        if (pc.getRules().getType().isCreature()) {
+            def.addProperty("power", pc.getRules().getPower().toString());
+            def.addProperty("toughness", pc.getRules().getToughness().toString());
+        }
+
+        return def;
+    }
+
+    private static void addVisibleCardsToKnownSet(Game game, Player player) {
+        // Player 1 Zones (Our Agent)
+        for (Card c : player.getCardsIn(ZoneType.Hand)) knownCardNames.add(c.getName());
+        for (Card c : player.getCardsIn(ZoneType.Graveyard)) knownCardNames.add(c.getName());
+        for (Card c : player.getCardsIn(ZoneType.Battlefield)) knownCardNames.add(c.getName());
+        for (Card c : player.getCardsIn(ZoneType.Exile)) knownCardNames.add(c.getName());
+        for (Card c : player.getCardsIn(ZoneType.Command)) knownCardNames.add(c.getName());
+
+        // Player 2 Zones (Visible)
+        Player opponent = player.getSingleOpponent(); 
+        if (opponent != null) {
+            for (Card c : opponent.getCardsIn(ZoneType.Graveyard)) knownCardNames.add(c.getName());
+            for (Card c : opponent.getCardsIn(ZoneType.Battlefield)) knownCardNames.add(c.getName());
+            for (Card c : opponent.getCardsIn(ZoneType.Exile)) knownCardNames.add(c.getName());
+            for (Card c : opponent.getCardsIn(ZoneType.Command)) knownCardNames.add(c.getName());
+        }
+
+        // Stack
+        for (forge.game.spellability.SpellAbilityStackInstance stackItem : game.getStack()) {
+            Card source = stackItem.getSpellAbility().getHostCard();
+            if (source != null) {
+                knownCardNames.add(source.getName());
+            }
+        }
+    }
+
     private static JsonObject extractGameState(Game game) {
+        // Find Player 1 (the one we are controlling/reporting for)
+        Player player = null;
+        for (Player p : game.getPlayers()) {
+            if (p.getController() instanceof HeadlessPlayerController) {
+                player = p;
+                break;
+            }
+        }
+        
+        if (player != null) {
+            addVisibleCardsToKnownSet(game, player);
+        }
+
         JsonObject state = new JsonObject();
+
+        // Add definitions for all known cards
+        JsonObject cardDefinitions = new JsonObject();
+        for (String cardName : knownCardNames) {
+            cardDefinitions.add(cardName, getCardDefinition(cardName));
+        }
+        state.add("card_definitions", cardDefinitions);
 
         // General Game Info
         state.addProperty("turn", game.getPhaseHandler().getTurn());
@@ -487,9 +696,6 @@ public class ForgeHeadless {
     }
 
     private static class HeadlessPlayerController extends forge.ai.PlayerControllerAi {
-        private List<SpellAbility> cachedActions = null;
-        private int cachedActionTurn = -1;
-
         public HeadlessPlayerController(Game game, Player player, forge.ai.LobbyPlayerAi lobbyPlayer) {
             super(game, player, lobbyPlayer);
         }
@@ -788,25 +994,14 @@ public class ForgeHeadless {
                     }
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
-                    break;
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid input received: " + e.getMessage());
+                    return selected;
                 }
             }
-
-            currentPromptType = "none";
             return selected;
         }
 
         private List<SpellAbility> getPossibleSpellAbilities() {
-            int currentTurn = getGame().getPhaseHandler().getTurn();
-
-            // Return cached list if still valid
-            if (cachedActions != null && cachedActionTurn == currentTurn) {
-                return cachedActions;
-            }
-
-            // Rebuild and cache
+            // Always regenerate the list of actions
             List<SpellAbility> allAbilities = new ArrayList<>();
 
             // Get available lands to play
@@ -826,14 +1021,10 @@ public class ForgeHeadless {
 
             for (SpellAbility sa : spellAbilities) {
                 // Filter to only abilities the player can actually activate
-                if (sa.canPlay() && sa.getActivatingPlayer() == player) {
+                if (sa.canPlay() && sa.getActivatingPlayer() == player && ComputerUtilMana.canPayManaCost(sa, player, 0, false)) {
                     allAbilities.add(sa);
                 }
             }
-
-            // Cache the result
-            cachedActions = allAbilities;
-            cachedActionTurn = currentTurn;
 
             return allAbilities;
         }
@@ -896,7 +1087,9 @@ public class ForgeHeadless {
 
         @Override
         public boolean chooseTargetsFor(SpellAbility sa) {
+            System.out.println("DEBUG: chooseTargetsFor called for: " + sa.getDescription());
             if (!sa.usesTargeting()) {
+                System.out.println("DEBUG: No targeting needed");
                 return true;
             }
 
@@ -910,9 +1103,12 @@ public class ForgeHeadless {
             int max = tgt.getMaxTargets(sa.getHostCard(), sa);
             String title = "Select targets for " + sa.getHostCard().getName();
 
+            System.out.println("DEBUG: Choosing targets (min=" + min + ", max=" + max + ")");
             List<GameEntity> chosen = chooseEntitiesForEffect(optionList, min, max, null, sa, title, player, null);
+            System.out.println("DEBUG: chosen entities count: " + chosen.size());
 
             if (chosen.size() < min) {
+                System.out.println("DEBUG: chosen size (" + chosen.size() + ") < min (" + min + ")");
                 return false;
             }
 
@@ -925,17 +1121,88 @@ public class ForgeHeadless {
 
         @Override
         public boolean playChosenSpellAbility(SpellAbility sa) {
-            if (!sa.setupTargets()) {
-                return false;
+            System.out.println("DEBUG: Executing playChosenSpellAbility for: " + sa.getDescription());
+            boolean result = false;
+            try {
+                if (!sa.setupTargets()) {
+                    System.out.println("DEBUG: setupTargets failed for: " + sa.getDescription());
+                    return false;
+                }
+                result = super.playChosenSpellAbility(sa);
+                System.out.println("DEBUG: super.playChosenSpellAbility returned: " + result);
+            } catch (Exception e) {
+                System.err.println("DEBUG: Exception in playChosenSpellAbility: " + e.getMessage());
+                e.printStackTrace();
             }
-            return super.playChosenSpellAbility(sa);
+            return result;
+        }
+
+        private void printCondensedLog(JsonObject gameState, JsonObject actionState) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("\n--- CONDENSED LOG ---\n");
+
+            // Possible Actions
+            sb.append("POSSIBLE ACTIONS:\n");
+            JsonArray actions = actionState.getAsJsonArray("actions");
+            for (int i = 0; i < actions.size(); i++) {
+                JsonObject a = actions.get(i).getAsJsonObject();
+                sb.append("  ").append(i).append(": ").append(a.get("type").getAsString());
+                if (a.has("card_name"))
+                    sb.append(" - ").append(a.get("card_name").getAsString());
+                if (a.has("ability_description"))
+                    sb.append(" (").append(a.get("ability_description").getAsString()).append(")");
+                sb.append("\n");
+            }
+
+            // Battlefields
+            sb.append("BATTLEFIELDS: \n");
+            JsonArray players = gameState.getAsJsonArray("players");
+            for (int i = 0; i < players.size(); i++) {
+                JsonObject p = players.get(i).getAsJsonObject();
+                sb.append("  ").append(p.get("name").getAsString()).append(": ");
+                JsonArray bf = p.getAsJsonArray("battlefield");
+                List<String> cards = new ArrayList<>();
+                for (int j = 0; j < bf.size(); j++)
+                    cards.add(bf.get(j).getAsJsonObject().get("name").getAsString());
+                sb.append(cards).append("\n");
+            }
+
+            // Hand
+            sb.append("HAND: ");
+            for (int i = 0; i < players.size(); i++) {
+                JsonObject p = players.get(i).getAsJsonObject();
+                if (p.get("name").getAsString().equals(player.getName())) {
+                    JsonArray hand = p.getAsJsonArray("hand");
+                    List<String> cards = new ArrayList<>();
+                    if (hand != null) {
+                        for (int j = 0; j < hand.size(); j++)
+                            cards.add(hand.get(j).getAsJsonObject().get("name").getAsString());
+                    } else {
+                         System.err.println("DEBUG: Hand is null in JSON for player " + p.get("name").getAsString());
+                    }
+                    sb.append(cards);
+                }
+            }
+            sb.append("\n");
+
+            sb.append("--> OUT");
+            System.out.println(sb.toString());
         }
 
         @Override
         public java.util.List<forge.game.spellability.SpellAbility> chooseSpellAbilityToPlay() {
+            System.out.println("Phase: " + getGame().getPhaseHandler().getPhase());
+            System.out.println("DEBUG: Controller Game Hash: " + System.identityHashCode(getGame()));
+            System.out.println("DEBUG: Global Game Hash: " + System.identityHashCode(currentGame));
+            System.out.println("DEBUG: Controller Player Hand Size: " + player.getCardsIn(ZoneType.Hand).size());
+
             // Build action state
             JsonObject actionState = getPossibleActionsJson();
             List<SpellAbility> actions = getPossibleSpellAbilities();
+
+            if (condensedLogging) {
+                printCondensedLog(extractGameState(getGame()), actionState);
+            }
 
             // OPTIMIZATION: If only one action is available (which is always "pass
             // priority"),
@@ -964,7 +1231,6 @@ public class ForgeHeadless {
                         JsonObject firstAction = actionsList.get(0).getAsJsonObject();
                         if ("pass_priority".equals(firstAction.get("type").getAsString())) {
                             System.out.println("Auto-passing priority (only option)...");
-                            cachedActions = null;
                             return null;
                         }
                     }
@@ -989,8 +1255,9 @@ public class ForgeHeadless {
 
                     // Handle pass decision (explicit)
                     if (response.isPass()) {
-                        cachedActions = null; // Invalidate cache
                         System.out.println("AI agent decided to pass priority");
+                        if (condensedLogging)
+                            System.out.println("DECISION --> IN: pass");
                         return null;
                     }
 
@@ -1003,7 +1270,8 @@ public class ForgeHeadless {
                         JsonObject selectedActionJson = actionsList.get(actionIndex).getAsJsonObject();
                         if ("pass_priority".equals(selectedActionJson.get("type").getAsString())) {
                             System.out.println("AI agent selected pass_priority via index " + actionIndex);
-                            cachedActions = null;
+                            if (condensedLogging)
+                                System.out.println("DECISION --> IN: pass (via index " + actionIndex + ")");
                             return null;
                         }
                     }
@@ -1012,9 +1280,11 @@ public class ForgeHeadless {
                         SpellAbility chosenAbility = actions.get(actionIndex);
                         List<SpellAbility> result = new ArrayList<>();
                         result.add(chosenAbility);
-                        System.out.println("AI agent selected action: " +
-                                (chosenAbility.getHostCard() != null ? chosenAbility.getHostCard().getName()
-                                        : "Unknown"));
+                        String actionDesc = (chosenAbility.getHostCard() != null ? chosenAbility.getHostCard().getName()
+                                : "Unknown");
+                        System.out.println("AI agent selected action: " + actionDesc);
+                        if (condensedLogging)
+                            System.out.println("DECISION --> IN: action " + actionIndex + " (" + actionDesc + ")");
                         return result;
                     } else {
                         System.err.println("AI agent returned invalid action index: " + actionIndex);
@@ -1068,7 +1338,6 @@ public class ForgeHeadless {
                             System.out.println("Invalid action index.");
                         }
                     } else if (command.equals("pass_priority") || command.equals("pp") || command.equals("pass")) {
-                        cachedActions = null; // Invalidate cache
                         currentPromptType = "none";
                         return null; // Pass priority
                     } else if (command.equals("concede") || command.equals("c")) {
