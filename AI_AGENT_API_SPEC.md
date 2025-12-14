@@ -88,11 +88,65 @@ Included in every request. Contains all public information.
     }
   },
   "combat": {
-    "attackers": [],
-    "blockers": []
+    "attacker_count": 2,
+    "attackers": [
+      {
+        "card_id": 301,
+        "card_name": "Goblin Guide",
+        "power": 2,
+        "toughness": 2,
+        "controller": "AI Agent",
+        "attacking_id": 900,
+        "attacking_name": "Opponent",
+        "attacking_type": "player",
+        "blockers": []
+      },
+      {
+        "card_id": 302,
+        "card_name": "Monastery Swiftspear",
+        "power": 2,
+        "toughness": 3,
+        "controller": "AI Agent",
+        "attacking_id": 900,
+        "attacking_name": "Opponent",
+        "attacking_type": "player",
+        "blockers": [
+          {
+            "card_id": 401,
+            "card_name": "Wall of Omens",
+            "power": 0,
+            "toughness": 4,
+            "controller": "Opponent"
+          }
+        ]
+      }
+    ]
   }
 }
 ```
+
+### Combat State Fields
+
+The `combat` object is **only present during combat phases** when there are attackers declared.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `combat.attacker_count` | Integer | Number of attacking creatures |
+| `combat.attackers` | Array | List of attacking creatures |
+| `combat.attackers[].card_id` | Integer | Unique ID of the attacking creature |
+| `combat.attackers[].card_name` | String | Name of the attacking creature |
+| `combat.attackers[].power` | Integer | Current power (after modifications) |
+| `combat.attackers[].toughness` | Integer | Current toughness (after modifications) |
+| `combat.attackers[].controller` | String | Name of the creature's controller |
+| `combat.attackers[].attacking_id` | Integer | ID of the entity being attacked |
+| `combat.attackers[].attacking_name` | String | Name of the entity being attacked |
+| `combat.attackers[].attacking_type` | String | `"player"` or `"planeswalker"` |
+| `combat.attackers[].blockers` | Array | List of creatures blocking this attacker |
+| `combat.attackers[].blockers[].card_id` | Integer | Unique ID of the blocking creature |
+| `combat.attackers[].blockers[].card_name` | String | Name of the blocking creature |
+| `combat.attackers[].blockers[].power` | Integer | Current power of the blocker |
+| `combat.attackers[].blockers[].toughness` | Integer | Current toughness of the blocker |
+| `combat.attackers[].blockers[].controller` | String | Name of the blocker's controller |
 
 *Note: The `hand` array for the AI player contains card names. Opponent hands will be masked (e.g., containing "Unknown") or empty depending on visibility rules.*
 
@@ -106,28 +160,58 @@ Used during Main phases, Combat steps, etc., when the player has priority.
 **`actionState` Structure:**
 ```json
 {
-  "possible_actions": [
+  "actions": [
     {
-      "index": 0,
       "type": "play_land",
-      "card": "Mountain",
-      "card_id": 201
+      "card_name": "Mountain",
+      "card_id": 201,
+      "card_zone": "Hand"
     },
     {
-      "index": 1,
       "type": "cast_spell",
-      "card": "Shock",
+      "card_name": "Shock",
       "card_id": 202,
+      "card_zone": "Hand",
       "mana_cost": "{R}",
+      "ability_description": "Shock deals 2 damage to any target.",
+      "requires_targets": true,
+      "target_min": 1,
+      "target_max": 1,
+      "target_zone": "any"
+    },
+    {
+      "type": "activate_ability",
+      "card_name": "Goblin Guide",
+      "card_id": 301,
+      "card_zone": "Battlefield",
+      "ability_description": "{T}: Deal 1 damage to any target.",
+      "mana_cost": "no cost",
       "requires_targets": true
     },
     {
-      "index": 2,
       "type": "pass_priority"
     }
-  ]
+  ],
+  "count": 4
 }
 ```
+
+### Action Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `type` | String | Action type: `play_land`, `cast_spell`, `activate_ability`, or `pass_priority` |
+| `card_name` | String | Name of the card (not present for `pass_priority`) |
+| `card_id` | Integer | Unique ID of the card |
+| `card_zone` | String | Zone where the card is located: `Hand`, `Battlefield`, `Graveyard`, etc. |
+| `mana_cost` | String | Mana cost to perform this action (e.g., `{2}{R}`) |
+| `ability_description` | String | Text description of the ability |
+| `requires_targets` | Boolean | Whether this action requires target selection |
+| `target_min` | Integer | Minimum number of targets (if targeting) |
+| `target_max` | Integer | Maximum number of targets (if targeting) |
+| `target_zone` | String | Zone(s) where targets can be selected from |
+
+**Note:** Mana abilities (tapping lands for mana) are NOT included in the action list. The game engine handles mana payment automatically when you cast spells.
 
 **Expected Response:**
 ```json

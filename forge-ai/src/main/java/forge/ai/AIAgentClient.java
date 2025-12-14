@@ -96,7 +96,8 @@ public class AIAgentClient {
 
                 // Send request
                 String requestBody = gson.toJson(request.toJson());
-                System.out.println("AIAgentClient: Sending request body: " + requestBody);
+                System.out.println("AIAgentClient: Sending request (" + requestBody.length() + " chars): " 
+                    + requestBody.substring(0, Math.min(100, requestBody.length())) + "...");
                 try (OutputStream os = connection.getOutputStream()) {
                     os.write(requestBody.getBytes(StandardCharsets.UTF_8));
                 }

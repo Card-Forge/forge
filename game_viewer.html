@@ -192,6 +192,86 @@
             color: #fbbf24;
             font-size: 11px;
         }
+
+        /* Layout: Main content + Log sidebar */
+        .main-layout {
+            display: flex;
+            gap: 20px;
+        }
+        .game-content {
+            flex: 1;
+            min-width: 0;
+        }
+        .log-panel {
+            width: 350px;
+            flex-shrink: 0;
+            background: #16213e;
+            border-radius: 10px;
+            padding: 15px;
+            max-height: calc(100vh - 150px);
+            display: flex;
+            flex-direction: column;
+        }
+        .log-panel h3 {
+            color: #60a5fa;
+            margin-bottom: 10px;
+            flex-shrink: 0;
+        }
+        .log-entries {
+            flex: 1;
+            overflow-y: auto;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 11px;
+            line-height: 1.4;
+        }
+        .log-entry {
+            padding: 4px 8px;
+            border-bottom: 1px solid #1e3a5f;
+            word-wrap: break-word;
+        }
+        .log-entry:hover {
+            background: #1e3a5f;
+        }
+        .log-entry.phase { color: #fbbf24; }
+        .log-entry.turn { color: #60a5fa; font-weight: bold; }
+        .log-entry.cast { color: #22d3d8; }
+        .log-entry.land { color: #84cc16; }
+        .log-entry.damage { color: #ef4444; }
+        .log-entry.life { color: #a78bfa; }
+        .log-entry.combat { color: #f472b6; }
+        .log-entry.action { color: #94a3b8; }
+        .log-clear {
+            margin-top: 10px;
+            background: #374151;
+            color: #fff;
+            border: none;
+            padding: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .log-clear:hover { background: #4b5563; }
+
+        /* Combat display */
+        .combat-container {
+            background: #7c2d12;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .combat-container h3 { color: #fdba74; margin-bottom: 10px; }
+        .attacker-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            background: #9a3412;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+        .attacker-card { color: #fff; font-weight: bold; }
+        .attacker-arrow { color: #fbbf24; }
+        .blocker-list { color: #94a3b8; font-size: 12px; }
     </style>
 </head>
 <body>
@@ -204,52 +284,67 @@
         <span>Active: <span id="active-player">-</span></span>
     </div>
 
-    <div id="stack-container" class="stack-container" style="display: none;">
-        <h3>📚 Stack</h3>
-        <div id="stack"></div>
-    </div>
+    <div class="main-layout">
+        <div class="game-content">
+            <div id="combat-container" class="combat-container" style="display: none;">
+                <h3>⚔️ Combat</h3>
+                <div id="combat"></div>
+            </div>
 
-    <div class="battlefield-container">
-        <div id="opponent-area" class="player-area opponent">
-            <div class="player-header">
-                <span class="player-name" id="opponent-name">Opponent</span>
-                <span class="life" id="opponent-life">20</span>
+            <div id="stack-container" class="stack-container" style="display: none;">
+                <h3>📚 Stack</h3>
+                <div id="stack"></div>
             </div>
-            <div class="library-count">Library: <span id="opponent-library">0</span> cards</div>
-            <div class="zone battlefield-zone">
-                <div class="zone-label">Battlefield</div>
-                <div class="cards" id="opponent-battlefield"></div>
+
+            <div class="battlefield-container">
+                <div id="opponent-area" class="player-area opponent">
+                    <div class="player-header">
+                        <span class="player-name" id="opponent-name">Opponent</span>
+                        <span class="life" id="opponent-life">20</span>
+                    </div>
+                    <div class="library-count">Library: <span id="opponent-library">0</span> cards</div>
+                    <div class="zone battlefield-zone">
+                        <div class="zone-label">Battlefield</div>
+                        <div class="cards" id="opponent-battlefield"></div>
+                    </div>
+                    <div class="zone graveyard-zone">
+                        <div class="zone-label">Graveyard</div>
+                        <div class="cards" id="opponent-graveyard"></div>
+                    </div>
+                </div>
+
+                <div id="self-area" class="player-area self">
+                    <div class="player-header">
+                        <span class="player-name" id="self-name">You</span>
+                        <span class="life" id="self-life">20</span>
+                    </div>
+                    <div class="library-count">Library: <span id="self-library">0</span> cards</div>
+                    <div class="zone battlefield-zone">
+                        <div class="zone-label">Battlefield</div>
+                        <div class="cards" id="self-battlefield"></div>
+                    </div>
+                    <div class="zone hand-zone">
+                        <div class="zone-label">Hand</div>
+                        <div class="cards" id="self-hand"></div>
+                    </div>
+                    <div class="zone graveyard-zone">
+                        <div class="zone-label">Graveyard</div>
+                        <div class="cards" id="self-graveyard"></div>
+                    </div>
+                </div>
             </div>
-            <div class="zone graveyard-zone">
-                <div class="zone-label">Graveyard</div>
-                <div class="cards" id="opponent-graveyard"></div>
+
+            <div class="actions-container">
+                <h3>🎯 Available Actions</h3>
+                <div id="actions"></div>
             </div>
         </div>
 
-        <div id="self-area" class="player-area self">
-            <div class="player-header">
-                <span class="player-name" id="self-name">You</span>
-                <span class="life" id="self-life">20</span>
-            </div>
-            <div class="library-count">Library: <span id="self-library">0</span> cards</div>
-            <div class="zone battlefield-zone">
-                <div class="zone-label">Battlefield</div>
-                <div class="cards" id="self-battlefield"></div>
-            </div>
-            <div class="zone hand-zone">
-                <div class="zone-label">Hand</div>
-                <div class="cards" id="self-hand"></div>
-            </div>
-            <div class="zone graveyard-zone">
-                <div class="zone-label">Graveyard</div>
-                <div class="cards" id="self-graveyard"></div>
-            </div>
+        <div class="log-panel">
+            <h3>📜 Game Log</h3>
+            <div class="log-entries" id="log-entries"></div>
+            <button class="log-clear" onclick="clearLog()">Clear Log</button>
         </div>
-    </div>
-
-    <div class="actions-container">
-        <h3>🎯 Available Actions</h3>
-        <div id="actions"></div>
     </div>
 
     <div class="controls">
@@ -262,6 +357,125 @@
         let autoRefresh = true;
         let refreshInterval = null;
         let cardDefinitions = {};
+        let lastState = null;
+        let gameLog = [];
+
+        function addLogEntry(message, type = '') {
+            const timestamp = new Date().toLocaleTimeString();
+            gameLog.push({ time: timestamp, message, type });
+            if (gameLog.length > 200) gameLog.shift(); // Keep last 200 entries
+            renderLog();
+        }
+
+        function renderLog() {
+            const container = document.getElementById('log-entries');
+            container.innerHTML = gameLog.slice().reverse().map(entry =>
+                `<div class="log-entry ${entry.type}">[${entry.time}] ${entry.message}</div>`
+            ).join('');
+        }
+
+        function clearLog() {
+            gameLog = [];
+            renderLog();
+        }
+
+        function detectChanges(oldState, newState) {
+            if (!oldState) return;
+
+            // Turn change
+            if (oldState.turn !== newState.turn) {
+                addLogEntry(`=== Turn ${newState.turn} ===`, 'turn');
+            }
+
+            // Phase change
+            if (oldState.phase !== newState.phase) {
+                addLogEntry(`Phase: ${newState.phase}`, 'phase');
+            }
+
+            // Life changes
+            const oldPlayers = oldState.players || [];
+            const newPlayers = newState.players || [];
+            for (let i = 0; i < newPlayers.length; i++) {
+                const oldP = oldPlayers[i] || {};
+                const newP = newPlayers[i] || {};
+                if (oldP.life !== newP.life && oldP.life !== undefined) {
+                    const diff = newP.life - oldP.life;
+                    const sign = diff > 0 ? '+' : '';
+                    addLogEntry(`${newP.name}: ${oldP.life} → ${newP.life} (${sign}${diff})`, 'life');
+                }
+            }
+
+            // Stack changes (new spells/abilities)
+            const oldStackSize = oldState.stack_size || 0;
+            const newStack = newState.stack || [];
+            if (newStack.length > oldStackSize) {
+                for (let i = oldStackSize; i < newStack.length; i++) {
+                    const item = newStack[i];
+                    addLogEntry(`CAST: ${item.card_name} by ${item.controller}`, 'cast');
+                }
+            }
+
+            // Battlefield changes - new permanents
+            for (let i = 0; i < newPlayers.length; i++) {
+                const oldP = oldPlayers[i] || {};
+                const newP = newPlayers[i] || {};
+                const oldBF = (oldP.battlefield || []).map(c => c.id);
+                const newBF = newP.battlefield || [];
+
+                for (const card of newBF) {
+                    if (!oldBF.includes(card.id)) {
+                        const def = cardDefinitions[card.name] || {};
+                        if (def.type && def.type.toLowerCase().includes('land')) {
+                            addLogEntry(`LAND: ${card.name} played by ${newP.name}`, 'land');
+                        } else {
+                            addLogEntry(`ENTER: ${card.name} (${newP.name})`, 'cast');
+                        }
+                    }
+                }
+
+                // Deaths
+                const newBFIds = newBF.map(c => c.id);
+                const oldBFCards = oldP.battlefield || [];
+                for (const card of oldBFCards) {
+                    if (!newBFIds.includes(card.id)) {
+                        addLogEntry(`LEFT: ${card.name} (${newP.name})`, 'damage');
+                    }
+                }
+            }
+
+            // Combat
+            if (newState.combat && !oldState.combat) {
+                const attackCount = newState.combat.attacker_count || 0;
+                if (attackCount > 0) {
+                    addLogEntry(`COMBAT: ${attackCount} attacker(s) declared`, 'combat');
+                }
+            }
+        }
+
+        function renderCombat(combat) {
+            const container = document.getElementById('combat-container');
+            const combatDiv = document.getElementById('combat');
+
+            if (!combat || !combat.attackers || combat.attackers.length === 0) {
+                container.style.display = 'none';
+                return;
+            }
+
+            container.style.display = 'block';
+            combatDiv.innerHTML = combat.attackers.map(att => {
+                const blockerNames = att.blockers && att.blockers.length > 0
+                    ? att.blockers.map(b => `${b.card_name} (${b.power}/${b.toughness})`).join(', ')
+                    : 'Unblocked';
+                return `
+                    <div class="attacker-row">
+                        <span class="attacker-card">${att.card_name} (${att.power}/${att.toughness})</span>
+                        <span class="attacker-arrow">→</span>
+                        <span>${att.attacking_name}</span>
+                        <span class="blocker-list">[${blockerNames}]</span>
+                    </div>
+                `;
+            }).join('');
+        }
 
         function getCardType(cardName) {
             const def = cardDefinitions[cardName];
@@ -352,6 +566,7 @@
 
         async function sendAction(index) {
             try {
+                addLogEntry(`ACTION: Selected index ${index}`, 'action');
                 const response = await fetch(`${API_BASE}/action`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -384,6 +599,10 @@
                     cardDefinitions = state.card_definitions;
                 }
 
+                // Detect and log changes
+                detectChanges(lastState, state);
+                lastState = JSON.parse(JSON.stringify(state));
+
                 // Update game info
                 document.getElementById('turn').textContent = state.turn || '-';
                 document.getElementById('phase').textContent = state.phase || '-';
@@ -413,6 +632,9 @@
 
                 // Update stack
                 renderStack(state.stack);
+
+                // Update combat
+                renderCombat(state.combat);
 
                 // Update actions
                 if (input.type === 'action' && input.data) {
@@ -453,6 +675,7 @@
         }
 
         // Initial load
+        addLogEntry('Game viewer started', 'phase');
         refresh();
         startAutoRefresh();
     </script>

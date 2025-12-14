@@ -603,6 +603,57 @@ public class ForgeHeadless {
         }
         state.add("players", playersArray);
 
+        // Combat state (if in combat)
+        Combat combat = game.getCombat();
+        if (combat != null && !combat.getAttackers().isEmpty()) {
+            JsonObject combatState = new JsonObject();
+            
+            // Attackers and their blockers
+            JsonArray attackersJson = new JsonArray();
+            for (Card attacker : combat.getAttackers()) {
+                JsonObject att = new JsonObject();
+                att.addProperty("card_id", attacker.getId());
+                att.addProperty("card_name", attacker.getName());
+                att.addProperty("power", attacker.getNetPower());
+                att.addProperty("toughness", attacker.getNetToughness());
+                att.addProperty("controller", attacker.getController().getName());
+                
+                // What is this creature attacking?
+                GameEntity defender = combat.getDefenderByAttacker(attacker);
+                if (defender != null) {
+                    att.addProperty("attacking_id", defender.getId());
+                    att.addProperty("attacking_name", defender.getName());
+                    att.addProperty("attacking_type", defender instanceof Player ? "player" : "planeswalker");
+                } else {
+                    att.addProperty("attacking_id", -1);
+                    att.addProperty("attacking_name", "Unknown");
+                    att.addProperty("attacking_type", "unknown");
+                }
+                
+                // Blockers assigned to this attacker
+                JsonArray blockersJson = new JsonArray();
+                CardCollection blockers = combat.getBlockers(attacker);
+                if (blockers != null) {
+                    for (Card blocker : blockers) {
+                        JsonObject blk = new JsonObject();
+                        blk.addProperty("card_id", blocker.getId());
+                        blk.addProperty("card_name", blocker.getName());
+                        blk.addProperty("power", blocker.getNetPower());
+                        blk.addProperty("toughness", blocker.getNetToughness());
+                        blk.addProperty("controller", blocker.getController().getName());
+                        blockersJson.add(blk);
+                    }
+                }
+                att.add("blockers", blockersJson);
+                
+                attackersJson.add(att);
+            }
+            combatState.add("attackers", attackersJson);
+            combatState.addProperty("attacker_count", combat.getAttackers().size());
+            
+            state.add("combat", combatState);
+        }
+
         return state;
     }
 
@@ -1021,6 +1072,10 @@ public class ForgeHeadless {
 
             for (SpellAbility sa : spellAbilities) {
                 // Filter to only abilities the player can actually activate
+                // Skip mana abilities - the game engine handles mana payment automatically
+                if (sa.isManaAbility()) {
+                    continue;
+                }
                 if (sa.canPlay() && sa.getActivatingPlayer() == player && ComputerUtilMana.canPayManaCost(sa, player, 0, false)) {
                     allAbilities.add(sa);
                 }
@@ -1037,16 +1092,25 @@ public class ForgeHeadless {
             for (SpellAbility sa : actions) {
                 JsonObject action = new JsonObject();
                 Card source = sa.getHostCard();
+                
+                // Get card zone for all actions
+                String cardZone = "Unknown";
+                if (source != null && source.getZone() != null) {
+                    cardZone = source.getZone().getZoneType().toString();
+                }
 
-                // Determine action type
-                if (source != null && source.isLand() && sa.isSpell()) {
+                // Determine action type - check zone to distinguish play_land from activate_ability
+                if (source != null && source.isLand() && source.isInZone(ZoneType.Hand)) {
+                    // Playing a land from hand
                     action.addProperty("type", "play_land");
                     action.addProperty("card_id", source.getId());
                     action.addProperty("card_name", source.getName());
+                    action.addProperty("card_zone", cardZone);
                 } else if (sa.isSpell()) {
                     action.addProperty("type", "cast_spell");
                     action.addProperty("card_id", source != null ? source.getId() : -1);
                     action.addProperty("card_name", source != null ? source.getName() : "Unknown");
+                    action.addProperty("card_zone", cardZone);
                     action.addProperty("ability_description", sa.getDescription());
                     action.addProperty("mana_cost", sa.getPayCosts() != null ? sa.getPayCosts().toSimpleString() : "");
 
@@ -1066,6 +1130,7 @@ public class ForgeHeadless {
                     action.addProperty("type", "activate_ability");
                     action.addProperty("card_id", source != null ? source.getId() : -1);
                     action.addProperty("card_name", source != null ? source.getName() : "Unknown");
+                    action.addProperty("card_zone", cardZone);
                     action.addProperty("ability_description", sa.getDescription());
                     action.addProperty("mana_cost",
                             sa.getPayCosts() != null ? sa.getPayCosts().toSimpleString() : "no cost");
