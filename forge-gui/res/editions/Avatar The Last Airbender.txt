@@ -11,7 +11,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=30
 
 [Common]
-Base=Common:fromSheet("TLA cards")
+Base=Common:!fromSheet("TLA allied lands"):fromSheet("TLA cards")
 
 [Common-Borderless]
 Base=Common:fromSheet("TLA cards")
