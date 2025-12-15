@@ -10,7 +10,11 @@
       "Bash(mvn package:*)",
       "Bash(./forge.cmd)",
       "Bash(mvn clean package:*)",
-      "Bash(./forge.exe:*)"
+      "Bash(./forge.exe:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(done)"
     ],
     "deny": [],
     "ask": []

@@ -1,16 +1,20 @@
 package forge.screens.home.rogue;
 
+import forge.ImageCache;
 import forge.deck.CardPool;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.gamemodes.rogue.NodeData;
 import forge.gui.CardPicturePanel;
+import forge.gui.GuiBase;
 import forge.item.PaperCard;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.imaging.FImagePanel;
 import forge.toolbox.imaging.FImagePanel.AutoSizeImageMode;
 import forge.toolbox.imaging.FImageUtil;
+import forge.util.ImageFetcher;
+import org.apache.commons.lang3.tuple.Pair;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -27,7 +31,7 @@ import java.awt.image.BufferedImage;
  * Visual representation of a single node in the Rogue Commander path.
  * Displays the plane card image, planebound name, and life total.
  */
-public class PathNodePanel extends SkinnedPanel {
+public class PathNodePanel extends SkinnedPanel implements ImageFetcher.Callback {
     // Plane cards are horizontal, so width > height (rotated 90 degrees from normal cards)
     private static final int CARD_WIDTH = 250;  // Wider (was height)
     private static final int CARD_HEIGHT = 180; // Shorter (was width)
@@ -67,21 +71,47 @@ public class PathNodePanel extends SkinnedPanel {
         cardImage = new CardPicturePanel();
         cardImage.setOpaque(false);
         cardImage.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
-        PaperCard planeCard = getPlaneCard(node.getPlaneBoundConfig().planeName());
+
+        String planeName = node.getPlaneBoundConfig().planeName();
+        System.out.println("=== PathNodePanel DEBUG ===");
+        System.out.println("Looking for plane: " + planeName);
+
+        PaperCard planeCard = getPlaneCard(planeName);
+        System.out.println("Found plane card: " + (planeCard != null ? planeCard.getName() + " [" + planeCard.getEdition() + "]" : "NULL"));
+
         if (planeCard != null) {
-            // Get the card image and rotate it 90 degrees clockwise
-            BufferedImage originalImage = getPlaneCardImage(planeCard);
+            // Check if we need to fetch the image
+            Pair<BufferedImage, Boolean> imageInfo = ImageCache.getCardOriginalImageInfo(
+                planeCard.getImageKey(false), true);
+            BufferedImage originalImage = imageInfo.getLeft();
+            boolean isPlaceholder = imageInfo.getRight();
+
+            System.out.println("Got image: " + (originalImage != null ? originalImage.getWidth() + "x" + originalImage.getHeight() : "NULL"));
+            System.out.println("Is placeholder: " + isPlaceholder);
+
+            // If image is missing or placeholder, trigger download
+            if (ImageCache.isDefaultImage(originalImage) || isPlaceholder) {
+                System.out.println("Triggering image fetch for: " + planeCard.getName());
+                GuiBase.getInterface().getImageFetcher().fetchImage(planeCard.getImageKey(false), this);
+            }
+
+            // Display current image (even if placeholder) while real image downloads
             if (originalImage != null) {
                 BufferedImage rotatedImage = rotateImage90Clockwise(originalImage);
                 cardImage.setItem(rotatedImage);
             } else {
                 // Fallback to original if image not available
+                System.out.println("Using fallback rendering for: " + planeCard.getName());
                 cardImage.setItem(planeCard);
             }
 
             cardImage.revalidate();
             cardImage.repaint();
+        } else {
+            System.out.println("ERROR: Plane card not found in database!");
         }
+        System.out.println("=========================");
+
         add(cardImage);
 
         // Store the plane card for zoom functionality
@@ -349,6 +379,32 @@ public class PathNodePanel extends SkinnedPanel {
         if (zoomOverlay != null) {
             zoomOverlay.setVisible(false);
             zoomOverlay.removeAll();
+        }
+    }
+
+    /**
+     * Callback from ImageFetcher when a card image has been downloaded.
+     * Updates the display with the newly downloaded image.
+     */
+    @Override
+    public void onImageFetched() {
+        if (currentPlaneCard == null) {
+            return;
+        }
+
+        System.out.println("=== Image fetched for: " + currentPlaneCard.getName() + " ===");
+
+        // Clear cached rotated image so it gets regenerated with the new downloaded image
+        cachedRotatedImage = null;
+
+        // Get the newly downloaded image
+        BufferedImage originalImage = getPlaneCardImage(currentPlaneCard);
+        if (originalImage != null) {
+            System.out.println("New image size: " + originalImage.getWidth() + "x" + originalImage.getHeight());
+            BufferedImage rotatedImage = rotateImage90Clockwise(originalImage);
+            cardImage.setItem(rotatedImage);
+            cardImage.revalidate();
+            cardImage.repaint();
         }
     }
 }

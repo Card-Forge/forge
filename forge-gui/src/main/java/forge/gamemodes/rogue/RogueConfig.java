@@ -134,19 +134,32 @@ public class RogueConfig {
         if (cachedPlanarPool == null) {
             cachedPlanarPool = new CardPool();
 
+            System.out.println("=== RogueConfig.getAllPlanes DEBUG ===");
+
             // Search both variant cards and common cards for planes
             // Variant cards include Commander sets, common cards include Planechase sets
+            int variantCount = 0;
             for (PaperCard card : db.getVariantCards().getAllCards()) {
                 if (card.getRules().getType().isPlane()) {
                     cachedPlanarPool.add(card);
+                    variantCount++;
                 }
             }
+            System.out.println("Found " + variantCount + " planes in variant cards");
 
+            int commonCount = 0;
             for (PaperCard card : db.getCommonCards().getAllCards()) {
                 if (card.getRules().getType().isPlane()) {
                     cachedPlanarPool.add(card);
+                    commonCount++;
+                    if (commonCount <= 5) {
+                        System.out.println("  - " + card.getName() + " from " + card.getEdition());
+                    }
                 }
             }
+            System.out.println("Found " + commonCount + " planes in common cards");
+            System.out.println("Total planes: " + cachedPlanarPool.countAll());
+            System.out.println("=====================================");
         }
         return cachedPlanarPool;
     }
