@@ -14,5 +14,5 @@ public interface IWinLoseView<T extends IButton> {
     void showRewards(Runnable runnable);
     void showCards(String title, List<PaperCard> cards);
     void showMessage(String message, String title, FSkinProp icon);
-    List<PaperCard> showCardRewardDialog(String title, List<PaperCard> cards, int minSelections, int maxSelections);
+    List<PaperCard> showCardRewardDialog(String title, List<PaperCard> cards, int minSelections, int maxSelections, int goldReward, int echoReward);
 }

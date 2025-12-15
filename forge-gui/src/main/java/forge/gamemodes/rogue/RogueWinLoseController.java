@@ -71,14 +71,20 @@ public class RogueWinLoseController {
         // Persist life total from match
         persistLifeTotal();
 
-        // Mark current node as completed
+        // Mark current node as completed and award gold/echo rewards
         NodeData currentNode = currentRun.getCurrentNode();
         if (currentNode != null) {
             currentNode.setCompleted(true);
+
+            // Award gold and echo rewards based on node type
+            int goldReward = currentNode.getType().getGoldReward();
+            int echoReward = currentNode.getType().getEchoReward();
+            currentRun.setCurrentGold(currentRun.getCurrentGold() + goldReward);
+            currentRun.setCurrentEchoes(currentRun.getCurrentEchoes() + echoReward);
         }
 
         // Award card rewards
-        awardCardRewards();
+        awardCardRewards(currentNode);
 
         // Move to next node
         currentRun.nextNode();
@@ -104,7 +110,7 @@ public class RogueWinLoseController {
         }
     }
 
-    private void awardCardRewards() {
+    private void awardCardRewards(NodeData currentNode) {
         // Get the rogue deck data to draw rewards from
         RogueDeckData rogueDeck = currentRun.getSelectedRogueDeck();
 
@@ -121,12 +127,22 @@ public class RogueWinLoseController {
             return;
         }
 
+        // Get rewards earned from current node
+        int goldReward = 0;
+        int echoReward = 0;
+        if (currentNode != null) {
+            goldReward = currentNode.getType().getGoldReward();
+            echoReward = currentNode.getType().getEchoReward();
+        }
+
         // Show visual card selection dialog
         List<PaperCard> chosenCards = view.showCardRewardDialog(
             "Choose Your Rewards",
             rewardOptions,
             0,
-            3
+            3,
+            goldReward,
+            echoReward
         );
 
         if (chosenCards != null && !chosenCards.isEmpty()) {

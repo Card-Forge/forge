@@ -7,13 +7,29 @@ package forge.gamemodes.rogue;
 public class NodeData {
 
     public enum NodeType {
-        PLANE,      // Standard match vs Planebound opponent
-        SANCTUM,    // Heal life + remove cards from deck
-        BAZAAR,     // Buy cards and loot
-        EVENT,      // Random event
-        LOOT,       // Loot reward
-        ELITE,      // Elite plane
-        BOSS,       // Final boss plane
+        PLANE(2, 2),       // Standard match vs Planebound opponent
+        SANCTUM(0, 0),      // Heal life + remove cards from deck
+        BAZAAR(0, 0),       // Buy cards and loot
+        EVENT(0, 0),        // Random event
+        LOOT(0, 0),         // Loot reward
+        ELITE(4, 4),       // Elite plane
+        BOSS(8, 8);        // Final boss plane
+
+        private final int goldReward;
+        private final int echoReward;
+
+        NodeType(int goldReward, int echoReward) {
+            this.goldReward = goldReward;
+            this.echoReward = echoReward;
+        }
+
+        public int getGoldReward() {
+            return goldReward;
+        }
+
+        public int getEchoReward() {
+            return echoReward;
+        }
     }
 
     private NodeType type;
