@@ -133,7 +133,16 @@ public class RogueConfig {
     public static CardPool getAllPlanes() {
         if (cachedPlanarPool == null) {
             cachedPlanarPool = new CardPool();
+
+            // Search both variant cards and common cards for planes
+            // Variant cards include Commander sets, common cards include Planechase sets
             for (PaperCard card : db.getVariantCards().getAllCards()) {
+                if (card.getRules().getType().isPlane()) {
+                    cachedPlanarPool.add(card);
+                }
+            }
+
+            for (PaperCard card : db.getCommonCards().getAllCards()) {
                 if (card.getRules().getType().isPlane()) {
                     cachedPlanarPool.add(card);
                 }
@@ -186,7 +195,11 @@ public class RogueConfig {
                 "rogue/planebounds/rakdos.dck",
             62));
 
-        // Add more planebounds here as you create them
+        planebounds.add(new PlaneboundConfig(
+            "Akoum",
+            "Ellivere of the Wild Court",
+            "rogue/planebounds/ellivere.dck",
+            91));
 
         return planebounds;
     }
