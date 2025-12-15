@@ -1,7 +1,6 @@
 package forge.screens.home.rogue;
 
 import forge.deck.CardPool;
-import forge.deck.DeckgenUtil;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.gamemodes.rogue.NodeData;

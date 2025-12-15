@@ -73,12 +73,12 @@ public enum VSubmenuRogueMap implements IVSubmenu<CSubmenuRogueMap> {
 
     @Override
     public EMenuGroup getGroupEnum() {
-        return EMenuGroup.GAUNTLET; // Using GAUNTLET group for now
+        return EMenuGroup.ROGUE;
     }
 
     @Override
     public String getMenuTitle() {
-        return "Rogue Commander - Continue";
+        return "Continue Run";
     }
 
     @Override

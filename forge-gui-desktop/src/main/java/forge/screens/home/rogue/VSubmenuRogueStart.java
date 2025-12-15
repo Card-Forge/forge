@@ -126,12 +126,12 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
 
     @Override
     public EMenuGroup getGroupEnum() {
-        return EMenuGroup.GAUNTLET;
+        return EMenuGroup.ROGUE;
     }
 
     @Override
     public String getMenuTitle() {
-        return "Rogue Commander - New Run";
+        return "Start New Run";
     }
 
     @Override
