@@ -44,6 +44,7 @@ public class PathNodePanel extends SkinnedPanel {
     // Zoom overlay
     private JPanel zoomOverlay;
     private PaperCard currentPlaneCard;
+    private BufferedImage cachedRotatedImage; // Cache rotated image to avoid recreating
 
     /**
      * Create a panel for displaying a path node.
@@ -318,14 +319,18 @@ public class PathNodePanel extends SkinnedPanel {
         // Clear previous content
         zoomOverlay.removeAll();
 
-        // Get the plane card image (already rotated)
-        BufferedImage originalImage = getPlaneCardImage(currentPlaneCard);
-        if (originalImage != null) {
-            BufferedImage rotatedImage = rotateImage90Clockwise(originalImage);
+        // Use cached rotated image if available, otherwise create and cache it
+        if (cachedRotatedImage == null) {
+            BufferedImage originalImage = getPlaneCardImage(currentPlaneCard);
+            if (originalImage != null) {
+                cachedRotatedImage = rotateImage90Clockwise(originalImage);
+            }
+        }
 
+        if (cachedRotatedImage != null) {
             // Create image panel for display at 80% of overlay size
             FImagePanel imagePanel = new FImagePanel();
-            imagePanel.setImage(rotatedImage, 0, AutoSizeImageMode.SOURCE);
+            imagePanel.setImage(cachedRotatedImage, 0, AutoSizeImageMode.SOURCE);
 
             // Add to overlay with size constraints (80% of overlay size)
             zoomOverlay.add(imagePanel, "w 80%!, h 80%!");
