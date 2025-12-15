@@ -2541,7 +2541,7 @@
 	},
 	{
 		"name": "Kiora Island",
-		"displayName": "Court of Empress Gallina",
+		"displayName": "Court of Empress Galina",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2552,7 +2552,7 @@
 			"Boss",
 			"Planeswalker",
 			"Hostile",
-			"Kiora"
+			"Empress Galina"
 		]
 	},
 	{

@@ -7691,10 +7691,10 @@
 {
 	"id": 35,
 	"isTemplate": true,
-	"name": "Kiora's Fall",
-	"description": "Defeat the Kiora and her minions.",
+	"name": "Empress Galina's Fall",
+	"description": "Defeat Empress Galina and her minions.",
 	"offerDialog": {
-		"text": "Village Elder: (Wrinkled brow, concerned tone) Ah, adventurer, have you heard of the looming threat? Kiora, the sea mage, stirs the depths with her restless sea creatures. We face a dire peril.",
+		"text": "Village Elder: (Wrinkled brow, concerned tone) Ah, adventurer, have you heard of the looming threat? Empress Galina, the sea mage, stirs the depths with her restless sea creatures. We face a dire peril.",
 		"options": [
 			{
 				"action": [
@@ -7722,12 +7722,12 @@
 				]
 			},
 			{
-				"name": "Kiora? What's she up to now, Elder?",
+				"name": "Empress Galina? What's she up to now, Elder?",
 				"text": "(Grimaces) She seeks to summon ancient sea titans that slumber beneath the waves, creatures that could engulf our lands in a cataclysmic flood. It's a threat that endangers Shandalar's very existence.",
 				"options": [
 					{
 						"name": "That sounds like a catastrophe waiting to happen. What can we do?",
-						"text": "(Nods) We must act swiftly. Seek out Kiora, reason with her if you can, but be prepared for a fight. Our survival depends on thwarting her dangerous ambitions. Remember, the sea is a powerful ally and a formidable foe.",
+						"text": "(Nods) We must act swiftly. Seek out Empress Galina, reason with her if you can, but be prepared for a fight. Our survival depends on thwarting her dangerous ambitions. Remember, the sea is a powerful ally and a formidable foe.",
 						"options": [
 							{
 								"action": [
@@ -7747,7 +7747,7 @@
 									}
 								],
 								"name": "I'll do my best to stop her, Elder. Shandalar's safety is my priority.",
-								"text": "(Grateful smile) Thank you, brave one. We place our hopes in your hands. Kiora must be convinced to abandon her reckless path, or we'll face a watery doom."
+								"text": "(Grateful smile) Thank you, brave one. We place our hopes in your hands. Empress Galina must be convinced to abandon her reckless path, or we'll face a watery doom."
 							},
 							{
 								"action": [
@@ -7782,7 +7782,7 @@
 	},
 	"prologue": {},
 	"epilogue": {
-		"text": "As you enter the village, the local townspeople rush towards you to thank you for defeating Kiora. (+3 Reputation in $(poi_1))",
+		"text": "As you enter the village, the local townspeople rush towards you to thank you for defeating Empress Galina. (+3 Reputation in $(poi_1))",
 		"options": [
 			{
 				"action": [
@@ -7842,7 +7842,7 @@
 				"POIReference": "$(poi_2)"
 			}
 		],
-		"text": "After some reflection, you decide that the rewards promised to you are not worth the effort of defeating Kiora. (-2 Local Reputation)",
+		"text": "After some reflection, you decide that the rewards promised to you are not worth the effort of defeating Empress Galina. (-2 Local Reputation)",
 		"options": [
 			{
 				"name": "(Quest Failed)"
@@ -7863,11 +7863,11 @@
 		{
 			"id": 1,
 			"name": "Clear",
-			"description": "Find Kiora's Hideout and defeat all enemies present.",
+			"description": "Find Empress Galina's Hideout and defeat all enemies present.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"POITags": [
-				"Kiora"
+				"Empress Galina"
 			],
 			"objective": "Clear",
 			"prologue": {},
@@ -7878,7 +7878,7 @@
 		{
 			"id": 2,
 			"name": "Travel",
-			"description": "Return to town and report your success in clearing Kiora's Hideout.",
+			"description": "Return to town and report your success in clearing Empress Galina's Hideout.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"here": true,
