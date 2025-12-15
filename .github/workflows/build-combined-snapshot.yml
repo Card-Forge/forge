@@ -1,0 +1,138 @@
+name: Build Desktop + Android Snapshot (Fork-Friendly)
+
+on:
+  workflow_dispatch:
+    inputs:
+      debug_enabled:
+        type: boolean
+        description: 'Run the build with tmate debugging enabled'
+        required: false
+        default: false
+      skip_android:
+        type: boolean
+        description: 'Skip Android build (useful if you do not have keystore)'
+        required: false
+        default: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Install virtual framebuffer (if not available) to allow running GUI on a headless server
+        run: command -v Xvfb >/dev/null 2>&1 || { sudo apt update && sudo apt install -y xvfb; }
+
+      - name: Configure Git User
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+
+      - name: Install old maven (3.8.1)
+        run: |
+          curl -o apache-maven-3.8.1-bin.tar.gz https://archive.apache.org/dist/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.tar.gz
+          tar xf apache-maven-3.8.1-bin.tar.gz
+          export PATH=$PWD/apache-maven-3.8.1/bin:$PATH
+          export MAVEN_HOME=$PWD/apache-maven-3.8.1
+          mvn --version
+
+      - name: Set Up Android tools
+        if: ${{ !inputs.skip_android }}
+        run: |
+          JAVA_HOME=${JAVA_HOME_17_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --install "build-tools;35.0.0" "platform-tools" "platforms;android-35"
+
+      - name: Extract Android keystore
+        if: ${{ !inputs.skip_android && secrets.FORGE_KEYSTORE != '' }}
+        run: |
+          cd forge-gui-android
+          echo "${{ secrets.FORGE_KEYSTORE }}" > forge.keystore.asc
+          gpg -d --passphrase "${{ secrets.FORGE_KEYSTORE_PASSPHRASE }}" --batch forge.keystore.asc > forge.keystore
+          cd -
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
+
+      - name: Install Android maven plugin
+        if: ${{ !inputs.skip_android }}
+        run: |
+          mkdir -p ~/.m2/repository/com/simpligility/maven/plugins/android-maven-plugin/4.6.2
+          cd ~/.m2/repository/com/simpligility/maven/plugins/android-maven-plugin/4.6.2
+          curl -L -o android-maven-plugin-4.6.2.jar https://github.com/Card-Forge/android-maven-plugin/releases/download/4.6.2/android-maven-plugin-4.6.2.jar
+          curl -L -o android-maven-plugin-4.6.2.pom https://github.com/Card-Forge/android-maven-plugin/releases/download/4.6.2/android-maven-plugin-4.6.2.pom
+          cd -
+          mvn install -Dmaven.test.skip=true
+          mvn dependency:tree
+
+      - name: Build Desktop Only
+        if: ${{ inputs.skip_android }}
+        run: |
+          export DISPLAY=":1"
+          Xvfb :1 -screen 0 800x600x8 &
+          export _JAVA_OPTIONS="-Xmx2g"
+          mvn -U -B clean -P windows-linux install -e
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Build Desktop and Android
+        if: ${{ !inputs.skip_android }}
+        run: |
+          export DISPLAY=":1"
+          Xvfb :1 -screen 0 800x600x8 &
+          export _JAVA_OPTIONS="-Xmx2g"
+          mvn -U -B clean -P windows-linux,android-release-build install -e -Dandroid.sdk.path=/usr/local/lib/android/sdk -Dandroid.buildToolsVersion=35.0.0
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Prepare artifacts for upload
+        run: |
+          mkdir artifacts
+          # Copy desktop distribution files
+          cp forge-installer/target/*.tar.bz2 artifacts/ || true
+          cp forge-installer/target/*.jar artifacts/ || true
+          cp forge-gui-desktop/target/classes/*.txt artifacts/ || true
+          # Copy Android files if they exist
+          cp forge-gui-android/target/*-signed-aligned.apk artifacts/ || true
+          cp forge-gui-android/target/assets.zip artifacts/ || true
+          # List what we got
+          ls -lh artifacts/
+
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+
+      - name: Upload artifacts to GitHub
+        uses: actions/upload-artifact@v3
+        with:
+          name: forge-snapshot-${{ steps.date.outputs.date }}
+          path: artifacts/*
+          retention-days: 30
+
+      - name: Create or Update Release
+        if: github.ref == 'refs/heads/master'
+        uses: ncipollo/release-action@v1
+        with:
+          name: Snapshot - ${{ steps.date.outputs.date }}
+          tag: snapshot-latest
+          prerelease: true
+          artifacts: artifacts/*
+          allowUpdates: true
+          removeArtifacts: true
+          body: |
+            Automated build from master branch
+            Build date: ${{ steps.date.outputs.date }}
+            Commit: ${{ github.sha }}
+
+            **Desktop:** Download the `.tar.bz2` file for a complete distribution with all resources.
+            **Android:** Download the `.apk` file if Android build was included.

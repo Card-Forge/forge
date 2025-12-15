@@ -1,0 +1,115 @@
+name: Build Desktop Snapshot (Fork-Friendly)
+
+on:
+  workflow_dispatch:
+    inputs:
+      debug_enabled:
+        type: boolean
+        description: 'Run the build with tmate debugging enabled'
+        required: false
+        default: false
+  push:
+    branches:
+      - master
+      - rogueCommander
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Install virtual framebuffer (if not available) to allow running GUI on a headless server
+        run: command -v Xvfb >/dev/null 2>&1 || { sudo apt update && sudo apt install -y xvfb; }
+
+      - name: Configure Git User
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+
+      - name: Build Desktop Distribution
+        run: |
+          export DISPLAY=":1"
+          Xvfb :1 -screen 0 800x600x8 &
+          mvn -U -B clean -P windows-linux install -T 1C
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
+
+      - name: Prepare artifacts for upload
+        run: |
+          mkdir artifacts
+          # Copy distribution files
+          cp forge-installer/target/*.tar.bz2 artifacts/ || true
+          cp forge-installer/target/*.jar artifacts/ || true
+          cp forge-gui-desktop/target/classes/build.txt artifacts/ || true
+          cp forge-gui-desktop/target/classes/version.txt artifacts/ || true
+          # List what we got
+          ls -lh artifacts/
+
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+
+      - name: Upload artifacts to GitHub
+        uses: actions/upload-artifact@v3
+        with:
+          name: forge-desktop-snapshot-${{ steps.date.outputs.date }}
+          path: artifacts/*
+          retention-days: 30
+
+      - name: Create or Update Release (Master)
+        if: github.ref == 'refs/heads/master'
+        uses: ncipollo/release-action@v1
+        with:
+          name: Desktop Snapshot - ${{ steps.date.outputs.date }}
+          tag: desktop-snapshot-latest
+          prerelease: true
+          artifacts: artifacts/*
+          allowUpdates: true
+          removeArtifacts: true
+          body: |
+            Automated desktop build from master branch
+            Build date: ${{ steps.date.outputs.date }}
+            Commit: ${{ github.sha }}
+
+            Download the `.tar.bz2` file for a complete distribution with all resources.
+
+      - name: Create or Update Release (Rogue Commander)
+        if: github.ref == 'refs/heads/rogueCommander'
+        uses: ncipollo/release-action@v1
+        with:
+          name: Rogue Commander - ${{ steps.date.outputs.date }}
+          tag: rogue-commander-latest
+          prerelease: true
+          artifacts: artifacts/*
+          allowUpdates: true
+          removeArtifacts: true
+          body: |
+            🎮 **Rogue Commander Playtest Build**
+
+            Automated build from rogueCommander branch
+            Build date: ${{ steps.date.outputs.date }}
+            Commit: ${{ github.sha }}
+
+            **Download Instructions:**
+            1. Download the `forge-installer-*.tar.bz2` file
+            2. Extract to a folder
+            3. Run `forge.exe` (Windows) or `forge.sh` (Linux/Mac)
+            4. Select "Rogue Commander" from the main menu
+
+            This is a development build for playtesting the new Rogue Commander game mode.

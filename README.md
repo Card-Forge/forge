@@ -1,5 +1,9 @@
 # ⚔️  Forge: The Magic: The Gathering Rules Engine
 
+> 🎮 **This is a fork featuring the experimental Rogue Commander game mode!**
+> 📥 [Download the latest Rogue Commander build here](https://github.com/bennybenedek/forge/releases/tag/rogue-commander-latest)
+> 🔙 [Original Forge repository](https://github.com/Card-Forge/forge)
+
 Join the **Forge community** on [Discord](https://discord.gg/HcPJNyD66a)!
 
 [![Test build](https://github.com/Card-Forge/forge/actions/workflows/test-build.yaml/badge.svg)](https://github.com/Card-Forge/forge/actions/workflows/test-build.yaml)
@@ -25,15 +29,39 @@ Join the **Forge community** on [Discord](https://discord.gg/HcPJNyD66a)!
 ## 🛠️ Installation Guide
 
 ### 📥 Desktop Installation
-1. **Latest Releases:** Download the latest version [here](https://github.com/Card-Forge/forge/releases/latest).
-2. **Snapshot Build:** For the latest development version, grab the `forge-gui-desktop` tarball from our [Snapshot Build](https://github.com/Card-Forge/forge/releases/tag/daily-snapshots).
+1. **Latest Releases:** Download the latest version [here](https://github.com/bennybenedek/forge/releases/tag/rogue-commander-latest).
+2. **Snapshot Build:** For the latest development version, grab the `forge-gui-desktop` tarball from our [Snapshot Build](https://github.com/bennybenedek/forge/releases/tag/rogue-commander-latest).
    - **Tip:** Extract to a new folder to prevent version conflicts.
-3. **User Data Management:** Previous players’ data is preserved during upgrades.
+3. **User Data Management:** Previous players' data is preserved during upgrades.
 4. **Java Requirement:** Ensure you have **Java 17 or later** installed.
+
+> 🎮 **Rogue Commander Mode:** This fork includes the new experimental **Rogue Commander** game mode! After installation, select "Rogue Commander" from the main menu to try it out.
 
 ### 📱 Android Installation
 - _(Note: **Android 11** is the minimum requirement with at least **6GB RAM** to run smoothly. You need to enable **"Install unknown apps"** for Forge to initialize and update itself)_
 - Download the **APK** from the [Snapshot Build](https://github.com/Card-Forge/forge/releases/tag/daily-snapshots). On the first launch, Forge will automatically download all necessary assets.
+
+---
+
+## 🎮 NEW: Rogue Commander Mode
+
+**This fork introduces Rogue Commander**, a new single-player roguelike game mode for Forge!
+
+### What is Rogue Commander?
+Rogue Commander combines the strategic depth of Commander format with roguelike progression:
+- 🗺️ **Path Progression:** Navigate through a branching path of increasingly difficult encounters
+- ✈️ **Planeswalker Battles:** Face unique planebound commanders on different planes
+- 🎁 **Deck Building:** Earn card rewards and strengthen your deck after each victory
+- ⚔️ **Permadeath:** Each run is unique - defeat means starting over with a new commander
+
+### How to Play
+1. Install Forge using the [download link above](#-desktop-installation)
+2. Launch Forge and select **"Rogue Commander"** from the main menu
+3. Choose **"Start New Run"** to begin your journey
+4. Select your commander and starting deck
+5. Battle through the planes and build the ultimate deck!
+
+📖 For detailed rules and mechanics, see the included Rogue Commander documentation.
 
 ---
 
