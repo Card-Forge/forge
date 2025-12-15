@@ -1,6 +1,10 @@
 name: Test build
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master  # Only run on master branch pushes
+  pull_request:  # Always run on pull requests
 
 jobs:
   build:
