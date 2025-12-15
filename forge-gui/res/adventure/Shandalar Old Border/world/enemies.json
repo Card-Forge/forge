@@ -556,7 +556,7 @@
       },
       {
         "type": "item",
-        "probability": 1,
+        "probability": 0.3,
         "count": 1,
         "itemName": "Dragon Blood"
       }
