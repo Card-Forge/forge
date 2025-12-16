@@ -18,7 +18,7 @@ public class PathVisualizerPanel extends SkinnedPanel {
     private static final int NODE_SPACING = 40;  // Vertical space between nodes
     private static final int PATH_LINE_WIDTH = 4;
 
-    private List<PathNodePanel> nodePanels;
+    private List<NodePanel> nodePanels;
     private int currentNodeIndex;
 
     public PathVisualizerPanel() {
@@ -59,7 +59,7 @@ public class PathVisualizerPanel extends SkinnedPanel {
             RoguePathNode node = nodes.get(i);
             boolean isCurrent = (i == currentNodeIndex);
 
-            PathNodePanel nodePanel = new PathNodePanel(node, isCurrent);
+            NodePanel nodePanel = NodePanelFactory.createPanel(node, isCurrent);
             nodePanels.add(nodePanel);
             add(nodePanel);
         }
@@ -89,7 +89,7 @@ public class PathVisualizerPanel extends SkinnedPanel {
             return;
         }
 
-        PathNodePanel firstPanel = nodePanels.get(0);
+        NodePanel firstPanel = nodePanels.get(0);
         int panelWidth = firstPanel.getPreferredSize().width;
         int panelHeight = firstPanel.getPreferredSize().height;
 
@@ -112,7 +112,7 @@ public class PathVisualizerPanel extends SkinnedPanel {
         int startX = (getWidth() - panelWidth) / 2;
         int y = 20;
 
-        for (PathNodePanel nodePanel : nodePanels) {
+        for (NodePanel nodePanel : nodePanels) {
             nodePanel.setBounds(startX, y, panelWidth, panelHeight);
             y += panelHeight + NODE_SPACING;
         }
@@ -134,8 +134,8 @@ public class PathVisualizerPanel extends SkinnedPanel {
         g2d.setStroke(new BasicStroke(PATH_LINE_WIDTH));
 
         for (int i = 0; i < nodePanels.size() - 1; i++) {
-            PathNodePanel currentPanel = nodePanels.get(i);
-            PathNodePanel nextPanel = nodePanels.get(i + 1);
+            NodePanel currentPanel = nodePanels.get(i);
+            NodePanel nextPanel = nodePanels.get(i + 1);
 
             // Calculate line positions (center bottom of current to center top of next)
             int x1 = currentPanel.getX() + (currentPanel.getWidth() / 2);
@@ -174,7 +174,7 @@ public class PathVisualizerPanel extends SkinnedPanel {
     /**
      * Get all node panels.
      */
-    public List<PathNodePanel> getNodePanels() {
+    public List<NodePanel> getNodePanels() {
         return nodePanels;
     }
 

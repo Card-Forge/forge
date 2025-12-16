@@ -5,12 +5,10 @@ import forge.deck.CardPool;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.gamemodes.rogue.NodePlanebound;
-import forge.gamemodes.rogue.RoguePathNode;
 import forge.gui.CardPicturePanel;
 import forge.gui.GuiBase;
 import forge.item.PaperCard;
 import forge.toolbox.FSkin;
-import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.imaging.FImagePanel;
 import forge.toolbox.imaging.FImagePanel.AutoSizeImageMode;
 import forge.toolbox.imaging.FImageUtil;
@@ -29,62 +27,42 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 /**
- * Visual representation of a single node in the Rogue Commander path.
- * Displays the plane card image, planebound name, and life total.
+ * Visual representation of a Planebound node in the Rogue Commander path.
+ * Displays the plane card image.
  */
-public class PathNodePanel extends SkinnedPanel implements ImageFetcher.Callback {
+public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callback {
     // Plane cards are horizontal, so width > height (rotated 90 degrees from normal cards)
     private static final int CARD_WIDTH = 250;  // Wider (was height)
     private static final int CARD_HEIGHT = 180; // Shorter (was width)
-    private static final int PANEL_WIDTH = CARD_WIDTH + 20;
-    private static final int PANEL_HEIGHT = CARD_HEIGHT + 80;
 
-    private final RoguePathNode node;
-    private final boolean isCurrentNode;
-    private final boolean isCompleted;
     private final CardPicturePanel cardImage;
     private final JLabel lblPlaneboundName;
     private final JLabel lblLifeTotal;
+    private final PaperCard currentPlaneCard;
 
     // Zoom overlay
     private JPanel zoomOverlay;
-    private PaperCard currentPlaneCard;
     private BufferedImage cachedRotatedImage; // Cache rotated image to avoid recreating
 
     /**
-     * Create a panel for displaying a path node.
+     * Create a panel for displaying a planebound node.
      *
      * @param node Node data to display
      * @param isCurrentNode Whether this is the player's current position
      */
-    public PathNodePanel(RoguePathNode node, boolean isCurrentNode) {
-        this.node = node;
-        this.isCurrentNode = isCurrentNode;
-        this.isCompleted = node.isCompleted();
+    public NodePlaneboundPanel(NodePlanebound node, boolean isCurrentNode) {
+        super(node, isCurrentNode);
 
-        setLayout(null);
-        setOpaque(false);
-        setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
-        setMinimumSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
-        setMaximumSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
-
-        // Card image (plane card) - rotated 90 degrees clockwise for horizontal display
+      // Card image (plane card) - rotated 90 degrees clockwise for horizontal display
         cardImage = new CardPicturePanel();
         cardImage.setOpaque(false);
         cardImage.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
 
-        // Only planebound nodes have plane cards
-        String planeName = null;
-        if (node instanceof NodePlanebound) {
-            planeName = ((NodePlanebound) node).getRoguePlanebound().planeName();
-        }
-        System.out.println("=== PathNodePanel DEBUG ===");
+        String planeName = node.getRoguePlanebound().planeName();
+        System.out.println("=== PlaneboundNodePanel DEBUG ===");
         System.out.println("Looking for plane: " + planeName);
 
-        PaperCard planeCard = null;
-        if (planeName != null) {
-            planeCard = getPlaneCard(planeName);
-        }
+        PaperCard planeCard = getPlaneCard(planeName);
         System.out.println("Found plane card: " + (planeCard != null ? planeCard.getName() + " [" + planeCard.getEdition() + "]" : "NULL"));
 
         if (planeCard != null) {
@@ -133,11 +111,8 @@ public class PathNodePanel extends SkinnedPanel implements ImageFetcher.Callback
         });
 
         // Planebound name label
-        String nodeName = node.toString();
-        if (node instanceof NodePlanebound) {
-            nodeName = ((NodePlanebound) node).getRoguePlanebound().planeboundName();
-        }
-        lblPlaneboundName = new JLabel(nodeName);
+        String planeboundName = node.getRoguePlanebound().planeboundName();
+        lblPlaneboundName = new JLabel(planeboundName);
         lblPlaneboundName.setFont(FSkin.getRelativeFont(12).getBaseFont());
         lblPlaneboundName.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT).getColor());
         lblPlaneboundName.setHorizontalAlignment(SwingConstants.CENTER);
@@ -167,52 +142,6 @@ public class PathNodePanel extends SkinnedPanel implements ImageFetcher.Callback
 
         // Life total
         lblLifeTotal.setBounds(x, y, CARD_WIDTH, 20);
-    }
-
-    @Override
-    public void paint(Graphics g) {
-        // First paint everything (component + children)
-        super.paint(g);
-
-        // Then paint border and checkmark ON TOP of children
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        // Draw border based on node status
-        Color borderColor;
-        int borderWidth;
-
-        if (isCurrentNode) {
-            // Current node: thick gold border
-            borderColor = new Color(255, 215, 0);
-            borderWidth = 4;
-        } else if (isCompleted) {
-            // Completed node: thin green border
-            borderColor = new Color(0, 200, 0);
-            borderWidth = 2;
-        } else {
-            // Uncompleted node: thin gray border
-            borderColor = new Color(100, 100, 100);
-            borderWidth = 2;
-        }
-
-        g2d.setColor(borderColor);
-        g2d.setStroke(new BasicStroke(borderWidth));
-        g2d.drawRoundRect(5, 5, getWidth() - 10, getHeight() - 10, 10, 10);
-
-        // Draw checkmark for completed nodes
-        if (isCompleted && !isCurrentNode) {
-            g2d.setColor(new Color(0, 200, 0, 230));
-            g2d.fillOval(getWidth() - 35, 10, 25, 25);
-
-            g2d.setColor(Color.WHITE);
-            g2d.setStroke(new BasicStroke(2));
-            int checkX = getWidth() - 32;
-            int checkY = 13;
-            int[] xPoints = {checkX + 5, checkX + 9, checkX + 18};
-            int[] yPoints = {checkY + 11, checkY + 15, checkY + 7};
-            g2d.drawPolyline(xPoints, yPoints, 3);
-        }
     }
 
     /**
@@ -292,10 +221,6 @@ public class PathNodePanel extends SkinnedPanel implements ImageFetcher.Callback
         }
     }
 
-    public RoguePathNode getNode() {
-        return node;
-    }
-
     /**
      * Show zoomed plane card overlay.
      */
@@ -354,7 +279,7 @@ public class PathNodePanel extends SkinnedPanel implements ImageFetcher.Callback
             zoomOverlay.setFocusable(true);
         }
 
-        // Always set glass pane (multiple PathNodePanels share the same frame)
+        // Always set glass pane (multiple PlaneboundNodePanels share the same frame)
         // Each panel needs to set its own overlay as the active glass pane when zooming
         frame.setGlassPane(zoomOverlay);
 

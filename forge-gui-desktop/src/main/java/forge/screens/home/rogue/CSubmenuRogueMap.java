@@ -54,6 +54,7 @@ public enum CSubmenuRogueMap implements ICDoc {
 
     @Override
     public void register() {
+        // TODO document why this method is empty
     }
 
     @Override
