@@ -8,6 +8,6 @@ T:Mode$ SpellCast | ValidCard$ Card.nonCreature+ManaCostPartialU | ValidActivati
 SVar:TrigToken:DB$ Token | TokenAmount$ Y | TokenScript$ u_1_1_merfolk
 SVar:X:Count$Valid Merfolk.YouCtrl
 SVar:Y:TriggeredCard$Chroma.Blue
-DeckHints:Type$Merkfolk
+DeckHints:Type$Merfolk
 DeckHas:Ability$Token
 Oracle:Flying\nNamor's power is equal to the number of Merfolk you control.\nWhenever you cast a noncreature spell with one or more blue mana symbols in its mana cost, create that many 1/1 blue Merfolk creature tokens.
