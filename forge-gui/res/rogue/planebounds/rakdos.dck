@@ -1,5 +1,7 @@
 [metadata]
-Name=Rakdos, Lord of Riots
+name=Rakdos, Lord of Riots
+planeName=Stronghold Furnace
+avatarIndex=62
 [Commander]
 1 Rakdos, Lord of Riots|GK2|1
 [Main]

@@ -7,12 +7,15 @@ import forge.deck.DeckSection;
 import forge.deck.io.DeckSerializer;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
+import forge.util.FileSection;
+import forge.util.FileUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -136,8 +139,7 @@ public class RogueConfig {
 
             System.out.println("=== RogueConfig.getAllPlanes DEBUG ===");
 
-            // Search both variant cards and common cards for planes
-            // Variant cards include Commander sets, common cards include Planechase sets
+            // Search variant cards for planes
             int variantCount = 0;
             for (PaperCard card : db.getVariantCards().getAllCards()) {
                 if (card.getRules().getType().isPlane()) {
@@ -146,22 +148,76 @@ public class RogueConfig {
                 }
             }
             System.out.println("Found " + variantCount + " planes in variant cards");
-
-            int commonCount = 0;
-            for (PaperCard card : db.getCommonCards().getAllCards()) {
-                if (card.getRules().getType().isPlane()) {
-                    cachedPlanarPool.add(card);
-                    commonCount++;
-                    if (commonCount <= 5) {
-                        System.out.println("  - " + card.getName() + " from " + card.getEdition());
-                    }
-                }
-            }
-            System.out.println("Found " + commonCount + " planes in common cards");
-            System.out.println("Total planes: " + cachedPlanarPool.countAll());
-            System.out.println("=====================================");
         }
         return cachedPlanarPool;
+    }
+
+    /**
+     * Load all available Planebound configurations from the planebounds directory.
+     * Scans for .dck files and loads their metadata.
+     */
+    public static List<PlaneboundConfig> loadPlanebounds() {
+        List<PlaneboundConfig> planebounds = new ArrayList<>();
+        File planeboundsDir = new File(ForgeConstants.RES_DIR, "rogue/planebounds");
+
+        if (!planeboundsDir.exists() || !planeboundsDir.isDirectory()) {
+            System.err.println("Warning: Rogue planebounds directory not found: " + planeboundsDir.getAbsolutePath());
+            return planebounds;
+        }
+
+        File[] files = planeboundsDir.listFiles((dir, name) -> name.endsWith(".dck"));
+
+        if (files == null || files.length == 0) {
+            System.err.println("Warning: No planebound deck files found in " + planeboundsDir.getAbsolutePath());
+            return planebounds;
+        }
+
+        for (File deckFile : files) {
+            try {
+                PlaneboundConfig planebound = loadPlaneboundFromFile(deckFile);
+                if (planebound != null) {
+                    planebounds.add(planebound);
+                }
+            } catch (Exception e) {
+                System.err.println("Error loading planebound from " + deckFile.getName() + ": " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
+
+        return planebounds;
+    }
+
+    /**
+     * Load a single Planebound configuration from a deck file.
+     * Reads metadata including name, planeName, and avatarIndex.
+     */
+    private static PlaneboundConfig loadPlaneboundFromFile(File deckFile) throws IOException {
+        // Parse deck file sections
+        Map<String, List<String>> sections = FileSection.parseSections(FileUtil.readFile(deckFile));
+        if (sections.isEmpty()) {
+            System.err.println("Warning: Failed to parse deck file " + deckFile.getName());
+            return null;
+        }
+
+        // Extract metadata section
+        List<String> metadataLines = sections.get("metadata");
+        if (metadataLines == null || metadataLines.isEmpty()) {
+            System.err.println("Warning: No metadata section found in " + deckFile.getName());
+            return null;
+        }
+
+        // Parse metadata as key-value pairs
+        FileSection metadata = FileSection.parse(metadataLines, FileSection.EQUALS_KV_SEPARATOR);
+
+        // Extract required metadata
+        String planeboundName = metadata.get("name", "Unknown Planebound");
+        String planeName = metadata.get("planeName", "Unknown Plane");
+        int avatarIndex = metadata.getInt("avatarIndex", 1);
+
+        // Build relative deck path
+        String deckPath = "rogue/planebounds/" + deckFile.getName();
+
+        return new PlaneboundConfig(planeName, planeboundName, deckPath, avatarIndex);
     }
 
     /**
@@ -169,52 +225,7 @@ public class RogueConfig {
      * These represent the pool of possible plane encounters.
      */
     public static List<PlaneboundConfig> getAllPlanebounds() {
-        List<PlaneboundConfig> planebounds = new ArrayList<>();
-
-        // Ravnica Planebounds
-        planebounds.add(new PlaneboundConfig(
-                "Bloodhill Bastion",
-                "Lyzolda, the Blood Witch",
-                "rogue/planebounds/lyzolda.dck",
-                100));
-
-        planebounds.add(new PlaneboundConfig(
-                "Izzet Steam Maze",
-                "Niv-Mizzet, the Firemind",
-                "rogue/planebounds/niv_mizzet.dck",
-            58));
-
-        planebounds.add(new PlaneboundConfig(
-                "The Zephyr Maze",
-                "Isperia, Supreme Judge",
-                "rogue/planebounds/isperia.dck",
-            47));
-
-        planebounds.add(new PlaneboundConfig(
-                "Selesnya Loft Gardens",
-                "Trostani, Selesnya's Voice",
-                "rogue/planebounds/trostani.dck",
-            74));
-
-        planebounds.add(new PlaneboundConfig(
-                "The Dark Barony",
-                "Lazav, Dimir Mastermind",
-                "rogue/planebounds/lazav.dck",
-            83));
-
-        planebounds.add(new PlaneboundConfig(
-                "Stronghold Furnace",
-                "Rakdos, Lord Of Riots",
-                "rogue/planebounds/rakdos.dck",
-            62));
-
-        planebounds.add(new PlaneboundConfig(
-            "Akoum",
-            "Ellivere of the Wild Court",
-            "rogue/planebounds/ellivere.dck",
-            91));
-
-        return planebounds;
+        return loadPlanebounds();
     }
 
     /**

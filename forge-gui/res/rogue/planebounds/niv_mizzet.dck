@@ -1,5 +1,7 @@
 [metadata]
-Name=Niv-Mizzet, the Firemind
+name=Niv-Mizzet, the Firemind
+planeName=Izzet Steam Maze
+avatarIndex=58
 [Commander]
 1 Niv-Mizzet, the Firemind|GK1|1
 [Main]
