@@ -96,6 +96,9 @@ public class CardZoomUtil {
             return;
         }
 
+        // Always set glass pane when showing zoom (multiple components may share the same window)
+        setGlassPane();
+
         currentZoomedCard = card;
         zoomOverlay.removeAll();
 
@@ -119,6 +122,49 @@ public class CardZoomUtil {
         zoomOverlay.requestFocusInWindow();
         zoomOverlay.revalidate();
         zoomOverlay.repaint();
+    }
+
+    /**
+     * Show zoomed view of a pre-rendered card image.
+     * Useful for displaying rotated or modified card images.
+     * @param cardImage The card image to zoom
+     */
+    public void showZoom(BufferedImage cardImage) {
+        if (zoomOverlay == null || cardImage == null) {
+            return;
+        }
+
+        // Always set glass pane when showing zoom (multiple components may share the same window)
+        setGlassPane();
+
+        currentZoomedCard = null; // No PaperCard associated
+        zoomOverlay.removeAll();
+
+        FImagePanel imagePanel = new FImagePanel();
+        imagePanel.setImage(cardImage, 0, AutoSizeImageMode.SOURCE);
+        zoomOverlay.add(imagePanel, "w 80%!, h 80%!");
+
+        zoomOverlay.setVisible(true);
+        zoomOverlay.requestFocusInWindow();
+        zoomOverlay.revalidate();
+        zoomOverlay.repaint();
+    }
+
+    /**
+     * Set this overlay as the active glass pane on the parent window.
+     * Called every time zoom is shown to ensure multiple components sharing
+     * the same window don't interfere with each other.
+     */
+    private void setGlassPane() {
+        if (parentWindow == null || zoomOverlay == null) {
+            return;
+        }
+
+        if (parentWindow instanceof JDialog) {
+            ((JDialog) parentWindow).setGlassPane(zoomOverlay);
+        } else if (parentWindow instanceof JFrame) {
+            ((JFrame) parentWindow).setGlassPane(zoomOverlay);
+        }
     }
 
     /**

@@ -44,7 +44,7 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
     // Commander card grid
     private final CommanderGridPanel pnlCommanderGrid = new CommanderGridPanel();
     private final List<CommanderCardPanel> commanderPanels = new ArrayList<>();
-    private CardZoomUtil zoomUtil;
+    private CardZoomUtil zoomUtil; // Lazily initialized on first use
 
     // Commander details
     private final FLabel lblCommanderName = new FLabel.Builder()
@@ -130,22 +130,6 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
-
-        // Setup zoom utility after UI is fully built (use invokeLater to ensure window hierarchy is ready)
-        if (zoomUtil == null) {
-            SwingUtilities.invokeLater(() -> {
-                Window window = SwingUtilities.getWindowAncestor(VHomeUI.SINGLETON_INSTANCE.getPnlDisplay());
-                if (window != null) {
-                    zoomUtil = new CardZoomUtil(window);
-                    zoomUtil.setupZoomOverlay();
-
-                    // Update existing commander panels with the zoom util
-                    for (CommanderCardPanel panel : commanderPanels) {
-                        panel.setZoomUtil(zoomUtil);
-                    }
-                }
-            });
-        }
     }
 
     private JPanel createDetailsPanel() {
@@ -212,7 +196,18 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
         return pnlCommanderGrid;
     }
 
+    /**
+     * Get the zoom utility, creating it lazily if needed.
+     * This ensures the window hierarchy is ready when zoom is first used.
+     */
     public CardZoomUtil getZoomUtil() {
+        if (zoomUtil == null) {
+            Window window = SwingUtilities.getWindowAncestor(pnlCommanderGrid);
+            if (window != null) {
+                zoomUtil = new CardZoomUtil(window);
+                zoomUtil.setupZoomOverlay();
+            }
+        }
         return zoomUtil;
     }
 

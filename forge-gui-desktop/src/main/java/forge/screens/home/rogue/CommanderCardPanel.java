@@ -2,7 +2,6 @@ package forge.screens.home.rogue;
 
 import forge.gamemodes.rogue.RogueDeck;
 import forge.gui.CardPicturePanel;
-import forge.gui.util.CardZoomUtil;
 import forge.item.PaperCard;
 import forge.toolbox.FSkin.SkinnedPanel;
 
@@ -19,16 +18,14 @@ public class CommanderCardPanel extends SkinnedPanel {
     private final RogueDeck commander;
     private final PaperCard commanderCard;
     private final CardPicturePanel cardPicture;
-    private CardZoomUtil zoomUtil; // Not final - can be set after construction
-    private boolean selected;
+  private boolean selected;
     private Consumer<CommanderCardPanel> selectionCallback;
 
-    public CommanderCardPanel(RogueDeck commander, CardZoomUtil zoomUtil) {
+    public CommanderCardPanel(RogueDeck commander, VSubmenuRogueStart view) {
         super(null);
         this.commander = commander;
         // Get the commander card from the start deck
         this.commanderCard = commander.getStartDeck().getCommanders().get(0);
-        this.zoomUtil = zoomUtil;
         this.selected = false;
         this.cardPicture = new CardPicturePanel();
 
@@ -62,8 +59,8 @@ public class CommanderCardPanel extends SkinnedPanel {
 
         // Add mouse wheel listener for card zoom
         addMouseWheelListener(e -> {
-            if (e.getWheelRotation() < 0 && zoomUtil != null) { // Scroll up to zoom
-                zoomUtil.showZoom(commanderCard);
+            if (e.getWheelRotation() < 0 && view.getZoomUtil() != null) { // Scroll up to zoom
+                view.getZoomUtil().showZoom(commanderCard);
             }
         });
 
@@ -73,11 +70,6 @@ public class CommanderCardPanel extends SkinnedPanel {
 
     public void setSelectionCallback(Consumer<CommanderCardPanel> callback) {
         this.selectionCallback = callback;
-    }
-
-    public void setZoomUtil(CardZoomUtil zoomUtil) {
-        // Allow updating zoom utility after panel creation (for initialization timing issues)
-        this.zoomUtil = zoomUtil;
     }
 
     public void setSelected(boolean selected) {

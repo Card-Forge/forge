@@ -7,6 +7,7 @@ import forge.game.card.CardView;
 import forge.gamemodes.rogue.NodePlanebound;
 import forge.gui.CardPicturePanel;
 import forge.gui.GuiBase;
+import forge.gui.util.CardZoomUtil;
 import forge.item.PaperCard;
 import forge.toolbox.FSkin;
 import forge.toolbox.imaging.FImagePanel;
@@ -19,8 +20,6 @@ import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
@@ -40,8 +39,8 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
     private final JLabel lblLifeTotal;
     private final PaperCard currentPlaneCard;
 
-    // Zoom overlay
-    private JPanel zoomOverlay;
+    // Zoom utility
+    private CardZoomUtil zoomUtil; // Lazily initialized on first zoom
     private BufferedImage cachedRotatedImage; // Cache rotated image to avoid recreating
 
     /**
@@ -221,62 +220,18 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
             return;
         }
 
-        // Find the root frame to attach the overlay
-        Window window = SwingUtilities.getWindowAncestor(this);
-        if (!(window instanceof JFrame)) {
+        // Lazily initialize zoom utility
+        if (zoomUtil == null) {
+            Window window = SwingUtilities.getWindowAncestor(this);
+            if (window != null) {
+                zoomUtil = new CardZoomUtil(window);
+                zoomUtil.setupZoomOverlay();
+            }
+        }
+
+        if (zoomUtil == null) {
             return;
         }
-
-        JFrame frame = (JFrame) window;
-
-        // Create zoom overlay if it doesn't exist
-        if (zoomOverlay == null) {
-            zoomOverlay = new JPanel() {
-                @Override
-                protected void paintComponent(Graphics g) {
-                    super.paintComponent(g);
-                    // Semi-transparent dark background
-                    g.setColor(new Color(0, 0, 0, 200));
-                    g.fillRect(0, 0, getWidth(), getHeight());
-                }
-            };
-            zoomOverlay.setLayout(new MigLayout("insets 0, wrap, ax center, ay center"));
-            zoomOverlay.setOpaque(false);
-            zoomOverlay.setVisible(false);
-
-            // Add click listener to close zoom
-            zoomOverlay.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    closeZoom();
-                }
-            });
-
-            // Add mouse wheel listener to close zoom on scroll down
-            zoomOverlay.addMouseWheelListener(e -> {
-                if (e.getWheelRotation() > 0) { // Scroll down
-                    closeZoom();
-                }
-            });
-
-            // Add key listener for ESC to close
-            zoomOverlay.addKeyListener(new KeyAdapter() {
-                @Override
-                public void keyPressed(KeyEvent e) {
-                    if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                        closeZoom();
-                    }
-                }
-            });
-            zoomOverlay.setFocusable(true);
-        }
-
-        // Always set glass pane (multiple PlaneboundNodePanels share the same frame)
-        // Each panel needs to set its own overlay as the active glass pane when zooming
-        frame.setGlassPane(zoomOverlay);
-
-        // Clear previous content
-        zoomOverlay.removeAll();
 
         // Use cached rotated image if available, otherwise create and cache it
         if (cachedRotatedImage == null) {
@@ -287,27 +242,16 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
         }
 
         if (cachedRotatedImage != null) {
-            // Create image panel for display at 80% of overlay size
-            FImagePanel imagePanel = new FImagePanel();
-            imagePanel.setImage(cachedRotatedImage, 0, AutoSizeImageMode.SOURCE);
-
-            // Add to overlay with size constraints (80% of overlay size)
-            zoomOverlay.add(imagePanel, "w 80%!, h 80%!");
+            zoomUtil.showZoom(cachedRotatedImage);
         }
-
-        zoomOverlay.setVisible(true);
-        zoomOverlay.requestFocusInWindow();
-        zoomOverlay.revalidate();
-        zoomOverlay.repaint();
     }
 
     /**
      * Close the zoom overlay.
      */
     private void closeZoom() {
-        if (zoomOverlay != null) {
-            zoomOverlay.setVisible(false);
-            zoomOverlay.removeAll();
+        if (zoomUtil != null) {
+            zoomUtil.closeZoom();
         }
     }
 

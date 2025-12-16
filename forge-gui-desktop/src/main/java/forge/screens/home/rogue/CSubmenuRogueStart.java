@@ -46,7 +46,7 @@ public enum CSubmenuRogueStart implements ICDoc {
 
         // Create card panel for each commander
         for (RogueDeck deck : availableDecks) {
-            CommanderCardPanel cardPanel = new CommanderCardPanel(deck, view.getZoomUtil());
+            CommanderCardPanel cardPanel = new CommanderCardPanel(deck, view);
 
             // Set selection callback to update details and handle single-selection
             cardPanel.setSelectionCallback(this::onCommanderSelected);
