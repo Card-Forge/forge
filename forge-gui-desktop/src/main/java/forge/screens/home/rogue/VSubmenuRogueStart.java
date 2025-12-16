@@ -1,44 +1,50 @@
 package forge.screens.home.rogue;
 
-import forge.gamemodes.rogue.RogueDeck;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
+import forge.gui.util.CardZoomUtil;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;
 import forge.toolbox.*;
 import forge.util.Localizer;
+import forge.view.arcane.CardPanel;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Assembles Swing components for Rogue Commander start screen.
- * Allows player to select a commander and begin a new run.
+ * Allows player to select a commander visually and begin a new run.
  */
 public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
     SINGLETON_INSTANCE;
     final Localizer localizer = Localizer.getInstance();
+
+    // Card display constants
+    private static final int CARD_WIDTH = 223;
+    private static final int CARD_HEIGHT = Math.round(CARD_WIDTH * CardPanel.ASPECT_RATIO);
+    private static final int CARD_SPACING = 15;
+    private static final int CARDS_PER_ROW = 4;
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
     private final DragTab tab = new DragTab("Start New Run");
 
     private final FLabel lblTitle = new FLabel.Builder()
-        .text("Rogue Commander - Choose Your Commander")
+        .text("Pick Your Rogue Commander")
         .opaque(true)
         .fontSize(16)
         .build();
 
-    private final JPanel pnlContent = new JPanel();
-
-    // Commander selection
-    private final FLabel lblCommanders = new FLabel.Builder()
-        .text("Available Commanders:")
-        .build();
-
-    private final FComboBoxWrapper<RogueDeck> cbxCommander = new FComboBoxWrapper<>();
+    // Commander card grid
+    private final CommanderGridPanel pnlCommanderGrid = new CommanderGridPanel();
+    private final List<CommanderCardPanel> commanderPanels = new ArrayList<>();
+    private CardZoomUtil zoomUtil;
 
     // Commander details
     private final FLabel lblCommanderName = new FLabel.Builder()
@@ -53,7 +59,7 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
     private final FLabel btnBeginRun = new FLabel.Builder()
         .opaque(true)
         .hoverable(true)
-        .text("Begin Run")
+        .text("Start Run")
         .fontSize(16)
         .build();
 
@@ -78,35 +84,6 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
         txtTheme.setFont(FSkin.getFont());
         txtTheme.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         txtTheme.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-
-        // Layout the content panel
-        pnlContent.setOpaque(false);
-        pnlContent.setLayout(new MigLayout("insets 0, gap 0, wrap 2", "[200px][grow]", "[]20px[]10px[]10px[]20px[]"));
-
-        // Row 1: Commander selection
-        pnlContent.add(lblCommanders, "cell 0 0, alignx left, aligny center");
-        cbxCommander.addTo(pnlContent, "cell 1 0, growx, pushx");
-
-        // Row 2: Commander name
-        pnlContent.add(new FLabel.Builder().text("Commander:").build(), "cell 0 1, alignx left, aligny top");
-        pnlContent.add(lblCommanderName, "cell 1 1, growx");
-
-        // Row 3: Description
-        pnlContent.add(new FLabel.Builder().text("Description:").build(), "cell 0 2, alignx left, aligny top");
-        pnlContent.add(new FScrollPane(txtDescription, false,
-            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER),
-            "cell 1 2, growx, h 60px!");
-
-        // Row 4: Theme
-        pnlContent.add(new FLabel.Builder().text("Theme:").build(), "cell 0 3, alignx left, aligny top");
-        pnlContent.add(new FScrollPane(txtTheme, false,
-            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER),
-            "cell 1 3, growx, h 40px!");
-
-        // Row 5: Begin button
-        pnlContent.add(btnBeginRun, "cell 0 4, span 2, alignx center, w 200px!, h 40px!");
     }
 
     @Override
@@ -145,10 +122,59 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap"));
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlContent, "w 98%!, gap 1% 0 0 0, pushy, growy");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlCommanderGrid, "w 98%!, gap 1% 0 15px 0");
+
+        // Add commander details panel
+        JPanel pnlDetails = createDetailsPanel();
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlDetails, "w 98%!, gap 1% 0 0 15px");
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
+
+        // Setup zoom utility after UI is fully built (use invokeLater to ensure window hierarchy is ready)
+        if (zoomUtil == null) {
+            SwingUtilities.invokeLater(() -> {
+                Window window = SwingUtilities.getWindowAncestor(VHomeUI.SINGLETON_INSTANCE.getPnlDisplay());
+                if (window != null) {
+                    zoomUtil = new CardZoomUtil(window);
+                    zoomUtil.setupZoomOverlay();
+
+                    // Update existing commander panels with the zoom util
+                    for (CommanderCardPanel panel : commanderPanels) {
+                        panel.setZoomUtil(zoomUtil);
+                    }
+                }
+            });
+        }
+    }
+
+    private JPanel createDetailsPanel() {
+        JPanel panel = new JPanel();
+        panel.setOpaque(false);
+        panel.setLayout(new MigLayout("insets 0, gap 0, wrap 2", "[150px][grow]", "[]10px[]10px[]20px[]"));
+
+        // Row 1: Commander name
+        panel.add(new FLabel.Builder().text("Commander:").build(), "cell 0 0, alignx left, aligny top");
+        panel.add(lblCommanderName, "cell 1 0, growx");
+
+        // Row 2: Description
+        panel.add(new FLabel.Builder().text("Description:").build(), "cell 0 1, alignx left, aligny top");
+        panel.add(new FScrollPane(txtDescription, false,
+            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER),
+            "cell 1 1, growx, h 60px!");
+
+        // Row 3: Theme
+        panel.add(new FLabel.Builder().text("Theme:").build(), "cell 0 2, alignx left, aligny top");
+        panel.add(new FScrollPane(txtTheme, false,
+            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER),
+            "cell 1 2, growx, h 40px!");
+
+        // Row 4: Begin button
+        panel.add(btnBeginRun, "cell 0 3, span 2, alignx center, w 200px!, h 40px!");
+
+        return panel;
     }
 
     @Override
@@ -162,10 +188,6 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
     }
 
     // Getters for controller access
-    public FComboBoxWrapper<RogueDeck> getCbxCommander() {
-        return cbxCommander;
-    }
-
     public FLabel getLblCommanderName() {
         return lblCommanderName;
     }
@@ -180,5 +202,79 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
 
     public FLabel getBtnBeginRun() {
         return btnBeginRun;
+    }
+
+    public List<CommanderCardPanel> getCommanderPanels() {
+        return commanderPanels;
+    }
+
+    public CommanderGridPanel getCommanderGridPanel() {
+        return pnlCommanderGrid;
+    }
+
+    public CardZoomUtil getZoomUtil() {
+        return zoomUtil;
+    }
+
+    /**
+     * Panel that displays commander cards in a grid (max 4 per row).
+     */
+    public class CommanderGridPanel extends FSkin.SkinnedPanel {
+        public CommanderGridPanel() {
+            super(null);
+            setOpaque(false);
+        }
+
+        public void clear() {
+            removeAll();
+            commanderPanels.clear();
+        }
+
+        public void addCommanderPanel(CommanderCardPanel panel) {
+            commanderPanels.add(panel);
+            add(panel);
+        }
+
+        @Override
+        public void doLayout() {
+            if (commanderPanels.isEmpty()) {
+                return;
+            }
+
+            int totalWidth = getWidth();
+            int cardIndex = 0;
+            int y = 15; // Top padding
+
+            // Layout cards in rows of up to 4
+            while (cardIndex < commanderPanels.size()) {
+                // Calculate how many cards in this row
+                int cardsInThisRow = Math.min(CARDS_PER_ROW, commanderPanels.size() - cardIndex);
+                int rowWidth = cardsInThisRow * CARD_WIDTH + (cardsInThisRow - 1) * CARD_SPACING;
+                int startX = (totalWidth - rowWidth) / 2;
+
+                // Position cards in this row
+                int x = startX;
+                for (int col = 0; col < cardsInThisRow; col++) {
+                    CommanderCardPanel panel = commanderPanels.get(cardIndex);
+                    panel.setBounds(x, y, CARD_WIDTH, CARD_HEIGHT);
+                    x += CARD_WIDTH + CARD_SPACING;
+                    cardIndex++;
+                }
+
+                // Move to next row
+                y += CARD_HEIGHT + CARD_SPACING;
+            }
+        }
+
+        @Override
+        public Dimension getPreferredSize() {
+            if (commanderPanels.isEmpty()) {
+                return new Dimension(0, 0);
+            }
+
+            int numRows = (int) Math.ceil(commanderPanels.size() / (double) CARDS_PER_ROW);
+            int height = numRows * (CARD_HEIGHT + CARD_SPACING) + 15; // Extra padding at top and bottom
+            return new Dimension(800, height);
+        }
     }
 }

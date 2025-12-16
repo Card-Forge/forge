@@ -137,8 +137,6 @@ public class RogueConfig {
         if (cachedPlanarPool == null) {
             cachedPlanarPool = new CardPool();
 
-            System.out.println("=== RogueConfig.getAllPlanes DEBUG ===");
-
             // Search variant cards for planes
             int variantCount = 0;
             for (PaperCard card : db.getVariantCards().getAllCards()) {
@@ -147,7 +145,6 @@ public class RogueConfig {
                     variantCount++;
                 }
             }
-            System.out.println("Found " + variantCount + " planes in variant cards");
         }
         return cachedPlanarPool;
     }
@@ -191,7 +188,7 @@ public class RogueConfig {
      * Load a single Planebound configuration from a deck file.
      * Reads metadata including name, planeName, and avatarIndex.
      */
-    private static RoguePlanebound loadPlaneboundFromFile(File deckFile) throws IOException {
+    private static RoguePlanebound loadPlaneboundFromFile(File deckFile) {
         // Parse deck file sections
         Map<String, List<String>> sections = FileSection.parseSections(FileUtil.readFile(deckFile));
         if (sections.isEmpty()) {

@@ -59,11 +59,7 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
         cardImage.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
 
         String planeName = node.getRoguePlanebound().planeName();
-        System.out.println("=== PlaneboundNodePanel DEBUG ===");
-        System.out.println("Looking for plane: " + planeName);
-
         PaperCard planeCard = getPlaneCard(planeName);
-        System.out.println("Found plane card: " + (planeCard != null ? planeCard.getName() + " [" + planeCard.getEdition() + "]" : "NULL"));
 
         if (planeCard != null) {
             // Check if we need to fetch the image
@@ -71,9 +67,6 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
                 planeCard.getImageKey(false), true);
             BufferedImage originalImage = imageInfo.getLeft();
             boolean isPlaceholder = imageInfo.getRight();
-
-            System.out.println("Got image: " + (originalImage != null ? originalImage.getWidth() + "x" + originalImage.getHeight() : "NULL"));
-            System.out.println("Is placeholder: " + isPlaceholder);
 
             // If image is missing or placeholder, trigger download
             if (ImageCache.isDefaultImage(originalImage) || isPlaceholder) {
@@ -96,7 +89,6 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
         } else {
             System.out.println("ERROR: Plane card not found in database!");
         }
-        System.out.println("=========================");
 
         add(cardImage);
 

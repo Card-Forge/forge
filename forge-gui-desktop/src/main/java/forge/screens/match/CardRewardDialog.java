@@ -3,19 +3,14 @@ package forge.screens.match;
 import com.google.common.collect.ImmutableList;
 import forge.ImageCache;
 import forge.ImageKeys;
-import forge.game.card.Card;
-import forge.game.card.CardView;
 import forge.gui.CardPicturePanel;
+import forge.gui.util.CardZoomUtil;
 import forge.item.PaperCard;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin.SkinnedPanel;
-import forge.toolbox.imaging.FImagePanel;
-import forge.toolbox.imaging.FImagePanel.AutoSizeImageMode;
-import forge.toolbox.imaging.FImageUtil;
 import forge.util.Localizer;
 import forge.view.arcane.CardPanel;
-import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
@@ -48,8 +43,7 @@ public class CardRewardDialog {
     private final FLabel lblRewards;
     private final JButton btnRevealAll;
     private FOptionPane optionPane;
-    private JPanel zoomOverlay;
-    private PaperCard currentZoomedCard;
+    private CardZoomUtil zoomUtil;
 
     /**
      * Create a card reward selection dialog.
@@ -145,8 +139,9 @@ public class CardRewardDialog {
                 0
         );
 
-        // Setup zoom overlay on the dialog's glass pane
-        setupZoomOverlay();
+        // Setup zoom utility
+        zoomUtil = new CardZoomUtil(optionPane);
+        zoomUtil.setupZoomOverlay();
 
         panel.revalidate();
         panel.repaint();
@@ -161,99 +156,6 @@ public class CardRewardDialog {
         return new ArrayList<>();
     }
 
-    /**
-     * Setup a zoom overlay that appears on top of the dialog when a card is zoomed.
-     */
-    private void setupZoomOverlay() {
-        // Get the dialog's layered pane to add overlay on top
-        JDialog dialog = optionPane;
-        if (dialog != null) {
-            zoomOverlay = new JPanel() {
-                @Override
-                protected void paintComponent(Graphics g) {
-                    // Semi-transparent black background
-                    g.setColor(new Color(0, 0, 0, 200));
-                    g.fillRect(0, 0, getWidth(), getHeight());
-                }
-            };
-            zoomOverlay.setOpaque(false);
-            zoomOverlay.setLayout(new MigLayout("insets 0, wrap, ax center, ay center"));
-            zoomOverlay.setVisible(false);
-
-            // Add mouse listener to close zoom on click
-            zoomOverlay.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    closeZoom();
-                }
-            });
-
-            // Add mouse wheel listener to close zoom on scroll down
-            zoomOverlay.addMouseWheelListener(e -> {
-                if (e.getWheelRotation() > 0) { // Scroll down
-                    closeZoom();
-                }
-            });
-
-            // Add key listener for ESC to close
-            zoomOverlay.addKeyListener(new KeyAdapter() {
-                @Override
-                public void keyPressed(KeyEvent e) {
-                    if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                        closeZoom();
-                    }
-                }
-            });
-            zoomOverlay.setFocusable(true);
-
-            // Add overlay to dialog's layered pane at highest layer
-            dialog.setGlassPane(zoomOverlay);
-        }
-    }
-
-    /**
-     * Show zoomed view of a card.
-     */
-    private void showZoom(PaperCard card) {
-        if (zoomOverlay == null) {
-            return;
-        }
-
-        currentZoomedCard = card;
-        zoomOverlay.removeAll();
-
-        // Get high-quality card image
-        Card gameCard = Card.getCardForUi(card);
-        if (gameCard != null) {
-            CardView cardView = CardView.get(gameCard);
-            BufferedImage cardImage = FImageUtil.getImageXlhq(cardView.getCurrentState());
-            if (cardImage == null) {
-                cardImage = FImageUtil.getImage(cardView.getCurrentState());
-            }
-
-            if (cardImage != null) {
-                FImagePanel imagePanel = new FImagePanel();
-                imagePanel.setImage(cardImage, 0, AutoSizeImageMode.SOURCE);
-                zoomOverlay.add(imagePanel, "w 80%!, h 80%!");
-            }
-        }
-
-        zoomOverlay.setVisible(true);
-        zoomOverlay.requestFocusInWindow();
-        zoomOverlay.revalidate();
-        zoomOverlay.repaint();
-    }
-
-    /**
-     * Close the zoom overlay.
-     */
-    private void closeZoom() {
-        if (zoomOverlay != null) {
-            zoomOverlay.setVisible(false);
-            zoomOverlay.removeAll();
-            currentZoomedCard = null;
-        }
-    }
 
     private void updateInfoLabel() {
         lblInfo.setText(getInfoText());
@@ -381,8 +283,8 @@ public class CardRewardDialog {
 
             // Add mouse wheel listener for card zoom (only when revealed)
             addMouseWheelListener(e -> {
-                if (!faceDown && e.getWheelRotation() < 0) { // Scroll up to zoom (only if face-up)
-                    CardRewardDialog.this.showZoom(card);
+                if (!faceDown && e.getWheelRotation() < 0 && CardRewardDialog.this.zoomUtil != null) { // Scroll up to zoom (only if face-up)
+                    CardRewardDialog.this.zoomUtil.showZoom(card);
                 }
             });
 

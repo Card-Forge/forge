@@ -11,20 +11,17 @@ import forge.gui.framework.ICDoc;
 import forge.screens.home.CHomeUI;
 
 import javax.swing.SwingUtilities;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 /**
  * Controls the Rogue Commander start screen.
- * Handles commander selection and new run creation.
+ * Handles commander selection via card grid and new run creation.
  */
 public enum CSubmenuRogueStart implements ICDoc {
     SINGLETON_INSTANCE;
 
     private final VSubmenuRogueStart view = VSubmenuRogueStart.SINGLETON_INSTANCE;
-    private final ActionListener actCommanderSelected = e -> updateCommanderDetails();
-
-  private RogueDeck selectedDeck;
+    private RogueDeck selectedDeck;
 
     @Override
     public void register() {
@@ -33,7 +30,6 @@ public enum CSubmenuRogueStart implements ICDoc {
     @Override
     public void initialize() {
         view.getBtnBeginRun().setCommand((UiCommand) this::beginNewRun);
-        view.getCbxCommander().addActionListener(actCommanderSelected);
     }
 
     @Override
@@ -43,25 +39,60 @@ public enum CSubmenuRogueStart implements ICDoc {
     }
 
     private void loadAvailableCommanders() {
-      List<RogueDeck> availableDecks = RogueConfig.loadRogueDecks();
+        List<RogueDeck> availableDecks = RogueConfig.loadRogueDecks();
 
-        // Populate combo box
-        view.getCbxCommander().removeAllItems();
+        // Clear existing commander panels
+        view.getCommanderGridPanel().clear();
+
+        // Create card panel for each commander
         for (RogueDeck deck : availableDecks) {
-            view.getCbxCommander().addItem(deck);
+            CommanderCardPanel cardPanel = new CommanderCardPanel(deck, view.getZoomUtil());
+
+            // Set selection callback to update details and handle single-selection
+            cardPanel.setSelectionCallback(this::onCommanderSelected);
+
+            view.getCommanderGridPanel().addCommanderPanel(cardPanel);
         }
 
         // Select first commander by default
-        if (!availableDecks.isEmpty()) {
-            view.getCbxCommander().setSelectedIndex(0);
-            selectedDeck = availableDecks.get(0);
+        if (!availableDecks.isEmpty() && !view.getCommanderPanels().isEmpty()) {
+            CommanderCardPanel firstPanel = view.getCommanderPanels().get(0);
+            firstPanel.setSelected(true);
+            selectedDeck = firstPanel.getCommander();
             updateCommanderDetails();
+        }
+
+        // Refresh layout
+        view.getCommanderGridPanel().revalidate();
+        view.getCommanderGridPanel().repaint();
+    }
+
+    private void onCommanderSelected(CommanderCardPanel clickedPanel) {
+        // Deselect all other panels (single-selection mode)
+        for (CommanderCardPanel panel : view.getCommanderPanels()) {
+            if (panel != clickedPanel) {
+                panel.setSelected(false);
+            }
+        }
+
+        // Toggle the clicked panel
+        boolean newState = !clickedPanel.isSelected();
+        clickedPanel.setSelected(newState);
+
+        // Update selected deck
+        if (newState) {
+            selectedDeck = clickedPanel.getCommander();
+            updateCommanderDetails();
+        } else {
+            // If deselecting, clear details
+            selectedDeck = null;
+            view.getLblCommanderName().setText("");
+            view.getTxtDescription().setText("");
+            view.getTxtTheme().setText("");
         }
     }
 
     private void updateCommanderDetails() {
-        selectedDeck = view.getCbxCommander().getSelectedItem();
-
         if (selectedDeck != null) {
             view.getLblCommanderName().setText(selectedDeck.getCommanderCardName());
             view.getTxtDescription().setText(selectedDeck.getDescription());
