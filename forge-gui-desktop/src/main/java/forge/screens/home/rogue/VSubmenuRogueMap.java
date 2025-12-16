@@ -1,6 +1,6 @@
 package forge.screens.home.rogue;
 
-import forge.gamemodes.rogue.RogueRunData;
+import forge.gamemodes.rogue.RogueRun;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -61,7 +61,7 @@ public enum VSubmenuRogueMap implements IVSubmenu<CSubmenuRogueMap> {
     /**
      * Update the display with current run data.
      */
-    public void updateDisplay(RogueRunData run) {
+    public void updateDisplay(RogueRun run) {
         if (run != null) {
             lblLife.setText("Life: " + run.getCurrentLife());
             pathVisualizer.updatePath(run);

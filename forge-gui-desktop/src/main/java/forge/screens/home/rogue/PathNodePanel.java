@@ -4,7 +4,7 @@ import forge.ImageCache;
 import forge.deck.CardPool;
 import forge.game.card.Card;
 import forge.game.card.CardView;
-import forge.gamemodes.rogue.NodeData;
+import forge.gamemodes.rogue.RoguePathNode;
 import forge.gui.CardPicturePanel;
 import forge.gui.GuiBase;
 import forge.item.PaperCard;
@@ -38,7 +38,7 @@ public class PathNodePanel extends SkinnedPanel implements ImageFetcher.Callback
     private static final int PANEL_WIDTH = CARD_WIDTH + 20;
     private static final int PANEL_HEIGHT = CARD_HEIGHT + 80;
 
-    private final NodeData node;
+    private final RoguePathNode node;
     private final boolean isCurrentNode;
     private final boolean isCompleted;
     private final CardPicturePanel cardImage;
@@ -56,7 +56,7 @@ public class PathNodePanel extends SkinnedPanel implements ImageFetcher.Callback
      * @param node Node data to display
      * @param isCurrentNode Whether this is the player's current position
      */
-    public PathNodePanel(NodeData node, boolean isCurrentNode) {
+    public PathNodePanel(RoguePathNode node, boolean isCurrentNode) {
         this.node = node;
         this.isCurrentNode = isCurrentNode;
         this.isCompleted = node.isCompleted();
@@ -280,7 +280,7 @@ public class PathNodePanel extends SkinnedPanel implements ImageFetcher.Callback
         }
     }
 
-    public NodeData getNode() {
+    public RoguePathNode getNode() {
         return node;
     }
 

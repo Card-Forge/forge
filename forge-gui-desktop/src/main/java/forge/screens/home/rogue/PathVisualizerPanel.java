@@ -1,12 +1,11 @@
 package forge.screens.home.rogue;
 
-import forge.gamemodes.rogue.NodeData;
-import forge.gamemodes.rogue.PathData;
-import forge.gamemodes.rogue.RogueRunData;
+import forge.gamemodes.rogue.RoguePathNode;
+import forge.gamemodes.rogue.RoguePath;
+import forge.gamemodes.rogue.RogueRun;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,13 +33,13 @@ public class PathVisualizerPanel extends SkinnedPanel {
      *
      * @param run The current run data
      */
-    public void updatePath(RogueRunData run) {
+    public void updatePath(RogueRun run) {
         if (run == null) {
             clearPath();
             return;
         }
 
-        PathData path = run.getPath();
+        RoguePath path = run.getPath();
         if (path == null || path.getNodes().isEmpty()) {
             clearPath();
             return;
@@ -51,13 +50,13 @@ public class PathVisualizerPanel extends SkinnedPanel {
         nodePanels.clear();
 
         // Find current node index
-        NodeData currentNode = run.getCurrentNode();
+        RoguePathNode currentNode = run.getCurrentNode();
         currentNodeIndex = path.getNodes().indexOf(currentNode);
 
         // Create panels for each node
-        List<NodeData> nodes = path.getNodes();
+        List<RoguePathNode> nodes = path.getNodes();
         for (int i = 0; i < nodes.size(); i++) {
-            NodeData node = nodes.get(i);
+            RoguePathNode node = nodes.get(i);
             boolean isCurrent = (i == currentNodeIndex);
 
             PathNodePanel nodePanel = new PathNodePanel(node, isCurrent);

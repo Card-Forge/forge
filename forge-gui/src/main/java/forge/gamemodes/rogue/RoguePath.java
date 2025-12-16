@@ -8,30 +8,30 @@ import java.util.List;
  * Represents the path (sequence of nodes) in a Rogue Commander run.
  * For MVP, paths are linear (no branching).
  */
-public class PathData {
+public class RoguePath {
 
-    private List<NodeData> nodes;
+    private List<RoguePathNode> nodes;
 
     // Constructors
-    public PathData() {
+    public RoguePath() {
         this.nodes = new ArrayList<>();
     }
 
-    public PathData(List<NodeData> nodes) {
+    public RoguePath(List<RoguePathNode> nodes) {
         this.nodes = nodes != null ? nodes : new ArrayList<>();
     }
 
     // Factory method for linear path generation
-    public static PathData createLinearPath(NodeData... nodes) {
-        return new PathData(Arrays.asList(nodes));
+    public static RoguePath createLinearPath(RoguePathNode... nodes) {
+        return new RoguePath(Arrays.asList(nodes));
     }
 
     // Node management
-    public void addNode(NodeData node) {
+    public void addNode(RoguePathNode node) {
         nodes.add(node);
     }
 
-    public NodeData getNode(int index) {
+    public RoguePathNode getNode(int index) {
         if (index >= 0 && index < nodes.size()) {
             return nodes.get(index);
         }
@@ -42,25 +42,25 @@ public class PathData {
         return nodes.size();
     }
 
-    public List<NodeData> getNodes() {
+    public List<RoguePathNode> getNodes() {
         return nodes;
     }
 
-    public void setNodes(List<NodeData> nodes) {
+    public void setNodes(List<RoguePathNode> nodes) {
         this.nodes = nodes;
     }
 
     // Path queries
     public boolean isComplete() {
-        return nodes.stream().allMatch(NodeData::isCompleted);
+        return nodes.stream().allMatch(RoguePathNode::isCompleted);
     }
 
     public int getCompletedCount() {
-        return (int) nodes.stream().filter(NodeData::isCompleted).count();
+        return (int) nodes.stream().filter(RoguePathNode::isCompleted).count();
     }
 
-    public NodeData getCurrentNode() {
-        for (NodeData node : nodes) {
+    public RoguePathNode getCurrentNode() {
+        for (RoguePathNode node : nodes) {
             if (!node.isCompleted()) {
                 return node;
             }

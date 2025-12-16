@@ -4,7 +4,7 @@ package forge.gamemodes.rogue;
  * Represents a single node in a Rogue Commander path.
  * Nodes can be Planes (matches), Sanctums (heal/remove), or Boss encounters.
  */
-public class NodeData {
+public class RoguePathNode {
 
     public enum NodeType {
         PLANE(2, 2),       // Standard match vs Planebound opponent
@@ -33,7 +33,7 @@ public class NodeData {
     }
 
     private NodeType type;
-    private PlaneboundConfig planeboundConfig;  // Config for Plane type
+    private RoguePlanebound roguePlanebound;  // Config for Plane type
     private boolean completed;                  // Has this node been completed?
     private int rowIndex;                       // Which row this node is on (for life scaling: 5 + 5*rowIndex)
 
@@ -42,30 +42,30 @@ public class NodeData {
     private int freeRemoves;            // Cards that can be removed (default: 3)
 
     // Constructors
-    public NodeData() {
+    public RoguePathNode() {
         this.completed = false;
     }
 
-    public NodeData(NodeType type) {
+    public RoguePathNode(NodeType type) {
         this.type = type;
         this.completed = false;
     }
 
     // Factory methods for convenience
-    public static NodeData createPlane(PlaneboundConfig planeboundConfig) {
-        NodeData node = new NodeData(NodeType.PLANE);
-        node.setPlaneBoundConfig(planeboundConfig);
+    public static RoguePathNode createPlane(RoguePlanebound roguePlanebound) {
+        RoguePathNode node = new RoguePathNode(NodeType.PLANE);
+        node.setPlaneBoundConfig(roguePlanebound);
         return node;
     }
 
-    public static NodeData createBoss(PlaneboundConfig planeboundConfig) {
-        NodeData node = new NodeData(NodeType.BOSS);
-        node.setPlaneBoundConfig(planeboundConfig);
+    public static RoguePathNode createBoss(RoguePlanebound roguePlanebound) {
+        RoguePathNode node = new RoguePathNode(NodeType.BOSS);
+        node.setPlaneBoundConfig(roguePlanebound);
         return node;
     }
 
-    public static NodeData createSanctum(int healAmount, int freeRemoves) {
-        NodeData node = new NodeData(NodeType.SANCTUM);
+    public static RoguePathNode createSanctum(int healAmount, int freeRemoves) {
+        RoguePathNode node = new RoguePathNode(NodeType.SANCTUM);
         node.setHealAmount(healAmount);
         node.setFreeRemoves(freeRemoves);
         return node;
@@ -80,12 +80,12 @@ public class NodeData {
         this.type = type;
     }
 
-    public PlaneboundConfig getPlaneBoundConfig() {
-        return planeboundConfig;
+    public RoguePlanebound getPlaneBoundConfig() {
+        return roguePlanebound;
     }
 
-    public void setPlaneBoundConfig(PlaneboundConfig planeboundConfig) {
-        this.planeboundConfig = planeboundConfig;
+    public void setPlaneBoundConfig(RoguePlanebound roguePlanebound) {
+        this.roguePlanebound = roguePlanebound;
     }
 
     public boolean isCompleted() {
@@ -124,9 +124,9 @@ public class NodeData {
     public String toString() {
         switch (type) {
             case PLANE:
-                return "Plane: " + planeboundConfig.planeName() + " (vs " + planeboundConfig.planeboundName() + ")";
+                return "Plane: " + roguePlanebound.planeName() + " (vs " + roguePlanebound.planeboundName() + ")";
             case BOSS:
-                return "Boss: " + planeboundConfig.planeName() + " (vs " + planeboundConfig.planeboundName() + ")";
+                return "Boss: " + roguePlanebound.planeName() + " (vs " + roguePlanebound.planeboundName() + ")";
             case SANCTUM:
                 return "Sanctum (Heal " + healAmount + ", Remove up to " + freeRemoves + ")";
             default:

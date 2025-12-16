@@ -1,10 +1,10 @@
 package forge.screens.home.rogue;
 
-import forge.gamemodes.rogue.PathData;
+import forge.gamemodes.rogue.RoguePath;
 import forge.gamemodes.rogue.RogueConfig;
-import forge.gamemodes.rogue.RogueDeckData;
+import forge.gamemodes.rogue.RogueDeck;
 import forge.gamemodes.rogue.RogueIO;
-import forge.gamemodes.rogue.RogueRunData;
+import forge.gamemodes.rogue.RogueRun;
 import forge.gui.UiCommand;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
@@ -24,7 +24,7 @@ public enum CSubmenuRogueStart implements ICDoc {
     private final VSubmenuRogueStart view = VSubmenuRogueStart.SINGLETON_INSTANCE;
     private final ActionListener actCommanderSelected = e -> updateCommanderDetails();
 
-  private RogueDeckData selectedDeck;
+  private RogueDeck selectedDeck;
 
     @Override
     public void register() {
@@ -43,11 +43,11 @@ public enum CSubmenuRogueStart implements ICDoc {
     }
 
     private void loadAvailableCommanders() {
-      List<RogueDeckData> availableDecks = RogueConfig.loadRogueDecks();
+      List<RogueDeck> availableDecks = RogueConfig.loadRogueDecks();
 
         // Populate combo box
         view.getCbxCommander().removeAllItems();
-        for (RogueDeckData deck : availableDecks) {
+        for (RogueDeck deck : availableDecks) {
             view.getCbxCommander().addItem(deck);
         }
 
@@ -82,10 +82,10 @@ public enum CSubmenuRogueStart implements ICDoc {
         }
 
         // Generate path for the run
-        PathData path = RogueConfig.getDefaultPath();
+        RoguePath path = RogueConfig.getDefaultPath();
 
         // Create new run
-        RogueRunData newRun = new RogueRunData(
+        RogueRun newRun = new RogueRun(
             selectedDeck,
             path
         );

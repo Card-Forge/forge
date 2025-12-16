@@ -1,6 +1,6 @@
 package forge.screens.home.rogue;
 
-import forge.gamemodes.rogue.RogueDeckData;
+import forge.gamemodes.rogue.RogueDeck;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -38,7 +38,7 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
         .text("Available Commanders:")
         .build();
 
-    private final FComboBoxWrapper<RogueDeckData> cbxCommander = new FComboBoxWrapper<>();
+    private final FComboBoxWrapper<RogueDeck> cbxCommander = new FComboBoxWrapper<>();
 
     // Commander details
     private final FLabel lblCommanderName = new FLabel.Builder()
@@ -162,7 +162,7 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
     }
 
     // Getters for controller access
-    public FComboBoxWrapper<RogueDeckData> getCbxCommander() {
+    public FComboBoxWrapper<RogueDeck> getCbxCommander() {
         return cbxCommander;
     }
 

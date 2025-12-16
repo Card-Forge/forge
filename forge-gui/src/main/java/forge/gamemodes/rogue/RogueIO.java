@@ -76,7 +76,7 @@ public class RogueIO {
         return new File(ROGUE_SAVE_DIR, name + SUFFIX_DATA);
     }
 
-    public static File getRogueFile(final RogueRunData rd) {
+    public static File getRogueFile(final RogueRun rd) {
         return getRogueFile(rd.getName());
     }
 
@@ -94,12 +94,12 @@ public class RogueIO {
         return folder.listFiles(filter);
     }
 
-    public static List<RogueRunData> loadAllRuns() {
-        List<RogueRunData> runs = new ArrayList<>();
+    public static List<RogueRun> loadAllRuns() {
+        List<RogueRun> runs = new ArrayList<>();
         File[] files = getRogueFiles();
         if (files != null) {
             for (File file : files) {
-                RogueRunData run = loadRun(file);
+                RogueRun run = loadRun(file);
                 if (run != null) {
                     runs.add(run);
                 }
@@ -108,11 +108,11 @@ public class RogueIO {
         return runs;
     }
 
-    public static RogueRunData loadRun(final File xmlSaveFile) {
+    public static RogueRun loadRun(final File xmlSaveFile) {
         boolean isCorrupt = false;
         try (GZIPInputStream zin = new GZIPInputStream(Files.newInputStream(xmlSaveFile.toPath()));
              InputStreamReader reader = new InputStreamReader(zin)) {
-            final RogueRunData data = (RogueRunData) RogueIO.getSerializer(true).fromXML(reader);
+            final RogueRun data = (RogueRun) RogueIO.getSerializer(true).fromXML(reader);
 
             final String filename = xmlSaveFile.getName();
             data.setName(filename.substring(0, filename.length() - SUFFIX_DATA.length()));
@@ -136,11 +136,11 @@ public class RogueIO {
         return null;
     }
 
-    public static RogueRunData loadRun(final String filename) {
+    public static RogueRun loadRun(final String filename) {
         return loadRun(getRogueFile(filename));
     }
 
-    public static void saveRun(final RogueRunData rd) {
+    public static void saveRun(final RogueRun rd) {
         try {
             final XStream xStream = RogueIO.getSerializer(false);
             RogueIO.savePacked(xStream, rd);
@@ -149,7 +149,7 @@ public class RogueIO {
         }
     }
 
-    private static void savePacked(final XStream xStream0, final RogueRunData rd) throws IOException {
+    private static void savePacked(final XStream xStream0, final RogueRun rd) throws IOException {
         ensureRogueDirectoryExists();
         try (final BufferedOutputStream bout = new BufferedOutputStream(Files.newOutputStream(getRogueFile(rd).toPath()));
              final GZIPOutputStream zout = new GZIPOutputStream(bout)) {
@@ -165,7 +165,7 @@ public class RogueIO {
         }
     }
 
-    public static void deleteRun(final RogueRunData rd) {
+    public static void deleteRun(final RogueRun rd) {
         deleteRun(rd.getName());
     }
 

@@ -15,13 +15,13 @@ import java.util.List;
  * Main container for a Rogue Commander run state.
  * Tracks deck evolution, life persistence, path progress, and match history.
  */
-public class RogueRunData {
+public class RogueRun {
 
     @XStreamOmitField
     private String name;  // Set based on filename on load
 
     // Run Configuration
-    private RogueDeckData selectedRogueDeck;    // Selected Rogue Deck identifier
+    private RogueDeck selectedRogueDeck;    // Selected Rogue Deck identifier
     private String timestamp;                   // Creation timestamp
 
     // Run State
@@ -30,7 +30,7 @@ public class RogueRunData {
     private int startingLife;                   // Initial life (default: 20)
     private int currentGold;                    // Currency (for future Bazaar support)
     private int currentEchoes;                  // Meta-currency (for future Codex support)
-    private PathData path;                      // The generated path
+    private RoguePath path;                      // The generated path
     private int currentNodeIndex;               // Current position on path
 
     // Match History
@@ -44,7 +44,7 @@ public class RogueRunData {
     private transient HostedMatch hostedMatch = null;
 
     // Constructors
-    public RogueRunData() {
+    public RogueRun() {
         this.startingLife = 20;
         this.currentLife = 20;
         this.currentGold = 2;
@@ -57,7 +57,7 @@ public class RogueRunData {
         stamp();
     }
 
-    public RogueRunData(RogueDeckData selectedRogueDeck, PathData path) {
+    public RogueRun(RogueDeck selectedRogueDeck, RoguePath path) {
         this();
         this.selectedRogueDeck = selectedRogueDeck;
         // Create deep copy of start deck
@@ -78,7 +78,7 @@ public class RogueRunData {
         }
     }
 
-    public NodeData getCurrentNode() {
+    public RoguePathNode getCurrentNode() {
         return path.getNode(currentNodeIndex);
     }
 
@@ -158,11 +158,11 @@ public class RogueRunData {
         return name;
     }
 
-    public RogueDeckData getSelectedRogueDeck() {
+    public RogueDeck getSelectedRogueDeck() {
         return selectedRogueDeck;
     }
 
-    public void setSelectedRogueDeck(RogueDeckData selectedRogueDeck) {
+    public void setSelectedRogueDeck(RogueDeck selectedRogueDeck) {
         this.selectedRogueDeck = selectedRogueDeck;
     }
 
@@ -211,11 +211,11 @@ public class RogueRunData {
         this.currentEchoes = currentEchoes;
     }
 
-    public PathData getPath() {
+    public RoguePath getPath() {
         return path;
     }
 
-    public void setPath(PathData path) {
+    public void setPath(RoguePath path) {
         this.path = path;
     }
 

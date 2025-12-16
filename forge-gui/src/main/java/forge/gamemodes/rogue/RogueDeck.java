@@ -11,7 +11,7 @@ import java.util.List;
  * Represents a Rogue Deck configuration: a Commander with a starting deck
  * and reward pool for progressive deck building during runs.
  */
-public class RogueDeckData {
+public class RogueDeck {
 
     private String name;                    // Display name (e.g., "Aegar, the Freezing Flame")
     private String commanderCardName;       // Commander card name
@@ -23,11 +23,11 @@ public class RogueDeckData {
     private int sleeveIndex;                // Sleeve image index
 
     // Constructors
-    public RogueDeckData() {
+    public RogueDeck() {
         this.rewardPool = new CardPool();
     }
 
-    public RogueDeckData(String name, String commanderCardName) {
+    public RogueDeck(String name, String commanderCardName) {
         this.name = name;
         this.commanderCardName = commanderCardName;
         this.rewardPool = new CardPool();

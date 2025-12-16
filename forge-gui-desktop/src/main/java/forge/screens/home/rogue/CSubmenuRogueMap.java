@@ -7,8 +7,8 @@ import forge.deck.io.DeckSerializer;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.match.HostedMatch;
-import forge.gamemodes.rogue.NodeData;
-import forge.gamemodes.rogue.RogueRunData;
+import forge.gamemodes.rogue.RoguePathNode;
+import forge.gamemodes.rogue.RogueRun;
 import forge.gui.GuiBase;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.EDocID;
@@ -38,7 +38,7 @@ public enum CSubmenuRogueMap implements ICDoc {
     private final VSubmenuRogueMap view = VSubmenuRogueMap.SINGLETON_INSTANCE;
 
     // Test run data (for MVP - will be replaced with proper loading later)
-    private RogueRunData currentRun;
+    private RogueRun currentRun;
 
     @Override
     public void update() {
@@ -70,7 +70,7 @@ public enum CSubmenuRogueMap implements ICDoc {
             return;
         }
 
-        NodeData node = currentRun.getCurrentNode();
+        RoguePathNode node = currentRun.getCurrentNode();
 
         // Handle different node types
         switch (node.getType()) {
@@ -95,7 +95,7 @@ public enum CSubmenuRogueMap implements ICDoc {
         }
     }
 
-    private void startMatch(NodeData node) {
+    private void startMatch(RoguePathNode node) {
         // Show loading overlay
         SwingUtilities.invokeLater(() -> {
             SOverlayUtils.startGameOverlay();
@@ -213,11 +213,11 @@ public enum CSubmenuRogueMap implements ICDoc {
         return DeckSerializer.fromFile(deckFile);
     }
 
-    public RogueRunData getCurrentRun() {
+    public RogueRun getCurrentRun() {
         return currentRun;
     }
 
-    public void setCurrentRun(RogueRunData run) {
+    public void setCurrentRun(RogueRun run) {
         this.currentRun = run;
     }
 }

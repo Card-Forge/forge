@@ -34,8 +34,8 @@ public class RogueConfig {
      * Load all available Rogue Decks from the commanders directory.
      * Scans for .dck files and their corresponding _rewards.dck and .meta files.
      */
-    public static List<RogueDeckData> loadRogueDecks() {
-        List<RogueDeckData> decks = new ArrayList<>();
+    public static List<RogueDeck> loadRogueDecks() {
+        List<RogueDeck> decks = new ArrayList<>();
         File commanderDir = new File(ForgeConstants.RES_DIR, "rogue/commanders");
 
         if (!commanderDir.exists() || !commanderDir.isDirectory()) {
@@ -53,7 +53,7 @@ public class RogueConfig {
 
         for (File deckFile : files) {
             try {
-                RogueDeckData rogueDeck = loadRogueDeckFromFile(deckFile);
+                RogueDeck rogueDeck = loadRogueDeckFromFile(deckFile);
                 if (rogueDeck != null) {
                     decks.add(rogueDeck);
                 }
@@ -70,7 +70,7 @@ public class RogueConfig {
      * Load a single Rogue Deck from a file.
      * Expected files: [name].dck, [name]_rewards.dck, [name].meta
      */
-    private static RogueDeckData loadRogueDeckFromFile(File deckFile) throws IOException {
+    private static RogueDeck loadRogueDeckFromFile(File deckFile) throws IOException {
         // Extract base name (e.g., "anim_pakal" from "anim_pakal.dck")
         String baseName = deckFile.getName().replace(".dck", "");
 
@@ -98,7 +98,7 @@ public class RogueConfig {
         }
 
         // Create RogueDeckData
-        RogueDeckData rogueDeck = new RogueDeckData();
+        RogueDeck rogueDeck = new RogueDeck();
         rogueDeck.setName(startDeck.getName());
         rogueDeck.setStartDeck(startDeck);
 
@@ -156,8 +156,8 @@ public class RogueConfig {
      * Load all available Planebound configurations from the planebounds directory.
      * Scans for .dck files and loads their metadata.
      */
-    public static List<PlaneboundConfig> loadPlanebounds() {
-        List<PlaneboundConfig> planebounds = new ArrayList<>();
+    public static List<RoguePlanebound> loadPlanebounds() {
+        List<RoguePlanebound> planebounds = new ArrayList<>();
         File planeboundsDir = new File(ForgeConstants.RES_DIR, "rogue/planebounds");
 
         if (!planeboundsDir.exists() || !planeboundsDir.isDirectory()) {
@@ -174,7 +174,7 @@ public class RogueConfig {
 
         for (File deckFile : files) {
             try {
-                PlaneboundConfig planebound = loadPlaneboundFromFile(deckFile);
+                RoguePlanebound planebound = loadPlaneboundFromFile(deckFile);
                 if (planebound != null) {
                     planebounds.add(planebound);
                 }
@@ -191,7 +191,7 @@ public class RogueConfig {
      * Load a single Planebound configuration from a deck file.
      * Reads metadata including name, planeName, and avatarIndex.
      */
-    private static PlaneboundConfig loadPlaneboundFromFile(File deckFile) throws IOException {
+    private static RoguePlanebound loadPlaneboundFromFile(File deckFile) throws IOException {
         // Parse deck file sections
         Map<String, List<String>> sections = FileSection.parseSections(FileUtil.readFile(deckFile));
         if (sections.isEmpty()) {
@@ -217,15 +217,7 @@ public class RogueConfig {
         // Build relative deck path
         String deckPath = "rogue/planebounds/" + deckFile.getName();
 
-        return new PlaneboundConfig(planeName, planeboundName, deckPath, avatarIndex);
-    }
-
-    /**
-     * Get all available Planebound configurations.
-     * These represent the pool of possible plane encounters.
-     */
-    public static List<PlaneboundConfig> getAllPlanebounds() {
-        return loadPlanebounds();
+        return new RoguePlanebound(planeName, planeboundName, deckPath, avatarIndex);
     }
 
     /**
@@ -233,8 +225,8 @@ public class RogueConfig {
      * Uses PathGenerator to create a randomized path from available planebounds.
      *
      */
-    public static PathData getDefaultPath() {
-        return PathGenerator.generateRandomLinearPath(5);
+    public static RoguePath getDefaultPath() {
+        return RoguePathGenerator.generateRandomLinearPath(5);
     }
 
     // Helper method to get cards from the database

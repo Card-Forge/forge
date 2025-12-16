@@ -21,9 +21,9 @@ public class RogueWinLoseController {
     private final GameView lastGame;
     private final IWinLoseView<? extends IButton> view;
     private final boolean wonMatch;
-    private final RogueRunData currentRun;
+    private final RogueRun currentRun;
 
-    public RogueWinLoseController(final GameView game0, final IWinLoseView<? extends IButton> view0, final RogueRunData currentRun0) {
+    public RogueWinLoseController(final GameView game0, final IWinLoseView<? extends IButton> view0, final RogueRun currentRun0) {
         this.lastGame = game0;
         this.view = view0;
         this.currentRun = currentRun0;
@@ -72,7 +72,7 @@ public class RogueWinLoseController {
         persistLifeTotal();
 
         // Mark current node as completed and award gold/echo rewards
-        NodeData currentNode = currentRun.getCurrentNode();
+        RoguePathNode currentNode = currentRun.getCurrentNode();
         if (currentNode != null) {
             currentNode.setCompleted(true);
 
@@ -110,9 +110,9 @@ public class RogueWinLoseController {
         }
     }
 
-    private void awardCardRewards(NodeData currentNode) {
+    private void awardCardRewards(RoguePathNode currentNode) {
         // Get the rogue deck data to draw rewards from
-        RogueDeckData rogueDeck = currentRun.getSelectedRogueDeck();
+        RogueDeck rogueDeck = currentRun.getSelectedRogueDeck();
 
         if (rogueDeck == null) {
             System.err.println("Warning: Could not find rogue deck for current run.");
