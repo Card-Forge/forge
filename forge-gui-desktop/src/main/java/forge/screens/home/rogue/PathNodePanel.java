@@ -4,6 +4,7 @@ import forge.ImageCache;
 import forge.deck.CardPool;
 import forge.game.card.Card;
 import forge.game.card.CardView;
+import forge.gamemodes.rogue.NodePlanebound;
 import forge.gamemodes.rogue.RoguePathNode;
 import forge.gui.CardPicturePanel;
 import forge.gui.GuiBase;
@@ -72,11 +73,18 @@ public class PathNodePanel extends SkinnedPanel implements ImageFetcher.Callback
         cardImage.setOpaque(false);
         cardImage.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
 
-        String planeName = node.getPlaneBoundConfig().planeName();
+        // Only planebound nodes have plane cards
+        String planeName = null;
+        if (node instanceof NodePlanebound) {
+            planeName = ((NodePlanebound) node).getRoguePlanebound().planeName();
+        }
         System.out.println("=== PathNodePanel DEBUG ===");
         System.out.println("Looking for plane: " + planeName);
 
-        PaperCard planeCard = getPlaneCard(planeName);
+        PaperCard planeCard = null;
+        if (planeName != null) {
+            planeCard = getPlaneCard(planeName);
+        }
         System.out.println("Found plane card: " + (planeCard != null ? planeCard.getName() + " [" + planeCard.getEdition() + "]" : "NULL"));
 
         if (planeCard != null) {
@@ -125,7 +133,11 @@ public class PathNodePanel extends SkinnedPanel implements ImageFetcher.Callback
         });
 
         // Planebound name label
-        lblPlaneboundName = new JLabel(node.getPlaneBoundConfig().planeboundName());
+        String nodeName = node.toString();
+        if (node instanceof NodePlanebound) {
+            nodeName = ((NodePlanebound) node).getRoguePlanebound().planeboundName();
+        }
+        lblPlaneboundName = new JLabel(nodeName);
         lblPlaneboundName.setFont(FSkin.getRelativeFont(12).getBaseFont());
         lblPlaneboundName.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT).getColor());
         lblPlaneboundName.setHorizontalAlignment(SwingConstants.CENTER);

@@ -7,7 +7,7 @@ import forge.deck.io.DeckSerializer;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.match.HostedMatch;
-import forge.gamemodes.rogue.RoguePathNode;
+import forge.gamemodes.rogue.*;
 import forge.gamemodes.rogue.RogueRun;
 import forge.gui.GuiBase;
 import forge.gui.SOverlayUtils;
@@ -73,29 +73,22 @@ public enum CSubmenuRogueMap implements ICDoc {
         RoguePathNode node = currentRun.getCurrentNode();
 
         // Handle different node types
-        switch (node.getType()) {
-            case PLANE:
-            case BOSS:
-            case ELITE:
-                startMatch(node);
-                break;
-            case SANCTUM:
-                // TODO: Show sanctum screen
-                currentRun.healLife(node.getHealAmount());
-                currentRun.nextNode();
-                updateView();
-                break;
-            case BAZAAR:
-            case EVENT:
-            case LOOT:
-                // TODO: Implement these node types
-                currentRun.nextNode();
-                updateView();
-                break;
+        if (node instanceof NodePlanebound) {
+            startMatch((NodePlanebound) node);
+        } else if (node instanceof NodeSanctum) {
+            // TODO: Show sanctum screen
+            NodeSanctum sanctumNode = (NodeSanctum) node;
+            currentRun.healLife(sanctumNode.getHealAmount());
+            currentRun.nextNode();
+            updateView();
+        } else if (node instanceof NodeBazaar || node instanceof NodeEvent || node instanceof NodeChest) {
+            // TODO: Implement these node types
+            currentRun.nextNode();
+            updateView();
         }
     }
 
-    private void startMatch(RoguePathNode node) {
+    private void startMatch(NodePlanebound node) {
         // Show loading overlay
         SwingUtilities.invokeLater(() -> {
             SOverlayUtils.startGameOverlay();
@@ -107,7 +100,7 @@ public enum CSubmenuRogueMap implements ICDoc {
             CardPool allPlanes = forge.gamemodes.rogue.RogueConfig.getAllPlanes();
 
             // Find the designated plane for this node
-            String cardPlaneName = node.getPlaneBoundConfig().planeName();
+            String cardPlaneName = node.getRoguePlanebound().planeName();
             PaperCard designatedPlane = null;
             for (PaperCard card : allPlanes.toFlatList()) {
                 if (cardPlaneName.equalsIgnoreCase(card.getName())) {
@@ -153,7 +146,7 @@ public enum CSubmenuRogueMap implements ICDoc {
             human.setPlayer(lobbyPlayer);
 
             // Load Planebound deck
-            Deck planeboundDeck = loadPlaneboundDeck(node.getPlaneBoundConfig().deckPath());
+            Deck planeboundDeck = loadPlaneboundDeck(node.getRoguePlanebound().deckPath());
 
             // Create AI Planebound opponent
             RegisteredPlayer ai = RegisteredPlayer.forVariants(
@@ -166,8 +159,8 @@ public enum CSubmenuRogueMap implements ICDoc {
                 null                                   // vanguard avatar
             );
             ai.setPlayer(GamePlayerUtil.createAiPlayer(
-                node.getPlaneBoundConfig().planeboundName(),
-                node.getPlaneBoundConfig().avatarIndex(),
+                node.getRoguePlanebound().planeboundName(),
+                node.getRoguePlanebound().avatarIndex(),
                 0));
 
             // Calculate life based on row: 5 + (5 * rowIndex)

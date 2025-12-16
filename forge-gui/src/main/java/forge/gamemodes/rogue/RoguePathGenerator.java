@@ -36,7 +36,13 @@ public class RoguePathGenerator {
             // Use modulo to wrap around if we need more nodes than available planebounds
             RoguePlanebound roguePlanebound = shuffled.get(i % shuffled.size());
 
-            RoguePathNode node = RoguePathNode.createPlane(roguePlanebound);
+            // Determine node type based on position (last node is boss, others are normal)
+            NodePlanebound node;
+            if (i == nodeCount - 1) {
+                node = NodePlanebound.createBoss(roguePlanebound);
+            } else {
+                node = NodePlanebound.createNormal(roguePlanebound);
+            }
 
             // Set row index for life scaling: Row 0 = 5 life, Row 1 = 10 life, etc.
             node.setRowIndex(i);
@@ -45,31 +51,6 @@ public class RoguePathGenerator {
         }
 
         // Create linear path from nodes
-        return RoguePath.createLinearPath(nodes.toArray(new RoguePathNode[0]));
-    }
-
-    /**
-     * Generate a linear path with specific planebounds.
-     * Useful for testing or curated experiences.
-     *
-     * @param roguePlanebounds Specific planebounds to use
-     * @return PathData with specified plane encounters
-     */
-    public static RoguePath generateLinearPath(List<RoguePlanebound> roguePlanebounds) {
-        if (roguePlanebounds == null || roguePlanebounds.isEmpty()) {
-            throw new IllegalArgumentException("Must provide at least one planebound configuration");
-        }
-
-        List<RoguePathNode> nodes = new ArrayList<>();
-        for (int i = 0; i < roguePlanebounds.size(); i++) {
-            RoguePlanebound roguePlanebound = roguePlanebounds.get(i);
-
-            RoguePathNode node = RoguePathNode.createPlane(roguePlanebound);
-
-            node.setRowIndex(i);
-            nodes.add(node);
-        }
-
         return RoguePath.createLinearPath(nodes.toArray(new RoguePathNode[0]));
     }
 }

@@ -56,6 +56,14 @@ public class RogueIO {
         xStream.allowTypeHierarchy(TreeMap.class);
         xStream.allowTypeHierarchy(List.class);
         xStream.allowTypeHierarchy(DeckSection.class);
+        // Allow node class hierarchy
+        xStream.allowTypeHierarchy(RoguePathNode.class);
+        xStream.allowTypeHierarchy(NodePlanebound.class);
+        xStream.allowTypeHierarchy(NodeSanctum.class);
+        xStream.allowTypeHierarchy(NodeBazaar.class);
+        xStream.allowTypeHierarchy(NodeEvent.class);
+        xStream.allowTypeHierarchy(NodeChest.class);
+        xStream.allowTypeHierarchy(RoguePlaneboundType.class);
         // Bypass invalid reference to allow loading earlier saves
         xStream.ignoreUnknownElements();
         xStream.setMode(XStream.NO_REFERENCES);

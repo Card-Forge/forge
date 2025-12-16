@@ -76,15 +76,18 @@ public class RogueWinLoseController {
         if (currentNode != null) {
             currentNode.setCompleted(true);
 
-            // Award gold and echo rewards based on node type
-            int goldReward = currentNode.getType().getGoldReward();
-            int echoReward = currentNode.getType().getEchoReward();
-            currentRun.setCurrentGold(currentRun.getCurrentGold() + goldReward);
-            currentRun.setCurrentEchoes(currentRun.getCurrentEchoes() + echoReward);
-        }
+            // Award card, gold and echo rewards (only planebound nodes have rewards)
+            if (currentNode instanceof NodePlanebound) {
+                NodePlanebound planeboundNode = (NodePlanebound) currentNode;
+                int goldReward = planeboundNode.getGoldReward();
+                int echoReward = planeboundNode.getEchoReward();
+                currentRun.setCurrentGold(currentRun.getCurrentGold() + goldReward);
+                currentRun.setCurrentEchoes(currentRun.getCurrentEchoes() + echoReward);
 
-        // Award card rewards
-        awardCardRewards(currentNode);
+                // Award card rewards
+                awardCardRewards(currentNode);
+            }
+        }
 
         // Move to next node
         currentRun.nextNode();
@@ -127,12 +130,13 @@ public class RogueWinLoseController {
             return;
         }
 
-        // Get rewards earned from current node
+        // Get rewards earned from current node (only planebound nodes have rewards)
         int goldReward = 0;
         int echoReward = 0;
-        if (currentNode != null) {
-            goldReward = currentNode.getType().getGoldReward();
-            echoReward = currentNode.getType().getEchoReward();
+        if (currentNode instanceof NodePlanebound) {
+            NodePlanebound planeboundNode = (NodePlanebound) currentNode;
+            goldReward = planeboundNode.getGoldReward();
+            echoReward = planeboundNode.getEchoReward();
         }
 
         // Show visual card selection dialog
@@ -171,7 +175,7 @@ public class RogueWinLoseController {
         // Save run state
         RogueIO.saveRun(currentRun);
 
-        view.showMessage("You were defeated! Return to the map to try again.", "Defeat", FSkinProp.ADV_CLR_ACTIVE);
+        view.showMessage("You were defeated! Return to the map to try again.", "Defeat", FSkinProp.ICO_QUEST_ZEP);
     }
 
     public void actionOnQuit() {
