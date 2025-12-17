@@ -41,15 +41,27 @@ public class RoguePathGenerator {
             }
         }
 
-        // Validate we have the required planebounds
-        if (normalPlanebounds.isEmpty()) {
-            throw new IllegalStateException("No normal planebounds available for path generation");
+        // Calculate required counts for each type
+        // With nodeCount=5: 1 elite (middle), 1 boss (last), 3 normal (others)
+        int requiredElite = 1;
+        int requiredBoss = 1;
+        int requiredNormal = nodeCount - requiredElite - requiredBoss;
+
+        // Validate we have enough unique planebounds of each type
+        if (normalPlanebounds.size() < requiredNormal) {
+            throw new IllegalStateException(
+                String.format("Not enough normal planebounds: need %d, have %d",
+                    requiredNormal, normalPlanebounds.size()));
         }
-        if (elitePlanebounds.isEmpty()) {
-            throw new IllegalStateException("No elite planebounds available for path generation");
+        if (elitePlanebounds.size() < requiredElite) {
+            throw new IllegalStateException(
+                String.format("Not enough elite planebounds: need %d, have %d",
+                    requiredElite, elitePlanebounds.size()));
         }
-        if (bossPlanebounds.isEmpty()) {
-            throw new IllegalStateException("No boss planebounds available for path generation");
+        if (bossPlanebounds.size() < requiredBoss) {
+            throw new IllegalStateException(
+                String.format("Not enough boss planebounds: need %d, have %d",
+                    requiredBoss, bossPlanebounds.size()));
         }
 
         // Shuffle lists for randomization
@@ -57,20 +69,28 @@ public class RoguePathGenerator {
         Collections.shuffle(elitePlanebounds, MyRandom.getRandom());
         Collections.shuffle(bossPlanebounds, MyRandom.getRandom());
 
-        // Create nodes from randomly selected planebounds
+        // Create nodes from randomly selected planebounds (shuffled lists ensure no duplicates)
+        // Use separate counters to track how many of each type we've used
+        int normalIndex = 0;
+        int eliteIndex = 0;
+        int bossIndex = 0;
+
         List<RoguePathNode> nodes = new ArrayList<>();
         for (int i = 0; i < nodeCount; i++) {
             RoguePlanebound roguePlanebound;
 
             // Middle node (row 3) is always elite
             if (i == nodeCount / 2) {
-                roguePlanebound = elitePlanebounds.get(0);
+                roguePlanebound = elitePlanebounds.get(eliteIndex);
+                eliteIndex++;
             }
             // Last node (row 5) is always a boss, others are normal
             else if (i == nodeCount - 1) {
-                roguePlanebound = bossPlanebounds.get(0);
+                roguePlanebound = bossPlanebounds.get(bossIndex);
+                bossIndex++;
             } else {
-                roguePlanebound = normalPlanebounds.get(i % normalPlanebounds.size());
+                roguePlanebound = normalPlanebounds.get(normalIndex);
+                normalIndex++;
             }
 
             NodePlanebound node = new NodePlanebound(roguePlanebound);
