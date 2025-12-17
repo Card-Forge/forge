@@ -19,8 +19,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 /**
@@ -42,7 +42,6 @@ public class CardRewardDialog {
     private final MainPanel panel;
     private final FLabel lblInfo;
     private final FLabel lblRewards;
-    private final JButton btnRevealAll;
     private FOptionPane optionPane;
     private CardZoomUtil zoomUtil;
 
@@ -78,16 +77,10 @@ public class CardRewardDialog {
                 .fontAlign(SwingConstants.CENTER)
                 .build();
 
-        // Create reveal all button
-        btnRevealAll = new JButton("Reveal All");
-        btnRevealAll.setFont(new Font("Arial", Font.BOLD, 14));
-        btnRevealAll.addActionListener(e -> revealAllCards());
-
         // Create main panel
         panel = new MainPanel();
         panel.add(lblRewards);
         panel.add(lblInfo);
-        panel.add(btnRevealAll);
 
         // Create card panels
         for (PaperCard card : cards) {
@@ -101,7 +94,7 @@ public class CardRewardDialog {
         int numRows = (int) Math.ceil(cards.size() / 4.0);
 
         int dialogWidth = cardsPerRow * (CARD_WIDTH + CARD_SPACING) - CARD_SPACING + 2 * PADDING;
-        int dialogHeight = numRows * (CARD_HEIGHT + CARD_SPACING) - CARD_SPACING + 185 + 2 * PADDING; // 185px for labels + button
+        int dialogHeight = numRows * (CARD_HEIGHT + CARD_SPACING) - CARD_SPACING + 140 + 2 * PADDING; // 140px for labels (removed button)
 
         Dimension dialogSize = new Dimension(dialogWidth, dialogHeight);
         panel.setPreferredSize(dialogSize);
@@ -112,8 +105,6 @@ public class CardRewardDialog {
         for (SelectableCardPanel cardPanel : cardPanels) {
             cardPanel.flip();
         }
-        // Optionally hide the button after revealing all cards
-        btnRevealAll.setVisible(false);
         panel.revalidate();
         panel.repaint();
     }
@@ -146,6 +137,18 @@ public class CardRewardDialog {
 
         panel.revalidate();
         panel.repaint();
+
+        // Automatically reveal all cards after dialog is shown
+        // Use invokeLater to ensure it runs after the dialog is displayed
+        SwingUtilities.invokeLater(() -> {
+            Timer revealTimer = new Timer(200, e -> {
+                revealAllCards();
+                ((Timer) e.getSource()).stop();
+            });
+            revealTimer.setRepeats(false);
+            revealTimer.start();
+        });
+
         optionPane.setVisible(true);
 
         int result = optionPane.getResult();
@@ -199,13 +202,7 @@ public class CardRewardDialog {
 
             // Layout info label
             lblInfo.setBounds(PADDING, y, totalWidth - 2 * PADDING, 30);
-            y += 30 + 5;
-
-            // Layout reveal all button (centered)
-            int buttonWidth = 120;
-            int buttonHeight = 35;
-            btnRevealAll.setBounds((totalWidth - buttonWidth) / 2, y, buttonWidth, buttonHeight);
-            y += buttonHeight + 10;
+            y += 30 + 15;
 
             // Layout card panels in rows of up to 4 cards
             int cardsPerRow = 4;
@@ -258,15 +255,12 @@ public class CardRewardDialog {
             cardPicture.setOpaque(false);
             add(cardPicture);
 
-            // Add mouse listener for revealing and selection
+            // Add mouse listener for selection
             addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    if (faceDown) {
-                        // First click: flip the card face-up
-                        flip();
-                    } else {
-                        // Subsequent clicks: toggle selection
+                    // Toggle selection (cards are automatically revealed on dialog open)
+                    if (!faceDown) {
                         toggleCardSelection(SelectableCardPanel.this);
                     }
                 }
