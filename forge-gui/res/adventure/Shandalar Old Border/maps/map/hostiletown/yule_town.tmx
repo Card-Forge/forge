@@ -56,7 +56,7 @@
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 8,
-  &quot;superTypes&quot;: [ &quot;Snow&quot; ]
+  &quot;editions&quot;: [ &quot;ICE&quot; ]
 }
 ]</property>
    </properties>
@@ -84,14 +84,16 @@
   </object>
   <object id="60" template="../../../../../../common/maps/obj/enemy.tx" x="354.5" y="331.5">
    <properties>
-    <property name="enemy" value="Penguin"/>
-    <property name="threatRange" type="int" value="30"/>
+    <property name="effect">{ "startBattleWithCard": ["Charcoal Diamond|MIR", "Charcoal Diamond|MIR", "Charcoal Diamond|MIR", "Coal Golem|DRK"] }</property>
+    <property name="enemy" value="Krampus"/>
+    <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
   <object id="61" template="../../../../../../common/maps/obj/enemy.tx" x="288.5" y="162">
    <properties>
-    <property name="enemy" value="Penguin"/>
-    <property name="threatRange" type="int" value="30"/>
+    <property name="effect">{ "startBattleWithCard": ["Snow-Covered Mountain|ICE", "Snow-Covered Forest|ICE", "Ice Floe|ICE", "Elder Druid|ICE", "Gang of Elk|ULG", "Tinder Wall|ICE", "Arcum's Sleigh|ICE", "Jack-in-the-Mox|UGL", "Squee's Toy|TMP", "Oath of Druids|EXO", "Oath of Lieges|EXO"] }</property>
+    <property name="enemy" value="Santa"/>
+    <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="79,81,79,76,79"/>
    </properties>
   </object>
@@ -114,7 +116,7 @@
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 8,
-  &quot;superTypes&quot;: [ &quot;Snow&quot; ]
+  &quot;editions&quot;: [ &quot;ICE&quot; ]
 }
 ]</property>
    </properties>
@@ -146,7 +148,7 @@
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 8,
-  &quot;superTypes&quot;: [ &quot;Snow&quot; ]
+  &quot;editions&quot;: [ &quot;ALL&quot; ]
 }
 ]</property>
    </properties>

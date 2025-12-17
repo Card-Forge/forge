@@ -4,5 +4,5 @@ Types:Artifact Creature Moonfolk Rogue
 PT:1/1
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters, tap target permanent.
-SVar:TrigTap:DB$ Tap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
+SVar:TrigTap:DB$ Tap | ValidTgts$ Permanent
 Oracle:Flying\nWhen Network Disruptor enters, tap target permanent.
