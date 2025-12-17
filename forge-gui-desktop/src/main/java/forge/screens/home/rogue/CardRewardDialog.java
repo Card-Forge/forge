@@ -1,10 +1,9 @@
-package forge.screens.match;
+package forge.screens.home.rogue;
 
 import com.google.common.collect.ImmutableList;
 import forge.ImageCache;
 import forge.ImageKeys;
 import forge.gui.CardPicturePanel;
-import forge.gui.util.CardZoomUtil;
 import forge.item.PaperCard;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;

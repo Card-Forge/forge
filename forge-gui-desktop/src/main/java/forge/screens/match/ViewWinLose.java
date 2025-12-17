@@ -23,6 +23,7 @@ import forge.gui.UiCommand;
 import forge.gui.interfaces.IWinLoseView;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.screens.home.rogue.CardRewardDialog;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.toolbox.FButton;

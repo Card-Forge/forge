@@ -1,4 +1,4 @@
-package forge.gui.util;
+package forge.screens.home.rogue;
 
 import forge.game.card.Card;
 import forge.game.card.CardView;

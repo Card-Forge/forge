@@ -7,7 +7,6 @@ import forge.game.card.CardView;
 import forge.gamemodes.rogue.NodePlanebound;
 import forge.gui.CardPicturePanel;
 import forge.gui.GuiBase;
-import forge.gui.util.CardZoomUtil;
 import forge.item.PaperCard;
 import forge.toolbox.FSkin;
 import forge.toolbox.imaging.FImagePanel;
