@@ -3,5 +3,5 @@ ManaCost:4 R
 Types:Sorcery
 A:SP$ Charm | Choices$ DBDmg,DBDestroy
 SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target creature.
-SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | SpellDescription$ Destroy target artifact.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact | SpellDescription$ Destroy target artifact.
 Oracle:Choose one —\n• Fiery Intervention deals 5 damage to target creature.\n• Destroy target artifact.

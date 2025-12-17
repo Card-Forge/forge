@@ -509,15 +509,13 @@ public class AiAttackController {
             bandingCreatures = CardLists.filter(bandingCreatures, card -> !combat.isAttacking(card) && CombatUtil.canAttack(card));
 
             bandingCreatures = notNeededAsBlockers(attackers, bandingCreatures);
-        } else {
+        } else if (test.hasKeyword(Keyword.BANDING) || test.hasKeyword(Keyword.BANDSWITH)) {
             // Test a specific creature for Banding
-            if (test.hasKeyword(Keyword.BANDING) || test.hasKeyword(Keyword.BANDSWITH)) {
-                bandingCreatures = new CardCollection(test);
-            }
+            bandingCreatures = new CardCollection(test);
         }
 
         // respect global attack constraints
-        GlobalAttackRestrictions restrict = GlobalAttackRestrictions.getGlobalRestrictions(ai, combat.getDefenders());
+        GlobalAttackRestrictions restrict = combat.getAttackConstraints().getGlobalRestrictions();
         int attackMax = restrict.getMax();
         if (attackMax >= attackers.size()) {
             return;
@@ -560,8 +558,7 @@ public class AiAttackController {
                 if (bestBand != null) {
                     GameEntity defender = combat.getDefenderByAttacker(bestBand);
                     if (attackMax == -1) {
-                        // check with the local limitations vs. the chosen defender
-                        attackMax = restrict.getDefenderMax().get(defender) == null ? -1 : restrict.getDefenderMax().get(defender);
+                        attackMax = restrict.getDefenderMax().getOrDefault(defender, -1);
                     }
 
                     if (attackMax == -1 || attackMax > combat.getAttackers().size()) {
@@ -868,20 +865,19 @@ public class AiAttackController {
         // TODO: detect Season of the Witch by presence of a card with a specific trigger
         final boolean seasonOfTheWitch = ai.getGame().isCardInPlay("Season of the Witch");
 
-        final Queue<Card> attackersLeft = new ConcurrentLinkedQueue<>(this.attackers);
-
-        // TODO probably use AttackConstraints instead of only GlobalAttackRestrictions?
-        GlobalAttackRestrictions restrict = GlobalAttackRestrictions.getGlobalRestrictions(ai, combat.getDefenders());
+        GlobalAttackRestrictions restrict = combat.getAttackConstraints().getGlobalRestrictions();
         int attackMax = restrict.getMax();
         if (attackMax == -1) {
             // check with the local limitations vs. the chosen defender
-            attackMax = restrict.getDefenderMax().get(defender) == null ? -1 : restrict.getDefenderMax().get(defender);
+            attackMax = restrict.getDefenderMax().getOrDefault(defender, -1);
         }
 
         if (attackMax == 0) {
             // can't attack anymore
             return aiAggression;
         }
+
+        final Queue<Card> attackersLeft = new ConcurrentLinkedQueue<>(this.attackers);
 
         // Attackers that don't really have a choice
         final AtomicInteger numForcedAttackers = new AtomicInteger(0);
