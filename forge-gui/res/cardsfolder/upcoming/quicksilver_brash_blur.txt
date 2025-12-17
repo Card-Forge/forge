@@ -1,0 +1,9 @@
+Name:Quicksilver, Brash Blur
+ManaCost:R
+Types:Legendary Creature Mutant Hero
+PT:1/1
+K:MayEffectFromOpeningHand:FromHand
+SVar:FromHand:DB$ ChangeZone | Defined$ Self | Origin$ Hand | Destination$ Battlefield | SpellDescription$ If CARDNAME is in your opening hand, you may begin the game with him on the battlefield.
+K:Haste
+A:AB$ PutCounter | Cost$ 4 R | Defined$ Self | CounterType$ P1P1,Double Strike | PowerUp$ True | SpellDescription$ Put a +1/+1 counter and a double strike counter on NICKNAME. (Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)
+Oracle:If Quicksilver, Brash Blur is in your opening hand, you may begin the game with him on the battlefield.\nHaste\nPower-up — {4}{R}: Put a +1/+1 counter and a double strike counter on Quicksilver. (Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)
