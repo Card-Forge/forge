@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import net.miginfocom.swing.MigLayout;
 
@@ -53,7 +54,8 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
     // Commander details
     private final FLabel lblCommanderName = new FLabel.Builder()
         .text("")
-        .fontSize(14)
+        .fontSize(18)
+        .fontAlign(SwingConstants.LEFT)
         .build();
 
     private final FTextArea txtDescription = new FTextArea("");
@@ -76,7 +78,7 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
         txtDescription.setLineWrap(true);
         txtDescription.setWrapStyleWord(true);
         txtDescription.setFocusable(false);
-        txtDescription.setFont(FSkin.getFont());
+        txtDescription.setFont(FSkin.getFont(14));
         txtDescription.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         txtDescription.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
@@ -85,7 +87,7 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
         txtTheme.setLineWrap(true);
         txtTheme.setWrapStyleWord(true);
         txtTheme.setFocusable(false);
-        txtTheme.setFont(FSkin.getFont());
+        txtTheme.setFont(FSkin.getFont(14));
         txtTheme.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         txtTheme.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
     }
@@ -142,18 +144,18 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
         panel.setLayout(new MigLayout("insets 0, gap 0, wrap 2", "[150px][grow]", "[]10px[]10px[]20px[]"));
 
         // Row 1: Commander name
-        panel.add(new FLabel.Builder().text("Commander:").build(), "cell 0 0, alignx left, aligny top");
-        panel.add(lblCommanderName, "cell 1 0, growx");
+        panel.add(new FLabel.Builder().text("Commander:").fontSize(14).build(), "cell 0 0, alignx left, aligny top");
+        panel.add(lblCommanderName, "cell 1 0, alignx left, growx");
 
         // Row 2: Description
-        panel.add(new FLabel.Builder().text("Description:").build(), "cell 0 1, alignx left, aligny top");
+        panel.add(new FLabel.Builder().text("Description:").fontSize(14).build(), "cell 0 1, alignx left, aligny top");
         panel.add(new FScrollPane(txtDescription, false,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER),
             "cell 1 1, growx, h 60px!");
 
         // Row 3: Theme
-        panel.add(new FLabel.Builder().text("Theme:").build(), "cell 0 2, alignx left, aligny top");
+        panel.add(new FLabel.Builder().text("Theme:").fontSize(14).build(), "cell 0 2, alignx left, aligny top");
         panel.add(new FScrollPane(txtTheme, false,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER),

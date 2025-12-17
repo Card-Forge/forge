@@ -5,9 +5,11 @@ import forge.deck.CardPool;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.gamemodes.rogue.NodePlanebound;
+import forge.gamemodes.rogue.RoguePlaneboundType;
 import forge.gui.CardPicturePanel;
 import forge.gui.GuiBase;
 import forge.item.PaperCard;
+import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FSkin;
 import forge.toolbox.imaging.FImageUtil;
 import forge.util.ImageFetcher;
@@ -97,12 +99,25 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
             }
         });
 
-        // Planebound name label
+        // Planebound name label with icon for Elite/Boss
         String planeboundName = node.getRoguePlanebound().planeboundName();
         lblPlaneboundName = new JLabel(planeboundName);
         lblPlaneboundName.setFont(FSkin.getRelativeFont(12).getBaseFont());
         lblPlaneboundName.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT).getColor());
         lblPlaneboundName.setHorizontalAlignment(SwingConstants.CENTER);
+
+        // Add icon based on planebound type
+        RoguePlaneboundType type = node.getPlaneboundType();
+        if (type == RoguePlaneboundType.ELITE) {
+            // Elite gets a filled star icon
+            lblPlaneboundName.setIcon(FSkin.getImage(FSkinProp.IMG_STAR_FILLED).resize(16, 16).getIcon());
+            lblPlaneboundName.setIconTextGap(5);
+        } else if (type == RoguePlaneboundType.BOSS) {
+            // Boss gets an attack/sword icon
+            lblPlaneboundName.setIcon(FSkin.getImage(FSkinProp.IMG_ATTACK).resize(18, 18).getIcon());
+            lblPlaneboundName.setIconTextGap(5);
+        }
+
         add(lblPlaneboundName);
 
         // Life total label

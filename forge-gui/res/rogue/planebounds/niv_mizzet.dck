@@ -1,33 +1,42 @@
 [metadata]
-name=Niv-Mizzet, the Firemind
+name=Niv-Mizzet, Visionary
 planeName=Izzet Steam Maze
 avatarIndex=58
 type=0
 [Commander]
-1 Niv-Mizzet, the Firemind|GK1|1
+1 Niv-Mizzet, Visionary|PFDN|1
 [Main]
-1 Beacon Bolt|GRN|1
-1 Cerebral Vortex|GK1|1
-1 Char|GK1|1
-1 Chemister's Insight|GRN|1
-1 Crackling Drake|GRN|1
-1 Direct Current|GRN|1
-1 Djinn Illuminatus|GK1|1
-1 Electrolyze|GK1|1
+1 Abrade|FDN|1
+1 Archmage of Runes|FDN|1
+1 Boltwave|FDN|1
+1 Brainstorm|DSC|1
+1 Command Tower|LCC|1
+1 Coruscation Mage|BLB|1
+1 Counterspell|CMM|1
 1 Electrostatic Field|PLST|1
-1 Erratic Cyclops|GRN|1
-1 Firemind's Research|GRN|1
-1 Gelectrode|GK1|1
+1 Firebrand Archer|FDN|1
+1 Firespitter Whelp|FDN|1
+1 Frantic Search|CMM|1
 1 Goblin Electromancer|GRN|1
-2 Guttersnipe|GK1|1
-1 Hypersonic Dragon|GK1|1
-1 Invoke the Firemind|GK1|1
-4 Island|M20|1
-4 Izzet Boilerworks|C20|1
+1 Grapeshot|DMR|1
+1 Guttersnipe|GK1|1
+5 Island|GK1|1
+1 Izzet Boilerworks|C20|1
 1 Izzet Charm|GK1|1
-4 Izzet Guildgate|C19|1
-1 Mizzium Mortars|GK1|1
-5 Mountain|J25|1
-2 Nivix Guildmage|GK1|1
-1 Quasiduplicate|GRN|1
-1 Turn // Burn|GK1|1
+1 Kessig Flamebreather|VOW|1
+1 Laboratory Maniac|INR|1
+1 Lightning Bolt|2X2|1
+5 Mountain|GK1|1
+1 Negate|AER|1
+1 Niv-Mizzet, Parun|PGRN|1
+1 Niv-Mizzet, the Firemind|GK1|1
+1 Reliquary Tower|LCC|1
+1 Ruby Medallion|C14|1
+1 Seething Song|C21|1
+1 Shivan Reef|EOC|1
+1 Sol Ring|ONC|1
+1 Steam Vents|ECL|1
+1 Sulfur Falls|EOC|1
+1 Temple of Epiphany|FDN|1
+1 Thermo-Alchemist|INR|1
+1 Training Center|CMM|1
