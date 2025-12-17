@@ -210,11 +210,13 @@ public class RogueConfig {
         String planeboundName = metadata.get("name", "Unknown Planebound");
         String planeName = metadata.get("planeName", "Unknown Plane");
         int avatarIndex = metadata.getInt("avatarIndex", 1);
+        int typeIndex = metadata.getInt("type", 0); // Default to NORMAL (0)
+        RoguePlaneboundType type = RoguePlaneboundType.fromIndex(typeIndex);
 
         // Build relative deck path
         String deckPath = "rogue/planebounds/" + deckFile.getName();
 
-        return new RoguePlanebound(planeName, planeboundName, deckPath, avatarIndex);
+        return new RoguePlanebound(planeName, planeboundName, deckPath, avatarIndex, type);
     }
 
     /**

@@ -3,34 +3,19 @@ package forge.gamemodes.rogue;
 /**
  * Represents a planebound encounter node in a Rogue Commander path.
  * This node type involves combat against a planebound opponent on their plane.
+ * The type (NORMAL/ELITE/BOSS) is now defined in the RoguePlanebound itself.
  */
 public class NodePlanebound extends RoguePathNode {
 
     private RoguePlanebound roguePlanebound;
-    private RoguePlaneboundType roguePlaneboundType;
 
     public NodePlanebound() {
         super();
-        this.roguePlaneboundType = RoguePlaneboundType.NORMAL;
     }
 
-    public NodePlanebound(RoguePlanebound roguePlanebound, RoguePlaneboundType roguePlaneboundType) {
+    public NodePlanebound(RoguePlanebound roguePlanebound) {
         super();
         this.roguePlanebound = roguePlanebound;
-        this.roguePlaneboundType = roguePlaneboundType;
-    }
-
-    // Factory methods for convenience
-    public static NodePlanebound createNormal(RoguePlanebound roguePlanebound) {
-        return new NodePlanebound(roguePlanebound, RoguePlaneboundType.NORMAL);
-    }
-
-    public static NodePlanebound createElite(RoguePlanebound roguePlanebound) {
-        return new NodePlanebound(roguePlanebound, RoguePlaneboundType.ELITE);
-    }
-
-    public static NodePlanebound createBoss(RoguePlanebound roguePlanebound) {
-        return new NodePlanebound(roguePlanebound, RoguePlaneboundType.BOSS);
     }
 
     // Getters and Setters
@@ -43,26 +28,23 @@ public class NodePlanebound extends RoguePathNode {
     }
 
     public RoguePlaneboundType getPlaneboundType() {
-        return roguePlaneboundType;
-    }
-
-    public void setPlaneboundType(RoguePlaneboundType roguePlaneboundType) {
-        this.roguePlaneboundType = roguePlaneboundType;
+        return roguePlanebound != null ? roguePlanebound.type() : RoguePlaneboundType.NORMAL;
     }
 
     // Convenience methods for rewards
     public int getGoldReward() {
-        return roguePlaneboundType.getGoldReward();
+        return getPlaneboundType().getGoldReward();
     }
 
     public int getEchoReward() {
-        return roguePlaneboundType.getEchoReward();
+        return getPlaneboundType().getEchoReward();
     }
 
     @Override
     public String toString() {
-        String typeStr = roguePlaneboundType == RoguePlaneboundType.BOSS ? "Boss" :
-                        roguePlaneboundType == RoguePlaneboundType.ELITE ? "Elite" : "Plane";
+        RoguePlaneboundType type = getPlaneboundType();
+        String typeStr = type == RoguePlaneboundType.BOSS ? "Boss" :
+                        type == RoguePlaneboundType.ELITE ? "Elite" : "Plane";
         return typeStr + ": " + roguePlanebound.planeName() + " (vs " + roguePlanebound.planeboundName() + ")";
     }
 }

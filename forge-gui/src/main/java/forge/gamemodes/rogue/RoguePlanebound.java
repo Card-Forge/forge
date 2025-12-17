@@ -5,7 +5,7 @@ package forge.gamemodes.rogue;
  * commander and deck.
  */
 public record RoguePlanebound(String planeName, String planeboundName, String deckPath,
-                              int avatarIndex) {
+                              int avatarIndex, RoguePlaneboundType type) {
 
     @Override
     public String toString() {

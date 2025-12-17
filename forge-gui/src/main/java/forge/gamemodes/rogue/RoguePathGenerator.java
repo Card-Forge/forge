@@ -14,7 +14,8 @@ public class RoguePathGenerator {
 
     /**
      * Generate a random linear path with the specified number of nodes.
-     * Planebounds are randomly selected from all available configurations.
+     * Planebounds are randomly selected based on their type: normal encounters for rows 1-4,
+     * boss encounter for row 5.
      *
      * @param nodeCount Number of nodes in the path (typically 5)
      * @return PathData with randomized plane encounters
@@ -26,23 +27,43 @@ public class RoguePathGenerator {
             throw new IllegalStateException("No planebounds available for path generation");
         }
 
-        // Shuffle planebounds to randomize selection
-        List<RoguePlanebound> shuffled = new ArrayList<>(availablePlanebounds);
-        Collections.shuffle(shuffled, MyRandom.getRandom());
+        // Split planebounds into normal and boss lists
+        List<RoguePlanebound> normalPlanebounds = new ArrayList<>();
+        List<RoguePlanebound> bossPlanebounds = new ArrayList<>();
+
+        for (RoguePlanebound planebound : availablePlanebounds) {
+            if (planebound.type() == RoguePlaneboundType.BOSS) {
+                bossPlanebounds.add(planebound);
+            } else {
+                normalPlanebounds.add(planebound);
+            }
+        }
+
+        // Validate we have the required planebounds
+        if (normalPlanebounds.isEmpty()) {
+            throw new IllegalStateException("No normal planebounds available for path generation");
+        }
+        if (bossPlanebounds.isEmpty()) {
+            throw new IllegalStateException("No boss planebounds available for path generation");
+        }
+
+        // Shuffle both lists for randomization
+        Collections.shuffle(normalPlanebounds, MyRandom.getRandom());
+        Collections.shuffle(bossPlanebounds, MyRandom.getRandom());
 
         // Create nodes from randomly selected planebounds
         List<RoguePathNode> nodes = new ArrayList<>();
         for (int i = 0; i < nodeCount; i++) {
-            // Use modulo to wrap around if we need more nodes than available planebounds
-            RoguePlanebound roguePlanebound = shuffled.get(i % shuffled.size());
+            RoguePlanebound roguePlanebound;
 
-            // Determine node type based on position (last node is boss, others are normal)
-            NodePlanebound node;
+            // Last node (row 5) is always a boss, others are normal
             if (i == nodeCount - 1) {
-                node = NodePlanebound.createBoss(roguePlanebound);
+                roguePlanebound = bossPlanebounds.get(0 % bossPlanebounds.size());
             } else {
-                node = NodePlanebound.createNormal(roguePlanebound);
+                roguePlanebound = normalPlanebounds.get(i % normalPlanebounds.size());
             }
+
+            NodePlanebound node = new NodePlanebound(roguePlanebound);
 
             // Set row index for life scaling: Row 0 = 5 life, Row 1 = 10 life, etc.
             node.setRowIndex(i);
