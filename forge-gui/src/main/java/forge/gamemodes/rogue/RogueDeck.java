@@ -3,7 +3,6 @@ package forge.gamemodes.rogue;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.item.PaperCard;
-
 import java.util.ArrayList;
 import java.util.List;
 

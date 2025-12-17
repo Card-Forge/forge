@@ -9,7 +9,6 @@ import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileSection;
 import forge.util.FileUtil;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;

@@ -18,14 +18,13 @@ import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.util.IgnoringXStream;
-import org.apache.commons.lang3.StringUtils;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Handles saving and loading of Rogue Commander run data using XStream serialization.

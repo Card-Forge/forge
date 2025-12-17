@@ -4,7 +4,6 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import forge.deck.Deck;
 import forge.gamemodes.match.HostedMatch;
 import forge.item.PaperCard;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

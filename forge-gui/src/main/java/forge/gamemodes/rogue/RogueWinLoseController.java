@@ -10,7 +10,6 @@ import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
 import forge.player.GamePlayerUtil;
 import forge.util.Localizer;
-
 import java.util.List;
 
 /**
