@@ -9,18 +9,12 @@ import forge.gui.CardPicturePanel;
 import forge.gui.GuiBase;
 import forge.item.PaperCard;
 import forge.toolbox.FSkin;
-import forge.toolbox.imaging.FImagePanel;
-import forge.toolbox.imaging.FImagePanel.AutoSizeImageMode;
 import forge.toolbox.imaging.FImageUtil;
 import forge.util.ImageFetcher;
 import org.apache.commons.lang3.tuple.Pair;
 
-import net.miginfocom.swing.MigLayout;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 

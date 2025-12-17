@@ -15,7 +15,9 @@
       "Bash(git commit:*)",
       "Bash(git push:*)",
       "Bash(done)",
-      "Bash(git mv:*)"
+      "Bash(git mv:*)",
+      "Bash(mvn checkstyle:check:*)",
+      "Bash(mvn checkstyle:checkstyle:*)"
     ],
     "deny": [],
     "ask": []
