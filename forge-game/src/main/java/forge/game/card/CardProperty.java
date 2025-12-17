@@ -1927,10 +1927,6 @@ public class CardProperty {
             if (property.contains("ByYou") && card.getCastSA() != null && !sourceController.equals(card.getCastSA().getActivatingPlayer())) {
                 return false;
             }
-        } else if (property.equals("wasNotCast")) {
-            if (card.wasCast()) {
-                return false;
-            }
         } else if (property.startsWith("set")) {
             final String setCode = property.substring(3, 6);
             if (card.getName().isEmpty()) {

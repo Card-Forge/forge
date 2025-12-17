@@ -42,7 +42,6 @@ public class StaticAbilityAttackRestrict {
                         num = stNum;
                     }
                 }
-
             }
         }
         return num < Integer.MAX_VALUE ? num : -1;
