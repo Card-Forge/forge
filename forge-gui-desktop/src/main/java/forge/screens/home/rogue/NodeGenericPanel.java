@@ -2,8 +2,8 @@ package forge.screens.home.rogue;
 
 import forge.gamemodes.rogue.RoguePathNode;
 import forge.toolbox.FSkin;
-
-import javax.swing.*;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 /**
  * Generic fallback panel for unknown or unimplemented node types.

@@ -1,17 +1,12 @@
 package forge.screens.home.rogue;
 
-import forge.gamemodes.rogue.RoguePath;
-import forge.gamemodes.rogue.RogueConfig;
-import forge.gamemodes.rogue.RogueDeck;
-import forge.gamemodes.rogue.RogueIO;
-import forge.gamemodes.rogue.RogueRun;
+import forge.gamemodes.rogue.*;
 import forge.gui.UiCommand;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.screens.home.CHomeUI;
-
-import javax.swing.SwingUtilities;
 import java.util.List;
+import javax.swing.SwingUtilities;
 
 /**
  * Controls the Rogue Commander start screen.

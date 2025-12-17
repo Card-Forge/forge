@@ -2,9 +2,9 @@ package forge.screens.home.rogue;
 
 import forge.gamemodes.rogue.NodeChest;
 import forge.toolbox.FSkin;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Graphics;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 /**
  * Visual representation of a Chest node in the Rogue Commander path.

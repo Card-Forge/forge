@@ -2,9 +2,9 @@ package forge.screens.home.rogue;
 
 import forge.gamemodes.rogue.NodeSanctum;
 import forge.toolbox.FSkin;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Graphics;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 /**
  * Visual representation of a Sanctum node in the Rogue Commander path.

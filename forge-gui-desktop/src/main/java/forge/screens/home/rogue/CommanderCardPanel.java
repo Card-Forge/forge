@@ -4,7 +4,6 @@ import forge.gamemodes.rogue.RogueDeck;
 import forge.gui.CardPicturePanel;
 import forge.item.PaperCard;
 import forge.toolbox.FSkin.SkinnedPanel;
-
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

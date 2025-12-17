@@ -12,11 +12,10 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.util.Localizer;
-import net.miginfocom.swing.MigLayout;
-
+import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
-import java.awt.Font;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * Assembles Swing components of "rogue map" submenu singleton.

@@ -6,11 +6,6 @@ import forge.item.PaperCard;
 import forge.toolbox.imaging.FImagePanel;
 import forge.toolbox.imaging.FImagePanel.AutoSizeImageMode;
 import forge.toolbox.imaging.FImageUtil;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Window;
@@ -19,6 +14,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * Utility class for card zoom functionality.

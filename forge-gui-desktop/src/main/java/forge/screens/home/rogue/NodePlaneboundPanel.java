@@ -11,12 +11,15 @@ import forge.item.PaperCard;
 import forge.toolbox.FSkin;
 import forge.toolbox.imaging.FImageUtil;
 import forge.util.ImageFetcher;
-import org.apache.commons.lang3.tuple.Pair;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.Window;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import org.apache.commons.lang3.tuple.Pair;
 
 /**
  * Visual representation of a Planebound node in the Rogue Commander path.

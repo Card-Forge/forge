@@ -8,23 +8,21 @@ import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.rogue.*;
-import forge.gamemodes.rogue.RogueRun;
 import forge.gui.GuiBase;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.item.PaperCard;
-import forge.screens.home.CHomeUI;
 import forge.localinstance.properties.ForgeConstants;
 import forge.player.GamePlayerUtil;
-
-import javax.swing.SwingUtilities;
+import forge.screens.home.CHomeUI;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
+import javax.swing.SwingUtilities;
 
 /**
  * Controls the "rogue map" submenu in the home UI.

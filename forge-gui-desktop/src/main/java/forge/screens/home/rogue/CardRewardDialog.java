@@ -10,16 +10,18 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.util.Localizer;
 import forge.view.arcane.CardPanel;
-
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import javax.swing.Timer;
 
 /**
  * Dialog for selecting reward cards visually.

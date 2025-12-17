@@ -1,11 +1,10 @@
 package forge.screens.home.rogue;
 
-import forge.gamemodes.rogue.RoguePathNode;
 import forge.gamemodes.rogue.RoguePath;
+import forge.gamemodes.rogue.RoguePathNode;
 import forge.gamemodes.rogue.RogueRun;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
-
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;

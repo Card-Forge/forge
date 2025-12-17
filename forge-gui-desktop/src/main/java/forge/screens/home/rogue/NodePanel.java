@@ -2,7 +2,6 @@ package forge.screens.home.rogue;
 
 import forge.gamemodes.rogue.RoguePathNode;
 import forge.toolbox.FSkin.SkinnedPanel;
-
 import java.awt.*;
 
 /**

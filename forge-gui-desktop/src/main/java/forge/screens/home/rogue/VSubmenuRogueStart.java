@@ -6,15 +6,20 @@ import forge.gui.framework.EDocID;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;
-import forge.toolbox.*;
+import forge.toolbox.FLabel;
+import forge.toolbox.FScrollPane;
+import forge.toolbox.FSkin;
+import forge.toolbox.FTextArea;
 import forge.util.Localizer;
 import forge.view.arcane.CardPanel;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Window;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JPanel;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingUtilities;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * Assembles Swing components for Rogue Commander start screen.
