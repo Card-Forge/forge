@@ -11,6 +11,7 @@ ScryfallCode=ECL
 76 R Sygg, Wanderwine Wisdom @Justin Gerard
 80 C Unexpected Assistance @Gustavo Pelissari
 88 M Bitterbloom Bearer @Chris Rahn
+100 U Dose of Dawnglow @Quintin Gleim
 115 U Perfect Intimidation @Heather Hudson
 124 R Ashling, Rekindled @Ilse Gort
 176 R Formidable Speaker @Aurore Folny
