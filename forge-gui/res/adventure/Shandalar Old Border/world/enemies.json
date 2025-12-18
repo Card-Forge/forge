@@ -876,7 +876,8 @@
       "IdentityWhite",
       "Akroma"
     ],
-    "gamesPerMatch": 3
+    "gamesPerMatch": 3,
+    "spawnRate": 0
   },
   {
     "name": "Amphin Warrior",
@@ -5086,7 +5087,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 25,
     "scale": 0.8,
@@ -6784,7 +6785,7 @@
     "ai": "reckless",
     "flying": true,
     "randomizeDeck": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 31,
     "scale": 0.6,
@@ -9085,7 +9086,8 @@
       }
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3
+    "gamesPerMatch": 3,
+    "spawnRate": 0
   },
   {
     "name": "Esper Artificer",
@@ -11149,7 +11151,8 @@
       "IdentityGreen",
       "Ghalta"
     ],
-    "gamesPerMatch": 3
+    "gamesPerMatch": 3,
+    "spawnRate": 0
   },
   {
     "name": "Garruk",
@@ -11160,7 +11163,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 1,
     "speed": 30,
     "life": 30,
@@ -11250,7 +11253,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 1,
     "speed": 30,
     "life": 30,
@@ -12363,7 +12366,8 @@
       "IdentityBlack",
       "Griselbrand"
     ],
-    "gamesPerMatch": 3
+    "gamesPerMatch": 3,
+    "spawnRate": 0
   },
   {
     "name": "Grolnok",
@@ -12374,7 +12378,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.8,
     "speed": 15,
     "scale": 0.5,
@@ -15668,7 +15672,7 @@
     ],
     "ai": "cautious",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 30,
@@ -16003,7 +16007,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.8,
     "speed": 31,
     "life": 30,
@@ -16944,7 +16948,8 @@
       "Boss",
       "Lathliss"
     ],
-    "gamesPerMatch": 3
+    "gamesPerMatch": 3,
+    "spawnRate": 0
   },
   {
     "name": "Leonin Weaponmaster",
@@ -17383,7 +17388,8 @@
       "IdentityBlue",
       "Lorthos"
     ],
-    "gamesPerMatch": 3
+    "gamesPerMatch": 3,
+    "spawnRate": 0
   },
   {
     "name": "Mageripper",
@@ -18562,7 +18568,7 @@
     ],
     "ai": "",
     "flying": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 5,
     "scale": 0.6,
@@ -19238,7 +19244,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.5,
     "speed": 20,
     "scale": 2.5,
@@ -19401,7 +19407,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 30,
@@ -20092,7 +20098,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 23,
     "life": 30,
@@ -22960,7 +22966,7 @@
     "ai": "",
     "boss": true,
     "flying": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 15,
     "life": 30,
@@ -23575,7 +23581,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.8,
     "speed": 31,
     "scale": 0.7,
@@ -24158,7 +24164,7 @@
     ],
     "ai": "reckless",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.8,
     "speed": 15,
     "scale": 0.75,
@@ -24347,7 +24353,8 @@
       "Nesting",
       "IdentityAll"
     ],
-    "gamesPerMatch": 3
+    "gamesPerMatch": 3,
+    "spawnRate": 0
   },
   {
     "name": "Snake",
@@ -25083,7 +25090,7 @@
     ],
     "ai": "reckless",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 1,
     "speed": 30,
     "life": 30,
@@ -25154,7 +25161,7 @@
     ],
     "ai": "reckless",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 1,
     "speed": 30,
     "life": 30,
@@ -25219,7 +25226,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 1,
     "speed": 30,
     "life": 30,
@@ -25284,7 +25291,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 1,
     "speed": 30,
     "life": 30,
@@ -25678,7 +25685,7 @@
       "decks/miniboss/teferi_boss.dck"
     ],
     "ai": "cautious",
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.8,
     "speed": 31,
     "life": 30,
@@ -25798,7 +25805,7 @@
     "ai": "",
     "boss": true,
     "flying": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 15,
     "scale": 0.6,
@@ -25915,7 +25922,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.8,
     "speed": 31,
     "scale": 0.5,
@@ -26080,7 +26087,7 @@
       "decks/miniboss/torturer.dck"
     ],
     "ai": "cautious",
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 20,
     "scale": 0.7,
@@ -26513,7 +26520,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 31,
     "life": 30,
@@ -27263,7 +27270,7 @@
       "decks/miniboss/bearboss.dck"
     ],
     "ai": "reckless",
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 25,
     "scale": 0.6,
@@ -28040,7 +28047,8 @@
       "IdentityRed",
       "IdentityWhite",
       "IdentityNaya"
-    ]
+    ],
+    "spawnRate": 0
   },
   {
     "name": "Xira",
@@ -28050,7 +28058,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.8,
     "speed": 31,
     "life": 30,
@@ -28231,7 +28239,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 30,
@@ -28590,7 +28598,7 @@
       "decks/miniboss/unholyknight.dck"
     ],
     "ai": "",
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 21,
     "life": 30,
@@ -32466,7 +32474,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -32541,7 +32549,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -32610,7 +32618,7 @@
     ],
     "ai": "cautious",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -32691,7 +32699,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -32748,7 +32756,7 @@
     ],
     "ai": "cautious",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -32795,7 +32803,7 @@
     ],
     "ai": "reckless",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -32838,7 +32846,7 @@
     ],
     "ai": "reckless",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -32853,7 +32861,7 @@
         "count": 15,
         "addMaxCount": 15
       },
-            {
+      {
         "type": "item",
         "probability": 1,
         "count": 1,
@@ -32894,7 +32902,7 @@
     ],
     "ai": "reckless",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -32941,7 +32949,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -32998,7 +33006,7 @@
     ],
     "ai": "cautious",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -33045,7 +33053,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -33092,7 +33100,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -33135,7 +33143,7 @@
     ],
     "ai": "cautious",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -33184,7 +33192,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -33231,7 +33239,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -33278,7 +33286,7 @@
     ],
     "ai": "cautious",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -33327,7 +33335,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -33374,7 +33382,7 @@
     ],
     "ai": "cautious",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -33421,7 +33429,7 @@
     ],
     "ai": "cautious",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -33468,7 +33476,7 @@
     ],
     "ai": "cautious",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -33525,7 +33533,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 60,
@@ -33559,7 +33567,7 @@
         "probability": 1,
         "count": 1
       },
-                              {
+      {
         "type": "landSketchbookShop",
         "probability": 0.5,
         "count": 1
@@ -33628,7 +33636,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 60,
@@ -33651,7 +33659,7 @@
         "count": 1,
         "itemName": "Sulfuric Staff"
       },
-                              {
+      {
         "type": "landSketchbookShop",
         "probability": 0.5,
         "count": 1
@@ -34728,7 +34736,7 @@
         "probability": 1,
         "count": 1
       },
-                              {
+      {
         "type": "landSketchbookShop",
         "probability": 0.1,
         "count": 1
@@ -34861,7 +34869,7 @@
         "count": 15,
         "addMaxCount": 10
       },
-                              {
+      {
         "type": "landSketchbookShop",
         "probability": 0.1,
         "count": 1
@@ -35010,7 +35018,7 @@
         "probability": 1,
         "count": 1
       },
-                              {
+      {
         "type": "landSketchbookShop",
         "probability": 0.1,
         "count": 1
@@ -35137,7 +35145,7 @@
         "count": 15,
         "addMaxCount": 10
       },
-                              {
+      {
         "type": "landSketchbookShop",
         "probability": 0.1,
         "count": 1
@@ -35287,7 +35295,7 @@
         "count": 1,
         "itemName": "Faerie Dragon Egg"
       },
-                        {
+      {
         "type": "landSketchbookShop",
         "probability": 0.1,
         "count": 1
@@ -35416,7 +35424,7 @@
         "count": 20,
         "addMaxCount": 10
       },
-     {
+      {
         "type": "item",
         "probability": 0.1,
         "count": 1,
@@ -35474,7 +35482,7 @@
         "count": 20,
         "addMaxCount": 10
       },
-           {
+      {
         "type": "item",
         "probability": 0.1,
         "count": 1,
@@ -35532,7 +35540,7 @@
         "count": 20,
         "addMaxCount": 10
       },
-           {
+      {
         "type": "item",
         "probability": 0.1,
         "count": 1,
@@ -35590,7 +35598,7 @@
         "count": 20,
         "addMaxCount": 10
       },
-           {
+      {
         "type": "item",
         "probability": 0.1,
         "count": 1,
@@ -35648,7 +35656,7 @@
         "probability": 1,
         "count": 1
       },
-                        {
+      {
         "type": "landSketchbookShop",
         "probability": 0.2,
         "count": 1
@@ -35744,7 +35752,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.5,
     "speed": 20,
     "life": 30,
@@ -35760,7 +35768,7 @@
         "count": 2000,
         "addMaxCount": 0
       },
-                        {
+      {
         "type": "landSketchbookShop",
         "probability": 0.1,
         "count": 1
@@ -35814,7 +35822,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.5,
     "speed": 20,
     "life": 30,
@@ -35830,7 +35838,7 @@
         "count": 2000,
         "addMaxCount": 0
       },
-                        {
+      {
         "type": "landSketchbookShop",
         "probability": 0.1,
         "count": 1
@@ -36149,7 +36157,7 @@
         "count": 10,
         "addMaxCount": 90
       },
-                        {
+      {
         "type": "landSketchbookShop",
         "probability": 0.05,
         "count": 1
@@ -36220,7 +36228,7 @@
         "count": 10,
         "addMaxCount": 90
       },
-                  {
+      {
         "type": "landSketchbookShop",
         "probability": 0.05,
         "count": 1
@@ -36284,7 +36292,7 @@
           "Sorcery"
         ]
       },
-                  {
+      {
         "type": "landSketchbookShop",
         "probability": 0.05,
         "count": 1
@@ -36488,7 +36496,7 @@
         "count": 10,
         "addMaxCount": 90
       },
-            {
+      {
         "type": "landSketchbookShop",
         "probability": 0.05,
         "count": 1
@@ -36625,7 +36633,7 @@
           "Sorcery"
         ]
       },
-            {
+      {
         "type": "landSketchbookShop",
         "probability": 0.05,
         "count": 1
@@ -36649,8 +36657,7 @@
       "Nightstalker",
       "IdentityBlack",
       "BiomeBlack"
-    ],
-    "boss": true
+    ]
   },
   {
     "name": "Nightstalker",
@@ -36755,7 +36762,7 @@
           "Sorcery"
         ]
       },
-            {
+      {
         "type": "landSketchbookShop",
         "probability": 0.05,
         "count": 1
@@ -36871,7 +36878,7 @@
           "Sorcery"
         ]
       },
-            {
+      {
         "type": "landSketchbookShop",
         "probability": 0.05,
         "count": 1
@@ -36981,7 +36988,7 @@
     ],
     "ai": "cautious",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 60,
@@ -37016,7 +37023,7 @@
         "count": 1,
         "cardName": "Mox Sapphire|LEA"
       },
-            {
+      {
         "type": "landSketchbookShop",
         "probability": 0.5,
         "count": 1
@@ -37044,7 +37051,7 @@
     ],
     "ai": "cautious",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 60,
@@ -37085,7 +37092,7 @@
         "count": 1,
         "cardName": "Gaea's Cradle|USG"
       },
-            {
+      {
         "type": "landSketchbookShop",
         "probability": 0.5,
         "count": 1
@@ -37107,7 +37114,7 @@
     ],
     "ai": "cautious",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 60,
@@ -37131,7 +37138,7 @@
         "count": 1,
         "itemName": "Serra's Prayer Book"
       },
-            {
+      {
         "type": "landSketchbookShop",
         "probability": 0.5,
         "count": 1
@@ -37187,7 +37194,8 @@
         "addMaxCount": 100
       }
     ],
-    "colors": "UG"
+    "colors": "UG",
+    "spawnRate": 0
   },
   {
     "name": "Twister of Time",
@@ -37213,7 +37221,8 @@
         "addMaxCount": 100
       }
     ],
-    "colors": "UB"
+    "colors": "UB",
+    "spawnRate": 0
   },
   {
     "name": "Time Walker",
@@ -37239,7 +37248,8 @@
         "addMaxCount": 100
       }
     ],
-    "colors": "U"
+    "colors": "U",
+    "spawnRate": 0
   },
   {
     "name": "Krampus",
@@ -37469,7 +37479,8 @@
       "Humanoid",
       "Merchant",
       "Boss"
-    ]
+    ],
+    "spawnRate": 0
   },
   {
     "name": "Arcades Sabboth",
@@ -37514,7 +37525,8 @@
       "Dragon",
       "Boss",
       "ElderDragon"
-    ]
+    ],
+    "spawnRate": 0
   },
   {
     "name": "Chromium",
@@ -37559,7 +37571,8 @@
       "Dragon",
       "Boss",
       "ElderDragon"
-    ]
+    ],
+    "spawnRate": 0
   },
   {
     "name": "Nicol Bolas",
@@ -37604,7 +37617,8 @@
       "Dragon",
       "Boss",
       "ElderDragon"
-    ]
+    ],
+    "spawnRate": 0
   },
   {
     "name": "Palladia-Mors",
@@ -37649,7 +37663,8 @@
       "Dragon",
       "Boss",
       "ElderDragon"
-    ]
+    ],
+    "spawnRate": 0
   },
   {
     "name": "Vaevictis Asmadi",
@@ -37694,6 +37709,7 @@
       "Dragon",
       "Boss",
       "ElderDragon"
-    ]
+    ],
+    "spawnRate": 0
   }
 ]
