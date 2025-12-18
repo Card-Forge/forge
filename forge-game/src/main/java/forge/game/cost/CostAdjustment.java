@@ -91,9 +91,8 @@ public class CostAdjustment {
             result.add(inc);
         }
 
-        // Raise cost
         for (final StaticAbility stAb : raiseAbilities) {
-            applyRaise(result, sa, stAb);
+            applyRaiseCostAbility(result, sa, stAb);
         }
 
         // Reset card state (if changed)
@@ -107,7 +106,7 @@ public class CostAdjustment {
         return result;
     }
 
-    private static void applyRaise(final Cost cost, final SpellAbility sa, final StaticAbility st) {
+    private static void applyRaiseCostAbility(final Cost cost, final SpellAbility sa, final StaticAbility st) {
         final Card hostCard = st.getHostCard();
 
         if (!checkRequirement(sa, st)) {
@@ -212,7 +211,6 @@ public class CostAdjustment {
             }
         }
 
-        // Reduce cost
         int sumGeneric = 0;
         if (sa.hasParam("ReduceCost")) {
             String cst = sa.getParam("ReduceCost");
@@ -244,12 +242,13 @@ public class CostAdjustment {
             }
         }
 
-        if (sa.isSpell() && sa.isOffering()) { // cost reduction from offerings
+        if (sa.isSpell() && sa.isOffering()) {
             adjustCostByOffering(cost, sa);
         }
-        if (sa.isSpell() && sa.isEmerge()) { // cost reduction from offerings
+        if (sa.isSpell() && sa.isEmerge()) {
             adjustCostByEmerge(cost, sa);
         }
+
         // Set cost (only used by Trinisphere) is applied last
         for (final StaticAbility stAb : setAbilities) {
             applySetCostAbility(stAb, sa, cost);
@@ -289,7 +288,7 @@ public class CostAdjustment {
             if (sa.getHostCard().hasKeyword(Keyword.IMPROVISE)) {
                 adjustCostByConvokeOrImprovise(cost, sa, activator, true, false, test);
             }
-        } // isSpell
+        }
 
         if (sa.hasParam("TapCreaturesForMana")) {
             adjustCostByConvokeOrImprovise(cost, sa, activator, false, true, test);
@@ -484,7 +483,21 @@ public class CostAdjustment {
             value = sa.getActivatingPlayer().getController().chooseNumberForCostReduction(sa, 0, value);
         }
 
-        if (!staticAbility.hasParam("Cost") && !staticAbility.hasParam("Color")) {
+        if (staticAbility.hasParam("Color")) {
+            final String color = staticAbility.getParam("Color");
+            int sumGeneric = 0;
+            // might be problematic for weird hybrid combinations
+            for (final String cost : color.split(" ")) {
+                if (StringUtils.isNumeric(cost)) {
+                    sumGeneric += Integer.parseInt(cost) * value;
+                } else if (staticAbility.hasParam("IgnoreGeneric")) {
+                    manaCost.decreaseShard(ManaCostShard.parseNonGeneric(cost), value);
+                } else {
+                    manaCost.subtractManaCost(new ManaCost(new ManaCostParser(Strings.repeat(cost + " ", value))));
+                }
+            }
+            return sumGeneric;
+        } else {
             int minMana = 0;
             if (staticAbility.hasParam("MinMana")) {
                 minMana = Integer.parseInt(staticAbility.getParam("MinMana"));
@@ -494,22 +507,6 @@ public class CostAdjustment {
             if (maxReduction > 0) {
                 return Math.min(value, maxReduction);
             }
-        } else {
-            final String color = staticAbility.getParamOrDefault("Cost", staticAbility.getParam("Color"));
-            int sumGeneric = 0;
-            // might be problematic for weird hybrid combinations
-            for (final String cost : color.split(" ")) {
-                if (StringUtils.isNumeric(cost)) {
-                    sumGeneric += Integer.parseInt(cost) * value;
-                } else {
-                    if (staticAbility.hasParam("IgnoreGeneric")) {
-                        manaCost.decreaseShard(ManaCostShard.parseNonGeneric(cost), value);
-                    } else {
-                        manaCost.subtractManaCost(new ManaCost(new ManaCostParser(Strings.repeat(cost + " ", value))));
-                    }
-                }
-            }
-            return sumGeneric;
         }
         return 0;
     }    

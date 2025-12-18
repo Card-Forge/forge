@@ -608,7 +608,7 @@ public class ManaCostBeingPaid {
                 decreaseShard(shard, 1);
             }
             else {
-                decreaseGenericMana(1);
+                decreaseGenericMana(shard.getCmc());
             }
         }
         decreaseGenericMana(subThisManaCost.getGenericCost());

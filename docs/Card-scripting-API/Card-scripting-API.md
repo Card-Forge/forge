@@ -173,8 +173,7 @@ If a permanent with this SVar is on the battlefield under human control the AI w
 
 * `BuffedBy:{ValidCards}`
 
-If a permanent with this SVar is on the battlefield under its control
-the AI will play the specified cards in Main1. Applicable for creatures with a P/T setting static ability (e.g. *Kithkin Rabble*) or additional buffs (*Abzan Runemark*).
+If a permanent with this SVar is on the battlefield under its control the AI will play the specified cards in Main1. Applicable for creatures with a P/T setting static ability (e.g. *Kithkin Rabble*) or additional buffs (*Abzan Runemark*).
 
 * `EnchantMe:{Multiple/Once}`
 

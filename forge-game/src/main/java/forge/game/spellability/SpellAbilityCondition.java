@@ -441,12 +441,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         }
 
         if (this.getLifeTotal() != null) {
-            int life = 1;
-            if (this.getLifeTotal().equals("OpponentSmallest")) {
-                life = activator.getOpponentsSmallestLifeTotal();
-            } else {
-                life = AbilityUtils.getDefinedPlayers(host, this.getLifeTotal(), sa).getFirst().getLife();
-            }
+            int life = AbilityUtils.getDefinedPlayers(host, this.getLifeTotal(), sa).getFirst().getLife();
 
             int right = 1;
             final String rightString = this.getLifeAmount().substring(2);

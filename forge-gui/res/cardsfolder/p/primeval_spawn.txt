@@ -5,7 +5,7 @@ PT:10/10
 K:Vigilance
 K:Trample
 K:Lifelink
-R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Battlefield | ValidCard$ Card.Self+wasNotCast,Card.Self+CastSa Spell.ManaSpent EQ0 | ReplaceWith$ Exile | Description$ If CARDNAME would enter and it wasn't cast or no mana was spent to cast it, exile it instead.
+R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Battlefield | ValidCard$ Card.Self+!wasCast,Card.Self+CastSa Spell.ManaSpent EQ0 | ReplaceWith$ Exile | Description$ If CARDNAME would enter and it wasn't cast or no mana was spent to cast it, exile it instead.
 SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME leaves the battlefield, exile the top ten cards of your library. You may cast any number of spells with total mana value 10 or less from among them without paying their mana costs.
 SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 10 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBPlay

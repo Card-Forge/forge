@@ -11,8 +11,8 @@ public class ChangeSpeedEffect extends SpellAbilityEffect {
 
         for (Player p : getTargetPlayers(sa)) {
             if (p.isInGame()) {
-                if (mode.equals("Increase") && !p.maxSpeed()) p.increaseSpeed();
-                else if (mode.equals("Decrease") && p.getSpeed() > 1) p.decreaseSpeed();
+                if (mode.equals("Increase")) p.increaseSpeed();
+                else if (mode.equals("Decrease")) p.decreaseSpeed();
             }
         }
     }

@@ -147,6 +147,10 @@ Parameters:
 AF in this group let the player make choices from all kinds of categories and are often used to chain effects together. However, for common cases many effects already support this directly, e.g. `PutCounter | Choices$`.  
 Besides making the script more concise using such shortcuts usually also helps the AI making better use of the effect.
 
+### ChooseCard
+
+### NameCard
+
 ### ChooseColor
 
 ### ChooseGeneric

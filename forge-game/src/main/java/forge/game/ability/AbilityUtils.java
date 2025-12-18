@@ -2197,10 +2197,11 @@ public class AbilityUtils {
             return doXMath(i == null ? 0 : i, expr, c, ctb);
         }
 
-        // Count$IfCastInOwnMainPhase.<numMain>.<numNotMain> // 7/10
-        if (sq[0].contains("IfCastInOwnMainPhase")) {
+        // Count$IfCastInOwnMainPhase.<numMain>.<numNotMain>
+        if (sq[0].endsWith("InOwnMainPhase")) {
             final PhaseHandler cPhase = game.getPhaseHandler();
-            final boolean isMyMain = cPhase.getPhase().isMain() && cPhase.isPlayerTurn(player) && c.wasCast();
+            final boolean isMyMain = cPhase.getPhase().isMain() && cPhase.isPlayerTurn(player) &&
+                    (!sq[0].startsWith("IfCast") || c.wasCast());
             return doXMath(Integer.parseInt(sq[isMyMain ? 1 : 2]), expr, c, ctb);
         }
 

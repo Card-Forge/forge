@@ -41,20 +41,6 @@ import forge.util.collect.FCollectionView;
 import java.util.List;
 import java.util.Map;
 
-
-//AB:GainControl|ValidTgts$Creature|TgtPrompt$Select target legendary creature|LoseControl$Untap,LoseControl|SpellDescription$Gain control of target xxxxxxx
-
-//GainControl specific sa:
-//  LoseControl - the lose control conditions (as a comma separated list)
-//  -Untap - source card becomes untapped
-//  -LoseControl - you lose control of source card
-//  -LeavesPlay - source card leaves the battlefield
-//  -PowerGT - (not implemented yet for Old Man of the Sea)
-//  AddKWs - Keywords to add to the controlled card
-//            (as a "&"-separated list; like Haste, Sacrifice CARDNAME at EOT, any standard keyword)
-//  OppChoice - set to True if opponent chooses creature (for Preacher) - not implemented yet
-//  Untap - set to True if target card should untap when control is taken
-
 /**
  * <p>
  * AbilityFactory_GainControl class.
@@ -95,9 +81,8 @@ public class ControlGainAi extends SpellAbilityAi {
                 sa.setTargetingPlayer(targetingPlayer);
                 if (targetingPlayer.getController().chooseTargetsFor(sa)) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                } else {
-                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
 
             if (tgt.canOnlyTgtOpponent()) {
