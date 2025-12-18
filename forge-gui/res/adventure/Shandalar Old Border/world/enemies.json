@@ -6791,6 +6791,22 @@
     "life": 25,
     "rewards": [
       {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 1,
+        "addMaxCount": 4,
+        "rarity": [
+          "uncommon"
+        ],
+        "cardTypes": [
+          "Creature",
+          "Artifact",
+          "Enchantment",
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
         "type": "gold",
         "probability": 0.3,
         "count": 10,
@@ -12521,6 +12537,38 @@
     "scale": 0.55,
     "life": 30,
     "rewards": [
+      {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 1,
+        "addMaxCount": 4,
+        "rarity": [
+          "uncommon"
+        ],
+        "cardTypes": [
+          "Creature",
+          "Artifact",
+          "Enchantment",
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "probability": 0.5,
+        "count": 1,
+        "addMaxCount": 2,
+        "rarity": [
+          "rare"
+        ],
+        "cardTypes": [
+          "Creature",
+          "Artifact",
+          "Enchantment",
+          "Instant",
+          "Sorcery"
+        ]
+      },
       {
         "type": "gold",
         "probability": 1,
@@ -18437,6 +18485,22 @@
     "life": 25,
     "rewards": [
       {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 1,
+        "addMaxCount": 4,
+        "rarity": [
+          "uncommon"
+        ],
+        "cardTypes": [
+          "Creature",
+          "Artifact",
+          "Enchantment",
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
         "type": "gold",
         "count": 150
       },
@@ -22185,6 +22249,38 @@
     "speed": 24,
     "life": 25,
     "rewards": [
+      {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 1,
+        "addMaxCount": 4,
+        "rarity": [
+          "uncommon"
+        ],
+        "cardTypes": [
+          "Creature",
+          "Artifact",
+          "Enchantment",
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "probability": 0.5,
+        "count": 1,
+        "addMaxCount": 2,
+        "rarity": [
+          "rare"
+        ],
+        "cardTypes": [
+          "Creature",
+          "Artifact",
+          "Enchantment",
+          "Instant",
+          "Sorcery"
+        ]
+      },
       {
         "type": "gold",
         "count": 150
@@ -25990,6 +26086,22 @@
     "scale": 0.7,
     "life": 30,
     "rewards": [
+      {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 1,
+        "addMaxCount": 4,
+        "rarity": [
+          "uncommon"
+        ],
+        "cardTypes": [
+          "Creature",
+          "Artifact",
+          "Enchantment",
+          "Instant",
+          "Sorcery"
+        ]
+      },
       {
         "type": "gold",
         "probability": 1,
@@ -35912,6 +36024,22 @@
     "speed": 24,
     "life": 25,
     "rewards": [
+      {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 1,
+        "addMaxCount": 4,
+        "rarity": [
+          "uncommon"
+        ],
+        "cardTypes": [
+          "Creature",
+          "Artifact",
+          "Enchantment",
+          "Instant",
+          "Sorcery"
+        ]
+      },
       {
         "type": "gold",
         "probability": 1,
