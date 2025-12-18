@@ -13,11 +13,12 @@ public class NodePanelFactory {
      *
      * @param node The node to create a panel for
      * @param isCurrentNode Whether this is the player's current position
+     * @param isFaceDown Whether this node should be displayed face-down
      * @return A panel instance for displaying the node
      */
-    public static NodePanel createPanel(RoguePathNode node, boolean isCurrentNode) {
+    public static NodePanel createPanel(RoguePathNode node, boolean isCurrentNode, boolean isFaceDown) {
         if (node instanceof NodePlanebound) {
-            return new NodePlaneboundPanel((NodePlanebound) node, isCurrentNode);
+            return new NodePlaneboundPanel((NodePlanebound) node, isCurrentNode, isFaceDown);
         } else if (node instanceof NodeSanctum) {
             return new NodeSanctumPanel((NodeSanctum) node, isCurrentNode);
         } else if (node instanceof NodeBazaar) {

@@ -1,6 +1,7 @@
 package forge.screens.home.rogue;
 
 import forge.ImageCache;
+import forge.ImageKeys;
 import forge.deck.CardPool;
 import forge.game.card.Card;
 import forge.game.card.CardView;
@@ -36,6 +37,7 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
     private final JLabel lblPlaneboundName;
     private final JLabel lblLifeTotal;
     private final PaperCard currentPlaneCard;
+    private final boolean isFaceDown;
 
     // Zoom utility
     private CardZoomUtil zoomUtil; // Lazily initialized on first zoom
@@ -46,9 +48,11 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
      *
      * @param node Node data to display
      * @param isCurrentNode Whether this is the player's current position
+     * @param isFaceDown Whether to display the card face-down
      */
-    public NodePlaneboundPanel(NodePlanebound node, boolean isCurrentNode) {
+    public NodePlaneboundPanel(NodePlanebound node, boolean isCurrentNode, boolean isFaceDown) {
         super(node, isCurrentNode);
+        this.isFaceDown = isFaceDown;
 
       // Card image (plane card) - rotated 90 degrees clockwise for horizontal display
         cardImage = new CardPicturePanel();
@@ -58,7 +62,15 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
         String planeName = node.getRoguePlanebound().planeName();
         PaperCard planeCard = getPlaneCard(planeName);
 
-        if (planeCard != null) {
+        if (isFaceDown) {
+            // Show card back for face-down planes
+            BufferedImage cardBack = ImageCache.getOriginalImage(
+                ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD), true, null);
+            if (cardBack != null) {
+                BufferedImage rotatedCardBack = rotateImage90Clockwise(cardBack);
+                cardImage.setItem(rotatedCardBack);
+            }
+        } else if (planeCard != null) {
             // Check if we need to fetch the image
             Pair<BufferedImage, Boolean> imageInfo = ImageCache.getCardOriginalImageInfo(
                 planeCard.getImageKey(false), true);
@@ -92,21 +104,21 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
         // Store the plane card for zoom functionality
         currentPlaneCard = planeCard;
 
-        // Add mouse wheel listener for zoom
+        // Add mouse wheel listener for zoom (only for face-up cards)
         addMouseWheelListener(e -> {
-            if (e.getWheelRotation() < 0 && currentPlaneCard != null) { // Scroll up to zoom
+            if (!isFaceDown && e.getWheelRotation() < 0 && currentPlaneCard != null) { // Scroll up to zoom
                 showZoom();
             }
         });
 
         // Planebound name label with icon for Elite/Boss
-        String planeboundName = node.getRoguePlanebound().planeboundName();
+        String planeboundName = isFaceDown ? "???" : node.getRoguePlanebound().planeboundName();
         lblPlaneboundName = new JLabel(planeboundName);
         lblPlaneboundName.setFont(FSkin.getRelativeFont(12).getBaseFont());
         lblPlaneboundName.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT).getColor());
         lblPlaneboundName.setHorizontalAlignment(SwingConstants.CENTER);
 
-        // Add icon based on planebound type
+        // Add icon based on planebound type (always shown)
         RoguePlaneboundType type = node.getPlaneboundType();
         if (type == RoguePlaneboundType.ELITE) {
             // Elite gets a filled star icon
@@ -120,7 +132,7 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
 
         add(lblPlaneboundName);
 
-        // Life total label
+        // Life total label (always shown - it's a known rule that life scales by row)
         int planeboundLife = 5 + (5 * node.getRowIndex());
         lblLifeTotal = new JLabel("Life: " + planeboundLife);
         lblLifeTotal.setFont(FSkin.getRelativeBoldFont(14).getBaseFont());

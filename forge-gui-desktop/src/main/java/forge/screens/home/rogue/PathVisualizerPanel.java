@@ -48,9 +48,10 @@ public class PathVisualizerPanel extends SkinnedPanel {
         removeAll();
         nodePanels.clear();
 
-        // Find current node index
+        // Find current node index and current row
         RoguePathNode currentNode = run.getCurrentNode();
         currentNodeIndex = path.getNodes().indexOf(currentNode);
+        int currentRow = currentNode != null ? currentNode.getRowIndex() : 0;
 
         // Create panels for each node
         List<RoguePathNode> nodes = path.getNodes();
@@ -58,7 +59,11 @@ public class PathVisualizerPanel extends SkinnedPanel {
             RoguePathNode node = nodes.get(i);
             boolean isCurrent = (i == currentNodeIndex);
 
-            NodePanel nodePanel = NodePanelFactory.createPanel(node, isCurrent);
+            // Node is face-down if its row is beyond the current row
+            // (Completed nodes and current row are face-up)
+            boolean isFaceDown = node.getRowIndex() > currentRow;
+
+            NodePanel nodePanel = NodePanelFactory.createPanel(node, isCurrent, isFaceDown);
             nodePanels.add(nodePanel);
             add(nodePanel);
         }
