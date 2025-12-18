@@ -126,7 +126,7 @@ public class NodePlaneboundPanel extends NodePanel implements ImageFetcher.Callb
             lblPlaneboundName.setIconTextGap(5);
         } else if (type == RoguePlaneboundType.BOSS) {
             // Boss gets an attack/sword icon
-            lblPlaneboundName.setIcon(FSkin.getImage(FSkinProp.IMG_ATTACK).resize(18, 18).getIcon());
+            lblPlaneboundName.setIcon(FSkin.getImage(FSkinProp.ICO_QUEST_BIG_AXE).resize(18, 18).getIcon());
             lblPlaneboundName.setIconTextGap(5);
         }
 

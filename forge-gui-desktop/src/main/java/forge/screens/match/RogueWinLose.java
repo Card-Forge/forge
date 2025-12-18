@@ -43,16 +43,16 @@ public class RogueWinLose extends ControlWinLose {
     }
 
     /**
-     * When "quit" button is pressed, navigate back to Commander selection if run failed,
-     * otherwise navigate back to the Rogue Map.
+     * When "quit" button is pressed, navigate back to Commander selection if run is over
+     * (won or lost), otherwise navigate back to the Rogue Map.
      */
     @Override
     public final void actionOnQuit() {
         controller.actionOnQuit();
 
         var currentRun = CSubmenuRogueMap.SINGLETON_INSTANCE.getCurrentRun();
-        if (currentRun != null && currentRun.isRunFailed()) {
-            // Run failed - send player back to Commander selection
+        if (currentRun != null && (currentRun.isRunFailed() || currentRun.isRunWon())) {
+            // Run is over (won or lost) - send player back to Commander selection
             CSubmenuRogueMap.SINGLETON_INSTANCE.setCurrentRun(null);
             CHomeUI.SINGLETON_INSTANCE.itemClick(EDocID.HOME_ROGUESTART);
         } else {

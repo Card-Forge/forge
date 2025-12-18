@@ -73,7 +73,18 @@ public class RogueWinLoseController {
         // Persist life total from match
         persistLifeTotal();
 
-        // Award gold/echo rewards and card rewards
+        // Check if this was the last node (run completed)
+        boolean isLastNode = currentRun.getCurrentNodeIndex() >= currentRun.getPath().getNodeCount() - 1;
+
+        if (isLastNode) {
+            // Run is complete - mark as won
+            currentRun.setRunWon(true);
+            RogueIO.saveRun(currentRun);
+            view.showMessage("Congratulations! You have completed the run!", "Victory", FSkinProp.IMG_RARE_TROPHY);
+            return; // Skip card rewards and navigation
+        }
+
+        // Award gold/echo rewards and card rewards (only for non-final nodes)
         RoguePathNode currentNode = currentRun.getCurrentNode();
         if (currentNode != null) {
             // Award card, gold and echo rewards (only planebound nodes have rewards)
