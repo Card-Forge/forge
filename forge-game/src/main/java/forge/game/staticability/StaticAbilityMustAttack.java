@@ -27,17 +27,15 @@ public class StaticAbilityMustAttack {
                     if (stAb.hasParam("MustAttack")) {
                         List<GameEntity> def = AbilityUtils.getDefinedEntities(stAb.getHostCard(), stAb.getParam("MustAttack"), stAb);
                         for (GameEntity e : def) {
-                            if (e instanceof Player attackPl) {
-                                if (!game.getPhaseHandler().isPlayerTurn(attackPl)) { // CR 506.2
-                                    entityList.add(e);
-                                }
-                            } else if (e instanceof Card attackPW) {
-                                if (!game.getPhaseHandler().isPlayerTurn(attackPW.getController())) { // CR 506.2
-                                    entityList.add(e);
-                                }
+                            if ((e instanceof Player attackPl && game.getPhaseHandler().isPlayerTurn(attackPl)) ||
+                                    ((e instanceof Card attackPw && game.getPhaseHandler().isPlayerTurn(attackPw.getController())))) {
+                                // CR 506.2
+                                continue;
                             }
+                            entityList.add(e);
                         }
-                    } else { // if the list is only the attacker, the attacker must attack, but no specific entity
+                    } else {
+                        // if the list is only the attacker, the attacker must attack, but no specific entity
                         entityList.add(attacker);
                     }
                 }

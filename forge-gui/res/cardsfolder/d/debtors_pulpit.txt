@@ -4,6 +4,6 @@ Types:Enchantment Aura
 K:Enchant:Land
 SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ DPTapCreature | Description$ Enchanted land has "{T}: Tap target creature."
-SVar:DPTapCreature:AB$ Tap | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Choose target creature. | SpellDescription$ Tap target creature.
+SVar:DPTapCreature:AB$ Tap | Cost$ T | ValidTgts$ Creature | SpellDescription$ Tap target creature.
 SVar:NonStackingAttachEffect:True
 Oracle:Enchant land\nEnchanted land has "{T}: Tap target creature."
