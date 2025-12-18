@@ -978,7 +978,7 @@
   {
     "name": "Ring of Immortals",
     "description": "Pay 3 and tap to counter a spell targeting a permanent you control.",
-    "equipmentSlot": "Right",
+    "equipmentSlot": "Left",
     "iconName": "RingofImmortals",
     "effect": {
       "startBattleWithCard": [
@@ -2873,6 +2873,51 @@
     "effect": {
       "startBattleWithCard": [
         "Crooked Scales|MMQ"
+      ]
+    }
+  },
+  {
+    "name": "Life Matrix",
+    "description": "Pay 4 to give a creature regeneration.",
+    "equipmentSlot": "Neck",
+    "iconName": "LifeMatrix",
+    "effect": {
+      "startBattleWithCard": [
+        "Life Matrix|LEG"
+      ]
+    }
+  },
+  {
+    "name": "Kry Shield",
+    "description": "Pay 2 to boost your creature's toughness.",
+    "equipmentSlot": "Left",
+    "iconName": "KryShield",
+    "effect": {
+      "startBattleWithCard": [
+        "Kry Shield|LEG"
+      ]
+    }
+  },
+  {
+    "name": "Gauntlets of Chaos",
+    "description": "Pay 5 to swap an artifact, creature, or land.",
+    "equipmentSlot": "Left",
+    "iconName": "GauntletsofChaos",
+    "effect": {
+      "startBattleWithCard": [
+        "Gauntlets of Chaos|LEG"
+      ]
+    }
+  },
+  {
+    "name": "Marble Mace",
+    "description": "A 3/3 artifact creature that lures walls. -5 Max Life.",
+    "equipmentSlot": "Right",
+    "iconName": "MarbleMace",
+    "effect": {
+      "lifeModifier": -5,
+      "startBattleWithCard": [
+        "Marble Priest|LEG"
       ]
     }
   }

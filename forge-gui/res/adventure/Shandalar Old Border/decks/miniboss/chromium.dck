@@ -1,0 +1,36 @@
+[metadata]
+Name=Chromium
+[Main]
+7 Swamp|LEA
+7 Island|LEA
+7 Plains|LEA
+1 Urborg|LEG
+1 Tolaria|LEG
+1 Karakas|LEG
+4 Chromium|LEG
+2 Lady Evangela|LEG
+2 Halfdane|LEG
+2 Dakkon Blackblade|LEG
+1 Ur-Drago|LEG
+1 Rasputin Dreamweaver|LEG
+2 Divine Offering|LEG
+2 Mana Drain|LEG
+2 Boomerang|LEG
+2 D'Avenant Archer|LEG 
+2 Hellfire|LEG
+2 Demonic Torment|LEG
+2 Psionic Entity|LEG
+2 Storm Spirit|ICE
+2 Hell’s Caretaker|LEG
+2 Azure Drake|LEG
+2 Carrion Ants|LEG
+2 Elder Land Wurm|LEG
+
+[StartInBattle_Reference]
+1 Island|LEA
+1 Plains|LEA
+1 Swamp|LEA
+1 Wall of Wonder|LEG
+1 Wall of Vapor|LEG
+1 Wall of Light|LEG
+1 Seafarer’s Quay|LEG

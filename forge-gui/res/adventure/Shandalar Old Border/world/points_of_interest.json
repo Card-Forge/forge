@@ -4235,5 +4235,90 @@
 			"BiomeColorless",
 			"Sidequest"
 		]
+	},
+	{
+		"name": "CaveArcades",
+		"displayName": "Arcades Sabboth's Lair",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Building50",
+		"map": "../Shandalar Old Border/maps/map/cave/cave_arcades.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Cave",
+			"Hostile",
+			"ElderDragon",
+			"Boss",
+			"BiomeWhite"
+		]
+	},
+	{
+		"name": "CaveChromium",
+		"displayName": "Chromium's Lair",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Building50",
+		"map": "../Shandalar Old Border/maps/map/cave/cave_chromium.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Cave",
+			"Hostile",
+			"ElderDragon",
+			"Boss",
+			"BiomeBlue"
+		]
+	},
+	{
+		"name": "CaveNicolBolas",
+		"displayName": "Nicol Bolas's Lair",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Building50",
+		"map": "../Shandalar Old Border/maps/map/cave/cave_nicol_bolas.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Cave",
+			"Hostile",
+			"ElderDragon",
+			"Boss",
+			"BiomeBlack"
+		]
+	},
+	{
+		"name": "CavePalladiaMors",
+		"displayName": "Palladia-Mors's Lair",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Building50",
+		"map": "../Shandalar Old Border/maps/map/cave/cave_palladia_mors.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Cave",
+			"Hostile",
+			"ElderDragon",
+			"Boss",
+			"BiomeGreen"
+		]
+	},
+	{
+		"name": "CaveVaevictis",
+		"displayName": "Vaevictis Asmadi's Lair",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Building50",
+		"map": "../Shandalar Old Border/maps/map/cave/cave_vaevictis.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Cave",
+			"Hostile",
+			"ElderDragon",
+			"Boss",
+			"BiomeRed"
+		]
 	}
 ]

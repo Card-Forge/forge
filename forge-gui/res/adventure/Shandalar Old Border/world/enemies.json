@@ -37470,5 +37470,230 @@
       "Merchant",
       "Boss"
     ]
+  },
+  {
+    "name": "Arcades Sabboth",
+    "sprite": "sprites/enemy/dragon/ancientsilverdragon.atlas",
+    "deck": [
+      "decks/miniboss/Arcades Sabboth.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "flying": true,
+    "speed": 15,
+    "scale": 1.8,
+    "life": 40,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 1500,
+        "addMaxCount": 500
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 15,
+        "addMaxCount": 25
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Kry Shield"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Arcades Sabboth|LEG"
+      }
+    ],
+    "colors": "WUG",
+    "questTags": [
+      "Dragon",
+      "Boss",
+      "ElderDragon"
+    ]
+  },
+  {
+    "name": "Chromium",
+    "sprite": "sprites/enemy/dragon/ancientsilverdragon.atlas",
+    "deck": [
+      "decks/miniboss/chromium.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "flying": true,
+    "speed": 15,
+    "scale": 1.8,
+    "life": 40,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 1500,
+        "addMaxCount": 500
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 15,
+        "addMaxCount": 25
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Ring of Immortals"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Chromium|LEG"
+      }
+    ],
+    "colors": "WUB",
+    "questTags": [
+      "Dragon",
+      "Boss",
+      "ElderDragon"
+    ]
+  },
+  {
+    "name": "Nicol Bolas",
+    "sprite": "sprites/enemy/dragon/firedragon.atlas",
+    "deck": [
+      "decks/miniboss/nicol bolas.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "flying": true,
+    "speed": 15,
+    "scale": 1.8,
+    "life": 40,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 1500,
+        "addMaxCount": 500
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 15,
+        "addMaxCount": 25
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Marble Mace"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Nicol Bolas|LEG"
+      }
+    ],
+    "colors": "UBR",
+    "questTags": [
+      "Dragon",
+      "Boss",
+      "ElderDragon"
+    ]
+  },
+  {
+    "name": "Palladia-Mors",
+    "sprite": "sprites/enemy/dragon/adultgreendragon.atlas",
+    "deck": [
+      "decks/miniboss/Palladia-Mors.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "flying": true,
+    "speed": 15,
+    "scale": 1.8,
+    "life": 40,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 1500,
+        "addMaxCount": 500
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 15,
+        "addMaxCount": 25
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Life Matrix"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Palladia-Mors|LEG"
+      }
+    ],
+    "colors": "WRG",
+    "questTags": [
+      "Dragon",
+      "Boss",
+      "ElderDragon"
+    ]
+  },
+  {
+    "name": "Vaevictis Asmadi",
+    "sprite": "sprites/enemy/dragon/adultgreendragon.atlas",
+    "deck": [
+      "decks/miniboss/Vaevictis Asmadi.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "flying": true,
+    "speed": 15,
+    "scale": 1.8,
+    "life": 40,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 1500,
+        "addMaxCount": 500
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 15,
+        "addMaxCount": 25
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Gauntlets of Chaos"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Vaevictis Asmadi|LEG"
+      }
+    ],
+    "colors": "BRG",
+    "questTags": [
+      "Dragon",
+      "Boss",
+      "ElderDragon"
+    ]
   }
 ]
