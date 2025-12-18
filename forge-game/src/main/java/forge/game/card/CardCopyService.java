@@ -164,6 +164,9 @@ public class CardCopyService {
         c.setState(in.getCurrentStateName(), false);
         c.setRules(in.getRules());
         c.setBackSide(in.isBackSide());
+        if(in.getEffectSource() != null)
+            c.setEffectSource(in.getEffectSource());
+
         c.updateStateForView();
 
         return c;
