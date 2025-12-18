@@ -31,6 +31,7 @@ public class RogueRun {
     private int currentEchoes;                  // Meta-currency (for future Codex support)
     private RoguePath path;                      // The generated path
     private int currentNodeIndex;               // Current position on path
+    private boolean runFailed;                  // Whether the run has failed (match lost)
 
     // Match History
     private List<String> matchResults;     // W/L record per match
@@ -49,6 +50,7 @@ public class RogueRun {
         this.currentGold = 2;
         this.currentEchoes = 2;
         this.currentNodeIndex = 0;
+        this.runFailed = false;
         this.matchResults = new ArrayList<>();
         this.completedMatches = 0;
         this.matchesWon = 0;
@@ -87,7 +89,11 @@ public class RogueRun {
     }
 
     public boolean isRunFailed() {
-        return currentLife <= 0;
+        return runFailed || currentLife <= 0;
+    }
+
+    public void setRunFailed(boolean failed) {
+        this.runFailed = failed;
     }
 
     // Match result tracking

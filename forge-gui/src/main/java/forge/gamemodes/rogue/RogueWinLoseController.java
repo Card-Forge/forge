@@ -67,14 +67,15 @@ public class RogueWinLoseController {
             return;
         }
 
+        // Record the victory (this also marks the node as completed)
+        currentRun.recordMatchResult(true);
+
         // Persist life total from match
         persistLifeTotal();
 
-        // Mark current node as completed and award gold/echo rewards
+        // Award gold/echo rewards and card rewards
         RoguePathNode currentNode = currentRun.getCurrentNode();
         if (currentNode != null) {
-            currentNode.setCompleted(true);
-
             // Award card, gold and echo rewards (only planebound nodes have rewards)
             if (currentNode instanceof NodePlanebound) {
                 NodePlanebound planeboundNode = (NodePlanebound) currentNode;
@@ -168,13 +169,14 @@ public class RogueWinLoseController {
             return;
         }
 
-        // TODO: Mark run as failed (add setRunActive method to RogueRunData later)
-        // For now, the run remains in progress and player can retry
+        // Record the loss and mark run as failed
+        currentRun.recordMatchResult(false);
+        currentRun.setRunFailed(true);
 
         // Save run state
         RogueIO.saveRun(currentRun);
 
-        view.showMessage("You were defeated! Return to the map to try again.", "Defeat", FSkinProp.ICO_QUEST_ZEP);
+        view.showMessage("You were defeated! Your run has ended.", "Defeat", FSkinProp.ICO_QUEST_ZEP);
     }
 
     public void actionOnQuit() {
