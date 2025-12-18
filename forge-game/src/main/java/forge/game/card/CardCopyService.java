@@ -136,6 +136,39 @@ public class CardCopyService {
         return c;
     }
 
+    /**
+     * Copy card stats to a new game instance. This is an optimized path for GameCopier
+     * that avoids re-parsing the card from its PaperCard definition.
+     *
+     * @param in The source card to copy from
+     * @param newOwner The owner in the new game
+     * @param targetGame The target game instance
+     * @return A new card with copied stats in the target game
+     */
+    public static Card copyStatsToGame(final Card in, final Player newOwner, final Game targetGame) {
+        int id = targetGame.nextCardId();
+        final Card c;
+        if (in instanceof DetachedCardEffect) {
+            c = new DetachedCardEffect((DetachedCardEffect) in, targetGame, true);
+        } else {
+            c = new Card(id, in.getPaperCard(), targetGame);
+        }
+
+        c.setOwner(newOwner);
+        c.setSetCode(in.getSetCode());
+
+        for (final CardStateName state : in.getStates()) {
+            copyState(in, state, c, state, false);
+        }
+
+        c.setState(in.getCurrentStateName(), false);
+        c.setRules(in.getRules());
+        c.setBackSide(in.isBackSide());
+        c.updateStateForView();
+
+        return c;
+    }
+
     @Deprecated
     public void copyCopiableCharacteristics(final Card to, SpellAbility sourceSA, SpellAbility targetSA) {
         final boolean toIsFaceDown = to.isFaceDown();

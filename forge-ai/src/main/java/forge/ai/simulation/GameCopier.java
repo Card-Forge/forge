@@ -32,14 +32,14 @@ import java.util.List;
 import java.util.Map;
 
 public class GameCopier {
-    private static final ZoneType[] ZONES = new ZoneType[] {
-        ZoneType.Battlefield,
-        ZoneType.Hand,
-        ZoneType.Graveyard,
-        ZoneType.Library,
-        ZoneType.Exile,
-        ZoneType.Stack,
-        ZoneType.Command,
+    private static final ZoneType[] ZONES = new ZoneType[]{
+            ZoneType.Battlefield,
+            ZoneType.Hand,
+            ZoneType.Graveyard,
+            ZoneType.Library,
+            ZoneType.Exile,
+            ZoneType.Stack,
+            ZoneType.Command,
     };
 
     private Game origGame;
@@ -66,6 +66,7 @@ public class GameCopier {
     public Game makeCopy() {
         return makeCopy(null, null);
     }
+
     public Game makeCopy(PhaseType advanceToPhase, Player aiPlayer) {
         if (origGame.EXPERIMENTAL_RESTORE_SNAPSHOT) {
             // How do we advance to phase when using restores?
@@ -138,8 +139,8 @@ public class GameCopier {
                         // Sometimes, a spell can "remember" a token card that's not in any zone
                         // (and thus wouldn't have been copied) - for example Swords to Plowshares
                         // remembering its target for LKI. Skip these to not crash in find().
-                        if (o instanceof Card && ((Card)o).getZone() == null) {
-                           continue;
+                        if (o instanceof Card && ((Card) o).getZone() == null) {
+                            continue;
                         }
                         c.addRemembered(find((GameObject) o));
                     } else {
@@ -198,7 +199,7 @@ public class GameCopier {
                 }
                 newGame.getStack().add(newSa);
             }
-        } 
+        }
     }
 
     private RegisteredPlayer clonePlayer(RegisteredPlayer p) {
@@ -283,51 +284,25 @@ public class GameCopier {
 
     private static PaperCard hidden_info_card = new PaperCard(CardRules.fromScript(Lists.newArrayList("Name:hidden", "Types:Artifact", "Oracle:")), "", CardRarity.Common);
     private static final boolean PRUNE_HIDDEN_INFO = false;
-    private static final boolean USE_FROM_PAPER_CARD = true;
+
     private Card createCardCopy(Game newGame, Player newOwner, Card c, Player aiPlayer) {
         if (c.isToken() && !c.isImmutable()) {
             Card result = new TokenInfo(c).makeOneToken(newOwner);
             new CardCopyService(c).copyCopiableCharacteristics(result, null, null);
             return result;
         }
-        if (USE_FROM_PAPER_CARD && !c.isImmutable() && c.getPaperCard() != null) {
-            Card newCard;
-            if (PRUNE_HIDDEN_INFO && !c.getView().canBeShownTo(aiPlayer.getView())) {
-                // TODO also check REVEALED_CARDS memory
-                newCard = new Card(newGame.nextCardId(), hidden_info_card, newGame);
-                newCard.setOwner(newOwner);
-            } else {
-                newCard = Card.fromPaperCard(c.getPaperCard(), newOwner);
-            }
-            newCard.setCommander(c.isCommander());
-            return newCard;
-        }
 
-        // TODO: The above is very expensive and accounts for the vast majority of GameCopier execution time.
-        // The issue is that it requires parsing the original card from scratch from the paper card. We should
-        // improve the copier to accurately copy the card from its actual state, so that the paper card shouldn't
-        // be needed. Once the below code accurately copies the card, remove the USE_FROM_PAPER_CARD code path.
         Card newCard;
-        if (c instanceof DetachedCardEffect)
-            newCard = new DetachedCardEffect((DetachedCardEffect) c, newGame, true);
-        else
-            newCard = new Card(newGame.nextCardId(), c.getPaperCard(), newGame);
-        newCard.setOwner(newOwner);
-        newCard.setName(c.getName());
+        if (PRUNE_HIDDEN_INFO && !c.getView().canBeShownTo(aiPlayer.getView())) {
+            // TODO also check REVEALED_CARDS memory
+            newCard = new Card(newGame.nextCardId(), hidden_info_card, newGame);
+            newCard.setOwner(newOwner);
+        } else {
+            // Use copyStatsToGame which copies all card states (abilities, triggers, etc.)
+            // directly from the source card without re-parsing from PaperCard definition.
+            newCard = CardCopyService.copyStatsToGame(c, newOwner, newGame);
+        }
         newCard.setCommander(c.isCommander());
-        newCard.addType(c.getType());
-        for (StaticAbility stAb : c.getStaticAbilities()) {
-            newCard.addStaticAbility(stAb.copy(newCard, true));
-        }
-        for (SpellAbility sa : c.getSpellAbilities()) {
-            SpellAbility saCopy = sa.copy(newCard, true);
-            if (saCopy != null) {
-                newCard.addSpellAbility(saCopy);
-            } else {
-                System.err.println(sa.toString());
-            }
-        }
-
         return newCard;
     }
 
@@ -495,6 +470,7 @@ public class GameCopier {
             throw new RuntimeException("Couldn't map " + o + "/" + System.identityHashCode(o));
         return result;
     }
+
     public GameObject reverseFind(GameObject o) {
         if (origGame.EXPERIMENTAL_RESTORE_SNAPSHOT) {
             return snapshot.reverseFind(o);
