@@ -5,5 +5,5 @@ A:SP$ NameCard | Defined$ You | SubAbility$ DBEffect | AILogic$ MostProminentInH
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STCantCast,STCantPlayLand | SubAbility$ DBDraw | Duration$ UntilYourNextTurn
 SVar:STCantCast:Mode$ CantBeCast | ValidCard$ Card.NamedCard | Description$ Spells with the chosen name can't be cast and lands with the chosen name can't be played.
 SVar:STCantPlayLand:Mode$ CantPlayLand | ValidCard$ Card.NamedCard
-SVar:DBDraw:DB$ Draw | NumCards$ 1
+SVar:DBDraw:DB$ Draw
 Oracle:Choose a card name. Until your next turn, spells with the chosen name can't be cast and lands with the chosen name can't be played.\nDraw a card.

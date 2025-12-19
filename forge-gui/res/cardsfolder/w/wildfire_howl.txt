@@ -2,7 +2,7 @@ Name:Wildfire Howl
 ManaCost:1 R R
 Types:Sorcery
 K:Gift
-SVar:GiftAbility:DB$ Draw | NumCards$ 1 | Defined$ Promised | GiftDescription$ a card
+SVar:GiftAbility:DB$ Draw | Defined$ Promised | GiftDescription$ a card
 A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 1 | TargetMin$ X | TargetMax$ X | SubAbility$ DBDamageAll | DamageMap$ True | SpellDescription$ CARDNAME deals 2 damage to each creature. If the gift was promised, instead CARDNAME deals 1 damage to any target and 2 damage to each creature.
 SVar:DBDamageAll:DB$ DamageAll | NumDmg$ 2 | ValidCards$ Creature | ValidDescription$ each creature | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve

@@ -2,7 +2,7 @@ Name:Ranger Class
 ManaCost:1 G
 Types:Enchantment Class
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 2/2 green Wolf creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_2_wolf | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenScript$ g_2_2_wolf | TokenOwner$ You
 K:Class:2:1 G:AddTrigger$ TriggerAttackersDeclared
 SVar:TriggerAttackersDeclared:Mode$ AttackersDeclared | AttackingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | Secondary$ True | TriggerDescription$ Whenever you attack, put a +1/+1 counter on target attacking creature.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | CounterType$ P1P1 | CounterNum$ 1

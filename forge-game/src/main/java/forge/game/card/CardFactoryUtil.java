@@ -1457,7 +1457,7 @@ public class CardFactoryUtil {
             sbTrig.append("Living Weapon (").append(inst.getReminderText()).append(")");
 
             final StringBuilder sbGerm = new StringBuilder();
-            sbGerm.append("DB$ Token | TokenAmount$ 1 | TokenScript$ b_0_0_phyrexian_germ | TokenOwner$ You | RememberTokens$ True");
+            sbGerm.append("DB$ Token | TokenScript$ b_0_0_phyrexian_germ | TokenOwner$ You | RememberTokens$ True");
 
             final SpellAbility saGerm = AbilityFactory.getAbility(sbGerm.toString(), card);
 
@@ -3983,7 +3983,7 @@ public class CardFactoryUtil {
                     + " | Secondary$ True | Description$ " + sb.toString() + " (" + inst.getReminderText() + ")";
             String trig = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self" +
                     " | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ When this creature dies, draw a card.";
-            String ab = "DB$ Draw | NumCards$ 1";
+            String ab = "DB$ Draw";
 
             StaticAbility st = StaticAbility.create(effect, state.getCard(), state, intrinsic);
 
