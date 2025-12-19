@@ -5,7 +5,7 @@ PT:*/*
 S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ Y | SetToughness$ Y | Description$ CARDNAME's power and toughness are each equal to the number of Soldiers you control.
 K:Suspend:X:XMin1 X W W
 T:Mode$ CounterRemoved | ValidCard$ Card.Self | TriggerZones$ Exile | CounterType$ TIME | Execute$ TrigToken | TriggerDescription$ Whenever a time counter is removed from CARDNAME while it's exiled, create a 1/1 white Soldier creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_soldier | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_soldier | TokenOwner$ You
 SVar:X:Count$xPaid
 SVar:Y:Count$Valid Soldier.YouCtrl
 SVar:NoZeroToughnessAI:True

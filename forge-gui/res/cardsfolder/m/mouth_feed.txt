@@ -1,7 +1,7 @@
 Name:Mouth
 ManaCost:2 G
 Types:Sorcery
-A:SP$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_hippo | TokenOwner$ You | SpellDescription$ Create a 3/3 green Hippo creature token.
+A:SP$ Token | TokenScript$ g_3_3_hippo | TokenOwner$ You | SpellDescription$ Create a 3/3 green Hippo creature token.
 DeckHas:Ability$Token
 AlternateMode:Split
 Oracle:Create a 3/3 green Hippo creature token.

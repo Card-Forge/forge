@@ -56,6 +56,7 @@ public abstract class SpellAbilityAi {
      * Handles the AI decision to play a "main" SpellAbility
      */
     protected AiAbilityDecision canPlay(final Player ai, final SpellAbility sa) {
+        // TODO this is redundant when reached from canPlayAndPayForFace
         if (sa.getRestrictions() != null && !sa.getRestrictions().canPlay(sa.getHostCard(), sa)) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlaySa);
         }

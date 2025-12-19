@@ -2,6 +2,6 @@ Name:Peek
 ManaCost:U
 Types:Instant
 A:SP$ RevealHand | ValidTgts$ Player | Look$ True | SubAbility$ DBDraw | SpellDescription$ Look at target player's hand.
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
 AI:RemoveDeck:All
 Oracle:Look at target player's hand.\nDraw a card.

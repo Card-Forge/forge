@@ -4,6 +4,6 @@ Types:Legendary Creature Serpent
 PT:5/5
 S:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | Description$ You may play an additional land on each of your turns.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Landfall — Whenever a land you control enters, you may draw a card.
-SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:TrigDraw:DB$ Draw
 SVar:BuffedBy:Land
 Oracle:You may play an additional land on each of your turns.\nLandfall — Whenever a land you control enters, you may draw a card.

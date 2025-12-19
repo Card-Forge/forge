@@ -9,5 +9,5 @@ R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You,Permanent.Othe
 SVar:DmgMe:DB$ ReplaceEffect | VarName$ Affected | VarValue$ Self | VarType$ Card
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When this creature dies, exile it and create ten tapped Treasure tokens.
 SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBToken
-SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenAmount$ 10 | TokenTapped$ True
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac0 | TokenTapped$ True
 Oracle:Vigilance, ward {3}\nDamage isn't removed from this creature during cleanup steps.\nAll damage that would be dealt to you and other permanents you control is dealt to this creature instead.\nWhen this creature dies, exile it and create ten tapped Treasure tokens.

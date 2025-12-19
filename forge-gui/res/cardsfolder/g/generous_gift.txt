@@ -2,5 +2,5 @@ Name:Generous Gift
 ManaCost:2 W
 Types:Instant
 A:SP$ Destroy | ValidTgts$ Permanent | AITgts$ Card.cmcGE4 | SubAbility$ DBToken | SpellDescription$ Destroy target permanent. Its controller creates a 3/3 green Elephant creature token.
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_elephant | TokenOwner$ TargetedController
+SVar:DBToken:DB$ Token | TokenScript$ g_3_3_elephant | TokenOwner$ TargetedController
 Oracle:Destroy target permanent. Its controller creates a 3/3 green Elephant creature token.

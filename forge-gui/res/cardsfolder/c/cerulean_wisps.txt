@@ -3,6 +3,6 @@ ManaCost:U
 Types:Instant
 A:SP$ Animate | ValidTgts$ Creature | Colors$ Blue | OverwriteColors$ True | SubAbility$ DBUntap | SpellDescription$ Target creature becomes blue until end of turn. Untap that creature. Draw a card.
 SVar:DBUntap:DB$ Untap | Defined$ Targeted | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ 1
+SVar:DBDraw:DB$ Draw
 AI:RemoveDeck:All
 Oracle:Target creature becomes blue until end of turn. Untap that creature.\nDraw a card.
