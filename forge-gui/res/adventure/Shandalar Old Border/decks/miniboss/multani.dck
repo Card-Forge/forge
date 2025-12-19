@@ -2,6 +2,7 @@
 Name=Multani
 [Main]
 20 Forest|ICE
+2 Yavimaya Hollow|UDS
 4 Multani, Maro-Sorcerer|ULG
 4 Maro|MIR
 4 Forgotten Ancient|SCG
@@ -9,8 +10,8 @@ Name=Multani
 2 Seeds of Innocence|MIR
 2 Greater Good|USG
 2 Sylvan Library|LEG
-4 Moment's Peace|ODY
-4 Tangle|INV
+3 Moment's Peace|ODY
+3 Tangle|INV
 4 Yavimaya Elder|UDS
 2 Yavimaya Wurm|ULG
 2 Yavimaya Ancients|ALL
@@ -18,7 +19,6 @@ Name=Multani
 
 [StartInBattle_Reference]
 1 Heart of Yavimaya|ALL
-1 Yavimaya Hollow|UDS
 1 Multani's Presence|ULG
 1 Rowen|VIS
 1 Primitive Etchings|SCG

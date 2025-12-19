@@ -40,7 +40,7 @@
    <properties>
     <property name="enemy" value="Vampire" />
     <property name="waypoints" value="95,94" />
-   <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML", "Crovax the Cursed|STH", "Swamp|TMP" ] }</property>
+   <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML|1", "Cemetery Gate|HML|2", "Crovax the Cursed|STH", "Swamp|TMP|2" ] }</property>
     </properties>
   </object>
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="272.917" y="202.438">
@@ -207,7 +207,7 @@
       {
         "name": "unlock with the key",
         "condition": [
-          { "item": "Sorin's Key" }
+          { "item": "Baron's Key" }
         ],
         "text": "The gate is unlocked",
         "options": [
@@ -215,7 +215,7 @@
             "name": "continue",
             "action": [
               { "deleteMapObject": -1 },
-              { "removeItem": "Sorin's Key" }
+              { "removeItem": "Baron's Key" }
             ]
           }
         ]
@@ -230,7 +230,7 @@
     <property name="enemy" value="Vampire" />
     <property name="speedModifier" type="float" value="30" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML", "Crovax the Cursed|STH", "Swamp|TMP" ] }</property>
+   <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML|1", "Cemetery Gate|HML|2", "Crovax the Cursed|STH", "Swamp|TMP|2" ] }</property>
     </properties>
   </object>
   <object id="93" template="../../../../../../common/maps/obj/enemy.tx" x="225.333" y="308">
@@ -238,7 +238,7 @@
     <property name="enemy" value="Vampire" />
     <property name="speedModifier" type="float" value="30" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML", "Crovax the Cursed|STH", "Swamp|TMP" ] }</property>
+   <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML|1", "Cemetery Gate|HML|2", "Crovax the Cursed|STH", "Swamp|TMP|2" ] }</property>
     </properties>
   </object>
   <object id="94" template="../../../../../../common/maps/obj/waypoint.tx" x="277.333" y="510.667" />
@@ -267,8 +267,8 @@
     "text": "*The poor peasant cowers before you* ",
     "options": [
       {
-        "name": "You are free to go, Sorin has been dealt with",
-        "text": "Thanks... Thank you sir, please take this item as a token of my gratitude",
+        "name": "You are free to go, Baron Sengir has been dealt with",
+        "text": "Thanks... Thank you brave hero, please take this item as a token of my gratitude",
         "options": [
           {
               "name": "(Take the Challenge Coin)",            

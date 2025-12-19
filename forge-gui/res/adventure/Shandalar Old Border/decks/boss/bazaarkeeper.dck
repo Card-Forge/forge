@@ -1,0 +1,43 @@
+[metadata]
+Name=Bazaar Keeper
+[Main]
+4 City of Brass|ARN
+4 Reflecting Pool|TMP
+4 Gem Bazaar|PAST
+2 Island|MMQ
+2 Mountain|MMQ
+2 Forest|MMQ
+2 Swamp|MMQ
+2 Plains|MMQ
+2 Sailmonger|MMQ
+2 Scandalmonger|MMQ
+2 Squallmonger|MMQ
+2 Warmonger|MMQ
+2 Wishmonger|MMQ
+2 Anavolver|APC
+2 Cetavolver|APC
+2 Degavolver|APC
+2 Necravolver|APC
+2 Rakavolver|APC
+2 Aerial Caravan|MMQ
+3 Arrest|MMQ
+3 Bribery|MMQ
+3 Disenchant|MMQ
+1 Lightning Angel|APC
+1 Overgrown Estate|APC
+1 Fervent Charge|APC
+1 Fungal Shambler|APC
+1 Guided Passage|APC
+
+[StartInBattle_Reference]
+1 Island|MMQ
+1 Mountain|MMQ
+1 Forest|MMQ
+1 Swamp|MMQ
+1 Plains|MMQ
+1 High Market|MMQ
+1 Talas Merchant|P02
+1 Merchant Ship|ARN
+1 Trade Caravan|HML
+1 Bargaining Table|MMQ
+1 Crooked Scales|MMQ

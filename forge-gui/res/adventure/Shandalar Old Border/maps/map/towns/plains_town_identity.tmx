@@ -33,34 +33,12 @@
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="219" y="383" width="28" height="16"/>
   <object id="41" template="../../../../../../common/maps/obj/shop.tx" x="97" y="305">
    <properties>
-    <property name="commonShopList" value="White,White,Enchantment4White,Creature2White,Instant4White"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White"/>
-    <property name="rareShopList" value="RWG,RWU,RWB,UWG,UWB,GWB,Land4White,Creature6White,Nobles"/>
-    <property name="uncommonShopList" value="Azorius,Boros,Selesnya,Orzhov,Azorius,Boros,Selesnya,Orzhov,Land"/>
+    <property name="commonShopList" value="White1,White2"/>
    </properties>
   </object>
-  <object id="56" template="../../../../../../common/maps/obj/shop.tx" x="208" y="144">
+  <object id="42" template="../../../../../../common/maps/obj/shop.tx" x="208" y="144">
    <properties>
-    <property name="commonShopList" value="White,White,Enchantment4White,Creature2White,Instant4White"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White"/>
-    <property name="rareShopList" value="RWG,RWU,RWB,UWG,UWB,GWB,Land4White,Creature6White,Nobles"/>
-    <property name="uncommonShopList" value="Azorius,Boros,Selesnya,Orzhov,Azorius,Boros,Selesnya,Orzhov,Land"/>
-   </properties>
-  </object>
-  <object id="57" template="../../../../../../common/maps/obj/shop.tx" x="240" y="144">
-   <properties>
-    <property name="commonShopList" value="White,White,Enchantment4White,Creature2White,Instant4White"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White"/>
-    <property name="rareShopList" value="RWG,RWU,RWB,UWG,UWB,GWB,Land4White,Creature6White,Nobles"/>
-    <property name="uncommonShopList" value="Azorius,Boros,Selesnya,Orzhov,Azorius,Boros,Selesnya,Orzhov,Land"/>
-   </properties>
-  </object>
-  <object id="43" template="../../../../../../common/maps/obj/shop.tx" x="352" y="306">
-   <properties>
-    <property name="commonShopList" value="White,White,Enchantment4White,Creature2White,Instant4White"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White"/>
-    <property name="rareShopList" value="RWG,RWU,RWB,UWG,UWB,GWB,Land4White,Creature6White,Nobles"/>
-    <property name="uncommonShopList" value="Azorius,Boros,Selesnya,Orzhov,Azorius,Boros,Selesnya,Orzhov,Land"/>
+    <property name="commonShopList" value="ColorRandomWhite"/>
    </properties>
   </object>
   <object id="47" template="../../../../../../common/maps/obj/inn.tx" x="224" y="211"/>
@@ -71,41 +49,11 @@
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
-  <object id="50" template="../../../../../../common/maps/obj/shop.tx" x="256" y="306">
-   <properties>
-    <property name="commonShopList" value="White,White,Enchantment4White,Creature2White,Instant4White"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White"/>
-    <property name="rareShopList" value="RWG,RWU,RWB,UWG,UWB,GWB,Land4White,Creature6White,Nobles"/>
-    <property name="uncommonShopList" value="Azorius,Boros,Selesnya,Orzhov,Azorius,Boros,Selesnya,Orzhov,Land"/>
-   </properties>
-  </object>
-  <object id="51" template="../../../../../../common/maps/obj/shop.tx" x="192" y="306">
-   <properties>
-    <property name="commonShopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop,WhiteBoosterPackShop,White,White,Enchantment4White,Creature2White,Instant4White"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White"/>
-    <property name="rareShopList" value="RWG,RWU,RWB,UWG,UWB,GWB,Land4White,Creature6White,Nobles"/>
-    <property name="uncommonShopList" value="Azorius,Boros,Selesnya,Orzhov,Azorius,Boros,Selesnya,Orzhov,Land"/>
-   </properties>
-  </object>
-  <object id="52" template="../../../../../../common/maps/obj/shop.tx" x="144" y="306">
-   <properties>
-    <property name="commonShopList" value="White,White,Enchantment4White,Creature2White,Instant4White"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White"/>
-    <property name="rareShopList" value="RWG,RWU,RWB,UWG,UWB,GWB,Land4White,Creature6White,Nobles"/>
-    <property name="uncommonShopList" value="Azorius,Boros,Selesnya,Orzhov,Azorius,Boros,Selesnya,Orzhov,Land"/>
-   </properties>
-  </object>
   <object id="58" template="../../../../../../common/maps/obj/quest.tx" x="319" y="130" width="34" height="16">
    <properties>
     <property name="questtype" value="plains_town_identity"/>
    </properties>
   </object>
   <object id="59" template="../../../../../../common/maps/obj/shardtrader.tx" x="128" y="130"/>
-  <object id="60" template="../../../../../../common/maps/obj/RotatingShop.tx" x="304" y="306">
-   <properties>
-    <property name="rotation" value="White1,White2,White3,White4,White5,White6"/>
-    <property name="signYOffset" type="float" value="-16"/>
-   </properties>
-  </object>
  </objectgroup>
 </map>

@@ -99,7 +99,7 @@
     <property name="deckOverride" value="" />
     <property name="enemy" value="Gorilla" />
     <property name="waypoints" value="19,r24-5-23-13" />
-   <property name="effect">{ "startBattleWithCard": [ "Forest|USG", "Gorilla Chieftain|ALL", "Gorilla Shaman|ALL", "Mountain|USG", "Treetop Village|ULG" ] }</property>
+   <property name="effect">{ "startBattleWithCard": [ "Gorilla Chieftain|ALL", "Gorilla Shaman|ALL", "Mountain|USG", "Treetop Village|ULG" ] }</property>
     </properties>
   </object>
   <object id="35" template="../../../../../../common/maps/obj/enemy.tx" x="384" y="480">
@@ -107,7 +107,7 @@
     <property name="deckOverride" value="" />
     <property name="enemy" value="Gorilla" />
     <property name="waypoints" value="r10-12-23-13" />
-   <property name="effect">{ "startBattleWithCard": [ "Forest|USG", "Gorilla Chieftain|ALL", "Gorilla Shaman|ALL", "Mountain|USG", "Treetop Village|ULG" ] }</property>
+   <property name="effect">{ "startBattleWithCard": [ "Gorilla Chieftain|ALL", "Gorilla Shaman|ALL", "Mountain|USG", "Treetop Village|ULG" ] }</property>
     </properties>
   </object>
   <object id="36" template="../../../../../../common/maps/obj/enemy.tx" x="64" y="352">
@@ -117,7 +117,7 @@
     <property name="pursueRange" type="int" value="100" />
     <property name="threatRange" type="int" value="60" />
     <property name="waypoints" value="37" />
-   <property name="effect">{ "startBattleWithCard": [ "Elephant Graveyard|ARN", "Forest|ICE", "Plains|ICE", "War Mammoth|LEA" ] }</property>
+   <property name="effect">{"startBattleWithCard": ["Brushland|ICE", "Elephant Graveyard|ARN", "War Mammoth|LEA"]}</property>
 </properties>
   </object>
   <object id="39" template="../../../../../../common/maps/obj/enemy.tx" x="416" y="336">
@@ -145,7 +145,7 @@
     <property name="enemy" value="Gorilla" />
     <property name="threatRange" type="int" value="75" />
     <property name="waypoints" value="r20-25-14-26" />
-   <property name="effect">{ "startBattleWithCard": [ "Forest|USG", "Gorilla Chieftain|ALL", "Gorilla Shaman|ALL", "Mountain|USG", "Treetop Village|ULG" ] }</property>
+   <property name="effect">{ "startBattleWithCard": [ "Gorilla Chieftain|ALL", "Gorilla Shaman|ALL", "Mountain|USG", "Treetop Village|ULG" ] }</property>
     </properties>
   </object>
   <object id="42" template="../../../../../../common/maps/obj/enemy.tx" x="192" y="358">
@@ -157,7 +157,7 @@
   <object id="43" template="../../../../../../common/maps/obj/enemy.tx" x="256" y="64">
    <properties>
     <property name="deckOverride" value="decks/miniboss/jungle_king.dck" />
-    <property name="effect">{ "startBattleWithCard": [ "Forest|USG", "Gorilla Chieftain|ALL", "Gorilla Shaman|ALL", "Mountain|USG", "Treetop Village|ULG" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Gorilla Chieftain|ALL", "Gorilla Shaman|ALL", "Mountain|USG", "Treetop Village|ULG" ] }</property>
     <property name="enemy" value="Gorilla" />
     <property name="pursueRange" type="int" value="100" />
     <property name="speedModifier" type="float" value="10" />
@@ -224,14 +224,14 @@
     <property name="deckOverride" value="" />
     <property name="enemy" value="Gorilla" />
     <property name="waypoints" value="" />
-   <property name="effect">{ "startBattleWithCard": [ "Forest|USG", "Gorilla Chieftain|ALL", "Gorilla Shaman|ALL", "Mountain|USG", "Treetop Village|ULG" ] }</property>
+   <property name="effect">{ "startBattleWithCard": [ "Gorilla Chieftain|ALL", "Gorilla Shaman|ALL", "Mountain|USG", "Treetop Village|ULG" ] }</property>
     </properties>
   </object>
   <object id="48" template="../../../../../../common/maps/obj/enemy.tx" x="176" y="80">
    <properties>
     <property name="enemy" value="Gorilla Chief" />
     <property name="threatRange" type="int" value="60" />
-   <property name="effect">{"startBattleWithCard": ["Plains|2ED", "Island|2ED", "Swamp|2ED", "Mountain|2ED", "Forest|2ED", "Ley Line|MMQ", "Hidden Ancients|USG", "Hidden Guerrillas|USG", "Hidden Herd|USG", "Hidden Predators|USG", "Hidden Spider|USG", "Hidden Stag|USG", "Hidden Gibbons|ULG"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Birds of Paradise|4ED", "Birds of Paradise|7ED", "Ley Line|MMQ", "Hidden Ancients|USG", "Hidden Guerrillas|USG", "Hidden Herd|USG", "Hidden Predators|USG", "Hidden Spider|USG", "Hidden Stag|USG", "Hidden Gibbons|ULG"]}</property>
     </properties>
   </object>
   <object id="1" template="../../../../../../common/maps/obj/collision.tx" x="-32" y="0" width="32" height="640" />
