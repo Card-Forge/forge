@@ -1,0 +1,36 @@
+[metadata]
+Name=Palladia-Mors
+[Main]
+7 Forest|LEA
+7 Plains|LEA
+7 Mountain|LEA
+1 Karakas|LEG
+1 Pendelhaven|LEG
+1 Hammerheim|LEG
+4 Palladia-Mors|LEG
+2 Joven|HML
+2 Hazezon Tamar|LEG
+2 Jacques le Vert|LEG
+1 Livonya Silone|LEG
+1 Lady Caleria|LEG
+2 Pyrotechnics|LEG
+2 Winter Blast|LEG
+2 Willow Satyr|LEG
+2 Chain Lightning|LEG
+2 Divine Offering|LEG
+2 D'Avenant Archer|LEG
+2 Thunder Spirit|LEG
+2 Firestorm Phoenix|LEG
+2 Elder Land Wurm|LEG
+2 Frost Giant|LEG
+2 Killer Bees|LEG
+2 Craw Giant|LEG
+
+[StartInBattle_Reference]
+1 Mountain|LEA
+1 Plains|LEA
+1 Forest|LEA
+1 Wall of Heat|LEG
+1 Wall of Dust|LEG
+1 Wall of Light|LEG
+1 Adventurers’ Guildhouse|LEG
