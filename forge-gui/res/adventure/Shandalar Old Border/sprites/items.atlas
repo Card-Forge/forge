@@ -994,3 +994,15 @@ FoolsTome
 CrookedScales
   xy: 128, 768
   size: 16, 16
+LifeMatrix
+  xy: 96, 848
+  size: 16, 16
+KryShield
+  xy: 288, 144
+  size: 16, 16
+GauntletsofChaos
+  xy: 80, 208
+  size: 16, 16
+MarbleMace
+  xy: 176, 416
+  size: 16, 16

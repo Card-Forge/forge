@@ -1,0 +1,36 @@
+[metadata]
+Name=Vaevictis Asmadi
+[Main]
+7 Swamp|LEA
+7 Forest|LEA
+7 Mountain|LEA
+1 Urborg|LEG
+1 Pendelhaven|LEG
+1 Hammerheim|LEG
+4 Vaevictis Asmadi|LEG
+2 Adun Oakenshield|LEG
+2 Bartel Runeaxe|LEG
+2 Xira Arien|LEG
+1 Stangg|LEG
+1 Pavel Maliki|LEG
+2 Pyrotechnics|LEG
+2 Winter Blast|LEG
+2 Willow Satyr|LEG
+2 Chain Lightning|LEG
+2 Hellfire|LEG
+2 Demonic Torment|LEG
+2 Crimson Manticore|LEG
+2 Firestorm Phoenix|LEG
+2 Untamed Wilds|LEG
+2 Radjan Spirit|LEG
+2 Carrion Ants|LEG
+2 Infernal Medusa|LEG
+
+[StartInBattle_Reference]
+1 Mountain|LEA
+1 Swamp|LEA
+1 Forest|LEA
+1 Wall of Shadows|LEG
+1 Wall of Dust|LEG
+1 Wall of Heat|LEG
+1 Mountain Stronghold|LEG
