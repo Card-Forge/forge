@@ -112,6 +112,8 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
             renderer = new MagicColorRenderer();
         } else if (item instanceof CardType.CoreType) {
             renderer = new CoreTypeRenderer();
+        } else if (item instanceof CardType.Supertype) {
+            renderer = new SuperTypeRenderer();
         } else if (item instanceof Integer || item == FilterOperator.EQUALS) { //allow numeric operators to be selected horizontally
             renderer = new NumberRenderer();
         } else if (item instanceof IHasSkinProp) {
@@ -698,6 +700,12 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
     protected class CoreTypeRenderer extends AbstractIHasSkinPropRenderer {
         public CoreTypeRenderer() {
             super(v -> ((CardType.CoreType)v).getTranslatedName(), v -> FSkinProp.iconFromCoreType((CardType.CoreType)v));
+        }
+    }
+
+    protected class SuperTypeRenderer extends AbstractIHasSkinPropRenderer {
+        public SuperTypeRenderer() {
+            super(v -> ((CardType.Supertype)v).getTranslatedName(), v -> null);
         }
     }
 

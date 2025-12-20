@@ -172,6 +172,34 @@ public class AdvancedSearch {
                 return input.getRules().getColor().countColors();
             }
         }),
+        CARD_SUPER_TYPE("lblSupertype", PaperCard.class, FilterOperator.COMBINATION_OPS, new CustomListEvaluator<PaperCard, CardType.Supertype>(List.of(CardType.Supertype.values()), CardType.Supertype::getTranslatedName) {
+            @Override
+            protected CardType.Supertype getItemValue(PaperCard input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+
+            @Override
+            protected Set<CardType.Supertype> getItemValues(PaperCard input) {
+                final CardType type = input.getRules().getType();
+                final Set<CardType.Supertype> types = new HashSet<>();
+                CardSplitType cardSplitType = input.getRules().getSplitType();
+                if (cardSplitType != CardSplitType.None && cardSplitType != CardSplitType.Split) {
+                    if (input.getRules().getOtherPart() != null) {
+                        for (CardType.Supertype coreType : input.getRules().getOtherPart().getType().getSupertypes()) {
+                            types.add(coreType);
+                        }
+                        for (CardType.Supertype coreType : input.getRules().getMainPart().getType().getSupertypes()) {
+                            types.add(coreType);
+                        }
+                        return types;
+                    }
+                }
+                for (CardType.Supertype t : type.getSupertypes()) {
+                    types.add(t);
+                }
+                return types;
+            }
+        }),
         CARD_TYPE("lblType", PaperCard.class, FilterOperator.COMBINATION_OPS, new CustomListEvaluator<PaperCard, CardType.CoreType>(List.of(CardType.CoreType.values()), CardType.CoreType::getTranslatedName) {
             @Override
             protected CardType.CoreType getItemValue(PaperCard input) {
@@ -419,6 +447,25 @@ public class AdvancedSearch {
                     return 0;
                 }
                 return ((PaperCard) input).getRules().getColor().countColors();
+            }
+        }),
+        INVITEM_SUPER_TYPE("lblSupertype", InventoryItem.class, FilterOperator.COMBINATION_OPS, new CustomListEvaluator<InventoryItem, CardType.Supertype>(List.of(CardType.Supertype.values()), CardType.Supertype::getTranslatedName) {
+            @Override
+            protected CardType.Supertype getItemValue(InventoryItem input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+
+            @Override
+            protected Set<CardType.Supertype> getItemValues(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return new HashSet<>();
+                }
+                final CardType type = ((PaperCard) input).getRules().getType();
+                final Set<CardType.Supertype> types = new HashSet<>();
+                for (CardType.Supertype t : type.getSupertypes()) {
+                    types.add(t);
+                }
+                return types;
             }
         }),
         INVITEM_TYPE("lblType", InventoryItem.class, FilterOperator.COMBINATION_OPS, new CustomListEvaluator<InventoryItem, CardType.CoreType>(List.of(CardType.CoreType.values()), CardType.CoreType::getTranslatedName) {

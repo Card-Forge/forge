@@ -108,14 +108,16 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         }
     }
 
-    public enum Supertype {
-        Basic,
-        Elite,
-        Host,
-        Legendary,
-        Snow,
-        Ongoing,
-        World;
+    public enum Supertype implements ITranslatable {
+        Basic("lblBasic"),
+        Elite("lblElite"),
+        Host("lblHost"),
+        Legendary("lblLegendary"),
+        Snow("lblSnow"),
+        Ongoing("lblOngoing"),
+        World("lblWorld");
+
+        public final String label;
 
         private static Map<String, Supertype> stringToSupertype = EnumUtils.getEnumMap(Supertype.class);
 
@@ -127,6 +129,20 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
             return stringToSupertype.containsKey(name);
         }
 
+        Supertype(final String label) {
+            this.label = label;
+        }
+
+
+        @Override
+        public String getName() {
+            return this.name();
+        }
+
+        @Override
+        public String getTranslatedName() {
+            return Localizer.getInstance().getMessage(label);
+        }
     }
 
     private final Set<CoreType> coreTypes = EnumSet.noneOf(CoreType.class);
