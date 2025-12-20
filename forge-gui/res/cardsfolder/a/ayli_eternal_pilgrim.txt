@@ -8,4 +8,4 @@ A:AB$ ChangeZone | Cost$ 1 W B Sac<1/Creature.Other/another creature> | CheckSVa
 SVar:Toughness:Sacrificed$CardToughness
 SVar:X:Count$YourLifeTotal
 SVar:Y:Count$YourStartingLife/Plus.10
-Oracle:Deathtouch\n{1}, Sacrifice another creature: You gain life equal to the sacrificed creature's toughness.\n{1}{W}{B}, Sacrifice another creature: Exile target nonland permanent. Activate only if you have at least 10 life more than your starting life total.
+Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\n{1}, Sacrifice another creature: You gain life equal to the sacrificed creature's toughness.\n{1}{W}{B}, Sacrifice another creature: Exile target nonland permanent. Activate only if you have at least 10 life more than your starting life total.

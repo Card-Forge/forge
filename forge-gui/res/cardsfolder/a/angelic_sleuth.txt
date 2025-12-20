@@ -7,4 +7,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Perman
 SVar:TrigInvestigate:DB$ Investigate
 DeckHas:Ability$Investigate|Token|Sacrifice & Type$Artifact|Clue
 DeckHints:Ability$Counters
-Oracle:Flying\nWhenever another permanent you control leaves the battlefield, if it had counters on it, investigate.
+Oracle:Flying\nWhenever another permanent you control leaves the battlefield, if it had counters on it, investigate. (Create a Clue artifact token with "{2}, Sacrifice this token: Draw a card.")

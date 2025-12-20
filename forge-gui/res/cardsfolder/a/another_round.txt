@@ -1,11 +1,11 @@
 Name:Another Round
 ManaCost:X X 2 W
 Types:Sorcery
-A:SP$ Repeat | MaxRepeat$ Y | RepeatSubAbility$ DBChangeZone | AILogic$ MaxX | StackDescription$ SpellDescription | SpellDescription$ Exile any number of creatures you control, then return those creatures to the battlefield under their owners' control. Repeat this process X times.
+A:SP$ Repeat | MaxRepeat$ Y | RepeatSubAbility$ DBChangeZone | AILogic$ MaxX | StackDescription$ SpellDescription | SpellDescription$ Exile any number of creatures you control, then return them to the battlefield under their owner's control. Then repeat this process X more times.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ChangeType$ Creature.YouCtrl | Hidden$ True | ChangeNum$ MaxTgts | SelectPrompt$ Choose any number of creatures you control | RememberChanged$ True | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:MaxTgts:Count$Valid Creature.YouCtrl
 SVar:Y:SVar$X/Plus.1
 SVar:X:Count$xPaid
-Oracle:Exile any number of creatures you control, then return those creatures to the battlefield under their owners' control. Repeat this process X times.
+Oracle:Exile any number of creatures you control, then return them to the battlefield under their owner's control. Then repeat this process X more times.

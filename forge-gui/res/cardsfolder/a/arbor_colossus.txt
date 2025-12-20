@@ -4,7 +4,7 @@ Types:Creature Giant
 PT:6/6
 K:Reach
 K:Monstrosity:3:3 G G G
-T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME becomes monstrous, destroy target creature with flying an opponent controls.
+T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ When this creature becomes monstrous, destroy target creature with flying an opponent controls.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.OppCtrl+withFlying | TgtPrompt$ Select target creature with flying an opponent controls
 DeckHas:Ability$Counters
-Oracle:Reach\n{3}{G}{G}{G}: Monstrosity 3. (If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)\nWhen Arbor Colossus becomes monstrous, destroy target creature with flying an opponent controls.
+Oracle:Reach\n{3}{G}{G}{G}: Monstrosity 3. (If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)\nWhen this creature becomes monstrous, destroy target creature with flying an opponent controls.

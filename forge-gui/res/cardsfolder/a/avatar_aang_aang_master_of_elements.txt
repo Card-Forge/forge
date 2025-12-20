@@ -18,7 +18,7 @@ ManaCost:no cost
 Types:Legendary Creature Avatar Ally
 PT:6/6
 K:Flying
-S:Mode$ ReduceCost | ValidCard$ Card | Type$ Spell | Activator$ You | Amount$ 1 | Color$ W U B R G | Description$ Spells you cast cost {W}{U}{B}{R}{G} less to cast. (This can reduce generic costs.)
+S:Mode$ ReduceCost | ValidCard$ Card | Type$ Spell | Activator$ You | Amount$ 1 | Color$ W U B R G | Description$ Spells you cast cost {W}{U}{B}{R}{G} less to cast.
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigTransform | OptionalDecider$ You | TriggerDescription$ At the beginning of each upkeep, you may transform CARDNAME. If you do, you gain 4 life, draw four cards, put four +1/+1 counters on him, and he deals 4 damage to each opponent.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform | RememberChanged$ True | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4 | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBDraw
@@ -26,4 +26,4 @@ SVar:DBDraw:DB$ Draw | NumCards$ 4 | ConditionDefined$ Remembered | ConditionPre
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 4 | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 4 | CounterNum$ 4 | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-Oracle:Flying\nSpells you cast cost {W}{U}{B}{R}{G} less to cast. (This can reduce generic costs.)\nAt the beginning of each upkeep, you may transform Aang, Master of Elements. If you do, you gain 4 life, draw four cards, put four +1/+1 counters on him, and he deals 4 damage to each opponent.
+Oracle:Flying\nSpells you cast cost {W}{U}{B}{R}{G} less to cast.\nAt the beginning of each upkeep, you may transform Aang, Master of Elements. If you do, you gain 4 life, draw four cards, put four +1/+1 counters on him, and he deals 4 damage to each opponent.

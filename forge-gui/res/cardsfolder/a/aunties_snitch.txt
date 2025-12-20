@@ -2,9 +2,9 @@ Name:Auntie's Snitch
 ManaCost:2 B
 Types:Creature Goblin Rogue
 PT:3/1
-S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ CARDNAME can't block.
+S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ This creature can't block.
 K:Prowl:1 B
-T:Mode$ DamageDone | ValidSource$ Goblin.YouCtrl,Rogue.YouCtrl | TriggerZones$ Graveyard | IsPresent$ Card.StrictlySelf | PresentZone$ Graveyard | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ Whenever a Goblin or Rogue you control deals combat damage to a player, if CARDNAME is in your graveyard, you may return CARDNAME to your hand.
+T:Mode$ DamageDone | ValidSource$ Goblin.YouCtrl,Rogue.YouCtrl | TriggerZones$ Graveyard | IsPresent$ Card.StrictlySelf | PresentZone$ Graveyard | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ Whenever a Goblin or Rogue you control deals combat damage to a player, if this card is in your graveyard, you may return this card to your hand.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ Self
 DeckNeeds:Type$Rogue
-Oracle:Auntie's Snitch can't block.\nProwl {1}{B} (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Goblin or Rogue.)\nWhenever a Goblin or Rogue you control deals combat damage to a player, if Auntie's Snitch is in your graveyard, you may return Auntie's Snitch to your hand.
+Oracle:This creature can't block.\nProwl {1}{B} (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Goblin or Rogue.)\nWhenever a Goblin or Rogue you control deals combat damage to a player, if this card is in your graveyard, you may return this card to your hand.

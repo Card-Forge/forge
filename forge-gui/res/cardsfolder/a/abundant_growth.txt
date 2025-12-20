@@ -3,8 +3,8 @@ ManaCost:G
 Types:Enchantment Aura
 K:Enchant:Land
 SVar:AttachAILogic:Pump
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ FreeCard | TriggerDescription$ When CARDNAME enters, draw a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ FreeCard | TriggerDescription$ When this Aura enters, draw a card.
 SVar:FreeCard:DB$ Draw
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ AbundantGrowthTap | Description$ Enchanted land has "{T}: Add one mana of any color."
 SVar:AbundantGrowthTap:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
-Oracle:Enchant land\nWhen Abundant Growth enters, draw a card.\nEnchanted land has "{T}: Add one mana of any color."
+Oracle:Enchant land\nWhen this Aura enters, draw a card.\nEnchanted land has "{T}: Add one mana of any color."

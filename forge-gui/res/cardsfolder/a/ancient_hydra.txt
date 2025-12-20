@@ -6,4 +6,4 @@ K:Fading:5
 A:AB$ DealDamage | Cost$ 1 SubCounter<1/FADE> | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ It deals 1 damage to any target.
 DeckHas:Ability$Counters
 DeckHints:Ability$Proliferate
-Oracle:Fading 5 (This creature enters with five fade counters on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)\n{1}, Remove a fade counter from Ancient Hydra: It deals 1 damage to any target.
+Oracle:Fading 5 (This creature enters with five fade counters on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)\n{1}, Remove a fade counter from this creature: It deals 1 damage to any target.

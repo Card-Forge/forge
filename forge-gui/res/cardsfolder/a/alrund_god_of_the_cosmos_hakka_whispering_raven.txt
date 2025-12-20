@@ -21,7 +21,7 @@ ManaCost:1 U
 Types:Legendary Creature Bird
 PT:2/3
 K:Flying
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigReturn | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, return it to its owner's hand, then scry 2.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigReturn | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, return it to its owner's hand, then scry 2.
 SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBScry
 SVar:DBScry:DB$ Scry | ScryNum$ 2
-Oracle:Flying\nWhenever Hakka, Whispering Raven deals combat damage to a player, return it to its owner's hand, then scry 2.
+Oracle:Flying\nWhenever Hakka deals combat damage to a player, return it to its owner's hand, then scry 2.

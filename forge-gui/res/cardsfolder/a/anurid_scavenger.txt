@@ -3,8 +3,8 @@ ManaCost:2 G
 Types:Creature Frog Beast
 PT:3/3
 K:Protection from black
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you put a card from your graveyard on the bottom of your library.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice this creature unless you put a card from your graveyard on the bottom of your library.
 SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ PutCardToLibFromGrave<1/-1/Card>
 SVar:NeedsToPlayVar:Y GE3
 SVar:Y:Count$ValidGraveyard Card.YouOwn
-Oracle:Protection from black\nAt the beginning of your upkeep, sacrifice Anurid Scavenger unless you put a card from your graveyard on the bottom of your library.
+Oracle:Protection from black\nAt the beginning of your upkeep, sacrifice this creature unless you put a card from your graveyard on the bottom of your library.

@@ -2,6 +2,6 @@ Name:Argivian Welcome
 ManaCost:W U
 Types:Instant
 A:SP$ Destroy | ValidTgts$ Creature.powerGE4 | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature with power 4 or greater | SubAbility$ DBChoose | SpellDescription$ Destroy up to one target creature with power 4 or greater.
-SVar:DBChoose:DB$ ChooseCard | Mandatory$ True | ChoiceZone$ Hand | Choices$ Card.nonLand+YouOwn | ChoiceDesc$ nonland | ChoiceTitle$ Choose a nonland card in your hand | Amount$ 1 | SubAbility$ DBPump | SpellDescription$ ,,,,,,Choose a nonland card in your hand.
+SVar:DBChoose:DB$ ChooseCard | Mandatory$ True | ChoiceZone$ Hand | Choices$ Card.nonLand+YouOwn | ChoiceDesc$ nonland | ChoiceTitle$ Choose a nonland card in your hand | Amount$ 1 | SubAbility$ DBPump | SpellDescription$ Choose a nonland card in your hand.
 SVar:DBPump:DB$ Pump | Defined$ ChosenCard | KW$ Flash | Duration$ Perpetual | PumpZone$ Hand | StackDescription$ SpellDescription | SpellDescription$ It perpetually gains flash.
 Oracle:Destroy up to one target creature with power 4 or greater.\nChoose a nonland card in your hand. It perpetually gains flash.

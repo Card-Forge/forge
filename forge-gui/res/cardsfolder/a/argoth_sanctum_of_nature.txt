@@ -1,7 +1,7 @@
 Name:Argoth, Sanctum of Nature
 ManaCost:no cost
 Types:Land
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ CARDNAME enters tapped unless you control a legendary green creature.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ This land enters tapped unless you control a legendary green creature.
 SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Creature.Legendary+YouCtrl+Green | ConditionCompare$ EQ0
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 A:AB$ Token | Cost$ 2 G G T | TokenScript$ g_2_2_bear | SorcerySpeed$ True | SubAbility$ DBMill | SpellDescription$ Create a 2/2 green Bear creature token, then mill three cards. Activate only as a sorcery.
@@ -10,4 +10,4 @@ DeckHas:Ability$Token & Type$Bear
 DeckNeeds:Name$Titania, Voice of Gaea
 MeldPair:Titania, Voice of Gaea
 AlternateMode:Meld
-Oracle:Argoth, Sanctum of Nature enters tapped unless you control a legendary green creature.\n{T}: Add {G}.\n{2}{G}{G}, {T}:Create a 2/2 green Bear creature token, then mill three cards. Activate only as a sorcery.
+Oracle:This land enters tapped unless you control a legendary green creature.\n{T}: Add {G}.\n{2}{G}{G}, {T}: Create a 2/2 green Bear creature token, then mill three cards. Activate only as a sorcery.\n(Melds with Titania, Voice of Gaea.)
