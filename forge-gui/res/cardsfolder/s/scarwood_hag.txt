@@ -4,5 +4,5 @@ Types:Creature Hag
 PT:1/1
 A:AB$ Pump | Cost$ G G G G T | ValidTgts$ Creature | KW$ Landwalk:Forest | SpellDescription$ Target creature gains forestwalk until end of turn. (It can't be blocked as long as defending player controls a Forest.)
 A:AB$ Debuff | Cost$ T | ValidTgts$ Creature | Keywords$ Landwalk:Forest | SpellDescription$ Target creature loses forestwalk until end of turn.
-DeckHas:Keyword$Forestwalk
+DeckHas:Keyword$Landwalk:Forest
 Oracle:{G}{G}{G}{G}, {T}: Target creature gains forestwalk until end of turn. (It can't be blocked as long as defending player controls a Forest.)\n{T}: Target creature loses forestwalk until end of turn.

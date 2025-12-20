@@ -11,5 +11,5 @@ Name:Ice
 ManaCost:1 U
 Types:Instant
 A:SP$ Tap | ValidTgts$ Permanent | SubAbility$ DBDraw | SpellDescription$ Tap target permanent. Draw a card.
-SVar:DBDraw:DB$ Draw | NumCards$ 1
+SVar:DBDraw:DB$ Draw
 Oracle:Tap target permanent.\nDraw a card.

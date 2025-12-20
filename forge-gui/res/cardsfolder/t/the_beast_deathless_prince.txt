@@ -9,6 +9,6 @@ T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigGainControl | TriggerDes
 SVar:TrigGainControl:DB$ GainControl | ValidTgts$ Creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste & Menace
 T:Mode$ DamageDone | ValidSource$ Creature | TargetRelativeToSource$ Player.CardOwner | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever a creature deals combat damage to its owner, untap NICKNAME and draw a card.
 SVar:TrigUntap:DB$ Untap | Defined$ Self | SubAbility$ TrigDraw
-SVar:TrigDraw:DB$ Draw | NumCards$ 1
+SVar:TrigDraw:DB$ Draw
 AI:RemoveDeck:Random
 Oracle:When you cast this spell, gain control of target creature until end of turn. Untap it. It gains menace and haste until end of turn.\nThe Beast enters tapped with six stun counters on it. (If it would become untapped, remove a stun counter from it instead.)\nWhenever a creature deals combat damage to its owner, untap The Beast and draw a card.

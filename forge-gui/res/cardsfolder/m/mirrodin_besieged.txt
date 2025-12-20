@@ -8,7 +8,7 @@ SVar:Phyrexian:DB$ Pump | SpellDescription$ Phyrexian
 S:Mode$ Continuous | Affected$ Card.Self+ChosenModeMirran | AddTrigger$ MirranTrigger | Description$ • Mirran — Whenever you cast an artifact spell, create a 1/1 colorless Myr artifact creature token.
 S:Mode$ Continuous | Affected$ Card.Self+ChosenModePhyrexian | AddTrigger$ TrigEnd | LockInText$ True | Description$ • Phyrexian — At the beginning of your end step, draw a card, then discard a card. Then if there are fifteen or more artifact cards in your graveyard, target opponent loses the game.
 SVar:MirranTrigger:Mode$ SpellCast | ValidCard$ Artifact | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever you cast an artifact spell, create a 1/1 colorless Myr artifact creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_myr | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_a_myr | TokenOwner$ You
 SVar:TrigEnd:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ Filter | Secondary$ True | TriggerDescription$ At the beginning of your end step, draw a card, then discard a card. Then if there are fifteen or more artifact cards in your graveyard, target opponent loses the game.
 SVar:Filter:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | SubAbility$ DBLose

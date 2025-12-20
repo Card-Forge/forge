@@ -5,7 +5,7 @@ PT:6/6
 K:Trample
 S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Trample | Description$ Other creatures you control have trample.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 5/5 green Tyranid creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_5_5_tyranid | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenScript$ g_5_5_tyranid | TokenOwner$ You
 T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | IsPresent$ Card.StrictlySelf | TriggerZones$ Graveyard | PresentZone$ Graveyard | PresentPlayer$ You | Execute$ TrigReturn | TriggerDescription$ Fast Healing — At the beginning of your first main phase, you may discard two cards. If you do, return CARDNAME from your graveyard to your hand.
 SVar:TrigReturn:AB$ ChangeZone | Cost$ Discard<2/Card> | Defined$ Self | Origin$ Graveyard | Destination$ Hand
 SVar:PlayMain1:TRUE

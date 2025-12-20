@@ -223,11 +223,19 @@ public class CostExile extends CostPartWithList {
             list = CardLists.getValidCards(list, type.split(";"), payer, source, ability);
         }
 
-        int amount = this.getAbilityAmount(ability);
-
-        if (nTypes > -1) {
-            if (AbilityUtils.countCardTypesFromList(list, false) < nTypes) return false;
+        if (nTypes > -1 && AbilityUtils.countCardTypesFromList(list, false) < nTypes) {
+            return false;
         }
+
+        if (totalCMC || totalCMCgreater) {
+            if (totalM.equals("X") && ability.getXManaCostPaid() == null) { // X hasn't yet been decided, let it pass
+                return true;
+            }
+            int i = AbilityUtils.calculateAmount(source, totalM, ability);
+            return totalCMCgreater ? CardLists.getTotalCMC(list) >= i : CardLists.cmcCanSumTo(i, list);
+        }
+
+        int amount = this.getAbilityAmount(ability);
         
         if (sharedType) { // will need more logic if cost ever wants more than 2 that share a type
             if (list.size() < amount) return false;
@@ -240,14 +248,6 @@ public class CostExile extends CostPartWithList {
                 }
             }
             return false;
-        }
-
-        if (totalCMC || totalCMCgreater) {
-            if (totalM.equals("X") && ability.getXManaCostPaid() == null) { // X hasn't yet been decided, let it pass
-                return true;
-            }
-            int i = AbilityUtils.calculateAmount(source, totalM, ability);
-            return totalCMCgreater ? CardLists.getTotalCMC(list) >= i : CardLists.cmcCanSumTo(i, list);
         }
 
         // for Craft: do not count the source card twice (it will be sacrificed)

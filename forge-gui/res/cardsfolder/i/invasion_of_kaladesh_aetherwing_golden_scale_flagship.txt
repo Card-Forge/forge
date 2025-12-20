@@ -3,7 +3,7 @@ ManaCost:U R
 Types:Battle Siege
 Defense:4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 1/1 colorless Thopter artifact creature token with flying.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ c_1_1_a_thopter_flying
+SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenScript$ c_1_1_a_thopter_flying
 DeckHas:Ability$Token & Type$Thopter
 DeckHints:Type$Artifact
 AlternateMode:DoubleFaced

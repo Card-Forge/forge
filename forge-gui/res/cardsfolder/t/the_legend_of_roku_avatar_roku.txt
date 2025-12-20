@@ -19,5 +19,5 @@ ManaCost:no cost
 Types:Legendary Creature Avatar
 PT:4/4
 K:Firebending:4
-A:AB$ Token | Cost$ 8 | TokenAmount$ 1 | TokenScript$ r_4_4_dragon_flying_firebending_4 | TokenOwner$ You | SpellDescription$ Create a 4/4 red Dragon creature token with flying and firebending 4.
+A:AB$ Token | Cost$ 8 | TokenScript$ r_4_4_dragon_flying_firebending_4 | TokenOwner$ You | SpellDescription$ Create a 4/4 red Dragon creature token with flying and firebending 4.
 Oracle:Firebending 4 (Whenever this creature attacks, add {R}{R}{R}{R}. This mana lasts until end of combat.)\n{8}: Create a 4/4 red Dragon creature token with flying and firebending 4.

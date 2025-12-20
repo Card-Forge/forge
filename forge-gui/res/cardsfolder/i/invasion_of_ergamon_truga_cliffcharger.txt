@@ -3,7 +3,7 @@ ManaCost:R G
 Types:Battle Siege
 Defense:5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTreasure | TriggerDescription$ When CARDNAME enters, create a Treasure token. Then you may discard a card. If you do, draw a card.
-SVar:TrigTreasure:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SubAbility$ DBLoot
+SVar:TrigTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SubAbility$ DBLoot
 SVar:DBLoot:DB$ Draw | UnlessCost$ Discard<1/Card> | UnlessSwitched$ True | UnlessPayer$ You
 DeckHas:Ability$Discard|Token & Type$Treasure
 DeckHints:Type$Battle

@@ -11,5 +11,5 @@ SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Valid
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigTreasure | TriggerDescription$ When you cycle CARDNAME, create two Treasure tokens.
 SVar:TrigTreasure:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac
 SVar:OneEach:PlayerCountOpponents$Amount
-DeckHas:Ability$Token|Discard & Type$Artifact|Treasure
+DeckHas:Ability$Token|Discard
 Oracle:Trample, haste\nWhen The Balrog of Moria dies, you may exile it. When you do, for each opponent, exile up to one target creature that player controls.\nCycling {3}{R} ({3}{R}, Discard this card: Draw a card.)\nWhen you cycle The Balrog of Moria, create two Treasure tokens.

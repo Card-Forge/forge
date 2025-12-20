@@ -9,6 +9,6 @@ SVar:NonLegendary:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_spirit_flying 
 SVar:X:TriggeredAttacker$Valid Card.Legendary
 SVar:AE:SVar:HasAttackEffect:TRUE
 K:Equip:2
-DeckHas:Ability$Token & Type$Spirit
+DeckHas:Ability$Token
 DeckHints:Type$Legendary & Type$Creature
 Oracle:Equipped creature gets +3/+1.\nWhenever equipped creature attacks, create two tapped 1/1 white Spirit creature tokens with flying. If that creature is legendary, instead create two of those tokens that are tapped and attacking.\nEquip {2}

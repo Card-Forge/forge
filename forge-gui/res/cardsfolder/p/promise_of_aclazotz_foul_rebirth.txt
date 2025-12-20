@@ -13,6 +13,6 @@ Name:Foul Rebirth
 ManaCost:2 B
 Types:Sorcery Adventure
 A:SP$ Sacrifice | SacValid$ Creature.nonDemon | Defined$ You | RememberSacrificed$ True | SubAbility$ DBToken | SpellDescription$ Sacrifice a non-Demon creature. If you do, create a 4/3 white and black Vampire Demon creature token with flying.
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ wb_4_3_vampire_demon_flying | TokenOwner$ You | ConditionDefined$ RememberedLKI | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBToken:DB$ Token | TokenScript$ wb_4_3_vampire_demon_flying | TokenOwner$ You | ConditionDefined$ RememberedLKI | ConditionPresent$ Card | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Sacrifice a non-Demon creature. If you do, create a 4/3 white and black Vampire Demon creature token with flying.

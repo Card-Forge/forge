@@ -6,5 +6,5 @@ PT:6/6
 K:Flying
 K:Haste
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature dies, create fourteen Treasure tokens.
-SVar:TrigToken:DB$ Token | TokenAmount$ 14 | TokenScript$ c_a_treasure_sac
+SVar:TrigToken:DB$ Token4 | TokenScript$ c_a_treasure_sac
 Oracle:Flying, haste\nWhen this creature dies, create fourteen Treasure tokens.

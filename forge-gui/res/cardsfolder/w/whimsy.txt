@@ -37,7 +37,7 @@ SVar:DBCopyPermanent17:DB$ CopyPermanent | Defined$ ChosenCard | Controller$ Rem
 SVar:Discard:DB$ ChoosePlayer | Choices$ Player | Random$ True | SubAbility$ DBDiscard18 | SpellDescription$ A player chosen at random discards a card.
 SVar:DBDiscard18:DB$ Discard | Defined$ ChosenPlayer | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBCleanup
 SVar:Fog:DB$ Fog | SpellDescription$ Prevent all combat damage that would be dealt this turn.
-SVar:Sindbad:DB$ Draw | NumCards$ 1 | Reveal$ All | RememberDrawn$ True | SubAbility$ DBDiscard20 | SpellDescription$ Draw a card and reveal it. If it isn't a land card, discard it.
+SVar:Sindbad:DB$ Draw | Reveal$ All | RememberDrawn$ True | SubAbility$ DBDiscard20 | SpellDescription$ Draw a card and reveal it. If it isn't a land card, discard it.
 SVar:DBDiscard20:DB$ Discard | Mode$ Defined | Defined$ You | DefinedCards$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | Log$ True | ClearRemembered$ True | ClearChosenCard$ True | ClearChosenPlayer$ True
 SVar:X:Count$xPaid

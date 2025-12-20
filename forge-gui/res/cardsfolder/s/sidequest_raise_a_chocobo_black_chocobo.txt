@@ -2,7 +2,7 @@ Name:Sidequest: Raise a Chocobo
 ManaCost:1 G
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this enchantment enters, create a 2/2 green Bird creature token with "Whenever a land you control enters, this token gets +1/+0 until end of turn."
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_2_bird_landfall | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenScript$ g_2_2_bird_landfall | TokenOwner$ You
 T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Bird.YouCtrl | PresentCompare$ GE4 | Execute$ TrigTransform | TriggerDescription$ At the beginning of your first main phase, if you control four or more Birds, transform this enchantment.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced

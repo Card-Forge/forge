@@ -2,7 +2,7 @@ Name:A-Nahiri, Heir of the Ancients
 ManaCost:2 R W
 Types:Legendary Planeswalker Nahiri
 Loyalty:4
-A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ w_1_1_kor_warrior | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBChooseToken | SpellDescription$ Create a 1/1 white Kor Warrior creature token. You may attach an Equipment you control to it.
+A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenScript$ w_1_1_kor_warrior | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBChooseToken | SpellDescription$ Create a 1/1 white Kor Warrior creature token. You may attach an Equipment you control to it.
 SVar:DBChooseToken:DB$ ChooseCard | DefinedCards$ Remembered | Mandatory$ True | ChoiceTitle$ Choose a token | SubAbility$ DBAttach | StackDescription$ None
 SVar:DBAttach:DB$ Attach | Optional$ True | Choices$ Equipment.YouCtrl | ChoiceTitle$ Choose an Equipment you control | Defined$ ChosenCard | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True

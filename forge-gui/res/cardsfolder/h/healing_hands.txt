@@ -2,5 +2,5 @@ Name:Healing Hands
 ManaCost:2 W
 Types:Sorcery
 A:SP$ GainLife | LifeAmount$ 4 | ValidTgts$ Player | SubAbility$ DBDraw | SpellDescription$ Target player gains 4 life. Draw a card.
-SVar:DBDraw:DB$ Draw | NumCards$ 1
+SVar:DBDraw:DB$ Draw
 Oracle:Target player gains 4 life.\nDraw a card.

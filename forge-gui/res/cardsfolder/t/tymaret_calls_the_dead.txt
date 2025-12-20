@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Enchantment Saga
 K:Chapter:3:DBMill,DBMill,DBGainLife
 SVar:DBMill:DB$ Mill | Defined$ You | NumCards$ 3 | SubAbility$ DBToken | SpellDescription$ Mill three cards. Then you may exile a creature or enchantment card from your graveyard. If you do, create a 2/2 black Zombie creature token.
-SVar:DBToken:DB$ Token | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenAmount$ 1 | UnlessCost$ ExileFromGrave<1/Creature;Enchantment/creature or enchantment card> | UnlessSwitched$ True | UnlessPayer$ You
+SVar:DBToken:DB$ Token | TokenScript$ b_2_2_zombie | TokenOwner$ You | UnlessCost$ ExileFromGrave<1/Creature;Enchantment/creature or enchantment card> | UnlessSwitched$ True | UnlessPayer$ You
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | SubAbility$ DBScry | SpellDescription$ You gain X life and scry X, where X is the number of Zombies you control.
 SVar:DBScry:DB$ Scry | ScryNum$ X
 SVar:X:Count$Valid Zombie.YouCtrl

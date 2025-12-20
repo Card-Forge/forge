@@ -21,5 +21,5 @@ PT:3/4
 K:Vigilance
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks or blocks, create a 1/1 colorless Spirit creature token.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, create a 1/1 colorless Spirit creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_spirit
+SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_spirit
 Oracle:Vigilance\nWhenever Architect of Restoration attacks or blocks, create a 1/1 colorless Spirit creature token.

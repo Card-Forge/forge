@@ -6,5 +6,5 @@ S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ 
 SVar:X:Count$ValidHand Card.YouOwn
 SVar:NeedsToPlayVar:X GE3
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your draw step, draw an additional card.
-SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You
+SVar:TrigDraw:DB$ Draw | Defined$ You
 Oracle:Overbeing of Myth's power and toughness are each equal to the number of cards in your hand.\nAt the beginning of your draw step, draw an additional card.

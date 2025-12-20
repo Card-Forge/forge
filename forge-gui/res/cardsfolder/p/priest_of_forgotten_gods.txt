@@ -6,6 +6,6 @@ A:AB$ LoseLife | Cost$ T Sac<2/Creature.Other/other creature> | ValidTgts$ Playe
 SVar:MaxTgts:PlayerCountPlayers$Amount
 SVar:DBSac:DB$ Sacrifice | SacValid$ Creature | Defined$ Targeted | Amount$ 1 | SubAbility$ DBMana
 SVar:DBMana:DB$ Mana | Produced$ B | Amount$ 2 | AILogic$ Always | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ 1
+SVar:DBDraw:DB$ Draw
 SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE2
 Oracle:{T}, Sacrifice two other creatures: Any number of target players each lose 2 life and sacrifice a creature. You add {B}{B} and draw a card.

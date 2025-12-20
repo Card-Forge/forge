@@ -2,6 +2,6 @@ Name:Sorcerous Sight
 ManaCost:U
 Types:Sorcery
 A:SP$ RevealHand | ValidTgts$ Opponent | Look$ True | SubAbility$ DBDraw | SpellDescription$ Look at target opponent's hand.
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
 AI:RemoveDeck:Random
 Oracle:Look at target opponent's hand.\nDraw a card.

@@ -3,7 +3,7 @@ ManaCost:2 U U
 Types:Enchantment Aura
 K:Gift
 K:Enchant:Creature
-SVar:GiftAbility:DB$ Draw | NumCards$ 1 | Defined$ Promised | GiftDescription$ a card
+SVar:GiftAbility:DB$ Draw | Defined$ Promised | GiftDescription$ a card
 SVar:AttachAILogic:GainControl
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters, tap enchanted creature. If the gift wasn't promised, put three stun counters on it.

@@ -4,7 +4,7 @@ Types:Legendary Creature Giant Scout
 PT:6/5
 K:Reach
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create Beau, a legendary blue Ox creature token with "This creature's power and toughness are each equal to the number of lands you control."
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ beau | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenScript$ beau | TokenOwner$ You
 T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, draw a card, then you may put a land card from your hand or graveyard onto the battlefield.
 SVar:TrigDraw:DB$ Draw | SubAbility$ DBPut
 SVar:DBPut:DB$ ChangeZone | ChangeType$ Land.YouOwn | ChangeNum$ 1 | Origin$ Hand,Graveyard | Hidden$ True | Destination$ Battlefield

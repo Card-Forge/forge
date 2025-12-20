@@ -3,8 +3,8 @@ ManaCost:2 B
 Types:Instant
 K:Devoid
 A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Opponent | DefinedPlayer$ Targeted | Mandatory$ True | ChangeType$ Card | ChangeNum$ 1 | Hidden$ True | IsCurse$ True | Chooser$ Targeted | SubAbility$ DBToken | SpellDescription$ Target opponent exiles a card from their graveyard.
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_eldrazi_scion_sac | TokenOwner$ You | SubAbility$ DBDraw | SpellDescription$ You create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:DBToken:DB$ Token | TokenScript$ c_1_1_eldrazi_scion_sac | TokenOwner$ You | SubAbility$ DBDraw | SpellDescription$ You create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
 DeckHints:Type$Eldrazi & Keyword$Ingest
 DeckHas:Ability$Mana.Colorless|Token
 Oracle:Devoid (This card has no color.)\nTarget opponent exiles a card from their graveyard. You create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."\nDraw a card.

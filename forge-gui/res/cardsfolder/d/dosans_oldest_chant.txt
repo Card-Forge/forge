@@ -2,5 +2,5 @@ Name:Dosan's Oldest Chant
 ManaCost:4 G
 Types:Sorcery
 A:SP$ GainLife | LifeAmount$ 6 | SpellDescription$ You gain 6 life. | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
 Oracle:You gain 6 life.\nDraw a card.

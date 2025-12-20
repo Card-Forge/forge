@@ -5,7 +5,7 @@ S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddAbility$ FishingPoleBait
 SVar:FishingPoleBaiting:AB$ PutCounter | Cost$ 1 T tapXType<1/OriginalHost/Fishing Pole> | CounterType$ BAIT | CounterNum$ 1 | Defined$ OriginalHost | SpellDescription$ Put a bait counter on ORIGINALHOST.
 T:Mode$ Untaps | ValidCard$ Creature.EquippedBy | TriggerZones$ Battlefield | Execute$ TrigRemoveCounter | TriggerDescription$ Whenever equipped creature becomes untapped, remove a bait counter from this Equipment. If you do, create a 1/1 blue Fish creature token.
 SVar:TrigRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ BAIT | CounterNum$ 1 | RememberRemoved$ True | SubAbility$ DBToken
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | TokenScript$ u_1_1_fish | TokenOwner$ You | SubAbility$ DBCleanup
+SVar:DBToken:DB$ Token | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | TokenScript$ u_1_1_fish | TokenOwner$ You | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedSize
 K:Equip:2

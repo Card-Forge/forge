@@ -5,7 +5,7 @@ S:Mode$ Continuous | Affected$ Artifact.YouCtrl | Condition$ PlayerTurn | AddTyp
 SVar:FoodSac:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME/this artifact> | Defined$ You | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
 K:Class:2:2 G:AddTrigger$ TriggerRaccoon
 SVar:TriggerRaccoon:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | FirstTime$ True | Execute$ TrigToken | TriggerDescription$ Whenever you gain life for the first time each turn, create a 3/3 green Raccoon creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_raccoon | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenScript$ g_3_3_raccoon | TokenOwner$ You
 K:Class:3:3 G:AddTrigger$ TriggerCounters
 SVar:TriggerCounters:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | FirstTime$ True | Execute$ TrigPutCounters | TriggerDescription$ Whenever you gain life for the first time each turn, put a +1/+1 counter on each creature you control.
 SVar:TrigPutCounters:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1

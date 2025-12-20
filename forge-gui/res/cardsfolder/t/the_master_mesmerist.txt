@@ -6,7 +6,7 @@ A:AB$ Pump | Cost$ T | ValidTgts$ Creature.OppCtrl+powerLEX | TgtPrompt$ Select 
 SVar:DBGoad:DB$ Goad | Defined$ Targeted
 T:Mode$ DamageDone | ValidSource$ Creature.withSkulk | ValidTarget$ Opponent | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature with skulk deals combat damage to one of your opponents, put a +1/+1 counter on NICKNAME and draw a card.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ TrigDraw
-SVar:TrigDraw:DB$ Draw | NumCards$ 1
+SVar:TrigDraw:DB$ Draw
 SVar:X:Count$CardPower
 DeckHas:Ability$Counters
 DeckHints:Keyword$Skulk

@@ -2,5 +2,5 @@ Name:Cloak of Feathers
 ManaCost:U
 Types:Sorcery
 A:SP$ Pump | ValidTgts$ Creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn. | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
 Oracle:Target creature gains flying until end of turn.\nDraw a card.

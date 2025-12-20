@@ -5,5 +5,5 @@ PT:3/4
 K:Mutate:3 U
 K:Flying
 T:Mode$ Mutates | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever this creature mutates, draw a card.
-SVar:TrigDraw:DB$ Draw | NumCards$ 1
+SVar:TrigDraw:DB$ Draw
 Oracle:Mutate {3}{U} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\nFlying\nWhenever this creature mutates, draw a card.

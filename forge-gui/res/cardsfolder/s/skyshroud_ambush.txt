@@ -5,6 +5,6 @@ A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control | SubAbility$ DBEffect | StackDescription$ fights target creature you don't control [{c:ThisTargetedCard}]. When the creature you control wins the fight, draw a card.
 SVar:DBEffect:DB$ Effect | Triggers$ TrigWin | RememberObjects$ ParentTarget | ImprintCards$ Imprinted | Duration$ UntilStateBasedActionChecked | SubAbility$ DBCleanup
 SVar:TrigWin:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.IsRemembered | IsPresent$ Creature.IsImprinted | NoResolvingCheck$ True | Execute$ TrigDraw | TriggerDescription$ When the creature you control wins the fight, draw a card.
-SVar:TrigDraw:DB$ Draw | NumCards$ 1
+SVar:TrigDraw:DB$ Draw
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 Oracle:Target creature you control fights target creature you don't control. When the creature you control wins the fight, draw a card.

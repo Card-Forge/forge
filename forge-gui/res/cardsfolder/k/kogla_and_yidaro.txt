@@ -8,7 +8,7 @@ SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Trample & Haste | SpellDescription$ I
 SVar:DBFight:DB$ Fight | Defined$ TriggeredCardLKICopy | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control | SpellDescription$ CARDNAME fights target creature you don't control.
 A:AB$ Destroy | Cost$ 2 R G Discard<1/CARDNAME> | ValidTgts$ Artifact,Enchantment | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target artifact or enchantment | ActivationZone$ Hand | SubAbility$ DBChangeZone | SpellDescription$ Destroy up to one target artifact or enchantment. Shuffle CARDNAME into your library from your graveyard, then draw a card.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | Shuffle$ True | Defined$ DiscardedCards | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ 1
+SVar:DBDraw:DB$ Draw
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Discard
 Oracle:When Kogla and Yidaro enters, choose one —\n• It gains trample and haste until end of turn.\n• It fights target creature you don't control.\n{2}{R}{G}, Discard Kogla and Yidaro: Destroy up to one target artifact or enchantment. Shuffle Kogla and Yidaro into your library from your graveyard, then draw a card.

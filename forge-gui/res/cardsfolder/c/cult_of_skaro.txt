@@ -6,7 +6,7 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerZones$ Batt
 SVar:TrigCharm:DB$ Charm | Choices$ DBPutCounterAll,DBDraw,DBToken,DBLoseLife | Random$ True
 SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.Artifact+YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Thay — Put a +1/+1 counter on each artifact creature you control.
 SVar:DBDraw:DB$ Draw | NumCards$ 2 | SpellDescription$ Caan — Draw two cards.
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_3_3_a_dalek_menace | SpellDescription$ Sec — Create a 3/3 black Dalek artifact creature token with menace.
+SVar:DBToken:DB$ Token | TokenScript$ b_3_3_a_dalek_menace | SpellDescription$ Sec — Create a 3/3 black Dalek artifact creature token with menace.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 4 | Defined$ Opponent | SpellDescription$ Jast — Each opponent loses 4 life.
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Token|Counters & Type$Dalek|Artifact

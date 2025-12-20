@@ -2,7 +2,7 @@ Name:Genesis Chamber
 ManaCost:2
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.!token | TriggerZones$ Battlefield | Execute$ TrigToken | PresentDefined$ Self | IsPresent$ Card.untapped | TriggerDescription$ Whenever a nontoken creature enters, if CARDNAME is untapped, that creature's controller creates a 1/1 colorless Myr artifact creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ TriggeredCardController | TokenScript$ c_1_1_a_myr
+SVar:TrigToken:DB$ Token | TokenOwner$ TriggeredCardController | TokenScript$ c_1_1_a_myr
 AI:RemoveDeck:Random
 DeckHas:Ability$Token
 Oracle:Whenever a nontoken creature enters, if Genesis Chamber is untapped, that creature's controller creates a 1/1 colorless Myr artifact creature token.

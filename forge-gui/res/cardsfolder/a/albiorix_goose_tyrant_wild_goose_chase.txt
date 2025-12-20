@@ -19,5 +19,5 @@ ManaCost:U G
 Types:Instant Adventure
 A:SP$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ TrigDiscard | SpellDescription$ Draw two cards, then discard two cards.
 SVar:TrigDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ DBToken
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You | SpellDescription$ Create a Food token.
+SVar:DBToken:DB$ Token | TokenScript$ c_a_food_sac | TokenOwner$ You | SpellDescription$ Create a Food token.
 Oracle:Draw two cards, then discard two cards. Create a Food token.

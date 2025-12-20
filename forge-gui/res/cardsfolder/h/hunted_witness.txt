@@ -3,7 +3,7 @@ ManaCost:W
 Types:Creature Human
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 1/1 white Soldier creature token with lifelink.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_soldier_lifelink
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_soldier_lifelink
 SVar:SacMe:1
 DeckHas:Ability$Token|LifeGain
 Oracle:When Hunted Witness dies, create a 1/1 white Soldier creature token with lifelink.

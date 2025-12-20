@@ -8,7 +8,7 @@ SVar:TrigChangeHandExile:DB$ ChangeZoneAll | Origin$ Hand | Destination$ Exile |
 SVar:ChangeBack:DB$ ChangeZoneAll | ChangeType$ Card.YouOwn+ExiledWithSource+IsNotRemembered | Origin$ Exile | Destination$ Hand | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ At the beginning of your end step, discard a card.
-SVar:TrigDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose
+SVar:TrigDiscard:DB$ Discard | Mode$ TgtChoose
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ GoToYard | TriggerDescription$ When you lose control of CARDNAME, put all cards exiled with CARDNAME into their owner's graveyard.
 T:Mode$ ChangesController | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ GoToYard | Secondary$ True | TriggerDescription$ When you lose control of CARDNAME, put all cards exiled with CARDNAME into their owner's graveyard.
 SVar:GoToYard:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Graveyard | ChangeType$ Card.ExiledWithSource
