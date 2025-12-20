@@ -2,5 +2,5 @@ Name:Pongify
 ManaCost:U
 Types:Instant
 A:SP$ Destroy | ValidTgts$ Creature | AILogic$ Pongify | SubAbility$ DBToken | NoRegen$ True | SpellDescription$ Destroy target creature. It can't be regenerated. Its controller creates a 3/3 green Ape creature token.
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_ape | TokenOwner$ TargetedController
+SVar:DBToken:DB$ Token | TokenScript$ g_3_3_ape | TokenOwner$ TargetedController
 Oracle:Destroy target creature. It can't be regenerated. Its controller creates a 3/3 green Ape creature token.

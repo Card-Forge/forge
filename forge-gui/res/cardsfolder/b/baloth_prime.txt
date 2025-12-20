@@ -6,7 +6,7 @@ R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ 
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True | SubAbility$ DBAddCounter
 SVar:DBAddCounter:DB$ PutCounter | Defined$ Self | ETB$ True | CounterType$ STUN | CounterNum$ 6
 T:Mode$ Sacrificed | ValidCard$ Land | Execute$ TrigToken | TriggerZones$ Battlefield | ValidPlayer$ You | TriggerDescription$ Whenever you sacrifice a land, create a tapped 4/4 green Beast creature token and untap this creature.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_4_4_beast | TokenTapped$ True | SubAbility$ DBUntap | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenScript$ g_4_4_beast | TokenTapped$ True | SubAbility$ DBUntap | TokenOwner$ You
 SVar:DBUntap:DB$ Untap
 A:AB$ GainLife | Cost$ 4 Sac<1/Land> | Defined$ You | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
 DeckHas:Ability$Counters|Token|LifeGain

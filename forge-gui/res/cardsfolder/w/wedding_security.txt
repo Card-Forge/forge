@@ -4,7 +4,7 @@ Types:Creature Vampire Soldier
 PT:4/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounter | IsPresent$ Blood.token+YouCtrl | TriggerDescription$ Whenever CARDNAME attacks, you may sacrifice a Blood token. If you do, put a +1/+1 counter on CARDNAME and draw a card.
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ Sac<1/Blood.token/Blood token> | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ 1
+SVar:DBDraw:DB$ Draw
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Counters|Sacrifice
 DeckNeeds:Type$Blood

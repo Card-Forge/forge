@@ -2,5 +2,5 @@ Name:Symbol of Unsummoning
 ManaCost:2 U
 Types:Sorcery
 A:SP$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand. | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
 Oracle:Return target creature to its owner's hand.\nDraw a card.

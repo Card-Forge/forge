@@ -15,6 +15,6 @@ ALTERNATE
 Name:Dread Whispers
 ManaCost:1 B
 Types:Sorcery Adventure
-A:SP$ Draw | NumCards$ 1 | SubAbility$ DBSLoseLife | SpellDescription$ You draw a card and you lose 1 life. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ Draw | SubAbility$ DBSLoseLife | SpellDescription$ You draw a card and you lose 1 life. (Then exile this card. You may cast the creature later from exile.)
 SVar:DBSLoseLife:DB$ LoseLife | LifeAmount$ 1
 Oracle:You draw a card and you lose 1 life. (Then exile this card. You may cast the creature later from exile.)
