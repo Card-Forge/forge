@@ -169,7 +169,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
                 source = CardCopyService.getLKICopy(source);
             }
 
-            source.animateBestow(false);
+            source.animateBestow();
             lkicheck = true;
         } else if (isCastFaceDown()) {
             // need a copy of the card to turn facedown without trigger anything
