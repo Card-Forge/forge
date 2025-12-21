@@ -104,12 +104,12 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             card = ObjectUtils.firstNonNull(getAlternateHost(card), card);
 
             if (!this.getRestrictions().canPlay(card, this)) {
-                return false;
+                return null;
             }
 
             if (!activator.getController().isFullControl(FullControlFlag.AllowPaymentStartWithMissingResources) &&
                     !CostPayment.canPayAdditionalCosts(this.getPayCosts(), this, false)) {
-                return false;
+                return null;
             }
         } finally {
             undoAlternateHost(card);
