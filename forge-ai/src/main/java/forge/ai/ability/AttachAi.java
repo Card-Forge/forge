@@ -1052,7 +1052,7 @@ public class AttachAi extends SpellAbilityAi {
         Card card = null;
         List<Card> magnetList = null;
         String stCheck = null;
-        if (attachSource.isAura() || sa.isBestow()) {
+        if (attachSource.isAura()) {
             stCheck = "EnchantedBy";
             magnetList = CardLists.filter(list, c -> {
                 if (!c.isCreature()) {

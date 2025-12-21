@@ -2,7 +2,7 @@ Name:Rush of Inspiration
 ManaCost:1 UR UR
 Types:Instant
 A:SP$ Draw | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards.
-SVar:DBDiscard:DB$ Discard | NumCards$ 1 | Mode$ Random | UnlessCost$ PayEnergy<2> | UnlessPayer$ You | SpellDescription$ Then discard a card at random unless you pay {E}{E} (two energy counters).
+SVar:DBDiscard:DB$ Discard | Mode$ Random | UnlessCost$ PayEnergy<2> | UnlessPayer$ You | SpellDescription$ Then discard a card at random unless you pay {E}{E} (two energy counters).
 AlternateMode:Modal
 Oracle:Draw two cards. Then discard a card at random unless you pay {E}{E} (two energy counters).
 

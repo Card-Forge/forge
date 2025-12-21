@@ -66,27 +66,31 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
     /** {@inheritDoc} */
     @Override
     public boolean canPlay() {
+        return canPlayFromHost() != null;
+    }
+
+    public Card canPlayFromHost() {
         Card card = this.getHostCard();
         if (card.isInPlay()) {
-            return false;
+            return null;
         }
 
         // CR 118.6 cost is unpayable
         if (!isCastFromPlayEffect() && getPayCosts().hasManaCost() && getPayCosts().getCostMana().getMana().isNoCost()) {
-            return false;
+            return null;
         }
 
         Player activator = this.getActivatingPlayer();
         if (activator == null) {
             activator = card.getController();
             if (activator == null) {
-            	return false;
+            	return null;
             }
         }
 
         final Game game = activator.getGame();
         if (game.getStack().isSplitSecondOnStack()) {
-            return false;
+            return null;
         }
 
         // do performanceMode only for cases where the activator is different than controller
@@ -111,7 +115,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             undoAlternateHost(card);
         }
 
-        return true;
+        return card;
     }
 
     /** {@inheritDoc} */

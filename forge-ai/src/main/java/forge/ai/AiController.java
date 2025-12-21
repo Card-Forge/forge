@@ -834,28 +834,35 @@ public class AiController {
     }
 
     private AiPlayDecision canPlayAndPayFor(final SpellAbility sa) {
-        if (!sa.canPlay()) {
+        final Card host = sa.getHostCard();
+        Card altHost = host;
+
+        if (sa instanceof Spell sp) {
+            altHost = sp.canPlayFromHost();
+            if (altHost == null) {
+                return AiPlayDecision.CantPlaySa;
+            }
+            if (sa.isBestow()) {
+                altHost.updateKeywords();
+            }
+            altHost.setCastSA(sa);
+        } else if (!sa.canPlay()) {
             return AiPlayDecision.CantPlaySa;
         }
 
-        final Card host = sa.getHostCard();
-
         // state needs to be switched here so API checks evaluate the right face
-        CardStateName currentState = sa.getCardState() != null && host.getCurrentStateName() != sa.getCardStateName() && !host.isInPlay() ? host.getCurrentStateName() : null;
-        if (currentState != null) {
-            host.setState(sa.getCardStateName(), false);
-        }
-        if (sa.isSpell()) {
-            host.setCastSA(sa);
+        if (host != altHost) {
+            sa.setHostCard(altHost);
         }
 
         AiPlayDecision decision = canPlayAndPayForFace(sa);
 
-        if (sa.isSpell()) {
-            host.setCastSA(null);
+        if (host != altHost) {
+            sa.setHostCard(host);
         }
-        if (currentState != null) {
-            host.setState(currentState, false);
+
+        if (sa.isSpell()) {
+            altHost.setCastSA(null);
         }
 
         return decision;
@@ -907,10 +914,9 @@ public class AiController {
         final Card card = sa.getHostCard();
 
         // Trying to play a card that has Buyback without a Buyback cost, look for possible additional considerations
-        if (getBoolProperty(AiProps.TRY_TO_PRESERVE_BUYBACK_SPELLS)) {
-            if (card.hasKeyword(Keyword.BUYBACK) && !sa.isBuyback() && !canPlaySpellWithoutBuyback(card, sa)) {
-                return AiPlayDecision.NeedsToPlayCriteriaNotMet;
-            }
+        if (getBoolProperty(AiProps.TRY_TO_PRESERVE_BUYBACK_SPELLS) && card.hasKeyword(Keyword.BUYBACK)
+                && !sa.isBuyback() && !canPlaySpellWithoutBuyback(card, sa)) {
+            return AiPlayDecision.NeedsToPlayCriteriaNotMet;
         }
 
         // TODO before suspending some spells try to predict if relevant targets can be expected

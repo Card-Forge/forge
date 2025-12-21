@@ -407,7 +407,7 @@ public final class GameActionUtil {
         final Game game = source.getGame();
         boolean lkicheck = false;
 
-        Card newHost = ((Spell)sa).getAlternateHost(source);
+        Card newHost = sa.getAlternateHost(source);
         if (newHost != null) {
             source = newHost;
             lkicheck = true;
