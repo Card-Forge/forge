@@ -988,14 +988,7 @@ public final class GameActionUtil {
             }
             //for Chorus of the Conclave
             ability.rollback();
-
-            oldCard.setBackSide(false);
-            oldCard.setState(oldCard.getFaceupCardStateName(), true);
-            oldCard.unanimateBestow();
-
-            if (ability.hasParam("Prototype")) {
-                oldCard.removeCloneState(oldCard.getPrototypeTimestamp());
-            }
+            ability.undoAlternateHost(oldCard);
 
             for (Card c : ability.getTappedForConvoke()) {
                 c.setTapped(false);

@@ -174,6 +174,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             }
 
             source.animateBestow();
+            source.updateKeywords();
             lkicheck = true;
         } else if (isCastFaceDown()) {
             // need a copy of the card to turn facedown without trigger anything
@@ -214,8 +215,17 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
     }
 
     public void undoAlternateHost(Card source) {
+        if (source == null) {
+            return;
+        }
+        source.setBackSide(false);
+        source.setState(source.getFaceupCardStateName(), true);
+
         if (isBestow()) {
             source.unanimateBestow();
+            source.updateKeywords();
+        } else if (hasParam("Prototype")) {
+            source.removeCloneState(source.getPrototypeTimestamp());
         }
     }
 
