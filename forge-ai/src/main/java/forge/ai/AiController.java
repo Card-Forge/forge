@@ -842,9 +842,6 @@ public class AiController {
             if (altHost == null) {
                 return AiPlayDecision.CantPlaySa;
             }
-            if (sa.isBestow()) {
-                altHost.updateKeywords();
-            }
             altHost.setCastSA(sa);
         } else if (!sa.canPlay()) {
             return AiPlayDecision.CantPlaySa;
