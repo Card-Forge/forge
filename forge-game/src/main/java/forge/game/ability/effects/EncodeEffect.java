@@ -64,7 +64,7 @@ public class EncodeEffect extends SpellAbilityEffect {
         }
 
         StringBuilder codeLog = new StringBuilder();
-        codeLog.append("Encoding ").append(host.toString()).append(" to ").append(choice.toString());
+        codeLog.append("Encoding ").append(host).append(" to ").append(choice);
         game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, codeLog.toString());
 
         // store hostcard in encoded array

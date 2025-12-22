@@ -3305,8 +3305,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public void createTheRing(String set) {
-        final PlayerZone com = getZone(ZoneType.Command);
         if (theRing == null) {
+            final PlayerZone com = getZone(ZoneType.Command);
             theRing = new Card(game.nextCardId(), null, game);
             theRing.setOwner(this);
             theRing.setGamePieceType(GamePieceType.EFFECT);
