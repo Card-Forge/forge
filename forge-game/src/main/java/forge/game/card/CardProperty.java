@@ -1466,7 +1466,7 @@ public class CardProperty {
             }
         } else if (property.startsWith("ManaCost")) {
             String cost = card.getManaCost().getShortString();
-            if (property.contains("Partial") ? !cost.contains(property.substring(15)) : !cost.equals(property.substring(8))) {
+            if (property.contains("Partial") ? !cost.contains(MagicColor.toShortString(property.substring(15))) : !cost.equals(property.substring(8))) {
                 return false;
             }
         } else if (property.equals("HasCounters")) {

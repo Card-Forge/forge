@@ -18,6 +18,7 @@
 package forge.game.card;
 
 import com.google.common.collect.Lists;
+import forge.card.mana.ManaCostShard;
 import forge.game.CardTraitBase;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
@@ -440,6 +441,17 @@ public class CardLists {
             }
         }
         return total;
+    }
+
+    public static int getTotalChroma(Iterable<Card> cardList, byte colorCode) {
+        int colorOcurrencices = 0;
+        for (Card c0 : cardList) {
+            for (ManaCostShard sh : c0.getManaCost()) {
+                if (sh.isColor(colorCode))
+                    colorOcurrencices++;
+            }
+        }
+        return colorOcurrencices;
     }
 
     /**

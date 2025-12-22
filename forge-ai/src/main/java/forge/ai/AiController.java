@@ -834,28 +834,32 @@ public class AiController {
     }
 
     private AiPlayDecision canPlayAndPayFor(final SpellAbility sa) {
-        if (!sa.canPlay()) {
+        final Card host = sa.getHostCard();
+        Card altHost = host;
+
+        if (sa instanceof Spell sp) {
+            altHost = sp.canPlayFromHost();
+            if (altHost == null) {
+                return AiPlayDecision.CantPlaySa;
+            }
+            altHost.setCastSA(sa);
+        } else if (!sa.canPlay()) {
             return AiPlayDecision.CantPlaySa;
         }
 
-        final Card host = sa.getHostCard();
-
         // state needs to be switched here so API checks evaluate the right face
-        CardStateName currentState = sa.getCardState() != null && host.getCurrentStateName() != sa.getCardStateName() && !host.isInPlay() ? host.getCurrentStateName() : null;
-        if (currentState != null) {
-            host.setState(sa.getCardStateName(), false);
-        }
-        if (sa.isSpell()) {
-            host.setCastSA(sa);
+        if (host != altHost) {
+            sa.setHostCard(altHost);
         }
 
         AiPlayDecision decision = canPlayAndPayForFace(sa);
 
-        if (sa.isSpell()) {
-            host.setCastSA(null);
+        if (host != altHost) {
+            sa.setHostCard(host);
         }
-        if (currentState != null) {
-            host.setState(currentState, false);
+
+        if (sa.isSpell()) {
+            altHost.setCastSA(null);
         }
 
         return decision;

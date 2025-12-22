@@ -18,7 +18,10 @@
 package forge.card;
 
 import com.google.common.collect.*;
+
+import forge.util.ITranslatable;
 import forge.util.IterableUtil;
+import forge.util.Localizer;
 import forge.util.Settable;
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.NotImplementedException;
@@ -40,25 +43,26 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
     public static final CardTypeView EMPTY = new CardType(false);
 
-    public enum CoreType {
-        Kindred(false, "kindreds"), // always printed first
-        Artifact(true, "artifacts"),
-        Battle(true, "battles"),
-        Conspiracy(false, "conspiracies"),
-        Enchantment(true, "enchantments"),
-        Creature(true, "creatures"),
-        Dungeon(false, "dungeons"),
-        Instant(false, "instants"),
-        Land(true, "lands"),
-        Phenomenon(false, "phenomenons"),
-        Plane(false, "planes"),
-        Planeswalker(true, "planeswalkers"),
-        Scheme(false, "schemes"),
-        Sorcery(false, "sorceries"),
-        Vanguard(false, "vanguards");
+    public enum CoreType implements ITranslatable {
+        Kindred(false, "kindreds", "lblKindred"), // always printed first
+        Artifact(true, "artifacts", "lblArtifact"),
+        Battle(true, "battles", "lblBattle"),
+        Conspiracy(false, "conspiracies", "lblConspiracy"),
+        Enchantment(true, "enchantments", "lblEnchantment"),
+        Creature(true, "creatures", "lblCreature"),
+        Dungeon(false, "dungeons", "lblDungeon"),
+        Instant(false, "instants", "lblInstant"),
+        Land(true, "lands", "lblLand"),
+        Phenomenon(false, "phenomenons", "lblPhenomenon"),
+        Plane(false, "planes", "lblPlane"),
+        Planeswalker(true, "planeswalkers", "lblPlaneswalker"),
+        Scheme(false, "schemes", "lblScheme"),
+        Sorcery(false, "sorceries", "lblSorcery"),
+        Vanguard(false, "vanguards", "lblVanguard");
 
         public final boolean isPermanent;
         public final String pluralName;
+        public final String label;
         private static Map<String, CoreType> stringToCoreType = EnumUtils.getEnumMap(CoreType.class);
         private static final Set<String> allCoreTypeNames = stringToCoreType.keySet();
         public static final Set<CoreType> spellTypes = ImmutableSet.of(Instant, Sorcery);
@@ -71,9 +75,10 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
             return stringToCoreType.containsKey(name);
         }
 
-        CoreType(final boolean permanent, final String plural) {
+        CoreType(final boolean permanent, final String plural, final String label) {
             isPermanent = permanent;
             pluralName = plural;
+            this.label = label;
         }
 
         /**
@@ -83,34 +88,38 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
          * @return a GamePieceType appropriate for this core type.
          */
         public GamePieceType toGamePieceType() {
-            switch(this) {
-                case Plane:
-                case Phenomenon:
-                    return GamePieceType.PLANAR;
-                case Scheme:
-                    return GamePieceType.SCHEME;
-                case Dungeon:
-                    return GamePieceType.DUNGEON;
-                case Vanguard:
-                    return GamePieceType.AVATAR;
-                //Sticker sheets will probably eventually go here.
-                default:
-                    return GamePieceType.CARD;
-            }
+            return switch (this) {
+            case Plane, Phenomenon -> GamePieceType.PLANAR;
+            case Scheme -> GamePieceType.SCHEME;
+            case Dungeon -> GamePieceType.DUNGEON;
+            case Vanguard -> GamePieceType.AVATAR;
+            default -> GamePieceType.CARD;
+            };
+        }
+
+        @Override
+        public String getName() {
+            return this.name();
+        }
+
+        @Override
+        public String getTranslatedName() {
+            return Localizer.getInstance().getMessage(label);
         }
     }
 
-    public enum Supertype {
-        Basic,
-        Elite,
-        Host,
-        Legendary,
-        Snow,
-        Ongoing,
-        World;
+    public enum Supertype implements ITranslatable {
+        Basic("lblBasic"),
+        Elite("lblElite"),
+        Host("lblHost"),
+        Legendary("lblLegendary"),
+        Snow("lblSnow"),
+        Ongoing("lblOngoing"),
+        World("lblWorld");
+
+        public final String label;
 
         private static Map<String, Supertype> stringToSupertype = EnumUtils.getEnumMap(Supertype.class);
-        private static final Set<String> allSuperTypeNames = stringToSupertype.keySet();
 
         public static Supertype getEnum(String name) {
             return stringToSupertype.get(name);
@@ -120,6 +129,20 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
             return stringToSupertype.containsKey(name);
         }
 
+        Supertype(final String label) {
+            this.label = label;
+        }
+
+
+        @Override
+        public String getName() {
+            return this.name();
+        }
+
+        @Override
+        public String getTranslatedName() {
+            return Localizer.getInstance().getMessage(label);
+        }
     }
 
     private final Set<CoreType> coreTypes = EnumSet.noneOf(CoreType.class);
@@ -938,16 +961,6 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
     public static Set<String> getAllCardTypes() {
         return CoreType.allCoreTypeNames;
-    }
-
-    private static List<String> combinedSuperAndCoreTypes;
-    public static List<String> getCombinedSuperAndCoreTypes() {
-        if (combinedSuperAndCoreTypes == null) {
-            combinedSuperAndCoreTypes = Lists.newArrayList();
-            combinedSuperAndCoreTypes.addAll(Supertype.allSuperTypeNames);
-            combinedSuperAndCoreTypes.addAll(CoreType.allCoreTypeNames);
-        }
-        return combinedSuperAndCoreTypes;
     }
 
     private static List<String> sortedSubTypes;
