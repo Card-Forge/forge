@@ -2,5 +2,5 @@ Name:Echo Circlet
 ManaCost:2
 Types:Artifact Equipment
 K:Equip:1
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | CanBlockAmount$ 1 | Description$ Equipped creature can block an additional creature each combat.
+S:Mode$ CanBlockAmount | ValidCard$ Creature.EquippedBy | Amount$ 1 | Description$ Equipped creature can block an additional creature each combat.
 Oracle:Equipped creature can block an additional creature each combat.\nEquip {1}

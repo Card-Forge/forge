@@ -3,7 +3,6 @@ package forge.ai.ability;
 import forge.ai.*;
 import forge.card.MagicColor;
 import forge.game.Game;
-import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -29,48 +28,6 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             }
         }
         return false;
-    }
-
-    public boolean grantsUsefulExtraBlockOpts(final Player ai, final SpellAbility sa, final Card card, List<String> keywords) {
-        PhaseHandler ph = ai.getGame().getPhaseHandler();
-        Card pumped = ComputerUtilCard.getPumpedCreature(ai, sa, card, 0, 0, keywords);
-
-        if (ph.isPlayerTurn(ai) || !ph.getPhase().equals(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-            return false;
-        }
-
-        int canBlockNum = 1 + card.canBlockAdditional();
-        int canBlockNumPumped = canBlockNum; // PumpedCreature doesn't return a meaningful value of canBlockAdditional, so we'll use sa params below
-
-        if (sa.hasParam("CanBlockAny")) {
-            canBlockNumPumped = Integer.MAX_VALUE;
-        } else if (sa.hasParam("CanBlockAmount")) {
-            canBlockNumPumped += AbilityUtils.calculateAmount(pumped, sa.getParam("CanBlockAmount"), sa);
-        }
-
-        int possibleBlockNum = 0;
-        int possibleBlockNumPumped = 0;
-
-        for (Card attacker : ai.getGame().getCombat().getAttackers()) {
-            if (CombatUtil.canBlock(attacker, card)) {
-                possibleBlockNum++;
-                if (possibleBlockNum > canBlockNum) {
-                    possibleBlockNum = canBlockNum;
-                    break;
-                }
-            }
-        }
-        for (Card attacker : ai.getGame().getCombat().getAttackers()) {
-            if (CombatUtil.canBlock(attacker, pumped)) {
-                possibleBlockNumPumped++;
-                if (possibleBlockNumPumped > canBlockNumPumped) {
-                    possibleBlockNumPumped = canBlockNumPumped;
-                    break;
-                }
-            }
-        }
-
-        return possibleBlockNumPumped > possibleBlockNum;
     }
 
     /**

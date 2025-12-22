@@ -1,5 +1,7 @@
 Name:Give No Ground
 ManaCost:3 W
 Types:Instant
-A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +2 | NumDef$ +6 | CanBlockAny$ True | SpellDescription$ Target creature gets +2/+6 until end of turn and can block any number of creatures this turn.
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +2 | NumDef$ +6 | SubAbility$ DBEffect | SpellDescription$ Target creature gets +2/+6 until end of turn and can block any number of creatures this turn.
+SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ DBBlock | AILogic$ Pump | StackDescription$ {c:Targeted} can block any number of creatures this turn.
+SVar:DBBlock:Mode$ CanBlockAmount | ValidCard$ Card.IsRemembered | Amount$ Any | Description$ This creature can block any number of creatures.
 Oracle:Target creature gets +2/+6 until end of turn and can block any number of creatures this turn.

@@ -3,5 +3,5 @@ ManaCost:2 W W
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | CanBlockAny$ True | Description$ Enchanted creature can block any number of creatures.
+S:Mode$ CanBlockAmount | ValidCard$ Creature.EnchantedBy | Amount$ Any | Description$ Enchanted creature can block any number of creatures.
 Oracle:Enchant creature\nEnchanted creature can block any number of creatures.

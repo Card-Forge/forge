@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
 A:AB$ Animate | Cost$ 4 R | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Artifact,Creature,Giant | RemoveCreatureTypes$ True | Colors$ Red | OverwriteColors$ True | Keywords$ Trample | SpellDescription$ CARDNAME becomes a 4/4 red Giant artifact creature with trample until end of turn.
-S:Mode$ Continuous | Affected$ Creature.Self | CanBlockAmount$ 1 | Description$ As long as CARDNAME is a creature, it can block an additional creature each combat.
+S:Mode$ CanBlockAmount | ValidCard$ Creature.Self | Amount$ 1 | Description$ As long as CARDNAME is a creature, it can block an additional creature each combat.
 DeckNeeds:Color$Red
 # TODO: The AI won't block multiple creatures yet, it seems. Can be improved.
 Oracle:{T}: Add {R}.\n{4}{R}: Foriysian Totem becomes a 4/4 red Giant artifact creature with trample until end of turn.\nAs long as Foriysian Totem is a creature, it can block an additional creature each combat.

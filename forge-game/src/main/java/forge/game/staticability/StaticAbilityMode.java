@@ -30,6 +30,9 @@ public enum StaticAbilityMode {
     // StaticAbilityMustTarget
     MustTarget,
 
+    // StaticAbilityCanBlockAmount
+    CanBlockAmount,
+
     // StaticAbilityCantAttackBlock
     CantAttack,
     CanAttackDefender,
