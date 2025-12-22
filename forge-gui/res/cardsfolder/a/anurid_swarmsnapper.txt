@@ -3,5 +3,6 @@ ManaCost:2 G
 Types:Creature Frog Beast
 PT:1/4
 K:Reach
-A:AB$ Pump | Cost$ 1 G | Defined$ Self | CanBlockAmount$ 1 | SpellDescription$ CARDNAME can block an additional creature this turn.
+A:AB$ Effect | Cost$ 1 G | Duration$ UntilHostLeavesPlayOrEOT | StaticAbilities$ DBBlock | AILogic$ Pump | StackDescription$ SpellDescription | SpellDescription$ CARDNAME can block an additional creature this turn.
+SVar:DBBlock:Mode$ CanBlockAmount | ValidCard$ Card.EffectSource | Amount$ 1 | Description$ EFFECTSOURCE can block an additional creature this turn.
 Oracle:Reach (This creature can block creatures with flying.)\n{1}{G}: Anurid Swarmsnapper can block an additional creature this turn.

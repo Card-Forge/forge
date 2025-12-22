@@ -1,6 +1,7 @@
 Name:Valor Made Real
 ManaCost:W
 Types:Instant
-A:SP$ Pump | ValidTgts$ Creature | CanBlockAny$ True | SpellDescription$ Target creature can block any number of creatures this turn.
+A:SP$ Effect | ValidTgts$ Creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ DBBlock | AILogic$ Pump | StackDescription$ {c:Targeted} can block any number of creatures this turn. | SpellDescription$ Target creature can block any number of creatures this turn.
+SVar:DBBlock:Mode$ CanBlockAmount | ValidCard$ Card.IsRemembered | Amount$ Any | Description$ This creature can block any number of creatures.
 AI:RemoveDeck:All
 Oracle:Target creature can block any number of creatures this turn.

@@ -2,6 +2,6 @@ Name:Ironfist Crusher
 ManaCost:4 W
 Types:Creature Human Soldier
 PT:2/4
-S:Mode$ Continuous | Affected$ Card.Self | CanBlockAny$ True | Description$ CARDNAME can block any number of creatures.
+S:Mode$ CanBlockAmount | ValidCard$ Card.Self | Amount$ Any | Description$ CARDNAME can block any number of creatures.
 K:Morph:3 W
 Oracle:Ironfist Crusher can block any number of creatures.\nMorph {3}{W} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
