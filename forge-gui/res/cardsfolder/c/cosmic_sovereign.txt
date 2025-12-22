@@ -1,0 +1,14 @@
+Name:Cosmic Sovereign
+ManaCost:3 R R
+Types:Creature Dragon
+PT:3/4
+K:Flying
+K:Haste
+A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigConjure | TriggerDescription$ At the beginning of combat on your turn, conjure a random creature card with mana value X onto the battlefield, where X is this creature's power. That creature gains haste. Exile it at the beginning of the next end step.
+SVar:TrigConjure:DB$ NameCard | AtRandom$ True | ValidCards$ Creature.cmcEQX | SubAbility$ DBConjure
+SVar:DBConjure:DB$ MakeCard | Name$ ChosenName | Conjure$ True | Zone$ Battlefield | RememberMade$ True | SubAbility$ DBHaste
+SVar:DBHaste:DB$ Pump | Defined$ Remembered | KW$ Haste | Duration$ Permanent | AtEOT$ Exile | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+SVar:X:Count$CardPower
+Oracle:Flying, haste\n{R}: Cosmic Sovereign gets +1/+0 until end of turn.\nAt the beginning of combat on your turn, conjure a random creature card with mana value X onto the battlefield, where X is this creature's power. That creature gains haste. Exile it at the beginning of the next end step.
