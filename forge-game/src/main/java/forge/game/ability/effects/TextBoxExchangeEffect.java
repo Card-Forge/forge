@@ -71,7 +71,7 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
                     Card card2 = game.getCardState(c2, null);
 
                     if (card1 != null && c1.equalsWithGameTimestamp(card1)) {
-                        card1.removeChangedCardTraits(ts, 0);
+                        card1.removeChangedCardTraitsByText(ts, 0);
                         card1.removeChangedCardKeywords(ts, 0, false);
                         card1.updateChangedText();
                         card1.updateStateForView();
@@ -79,7 +79,7 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
                     }
 
                     if (card2 != null && c2.equalsWithGameTimestamp(card2)) {
-                        card2.removeChangedCardTraits(ts, 0);
+                        card2.removeChangedCardTraitsByText(ts, 0);
                         card2.removeChangedCardKeywords(ts, 0, false);
                         card2.updateChangedText();
                         card2.updateStateForView();

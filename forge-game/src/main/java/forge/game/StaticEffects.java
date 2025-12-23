@@ -40,10 +40,10 @@ public class StaticEffects {
     // **************** StaticAbility system **************************
     private final Map<StaticAbility, StaticEffect> staticEffects = Maps.newHashMap();
 
-    public final void clearStaticEffects(final Set<Card> affectedCards) {
+    public final void clearStaticEffects(final Set<Card> affectedCards, Map<StaticAbilityLayer, Set<Card>> affectedByLayer) {
         // remove all static effects
         for (final StaticEffect se : staticEffects.values()) {
-            se.remove().forEach(affectedCards::add);
+            se.remove(affectedByLayer).forEach(affectedCards::add);
         }
         this.staticEffects.clear();
     }

@@ -624,7 +624,7 @@ public final class StaticAbilityContinuous {
                         // color
                         affectedCard.addColorByText(state.getColor(), false, se.getTimestamp(), stAb);
                         // type
-                        affectedCard.addChangedCardTypesByText(new CardType(state.getType()), se.getTimestamp(), stAb.getId());
+                        affectedCard.addChangedCardTypesByText(new CardType(state.getType()), se.getTimestamp(), stAb.getId(), true);
                         // abilities
                         affectedCard.addChangedCardTraitsByText(spellAbilities, trigger, replacementEffects, staticAbilities, se.getTimestamp(), stAb.getId());
                         affectedCard.addChangedCardKeywordsByText(keywords, se.getTimestamp(), stAb.getId(), false);
