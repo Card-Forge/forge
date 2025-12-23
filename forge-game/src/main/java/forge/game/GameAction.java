@@ -1116,6 +1116,7 @@ public class GameAction {
 
         staticAbilities.sort(effectOrder);
 
+        final Map<StaticAbilityLayer, List<Card>> affectedPerLayer = Maps.newHashMap();
         final Map<StaticAbility, CardCollectionView> affectedPerAbility = Maps.newHashMap();
         for (final StaticAbilityLayer layer : StaticAbilityLayer.CONTINUOUS_LAYERS) {
             List<StaticAbility> toAdd = Lists.newArrayList();
@@ -1148,6 +1149,7 @@ public class GameAction {
                     stAb.applyContinuousAbility(layer, previouslyAffected);
                 }
                 if (affectedHere != null) {
+                    affectedPerLayer.computeIfAbsent(layer, l -> Lists.newArrayList()).addAll(affectedHere);
                     for (final Card c : affectedHere) {
                         for (final StaticAbility st2 : c.getStaticAbilities()) {
                             if (!staticAbilities.contains(st2) && st2.checkMode(StaticAbilityMode.Continuous) && st2.zonesCheck()) {
@@ -1221,13 +1223,37 @@ public class GameAction {
             game.getView().setDependencies(dependencies);
         }
 
-        // Update P/T and type in the view only once after all the cards have been processed, to avoid flickering
-        for (Card c : affectedCards) {
-            c.updateNameforView();
-            c.updatePTforView();
-            c.updateTypesForView();
-            c.updateKeywords();
+        CardCollection affectedKeywords = new CardCollection();
+        CardCollection affectedPT = new CardCollection();
+        if (affectedPerLayer.containsKey(StaticAbilityLayer.TEXT)) {
+            affectedPerLayer.get(StaticAbilityLayer.TEXT).forEach(Card::updateNameforView);
+            affectedKeywords.addAll(affectedPerLayer.get(StaticAbilityLayer.TEXT));
         }
+        if (affectedPerLayer.containsKey(StaticAbilityLayer.TYPE)) {
+            affectedPerLayer.get(StaticAbilityLayer.TYPE).forEach(Card::updateTypesForView);
+            // setting Basic Land Type case
+            affectedKeywords.addAll(affectedPerLayer.get(StaticAbilityLayer.TYPE));
+        }
+        if (affectedPerLayer.containsKey(StaticAbilityLayer.ABILITIES)) {
+            affectedKeywords.addAll(affectedPerLayer.get(StaticAbilityLayer.ABILITIES));
+        }
+        // Update P/T and type in the view only once after all the cards have been processed, to avoid flickering
+        if (affectedPerLayer.containsKey(StaticAbilityLayer.CHARACTERISTIC)) {
+            affectedPT.addAll(affectedPerLayer.get(StaticAbilityLayer.CHARACTERISTIC));
+        }
+        if (affectedPerLayer.containsKey(StaticAbilityLayer.SETPT)) {
+            affectedPT.addAll(affectedPerLayer.get(StaticAbilityLayer.SETPT));
+        }
+        if (affectedPerLayer.containsKey(StaticAbilityLayer.MODIFYPT)) {
+            affectedPT.addAll(affectedPerLayer.get(StaticAbilityLayer.MODIFYPT));
+        }
+        /*
+        if (affectedPerLayer.containsKey(StaticAbilityLayer.SWITCHPT)) {
+            affectedPT.addAll(affectedPerLayer.get(StaticAbilityLayer.SWITCHPT));
+        }
+        //*/
+        affectedPT.forEach(Card::updatePTforView);
+        affectedKeywords.forEach(Card::updateKeywords);
 
         // TODO filter out old copies from zone change
 
@@ -1353,7 +1379,7 @@ public class GameAction {
     }
 
     private Iterable<Object> generateContinuousEffectChanges(StaticAbilityLayer layer, StaticAbility stAb) {
-        List<Object> result = Collections.EMPTY_LIST;
+        List<Object> result = Collections.emptyList();
         if (layer == StaticAbilityLayer.CONTROL) {
             result = Lists.newArrayList();
             result.addAll(AbilityUtils.getDefinedPlayers(stAb.getHostCard(), stAb.getParam("GainControl"), stAb));
