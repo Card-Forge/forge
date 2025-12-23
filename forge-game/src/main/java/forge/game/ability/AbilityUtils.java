@@ -2703,21 +2703,14 @@ public class AbilityUtils {
                 cards = player.getCardsIn(sourceZone);
             }
 
-            int colorOcurrencices = 0;
             byte colorCode;
             if (sq.length > 1) {
                 colorCode = ManaAtom.fromName(sq[1]);
             } else {
                 colorCode = ManaAtom.ALL_MANA_COLORS;
             }
-            for (Card c0 : cards) {
-                for (ManaCostShard sh : c0.getManaCost()) {
-                    if (sh.isColor(colorCode))
-                        colorOcurrencices++;
-                }
-            }
 
-            return doXMath(colorOcurrencices, expr, c, ctb);
+            return doXMath(CardLists.getTotalChroma(cards, colorCode), expr, c, ctb);
         }
 
         if (l[0].contains("ExactManaCost")) {

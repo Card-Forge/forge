@@ -1,7 +1,7 @@
 Name:Gravedig
 ManaCost:1 B
 Types:Sorcery
-A:SP$ Charm | Choices$ DBToken,DBChangeZone | Defined$ You | CharmNum$ 1
+A:SP$ Charm | Choices$ DBToken,DBChangeZone | Defined$ You
 SVar:DBToken:DB$ Token | ValidTgts$ Player | TokenScript$ b_2_2_zombie | TokenOwner$ TargetedPlayer | StackDescription$ SpellDescription | SpellDescription$ Target player creates a 2/2 black Zombie creature token.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature in your graveyard | SpellDescription$ Return target creature card from your graveyard to your hand.
 K:Entwine:2

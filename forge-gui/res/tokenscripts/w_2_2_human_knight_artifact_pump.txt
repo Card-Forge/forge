@@ -3,6 +3,6 @@ ManaCost:no cost
 Colors:white
 Types:Creature Human Knight
 PT:2/2
-S:Mode$ Continuous | Affected$ Card.Self | CheckSVar$ X | SVarCompare$ GE1 | AddPower$ 2 | AddToughness$ 2 | Description$ This creature gets +2/+2 as long as an artifact entered the battlefield under your control this turn.
+S:Mode$ Continuous | Affected$ Card.Self | CheckSVar$ X | AddPower$ 2 | AddToughness$ 2 | Description$ This creature gets +2/+2 as long as an artifact entered the battlefield under your control this turn.
 SVar:X:Count$ThisTurnEntered_Battlefield_Artifact.YouCtrl
 Oracle:This creature gets +2/+2 as long as an artifact entered the battlefield under your control this turn.

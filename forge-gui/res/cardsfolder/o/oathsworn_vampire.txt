@@ -4,7 +4,7 @@ Types:Creature Vampire Knight
 PT:2/2
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
-S:Mode$ Continuous | Affected$ Card.Self | AffectedZone$ Graveyard | EffectZone$ Graveyard | MayPlay$ True | CheckSVar$ X | SVarCompare$ GE1 | Description$ You may cast CARDNAME from your graveyard if you gained life this turn.
+S:Mode$ Continuous | Affected$ Card.Self | AffectedZone$ Graveyard | EffectZone$ Graveyard | MayPlay$ True | CheckSVar$ X | Description$ You may cast CARDNAME from your graveyard if you gained life this turn.
 SVar:X:Count$LifeYouGainedThisTurn
 SVar:SacMe:3
 SVar:DiscardMe:3
