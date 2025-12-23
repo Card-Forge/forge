@@ -4,7 +4,7 @@ Types:Instant
 A:SP$ Tap | ValidTgts$ Creature | AILogic$ Curse | SubAbility$ DBMill | SpellDescription$ Tap target creature. Its controller mills two cards. That creature doesn't untap during its controller's next untap step. (They put the top two cards of their library into their graveyard.)
 SVar:DBMill:DB$ Mill | Defined$ TargetedController | NumCards$ 2 | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ ParentTarget | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | SubAbility$ DBDraw | StackDescription$ {c:Targeted} doesn't untap during its controller's next untap step.
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
 SVar:NeedsToPlay:Creature.OppCtrl
 DeckHas:Ability$Mill
 Oracle:Tap target creature. Its controller mills two cards. That creature doesn't untap during its controller's next untap step. (They put the top two cards of their library into their graveyard.)\nDraw a card.

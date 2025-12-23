@@ -8,7 +8,7 @@ SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Pl
 SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until the end of turn, you may cast that card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ DealDamage | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 4 | UnlessCost$ DamageYou<4> | UnlessPayer$ TargetedController | UnlessResolveSubs$ WhenPaid | SubAbility$ DBDiscardDraw | StackDescription$ CARDNAME deals 4 damage to {c:Targeted} unless {p:TargetedController} has NICKNAME deal 4 damage to them. | SpellDescription$ CARDNAME deals 4 damage to target creature or planeswalker unless its controller has NICKNAME deal 4 damage to them.
-SVar:DBDiscardDraw:DB$ Draw | NumCards$ 1 | UnlessCost$ Discard<1/Card> | UnlessPayer$ You | UnlessSwitched$ True | OrString$ Draw a card. | StackDescription$ SpellDescription | SpellDescription$ If they do, you may discard a card. If you do, draw card.
+SVar:DBDiscardDraw:DB$ Draw | UnlessCost$ Discard<1/Card> | UnlessPayer$ You | UnlessSwitched$ True | OrString$ Draw a card. | StackDescription$ SpellDescription | SpellDescription$ If they do, you may discard a card. If you do, draw card.
 A:AB$ Token | Cost$ SubCounter<X/LOYALTY> | Planeswalker$ True | TokenAmount$ X | TokenScript$ r_1_1_devil_burn | SpellDescription$ Create X 1/1 red Devil creature tokens with "When this creature dies, it deals 1 damage to any target."
 SVar:X:Count$xPaid
 DeckHas:Ability$Discard|Token & Type$Devil

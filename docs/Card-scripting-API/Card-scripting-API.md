@@ -11,15 +11,15 @@ PT:2/2
 Oracle:
 ```
 
-* The name of this card is Vanilla Creature.  
-* It's casting cost is {2}{G}.  
-* It has the types Creature and Beast.  
-* It has a Power-Toughness of 2/2.  
-* It will not display any additional text in the card's template.  
+* The name of this card is Vanilla Creature.
+* It's casting cost is {2}{G}.
+* It has the types Creature and Beast.
+* It has a Power-Toughness of 2/2.
+* It will not display any additional text in the card's template.
 
-If a card has two faces, use AlternateMode:{CardStateName} in the front face and separate both by a new line with the text "ALTERNATE".
+If a card has two faces, use AlternateMode:{CardStateName} in the front face and separate both by a new line with the text `ALTERNATE`.
 
-There are a few other properties that will appear in many cards. These are
+There are a few other properties that will appear in many cards. These can all be used across different faces - with `AI` and related `Deck`-variants being the exception:
 
 | Property | Description
 | - | -

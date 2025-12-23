@@ -2,8 +2,8 @@ Name:Invisible Woman
 ManaCost:2 W
 Types:Legendary Creature Human Hero
 PT:3/3
-T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigToken | TriggerDescription$ At the beginning of combat on your turn, if you've cast a noncreature spell this turn, create a 0/3 colorless Wall creature token with defender and reach.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_0_3_wall_defender_reach | TokenOwner$ You
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigToken | TriggerDescription$ At the beginning of combat on your turn, if you've cast a noncreature spell this turn, create a 0/3 colorless Wall creature token with defender and reach.
+SVar:TrigToken:DB$ Token | TokenScript$ c_0_3_wall_defender_reach | TokenOwner$ You
 T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigImmediateTrig | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, you may pay {R}{G}{W}{U}. When you do, target creature gets +1/+0 until end of turn for each creature you control and can't be blocked this turn.
 SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ R G W U | Execute$ TrigPump | TriggerDescription$ When you do, target creature gets +1/+0 until end of turn for each creature you control and can't be blocked this turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ +Y | SubAbility$ DBUnblockable

@@ -2,7 +2,7 @@ Name:Mind Spiral
 ManaCost:4 U
 Types:Sorcery
 K:Gift
-SVar:GiftAbility:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_1_fish | TokenTapped$ True | TokenOwner$ Promised | LockTokenScript$ True | GiftDescription$ a tapped Fish
+SVar:GiftAbility:DB$ Token | TokenScript$ u_1_1_fish | TokenTapped$ True | TokenOwner$ Promised | LockTokenScript$ True | GiftDescription$ a tapped Fish
 A:SP$ Draw | NumCards$ 3 | ValidTgts$ Player | SubAbility$ DBTap | SpellDescription$ Target player draws three cards. If the gift was promised, tap target creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
 SVar:DBTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TargetMin$ X | TargetMax$ X | SubAbility$ DBCounter
 SVar:DBCounter:DB$ PutCounter | Defined$ ParentTarget | ConditionZone$ Stack | ConditionPresent$ Card.Self+PromisedGift | ConditionCompare$ EQ1 | CounterType$ Stun | CounterNum$ 1

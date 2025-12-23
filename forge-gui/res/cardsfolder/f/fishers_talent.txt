@@ -3,7 +3,7 @@ ManaCost:2 G U
 Types:Enchantment Class
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPeek | TriggerDescription$ At the beginning of your upkeep, look at the top card of your library. You may reveal it if it's a land card. Create a 1/1 blue Fish creature token if you revealed it this way. Then draw a card.
 SVar:TrigPeek:DB$ PeekAndReveal | PeekAmount$ 1 | RevealValid$ Land | RevealOptional$ True | RememberRevealed$ True | SubAbility$ DBToken
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | TokenScript$ u_1_1_fish | TokenOwner$ You | SubAbility$ DBDraw
+SVar:DBToken:DB$ Token | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | TokenScript$ u_1_1_fish | TokenOwner$ You | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 K:Class:2:G U:AddReplacementEffect$ SharkCatch

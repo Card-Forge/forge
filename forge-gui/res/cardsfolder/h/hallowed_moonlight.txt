@@ -4,5 +4,5 @@ Types:Instant
 A:SP$ Effect | ReplacementEffects$ ReplaceExile | SubAbility$ DBDraw | AILogic$ NonCastCreature | SpellDescription$ Until end of turn, if a creature would enter and it wasn't cast, exile it instead. Draw a card.
 SVar:ReplaceExile:Event$ Moved | ActiveZones$ Command | Destination$ Battlefield | ValidCard$ Creature.!wasCast | ReplaceWith$ DBExile | Description$ If a creature would enter and it wasn't cast, exile it instead.
 SVar:DBExile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
-SVar:DBDraw:DB$ Draw | NumCards$ 1
+SVar:DBDraw:DB$ Draw
 Oracle:Until end of turn, if a creature would enter and it wasn't cast, exile it instead.\nDraw a card.

@@ -1,7 +1,7 @@
 Name:Glacial Dragonhunt
 ManaCost:U R
 Types:Sorcery
-A:SP$ Draw | NumCards$ 1 | SubAbility$ DBDiscard | StackDescription$ SpellDescription | SpellDescription$ Draw a card, then you may discard a card.
+A:SP$ Draw | SubAbility$ DBDiscard | StackDescription$ SpellDescription | SpellDescription$ Draw a card, then you may discard a card.
 SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | Optional$ True | NumCards$ 1 | RememberDiscarded$ True | SubAbility$ DBImmediateTrig | StackDescription$ None
 SVar:DBImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | ConditionCompare$ EQ1 | Execute$ TrigDamage | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ When you discard a nonland card this way, CARDNAME deals 3 damage to target creature.
 SVar:TrigDamage:DB$ DealDamage | NumDmg$ 3 | ValidTgts$ Creature
