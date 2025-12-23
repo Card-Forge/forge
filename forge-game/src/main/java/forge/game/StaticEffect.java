@@ -178,7 +178,7 @@ public class StaticEffect {
         return remove(affectedByLayer, StaticAbilityLayer.CONTINUOUS_LAYERS);
     }
     final CardCollectionView remove(List<StaticAbilityLayer> layers) {
-        return remove(Maps.newHashMap(), StaticAbilityLayer.CONTINUOUS_LAYERS);
+        return remove(Maps.newHashMap(), layers);
     }
     final CardCollectionView remove(Map<StaticAbilityLayer, Set<Card>> affectedByLayer, List<StaticAbilityLayer> layers) {
         final CardCollectionView affectedCards = getAffectedCards();
