@@ -1081,8 +1081,10 @@ public class GameAction {
         }
         game.getTracker().freeze(); //prevent views flickering during while updating for state-based effects
 
+        final Map<StaticAbilityLayer, Set<Card>> affectedPerLayer = Maps.newHashMap();
+
         // remove old effects
-        game.getStaticEffects().clearStaticEffects(affectedCards);
+        game.getStaticEffects().clearStaticEffects(affectedCards, affectedPerLayer);
 
         // search for cards with static abilities
         final FCollection<StaticAbility> staticAbilities = new FCollection<>();
@@ -1116,7 +1118,6 @@ public class GameAction {
 
         staticAbilities.sort(effectOrder);
 
-        final Map<StaticAbilityLayer, List<Card>> affectedPerLayer = Maps.newHashMap();
         final Map<StaticAbility, CardCollectionView> affectedPerAbility = Maps.newHashMap();
         for (final StaticAbilityLayer layer : StaticAbilityLayer.CONTINUOUS_LAYERS) {
             List<StaticAbility> toAdd = Lists.newArrayList();
@@ -1149,7 +1150,7 @@ public class GameAction {
                     stAb.applyContinuousAbility(layer, previouslyAffected);
                 }
                 if (affectedHere != null) {
-                    affectedPerLayer.computeIfAbsent(layer, l -> Lists.newArrayList()).addAll(affectedHere);
+                    affectedPerLayer.computeIfAbsent(layer, l -> Sets.newHashSet()).addAll(affectedHere);
                     for (final Card c : affectedHere) {
                         for (final StaticAbility st2 : c.getStaticAbilities()) {
                             if (!staticAbilities.contains(st2) && st2.checkMode(StaticAbilityMode.Continuous) && st2.zonesCheck()) {
