@@ -1115,7 +1115,14 @@ public class ComputerUtil {
     public static boolean castPermanentInMain1(final Player ai, final SpellAbility sa) {
         final Card card = sa.getHostCard();
         final CardState cardState = card.isFaceDown() ? card.getState(CardStateName.Original) : card.getCurrentState();
+        final CardCollection myCreatures = ai.getCreaturesInPlay();
 
+        // 2840+ cards match `ManaCost:no cost`
+        // trigger/boost boardstate while you can
+        if (card.getManaCost().isZero()) return true;
+
+        // 1368+ cards match `PlayMain1`
+        // manually chosen, e.g. Bello, Bard of the Brambles
         if (card.hasSVar("PlayMain1")) {
             if (card.getSVar("PlayMain1").equals("ALWAYS") || sa.getPayCosts().hasNoManaCost()) {
                 return true;
@@ -1124,47 +1131,247 @@ public class ComputerUtil {
                 if (!ai.getOpponents().getCreaturesInPlay().isEmpty()) {
                     return true;
                 }
-            } else if (!card.getController().getCreaturesInPlay().isEmpty()) {
+            } else if (!myCreatures.isEmpty()) {
                 return true;
             }
         }
 
-        // cast Backup creatures in main 1 to pump attackers
-        if (cardState.hasKeyword(Keyword.BACKUP)) {
-            for (Card potentialAtkr: ai.getCreaturesInPlay()) {
-                if (ComputerUtilCard.doesCreatureAttackAI(ai, potentialAtkr)) {
+        // Activated abilities
+        for (SpellAbility nma : cardState.getNonManaAbilities()) {
+            final Cost cost = nma.getPayCosts();
+            if (cost.hasSpecificCostType(CostTap.class) && card.isAbilitySick()) continue;
+
+            // 1715+ cards match `A:AB\$.*Cost\$[^|]*Sac`
+            // sac as combat trick
+            // if (cost.hasSpecificCostType(CostSacrifice.class)) {
+            //     return true;
+            // }
+
+            // 234+ cards match `A:AB\$[^|]*(PumpAll|PutCounterAll)`
+            // Jazal Goldmane etc
+            if (nma.getApi() != null && Set.of(
+                    ApiType.PumpAll,
+                    ApiType.PutCounterAll
+                    ).contains(nma.getApi())) {
+                if (card.isCreature()) {
+                    final String nmaCost = nma.getParam("Cost");
+                    if (nmaCost == null || !nmaCost.contains("T")) {
+                        return true;
+                    }
+                    continue;
+                }
+            }
+
+            // 11+ cards match `A:AB.*?BeforeCombat`
+            // Apprentice Necromancer only gets here if it has haste.
+            // Arms Race already has SVar:PlayMain1:ALWAYS
+            // Cogwork Assembler cost is steep.
+            // Kiki-Jiki, Mirror Breaker etc.
+            if ("BeforeCombat".equals(nma.getParam("AILogic"))) {
+                return true;
+            }
+        }  // activated abilities
+
+        // Static abilities
+        for (StaticAbility sta : cardState.getStaticAbilities()) {
+            final Set<StaticAbilityMode> mode = sta.getMode();
+
+            // 1103+ cards match `S:Mode\$ Continuous.*?Affected\$[^|]*?YouCtrl`
+            // Saryth, the Viper's Fang etc
+            // TODO: Check if Toby's would be active?
+            if (mode.contains(StaticAbilityMode.Continuous)) {
+                final String affected = sta.getParam("Affected");
+                if (affected != null && affected.contains("YouCtrl")
+                    && myCreatures.size() >= 1) {
                     return true;
                 }
             }
-        }
 
-        // if AI has no speed, play start your engines on Main1
-        if (ai.noSpeed() && cardState.hasKeyword(Keyword.START_YOUR_ENGINES)) {
-            return true;
-        }
+            // 29+ cards match `S:Mode\$ Panharmonicon`
+            // double triggers
+            if (mode.contains(StaticAbilityMode.Panharmonicon)) {
+                return true;
+            }
 
-        // cast Blitz in main 1 if the creature attacks
-        if (sa.isBlitz() && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, card)) {
-            return true;
-        }
+            String validCard = sta.getParam("ValidCard");
+            if (validCard == null) validCard = "";
+            // 26+ cards match `S:Mode\$ CantBlock.*ValidCard\$(?![^|]*(You|Self))`
+            // Bedlam; Heat Wave etc
+            if (mode.contains(StaticAbilityMode.CantBlock) || mode.contains(StaticAbilityMode.CantBlockUnless)) {
+                if (!validCard.contains("You") && !validCard.contains("Self")) return true;
+            }
 
+            // 20+ card match `S:Mode\$ CombatDamageToughness(?!.*Self)`
+            // Ancient Lumberknot; Belligerent Brontodon etc
+            if (mode.contains(StaticAbilityMode.CombatDamageToughness)) {
+                if (validCard.contains("Self")) continue;
+                int moreT = 0;
+                for (Card c : myCreatures) {
+                    if (!c.hasSickness()) moreT += c.getNetToughness() - c.getNetPower();
+                }
+                if (moreT > 0) return true;
+            }
+
+            // 18+ cards match `S:Mode\$ CantGainLife.*ValidPlayer\$[^|]*(?!You)`
+            // Archfiend of Despair etc
+            if (mode.contains(StaticAbilityMode.CantGainLife)) {
+                final String validPlayer = sta.getParam("ValidPlayer");
+                if (validPlayer != null && validPlayer.contains("You")) continue;
+                for (Player p : ai.getOpponents()) {
+                    for (Card c : p.getCreaturesInPlay()) {
+                        if (c.hasKeyword(Keyword.LIFELINK) && !c.isTapped()) return true;
+                    }
+                }
+            }
+
+            // 17+ cards match `S:Mode\$ CantBlockBy.*ValidAttacker\$[^|]*You`
+            // Bower Passage etc
+            if (mode.contains(StaticAbilityMode.CantBlockBy)) {
+                final String validAttacker = sta.getParam("ValidAttacker");
+                if (validAttacker != null && validAttacker.contains("You")) return true;
+            }
+
+            // 11+ card match `S:Mode\$ CantPreventDamage.*(?!Card.Self)`
+            // Everlasting Torment etc
+            if (mode.contains(StaticAbilityMode.CantPreventDamage)) {
+                final String validSource = sta.getParam("ValidSource");
+                if (!"Card.Self".equals(validSource)) return true;
+            }
+
+            // 8+ cards match `S:Mode\$ CantBeActivated.*Activator\$[^|]*(?!You)`
+            // Drana and Linvala; City of Solitude etc
+            if (mode.contains(StaticAbilityMode.CantBeActivated)) {
+                final String activator = sta.getParam("Activator");
+                if ("Opponent".equals(activator) || "Player.NonActive".equals(activator)) return true;
+            }
+
+            // 5+ cards match `S:Mode\$ NoCleanupDamage`
+            // Patient Zero etc
+            if (mode.contains(StaticAbilityMode.NoCleanupDamage)) {
+                if (!"Card.Self".equals(validCard)) return true;
+            }
+
+            // 4+ cards match `S:Mode\$ CanAttackDefender.*ValidCard\$[^|]*You`
+            // Guardians of Oboro etc
+            if (mode.contains(StaticAbilityMode.CanAttackDefender)) {
+                if (!validCard.contains("You")) continue;
+                for (Card c : myCreatures) {
+                    if (c.hasKeyword(Keyword.DEFENDER) && !c.hasSickness()) return true;
+                }
+            }
+
+            // 3+ cards match `S:Mode\$ IgnoreHexproof`
+            // Glaring Spotlight etc
+            if (mode.contains(StaticAbilityMode.IgnoreHexproof)) {
+                return true;
+            }
+
+            // Everlasting Torment
+            if (mode.contains(StaticAbilityMode.WitherDamage)) {
+                return true;
+            }
+        }  // static abilities
+
+        // Triggered abilities
+        for (Trigger trigger : cardState.getTriggers()) {
+            if (!"Battlefield".equals(trigger.getParam("TriggerZones"))) continue;
+
+            final TriggerType mode = trigger.getMode();
+            if (mode != null) {
+                // 617+ cards match `Mode\$ ChangesZone.*?ValidCards?\$[^|]*Creature.*?TriggerZones\$ Battlefield`
+                // death triggers
+                // Al Bhed Salvagers; Dennick, Pious Apparition etc
+                if ("Graveyard".equals(trigger.getParam("Destination"))
+                    && Set.of("Any", "Battlefield").contains(trigger.getParamOrDefault("Origin", ""))
+                    && ((mode == TriggerType.ChangesZone && trigger.getParamOrDefault("ValidCard", "").contains("Creature") || trigger.getParamOrDefault("ValidCard", "").contains("Permanent"))
+                    || (mode == TriggerType.ChangesZoneAll && trigger.getParamOrDefault("ValidCards", "").contains("Creature") || trigger.getParamOrDefault("ValidCards", "").contains("Permanent")))
+                    && myCreatures.size() >= 1) {
+                    return true;
+                }
+
+                // 329+ cards match `T:Mode\$[^|]*Damage.*validSource(?![^|]*Self)`
+                // Aragorn, Hornburg Hero; Aegar, the Freezing Flame etc
+                if (Set.of(TriggerType.DamageAll, TriggerType.DamageDealtOnce, TriggerType.DamageDone, TriggerType.DamageDoneOnce, TriggerType.ExcessDamage, TriggerType.ExcessDamageAll).contains(mode)) {
+                    if (!"Card.Self".equals(trigger.getParam("ValidSource"))) return true;
+                }
+            }
+
+            // 279+ cards match `Phase\$ BeginCombat.*?ValidPlayer\$(?![^|]*Opponent)`
+            // Odric, Lunarch Marshal etc
+            final String phase = trigger.getParam("Phase");
+            if ("BeginCombat".equals(phase)) {
+                String validPlayer = trigger.getParam("ValidPlayer");
+                if (validPlayer == null || !validPlayer.contains("Opponent")) {
+                    return true;
+                }
+            }
+
+            // 123+ cards match `AttackingPlayer\$[^|]*You`
+            // Adeline, Resplendent Cathar etc
+            final String attackingPlayer = trigger.getParam("AttackingPlayer");
+            if (attackingPlayer != null && attackingPlayer.contains("You")) {
+                return true;
+            }
+
+            // 65+ cards match `ValidAttackers\$[^|]*You`
+            // Akiri, Fearless Voyager etc
+            final String validAttackers = trigger.getParam("ValidAttackers");
+            if (validAttackers != null && validAttackers.contains("You")) {
+                return true;
+            }
+            // TODO: Only if would attack?
+            // 25+ cards match `Attacked\$(?![^|]*You)`
+            // Gahiji, Honored One etc
+            final String attacked = trigger.getParam("Attacked");
+            if (attacked != null && !attacked.contains("You")) {
+                return true;
+            }
+        } // triggered abilities
+
+        // 47+ cards match `RaidTest`
         // try not to cast Raid creatures in main 1 if an attack is likely
         if ("Count$AttackersDeclared".equals(card.getSVar("RaidTest")) && !cardState.hasKeyword(Keyword.HASTE)) {
-            for (Card potentialAtkr: ai.getCreaturesInPlay()) {
+            for (Card potentialAtkr: myCreatures) {
                 if (ComputerUtilCard.doesCreatureAttackAI(ai, potentialAtkr)) {
                     return false;
                 }
             }
         }
 
-        if (card.getManaCost().isZero()) {
+        // 46+ cards match `K:Start your engines`
+        // if AI has no speed, play start your engines on Main1
+        if (ai.noSpeed() && cardState.hasKeyword(Keyword.START_YOUR_ENGINES)) {
             return true;
         }
 
-        if (cardState.hasKeyword(Keyword.EXALTED) || cardState.hasKeyword(Keyword.EXTORT)) {
+        // 34+ cards match `K:Exalted`
+        if (cardState.hasKeyword(Keyword.EXALTED)) {
             return true;
         }
 
+        // 26+ cards match `K:Backup`
+        // cast Backup creatures in main 1 to pump attackers
+        if (cardState.hasKeyword(Keyword.BACKUP)) {
+            for (Card potentialAtkr: myCreatures) {
+                if (ComputerUtilCard.doesCreatureAttackAI(ai, potentialAtkr)) {
+                    return true;
+                }
+            }
+        }
+
+        // 19+ cards match `K:Blitz`
+        // cast Blitz in main 1 if the creature attacks
+        if (sa.isBlitz() && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, card)) {
+            return true;
+        }
+
+        // 17+ cards match `K:Extort`
+        // benefit from other spells this turn
+        if (cardState.hasKeyword(Keyword.EXTORT)) {
+            return true;
+        }
+
+        // 13+ card match `K:Riot`
         if (cardState.hasKeyword(Keyword.RIOT) && SpecialAiLogic.preferHasteForRiot(sa, ai)) {
             // Planning to choose Haste for Riot, so do this in Main 1
             return true;
@@ -1187,6 +1394,7 @@ public class ComputerUtil {
             }
         }
 
+        // slower than the if above
         if (card.isCreature() && !cardState.hasKeyword(Keyword.DEFENDER)
                 && (cardState.hasKeyword(Keyword.HASTE) || hasACardGivingHaste(ai, true) || sa.isDash())) {
             return true;
@@ -1271,12 +1479,17 @@ public class ComputerUtil {
 
     public static boolean castSpellInMain1(final Player ai, final SpellAbility sa) {
         final Card source = sa.getHostCard();
-        final SpellAbility sub = sa.getSubAbility();
-
         if (source != null && "ALWAYS".equals(source.getSVar("PlayMain1"))) {
             return true;
         }
 
+        // 6+ cards match `A:SP.*BeforeCombat`
+        // Footsteps of the Goryo etc
+        if ("BeforeCombat".equals(sa.getParam("AILogic"))) {
+            return true;
+        }
+
+        final SpellAbility sub = sa.getSubAbility();
         if (sub != null) {
             final ApiType api = sub.getApi();
             if (ApiType.Encode == api && !ai.getCreaturesInPlay().isEmpty()) {
