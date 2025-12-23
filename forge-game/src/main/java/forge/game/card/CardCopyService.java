@@ -318,6 +318,9 @@ public class CardCopyService {
         if (copyFrom.isSuspected()) {
             newCopy.setSuspectedStatic(copyFrom.getSuspectedStatic().copy(newCopy, true));
         }
+        if (copyFrom.isBestowed()) {
+            newCopy.setBestowStatic(copyFrom.getBestowStatic().copy(newCopy, true));
+        }
 
         newCopy.setDamageHistory(copyFrom.getDamageHistory());
         newCopy.setDamageReceivedThisTurn(copyFrom.getDamageReceivedThisTurn());
@@ -364,8 +367,7 @@ public class CardCopyService {
         newCopy.setGameTimestamp(copyFrom.getGameTimestamp());
         newCopy.setLayerTimestamp(copyFrom.getLayerTimestamp());
 
-        newCopy.setBestowTimestamp(copyFrom.getBestowTimestamp());
-
+        newCopy.setForetold(copyFrom.isForetold());
         newCopy.setTurnInZone(copyFrom.getTurnInZone());
 
         newCopy.setForetold(copyFrom.isForetold());
