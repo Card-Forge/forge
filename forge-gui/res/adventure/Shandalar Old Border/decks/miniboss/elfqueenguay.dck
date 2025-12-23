@@ -54,13 +54,12 @@ Name=Elf Queen Guay
 1 Angelic Wall|PO2
 
 [StartInBattle_Reference]
-2 Plains|CMM|2
-2 Island|CMM|2
-2 Forest|CMM|2
+1 Plains|CMM|2
+1 Island|CMM|2
+1 Forest|CMM|2
 1 Vernal Equinox|MMQ
 1 Briar Patch|MMQ
 1 Serra's Blessing|WTH
-1 Dispersing Orb|ONS
 1 Silent Attendant|USG
 1 Diplomatic Escort|MMQ
 1 Heartwood Dryad|TMP

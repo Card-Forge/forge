@@ -91,9 +91,8 @@ public class CostAdjustment {
             result.add(inc);
         }
 
-        // Raise cost
         for (final StaticAbility stAb : raiseAbilities) {
-            applyRaise(result, sa, stAb);
+            applyRaiseCostAbility(result, sa, stAb);
         }
 
         // Reset card state (if changed)
@@ -107,7 +106,7 @@ public class CostAdjustment {
         return result;
     }
 
-    private static void applyRaise(final Cost cost, final SpellAbility sa, final StaticAbility st) {
+    private static void applyRaiseCostAbility(final Cost cost, final SpellAbility sa, final StaticAbility st) {
         final Card hostCard = st.getHostCard();
 
         if (!checkRequirement(sa, st)) {
@@ -182,20 +181,20 @@ public class CostAdjustment {
 
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
-        final Card originalCard = sa.getHostCard();
+        final Card host = sa.getHostCard();
 
         boolean isStateChangeToFaceDown = false;
-        if (sa.isSpell() && sa.isCastFaceDown() && !originalCard.isFaceDown()) {
+        if (sa.isSpell() && sa.isCastFaceDown() && !host.isFaceDown()) {
             // Turn face down to apply cost modifiers correctly
-            originalCard.turnFaceDownNoUpdate();
+            host.turnFaceDownNoUpdate();
             isStateChangeToFaceDown = true;
         }
 
         CardCollection cardsOnBattlefield = new CardCollection(game.getCardsIn(ZoneType.Battlefield));
         cardsOnBattlefield.addAll(game.getCardsIn(ZoneType.Stack));
         cardsOnBattlefield.addAll(game.getCardsIn(ZoneType.Command));
-        if (!cardsOnBattlefield.contains(originalCard)) {
-            cardsOnBattlefield.add(originalCard);
+        if (!cardsOnBattlefield.contains(host)) {
+            cardsOnBattlefield.add(host);
         }
         final List<StaticAbility> reduceAbilities = Lists.newArrayList();
         final List<StaticAbility> setAbilities = Lists.newArrayList();
@@ -212,12 +211,11 @@ public class CostAdjustment {
             }
         }
 
-        // Reduce cost
         int sumGeneric = 0;
         if (sa.hasParam("ReduceCost")) {
             String cst = sa.getParam("ReduceCost");
             String amt = sa.getParamOrDefault("ReduceAmount", cst);
-            int num = AbilityUtils.calculateAmount(originalCard, amt, sa);
+            int num = AbilityUtils.calculateAmount(host, amt, sa);
 
             if (sa.hasParam("ReduceAmount") && num > 0) {
                 cost.subtractManaCost(new ManaCost(new ManaCostParser(Strings.repeat(cst + " ", num))));
@@ -225,9 +223,9 @@ public class CostAdjustment {
                 sumGeneric += num;
             }
         }
-        if (sa.isPowerUp() && originalCard.enteredThisTurn()) {
+        if (sa.isPowerUp() && host.enteredThisTurn()) {
             // TODO handle hybrid ManaCost
-            cost.subtractManaCost(originalCard.getManaCost());
+            cost.subtractManaCost(host.getManaCost());
         }
 
         while (!reduceAbilities.isEmpty()) {
@@ -244,24 +242,25 @@ public class CostAdjustment {
             }
         }
 
-        if (sa.isSpell() && sa.isOffering()) { // cost reduction from offerings
+        if (sa.isSpell() && sa.isOffering()) {
             adjustCostByOffering(cost, sa);
         }
-        if (sa.isSpell() && sa.isEmerge()) { // cost reduction from offerings
+        if (sa.isSpell() && sa.isEmerge()) {
             adjustCostByEmerge(cost, sa);
         }
+
         // Set cost (only used by Trinisphere) is applied last
         for (final StaticAbility stAb : setAbilities) {
             applySetCostAbility(stAb, sa, cost);
         }
 
         if (sa.isSpell()) {
-            if (sa.getHostCard().hasKeyword(Keyword.ASSIST) && !adjustCostByAssist(cost, sa, test)) {
+            if (host.hasKeyword(Keyword.ASSIST) && !adjustCostByAssist(cost, sa, test)) {
                 return false;
             }
 
-            if (sa.getHostCard().hasKeyword(Keyword.DELVE)) {
-                sa.getHostCard().clearDelved();
+            if (host.hasKeyword(Keyword.DELVE)) {
+                host.clearDelved();
 
                 final CardZoneTable table = new CardZoneTable();
                 final CardCollection mutableGrave = new CardCollection(activator.getCardsIn(ZoneType.Graveyard));
@@ -271,9 +270,8 @@ public class CostAdjustment {
                     if (cardsToDelveOut != null) {
                         cardsToDelveOut.add(c);
                     } else if (!test) {
-                        sa.getHostCard().addDelved(c);
+                        host.addDelved(c);
                         final Card d = game.getAction().exile(c, null, null);
-                        final Card host = sa.getHostCard();
                         host.addExiledCard(d);
                         d.setExiledWith(host);
                         d.setExiledBy(host.getController());
@@ -283,13 +281,13 @@ public class CostAdjustment {
                 }
                 table.triggerChangesZoneAll(game, sa);
             }
-            if (sa.getHostCard().hasKeyword(Keyword.CONVOKE)) {
+            if (host.hasKeyword(Keyword.CONVOKE)) {
                 adjustCostByConvokeOrImprovise(cost, sa, activator, false, true, test);
             }
-            if (sa.getHostCard().hasKeyword(Keyword.IMPROVISE)) {
+            if (host.hasKeyword(Keyword.IMPROVISE)) {
                 adjustCostByConvokeOrImprovise(cost, sa, activator, true, false, test);
             }
-        } // isSpell
+        }
 
         if (sa.hasParam("TapCreaturesForMana")) {
             adjustCostByConvokeOrImprovise(cost, sa, activator, false, true, test);
@@ -299,8 +297,8 @@ public class CostAdjustment {
 
         // Reset card state (if changed)
         if (isStateChangeToFaceDown) {
-            originalCard.setFaceDown(false);
-            originalCard.setState(CardStateName.Original, false);
+            host.setFaceDown(false);
+            host.setState(CardStateName.Original, false);
         }
 
         return true;
@@ -484,7 +482,21 @@ public class CostAdjustment {
             value = sa.getActivatingPlayer().getController().chooseNumberForCostReduction(sa, 0, value);
         }
 
-        if (!staticAbility.hasParam("Cost") && !staticAbility.hasParam("Color")) {
+        if (staticAbility.hasParam("Color")) {
+            final String color = staticAbility.getParam("Color");
+            int sumGeneric = 0;
+            // might be problematic for weird hybrid combinations
+            for (final String cost : color.split(" ")) {
+                if (StringUtils.isNumeric(cost)) {
+                    sumGeneric += Integer.parseInt(cost) * value;
+                } else if (staticAbility.hasParam("IgnoreGeneric")) {
+                    manaCost.decreaseShard(ManaCostShard.parseNonGeneric(cost), value);
+                } else {
+                    manaCost.subtractManaCost(new ManaCost(new ManaCostParser(Strings.repeat(cost + " ", value))));
+                }
+            }
+            return sumGeneric;
+        } else {
             int minMana = 0;
             if (staticAbility.hasParam("MinMana")) {
                 minMana = Integer.parseInt(staticAbility.getParam("MinMana"));
@@ -494,22 +506,6 @@ public class CostAdjustment {
             if (maxReduction > 0) {
                 return Math.min(value, maxReduction);
             }
-        } else {
-            final String color = staticAbility.getParamOrDefault("Cost", staticAbility.getParam("Color"));
-            int sumGeneric = 0;
-            // might be problematic for weird hybrid combinations
-            for (final String cost : color.split(" ")) {
-                if (StringUtils.isNumeric(cost)) {
-                    sumGeneric += Integer.parseInt(cost) * value;
-                } else {
-                    if (staticAbility.hasParam("IgnoreGeneric")) {
-                        manaCost.decreaseShard(ManaCostShard.parseNonGeneric(cost), value);
-                    } else {
-                        manaCost.subtractManaCost(new ManaCost(new ManaCostParser(Strings.repeat(cost + " ", value))));
-                    }
-                }
-            }
-            return sumGeneric;
         }
         return 0;
     }    

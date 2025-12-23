@@ -21,7 +21,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJy9VF0OwUAQ/qhqncEBpCKa4I1rOAJCcAuevDkIj+IOxWHEI1aaSWeHrTZsv2Q6szPd+XZmf4DicC/bzV9yYl12dP8mUB/n7XereFio9VAB6ilyrPw23yQ3Fxh3kjzHqp536KbzpsV5rqnap5mSXQPYKxkpzm4L6LXieOQB/SYwaGbn5fO5TWjXgJXiXAdx/gmrc+4DW7W+sxfrpZ+dN/SSMbc5Ik/XpjjP+42X1vySiyHvSdTzK+/V1c8gny/375OfbIrT+BuvXGNk6LnJH4r+0zgvL+/5gtl0bqSfbNJZzxUH77l8A1715Lnrtxy8EvSmU/+pBvkG2wLnLYpT8haJf/E+ARjrRkU=
+   eJy9VF0OwUAQ/mhr6wwOIEQ0wRvXcASE4BY8eXMQHqV3qDqM9BErm4nZZasN7ZdMd3668+3M/gDl4VYtNn/FUWPV0f27lvw4b78XinsBtZ5coJEiofvbfJskHjDtvfKENT3v2EvnTYvzXHO5TwsphyZwlDKRnP0OMOioeCSAYRsYtbPz8vlcJ3TrwEZyblsq/4zVufSBvVxfLJS99rPzBuJlc50jEvpoi/O833hpzU+5WPKehYpTPb/yXj39DPL55v598pNOcbK/8ZprjCw9t/kDo/9k5+XlPV8xPRaf/aTTmPVccfCem2/As548dz3JwWuC3nTqP9VgvsFFgfOWxWnylol/8T4AOHRFrA==
   </data>
  </layer>
  <layer id="5" name="AboveSprites" width="30" height="17">
@@ -33,56 +33,17 @@
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="208" y="272"/>
   <object id="41" template="../../../../../../common/maps/obj/shop.tx" x="64" y="115">
    <properties>
-    <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,
-    Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red,Giant"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
-    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red,PhyrexianRed"/>
-    <property name="uncommonShopList" value="Creature2Red,Creature,Red"/>
+    <property name="commonShopList" value="Goblin,Dragon,Phoenix,Orc,Ogre,Dwarf,Giant,Viashino,Minotaur"/>
    </properties>
   </object>
   <object id="42" template="../../../../../../common/maps/obj/shop.tx" x="113" y="115">
    <properties>
-    <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,
-    Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red,Giant"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
-    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red,PhyrexianRed"/>
-    <property name="uncommonShopList" value="Creature2Red,Creature,Red"/>
+    <property name="commonShopList" value="AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop"/>
    </properties>
   </object>
   <object id="43" template="../../../../../../common/maps/obj/shop.tx" x="161" y="163">
    <properties>
-    <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,
-    Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red,Giant"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
-    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red,PhyrexianRed"/>
-    <property name="uncommonShopList" value="Creature2Red,Creature,Red"/>
-   </properties>
-  </object>
-  <object id="44" template="../../../../../../common/maps/obj/shop.tx" x="257" y="162">
-   <properties>
-    <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,
-    Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red,Giant"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
-    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red,PhyrexianRed"/>
-    <property name="uncommonShopList" value="Creature2Red,Creature,Red"/>
-   </properties>
-  </object>
-  <object id="45" template="../../../../../../common/maps/obj/shop.tx" x="304" y="162">
-   <properties>
-    <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,
-    Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red,Giant"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
-    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red,PhyrexianRed"/>
-    <property name="uncommonShopList" value="Creature2Red,Creature,Red"/>
-   </properties>
-  </object>
-  <object id="46" template="../../../../../../common/maps/obj/shop.tx" x="367" y="162">
-   <properties>
-    <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,
-    Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red,Giant"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
-    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red,PhyrexianRed"/>
-    <property name="uncommonShopList" value="Creature2Red,Creature,Red"/>
+    <property name="commonShopList" value="ColorRandomRed"/>
    </properties>
   </object>
   <object id="47" template="../../../../../../common/maps/obj/inn.tx" x="214" y="114"/>
@@ -100,25 +61,6 @@
   <object id="51" template="../../../../../../common/maps/obj/quest.tx" x="353" y="98" width="33" height="16">
    <properties>
     <property name="questtype" value="mountain_town_tribal"/>
-   </properties>
-  </object>
-  <object id="52" template="../../../../../../common/maps/obj/shop.tx" x="304" y="97">
-   <properties>
-    <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,
-    Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red,Giant"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
-    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red,PhyrexianRed"/>
-    <property name="uncommonShopList" value="Creature2Red,Creature,Red"/>
-   </properties>
-  </object>
-  <object id="53" template="../../../../../../common/maps/obj/shop.tx" x="240" y="97">
-   <properties>
-    <property name="commonShopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,
-    GammaBoosterPackShop,DeltaBoosterPackShop,RedBoosterPackShop,Wolf4Red,Goblin,Devil,Dwarf,Dragon,
-    Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red,Giant"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
-    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red,PhyrexianRed"/>
-    <property name="uncommonShopList" value="Creature2Red,Creature,Red"/>
    </properties>
   </object>
  </objectgroup>

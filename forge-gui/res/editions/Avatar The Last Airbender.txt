@@ -341,22 +341,22 @@ Replace=0.025F BasicLand:fromSheet("TLA appa basic")+
 262 M White Lotus Tile @Dee Nguyen
 263 R Abandoned Air Temple @Dom Lay
 264 R Agna Qel'a @Dom Lay
-265 C Airship Engine Room @Andreas Rocha
+265 L Airship Engine Room @Andreas Rocha
 266 R Ba Sing Se @Andreas Rocha
-267 C Boiling Rock Prison @Matteo Bassini
+267 L Boiling Rock Prison @Matteo Bassini
 268 R Fire Nation Palace @Awanqi (Angela Wang)
-269 C Foggy Bottom Swamp @Dom Lay
+269 L Foggy Bottom Swamp @Dom Lay
 270 R Jasmine Dragon Tea Shop @Leanna Crossan
-271 C Kyoshi Village @Luc Courtois
-272 C Meditation Pools @Luc Courtois
-273 C Misty Palms Oasis @Andreas Rocha
-274 C North Pole Gates @Andreas Rocha
-275 C Omashu City @Andreas Rocha
+271 L Kyoshi Village @Luc Courtois
+272 L Meditation Pools @Luc Courtois
+273 L Misty Palms Oasis @Andreas Rocha
+274 L North Pole Gates @Andreas Rocha
+275 L Omashu City @Andreas Rocha
 276 R Realm of Koh @Andreas Rocha
 277 C Rumble Arena @Le Vuong
 278 R Secret Tunnel @Alexander Forssberg
-279 C Serpent's Pass @Matteo Bassini
-280 C Sun-Blessed Peak @Dom Lay
+279 L Serpent's Pass @Matteo Bassini
+280 L Sun-Blessed Peak @Dom Lay
 281 U White Lotus Hideout @Luc Courtois
 282 L Plains @Slawek Fedorczuk
 283 L Island @Maojin Lee

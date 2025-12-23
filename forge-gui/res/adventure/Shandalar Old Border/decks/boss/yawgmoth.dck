@@ -1,8 +1,7 @@
 [metadata]
 Name=Yawgmoth
 [Main]
-20 Swamp|LEA
-4 Cabal Coffers|TOR
+24 Swamp|LEA
 4 Spawning Pool|ULG
 4 Tarnished Citadel|ODY
 3 Strip Mine|ATQ
@@ -46,12 +45,5 @@ Name=Yawgmoth
 1 Phyrexian Reclamation|ULG
 1 Swamp|USG|1
 1 Swamp|USG|2
-1 Swamp|USG|3
-1 Phyrexian Walker|VIS
-1 Phyrexian Walker|VIS
-1 Phyrexian Walker|VIS
-1 Phyrexian Walker|VIS
-1 Phyrexian Battleflies|INV
-1 Phyrexian Battleflies|INV
-1 Phyrexian Battleflies|INV
-1 Phyrexian Battleflies|INV
+2 Phyrexian Walker|VIS
+2 Phyrexian Battleflies|INV

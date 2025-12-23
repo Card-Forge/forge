@@ -3,7 +3,7 @@ ManaCost:1 W U B
 Types:Legendary Creature Human Samurai
 PT:2/4
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, draw a card.
-SVar:TrigDraw:DB$ Draw | NumCards$ 1
+SVar:TrigDraw:DB$ Draw
 T:Mode$ AttackersDeclaredOneTarget | ValidAttackers$ Creature.YouCtrl | AttackedTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigCharm | ValidAttackersAmount$ EQ1 | TriggerDescription$ Whenever a creature you control attacks a player, if no other creatures are attacking that player, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ Standoff,Ghost
 SVar:Standoff:DB$ Pump | Defined$ TriggeredAttackers | KW$ Double Strike | SpellDescription$ Standoff — It gains double strike until end of turn.

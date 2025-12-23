@@ -31,7 +31,7 @@
   </object>
   <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="227.847" y="118.678">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Island|ONS", "Mountain|ATH", "Pendrell Mists|WTH" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Pendrell Mists|WTH" ] }</property>
     <property name="enemy" value="Storm Titan" />
     <property name="threatRange" type="int" value="30" />
    </properties>

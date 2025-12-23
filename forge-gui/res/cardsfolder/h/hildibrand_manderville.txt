@@ -15,5 +15,5 @@ ALTERNATE
 Name:Gentleman's Rise
 ManaCost:2 B
 Types:Instant Adventure
-A:SP$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | SpellDescription$ Create a 2/2 black Zombie creature token. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ Token | TokenScript$ b_2_2_zombie | TokenOwner$ You | SpellDescription$ Create a 2/2 black Zombie creature token. (Then exile this card. You may cast the creature later from exile.)
 Oracle:Create a 2/2 black Zombie creature token. (Then exile this card. You may cast the creature later from exile.)

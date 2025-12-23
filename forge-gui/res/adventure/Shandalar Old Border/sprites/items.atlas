@@ -163,7 +163,7 @@ SteelShield
   xy: 272, 208
   size: 16, 16
 SteelBoots
-  xy: 128, 128
+  xy: 48, 160
   size: 16, 16
 SteelSword
   xy: 272, 752
@@ -624,6 +624,9 @@ AmuletOfAzar
 ArmorOfEvil
   xy: 240, 96
   size: 16, 16
+ArmorOfYawgmoth
+  xy: 240, 96
+  size: 16, 16
 AshnodsBattleGear
   xy: 224, 80
   size: 16, 16
@@ -632,6 +635,12 @@ BroodlingEgg
   size: 16, 16
 CatalystStone
   xy: 144, 784
+  size: 16, 16
+ChimericSphere
+  xy: 160, 192
+  size: 16, 16
+KoboldKingsCrown
+  xy: 128, 368
   size: 16, 16
 CaveDiversBoots
   xy: 144, 96
@@ -918,4 +927,82 @@ WaterOfYouth
   index: -1
 BraidwoodSextant
   xy: 96, 832
+  size: 16, 16
+SentrysPlate
+  xy: 240, 48
+  size: 16, 16
+FortifiedShield
+  xy: 224, 192
+  size: 16, 16
+HorribleHalberd
+  xy: 304, 288
+  size: 16, 16
+SoulcatcherCloak
+  xy: 64, 16
+  size: 16, 16
+ElixirOfVitality
+  xy: 48, 720
+  size: 16, 16
+ClockworkRidersBoots
+  xy: 96, 144
+  size: 16, 16
+OnuletArmor
+  xy: 288, 32
+  size: 16, 16
+AmuletOfUnmaking
+  xy: 64, 832
+  size: 16, 16
+SteelHelm
+  xy: 32, 304
+  size: 16, 16
+Aeolipile
+  xy: 96, 624
+  size: 16, 16
+SwordOfTheChosen
+  xy: 224, 736
+  size: 16, 16
+ChristmasGift
+  xy: 48, 624
+  size: 16, 16
+LumpOfCoal
+  xy: 240, 944
+  size: 16, 16
+AnaSpellbook
+  xy: 144, 704
+  size: 16, 16
+CetaSpellbook
+  xy: 128, 704
+  size: 16, 16
+DegaSpellbook
+  xy: 80, 704
+  size: 16, 16
+NecraSpellbook
+  xy: 96, 704
+  size: 16, 16
+RakaSpellbook
+  xy: 112, 704
+  size: 16, 16
+JalumTome
+  xy: 32, 688
+  size: 16, 16
+JayemdaeTome
+  xy: 32, 656
+  size: 16, 16
+FoolsTome
+  xy: 64, 688
+  size: 16, 16
+CrookedScales
+  xy: 128, 768
+  size: 16, 16
+LifeMatrix
+  xy: 96, 848
+  size: 16, 16
+KryShield
+  xy: 288, 144
+  size: 16, 16
+GauntletsofChaos
+  xy: 80, 208
+  size: 16, 16
+MarbleMace
+  xy: 176, 416
   size: 16, 16

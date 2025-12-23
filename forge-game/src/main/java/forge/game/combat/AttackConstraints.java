@@ -97,6 +97,9 @@ public class AttackConstraints {
     public Map<Card, AttackRestriction> getRestrictions() {
         return restrictions;
     }
+    public GlobalAttackRestrictions getGlobalRestrictions() {
+        return globalRestrictions;
+    }
 
     public Map<Card, AttackRequirement> getRequirements() {
         return requirements;

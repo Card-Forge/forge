@@ -556,7 +556,7 @@
       },
       {
         "type": "item",
-        "probability": 1,
+        "probability": 0.3,
         "count": 1,
         "itemName": "Dragon Blood"
       }
@@ -819,11 +819,6 @@
         "itemName": "Serra's Shield"
       },
       {
-        "type": "life",
-        "probability": 1,
-        "count": 1
-      },
-      {
         "type": "card",
         "probability": 1,
         "count": 1,
@@ -861,7 +856,7 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.2,
         "count": 1
       },
       {
@@ -870,9 +865,6 @@
         "count": 1,
         "itemName": "White Key"
       }
-    ],
-    "equipment": [
-      "Akroma Starting Setup"
     ],
     "colors": "W",
     "questTags": [
@@ -884,7 +876,8 @@
       "IdentityWhite",
       "Akroma"
     ],
-    "gamesPerMatch": 3
+    "gamesPerMatch": 3,
+    "spawnRate": 0
   },
   {
     "name": "Amphin Warrior",
@@ -961,77 +954,6 @@
       "Wandering",
       "Humanoid",
       "Evil"
-    ]
-  },
-  {
-    "name": "Ancient Vampire",
-    "sprite": "sprites/enemy/undead/vampire_4.atlas",
-    "deck": [
-      "decks/standard/ancientvampire.dck"
-    ],
-    "ai": "",
-    "flying": true,
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 29,
-    "scale": 0.85,
-    "life": 25,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "rare",
-          "Uncommon"
-        ],
-        "cardTypes": [
-          "Creature",
-          "Artifact",
-          "Enchantment",
-          "Instant",
-          "Sorcery"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "addMaxCount": 4,
-        "colors": [
-          "Black"
-        ],
-        "rarity": [
-          "rare"
-        ],
-        "subTypes": [
-          "Vampire"
-        ],
-        "cardTypes": [
-          "Land"
-        ]
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 10,
-        "addMaxCount": 90
-      },
-      {
-        "type": "shards",
-        "probability": 1,
-        "count": 10
-      }
-    ],
-    "colors": "B",
-    "questTags": [
-      "Vampire",
-      "Undead",
-      "Unholy",
-      "Evil",
-      "Wise",
-      "IdentityBlack"
     ]
   },
   {
@@ -1368,8 +1290,7 @@
     "deck": [
       "decks/standard/bluewizard_apprentice_1.dck",
       "decks/standard/bluewizard_apprentice_2.dck",
-      "decks/standard/bluewizard_apprentice_3.dck",
-      "decks/standard/bluewizard_easy.json"
+      "decks/standard/bluewizard_apprentice_3.dck"
     ],
     "ai": "cautious",
     "flying": true,
@@ -3300,87 +3221,6 @@
     ]
   },
   {
-    "name": "Berserker",
-    "nameOverride": "Dwarven Berserker",
-    "sprite": "sprites/enemy/humanoid/dwarf/dwarf_5.atlas",
-    "deck": [
-      "decks/standard/berserker.json"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 22,
-    "life": 13,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Black",
-          "Green",
-          "Red"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 0,
-        "addMaxCount": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 0,
-        "addMaxCount": 300
-      }
-    ],
-    "colors": "BGR",
-    "questTags": [
-      "Dwarf",
-      "Aggressive",
-      "Loner",
-      "Barbarian",
-      "Warrior",
-      "IdentityRed",
-      "IdentityBlack",
-      "IdentityGreen",
-      "IdentityJund",
-      "BiomeRed"
-    ]
-  },
-  {
     "name": "Big Zombie",
     "sprite": "sprites/enemy/undead/zombie_2.atlas",
     "deck": [
@@ -3431,7 +3271,7 @@
     "nameOverride": "Griffin Birdcaller",
     "sprite": "sprites/enemy/monstrosity/griffin_2.atlas",
     "deck": [
-      "decks/standard/bird_blue.json"
+      "decks/standard/bird_blue.dck"
     ],
     "ai": "",
     "flying": true,
@@ -5018,6 +4858,12 @@
         "rarity": [
           "Rare"
         ]
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Chimeric Sphere"
       }
     ],
     "colors": "GW",
@@ -5241,7 +5087,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 25,
     "scale": 0.8,
@@ -5318,9 +5164,6 @@
         "count": 1
       }
     ],
-    "equipment": [
-      "Conjurer Starting Setup"
-    ],
     "colors": "UB",
     "questTags": [
       "Humanoid",
@@ -5338,7 +5181,6 @@
     "sprite": "sprites/enemy/construct/golem_3.atlas",
     "deck": [
       "decks/standard/artificer.dck",
-      "decks/standard/construct.json",
       "decks/standard/rustic_construct.dck"
     ],
     "ai": "",
@@ -6223,9 +6065,6 @@
         "addMaxCount": 85
       }
     ],
-    "equipment": [
-      "Cyclops Starting Setup"
-    ],
     "colors": "R",
     "questTags": [
       "Humanoid",
@@ -6499,9 +6338,6 @@
         "probability": 0.05,
         "count": 1
       }
-    ],
-    "equipment": [
-      "Dark Enchanter Starting Setup"
     ],
     "colors": "GB",
     "questTags": [
@@ -6949,12 +6785,28 @@
     "ai": "reckless",
     "flying": true,
     "randomizeDeck": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 31,
     "scale": 0.6,
     "life": 25,
     "rewards": [
+      {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 1,
+        "addMaxCount": 4,
+        "rarity": [
+          "uncommon"
+        ],
+        "cardTypes": [
+          "Creature",
+          "Artifact",
+          "Enchantment",
+          "Instant",
+          "Sorcery"
+        ]
+      },
       {
         "type": "gold",
         "probability": 0.3,
@@ -6997,9 +6849,6 @@
         "count": 1,
         "cardName": "Devouring Strossus|INV"
       }
-    ],
-    "equipment": [
-      "Specter's Horror Starting Setup"
     ],
     "colors": "B",
     "questTags": [
@@ -7555,10 +7404,53 @@
     ]
   },
   {
+    "name": "Mighty Djinn",
+    "sprite": "sprites/enemy/elemental/genie.atlas",
+    "deck": [
+      "decks/miniboss/mighty_djinn.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "flying": true,
+    "spawnRate": 0,
+    "difficulty": 5,
+    "speed": 32,
+    "life": 25,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 0.7,
+        "count": 50,
+        "addMaxCount": 95
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 10,
+        "addMaxCount": 10
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Cursed Lamp"
+      }
+    ],
+    "colors": "UB",
+    "questTags": [
+      "Elemental",
+      "Flying",
+      "Humanoid",
+      "IdentityBlue",
+      "IdentityBlack",
+      "IdentityDimir",
+      "BiomeBlue"
+    ]
+  },
+  {
     "name": "Dog",
     "sprite": "sprites/enemy/beast/dog.atlas",
     "deck": [
-      "decks/standard/dog.json",
       "decks/standard/dog.dck",
       "decks/standard/dog_w_beginner.dck"
     ],
@@ -8963,7 +8855,7 @@
     "name": "Elf",
     "sprite": "sprites/enemy/humanoid/elf/druid.atlas",
     "deck": [
-      "decks/standard/elf_bad.json"
+      "decks/standard/elf_bad.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -9009,7 +8901,7 @@
     "name": "Elf warrior",
     "sprite": "sprites/enemy/humanoid/elf/hunter.atlas",
     "deck": [
-      "decks/standard/elf_mid.json"
+      "decks/standard/elf_mid.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -9139,11 +9031,6 @@
         "itemName": "Crown of the False God"
       },
       {
-        "type": "life",
-        "probability": 1,
-        "count": 1
-      },
-      {
         "type": "card",
         "probability": 1,
         "count": 1,
@@ -9166,13 +9053,41 @@
         "cardName": "Karona, False God|SCG",
         "count": 1,
         "probability": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Plains|PGRU",
+        "count": 1,
+        "probability": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Island|PGRU",
+        "count": 1,
+        "probability": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Swamp|PGRU",
+        "count": 1,
+        "probability": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Mountain|PGRU",
+        "count": 1,
+        "probability": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Forest|PGRU",
+        "count": 1,
+        "probability": 1
       }
     ],
-    "equipment": [
-      "Karona Starting Setup"
-    ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3
+    "gamesPerMatch": 3,
+    "spawnRate": 0
   },
   {
     "name": "Esper Artificer",
@@ -9325,7 +9240,7 @@
     "name": "Faerie",
     "sprite": "sprites/enemy/fey/pixie_2.atlas",
     "deck": [
-      "decks/standard/faerie.json"
+      "decks/standard/faerie.dck"
     ],
     "ai": "",
     "flying": true,
@@ -9946,56 +9861,34 @@
     "life": 18,
     "rewards": [
       {
-        "type": "card",
+        "type": "deckCard",
         "probability": 1,
         "count": 2,
-        "addMaxCount": 5,
-        "colors": [
-          "Red"
-        ],
+        "addMaxCount": 0,
         "rarity": [
           "common",
-          "uncommon",
-          "rare"
-        ],
-        "subTypes": [
-          "Dragon"
+          "uncommon"
         ]
+      },
+      {
+        "type": "deckCard",
+        "probability": 0.25,
+        "count": 1,
+        "rarity": [
+          "rare"
+        ]
+      },
+      {
+        "type": "shards",
+        "probability": 0.25,
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
-        "probability": 0.7,
-        "count": 10,
-        "addMaxCount": 90
-      },
-      {
-        "type": "card",
-        "probability": 0.4,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ],
-        "cardTypes": [
-          "Artifact",
-          "Enchantment",
-          "Instant",
-          "Sorcery"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "rarity": [
-          "uncommon",
-          "common",
-          "Rare"
-        ],
-        "cardTypes": [
-          "Land"
-        ],
-        "colorType": "Colorless",
-        "cardText": "\\{R\\}"
+        "probability": 0.3,
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "R",
@@ -10446,79 +10339,6 @@
     ]
   },
   {
-    "name": "Forest Giant",
-    "sprite": "sprites/enemy/giant/forestgiant.atlas",
-    "deck": [
-      "decks/elite/forest_titan.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 23,
-    "scale": 1.4,
-    "life": 25,
-    "rewards": [
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 2,
-        "addMaxCount": 4,
-        "colors": [
-          "Green"
-        ],
-        "subTypes": [
-          "Giant"
-        ],
-        "colorType": "MonoColor"
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "addMaxCount": 4,
-        "colors": [
-          "Green"
-        ],
-        "rarity": [
-          "Rare"
-        ],
-        "colorType": "MonoColor"
-      },
-      {
-        "type": "gold",
-        "probability": 1,
-        "count": 50,
-        "addMaxCount": 200
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "rarity": [
-          "uncommon",
-          "common"
-        ],
-        "cardTypes": [
-          "Land"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 1,
-        "count": 10,
-        "addMaxCount": 10
-      }
-    ],
-    "colors": "G",
-    "questTags": [
-      "Forest",
-      "Giant",
-      "Warrior",
-      "Territorial",
-      "IdentityGreen"
-    ]
-  },
-  {
     "name": "Fox",
     "sprite": "sprites/enemy/beast/fox.atlas",
     "deck": [
@@ -10740,71 +10560,34 @@
     "life": 10,
     "rewards": [
       {
-        "type": "item",
-        "probability": 1,
-        "count": 1,
-        "itemName": "Fungal Staff"
-      },
-      {
-        "type": "card",
+        "type": "deckCard",
         "probability": 1,
         "count": 2,
-        "addMaxCount": 4,
+        "addMaxCount": 0,
         "rarity": [
           "common",
           "uncommon"
-        ],
-        "cardText": "Saproling"
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 1,
-        "colors": [
-          "Black",
-          "Green"
-        ],
-        "rarity": [
-          "Rare"
-        ],
-        "colorType": "Any"
-      },
-      {
-        "type": "gold",
-        "probability": 1,
-        "count": 50,
-        "addMaxCount": 100
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "rarity": [
-          "uncommon",
-          "common"
-        ],
-        "cardTypes": [
-          "Land"
         ]
       },
       {
-        "type": "card",
-        "probability": 1,
-        "count": 2,
-        "addMaxCount": 4,
-        "colors": [
-          "Green",
-          "Black"
-        ],
+        "type": "deckCard",
+        "probability": 0.25,
+        "count": 1,
         "rarity": [
-          "common",
-          "uncommon",
-          "Rare"
-        ],
-        "subTypes": [
-          "Fungus"
-        ],
-        "colorType": "Any"
+          "rare"
+        ]
+      },
+      {
+        "type": "shards",
+        "probability": 0.25,
+        "count": 0,
+        "addMaxCount": 3
+      },
+      {
+        "type": "gold",
+        "probability": 0.3,
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "G",
@@ -11348,7 +11131,7 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.2,
         "count": 1
       },
       {
@@ -11357,9 +11140,6 @@
         "count": 1,
         "itemName": "Green Key"
       }
-    ],
-    "equipment": [
-      "Ghalta Starting Setup"
     ],
     "colors": "G",
     "questTags": [
@@ -11371,7 +11151,8 @@
       "IdentityGreen",
       "Ghalta"
     ],
-    "gamesPerMatch": 3
+    "gamesPerMatch": 3,
+    "spawnRate": 0
   },
   {
     "name": "Garruk",
@@ -11382,7 +11163,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 1,
     "speed": 30,
     "life": 30,
@@ -11448,12 +11229,9 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.1,
         "count": 1
       }
-    ],
-    "equipment": [
-      "Kamahl Starting Setup"
     ],
     "colors": "GB",
     "questTags": [
@@ -11475,7 +11253,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 1,
     "speed": 30,
     "life": 30,
@@ -11547,12 +11325,9 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.1,
         "count": 1
       }
-    ],
-    "equipment": [
-      "Baron Sengir Starting Setup"
     ],
     "colors": "GB",
     "questTags": [
@@ -12571,7 +12346,7 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.2,
         "count": 1
       },
       {
@@ -12580,9 +12355,6 @@
         "count": 1,
         "itemName": "Black Key"
       }
-    ],
-    "equipment": [
-      "Volrath Starting Setup"
     ],
     "colors": "B",
     "questTags": [
@@ -12594,7 +12366,8 @@
       "IdentityBlack",
       "Griselbrand"
     ],
-    "gamesPerMatch": 3
+    "gamesPerMatch": 3,
+    "spawnRate": 0
   },
   {
     "name": "Grolnok",
@@ -12605,7 +12378,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.8,
     "speed": 15,
     "scale": 0.5,
@@ -12628,11 +12401,6 @@
         "probability": 1,
         "count": 50,
         "addMaxCount": 50
-      },
-      {
-        "type": "life",
-        "probability": 1,
-        "count": 1
       },
       {
         "type": "card",
@@ -12666,13 +12434,13 @@
       },
       {
         "type": "card",
-        "probability": 0.5,
+        "probability": 1,
         "count": 1,
         "cardName": "Avatar of Woe|PCY"
       },
       {
         "type": "card",
-        "probability": 0.5,
+        "probability": 1,
         "count": 1,
         "cardName": "Doomed Necromancer|ONS"
       },
@@ -12680,16 +12448,14 @@
         "type": "card",
         "probability": 1,
         "count": 1,
-        "cardName": "Forest|PGRU"
+        "cardName": "Forest|PELP|2"
       },
       {
-        "type": "landSketchbookShop",
-        "probability": 0.05,
-        "count": 1
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Swamp|PELP|2"
       }
-    ],
-    "equipment": [
-      "Grolnok Starting Setup"
     ],
     "colors": "BGU",
     "questTags": [
@@ -12776,34 +12542,35 @@
     "life": 30,
     "rewards": [
       {
-        "type": "card",
+        "type": "deckCard",
         "probability": 1,
-        "count": 2,
+        "count": 1,
         "addMaxCount": 4,
-        "colors": [
-          "Red",
-          "Green"
-        ],
         "rarity": [
-          "Rare",
-          "Uncommon",
-          "Common"
+          "uncommon"
         ],
-        "subTypes": [
-          "Ape"
+        "cardTypes": [
+          "Creature",
+          "Artifact",
+          "Enchantment",
+          "Instant",
+          "Sorcery"
         ]
       },
       {
-        "type": "card",
+        "type": "deckCard",
         "probability": 0.5,
-        "count": 2,
-        "addMaxCount": 4,
-        "colors": [
-          "Green",
-          "Red"
-        ],
+        "count": 1,
+        "addMaxCount": 2,
         "rarity": [
-          "Rare"
+          "rare"
+        ],
+        "cardTypes": [
+          "Creature",
+          "Artifact",
+          "Enchantment",
+          "Instant",
+          "Sorcery"
         ]
       },
       {
@@ -12813,28 +12580,10 @@
         "addMaxCount": 100
       },
       {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "rarity": [
-          "uncommon",
-          "common"
-        ],
-        "cardTypes": [
-          "Land"
-        ]
-      },
-      {
         "type": "shards",
         "probability": 1,
         "count": 20,
         "addMaxCount": 10
-      },
-      {
-        "type": "item",
-        "probability": 1,
-        "count": 1,
-        "itemName": "Shaman's Staff"
       }
     ],
     "colors": "RG",
@@ -14464,7 +14213,7 @@
     "name": "High Elf",
     "sprite": "sprites/enemy/humanoid/elf/druid_2.atlas",
     "deck": [
-      "decks/standard/elf_good.json"
+      "decks/standard/elf_good.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -15145,7 +14894,7 @@
     "nameOverride": "Human Footsoldier",
     "sprite": "sprites/enemy/humanoid/human/soldier/pikeman.atlas",
     "deck": [
-      "decks/standard/human_bad.json"
+      "decks/standard/human_bad.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -15268,7 +15017,7 @@
     "nameOverride": "Legionnaire",
     "sprite": "sprites/enemy/humanoid/human/soldier/legionite.atlas",
     "deck": [
-      "decks/standard/human_good.json"
+      "decks/standard/human_good.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -15315,7 +15064,7 @@
     "nameOverride": "Human Guard",
     "sprite": "sprites/enemy/humanoid/human/soldier/swordsman.atlas",
     "deck": [
-      "decks/standard/human_mid.json"
+      "decks/standard/human_mid.dck"
     ],
     "ai": "cautious",
     "spawnRate": 1,
@@ -15568,12 +15317,9 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.1,
         "count": 1
       }
-    ],
-    "equipment": [
-      "Hydra Starting Setup"
     ],
     "colors": "G",
     "questTags": [
@@ -15650,163 +15396,6 @@
       "Celestial",
       "Arcane",
       "Magical"
-    ]
-  },
-  {
-    "name": "Ibis",
-    "sprite": "sprites/enemy/beast/ibis.atlas",
-    "deck": [
-      "decks/standard/bird_gu.dck"
-    ],
-    "ai": "",
-    "flying": true,
-    "spawnRate": 0.3,
-    "difficulty": 0.1,
-    "speed": 25,
-    "scale": 1.3,
-    "life": 11,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Green",
-          "Blue"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 0,
-        "addMaxCount": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 0,
-        "addMaxCount": 300
-      }
-    ],
-    "colors": "GU",
-    "questTags": [
-      "Bird",
-      "Wild",
-      "Flying",
-      "IdentityGreen",
-      "IdentityBlue",
-      "IdentitySimic",
-      "BiomeGreen",
-      "BiomeBlue"
-    ]
-  },
-  {
-    "name": "Ibis-headed Aven Warrior",
-    "sprite": "sprites/enemy/humanoid/aven/ibisheadedaven.atlas",
-    "deck": [
-      "decks/standard/amonkhet_aven_u.dck"
-    ],
-    "ai": "",
-    "flying": true,
-    "spawnRate": 0.5,
-    "difficulty": 0.1,
-    "speed": 25,
-    "life": 16,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Blue"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 0,
-        "addMaxCount": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 0,
-        "addMaxCount": 300
-      }
-    ],
-    "colors": "U",
-    "questTags": [
-      "Humanoid",
-      "Initiate",
-      "Aggressive",
-      "Aven",
-      "Flying",
-      "Tribal",
-      "IdentityBlue",
-      "BiomeBlue",
-      "Warrior"
     ]
   },
   {
@@ -16083,7 +15672,7 @@
     ],
     "ai": "cautious",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 30,
@@ -16155,12 +15744,9 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.1,
         "count": 1
       }
-    ],
-    "equipment": [
-      "Arcanis Starting Setup"
     ],
     "colors": "UW",
     "questTags": [
@@ -16421,7 +16007,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.8,
     "speed": 31,
     "life": 30,
@@ -16499,17 +16085,14 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.1,
         "count": 1
       }
-    ],
-    "equipment": [
-      "Empress Galina Starting Setup"
     ],
     "colors": "UG",
     "questTags": [
       "Planeswalker",
-      "Kiora",
+      "Empress Galina",
       "Boss",
       "Merfolk",
       "Wizard",
@@ -16984,6 +16567,60 @@
     ]
   },
   {
+    "name": "King Rohgahh",
+    "sprite": "sprites/enemy/humanoid/kobold/koboldworker.atlas",
+    "deck": [
+      "decks/elite/king_rohgahh.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "spawnRate": 0.5,
+    "difficulty": 0.5,
+    "speed": 31,
+    "scale": 1.5,
+    "life": 25,
+    "rewards": [
+      {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 2
+      },
+      {
+        "type": "deckCard",
+        "probability": 0.25,
+        "count": 1
+      },
+      {
+        "type": "shards",
+        "probability": 0.25,
+        "count": 0,
+        "addMaxCount": 3
+      },
+      {
+        "type": "gold",
+        "probability": 0.3,
+        "count": 0,
+        "addMaxCount": 300
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Kobold King's Crown"
+      }
+    ],
+    "colors": "RB",
+    "questTags": [
+      "Kobold",
+      "Boss",
+      "Humanoid",
+      "IdentityRed",
+      "IdentityBlack",
+      "IdentityRakdos",
+      "BiomeRed"
+    ]
+  },
+  {
     "name": "Kor Warrior",
     "sprite": "sprites/enemy/humanoid/kor/mineguard.atlas",
     "deck": [
@@ -17292,7 +16929,7 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.2,
         "count": 1
       },
       {
@@ -17301,9 +16938,6 @@
         "count": 1,
         "itemName": "Red Key"
       }
-    ],
-    "equipment": [
-      "Rorix Starting Setup"
     ],
     "colors": "R",
     "questTags": [
@@ -17314,7 +16948,8 @@
       "Boss",
       "Lathliss"
     ],
-    "gamesPerMatch": 3
+    "gamesPerMatch": 3,
+    "spawnRate": 0
   },
   {
     "name": "Leonin Weaponmaster",
@@ -17735,7 +17370,7 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.2,
         "count": 1
       },
       {
@@ -17745,9 +17380,6 @@
         "itemName": "Blue Key"
       }
     ],
-    "equipment": [
-      "Leviathan Starting Setup"
-    ],
     "colors": "U",
     "questTags": [
       "Boss",
@@ -17756,7 +17388,8 @@
       "IdentityBlue",
       "Lorthos"
     ],
-    "gamesPerMatch": 3
+    "gamesPerMatch": 3,
+    "spawnRate": 0
   },
   {
     "name": "Mageripper",
@@ -18771,7 +18404,7 @@
     "nameOverride": "Merfok Warrior",
     "sprite": "sprites/enemy/elemental/airelemental.atlas",
     "deck": [
-      "decks/standard/merfolk_mid.json"
+      "decks/standard/merfolk_mid.dck"
     ],
     "ai": "",
     "flying": true,
@@ -18858,6 +18491,22 @@
     "life": 25,
     "rewards": [
       {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 1,
+        "addMaxCount": 4,
+        "rarity": [
+          "uncommon"
+        ],
+        "cardTypes": [
+          "Creature",
+          "Artifact",
+          "Enchantment",
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
         "type": "gold",
         "count": 150
       },
@@ -18919,7 +18568,7 @@
     ],
     "ai": "",
     "flying": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 5,
     "scale": 0.6,
@@ -19595,7 +19244,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.5,
     "speed": 20,
     "scale": 2.5,
@@ -19611,7 +19260,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Glider Gloves"
+        "itemName": "Disrupting Scepter"
       },
       {
         "type": "life",
@@ -19656,7 +19305,7 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.1,
         "count": 1
       }
     ],
@@ -19758,7 +19407,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 30,
@@ -20030,6 +19679,19 @@
         "type": "shards",
         "probability": 1,
         "count": 10
+      },
+      {
+        "type": "card",
+        "probability": 0.5,
+        "count": 1,
+        "rarity": [
+          "common",
+          "uncommon",
+          "rare"
+        ],
+        "subTypes": [
+          "Lhurgoyf"
+        ]
       }
     ],
     "colors": "B",
@@ -20436,7 +20098,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 23,
     "life": 30,
@@ -20455,51 +20117,57 @@
       },
       {
         "type": "card",
-        "probability": 0.5,
+        "probability": 1,
         "count": 1,
-        "cardName": "Dust Bowl|MMQ"
+        "cardName": "Sulfurous Springs|ICE"
       },
       {
         "type": "card",
-        "probability": 0.5,
+        "probability": 1,
         "count": 1,
-        "cardName": "Sphere of Resistance|EXO"
+        "cardName": "Karplusan Forest|ICE"
       },
       {
         "type": "card",
-        "probability": 0.5,
+        "probability": 1,
         "count": 1,
-        "cardName": "Dark Ritual|LEA"
+        "cardName": "Ancient Ooze|SCG"
       },
       {
         "type": "card",
-        "probability": 0.5,
+        "probability": 1,
         "count": 1,
-        "cardName": "Thawing Glaciers|ALL"
+        "cardName": "Weird Harvest|ONS"
       },
       {
         "type": "card",
-        "probability": 0.5,
+        "probability": 1,
         "count": 1,
-        "cardName": "Static Orb|TMP"
+        "cardName": "Gravity Sphere|LEG"
       },
       {
         "type": "card",
-        "probability": 0.5,
+        "probability": 1,
         "count": 1,
-        "cardName": "Undiscovered Paradise|VIS"
+        "cardName": "Lightning Bolt|LEA"
       },
       {
         "type": "card",
-        "probability": 0.5,
+        "probability": 1,
         "count": 1,
-        "cardName": "Rampant Growth|MIR"
+        "cardName": "Terror|LEA"
       },
       {
         "type": "card",
-        "probability": 0.5,
+        "probability": 1,
         "count": 1,
-        "cardName": "Jet Medallion|TMP"
+        "cardName": "Rancor|ULG"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Utopia Tree|INV"
       },
       {
         "type": "shards",
@@ -20514,12 +20182,9 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.1,
         "count": 1
       }
-    ],
-    "equipment": [
-      "Slime Mother Starting Setup"
     ],
     "colors": "GB",
     "questTags": [
@@ -21100,30 +20765,46 @@
     "life": 25,
     "rewards": [
       {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "addMaxCount": 4
-      },
-      {
         "type": "card",
         "probability": 1,
-        "count": 5,
-        "rarity": [
-          "Rare"
-        ]
+        "count": 1,
+        "cardName": "Erhnam Djinn|ARN"
       },
       {
         "type": "card",
         "probability": 1,
         "count": 1,
-        "rarity": [
-          "uncommon",
-          "common"
-        ],
-        "cardTypes": [
-          "Land"
-        ]
+        "cardName": "Desert|ARN"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Mountain|ARN"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Ifh-Biff Efreet|ARN"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Diamond Valley|ARN"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Island of Wak-Wak|ARN"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Ali from Cairo|ARN"
       },
       {
         "type": "gold",
@@ -21155,7 +20836,6 @@
     "name": "Plant",
     "sprite": "sprites/enemy/plant/plant.atlas",
     "deck": [
-      "decks/standard/plant.json",
       "decks/standard/plant.dck"
     ],
     "ai": "cautious",
@@ -22576,6 +22256,38 @@
     "life": 25,
     "rewards": [
       {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 1,
+        "addMaxCount": 4,
+        "rarity": [
+          "uncommon"
+        ],
+        "cardTypes": [
+          "Creature",
+          "Artifact",
+          "Enchantment",
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "probability": 0.5,
+        "count": 1,
+        "addMaxCount": 2,
+        "rarity": [
+          "rare"
+        ],
+        "cardTypes": [
+          "Creature",
+          "Artifact",
+          "Enchantment",
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
         "type": "gold",
         "count": 150
       },
@@ -23254,7 +22966,7 @@
     "ai": "",
     "boss": true,
     "flying": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 15,
     "life": 30,
@@ -23326,7 +23038,7 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.1,
         "count": 1
       }
     ],
@@ -23625,7 +23337,7 @@
     "name": "Shaman",
     "sprite": "sprites/enemy/humanoid/elf/shaman_2.atlas",
     "deck": [
-      "decks/standard/shaman.json"
+      "decks/standard/mindclaw_shaman.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -23700,7 +23412,7 @@
   },
   {
     "name": "Shaman of Zedruu",
-    "nameOverride": "",
+    "nameOverride": "Portal Disciple",
     "sprite": "sprites/enemy/humanoid/viashino/pikelizard.atlas",
     "deck": [
       "decks/standard/shamanelite.dck"
@@ -23869,7 +23581,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.8,
     "speed": 31,
     "scale": 0.7,
@@ -23930,12 +23642,9 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.1,
         "count": 1
       }
-    ],
-    "equipment": [
-      "Fungus Starting Setup"
     ],
     "colors": "BG",
     "questTags": [
@@ -23999,7 +23708,11 @@
     "name": "Sliver",
     "sprite": "sprites/enemy/aberration/sliver.atlas",
     "deck": [
-      "decks/standard/sliver.json"
+      "decks/standard/sliver_white.dck",
+      "decks/standard/sliver_blue.dck",
+      "decks/standard/sliver_black.dck",
+      "decks/standard/sliver_red.dck",
+      "decks/standard/sliver_green.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -24451,7 +24164,7 @@
     ],
     "ai": "reckless",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.8,
     "speed": 15,
     "scale": 0.75,
@@ -24518,12 +24231,9 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.1,
         "count": 1
       }
-    ],
-    "equipment": [
-      "Squee Starting Setup"
     ],
     "colors": "R",
     "questTags": [
@@ -24567,21 +24277,16 @@
         "itemName": "Slivercaller's Gauntlet"
       },
       {
-        "type": "life",
+        "type": "card",
         "probability": 1,
-        "count": 1
+        "count": 1,
+        "cardName": "City of Brass|5ED"
       },
       {
         "type": "card",
         "probability": 1,
         "count": 1,
-        "cardName": "City of Brass|ARN"
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "cardName": "Reflecting Pool|TMP"
+        "cardName": "Harsh Mercy|ONS"
       },
       {
         "type": "card",
@@ -24611,16 +24316,32 @@
         "type": "card",
         "probability": 1,
         "count": 1,
-        "cardName": "Forest|PGRU"
+        "cardName": "Synapse Sliver|LGN"
       },
       {
-        "type": "landSketchbookShop",
-        "probability": 0.05,
-        "count": 1
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Brood Sliver|LGN"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Magma Sliver|LGN"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Essence Sliver|LGN"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Toxin Sliver|LGN"
       }
-    ],
-    "equipment": [
-      "Sliver Queen Starting Setup"
     ],
     "colors": "BGRUW",
     "questTags": [
@@ -24632,7 +24353,8 @@
       "Nesting",
       "IdentityAll"
     ],
-    "gamesPerMatch": 3
+    "gamesPerMatch": 3,
+    "spawnRate": 0
   },
   {
     "name": "Snake",
@@ -25169,37 +24891,36 @@
       {
         "type": "card",
         "probability": 1,
-        "count": 2,
-        "addMaxCount": 8,
+        "count": 1,
+        "addMaxCount": 1,
         "colors": [
           "Blue"
         ],
-        "subTypes": [
-          "Giant"
+        "rarity": [
+          "Rare"
         ],
         "colorType": "MonoColor"
       },
       {
-        "type": "gold",
-        "probability": 0.7,
-        "count": 100,
-        "addMaxCount": 900
-      },
-      {
-        "type": "card",
+        "type": "deckCard",
         "probability": 0.5,
-        "count": 3,
-        "colors": [
-          "White"
-        ],
+        "count": 1,
         "rarity": [
           "Rare"
         ]
       },
       {
+        "type": "deckCard",
+        "probability": 0.5,
+        "count": 1,
+        "rarity": [
+          "Uncommon"
+        ]
+      },
+      {
         "type": "shards",
         "probability": 1,
-        "count": 50,
+        "count": 10,
         "addMaxCount": 10
       }
     ],
@@ -25369,7 +25090,7 @@
     ],
     "ai": "reckless",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 1,
     "speed": 30,
     "life": 30,
@@ -25392,6 +25113,42 @@
         "probability": 1,
         "count": 15,
         "addMaxCount": 10
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Mishra's Factory|ATQ|3"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Kismet|LEG"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Hydroblast|ICE"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Pyroblast|ICE"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Al-abara's Carpet|LEG"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Swords to Plowshares|ICE"
       }
     ],
     "colors": "WUR"
@@ -25404,7 +25161,7 @@
     ],
     "ai": "reckless",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 1,
     "speed": 30,
     "life": 30,
@@ -25469,7 +25226,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 1,
     "speed": 30,
     "life": 30,
@@ -25492,6 +25249,36 @@
         "probability": 1,
         "count": 15,
         "addMaxCount": 10
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Hazezon Tamar|LEG"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Dakkon Blackblade|LEG"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Sol'kanar the Swamp King|LEG"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Desertion|VIS"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Hymn of Rebirth|ICE"
       }
     ],
     "colors": "WUBRG"
@@ -25504,7 +25291,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 1,
     "speed": 30,
     "life": 30,
@@ -25531,6 +25318,48 @@
         "probability": 1,
         "count": 1,
         "cardName": "Serra Angel|O90P"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Asmira, Holy Avenger|MIR"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Priest of Titania|USG"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Deathcoil Wurm|PO2"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Commander Eesha|JUD"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Moment's Peace|ODY"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Wonder|JUD"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Kaysa|ALL"
       }
     ],
     "colors": "WUG"
@@ -25856,7 +25685,7 @@
       "decks/miniboss/teferi_boss.dck"
     ],
     "ai": "cautious",
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.8,
     "speed": 31,
     "life": 30,
@@ -25951,9 +25780,6 @@
         "cardName": "Island|PGRU"
       }
     ],
-    "equipment": [
-      "Teferi Starting Setup"
-    ],
     "colors": "WU",
     "questTags": [
       "Boss",
@@ -25979,7 +25805,7 @@
     "ai": "",
     "boss": true,
     "flying": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 15,
     "scale": 0.6,
@@ -26071,12 +25897,9 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.1,
         "count": 1
       }
-    ],
-    "equipment": [
-      "Homelands Chef Starting Setup"
     ],
     "colors": "GBR",
     "questTags": [
@@ -26099,7 +25922,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.8,
     "speed": 31,
     "scale": 0.5,
@@ -26166,12 +25989,9 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.1,
         "count": 1
       }
-    ],
-    "equipment": [
-      "Chainer Starting Setup"
     ],
     "colors": "R",
     "questTags": [
@@ -26267,12 +26087,28 @@
       "decks/miniboss/torturer.dck"
     ],
     "ai": "cautious",
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 20,
     "scale": 0.7,
     "life": 30,
     "rewards": [
+      {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 1,
+        "addMaxCount": 4,
+        "rarity": [
+          "uncommon"
+        ],
+        "cardTypes": [
+          "Creature",
+          "Artifact",
+          "Enchantment",
+          "Instant",
+          "Sorcery"
+        ]
+      },
       {
         "type": "gold",
         "probability": 1,
@@ -26286,14 +26122,8 @@
         "addMaxCount": 20
       },
       {
-        "type": "item",
-        "probability": 1,
-        "count": 1,
-        "itemName": "Torturer's Hood"
-      },
-      {
         "type": "card",
-        "probability": 0.25,
+        "probability": 1,
         "count": 1,
         "cardName": "Bloodstained Mire|ONS"
       },
@@ -26305,25 +26135,22 @@
       },
       {
         "type": "card",
-        "probability": 0.25,
+        "probability": 1,
         "count": 1,
         "cardName": "Mindslicer|ODY"
       },
       {
         "type": "card",
-        "probability": 0.5,
+        "probability": 1,
         "count": 1,
         "cardName": "Meekstone|LEA"
       },
       {
         "type": "card",
         "probability": 1,
-        "count": 1,
+        "count": 2,
         "cardName": "Swamp|PELP"
       }
-    ],
-    "equipment": [
-      "Specter's Torturer Starting Setup"
     ],
     "colors": "B",
     "questTags": [
@@ -26693,17 +26520,11 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 31,
     "life": 30,
     "rewards": [
-      {
-        "type": "item",
-        "probability": 1,
-        "count": 1,
-        "itemName": "Ankh of Purgatory"
-      },
       {
         "type": "life",
         "probability": 1,
@@ -27449,7 +27270,7 @@
       "decks/miniboss/bearboss.dck"
     ],
     "ai": "reckless",
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 25,
     "scale": 0.6,
@@ -28226,7 +28047,8 @@
       "IdentityRed",
       "IdentityWhite",
       "IdentityNaya"
-    ]
+    ],
+    "spawnRate": 0
   },
   {
     "name": "Xira",
@@ -28236,7 +28058,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.8,
     "speed": 31,
     "life": 30,
@@ -28308,12 +28130,9 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.1,
         "count": 1
       }
-    ],
-    "equipment": [
-      "Xira Starting Setup"
     ],
     "colors": "BGR",
     "questTags": [
@@ -28420,7 +28239,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 30,
@@ -28452,13 +28271,13 @@
         "type": "card",
         "probability": 1,
         "count": 1,
-        "cardName": "Wrath of God|LEA"
+        "cardName": "Wrath of God|POR"
       },
       {
         "type": "card",
         "probability": 1,
         "count": 1,
-        "cardName": "Archangel|VIS"
+        "cardName": "Archangel|POR"
       },
       {
         "type": "card",
@@ -28482,19 +28301,19 @@
         "type": "card",
         "probability": 1,
         "count": 1,
-        "cardName": "Ancestral Memories|MIR"
+        "cardName": "Ancestral Memories|POR"
       },
       {
         "type": "card",
         "probability": 1,
         "count": 1,
-        "cardName": "Volcanic Dragon|MIR"
+        "cardName": "Thundermare|POR"
       },
       {
         "type": "card",
         "probability": 1,
         "count": 1,
-        "cardName": "Earthquake|LEA"
+        "cardName": "Earthquake|POR"
       },
       {
         "type": "card",
@@ -28509,13 +28328,17 @@
         "cardName": "Plains|UGL"
       },
       {
-        "type": "landSketchbookShop",
-        "probability": 0.05,
-        "count": 1
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Mountain|UGL"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Island|UGL"
       }
-    ],
-    "equipment": [
-      "Portal Master Starting Setup"
     ],
     "colors": "WUBR",
     "questTags": [
@@ -28775,7 +28598,7 @@
       "decks/miniboss/unholyknight.dck"
     ],
     "ai": "",
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 21,
     "life": 30,
@@ -32651,7 +32474,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -32726,7 +32549,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -32795,7 +32618,7 @@
     ],
     "ai": "cautious",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -32876,7 +32699,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -32933,7 +32756,7 @@
     ],
     "ai": "cautious",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -32980,26 +32803,26 @@
     ],
     "ai": "reckless",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
     "rewards": [
       {
         "type": "card",
-        "cardName": "Latulla, Keldon Overseer|PCY"
+        "cardName": "M\u00e1rton Stromgald|ICE"
       },
       {
         "type": "card",
-        "cardName": "Repercussion|UDS"
+        "cardName": "Mogg Infestation|STH"
       },
       {
         "type": "card",
-        "cardName": "Starstorm|ONS"
+        "cardName": "Insurrection|ONS"
       },
       {
         "type": "card",
-        "cardName": "Fork|LEA"
+        "cardName": "Goblin Marshal|UDS"
       },
       {
         "type": "shards",
@@ -33008,6 +32831,10 @@
       {
         "type": "gold",
         "count": 2000
+      },
+      {
+        "type": "item",
+        "itemName": "Ebony Horseshoe"
       }
     ]
   },
@@ -33019,11 +32846,53 @@
     ],
     "ai": "reckless",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
-    "rewards": []
+    "rewards": [
+      {
+        "type": "gold",
+        "count": 1000,
+        "addMaxCount": 2000
+      },
+      {
+        "type": "shards",
+        "count": 15,
+        "addMaxCount": 15
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Narcissist's Mask"
+      },
+      {
+        "type": "card",
+        "cardName": "Jeska, Warrior Adept|JUD",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Gratuitous Violence|ONS",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Kamahl, Fist of Krosa|ONS",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Decimate|ODY",
+        "count": 1
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 2
+      }
+    ]
   },
   {
     "name": "Eron the Relentless",
@@ -33033,7 +32902,7 @@
     ],
     "ai": "reckless",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -33080,7 +32949,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -33099,7 +32968,7 @@
       },
       {
         "type": "item",
-        "itemName": "Empress's Crown",
+        "itemName": "Map to Paradise",
         "count": 1,
         "probability": 1
       },
@@ -33126,12 +32995,6 @@
         "cardName": "Collective Unconscious|MMQ",
         "count": 1,
         "probability": 1
-      },
-      {
-        "type": "item",
-        "itemName": "Green Key to the False God",
-        "count": 1,
-        "probability": 1
       }
     ]
   },
@@ -33143,7 +33006,7 @@
     ],
     "ai": "cautious",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -33190,7 +33053,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -33222,6 +33085,10 @@
       {
         "type": "gold",
         "count": 2000
+      },
+      {
+        "type": "item",
+        "itemName": "Ivy Seer's Amulet"
       }
     ]
   },
@@ -33233,7 +33100,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -33261,6 +33128,10 @@
       {
         "type": "gold",
         "count": 2000
+      },
+      {
+        "type": "item",
+        "itemName": "Multani's Boots"
       }
     ]
   },
@@ -33272,7 +33143,7 @@
     ],
     "ai": "cautious",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -33307,6 +33178,8 @@
       },
       {
         "type": "item",
+        "probability": 1,
+        "count": 1,
         "itemName": "Hymnal Hood"
       }
     ]
@@ -33319,7 +33192,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -33354,7 +33227,7 @@
       },
       {
         "type": "item",
-        "itemName": "Celestial Sword"
+        "itemName": "Ankh of Purgatory"
       }
     ]
   },
@@ -33366,7 +33239,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -33413,7 +33286,7 @@
     ],
     "ai": "cautious",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -33439,6 +33312,12 @@
         "count": 1
       },
       {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Robes of Renewal"
+      },
+      {
         "type": "shards",
         "count": 20
       },
@@ -33456,7 +33335,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -33503,7 +33382,7 @@
     ],
     "ai": "cautious",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -33550,7 +33429,7 @@
     ],
     "ai": "cautious",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -33597,7 +33476,7 @@
     ],
     "ai": "cautious",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
@@ -33616,7 +33495,13 @@
       },
       {
         "type": "item",
-        "itemName": "Karn's Touch",
+        "itemName": "Shield of Tears",
+        "count": 1,
+        "probability": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Karn's Touch|MMQ",
         "count": 1,
         "probability": 1
       },
@@ -33637,12 +33522,6 @@
         "cardName": "Humility|TMP",
         "count": 1,
         "probability": 1
-      },
-      {
-        "type": "item",
-        "itemName": "Blue Key to the False God",
-        "count": 1,
-        "probability": 1
       }
     ]
   },
@@ -33654,7 +33533,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 60,
@@ -33675,7 +33554,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Armor of Evil"
+        "itemName": "Armor of Yawgmoth"
       },
       {
         "type": "item",
@@ -33686,6 +33565,11 @@
       {
         "type": "life",
         "probability": 1,
+        "count": 1
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.5,
         "count": 1
       },
       {
@@ -33742,9 +33626,6 @@
         "count": 1,
         "itemName": "Black Key to the False God"
       }
-    ],
-    "equipment": [
-      "Yawgmoth Starting Setup"
     ]
   },
   {
@@ -33755,7 +33636,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 60,
@@ -33777,6 +33658,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Sulfuric Staff"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.5,
+        "count": 1
       },
       {
         "type": "life",
@@ -33855,9 +33741,6 @@
         "count": 1,
         "itemName": "Red Key to the False God"
       }
-    ],
-    "equipment": [
-      "Jaya Ballard Starting Setup"
     ]
   },
   {
@@ -34854,6 +34737,11 @@
         "count": 1
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
+      },
+      {
         "type": "card",
         "probability": 1,
         "count": 1,
@@ -34980,6 +34868,11 @@
         "probability": 1,
         "count": 15,
         "addMaxCount": 10
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
       },
       {
         "type": "item",
@@ -35126,6 +35019,11 @@
         "count": 1
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
+      },
+      {
         "type": "card",
         "probability": 1,
         "count": 1,
@@ -35246,6 +35144,11 @@
         "probability": 1,
         "count": 15,
         "addMaxCount": 10
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
       },
       {
         "type": "item",
@@ -35393,6 +35296,11 @@
         "itemName": "Faerie Dragon Egg"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
+      },
+      {
         "type": "life",
         "probability": 1,
         "count": 1
@@ -35463,6 +35371,12 @@
         "probability": 1,
         "count": 20,
         "addMaxCount": 10
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Prismatic Egg"
       }
     ],
     "colors": "WUG",
@@ -35509,6 +35423,18 @@
         "probability": 1,
         "count": 20,
         "addMaxCount": 10
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Celestial Prism"
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Prismatic Egg"
       }
     ],
     "colors": "WUB",
@@ -35555,6 +35481,18 @@
         "probability": 1,
         "count": 20,
         "addMaxCount": 10
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Celestial Prism"
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Prismatic Egg"
       }
     ],
     "colors": "UBR",
@@ -35601,6 +35539,18 @@
         "probability": 1,
         "count": 20,
         "addMaxCount": 10
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Celestial Prism"
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Prismatic Egg"
       }
     ],
     "colors": "BRG",
@@ -35647,6 +35597,18 @@
         "probability": 1,
         "count": 20,
         "addMaxCount": 10
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Celestial Prism"
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Prismatic Egg"
       }
     ],
     "colors": "WRG",
@@ -35687,11 +35649,16 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Prismatic Egg"
+        "itemName": "Pandora's Box"
       },
       {
         "type": "life",
         "probability": 1,
+        "count": 1
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
         "count": 1
       },
       {
@@ -35785,7 +35752,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.5,
     "speed": 20,
     "life": 30,
@@ -35793,18 +35760,48 @@
       {
         "type": "item",
         "probability": 1,
-        "itemName": "Guard Armor"
-      },
-      {
-        "type": "life",
-        "probability": 1,
-        "count": 1
+        "itemName": "Guard's Armor"
       },
       {
         "type": "gold",
         "probability": 1,
-        "count": 200,
-        "addMaxCount": 300
+        "count": 2000,
+        "addMaxCount": 0
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Intrepid Hero|USG"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Soltari Champion|STH"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Catapult Master|ONS"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Daru Warchief|SCG"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Shared Triumph|ONS"
       }
     ],
     "colors": "W",
@@ -35825,7 +35822,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.5,
     "speed": 20,
     "life": 30,
@@ -35838,8 +35835,49 @@
       {
         "type": "gold",
         "probability": 1,
-        "count": 200,
-        "addMaxCount": 300
+        "count": 2000,
+        "addMaxCount": 0
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Steam Catapult|PO2"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Righteous Fury|PO2"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Angel of Fury|PO2"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Archangel|PO2"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Festival of Trokin|PO2"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Righteous Charge|PO2"
       }
     ],
     "colors": "W",
@@ -36011,32 +36049,51 @@
         ]
       },
       {
-        "type": "deckCard",
-        "probability": 0.5,
-        "count": 1,
-        "addMaxCount": 2,
-        "rarity": [
-          "rare"
-        ],
-        "cardTypes": [
-          "Creature",
-          "Artifact",
-          "Enchantment",
-          "Instant",
-          "Sorcery"
-        ]
+        "type": "gold",
+        "probability": 1,
+        "count": 50,
+        "addMaxCount": 100
       },
       {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 10,
-        "addMaxCount": 90
+        "type": "shards",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 20
       },
       {
         "type": "item",
         "probability": 1,
-        "count": 1,
         "itemName": "Torturer's Hood"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Bloodstained Mire|ONS"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Pox|ICE"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Mindslicer|ODY"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Meekstone|LEA"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 2,
+        "cardName": "Swamp|PELP"
       }
     ],
     "colors": "BR",
@@ -36099,6 +36156,11 @@
         "probability": 0.3,
         "count": 10,
         "addMaxCount": 90
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.05,
+        "count": 1
       },
       {
         "type": "item",
@@ -36167,6 +36229,11 @@
         "addMaxCount": 90
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.05,
+        "count": 1
+      },
+      {
         "type": "item",
         "probability": 1,
         "count": 1,
@@ -36224,6 +36291,11 @@
           "Instant",
           "Sorcery"
         ]
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.05,
+        "count": 1
       },
       {
         "type": "gold",
@@ -36375,66 +36447,6 @@
     ]
   },
   {
-    "name": "Fire Titan",
-    "nameOverride": "Loafing Flame Titan",
-    "sprite": "sprites/enemy/giant/firegiant.atlas",
-    "deck": [
-      "decks/standard/shandalar97_fire_titan.dck"
-    ],
-    "ai": "reckless",
-    "spawnRate": 0.5,
-    "difficulty": 0.1,
-    "speed": 24,
-    "life": 30,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 1,
-        "addMaxCount": 4,
-        "rarity": [
-          "uncommon"
-        ],
-        "cardTypes": [
-          "Creature",
-          "Artifact",
-          "Enchantment",
-          "Instant",
-          "Sorcery"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.5,
-        "count": 1,
-        "addMaxCount": 2,
-        "rarity": [
-          "rare"
-        ],
-        "cardTypes": [
-          "Creature",
-          "Artifact",
-          "Enchantment",
-          "Instant",
-          "Sorcery"
-        ]
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 10,
-        "addMaxCount": 90
-      }
-    ],
-    "colors": "R",
-    "questTags": [
-      "Giant",
-      "Elemental",
-      "IdentityRed",
-      "BiomeRed"
-    ]
-  },
-  {
     "name": "Uncle Istvan",
     "sprite": "sprites/enemy/humanoid/human/wizard/black_wizard.atlas",
     "deck": [
@@ -36483,6 +36495,11 @@
         "probability": 0.3,
         "count": 10,
         "addMaxCount": 90
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.05,
+        "count": 1
       },
       {
         "type": "item",
@@ -36555,6 +36572,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Holy Symbol"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.05,
+        "count": 1
       }
     ],
     "colors": "W",
@@ -36573,6 +36595,7 @@
       "decks/miniboss/shandalar97_swamp_queen_tojira.dck"
     ],
     "ai": "",
+    "boss": true,
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 24,
@@ -36611,6 +36634,11 @@
         ]
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.05,
+        "count": 1
+      },
+      {
         "type": "gold",
         "probability": 0.3,
         "count": 10,
@@ -36629,8 +36657,7 @@
       "Nightstalker",
       "IdentityBlack",
       "BiomeBlack"
-    ],
-    "boss": true
+    ]
   },
   {
     "name": "Nightstalker",
@@ -36734,6 +36761,11 @@
           "Instant",
           "Sorcery"
         ]
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.05,
+        "count": 1
       },
       {
         "type": "gold",
@@ -36847,6 +36879,11 @@
         ]
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.05,
+        "count": 1
+      },
+      {
         "type": "deckCard",
         "probability": 0.5,
         "count": 1,
@@ -36951,7 +36988,7 @@
     ],
     "ai": "cautious",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 60,
@@ -36987,14 +37024,22 @@
         "cardName": "Mox Sapphire|LEA"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.5,
+        "count": 1
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Tolarian Academy|USG"
+      },
+      {
         "type": "item",
         "probability": 1,
         "count": 1,
         "itemName": "Blue Key to the False God"
       }
-    ],
-    "equipment": [
-      "Urza Planeswalker Starting Setup"
     ],
     "colors": "U"
   },
@@ -37006,7 +37051,7 @@
     ],
     "ai": "cautious",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 60,
@@ -37042,14 +37087,22 @@
         "cardName": "Mox Emerald|LEA"
       },
       {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Gaea's Cradle|USG"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.5,
+        "count": 1
+      },
+      {
         "type": "item",
         "probability": 1,
         "count": 1,
         "itemName": "Green Key to the False God"
       }
-    ],
-    "equipment": [
-      "Gaea, the Worldsoul Starting Setup"
     ],
     "colors": "G"
   },
@@ -37061,7 +37114,7 @@
     ],
     "ai": "cautious",
     "boss": true,
-    "spawnRate": 1,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 30,
     "life": 60,
@@ -37086,8 +37139,8 @@
         "itemName": "Serra's Prayer Book"
       },
       {
-        "type": "life",
-        "probability": 1,
+        "type": "landSketchbookShop",
+        "probability": 0.5,
         "count": 1
       },
       {
@@ -37107,11 +37160,556 @@
         "probability": 1,
         "count": 1,
         "cardName": "Serra Angel|O90P"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Serra's Sanctum|USG"
       }
     ],
-    "equipment": [
-      "Serra the Benevolent Starting Setup"
-    ],
     "colors": "W"
+  },
+  {
+    "name": "Recaller of Ancestry",
+    "sprite": "sprites/enemy/humanoid/human/wizard/archmage.atlas",
+    "deck": [
+      "decks/miniboss/recaller_of_ancestry.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "speed": 15,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Ancestral Recall|LEA"
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 100,
+        "addMaxCount": 100
+      }
+    ],
+    "colors": "UG",
+    "spawnRate": 0
+  },
+  {
+    "name": "Twister of Time",
+    "sprite": "sprites/enemy/celestial/seraphim.atlas",
+    "deck": [
+      "decks/miniboss/twister_of_time.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "speed": 15,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Timetwister|LEA"
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 150,
+        "addMaxCount": 100
+      }
+    ],
+    "colors": "UB",
+    "spawnRate": 0
+  },
+  {
+    "name": "Time Walker",
+    "sprite": "sprites/enemy/undead/bonegolem.atlas",
+    "deck": [
+      "decks/miniboss/time_walker.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "speed": 15,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Time Walk|LEA"
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 200,
+        "addMaxCount": 100
+      }
+    ],
+    "colors": "U",
+    "spawnRate": 0
+  },
+  {
+    "name": "Krampus",
+    "sprite": "sprites/enemy/fiend/abyssalbaron.atlas",
+    "deck": [
+      "decks/elite/krampus.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "speed": 25,
+    "scale": 1.4,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Lump of Coal"
+      }
+    ],
+    "colors": "BR",
+    "questTags": [
+      "Fiend",
+      "Aggressive",
+      "Unholy"
+    ]
+  },
+  {
+    "name": "Santa",
+    "sprite": "sprites/enemy/humanoid/human/wizard/red_wiz2.atlas",
+    "deck": [
+      "decks/elite/santa.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "speed": 20,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Christmas Gift"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Dream Thrush|INV"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Carrier Pigeons|ALL"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Zodiac Rooster|PTK"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Battle Screech|JUD"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Sol Ring|LEA"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Rukh Egg|ARN"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Birds of Paradise|7ED"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Krazy Kow|UGL"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "The Lady of the Mountain|LEG"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Lord of the Pit|LEA"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Elvish Piper|UDS"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Goblin War Drums|FEM"
+      }
+    ],
+    "colors": "RG",
+    "questTags": [
+      "Humanoid",
+      "Elf"
+    ]
+  },
+  {
+    "name": "Bazaar Keeper",
+    "sprite": "sprites/enemy/humanoid/conjurer.atlas",
+    "deck": [
+      "decks/boss/bazaarkeeper.dck"
+    ],
+    "boss": true,
+    "life": 30,
+    "gamesPerMatch": 3,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 5000,
+        "addMaxCount": 5000
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Crooked Scales"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Bazaar of Baghdad|ARN"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Bazaar of Wonders|MIR"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Anavolver|APC"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Cetavolver|APC"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Degavolver|APC"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Necravolver|APC"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Rakavolver|APC"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Gem Bazaar|PAST"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Lightning Angel|APC"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Overgrown Estate|APC"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Fervent Charge|APC"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Fungal Shambler|APC"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Guided Passage|APC"
+      }
+    ],
+    "colors": "WUBRG",
+    "questTags": [
+      "Humanoid",
+      "Merchant",
+      "Boss"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "Arcades Sabboth",
+    "sprite": "sprites/enemy/dragon/ancientsilverdragon.atlas",
+    "deck": [
+      "decks/miniboss/Arcades Sabboth.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "flying": true,
+    "speed": 15,
+    "scale": 1.8,
+    "life": 40,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 1500,
+        "addMaxCount": 500
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 15,
+        "addMaxCount": 25
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Kry Shield"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Arcades Sabboth|LEG"
+      }
+    ],
+    "colors": "WUG",
+    "questTags": [
+      "Dragon",
+      "Boss",
+      "ElderDragon"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "Chromium",
+    "sprite": "sprites/enemy/dragon/ancientsilverdragon.atlas",
+    "deck": [
+      "decks/miniboss/chromium.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "flying": true,
+    "speed": 15,
+    "scale": 1.8,
+    "life": 40,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 1500,
+        "addMaxCount": 500
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 15,
+        "addMaxCount": 25
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Ring of Immortals"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Chromium|LEG"
+      }
+    ],
+    "colors": "WUB",
+    "questTags": [
+      "Dragon",
+      "Boss",
+      "ElderDragon"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "Nicol Bolas",
+    "sprite": "sprites/enemy/dragon/firedragon.atlas",
+    "deck": [
+      "decks/miniboss/nicol bolas.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "flying": true,
+    "speed": 15,
+    "scale": 1.8,
+    "life": 40,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 1500,
+        "addMaxCount": 500
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 15,
+        "addMaxCount": 25
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Marble Mace"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Nicol Bolas|LEG"
+      }
+    ],
+    "colors": "UBR",
+    "questTags": [
+      "Dragon",
+      "Boss",
+      "ElderDragon"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "Palladia-Mors",
+    "sprite": "sprites/enemy/dragon/adultgreendragon.atlas",
+    "deck": [
+      "decks/miniboss/Palladia-Mors.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "flying": true,
+    "speed": 15,
+    "scale": 1.8,
+    "life": 40,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 1500,
+        "addMaxCount": 500
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 15,
+        "addMaxCount": 25
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Life Matrix"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Palladia-Mors|LEG"
+      }
+    ],
+    "colors": "WRG",
+    "questTags": [
+      "Dragon",
+      "Boss",
+      "ElderDragon"
+    ],
+    "spawnRate": 0
+  },
+  {
+    "name": "Vaevictis Asmadi",
+    "sprite": "sprites/enemy/dragon/adultgreendragon.atlas",
+    "deck": [
+      "decks/miniboss/Vaevictis Asmadi.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "flying": true,
+    "speed": 15,
+    "scale": 1.8,
+    "life": 40,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 1500,
+        "addMaxCount": 500
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 15,
+        "addMaxCount": 25
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Gauntlets of Chaos"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Vaevictis Asmadi|LEG"
+      }
+    ],
+    "colors": "BRG",
+    "questTags": [
+      "Dragon",
+      "Boss",
+      "ElderDragon"
+    ],
+    "spawnRate": 0
   }
 ]
