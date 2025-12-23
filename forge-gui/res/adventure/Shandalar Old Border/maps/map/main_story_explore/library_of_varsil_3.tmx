@@ -241,7 +241,6 @@
   </object>
   <object id="49" template="../../../../../../common/maps/obj/enemy.tx" x="512" y="-32" visible="0">
    <properties>
-    <property name="deckOverride" value="../../../../common/decks/standard/mimic_multicolor.dck" />
     <property name="defeatDialog">[
   {
     "action": [{"deleteMapObject": -1}, {"deleteMapObject": 50}]
