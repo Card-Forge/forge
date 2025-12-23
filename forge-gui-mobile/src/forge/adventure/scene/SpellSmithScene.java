@@ -417,12 +417,11 @@ public class SpellSmithScene extends UIScene {
         lockedPrice = currentPrice;
         PaperCard P = cardPool.get(MyRandom.getRandom().nextInt(cardPool.size())); //Don't use the standard RNG.
         currentReward = null;
-        if (Config.instance().getSettingData().useAllCardVariants) {
-            if (!edition.isEmpty()) {
-                currentReward = new Reward(CardUtil.getCardByNameAndEdition(P.getCardName(), edition));
-            } else {
-                currentReward = new Reward(CardUtil.getCardByName(P.getCardName())); // grab any random variant if no set preference is specified
-            }
+        if (!edition.isEmpty()) {
+            // Always respect edition filter when one is selected
+            currentReward = new Reward(CardUtil.getCardByNameAndEdition(P.getCardName(), edition));
+        } else if (Config.instance().getSettingData().useAllCardVariants) {
+            currentReward = new Reward(CardUtil.getCardByName(P.getCardName())); // grab any random variant if no set preference is specified
         } else {
             currentReward = new Reward(P);
         }

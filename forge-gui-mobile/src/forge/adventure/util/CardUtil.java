@@ -784,9 +784,8 @@ public class CardUtil {
     }
 
     public static PaperCard getCardByNameAndEdition(String cardName, String edition) {
-        List<PaperCard> cardPool = Config.instance().getSettingData().useAllCardVariants
-                ? FModel.getMagicDb().getCommonCards().getAllCards(cardName)
-                : FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt(cardName);
+        // Always search all printings when looking for a specific edition
+        List<PaperCard> cardPool = FModel.getMagicDb().getCommonCards().getAllCards(cardName);
         List<PaperCard> validCards = cardPool.stream()
                 .filter(input -> input.getEdition().equals(edition)).collect(Collectors.toList());
 
