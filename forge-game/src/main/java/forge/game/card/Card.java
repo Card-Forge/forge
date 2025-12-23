@@ -1005,10 +1005,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         updateNameforView();
     }
 
-    public void removeChangedName(long timestamp, long staticId) {
-        if (changedCardNames.remove(timestamp, staticId) != null) {
+    public boolean removeChangedName(long timestamp, long staticId) {
+        return removeChangedName(timestamp, staticId, true);
+    }
+    public boolean removeChangedName(long timestamp, long staticId, boolean updateView) {
+        boolean changed = changedCardNames.remove(timestamp, staticId) != null;
+        if (changed && updateView) {
             updateNameforView();
         }
+        return changed;
     }
 
     public boolean clearChangedName() {
@@ -4304,6 +4309,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         this.updateChangedText();
     }
+    public final boolean removeChangedCardTypesByText(final long timestamp, final long staticId) {
+        return changedCardTypesByText.remove(timestamp, staticId) != null;
+    }
 
     public final void addChangedCardTypes(final CardType addType, final CardType removeType, final boolean addAllCreatureTypes,
             final Set<RemoveType> remove,
@@ -4316,10 +4324,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
     }
 
-    public final void removeChangedCardTypes(final long timestamp, final long staticId) {
-        removeChangedCardTypes(timestamp, staticId, true);
+    public final boolean removeChangedCardTypes(final long timestamp, final long staticId) {
+        return removeChangedCardTypes(timestamp, staticId, true);
     }
-    public final void removeChangedCardTypes(final long timestamp, final long staticId, final boolean updateView) {
+    public final boolean removeChangedCardTypes(final long timestamp, final long staticId, final boolean updateView) {
         boolean removed = false;
         removed |= changedCardTypes.remove(timestamp, staticId) != null;
         removed |= changedCardTypesCharacterDefining.remove(timestamp, staticId) != null;
@@ -4328,6 +4336,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             if (updateView)
                 updateTypesForView();
         }
+        return removed;
     }
 
     public final void updateTypeCache() {
@@ -4342,6 +4351,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         changedCardColorsByText.put(timestamp, stAb != null ? stAb.getId() : (long)0, new CardColor(color, addToColors));
         updateColorForView();
     }
+    public final void removeColorByText(final long timestampIn, final long staticId) {
+        if (changedCardColorsByText.remove(timestampIn, staticId) != null) {
+            updateColorForView();
+        }
+    }
 
     public final void addColor(final ColorSet color, final boolean addToColors, final long timestamp, final StaticAbility stAb) {
         (stAb != null && stAb.isCharacteristicDefining() ? changedCardColorsCharacterDefining : changedCardColors).put(
@@ -4352,7 +4366,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public final void removeColor(final long timestampIn, final long staticId) {
         boolean removed = false;
-        removed |= changedCardColorsByText.remove(timestampIn, staticId) != null;
         removed |= changedCardColors.remove(timestampIn, staticId) != null;
         removed |= changedCardColorsCharacterDefining.remove(timestampIn, staticId) != null;
 
@@ -4550,6 +4563,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         newPTText.put(timestamp, staticId, Pair.of(power, toughness));
         updatePTforView();
     }
+    public final boolean removeNewPTbyText(final long timestamp, final long staticId) {
+        return newPTText.remove(timestamp, staticId) != null;
+    }
 
     public final void addNewPT(final Integer power, final Integer toughness, final long timestamp, final long staticId) {
         addNewPT(power, toughness, timestamp, staticId, false, true);
@@ -4564,16 +4580,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final void removeNewPT(final long timestamp, final long staticId) {
         removeNewPT(timestamp, staticId, true);
     }
-    public final void removeNewPT(final long timestamp, final long staticId, final boolean updateView) {
+    public final boolean removeNewPT(final long timestamp, final long staticId, final boolean updateView) {
         boolean removed = false;
 
-        removed |= newPTText.remove(timestamp, staticId) != null;
         removed |= newPT.remove(timestamp, staticId) != null;
         removed |= newPTCharacterDefining.remove(timestamp, staticId) != null;
 
         if (removed && updateView) {
             updatePTforView();
         }
+        return removed;
     }
 
     public Iterable<Pair<Integer, Integer>> getPTIterable() {
@@ -4736,8 +4752,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         boostPT.put(timestamp, staticId, Pair.of(power, toughness));
     }
 
-    public void removePTBoost(final long timestamp, final long staticId) {
-        boostPT.remove(timestamp, staticId);
+    public boolean removePTBoost(final long timestamp, final long staticId) {
+        return boostPT.remove(timestamp, staticId) != null;
     }
 
     public Table<Long, Long, Pair<Integer, Integer>> getPTBoostTable() {
@@ -5087,10 +5103,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final boolean removeChangedCardTraits(long timestamp, long staticId) {
-        boolean changed = false;
-        changed |= changedCardTraitsByText.remove(timestamp, staticId) != null;
-        changed |= changedCardTraits.remove(timestamp, staticId) != null;
-        return changed;
+        return changedCardTraits.remove(timestamp, staticId) != null;
+    }
+    public final boolean removeChangedCardTraitsByText(long timestamp, long staticId) {
+        return changedCardTraitsByText.remove(timestamp, staticId) != null;
     }
 
     public Iterable<CardTraitChanges> getChangedCardTraitsList(CardState state) {
@@ -5304,6 +5320,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             updateKeywords();
         }
         return changed;
+    }
+    public final boolean removeChangedCardKeywordsByText(final long timestamp, final long staticId) {
+        return changedCardKeywordsByText.remove(timestamp, staticId) != null;
     }
 
     public boolean clearChangedCardKeywords() {
