@@ -2,7 +2,7 @@ Name:Gnostro, Voice of the Crags
 ManaCost:1 U R W
 Types:Legendary Creature Chimera
 PT:3/3
-A:AB$ Charm | Cost$ T | Choices$ DBScry,DBDamage,DBGainLife | CharmNum$ 1
+A:AB$ Charm | Cost$ T | Choices$ DBScry,DBDamage,DBGainLife
 SVar:DBScry:DB$ Scry | ScryNum$ X | SpellDescription$ Scry X.
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target creature.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SpellDescription$ You gain X life.

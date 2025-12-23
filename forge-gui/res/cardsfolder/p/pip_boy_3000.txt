@@ -2,7 +2,7 @@ Name:Pip-Boy 3000
 ManaCost:1
 Types:Artifact Equipment
 T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigChoose | TriggerDescription$ Whenever equipped creature attacks, ABILITY
-SVar:TrigChoose:DB$ Charm | Choices$ DBDraw,DBPutCounter,DBUntap | CharmNum$ 1
+SVar:TrigChoose:DB$ Charm | Choices$ DBDraw,DBPutCounter,DBUntap
 SVar:DBDraw:DB$ Draw | SubAbility$ DBDiscard | SpellDescription$ Sort Inventory — Draw a card, then discard a card.
 SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose
 SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | Defined$ TriggeredAttackerLKICopy | CounterNum$ 1 | SpellDescription$ Pick a Perk — Put a +1/+1 counter on that creature.

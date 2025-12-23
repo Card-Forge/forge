@@ -1,7 +1,7 @@
 Name:Sapphire Charm
 ManaCost:U
 Types:Instant
-A:SP$ Charm | Choices$ DelTrigSlowtrip,Pump,Phases | CharmNum$ 1
+A:SP$ Charm | Choices$ DelTrigSlowtrip,Pump,Phases
 SVar:DelTrigSlowtrip:DB$ DelayedTrigger | NextTurn$ True | Mode$ Phase | Phase$ Upkeep | ValidTgts$ Player | RememberObjects$ Targeted | Execute$ DrawSlowtrip | SpellDescription$ Target player draws a card at the beginning of the next turn's upkeep.
 SVar:DrawSlowtrip:DB$ Draw | Defined$ DelayTriggerRemembered | SpellDescription$ Draw a card.
 SVar:Pump:DB$ Pump | ValidTgts$ Creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.

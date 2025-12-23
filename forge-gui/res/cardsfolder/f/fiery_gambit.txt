@@ -8,7 +8,7 @@ SVar:FlipAgain:DB$ FlipACoin | WinSubAbility$ IncrementWins | LoseSubAbility$ In
 SVar:IncrementWins:DB$ StoreSVar | SVar$ Win | Type$ CountSVar | Expression$ Win/Plus.1
 SVar:IncrementLoss:DB$ StoreSVar | SVar$ Loss | Type$ CountSVar | Expression$ Loss/Plus.1 | SubAbility$ ResetWins
 SVar:ResetWins:DB$ StoreSVar | SVar$ Win | Type$ Number | Expression$ 0
-SVar:DamageCreature:DB$ DealDamage | Defined$ Targeted | NumDmg$ 3 | ConditionCheckSVar$ Win | ConditionSVarCompare$ GE1 | SubAbility$ DamageOpponents
+SVar:DamageCreature:DB$ DealDamage | Defined$ Targeted | NumDmg$ 3 | ConditionCheckSVar$ Win | SubAbility$ DamageOpponents
 SVar:DamageOpponents:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 6 | ConditionCheckSVar$ Win | ConditionSVarCompare$ GE2 | SubAbility$ DrawNine
 SVar:DrawNine:DB$ Draw | Defined$ You | NumCards$ 9 | ConditionCheckSVar$ Win | ConditionSVarCompare$ GE3 | SubAbility$ UntapLands
 SVar:UntapLands:DB$ UntapAll | ValidCards$ Land.YouCtrl | ConditionCheckSVar$ Win | ConditionSVarCompare$ GE3

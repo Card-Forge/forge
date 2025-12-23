@@ -24,8 +24,7 @@ public class RingTemptsYouEffect extends EffectEffect {
         Player p = sa.getActivatingPlayer();
         Game game = p.getGame();
 
-        if (p.getTheRing() == null)
-            p.createTheRing(sa.getOriginalHost().getSetCode());
+        p.createTheRing(sa.getOriginalHost().getSetCode());
 
         //increment ring tempted you for property
         p.incrementRingTemptedYou();

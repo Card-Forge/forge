@@ -5,7 +5,7 @@ T:Mode$ ChangesZoneAll | ValidCards$ Permanent.token+YouCtrl | Destination$ Batt
 SVar:TrigDraw:DB$ Draw
 K:Class:2:W:AddTrigger$ TriggerClassLevel
 SVar:TriggerClassLevel:Mode$ ClassLevelGained | ClassLevel$ 2 | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ When this Class becomes level 2, create a token that's a copy of target token you control.
-SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Permanent.token+YouCtrl | TgtPrompt$ Select target token you control | NumCopies$ 1
+SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Permanent.token+YouCtrl | TgtPrompt$ Select target token you control
 K:Class:3:3 W:AddStaticAbility$ SBuff
 SVar:SBuff:Mode$ Continuous | Affected$ Creature.token+YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Creature tokens you control get +2/+2.
 DeckNeeds:Ability$Token

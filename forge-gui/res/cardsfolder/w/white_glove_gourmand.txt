@@ -4,7 +4,7 @@ Types:Creature Human Noble
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigHumanToken | TriggerDescription$ When CARDNAME enters, create two 1/1 white Human Soldier creature tokens.
 SVar:TrigHumanToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_human_soldier | TokenOwner$ You
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigFoodToken | TriggerDescription$ At the beginning of your end step, if another Human died under your control this turn, create a Food token.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigFoodToken | TriggerDescription$ At the beginning of your end step, if another Human died under your control this turn, create a Food token.
 SVar:TrigFoodToken:DB$ Token | TokenScript$ c_a_food_sac | TokenOwner$ You
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Human.Other+YouCtrl
 DeckHas:Ability$Token|Food

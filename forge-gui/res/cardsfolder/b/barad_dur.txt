@@ -4,7 +4,7 @@ Types:Legendary Land
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ CARDNAME enters tapped unless you control a legendary creature.
 SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Creature.Legendary+YouCtrl | ConditionCompare$ EQ0
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
-A:AB$ Amass | Cost$ X X B T | Type$ Orc | Num$ X | CheckSVar$ Morbid | SVarCompare$ GE1 | SpellDescription$ Amass Orcs X. Activate only if a creature died this turn.
+A:AB$ Amass | Cost$ X X B T | Type$ Orc | Num$ X | CheckSVar$ Morbid | SpellDescription$ Amass Orcs X. Activate only if a creature died this turn.
 SVar:Morbid:Count$Morbid.1.0
 SVar:X:Count$xPaid
 DeckHints:Type$Legendary & Type$Creature

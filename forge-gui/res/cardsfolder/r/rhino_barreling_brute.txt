@@ -6,7 +6,7 @@ PT:6/7
 K:Vigilance
 K:Trample
 K:Haste
-T:Mode$ Attacks | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigDraw | TriggerDescription$ Whenever NICKNAME attacks, if you've cast a spell with mana value 4 or greater this turn, draw a card.
+T:Mode$ Attacks | ValidCard$ Card.Self | CheckSVar$ X | Execute$ TrigDraw | TriggerDescription$ Whenever NICKNAME attacks, if you've cast a spell with mana value 4 or greater this turn, draw a card.
 SVar:TrigDraw:DB$ Draw
 SVar:X:Count$ThisTurnCast_Card.cmcGE4+YouCtrl
 SVar:HasAttackEffect:TRUE
