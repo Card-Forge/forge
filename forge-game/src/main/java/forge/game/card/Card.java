@@ -591,6 +591,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         currentStateName = state;
         currentState = getState(state);
 
+        updateTypeCache();
         if (updateView) {
             updateStateForView();
             view.updateNeedsTransformAnimation(needsTransformAnimation);
@@ -4268,6 +4269,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             changed = true;
         changedCardTypes.clear();
 
+        this.updateTypeCache();
+
         return changed;
     }
 
@@ -4328,6 +4331,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             final long timestamp, final long staticId, final boolean updateView, final boolean cda) {
         (cda ? changedCardTypesCharacterDefining : changedCardTypes).put(timestamp, staticId, new CardChangedType(
                 addType, removeType, addAllCreatureTypes, remove));
+        updateTypeCache();
         if (updateView) {
             updateTypesForView();
         }
@@ -4340,9 +4344,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         boolean removed = false;
         removed |= changedCardTypes.remove(timestamp, staticId) != null;
         removed |= changedCardTypesCharacterDefining.remove(timestamp, staticId) != null;
-        if (removed && updateView) {
-            updateTypesForView();
+        if (removed) {
+            updateTypeCache();
+            if (updateView)
+                updateTypesForView();
         }
+    }
+
+    public final void updateTypeCache() {
+        this.getCurrentState().updateTypes();
     }
 
     public boolean hasChangedCardColors() {
@@ -5653,19 +5663,21 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         // Text Change for intrinsic keywords
         for (KeywordInterface kw : beforeKeywords) {
             String oldtxt = kw.getOriginal();
-            final String newtxt = AbilityUtils.applyKeywordTextChangeEffects(oldtxt, this);
-            if (!newtxt.equals(oldtxt)) {
-                KeywordInterface newKw = Keyword.getInstance(newtxt);
-                newKw.createTraits(this, true);
-                addKeywords.add(newKw);
-                removeKeywords.add(kw);
-            } else if (oldtxt.startsWith("Class")) {
+            if (oldtxt.startsWith("Class")) {
                 for (StaticAbility trait : kw.getStaticAbilities()) {
                     trait.changeText();
                 }
             } else if (oldtxt.startsWith("Chapter")) {
                 for (Trigger trait : kw.getTriggers()) {
                     trait.changeText();
+                }
+            } else {
+                final String newtxt = AbilityUtils.applyKeywordTextChangeEffects(oldtxt, this);
+                if (!newtxt.equals(oldtxt)) {
+                    KeywordInterface newKw = Keyword.getInstance(newtxt);
+                    newKw.createTraits(this, true);
+                    addKeywords.add(newKw);
+                    removeKeywords.add(kw);
                 }
             }
         }
@@ -5677,6 +5689,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         getView().updateChangedColorWords(this);
         getView().updateChangedTypes(this);
         updateManaCostForView();
+
+        updateTypeCache();
+        updateTypesForView();
 
         updateAbilityTextForView();
         view.updateNonAbilityText(this);
@@ -7565,7 +7580,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
     public void setRules(CardRules r) {
         cardRules = r;
-        currentState.getView().updateRulesText(r, getType());
+        currentState.getView().updateRulesText(r);
     }
 
     @Override
@@ -8345,6 +8360,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         this.changedCardTypes.putAll(in.changedCardTypes);
         this.changedCardTypesCharacterDefining.putAll(in.changedCardTypesCharacterDefining);
+        updateTypeCache();
 
         this.changedCardNames.putAll(in.changedCardNames);
         setChangedCardTraits(in.getChangedCardTraits());
