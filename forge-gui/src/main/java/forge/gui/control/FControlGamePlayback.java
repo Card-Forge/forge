@@ -55,12 +55,7 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
     private PlaybackSpeed playbackSpeed = PlaybackSpeed.NORMAL;
 
     private void pauseForEvent(final int delay) {
-        try {
-            Thread.sleep(playbackSpeed.applyModifier(delay));
-        } catch (final InterruptedException e) {
-            // Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
-            e.printStackTrace();
-        }
+
     }
 
     @Override

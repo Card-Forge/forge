@@ -3161,11 +3161,12 @@ public class ComputerUtil {
         }
         Combat combat = ai.getGame().getCombat();
         boolean isThreatened = (c.isCreature() && ComputerUtil.predictCreatureWillDieThisTurn(ai, c, sa, false)
-                && (!ComputerUtilCombat.willOpposingCreatureDieInCombat(ai, c, combat) && !ComputerUtilCombat.isDangerousToSacInCombat(ai, c, combat)))
+                && !ComputerUtilCombat.willOpposingCreatureDieInCombat(ai, c, combat) && !ComputerUtilCombat.isDangerousToSacInCombat(ai, c, combat))
                 || (!c.isCreature() && ComputerUtil.predictThreatenedObjects(ai, sa).contains(c));
         return isThreatened;
     }
 
+    // some AI checks can lead to loops depending on the boardstate
     public static <T> T protectRecursion(SpellAbility sa, Supplier<T> loopableMethod, T fallback) {
         boolean unskip = false;
         if (sa != null) {
