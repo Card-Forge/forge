@@ -328,6 +328,7 @@ public class Forge implements ApplicationListener {
     public static void openHomeDefault() {
         //default to English only if CJK is missing
         getLocalizer().setEnglish(forcedEnglishonCJKMissing);
+        FSkinTexture.invalidateAdventureTextures();
         GuiBase.setAdventureDirectory(null);
         clearScreenStack();
         openHomeScreen(-1, null); //default for startup
@@ -345,6 +346,7 @@ public class Forge implements ApplicationListener {
         getLocalizer().setEnglish(forcedEnglishonCJKMissing);
         //continuous rendering is needed for adventure mode
         startContinuousRendering();
+        FSkinTexture.invalidateAdventureTextures();
         GuiBase.setAdventureDirectory(ForgeConstants.ADVENTURE_COMMON_DIR);
         advStartup = false;
         isMobileAdventureMode = true;
@@ -767,6 +769,7 @@ public class Forge implements ApplicationListener {
         setTransitionScreen(new TransitionScreen(() -> {
             ImageCache.getInstance().disposeTextures();
             isMobileAdventureMode = false;
+            FSkinTexture.invalidateAdventureTextures();
             GuiBase.setAdventureDirectory(null);
             setCursor(FSkin.getCursor().get(0), "0");
             setAltZoneTabMode(FModel.getPreferences().getPref(FPref.UI_ALT_PLAYERZONETABS));
