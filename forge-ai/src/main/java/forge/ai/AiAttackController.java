@@ -236,25 +236,25 @@ public class AiAttackController {
      *
      */
     public final static List<Card> sortAttackers(final List<Card> in) {
-        final List<Card> list = new ArrayList<>();
+        final List<Card> result = new ArrayList<>();
 
         // Cards with triggers should come first (for Battle Cry)
         for (final Card attacker : in) {
             for (final Trigger trigger : attacker.getTriggers()) {
                 if (trigger.getMode() == TriggerType.Attacks) {
-                    list.add(attacker);
+                    result.add(attacker);
                     break;
                 }
             }
         }
 
         for (final Card attacker : in) {
-            if (!list.contains(attacker)) {
-                list.add(attacker);
+            if (!result.contains(attacker)) {
+                result.add(attacker);
             }
         }
 
-        return list;
+        return result;
     }
 
     // Is there any reward for attacking? (for 0/1 creatures there is not)
@@ -706,27 +706,28 @@ public class AiAttackController {
         }
         unblockedAttackers.addAll(remainingAttackers);
 
-        Map<Card, Integer> trampleDamage = Maps.newHashMap();
+        Map<Card, Integer> trampleDmg = Maps.newHashMap();
         CardCollection tramplers = CardLists.getKeyword(blockedAttackers, Keyword.TRAMPLE);
-        tramplers.sort((c1, c2) -> Boolean.compare(c2.isInfectDamage(defendingOpponent), c1.isInfectDamage(defendingOpponent)));
-        for (Card attacker : tramplers) {
-            int damage = ComputerUtilCombat.getAttack(attacker);
+        CardCollection infecterTramplers = tramplers.filter(c -> c.isInfectDamage(defendingOpponent));
+        tramplers.removeAll(infecterTramplers);
+        for (Card attacker : Iterables.concat(infecterTramplers, tramplers)) {
+            int dmg = ComputerUtilCombat.getAttack(attacker);
             for (Card blocker : remainingBlockers.threadSafeIterable()) {
+                if (dmg < 1) {
+                    break;
+                }
                 if (CombatUtil.canBlock(attacker, blocker)) {
-                    damage -= ComputerUtilCombat.shieldDamage(attacker, blocker);
+                    dmg -= ComputerUtilCombat.shieldDamage(attacker, blocker);
                     remainingBlockers.remove(blocker);
-                    if (damage < 1) {
-                        break;
-                    }
                 }
             }
-            if (damage > 0) {
-                trampleDamage.put(attacker, damage);
+            if (dmg > 0) {
+                trampleDmg.put(attacker, dmg);
             }
         }
 
         if (defendingOpponent.getLife() > 0 && !defendingOpponent.cantLoseForZeroOrLessLife()) {
-            int totalCombatDamage = Aggregates.sum(trampleDamage.values());
+            int totalCombatDamage = Aggregates.sum(trampleDmg.values());
             if (totalCombatDamage >= defendingOpponent.getLife()) {
                 return true;
             }
@@ -744,8 +745,8 @@ public class AiAttackController {
         if (totalPoisonDamage >= 10 - defendingOpponent.getPoisonCounters()) {
             return true;
         }
-        for (Card trampler : trampleDamage.keySet()) {
-            int dmg = trampleDamage.get(trampler);
+        for (Card trampler : trampleDmg.keySet()) {
+            int dmg = trampleDmg.get(trampler);
             if (trampler.isInfectDamage(defendingOpponent)) {
                 totalPoisonDamage += dmg;
             }
