@@ -2,6 +2,6 @@ Name:Ancient Amphitheater
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ Combo R W | SpellDescription$ Add {R} or {W}.
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ DBTap | ReplacementResult$ Updated | Description$ As CARDNAME enters, you may reveal a Giant card from your hand. If you don't, CARDNAME enters tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ DBTap | ReplacementResult$ Updated | Description$ As this land enters, you may reveal a Giant card from your hand. If you don't, this land enters tapped.
 SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ Reveal<1/Giant> | UnlessPayer$ You | StackDescription$ enters tapped.
-Oracle:As Ancient Amphitheater enters, you may reveal a Giant card from your hand. If you don't, Ancient Amphitheater enters tapped.\n{T}: Add {R} or {W}.
+Oracle:As this land enters, you may reveal a Giant card from your hand. If you don't, this land enters tapped.\n{T}: Add {R} or {W}.
