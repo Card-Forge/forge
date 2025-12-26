@@ -146,7 +146,7 @@
   </object>
   <object id="65" template="../../../../../../common/maps/obj/entry_down.tx" x="352" y="542.75" width="48" height="29">
    <properties>
-    <property name="teleport" value="../common/maps/map/main_story/castles/blue_castle_f1.tmx" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/end_palace/blue_end_palace_f1.tmx" />
    </properties>
   </object>
   <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="83.3333" y="603">
