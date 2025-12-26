@@ -526,8 +526,6 @@ public class CardFactoryUtil {
      *            the card
      */
     public static final void addAbilityFactoryAbilities(final Card card, final Iterable<String> abilities) {
-        // **************************************************
-        // AbilityFactory cards
         for (String rawAbility : abilities) {
             try {
                 final SpellAbility intrinsicAbility = AbilityFactory.getAbility(rawAbility, card);

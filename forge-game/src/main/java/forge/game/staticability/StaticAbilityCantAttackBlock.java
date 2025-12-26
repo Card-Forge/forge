@@ -396,7 +396,6 @@ public class StaticAbilityCantAttackBlock {
     public static Pair<Integer, Integer> getMinMaxBlocker(final Card attacker, final Player defender) {
         MutablePair<Integer, Integer> result = MutablePair.of(1, Integer.MAX_VALUE);
 
-        // Menace keyword
         if (attacker.hasKeyword(Keyword.MENACE)) {
             result.setLeft(2);
         }
