@@ -598,6 +598,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             if (game != null) {
                 // update Type, color and keywords again if they have changed
                 if (!changedCardTypes.isEmpty()) {
+                    updateTypeCache();
                     updateTypesForView();
                 }
                 updateColorForView();
@@ -4268,6 +4269,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             changed = true;
         changedCardTypes.clear();
 
+        this.updateTypeCache();
+
         return changed;
     }
 
@@ -4316,6 +4319,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         this.changedTextColors.addEmpty(timestamp, staticId);
         this.changedTextTypes.addEmpty(timestamp, staticId);
 
+        this.updateTypeCache();
         this.updateChangedText();
 
         if (updateView) {
@@ -4328,6 +4332,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             final long timestamp, final long staticId, final boolean updateView, final boolean cda) {
         (cda ? changedCardTypesCharacterDefining : changedCardTypes).put(timestamp, staticId, new CardChangedType(
                 addType, removeType, addAllCreatureTypes, remove));
+        updateTypeCache();
         if (updateView) {
             updateTypesForView();
         }
@@ -4340,9 +4345,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         boolean removed = false;
         removed |= changedCardTypes.remove(timestamp, staticId) != null;
         removed |= changedCardTypesCharacterDefining.remove(timestamp, staticId) != null;
-        if (removed && updateView) {
-            updateTypesForView();
+        if (removed) {
+            updateTypeCache();
+            if (updateView)
+                updateTypesForView();
         }
+    }
+
+    public final void updateTypeCache() {
+        this.getCurrentState().updateTypes();
     }
 
     public boolean hasChangedCardColors() {
@@ -7565,7 +7576,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
     public void setRules(CardRules r) {
         cardRules = r;
-        currentState.getView().updateRulesText(r, getType());
+        currentState.getView().updateRulesText(r);
     }
 
     @Override
@@ -8345,6 +8356,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         this.changedCardTypes.putAll(in.changedCardTypes);
         this.changedCardTypesCharacterDefining.putAll(in.changedCardTypesCharacterDefining);
+        updateTypeCache();
 
         this.changedCardNames.putAll(in.changedCardNames);
         setChangedCardTraits(in.getChangedCardTraits());
