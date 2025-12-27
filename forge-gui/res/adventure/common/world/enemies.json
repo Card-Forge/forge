@@ -25859,7 +25859,8 @@
 			"count": 2,
 			"addMaxCount": 4,
 			"colors": [
-				"Red,Green"
+				"Red",
+				"Green"
 			],
 			"rarity": [
 				"common",
