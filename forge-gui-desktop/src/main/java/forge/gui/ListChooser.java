@@ -29,6 +29,7 @@ import java.util.function.Function;
 
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.ImageIcon;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
@@ -40,6 +41,7 @@ import javax.swing.event.ListSelectionListener;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
+import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FList;
@@ -309,9 +311,19 @@ public class ListChooser<T> {
         public Component getListCellRendererComponent(final JList<? extends T> list, final T value, final int index, final boolean isSelected, final boolean cellHasFocus) {
             Component result = defRenderer.getListCellRendererComponent(list, getLabel(value), index, isSelected, cellHasFocus);
             if (value instanceof MagicColor.Color c) {
-                defRenderer.setIcon(FSkin.getImage(FSkinProp.iconFromColor(c), 24, 24).getIcon());
+                defRenderer.setIcon(fromSkinProp(FSkinProp.iconFromColor(c)));
+            }
+            if (value instanceof CardType.CoreType c) {
+                defRenderer.setIcon(fromSkinProp(FSkinProp.iconFromCoreType(c)));
             }
             return result;
+        }
+
+        protected ImageIcon fromSkinProp(FSkinProp prop) {
+            if (prop == null) {
+                return null;
+            }
+            return FSkin.getImage(prop, 24, 24).getIcon();
         }
 
         protected String getLabel(final T value) {

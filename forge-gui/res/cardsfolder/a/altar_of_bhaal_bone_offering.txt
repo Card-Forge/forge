@@ -11,6 +11,6 @@ ALTERNATE
 Name:Bone Offering
 ManaCost:2 B
 Types:Sorcery Adventure
-A:SP$ Token | TokenAmount$ 1 | TokenScript$ b_4_1_skeleton_menace | TokenTapped$ True | TokenOwner$ You | SpellDescription$ Create a tapped 4/1 black Skeleton creature token with menace.
+A:SP$ Token | TokenScript$ b_4_1_skeleton_menace | TokenTapped$ True | TokenOwner$ You | SpellDescription$ Create a tapped 4/1 black Skeleton creature token with menace.
 DeckHas:Ability$Token & Type$Skeleton
 Oracle:Create a tapped 4/1 black Skeleton creature token with menace.

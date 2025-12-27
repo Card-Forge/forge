@@ -4,7 +4,7 @@ Types:Creature Dragon
 PT:4/3
 K:Flying
 T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Dragon.YouCtrl | ValidTarget$ Opponent | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ Whenever one or more Dragons you control deal combat damage to an opponent, ABILITY
-SVar:TrigCharm:DB$ Charm | Choices$ DBSmash,DBStrafe,DBSwoop | ChoiceRestriction$ ThisTurn | CharmNum$ 1
+SVar:TrigCharm:DB$ Charm | Choices$ DBSmash,DBStrafe,DBSwoop | ChoiceRestriction$ ThisTurn
 SVar:DBSmash:DB$ Destroy | ValidTgts$ Artifact.ControlledBy TriggeredTarget | TgtPrompt$ Select target artifact or enchantment damaged player controls | SpellDescription$ Destroy target artifact that opponent controls.
 SVar:DBStrafe:DB$ DamageAll | ValidPlayers$ OppNonTriggeredTarget | NumDmg$ 4 | SpellDescription$ This creature deals 4 damage to each other opponent.
 SVar:DBSwoop:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top card of your library. You may play it this turn.

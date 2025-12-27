@@ -2,5 +2,5 @@ Name:Shadow Rift
 ManaCost:U
 Types:Instant
 A:SP$ Pump | ValidTgts$ Creature | KW$ Shadow | SpellDescription$ Target creature gains shadow until end of turn. | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
 Oracle:Target creature gains shadow until end of turn. (It can block or be blocked by only creatures with shadow.)\nDraw a card.

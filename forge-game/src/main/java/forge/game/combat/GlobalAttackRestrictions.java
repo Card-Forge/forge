@@ -3,8 +3,6 @@ package forge.game.combat;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.google.common.primitives.Ints;
-
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.card.Card;
@@ -119,7 +117,7 @@ public class GlobalAttackRestrictions {
         }
         if (defenderMax.size() == possibleDefenders.size()) {
             // maximum on each defender, global maximum is sum of these
-            max = Ints.min(max, defenderMax.countAll());
+            max = Math.min(max, defenderMax.countAll());
         }
 
         return new GlobalAttackRestrictions(max, defenderMax);

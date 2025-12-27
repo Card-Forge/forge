@@ -794,7 +794,7 @@ public final class CardRules implements ICardCharacteristics {
                         face.addTrigger(value);
                     } else if ("Types".equals(key)) {
                         face.setType(CardType.parse(value, false));
-                    } else if ("Text".equals(key) && !"no text".equals(value) && StringUtils.isNotBlank(value)) {
+                    } else if ("Text".equals(key) && StringUtils.isNotBlank(value)) {
                         face.setNonAbilityText(value);
                     }
                     break;
@@ -897,8 +897,7 @@ public final class CardRules implements ICardCharacteristics {
     }
     public boolean hasStartOfKeyword(final String k, ICardFace cf) {
         for (final String inst : cf.getKeywords()) {
-            final String[] parts = inst.split(":");
-            if ((parts[0]).equalsIgnoreCase(k)) {
+            if (inst.startsWith(k)) {
                 return true;
             }
         }

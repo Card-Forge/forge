@@ -14,5 +14,5 @@ ALTERNATE
 Name:Harried Dash
 ManaCost:R
 Types:Sorcery Adventure
-A:SP$ Token | TokenScript$ w_1_1_rabbit | TokenOwner$ You | TokenAmount$ 1 | PumpKeywords$ Haste | PumpDuration$ EOT | SpellDescription$ Create a 1/1 white Rabbit creature token. It gains haste until end of turn.
+A:SP$ Token | TokenScript$ w_1_1_rabbit | TokenOwner$ You | PumpKeywords$ Haste | PumpDuration$ EOT | SpellDescription$ Create a 1/1 white Rabbit creature token. It gains haste until end of turn.
 Oracle:Create a 1/1 white Rabbit creature token. It gains haste until end of turn.

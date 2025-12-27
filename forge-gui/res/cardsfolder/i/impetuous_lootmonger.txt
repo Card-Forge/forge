@@ -4,7 +4,7 @@ Types:Creature Human Rogue
 PT:2/2
 K:First Strike
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters, discard a card, then heist target opponent's library.
-SVar:TrigDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBHeist
+SVar:TrigDiscard:DB$ Discard | Mode$ TgtChoose | SubAbility$ DBHeist
 SVar:DBHeist:DB$ Heist | ValidTgts$ Opponent
 T:Mode$ SpellCast | ValidCard$ Card.YouDontOwn | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell you don't own, create a tapped Treasure token.
 SVar:TrigToken:DB$ Token | TokenTapped$ True | TokenScript$ c_a_treasure_sac
