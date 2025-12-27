@@ -17,7 +17,6 @@
  */
 package forge.ai;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.ai.ability.AnimateAi;
 import forge.ai.ability.FightAi;
@@ -38,6 +37,7 @@ import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
@@ -405,24 +405,22 @@ public class SpecialCardAi {
                     ai.getCardsIn(ZoneType.Battlefield).threadSafeIterable(), CardPredicates.hasSVar("DonateMe")));
             if (donateTarget != null) {
                 // first filter for opponents which can be targeted by SA
-                final Iterable<Player> oppList = IterableUtil.filter(ai.getOpponents(),
-                        PlayerPredicates.isTargetableBy(sa));
+                PlayerCollection oppList = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
 
                 // All opponents have hexproof or something like that
-                if (Iterables.isEmpty(oppList)) {
+                if (oppList.isEmpty()) {
                     return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
 
                 // filter for player who does not have donate target already
-                Iterable<Player> oppTarget = IterableUtil.filter(oppList,
-                        PlayerPredicates.isNotCardInPlay(donateTarget.getName()));
+                PlayerCollection oppTarget = oppList.filter(PlayerPredicates.isNotCardInPlay(donateTarget.getName()));
                 // fall back to previous list
-                if (Iterables.isEmpty(oppTarget)) {
+                if (oppTarget.isEmpty()) {
                     oppTarget = oppList;
                 }
 
                 // select player with less lands on the field (helpful for Illusions of Grandeur and probably Pacts too)
-                Player opp = Collections.min(Lists.newArrayList(oppTarget),
+                Player opp = Collections.min(oppTarget,
                         PlayerPredicates.compareByZoneSize(ZoneType.Battlefield, CardPredicates.LANDS));
 
                 if (opp != null) {

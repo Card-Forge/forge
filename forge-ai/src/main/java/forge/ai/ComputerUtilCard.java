@@ -75,8 +75,6 @@ public class ComputerUtilCard {
         list.sort(ComputerUtilCard.EvaluateCreatureComparator);
     }
 
-    // The AI doesn't really pick the best artifact, just the most expensive.
-
     /**
      * <p>
      * getBestArtifactAI.

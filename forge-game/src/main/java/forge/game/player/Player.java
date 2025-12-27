@@ -3724,10 +3724,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return this.teamNumber == other.getTeam();
     }
 
-    public final int countExaltedBonus() {
-        return CardLists.getAmountOfKeyword(this.getCardsIn(ZoneType.Battlefield), Keyword.EXALTED);
-    }
-
     public final boolean isCursed() {
         return CardLists.count(getAttachedCards(), Card::isCurse) > 0;
     }

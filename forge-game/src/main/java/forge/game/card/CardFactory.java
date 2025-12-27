@@ -368,16 +368,16 @@ public class CardFactory {
             }
         }
 
+        // Set name for Sentry reports to be identifiable
+        c.setName(face.getName());
+
+        c.getCurrentState().setFlavorName(face.getFlavorName());
+
         // Negative card Id's are for view purposes only
         if (c.getId() >= 0) {
             // Build English oracle and translated oracle mapping
             CardTranslation.buildOracleMapping(face.getName(), face.getOracleText(), variantName);
-        }
 
-        // Set name for Sentry reports to be identifiable
-        c.setName(face.getName());
-
-        if (c.getId() >= 0) { // Set Triggers & Abilities if not for view
             for (Entry<String, String> v : face.getVariables())
                 c.setSVar(v.getKey(), v.getValue());
             for (String r : face.getReplacements())
@@ -397,12 +397,7 @@ public class CardFactory {
         c.setManaCost(face.getManaCost());
         c.setText(face.getNonAbilityText());
 
-        c.getCurrentState().setBaseLoyalty(face.getInitialLoyalty());
-        c.getCurrentState().setBaseDefense(face.getDefense());
-
         c.getCurrentState().setOracleText(face.getOracleText());
-
-        c.getCurrentState().setFlavorName(face.getFlavorName());
 
         // Super and 'middle' types should use enums.
         c.setType(new CardType(face.getType()));
@@ -417,6 +412,9 @@ public class CardFactory {
             c.setBaseToughness(face.getIntToughness());
             c.setBaseToughnessString(face.getToughness());
         }
+
+        c.getCurrentState().setBaseLoyalty(face.getInitialLoyalty());
+        c.getCurrentState().setBaseDefense(face.getDefense());
 
         c.setAttractionLights(face.getAttractionLights());
 
