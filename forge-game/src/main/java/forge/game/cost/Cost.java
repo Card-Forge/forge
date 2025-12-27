@@ -578,6 +578,11 @@ public class Cost implements Serializable {
             return new CostWaterbend(splitStr[0]);
         }
 
+        if (parse.startsWith("Blight<")) {
+            final String[] splitStr = abCostParse(parse, 1);
+            return new CostBlight("1", splitStr[0]);
+        }
+
         if (parse.equals("Forage")) {
             return new CostForage();
         }
