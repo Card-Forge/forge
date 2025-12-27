@@ -1,18 +1,10 @@
 package forge.game.cost;
 
 import forge.game.card.CounterEnumType;
-import java.io.Serial;
 
-/**
- * The Class CostBlight.
- */
 public class CostBlight extends CostPutCounter {
-    @Serial
-    private static final long serialVersionUID = 1L;
-
-    public CostBlight(final String amount, final String counters) {
-        // Selection count, M1M1 counters, Target type, Target description
-        super(amount, CounterEnumType.M1M1, "Creature.YouCtrl", "a creature you control");
+    public CostBlight(final String counters) {
+        super("1", CounterEnumType.M1M1, "Creature.YouCtrl", "a creature you control");
         this.setAmount(counters);
     }
 

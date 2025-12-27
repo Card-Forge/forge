@@ -580,7 +580,7 @@ public class Cost implements Serializable {
 
         if (parse.startsWith("Blight<")) {
             final String[] splitStr = abCostParse(parse, 1);
-            return new CostBlight("1", splitStr[0]);
+            return new CostBlight(splitStr[0]);
         }
 
         if (parse.equals("Forage")) {
