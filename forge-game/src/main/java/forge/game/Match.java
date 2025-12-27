@@ -13,6 +13,7 @@ import forge.game.card.CardCollectionView;
 import forge.game.event.Event;
 import forge.game.event.GameEventAnteCardsSelected;
 import forge.game.event.GameEventGameFinished;
+import forge.game.mulligan.MulliganService;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.player.RegisteredPlayer;
@@ -69,7 +70,9 @@ public class Match {
     }
 
     public Game createGame() {
-        return new Game(players, rules, this);
+        final GameRules currentRules = this.getRules();
+        MulliganService.applyPreDrawRules(this.players);
+        return new Game(this.players, currentRules, this);
     }
 
     public void startGame(final Game game) {
