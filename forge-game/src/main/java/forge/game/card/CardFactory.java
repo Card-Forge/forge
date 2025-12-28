@@ -302,7 +302,7 @@ public class CardFactory {
     private static Card readCard(final IPaperCard paperCard, int cardId, Game game) {
         final Card card = new Card(cardId, paperCard, game);
         CardRules rules = paperCard.getRules();
-        card.updateRulesView(rules);
+        card.updateRulesView();
 
         // 1. The states we may have:
         CardSplitType st = rules.getSplitType();

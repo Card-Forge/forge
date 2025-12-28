@@ -7570,8 +7570,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public CardRules getRules() {
         return getPaperCard() == null ? null : getPaperCard().getRules();
     }
-    public void updateRulesView(CardRules r) {
-        currentState.getView().updateRulesText(r);
+    public void updateRulesView() {
+        currentState.getView().updateRulesText(getRules());
     }
 
     @Override
