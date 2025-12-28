@@ -72,7 +72,7 @@ public class ComputerUtilCard {
      * @param list
      */
     public static void sortByEvaluateCreature(final CardCollection list) {
-        list.sort(ComputerUtilCard.EvaluateCreatureComparator);
+        list.sort(getCachedCreatureComparator().reversed());
     }
 
     /**
@@ -544,7 +544,10 @@ public class ComputerUtilCard {
         return null;
     }
 
-    public static final Comparator<Card> EvaluateCreatureComparator = (a, b) -> evaluateCreature(b) - evaluateCreature(a);
+    public static Comparator<Card> getCachedCreatureComparator() {
+        Map<Card, Integer> cache = new IdentityHashMap<>();
+        return Comparator.comparing(c -> cache.computeIfAbsent(c, creatureEvaluator));
+    }
     public static final Comparator<SpellAbility> EvaluateCreatureSpellComparator = (a, b) -> {
         // TODO ideally we could reuse the value from the previous pass with false
         return ComputerUtilAbility.saEvaluator.compareEvaluator(a, b, true);

@@ -1382,15 +1382,7 @@ public class CardView extends GameEntityView {
             return get(TrackableProperty.Type);
         }
         void updateType(CardState c) {
-            CardTypeView type = c.getType();
-            if (CardView.this.getCurrentState() == this) {
-                Card card = c.getCard();
-                if (card != null) {
-                    type = type.getTypeWithChanges(card.getChangedCardTypes()); //TODO: find a better way to do this
-                    updateRulesText(card.getRules(), type);
-                }
-            }
-            set(TrackableProperty.Type, type);
+            set(TrackableProperty.Type, c.getTypeWithChanges());
         }
 
         public ManaCost getManaCost() {
@@ -1420,10 +1412,10 @@ public class CardView extends GameEntityView {
         public String getRulesText() {
             return get(TrackableProperty.RulesText);
         }
-        void updateRulesText(CardRules rules, CardTypeView type) {
+        void updateRulesText(CardRules rules) {
             String rulesText = null;
 
-            if (type.isVanguard() && rules != null) {
+            if (rules != null && rules.getType().isVanguard()) {
                 boolean decHand = rules.getHand() < 0;
                 boolean decLife = rules.getLife() < 0;
                 String handSize = Localizer.getInstance().getMessageorUseDefault("lblHandSize", "Hand Size")
