@@ -120,11 +120,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     // changes by AF animate and continuous static effects
 
-    protected CardChangedType changedTypeByText; // Layer 3 by Text Change
+    protected ICardChangedType changedTypeByText; // Layer 3 by Text Change
     // x=timestamp y=StaticAbility id
-    private final Table<Long, Long, CardChangedType> changedCardTypesByText = TreeBasedTable.create(); // Layer 3
-    private final Table<Long, Long, CardChangedType> changedCardTypesCharacterDefining = TreeBasedTable.create(); // Layer 4 CDA
-    private final Table<Long, Long, CardChangedType> changedCardTypes = TreeBasedTable.create(); // Layer 4
+    private final Table<Long, Long, ICardChangedType> changedCardTypesByText = TreeBasedTable.create(); // Layer 3
+    private final Table<Long, Long, ICardChangedType> changedCardTypesCharacterDefining = TreeBasedTable.create(); // Layer 4 CDA
+    private final Table<Long, Long, ICardChangedType> changedCardTypes = TreeBasedTable.create(); // Layer 4
 
     private final Table<Long, Long, CardChangedName> changedCardNames = TreeBasedTable.create(); // Layer 3
     private final Table<Long, Long, KeywordsChange> changedCardKeywordsByText = TreeBasedTable.create(); // Layer 3 by Text Change
@@ -3521,12 +3521,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public boolean hasRemoveIntrinsic() {
-        for (final CardChangedType ct : getChangedCardTypes()) {
-            if (ct.isRemoveLandTypes()) {
-                return true;
-            }
-        }
-        return false;
+        return IterableUtil.any(getChangedCardTypes(), ICardChangedType::isRemoveLandTypes);
     }
 
     public boolean hasNoAbilities() {
@@ -4233,14 +4228,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return state.getType();
     }
 
-    public Iterable<CardChangedType> getChangedCardTypes() {
+    public Iterable<ICardChangedType> getChangedCardTypes() {
         // If there are no changed types, just return an empty immutable list, which actually
         // produces a surprisingly large speedup by avoid lots of temp objects and making iteration
         // over the result much faster. (This function gets called a lot!)
         if (changedCardTypesByText.isEmpty() && changedTypeByText == null && changedCardTypesCharacterDefining.isEmpty() && changedCardTypes.isEmpty()) {
             return ImmutableList.of();
         }
-        Iterable<CardChangedType> byText = changedTypeByText == null ? ImmutableList.of() : ImmutableList.of(this.changedTypeByText);
+        Iterable<ICardChangedType> byText = changedTypeByText == null ? ImmutableList.of() : ImmutableList.of(this.changedTypeByText);
         return ImmutableList.copyOf(Iterables.concat(
                 changedCardTypesByText.values(), // Layer 3
                 byText, // Layer 3 by Word Changes,
@@ -5622,21 +5617,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
      * Update the changed text of the intrinsic spell abilities and keywords.
      */
     public void updateChangedText() {
-        // update type
-        List<String> toAdd = Lists.newArrayList();
-        List<String> toRemove = Lists.newArrayList();
-
-        // before change by text word change, apply the other card type change by text for Volrath's Shapeshifter
-        CardTypeView changedByText = getOriginalType().getTypeWithChanges(this.changedCardTypesByText.values());
-
-        for (Map.Entry<String, String> e : this.changedTextTypes.entrySet()) {
-            if (changedByText.hasStringType(e.getKey())) {
-                toRemove.add(e.getKey());
-                toAdd.add(e.getValue());
-            }
-        }
-
-        this.changedTypeByText = new CardChangedType(new CardType(toAdd, true), new CardType(toRemove, true), false, EnumSet.noneOf(RemoveType.class));
+        this.changedTypeByText = new TextChangedType(this.changedTextTypes);
 
         currentState.updateChangedText();
 
