@@ -346,7 +346,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     private CombatLki combatLKI;
 
-    private CardRules cardRules;
     protected boolean renderForUi = true;
     private final CardView view;
 
@@ -4309,9 +4308,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final void addChangedCardTypesByText(final CardType addType, final long timestamp, final long staticId) {
-        addChangedCardTypesByText(addType, timestamp, staticId, true);
-    }
-    public final void addChangedCardTypesByText(final CardType addType, final long timestamp, final long staticId, final boolean updateView) {
         changedCardTypesByText.put(timestamp, staticId, new CardChangedType(addType, null, false,
                 EnumSet.of(RemoveType.SuperTypes, RemoveType.CardTypes, RemoveType.SubTypes)));
 
@@ -4320,10 +4316,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         this.changedTextTypes.addEmpty(timestamp, staticId);
 
         this.updateChangedText();
-
-        if (updateView) {
-            updateTypesForView();
-        }
     }
 
     public final void addChangedCardTypes(final CardType addType, final CardType removeType, final boolean addAllCreatureTypes,
@@ -7576,11 +7568,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public CardRules getRules() {
-        return cardRules;
+        return getPaperCard() == null ? null : getPaperCard().getRules();
     }
-    public void setRules(CardRules r) {
-        cardRules = r;
-        currentState.getView().updateRulesText(r);
+    public void updateRulesView() {
+        currentState.getView().updateRulesText(getRules());
     }
 
     @Override
