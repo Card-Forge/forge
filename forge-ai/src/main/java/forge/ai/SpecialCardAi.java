@@ -1305,7 +1305,7 @@ public class SpecialCardAi {
     // Phyrexian Dreadnought
     public static class PhyrexianDreadnought {
         public static CardCollection reviseCreatureSacList(final Player ai, final SpellAbility sa, final CardCollection choices) {
-            choices.sort(Collections.reverseOrder(ComputerUtilCard.EvaluateCreatureComparator));
+            choices.sort(ComputerUtilCard.getCachedCreatureComparator());
             int power = 0;
             List<Card> toKeep = Lists.newArrayList();
             for (Card c : choices) {
