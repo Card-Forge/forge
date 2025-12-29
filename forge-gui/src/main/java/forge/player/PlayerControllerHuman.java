@@ -1505,7 +1505,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public CardCollectionView londonMulliganReturnCards(final Player mulliganingPlayer, int cardsToReturn) {
+    public CardCollectionView tuckCardsViaMulligan(final Player mulliganingPlayer, int cardsToReturn) {
         final InputLondonMulligan inp = new InputLondonMulligan(this, player, cardsToReturn);
         inp.showAndWait();
         return inp.getSelectedCards();

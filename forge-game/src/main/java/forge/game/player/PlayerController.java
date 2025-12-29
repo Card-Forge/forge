@@ -239,7 +239,7 @@ public abstract class PlayerController {
     public abstract Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes, Player forPlayer, boolean optional);
 
     public abstract boolean mulliganKeepHand(Player player, int cardsToReturn);
-    public abstract CardCollectionView londonMulliganReturnCards(Player mulliganingPlayer, int cardsToReturn);
+    public abstract CardCollectionView tuckCardsViaMulligan(Player mulliganingPlayer, int cardsToReturn);
     public abstract boolean confirmMulliganScry(final Player p);
 
     public abstract List<SpellAbility> chooseSpellAbilityToPlay();
