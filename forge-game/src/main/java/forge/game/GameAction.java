@@ -678,7 +678,7 @@ public class GameAction {
             timestamp = game.getNextTimestamp();
             cause.setSVar("StaticEffectTimestamp", String.valueOf(timestamp));
         }
-        String name = "Static Effect #" + source.getGameTimestamp();
+        String name = "Static Effect #" + cause.getId();
         // check if this isn't the first card being moved
         Optional<Card> opt = IterableUtil.tryFind(cause.getActivatingPlayer().getZone(ZoneType.Command).getCards(), CardPredicates.nameEquals(name));
 
@@ -689,7 +689,7 @@ public class GameAction {
             eff.setLayerTimestamp(timestamp);
         } else {
             // otherwise create effect first
-            eff = SpellAbilityEffect.createEffect(cause, cause.getHostCard(), cause.getActivatingPlayer(), name, source.getImageKey(), timestamp);
+            eff = SpellAbilityEffect.createEffect(cause, source, cause.getActivatingPlayer(), name, source.getImageKey(), timestamp);
             eff.setRenderForUI(false);
             StaticAbility stAb = eff.addStaticAbility(AbilityUtils.getSVar(cause, cause.getParam("StaticEffect")));
             stAb.setActiveZone(EnumSet.of(ZoneType.Command));

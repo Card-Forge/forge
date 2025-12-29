@@ -340,7 +340,7 @@ public class AiAttackController {
 
     // this checks to make sure that the computer player doesn't lose when the human player attacks
     public final List<Card> notNeededAsBlockers(final List<Card> currentAttackers, final List<Card> potentialAttackers) {
-        //check for time walks
+        // check for time walks
         if (ai.getGame().getPhaseHandler().getNextTurn().equals(ai)) {
             return potentialAttackers;
         }
@@ -710,6 +710,7 @@ public class AiAttackController {
         CardCollection tramplers = CardLists.getKeyword(blockedAttackers, Keyword.TRAMPLE);
         CardCollection infecterTramplers = tramplers.filter(c -> c.isInfectDamage(defendingOpponent));
         tramplers.removeAll(infecterTramplers);
+        // in most cases avoiding more poison would come first
         for (Card attacker : Iterables.concat(infecterTramplers, tramplers)) {
             int dmg = ComputerUtilCombat.getAttack(attacker);
             for (Card blocker : remainingBlockers.threadSafeIterable()) {
@@ -727,7 +728,7 @@ public class AiAttackController {
         }
 
         if (defendingOpponent.getLife() > 0 && !defendingOpponent.cantLoseForZeroOrLessLife()) {
-            int totalCombatDamage = Aggregates.sum(trampleDmg.values());
+            int totalCombatDamage = tramplers.stream().map(c -> trampleDmg.getOrDefault(c, 0)).reduce(0, Integer::sum);
             if (totalCombatDamage >= defendingOpponent.getLife()) {
                 return true;
             }
@@ -747,7 +748,7 @@ public class AiAttackController {
         }
         for (Card trampler : trampleDmg.keySet()) {
             int dmg = trampleDmg.get(trampler);
-            if (trampler.isInfectDamage(defendingOpponent)) {
+            if (infecterTramplers.contains(trampler)) {
                 totalPoisonDamage += dmg;
             }
             totalPoisonDamage += ComputerUtilCombat.predictExtraPoisonWithDamage(trampler, defendingOpponent, dmg);
@@ -959,12 +960,11 @@ public class AiAttackController {
         }
 
         // Only do decisive attacks against token-generating players
-        if (!bAssault && defender instanceof Player opp) {
-            if (CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Rabble Rousing"))
-                - CardLists.count(opp.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Darien, King of Kjeldor"))
-                - CardLists.count(opp.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Kazuul, Tyrant of the Cliffs")) < 0) {
-                    return aiAggression;
-                }
+        if (!bAssault && defender instanceof Player opp &&
+                CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Rabble Rousing"))
+                        - CardLists.count(opp.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Darien, King of Kjeldor"))
+                        - CardLists.count(opp.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Kazuul, Tyrant of the Cliffs")) < 0) {
+            return aiAggression;
         }
 
         if (bAssault && defender == defendingOpponent) { // in case we are forced to attack someone else
