@@ -6,7 +6,7 @@ import forge.StaticData;
 import forge.ai.AiProfileUtil;
 import forge.control.FControl.CloseAction;
 import forge.download.AutoUpdater;
-import forge.game.GameLogVerbosity;
+import forge.game.GameLogEntryType;
 import forge.gamemodes.net.server.FServerManager;
 import forge.gui.GuiBase;
 import forge.gui.UiCommand;
@@ -17,7 +17,6 @@ import forge.localinstance.properties.ForgeNetPreferences;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.properties.PreferencesStore;
-import forge.menus.LayoutMenu;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.screens.deckeditor.CDeckEditorUI;
@@ -37,7 +36,6 @@ import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -113,7 +111,6 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.clear(); // just in case
         lstControls.add(Pair.of(view.getCbAnte(), FPref.UI_ANTE));
         lstControls.add(Pair.of(view.getCbAnteMatchRarity(), FPref.UI_ANTE_MATCH_RARITY));
-        lstControls.add(Pair.of(view.getCbAnteIncludeBasicLands(), FPref.UI_ANTE_INCLUDE_BASIC_LANDS));
         lstControls.add(Pair.of(view.getCbManaBurn(), FPref.UI_MANABURN));
         lstControls.add(Pair.of(view.getCbOrderCombatants(), FPref.LEGACY_ORDER_COMBATANTS));
         lstControls.add(Pair.of(view.getCbScaleLarger(), FPref.UI_SCALE_LARGER));
@@ -137,7 +134,6 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbAllowCustomCardsDeckConformance(), FPref.ALLOW_CUSTOM_CARDS_IN_DECKS_CONFORMANCE));
         lstControls.add(Pair.of(view.getCbUseExperimentalNetworkStream(), FPref.UI_NETPLAY_COMPAT));
         lstControls.add(Pair.of(view.getCbImageFetcher(), FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER));
-        lstControls.add(Pair.of(view.getCbSmartTokenArt(), FPref.UI_ENABLE_SMART_TOKEN_ART));
         lstControls.add(Pair.of(view.getCbDisableCardImages(), FPref.UI_DISABLE_CARD_IMAGES));
         lstControls.add(Pair.of(view.getCbDisplayFoil(), FPref.UI_OVERLAY_FOIL_EFFECT));
         lstControls.add(Pair.of(view.getCbRandomFoil(), FPref.UI_RANDOM_FOIL));
@@ -158,9 +154,9 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbCardTextHideReminder(), FPref.UI_CARD_IMAGE_RENDER_HIDE_REMINDER_TEXT));
         lstControls.add(Pair.of(view.getCbOpenPacksIndiv(), FPref.UI_OPEN_PACKS_INDIV));
         lstControls.add(Pair.of(view.getCbTokensInSeparateRow(), FPref.UI_TOKENS_IN_SEPARATE_ROW));
-        // UI_STACK_CREATURES replaced by UI_GROUP_PERMANENTS dropdown — see initializeStackGroupPermanentsComboBox()
+        lstControls.add(Pair.of(view.getCbStackCreatures(), FPref.UI_STACK_CREATURES));
+        lstControls.add(Pair.of(view.getCbShowCastableBorder(), FPref.UI_SHOW_CASTABLE_BORDER));
         lstControls.add(Pair.of(view.getCbManaLostPrompt(), FPref.UI_MANA_LOST_PROMPT));
-        lstControls.add(Pair.of(view.getCbYieldExperimentalOptions(), FPref.YIELD_EXPERIMENTAL_OPTIONS));
         lstControls.add(Pair.of(view.getCbEscapeEndsTurn(), FPref.UI_ALLOW_ESC_TO_END_TURN));
         lstControls.add(Pair.of(view.getCbDetailedPaymentDesc(), FPref.UI_DETAILED_SPELLDESC_IN_PROMPT));
         lstControls.add(Pair.of(view.getCbGrayText(), FPref.UI_GRAY_INACTIVE_TEXT));
@@ -173,7 +169,6 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbLoadArchivedFormats(), FPref.LOAD_ARCHIVED_FORMATS));
         lstControls.add(Pair.of(view.getCbSmartCardArtSelectionOpt(), FPref.UI_SMART_CARD_ART));
         lstControls.add(Pair.of(view.getCbShowDraftRanking(), FPref.UI_OVERLAY_DRAFT_RANKING));
-        lstControls.add(Pair.of(view.getCbAiPicker(), FPref.UI_ENABLE_AI_PICKER));
 
 
         for(final Pair<JCheckBox, FPref> kv : lstControls) {
@@ -229,11 +224,9 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeColorIdentityCombobox();
         initializeSwitchStatesCombobox();
         initializeAutoYieldModeComboBox();
-        initializeStackGroupPermanentsComboBox();
         initializeCounterDisplayTypeComboBox();
         initializeCounterDisplayLocationComboBox();
         initializeGraveyardOrderingComboBox();
-        initializeStackGroupPermanentsComboBox();
         initializePlayerNameButton();
         initializeServerPortButton();
         initializeDefaultLanguageComboBox();
@@ -342,18 +335,10 @@ public enum CSubmenuPreferences implements ICDoc {
 
     private void initializeGameLogVerbosityComboBox() {
         final FPref userSetting = FPref.DEV_LOG_ENTRY_TYPE;
-        final FComboBoxPanel<GameLogVerbosity> panel = this.view.getGameLogVerbosityComboBoxPanel();
-        final FComboBox<GameLogVerbosity> comboBox = createComboBox(GameLogVerbosity.values(), userSetting);
-        final GameLogVerbosity selectedItem = GameLogVerbosity.fromString(this.prefs.getPref(userSetting));
+        final FComboBoxPanel<GameLogEntryType> panel = this.view.getGameLogVerbosityComboBoxPanel();
+        final FComboBox<GameLogEntryType> comboBox = createComboBox(GameLogEntryType.values(), userSetting);
+        final GameLogEntryType selectedItem = GameLogEntryType.valueOf(this.prefs.getPref(userSetting));
         panel.setComboBox(comboBox, selectedItem);
-
-        view.getBtnCustomLogSettings().setCommand(
-                (UiCommand) LayoutMenu::showCustomLogCategoriesDialog);
-        view.getBtnCustomLogSettings().setEnabled(selectedItem == GameLogVerbosity.CUSTOM);
-        comboBox.addItemListener(e -> {
-            view.getBtnCustomLogSettings().setEnabled(
-                    comboBox.getSelectedItem() == GameLogVerbosity.CUSTOM);
-        });
     }
 
     private void initializeCloseActionComboBox() {
@@ -588,27 +573,6 @@ public enum CSubmenuPreferences implements ICDoc {
         final FComboBox<String> comboBox = createComboBox(elems, userSetting);
         final String selectedItem = this.prefs.getPref(userSetting);
         panel.setComboBox(comboBox, selectedItem);
-    }
-
-    private void initializeStackGroupPermanentsComboBox() {
-        final Localizer localizer = Localizer.getInstance();
-        final String[] keys = {"default", "stack", "group_creatures", "group_all"};
-        final String[] labelKeys = {"lblGroupDefault", "lblGroupStack", "lblGroupCreatures", "lblGroupAll"};
-        final Map<String, String> mapping = new LinkedHashMap<>();
-        final String[] labels = new String[keys.length];
-        for (int i = 0; i < keys.length; i++) {
-            labels[i] = localizer.getMessage(labelKeys[i]);
-            mapping.put(labels[i], keys[i]);
-        }
-        final FComboBoxPanel<String> panel = this.view.getCbpStackGroupPermanents();
-        final FComboBox<String> comboBox = createLocalizedComboBox(labels, FPref.UI_GROUP_PERMANENTS, mapping);
-        final String savedValue = this.prefs.getPref(FPref.UI_GROUP_PERMANENTS);
-        final String selectedLabel = mapping.entrySet().stream()
-                .filter(e -> e.getValue().equals(savedValue))
-                .map(Map.Entry::getKey)
-                .findFirst()
-                .orElse(labels[0]);
-        panel.setComboBox(comboBox, selectedLabel);
     }
 
     private void initializeCounterDisplayTypeComboBox() {
