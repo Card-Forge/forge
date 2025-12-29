@@ -9,7 +9,6 @@ import forge.StaticData;
 import forge.game.Game;
 import forge.game.GameType;
 import forge.game.player.Player;
-import forge.game.player.RegisteredPlayer;
 
 public class MulliganService {
     Player firstPlayer;
@@ -24,12 +23,7 @@ public class MulliganService {
     public void perform() {
         initializeMulligans();
         runPlayerMulligans();
-
-        for (AbstractMulligan mulligan : mulligans) {
-            if (mulligan.hasKept()) {
-                mulligan.afterMulligan();
-            }
-        }
+        runPostMulligans();
     }
 
     private void initializeMulligans() {
@@ -43,29 +37,31 @@ public class MulliganService {
         boolean firstMullFree = game.getPlayers().size() > 2 || game.getRules().hasAppliedVariant(GameType.Brawl);
 
         for (Player player : whoCanMulligan) {
-            final int baseHandSize = player.getStartingHandSize();
-
             MulliganDefs.MulliganRule rule = StaticData.instance().getMulliganRule();
+            AbstractMulligan mulligan;
             switch (rule) {
                 case Original:
-                    mulligans.add(new OriginalMulligan(player, firstMullFree));
+                    mulligan = new OriginalMulligan(player, firstMullFree);
                     break;
                 case Paris:
-                    mulligans.add(new ParisMulligan(player, firstMullFree));
+                    mulligan = new ParisMulligan(player, firstMullFree);
                     break;
                 case Vancouver:
-                    mulligans.add(new VancouverMulligan(player, firstMullFree));
+                    mulligan = new VancouverMulligan(player, firstMullFree);
                     break;
                 case London:
-                    mulligans.add(new LondonMulligan(player, firstMullFree));
+                    mulligan = new LondonMulligan(player, firstMullFree);
                     break;
                 case Houston:
-                    mulligans.add(new HoustonMulligan(player, firstMullFree));
+                    mulligan = new HoustonMulligan(player, firstMullFree);
                     break;
                 default:
-                    mulligans.add(new VancouverMulligan(player, firstMullFree));
+                    mulligan = new VancouverMulligan(player, firstMullFree);
                     break;
             }
+
+            mulligans.add(mulligan);
+            mulligan.beforeFirstMulligan();
         }
     }
 
@@ -74,7 +70,6 @@ public class MulliganService {
         do {
             allKept = true;
             for (AbstractMulligan mulligan : mulligans) {
-
                 if (mulligan.hasKept()) {
                     continue;
                 }
@@ -84,10 +79,11 @@ public class MulliganService {
                 boolean keep = !mulligan.canMulligan() ||
                         p.getController().mulliganKeepHand(
                                 firstPlayer,
-                                mulligan.tuckCardsAfterKeepHand()
+                                mulligan.tuckCardsDuringMulligan()
                         );
 
                 if (game.isGameOver()) {
+                    // conceded during mulligan prompt
                     return;
                 }
 
@@ -99,23 +95,12 @@ public class MulliganService {
                 allKept = false;
                 mulligan.mulligan();
             }
-
         } while (!allKept);
-
-        for (AbstractMulligan mulligan : mulligans) {
-            mulligan.afterMulligan();
-        }
     }
 
-    public static void applyPreDrawRules(List<RegisteredPlayer> players) {
-        MulliganDefs.MulliganRule selectedRule = StaticData.instance().getMulliganRule();
-        if (selectedRule == MulliganDefs.MulliganRule.Houston) {
-            HoustonMulligan helperMulligan = new HoustonMulligan(null, false);
-            for (RegisteredPlayer rp : players) {
-                int baseHandSize = rp.getStartingHand();
-                int newDrawSize = helperMulligan.getModifiedHandSize(baseHandSize);
-                rp.setStartingHand(newDrawSize); // Update the RegisteredPlayer object
-            }
+    private void runPostMulligans() {
+        for (AbstractMulligan mulligan : mulligans) {
+            mulligan.afterMulligan();
         }
     }
 }

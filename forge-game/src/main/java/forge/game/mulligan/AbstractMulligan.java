@@ -20,10 +20,11 @@ public abstract class AbstractMulligan {
 
     public Player getPlayer() { return player; }
 
+    public void beforeFirstMulligan() {}
     public abstract boolean canMulligan();
     public abstract int handSizeAfterNextMulligan();
 
-    public int tuckCardsAfterKeepHand() {
+    public int tuckCardsDuringMulligan() {
         return 0;
     }
 
@@ -61,9 +62,5 @@ public abstract class AbstractMulligan {
 
     public void afterMulligan() {
         player.getGame().getGameLog().add(GameLogEntryType.MULLIGAN, Localizer.getInstance().getMessage("lblPlayerKeepNCardsHand", player.getName(), String.valueOf(player.getZone(ZoneType.Hand).size())));
-    }
-
-    public int getModifiedHandSize(int startingHandSize) {
-        return startingHandSize;
     }
 }
