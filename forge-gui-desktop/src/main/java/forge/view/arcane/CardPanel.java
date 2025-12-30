@@ -383,23 +383,8 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                 return false;
         }
 
-        // Find the actual Card object in the player's hand by matching ID
-        Card actualCard = null;
-        for (final var player : game.getPlayers()) {
-            final var hand = player.getZone(ZoneType.Hand);
-            if (hand != null) {
-                for (final Card c : hand) {
-                    if (c.getId() == card.getId()) {
-                        actualCard = c;
-                        break;
-                    }
-                }
-                if (actualCard != null) {
-                    break;
-                }
-            }
-        }
-
+        // Find the actual Card object 
+        Card actualCard = game.findByView(card);
         if (actualCard == null) {
             return false;
         }
