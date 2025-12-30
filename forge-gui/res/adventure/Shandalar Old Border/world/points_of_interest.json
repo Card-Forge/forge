@@ -151,7 +151,7 @@
 		"questFlagsToActivate": [
 			{
 				"key": "mainQuest",
-				"val": 2
+				"val": 1
 			}
 		]
 	},
@@ -178,7 +178,7 @@
 		"questFlagsToActivate": [
 			{
 				"key": "mainQuest",
-				"val": 2
+				"val": 1
 			}
 		]
 	},
@@ -2148,7 +2148,7 @@
 		"questFlagsToActivate": [
 			{
 				"key": "mainQuest",
-				"val": 2
+				"val": 1
 			}
 		]
 	},
@@ -3563,7 +3563,7 @@
 		"questFlagsToActivate": [
 			{
 				"key": "mainQuest",
-				"val": 2
+				"val": 1
 			}
 		]
 	},
@@ -4126,7 +4126,7 @@
 		"questFlagsToActivate": [
 			{
 				"key": "mainQuest",
-				"val": 2
+				"val": 1
 			}
 		]
 	},
