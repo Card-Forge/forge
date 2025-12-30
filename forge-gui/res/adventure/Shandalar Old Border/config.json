@@ -60,11 +60,11 @@
         "G": "decks/starter/MIR - GreenWhite - Jungle_Jam.dck"
       },
       "constructedStarterDecks": {
-        "W": "decks/starter/MIR - RedWhite.dck",
-        "U": "decks/starter/TMP - BlueWhite.dck",
-        "B": "decks/starter/USG - BlackWhite.dck",
-        "R": "decks/starter/MMQ - RedBlack - Disrupter.dck",
-        "G": "decks/starter/TMP - GreenWhite.dck"
+        "W": "decks/starter/4E_W_Starter.dck",
+        "U": "decks/starter/4E_U_Starter.dck",
+        "B": "decks/starter/4E_B_Starter.dck",
+        "R": "decks/starter/4E_R_Starter.dck",
+        "G": "decks/starter/4E_G_Starter.dck"
       },
       "pileDecks": {
         "W": "decks/starter/pile_white_e.json",
@@ -193,7 +193,7 @@
       "constructedStarterDecks": {
         "W": "decks/starter/Portal - Boros.dck",
         "U": "decks/starter/Portal - Dimir.dck",
-        "B": "decks/starter/6ED - GreenBlack.dck",
+        "B": "decks/starter/7E_BU_Starter.dck",
         "R": "decks/starter/6ED - BlueRed.dck",
         "G": "decks/starter/6ED - GreenBlack.dck"
       },
@@ -216,9 +216,20 @@
     }
   ],
   "starterEditions": [
-    "7ED"
+    "4ED", "ICE", "ALL", "HML", "MIR", "VIS", "5ED", "TMP", "STH", "EXO",
+    "USG", "ULG", "UDS", "6ED", "MMQ", "NMS", "PCY", "INV", "PLS", "APC",
+    "7ED", "ODY", "TOR", "JUD", "ONS", "LGN", "SCG",
+    "POR", "PO2", "PTK", "S99", "S00",
+    "ARN", "ATQ", "LEG", "DRK", "FEM"
   ],
   "starterEditionNames": [
-    "Seventh Edition"
+    "Fourth Edition", "Ice Age", "Alliances", "Homelands", "Mirage", "Visions", "Fifth Edition",
+    "Tempest", "Stronghold", "Exodus",
+    "Urza's Saga", "Urza's Legacy", "Urza's Destiny", "Sixth Edition",
+    "Mercadian Masques", "Nemesis", "Prophecy",
+    "Invasion", "Planeshift", "Apocalypse",
+    "Seventh Edition", "Odyssey", "Torment", "Judgment", "Onslaught", "Legions", "Scourge",
+    "Portal", "Portal Second Age", "Portal Three Kingdoms", "Starter 1999", "Starter 2000",
+    "Arabian Nights", "Antiquities", "Legends", "The Dark", "Fallen Empires"
   ]
 }
