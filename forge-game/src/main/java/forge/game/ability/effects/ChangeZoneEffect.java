@@ -569,7 +569,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 game.getStack().remove(gameCard);
             }
 
-            Card movedCard = null;
+            Card movedCard;
             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
             AbilityKey.addCardZoneTableParams(moveParams, triggerList);
 

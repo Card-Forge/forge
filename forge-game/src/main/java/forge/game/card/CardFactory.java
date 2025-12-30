@@ -171,9 +171,7 @@ public class CardFactory {
         return getCard(cp, owner, owner == null ? -1 : owner.getGame().nextCardId(), game);
     }
     public static Card getCard(final IPaperCard cp, final Player owner, final int cardId, final Game game) {
-        CardRules cardRules = cp.getRules();
-        final Card c = readCard(cardRules, cp, cardId, game);
-        c.setRules(cardRules);
+        final Card c = readCard(cp, cardId, game);
         c.setOwner(owner);
         buildAbilities(c);
 
@@ -196,8 +194,8 @@ public class CardFactory {
                 // setting this to true will download the original image with different name.
                 c.setImageKey(cp.getImageKey(false));
             }
-            else if (c.isDoubleFaced() && cardRules != null) {
-                c.setState(cardRules.getSplitType().getChangedStateName(), false);
+            else if (c.isDoubleFaced()) {
+                c.setState(cp.getRules().getSplitType().getChangedStateName(), false);
                 c.setImageKey(cp.getImageKey(true));
             }
             else if (c.isSplitCard()) {
@@ -301,8 +299,10 @@ public class CardFactory {
         return sa;
     }
 
-    private static Card readCard(final CardRules rules, final IPaperCard paperCard, int cardId, Game game) {
+    private static Card readCard(final IPaperCard paperCard, int cardId, Game game) {
         final Card card = new Card(cardId, paperCard, game);
+        CardRules rules = paperCard.getRules();
+        card.updateRulesView();
 
         // 1. The states we may have:
         CardSplitType st = rules.getSplitType();

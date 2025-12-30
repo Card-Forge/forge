@@ -867,6 +867,11 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(final CostBlight cost) {
+        return this.visit((CostPutCounter) cost);
+    }
+
+    @Override
     public PaymentDecision visit(final CostReturn cost) {
         int c = cost.getAbilityAmount(ability);
 
