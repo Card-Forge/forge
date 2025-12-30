@@ -450,9 +450,17 @@ public abstract class Trigger extends TriggerReplacementBase {
             var rest = condition.substring(16);
             final SpellAbility trigSA = (SpellAbility) runParams.get(AbilityKey.Cause);
 
-            if (trigSA != null && !trigSA.getName().equals(rest)) {
-                return false;
+            if (trigSA != null && trigSA.getName().equals(rest)) {
+                return true;
             }
+
+            final SpellAbility fromSA = (SpellAbility) runParams.get(AbilityKey.SpellAbility);
+
+            if (fromSA != null && fromSA.getName().equals(rest)) {
+                return true;
+            }
+
+            return false;
         }
         
         return true;
