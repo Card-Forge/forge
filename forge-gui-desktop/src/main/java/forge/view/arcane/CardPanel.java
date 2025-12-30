@@ -302,7 +302,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         }
 
         // Yellow border for cards in hand that can be cast with available mana
-        if (canCastCard() && isPreferenceEnabled(FPref.UI_SHOW_CASTABLE_BORDER)) {
+        if (isPreferenceEnabled(FPref.UI_SHOW_CASTABLE_BORDER) && canCastCard()) {
             g2d.setColor(Color.YELLOW);
             final int n = Math.max(1, Math.round(cardWidth * CardPanel.SELECTED_BORDER_SIZE));
             g2d.fillRoundRect(cardXOffset - n, (cardYOffset - n) + offset, cardWidth + (n * 2), cardHeight + (n * 2), cornerSize + n , cornerSize + n);
