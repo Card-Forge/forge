@@ -691,15 +691,11 @@ public class MatchController extends AbstractGuiGame {
             return SGuiChoose.one(title, optionList);
         }
 
-        final Collection<CardView> revealList = delayedReveal.getCards();
-        final String revealListCaption = StringUtils.capitalize(MessageUtil.formatMessage("{player's} " + delayedReveal.getZone().getTranslatedName(), delayedReveal.getOwner(), delayedReveal.getOwner()));
-        final FImage revealListImage = VPlayerPanel.iconFromZone(delayedReveal.getZone());
-
         //use special dialog for choosing card and offering ability to see all revealed cards at the same time
         return new WaitCallback<GameEntityView>() {
             @Override
             public void run() {
-                final GameEntityPicker picker = new GameEntityPicker(title, optionList, revealList, revealListCaption, revealListImage, isOptional, this);
+                final GameEntityPicker picker = new GameEntityPicker(title, optionList, delayedReveal, isOptional, this);
                 picker.show();
             }
         }.invokeAndWait();
@@ -714,8 +710,8 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public List<CardView> manipulateCardList(final String title, final Iterable<CardView> cards, final Iterable<CardView> manipulable, final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
-	System.err.println("Not implemented yet - should never be called");
-	return null;
+        System.err.println("Not implemented yet - should never be called");
+        return null;
     }
 
     @Override
