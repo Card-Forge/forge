@@ -188,6 +188,30 @@
         "options": [
             {
                 "name": "\"Bye.\""
+            },
+            {
+                "name": "\"I have already defeated all five guardians.\"",
+                "action": [
+                    {
+                        "setQuestFlag": { "key": "Ch1BlackCastleComplete", "val": 1 }
+                    },
+                    {
+                        "setQuestFlag": { "key": "Ch1BlueCastleComplete", "val": 1 }
+                    },
+                    {
+                        "setQuestFlag": { "key": "Ch1GreenCastleComplete", "val": 1 }
+                    },
+                    {
+                        "setQuestFlag": { "key": "Ch1RedCastleComplete", "val": 1 }
+                    },
+                    {
+                        "setQuestFlag": { "key": "Ch1WhiteCastleComplete", "val": 1 }
+                    },
+                    {
+                        "setQuestFlag": { "key": "Ch1CastlesComplete", "val": 5 }
+                    }
+                ],
+                "text": "\"Ah, I sense it now - you speak the truth. The guardians have fallen, though the magical resonance was... scattered. No matter, what's done is done. Talk to me again and we can discuss what comes next.\""
             }
         ]
     },
