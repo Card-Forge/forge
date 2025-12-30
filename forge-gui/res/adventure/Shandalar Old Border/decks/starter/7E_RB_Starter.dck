@@ -1,35 +1,44 @@
 [metadata]
 Name=7E Red/Black Starter
+[Avatar]
+
 [Main]
-3 Mountain|7ED|1
+4 Mountain|7ED|1
 3 Mountain|7ED|2
-2 Mountain|7ED|3
-2 Mountain|7ED|4
-2 Swamp|7ED|1
-2 Swamp|7ED|2
+3 Mountain|7ED|3
+4 Swamp|7ED|1
+3 Swamp|7ED|2
 3 Swamp|7ED|3
-3 Swamp|7ED|4
-2 Charcoal Diamond|7ED
-2 Fire Diamond|7ED
-2 Raging Goblin|7ED
-2 Blaze|7ED
-2 Shock|7ED
-1 Pyroclasm|7ED
-2 Volcanic Hammer|7ED
-1 Pillage|7ED
-1 Storm Shaman|7ED
-1 Orcish Artillery|7ED
-1 Sabretooth Tiger|7ED
-1 Fervor|7ED
-1 Bloodshot Cyclops|7ED
-1 Shivan Dragon|7ED
-2 Duress|7ED
-2 Drudge Skeletons|7ED
-2 Dark Banishing|7ED
-1 Engineered Plague|7ED
-1 Razortooth Rats|7ED
-1 Stronghold Assassin|7ED
-2 Gravedigger|7ED
-1 Abyssal Specter|7ED
-2 Fallen Angel|7ED
-2 Dakmor Lancer|7ED
+2 Charcoal Diamond|7ED|1
+2 Fire Diamond|7ED|1
+2 Raging Goblin|7ED|1
+2 Blaze|7ED|1
+2 Shock|7ED|1
+1 Pyroclasm|7ED|1
+2 Volcanic Hammer|7ED|1
+1 Pillage|7ED|1
+1 Storm Shaman|7ED|1
+1 Orcish Artillery|7ED|1
+1 Sabretooth Tiger|7ED|1
+1 Fervor|7ED|1
+1 Bloodshot Cyclops|7ED|1
+1 Shivan Dragon|7ED|1
+2 Duress|7ED|1
+2 Drudge Skeletons|7ED|1
+2 Dark Banishing|7ED|1
+1 Engineered Plague|7ED|1
+1 Razortooth Rats|7ED|1
+1 Stronghold Assassin|7ED|1
+2 Gravedigger|7ED|1
+1 Abyssal Specter|7ED|1
+2 Fallen Angel|7ED|1
+2 Dakmor Lancer|7ED|1
+[Sideboard]
+
+[Planes]
+
+[Schemes]
+
+[Conspiracy]
+
+[Dungeon]

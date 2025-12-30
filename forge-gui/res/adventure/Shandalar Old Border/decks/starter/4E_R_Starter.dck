@@ -1,26 +1,37 @@
 [metadata]
 Name=4E Red Starter
+[Avatar]
+
 [Main]
 8 Mountain|4ED|1
 8 Mountain|4ED|2
 8 Mountain|4ED|3
-2 Goblin Balloon Brigade|4ED
-2 Lightning Bolt|4ED
-2 Immolation|4ED
-2 Ironclaw Orcs|4ED
-2 Shatter|4ED
-2 Fork|3ED
-2 Ball Lightning|4ED
-2 Orcish Artillery|4ED
-2 Stone Rain|4ED
-2 Granite Gargoyle|3ED
-2 Uthden Troll|4ED
-2 Dragon Whelp|4ED
-2 Keldon Warlord|4ED
-1 Stone Giant|4ED
-1 Roc of Kher Ridges|3ED
-2 Pyrotechnics|4ED
-1 Fissure|4ED
-1 Earthquake|4ED
-2 Shivan Dragon|4ED
-2 Rock Hydra|3ED
+2 Goblin Balloon Brigade|4ED|1
+2 Lightning Bolt|4ED|1
+2 Immolation|4ED|1
+2 Ironclaw Orcs|4ED|1
+2 Shatter|4ED|1
+2 Fork|3ED|1
+2 Ball Lightning|4ED|1
+2 Orcish Artillery|4ED|1
+2 Stone Rain|4ED|1
+2 Granite Gargoyle|3ED|1
+2 Uthden Troll|4ED|1
+2 Dragon Whelp|4ED|1
+2 Keldon Warlord|4ED|1
+1 Stone Giant|4ED|1
+1 Roc of Kher Ridges|3ED|1
+2 Pyrotechnics|4ED|1
+1 Fissure|4ED|1
+1 Earthquake|4ED|1
+2 Shivan Dragon|4ED|1
+2 Rock Hydra|3ED|1
+[Sideboard]
+
+[Planes]
+
+[Schemes]
+
+[Conspiracy]
+
+[Dungeon]

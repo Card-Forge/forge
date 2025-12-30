@@ -53,18 +53,18 @@
       "sellFactor": 0.6,
       "shardSellRatio": 0.95,
       "starterDecks": {
-        "W": "decks/starter/MMQ - White.dck",
-        "B": "decks/starter/MIR - Black.dck",
-        "U": "decks/starter/MMQ - BlueWhite.dck",
-        "R": "decks/starter/MIR - BlueRed.dck",
-        "G": "decks/starter/MIR - GreenWhite - Jungle_Jam.dck"
+        "W": "decks/starter/USG - White.dck",
+        "U": "decks/starter/UDS - BlueWhite.dck",
+        "B": "decks/starter/EXO - Black.dck",
+        "R": "decks/starter/UDS - BlueRed.dck",
+        "G": "decks/starter/USG - GreenBlack.dck"
       },
       "constructedStarterDecks": {
-        "W": "decks/starter/4E_W_Starter.dck",
-        "U": "decks/starter/4E_U_Starter.dck",
-        "B": "decks/starter/4E_B_Starter.dck",
-        "R": "decks/starter/4E_R_Starter.dck",
-        "G": "decks/starter/4E_G_Starter.dck"
+        "W": "decks/starter/ULG - BlueWhite.dck",
+        "U": "decks/starter/EXO - Blue.dck",
+        "B": "decks/starter/EXO - RedBlack.dck",
+        "R": "decks/starter/EXO - RedWhite.dck",
+        "G": "decks/starter/TMP - GreenWhite.dck"
       },
       "pileDecks": {
         "W": "decks/starter/pile_white_e.json",
@@ -98,18 +98,18 @@
       "sellFactor": 0.5,
       "shardSellRatio": 0.8,
       "starterDecks": {
-        "W": "decks/starter/USG - White.dck",
-        "B": "decks/starter/TMP - BlueBlack.dck",
-        "U": "decks/starter/USG - BlueBlack.dck",
-        "R": "decks/starter/TMP - RedWhite.dck",
-        "G": "decks/starter/USG GreenRed.dck"
+        "W": "decks/starter/TMP - BlueWhite.dck",
+        "U": "decks/starter/TMP - BlueBlack.dck",
+        "B": "decks/starter/UDS - Black.dck",
+        "R": "decks/starter/UDS - RedBlack.dck",
+        "G": "decks/starter/ULG - BlueGreen.dck"
       },
       "constructedStarterDecks": {
-        "W": "decks/starter/USG - BlackWhite.dck",
-        "U": "decks/starter/TMP - BlueWhite.dck",
-        "B": "decks/starter/MMQ - RedBlack - Disrupter.dck",
-        "R": "decks/starter/MIR - RedWhite.dck",
-        "G": "decks/starter/MMQ - GreenRed.dck"
+        "W": "decks/starter/STH - WhiteBlack.dck",
+        "U": "decks/starter/EXO - BlueBlack.dck",
+        "B": "decks/starter/USG - BlackWhite.dck",
+        "R": "decks/starter/TMP - RedWhite.dck",
+        "G": "decks/starter/ULG - GreenWhite.dck"
       },
       "pileDecks": {
         "W": "decks/starter/pile_white_n.json",
@@ -141,18 +141,18 @@
       "sellFactor": 0.25,
       "shardSellRatio": 0.6,
       "starterDecks": {
-        "W": "decks/starter/7ED - White.dck",
-        "B": "decks/starter/7ED - Black.dck",
-        "U": "decks/starter/7ED - Blue.dck",
-        "R": "decks/starter/7ED - Red.dck",
-        "G": "decks/starter/7ED - Green.dck"
+        "W": "decks/starter/VIS - White.dck",
+        "U": "decks/starter/MIR - BlueRed.dck",
+        "B": "decks/starter/MIR - Black.dck",
+        "R": "decks/starter/VIS - Red.dck",
+        "G": "decks/starter/MIR - GreenWhite - Jungle_Jam.dck"
       },
       "constructedStarterDecks": {
-        "W": "decks/starter/Portal Second Age - White.dck",
-        "U": "decks/starter/Portal Second Age - Blue.dck",
-        "B": "decks/starter/Portal Second Age - Black.dck",
-        "R": "decks/starter/Portal Second Age - Red.dck",
-        "G": "decks/starter/Portal Second Age - Green.dck"
+        "W": "decks/starter/WTH - BlueWhite.dck",
+        "U": "decks/starter/VIS - BlueBlack.dck",
+        "B": "decks/starter/WTH - Black.dck",
+        "R": "decks/starter/WTH - Red.dck",
+        "G": "decks/starter/VIS - GreenRed.dck"
       },
       "pileDecks": {
         "W": "decks/starter/pile_white_h.json",
@@ -185,17 +185,17 @@
       "shardSellRatio": 0.3,
       "starterDecks": {
         "W": "decks/starter/Starter 1999 - White.dck",
-        "B": "decks/starter/Starter 1999 - Black.dck",
-        "U": "decks/starter/Starter 1999 - Blue.dck",
-        "R": "decks/starter/Starter 1999 - Red.dck",
-        "G": "decks/starter/Starter 1999 - Green.dck"
+        "U": "decks/starter/7ED - Blue.dck",
+        "B": "decks/starter/7ED - Black.dck",
+        "R": "decks/starter/7ED - Red.dck",
+        "G": "decks/starter/7ED - Green.dck"
       },
       "constructedStarterDecks": {
-        "W": "decks/starter/Portal - Boros.dck",
-        "U": "decks/starter/Portal - Dimir.dck",
-        "B": "decks/starter/7E_BU_Starter.dck",
-        "R": "decks/starter/6ED - BlueRed.dck",
-        "G": "decks/starter/6ED - GreenBlack.dck"
+        "W": "decks/starter/7ED - White.dck",
+        "U": "decks/starter/Starter 1999 - Blue.dck",
+        "B": "decks/starter/Starter 1999 - Black.dck",
+        "R": "decks/starter/Starter 1999 - Red.dck",
+        "G": "decks/starter/Starter 1999 - Green.dck"
       },
       "pileDecks": {
         "W": "decks/starter/pile_white_h.json",

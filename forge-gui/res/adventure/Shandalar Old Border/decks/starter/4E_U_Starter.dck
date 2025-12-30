@@ -1,24 +1,35 @@
 [metadata]
 Name=4E Blue Starter
+[Avatar]
+
 [Main]
 8 Island|4ED|1
 8 Island|4ED|2
 8 Island|4ED|3
-2 Unsummon|4ED
-2 Flood|4ED
-2 Counterspell|4ED
-2 Zephyr Falcon|4ED
-2 Giant Tortoise|4ED
-2 Prodigal Sorcerer|4ED
-2 Apprentice Wizard|4ED
-2 Time Elemental|4ED
-2 Gaseous Form|4ED
-2 Control Magic|4ED
-2 Phantom Monster|4ED
-2 Air Elemental|4ED
-2 Phantasmal Forces|4ED
-2 Mahamoti Djinn|4ED
-2 Power Sink|4ED
-2 Brainstorm|ICE
-2 Clone|3ED
-2 Vesuvan Doppelganger|3ED
+2 Unsummon|4ED|1
+2 Flood|4ED|1
+2 Counterspell|4ED|1
+2 Zephyr Falcon|4ED|1
+2 Giant Tortoise|4ED|1
+2 Prodigal Sorcerer|4ED|1
+2 Apprentice Wizard|4ED|1
+2 Time Elemental|4ED|1
+2 Gaseous Form|4ED|1
+2 Control Magic|4ED|1
+2 Phantom Monster|4ED|1
+2 Air Elemental|4ED|1
+2 Phantasmal Forces|4ED|1
+2 Mahamoti Djinn|4ED|1
+2 Power Sink|4ED|1
+2 Brainstorm|ICE|1
+2 Clone|3ED|1
+2 Vesuvan Doppelganger|3ED|1
+[Sideboard]
+
+[Planes]
+
+[Schemes]
+
+[Conspiracy]
+
+[Dungeon]

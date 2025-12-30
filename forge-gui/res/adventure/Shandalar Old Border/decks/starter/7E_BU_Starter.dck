@@ -1,39 +1,48 @@
 [metadata]
 Name=7E Black/Blue Starter
+[Avatar]
+
 [Main]
-3 Swamp|7ED|1
+4 Swamp|7ED|1
 3 Swamp|7ED|2
-2 Swamp|7ED|3
-2 Swamp|7ED|4
-2 Island|7ED|1
-2 Island|7ED|2
+3 Swamp|7ED|3
+4 Island|7ED|1
+3 Island|7ED|2
 3 Island|7ED|3
-3 Island|7ED|4
-4 Underground River|7ED
-2 Charcoal Diamond|7ED
-2 Sky Diamond|7ED
-2 Sage Owl|7ED
-1 Counterspell|7ED
-1 Boomerang|7ED
-1 Unsummon|7ED
-1 Merfolk Looter|7ED
-1 Fleeting Image|7ED
-1 Prodigal Sorcerer|7ED
-1 Phantom Warrior|7ED
-1 Archivist|7ED
-1 Levitation|7ED
-1 Opposition|7ED
-1 Thieving Magpie|7ED
-1 Evacuation|7ED
-1 Confiscate|7ED
-1 Mahamoti Djinn|7ED
-2 Duress|7ED
-2 Drudge Skeletons|7ED
-2 Dark Banishing|7ED
-1 Engineered Plague|7ED
-1 Razortooth Rats|7ED
-1 Stronghold Assassin|7ED
-2 Gravedigger|7ED
-1 Abyssal Specter|7ED
-2 Fallen Angel|7ED
-2 Dakmor Lancer|7ED
+4 Underground River|7ED|1
+2 Charcoal Diamond|7ED|1
+2 Sky Diamond|7ED|1
+2 Sage Owl|7ED|1
+1 Counterspell|7ED|1
+1 Boomerang|7ED|1
+1 Unsummon|7ED|1
+1 Merfolk Looter|7ED|1
+1 Fleeting Image|7ED|1
+1 Prodigal Sorcerer|7ED|1
+1 Phantom Warrior|7ED|1
+1 Archivist|7ED|1
+1 Levitation|7ED|1
+1 Opposition|7ED|1
+1 Thieving Magpie|7ED|1
+1 Evacuation|7ED|1
+1 Confiscate|7ED|1
+1 Mahamoti Djinn|7ED|1
+2 Duress|7ED|1
+2 Drudge Skeletons|7ED|1
+2 Dark Banishing|7ED|1
+1 Engineered Plague|7ED|1
+1 Razortooth Rats|7ED|1
+1 Stronghold Assassin|7ED|1
+2 Gravedigger|7ED|1
+1 Abyssal Specter|7ED|1
+2 Fallen Angel|7ED|1
+2 Dakmor Lancer|7ED|1
+[Sideboard]
+
+[Planes]
+
+[Schemes]
+
+[Conspiracy]
+
+[Dungeon]
