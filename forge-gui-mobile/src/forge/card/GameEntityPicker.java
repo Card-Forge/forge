@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import com.google.common.collect.ImmutableList;
 
@@ -65,7 +66,7 @@ public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
         List<PickerTab> tabs = Lists.newArrayList();
         tabs.add(new PickerTab(choiceList, Forge.getLocalizer().getMessage("lblChoices"), Forge.hdbuttons ? FSkinImage.HDCHOICE : FSkinImage.DECKLIST, 1));
         for (ZoneType zone : delayedReveal.getZone()) {
-            final Collection<CardView> revealList = delayedReveal.getCards().stream().filter(c -> c.getZone() == zone).toList();
+            final Collection<CardView> revealList = delayedReveal.getCards().stream().filter(c -> c.getZone() == zone).collect(Collectors.toList());
             final String revealListCaption = StringUtils.capitalize(MessageUtil.formatMessage("{player's} " + zone.getTranslatedName(), delayedReveal.getOwner(), delayedReveal.getOwner()));
             final FImage revealListImage = VPlayerPanel.iconFromZone(zone);
             tabs.add(new PickerTab(revealList, revealListCaption, revealListImage, 1));
