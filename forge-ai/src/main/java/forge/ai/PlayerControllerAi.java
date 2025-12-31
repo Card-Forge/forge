@@ -351,7 +351,7 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public <T extends GameEntity> T chooseSingleEntityForEffect(FCollectionView<T> optionList, DelayedReveal delayedReveal, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         if (delayedReveal != null) {
-            reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
+            reveal(delayedReveal);
         }
         return SpellApiToAi.Converter.get(sa).chooseSingleEntity(player, sa, (FCollection<T>)optionList, isOptional, targetedPlayer, params);
     }
@@ -361,7 +361,7 @@ public class PlayerControllerAi extends PlayerController {
             FCollectionView<T> optionList, int min, int max, DelayedReveal delayedReveal, SpellAbility sa, String title,
             Player targetedPlayer, Map<String, Object> params) {
         if (delayedReveal != null) {
-            reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
+            reveal(delayedReveal);
         }
         FCollection<T> remaining = new FCollection<>(optionList);
         List<T> selecteds = new ArrayList<>();
@@ -1492,7 +1492,7 @@ public class PlayerControllerAi extends PlayerController {
             List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, DelayedReveal delayedReveal,
             String selectPrompt, boolean isOptional, Player decider) {
         if (delayedReveal != null) {
-            reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
+            reveal(delayedReveal);
         }
         return brains.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player, decider);
     }
