@@ -515,7 +515,9 @@ public class GameAction {
             }
             copied.clearMergedCards();
         } else {
-            storeChangesZoneAll(copied, zoneFrom, zoneTo, params);
+            if (!suppress) {
+                storeChangesZoneAll(copied, zoneFrom, zoneTo, params);
+            }
             // "enter the battlefield as a copy" - apply code here
             // but how to query for input here and continue later while the callers assume synchronous result?
             zoneTo.add(copied, position, toBattlefield ? null : lastKnownInfo); // the modified state of the card is also reported here (e.g. for Morbid + Awaken)
