@@ -3722,6 +3722,15 @@ public class AbilityUtils {
             return doXMath(creatTypes.size(), CardFactoryUtil.extractOperators(string), source, ctb);
         }
 
+        if (string.startsWith("LandType")) {
+            final Set<String> landTypes = Sets.newHashSet();
+            for (Card card : paidList) {
+                landTypes.addAll(card.getType().getLandTypes());
+            }
+
+            return doXMath(landTypes.size(), CardFactoryUtil.extractOperators(string), source, ctb);
+        }
+
         String filteredString = string;
         Iterable<Card> filteredList = paidList;
         final String[] filter = filteredString.split("_");
