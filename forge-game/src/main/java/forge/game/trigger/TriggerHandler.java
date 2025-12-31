@@ -239,7 +239,8 @@ public class TriggerHandler {
                     TriggerType.Destroyed.equals(t.getMode()) ||
                     TriggerType.Sacrificed.equals(t.getMode()) || TriggerType.SacrificedOnce.equals(t.getMode()) ||
                     ((TriggerType.ChangesZone.equals(t.getMode()) || TriggerType.ChangesZoneAll.equals(t.getMode()))
-                            && StringUtils.contains(t.getParam("Origin"), "Battlefield"))) {
+                            && (StringUtils.contains(t.getParam("Origin"), "Battlefield") ||
+                            StringUtils.containsAny(t.getParam("Destination"), "Library", "Hand")))) {
                 registerOneTrigger(t);
             }
         }
