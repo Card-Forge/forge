@@ -1725,5 +1725,56 @@
 			{ "type": "item", "count": 1, "itemName": "Jayemdae Robes" },
 			{ "type": "item", "count": 1, "itemName": "Fool's Outfit" }
 		]
+	  },
+	  {
+		"name": "ArtificerBazaar",
+		"description": "The Artificer's Bazaar",
+		"spriteAtlas": "maps/tileset/buildings.atlas",
+		"sprite": "LegendShop",
+		"restockPrice": 10,
+		"rewards": [
+			{ "type": "item", "count": 1, "itemName": "Aeolipile" },
+			{ "type": "item", "count": 1, "itemName": "Serrated Quiver" },
+			{ "type": "item", "count": 1, "itemName": "Elixir of Vitality" },
+			{ "type": "item", "count": 1, "itemName": "Hivecaller's Horn" },
+			{ "type": "item", "count": 1, "itemName": "Dragon Mask" },
+			{ "type": "item", "count": 1, "itemName": "Coral Helm" },
+			{ "type": "item", "count": 1, "itemName": "Urza's Armor" },
+			{ "type": "item", "count": 1, "itemName": "Whalebone Glider" }
+		]
+	  },
+	  {
+		"name": "ArtificerBazaar2",
+		"description": "The Artificer's Bazaar",
+		"spriteAtlas": "maps/tileset/buildings.atlas",
+		"sprite": "LegendShop",
+		"restockPrice": 10,
+		"rewards": [
+			{ "type": "item", "count": 1, "itemName": "Rod of Ruin" },
+			{ "type": "item", "count": 1, "itemName": "Triangle of War" },
+			{ "type": "item", "count": 1, "itemName": "Shield of the Ages" },
+			{ "type": "item", "count": 1, "itemName": "Roc Egg" },
+			{ "type": "item", "count": 1, "itemName": "Jester's Cap" },
+			{ "type": "item", "count": 1, "itemName": "Crown of the Ages" },
+			{ "type": "item", "count": 1, "itemName": "Fool's Outfit" },
+			{ "type": "item", "count": 1, "itemName": "Sandals of Speed" }
+		]
+	  },
+	  {
+		"name": "ArtificerBazaar3",
+		"description": "The Artificer's Bazaar",
+		"spriteAtlas": "maps/tileset/buildings.atlas",
+		"sprite": "LegendShop",
+		"restockPrice": 10,
+		"rewards": [
+			{ "type": "item", "count": 1, "itemName": "Gauntlets of Chaos" },
+			{ "type": "item", "count": 1, "itemName": "Scythe of Yawgmoth" },
+			{ "type": "item", "count": 1, "itemName": "Claws of Gix" },
+			{ "type": "item", "count": 1, "itemName": "Life Chisel" },
+			{ "type": "item", "count": 1, "itemName": "Phyrexian Splicer" },
+			{ "type": "item", "count": 1, "itemName": "Torturer's Hood" },
+			{ "type": "item", "count": 1, "itemName": "Yawgmoth's Armor" },
+			{ "type": "item", "count": 1, "itemName": "Joven's Boots" }
+		]
 	  }
 	]

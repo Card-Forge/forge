@@ -311,7 +311,7 @@
     "description": "Pay 2 to prevent 1 damage to you.",
     "equipmentSlot": "Left",
     "iconName": "ShieldOfTheAges",
-    "cost": 2000,
+    "cost": 12000,
     "effect": {
       "startBattleWithCard": [
         "Shield of the Ages|ICE"
@@ -445,7 +445,7 @@
     "description": "Pay 3 and discard randomly to give target creature +2/+2.",
     "equipmentSlot": "Neck",
     "iconName": "KiteShield",
-    "cost": 1000,
+    "cost": 12000,
     "effect": {
       "startBattleWithCard": [
         "Coral Helm|ATQ"
@@ -492,7 +492,7 @@
     "name": "Roc Egg",
     "equipmentSlot": "Left",
     "iconName": "Sandals",
-    "cost": 5000,
+    "cost": 12000,
     "effect": {
       "startBattleWithCard": [
         "Roc Hatchling|WTH"
@@ -517,7 +517,7 @@
     "description": "+1 Life. Sacrifice a land to give target creature haste.",
     "equipmentSlot": "Boots",
     "iconName": "Sandals",
-    "cost": 1500,
+    "cost": 12000,
     "effect": {
       "lifeModifier": 1,
       "startBattleWithCard": [
@@ -554,7 +554,7 @@
     "description": "Pay 3 and tap to give a creature +2/+2 until end of turn, it returns to hand at end step.",
     "equipmentSlot": "Neck",
     "iconName": "DragonMask",
-    "cost": 3000,
+    "cost": 12000,
     "effect": {
       "startBattleWithCard": [
         "Dragon Mask|VIS"
@@ -754,7 +754,7 @@
     "description": "Sacrifice a creature during upkeep to gain life equal to its toughness.",
     "equipmentSlot": "Left",
     "iconName": "LifeChisel",
-    "cost": 3000,
+    "cost": 12000,
     "effect": {
       "startBattleWithCard": [
         "Life Chisel|LEG"
@@ -887,7 +887,7 @@
     "description": "Pay 2 and sacrifice to make two creatures fight.",
     "equipmentSlot": "Right",
     "iconName": "TriangleOfWar",
-    "cost": 3000,
+    "cost": 12000,
     "effect": {
       "startBattleWithCard": [
         "Triangle of War|VIS"
@@ -939,7 +939,8 @@
       "startBattleWithCard": [
         "Rod of Ruin|LEA"
       ]
-    }
+    },
+    "cost": 12000
   },
   {
     "name": "Disruptor's Robes",
@@ -1155,7 +1156,8 @@
         "Jester's Cap|ICE"
       ]
     },
-    "description": "Pay 2 and sacrifice to exile 3 cards from opponent's library."
+    "description": "Pay 2 and sacrifice to exile 3 cards from opponent's library.",
+    "cost": 12000
   },
   {
     "name": "Mad Staff",
@@ -1190,7 +1192,8 @@
         "Crown of the Ages|ICE"
       ]
     },
-    "description": "+2 life. Pay 4 and tap to move an Aura to another creature."
+    "description": "+2 life. Pay 4 and tap to move an Aura to another creature.",
+    "cost": 12000
   },
   {
     "name": "Cultist's Key",
@@ -1300,7 +1303,7 @@
     "description": "+1 life. Pay 2 to give target creature with power 3 or less flying.",
     "equipmentSlot": "Boots",
     "iconName": "WhaleboneGlider",
-    "cost": 3000,
+    "cost": 12000,
     "effect": {
       "lifeModifier": 1,
       "startBattleWithCard": [
@@ -1390,7 +1393,8 @@
         "The Hive|LEA"
       ]
     },
-    "description": "Pay 5 and tap to create a 1/1 flying Wasp token."
+    "description": "Pay 5 and tap to create a 1/1 flying Wasp token.",
+    "cost": 12000
   },
   {
     "name": "Warren Tender's Baton",
@@ -1572,7 +1576,8 @@
         "Wheel of Torture|ULG"
       ]
     },
-    "description": "-3 life. Opponent loses life for each card under 3 at their upkeep."
+    "description": "-3 life. Opponent loses life for each card under 3 at their upkeep.",
+    "cost": 12000
   },
   {
     "name": "Armor of Madness",
@@ -1595,7 +1600,8 @@
         "Joven's Tools|HML"
       ]
     },
-    "description": "Pay 4 and tap to make a creature unblockable except by walls."
+    "description": "Pay 4 and tap to make a creature unblockable except by walls.",
+    "cost": 12000
   },
   {
     "name": "Yellow Scarves Spear",
@@ -1676,7 +1682,8 @@
         "Urza's Armor|USG"
       ]
     },
-    "description": "Prevent 1 damage from each damage source dealt to you."
+    "description": "Prevent 1 damage from each damage source dealt to you.",
+    "cost": 12000
   },
   {
     "name": "Memory Crystal",
@@ -1893,7 +1900,8 @@
         "Order of Yawgmoth|USG"
       ]
     },
-    "description": "A 2/2 fear creature. Opponent discards when it deals damage."
+    "description": "A 2/2 fear creature. Opponent discards when it deals damage.",
+    "cost": 12000
   },
   {
     "name": "Yawgmoth's Armor",
@@ -1904,7 +1912,8 @@
         "Eye of Yawgmoth|NMS"
       ]
     },
-    "description": "Pay 3 and sac a creature to look at its power in cards and keep one."
+    "description": "Pay 3 and sac a creature to look at its power in cards and keep one.",
+    "cost": 12000
   },
   {
     "name": "Ashnod's Greaves",
@@ -2190,7 +2199,8 @@
         "Claws of Gix|USG"
       ]
     },
-    "description": "+3 life. Pay 1 and sac a permanent to gain 1 life."
+    "description": "+3 life. Pay 1 and sac a permanent to gain 1 life.",
+    "cost": 12000
   },
   {
     "name": "Sulfuric Amulet",
@@ -2305,7 +2315,7 @@
       ]
     },
     "description": "Pay 2 and tap to move flying/first strike/shadow/trample.",
-    "cost": 1500
+    "cost": 12000
   },
   {
     "name": "Tome of the Trove",
@@ -2374,7 +2384,8 @@
         "Serrated Arrows|HML"
       ]
     },
-    "description": "-4 life. Enters with 3 arrows. Tap to shoot out a -1/-1 counter."
+    "description": "-4 life. Enters with 3 arrows. Tap to shoot out a -1/-1 counter.",
+    "cost": 12000
   },
   {
     "name": "Headdress of Paradise",
@@ -2624,7 +2635,7 @@
     "description": "Gain 4 life early or pay 8 for 8 life later.",
     "iconName": "ElixirOfVitality",
     "equipmentSlot": "Left",
-    "cost": 16000,
+    "cost": 12000,
     "effect": {
       "startBattleWithCard": [
         "Elixir of Vitality|MIR"
@@ -2687,7 +2698,7 @@
       "lifeModifier": 2
     }
   },
-    {
+  {
     "name": "Hallowed Sigil",
     "description": "Pay W and discard a card to gain 3 life.",
     "equipmentSlot": "Neck",
@@ -2714,7 +2725,7 @@
     "description": "Pay 1 and sacrifice for 2 damage to any target.",
     "equipmentSlot": "Right",
     "iconName": "Aeolipile",
-    "cost": 2000,
+    "cost": 12000,
     "effect": {
       "startBattleWithCard": [
         "Aeolipile|FEM"
@@ -2835,7 +2846,7 @@
     "description": "Pay 4 and tap to draw a card. Skip your next draw step.",
     "equipmentSlot": "Body",
     "iconName": "FoolsTome",
-    "cost": 10000,
+    "cost": 12000,
     "effect": {
       "startBattleWithCard": [
         "Fool's Tome|TMP"
@@ -2884,7 +2895,8 @@
       "startBattleWithCard": [
         "Gauntlets of Chaos|LEG"
       ]
-    }
+    },
+    "cost": 12000
   },
   {
     "name": "Marble Mace",
