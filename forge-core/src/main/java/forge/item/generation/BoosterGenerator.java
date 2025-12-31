@@ -26,10 +26,7 @@ import forge.card.CardRarity;
 import forge.card.CardSplitType;
 import forge.card.PrintSheet;
 import forge.item.*;
-import forge.util.Aggregates;
-import forge.util.IterableUtil;
-import forge.util.MyRandom;
-import forge.util.TextUtil;
+import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -54,8 +51,9 @@ public class BoosterGenerator {
     }
 
     private static PaperCard generateFoilCard(PrintSheet sheet) {
-        PaperCard randomCard = sheet.random(1, true).get(0);
-        return randomCard.getFoiled();
+        List<PaperCard> randomCards = sheet.random(1, true);
+        PaperCard randomCard = !randomCards.isEmpty() ? randomCards.get(0) : null;
+        return randomCard != null ? randomCard.getFoiled() : null;
     }
 
     private static PaperCard generateFoilCard(List<PaperCard> cardList) {
@@ -347,14 +345,14 @@ public class BoosterGenerator {
                                 // match that.
                                 // If not special card, make it always foil.
                                 if ((MyRandom.getRandom().nextInt(30) == 1) || (!foilSlot.equals(BoosterSlots.SPECIAL))) {
-                                    foilCardGeneratedAndHeld.add(generateFoilCard(ps));
+                                    CollectionUtil.addNoNull(foilCardGeneratedAndHeld, generateFoilCard(ps));
                                 } else {
                                     // Otherwise it's not foil (even though this is the
                                     // foil slot!)
                                     result.addAll(ps.random(1, true));
                                 }
                             } else {
-                                foilCardGeneratedAndHeld.add(generateFoilCard(ps));
+                                CollectionUtil.addNoNull(foilCardGeneratedAndHeld, generateFoilCard(ps));
                             }
                         }
                     }
