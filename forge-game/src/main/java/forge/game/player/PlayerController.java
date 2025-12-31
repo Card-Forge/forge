@@ -178,6 +178,11 @@ public abstract class PlayerController {
     public final void reveal(List<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix) {
         reveal(cards, zone, owner, null, true);
     }
+    public final void reveal(DelayedReveal delayedReveal) {
+        for (ZoneType zt : delayedReveal.getZone()) {
+            reveal(delayedReveal.getCards().stream().filter(c -> c.getZone() == zt).toList(), zt, delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
+        }
+    }
     public abstract void reveal(List<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix, boolean addMsgSuffix);
 
     /** Shows message to player to reveal chosen cardName, creatureType, number etc. AI must analyze API to understand what that is */

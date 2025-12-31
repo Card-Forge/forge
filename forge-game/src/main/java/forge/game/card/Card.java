@@ -3025,10 +3025,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             }
         }
 
-        // Replacement effects
         sb.append(replacementEffects);
 
-        // static abilities
         for (final StaticAbility stAb : state.getStaticAbilities()) {
             if (!stAb.isSecondary() && !stAb.isClassAbility()) {
                 final String stAbD = stAb.toString();
@@ -3225,11 +3223,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         final StringBuilder sbSpell = new StringBuilder();
 
-        // I think SpellAbilities should be displayed after Keywords
-        // Add SpellAbilities
+        // SpellAbilities should be displayed after Keywords
         for (final SpellAbility element : state.getSpellAbilities()) {
             if (!element.isSecondary()) {
-                element.usesTargeting();
                 sbSpell.append(formatSpellAbility(element));
             }
         }
@@ -3309,8 +3305,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         sbBefore.append(" ").append(state.getFirstAbility().getAdditionalAbility("GiftAbility").getParam("GiftDescription"));
                     }
                     sbBefore.append("\r\n");
-                } else if (keyword.equals("Remove CARDNAME from your deck before playing if you're not " +
-                        "playing for ante.")) {
+                } else if (keyword.equals("Remove CARDNAME from your deck before playing if you're not playing for ante.")) {
                     sbBefore.append(keyword);
                     sbBefore.append("\r\n");
                 } else if (keyword.startsWith("Haunt")) {
@@ -3385,21 +3380,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         // add Spells there to main StringBuilder
         sb.append(strSpell);
 
-        // Triggered abilities
         for (final Trigger trig : state.getTriggers()) {
             if (!trig.isSecondary()) {
                 sb.append(trig.replaceAbilityText(trig.toString(), state)).append("\r\n");
             }
         }
 
-        // Replacement effects
         for (final ReplacementEffect replacementEffect : state.getReplacementEffects()) {
             if (!replacementEffect.isSecondary()) {
                 sb.append(replacementEffect.getDescription()).append("\r\n");
             }
         }
 
-        // static abilities
         for (final StaticAbility stAb : state.getStaticAbilities()) {
             if (!stAb.isSecondary()) {
                 final String stAbD = stAb.toString();
@@ -3424,10 +3416,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
 
         StringBuilder sbCost = new StringBuilder(k[0]);
-        if (!mCost.isOnlyManaCost()) {
-            sbCost.append("—");
-        } else {
+        if (mCost.isOnlyManaCost()) {
             sbCost.append(" ");
+        } else {
+            sbCost.append("—");
         }
         sbCost.append(mCost.toSimpleString());
         return sbCost + " (" + inst.getReminderText() + ")";
