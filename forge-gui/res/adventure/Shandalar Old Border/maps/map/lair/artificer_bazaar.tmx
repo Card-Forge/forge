@@ -1,10 +1,10 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="54">
  <editorsettings>
-  <export target="artificer_bazaar.tmx" format="tmx" />
+  <export target="artificer_bazaar.tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJzz42Rg8BvFo3gUj+JRPIpH8YjAAAvyrVM=
@@ -17,7 +17,7 @@
  </layer>
  <layer id="3" name="Foreground" width="30" height="17">
   <properties>
-   <property name="spriteLayer" type="bool" value="true" />
+   <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
@@ -31,12 +31,12 @@
  <objectgroup id="4" name="Objects">
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="282" width="48" height="16">
    <properties>
-    <property name="teleport" value="" />
+    <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="53" template="../../../../../../common/maps/obj/shop.tx" x="208" y="128">
+  <object id="53" template="../../../../../../common/maps/obj/shop.tx" x="197.5" y="138.75">
    <properties>
-    <property name="commonShopList" value="ArtificerBazaar" />
+    <property name="commonShopList" value="ArtificerBazaar"/>
    </properties>
   </object>
  </objectgroup>

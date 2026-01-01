@@ -34,9 +34,9 @@
     <property name="teleport" value="" />
    </properties>
   </object>
-  <object id="53" template="../../../../../../common/maps/obj/shop.tx" x="208" y="128">
+  <object id="53" template="../../../../../../common/maps/obj/shop.tx" x="197.5" y="138.75">
    <properties>
-    <property name="commonShopList" value="ArtificerBazaar3" />
+    <property name="commonShopList" value="ArtificerBazaar3"/>
    </properties>
   </object>
  </objectgroup>
