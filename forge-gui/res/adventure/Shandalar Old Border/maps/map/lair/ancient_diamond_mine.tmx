@@ -42,14 +42,14 @@
     "text": "Before you stands an ancient crystalline formation, pulsing with primordial mana. The diamonds here are remnants of Shandalar's earliest age, and can be exchanged for spells from the dawn of magic itself.",
     "options": [
       {
-        "name": "Trade 500 Shards for Beta Pack",
+        "name": "Trade 300 Shards for Beta Pack",
         "condition": [
-          { "hasShards": 500 }
+          { "hasShards": 300 }
         ],
         "text": "The crystals shimmer and absorb your mana shards. In exchange, ancient spells materialize before you - cards from the Beta era of magic!",
         "action": [
           {
-            "addShards": -500,
+            "addShards": -300,
             "grantRewards": [
               { "type": "randomCard", "sourceDeck": "decks/custom_lists/LEB_List.dck", "rarity": ["R"], "count": 1 },
               { "type": "randomCard", "sourceDeck": "decks/custom_lists/LEB_List.dck", "rarity": ["U"], "count": 3 },
@@ -62,11 +62,11 @@
         ]
       },
       {
-        "name": "Trade 500 Shards for Beta Pack",
+        "name": "Trade 300 Shards for Beta Pack",
         "condition": [
-          { "hasShards": 500, "not": true }
+          { "hasShards": 300, "not": true }
         ],
-        "text": "You don't have enough mana shards. The ancient diamonds require 500 shards to activate."
+        "text": "You don't have enough mana shards. The ancient diamonds require 300 shards to activate."
       },
       {
         "name": "Leave",
