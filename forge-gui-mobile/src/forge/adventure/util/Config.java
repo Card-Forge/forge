@@ -246,7 +246,7 @@ public class Config {
                     }
                 }
             case Chaos:
-                return DeckgenUtil.getRandomOrPreconOrThemeDeck("", false, false, false);
+                return DeckgenUtil.getRandomOrPreconOrThemeDeck("", false, false, false, configData.allowedEditions);
             case Custom:
                 return DeckProxy.getAllCustomStarterDecks().get(index).getDeck();
             case Pile:
