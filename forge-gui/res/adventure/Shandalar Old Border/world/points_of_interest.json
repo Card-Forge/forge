@@ -4360,5 +4360,55 @@
 		"sprite": "Cave",
 		"map": "../Shandalar Old Border/maps/map/lair/ancient_diamond_mine.tmx",
 		"radiusFactor": 0.6
+	},
+	{
+		"name": "DragonsLairWhite",
+		"displayName": "Dragon's Lair",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../Shandalar Old Border/maps/map/lair/dragons_lair_white.tmx",
+		"radiusFactor": 0.6
+	},
+	{
+		"name": "DragonsLairBlue",
+		"displayName": "Dragon's Lair",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../Shandalar Old Border/maps/map/lair/dragons_lair_blue.tmx",
+		"radiusFactor": 0.6
+	},
+	{
+		"name": "DragonsLairBlack",
+		"displayName": "Dragon's Lair",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../Shandalar Old Border/maps/map/lair/dragons_lair_black.tmx",
+		"radiusFactor": 0.6
+	},
+	{
+		"name": "DragonsLairRed",
+		"displayName": "Dragon's Lair",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../Shandalar Old Border/maps/map/lair/dragons_lair_red.tmx",
+		"radiusFactor": 0.6
+	},
+	{
+		"name": "DragonsLairGreen",
+		"displayName": "Dragon's Lair",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../Shandalar Old Border/maps/map/lair/dragons_lair_green.tmx",
+		"radiusFactor": 0.6
 	}
 ]
