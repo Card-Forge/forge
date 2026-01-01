@@ -55,9 +55,9 @@
       "starterDecks": {
         "W": "decks/starter/USG - White.dck",
         "U": "decks/starter/UDS - BlueWhite.dck",
-        "B": "decks/starter/EXO - Black.dck",
+        "B": "decks/starter/STH - Black.dck",
         "R": "decks/starter/UDS - BlueRed.dck",
-        "G": "decks/starter/USG - GreenBlack.dck"
+        "G": "decks/starter/UDS - GreenBlack.dck"
       },
       "constructedStarterDecks": {
         "W": "decks/starter/ULG - BlueWhite.dck",
@@ -101,7 +101,7 @@
         "W": "decks/starter/TMP - BlueWhite.dck",
         "U": "decks/starter/TMP - BlueBlack.dck",
         "B": "decks/starter/UDS - Black.dck",
-        "R": "decks/starter/UDS - RedBlack.dck",
+        "R": "decks/starter/ULG - RedBlack.dck",
         "G": "decks/starter/ULG - BlueGreen.dck"
       },
       "constructedStarterDecks": {
@@ -216,20 +216,13 @@
     }
   ],
   "starterEditions": [
-    "4ED", "ICE", "ALL", "HML", "MIR", "VIS", "5ED", "TMP", "STH", "EXO",
-    "USG", "ULG", "UDS", "6ED", "MMQ", "NMS", "PCY", "INV", "PLS", "APC",
-    "7ED", "ODY", "TOR", "JUD", "ONS", "LGN", "SCG",
-    "POR", "PO2", "PTK", "S99", "S00",
-    "ARN", "ATQ", "LEG", "DRK", "FEM"
+    "4ED", "MIR", "VIS", "WTH", "TMP", "STH", "USG", "ULG", "UDS",
+    "MMQ", "NMS", "PCY", "INV", "PLS", "APC",
+    "7ED", "PO2", "S99", "ODY", "TOR", "ONS", "SCG"
   ],
   "starterEditionNames": [
-    "Fourth Edition", "Ice Age", "Alliances", "Homelands", "Mirage", "Visions", "Fifth Edition",
-    "Tempest", "Stronghold", "Exodus",
-    "Urza's Saga", "Urza's Legacy", "Urza's Destiny", "Sixth Edition",
-    "Mercadian Masques", "Nemesis", "Prophecy",
-    "Invasion", "Planeshift", "Apocalypse",
-    "Seventh Edition", "Odyssey", "Torment", "Judgment", "Onslaught", "Legions", "Scourge",
-    "Portal", "Portal Second Age", "Portal Three Kingdoms", "Starter 1999", "Starter 2000",
-    "Arabian Nights", "Antiquities", "Legends", "The Dark", "Fallen Empires"
+    "Fourth Edition", "Mirage", "Visions", "Weatherlight", "Tempest", "Stronghold", "Urza's Saga", "Urza's Legacy", "Urza's Destiny",
+    "Mercadian Masques", "Nemesis", "Prophecy", "Invasion", "Planeshift", "Apocalypse",
+    "Seventh Edition", "Portal Second Age", "Starter 1999", "Odyssey", "Torment", "Onslaught", "Scourge"
   ]
 }
