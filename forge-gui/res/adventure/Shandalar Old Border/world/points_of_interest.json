@@ -4350,5 +4350,15 @@
 		"sprite": "Building143",
 		"map": "../Shandalar Old Border/maps/map/lair/artificer_bazaar3.tmx",
 		"radiusFactor": 0.6
+	},
+	{
+		"name": "AncientDiamondMine",
+		"displayName": "Ancient Diamond Mine",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../Shandalar Old Border/maps/map/lair/ancient_diamond_mine.tmx",
+		"radiusFactor": 0.6
 	}
 ]
