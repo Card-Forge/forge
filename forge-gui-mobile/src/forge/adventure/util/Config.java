@@ -239,7 +239,18 @@ public class Config {
                     }
                 }
             case Standard:
-
+                // Check for edition-specific starter decks first
+                if (starterEdition != null && configData.starterDecksByEdition != null) {
+                    ObjectMap<String, String> editionDecks = configData.starterDecksByEdition.get(starterEdition.getCode());
+                    if (editionDecks != null) {
+                        for (ObjectMap.Entry<String, String> entry : editionDecks) {
+                            if (ColorSet.fromNames(entry.key.toCharArray()).getColor() == color.getColor()) {
+                                return CardUtil.getDeck(entry.value, false, false, "", false, false);
+                            }
+                        }
+                    }
+                }
+                // Fall back to default starter decks (JSON generation with edition filter)
                 for (ObjectMap.Entry<String, String> entry : difficultyData.starterDecks) {
                     if (ColorSet.fromNames(entry.key.toCharArray()).getColor() == color.getColor()) {
                         return CardUtil.getDeck(entry.value, false, false, "", false, false, starterEdition, true);
