@@ -367,56 +367,62 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
      * This method is used to highlight castable cards with a yellow border.
      */
     private boolean canCastCard() {
-        // Only check cards in hand
-        if (card == null || !ZoneType.Hand.equals(card.getZone())) {
-            return false;
-        }
-
-        // Get the game view to access the actual Game object
-        final var gameView = matchUI.getGameView();
-            if (gameView == null) {
+        try {
+            // Only check cards in hand
+            if (card == null || !ZoneType.Hand.equals(card.getZone())) {
                 return false;
-        }
-
-        final var game = gameView.getGame();
-            if (game == null) {
-                return false;
-        }
-
-        // Find the actual Card object 
-        Card actualCard = game.findByView(card);
-        if (actualCard == null) {
-            return false;
-        }
-
-        // Get all spell abilities for this card
-        final var abilities = actualCard.getSpellAbilities();
-        if (abilities == null || abilities.isEmpty()) {
-            return false;
-        }
-
-        // Get the player who owns this card
-        final var player = actualCard.getOwner();
-        if (player == null) {
-            return false;
-        }
-
-        for (final SpellAbility sa : abilities) {
-            // First check if the spell can be played (timing, restrictions, etc.)
-            if (!sa.canPlay(true)) {
-                continue;
             }
 
-            // Set the activating player for the spell ability
-            sa.setActivatingPlayer(player);
-
-            // Check if the player can actually pay the mana cost from available sources
-            if (ComputerUtilMana.canPayManaCost(sa, player, 0, false)) {
-                return true;
+            // Get the game view to access the actual Game object
+            final var gameView = matchUI.getGameView();
+                if (gameView == null) {
+                    return false;
             }
+
+            final var game = gameView.getGame();
+                if (game == null) {
+                    return false;
+            }
+
+            // Find the actual Card object 
+            Card actualCard = game.findByView(card);
+            if (actualCard == null) {
+                return false;
+            }
+
+            // Get all spell abilities for this card
+            final var abilities = actualCard.getSpellAbilities();
+            if (abilities == null || abilities.isEmpty()) {
+                return false;
+            }
+
+            // Get the player who owns this card
+            final var player = actualCard.getOwner();
+            if (player == null) {
+                return false;
+            }
+
+            for (final SpellAbility sa : abilities) {
+                // First check if the spell can be played (timing, restrictions, etc.)
+                if (!sa.canPlay(true)) {
+                    continue;
+                }
+
+                // Set the activating player for the spell ability
+                sa.setActivatingPlayer(player);
+
+                // Check if the player can actually pay the mana cost from available sources
+                if (ComputerUtilMana.canPayManaCost(sa, player, 0, false)) {
+                    return true;
+                }
+            }
+            //If no costs can be met
+            return false;
+
+        } catch (Exception e) {
+            // If any exception occurs (NullPointerException, etc.), safely return false
+            return false;
         }
-        //If no costs can be met
-        return false;
     }
 
 
