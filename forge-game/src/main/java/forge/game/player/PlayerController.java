@@ -41,6 +41,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * A prototype for player controller class
@@ -177,6 +178,11 @@ public abstract class PlayerController {
     public abstract void reveal(CardCollectionView cards, ZoneType zone, Player owner, String messagePrefix, boolean addMsgSuffix);
     public final void reveal(List<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix) {
         reveal(cards, zone, owner, null, true);
+    }
+    public final void reveal(DelayedReveal delayedReveal) {
+        for (ZoneType zt : delayedReveal.getZone()) {
+            reveal(delayedReveal.getCards().stream().filter(c -> c.getZone() == zt).collect(Collectors.toList()), zt, delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
+        }
     }
     public abstract void reveal(List<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix, boolean addMsgSuffix);
 

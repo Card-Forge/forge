@@ -1,6 +1,7 @@
 package forge.game.player;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import forge.game.card.Card;
 import forge.game.card.CardView;
@@ -15,7 +16,7 @@ public class DelayedReveal implements Serializable {
     private static final long serialVersionUID = 5516713460440436615L;
 
     private final TrackableCollection<CardView> cards;
-    private final ZoneType zone;
+    private final Set<ZoneType> zone;
     private final PlayerView owner;
     private final String messagePrefix;
 
@@ -23,6 +24,9 @@ public class DelayedReveal implements Serializable {
         this(cards0, zone0, owner0, "");
     }
     public DelayedReveal(final Iterable<Card> cards0, final ZoneType zone0, final PlayerView owner0, final String messagePrefix0) {
+        this(cards0, Set.of(zone0), owner0, "");
+    }
+    public DelayedReveal(final Iterable<Card> cards0, final Set<ZoneType> zone0, final PlayerView owner0, final String messagePrefix0) {
         cards = CardView.getCollection(cards0);
         zone = zone0;
         owner = owner0;
@@ -33,7 +37,7 @@ public class DelayedReveal implements Serializable {
         return cards;
     }
 
-    public ZoneType getZone() {
+    public Set<ZoneType> getZone() {
         return zone;
     }
 

@@ -467,22 +467,22 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         // if UI_SELECT_FROM_CARD_DISPLAYS not set use InputSelect only for battlefield and player hand
         // if UI_SELECT_FROM_CARD_DISPLAYS set and using desktop GUI use InputSelect for any zone that can be shown
-        for (final GameEntity c : sourceList) {
-            if (c instanceof Player) {
+        for (final GameEntity ge : sourceList) {
+            if (ge instanceof Player) {
                 continue;
             }
 
-            if (!(c instanceof Card)) {
+            if (!(ge instanceof Card c)) {
                 return false;
             }
-            final Zone cz = ((Card) c).getZone();
+            final Zone cz = c.getZone();
             // Don't try to draw the UI point of a card if it doesn't exist in any zone.
             if (cz == null) {
                 return false;
             }
 
             final boolean useUiPointAtCard =
-                    (FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) && (!GuiBase.getInterface().isLibgdxPort())) ?
+                    FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) && !GuiBase.getInterface().isLibgdxPort() ?
                             (cz.is(ZoneType.Battlefield) || cz.is(ZoneType.Hand) || cz.is(ZoneType.Library) ||
                                     cz.is(ZoneType.Graveyard) || cz.is(ZoneType.Exile) || cz.is(ZoneType.Flashback) ||
                                     cz.is(ZoneType.Command) || cz.is(ZoneType.Sideboard)) :
@@ -614,15 +614,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // Human is supposed to read the message and understand from it what to choose
         if (optionList.isEmpty()) {
             if (delayedReveal != null) {
-                reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(),
-                        delayedReveal.getMessagePrefix());
+                reveal(delayedReveal);
             }
             return null;
         }
         if (!isOptional && optionList.size() == 1) {
             if (delayedReveal != null) {
-                reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(),
-                        delayedReveal.getMessagePrefix());
+                reveal(delayedReveal);
             }
             return Iterables.getFirst(optionList, null);
         }
@@ -663,8 +661,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // Human is supposed to read the message and understand from it what to choose
         if (optionList.isEmpty()) {
             if (delayedReveal != null) {
-                reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(),
-                        delayedReveal.getMessagePrefix());
+                reveal(delayedReveal);
             }
             return Lists.newArrayList();
         }
@@ -675,8 +672,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         tempShow(optionList);
         if (useSelectCardsInput(optionList)) {
-            final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<>(this, min, max, optionList,
-                    sa);
+            final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<>(this, min, max, optionList, sa);
             input.setCancelAllowed(min == 0);
             input.setMessage(MessageUtil.formatMessage(title, player, targetedPlayer));
             input.showAndWait();
@@ -689,7 +685,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         endTempShowCards();
 
         List<T> results = Lists.newArrayList();
-
         if (views != null) {
             gameCacheEntity.addToList(views, results);
         }
@@ -962,19 +957,19 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     protected void reveal(final CardCollectionView cards, final ZoneType zone, final PlayerView owner, String message, boolean addSuffix) {
         if (StringUtils.isBlank(message)) {
             message = localizer.getMessage("lblLookCardInPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase());
-        } else {
-            if (addSuffix) message += " " + localizer.getMessage("lblPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase());
+        } else if (addSuffix) {
+            message += " " + localizer.getMessage("lblPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase());
         }
         final String fm = MessageUtil.formatMessage(message, getLocalPlayerView(), owner);
-        if (!cards.isEmpty()) {
+        if (cards.isEmpty()) {
+            getGui().message(MessageUtil.formatMessage(localizer.getMessage("lblThereNoCardInPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase()),
+                    getLocalPlayerView(), owner), fm);
+        } else {
             tempShowCards(cards);
             TrackableCollection<CardView> collection = CardView.getCollection(cards);
             getGui().reveal(fm, collection);
             getGui().updateRevealedCards(collection);
             endTempShowCards();
-        } else {
-            getGui().message(MessageUtil.formatMessage(localizer.getMessage("lblThereNoCardInPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase()),
-                    getLocalPlayerView(), owner), fm);
         }
     }
 
@@ -2896,15 +2891,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         private void addCardToZone(ZoneType zone, final boolean repeatLast, final boolean noTriggers) {
             final ZoneType targetZone = repeatLast ? lastAddedZone : zone;
-            String message = null;
+            String message;
             if (targetZone != ZoneType.Battlefield) {
                 message = localizer.getMessage("lblPutCardInWhichPlayerZone", targetZone.getTranslatedName().toLowerCase());
+            } else if (noTriggers) {
+                message = localizer.getMessage("lblPutCardInWhichPlayerBattlefield");
             } else {
-                if (noTriggers) {
-                    message = localizer.getMessage("lblPutCardInWhichPlayerBattlefield");
-                } else {
-                    message = localizer.getMessage("lblPutCardInWhichPlayerPlayOrStack");
-                }
+                message = localizer.getMessage("lblPutCardInWhichPlayerPlayOrStack");
             }
 
             Player pOld = lastAddedPlayer;
