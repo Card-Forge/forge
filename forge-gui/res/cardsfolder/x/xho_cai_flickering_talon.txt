@@ -1,7 +1,7 @@
 Name:Xho Cai, Flickering Talon
 ManaCost:U R W
 Types:Legendary Creature Bird Monk
-PT:2/3
+PT:2/4
 K:Flying
 K:Vigilance
 K:Haste
