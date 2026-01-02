@@ -142,7 +142,6 @@ public final class CardEdition implements Comparable<CardEdition> {
         PRERELEASE_PROMO("prerelease promo"),
         BUNDLE("bundle"),
         BOX_TOPPER("box topper"),
-        DUNGEONS("dungeons"),
         JUMPSTART("jumpstart"),
         REBALANCED("rebalanced"),
         ETERNAL("eternal"),
