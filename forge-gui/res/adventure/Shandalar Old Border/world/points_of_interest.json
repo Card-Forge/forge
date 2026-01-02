@@ -4410,5 +4410,15 @@
 		"sprite": "Cave",
 		"map": "../Shandalar Old Border/maps/map/lair/dragons_lair_green.tmx",
 		"radiusFactor": 0.6
+	},
+	{
+		"name": "RiddlesLair",
+		"displayName": "Sphinx's Sanctum",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../Shandalar Old Border/maps/map/lair/riddles_lair.tmx",
+		"radiusFactor": 0.6
 	}
 ]
