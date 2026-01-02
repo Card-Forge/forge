@@ -47,13 +47,13 @@
 ]</property>
    </properties>
   </object>
-  <object id="51" template="../../../../../../common/maps/obj/enemy.tx" type="enemy" x="240" y="100" width="16" height="16">
+  <object id="51" template="../../../../../../common/maps/obj/enemy.tx" type="enemy" x="167.5" y="139" width="16" height="16">
    <properties>
     <property name="enemy" value="Mandurang of Shandalar"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
-  <object id="52" template="../../../../../../common/maps/obj/treasure.tx" type="reward" x="210" y="90" width="16" height="16">
+  <object id="52" template="../../../../../../common/maps/obj/treasure.tx" type="reward" x="196" y="141" width="16" height="16">
    <properties>
     <property name="reward">[
   { "type": "randomCard", "editions": ["3ED"], "rarity": ["C"], "count": 11 },
@@ -62,7 +62,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="53" template="../../../../../../common/maps/obj/treasure.tx" type="reward" x="270" y="90" width="16" height="16">
+  <object id="53" template="../../../../../../common/maps/obj/treasure.tx" type="reward" x="199" y="141" width="16" height="16">
    <properties>
     <property name="reward">[
   { "type": "randomCard", "rarity": ["R"], "count": 3 },
@@ -71,9 +71,9 @@
 ]</property>
    </properties>
   </object>
-  <object id="54" template="../../../../../../common/maps/obj/gold.tx" type="reward" x="185" y="110" width="16" height="16"/>
-  <object id="55" template="../../../../../../common/maps/obj/gold.tx" type="reward" x="260" y="130" width="16" height="16"/>
-  <object id="56" template="../../../../../../common/maps/obj/gold.tx" type="reward" x="220" y="150" width="16" height="16"/>
-  <object id="57" template="../../../../../../common/maps/obj/gold.tx" type="reward" x="280" y="110" width="16" height="16"/>
+  <object id="54" template="../../../../../../common/maps/obj/gold.tx" type="reward" x="194" y="140" width="16" height="16"/>
+  <object id="55" template="../../../../../../common/maps/obj/gold.tx" type="reward" x="201" y="140" width="16" height="16"/>
+  <object id="56" template="../../../../../../common/maps/obj/gold.tx" type="reward" x="197" y="143" width="16" height="16"/>
+  <object id="57" template="../../../../../../common/maps/obj/gold.tx" type="reward" x="200" y="142" width="16" height="16"/>
  </objectgroup>
 </map>
