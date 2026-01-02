@@ -3,6 +3,7 @@ package forge.game.ability.effects;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -57,7 +58,7 @@ public class VentureEffect extends SpellAbilityEffect {
             filter = e -> e.getValue().isEnterableDungeon();
         }
         Map<ICardFace, String> mapping = StaticData.instance().getAllTokens().getRules().entrySet()
-                .stream().filter(filter).collect(Collectors.toMap(e -> e.getValue().getMainPart(), Map.Entry::getKey));
+                .stream().filter(filter).collect(Collectors.toMap(e -> e.getValue().getMainPart(), Map.Entry::getKey, (a,b) -> a, TreeMap::new));
         String message = Localizer.getInstance().getMessage("lblChooseDungeon");
         ICardFace chosen = player.getController().chooseSingleCardFace(sa, Lists.newArrayList(mapping.keySet()), message);
         if (chosen == null) {
