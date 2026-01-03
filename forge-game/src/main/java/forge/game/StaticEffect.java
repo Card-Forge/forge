@@ -332,6 +332,7 @@ public class StaticEffect {
                 if (hasParam("CanBlockAmount")) {
                     affectedCard.removeCanBlockAdditional(getTimestamp());
                 }
+                addCard(affectedByLayer, StaticAbilityLayer.RULES, affectedCard);
             }
         }
         return affectedCards;

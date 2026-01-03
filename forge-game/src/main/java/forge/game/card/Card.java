@@ -434,6 +434,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public void updateAbilityTextForView() {
         view.getCurrentState().updateAbilityText(this, getCurrentState());
     }
+    public void updateNonAbilityTextForView() {
+        view.updateNonAbilityText(this);
+    }
 
     public void updateManaCostForView() {
         currentState.getView().updateManaCost(this);
@@ -2415,7 +2418,21 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             sbLong.append("\r\n");
         }
         sb.append(sbLong);
-        return CardTranslation.translateMultipleDescriptionText(sb.toString(), this);
+
+        if (!mayPlay.isEmpty()) {
+            PlayerCollection players = new PlayerCollection();
+            for (CardPlayOption o : mayPlay.values()) {
+                if (getController() == o.getPlayer() || o.grantsZonePermissions())
+                    players.add(o.getPlayer());
+            }
+            if (!players.isEmpty()) {
+                sb.append("May be played by: ");
+                sb.append(Lang.joinHomogenous(players));
+                sb.append("\r\n");
+            }
+        }
+
+        return sb.toString();
     }
 
     // convert a keyword list to the String that should be displayed in game
@@ -2882,20 +2899,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         final CardTypeView type = state.getType();
 
         final StringBuilder sb = new StringBuilder();
-        if (!mayPlay.isEmpty()) {
-            Set<String> players = new HashSet<>();
-            for (CardPlayOption o : mayPlay.values()) {
-                if (getController() == o.getPlayer())
-                    players.add(o.getPlayer().getName());
-                else if (o.grantsZonePermissions())
-                    players.add(o.getPlayer().getName());
-            }
-            if (!players.isEmpty()) {
-                sb.append("May be played by: ");
-                sb.append(Lang.joinHomogenous(players));
-                sb.append("\r\n");
-            }
-        }
 
         if (plotted) sb.append("Plotted\r\n");
 
@@ -5433,13 +5436,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         // TODO if some keywords aren't removed anymore, then no need for extra Array List
         hiddenExtrinsicKeywords.put(timestamp, staticId, Lists.newArrayList(keywords));
 
-        view.updateNonAbilityText(this);
+        updateNonAbilityTextForView();
         updateKeywords();
     }
 
     public final void removeHiddenExtrinsicKeywords(long timestamp, long staticId) {
         if (hiddenExtrinsicKeywords.remove(timestamp, staticId) != null) {
-            view.updateNonAbilityText(this);
+            updateNonAbilityTextForView();
             updateKeywords();
         }
     }
@@ -5452,7 +5455,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             }
         }
         if (updated) {
-            view.updateNonAbilityText(this);
+            updateNonAbilityTextForView();
             updateKeywords();
         }
     }

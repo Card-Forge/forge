@@ -1261,6 +1261,9 @@ public class GameAction {
         affectedPT.forEach(Card::updatePTforView);
         affectedKeywords.forEach(Card::updateKeywords);
 
+        if (affectedPerLayer.containsKey(StaticAbilityLayer.RULES)) {
+            affectedPerLayer.get(StaticAbilityLayer.RULES);
+        }
         // TODO filter out old copies from zone change
 
         if (runEvents && !affectedCards.isEmpty()) {
