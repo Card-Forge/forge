@@ -374,19 +374,21 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 });
             }
 
-            for (final Player op : ai.getOpponents()) {
-                for (Card c : op.getCardsIn(ZoneType.Battlefield)) {
-                    // Ob Nixilis, Unshackled
-                    for (Trigger trigger : c.getTriggers()) {
-                        if (TriggerType.SearchedLibrary.equals(trigger.getMode())
-                            && "TrigSac".equals(trigger.getParam("Execute"))) {
-                                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            if (origin != null && origin.size() == 1 && origin.get(0).equals(ZoneType.Library)) {
+                for (final Player op : ai.getOpponents()) {
+                    for (Card c : op.getCardsIn(ZoneType.Battlefield)) {
+                        // Ob Nixilis, Unshackled
+                        for (Trigger trigger : c.getTriggers()) {
+                            if (TriggerType.SearchedLibrary.equals(trigger.getMode())
+                                && "TrigSac".equals(trigger.getParam("Execute"))) {
+                                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                            }
                         }
-                    }
-                    // Opposition Agent
-                    for (StaticAbility stAb : c.getStaticAbilities()) {
-                        if ("You".equals(stAb.getParam("ControlOpponentsSearchingLibrary"))) {
-                            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                        // Opposition Agent
+                        for (StaticAbility stAb : c.getStaticAbilities()) {
+                            if ("You".equals(stAb.getParam("ControlOpponentsSearchingLibrary"))) {
+                                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                            }
                         }
                     }
                 }
