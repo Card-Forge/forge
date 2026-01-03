@@ -171,9 +171,7 @@ public class CardFactory {
         return getCard(cp, owner, owner == null ? -1 : owner.getGame().nextCardId(), game);
     }
     public static Card getCard(final IPaperCard cp, final Player owner, final int cardId, final Game game) {
-        CardRules cardRules = cp.getRules();
-        final Card c = readCard(cardRules, cp, cardId, game);
-        c.setRules(cardRules);
+        final Card c = readCard(cp, cardId, game);
         c.setOwner(owner);
         buildAbilities(c);
 
@@ -196,8 +194,8 @@ public class CardFactory {
                 // setting this to true will download the original image with different name.
                 c.setImageKey(cp.getImageKey(false));
             }
-            else if (c.isDoubleFaced() && cardRules != null) {
-                c.setState(cardRules.getSplitType().getChangedStateName(), false);
+            else if (c.isDoubleFaced()) {
+                c.setState(cp.getRules().getSplitType().getChangedStateName(), false);
                 c.setImageKey(cp.getImageKey(true));
             }
             else if (c.isSplitCard()) {
@@ -301,8 +299,10 @@ public class CardFactory {
         return sa;
     }
 
-    private static Card readCard(final CardRules rules, final IPaperCard paperCard, int cardId, Game game) {
+    private static Card readCard(final IPaperCard paperCard, int cardId, Game game) {
         final Card card = new Card(cardId, paperCard, game);
+        CardRules rules = paperCard.getRules();
+        card.updateRulesView();
 
         // 1. The states we may have:
         CardSplitType st = rules.getSplitType();
@@ -368,16 +368,16 @@ public class CardFactory {
             }
         }
 
+        // Set name for Sentry reports to be identifiable
+        c.setName(face.getName());
+
+        c.getCurrentState().setFlavorName(face.getFlavorName());
+
         // Negative card Id's are for view purposes only
         if (c.getId() >= 0) {
             // Build English oracle and translated oracle mapping
             CardTranslation.buildOracleMapping(face.getName(), face.getOracleText(), variantName);
-        }
 
-        // Set name for Sentry reports to be identifiable
-        c.setName(face.getName());
-
-        if (c.getId() >= 0) { // Set Triggers & Abilities if not for view
             for (Entry<String, String> v : face.getVariables())
                 c.setSVar(v.getKey(), v.getValue());
             for (String r : face.getReplacements())
@@ -397,12 +397,7 @@ public class CardFactory {
         c.setManaCost(face.getManaCost());
         c.setText(face.getNonAbilityText());
 
-        c.getCurrentState().setBaseLoyalty(face.getInitialLoyalty());
-        c.getCurrentState().setBaseDefense(face.getDefense());
-
         c.getCurrentState().setOracleText(face.getOracleText());
-
-        c.getCurrentState().setFlavorName(face.getFlavorName());
 
         // Super and 'middle' types should use enums.
         c.setType(new CardType(face.getType()));
@@ -417,6 +412,9 @@ public class CardFactory {
             c.setBaseToughness(face.getIntToughness());
             c.setBaseToughnessString(face.getToughness());
         }
+
+        c.getCurrentState().setBaseLoyalty(face.getInitialLoyalty());
+        c.getCurrentState().setBaseDefense(face.getDefense());
 
         c.setAttractionLights(face.getAttractionLights());
 

@@ -515,7 +515,9 @@ public class GameAction {
             }
             copied.clearMergedCards();
         } else {
-            storeChangesZoneAll(copied, zoneFrom, zoneTo, params);
+            if (!suppress) {
+                storeChangesZoneAll(copied, zoneFrom, zoneTo, params);
+            }
             // "enter the battlefield as a copy" - apply code here
             // but how to query for input here and continue later while the callers assume synchronous result?
             zoneTo.add(copied, position, toBattlefield ? null : lastKnownInfo); // the modified state of the card is also reported here (e.g. for Morbid + Awaken)
@@ -678,7 +680,7 @@ public class GameAction {
             timestamp = game.getNextTimestamp();
             cause.setSVar("StaticEffectTimestamp", String.valueOf(timestamp));
         }
-        String name = "Static Effect #" + source.getGameTimestamp();
+        String name = "Static Effect #" + cause.getId();
         // check if this isn't the first card being moved
         Optional<Card> opt = IterableUtil.tryFind(cause.getActivatingPlayer().getZone(ZoneType.Command).getCards(), CardPredicates.nameEquals(name));
 
@@ -689,7 +691,7 @@ public class GameAction {
             eff.setLayerTimestamp(timestamp);
         } else {
             // otherwise create effect first
-            eff = SpellAbilityEffect.createEffect(cause, cause.getHostCard(), cause.getActivatingPlayer(), name, source.getImageKey(), timestamp);
+            eff = SpellAbilityEffect.createEffect(cause, source, cause.getActivatingPlayer(), name, source.getImageKey(), timestamp);
             eff.setRenderForUI(false);
             StaticAbility stAb = eff.addStaticAbility(AbilityUtils.getSVar(cause, cause.getParam("StaticEffect")));
             stAb.setActiveZone(EnumSet.of(ZoneType.Command));
@@ -2304,6 +2306,7 @@ public class GameAction {
 
             game.setAge(GameStage.Mulligan);
             for (final Player p1 : game.getPlayers()) {
+                // Choose starting hand for each player with multiple hands
                 if (StaticData.instance().getFilteredHandsEnabled() ) {
                     drawStartingHand(p1);
                 } else {
@@ -2316,7 +2319,6 @@ public class GameAction {
                 }
             }
 
-            // Choose starting hand for each player with multiple hands
             if (game.getRules().getGameType() != GameType.Puzzle) {
                 new MulliganService(first).perform();
             }

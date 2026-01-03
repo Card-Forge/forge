@@ -19,7 +19,12 @@ package forge.card;
 
 import java.util.Set;
 
-public record CardChangedType(CardType addType, CardType removeType, boolean addAllCreatureTypes, Set<RemoveType> remove) {
+import com.google.common.collect.Lists;
+
+import forge.card.CardType.CoreType;
+import forge.util.IterableUtil;
+
+public record CardChangedType(CardTypeView addType, CardTypeView removeType, boolean addAllCreatureTypes, Set<RemoveType> remove) implements ICardChangedType {
 
     public final boolean isRemoveSuperTypes() {
         return remove.contains(RemoveType.SuperTypes);
@@ -33,6 +38,7 @@ public record CardChangedType(CardType addType, CardType removeType, boolean add
         return remove.contains(RemoveType.SubTypes);
     }
 
+    @Override
     public final boolean isRemoveLandTypes() {
         return remove.contains(RemoveType.LandTypes);
     }
@@ -47,5 +53,51 @@ public record CardChangedType(CardType addType, CardType removeType, boolean add
 
     public final boolean isRemoveEnchantmentTypes() {
         return remove.contains(RemoveType.EnchantmentTypes);
+    }
+
+    @Override
+    public CardType applyChanges(CardType newType) {
+        if (isRemoveCardTypes()) {
+            // 205.1a However, an object with either the instant or sorcery card type retains that type.
+            newType.coreTypes.retainAll(CoreType.spellTypes);
+        }
+        if (isRemoveSuperTypes()) {
+            newType.supertypes.clear();
+        }
+        if (isRemoveSubTypes()) {
+            newType.subtypes.clear();
+        } else if (!newType.subtypes.isEmpty()) {
+            if (isRemoveLandTypes()) {
+                newType.subtypes.removeIf(CardType::isALandType);
+            }
+            if (isRemoveCreatureTypes()) {
+                newType.subtypes.removeIf(CardType::isACreatureType);
+                // need to remove AllCreatureTypes too when removing creature Types
+                newType.allCreatureTypes = false;
+            }
+            if (isRemoveArtifactTypes()) {
+                newType.subtypes.removeIf(CardType::isAnArtifactType);
+            }
+            if (isRemoveEnchantmentTypes()) {
+                newType.subtypes.removeIf(CardType::isAnEnchantmentType);
+            }
+        }
+        if (removeType() != null) {
+            newType.removeAll(removeType());
+        }
+        if (addType() != null) {
+            newType.addAll(addType());
+            if (addType().hasAllCreatureTypes()) {
+                newType.allCreatureTypes = true;
+            }
+        }
+        if (addAllCreatureTypes()) {
+            newType.allCreatureTypes = true;
+        }
+        // remove specific creature types from all creature types
+        if (removeType() != null && newType.allCreatureTypes) {
+            newType.excludedCreatureSubtypes.addAll(Lists.newArrayList(IterableUtil.filter(removeType(), CardType::isACreatureType)));
+        }
+        return newType;
     }
 }
