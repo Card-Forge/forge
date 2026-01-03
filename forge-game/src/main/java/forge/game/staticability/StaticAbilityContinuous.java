@@ -741,7 +741,7 @@ public final class StaticAbilityContinuous {
 
                 affectedCard.addChangedCardKeywords(newKeywords, removeKeywords,
                         removeAllAbilities, se.getTimestamp(), stAb, false);
-                affectedCard.updateKeywordsCache(affectedCard.getCurrentState());
+                affectedCard.updateKeywordsCache();
             }
 
             // add HIDDEN keywords

@@ -434,6 +434,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public void updateAbilityTextForView() {
         view.getCurrentState().updateAbilityText(this, getCurrentState());
     }
+    public void updateNonAbilityTextForView() {
+        view.updateNonAbilityText(this);
+    }
 
     public void updateManaCostForView() {
         currentState.getView().updateManaCost(this);
@@ -1005,10 +1008,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         updateNameforView();
     }
 
-    public void removeChangedName(long timestamp, long staticId) {
-        if (changedCardNames.remove(timestamp, staticId) != null) {
+    public boolean removeChangedName(long timestamp, long staticId) {
+        return removeChangedName(timestamp, staticId, true);
+    }
+    public boolean removeChangedName(long timestamp, long staticId, boolean updateView) {
+        boolean changed = changedCardNames.remove(timestamp, staticId) != null;
+        if (changed && updateView) {
             updateNameforView();
         }
+        return changed;
     }
 
     public boolean clearChangedName() {
@@ -2410,7 +2418,21 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             sbLong.append("\r\n");
         }
         sb.append(sbLong);
-        return CardTranslation.translateMultipleDescriptionText(sb.toString(), this);
+
+        if (!mayPlay.isEmpty()) {
+            PlayerCollection players = new PlayerCollection();
+            for (CardPlayOption o : mayPlay.values()) {
+                if (getController() == o.getPlayer() || o.grantsZonePermissions())
+                    players.add(o.getPlayer());
+            }
+            if (!players.isEmpty()) {
+                sb.append("May be played by: ");
+                sb.append(Lang.joinHomogenous(players));
+                sb.append("\r\n");
+            }
+        }
+
+        return sb.toString();
     }
 
     // convert a keyword list to the String that should be displayed in game
@@ -2877,20 +2899,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         final CardTypeView type = state.getType();
 
         final StringBuilder sb = new StringBuilder();
-        if (!mayPlay.isEmpty()) {
-            Set<String> players = new HashSet<>();
-            for (CardPlayOption o : mayPlay.values()) {
-                if (getController() == o.getPlayer())
-                    players.add(o.getPlayer().getName());
-                else if (o.grantsZonePermissions())
-                    players.add(o.getPlayer().getName());
-            }
-            if (!players.isEmpty()) {
-                sb.append("May be played by: ");
-                sb.append(Lang.joinHomogenous(players));
-                sb.append("\r\n");
-            }
-        }
 
         if (plotted) sb.append("Plotted\r\n");
 
@@ -4304,6 +4312,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         this.updateChangedText();
     }
+    public final boolean removeChangedCardTypesByText(final long timestamp, final long staticId) {
+        return changedCardTypesByText.remove(timestamp, staticId) != null;
+    }
 
     public final void addChangedCardTypes(final CardType addType, final CardType removeType, final boolean addAllCreatureTypes,
             final Set<RemoveType> remove,
@@ -4316,10 +4327,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
     }
 
-    public final void removeChangedCardTypes(final long timestamp, final long staticId) {
-        removeChangedCardTypes(timestamp, staticId, true);
+    public final boolean removeChangedCardTypes(final long timestamp, final long staticId) {
+        return removeChangedCardTypes(timestamp, staticId, true);
     }
-    public final void removeChangedCardTypes(final long timestamp, final long staticId, final boolean updateView) {
+    public final boolean removeChangedCardTypes(final long timestamp, final long staticId, final boolean updateView) {
         boolean removed = false;
         removed |= changedCardTypes.remove(timestamp, staticId) != null;
         removed |= changedCardTypesCharacterDefining.remove(timestamp, staticId) != null;
@@ -4328,6 +4339,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             if (updateView)
                 updateTypesForView();
         }
+        return removed;
     }
 
     public final void updateTypeCache() {
@@ -4342,6 +4354,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         changedCardColorsByText.put(timestamp, stAb != null ? stAb.getId() : (long)0, new CardColor(color, addToColors));
         updateColorForView();
     }
+    public final void removeColorByText(final long timestampIn, final long staticId) {
+        if (changedCardColorsByText.remove(timestampIn, staticId) != null) {
+            updateColorForView();
+        }
+    }
 
     public final void addColor(final ColorSet color, final boolean addToColors, final long timestamp, final StaticAbility stAb) {
         (stAb != null && stAb.isCharacteristicDefining() ? changedCardColorsCharacterDefining : changedCardColors).put(
@@ -4352,7 +4369,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public final void removeColor(final long timestampIn, final long staticId) {
         boolean removed = false;
-        removed |= changedCardColorsByText.remove(timestampIn, staticId) != null;
         removed |= changedCardColors.remove(timestampIn, staticId) != null;
         removed |= changedCardColorsCharacterDefining.remove(timestampIn, staticId) != null;
 
@@ -4550,6 +4566,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         newPTText.put(timestamp, staticId, Pair.of(power, toughness));
         updatePTforView();
     }
+    public final boolean removeNewPTbyText(final long timestamp, final long staticId) {
+        return newPTText.remove(timestamp, staticId) != null;
+    }
 
     public final void addNewPT(final Integer power, final Integer toughness, final long timestamp, final long staticId) {
         addNewPT(power, toughness, timestamp, staticId, false, true);
@@ -4564,16 +4583,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final void removeNewPT(final long timestamp, final long staticId) {
         removeNewPT(timestamp, staticId, true);
     }
-    public final void removeNewPT(final long timestamp, final long staticId, final boolean updateView) {
+    public final boolean removeNewPT(final long timestamp, final long staticId, final boolean updateView) {
         boolean removed = false;
 
-        removed |= newPTText.remove(timestamp, staticId) != null;
         removed |= newPT.remove(timestamp, staticId) != null;
         removed |= newPTCharacterDefining.remove(timestamp, staticId) != null;
 
         if (removed && updateView) {
             updatePTforView();
         }
+        return removed;
     }
 
     public Iterable<Pair<Integer, Integer>> getPTIterable() {
@@ -4736,8 +4755,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         boostPT.put(timestamp, staticId, Pair.of(power, toughness));
     }
 
-    public void removePTBoost(final long timestamp, final long staticId) {
-        boostPT.remove(timestamp, staticId);
+    public boolean removePTBoost(final long timestamp, final long staticId) {
+        return boostPT.remove(timestamp, staticId) != null;
     }
 
     public Table<Long, Long, Pair<Integer, Integer>> getPTBoostTable() {
@@ -5087,10 +5106,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final boolean removeChangedCardTraits(long timestamp, long staticId) {
-        boolean changed = false;
-        changed |= changedCardTraitsByText.remove(timestamp, staticId) != null;
-        changed |= changedCardTraits.remove(timestamp, staticId) != null;
-        return changed;
+        return changedCardTraits.remove(timestamp, staticId) != null;
+    }
+    public final boolean removeChangedCardTraitsByText(long timestamp, long staticId) {
+        return changedCardTraitsByText.remove(timestamp, staticId) != null;
     }
 
     public Iterable<CardTraitChanges> getChangedCardTraitsList(CardState state) {
@@ -5305,6 +5324,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
         return changed;
     }
+    public final boolean removeChangedCardKeywordsByText(final long timestamp, final long staticId) {
+        return changedCardKeywordsByText.remove(timestamp, staticId) != null;
+    }
 
     public boolean clearChangedCardKeywords() {
         return clearChangedCardKeywords(false);
@@ -5340,6 +5362,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
     public final Collection<KeywordInterface> getUnhiddenKeywords(CardState state) {
         return state.getCachedKeywords();
+    }
+
+    public final void updateKeywordsCache() {
+        updateKeywordsCache(getCurrentState());
     }
 
     public final void updateKeywordsCache(final CardState state) {
@@ -5414,13 +5440,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         // TODO if some keywords aren't removed anymore, then no need for extra Array List
         hiddenExtrinsicKeywords.put(timestamp, staticId, Lists.newArrayList(keywords));
 
-        view.updateNonAbilityText(this);
+        updateNonAbilityTextForView();
         updateKeywords();
     }
 
     public final void removeHiddenExtrinsicKeywords(long timestamp, long staticId) {
         if (hiddenExtrinsicKeywords.remove(timestamp, staticId) != null) {
-            view.updateNonAbilityText(this);
+            updateNonAbilityTextForView();
             updateKeywords();
         }
     }
@@ -5433,7 +5459,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             }
         }
         if (updated) {
-            view.updateNonAbilityText(this);
+            updateNonAbilityTextForView();
             updateKeywords();
         }
     }
