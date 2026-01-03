@@ -41,9 +41,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.WeakHashMap;
 
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
 import forge.CachedCardImage;
 import forge.StaticData;
@@ -112,12 +114,18 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private boolean displayEnabled = true;
     private boolean isAnimationPanel;
     private int cardXOffset, cardYOffset, cardWidth, cardHeight;
+    private int baseY = -1;
+    private float flyingPhase = 0f;
     private boolean isSelected;
     private boolean hasFlash;
     private CachedCardImage cachedImage;
 
     private static Font smallCounterFont;
     private static Font largeCounterFont;
+    private static final WeakHashMap<CardPanel, Void> allPanels = new WeakHashMap<>();
+    private static Timer flyingAnimationTimer;
+    private static final float FLYING_AMPLITUDE = 3f;
+    private static final float FLYING_SPEED = 0.115f;
 
     static {
 
@@ -155,6 +163,16 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         createPTOverlay();
         createCardIdOverlay();
         createScaleImagePanel();
+
+        if (isPreferenceEnabled(FPref.UI_ANIMATE_FLYING)) {
+            synchronized (allPanels) {
+                allPanels.put(this, null);
+                if (flyingAnimationTimer == null) {
+                    flyingAnimationTimer = new Timer(50, e -> updateFlyingAnimation());
+                    flyingAnimationTimer.start();
+                }
+            }
+        }
 
         setCard(card0);
     }
@@ -970,6 +988,43 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         width = -xOffset + rotCenterX + rotCenterToTopCorner;
         height = -yOffset + rotCenterY + rotCenterToBottomCorner;
         setBounds(x + xOffset, y + yOffset, width, height);
+        baseY = y + yOffset;
+    }
+
+    @Override
+    public void setBounds(final int x, final int y, final int width, final int height) {
+        if (!shouldFloat() && (baseY == -1 || Math.abs(y - baseY) > 10)) {
+            baseY = y;
+        }
+        final float offset = shouldFloat() ? (float)(Math.sin(flyingPhase) * FLYING_AMPLITUDE) : 0f;
+        super.setBounds(x, baseY == -1 ? y : baseY + Math.round(offset), width, height);
+    }
+
+    private boolean shouldFloat() {
+        return card != null && !isAnimationPanel && ZoneType.Battlefield.equals(card.getZone()) 
+                && card.getCurrentState().hasFlying() && baseY != -1;
+    }
+
+    private static void updateFlyingAnimation() {
+        synchronized (allPanels) {
+            for (CardPanel panel : new java.util.HashSet<>(allPanels.keySet())) {
+                if (panel != null && panel.isDisplayEnabled() && panel.shouldFloat()) {
+                    panel.flyingPhase += FLYING_SPEED;
+                    if (panel.flyingPhase > Math.PI * 2) {
+                        panel.flyingPhase -= Math.PI * 2;
+                    }
+                    panel.setBounds(panel.getX(), panel.baseY, panel.getWidth(), panel.getHeight());
+                    if (panel.attachedPanels != null) {
+                        final int offsetY = Math.round((float)(Math.sin(panel.flyingPhase) * FLYING_AMPLITUDE));
+                        for (CardPanel attached : panel.attachedPanels) {
+                            if (attached != null && attached.isDisplayEnabled() && attached.baseY != -1) {
+                                attached.setBounds(attached.getX(), attached.baseY + offsetY, attached.getWidth(), attached.getHeight());
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -1081,6 +1136,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     @Override
     public void dispose() {
+        synchronized (allPanels) {
+            allPanels.remove(this);
+        }
         attachedToPanel = null;
         attachedPanels = null;
         stack = null;
