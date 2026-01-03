@@ -3,38 +3,38 @@ Name=Morph Mayhem
 [Avatar]
 
 [Main]
-4 Plains|LGN|1
-4 Plains|LGN|2
-3 Plains|LGN|3
-4 Island|LGN|1
-4 Island|LGN|2
-3 Island|LGN|3
-2 Lonely Sandbar|LGN|1
-2 Secluded Steppe|LGN|1
-2 Ascending Aven|LGN|1
+4 Plains|ONS|1
+4 Plains|ONS|2
+3 Plains|ONS|3
+4 Island|ONS|1
+4 Island|ONS|2
+3 Island|ONS|3
+2 Lonely Sandbar|ONS|1
+2 Secluded Steppe|ONS|1
+2 Ascending Aven|ONS|1
 1 Aven Redeemer|LGN|1
 1 Chromeshell Crab|LGN|1
 1 Daru Mender|LGN|1
-1 Daru Lancer|LGN|1
+1 Daru Lancer|ONS|1
 2 Deftblade Elite|LGN|1
 2 Echo Tracer|LGN|1
-4 Glory Seeker|LGN|1
-1 Imagecrafter|LGN|1
-1 Ironfist Crusher|LGN|1
+4 Glory Seeker|ONS|1
+1 Imagecrafter|ONS|1
+1 Ironfist Crusher|ONS|1
 1 Liege of the Axe|LGN|1
 1 Master of the Veil|LGN|1
-1 Mistform Mutant|LGN|1
+1 Mistform Mutant|ONS|1
 1 Swooping Talon|LGN|1
 2 Voidmage Apprentice|LGN|1
 1 Wall of Deceit|LGN|1
 1 Weaver of Lies|LGN|1
-1 Whipcorder|LGN|1
+1 Whipcorder|ONS|1
 2 Willbender|LGN|1
 2 Wingbeat Warrior|LGN|1
-1 Akroma's Blessing|LGN|1
-1 Discombobulate|LGN|1
-1 Improvised Armor|LGN|1
-2 Pacifism|LGN|1
+1 Akroma's Blessing|ONS|1
+1 Discombobulate|ONS|1
+1 Improvised Armor|ONS|1
+2 Pacifism|MIR|1
 [Sideboard]
 
 [Planes]

@@ -3,33 +3,33 @@ Name=Air Razers
 [Avatar]
 
 [Main]
-4 Island|JUD|1
-4 Island|JUD|2
-4 Island|JUD|3
-4 Mountain|JUD|1
-4 Mountain|JUD|2
-4 Mountain|JUD|3
-2 Aven Fisher|JUD|1
-1 Aven Windreader|JUD|1
+4 Island|ODY|1
+4 Island|ODY|2
+4 Island|ODY|3
+4 Mountain|ODY|1
+4 Mountain|ODY|2
+4 Mountain|ODY|3
+2 Aven Fisher|ODY|1
+1 Aven Windreader|ODY|1
 2 Barbarian Bully|JUD|1
-2 Barbarian Lunatic|JUD|1
-1 Chainflinger|JUD|1
+2 Barbarian Lunatic|ODY|1
+1 Chainflinger|ODY|1
 2 Dwarven Scorcher|JUD|1
 2 Hapless Researcher|JUD|1
 1 Scalpelexis|JUD|1
-2 Skywing Aven|JUD|1
+2 Skywing Aven|TOR|1
 1 Wonder|JUD|1
 1 Worldgorger Dragon|JUD|1
 2 Wormfang Turtle|JUD|1
-2 Fiery Temper|JUD|1
+2 Fiery Temper|TOR|1
 2 Flash of Insight|JUD|1
 3 Lava Dart|JUD|1
-1 Violent Eruption|JUD|1
-2 Churning Eddy|JUD|1
-1 Concentrate|JUD|1
-2 Shower of Coals|JUD|1
+1 Violent Eruption|TOR|1
+2 Churning Eddy|TOR|1
+1 Concentrate|ODY|1
+2 Shower of Coals|ODY|1
 2 Swelter|JUD|1
-2 Compulsion|JUD|1
+2 Compulsion|TOR|1
 [Sideboard]
 
 [Planes]

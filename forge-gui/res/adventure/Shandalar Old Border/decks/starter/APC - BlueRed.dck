@@ -3,36 +3,36 @@ Name=Whirlpool
 [Avatar]
 
 [Main]
-4 Island|APC|1
-4 Island|APC|2
-4 Island|APC|3
-4 Mountain|APC|1
-4 Mountain|APC|2
-4 Mountain|APC|3
+4 Island|INV|1
+4 Island|INV|2
+4 Island|INV|3
+4 Mountain|INV|1
+4 Mountain|INV|2
+4 Mountain|INV|3
 2 Bloodfire Dwarf|APC|1
 2 Bloodfire Kavu|APC|1
 1 Coastal Drake|APC|1
 1 Dwarven Patrol|APC|1
-2 Faerie Squadron|APC|1
-1 Flametongue Kavu|APC|1
-1 Metathran Transport|APC|1
+2 Faerie Squadron|INV|1
+1 Flametongue Kavu|PLS|1
+1 Metathran Transport|INV|1
 2 Minotaur Illusionist|APC|1
-1 Rainbow Crow|APC|1
+1 Rainbow Crow|INV|1
 2 Razorfin Hunter|APC|1
 2 Whirlpool Drake|APC|1
 3 Whirlpool Rider|APC|1
 1 Whirlpool Warrior|APC|1
 1 Bloodfire Infusion|APC|1
 2 Quicksilver Dagger|APC|1
-1 Confound|APC|1
-1 Exclude|APC|1
+1 Confound|PLS|1
+1 Exclude|INV|1
 1 Fire // Ice|APC|1
 2 Jilt|APC|1
-1 Opt|APC|1
-1 Scorching Lava|APC|1
-2 Stun|APC|1
+1 Opt|INV|1
+1 Scorching Lava|INV|1
+2 Stun|TMP|1
 1 Suffocating Blast|APC|1
-2 Chromatic Sphere|APC|1
+2 Chromatic Sphere|INV|1
 [Sideboard]
 
 [Planes]

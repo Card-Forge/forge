@@ -3,19 +3,19 @@ Name=The Spikes
 [Avatar]
 
 [Main]
-3 Mountain|STH|1
-3 Mountain|STH|2
-3 Mountain|STH|3
-4 Forest|STH|1
-4 Forest|STH|2
-4 Forest|STH|3
-4 Spike Drone|STH|1
-1 Bayou Dragonfly|STH|1
-1 Canopy Spider|STH|1
+3 Mountain|TMP|1
+3 Mountain|TMP|2
+3 Mountain|TMP|3
+4 Forest|TMP|1
+4 Forest|TMP|2
+4 Forest|TMP|3
+4 Spike Drone|TMP|1
+1 Bayou Dragonfly|TMP|1
+1 Canopy Spider|TMP|1
 1 Hermit Druid|STH|1
-4 Skyshroud Elf|STH|1
+4 Skyshroud Elf|TMP|1
 1 Lowland Basilisk|STH|1
-2 Pincher Beetles|STH|1
+2 Pincher Beetles|TMP|1
 3 Spike Worker|STH|1
 1 Tempting Licid|STH|1
 2 Spike Feeder|STH|1
@@ -24,12 +24,12 @@ Name=The Spikes
 2 Spike Colony|STH|1
 2 Heartstone|STH|1
 2 Shock|STH|1
-4 Kindle|STH|1
+4 Kindle|TMP|1
 1 Fanning the Flames|STH|1
 1 Elven Rite|STH|1
-2 Rampant Growth|STH|1
+2 Rampant Growth|MIR|1
 1 Verdant Touch|STH|1
-1 Tranquility|STH|1
+1 Tranquility|LEA|1
 [Sideboard]
 
 [Planes]

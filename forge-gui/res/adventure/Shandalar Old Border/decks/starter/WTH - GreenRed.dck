@@ -3,33 +3,33 @@ Name=Gatecrasher
 [Avatar]
 
 [Main]
-3 Mountain|WTH|1
-2 Mountain|WTH|2
-2 Mountain|WTH|3
-5 Forest|WTH|1
-5 Forest|WTH|2
-5 Forest|WTH|3
+3 Mountain|MIR|1
+2 Mountain|MIR|2
+2 Mountain|MIR|3
+5 Forest|MIR|1
+5 Forest|MIR|2
+5 Forest|MIR|3
 1 Aboroth|WTH|1
 3 Arctic Wolves|WTH|1
 1 Bogardan Firefiend|WTH|1
-2 Granger Guildmage|WTH|1
+2 Granger Guildmage|MIR|1
 1 Llanowar Behemoth|WTH|1
 3 Llanowar Sentinel|WTH|1
 1 Maraxus of Keld|WTH|1
 2 Redwood Treefolk|WTH|1
-2 Stampeding Wildebeests|WTH|1
+2 Stampeding Wildebeests|VIS|1
 2 Striped Bears|WTH|1
 2 Uktabi Efreet|WTH|1
-1 Uktabi Orangutan|WTH|1
-3 Wall of Roots|WTH|1
+1 Uktabi Orangutan|VIS|1
+3 Wall of Roots|MIR|1
 2 Fire Whip|WTH|1
-2 Incinerate|WTH|1
+2 Incinerate|ICE|1
 2 Cone of Flame|WTH|1
-1 Creeping Mold|WTH|1
-1 Kaervek's Torch|WTH|1
-3 Rampant Growth|WTH|1
-1 Savage Twister|WTH|1
-2 Dragon Mask|WTH|1
+1 Creeping Mold|VIS|1
+1 Kaervek's Torch|MIR|1
+3 Rampant Growth|MIR|1
+1 Savage Twister|MIR|1
+2 Dragon Mask|VIS|1
 [Sideboard]
 
 [Planes]

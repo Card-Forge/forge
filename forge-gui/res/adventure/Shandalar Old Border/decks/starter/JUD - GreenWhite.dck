@@ -3,34 +3,34 @@ Name=Spectral Slam
 [Avatar]
 
 [Main]
-4 Plains|JUD|1
-4 Plains|JUD|2
-4 Plains|JUD|3
-4 Forest|JUD|1
-4 Forest|JUD|2
-4 Forest|JUD|3
+4 Plains|ODY|1
+4 Plains|ODY|2
+4 Plains|ODY|3
+4 Forest|ODY|1
+4 Forest|ODY|2
+4 Forest|ODY|3
 1 Krosan Verge|JUD|1
 1 Nantuko Monastery|JUD|1
 1 Battlewise Aven|JUD|1
 2 Benevolent Bodyguard|JUD|1
-2 Blessed Orator|JUD|1
+2 Blessed Orator|ODY|1
 1 Forcemage Advocate|JUD|1
-2 Hallowed Healer|JUD|1
+2 Hallowed Healer|ODY|1
 2 Ironshell Beetle|JUD|1
-1 Patrol Hound|JUD|1
+1 Patrol Hound|ODY|1
 2 Phantom Centaur|JUD|1
 2 Phantom Flock|JUD|1
 4 Phantom Nomad|JUD|1
 1 Phantom Nantuko|JUD|1
 3 Phantom Tiger|JUD|1
 1 Guided Strike|JUD|1
-2 Second Thoughts|JUD|1
-1 Spirit Flare|JUD|1
+2 Second Thoughts|ODY|1
+1 Spirit Flare|TOR|1
 2 Elephant Guide|JUD|1
 1 Exoskeletal Armor|JUD|1
 1 Mirari's Wake|JUD|1
-2 Seton's Desire|JUD|1
-1 Strength of Isolation|JUD|1
+2 Seton's Desire|ODY|1
+1 Strength of Isolation|TOR|1
 [Sideboard]
 
 [Planes]

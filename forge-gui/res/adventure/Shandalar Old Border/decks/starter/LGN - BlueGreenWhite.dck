@@ -3,31 +3,31 @@ Name=Sliver Shivers
 [Avatar]
 
 [Main]
-3 Plains|LGN|1
-3 Plains|LGN|2
-3 Plains|LGN|3
-2 Island|LGN|1
-2 Island|LGN|2
-1 Island|LGN|3
-3 Forest|LGN|1
-2 Forest|LGN|2
-2 Forest|LGN|3
-2 Lonely Sandbar|LGN|1
-4 Secluded Steppe|LGN|1
+3 Plains|ONS|1
+3 Plains|ONS|2
+3 Plains|ONS|3
+2 Island|ONS|1
+2 Island|ONS|2
+1 Island|ONS|3
+3 Forest|ONS|1
+2 Forest|ONS|2
+2 Forest|ONS|3
+2 Lonely Sandbar|ONS|1
+4 Secluded Steppe|ONS|1
 1 Brood Sliver|LGN|1
 1 Essence Sliver|LGN|1
-3 Mistform Dreamer|LGN|1
+3 Mistform Dreamer|ONS|1
 4 Plated Sliver|LGN|1
 4 Quick Sliver|LGN|1
 1 Root Sliver|LGN|1
 3 Shifting Sliver|LGN|1
 3 Ward Sliver|LGN|1
-2 Akroma's Blessing|LGN|1
-2 Mage's Guile|LGN|1
-2 Tribal Unity|LGN|1
-2 Explosive Vegetation|LGN|1
-1 Crown of Vigor|LGN|1
-4 Pacifism|LGN|1
+2 Akroma's Blessing|ONS|1
+2 Mage's Guile|ONS|1
+2 Tribal Unity|ONS|1
+2 Explosive Vegetation|ONS|1
+1 Crown of Vigor|ONS|1
+4 Pacifism|MIR|1
 [Sideboard]
 
 [Planes]

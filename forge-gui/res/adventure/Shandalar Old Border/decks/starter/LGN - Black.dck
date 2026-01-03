@@ -3,31 +3,31 @@ Name=Zombies Unleashed
 [Avatar]
 
 [Main]
-8 Swamp|LGN|1
-8 Swamp|LGN|2
-7 Swamp|LGN|3
-2 Barren Moor|LGN|1
+8 Swamp|ONS|1
+8 Swamp|ONS|2
+7 Swamp|ONS|3
+2 Barren Moor|ONS|1
 1 Aphetto Exterminator|LGN|1
-1 Boneknitter|LGN|1
+1 Boneknitter|ONS|1
 2 Corpse Harvester|LGN|1
 2 Deathmark Prelate|LGN|1
 2 Dripping Dead|LGN|1
 2 Embalmed Brawler|LGN|1
-1 Festering Goblin|LGN|1
-2 Frightshroud Courier|LGN|1
+1 Festering Goblin|ONS|1
+2 Frightshroud Courier|ONS|1
 2 Gempalm Polluter|LGN|1
 1 Ghastly Remains|LGN|1
 1 Graveborn Muse|LGN|1
 2 Infernal Caretaker|LGN|1
 1 Noxious Ghoul|LGN|1
-2 Shepherd of Rot|LGN|1
+2 Shepherd of Rot|ONS|1
 4 Skinthinner|LGN|1
 3 Smokespew Invoker|LGN|1
-1 Soulless One|LGN|1
+1 Soulless One|ONS|1
 2 Withered Wretch|LGN|1
-1 Cruel Revival|LGN|1
-1 Feeding Frenzy|LGN|1
-1 Dirge of Dread|LGN|1
+1 Cruel Revival|ONS|1
+1 Feeding Frenzy|ONS|1
+1 Dirge of Dread|ONS|1
 [Sideboard]
 
 [Planes]

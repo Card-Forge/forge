@@ -3,39 +3,39 @@ Name=Distress
 [Avatar]
 
 [Main]
-3 Plains|PCY|1
-3 Plains|PCY|2
-3 Plains|PCY|3
-4 Swamp|PCY|1
-4 Swamp|PCY|2
-3 Swamp|PCY|3
-1 Peat Bog|PCY|1
+3 Plains|MMQ|1
+3 Plains|MMQ|2
+3 Plains|MMQ|3
+4 Swamp|MMQ|1
+4 Swamp|MMQ|2
+3 Swamp|MMQ|3
+1 Peat Bog|MMQ|1
 1 Agent of Shauku|PCY|1
 1 Avatar of Woe|PCY|1
-1 Ballista Squad|PCY|1
-1 Belbe's Percher|PCY|1
+1 Ballista Squad|MMQ|1
+1 Belbe's Percher|NMS|1
 1 Chilling Apparition|PCY|1
 1 Death Charmer|PCY|1
-2 Fresh Volunteers|PCY|1
+2 Fresh Volunteers|MMQ|1
 3 Glittering Lion|PCY|1
 2 Glittering Lynx|PCY|1
 1 Nakaya Shade|PCY|1
 1 Plague Fiend|PCY|1
 1 Shield Dancer|PCY|1
-2 Skulking Fugitive|PCY|1
-1 Spineless Thug|PCY|1
-1 Maggot Therapy|PCY|1
-1 Seal of Cleansing|PCY|1
-1 Seal of Doom|PCY|1
-1 Afterlife|PCY|1
-1 Angelic Favor|PCY|1
-2 Dark Ritual|PCY|1
-1 Disenchant|PCY|1
+2 Skulking Fugitive|MMQ|1
+1 Spineless Thug|NMS|1
+1 Maggot Therapy|MMQ|1
+1 Seal of Cleansing|NMS|1
+1 Seal of Doom|NMS|1
+1 Afterlife|MIR|1
+1 Angelic Favor|NMS|1
+2 Dark Ritual|LEA|1
+1 Disenchant|LEA|1
 2 Excise|PCY|1
 1 Steal Strength|PCY|1
-1 Snuff Out|PCY|1
+1 Snuff Out|MMQ|1
 3 Despoil|PCY|1
-2 Rain of Tears|PCY|1
+2 Rain of Tears|POR|1
 2 Rhystic Syphon|PCY|1
 1 Rhystic Tutor|PCY|1
 [Sideboard]
