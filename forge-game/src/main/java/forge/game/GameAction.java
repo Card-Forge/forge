@@ -1262,7 +1262,7 @@ public class GameAction {
         affectedKeywords.forEach(Card::updateKeywords);
 
         if (affectedPerLayer.containsKey(StaticAbilityLayer.RULES)) {
-            affectedPerLayer.get(StaticAbilityLayer.RULES);
+            affectedPerLayer.get(StaticAbilityLayer.RULES).forEach(Card::updateNonAbilityTextForView);
         }
         // TODO filter out old copies from zone change
 
