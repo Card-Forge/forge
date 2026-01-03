@@ -106,7 +106,7 @@ public class ImageUtil {
 
         CardRules card = cp.getRules();
         String edition = cp.getEdition().equals(CardEdition.UNKNOWN_CODE)
-                ? "UNKNOWN"
+                ? CardEdition.UNKNOWN_SET_NAME
                 : cp.getEdition();
         s.append(toMWSFilename(nameToUse));
 
