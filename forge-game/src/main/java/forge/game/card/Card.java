@@ -5364,6 +5364,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return state.getCachedKeywords();
     }
 
+    public final void updateKeywordsCache() {
+        updateKeywordsCache(getCurrentState());
+    }
+
     public final void updateKeywordsCache(final CardState state) {
         KeywordCollection keywords = new KeywordCollection();
 

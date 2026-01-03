@@ -290,7 +290,6 @@ public class StaticEffect {
 
                 // need update for clean reapply
                 if (abilitiesChanged) {
-                    affectedCard.updateKeywordsCache(affectedCard.getCurrentState());
                     addCard(affectedByLayer, StaticAbilityLayer.ABILITIES, affectedCard);
                 }
             }

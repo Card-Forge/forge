@@ -1087,6 +1087,19 @@ public class GameAction {
 
         // remove old effects
         game.getStaticEffects().clearStaticEffects(affectedCards, affectedPerLayer);
+        CardCollection affectedKeywordsBefore = new CardCollection();
+        if (affectedPerLayer.containsKey(StaticAbilityLayer.TEXT)) {
+            affectedKeywordsBefore.addAll(affectedPerLayer.get(StaticAbilityLayer.TEXT));
+        }
+        if (affectedPerLayer.containsKey(StaticAbilityLayer.TYPE)) {
+            // setting Basic Land Type case
+            affectedKeywordsBefore.addAll(affectedPerLayer.get(StaticAbilityLayer.TYPE));
+        }
+        if (affectedPerLayer.containsKey(StaticAbilityLayer.ABILITIES)) {
+            affectedKeywordsBefore.addAll(affectedPerLayer.get(StaticAbilityLayer.ABILITIES));
+        }
+        affectedKeywordsBefore.forEach(Card::updateKeywordsCache);
+
 
         // search for cards with static abilities
         final FCollection<StaticAbility> staticAbilities = new FCollection<>();
