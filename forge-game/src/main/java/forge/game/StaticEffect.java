@@ -173,13 +173,10 @@ public class StaticEffect {
      *
      * @return a {@link CardCollectionView} of all affected cards.
      */
-    final CardCollectionView remove(Map<StaticAbilityLayer, Set<Card>> affectedByLayer) {
-        return remove(affectedByLayer, StaticAbilityLayer.CONTINUOUS_LAYERS);
+    final CardCollectionView remove(Map<StaticAbilityLayer, Set<Card>> affectedPerLayer) {
+        return remove(affectedPerLayer, StaticAbilityLayer.CONTINUOUS_LAYERS);
     }
-    final CardCollectionView remove(List<StaticAbilityLayer> layers) {
-        return remove(Maps.newHashMap(), layers);
-    }
-    final CardCollectionView remove(Map<StaticAbilityLayer, Set<Card>> affectedByLayer, List<StaticAbilityLayer> layers) {
+    final CardCollectionView remove(Map<StaticAbilityLayer, Set<Card>> affectedPerLayer, List<StaticAbilityLayer> layers) {
         final CardCollectionView affectedCards = getAffectedCards();
         final List<Player> affectedPlayers = getAffectedPlayers();
 
@@ -230,7 +227,7 @@ public class StaticEffect {
                 // remove changed name
                 if (hasParam("SetName") || hasParam("AddNames")) {
                     if (affectedCard.removeChangedName(timestamp, ability.getId(), false)) {
-                        addCard(affectedByLayer, StaticAbilityLayer.TEXT, affectedCard);
+                        addCard(affectedPerLayer, StaticAbilityLayer.TEXT, affectedCard);
                     }
                 }
 
@@ -244,7 +241,7 @@ public class StaticEffect {
                     affectedCard.removeNewPTbyText(getTimestamp(), ability.getId());
 
                     affectedCard.updateChangedText();
-                    addCard(affectedByLayer, StaticAbilityLayer.TEXT, affectedCard);
+                    addCard(affectedPerLayer, StaticAbilityLayer.TEXT, affectedCard);
                 }
             }
 
@@ -253,7 +250,7 @@ public class StaticEffect {
                 if (hasParam("AddType") || hasParam("AddAllCreatureTypes") || hasParam("RemoveType") || hasParam("RemoveLandTypes")) {
                     // the view is updated in GameAction#checkStaticAbilities to avoid flickering
                     if (affectedCard.removeChangedCardTypes(getTimestamp(), ability.getId(), false)) {
-                        addCard(affectedByLayer, StaticAbilityLayer.TYPE, affectedCard);
+                        addCard(affectedPerLayer, StaticAbilityLayer.TYPE, affectedCard);
                     }
                 }
             }
@@ -290,21 +287,21 @@ public class StaticEffect {
 
                 // need update for clean reapply
                 if (abilitiesChanged) {
-                    addCard(affectedByLayer, StaticAbilityLayer.ABILITIES, affectedCard);
+                    addCard(affectedPerLayer, StaticAbilityLayer.ABILITIES, affectedCard);
                 }
             }
 
             if (layers.contains(StaticAbilityLayer.CHARACTERISTIC) || layers.contains(StaticAbilityLayer.SETPT)) {
                 if (hasParam("SetPower") || hasParam("SetToughness")) {
                     if (affectedCard.removeNewPT(getTimestamp(), ability.getId(), false)) {
-                        addCard(affectedByLayer, ability.isCharacteristicDefining() ? StaticAbilityLayer.CHARACTERISTIC : StaticAbilityLayer.SETPT, affectedCard);
+                        addCard(affectedPerLayer, ability.isCharacteristicDefining() ? StaticAbilityLayer.CHARACTERISTIC : StaticAbilityLayer.SETPT, affectedCard);
                     }
                 }
             }
 
             if (layers.contains(StaticAbilityLayer.MODIFYPT)) {
                 if (affectedCard.removePTBoost(getTimestamp(), ability.getId())) {
-                    addCard(affectedByLayer, StaticAbilityLayer.MODIFYPT, affectedCard);
+                    addCard(affectedPerLayer, StaticAbilityLayer.MODIFYPT, affectedCard);
                 }
             }
 
@@ -331,7 +328,7 @@ public class StaticEffect {
                 if (hasParam("CanBlockAmount")) {
                     affectedCard.removeCanBlockAdditional(getTimestamp());
                 }
-                addCard(affectedByLayer, StaticAbilityLayer.RULES, affectedCard);
+                addCard(affectedPerLayer, StaticAbilityLayer.RULES, affectedCard);
             }
         }
         return affectedCards;

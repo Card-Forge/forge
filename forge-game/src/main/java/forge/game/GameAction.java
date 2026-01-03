@@ -949,7 +949,7 @@ public class GameAction {
 
     public void ceaseToExist(Card c, boolean skipTrig) {
         if (c.isInZone(ZoneType.Stack)) {
-            c.getGame().getStack().remove(c);
+            game.getStack().remove(c);
         }
 
         final Zone z = c.getZone();
@@ -1087,19 +1087,6 @@ public class GameAction {
 
         // remove old effects
         game.getStaticEffects().clearStaticEffects(affectedCards, affectedPerLayer);
-        CardCollection affectedKeywordsBefore = new CardCollection();
-        if (affectedPerLayer.containsKey(StaticAbilityLayer.TEXT)) {
-            affectedKeywordsBefore.addAll(affectedPerLayer.get(StaticAbilityLayer.TEXT));
-        }
-        if (affectedPerLayer.containsKey(StaticAbilityLayer.TYPE)) {
-            // setting Basic Land Type case
-            affectedKeywordsBefore.addAll(affectedPerLayer.get(StaticAbilityLayer.TYPE));
-        }
-        if (affectedPerLayer.containsKey(StaticAbilityLayer.ABILITIES)) {
-            affectedKeywordsBefore.addAll(affectedPerLayer.get(StaticAbilityLayer.ABILITIES));
-        }
-        affectedKeywordsBefore.forEach(Card::updateKeywordsCache);
-
 
         // search for cards with static abilities
         final FCollection<StaticAbility> staticAbilities = new FCollection<>();
@@ -1109,7 +1096,7 @@ public class GameAction {
             dependencies = HashBasedTable.create();
         }
 
-        game.forEachCardInGame(new Visitor<Card>() {
+        game.forEachCardInGame(new Visitor<>() {
             @Override
             public boolean visit(final Card c) {
                 // need to get Card from preList if able
@@ -1853,7 +1840,7 @@ public class GameAction {
         // CR 903.9a
         if (c.isRealCommander() && c.canMoveToCommandZone()) {
             // FIXME: need to flush the tracker to make sure the Commander is properly updated
-            c.getGame().getTracker().flush();
+            game.getTracker().flush();
 
             c.setMoveToCommandZone(false);
             if (c.getOwner().getController().confirmAction(c.getFirstSpellAbility(), PlayerActionConfirmMode.ChangeZoneToAltDestination, c.getDisplayName() + ": If a commander is in a graveyard or in exile and that card was put into that zone since the last time state-based actions were checked, its owner may put it into the command zone.", null)) {
