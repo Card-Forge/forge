@@ -3,5 +3,6 @@ ManaCost:3 W
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Vigilance | CanBlockAmount$ 1 | Description$ Enchanted creature gets +2/+2, has vigilance, and can block an additional creature each combat.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Vigilance | Description$ Enchanted creature gets +2/+2, has vigilance, and can block an additional creature each combat.
+S:Mode$ CanBlockAmount | ValidCard$ Card.EnchantedBy | Amount$ 1 | Secondary$ True | Description$ Enchanted creature can block an additional creature each combat.
 Oracle:Enchant creature\nEnchanted creature gets +2/+2, has vigilance, and can block an additional creature each combat.

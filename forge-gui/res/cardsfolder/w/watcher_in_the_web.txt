@@ -3,5 +3,5 @@ ManaCost:4 G
 Types:Creature Spider
 PT:2/5
 K:Reach
-S:Mode$ Continuous | Affected$ Card.Self | CanBlockAmount$ 7 | Description$ CARDNAME can block an additional seven creatures each combat.
+S:Mode$ CanBlockAmount | ValidCard$ Card.Self | Amount$ 7 | Description$ CARDNAME can block an additional seven creatures each combat.
 Oracle:Reach (This creature can block creatures with flying.)\nWatcher in the Web can block an additional seven creatures each combat.

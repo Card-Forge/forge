@@ -4,6 +4,6 @@ Types:Creature Dragon
 PT:4/4
 K:Flying
 K:Menace
-S:Mode$ Continuous | Affected$ Card.Self | CanBlockAmount$ 1 | Description$ CARDNAME can block an additional creature each combat.
+S:Mode$ CanBlockAmount | ValidCard$ Card.Self | Amount$ 1 | Description$ CARDNAME can block an additional creature each combat.
 A:AB$ Pump | Cost$ 1 R | NumAtt$ +2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
 Oracle:Flying\nMenace (This creature can't be blocked except by two or more creatures.)\nTwo-Headed Dragon can block an additional creature each combat.\n{1}{R}: Two-Headed Dragon gets +2/+0 until end of turn.
