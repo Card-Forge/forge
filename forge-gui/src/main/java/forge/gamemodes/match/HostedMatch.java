@@ -266,7 +266,16 @@ public class HostedMatch {
             isMatchOver = match.isMatchOver();
             if (humanCount == 0) {
                 // ... if no human players, let AI decide next game
-                if (isMatchOver) {
+                if (game.getRules().getGameType() == GameType.Constructed) {
+                    // Dramatic interlude to signal end of game.
+                    FThreads.delayInEDT(3000, () -> {
+                        if (isMatchOver) {
+                            // Leave match-end overview open for spectator.
+                        } else {
+                            addNextGameDecision(null, NextGameDecision.CONTINUE);
+                        }
+                    });
+                } else if (isMatchOver) {
                     addNextGameDecision(null, NextGameDecision.QUIT);
                 } else {
                     addNextGameDecision(null, NextGameDecision.CONTINUE);
