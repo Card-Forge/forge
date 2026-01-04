@@ -2714,4 +2714,447 @@ public class GameSimulationTest extends SimulationTest {
         return true;  // All words appear exactly once
     }
 
+    // ========================================================================
+    // GameCopier Performance and Correctness Tests
+    // ========================================================================
+
+    /**
+     * Test that GameCopier correctly copies a card with counters.
+     */
+    @Test
+    public void testGameCopierCardWithCounters() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        String lionCardName = "Fleecemane Lion";
+        Card lion = addCard(lionCardName, p);
+        lion.setSickness(false);
+        lion.addCounterInternal(CounterEnumType.P1P1, 3, p, false, null, null);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        AssertJUnit.assertEquals(3, lion.getCounters(CounterEnumType.P1P1));
+        AssertJUnit.assertEquals(6, lion.getNetPower());
+        AssertJUnit.assertEquals(6, lion.getNetToughness());
+
+        GameCopier copier = new GameCopier(game);
+        Game copy = copier.makeCopy();
+        Card lionCopy = findCardWithName(copy, lionCardName);
+
+        AssertJUnit.assertNotNull(lionCopy);
+        AssertJUnit.assertEquals(3, lionCopy.getCounters(CounterEnumType.P1P1));
+        AssertJUnit.assertEquals(6, lionCopy.getNetPower());
+        AssertJUnit.assertEquals(6, lionCopy.getNetToughness());
+
+        // Verify independence - modifying copy doesn't affect original
+        lionCopy.addCounterInternal(CounterEnumType.P1P1, 2, copy.getPlayers().get(1), false, null, null);
+        AssertJUnit.assertEquals(5, lionCopy.getCounters(CounterEnumType.P1P1));
+        AssertJUnit.assertEquals(3, lion.getCounters(CounterEnumType.P1P1));
+    }
+
+    /**
+     * Test that GameCopier correctly copies a card with chosen colors.
+     */
+    @Test
+    public void testGameCopierCardWithChosenColors() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        // Voice of All has "As Voice of All enters the battlefield, choose a color."
+        String voiceCardName = "Voice of All";
+        Card voice = addCard(voiceCardName, p);
+        voice.setSickness(false);
+        voice.setChosenColors(Lists.newArrayList("white", "blue"));
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        AssertJUnit.assertTrue(voice.hasChosenColor());
+        AssertJUnit.assertTrue(voice.getChosenColors().toString().contains("white"));
+        AssertJUnit.assertTrue(voice.getChosenColors().toString().contains("blue"));
+
+        GameCopier copier = new GameCopier(game);
+        Game copy = copier.makeCopy();
+        Card voiceCopy = findCardWithName(copy, voiceCardName);
+
+        AssertJUnit.assertNotNull(voiceCopy);
+        AssertJUnit.assertTrue(voiceCopy.hasChosenColor());
+        AssertJUnit.assertTrue(voiceCopy.getChosenColors().toString().contains("white"));
+        AssertJUnit.assertTrue(voiceCopy.getChosenColors().toString().contains("blue"));
+    }
+
+    /**
+     * Test that GameCopier correctly copies a card with chosen type.
+     */
+    @Test
+    public void testGameCopierCardWithChosenType() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        // Adaptive Automaton has "As Adaptive Automaton enters the battlefield, choose a creature type."
+        String automatonCardName = "Adaptive Automaton";
+        Card automaton = addCard(automatonCardName, p);
+        automaton.setSickness(false);
+        automaton.setChosenType("Goblin");
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        AssertJUnit.assertTrue(automaton.hasChosenType());
+        AssertJUnit.assertEquals("Goblin", automaton.getChosenType());
+
+        GameCopier copier = new GameCopier(game);
+        Game copy = copier.makeCopy();
+        Card automatonCopy = findCardWithName(copy, automatonCardName);
+
+        AssertJUnit.assertNotNull(automatonCopy);
+        AssertJUnit.assertTrue(automatonCopy.hasChosenType());
+        AssertJUnit.assertEquals("Goblin", automatonCopy.getChosenType());
+    }
+
+    /**
+     * Test that GameCopier correctly copies a card with named cards.
+     */
+    @Test
+    public void testGameCopierCardWithNamedCards() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        // Pithing Needle has "As Pithing Needle enters the battlefield, choose a card name."
+        String needleCardName = "Pithing Needle";
+        Card needle = addCard(needleCardName, p);
+        needle.setNamedCards(Lists.newArrayList("Lightning Bolt", "Counterspell"));
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        AssertJUnit.assertTrue(needle.hasNamedCard());
+        AssertJUnit.assertTrue(needle.getNamedCards().contains("Lightning Bolt"));
+        AssertJUnit.assertTrue(needle.getNamedCards().contains("Counterspell"));
+
+        GameCopier copier = new GameCopier(game);
+        Game copy = copier.makeCopy();
+        Card needleCopy = findCardWithName(copy, needleCardName);
+
+        AssertJUnit.assertNotNull(needleCopy);
+        AssertJUnit.assertTrue(needleCopy.hasNamedCard());
+        AssertJUnit.assertTrue(needleCopy.getNamedCards().contains("Lightning Bolt"));
+        AssertJUnit.assertTrue(needleCopy.getNamedCards().contains("Counterspell"));
+    }
+
+    /**
+     * Test that GameCopier correctly copies a tapped creature.
+     */
+    @Test
+    public void testGameCopierTappedCard() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        String bearCardName = "Runeclaw Bear";
+        Card bear = addCard(bearCardName, p);
+        bear.setSickness(false);
+        bear.setTapped(true);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        AssertJUnit.assertTrue(bear.isTapped());
+
+        GameCopier copier = new GameCopier(game);
+        Game copy = copier.makeCopy();
+        Card bearCopy = findCardWithName(copy, bearCardName);
+
+        AssertJUnit.assertNotNull(bearCopy);
+        AssertJUnit.assertTrue(bearCopy.isTapped());
+    }
+
+    /**
+     * Test that GameCopier correctly copies a monstrous creature.
+     */
+    @Test
+    public void testGameCopierMonstrousCard() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        String lionCardName = "Fleecemane Lion";
+        Card lion = addCard(lionCardName, p);
+        lion.setSickness(false);
+        lion.setMonstrous(true);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        AssertJUnit.assertTrue(lion.isMonstrous());
+
+        GameCopier copier = new GameCopier(game);
+        Game copy = copier.makeCopy();
+        Card lionCopy = findCardWithName(copy, lionCardName);
+
+        AssertJUnit.assertNotNull(lionCopy);
+        AssertJUnit.assertTrue(lionCopy.isMonstrous());
+    }
+
+    /**
+     * Test that GameCopier correctly copies a renowned creature.
+     */
+    @Test
+    public void testGameCopierRenownedCard() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        String knightCardName = "Knight of the White Orchid";
+        Card knight = addCard(knightCardName, p);
+        knight.setSickness(false);
+        knight.setRenowned(true);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        AssertJUnit.assertTrue(knight.isRenowned());
+
+        GameCopier copier = new GameCopier(game);
+        Game copy = copier.makeCopy();
+        Card knightCopy = findCardWithName(copy, knightCardName);
+
+        AssertJUnit.assertNotNull(knightCopy);
+        AssertJUnit.assertTrue(knightCopy.isRenowned());
+    }
+
+    /**
+     * Test that GameCopier correctly copies SVars.
+     */
+    @Test
+    public void testGameCopierCardWithSVars() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        String bearCardName = "Runeclaw Bear";
+        Card bear = addCard(bearCardName, p);
+        bear.setSickness(false);
+        bear.setSVar("TestSVar", "TestValue");
+        bear.setSVar("AnotherSVar", "42");
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        AssertJUnit.assertEquals("TestValue", bear.getSVar("TestSVar"));
+        AssertJUnit.assertEquals("42", bear.getSVar("AnotherSVar"));
+
+        GameCopier copier = new GameCopier(game);
+        Game copy = copier.makeCopy();
+        Card bearCopy = findCardWithName(copy, bearCardName);
+
+        AssertJUnit.assertNotNull(bearCopy);
+        AssertJUnit.assertEquals("TestValue", bearCopy.getSVar("TestSVar"));
+        AssertJUnit.assertEquals("42", bearCopy.getSVar("AnotherSVar"));
+    }
+
+    /**
+     * Test that GameCopier correctly copies multiple cards across zones.
+     */
+    @Test
+    public void testGameCopierMultipleZones() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        // Add cards to different zones
+        Card bearBattlefield = addCard("Runeclaw Bear", p);
+        bearBattlefield.setSickness(false);
+
+        Card boltHand = addCardToZone("Lightning Bolt", p, ZoneType.Hand);
+        Card islandLibrary = addCardToZone("Island", p, ZoneType.Library);
+        Card swampGraveyard = addCardToZone("Swamp", p, ZoneType.Graveyard);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        GameCopier copier = new GameCopier(game);
+        Game copy = copier.makeCopy();
+        Player copyP = copy.getPlayer(p.getId());
+
+        // Verify battlefield
+        Card bearCopy = findCardWithName(copy, "Runeclaw Bear");
+        AssertJUnit.assertNotNull(bearCopy);
+        AssertJUnit.assertEquals(ZoneType.Battlefield, bearCopy.getZone().getZoneType());
+
+        // Verify hand
+        CardCollectionView handCards = copyP.getCardsIn(ZoneType.Hand);
+        boolean foundBolt = false;
+        for (Card c : handCards) {
+            if (c.getName().equals("Lightning Bolt")) {
+                foundBolt = true;
+                break;
+            }
+        }
+        AssertJUnit.assertTrue("Lightning Bolt should be in hand", foundBolt);
+
+        // Verify graveyard
+        CardCollectionView graveyardCards = copyP.getCardsIn(ZoneType.Graveyard);
+        boolean foundSwamp = false;
+        for (Card c : graveyardCards) {
+            if (c.getName().equals("Swamp")) {
+                foundSwamp = true;
+                break;
+            }
+        }
+        AssertJUnit.assertTrue("Swamp should be in graveyard", foundSwamp);
+    }
+
+    /**
+     * Test that GameCopier correctly copies a planeswalker with loyalty counters.
+     */
+    @Test
+    public void testGameCopierPlaneswalkerLoyalty() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        String jaceCardName = "Jace Beleren";
+        Card jace = addCard(jaceCardName, p);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        int originalLoyalty = jace.getCurrentLoyalty();
+        AssertJUnit.assertTrue(jace.isPlaneswalker());
+        AssertJUnit.assertTrue(originalLoyalty > 0);
+
+        GameCopier copier = new GameCopier(game);
+        Game copy = copier.makeCopy();
+        Card jaceCopy = findCardWithName(copy, jaceCardName);
+
+        AssertJUnit.assertNotNull(jaceCopy);
+        AssertJUnit.assertTrue(jaceCopy.isPlaneswalker());
+        AssertJUnit.assertEquals(originalLoyalty, jaceCopy.getCurrentLoyalty());
+    }
+
+    /**
+     * Test that GameCopier correctly copies commander status.
+     */
+    @Test
+    public void testGameCopierCommander() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        String commanderCardName = "Runeclaw Bear";
+        Card commander = addCard(commanderCardName, p);
+        commander.setSickness(false);
+        commander.setCommander(true);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        AssertJUnit.assertTrue(commander.isCommander());
+
+        GameCopier copier = new GameCopier(game);
+        Game copy = copier.makeCopy();
+        Card commanderCopy = findCardWithName(copy, commanderCardName);
+
+        AssertJUnit.assertNotNull(commanderCopy);
+        AssertJUnit.assertTrue(commanderCopy.isCommander());
+    }
+
+    /**
+     * Performance benchmark test for GameCopier.
+     * This test measures the time taken to copy a game state multiple times.
+     */
+    @Test
+    public void testGameCopierPerformance() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Player opp = game.getPlayers().get(0);
+
+        // Create a moderately complex game state with various card types
+        // Add lands
+        addCards("Plains", 4, p);
+        addCards("Island", 4, p);
+        addCards("Mountain", 4, opp);
+        addCards("Forest", 4, opp);
+
+        // Add creatures with various states
+        for (int i = 0; i < 5; i++) {
+            Card bear = addCard("Runeclaw Bear", p);
+            bear.setSickness(false);
+            if (i % 2 == 0) {
+                bear.setTapped(true);
+            }
+            if (i % 3 == 0) {
+                bear.addCounterInternal(CounterEnumType.P1P1, 2, p, false, null, null);
+            }
+        }
+
+        for (int i = 0; i < 5; i++) {
+            Card giant = addCard("Hill Giant", opp);
+            giant.setSickness(false);
+        }
+
+        // Add cards to hand
+        addCardToZone("Lightning Bolt", p, ZoneType.Hand);
+        addCardToZone("Counterspell", p, ZoneType.Hand);
+        addCardToZone("Giant Growth", p, ZoneType.Hand);
+
+        // Add cards to graveyard
+        addCardToZone("Shock", p, ZoneType.Graveyard);
+        addCardToZone("Cancel", p, ZoneType.Graveyard);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        // Warm up
+        for (int i = 0; i < 5; i++) {
+            GameCopier copier = new GameCopier(game);
+            copier.makeCopy();
+        }
+
+        // Benchmark
+        int iterations = 50;
+        long startTime = System.nanoTime();
+        for (int i = 0; i < iterations; i++) {
+            GameCopier copier = new GameCopier(game);
+            Game copy = copier.makeCopy();
+            // Verify basic correctness
+            AssertJUnit.assertNotNull(copy);
+            AssertJUnit.assertEquals(2, copy.getPlayers().size());
+        }
+        long endTime = System.nanoTime();
+
+        double avgTimeMs = (endTime - startTime) / 1_000_000.0 / iterations;
+        System.out.println("GameCopier Performance: Average copy time = " + String.format("%.2f", avgTimeMs) + " ms");
+
+        // Assert that copying is reasonably fast (adjust threshold as needed)
+        // This is a baseline - after optimization, this should improve
+        AssertJUnit.assertTrue("GameCopier should complete in reasonable time (< 500ms)", avgTimeMs < 500);
+    }
+
+    /**
+     * Test that GameCopier correctly copies a complex game state with all card abilities intact.
+     */
+    @Test
+    public void testGameCopierAbilitiesIntact() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCards("Mountain", 3, p);
+        String prodigalCardName = "Prodigal Pyromancer";
+        Card prodigal = addCard(prodigalCardName, p);
+        prodigal.setSickness(false);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        // Find the tap ability
+        SpellAbility tapAbility = findSAWithPrefix(prodigal, "{T}:");
+        AssertJUnit.assertNotNull(tapAbility);
+
+        GameCopier copier = new GameCopier(game);
+        Game copy = copier.makeCopy();
+        Card prodigalCopy = findCardWithName(copy, prodigalCardName);
+
+        AssertJUnit.assertNotNull(prodigalCopy);
+
+        // Verify the ability exists on the copy
+        SpellAbility tapAbilityCopy = findSAWithPrefix(prodigalCopy, "{T}:");
+        AssertJUnit.assertNotNull("Tap ability should exist on copied card", tapAbilityCopy);
+    }
+
 }
