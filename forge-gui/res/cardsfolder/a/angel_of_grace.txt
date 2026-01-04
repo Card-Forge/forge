@@ -4,7 +4,7 @@ Types:Creature Angel
 PT:5/4
 K:Flash
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When CARDNAME enters, until end of turn, damage that would reduce your life total to less than 1 reduces it to 1 instead.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When this creature enters, until end of turn, damage that would reduce your life total to less than 1 reduces it to 1 instead.
 SVar:TrigEffect:DB$ Effect | ReplacementEffects$ SelflessDamage | Description$ Until end of turn, damage that would reduce your life total to less than 1 reduces it to 1 instead.
 SVar:SelflessDamage:Event$ LifeReduced | ValidPlayer$ You.lifeGE1 | Result$ LT1 | IsDamage$ True | ReplaceWith$ ReduceLoss | Description$ Until end of turn, damage that would reduce your life total to less than 1 reduces it to 1 instead.
 SVar:ReduceLoss:DB$ ReplaceEffect | VarName$ Amount | VarValue$ X
@@ -12,4 +12,4 @@ SVar:X:ReplaceCount$Amount/LimitMax.Difference
 SVar:Difference:Count$YourLifeTotal/Minus.1
 A:AB$ SetLife | Cost$ 4 W W ExileFromGrave<1/CARDNAME> | Defined$ You | ActivationZone$ Graveyard | LifeAmount$ 10 | SpellDescription$ Your life total becomes 10.
 AI:RemoveDeck:Random
-Oracle:Flash\nFlying\nWhen Angel of Grace enters, until end of turn, damage that would reduce your life total to less than 1 reduces it to 1 instead.\n{4}{W}{W}, Exile Angel of Grace from your graveyard: Your life total becomes 10.
+Oracle:Flash\nFlying\nWhen this creature enters, until end of turn, damage that would reduce your life total to less than 1 reduces it to 1 instead.\n{4}{W}{W}, Exile this card from your graveyard: Your life total becomes 10.
