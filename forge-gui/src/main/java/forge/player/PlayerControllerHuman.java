@@ -2924,12 +2924,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             if (repeatLast) {
                 f = lastAdded;
             } else {
-                List<CardFaceView> choices = new ArrayList<>();
-                for (ICardFace cardFace : carddb.getAllFaces()) {
-                    choices.add(
-                            new CardFaceView(CardTranslation.getTranslatedName(cardFace.getDisplayName()), cardFace.getName())
-                    );
-                }
+                List<CardFaceView> choices = carddb.getAllFaces().stream().map(CardFaceView::new).collect(Collectors.toList());
                 Collections.sort(choices);
                 f = getGui().oneOrNone(localizer.getMessage("lblNameTheCard"), choices);
             }
