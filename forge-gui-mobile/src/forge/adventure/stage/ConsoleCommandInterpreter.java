@@ -535,5 +535,14 @@ public class ConsoleCommandInterpreter {
             InnScene.replaceLocalEvent(eventFormat, eventCardBlock);
             return "Replaced local event with " + eventFormat.name() + " - " + eventCardBlock.getName();
         });
+        registerCommand(new String[]{"reset", "map"}, s -> {
+            if(!MapStage.getInstance().isInMap()) {
+                return "Can only be used in maps.";
+            }
+
+            MapStage.getInstance().clearOnExit();
+            
+            return "Exit the map to reset it.";
+        });
     }
 }

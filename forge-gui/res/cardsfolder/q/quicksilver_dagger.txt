@@ -5,6 +5,6 @@ K:Enchant:Creature
 SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ Damage | AddSVar$ QuicksilverDraw | Description$ Enchanted creature has "{T}: This creature deals 1 damage to target player or planeswalker. You draw a card."
 SVar:Damage:AB$ DealDamage | Cost$ T | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1 | SubAbility$ QuicksilverDraw | SpellDescription$ This creature deals 1 damage to target player or planeswalker.
-SVar:QuicksilverDraw:DB$ Draw | NumCards$ 1 | Defined$ You | SpellDescription$ You draw a card.
+SVar:QuicksilverDraw:DB$ Draw | Defined$ You | SpellDescription$ You draw a card.
 SVar:NonStackingAttachEffect:True
 Oracle:Enchant creature\nEnchanted creature has "{T}: This creature deals 1 damage to target player or planeswalker. You draw a card."

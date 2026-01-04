@@ -7,6 +7,6 @@ A:AB$ Pump | Cost$ W | KW$ Flying | Defined$ Self | SubAbility$ DBGain | SpellDe
 A:AB$ ChangeZone | Cost$ U | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDraw | SpellDescription$ Return CARDNAME to its owner's hand. Target opponent may draw a card.
 SVar:DBToken:DB$ Token | ValidTgts$ Opponent | TokenScript$ g_1_1_hippo | TokenOwner$ Targeted
 SVar:DBGain:DB$ GainLife | LifeAmount$ 2 | ValidTgts$ Opponent
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | ValidTgts$ Opponent | OptionalDecider$ Opponent
+SVar:DBDraw:DB$ Draw | ValidTgts$ Opponent | OptionalDecider$ Opponent
 AI:RemoveDeck:All
 Oracle:{G}: Phelddagrif gains trample until end of turn. Target opponent creates a 1/1 green Hippo creature token.\n{W}: Phelddagrif gains flying until end of turn. Target opponent gains 2 life.\n{U}: Return Phelddagrif to its owner's hand. Target opponent may draw a card.

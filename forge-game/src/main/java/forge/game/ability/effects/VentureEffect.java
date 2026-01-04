@@ -3,16 +3,24 @@ package forge.game.ability.effects;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+import org.apache.commons.lang3.ObjectUtils;
+
+import com.google.common.collect.Lists;
 
 import forge.StaticData;
 import forge.card.CardRules;
-import forge.card.CardRulesPredicates;
+import forge.card.GamePieceType;
+import forge.card.ICardFace;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardFactory;
 import forge.game.card.CounterType;
 import forge.game.event.GameEventCardCounters;
 import forge.game.player.Player;
@@ -22,10 +30,7 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
-import forge.item.PaperCard;
-import forge.item.PaperCardPredicates;
 import forge.util.Localizer;
-import forge.util.PredicateString.StringOp;
 
 public class VentureEffect extends SpellAbilityEffect {
 
@@ -44,20 +49,30 @@ public class VentureEffect extends SpellAbilityEffect {
             }
         }
 
-        List<PaperCard> dungeonCards;
+        Predicate<Map.Entry<String, CardRules>> filter;
         if (sa.hasParam("Dungeon")) {
             String dungeonType = sa.getParam("Dungeon");
-            Predicate<CardRules> rulesPredicate = CardRulesPredicates.IS_DUNGEON.and(CardRulesPredicates.subType(StringOp.EQUALS, dungeonType));
-            dungeonCards = StaticData.instance().getVariantCards().getAllCards(
-                    PaperCardPredicates.fromRules(rulesPredicate));
+            filter = e -> e.getValue().getType().hasSubtype(dungeonType);
         } else {
             // Create a new dungeon card chosen by player in command zone.
-            dungeonCards = StaticData.instance().getVariantCards().getAllCards(
-                    PaperCardPredicates.fromRules(CardRulesPredicates.IS_DUNGEON));
-            dungeonCards.removeIf(c -> !c.getRules().isEnterableDungeon());
+            filter = e -> e.getValue().isEnterableDungeon();
         }
+        Map<ICardFace, String> mapping = StaticData.instance().getAllTokens().getRules().entrySet()
+                .stream().filter(filter).collect(Collectors.toMap(e -> e.getValue().getMainPart(), Map.Entry::getKey, (a,b) -> a, TreeMap::new));
         String message = Localizer.getInstance().getMessage("lblChooseDungeon");
-        Card dungeon = player.getController().chooseDungeon(player, dungeonCards, message);
+        ICardFace chosen = player.getController().chooseSingleCardFace(sa, Lists.newArrayList(mapping.keySet()), message);
+        if (chosen == null) {
+            return null;
+        }
+        String script = mapping.get(chosen);
+        final Card host = sa.getHostCard();
+        Card editionHost = sa.getOriginalHost();
+
+        String edition = ObjectUtils.firstNonNull(editionHost, host).getSetCode();
+        edition = ObjectUtils.firstNonNull(StaticData.instance().getCardEdition(edition).getTokenSet(script), edition);
+
+        final Card dungeon = CardFactory.getCard(StaticData.instance().getAllTokens().getToken(script, edition), player, game);
+        dungeon.setGamePieceType(GamePieceType.DUNGEON);
 
         game.getAction().moveToCommand(dungeon, sa, moveParams);
 

@@ -87,7 +87,7 @@
 		"options":
 			[
 				{
-					"name": "Urza, I've done as you asked! It's time to end this!",
+					"name": "Urza, your guardians have been defeated! It's time to end this!",
 					"action": [ { "deleteMapObject": 55 } ],
 					"condition": [
 						{
@@ -146,7 +146,7 @@
   </object>
   <object id="65" template="../../../../../../common/maps/obj/entry_down.tx" x="352" y="542.75" width="48" height="29">
    <properties>
-    <property name="teleport" value="../common/maps/map/main_story/castles/blue_castle_f1.tmx" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/end_palace/blue_end_palace_f1.tmx" />
    </properties>
   </object>
   <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="83.3333" y="603">
@@ -161,7 +161,7 @@
 ]</property>
     <property name="enemy" value="Tawnos" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{"startBattleWithCard": ["Candelabra of Tawnos|ATQ", "Tawnos's Coffin|ATQ", "Tawnos's Wand|ATQ", "Tawnos's Weaponry|ATQ", "Serpent Generator|LEG", "Clay Statue|ATQ", "Mantis Engine|UDS"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Candelabra of Tawnos|ATQ", "Tawnos's Coffin|ATQ", "Tawnos's Wand|ATQ", "Tawnos's Weaponry|ATQ", "Serpent Generator|LEG", "Clay Statue|ATQ"]}</property>
     </properties>
   </object>
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="649" y="601.333">
@@ -239,18 +239,18 @@
    <properties>
     <property name="dialog">[
   {
-    "text": "Welcome {var=player_name}, Urza has been waiting eagerly for this moment.",
+    "text": "Welcome {var=player_name}, the mighty planeswalker Urza awaits your challenge.",
     "options": [
       {
-        "name": "Is that so? I guess you wouldn't mind opening that gate in front of me?",
-        "text": "I'm afraid I'm not allowed to do that, I am a mere servant of the mighty Urza, master of the depths of the sea.",
+        "name": "I am ready. What must I do?",
+        "text": "Urza's four most trusted allies guard the path forward to him, each mighty wizards and artificiers themselves.",
         "options": [
           {
-            "name": "What do I need to do to get passed though this gate?",
-            "text": "To show you are worthy, you must prove your strength by defeating at least four of the five enemies lurking within this dungeon to be worthy of an audience with my illustrious master.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.",
+            "name": "So if I defeat them my path will be clear?",
+            "text": "Yes, then you will be worthy to face my illustrious master.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.",
             "options": [
               {
-                "name": "I'll show my worth, just make sure to open the gate when I do defeat your challengers.",
+                "name": "I'll show my worth, just make sure to open the gate when I do defeat your guardians.",
                 "text": "Leave"
               }
             ]
@@ -260,8 +260,8 @@
     ]
   }
 ]</property>
+    <property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN", "Keeper of Kookus|VIS" ] }</property>
     <property name="enemy" value="Djinn" />
-   <property name="effect">{"startBattleWithCard": ["Island|LEA", "Mountain|ARN", "Swamp|LEA", "Aladdin's Lamp|ARN", "Keeper of Kookus|VIS"]}</property>
    </properties>
   </object>
  </objectgroup>

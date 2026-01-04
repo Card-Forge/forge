@@ -372,7 +372,6 @@ public class Game {
 
         sbaCheckedCommandList = new ArrayList<>();
 
-        // update players
         view.updatePlayers(this);
 
         subscribeToEvents(gameLog.getEventVisitor());
@@ -454,9 +453,19 @@ public class Game {
         sbaCheckedCommandList.clear();
     }
 
+    public final StaticEffects getStaticEffects() {
+        return staticEffects;
+    }
+    public final ReplacementHandler getReplacementHandler() {
+        return replacementHandler;
+    }
+    public final TriggerHandler getTriggerHandler() {
+        return triggerHandler;
+    }
     public final PhaseHandler getPhaseHandler() {
         return phaseHandler;
     }
+
     public final void updateTurnForView() {
         view.updateTurn(phaseHandler);
     }
@@ -472,14 +481,6 @@ public class Game {
     }
     public final void updateStackForView() {
         view.updateStack(stack);
-    }
-
-    public final StaticEffects getStaticEffects() {
-        return staticEffects;
-    }
-
-    public final TriggerHandler getTriggerHandler() {
-        return triggerHandler;
     }
 
     public final Combat getCombat() {
@@ -549,10 +550,6 @@ public class Game {
 
     public final Game getMaingame() {
         return maingame;
-    }
-
-    public ReplacementHandler getReplacementHandler() {
-        return replacementHandler;
     }
 
     public synchronized boolean isGameOver() {
@@ -856,7 +853,7 @@ public class Game {
         for (Card c : cards) {
             // CR 800.4d if card is controlled by opponent, LTB should trigger
             if (c.getOwner().equals(p) && c.getController().equals(p)) {
-                c.getGame().getTriggerHandler().clearActiveTriggers(c, null);
+                getTriggerHandler().clearActiveTriggers(c, null);
             }
         }
 

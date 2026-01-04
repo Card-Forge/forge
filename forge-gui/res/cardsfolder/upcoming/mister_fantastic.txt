@@ -1,0 +1,12 @@
+Name:Mister Fantastic
+ManaCost:2 U
+Types:Legendary Creature Human Scientist Hero
+PT:2/4
+K:Vigilance
+K:Reach
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigDraw | TriggerDescription$ At the beginning of combat on your turn, if you've cast a noncreature spell this turn, draw a card.
+SVar:TrigDraw:DB$ Draw
+A:AB$ CopySpellAbility | Cost$ R G W U T | TargetType$ Triggered.YouCtrl | ValidTgts$ Card,Emblem | TgtPrompt$ Choose target triggered ability you control | Amount$ 2 | MayChooseTarget$ True | SpellDescription$ Copy target triggered ability you control twice. You may choose new targets for the copies.
+SVar:X:Count$ThisTurnCast_Card.nonCreature+YouCtrl
+SVar:PlayMain1:TRUE
+Oracle:Vigilance, reach\nAt the beginning of combat on your turn, if you've cast a noncreature spell this turn, draw a card.\n{R}{G}{W}{U}, {T}: Copy target triggered ability you control twice. You may choose new targets for the copies.

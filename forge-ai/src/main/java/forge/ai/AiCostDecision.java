@@ -853,6 +853,12 @@ public class AiCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(CostBlight cost) {
+        // This tells the AI: "Treat this like placing counters"
+        return this.visit((CostPutCounter) cost);
+    }
+
+    @Override
     public boolean paysRightAfterDecision() {
         return false;
     }

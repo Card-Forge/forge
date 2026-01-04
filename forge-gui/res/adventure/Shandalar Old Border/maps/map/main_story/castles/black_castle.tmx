@@ -77,7 +77,7 @@
 			[
 				{
 					"name": "Lord, I've done as you asked! It's time to end this!",
-					"action": [ { "deleteMapObject": 55 } ],
+					"action": [ { "deleteMapObject": -1 } ],
 					"condition": [
 						{
 							"getMapFlag": {
@@ -96,7 +96,7 @@
 				},
 				{
                 	"name": "Lord, I've done as you asked! It's time to end this!",
-                	"action": [ { "deleteMapObject": 55 } ],
+                	"action": [ { "deleteMapObject": -1 } ],
                 	"condition": [
                 	{
                 		"getMapFlag": {
@@ -151,7 +151,7 @@
     <property name="enemy" value="Shade" />
     <property name="pursueRange" type="int" value="30" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{"startBattleWithCard": ["Swamp|3ED", "Swamp|3ED", "Swamp|3ED", "Frozen Shade|LEA"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Swamp|3ED", "Frozen Shade|LEA"]}</property>
     </properties>
   </object>
   <object id="67" template="../../../../../../../common/maps/obj/enemy.tx" x="649.5" y="604">
@@ -182,24 +182,8 @@
     <property name="enemy" value="Witch" />
     <property name="pursueRange" type="int" value="30" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Swamp|TMP|1", "Swamp|TMP|2", "Vile Consumption|INV" ] }</property>
+   <property name="effect">{ "startBattleWithCard": [ "Swamp|TMP|2", "Vile Consumption|INV" ] }</property>
     </properties>
-  </object>
-  <object id="69" template="../../../../../../../common/maps/obj/enemy.tx" x="365" y="232.63">
-   <properties>
-    <property name="defeatDialog">[
-   {
-   "action": [
-      {"advanceMapFlag":"enemiesDefeated"},
-      {"deleteMapObject": -1}
-    ]
-   }
-]</property>
-    <property name="effect">{ "startBattleWithCard": [ "Rotting Giant|ODY", "Swamp|ODY|1", "Swamp|ODY|2", "Swamp|ODY|3", "Swamp|ODY|4" ] }</property>
-    <property name="enemy" value="Grave Titan" />
-    <property name="pursueRange" type="int" value="10" />
-    <property name="threatRange" type="int" value="10" />
-   </properties>
   </object>
   <object id="70" template="../../../../../../../common/maps/obj/enemy.tx" x="96.0511" y="407.602">
    <properties>
@@ -211,9 +195,10 @@
     ]
    }
 ]</property>
-    <property name="enemy" value="Ancient Vampire" />
+    <property name="enemy" value="Vampire" />
     <property name="pursueRange" type="int" value="30" />
     <property name="threatRange" type="int" value="30" />
+    <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML|1", "Cemetery Gate|HML|2", "Crovax the Cursed|STH", "Swamp|TMP|2" ] }</property>
    </properties>
   </object>
   <object id="71" template="../../../../../../../common/maps/obj/enemy.tx" x="366.694" y="701.945">
@@ -252,7 +237,7 @@
         "options": [
           {
             "name": "What do I need to do to get passed though this gate?",
-            "text": "To show you are worthy, you must prove your strength by defeating at least four of the five enemies lurking within this cursed dungeon to be worthy of an audience with my illustrious master, who holds dominion over this realm of evil. Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.",
+            "text": "To show you are worthy, you must prove your strength by defeating all four enemies lurking within this cursed dungeon to be worthy of an audience with my illustrious master, who holds dominion over this realm of evil. Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.",
             "options": [
               {
                 "name": "I'll show my worth, just make sure to open the gate when I defeat your challengers.",

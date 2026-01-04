@@ -412,7 +412,7 @@ public class ForgeScript {
                 return !sa.isPwAbility() && !sa.getRestrictions().isSorcerySpeed();
             }
             return true;
-        } else if(property.startsWith("NamedAbility")) {
+        } else if (property.startsWith("NamedAbility")) {
             return sa.getName().equals(property.substring(12));
         } else if (sa.getHostCard() != null) {
             return sa.getHostCard().hasProperty(property, sourceController, source, spellAbility);

@@ -79,7 +79,7 @@
 	}
 ]</property>
     <property name="displayNameOverride" value="Tibalt's Pet Cyclops" />
-    <property name="effect">{ "startBattleWithCard": [ "Mountain|LEA", "Mountain|LEB", "Mana Crypt|PHPR", "Chance Encounter|ODY", "Goblin Bomb|WTH", "Impulsive Maneuvers|ODY" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Chance Encounter|ODY", "Goblin Bomb|WTH", "Impulsive Maneuvers|ODY", "Mana Crypt|PHPR" ] }</property>
     <property name="enemy" value="Cyclops" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="speedModifier" type="float" value="10" />

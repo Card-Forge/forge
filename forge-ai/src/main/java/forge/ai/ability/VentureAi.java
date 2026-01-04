@@ -3,8 +3,11 @@ package forge.ai.ability;
 import com.google.common.collect.Lists;
 import forge.ai.AiAbilityDecision;
 import forge.ai.AiPlayDecision;
+import forge.ai.AiProfileUtil;
+import forge.ai.AiProps;
 import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
+import forge.card.ICardFace;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -74,4 +77,19 @@ public class VentureAi extends SpellAbilityAi {
         return Aggregates.random(spells);
     }
 
+    @Override
+    public ICardFace chooseCardFace(Player ai, SpellAbility sa, List<ICardFace> faces) {
+        if (faces.size() == 1) {
+            return faces.get(0);
+        }
+
+        // Don't choose Tomb of Annihilation when life in danger unless we can win right away or can't lose for 0 life
+        int lifeInDanger = AiProfileUtil.getIntProperty(ai, AiProps.AI_IN_DANGER_THRESHOLD);
+        if ((ai.getLife() <= lifeInDanger && !ai.cantLoseForZeroOrLessLife())
+                && !(ai.getLife() > 1 && ai.getWeakestOpponent().getLife() == 1)) {
+            faces.removeIf(f -> "Tomb of Annihilation".equals(f.getName()));
+        }
+
+        return Aggregates.random(faces);
+    }
 }

@@ -50,6 +50,8 @@ import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
+
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collection;
@@ -62,6 +64,7 @@ import java.util.stream.Collectors;
 public class CardState implements GameObject, IHasSVars, ITranslatable {
     private String name = "";
     private CardType type = new CardType(false);
+    private CardTypeView changedType = null;
     private ManaCost manaCost = ManaCost.NO_COST;
     // Track mana cost after adjustments from perpetual cost-changing effects for display
     private ManaCost perpetualAdjustedManaCost = null;
@@ -144,7 +147,14 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     }
 
     public CardTypeView getTypeWithChanges() {
-        return getType().getTypeWithChanges(card.getChangedCardTypes());
+        return ObjectUtils.firstNonNull(this.changedType, getType());
+    }
+
+    public void updateTypes() {
+        this.changedType = getType().getTypeWithChanges(card.getChangedCardTypes());
+    }
+    public void updateTypesForView() {
+        view.updateType(this);
     }
 
     public final CardTypeView getType() {
@@ -152,12 +162,14 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     }
     public final void addType(String type0) {
         if (type.add(type0)) {
-            view.updateType(this);
+            updateTypes();
+            updateTypesForView();
         }
     }
     public final void addType(Iterable<String> type0) {
         if (type.addAll(type0)) {
-            view.updateType(this);
+            updateTypes();
+            updateTypesForView();
         }
     }
     public final void setType(final CardType type0) {
@@ -168,12 +180,14 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         if (type0.isEmpty() && type.isEmpty()) { return; }
         type.clear();
         type.addAll(type0);
-        view.updateType(this);
+        updateTypes();
+        updateTypesForView();
     }
 
     public final void removeType(final CardType.Supertype st) {
         if (type.remove(st)) {
-            view.updateType(this);
+            updateTypes();
+            updateTypesForView();
         }
     }
 
@@ -182,11 +196,15 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         if (sanisfy) {
             type.sanisfySubtypes();
         }
+
+        updateTypes();
+        updateTypesForView();
     }
 
     public final void setCreatureTypes(Collection<String> ctypes) {
         if (type.setCreatureTypes(ctypes)) {
-            view.updateType(this);
+            updateTypes();
+            updateTypesForView();
         }
     }
 
@@ -395,6 +413,10 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         for (KeywordInterface k : intrinsicKeyword0) {
             intrinsicKeywords.insert(k.copy(card, lki));
         }
+        updateKeywordsCache();
+    }
+
+    public final void updateKeywordsCache() {
         card.updateKeywordsCache(this);
     }
 
@@ -869,6 +891,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             }
         }
         if (lki) {
+            this.changedType = source.changedType;
             if (source.landAbility != null) {
                 landAbility = source.landAbility.copy(card, true);
             }

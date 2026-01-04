@@ -2,7 +2,8 @@
 Name=Verdeloth the Ancient
 [Main]
 20 Forest|ICE
-4 Primal Growth|PLS
+2 Yavimaya Hollow|UDS
+3 Primal Growth|PLS
 3 Verdeloth the Ancient|INV
 3 Nemata, Grove Guardian|PLS
 2 Kaysa|ALL
@@ -13,12 +14,11 @@ Name=Verdeloth the Ancient
 2 Coat of Arms|EXO
 2 Seeds of Innocence|MIR
 2 Multani's Decree|UDS
-4 Parallel Evolution|TOR
+3 Parallel Evolution|TOR
 4 Thicket Elemental|INV
 
 [StartInBattle_Reference]
 1 Heart of Yavimaya|ALL
-1 Yavimaya Hollow|UDS
 1 Greener Pastures|USG
 1 Saproling Infestation|INV
 1 Night Soil|FEM

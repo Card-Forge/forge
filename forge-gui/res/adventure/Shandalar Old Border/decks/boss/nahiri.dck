@@ -1,7 +1,7 @@
 [metadata]
 Name=Lin Sivvi
 [Main]
-26 Plains|PALP
+30 Plains|PALP
 4 Kor Haven|NMS
 1 Ramosian Sergeant|MMQ
 1 Defiant Falcon|NMS
@@ -36,6 +36,6 @@ Name=Lin Sivvi
 2 Coat of Arms|EXO
 
 [StartInBattle_Reference]
-3 Plains|PALP
+1 Plains|PALP
 1 Lin Sivvi, Defiant Hero|NMS
 1 Cho-Manno, Revolutionary|MMQ

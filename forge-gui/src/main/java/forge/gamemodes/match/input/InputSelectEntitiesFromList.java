@@ -49,15 +49,15 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
             System.out.printf("Trying to choose at least %d things from a list with only %d things!%n", min, validChoices.size());
         }
         ArrayList<CardView> vCards = new ArrayList<>();
-        for (T c : validChoices0) {
-            if (c instanceof Card) {
-                vCards.add(((Card) c).getView());
+        for (T v : validChoices0) {
+            if (v instanceof Card c) {
+                vCards.add(c.getView());
             }
         }
         getController().getGui().setSelectables(vCards);
         final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
-        for (final GameEntity c : validChoices) {
-            final Zone cz = (c instanceof Card) ? ((Card) c).getLastKnownZone() : null;
+        for (final GameEntity ge : validChoices) {
+            final Zone cz = ge instanceof Card c ? c.getLastKnownZone() : null;
             if (cz != null) {
                 zonesToUpdate.add(new PlayerZoneUpdate(cz.getPlayer().getView(), cz.getZoneType()));
             }
@@ -134,12 +134,11 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
         if (sa != null) {
             if (sa.getPayCosts().hasSpecificCostType(CostTapType.class) &&
                 (sa.isCrew() || sa.isKeyword(Keyword.SADDLE))) {
-                msg.append((sa.isCrew())  ? "\nCrewing: " : "\nSaddling: ");
+                msg.append(sa.isCrew() ? "\nCrewing: " : "\nSaddling: ");
                 msg.append(CardLists.getTotalPower((FCollection<Card>)getSelected(), sa));
                 msg.append(" / ").append(TextUtil.fastReplace(sa.getPayCosts().
                     getCostPartByType(CostTapType.class).getType(), 
                     "Creature.Other+withTotalPowerGE", ""));
-    
             }
             else if (sa.getPayCosts().hasSpecificCostType(CostExile.class) && tally > 0) {
                 msg.append("\n");
@@ -188,7 +187,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
      * change to if the button is clicked.
      */
     private void updateMassSelectButton() {
-        String selectButtonLabel = Localizer.getInstance().getMessage(massSelectMode.next().getLabelName());
+        String selectButtonLabel = massSelectMode.next().getTranslatedName();
         getController().getGui().updateButtons(getOwner(), Localizer.getInstance().getMessage("lblOK"),
                 selectButtonLabel, hasEnoughTargets(), allowCancel, true);
     }
@@ -210,11 +209,11 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
             });
             this.getSelected().clear();
             if (massSelectMode == MassSelectMode.MINE) { // Select all valid targets owned by player
-                for (T c : validChoices) {
-                    if (c instanceof Card) {
-                        if (((Card) c).getController().equals(getController().getPlayer())) {
-                            selected.add(c);
-                            onSelectStateChanged(c, true);
+                for (T v : validChoices) {
+                    if (v instanceof Card c) {
+                        if (c.getController().equals(getController().getPlayer())) {
+                            selected.add(v);
+                            onSelectStateChanged(v, true);
                         }
                     }
                 }

@@ -36,7 +36,7 @@
    <properties>
     <property name="enemy" value="Yawgmoth"/>
     <property name="threatRange" type="int" value="50"/>
-   <property name="effect">{ "startBattleWithCard": [ "Eye of Yawgmoth|NMS", "Order of Yawgmoth|USG", "Phyrexian Altar|INV", "Phyrexian Lens|INV", "Phyrexian Reclamation|ULG", "Swamp|USG|1", "Swamp|USG|2", "Swamp|USG|3", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Phyrexian Battleflies|INV", "Phyrexian Battleflies|INV", "Phyrexian Battleflies|INV", "Phyrexian Battleflies|INV" ] }</property>
+   <property name="effect">{ "startBattleWithCard": [ "Eye of Yawgmoth|NMS", "Order of Yawgmoth|USG", "Phyrexian Altar|INV", "Phyrexian Lens|INV", "Phyrexian Reclamation|ULG", "Swamp|USG|1", "Swamp|USG|2", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Phyrexian Battleflies|INV", "Phyrexian Battleflies|INV" ] }</property>
     </properties>
   </object>
   <object id="51" template="../../../../../../common/maps/obj/entry_up.tx" x="209" y="480">

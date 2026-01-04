@@ -4,5 +4,5 @@ Types:Creature Human Rebel Ally
 PT:2/1
 K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create a 1/1 white Ally creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_ally | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_ally | TokenOwner$ You
 Oracle:Haste\nWhen this creature enters, create a 1/1 white Ally creature token.

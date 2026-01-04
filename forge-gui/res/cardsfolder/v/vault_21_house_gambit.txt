@@ -12,5 +12,5 @@ SVar:DBReset:DB$ StoreSVar | SVar$ TreasureNum | Type$ Number | Expression$ 0 | 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:TreasureNum:Number$0
 AI:RemoveDeck:All
-DeckHas:Type$Artifact|Treasure & Ability$Sacrifice|Token|Discard
+DeckHas:Ability$Sacrifice|Token|Discard
 Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Discard a card, then draw a card.\nIII — Reveal up to five nonland cards from your hand. For each of those cards that has the same mana value as another card revealed this way, create a Treasure token.

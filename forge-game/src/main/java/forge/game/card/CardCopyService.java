@@ -130,7 +130,6 @@ public class CardCopyService {
         }
 
         c.setState(in.getCurrentStateName(), false);
-        c.setRules(in.getRules());
         c.setBackSide(in.isBackSide());
 
         return c;
@@ -235,8 +234,6 @@ public class CardCopyService {
         newCopy.setController(copyFrom.getController(), 0);
         newCopy.setCommander(copyFrom.isCommander());
         newCopy.setCollectible(copyFrom.isCollectible());
-
-        newCopy.setRules(copyFrom.getRules());
 
         // needed to ensure that the LKI object has correct CMC info no matter what state the original card was in
         // (e.g. Scrap Trawler + transformed Harvest Hand)
@@ -377,7 +374,7 @@ public class CardCopyService {
 
         // update keyword cache on all states
         for (CardStateName s : newCopy.getStates()) {
-            newCopy.updateKeywordsCache(newCopy.getState(s));
+            newCopy.getState(s).updateKeywordsCache();
         }
 
         if (copyFrom.getCastSA() != null) {

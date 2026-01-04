@@ -5,6 +5,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.card.CardType;
 import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.game.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
@@ -243,19 +244,24 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             type = TextUtil.fastReplace(type, "FromTopGrave", "");
             fromTopGrave = true;
         }
-        boolean totalCMC = false;
         boolean totalCMCgreater = false;
-        String totalM = "";
+        String totalM = null;
         if (type.contains("+withTotalCMCEQ")) {
-            totalCMC = true;
             totalM = type.split("withTotalCMCEQ")[1];
             type = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTotalCMCEQ", totalM), "");
         }
         if (type.contains("+withTotalCMCGE")) {
-            totalCMC = true;
             totalCMCgreater = true;
             totalM = type.split("withTotalCMCGE")[1];
             type = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTotalCMCGE", totalM), "");
+        }
+        String totalManaSymbolsColor = null;
+        String totalManaSymbolsCmp = null;
+        if (type.contains("+withTotalManaSymbols_")) {
+            String[] details = type.split("withTotalManaSymbols_")[1].split("_");
+            totalManaSymbolsColor = details[0];
+            totalManaSymbolsCmp = details[1];
+            type = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTotalManaSymbols_", totalManaSymbolsColor, "_", totalManaSymbolsCmp), "");
         }
         boolean sharedType = false;
         if (type.contains("+withSharedCardType")) {
@@ -286,7 +292,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         list = CardLists.getValidCards(list, type.split(";"), player, source, ability);
         list = CardLists.filter(list, CardPredicates.canExiledBy(ability, isEffect()));
 
-        if (totalCMC) {
+        if (totalM != null) {
             int needed = Integer.parseInt(cost.getAmount().split("\\+")[0]);
             final int total = AbilityUtils.calculateAmount(source, totalM, ability);
             final InputSelectCardsFromList inp =
@@ -297,6 +303,23 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
             int sum = CardLists.getTotalCMC(inp.getSelected());
             if (inp.hasCancelled() || (sum != total && !totalCMCgreater) || (sum < total && totalCMCgreater)) {
+                return null;
+            }
+            return PaymentDecision.card(inp.getSelected());
+        }
+
+        if (totalManaSymbolsColor != null) {
+            int needed = Integer.parseInt(cost.getAmount().split("\\+")[0]);
+            final int total = AbilityUtils.calculateAmount(source, totalM, ability);
+            final InputSelectCardsFromList inp =
+                    new InputSelectCardsFromList(controller, needed, list.size(), list, ability, "ManaSymbols", total);
+            inp.setMessage(Localizer.getInstance().getMessage("lblSelectToExile", Lang.getNumeral(needed)));
+            inp.setCancelAllowed(true);
+            inp.showAndWait();
+
+            int sum = CardLists.getTotalChroma(inp.getSelected(), MagicColor.fromName(totalManaSymbolsColor));
+            int right = AbilityUtils.calculateAmount(source, totalManaSymbolsCmp.substring(2) , ability);
+            if (inp.hasCancelled() || !Expressions.compare(sum, totalManaSymbolsCmp, right)) {
                 return null;
             }
             return PaymentDecision.card(inp.getSelected());
@@ -841,6 +864,11 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return null;
         }
         return PaymentDecision.card(inp.getSelected());
+    }
+
+    @Override
+    public PaymentDecision visit(final CostBlight cost) {
+        return this.visit((CostPutCounter) cost);
     }
 
     @Override

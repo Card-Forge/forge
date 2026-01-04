@@ -74,7 +74,7 @@
 		"options":
 			[
 				{
-					"name": "Yawgmoth, I've done as you asked! It's time to end this!",
+					"name": "Yawgmoth, your guardians have fallen! It's time to end this!",
 					"action": [ { "deleteMapObject": 55 } ],
 					"condition": [
 						{
@@ -93,7 +93,7 @@
 					"options": [ { "name": "(continue)" } ]
 				},
 				{
-                	"name": "Griselbrand, I've done as you asked! It's time to end this!",
+                	"name": "Yawgmoth, your guardians have fallen! It's time to end this!",
                 	"action": [ { "deleteMapObject": 55 } ],
                 	"condition": [
                 	{
@@ -133,7 +133,7 @@
   </object>
   <object id="65" template="../../../../../../common/maps/obj/entry_up.tx" x="355" y="543.5" width="44.5" height="52">
    <properties>
-    <property name="teleport" value="../common/maps/map/main_story/castles/black_castle_f1.tmx" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/end_palace/black_end_palace_f1.tmx" />
    </properties>
   </object>
   <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="89.5" y="601">
@@ -149,7 +149,7 @@
     <property name="enemy" value="Shade" />
     <property name="pursueRange" type="int" value="30" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{"startBattleWithCard": ["Swamp|3ED", "Swamp|3ED", "Swamp|3ED", "Frozen Shade|LEA"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Swamp|3ED", "Frozen Shade|LEA"]}</property>
     </properties>
   </object>
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="649.5" y="604">
@@ -181,7 +181,7 @@
     <property name="enemy" value="Ashnod" />
     <property name="pursueRange" type="int" value="30" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Ashnod's Altar|ATQ", "Ashnod's Battle Gear|ATQ", "Ashnod's Cylix|ALL", "Ashnod's Transmogrant|ATQ", "Island|2ED", "Mountain|2ED", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Swamp|2ED" ] }</property>
+   <property name="effect">{ "startBattleWithCard": [ "Ashnod's Altar|ATQ", "Ashnod's Battle Gear|ATQ", "Ashnod's Cylix|ALL", "Ashnod's Transmogrant|ATQ", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Badlands|LEB", "Underground Sea|LEB" ] }</property>
     </properties>
   </object>
   <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="365" y="232.63">
@@ -252,7 +252,7 @@
         "options": [
           {
             "name": "What do I need to do to get passed though this gate?",
-            "text": "To show you are worthy, you must prove your strength by defeating at least four of Yawgmoth's five lieutenants lurking within this cursed palace to be worthy of an audience with my illustrious master, who holds dominion over this realm of darkness. Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.",
+            "text": "To show you are worthy, you must prove your strength by defeating all four of Yawgmoth's lieutenants lurking within this cursed palace to be worthy of an audience with my illustrious master, who holds dominion over this realm of darkness. Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.",
             "options": [
               {
                 "name": "I'll show my worth, just make sure to open the gate when I defeat your challengers.",

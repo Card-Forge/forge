@@ -72,10 +72,8 @@ public class ComputerUtilCard {
      * @param list
      */
     public static void sortByEvaluateCreature(final CardCollection list) {
-        list.sort(ComputerUtilCard.EvaluateCreatureComparator);
+        list.sort(getCachedCreatureComparator().reversed());
     }
-
-    // The AI doesn't really pick the best artifact, just the most expensive.
 
     /**
      * <p>
@@ -546,7 +544,10 @@ public class ComputerUtilCard {
         return null;
     }
 
-    public static final Comparator<Card> EvaluateCreatureComparator = (a, b) -> evaluateCreature(b) - evaluateCreature(a);
+    public static Comparator<Card> getCachedCreatureComparator() {
+        Map<Card, Integer> cache = new IdentityHashMap<>();
+        return Comparator.comparing(c -> cache.computeIfAbsent(c, creatureEvaluator));
+    }
     public static final Comparator<SpellAbility> EvaluateCreatureSpellComparator = (a, b) -> {
         // TODO ideally we could reuse the value from the previous pass with false
         return ComputerUtilAbility.saEvaluator.compareEvaluator(a, b, true);
@@ -566,6 +567,9 @@ public class ComputerUtilCard {
     public static int evaluateCreature(final Card c) {
         return creatureEvaluator.evaluateCreature(c);
     }
+    public static int evaluateCreature(final Card c, final boolean considerPT, final boolean considerCMC) {
+        return creatureEvaluator.evaluateCreature(c, considerPT, considerCMC);
+    }
     public static int evaluateCreature(final SpellAbility sa) {
         final Card host = sa.getHostCard();
 
@@ -580,16 +584,13 @@ public class ComputerUtilCard {
             host.setState(sa.getCardStateName(), false);
         }
 
-        int eval = evaluateCreature(host);
+        int eval = evaluateCreature(host, true, false);
 
         if (currentState != null) {
             host.setState(currentState, false);
         }
 
         return eval;
-    }
-    public static int evaluateCreature(final Card c, final boolean considerPT, final boolean considerCMC) {
-        return creatureEvaluator.evaluateCreature(c, considerPT, considerCMC);
     }
 
     public static int evaluatePermanentList(final CardCollectionView list) {
@@ -1758,7 +1759,7 @@ public class ComputerUtilCard {
         }
         final long timestamp2 = c.getGame().getNextTimestamp(); //is this necessary or can the timestamp be re-used?
         pumped.addChangedCardKeywordsInternal(toCopy, null, false, timestamp2, null, false);
-        pumped.updateKeywordsCache(pumped.getCurrentState());
+        pumped.updateKeywordsCache();
         applyStaticContPT(ai.getGame(), pumped, new CardCollection(c));
         return pumped;
     }

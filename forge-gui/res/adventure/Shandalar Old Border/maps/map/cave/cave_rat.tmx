@@ -86,9 +86,8 @@
   </object>
   <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="289.277" y="129.038">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Phyrexian Arena|APC&quot;]}" />
     <property name="enemy" value="Nezumi Leader" />
-   <property name="effect">{ "startBattleWithCard": [ "Swarm of Rats|PO2", "Dirty Wererat|ODY" ] }</property>
+   <property name="effect">{ "startBattleWithCard": [ "Dirty Wererat|ODY" ] }</property>
     <property name="threatRange" type="int" value="50" />
    </properties>
   </object>

@@ -73,11 +73,6 @@ public class AbilityUtils {
             player = hostCard.getController();
         }
 
-        if (defined.contains("AndSelf")) {
-            cards.add(hostCard);
-            defined = defined.replace("AndSelf", "");
-        }
-
         if (defined.equals("Self")) {
             c = hostCard;
         } else if (defined.equals("CorrectedSelf")) {
@@ -2197,10 +2192,11 @@ public class AbilityUtils {
             return doXMath(i == null ? 0 : i, expr, c, ctb);
         }
 
-        // Count$IfCastInOwnMainPhase.<numMain>.<numNotMain> // 7/10
-        if (sq[0].contains("IfCastInOwnMainPhase")) {
+        // Count$IfCastInOwnMainPhase.<numMain>.<numNotMain>
+        if (sq[0].endsWith("InOwnMainPhase")) {
             final PhaseHandler cPhase = game.getPhaseHandler();
-            final boolean isMyMain = cPhase.getPhase().isMain() && cPhase.isPlayerTurn(player) && c.wasCast();
+            final boolean isMyMain = cPhase.getPhase().isMain() && cPhase.isPlayerTurn(player) &&
+                    (!sq[0].startsWith("IfCast") || c.wasCast());
             return doXMath(Integer.parseInt(sq[isMyMain ? 1 : 2]), expr, c, ctb);
         }
 
@@ -2702,21 +2698,14 @@ public class AbilityUtils {
                 cards = player.getCardsIn(sourceZone);
             }
 
-            int colorOcurrencices = 0;
             byte colorCode;
             if (sq.length > 1) {
                 colorCode = ManaAtom.fromName(sq[1]);
             } else {
                 colorCode = ManaAtom.ALL_MANA_COLORS;
             }
-            for (Card c0 : cards) {
-                for (ManaCostShard sh : c0.getManaCost()) {
-                    if (sh.isColor(colorCode))
-                        colorOcurrencices++;
-                }
-            }
 
-            return doXMath(colorOcurrencices, expr, c, ctb);
+            return doXMath(CardLists.getTotalChroma(cards, colorCode), expr, c, ctb);
         }
 
         if (l[0].contains("ExactManaCost")) {

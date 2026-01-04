@@ -119,7 +119,7 @@ public class ComputerUtilMana {
         return score;
     }
 
-    private static void sortManaAbilities(final Multimap<ManaCostShard, SpellAbility> manaAbilityMap, final SpellAbility sa) {
+    private static void sortManaAbilities(final ListMultimap<ManaCostShard, SpellAbility> manaAbilityMap, final SpellAbility sa) {
         final Map<Card, Integer> manaCardMap = Maps.newHashMap();
         final List<Card> orderedCards = Lists.newArrayList();
 
@@ -132,6 +132,8 @@ public class ComputerUtilMana {
                 }
             }
         }
+
+        // lower value means better choice
         orderedCards.sort(Comparator.comparingInt(manaCardMap::get));
 
         if (DEBUG_MANA_PAYMENT) {
@@ -142,8 +144,25 @@ public class ComputerUtilMana {
             System.out.println();
         }
 
+        String[] colorsMostCommon;
+        if (manaAbilityMap.keySet().stream().anyMatch(ManaCostShard::isGeneric)) {
+            // early tempo is more important so we only look at hand here
+            CardCollection hand = new CardCollection(sa.getActivatingPlayer().getCardsIn(ZoneType.Hand));
+            hand.remove(sa.getHostCard());
+            AiDeckStatistics stats = AiDeckStatistics.fromCards(hand);
+            Integer[] orderedColorsIdx = {0, 1, 2, 3, 4};
+            // order common colors to the front, increases chance AI can play a second spell after
+            Arrays.sort(orderedColorsIdx, Comparator.comparingInt(o -> stats.maxPips[(int) o]).reversed());
+            colorsMostCommon = Arrays.stream(orderedColorsIdx)
+                    .filter(idx -> stats.maxPips[idx] > 0)
+                    .map(idx -> MagicColor.toShortString(MagicColor.WUBRG[idx]))
+                    .toArray(String[]::new);
+        } else {
+            colorsMostCommon = null;
+        }
+
         for (final ManaCostShard shard : manaAbilityMap.keySet()) {
-            final Collection<SpellAbility> abilities = manaAbilityMap.get(shard);
+            final List<SpellAbility> abilities = manaAbilityMap.get(shard);
             final List<SpellAbility> newAbilities = new ArrayList<>(abilities);
 
             if (DEBUG_MANA_PAYMENT) {
@@ -154,6 +173,21 @@ public class ComputerUtilMana {
                 int preOrder = orderedCards.indexOf(ability1.getHostCard()) - orderedCards.indexOf(ability2.getHostCard());
 
                 if (preOrder != 0) {
+                    // if the score is identical (most likely basics) try keep access to more colors longer
+                    if (shard.isGeneric() && manaCardMap.get(ability1.getHostCard()) == manaCardMap.get(ability2.getHostCard())) {
+                        for (String col : colorsMostCommon) {
+                            if (ability1.canProduce(col) && !ability2.canProduce(col)) {
+                                return 1;
+                            }
+                            if (!ability1.canProduce(col) && ability2.canProduce(col)) {
+                                return -1;
+                            }
+                        }
+                    }
+
+                    // sources were previously sorted, so add their index to connect those values to some degree
+                    preOrder += abilities.indexOf(ability1) - abilities.indexOf(ability2);
+
                     return preOrder;
                 }
 
@@ -548,6 +582,8 @@ public class ComputerUtilMana {
     }
 
     public static CardCollection getManaSourcesToPayCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai) {
+        // TODO ManaConvert
+
         CardCollection manaSources = new CardCollection();
 
         adjustManaCostToAvoidNegEffects(cost, sa.getHostCard(), ai);
@@ -587,7 +623,7 @@ public class ComputerUtilMana {
         }
 
         // select which abilities may be used for each shard
-        Multimap<ManaCostShard, SpellAbility> sourcesForShards = groupAndOrderToPayShards(ai, manaAbilityMap, cost);
+        ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = groupAndOrderToPayShards(ai, manaAbilityMap, cost);
 
         sortManaAbilities(sourcesForShards, sa);
 
@@ -724,38 +760,27 @@ public class ComputerUtilMana {
                     saList = sourcesForShards.get(toPay);
                     hasConverge = false;
                 }
+            } else if (sourcesForShards == null && purePhyrexian) {
+                // Phyrexian mana only: no valid mana sources, but can still pay life
+                saList = Lists.newArrayList();
             } else {
-                if (!(sourcesForShards == null && purePhyrexian)) {
-                    saList = sourcesForShards.get(toPay);
-                } else {
-                    saList = Lists.newArrayList(); // Phyrexian mana only: no valid mana sources, but can still pay life
-                }
-            }
-            if (saList == null) {
-                break;
+                saList = sourcesForShards.get(toPay);
             }
 
             saList.removeAll(saExcludeList);
 
             SpellAbility saPayment = saList.isEmpty() ? null : chooseManaAbility(cost, sa, ai, toPay, saList, checkPlayable || !test);
 
-            if (saPayment != null && ComputerUtilCost.isSacrificeSelfCost(saPayment.getPayCosts())) {
-                if (sa.getTargets() != null && sa.getTargets().contains(saPayment.getHostCard())) {
-                    // not a good idea to sac a card that you're targeting with the SA you're paying for
-                    saExcludeList.add(saPayment);
-                    continue;
-                }
+            if (saPayment != null && ComputerUtilCost.isSacrificeSelfCost(saPayment.getPayCosts()) && sa.isTargeting(saPayment.getHostCard())) {
+                // not a good idea to sac a card that you're targeting with the SA you're paying for
+                saExcludeList.add(saPayment);
+                continue;
             }
 
-            if (saPayment != null && saPayment.hasParam("AILogic")) {
-                boolean consider = false;
-                if (saPayment.getParam("AILogic").equals("BlackLotus")) {
-                    consider = SpecialCardAi.BlackLotus.consider(ai, sa, cost);
-                    if (!consider) {
-                        saExcludeList.add(saPayment); // since we checked this already, do not loop indefinitely checking again
-                        continue;
-                    }
-                }
+            if (saPayment != null && "BlackLotus".equals(saPayment.getParam("AILogic")) && !SpecialCardAi.BlackLotus.consider(ai, sa, cost)) {
+                // since we checked this already, do not loop indefinitely checking again
+                saExcludeList.add(saPayment);
+                continue;
             }
 
             if (saPayment == null) {
@@ -1242,7 +1267,7 @@ public class ComputerUtilMana {
             final ManaCostBeingPaid cost) {
         ListMultimap<ManaCostShard, SpellAbility> res = ArrayListMultimap.create();
 
-        if (cost.getGenericManaAmount() > 0 && manaAbilityMap.containsKey(ManaAtom.GENERIC)) {
+        if ((cost.getGenericManaAmount() > 0 || cost.hasAnyKind(ManaAtom.OR_2_GENERIC)) && manaAbilityMap.containsKey(ManaAtom.GENERIC)) {
             res.putAll(ManaCostShard.GENERIC, manaAbilityMap.get(ManaAtom.GENERIC));
         }
 
@@ -1421,7 +1446,6 @@ public class ComputerUtilMana {
         return availableMana;
     }
 
-    //This method is currently used by AI to estimate available mana
     public static CardCollection getAvailableManaSources(final Player ai, final boolean checkPlayable) {
         final CardCollectionView list = CardCollection.combine(ai.getCardsIn(ZoneType.Battlefield), ai.getCardsIn(ZoneType.Hand));
         final List<Card> manaSources = CardLists.filter(list, c -> {
@@ -1432,7 +1456,7 @@ public class ComputerUtilMana {
                 }
             }
             return false;
-        }); // CardListFilter
+        });
 
         final CardCollection sortedManaSources = new CardCollection();
         final CardCollection otherManaSources = new CardCollection();
@@ -1572,7 +1596,6 @@ public class ComputerUtilMana {
         return sortedManaSources;
     }
 
-    //This method is currently used by AI to estimate mana available
     private static ListMultimap<Integer, SpellAbility> groupSourcesByManaColor(final Player ai, boolean checkPlayable) {
         final ListMultimap<Integer, SpellAbility> manaMap = ArrayListMultimap.create();
         final Game game = ai.getGame();

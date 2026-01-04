@@ -2,7 +2,7 @@ Name:Esper Charm
 ManaCost:W U B
 Types:Instant
 A:SP$ Charm | Choices$ DBDestroy,DBDraw,DBDiscard
-SVar:DBDestroy:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment. | SpellDescription$ Destroy target enchantment.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Enchantment | SpellDescription$ Destroy target enchantment.
 SVar:DBDraw:DB$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards.
 SVar:DBDiscard:DB$ Discard | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target player discards two cards.
 Oracle:Choose one —\n• Destroy target enchantment.\n• Draw two cards.\n• Target player discards two cards.
