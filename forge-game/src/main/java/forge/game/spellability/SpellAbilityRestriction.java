@@ -204,24 +204,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
     public final boolean checkZoneRestrictions(final Card c, final SpellAbility sa) {
         final Player activator = sa.getActivatingPlayer();
         final Zone cardZone = c.getLastKnownZone();
-        Card cp = c;
-
-        // for Bestow need to check the animated State
-        if (sa.isSpell() && sa.isBestow()) {
-            // already bestowed or in battlefield, no need to check for spell
-            if (c.isInPlay()) {
-                return false;
-            }
-
-            // if card is lki and bestowed, then do nothing there, it got already animated
-            if (!(c.isLKI() && c.isBestowed())) {
-                if (!c.isLKI()) {
-                    cp = CardCopyService.getLKICopy(c);
-                }
-
-                cp.animateBestow(!cp.isLKI());
-            }
-        }
 
         if (cardZone == null || this.getZone() == null || !cardZone.is(this.getZone())) {
             // If Card is not in the default activating zone, do some additional checks
@@ -268,7 +250,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                     }
 
                     if (params.containsKey("Affected")) {
-                        if (!cp.isValid(params.get("Affected").split(","), activator, o.getHost(), o.getAbility())) {
+                        if (!c.isValid(params.get("Affected").split(","), activator, o.getHost(), o.getAbility())) {
                             return false;
                         }
                     }

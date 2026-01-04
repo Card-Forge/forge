@@ -268,6 +268,8 @@ public final class GameActionUtil {
 
             // reset static abilities
             if (lkicheck) {
+                // unanimate host again
+                sa.undoAlternateHost(newHost);
                 game.getAction().checkStaticAbilities(false);
                 // clear delayed changes, this check should not have updated the view
                 game.getTracker().clearDelayed();
@@ -504,6 +506,7 @@ public final class GameActionUtil {
 
         // reset static abilities
         if (lkicheck) {
+            sa.undoAlternateHost(newHost);
             game.getAction().checkStaticAbilities(false);
             // clear delayed changes, this check should not have updated the view
             game.getTracker().clearDelayed();
@@ -985,14 +988,7 @@ public final class GameActionUtil {
             }
             //for Chorus of the Conclave
             ability.rollback();
-
-            oldCard.setBackSide(false);
-            oldCard.setState(oldCard.getFaceupCardStateName(), true);
-            oldCard.unanimateBestow();
-
-            if (ability.hasParam("Prototype")) {
-                oldCard.removeCloneState(oldCard.getPrototypeTimestamp());
-            }
+            ability.undoAlternateHost(oldCard);
 
             for (Card c : ability.getTappedForConvoke()) {
                 c.setTapped(false);
