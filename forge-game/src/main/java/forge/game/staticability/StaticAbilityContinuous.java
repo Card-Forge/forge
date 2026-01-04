@@ -491,7 +491,7 @@ public final class StaticAbilityContinuous {
 
             if (params.containsKey("IgnoreEffectCost")) {
                 String cost = params.get("IgnoreEffectCost");
-                buildIgnorEffectAbility(stAb, cost, affectedPlayers, affectedCards);
+                buildIgnoreEffectAbility(stAb, cost, affectedPlayers, affectedCards);
             }
         }
 
@@ -940,7 +940,7 @@ public final class StaticAbilityContinuous {
         return addColors;
     }
 
-    private static void buildIgnorEffectAbility(final StaticAbility stAb, final String costString, final List<Player> players, final CardCollectionView cards) {
+    private static void buildIgnoreEffectAbility(final StaticAbility stAb, final String costString, final List<Player> players, final CardCollectionView cards) {
         final List<Player> validActivator = new ArrayList<>(players);
         for (final Card c : cards) {
             validActivator.add(c.getController());
