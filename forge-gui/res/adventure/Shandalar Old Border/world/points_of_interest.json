@@ -4320,5 +4320,105 @@
 			"Boss",
 			"BiomeRed"
 		]
+	},
+	{
+		"name": "ArtificerBazaar",
+		"displayName": "Artificer's Bazaar",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Building143",
+		"map": "../Shandalar Old Border/maps/map/lair/artificer_bazaar.tmx",
+		"radiusFactor": 0.6
+	},
+	{
+		"name": "ArtificerBazaar2",
+		"displayName": "Artificer's Bazaar",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Building143",
+		"map": "../Shandalar Old Border/maps/map/lair/artificer_bazaar2.tmx",
+		"radiusFactor": 0.6
+	},
+	{
+		"name": "ArtificerBazaar3",
+		"displayName": "Artificer's Bazaar",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Building143",
+		"map": "../Shandalar Old Border/maps/map/lair/artificer_bazaar3.tmx",
+		"radiusFactor": 0.6
+	},
+	{
+		"name": "AncientDiamondMine",
+		"displayName": "Ancient Diamond Mine",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../Shandalar Old Border/maps/map/lair/ancient_diamond_mine.tmx",
+		"radiusFactor": 0.6
+	},
+	{
+		"name": "DragonsLairWhite",
+		"displayName": "Dragon's Lair",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../Shandalar Old Border/maps/map/lair/dragons_lair_white.tmx",
+		"radiusFactor": 0.6
+	},
+	{
+		"name": "DragonsLairBlue",
+		"displayName": "Dragon's Lair",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../Shandalar Old Border/maps/map/lair/dragons_lair_blue.tmx",
+		"radiusFactor": 0.6
+	},
+	{
+		"name": "DragonsLairBlack",
+		"displayName": "Dragon's Lair",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../Shandalar Old Border/maps/map/lair/dragons_lair_black.tmx",
+		"radiusFactor": 0.6
+	},
+	{
+		"name": "DragonsLairRed",
+		"displayName": "Dragon's Lair",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../Shandalar Old Border/maps/map/lair/dragons_lair_red.tmx",
+		"radiusFactor": 0.6
+	},
+	{
+		"name": "DragonsLairGreen",
+		"displayName": "Dragon's Lair",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../Shandalar Old Border/maps/map/lair/dragons_lair_green.tmx",
+		"radiusFactor": 0.6
+	},
+	{
+		"name": "RiddlesLair",
+		"displayName": "Sphinx's Sanctum",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../Shandalar Old Border/maps/map/lair/riddles_lair.tmx",
+		"radiusFactor": 0.6
 	}
 ]

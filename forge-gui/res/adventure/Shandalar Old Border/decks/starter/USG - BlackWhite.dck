@@ -3,8 +3,12 @@ Name=The Plague
 [Avatar]
 
 [Main]
-7 Plains|USG|1
-12 Swamp|USG|1
+3 Plains|USG|1
+2 Plains|USG|2
+2 Plains|USG|3
+4 Swamp|USG|1
+4 Swamp|USG|2
+4 Swamp|USG|3
 3 Drifting Meadow|USG|1
 2 Polluted Mire|USG|1
 1 Blood Vassal|USG|1

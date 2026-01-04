@@ -3,6 +3,15 @@ Name=Adventure - Low Simic - 6th Edition Deck A
 [Avatar]
 
 [Main]
+1 Plains|6ED|1
+1 Plains|6ED|2
+1 Plains|6ED|3
+3 Swamp|6ED|1
+2 Swamp|6ED|2
+2 Swamp|6ED|3
+3 Forest|6ED|1
+2 Forest|6ED|2
+2 Forest|6ED|3
 1 Ardent Militia|6ED|1
 1 Blood Pet|6ED|1
 1 Drudge Skeletons|6ED|1
@@ -26,9 +35,6 @@ Name=Adventure - Low Simic - 6th Edition Deck A
 1 Rampant Growth|6ED|1
 1 Obsianus Golem|6ED|1
 1 Rod of Ruin|6ED|1
-7 Forest|6ED|1
-3 Plains|6ED|1
-7 Swamp|6ED|1
 [Sideboard]
 
 [Planes]

@@ -60,7 +60,7 @@
   <object id="81" template="../../../../../../common/maps/obj/waypoint.tx" x="208.885" y="202.527" />
   <object id="101" template="../../../../../../common/maps/obj/treasure.tx" x="224.945" y="57.9992">
    <properties>
-    <property name="reward" value="[{&quot;type&quot;: &quot;randomCard&quot;, &quot;count&quot;: 10 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Dark Armor&quot;}]" />
+    <property name="reward" value="[{&quot;type&quot;: &quot;randomCard&quot;, &quot;count&quot;: 10 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Spine Whip&quot;}]" />
    </properties>
   </object>
   <object id="94" template="../../../../../../common/maps/obj/manashards.tx" x="209.123" y="58.295" />
@@ -94,7 +94,7 @@
   </object>
   <object id="100" template="../../../../../../common/maps/obj/treasure.tx" x="194.105" y="57.4273">
    <properties>
-    <property name="reward" value="[{&quot;type&quot;: &quot;randomCard&quot;, &quot;count&quot;: 10 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Dark Armor&quot;}]" />
+    <property name="reward" value="[{&quot;type&quot;: &quot;randomCard&quot;, &quot;count&quot;: 10 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Spine Whip&quot;}]" />
    </properties>
   </object>
   <object id="102" template="../../../../../../common/maps/obj/gate.tx" x="207.807" y="95.793">

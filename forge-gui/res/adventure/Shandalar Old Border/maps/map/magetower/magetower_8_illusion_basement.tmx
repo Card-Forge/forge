@@ -48,7 +48,7 @@
   </object>
   <object id="71" template="../../../../../../common/maps/obj/treasure.tx" x="210.851" y="46.2797">
    <properties>
-    <property name="reward" value="[{&quot;type&quot;: &quot;randomCard&quot;, &quot;count&quot;: 10 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Dark Armor&quot;}]" />
+    <property name="reward" value="[{&quot;type&quot;: &quot;randomCard&quot;, &quot;count&quot;: 10 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Spine Whip&quot;}]" />
    </properties>
   </object>
   <object id="72" template="../../../../../../common/maps/obj/enemy.tx" x="166.965" y="95.3624">
@@ -90,12 +90,12 @@
   <object id="90" template="../../../../../../common/maps/obj/gold.tx" x="298.045" y="108.066" />
   <object id="91" template="../../../../../../common/maps/obj/treasure.tx" x="303.242" y="143.534">
    <properties>
-    <property name="reward" value="[{&quot;type&quot;: &quot;randomCard&quot;, &quot;count&quot;: 10 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Dark Armor&quot;}]" />
+    <property name="reward" value="[{&quot;type&quot;: &quot;randomCard&quot;, &quot;count&quot;: 10 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Spine Whip&quot;}]" />
    </properties>
   </object>
   <object id="92" template="../../../../../../common/maps/obj/treasure.tx" x="111.775" y="144.778">
    <properties>
-    <property name="reward" value="[{&quot;type&quot;: &quot;randomCard&quot;, &quot;count&quot;: 10 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Dark Armor&quot;}]" />
+    <property name="reward" value="[{&quot;type&quot;: &quot;randomCard&quot;, &quot;count&quot;: 10 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Spine Whip&quot;}]" />
    </properties>
   </object>
   <object id="94" template="../../../../../../common/maps/obj/manashards.tx" x="152.667" y="45" />

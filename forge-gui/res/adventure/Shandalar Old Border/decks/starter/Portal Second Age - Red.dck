@@ -3,6 +3,9 @@ Name=Adventure - Low Gruul - Goblin Fire
 [Avatar]
 
 [Main]
+5 Mountain|PO2|1
+5 Mountain|PO2|2
+5 Mountain|PO2|3
 2 Goblin Cavaliers|PO2|1
 2 Goblin Firestarter|PO2|1
 1 Goblin General|PO2|1
@@ -16,7 +19,6 @@ Name=Adventure - Low Gruul - Goblin Fire
 1 Relentless Assault|PO2|1
 3 Volcanic Hammer|PO2|1
 1 Wildfire|PO2|1
-15 Mountain|PO2|1
 [Sideboard]
 
 [Planes]

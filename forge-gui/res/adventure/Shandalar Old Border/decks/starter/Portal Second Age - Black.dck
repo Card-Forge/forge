@@ -3,6 +3,9 @@ Name=Adventure - Low Rakdos - Nightstalkers
 [Avatar]
 
 [Main]
+5 Swamp|PO2|1
+5 Swamp|PO2|2
+5 Swamp|PO2|3
 2 Abyssal Nightstalker|PO2|1
 2 Brutal Nightstalker|PO2|1
 2 Dakmor Bat|PO2|1
@@ -16,7 +19,6 @@ Name=Adventure - Low Rakdos - Nightstalkers
 2 Hand of Death|PO2|1
 2 Mind Rot|PO2|1
 1 Return of the Nightstalkers|PO2|1
-15 Swamp|PO2|1
 [Sideboard]
 
 [Planes]

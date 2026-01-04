@@ -3,6 +3,15 @@ Name=Adventure - Low Izzet - 6th Edition Deck B
 [Avatar]
 
 [Main]
+2 Plains|6ED|1
+2 Plains|6ED|2
+1 Plains|6ED|3
+2 Island|6ED|1
+2 Island|6ED|2
+2 Island|6ED|3
+2 Mountain|6ED|1
+2 Mountain|6ED|2
+2 Mountain|6ED|3
 1 Air Elemental|6ED|1
 1 Anaba Bodyguard|6ED|1
 1 D'Avenant Archer|6ED|1
@@ -26,9 +35,6 @@ Name=Adventure - Low Izzet - 6th Edition Deck B
 1 Pyrotechnics|6ED|1
 1 Tremor|6ED|1
 1 Mana Prism|6ED|1
-6 Island|6ED|1
-6 Mountain|6ED|1
-5 Plains|6ED|1
 [Sideboard]
 
 [Planes]
