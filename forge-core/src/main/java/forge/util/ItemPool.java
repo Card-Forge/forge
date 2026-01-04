@@ -305,4 +305,22 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
         }
         return filteredPool;
     }
+
+    /**
+     * Returns the items in this pool that exceed the quantity available in the provided super-set.
+     * <p>
+     * For example, if you have a card pool and a deck that must be made using only cards from that pool,
+     * you can call deck.skimOverflow(cardPool), and this will return the entries in the deck which exceed the
+     * available quantity in the pool. Those cards could then be removed from the deck via removeAll, or added
+     * to the pool via addAll.
+     */
+    public ItemPool<T> skimOverflow(ItemPool<T> superSet) {
+        ItemPool<T> out = new ItemPool<>(this.myClass);
+        for(Entry<T, Integer> entry : this.items.entrySet()) {
+            int count = Math.max(0, entry.getValue() - superSet.count(entry.getKey()));
+            if(count > 0)
+                out.add(entry.getKey(), count);
+        }
+        return out;
+    }
 }
