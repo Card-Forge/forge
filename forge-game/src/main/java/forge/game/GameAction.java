@@ -1239,6 +1239,7 @@ public class GameAction {
             affectedPerLayer.get(StaticAbilityLayer.TYPE).forEach(Card::updateTypesForView);
             // setting Basic Land Type case
             affectedKeywords.addAll(affectedPerLayer.get(StaticAbilityLayer.TYPE));
+            affectedPT.addAll(affectedPerLayer.get(StaticAbilityLayer.TYPE));
         }
         if (affectedPerLayer.containsKey(StaticAbilityLayer.ABILITIES)) {
             affectedKeywords.addAll(affectedPerLayer.get(StaticAbilityLayer.ABILITIES));
