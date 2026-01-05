@@ -22,6 +22,8 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.*;
+import java.util.WeakHashMap;
+import javax.swing.Timer;
 
 import com.google.common.collect.Lists;
 
@@ -48,6 +50,10 @@ import forge.view.arcane.util.CardPanelMouseListener;
  */
 public class PlayArea extends CardPanelContainer implements CardPanelMouseListener {
     private static final long serialVersionUID = 8333013579724492513L;
+
+    private static final WeakHashMap<PlayArea, Void> registeredPlayAreas = new WeakHashMap<>();
+    private static Timer animationTimer;
+    private static final int ANIMATION_DELAY_MS = 50; // 20 FPS
 
     private static final int GUTTER_Y = 5;
     private static final int GUTTER_X = 5;
@@ -85,6 +91,14 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         this.zone = zone;
         this.makeTokenRow = FModel.getPreferences().getPrefBoolean(FPref.UI_TOKENS_IN_SEPARATE_ROW);
         this.stackCreatures = FModel.getPreferences().getPrefBoolean(FPref.UI_STACK_CREATURES);
+
+        // Register Battlefield PlayArea for flying animation
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_ANIMATE_FLYING) && ZoneType.Battlefield.equals(zone)) {
+            synchronized (registeredPlayAreas) {
+                registeredPlayAreas.put(this, null);
+                startAnimationTimerIfNeeded();
+            }
+        }
     }
 
     private CardStackRow collectAllLands(List<CardPanel> remainingPanels) {
@@ -949,5 +963,63 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         this.cardSpacingY = Math.round(this.cardHeight * PlayArea.CARD_SPACING_Y);
         this.stackSpacingX = Math.round(this.cardWidth * PlayArea.STACK_SPACING_X);
         this.stackSpacingY = Math.round(this.cardHeight * PlayArea.STACK_SPACING_Y);
+    }
+
+    private static synchronized void startAnimationTimerIfNeeded() {
+        if (animationTimer != null || !FModel.getPreferences().getPrefBoolean(FPref.UI_ANIMATE_FLYING)) {
+            return;
+        }
+        animationTimer = new Timer(ANIMATION_DELAY_MS, e -> updateFlyingAnimationForAllPlayAreas());
+        animationTimer.start();
+    }
+
+    private static synchronized void stopAnimationTimerIfNeeded() {
+        if (animationTimer != null) {
+            animationTimer.stop();
+            animationTimer = null;
+        }
+    }
+
+    static void updateFlyingAnimationForAllPlayAreas() {
+        if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ANIMATE_FLYING)) {
+            synchronized (registeredPlayAreas) {
+                registeredPlayAreas.clear();
+                stopAnimationTimerIfNeeded();
+            }
+            return;
+        }
+
+        List<PlayArea> playAreasToUpdate;
+        synchronized (registeredPlayAreas) {
+            playAreasToUpdate = new ArrayList<>(registeredPlayAreas.keySet());
+        }
+
+        for (PlayArea playArea : playAreasToUpdate) {
+            if (playArea == null || !ZoneType.Battlefield.equals(playArea.zone)) {
+                continue;
+            }
+
+            for (CardPanel panel : playArea.getCardPanels()) {
+                if (!panel.shouldFloat()) {
+                    continue;
+                }
+
+                // Update flying phase
+                panel.flyingPhase += CardPanel.FLYING_SPEED;
+                if (panel.flyingPhase >= CardPanel.FLYING_PHASE_MAX) {
+                    panel.flyingPhase -= CardPanel.FLYING_PHASE_MAX;
+                }
+
+                // Update position using baseY
+                panel.setCardBounds(panel.getCardX(), panel.baseY, panel.getCardWidth(), panel.getCardHeight());
+            }
+        }
+
+        // Check if we should stop timer (no more registered areas)
+        synchronized (registeredPlayAreas) {
+            if (registeredPlayAreas.isEmpty()) {
+                stopAnimationTimerIfNeeded();
+            }
+        }
     }
 }
