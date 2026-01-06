@@ -2932,7 +2932,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 return;
             }
 
-            PaperCard c = carddb.getUniqueByName(f.getName());
+            PaperCard c = carddb.getUniqueByName(f.displayName());
             final Card forgeCard = Card.fromPaperCard(c, p);
             forgeCard.setGameTimestamp(getGame().getNextTimestamp());
 
