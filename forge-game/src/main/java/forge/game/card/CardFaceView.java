@@ -2,41 +2,37 @@ package forge.game.card;
 
 import java.io.Serializable;
 
-public class CardFaceView implements Serializable, Comparable<CardFaceView> {
-    /**
-     *
-     */
+import forge.card.ICardFace;
+import forge.util.CardTranslation;
+import forge.util.ITranslatable;
+
+public record CardFaceView(String name, String displayName) implements Serializable, ITranslatable, Comparable<CardFaceView> {
     private static final long serialVersionUID = 1874016432028306386L;
-    private String displayName;
-    private String oracleName;
 
-    public CardFaceView(String displayName) {
-        this(displayName, displayName);
+    public CardFaceView(ICardFace face) {
+        this(face.getName(), face.getDisplayName());
     }
 
-    public CardFaceView(String displayFaceName, String oracleFaceName ) {
-        this.displayName = displayFaceName;
-        this.oracleName = oracleFaceName;
+    @Override
+    public String getName() {
+        return this.name;
     }
-
-    public String getName() { return displayName;}
-
-    public void setName(String name) {
-        this.displayName = name;
+    @Override
+    public String getTranslatedName() {
+        return CardTranslation.getTranslatedName(this.displayName);
     }
-
-    public String getOracleName() { return oracleName; }
-
-    public void setOracleName(String name) {
-        this.oracleName = name;
-    }
-
+    @Override
     public String toString() {
-        return displayName;
+        return name;
     }
 
     @Override
     public int compareTo(CardFaceView o) {
-        return this.getOracleName().compareTo(o.getOracleName());
+        return this.getName().compareTo(o.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return this.name.hashCode();
     }
 }

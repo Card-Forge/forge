@@ -202,4 +202,6 @@ public class TokenDb implements ITokenDatabase {
     public Iterator<PaperToken> iterator() {
         return allTokenByName.values().iterator();
     }
+
+    public Map<String, CardRules> getRules() { return this.rulesByName;}
 }

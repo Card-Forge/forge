@@ -1,11 +1,11 @@
 package forge.card;
 
 import forge.card.mana.ManaCost;
+import forge.util.IHasName;
 
 import java.util.Set;
 
-public interface ICardCharacteristics {
-    String   getName();
+public interface ICardCharacteristics extends IHasName {
     CardType getType();
     ManaCost getManaCost();
     ColorSet getColor();

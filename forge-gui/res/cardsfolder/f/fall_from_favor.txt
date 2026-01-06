@@ -5,6 +5,6 @@ K:Enchant:Creature
 SVar:AttachAITgts:Card.cmcGE2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters, tap enchanted creature and you become the monarch.
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted | SubAbility$ DBMonarch
-SVar:DBMonarch:DB$ BecomeMonarch | Defined$ You
+SVar:DBMonarch:DB$ BecomeMonarch
 R:Event$ Untap | ValidCard$ Creature.EnchantedBy+ControlledBy EnchantedController.!isMonarch | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Enchanted creature doesn't untap during its controller's untap step unless that player is the monarch.
 Oracle:Enchant creature\nWhen Fall from Favor enters, tap enchanted creature and you become the monarch.\nEnchanted creature doesn't untap during its controller's untap step unless that player is the monarch.

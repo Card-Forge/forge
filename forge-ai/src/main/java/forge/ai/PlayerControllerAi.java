@@ -781,7 +781,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CardCollectionView londonMulliganReturnCards(final Player mulliganingPlayer, int cardsToReturn) {
+    public CardCollectionView tuckCardsViaMulligan(final Player mulliganingPlayer, int cardsToReturn) {
         // TODO This is better than it was before, but still suboptimal (but fast).
         // Maybe score a bunch of hands based on projected hand size and return the "duds"
         CardCollection hand = new CardCollection(player.getCardsIn(ZoneType.Hand));
@@ -1538,30 +1538,6 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public CardState chooseSingleCardState(SpellAbility sa, List<CardState> states, String message, Map<String, Object> params) {
         return SpellApiToAi.Converter.get(sa).chooseCardState(player, sa, states, params);
-    }
-
-    @Override
-    public Card chooseDungeon(Player ai, List<PaperCard> dungeonCards, String message) {
-        // TODO: improve the conditions that define which dungeon is a viable option to choose
-        List<String> dungeonNames = Lists.newArrayList();
-        for (PaperCard pc : dungeonCards) {
-            dungeonNames.add(pc.getName());
-        }
-
-        // Don't choose Tomb of Annihilation when life in danger unless we can win right away or can't lose for 0 life
-        int lifeInDanger = AiProfileUtil.getIntProperty(player, AiProps.AI_IN_DANGER_THRESHOLD);
-        if ((ai.getLife() <= lifeInDanger && !ai.cantLoseForZeroOrLessLife())
-                && !(ai.getLife() > 1 && ai.getWeakestOpponent().getLife() == 1)) {
-            dungeonNames.remove("Tomb of Annihilation");
-        }
-
-        try {
-            // if this fail somehow add fallback to get any from dungeonCards
-            int i = MyRandom.getRandom().nextInt(dungeonNames.size());
-            return Card.fromPaperCard(dungeonCards.get(i), ai);
-        } catch (Exception e) {
-            return Card.fromPaperCard(Aggregates.random(dungeonCards), ai);
-        }
     }
 
     @Override

@@ -335,6 +335,10 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         for (KeywordInterface k : intrinsicKeyword0) {
             intrinsicKeywords.insert(k.copy(card, lki));
         }
+        updateKeywordsCache();
+    }
+
+    public final void updateKeywordsCache() {
         card.updateKeywordsCache(this);
     }
 

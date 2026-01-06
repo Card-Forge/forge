@@ -142,7 +142,6 @@ public final class CardEdition implements Comparable<CardEdition> {
         PRERELEASE_PROMO("prerelease promo"),
         BUNDLE("bundle"),
         BOX_TOPPER("box topper"),
-        DUNGEONS("dungeons"),
         JUMPSTART("jumpstart"),
         REBALANCED("rebalanced"),
         ETERNAL("eternal"),
@@ -273,7 +272,8 @@ public final class CardEdition implements Comparable<CardEdition> {
      * Equivalent to the set code of CardEdition.UNKNOWN
      */
     public static final String UNKNOWN_CODE = "???";
-    public static final CardEdition UNKNOWN = new CardEdition("1990-01-01", UNKNOWN_CODE, "??", Type.UNKNOWN, "Undefined", FoilType.NOT_SUPPORTED, new EditionEntry[]{});
+    public static final String UNKNOWN_SET_NAME = "UNKNOWN";
+    public static final CardEdition UNKNOWN = new CardEdition("1990-01-01", UNKNOWN_CODE, "??", Type.UNKNOWN, UNKNOWN_SET_NAME, FoilType.NOT_SUPPORTED, new EditionEntry[]{});
     private Date date;
     private String code;
     private String code2;

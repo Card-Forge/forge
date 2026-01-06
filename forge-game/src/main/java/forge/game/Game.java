@@ -372,7 +372,6 @@ public class Game {
 
         sbaCheckedCommandList = new ArrayList<>();
 
-        // update players
         view.updatePlayers(this);
 
         subscribeToEvents(gameLog.getEventVisitor());

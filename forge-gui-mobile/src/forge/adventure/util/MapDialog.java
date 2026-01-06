@@ -333,8 +333,8 @@ public class MapDialog {
                 else Current.player().takeGold(-E.addGold);
             }
             if (E.addShards != 0) { //Gives (positive or negative) mana shards to the player.
-                if (E.addShards > 0) Current.player().giveGold(E.addShards);
-                else Current.player().takeGold(-E.addShards);
+                if (E.addShards > 0) Current.player().addShards(E.addShards);
+                else Current.player().takeShards(-E.addShards);
             }
             if (E.addMapReputation != 0) {
                 if (E.POIReference != null && !E.POIReference.isEmpty()) {

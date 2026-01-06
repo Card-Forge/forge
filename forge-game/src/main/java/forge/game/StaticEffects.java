@@ -24,6 +24,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityLayer;
 
@@ -40,12 +41,13 @@ public class StaticEffects {
     // **************** StaticAbility system **************************
     private final Map<StaticAbility, StaticEffect> staticEffects = Maps.newHashMap();
 
-    public final void clearStaticEffects(final Set<Card> affectedCards) {
+    public final void clearStaticEffects(final Set<Card> affectedCards, Map<StaticAbilityLayer, Set<Card>> affectedPerLayer) {
         // remove all static effects
         for (final StaticEffect se : staticEffects.values()) {
-            se.remove().forEach(affectedCards::add);
+            se.remove(affectedPerLayer).forEach(affectedCards::add);
         }
         this.staticEffects.clear();
+        updateCaches(affectedPerLayer);
     }
 
     /**
@@ -79,7 +81,24 @@ public class StaticEffects {
         if (currentEffect == null) {
             return false;
         }
-        currentEffect.remove(Lists.newArrayList(layer));
+        Map<StaticAbilityLayer, Set<Card>> affectedPerLayer = Maps.newHashMap();
+        currentEffect.remove(affectedPerLayer, Lists.newArrayList(layer));
+        updateCaches(affectedPerLayer);
         return true;
+    }
+
+    private void updateCaches(Map<StaticAbilityLayer, Set<Card>> affectedPerLayer) {
+        CardCollection affectedKeywordsBefore = new CardCollection();
+        if (affectedPerLayer.containsKey(StaticAbilityLayer.TEXT)) {
+            affectedKeywordsBefore.addAll(affectedPerLayer.get(StaticAbilityLayer.TEXT));
+        }
+        if (affectedPerLayer.containsKey(StaticAbilityLayer.TYPE)) {
+            // setting Basic Land Type case
+            affectedKeywordsBefore.addAll(affectedPerLayer.get(StaticAbilityLayer.TYPE));
+        }
+        if (affectedPerLayer.containsKey(StaticAbilityLayer.ABILITIES)) {
+            affectedKeywordsBefore.addAll(affectedPerLayer.get(StaticAbilityLayer.ABILITIES));
+        }
+        affectedKeywordsBefore.forEach(Card::updateKeywordsCache);
     }
 }

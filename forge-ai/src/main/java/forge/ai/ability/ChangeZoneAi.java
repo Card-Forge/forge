@@ -321,7 +321,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         }
 
-        Iterable<Player> pDefined = Lists.newArrayList(source.getController());
+        Iterable<Player> pDefined;
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null && tgt.canTgtPlayer()) {
             sa.resetTargets();
@@ -335,12 +335,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
             pDefined = sa.getTargets().getTargetPlayers();
+        } else if (sa.hasParam("DefinedPlayer")) {
+            pDefined = AbilityUtils.getDefinedPlayers(source, sa.getParam("DefinedPlayer"), sa);
         } else {
-            if (sa.hasParam("DefinedPlayer")) {
-                pDefined = AbilityUtils.getDefinedPlayers(source, sa.getParam("DefinedPlayer"), sa);
-            } else {
-                pDefined = AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa);
-            }
+            pDefined = AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa);
         }
 
         String type = sa.getParam("ChangeType");

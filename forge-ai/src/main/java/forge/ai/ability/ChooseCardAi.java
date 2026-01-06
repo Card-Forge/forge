@@ -170,12 +170,12 @@ public class ChooseCardAi extends SpellAbilityAi {
                 ownChoices = CardLists.filter(options, CardPredicates.isControlledByAnyOf(ai.getAllies()));
             }
             choice = ComputerUtilCard.getBestAI(ownChoices);
-        } else if (logic.equals("BestBlocker")) {
+        } else if ("BestBlocker".equals(logic)) {
             if (IterableUtil.any(options, CardPredicates.UNTAPPED)) {
                 options = CardLists.filter(options, CardPredicates.UNTAPPED);
             }
             choice = ComputerUtilCard.getBestCreatureAI(options);
-        } else if (logic.equals("Clone")) {
+        } else if ("Clone".equals(logic)) {
             final String filter = "Permanent.YouDontCtrl,Permanent.nonLegendary";
             CardCollection newOptions = CardLists.getValidCards(options, filter, ctrl, host, sa);
             if (!newOptions.isEmpty()) {
@@ -185,7 +185,7 @@ public class ChooseCardAi extends SpellAbilityAi {
         } else if ("RandomNonLand".equals(logic)) {
             options = CardLists.getValidCards(options, "Card.nonLand", host.getController(), host, sa);
             choice = Aggregates.random(options);
-        } else if (logic.equals("NeedsPrevention")) {
+        } else if ("NeedsPrevention".equals(logic)) {
             final Game game = ai.getGame();
             final Combat combat = game.getCombat();
             CardCollectionView better = CardLists.filter(options, c -> {
@@ -242,7 +242,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             } else {
                 choice = ComputerUtilCard.getWorstPermanentAI(options, false, false, false, false);
             }
-        } else if (logic.equals("Duneblast")) {
+        } else if ("Duneblast".equals(logic)) {
             CardCollectionView aiCreatures = ai.getCreaturesInPlay();
             aiCreatures = CardLists.getNotKeyword(aiCreatures, Keyword.INDESTRUCTIBLE);
 
@@ -252,7 +252,7 @@ public class ChooseCardAi extends SpellAbilityAi {
 
             Card chosen = ComputerUtilCard.getBestCreatureAI(aiCreatures);
             return chosen;
-        } else if (logic.equals("OrzhovAdvokist")) {
+        } else if ("OrzhovAdvokist".equals(logic)) {
             if (ai.equals(sa.getActivatingPlayer()) || // who cares if you can't attack yourself
                     (ai.getOpponents().size() > 1 && // if there is another opponent good to attack, take the counters
                     !AiAttackController.choosePreferredDefenderPlayer(ai).equals(sa.getActivatingPlayer()))) {
@@ -260,7 +260,7 @@ public class ChooseCardAi extends SpellAbilityAi {
                 // TODO: would also be nice to take the counters if not in a good position to attack anyway
                 //  – might also be good to do a separate AI for Noble Heritage
             }
-        } else if (logic.equals("Phylactery")) {
+        } else if ("Phylactery".equals(logic)) {
             CardCollection aiArtifacts = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.ARTIFACTS);
             CardCollection indestructibles = CardLists.filter(aiArtifacts, CardPredicates.hasKeyword(Keyword.INDESTRUCTIBLE));
             CardCollection nonCreatures = CardLists.filter(aiArtifacts, CardPredicates.NON_CREATURES);
@@ -276,7 +276,7 @@ public class ChooseCardAi extends SpellAbilityAi {
                 // Choose the best (hopefully the fattest, whatever) creature so that hopefully it won't die too easily
                 choice = ComputerUtilCard.getBestAI(creatures);
             }
-        } else if (logic.equals("NextTurnAttacker")) {
+        } else if ("NextTurnAttacker".equals(logic)) {
             choice = ComputerUtilCard.getBestCreatureToAttackNextTurnAI(ai, options);
         } else {
             choice = ComputerUtilCard.getBestAI(options);

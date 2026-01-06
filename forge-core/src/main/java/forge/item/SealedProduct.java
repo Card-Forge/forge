@@ -101,7 +101,6 @@ public abstract class SealedProduct implements InventoryItemFromSet {
 
     protected List<PaperCard> generate() {
         return BoosterGenerator.getBoosterPack(contents);
-
     }
 
     protected PaperCard getRandomBasicLand(final String setCode) {

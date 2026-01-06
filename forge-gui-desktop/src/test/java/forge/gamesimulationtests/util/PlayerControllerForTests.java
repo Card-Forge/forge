@@ -328,7 +328,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public CardCollectionView londonMulliganReturnCards(final Player mulliganingPlayer, int cardsToReturn) {
+    public CardCollectionView tuckCardsViaMulligan(final Player mulliganingPlayer, int cardsToReturn) {
         CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
         return hand;
     }
@@ -763,12 +763,6 @@ public class PlayerControllerForTests extends PlayerController {
 
     @Override
     public CardState chooseSingleCardState(SpellAbility sa, List<CardState> states, String message, Map<String, Object> params) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Card chooseDungeon(Player player, List<PaperCard> dungeonCards, String message) {
         // TODO Auto-generated method stub
         return null;
     }

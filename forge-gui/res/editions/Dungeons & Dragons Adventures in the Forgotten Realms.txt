@@ -447,11 +447,6 @@ A-233 R A-Sorcerer Class @Alexander Mokhov
 A-237 R A-Triumphant Adventurer @Alexander Mokhov
 A-255 R A-Dungeon Descent @Kasia 'Kafis' Zielińska
 
-[dungeons]
-20 Dungeon of the Mad Mage
-21 Lost Mine of Phandelver
-22 Tomb of Annihilation
-
 [tokens]
 1 w_3_3_angel_flying @Irina Nordsol
 2 icingdeath_frost_tongue @Kieran Yanner
@@ -468,12 +463,12 @@ A-255 R A-Dungeon Descent @Kasia 'Kafis' Zielińska
 13 guenhwyvar @Brian Valeza
 14 g_2_2_wolf @Daren Bader
 15 c_a_treasure_sac @Dan Murayama Scott
+20 dungeon_of_the_mad_mage
+21 lost_mine_of_phandelver
+22 tomb_of_annihilation
 
 [other]
 16 emblem_ellywick_tumblestrum @Anna Steinbauer
 17 emblem_lolth_spider_queen @Tyler Jacobson
 18 emblem_mordenkainen @Ryan Pancoast
 19 emblem_zariel_archduke_of_avernus @Heonhwa Choe
-20 Dungeon of the Mad Mage
-21 Lost Mine of Phandelver
-22 Tomb of Annihilation

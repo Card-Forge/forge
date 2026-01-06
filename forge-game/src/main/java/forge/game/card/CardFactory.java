@@ -256,7 +256,7 @@ public class CardFactory {
         card.setState(CardStateName.Original, false);
         // need to update keyword cache for original spell
         if (card.isSplitCard()) {
-            card.updateKeywordsCache(card.getCurrentState());
+            card.updateKeywordsCache();
         }
 
         // ******************************************************************

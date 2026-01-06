@@ -136,7 +136,27 @@ ScryfallCode=SPG
 122 M Nexus of Fate @Gaboleps
 123 M Paradox Haze @Stephen Andrade
 124 M Darkness @Wojtek Łebski
-125 R Magus of the Moon @David Robert Hovey
+125 M Magus of the Moon @David Robert Hovey
 126 M Burgeoning @Stephen Andrade
 127 M Green Sun's Zenith @Warren Mahy
-128 R Sliver Overlord @James Bousema
+128 M Sliver Overlord @James Bousema
+129 M Idyllic Tutor @Ryan Riller
+130 M Kinsbaile Cavalier @Nathanna Erica
+131 M Mistbind Clique @Justin Hernandez & Alexis Hernandez
+132 M Wanderwine Prophets @Nathanna Erica
+133 M Bitterblossom @Harry Conway
+134 M Faerie Macabre @Nathanna Erica
+135 M Goblin Chieftain @Nathanna Erica
+136 M Goblin Sharpshooter @Harry Conway
+137 M Heat Shimmer @Justin Hernandez & Alexis Hernandez
+138 M Devoted Druid @Ryan Riller
+139 M Helix Pinnacle @Nathanna Erica
+140 M Leaf-Crowned Visionary @Ryan Riller
+141 M Regal Force @Nathanna Erica
+142 M Manamorphose @Harry Conway
+143 M Risen Reef @Nathanna Erica
+144 M Slippery Bogle @Raphael Oda
+145 M Dolmen Gate @Justin Hernandez & Alexis Hernandez
+146 M Door of Destinies @Serena Malyon
+147 M Painter's Servant @Ryan Riller
+148 M Thousand-Year Elixir @Raphael Oda

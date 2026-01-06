@@ -15,7 +15,7 @@ Syntax definitions like the above will use different symbols to separate the var
 - curly brackets to denote the type of a parameter
 
 >*NOTE:*
-> - these factories are refactored from time to time (often to adapt to new sets), so while some entries could be slightly outdated, the base information should still be correct
+> - these factories are refactored from time to time (often to adapt to new mechanics), so while some entries could be slightly outdated, the base information should still be correct
 > - when in doubt you can always cross-check with the [available APIs](https://github.com/Card-Forge/forge/tree/master/forge-game/src/main/java/forge/game/ability/effects) code
 > - a few factories also have _*All_ variants, these are slowly being phased out
 > - some parameters are only added for very exotic cards, these won't be included here to keep the focus on understanding the general concepts of scripting
@@ -27,7 +27,7 @@ Syntax definitions like the above will use different symbols to separate the var
 ## Cost / UnlessCost
 `Cost$ {AbilityCost}` is the appropriate way to set the cost of the ability. Currently for spells, any additional costs including the original Mana cost need to appear in the Cost param in the AbilityFactory. For each card that uses it, the order in which the cost is paid will always be the same.
 
-Secondary abilities such as the DB executed by triggers or replacements (usually) don't need costs. (This is one reason to use DB over AB in these cases.)
+Secondary abilities such as those executed by triggers or replacements (usually) don't need costs. (This is one reason to use DB over AB in these cases.)
 
 Read more about it in [Costs](Costs.md)
 
@@ -305,6 +305,8 @@ Parameters:
 
 ## Fight
 
+## FlipACoin
+
 ## Fog
 This AF is based on the original *Fog* spell: "Prevent all combat damage that would be dealt this turn." While this could be done with an Effect, the specialized nature of the AI gives it its own AF.
 
@@ -406,7 +408,7 @@ SVar:DBExchange:DB$ ExchangeControl | Defined$ ParentTarget | ValidTgts$ Land.Op
 ```
 
 ## Regenerate
-Regenerate is for creating regeneration shields.
+Creating regeneration shields.
 
 ## Reveal
 
@@ -468,7 +470,7 @@ The trigger-specific params are defined in [Triggers](Triggers.md).
 
 ### ImmediateTrigger
 Parameters:
-- `TriggerAmount$ {Integer}`
+- `TriggerAmount$ {Integer}` (Default: 1)
 
 ## Turn structure
 
