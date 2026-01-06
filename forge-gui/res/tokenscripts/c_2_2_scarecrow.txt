@@ -1,0 +1,5 @@
+Name:Scarecrow
+ImageName:c_2_2_scarecrow
+Color:Colorless
+Types:Artifact Creature Scarecrow
+PT:2/2
