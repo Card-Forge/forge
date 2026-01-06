@@ -7,4 +7,4 @@ ScryfallCode=ECC
 
 [cards]
 1 M Ashling, the Limitless @Kai Carpenter
-2 M Auntie Ool, Cursewretch @
+2 M Auntie Ool, Cursewretch @Daniel Zrom
