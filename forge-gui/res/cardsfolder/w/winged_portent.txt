@@ -1,8 +1,9 @@
 Name:Winged Portent
 ManaCost:1 U U
 Types:Instant
-A:SP$ Draw | NumCards$ X | SpellDescription$ Draw a card for each creature [with flying] you control.
-A:SP$ Draw | Cost$ 4 G U | NumCards$ Y | PrecostDesc$ Cleave | CostDesc$ {4}{G}{U} | NonBasicSpell$ True | SpellDescription$ (You may cast this spell for its cleave cost. If you do, remove the words in square brackets.)
-SVar:X:Count$Valid Creature.withFlying+YouCtrl
-SVar:Y:Count$Valid Creature.YouCtrl
+K:Cleave:4 G U
+A:SP$ Draw | NumCards$ Z | SpellDescription$ Draw a card for each creature [with flying] you control.
+SVar:X:Count$Valid Creature.YouCtrl
+SVar:Y:Count$Valid Creature.withFlying+YouCtrl
+SVar:Z:Count$Cleave.X.Y
 Oracle:Cleave {4}{G}{U} (You may cast this spell for its cleave cost. If you do, remove the words in square brackets.)\nDraw a card for each creature [with flying] you control.
