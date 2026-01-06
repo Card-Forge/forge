@@ -1141,6 +1141,7 @@ public class MapStage extends GameStage {
         }
         GameHUD.getInstance().playerIdle();
         dialogButtonMap.clear();
+        Forge.advFreezePlayerControls = true;
         for (int i = 0; i < dialog.getButtonTable().getCells().size; i++) {
             dialogButtonMap.add((TextraButton) dialog.getButtonTable().getCells().get(i).getActor());
         }
@@ -1153,8 +1154,6 @@ public class MapStage extends GameStage {
             dialogStage.setKeyboardFocus(dialogButtonMap.first());
         }
     }
-
-
 
     public void resetPosition() {
         if (positions.peek() != null){

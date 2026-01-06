@@ -262,6 +262,7 @@ public class MapDialog {
             }
         } else {
             stage.hideDialog();
+            emitDialogFinished();
             return false;
         }
     }
@@ -276,6 +277,8 @@ public class MapDialog {
     }
 
     private void emitDialogFinished(){
+        // Unfreeze player controls when dialog is finished
+        Forge.advFreezePlayerControls = false;
         if (dialogCompleteList != null && dialogCompleteList.size() > 0) {
             ChangeListener.ChangeEvent evt = new ChangeListener.ChangeEvent();
             for (ChangeListener listener : dialogCompleteList) {
