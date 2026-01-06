@@ -1,4 +1,4 @@
-Name:Disrupter of Currents
+Name:Disruptor of Currents
 ManaCost:3 U U
 Types:Creature Merfolk Wizard
 PT:3/3
