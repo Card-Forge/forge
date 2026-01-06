@@ -17,8 +17,7 @@ ManaCost:no cost
 Colors:green
 Types:Legendary Creature Kithkin Soldier
 PT:3/2
-A:AB$ Mana | Cost$ T | Produced$ G  | Amount$ X | SpellDescription$ Add X {G}, where X is the number of other creatures you control.
-A:AB$ Mana | Cost$ T | Produced$ W  | Amount$ X | SpellDescription$ Add X {W}, where X is the number of other creatures you control.
+A:AB$ Mana | Cost$ T | Produced$ Combo G W | Each$ X | SpellDescription$ Add X {G} or X {W}, where X is the number of other creatures you control.
 T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of your first main phase, you may pay {W}. If you do, transform NICKNAME.
 SVar:TrigTransform:AB$ SetState | Cost$ W | Defined$ Self | Mode$ Transform
 SVar:X:Count$Valid Creature.Other+YouCtrl

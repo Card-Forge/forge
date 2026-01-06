@@ -544,10 +544,8 @@ public class EffectAi extends SpellAbilityAi {
                     if (subAbility.getTargets().contains(host)) {
                         return true;
                     }
-                } else {
-                    if (AbilityUtils.getDefinedObjects(subAbility.getHostCard(), subAbility.getParam("Defined"), subAbility).contains(host)) {
-                        return true;
-                    }
+                } else if (AbilityUtils.getDefinedObjects(subAbility.getHostCard(), subAbility.getParam("Defined"), subAbility).contains(host)) {
+                    return true;
                 }
 
                 if (CardUtil.getRadiance(subAbility).contains(host)) {
@@ -603,10 +601,8 @@ public class EffectAi extends SpellAbilityAi {
                     if (subAbility.getTargets().contains(host)) {
                         targeting = true;
                     }
-                } else {
-                    if (AbilityUtils.getDefinedObjects(subAbility.getHostCard(), subAbility.getParam("Defined"), subAbility).contains(host)) {
-                        targeting = true;
-                    }
+                } else if (AbilityUtils.getDefinedObjects(subAbility.getHostCard(), subAbility.getParam("Defined"), subAbility).contains(host)) {
+                    targeting = true;
                 }
 
                 for (Card source : definedSources) {
