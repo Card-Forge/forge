@@ -304,8 +304,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         options = options.replace(ct.getName(), "");
                     }
                     for (CounterType ct : typesToAdd) {
-                        if (obj instanceof Player) {
-                            ((Player) obj).addCounter(ct, counterAmount, placer, table);
+                        if (obj instanceof Player p) {
+                            p.addCounter(ct, counterAmount, placer, table);
                         }
                         if (obj instanceof Card) {
                             if (etbcounter) {
@@ -367,8 +367,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
                                 counterAmount = remaining;
                             }
                         }
-                        if (obj instanceof Player) {
-                            ((Player) obj).addCounter(ct, counterAmount, placer, table);
+                        if (obj instanceof Player p) {
+                            p.addCounter(ct, counterAmount, placer, table);
                         }
                         if (obj instanceof Card) {
                             if (etbcounter) {
@@ -393,8 +393,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
 
                     if (eachExistingCounter) {
                         for (CounterType ct : choices) {
-                            if (obj instanceof Player) {
-                                ((Player) obj).addCounter(ct, counterAmount, placer, table);
+                            if (obj instanceof Player p) {
+                                p.addCounter(ct, counterAmount, placer, table);
                             }
                             if (obj instanceof Card) {
                                 gameCard.addCounter(ct, counterAmount, placer, table);
@@ -600,8 +600,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 counterMapValue = Integer.valueOf(sa.getParam("CounterMapValues"));
             }
             @SuppressWarnings("unchecked")
-            Map<CounterType, Integer> counterMap = (Map<CounterType, Integer>) sa
-                    .getTriggeringObject(AbilityKey.CounterMap);
+            Map<CounterType, Integer> counterMap = (Map<CounterType, Integer>) sa.getTriggeringObject(AbilityKey.CounterMap);
             for (Map.Entry<CounterType, Integer> e : counterMap.entrySet()) {
                 resolvePerType(sa, placer, e.getKey(), counterMapValue == null ? e.getValue() : counterMapValue, table, false);
             }

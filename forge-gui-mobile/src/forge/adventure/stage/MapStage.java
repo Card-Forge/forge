@@ -63,7 +63,7 @@ public class MapStage extends GameStage {
     private boolean isLoadingMatch = false;
     private boolean isPlayerLeavingDungeon = false;
     //private HashMap<String, Byte> mapFlags = new HashMap<>(); //Stores local map flags. These aren't available outside this map.
-
+    private boolean mustClearOnExit = false;
 
     //Map properties.
     //These maps are defined as embedded properties within the Tiled maps.
@@ -81,8 +81,6 @@ public class MapStage extends GameStage {
     float collisionWidthMod = 0.4f;
     float defaultSpriteSize = 16f;
     float navMapSize =  defaultSpriteSize * collisionWidthMod;
-
-
 
     public boolean canEscape() {
         return !preventEscape;
@@ -761,6 +759,11 @@ public class MapStage extends GameStage {
     }
 
     public boolean exitDungeon(boolean defeated, boolean defeatedByBoss) {
+        if (mustClearOnExit) {
+            mustClearOnExit = false;
+            changes.clearDeletedObjects();
+        }
+
         AdventureQuestController.instance().updateQuestsLeave();
         clearIsInMap();
         AdventureQuestController.instance().showQuestDialogs(this);
@@ -1082,6 +1085,7 @@ public class MapStage extends GameStage {
     }
 
     boolean started = false;
+    
     public void beginDuel(EnemySprite mob) {
         if (mob == null) return;
         mob.clearCollisionHeight();
@@ -1250,5 +1254,9 @@ public class MapStage extends GameStage {
                 return;
             }
         }
+    }
+
+    public void clearOnExit() {
+        mustClearOnExit = true;
     }
 }

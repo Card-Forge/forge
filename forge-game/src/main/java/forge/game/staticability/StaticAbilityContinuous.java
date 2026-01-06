@@ -491,7 +491,7 @@ public final class StaticAbilityContinuous {
 
             if (params.containsKey("IgnoreEffectCost")) {
                 String cost = params.get("IgnoreEffectCost");
-                buildIgnorEffectAbility(stAb, cost, affectedPlayers, affectedCards);
+                buildIgnoreEffectAbility(stAb, cost, affectedPlayers, affectedCards);
             }
         }
 
@@ -713,9 +713,12 @@ public final class StaticAbilityContinuous {
 
                     newKeywords.removeIf(input -> {
                         // replace one Keyword with list of keywords
-                        if (input.startsWith("Protection") && input.contains("CardColors")) {
+                        if (input.contains("CardColors") || input.contains("cardColors")) {
                             for (MagicColor.Color color : affectedCard.getColor()) {
-                                extraKeywords.add(input.replace("CardColors", color.getName()));
+                                extraKeywords.add(
+                                    input.replaceAll("CardColors", StringUtils.capitalize(color.getName()))
+                                        .replaceAll("cardColors", color.getName())
+                                    );
                             }
                             return true;
                         }
@@ -940,7 +943,7 @@ public final class StaticAbilityContinuous {
         return addColors;
     }
 
-    private static void buildIgnorEffectAbility(final StaticAbility stAb, final String costString, final List<Player> players, final CardCollectionView cards) {
+    private static void buildIgnoreEffectAbility(final StaticAbility stAb, final String costString, final List<Player> players, final CardCollectionView cards) {
         final List<Player> validActivator = new ArrayList<>(players);
         for (final Card c : cards) {
             validActivator.add(c.getController());
