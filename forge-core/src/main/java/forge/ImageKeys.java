@@ -431,20 +431,58 @@ public final class ImageKeys {
                 if (!aliasSet.isEmpty())
                     editionAlias.put(setFolder, aliasSet);
             }
-            editionHasImage = FileUtil.isDirectoryWithFiles(CACHE_CARD_PICS_DIR + setFolder);
+            // Build list of all folders that contain images for this set
+            // This handles mixed setups where images may be split across legacy (Code2),
+            // modern code, and alias folders (e.g., some in DS/, some in DST/)
+            List<String> foldersWithImages = new ArrayList<>();
+
+            // Check Code2 folder first (legacy - highest priority for duplicates)
+            if (FileUtil.isDirectoryWithFiles(CACHE_CARD_PICS_DIR + setFolder)) {
+                foldersWithImages.add(setFolder);
+            }
+
+            // Check modern code and alias folders
+            if (ed != null) {
+                String code = ed.getCode();
+                if (code != null && !code.equalsIgnoreCase(setFolder)) {
+                    if (FileUtil.isDirectoryWithFiles(CACHE_CARD_PICS_DIR + code)) {
+                        foldersWithImages.add(code);
+                    }
+                }
+                String alias = ed.getAlias();
+                if (alias != null && !alias.equalsIgnoreCase(setFolder)
+                        && (code == null || !alias.equalsIgnoreCase(code))) {
+                    if (FileUtil.isDirectoryWithFiles(CACHE_CARD_PICS_DIR + alias)) {
+                        foldersWithImages.add(alias);
+                    }
+                }
+            }
+
+            editionHasImage = !foldersWithImages.isEmpty();
             editionImageLookup.put(pc.getEdition(), editionHasImage);
             if (editionHasImage) {
-                File f = new File(CACHE_CARD_PICS_DIR + setFolder);  // no need to check this, otherwise editionHasImage would be false!
                 HashSet<String> setFolderContent = new HashSet<>();
-                for (String filename : Arrays.asList(f.list())) {
-                    // TODO: should this use FILE_EXTENSIONS ?
-                    if (!filename.endsWith(".jpg") && !filename.endsWith(".png"))
-                        continue;  // not image - not interested
-                    setFolderContent.add(filename.split("\\.")[0]);  // get rid of any full or fullborder
-                    //preload cachedCards at startUp
-                    String key = setFolder + "/" + filename.replace(".fullborder", ".full").replace(".jpg", "").replace(".png", "");
-                    File value = new File(CACHE_CARD_PICS_DIR + setFolder + "/" + filename);
-                    cachedCards.put(key, value);
+                // Process all folders, merging their contents
+                // First folder in list wins for duplicates (legacy Code2 has priority)
+                for (String folder : foldersWithImages) {
+                    File f = new File(CACHE_CARD_PICS_DIR + folder);
+                    String[] files = f.list();
+                    if (files == null) continue;
+                    for (String filename : files) {
+                        // TODO: should this use FILE_EXTENSIONS ?
+                        if (!filename.endsWith(".jpg") && !filename.endsWith(".png"))
+                            continue;  // not image - not interested
+                        String cardName = filename.split("\\.")[0];  // get rid of any full or fullborder
+                        setFolderContent.add(cardName);
+                        //preload cachedCards at startUp
+                        // Use setFolder in key (for lookup) but actual folder in path
+                        String key = setFolder + "/" + filename.replace(".fullborder", ".full").replace(".jpg", "").replace(".png", "");
+                        // Only cache if not already present (first folder wins)
+                        if (!cachedCards.containsKey(key)) {
+                            File value = new File(CACHE_CARD_PICS_DIR + folder + "/" + filename);
+                            cachedCards.put(key, value);
+                        }
+                    }
                 }
                 cachedContent.put(setFolder, setFolderContent);
             }
