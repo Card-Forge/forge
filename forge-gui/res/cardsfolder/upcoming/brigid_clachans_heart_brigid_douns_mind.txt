@@ -4,7 +4,7 @@ Types:Legendary Creature Kithkin Warrior
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever this creature enters or transforms into CARDNAME, create a 1/1 green and white Kithkin creature token.
 T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever this creature enters or transforms into CARDNAME, create a 1/1 green and white Kithkin creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ gw_1_1_kithkin | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenScript$ gw_1_1_kithkin
 T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of your first main phase, you may pay {G}. If you do, transform NICKNAME.
 SVar:TrigTransform:AB$ SetState | Cost$ G | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
