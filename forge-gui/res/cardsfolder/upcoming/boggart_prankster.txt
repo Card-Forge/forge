@@ -1,0 +1,7 @@
+Name:Boggart Prankster
+ManaCost:1 B
+Types:Creature Goblin Warrior
+PT:1/1
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, target attacking Goblin you control gets +1/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Goblin.attacking+YouCtrl | TgtPrompt$ Select target attacking Goblin you control | NumAtt$ +1
+Oracle:Whenever you attack, target attacking Goblin you control gets +1/+0 until end of turn.
