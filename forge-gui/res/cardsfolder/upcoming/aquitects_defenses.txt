@@ -1,6 +1,7 @@
 Name:Aquitect's Defenses
 ManaCost:1 U
 Types:Enchantment Aura
+K:Flash
 K:Enchant:Creature.YouCtrl:creature you control
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerDescription$ When this Aura enters, enchanted creature gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)
 SVar:TrigPump:DB$ Pump | Defined$ Enchanted | KW$ Hexproof
