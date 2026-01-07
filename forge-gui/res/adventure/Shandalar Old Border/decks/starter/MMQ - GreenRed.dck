@@ -3,8 +3,12 @@ Name=Deepwood Menace
 [Avatar]
 
 [Main]
-11 Forest|MMQ|1
-13 Mountain|MMQ|1
+5 Mountain|MMQ|1
+4 Mountain|MMQ|2
+4 Mountain|MMQ|3
+4 Forest|MMQ|1
+4 Forest|MMQ|2
+3 Forest|MMQ|3
 1 Battle Squadron|MMQ|1
 2 Cinder Elemental|MMQ|1
 2 Deepwood Drummer|MMQ|1
