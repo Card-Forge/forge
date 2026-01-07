@@ -1776,6 +1776,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public List<AbilitySub> chooseModeForAbility(final SpellAbility sa, List<AbilitySub> possible, final int min, final int num,
                                                  boolean allowRepeat) {
+        if (min == num) {
+            return possible;
+        }
         boolean trackerFrozen = getGame().getTracker().isFrozen();
         if (trackerFrozen) {
             // The view tracker needs to be unfrozen to update the SpellAbilityViews at this point, or it may crash

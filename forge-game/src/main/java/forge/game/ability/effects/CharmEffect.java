@@ -212,6 +212,12 @@ public class CharmEffect extends SpellAbilityEffect {
 
         List<AbilitySub> choices = makePossibleOptions(sa);
 
+        // Entwine does use all Choices
+        if (sa.isEntwine()) {
+            chainAbilities(sa, choices);
+            return true;
+        }
+
         final Card source = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
 
@@ -225,11 +231,6 @@ public class CharmEffect extends SpellAbilityEffect {
                 return false;
             }
             num = Math.min(num, choices.size());
-            // Entwine does use all Choices
-            if (sa.isEntwine() || (num == min && num == choices.size())) {
-                chainAbilities(sa, choices);
-                return true;
-            }
         }
 
         boolean isOptional = sa.hasParam("Optional");
