@@ -1,0 +1,8 @@
+Name:Explosive Prodigy
+ManaCost:1 R
+Types:Creature Elemental Sorcerer
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Vivid — When this creature enters, it deals X damage to target creature an opponent controls, where X is the number of colors among permanents you control.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumDmg$ X
+SVar:X:Count$Valid Permanent.YouCtrl$Colors
+Oracle:Vivid — When this creature enters, it deals X damage to target creature an opponent controls, where X is the number of colors among permanents you control.
