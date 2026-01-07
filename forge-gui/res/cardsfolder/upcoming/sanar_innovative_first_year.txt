@@ -4,11 +4,11 @@ Types:Legendary Creature Goblin Sorcerer
 PT:2/4
 T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDigUntil | TriggerDescription$ Vivid — At the beginning of your first main phase, reveal cards from the top of your library until you reveal X nonland cards, where X is the number of colors among permanents you control. For each of those colors, you may exile a card of that color from among the revealed cards. Then shuffle. You may cast the exiled cards this turn.
 SVar:DBDigUntil:DB$ DigUntil | Amount$ X | Valid$ Card.nonLand | ValidDescription$ nonland card | RevealedDestination$ Library | RememberRevealed$ True | SubAbility$ DBExileW
-SVar:DBExileW:DB$ ChangeZone | ChooseFromDefined$ Remembered | Destination$ Exile | ChangeType$ Card.White+IsRemembered | ConditionCheckSVar$ HaveW | Imprint$ True | LockInText$ True | SubAbility$ DBExileU
-SVar:DBExileU:DB$ ChangeZone | ChooseFromDefined$ Remembered | Destination$ Exile | ChangeType$ Card.Blue+IsRemembered | ConditionCheckSVar$ HaveU | Imprint$ True | LockInText$ True | SubAbility$ DBExileB
-SVar:DBExileB:DB$ ChangeZone | ChooseFromDefined$ Remembered | Destination$ Exile | ChangeType$ Card.Black+IsRemembered | ConditionCheckSVar$ HaveB | Imprint$ True | LockInText$ True | SubAbility$ DBExileR
-SVar:DBExileR:DB$ ChangeZone | ChooseFromDefined$ Remembered | Destination$ Exile | ChangeType$ Card.Red+IsRemembered | ConditionCheckSVar$ HaveR | Imprint$ True | LockInText$ True | SubAbility$ DBExileG
-SVar:DBExileG:DB$ ChangeZone | ChooseFromDefined$ Remembered | Destination$ Exile | ChangeType$ Card.Green+IsRemembered | ConditionCheckSVar$ HaveG | Imprint$ True | LockInText$ True | SubAbility$ DBShuffle
+SVar:DBExileW:DB$ ChangeZone | ChooseFromDefined$ Remembered.White | Destination$ Exile | ConditionCheckSVar$ HaveW | Imprint$ True | LockInText$ True | ForgetChanged$ True | SubAbility$ DBExileU
+SVar:DBExileU:DB$ ChangeZone | ChooseFromDefined$ Remembered.Blue | Destination$ Exile | ConditionCheckSVar$ HaveU | Imprint$ True | LockInText$ True | ForgetChanged$ True | SubAbility$ DBExileB
+SVar:DBExileB:DB$ ChangeZone | ChooseFromDefined$ Remembered.Black | Destination$ Exile | ConditionCheckSVar$ HaveB | Imprint$ True | LockInText$ True | ForgetChanged$ True | SubAbility$ DBExileR
+SVar:DBExileR:DB$ ChangeZone | ChooseFromDefined$ Remembered.Red | Destination$ Exile | ConditionCheckSVar$ HaveR | Imprint$ True | LockInText$ True | ForgetChanged$ True | SubAbility$ DBExileG
+SVar:DBExileG:DB$ ChangeZone | ChooseFromDefined$ Remembered.Green | Destination$ Exile | ConditionCheckSVar$ HaveG | Imprint$ True | LockInText$ True | ForgetChanged$ True | SubAbility$ DBShuffle
 SVar:DBShuffle:DB$ Shuffle | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ Imprinted | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.nonLand+IsRemembered | AffectedZone$ Exile | Description$ You may cast the exiled cards this turn.
