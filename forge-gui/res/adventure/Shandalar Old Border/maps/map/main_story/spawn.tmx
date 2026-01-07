@@ -265,7 +265,7 @@
                                                 "text": "Developer's Note: This is the last of the story prompts. Once you are satisfied with facing the final challenges and whatever else, you may start over or try new game+ where you keep cards and items but nothing else.",
                                                 "options": [
                                                     {
-                                                        "name": "(Chapter 1 complete)"
+                                                        "name": "Congratulations on reaching the final chapter!"
                                                     }
                                                 ]
                                             }

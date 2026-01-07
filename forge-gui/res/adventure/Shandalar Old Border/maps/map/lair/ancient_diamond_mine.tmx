@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="54">
+ <editorsettings>
+  <export target="ancient_diamond_mine.tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzz42Rg8BvFo3gUj+JRPIpH8YjAAAvyrVM=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxz42RgcBvFo3gE4lUcDAyrgXgNB33tfAqkQcCVjn59BsQrOSD2Puakr789oP4FgeVAO18MgJ+9oGFPDz8jxzEorEFsLzqHMz3DGjmc6Rm/IOzOSf+8hBzW9IhXWtgLAD1zph0=
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="282" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="10575" x="197.5" y="138.75" width="16" height="16">
+   <properties>
+    <property name="hidden" type="bool" value="false"/>
+    <property name="dialog">[
+  {
+    "text": "Before you stands an ancient crystalline formation, pulsing with primordial mana. The diamonds here are remnants of Shandalar's earliest age, and can be exchanged for spells from the dawn of magic itself.",
+    "options": [
+      {
+        "name": "Trade 10,000 Gold for Beta Pack",
+        "condition": [
+          { "hasGold": 10000 }
+        ],
+        "text": "The crystals shimmer and absorb your gold. In exchange, ancient spells materialize before you - cards from the Beta era of magic!",
+        "action": [
+          {
+            "addGold": -10000,
+            "grantRewards": [
+              { "type": "randomCard", "sourceDeck": "decks/custom_lists/LEB_List.dck", "rarity": ["R"], "count": 1 },
+              { "type": "randomCard", "sourceDeck": "decks/custom_lists/LEB_List.dck", "rarity": ["U"], "count": 3 },
+              { "type": "randomCard", "sourceDeck": "decks/custom_lists/LEB_List.dck", "rarity": ["C"], "count": 11 }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Trade 10,000 Gold for Beta Pack",
+        "condition": [
+          { "hasGold": 10000, "not": true }
+        ],
+        "text": "You don't have enough gold. The ancient diamonds require 10,000 gold to activate."
+      },
+      {
+        "name": "Trade 400 Shards for Beta Pack",
+        "condition": [
+          { "hasShards": 400 }
+        ],
+        "text": "The crystals shimmer and absorb your mana shards. In exchange, ancient spells materialize before you - cards from the Beta era of magic!",
+        "action": [
+          {
+            "addShards": -400,
+            "grantRewards": [
+              { "type": "randomCard", "sourceDeck": "decks/custom_lists/LEB_List.dck", "rarity": ["R"], "count": 1 },
+              { "type": "randomCard", "sourceDeck": "decks/custom_lists/LEB_List.dck", "rarity": ["U"], "count": 3 },
+              { "type": "randomCard", "sourceDeck": "decks/custom_lists/LEB_List.dck", "rarity": ["C"], "count": 11 }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Trade 400 Shards for Beta Pack",
+        "condition": [
+          { "hasShards": 400, "not": true }
+        ],
+        "text": "You don't have enough mana shards. The ancient diamonds require 400 shards to activate."
+      },
+      {
+        "name": "Leave",
+        "text": ""
+      }
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
