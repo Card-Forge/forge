@@ -1,0 +1,9 @@
+Name:Rhys, the Evermore
+ManaCost:1 W
+Types:Legendary Creature Elf Warrior
+PT:2/2
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When Rhys enters, another target creature you control gains persist until end of turn. (When it dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | KW$ Persist
+A:AB$ RemoveCounter | Cost$ W T | ValidTgts$ Creature.YouCtrl | CounterType$ Any | CounterNum$ Any | SorcerySpeed$ True | SpellDescription$ Remove any number of counters from target creature you control. Activate only as a sorcery.
+Oracle:Flash\nWhen Rhys enters, another target creature you control gains persist until end of turn. (When it dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)\n{W}, {T}: Remove any number of counters from target creature you control. Activate only as a sorcery.
