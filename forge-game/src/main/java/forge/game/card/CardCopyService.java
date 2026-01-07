@@ -374,7 +374,7 @@ public class CardCopyService {
 
         // update keyword cache on all states
         for (CardStateName s : newCopy.getStates()) {
-            newCopy.updateKeywordsCache(newCopy.getState(s));
+            newCopy.getState(s).updateKeywordsCache();
         }
 
         if (copyFrom.getCastSA() != null) {

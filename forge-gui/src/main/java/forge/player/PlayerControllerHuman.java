@@ -2920,25 +2920,22 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
             final CardDb carddb = FModel.getMagicDb().getCommonCards();
 
-            List<CardFaceView> choices = new ArrayList<>();
-            CardFaceView cardFaceView;
-            for (ICardFace cardFace : carddb.getAllFaces()) {
-                cardFaceView = new CardFaceView(CardTranslation.getTranslatedName(cardFace.getDisplayName()), cardFace.getName());
-                choices.add(cardFaceView);
+            final CardFaceView f;
+            if (repeatLast) {
+                f = lastAdded;
+            } else {
+                List<CardFaceView> choices = carddb.getAllFaces().stream().map(CardFaceView::new).collect(Collectors.toList());
+                Collections.sort(choices);
+                f = getGui().oneOrNone(localizer.getMessage("lblNameTheCard"), choices);
             }
-            Collections.sort(choices);
-
-            // use standard forge's list selection dialog
-            final CardFaceView f = repeatLast ? lastAdded : getGui().oneOrNone(localizer.getMessage("lblNameTheCard"), choices);
             if (f == null) {
                 return;
             }
 
-            PaperCard c = carddb.getUniqueByName(f.getName());
+            PaperCard c = carddb.getUniqueByName(f.displayName());
             final Card forgeCard = Card.fromPaperCard(c, p);
             forgeCard.setGameTimestamp(getGame().getNextTimestamp());
 
-            PaperCard finalC = c;
             getGame().getAction().invoke(() -> {
                 if (targetZone == ZoneType.Battlefield) {
                     if (!forgeCard.getName().equals(f.getName())) {
@@ -2978,7 +2975,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                             return;
                         }
                     } else {
-                        if (finalC.getRules().getType().isLand()) {
+                        if (c.getRules().getType().isLand()) {
                             // this is needed to ensure land abilities fire
                             getGame().getAction().moveToHand(forgeCard, null);
                             getGame().getAction().moveToPlay(forgeCard, null, null);

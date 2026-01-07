@@ -7,4 +7,178 @@ ScryfallCode=ECC
 
 [cards]
 1 M Ashling, the Limitless @Kai Carpenter
-2 M Auntie Ool, Cursewretch @
+2 M Auntie Ool, Cursewretch @Daniel Zrom
+3 M Mass of Mysteries @Jeff Miracola
+4 M The Reaper, King No More @Zack Stella
+5 R Belonging @Danny Schwartz
+6 R Subterfuge @Ilse Gort
+7 R Aberrant Return @Aaron Miller
+8 R Eventide's Shadow @Jabari Weathers
+9 R Grave Venerations @Omar Rayyan
+10 R Lamentation @Lars Grant-West
+11 R Oft-Nabbed Goat @Mariah Tekulve
+12 R Sinister Gnarlbark @Olivier Bernard
+13 R Impulsivity @Alex Konstad
+14 R Village Pillagers @Paolo Parente
+15 R Elemental Spectacle @Aldo Domínguez
+16 R Ferrafor, Young Yew @Jesper Ejsing
+17 R Jubilation @Vincent Christiaens
+18 R Puca's Covenant @Daria Aksenova
+19 R Springleaf Parade @Cory Godbey
+20 R Dread Tiller @Steven Belledin
+21 R Wickersmith's Tools @Paolo Parente
+22 R Abundant Countryside @Iris Compiet
+23 R Rain-Slicked Copse @Adam Paquette
+24 R Sodden Verdure @Raymond Bonilla
+25 R Belonging @Danny Schwartz
+26 R Subterfuge @Ilse Gort
+27 R Aberrant Return @Aaron Miller
+28 R Eventide's Shadow @Jabari Weathers
+29 R Grave Venerations @Omar Rayyan
+30 R Lamentation @Lars Grant-West
+31 R Oft-Nabbed Goat @Mariah Tekulve
+32 R Sinister Gnarlbark @Olivier Bernard
+33 R Impulsivity @Alex Konstad
+34 R Village Pillagers @Paolo Parente
+35 R Elemental Spectacle @Aldo Domínguez
+36 R Ferrafor, Young Yew @Jesper Ejsing
+37 R Jubilation @Vincent Christiaens
+38 R Puca's Covenant @Daria Aksenova
+39 R Springleaf Parade @Cory Godbey
+40 R Dread Tiller @Steven Belledin
+41 R Wickersmith's Tools @Paolo Parente
+42 R Abundant Countryside @Iris Compiet
+43 R Rain-Slicked Copse @Adam Paquette
+44 R Sodden Verdure @Raymond Bonilla
+45 C Distant Melody @Warren Mahy
+46 U Blowfly Infestation @Caio Monteiro
+47 U Hoarder's Greed @Mariah Tekulve
+48 R Necroskitter @Thomas M. Baxa
+49 M Tree of Perdition @Iris Compiet
+50 M Fury @Victor Adame Minguez
+51 M Endurance @Paolo Parente
+52 R Ignoble Hierarch @Victor Adame Minguez
+53 R Faeburrow Elder @Mark Zug
+54 U Fire Covenant @Jeff Miracola
+55 U Arcane Signet @Raymond Bonilla
+56 U Arcane Signet @Alessandra Pisano
+57 U Sol Ring @Daria Aksenova
+58 U Sol Ring @Daria Aksenova
+59 C Command Tower @Ron Spears
+60 C Command Tower @Randy Gallegos
+61 R Festering Thicket @Zoltan Boros
+62 U Secluded Courtyard @Alayna Danner
+63 R Vernal Fen @Adam Paquette
+64 R Hoofprints of the Stag @Anthony S. Waters
+65 U Path to Exile @Todd Lockwood
+66 R Shatter the Sky @Bayard Wu
+67 U Mulldrifter @Eric Fortune
+68 U Reality Shift @Howard Lyon
+69 R Slithermuse @Steven Belledin
+70 R Archfiend of Ifnir @Seb McKinnon
+71 R Black Sun's Zenith @Daniel Ljunggren
+72 R Carnifex Demon @Aleksi Briclot
+73 R Dusk Urchins @Darrell Riche
+74 M Grave Titan @Nils Hamm
+75 M Haunting Voyage @Ryan Yee
+76 U Incremental Blight @Chuck Lukacs
+77 U Infernal Grasp @Naomi Baker
+78 M Liliana, Death Wielder @Clint Cearley
+79 M Massacre Girl, Known Killer @Billy Christian
+80 R Midnight Banshee @Daarken
+81 C Night's Whisper @John Severin Brassell
+82 R Painful Truths @Winona Nelson
+83 R Persist @Milivoj Ćeran
+84 R Puppeteer Clique @Daren Bader
+85 U Shriekmaw @Steve Prescott
+86 U Skinrender @David Rapoza
+87 U Soul Snuffers @Izzy
+88 M Vraska, Betrayal's Sting @Chase Stone
+89 R Blasphemous Act @Daarken
+90 U Cathartic Pyre @Ryan Yee
+91 C Cathartic Reunion @Jakub Kasper
+92 R Chain Reaction @Trevor Claxton
+93 R Descendants' Fury @Aldo Domínguez
+94 U Incandescent Soulstoke @Todd Lockwood
+95 C Ingot Chewer @Kev Walker
+96 C Smokebraider @Anthony S. Waters
+97 C Abundant Growth @Vincent Proce
+98 M Avenger of Zendikar @Zoltan Boros
+99 R Bane of Progress @Lars Grant-West
+100 M Cavalier of Thorns @Jehan Choo
+101 R Channeler Initiate @Yongjae Choi
+102 R Cream of the Crop @Howard Lyon
+103 C Cultivate @Anthony Palumbo
+104 U Devoted Druid @Kimonas Theodossiou
+105 U Evolution Sage @Simon Dominic
+106 C Fertile Ground @Heather Hudson
+107 U Flourishing Defenses @Dan Murayama Scott
+108 U Foundation Breaker @Yeong-Hao Han
+109 U Garruk's Uprising @Wisnu Tan
+110 M Greenwarden of Murasa @Eric Deschamps
+111 U Harmonize @Dan Murayama Scott
+112 R Kindred Summons @Ryan Pancoast
+113 C Kodama's Reach @John Avon
+114 R Realmwalker @Zack Stella
+115 R Return of the Wildspeaker @Chris Rallis
+116 M Selvala, Heart of the Wilds @Tyler Jacobson
+117 M Titan of Industry @Lucas Staniec
+118 C Wickerbough Elder @Jesper Ejsing
+119 R Assassin's Trophy @Dmitry Burmak
+120 U Binding the Old Gods @Victor Adame Minguez
+121 R Everlasting Torment @Richard Kane Ferguson
+122 R Glissa Sunslayer @Krharts
+123 R Hapatra, Vizier of Poisons @Tyler Jacobson
+124 R Horde of Notions @Adam Rex
+125 R Jegantha, the Wellspring @Chris Rahn
+126 U Kulrath Knight @Daarken
+127 R Maelstrom Wanderer @Victor Adame Minguez
+128 M Muldrotha, the Gravetide @Jason Rainville
+129 M Omnath, Locus of Rage @Brad Rigney
+130 M Omnath, Locus of the Roil @Lius Lasahido
+131 U Putrefy @Igor Kieryluk
+132 U Risen Reef @Johan Grenier
+133 M The Scorpion God @Lius Lasahido
+134 C Terminate @Wayne Reynolds
+135 R Vernal Sovereign @Aaron Miller
+136 M Yarok, the Desecrated @Daarken
+137 M Chimil, the Inner Sun @Adam Paquette
+138 R Chromatic Lantern @Jung Park
+139 C Commander's Sphere @Ryan Alexander Lee
+140 U Contagion Clasp @Anthony Palumbo
+141 U Fellwar Stone @John Avon
+142 R Grim Poppet @Kev Walker
+143 M Timeless Lotus @Lindsey Look
+144 U Ancient Ziggurat @John Avon
+145 R Canyon Slough @Titus Lunter
+146 R Cinder Glade @Adam Paquette
+147 R Dragonskull Summit @Jon Foster
+148 R Exotic Orchard @Steven Belledin
+149 R Flamekin Village @Ron Spears
+150 U Frontier Bivouac @Andrea Piparo
+151 U Golgari Rot Farm @John Avon
+152 U Gruul Turf @John Avon
+153 U Ifnir Deadlands @Jonas De Ro
+154 U Jungle Shrine @Wayne Reynolds
+155 R Nesting Grounds @Yeong-Hao Han
+156 C Opal Palace @John Avon
+157 U Opulent Palace @Sergey Glushakov
+158 C Path of Ancestry @Alayna Danner
+159 R Primal Beyond @Mark Tedin
+160 R Raging Ravine @Todd Lockwood
+161 U Rakdos Carnarium @John Avon
+162 C Riveteers Overlook @Lucas Staniec
+163 R Rootbound Crag @Grzegorz Rutkowski
+164 U Sandsteppe Citadel @Diego Gisbert
+165 U Savage Lands @Vance Kovacs
+166 U Seaside Citadel @Volkan Baǵa
+167 R Sheltered Thicket @Sung Choi
+168 R Smoldering Marsh @Adam Paquette
+169 C Terramorphic Expanse @Alayna Danner
+170 C Thriving Bluff @Johannes Voss
+171 C Thriving Grove @Ravenna Tran
+172 C Thriving Heath @Alayna Danner
+173 C Thriving Isle @Jonas De Ro
+174 C Thriving Moor @Titus Lunter
+175 U Unclaimed Territory @Dimitar Marinski
+176 R Woodland Cemetery @Lars Grant-West
