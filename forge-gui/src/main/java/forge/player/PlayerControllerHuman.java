@@ -1776,7 +1776,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public List<AbilitySub> chooseModeForAbility(final SpellAbility sa, List<AbilitySub> possible, final int min, final int num,
                                                  boolean allowRepeat) {
-        if (min == num) {
+        if (min == num && num == possible.size()) {
             return possible;
         }
         boolean trackerFrozen = getGame().getTracker().isFrozen();
