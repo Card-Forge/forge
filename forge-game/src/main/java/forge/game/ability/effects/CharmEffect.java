@@ -207,16 +207,10 @@ public class CharmEffect extends SpellAbilityEffect {
             return true;
         }
 
-        //this resets all previous choices
+        // reset all previous choices
         sa.setSubAbility(null);
 
         List<AbilitySub> choices = makePossibleOptions(sa);
-
-        // Entwine does use all Choices
-        if (sa.isEntwine()) {
-            chainAbilities(sa, choices);
-            return true;
-        }
 
         final Card source = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
@@ -225,12 +219,17 @@ public class CharmEffect extends SpellAbilityEffect {
         int num = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("CharmNum", "1"), sa);
         final int min = sa.hasParam("MinCharmNum") ? AbilityUtils.calculateAmount(source, sa.getParam("MinCharmNum"), sa) : num;
 
-        // if the amount of choices is smaller than min then they can't be chosen
         if (!canRepeat) {
+            // not enough choices
             if (min > choices.size()) {
                 return false;
             }
             num = Math.min(num, choices.size());
+            // Entwine does use all Choices
+            if (sa.isEntwine() || num == min) {
+                chainAbilities(sa, choices);
+                return true;
+            }
         }
 
         boolean isOptional = sa.hasParam("Optional");

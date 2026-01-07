@@ -546,8 +546,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
     }
     public boolean isOptionalCostPaid(OptionalCost cost) {
-        SpellAbility saRoot = getRootAbility();
-        return saRoot.optionalCosts.contains(cost);
+        return getRootAbility().optionalCosts.contains(cost);
     }
 
     public boolean isSpell() { return false; }
