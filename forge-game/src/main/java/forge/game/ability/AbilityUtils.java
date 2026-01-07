@@ -3117,7 +3117,6 @@ public class AbilityUtils {
         }
 
         final CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
-
         if (hand.isEmpty()) {
             return sa;
         }
@@ -3140,7 +3139,6 @@ public class AbilityUtils {
         }
 
         final List<Card> choosen = player.getController().chooseCardsForSplice(sa, splices);
-
         if (choosen.isEmpty()) {
             return sa;
         }

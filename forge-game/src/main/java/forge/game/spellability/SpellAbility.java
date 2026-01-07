@@ -1648,9 +1648,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public CardCollection getSplicedCards() {
         return splicedCards;
     }
-    public void setSplicedCards(CardCollection splicedCards0) {
-        splicedCards = splicedCards0;
-    }
     public void addSplicedCards(Card splicedCard) {
         if (splicedCards == null) {
             splicedCards = new CardCollection();
