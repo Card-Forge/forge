@@ -987,6 +987,12 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         return PaymentDecision.card(inp.getSelected());
     }
 
+
+    @Override
+    public PaymentDecision visit(final CostBeholdExile cost) {
+        return this.visit((CostBehold) cost);
+    }
+
     @Override
     public PaymentDecision visit(final CostRevealChosen cost) {
         return PaymentDecision.number(1);

@@ -1,0 +1,6 @@
+Name:Sodden Verdure
+ManaCost:no cost
+Types:Land Forest Island
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ This land enters tapped unless you control two or more basic lands.
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Land.Basic+YouCtrl | ConditionCompare$ LE1
+Oracle:({T}: Add {G} or {U}.)\nThis land enters tapped unless you control two or more basic lands.
