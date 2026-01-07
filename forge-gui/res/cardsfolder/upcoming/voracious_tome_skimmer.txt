@@ -1,0 +1,8 @@
+Name:Voracious Tome-Skimmer
+ManaCost:UB UB UB
+Types:Creature Faerie Rogue
+PT:2/3
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OpponentTurn$ True | Execute$ TrigDraw | TriggerDescription$ Whenever you cast a spell during an opponent's turn, you may pay 1 life. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ PayLife<1> | NumCards$ 1
+Oracle:Flying\nWhenever you cast a spell during an opponent's turn, you may pay 1 life. If you do, draw a card.
