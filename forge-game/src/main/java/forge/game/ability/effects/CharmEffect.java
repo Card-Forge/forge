@@ -226,7 +226,7 @@ public class CharmEffect extends SpellAbilityEffect {
             }
             num = Math.min(num, choices.size());
             // Entwine does use all Choices
-            if (sa.isEntwine() || num == min) {
+            if (sa.isEntwine() || (num == min && num == choices.size())) {
                 chainAbilities(sa, choices);
                 return true;
             }
