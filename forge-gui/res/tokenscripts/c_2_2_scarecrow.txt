@@ -1,5 +1,5 @@
-Name:Scarecrow
-ImageName:c_2_2_scarecrow
-Color:Colorless
+Name:Scarecrow Token
+ManaCost:no cost
 Types:Artifact Creature Scarecrow
 PT:2/2
+Oracle:
