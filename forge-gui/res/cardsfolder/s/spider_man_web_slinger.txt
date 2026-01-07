@@ -1,0 +1,8 @@
+Name:Spider-Man, Web-Slinger
+Variant:UniversesWithin:FlavorName:Darval, Whose Web Protects
+ManaCost:2 W
+Types:Legendary Creature Spider Human Hero
+PT:3/3
+K:Web-slinging:W
+Oracle:Web-slinging {W} (You may cast this spell for {W} if you also return a tapped creature you control to its owner's hand.)
+

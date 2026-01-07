@@ -1,0 +1,12 @@
+[metadata]
+Code=LMAR
+Date=2025-09-30
+Name=Marvel Legends Series Inserts
+Type=Promo
+ScryfallCode=LMAR
+
+[cards]
+1 M Anti-Venom, Horrifying Healer @Lordigan
+2 R Spectacular Spider-Man @Alex Horley-Orlandelli
+3 R Huntmaster of the Fells @Mark Spears ${"flavorName": "Colonel John Jameson // Man-Wolf"}
+4 R Iron Spider, Stark Upgrade @Bachzim

@@ -96,8 +96,6 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
                 PerpetualManaCost p = new PerpetualManaCost(timestamp, manaCost);
                 c.addPerpetual(p);
                 p.applyEffect(c);
-            } else {
-                c.addChangedManaCost(manaCost, timestamp, (long) 0);
             }
         }
         
@@ -138,7 +136,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             if (perpetual) {
                 c.addPerpetual(new PerpetualColors(timestamp, colors, overwrite));
             }
-            c.addColor(colors, !overwrite, timestamp, 0, false);
+            c.addColor(colors, !overwrite, timestamp, null);
         }
 
         if (sa.hasParam("LeaveBattlefield")) {

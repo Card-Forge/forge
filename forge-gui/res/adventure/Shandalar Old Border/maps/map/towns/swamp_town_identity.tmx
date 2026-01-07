@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="54">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyL4GZgiBjFo3gUj+JRPIpH8YjAAH23xTs=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJydVUtSg0AQ7QUkBCsnMH42uo0eQC8UPcKQFPfws9Rz6BY9gpp4D+0m82qaZkBwqrpggOnX7/VjppgRFT5+JkQ0DXMdxznRV0b1OOT776z9zZafHfG7D76e5vE8D5z/0WDc8fx+2swj+eW68zkxBHuhYmcwbV3IdcVxnTWfxWp3fL+eUWssE6LLpP1c6pF1pcGTHKXKjzpLo8fGY5UKV7AufOTck4NJmCNQC/SQ3KjFzYJ2de55s2dbpSnWLD3WW9IfUktMB8vBaoQa7aj+wOvDFl7gVms73/sAPo31UOs6FBfYWncZZynReRq4Sy8t/lBdY/HM627SfdymIecL37/6ufP/pnh/o7Qfo6uN947+CrdPz88pD68V7xXX9fRPvrq/0kvtH/Gu8HPmfx3r37GcoS9qsP6ufJ/GcEZfZY3FFR1P8rB/dnmr8jUP0Rt48FAV+Zec2ZeAC2+B90rl6cMWTO1ZfI864CV7Tuh+Fx37CTgMwYSeMd9aXJwhen+0AxzQvxgmOCw8D2gYO1/1t12YMe5dfo3h2/NV6vgFXcroBg==
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYKAcNPJSJk9tQG/7KAUNQPc6MDEwLGYkDzsxkW5nPTSM7hKpdxE3JptYvTCA7Mc6ZoiYpyFCHsT+rM7A8EUdvzmk2gtSb63FwGCjhVuNPjtx5hALGpDSID6zzyLJGeswMJjoYLLJ8S/MbFxmIturj4NNib24zES29xyQPZkNgvM4KLc3B2hGLhAbsSP4MPZZHG4AAVi4kGsvTD/IPph/LqDZa8CO6kcQgIULufZiS1dn0eyFuckQS1hTEs4gc0BhC/IXiEa3F9k96GUbLO+Tai8MgOwH+QEW3yC/5SKFPcyPpPoPHdQw4y9zsfmNFP/VkVFP3YXaS6nfALctVQs=
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBg8oIZ3oF0w8GAxIyqmF/DUQsXX1RkYbqhT3x55oNkKWhB20wDE9x0dwmrEgWokdDDZlAB8ZupxUm7+cACUhjUu/Rc0yDezhYI0+oYCe6npDnqDeiq4Febf5iHk76EEAI3DEUk=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="208" y="272"/>
+  <object id="41" template="../../../../../../common/maps/obj/shop.tx" x="129" y="146">
+   <properties>
+    <property name="commonShopList" value="Black1,Black2"/>
+   </properties>
+  </object>
+  <object id="42" template="../../../../../../common/maps/obj/shop.tx" x="177" y="145">
+   <properties>
+    <property name="commonShopList" value="ColorRandomBlack"/>
+   </properties>
+  </object>
+  <object id="47" template="../../../../../../common/maps/obj/inn.tx" x="230" y="98"/>
+  <object id="48" template="../../../../../../common/maps/obj/shop.tx" x="336" y="80">
+   <properties>
+    <property name="commonShopList" value="Swamp"/>
+   </properties>
+  </object>
+  <object id="49" template="../../../../../../common/maps/obj/quest.tx" x="95" y="114" width="36" height="16">
+   <properties>
+    <property name="questtype" value="swamp_town_identity"/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../../../common/maps/obj/shardtrader.tx" x="288" y="82"/>
+ </objectgroup>
+</map>

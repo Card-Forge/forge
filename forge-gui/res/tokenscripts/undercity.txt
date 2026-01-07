@@ -1,0 +1,18 @@
+Name:Undercity
+ManaCost:no cost
+Types:Dungeon Undercity
+K:You can't enter this dungeon unless you "venture into Undercity".
+K:Dungeon:Entrance,Forge,Well,Trap,Arena,Stash,Archives,Catacombs,Throne
+SVar:Entrance:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeTypeDesc$ basic land | RoomName$ Secret Entrance | NextRoom$ Forge,Well | SpellDescription$ Search your library for a basic land card, reveal it, put it into your hand, then shuffle.
+SVar:Forge:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 2 | RoomName$ Forge | NextRoom$ Trap,Arena | SpellDescription$ Put two +1/+1 counters on target creature.
+SVar:Well:DB$ Scry | ScryNum$ 2 | RoomName$ Lost Well | NextRoom$ Arena,Stash | SpellDescription$ Scry 2.
+SVar:Trap:DB$ LoseLife | ValidTgts$ Player | LifeAmount$ 5 | RoomName$ Trap! | NextRoom$ Archives | SpellDescription$ Target player loses 5 life.
+SVar:Arena:DB$ Goad | ValidTgts$ Creature | RoomName$ Arena | NextRoom$ Archives,Catacombs | SpellDescription$ Goad target creature.
+SVar:Stash:DB$ Token | TokenScript$ c_a_treasure_sac | RoomName$ Stash | NextRoom$ Catacombs | SpellDescription$ Create a Treasure token.
+SVar:Archives:DB$ Draw | RoomName$ Archive | NextRoom$ Throne | SpellDescription$ Draw a card.
+SVar:Catacombs:DB$ Token | TokenScript$ b_4_1_skeleton_menace | RoomName$ Catacombs | NextRoom$ Throne | SpellDescription$ Create a 4/1 black Skeleton creature token with menace.
+SVar:Throne:DB$ Dig | DigNum$ 10 | Reveal$ True | ChangeValid$ Creature | DestinationZone$ Battlefield | WithCounters$ P1P1 | WithCountersAmount$ 3 | RememberChanged$ True | LibraryPosition2$ 0 | SkipReorder$ True | SubAbility$ DBPump | RoomName$ Throne of the Dead Three | SpellDescription$ Reveal the top ten cards of your library. Put a creature card from among them onto the battlefield with three +1/+1 counters on it. It gains hexproof until your next turn. Then shuffle.
+SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Hexproof | Duration$ UntilYourNextTurn | SubAbility$ DBShuffle
+SVar:DBShuffle:DB$ Shuffle | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:You can't enter this dungeon unless you "venture into Undercity".\nSecret Entrance — Search your library for a basic land card, reveal it, put it into your hand, then shuffle. (Leads to: Forge, Lost Well)\nForge — Put two +1/+1 counters on target creature. (Leads to: Trap!, Arena)\nLost Well — Scry 2. (Leads to: Arena, Stash)\nTrap! — Target player loses 5 life. (Leads to: Archives)\nArena — Goad target creature. (Leads to: Archives, Catacombs)\nStash — Create a Treasure token. (Leads to: Catacombs)\nArchives — Draw a card. (Leads to: Throne of the Dead Three)\nCatacombs — Create a 4/1 black Skeleton creature token with menace. (Leads to: Throne of the Dead Three)\nThrone of the Dead Three — Reveal the top ten cards of your library. Put a creature card from among them onto the battlefield with three +1/+1 counters on it. It gains hexproof until your next turn. Then shuffle.

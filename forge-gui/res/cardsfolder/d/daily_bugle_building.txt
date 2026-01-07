@@ -1,0 +1,9 @@
+Name:Daily Bugle Building
+Variant:UniversesWithin:FlavorName:Fearsome Ridgeline
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ 1 T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+A:AB$ Pump | PrecostDesc$ Smear Campaign — | Cost$ 1 T | ValidTgts$ Creature.Legendary | TgtPrompt$ Select target legendary creature | KW$ Menace | SorcerySpeed$ True | SpellDescription$ Target legendary creature gains menace until end of turn. Activate only as a sorcery.
+DeckHints:Type$Legendary
+Oracle:{T}: Add {C}.\n{1}, {T}: Add one mana of any color.\nSmear Campaign — {1}, {T}: Target legendary creature gains menace until end of turn. Activate only as a sorcery.

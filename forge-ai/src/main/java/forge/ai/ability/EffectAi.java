@@ -270,7 +270,7 @@ public class EffectAi extends SpellAbilityAi {
                 }
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if (logic.equals("Fight")) {
-                return FightAi.canFightAi(ai, sa, 0,0);
+                return FightAi.canFight(ai, sa, 0,0);
             } else if (logic.equals("Pump")) {
                 sa.resetTargets();
                 List<Card> options = CardUtil.getValidCardsToTarget(sa);
@@ -332,7 +332,7 @@ public class EffectAi extends SpellAbilityAi {
             } else if (logic.equals("CantRegenerate")) {
                 if (sa.usesTargeting()) {
                     CardCollection list = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
-                    list = CardLists.filter(list, CardPredicates.CAN_BE_DESTROYED, input -> {
+                    list = CardLists.filter(list, Card::canBeDestroyed, input -> {
                         Map<AbilityKey, Object> runParams = AbilityKey.mapFromAffected(input);
                         runParams.put(AbilityKey.Regeneration, true);
                         List<ReplacementEffect> repDestroyList = game.getReplacementHandler().getReplacementList(ReplacementType.Destroy, runParams, ReplacementLayer.Other);
@@ -544,10 +544,8 @@ public class EffectAi extends SpellAbilityAi {
                     if (subAbility.getTargets().contains(host)) {
                         return true;
                     }
-                } else {
-                    if (AbilityUtils.getDefinedObjects(subAbility.getHostCard(), subAbility.getParam("Defined"), subAbility).contains(host)) {
-                        return true;
-                    }
+                } else if (AbilityUtils.getDefinedObjects(subAbility.getHostCard(), subAbility.getParam("Defined"), subAbility).contains(host)) {
+                    return true;
                 }
 
                 if (CardUtil.getRadiance(subAbility).contains(host)) {
@@ -603,10 +601,8 @@ public class EffectAi extends SpellAbilityAi {
                     if (subAbility.getTargets().contains(host)) {
                         targeting = true;
                     }
-                } else {
-                    if (AbilityUtils.getDefinedObjects(subAbility.getHostCard(), subAbility.getParam("Defined"), subAbility).contains(host)) {
-                        targeting = true;
-                    }
+                } else if (AbilityUtils.getDefinedObjects(subAbility.getHostCard(), subAbility.getParam("Defined"), subAbility).contains(host)) {
+                    targeting = true;
                 }
 
                 for (Card source : definedSources) {
@@ -640,7 +636,7 @@ public class EffectAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+    public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         final String aiLogic = sa.getParam("UnlessAI");
         if ("WillAttack".equals(aiLogic)) {
             // TODO use AiController::getPredictedCombat
@@ -651,6 +647,6 @@ public class EffectAi extends SpellAbilityAi {
                 return false;
             }
         }
-        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
+        return super.willPayUnlessCost(payer, sa, cost, alreadyPaid, payers);
     }
 }

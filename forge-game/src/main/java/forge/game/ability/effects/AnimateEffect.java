@@ -323,8 +323,6 @@ public class AnimateEffect extends AnimateEffectBase {
                 sb.append("until your next upkeep");
             } else if ("UntilYourNextTurn".equals(duration)) {
                 sb.append("until your next turn");
-            } else if ("UntilControllerNextUntap".equals(duration)) {
-                sb.append("until its controller's next untap step");
             } else {
                 sb.append("until end of turn");
             }

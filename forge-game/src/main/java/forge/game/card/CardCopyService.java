@@ -130,10 +130,7 @@ public class CardCopyService {
         }
 
         c.setState(in.getCurrentStateName(), false);
-        c.setRules(in.getRules());
-        if (in.isTransformed()) {
-            c.incrementTransformedTimestamp();
-        }
+        c.setBackSide(in.isBackSide());
 
         return c;
     }
@@ -168,9 +165,6 @@ public class CardCopyService {
             // The characteristics of its front and back face are determined by the copiable values of the same face of the spell it is a copy of, as modified by any other copy effects.
             // If the spell it is a copy of has its back face up, the copy is created with its back face up. The token that’s put onto the battlefield as that spell resolves is a transforming token.
             to.setBackSide(copyFrom.isBackSide());
-            if (copyFrom.isTransformed()) {
-                to.incrementTransformedTimestamp();
-            }
         } else if (fromIsTransformedCard) {
             copyState(copyFrom, copyFrom.getCurrentStateName(), to, CardStateName.Original);
         } else {
@@ -241,8 +235,6 @@ public class CardCopyService {
         newCopy.setCommander(copyFrom.isCommander());
         newCopy.setCollectible(copyFrom.isCollectible());
 
-        newCopy.setRules(copyFrom.getRules());
-
         // needed to ensure that the LKI object has correct CMC info no matter what state the original card was in
         // (e.g. Scrap Trawler + transformed Harvest Hand)
         newCopy.setLKICMC(copyFrom.getCMC());
@@ -274,9 +266,6 @@ public class CardCopyService {
         }
         newCopy.setFlipped(copyFrom.isFlipped());
         newCopy.setBackSide(copyFrom.isBackSide());
-        if (copyFrom.isTransformed()) {
-            newCopy.incrementTransformedTimestamp();
-        }
         if (newCopy.hasAlternateState()) {
             newCopy.setState(copyFrom.getCurrentStateName(), false, true);
         }
@@ -309,9 +298,10 @@ public class CardCopyService {
         // extra copy PT boost
         newCopy.setPTBoost(copyFrom.getPTBoostTable());
 
+        newCopy.copyFrom(copyFrom);
         newCopy.setCounters(Maps.newHashMap(copyFrom.getCounters()));
 
-        newCopy.setColor(copyFrom.getColor().getColor());
+        newCopy.setColor(copyFrom.getColor());
         newCopy.setPhasedOut(copyFrom.getPhasedOut());
         newCopy.setTapped(copyFrom.isTapped());
         newCopy.setTributed(copyFrom.isTributed());
@@ -323,7 +313,7 @@ public class CardCopyService {
         newCopy.setSaddled(copyFrom.isSaddled());
         if (newCopy.isSaddled()) newCopy.setSaddledByThisTurn(copyFrom.getSaddledByThisTurn());
         if (copyFrom.isSuspected()) {
-            newCopy.setSuspectedEffect(getLKICopy(copyFrom.getSuspectedEffect(), cachedMap));
+            newCopy.setSuspectedStatic(copyFrom.getSuspectedStatic().copy(newCopy, true));
         }
 
         newCopy.setDamageHistory(copyFrom.getDamageHistory());
@@ -360,8 +350,6 @@ public class CardCopyService {
         }
         newCopy.setChosenEvenOdd(copyFrom.getChosenEvenOdd());
 
-        newCopy.copyFrom(copyFrom);
-
         // for getReplacementList (run after setChangedCardKeywords for caching)
         newCopy.setStoredKeywords(copyFrom.getStoredKeywords(), true);
         newCopy.setStoredReplacements(copyFrom.getStoredReplacements());
@@ -386,7 +374,7 @@ public class CardCopyService {
 
         // update keyword cache on all states
         for (CardStateName s : newCopy.getStates()) {
-            newCopy.updateKeywordsCache(newCopy.getState(s));
+            newCopy.getState(s).updateKeywordsCache();
         }
 
         if (copyFrom.getCastSA() != null) {

@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Avatar: The Last Airbender #01
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2025/08/latest-3-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Your Forest is a 0/0 creature (with one +1/+1 counter on it.) Ensure your solution satisfies all blocks. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=3
+p0hand=Jeong Jeong's Deserters;Earthbending Student;Bulk Up;How to Start a Riot
+p0battlefield=Haru, Hidden Talent;Garruk's Uprising;Forest|Id:1;Forgotten Monument;Forgotten Monument;Forgotten Monument;Restless Ridgeline;Cavernous Maw
+p1life=11
+p1battlefield=Vindictive Warden;Vindictive Warden
+p0precast=Haru, Hidden Talent:TrigEarthbend->1

@@ -1,0 +1,9 @@
+Name:Bagel and Schmear
+Variant:UniversesWithin:FlavorName:Perfected Pastry
+ManaCost:1
+Types:Artifact Food
+A:AB$ PutCounter | PrecostDesc$ Share — | Cost$ W T Sac<1/CARDNAME> | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDraw | SorcerySpeed$ True | SpellDescription$ Put a +1/+1 counter on up to one target creature. Draw a card. Activate only as a sorcery.
+A:AB$ GainLife | PrecostDesc$ Nosh — | Cost$ 2 T Sac<1/CARDNAME> | LifeAmount$ 3 | SubAbility$ DBDraw | SpellDescription$ You gain 3 life and draw a card.
+SVar:DBDraw:DB$ Draw
+DeckHas:Ability$LifeGain|Sacrifice|Counters
+Oracle:Share — {W}, {T}, Sacrifice this artifact: Put a +1/+1 counter on up to one target creature. Draw a card. Activate only as a sorcery.\nNosh — {2}, {T}, Sacrifice this artifact: You gain 3 life and draw a card.

@@ -33,10 +33,8 @@ public class PhasesAi extends SpellAbilityAi {
                 final boolean isThreatened = ComputerUtil.predictThreatenedObjects(aiPlayer, null, true).contains(source);
                 if (isThreatened) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                } else {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-
                 }
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
@@ -82,7 +80,7 @@ public class PhasesAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(Player aiPlayer, SpellAbility sa) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         if (tgt != null) {

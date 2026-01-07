@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigCharm:DB$ Charm | MinCharmNum$ 1 | CharmNum$ 3 | Choices$ DBChangeZone,DBChangeZoneBis,DBExileGrave
 SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Card.AdventureCard+YouOwn | TgtPrompt$ Select target card you own in exile that has an Adventure | Origin$ Exile | Destination$ Hand | SpellDescription$ Return target card you own in exile that has an Adventure to your hand.
 SVar:DBChangeZoneBis:DB$ ChangeZone | ValidTgts$ Card.AdventureCard+YouDontOwn | TgtPrompt$ Select target card you don't own in exile that has an Adventure | Origin$ Exile | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target card you don't own in exile that has an Adventure on the bottom of its owner's library.
-SVar:DBExileGrave:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card | SpellDescription$ Exile target player's graveyard.
+SVar:DBExileGrave:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | ChangeType$ Card | SpellDescription$ Exile target player's graveyard.
 DeckHas:Ability$Graveyard
 DeckHints:Type$Adventure
 Oracle:When Sentinel of Lost Lore enters, choose one or more —\n• Return target card you own in exile that has an Adventure to your hand.\n• Put target card you don't own in exile that has an Adventure on the bottom of its owner's library.\n• Exile target player's graveyard.

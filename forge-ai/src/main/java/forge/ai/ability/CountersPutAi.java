@@ -21,6 +21,7 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -43,11 +44,11 @@ public class CountersPutAi extends CountersAi {
      * forge.game.card.Card)
      */
     @Override
-    protected boolean willPayCosts(Player ai, SpellAbility sa, Cost cost, Card source) {
+    protected boolean willPayCosts(Player payer, SpellAbility sa, Cost cost, Card source) {
         final String type = sa.getParam("CounterType");
         final String aiLogic = sa.getParamOrDefault("AILogic", "");
 
-        if (!super.willPayCosts(ai, sa, cost, source)) {
+        if (!super.willPayCosts(payer, sa, cost, source)) {
             return false;
         }
 
@@ -92,9 +93,8 @@ public class CountersPutAi extends CountersAi {
                     return false;
                 }
                 return chance > MyRandom.getRandom().nextFloat();
-            } else {
-                return false;
             }
+            return false;
         }
 
         if (sa.isKeyword(Keyword.LEVEL_UP)) {
@@ -106,7 +106,12 @@ public class CountersPutAi extends CountersAi {
                     }
                 }
             }
-            int maxLevel = Integer.parseInt(sa.getParam("MaxLevel"));
+            int maxLevel = 0;
+            for (StaticAbility st : source.getStaticAbilities()) {
+                if (st.toString().startsWith("LEVEL ")) {
+                    maxLevel = Math.max(maxLevel, Integer.parseInt(st.toString().substring(6, 7)));
+                }
+            }
             return source.getCounters(CounterEnumType.LEVEL) < maxLevel;
         }
 
@@ -124,7 +129,6 @@ public class CountersPutAi extends CountersAi {
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
-        CardCollection list;
         Card choice = null;
         final String amountStr = sa.getParamOrDefault("CounterNum", "1");
         final boolean divided = sa.isDividedAsYouChoose();
@@ -143,7 +147,7 @@ public class CountersPutAi extends CountersAi {
         final boolean isClockwork = "True".equals(sa.getParam("UpTo")) && "Self".equals(sa.getParam("Defined"))
                 && "P1P0".equals(sa.getParam("CounterType")) && "Count$xPaid".equals(source.getSVar("X"))
                 && sa.hasParam("MaxFromEffect");
-        boolean playAggro = ((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.PLAY_AGGRO);
+        boolean playAggro = AiProfileUtil.getBoolProperty(ai, AiProps.PLAY_AGGRO);
 
         if ("ExistingCounter".equals(type)) {
             final boolean eachExisting = sa.hasParam("EachExistingCounter");
@@ -221,10 +225,8 @@ public class CountersPutAi extends CountersAi {
         } else if ("PayEnergy".equals(logic)) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         } else if ("PayEnergyConservatively".equals(logic)) {
-            boolean onlyInCombat = ai.getController().isAI()
-                    && ((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.CONSERVATIVE_ENERGY_PAYMENT_ONLY_IN_COMBAT);
-            boolean onlyDefensive = ai.getController().isAI()
-                    && ((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.CONSERVATIVE_ENERGY_PAYMENT_ONLY_DEFENSIVELY);
+            boolean onlyInCombat = AiProfileUtil.getBoolProperty(ai, AiProps.CONSERVATIVE_ENERGY_PAYMENT_ONLY_IN_COMBAT);
+            boolean onlyDefensive = AiProfileUtil.getBoolProperty(ai, AiProps.CONSERVATIVE_ENERGY_PAYMENT_ONLY_DEFENSIVELY);
 
             if (playAggro) {
                 // aggro profiles ignore conservative play for this AI logic
@@ -292,10 +294,8 @@ public class CountersPutAi extends CountersAi {
 
             if (willActivate) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
-
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         } else if (logic.equals("ChargeToBestCMC")) {
             return doChargeToCMCLogic(ai, sa);
         } else if (logic.equals("ChargeToBestOppControlledCMC")) {
@@ -348,7 +348,7 @@ public class CountersPutAi extends CountersAi {
             if (type.equals("P1P1")) {
                 nPump = amount;
             }
-            return FightAi.canFightAi(ai, sa, nPump, nPump);
+            return FightAi.canFight(ai, sa, nPump, nPump);
         }
 
         if (amountStr.equals("X")) {
@@ -442,17 +442,16 @@ public class CountersPutAi extends CountersAi {
                         }
                         sa.addDividedAllocation(c, amount);
                         return decision;
-                    } else {
-                        if (!hasSacCost) {
-                            // for Sacrifice costs, evaluate further to see if it's worth using the ability before the card dies
-                            return decision;
-                        }
+                    } else if (!hasSacCost) {
+                        // for Sacrifice costs, evaluate further to see if it's worth using the ability before the card dies
+                        return decision;
                     }
                 }
             }
 
             sa.resetTargets();
 
+            CardCollection list;
             if (sa.isCurse()) {
                 list = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
             } else {
@@ -670,7 +669,7 @@ public class CountersPutAi extends CountersAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(final SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(Player ai, final SpellAbility sa) {
         final Game game = ai.getGame();
         Card choice = null;
         final String type = sa.getParam("CounterType");
@@ -684,14 +683,12 @@ public class CountersPutAi extends CountersAi {
                 || (sa.getRootAbility().isTrigger() && !sa.getRootAbility().isOptionalTrigger());
 
         if (sa.usesTargeting()) {
-            CardCollection list = null;
-
+            CardCollection list;
             if (sa.isCurse()) {
                 list = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
             } else {
                 list = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
             }
-
             list = CardLists.getTargetableCards(list, sa);
 
             if (list.isEmpty() && isMandatoryTrigger) {
@@ -707,9 +704,8 @@ public class CountersPutAi extends CountersAi {
                             || sa.getTargets().isEmpty()) {
                         sa.resetTargets();
                         return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
-                    } else {
-                        break;
                     }
+                    break;
                 }
 
                 if (sa.isCurse()) {
@@ -751,9 +747,7 @@ public class CountersPutAi extends CountersAi {
     protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final SpellAbility root = sa.getRootAbility();
         final Card source = sa.getHostCard();
-        final String aiLogic = sa.getParamOrDefault("AILogic", "");
-        boolean preferred = true;
-        CardCollection list;
+        final String aiLogic = sa.getParam("AILogic");
         final String amountStr = sa.getParamOrDefault("CounterNum", "1");
         final boolean divided = sa.isDividedAsYouChoose();
         final int amount = AbilityUtils.calculateAmount(source, amountStr, sa);
@@ -772,14 +766,10 @@ public class CountersPutAi extends CountersAi {
         }
 
         if ("ChargeToBestCMC".equals(aiLogic)) {
-            AiAbilityDecision decision = doChargeToCMCLogic(ai, sa);
-            if (decision.willingToPlay()) {
-                return decision;
-            } else if (mandatory) {
+            if (mandatory) {
                 return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+            return doChargeToCMCLogic(ai, sa);
         }
 
         if (!sa.usesTargeting()) {
@@ -803,7 +793,6 @@ public class CountersPutAi extends CountersAi {
                 // things like Powder Keg, which are way too complex for the AI
             }
         } else if (sa.getTargetRestrictions().canOnlyTgtOpponent() && !sa.getTargetRestrictions().canTgtCreature()) {
-            // can only target opponent
             PlayerCollection playerList = new PlayerCollection(IterableUtil.filter(
                     sa.getTargetRestrictions().getAllCandidates(sa, true, true), Player.class));
 
@@ -818,48 +807,47 @@ public class CountersPutAi extends CountersAi {
                 sa.getTargets().add(choice);
             }
         } else {
-            String logic = sa.getParam("AILogic");
-            if ("Fight".equals(logic) || "PowerDmg".equals(logic)) {
+            if ("Fight".equals(aiLogic) || "PowerDmg".equals(aiLogic)) {
                 int nPump = 0;
                 if (type.equals("P1P1")) {
                     nPump = amount;
                 }
-                AiAbilityDecision decision = FightAi.canFightAi(ai, sa, nPump, nPump);
+                AiAbilityDecision decision = FightAi.canFight(ai, sa, nPump, nPump);
                 if (decision.willingToPlay()) {
                     return decision;
                 }
             }
 
-            if (sa.isCurse()) {
-                list = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
-            } else {
-                list = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
-            }
-            list = CardLists.getTargetableCards(list, sa);
-
-            // Filter AI-specific targets if provided
-            list = ComputerUtil.filterAITgts(sa, ai, list, false);
-
-            int totalTargets = list.size();
-
             sa.resetTargets();
+
+            CardCollection targetables = CardLists.getTargetableCards(ai.getGame().getCardsIn(ZoneType.Battlefield), sa);
+            CardCollection list = ComputerUtil.filterAITgts(sa, ai, targetables, true);
+            if (list.isEmpty() || list.equals(targetables)) {
+                if (sa.isCurse()) {
+                    list = CardLists.filterControlledBy(targetables, ai.getOpponents());
+                } else {
+                    list = CardLists.filterControlledBy(targetables, ai);
+                }
+            }
+            int totalTargets = list.size();
+            boolean preferred = true;
+
             while (sa.canAddMoreTarget()) {
                 if (mandatory) {
-                    // When things are mandatory, gotta handle a little differently
                     if ((list.isEmpty() || !preferred) && sa.isTargetNumberValid()) {
-                        return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+                        return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
                     }
 
                     if (list.isEmpty() && preferred) {
                         // If it's required to choose targets and the list is empty, get a new list
-                        list = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
+                        list = CardLists.filterControlledBy(targetables, ai.getOpponents());
                         preferred = false;
                     }
 
                     if (list.isEmpty()) {
                         // Still an empty list, but we have to choose something (mandatory); expand targeting to
                         // include AI's own cards to see if there's anything targetable (e.g. Plague Belcher).
-                        list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
+                        list = CardLists.filterControlledBy(targetables, ai.getYourTeam());
                         preferred = false;
                     }
                 }
@@ -870,7 +858,7 @@ public class CountersPutAi extends CountersAi {
                     return new AiAbilityDecision(sa.isTargetNumberValid() ? 100 : 0, sa.isTargetNumberValid() ? AiPlayDecision.WillPlay : AiPlayDecision.CantPlayAi);
                 }
 
-                Card choice = null;
+                Card choice;
 
                 // Choose targets here:
                 if (sa.isCurse()) {
@@ -879,33 +867,27 @@ public class CountersPutAi extends CountersAi {
                         if (choice == null && mandatory) {
                             choice = Aggregates.random(list);
                         }
+                    } else if (type.equals("M1M1")) {
+                        choice = ComputerUtilCard.getWorstCreatureAI(list);
                     } else {
-                        if (type.equals("M1M1")) {
-                            choice = ComputerUtilCard.getWorstCreatureAI(list);
-                        } else {
-                            choice = Aggregates.random(list);
-                        }
+                        choice = Aggregates.random(list);
                     }
+                } else if (preferred) {
+                    list = ComputerUtil.getSafeTargets(ai, sa, list);
+                    choice = chooseBoonTarget(list, type);
+                    if (choice == null && mandatory) {
+                        choice = Aggregates.random(list);
+                    }
+                } else if (type.equals("P1P1")) {
+                    choice = ComputerUtilCard.getWorstCreatureAI(list);
                 } else {
-                    if (preferred) {
-                        list = ComputerUtil.getSafeTargets(ai, sa, list);
-                        choice = chooseBoonTarget(list, type);
-                        if (choice == null && mandatory) {
-                            choice = Aggregates.random(list);
-                        }
-                    } else {
-                        if (type.equals("P1P1")) {
-                            choice = ComputerUtilCard.getWorstCreatureAI(list);
-                        } else {
-                            choice = Aggregates.random(list);
-                        }
-                    }
+                    choice = Aggregates.random(list);
                 }
                 if (choice != null && divided) {
-                    int alloc = Math.max(amount / totalTargets, 1);
                     if (sa.getTargets().size() == Math.min(totalTargets, sa.getMaxTargets()) - 1) {
                         sa.addDividedAllocation(choice, left);
                     } else {
+                        int alloc = Math.max(amount / totalTargets, 1);
                         sa.addDividedAllocation(choice, alloc);
                         left -= alloc;
                     }
@@ -995,9 +977,7 @@ public class CountersPutAi extends CountersAi {
         final String amountStr = sa.getParamOrDefault("CounterNum", "1");
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
 
-        final boolean isCurse = sa.isCurse();
-
-        if (isCurse) {
+        if (sa.isCurse()) {
             final CardCollection opponents = CardLists.filterControlledBy(options, ai.getOpponents());
 
             if (!opponents.isEmpty()) {
@@ -1094,8 +1074,7 @@ public class CountersPutAi extends CountersAi {
         Player ai = sa.getActivatingPlayer();
         GameEntity e = (GameEntity) params.get("Target");
         // for Card try to select not useless counter
-        if (e instanceof Card) {
-            Card c = (Card) e;
+        if (e instanceof Card c) {
             if (c.getController().isOpponentOf(ai)) {
                 if (options.contains(CounterEnumType.M1M1) && !c.hasKeyword(Keyword.UNDYING)) {
                     return CounterEnumType.M1M1;
@@ -1112,8 +1091,7 @@ public class CountersPutAi extends CountersAi {
                     }
                 }
             }
-        } else if (e instanceof Player) {
-            Player p = (Player) e;
+        } else if (e instanceof Player p) {
             if (p.isOpponentOf(ai)) {
                 if (options.contains(CounterEnumType.POISON)) {
                     return CounterEnumType.POISON;
@@ -1202,7 +1180,7 @@ public class CountersPutAi extends CountersAi {
 
     @Override
     public int chooseNumber(Player player, SpellAbility sa, int min, int max, Map<String, Object> params) {
-        if (sa.hasParam("ReadAhead")) {
+        if (sa.isKeyword(Keyword.READ_AHEAD)) {
             return 1;
         }
         return max;
@@ -1225,9 +1203,8 @@ public class CountersPutAi extends CountersAi {
         }
         if (numCtrs < optimalCMC) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     private AiAbilityDecision doChargeToOppCtrlCMCLogic(Player ai, SpellAbility sa) {
@@ -1247,9 +1224,8 @@ public class CountersPutAi extends CountersAi {
         if (numCtrs < optimalCMC) {
             // If the AI has less counters than the optimal CMC, it should play the ability.
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            // If the AI has enough counters or more than the optimal CMC, it should not play the ability.
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
+        // If the AI has enough counters or more than the optimal CMC, it should not play the ability.
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 }

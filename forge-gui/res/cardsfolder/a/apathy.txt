@@ -3,7 +3,7 @@ ManaCost:U
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Curse
-R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.EnchantedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Enchanted creature doesn't untap during its controller's untap step. At the beginning of the upkeep of enchanted creature's controller, that player may discard a card at random. If the player does, untap that creature.
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.EnchantedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Enchanted creature doesn't untap during its controller's untap step.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedController | TriggerZones$ Battlefield | OptionalDecider$ EnchantedController | Execute$ ApathyDiscard | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, that player may discard a card at random. If the player does, untap that creature.
 SVar:ApathyDiscard:DB$ Discard | Defined$ TriggeredPlayer | Mode$ Random | RememberDiscarded$ True | SubAbility$ ApathyUntap
 SVar:ApathyUntap:DB$ Untap | Defined$ Enchanted | SpellDescription$ Untap enchanted creature | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup

@@ -1,0 +1,299 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="83">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <properties>
+  <property name="preventEscape" type="bool" value="true" />
+ </properties>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt1DEKwCAMBVAHt17YS3nHDl2kaBpj8j+UDB/EwWcSsV2ltExmM70+YZhjIs7V7Hm5Um3e7leNUiyzmXlo1xqWK9mRJtNd2eniXMabHvcRnrbnJ/ex/smrteRYTY85nJqaPrwtb3d2PqLeHTei1wwX/a6QffxTbui3Dvk=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztVe0KgzAQq7M/Zl/JrtuTDt9066GBeLYqsroxGghixUty/TKmouL38Loac3cjTTcnjzXd8dpcC1qPyGe35CXSx29tfNrI4PZpc45c7TUGt/w/p825jmitEflvbtTivn1aK5UfeW0hnRyHSbdkxlSv0edvZBXIXJfuteRM7aW+sHagNcuZZf+cNc/QPVOTdaGpz7WSPW8mPdHC+sZ8w0OJdSfaQZ3z+l7BOQZ/7KdNjO31qP/TtORx666DR+/mvtgfxrfQJ7x4VZvfeb4qKir+E28jjd6D
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxz42RgcBvFo3gU0xSv4mBgeAKkV3NAMIwNomF4DQf17XwKpGGgURyVhoHHVLQf3U584AM7hHalgl/dibQTBCLYEf4GxQEl/n4GxCs5iLcbGVDqbw8gXs5Bmv0g9S8otBfk5xdQGh2sFMVurxcV07UbDrtBYIUoAlPDr8TGubsY9cKXkN3PoRjkBphfqR2+xLqBln4dxaN4FI/iUUw/DADY/Rvw
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" gid="2147495067" x="208" y="224">
+   <properties>
+    <property name="dialog">[
+    {
+        "text": "Hello, planeswalker {var=player_name}",
+        "options": [
+            {
+                "name": "Why am I here?",
+                "condition": [
+                    {
+                        "checkQuestFlag": "mainQuest",
+                        "not": true
+                    },
+                    {
+                        "checkCharacterFlag": "noQuest",
+                        "not": true
+                    }
+                ],
+                "text": "This... is Shandalar. A plane where magic is as it once was, long ago.",
+                "voiceFile": "audio/WizPAR1.mp3",
+                "options": [
+                    {
+                        "name": "(Continue)",
+                        "text": "The False God Karona has trapped you here. It will be a long road to defeating her - first you must conquer the five castles, then five more temples hidden within her own, each with powerful guardians.",
+                        "voiceFile": "audio/WizPAR2.mp3",
+                        "options": [
+                            {
+                                "name": "(Continue)",
+                                "text": "Explore the world and gather spells for your library and artifacts to equip yourself with. You shall need their strength if you are to succeed.",
+                                "voiceFile": "audio/WizPAR3.mp3",
+                                "options": [
+                                    {
+                                        "name": "(Continue)",
+                                        "text": "Take this rune. You can use it anytime to return here. Be careful, planeswalker.",
+                                        "action": [
+                                            {
+                                                "addItem": "Colorless rune"
+                                            }
+                                        ],
+                                        "voiceFile": "audio/WizPAR4.mp3",
+                                        "options": [
+                                            {
+                                                "name": "(Continue)",
+                                                "text": "I have something else for you, {var=player_name}. It isn't much, but perhaps it may help you out.",
+                                                "condition": [
+                                                    {
+                                                        "checkCharacterFlag": "freeChallengeCoins",
+                                                        "not": true
+                                                    }
+                                                ],
+                                                "options": [
+                                                    {
+                                                        "action": [
+                                                            {
+                                                                "grantRewards": [
+                                                                    {
+                                                                        "type": "item",
+                                                                        "count": 1,
+                                                                        "itemName": "Challenge Coin"
+                                                                    },
+                                                                    {
+                                                                        "type": "item",
+                                                                        "count": 1,
+                                                                        "itemName": "Landscape Sketchbook - Fourth Edition"
+                                                                    },
+                                                                    {
+                                                                        "type": "item",
+                                                                        "count": 1,
+                                                                        "itemName": "Landscape Sketchbook - Seventh Edition"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "setCharacterFlag": {
+                                                                    "key": "freeChallengeCoins",
+                                                                    "val": 1
+                                                                }
+                                                            }
+                                                        ],
+                                                        "name": "What are they, then? What are they for?",
+                                                        "text": "The coin can be redeemed at any inn to begin a challenge of skill and magic known to mages here as a draft.",
+                                                        "options": [
+                                                            {
+                                                                "name": "And the sketchbooks?",
+                                                                "text": "They will allow you to choose the lands you draw power from in the add lands menu of the deck screen.",
+                                                                "options": [
+                                                                    {
+                                                                        "name": "Thank you",
+                                                                        "text": "I will reopen the portal you arrived through now, but it cannot send you back from wherever you have come. On the other side, you will find the barrens of Shandalar which I, and now you, call home.",
+                                                                        "options": [
+                                                                            {
+                                                                                "name": "(Leave)",
+                                                                                "action": [
+                                                                                    {
+                                                                                        "setQuestFlag": {
+                                                                                            "key": "mainQuest",
+                                                                                            "val": 1
+                                                                                        },
+                                                                                        "activateMapObject": 78
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "name": "Thank you",
+                                                "text": "I will reopen the portal you arrived through now, but it cannot send you back from wherever you have come. On the other side, you will find the barrens of Shandalar which I, and now you, call home.",
+                                                "condition": [
+                                                    {
+                                                        "checkCharacterFlag": "freeChallengeCoins"
+                                                    }
+                                                ],
+                                                "options": [
+                                                    {
+                                                        "name": "(Leave)",
+                                                        "action": [
+                                                            {
+                                                                "setQuestFlag": {
+                                                                    "key": "mainQuest",
+                                                                    "val": 1
+                                                                },
+                                                                "activateMapObject": 78
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Bye"
+            }
+        ]
+    },
+    {
+        "condition": [
+            {
+                "checkQuestFlag": "Ch1CastlesComplete",
+                "getQuestFlag": {
+                    "key": "Ch1CastlesComplete",
+                    "op": "&lt;",
+                    "val": 5
+                }
+            }
+        ],
+        "text": "\"{var=player_name}! I feel the Guardians' spell growing weaker! Defeat them all and you may save us yet.\"",
+        "options": [
+            {
+                "name": "\"Bye.\""
+            },
+            {
+                "name": "\"I have already defeated all five guardians.\"",
+                "action": [
+                    {
+                        "setQuestFlag": { "key": "Ch1BlackCastleComplete", "val": 1 }
+                    },
+                    {
+                        "setQuestFlag": { "key": "Ch1BlueCastleComplete", "val": 1 }
+                    },
+                    {
+                        "setQuestFlag": { "key": "Ch1GreenCastleComplete", "val": 1 }
+                    },
+                    {
+                        "setQuestFlag": { "key": "Ch1RedCastleComplete", "val": 1 }
+                    },
+                    {
+                        "setQuestFlag": { "key": "Ch1WhiteCastleComplete", "val": 1 }
+                    },
+                    {
+                        "setQuestFlag": { "key": "Ch1CastlesComplete", "val": 5 }
+                    }
+                ],
+                "text": "\"Ah, I sense it now - you speak the truth. The guardians have fallen, though the magical resonance was... scattered. No matter, what's done is done. Talk to me again and we can discuss what comes next.\""
+            }
+        ]
+    },
+    {
+        "condition": [
+            {
+                "getQuestFlag": {
+                    "key": "Ch1CastlesComplete",
+                    "op": "&gt;=",
+                    "val": 5
+                }
+            }
+        ],
+        "text": "\"Good to see you again {var=player_name}. I take it that you have had some success in your quest?\"",
+        "options": [
+            {
+                "action": [
+                    {
+                        "removeItem": "",
+                        "setColorIdentity": "",
+                        "advanceQuestFlag": "",
+                        "advanceMapFlag": "",
+                        "setQuestFlag": {
+                            "key": "mainQuest",
+                            "val": 3
+                        },
+                        "setMapFlag": {
+                            "key": ""
+                        },
+                        "issueQuest": "",
+                        "POIReference": ""
+                    }
+                ],
+                "name": "\"I have defeated the occupants of the five castles, but I did not find any captives.\"",
+                "text": "\"I suppose I should have explained further. The guardians you have defeated were not captors, not directly. But they guarded the keys to the temple of the false god.\"",
+                "options": [
+                    {
+                        "name": "\"And what is that?\"",
+                        "text": "\"It is located here in the wastelands. Within are portals to five more temples with yet more mighty guardians. Each must be defeated to face the false god.\"",
+                        "options": [
+                            {
+                                "name": "(Continue)",
+                                "text": "\"If you haven't already, use the five colored keys to unlock one of the castle gates. Take the strange key there and enter the temple of the false god.\"",
+                                "options": [
+                                    {
+                                        "name": "(Continue)",
+                                        "text": "The final challenges within the temple of the false god await. Once she is defeated, you can call your quest complete or keep exploring to grow your collection.",
+                                        "options": [
+                                            {
+                                                "name": "(Continue)",
+                                                "text": "Developer's Note: This is the last of the story prompts. Once you are satisfied with facing the final challenges and whatever else, you may start over or try new game+ where you keep cards and items but nothing else.",
+                                                "options": [
+                                                    {
+                                                        "name": "(Chapter 1 complete)"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]</property>
+    <property name="enemy" value="Adept Black Wizard" />
+   </properties>
+  </object>
+  <object id="70" template="../../../../../../common/maps/obj/entry_down.tx" x="192" y="160">
+   <properties>
+    <property name="noExit" type="bool" value="true" />
+   </properties>
+  </object>
+  <object id="78" template="../../../../../../common/maps/obj/portal.tx" x="192" y="144">
+   <properties>
+    <property name="portalState" value="active" />
+    <property name="sprite" value="sprites/portal3.atlas" />
+    <property name="teleport" value="" />
+   </properties>
+  </object>
+ </objectgroup>
+</map>

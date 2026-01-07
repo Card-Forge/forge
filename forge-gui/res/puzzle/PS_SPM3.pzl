@@ -1,0 +1,21 @@
+[metadata]
+Name:Possibility Storm - Marvel's Spider-Man #03
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2025/10/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Ensure your solution satisfies all possible opponent decisions. Your opponent has no cards in hand. Good luck! NOTE: In order to correctly set up the three Mysterio, Master of Illusion's tokens, an extra Mysterio's Phantasm is added to the battlefield temporarily and is immediately destroyed once the battlefield is set up. Assume this extra Mysterio's Phantasm in your graveyard is irrelevant to the puzzle.
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=5
+p0hand=Spider-Sense;Splash Portal;The Apprentice's Folly;Enduring Courage
+p0battlefield=Unyielding Gatekeeper|FaceDown;Mysterio's Phantasm|Id:1;Mysterio, Master of Illusion|ExecuteScript:TrigToken;Mysterio's Phantasm;Kavaron, Memorial World|Counters:CHARGE=6;Inspiring Vantage;Inspiring Vantage;Inspiring Vantage;Island;Island;Island
+# FIXME: This is needed to set up the third Illusion token.
+p0precast=Lightning Bolt->1
+p1life=21
+p1graveyard=
+p1battlefield=Electro, Assaulting Battery|Id:2;Impostor Syndrome;Mountain;Mountain;Mountain;Mountain;Mountain
+p1precast=Impostor Syndrome:TrigCopy->2;Impostor Syndrome:TrigCopy->2
+removesummoningsickness=true

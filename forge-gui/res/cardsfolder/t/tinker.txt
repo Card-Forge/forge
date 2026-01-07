@@ -3,5 +3,5 @@ ManaCost:2 U
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 2 U Sac<1/Artifact> | Origin$ Library | Destination$ Battlefield | ChangeType$ Artifact | ChangeNum$ 1 | SpellDescription$ Search your library for an artifact card, put that card onto the battlefield, then shuffle.
 AI:RemoveDeck:Random
-SVar:AIPreference:SacCost$Artifact.token,Artifact.cmcEQ0+nonLegendary+notnamedMox Pearl+notnamedMox Sapphire+notnamedMox Ruby+notnamedMox Emerald+notnamedMox Jet+notnamedBlack Lotus+notnamedLotus Petal,Artifact.cmcEQ1,Artifact.cmcEQ2,Artifact.cmcEQ3
+SVar:AIPreference:SacCost$Artifact.token,Artifact.cmcEQ0+nonLegendary+!namedMox Pearl+!namedMox Sapphire+!namedMox Ruby+!namedMox Emerald+!namedMox Jet+!namedBlack Lotus+!namedLotus Petal,Artifact.cmcEQ1,Artifact.cmcEQ2,Artifact.cmcEQ3
 Oracle:As an additional cost to cast this spell, sacrifice an artifact.\nSearch your library for an artifact card, put that card onto the battlefield, then shuffle.

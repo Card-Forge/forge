@@ -188,6 +188,15 @@ public class Cost implements Serializable {
         return this.isAbility;
     }
 
+    public final String getMaxWaterbend() {
+        for (CostPart cp : this.costParts) {
+            if (cp instanceof CostPartMana) {
+                return ((CostPartMana) cp).getMaxWaterbend();
+            }
+        }
+        return null;
+    }
+
     private Cost() {
 
     }
@@ -237,17 +246,17 @@ public class Cost implements Serializable {
         CostPartMana parsedMana = null;
         for (String part : parts) {
             if (part.startsWith("XMin")) {
-                xMin = (part);
+                xMin = part;
             } else if ("Mandatory".equals(part)) {
                 this.isMandatory = true;
             } else {
                 CostPart cp = parseCostPart(part, tapCost, untapCost);
                 if (null != cp)
-                    if (cp instanceof CostPartMana) {
-                        parsedMana = (CostPartMana) cp;
+                    if (cp instanceof CostPartMana p) {
+                        parsedMana = p;
                     } else {
-                        if (cp instanceof CostPartWithList) {
-                            ((CostPartWithList)cp).setIntrinsic(intrinsic);
+                        if (cp instanceof CostPartWithList p) {
+                            p.setIntrinsic(intrinsic);
                         }
                         this.costParts.add(cp);
                     }
@@ -562,6 +571,16 @@ public class Cost implements Serializable {
         if (parse.startsWith("RevealChosen<")) {
             final String[] splitStr = abCostParse(parse, 2);
             return new CostRevealChosen(splitStr[0], splitStr.length > 1 ? splitStr[1] : null);
+        }
+
+        if (parse.startsWith("Waterbend<")) {
+            final String[] splitStr = abCostParse(parse, 1);
+            return new CostWaterbend(splitStr[0]);
+        }
+
+        if (parse.startsWith("Blight<")) {
+            final String[] splitStr = abCostParse(parse, 1);
+            return new CostBlight(splitStr[0]);
         }
 
         if (parse.equals("Forage")) {
@@ -973,6 +992,7 @@ public class Cost implements Serializable {
                 } else {
                     costParts.add(0, new CostPartMana(manaCost.toManaCost(), null));
                 }
+                getCostMana().setMaxWaterbend(mPart.getMaxWaterbend());
             } else if (part instanceof CostPutCounter || (mergeAdditional && // below usually not desired because they're from different causes
                     (part instanceof CostDiscard || part instanceof CostDraw ||
                     part instanceof CostAddMana || part instanceof CostPayLife ||

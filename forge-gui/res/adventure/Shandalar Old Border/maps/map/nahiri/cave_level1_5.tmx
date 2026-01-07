@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="79">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1EsKgDAQBNFsvZj3P5K4UkI0IGgXY71dVun5MK1JkpS3LukEB1KWSva+nnvbv9Po+VLofaDne2JWU7reij3/k9H8vpjn1R+jLLP9J+9fKh/pZjijd9zlJtREz0eSuMHV0XeMnk+qbgOlTQ9v
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7C+M1f/cupjJJBeUlVVVVVV1UcHjs4f3w==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztWNEOgyAM5FE+bE79UTfdXznRzxiNkrBm6IAWWLJLLrpplstxtB21FKL+MxuHSohx56PKrwez0Ww1AV0BejCV5l371muuBehxeViid0DI36yvk+ZTlpfBqxRvmArRCL6BXzPSV4JGs6ZHyLXe32jL5aWvttQamwBtKTXG6ANw1sjQteX20PT/WG1cGpXc+islQmvP8GFGolhXFy4B+eqsz67+QAXw8Wx2HFG+jPecumzA7NhK997OCZgZF7nRNTvCs9v+HvU+ONPlO88qya+TYs7GMx0lKHoIpz6fmpKyJgOo/kNx1WQK7zj7BUX2YmeoI5ScPQDV7BKrEfYB1Hz8G5RnDCE1xugyGiAr5ruQfkHtIc4X97mHr0acrxTnMj77GedLEa/pkYe9lXdzb++DnOdrxge4Ltb9ip7n0Pbnb/MF7syi6w==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMFwBx0A7gATgITjQLkAAdxxuYaevM/ACTixiA+m+P0SoCedjYIjgQ/BTgew0PtzqaQmwhVUx0C0lQBwN5TcC2U0D5D4QaOOH4IEGpMYTvdMhejwJA9kiSPx4IDsBib8MSnPRxXWogBWI9YFuMQBiPWgmrgaya6DuWwxVlwzkp1Ap7bGRoecrF3Y2CIDSZD3QbQ1AHMOAiG9S7InkIh1P4Uawv3GhspHlkHEUnSL5FxBP5sYtj0+OlmA5DjckAuMuiQ9VzpUOdbADDjscBVHdVwt0Wx0fovxDDz9VoJwanctmYuMXlB8cgW5zGgD3OaGFLzuSnJsgqhitwUSg/ycB8VIkN+ACIDl61xtrgW5bB8S/kdyAC4DklmERj6WFw/C4AdSmf87LwPACiFegyYEAcl1Nr/CE1VkgN/wE0sxA+1nQ0j7MffRsU0Wg1QXf8NQt0waofHZBy5POg6gfhAwGU9+HEDgNTF9nBrDdjg+A2gnPgW57AXUf64C6ZhSMgpEJABvCRzY=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="59" template="../../../../../../common/maps/obj/door_right.tx" x="1" y="336.333">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel_4/cave_23B9.tmx"/>
+    <property name="teleportObjectId" value="60"/>
+   </properties>
+  </object>
+  <object id="60" template="../../../../../../common/maps/obj/inn.tx" x="240.667" y="304.667"/>
+  <object id="61" template="../../../../../../common/maps/obj/shop.tx" x="304.333" y="305"/>
+  <object id="62" template="../../../../../../common/maps/obj/treasure.tx" x="377" y="551.5"/>
+  <object id="63" template="../../../../../../common/maps/obj/gold.tx" x="377.273" y="533.682"/>
+  <object id="64" template="../../../../../../common/maps/obj/treasure.tx" x="532.75" y="331.75"/>
+  <object id="65" template="../../../../../../common/maps/obj/gold.tx" x="533.25" y="312.5"/>
+  <object id="66" template="../../../../../../common/maps/obj/treasure.tx" x="271" y="58.75"/>
+  <object id="67" template="../../../../../../common/maps/obj/gold.tx" x="291" y="57.6667"/>
+  <object id="68" template="../../../../../../common/maps/obj/gold.tx" x="153" y="587"/>
+  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="80" y="350">
+   <properties>
+    <property name="enemy" value="Golem"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../../../common/maps/obj/enemy.tx" x="279.5" y="97.5">
+   <properties>
+    <property name="enemy" value="Dwarf"/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="512" y="323">
+   <properties>
+    <property name="enemy" value="Dwarf"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../../../common/maps/obj/enemy.tx" x="377" y="514.5">
+   <properties>
+    <property name="enemy" value="Dwarf"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../../../common/maps/obj/enemy.tx" x="192" y="316.5">
+   <properties>
+    <property name="enemy" value="Dwarf"/>
+   </properties>
+  </object>
+  <object id="74" template="../../../../../../common/maps/obj/enemy.tx" x="370" y="352.5">
+   <properties>
+    <property name="enemy" value="Dwarf"/>
+   </properties>
+  </object>
+  <object id="75" template="../../../../../../common/maps/obj/enemy.tx" x="355" y="197.5">
+   <properties>
+    <property name="enemy" value="Dwarf"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../../../common/maps/obj/enemy.tx" x="273" y="225.5">
+   <properties>
+    <property name="enemy" value="Dwarf"/>
+   </properties>
+  </object>
+  <object id="77" template="../../../../../../common/maps/obj/enemy.tx" x="303" y="480">
+   <properties>
+    <property name="enemy" value="Dwarf"/>
+   </properties>
+  </object>
+  <object id="78" template="../../../../../../common/maps/obj/enemy.tx" x="194" y="446.5">
+   <properties>
+    <property name="enemy" value="Dwarf"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

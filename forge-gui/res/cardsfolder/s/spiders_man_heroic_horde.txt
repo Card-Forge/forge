@@ -1,0 +1,10 @@
+Name:Spiders-Man, Heroic Horde
+Variant:UniversesWithin:FlavorName:The Clutter Cluster
+ManaCost:1 G
+Types:Legendary Creature Spider Hero
+PT:2/3
+K:Web-slinging:4 G G
+T:Mode$ ChangesZone | Origin$ Stack | Destination$ Battlefield | ValidCard$ Card.Self+wasCast+webSlinged | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters, if they were cast using web-slinging, you gain 3 life and create two 2/1 green Spider creature tokens with reach.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ g_2_1_spider_reach | TokenOwner$ You
+Oracle:Web-slinging {4}{G}{G} (You may cast this spell for {4}{G}{G} if you also return a tapped creature you control to its owner's hand.)\nWhen Spiders-Man enters, if they were cast using web-slinging, you gain 3 life and create two 2/1 green Spider creature tokens with reach.

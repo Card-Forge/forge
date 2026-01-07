@@ -3,7 +3,7 @@ ManaCost:1 G W U
 Types:Legendary Creature Human Detective
 PT:3/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTokenTiny | TriggerDescription$ When CARDNAME enters, create Tiny, a legendary 2/2 green Dog Detective creature token with trample.
-SVar:TrigTokenTiny:DB$ Token | TokenAmount$ 1 | TokenScript$ tiny | TokenOwner$ You
+SVar:TrigTokenTiny:DB$ Token | TokenScript$ tiny | TokenOwner$ You
 A:AB$ PutCounterAll | Cost$ 1 Sac<1/Artifact.token/artifact token> | ValidCards$ Dog.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | AILogic$ AtEOTOrBlock | SpellDescription$ Put a +1/+1 counter on each Dog you control.
 T:Mode$ DamageDone | ValidSource$ Dog.YouCtrl | Execute$ TrigTokenFoodClue | CombatDamage$ True | ValidTarget$ Player | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Dog you control deals combat damage to a player, create a Food token, then investigate.
 SVar:TrigTokenFoodClue:DB$ Token | TokenScript$ c_a_food_sac | SubAbility$ DBInvestigate

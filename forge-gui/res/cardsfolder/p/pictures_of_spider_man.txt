@@ -1,0 +1,9 @@
+Name:Pictures of Spider-Man
+Variant:UniversesWithin:FlavorName:Ancestral Carvings
+ManaCost:2 G
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When this artifact enters, look at the top five cards of your library. You may reveal up to two creature cards from among them and put them into your hand. Put the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ 5 | ChangeNum$ 2 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Creature | RestRandomOrder$ True
+A:AB$ Token | Cost$ 1 T Sac<1/CARDNAME> | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token.
+DeckHas:Ability$Sacrifice|Token & Type$Treasure
+Oracle:When this artifact enters, look at the top five cards of your library. You may reveal up to two creature cards from among them and put them into your hand. Put the rest on the bottom of your library in a random order.\n{1}, {T}, Sacrifice this artifact: Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")

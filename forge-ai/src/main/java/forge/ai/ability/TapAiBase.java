@@ -101,6 +101,7 @@ public abstract class TapAiBase extends SpellAbilityAi {
     protected boolean tapPrefTargeting(final Player ai, final Card source, final SpellAbility sa, final boolean mandatory) {
         final Game game = ai.getGame();
         CardCollection tapList = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
+        tapList = ComputerUtil.filterAITgts(sa, ai, tapList, false);
         tapList = CardLists.filter(tapList, CardPredicates.CAN_TAP);
         tapList = CardLists.filter(tapList, c -> {
             if (c.isCreature()) {
@@ -308,7 +309,7 @@ public abstract class TapAiBase extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final boolean oppTargetsChoice = sa.hasParam("TargetingPlayer");
 

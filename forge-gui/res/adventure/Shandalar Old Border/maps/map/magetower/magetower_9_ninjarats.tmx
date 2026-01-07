@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="77">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [&quot;Muck Rats|POR&quot;]}" />
+ </properties>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx" />
+ <tileset firstgid="28289" source="../../../../../../common/maps/tileset/dungeon/animatedtiles.tsx" />
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJytlT0OwjAMhb1mYerWASEx9Q5wBebMXKHZOA0Czoki9ITrxqkNrvTU9M9fnu2kORFN41LX4T/d9u37OX3liXfeLWX9Dpw6H6heS4+Hy0dRXDAk18rTYj5note8jsXzHl3LYyG6V25pP698yfyVy/0/is7kftFPGLfyasmt1GnsfyP9alytVj1uPTS/6B3k3RLT6ndr7uhlS32tud7i8jUU7ddTX7C1tev1rXnlntHPUZ49itxDWrHlmO/NrZx74vfel3syzry2ljpHKad1b3nzrs2T/4Ok/zfvk+b8
+  </data>
+ </layer>
+ <layer id="8" name="SubGround" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBi8wFaaMKa3fTB8m4p2g8yzAmJrIv04V4o6dpIatvOkKAtzUsIX3U5y45sUO+2gNMjO3TyUpzNi/YmNTWt7aZGvSPUvPe2ltp9x+YdUN1HLr6SGA7XsxZeGcYUNOYAUP1HLTnLcQG078bkBmU8qAABJP0vB
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy91EEOgjAQBdDZF3auKJp4ELyCe116BbeoF3GDHgIRL6KXkQlMOtS2tA2xyU8JpH2dtqFOAOo/JNfiM2afAjSJPbt0Ppe+o/nselv7SICHhx1S75S5kep5yvZ10bwIs1fIsVsd+37lsH1cqhNr4PZh0ZsUXi+aNMZk+7jLLrcM4J6N7fVWmbgGdK+ZMvmaYt1imBODz3R39dobzcPIyH3mLvZYp36+6JJN7+Z0yabwe8XXMaer22/5a/DQHsS6L+3MyDbVj6kyVXvZ3cE20s0H+yzUPrps3lrLvCH/SW7zczXtscsM/U+a6rbdJ5cZ6nL7JPrQGkqh3k2ZMa4+Bu86Nhmxfp4vNtD8wg==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzdkjkOwjAQRUeCDgMtsQ/AHdi6HAVKFokWiWtQsAhyCeAiJLkMM3IsRsY0kQchvvSKuJiX+TbA72eeACyQJbJKvuPs9wCUBmgjHaSr7RkhlQs6MmRsLDzZWsa5877JO8WOZ6zns5CbO4kG7t7Usq6Q1zFhnd/V6w6Mqu8Y4IwSGSLXwBxy3KrzbSt893VCu+yxy6Jycx8ndpw3NdZdMr/vjfkPD5xz0tbtKMz7vhJ+ch+19ade75JdU/i7dXuPAi56e/S+Yrtp54O2++esV5dNZKebT53nHzqVcP5bnoh2M80=
+  </data>
+ </layer>
+ <layer id="9" name="Fog" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4CBobN1YOzlbBsYewmB3TwMDCGCEEwNQGr4fqeOtSSH7w8q2UsskAaGcxyQ/kkj862lcdtLzfglFoDspZVf6Q1u4AhbEBgtTwY3AADjrg0w
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="275.665" width="48" height="16">
+   <properties>
+    <property name="teleport" value="" />
+   </properties>
+  </object>
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="213.605" y="70.6596">
+   <properties>
+    <property name="enemy" value="Nezumi Ninja" />
+    <property name="spawn.Normal" type="bool" value="true" />
+    <property name="speedModifier" type="float" value="30" />
+    <property name="threatRange" type="int" value="40" />
+   </properties>
+  </object>
+  <object id="62" template="../../../../../../common/maps/obj/gold.tx" x="89.6918" y="125.224" />
+  <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="176.55" y="148.218">
+   <properties>
+    <property name="enemy" value="Nezumi Ninja" />
+    <property name="speedModifier" type="float" value="4" />
+    <property name="threatRange" type="int" value="50" />
+    <property name="waypoints" value="72,69,70,71,73,72" />
+   </properties>
+  </object>
+  <object id="66" template="../../../../../../common/maps/obj/booster.tx" x="126.196" y="72.7342" width="16.25" height="15.25">
+   <properties>
+    <property name="reward">[
+  {
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Common" ]
+  },
+  {
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 1,
+    "rarity": [ "Uncommon" ]
+  },
+  {
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 1,
+    "rarity": [ "Rare" ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="304.845" y="135.63">
+   <properties>
+    <property name="enemy" value="Nezumi Ninja" />
+    <property name="threatRange" type="int" value="40" />
+   </properties>
+  </object>
+  <object id="68" template="../../../../../../common/maps/obj/manashards.tx" x="332.361" y="137.498" />
+  <object id="69" template="../../../../../../common/maps/obj/waypoint.tx" x="248.604" y="186.586" />
+  <object id="70" template="../../../../../../common/maps/obj/waypoint.tx" x="195.111" y="215.924" />
+  <object id="71" template="../../../../../../common/maps/obj/waypoint.tx" x="117.185" y="203.246" />
+  <object id="72" template="../../../../../../common/maps/obj/waypoint.tx" x="203.732" y="136.586" />
+  <object id="73" template="../../../../../../common/maps/obj/waypoint.tx" x="88.2493" y="142.122" />
+  <object id="76" template="../../../../../../common/maps/obj/treasure.tx" x="188.774" y="63.2297">
+   <properties>
+    <property name="reward">[{"type": "randomCard","colors": ["Red"], "count": 5 }, {"type": "item","count": 1,"probability":0.2,"itemName": "Dagger"},
+{
+"type": "card",
+"probability": 1,
+"count": 1,
+"cardName": "Ruby Medallion|TMP"}]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

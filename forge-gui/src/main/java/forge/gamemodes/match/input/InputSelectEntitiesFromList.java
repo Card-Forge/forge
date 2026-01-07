@@ -2,6 +2,7 @@ package forge.gamemodes.match.input;
 
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardView;
@@ -31,6 +32,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
     private final FCollectionView<T> validChoices;
     protected final FCollection<T> selected = new FCollection<>();
     protected Iterable<PlayerZoneUpdate> zonesShown; // want to hide these zones when input done
+    protected MassSelectMode massSelectMode = null;
 
     public InputSelectEntitiesFromList(final PlayerControllerHuman controller, final int min, final int max, final FCollectionView<T> validChoices0) {
         this(controller, min, max, validChoices0, null, "", 0);
@@ -47,15 +49,15 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
             System.out.printf("Trying to choose at least %d things from a list with only %d things!%n", min, validChoices.size());
         }
         ArrayList<CardView> vCards = new ArrayList<>();
-        for (T c : validChoices0) {
-            if (c instanceof Card) {
-                vCards.add(((Card) c).getView());
+        for (T v : validChoices0) {
+            if (v instanceof Card c) {
+                vCards.add(c.getView());
             }
         }
         getController().getGui().setSelectables(vCards);
         final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
-        for (final GameEntity c : validChoices) {
-            final Zone cz = (c instanceof Card) ? ((Card) c).getLastKnownZone() : null;
+        for (final GameEntity ge : validChoices) {
+            final Zone cz = ge instanceof Card c ? c.getLastKnownZone() : null;
             if (cz != null) {
                 zonesToUpdate.add(new PlayerZoneUpdate(cz.getPlayer().getView(), cz.getZoneType()));
             }
@@ -120,7 +122,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
     @Override
     protected boolean hasEnoughTargets() { return selected.size() >= min; }
     @Override
-    protected boolean hasAllTargets() { return selected.size() >= max; }
+    protected boolean hasAllTargets() { return (massSelectMode == null || massSelectMode == MassSelectMode.NONE) && selected.size() >= max; }
 
     @Override
     protected String getMessage() {
@@ -132,12 +134,11 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
         if (sa != null) {
             if (sa.getPayCosts().hasSpecificCostType(CostTapType.class) &&
                 (sa.isCrew() || sa.isKeyword(Keyword.SADDLE))) {
-                msg.append((sa.isCrew())  ? "\nCrewing: " : "\nSaddling: ");
+                msg.append(sa.isCrew() ? "\nCrewing: " : "\nSaddling: ");
                 msg.append(CardLists.getTotalPower((FCollection<Card>)getSelected(), sa));
                 msg.append(" / ").append(TextUtil.fastReplace(sa.getPayCosts().
                     getCostPartByType(CostTapType.class).getType(), 
                     "Creature.Other+withTotalPowerGE", ""));
-    
             }
             else if (sa.getPayCosts().hasSpecificCostType(CostExile.class) && tally > 0) {
                 msg.append("\n");
@@ -160,5 +161,68 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
         getController().getGui().hideZones(getController().getPlayer().getView(),zonesShown);  
         getController().getGui().clearSelectables();
         super.onStop();
+    }
+
+    /**
+     * Shows the usual card action dialog but then, if offering the "mass select" function,
+     * replaces the "cancel" button with a button that will cycle through "auto-select all
+     * targets owned by player", "auto-select all valid targets", and "clear existing target
+     * selections". Because the number of possible targets can be 0, simply pressing "OK"
+     * without selecting anything is functionally equivalent to "cancel" so the "cancel"
+     * button is not needed in this case.
+     */
+    @Override
+    public void showMessage() {
+        super.showMessage();
+        // Use mass select mode for proliferate. If you wanted to add it to a different effect
+        // the effect must allow you to select any number of targets between "none" and "all valid targets"
+        if (sa != null && ApiType.Proliferate == sa.getApi()) {
+            massSelectMode = MassSelectMode.NONE;
+            updateMassSelectButton();
+        }
+    }
+
+    /**
+     * Sets the button label to the "mass select" mode's next value representing what it will
+     * change to if the button is clicked.
+     */
+    private void updateMassSelectButton() {
+        String selectButtonLabel = massSelectMode.next().getTranslatedName();
+        getController().getGui().updateButtons(getOwner(), Localizer.getInstance().getMessage("lblOK"),
+                selectButtonLabel, hasEnoughTargets(), allowCancel, true);
+    }
+
+    /**
+     * If the cancel button has been updated with the mass-select function then execute the appropriate
+     * mass-select function when it is clicked. Otherwise, execute the normal cancel function.
+     */
+    @Override
+    protected void onCancel() {
+        if (massSelectMode == null) {
+            super.onCancel();
+        } else {
+            massSelectMode = massSelectMode.next();
+            updateMassSelectButton();
+            // Remove all current selections
+            this.getSelected().forEach(selected -> {
+                onSelectStateChanged(selected, false);
+            });
+            this.getSelected().clear();
+            if (massSelectMode == MassSelectMode.MINE) { // Select all valid targets owned by player
+                for (T v : validChoices) {
+                    if (v instanceof Card c) {
+                        if (c.getController().equals(getController().getPlayer())) {
+                            selected.add(v);
+                            onSelectStateChanged(v, true);
+                        }
+                    }
+                }
+            } else if (massSelectMode == MassSelectMode.ALL) { // Select all valid targets
+                for (T c : validChoices) {
+                    selected.add(c);
+                    onSelectStateChanged(c, true);
+                }
+            }
+        }
     }
 }

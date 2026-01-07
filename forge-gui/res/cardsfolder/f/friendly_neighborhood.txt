@@ -1,0 +1,14 @@
+Name:Friendly Neighborhood
+Variant:UniversesWithin:FlavorName:Remarkable Readings
+ManaCost:3 W
+Types:Enchantment Aura
+K:Enchant:Land
+SVar:AttachAILogic:Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this Aura enters, create three 1/1 green and white Human Citizen creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 3 | TokenScript$ gw_1_1_human_citizen | TokenOwner$ You
+S:Mode$ Continuous | Affected$ Land.AttachedBy | AddAbility$ FriendlyPump | Description$ Enchanted land has "{1}, {T}: Target creature gets +1/+1 until end of turn for each creature you control. Activate only as a sorcery."
+SVar:FriendlyPump:AB$ Pump | Cost$ 1 T | ValidTgts$ Creature | NumAtt$ +X | NumDef$ +X | SorcerySpeed$ True | SpellDescription$ Target creature gets +1/+1 until end of turn for each creature you control. Activate only as a sorcery.
+SVar:X:Count$Valid Creature.YouCtrl
+SVar:NonStackingAttachEffect:True
+DeckHas:Ability$Token
+Oracle:Enchant land\nWhen this Aura enters, create three 1/1 green and white Human Citizen creature tokens.\nEnchanted land has "{1}, {T}: Target creature gets +1/+1 until end of turn for each creature you control. Activate only as a sorcery."

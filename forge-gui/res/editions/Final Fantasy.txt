@@ -631,6 +631,14 @@ Replace=.18F BasicLand:fromSheet("FIN cards"):!fromSheet("FIN dual lands")+
 551c M Traveling Chocobo @Toni Infante
 551d M Traveling Chocobo @Toni Infante
 551f M Traveling Chocobo @Toni Infante
+564 M Cloud, Midgar Mercenary @Inuchiyo Meimaru
+565 R Stiltzkin, Moogle Merchant @Yukihiro Maruo
+566 R A Realm Reborn @Susumu Kuroi
+567 R Tifa Lockhart @Yoshiro Ambe
+568 M Traveling Chocobo @Ishikawa Kenta
+569 R Choco, Seeker of Paradise @Kemonomichi
+570 M Vivi Ornitier @Ryanroro
+571 M Yuna, Hope of Spira @Yuichi Murakami
 572 L Plains @Jonas De Ro
 573 L Island @Eddie Mendoza
 574 L Swamp @Domenico Cava
@@ -658,6 +666,9 @@ Replace=.18F BasicLand:fromSheet("FIN cards"):!fromSheet("FIN dual lands")+
 561 R Xande, Dark Mage @Joseph Weston
 562 R Magitek Scythe @Thanh Tuấn
 563 R Ultima Weapon @Fariba Khamseh
+
+[rebalanced]
+A-248 M A-Vivi Ornitier @Toni Infante
 
 [tokens]
 2 c_1_1_hero @Josephine Chang

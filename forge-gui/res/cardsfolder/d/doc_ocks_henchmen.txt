@@ -1,0 +1,11 @@
+Name:Doc Ock's Henchmen
+Variant:UniversesWithin:FlavorName:Obscura Alleylurkers
+ManaCost:2 U
+Types:Creature Human Villain
+PT:2/1
+K:Flash
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigConnive | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature attacks, it connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
+SVar:TrigConnive:DB$ Connive
+SVar:HasAttackEffect:True
+DeckHas:Ability$Counters|Discard
+Oracle:Flash\nWhenever this creature attacks, it connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)

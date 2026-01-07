@@ -5,5 +5,5 @@ R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementRe
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, target creature gains flying until end of turn.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | KW$ Flying
 Oracle:Soaring Seacliff enters tapped.\nWhen Soaring Seacliff enters, target creature gains flying until end of turn.\n{T}: Add {U}.

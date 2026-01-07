@@ -1,0 +1,24 @@
+[metadata]
+Name=Bear Boss
+[Main]
+20 Forest|ICE
+4 Nature's Lore|5ED
+4 Werebear|ODY
+4 Razorclaw Bear|PO2
+2 Golden Bear|PO2
+2 Striped Bears|WTH
+2 Grizzly Bears|6ED
+2 Balduvian Bears|ICE
+2 Forest Bear|PTK
+2 Bear Cub|PO2
+4 Grizzly Fate|JUD
+2 Tranquility|6ED
+2 Seeds of Innocence|MIR
+2 Bearscape|ODY
+2 Kamahl's Summons|ONS
+4 Overrun|TMP
+
+[StartInBattle_Reference]
+1 Bear Cub|PO2
+1 Grizzly Bears|LEA
+1 Werebear|ODY

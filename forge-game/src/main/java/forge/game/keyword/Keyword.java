@@ -1,8 +1,8 @@
 package forge.game.keyword;
 
-import forge.StaticData;
-import forge.game.card.Card;
+import forge.card.CardSplitType;
 import forge.item.PaperCard;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 
@@ -141,6 +141,9 @@ public enum Keyword {
     OFFSPRING("Offspring", KeywordWithCost.class, false, "You may pay an additional %s as you cast this spell. If you do, when this creature enters, create a 1/1 token copy of it."),
     OVERLOAD("Overload", KeywordWithCost.class, false, "You may cast this spell for its overload cost. If you do, change its text by replacing all instances of \"target\" with \"each.\""),
     PARTNER("Partner", Partner.class, true, "You can have two commanders if both have partner."),
+    PARTNER_SURVIVORS("Partner - Survivors", Partner.class, true, "You can have two commanders if both have this ability."),
+    PARTNER_FATHER_AND_SON("Partner - Father & Son", Partner.class, true, "You can have two commanders if both have this ability."),    
+    PARTNER_CHARACTER_SELECT("Partner - Character select", Partner.class, true, "You can have two commanders if both have this ability."),    
     PERSIST("Persist", SimpleKeyword.class, false, "When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it."),
     PHASING("Phasing", SimpleKeyword.class, true, "This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist."),
     PLOT("Plot", KeywordWithCost.class, false, "You may pay %s and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery."),
@@ -165,10 +168,11 @@ public enum Keyword {
     RIOT("Riot", SimpleKeyword.class, false, "This creature enters with your choice of a +1/+1 counter or haste."),
     RIPPLE("Ripple", KeywordWithAmount.class, false, "When you cast this spell, you may reveal the top {%d:card} of your library. You may cast any of those cards with the same name as this spell without paying their mana costs. Put the rest on the bottom of your library in any order."),
     SADDLE("Saddle", KeywordWithAmount.class, false, "Tap any number of other creatures you control with total power %1$d or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery."),
+    SCAVENGE("Scavenge", KeywordWithCost.class, false, "%s, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery."),
     SHADOW("Shadow", SimpleKeyword.class, true, "This creature can block or be blocked by only creatures with shadow."),
     SHROUD("Shroud", SimpleKeyword.class, true, "This can't be the target of spells or abilities."),
     SKULK("Skulk", SimpleKeyword.class, true, "This creature can't be blocked by creatures with greater power."),
-    SCAVENGE("Scavenge", KeywordWithCost.class, false, "%s, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery."),
+    SNEAK("Sneak", KeywordWithCost.class, false, "You may cast this spell for %s if you also return an unblocked attacker you control to hand during the declare blockers step."),
     SOULBOND("Soulbond", SimpleKeyword.class, true, "You may pair this creature with another unpaired creature when either enters. They remain paired for as long as you control both of them."),
     SOULSHIFT("Soulshift", KeywordWithAmount.class, false, "When this creature dies, you may return target Spirit card with mana value %d or less from your graveyard to your hand."),
     SPACE_SCULPTOR("Space sculptor", SimpleKeyword.class, true, "CARDNAME divides the battlefield into alpha, beta, and gamma sectors. If a creature isn't assigned to a sector, its controller assigns it to one. Opponents assign first."),
@@ -223,7 +227,7 @@ public enum Keyword {
         displayName = displayName0;
     }
 
-    public static KeywordInterface getInstance(String k) {
+    private static Pair<Keyword, String> getKeywordDetails(String k) {
         Keyword keyword = Keyword.UNDEFINED;
         String details = k;
         // try to get real part
@@ -255,15 +259,20 @@ public enum Keyword {
             keyword = smartValueOf(k);
             details = "";
         }
+        return Pair.of(keyword, details);
+    }
+
+    public static KeywordInterface getInstance(String k) {
+        Pair<Keyword, String> p = getKeywordDetails(k);
 
         KeywordInstance<?> inst;
         try {
-            inst = keyword.type.getConstructor().newInstance();
+            inst = p.getKey().type.getConstructor().newInstance();
         }
         catch (Exception e) {
             inst = new UndefinedKeyword();
         }
-        inst.initialize(k, keyword, details);
+        inst.initialize(k, p.getKey(), p.getValue());
         return inst;
     }
 
@@ -278,34 +287,42 @@ public enum Keyword {
         return keywords;
     }
 
+    private static Keyword get(String k) {
+        if (k == null || k.isEmpty())
+            return Keyword.UNDEFINED;
+
+        return getKeywordDetails(k).getKey();
+    }
+
     private static final Map<String, Set<Keyword>> cardKeywordSetLookup = new HashMap<>();
 
     public static Set<Keyword> getKeywordSet(PaperCard card) {
-        String key = card.getName();
-        Set<Keyword> keywordSet = cardKeywordSetLookup.get(key);
+        String name = card.getName();
+        Set<Keyword> keywordSet = cardKeywordSetLookup.get(name);
         if (keywordSet == null) {
-            keywordSet = new HashSet<>();
-            for (KeywordInterface inst : Card.getCardForUi(card).getKeywords()) {
-                final Keyword keyword = inst.getKeyword();
-                if (keyword != Keyword.UNDEFINED) {
-                    keywordSet.add(keyword);
+            CardSplitType cardSplitType = card.getRules().getSplitType();
+            keywordSet = EnumSet.noneOf(Keyword.class);
+            if (cardSplitType != CardSplitType.None && cardSplitType != CardSplitType.Split) {
+                if (card.getRules().getOtherPart() != null) {
+                    if (card.getRules().getOtherPart().getKeywords() != null) {
+                        for (String key : card.getRules().getOtherPart().getKeywords()) {
+                            Keyword keyword = get(key);
+                            if (!Keyword.UNDEFINED.equals(keyword))
+                                keywordSet.add(keyword);
+                        }
+                    }
                 }
             }
-            cardKeywordSetLookup.put(card.getName(), keywordSet);
+            if (card.getRules().getMainPart().getKeywords() != null) {
+                for (String key : card.getRules().getMainPart().getKeywords()) {
+                    Keyword keyword = get(key);
+                    if (!Keyword.UNDEFINED.equals(keyword))
+                        keywordSet.add(keyword);
+                }
+            }
+            cardKeywordSetLookup.put(name, keywordSet);
         }
         return keywordSet;
-    }
-
-    public static Runnable getPreloadTask() {
-        if (cardKeywordSetLookup.size() < 10000) { //allow preloading even if some but not all cards loaded
-            return () -> {
-                final Collection<PaperCard> cards = StaticData.instance().getCommonCards().getUniqueCards();
-                for (PaperCard card : cards) {
-                    getKeywordSet(card);
-                }
-            };
-        }
-        return null;
     }
 
     public static Keyword smartValueOf(String value) {

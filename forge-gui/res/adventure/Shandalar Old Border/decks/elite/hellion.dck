@@ -1,0 +1,18 @@
+[metadata]
+Name=Hellion
+[Main]
+22 Mountain|USG
+4 Fervor|WTH
+4 Crater Hellion|USG
+4 Flowstone Hellion|STH
+4 Pandemonium|EXO
+4 Wild Wurm|TMP
+4 Scoria Wurm|USG
+4 Lava Flow|POR
+3 Worn Powerstone|USG
+3 Fire Diamond|MIR
+4 Firebolt|ODY
+
+[StartInBattle_Reference]
+1 Pandemonium|EXO
+1 Smoldering Crater|USG

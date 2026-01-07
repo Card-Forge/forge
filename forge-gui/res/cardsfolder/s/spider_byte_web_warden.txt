@@ -1,0 +1,8 @@
+Name:Spider-Byte, Web Warden
+Variant:UniversesWithin:FlavorName:Argyr, Tidal Spinner
+ManaCost:2 U
+Types:Legendary Creature Spider Avatar Hero
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When NICKNAME enters, return up to one target nonland permanent to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Permanent.nonLand | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Select up to one target nonland permanent
+Oracle:When Spider-Byte enters, return up to one target nonland permanent to its owner's hand.

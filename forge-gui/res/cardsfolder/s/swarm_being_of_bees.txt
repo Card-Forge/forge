@@ -1,0 +1,9 @@
+Name:Swarm, Being of Bees
+Variant:UniversesWithin:FlavorName:Wekhdu, Midnight Hunter
+ManaCost:2 B
+Types:Legendary Creature Insect Villain
+PT:2/2
+K:Flash
+K:Flying
+K:Mayhem:B
+Oracle:Flash\nFlying\nMayhem {B} (You may cast this card from your graveyard for {B} if you discarded it this turn. Timing rules still apply.)

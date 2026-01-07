@@ -14,6 +14,7 @@ import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.IAfterMatch;
 import forge.adventure.util.AdventureEventController;
+import forge.adventure.util.AdventureModes;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.assets.FBufferedImage;
@@ -36,6 +37,7 @@ import forge.screens.LoadingOverlay;
 import forge.screens.TransitionScreen;
 import forge.screens.match.MatchController;
 import forge.sound.MusicPlaylist;
+import forge.sound.SoundSystem;
 import forge.toolbox.FOptionPane;
 import forge.trackable.TrackableCollection;
 import forge.util.Aggregates;
@@ -132,7 +134,7 @@ public class DuelScene extends ForgeScene {
     void afterGameEnd(String enemyName, boolean winner) {
         Forge.advFreezePlayerControls = winner;
         endRunnable = () -> Gdx.app.postRunnable(() -> {
-            GameHUD.getInstance().switchAudio();
+            GameHUD.getInstance().updateBGM();
             dungeonEffect = null;
             callbackExit = false;
             Forge.clearTransitionScreen();
@@ -142,7 +144,7 @@ public class DuelScene extends ForgeScene {
             Current.player().getStatistic().setResult(enemyName, winner);
 
             if (last instanceof IAfterMatch) {
-                ((IAfterMatch) last).setWinner(winner);
+                ((IAfterMatch) last).setWinner(winner, isArena);
             }
         });
     }
@@ -191,10 +193,14 @@ public class DuelScene extends ForgeScene {
 
     @Override
     public void enter() {
-        GameHUD.getInstance().unloadAudio();
+        SoundSystem.instance.stopBackgroundMusic();
         GameType mainGameType;
+        boolean isDeckMissing = false;
+        String isDeckMissingMsg = "";
         if (eventData != null && eventData.eventRules != null) {
             mainGameType = eventData.eventRules.gameType;
+        } else if (AdventurePlayer.current().getAdventureMode() == AdventureModes.Commander){
+            mainGameType = GameType.Commander;
         } else {
             mainGameType = GameType.Adventure;
         }
@@ -275,7 +281,7 @@ public class DuelScene extends ForgeScene {
 
         currentEnemy = enemy.getData();
         boolean bossBattle = currentEnemy.boss;
-        for (int i = 0; i < 8 && currentEnemy != null; i++) {
+        for (int i = 0; i < playerCount && currentEnemy != null; i++) {
             Deck deck;
 
             if (this.chaosBattle) { //random challenge for chaos mode
@@ -294,6 +300,12 @@ public class DuelScene extends ForgeScene {
                 deck = eventData.nextOpponent.getDeck();
             } else {
                 deck = currentEnemy.copyPlayerDeck ? this.playerDeck : currentEnemy.generateDeck(Current.player().isFantasyMode(), Current.player().isUsingCustomDeck() || Current.player().isHardorInsaneDifficulty());
+            }
+            if (deck == null) {
+                isDeckMissing = true;
+                isDeckMissingMsg = "Deck for " + currentEnemy.getName() + " is missing! " + (this.eventData == null ? "Genetic AI deck will be used." : "Player deck will be used.");
+                System.err.println(isDeckMissingMsg);
+                deck = this.eventData == null ? Aggregates.random(DeckProxy.getAllGeneticAIDecks()).getDeck() : this.playerDeck;
             }
             RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(playerCount, appliedVariants, deck, null, false, null, null);
 
@@ -368,9 +380,9 @@ public class DuelScene extends ForgeScene {
         hostedMatch.startMatch(rules, appliedVariants, players, guiMap, bossBattle ? MusicPlaylist.BOSS : MusicPlaylist.MATCH);
         MatchController.instance.setGameView(hostedMatch.getGameView());
         boolean showMessages = enemy.getData().boss || (enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck());
-        if (chaosBattle || showMessages) {
+        if (chaosBattle || showMessages || isDeckMissing) {
             final FBufferedImage fb = getFBEnemyAvatar();
-            bossDialogue = createFOption(Forge.getLocalizer().getMessage("AdvBossIntro" + Aggregates.randomInt(1, 35)),
+            bossDialogue = createFOption(isDeckMissing ? isDeckMissingMsg : Forge.getLocalizer().getMessage("AdvBossIntro" + Aggregates.randomInt(1, 35)),
                     enemy.getName(), fb, fb::dispose);
             matchOverlay = new LoadingOverlay(() -> FThreads.delayInEDT(300, () -> FThreads.invokeInEdtNowOrLater(() ->
                     bossDialogue.show())), false, true);

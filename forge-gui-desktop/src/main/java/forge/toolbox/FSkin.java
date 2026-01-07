@@ -699,7 +699,7 @@ public class FSkin {
             return this.image.getHeight(null);
         }
 
-        protected ImageIcon getIcon() {
+        public ImageIcon getIcon() {
             if (this.imageIcon == null) {
                 /*float screenScale = GuiBase.getInterface().getScreenScale();
                 int iconWidth = Math.round(image.getWidth(null) / screenScale);
@@ -872,7 +872,7 @@ public class FSkin {
         }
 
         @Override
-        protected ImageIcon getIcon() { //can skip null check since imageIcon will always be set
+        public ImageIcon getIcon() { //can skip null check since imageIcon will always be set
             return this.imageIcon;
         }
     }
@@ -1101,8 +1101,14 @@ public class FSkin {
         if (FModel.getPreferences().getPrefBoolean(FPref.UI_SR_OPTIMIZE)) {
             return str;
         }
-        //format mana symbols to display as icons
-        pattern = "\\{([A-Z0-9]+)\\}|\\{([A-Z0-9]+)/([A-Z0-9]+)\\}|(A-)|\\{([A-Z0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)\\}"; //fancy pattern needed so "/" can be omitted from replacement
+        // format mana symbols to display as icons
+        // fancy pattern needed so "/" can be omitted from replacement
+        pattern = 
+          "\\{([A-Z0-9]+)\\}" +                  // {SINGLE}
+          "|\\{([A-Z0-9]+)/([A-Z0-9]+)\\}" +    // {DOUBLE}
+          "|(?:(?<=\\s)|(?<=^))(A-)" +      // A- after ' ' or start of string
+          "|\\{([A-Z0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)\\}"; // {TRIPLE}
+ 
         try {
             replacement = "<img src=\"" + new File(ForgeConstants.CACHE_SYMBOLS_DIR + "/$1$2$3$4$5$6$7.png").toURI().toURL().toString() + "\" width=" + SYMBOL_WIDTH + " height=" + SYMBOL_HEIGHT + ">";
             str = str.replaceAll(pattern, replacement);

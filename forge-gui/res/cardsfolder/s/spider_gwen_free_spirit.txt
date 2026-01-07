@@ -1,0 +1,10 @@
+Name:Spider-Gwen, Free Spirit
+Variant:UniversesWithin:FlavorName:Wardens of Silverweb Summit
+ManaCost:2 R
+Types:Legendary Creature Spider Human Hero
+PT:2/3
+K:Reach
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever NICKNAME becomes tapped, you may discard a card. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ Discard<1/Card>
+DeckHas:Ability$Discard
+Oracle:Reach\nWhenever Spider-Gwen becomes tapped, you may discard a card. If you do, draw a card.

@@ -20,6 +20,7 @@ public class SaveFileData extends HashMap<String, byte[]> {
             objStream.flush();
             put(key, stream.toByteArray());
         } catch (IOException e) {
+            put("IOException", e.toString().getBytes());
             captureException(e, key, subData);
         }
     }
@@ -33,6 +34,7 @@ public class SaveFileData extends HashMap<String, byte[]> {
             objStream.flush();
             put(key, stream.toByteArray());
         } catch (IOException e) {
+            put("IOException", e.toString().getBytes());
             e.printStackTrace();
         }
     }
@@ -45,6 +47,7 @@ public class SaveFileData extends HashMap<String, byte[]> {
             objStream.flush();
             put(key, stream.toByteArray());
         } catch (IOException e) {
+            put("IOException", e.toString().getBytes());
             e.printStackTrace();
         }
     }
@@ -57,6 +60,7 @@ public class SaveFileData extends HashMap<String, byte[]> {
             objStream.flush();
             put(key, stream.toByteArray());
         } catch (IOException e) {
+            put("IOException", e.toString().getBytes());
             e.printStackTrace();
         }
     }
@@ -69,6 +73,7 @@ public class SaveFileData extends HashMap<String, byte[]> {
             objStream.flush();
             put(key, stream.toByteArray());
         } catch (IOException e) {
+            put("IOException", e.toString().getBytes());
             e.printStackTrace();
         }
     }
@@ -81,6 +86,7 @@ public class SaveFileData extends HashMap<String, byte[]> {
             objStream.flush();
             put(key, stream.toByteArray());
         } catch (IOException e) {
+            put("IOException", e.toString().getBytes());
             e.printStackTrace();
         }
     }
@@ -95,6 +101,7 @@ public class SaveFileData extends HashMap<String, byte[]> {
             stream.flush();
             put(key, stream.toByteArray());
         } catch (IOException e) {
+            put("IOException", e.toString().getBytes());
             e.printStackTrace();
         }
     }
@@ -107,6 +114,7 @@ public class SaveFileData extends HashMap<String, byte[]> {
             objStream.flush();
             put(key, stream.toByteArray());
         } catch (IOException e) {
+            put("IOException", e.toString().getBytes());
             captureException(e, key, subData);
         }
     }
@@ -119,6 +127,7 @@ public class SaveFileData extends HashMap<String, byte[]> {
             objStream.flush();
             put(key, stream.toByteArray());
         } catch (IOException e) {
+            put("IOException", e.toString().getBytes());
             captureException(e, key, subData);
         }
     }
@@ -132,6 +141,7 @@ public class SaveFileData extends HashMap<String, byte[]> {
             objStream.flush();
             put(key, stream.toByteArray());
         } catch (IOException e) {
+            put("IOException", e.toString().getBytes());
             e.printStackTrace();
         }
     }
@@ -147,6 +157,7 @@ public class SaveFileData extends HashMap<String, byte[]> {
             objStream.flush();
             put(key, stream.toByteArray());
         } catch (IOException e) {
+            put("IOException", e.toString().getBytes());
             e.printStackTrace();
         }
     }

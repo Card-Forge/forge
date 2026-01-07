@@ -1,0 +1,8 @@
+Name:Spider-Islanders
+Variant:UniversesWithin:FlavorName:Sadistic String-Puller
+ManaCost:3 R
+Types:Creature Spider Horror Citizen
+PT:4/3
+K:Mayhem:1 R
+Oracle:Mayhem {1}{R} (You may cast this card from your graveyard for {1}{R} if you discarded it this turn. Timing rules still apply.)
+

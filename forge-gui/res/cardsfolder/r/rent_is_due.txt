@@ -1,0 +1,8 @@
+Name:Rent Is Due
+Variant:UniversesWithin:FlavorName:Confessor's Bindings
+ManaCost:W
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, you may tap two untapped creatures and/or Treasures you control. If you do, draw a card. Otherwise, sacrifice this enchantment.
+SVar:TrigDraw:DB$ Draw | UnlessCost$ tapXType<2/Creature;Treasure/creatures and/or Treasures> | UnlessPayer$ You | UnlessSwitched$ True | UnlessResolveSubs$ WhenNotPaid | SubAbility$ DBSac
+SVar:DBSac:DB$ Sacrifice | SacValid$ Self
+Oracle:At the beginning of your end step, you may tap two untapped creatures and/or Treasures you control. If you do, draw a card. Otherwise, sacrifice this enchantment.

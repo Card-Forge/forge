@@ -117,19 +117,17 @@ public class ProtectEffect extends SpellAbilityEffect {
                 return;
             gains.add(choice);
             game.getAction().notifyOfValue(sa, choser, Lang.joinHomogenous(gains), choser);
-        } else {
-            if (sa.getParam("Gains").equals("ChosenColor")) {
-                for (final String color : host.getChosenColors()) {
-                    gains.add(color.toLowerCase());
-                }
-            } else if (sa.getParam("Gains").startsWith("Defined")) {
-                CardCollection def = AbilityUtils.getDefinedCards(host, sa.getParam("Gains").substring(8), sa);
-                for (final Byte color : def.get(0).getColor()) {
-                    gains.add(MagicColor.toLongString(color));
-                }
-            } else {
-                gains.addAll(choices);
+        } else if (sa.getParam("Gains").equals("ChosenColor")) {
+            for (final String color : host.getChosenColors()) {
+                gains.add(color.toLowerCase());
             }
+        } else if (sa.getParam("Gains").startsWith("Defined")) {
+            CardCollection def = AbilityUtils.getDefinedCards(host, sa.getParam("Gains").substring(8), sa);
+            for (final MagicColor.Color color : def.get(0).getColor()) {
+                gains.add(color.getName());
+            }
+        } else {
+            gains.addAll(choices);
         }
 
         List<String> gainsKWList = Lists.newArrayList();

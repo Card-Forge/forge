@@ -1,0 +1,11 @@
+Name:Maximum Carnage
+Variant:UniversesWithin:FlavorName:Lavabrink Repels the Magmaloth
+ManaCost:4 R
+Types:Enchantment Saga
+K:Chapter:3:DBEffect,DBMana,DBDamage
+SVar:DBEffect:DB$ Effect | Duration$ UntilYourNextTurn | StaticAbilities$ MustAttack1,MustAttack2 | SpellDescription$ Until your next turn, each creature attacks each combat if able and attacks a player other than you if able.
+SVar:MustAttack1:Mode$ MustAttack | ValidCreature$ Creature | Description$ Until your next turn, each creature attacks each combat if able and attacks a player other than you if able.
+SVar:MustAttack2:Mode$ MustAttack | ValidCreature$ Creature | MustAttack$ Player.Other | Secondary$ True | Description$ Until your next turn, each creature attacks each combat if able and attacks a player other than you if able.
+SVar:DBMana:DB$ Mana | Produced$ R | Amount$ 3 | SpellDescription$ Add {R}{R}{R}.
+SVar:DBDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 5 | SpellDescription$ This Saga deals 5 damage to each opponent.
+Oracle:(As this Saga enters step and after your draw step, add a lore counter. Sacrifice after III.)\nI — Until your next turn, each creature attacks each combat if able and attacks a player other than you if able.\nII — Add {R}{R}{R}.\nIII — This Saga deals 5 damage to each opponent.

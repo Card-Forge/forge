@@ -1,0 +1,7 @@
+Name:Taxi Driver
+Variant:UniversesWithin:FlavorName:Full-Throttle Fanatic
+ManaCost:1 R
+Types:Creature Human Pilot
+PT:3/1
+A:AB$ Pump | Cost$ 1 T | ValidTgts$ Creature | KW$ Haste | SpellDescription$ Target creature gains haste until end of turn.
+Oracle:{1}, {T}: Target creature gains haste until end of turn.

@@ -1,0 +1,23 @@
+[metadata]
+Name=unholyknight
+[Main]
+2 Unholy Citadel|LEG
+2 Urborg Volcano|INV
+26 Swamp|2ED|3
+4 Bad Moon|2ED
+4 Black Knight|ATH
+4 Corrupt|7ED
+4 Dark Ritual|TMP
+4 Demonic Tutor|3ED
+4 Hymn to Tourach|FEM
+4 Persecute|7ED
+4 Phyrexian Scuta|PLS
+4 Raise Dead|2ED
+4 Terror|5ED
+4 Unholy Strength|2ED
+4 Vampiric Tutor|VIS
+
+[StartInBattle_Reference]
+1 Maze of Shadows|TMP
+1 Rhystic Cave|PCY
+1 Wall of Shadows|LEG

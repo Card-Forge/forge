@@ -1,40 +1,56 @@
 package forge.game.keyword;
 
-import forge.card.CardType;
+import java.util.Arrays;
+
+import forge.util.Lang;
 
 public class KeywordWithType extends KeywordInstance<KeywordWithType> {
-    protected String type;
+    protected String type = null;
+    protected String descType = null;
+    protected String reminderType = null;
+
+    public String getValidType() { return type; }
+    public String getTypeDescription() { return descType; }
 
     @Override
     protected void parse(String details) {
-        if (CardType.isACardType(details)) {
-            type = details.toLowerCase();
-        } else if (details.contains(":")) {
+        String k[];
+        if (details.contains(":")) {
             switch (getKeyword()) {
             case AFFINITY:
-                type = details.split(":")[1];
-                // type lists defined by rules should not be changed by TextChange in reminder text 
-                if (type.equalsIgnoreCase("Outlaw")) {
-                    type = "Assassin, Mercenary, Pirate, Rogue, and/or Warlock";
-                } else if (type.equalsIgnoreCase("historic permanent")) {
-                    type = "artifact, legendary, and/or Saga permanent";
-                }
-                break;
             case BANDSWITH:
+            case ENCHANT:
             case HEXPROOF:
             case LANDWALK:
-                type = details.split(":")[1];
+                k = details.split(":");
+                type = k[0];
+                descType = k[1];
                 break;
             default:
-                type = details.split(":")[0];
+                k = details.split(":");
+                type = k[1];
+                descType = k[0];
             }
         } else {
-            type = details;
+            descType = type = details;
+            boolean multiple = switch(getKeyword()) {
+                case AFFINITY -> true;
+                default -> false;
+            };
+            descType = Lang.getInstance().buildValidDesc(Arrays.asList(type.split(",")), multiple);
+        }
+
+        if (descType.equalsIgnoreCase("Outlaw")) {
+            reminderType = "Assassin, Mercenary, Pirate, Rogue, and/or Warlock";
+        } else if (type.equalsIgnoreCase("historic permanent")) {
+            reminderType = "artifact, legendary, and/or Saga permanent";
+        } else {
+            reminderType = descType;
         }
     }
 
     @Override
     protected String formatReminderText(String reminderText) {
-        return String.format(reminderText, type);
+        return String.format(reminderText, reminderType);
     }
 }

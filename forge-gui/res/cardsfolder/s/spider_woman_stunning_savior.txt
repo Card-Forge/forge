@@ -1,0 +1,9 @@
+Name:Spider-Woman, Stunning Savior
+Variant:UniversesWithin:FlavorName:Makdee and Itla, Skysnarers
+ManaCost:1 WU
+Types:Legendary Creature Spider Human Hero
+PT:2/2
+K:Flying
+R:Event$ Moved | ValidCard$ Artifact.OppCtrl,Creature.OppCtrl | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | ActiveZones$ Battlefield | Description$ Venom Blast — Artifacts and creatures your opponents control enter tapped.
+SVar:ETBTapped:DB$ Tap | ETB$ True | Defined$ ReplacedCard
+Oracle:Flying\nVenom Blast — Artifacts and creatures your opponents control enter tapped.

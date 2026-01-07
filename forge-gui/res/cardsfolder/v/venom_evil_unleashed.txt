@@ -1,0 +1,9 @@
+Name:Venom, Evil Unleashed
+Variant:UniversesWithin:FlavorName:Tethex, Gift of Malice
+ManaCost:4 B
+Types:Legendary Creature Symbiote Villain
+PT:4/5
+K:Deathtouch
+A:AB$ PutCounter | Cost$ 2 B ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 2 | SorcerySpeed$ True | SubAbility$ DBPump | SpellDescription$ Put two +1/+1 counters on target creature. It gains deathtouch until end of turn. Activate only as a sorcery.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Deathtouch
+Oracle:Deathtouch\n{2}{B}, Exile this card from your graveyard: Put two +1/+1 counters on target creature. It gains deathtouch until end of turn. Activate only as a sorcery.

@@ -442,10 +442,10 @@
 	{ &quot;name&quot;:&quot;Open the gate&quot;,
 	  &quot;condition&quot;: [{&quot;checkMapFlag&quot;:&quot;cemeteryKey&quot;, &quot;not&quot;:true}],
 	  &quot;text&quot;: &quot;The gate is closed with a large and elaborate lock.&quot;,
-	  &quot;options&quot;: [{ &quot;name&quot;:&quot;Walk away in search of a key.&quot; }]
+	  &quot;options&quot;: [{ &quot;name&quot;:&quot;Walk away in search of a key&quot; }]
 	}, 
 	{ 
-	  &quot;name&quot;:&quot;Walk away.&quot; 
+	  &quot;name&quot;:&quot;Leave&quot; 
 	} 
 	]
   },
@@ -459,10 +459,10 @@
 	{ &quot;name&quot;:&quot;Open the gate&quot;,
               &quot;action&quot;: [{&quot;deleteMapObject&quot;:270}],
 	   &quot;text&quot;: &quot;With a screeching sound that could wake the dead, the gate swings open. You are now free to pass.&quot;,
-	  &quot;options&quot;:[{&quot;name&quot;:&quot;(continue)&quot;}]
+	  &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;}]
 	 },
 	{ 
-	  &quot;name&quot;:&quot;Walk away.&quot; 
+	  &quot;name&quot;:&quot;Leave&quot; 
 	} 
 	]
   }

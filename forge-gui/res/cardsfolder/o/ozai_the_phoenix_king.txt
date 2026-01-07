@@ -1,0 +1,12 @@
+Name:Ozai, the Phoenix King
+ManaCost:2 B B R R
+Types:Legendary Creature Human Noble
+PT:7/7
+K:Trample
+K:Firebending:4
+K:Haste
+R:Event$ LoseMana | ValidPlayer$ You | ReplacementResult$ Replaced | ReplaceWith$ ConvertMana | ActiveZones$ Battlefield | Description$ If you would lose unspent mana, that mana becomes red instead.
+SVar:ConvertMana:DB$ ReplaceMana | ReplaceType$ Red
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying & Indestructible | CheckSVar$ X | SVarCompare$ GE6 | Description$ NICKNAME has flying and indestructible as long as you have six or more unspent mana.
+SVar:X:Count$ManaPool:All
+Oracle:Trample, firebending 4, haste\nIf you would lose unspent mana, that mana becomes red instead.\nOzai has flying and indestructible as long as you have six or more unspent mana.

@@ -2,5 +2,5 @@ Name:Ritual of Rejuvenation
 ManaCost:2 W
 Types:Instant
 A:SP$ GainLife | LifeAmount$ 4 | SubAbility$ DBDraw | SpellDescription$ You gain 4 life. Draw a card.
-SVar:DBDraw:DB$ Draw | NumCards$ 1
+SVar:DBDraw:DB$ Draw
 Oracle:You gain 4 life.\nDraw a card.

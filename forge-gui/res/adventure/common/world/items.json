@@ -1556,7 +1556,7 @@
   },
   {
     "name": "Amulet of the Deceiver",
-    "equipmentSlot": "Head",
+    "equipmentSlot": "Neck",
     "iconName": "MoxJet",
     "effect": {
       "lifeModifier": -1,

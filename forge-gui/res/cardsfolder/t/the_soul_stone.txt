@@ -1,0 +1,12 @@
+Name:The Soul Stone
+Variant:UniversesWithin:FlavorName:The Terminus of Return
+ManaCost:1 B
+Types:Legendary Artifact Infinity Stone
+K:Indestructible
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+A:AB$ AlterAttribute | Cost$ 6 B T Exile<1/Creature> | Defined$ Self | Attributes$ Harnessed | StackDescription$ SpellDescription | SpellDescription$ Harness CARDNAME. (Once harnessed, its ∞ ability is active.)
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.Self+harnessed | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ ∞ — At the beginning of your upkeep, return target creature card from your graveyard to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature.YouOwn | Origin$ Graveyard | Destination$ Battlefield
+SVar:PlayMain1:TRUE
+DeckHints:Ability$Graveyard
+Oracle:Indestructible\n{T}: Add {B}.\n{6}{B}, {T}, Exile a creature you control: Harness The Soul Stone. (Once harnessed, its ∞ ability is active.)\n∞ — At the beginning of your upkeep, return target creature card from your graveyard to the battlefield.

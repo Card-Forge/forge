@@ -53,23 +53,21 @@ public class ControlExchangeAi extends SpellAbilityAi {
             if (mandatory) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
-        } else {
-            if (mandatory) {
-                AiAbilityDecision decision = chkDrawback(sa, aiPlayer);
-                if (sa.isTargetNumberValid()) {
-                    return  new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                }
-
-                return decision;
-            } else {
-                return canPlay(aiPlayer, sa);
+        } else if (mandatory) {
+            AiAbilityDecision decision = chkDrawback(aiPlayer, sa);
+            if (sa.isTargetNumberValid()) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
+
+            return decision;
+        } else {
+            return canPlay(aiPlayer, sa);
         }
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(Player aiPlayer, SpellAbility sa) {
         if (!sa.usesTargeting()) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }

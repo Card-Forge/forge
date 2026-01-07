@@ -1,0 +1,12 @@
+Name:Sokka, Swordmaster
+ManaCost:2 W
+Types:Legendary Creature Human Warrior Ally
+PT:3/3
+K:Vigilance
+S:Mode$ ReduceCost | ValidCard$ Equipment| Type$ Spell | Activator$ You | Amount$ X | Description$ Equipment spells you cast cost {1} less to cast for each Ally you control.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBAttach | TriggerDescription$ At the beginning of combat on your turn, attach up to one target Equipment you control to NICKNAME.
+SVar:DBAttach:DB$ Attach | ValidTgts$ Equipment.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target Equipment you control | Object$ Targeted | Defined$ Self
+SVar:X:Count$Valid Ally.YouCtrl
+SVar:BuffedBy:Ally
+DeckHints:Type$Equipment
+Oracle:Vigilance\nEquipment spells you cast cost {1} less to cast for each Ally you control.\nAt the beginning of combat on your turn, attach up to one target Equipment you control to Sokka.

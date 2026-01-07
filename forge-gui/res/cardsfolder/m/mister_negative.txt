@@ -1,0 +1,13 @@
+Name:Mister Negative
+Variant:UniversesWithin:FlavorName:Withar, Cocoon Keeper
+ManaCost:5 W B
+Types:Legendary Creature Human Villain
+PT:5/5
+K:Vigilance
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExchangeLife | OptionalDecider$ You | TriggerDescription$ Darkforce Inversion — When CARDNAME enters, you may exchange life totals with target opponent. If you lost life this way, draw that many cards.
+SVar:TrigExchangeLife:DB$ ExchangeLife | ValidTgts$ Opponent | TgtPrompt$ Select target opponent to exchange life totals with | RememberOwnLoss$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$RememberedNumber
+Oracle:Vigilance, lifelink\nDarkforce Inversion — When Mister Negative enters, you may exchange life totals with target opponent. If you lost life this way, draw that many cards.

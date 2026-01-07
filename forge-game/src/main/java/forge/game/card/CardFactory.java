@@ -87,22 +87,16 @@ public class CardFactory {
         // need to create a physical card first, i need the original card faces
         final Card copy = getCard(original.getPaperCard(), controller, id, game);
 
+        copy.setStates(getCloneStates(original, copy, sourceSA));
+        // force update the now set State
         if (original.isTransformable()) {
+            copy.setState(original.isTransformed() ? CardStateName.Backside : CardStateName.Original, true, true);
             // 707.8a If an effect creates a token that is a copy of a transforming permanent or a transforming double-faced card not on the battlefield,
             // the resulting token is a transforming token that has both a front face and a back face.
             // The characteristics of each face are determined by the copiable values of the same face of the permanent it is a copy of, as modified by any other copy effects that apply to that permanent.
             // If the token is a copy of a transforming permanent with its back face up, the token enters the battlefield with its back face up.
             // This rule does not apply to tokens that are created with their own set of characteristics and enter the battlefield as a copy of a transforming permanent due to a replacement effect.
             copy.setBackSide(original.isBackSide());
-            if (original.isTransformed()) {
-                copy.incrementTransformedTimestamp();
-            }
-        }
-
-        copy.setStates(getCloneStates(original, copy, sourceSA));
-        // force update the now set State
-        if (original.isTransformable()) {
-            copy.setState(original.isTransformed() ? CardStateName.Backside : CardStateName.Original, true, true);
         } else {
             copy.setState(copy.getCurrentStateName(), true, true);
         }
@@ -177,9 +171,7 @@ public class CardFactory {
         return getCard(cp, owner, owner == null ? -1 : owner.getGame().nextCardId(), game);
     }
     public static Card getCard(final IPaperCard cp, final Player owner, final int cardId, final Game game) {
-        CardRules cardRules = cp.getRules();
-        final Card c = readCard(cardRules, cp, cardId, game);
-        c.setRules(cardRules);
+        final Card c = readCard(cp, cardId, game);
         c.setOwner(owner);
         buildAbilities(c);
 
@@ -202,8 +194,8 @@ public class CardFactory {
                 // setting this to true will download the original image with different name.
                 c.setImageKey(cp.getImageKey(false));
             }
-            else if (c.isDoubleFaced() && cardRules != null) {
-                c.setState(cardRules.getSplitType().getChangedStateName(), false);
+            else if (c.isDoubleFaced()) {
+                c.setState(cp.getRules().getSplitType().getChangedStateName(), false);
                 c.setImageKey(cp.getImageKey(true));
             }
             else if (c.isSplitCard()) {
@@ -264,7 +256,7 @@ public class CardFactory {
         card.setState(CardStateName.Original, false);
         // need to update keyword cache for original spell
         if (card.isSplitCard()) {
-            card.updateKeywordsCache(card.getCurrentState());
+            card.updateKeywordsCache();
         }
 
         // ******************************************************************
@@ -303,12 +295,14 @@ public class CardFactory {
         String abString  = "AB$ Mana | Cost$ T | Produced$ " + strcolor +
                 " | Secondary$ True | SpellDescription$ Add {" + strcolor + "}.";
         SpellAbility sa = AbilityFactory.getAbility(abString, state);
-        sa.setIntrinsic(true); // always intrisic
+        sa.setIntrinsic(true); // always intrinsic
         return sa;
     }
 
-    private static Card readCard(final CardRules rules, final IPaperCard paperCard, int cardId, Game game) {
+    private static Card readCard(final IPaperCard paperCard, int cardId, Game game) {
         final Card card = new Card(cardId, paperCard, game);
+        CardRules rules = paperCard.getRules();
+        card.updateRulesView();
 
         // 1. The states we may have:
         CardSplitType st = rules.getSplitType();
@@ -345,12 +339,10 @@ public class CardFactory {
             card.setName(rules.getName());
 
             // Combined mana cost
-            ManaCost combinedManaCost = ManaCost.combine(rules.getMainPart().getManaCost(), rules.getOtherPart().getManaCost());
-            card.setManaCost(combinedManaCost);
+            card.setManaCost(rules.getManaCost());
 
             // Combined card color
-            final byte combinedColor = (byte) (rules.getMainPart().getColor().getColor() | rules.getOtherPart().getColor().getColor());
-            card.setColor(combinedColor);
+            card.setColor(rules.getColor());
             card.setType(new CardType(rules.getType()));
 
             // Combined text based on Oracle text -  might not be necessary
@@ -376,16 +368,16 @@ public class CardFactory {
             }
         }
 
+        // Set name for Sentry reports to be identifiable
+        c.setName(face.getName());
+
+        c.getCurrentState().setFlavorName(face.getFlavorName());
+
         // Negative card Id's are for view purposes only
         if (c.getId() >= 0) {
             // Build English oracle and translated oracle mapping
             CardTranslation.buildOracleMapping(face.getName(), face.getOracleText(), variantName);
-        }
 
-        // Set name for Sentry reports to be identifiable
-        c.setName(face.getName());
-
-        if (c.getId() >= 0) { // Set Triggers & Abilities if not for view
             for (Entry<String, String> v : face.getVariables())
                 c.setSVar(v.getKey(), v.getValue());
             for (String r : face.getReplacements())
@@ -405,15 +397,12 @@ public class CardFactory {
         c.setManaCost(face.getManaCost());
         c.setText(face.getNonAbilityText());
 
-        c.getCurrentState().setBaseLoyalty(face.getInitialLoyalty());
-        c.getCurrentState().setBaseDefense(face.getDefense());
-
         c.getCurrentState().setOracleText(face.getOracleText());
 
         // Super and 'middle' types should use enums.
         c.setType(new CardType(face.getType()));
 
-        c.setColor(face.getColor().getColor());
+        c.setColor(face.getColor());
 
         if (face.getIntPower() != Integer.MAX_VALUE) {
             c.setBasePower(face.getIntPower());
@@ -423,6 +412,9 @@ public class CardFactory {
             c.setBaseToughness(face.getIntToughness());
             c.setBaseToughnessString(face.getToughness());
         }
+
+        c.getCurrentState().setBaseLoyalty(face.getInitialLoyalty());
+        c.getCurrentState().setBaseDefense(face.getDefense());
 
         c.setAttractionLights(face.getAttractionLights());
 
@@ -472,29 +464,30 @@ public class CardFactory {
         return new WrappedAbility(sa.getTrigger(), sa.getWrappedAbility().copy(newHost, controller, false), sa.getDecider());
     }
 
-    public static CardCloneStates getCloneStates(final Card in, final Card out, final CardTraitBase sa) {
-        final Card host = sa.getHostCard();
+    public static CardCloneStates getCloneStates(final Card in, final Card out, final CardTraitBase cause) {
+        final Card host = cause.getHostCard();
         final Map<String,String> origSVars = host.getSVars();
         final List<String> types = Lists.newArrayList();
         final List<String> keywords = Lists.newArrayList();
         boolean KWifNew = false;
         final List<String> removeKeywords = Lists.newArrayList();
         List<String> creatureTypes = null;
-        final CardCloneStates result = new CardCloneStates(in, sa);
+        final CardCloneStates result = new CardCloneStates(in, cause);
 
-        final String newName = sa.getParam("NewName");
+        final String newName = cause.getParam("NewName");
+        ManaCost manaCost = null;
         ColorSet colors = null;
 
-        if (sa.hasParam("AddTypes")) {
-            types.addAll(Arrays.asList(sa.getParam("AddTypes").split(" & ")));
+        if (cause.hasParam("AddTypes")) {
+            types.addAll(Arrays.asList(cause.getParam("AddTypes").split(" & ")));
         }
 
-        if (sa.hasParam("SetCreatureTypes")) {
-            creatureTypes = ImmutableList.copyOf(sa.getParam("SetCreatureTypes").split(" "));
+        if (cause.hasParam("SetCreatureTypes")) {
+            creatureTypes = ImmutableList.copyOf(cause.getParam("SetCreatureTypes").split(" "));
         }
 
-        if (sa.hasParam("AddKeywords")) {
-            String kwString = sa.getParam("AddKeywords");
+        if (cause.hasParam("AddKeywords")) {
+            String kwString = cause.getParam("AddKeywords");
             if (kwString.startsWith("IfNew ")) {
                 KWifNew = true;
                 kwString = kwString.substring(6);
@@ -502,23 +495,22 @@ public class CardFactory {
             keywords.addAll(Arrays.asList(kwString.split(" & ")));
         }
 
-        if (sa.hasParam("RemoveKeywords")) {
-            removeKeywords.addAll(Arrays.asList(sa.getParam("RemoveKeywords").split(" & ")));
+        if (cause.hasParam("RemoveKeywords")) {
+            removeKeywords.addAll(Arrays.asList(cause.getParam("RemoveKeywords").split(" & ")));
         }
 
-        if (sa.hasParam("AddColors")) {
-            colors = ColorSet.fromNames(sa.getParam("AddColors").split(","));
+        if (cause.hasParam("AddColors")) {
+            colors = ColorSet.fromNames(cause.getParam("AddColors").split(","));
         }
 
-        if (sa.hasParam("SetColor")) {
-            colors = ColorSet.fromNames(sa.getParam("SetColor").split(","));
+        if (cause.hasParam("SetColor")) {
+            colors = ColorSet.fromNames(cause.getParam("SetColor").split(","));
         }
 
-        if (sa.hasParam("SetColorByManaCost")) {
-            if (sa.hasParam("SetManaCost")) {
-                colors = ColorSet.fromManaCost(new ManaCost(new ManaCostParser(sa.getParam("SetManaCost"))));
-            } else {
-                colors = ColorSet.fromManaCost(host.getManaCost());
+        if (cause.hasParam("SetManaCost")) {
+            manaCost = new ManaCost(new ManaCostParser(cause.getParam("SetManaCost")));
+            if (cause.hasParam("SetColorByManaCost")) {
+                colors = ColorSet.fromManaCost(manaCost);
             }
         }
 
@@ -527,58 +519,34 @@ public class CardFactory {
         if (in.isFaceDown()) {
             // if something is cloning a facedown card, it only clones the
             // facedown state into original
-            final CardState ret = new CardState(out, CardStateName.Original);
-            ret.copyFrom(in.getFaceDownState(), false, sa);
-            result.put(CardStateName.Original, ret);
+            result.add(in.getFaceDownState().copy(out, CardStateName.Original, cause));
         } else if (in.isFlipCard()) {
             // if something is cloning a flip card, copy both original and
             // flipped state
-            final CardState ret1 = new CardState(out, CardStateName.Original);
-            ret1.copyFrom(in.getState(CardStateName.Original), false, sa);
-            result.put(CardStateName.Original, ret1);
-
-            final CardState ret2 = new CardState(out, CardStateName.Flipped);
-            ret2.copyFrom(in.getState(CardStateName.Flipped), false, sa);
-            result.put(CardStateName.Flipped, ret2);
+            result.add(in.getState(CardStateName.Original).copy(out, cause));
+            result.add(in.getState(CardStateName.Flipped).copy(out, cause));
         } else if (in.hasState(CardStateName.Secondary)) {
-            final CardState ret1 = new CardState(out, CardStateName.Original);
-            ret1.copyFrom(in.getState(CardStateName.Original), false, sa);
-            result.put(CardStateName.Original, ret1);
-
-            final CardState ret2 = new CardState(out, CardStateName.Secondary);
-            ret2.copyFrom(in.getState(CardStateName.Secondary), false, sa);
-            result.put(CardStateName.Secondary, ret2);
-        } else if (in.isTransformable() && sa instanceof SpellAbility && (
-                ApiType.CopyPermanent.equals(((SpellAbility)sa).getApi()) ||
-                ApiType.CopySpellAbility.equals(((SpellAbility)sa).getApi()) ||
-                ApiType.ReplaceToken.equals(((SpellAbility)sa).getApi())
-                )) {
+            result.add(in.getState(CardStateName.Original).copy(out, cause));
+            result.add(in.getState(CardStateName.Secondary).copy(out, cause));
+        } else if (in.isTransformable() && cause instanceof SpellAbility sa && (
+                ApiType.CopyPermanent.equals(sa.getApi()) ||
+                ApiType.CopySpellAbility.equals(sa.getApi()) ||
+                ApiType.ReplaceToken.equals(sa.getApi()))) {
             // CopyPermanent can copy token
-            final CardState ret1 = new CardState(out, CardStateName.Original);
-            ret1.copyFrom(in.getState(CardStateName.Original), false, sa);
-            result.put(CardStateName.Original, ret1);
-
-            final CardState ret2 = new CardState(out, CardStateName.Backside);
-            ret2.copyFrom(in.getState(CardStateName.Backside), false, sa);
-            result.put(CardStateName.Backside, ret2);
+            result.add(in.getState(CardStateName.Original).copy(out, cause));
+            result.add(in.getState(CardStateName.Backside).copy(out, cause));
         } else if (in.isSplitCard()) {
             // for split cards, copy all three states
-            final CardState ret1 = new CardState(out, CardStateName.Original);
-            ret1.copyFrom(in.getState(CardStateName.Original), false, sa);
-            result.put(CardStateName.Original, ret1);
 
-            final CardState ret2 = new CardState(out, CardStateName.LeftSplit);
-            ret2.copyFrom(in.getState(CardStateName.LeftSplit), false, sa);
-            result.put(CardStateName.LeftSplit, ret2);
-
-            final CardState ret3 = new CardState(out, CardStateName.RightSplit);
-            ret3.copyFrom(in.getState(CardStateName.RightSplit), false, sa);
-            result.put(CardStateName.RightSplit, ret3);
+            result.add(in.getState(CardStateName.Original).copy(out, cause));
+            result.add(in.getState(CardStateName.LeftSplit).copy(out, cause));
+            result.add(in.getState(CardStateName.RightSplit).copy(out, cause));
+            if (in.isPermanent()) {
+                result.add(in.getState(CardStateName.EmptyRoom).copy(out, cause));
+            }
         } else {
             // in all other cases just copy the current state to original
-            final CardState ret = new CardState(out, CardStateName.Original);
-            ret.copyFrom(in.getState(in.getCurrentStateName()), false, sa);
-            result.put(CardStateName.Original, ret);
+            result.add(in.getState(in.getCurrentStateName()).copy(out, CardStateName.Original, cause));
         }
 
         // update all states, both for flip cards
@@ -587,32 +555,32 @@ public class CardFactory {
             final CardState state = e.getValue();
 
             // has Embalm Condition for extra changes of Vizier of Many Faces
-            if (sa.hasParam("Embalm") && !out.isEmbalmed()) {
+            if (cause.hasParam("Embalm") && !out.isEmbalmed()) {
                 continue;
             }
 
             // update the names for the states
-            if (sa.hasParam("KeepName")) {
+            if (cause.hasParam("KeepName")) {
                 state.setName(originalState.getName());
             } else if (newName != null) {
                 // convert NICKNAME descriptions?
                 state.setName(newName);
             }
 
-            if (sa.hasParam("AddColors")) {
-                state.addColor(colors.getColor());
+            if (cause.hasParam("AddColors")) {
+                state.addColor(colors);
             }
 
-            if (sa.hasParam("SetColor") || sa.hasParam("SetColorByManaCost")) {
-                state.setColor(colors.getColor());
+            if (cause.hasParam("SetColor") || cause.hasParam("SetColorByManaCost")) {
+                state.setColor(colors);
             }
 
-            if (sa.hasParam("NonLegendary")) {
+            if (cause.hasParam("NonLegendary")) {
                 state.removeType(CardType.Supertype.Legendary);
             }
 
-            if (sa.hasParam("RemoveCardTypes")) {
-                state.removeCardTypes(sa.hasParam("RemoveSubTypes"));
+            if (cause.hasParam("RemoveCardTypes")) {
+                state.removeCardTypes(cause.hasParam("RemoveSubTypes"));
             }
 
             state.addType(types);
@@ -621,21 +589,9 @@ public class CardFactory {
                 state.setCreatureTypes(creatureTypes);
             }
 
-            List<String> finalizedKWs = KWifNew ? Lists.newArrayList() : keywords;
+            List<String> finalizedKWs = keywords;
             if (KWifNew) {
-                for (String k : keywords) {
-                    Keyword toAdd = Keyword.getInstance(k).getKeyword();
-                    boolean match = false;
-                    for (KeywordInterface kw : state.getIntrinsicKeywords()) {
-                        if (kw.getKeyword().equals(toAdd)) {
-                            match = true;
-                            break;
-                        }
-                    }
-                    if (!match) {
-                        finalizedKWs.add(k);
-                    }
-                }
+                finalizedKWs = keywords.stream().filter(k -> !state.hasIntrinsicKeyword(Keyword.getInstance(k).getKeyword())).collect(Collectors.toList());
             }
             state.addIntrinsicKeywords(finalizedKWs);
             for (String kw : removeKeywords) {
@@ -644,31 +600,31 @@ public class CardFactory {
 
             // CR 208.3 A noncreature object not on the battlefield has power or toughness only if it has a power and toughness printed on it.
             // currently only LKI can be trusted?
-            if ((sa.hasParam("SetPower") || sa.hasParam("SetToughness")) &&
+            if ((cause.hasParam("SetPower") || cause.hasParam("SetToughness")) &&
                 (state.getType().isCreature() || (originalState != null && in.getOriginalState(originalState.getStateName()).getBasePowerString() != null))) {
-                if (sa.hasParam("SetPower")) {
-                    state.setBasePower(AbilityUtils.calculateAmount(host, sa.getParam("SetPower"), sa));
+                if (cause.hasParam("SetPower")) {
+                    state.setBasePower(AbilityUtils.calculateAmount(host, cause.getParam("SetPower"), cause));
                 }
-                if (sa.hasParam("SetToughness")) {
-                    state.setBaseToughness(AbilityUtils.calculateAmount(host, sa.getParam("SetToughness"), sa));
+                if (cause.hasParam("SetToughness")) {
+                    state.setBaseToughness(AbilityUtils.calculateAmount(host, cause.getParam("SetToughness"), cause));
                 }
             }
 
-            if (state.getType().isPlaneswalker() && sa.hasParam("SetLoyalty")) {
-                state.setBaseLoyalty(String.valueOf(AbilityUtils.calculateAmount(host, sa.getParam("SetLoyalty"), sa)));
+            if (state.getType().isPlaneswalker() && cause.hasParam("SetLoyalty")) {
+                state.setBaseLoyalty(String.valueOf(AbilityUtils.calculateAmount(host, cause.getParam("SetLoyalty"), cause)));
             }
 
-            if (sa.hasParam("RemoveCost")) {
+            if (cause.hasParam("RemoveCost")) {
                 state.setManaCost(ManaCost.NO_COST);
             }
 
-            if (sa.hasParam("SetManaCost")) {
-                state.setManaCost(new ManaCost(new ManaCostParser(sa.getParam("SetManaCost"))));
+            if (cause.hasParam("SetManaCost")) {
+                state.setManaCost(manaCost);
             }
 
             // SVars to add to clone
-            if (sa.hasParam("AddSVars") || sa.hasParam("GainTextSVars")) {
-                final String str = sa.getParamOrDefault("GainTextSVars", sa.getParam("AddSVars"));
+            if (cause.hasParam("AddSVars")) {
+                final String str = cause.getParam("AddSVars");
                 for (final String s : str.split(",")) {
                     if (origSVars.containsKey(s)) {
                         final String actualsVar = origSVars.get(s);
@@ -678,8 +634,8 @@ public class CardFactory {
             }
 
             // triggers to add to clone
-            if (sa.hasParam("AddTriggers")) {
-                for (final String s : sa.getParam("AddTriggers").split(",")) {
+            if (cause.hasParam("AddTriggers")) {
+                for (final String s : cause.getParam("AddTriggers").split(",")) {
                     if (origSVars.containsKey(s)) {
                         final String actualTrigger = origSVars.get(s);
                         final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, out, true, state);
@@ -689,8 +645,8 @@ public class CardFactory {
             }
 
             // abilities to add to clone
-            if (sa.hasParam("AddAbilities") || sa.hasParam("GainTextAbilities")) {
-                final String str = sa.getParamOrDefault("GainTextAbilities", sa.getParam("AddAbilities"));
+            if (cause.hasParam("AddAbilities") || cause.hasParam("GainTextAbilities")) {
+                final String str = cause.getParamOrDefault("GainTextAbilities", cause.getParam("AddAbilities"));
                 for (final String s : str.split(",")) {
                     if (origSVars.containsKey(s)) {
                         final String actualAbility = origSVars.get(s);
@@ -702,18 +658,18 @@ public class CardFactory {
             }
 
             // static abilities to add to clone
-            if (sa.hasParam("AddStaticAbilities")) {
-                final String str = sa.getParam("AddStaticAbilities");
+            if (cause.hasParam("AddStaticAbilities")) {
+                final String str = cause.getParam("AddStaticAbilities");
                 for (final String s : str.split(",")) {
                     if (origSVars.containsKey(s)) {
                         final String actualStatic = origSVars.get(s);
-                        state.addStaticAbility(StaticAbility.create(actualStatic, out, sa.getCardState(), true));
+                        state.addStaticAbility(StaticAbility.create(actualStatic, out, cause.getCardState(), true));
                     }
                 }
             }
 
-            if (sa.hasParam("GainThisAbility") && sa instanceof SpellAbility) {
-                SpellAbility root = ((SpellAbility) sa).getRootAbility();
+            if (cause.hasParam("GainThisAbility") && cause instanceof SpellAbility sa) {
+                SpellAbility root = sa.getRootAbility();
 
                 // Aurora Shifter
                 if (root.isTrigger() && root.getTrigger().getSpawningAbility() != null) {
@@ -730,35 +686,35 @@ public class CardFactory {
             }
 
             // Special Rules for Embalm and Eternalize
-            if (sa.isEmbalm() && sa.isIntrinsic()) {
+            if (cause.isEmbalm() && cause.isIntrinsic()) {
                 String name = "embalm_" + TextUtil.fastReplace(
                         TextUtil.fastReplace(host.getName(), ",", ""),
                         " ", "_").toLowerCase();
                 state.setImageKey(StaticData.instance().getOtherImageKey(name, host.getSetCode()));
             }
 
-            if (sa.isEternalize() && sa.isIntrinsic()) {
+            if (cause.isEternalize() && cause.isIntrinsic()) {
                 String name = "eternalize_" + TextUtil.fastReplace(
                     TextUtil.fastReplace(host.getName(), ",", ""),
                         " ", "_").toLowerCase();
                 state.setImageKey(StaticData.instance().getOtherImageKey(name, host.getSetCode()));
             }
 
-            if (sa.isKeyword(Keyword.OFFSPRING) && sa.isIntrinsic()) {
+            if (cause.isKeyword(Keyword.OFFSPRING) && cause.isIntrinsic()) {
                 String name = "offspring_" + TextUtil.fastReplace(
                         TextUtil.fastReplace(host.getName(), ",", ""),
                         " ", "_").toLowerCase();
                 state.setImageKey(StaticData.instance().getOtherImageKey(name, host.getSetCode()));
             }
 
-            if (sa.isKeyword(Keyword.SQUAD) && sa.isIntrinsic()) {
+            if (cause.isKeyword(Keyword.SQUAD) && cause.isIntrinsic()) {
                 String name = "squad_" + TextUtil.fastReplace(
                         TextUtil.fastReplace(host.getName(), ",", ""),
                         " ", "_").toLowerCase();
                 state.setImageKey(StaticData.instance().getOtherImageKey(name, host.getSetCode()));
             }
             
-            if (sa.hasParam("GainTextOf") && originalState != null) {
+            if (cause.hasParam("GainTextOf") && originalState != null) {
                 state.setSetCode(originalState.getSetCode());
                 state.setRarity(originalState.getRarity());
                 state.setImageKey(originalState.getImageKey());
@@ -770,27 +726,27 @@ public class CardFactory {
                     continue;
                 }
 
-                if (sa.hasParam("SetPower") && sta.hasParam("SetPower"))
+                if (cause.hasParam("SetPower") && sta.hasParam("SetPower"))
                     state.removeStaticAbility(sta);
 
-                if (sa.hasParam("SetToughness") && sta.hasParam("SetToughness"))
+                if (cause.hasParam("SetToughness") && sta.hasParam("SetToughness"))
                     state.removeStaticAbility(sta);
 
                 // currently only Changeling and similar should be affected by that
                 // other cards using AddType$ ChosenType should not
-                if (sa.hasParam("SetCreatureTypes") && sta.hasParam("AddAllCreatureTypes")) {
+                if (cause.hasParam("SetCreatureTypes") && sta.hasParam("AddAllCreatureTypes")) {
                     state.removeStaticAbility(sta);
                 }
-                if ((sa.hasParam("SetColor") || sa.hasParam("SetColorByManaCost")) && sta.hasParam("SetColor")) {
+                if ((cause.hasParam("SetColor") || cause.hasParam("SetColorByManaCost")) && sta.hasParam("SetColor")) {
                     state.removeStaticAbility(sta);
                 }
             }
 
             // remove some keywords
-            if (sa.hasParam("SetCreatureTypes")) {
+            if (cause.hasParam("SetCreatureTypes")) {
                 state.removeIntrinsicKeyword(Keyword.CHANGELING);
             }
-            if (sa.hasParam("SetColor") || sa.hasParam("SetColorByManaCost")) {
+            if (cause.hasParam("SetColor") || cause.hasParam("SetColorByManaCost")) {
                 state.removeIntrinsicKeyword(Keyword.DEVOID);
             }
         }
@@ -800,11 +756,11 @@ public class CardFactory {
     public static CardCloneStates getMutatedCloneStates(final Card card, final CardTraitBase sa) {
         final Card top = card.getTopMergedCard();
         final CardStateName state = top.getCurrentStateName();
-        final CardState ret = new CardState(card, state);
+        CardState ret;
         if (top.isCloned()) {
-            ret.copyFrom(top.getState(state), false, sa);
+            ret = top.getState(state).copy(card, sa);
         } else {
-            ret.copyFrom(top.getOriginalState(state), false, sa);
+            ret = top.getOriginalState(state).copy(card, sa);
         }
 
         boolean first = true;
@@ -821,9 +777,7 @@ public class CardFactory {
 
         // For face down, flipped, transformed, melded or MDFC card, also copy the original state to avoid crash
         if (state != CardStateName.Original) {
-            final CardState ret1 = new CardState(card, CardStateName.Original);
-            ret1.copyFrom(top.getState(CardStateName.Original), false, sa);
-            result.put(CardStateName.Original, ret1);
+            result.add(top.getState(CardStateName.Original).copy(card, sa));
         }
 
         return result;

@@ -1,0 +1,9 @@
+Name:Kraven, Proud Predator
+Variant:UniversesWithin:FlavorName:Dreadfang, Loathed by Fans
+ManaCost:1 R G
+Types:Legendary Creature Human Warrior Villain
+PT:*/4
+K:Vigilance
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ Top of the Food Chain — NICKNAME's power is equal to the greatest mana value among permanents you control.
+SVar:X:Count$Valid Permanent.YouCtrl$GreatestCMC
+Oracle:Vigilance\nTop of the Food Chain — Kraven's power is equal to the greatest mana value among permanents you control.

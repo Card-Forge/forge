@@ -1,0 +1,23 @@
+[metadata]
+Name=counter
+[Main]
+1 Mountain|7ED|3
+1 Seismic Assault|7ED
+16 Island|7ED|3
+2 Concentrate|ODY
+2 Cunning Wish|JUD
+2 Impulse|BTD
+2 Intuition|TMP
+4 Accumulated Knowledge|NMS
+4 Ancient Tomb|TMP
+4 City of Traitors|EXO
+4 Dream Halls|STH
+4 Meditate|TMP
+4 Opportunity|7ED
+4 Rush of Knowledge|SCG
+4 Show and Tell|USG
+4 Sleight of Hand|7ED
+4 Volcanic Island|LEB
+
+[StartInBattle_Reference]
+1 Hesitation|STH

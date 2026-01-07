@@ -1,0 +1,7 @@
+Name:Behold the Sinister Six!
+Variant:UniversesWithin:FlavorName:Hex of Undeath
+ManaCost:6 B
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose up to six target creature cards with different names in your graveyard | ValidTgts$ Creature.YouOwn | TargetsWithDifferentNames$ True | TargetMin$ 0 | TargetMax$ 6 | SpellDescription$ Return up to six target creature cards with different names from your graveyard to the battlefield.
+DeckHas:Ability$Graveyard
+Oracle:Return up to six target creature cards with different names from your graveyard to the battlefield.

@@ -1,0 +1,9 @@
+Name:Steel Wrecking Ball
+Variant:UniversesWithin:FlavorName:Temple Trap
+ManaCost:5
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When this artifact enters, it deals 5 damage to target creature.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ 5
+A:AB$ Destroy | Cost$ 1 R Discard<1/CARDNAME> | ActivationZone$ Hand | ValidTgts$ Artifact | SpellDescription$ Destroy target artifact.
+SVar:PlayMain1:TRUE
+Oracle:When this artifact enters, it deals 5 damage to target creature.\n{1}{R}, Discard this card: Destroy target artifact.

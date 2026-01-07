@@ -67,19 +67,24 @@ ScryfallCode=PMEI
 2024-3 M Ajani, Mentor of Heroes @Aaron Miller
 2024-4 R Gush @Kev Walker
 2024-5 R Diabolic Edict @Ron Spencer
-2024-6 R Voltaic Key @Henry G. Higginbotham
 2024-7 R Patchwork Banner @Sarah Finnigan
 2024-8 M Liliana of the Dark Realms @D. Alexander Gregory
 2025-1 R Shock @Randy Gallegos
-2025-2 R Ancestral Mask @Massimilano Frezzato
+2025-2 R Ancestral Mask @Massimiliano Frezzato
 2025-3 R Wrath of God @Yumeko
+2025-4 R Voltaic Key @Henry G. Higginbotham
 2025-7 R Duress @Lawrence Snelly
+2025-8 R Dark Ritual @Tom Fleming
 2025-10 M Nicol Bolas, Planeswalker @D. Alexander Gregory
 2025-11 R Ultimecia, Temporal Threat @Bachzim
 2025-12 R Lightning, Security Sergeant @Ramza Psyru
 2025-13 M Cloud, Planet's Champion @Magali Villeneuve
 2025-14 M Sephiroth, Planet's Heir @Magali Villeneuve
-2025-15 M Anti-Venom, Horrifying Healer @Lordigan
-2025-16 R Spectacular Spider-Man @Alex Horley-Orlandelli
-2025-17 R Huntmaster of the Fells @Mark Spears
-2025-18 R Iron Spider, Stark Upgrade @Bachzim
+2025-19 M Kaalia of the Vast @Justyna Dura
+2025-20 R Chrome Host Seedshark @Donato Giancola
+2025-21 M Cloud, Midgar Mercenary @Square Enix
+2025-22 M Peter Parker @Randy Gallegos
+2025-23 M Spider-Man, Miles Morales @InHyuk Lee
+2025-24 R Iroh, Grand Lotus @Jo Cordisco
+2025-25 R Aang, Air Nomad @Jinho Bae
+2026-01 R Command Tower @Constantin Marin

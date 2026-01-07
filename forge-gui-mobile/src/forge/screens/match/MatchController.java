@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
 
 import forge.adventure.scene.DuelScene;
 import forge.adventure.util.Config;
@@ -67,9 +66,8 @@ import forge.toolbox.FButton;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOptionPane;
 import forge.trackable.TrackableCollection;
+import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
-import forge.util.Localizer;
-import forge.util.MessageUtil;
 import forge.util.WaitCallback;
 import forge.util.collect.FCollectionView;
 
@@ -174,10 +172,13 @@ public class MatchController extends AbstractGuiGame {
             final VPlayerPanel playerPanel = new VPlayerPanel(p, isLocal || noHumans, players.size());
             if (isLocal && !init) {
                 playerPanels.add(0, playerPanel); //ensure local player always first among player panels
+                playerPanel.setBottomPlayer(true);
                 init = true;
             }
             else {
                 playerPanels.add(playerPanel);
+                if (playerPanel.equals(playerPanels.get(0)))
+                    playerPanel.setBottomPlayer(true);
             }
         }
         view = new MatchScreen(playerPanels);
@@ -660,7 +661,7 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public <T> List<T> getChoices(final String message, final int min, final int max, final List<T> choices, final List<T> selected, final Function<T, String> display) {
+    public <T> List<T> getChoices(final String message, final int min, final int max, final List<T> choices, final List<T> selected, final FSerializableFunction<T, String> display) {
         return GuiBase.getInterface().getChoices(message, min, max, choices, selected, display);
     }
 
@@ -689,15 +690,11 @@ public class MatchController extends AbstractGuiGame {
             return SGuiChoose.one(title, optionList);
         }
 
-        final Collection<CardView> revealList = delayedReveal.getCards();
-        final String revealListCaption = StringUtils.capitalize(MessageUtil.formatMessage("{player's} " + delayedReveal.getZone().getTranslatedName(), delayedReveal.getOwner(), delayedReveal.getOwner()));
-        final FImage revealListImage = VPlayerPanel.iconFromZone(delayedReveal.getZone());
-
         //use special dialog for choosing card and offering ability to see all revealed cards at the same time
         return new WaitCallback<GameEntityView>() {
             @Override
             public void run() {
-                final GameEntityPicker picker = new GameEntityPicker(title, optionList, revealList, revealListCaption, revealListImage, isOptional, this);
+                final GameEntityPicker picker = new GameEntityPicker(title, optionList, delayedReveal, isOptional, this);
                 picker.show();
             }
         }.invokeAndWait();
@@ -712,8 +709,8 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public List<CardView> manipulateCardList(final String title, final Iterable<CardView> cards, final Iterable<CardView> manipulable, final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
-	System.err.println("Not implemented yet - should never be called");
-	return null;
+        System.err.println("Not implemented yet - should never be called");
+        return null;
     }
 
     @Override
@@ -748,10 +745,7 @@ public class MatchController extends AbstractGuiGame {
         FPopupMenu menu = new FPopupMenu() {
             @Override
             protected void buildMenu() {
-                addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblFullControl"),
-                        e -> {
-                            FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblFullControlDetails"), "Full Control details");
-                        }));
+                addItem(new FMenuItem("- " + Forge.getLocalizer().getMessage("lblFullControl") + " -", null, false));
                 addItem(getFullControlMenuEntry("lblChooseCostOrder", FullControlFlag.ChooseCostOrder, controlFlags));
                 addItem(getFullControlMenuEntry("lblChooseCostReductionOrder", FullControlFlag.ChooseCostReductionOrderAndVariableAmount, controlFlags));
                 addItem(getFullControlMenuEntry("lblNoPaymentFromManaAbility", FullControlFlag.NoPaymentFromManaAbility, controlFlags));

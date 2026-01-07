@@ -499,7 +499,7 @@ try {
             <properties>
                 <license.file.name>"LICENSE.txt"</license.file.name>
                 <changes.file.name>"CHANGES.txt"</changes.file.name>
-                <readme.file.name>"MANUAL.txt"</readme.file.name>
+                <readme.file.name>"INSTALLATION.txt"</readme.file.name>
                 <forge.file.name>"Forge"</forge.file.name>
                 <applications.file.name>"Applications"</applications.file.name>
             </properties>
@@ -530,8 +530,6 @@ try {
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="CONTRIBUTORS.txt" />
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="ISSUES.txt" />
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="INSTALLATION.txt" />
-                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="GAMEPAD_README.txt" />
-                                            <fileset dir="${basedir}/../forge-gui/" includes="MANUAL.txt" />
                                             <fileset dir="${basedir}/" includes="sentry.properties" />
                                         </copy>
                                         <taskdef name="bundleapp" classpath="${basedir}/../forge-gui/${configSourceDirectory}/appbundler-1.0-custom.jar" classname="com.oracle.appbundler.AppBundlerTask" />
@@ -613,8 +611,8 @@ try {
         <profile>
             <properties>
                 <license.file.name>"LICENSE.txt"</license.file.name>
-                <changes.file.name>"README.txt"</changes.file.name>
-                <readme.file.name>"MANUAL.txt"</readme.file.name>
+                <changes.file.name>"CHANGES.txt"</changes.file.name>
+                <readme.file.name>"INSTALLATION.txt"</readme.file.name>
                 <forge.file.name>"Forge"</forge.file.name>
                 <applications.file.name>"Applications"</applications.file.name>
             </properties>
@@ -642,7 +640,6 @@ try {
                                         <copy todir="${project.build.directory}/${project.build.finalName}-osx">
                                             <fileset dir="${basedir}/../forge-gui/" includes="LICENSE.txt" />
                                             <fileset dir="${basedir}/../forge-gui/" includes="README.txt" />
-                                            <fileset dir="${basedir}/../forge-gui/" includes="MANUAL.txt" />
                                             <fileset dir="${basedir}/" includes="sentry.properties" />
                                         </copy>
                                         <taskdef name="bundleapp" classpath="${basedir}/../forge-gui/${configSourceDirectory}/appbundler-1.0-custom.jar" classname="com.oracle.appbundler.AppBundlerTask" />

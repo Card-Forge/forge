@@ -428,6 +428,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 game.getTriggerHandler().runTrigger(TriggerType.AbilityCast, runParams, true);
             }
 
+            if (sp.getMaxWaterbend() != null) {
+                activator.triggerElementalBend(TriggerType.Waterbend);
+            }
+
             // Run Cycled triggers
             if (sp.isCycling()) {
                 activator.addCycled(sp);
@@ -450,6 +454,16 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                         Map<AbilityKey, Object> saddleParams = AbilityKey.mapFromCard(sp.getHostCard());
                         saddleParams.put(AbilityKey.Crew, c);
                         game.getTriggerHandler().runTrigger(TriggerType.Saddled, saddleParams, false);
+                    }
+                }
+            }
+            if (sp.isKeyword(Keyword.STATION) && (sp.getHostCard().getType().hasSubtype("Spacecraft") || (sp.getHostCard().getType().hasSubtype("Planet")))) {
+                Iterable<Card> crews = sp.getPaidList("Tapped", true);
+                if (crews != null) {
+                    for (Card c : crews) {
+                        Map<AbilityKey, Object> stationParams = AbilityKey.mapFromCard(sp.getHostCard());
+                        stationParams.put(AbilityKey.Crew, c);
+                        game.getTriggerHandler().runTrigger(TriggerType.Stationed, stationParams, false);
                     }
                 }
             }

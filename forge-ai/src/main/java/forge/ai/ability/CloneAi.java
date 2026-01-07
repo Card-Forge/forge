@@ -76,7 +76,7 @@ public class CloneAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(Player aiPlayer, SpellAbility sa) {
         // AI should only activate this during Human's turn
         boolean chance = true;
 
@@ -96,6 +96,10 @@ public class CloneAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             chance = cloneTgtAI(sa);
         } else {
+            if (sa.isReplacementAbility() && host.isCloned()) {
+                // prevent StackOverflow from infinite loop copying another ETB RE
+                return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
+            }
             if (sa.hasParam("Choices")) {
                 CardCollectionView choices = CardLists.getValidCards(host.getGame().getCardsIn(ZoneType.Battlefield),
                         sa.getParam("Choices"), host.getController(), host, sa);
@@ -188,7 +192,7 @@ public class CloneAi extends SpellAbilityAi {
         final boolean canCloneLegendary = "True".equalsIgnoreCase(sa.getParam("NonLegendary"));
 
         String filter = !isVesuva ? "Permanent.YouDontCtrl,Permanent.nonLegendary"
-                : "Permanent.YouDontCtrl+notnamed" + name + ",Permanent.nonLegendary+notnamed" + name;
+                : "Permanent.YouDontCtrl+!named" + name + ",Permanent.nonLegendary+!named" + name;
 
         // TODO: rewrite this block so that this is done somehow more elegantly
         if (canCloneLegendary) {

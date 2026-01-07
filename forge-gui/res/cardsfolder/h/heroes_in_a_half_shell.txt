@@ -1,0 +1,12 @@
+Name:Heroes in a Half Shell
+ManaCost:W U B R G
+Types:Legendary Creature Mutant Ninja Turtle
+PT:5/5
+K:Vigilance
+K:Menace
+K:Trample
+K:Haste
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Mutant.YouCtrl,Ninja.YouCtrl,Turtle.YouCtrl | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever one or more Mutants, Ninjas, and/or Turtles you control deal combat damage to a player, put a +1/+1 counter on each of those creatures and draw a card.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredSources | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw
+Oracle:Vigilance, menace, trample, haste\nWhenever one or more Mutants, Ninjas, and/or Turtles you control deal combat damage to a player, put a +1/+1 counter on each of those creatures and draw a card.

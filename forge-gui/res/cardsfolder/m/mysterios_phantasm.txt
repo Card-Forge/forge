@@ -1,0 +1,12 @@
+Name:Mysterio's Phantasm
+Variant:UniversesWithin:FlavorName:Phantasmal Vision
+ManaCost:1 U
+Types:Creature Illusion Villain
+PT:1/3
+K:Flying
+K:Vigilance
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever this creature attacks, mill a card. (Put the top card of your library into your graveyard.)
+SVar:TrigMill:DB$ Mill | NumCards$ 1
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Mill
+Oracle:Flying, vigilance\nWhenever this creature attacks, mill a card. (Put the top card of your library into your graveyard.)

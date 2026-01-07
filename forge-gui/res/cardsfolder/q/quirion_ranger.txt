@@ -2,6 +2,6 @@ Name:Quirion Ranger
 ManaCost:G
 Types:Creature Elf Ranger
 PT:1/1
-A:AB$ Untap | Cost$ Return<1/Forest> | ValidTgts$ Creature | TgtPrompt$ Select target creature | ActivationLimit$ 1 | SpellDescription$ Untap target creature. Activate only once each turn.
+A:AB$ Untap | Cost$ Return<1/Forest> | ValidTgts$ Creature | ActivationLimit$ 1 | SpellDescription$ Untap target creature. Activate only once each turn.
 AI:RemoveDeck:All
 Oracle:Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.

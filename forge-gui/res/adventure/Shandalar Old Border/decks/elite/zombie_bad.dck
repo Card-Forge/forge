@@ -1,0 +1,24 @@
+[metadata]
+Name=zombie_bad
+[Main]
+22 Swamp|ONS|3
+2 Bubbling Muck|UDS
+4 Dark Ritual|USG
+4 Twisted Abomination|SCG
+2 Sutured Ghoul|JUD
+2 Zombie Brute|LGN
+2 Nefashu|SCG
+2 Putrid Raptor|SCG
+2 Gluttonous Zombie|ONS
+2 Dripping Dead|LGN
+2 Carrion Wurm|TOR
+2 Dread Wight|ICE
+1 Western Paladin|USG
+1 Eastern Paladin|USG
+2 Zombie Trailblazer|TOR
+2 Zombie Master|5ED
+3 Feast or Famine|ALL|2
+3 Pestilence|5ED
+
+[StartInBattle_Reference]
+1 Gravespawn Sovereign|ONS

@@ -1,0 +1,5 @@
+Name:It'll Quench Ya!
+ManaCost:1 U
+Types:Instant Lesson
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 2 | SpellDescription$ Counter target spell unless its controller pays {2}.
+Oracle:Counter target spell unless its controller pays {2}.

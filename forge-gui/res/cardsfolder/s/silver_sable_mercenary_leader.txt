@@ -1,0 +1,13 @@
+Name:Silver Sable, Mercenary Leader
+Variant:UniversesWithin:FlavorName:Generous Betty Wray
+ManaCost:2 W
+Types:Legendary Creature Human Mercenary Hero
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When NICKNAME enters, put a +1/+1 counter on another target creature.
+SVar:TrigPut:DB$ PutCounter | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | CounterType$ P1P1
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever NICKNAME attacks, target modified creature you control gains lifelink until end of turn. (Equipment, Auras you control, and counters are modifications.)
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.modified+YouCtrl | TgtPrompt$ Select target modified creature you control | KW$ Lifelink
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters
+DeckHints:Type$Aura|Equipment
+Oracle:When Silver Sable enters, put a +1/+1 counter on another target creature.\nWhenever Silver Sable attacks, target modified creature you control gains lifelink until end of turn. (Equipment, Auras you control, and counters are modifications.)

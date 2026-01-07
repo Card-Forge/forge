@@ -4,7 +4,7 @@ Types:Creature Human Werewolf
 PT:3/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME enters or attacks, create a 1/1 green Insect creature token.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters or attacks, create a 1/1 green Insect creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_insect
+SVar:TrigToken:DB$ Token | TokenScript$ g_1_1_insect
 K:Daybound
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Token

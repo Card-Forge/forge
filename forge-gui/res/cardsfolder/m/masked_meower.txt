@@ -1,0 +1,10 @@
+Name:Masked Meower
+Variant:UniversesWithin:FlavorName:Skittering Kitten
+ManaCost:R
+Types:Creature Spider Cat Hero
+PT:1/1
+K:Haste
+A:AB$ Draw | Cost$ Discard<1/Card> Sac<1/CARDNAME/this creature> | SpellDescription$ Draw a card.
+DeckHas:Ability$Discard
+DeckHints:Keyword$Madness & Ability$Delirium
+Oracle:Haste\nDiscard a card, Sacrifice this creature: Draw a card.

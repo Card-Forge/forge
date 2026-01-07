@@ -18,7 +18,6 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.Localizer;
 
@@ -82,13 +81,13 @@ public class ExploreEffect extends SpellAbilityEffect {
                         params.put("RevealedCard", r);
                         if (pl.getController().confirmAction(sa, null,
                                 Localizer.getInstance().getMessage("lblPutThisCardToYourGraveyard",
-                                        CardTranslation.getTranslatedName(r.getName())), r, params))
+                                        r.getTranslatedName()), r, params))
                             game.getAction().moveTo(ZoneType.Graveyard, r, sa, moveParams);
                     }
                 }
                 if (!revealedLand) {
                     // need to get newest game state to check if it is still on the battlefield
-                    // and the timestamp didnt change
+                    // and the timestamp didn't change
                     Card gamec = game.getCardState(c);
                     if (gamec.isInPlay() && gamec.equalsWithGameTimestamp(c)) {
                         c.addCounter(CounterEnumType.P1P1, 1, pl, table);

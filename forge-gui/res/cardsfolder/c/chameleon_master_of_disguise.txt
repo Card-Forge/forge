@@ -1,0 +1,9 @@
+Name:Chameleon, Master of Disguise
+Variant:UniversesWithin:FlavorName:Vazin, Two-Faced Trickster
+ManaCost:3 U
+Types:Legendary Creature Human Shapeshifter Villain
+PT:2/3
+K:ETBReplacement:Copy:DBCopy:Optional
+SVar:DBCopy:DB$ Clone | Choices$ Creature.YouCtrl+Other | NewName$ Chameleon, Master of Disguise | SpellDescription$ You may have NICKNAME enter as a copy of a creature you control, except his name is Chameleon, Master of Disguise.
+K:Mayhem:2 U
+Oracle:You may have Chameleon enter as a copy of a creature you control, except his name is Chameleon, Master of Disguise.\nMayhem {2}{U} (You may cast this card from your graveyard for {2}{U} if you discarded it this turn. Timing rules still apply.)

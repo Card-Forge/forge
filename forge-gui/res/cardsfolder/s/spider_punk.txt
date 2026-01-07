@@ -1,0 +1,11 @@
+Name:Spider-Punk
+Variant:UniversesWithin:FlavorName:Kraza, the Swarm as One
+ManaCost:1 R
+Types:Legendary Creature Spider Human Hero
+PT:2/1
+K:Riot
+S:Mode$ Continuous | Affected$ Spider.Other+YouCtrl | AddKeyword$ Riot | Description$ Other Spiders you control have riot.
+R:Event$ Counter | ValidSA$ Spell,Activated,Triggered | Layer$ CantHappen | ActiveZones$ Battlefield | Description$ Spells and abilities can't be countered.
+S:Mode$ CantPreventDamage | Description$ Damage can't be prevented.
+DeckHas:Ability$Counters
+Oracle:Riot (This creature enters with your choice of a +1/+1 counter or haste.)\nOther Spiders you control have riot.\nSpells and abilities can't be countered.\nDamage can't be prevented.

@@ -1,0 +1,10 @@
+[metadata]
+Code=ECC
+Date=2026-01-23
+Name=Lorwyn Eclipsed Commander
+Type=Commander
+ScryfallCode=ECC
+
+[cards]
+1 M Ashling, the Limitless @Kai Carpenter
+2 M Auntie Ool, Cursewretch @Daniel Zrom

@@ -1,0 +1,13 @@
+Name:Parker Luck
+Variant:UniversesWithin:FlavorName:Duskmourn's Claim
+ManaCost:2 B
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigReveal | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, two target players each reveal the top card of their library. They each lose life equal to the mana value of the card revealed by the other player. Then they each put the card they revealed into their hand.
+SVar:TrigReveal:DB$ PeekAndReveal | NoPeek$ True | ValidTgts$ Player | TgtPrompt$ Choose two target players | TargetMin$ 2 | TargetMax$ 2 | RememberRevealed$ True | SubAbility$ DBRepeatEach
+SVar:DBRepeatEach:DB$ RepeatEach | RepeatPlayers$ Targeted | RepeatSubAbility$ DBLoseLife | SubAbility$ DBChangeZoneAll
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ X
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Hand | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$ValidLibrary Card.IsRemembered+!RememberedPlayerOwn$CardManaCost
+AI:RemoveDeck:All
+Oracle:At the beginning of your end step, two target players each reveal the top card of their library. They each lose life equal to the mana value of the card revealed by the other player. Then they each put the card they revealed into their hand.

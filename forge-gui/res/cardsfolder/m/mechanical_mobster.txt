@@ -1,0 +1,9 @@
+Name:Mechanical Mobster
+Variant:UniversesWithin:FlavorName:Data Scrubber
+ManaCost:3
+Types:Artifact Creature Human Robot Villain
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this creature enters, exile up to one target card from a graveyard. Target creature you control connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBConnive | TgtPrompt$ Select up to one target card in a graveyard
+SVar:DBConnive:DB$ Connive | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control
+Oracle:When this creature enters, exile up to one target card from a graveyard. Target creature you control connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)

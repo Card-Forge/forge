@@ -1,0 +1,10 @@
+Name:Silk, Web Weaver
+Variant:UniversesWithin:FlavorName:Alenni, Brood Recruiter
+ManaCost:2 G W
+Types:Legendary Creature Spider Human Hero
+PT:3/5
+K:Web-slinging:1 G W
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell, create a 1/1 green and white Human Citizen creature token.
+SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenScript$ gw_1_1_human_citizen
+A:AB$ PumpAll | Cost$ 3 G W | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | KW$ Vigilance | SpellDescription$ Creatures you control get +2/+2 and gain vigilance until end of turn.
+Oracle:Web-slinging {1}{G}{W} (You may cast this spell for {1}{G}{W} if you also return a tapped creature you control to its owner's hand.)\nWhenever you cast a creature spell, create a 1/1 green and white Human Citizen creature token.\n{3}{G}{W}: Creatures you control get +2/+2 and gain vigilance until end of turn.

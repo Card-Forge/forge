@@ -4,5 +4,5 @@ Types:Creature Ogre Pirate
 PT:5/2
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters, you become the monarch.
-SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
+SVar:TrigMonarch:DB$ BecomeMonarch
 Oracle:Trample\nWhen Crimson Fleet Commodore enters, you become the monarch.

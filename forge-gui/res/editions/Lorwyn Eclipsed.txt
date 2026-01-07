@@ -1,0 +1,172 @@
+[metadata]
+Code=ECL
+Date=2026-01-23
+Name=Lorwyn Eclipsed
+Type=Expansion
+ScryfallCode=ECL
+
+[cards]
+5 C Appeal to Eirdu @Milivoj Ćeran
+9 R Champion of the Clachan @Edgar Sánchez Hidalgo
+12 M Curious Colossus @Raoul Vitale
+13 M Eirdu, Carrier of Dawn @Lucas Graciano
+16 U Flock Impostor @Ilse Gort
+20 R Kinbinding @Caio Monteiro
+27 M Morningtide's Light @Mark Poole
+28 U Personify @Slawomir Maniak
+32 R Rhys, the Evermore @Kai Carpenter
+37 C Sun-Dappled Celebrant @Steve Ellis
+43 R Winnowing @David Palumbo
+47 R Disruptor of Currents @Pauline Voss
+52 M Glen Elendra's Answer @Sam Guay
+54 R Harmonized Crescendo @Tyler Walpole
+59 M Mirrorform @Wayne Reynolds
+61 M Oko, Lorwyn Liege @Kai Carpenter
+68 U Shinestriker @Ron Spencer
+71 U Spell Snare @Iris Compiet
+76 R Sygg, Wanderwine Wisdom @Justin Gerard
+80 C Unexpected Assistance @Gustavo Pelissari
+83 U Wanderwine Farewell @Aldo Domínguez
+88 M Bitterbloom Bearer @Chris Rahn
+92 U Boggart Mischief @Ron Spears
+95 R Champion of the Weird @Lucas Graciano
+98 R Dawnhand Dissident @Jacob Walker
+100 U Dose of Dawnglow @Quintin Gleim
+101 C Dream Seizer @Omar Rayyan
+108 U Iron-Shield Elf @Adrián Rodríguez Pérez
+109 C Moonglove Extractor @Milivoj Ćeran
+111 R Mornsong Aria @Scott M. Fischer
+115 U Perfect Intimidation @Heather Hudson
+124 R Ashling, Rekindled @Ilse Gort
+133 C Elder Auntie @Caio Monteiro
+136 U Explosive Prodigy @Joshua Raphael
+142 U Goatnap @Vincent Christiaens
+143 R Goliath Daydreamer @Omar Rayyan
+145 R Hexing Squelcher @Matt Stewart
+150 R Lavaleaper @Ron Spears
+151 M Meek Attack @Karl Kopinski
+154 U Sear @Lars Grant-West
+155 U Sizzling Changeling @Chris Seaman
+165 M Aurora Awakener @Paolo Parente
+166 M Bloom Tender @Nils Hamm
+167 U Blossoming Defense @Eelis Kyttanen
+171 R Champions of the Perfect @Chris Rahn
+172 U Chomping Changeling @Jeff Laubenstein
+173 C Crossroads Watcher @Aurore Folny
+176 R Formidable Speaker @Aurore Folny
+181 C Lys Alana Informant @Sidharth Chaturvedi
+186 R Mutable Explorer @Wayne Reynolds
+193 R Selfless Safewright @Quintin Gleim
+197 C Tend the Sprigs @Iris Compiet
+199 R Trystan, Callous Cultivator @Annie Stegg
+201 U Vinebred Brawler @Evyn Fong
+202 U Virulent Emissary @Tiffany Turrill
+204 R Abigale, Eloquent First-Year @Mark Zug
+205 R Ashling's Command @Iris Compiet
+207 R Bre of Clan Stoutarm @Jesper Ejsing
+212 M Deceit @Svetlin Velinov
+214 R Deepway Navigator @Jacob Walker
+222 M Emptiness @Ryan Pancoast
+224 R Figure of Fable @Omar Rayyan
+228 R Grub's Command @Iris Compiet
+229 R High Perfect Morcant @Victor Adame Minguez
+231 R Kirol, Attentive First-Year @Evyn Fong
+241 R Sanar, Innovative First-Year @Steven Belledin
+246 U Thoughtweft Lieutenant @Matt Stewart
+249 M Vibrance @Jakub Kasper
+250 U Voracious Tome-Skimmer @Loïc Canavaggia
+253 M Chronicle of Victory @Aldo Domínguez
+254 U Dawn-Blessed Pennant @Igor Krstic
+258 R Mirrormind Crown @Dan Frazier
+262 R Blood Crypt @Adam Paquette
+265 R Hallowed Fountain @Adam Paquette
+266 R Overgrown Tomb @Adam Paquette
+267 R Steam Vents @Adam Paquette
+268 R Temple Garden @Adam Paquette
+269 L Plains @Zoltan Boros
+270 L Island @Ron Spears
+271 L Swamp @Jorge Jacinto
+272 L Mountain @Raymond Bonilla
+273 L Forest @Jorge Jacinto
+274 L Plains @Justin Gerard
+275 L Island @Annie Stegg
+276 L Swamp @Raoul Vitale
+277 L Mountain @Ralph Horsley
+278 L Forest @Jason Mowry
+279 L Plains @Justin Gerard
+280 L Island @Annie Stegg
+281 L Swamp @Raoul Vitale
+282 L Mountain @Ralph Horsley
+283 L Forest @Jason Mowry
+286 M Eirdu, Carrier of Dawn @Omar Rayyan
+287 M Oko, Lorwyn Liege @Steve Prescott
+288 R Sygg, Wanderwine Wisdom @Warren Mahy
+290 R Ashling, Rekindled @Chuck Lukacs
+291 R Trystan, Callous Cultivator @Larry MacDougall
+293 M Deceit @Kev Walker
+294 M Emptiness @Jeff Miracola
+295 M Vibrance @Mark Zug
+298 M Curious Colossus @Hayden Goodman
+299 R Kinbinding @Yas Imamura
+301 M Morningtide's Light @adelinaillustration
+303 R Disruptor of Currents @Julie Benbassat
+306 M Glen Elendra's Answer @Matthew Forsythe
+308 M Mirrorform @Felicita Sala
+310 M Bitterbloom Bearer @Taryn Knight
+311 R Dawnhand Dissident @Lauren Degraaf
+316 R Goliath Daydreamer @Vanessa Gillings
+317 R Hexing Squelcher @Matthew Forsythe
+318 R Lavaleaper @Matthew Forsythe
+319 M Meek Attack @Matt Rockefeller
+323 M Aurora Awakener @Matthew Forsythe
+324 M Bloom Tender @Danny Schwartz
+327 R Mutable Explorer @Felicita Sala
+330 R Ashling's Command @adelinaillustration
+340 R Grub's Command @Phoebe Wahl
+343 U Thoughtweft Lieutenant @Vanessa Gillings
+346 M Chronicle of Victory @adelinaillustration
+347 R Hallowed Fountain @Justin Gerard
+347☇ R Hallowed Fountain @Justin Gerard
+348 R Steam Vents @Raoul Vitale
+348☇ R Steam Vents @Raoul Vitale
+349 R Blood Crypt @Valera Lutfullina
+349☇ R Blood Crypt @Valera Lutfullina
+350 R Overgrown Tomb @Matt Stewart
+350☇ R Overgrown Tomb @Matt Stewart
+351 R Temple Garden @Annie Stegg
+351☇ R Temple Garden @Annie Stegg
+352 M Bitterbloom Bearer @Rebecca Guay
+353 R Champion of the Clachan @Edgar Sánchez Hidalgo
+354 R Rhys, the Evermore @Kai Carpenter
+355 R Winnowing @David Palumbo
+357 R Harmonized Crescendo @Tyler Walpole
+360 R Champion of the Weird @Lucas Graciano
+361 R Mornsong Aria @Scott M. Fischer
+365 R Champions of the Perfect @Chris Rahn
+366 R Formidable Speaker @Aurore Folny
+367 R Selfless Safewright @Quintin Gleim
+368 R Abigale, Eloquent First-Year @Mark Zug
+369 R Bre of Clan Stoutarm @Jesper Ejsing
+370 R Deepway Navigator @Jacob Walker
+372 R Figure of Fable @Omar Rayyan
+373 R High Perfect Morcant @Victor Adame Minguez
+374 R Kirol, Attentive First-Year @Evyn Fong
+378 R Sanar, Innovative First-Year @Steven Belledin
+381 R Mirrormind Crown @Dan Frazier
+382 M Winnowing @Yukoring
+384 M Harmonized Crescendo @konomura
+388 M Meek Attack @Yoshioka
+390 M Bloom Tender @Yuyuharu
+391 M Selfless Safewright @Karuta Shiki
+392 M Winnowing @Yukoring
+394 M Harmonized Crescendo @konomura
+398 M Meek Attack @Yoshioka
+400 M Bloom Tender @Yuyuharu
+401 M Selfless Safewright @Karuta Shiki
+402 U Personify @Slawomir Maniak
+403 U Silvergill Mentor @Iris Compiet
+404 U Iron-Shield Elf @Adrián Rodríguez Pérez
+405 U Sear @Lars Grant-West
+406 U Virulent Emissary @Tiffany Turrill
+407 R Kinbinding @Heather Hudson
+408 R Harmonized Crescendo @Jeff Miracola

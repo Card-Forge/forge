@@ -498,8 +498,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             runParams.put(AbilityKey.FirstTime, firstGain);
             game.getTriggerHandler().runTrigger(TriggerType.LifeGained, runParams, false);
 
-            game.getTriggerHandler().runTrigger(TriggerType.LifeChanged, runParams, false);
-
             game.fireEvent(new GameEventPlayerLivesChanged(this, oldLife, life));
             return true;
         }
@@ -560,8 +558,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         runParams.put(AbilityKey.FirstTime, firstLost);
         game.getTriggerHandler().runTrigger(TriggerType.LifeLost, runParams, false);
 
-        game.getTriggerHandler().runTrigger(TriggerType.LifeChanged, runParams, false);
-
         return toLose;
     }
 
@@ -577,9 +573,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean payLife(final int lifePayment, final SpellAbility cause, final boolean effect) {
-        return payLife(lifePayment, cause, effect, null);
-    }
-    public final boolean payLife(final int lifePayment, final SpellAbility cause, final boolean effect, Map<AbilityKey, Object> params) {
         // fast check for pay zero life
         if (lifePayment <= 0) {
             cause.setPaidLife(0);
@@ -598,9 +591,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         // copy replacement params?
         if (cause.isReplacementAbility() && effect) {
             replaceParams.putAll(cause.getReplacingObjects());
-        }
-        if (params != null) {
-            replaceParams.putAll(params);
         }
         switch (getGame().getReplacementHandler().run(ReplacementType.PayLife, replaceParams)) {
         case Replaced:
@@ -1084,7 +1074,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         // CantTarget static abilities
-        if (StaticAbilityCantTarget.cantTarget(this, sa)) {
+        if (StaticAbilityCantTarget.cantTarget(this, sa) != null) {
             return false;
         }
 
@@ -1126,13 +1116,14 @@ public class Player extends GameEntity implements Comparable<Player> {
             getGame().fireEvent(new GameEventSurveil(this, numToTop, numToGrave));
         }
 
-        surveilThisTurn++;
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
-        runParams.put(AbilityKey.FirstTime, surveilThisTurn == 1);
+        runParams.put(AbilityKey.FirstTime, surveilThisTurn == 0);
         if (params != null) {
             runParams.putAll(params);
         }
         getGame().getTriggerHandler().runTrigger(TriggerType.Surveil, runParams, false);
+
+        surveilThisTurn++;
     }
 
     public int getSurveilThisTurn() {
@@ -1601,7 +1592,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         Iterable<Card> milledView = getCardsIn(ZoneType.Library);
-        // 614.13c
+        // CR 614.13c
         if (sa.getRootAbility().getReplacingObject(AbilityKey.SimultaneousETB) != null) {
             milledView = IterableUtil.filter(milledView, c -> !((CardCollection) sa.getRootAbility().getReplacingObject(AbilityKey.SimultaneousETB)).contains(c));
         }
@@ -3011,26 +3002,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (!registeredPlayer.getCommanders().isEmpty()) {
             for (PaperCard pc : registeredPlayer.getCommanders()) {
                 Card cmd = Card.fromPaperCard(pc, this);
-                boolean color = false;
-                for (StaticAbility stAb : cmd.getStaticAbilities()) {
-                    if (stAb.hasParam("Description") && stAb.getParam("Description")
-                            .contains("If CARDNAME is your commander, choose a color before the game begins.")) {
-                        color = true;
-                        break;
-                    }
-                }
-                if (color) {
-                    Player p = cmd.getController();
-                    List<String> colorChoices = new ArrayList<>(MagicColor.Constant.ONLY_COLORS);
-                    String prompt = Localizer.getInstance().getMessage("lblChooseAColorFor", cmd.getName());
-                    List<String> chosenColors;
-                    SpellAbility cmdColorsa = new SpellAbility.EmptySa(ApiType.ChooseColor, cmd, p);
-                    chosenColors = p.getController().chooseColors(prompt,cmdColorsa, 1, 1, colorChoices);
-                    cmd.setChosenColors(chosenColors);
-                    p.getGame().getAction().notifyOfValue(cmdColorsa, cmd,
-                            Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(),
-                                    Lang.joinHomogenous(chosenColors)), p);
-                }
+                initCommanderColor(cmd);
                 cmd.setCollectible(true);
                 com.add(cmd);
                 this.addCommander(cmd);
@@ -3115,6 +3087,19 @@ public class Player extends GameEntity implements Comparable<Player> {
                     getController().playSpellAbilityNoStack(effect, true);
                 }
             }
+        }
+    }
+
+    public void initCommanderColor(Card cmd) {
+        if (cmd.getStaticAbilities().stream().anyMatch(stAb -> stAb.hasParam("Description") && stAb.getParam("Description")
+                .contains("If CARDNAME is your commander, choose a color before the game begins."))) {
+            Player p = cmd.getController();
+            String prompt = Localizer.getInstance().getMessage("lblChooseAColorFor", cmd.getName());
+            SpellAbility cmdColorsa = new SpellAbility.EmptySa(ApiType.ChooseColor, cmd, p);
+            byte chosenColor = p.getController().chooseColor(prompt, cmdColorsa, ColorSet.WUBRG);
+            cmd.setChosenColors(List.of(MagicColor.toLongString(chosenColor)));
+            p.getGame().getAction().notifyOfValue(cmdColorsa, cmd,
+                    Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), MagicColor.toLongString(chosenColor)), p);
         }
     }
 
@@ -3224,7 +3209,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      }
 
     public static DetachedCardEffect createCompanionEffect(Game game, Card companion) {
-        final String name = Lang.getInstance().getPossesive(companion.getName()) + " Companion Effect";
+        final String name = Lang.getInstance().getPossesive(companion.getDisplayName()) + " Companion Effect";
         DetachedCardEffect eff = new DetachedCardEffect(companion, name);
 
         String addToHandAbility = "Mode$ Continuous | EffectZone$ Command | Affected$ Card.YouOwn+EffectSource | AffectedZone$ Command | AddAbility$ MoveToHand";
@@ -3320,8 +3305,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public void createTheRing(String set) {
-        final PlayerZone com = getZone(ZoneType.Command);
         if (theRing == null) {
+            final PlayerZone com = getZone(ZoneType.Command);
             theRing = new Card(game.nextCardId(), null, game);
             theRing.setOwner(this);
             theRing.setGamePieceType(GamePieceType.EFFECT);
@@ -3739,12 +3724,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         return this.teamNumber == other.getTeam();
     }
 
-    public final int countExaltedBonus() {
-        return CardLists.getAmountOfKeyword(this.getCardsIn(ZoneType.Battlefield), Keyword.EXALTED);
-    }
-
     public final boolean isCursed() {
-        return CardLists.count(getAttachedCards(), CardPredicates.CURSE) > 0;
+        return CardLists.count(getAttachedCards(), Card::isCurse) > 0;
     }
 
     public boolean canDiscardBy(SpellAbility sa, final boolean effect) {
@@ -4004,7 +3985,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             String label = Localizer.getInstance().getMessage("lblCrank", this.crankCounter);
             contraptionSprocketEffect.setOverlayText(label);
         }
-        else if (this.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.CONTRAPTIONS)) {
+        else if (this.getCardsIn(ZoneType.Battlefield).anyMatch(Card::isContraption)) {
             this.createContraptionSprockets();
         }
     }

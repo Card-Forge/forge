@@ -1,0 +1,10 @@
+Name:Vulture, Scheming Scavenger
+Variant:UniversesWithin:FlavorName:Rishei, Getaway Accomplice
+ManaCost:5 UB
+Types:Legendary Creature Human Artificer Villain
+PT:4/6
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever NICKNAME attacks, other Villains you control gain flying until end of turn.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Villain.YouCtrl+StrictlyOther | KW$ Flying
+DeckHints:Type$Villain
+Oracle:Flying\nWhenever Vulture attacks, other Villains you control gain flying until end of turn.

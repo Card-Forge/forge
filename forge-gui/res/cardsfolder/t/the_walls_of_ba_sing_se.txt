@@ -1,0 +1,7 @@
+Name:The Walls of Ba Sing Se
+ManaCost:8
+Types:Legendary Artifact Creature Wall
+PT:0/30
+K:Defender
+S:Mode$ Continuous | Affected$ Permanent.Other+YouCtrl | AddKeyword$ Indestructible | Description$ Other permanents you control have indestructible.
+Oracle:Defender\nOther permanents you control have indestructible.

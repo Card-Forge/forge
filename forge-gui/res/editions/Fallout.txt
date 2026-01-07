@@ -1,0 +1,1101 @@
+[metadata]
+Code=PIP
+Date=2024-03-08
+Name=Fallout
+Type=Commander
+ScryfallCode=PIP
+
+[cards]
+1 M Caesar, Legion's Emperor @Alexander Gering
+2 M Dogmeat, Ever Loyal @Kieran Yanner
+3 M Dr. Madison Li @Zuzanna Wużyk
+4 M The Wise Mothman @Sergei Leoluch Panin
+5 M Liberty Prime, Recharged @Pascal Quidault
+6 M The Master, Transcendent @Javier Charro
+7 M Mr. House, President and CEO @Joseph Meehan
+8 M Preston Garvey, Minuteman @Leonardo Borazio
+9 R Aradesh, the Founder @Campbell White
+10 R Automated Assembly Line @David Álvarez
+11 R Battle of Hoover Dam @Campbell White
+12 U Brotherhood Outcast @Brian Valeza
+13 R Brotherhood Scribe @Jarel Threat
+14 R Codsworth, Handy Helper @Alex Konstad
+15 U Commander Sofia Daguerre @Craig Elliott
+16 U Gary Clone @Nicholas Gregory
+17 R Idolized @Kim Sokol
+18 R Overencumbered @Elizabeth Peiró
+19 R Overseer of Vault 76 @Kieran Yanner
+20 U Paladin Danse, Steel Maverick @Dan Murayama Scott
+21 R Pre-War Formalwear @Josu Hernaiz
+22 R The Prydwen, Steel Flagship @Victor Harmatiuk
+23 R Securitron Squadron @Jonas De Ro
+24 R Sentry Bot @Anthony Devine
+25 R Sierra, Nuka's Biggest Fan @Anna Podedworna
+26 R Vault 13: Dweller's Journey @Gaboleps
+27 R Vault 75: Middle School @Victor Harmatiuk
+28 R Vault 101: Birthday Party @Andrea Piparo
+29 R Yes Man, Personal Securitron @Dan Murayama Scott
+30 R Curie, Emergent Intelligence @Daniel Romanovsky
+31 R James, Wandering Dad @Wonchun Choi
+32 R Jason Bright, Glowing Prophet @Tomas Duchek
+33 R Mirelurk Queen @Nicholas Gregory
+34 U Nerd Rage @Irina Nordsol
+35 R Nick Valentine, Private Eye @Viko Menezes
+36 R Piper Wright, Publick Reporter @Rafater
+37 R Radstorm @Salvatorre Zee Yazzie
+38 U Robobrain War Mind @Leonardo Borazio
+39 R Struggle for Project Purity @Billy Christian
+40 R Synth Infiltrator @Leonardo Borazio
+41 U Vexing Radgull @Josu Solano
+42 U Bloatfly Swarm @Igor Krstic
+43 U Butch DeLoria, Tunnel Snake @Zuzanna Wużyk
+44 R Feral Ghoul @Sergio Cosmai
+45 R Hancock, Ghoulish Mayor @Wonchun Choi
+46 U Infesting Radroach @Loïc Canavaggia
+47 R Nuclear Fallout @Jason Rainville
+48 U Ruthless Radrat @Bruno Biazotto
+49 R Screeching Scorchbeast @Nino Is
+50 R V.A.T.S. @Diego Gisbert
+51 R Vault 12: The Necropolis @Nicholas Gregory
+52 R Wasteland Raider @Yigit Koroglu
+53 U Acquired Mutation @Xavier Ribeiro
+54 R Assaultron Dominator @Viko Menezes
+55 U Bottle-Cap Blast @Liiga Smilshkalne
+56 U Crimson Caravaneer @Nicholas Gregory
+57 R Duchess, Wayward Tavernkeep @Kieran Yanner
+58 R Grim Reaper's Sprint @Anton Solovianchyk
+59 U Ian the Reckless @Lorenzo Mastroianni
+60 R Junk Jet @Billy Christian
+61 R Megaton's Fate @Chris Cold
+62 R The Motherlode, Excavator @Josu Solano
+63 R Mysterious Stranger @Xavier Ribeiro
+64 R Plasma Caster @Kekai Kotaki
+65 R Powder Ganger @Fesbra
+66 R Rose, Cutthroat Raider @Zezhou Chen
+67 R Synth Eradicator @Kekai Kotaki
+68 R Thrill-Kill Disciple @Mathias Kollros
+69 R Vault 21: House Gambit @Kieran Yanner
+70 R Veronica, Dissident Scribe @Pascal Quidault
+71 R Wild Wasteland @Mathias Kollros
+72 R Animal Friend @Maxim Kostin
+73 U Bighorner Rancher @Brian Valeza
+74 U Break Down @Fesbra
+75 U Cathedral Acolyte @Jeremy Paillotin
+76 U Glowing One @Liiga Smilshkalne
+77 U Gunner Conscript @Miguel Mercado
+78 R Harold and Bob, First Numens @Andrea Piparo
+79 R Lily Bowen, Raging Grandma @Villarrte
+80 U Lumbering Megasloth @Daniel Romanovsky
+81 R Power Fist @Campbell White
+82 R Rampaging Yao Guai @Christina Kraus
+83 R Strong Back @Elizabeth Peiró
+84 R Strong, the Brutish Thespian @Jason Rainville
+85 U Super Mutant Scavenger @David Astruga
+86 R Tato Farmer @Xavier Ribeiro
+87 R Watchful Radstag @Alexander Ostrowski
+88 U Well Rested @Brian Valeza
+89 R Agent Frank Horrigan @Wisnu Tan
+90 R Almost Perfect @Elizabeth Peiró
+91 R Alpha Deathclaw @Daarken
+92 R Arcade Gannon @Kieran Yanner
+93 R Armory Paladin @Javier Charro
+94 R Atomize @Josu Solano
+95 R Boomer Scrapper @Xavier Ribeiro
+96 R Cait, Cage Brawler @Joseph Meehan
+97 R Cass, Hand of Vengeance @Dan Watson
+98 R Colonel Autumn @Daniel Romanovsky
+99 U Contaminated Drink @Craig Elliott
+100 U Craig Boone, Novac Guard @Pierre Raveneau
+101 R Desdemona, Freedom's Edge @Anton Solovianchyk
+102 R Elder Arthur Maxson @Anton Solovianchyk
+103 U Elder Owyn Lyons @David Astruga
+104 R Electrosiphon @Antonio José Manzanedo
+105 R Inventory Management @Kamila Szutenberg
+106 R Kellogg, Dangerous Mind @Josh Hass
+107 U Legate Lanius, Caesar's Ace @Bruno Biazotto
+108 R MacCready, Lamplight Mayor @Stephen Stark
+109 R Marcus, Mutant Mayor @Josu Hernaiz
+110 R Moira Brown, Guide Author @Campbell White
+111 R Mutational Advantage @Maxim Kostin
+112 U Nightkin Ambusher @Antonio José Manzanedo
+113 R The Nipton Lottery @Olivier Bernard
+114 R Paladin Elizabeth Taggerdy @Wisnu Tan
+115 U Raul, Trouble Shooter @Irina Nordsol
+116 R Red Death, Shipwrecker @Jeremy Paillotin
+117 R Rex, Cyber-Hound @Jeremy Paillotin
+118 R Sentinel Sarah Lyons @David Astruga
+119 R Shaun, Father of Synths @Zuzanna Wużyk
+120 R Three Dog, Galaxy News DJ @Elizabeth Peiró
+121 R Vault 11: Voter's Dilemma @Kieran Yanner
+122 R Vault 87: Forced Evolution @Nicholas Gregory
+123 R Vault 112: Sadistic Simulation @Anton Solovianchyk
+124 U White Glove Gourmand @Wonchun Choi
+125 U Young Deathclaws @Nino Is
+126 U Agility Bobblehead @Daarken
+127 U Behemoth of Vault 0 @Eddie Mendoza
+128 R Brotherhood Vertibird @Daarken
+129 U C.A.M.P. @Tomas Duchek
+130 U Charisma Bobblehead @Michał Miłkowski
+131 R ED-E, Lonesome Eyebot @Leanna Crossan
+132 U Endurance Bobblehead @Alex Brock
+133 U Expert-Level Safe @Victor Harmatiuk
+134 U Intelligence Bobblehead @Torgeir Fjereide
+135 U Luck Bobblehead @Ørjan Ruttenborg Svendsen
+136 R Mister Gutsy @Zezhou Chen
+137 U Nuka-Cola Vending Machine @Anthony Devine
+138 R Nuka-Nuke Launcher @Uriah Voth
+139 U Perception Bobblehead @Marina Ortega Lorente
+140 R Pip-Boy 3000 @Mirko Failoni
+141 R Recon Craft Theta @Jarel Threat
+142 U Silver Shroud Costume @Zuzanna Wużyk
+143 U Strength Bobblehead @Nikola Matkovic
+144 U Survivor's Med Kit @Valera Lutfullina
+145 R T-45 Power Armor @Diego Gisbert
+146 R Desolate Mire @Tomáš Honz
+147 R Diamond City @Pascal Quidault
+148 R Ferrous Lake @Hristo D. Chukov
+149 R HELIOS One @Brian Valeza
+150 R Junktown @Calder Moore
+151 R Mariposa Military Base @Alexander Forssberg
+152 R Overflowing Basin @Marina Ortega Lorente
+153 R Sunscorched Divide @Zezhou Chen
+154 R Viridescent Bog @Rafater
+155 C All That Glitters @Kieran Yanner
+156 R Austere Command @Andrew Theophilopoulos
+157 R Captain of the Watch @Jonas De Ro
+158 U Crush Contraband @Xavier Ribeiro
+159 U Dispatch @Zezhou Chen
+160 R Entrapment Maneuver @Nicholas Gregory
+161 R Hour of Reckoning @Jason Kang
+162 C Impassioned Orator @Josu Hernaiz
+163 U Intangible Virtue @Anton Solovianchyk
+164 R Keeper of the Accord @Leanna Crossan
+165 R Mantle of the Ancients @Igor Krstic
+166 R Marshal's Anthem @Veli Nyström
+167 R Martial Coup @Monztre
+168 R Open the Vaults @Ilker Yildiz
+169 U Path to Exile @Stephen Stark
+170 R Puresteel Paladin @Daarken
+171 R Secure the Wastes @Viko Menezes
+172 R Single Combat @Josh Hass
+173 U Swords to Plowshares @Alex Konstad
+174 U Valorous Stance @Diego Gisbert
+175 R Fraying Sanity @Jason Kang
+176 U Glimmer of Genius @Josu Hernaiz
+177 R Inexorable Tide @James Bousema
+178 M Mechanized Production @Brian Valeza
+179 R One with the Machine @Bartek Fedyczak
+180 U Thirst for Knowledge @Javier Charro
+181 U Whirler Rogue @Daarken
+182 U Bastion of Remembrance @Pablo Mendoza
+183 R Black Market @Irina Nordsol
+184 C Deadly Dispute @Torgeir Fjereide
+185 R Lethal Scheme @Mirko Failoni
+186 U Morbid Opportunist @Lorenzo Mastroianni
+187 U Pitiless Plunderer @Nicholas Gregory
+188 R Blasphemous Act @Chris Cold
+189 R Chaos Warp @Justine Cruz
+190 U Loyal Apprentice @Ilker Yildiz
+191 C Sticky Fingers @Elizabeth Peiró
+192 R Stolen Strategy @Wonchun Choi
+193 C Unexpected Windfall @Rafater
+194 C Abundant Growth @Victor Harmatiuk
+195 R Branching Evolution @Tomas Duchek
+196 U Cultivate @Valera Lutfullina
+197 C Farseek @Erikas Perl
+198 C Fertile Ground @Jason Kang
+199 R Guardian Project @Mirko Failoni
+200 R Hardened Scales @Maxim Kostin
+201 U Harmonize @Javier Charro
+202 R Heroic Intervention @Josh Hass
+203 U Inspiring Call @Liiga Smilshkalne
+204 C Rampant Growth @Tomas Duchek
+205 U Rancor @Andrea Piparo
+206 U Squirrel Nest @Loïc Canavaggia
+207 R Tireless Tracker @Evyn Fong
+208 C Wild Growth @Igor Krstic
+209 R Anguished Unmaking @Javier Charro
+210 R Assemble the Legion @Bruno Biazotto
+211 U Behemoth Sledge @Campbell White
+212 R Biomass Mutation @Nicholas Gregory
+213 R Casualties of War @Samuel Perin
+214 U Corpsejack Menace @Russell Lu
+215 R Fervent Charge @Aaron J. Riley
+216 R Find // Finality @Nikola Matkovic
+217 U General's Enforcer @Nino Is
+218 U Heroic Reinforcements @Daniel Romanovsky
+219 U Putrefy @Irina Nordsol
+220 R Ruinous Ultimatum @Diego Gisbert
+221 R Wake the Past @David Álvarez
+222 U Wear // Tear @Constantin Marin & Diego Gisbert
+223 U Winding Constrictor @Crystal Sully
+224 U Arcane Signet @Eddie Mendoza
+225 R Basilisk Collar @Artur Treffner
+226 R Bloodforged Battle-Axe @James Bousema
+227 U Brass Knuckles @Russell Lu
+228 R Champion's Helm @Bruno Biazotto
+229 U Contagion Clasp @Zuzanna Wużyk
+230 U Everflowing Chalice @David Astruga
+231 C Explorer's Scope @Michał Miłkowski
+232 U Fireshrieker @Xavier Ribeiro
+233 U Lightning Greaves @Uriah Voth
+234 R Masterwork of Ingenuity @Daarken
+235 U Mind Stone @David Astruga
+236 R Mystic Forge @Samuel Perin
+237 R Panharmonicon @Leonardo Borazio
+238 U Skullclamp @Skinnyelbows
+239 U Sol Ring @Aaron J. Riley
+240 R Solemn Simulacrum @Kamila Szutenberg
+241 R Steel Overseer @Daarken
+242 U Swiftfoot Boots @Zezhou Chen
+243 U Talisman of Conviction @Jason Kang
+244 U Talisman of Creativity @Justine Cruz
+245 U Talisman of Curiosity @Kekai Kotaki
+246 U Talisman of Dominance @Valera Lutfullina
+247 U Talisman of Hierarchy @Brian Valeza
+248 U Talisman of Indulgence @Bruno Biazotto
+249 U Talisman of Progress @Ilker Yildiz
+250 U Talisman of Resilience @Gaboleps
+251 C Thought Vessel @Artur Treffner
+252 C Wayfarer's Bauble @Marina Ortega Lorente
+253 C Ash Barrens @Sergei Leoluch Panin
+254 U Buried Ruin @Arthur Yuan
+255 R Canopy Vista @Skinnyelbows
+256 R Canyon Slough @Anthony Devine
+257 R Cinder Glade @Nino Is
+258 R Clifftop Retreat @Samuele Bandini
+259 C Command Tower @Gabriel Tanko
+260 R Darkwater Catacombs @Victor Harmatiuk
+261 R Dragonskull Summit @Liiga Smilshkalne
+262 R Drowned Catacomb @Eddie Mendoza
+263 C Evolving Wilds @Anthony Devine
+264 R Exotic Orchard @Calder Moore
+265 R Fetid Pools @Kamila Szutenberg
+266 R Glacial Fortress @Erikas Perl
+267 R Hinterland Harbor @Marco Gorlei
+268 R Irrigated Farmland @Salvatorre Zee Yazzie
+269 R Isolated Chapel @Daniel Ljunggren
+270 U Jungle Shrine @Tomas Duchek
+271 U Memorial to Glory @Kim Sokol
+272 C Mortuary Mire @Zuzanna Wużyk
+273 R Mossfire Valley @Nino Is
+274 U Myriad Landscape @Alexander Forssberg
+275 U Mystic Monastery @Kamila Szutenberg
+276 R Nesting Grounds @Ashley Mackenzie
+277 U Nomad Outpost @Sergei Leoluch Panin
+278 U Opulent Palace @Jonas De Ro
+279 C Path of Ancestry @Marco Gorlei
+280 R Prairie Stream @Marina Ortega Lorente
+281 C Razortide Bridge @Erikas Perl
+282 U Roadside Reliquary @Arthur Yuan
+283 U Rogue's Passage @Rafater
+284 R Rootbound Crag @Samuele Bandini
+285 C Rustvale Bridge @Erikas Perl
+286 R Scattered Groves @Pablo Mendoza
+287 R Scavenger Grounds @Jonas De Ro
+288 R Shadowblood Ridge @Slawomir Maniak
+289 R Sheltered Thicket @Constantin Marin
+290 C Silverbluff Bridge @Erikas Perl
+291 R Skycloud Expanse @Arthur Yuan
+292 R Smoldering Marsh @Erikas Perl
+293 R Spire of Industry @Salvatorre Zee Yazzie
+294 R Sulfur Falls @Pablo Mendoza
+295 R Sungrass Prairie @Hristo D. Chukov
+296 R Sunken Hollow @Daarken
+297 R Sunpetal Grove @Eddie Mendoza
+298 U Tainted Field @Mirko Failoni
+299 U Tainted Isle @Rafater
+300 U Tainted Peak @Gabriel Tanko
+301 U Tainted Wood @Jarel Threat
+302 R Temple of Abandon @Arthur Yuan
+303 R Temple of Deceit @Pascal Quidault
+304 R Temple of Enlightenment @Arthur Yuan
+305 R Temple of Epiphany @Eddie Mendoza
+306 R Temple of Malady @Alexander Forssberg
+307 R Temple of Malice @Arthur Yuan
+308 R Temple of Mystery @Alexander Forssberg
+309 R Temple of Plenty @Jeremy Paillotin
+310 R Temple of Silence @Nino Is
+311 U Temple of the False God @Kekai Kotaki
+312 R Temple of Triumph @Josu Hernaiz
+313 C Terramorphic Expanse @Jonas De Ro
+314 R Treasure Vault @Rafater
+315 R Windbrisk Heights @Anthony Devine
+316 R Woodland Cemetery @Arthur Yuan
+317 L Plains @Samuele Bandini
+318 L Plains @Constantin Marin
+319 L Island @Samuele Bandini
+320 L Island @Pablo Mendoza
+321 L Swamp @Samuele Bandini
+322 L Swamp @Nikola Matkovic
+323 L Mountain @Samuele Bandini
+324 L Mountain @Pablo Mendoza
+325 L Forest @Samuele Bandini
+326 L Forest @Nikola Matkovic
+327 R Idolized @Tim Brumley
+328 R Securitron Squadron @Tim Brumley
+329 R Radstorm @Tim Brumley
+330 R Synth Infiltrator @David Gaillet
+331 R Nuclear Fallout @James Bousema
+332 R Screeching Scorchbeast @Tomas Duchek
+333 R V.A.T.S. @Robin Olausson
+334 R Mysterious Stranger @Chad Weatherford
+335 R Watchful Radstag @Evan Shipard
+336 R Alpha Deathclaw @Robin Olausson
+337 R Armory Paladin @Chad Weatherford
+338 R Atomize @Robin Olausson
+339 M Caesar, Legion's Emperor @David Gaillet
+340 M Dogmeat, Ever Loyal @Mark Poole
+341 M Dr. Madison Li @John Stanko
+342 R Inventory Management @Tim Brumley
+343 M The Wise Mothman @David Gaillet
+344 R Hullbreaker Horror @Tomas Duchek ${"flavorName": "Prime Mirelurk Queen"}
+345 R Lord of the Undead @John Stanko ${"flavorName": "Centurion of the Marked"}
+346 M Grave Titan @Mark Poole ${"flavorName": "West Tek Tyrant"}
+347 R Vigor @Tomas Duchek ${"flavorName": "Fog Crawler"}
+348 R Ayula, Queen Among Bears @Mark Poole ${"flavorName": "Ruzka, Terror of Point Lookout"}
+349 M Tarmogoyf @Robin Olausson ${"flavorName": "Scrounging Deathclaw"}
+350 R Hornet Queen @Robin Olausson ${"flavorName": "Specimen 73"}
+351 R Gemrazer @Evan Shipard ${"flavorName": "Toxic Sheepsquatch"}
+352 R Walking Ballista @Evan Shipard ${"flavorName": "Assaultron Invader"}
+353 R Farewell @AKQA
+354 M Ravages of War @AKQA
+355 U Vandalblast @AKQA
+356 U Arcane Signet @AKQA
+357 M Crucible of Worlds @AKQA
+358 U Nuka-Cola Vending Machine @AKQA
+359 M Sol Ring @AKQA
+360 U Command Tower @AKQA
+361 R Wasteland @AKQA
+362 R Aradesh, the Founder @Campbell White
+363 R Automated Assembly Line @David Álvarez
+364 R Battle of Hoover Dam @Campbell White
+365 R Brotherhood Scribe @Jarel Threat
+366 R Codsworth, Handy Helper @Alex Konstad
+367 R Overencumbered @Elizabeth Peiró
+368 R Overseer of Vault 76 @Kieran Yanner
+369 R Pre-War Formalwear @Josu Hernaiz
+370 R The Prydwen, Steel Flagship @Victor Harmatiuk
+371 R Sentry Bot @Anthony Devine
+372 R Sierra, Nuka's Biggest Fan @Anna Podedworna
+373 R Yes Man, Personal Securitron @Dan Murayama Scott
+374 R Curie, Emergent Intelligence @Daniel Romanovsky
+375 R James, Wandering Dad @Wonchun Choi
+376 R Jason Bright, Glowing Prophet @Tomas Duchek
+377 R Mirelurk Queen @Nicholas Gregory
+378 R Nick Valentine, Private Eye @Viko Menezes
+379 R Piper Wright, Publick Reporter @Rafater
+380 R Struggle for Project Purity @Billy Christian
+381 R Feral Ghoul @Sergio Cosmai
+382 R Hancock, Ghoulish Mayor @Wonchun Choi
+383 R Wasteland Raider @Yigit Koroglu
+384 R Assaultron Dominator @Viko Menezes
+385 R Duchess, Wayward Tavernkeep @Kieran Yanner
+386 R Grim Reaper's Sprint @Anton Solovianchyk
+387 R Junk Jet @Billy Christian
+388 R Megaton's Fate @Chris Cold
+389 R The Motherlode, Excavator @Josu Solano
+390 R Plasma Caster @Kekai Kotaki
+391 R Powder Ganger @Fesbra
+392 R Rose, Cutthroat Raider @Zezhou Chen
+393 R Synth Eradicator @Kekai Kotaki
+394 R Thrill-Kill Disciple @Mathias Kollros
+395 R Veronica, Dissident Scribe @Pascal Quidault
+396 R Wild Wasteland @Mathias Kollros
+397 R Animal Friend @Maxim Kostin
+398 R Harold and Bob, First Numens @Andrea Piparo
+399 R Lily Bowen, Raging Grandma @Villarrte
+400 R Power Fist @Campbell White
+401 R Rampaging Yao Guai @Christina Kraus
+402 R Strong Back @Elizabeth Peiró
+403 R Strong, the Brutish Thespian @Jason Rainville
+404 R Tato Farmer @Xavier Ribeiro
+405 R Agent Frank Horrigan @Wisnu Tan
+406 R Almost Perfect @Elizabeth Peiró
+407 R Arcade Gannon @Kieran Yanner
+408 R Boomer Scrapper @Xavier Ribeiro
+409 R Cait, Cage Brawler @Joseph Meehan
+410 R Cass, Hand of Vengeance @Dan Watson
+411 R Colonel Autumn @Daniel Romanovsky
+412 R Desdemona, Freedom's Edge @Anton Solovianchyk
+413 R Elder Arthur Maxson @Anton Solovianchyk
+414 R Electrosiphon @Antonio José Manzanedo
+415 R Kellogg, Dangerous Mind @Josh Hass
+416 M Liberty Prime, Recharged @Pascal Quidault
+417 R MacCready, Lamplight Mayor @Stephen Stark
+418 R Marcus, Mutant Mayor @Josu Hernaiz
+419 M The Master, Transcendent @Javier Charro
+420 R Moira Brown, Guide Author @Campbell White
+421 M Mr. House, President and CEO @Joseph Meehan
+422 R Mutational Advantage @Maxim Kostin
+423 R The Nipton Lottery @Olivier Bernard
+424 R Paladin Elizabeth Taggerdy @Wisnu Tan
+425 M Preston Garvey, Minuteman @Leonardo Borazio
+426 R Red Death, Shipwrecker @Jeremy Paillotin
+427 R Rex, Cyber-Hound @Jeremy Paillotin
+428 R Sentinel Sarah Lyons @David Astruga
+429 R Shaun, Father of Synths @Zuzanna Wużyk
+430 R Three Dog, Galaxy News DJ @Elizabeth Peiró
+431 R Brotherhood Vertibird @Daarken
+432 R ED-E, Lonesome Eyebot @Leanna Crossan
+433 R Mister Gutsy @Zezhou Chen
+434 R Nuka-Nuke Launcher @Uriah Voth
+435 R Pip-Boy 3000 @Mirko Failoni
+436 R Recon Craft Theta @Jarel Threat
+437 R T-45 Power Armor @Diego Gisbert
+438 R Desolate Mire @Tomáš Honz
+439 R Diamond City @Pascal Quidault
+440 R Ferrous Lake @Hristo D. Chukov
+441 R HELIOS One @Brian Valeza
+442 R Junktown @Calder Moore
+443 R Mariposa Military Base @Alexander Forssberg
+444 R Overflowing Basin @Marina Ortega Lorente
+445 R Sunscorched Divide @Zezhou Chen
+446 R Viridescent Bog @Rafater
+447 R Austere Command @Andrew Theophilopoulos
+448 R Captain of the Watch @Jonas De Ro
+449 R Entrapment Maneuver @Nicholas Gregory
+450 R Hour of Reckoning @Jason Kang
+451 R Keeper of the Accord @Leanna Crossan
+452 R Mantle of the Ancients @Igor Krstic
+453 R Marshal's Anthem @Veli Nyström
+454 R Martial Coup @Monztre
+455 R Open the Vaults @Ilker Yildiz
+456 R Puresteel Paladin @Daarken
+457 R Secure the Wastes @Viko Menezes
+458 R Single Combat @Josh Hass
+459 R Fraying Sanity @Jason Kang
+460 R Inexorable Tide @James Bousema
+461 M Mechanized Production @Brian Valeza
+462 R One with the Machine @Bartek Fedyczak
+463 R Black Market @Irina Nordsol
+464 R Lethal Scheme @Mirko Failoni
+465 R Blasphemous Act @Chris Cold
+466 R Chaos Warp @Justine Cruz
+467 R Stolen Strategy @Wonchun Choi
+468 R Branching Evolution @Tomas Duchek
+469 R Guardian Project @Mirko Failoni
+470 R Hardened Scales @Maxim Kostin
+471 R Heroic Intervention @Josh Hass
+472 R Tireless Tracker @Evyn Fong
+473 R Anguished Unmaking @Javier Charro
+474 R Assemble the Legion @Bruno Biazotto
+475 R Biomass Mutation @Nicholas Gregory
+476 R Casualties of War @Samuel Perin
+477 R Fervent Charge @Aaron J. Riley
+478 R Ruinous Ultimatum @Diego Gisbert
+479 R Wake the Past @David Álvarez
+480 R Basilisk Collar @Artur Treffner
+481 R Bloodforged Battle-Axe @James Bousema
+482 R Champion's Helm @Bruno Biazotto
+483 R Masterwork of Ingenuity @Daarken
+484 R Mystic Forge @Samuel Perin
+485 R Panharmonicon @Leonardo Borazio
+486 R Solemn Simulacrum @Kamila Szutenberg
+487 R Steel Overseer @Daarken
+488 R Canopy Vista @Skinnyelbows
+489 R Canyon Slough @Anthony Devine
+490 R Cinder Glade @Nino Is
+491 R Clifftop Retreat @Samuele Bandini
+492 R Darkwater Catacombs @Victor Harmatiuk
+493 R Dragonskull Summit @Liiga Smilshkalne
+494 R Drowned Catacomb @Eddie Mendoza
+495 R Exotic Orchard @Calder Moore
+496 R Fetid Pools @Kamila Szutenberg
+497 R Glacial Fortress @Erikas Perl
+498 R Hinterland Harbor @Marco Gorlei
+499 R Irrigated Farmland @Salvatorre Zee Yazzie
+500 R Isolated Chapel @Daniel Ljunggren
+501 R Mossfire Valley @Nino Is
+502 R Nesting Grounds @Ashley Mackenzie
+503 R Prairie Stream @Marina Ortega Lorente
+504 R Rootbound Crag @Samuele Bandini
+505 R Scattered Groves @Pablo Mendoza
+506 R Scavenger Grounds @Jonas De Ro
+507 R Shadowblood Ridge @Slawomir Maniak
+508 R Sheltered Thicket @Constantin Marin
+509 R Skycloud Expanse @Arthur Yuan
+510 R Smoldering Marsh @Erikas Perl
+511 R Spire of Industry @Salvatorre Zee Yazzie
+512 R Sulfur Falls @Pablo Mendoza
+513 R Sungrass Prairie @Hristo D. Chukov
+514 R Sunken Hollow @Daarken
+515 R Sunpetal Grove @Eddie Mendoza
+516 R Temple of Abandon @Arthur Yuan
+517 R Temple of Deceit @Pascal Quidault
+518 R Temple of Enlightenment @Arthur Yuan
+519 R Temple of Epiphany @Eddie Mendoza
+520 R Temple of Malady @Alexander Forssberg
+521 R Temple of Malice @Arthur Yuan
+522 R Temple of Mystery @Alexander Forssberg
+523 R Temple of Plenty @Jeremy Paillotin
+524 R Temple of Silence @Nino Is
+525 R Temple of Triumph @Josu Hernaiz
+526 R Treasure Vault @Rafater
+527 R Windbrisk Heights @Anthony Devine
+528 R Woodland Cemetery @Arthur Yuan
+529 M Caesar, Legion's Emperor @Alexander Gering
+530 M Dogmeat, Ever Loyal @Kieran Yanner
+531 M Dr. Madison Li @Zuzanna Wużyk
+532 M The Wise Mothman @Sergei Leoluch Panin
+533 M Liberty Prime, Recharged @Pascal Quidault
+534 M The Master, Transcendent @Javier Charro
+535 M Mr. House, President and CEO @Joseph Meehan
+536 M Preston Garvey, Minuteman @Leonardo Borazio
+537 R Aradesh, the Founder @Campbell White
+538 R Automated Assembly Line @David Álvarez
+539 R Battle of Hoover Dam @Campbell White
+540 U Brotherhood Outcast @Brian Valeza
+541 R Brotherhood Scribe @Jarel Threat
+542 R Codsworth, Handy Helper @Alex Konstad
+543 U Commander Sofia Daguerre @Craig Elliott
+544 U Gary Clone @Nicholas Gregory
+545 R Idolized @Kim Sokol
+546 R Overencumbered @Elizabeth Peiró
+547 R Overseer of Vault 76 @Kieran Yanner
+548 U Paladin Danse, Steel Maverick @Dan Murayama Scott
+549 R Pre-War Formalwear @Josu Hernaiz
+550 R The Prydwen, Steel Flagship @Victor Harmatiuk
+551 R Securitron Squadron @Jonas De Ro
+552 R Sentry Bot @Anthony Devine
+553 R Sierra, Nuka's Biggest Fan @Anna Podedworna
+554 R Vault 13: Dweller's Journey @Gaboleps
+555 R Vault 75: Middle School @Victor Harmatiuk
+556 R Vault 101: Birthday Party @Andrea Piparo
+557 R Yes Man, Personal Securitron @Dan Murayama Scott
+558 R Curie, Emergent Intelligence @Daniel Romanovsky
+559 R James, Wandering Dad @Wonchun Choi
+560 R Jason Bright, Glowing Prophet @Tomas Duchek
+561 R Mirelurk Queen @Nicholas Gregory
+562 U Nerd Rage @Irina Nordsol
+563 R Nick Valentine, Private Eye @Viko Menezes
+564 R Piper Wright, Publick Reporter @Rafater
+565 R Radstorm @Salvatorre Zee Yazzie
+566 U Robobrain War Mind @Leonardo Borazio
+567 R Struggle for Project Purity @Billy Christian
+568 R Synth Infiltrator @Leonardo Borazio
+569 U Vexing Radgull @Josu Solano
+570 U Bloatfly Swarm @Igor Krstic
+571 U Butch DeLoria, Tunnel Snake @Zuzanna Wużyk
+572 R Feral Ghoul @Sergio Cosmai
+573 R Hancock, Ghoulish Mayor @Wonchun Choi
+574 U Infesting Radroach @Loïc Canavaggia
+575 R Nuclear Fallout @Jason Rainville
+576 U Ruthless Radrat @Bruno Biazotto
+577 R Screeching Scorchbeast @Nino Is
+578 R V.A.T.S. @Diego Gisbert
+579 R Vault 12: The Necropolis @Nicholas Gregory
+580 R Wasteland Raider @Yigit Koroglu
+581 U Acquired Mutation @Xavier Ribeiro
+582 R Assaultron Dominator @Viko Menezes
+583 U Bottle-Cap Blast @Liiga Smilshkalne
+584 U Crimson Caravaneer @Nicholas Gregory
+585 R Duchess, Wayward Tavernkeep @Kieran Yanner
+586 R Grim Reaper's Sprint @Anton Solovianchyk
+587 U Ian the Reckless @Lorenzo Mastroianni
+588 R Junk Jet @Billy Christian
+589 R Megaton's Fate @Chris Cold
+590 R The Motherlode, Excavator @Josu Solano
+591 R Mysterious Stranger @Xavier Ribeiro
+592 R Plasma Caster @Kekai Kotaki
+593 R Powder Ganger @Fesbra
+594 R Rose, Cutthroat Raider @Zezhou Chen
+595 R Synth Eradicator @Kekai Kotaki
+596 R Thrill-Kill Disciple @Mathias Kollros
+597 R Vault 21: House Gambit @Kieran Yanner
+598 R Veronica, Dissident Scribe @Pascal Quidault
+599 R Wild Wasteland @Mathias Kollros
+600 R Animal Friend @Maxim Kostin
+601 U Bighorner Rancher @Brian Valeza
+602 U Break Down @Fesbra
+603 U Cathedral Acolyte @Jeremy Paillotin
+604 U Glowing One @Liiga Smilshkalne
+605 U Gunner Conscript @Miguel Mercado
+606 R Harold and Bob, First Numens @Andrea Piparo
+607 R Lily Bowen, Raging Grandma @Villarrte
+608 U Lumbering Megasloth @Daniel Romanovsky
+609 R Power Fist @Campbell White
+610 R Rampaging Yao Guai @Christina Kraus
+611 R Strong Back @Elizabeth Peiró
+612 R Strong, the Brutish Thespian @Jason Rainville
+613 U Super Mutant Scavenger @David Astruga
+614 R Tato Farmer @Xavier Ribeiro
+615 R Watchful Radstag @Alexander Ostrowski
+616 U Well Rested @Brian Valeza
+617 R Agent Frank Horrigan @Wisnu Tan
+618 R Almost Perfect @Elizabeth Peiró
+619 R Alpha Deathclaw @Daarken
+620 R Arcade Gannon @Kieran Yanner
+621 R Armory Paladin @Javier Charro
+622 R Atomize @Josu Solano
+623 R Boomer Scrapper @Xavier Ribeiro
+624 R Cait, Cage Brawler @Joseph Meehan
+625 R Cass, Hand of Vengeance @Dan Watson
+626 R Colonel Autumn @Daniel Romanovsky
+627 U Contaminated Drink @Craig Elliott
+628 U Craig Boone, Novac Guard @Pierre Raveneau
+629 R Desdemona, Freedom's Edge @Anton Solovianchyk
+630 R Elder Arthur Maxson @Anton Solovianchyk
+631 U Elder Owyn Lyons @David Astruga
+632 R Electrosiphon @Antonio José Manzanedo
+633 R Inventory Management @Kamila Szutenberg
+634 R Kellogg, Dangerous Mind @Josh Hass
+635 U Legate Lanius, Caesar's Ace @Bruno Biazotto
+636 R MacCready, Lamplight Mayor @Stephen Stark
+637 R Marcus, Mutant Mayor @Josu Hernaiz
+638 R Moira Brown, Guide Author @Campbell White
+639 R Mutational Advantage @Maxim Kostin
+640 U Nightkin Ambusher @Antonio José Manzanedo
+641 R The Nipton Lottery @Olivier Bernard
+642 R Paladin Elizabeth Taggerdy @Wisnu Tan
+643 U Raul, Trouble Shooter @Irina Nordsol
+644 R Red Death, Shipwrecker @Jeremy Paillotin
+645 R Rex, Cyber-Hound @Jeremy Paillotin
+646 R Sentinel Sarah Lyons @David Astruga
+647 R Shaun, Father of Synths @Zuzanna Wużyk
+648 R Three Dog, Galaxy News DJ @Elizabeth Peiró
+649 R Vault 11: Voter's Dilemma @Kieran Yanner
+650 R Vault 87: Forced Evolution @Nicholas Gregory
+651 R Vault 112: Sadistic Simulation @Anton Solovianchyk
+652 U White Glove Gourmand @Wonchun Choi
+653 U Young Deathclaws @Nino Is
+654 U Agility Bobblehead @Daarken
+655 U Behemoth of Vault 0 @Eddie Mendoza
+656 R Brotherhood Vertibird @Daarken
+657 U C.A.M.P. @Tomas Duchek
+658 U Charisma Bobblehead @Michał Miłkowski
+659 R ED-E, Lonesome Eyebot @Leanna Crossan
+660 U Endurance Bobblehead @Alex Brock
+661 U Expert-Level Safe @Victor Harmatiuk
+662 U Intelligence Bobblehead @Torgeir Fjereide
+663 U Luck Bobblehead @Ørjan Ruttenborg Svendsen
+664 R Mister Gutsy @Zezhou Chen
+665 U Nuka-Cola Vending Machine @Anthony Devine
+666 R Nuka-Nuke Launcher @Uriah Voth
+667 U Perception Bobblehead @Marina Ortega Lorente
+668 R Pip-Boy 3000 @Mirko Failoni
+669 R Recon Craft Theta @Jarel Threat
+670 U Silver Shroud Costume @Zuzanna Wużyk
+671 U Strength Bobblehead @Nikola Matkovic
+672 U Survivor's Med Kit @Valera Lutfullina
+673 R T-45 Power Armor @Diego Gisbert
+674 R Desolate Mire @Tomáš Honz
+675 R Diamond City @Pascal Quidault
+676 R Ferrous Lake @Hristo D. Chukov
+677 R HELIOS One @Brian Valeza
+678 R Junktown @Calder Moore
+679 R Mariposa Military Base @Alexander Forssberg
+680 R Overflowing Basin @Marina Ortega Lorente
+681 R Sunscorched Divide @Zezhou Chen
+682 R Viridescent Bog @Rafater
+683 C All That Glitters @Kieran Yanner
+684 R Austere Command @Andrew Theophilopoulos
+685 R Captain of the Watch @Jonas De Ro
+686 U Crush Contraband @Xavier Ribeiro
+687 U Dispatch @Zezhou Chen
+688 R Entrapment Maneuver @Nicholas Gregory
+689 R Hour of Reckoning @Jason Kang
+690 C Impassioned Orator @Josu Hernaiz
+691 U Intangible Virtue @Anton Solovianchyk
+692 R Keeper of the Accord @Leanna Crossan
+693 R Mantle of the Ancients @Igor Krstic
+694 R Marshal's Anthem @Veli Nyström
+695 R Martial Coup @Monztre
+696 R Open the Vaults @Ilker Yildiz
+697 U Path to Exile @Stephen Stark
+698 R Puresteel Paladin @Daarken
+699 R Secure the Wastes @Viko Menezes
+700 R Single Combat @Josh Hass
+701 U Swords to Plowshares @Alex Konstad
+702 U Valorous Stance @Diego Gisbert
+703 R Fraying Sanity @Jason Kang
+704 U Glimmer of Genius @Josu Hernaiz
+705 R Inexorable Tide @James Bousema
+706 M Mechanized Production @Brian Valeza
+707 R One with the Machine @Bartek Fedyczak
+708 U Thirst for Knowledge @Javier Charro
+709 U Whirler Rogue @Daarken
+710 U Bastion of Remembrance @Pablo Mendoza
+711 R Black Market @Irina Nordsol
+712 C Deadly Dispute @Torgeir Fjereide
+713 R Lethal Scheme @Mirko Failoni
+714 U Morbid Opportunist @Lorenzo Mastroianni
+715 U Pitiless Plunderer @Nicholas Gregory
+716 R Blasphemous Act @Chris Cold
+717 R Chaos Warp @Justine Cruz
+718 U Loyal Apprentice @Ilker Yildiz
+719 C Sticky Fingers @Elizabeth Peiró
+720 R Stolen Strategy @Wonchun Choi
+721 C Unexpected Windfall @Rafater
+722 C Abundant Growth @Victor Harmatiuk
+723 R Branching Evolution @Tomas Duchek
+724 U Cultivate @Valera Lutfullina
+725 C Farseek @Erikas Perl
+726 C Fertile Ground @Jason Kang
+727 R Guardian Project @Mirko Failoni
+728 R Hardened Scales @Maxim Kostin
+729 U Harmonize @Javier Charro
+730 R Heroic Intervention @Josh Hass
+731 U Inspiring Call @Liiga Smilshkalne
+732 C Rampant Growth @Tomas Duchek
+733 U Rancor @Andrea Piparo
+734 U Squirrel Nest @Loïc Canavaggia
+735 R Tireless Tracker @Evyn Fong
+736 C Wild Growth @Igor Krstic
+737 R Anguished Unmaking @Javier Charro
+738 R Assemble the Legion @Bruno Biazotto
+739 U Behemoth Sledge @Campbell White
+740 R Biomass Mutation @Nicholas Gregory
+741 R Casualties of War @Samuel Perin
+742 U Corpsejack Menace @Russell Lu
+743 R Fervent Charge @Aaron J. Riley
+744 R Find // Finality @Nikola Matkovic
+745 U General's Enforcer @Nino Is
+746 U Heroic Reinforcements @Daniel Romanovsky
+747 U Putrefy @Irina Nordsol
+748 R Ruinous Ultimatum @Diego Gisbert
+749 R Wake the Past @David Álvarez
+750 U Wear // Tear @Constantin Marin & Diego Gisbert
+751 U Winding Constrictor @Crystal Sully
+752 U Arcane Signet @Eddie Mendoza
+753 R Basilisk Collar @Artur Treffner
+754 R Bloodforged Battle-Axe @James Bousema
+755 U Brass Knuckles @Russell Lu
+756 R Champion's Helm @Bruno Biazotto
+757 U Contagion Clasp @Zuzanna Wużyk
+758 U Everflowing Chalice @David Astruga
+759 C Explorer's Scope @Michał Miłkowski
+760 U Fireshrieker @Xavier Ribeiro
+761 U Lightning Greaves @Uriah Voth
+762 R Masterwork of Ingenuity @Daarken
+763 U Mind Stone @David Astruga
+764 R Mystic Forge @Samuel Perin
+765 R Panharmonicon @Leonardo Borazio
+766 U Skullclamp @Skinnyelbows
+767 U Sol Ring @Aaron J. Riley
+768 R Solemn Simulacrum @Kamila Szutenberg
+769 R Steel Overseer @Daarken
+770 U Swiftfoot Boots @Zezhou Chen
+771 U Talisman of Conviction @Jason Kang
+772 U Talisman of Creativity @Justine Cruz
+773 U Talisman of Curiosity @Kekai Kotaki
+774 U Talisman of Dominance @Valera Lutfullina
+775 U Talisman of Hierarchy @Brian Valeza
+776 U Talisman of Indulgence @Bruno Biazotto
+777 U Talisman of Progress @Ilker Yildiz
+778 U Talisman of Resilience @Gaboleps
+779 C Thought Vessel @Artur Treffner
+780 C Wayfarer's Bauble @Marina Ortega Lorente
+781 C Ash Barrens @Sergei Leoluch Panin
+782 U Buried Ruin @Arthur Yuan
+783 R Canopy Vista @Skinnyelbows
+784 R Canyon Slough @Anthony Devine
+785 R Cinder Glade @Nino Is
+786 R Clifftop Retreat @Samuele Bandini
+787 C Command Tower @Gabriel Tanko
+788 R Darkwater Catacombs @Victor Harmatiuk
+789 R Dragonskull Summit @Liiga Smilshkalne
+790 R Drowned Catacomb @Eddie Mendoza
+791 C Evolving Wilds @Anthony Devine
+792 R Exotic Orchard @Calder Moore
+793 R Fetid Pools @Kamila Szutenberg
+794 R Glacial Fortress @Erikas Perl
+795 R Hinterland Harbor @Marco Gorlei
+796 R Irrigated Farmland @Salvatorre Zee Yazzie
+797 R Isolated Chapel @Daniel Ljunggren
+798 U Jungle Shrine @Tomas Duchek
+799 U Memorial to Glory @Kim Sokol
+800 C Mortuary Mire @Zuzanna Wużyk
+801 R Mossfire Valley @Nino Is
+802 U Myriad Landscape @Alexander Forssberg
+803 U Mystic Monastery @Kamila Szutenberg
+804 R Nesting Grounds @Ashley Mackenzie
+805 U Nomad Outpost @Sergei Leoluch Panin
+806 U Opulent Palace @Jonas De Ro
+807 C Path of Ancestry @Marco Gorlei
+808 R Prairie Stream @Marina Ortega Lorente
+809 C Razortide Bridge @Erikas Perl
+810 U Roadside Reliquary @Arthur Yuan
+811 U Rogue's Passage @Rafater
+812 R Rootbound Crag @Samuele Bandini
+813 C Rustvale Bridge @Erikas Perl
+814 R Scattered Groves @Pablo Mendoza
+815 R Scavenger Grounds @Jonas De Ro
+816 R Shadowblood Ridge @Slawomir Maniak
+817 R Sheltered Thicket @Constantin Marin
+818 C Silverbluff Bridge @Erikas Perl
+819 R Skycloud Expanse @Arthur Yuan
+820 R Smoldering Marsh @Erikas Perl
+821 R Spire of Industry @Salvatorre Zee Yazzie
+822 R Sulfur Falls @Pablo Mendoza
+823 R Sungrass Prairie @Hristo D. Chukov
+824 R Sunken Hollow @Daarken
+825 R Sunpetal Grove @Eddie Mendoza
+826 U Tainted Field @Mirko Failoni
+827 U Tainted Isle @Rafater
+828 U Tainted Peak @Gabriel Tanko
+829 U Tainted Wood @Jarel Threat
+830 R Temple of Abandon @Arthur Yuan
+831 R Temple of Deceit @Pascal Quidault
+832 R Temple of Enlightenment @Arthur Yuan
+833 R Temple of Epiphany @Eddie Mendoza
+834 R Temple of Malady @Alexander Forssberg
+835 R Temple of Malice @Arthur Yuan
+836 R Temple of Mystery @Alexander Forssberg
+837 R Temple of Plenty @Jeremy Paillotin
+838 R Temple of Silence @Nino Is
+839 U Temple of the False God @Kekai Kotaki
+840 R Temple of Triumph @Josu Hernaiz
+841 C Terramorphic Expanse @Jonas De Ro
+842 R Treasure Vault @Rafater
+843 R Windbrisk Heights @Anthony Devine
+844 R Woodland Cemetery @Arthur Yuan
+845 L Plains @Samuele Bandini
+846 L Plains @Constantin Marin
+847 L Island @Samuele Bandini
+848 L Island @Pablo Mendoza
+849 L Swamp @Samuele Bandini
+850 L Swamp @Nikola Matkovic
+851 L Mountain @Samuele Bandini
+852 L Mountain @Pablo Mendoza
+853 L Forest @Samuele Bandini
+854 L Forest @Nikola Matkovic
+855 R Idolized @Tim Brumley
+856 R Securitron Squadron @Tim Brumley
+857 R Radstorm @Tim Brumley
+858 R Synth Infiltrator @David Gaillet
+859 R Nuclear Fallout @James Bousema
+860 R Screeching Scorchbeast @Tomas Duchek
+861 R V.A.T.S. @Robin Olausson
+862 R Mysterious Stranger @Chad Weatherford
+863 R Watchful Radstag @Evan Shipard
+864 R Alpha Deathclaw @Robin Olausson
+865 R Armory Paladin @Chad Weatherford
+866 R Atomize @Robin Olausson
+867 M Caesar, Legion's Emperor @David Gaillet
+868 M Dogmeat, Ever Loyal @Mark Poole
+869 M Dr. Madison Li @John Stanko
+870 R Inventory Management @Tim Brumley
+871 M The Wise Mothman @David Gaillet
+872 R Hullbreaker Horror @Tomas Duchek ${"flavorName": "Prime Mirelurk Queen"}
+873 R Lord of the Undead @John Stanko ${"flavorName": "Centurion of the Marked"}
+874 M Grave Titan @Mark Poole ${"flavorName": "West Tek Tyrant"}
+875 R Vigor @Tomas Duchek ${"flavorName": "Fog Crawler"}
+876 R Ayula, Queen Among Bears @Mark Poole ${"flavorName": "Ruzka, Terror of Point Lookout"}
+877 M Tarmogoyf @Robin Olausson ${"flavorName": "Scrounging Deathclaw"}
+878 R Hornet Queen @Robin Olausson ${"flavorName": "Specimen 73"}
+879 R Gemrazer @Evan Shipard ${"flavorName": "Toxic Sheepsquatch"}
+880 R Walking Ballista @Evan Shipard ${"flavorName": "Assaultron Invader"}
+881 R Farewell @AKQA
+882 M Ravages of War @AKQA
+883 U Vandalblast @AKQA
+884 U Arcane Signet @AKQA
+885 M Crucible of Worlds @AKQA
+886 U Nuka-Cola Vending Machine @AKQA
+887 M Sol Ring @AKQA
+888 U Command Tower @AKQA
+889 R Wasteland @AKQA
+890 R Aradesh, the Founder @Campbell White
+891 R Automated Assembly Line @David Álvarez
+892 R Battle of Hoover Dam @Campbell White
+893 R Brotherhood Scribe @Jarel Threat
+894 R Codsworth, Handy Helper @Alex Konstad
+895 R Overencumbered @Elizabeth Peiró
+896 R Overseer of Vault 76 @Kieran Yanner
+897 R Pre-War Formalwear @Josu Hernaiz
+898 R The Prydwen, Steel Flagship @Victor Harmatiuk
+899 R Sentry Bot @Anthony Devine
+900 R Sierra, Nuka's Biggest Fan @Anna Podedworna
+901 R Yes Man, Personal Securitron @Dan Murayama Scott
+902 R Curie, Emergent Intelligence @Daniel Romanovsky
+903 R James, Wandering Dad @Wonchun Choi
+904 R Jason Bright, Glowing Prophet @Tomas Duchek
+905 R Mirelurk Queen @Nicholas Gregory
+906 R Nick Valentine, Private Eye @Viko Menezes
+907 R Piper Wright, Publick Reporter @Rafater
+908 R Struggle for Project Purity @Billy Christian
+909 R Feral Ghoul @Sergio Cosmai
+910 R Hancock, Ghoulish Mayor @Wonchun Choi
+911 R Wasteland Raider @Yigit Koroglu
+912 R Assaultron Dominator @Viko Menezes
+913 R Duchess, Wayward Tavernkeep @Kieran Yanner
+914 R Grim Reaper's Sprint @Anton Solovianchyk
+915 R Junk Jet @Billy Christian
+916 R Megaton's Fate @Chris Cold
+917 R The Motherlode, Excavator @Josu Solano
+918 R Plasma Caster @Kekai Kotaki
+919 R Powder Ganger @Fesbra
+920 R Rose, Cutthroat Raider @Zezhou Chen
+921 R Synth Eradicator @Kekai Kotaki
+922 R Thrill-Kill Disciple @Mathias Kollros
+923 R Veronica, Dissident Scribe @Pascal Quidault
+924 R Wild Wasteland @Mathias Kollros
+925 R Animal Friend @Maxim Kostin
+926 R Harold and Bob, First Numens @Andrea Piparo
+927 R Lily Bowen, Raging Grandma @Villarrte
+928 R Power Fist @Campbell White
+929 R Rampaging Yao Guai @Christina Kraus
+930 R Strong Back @Elizabeth Peiró
+931 R Strong, the Brutish Thespian @Jason Rainville
+932 R Tato Farmer @Xavier Ribeiro
+933 R Agent Frank Horrigan @Wisnu Tan
+934 R Almost Perfect @Elizabeth Peiró
+935 R Arcade Gannon @Kieran Yanner
+936 R Boomer Scrapper @Xavier Ribeiro
+937 R Cait, Cage Brawler @Joseph Meehan
+938 R Cass, Hand of Vengeance @Dan Watson
+939 R Colonel Autumn @Daniel Romanovsky
+940 R Desdemona, Freedom's Edge @Anton Solovianchyk
+941 R Elder Arthur Maxson @Anton Solovianchyk
+942 R Electrosiphon @Antonio José Manzanedo
+943 R Kellogg, Dangerous Mind @Josh Hass
+944 M Liberty Prime, Recharged @Pascal Quidault
+945 R MacCready, Lamplight Mayor @Stephen Stark
+946 R Marcus, Mutant Mayor @Josu Hernaiz
+947 M The Master, Transcendent @Javier Charro
+948 R Moira Brown, Guide Author @Campbell White
+949 M Mr. House, President and CEO @Joseph Meehan
+950 R Mutational Advantage @Maxim Kostin
+951 R The Nipton Lottery @Olivier Bernard
+952 R Paladin Elizabeth Taggerdy @Wisnu Tan
+953 M Preston Garvey, Minuteman @Leonardo Borazio
+954 R Red Death, Shipwrecker @Jeremy Paillotin
+955 R Rex, Cyber-Hound @Jeremy Paillotin
+956 R Sentinel Sarah Lyons @David Astruga
+957 R Shaun, Father of Synths @Zuzanna Wużyk
+958 R Three Dog, Galaxy News DJ @Elizabeth Peiró
+959 R Brotherhood Vertibird @Daarken
+960 R ED-E, Lonesome Eyebot @Leanna Crossan
+961 R Mister Gutsy @Zezhou Chen
+962 R Nuka-Nuke Launcher @Uriah Voth
+963 R Pip-Boy 3000 @Mirko Failoni
+964 R Recon Craft Theta @Jarel Threat
+965 R T-45 Power Armor @Diego Gisbert
+966 R Desolate Mire @Tomáš Honz
+967 R Diamond City @Pascal Quidault
+968 R Ferrous Lake @Hristo D. Chukov
+969 R HELIOS One @Brian Valeza
+970 R Junktown @Calder Moore
+971 R Mariposa Military Base @Alexander Forssberg
+972 R Overflowing Basin @Marina Ortega Lorente
+973 R Sunscorched Divide @Zezhou Chen
+974 R Viridescent Bog @Rafater
+975 R Austere Command @Andrew Theophilopoulos
+976 R Captain of the Watch @Jonas De Ro
+977 R Entrapment Maneuver @Nicholas Gregory
+978 R Hour of Reckoning @Jason Kang
+979 R Keeper of the Accord @Leanna Crossan
+980 R Mantle of the Ancients @Igor Krstic
+981 R Marshal's Anthem @Veli Nyström
+982 R Martial Coup @Monztre
+983 R Open the Vaults @Ilker Yildiz
+984 R Puresteel Paladin @Daarken
+985 R Secure the Wastes @Viko Menezes
+986 R Single Combat @Josh Hass
+987 R Fraying Sanity @Jason Kang
+988 R Inexorable Tide @James Bousema
+989 M Mechanized Production @Brian Valeza
+990 R One with the Machine @Bartek Fedyczak
+991 R Black Market @Irina Nordsol
+992 R Lethal Scheme @Mirko Failoni
+993 R Blasphemous Act @Chris Cold
+994 R Chaos Warp @Justine Cruz
+995 R Stolen Strategy @Wonchun Choi
+996 R Branching Evolution @Tomas Duchek
+997 R Guardian Project @Mirko Failoni
+998 R Hardened Scales @Maxim Kostin
+999 R Heroic Intervention @Josh Hass
+1000 R Tireless Tracker @Evyn Fong
+1001 R Anguished Unmaking @Javier Charro
+1002 R Assemble the Legion @Bruno Biazotto
+1003 R Biomass Mutation @Nicholas Gregory
+1004 R Casualties of War @Samuel Perin
+1005 R Fervent Charge @Aaron J. Riley
+1006 R Ruinous Ultimatum @Diego Gisbert
+1007 R Wake the Past @David Álvarez
+1008 R Basilisk Collar @Artur Treffner
+1009 R Bloodforged Battle-Axe @James Bousema
+1010 R Champion's Helm @Bruno Biazotto
+1011 R Masterwork of Ingenuity @Daarken
+1012 R Mystic Forge @Samuel Perin
+1013 R Panharmonicon @Leonardo Borazio
+1014 R Solemn Simulacrum @Kamila Szutenberg
+1015 R Steel Overseer @Daarken
+1016 R Canopy Vista @Skinnyelbows
+1017 R Canyon Slough @Anthony Devine
+1018 R Cinder Glade @Nino Is
+1019 R Clifftop Retreat @Samuele Bandini
+1020 R Darkwater Catacombs @Victor Harmatiuk
+1021 R Dragonskull Summit @Liiga Smilshkalne
+1022 R Drowned Catacomb @Eddie Mendoza
+1023 R Exotic Orchard @Calder Moore
+1024 R Fetid Pools @Kamila Szutenberg
+1025 R Glacial Fortress @Erikas Perl
+1026 R Hinterland Harbor @Marco Gorlei
+1027 R Irrigated Farmland @Salvatorre Zee Yazzie
+1028 R Isolated Chapel @Daniel Ljunggren
+1029 R Mossfire Valley @Nino Is
+1030 R Nesting Grounds @Ashley Mackenzie
+1031 R Prairie Stream @Marina Ortega Lorente
+1032 R Rootbound Crag @Samuele Bandini
+1033 R Scattered Groves @Pablo Mendoza
+1034 R Scavenger Grounds @Jonas De Ro
+1035 R Shadowblood Ridge @Slawomir Maniak
+1036 R Sheltered Thicket @Constantin Marin
+1037 R Skycloud Expanse @Arthur Yuan
+1038 R Smoldering Marsh @Erikas Perl
+1039 R Spire of Industry @Salvatorre Zee Yazzie
+1040 R Sulfur Falls @Pablo Mendoza
+1041 R Sungrass Prairie @Hristo D. Chukov
+1042 R Sunken Hollow @Daarken
+1043 R Sunpetal Grove @Eddie Mendoza
+1044 R Temple of Abandon @Arthur Yuan
+1045 R Temple of Deceit @Pascal Quidault
+1046 R Temple of Enlightenment @Arthur Yuan
+1047 R Temple of Epiphany @Eddie Mendoza
+1048 R Temple of Malady @Alexander Forssberg
+1049 R Temple of Malice @Arthur Yuan
+1050 R Temple of Mystery @Alexander Forssberg
+1051 R Temple of Plenty @Jeremy Paillotin
+1052 R Temple of Silence @Nino Is
+1053 R Temple of Triumph @Josu Hernaiz
+1054 R Treasure Vault @Rafater
+1055 R Windbrisk Heights @Anthony Devine
+1056 R Woodland Cemetery @Arthur Yuan
+1057 U Strength Bobblehead @Nikola Matkovic
+1058 U Perception Bobblehead @Marina Ortega Lorente
+1059 U Endurance Bobblehead @Alex Brock
+1060 U Charisma Bobblehead @Michał Miłkowski
+1061 U Intelligence Bobblehead @Torgeir Fjereide
+1062 U Agility Bobblehead @Daarken
+1063 U Luck Bobblehead @Ørjan Ruttenborg Svendsen
+1064 M Caesar, Legion's Emperor @Alexander Gering
+1065 M Dogmeat, Ever Loyal @Kieran Yanner
+1066 M Dr. Madison Li @Zuzanna Wużyk
+1067 M The Wise Mothman @Sergei Leoluch Panin
+1068 R War Room @Desmuncubic
+
+[tokens]
+2 w_2_2_human_knight_artifact_pump @Wayne Wu
+3 w_1_1_human_soldier @Viko Menezes
+4 w_1_1_soldier @Wayne Wu
+5 w_1_1_warrior @Andreia Ugrai
+6 u_0_0_alien @Tomasz Zarucki
+7 b_2_2_zombie_mutant @Bartek Fedyczak
+8 settlement @Mathias Kollros
+9 g_1_1_squirrel @Dan Watson
+10 rw_1_1_soldier_haste @Justine Cruz
+11 c_a_clue_draw @Ashley Mackenzie
+12 c_a_food_sac @David Astruga
+13 c_a_food_sac @Bruno Biazotto
+14 c_a_food_sac @Kamila Szutenberg
+15 c_a_junk_sac_exileplay @Justine Cruz
+16 c_3_3_a_robot @Sergio Cosmai
+17 c_1_1_a_thopter_flying @Victor Harmatiuk
+18 c_a_treasure_sac @Rafater
+19 c_a_treasure_sac @Kim Sokol
+20 wasteland_survival_guide @Sergio Cosmai
+
+[other]
+1 copy @Monztre
+22 radiation @Skinnyelbows

@@ -1,0 +1,9 @@
+Name:Trusty Boomerang
+ManaCost:1
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddAbility$ BoomerangTap | Description$ Equipped creature has "{1}, {T}: Tap target creature. Return CARDNAME to its owner's hand."
+SVar:BoomerangTap:AB$ Tap | Cost$ 1 T | ValidTgts$ Creature | SubAbility$ DBChangeZone | SpellDescription$ Tap target creature. Return ORIGINALHOST to its owner's hand.
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ OriginalHost | Origin$ Battlefield | Destination$ Hand
+K:Equip:1
+SVar:NonStackingAttachEffect:True
+Oracle:Equipped creature has "{1}, {T}: Tap target creature. Return Trusty Boomerang to its owner's hand."\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

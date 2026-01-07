@@ -120,7 +120,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             sb.append(TextUtil.concatNoSpace("\n(", String.valueOf(maxTargets - targeted), " more can be targeted)"));
         }
 
-        String name = CardTranslation.getTranslatedName(sa.getHostCard().getName());
+        String name = sa.getHostCard().getTranslatedName();
         String message = TextUtil.fastReplace(TextUtil.fastReplace(sb.toString(),
                 "CARDNAME", name), "(Targeting ERROR)", "");
         message = TextUtil.fastReplace(message, "NICKNAME", Lang.getInstance().getNickName(name));
@@ -169,19 +169,16 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         // TODO should use sa.canTarget(card) instead?
         // it doesn't have messages
 
-        if (sa.isSpell() && sa.getHostCard().isAura() && !card.canBeAttached(sa.getHostCard(), sa)) {
-            showMessage(sa.getHostCard() + " - Cannot enchant this card (Shroud? Protection? Restrictions?).");
-            return false;
+        if (sa.isSpell() && sa.getHostCard().isAura()) {
+            String msg = card.cantBeAttachedMsg(sa.getHostCard(), sa);
+            if (msg != null) {
+                showMessage(sa.getHostCard() + " - " + msg);
+                return false;
+            }
         }
         //If the card is not a valid target
         if (!card.canBeTargetedBy(sa)) {
             showMessage(sa.getHostCard() + " - Cannot target this card (Shroud? Protection? Restrictions).");
-            return false;
-        }
-
-        // If all cards must be from the same zone
-        if (tgt.isSingleZone() && lastTarget != null && !card.getController().equals(lastTarget.getController())) {
-            showMessage(sa.getHostCard() + " - Cannot target this card (not in the same zone)");
             return false;
         }
 
@@ -300,7 +297,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         }
 
         if (!choices.contains(card)) {
-            showMessage(sa.getHostCard() + " - The selected card is not a valid choice to be targeted.");
+            showMessage(sa.getHostCard() + " - The selected card is not " + Lang.nounWithAmount(1, tgt.getValidDesc()) + ".");
             return false;
         }
 
@@ -408,15 +405,18 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     }
 
     private void removeTarget(final GameEntity ge) {
+        if (divisionValues != null) {
+            divisionValues.add(sa.getDividedValue(ge));
+        }
         targets.remove(ge);
         sa.getTargets().remove(ge);
-        if (ge instanceof Card) {
-            getController().getGui().setUsedToPay(CardView.get((Card) ge), false);
+        if (ge instanceof Card c) {
+            getController().getGui().setUsedToPay(CardView.get(c), false);
             // try to get last selected card
             lastTarget = Iterables.getLast(IterableUtil.filter(targets, Card.class), null);
         }
-        else if (ge instanceof Player) {
-            getController().getGui().setHighlighted(PlayerView.get((Player) ge), false);
+        else if (ge instanceof Player p) {
+            getController().getGui().setHighlighted(PlayerView.get(p), false);
         }
 
         this.showMessage();

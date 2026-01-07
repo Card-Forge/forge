@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="71">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzdlksOgCAMRNmaeATPw6E9nbpwV+wM/QBO0l3LvPSTULdS6h2v6jZnjOA79rn5GMYsPslHY2SF1Go5TB9HKJvvef+JGfikOomNnS9zz8yuS73TemC5ZZYP8W7dbjYfkp/Fh84N4YvYP4ZPy4tgW4EP2St2D7Taljz5Wm9LfYxQj8fXnGfhs8zY4mVhY3fK26vnhjWvUXy9fla2FfgYHy8+VBF8nvoDH1uL5EfwnTtWZ/HKug0Proy/VVTfLiG77/0=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztwzENAAAMA6Aes13vtbEDEnpJVVVVVfXpAffWXM8=
+  </data>
+ </layer>
+ <layer id="2" name="Grass" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJy1V21u6zAMy8802ddFvQ69aLp1B5q9hYDAUbLibgKCt5cqMiVTtLwu0/RQn895ms6n6dtK/fe1Pm/7/61t1e+5+r/U52P++fZx+e1n4+Bp/uy77mu335/q3++zjrWaddZFr9uwZXBZXw9b+x1Yehib73X2sdscbqIGyorBhVwspkJYPIy2JlgXe9jDuzk52dqBM3gHzqg9AkaLBe8s1/Cu5eHVFeudBUfLXrcbrcO1V/mtgjf8jrmjOBHttVqDsUT59cxyAc9IHGsXyvPi9PMoRq/3VW95+2b5pmo8grHtIXNW5WHry7X6b+vlyr97+nmPZTQwqzu977KcsGY1JdKTo5xW33FvwEetbfNQWmjxe3qicudzmvefsXl9yDUb6Ss+q5pdTrlzGn7oQYXH21fmicdR1cMZjbZ+ZZ+XvFgqT/aNcsnUPdIdnp+8WJyjx5URfYvmNi/WRvvn9RHigye2V7z+yOJX/IWh5ldTm0hDVO05fi9PFTOaNew5O3Jmsy5l5uGmPVmtz94BejGYp8wDWElqD8fHLMD6fIRLzaLZiefoo2t4s+qReJH2RVo2Mk9wPGg0Y47uIvBXM66aq0fnMqt/2fMdvInuq94dqpeLiqU4jxpH848yqyvefGR73eOZN4dE6/H3DXPmPsr5FZofeve4zD2eMaOuEQdQf28W690x/0K/R84mz+xcdg82xnhU/78AR0z7Ww==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztlzEOwjAMRbvAJWCjEtBrwyXKVgZA6qUQg6UoCrH9bTcI9U1tkzip/e0kXbcSwan1Av6Aa7D9h2HsUdl/SJ43jnYljMnz7DjXDhhzrrTdwXX0jP0LaFdKyQ+34DmXJEKTCPk6SNcHwBYXn73C1sx3gfkV3xOTcTzFivuvp3GenJezPS0j38UE6ZX2lta60ewNmlwjpHu3tPaXdO1VwzW+iIybxTbni2i99dk7p5nofPsQWfdTWueyF9sv36XaKp3tavcsa8339LunVoZKG1JLc9BzeATpXakUjyXynAO5B6348AYH3Rhd
+  </data>
+ </layer>
+ <layer id="7" name="Walls of Trees " width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzFV9FOwzAM7Hv7F6PjT1eQEP9Ey2CCn6IRRNyOs+N0bYlkMdbUOTtnn3fsmuZ+trz6+fNhttcfu5vt+M/G+Pj/iA+Mae24LHxD2zRjpY9T+/33YmDMcUTxp/1nwvMy20MFtiO8gzaKvH50f3nkYcXcTbSXfaN5eyz/uPCerFyr9yc452z4xljU+crHk8hthOdWfLgG8PvY/n5/IW7gMysePjvz1cKXeIN+h1bziHmG76TcvAG3rHgYY7RPILdr6zWtT+JC39nx9wvwLelpfC7mn2PEvYy9Ni+l2lH3MxhcUL6W5KmE71S4n8iZW+BTtTOKM1VtWvhy71lL/zyO1PCbubKHrlu89+LE/dachLoXiUtpWPZn8crSVrxn7ElKcybBsUlgUTo30TPGZ3Eznffs6AwvxQ1reRqm8OW6VxhZWyL4BtIk1jqcvVi/PO1S+Jm/ShPTdxjP2PmcKtWlpQ1e31azZmn+rMFXU8NrmeK2N+tuoQ21d+Zpxd741J1hX+C8Yr+yeq3VP5cYnlma16LzvbcnivcgfPbwDOdjrvXSfM+9i1dtr+D31JzAd/veXfcU1V/U79DofMrzXun3+dKZ5Ja6QG3cama6FWM053vg+wJe8kpS
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="270.951" y="479.787">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../../../common/maps/obj/door_down.tx" x="39.5" y="17.5">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/grove_11U.tmx"/>
+    <property name="teleportObjectId" value="70"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../../../common/maps/obj/door_left.tx" x="544" y="279.5">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/grove_11R.tmx"/>
+    <property name="teleportObjectId" value="77"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

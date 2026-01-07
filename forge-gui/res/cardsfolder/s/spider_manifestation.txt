@@ -1,0 +1,10 @@
+Name:Spider Manifestation
+Variant:UniversesWithin:FlavorName:Leyline Weaver
+ManaCost:1 RG
+Types:Creature Spider Avatar
+PT:2/2
+K:Reach
+A:AB$ Mana | Cost$ T | Produced$ Combo R G | SpellDescription$ Add {R} or {G}.
+T:Mode$ SpellCast | ValidCard$ Card.cmcGE4 | ValidActivatingPlayer$ You | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell with mana value 4 or greater, untap this creature.
+SVar:TrigUntap:DB$ Untap | Defined$ Self
+Oracle:Reach\n{T}: Add {R} or {G}.\nWhenever you cast a spell with mana value 4 or greater, untap this creature.

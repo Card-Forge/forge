@@ -54,7 +54,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
 
     // might support different order via preference later
     private static final Comparator<Card> COMPARATOR = Comparator.comparingInt((Card c) -> c.getCMC())
-            .thenComparing(c -> c.getColor())
+            .thenComparing(c -> c.getColor().getOrderWeight())
             .thenComparing(Comparator.comparing(Card::getName))
             .thenComparing(Card::hasPerpetual);
 
@@ -111,8 +111,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
                 final Zone oldZone = game.getZoneOf(c);
                 final ZoneType zt = oldZone == null ? ZoneType.Stack : oldZone.getZoneType();
 
-                // only if the zoneType differs from this
-                // don't go in there is its a control change
+                // don't go in there if its a control change
                 if (zt != zoneType) {
                     c.setTurnInController(getPlayer());
                     c.setTurnInZone(game.getPhaseHandler().getTurn());

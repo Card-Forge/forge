@@ -3,8 +3,8 @@ ManaCost:4 B
 Types:Legendary Creature Rat Faerie
 PT:3/4
 K:Flying
-T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ Morbid | SVarCompare$ GE1 | TriggerZones$ Battlefield | Execute$ TrigFood | TriggerDescription$ At the beginning of each end step, if a creature died this turn, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
-SVar:TrigFood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ Morbid | TriggerZones$ Battlefield | Execute$ TrigFood | TriggerDescription$ At the beginning of each end step, if a creature died this turn, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:TrigFood:DB$ Token | TokenScript$ c_a_food_sac | TokenOwner$ You
 SVar:Morbid:Count$Morbid.1.0
 A:AB$ Pump | Cost$ 2 B Sac<1/Creature.Other;Artifact.Other/another creature or artifact> | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
 DeckHas:Ability$Token|Sacrifice & Type$Food|Artifact

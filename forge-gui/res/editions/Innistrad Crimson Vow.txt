@@ -340,23 +340,23 @@ Prerelease=6 Boosters, 1 RareMythic+
 326 R Old Rutstein @Mark Riddick
 327 R Runo Stromkirk @Nico Delort
 328 R Torens, Fist of the Angels @Cabrol
-329 U Circle of Confinement @Dan Murayama Scott
-330 M Savior of Ollenbock @Johannes Voss
-331 R Thalia, Guardian of Thraben @Magali Villeneuve
-332 M Jacob Hauken, Inspector @Slawomir Maniak
-333 U Thirst for Discovery @Dan Murayama Scott
-334 R Falkenrath Forebear @Greg Staples
-335 M Henrika Domnathi @Nils Hamm
-336 U Innocent Traveler @Igor Kieryluk
-337 M Sorin the Mirthless @Bastien L. Deharme
-338 R Voldaren Bloodcaster @Johann Bodin
-339 U Vampires' Vengeance @Dave Kendall
-340 U Reclusive Taxidermist @Tomasz Jedruszek
-341 R Edgar, Charmed Groom @Lucas Graciano
-342 R Eruth, Tormented Prophet @Dave Kendall
-343 M Olivia, Crimson Bride @Bastien L. Deharme
-344 R Torens, Fist of the Angels @Greg Staples
-345 R Investigator's Journal @Alix Branwyn
+329 U Circle of Confinement @Dan Murayama Scott ${"flavorName": "Van Helsing's Holy Ward"}
+330 M Savior of Ollenbock @Johannes Voss ${"flavorName": "Abraham Van Helsing"}
+331 R Thalia, Guardian of Thraben @Magali Villeneuve ${"flavorName": "Mina Harker"}
+332 M Jacob Hauken, Inspector @Slawomir Maniak ${"flavorName": "Jonathan Harker // Harker's Obsessive Inquiry"}
+333 U Thirst for Discovery @Dan Murayama Scott ${"flavorName": "Search the Count's Castle"}
+334 R Falkenrath Forebear @Greg Staples ${"flavorName": "Dracula, Blood Immortal"}
+335 M Henrika Domnathi @Nils Hamm ${"flavorName": "The Three Weird Sisters // Fiends of Darkest Night"}
+336 U Innocent Traveler @Igor Kieryluk ${"flavorName": "Lucy Westenra // Lucy, Arisen Vampire"}
+337 M Sorin the Mirthless @Bastien L. Deharme ${"flavorName": "Count Dracula"}
+338 R Voldaren Bloodcaster @Johann Bodin ${"flavorName": "Dracula, Lord of Blood // Dracula, Lord of Bats"}
+339 U Vampires' Vengeance @Dave Kendall ${"flavorName": "Mysterious Blood Illness"}
+340 U Reclusive Taxidermist @Tomasz Jedruszek ${"flavorName": "Quincey Harker"}
+341 R Edgar, Charmed Groom @Lucas Graciano ${"flavorName": "Dracula the Voyager // Casket of Native Earth"}
+342 R Eruth, Tormented Prophet @Dave Kendall ${"flavorName": "Renfield, Delusional Minion"}
+343 M Olivia, Crimson Bride @Bastien L. Deharme ${"flavorName": "Sisters of the Undead"}
+344 R Torens, Fist of the Angels @Greg Staples ${"flavorName": "Dr. John Seward"}
+345 R Investigator's Journal @Alix Branwyn ${"flavorName": "Harker's Journal"}
 
 [extended art]
 346 R By Invitation Only @Micah Epstein
@@ -420,7 +420,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 402 L Forest @Sam White
 
 [buy a box]
-403 R Voldaren Estate @Cliff Childs
+403 R Voldaren Estate @Cliff Childs ${"flavorName": "Castle Dracula"}
 
 [promo]
 404 R Sigarda's Summons @Wisnu Tan
@@ -470,5 +470,4 @@ A-248 U A-Skull Skaab @Nicholas Gregory
 19 copy @Brian Valeza
 20 emblem_chandra_dressed_to_kill @Viktor Titov
 21 day @Johan Grenier
-# Double-faced tokens are not supported yet
-# 21☇ night @Johan Grenier
+21☇ night @Johan Grenier

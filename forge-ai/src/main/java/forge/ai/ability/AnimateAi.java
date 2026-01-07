@@ -234,7 +234,7 @@ public class AnimateAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(Player aiPlayer, SpellAbility sa) {
         if (sa.usesTargeting()) {
             sa.resetTargets();
             return animateTgtAI(sa);
@@ -411,15 +411,13 @@ public class AnimateAi extends SpellAbilityAi {
         }
 
         if (logic.equals("ValuableAttackerOrBlocker")) {
-            if (ph.inCombat()) {
-                final Combat combat = ph.getCombat();
-                for (Card c : list) {
-                    Card animated = becomeAnimated(c, sa);
-                    boolean isValuableAttacker = ph.is(PhaseType.MAIN1, ai) && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, animated);
-                    boolean isValuableBlocker = combat != null && combat.getDefendingPlayers().contains(ai) && ComputerUtilCard.doesSpecifiedCreatureBlock(ai, animated);
-                    if (isValuableAttacker || isValuableBlocker)
-                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                }
+            final Combat combat = ph.getCombat();
+            for (Card c : list) {
+                Card animated = becomeAnimated(c, sa);
+                boolean isValuableAttacker = ph.is(PhaseType.COMBAT_BEGIN, ai) && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, animated);
+                boolean isValuableBlocker = combat != null && combat.getDefendingPlayers().contains(ai) && ComputerUtilCard.doesSpecifiedCreatureBlock(ai, animated);
+                if (isValuableAttacker || isValuableBlocker)
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
         }
 
@@ -607,10 +605,10 @@ public class AnimateAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+    public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         if (sa.isKeyword(Keyword.RIOT)) {
             return !SpecialAiLogic.preferHasteForRiot(sa, payer);
         }
-        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
+        return super.willPayUnlessCost(payer, sa, cost, alreadyPaid, payers);
     }
 }

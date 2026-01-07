@@ -1,0 +1,6 @@
+Name:Cordyceps Infected
+ManaCost:no cost
+Colors:black
+Types:Creature Fungus Zombie
+PT:1/1
+Oracle:

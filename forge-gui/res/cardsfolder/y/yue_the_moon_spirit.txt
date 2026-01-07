@@ -1,0 +1,8 @@
+Name:Yue, the Moon Spirit
+ManaCost:3 U
+Types:Legendary Creature Spirit Ally 
+PT:3/3
+K:Flying
+K:Vigilance
+A:AB$ Play | Cost$ Waterbend<5> T | Valid$ Card | ValidZone$ Hand | ValidSA$ Spell.nonCreature+YouOwn | WithoutManaCost$ True | Amount$ 1 | Controller$ You | Optional$ True | SpellDescription$ You may cast a noncreature spell from your hand without paying its mana cost.
+Oracle:Flying, vigilance\nWaterbend {5}, {T}: You may cast a noncreature spell from your hand without paying its mana cost.

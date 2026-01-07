@@ -1,0 +1,9 @@
+Name:Ezekiel Sims, Spider-Totem
+Variant:UniversesWithin:FlavorName:Orris, Last of the Web Lords
+ManaCost:4 G
+Types:Legendary Creature Spider Human Advisor
+PT:3/5
+K:Reach
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target Spider you control gets +2/+2 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Spider.YouCtrl | TgtPrompt$ Select target Spider you control | NumAtt$ +2 | NumDef$ +2
+Oracle:Reach\nAt the beginning of combat on your turn, target Spider you control gets +2/+2 until end of turn.

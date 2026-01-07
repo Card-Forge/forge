@@ -1,5 +1,5 @@
 Name:Negan, the Cold-Blooded
-AltName:Malik, Grim Manipulator
+Variant:UniversesWithin:FlavorName:Malik, Grim Manipulator
 ManaCost:2 R W B
 Types:Legendary Creature Human Rogue
 PT:4/3
@@ -8,6 +8,6 @@ SVar:TrigChoose:DB$ ChooseCard | ValidTgts$ Opponent | Defined$ TargetedAndYou |
 SVar:DBSacrificeAll:DB$ SacrificeAll | ValidCards$ Creature.ChosenCard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 T:Mode$ Sacrificed | ValidCard$ Creature.OppCtrl | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent sacrifices a creature, you create a Treasure token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You
 DeckHas:Ability$Token
 Oracle:When Negan enters, you and target opponent each secretly choose a creature that player controls. Then those choices are revealed, and that player sacrifices those creatures.\nWhenever an opponent sacrifices a creature, you create a Treasure token.

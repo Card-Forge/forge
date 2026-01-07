@@ -1,0 +1,8 @@
+Name:Skyward Spider
+Variant:UniversesWithin:FlavorName:Wonderweave Aerialist
+ManaCost:WU WU
+Types:Creature Spider Human Hero
+PT:2/2
+K:Ward:2
+S:Mode$ Continuous | Affected$ Card.Self+modified | AddKeyword$ Flying | Description$ CARDNAME has flying as long as it's modified. (Equipment, Auras you control, and counters are modifications.)
+Oracle:Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nThis creature has flying as long as it's modified. (Equipment, Auras you control, and counters are modifications.)

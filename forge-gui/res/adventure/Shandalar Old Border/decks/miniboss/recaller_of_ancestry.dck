@@ -1,0 +1,23 @@
+[metadata]
+Name=Recaller of Ancestry
+[Main]
+10 Island|LEA
+10 Forest|LEA|2
+4 Mox Sapphire|LEA
+4 Mox Emerald|LEA
+4 Ancestral Recall|LEA
+4 Maro|MIR
+2 Sylvan Yeti|PO2
+2 Multani, Maro-Sorcerer|ULG
+3 Rancor|ULG
+2 Norwood Priestess|PO2
+2 Defense of the Heart|ULG
+3 Braingeyser|LEA
+2 Rush of Knowledge|SCG
+4 Memory Lapse|HML
+2 Recall|LEG
+2 Hurkyl's Recall|ATQ
+
+[StartInBattle_Reference]
+1 Sylvan Yeti|PO2
+1 Library of Leng|LEA

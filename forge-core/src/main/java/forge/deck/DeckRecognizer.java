@@ -22,6 +22,7 @@ import forge.StaticData;
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardType;
+import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
@@ -49,6 +50,16 @@ public class DeckRecognizer {
         LIMITED_CARD,
         CARD_FROM_NOT_ALLOWED_SET,
         CARD_FROM_INVALID_SET,
+        /**
+         * Valid card request, but can't be imported because the player does not have enough copies.
+         * Should be replaced with a different printing if possible.
+         */
+        CARD_NOT_IN_INVENTORY,
+        /**
+         * Valid card request for a card that isn't in the player's inventory, but new copies can be acquired freely.
+         * Usually used for basic lands. Should be supplied to the import controller by the editor.
+         */
+        FREE_CARD_NOT_IN_INVENTORY,
         // Warning messages
         WARNING_MESSAGE,
         UNKNOWN_CARD,
@@ -63,10 +74,14 @@ public class DeckRecognizer {
         CARD_TYPE,
         CARD_RARITY,
         CARD_CMC,
-        MANA_COLOUR
+        MANA_COLOUR;
+
+        public static final EnumSet<TokenType> CARD_TOKEN_TYPES = EnumSet.of(LEGAL_CARD, LIMITED_CARD, CARD_FROM_NOT_ALLOWED_SET, CARD_FROM_INVALID_SET, CARD_NOT_IN_INVENTORY, FREE_CARD_NOT_IN_INVENTORY);
+        public static final EnumSet<TokenType> IN_DECK_TOKEN_TYPES = EnumSet.of(LEGAL_CARD, LIMITED_CARD, DECK_NAME, FREE_CARD_NOT_IN_INVENTORY);
+        public static final EnumSet<TokenType> CARD_PLACEHOLDER_TOKEN_TYPES = EnumSet.of(CARD_TYPE, CARD_RARITY, CARD_CMC, MANA_COLOUR);
     }
 
-    public enum LimitedCardType{
+    public enum LimitedCardType {
         BANNED,
         RESTRICTED,
     }
@@ -108,6 +123,10 @@ public class DeckRecognizer {
             return new Token(TokenType.CARD_FROM_INVALID_SET, count, card, cardRequestHasSetCode);
         }
 
+        public static Token NotInInventoryFree(final PaperCard card, final int count, final DeckSection section) {
+            return new Token(TokenType.FREE_CARD_NOT_IN_INVENTORY, count, card, section, true);
+        }
+
         // WARNING MESSAGES
         // ================
         public static Token UnknownCard(final String cardName, final String setCode, final int count) {
@@ -124,6 +143,10 @@ public class DeckRecognizer {
 
         public static Token WarningMessage(String msg) {
            return new Token(TokenType.WARNING_MESSAGE, msg);
+        }
+
+        public static Token NotInInventory(final PaperCard card, final int count, final DeckSection section) {
+            return new Token(TokenType.CARD_NOT_IN_INVENTORY, count, card, section, false);
         }
 
         /* =================================
@@ -239,14 +262,11 @@ public class DeckRecognizer {
         /**
          * Filters all token types that have a PaperCard instance set (not null)
          * @return true for tokens of type:
-         * LEGAL_CARD, LIMITED_CARD, CARD_FROM_NOT_ALLOWED_SET and CARD_FROM_INVALID_SET.
+         * LEGAL_CARD, LIMITED_CARD, CARD_FROM_NOT_ALLOWED_SET and CARD_FROM_INVALID_SET, CARD_NOT_IN_INVENTORY, FREE_CARD_NOT_IN_INVENTORY.
          * False otherwise.
          */
         public boolean isCardToken() {
-            return (this.type == TokenType.LEGAL_CARD ||
-                    this.type == TokenType.LIMITED_CARD ||
-                    this.type == TokenType.CARD_FROM_NOT_ALLOWED_SET ||
-                    this.type == TokenType.CARD_FROM_INVALID_SET);
+            return TokenType.CARD_TOKEN_TYPES.contains(this.type);
         }
 
         /**
@@ -255,9 +275,7 @@ public class DeckRecognizer {
          * LEGAL_CARD, LIMITED_CARD, DECK_NAME; false otherwise.
          */
         public boolean isTokenForDeck() {
-            return (this.type == TokenType.LEGAL_CARD ||
-                    this.type == TokenType.LIMITED_CARD ||
-                    this.type == TokenType.DECK_NAME);
+            return TokenType.IN_DECK_TOKEN_TYPES.contains(this.type);
         }
 
         /**
@@ -266,7 +284,7 @@ public class DeckRecognizer {
          * False otherwise.
          */
         public boolean isCardTokenForDeck() {
-            return (this.type == TokenType.LEGAL_CARD || this.type == TokenType.LIMITED_CARD);
+            return isCardToken() && isTokenForDeck();
         }
 
         /**
@@ -276,10 +294,7 @@ public class DeckRecognizer {
          * CARD_RARITY, CARD_CMC, CARD_TYPE, MANA_COLOUR
          */
         public boolean isCardPlaceholder(){
-            return (this.type == TokenType.CARD_RARITY ||
-                    this.type == TokenType.CARD_CMC ||
-                    this.type == TokenType.MANA_COLOUR ||
-                    this.type == TokenType.CARD_TYPE);
+            return TokenType.CARD_PLACEHOLDER_TOKEN_TYPES.contains(this.type);
         }
 
         /** Determines if current token is a Deck Section token
@@ -420,7 +435,7 @@ public class DeckRecognizer {
 
     public static final String REX_CARD_NAME = String.format("(\\[)?(?<%s>[a-zA-Z0-9à-ÿÀ-Ÿ&',\\.:!\\+\\\"\\/\\-\\s]+)(\\])?", REGRP_CARD);
     public static final String REX_SET_CODE = String.format("(?<%s>[a-zA-Z0-9_]{2,7})", REGRP_SET);
-    public static final String REX_COLL_NUMBER = String.format("(?<%s>\\*?[0-9A-Z]+\\S?[A-Z]*)", REGRP_COLLNR);
+    public static final String REX_COLL_NUMBER = String.format("(?<%s>\\*?[0-9A-Z]+(?:\\S[0-9A-Z]*)?)", REGRP_COLLNR);
     public static final String REX_CARD_COUNT = String.format("(?<%s>[\\d]{1,2})(?<mult>x)?", REGRP_CARDNO);
     // EXTRA
     public static final String REGRP_FOIL_GFISH = "foil";
@@ -536,7 +551,7 @@ public class DeckRecognizer {
             PaperCard tokenCard = token.getCard();
 
             if (isAllowed(tokenSection)) {
-                if (!tokenSection.equals(referenceDeckSectionInParsing)) {
+                if (tokenSection != referenceDeckSectionInParsing) {
                     Token sectionToken = Token.DeckSection(tokenSection.name(), this.allowedDeckSections);
                     // just check that last token is stack is a card placeholder.
                     // In that case, add the new section token before the placeholder
@@ -575,16 +590,16 @@ public class DeckRecognizer {
         refLine = purgeAllLinks(refLine);
 
         String line;
-        if (StringUtils.startsWith(refLine, LINE_COMMENT_DELIMITER_OR_MD_HEADER))
+        if (refLine.startsWith(LINE_COMMENT_DELIMITER_OR_MD_HEADER))
             line = refLine.replaceAll(LINE_COMMENT_DELIMITER_OR_MD_HEADER, "");
         else
             line = refLine.trim();  // Remove any trailing formatting
 
         // Some websites export split card names with a single slash. Replace with double slash.
-        // Final fantasy cards like Summon: Choco/Mog should be ommited to be recognized. TODO: fix maybe for future cards
+        // Final fantasy cards like Summon: Choco/Mog should be omitted to be recognized. TODO: fix maybe for future cards
         if (!line.contains("Summon:"))
             line = SEARCH_SINGLE_SLASH.matcher(line).replaceFirst(" // ");
-        if (StringUtils.startsWith(line, ASTERISK))  // markdown lists (tappedout md export)
+        if (line.startsWith(ASTERISK))  // Markdown lists (tappedout md export)
             line = line.substring(2);
 
         // == Patches to Corner Cases
@@ -600,8 +615,8 @@ public class DeckRecognizer {
         Token result = recogniseCardToken(line, referenceSection);
         if (result == null)
             result = recogniseNonCardToken(line);
-        return result != null ? result : StringUtils.startsWith(refLine, DOUBLE_SLASH) ||
-                StringUtils.startsWith(refLine, LINE_COMMENT_DELIMITER_OR_MD_HEADER) ?
+        return result != null ? result : refLine.startsWith(DOUBLE_SLASH) ||
+                refLine.startsWith(LINE_COMMENT_DELIMITER_OR_MD_HEADER) ?
                 new Token(TokenType.COMMENT, 0, refLine) : new Token(TokenType.UNKNOWN_TEXT, 0, refLine);
     }
 
@@ -613,7 +628,7 @@ public class DeckRecognizer {
         while (m.find()) {
             line = line.replaceAll(m.group(), "").trim();
         }
-        if (StringUtils.endsWith(line, "()"))
+        if (line.endsWith("()"))
             return line.substring(0, line.length()-2);
         return line;
     }
@@ -741,21 +756,12 @@ public class DeckRecognizer {
     // This would save tons of time in parsing Input + would also allow to return UnsupportedCardTokens beforehand
     private DeckSection getTokenSection(String deckSec, DeckSection currentDeckSection, PaperCard card){
         if (deckSec != null) {
-            DeckSection cardSection;
-            switch (deckSec.toUpperCase().trim()) {
-                case "MB":
-                    cardSection = DeckSection.Main;
-                    break;
-                case "SB":
-                    cardSection = DeckSection.Sideboard;
-                    break;
-                case "CM":
-                    cardSection = DeckSection.Commander;
-                    break;
-                default:
-                    cardSection = DeckSection.matchingSection(card);
-                    break;
-            }
+            DeckSection cardSection = switch (deckSec.toUpperCase().trim()) {
+                case "MB" -> DeckSection.Main;
+                case "SB" -> DeckSection.Sideboard;
+                case "CM" -> DeckSection.Commander;
+                default -> DeckSection.matchingSection(card);
+            };
             if (cardSection.validate(card))
                 return cardSection;
         }
@@ -988,127 +994,23 @@ public class DeckRecognizer {
 
     private static String getMagicColourLabel(MagicColor.Color magicColor) {
         if (magicColor == null) // Multicolour
-            return String.format("%s {W}{U}{B}{R}{G}", getLocalisedMagicColorName("Multicolour"));
-        return String.format("%s %s", magicColor.getLocalizedName(), magicColor.getSymbol());
+            return String.format("%s {W}{U}{B}{R}{G}", Localizer.getInstance().getMessage("lblMulticolor"));
+        return String.format("%s %s", magicColor.getTranslatedName(), magicColor.getSymbol());
     }
 
-    private static final HashMap<Integer, String> manaSymbolsMap = new HashMap<Integer, String>() {{
-        put(MagicColor.WHITE | MagicColor.BLUE, "WU");
-        put(MagicColor.BLUE | MagicColor.BLACK, "UB");
-        put(MagicColor.BLACK | MagicColor.RED, "BR");
-        put(MagicColor.RED | MagicColor.GREEN, "RG");
-        put(MagicColor.GREEN | MagicColor.WHITE, "GW");
-        put(MagicColor.WHITE | MagicColor.BLACK, "WB");
-        put(MagicColor.BLUE | MagicColor.RED, "UR");
-        put(MagicColor.BLACK | MagicColor.GREEN, "BG");
-        put(MagicColor.RED | MagicColor.WHITE, "RW");
-        put(MagicColor.GREEN | MagicColor.BLUE, "GU");
-    }};
-    private static String getMagicColourLabel(MagicColor.Color magicColor1, MagicColor.Color magicColor2){
+    private static String getMagicColourLabel(MagicColor.Color magicColor1, MagicColor.Color magicColor2) {
         if (magicColor2 == null || magicColor2 == MagicColor.Color.COLORLESS
                 || magicColor1 == MagicColor.Color.COLORLESS)
             return String.format("%s // %s", getMagicColourLabel(magicColor1), getMagicColourLabel(magicColor2));
-        String localisedName1 = magicColor1.getLocalizedName();
-        String localisedName2 = magicColor2.getLocalizedName();
-        String comboManaSymbol = manaSymbolsMap.get(magicColor1.getColormask() | magicColor2.getColormask());
-        return String.format("%s/%s {%s}", localisedName1, localisedName2, comboManaSymbol);
+        String localisedName1 = magicColor1.getTranslatedName();
+        String localisedName2 = magicColor2.getTranslatedName();
+        return String.format("%s/%s {%s}", localisedName1, localisedName2, ColorSet.fromEnums(magicColor1, magicColor2));
     }
 
     private static MagicColor.Color getMagicColor(String colorName){
         if (colorName.toLowerCase().startsWith("multi") || colorName.equalsIgnoreCase("m"))
             return null;  // will be handled separately
-
-        byte color = MagicColor.fromName(colorName.toLowerCase());
-        switch (color) {
-            case MagicColor.WHITE:
-                return MagicColor.Color.WHITE;
-            case MagicColor.BLUE:
-                return MagicColor.Color.BLUE;
-            case MagicColor.BLACK:
-                return MagicColor.Color.BLACK;
-            case MagicColor.RED:
-                return MagicColor.Color.RED;
-            case MagicColor.GREEN:
-                return MagicColor.Color.GREEN;
-            default:
-                return MagicColor.Color.COLORLESS;
-
-        }
-    }
-
-    public static String getLocalisedMagicColorName(String colorName){
-        Localizer localizer = Localizer.getInstance();
-        switch(colorName.toLowerCase()){
-            case MagicColor.Constant.WHITE:
-                return localizer.getMessage("lblWhite");
-
-            case MagicColor.Constant.BLUE:
-                return localizer.getMessage("lblBlue");
-
-            case MagicColor.Constant.BLACK:
-                return localizer.getMessage("lblBlack");
-
-            case MagicColor.Constant.RED:
-                return localizer.getMessage("lblRed");
-
-            case MagicColor.Constant.GREEN:
-                return localizer.getMessage("lblGreen");
-
-            case MagicColor.Constant.COLORLESS:
-                return localizer.getMessage("lblColorless");
-            case "multicolour":
-            case "multicolor":
-                return localizer.getMessage("lblMulticolor");
-            default:
-                return "";
-        }
-    }
-
-    /**
-     * Get the magic color by the localised/translated name.
-     * @param localisedName String of localised color name.
-     * @return The string of the magic color.
-     */
-    public static String getColorNameByLocalisedName(String localisedName) {
-        Localizer localizer = Localizer.getInstance();
-
-        if(localisedName.equals(localizer.getMessage("lblWhite"))) return MagicColor.Constant.WHITE;
-        if(localisedName.equals(localizer.getMessage("lblBlue"))) return MagicColor.Constant.BLUE;
-        if(localisedName.equals(localizer.getMessage("lblBlack"))) return MagicColor.Constant.BLACK;
-        if(localisedName.equals(localizer.getMessage("lblRed"))) return MagicColor.Constant.RED;
-        if(localisedName.equals(localizer.getMessage("lblGreen"))) return MagicColor.Constant.GREEN;
-
-        return "";
-    }
-
-
-    private static Pair<String, String> getManaNameAndSymbol(String matchedMana) {
-        if (matchedMana == null)
-            return null;
-
-        Localizer localizer = Localizer.getInstance();
-        switch (matchedMana.toLowerCase()) {
-            case MagicColor.Constant.WHITE:
-            case "w":
-                return Pair.of(localizer.getMessage("lblWhite"), MagicColor.Color.WHITE.getSymbol());
-            case MagicColor.Constant.BLUE:
-            case "u":
-                return Pair.of(localizer.getMessage("lblBlue"), MagicColor.Color.BLUE.getSymbol());
-            case MagicColor.Constant.BLACK:
-            case "b":
-                return Pair.of(localizer.getMessage("lblBlack"), MagicColor.Color.BLACK.getSymbol());
-            case MagicColor.Constant.RED:
-            case "r":
-                return Pair.of(localizer.getMessage("lblRed"), MagicColor.Color.RED.getSymbol());
-            case MagicColor.Constant.GREEN:
-            case "g":
-                return Pair.of(localizer.getMessage("lblGreen"), MagicColor.Color.GREEN.getSymbol());
-            case MagicColor.Constant.COLORLESS:
-            case "c":
-                return Pair.of(localizer.getMessage("lblColorless"), MagicColor.Color.COLORLESS.getSymbol());
-            default: // Multicolour
-                return Pair.of(localizer.getMessage("lblMulticolor"), "");
-        }
+        return MagicColor.Color.fromName(colorName.toLowerCase());
     }
 
     public static boolean isDeckName(final String lineAsIs) {

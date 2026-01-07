@@ -50,6 +50,7 @@ public class ConquestPlane {
     private FCollection<PaperCard> commanders;
     private ConquestAwardPool awardPool;
     private ConquestEvent[] events;
+    private final Set<CardEdition> editions = new HashSet<>();
 
     private ConquestPlane(String name0, String description0, int regionSize0, boolean unreachable0) {
         name = name0;
@@ -153,6 +154,10 @@ public class ConquestPlane {
         return planeCards;
     }
 
+    public Set<CardEdition> getEditions() {
+        return editions;
+    }
+
     private void ensureRegionsLoaded() {
         if (regions != null) { return; }
 
@@ -192,6 +197,8 @@ public class ConquestPlane {
             CardEdition edition = FModel.getMagicDb().getEditions().get(setCode);
             if (edition == null)
                 continue;
+
+            editions.add(edition);
 
             for (EditionEntry card : edition.getObtainableCards()) {
                 if (bannedCardSet == null || !bannedCardSet.contains(card.name())) {

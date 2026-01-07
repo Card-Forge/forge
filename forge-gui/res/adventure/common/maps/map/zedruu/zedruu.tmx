@@ -201,14 +201,14 @@
   <object id="224" template="../../obj/gate.tx" x="465.009" y="47.9386">
    <properties>
     <property name="dialog">[{
-    &quot;text&quot;:&quot;This gate is locked&quot;,
+    &quot;text&quot;:&quot;This gate is locked.&quot;,
     &quot;options&quot;:[
-    { &quot;name&quot;:&quot;go away&quot; },
+    { &quot;name&quot;:&quot;Leave&quot; },
     {      
-        &quot;name&quot;:&quot;unlock with Outer Gate Key&quot;,     
+        &quot;name&quot;:&quot;Unlock with Outer Gate Key&quot;,     
         &quot;condition&quot;:[{&quot;item&quot;:&quot;Outer Gate Key&quot;}],    
-        &quot;text&quot;:&quot;The gate is unlocked&quot;,
-        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Outer Gate Key&quot;}]} ]
+        &quot;text&quot;:&quot;The gate is unlocked.&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Outer Gate Key&quot;}]} ]
     }
     ]
 }]</property>

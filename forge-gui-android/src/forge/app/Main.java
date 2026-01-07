@@ -67,12 +67,15 @@ import forge.util.ThreadUtil;
 import io.sentry.protocol.Device;
 import io.sentry.protocol.OperatingSystem;
 import org.apache.commons.lang3.tuple.Pair;
+import org.json.JSONObject;
 import org.jupnp.DefaultUpnpServiceConfiguration;
 import org.jupnp.android.AndroidUpnpServiceConfiguration;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Set;
 
 public class Main extends AndroidApplication {
     private AndroidAdapter Gadapter;
@@ -188,7 +191,26 @@ public class Main extends AndroidApplication {
 
         boolean permissiongranted = checkPermission();
         Gadapter = new AndroidAdapter(getContext());
-
+        String cpu = "";
+        String soc = "";
+        boolean getChipset = false;
+        // database.json source: https://github.com/xTheEc0/Android-Device-Hardware-Specs-Database
+        try {
+            InputStream is = getAssets().open("database.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            JSONObject db = new JSONObject(new String(buffer, StandardCharsets.UTF_8));
+            JSONObject board = db.getJSONObject(Build.BOARD);
+            cpu = board.get("CPU").toString();
+            soc = board.get("SoC").toString();
+            getChipset = true;
+        } catch (Exception e) {
+            cpu = getCpuName();
+            soc = Build.BOARD;
+            getChipset = false;
+        }
         // Device Info
         Device device = new Device();
         device.setId(Build.ID);
@@ -197,8 +219,8 @@ public class Main extends AndroidApplication {
         device.setBrand(Build.BRAND);
         device.setManufacturer(Build.MANUFACTURER);
         device.setMemorySize(memInfo.totalMem);
-        device.setCpuDescription(getCpuName());
-        device.setChipset(Build.HARDWARE + " " + Build.BOARD);
+        device.setCpuDescription(cpu);
+        device.setChipset(soc);
         // OS Info
         OperatingSystem os = new OperatingSystem();
         os.setName("Android");
@@ -206,7 +228,7 @@ public class Main extends AndroidApplication {
         os.setBuild(Build.DISPLAY);
         os.setRawDescription(getAndroidOSName());
 
-        initForge(Gadapter, new HWInfo(device, os), permissiongranted, totalMemory, isTabletDevice(getContext()));
+        initForge(Gadapter, new HWInfo(device, os, getChipset), permissiongranted, totalMemory, isTabletDevice(getContext()));
     }
 
     private void crossfade(View contentView, View previousView) {
@@ -814,6 +836,18 @@ public class Main extends AndroidApplication {
         @Override
         public ArrayList<String> getGamepads() {
             return gamepads;
+        }
+
+        //Commonly supported Android audio formats, taken from https://developer.android.com/media/platform/supported-formats#audio-formats
+        Set<String> ANDROID_SUPPORTED_AUDIO_TYPES = Set.of(".wav", ".mp3", ".ogg", ".mp4", ".m4a", ".aac", ".mkv");
+        @Override
+        public boolean isSupportedAudioFormat(File file) {
+            //At some point it's worth considering switching this out for a more elaborate method
+            //that checks the mime type against the MediaCodecList. Might also throw in some logic
+            //that distinguishes between sound effects and music and disallows any SFX that are over
+            //1 MB in size, since the Android SFX implementation fully loads SFX files into RAM.
+            String path = file.getPath().toLowerCase();
+            return ANDROID_SUPPORTED_AUDIO_TYPES.stream().anyMatch(path::endsWith);
         }
     }
 

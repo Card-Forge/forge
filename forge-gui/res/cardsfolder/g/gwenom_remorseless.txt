@@ -1,0 +1,12 @@
+Name:Gwenom, Remorseless
+Variant:UniversesWithin:FlavorName:Egrix the Bile Bulwark
+ManaCost:3 B B
+Types:Legendary Creature Symbiote Spider Hero
+PT:4/4
+K:Deathtouch
+K:Lifelink
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ Whenever NICKNAME attacks, until end of turn, you may look at the top card of your library any time and you may play cards from the top of your library. If you cast a spell this way, pay life equal to its mana value rather than pay its mana cost.
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ MayLookAndPlay | Description$ Until end of turn, you may look at the top card of your library any time and you may play cards from the top of your library. If you cast a spell this way, pay life equal to its mana value rather than pay its mana cost.
+SVar:MayLookAndPlay:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | MayPlay$ True | MayPlayAltManaCost$ PayLife<ConvertedManaCost> | Description$ You may look at the top card of your library any time and you may play cards from the top of your library. If you cast a spell this way, pay life equal to its mana value rather than pay its mana cost.
+SVar:HasAttackEffect:TRUE
+Oracle:Deathtouch, lifelink\nWhenever Gwenom attacks, until end of turn, you may look at the top card of your library any time and you may play cards from the top of your library. If you cast a spell this way, pay life equal to its mana value rather than pay its mana cost.

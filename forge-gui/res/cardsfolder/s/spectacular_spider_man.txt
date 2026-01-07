@@ -1,0 +1,9 @@
+Name:Spectacular Spider-Man
+Variant:UniversesWithin:FlavorName:Ademi of the Silkchutes
+ManaCost:1 W
+Types:Legendary Creature Spider Human Hero
+PT:3/2
+K:Flash
+A:AB$ Pump | Cost$ 1 | KW$ Flying | Defined$ Self | SpellDescription$ CARDNAME gains flying until end of turn.
+A:AB$ PumpAll | Cost$ 1 Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl | KW$ Indestructible & Hexproof | SpellDescription$ Creatures you control gain hexproof and indestructible until end of turn.
+Oracle:Flash\n{1}: Spectacular Spider-Man gains flying until end of turn.\n{1}, Sacrifice Spectacular Spider-Man: Creatures you control gain hexproof and indestructible until end of turn.

@@ -416,11 +416,11 @@
       { &quot;name&quot;:&quot;Walk away&quot; },
       {
         &quot;name&quot;:&quot;Take a closer look at the statue&quot;,
-        &quot;text&quot;: &quot;You sense an immense amount of power radiating from the monument. You also begin to note that many of the familiar holy symbols engraved around the base are twisted, incomplete, altered, or otherwise seem 'wrong'&quot;,
+        &quot;text&quot;: &quot;You sense an immense amount of power radiating from the monument. You also begin to note that many of the familiar holy symbols engraved around the base are twisted, incomplete, altered, or otherwise seem 'wrong'.&quot;,
         &quot;options&quot;: [
 	{ &quot;name&quot;:&quot;Walk away&quot; },
 	{ &quot;name&quot;:&quot;Drain the power from the statue&quot;,
-	  &quot;text&quot;:&quot;Whatever you're doing, it seems to be working. The glow around the statue's armaments begins to clear away, as does the barrier around the graveyard. You also find that you are able to channel this energy, and feel somewhat refreshed by it (+15 health recovered)&quot;,
+	  &quot;text&quot;:&quot;Whatever you're doing, it seems to be working. The glow around the statue's armaments begins to clear away, as does the barrier around the graveyard. You also find that you are able to channel this energy, and feel somewhat refreshed by it. (+15 health recovered)&quot;,
 	  &quot;action&quot;:[{&quot;addLife&quot;:15}],
 	  &quot;options&quot;:[{
 		&quot;name&quot;:&quot;(Continue)&quot;,
@@ -553,7 +553,7 @@
 &quot;condition&quot;: [{&quot;checkQuestFlag&quot;:&quot;lilianaGraveyardPortal&quot;, &quot;not&quot;:true}],
 &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;lilianaGraveyardPortal&quot;, &quot;val&quot;: 1}, &quot;activateMapObject&quot;: 269}],
 &quot;text&quot;:&quot;The sound of it is almost masked by the humming from the walls, but you notice a portal back to the entrance opening to your left.&quot;,
-&quot;options&quot;:[{&quot;name&quot;:&quot;(continue)&quot;}]
+&quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;}]
 }]</property>
    </properties>
   </object>

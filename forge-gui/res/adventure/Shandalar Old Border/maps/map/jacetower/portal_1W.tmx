@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="79">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwWAEu3gQmBhxYgAAQ08EpQ==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyrYWNgqEHDYRyUY3QzCWFsZjxhJ4ypbS8xdmKzmxJ7SbET3W5S7YXZTY6dyHaTYy8ldsLwqL2j9o50ewcq/w5keUVp+UyvuoEa9SG+epUYu4ixDwC1sVGi
+  </data>
+ </layer>
+ <layer id="2" name="Floor and Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy91V0OgjAMB/A+sgxOYLwSvutZ0CP5+eLXiRDDEVxjGspsYVsWmyxGYPsx+RcBAC4FQG2GcXLftdqza99Gv46qn1izNWN35a23qQBupT7WVbwp2R1z0byX03u6CnaIye1YU7NbYQ8hFWNq9j9MzdbqKPz+y0STauHNxx7A580t6gc8hufxM6er9V0t9FBO1383kO33bpfZxfXPxeDzvqJzlL/cz5eMuXw/3bydTTMbN++RcN+UvRQ71cTqWb5ibG5KfRNi8tyF2GSidxDyO+drmUd7a7+D7qGxwzHaZ29++zLUfpmx7//HUtb9zGqmZn8AulhqKg==
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBic4DEXA0MTN2H8lIv6diry4Fcnz0M9u4m1k5p2k2ontewmx050u8m1lxIwau+ovbj0kZsXYHmQHEBuPiQ331NiNzXsJNVuatqJbjcMN0PjrhGtPqKmneigEc3eZgrSPQArjCuE
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy9lUkSQDAQRW0tlINxH9N5DLfhGpyCFFHt60ySeBvVIUnn9+/osuTBlrixQtxm72/m9Hx2zDtu7pI6JgGo9qmO8ZLJywc8v47acP6vUL2aa4+S/9RYgy9gzWnsW0sVVPcQdbRBVz/O939Be7Zh8hjzZzxB3EMsQF9T3whvxdTcRssi3vY36N0YvSORerrcJ8hgqLMteM7QPUzXrxhNccz33lTNt/3XhfAap6HoVbk27SdXn2F+qvm0r3adwSVC
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="69" template="../../../../../../common/maps/obj/door_up.tx" x="208" y="143.5">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/jacetower/portal_1.tmx"/>
+    <property name="teleportObjectId" value="71"/>
+   </properties>
+  </object>
+  <object id="74" template="../../../../../../common/maps/obj/door_up.tx" x="208.359" y="271.521">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/jacetower/portal_1W2.tmx"/>
+    <property name="teleportObjectId" value="56"/>
+   </properties>
+  </object>
+  <object id="75" template="../../../../../../common/maps/obj/door_down.tx" x="176" y="209.5">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/jacetower/portal_1R.tmx"/>
+    <property name="teleportObjectId" value="68"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../../../common/maps/obj/door_down.tx" x="144" y="144.5">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/jacetower/portal_1G.tmx"/>
+    <property name="teleportObjectId" value="77"/>
+   </properties>
+  </object>
+  <object id="77" template="../../../../../../common/maps/obj/door_down.tx" x="272" y="144">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/jacetower/portal_1U.tmx"/>
+    <property name="teleportObjectId" value="79"/>
+   </properties>
+  </object>
+  <object id="78" template="../../../../../../common/maps/obj/door_down.tx" x="241" y="209">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/jacetower/portal_1B.tmx"/>
+    <property name="teleportObjectId" value="64"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

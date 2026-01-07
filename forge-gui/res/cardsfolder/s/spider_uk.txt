@@ -1,0 +1,11 @@
+Name:Spider-UK
+Variant:UniversesWithin:FlavorName:Sarn of the Silken Throne
+ManaCost:3 W
+Types:Legendary Creature Spider Human Hero
+PT:3/4
+K:Web-slinging:2 W
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE2 | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, if two or more creatures entered the battlefield under your control this turn, you draw a card and gain 2 life.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+SVar:X:Count$ThisTurnEntered_Battlefield_Creature.YouCtrl
+Oracle:Web-slinging {2}{W} (You may cast this spell for {2}{W} if you also return a tapped creature you control to its owner's hand.)\nAt the beginning of your end step, if two or more creatures entered the battlefield under your control this turn, you draw a card and gain 2 life.

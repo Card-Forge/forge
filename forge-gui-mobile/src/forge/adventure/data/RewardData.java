@@ -9,6 +9,7 @@ import forge.adventure.world.WorldSave;
 import forge.card.CardEdition;
 import forge.deck.Deck;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.model.FModel;
 import forge.util.IterableUtil;
 import forge.util.StreamUtil;
@@ -16,7 +17,6 @@ import forge.util.StreamUtil;
 import java.io.Serializable;
 import java.util.*;
 import java.util.function.Predicate;
-
 
 /**
  * Data class that will be used to read Json configuration files
@@ -27,7 +27,7 @@ import java.util.function.Predicate;
  */
 public class RewardData implements Serializable {
     private static final long serialVersionUID = 3158932532013393718L;
-    public String type;
+    public String type; // TODO convert to enum
     public float probability;
     public int count;
     public int addMaxCount;
@@ -97,34 +97,38 @@ public class RewardData implements Serializable {
         ConfigData configData = Config.instance().getConfigData();
         RewardData legals = configData.legalCards;
 
-        if(legals==null)
-            allCards = CardUtil.getFullCardPool(false); // we need unique cards only here, so that a unique card can be chosen before a set variant is determined
-        else
-            allCards = IterableUtil.filter(CardUtil.getFullCardPool(false), new CardUtil.CardPredicate(legals, true));
-        //Filter out specific cards.
+        allCards = CardUtil.getFullCardPool(false);
+
+        if(legals != null)
+            allCards = IterableUtil.filter(allCards, new CardUtil.CardPredicate(legals, true));
+
+        // Filter out by editions and obtainability
+        if (configData.allowedEditions != null && configData.allowedEditions.length > 0) {
+            allCards = IterableUtil.filter(allCards, PaperCardPredicates.printedInAnyEditions(configData.allowedEditions));
+        } else if (configData.restrictedEditions != null && configData.restrictedEditions.length > 0) {
+            allCards = IterableUtil.filter(allCards, PaperCardPredicates.onlyPrintedInEditions(configData.restrictedEditions).negate());
+        } else {
+            allCards = IterableUtil.filter(allCards, PaperCardPredicates.isObtainableAnyEdition());
+        }
+
+        Set<String> restrictedCards = new HashSet<>(Arrays.asList(configData.restrictedCards));
+
+        // Filter out specific cards.
         allCards = IterableUtil.filter(allCards, input -> {
             if (input == null)
                 return false;
             if (Iterables.contains(input.getRules().getMainPart().getKeywords(), "Remove CARDNAME from your deck before playing if you're not playing for ante."))
                 return false;
+            // TODO check if commander player
             if (input.getRules().getAiHints().getRemNonCommanderDecks())
                 return false;
-            if (configData.allowedEditions != null) {
-                if (!Arrays.asList(configData.allowedEditions).contains(input.getEdition()))
-                    return false;
-            } else if (Arrays.asList(configData.restrictedEditions).contains(input.getEdition()))
-                return false;
-
             if (input.getRules().isCustom() &&
                     input.getImageKey(false).startsWith(ImageKeys.ADVENTURECARD_PREFIX)) {
                 return false;
             }
 
-            return !Arrays.asList(configData.restrictedCards).contains(input.getName());
+            return !restrictedCards.contains(input.getName());
         });
-
-        // Only allow obtainable cards
-        allCards = IterableUtil.filter(allCards, input -> StaticData.instance().getCardEdition(input.getEdition()).isCardObtainable(input.getCardName()));
 
         //Filter AI cards for enemies.
         allEnemyCards = IterableUtil.filter(allCards, input -> {
@@ -152,7 +156,6 @@ public class RewardData implements Serializable {
     }
 
     public Array<Reward> generate(boolean isForEnemy, Iterable<PaperCard> cards, boolean useSeedlessRandom, boolean isNoSell) {
-
         boolean allCardVariants = Config.instance().getSettingData().useAllCardVariants;
         Random rewardRandom = useSeedlessRandom ? new Random() : WorldSave.getCurrentSave().getWorld().getRandom();
         //Keep using same generation method for shop rewards, but fully randomize loot drops by not using the instance pre-seeded by the map

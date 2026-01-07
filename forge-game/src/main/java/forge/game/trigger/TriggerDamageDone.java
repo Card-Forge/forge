@@ -22,7 +22,6 @@ import java.util.Map;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCopyService;
-import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Expressions;
 import forge.util.Localizer;
@@ -102,23 +101,6 @@ public class TriggerDamageDone extends Trigger {
 
             if (!Expressions.compare(actualAmount, operator, operand)) {
                 return false;
-            }
-        }
-
-        if (hasParam("DamageToTargetThisTurnCondition")) {
-            final String fullParam = getParam("DamageToTargetThisTurnCondition");
-
-            final String operator = fullParam.substring(0, 2);
-            final int operand = Integer.parseInt(fullParam.substring(2));
-            final Object target = runParams.get(AbilityKey.DamageTarget);
-            final Card source = (Card) runParams.get(AbilityKey.DamageSource);
-
-            if (target instanceof Player trigTgt) {
-                if (!Expressions.compare(trigTgt.getAssignedDamage(null, source), operator, operand)) {
-                    return false;
-                }
-            } else {
-                return false; //for now this is only used to check damage assigned to a player
             }
         }
 

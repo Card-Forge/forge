@@ -1,0 +1,10 @@
+Name:Prowler, Clawed Thief
+Variant:UniversesWithin:FlavorName:Carlo, Suave Schemer
+ManaCost:1 U B
+Types:Legendary Creature Human Rogue Villain
+PT:2/3
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Villain.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigConnive | TriggerDescription$ Whenever another Villain you control enters, NICKNAME connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
+SVar:TrigConnive:DB$ Connive
+DeckHints:Type$Villain
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhenever another Villain you control enters, Prowler connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)

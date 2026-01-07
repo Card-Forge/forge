@@ -1,7 +1,9 @@
 package forge.card;
 
 import com.google.common.collect.ImmutableList;
-import forge.deck.DeckRecognizer;
+
+import forge.util.ITranslatable;
+import forge.util.Localizer;
 
 /**
  * Holds byte values for each color magic has.
@@ -67,14 +69,14 @@ public final class MagicColor {
     }
 
     public static byte fromName(final char c) {
-        switch (Character.toLowerCase(c)) {
-            case 'w': return MagicColor.WHITE;
-            case 'u': return MagicColor.BLUE;
-            case 'b': return MagicColor.BLACK;
-            case 'r': return MagicColor.RED;
-            case 'g': return MagicColor.GREEN;
-        }
-        return 0; // unknown means 'colorless'
+        return switch (Character.toLowerCase(c)) {
+            case 'w' -> MagicColor.WHITE;
+            case 'u' -> MagicColor.BLUE;
+            case 'b' -> MagicColor.BLACK;
+            case 'r' -> MagicColor.RED;
+            case 'g' -> MagicColor.GREEN;
+            default  -> 0; // unknown means 'colorless'
+        };
     }
 
     // This probably should be in ManaAtom since it cares about Mana, not Color.
@@ -86,29 +88,15 @@ public final class MagicColor {
     }
 
     public static String toShortString(final byte color) {
-        switch (color) {
-            case WHITE: return "W";
-            case BLUE:  return "U";
-            case BLACK: return "B";
-            case RED:   return "R";
-            case GREEN: return "G";
-            default:    return "C";
-        }
+        return Color.fromByte(color).getShortName();
     }
 
     public static String toLongString(final byte color) {
-        switch (color) {
-            case WHITE: return Constant.WHITE;
-            case BLUE:  return Constant.BLUE;
-            case BLACK: return Constant.BLACK;
-            case RED:   return Constant.RED;
-            case GREEN: return Constant.GREEN ;
-            default:    return Constant.COLORLESS;
-        }
+        return Color.fromByte(color).getName();
     }
 
     public static String toSymbol(final byte color) {
-        return MagicColor.Color.fromByte(color).getSymbol();
+        return Color.fromByte(color).getSymbol();
     }
 
     public static String toSymbol(final String color) {
@@ -157,52 +145,65 @@ public final class MagicColor {
         }
     }
 
-    public enum Color {
-        WHITE(Constant.WHITE, MagicColor.WHITE, "{W}"),
-        BLUE(Constant.BLUE, MagicColor.BLUE, "{U}"),
-        BLACK(Constant.BLACK, MagicColor.BLACK, "{B}"),
-        RED(Constant.RED, MagicColor.RED, "{R}"),
-        GREEN(Constant.GREEN, MagicColor.GREEN, "{G}"),
-        COLORLESS(Constant.COLORLESS, MagicColor.COLORLESS, "{C}");
+    public enum Color implements ITranslatable {
+        WHITE(Constant.WHITE, MagicColor.WHITE, "W", "lblWhite"),
+        BLUE(Constant.BLUE, MagicColor.BLUE, "U", "lblBlue"),
+        BLACK(Constant.BLACK, MagicColor.BLACK, "B", "lblBlack"),
+        RED(Constant.RED, MagicColor.RED, "R", "lblRed"),
+        GREEN(Constant.GREEN, MagicColor.GREEN, "G", "lblGreen"),
+        COLORLESS(Constant.COLORLESS, MagicColor.COLORLESS, "C", "lblColorless");
 
-        private final String name, symbol;
+        private final String name, shortName, symbol;
+        private final String label;
         private final byte colormask;
 
-        Color(String name0, byte colormask0, String symbol0) {
+        Color(String name0, byte colormask0, String shortName, String label) {
             name = name0;
             colormask = colormask0;
-            symbol = symbol0;
+            this.shortName = shortName;
+            symbol = "{" + shortName + "}";
+            this.label = label;
         }
 
         public static Color fromByte(final byte color) {
-            switch (color) {
-                case MagicColor.WHITE: return WHITE;
-                case MagicColor.BLUE: return BLUE;
-                case MagicColor.BLACK: return BLACK;
-                case MagicColor.RED: return RED;
-                case MagicColor.GREEN: return GREEN;
-                default: return COLORLESS;
-            }
+            return switch (color) {
+                case MagicColor.WHITE -> WHITE;
+                case MagicColor.BLUE -> BLUE;
+                case MagicColor.BLACK -> BLACK;
+                case MagicColor.RED -> RED;
+                case MagicColor.GREEN -> GREEN;
+                default -> COLORLESS;
+            };
+        }
+        public static Color fromName(final String color) {
+            return switch (color) {
+                case MagicColor.Constant.WHITE -> WHITE;
+                case MagicColor.Constant.BLUE -> BLUE;
+                case MagicColor.Constant.BLACK -> BLACK;
+                case MagicColor.Constant.RED -> RED;
+                case MagicColor.Constant.GREEN -> GREEN;
+                default -> COLORLESS;
+            };
         }
 
+        @Override
         public String getName() {
             return name;
         }
-
-        public String getLocalizedName() {
-            //Should probably move some of this logic back here, or at least to a more general location.
-            return DeckRecognizer.getLocalisedMagicColorName(getName());
+        public String getShortName() {
+            return shortName;
         }
 
-        public byte getColormask() {
+        @Override
+        public String getTranslatedName() {
+            return Localizer.getInstance().getMessage(label);
+        }
+
+        public byte getColorMask() {
             return colormask;
         }
         public String getSymbol() {
             return symbol;
-        }
-        @Override
-        public String toString() {
-            return name;
         }
     }
 

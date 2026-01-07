@@ -58,10 +58,6 @@ public class TriggerHandler {
         game = gameState;
     }
 
-    public final boolean hasDelayedTriggers() {
-        return !delayedTriggers.isEmpty();
-    }
-
     public final void registerDelayedTrigger(final Trigger trig) {
         delayedTriggers.add(trig);
     }
@@ -243,7 +239,8 @@ public class TriggerHandler {
                     TriggerType.Destroyed.equals(t.getMode()) ||
                     TriggerType.Sacrificed.equals(t.getMode()) || TriggerType.SacrificedOnce.equals(t.getMode()) ||
                     ((TriggerType.ChangesZone.equals(t.getMode()) || TriggerType.ChangesZoneAll.equals(t.getMode()))
-                            && StringUtils.contains(t.getParam("Origin"), "Battlefield"))) {
+                            && (StringUtils.contains(t.getParam("Origin"), "Battlefield") ||
+                            StringUtils.containsAny(t.getParam("Destination"), "Library", "Hand")))) {
                 registerOneTrigger(t);
             }
         }

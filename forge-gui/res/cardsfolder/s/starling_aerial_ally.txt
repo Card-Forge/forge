@@ -1,0 +1,9 @@
+Name:Starling, Aerial Ally
+Variant:UniversesWithin:FlavorName:Eztli of the Thousand Moons
+ManaCost:4 W
+Types:Legendary Creature Human Hero
+PT:3/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When NICKNAME enters, another target creature you control gains flying until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | KW$ Flying
+Oracle:Flying\nWhen Starling enters, another target creature you control gains flying until end of turn.

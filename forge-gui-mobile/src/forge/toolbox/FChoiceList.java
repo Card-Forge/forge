@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Align;
@@ -22,8 +23,10 @@ import forge.assets.TextRenderer;
 import forge.card.CardFaceSymbols;
 import forge.card.CardRenderer;
 import forge.card.CardRenderer.CardStackPosition;
+import forge.card.CardType;
 import forge.card.CardZoom;
 import forge.card.CardZoom.ActivateHandler;
+import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.card.CardView;
@@ -105,6 +108,12 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
             renderer = new IHasCardViewItemRenderer();
         } else if (item instanceof PlayerView) {
             renderer = new PlayerItemRenderer();
+        } else if (item instanceof MagicColor.Color) {
+            renderer = new MagicColorRenderer();
+        } else if (item instanceof CardType.CoreType) {
+            renderer = new CoreTypeRenderer();
+        } else if (item instanceof CardType.Supertype) {
+            renderer = new SuperTypeRenderer();
         } else if (item instanceof Integer || item == FilterOperator.EQUALS) { //allow numeric operators to be selected horizontally
             renderer = new NumberRenderer();
         } else if (item instanceof IHasSkinProp) {
@@ -649,12 +658,19 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
         }
     }
 
-    protected class IHasSkinPropRenderer extends DefaultItemRenderer {
+    protected class AbstractIHasSkinPropRenderer extends DefaultItemRenderer {
         private final TextRenderer textRenderer = new TextRenderer(true);
+        private final Function<T, String> displayFunction;
+        private final Function<T, FSkinProp> skinFunction;
+
+        public AbstractIHasSkinPropRenderer(Function<T, String> displayFunction, Function<T, FSkinProp> skinFunction) {
+            this.displayFunction = displayFunction;
+            this.skinFunction = skinFunction;
+        }
 
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-            FSkinProp skinProp = ((IHasSkinProp) value).getSkinProp();
+            FSkinProp skinProp = skinFunction.apply(value);
             if (skinProp != null) {
                 float iconSize = h * 0.8f;
                 float offset = (h - iconSize) / 2;
@@ -665,7 +681,31 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
                 x += dx;
                 w -= dx;
             }
-            textRenderer.drawText(g, value.toString(), font, foreColor, x, y, w, h, y, h, true, Align.left, true);
+            textRenderer.drawText(g, displayFunction.apply(value), font, foreColor, x, y, w, h, y, h, true, Align.left, true);
+        }
+    }
+
+    protected class IHasSkinPropRenderer extends AbstractIHasSkinPropRenderer {
+        public IHasSkinPropRenderer() {
+            super(v -> v.toString(), v -> ((IHasSkinProp)v).getSkinProp());
+        }
+    }
+
+    protected class MagicColorRenderer extends AbstractIHasSkinPropRenderer {
+        public MagicColorRenderer() {
+            super(v -> ((MagicColor.Color)v).getTranslatedName(), v -> FSkinProp.iconFromColor((MagicColor.Color)v));
+        }
+    }
+
+    protected class CoreTypeRenderer extends AbstractIHasSkinPropRenderer {
+        public CoreTypeRenderer() {
+            super(v -> ((CardType.CoreType)v).getTranslatedName(), v -> FSkinProp.iconFromCoreType((CardType.CoreType)v));
+        }
+    }
+
+    protected class SuperTypeRenderer extends AbstractIHasSkinPropRenderer {
+        public SuperTypeRenderer() {
+            super(v -> ((CardType.Supertype)v).getTranslatedName(), v -> null);
         }
     }
 

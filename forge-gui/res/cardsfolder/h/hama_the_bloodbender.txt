@@ -1,0 +1,11 @@
+Name:Hama, the Bloodbender
+ManaCost:2 UB UB UB
+Types:Legendary Creature Human Warlock
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When NICKNAME enters, target opponent mills three cards. Exile up to one noncreature, nonland card from that player's graveyard. For as long as you control NICKNAME, you may cast the exiled card during your turn by waterbending {X} rather than paying its mana cost, where X is its mana value. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent to mill | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Optional$ True | Origin$ Graveyard | Destination$ Exile | DefinedPlayer$ Targeted | Chooser$ You | ChangeType$ Card.nonCreature+nonLand | Hidden$ True | ChangeNum$ 1 | IsCurse$ True | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | Duration$ AsLongAsControl | ExileOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Condition$ PlayerTurn | Affected$ Card.IsRemembered | AffectedZone$ Exile | MayPlayAltManaCost$ Waterbend<ConvertedManaCost> | Description$ You may cast that card during your turn by waterbending {X} rather than paying its mana cost, where X is its mana value.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:When Hama enters, target opponent mills three cards. Exile up to one noncreature, nonland card from that player's graveyard. For as long as you control Hama, you may cast the exiled card during your turn by waterbending {X} rather than paying its mana cost, where X is its mana value. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)

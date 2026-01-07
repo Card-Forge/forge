@@ -38,7 +38,12 @@
   <object id="49" template="../../obj/gold.tx" x="106" y="216"/>
   <object id="50" template="../../obj/enemy.tx" x="182.772" y="284.992" width="64" height="64">
    <properties>
+    <property name="effect" value="{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Emrakul's Presence&quot;]}"/>
     <property name="enemy" value="Emrakul"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Insane" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
    </properties>
   </object>
   <object id="51" template="../../obj/entry_up.tx" x="209" y="480">
@@ -46,12 +51,22 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
+  <object id="52" template="../../obj/enemy.tx" x="182.772" y="284.992" width="64" height="64">
+     <properties>
+      <property name="effect" value="{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Emrakul's Awakening&quot;]}"/>
+      <property name="enemy" value="Emrakul"/>
+      <property name="spawn.Easy" type="bool" value="true"/>
+      <property name="spawn.Hard" type="bool" value="false"/>
+      <property name="spawn.Insane" type="bool" value="false"/>
+      <property name="spawn.Normal" type="bool" value="true"/>
+     </properties>
+    </object>
   <object id="69" template="../../obj/enemy.tx" x="132.844" y="401.619">
    <properties>
     <property name="dialog">[{
-  &quot;text&quot;:&quot;Hello, planeswalker {var=player_name}, Lord Emrakul awaits you for the final challenge. Be prepared.&quot;,
+  &quot;text&quot;:&quot;Hello, planeswalker {var=player_name}. Lord Emrakul awaits you for the final challenge. Be prepared.&quot;,
   &quot;options&quot;:[
-    { &quot;name&quot;:&quot;Ok&quot; }
+    { &quot;name&quot;:&quot;Continue&quot; }
   ]
 }]</property>
     <property name="enemy" value="Homarid"/>
@@ -63,16 +78,16 @@
 	{
 		&quot;text&quot;: &quot;A massive gate with a strange lock is blocking the path.&quot;,
 		&quot;options&quot;: [
-			{ &quot;name&quot;: &quot;go away&quot; },
+			{ &quot;name&quot;: &quot;Leave&quot; },
 			{
-				&quot;name&quot;: &quot;unlock with the strange key&quot;,
+				&quot;name&quot;: &quot;Unlock with the strange key&quot;,
 				&quot;condition&quot;: [
 					{ &quot;item&quot;: &quot;Strange Key&quot; }
 				],
-				&quot;text&quot;: &quot;The gate is unlocked&quot;,
+				&quot;text&quot;: &quot;The gate is unlocked.&quot;,
 				&quot;options&quot;: [
 					{
-						&quot;name&quot;: &quot;continue&quot;,
+						&quot;name&quot;: &quot;Continue&quot;,
 						&quot;action&quot;: [
 							{ &quot;deleteMapObject&quot;: -1 },
 							{ &quot;removeItem&quot;: &quot;Strange Key&quot; }

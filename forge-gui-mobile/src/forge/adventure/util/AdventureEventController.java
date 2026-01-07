@@ -1,6 +1,5 @@
 package forge.adventure.util;
 
-import com.badlogic.gdx.utils.Array;
 import forge.StaticData;
 import forge.adventure.data.AdventureEventData;
 import forge.adventure.player.AdventurePlayer;
@@ -20,18 +19,22 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class AdventureEventController implements Serializable {
-
     public void finalizeEvent(AdventureEventData completedEvent) {
         Current.player().getStatistic().setResult(completedEvent);
         Current.player().removeEvent(completedEvent);
-
     }
 
     public enum EventFormat {
         Draft,
         Sealed,
         Jumpstart,
-        Constructed
+        Constructed;
+
+        public static EventFormat smartValueOf(String name) {
+            return Arrays.stream(EventFormat.values())
+                    .filter(e -> e.name().equalsIgnoreCase(name))
+                    .findFirst().orElse(null);
+        }
     }
 
     public enum EventStyle {
@@ -41,13 +44,13 @@ public class AdventureEventController implements Serializable {
     }
 
     public enum EventStatus {
-        Available, //New event
-        Entered, //Entry fee paid, deck not locked in
-        Ready,   //Deck is registered but can still be edited
-        Started, //Matches available
-        Completed, //All matches complete, rewards pending
-        Awarded, //Rewards distributed
-        Abandoned //Ended without completing all matches
+        Available, // New event
+        Entered,   // Entry fee paid, deck not locked in
+        Ready,     // Deck is registered but can still be edited
+        Started,   // Matches available
+        Completed, // All matches complete, rewards pending
+        Awarded,   // Rewards distributed
+        Abandoned  // Ended without completing all matches
     }
 
     private static AdventureEventController object;
@@ -63,27 +66,46 @@ public class AdventureEventController implements Serializable {
 
     }
 
-    private transient Array<AdventureEventData> allEvents = new Array<>();
-    private Map<String, Long> nextEventDate = new HashMap<>();
-
-    public AdventureEventController(AdventureEventController other) {
-        if (object == null) {
-            object = this;
-        } else {
-            System.out.println("Could not initialize AdventureEventController. An instance already exists and cannot be merged.");
-        }
-    }
+    private final Map<String, Long> nextEventDate = new HashMap<>();
 
     public static void clear() {
         object = null;
     }
 
-    public AdventureEventData createEvent(EventStyle style, String pointID, int eventOrigin, PointOfInterestChanges changes) {
+    public AdventureEventData createEvent(String pointID) {
         if (nextEventDate.containsKey(pointID) && nextEventDate.get(pointID) >= LocalDate.now().toEpochDay()) {
-            //No event currently available here
+            // No event currently available here
             return null;
         }
 
+        long eventSeed = getEventSeed(pointID);
+        Random random = new Random(eventSeed);
+
+        AdventureEventData e;
+        // After a certain number of wins, stop offering Jumpstart events
+        if (Current.player().getStatistic().totalWins() < 10 &&
+                random.nextInt(10) <= 2) {
+            e = new AdventureEventData(eventSeed, EventFormat.Jumpstart);
+        } else {
+            e = new AdventureEventData(eventSeed, EventFormat.Draft);
+        }
+
+        if (e.cardBlock == null) {
+            //covers cases where (somehow) editions that do not match the event style have been picked up
+            return null;
+        }
+        return e;
+    }
+
+    public AdventureEventData createEvent(EventFormat format, CardBlock cardBlock, String pointID) {
+        long eventSeed = getEventSeed(pointID);
+        AdventureEventData e = new AdventureEventData(eventSeed, format, cardBlock);
+        if(e.cardBlock == null)
+             return null;
+        return e;
+    }
+
+    private static long getEventSeed(String pointID) {
         long eventSeed;
         long timeSeed = LocalDate.now().toEpochDay();
         long placeSeed = Long.parseLong(pointID.replaceAll("[^0-9]", ""));
@@ -94,40 +116,26 @@ public class AdventureEventController implements Serializable {
         } else {
             eventSeed = timeSeed + placeSeed;
         }
+        return eventSeed;
+    }
 
-        Random random = new Random(eventSeed);
-
-        AdventureEventData e;
-
-        // TODO After a certain amount of wins, stop offering jump start events
-        if (random.nextInt(10) <= 2) {
-            e = new AdventureEventData(eventSeed, EventFormat.Jumpstart);
-        } else {
-            e = new AdventureEventData(eventSeed, EventFormat.Draft);
-        }
-
-        if (e.cardBlock == null) {
-            //covers cases where (somehow) editions that do not match the event style have been picked up
-            return null;
-        }
+    public void initializeEvent(AdventureEventData e, String pointID, int eventOrigin, PointOfInterestChanges changes) {
         e.sourceID = pointID;
         e.eventOrigin = eventOrigin;
-        e.eventRules = new AdventureEventData.AdventureEventRules(e.format, changes == null ? 1f : changes.getTownPriceModifier());
-        e.style = style;
 
-        switch (style) {
-            case Swiss:
-            case Bracket:
-                e.rounds = (e.participants.length / 2) - 1;
-                break;
-            case RoundRobin:
-                e.rounds = e.participants.length - 1;
-                break;
+        AdventureEventData.PairingStyle pairingStyle;
+        if (e.style == EventStyle.RoundRobin) {
+            pairingStyle = AdventureEventData.PairingStyle.RoundRobin;
+        } else {
+            pairingStyle = AdventureEventData.PairingStyle.SingleElimination;
         }
+
+        e.eventRules = new AdventureEventData.AdventureEventRules(e.format, pairingStyle, changes == null ? 1f : changes.getTownPriceModifier());
+
+        e.generateParticipants();
 
         AdventurePlayer.current().addEvent(e);
         nextEventDate.put(pointID, LocalDate.now().toEpochDay() + new Random().nextInt(2)); //next local event availability date
-        return e;
     }
 
     public Deck generateBooster(String setCode) {
@@ -139,9 +147,7 @@ public class AdventureEventController implements Serializable {
         output.setComment(setCode);
         return output;
     }
-    public Deck generateBoosterByColor(String color)
-    {
-
+    public Deck generateBoosterByColor(String color) {
         List<PaperCard> cards = BoosterPack.fromColor(color).getCards();
         Deck output = new Deck();
         output.getMain().add(cards);
@@ -152,8 +158,8 @@ public class AdventureEventController implements Serializable {
     }
 
     public List<Deck> getJumpstartBoosters(CardBlock block, int count) {
-        //Get all candidates then remove at random until no more than count are included
-        //This will prevent duplicate choices within a round of a Jumpstart draft
+        // Get all candidates, then remove at random until no more than count are included
+        // This will prevent duplicate choices within a round of a Jumpstart draft
         List<Deck> packsAsDecks = new ArrayList<>();
         for (SealedTemplate template : StaticData.instance().getSpecialBoosters()) {
             if (!template.getEdition().contains(block.getLandSet().getCode()))

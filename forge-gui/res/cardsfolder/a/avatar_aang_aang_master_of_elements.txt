@@ -1,0 +1,29 @@
+Name:Avatar Aang
+ManaCost:R G W U
+Types:Legendary Creature Human Avatar Ally
+PT:4/4
+K:Flying
+K:Firebending:2
+T:Mode$ ElementalBend | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you waterbend, earthbend, firebend, or airbend, draw a card. Then if you've done all four this turn, transform CARDNAME.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBTransform
+SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | ConditionCheckSVar$ X
+SVar:X:Count$AllFourBend.1.0
+AlternateMode:DoubleFaced
+Oracle:Flying, firebending 2\nWhenever you waterbend, earthbend, firebend, or airbend, draw a card. Then if you've done all four this turn, transform Avatar Aang.
+
+ALTERNATE
+
+Name:Aang, Master of Elements
+ManaCost:no cost
+Types:Legendary Creature Avatar Ally
+PT:6/6
+K:Flying
+S:Mode$ ReduceCost | ValidCard$ Card | Type$ Spell | Activator$ You | Amount$ 1 | Color$ W U B R G | Description$ Spells you cast cost {W}{U}{B}{R}{G} less to cast. (This can reduce generic costs.)
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigTransform | OptionalDecider$ You | TriggerDescription$ At the beginning of each upkeep, you may transform CARDNAME. If you do, you gain 4 life, draw four cards, put four +1/+1 counters on him, and he deals 4 damage to each opponent.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform | RememberChanged$ True | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4 | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 4 | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 4 | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 4 | CounterNum$ 4 | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Flying\nSpells you cast cost {W}{U}{B}{R}{G} less to cast. (This can reduce generic costs.)\nAt the beginning of each upkeep, you may transform Aang, Master of Elements. If you do, you gain 4 life, draw four cards, put four +1/+1 counters on him, and he deals 4 damage to each opponent.

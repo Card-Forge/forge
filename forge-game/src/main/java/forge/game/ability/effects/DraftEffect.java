@@ -24,7 +24,7 @@ import java.util.*;
 
          final StringBuilder sb = new StringBuilder();
 
-         sb.append(player).append(" drafts a card from ").append(source.getName()).append("'s spellbook");
+         sb.append(player).append(" drafts a card from ").append(source.getDisplayName()).append("'s spellbook");
          if (zone.equals(ZoneType.Hand)) {
              sb.append(".");
          } else if (zone.equals(ZoneType.Battlefield)) {
@@ -73,6 +73,11 @@ import java.util.*;
              }
 
              Card made = game.getAction().moveTo(zone, c, sa, moveParams);
+             if (zone.equals(ZoneType.Battlefield)) {
+                 if (sa.hasParam("Tapped")) {
+                     made.setTapped(true);
+                 }
+             }
              if (zone.equals(ZoneType.Exile)) {
                  handleExiledWith(made, sa);
                  if (sa.hasParam("ExileFaceDown")) {

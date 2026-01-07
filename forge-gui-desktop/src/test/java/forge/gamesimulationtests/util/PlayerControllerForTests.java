@@ -183,7 +183,7 @@ public class PlayerControllerForTests extends PlayerController {
     @Override
     public <T extends GameEntity> T chooseSingleEntityForEffect(FCollectionView<T> optionList, DelayedReveal delayedReveal, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         if (delayedReveal != null) {
-            reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
+            reveal(delayedReveal);
         }
         return chooseItem(optionList);
     }
@@ -328,7 +328,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public CardCollectionView londonMulliganReturnCards(final Player mulliganingPlayer, int cardsToReturn) {
+    public CardCollectionView tuckCardsViaMulligan(final Player mulliganingPlayer, int cardsToReturn) {
         CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
         return hand;
     }
@@ -471,12 +471,12 @@ public class PlayerControllerForTests extends PlayerController {
 
     @Override
     public byte chooseColor(String message, SpellAbility sa, ColorSet colors) {
-        return Iterables.getFirst(colors, MagicColor.WHITE);
+        return Iterables.getFirst(colors, MagicColor.Color.WHITE).getColorMask();
     }
 
     @Override
     public byte chooseColorAllowColorless(String message, Card card, ColorSet colors) {
-        return Iterables.getFirst(colors, (byte)0);
+        return Iterables.getFirst(colors, MagicColor.Color.COLORLESS).getColorMask();
     }
 
     private CardCollection chooseItems(CardCollectionView items, int amount) {
@@ -550,7 +550,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public List<String> chooseColors(String message, SpellAbility sa, int min, int max, List<String> options) {
+    public ColorSet chooseColors(String message, SpellAbility sa, int min, int max, ColorSet options) {
         throw new UnsupportedOperationException("No idea how a test player controller would choose colors");
     }
 
@@ -690,7 +690,7 @@ public class PlayerControllerForTests extends PlayerController {
 
     @Override
     public Map<Card, ManaCostShard> chooseCardsForConvokeOrImprovise(SpellAbility sa, ManaCost manaCost,
-                                                                     CardCollectionView untappedCards, boolean improvise) {
+                                                                     CardCollectionView untappedCards, boolean artifacts, boolean creatures, Integer maxReduction) {
         // TODO: AI to choose a creature to tap would go here
         // Probably along with deciding how many creatures to tap
         return new HashMap<>();
@@ -706,9 +706,8 @@ public class PlayerControllerForTests extends PlayerController {
     public Card chooseSingleCardForZoneChange(ZoneType destination,
             List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, DelayedReveal delayedReveal,
             String selectPrompt, boolean isOptional, Player decider) {
-
         if (delayedReveal != null) {
-            reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
+            reveal(delayedReveal);
         }
         return ChangeZoneAi.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player, decider);
     }
@@ -764,12 +763,6 @@ public class PlayerControllerForTests extends PlayerController {
 
     @Override
     public CardState chooseSingleCardState(SpellAbility sa, List<CardState> states, String message, Map<String, Object> params) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Card chooseDungeon(Player player, List<PaperCard> dungeonCards, String message) {
         // TODO Auto-generated method stub
         return null;
     }
