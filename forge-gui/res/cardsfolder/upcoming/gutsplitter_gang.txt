@@ -1,0 +1,7 @@
+Name:Gutsplitter Gang
+ManaCost:3 B
+Types:Creature Goblin Berserker
+PT:6/6
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$  At the beginning of your first main phase, you may blight 2. If you don't, you lose 3 life. (To blight 2, put two -1/-1 counters on a creature you control.)
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 3 | UnlessCost$ Blight<2> | UnlessPayer$ You
+Oracle:At the beginning of your first main phase, you may blight 2. If you don't, you lose 3 life. (To blight 2, put two -1/-1 counters on a creature you control.)
