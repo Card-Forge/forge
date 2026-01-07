@@ -1,7 +1,7 @@
 Name:Wickersmith's Tools
 ManaCost:3
 Types:Artifact
-T:Mode$ CounterAdded | ValidCard$ Creature | CounterType$ M1M1 | TriggerZones$ Battlefield | Execute$ TrigCharge | TriggerDescription$ Whenever one or more -1/-1 counters are put on a creature, put a charge counter on Wickersmith's Tools.
+T:Mode$ CounterAddedOnce | ValidCard$ Creature | CounterType$ M1M1 | TriggerZones$ Battlefield | Execute$ TrigCharge | TriggerDescription$ Whenever one or more -1/-1 counters are put on a creature, put a charge counter on Wickersmith's Tools.
 SVar:TrigCharge:DB$ PutCounter | CounterType$ CHARGE | CounterNum$ 1
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
 A:AB$ Token | Cost$ 5 T Sac<1/Card.Self> | TokenAmount$ X | TokenScript$ c_2_2_scarecrow | TokenOwner$ You | TokenTapped$ True | SpellDescription$ Create X tapped 2/2 colorless Scarecrow artifact creature tokens, where X is the number of charge counters on this artifact.
