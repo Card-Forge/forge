@@ -1,0 +1,6 @@
+Name:Tweeze
+ManaCost:2 R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBDraw | SpellDescription$ CARDNAME deals 3 damage to any target. You may discard a card. If you do, draw a card.
+SVar:DBDraw:AB$ Draw | Cost$ Discard<1/Card>
+Oracle:Tweeze deals 3 damage to any target. You may discard a card. If you do, draw a card.
