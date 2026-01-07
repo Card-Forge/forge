@@ -4,7 +4,8 @@ Types:Legendary Planeswalker Oko
 Loyalty:3
 T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of your first main phase, you may pay {G}. If you do, transform NICKNAME.
 SVar:TrigTransform:AB$ SetState | Cost$ G | Defined$ Self | Mode$ Transform
-A:AB$ Animate | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Duration$Permanent | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature | AddAllCreatureTypes$ True | SpellDescription$ Up to one target creature gains all creature types. (This effect doesn't end.)
+A:AB$ Animate | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Duration$ Permanent | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature | AddAllCreatureTypes$ True | SpellDescription$ Up to one target creature gains all creature types. (This effect doesn't end.)
+A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumAtt$ -2 | IsCurse$ True | Duration$ UntilYourNextTurn | ValidTgts$ Creature | SpellDescription$ Target creature gets -2/-0 until your next turn.
 AlternateMode:DoubleFaced
 Oracle:At the beginning of your first main phase, you may pay {G}. If you do, transform Oko.\n[+2]: Up to one target creature gains all creature types. (This effect doesn't end.)\n[+1]: Target creature gets -2/-0 until your next turn.
 
