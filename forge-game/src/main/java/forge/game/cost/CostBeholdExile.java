@@ -1,5 +1,14 @@
 package forge.game.cost;
 
+import forge.game.card.*;
+import forge.game.ability.AbilityKey;
+import forge.game.ability.SpellAbilityEffect;
+import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
+
+import java.util.Map;
+
+
 public class CostBeholdExile extends CostBehold {
 
     private static final long serialVersionUID = 1L;
