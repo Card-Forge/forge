@@ -23,6 +23,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import java.util.*;
 
 import static forge.ai.ComputerUtilCard.getBestCreatureAI;
+import static forge.ai.ComputerUtilCard.getWorstCreatureAI;
 
 public class AiCostDecision extends CostDecisionMakerBase {
     private final CardCollection discarded;
