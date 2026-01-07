@@ -24,8 +24,11 @@ import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
+import forge.game.GameOutcome;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.quest.QuestUtil;
+import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
 import forge.gui.FThreads;
 import forge.gui.interfaces.IGuiGame;
 import forge.item.IPaperCard;
@@ -104,6 +107,24 @@ public class DuelScene extends ForgeScene {
                 {
                     if (humans.size() == 1) {
                         Current.player().setShards(humans.get(0).getPlayer().getNumManaShards());
+                    }
+                }
+            }
+
+            // Handle ante card transfers
+            if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ANTE)) {
+                GameOutcome.AnteResult anteResult = hostedMatch.getGame().getOutcome()
+                        .getAnteResult(humanPlayer);
+                if (anteResult != null) {
+                    if (anteResult.wonCards != null) {
+                        for (PaperCard card : anteResult.wonCards) {
+                            Current.player().addCard(card);
+                        }
+                    }
+                    if (anteResult.lostCards != null) {
+                        for (PaperCard card : anteResult.lostCards) {
+                            Current.player().getCards().remove(card, 1);
+                        }
                     }
                 }
             }
@@ -371,8 +392,8 @@ public class DuelScene extends ForgeScene {
             rules = new GameRules(GameType.Adventure);
             rules.setGamesPerMatch(enemy.getData().gamesPerMatch);
         }
-        rules.setPlayForAnte(false);
-        rules.setMatchAnteRarity(true);
+        rules.setPlayForAnte(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ANTE));
+        rules.setMatchAnteRarity(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ANTE_MATCH_RARITY));
         rules.setManaBurn(false);
         rules.setWarnAboutAICards(false);
 
