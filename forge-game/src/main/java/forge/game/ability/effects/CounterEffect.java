@@ -11,7 +11,6 @@ import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.spellability.SpellPermanent;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
