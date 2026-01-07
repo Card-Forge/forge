@@ -5,6 +5,6 @@ PT:5/5
 K:Wither
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl+counters_GE1_M1M1 | TriggerZones$ Battlefield | Execute$ TrigTreasure | TriggerDescription$ Whenever a creature an opponent controls with a counter on it dies, you create a tapped Treasure token.
 SVar:TrigTreasure:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | TokenTapped$ True
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamageAll | TriggerDescription$ When Village Pillagers enters, it deals 1 damage to each creature your opponents control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamageAll | TriggerDescription$ When this creature enters, it deals 1 damage to each creature your opponents control.
 SVar:TrigDamageAll:DB$ DamageAll | ValidCards$ Creature.OppCtrl | NumDmg$ 1
-Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)\nWhen Village Pillagers enters, it deals 1 damage to each creature your opponents control.\nWhenever a creature an opponent controls with a counter on it dies, you create a tapped Treasure token.
+Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)\nWhen this creature enters, it deals 1 damage to each creature your opponents control.\nWhenever a creature an opponent controls with a counter on it dies, you create a tapped Treasure token.
