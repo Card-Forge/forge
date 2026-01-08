@@ -4290,7 +4290,7 @@
 	{
 		"name": "DemonsBargain",
 		"displayName": "Demon's Bargain",
-		"type": "dungeon",
+		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
 		"sprite": "Cave",
@@ -4364,7 +4364,7 @@
 	{
 		"name": "AncientDiamondMine",
 		"displayName": "Ancient Diamond Mine",
-		"type": "dungeon",
+		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
 		"sprite": "Cave",
@@ -4374,7 +4374,7 @@
 	{
 		"name": "DragonsLairWhite",
 		"displayName": "Dragon's Lair",
-		"type": "dungeon",
+		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
 		"sprite": "Cave",
@@ -4384,7 +4384,7 @@
 	{
 		"name": "DragonsLairBlue",
 		"displayName": "Dragon's Lair",
-		"type": "dungeon",
+		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
 		"sprite": "Cave",
@@ -4394,7 +4394,7 @@
 	{
 		"name": "DragonsLairBlack",
 		"displayName": "Dragon's Lair",
-		"type": "dungeon",
+		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
 		"sprite": "Cave",
@@ -4404,7 +4404,7 @@
 	{
 		"name": "DragonsLairRed",
 		"displayName": "Dragon's Lair",
-		"type": "dungeon",
+		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
 		"sprite": "Cave",
@@ -4414,7 +4414,7 @@
 	{
 		"name": "DragonsLairGreen",
 		"displayName": "Dragon's Lair",
-		"type": "dungeon",
+		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
 		"sprite": "Cave",
@@ -4424,7 +4424,7 @@
 	{
 		"name": "RiddlesLair",
 		"displayName": "Sphinx's Sanctum",
-		"type": "dungeon",
+		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
 		"sprite": "Cave",
