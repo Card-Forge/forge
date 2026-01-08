@@ -3,6 +3,9 @@ Name=Adventure - Low Black - Deadly Instinct
 [Avatar]
 
 [Main]
+6 Swamp|S99|1
+6 Swamp|S99|2
+5 Swamp|S99|3
 1 Dakmor Lancer|S99|1
 2 Dakmor Scorpion|S99|1
 2 Feral Shadow|S99|1
@@ -16,7 +19,6 @@ Name=Adventure - Low Black - Deadly Instinct
 3 Hand of Death|S99|1
 2 Mind Rot|S99|1
 1 Soul Feast|S99|1
-17 Swamp|S99|1
 [Sideboard]
 
 [Planes]
