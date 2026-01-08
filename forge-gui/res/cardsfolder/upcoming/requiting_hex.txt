@@ -1,0 +1,8 @@
+Name:Requiting Hex
+ManaCost:B
+Types:Instant
+S:Mode$ OptionalCost | EffectZone$ All | ValidCard$ Card.Self | ValidSA$ Spell | Cost$ Blight<1> | Description$ As an additional cost to cast this spell, you may blight 1. (You may put a -1/-1 counter on a creature you control.)
+A:SP$ Destroy | ValidTgts$ Creature.cmcLE2 | TgtPrompt$ Select target creature with mana value 2 or less | SubAbility$ DBGainLife | SpellDescription$ Destroy target creature with mana value 2 or less. If this spell's additional cost was paid, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2 | CheckSVar$ X
+SVar:X:Count$OptionalGenericCostPaid.1.0
+Oracle:As an additional cost to cast this spell, you may blight 1. (You may put a -1/-1 counter on a creature you control.)\nDestroy target creature with mana value 2 or less. If this spell's additional cost was paid, you gain 2 life.

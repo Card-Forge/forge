@@ -1,0 +1,7 @@
+Name:Swat Away
+ManaCost:2 U U
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | CheckSVar$ X | SVarCompare$ GE1 | Description$ This spell costs {2} less to cast if a creature is attacking you.
+A:SP$ ChangeZone | ValidTgts$ Creature,Card.inZoneStack | TgtPrompt$ Select target spell or nonland permanent | AlternativeDecider$ TargetedOwner | Origin$ Battlefield,Stack | Destination$ Library | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | StackDescription$ {p:TargetedOwner} puts {c:Targeted} on the top or bottom of their library. | SpellDescription$ The owner of target spell or creature puts it on their choice of the top or bottom of their library.
+SVar:X:Count$Valid Creature.attackingYou
+Oracle:This spell costs {2} less to cast if a creature is attacking you.\nThe owner of target spell or creature puts it on their choice of the top or bottom of their library.
