@@ -9,6 +9,5 @@ SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPr
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this creature leaves the battlefield, return the exiled card to its owner's hand.
 SVar:TrigChangeZone:DB$ ChangeZone | Defined$ ExiledWith | Origin$ Exile | Destination$ Hand
-SVar:X:TriggeredCard$CardPower
 DeckHints:Type$Merfolk
 Oracle:As an additional cost to cast this spell, behold a Merfolk and exile it. (Exile a Merfolk you control or a Merfolk card from your hand.)\nWhenever this creature enters or becomes tapped, tap up to one target creature and put a stun counter on it.\nWhen this creature leaves the battlefield, return the exiled card to its owner's hand.
