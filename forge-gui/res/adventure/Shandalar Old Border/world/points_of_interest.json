@@ -4288,6 +4288,16 @@
 		]
 	},
 	{
+		"name": "DemonsBargain",
+		"displayName": "Demon's Bargain",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../Shandalar Old Border/maps/map/lair/demons_bargain.tmx",
+		"radiusFactor": 0.6
+	},
+	{
 		"name": "CavePalladiaMors",
 		"displayName": "Palladia-Mors's Lair",
 		"type": "cave",
