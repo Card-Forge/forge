@@ -4,4 +4,4 @@ Types:Instant
 A:SP$ Pump | TargetMin$ 0 | TargetMax$ 2 | NumAtt$ +1 | KW$ First Strike | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures | SpellDescription$ Up to two target creatures each get +1/+0 and gain first strike until end of turn.
 K:Madness:1 R
 DeckHints:Ability$Discard
-Oracle:Up to two target creatures each get +1/+0 and gain first strike until end of turn.\nMadness {1}{R} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)
+Oracle:Up to two target creatures each get +1/+0 and gain first strike until end of turn. (They deal combat damage before creatures without first strike.)\nMadness {1}{R} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

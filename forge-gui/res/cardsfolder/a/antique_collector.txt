@@ -2,12 +2,12 @@ Name:Antique Collector
 ManaCost:1 G
 Types:Creature Human Rogue
 PT:2/2
-S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or less.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAnimateAll | TriggerDescription$ When CARDNAME enters, creatures you control perpetually gain "When this creature dies, you may shuffle it into its owner's library if it's in your graveyard. If you do, investigate."
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ This creature can't be blocked by creatures with power 2 or less.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAnimateAll | TriggerDescription$ When this creature enters, creatures you control perpetually gain "When this creature dies, you may shuffle it into its owner's library if it's in your graveyard. If you do, investigate."
 SVar:TrigAnimateAll:DB$ AnimateAll | Duration$ Perpetual | ValidCards$ Creature.YouCtrl | Triggers$ DiesTrigger
 SVar:DiesTrigger:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigShuffle | OptionalDecider$ You | TriggerDescription$ When this creature dies, you may shuffle it into its owner's library if it's in your graveyard. If you do, investigate.
 SVar:TrigShuffle:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | Shuffle$ True | Defined$ TriggeredNewCardLKICopy | RememberChanged$ True | SubAbility$ DBInvestigate
 SVar:DBInvestigate:DB$ Investigate | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Investigate|Token|Graveyard & Type$Artifact|Clue
-Oracle:Antique Collector can't be blocked by creatures with power 2 or less.\nWhen Antique Collector enters, creatures you control perpetually gain "When this creature dies, you may shuffle it into its owner's library if it's in your graveyard. If you do, investigate."
+Oracle:This creature can't be blocked by creatures with power 2 or less.\nWhen this creature enters, creatures you control perpetually gain "When this creature dies, you may shuffle it into its owner's library if it's in your graveyard. If you do, investigate." (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")

@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddKeyword$ Trample | Description$ Enchanted creature gets +2/+0 and has trample.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, draw a card.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this Aura is put into a graveyard from the battlefield, draw a card.
 SVar:TrigDraw:DB$ Draw
 SVar:SacMe:2
-Oracle:Enchant creature\nEnchanted creature gets +2/+0 and has trample.\nWhen Audacity is put into a graveyard from the battlefield, draw a card.
+Oracle:Enchant creature\nEnchanted creature gets +2/+0 and has trample. (It can deal excess combat damage to the player or planeswalker it’s attacking.)\nWhen this Aura is put into a graveyard from the battlefield, draw a card.

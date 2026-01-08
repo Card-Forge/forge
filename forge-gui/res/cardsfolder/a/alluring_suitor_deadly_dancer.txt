@@ -2,10 +2,10 @@ Name:Alluring Suitor
 ManaCost:2 R
 Types:Creature Vampire
 PT:2/3
-T:Mode$ AttackersDeclared | Execute$ TrigTransform | ValidAttackers$ Creature | ValidAttackersAmount$ EQ2 | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ When you attack with exactly two creatures, transform CARDNAME.
+T:Mode$ AttackersDeclared | Execute$ TrigTransform | ValidAttackers$ Creature | ValidAttackersAmount$ EQ2 | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ When you attack with exactly two creatures, transform this creature.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
-Oracle:When you attack with exactly two creatures, transform Alluring Suitor.
+Oracle:When you attack with exactly two creatures, transform this creature.
 
 ALTERNATE
 
@@ -17,6 +17,6 @@ PT:3/3
 K:Trample
 T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$ When this creature transforms into CARDNAME, add {R}{R}. Until end of turn, you don't lose this mana as steps and phases end.
 SVar:TrigMana:DB$ Mana | Produced$ R | Amount$ 2 | PersistentMana$ True
-A:AB$ Pump | Cost$ R R | Defined$ Self | NumAtt$ +1 | SubAbility$ DBPump | StackDescription$ CARDNAME and | SpellDescription$ CARDNAME and another target creature each get +1/+0 until end of turn.
+A:AB$ Pump | Cost$ R R | Defined$ Self | NumAtt$ +1 | SubAbility$ DBPump | StackDescription$ CARDNAME and | SpellDescription$ This creature and another target creature each get +1/+0 until end of turn.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | NumAtt$ +1 | StackDescription$ {c:Targeted} each get +1/+0 until end of turn.
-Oracle:Trample\nWhen this creature transforms into Deadly Dancer, add {R}{R}. Until end of turn, you don't lose this mana as steps and phases end.\n{R}{R}: Deadly Dancer and another target creature each get +1/+0 until end of turn.
+Oracle:Trample\nWhen this creature transforms into Deadly Dancer, add {R}{R}. Until end of turn, you don't lose this mana as steps and phases end.\n{R}{R}: This creature and another target creature each get +1/+0 until end of turn.
