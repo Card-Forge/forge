@@ -6,5 +6,4 @@ SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedNumber
-
 Oracle:Remove any number of counters from among permanents on the battlefield. You draw cards and lose life equal to the number of counters removed this way.
