@@ -1,0 +1,12 @@
+Name:Brigid's Command
+ManaCost:1 G W
+Types:Kindred Sorcery Kithkin
+A:SP$ Charm | Choices$ DBCopy,DBToken,DBPump,DBFight | CharmNum$ 2
+SVar:DBCopy:DB$ CopyPermanent | ValidTgts$ Kithkin.YouCtrl | TgtPrompt$ Select target Kithkin you control | SpellDescription$ Create a token that's a copy of target Kithkin you control.
+SVar:DBToken:DB$ Token | ValidTgts$ Player | TokenScript$ gw_1_1_kithkin | TokenOwner$ TargetedPlayer | StackDescription$ SpellDescription | SpellDescription$ Target player creates a 1/1 green and white Kithkin creature token.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | NumAtt$ +3 | NumDef$ +3 | TgtPrompt$ Select target creature you control | SpellDescription$ Target creature you control gets +3/+3 until end of turn.
+SVar:DBFight:DB$ Pump | AILogic$ Fight | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBFight2 | SpellDescription$ Target creature you control fights target creature an opponent controls.
+SVar:DBFight2:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls.
+DeckHas:Ability$Token
+DeckHints:Type$Kithkin
+Oracle:Choose two —\n• Create a token that's a copy of target Kithkin you control.\n• Target player creates a 1/1 green and white Kithkin creature token.\n• Target creature you control gets +3/+3 until end of turn.\n• Target creature you control fights target creature an opponent controls.

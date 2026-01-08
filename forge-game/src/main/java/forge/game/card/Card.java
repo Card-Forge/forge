@@ -2552,13 +2552,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     final String[] k = keyword.split(":");
                     if(!k[2].equals("Secondary")) {
                         sbLong.append("Hexproof from ");
-                        if (k[2].equals("chosen")) {
-                            k[2] = k[1].substring(5).toLowerCase();
-                        }
                         sbLong.append(k[2]);
                         // skip reminder text for more complicated Hexproofs
                         if (!k[2].contains(" and ") && !k[2].contains("each")) {
-                            sbLong.append(" (").append(inst.getReminderText().replace("chosen", k[2]));
+                            sbLong.append(" (").append(inst.getReminderText());
                             sbLong.append(")");
                         }
                         sbLong.append("\r\n");
@@ -7657,6 +7654,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         boolean hasK1 = isOptionalCostPaid(OptionalCost.Kicker1);
         return hasK1 == isOptionalCostPaid(OptionalCost.Kicker2) ? (hasK1 ? 2 : 0) : 1;
     }
+
     public List<SpellAbility> getAllPossibleAbilities(final Player player, final boolean removeUnplayable) {
         return getAllPossibleAbilities(player, removeUnplayable, null);
     }
