@@ -3,7 +3,7 @@ ManaCost:4 B G
 Types:Kindred Sorcery Elf
 A:SP$ Charm | Choices$ DBCopy,DBChangeZone,DBDestroy,DBPumpAll | CharmNum$ 2
 SVar:DBCopy:DB$ CopyPermanent | ValidTgts$ Elf.YouCtrl | TgtPrompt$ Select target Elf you control | SpellDescription$ Create a token that's a copy of target Elf you control.
-SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Permanet.YouOwn | TgtPrompt$ Select one or two target permanent cards in your graveyard | TargetMin$ 1 | TargetMax$ 2 | TgtZone$ Graveyard | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return one or two target permanent cards from your graveyard to your hand.
+SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Permanent.YouOwn | TgtPrompt$ Select one or two target permanent cards in your graveyard | TargetMin$ 1 | TargetMax$ 2 | TgtZone$ Graveyard | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return one or two target permanent cards from your graveyard to your hand.
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature,Enchantment | TgtPrompt$ Select target creature or enchantment | SpellDescription$ Destroy target creature or enchantment.
 SVar:DBPumpAll:DB$ PumpAll | ValidTgts$ Player | ValidCards$ Creature | NumAtt$ +3 | NumDef$ +3 | SubAbility$ DBUntapAll | SpellDescription$ Creatures target player controls get +3/+3 until end of turn. Untap them.
 SVar:DBUntapAll:DB$ UntapAll | ValidCards$ Creature.TargetedPlayerCtrl
