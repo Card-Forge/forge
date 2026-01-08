@@ -1,0 +1,11 @@
+Name:Glamermite
+ManaCost:2 U
+Types:Creature Faerie Rogue
+PT:2/2
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When this creature enters, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBTap,DBUntap
+SVar:DBTap:DB$ Tap | ValidTgts$ Creature | SpellDescription$ Tap target creature.
+SVar:DBUntap:DB$ Untap | ValidTgts$ Creature | SpellDescription$ Untap target creature.
+Oracle:Flash\nFlying\nWhen this creature enters, choose one —\n• Tap target creature.\n• Untap target creature.
