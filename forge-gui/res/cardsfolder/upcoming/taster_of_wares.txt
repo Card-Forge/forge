@@ -3,10 +3,10 @@ ManaCost:2 B
 Types:Creature Goblin Warlock
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ OppRevealX | TriggerDescription$ When this creature enters, target opponent reveals X cards from their hand, where X is the number of Goblins you control. You choose one of those cards. That player exiles it. If an instant or sorcery card is exiled this way, you may cast it for as long as you control this creature, and mana of any type can be spent to cast that spell.
-SVar:OppRevealX:DB$ Reveal | Cost$ValidTgts$ Opponent | NumCards$ X | RememberRevealed$ True | SubAbility$ PickOne
+SVar:OppRevealX:DB$ Reveal | ValidTgts$ Opponent | NumCards$ X | RememberRevealed$ True | SubAbility$ PickOne
 SVar:PickOne:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | Chooser$ You | DefinedPlayer$ Targeted | ChangeType$ Card.IsRemembered | AlreadyRevealed$ True | Mandatory$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ AsLongAsControl | ConditionDefined$ Remembered | ConditionPresent$ Instant,Sorcery
-SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | MayPlayIgnoreType$ True | Description$ You may cast that card for as long as you control EFFECTSOURCE, and mana of any type can be spent to cast that spell.
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.nonLand+IsRemembered | AffectedZone$ Exile | MayPlayIgnoreType$ True | Description$ You may cast that card for as long as you control EFFECTSOURCE, and mana of any type can be spent to cast that spell.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Goblin.YouCtrl
 DeckHints:Type$Goblin
