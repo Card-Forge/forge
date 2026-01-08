@@ -754,7 +754,7 @@ RainbowSpear
   xy: 240, 544
   size: 16, 16
 RodOfRuin
-  xy: 288, 592
+  xy: 272, 624
   size: 16, 16
 ShamansStaff
   xy: 176, 576
@@ -874,7 +874,7 @@ MaptoParadise
   xy: 176, 896
   size: 16, 16
 RingofInfestation
-  xy: 128, 896
+  xy: 112, 960
   size: 16, 16
 IvySeersAmulet
   xy: 0, 800
@@ -901,7 +901,7 @@ SerrasPrayerBook
   xy: 112, 656
   size: 16, 16
 SerpentRing
-  xy: 112, 960
+  xy: 48, 912
   size: 16, 16
 BarrinsCodex
   xy: 48, 688
@@ -1001,8 +1001,38 @@ KryShield
   xy: 288, 144
   size: 16, 16
 GauntletsofChaos
-  xy: 80, 208
+  xy: 16, 256
   size: 16, 16
 MarbleMace
   xy: 176, 416
+  size: 16, 16
+HivecallersStaff
+  xy: 288, 608
+  size: 16, 16
+MaskOfMultani
+  xy: 16, 384
+  size: 16, 16
+CrownOfTheVale
+  xy: 96, 320
+  size: 16, 16
+CircletOfParadise
+  xy: 112, 384
+  size: 16, 16
+TawnossHelm
+  xy: 112, 400
+  size: 16, 16
+AmuletOfGaea
+  xy: 144, 816
+  size: 16, 16
+BogGliderGlove
+  xy: 128, 272
+  size: 16, 16
+WarBeastGauntlet
+  xy: 144, 256
+  size: 16, 16
+GladiatorsCestus
+  xy: 288, 320
+  size: 16, 16
+SpineStaff
+  xy: 208, 624
   size: 16, 16
