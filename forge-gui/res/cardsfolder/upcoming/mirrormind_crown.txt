@@ -1,0 +1,8 @@
+Name:Mirrormind Crown
+ManaCost:4
+Types:Artifact Equipment
+K:Equip:2
+R:Event$ CreateToken | ActiveZones$ Battlefield | IsPresent$ Card.Self+AttachedTo Creature | CheckSVar$ X | SVarCompare$ EQ0 | ValidPlayer$ You | Optional$ True | Layer$ Copy | ReplaceWith$ DBCopy | Description$ As long as this Equipment is attached to a creature, the first time you would create one or more tokens each turn, you may instead create that many tokens that are copies of equipped creature.
+SVar:DBCopy:DB$ ReplaceToken | Type$ ReplaceToken | ValidChoices$ Card.EquippedBy | TokenScript$ Chosen
+SVar:X:Count$ThisTurnEntered_Battlefield_Card.tokenCreated+YouOwn
+Oracle:As long as this Equipment is attached to a creature, the first time you would create one or more tokens each turn, you may instead create that many tokens that are copies of equipped creature.\nEquip {2}
