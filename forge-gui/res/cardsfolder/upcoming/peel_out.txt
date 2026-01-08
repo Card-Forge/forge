@@ -1,0 +1,6 @@
+Name:Peel Out
+ManaCost:1 G
+Types:Instant
+A:SP$ Fog | SubAbility$ DBBanana | SpellDescription$ Prevent all combat damage that would be dealt this turn. Create a colorless artifact token named Banana with "{T}, Sacrifice this token: Add {R} or {G}. You gain 2 life."
+SVar:DBBanana:DB$ Token | TokenAmount$ 1 | TokenScript$ banana | TokenOwner$ You
+Oracle:Prevent all combat damage that would be dealt this turn. Create a colorless artifact token named Banana with "{T}, Sacrifice this token: Add {R} or {G}. You gain 2 life."

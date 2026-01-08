@@ -37,6 +37,8 @@ public enum CounterEnumType implements CounterType {
 
     ACORN("ACORN", 139, 69, 19),
 
+    ACQUIREDTASTE("acquired taste", "ATASTE", 139, 19, 69),
+
     AEGIS("AEGIS", 207, 207, 207),
 
     AGE("AGE", 255, 137, 57),
