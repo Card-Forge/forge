@@ -1,0 +1,9 @@
+Name:Unwelcome Sprite
+ManaCost:1 U
+Types:Creature Faerie Rogue
+PT:2/1
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OpponentTurn$ True | Execute$ TrigSurveil | TriggerDescription$ Whenever you cast a spell during an opponent's turn, surveil 2. (Look at the top two cards of your library. You may put any number of them into your graveyard and the rest on top of your library in any order.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 2
+DeckHas:Ability$Surveil|Graveyard
+Oracle:Flying\nWhenever you cast a spell during an opponent's turn, surveil 2. (Look at the top two cards of your library. You may put any number of them into your graveyard and the rest on top of your library in any order.)
