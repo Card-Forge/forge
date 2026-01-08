@@ -1,0 +1,8 @@
+Name:Wanderwine Farewell
+ManaCost:5 U U
+Types:Kindred Sorcery Merfolk
+K:Convoke
+A:SP$ ChangeZone | TargetMin$ 1 | TargetMax$ 2 | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | RememberChanged$ True | SubAbility$ DBToken | SpellDescription$ Return one or two target nonland permanents to their owners' hands. Then if you control a Merfolk, create a 1/1 white and blue Merfolk creature token for each permanent returned to its owner's hand this way.
+SVar:DBToken:DB$ Token | TokenAmount$ Remembered$Amount | TokenScript$ wu_1_1_merfolk | ConditionPresent$ Merfolk.YouCtrl | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nReturn one or two target nonland permanents to their owners' hands. Then if you control a Merfolk, create a 1/1 white and blue Merfolk creature token for each permanent returned to its owner's hand this way.
