@@ -17,7 +17,7 @@ Name:Garruk, the Veil-Cursed
 ManaCost:no cost
 Colors:green,black
 Types:Legendary Planeswalker Garruk
-Loyalty:3
+Loyalty:0
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | TokenScript$ b_1_1_wolf_deathtouch | TokenOwner$ You | Planeswalker$ True | SpellDescription$ Create a 1/1 black Wolf creature token with deathtouch.
 A:AB$ ChangeZone | Cost$ SubCounter<1/LOYALTY> | UnlessCost$ Sac<1/Creature> | UnlessSwitched$ True | UnlessPayer$ You | Origin$ Library | Destination$ Hand | ChangeType$ Creature | ChangeNum$ 1 | Planeswalker$ True | SpellDescription$ Sacrifice a creature. If you do, search your library for a creature card, reveal it, put it into your hand, then shuffle.
 A:AB$ PumpAll | Cost$ SubCounter<3/LOYALTY> | ValidCards$ Creature.YouCtrl | KW$ Trample | NumAtt$ +X | NumDef$ +X | Planeswalker$ True | Ultimate$ True | SpellDescription$ Creatures you control gain trample and get +X/+X until end of turn, where X is the number of creature cards in your graveyard.
