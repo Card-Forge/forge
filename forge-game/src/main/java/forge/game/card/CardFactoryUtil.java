@@ -994,7 +994,7 @@ public class CardFactoryUtil {
             final String attackTrig = "Mode$ Attacks | ValidCard$ Card.Self | Secondary$ True | TriggerDescription$ " +
                     "When a creature with decayed attacks, sacrifice it at end of combat.";
 
-            final String delayTrigStg = "DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | " +
+            final String delayTrigStg = "DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | " +
                     "TriggerDescription$ At end of combat, sacrifice CARDNAME.";
 
             final String trigSacStg = "DB$ Sacrifice";
@@ -1111,7 +1111,7 @@ public class CardFactoryUtil {
 
             inst.addTrigger(trigger);
         } else if (keyword.equals("Extort")) {
-            final String extortTrigger = "Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | "
+            final String extortTrigger = "Mode$ SpellCast | ValidActivatingPlayer$ You | "
                     + "TriggerZones$ Battlefield | Secondary$ True"
                     + " | TriggerDescription$ Extort (" + inst.getReminderText() + ")";
 
@@ -2953,7 +2953,7 @@ public class CardFactoryUtil {
 
             final AbilitySub newSA = (AbilitySub) AbilityFactory.getAbility(dbStr, card);
 
-            newSA.setSVar("EpicCantBeCast", "Mode$ CantBeCast | ValidCard$ Card | Caster$ You | EffectZone$ Command | Description$ For the rest of the game, you can't cast spells.");
+            newSA.setSVar("EpicCantBeCast", "Mode$ CantBeCast | Caster$ You | EffectZone$ Command | Description$ For the rest of the game, you can't cast spells.");
             newSA.setSVar("EpicTrigger", "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ EpicCopy | TriggerDescription$ "
                     + "At the beginning of each of your upkeeps, copy " + card.toString() + " except for its epic ability.");
             newSA.setSVar("EpicCopy", "DB$ CopySpellAbility | Defined$ EffectSource | Epic$ True | MayChooseTarget$ True");

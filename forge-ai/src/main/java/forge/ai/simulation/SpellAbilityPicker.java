@@ -125,20 +125,6 @@ public class SpellAbilityPicker {
         }
     }
 
-    private static boolean isSorcerySpeed(SpellAbility sa, Player player) {
-        // TODO: Can we use the actual rules engine for this instead of trying to do the logic ourselves?
-        if (sa.isLandAbility()) {
-            return true;
-        }
-        if (sa.isSpell()) {
-            return !sa.withFlash(sa.getHostCard(), player);
-        }
-        if (sa.isPwAbility()) {
-            return !sa.withFlash(sa.getHostCard(), player);
-        }
-        return sa.isActivatedAbility() && sa.getRestrictions().isSorcerySpeed();
-    }
-
     private void createNewPlan(Score origGameScore, List<SpellAbility> candidateSAs) {
         plan = null;
 
@@ -152,7 +138,7 @@ public class SpellAbilityPicker {
         if (currentPhase.isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             List<SpellAbility> candidateSAs2 = new ArrayList<>();
             for (SpellAbility sa : candidateSAs) {
-                if (!isSorcerySpeed(sa, player)) {
+                if (!SpellAbilityAi.isSorcerySpeed(sa, player)) {
                     if (printOutput) {
                         System.err.println("Not sorcery: " + sa);
                     }
