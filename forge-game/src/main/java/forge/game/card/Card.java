@@ -2552,13 +2552,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     final String[] k = keyword.split(":");
                     if(!k[2].equals("Secondary")) {
                         sbLong.append("Hexproof from ");
-                        if (k[2].equals("chosen")) {
-                            k[2] = k[1].substring(5).toLowerCase();
-                        }
                         sbLong.append(k[2]);
                         // skip reminder text for more complicated Hexproofs
                         if (!k[2].contains(" and ") && !k[2].contains("each")) {
-                            sbLong.append(" (").append(inst.getReminderText().replace("chosen", k[2]));
+                            sbLong.append(" (").append(inst.getReminderText());
                             sbLong.append(")");
                         }
                         sbLong.append("\r\n");
