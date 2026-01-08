@@ -1,0 +1,11 @@
+Name:Gloom Ripper
+ManaCost:3 B B
+Types:Creature Elf Assassin
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When this creature enters, target creature you control gets +X/+0 until end of turn and up to one target creature an opponent controls gets -0/-X until end of turn, where X is the number of Elves you control plus the number of Elf cards in your graveyard.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +X | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature an opponent controls | NumDef$ -X | IsCurse$ True
+SVar:X:Count$Valid Elf.YouCtrl/Plus.Y
+SVar:Y:Count$ValidGraveyard Elf.YouOwn
+SVar:PlayMain1:TRUE
+Oracle:When this creature enters, target creature you control gets +X/+0 until end of turn and up to one target creature an opponent controls gets -0/-X until end of turn, where X is the number of Elves you control plus the number of Elf cards in your graveyard.
