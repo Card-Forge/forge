@@ -1,9 +1,10 @@
 Name:Springleaf Parade
 ManaCost:X G G
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this enchantment enters, create X 1/1 colorless Shapeshifter creature tokens with changeling.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this enchantment enters, create X 1/1 colorless Shapeshifter creature tokens with changeling. (They're every creature type.)
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_1_1_shapeshifter_changeling | TokenOwner$ You
 S:Mode$ Continuous | Affected$ Creature.token+YouCtrl | AddAbility$ AnyMana | Description$ Creature tokens you control have "{T}: Add one mana of any color."
 SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
 SVar:X:Count$xPaid
-Oracle:When this enchantment enters, create X 1/1 colorless Shapeshifter creature tokens with changeling. (They’re every creature type.)\nCreature tokens you control have “{T}: Add one mana of any color.”
+DeckHas:Ability$Token
+Oracle:When this enchantment enters, create X 1/1 colorless Shapeshifter creature tokens with changeling. (They're every creature type.)\nCreature tokens you control have "{T}: Add one mana of any color."
