@@ -7657,6 +7657,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         boolean hasK1 = isOptionalCostPaid(OptionalCost.Kicker1);
         return hasK1 == isOptionalCostPaid(OptionalCost.Kicker2) ? (hasK1 ? 2 : 0) : 1;
     }
+
     public List<SpellAbility> getAllPossibleAbilities(final Player player, final boolean removeUnplayable) {
         return getAllPossibleAbilities(player, removeUnplayable, null);
     }
