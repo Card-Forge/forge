@@ -1,6 +1,6 @@
 Name:Raiding Schemes
 ManaCost:3 R G
 Types:Enchantment
-S:Mode$ Continuous | AddKeyword$ Conspire | Affected$ Card.nonCreature+YouCtrl+wasCast | AffectedZone$ Stack | EffectZone$ Battlefield | Description$ Each instant and sorcery spell you cast has replicate. The replicate cost is equal to its mana cost. (When you cast it, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)
+S:Mode$ Continuous | AddKeyword$ Conspire | Affected$ Card.nonCreature+YouCtrl+wasCast | AffectedZone$ Stack | EffectZone$ Battlefield | Description$ Each noncreature spell you cast has conspire. (As you cast a noncreature spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose new targets for the copy. A copy of a permanent spell becomes a token.)
 AI:RemoveDeck:All
-Oracle:Each noncreature spell you cast has conspire. (As you cast a noncreature spell, you may tap twoi untapped creatures you control that share a color with it. When you do, copy it and you may choose new targets for the copy. A copy of a permanent spell becomes a token.)
+Oracle:Each noncreature spell you cast has conspire. (As you cast a noncreature spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose new targets for the copy. A copy of a permanent spell becomes a token.)
