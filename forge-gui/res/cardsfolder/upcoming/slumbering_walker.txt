@@ -1,0 +1,9 @@
+Name:Slumbering Walker
+ManaCost:3 W W
+Types:Creature Giant Warrior
+PT:4/7
+K:etbCounter:M1M1:2
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigImmediateTrig | TriggerDescription$ At the beginning of your end step, you may remove a counter from this creature. When you do, return target creature card with power 2 or less from your graveyard to the battlefield.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ RemoveAnyCounter<1/Any/Card.Self/this creature> | Execute$ TrigChangeZone | SpellDescription$ When you do, return target creature card with power 2 or less from your graveyard to the battlefield.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn+powerLE2 | TgtPrompt$ Choose target creature card with power 2 or less in your graveyard
+Oracle:This creature enters with two -1/-1 counters on it.\nAt the beginning of your end step, you may remove a counter from this creature. When you do, return target creature card with power 2 or less from your graveyard to the battlefield.
