@@ -1,0 +1,6 @@
+Name:Timid Shieldbearer
+ManaCost:1 W
+Types:Creature Kithkin Soldier
+PT:2/2
+A:AB$ PumpAll | Cost$ 4 W | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
+Oracle:{4}{W}: Creatures you control get +1/+1 until end of turn.
