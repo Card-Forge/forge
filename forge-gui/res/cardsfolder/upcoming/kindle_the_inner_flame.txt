@@ -1,7 +1,7 @@
 Name:Kindle the Inner Flame
 ManaCost:3 R
 Types:Kindred Sorcery Elemental
-A:SP$ CopyPermanent | ValidTgts$ Creature | AddKeywords$ Haste | AddTriggers$ TriggerPhase | SpellDescription$ Create a token that's a copy of target creature you control, except it has haste and "At the beginning of the end step, sacrifice this token."
+A:SP$ CopyPermanent | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AddKeywords$ Haste | AddTriggers$ TriggerPhase | SpellDescription$ Create a token that's a copy of target creature you control, except it has haste and "At the beginning of the end step, sacrifice this token."
 SVar:TriggerPhase:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, sacrifice this token.
 SVar:TrigSac:DB$ Sacrifice | SacValid$ Self
 Flashback:1 R Behold<3/Elemental>
