@@ -4,6 +4,6 @@ Types:Creature Goblin
 PT:4/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+counters_GE1_M1M1 | Execute$ TrigChangeZone | TriggerDescription$ When this creature dies, if it had a -1/-1 counter on it, return it to the battlefield under its owner’s control and it loses all abilities.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredNewCardLKICopy | RememberChanged$ True | SubAbility$ DBAnimate
-SVar:DBAnimate:DB$ Animate | Affected$ Card.IsRemembered | RemoveAllAbilities$ True | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | RemoveAllAbilities$ True | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:When this creature dies, if it had a -1/-1 counter on it, return it to the battlefield under its owner's control and it loses all abilities.
