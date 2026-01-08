@@ -1,0 +1,7 @@
+Name:Hovel Hurler
+ManaCost:3 RW RW
+Types:Creature Giant Warrior
+PT:6/7
+K:etbCounter:M1M1:2
+A:AB$ Pump | Cost$ RW RW RemoveAnyCounter<1/Any/Card.Self/this creature> | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | NumAtt$ +1 | KW$ Flying | SorcerySpeed$ True | SpellDescription$ Another target creature you control gets +1/+0 and gains flying until end of turn. Activate only as a sorcery.
+Oracle:This creature enters with two -1/-1 counters on it.\n{R/W}{R/W}, Remove a counter from this creature: Another target creature you control gets +1/+0 and gains flying until end of turn. Activate only as a sorcery.

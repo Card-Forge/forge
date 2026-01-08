@@ -106,8 +106,10 @@ public class AnimateEffect extends AnimateEffectBase {
             final String colors = sa.getParam("Colors");
             if (colors.equals("ChosenColor")) {
                 finalColors = ColorSet.fromNames(source.getChosenColors());
+            } else if (colors.equals("All")) {
+                finalColors = ColorSet.WUBRG;
             } else {
-                finalColors = ColorSet.fromNames(Arrays.asList(colors.split(",")));
+                finalColors = ColorSet.fromNames(colors.split(","));
             }
         }
 

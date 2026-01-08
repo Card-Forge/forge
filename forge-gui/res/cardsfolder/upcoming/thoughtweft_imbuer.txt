@@ -1,0 +1,9 @@
+Name:Thoughtweft Imbuer
+ManaCost:3 W
+Types:Creature Kithkin Advisor
+PT:0/5
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control attacks alone, it gets +X/+X until end of turn, where X is the number of Kithkin you control.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ +X | NumDef$ +X
+SVar:X:Count$Valid Kithkin.YouCtrl
+DeckHints:Type$Kithkin
+Oracle:Whenever a creature you control attacks alone, it gets +X/+X until end of turn, where X is the number of Kithkin you control.
