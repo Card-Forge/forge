@@ -1,0 +1,9 @@
+Name:Enraged Flamecaster
+ManaCost:2 R
+Types:Creature Elemental Sorcerer
+PT:3/2
+K:Reach
+T:Mode$ SpellCast | ValidCard$ Card.cmcGE4 | ValidActivatingPlayer$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell with mana value 4 or greater, this creature deals 2 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 2
+SVar:BuffedBy:Card.cmcGE4
+Oracle:Reach\nWhenever you cast a spell with mana value 4 or greater, this creature deals 2 damage to each opponent.
