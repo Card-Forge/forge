@@ -150,9 +150,9 @@
 		{ "type": "item","count":1, "itemName": "White rune"  },
 		{ "type": "item","count":1, "itemName": "White Staff"  },
 		{ "type": "item","count":1, "itemName": "Hero's Sword"  },
-		{ "type": "item","count":1, "itemName": "Sword of the Chosen"  },
+		{ "type": "item","count":1, "itemName": "Crown of the Chosen"  },
 		{ "type": "item","count":1, "itemName": "Fortified Shield"  },
-		{ "type": "item","count":1, "itemName": "Belbe's Armor"  },
+		{ "type": "item","count":1, "itemName": "Belbe's Boots"  },
 		{ "type": "item","count":1, "itemName": "Riding Boots"  },
 		{ "type": "life","count":1    }
 
@@ -168,7 +168,7 @@
 		{ "type": "item","count":1, "itemName": "Red Staff"  },
 		{ "type": "item","count":1, "itemName": "Raging Dagger"  },
 		{ "type": "item","count":1, "itemName": "Dwarven Shield"  },
-		{ "type": "item","count":1, "itemName": "Flowstone Armor"  },
+		{ "type": "item","count":1, "itemName": "Flowstone Boots"  },
 		{ "type": "item","count":1, "itemName": "Sandals of Speed"  },
 		{ "type": "item","count":1, "itemName": "Dragon Mask"  },
 		{ "type": "life","count":1    }
@@ -201,8 +201,8 @@
 		{ "type": "item","count":1, "itemName": "Black Staff"  },
 		{ "type": "item","count":1, "itemName": "Scathe Scythe"  },
 		{ "type": "item","count":1, "itemName": "Life Chisel"  },
-		{ "type": "item","count":1, "itemName": "Feverbringer's Cloak"  },
-		{ "type": "item","count":1, "itemName": "Boots of the Crossroads"  },
+		{ "type": "item","count":1, "itemName": "Feverbringer's Blade"  },
+		{ "type": "item","count":1, "itemName": "Haunted Robes"  },
 		{ "type": "item","count":1, "itemName": "Splicer's Charm"  },
 		{ "type": "life","count":1    }
 		
@@ -219,7 +219,7 @@
 		{ "type": "item","count":1, "itemName": "Green Staff"  },
 		{ "type": "item","count":1, "itemName": "Willow Bow"  },
 		{ "type": "item","count":1, "itemName": "Wooden Shield"  },
-		{ "type": "item","count":1, "itemName": "Medicine Bag"  },
+		{ "type": "item","count":1, "itemName": "Slung Medicine Bag"  },
 		{ "type": "item","count":1, "itemName": "Chariot Rider's Boots"  },
 		{ "type": "item","count":1, "itemName": "Lotus Petal"  },
 		{ "type": "life","count":1   }
@@ -236,9 +236,9 @@
 		{ "type": "item","count":1, "itemName": "Steel Shield"  },
 		{ "type": "item","count":1, "itemName": "Steel Armor"  },
 		{ "type": "item","count":1, "itemName": "Steel Boots"  },
-		{ "type": "item","count":1, "itemName": "Sentry's Plate"  },
+		{ "type": "item","count":1, "itemName": "Sentry's Shield"  },
 		{ "type": "item","count":1, "itemName": "Steel Helm"  },
-		{ "type": "item","count":1, "itemName": "Braidwood Sextant"  },
+		{ "type": "item","count":1, "itemName": "Braidwood Leathers"  },
 		{ "type": "item","count":1, "itemName": "Aeolipile"  }
 
 		]
@@ -249,13 +249,13 @@
 	"sprite":"BattleShop",
 	"rewards": [
 		{ "type": "item","count":1, "itemName": "Horrible Halberd"  },
-		{ "type": "item","count":1, "itemName": "Spellbook"  },
+		{ "type": "item","count":1, "itemName": "Sage's Robes"  },
 		{ "type": "item","count":1, "itemName": "Soulcatcher Cloak"  },
-		{ "type": "item","count":1, "itemName": "Credit Voucher"  },
+		{ "type": "item","count":1, "itemName": "Noble's Silks"  },
 		{ "type": "item","count":1, "itemName": "Elixir of Vitality"  },
-		{ "type": "item","count":1, "itemName": "Clockwork Rider's Boots"  },
-		{ "type": "item","count":1, "itemName": "Onulet Armor"  },
-		{ "type": "item","count":1, "itemName": "Amulet of Unmaking"  }
+		{ "type": "item","count":1, "itemName": "Clockwork Lance"  },
+		{ "type": "item","count":1, "itemName": "Onulet Shield"  },
+		{ "type": "item","count":1, "itemName": "Ring of Unmaking"  }
 
 		]
 
@@ -1721,9 +1721,60 @@
 			{ "type": "item", "count": 1, "itemName": "Dega Spellbook" },
 			{ "type": "item", "count": 1, "itemName": "Necra Spellbook" },
 			{ "type": "item", "count": 1, "itemName": "Raka Spellbook" },
-			{ "type": "item", "count": 1, "itemName": "Jalum Tome" },
-			{ "type": "item", "count": 1, "itemName": "Jayemdae Tome" },
-			{ "type": "item", "count": 1, "itemName": "Fool's Tome" }
+			{ "type": "item", "count": 1, "itemName": "Jalum Robes" },
+			{ "type": "item", "count": 1, "itemName": "Jayemdae Robes" },
+			{ "type": "item", "count": 1, "itemName": "Fool's Outfit" }
+		]
+	  },
+	  {
+		"name": "ArtificerBazaar",
+		"description": "The Artificer's Bazaar",
+		"spriteAtlas": "maps/tileset/buildings.atlas",
+		"sprite": "LegendShop",
+		"restockPrice": 10,
+		"rewards": [
+			{ "type": "item", "count": 1, "itemName": "Aeolipile" },
+			{ "type": "item", "count": 1, "itemName": "Serrated Quiver" },
+			{ "type": "item", "count": 1, "itemName": "Elixir of Vitality" },
+			{ "type": "item", "count": 1, "itemName": "Hivecaller's Horn" },
+			{ "type": "item", "count": 1, "itemName": "Dragon Mask" },
+			{ "type": "item", "count": 1, "itemName": "Coral Helm" },
+			{ "type": "item", "count": 1, "itemName": "Urza's Armor" },
+			{ "type": "item", "count": 1, "itemName": "Whalebone Glider" }
+		]
+	  },
+	  {
+		"name": "ArtificerBazaar2",
+		"description": "The Artificer's Bazaar",
+		"spriteAtlas": "maps/tileset/buildings.atlas",
+		"sprite": "LegendShop",
+		"restockPrice": 10,
+		"rewards": [
+			{ "type": "item", "count": 1, "itemName": "Rod of Ruin" },
+			{ "type": "item", "count": 1, "itemName": "Triangle of War" },
+			{ "type": "item", "count": 1, "itemName": "Shield of the Ages" },
+			{ "type": "item", "count": 1, "itemName": "Roc Egg" },
+			{ "type": "item", "count": 1, "itemName": "Jester's Cap" },
+			{ "type": "item", "count": 1, "itemName": "Crown of the Ages" },
+			{ "type": "item", "count": 1, "itemName": "Fool's Outfit" },
+			{ "type": "item", "count": 1, "itemName": "Sandals of Speed" }
+		]
+	  },
+	  {
+		"name": "ArtificerBazaar3",
+		"description": "The Artificer's Bazaar",
+		"spriteAtlas": "maps/tileset/buildings.atlas",
+		"sprite": "LegendShop",
+		"restockPrice": 10,
+		"rewards": [
+			{ "type": "item", "count": 1, "itemName": "Gauntlets of Chaos" },
+			{ "type": "item", "count": 1, "itemName": "Scythe of Yawgmoth" },
+			{ "type": "item", "count": 1, "itemName": "Claws of Gix" },
+			{ "type": "item", "count": 1, "itemName": "Life Chisel" },
+			{ "type": "item", "count": 1, "itemName": "Phyrexian Splicer" },
+			{ "type": "item", "count": 1, "itemName": "Torturer's Hood" },
+			{ "type": "item", "count": 1, "itemName": "Yawgmoth's Armor" },
+			{ "type": "item", "count": 1, "itemName": "Joven's Boots" }
 		]
 	  }
 	]
