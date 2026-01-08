@@ -39,11 +39,11 @@
     <property name="enemy" value="Scourgemaster"/>
     <property name="dialog">[
   {
-    "text": "Hello, planeswalker. Before we discuss business, tell me - do you appreciate the fine art of ante? The wagering on duels to the death?",
+    "text": "Hello, planeswalker. Do you appreciate the fine art of ante – the wagering on duels to the death?",
     "options": [
       {
         "name": "Yes, I play with ante enabled",
-        "text": "Excellent! I have many mighty spells to tip the scales of such wagers in your favor! You could win countless more spells from your foes with such tools - contracts from below, demonic attorneys, jeweled birds, bronze tablets and more... all for just a tiny sliver of your soul. What do you say?",
+        "text": "I have many mighty spells to tip the scales of such wagers in your favor! You could win countless more spells from your foes with such tools – contracts from below, demonic attorneys, jeweled birds, bronze tablets and more… all for just a tiny sliver of your soul. What do you say?",
         "options": [
           {
             "name": "Accept the deal",
@@ -74,7 +74,7 @@
       },
       {
         "name": "No, I don't use ante",
-        "text": "Ah, a pity. But I have another offer for you - fabulous wealth in exchange for just a tiny sliver of your soul. How does 20,000 gold sound? A fortune fit for a king, I would say! And well-deserved by a mighty and noble adventurer such as yourself. So, do we have a deal?",
+        "text": "Well, I still have something quite magnificent to offer you – fabulous wealth in exchange for just a tiny sliver of your soul. How does 20,000 gold sound? A fortune fit for a king, I would say! And well-deserved by a mighty and noble adventurer such as yourself. So, do we have a deal?",
         "options": [
           {
             "name": "Accept the deal",
@@ -97,10 +97,6 @@
             ]
           }
         ]
-      },
-      {
-        "name": "Leave",
-        "text": ""
       }
     ]
   }
