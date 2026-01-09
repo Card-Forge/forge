@@ -184,7 +184,6 @@ ScryfallCode=ECC
 176 R Woodland Cemetery @Lars Grant-West
 
 [tokens]
-1 copy @Michele Giorgi
 2 w_4_4_elemental_flying @Svetlin Velinov
 3 b_2_2_zombie @Paul Scott Canavan
 4 g_1_1_elf_warrior @William O'Connor
@@ -195,3 +194,6 @@ ScryfallCode=ECC
 9 rg_5_5_elemental @Brad Rigney
 10 gw_x_x_elemental_total_creatures @Mark Winters
 11 c_2_2_scarecrow @Alex Horley-Orlandelli
+
+[other]
+1 copy @Michele Giorgi
