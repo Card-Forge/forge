@@ -116,8 +116,8 @@ public class VentureEffect extends SpellAbilityEffect {
         final Game game = player.getGame();
         Card dungeon = getDungeonCard(sa, player, moveParams);
         String room = dungeon.getCurrentRoom();
-        String nextRoom = null;
 
+        String nextRoom;
         // Determine next room to venture into
         if (room == null || room.isEmpty()) {
             SpellAbility roomSA = dungeon.getTriggers().get(0).getOverridingAbility();
