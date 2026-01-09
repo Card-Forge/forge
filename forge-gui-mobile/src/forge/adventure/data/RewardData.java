@@ -107,7 +107,7 @@ public class RewardData implements Serializable {
         if (configData.allowedEditions != null && configData.allowedEditions.length > 0) {
             allCards = IterableUtil.filter(allCards, PaperCardPredicates.printedInAnyEditions(configData.allowedEditions));
         } else if (configData.restrictedEditions != null && configData.restrictedEditions.length > 0) {
-            allCards = IterableUtil.filter(allCards, PaperCardPredicates.onlyPrintedInEditions(configData.restrictedEditions).negate());
+            allCards = IterableUtil.filter(allCards, PaperCardPredicates.isObtainableNotRestricted(configData.restrictedEditions));
         } else {
             allCards = IterableUtil.filter(allCards, PaperCardPredicates.isObtainableAnyEdition());
         }
