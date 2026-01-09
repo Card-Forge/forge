@@ -81,18 +81,28 @@ public class CostReveal extends CostPartWithList {
 
         if (this.payCostFromSource()) {
             return revealFrom.contains(source.getLastKnownZone().getZoneType());
-        } else if (this.getType().equals("Hand")) {
+        }
+        if (this.getType().equals("Hand")) {
             return true;
-        } else if (this.getType().equals("SameColor")) {
+        }
+        if (this.getType().equals("SameColor")) {
             for (final Card card : handList) {
                 if (CardLists.count(handList, CardPredicates.sharesColorWith(card)) >= amount) {
                     return true;
                 }
             }
             return false;
-        } else {
-            return amount <= getMaxAmountX(ability, payer, effect);
         }
+        // currently only creatures (Celestial Reunion)
+        if (this.getType().endsWith("ChosenType")) {
+            for (final Card card : handList) {
+                if (CardLists.count(handList, CardPredicates.sharesCreatureTypeWith(card)) >= amount) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return amount <= getMaxAmountX(ability, payer, effect);
     }
 
     @Override
