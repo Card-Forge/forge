@@ -392,10 +392,10 @@
     "description": "Start with a 1/1 Human Wizard in play."
   },
   {
-    "name": "Tawnos's Hat",
+    "name": "Tawnos's Helm",
     "description": "Pay 2 and tap to make a creature with power 2 or less unblockable.",
     "equipmentSlot": "Neck",
-    "iconName": "TawnossWand",
+    "iconName": "TawnossHelm",
     "cost": 3000,
     "effect": {
       "startBattleWithCard": [
@@ -918,10 +918,10 @@
     }
   },
   {
-    "name": "Spine Whip",
+    "name": "Spine Staff",
     "equipmentSlot": "Right",
     "cost": 3000,
-    "iconName": "DarkArmor",
+    "iconName": "SpineStaff",
     "effect": {
       "startBattleWithCard": [
         "Skeletal Snake|POR"
@@ -1385,9 +1385,9 @@
     }
   },
   {
-    "name": "Hivecaller's Horn",
+    "name": "Hivecaller's Staff",
     "equipmentSlot": "Left",
-    "iconName": "HivecallersHelm",
+    "iconName": "HivecallersStaff",
     "effect": {
       "startBattleWithCard": [
         "The Hive|LEA"
@@ -1719,9 +1719,9 @@
     "description": "Pay 3 and tap to untap target creature."
   },
   {
-    "name": "Gladiator's Gladius",
+    "name": "Gladiator's Cestus",
     "equipmentSlot": "Right",
-    "iconName": "GladiatorsGreaves",
+    "iconName": "GladiatorsCestus",
     "effect": {
       "startBattleWithCard": [
         "Arena|PHPR"
@@ -1809,9 +1809,9 @@
     "description": "+2 life. Pay 2 and tap to mill opponent 2 cards."
   },
   {
-    "name": "War Beast Reins",
+    "name": "War Beast Gauntlet",
     "equipmentSlot": "Right",
-    "iconName": "WarBeastRidersBoots",
+    "iconName": "WarBeastGauntlet",
     "effect": {
       "startBattleWithCard": [
         "Phyrexian War Beast|ALL"
@@ -2101,9 +2101,9 @@
     "description": "Pay 3 and tap to make a 0/1 token that sacs for any color of mana."
   },
   {
-    "name": "Rainbow Headdress",
+    "name": "Crown of the Vale",
     "equipmentSlot": "Neck",
-    "iconName": "MapToTheVale",
+    "iconName": "CrownOfTheVale",
     "effect": {
       "startBattleWithCard": [
         "Rainbow Vale|FEM"
@@ -2341,9 +2341,9 @@
     "description": "Gives each player a +1/+1 counter each turn."
   },
   {
-    "name": "Bog Glider",
+    "name": "Bog Glider Glove",
     "equipmentSlot": "Right",
-    "iconName": "BogGliderGreaves",
+    "iconName": "BogGliderGlove",
     "effect": {
       "lifeModifier": -2,
       "startBattleWithCard": [
@@ -2388,9 +2388,9 @@
     "cost": 12000
   },
   {
-    "name": "Headdress of Paradise",
+    "name": "Circlet of Paradise",
     "equipmentSlot": "Neck",
-    "iconName": "MaptoParadise",
+    "iconName": "CircletOfParadise",
     "effect": {
       "startBattleWithCard": [
         "Undiscovered Paradise|VIS"
@@ -2421,9 +2421,9 @@
     "description": "A 1/1 Elf Wizard. Pay 3 and tap to reveal hand, give +X/+X for green cards."
   },
   {
-    "name": "Multani's Laurels",
+    "name": "Mask of Multani",
     "equipmentSlot": "Neck",
-    "iconName": "MultanisBoots",
+    "iconName": "MaskOfMultani",
     "effect": {
       "lifeModifier": -5,
       "startBattleWithCard": [
@@ -2433,9 +2433,9 @@
     "description": "-5 life. Draw a card whenever a spell of yours is countered."
   },
   {
-    "name": "Crown of Gaea",
+    "name": "Amulet of Gaea",
     "equipmentSlot": "Neck",
-    "iconName": "GarmentsofGaea",
+    "iconName": "AmuletOfGaea",
     "effect": {
       "startBattleWithCard": [
         "Pulse of Llanowar|INV"
