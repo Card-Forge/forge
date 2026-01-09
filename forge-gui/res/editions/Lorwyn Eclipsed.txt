@@ -431,7 +431,7 @@ ScryfallCode=ECL
 8 wu_1_1_merfolk @Julia Griffin
 9 bg_1_1_worm @Edgar Sánchez Hidalgo
 10 c_a_treasure_sac @Jeff Miracola
-11 mutavault @Mark Poole
 
 [other]
+11 mutavault @Mark Poole
 12 emblem_oko_shadowmoor_scion @Kai Carpenter
