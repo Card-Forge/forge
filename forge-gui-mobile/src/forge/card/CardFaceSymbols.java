@@ -17,10 +17,7 @@
  */
 package forge.card;
 
-import java.util.Map;
-import java.util.Set;
-import java.util.StringTokenizer;
-
+import com.badlogic.gdx.graphics.Color;
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinImage;
@@ -29,6 +26,10 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.gui.error.BugReporter;
 import forge.localinstance.skin.FSkinProp;
+
+import java.util.Map;
+import java.util.Set;
+import java.util.StringTokenizer;
 
 
 public class CardFaceSymbols {
@@ -178,6 +179,15 @@ public class CardFaceSymbols {
                 x += dx;
             }
         }
+        // Show "negative" mana cost caused by perpetual cost reduction effects
+        // This is only relevant for cards with an "X" in the cost
+        if (genericManaCost < 0) {
+            final String sGenericAdjust = Integer.toString(Math.abs(genericManaCost));
+            drawSymbol(sGenericAdjust, g, x, y, imageSize, imageSize);
+            // Give it a yellow border so it doesn't look like the regular generic mana symbol
+            g.drawCircle(3, Color.YELLOW, x + dx / 2, y + dx / 2, imageSize / 2 - 1);
+            x += dx;
+        }
     }
 
     public static void drawColorSet(Graphics g, ColorSet colorSet, float x, float y, final float imageSize) {
@@ -235,6 +245,9 @@ public class CardFaceSymbols {
         g.drawImage(Forge.getAssets().manaImages().get(imageName), x, y, w, h);
     }
 
+    /**
+     * Return width needed to draw mana symbols
+     */
     public static float getWidth(final ManaCost manaCost, float imageSize) {
         return manaCost.getGlyphCount() * imageSize;
     }
