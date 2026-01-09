@@ -1,0 +1,28 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Impaler
+Description=Impaler commands nature's might. Green's biggest, baddest creatures.
+Deck Type=constructed
+Set=S99
+Image=impaler.jpg
+[main]
+6 Forest|S99|1
+6 Forest|S99|2
+5 Forest|S99|3
+2 Bull Hippo|S99
+3 Durkwood Boars|S99
+3 Grizzly Bears|S99
+2 Lone Wolf|S99
+3 Norwood Archers|S99
+1 Pride of Lions|S99
+1 Thorn Elemental|S99
+2 Wild Ox|S99
+2 Monstrous Growth|S99
+2 Nature's Lore|S99
+1 Renewing Touch|S99
+1 Whirlwind|S99
+[sideboard]
