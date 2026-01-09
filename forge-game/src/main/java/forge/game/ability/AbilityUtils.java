@@ -3676,6 +3676,7 @@ public class AbilityUtils {
             return diffCMC.size();
         }
 
+        // shortcut to filter from Defined directly
         if (def.startsWith("Valid")) {
             final String[] splitString = def.split("/", 2);
             String valid = splitString[0].substring(6);
