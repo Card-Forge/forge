@@ -1,6 +1,6 @@
 Name:Greensleeves, Maro-Sorcerer
 ManaCost:3 G G
-Types:Legendary Creature Elemental
+Types:Legendary Creature Elemental Sorcerer
 PT:*/*
 K:Protection:Planeswalker
 K:Protection:Wizard
