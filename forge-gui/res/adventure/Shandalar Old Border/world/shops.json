@@ -478,9 +478,9 @@
 	"sprite": "ElfShop",
 	"restockPrice": 5,
 	"rewards": [
-		{ "count": 1, "type": "Union", "cardUnion": [ { "subTypes": ["Elf"] }, { "cardText": "Elf" }, { "cardText": "Elves" } ], "rarity": ["R"] },
-		{ "count": 3, "type": "Union", "cardUnion": [ { "subTypes": ["Elf"] }, { "cardText": "Elf" }, { "cardText": "Elves" } ], "rarity": ["U"] },
-		{ "count": 4, "type": "Union", "cardUnion": [ { "subTypes": ["Elf"] }, { "cardText": "Elf" }, { "cardText": "Elves" } ], "rarity": ["C"] }
+		{ "count": 1, "type": "Union", "cardUnion": [ { "subTypes": ["Elf"] }, { "cardText": "\\bElf\\b" }, { "cardText": "\\bElves\\b" } ], "rarity": ["R"] },
+		{ "count": 3, "type": "Union", "cardUnion": [ { "subTypes": ["Elf"] }, { "cardText": "\\bElf\\b" }, { "cardText": "\\bElves\\b" } ], "rarity": ["U"] },
+		{ "count": 4, "type": "Union", "cardUnion": [ { "subTypes": ["Elf"] }, { "cardText": "\\bElf\\b" }, { "cardText": "\\bElves\\b" } ], "rarity": ["C"] }
 	]
 	},{                                    
 	"name": "Merfolk",
