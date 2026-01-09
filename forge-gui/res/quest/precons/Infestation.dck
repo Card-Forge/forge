@@ -20,7 +20,9 @@ Image=infestation.jpg
 1 Goblin Matron|7ED
 2 Goblin Raider|7ED
 1 Lightning Blast|7ED
-16 Mountain|7ED
+6 Mountain|7ED|1
+5 Mountain|7ED|2
+5 Mountain|7ED|3
 1 Patagia Golem|7ED
 2 Pillage|7ED
 2 Raging Goblin|7ED
