@@ -8,7 +8,7 @@ SVar:TrigEachOpp:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DB
 SVar:DBChoose:DB$ ChooseCard | Defined$ Remembered | Choices$ Permanent.nonLand+!token | ControlledByPlayer$ Chooser | ChoiceZone$ Battlefield | ImprintChosen$ True | Mandatory$ True | SubAbility$ DBRandom
 SVar:DBRandom:DB$ ChooseCard | Defined$ Remembered | Choices$ Card.nonLand | ControlledByPlayer$ Chooser | ChoiceZone$ Library | AtRandom$ True | ImprintChosen$ True
 SVar:DBExile:DB$ ChangeZone | Defined$ Imprinted | Origin$ Battlefield,Library | Destination$ Exile | SubAbility$ DBDamage | RememberChanged$ True
-SVar:DBDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ Remembered$SumCMC | SubAbility$ DBCleanup
+SVar:DBDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ Remembered$CardManaCost | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True | ClearChosenCard$ True
 DeckHas:Ability$Sacrifice
 Oracle:Whenever Gilded Ambusher attacks, you may sacrifice another nonland permanent. When you do, each opponent exiles a nonland, nontoken permanent they control and a random nonland card from their library, then Gilded Ambusher deals damage to them equal to the total mana value of the cards exiled this way.
