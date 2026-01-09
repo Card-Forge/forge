@@ -1,0 +1,7 @@
+Name:Prideful Feastling
+ManaCost:2 WB
+Types:Creature Shapeshifter
+PT:2/3
+K:Changeling
+K:Lifelink
+Oracle:Changeling (This card is every creature type.)\nLifelink

@@ -1,0 +1,7 @@
+Name:Treefolk Token
+ManaCost:no cost
+Colors:green
+Types:Creature Treefolk
+PT:3/4
+K:Reach
+Oracle:Reach

@@ -5320,7 +5320,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "War Beast Reins"
+        "itemName": "War Beast Gauntlet"
       }
     ],
     "colors": "GB",
@@ -25106,7 +25106,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Rainbow Headdress"
+        "itemName": "Crown of the Vale"
       },
       {
         "type": "shards",
@@ -28073,7 +28073,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Hivecaller's Horn"
+        "itemName": "Hivecaller's Staff"
       },
       {
         "type": "shards",
@@ -32968,7 +32968,7 @@
       },
       {
         "type": "item",
-        "itemName": "Headdress of Paradise",
+        "itemName": "Circlet of Paradise",
         "count": 1,
         "probability": 1
       },
@@ -33131,7 +33131,7 @@
       },
       {
         "type": "item",
-        "itemName": "Multani's Laurels"
+        "itemName": "Mask of Multani"
       }
     ]
   },
@@ -36909,7 +36909,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Bog Glider"
+        "itemName": "Bog Glider Glove"
       }
     ],
     "colors": "B",
@@ -37073,7 +37073,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Crown of Gaea"
+        "itemName": "Amulet of Gaea"
       },
       {
         "type": "life",

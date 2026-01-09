@@ -6924,6 +6924,10 @@
 								"setMapFlag": {
 									"key": ""
 								},
+								"setCharacterFlag": {
+									"key": "noQuest",
+									"val": 0
+								},
 								"issueQuest": "53",
 								"POIReference": ""
 							}

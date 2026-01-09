@@ -1,0 +1,8 @@
+Name:Soul Immolation
+ManaCost:3 R R
+Types:Sorcery
+S:Mode$ RaiseCost | ValidCard$ Card.Self | Activator$ You | Type$ Spell | Cost$ Blight<X> | EffectZone$ All | Description$ As an additional cost to cast this spell, blight X. X can't be greater than the greatest toughness among creatures you control. (Put X -1/-1 counters on a creature you control.)
+A:SP$ DamageAll | NumDmg$ X | Announce$ X | XMaxLimit$ GrTo | ValidPlayers$ Player.Opponent | ValidCards$ Creature.OppCtrl | ValidDescription$ each opponent and each creature they control. | SpellDescription$ CARDNAME deals X damage to each opponent and each creature they control.
+SVar:X:Count$xPaid
+SVar:GrTo:Count$Valid Creature.YouCtrl$GreatestToughness
+Oracle:As an additional cost to cast this spell, blight X. X can't be greater than the greatest toughness among creatures you control. (Put X -1/-1 counters on a creature you control.)\nSoul Immolation deals X damage to each opponent and each creature they control.

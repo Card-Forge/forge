@@ -72,7 +72,7 @@
     "type": "item",
     "count": 1,
     "probability": 0.1,
-    "itemName": "Spine Whip"
+    "itemName": "Spine Staff"
   },
   {
     "type": "item",
@@ -114,7 +114,7 @@
     "type": "item",
     "count": 1,
     "probability": 0.1,
-    "itemName": "Spine Whip"
+    "itemName": "Spine Staff"
   },
   {
     "type": "item",
