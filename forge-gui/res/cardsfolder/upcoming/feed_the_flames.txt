@@ -1,0 +1,5 @@
+Name:Feed the Flames
+ManaCost:3 R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ 5 | ReplaceDyingDefined$ Targeted | SpellDescription$ CARDNAME deals 5 damage to target creature. If that creature would die this turn, exile it instead.
+Oracle:Feed the Flames deals 5 damage to target creature. If that creature would die this turn, exile it instead.

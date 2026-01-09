@@ -1,0 +1,10 @@
+Name:Vinebred Brawler
+ManaCost:2 G
+Types:Creature Elf Berserker
+PT:4/2
+K:CARDNAME must be blocked if able.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever this creature attacks, another target Elf you control gets +2/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Elf.Other+YouCtrl | TgtPrompt$ Select another target Elf you control | NumAtt$ +2 | NumDef$ +1
+SVar:HasAttackEffect:TRUE
+DeckHints:Type$Elf
+Oracle:This creature must be blocked if able.\nWhenever this creature attacks, another target Elf you control gets +2/+1 until end of turn.
