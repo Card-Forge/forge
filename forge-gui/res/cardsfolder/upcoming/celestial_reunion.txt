@@ -9,5 +9,5 @@ SVar:DBChangeZoneAll2:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin
 SVar:DBShuffle:DB$ Shuffle | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
-SVar:Y:Count$Valid Card.ChosenType+IsRemembered
+SVar:Y:Remembered$ Valid Card.ChosenType
 Oracle:As an additional cost to cast this spell, you may choose a creature type and behold two creatures of that type.\nSearch your library for a creature card with mana value X or less, reveal it, put it into your hand, then shuffle. If this spell's additional cost was paid and the revealed card is the chosen type, put that card onto the battlefield instead of putting it into your hand.
