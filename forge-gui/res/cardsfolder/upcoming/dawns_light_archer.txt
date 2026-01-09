@@ -1,0 +1,7 @@
+Name:Dawn's Light Archer
+ManaCost:2 G
+Types:Creature Elf Archer
+PT:4/2
+K:Flash
+K:Reach
+Oracle:Flash\nReach
