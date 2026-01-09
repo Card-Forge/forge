@@ -3,5 +3,5 @@ ManaCost:1 W
 Types:Creature Human Cleric
 PT:1/1
 K:Protection from red
-A:AB$ Protection | Cost$ W | ValidTgts$ Creature | Gains$ red | SpellDescription$ Target creature gains protection from red until end of turn.
+A:AB$ Pump | Cost$ W | ValidTgts$ Creature | KW$ Protection from red | SpellDescription$ Target creature gains protection from red until end of turn.
 Oracle:Protection from red\n{W}: Target creature gains protection from red until end of turn.
