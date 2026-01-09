@@ -2,7 +2,7 @@ Name:Rime Chill
 ManaCost:6 U
 Types:Instant
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ Vivid — This spell costs {1} less to cast for each color among permanents you control.
-A:SP$ Tap | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | SubAbility$ TrigCounter | SpellDescription$ Tap up to two target creatures. Put a stun counter on each of them. Draw a card.
+A:SP$ Tap | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | SubAbility$ DBPutCounter | SpellDescription$ Tap up to two target creatures. Put a stun counter on each of them. Draw a card.
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ STUN | CounterNum$ 1 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw
 SVar:X:Count$Valid Permanent.YouCtrl$Colors
