@@ -1645,7 +1645,7 @@ public class CardFactoryUtil {
             trigger.setSVar("Offspring", "Count$OptionalKeywordAmount");
 
             inst.addTrigger(trigger);
-        } else if (keyword.startsWith("Partner:")) {
+        } else if (keyword.startsWith("Partner with:")) {
             // Partner With
             final String[] k = keyword.split(":");
             final String trigStr = "Mode$ ChangesZone | Destination$ Battlefield " +

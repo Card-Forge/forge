@@ -2,7 +2,7 @@ Name:Amy Pond
 ManaCost:2 R
 Types:Legendary Creature Human
 PT:2/2
-K:Partner:Rory Williams:Rory
+K:Partner with:Rory Williams:Rory
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigRemove | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, choose a suspended card you own and remove that many time counters from it.
 SVar:TrigRemove:DB$ RemoveCounter | Choices$ Card.suspended+YouOwn | ChoiceZone$ Exile | CounterType$ TIME | CounterNum$ X
 SVar:X:TriggerCount$DamageAmount
