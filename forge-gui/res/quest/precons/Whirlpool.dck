@@ -1,0 +1,43 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Whirlpool
+Description=Whirlpool churns through your deck for answers. Blue-red card selection and burn.
+Deck Type=constructed
+Set=APC
+Image=whirlpool.jpg
+[main]
+4 Island|INV|1
+4 Island|INV|2
+4 Island|INV|3
+4 Mountain|INV|1
+4 Mountain|INV|2
+4 Mountain|INV|3
+2 Bloodfire Dwarf|APC
+2 Bloodfire Kavu|APC
+1 Coastal Drake|APC
+1 Dwarven Patrol|APC
+2 Faerie Squadron|INV
+1 Flametongue Kavu|PLS
+1 Metathran Transport|INV
+2 Minotaur Illusionist|APC
+1 Rainbow Crow|INV
+2 Razorfin Hunter|APC
+2 Whirlpool Drake|APC
+3 Whirlpool Rider|APC
+1 Whirlpool Warrior|APC
+1 Bloodfire Infusion|APC
+2 Quicksilver Dagger|APC
+1 Confound|PLS
+1 Exclude|INV
+1 Fire // Ice|APC
+2 Jilt|APC
+1 Opt|INV
+1 Scorching Lava|INV
+2 Stun|TMP
+1 Suffocating Blast|APC
+2 Chromatic Sphere|INV
+[sideboard]

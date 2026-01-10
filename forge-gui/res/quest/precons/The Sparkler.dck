@@ -1,0 +1,41 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=The Sparkler
+Description=The Sparkler combines blue control magic with red direct damage. Counter threats and burn your opponents with lightning and fire.
+Deck Type=constructed
+Set=STH
+Image=the_sparkler.jpg
+[main]
+5 Island|TMP|1
+5 Island|TMP|2
+4 Island|TMP|3
+5 Mountain|TMP|1
+4 Mountain|TMP|2
+4 Mountain|TMP|3
+1 Wall of Tears|STH
+1 Mogg Fanatic|TMP
+1 Wall of Razors|STH
+1 Contempt|STH
+2 Flowstone Blade|STH
+1 Intruder Alarm|STH
+2 Propaganda|TMP
+2 Capsize|TMP
+1 Counterspell|LEA
+1 Evacuation|STH
+3 Lightning Blast|TMP
+3 Mana Leak|STH
+1 Mind Games|STH
+2 Power Sink|LEA
+1 Reins of Power|STH
+1 Searing Touch|TMP
+1 Shatter|LEA
+2 Shock|STH
+2 Spell Blast|LEA
+1 Whispers of the Muse|TMP
+1 Ransack|STH
+2 Fanning the Flames|STH
+[sideboard]

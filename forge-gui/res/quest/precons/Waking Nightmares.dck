@@ -1,0 +1,41 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Waking Nightmares
+Description=Waking Nightmares brings terror to opponents. Black's nightmares combine with red's fury.
+Deck Type=constructed
+Set=TOR
+Image=waking_nightmares.jpg
+[main]
+4 Swamp|ODY|1
+4 Swamp|ODY|2
+4 Swamp|ODY|3
+3 Mountain|ODY|1
+3 Mountain|ODY|2
+3 Mountain|ODY|3
+2 Tainted Peak|TOR
+3 Barbarian Outcast|TOR
+1 Chainer, Dementia Master|TOR
+1 Enslaved Dwarf|TOR
+3 Faceless Butcher|TOR
+1 Gravegouger|TOR
+3 Mesmeric Fiend|TOR
+2 Pardic Collaborator|TOR
+1 Petradon|TOR
+3 Petravark|TOR
+1 Slithery Stalker|TOR
+3 Soul Scourge|TOR
+2 Flame Burst|ODY
+1 Flaming Gambit|TOR
+2 Temporary Insanity|TOR
+2 Firebolt|ODY
+2 Rancid Earth|TOR
+1 Caustic Tar|ODY
+1 Demolish|ODY
+1 Malevolent Awakening|ODY
+2 Pyromania|TOR
+1 Shade's Form|TOR
+[sideboard]

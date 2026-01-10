@@ -1,0 +1,50 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Pandemonium
+Description=Pandemonium brings chaos to the battlefield. Five-color madness with powerful multicolored spells.
+Deck Type=constructed
+Set=APC
+Image=pandemonium.jpg
+[main]
+1 Plains|INV|1
+1 Plains|INV|2
+1 Plains|INV|3
+1 Island|INV|1
+1 Island|INV|2
+1 Island|INV|3
+1 Swamp|INV|1
+1 Swamp|INV|2
+1 Swamp|INV|3
+1 Mountain|INV|1
+1 Mountain|INV|2
+4 Forest|INV|1
+4 Forest|INV|2
+4 Forest|INV|3
+1 Emblazoned Golem|APC
+1 Helionaut|APC
+1 Nomadic Elf|INV
+3 Penumbra Bobcat|APC
+2 Penumbra Kavu|APC
+1 Penumbra Wurm|APC
+2 Quirion Elves|MIR
+1 Quirion Trailblazer|INV
+1 Stratadon|PLS
+2 Urborg Elf|APC
+1 Wayfaring Giant|INV
+2 Exotic Curse|INV
+2 Fertile Ground|USG
+1 Captain's Maneuver|APC
+2 Evasive Action|APC
+3 Harrow|TMP
+1 Order // Chaos|APC
+2 Allied Strategies|PLS
+1 Gaea's Balance|APC
+1 Last Stand|APC
+3 Lay of the Land|APC
+1 Life // Death|APC
+2 Tribal Flames|INV
+[sideboard]

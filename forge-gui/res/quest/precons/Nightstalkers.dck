@@ -1,0 +1,29 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Nightstalkers
+Description=Nightstalkers lurk in shadows. Black discard and creature destruction.
+Deck Type=constructed
+Set=PO2
+Image=nightstalkers.jpg
+[main]
+5 Swamp|PO2
+5 Swamp|PO2
+5 Swamp|PO2
+2 Abyssal Nightstalker|PO2
+2 Brutal Nightstalker|PO2
+2 Dakmor Bat|PO2
+3 Lurking Nightstalker|PO2
+1 Nightstalker Engine|PO2
+2 Predatory Nightstalker|PO2
+3 Prowling Nightstalker|PO2
+2 Raiding Nightstalker|PO2
+1 Ancient Craving|PO2
+2 Cruel Edict|PO2
+2 Hand of Death|PO2
+2 Mind Rot|PO2
+1 Return of the Nightstalkers|PO2
+[sideboard]

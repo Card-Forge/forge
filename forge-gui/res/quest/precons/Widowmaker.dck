@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Widowmaker
+Description=Widowmaker uses blue-black control to slowly strangle opponents. Card advantage and removal ensure victory through attrition.
+Deck Type=constructed
+Set=EXO
+Image=widowmaker.jpg
+[main]
+5 Island|TMP|1
+5 Island|TMP|2
+4 Island|TMP|3
+4 Swamp|TMP|1
+4 Swamp|TMP|2
+3 Swamp|TMP|3
+3 Manta Riders|TMP
+4 Merfolk Looter|EXO
+1 Keeper of the Mind|EXO
+1 Rootwater Hunter|TMP
+1 Thalakos Scout|EXO
+3 Vampire Hounds|EXO
+2 Mind Maggots|EXO
+1 Skyshroud Vampire|TMP
+1 Mindless Automaton|EXO
+1 Null Brooch|EXO
+1 Oath of Scholars|EXO
+1 Treasure Trove|EXO
+1 Capsize|TMP
+2 Counterspell|TMP
+2 Dark Banishing|TMP
+2 Dark Ritual|TMP
+2 Diabolic Edict|TMP
+2 Forbid|EXO
+2 Mana Leak|STH
+2 Necrologia|EXO
+[sideboard]

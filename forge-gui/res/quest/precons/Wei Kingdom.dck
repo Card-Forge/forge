@@ -1,0 +1,30 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Wei Kingdom
+Description=A black deck from Portal Three Kingdoms ruled by the cunning Cao Cao. Assassins and disruption crush your enemies.
+Deck Type=constructed
+Set=PTK
+Image=wei_kingdom.jpg
+[main]
+5 Swamp|PTK|1
+5 Swamp|PTK|2
+5 Swamp|PTK|3
+1 Cao Cao, Lord of Wei|PTK
+2 Cunning Advisor|PTK
+1 Sima Yi, Wei Field Marshal|PTK
+2 Wei Assassins|PTK
+2 Wei Ambush Force|PTK
+2 Wei Elite Companions|PTK
+2 Wei Infantry|PTK
+2 Wei Scout|PTK
+2 Wei Strike Force|PTK
+2 Return to Battle|PTK
+2 Imperial Edict|PTK
+2 Deception|PTK
+2 Ghostly Visit|PTK
+1 Ambition's Cost|PTK
+[sideboard]

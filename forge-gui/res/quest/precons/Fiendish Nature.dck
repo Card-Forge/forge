@@ -17,8 +17,12 @@ Image=fiendish_nature.jpg
 1 Polluted Mire|USG
 2 Expunge|USG
 1 Winding Wurm|USG
-6 Swamp|6ED
-13 Forest|6ED
+2 Swamp|6ED|1
+2 Swamp|6ED|2
+2 Swamp|6ED|3
+5 Forest|6ED|1
+4 Forest|6ED|2
+4 Forest|6ED|3
 1 No Rest for the Wicked|USG
 1 Diabolic Servitude|USG
 1 Victimize|USG
