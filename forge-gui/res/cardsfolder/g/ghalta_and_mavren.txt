@@ -7,7 +7,7 @@ T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigCharm | TriggerZ
 SVar:TrigCharm:DB$ Charm | Choices$ DBDino,DBVampire
 SVar:DBDino:DB$ Token | TokenScript$ g_x_x_dinosaur_trample | TokenPower$ X | TokenToughness$ X | TokenTapped$ True | TokenAttacking$ True | TokenOwner$ You | SpellDescription$ Create a tapped and attacking X/X green Dinosaur creature token with trample, where X is the greatest power among other attacking creatures.
 SVar:DBVampire:DB$ Token | TokenAmount$ Y | TokenScript$ w_1_1_vampire_lifelink | TokenOwner$ You | SpellDescription$ Create X 1/1 white Vampire creature tokens with lifelink, where X is the number of other attacking creatures.
-SVar:X:Count$Valid Creature.YouCtrl+Other+attacking$GreatestPower
+SVar:X:Count$Valid Creature.YouCtrl+Other+attacking$GreatestCardPower
 SVar:Y:Count$Valid Creature.attacking+Other
 DeckHas:Ability$LifeGain|Token
 Oracle:Trample\nWhenever you attack, choose one —\n• Create a tapped and attacking X/X green Dinosaur creature token with trample, where X is the greatest power among other attacking creatures.\n• Create X 1/1 white Vampire creature tokens with lifelink, where X is the number of other attacking creatures.

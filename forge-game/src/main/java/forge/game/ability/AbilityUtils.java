@@ -42,6 +42,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.BinaryOperator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -3631,44 +3632,33 @@ public class AbilityUtils {
      *
      * @param paidList
      *            a {@link forge.game.card.CardCollectionView} object.
-     * @param string
+     * @param def
      *            a {@link java.lang.String} object.
      * @param source
      *            a {@link forge.game.card.Card} object.
      * @return a int.
      */
-    public static int handlePaid(final Iterable<Card> paidList, final String string, final Card source, CardTraitBase ctb) {
+    public static int handlePaid(final Iterable<Card> paidList, final String def, final Card source, final CardTraitBase ctb) {
         if (Iterables.isEmpty(paidList)) {
-            return doXMath(0, CardFactoryUtil.extractOperators(string), source, ctb);
+            return doXMath(0, CardFactoryUtil.extractOperators(def), source, ctb);
         }
-        if (string.startsWith("Amount")) {
-            return doXMath(Iterables.size(paidList), CardFactoryUtil.extractOperators(string), source, ctb);
-        }
-
-        if (string.startsWith("GreatestPower")) {
-            return Aggregates.max(paidList, Card::getNetPower);
-        }
-        if (string.startsWith("GreatestToughness")) {
-            return Aggregates.max(paidList, Card::getNetToughness);
+        if (def.startsWith("Amount")) {
+            return doXMath(Iterables.size(paidList), CardFactoryUtil.extractOperators(def), source, ctb);
         }
 
-        if (string.startsWith("TapPowerValue")) {
+        if (def.startsWith("TapPowerValue")) {
             return CardLists.getTotalPower(paidList, ctb);
         }
 
-        if (string.startsWith("GreatestCMC")) {
-            return Aggregates.max(paidList, Card::getCMC);
-        }
-
-        if (string.equals("Colors")) {
+        if (def.equals("Colors")) {
             return CardUtil.getColorsFromCards(paidList).countColors();
         }
 
-        if (string.startsWith("DifferentCardNames")) {
-            return doXMath(CardLists.getDifferentNamesCount(paidList), CardFactoryUtil.extractOperators(string), source, ctb);
+        if (def.startsWith("DifferentCardNames")) {
+            return doXMath(CardLists.getDifferentNamesCount(paidList), CardFactoryUtil.extractOperators(def), source, ctb);
         }
 
-        if (string.equals("DifferentColorPair")) {
+        if (def.equals("DifferentColorPair")) {
             final Set<ColorSet> diffPair = new HashSet<>();
             for (final Card card : paidList) {
                 if (card.getColor().countColors() == 2) {
@@ -3678,7 +3668,7 @@ public class AbilityUtils {
             return diffPair.size();
         }
 
-        if (string.startsWith("DifferentCMC")) {
+        if (def.startsWith("DifferentCMC")) {
             final Set<Integer> diffCMC = new HashSet<>();
             for (final Card card : paidList) {
                 diffCMC.add(card.getCMC());
@@ -3686,55 +3676,46 @@ public class AbilityUtils {
             return diffCMC.size();
         }
 
-        if (string.startsWith("SumCMC")) {
-            return Aggregates.sum(paidList, Card::getCMC);
-        }
-
-        if (string.startsWith("Valid")) {
-            final String[] splitString = string.split("/", 2);
+        // shortcut to filter from Defined directly
+        if (def.startsWith("Valid")) {
+            final String[] splitString = def.split("/", 2);
             String valid = splitString[0].substring(6);
             final int num = CardLists.getValidCardCount(paidList, valid, source.getController(), source, ctb);
             return doXMath(num, splitString.length > 1 ? splitString[1] : null, source, ctb);
         }
 
-        if (string.startsWith("AllTypes")) {
+        if (def.startsWith("AllTypes")) {
             return countCardTypesFromList(paidList, false) +
                     countSuperTypesFromList(paidList) +
                     countSubTypesFromList(paidList);
         }
 
-        if (string.startsWith("CardTypes")) {
-            return doXMath(countCardTypesFromList(paidList, string.startsWith("CardTypesPermanent")), CardFactoryUtil.extractOperators(string), source, ctb);
+        if (def.startsWith("CardTypes")) {
+            return doXMath(countCardTypesFromList(paidList, def.startsWith("CardTypesPermanent")), CardFactoryUtil.extractOperators(def), source, ctb);
         }
 
-        if (string.startsWith("CreatureType")) {
+        if (def.startsWith("CreatureType")) {
             final Set<String> creatTypes = Sets.newHashSet();
             for (Card card : paidList) {
                 creatTypes.addAll(card.getType().getCreatureTypes());
             }
             // filter out fun types?
-            return doXMath(creatTypes.size(), CardFactoryUtil.extractOperators(string), source, ctb);
+            return doXMath(creatTypes.size(), CardFactoryUtil.extractOperators(def), source, ctb);
         }
 
-        String filteredString = string;
-        Iterable<Card> filteredList = paidList;
-        final String[] filter = filteredString.split("_");
-
-        if (string.startsWith("FilterControlledBy")) {
-            final String pString = filter[0].substring(18);
-            FCollectionView<Player> controllers = getDefinedPlayers(source, pString, ctb);
-            filteredList = CardLists.filterControlledByAsList(filteredList, controllers);
-            filteredString = TextUtil.fastReplace(filteredString, pString, "");
-            filteredString = TextUtil.fastReplace(filteredString, "FilterControlledBy_", "");
+        BinaryOperator<Integer> op;
+        String finalDef;
+        if (def.startsWith("Least")) {
+            op = Integer::min;
+            finalDef = def.substring(5);
+        } else if (def.startsWith("Greatest")) {
+            op = Integer::max;
+            finalDef = def.substring(8);
+        } else {
+            op = Integer::sum;
+            finalDef = def;
         }
-
-        int tot = 0;
-
-        for (final Card c : filteredList) {
-            tot += xCount(c, filteredString, ctb);
-        }
-
-        return tot;
+        return StreamUtil.stream(paidList).map(c -> xCount(c, finalDef, ctb)).reduce(op).get();
     }
 
     private static CardCollectionView getCardListForXCount(final Card c, final Player cc, final String[] sq, CardTraitBase ctb) {
