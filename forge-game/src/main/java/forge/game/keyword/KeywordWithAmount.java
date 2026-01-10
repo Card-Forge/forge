@@ -11,6 +11,11 @@ public class KeywordWithAmount extends KeywordInstance<KeywordWithAmount> {
     }
 
     @Override
+    public String getAmountString() {
+        return withX ? "X" : String.valueOf(amount);
+    }
+
+    @Override
     protected void parse(String details) {
         if (details.startsWith("X")) {
             withX = true;
