@@ -9,10 +9,15 @@ public class KeywordWithAmount extends KeywordInstance<KeywordWithAmount> {
     public int getAmount() {
         return amount;
     }
-
     @Override
     public String getAmountString() {
         return withX ? "X" : String.valueOf(amount);
+    }
+
+    public String getTitle() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getKeyword()).append(" ").append(getAmountString());
+        return sb.toString();
     }
 
     @Override

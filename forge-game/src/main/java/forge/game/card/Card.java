@@ -2634,7 +2634,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     final Cost cost = new Cost(k[1], false);
                     sbLong.append(k[0]).append(" ").append(cost.toSimpleString()).append(" ").append("[").append(k[2]);
                     sbLong.append("/").append(k[3]).append("] ").append("(").append(inst.getReminderText()).append(")");
-                } else if (keyword.startsWith("Modular") || keyword.startsWith("Bloodthirst") || keyword.startsWith("Dredge")
+                } else if (keyword.startsWith("Modular") && inst instanceof Modular modular) {
+                    sbLong.append(modular.getTitle()).append(" (").append(inst.getReminderText()).append(")");
+                } else if (keyword.startsWith("Bloodthirst") || keyword.startsWith("Dredge")
                         || keyword.startsWith("Fabricate") || keyword.startsWith("Soulshift") || keyword.startsWith("Bushido")
                         || keyword.startsWith("Saddle") || keyword.startsWith("Tribute") || keyword.startsWith("Absorb")
                         || keyword.startsWith("Graft") || keyword.startsWith("Fading") || keyword.startsWith("Vanishing:")
