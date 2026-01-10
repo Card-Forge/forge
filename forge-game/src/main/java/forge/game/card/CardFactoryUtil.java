@@ -32,6 +32,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.cost.*;
 import forge.game.event.GameEventCardForetold;
 import forge.game.event.GameEventCardPlotted;
+import forge.game.keyword.Devour;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
@@ -2262,27 +2263,11 @@ public class CardFactoryUtil {
             re.setOverridingAbility(saTransform);
 
             inst.addReplacement(re);
-        } else if (keyword.startsWith("Devour")) {
-            final String[] k = keyword.split(":");
-            final String magnitude = k[1];
-            String valid = "Creature";
-            String type = "creature";
-            StringBuilder sbDesc = new StringBuilder("Devour ");
-            if (k.length > 2 && !k[2].isEmpty()) {
-                valid = k[2];
-                type = valid;
-                if (CardType.isACardType(type)) {
-                    type = type.toLowerCase(Locale.ENGLISH);
-                }
-                sbDesc.append(type).append(" ");
-            }
-            sbDesc.append(magnitude);
-            if (k.length > 3) {
-                sbDesc.append(k[3]);
-            }
+        } else if (keyword.startsWith("Devour") && inst instanceof Devour devour) {
+            String valid = devour.getValidType();
 
             String sacrificeStr = "DB$ Sacrifice | Defined$ You | Amount$ DevourSacX | RememberSacrificed$ True | Optional$ True"
-                    + " | SacValid$ " + valid + ".Other | SacMessage$ another " + type;
+                    + " | SacValid$ " + valid + ".Other | SacMessage$ another " + devour.getTypeDescription();
             // TODO find better way to add Devour N to Player Msg
             // Also better lblDoYouWantSacrifice?
 
@@ -2293,13 +2278,13 @@ public class CardFactoryUtil {
             sacrificeSA.setSVar("DevourSacX", "Count$Valid " + valid + ".YouCtrl+Other");
 
             AbilitySub counterSA = (AbilitySub) AbilityFactory.getAbility(counterStr, card);
-            counterSA.setSVar("DevourX", "Count$RememberedSize/Times." + magnitude);
+            counterSA.setSVar("DevourX", "Count$RememberedSize/Times." + devour.getAmountString());
             sacrificeSA.setSubAbility(counterSA);
 
             AbilitySub cleanupSA = (AbilitySub) AbilityFactory.getAbility(cleanupStr, card);
             counterSA.setSubAbility(cleanupSA);
 
-            String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | Description$ " + sbDesc + " ("+ inst.getReminderText() + ")";
+            String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | Description$ " + devour.getTitle() + " ("+ inst.getReminderText() + ")";
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, host, intrinsic, card);
 
