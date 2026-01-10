@@ -33,6 +33,7 @@ import forge.game.cost.*;
 import forge.game.event.GameEventCardForetold;
 import forge.game.event.GameEventCardPlotted;
 import forge.game.keyword.Devour;
+import forge.game.keyword.Emerge;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
@@ -2896,20 +2897,13 @@ public class CardFactoryUtil {
             newSA.getRestrictions().setZone(ZoneType.Graveyard);
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
-        } else if (keyword.startsWith("Emerge")) {
-            final String[] kw = keyword.split(":");
-            String costStr = kw[1];
-            String validStr = kw.length > 2 ? kw[2] : "Creature";
-            String desc = "(Emerge";
-            if (kw.length > 2) {
-                desc += " from " + kw[2].toLowerCase();
-            }
-            desc += ")";
+        } else if (keyword.startsWith("Emerge") && inst instanceof Emerge emerge) {
+            String desc = "(" + emerge.getTitleWithoutCost()  + ")";
 
             final SpellAbility sa = card.getFirstSpellAbilityWithFallback();
-            final SpellAbility newSA = sa.copyWithDefinedCost(new Cost(costStr, false));
+            final SpellAbility newSA = sa.copyWithDefinedCost(emerge.getCost());
 
-            newSA.getRestrictions().setIsPresent(validStr + ".YouCtrl+CanBeSacrificedBy");
+            newSA.getRestrictions().setIsPresent(emerge.getValidType() + ".YouCtrl+CanBeSacrificedBy");
             newSA.putParam("Secondary", "True");
             newSA.setAlternativeCost(AlternativeCost.Emerge);
 

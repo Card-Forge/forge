@@ -2575,14 +2575,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         }
                     }
                     sbLong.append("\r\n");
-                } else if (keyword.startsWith("Emerge")) {
-                    final String[] k = keyword.split(":");
-                    sbLong.append(k[0]);
-                    if (k.length > 2) {
-                        sbLong.append(" from ").append(k[2].toLowerCase());
-                    }
-                    sbLong.append(" ").append(ManaCostParser.parse(k[1]));
-                    sbLong.append(" (").append(inst.getReminderText()).append(")");
+                } else if (keyword.startsWith("Emerge") && inst instanceof Emerge emerge) {
+                    sbLong.append(emerge.getTitle()).append(" (").append(inst.getReminderText()).append(")");
                     sbLong.append("\r\n");
                 } else if (inst.getKeyword().equals(Keyword.COMPANION)) {
                     sbLong.append("Companion — ");
