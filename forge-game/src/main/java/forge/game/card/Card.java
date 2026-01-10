@@ -2635,13 +2635,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         sbLong.append(rem.toString());
                     }
                     sbLong.append(")");
-                } else if (keyword.startsWith("Devour ")) {
-                    final String[] k = keyword.split(":");
-                    final String[] s = (k[0]).split(" ");
-                    final String t = s[1];
-                    sbLong.append(k[0]).append(" ").append(k[1]).append(" (As this enters, you may ");
-                    sbLong.append("sacrifice any number of ").append(t).append("s. This creature enters ");
-                    sbLong.append("with that many +1/+1 counters on it.)");
                 } else if (keyword.startsWith("Prototype")) {
                     final String[] k = keyword.split(":");
                     final Cost cost = new Cost(k[1], false);

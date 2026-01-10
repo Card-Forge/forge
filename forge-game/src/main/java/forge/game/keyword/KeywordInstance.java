@@ -72,6 +72,9 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
     public int getAmount() {
         return 1;
     }
+    public String getAmountString() {
+        return String.valueOf(getAmount());
+    }
     protected void initialize(String original0, Keyword keyword0, String details) {
         original = original0;
         keyword = keyword0;
