@@ -2,7 +2,7 @@ Name:Impetuous Protege
 ManaCost:2 R
 Types:Creature Human Warrior
 PT:0/4
-K:Partner:Proud Mentor
+K:Partner with:Proud Mentor
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +X/+0 until end of turn, where X is the greatest power among tapped creatures your opponents control.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X
 SVar:X:Count$Valid Creature.tapped+OppCtrl$GreatestCardPower

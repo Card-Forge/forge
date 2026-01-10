@@ -2,7 +2,7 @@ Name:Madame Vastra
 ManaCost:2 G U
 Types:Legendary Creature Lizard Detective
 PT:3/3
-K:Partner:Jenny Flint
+K:Partner with:Jenny Flint
 K:CARDNAME must be blocked if able.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a creature dealt damage by CARDNAME this turn dies, create a Clue token and a Food token.
 SVar:TrigToken:DB$ Token | TokenScript$ c_a_food_sac,c_a_clue_draw | TokenOwner$ You
