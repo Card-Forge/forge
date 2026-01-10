@@ -36,6 +36,7 @@ import forge.game.keyword.Devour;
 import forge.game.keyword.Emerge;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
+import forge.game.keyword.Modular;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
@@ -2441,18 +2442,12 @@ public class CardFactoryUtil {
             re.setOverridingAbility(AbilityFactory.getAbility(sVarMadness, card));
 
             inst.addReplacement(re);
-        } else if (keyword.startsWith("Modular")) {
-            final String[] k = keyword.split(":");
-            final String m = k[1];
+        } else if (keyword.startsWith("Modular") && inst instanceof Modular modular) {
+            final String m = modular.getAmountString();
 
             StringBuilder sb = new StringBuilder("etbCounter:P1P1:");
             sb.append(m).append(":no Condition:");
-            sb.append("Modular ");
-            if (!StringUtils.isNumeric(m)) {
-                sb.append("- ");
-            }
-            sb.append(m);
-            sb.append(" (").append(inst.getReminderText()).append(")");
+            sb.append(modular.getTitle()).append(" (").append(inst.getReminderText()).append(")");
 
             final ReplacementEffect re = makeEtbCounter(sb.toString(), card, intrinsic);
             if ("Sunburst".equals(m)) {
