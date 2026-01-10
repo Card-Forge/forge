@@ -15,6 +15,7 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -289,6 +290,8 @@ public class GameSnapshot {
             toGame.setDayTime(fromGame.getDayTime());
         }
 
+        List<UnorderedEntities> unorderedEntities = Lists.newArrayList();
+
         for(Card fromCard : fromGame.getCardsInGame()) {
             Card newCard = toGame.findById(fromCard.getId());
             Player toPlayer = findBy(toGame, fromCard.getController());
@@ -314,22 +317,17 @@ public class GameSnapshot {
                 }
             }
 
-            if (fromType.equals(ZoneType.Stack)) {
-                toGame.getStackZone().add(newCard, zonePosition);
-                newCard.setZone(toGame.getStackZone());
+            if (zonePosition == 0) {
+                setCardInCopiedGame(toGame, toPlayer, fromCard, newCard, fromType, zonePosition);
             } else {
-                toPlayer.getZone(fromType).add(newCard, zonePosition);
-                newCard.setZone(toPlayer.getZone(fromType));
+                // stash this info
+                unorderedEntities.add(new UnorderedEntities(toPlayer, fromCard, newCard, fromType, zonePosition));
             }
+        }
 
-            // TODO: This is a bit of a mess. We should probably have a method to copy a card's state.
-            newCard.setGameTimestamp(fromCard.getGameTimestamp());
-            newCard.setLayerTimestamp(fromCard.getLayerTimestamp());
-            newCard.setTapped(fromCard.isTapped());
-            newCard.setFaceDown(fromCard.isFaceDown());
-            newCard.setManifested(fromCard.getManifestedSA());
-            newCard.setSickness(fromCard.hasSickness());
-            newCard.setState(fromCard.getCurrentStateName(), false);
+        Collections.sort(unorderedEntities);
+        for(UnorderedEntities ue : unorderedEntities) {
+            setCardInCopiedGame(toGame, ue.toPlayer, ue.fromCard, ue.newCard, ue.fromType, ue.zonePosition);
         }
 
         // This loop happens later to make sure all cards are in the correct zone first
@@ -369,6 +367,29 @@ public class GameSnapshot {
         return newCard;
     }
 
+    private void setCardInCopiedGame(Game toGame, Player toPlayer, Card fromCard, Card newCard, ZoneType fromType, int zonePosition) {
+        // Things should be sorted before getting here, so don't try to put it into its zone position
+        //System.out.println("Setting card " + newCard + " at position " + zonePosition + " in " + toPlayer + "'s "+ fromType);
+        if (fromType.equals(ZoneType.Stack)) {
+            toGame.getStackZone().add(newCard);
+            newCard.setZone(toGame.getStackZone());
+        } else {
+            toPlayer.getZone(fromType).add(newCard);
+            newCard.setZone(toPlayer.getZone(fromType));
+        }
+
+        // TODO: This is a bit of a mess. We should probably have a method to copy a card's state.
+        newCard.setGameTimestamp(fromCard.getGameTimestamp());
+        newCard.setLayerTimestamp(fromCard.getLayerTimestamp());
+        newCard.setTapped(fromCard.isTapped());
+        newCard.setFaceDown(fromCard.isFaceDown());
+        newCard.setManifested(fromCard.getManifestedSA());
+        newCard.setSickness(fromCard.hasSickness());
+        //newCard.setForetold(fromCard.isForetold());
+        //newCard.setForetoldCostByEffect(fromCard.isForetoldCostByEffect());
+        newCard.setState(fromCard.getCurrentStateName(), false);
+    }
+
     private static SpellAbility findSAInCard(SpellAbility sa, Card c) {
         String saDesc = sa.getDescription();
         for (SpellAbility cardSa : c.getAllSpellAbilities()) {
@@ -386,6 +407,15 @@ public class GameSnapshot {
 
 
         return null;
+    }
+
+    private record UnorderedEntities(
+        Player toPlayer, Card fromCard, Card newCard, ZoneType fromType, int zonePosition
+    ) implements Comparable<UnorderedEntities> {
+        @Override
+        public int compareTo(UnorderedEntities o) {
+            return Integer.compare(this.zonePosition, o.zonePosition);
+        }
     }
 
     public class SnapshotEntityMap implements IEntityMap {
