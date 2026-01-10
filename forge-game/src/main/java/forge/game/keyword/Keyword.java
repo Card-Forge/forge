@@ -14,7 +14,7 @@ public enum Keyword {
     AFFLICT("Afflict", KeywordWithAmount.class, false, "Whenever this creature becomes blocked, defending player loses %d life."),
     AFTERLIFE("Afterlife", KeywordWithAmount.class, false, "When this creature dies, create {%1$d:1/1 white and black Spirit creature token} with flying."),
     AFTERMATH("Aftermath", SimpleKeyword.class, false, "Cast this spell only from your graveyard. Then exile it."),
-    AMPLIFY("Amplify", KeywordWithAmountAndType.class, false, "As this creature enters, put {%d:+1/+1 counter} on it for each %s card you reveal in your hand."),
+    AMPLIFY("Amplify", Amplify.class, false, "As this creature enters, put {%d:+1/+1 counter} on it for each %s card you reveal in your hand."),
     ANNIHILATOR("Annihilator", KeywordWithAmount.class, false, "Whenever this creature attacks, defending player sacrifices {%d:permanent}."),
     ASCEND("Ascend", SimpleKeyword.class, true, "If you control ten or more permanents, you get the city's blessing for the rest of the game."),
     ASSIST("Assist", SimpleKeyword.class, true, "Another player can pay up to %s of this spell's cost."),
