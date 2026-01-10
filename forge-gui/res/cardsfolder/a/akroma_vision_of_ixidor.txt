@@ -20,6 +20,6 @@ SVar:DBProtection:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl+withProtectio
 SVar:DBReach:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl+withReach | NumAtt$ +1 | NumDef$ +1 | SubAbility$ DBTrample
 SVar:DBTrample:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl+withTrample | NumAtt$ +1 | NumDef$ +1 | SubAbility$ DBVigilance
 SVar:DBVigilance:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl+withVigilance | NumAtt$ +1 | NumDef$ +1 | SubAbility$ DBPartner
-SVar:DBPartner:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl+withPartner | NumAtt$ +1 | NumDef$ +1
+SVar:DBPartner:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl+withPartner,Creature.Other+YouCtrl+withPartnerWith | NumAtt$ +1 | NumDef$ +1
 K:Partner
 Oracle:Flying, first strike, vigilance, trample\nAt the beginning of each combat, until end of turn, each other creature you control gets +1/+1 if it has flying, +1/+1 if it has first strike, and so on for double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, protection, reach, trample, vigilance, and partner.\nPartner
