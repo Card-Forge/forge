@@ -2577,7 +2577,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 } else if (keyword.startsWith("Strive") || keyword.startsWith("Escalate")
                         || keyword.startsWith("ETBReplacement")
                         || keyword.startsWith("Affinity")) {
-                } else if (keyword.equals("Provoke") || keyword.equals("Ingest") || keyword.equals("Unleash")
+                } else if ((keyword.equals("Provoke") || keyword.equals("Ingest") || keyword.equals("Unleash")
                         || keyword.equals("Soulbond") || keyword.equals("Retrace")
                         || keyword.equals("Living Weapon") || keyword.equals("Myriad") || keyword.equals("Exploit")
                         || keyword.equals("Changeling") || keyword.equals("Delve") || keyword.equals("Decayed")
@@ -2588,36 +2588,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.equals("Ascend") || keyword.equals("Umbra armor")
                         || keyword.equals("Battle cry") || keyword.equals("Devoid") || keyword.equals("Riot")
                         || keyword.equals("Daybound") || keyword.equals("Nightbound")
-                        || keyword.equals("Choose a Background")
+                        || keyword.equals("Choose a Background") || keyword.equals("Compleated")
                         || keyword.equals("Space sculptor") || keyword.equals("Doctor's companion")
-                        || keyword.equals("Start your engines")) {
-                    sbLong.append(keyword).append(" (").append(inst.getReminderText()).append(")");
+                        || keyword.equals("Start your engines")) && inst instanceof SimpleKeyword simple) {
+                    sbLong.append(simple.getTitle()).append(" (").append(inst.getReminderText()).append(")");
                 } else if (keyword.startsWith("Partner with:")) {
                     final String[] k = keyword.split(":");
                     sbLong.append("Partner with ").append(k[1]).append(" (").append(inst.getReminderText()).append(")");
                 } else if (keyword.startsWith("Partner") && inst instanceof Partner partner) {
                     sbLong.append(partner.getTitle()).append(" (").append(inst.getReminderText()).append(")");
-                } else if (keyword.equals("Compleated")) {
-                    sbLong.append(keyword).append(" (");
-                    final ManaCost mc = this.getManaCost();
-                    if (mc != ManaCost.NO_COST && mc.hasPhyrexian()) {
-                        String pip = mc.getFirstPhyrexianPip();
-                        String[] parts = pip.substring(1, pip.length() - 1).split("/");
-                        final StringBuilder rem = new StringBuilder();
-                        rem.append(pip).append(" can be paid with {").append(parts[0]).append("}");
-                        if (parts.length > 2) {
-                            rem.append(", {").append(parts[1]).append("},");
-                        }
-                        rem.append(" or 2 life. ");
-                        if (mc.getPhyrexianCount() > 1) {
-                            rem.append("For each ").append(pip).append(" paid with life,");
-                        } else {
-                            rem.append("If life was paid,");
-                        }
-                        rem.append(" this planeswalker enters with two fewer loyalty counters.");
-                        sbLong.append(rem.toString());
-                    }
-                    sbLong.append(")");
                 } else if (keyword.startsWith("Prototype")) {
                     final String[] k = keyword.split(":");
                     final Cost cost = new Cost(k[1], false);
