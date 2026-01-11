@@ -2633,19 +2633,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     final Cost cost = new Cost(k[1], false);
                     sbLong.append(k[0]).append(" ").append(cost.toSimpleString()).append(" ").append("[").append(k[2]);
                     sbLong.append("/").append(k[3]).append("] ").append("(").append(inst.getReminderText()).append(")");
-                } else if (keyword.startsWith("Modular") && inst instanceof Modular modular) {
-                    sbLong.append(modular.getTitle()).append(" (").append(inst.getReminderText()).append(")");
-                } else if (keyword.startsWith("Vanishing") && inst instanceof Vanishing vanishing) {
-                    sbLong.append(vanishing.getTitle()).append(" (").append(inst.getReminderText()).append(")");
-                } else if (keyword.startsWith("Bloodthirst") || keyword.startsWith("Dredge")
+                } else if ((keyword.startsWith("Modular") || keyword.startsWith("Bloodthirst") || keyword.startsWith("Dredge")
                         || keyword.startsWith("Fabricate") || keyword.startsWith("Soulshift") || keyword.startsWith("Bushido")
                         || keyword.startsWith("Saddle") || keyword.startsWith("Tribute") || keyword.startsWith("Absorb")
-                        || keyword.startsWith("Graft") || keyword.startsWith("Fading")
+                        || keyword.startsWith("Graft") || keyword.startsWith("Fading") || keyword.startsWith("Vanishing:")
                         || keyword.startsWith("Afterlife") || keyword.startsWith("Hideaway") || keyword.startsWith("Toxic")
                         || keyword.startsWith("Afflict") || keyword.startsWith ("Poisonous") || keyword.startsWith("Rampage")
-                        || keyword.startsWith("Renown") || keyword.startsWith("Annihilator") || keyword.startsWith("Ripple")) {
-                    final String[] k = keyword.split(":");
-                    sbLong.append(k[0]).append(" ").append(k[1]).append(" (").append(inst.getReminderText()).append(")");
+                        || keyword.startsWith("Renown") || keyword.startsWith("Annihilator") || keyword.startsWith("Ripple"))
+                        && inst instanceof KeywordWithAmount withAmount) {
+                    sbLong.append(withAmount.getTitle()).append(" (").append(inst.getReminderText()).append(")");
                 } else if (keyword.startsWith("Crew")) {
                     final String[] k = keyword.split(":");
                     sbLong.append("Crew ").append(k[1]);
