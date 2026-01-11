@@ -7785,7 +7785,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     // Counts number of instances of a given keyword.
-    private static final class CountKeywordVisitor extends Visitor<KeywordInterface> {
+    private static final class CountKeywordVisitor implements Visitor<KeywordInterface> {
         private String keyword;
         private int count;
 
@@ -7808,7 +7808,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
     }
 
-    private static final class HasKeywordVisitor extends Visitor<KeywordInterface> {
+    private static final class HasKeywordVisitor implements Visitor<KeywordInterface> {
         private String keyword;
         private final MutableBoolean result = new MutableBoolean(false);
 
@@ -7832,7 +7832,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     // Collects all the keywords into a list.
-    private static final class ListKeywordVisitor extends Visitor<KeywordInterface> {
+    private static final class ListKeywordVisitor implements Visitor<KeywordInterface> {
         private List<KeywordInterface> keywords = Lists.newArrayList();
 
         @Override
