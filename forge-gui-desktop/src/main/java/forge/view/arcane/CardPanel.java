@@ -1176,10 +1176,10 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ANIMATE_FLYING)) {
              return false;
         }
-        if (!card.getCurrentState().hasFlying()) {
+        if (card == null || !card.getCurrentState().hasFlying()) {
             return false;
         }
-        if (card == null || isAnimationPanel || !displayEnabled) {
+        if (isAnimationPanel || !displayEnabled) {
             return false;
         }
         if (!ZoneType.Battlefield.equals(card.getZone())) {
