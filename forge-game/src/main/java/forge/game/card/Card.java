@@ -2466,15 +2466,22 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 } else if (keyword.startsWith("Enchant") && inst instanceof KeywordWithType kwt) {
                     String desc = kwt.getTypeDescription();
                     sbLong.append("Enchant ").append(desc).append("\r\n");
-                } else if (keyword.startsWith("Morph") || keyword.startsWith("Megamorph")
+                } else if ((keyword.startsWith("Morph") || keyword.startsWith("Megamorph")
+                        || keyword.startsWith("Multikicker")
                         || keyword.startsWith("Disguise") || keyword.startsWith("Reflect")
-                        || keyword.startsWith("Escape") || keyword.startsWith("Foretell:")
-                        || keyword.startsWith("Madness:")|| keyword.startsWith("Recover")
-                        || keyword.startsWith("Reconfigure") || keyword.startsWith("Squad")
-                        || keyword.startsWith("Miracle") || keyword.startsWith("More Than Meets the Eye")
+                        || keyword.startsWith("Mayhem") || keyword.startsWith("Recover")
+                        || keyword.startsWith("Sneak") || keyword.startsWith("Squad")
+                        || keyword.startsWith("Emerge") || keyword.startsWith("More Than Meets the Eye")
                         || keyword.startsWith("Level up") || keyword.startsWith("Plot")
-                        || keyword.startsWith("Offspring") || keyword.startsWith("Mayhem")
-                        || keyword.startsWith("Sneak")) {
+                        || keyword.startsWith("Echo")
+                        ) && inst instanceof KeywordWithCost withCost) {
+                    sbLong.append(withCost.getTitle()).append(" (").append(inst.getReminderText()).append(")");
+                    sbLong.append("\r\n");
+                } else if (keyword.startsWith("Escape") || keyword.startsWith("Foretell:")
+                        || keyword.startsWith("Madness:")
+                        || keyword.startsWith("Reconfigure")
+                        || keyword.startsWith("Miracle")
+                        || keyword.startsWith("Offspring")) {
                     String[] k = keyword.split(":");
                     sbLong.append(k[0]);
                     if (k.length > 1) {
@@ -2512,16 +2519,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         }
                         sbLong.append(" (").append(inst.getReminderText()).append(")");
                         sbLong.append("\r\n");
-                    } else if (keyword.equals("Mayhem")) {
-                        sbLong.append(" (").append(inst.getReminderText()).append(")");
-                        sbLong.append("\r\n");
                     }
-                } else if (keyword.startsWith("Echo")) {
-                    sbLong.append("Echo ");
-                    final String[] upkeepCostParams = keyword.split(":");
-                    sbLong.append(upkeepCostParams.length > 2 ? "— " + upkeepCostParams[2] : ManaCostParser.parse(upkeepCostParams[1]));
-                    sbLong.append(" (At the beginning of your upkeep, if CARDNAME came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)");
-                    sbLong.append("\r\n");
                 } else if (keyword.startsWith("Cumulative upkeep")) {
                     sbLong.append("Cumulative upkeep ");
                     final String[] upkeepCostParams = keyword.split(":");
@@ -2539,11 +2537,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         sbLong.append(n + 1 == costs.length ? ".\r\n\r\n" : n + 2 == costs.length && costs.length > 2
                                 ? ", or " : n + 2 == costs.length ? " or " : ", ");
                     }
-                } else if (keyword.startsWith("Multikicker")) {
-                    final String[] n = keyword.split(":");
-                    final Cost cost = new Cost(n[1], false);
-                    sbLong.append("Multikicker ").append(cost.toSimpleString());
-                    sbLong.append(" (").append(inst.getReminderText()).append(")").append("\r\n");
                 } else if (keyword.startsWith("Kicker")) {
                     sbLong.append(kickerDesc(keyword, inst.getReminderText())).append("\r\n");
                 } else if (keyword.startsWith("Trample:")) {
@@ -2574,9 +2567,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                             sbLong.append(CardType.getPluralType(k[1]));
                         }
                     }
-                    sbLong.append("\r\n");
-                } else if (keyword.startsWith("Emerge") && inst instanceof Emerge emerge) {
-                    sbLong.append(emerge.getTitle()).append(" (").append(inst.getReminderText()).append(")");
                     sbLong.append("\r\n");
                 } else if (inst.getKeyword().equals(Keyword.COMPANION)) {
                     sbLong.append("Companion — ");
@@ -3258,10 +3248,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     sbAfter.append(" (").append(inst.getReminderText()).append(")").append("\r\n");
                 } else if (keyword.startsWith("Starting intensity")) {
                     sbAfter.append(TextUtil.fastReplace(keyword, ":", " ")).append("\r\n");
-                } else if (keyword.startsWith("Escalate") || keyword.startsWith("Buyback")
+                } else if ((keyword.startsWith("Escalate") || keyword.startsWith("Buyback")
                         || keyword.startsWith("Freerunning") || keyword.startsWith("Prowl")
-                        || keyword.startsWith("Sneak") || keyword.startsWith("Cleave")) {
-                    sbBefore.append(formatKeywordWithCost(inst));
+                        || keyword.startsWith("Sneak") || keyword.startsWith("Cleave"))
+                    && inst instanceof KeywordWithCost withCost) {
+                    sbBefore.append(withCost.getTitle()).append(" (").append(inst.getReminderText()).append(")");
                     sbBefore.append("\r\n");
                 } else if (keyword.startsWith("Multikicker")) {
                     final String[] n = keyword.split(":");
@@ -3285,12 +3276,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     // Pseudo keywords, only print Reminder
                     sbBefore.append(inst.getReminderText());
                     sbBefore.append("\r\n");
-                } else if (keyword.startsWith("Entwine") || keyword.startsWith("Madness")
+                } else if ((keyword.startsWith("Entwine") || keyword.startsWith("Madness")
                         || keyword.startsWith("Miracle") || keyword.startsWith("Recover")
                         || keyword.startsWith("Escape") || keyword.startsWith("Foretell:")
                         || keyword.startsWith("Disturb") || keyword.startsWith("Overload")
-                        || keyword.startsWith("Plot") || keyword.startsWith("Mayhem")) {
-                    sbAfter.append(formatKeywordWithCost(inst));
+                        || keyword.startsWith("Plot") || keyword.startsWith("Mayhem"))
+                        && inst instanceof KeywordWithCost withCost) {
+                    sbAfter.append(withCost.getTitle()).append(" (").append(inst.getReminderText()).append(")");
                     sbAfter.append("\r\n");
                 } else if (keyword.equals("Gift")) {
                     sbBefore.append(keyword);
@@ -3396,26 +3388,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         sb.append(CardTranslation.translateMultipleDescriptionText(sbAfter.toString(), state));
         return sb;
-    }
-
-    private String formatKeywordWithCost(final KeywordInterface inst) {
-        final String keyword = inst.getOriginal();
-        final String[] k = keyword.split(":");
-        final Cost mCost;
-        if (k.length < 2 || "ManaCost".equals(k[1])) {
-            mCost = new Cost(getManaCost(), false);
-        } else {
-            mCost = new Cost(k[1], false);
-        }
-
-        StringBuilder sbCost = new StringBuilder(k[0]);
-        if (mCost.isOnlyManaCost()) {
-            sbCost.append(" ");
-        } else {
-            sbCost.append("—");
-        }
-        sbCost.append(mCost.toSimpleString());
-        return sbCost + " (" + inst.getReminderText() + ")";
     }
 
     private String formatSpellAbility(final SpellAbility sa) {
