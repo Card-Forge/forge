@@ -574,8 +574,7 @@ public class AbilityUtils {
         }
 
         // All the following only work for SpellAbilities
-        else if (ability instanceof SpellAbility) {
-            final SpellAbility sa = (SpellAbility) ability;
+        else if (ability instanceof SpellAbility sa) {
             // Player attribute counting
             if (calcX[0].startsWith("TargetedPlayer")) {
                 final List<Player> players = new ArrayList<>();
@@ -2027,7 +2026,7 @@ public class AbilityUtils {
         if (game != null) {
             // CR 608.2h
             // we'll want to avoid grabbing LKI for params that can handle internal information
-            // e. g. the remembering on Xenagos, the Reveler
+            // e.g. the remembering on Xenagos, the Reveler
             c = game.getChangeZoneLKIInfo(c);
         }
 
@@ -2254,9 +2253,6 @@ public class AbilityUtils {
         if (sq[0].equals("Delirium")) {
             return doXMath(calculateAmount(c, sq[player.hasDelirium() ? 1 : 2], ctb), expr, c, ctb);
         }
-        if (sq[0].equals("MaxSpeed")) {
-            return doXMath(calculateAmount(c, sq[player.maxSpeed() ? 1 : 2], ctb), expr, c, ctb);
-        }
         if (sq[0].equals("FatefulHour")) {
             return doXMath(calculateAmount(c, sq[player.getLife() <= 5 ? 1 : 2], ctb), expr, c, ctb);
         }
@@ -2301,7 +2297,6 @@ public class AbilityUtils {
         if (sq[0].equals("YouDrewThisTurn")) {
             return doXMath(player.getNumDrawnThisTurn(), expr, c, ctb);
         }
-
         if (sq[0].equals("YouDrewLastTurn")) {
             return doXMath(player.getNumDrawnLastTurn(), expr, c, ctb);
         }
@@ -2313,7 +2308,6 @@ public class AbilityUtils {
         if (sq[0].equals("YouRollThisTurn")) {
             return doXMath(player.getNumRollsThisTurn(), expr, c, ctb);
         }
-
         if (sq[0].startsWith("YouRolledThisTurn")) {
             int n = calculateAmount(c, sq[0].substring(17), ctb);
             return doXMath(Collections.frequency(player.getDiceRollsThisTurn(), n), expr, c, ctb);
@@ -2334,6 +2328,10 @@ public class AbilityUtils {
         if (sq[0].equals("YourSpeed")) {
             return doXMath(player.getSpeed(), expr, c, ctb);
         }
+        if (sq[0].equals("MaxSpeed")) {
+            return doXMath(calculateAmount(c, sq[player.maxSpeed() ? 1 : 2], ctb), expr, c, ctb);
+        }
+
         if (sq[0].equals("AllFourBend")) {
             return doXMath(calculateAmount(c, sq[player.hasAllElementBend() ? 1 : 2], ctb), expr, c, ctb);
         }
@@ -2350,7 +2348,6 @@ public class AbilityUtils {
             // only used by Opal Palace, and it does add the trigger to the card
             return doXMath(player.getCommanderCast(c), expr, c, ctb);
         }
-
         if (l[0].startsWith("TotalCommanderCastFromCommandZone")) {
             return doXMath(player.getTotalCommanderCast(), expr, c, ctb);
         }
@@ -2527,8 +2524,6 @@ public class AbilityUtils {
             final String validFilter = workingCopy[1];
             return doXMath(CardLists.getValidCardCount(game.getLeftBattlefieldThisTurn(), validFilter, player, c, ctb), expr, c, ctb);
         }
-
-        // Count$LeftBattlefieldThisTurn <Valid>
         if (sq[0].startsWith("LeftGraveyardThisTurn")) {
             final String[] workingCopy = l[0].split(" ", 2);
             final String validFilter = workingCopy[1];
@@ -2538,7 +2533,6 @@ public class AbilityUtils {
         if (sq[0].equals("UnlockedDoors")) {
             return doXMath(player.getUnlockedDoors().size(), expr, c, ctb);
         }
-
         // Counts the distinct names of unlocked doors. Used for the "Promising Stairs"
         if (sq[0].equals("DistinctUnlockedDoors")) {
             return doXMath(Sets.newHashSet(player.getUnlockedDoors()).size(), expr, c, ctb);

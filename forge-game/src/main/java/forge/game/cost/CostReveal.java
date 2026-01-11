@@ -37,7 +37,7 @@ public class CostReveal extends CostPartWithList {
      */
     private static final long serialVersionUID = 1L;
 
-    private List<ZoneType> revealFrom = Arrays.asList(ZoneType.Hand);
+    protected List<ZoneType> revealFrom = Arrays.asList(ZoneType.Hand);
 
     public CostReveal(final String amount, final String type, final String description) {
         super(amount, type, description);
@@ -73,7 +73,7 @@ public class CostReveal extends CostPartWithList {
     }
 
     @Override
-    public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
+    public boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
 
         CardCollectionView handList = payer.getCardsIn(revealFrom);
@@ -88,15 +88,6 @@ public class CostReveal extends CostPartWithList {
         if (this.getType().equals("SameColor")) {
             for (final Card card : handList) {
                 if (CardLists.count(handList, CardPredicates.sharesColorWith(card)) >= amount) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        // currently only creatures (Celestial Reunion)
-        if (this.getType().endsWith("ChosenType")) {
-            for (final Card card : handList) {
-                if (CardLists.count(handList, CardPredicates.sharesCreatureTypeWith(card)) >= amount) {
                     return true;
                 }
             }

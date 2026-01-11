@@ -1038,7 +1038,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public void setGamePieceType(GamePieceType gamePieceType) {
         this.gamePieceType = gamePieceType;
         this.view.updateGamePieceType(this);
-        this.view.updateToken(this);
+        updateTokenView();
     }
 
     public GamePieceType getGamePieceType() {
