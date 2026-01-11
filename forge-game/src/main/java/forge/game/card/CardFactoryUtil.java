@@ -2715,7 +2715,7 @@ public class CardFactoryUtil {
 
             awakenSub.setSubAbility(animateSub);
             awakenSpell.appendSubAbility(awakenSub);
-            awakenSpell.setDescription(awaken.getTitle());
+            awakenSpell.setDescription(awaken.getTitle() + "(" + inst.getReminderText() + ")");
             awakenSpell.setAlternativeCost(AlternativeCost.Awaken);
             awakenSpell.setIntrinsic(intrinsic);
             inst.addSpellAbility(awakenSpell);
