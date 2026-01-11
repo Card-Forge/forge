@@ -12,13 +12,7 @@ public class Emerge extends KeywordWithCost {
     public String getValidType() { return type == null ? "Creature" : type; }
     public String getTypeDescription() { return descType; }
 
-    public String getTitle() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getTitleWithoutCost());
-        sb.append(" ").append(cost.toSimpleString());
-        return sb.toString();
-    }
-
+    @Override
     public String getTitleWithoutCost() {
         StringBuilder sb = new StringBuilder();
         sb.append(getKeyword());
