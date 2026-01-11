@@ -32,11 +32,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.cost.*;
 import forge.game.event.GameEventCardForetold;
 import forge.game.event.GameEventCardPlotted;
-import forge.game.keyword.Devour;
-import forge.game.keyword.Emerge;
-import forge.game.keyword.Keyword;
-import forge.game.keyword.KeywordInterface;
-import forge.game.keyword.Modular;
+import forge.game.keyword.*;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
@@ -1979,24 +1975,17 @@ public class CardFactoryUtil {
             inst.addTrigger(parsedTrigger);
         } else if (keyword.startsWith("Vanishing")) {
             // Remove Time counter trigger
-            final StringBuilder upkeepTrig = new StringBuilder("Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | " +
-                    "TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE1_TIME");
-            if (keyword.contains(":")) {
-                upkeepTrig.append(" | Secondary$ True");
-            }
-            upkeepTrig.append(" | TriggerDescription$ At the beginning of your upkeep, " +
-                    "if CARDNAME has a time counter on it, remove a time counter from it.");
+            final StringBuilder upkeepTrig = new StringBuilder();
+            upkeepTrig.append("Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE1_TIME");
+            upkeepTrig.append(" | Secondary$ True | TriggerDescription$ At the beginning of your upkeep, if CARDNAME has a time counter on it, remove a time counter from it.");
 
             final String remove = "DB$ RemoveCounter | Defined$ Self | CounterType$ TIME | CounterNum$ 1";
             final Trigger parsedUpkeepTrig = TriggerHandler.parseTrigger(upkeepTrig.toString(), card, intrinsic);
             parsedUpkeepTrig.setOverridingAbility(AbilityFactory.getAbility(remove, card));
 
             // sacrifice trigger
-            final StringBuilder sacTrig = new StringBuilder("Mode$ CounterRemoved | TriggerZones$ Battlefield" +
-                    " | ValidCard$ Card.Self | NewCounterAmount$ 0 | CounterType$ TIME");
-            if (keyword.contains(":")) {
-                sacTrig.append("| Secondary$ True");
-            }
+            final StringBuilder sacTrig = new StringBuilder();
+            sacTrig.append("Mode$ CounterRemoved | TriggerZones$ Battlefield | ValidCard$ Card.Self | NewCounterAmount$ 0 | CounterType$ TIME | Secondary$ True");
             sacTrig.append("| TriggerDescription$ When the last time counter is removed from CARDNAME, sacrifice it.");
 
             final String sac = "DB$ Sacrifice | SacValid$ Self";
@@ -2594,16 +2583,12 @@ public class CardFactoryUtil {
             ReplacementEffect cardre = createETBReplacement(card, ReplacementLayer.Other, effect, true, true, intrinsic, "Card.Self", "");
 
             inst.addReplacement(cardre);
-        } else if (keyword.startsWith("Vanishing") && keyword.contains(":")) {
+        } else if (keyword.startsWith("Vanishing:") && inst instanceof Vanishing vanishing) {
             // Vanishing could be added to a card, but this Effect should only be done when it has amount
-            final String[] k = keyword.split(":");
-            final String m = k[1];
 
             StringBuilder sb = new StringBuilder("etbCounter:TIME:");
-            sb.append(m).append(":no Condition:");
-            sb.append("Vanishing ");
-            sb.append(m);
-            sb.append(" (").append(inst.getReminderText()).append(")");
+            sb.append(vanishing.getAmount()).append(":no Condition:");
+            sb.append(vanishing.getTitle()).append(" (").append(inst.getReminderText()).append(")");
 
             final ReplacementEffect re = makeEtbCounter(sb.toString(), card, intrinsic);
 
