@@ -323,12 +323,11 @@ public final class CardRules implements ICardCharacteristics {
         if (!(canBePartnerCommander() && b.canBePartnerCommander())) {
             return false;
         }
-        boolean legal = false;
         if (hasKeyword("Partner") && b.hasKeyword("Partner")) {
-            legal = true; // normal partner commander
+            return true; // normal partner commander
         }
         if (getName().equals(b.getPartnerWith()) && b.getName().equals(getPartnerWith())) {
-            legal = true; // paired partner commander
+            return true; // paired partner commander
         }
 
         if (!this.partnerType.isEmpty() && this.partnerType.equals(b.partnerType)) {
@@ -337,13 +336,13 @@ public final class CardRules implements ICardCharacteristics {
 
         if (hasKeyword("Choose a Background") && b.canBeBackground()
                 || b.hasKeyword("Choose a Background") && canBeBackground()) {
-            legal = true; // commander with background
+            return true; // commander with background
         }
         if (isDoctor() && b.hasKeyword("Doctor's companion")
                 || hasKeyword("Doctor's companion") && b.isDoctor()) {
-            legal = true; // Doctor Who partner commander
+            return true; // Doctor Who partner commander
         }
-        return legal;
+        return false;
     }
 
     public boolean canBePartnerCommander() {
