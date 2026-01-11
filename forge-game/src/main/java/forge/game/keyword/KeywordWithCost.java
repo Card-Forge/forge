@@ -2,16 +2,20 @@ package forge.game.keyword;
 
 import forge.game.cost.Cost;
 
-public class KeywordWithCost extends KeywordInstance<KeywordWithCost> {
+public class KeywordWithCost extends KeywordInstance<KeywordWithCost> implements KeywordWithCostInterface
+{
     protected Cost cost;
     protected String costString;
 
+    @Override
     public Cost getCost() {
         if ("ManaCost".equals(costString)) {
             return new Cost(this.getHostCard().getManaCost(), false);
         }
         return cost;
     }
+    @Override
+    public String getCostString() { return costString; }
 
     public String getTitle() {
         StringBuilder sb = new StringBuilder();
@@ -26,6 +30,7 @@ public class KeywordWithCost extends KeywordInstance<KeywordWithCost> {
         return sb.toString();
     }
 
+    @Override
     public String getTitleWithoutCost() {
         return getKeyword().toString();
     }

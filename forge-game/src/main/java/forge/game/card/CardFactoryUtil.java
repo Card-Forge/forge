@@ -2376,17 +2376,9 @@ public class CardFactoryUtil {
             final ReplacementEffect re = makeEtbCounter(sb.toString(), card, intrinsic);
 
             inst.addReplacement(re);
-        } else if (keyword.startsWith("Impending")) {
-            final String[] k = keyword.split(":");
-            final String m = k[1];
-            final Cost cost = new Cost(k[2], false);
-
-            StringBuilder desc = new StringBuilder();
-            desc.append("Impending ");
-            desc.append(m).append("—").append(cost.toSimpleString());
-
-            final String effect = "DB$ PutCounter | Defined$ ReplacedCard | CounterType$ TIME | CounterNum$ " + m
-                    + " | ETB$ True | SpellDescription$ " + desc;
+        } else if (keyword.startsWith("Impending") && inst instanceof KeywordWithCostAndAmount impending) {
+            final String effect = "DB$ PutCounter | Defined$ ReplacedCard | CounterType$ TIME | CounterNum$ " + impending.getAmountString()
+                    + " | ETB$ True | SpellDescription$ " + impending.getTitle();
 
             final ReplacementEffect re = createETBReplacement(card, ReplacementLayer.Other, effect, false, true, intrinsic, "Card.Self+impended", "");
 
@@ -2710,26 +2702,20 @@ public class CardFactoryUtil {
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
-        } else if (keyword.startsWith("Awaken")) {
-            final String[] k = keyword.split(":");
-            final String counters = k[1];
-            final Cost awakenCost = new Cost(k[2], false);
+        } else if (keyword.startsWith("Awaken") && inst instanceof KeywordWithCostAndAmount awaken) {
+            final SpellAbility awakenSpell = card.getFirstSpellAbility().copyWithDefinedCost(awaken.getCost());
 
-            final SpellAbility awakenSpell = card.getFirstSpellAbility().copyWithDefinedCost(awakenCost);
-
-            final String awaken = "DB$ PutCounter | CounterType$ P1P1 | CounterNum$ "+ counters + " | "
+            final String putCounter = "DB$ PutCounter | CounterType$ P1P1 | CounterNum$ "+ awaken.getAmount() + " | "
                     + "ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | Awaken$ True";
             final String animate = "DB$ Animate | Defined$ ParentTarget | Power$ 0 | Toughness$ 0 | Types$"
                     + " Creature,Elemental | Duration$ Permanent | Keywords$ Haste";
 
-            final AbilitySub awakenSub = (AbilitySub) AbilityFactory.getAbility(awaken, card);
+            final AbilitySub awakenSub = (AbilitySub) AbilityFactory.getAbility(putCounter, card);
             final AbilitySub animateSub = (AbilitySub) AbilityFactory.getAbility(animate, card);
 
             awakenSub.setSubAbility(animateSub);
             awakenSpell.appendSubAbility(awakenSub);
-            String desc = "Awaken " + counters + "—" + awakenCost.toSimpleString() +
-                    " (" + inst.getReminderText() + ")";
-            awakenSpell.setDescription(desc);
+            awakenSpell.setDescription(awaken.getTitle());
             awakenSpell.setAlternativeCost(AlternativeCost.Awaken);
             awakenSpell.setIntrinsic(intrinsic);
             inst.addSpellAbility(awakenSpell);
@@ -3208,24 +3194,26 @@ public class CardFactoryUtil {
                 sa.setIntrinsic(intrinsic);
                 inst.addSpellAbility(sa);
             }
-        } else if (keyword.startsWith("Impending")) {
-            final String[] k = keyword.split(":");
-            final Cost cost = new Cost(k[2], false);
+        } else if (keyword.startsWith("Impending") && inst instanceof KeywordWithCostAndAmount impending) {
+            final Cost cost = impending.getCost();
             final SpellAbility newSA = card.getFirstSpellAbility().copyWithDefinedCost(cost);
 
-            newSA.putParam("PrecostDesc", "Impending");
-            StringBuilder costDesc = new StringBuilder();
-            costDesc.append(k[1]).append("—").append(cost.toSimpleString());
-            newSA.putParam("CostDesc", costDesc.toString());
+            newSA.putParam("PrecostDesc", impending.getTitleWithoutCost());
+            newSA.putParam("CostDesc", cost.toSimpleString());
 
             // makes new SpellDescription
+            final StringBuilder desc = new StringBuilder();
+            desc.append(newSA.getCostDescription());
+            desc.append("(").append(inst.getReminderText()).append(")");
+            newSA.setDescription(desc.toString());
+
             final StringBuilder sb = new StringBuilder();
-            sb.append(newSA.getCostDescription());
-            sb.append("(").append(inst.getReminderText()).append(")");
-            newSA.setDescription(sb.toString());
+            sb.append(card.getName()).append(" (Impending)");
+            newSA.setStackDescription(sb.toString());
 
             newSA.setAlternativeCost(AlternativeCost.Impending);
 
+            newSA.putParam("Secondary", "True");
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Level up")) {
@@ -3526,17 +3514,16 @@ public class CardFactoryUtil {
             SpellAbility unattachSA = AbilityFactory.getAbility(unattachStr.toString(), card);
             unattachSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(unattachSA);
-        } else if (keyword.startsWith("Reinforce")) {
-            final String[] k = keyword.split(":");
-            final String n = k[1];
-            final String manacost = k[2];
+        } else if (keyword.startsWith("Reinforce") && inst instanceof KeywordWithCostAndAmount reinforce) {
+            final String n = reinforce.getAmountString();
+            final String manacost = reinforce.getCostString();
 
             StringBuilder sb = new StringBuilder();
             sb.append("AB$ PutCounter | CounterType$ P1P1 | ActivationZone$ Hand | ValidTgts$ Creature ");
             sb.append("| Cost$ ").append(manacost).append(" Discard<1/CARDNAME>");
             sb.append("| CounterNum$ ").append(n);
             sb.append("| CostDesc$ ").append(ManaCostParser.parse(manacost)); // to hide the Discard from the cost
-            sb.append("| PrecostDesc$ Reinforce ").append(n).append("—");
+            sb.append("| PrecostDesc$ ").append(reinforce.getTitleWithoutCost());
             sb.append("| SpellDescription$ (").append(inst.getReminderText()).append(")");
 
             final SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
