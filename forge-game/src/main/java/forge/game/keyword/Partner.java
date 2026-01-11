@@ -5,6 +5,14 @@ public class Partner extends SimpleKeyword {
     private String with = null;
 
     @Override
+    public String getTitle() {
+        if (with != null) {
+            return "Partner — " + with;
+        }
+        return super.getTitle();
+    }
+
+    @Override
     protected void parse(String details) {
         with = details;
     }
