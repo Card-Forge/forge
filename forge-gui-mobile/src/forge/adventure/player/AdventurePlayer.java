@@ -1540,6 +1540,33 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return copiesUsed;
     }
 
+    public void removeLostCardFromPools(PaperCard card, int leftInPool) {
+        if (card.isVeryBasicLand() && !card.isFoil()) {
+            return;
+        }
+
+        // This is all copied from the QuestController's similar method.
+        for (final Deck deck : decks) {
+            int cntInMain = deck.getMain().count(card);
+            int cntInSb = deck.has(DeckSection.Sideboard) ? deck.get(DeckSection.Sideboard).count(card) : 0;
+            int nToRemoveFromThisDeck = cntInMain + cntInSb - leftInPool;
+            if (nToRemoveFromThisDeck <= 0) {
+                continue; // this is not the deck you are looking for
+            }
+
+            int nToRemoveFromSb = Math.min(cntInSb, nToRemoveFromThisDeck);
+            if (nToRemoveFromSb > 0) {
+                deck.get(DeckSection.Sideboard).remove(card, nToRemoveFromSb);
+                nToRemoveFromThisDeck -= nToRemoveFromSb;
+                if (nToRemoveFromThisDeck <= 0) {
+                    continue; // done here
+                }
+            }
+
+            deck.getMain().remove(card, nToRemoveFromThisDeck);
+        }
+        Current.player().getCards().remove(card, 1);
+    }
 
     public CardPool getCollectionCards(boolean allCards) {
         CardPool collectionCards = new CardPool();

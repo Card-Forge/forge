@@ -3408,6 +3408,14 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
     }
 
+    public void destroyPhysicalCard(Card card) {
+        if(!card.isCollectible()) {
+            return;
+        }
+
+        card.getOwner().lostOwnership.add(card);
+    }
+
     public CardCollectionView getLostOwnership() {
         return lostOwnership;
     }
