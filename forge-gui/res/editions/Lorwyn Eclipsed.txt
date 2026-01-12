@@ -332,9 +332,9 @@ Replace=.1F fromSheet("ECL full art")+
 271 L Swamp @Jorge Jacinto
 272 L Mountain @Raymond Bonilla
 273 L Forest @Jorge Jacinto
-274 L Plains @Justin Gerard
 
 [full art]
+274 L Plains @Justin Gerard
 275 L Island @Annie Stegg
 276 L Swamp @Raoul Vitale
 277 L Mountain @Ralph Horsley
