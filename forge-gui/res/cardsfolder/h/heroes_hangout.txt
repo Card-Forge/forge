@@ -1,4 +1,5 @@
 Name:Heroes' Hangout
+Variant:UniversesWithin:FlavorName:Fire-Brained Scheme
 ManaCost:R
 Types:Sorcery
 A:SP$ Charm | Choices$ DBDateNight,DBPatrolNight

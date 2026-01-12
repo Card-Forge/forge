@@ -1,0 +1,7 @@
+Name:Monk Gyatso
+ManaCost:3 W
+Types:Legendary Creature Human Monk
+PT:3/3
+T:Mode$ BecomesTarget | ValidTarget$ Creature.Other+YouCtrl+inZoneBattlefield | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigAirbend | TriggerDescription$ Whenever another creature you control becomes the target of a spell or ability, you may airbend that creature. (Exile it. While it's exiled, its owner may cast it for {2} rather than its mana cost.)
+SVar:TrigAirbend:DB$ Airbend | Defined$ TriggeredTarget
+Oracle:Whenever another creature you control becomes the target of a spell or ability, you may airbend that creature. (Exile it. While it's exiled, its owner may cast it for {2} rather than its mana cost.)

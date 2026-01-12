@@ -1,0 +1,12 @@
+Name:Maralen, Fae Ascendant
+ManaCost:2 B G U
+Types:Legendary Creature Elf Faerie Noble
+PT:4/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Elf.Other+YouCtrl,Faerie.Other+YouCtrl | Execute$ TrigExile | TriggerDescription$ Whenever NICKNAME or another Elf or Faerie you control enters, exile the top two cards of target opponent's library.
+SVar:TrigExile:DB$ Dig | ValidTgts$ Opponent | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile
+S:Mode$ Continuous | Affected$ Card.nonLand+cmcLEX+ExiledWithSource+ThisTurnEntered | MayPlay$ True | MayPlayLimit$ 1 | MayPlayWithoutManaCost$ True | EffectZone$ Battlefield | AffectedZone$ Exile | Description$ Once each turn, you may cast a spell with mana value less than or equal to the number of Elves and Faeries you control from among cards exiled with NICKNAME this turn without paying its mana cost.
+SVar:X:Count$Valid Elf.YouCtrl,Faerie.YouCtrl
+SVar:PlayMain1:ALWAYS
+DeckHints:Type$Elf|Faerie
+Oracle:Flying\nWhenever Maralen or another Elf or Faerie you control enters, exile the top two cards of target opponent's library.\nOnce each turn, you may cast a spell with mana value less than or equal to the number of Elves and Faeries you control from among cards exiled with Maralen this turn without paying its mana cost.

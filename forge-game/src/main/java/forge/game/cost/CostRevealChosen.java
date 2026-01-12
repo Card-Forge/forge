@@ -54,7 +54,8 @@ public class CostRevealChosen extends CostPart {
 
         if (getType().equals("Player")) {
             return source.hasChosenPlayer() && source.getTurnInController().equals(activator);
-        } else if (getType().equals("Type")) {
+        }
+        if (getType().equals("Type")) {
             return source.hasChosenType() && source.getTurnInController().equals(activator);
         }
         return false;

@@ -78,7 +78,7 @@ public class HumanPlaySpellAbility {
                 }
                 if (!CharmEffect.makeChoices(ability)) {
                     game.clearTopLibsCast(ability);
-                    // 603.3c If no mode is chosen, the ability is removed from the stack.
+                    // CR 603.3c If no mode is chosen, the ability is removed from the stack.
                     return false;
                 }
             }
@@ -296,7 +296,7 @@ public class HumanPlaySpellAbility {
 
         // For older abilities that don't setStackDescription set it here
         final StringBuilder sb = new StringBuilder();
-        sb.append(ability.getHostCard().getName());
+        sb.append(ability.getHostCard().getDisplayName());
         if (ability.usesTargeting()) {
             final Iterable<GameObject> targets = ability.getTargets();
             if (!Iterables.isEmpty(targets)) {

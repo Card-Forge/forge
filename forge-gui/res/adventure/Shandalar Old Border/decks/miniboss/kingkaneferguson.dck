@@ -1,0 +1,61 @@
+[metadata]
+Name=King Kane Ferguson
+[Main]
+3 Flooded Strand|ONS
+3 Bloodstained Mire|ONS
+3 Wooded Foothills|ONS
+3 Polluted Delta|ONS
+3 Windswept Heath|ONS
+3 Plains|ONS
+3 Swamp|ONS
+3 Forest|ONS
+3 Mountain|ONS
+3 Island|ONS
+4 Reflecting Pool|TMP
+4 Grand Coliseum|ONS
+2 Hazezon Tamar|LEG
+2 Sol'kanar the Swamp King|LEG
+2 Dakkon Blackblade|LEG
+1 Jasmine Boreal|LEG
+1 The Lady of the Mountain|LEG
+1 Livonya Silone|LEG
+1 Kasimir the Lone Wolf|LEG
+1 Nebuchadnezzar|LEG
+1 Riven Turnbull|LEG
+1 Ramses Overdark|LEG
+1 Earthlink|ICE
+2 Hymn of Rebirth|ICE
+2 Goblin War Drums|FEM|2
+2 Kaervek's Purge|MIR
+2 Watchdog|TMP
+1 Drain Life|LEA
+2 Rootbreaker Wurm|TMP
+2 Krakilin|TMP
+1 Elder Druid|ICE
+2 Tropical Storm|MIR
+2 Price of Progress|EXO
+2 Wildfire Emissary|MIR
+2 Searing Spear Askari|MIR
+1 Pillage|ALL
+2 Earthquake|6ED
+2 Flame Elemental|MIR
+1 Icequake|ICE
+2 Field of Souls|TMP
+2 Misinformation|ALL
+2 Theft of Dreams|EXO
+2 Thalakos Mistfolk|TMP
+2 Recall|5ED
+1 Dream Prowler|STH
+1 Walking Dream|STH
+2 Dissipate|MIR
+1 Arcane Denial|ALL|1
+1 Arcane Denial|ALL|2
+2 Desertion|VIS
+2 Kjeldoran Phalanx|ICE
+
+[StartInBattle_Reference]
+3 Grand Coliseum|ONS
+1 Jade Monolith|5ED
+1 Dingus Staff|WTH
+1 Wall of Air|5ED
+1 Watchdog|TMP

@@ -52,6 +52,7 @@ public final class CardRules implements ICardCharacteristics {
     private ColorSet deckbuildingColors;
     private String meldWith;
     private String partnerWith;
+    private String partnerType;
     private boolean addsWildCardColor;
     private int setColorID;
     private boolean custom;
@@ -77,6 +78,7 @@ public final class CardRules implements ICardCharacteristics {
         aiHints = cah;
         meldWith = "";
         partnerWith = "";
+        partnerType = "";
         addsWildCardColor = false;
         setColorID = 0;
 
@@ -321,44 +323,37 @@ public final class CardRules implements ICardCharacteristics {
         if (!(canBePartnerCommander() && b.canBePartnerCommander())) {
             return false;
         }
-        boolean legal = false;
         if (hasKeyword("Partner") && b.hasKeyword("Partner")) {
-            legal = true; // normal partner commander
+            return true; // normal partner commander
         }
         if (getName().equals(b.getPartnerWith()) && b.getName().equals(getPartnerWith())) {
-            legal = true; // paired partner commander
+            return true; // paired partner commander
         }
-        if (hasKeyword("Friends forever") && b.hasKeyword("Friends forever")) {
-            legal = true; // Stranger Things Secret Lair gimmick partner commander
-        }  
-        if (hasKeyword("Partner - Survivors") && b.hasKeyword("Partner - Survivors")) {
-            legal = true; // The Last of Us Secret Lair gimmick partner commander
+
+        if (!this.partnerType.isEmpty() && this.partnerType.equals(b.partnerType)) {
+            return true;
         }
-        if (hasKeyword("Partner - Father & Son") && b.hasKeyword("Partner - Father & Son")) {
-            legal = true; // God of War Secret Lair gimmick partner commander
-        }
-        if (hasKeyword("Partner - Character select") && b.hasKeyword("Partner - Character select")) {
-            legal = true; // TMNT Commander deck gimmick partner commander
-        }
+
         if (hasKeyword("Choose a Background") && b.canBeBackground()
                 || b.hasKeyword("Choose a Background") && canBeBackground()) {
-            legal = true; // commander with background
+            return true; // commander with background
         }
         if (isDoctor() && b.hasKeyword("Doctor's companion")
                 || hasKeyword("Doctor's companion") && b.isDoctor()) {
-            legal = true; // Doctor Who partner commander
+            return true; // Doctor Who partner commander
         }
-        return legal;
+        return false;
     }
 
     public boolean canBePartnerCommander() {
         if (canBeBackground()) {
             return true;
         }
-        return canBeCommander() && (hasKeyword("Partner") || !this.partnerWith.isEmpty() ||
-                hasKeyword("Friends forever") || hasKeyword("Choose a Background") ||
-                hasKeyword("Partner - Father & Son") || hasKeyword("Partner - Survivors") || hasKeyword("Partner - Character select") ||
-                hasKeyword("Doctor's companion") || isDoctor());
+        if (!canBeCommander()) {
+            return false;
+        }
+        return hasKeyword("Partner") || !this.partnerWith.isEmpty() || !this.partnerType.isEmpty() ||
+                hasKeyword("Choose a Background") || hasKeyword("Doctor's companion") || isDoctor();
     }
 
     public boolean canBeBackground() {
@@ -475,11 +470,11 @@ public final class CardRules implements ICardCharacteristics {
             return getName();
 
         ICardFace mainFace = Objects.requireNonNullElse(mainPart.getFunctionalVariant(variantName), mainPart);
-        String mainPartName = Objects.requireNonNullElse(mainFace.getFlavorName(), mainFace.getName());
+        String mainPartName = mainFace.getDisplayName();
 
         if(splitType.getAggregationMethod() == CardSplitType.FaceSelectionMethod.COMBINE) {
             ICardFace otherFace = Objects.requireNonNullElse(otherPart.getFunctionalVariant(variantName), otherPart);
-            String otherPartName = Objects.requireNonNullElse(otherFace.getFlavorName(), otherFace.getName());
+            String otherPartName = otherFace.getDisplayName();
             return mainPartName + " // " + otherPartName;
         }
         else
@@ -504,16 +499,11 @@ public final class CardRules implements ICardCharacteristics {
 
         CardFace variantMain = ((CardFace) mainPart).getOrCreateFunctionalVariant(variantName);
         variantMain.setFlavorName(nameParts[0]);
-        //Rudimentary name replacement. Can't do nicknames, pronouns, ability words, or flavored keywords. Need to define variants manually for that.
-        if(mainPart.getOracleText().contains(mainPart.getName()))
-            variantMain.setOracleText(mainPart.getOracleText().replace(mainPart.getName(), nameParts[0]));
         ((CardFace) mainPart).assignMissingFieldsToVariant(variantMain);
 
         if(otherPart != null) {
             CardFace variantOther = ((CardFace) otherPart).getOrCreateFunctionalVariant(variantName);
             variantOther.setFlavorName(nameParts[1]);
-            if(otherPart.getOracleText().contains(otherPart.getName()))
-                variantMain.setOracleText(otherPart.getOracleText().replace(otherPart.getName(), nameParts[1]));
             ((CardFace) otherPart).assignMissingFieldsToVariant(variantOther);
         }
 
@@ -543,6 +533,7 @@ public final class CardRules implements ICardCharacteristics {
         private CardSplitType altMode = CardSplitType.None;
         private String meldWith = "";
         private String partnerWith = "";
+        private String partnerType = "";
         private boolean addsWildCardColor = false;
         private int setColorID = 0;
         private String handLife = null;
@@ -584,6 +575,7 @@ public final class CardRules implements ICardCharacteristics {
             this.has = null;
             this.meldWith = "";
             this.partnerWith = "";
+            this.partnerType = "";
             this.addsWildCardColor = false;
             this.normalizedName = "";
             this.supportedFunctionalVariants = null;
@@ -609,6 +601,7 @@ public final class CardRules implements ICardCharacteristics {
             result.setNormalizedName(this.normalizedName);
             result.meldWith = this.meldWith;
             result.partnerWith = this.partnerWith;
+            result.partnerType = this.partnerType;
             result.addsWildCardColor = this.addsWildCardColor;
             result.setColorID = this.setColorID;
             if (!tokens.isEmpty()) {
@@ -718,8 +711,11 @@ public final class CardRules implements ICardCharacteristics {
                 case 'K':
                     if ("K".equals(key)) {
                         face.addKeyword(value);
-                        if (value.startsWith("Partner:")) {
+                        if (value.startsWith("Partner with:")) {
                             this.partnerWith = value.split(":")[1];
+                        }
+                        if (value.startsWith("Partner:")) {
+                            this.partnerType = value.split(":")[1];
                         }
                     }
                     break;
@@ -799,7 +795,7 @@ public final class CardRules implements ICardCharacteristics {
                         face.addTrigger(value);
                     } else if ("Types".equals(key)) {
                         face.setType(CardType.parse(value, false));
-                    } else if ("Text".equals(key) && !"no text".equals(value) && StringUtils.isNotBlank(value)) {
+                    } else if ("Text".equals(key) && StringUtils.isNotBlank(value)) {
                         face.setNonAbilityText(value);
                     }
                     break;
@@ -902,8 +898,7 @@ public final class CardRules implements ICardCharacteristics {
     }
     public boolean hasStartOfKeyword(final String k, ICardFace cf) {
         for (final String inst : cf.getKeywords()) {
-            final String[] parts = inst.split(":");
-            if ((parts[0]).equalsIgnoreCase(k)) {
+            if (inst.startsWith(k)) {
                 return true;
             }
         }

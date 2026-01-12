@@ -1,0 +1,172 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="123">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/main-nocollide.tsx" />
+ <layer id="1" name="Background" width="60" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt1EEOgDAIRNFuvaj3P4L7RlvBDr+tkLBTnAeJ51HKCfabIvMRbjpbese4RtUfjLSXKKVhJmcv08q3+vLuSs5WpqdnZjXWtdt/RW0a4R2xH8po8UbNoL3eGbQnwlvPo00e9y4uy51nyHOXT2GNMkfvtlfkjVu78WazeiP3ofiGtdTz1Tv0ZmrlIi0qO51T7abzZGdnZ2fv3Rde8Ezx
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="60" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztWVFOwzAMzRfrmvHDpcZQz8HfBOIojEt0rDsM7AqFjW+G4I+YxqrrJdKUNVmo8iQr6trEfnYyPbf7CyH22r6VPY2EuB+LP8zV+Kiufwz3y1yI57x57kFdf5J1uOG8OzbPF8DHTra2JD55TC+ZEJf6nlTjJms4L0bd+1O1zo0054WuifMgBvD7Qeb5AsR2zQx92rhiniAvE2WvWWOYOxo3z8uC5afUPFdqfFPju0e+6IvznWmfNq6Yp5k8/A3irvJu3JLkZEJyBGvW8vB5XygYT55jG9fSsvdqz/U5FZjbylATANTBxnUVqCbnBuTI9zlLSEhI8IXbcTuabGhAXlSbgvYaMl8A1aZb6V/7nwtYW65Nud48BrhHQubKpS8DHbLOu3wRx6xFe6TQ2q1w7MtQe6G5zA3VO+A+whxve/AJHL6u2muX/e0L9L8G9tO65/MTW++E5w/PTh1RbL4QWw0SEhLsCPG+NyZMHXXFf4XpneqQERNf2ksutZbm3zvwOdczGNN+pu/qq7zV4KCBaG9ZnFCjGPQF7YtMPGrCmX+r6Ru/Aoi0Og==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="60" height="30">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <layer id="7" name="Bridge" width="60" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztWNtSE0EQndqtCFqVF0iV7755RyLlDwjkYvQv/A0uChEBb38if+CLDxY/AUQgJhSgeHuz2+lTaSazm90QAqnKqeqandnZmTl929415uLw6ZKtM8TFYD57uj+05xCDhLls5zk+bN6w7ZfeHWVg8NkzVgn6foxzweaUbd28ViJ+ZZInwnO/h3w3Msa8G7HyMdO7dRlsl2cxZ21c948vhMZUSV6Etr/TJd97o61rcHTlrGDbPCWZDey5X4Wte66vjj5KtmY39n1DXA7HjPk1ZnlDcpn0fOPm89m2SJZCy9mHtO/hRgq+J8TvJ8kxyYdxY27mjDlSY+sjlnMconxB80XMvSSeq6E940Fw+j779rS0SXIx5iyEsdP+czwCH+L4nmSKeE6QPCS5IzJJcnjFmDV17ijbdfL7FSfmlh1fZv5z1C+IHh4nsBn8Py4//yaOt4jH6rjlc5vkbs4/1+Xq8joLXJ9FDlp09JAEUfmKuX4fs/acjOCokcSXgW5riV6Ac8KMJ9fnieMacf1BnP+IT3N+isO6suPzq6clDr2u/aPWK0lOWJS84IJj9IHEJ8fq/ZzlzLb/K+2x0kH2Wus6Dd9+YVnlhCTg+OVclZc45hz9drx93onow4WvvusHSqq+OgsmIvJXXvRyWbCS0q6DjOF/gehabdBRiXj3FGW8HKTjXpF6HlIWQZ/3Kcnas6r+6wd433mK2b2gPXZrNFYXKXbgPK10w/VcUz1bE+Eaf1vWKqh1C1IHnhdnrc+GnO1r0B7D20GL8558j8BO4IZr1pnLD8825Rq1rdYj1t6V+zPKJ7rh78tDOg8vSF3hy8sFdf6icIKNwKGp5mgOPr64tyX8MO9bYM+0qOpf+EFZ9KlF/5eIQ0Xmud9JUe/7XXXupkhRaq9tZ7wetPuwbnEP363wB+5zbY/aGfZhO7wW7low5qv7XOyLzyBndHoH7Sg+NdXC1loX4KZt5/Juyv78LNY98Oi/GyB/zCibcp24q/YB8H/EjRfYQNsRnGuevquLuvOcGwM6R0L3SWpLPQfvFuRcxAHyAHKnjo1C4M/PsBVi1uXN41WPv1WVXmFnzMc475fEJzsB/wBYlpTvuDZxz+3b+x9+f0Ik
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="488.817" y="478.704" width="41.5" height="16">
+   <properties>
+    <property name="teleport" value="" />
+   </properties>
+  </object>
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="210.657" y="215.069">
+   <properties>
+    <property name="reward">[{
+  "type": "randomCard",
+  "count": 2,
+  "colors": [ "Green" ]
+},{
+  "type": "randomCard",
+  "count": 1,
+  "probability": 0.5,
+  "rarity": [ "rare" ],
+  "colors": [ "Green" ]
+},{
+  "type": "randomCard",
+  "count": 3,
+  "addMaxCount": 2,
+  "colors": [ "Green" ]
+}]</property>
+   </properties>
+  </object>
+  <object id="63" template="../../../../../../common/maps/obj/gold.tx" x="161.217" y="237.673" />
+  <object id="68" template="../../../../../../common/maps/obj/gold.tx" x="769.875" y="455.247" />
+  <object id="71" template="../../../../../../common/maps/obj/manashards.tx" x="246.784" y="224.533" />
+  <object id="72" template="../../../../../../common/maps/obj/booster.tx" x="178.912" y="251.368">
+   <properties>
+    <property name="reward">[
+  {
+    "editions": [ "MIR", "VIS", "WTH", "POR" ],
+    "type": "card",
+    "count": 10,
+    "colors": ["Green"],
+    "rarity": [ "Common" ]
+  },
+  {
+    "editions": [ "MIR", "VIS", "WTH", "POR" ],
+    "type": "card",
+    "count": 3,
+    "colors": ["Green"],
+    "rarity": [ "Uncommon" ]
+  },
+  {
+    "editions": [ "MIR", "VIS", "WTH", "POR" ],
+    "type": "Green",
+    "count": 1,
+    "colors": ["Colorless"],
+    "rarity": [ "Rare" ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="84" template="../../../../../../common/maps/obj/waypoint.tx" x="650.485" y="448.365" />
+  <object id="85" template="../../../../../../common/maps/obj/waypoint.tx" x="236.985" y="289.365" />
+  <object id="105" template="../../../../../../common/maps/obj/enemy.tx" x="221.39" y="243.01">
+   <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Forest|LEA", "Mana Flare|LEA", "Mountain|LEA", "Primal Rage|STH" ] }</property>
+    <property name="enemy" value="The Hydra of Shandalaar" />
+    <property name="reward">[
+  {
+    "type": "item",
+    "probability": 1,
+    "count": 1,
+    "itemName": "Presence of the Hydra"
+  }
+]
+</property>
+    <property name="spawn.Easy" type="bool" value="false" />
+    <property name="spawn.Normal" type="bool" value="false" />
+    <property name="speedModifier" type="float" value="10" />
+    <property name="threatRange" type="int" value="50" />
+   </properties>
+  </object>
+  <object id="107" template="../../../../../../common/maps/obj/enemy.tx" x="411.402" y="265.155">
+   <properties>
+    <property name="enemy" value="Hydra" />
+    <property name="threatRange" type="int" value="50" />
+    <property name="waypoints" value="117,114,85,114,117" />
+   </properties>
+  </object>
+  <object id="108" template="../../../../../../common/maps/obj/collision.tx" x="-0.122016" y="479.744" width="962.195" height="16" />
+  <object id="109" template="../../../../../../common/maps/obj/collision.tx" x="-2.27555" y="-17.028" width="962.195" height="16" />
+  <object id="110" template="../../../../../../common/maps/obj/collision.tx" x="960" y="-17.383" width="16" height="514.099" />
+  <object id="111" template="../../../../../../common/maps/obj/collision.tx" x="-17.3333" y="-15.0495" width="16" height="514.099" />
+  <object id="112" template="../../../../../../common/maps/obj/enemy.tx" x="681.5" y="188.5">
+   <properties>
+    <property name="enemy" value="Hydra" />
+    <property name="threatRange" type="int" value="50" />
+    <property name="waypoints" value="78,99,78,98,93,98,78" />
+   </properties>
+  </object>
+  <object id="114" template="../../../../../../common/maps/obj/waypoint.tx" x="356.5" y="274.5" />
+  <object id="115" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="816.5" y="95" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    "text":"Dangerous Beast Ahead! Turn back now!",
+    "options":[
+      { "name":"Walk away" }
+]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="116" template="../../../../../../common/maps/obj/enemy.tx" x="928" y="176">
+   <properties>
+    <property name="enemy" value="Parrot" />
+    <property name="threatRange" type="int" value="50" />
+    <property name="waypoints" value="119,118,84" />
+   </properties>
+  </object>
+  <object id="117" template="../../../../../../common/maps/obj/waypoint.tx" x="527.5" y="235" />
+  <object id="118" template="../../../../../../common/maps/obj/waypoint.tx" x="923.5" y="334" />
+  <object id="119" template="../../../../../../common/maps/obj/waypoint.tx" x="919" y="95" />
+  <object id="121" template="../../../../../../common/maps/obj/enemy.tx" x="222.406" y="242.409">
+   <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Forest|LEA", "Mana Flare|LEA", "Mountain|LEA", "Primal Rage|STH" ] }</property>
+    <property name="enemy" value="The Hydra of Shandalaar" />
+    <property name="reward">[
+  {
+    "type": "item",
+    "probability": 1,
+    "count": 1,
+    "itemName": "Presence of the Hydra"
+  }
+]
+</property>
+    <property name="spawn.Easy" type="bool" value="true" />
+    <property name="spawn.Hard" type="bool" value="false" />
+    <property name="spawn.Normal" type="bool" value="true" />
+    <property name="speedModifier" type="float" value="10" />
+    <property name="threatRange" type="int" value="50" />
+   </properties>
+  </object>
+ </objectgroup>
+</map>

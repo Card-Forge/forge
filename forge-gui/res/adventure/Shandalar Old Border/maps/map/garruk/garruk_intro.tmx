@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="34" height="27" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="101">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/main-nocollide.tsx" />
+ <tileset firstgid="22017" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx" />
+ <layer id="10" name="Lowest Background" width="34" height="27">
+  <data encoding="base64" compression="zlib">
+   eJz7ysbA8JXGuJ+dgWECFG9jZWCYyE57O3G5A2T/WyA7BIj1OQbWHdQKB2IBsp73QNwzwO6AuQEUH3rAuOgbAHcgu4Ha6YEUd1A7TQx1d/CbMTCYmTAwCJoNrDt0gWniHZDuBobHByq7g1Q8mNwCSycD7RZYmAxkvYItTD4PAncMdJgMxrgZdQdt6n5KwmKg3TGaTnG7YyPrwJbv6GkkjROCB0MaGQh3DMY0gs0dAAf2G8A=
+  </data>
+ </layer>
+ <layer id="8" name="Lower Background" width="34" height="27">
+  <data encoding="base64" compression="zlib">
+   eJztk2EKwyAMRvMz6tb1ot1KD7Hrrdt6gd1kEQl1A4cW4yjkwYcBwTwjApRxQ4CTBbhjqGcMdWsmA3CmdOTS27WeIz9p/P25dypdA5fhR/84FyPnkDOLFh5T5ix8RiGPkllIeZQ6SLzLFgeJefD/eJDPgum+3/s1PXgWvseRVkd5YsjBfq68zy4pj9cGj8GsDrm4yKsW/sya59Xk6v5toCiKoij75A3pzkTy
+  </data>
+ </layer>
+ <layer id="7" name="Background" width="34" height="27">
+  <data encoding="base64" compression="zlib">
+   eJzVll9OwkAQxjcx0u62gi8ewT8n8CjGC6jRBLgFoL6piQdCYlAT//HiI3cQo2/OZDvpdNi22woJNvlSWJb9fv1mdqEfKTUAnYP41WfjF6DnUKlNo9RVoNR1iX4aSs2YXNdMzNmOldoB7YI62s5BXz6+B2pr+3mR3oB1AvqswTEEjzvQKHbncJnk5MPRBUVm3qPIP0+UA63dMlZYE+75AM/9FGaz2DCpF7/X4RgmDKPkfgBjh415hnXwXAM9JjxNeP0aumtQh2MmPLHWX2KsAZ5j8DzVVsiDLF29GH8Xx22Q5aBePNEpB+pI53Pwtcfi/SSHcRxkOb5h7Caw/rGxPdAWmdzDPTQpR9XelGwuTsyC9yBeuCcwE2QJjGVw9SnnKPLK8+ZCjmayZ6gP8Y4s70lGx9qK+7pq81GzT1zCi7hQL2Eq5Cs6vxbFQM9NojHe2y7uIpa/ZkQ15EzIIWu7rExobVdOrjzqZELPkrenSb0on6Mj6sY59h0cU09P6e+av9WCMyTO9gjOk/uobm3OQj82emaZA2XVi/w5fDg7OvWVteE5SZYijrLzDdeVNeDnfdF3JUdZXaYlLIvSMvYu/l/rR6vDUYWlSp/+x9r4ZFbG4drjpCpnWhmHz+9MHscy85Asq9Ij8rNfSMeZkw==
+  </data>
+ </layer>
+ <layer id="9" name="Tree" width="34" height="27">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzFl0tOwzAQhr0CKhMuUdqCGrrmSIgFK/awShtArTgSCuUpdr1JL4CHepS/w3iSVEhYGjVPz+d/Hk6Hh84Ng50GWwZ733duEK/9hY2CaSPlg57PA8Plwf9zkBZT79yd15+ZRN2eox0r52N4njXGQfPPDB/MYWnRj/Pmcc63cPwR/dC1T5oD+CSDpYPkqMLviXJ/bGj8ENY295vjRfh9STC05bgIuTFJaELrew326LfnXUZdvg5rjTSGwm+sgjiisZ/78Ezp07Ehzgr8WaPwv8/JqA4We7ppuY3MHKMn0CIHH9rcpKnGwXUwi1YCL+rOOcLjJqu16UctlvHeFPTDGNGg+A57tTGf7AmYb/IaMpcinji4Vuh5macyhzBWGkfh9fxg3z81asSU11hFppXb1C7lc6mwoL4pPbBm2MdZ7K/ES3NgbKWR36vexgawLjma9JDXZYysHojvrsCX1m+wP1l68LjNuu15oxgX7BEUV1nDqEkbDtajKwfqSbHsytEHfqz3thycDyvwN23IEcwhXM/abdcHvtNWE9Qjla88J+6FOEcO9SHfaasJ9knMk7Zx4V7KMdmFA+fiKZSwdOLA/VH7DuiiSxMH9g/koDzn+9fZbiyp/tFGD+ylcu9MfTdYfJz7cvC66H4h6gW1PM/qmrPY1kb+pL4LUZNUH0Me6uF8zHzETr5xr099uyFDqpdZHJbGuO8QT+rbHvNvfpTWA9fZhYNjzXpY/0FwWL29q2FfbOLAXFsnWOS73+scCHc=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="431.5" width="48" height="16">
+   <properties>
+    <property name="teleport" value="" />
+   </properties>
+  </object>
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="522.915" y="383.179" />
+  <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="102.417" y="295.946">
+   <properties>
+    <property name="enemy" value="Viper" />
+    <property name="threatRange" type="int" value="30" />
+   </properties>
+  </object>
+  <object id="55" template="../../../../../../common/maps/obj/enemy.tx" x="311.237" y="106.637">
+   <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Epic Struggle|JUD", "Forest|PALP", "Overwhelming Instinct|ONS" ] }</property>
+    <property name="enemy" value="Garruk" />
+   </properties>
+  </object>
+  <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="303.059" y="176.054">
+   <properties>
+    <property name="enemy" value="Bear" />
+    <property name="threatRange" type="int" value="60" />
+   </properties>
+  </object>
+  <object id="62" template="../../../../../../common/maps/obj/enemy.tx" x="215.96" y="113.041">
+   <properties>
+    <property name="enemy" value="Squirrel" />
+    <property name="threatRange" type="int" value="30" />
+   <property name="effect">{"startBattleWithCard": ["Forest|TMP", "Forest|TMP", "Nut Collector|ODY"]}</property>
+    </properties>
+  </object>
+  <object id="63" template="../../../../../../common/maps/obj/enemy.tx" x="513.96" y="174.058">
+   <properties>
+    <property name="enemy" value="Treefolk" />
+    <property name="threatRange" type="int" value="20" />
+   </properties>
+  </object>
+  <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="385.042" y="366.783">
+   <properties>
+    <property name="enemy" value="Fox" />
+    <property name="threatRange" type="int" value="40" />
+   </properties>
+  </object>
+  <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="65.5575" y="124.951">
+   <properties>
+    <property name="enemy" value="Beastmaster" />
+    <property name="threatRange" type="int" value="40" />
+   <property name="effect">{ "startBattleWithCard": [ "Dual Nature" ] }</property></properties>
+  </object>
+  <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="478.558" y="111.013">
+   <properties>
+    <property name="enemy" value="Treefolk" />
+    <property name="threatRange" type="int" value="20" />
+   </properties>
+  </object>
+  <object id="70" template="../../../../../../common/maps/obj/gold.tx" x="68.0821" y="226.099" />
+  <object id="71" template="../../../../../../common/maps/obj/gold.tx" x="401.185" y="431.423" />
+  <object id="72" template="../../../../../../common/maps/obj/gold.tx" x="45.6927" y="80.6475" />
+  <object id="90" template="../../../../../../common/maps/obj/manashards.tx" x="320.5" y="270" />
+  <object id="91" template="../../../../../../common/maps/obj/manashards.tx" x="513" y="336.5" />
+  <object id="94" template="../../../../../../common/maps/obj/collision.tx" x="-0.25" y="0" width="544.5" height="16" />
+  <object id="95" template="../../../../../../common/maps/obj/collision.tx" x="543.75" y="0.5" width="19.5" height="431" />
+  <object id="96" template="../../../../../../common/maps/obj/collision.tx" x="344.25" y="432.5" width="136" height="16" />
+  <object id="97" template="../../../../../../common/maps/obj/portal.tx" x="210.28" y="62.3978">
+   <properties>
+    <property name="activeQuestFlag" value="FortressPortal" />
+    <property name="portalState" value="closed" />
+    <property name="sprite" value="sprites/portal3.atlas" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt_f0.tmx" />
+    <property name="teleportObjectId" value="194" />
+   </properties>
+  </object>
+  <object id="98" template="../../../../../../common/maps/obj/portal.tx" x="227.289" y="61.9253">
+   <properties>
+    <property name="activeQuestFlag" value="FortressPortal" />
+    <property name="portalState" value="closed" />
+    <property name="sprite" value="sprites/portal3.atlas" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt_f0.tmx" />
+    <property name="teleportObjectId" value="194" />
+   </properties>
+  </object>
+  <object id="99" template="../../../../../../common/maps/obj/portal.tx" x="272.646" y="62.3978">
+   <properties>
+    <property name="activeQuestFlag" value="FortressPortal" />
+    <property name="portalState" value="closed" />
+    <property name="sprite" value="sprites/portal3.atlas" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt_f0.tmx" />
+    <property name="teleportObjectId" value="194" />
+   </properties>
+  </object>
+  <object id="100" template="../../../../../../common/maps/obj/portal.tx" x="287.765" y="62.8702">
+   <properties>
+    <property name="activeQuestFlag" value="FortressPortal" />
+    <property name="portalState" value="closed" />
+    <property name="sprite" value="sprites/portal3.atlas" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt_f0.tmx" />
+    <property name="teleportObjectId" value="194" />
+   </properties>
+  </object>
+ </objectgroup>
+</map>

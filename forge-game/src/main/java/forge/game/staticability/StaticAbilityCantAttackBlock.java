@@ -281,8 +281,7 @@ public class StaticAbilityCantAttackBlock {
         return false;
     }
 
-    public static boolean applyCanBlockIfReachAbility(final StaticAbility stAb, final Card attacker,
-            final Card blocker) {
+    public static boolean applyCanBlockIfReachAbility(final StaticAbility stAb, final Card attacker, final Card blocker) {
         if (!stAb.matchesValidParam("ValidAttacker", attacker)) {
             return false;
         }
@@ -397,7 +396,6 @@ public class StaticAbilityCantAttackBlock {
     public static Pair<Integer, Integer> getMinMaxBlocker(final Card attacker, final Player defender) {
         MutablePair<Integer, Integer> result = MutablePair.of(1, Integer.MAX_VALUE);
 
-        // Menace keyword
         if (attacker.hasKeyword(Keyword.MENACE)) {
             result.setLeft(2);
         }

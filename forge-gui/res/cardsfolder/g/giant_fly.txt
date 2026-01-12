@@ -1,0 +1,8 @@
+Name:Giant Fly
+ManaCost:2 B
+Types:Creature Insect
+PT:2/2
+K:Flying
+T:Mode$ Sacrificed | ValidCard$ Permanent.Other | Execute$ TrigPump | TriggerZones$ Battlefield | ValidPlayer$ You | TriggerDescription$ Whenever you sacrifice another permanent, this creature gets +1/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1
+Oracle:Flying\nWhenever you sacrifice another permanent, this creature gets +1/+0 until end of turn.

@@ -4,7 +4,7 @@ Types:Enchantment Aura Cartouche
 K:Enchant:Creature.YouCtrl:creature you control
 SVar:AttachAILogic:Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters, you may put a -1/-1 counter on target creature.
-SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | IsCurse$ True | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ M1M1 | IsCurse$ True | CounterNum$ 1
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Lifelink | Description$ Enchanted creature gets +1/+1 and has lifelink.
 DeckHints:Name$Trial of Ambition
 Oracle:Enchant creature you control\nWhen Cartouche of Ambition enters, you may put a -1/-1 counter on target creature.\nEnchanted creature gets +1/+1 and has lifelink.

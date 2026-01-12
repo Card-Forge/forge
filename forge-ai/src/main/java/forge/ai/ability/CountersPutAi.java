@@ -21,6 +21,7 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -43,11 +44,11 @@ public class CountersPutAi extends CountersAi {
      * forge.game.card.Card)
      */
     @Override
-    protected boolean willPayCosts(Player ai, SpellAbility sa, Cost cost, Card source) {
+    protected boolean willPayCosts(Player payer, SpellAbility sa, Cost cost, Card source) {
         final String type = sa.getParam("CounterType");
         final String aiLogic = sa.getParamOrDefault("AILogic", "");
 
-        if (!super.willPayCosts(ai, sa, cost, source)) {
+        if (!super.willPayCosts(payer, sa, cost, source)) {
             return false;
         }
 
@@ -105,7 +106,12 @@ public class CountersPutAi extends CountersAi {
                     }
                 }
             }
-            int maxLevel = Integer.parseInt(sa.getParam("MaxLevel"));
+            int maxLevel = 0;
+            for (StaticAbility st : source.getStaticAbilities()) {
+                if (st.toString().startsWith("LEVEL ")) {
+                    maxLevel = Math.max(maxLevel, Integer.parseInt(st.toString().substring(6, 7)));
+                }
+            }
             return source.getCounters(CounterEnumType.LEVEL) < maxLevel;
         }
 
@@ -663,7 +669,7 @@ public class CountersPutAi extends CountersAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(final SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(Player ai, final SpellAbility sa) {
         final Game game = ai.getGame();
         Card choice = null;
         final String type = sa.getParam("CounterType");
@@ -814,33 +820,34 @@ public class CountersPutAi extends CountersAi {
 
             sa.resetTargets();
 
-            Iterable<Card> filteredField;
-            if (sa.isCurse()) {
-                filteredField = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
-            } else {
-                filteredField = ai.getCardsIn(ZoneType.Battlefield);
+            CardCollection targetables = CardLists.getTargetableCards(ai.getGame().getCardsIn(ZoneType.Battlefield), sa);
+            CardCollection list = ComputerUtil.filterAITgts(sa, ai, targetables, true);
+            if (list.isEmpty() || list.equals(targetables)) {
+                if (sa.isCurse()) {
+                    list = CardLists.filterControlledBy(targetables, ai.getOpponents());
+                } else {
+                    list = CardLists.filterControlledBy(targetables, ai);
+                }
             }
-            CardCollection list = CardLists.getTargetableCards(filteredField, sa);
-            list = ComputerUtil.filterAITgts(sa, ai, list, false);
             int totalTargets = list.size();
             boolean preferred = true;
 
             while (sa.canAddMoreTarget()) {
                 if (mandatory) {
                     if ((list.isEmpty() || !preferred) && sa.isTargetNumberValid()) {
-                        return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+                        return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
                     }
 
                     if (list.isEmpty() && preferred) {
                         // If it's required to choose targets and the list is empty, get a new list
-                        list = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
+                        list = CardLists.filterControlledBy(targetables, ai.getOpponents());
                         preferred = false;
                     }
 
                     if (list.isEmpty()) {
                         // Still an empty list, but we have to choose something (mandatory); expand targeting to
                         // include AI's own cards to see if there's anything targetable (e.g. Plague Belcher).
-                        list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
+                        list = CardLists.filterControlledBy(targetables, ai.getYourTeam());
                         preferred = false;
                     }
                 }

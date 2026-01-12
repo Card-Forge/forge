@@ -62,10 +62,6 @@ public class CounterAi extends SpellAbilityAi {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
 
-            if (sa.hasParam("CounterNoManaSpell") && topSA.getTotalManaSpent() > 0) {
-                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
-            }
-
             if (sa.hasParam("UnlessCost") && "TargetedController".equals(sa.getParamOrDefault("UnlessPayer", "TargetedController"))) {
                 Cost unlessCost = AbilityUtils.calculateUnlessCost(sa, sa.getParam("UnlessCost"), false);
                 if (unlessCost.hasSpecificCostType(CostDiscard.class)) {
@@ -91,7 +87,7 @@ public class CounterAi extends SpellAbilityAi {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
         } else {
-            // This spell doesn't target. Must be a "Coutner All" or "Counter trigger" type of ability.
+            // This spell doesn't target. Must be a "Counter All" or "Counter trigger" type of ability.
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
@@ -226,7 +222,7 @@ public class CounterAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(Player aiPlayer, SpellAbility sa) {
         return doTriggerNoCost(aiPlayer, sa, true);
     }
 
@@ -345,7 +341,7 @@ public class CounterAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+    public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
         List<SpellAbility> spells = AbilityUtils.getDefinedSpellAbilities(source, sa.getParamOrDefault("Defined", "Targeted"), sa);
@@ -388,6 +384,6 @@ public class CounterAi extends SpellAbilityAi {
             }
         }
 
-        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
+        return super.willPayUnlessCost(payer, sa, cost, alreadyPaid, payers);
     }
 }

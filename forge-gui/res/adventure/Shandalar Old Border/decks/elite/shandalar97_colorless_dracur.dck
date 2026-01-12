@@ -1,0 +1,30 @@
+[metadata]
+Name=Dracur of Shandalar
+[Main]
+1 Craw Wurm|LEA
+4 Kird Ape|ARN
+1 Shivan Dragon|LEA
+3 Lightning Bolt|LEA
+1 Demonic Tutor|LEA
+2 Disintegrate|LEA
+3 Fireball|LEA
+4 Ice Storm|LEA
+4 Sinkhole|LEA
+4 Stone Rain|LEA
+2 Tranquility|LEA
+1 Black Lotus|LEA
+4 Dingus Egg|LEA
+1 Mox Emerald|LEA
+1 Mox Jet|LEA
+1 Mox Ruby|LEA
+1 Sol Ring|LEA
+4 Swamp|LEA
+2 Mountain|LEA
+2 Forest|LEA
+4 Badlands|LEA
+4 Bayou|LEA
+4 Strip Mine|ATQ
+4 Taiga|LEA
+
+[StartInBattle_Reference]
+1 City of Brass|ARN

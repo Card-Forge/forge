@@ -408,7 +408,7 @@ public class ManaCostBeingPaid {
             }
 
             unpaidShards.keySet().removeAll(toRemove);
-            //System.out.println("Tried to substract a " + shard.toString() + " shard that is not present in this ManaCostBeingPaid");
+            //System.out.println("Tried to subtract a " + shard.toString() + " shard that is not present in this ManaCostBeingPaid");
             return;
         }
 
@@ -608,7 +608,7 @@ public class ManaCostBeingPaid {
                 decreaseShard(shard, 1);
             }
             else {
-                decreaseGenericMana(1);
+                decreaseGenericMana(shard.getCmc());
             }
         }
         decreaseGenericMana(subThisManaCost.getGenericCost());

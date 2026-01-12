@@ -188,6 +188,15 @@ public class Cost implements Serializable {
         return this.isAbility;
     }
 
+    public final String getMaxWaterbend() {
+        for (CostPart cp : this.costParts) {
+            if (cp instanceof CostPartMana) {
+                return ((CostPartMana) cp).getMaxWaterbend();
+            }
+        }
+        return null;
+    }
+
     private Cost() {
 
     }
@@ -507,6 +516,12 @@ public class Cost implements Serializable {
             return new CostBehold(splitStr[0], splitStr[1], description);
         }
 
+        if (parse.startsWith("BeholdExile<")) {
+            final String[] splitStr = abCostParse(parse, 3);
+            final String description = splitStr.length > 2 ? splitStr[2] : null;
+            return new CostBeholdExile(splitStr[0], splitStr[1], description);
+        }
+
         if (parse.startsWith("ExiledMoveToGrave<")) {
             final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
@@ -562,6 +577,16 @@ public class Cost implements Serializable {
         if (parse.startsWith("RevealChosen<")) {
             final String[] splitStr = abCostParse(parse, 2);
             return new CostRevealChosen(splitStr[0], splitStr.length > 1 ? splitStr[1] : null);
+        }
+
+        if (parse.startsWith("Waterbend<")) {
+            final String[] splitStr = abCostParse(parse, 1);
+            return new CostWaterbend(splitStr[0]);
+        }
+
+        if (parse.startsWith("Blight<")) {
+            final String[] splitStr = abCostParse(parse, 1);
+            return new CostBlight(splitStr[0]);
         }
 
         if (parse.equals("Forage")) {
@@ -973,6 +998,7 @@ public class Cost implements Serializable {
                 } else {
                     costParts.add(0, new CostPartMana(manaCost.toManaCost(), null));
                 }
+                getCostMana().setMaxWaterbend(mPart.getMaxWaterbend());
             } else if (part instanceof CostPutCounter || (mergeAdditional && // below usually not desired because they're from different causes
                     (part instanceof CostDiscard || part instanceof CostDraw ||
                     part instanceof CostAddMana || part instanceof CostPayLife ||

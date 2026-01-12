@@ -4,6 +4,6 @@ Types:Creature Human Peasant
 PT:1/1
 K:Training
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 3/1 green Boar creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_3_1_boar | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenScript$ g_3_1_boar | TokenOwner$ You
 DeckHas:Ability$Token|Counters
 Oracle:Training\nWhen Rural Recruit enters, create a 3/1 green Boar creature token.

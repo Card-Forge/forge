@@ -144,7 +144,7 @@ public abstract class GameEntity implements GameObject, IIdentifiable {
 
     public final CardCollectionView getEnchantedBy() {
         // enchanted means attached by Aura
-        return CardLists.filter(getAttachedCards(), CardPredicates.AURA);
+        return CardLists.filter(getAttachedCards(), Card::isAura);
     }
 
     // doesn't include phased out cards
@@ -176,7 +176,7 @@ public abstract class GameEntity implements GameObject, IIdentifiable {
 
     public final boolean isEnchanted() {
         // enchanted means attached by Aura
-        return getAttachedCards().anyMatch(CardPredicates.AURA);
+        return getAttachedCards().anyMatch(Card::isAura);
     }
 
     public final boolean hasCardAttachment(Card c) {
@@ -229,18 +229,18 @@ public abstract class GameEntity implements GameObject, IIdentifiable {
     }
     public String cantBeAttachedMsg(final Card attach, SpellAbility sa, boolean checkSBA) {
         if (!attach.isAttachment()) {
-            return attach.getName() + " is not an attachment";
+            return attach.getDisplayName() + " is not an attachment";
         }
         if (equals(attach)) {
-            return attach.getName() + " can't attach to itself";
+            return attach.getDisplayName() + " can't attach to itself";
         }
 
         if (attach.isCreature() && !attach.hasKeyword(Keyword.RECONFIGURE)) {
-            return attach.getName() + " is a creature without reconfigure";
+            return attach.getDisplayName() + " is a creature without reconfigure";
         }
 
         if (attach.isPhasedOut()) {
-            return attach.getName() + " is phased out";
+            return attach.getDisplayName() + " is phased out";
         }
 
         if (attach.isAura()) {

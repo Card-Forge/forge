@@ -1,0 +1,12 @@
+Name:Grub's Command
+ManaCost:3 B R
+Types:Kindred Sorcery Goblin
+A:SP$ Charm | Choices$ DBCopy,DBPumpAll,DBDestroy,DBMill | CharmNum$ 2
+SVar:DBCopy:DB$ CopyPermanent | ValidTgts$ Goblin.YouCtrl | TgtPrompt$ Select target Goblin you control | SpellDescription$ Create a token that's a copy of target Goblin you control.
+SVar:DBPumpAll:DB$ PumpAll | ValidTgts$ Player | ValidCards$ Creature | NumAtt$ +1 | NumDef$ +1 | KW$ Haste | SpellDescription$ Creatures target player controls get +1/+1 and gain haste until end of turn.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | SpellDescription$ Destroy target artifact or creature.
+SVar:DBMill:DB$ Mill | NumCards$ 5 | ValidTgts$ Player | RememberMilled$ True | SubAbility$ DBChangeZoneAll | SpellDescription$ Target player mills five cards, then puts each Goblin card milled this way into their hand.
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Goblin.IsRemembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token
+Oracle:Choose two —\n• Create a token that's a copy of target Goblin you control.\n• Creatures target player controls get +1/+1 and gain haste until end of turn.\n• Destroy target artifact or creature.\n• Target player mills five cards, then puts each Goblin card milled this way into their hand.

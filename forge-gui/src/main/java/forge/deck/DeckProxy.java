@@ -89,8 +89,8 @@ public class DeckProxy implements InventoryItem {
 
     public CardEdition getEdition() {
         if (edition == null) {
-            if (deck instanceof PreconDeck) {
-                edition = StaticData.instance().getEditions().get(((PreconDeck) deck).getEdition());
+            if (deck instanceof PreconDeck pd) {
+                edition = StaticData.instance().getEditions().get(pd.getEdition());
             }
             else if (!isGeneratedDeck()) {
                 edition = StaticData.instance().getEditions().getTheLatestOfAllTheOriginalEditionsOfCardsIn(getDeck().getAllCardsInASinglePool());

@@ -361,7 +361,7 @@ public final class CardScriptParser {
      * Defined starting strings for cards and spellabilities.
      */
     private static final Set<String> DEFINED_CARDS_STARTSWITH = ImmutableSortedSet
-            .of("Triggered", "Replaced", "ThisTurnEntered");
+            .of("Triggered", "Replaced");
     /**
      * Literal defined strings for players.
      */
@@ -482,21 +482,21 @@ public final class CardScriptParser {
             "CostsPhyrexianMana", "IsRemembered", "IsNotRemembered",
             "IsImprinted", "IsNotImprinted", "hasManaAbility",
             "hasNonManaActivatedAbility", "NoAbilities", "HasCounters",
-            "wasNotCast", "ChosenType", "IsNotChosenType", "IsCommander",
+            "ChosenType", "IsNotChosenType", "IsCommander",
             "IsRenowned");
-    private static final Set<String> VALID_EXCLUSIVE_STARTSWITH = ImmutableSortedSet
-            .of("named", "OwnedBy", "ControlledBy",
-                    "ControllerControls", "AttachedTo", "EnchantedBy",
-                    "TopGraveyard", "SharesColorWith",
-                    "MostProminentColor", "notSharesColorWith",
-                    "sharesCreatureTypeWith", "sharesCardTypeWith", "sharesLandTypeWith",
-                    "sharesNameWith", "doesNotShareNameWith",
-                    "sharesControllerWith", "sharesOwnerWith",
-                    "ThisTurnEntered", "sharesTypeWith", "hasKeyword", "with",
-                    "greatestPowerControlledBy", "greatestCMCControlledBy",
-                    "power", "toughness", "cmc", "totalPT", "counters", "non",
-                    "RememberMap", "wasCastFrom", "set",
-                    "inZone", "HasSVar", "hasAbility");
+    private static final Set<String> VALID_EXCLUSIVE_STARTSWITH = ImmutableSortedSet.of(
+            "named", "OwnedBy", "ControlledBy",
+            "ControllerControls", "AttachedTo", "EnchantedBy",
+            "TopGraveyard", "SharesColorWith",
+            "MostProminentColor", "notSharesColorWith",
+            "sharesCreatureTypeWith", "sharesCardTypeWith", "sharesLandTypeWith",
+            "sharesNameWith", "doesNotShareNameWith",
+            "sharesControllerWith", "sharesOwnerWith",
+            "ThisTurnEntered", "sharesTypeWith", "hasKeyword", "with",
+            "greatestPowerControlledBy", "greatestCMCControlledBy",
+            "power", "toughness", "cmc", "totalPT", "counters", "non",
+            "RememberMap", "wasCastFrom", "set",
+            "inZone", "HasSVar", "hasAbility");
 
     private static boolean isValidExclusive(String valid) {
         if (valid.charAt(0) == '!') {

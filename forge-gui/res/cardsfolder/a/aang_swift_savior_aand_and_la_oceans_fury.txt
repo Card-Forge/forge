@@ -1,0 +1,23 @@
+Name:Aang, Swift Savior
+ManaCost:1 W U
+Types:Legendary Creature Human Avatar Ally
+PT:2/3
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAirbend | TriggerDescription$ When NICKNAME enters, airbend up to one other target creature or spell. (Exile it. While it's exiled, its owner may cast it for {2} rather than its mana cost.)
+SVar:TrigAirbend:DB$ Airbend | ValidTgts$ Creature.Other,Card.inZoneStack | TgtPrompt$ Select up to another target creature or spell | TgtZone$ Battlefield,Stack | TargetMin$ 0
+A:AB$ SetState | Cost$ Waterbend<8> | Defined$ Self | Mode$ Transform | SpellDescription$ Transform NICKNAME.
+AlternateMode:DoubleFaced
+Oracle:Flash\nFlying\nWhen Aang enters, airbend up to one other target creature or spell. (Exile it. While it's exiled, its owner may cast it for {2} rather than its mana cost.)\nWaterbend {8}: Transform Aang.
+
+ALTERNATE
+
+Name:Aang and La, Ocean's Fury
+ManaCost:no cost
+Types:Legendary Creature Avatar Spirit Ally
+PT:5/5
+K:Reach
+K:Trample
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounterAll | TriggerDescription$ Whenever NICKNAME attack, put a +1/+1 counter on each tapped creature you control.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl+tapped | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Reach, trample\nWhenever Aang and La attack, put a +1/+1 counter on each tapped creature you control.

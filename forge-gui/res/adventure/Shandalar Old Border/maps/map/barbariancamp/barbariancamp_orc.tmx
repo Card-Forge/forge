@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="91">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1KENACAMAMEmKEbs2CQMhOoEFRWcOP/qc0ckAADQdtZ8A0C5ngQAfO4B4qxlhg==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJy1WFFyUzEMzGdf7sQAvccDJrcACldLaLkFDJN7EBrsoTuz3axkvZeiGU+T1LLWsqy19DhtNpvtZvNuej7e999Ffrffvt88n3ffvj+08Ufmz9Plmvdmnsq+zTkHmDJ7kJ3Mf2zj243fS1+H9xPNZWzA1XGcDD7nN7V7Ej9+SHR4fuY/xsZrwg7wsv6r9vlL03kdnDXsjvyC+dnZIh4UxxzERcf2tWH72f7+KvhnFFcjQTzoOm5fjG2Eb6n0td15LNFnbG/a+Lz186Kzj+b20de+29Z1VT42vdtp7Lvj0//vCnaOtB6Pim62Hvuu3y++A8cFdvqe307/xm0BI3Lgebr8rWPAeoyt332+p+rnqi9UT31wkDzD9sP8ZPJSlx/iCxcL6nfFyDqOnzgvRnmWdTh/dzufAlu8b5fz9YwgyHcPTwN8leX2eTDH2eJ9jziJ5SLfZedKOt2HGY+pME9X+CWSypsCGJdwBMdS1YaTJT5ZImvPVwX74hx/Df9A4L9rfMeyJN9CRhy3S3KCE81Fe/q8Jt8yxzmcWcy6vc10lxAfLEsxuvlVcfyNmOgYEbuZTcc9h4SH+6jGbhRPWhe4vATdiHv+Bw+rHnB2Wwd6G0DXcU8V4xoejvTYl9U6AnWHcrHjYX6TuLvMby/3DoZNYKzmUnc3nd+5Dr6G516qznHrVngOfj5fsYdMMv6JajPg4n7BS/GNYltb7wG7i+lI9gv9zLksqvdUuM7EZ43pfWB/V4wVzS9VbNgTeLH73vl8F8SD1kLu/4q/Y4xqPdat5kzHv8Cc9X2ifoiuq3E0qgGZP/jtyPq4R1GPDXoOt+q7PsqIe+BDnsv6J8qBrk8S5QntjWU9QdfzyvheBXkMfZIK1/NbuZIndJ8Z36voewl7imKe14K9pbUUxNng71nvak7OjfUdf2g+irC52I5iFdiUfyKMvLfoLjrd0fruPnEsuJ6IrqF+R1zovXH3Wvv8OmdNj1vvsMYsfD96u3Cuj2rRv4mQ7lk=
+  </data>
+ </layer>
+ <layer id="7" name="Mountain Walls" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmFkOwjAMRNs7tMBRCxIqZ6JhOR7JRyTLZBJ3i43ESPOFhR+TNDE9tk1zFLrzfjD3K+rWmvd5enM50r8T1K3hlfAguQX1czi7md+/lZyQ8bQj2+B9yXx+UOYLGb29z4BTmy8yhnW8t9+MpTWutfdyjLkM984uxch7WuGLLCHD0TAf74v2oMa5R/dhKcPa2VEWno0Vvqv3JHxGNPhS2Vnj433DHTgl+FJn5Z66eb8y2dEZqlfIMJVdUJy3KLdTuj/irDAWq3XWmJ5/JU6t54TO+2j2Ghrd2TnKMc7oSSk7JDQjWObTXlsqK/dHSuj+sML3i3vPEh+an2vfHTlZz/DPt06Iz8IeROeflQxL74i0+MJ/OTqrINde40HIxRnROzrUY05tarZb4siJWOlvR7lvySNlRb0kNUv9AaPvfHM=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzlWEtOw0AMbZFYIBASC1gAB2iEhMRhOEsvwS3gBiDxWbPKHdh2US7AEgZkxTEe/8YNCJ5UJZl6/Oyx43FmNvubeN3bjGwUU3BE8ESe37aH+6Uyl/PpeSH/bwHmBR2SLSADV+wDJ9cCSUd2jPFaelFbA+2/glMjx6PZmjGOyXMttlnr6dEDtpwk8C7JlUNLjAvu0P2a8ZNyT5m/EihX1K5InefyX3oncC6AHBdT7b2KgItpy3ytZkuo5THdQyjPxc54DK5HNtpP3DpktZzwxAlki86HBk5JxrpfafsxBy42HkT9gjHrXmKFVJf7hT22vdKn4DFvja7ZsPrQcz23/VYM56br88vW1/WyG8b2z77L3ewOslPCw1lkIQ5rUve1mhrdbzT78Fr+1Pp18/HYVVeXLaA1GyOjvy+AeHjjOzWsnGWNsSzk3WEjP6x3TQ9wWvryIpsZUwquBvaOOgqy2Jcs22rvP1efAVJ9Pj8Y64ns0zAH+5jhL3wfRGyygrMz2ndk+Ay+0t6jVTfOaZxDGWtr0SH18hl9FtiA/YzshVoPxvFkQNJXs9VyvuQF5aLfDZiL2mzJ0XuHrAbLuZo213Nm2AKLv5vkr8H7jfRbz4L/I94BrdWaLg==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="294.5" y="319.25"/>
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="256.285" y="345.467">
+   <properties>
+    <property name="enemy" value="Orc Warrior"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="231.333" y="320.333"/>
+  <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="507.631" y="268.411">
+   <properties>
+    <property name="enemy" value="Orc Brute"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../../../common/maps/obj/enemy.tx" x="228.486" y="383.015">
+   <properties>
+    <property name="enemy" value="Orc Warrior"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="78,79,80,79"/>
+   </properties>
+  </object>
+  <object id="59" template="../../../../../../common/maps/obj/enemy.tx" x="262.885" y="444.395">
+   <properties>
+    <property name="enemy" value="Orc Warrior"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="61" template="../../../../../../common/maps/obj/entry_right.tx" x="605.699" y="312.652">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../../../common/maps/obj/gold.tx" x="189.5" y="320.5"/>
+  <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="198.087" y="89.9317">
+   <properties>
+    <property name="enemy" value="Orc Hunter"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="83,84,85,84"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../../../common/maps/obj/enemy.tx" x="105.536" y="331.533">
+   <properties>
+    <property name="enemy" value="Orc Hunter"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="81,82"/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="262.657" y="495.649">
+   <properties>
+    <property name="enemy" value="Orc Hunter"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="73,74"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../../../common/maps/obj/enemy.tx" x="501.568" y="446.145">
+   <properties>
+    <property name="enemy" value="Orc Hunter"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="76,75,76,77"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../../../common/maps/obj/waypoint.tx" x="196.473" y="493.497"/>
+  <object id="74" template="../../../../../../common/maps/obj/waypoint.tx" x="410.093" y="487.04"/>
+  <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="443.455" y="363.28"/>
+  <object id="76" template="../../../../../../common/maps/obj/waypoint.tx" x="507.487" y="407.941"/>
+  <object id="77" template="../../../../../../common/maps/obj/waypoint.tx" x="472.511" y="481.659"/>
+  <object id="78" template="../../../../../../common/maps/obj/waypoint.tx" x="223.915" y="348.751"/>
+  <object id="79" template="../../../../../../common/maps/obj/waypoint.tx" x="224.991" y="424.621"/>
+  <object id="80" template="../../../../../../common/maps/obj/waypoint.tx" x="324.537" y="427.312"/>
+  <object id="81" template="../../../../../../common/maps/obj/waypoint.tx" x="106.612" y="410.093"/>
+  <object id="82" template="../../../../../../common/maps/obj/waypoint.tx" x="114.146" y="122.755"/>
+  <object id="83" template="../../../../../../common/maps/obj/waypoint.tx" x="202.392" y="85.089"/>
+  <object id="84" template="../../../../../../common/maps/obj/waypoint.tx" x="276.11" y="114.146"/>
+  <object id="85" template="../../../../../../common/maps/obj/waypoint.tx" x="389.108" y="115.76"/>
+  <object id="86" template="../../../../../../common/maps/obj/gold.tx" x="317.004" y="317.542"/>
+  <object id="87" template="../../../../../../common/maps/obj/booster.tx" x="171.183" y="618.333">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ICE&quot;, &quot;ALL&quot;, &quot;PTK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ICE&quot;, &quot;ALL&quot;, &quot;PTK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ICE&quot;, &quot;ALL&quot;, &quot;PTK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="88" template="../../../../../../common/maps/obj/manashards.tx" x="459.597" y="219.072"/>
+  <object id="89" template="../../../../../../common/maps/obj/manashards.tx" x="92.6222" y="64.6417"/>
+  <object id="90" template="../../../../../../common/maps/obj/manashards.tx" x="307.857" y="623.175"/>
+ </objectgroup>
+</map>

@@ -10,7 +10,6 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.deck.CardPool;
 import forge.deck.Deck;
-import forge.deck.DeckRecognizer;
 import forge.deck.DeckSection;
 import forge.game.*;
 import forge.game.ability.AbilityKey;
@@ -415,14 +414,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 ability.getParamOrDefault("AnnounceTitle", announce);
         if (cost.isMandatory()) {
             return chooseNumber(ability, localizer.getMessage("lblChooseAnnounceForCard", announceTitle,
-                    CardTranslation.getTranslatedName(host.getName())), min, max);
+                    host.getTranslatedName()), min, max);
         }
         if ("NumTimes".equals(announce)) {
             return getGui().getInteger(localizer.getMessage("lblHowManyTimesToPay", ability.getPayCosts().getTotalMana(),
-                    CardTranslation.getTranslatedName(host.getName())), min, max, min + 9);
+                    host.getTranslatedName()), min, max, min + 9);
         }
         return getGui().getInteger(localizer.getMessage("lblChooseAnnounceForCard", announceTitle,
-                CardTranslation.getTranslatedName(host.getName())), min, max, min + 9);
+                host.getTranslatedName()), min, max, min + 9);
     }
 
     @Override
@@ -469,22 +468,22 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         // if UI_SELECT_FROM_CARD_DISPLAYS not set use InputSelect only for battlefield and player hand
         // if UI_SELECT_FROM_CARD_DISPLAYS set and using desktop GUI use InputSelect for any zone that can be shown
-        for (final GameEntity c : sourceList) {
-            if (c instanceof Player) {
+        for (final GameEntity ge : sourceList) {
+            if (ge instanceof Player) {
                 continue;
             }
 
-            if (!(c instanceof Card)) {
+            if (!(ge instanceof Card c)) {
                 return false;
             }
-            final Zone cz = ((Card) c).getZone();
+            final Zone cz = c.getZone();
             // Don't try to draw the UI point of a card if it doesn't exist in any zone.
             if (cz == null) {
                 return false;
             }
 
             final boolean useUiPointAtCard =
-                    (FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) && (!GuiBase.getInterface().isLibgdxPort())) ?
+                    FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) && !GuiBase.getInterface().isLibgdxPort() ?
                             (cz.is(ZoneType.Battlefield) || cz.is(ZoneType.Hand) || cz.is(ZoneType.Library) ||
                                     cz.is(ZoneType.Graveyard) || cz.is(ZoneType.Exile) || cz.is(ZoneType.Flashback) ||
                                     cz.is(ZoneType.Command) || cz.is(ZoneType.Sideboard)) :
@@ -616,15 +615,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // Human is supposed to read the message and understand from it what to choose
         if (optionList.isEmpty()) {
             if (delayedReveal != null) {
-                reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(),
-                        delayedReveal.getMessagePrefix());
+                reveal(delayedReveal);
             }
             return null;
         }
         if (!isOptional && optionList.size() == 1) {
             if (delayedReveal != null) {
-                reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(),
-                        delayedReveal.getMessagePrefix());
+                reveal(delayedReveal);
             }
             return Iterables.getFirst(optionList, null);
         }
@@ -665,8 +662,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // Human is supposed to read the message and understand from it what to choose
         if (optionList.isEmpty()) {
             if (delayedReveal != null) {
-                reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(),
-                        delayedReveal.getMessagePrefix());
+                reveal(delayedReveal);
             }
             return Lists.newArrayList();
         }
@@ -677,8 +673,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         tempShow(optionList);
         if (useSelectCardsInput(optionList)) {
-            final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<>(this, min, max, optionList,
-                    sa);
+            final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<>(this, min, max, optionList, sa);
             input.setCancelAllowed(min == 0);
             input.setMessage(MessageUtil.formatMessage(title, player, targetedPlayer));
             input.showAndWait();
@@ -691,7 +686,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         endTempShowCards();
 
         List<T> results = Lists.newArrayList();
-
         if (views != null) {
             gameCacheEntity.addToList(views, results);
         }
@@ -964,19 +958,19 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     protected void reveal(final CardCollectionView cards, final ZoneType zone, final PlayerView owner, String message, boolean addSuffix) {
         if (StringUtils.isBlank(message)) {
             message = localizer.getMessage("lblLookCardInPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase());
-        } else {
-            if (addSuffix) message += " " + localizer.getMessage("lblPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase());
+        } else if (addSuffix) {
+            message += " " + localizer.getMessage("lblPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase());
         }
         final String fm = MessageUtil.formatMessage(message, getLocalPlayerView(), owner);
-        if (!cards.isEmpty()) {
+        if (cards.isEmpty()) {
+            getGui().message(MessageUtil.formatMessage(localizer.getMessage("lblThereNoCardInPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase()),
+                    getLocalPlayerView(), owner), fm);
+        } else {
             tempShowCards(cards);
             TrackableCollection<CardView> collection = CardView.getCollection(cards);
             getGui().reveal(fm, collection);
             getGui().updateRevealedCards(collection);
             endTempShowCards();
-        } else {
-            getGui().message(MessageUtil.formatMessage(localizer.getMessage("lblThereNoCardInPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase()),
-                    getLocalPlayerView(), owner), fm);
         }
     }
 
@@ -1282,7 +1276,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final List<String> options = Lists.newArrayList();
         for (int i = 0; i < manaChoices.size(); i++) {
             final Mana m = manaChoices.get(i);
-            options.add(localizer.getMessage("lblNColorManaFromCard", String.valueOf(1 + i), MagicColor.toLongString(m.getColor()), CardTranslation.getTranslatedName(m.getSourceCard().getName())));
+            options.add(localizer.getMessage("lblNColorManaFromCard", String.valueOf(1 + i), MagicColor.toLongString(m.getColor()), m.getSourceCard().getTranslatedName()));
         }
         final String chosen = getGui().one(localizer.getMessage("lblPayManaFromManaPool"), options);
         final String idx = TextUtil.split(chosen, '.')[0];
@@ -1400,7 +1394,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public String chooseSector(Card assignee, String ai, List<String> sectors) {
         String prompt;
         if (assignee != null) {
-            String creature = CardTranslation.getTranslatedName(assignee.getName()) + " (" + assignee.getId() + ")";
+            String creature = assignee.getTranslatedName() + " (" + assignee.getId() + ")";
             prompt = Localizer.getInstance().getMessage("lblAssignSectorCreature", creature);
         } else {
             prompt = Localizer.getInstance().getMessage("lblChooseSectorEffect");
@@ -1410,7 +1404,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public int chooseSprocket(Card assignee, boolean forceDifferent) {
-        String cardName = CardTranslation.getTranslatedName(assignee.getName()) + " (" + assignee.getId() + ")";
+        String cardName = assignee.getTranslatedName() + " (" + assignee.getId() + ")";
         String prompt = Localizer.getInstance().getMessage("lblAssignSprocket", cardName);
         List<Integer> options = Lists.newArrayList(1, 2, 3);
         if(forceDifferent)
@@ -1507,7 +1501,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public CardCollectionView londonMulliganReturnCards(final Player mulliganingPlayer, int cardsToReturn) {
+    public CardCollectionView tuckCardsViaMulligan(final Player mulliganingPlayer, int cardsToReturn) {
         final InputLondonMulligan inp = new InputLondonMulligan(this, player, cardsToReturn);
         inp.showAndWait();
         return inp.getSelectedCards();
@@ -1736,7 +1730,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (!call) {
             Collections.reverse(sortedResults);
         }
-        return getGui().one(sa.getHostCard().getName() + " - " + localizer.getMessage("lblChooseAResult"), sortedResults).equals(labelsSrc[0]);
+        return getGui().one(sa.getHostCard().getDisplayName() + " - " + localizer.getMessage("lblChooseAResult"), sortedResults).equals(labelsSrc[0]);
     }
 
     @Override
@@ -1747,18 +1741,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         final List<Pair<SpellAbilityStackInstance, GameObject>> chosen = getGui()
-                .getChoices(saSpellskite.getHostCard().getName(), 1, 1, allTargets, null, new FnTargetToString());
+                .getChoices(saSpellskite.getHostCard().getDisplayName(), 1, 1, allTargets, null, targ -> targ.getRight().toString() + " - " + targ.getLeft().getStackDescription());
         return Iterables.getFirst(chosen, null);
-    }
-
-    private final static class FnTargetToString
-            implements Function<Pair<SpellAbilityStackInstance, GameObject>, String>, Serializable {
-        private static final long serialVersionUID = -4779137632302777802L;
-
-        @Override
-        public String apply(final Pair<SpellAbilityStackInstance, GameObject> targ) {
-            return targ.getRight().toString() + " - " + targ.getLeft().getStackDescription();
-        }
     }
 
     @Override
@@ -1792,6 +1776,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public List<AbilitySub> chooseModeForAbility(final SpellAbility sa, List<AbilitySub> possible, final int min, final int num,
                                                  boolean allowRepeat) {
+        if (!allowRepeat && min == num && num == possible.size()) {
+            return possible;
+        }
         boolean trackerFrozen = getGame().getTracker().isFrozen();
         if (trackerFrozen) {
             // The view tracker needs to be unfrozen to update the SpellAbilityViews at this point, or it may crash
@@ -1801,7 +1788,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (trackerFrozen) {
             getGame().getTracker().freeze(); // refreeze if the tracker was frozen prior to this update
         }
-        final String modeTitle = localizer.getMessage("lblPlayerActivatedCardChooseMode", sa.getActivatingPlayer().toString(), CardTranslation.getTranslatedName(sa.getHostCard().getName()));
+        final String modeTitle = localizer.getMessage("lblPlayerActivatedCardChooseMode", sa.getActivatingPlayer().toString(), sa.getHostCard().getTranslatedName());
         final List<AbilitySub> chosen = Lists.newArrayListWithCapacity(num);
         int chosenPawprint = 0;
         for (int i = 0; i < num; i++) {
@@ -1834,11 +1821,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public List<String> chooseColors(final String message, final SpellAbility sa, final int min, final int max,
-                                     List<String> options) {
-        options = options.stream().map(DeckRecognizer::getLocalisedMagicColorName).collect(Collectors.toList());
-        List<String> choices = getGui().getChoices(message, min, max, options);
-        return choices.stream().map(DeckRecognizer::getColorNameByLocalisedName).collect(Collectors.toList());
+    public ColorSet chooseColors(final String message, final SpellAbility sa, final int min, final int max, ColorSet options) {
+        return ColorSet.fromEnums(getGui().getChoices(message, min, max, Lists.newArrayList(options.getOrderedColors())));
     }
 
     @Override
@@ -1867,22 +1851,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     private byte chooseColorCommon(final String message, final Card c, final ColorSet colors,
                                    final boolean withColorless) {
-        final ImmutableList.Builder<String> colorNamesBuilder = ImmutableList.builder();
-        if (withColorless) {
-            colorNamesBuilder.add(MagicColor.toLongString(MagicColor.COLORLESS));
+        List<MagicColor.Color> choices = Lists.newArrayList(colors.getOrderedColors());
+        if (withColorless && !colors.isColorless()) {
+            choices.add(MagicColor.Color.COLORLESS);
         }
-        for (final MagicColor.Color color : colors) {
-            colorNamesBuilder.add(color.getName());
-        }
-        final ImmutableList<String> colorNames = colorNamesBuilder.build();
-        if (colorNames.size() > 2) {
-            return MagicColor.fromName(getGui().one(message, colorNames));
+        if (choices.size() > 2) {
+            return getGui().one(message, choices).getColorMask();
         }
 
-        boolean confirmed = false;
-        confirmed = InputConfirm.confirm(this, CardView.get(c), message, true, colorNames);
-        final int idxChosen = confirmed ? 0 : 1;
-        return MagicColor.fromName(colorNames.get(idxChosen));
+        final int idxChosen = InputConfirm.confirm(this, CardView.get(c), message, true, choices.stream().map(MagicColor.Color::getTranslatedName).collect(Collectors.toList()))
+                ? 0 : 1;
+        return choices.get(idxChosen).getColorMask();
     }
 
     @Override
@@ -1890,16 +1869,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                                           final String name) {
         List<CardFaceView> choices = FModel.getMagicDb().getCommonCards().streamAllFaces()
                 .filter(cpp)
-                .map(cardFace -> new CardFaceView(CardTranslation.getTranslatedName(cardFace.getName()), cardFace.getName()))
+                .map(CardFaceView::new)
                 .sorted()
                 .collect(Collectors.toList());
         CardFaceView cardFaceView = getGui().one(message, choices);
-        return StaticData.instance().getCommonCards().getFaceByName(cardFaceView.getOracleName());
+        return StaticData.instance().getCommonCards().getFaceByName(cardFaceView.getName());
     }
 
     @Override
     public ICardFace chooseSingleCardFace(SpellAbility sa, List<ICardFace> faces, String message) {
-        return getGui().one(message, faces);
+        Map<CardFaceView, ICardFace> mapped = faces.stream().collect(Collectors.toMap(CardFaceView::new, Function.identity(), (a, b) -> a, TreeMap::new));
+        CardFaceView chosen = getGui().one(message, Lists.newArrayList(mapped.keySet()));
+        return mapped.get(chosen);
     }
 
     @Override
@@ -2332,9 +2313,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public Map<Card, ManaCostShard> chooseCardsForConvokeOrImprovise(final SpellAbility sa, final ManaCost manaCost,
-                                                                     final CardCollectionView untappedCards, boolean improvise) {
+                                                                     final CardCollectionView untappedCards, boolean artifacts, boolean creatures, Integer maxReduction) {
         final InputSelectCardsForConvokeOrImprovise inp = new InputSelectCardsForConvokeOrImprovise(this, player,
-                manaCost, untappedCards, improvise, sa);
+                sa, manaCost, untappedCards, artifacts, creatures, maxReduction);
         inp.showAndWait();
         return inp.getConvokeMap();
     }
@@ -2916,15 +2897,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         private void addCardToZone(ZoneType zone, final boolean repeatLast, final boolean noTriggers) {
             final ZoneType targetZone = repeatLast ? lastAddedZone : zone;
-            String message = null;
+            String message;
             if (targetZone != ZoneType.Battlefield) {
                 message = localizer.getMessage("lblPutCardInWhichPlayerZone", targetZone.getTranslatedName().toLowerCase());
+            } else if (noTriggers) {
+                message = localizer.getMessage("lblPutCardInWhichPlayerBattlefield");
             } else {
-                if (noTriggers) {
-                    message = localizer.getMessage("lblPutCardInWhichPlayerBattlefield");
-                } else {
-                    message = localizer.getMessage("lblPutCardInWhichPlayerPlayOrStack");
-                }
+                message = localizer.getMessage("lblPutCardInWhichPlayerPlayOrStack");
             }
 
             Player pOld = lastAddedPlayer;
@@ -2942,29 +2921,24 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
             final Player p = pOld;
 
-
             final CardDb carddb = FModel.getMagicDb().getCommonCards();
-            final List<ICardFace> faces = Lists.newArrayList(carddb.getAllFaces());
 
-            List<CardFaceView> choices = new ArrayList<>();
-            CardFaceView cardFaceView;
-            for (ICardFace cardFace : faces) {
-                cardFaceView = new CardFaceView(CardTranslation.getTranslatedName(cardFace.getName()), cardFace.getName());
-                choices.add(cardFaceView);
+            final CardFaceView f;
+            if (repeatLast) {
+                f = lastAdded;
+            } else {
+                List<CardFaceView> choices = carddb.getAllFaces().stream().map(CardFaceView::new).collect(Collectors.toList());
+                Collections.sort(choices);
+                f = getGui().oneOrNone(localizer.getMessage("lblNameTheCard"), choices);
             }
-            Collections.sort(choices);
-
-            // use standard forge's list selection dialog
-            final CardFaceView f = repeatLast ? lastAdded : getGui().oneOrNone(localizer.getMessage("lblNameTheCard"), choices);
             if (f == null) {
                 return;
             }
 
-            PaperCard c = carddb.getUniqueByName(f.getOracleName());
+            PaperCard c = carddb.getUniqueByName(f.displayName());
             final Card forgeCard = Card.fromPaperCard(c, p);
             forgeCard.setGameTimestamp(getGame().getNextTimestamp());
 
-            PaperCard finalC = c;
             getGame().getAction().invoke(() -> {
                 if (targetZone == ZoneType.Battlefield) {
                     if (!forgeCard.getName().equals(f.getName())) {
@@ -2991,7 +2965,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                                         lastSummoningSickness = true;
                                     } else {
                                         lastSummoningSickness = getGui().confirm(forgeCard.getView(),
-                                                localizer.getMessage("lblCardShouldBeSummoningSicknessConfirm", CardTranslation.getTranslatedName(forgeCard.getName())));
+                                                localizer.getMessage("lblCardShouldBeSummoningSicknessConfirm", forgeCard.getTranslatedName()));
                                     }
                                 }
                             }
@@ -3004,7 +2978,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                             return;
                         }
                     } else {
-                        if (finalC.getRules().getType().isLand()) {
+                        if (c.getRules().getType().isLand()) {
                             // this is needed to ensure land abilities fire
                             getGame().getAction().moveToHand(forgeCard, null);
                             getGame().getAction().moveToPlay(forgeCard, null, null);
@@ -3041,7 +3015,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     }
                 } else if (targetZone == ZoneType.Library) {
                     if (!repeatLast) {
-                        lastTopOfTheLibrary = getGui().confirm(forgeCard.getView(), localizer.getMessage("lblCardShouldBeAddedToLibraryTopOrBottom", CardTranslation.getTranslatedName(forgeCard.getName())),
+                        lastTopOfTheLibrary = getGui().confirm(forgeCard.getView(), localizer.getMessage("lblCardShouldBeAddedToLibraryTopOrBottom", forgeCard.getTranslatedName()),
                                 true, Arrays.asList(localizer.getMessage("lblTop"), localizer.getMessage("lblBottom")));
                     }
                     if (lastTopOfTheLibrary) {
@@ -3321,12 +3295,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public String chooseCardName(SpellAbility sa, List<ICardFace> faces, String message) {
         ICardFace face = chooseSingleCardFace(sa, faces, message);
         return face == null ? "" : face.getName();
-    }
-
-    @Override
-    public Card chooseDungeon(Player player, List<PaperCard> dungeonCards, String message) {
-        PaperCard dungeon = getGui().one(message, dungeonCards);
-        return Card.fromPaperCard(dungeon, player);
     }
 
     @Override

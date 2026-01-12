@@ -5,6 +5,6 @@ K:Enchant:Creature
 SVar:AttachAILogic:Curse
 S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddTrigger$ TrigCustodyBattlePhase | Description$ Enchanted creature has "At the beginning of your upkeep, target opponent gains control of this creature unless you sacrifice a land."
 SVar:TrigCustodyBattlePhase:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigGainControl | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, target opponent gains control of this creature unless you sacrifice a land.
-SVar:TrigGainControl:DB$ GainControl | Defined$ Self | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | UnlessCost$ Sac<1/Land> | UnlessPayer$ You
+SVar:TrigGainControl:DB$ GainControl | Defined$ Self | ValidTgts$ Opponent | UnlessCost$ Sac<1/Land> | UnlessPayer$ You
 DeckHas:Ability$Sacrifice
 Oracle:Enchant creature\nEnchanted creature has "At the beginning of your upkeep, target opponent gains control of this creature unless you sacrifice a land."

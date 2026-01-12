@@ -4,33 +4,415 @@ Date=2026-01-23
 Name=Lorwyn Eclipsed
 Type=Expansion
 ScryfallCode=ECL
+#https://mtgscribe.com/2026/01/10/lorwyn-eclipsed-play-booster-fact-sheet/
+BoosterSlots=Common,Common-SPG,Uncommon,RareMythic,Land,Wildcard,WildcardFoil
+Booster=6 Common, 1 Common-SPG, 3 Uncommon, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 Land
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=30
+
+[Common]
+Base=Common:fromSheet("ECL cards")
+
+[Common-SPG]
+Base=Common:fromSheet("ECL cards")
+Replace=0.01818F fromSheet("ECL special guests")
+
+[Uncommon]
+Base=Uncommon:fromSheet("ECL cards")
+Replace=0.1F fromSheet("ECL showcase")
+
+[RareMythic]
+Base=Rare:fromSheet("ECL cards")
+Replace=.136F Mythic:fromSheet("ECL cards")
+Replace=.046F Rare:fromSheet("ECL showcase")
+Replace=.012F Mythic:fromSheet("ECL showcase")
+Replace=0.006F Rare:fromSheet("ECL borderless")
+Replace=0.004F Mythic:fromSheet("ECL borderless")
+Replace=0.006F fromSheet("ECL reversible shocklands")
+
+[Wildcard]
+Base=Uncommon:fromSheet("ECL cards")
+Replace=0.18F Common:fromSheet("ECL cards")
+Replace=0.19 Rare:fromSheet("ECL cards")
+Replace=0.02F Mythic:fromSheet("ECL cards")
+Replace=0.02F Uncommon:fromSheet("ECL showcase")
+Replace=0.006F Rare:fromSheet("ECL showcase")
+Replace=0.002F Mythic:fromSheet("ECL showcase")
+Replace=0.01F Rare:fromSheet("ECL borderless")
+Replace=0.004F Mythic:fromSheet("ECL borderless")
+Replace=0.006 fromSheet("ECL reversible shocklands")
+
+[WildcardFoil]
+Base=Common:fromSheet("ECL cards")
+Replace=0.298F Uncommon:fromSheet("ECL cards")
+Replace=0.065F Rare:fromSheet("ECL cards")
+Replace=0.011F Mythic:fromSheet("ECL cards")
+Replace=0.008F Uncommon:fromSheet("ECL showcase")
+Replace=0.008F Rare:fromSheet("ECL showcase")
+Replace=0.002F Mythic:fromSheet("ECL showcase")
+Replace=0.004F Rare:fromSheet("ECL reversible shocklands")
+
+[Land]
+Base=BasicLand:fromSheet("ECL cards")
+Repalce=.1F BasicLand:fromSheet("ECL cards")+
+Replace=.4F fromSheet("ECL full art")
+Replace=.1F fromSheet("ECL full art")+
 
 [cards]
+1 C Changeling Wayfinder @Quintin Gleim
+2 C Rooftop Percher @Nils Hamm
+3 R Adept Watershaper @Pauline Voss
+4 M Ajani, Outland Chaperone @Daren Bader
+5 C Appeal to Eirdu @Milivoj Ćeran
+6 U Bark of Doran @Jorge Jacinto
+7 R Brigid, Clachan's Heart @Zoltan Boros
+8 U Burdened Stoneback @Carl Critchlow
+9 R Champion of the Clachan @Edgar Sánchez Hidalgo
+10 U Clachan Festival @Kev Fang
+11 U Crib Swap @Pete Venters
+12 M Curious Colossus @Raoul Vitale
 13 M Eirdu, Carrier of Dawn @Lucas Graciano
+14 U Encumbered Reejerey @Jeff Miracola
+15 U Evershrike's Gift @Drew Tucker
+16 U Flock Impostor @Ilse Gort
+17 C Gallant Fowlknight @Edgar Sánchez Hidalgo
+18 C Goldmeadow Nomad @Paolo Parente
+19 C Keep Out @Ron Spencer
+20 R Kinbinding @Caio Monteiro
+21 U Kinsbaile Aspirant @Margaret Organ-Kean
+22 R Kinscaer Sentry @Kev Fang
+23 U Kithkeeper @Filip Burburan
+24 C Liminal Hold @Ovidio Cartagena
+25 U Meanders Guide @Julie Dillon
+26 U Moonlit Lamenter @Steve Ellis
 27 M Morningtide's Light @Mark Poole
+28 U Personify @Slawomir Maniak
+29 U Protective Response @Gustavo Pelissari
+30 U Pyrrhic Strike @Randy Vargas
+31 C Reluctant Dounguard @Paolo Parente
+32 R Rhys, the Evermore @Kai Carpenter
+33 C Riverguard's Reflexes @Lucas Graciano
+34 C Shore Lurker @Tiffany Turrill
+35 R Slumbering Walker @Jakub Kasper
+36 C Spiral into Solitude @Drew Baker
+37 C Sun-Dappled Celebrant @Steve Ellis
+38 U Thoughtweft Imbuer @Ioannis Fiore
+39 C Timid Shieldbearer @Edgar Sánchez Hidalgo
+40 C Tributary Vaulter @Tiffany Turrill
+41 C Wanderbrine Preacher @Warren Mahy
+42 U Wanderbrine Trapper @Iris Compiet
+43 R Winnowing @David Palumbo
+44 C Aquitect's Defenses @Ioannis Fiore
+45 C Blossombind @Drew Tucker
+46 R Champions of the Shoal @Daniel Zrom
+47 R Disruptor of Currents @Pauline Voss
+48 R Flitterwing Nuisance @Evyn Fong
+49 U Glamer Gifter @Ben Hill
+50 C Glamermite @Pauline Voss
+51 R Glen Elendra Guardian @Yohann Schepacz
+52 M Glen Elendra's Answer @Sam Guay
+53 C Gravelgill Scoundrel @John Tedrick
+54 R Harmonized Crescendo @Tyler Walpole
+55 U Illusion Spinners @Zoltan Boros
+56 C Kulrath Mystic @Jason A. Engle
+57 M Loch Mare @Chris Rahn
+58 U Lofty Dreams @Steven Belledin
+59 M Mirrorform @Wayne Reynolds
+60 U Noggle the Mind @Thomas M. Baxa
+61 M Oko, Lorwyn Liege @Kai Carpenter
+62 U Omni-Changeling @Jeff Laubenstein
+63 U Pestered Wellguard @Julie Dillon
+64 U Rime Chill @Igor Krstic
+65 R Rimefire Torque @Jorge Jacinto
+66 U Rimekin Recluse @Aurore Folny
+67 C Run Away Together @Annie Stegg
+68 U Shinestriker @Ron Spencer
+69 U Silvergill Mentor @Iris Compiet
+70 C Silvergill Peddler @John Tedrick
+71 U Spell Snare @Iris Compiet
+72 C Stratosoarer @John Tedrick
+73 C Summit Sentinel @Jake Murray
+74 R Sunderflock @Caio Monteiro
+75 U Swat Away @Julie Dillon
 76 R Sygg, Wanderwine Wisdom @Justin Gerard
+77 U Tanufel Rimespeaker @Lauren K. Cannon
+78 C Temporal Cleansing @Wylie Beckert
+79 U Thirst for Identity @Danny Schwartz
+80 C Unexpected Assistance @Gustavo Pelissari
+81 U Unwelcome Sprite @Iris Compiet
+82 C Wanderwine Distracter @Warren Mahy
+83 U Wanderwine Farewell @Aldo Domínguez
+84 C Wild Unraveling @Jabari Weathers
+85 C Auntie's Sentence @Vincent Christiaens
+86 C Barbed Bloodletter @Warren Mahy
+87 C Bile-Vial Boggart @Slawomir Maniak
 88 M Bitterbloom Bearer @Chris Rahn
+89 C Blight Rot @Forrest Schehl
+90 C Blighted Blackthorn @Omar Rayyan
+91 R Bloodline Bidding @Drew Baker
+92 U Boggart Mischief @Ron Spears
+93 C Boggart Prankster @Karl Kopinski
+94 C Bogslither's Embrace @Justin Gerard
+95 R Champion of the Weird @Lucas Graciano
+96 U Creakwood Safewright @Heather Hudson
+97 U Darkness Descends @Ralph Horsley
+98 R Dawnhand Dissident @Jacob Walker
+99 C Dawnhand Eulogist @Evyn Fong
+100 U Dose of Dawnglow @Quintin Gleim
+101 C Dream Seizer @Omar Rayyan
+102 R Gloom Ripper @Annie Stegg
+103 U Gnarlbark Elm @Loïc Canavaggia
+104 U Graveshifter @Deborah Garcia
+105 R Grub, Storied Matriarch @Jesper Ejsing
+106 U Gutsplitter Gang @Tyler Walpole
+107 C Heirloom Auntie @Raph Lomotan
+108 U Iron-Shield Elf @Adrián Rodríguez Pérez
+109 C Moonglove Extractor @Milivoj Ćeran
+110 M Moonshadow @Olivier Bernard
+111 R Mornsong Aria @Scott M. Fischer
+112 U Mudbutton Cursetosser @Ioannis Fiore
+113 U Nameless Inversion @Dominik Mayer
+114 U Nightmare Sower @Tommy Arnold
+115 U Perfect Intimidation @Heather Hudson
+116 U Requiting Hex @Randy Gallegos
+117 U Retched Wretch @Raph Lomotan
+118 C Scarblade Scout @Lorenzo Mastroianni
+119 C Scarblade's Malice @Quintin Gleim
+120 U Shimmercreep @Nils Hamm
+121 R Taster of Wares @Edgar Sánchez Hidalgo
+122 R Twilight Diviner @Pauline Voss
+123 U Unbury @Kev Fang
 124 R Ashling, Rekindled @Ilse Gort
+125 U Boldwyr Aggressor @Aaron Miller
+126 C Boneclub Berserker @Slawomir Maniak
+127 U Boulder Dash @Chuck Lukacs
+128 C Brambleback Brute @Aaron Miller
+129 C Burning Curiosity @Jim Pavelec
+130 R Champion of the Path @Tyler Walpole
+131 C Cinder Strike @Joshua Raphael
+132 R Collective Inferno @Jason A. Engle
+133 C Elder Auntie @Caio Monteiro
+134 R End-Blaze Epiphany @Tyler Walpole
+135 C Enraged Flamecaster @Lars Grant-West
+136 U Explosive Prodigy @Joshua Raphael
+137 C Feed the Flames @Xabi Gaztelua
+138 C Flame-Chain Mauler @Kai Carpenter
+139 U Flamebraider @Pete Venters
+140 C Flamekin Gildweaver @Aurore Folny
+141 U Giantfall @Drew Baker
+142 U Goatnap @Vincent Christiaens
+143 R Goliath Daydreamer @Omar Rayyan
+144 C Gristle Glutton @Filip Burburan
+145 R Hexing Squelcher @Matt Stewart
+146 U Impolite Entrance @Scott Murphy
+147 U Kindle the Inner Flame @Jeff Miracola
+148 C Kulrath Zealot @Karl Kopinski
+149 U Lasting Tarfire @Jorge Jacinto
+150 R Lavaleaper @Ron Spears
+151 M Meek Attack @Karl Kopinski
+152 C Reckless Ransacking @Daren Bader
+153 R Scuzzback Scrounger @Mark Zug
+154 U Sear @Lars Grant-West
+155 U Sizzling Changeling @Chris Seaman
+156 M Soul Immolation @Drew Tucker
+157 U Soulbright Seeker @Kev Fang
+158 U Sourbread Auntie @John Tedrick
+159 M Spinerock Tyrant @Cory Godbey
+160 U Squawkroaster @Alessandra Pisano
+161 U Sting-Slinger @Ralph Horsley
+162 C Tweeze @Scott Gustafson
+163 U Warren Torchmaster @Ioannis Fiore
+164 C Assert Perfection @Matt Stewart
+165 M Aurora Awakener @Paolo Parente
+166 M Bloom Tender @Nils Hamm
+167 U Blossoming Defense @Eelis Kyttanen
+168 R Bristlebane Battler @Steve Ellis
+169 U Bristlebane Outrider @Ryan Pancoast
+170 M Celestial Reunion @Justin Gerard
+171 R Champions of the Perfect @Chris Rahn
+172 U Chomping Changeling @Jeff Laubenstein
+173 C Crossroads Watcher @Aurore Folny
+174 C Dawn's Light Archer @Scott Gustafson
+175 U Dundoolin Weaver @Olivier Bernard
 176 R Formidable Speaker @Aurore Folny
+177 C Gilt-Leaf's Embrace @Volkan Baǵa
+178 C Great Forest Druid @Pete Venters
+179 U Luminollusk @Maxime Minard
+180 U Lys Alana Dignitary @Heather Hudson
+181 C Lys Alana Informant @Sidharth Chaturvedi
+182 C Midnight Tilling @Slawomir Maniak
+183 C Mistmeadow Council @Jim Pavelec
+184 U Moon-Vigil Adherents @David Palumbo
+185 U Morcant's Eyes @David Palumbo
 186 R Mutable Explorer @Wayne Reynolds
+187 U Pitiless Fists @A. M. Sartor
+188 U Prismabasher @Aaron Miller
+189 U Prismatic Undercurrents @Steve Ellis
+190 U Pummeler for Hire @Steve Ellis
+191 C Safewright Cavalry @Milivoj Ćeran
+192 R Sapling Nursery @Vincent Christiaens
+193 R Selfless Safewright @Quintin Gleim
+194 U Shimmerwilds Growth @Jorge Jacinto
+195 R Spry and Mighty @Pete Venters
+196 C Surly Farrier @Jake Murray
+197 C Tend the Sprigs @Iris Compiet
+198 U Thoughtweft Charge @Josiah "Jo" Cameron
+199 R Trystan, Callous Cultivator @Annie Stegg
+200 C Unforgiving Aim @Filip Burburan
+201 U Vinebred Brawler @Evyn Fong
+202 U Virulent Emissary @Tiffany Turrill
+203 C Wildvine Pummeler @Kev Walker
+204 R Abigale, Eloquent First-Year @Mark Zug
 205 R Ashling's Command @Iris Compiet
+206 U Boggart Cursecrafter @Alex Stone
+207 R Bre of Clan Stoutarm @Jesper Ejsing
+208 R Brigid's Command @Sam Guay
+209 M Catharsis @Alex Horley-Orlandelli
+210 C Chaos Spewer @Quintin Gleim
+211 C Chitinous Graspling @Richard Kane Ferguson
 212 M Deceit @Svetlin Velinov
+213 U Deepchannel Duelist @Richard Kane Ferguson
+214 R Deepway Navigator @Jacob Walker
+215 R Doran, Besieged by Time @Carl Critchlow
+216 R Dream Harvest @Ben Hill
+217 U Eclipsed Boggart @Tiffany Turrill
+218 U Eclipsed Elf @Jason A. Engle
+219 U Eclipsed Flamekin @Paolo Parente
+220 U Eclipsed Kithkin @Filip Burburan
+221 U Eclipsed Merrow @Chris Rahn
 222 M Emptiness @Ryan Pancoast
+223 C Feisty Spikeling @Tiffany Turrill
 224 R Figure of Fable @Omar Rayyan
+225 C Flaring Cinder @Kai Carpenter
+226 C Gangly Stompling @Scott Murphy
+227 U Glister Bairn @Nils Hamm
+228 R Grub's Command @Iris Compiet
+229 R High Perfect Morcant @Victor Adame Minguez
+230 U Hovel Hurler @Chris Seaman
+231 R Kirol, Attentive First-Year @Evyn Fong
+232 R Lluwen, Imperfect Naturalist @Evyn Fong
+233 R Maralen, Fae Ascendant @Steve Prescott
+234 C Merrow Skyswimmer @Richard Kane Ferguson
+235 C Mischievous Sneakling @Ron Spears
+236 U Morcant's Loyalist @Evyn Fong
+237 U Noggle Robber @Steve Ellis
+238 C Prideful Feastling @Raph Lomotan
+239 R Raiding Schemes @Justin Gerard
+240 U Reaping Willow @Igor Krstic
+241 R Sanar, Innovative First-Year @Steven Belledin
+242 R Shadow Urchin @Ron Spencer
+243 C Stoic Grove-Guide @Tran Nguyen
+244 R Sygg's Command @Margaret Organ-Kean
+245 R Tam, Mindful First-Year @Zoltan Boros
+246 U Thoughtweft Lieutenant @Matt Stewart
+247 R Trystan's Command @Sam Guay
+248 U Twinflame Travelers @Jeff Miracola
+249 M Vibrance @Jakub Kasper
+250 U Voracious Tome-Skimmer @Loïc Canavaggia
+251 C Wary Farmer @Ron Spears
+252 M Wistfulness @Jesper Ejsing
+253 M Chronicle of Victory @Aldo Domínguez
+254 U Dawn-Blessed Pennant @Igor Krstic
+255 C Firdoch Core @Jason A. Engle
+256 C Foraging Wickermaw @Ron Spencer
+257 U Gathering Stone @Paolo Parente
+258 R Mirrormind Crown @Dan Frazier
+259 U Puca's Eye @Dan Frazier
+260 U Springleaf Drum @Cory Godbey
+261 C Stalactite Dagger @Drew Tucker
 262 R Blood Crypt @Adam Paquette
+263 U Eclipsed Realms @Alayna Danner
+264 C Evolving Wilds @Alayna Danner
 265 R Hallowed Fountain @Adam Paquette
 266 R Overgrown Tomb @Adam Paquette
 267 R Steam Vents @Adam Paquette
 268 R Temple Garden @Adam Paquette
+269 L Plains @Zoltan Boros
+270 L Island @Ron Spears
+271 L Swamp @Jorge Jacinto
+272 L Mountain @Raymond Bonilla
+273 L Forest @Jorge Jacinto
+
+[full art]
+274 L Plains @Justin Gerard
+275 L Island @Annie Stegg
+276 L Swamp @Raoul Vitale
+277 L Mountain @Ralph Horsley
+278 L Forest @Jason Mowry
+279 L Plains @Justin Gerard
+280 L Island @Annie Stegg
+281 L Swamp @Raoul Vitale
+282 L Mountain @Ralph Horsley
+283 L Forest @Jason Mowry
+
+[borderless]
+284 M Ajani, Outland Chaperone @Greg Staples
+285 R Brigid, Clachan's Heart @Jesper Ejsing
 286 M Eirdu, Carrier of Dawn @Omar Rayyan
+287 M Oko, Lorwyn Liege @Steve Prescott
 288 R Sygg, Wanderwine Wisdom @Warren Mahy
+289 R Grub, Storied Matriarch @Zoltan Boros
 290 R Ashling, Rekindled @Chuck Lukacs
+291 R Trystan, Callous Cultivator @Larry MacDougall
+292 M Catharsis @Wayne Reynolds
 293 M Deceit @Kev Walker
 294 M Emptiness @Jeff Miracola
+295 M Vibrance @Mark Zug
+296 M Wistfulness @Paolo Parente
+
+[showcase]
+297 R Adept Watershaper @Julie Benbassat
+298 M Curious Colossus @Hayden Goodman
+299 R Kinbinding @Yas Imamura
+300 R Kinscaer Sentry @Felicita Sala
 301 M Morningtide's Light @adelinaillustration
+302 R Slumbering Walker @Rebecca Green
+303 R Disruptor of Currents @Julie Benbassat
+304 R Flitterwing Nuisance @Serena Malyon
+305 R Glen Elendra Guardian @Danny Schwartz
+306 M Glen Elendra's Answer @Matthew Forsythe
+307 M Loch Mare @Isabella Mazzanti
+308 M Mirrorform @Felicita Sala
+309 R Sunderflock @Danny Schwartz
 310 M Bitterbloom Bearer @Taryn Knight
+311 R Dawnhand Dissident @Lauren Degraaf
+312 R Gloom Ripper @Isabella Mazzanti
+313 M Moonshadow @Julie Benbassat
+314 R Taster of Wares @Felicita Sala
+315 R Twilight Diviner @Isabella Mazzanti
+316 R Goliath Daydreamer @Vanessa Gillings
+317 R Hexing Squelcher @Matthew Forsythe
+318 R Lavaleaper @Matthew Forsythe
+319 M Meek Attack @Matt Rockefeller
+320 R Scuzzback Scrounger @Matthew Forsythe
+321 M Soul Immolation @Serena Malyon
+322 M Spinerock Tyrant @Danny Schwartz
+323 M Aurora Awakener @Matthew Forsythe
+324 M Bloom Tender @Danny Schwartz
+325 R Bristlebane Battler @Matt Rockefeller
+326 M Celestial Reunion @Serena Malyon
 327 R Mutable Explorer @Felicita Sala
+328 R Sapling Nursery @Julie Benbassat
+329 R Spry and Mighty @Matthew Forsythe
 330 R Ashling's Command @adelinaillustration
+331 U Boggart Cursecrafter @Heikala
+332 R Brigid's Command @Rebecca Green
+333 U Deepchannel Duelist @Lauren Degraaf
+334 R Doran, Besieged by Time @Serena Malyon
+335 U Eclipsed Boggart @Yas Imamura
+336 U Eclipsed Elf @Heikala
+337 U Eclipsed Flamekin @Vanessa Gillings
+338 U Eclipsed Kithkin @Yas Imamura
+339 U Eclipsed Merrow @Felicita Sala
+340 R Grub's Command @Phoebe Wahl
+341 U Morcant's Loyalist @Yas Imamura
+342 R Sygg's Command @Felicita Sala
+343 U Thoughtweft Lieutenant @Vanessa Gillings
+344 R Trystan's Command @Yas Imamura
+345 U Twinflame Travelers @adelinaillustration
+346 M Chronicle of Victory @adelinaillustration
+
+[alternate art]
 347 R Hallowed Fountain @Justin Gerard
 347☇ R Hallowed Fountain @Justin Gerard
 348 R Steam Vents @Raoul Vitale
@@ -42,5 +424,108 @@ ScryfallCode=ECL
 351 R Temple Garden @Annie Stegg
 351☇ R Temple Garden @Annie Stegg
 352 M Bitterbloom Bearer @Rebecca Guay
+382 M Winnowing @Yukoring
+383 M Glen Elendra Guardian @NgN
+384 M Harmonized Crescendo @konomura
+385 M Bloodline Bidding @Morizo
+386 M Moonshadow @Mizugoromaru
+387 M Collective Inferno @YUE
+388 M Meek Attack @Yoshioka
+389 M Spinerock Tyrant @D-suzuki
+390 M Bloom Tender @Yuyuharu
+391 M Selfless Safewright @Karuta Shiki
+392 M Winnowing @Yukoring
+393 M Glen Elendra Guardian @NgN
+394 M Harmonized Crescendo @konomura
+395 M Bloodline Bidding @Morizo
+396 M Moonshadow @Mizugoromaru
+397 M Collective Inferno @YUE
+398 M Meek Attack @Yoshioka
+399 M Spinerock Tyrant @D-suzuki
+400 M Bloom Tender @Yuyuharu
+401 M Selfless Safewright @Karuta Shiki
+
+[extended art]
+353 R Champion of the Clachan @Edgar Sánchez Hidalgo
+354 R Rhys, the Evermore @Kai Carpenter
+355 R Winnowing @David Palumbo
+356 R Champions of the Shoal @Daniel Zrom
+357 R Harmonized Crescendo @Tyler Walpole
+358 R Rimefire Torque @Jorge Jacinto
+359 R Bloodline Bidding @Drew Baker
+360 R Champion of the Weird @Lucas Graciano
+361 R Mornsong Aria @Scott M. Fischer
+362 R Champion of the Path @Tyler Walpole
+363 R Collective Inferno @Jason A. Engle
+364 R End-Blaze Epiphany @Tyler Walpole
+365 R Champions of the Perfect @Chris Rahn
 366 R Formidable Speaker @Aurore Folny
+367 R Selfless Safewright @Quintin Gleim
+368 R Abigale, Eloquent First-Year @Mark Zug
+369 R Bre of Clan Stoutarm @Jesper Ejsing
+370 R Deepway Navigator @Jacob Walker
+371 R Dream Harvest @Ben Hill
 372 R Figure of Fable @Omar Rayyan
+373 R High Perfect Morcant @Victor Adame Minguez
+374 R Kirol, Attentive First-Year @Evyn Fong
+375 R Lluwen, Imperfect Naturalist @Evyn Fong
+376 R Maralen, Fae Ascendant @Steve Prescott
+377 R Raiding Schemes @Justin Gerard
+378 R Sanar, Innovative First-Year @Steven Belledin
+379 R Shadow Urchin @Ron Spencer
+380 R Tam, Mindful First-Year @Zoltan Boros
+381 R Mirrormind Crown @Dan Frazier
+
+[promo]
+402 U Personify @Slawomir Maniak
+403 U Silvergill Mentor @Iris Compiet
+404 U Iron-Shield Elf @Adrián Rodríguez Pérez
+405 U Sear @Lars Grant-West
+406 U Virulent Emissary @Tiffany Turrill
+407 R Kinbinding @Heather Hudson
+408 R Harmonized Crescendo @Jeff Miracola
+
+[special guests]
+1 Idyllic Tutor|SPG|[129]
+1 Kinsbaile Cavalier|SPG|[130]
+1 Mistbind Clique|SPG|[131]
+1 Wanderwine Prophets|SPG|[132]
+1 Bitterblossom|SPG|[133]
+1 Faerie Macabre|SPG|[134]
+1 Goblin Chieftain|SPG|[135]
+1 Goblin Sharpshooter|SPG|[136]
+1 Heat Shimmer|SPG|[137]
+1 Devoted Druid|SPG|[138]
+1 Helix Pinnacle|SPG|[139]
+1 Leaf-Crowned Visionary|SPG|[140]
+1 Regal Force|SPG|[141]
+1 Manamorphose|SPG|[142]
+1 Risen Reef|SPG|[143]
+1 Slippery Bogle|SPG|[144]
+1 Dolmen Gate|SPG|[145]
+1 Door of Destinies|SPG|[146]
+1 Painter's Servant|SPG|[147]
+1 Thousand-Year Elixir|SPG|[148]
+
+[reversible shocklands]
+1 Hallowed Fountain|ECL|[347]
+1 Steam Vents|ECL|[348]
+1 Blood Crypt|ECL|[349]
+1 Overgrown Tomb|ECL|[350]
+1 Temple Garden|ECL|[351]
+
+[tokens]
+1 c_1_1_shapeshifter_changeling @Jeff Miracola
+2 g_3_3_elk @Sam Guay
+3 g_3_4_treefolk_reach @Jeff Laubenstein
+4 bg_2_2_elf @Pete Venters
+5 ub_1_1_faerie_flying @Iris Compiet
+6 br_1_1_goblin @Larry MacDougall
+7 gw_1_1_kithkin @Jeff Laubenstein
+8 wu_1_1_merfolk @Julia Griffin
+9 bg_1_1_worm @Edgar Sánchez Hidalgo
+10 c_a_treasure_sac @Jeff Miracola
+
+[other]
+11 mutavault @Mark Poole
+12 emblem_oko_shadowmoor_scion @Kai Carpenter

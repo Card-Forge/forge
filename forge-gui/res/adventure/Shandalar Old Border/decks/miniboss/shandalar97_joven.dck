@@ -1,0 +1,28 @@
+[metadata]
+Name=Joven
+[Main]
+22 Mountain|2ED
+1 Chandler|HML
+1 Joven|HML
+2 Blood Hound|MMQ
+2 Mountain Goat|ICE
+2 Grizzled Wolverine|ICE
+2 Guma|USG
+4 Jackal Pup|TMP
+2 Raging Bull|LEG
+2 Raging Cougar|POR
+2 Ravenous Baboons|EXO
+2 Rock Badger|MMQ
+2 Roc of Kher Ridges|LEA
+2 Sabretooth Tiger|ICE
+2 Wild Colos|UDS
+2 Zodiac Dog|PTK
+2 Zodiac Goat|PTK
+2 Canyon Wildcat|TMP
+2 Cinder Crawler|EXO
+2 Crested Craghorn|LGN
+
+[StartInBattle_Reference]
+1 Joven|HML
+1 Joven's Ferrets|HML
+1 Joven's Tools|HML

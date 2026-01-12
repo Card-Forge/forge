@@ -1,0 +1,16 @@
+Name:The Thing
+ManaCost:5 G
+Types:Legendary Creature Human Hero
+PT:5/5
+K:Trample
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of combat on your turn, if you've cast a noncreature spell this turn, put four +1/+1 counters on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerDescription$ Whenever CARDNAME attacks, you may pay {R}{G}{W}{U}. When you do, double the number of each kind of counter on any number of target permanents you control.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ R G W U | Execute$ TrigMultiplyCounter | TriggerDescription$ When you do, double the number of each kind of counter on any number of target permanents you control.
+SVar:TrigMultiplyCounter:DB$ MultiplyCounter | ValidTgts$ Permanent.YouCtrl | TargetMin$ 0 | TargetMax$ MaxTargets | TgtPrompt$ Select any number of target permanents you control
+SVar:X:Count$ThisTurnCast_Card.nonCreature+YouCtrl
+SVar:MaxTargets:Count$Valid Permanent.YouCtrl
+SVar:HasAttackEffect:TRUE
+SVar:PlayMain1:TRUE
+DeckHints:Ability$Counters
+Oracle:Trample\nAt the beginning of combat on your turn, if you've cast a noncreature spell this turn, put four +1/+1 counters on The Thing.\nWhenever The Thing attacks, you may pay {R}{G}{W}{U}. When you do, double the number of each kind of counter on any number of target permanents you control.

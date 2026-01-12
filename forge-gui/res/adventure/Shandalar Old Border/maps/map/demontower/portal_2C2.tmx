@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="89">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="7" name="Collision" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20Hb6AAAAAAAAAAAAB4DCWAAAE=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="40" height="60" tintcolor="#f87f85">
+  <data encoding="base64" compression="zlib">
+   eJztw7ENAAAMAiDT/0928IbukNBLqqqqqqqqqqqq6vsAVwtNyA==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJzNmWFuwjAMhflJNW6xs7ChnoSbsY3dChgcY43AmvewHTt12CJFSDRtvj47tptsV4vFy/C7b6Ze2jjcX+vZtyu58zEfy8Xi1MBX7vtc9uXjbDW+MnbPernvMPXj0M5Z49swttIOwlyFqzCcYOzz0/V3N12/JOtHjK8wJ86F+kqtvNO+0dY1vq+pvy+v85Rfstdx+LEhZ3+7dboHOaO2tvgkRq2hrvherXp6+NAPJda18Gz0Xc89rXzoh9ikdV001GxNOtY07Mnn4az5pJcPfXB3m4/WhCd+WH6saVnj03xwvM0XjWvZjNKz58TbFkYvHz17DpuHEdd1hC+za+sGNYz4oLdTTvbEYCk2cA0z+bBWqMU4KX9L/p3FJ/mVxYg5Rlt7mfZFRqnm2YPOWhyluTP50GZr45q2ZiO+F+Wzalp+jecgLWZl82n6jMI1Tw7K5tNqqsNwz+351srk89T63LaePJTJJ8WWOWwZfHi9MFo1abS2aOWT4hJq6cmtj+TTOOcwtvBFx0v537tP0oPPs268Gs6xb+Q+KS5mfF9qazfC562hMvkiXdIu0740lmpP2pugOqk2D/pf0e485OqHNuL51KMFZ/T4XXQt1vZSPIybwPtE+Lx539LFqlnn8tW088yJdWlWfZDBJ/luhn0jtrU0wfVb0zrC59XO2ieT3jEj/mnvbrWRMVGMlPTPyh9lTG1vUtKRzj6scVn7z1xDiv1WjVxrmfmD+zg+k/6zzhTmaBfh83TijZ5FzOFrqV+sNd/j+yjKp635ln1hD1+UUYsp5HeRc9cefFo8Iv2K/SNncdl8mn3p3M3aezsCt6R1lg96Yg4/D8Uagv7z7OdH+ZCzxB1P7JFaTz6J9zzIvJRX8B3wW74nn+arPPbg+vKch/TiI0YeF2v7IY/m0zTldr/8Iz7U8C/9T+t4lmux/Rc+YvkGqY5eAg==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="60">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt1jEOgCAMBVAWvf8d9KCOOmiCgELJezNDA+W3KcE49oqza8tC4KK0t/QkI1l6FzARfzuON3sFfOEpL2QynGQ1I7DfQV92ozbM1PlEfdOcP2328jezpl7UTOpt611AgUgZfVdrpF6NdNdAngMVnwYZ
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="70" template="../../../../../../common/maps/obj/door_down.tx" x="97" y="18.5">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/demontower/portal_2B.tmx"/>
+    <property name="teleportObjectId" value="70"/>
+   </properties>
+  </object>
+  <object id="74" template="../../../../../../common/maps/obj/door_up.tx" x="551" y="958.5">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/demontower/portal_2C.tmx"/>
+    <property name="teleportObjectId" value="77"/>
+   </properties>
+  </object>
+  <object id="75" template="../../../../../../common/maps/obj/enemy.tx" x="146.162" y="638.511">
+   <properties>
+    <property name="displayNameOverride" value="Cave Horror"/>
+    <property name="enemy" value="Horror of Tibalt"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../../../common/maps/obj/gold.tx" x="93.6983" y="597.347"/>
+  <object id="77" template="../../../../../../common/maps/obj/gold.tx" x="146.969" y="577.976"/>
+  <object id="78" template="../../../../../../common/maps/obj/gold.tx" x="199.432" y="602.19"/>
+  <object id="79" template="../../../../../../common/maps/obj/enemy.tx" x="355.208" y="674.025">
+   <properties>
+    <property name="displayNameOverride" value="Cave Horror"/>
+    <property name="enemy" value="Horror of Tibalt"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="83,84,85,86,87,88,87,86,85,84,83"/>
+   </properties>
+  </object>
+  <object id="80" template="../../../../../../common/maps/obj/manashards.tx" x="89.6627" y="704.695"/>
+  <object id="81" template="../../../../../../common/maps/obj/manashards.tx" x="288.217" y="278.531"/>
+  <object id="82" template="../../../../../../common/maps/obj/manashards.tx" x="114.684" y="197.011"/>
+  <object id="83" template="../../../../../../common/maps/obj/waypoint.tx" x="325.345" y="758.773"/>
+  <object id="84" template="../../../../../../common/maps/obj/waypoint.tx" x="369.737" y="592.504"/>
+  <object id="85" template="../../../../../../common/maps/obj/waypoint.tx" x="350.366" y="404.443"/>
+  <object id="86" template="../../../../../../common/maps/obj/waypoint.tx" x="416.55" y="327.766"/>
+  <object id="87" template="../../../../../../common/maps/obj/waypoint.tx" x="488.385" y="256.739"/>
+  <object id="88" template="../../../../../../common/maps/obj/waypoint.tx" x="284.988" y="73.5201"/>
+ </objectgroup>
+</map>

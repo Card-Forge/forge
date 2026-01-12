@@ -1,0 +1,8 @@
+Name:Flash Photography
+ManaCost:2 U U
+Types:Sorcery
+K:Flashback:4 U U
+S:Mode$ CastWithFlash | ValidCard$ Card.Self | ValidSA$ Spell.IsTargeting Valid Permanent.YouCtrl | EffectZone$ All | Caster$ You | Description$ You may cast this spell as though it had flash if it targets a permanent you control. 
+A:SP$ CopyPermanent | ValidTgts$ Permanent | StackDescription$ SpellDescription | SpellDescription$ Create a token that's a copy of target permanent.
+DeckHas:Ability$Token
+Oracle:You may cast this spell as though it had flash if it targets a permanent you control.\nCreate a token that's a copy of target permanent.\nFlashback {4}{U)}U)

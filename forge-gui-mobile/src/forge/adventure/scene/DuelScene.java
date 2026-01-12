@@ -24,8 +24,11 @@ import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
+import forge.game.GameOutcome;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.quest.QuestUtil;
+import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
 import forge.gui.FThreads;
 import forge.gui.interfaces.IGuiGame;
 import forge.item.IPaperCard;
@@ -37,6 +40,7 @@ import forge.screens.LoadingOverlay;
 import forge.screens.TransitionScreen;
 import forge.screens.match.MatchController;
 import forge.sound.MusicPlaylist;
+import forge.sound.SoundSystem;
 import forge.toolbox.FOptionPane;
 import forge.trackable.TrackableCollection;
 import forge.util.Aggregates;
@@ -106,6 +110,24 @@ public class DuelScene extends ForgeScene {
                     }
                 }
             }
+
+            // Handle ante card transfers
+            if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ANTE)) {
+                GameOutcome.AnteResult anteResult = hostedMatch.getGame().getOutcome()
+                        .getAnteResult(humanPlayer);
+                if (anteResult != null) {
+                    if (anteResult.wonCards != null) {
+                        for (PaperCard card : anteResult.wonCards) {
+                            Current.player().addCard(card);
+                        }
+                    }
+                    if (anteResult.lostCards != null) {
+                        for (PaperCard card : anteResult.lostCards) {
+                            Current.player().getCards().remove(card, 1);
+                        }
+                    }
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -133,7 +155,7 @@ public class DuelScene extends ForgeScene {
     void afterGameEnd(String enemyName, boolean winner) {
         Forge.advFreezePlayerControls = winner;
         endRunnable = () -> Gdx.app.postRunnable(() -> {
-            GameHUD.getInstance().switchAudio();
+            GameHUD.getInstance().updateBGM();
             dungeonEffect = null;
             callbackExit = false;
             Forge.clearTransitionScreen();
@@ -192,7 +214,7 @@ public class DuelScene extends ForgeScene {
 
     @Override
     public void enter() {
-        GameHUD.getInstance().unloadAudio();
+        SoundSystem.instance.stopBackgroundMusic();
         GameType mainGameType;
         boolean isDeckMissing = false;
         String isDeckMissingMsg = "";
@@ -370,8 +392,8 @@ public class DuelScene extends ForgeScene {
             rules = new GameRules(GameType.Adventure);
             rules.setGamesPerMatch(enemy.getData().gamesPerMatch);
         }
-        rules.setPlayForAnte(false);
-        rules.setMatchAnteRarity(true);
+        rules.setPlayForAnte(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ANTE));
+        rules.setMatchAnteRarity(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ANTE_MATCH_RARITY));
         rules.setManaBurn(false);
         rules.setWarnAboutAICards(false);
 

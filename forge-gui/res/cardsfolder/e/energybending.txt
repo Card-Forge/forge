@@ -1,0 +1,7 @@
+Name:Energybending
+ManaCost:2
+Types:Instant Lesson
+A:SP$ Effect | StaticAbilities$ Energybend | RememberObjects$ Valid Land.YouCtrl | SubAbility$ DBDraw | SpellDescription$ Lands you control gain all basic land types until end of turn. Draw a card.
+SVar:Energybend:Mode$ Continuous | Affected$ Permanent.IsRemembered | AddType$ AllBasicLandType | Description$ Lands you control gain all basic land types until end of turn.
+SVar:DBDraw:DB$ Draw
+Oracle:Lands you control gain all basic land types until end of turn.\nDraw a card.

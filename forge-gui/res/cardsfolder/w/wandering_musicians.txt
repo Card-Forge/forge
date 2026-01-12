@@ -1,0 +1,7 @@
+Name:Wandering Musicians
+ManaCost:3 RW
+Types:Creature Human Bard Ally
+PT:2/5
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Whenever this creature attacks, creatures you control get +1/+0 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1
+Oracle:Whenever this creature attacks, creatures you control get +1/+0 until end of turn.

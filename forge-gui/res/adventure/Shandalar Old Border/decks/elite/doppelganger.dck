@@ -1,0 +1,22 @@
+[metadata]
+Name=Doppelganger - Clone Deck
+[Main]
+10 Swamp|5ED
+10 Island|5ED
+4 Salt Marsh|INV
+4 Clone|ONS
+4 Vesuvan Doppelganger|LEA
+4 Dralnu's Pet|PLS
+2 Shifty Doppelganger|ODY
+2 Volrath the Fallen|NMS
+3 Broken Visage|5ED
+4 Dark Ritual|MIR
+2 Copy Artifact|LEB
+3 Vendetta|MMQ
+2 Ambition's Cost|PTK
+2 Ashen Powder|MIR
+4 Fog Bank|USG
+
+[StartInBattle_Reference]
+1 Fellwar Stone|DRK
+1 Kismet|LEG

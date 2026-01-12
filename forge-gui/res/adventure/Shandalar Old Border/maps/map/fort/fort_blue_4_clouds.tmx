@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="65">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx" />
+ <tileset firstgid="28289" source="../../../../../../common/maps/tileset/main-nocollide.tsx" />
+ <layer id="6" name="Collision" width="30" height="30" visible="0" opacity="0.6">
+  <data encoding="base64" compression="zlib">
+   eJy9lkFOwzAQRb1PE7FjEeiGC4BK8TJngC33YNVGXIK2rGHDGiEkJA5ReiHylXxlMth1HNJ+adQ0tf08zp9JjenKZsZsUmNuMnM0gSf1k/2NQ+xnrta8KrpxYY25XY7L1rlqSf6YbKzzUuXzaus9uM74OT0cO5Q32DPB/liMw+4jsq+L/lw7kifpwT7c6aS9fkzG4+o68DH/w7aNx3aCa5X/uI+8Yp47uK69hJg7kds2q+9pketaP4apcwyJ53j50N5bpfFM8NCrQuKYrdgn2KHadGneMJ/Sej5yWVef70X9e5nUQZXKM0OYkpurWlg369E3uDcV13LsaWRvkWc8U8+WPJdfNTump0nv7uP6ahEs8mJ6GvNk5CovedaaDc7novt9CJOe0pLsr0kbd8vuOPRl7T8XU8rHdLH76Fud2xDmUDa94WJC+pmG2L5zpJDHvdgfajQ76QaEvuPzK+bjzJgnavdszz41k1yfXDlj/lvTE8EO9V0Xk1ydL3PWXM739Wsw6F2Gi0mubw3tK3iC9SXFeot55+D/kvajz8v0IrmyxmPf52SvRPjqB8+zVHUzlDlE5JfJ8ZhSoZr16ReQQoXh
+  </data>
+ </layer>
+ <layer id="8" name="Ground" width="30" height="30" opacity="0.62">
+  <data encoding="base64" compression="zlib">
+   eJzt08EJgDAMheFctBN0Dy9uJh50ie4mOo8UCbyWVhCSeMnhP38kJDEQRYHmgej6kISZO90tSsHWzR5m4aJV21Lu8eJOa5mk27JbpoaLdm9WTtpFu2dquWz/4eb2rW0mRZNDC9N2eef1H1u4eGtsW7lsL+OTpet5nud5vW5Hg8Dk
+  </data>
+ </layer>
+ <layer id="9" name="Clutter Ground" width="30" height="30" opacity="0.66">
+  <data encoding="base64" compression="zlib">
+   eJzNV21OwkAQ3f6i/aFiUtoi+HEEbyb4UUGDokcCNaLGS4Bard7FmXQmrM1u2V3E+JKXEmj7dnZn3gxCCDEEXgo1spoQ78RP6ToDftQ0DxkANc+Be576941AiATYkFgnRoG77g3oPQDvNLr/FTns9csS++2K1Idz8v9etwuaa4F9jmUGeZlRDqvui0HzGLR7ljH34f43qosZ1cmsdGYY0yHdpzpLjvnLIua4VB8NWr/8nhA+d+C7A19dO6FBXe2nZmvplM4N67jpWK+oyVwE3tsjh1zNS7lQpTkAXtNnzKP1oNjXTYcYcW9MnhuKn16JuXbiqGmKAWnGoLkNnEKsr7XVe0ELtEJgE5h4brH2gFdifk4mwFhH3nyfuw6+F9Ha73HdQt1TuZ9y/e96BbeAz16RE7b9bUKaY9JX9bZY8gX0vjZpPhr0wayi9zzB87ea9+QUK9bIqV/QVBPRJa+08UNEn7wukXzRpt+ntFadT68K7NNndE6r1h4CL0RRJ6G0V8vMVybAnGlQff81Wr+kW+4ZixAtqZvTPIEebDObYLy6GbsKPCNh7aL/1i37eER9wwRTaV7C+FhPzkPsR5yrOqDvjw3izSRfQp/g+UmV9xPK1RF5OvYVviLR43cqfFdGSr0sMagxjgX7b7t0ZQ9t0bp0/90YocXZfQNfOXVl
+  </data>
+ </layer>
+ <layer id="1" name="SubClouds" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztl1EKwyAMQHOXXcCuwv7MYBe2nQecMqVORttolpbhg3yaZ4MhKUAb1gBMPmbTmCjiYr4yyvwKAQYfV+TxrpG7rfdNPuYNL0ddXMX5si7qQfdebm83hbIulugN50dc3PpOO99CcmsfLvPW1I7lPkLevf2z1oe1bPVPYIhvObwJiT7PvcHZOYZ/77tOp/OJZZorVOfT0HcdDmeYL5IzRuF356/vUHqlvjvtoyMue4QW3CGSf8+/wpl4AevSO68=
+  </data>
+ </layer>
+ <layer id="2" name="Clouds" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzFltFuwyAMRfmXva/dEmlvJVJ/GAIfOFhq9ca1g0ORZsmqQhDHNvZtnNtbuDkXi68397ZNi3Pz0t5Xman4l3+fWS0VZjZwr35jkn/87L2u5QF1QMNc5+ITiwHjGMp9sCpz9dtzFHyCOxjRA8ReB93tf1u4b7/W3m7tTbXHjLWh3snG+TyaAyuXmNSTVrZ0TqT4/eu6dCbO4tzRQzhrNMuVg+vfwpm9TMyRz3RWYql29U9e7GDS/Wh6Qk7vM8TZU9dqye9rFIBNeUTIh9733iXn4r3R2Vo/B8i7t3epxvwMPkd81luxWZhUU6xZYvlIs35GWySmNB+WWvZoGjK1/kB2FJy0kZ61+LgucKak19jfLZc0pcX8q9si67WV/XJXihZJ8WkmfSfwWPh5/LtK0jyLSfd71CMa92zOR/op9WUvF793kcHrrWmlxtXi/CxrF7a3WkuPNU2zMLV8LfuleeD9ePZ/5Gh/MGjHaOMzemo272OYyP0Fy7n4Rw==
+  </data>
+ </layer>
+ <layer id="10" name="CloudsClutter" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztlt8KwiAUxn2Rblasm4Jtji7detm6KXB/qNfrSEpGerTUFbEPhE1hPz3fp5OQV12YoXMC7ZrvcFNpruNviIMPHbR+Yj84+EChjQ62azyEXSFZKBPlRLB75Nu1HFO+mFQkmNsoeQMzr53LMZNC/RE81d5RzGy4+FxjlR659ZHIoPC7k3k0qdBYao5Ybn1ky6B+DhQaKxbXJlXPun3em6m4XMu5qP/Yyn5ZF9WP7dNQpunbsZlCA3NnOzYTE7Zv8oqQdZWGi+XoAMxjAJc29jPM5Ol1T8gCeDmF9VI/hl4zLp91b1P9r5Rf2PnvUgZrzWCdS2gren+36QSMM3uwP2Uq+d4zN1C/bcQazvfM/9MND89aRQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="202" y="415.5" width="48" height="32.5">
+   <properties>
+    <property name="direction" value="left" />
+    <property name="teleport" value="" />
+   </properties>
+  </object>
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="62.75" y="49" />
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="71" y="425.333" />
+  <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="91.5" y="423" />
+  <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="231.263" y="156.93">
+   <properties>
+    <property name="enemy" value="Shapeshifter of Shandalar" />
+   </properties>
+  </object>
+  <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="354.825" y="227.365">
+   <properties>
+    <property name="enemy" value="Thought Invoker of Shandalar" />
+   </properties>
+  </object>
+  <object id="55" template="../../../../../../common/maps/obj/enemy.tx" x="92.7585" y="386.594">
+   <properties>
+    <property name="enemy" value="Whim of Shandalar" />
+    <property name="threatRange" type="int" value="50" />
+   <property name="effect">{"startBattleWithCard": ["City of Brass|ARN"]}</property>
+    </properties>
+  </object>
+  <object id="56" template="../../../../../../common/maps/obj/gold.tx" x="438.5" y="150" />
+  <object id="58" template="../../../../../../common/maps/obj/collision.tx" x="1.75" y="479" width="482" height="16" />
+  <object id="59" template="../../../../../../common/maps/obj/collision.tx" x="-1" y="-16.5" width="482" height="16" />
+  <object id="60" template="../../../../../../common/maps/obj/collision.tx" x="-16" y="-2.5415" width="16" height="502.083" />
+  <object id="61" template="../../../../../../common/maps/obj/collision.tx" x="481.5" y="-11.0415" width="16" height="502.083" />
+  <object id="62" template="../../../../../../common/maps/obj/enemy.tx" x="175.622" y="197.414">
+   <properties>
+    <property name="enemy" value="Shapeshifter of Shandalar" />
+   </properties>
+  </object>
+  <object id="63" template="../../../../../../common/maps/obj/enemy.tx" x="231.718" y="263.196">
+   <properties>
+    <property name="enemy" value="Thought Invoker of Shandalar" />
+   </properties>
+  </object>
+  <object id="64" template="../../../../../../common/maps/obj/manashards.tx" x="297.095" y="174.815" />
+ <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="240" y="50"><properties><property name="enemy" value="The Astral Visionary" /><property name="threatRange" type="int" value="50" /><property name="effect">{"startBattleWithCard": ["Mox Sapphire|LEA", "Zephyr Falcon|LEG", "Yotian Soldier|ATQ"]}</property></properties></object></objectgroup>
+</map>

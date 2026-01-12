@@ -10,6 +10,7 @@ import forge.card.CardEdition;
 import forge.deck.Deck;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.util.IterableUtil;
 import forge.util.StreamUtil;
@@ -27,7 +28,7 @@ import java.util.function.Predicate;
  */
 public class RewardData implements Serializable {
     private static final long serialVersionUID = 3158932532013393718L;
-    public String type;
+    public String type; // TODO convert to enum
     public float probability;
     public int count;
     public int addMaxCount;
@@ -117,8 +118,10 @@ public class RewardData implements Serializable {
         allCards = IterableUtil.filter(allCards, input -> {
             if (input == null)
                 return false;
-            if (Iterables.contains(input.getRules().getMainPart().getKeywords(), "Remove CARDNAME from your deck before playing if you're not playing for ante."))
+            if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE) &&
+                    Iterables.contains(input.getRules().getMainPart().getKeywords(), "Remove CARDNAME from your deck before playing if you're not playing for ante."))
                 return false;
+            // TODO check if commander player
             if (input.getRules().getAiHints().getRemNonCommanderDecks())
                 return false;
             if (input.getRules().isCustom() &&
@@ -155,7 +158,6 @@ public class RewardData implements Serializable {
     }
 
     public Array<Reward> generate(boolean isForEnemy, Iterable<PaperCard> cards, boolean useSeedlessRandom, boolean isNoSell) {
-
         boolean allCardVariants = Config.instance().getSettingData().useAllCardVariants;
         Random rewardRandom = useSeedlessRandom ? new Random() : WorldSave.getCurrentSave().getWorld().getRandom();
         //Keep using same generation method for shop rewards, but fully randomize loot drops by not using the instance pre-seeded by the map

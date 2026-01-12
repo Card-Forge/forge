@@ -37,7 +37,7 @@ public class SurveilEffect extends SpellAbilityEffect {
             return;
         }
 
-        boolean isOptional = sa.hasParam("Optional");
+        boolean optional = sa.hasParam("Optional");
 
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         final CardZoneTable table = AbilityKey.addCardZoneTableParams(moveParams, sa);
@@ -46,7 +46,7 @@ public class SurveilEffect extends SpellAbilityEffect {
             if (!p.isInGame()) {
                 continue;
             }
-            if (isOptional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantSurveil"), null)) {
+            if (optional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantSurveil"), null)) {
                 continue;
             }
 

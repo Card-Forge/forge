@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="78">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztkzEOwDAIA7N27iP7o/yo/+qQLaor28BSMdwSiRyYZB5jzKZpfst1LvYzpi7LjWB6zXKpvVQ7nYz3WsfnOpUMszJmPOjtuG52Z+juyMzRt1rlZeucP4T8zHzVOX/53HmVf/NW52bM7hn1lOF1so94lVwrvGo2TR53ZyrzAH9WER8=
+  </data>
+ </layer>
+ <layer id="6" name="BackgroundBlend" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIKhDRxEIXQ4HjX45CixcyDAQNgdSn8r4YCSuBtId5MLwsjU95mqrqAPeAJMy1/I1EvtPE0vQKq7kdPwIzLz/hMKyoxQCu11ocBucu2tFWNgcAXqdUPSD8sfuNyDnO/ItRcZgOxHxujuQ3abCxY1tAKwsKGXfaNgaAAAL10Ung==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJyTEGBgkBjFGFgaiLdhwVI0tlcSiLEB8VF7qYpr+RkYqoC4mh9iXyWUX8NPn/QF8zet/UlPe3HlGRDeDrV3Kx415OYtbGnoEzv2dIVNnNywgNnbCEwzTSTgZn7q2CsPpBVIwIoUxv2ovaP2jto7ai+59u4F0vuwYFUc4vupZC8uoERAftRe4jCsLYUNg9pXIHsr8aihRZsLFBYgeweifTWU7QUAWLuklw==
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALqgJ0CDAw7BDBpZIBNfqcAdvNGwSgYBaNgFIyCUTD0QB0/hG7gp6+9MtD2hNxou4IkAAD01grd
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztzkENADAIADEcDA0YxfpEQLLHWgGXiwAAANjT5/XBHyrnjQsIsADB
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="50" template="../../../../../../common/maps/obj/portal.tx" x="210" y="220">
+   <properties>
+    <property name="portalState" value="active"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/end_palace/white_end_palace.tmx"/>
+   </properties>
+  </object>
+  <object id="51" template="../../../../../../common/maps/obj/entry_up.tx" x="209" y="480">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="74" template="../../../../../../common/maps/obj/gate.tx" x="208" y="448">
+   <properties>
+    <property name="dialog">[
+	{
+		"text": "A massive gate with a strange lock is blocking the path.",
+		"options": [
+			{ "name": "Leave" },
+			{
+				"name": "Unlock with the strange key",
+				"condition": [
+					{ "item": "Strange Key" }
+				],
+				"text": "The gate is unlocked.",
+				"options": [
+					{
+						"name": "Continue",
+						"action": [
+							{ "deleteMapObject": -1 },
+							{ "removeItem": "Strange Key" }
+						]
+					}
+				]
+			}
+		]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="52" template="../../../../../../common/maps/obj/portal.tx" x="280" y="250">
+   <properties>
+    <property name="portalState" value="active"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/end_palace/blue_end_palace.tmx"/>
+   </properties>
+  </object>
+  <object id="53" template="../../../../../../common/maps/obj/portal.tx" x="260" y="340">
+   <properties>
+    <property name="portalState" value="active"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/end_palace/black_end_palace.tmx"/>
+   </properties>
+  </object>
+  <object id="54" template="../../../../../../common/maps/obj/portal.tx" x="160" y="340">
+   <properties>
+    <property name="portalState" value="active"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/end_palace/red_end_palace.tmx"/>
+   </properties>
+  </object>
+  <object id="55" template="../../../../../../common/maps/obj/portal.tx" x="140" y="250">
+   <properties>
+    <property name="portalState" value="active"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/end_palace/green_end_palace.tmx"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../../../common/maps/obj/gate.tx" x="208" y="142">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;text&quot;: &quot;A massive gate with five colored locks is blocking the path to the False God.&quot;,
+		&quot;options&quot;: [
+			{ &quot;name&quot;: &quot;go away&quot; },
+			{
+				&quot;name&quot;: &quot;unlock with the five keys to the False God&quot;,
+				&quot;condition&quot;: [
+					{ &quot;item&quot;: &quot;White Key to the False God&quot; },
+					{ &quot;item&quot;: &quot;Blue Key to the False God&quot; },
+					{ &quot;item&quot;: &quot;Black Key to the False God&quot; },
+					{ &quot;item&quot;: &quot;Red Key to the False God&quot; },
+					{ &quot;item&quot;: &quot;Green Key to the False God&quot; }
+				],
+				&quot;text&quot;: &quot;The gate is unlocked. You may now face the False God, Karona.&quot;,
+				&quot;options&quot;: [
+					{
+						&quot;name&quot;: &quot;continue&quot;,
+						&quot;action&quot;: [
+							{ &quot;deleteMapObject&quot;: -1 },
+							{ &quot;removeItem&quot;: &quot;White Key to the False God&quot; },
+							{ &quot;removeItem&quot;: &quot;Blue Key to the False God&quot; },
+							{ &quot;removeItem&quot;: &quot;Black Key to the False God&quot; },
+							{ &quot;removeItem&quot;: &quot;Red Key to the False God&quot; },
+							{ &quot;removeItem&quot;: &quot;Green Key to the False God&quot; }
+						]
+					}
+				]
+			}
+		]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="72" template="../../../../../../common/maps/obj/block.tx" x="192" y="142"/>
+  <object id="73" template="../../../../../../common/maps/obj/block.tx" x="224" y="142"/>
+  <object id="77" template="../../../../../../common/maps/obj/portal.tx" x="210" y="80">
+   <properties>
+    <property name="portalState" value="active"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/karona_temple/karona_chamber.tmx"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

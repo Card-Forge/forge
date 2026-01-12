@@ -1,7 +1,5 @@
 package forge.ai.ability;
 
-import forge.ai.AiAbilityDecision;
-import forge.ai.AiPlayDecision;
 import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -179,8 +177,11 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                 if (oppList.isEmpty()) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlaySa);
                 }
-                Player oppTarget = Collections.max(oppList, AiPlayerPredicates.compareByZoneValue(sa.getParam("ChangeType"), origin, sa));
-                if (!oppTarget.getCardsIn(ZoneType.Graveyard).isEmpty()) {
+                String changeType = sa.getParam("ChangeType");
+                Player oppTarget = Collections.max(oppList, AiPlayerPredicates.compareByZoneValue(changeType, origin, sa));
+                int countChangeType = AbilityUtils.filterListByType(oppTarget.getCardsIn(ZoneType.Graveyard), changeType, sa).size();
+                // Assumes the SpellAbility is only useful when 1 or more ChangeType will change zones
+                if (countChangeType > 0) {
                     sa.resetTargets();
                     sa.getTargets().add(oppTarget);
                 } else {
@@ -239,15 +240,13 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
      * <p>
      * changeZoneAllPlayDrawbackAI.
      * </p>
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     * @param aiPlayer
-     *            a {@link forge.game.player.Player} object.
-     * 
+     *
+     * @param aiPlayer a {@link Player} object.
+     * @param sa       a {@link SpellAbility} object.
      * @return a boolean.
      */
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(Player aiPlayer, SpellAbility sa) {
         // if putting cards from hand to library and parent is drawing cards
         // make sure this will actually do something:
 

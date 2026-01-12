@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="77">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [&quot;Iron Star|LEA&quot;]}" />
+ </properties>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF+MBenoGxN5oXQtdy09fe3VD/7qSDv0F+jOJFFavjxo+pYScMwOyWBvp1FwFMLTuR7cYmTm2Qy4Kdjc6n1I8DCZDjCT09EdJHTUCK3dQGyHaD0hW10i4xgF72jGSALYwpCXcA4Msefg==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyL5GRgiCQRb+MmXQ+5GGYXLnog7KSF3cTaSU27SbWTGnaTY2cuC2V2k+tPavh7KNo56l/q2I2cbgdLXqLUTnLtpiYeCDuJtZsemBp2AQCEjupS
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzt1FsKgCAQBVD/zRVoG6u1WNuy194yYkik8s4QfUTCRVDGM4IYKqXCC3FZkJrWKDVW12nMcy7tb+YU57sxADbnvoiJ2qjLMREbcSVmyUbcWmjSsML7/u633SWm1zLTx7pZ6DqhTebZuZx/kmPfmdx/ErVLJtdN7U7voR68PtZKpsTNa+itW0H/aVYIl805
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgaQJYHQkvz0M/OFwNkLwMd7Z1JhJrnNLL7MzsEo4uhy6GrodRObHZhk7tDBfvmMGB3P0iMmLCnFCDbg+6OHk1UdSBADzfRAuBKK+aMqHxk/1ErXeGyO5cFu3oDRuzi1HADuntokYdgABa26PZ4Ut8qDEAL/4wkAAAUQyaR
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="275.665" width="48" height="16">
+   <properties>
+    <property name="teleport" value="" />
+   </properties>
+  </object>
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="209.152" y="63.8086">
+   <properties>
+    <property name="enemy" value="Adept Red Wizard" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="74,72,73,75,72" />
+   </properties>
+  </object>
+  <object id="62" template="../../../../../../common/maps/obj/gold.tx" x="144.5" y="64.25" />
+  <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="128.25" y="192.75">
+   <properties>
+    <property name="enemy" value="Magma Fire Elemental" />
+    <property name="threatRange" type="int" value="40" />
+    <property name="waypoints" value="70,74,71,69" />
+   </properties>
+  </object>
+  <object id="66" template="../../../../../../common/maps/obj/booster.tx" x="289.25" y="95" width="16.25" height="15.25">
+   <properties>
+    <property name="reward">[
+  {
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Common" ]
+  },
+  {
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 1,
+    "rarity": [ "Uncommon" ]
+  },
+  {
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 1,
+    "rarity": [ "Rare" ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="251.75" y="65.75">
+   <properties>
+    <property name="enemy" value="Magma Fire Elemental" />
+    <property name="threatRange" type="int" value="40" />
+    <property name="waypoints" value="75,70,69,71,72" />
+   </properties>
+  </object>
+  <object id="68" template="../../../../../../common/maps/obj/manashards.tx" x="257" y="47.75" />
+  <object id="69" template="../../../../../../common/maps/obj/waypoint.tx" x="269.5" y="130.75" />
+  <object id="70" template="../../../../../../common/maps/obj/waypoint.tx" x="191" y="203.25" />
+  <object id="71" template="../../../../../../common/maps/obj/waypoint.tx" x="116.5" y="95" />
+  <object id="72" template="../../../../../../common/maps/obj/waypoint.tx" x="207.5" y="80.75" />
+  <object id="73" template="../../../../../../common/maps/obj/waypoint.tx" x="159.5" y="78.75" />
+  <object id="74" template="../../../../../../common/maps/obj/waypoint.tx" x="208.5" y="46.75" />
+  <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="271.25" y="79.75" />
+  <object id="76" template="../../../../../../common/maps/obj/treasure.tx" x="160" y="48.5">
+   <properties>
+    <property name="reward">[{"type": "randomCard","colors": ["Red"], "count": 5 }, {"type": "item","count": 1,"probability":0.2,"itemName": "Dagger"},
+{
+"type": "card",
+"probability": 1,
+"count": 1,
+"cardName": "Ruby Medallion|TMP"}]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

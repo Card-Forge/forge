@@ -1,0 +1,7 @@
+Name:Stand United
+ManaCost:1 GW
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBScry | SpellDescription$ Target creature gets +2/+2 until end of turn. If it's an Ally, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)
+SVar:DBScry:DB$ Scry | ScryNum$ 2 | ConditionDefined$ Targeted | ConditionPresent$ Ally
+DeckHints:Type$Ally
+Oracle:Target creature gets +2/+2 until end of turn. If it's an Ally, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)

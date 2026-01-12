@@ -1,4 +1,5 @@
 Name:Cosmic Spider-Man
+Variant:UniversesWithin:FlavorName:Scions of the Ur-Spider
 ManaCost:W U B R G
 Types:Legendary Creature Spider Human Hero
 PT:5/5

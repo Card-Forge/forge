@@ -1,0 +1,31 @@
+[metadata]
+Name=Chewbacca 3
+[Main]
+1 Nantuko Vigilante|LGN
+1 Naturalize|ONS
+1 Rith's Grove|PLS
+1 Seal of Cleansing|NMS
+2 Hidden Gibbons|ULG
+2 Island|5ED|2
+2 Mountain|5ED|2
+2 Treva's Ruins|PLS
+2 Winter Orb|2ED
+3 Armageddon|2ED
+3 Brushland|5ED
+3 Fire // Ice|APC
+3 Mana Leak|BRB
+4 Birds of Paradise|2ED
+4 Call of the Herd|ODY
+4 City of Brass|5ED
+4 Exalted Angel|ONS
+4 Forest|5ED|2
+4 Gemstone Mine|WTH
+4 Lightning Bolt|2ED
+4 Plateau|LEA
+4 Savannah|LEA
+4 Swords to Plowshares|2ED
+4 Taiga|LEA
+6 Plains|5ED|2
+
+[StartInBattle_Reference]
+1 Jayemdae Tome|LEB

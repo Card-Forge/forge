@@ -667,6 +667,9 @@ Replace=.18F BasicLand:fromSheet("FIN cards"):!fromSheet("FIN dual lands")+
 562 R Magitek Scythe @Thanh Tuấn
 563 R Ultima Weapon @Fariba Khamseh
 
+[rebalanced]
+A-248 M A-Vivi Ornitier @Toni Infante
+
 [tokens]
 2 c_1_1_hero @Josephine Chang
 3 c_1_1_hero @Josephine Chang

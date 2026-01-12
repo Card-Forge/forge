@@ -142,7 +142,6 @@ public final class CardEdition implements Comparable<CardEdition> {
         PRERELEASE_PROMO("prerelease promo"),
         BUNDLE("bundle"),
         BOX_TOPPER("box topper"),
-        DUNGEONS("dungeons"),
         JUMPSTART("jumpstart"),
         REBALANCED("rebalanced"),
         ETERNAL("eternal"),
@@ -273,7 +272,8 @@ public final class CardEdition implements Comparable<CardEdition> {
      * Equivalent to the set code of CardEdition.UNKNOWN
      */
     public static final String UNKNOWN_CODE = "???";
-    public static final CardEdition UNKNOWN = new CardEdition("1990-01-01", UNKNOWN_CODE, "??", Type.UNKNOWN, "Undefined", FoilType.NOT_SUPPORTED, new EditionEntry[]{});
+    public static final String UNKNOWN_SET_NAME = "UNKNOWN";
+    public static final CardEdition UNKNOWN = new CardEdition("1990-01-01", UNKNOWN_CODE, "??", Type.UNKNOWN, UNKNOWN_SET_NAME, FoilType.NOT_SUPPORTED, new EditionEntry[]{});
     private Date date;
     private String code;
     private String code2;
@@ -425,7 +425,7 @@ public final class CardEdition implements Comparable<CardEdition> {
      * Get all the CardInSet instances with the input card name.
      * @param cardName Name of the Card to look for.
      * @return A List of all the CardInSet instances for a given name.
-     * If not fount, an Empty sequence (view) will be returned instead!
+     * If not found, an Empty sequence (view) will be returned instead!
      */
     public List<EditionEntry> getCardInSet(String cardName){
         if (cardsInSetLookupMap == null) {
@@ -610,7 +610,7 @@ public final class CardEdition implements Comparable<CardEdition> {
              */
                 /*  Ideally we'd use the named group above, but Android *25* and
                 earlier doesn't appear to support named groups.
-                So, untill support for those devices is officially dropped,
+                So, until support for those devices is officially dropped,
                 we'll have to suffice with numbered groups.
                 We are looking for:
                     * cnum - grouping #2

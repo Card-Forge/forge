@@ -1,4 +1,5 @@
 Name:Hydro-Man, Fluid Felon
+Variant:UniversesWithin:FlavorName:Belion, the Parched
 ManaCost:U U
 Types:Legendary Creature Elemental Villain
 PT:2/2

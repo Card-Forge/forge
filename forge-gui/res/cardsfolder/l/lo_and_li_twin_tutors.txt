@@ -1,0 +1,10 @@
+Name:Lo and Li, Twin Tutors
+ManaCost:4 B
+Types:Legendary Creature Human Advisor
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When NICKNAME enter, search your library for a Lesson or Noble card, reveal it, put it into your hand, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Lesson,Noble | ChangeNum$ 1
+S:Mode$ Continuous | Affected$ Creature.Noble+YouCtrl | AddKeyword$ Lifelink | Description$ Noble creatures you control and Lesson spells you control have lifelink.
+S:Mode$ Continuous | AddKeyword$ Lifelink | Affected$ Lesson.YouCtrl | AffectedZone$ Stack | Secondary$ True | Description$ Noble creatures you control and Lesson spells you control have lifelink.
+DeckHints:Type$Lesson|Noble
+Oracle:When Lo and Li enter, search your library for a Lesson or Noble card, reveal it, put it into your hand, then shuffle.\nNoble creatures you control and Lesson spells you control have lifelink.

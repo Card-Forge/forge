@@ -1,0 +1,26 @@
+[metadata]
+Name=Squee, Goblin Nabob
+[Main]
+16 Mountain|UGL
+4 Goblin Burrows|ONS
+4 Goblin Warchief|SCG
+4 Goblin King|LEA
+4 Siege-Gang Commander|SCG
+4 Goblin Ringleader|APC
+2 Goblin Lackey|USG
+2 Battle Squadron|MMQ
+2 Sparksmith|ONS
+2 Goblin Piledriver|ONS
+2 Goblin Wizard|DRK
+2 Goblin Assassin|LGN
+2 Goblin War Strike|SCG
+2 Disintegrate|LEA
+2 Lightning Bolt|LEA
+2 Goblin Offensive|USG
+2 Mogg Infestation|STH
+2 Shatterstorm|ATQ
+
+[StartInBattle_Reference]
+2 Mountain|UGL
+1 Goblin Spy|INV
+1 Goblin War Drums|FEM

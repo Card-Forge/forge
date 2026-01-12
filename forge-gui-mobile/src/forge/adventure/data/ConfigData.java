@@ -1,5 +1,6 @@
 package forge.adventure.data;
 
+import com.badlogic.gdx.utils.ObjectMap;
 
 /**
  * Data class that will be used to read Json configuration files
@@ -18,11 +19,13 @@ public class ConfigData {
     public String[] colorIdNames;
     public String[] starterEditions;
     public String[] starterEditionNames;
+    public ObjectMap<String, ObjectMap<String, String>> starterDecksByEdition;
     public DifficultyData[] difficulties;
     public RewardData legalCards;
     public String[] restrictedCards;
     public String[] restrictedEditions;
     public String[] allowedEditions;
     public String[] restrictedEvents;
+    public String[] allowedEvents;
     public String[] allowedJumpstart;
 }

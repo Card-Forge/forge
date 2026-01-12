@@ -1,7 +1,6 @@
 ## Part 1
 
 ### Install IntelliJ
-
 IntelliJ comes in two versions:
 
 - **Community Edition**: Free to download and sufficient for this project (it is not a trial version that expires).
@@ -14,7 +13,6 @@ No additional plugins are required for this project.
   * start IntelliJ
 
 ![01-01-initial-prompt](01-01-initial-prompt.png)
-
 
   * select **Do not import settings**
   * click **OK**
@@ -42,7 +40,6 @@ You will receive a prompt indicating that your checkout from version control con
 
 ![01-05-do-not-open-it](01-05-do-not-open-it.png)
 
-
   * click **No**
 
 ![01-06-click-open](01-06-click-open.png)
@@ -57,18 +54,15 @@ Browse to the folder you specified for the parent and inside the folder you spec
 
 ![01-08-open-as-project](01-08-open-as-project.png)
 
-
   * select **Open as Project**
 
 At this point IntelliJ should be open with the Forge project.  However, it will take a while for IntelliJ to download all the project dependencies.  This is reflected in the bottom status bar by default.
-
 
 ## Part 2
   * select **File**
   * select **Project Structure...**
 
 ![02-01-project-settings](02-01-project-settings.png)
-
 
   * select **New**
   * select **JDK**
@@ -78,12 +72,10 @@ At this point IntelliJ should be open with the Forge project.  However, it will 
 
 ![02-03-jdk-homedirectory](02-03-jdk-homedirectory.png)
 
-
 If necessary browse to the JDK directory.
   * click **OK**
 
 ![02-04-after-jdk-setup](02-04-after-jdk-setup.png)
-
 
   * click **OK**
 
@@ -92,13 +84,11 @@ If necessary browse to the JDK directory.
 
 ![02-05-edit-configurations](02-05-edit-configurations.png)
 
-
   * select **Edit Configurations...**
 
   * click the **+** in the upper left
 
 ![02-06-application](02-06-application.png)
-
 
   * select "Application"
 
@@ -120,22 +110,12 @@ If necessary browse to the JDK directory.
 If all goes well, you should eventually see the Forge splash screen followed by the main UI.
 
 ### Adventure Mode debugging on Desktop
+Follow the same steps to create a Run Configuration, but use `forge-gui-mobile-dev` as the module and `forge.app.Main` for the main class.
 
-Follow the same steps to create a Run Configuration, but use forge-gui-mobile-dev instead of forge-gui-desktop as the module and directory.
+### How to find & fix card errors
+When you have no initial lead a good idea is setting a breakpoint at `AbilityUtils.resolve`. From there you can step towards the individual effects (unless something is seriously broken):
+![02-08-debugger](02-08-debugger.png)
 
-  * select **Run** from the top menu
-  * select **Debug...** from the drop down
-  * select **Edit Configurations...**
-  * click the **+** in the upper left
-  * select "Application"
-
-  * set the **Name** to: Forge
-  * set the **Main class** to: forge.app.Main
-  * Latest IntelliJ Versions: click Modify options and check Add VM Options
-  * set the **VM options** to: 
-    * **(JAVA 17 and above)**
-      > -Xms768m -XX:+UseParallelGC -Dsun.java2d.xrender=false --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.text=ALL-UNNAMED --add-opens java.desktop/java.awt.font=ALL-UNNAMED --add-opens java.base/jdk.internal.misc=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.math=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.desktop/java.awt=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.desktop/javax.swing=ALL-UNNAMED --add-opens java.desktop/java.beans=ALL-UNNAMED --add-opens java.desktop/javax.swing.border=ALL-UNNAMED -Dio.netty.tryReflectionSetAccessible=true
-
-  * set the **Working directory** to %MODULE_WORKING_DIR%
-  * set **Use classpath of module** to: forge-gui-mobile-dev
-  * click **Debug**
+Another approach if you can't quickly find any obvious errors in the code:
+- compare scripts with the same effect variants (ideally newer ones)
+- use `git blame` to check if the script was recently updated - sometimes the cause is from a typo introduced

@@ -470,7 +470,7 @@ public enum CSubmenuPreferences implements ICDoc {
     private void initializeMusicSetsComboBox() {
         final FPref userSetting = FPref.UI_CURRENT_MUSIC_SET;
         final FComboBoxPanel<String> panel = this.view.getMusicSetsComboBoxPanel();
-        final FComboBox<String> comboBox = createComboBox(SoundSystem.instance.getAvailableMusicSets(), userSetting);
+        final FComboBox<String> comboBox = createComboBox(SoundSystem.getAvailableMusicSets(), userSetting);
         final String selectedItem = this.prefs.getPref(userSetting);
         panel.setComboBox(comboBox, selectedItem);
         comboBox.addActionListener(actionEvent -> {

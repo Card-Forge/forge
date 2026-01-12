@@ -1,0 +1,7 @@
+Name:Great Divide Guide
+ManaCost:1 G
+Types:Creature Human Scout Ally
+PT:2/3
+S:Mode$ Continuous | Affected$ Land.YouCtrl,Ally.YouCtrl | AddAbility$ AnyMana | Description$ Each land and Ally you control has "{T}: Add one mana of any color."
+SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+Oracle:Each land and Ally you control has "{T}: Add one mana of any color."

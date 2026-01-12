@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -22,8 +21,6 @@ import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.card.CardType;
-import forge.card.CardType.CoreType;
-import forge.card.CardType.Supertype;
 import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.deck.CardPool;
@@ -47,6 +44,7 @@ import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.model.FModel;
 import forge.util.CardTranslation;
+import forge.util.FSerializableFunction;
 import forge.util.Localizer;
 
 public class AdvancedSearch {
@@ -174,39 +172,58 @@ public class AdvancedSearch {
                 return input.getRules().getColor().countColors();
             }
         }),
-        CARD_TYPE("lblType", PaperCard.class, FilterOperator.COMBINATION_OPS, new CustomListEvaluator<PaperCard, String>(CardType.getCombinedSuperAndCoreTypes()) {
+        CARD_SUPER_TYPE("lblSupertype", PaperCard.class, FilterOperator.COMBINATION_OPS, new CustomListEvaluator<PaperCard, CardType.Supertype>(List.of(CardType.Supertype.values()), CardType.Supertype::getTranslatedName) {
             @Override
-            protected String getItemValue(PaperCard input) {
+            protected CardType.Supertype getItemValue(PaperCard input) {
                 throw new RuntimeException("getItemValues should be called instead");
             }
 
             @Override
-            protected Set<String> getItemValues(PaperCard input) {
+            protected Set<CardType.Supertype> getItemValues(PaperCard input) {
                 final CardType type = input.getRules().getType();
-                final Set<String> types = new HashSet<>();
+                final Set<CardType.Supertype> types = new HashSet<>();
                 CardSplitType cardSplitType = input.getRules().getSplitType();
                 if (cardSplitType != CardSplitType.None && cardSplitType != CardSplitType.Split) {
                     if (input.getRules().getOtherPart() != null) {
-                        for (Supertype supertype : input.getRules().getOtherPart().getType().getSupertypes()) {
-                            types.add(supertype.name());
+                        for (CardType.Supertype coreType : input.getRules().getOtherPart().getType().getSupertypes()) {
+                            types.add(coreType);
                         }
-                        for (CoreType coreType : input.getRules().getOtherPart().getType().getCoreTypes()) {
-                            types.add(coreType.name());
-                        }
-                        for (Supertype supertype : input.getRules().getMainPart().getType().getSupertypes()) {
-                            types.add(supertype.name());
-                        }
-                        for (CoreType coreType : input.getRules().getMainPart().getType().getCoreTypes()) {
-                            types.add(coreType.name());
+                        for (CardType.Supertype coreType : input.getRules().getMainPart().getType().getSupertypes()) {
+                            types.add(coreType);
                         }
                         return types;
                     }
                 }
-                for (Supertype t : type.getSupertypes()) {
-                    types.add(t.name());
+                for (CardType.Supertype t : type.getSupertypes()) {
+                    types.add(t);
                 }
-                for (CoreType t : type.getCoreTypes()) {
-                    types.add(t.name());
+                return types;
+            }
+        }),
+        CARD_TYPE("lblType", PaperCard.class, FilterOperator.COMBINATION_OPS, new CustomListEvaluator<PaperCard, CardType.CoreType>(List.of(CardType.CoreType.values()), CardType.CoreType::getTranslatedName) {
+            @Override
+            protected CardType.CoreType getItemValue(PaperCard input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+
+            @Override
+            protected Set<CardType.CoreType> getItemValues(PaperCard input) {
+                final CardType type = input.getRules().getType();
+                final Set<CardType.CoreType> types = new HashSet<>();
+                CardSplitType cardSplitType = input.getRules().getSplitType();
+                if (cardSplitType != CardSplitType.None && cardSplitType != CardSplitType.Split) {
+                    if (input.getRules().getOtherPart() != null) {
+                        for (CardType.CoreType coreType : input.getRules().getOtherPart().getType().getCoreTypes()) {
+                            types.add(coreType);
+                        }
+                        for (CardType.CoreType coreType : input.getRules().getMainPart().getType().getCoreTypes()) {
+                            types.add(coreType);
+                        }
+                        return types;
+                    }
+                }
+                for (CardType.CoreType t : type.getCoreTypes()) {
+                    types.add(t);
                 }
                 return types;
             }
@@ -432,24 +449,40 @@ public class AdvancedSearch {
                 return ((PaperCard) input).getRules().getColor().countColors();
             }
         }),
-        INVITEM_TYPE("lblType", InventoryItem.class, FilterOperator.COMBINATION_OPS, new CustomListEvaluator<InventoryItem, String>(CardType.getCombinedSuperAndCoreTypes()) {
+        INVITEM_SUPER_TYPE("lblSupertype", InventoryItem.class, FilterOperator.COMBINATION_OPS, new CustomListEvaluator<InventoryItem, CardType.Supertype>(List.of(CardType.Supertype.values()), CardType.Supertype::getTranslatedName) {
             @Override
-            protected String getItemValue(InventoryItem input) {
+            protected CardType.Supertype getItemValue(InventoryItem input) {
                 throw new RuntimeException("getItemValues should be called instead");
             }
 
             @Override
-            protected Set<String> getItemValues(InventoryItem input) {
+            protected Set<CardType.Supertype> getItemValues(InventoryItem input) {
                 if (!(input instanceof PaperCard)) {
                     return new HashSet<>();
                 }
                 final CardType type = ((PaperCard) input).getRules().getType();
-                final Set<String> types = new HashSet<>();
-                for (Supertype t : type.getSupertypes()) {
-                    types.add(t.name());
+                final Set<CardType.Supertype> types = new HashSet<>();
+                for (CardType.Supertype t : type.getSupertypes()) {
+                    types.add(t);
                 }
-                for (CoreType t : type.getCoreTypes()) {
-                    types.add(t.name());
+                return types;
+            }
+        }),
+        INVITEM_TYPE("lblType", InventoryItem.class, FilterOperator.COMBINATION_OPS, new CustomListEvaluator<InventoryItem, CardType.CoreType>(List.of(CardType.CoreType.values()), CardType.CoreType::getTranslatedName) {
+            @Override
+            protected CardType.CoreType getItemValue(InventoryItem input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+
+            @Override
+            protected Set<CardType.CoreType> getItemValues(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return new HashSet<>();
+                }
+                final CardType type = ((PaperCard) input).getRules().getType();
+                final Set<CardType.CoreType> types = new HashSet<>();
+                for (CardType.CoreType t : type.getCoreTypes()) {
+                    types.add(t);
                 }
                 return types;
             }
@@ -1271,17 +1304,17 @@ public class AdvancedSearch {
 
     private static abstract class CustomListEvaluator<T extends InventoryItem, V> extends FilterEvaluator<T, V> {
         private final Collection<V> choices;
-        private final Function<V, String> toShortString, toLongString;
+        private final FSerializableFunction<V, String> toShortString, toLongString;
 
         public CustomListEvaluator(Collection<V> choices0) {
             this(choices0, null, null);
         }
 
-        public CustomListEvaluator(Collection<V> choices0, Function<V, String> toShortString0) {
+        public CustomListEvaluator(Collection<V> choices0, FSerializableFunction<V, String> toShortString0) {
             this(choices0, toShortString0, null);
         }
 
-        public CustomListEvaluator(Collection<V> choices0, Function<V, String> toShortString0, Function<V, String> toLongString0) {
+        public CustomListEvaluator(Collection<V> choices0, FSerializableFunction<V, String> toShortString0, FSerializableFunction<V, String> toLongString0) {
             choices = choices0;
             toShortString = toShortString0;
             toLongString = toLongString0;
@@ -1354,7 +1387,7 @@ public class AdvancedSearch {
 
     private static abstract class ColorEvaluator<T extends InventoryItem> extends CustomListEvaluator<T, MagicColor.Color> {
         public ColorEvaluator() {
-            super(Arrays.asList(MagicColor.Color.values()), MagicColor.Color::getSymbol);
+            super(Arrays.asList(MagicColor.Color.values()), MagicColor.Color::getSymbol, MagicColor.Color::getTranslatedName);
         }
 
         @Override

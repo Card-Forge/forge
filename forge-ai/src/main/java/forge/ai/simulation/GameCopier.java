@@ -364,7 +364,7 @@ public class GameCopier {
             for (Table.Cell<Long, Long, List<String>> kw : c.getHiddenExtrinsicKeywordsTable().cellSet()) {
                 newCard.addHiddenExtrinsicKeywords(kw.getRowKey(), kw.getColumnKey(), kw.getValue());
             }
-            newCard.updateKeywordsCache(newCard.getCurrentState());
+            newCard.updateKeywordsCache();
 
             if (c.isTapped()) {
                 newCard.setTapped(true);

@@ -3,7 +3,7 @@ ManaCost:B B B
 Types:Creature Human Wizard
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+!token | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a nontoken creature is put into your graveyard from the battlefield, create a 2/2 black Zombie creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_zombie | TokenOwner$ You
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppOwn | Execute$ TrigChange | TriggerDescription$ When a creature is put into an opponent's graveyard from the battlefield, exile CARDNAME.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile
 DeckHas:Ability$Token

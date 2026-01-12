@@ -1,222 +1,131 @@
-AbilityFactory parses differently from the Keyword parser. Your Ability line will look more like this:
+AbilityFactory parses differently from the Keyword parser. Your Ability line will look more like a collection of name-value pairs:
 
-`A:{AB/SP/DB/ST}$ <AFSubclass> | {Necessary$ Parameters} | {Separated$ By} | {Pipes$ Here} | [Optional$ Values]`
+`A:<AB/SP/DB/ST>$ <AFSubclass> | <Necessary$ Parameters> | (<Separated$ By> | <Pipes$ Here>) | [Optional$ {Values} [Nested$ Dependency]]`
 
-In most cases, each AF subclass implements both the Spell and Ability.
-Much of the code is shared, so creating the data object will look very similar.
+The ability types are:
+- **AB** for Activated Abilities
+- **SP** for Spell
+- **DB** for Drawback and many abilities that are subsidiary to other things, like replacements. They are only used to chain AFs together, and will never be the root AF
+- **ST** for Static, this gets used in case the API should resolve without using the stack<br /> (e.g. the unique *Circling Vultures* special action is directly implemented in the script this way)
 
-  - **AB** is for Activated Abilities
-  - **SP** is for Spell
-  - **DB** is for Drawback and many abilities that are subsidiary to other things, like replacements. They are only used to chain AFs together, and will never be the root AF
-  - **ST** is for Static, this gets used in case the API should resolve without using the stack<br> (e.g. the unique *Circling Vultures* special action is directly implemented in the script this way)
+Syntax definitions like the above will use different symbols to separate the variable parts from the plaintext:
+- angle brackets for mandatory parts
+- square brackets for optional parts
+- round brackets for grouping parts that are exclusive to each other
+- curly brackets to denote the type of a parameter
 
 >*NOTE:*
-> - these factories are refactored from time to time (often to adapt to new sets), so while some entries could be slightly outdated, the base information should still be correct
+> - these factories are refactored from time to time (often to adapt to new mechanics), so while some entries could be slightly outdated, the base information should still be correct
+> - when in doubt you can always cross-check with the [available APIs](https://github.com/Card-Forge/forge/tree/master/forge-game/src/main/java/forge/game/ability/effects) code
 > - a few factories also have _*All_ variants, these are slowly being phased out
 > - some parameters are only added for very exotic cards, these won't be included here to keep the focus on understanding the general concepts of scripting
-> - when in doubt you can always cross check with the [available APIs](https://github.com/Card-Forge/forge/tree/master/forge-game/src/main/java/forge/game/ability/effects) code
+> - a good knowledge of the game rules is often helpful for some of the more complex cases covered
 
 # Common Parameters
+*Tip:* the convention is to put most of these before AF-specific params for readability (with the exception of Descriptions better suited at the very end)
 
 ## Cost / UnlessCost
+`Cost$ {AbilityCost}` is the appropriate way to set the cost of the ability. Currently for spells, any additional costs including the original Mana cost need to appear in the Cost param in the AbilityFactory. For each card that uses it, the order in which the cost is paid will always be the same.
 
-`Cost$ <AbilityCost>` is the appropriate way to set the cost of the ability. Currently for spells, any additional costs including the original Mana cost need to appear in the Cost parameter in the AbilityFactory. For each card that uses it, the order in which the cost is paid will always be the same.
+Secondary abilities such as those executed by triggers or replacements (usually) don't need costs. (This is one reason to use DB over AB in these cases.)
 
-Secondary abilities such as the DB executed by triggers or replacements (usually) don't need costs. (This is one reason to use DB over AB in these cases.)
+Read more about it in [Costs](Costs.md)
 
-Read more about it in [Costs](Costs)
-
-## ValidTgts / Defined
-
+## Defined / ValidTgts
 Most effects need to know (at least implicitly) which players or objects they're trying to affect. There are two different ways for that:
-- `ValidTgts` will need to be used for abilities that target
-- if your ability instead describes on what it's applied use `Defined`
+- `Defined$ {Defined}` if the ability describes on what it's applied
+- `ValidTgts$ {Valid}` for abilities that target
 
-Read more about it in [Affected / Targets](Targeting)
+Read more about it in [Affected / Targets](Targeting.md)
 
 ## Restrictions / Conditions
+Restrictions limit when abilities can be put on the stack and Conditions apply during resolving. Typical examples are "Activate only once each turn" or "If this spell’s additional cost was paid, [...]".
 
-Restrictions limit when abilities can be put on the stack and Conditions apply during resolving. Common examples are Putrid Leech's only activate this once per turn or different cards that can activate from Zones like the Hand or the Graveyard.
-
-Read more about it in [Restriction](Restrictions)
+Read more about it in [Restriction](Restrictions.md)
 
 ## SpellDescription
+`SpellDescription$ {String}` is how the text of the ability will display on the card and in the option dialog for cards with multiple abilities.
 
-SpellDescription is how the text of the ability will display on the card and in the option dialog for cards with multiple abilities.
-
-The SpellDescription for secondary abilities (both AB and DB) is now displayed when (and if) the ability prompts for user input in the prompt pane so it is useful to put some nice text there.
+The SpellDescription for secondary abilities is displayed when (and if) the ability prompts for user input in the prompt pane so it is useful to put some text there or rather split the text into the different effect parts.
 
 ## StackDescription
-
-*(Optional)* StackDescription is the description the ability will have on the stack. This is automatically generated by the effect, but may be overridden using this parameter. This is sometimes needed with complex effects, when the generated text can't handle some details. Properties of the spell can be accessed like this: {c:Targeted}. You can reuse the spell text by just putting `SpellDescription` or `None` to leave it empty.
+`StackDescription$ {String}` is the description the ability will have on the stack. This is automatically generated by the effect, but may be overridden using this parameter. This is sometimes needed with complex effects, when the generated text can't handle some details. Properties of the spell can be accessed like this: `{c:Targeted}`. You can reuse the spell text by just putting `SpellDescription` or `None` to leave it empty.
 
 ## Remember*
-
-Remembering is often needed when a card becomes a new object, which is then further affected by the ability. Typical example: [Flicker](https://github.com/Card-Forge/forge/blob/master/forge-gui/res/cardsfolder/f/flicker.txt)<br>
+Remembering is often needed when a card becomes a new object, which is then further affected by the ability. Typical example: [Flicker](https://github.com/Card-Forge/forge/blob/master/forge-gui/res/cardsfolder/f/flicker.txt)<br />
 Because cards keep their remembered parts when changing zones manual [cleanup](#Cleanup) is usually required.
 
+## Duration
+> 611.2a. A continuous effect generated by the resolution of a spell or ability lasts as long as stated by the spell or ability creating it (such as "until end of turn"). If no duration is stated, it lasts until the end of the game.
+
+Values:
+- EndOfTurn (Default)  
+*Note:* since more often an effect only lasts until end of turn this was chosen as default instead of following how the rule defines it
+- Permanent
+- AsLongAsControl
+- AsLongAsInPlay - it really depends on each card's wording if this or the below one is correct, since here *CR 702.26f* defines phasing out as an extra way of ending the effect
+- UntilHostLeavesPlay - if the effect should last while the host is still in play
+- UntilEndOfCombat
+- UntilYourNextTurn
+
 ## AI params
+* `IsCurse$ True` - for effects that are normally treated positive e.g. Pump
 
-`IsCurse$ True` - For effects that are normally treated positive e.g. Pump
+* `AICheckSVar$ {Count}`
 
-`AITgts$ BetterThanEvalRating.130`
+* `AILogic$ {String}`
+
+* `AITgts$ BetterThanEvalRating.130`
+Normally the AI will only prefer targeting cards that satisfy the constraint. However, you can add `AITgtsStrict$ True` if playing it should only happen when enough of these cards are available, e.g. *Rootwater Matriarch*.
 
 # Factories (in Alphabetical Order)
 
-## AlterLife
-
-AlterLife is for Abilities that Alter a player's life total.
-
-### GainLife
-
-Have a player gain the specified amount of life.
-
-`A:AB$ GainLife | Cost$ T | LifeAmount$ 1 | SpellDescription$ You gain 1 life.`  
-
-LifeAmount$ is required. This is how much life you will gain.
-
-Defined is optional, if it appears the defined player(s) gain life.
-Target is optional, if it appears and Defined doesn't then targeted player(s) gain life.
-
-### LoseLife
-
-Have a player lose the specified amount of life.
-
-`A:AB$ LoseLife | Cost$ Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Target a player to lose a life | LifeAmount$ 1 | SpellDescription$ Target player loses 1 life.`   
-`A:SP$ LoseLife | Cost$ 2 B | Defined$ Opponent | LifeAmount$ 2 | SpellDescription$ Each opponent loses 2 life.`
-
-LifeAmount$ is required. This is how much life will be lost.
-
-Target is optional. If Target doesn't appear then Defined will be used.
-Remember, if Defined is missing, the default for Players is "You"
-
-Part of resolving sets the **SVar AFLifeLost** to the amount of life lost by all players.
-
-### SetLife
-
-SetLife sets one or both player's life total to a specified value (i.e.
-"your life total becomes 20" or "Target player's life total is equal to
-the number of cards in your graveyard").
-
-`A:SP$ SetLife | Cost$ 7 W W | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 20 | SpellDescription$ Target player's life total becomes 20.`
-
-Parameters:  
-LifeAmount (required) - the value to set the life total(s) to
-
-Defined is optional. If it exists, it will be used. Target is optional.
-If it exists and defined doesn't it will be used. Default player is "You".
-
-### ExchangeLife
-
-ExchangeLife switches the Life total of two players.
-
-`A:AB$ ExchangeLife | Cost$ 6 T | ValidTgts$ Player | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select target player | SpellDescription$ Two target players exchange life totals.`
-
-One of Defined or Target is required, since there needs to be two
-Players exchanging life If Defined it will be used. If Target exists and
-defined doesn't it will be used.
-
-If there aren't two determined players by the SA, the activating player is added as the second player.
-
 ## Animate
+Animate handles animation effects like "This card becomes a 5/5 green creature with flying until end of turn."
 
-Animate handles animation effects like "This card becomes a 5/5
-green creature with flying until end of turn." It is designed to handle
-color changing, type changing, P/T setting, and granting/removing abilities.
-
-`A:SP$Animate | Cost$ G | ValidTgts$ Land | TgtPrompt$ Select target land | Power$ 3 | Toughness$ 3 | Types$ Creature | SpellDescription$ Until end of turn, target land becomes a 3/3 creature that's still a land.`
-
-`A:AB$Animate | Cost$ 1 B | Defined$ Self | Power$ 1 | Toughness$ 1 | Types$ Creature,Skeleton | Colors$ Black | Abilities$ ABRegen | SpellDescription$ CARDNAME becomes a 1/1 black Skeleton creature with "B: Regenerate this creature" until end of turn. It's still a land. (If it regenerates, the next time it would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)`  
-`SVar:ABRegen:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.`
-
-`A:AB$Animate | Cost$ 2 R G | Defined$ Self | Power$ 3 | Toughness$ 3 | Types$ Creature,Elemental | Colors$ Red,Green | Triggers$ TrigAttack | SpellDescription$ Until end of turn, CARDNAME becomes a 3/3 red and green Elemental creature with "Whenever this creature attacks, put a +1/+1 counter on it." It's still a land.`  
-`SVar:TrigAttack:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME attacks, put a +1/+1 counter on it.`  
-`SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1`
-
-Parameters:
-
- - Power (required) - the power to assign to the animated card
- - Toughness (required) - the toughness to assign to the animated card
- - Types (optional) - the additional types to give the animated card;
-    comma delimited
- - OverwriteTypes (optional) - set to True if the animated being should
-    have these types **instead** as opposed to **in addition to**
- - RemoveTypes (optional) - a list of types to Remove from the animated
-    card
- - ChosenType (optional) - overrides types before it and just will add
-    the ChosenType
- - Keywords (optional) - a " & " delimited list of keywords to give the
-    animated being (just like AB$Pump)
- - HiddenKeywords (optional) - a " & " delimited list of hidden
-    keywords to give the animated being (just like AB$Pump)
- - RemoveKeywords (optional) - a " & " delimited list of keywords to
-    remove from the animated being (just like AB$Debuff)
- - Colors (optional) - a comma-delimited list of Colors to give to the
-    animated being (capitalized and spelled out) (ChosenColor accepted)
- - Abilities (optional) - a comma-delimited list of SVar names which
-    contain abilities that should be granted to the animated being
- - OverwriteAbilities - Remove Abilities from animated being
- - Triggers (optional) - a comma-delimited list of SVar names which
-    contain triggers that should be granted to the animated being
- - OverwriteTriggers - Remove/suppress triggers from animated being
- - staticAbilities (optional) - a comma-delimited list of SVar names
-    which contain static abilities that should be granted to the
-    animated being
- - OverwriteStatics- Remove static abilities from animated being
- - OverwriteReplacements - Remove replacement effects from animated
-    being
- - RemoveAllAbilities - Remove all Abilities, Triggers, Statics, and
-    Replacement effects
- - sVars(optional) - a comma-delimited list of SVars that should be
-    granted to the animated being
- - Duration (Default is end of turn)
-    - Permanent
-   - UntilEndOfCombat - if the effect should last only until End of Combat instead of End of Turn
-   - UntilHostLeavesPlay - if the effect should last as long as the host is still in play
-   - UntilYourNextUpkeep
-   - UntilControllerNextUntap
-   - UntilYourNextTurn
-
-Target is optional, will be used if possible. Defined is optional, will be used if no Targets (Self by default)
+Parameters (all optional):
+- `Power` - the power to assign to the animated card
+- `Toughness` - the toughness to assign to the animated card
+- `Types/RemoveTypes` - the types to give to/remove from the animated card; comma delimited
+- `RemoveSuperTypes/RemoveCardTypes/RemoveSubTypes$/RemoveCreatureTypes True` - if the animated being should have these types **instead** as opposed to **in addition to**
+- `Keywords/RemoveKeywords` - a " & " delimited list of keywords to give to/remove from the animated being
+- `Colors` - a comma-delimited list of colors to give to the animated being (capitalized and spelled out)  
+  - `ChosenColor` accepted
+- `Abilities/Replacements/Triggers/staticAbilities` - a comma-delimited list of SVar names which contain abilities that should be granted to the animated being
+- `RemoveAllAbilities` - Remove all Abilities, Triggers, Statics and Replacement effects
+- `sVars` - a comma-delimited list of SVars that should be granted to the animated being
 
 ## Attach
-
-Attach is being used directly only for Auras, primarily for Aura Spells, but also for Auras entering the battlefield by some effect.
-
-`AB$ Attach | Cost$ R R | ValidTgts$ Creature | AILogic$ Pump`
+Attaches a permanent to an affected card or player.
 
 Parameters:
+- `Object$ {Defined}` (Default: Self) - This is the Object that will be Attached
+- `Choices$ {ValidCard}` - can be used to choose the attachment instead  
+can also be combined with `Object` so the choice is for what it should attach to
+- `RememberAttached`
 
-  - Object (optional) - This is the Object that will be Attached
-    (generally the Source Card for Auras)
-  - AILogic - AI Logic tells the AI which base AI code it should use for
-    Attaching
-      - GainControl - Gains Control of the Attached Permanent (Control
-        Magic)
-      - Curse - A Generic Curse the AI has a handful of checks to see
-        what the most appropriate Target is.
-      - Pump - A Generic Pump. The AI has a handful of checks to see
-        what the most appropriate Target is.
-      - ChangeType - For Attachments that change types. Evil Presence is
-        a good example. This logic should be expanded.
-      - KeepTapped - For Attachments that keep a Permanent tapped. The
-        AI will also check for a few things like Vigilance, and another
-        KeepTapped Aura. Paralyzing Grasp is a good example.
+Note that Forge's engine handles this automatically for Aura spells, so adding AILogic is a bit different but usually required:
 
-Attach separates the actually granting of abilities from the attaching to permanents to streamline how things work.
+`SVar:AttachAILogic:{String}`
+- `Curse/Pump` - A generic Curse/Pump for which the AI has a handful of checks to see if an appropriate target exists
+- `GainControl` - Gains control of the attached permanent
+- `ChangeType` - For attachments that change types, e.g. *Evil Presence*
 
 ## BecomeMonarch
+No own parameters.
 
 ## Bond
-
 Soulbonding two creatures. Only used internally by the engine.
 
 ## Branch
-Sometimes, an ability might do certain things when a specific condition is true, and other things if not. This can be implemented by using `Branch`.
-The branch evaluates the SVar specified by the property `BranchConditionSVar`, using the comparison defined with `BranchConditionSVarCompare` (such as `GTY`, `LT1`, etc). Depending on whether the condition evaluated to true or false, the subability defined by `TrueSubAbility` or `FalseSubAbility` is executed.
+Sometimes, an ability might do certain things when a specific condition is true, and others if not. This can be implemented by using `Branch`.
 
-The example below is for "Composer of Spring", which allows either a "land" or a "land or creature" to be put on the battlefield, depending on the number of enchantments in play under your control.
+Parameters:
+- `BranchConditionSVar$ {Count}`
+- `BranchConditionSVarCompare {comparator}`
+- `TrueSubAbility/FalseSubAbility$ {SubAbility}` - executes the specified ability depending on how the condition evaluated
 
+The example below is from *Composer of Spring*, which allows either a "land" or a "land or creature" to be put on the battlefield, depending on the number of enchantments you control:
 ```
 SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE6 | TrueSubAbility$ PutLandCreature | FalseSubAbility$ PutLand
 SVar:PutLand:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.YouOwn
@@ -224,171 +133,109 @@ SVar:PutLandCreature:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | 
 SVar:X:Count$Valid Enchantment.YouCtrl
 ```
 
+*Note:* sometimes you could also implement this via standard ability Conditions instead, but that requires careful consideration if the relevant property could be changed by one of the applicable effects.
+
 ## Charm
+This AF represents modal effects.
 
-This allows cards that have a mode to be chosen to occur after a trigger.
+Parameters:
+- `CharmNum$ {Integer}` (Default: 1) - number of modes to choose
+- `MinCharmNum$ {Integer}` (Default: same as CharmNum) - if "up to" allows a variable number
+- `Choices$ {SubAbilities}` - a comma delimited list of SVars containing the modes
 
-Parameters
+## Choices
+AF in this group let the player make choices from all kinds of categories and are often used to chain effects together. However, for common cases many effects already support this directly, e.g. `PutCounter | Choices$`.  
+Besides making the script more concise using such shortcuts usually also helps the AI making better use of the effect.
 
-  - CharmNum - Number of Modes to Choose
-  - Choices - A Comma delimited list of SVars containing the Modes
+### ChooseCard
 
-## Choose*
+### NameCard
 
-These can be used to chain effects together. However for common cases many effects already support this directly, e.g. `PutCounter | Choices$``.<br>
-Besides making the script shorter using such shortcuts usually also helps the AI making better use of the effect.
+### ChooseColor
+
+### ChooseGeneric
+
+### ChooseNumber
+
+### ChoosePlayer
 
 ### ChooseType
+This can be used when a player is asked to choose a card (sub)type.
 
-This can be used when you are asked to choose a card type or creature type.
-
-  - Type - Required - Can be Card or Creature
-  - InvalidTypes - Optional - Use to specify any type that cannot be chosen (ex: "Choose any creature type except Wall")
-
-The Defined is for target players.
+Parameters:
+- `Type` - Typically "Card", "Creature" or a few special cases
+- `ValidTypes {String}` - alternative to above param to explicitly define the types
+- `InvalidTypes$ {String}` (Optional) - used to specify any type that can't be chosen
 
 ## Clash
+This AF handles clashing.
 
-This AF handles clashing. It takes two special parameters: WinSubAbility and
-OtherwiseSubAbility. They are both optional and work the same way,
-namely that it contains the name of an SVar that in turn contains a
-drawback to be executed. The example below is for Release the Ants.
-
-`A:SP$ DealDamage | Cost$ 1 R | Tgt$ TgtCP | NumDmg$ 1 | SubAbility$ DBClash | SpellDescription$ Release the Ants deals 1 damage to target creature or player. Clash with an opponent. If you win, return CARDNAME to its owner's hand.`  
-`SVar:DBClash:DB$ Clash | WinSubAbility$ DBReturn`  
-`SVar:DBReturn:DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Hand`
+Parameters:
+- `WinSubAbility$` (Optional)
+- `OtherwiseSubAbility$` (Optional)
 
 ## Cleanup
+A non-functional, maintenance AF used for cleaning up certain variables before a spell finishes resolving.
 
-A non-functional, maintenance AF used for Cleaning up certain Variables before a Spell finishes Resolving.
-
-Parameters
-
-  - ClearRemembered$ (optional) Set to True to clear this card's
-    remembered list. Generally useful for Cards that Remember a card, do
-    something to it, then need to forget it once it's done.
-  - ClearImprinted$ (optional) Set to True to clear the list of
-    imprinted cards.
-  - ClearChosenX$ (optional) Set to True to clear the chosen X value.
-  - ClearTriggered$ (optional) Set to True to clear any delayed triggers
-    produced by this card.
-  - ClearCoinFlips$ (optional) Set to True to clear the remembered coin
-    flip result.
-  - ClearChosenCard$ (optional) Set to True to clear the chosen cards.
-  - ForgetDefined$ (optional) If present, remove the specified cards
-    from this card's remembered list.
+Parameters:
+- `ClearRemembered$ True` - clear this card's remembered list. Generally useful for abilities that remember an object, do something to it, then need to forget it once it's done
+- `ClearImprinted$ True` - clear the imprinted cards
+- `ClearChosenCard$ True` - clear the chosen cards
 
 ## Control
 
 ### GainControl
-
-Example: Act of Aggression
-
-`A:SP$ GainControl | Cost$ 3 PR PR | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls. | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn.`
-
 Parameters:
-
-- NewController(Targeted player, if there is no target player, the
-  default is the ActivatingPlayer)
-- AllValid(all valid types, no targets)
-- LoseControl(LeavesPlay, Untap, LoseControl, EOT(end of turn))
+- `NewController$ {Defined}` (Default: You)
 
 ### ControlExchange
 
+### ControlPlayer
+
 ### ControlSpell
 
-## Copy*
+## Copies
+
+### Clone
 
 ### CopyPermanent
-
-Copies a permanent on the battlefield.
+Copies a permanent.
 
 Parameters:
-
-  - NumCopies - optional - the number of copies to put onto the
-    battlefield. Supports SVar:X:????.
-  - Keywords - optional - a list of keywords to add to the copies
-  - AtEOT - optional
-      - Sacrifice - set to this is copy should be sacrificed at End of
-        Turn
-      - Exile - set to this is copy should be exiled at End of Turn
+- `NumCopies` (Default: 1) - the number of copies to put onto the battlefield.
+- `Keywords` (Optional) - a list of keywords to add to the copies
 
 ### CopySpellAbility
-
-Copies a spell on the stack (Twincast, etc.).
+Parameters:
+- `Num$ {Integer}` (Default: 1)
 
 ## Counter
-
 Countering Spells or Abilities.
 
-`A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 3 | SpellDescription$ Counter target spell unless its controller pays 3.`  
-`A:SP$ Counter | Cost$ U | TgtPrompt$ Select target Activated or Triggered Ability | ValidTgts$ Card | TargetType$ Activated,Triggered | SpellDescription$ Counter target activated or triggered ability.`  
-`A:SP$ Counter | Cost$ G | TargetType$ Spell | ValidTgts$ Instant,Aura | TargetValidTargeting$ Permanent.YouCtrl | SpellDescription$ Counter target instant or Aura spell that targets a permanent you control. `
+Parameters:
+- `Destination` - send countered spell to: (only applies to Spells; ignored for Abilities)
+    - TopDeck
 
-Parameters
-
-  - TargetType - Can be Spell,Activated,Triggered. If more than one,
-    just put a comma in between.
-  - ValidTgts - a "valid" expression for types of source card (if you
-    don't know what it is it's just "Card")
-  - TargetValidTargeting- a "valid" expression for targets of this
-    spell's target
-  - Destination - send countered spell to: (only applies to Spells; ignored for Abilities)
-      - Graveyard (Default)
-      - Exile
-      - TopDeck
-      - Hand
-      - BottomDeck
-      - Shuffle
-
-## Counters*
-
-Factories to handle counters on cards.
+## Counters
+Factories to handle counters on cards or players.
 
 ### Poison
-
 Poison gives a player the specified number of poison counters.
 
-`A:AB$ Poison | Cost$ B T | ValidTgts$ Player | TgtPrompt$ Select target player | Num$ 2 | SpellDescription$ Target player gets 2 poison counters.`
-
 Parameters:
-
-- Num (required) - the number of poison counters to give
-
-Target is optional and used if available. Defined is optional and used if no Target (defaults to "You").
+- `Num$ {Integer}` - the number of poison counters to give
 
 ### PutCounter
-
 Put any type of counter on a game object.
 
-`A:AB$ PutCounter | Cost$ T | CounterType$ CHARGE | CounterNum$1 | SpellDescription$ Put a charge counter on CARDNAME.`  
-`A:SP$ PutCounter | Cost$ G | Tgt$ TgtC | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.`
-
-Target is optional. If no Target is provided, the permanent will put counters on itself.
-
-  - CounterType (required) specifies the type of counter and should
-    appear in all caps. It should be one of the values in the Counters
-    enum.
-  - CounterNum (required) specifies how many counters will be put on
-    the chosen card.
-
-### PutCounterAll
-
-Put any type of counter on all valid cards.
-
-  - CounterType (required) specifies the type of counter and should
-    appear in all caps. It should be one of the values in the Counters
-    enum.
-  - CounterNum (required) specifies how many counters will be put on
-    the chosen cards.
-  - ValidCards (required) specifies the cards to add counters to.
+Parameters:
+- `CounterType` - specifies the type of counter and should appear in all caps
+- `CounterNum$ {Integer}` (Default: 1) - how many counters will be put on the chosen card
+- `Placer$ {Defined}`
+- `ETB$ True` - for ETB counters
 
 ### RemoveCounter
-
-Remove any type of counter from a card.
-
-Target is optional. If no Target is provided, the permanent will remove
-counters from itself.
+Remove any type of counter from a game object.
 
   - CounterType (required) specifies the type of counter and should
     appear in all caps. It should be one of the values in the Counters
@@ -398,103 +245,76 @@ counters from itself.
   - UpTo is optional. If an effect states you may remove "up to X
     counters", set this to True.
 
-### RemoveCounterAll
-
-Remove any type of counter from all valid cards.
-
-  - CounterType$ (required) specifies the type of counter and should
-    appear in all caps. It should be one of the values in the Counters
-    enum.
-  - CounterNum$ (required) specifies how many counters will be removed
-    from the chosen cards.
-  - ValidCards$ (required) specifies the card to remove counters from.
-
 ### Proliferate
 
-No own parameters.
-
 ### MoveCounters
+Used for effects that move counters.
 
-Used for cards that Move Counters on Resolution, requiring the Host card
-to have Counters for the Move to occur.
-
-Parameters
-
-  - Source - The Source of the Moving Counters
-  - Defined - The Destination of the Moving Counters
-  - CounterType - The type of counter to move.
-  - CounterNum - The number of counters to move.
+Parameters:
+- `Source` - The Source of the counters
+- `Defined` - The Destination of the counters
+- `CounterType` - The type of counter to move
+- `CounterNum` - The number of counters to move
 
 ## Damage
 
 ### DealDamage
-
 Deal damage to a specified player or permanent.
 
-`A:AB$ DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.` 
-
-NumDmg is required. This is the amount of damage dealt.
+Parameters:
+- `NumDmg$ {Integer}` - amount of damage dealt
 
 ### EachDamage
 
 ## Debuff
+Removing Keywords.
 
-Parameters
-
-  - Keywords
-  - Duration
-
-An AbilityFactory for Removing Keywords, either temporarily or for longer durations.
+Parameters:
+- `Keywords`
+- `Duration`
 
 ## Destroy
+Handles destruction of permanents.
 
-These APIs handles destruction of cards on the battlefield.
-
-`A:SP$Destroy | Cost$ 1 W W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.`
+Parameters:
+- `NoRegen$ True`
 
 ## Effect
+Effect is an oddball of the AF family. Where usually AFs have similarities to each other to help with AI use, this one's used for all sorts of continuous effects.
 
-Effect is an oddball of the AF family. Where usually AFs have similarities to each other to help with AI use, Effect doesn't fall under that jurisdiction. In general, an effect is some type of SA that
-lasts longer than its resolution.
+A good example is *High Tide*. It doesn't matter if the Island was in play, if it turned into an Island after the spell resolved, any of that.
+```
+A:SP$ Effect | Triggers$ IslandTrigger | SpellDescription$ Until end of turn, whenever a player taps an Island for mana, that player adds an additional {U}.
+SVar:IslandTrigger:Mode$ TapsForMana | ValidCard$ Island | Execute$ TrigMana | Static$ True | TriggerDescription$ Whenever a player taps an Island for mana, that player adds an additional {U}.
+SVar:TrigMana:DB$ Mana | Produced$ U | Amount$ 1 | Defined$ TriggeredActivator
+```
 
-A good example is High Tide. For the rest of the turn, High Tide makes
-all Islands produce an extra mana. It doesn't matter if the Island was
-in play, if it turned into an Island after High Tide was cast, any of that.
+Effect is most similar to Token as it creates a pseudo-permanent, except Effect creates in the command zone rather than the battlefield.
 
-`A:SP$ Effect | Cost$ U | Name$ High Tide Effect | Triggers$ IslandTrigger | SVars$ TrigMana | SpellDescription$ Until end of turn, whenever a player taps an Island for mana, that player adds U to his or her mana pool (in addition to the mana the land produces).`  
-`SVar:IslandTrigger:Mode$ TapsForMana | ValidCard$ Island | Execute$ TrigMana | TriggerDescription$ Whenever a player taps an Island for mana, that player adds U to his or her mana pool (in addition to the mana the land produces).`  
-`SVar:TrigMana:AB$Mana | Cost$ 0 | Produced$ U | Amount$ 1`
-
-Effect is most similar to Token as it creates a pseudo-permanent, except
-Effect creates in the command zone rather than the battlefield. It stays
-active there for a set Duration.
-
-Parameters
-
-  - Abilities,Triggers,SVars are comma separated lists which contain
-    SVars that point to the appropriate type that the Effect will gain.
-  - Duration is how long the Effect lasts. Right now, most effects will
-    last Until End of Turn. In the future, they may have other
-    conditions.
-
-Duration$ Permanent for effects that have no specific Duration.
-
-  - Stackable$ False - Most Effects are assumed to be Stackable. By
-    setting the Stackable Flag to False, the AI will know having a
-    second one in play is useless, so will save it's Resource for
-    something else.
-  - Image - a file\_name\_without\_extension (image needs to reside in
-    the tokens directory)
+Parameters:
+- `Abilities,Triggers,ReplacementEffects,StaticAbilities,SVars` - comma separated lists which contain SVars that point to the appropriate type that the Effect will gain. You don't need to put the zone-specific params like EffectZone$ onto these
+- `Duration`
+- `EffectOwner$ {Defined}`
+- `ForgetOnMoved$ {ZoneType}` - gets rid of the effect if all remembered cards have left the affected zone
+- `RememberObjects$ {Defined}`
+- `Stackable$ False` - most effects are assumed to be stackable. By using this flag, the AI will know having a second one active is (at least mostly) useless, so it will save its resources for something else
+- `Name$ {String}` (Optional) - usually auto-generated
+- `Image$ filename\without\extension` (Optional) - image needs to reside in the tokens directory
 
 ## Explore
 
 ## Fight
 
-## Fog
+## FlipACoin
 
-Fog is an ability based on the original Fog spell. "Prevent all combat
-damage that would be dealt this turn." While this could be done with an
-effect, the specialized nature of the AI gives it its own AF.
+## Fog
+This AF is based on the original *Fog* spell: "Prevent all combat damage that would be dealt this turn." While this could be done with an Effect, the specialized nature of the AI gives it its own AF.
+
+## GainLife / LoseLife / SetLife
+Have a player gain or lose the specified amount of life.
+
+Parameters:
+- `LifeAmount$ {Integer}` - the value to modify the life total(s)
 
 ## Game outcome
 
@@ -505,254 +325,152 @@ effect, the specialized nature of the AI gives it its own AF.
 ### GameWin
 
 ### RestartGame
-
-Used in the script of *Karn Liberated*
+Used in the script of *Karn Liberated*.
 
 ## Goad
 
-## Investigate
+## Loops
+Repeat the specified ability.
+
+### Repeat
+Parameters:
+- `MaxRepeat` - optional - the maximum times to repeat, execute repeat ability at least once
+- `RepeatSubAbility` - setup subability to repeat
+- `RepeatOptional$ True` - you make the choice whether to repeat the process
+- RepeatPresent, RepeatCompare, RepeatDefined, RepeatCheckSVar, RepeatSVarCompare - optional - condition check
+
+### RepeatEach
+A more complex variant that iterates over objects of some type instead. During each `RepeatSubAbility` execution the current object is remembered.
+
+Parameters:
+- `RepeatSubAbility` - required - to set up repeat subability
+- `RepeatCards` - to repeat for each valid card (zone: present zone of the valid repeat cards, default: battlefield)
+- `DefinedCards`
+- `RepeatPlayers` - to repeat for each valid player
+- `RepeatCounters` - to repeat for each valid counters
 
 ## Mana
+Add mana to a player's mana pool.
 
-For lands or other permanent to produce mana.
+Parameters:
+- `Produced$ {String}`
 
-`A:AB$ Mana | Cost$ T | Produced$ <ManaType> | SpellDescription$ Add W to your mana pool.`
+## Manifest / Cloak
 
-In this example ManaType would be W.
-
-## Manifest
-
-## PermanentState
-
-API for things that alter a permanent's state.
+## Permanent State
+AF for effects that alter a permanent's state.
 
 ### Phases
 
 ### SetState
-
-Changing a cards State. This is mostly for Flip Cards or the Transform mechanic.
+Changing a cards state. This is mostly for Flip Cards or the Transform mechanic.
 
 ### Tap
-
-`A:AB$ Tap | Cost$ R | ValidTgts$ Wall | TgtPrompt$ Select target wall | SpellDescription$ Tap target wall.`
 
 ### TapOrUntap
 
 ### Untap
 
-`A:AB$ Untap | Cost$ G | ActivationLimit$ 1| SpellDescription$ Untap CARDNAME. Activate this ability only once each turn.`  
-`A:SP$ Untap | Cost$ W | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ Untap target permanent.`
-
-Target is optional. If not provided, will untap the permanent with this ability.
-
 ## Play
+Playing cards as part of another ability. The player may have to make a choice about which card to play if there are more choices than the number of cards to play.
 
-Playing a card or cards as part of SA. The player may have to make a
-choice about which card to play if there are more choices than the
-number of cards to play.
-
-Sunbird's Invocation uses many of the parameters.
-
-Amount - How many cards can be played (a non-negative integer or "All").
-
-Valid - Selection criteria for valid cards from the zone to cast.
-
-ValidSA - Applied after Valid, this will filter based on all spells of the cards.
-
-ValidZone - The zone to look in to determine the valid cards.
-
-ShowCards - Other cards in the zone to show when selecting valid cards.
-
-Optional - Casting the card is optional.
-
-RememberPlayed - Remember the card played.
-
-ForgetRemembered - Remove all remembered cards from the source (but only
-if a card was successfully played)
-
-ForgetTargetRemembered - Remove the played card from remembered cards
-(but only if it was successfully played)
-
-WithoutManaCost - The card can be cast without mana payment.
+Parameters:
+- `Amount$ {Integer/All}` (Default: 1) - how many cards can be played
+- `Valid` - selection criteria for valid cards from the zone to cast
+- `ValidSA` - applied after Valid, this will filter based on all spells of the cards
+- `ValidZone` - the zone to look in to determine the valid cards
+- `Optional$ True` - playing is optional
+- `RememberPlayed$ True` - remember the card played
+- `PlayCost$ {AbilityCost}`
+- `WithoutManaCost$ True` - The card can be cast without its normal mana cost
+- `Controller$ {Defined}` (Default: You) - controller of the ability
 
 ## PreventDamage
 
-AF damage prevention effects.
-
-      - A:SP$ PreventDamage | Cost$ W | ValidTgts$ Creature | Amount$ 3
-        | TgtPrompt$ Select target creature | SpellDescription$ Prevent
-        the next 3 damage that would be dealt to target creature this
-        turn.
-
 ## Protection
+Grants protection from traits like colors or card types.
 
-Protection grants protection from colors or cards types, or creature
-types. Anything that has "Protection from ..."
-
-Gains - required - the thing to gain protection from (green, artifacts,
-Demons, etc.) or "Choice" if you can choose one of...
-
-Choices - optional
-- if Gains$ Choice then this is a comma-delimited list of choices
+Parameters:
+- `Gains` - the thing to gain protection from (green, artifacts, Demons, etc.) or "Choice" if you can choose one of a comma-delimited list of `Choices$`
 
 ## Pump
+Handles pumping creatures power/toughness or granting keywords to cards or players.
 
-This factory handles pumping creatures power/toughness or granting abilities to permanents (usually creatures).
+Parameters (all optional):
+- `NumAtt$` - pumps Power
+- `NumDef$` - pumps Toughness
+- `KW$` - gives keywords
 
-      - A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME
-        gets +1/+0 until end of turn.
-      - A:SP$ Pump | Cost$ 1 U | ValidTgts$ Creature | KW$ Shroud|
-        SpellDescription$ Target creature gains shroud until end of
-        turn. | TgtPrompt$ Select target creature.
-
-Target is optional. If it's not provided, the activating permanent will be pumped.
-
-NumAtt$ is optional, will pump Power.
-
-NumDef$ is optional, will pump Toughness.
-
-KW$ is optional, will give temporary keywords.
+Due to its generic nature Pump is also the conventional "helper AF" when an effect requires more than one target with different restrictions, e.g. *Political Trickery*:
+```
+A:SP$ Pump | ValidTgts$ Land.YouCtrl | TgtPrompt$ Choose target land you control | SubAbility$ DBExchange | SpellDescription$ Exchange control of target land you control and target land an opponent controls. (This effect lasts indefinitely.)
+SVar:DBExchange:DB$ ExchangeControl | Defined$ ParentTarget | ValidTgts$ Land.OppCtrl | TgtPrompt$ Choose target land an opponent controls
+```
 
 ## Regenerate
-
-Regenerate is similar to abilities like Pump. But for creating
-Regeneration shields.
-
-      - A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate
-        CARDNAME
-      - A:SP$ Regenerate | Cost$ W | ValidTgts$ Creature | TgtPrompt$
-        Select target creature | SpellDescription$ Regenerate target
-        creature.
-
-Target is optional. If not provided, will regenerate the permanent with this ability.
-
-## Repeat
-
-Repeat the specified ability.
-
-### Repeat
-
-`A:SP$ Repeat | Cost$ 3 B B | RepeatSubAbility$ DBDig | RepeatOptional$ True`
-
-  - MaxRepeat - optional - the maxium times to repeat, execute repeat
-    ability at least once
-  - RepeatSubAbility - required - setup subability to repeat
-  - RepeatOptional - optional - you make the choice whether to repeat
-    the process
-  - RepeatPresent, RepeatCompare, RepeatDefined, RepeatCheckSVar,
-    RepeatSVarCompare - optional - condition check
-
-### RepeatEach
-
-  - RepeatSubAbility - required - to set up repeat subability
-  - RepeatCards - to repeat for each valid card (zone: present zone of
-    the valid repeat cards, default: battlefield)
-  - DefinedCards
-  - RepeatPlayers - to repeat for each valid player
-  - RepeatCounters - to repeat for each valid counters
+Creating regeneration shields.
 
 ## Reveal
 
 ### RevealHand
-
 Look at a player's hand.
 
-Target or Defined is required.
-
-`A:AB$ RevealHand | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Look at target player's hand.`
-
 ### Reveal
-
-`A:AB$ Reveal | Cost$ 2 U T | Defined$ You | RevealValid$ Card.Blue | AnyNumber$ True | RememberRevealed$ True`
-
 Parameters:
-
-  - RevealValid: to limit the valid cards.
-  - AnyNumber
-  - Random
-  - RememberRevealed: to remember the cards revealed
+- `RevealValid` to limit the valid cards
+- `AnyNumber`
+- `Random`
+- `RememberRevealed` to remember the cards revealed
 
 ### PeekAndReveal
+This AF is very similar to things that Dig can do, but handle a much simpler form, with less complex coding underneath. Similar to how RearrangeTopOfLibrary could be handled with Dig.
 
-This AF is very similar to things that Dig can do, but handle a much
-simpler form, with less complex coding underneath. Similar to how
-RearrangeTopOfLibrary could be handled with Dig.
+Primarily used with cards that allow you to Peek at the top card of your library, and allow you to reveal it if it's of a certain type. The Kinship cards fit this bill perfectly, so they are used to simplify the complex popups that would be required if using multiple Dig SubAbilities.
 
-Primarily used with cards that allow you to Peek at the top card of your
-library, and allow you to reveal it if it's of a certain type. The
-Kinship cards fit this bill perfectly, so they are used to simplify the
-complex popups that would be required if using multiple Dig
-SubAbilities.
-
-RevealOptional - Whether or not the Reveal is optional.
-
-RememberRevealed - Whether to remember the revealed cards (after
-filtering by Valid)
-
-RememberPeeked - Whether to remember the peeked cards (only if they are
-not revealed\!)
-
-RevealValid - defaults to Card, but allows you to set a specific
-ValidType if you can only have certain things
-
-PeekAmount - defaults to 1, but allows you to peek at multiple cards if
-possible
+Parameters:
+- `RevealOptional` - Whether or not the Reveal is optional.
+- `RememberRevealed` - Whether to remember the revealed cards (after filtering by Valid)
+- `RememberPeeked` - Whether to remember the peeked cards (only if they are not revealed\!)
+- `RevealValid` - defaults to Card, but allows you to set a specific ValidType if you can only have certain things
+- `PeekAmount` - defaults to 1, but allows you to peek at multiple cards if possible
 
 ## RollDice
 
 ## Sacrifice
+Forces a player to sacrifice something of their choice.
 
-Usually you choose a player and that player has to sacrifice something
-
-`A:SP$ Sacrifice | Cost$ 1 B | ValidTgts$ Player | SacValid$ Creature | SacMessage$ Creature | Amount$ 2 | SpellDescription$ Target player sacrifices a creature.`
-
-Destroy$ True - An optional parameter for destroying permanents target
-player chooses (eg: Burning of Xinye, or Imperial Edict).
-
-`A:SP$ Sacrifice | Cost$ 1 B | ValidTgts$ Opponent | SacValid$ Creature | SacMessage$ Creature | Destroy$ True | SpellDescription$ Target opponent chooses a creature he or she controls. Destroy it.`
+Parameters:
+- `SacValid$ {ValidCard}` (Default: Card.Self)
 
 ## Scry
 
-`A:AB$ Scry | Cost$ 1 T | ScryNum$ 2`
+## Surveil
 
 ## StoreSVar
 
-## Token
+## Tokens
 
-Token simply lets you create tokens of any type.
+### Amass
 
-`A:SP$ Token | Cost$ 3 W U | TokenImage$ W 1 1 Bird Flying | TokenAmount$ X | TokenName$ Bird | TokenTypes$ Creature,Bird | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying`
+### Investigate
 
-This ability factory does not take a target. All the parameters are
-mandatory except for TokenKeywords. If you provide a non-integer for
-TokenAmount, TokenPower or TokenToughness the AF will attempt to look for
-an SVar of that name and interpret it's contents as a Count$ line. Worth
-noting is that TokenTypes and TokenColors are simple commaseparated
-lists while TokenKeywords is a list where the items are separated by
-"\<\>". If TokenImage is not provided, the factory will attempt to
-construct a filename on it's own. TokenOwner can use Defined-like
-parameters, such as "You" "Opponent" or the new Triggered-Variables.
+### Token
+Token lets you create tokens of any type. They get defined by creating scripts in the `res/tokenscripts` folder.
 
-You can also use the parameters TokenAbilities$, TokenTriggers$ and
-TokenSVars$ to give the created tokens any number of either. For
-example, here's how Growth Spasm creates an Eldrazi Spawn token complete
-with ability.
+Parameters:
+- `TokenScript$ {filename[,filename]}` - list of tokens to create
+- `TokenAmount$ {Integer}` (Default: 1)
+- `TokenOwner$ {DefinedPlayer}` (Default: You)
 
-    SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Eldrazi Spawn | TokenTypes$ Creature,Eldrazi,Spawn | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 0 | TokenToughness$ 1 | TokenAbilities$ ABMana SVar:ABMana:AB$Mana | Cost$ Sac<1/CARDNAME> | Produced$ 1 | Amount$ 1 | SpellDescription$ Add 1 to your mana pool. 
-
-As another example, here's Mitotic Slimes' use of TokenTriggers$:
-
-    T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigTokenSenior | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, put two 2/2 green Ooze creature tokens onto the battlefield. They have "When this creature is put into a graveyard, put two 1/1 green Ooze creature tokens onto the battlefield." 
-    SVar:TrigTokenSenior:AB$ Token | Cost$ 0 | TokenImage$ g 2 2 ooze | TokenName$ Ooze | TokenTypes$ Creature,Ooze | TokenColors$ Green | TokenOwner$ You | TokenPower$ 2 | TokenToughness$ 2 | TokenAmount$ 2 | TokenTriggers$ TriggerJunior | TokenSVars$ TrigTokenJunior 
-    SVar:TriggerJunior:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigTokenJunior | TriggerDescription$ When this creature is put into a graveyard, put two 1/1 green Ooze creature tokens onto the battlefield. SVar:TrigTokenJunior:AB$Token | Cost$ 0 | TokenImage$ g 1 1 ooze | TokenName$ Ooze | TokenTypes$ Creature,Ooze | TokenColors$ Green | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenAmount$ 2 
-
-## Trigger
-
-If possible split the SpellDescription$ of the the effect so the part for the trigger can become the StackDescription directly.
+## Triggers
+If possible split the SpellDescription of the effect so the part for the trigger can become the StackDescription directly.
 
 ### DelayedTrigger
+The trigger-specific params are defined in [Triggers](Triggers.md).
 
 ### ImmediateTrigger
+Parameters:
+- `TriggerAmount$ {Integer}` (Default: 1)
 
 ## Turn structure
 
@@ -760,72 +478,52 @@ If possible split the SpellDescription$ of the the effect so the part for the tr
 
 ### AddTurn
 
-`A:SP$ AddTurn | Cost$ 1 U | NumTurns$ 1 | SpellDescription$ Take an extra turn after this one.`
-
 ### EndTurn
 
 ### ReverseTurnOrder
+No own parameters.
 
 ### SkipPhase
 
 ### SkipTurn
 
-## ZoneAffecting
+## Vote
 
-For specific effects that handle zones in a specific manner
+## Zone Affecting
+For effects that modify zones in a specific manner.
 
 ### ChangeZone
+ChangeZone is a united front of any card that changes zone. This does not include: drawing, destroying, etc. as these represent specific words on which triggers and replacements can react.
 
-ChangeZone is a united front of any card that changes zone. This does
-not include: drawing, discarding, destroying, or milling, as these
-represent specific words on which triggers and replacements can react.
-There are two primary forms, but the distinction is handled mostly in
-the codebase. The only thing that is required is to set appropriate parameters.
+Two primary forms are available after setting these parameters, depending on how the effect is templated:
+- `Origin$ {ZoneType}` is where the card is coming from
+- `Destination$ {ZoneType}` is where the card is going to
+- `LibraryPosition {Integer}` (Default: 0) - ignored when not moving to library. 0 represents the top, -1 the bottom
 
-Origin and Destination are both required.
+**Hidden syntax**
 
-Origin is where the card is coming from.
+Hidden is generally used for origin zones that are not known information, e.g. the Library. The choice of "What card is changing zones?" happens during resolution. **If you need this for public zones `Hidden$ True` is required.**
 
-Destination is where the card is going to. If Destination is Library, a
-LibraryPosition is recommended, but not required. **Default value of the
-LibraryPosition is 0.** 0 represents the top of the library, -1 represents the bottom.
+Example (*Call the Gatewatch*):  
+`A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Planeswalker | SpellDescription$ Search your library for a planeswalker card, reveal it, put it into your hand, then shuffle.`
 
-There are two primary versions of ChangeZone.
+Parameters:
+- `ChangeType$ {ValidCard}`
+- `ChangeNum$ {Integer}`
+- `Chooser$ {DefinedPlayer} -` which player decides which card changes zone
+- `Mandatory$ True` - most of these abilities aren't mandatory, but **CR 701.23d.** means cards like *Demonic Tutor* are different
 
-#### Hidden Origin
+**Known syntax**
 
-The first is hidden, generally used for Origin zones that are not known
-information, like the Library or the Hand. The choice of "What card is
-changing zones?" happens during resolution.
+The second is known, instead designed for origin zones that are known information, like the battlefield. The choice of "What card is changing zones?" happens when it's put on the stack (or is at least fixed some other way).
 
-`A:SP$ ChangeZone | Cost$ W | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Artifact,Enchantment | ChangeNum$ 1 | SpellDescription$ Search your library for an artifact or enchantment card and reveal that card. Shuffle your library, then put the card on top of it.`  
-`A:AB$ ChangeZone | Cost$ T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | Optional$ True | SpellDescription$ You may put a land card from your hand onto the battlefield.`
-
-For Hidden, things like ChangeType and ChangeNum are used to restrict
-what can ChangeZone, and how many do. There are two parameters special
-to Hidden Origin:
-
-"Chooser" defines which player has to decide which card changes zone
-(example You, Opponent).
-
-"Mandatory" most of these abilities are not mandatory, but some are.
-
-#### Known Origin
-
-The second is known, generally used for Origin zones that are known
-information, like the Battlefield or the Graveyard. The choice of "What
-card is changing zones?" happens on activation, generally by targeting.
-
-`A:AB$ ChangeZone | Cost$ 1 U T | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | Origin$ Graveyard | Destination$ Library | SpellDescription$ Put target artifact card from your graveyard on top of your library.`  
-`A:SP$ ChangeZone | Cost$ U U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand.`
-
-For Known, since it just uses Target, normal target parameters are used in this Scenario.
+Example (**Excommunicate**):  
+`A:SP$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target creature on top of its owner's library.`
 
 ### ChangeZoneResolve
-
 This is a helper AF, for chained effects that create multiple permanents which should enter the battlefield at the same time.
 
-To use it, you need to set the param "ChangeZoneTable" on the first effect and then call this at the end.
+To use it, you need to set the param `ChangeZoneTable$ True` on the first effect and then call this at the end.
 
 This is supported by the following effects:
 - Amass
@@ -834,67 +532,49 @@ This is supported by the following effects:
 - Token
 
 ### Dig
+Dig is for an ability that does basically this: "You look at the X cards of your Library, put Y of them somewhere, then put the rest somewhere."
 
-Dig is for an ability that does basically this: "You look at the X cards
-of your Library, put Y of them somewhere, then put the rest somewhere."
-Think of Impulse.
-
-- DigNum - Required - look at the top number of cards of your library.
-- Reveal - Optional - for abilities that say "Reveal the top X cards
-  of your library". Default is false.
-- SourceZone - Optional - the zone to dig in. Default is Library.
-- DestinationZone - Optional - the zone to put the Y cards in. Default
-  is Hand.
-- LibraryPosition - Optional - if DestinationZone is Library, use this
-  to specify position. Default is -1 (bottom of library).
-- ChangeNum - Optional - the number of cards to move to the
-  DestinationZone (or "All" when it's for things like "put all lands
-  revealed this way into your hand"). Default is 1.
-- ChangeValid - Optional - use this to specify if "you may move an
-  artifact to DestinationZone". Default is any Card.
-- AnyNumber - Optional - use if you can move any number of Cards to
-  DestinationZone. Default is false. (think of Lead the Stampede)
-- Optional - Optional - set this if you "may" move a card to
-  DestinationZone. Default is false.
-- DestinationZone2 - Optional - the zone to put the rest of the cards
-  in. If it is library, you are prompted for the order. Default is
-  Library.
-- LibraryPosition2 - Optional - if DestinationZone2 is Library, use
-  this to specify position. Default is -1 (bottom of library).
+Parameters:
+- `DigNum$ {Integer}` - look at the top X number of cards
+- `Reveal$ True` (Default: False)
+- `ChangeNum$ {Integer/Any/All}` (Default: 1)
+  - the number of cards to move to the DestinationZone
+  - "Any" if you can move any number of Cards to DestinationZone
+  - "All" when it's for things like "put all lands revealed this way into your hand"
+- `ChangeValid$ {ValidCard}` (Default: Card) - use this to specify if only certain types can be moved to DestinationZone
+- `Optional$ True` (Default: False) - if you "may" move a card to DestinationZone
+- `SourceZone$ {ZoneType}` (Default: Library) - the zone to dig in
+- `DestinationZone$ {ZoneType}` (Default: Hand) - the zone to put the Y cards in
+- `DestinationZone2$ {ZoneType}` (Default: Library) - the zone to put the rest in
+- `LibraryPosition/LibraryPosition2 {Integer}` (Default: -1) - if DestinationZone is Library, use this to specify position
 
 ### DigUntil
 
 ### Discard
-
-`A:AB$ Discard | Cost$ T | ValidTgts$ Opponent | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Target opponent discards a card. `
-
-  - NumCards - the number of cards to be discarded (may be integer or X)
-  - Mode - the mode of discard - should match spDiscard
-      - Random
-      - TgtChoose
-      - RevealYouChoose
-      - Hand
-  - DiscardValid - a ValidCards syntax for acceptable cards to discard
-  - UnlessType - a ValidCards expression for "discard X unless you
-    discard <Type>"
+Parameters:
+- `NumCards$ {Integer}` (Default: 1) - the number of cards to discard
+- `Mode$ {String}` - the mode of discard
+  - Random
+  - TgtChoose
+  - RevealYouChoose
+  - Hand
+- `DiscardValid$ {ValidCard}` (Default: Card) - acceptable cards to discard
+- `UnlessType$ {ValidCard}` - expression for "discard X unless you discard valid"
 
 ### Draw
-
-`A:AB$ Draw | Cost$ 1 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.`
+Parameters:
+- `NumCards$ {Integer}` (Default: 1) - the number of cards to draw
 
 ### Mill
-
-`A:AB$ Mill | Cost$ 2 T | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player to mill | SpellDescription$ Target player puts the top two cards of his or her library into his or her graveyard.`
+Parameters:
+- `NumCards$ {Integer}` (Default: 1) - the number of cards to mill
 
 ### RearrangeTopOfLibrary
 
 ### Shuffle
+Used for shuffling a player's library.
 
-Used for shuffling a player's library
-
-  - Optional - Set this parameter if the user should be
-    prompted Yes/No to shuffle the given library. Default is false.
+Parameters:
+- `Optional$ True` - if the activator gets to decide if each affected player shuffles
 
 ### TwoPiles
-
-## Vote

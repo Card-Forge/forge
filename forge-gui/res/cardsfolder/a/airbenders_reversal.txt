@@ -1,0 +1,7 @@
+Name:Airbender's Reversal
+ManaCost:1 W
+Types:Instant Lesson
+A:SP$ Charm | Choices$ DBDestroy,DBAirbend
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SpellDescription$ Destroy target attacking creature.
+SVar:DBAirbend:DB$ Airbend | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Airbend target creature you control. (Exile it. While it's exiled, its owner may cast it for {2} rather than its mana cost.)
+Oracle:Choose one —\n• Destroy target attacking creature.\n• Airbend target creature you control. (Exile it. While it's exiled, its owner may cast it for {2} rather than its mana cost.)

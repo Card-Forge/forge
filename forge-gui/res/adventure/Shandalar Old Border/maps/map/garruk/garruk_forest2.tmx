@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="34" height="27" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="97">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/main-nocollide.tsx" />
+ <layer id="10" name="Lowest Background" width="34" height="27">
+  <data encoding="base64" compression="zlib">
+   eJz7ysbA8JXGuJ+dgWECFG9jZWCYyE57O3G5A2T/WyA7BIj1OQbWHQMVDiD8Hoh7BtgdMDeA4kMPGBd9A+AOZDcMVHoYLGliMLmD34yBwcyEgUHQbGDdoQtME++AdDcwPD4MoDsGm1tg6WSg3QILk8GQZpHD5PMgcMdAh8lgjJtRdwyOuh85LAbaHaPpFLc7NrIObPmOnkbSOCF4MKSRgXDHYEwj2NwBAEJJYGI=
+  </data>
+ </layer>
+ <layer id="8" name="Lower Background" width="34" height="27">
+  <data encoding="base64" compression="zlib">
+   eJztzkERAAAEADB/vfXURAzHbQkWAcA1vR14qnJ7AAA3Db2SAXM=
+  </data>
+ </layer>
+ <layer id="7" name="Background" width="34" height="27">
+  <data encoding="base64" compression="zlib">
+   eJzVlrtOw0AQRbeBeGNL0FABEg2vH+CTKChc0qFQJTw+KwSUnoYKjPgFemZkjzIZz77sGIGlK8vrle/ZO2OvZ7kxd6B7ED9mbPwB9Aj63u4m7ZBzjgtjTkCnoNLWc9CXj5+BzothOebw/CfQonDn8Az3XhqO98yYD4+qzM8Ry045YDYongMyHI2N2Rq5NbErby2LWI55w7BgLDiO5xvQdSPuza8nVq9DKgd5cnEOLYNstz5/Ql6H4/7+sRy4fvImEUOoFktx/epgXI7aHCTOIbO4teueKVlINh8neu3Der+ydhbE4erPkFfIW6sVshwoopq4vhk49taxTzTJnIkdGeU6NtGrmi7tumiM56Vx+1j6ZkRr50y/mYlWG2LR8uiSCa3F16+oae7mKEXdOMeFwlFFekp/bf7eTr0P8h7BecTTtzZXyt7pysaYdg6U1TSP54jhLO3KV9aG5yRZfByh7xs+V9ZA7jkuSY5QXaoAy6Y0xLuL/2uzxH/VITlSWFL69D/WJiazEIf2jpNSvmkhjph9xsUxZB6S5a/0iLz3A5f3pEQ=
+  </data>
+ </layer>
+ <layer id="9" name="Tree" width="34" height="27">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzFlk1Ow0AMhUegUqokXAK1FKmw5kiIBSvEFla0AQkOVSrEPktWXCEXYCzy1BfX4yQVEpGsVvmxPz97PDPLQ5hFO4+2ifY5DmHa3PsLO4tmXakY8v4iMtwc/z+HaLHMQnjO0n5Ft3fH5urdjeIQ/ysnBjg8LbTfg8MQvnM7T4vB00FzrFVOlsYPRdv3U7b9XTe6WAx9Oa5jb1w6msg7iInrK9povOWA6Qv3wakNMV7iO2Xm1wZ6ILb09dtR2yQPzQEG632YFYeZ58Zz1EaYR03cZZMHNLU4sA5WjZXEyz2IHuFYU0Oz+8mvX4kJDab0XO7PJltDznomcF76HjOXRj03+W4foL/l+UfezpM10X2KmE+Z3R/c815NOc/bmHfV1DTFovW19OA1A/8XzXwVXvHBtdUmcYVFjGukry499H1dI28G8rcVxbJmOs8nTw9cj8WwPU++rcLuLLNmicXp7Un7cLCeUsuhHKfGWhjCgX6oKN6yo0e4hzifOrTXB3/TVxPWI9Wv1l7IPha0PvQ3fTXhOZna87y6YJbqfWqfM5H4ggujLIM4eH9MnQP66tLFwfODOXC+kP93xX4sqfnRRw+epbyPc629c6DFURscyIvPM5aWV0V7H0+x1U7/pM6FrElqjjGPzHD8B5+wS2w+G1gcmiE1yzwOT2Ped4Qndbbn/ns9SevBeQ7hQK2hR9f5sUuPoX2PepWkh+eLe61OsOhvfwD72wpv
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="431.5" width="48" height="16">
+   <properties>
+    <property name="teleport" value="" />
+   </properties>
+  </object>
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="522.915" y="383.179" />
+  <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="104.779" y="294.529">
+   <properties>
+    <property name="enemy" value="Viper" />
+    <property name="threatRange" type="int" value="30" />
+   </properties>
+  </object>
+  <object id="55" template="../../../../../../common/maps/obj/enemy.tx" x="274.384" y="103.802">
+   <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Epic Struggle|JUD", "Forest|PALP", "Overwhelming Instinct|ONS" ] }</property>
+    <property name="enemy" value="Garruk" />
+   </properties>
+  </object>
+  <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="303.059" y="176.054">
+   <properties>
+    <property name="enemy" value="Bear" />
+    <property name="threatRange" type="int" value="60" />
+   </properties>
+  </object>
+  <object id="62" template="../../../../../../common/maps/obj/enemy.tx" x="79.889" y="367.701">
+   <properties>
+    <property name="enemy" value="Squirrel" />
+    <property name="threatRange" type="int" value="30" />
+   <property name="effect">{"startBattleWithCard": ["Forest|TMP", "Forest|TMP", "Nut Collector|ODY"]}</property>
+    </properties>
+  </object>
+  <object id="63" template="../../../../../../common/maps/obj/enemy.tx" x="513.96" y="174.058">
+   <properties>
+    <property name="enemy" value="Treefolk" />
+    <property name="threatRange" type="int" value="20" />
+   </properties>
+  </object>
+  <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="385.042" y="366.783">
+   <properties>
+    <property name="enemy" value="Fox" />
+    <property name="threatRange" type="int" value="40" />
+   </properties>
+  </object>
+  <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="65.5575" y="124.951">
+   <properties>
+    <property name="enemy" value="Beastmaster" />
+    <property name="threatRange" type="int" value="40" />
+   <property name="effect">{ "startBattleWithCard": [ "Dual Nature" ] }</property></properties>
+  </object>
+  <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="478.558" y="111.013">
+   <properties>
+    <property name="enemy" value="Treefolk" />
+    <property name="threatRange" type="int" value="20" />
+   </properties>
+  </object>
+  <object id="68" template="../../../../../../common/maps/obj/treasure.tx" x="222.685" y="60.7665" />
+  <object id="70" template="../../../../../../common/maps/obj/gold.tx" x="68.0821" y="226.099" />
+  <object id="71" template="../../../../../../common/maps/obj/gold.tx" x="401.185" y="431.423" />
+  <object id="72" template="../../../../../../common/maps/obj/gold.tx" x="45.6927" y="80.6475" />
+  <object id="88" template="../../../../../../common/maps/obj/manashards.tx" x="288" y="64" />
+  <object id="89" template="../../../../../../common/maps/obj/manashards.tx" x="303.5" y="62" />
+  <object id="90" template="../../../../../../common/maps/obj/manashards.tx" x="320.5" y="270" />
+  <object id="91" template="../../../../../../common/maps/obj/manashards.tx" x="513" y="336.5" />
+  <object id="94" template="../../../../../../common/maps/obj/collision.tx" x="-0.25" y="0" width="544.5" height="16" />
+  <object id="95" template="../../../../../../common/maps/obj/collision.tx" x="543.75" y="0.5" width="19.5" height="431" />
+  <object id="96" template="../../../../../../common/maps/obj/collision.tx" x="344.25" y="432.5" width="136" height="16" />
+ </objectgroup>
+</map>

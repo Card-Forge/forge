@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="77">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/phyrexia/GitaxianTilesheet.tsx" />
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAMpvIyMEzDg6fzEmEIGcCYj4HhEh5sykc7e/GB4WbvRaQwNYPaYY4kdplG9iKnK5jfQX6kdTpDT1cggC+dzaSSOwjFLzpAj29y459Uewm5YyjYu4sHgUEAmS/Lg98eWvkX3V5ztHRGTj5z4yTdXmqVI8Taa06B/yixl9rlJcjeem7c8tT2J7K9sLIHGcDEyPEnAMvuO9Q=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy1lVEOhCAMRP3duGfhGB7MdP/Y++zxDIkTx24rCJVkAgTD67SA6zxNa0XLq021fXqU06FvOs85tkjm733wZO95XNbBjubK7k3SfwzR+WYfrGywisr3EWyLi1pb8YxywfPO1ZU+6cy/E4fHFapvVvW+0ggXd4fPU40vAdwWX09wuX7ar1R8j3J1brWwPnKuuOHO8jul4+CxFXerSkMPrnems+Gzlwku3gerdnoObq9XK+/evyjCZwvXy+/dPTf2kSWe
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBi8wI2TMnlqg816DAy79ehr50DaS08Ai0t6xCnIjtnA8JwLxFug4boNSuPiU8ve1UDzlkDtJgVQEv8ge3cB9XcD8Uo6piOQvTOB9q0B4lkk2nuAQv8OBADZu1APkrZg/gX5vwmIm7H4Z7oeAlMKOvUgGAYWQtndSGI7aRD3i9HS82Kof5fSOJ116yEwCEwE0nOAeDKUTwu/gsBqaHpei2Q+PfMUtQAAdAkuEg==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzbwcPAsIMAbtNjYGjHgzv0CJshg4YJqQfhPqC5+MCEUXupYu80oLnToXgd1A0bkMRm0Mhe5HQ1D2rvAhLTGS3CGR3cxOIOetg7QQ+TTw97sbljKNl7CCntToe6AZm/DEu40sO/6PZcRHPnDDrZi60coaW9G/RwlyO0tBdfeUkLe88RUV6SY+8dpLIHGcDEbpNRPgMAC9v4YQ==
+  </data>
+ </layer>
+ <layer id="8" name="Archway" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFowAVtOsNtAtGwSgYBaNgFNAKAAAyOgC2
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="277" width="48" height="16">
+   <properties>
+    <property name="teleport" value="" />
+   </properties>
+  </object>
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="160.239" y="31.7659" />
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="192.235" y="47.7421">
+   <properties>
+    <property name="enemy" value="Gitaxian Scientist" />
+    <property name="threatRange" value="20" />
+    <property name="waypoints" value="68,69,70" />
+   <property name="effect">{"startBattleWithCard": ["Phyrexian Arena|APC", "Phyrexian Infiltrator|INV", "Howling Mine|LEA", "Phyrexian Walker|VIS"]}</property>
+    </properties>
+  </object>
+  <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="273" y="145.112">
+   <properties>
+    <property name="enemy" value="Gitaxian Underling" />
+    <property name="threatRange" value="20" />
+    <property name="waypoints" value="64,65,66,67" />
+   </properties>
+  </object>
+  <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="207.841" y="177.756">
+   <properties>
+    <property name="enemy" value="Gitaxian Underling" />
+   </properties>
+  </object>
+  <object id="62" template="../../../../../../common/maps/obj/gold.tx" x="383.945" y="175.462" />
+  <object id="71" name="switch" type="dialog" gid="4426" x="368" y="126.848" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    "text":"A large, conspicuous switch juts from the wall in the back of the lab.", 
+    "options":[ 
+	{ 
+		"text":"You hear the sound of metal sliding across metal from behind you.",
+		"action":[{"deleteMapObject":73}],
+		"name":"Flip the switch" 
+	},
+	{ "name":"Leave" } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="75" template="../../../../../../common/maps/obj/booster.tx" x="216.75" y="32.8333">
+   <properties>
+    <property name="reward">[
+  {
+    "editions": [ "USG","ULG","UDS","INV","APC" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
+    "colors": [ "blue" ]
+  },
+  {
+    "editions": [ "USG","ULG","UDS","INV","APC" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
+    "colors": [ "blue" ]
+  },
+  {
+    "editions": [ "USG","ULG","UDS","INV","APC" ],
+    "type": "card",
+    "count": 1,
+    "rarity": [ "Rare", "Mythic Rare" ]
+    "colors": [ "blue" ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="76" template="../../../../../../common/maps/obj/treasure.tx" x="256" y="32" />
+ </objectgroup>
+ <objectgroup id="7" name="Waypoints">
+  <object id="64" template="../../../../../../common/maps/obj/waypoint.tx" x="273" y="145" />
+  <object id="65" template="../../../../../../common/maps/obj/waypoint.tx" x="367.667" y="145" />
+  <object id="66" template="../../../../../../common/maps/obj/waypoint.tx" x="367.333" y="157" />
+  <object id="67" template="../../../../../../common/maps/obj/waypoint.tx" x="272.667" y="157" />
+  <object id="68" template="../../../../../../common/maps/obj/waypoint.tx" x="163" y="61" />
+  <object id="69" template="../../../../../../common/maps/obj/waypoint.tx" x="192" y="61" />
+  <object id="70" template="../../../../../../common/maps/obj/waypoint.tx" x="192" y="34" />
+  <object id="73" template="../../../../../../common/maps/obj/gate.tx" x="208.25" y="96.5">
+   <properties>
+    <property name="dialog">[{
+    "text":"This gate is locked. There must be a way to open it somewhere else in here.",
+    "options":[
+    { "name":"continue" } 
+    ]
+}]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
