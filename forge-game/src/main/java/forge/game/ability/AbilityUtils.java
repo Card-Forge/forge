@@ -20,6 +20,7 @@ import forge.game.cost.CostAdjustment;
 import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
+import forge.game.keyword.KeywordWithCostAndType;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
@@ -3112,10 +3113,10 @@ public class AbilityUtils {
 
         final CardCollection splices = CardLists.filter(hand, input -> {
             for (final KeywordInterface inst : input.getKeywords(Keyword.SPLICE)) {
-                String k = inst.getOriginal();
-                final String[] n = k.split(":");
-                if (source.isValid(n[1].split(","), player, input, sa)) {
-                    return true;
+                if (inst instanceof KeywordWithCostAndType splice) {
+                    if (source.isValid(splice.getValidType().split(","), player, input, sa)) {
+                        return true;
+                    }
                 }
             }
             return false;
@@ -3143,9 +3144,10 @@ public class AbilityUtils {
         Cost spliceCost = null;
         // This Function thinks that Splice exist only once on the card
         for (final KeywordInterface inst : c.getKeywords(Keyword.SPLICE)) {
-            final String k = inst.getOriginal();
-            final String[] n = k.split(":");
-            spliceCost = new Cost(n[2], false);
+            if (inst instanceof KeywordWithCostAndType splice) {
+                spliceCost = splice.getCost();
+                break;
+            }
         }
 
         if (spliceCost == null)
@@ -3164,7 +3166,7 @@ public class AbilityUtils {
 
         // update master SpellAbility
         sa.setBasicSpell(false);
-        sa.setPayCosts(spliceCost.add(sa.getPayCosts()));
+        sa.getPayCosts().add(spliceCost);
         sa.setDescription(sa.getDescription() + " (Splicing " + c + " onto it)");
         sa.addSplicedCards(c);
     }
