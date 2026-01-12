@@ -2,5 +2,5 @@ Name:Celebrate the Harvest
 ManaCost:3 G
 Types:Sorcery
 A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeTypeDesc$ basic land | ChangeNum$ X | Tapped$ True | SelectPrompt$ Select up to X basic land cards | StackDescription$ SpellDescription | SpellDescription$ Search your library for up to X basic land cards, where X is the number of different powers among creatures you control. Put those cards onto the battlefield tapped, then shuffle.
-SVar:X:Count$DifferentPower_Creature.YouCtrl
+SVar:X:Count$Valid Creature.YouCtrl$DifferentCardPower
 Oracle:Search your library for up to X basic land cards, where X is the number of different powers among creatures you control. Put those cards onto the battlefield tapped, then shuffle.

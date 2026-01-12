@@ -1,5 +1,6 @@
 package forge.game.ability;
 
+import com.google.common.base.Function;
 import com.google.common.collect.*;
 import com.google.common.math.IntMath;
 import forge.card.CardStateName;
@@ -42,10 +43,10 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.function.BinaryOperator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class AbilityUtils {
     private final static ImmutableList<String> cmpList = ImmutableList.of("LT", "LE", "EQ", "GE", "GT", "NE");
@@ -2866,14 +2867,6 @@ public class AbilityUtils {
         }
 
         // TODO move below to handlePaid
-        if (sq[0].startsWith("DifferentPower_")) {
-            final String restriction = l[0].substring(15);
-            final int uniquePowers = (int) game.getCardsIn(ZoneType.Battlefield).stream()
-                    .filter(CardPredicates.restriction(restriction, player, c, ctb))
-                    .map(Card::getNetPower)
-                    .distinct().count();
-            return doXMath(uniquePowers, expr, c, ctb);
-        }
         if (sq[0].startsWith("DifferentCounterKinds_")) {
             final Set<CounterType> kinds = Sets.newHashSet();
             final String rest = l[0].substring(22);
@@ -3662,14 +3655,6 @@ public class AbilityUtils {
             return diffPair.size();
         }
 
-        if (def.startsWith("DifferentCMC")) {
-            final Set<Integer> diffCMC = new HashSet<>();
-            for (final Card card : paidList) {
-                diffCMC.add(card.getCMC());
-            }
-            return diffCMC.size();
-        }
-
         // shortcut to filter from Defined directly
         if (def.startsWith("Valid")) {
             final String[] splitString = def.split("/", 2);
@@ -3697,19 +3682,22 @@ public class AbilityUtils {
             return doXMath(creatTypes.size(), CardFactoryUtil.extractOperators(def), source, ctb);
         }
 
-        BinaryOperator<Integer> op;
+        Function<IntStream, Integer> func;
         String finalDef;
         if (def.startsWith("Least")) {
-            op = Integer::min;
+            func = s -> s.min().getAsInt();
             finalDef = def.substring(5);
         } else if (def.startsWith("Greatest")) {
-            op = Integer::max;
+            func = s -> s.max().getAsInt();
             finalDef = def.substring(8);
+        } else if (def.startsWith("Different")) {
+            func = s -> Math.toIntExact(s.distinct().count());
+            finalDef = def.substring(9);
         } else {
-            op = Integer::sum;
+            func = IntStream::sum;
             finalDef = def;
         }
-        return StreamUtil.stream(paidList).map(c -> xCount(c, finalDef, ctb)).reduce(op).get();
+        return func.apply(StreamUtil.stream(paidList).mapToInt(c -> xCount(c, finalDef, ctb)));
     }
 
     private static CardCollectionView getCardListForXCount(final Card c, final Player cc, final String[] sq, CardTraitBase ctb) {
