@@ -314,26 +314,24 @@ public final class CardUtil {
             final List<SpellAbility> reflectAbilities = Lists.newArrayList();
 
             for (final SpellAbility ab : abilities) {
-                if (ab.isSpell()) {
+                if (ab.isSpell() || ab.isLandAbility()) {
                     continue;
                 }
                 if (maxChoices == colors.size()) {
                     break;
                 }
 
-                // Recursion! Set Activator to controller for appropriate valid comparison
-                ab.setActivatingPlayer(ab.getHostCard().getController());
-                if (ab.getApi() == ApiType.ManaReflected && !"Produced".equals(ab.getParam("ReflectProperty"))) {
-                    if (!parents.contains(ab.getHostCard())) {
-                        reflectAbilities.add(ab);
-                        parents.add(ab.getHostCard());
-                    }
-                    continue;
-                }
-                colors = canProduce(maxChoices, ab, colors);
                 if (!parents.contains(ab.getHostCard())) {
                     parents.add(ab.getHostCard());
                 }
+
+                // Recursion! Set Activator to controller for appropriate valid comparison
+                ab.setActivatingPlayer(ab.getHostCard().getController());
+                if (ab.getApi() == ApiType.ManaReflected && !"Produced".equals(ab.getParam("ReflectProperty"))) {
+                    reflectAbilities.add(ab);
+                    continue;
+                }
+                colors = canProduce(maxChoices, ab, colors);
             }
 
             for (final SpellAbility ab : reflectAbilities) {
