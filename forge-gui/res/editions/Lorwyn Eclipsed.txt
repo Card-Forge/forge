@@ -4,6 +4,59 @@ Date=2026-01-23
 Name=Lorwyn Eclipsed
 Type=Expansion
 ScryfallCode=ECL
+#https://mtgscribe.com/2026/01/10/lorwyn-eclipsed-play-booster-fact-sheet/
+BoosterSlots=Common,Common-SPG,Uncommon,RareMythic,Land,Wildcard,WildcardFoil
+Booster=6 Common, 1 Common-SPG, 3 Uncommon, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 Land
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=30
+
+[Common]
+Base=Common:fromSheet("ECL cards")
+
+[Common-SPG]
+Base=Common:fromSheet("ECL cards")
+Replace=0.01818F fromSheet("ECL special guests")
+
+[Uncommon]
+Base=Uncommon:fromSheet("ECL cards")
+Replace=0.1F fromSheet("ECL showcase")
+
+[RareMythic]
+Base=Rare:fromSheet("ECL cards")
+Replace=.136F Mythic:fromSheet("ECL cards")
+Replace=.046F Rare:fromSheet("ECL showcase")
+Replace=.012F Mythic:fromSheet("ECL showcase")
+Replace=0.006F Rare:fromSheet("ECL borderless")
+Replace=0.004F Mythic:fromSheet("ECL borderless")
+Replace=0.006F fromSheet("ECL reversible shocklands")
+
+[Wildcard]
+Base=Uncommon:fromSheet("ECL cards")
+Replace=0.18F Common:fromSheet("ECL cards")
+Replace=0.19 Rare:fromSheet("ECL cards")
+Replace=0.02F Mythic:fromSheet("ECL cards")
+Replace=0.02F Uncommon:fromSheet("ECL showcase")
+Replace=0.006F Rare:fromSheet("ECL showcase")
+Replace=0.002F Mythic:fromSheet("ECL showcase")
+Replace=0.01F Rare:fromSheet("ECL borderless")
+Replace=0.004F Mythic:fromSheet("ECL borderless")
+Replace=0.006 fromSheet("ECL reversible shocklands")
+
+[WildcardFoil]
+Base=Common:fromSheet("ECL cards")
+Replace=0.298F Uncommon:fromSheet("ECL cards")
+Replace=0.065F Rare:fromSheet("ECL cards")
+Replace=0.011F Mythic:fromSheet("ECL cards")
+Replace=0.008F Uncommon:fromSheet("ECL showcase")
+Replace=0.008F Rare:fromSheet("ECL showcase")
+Replace=0.002F Mythic:fromSheet("ECL showcase")
+Replace=0.004F Rare:fromSheet("ECL reversible shocklands")
+
+[Land]
+Base=BasicLand:fromSheet("ECL cards")
+Repalce=.1F BasicLand:fromSheet("ECL cards")+
+Replace=.4F fromSheet("ECL full art")
+Replace=.1F fromSheet("ECL full art")+
 
 [cards]
 1 C Changeling Wayfinder @Quintin Gleim
@@ -280,6 +333,8 @@ ScryfallCode=ECL
 272 L Mountain @Raymond Bonilla
 273 L Forest @Jorge Jacinto
 274 L Plains @Justin Gerard
+
+[full art]
 275 L Island @Annie Stegg
 276 L Swamp @Raoul Vitale
 277 L Mountain @Ralph Horsley
@@ -289,6 +344,8 @@ ScryfallCode=ECL
 281 L Swamp @Raoul Vitale
 282 L Mountain @Ralph Horsley
 283 L Forest @Jason Mowry
+
+[borderless]
 284 M Ajani, Outland Chaperone @Greg Staples
 285 R Brigid, Clachan's Heart @Jesper Ejsing
 286 M Eirdu, Carrier of Dawn @Omar Rayyan
@@ -302,6 +359,8 @@ ScryfallCode=ECL
 294 M Emptiness @Jeff Miracola
 295 M Vibrance @Mark Zug
 296 M Wistfulness @Paolo Parente
+
+[showcase]
 297 R Adept Watershaper @Julie Benbassat
 298 M Curious Colossus @Hayden Goodman
 299 R Kinbinding @Yas Imamura
@@ -352,6 +411,8 @@ ScryfallCode=ECL
 344 R Trystan's Command @Yas Imamura
 345 U Twinflame Travelers @adelinaillustration
 346 M Chronicle of Victory @adelinaillustration
+
+[alternate art]
 347 R Hallowed Fountain @Justin Gerard
 347☇ R Hallowed Fountain @Justin Gerard
 348 R Steam Vents @Raoul Vitale
@@ -363,6 +424,28 @@ ScryfallCode=ECL
 351 R Temple Garden @Annie Stegg
 351☇ R Temple Garden @Annie Stegg
 352 M Bitterbloom Bearer @Rebecca Guay
+382 M Winnowing @Yukoring
+383 M Glen Elendra Guardian @NgN
+384 M Harmonized Crescendo @konomura
+385 M Bloodline Bidding @Morizo
+386 M Moonshadow @Mizugoromaru
+387 M Collective Inferno @YUE
+388 M Meek Attack @Yoshioka
+389 M Spinerock Tyrant @D-suzuki
+390 M Bloom Tender @Yuyuharu
+391 M Selfless Safewright @Karuta Shiki
+392 M Winnowing @Yukoring
+393 M Glen Elendra Guardian @NgN
+394 M Harmonized Crescendo @konomura
+395 M Bloodline Bidding @Morizo
+396 M Moonshadow @Mizugoromaru
+397 M Collective Inferno @YUE
+398 M Meek Attack @Yoshioka
+399 M Spinerock Tyrant @D-suzuki
+400 M Bloom Tender @Yuyuharu
+401 M Selfless Safewright @Karuta Shiki
+
+[extended art]
 353 R Champion of the Clachan @Edgar Sánchez Hidalgo
 354 R Rhys, the Evermore @Kai Carpenter
 355 R Winnowing @David Palumbo
@@ -392,26 +475,8 @@ ScryfallCode=ECL
 379 R Shadow Urchin @Ron Spencer
 380 R Tam, Mindful First-Year @Zoltan Boros
 381 R Mirrormind Crown @Dan Frazier
-382 M Winnowing @Yukoring
-383 M Glen Elendra Guardian @NgN
-384 M Harmonized Crescendo @konomura
-385 M Bloodline Bidding @Morizo
-386 M Moonshadow @Mizugoromaru
-387 M Collective Inferno @YUE
-388 M Meek Attack @Yoshioka
-389 M Spinerock Tyrant @D-suzuki
-390 M Bloom Tender @Yuyuharu
-391 M Selfless Safewright @Karuta Shiki
-392 M Winnowing @Yukoring
-393 M Glen Elendra Guardian @NgN
-394 M Harmonized Crescendo @konomura
-395 M Bloodline Bidding @Morizo
-396 M Moonshadow @Mizugoromaru
-397 M Collective Inferno @YUE
-398 M Meek Attack @Yoshioka
-399 M Spinerock Tyrant @D-suzuki
-400 M Bloom Tender @Yuyuharu
-401 M Selfless Safewright @Karuta Shiki
+
+[promo]
 402 U Personify @Slawomir Maniak
 403 U Silvergill Mentor @Iris Compiet
 404 U Iron-Shield Elf @Adrián Rodríguez Pérez
@@ -419,6 +484,35 @@ ScryfallCode=ECL
 406 U Virulent Emissary @Tiffany Turrill
 407 R Kinbinding @Heather Hudson
 408 R Harmonized Crescendo @Jeff Miracola
+
+[special guests]
+1 Idyllic Tutor|SPG|[129]
+1 Kinsbaile Cavalier|SPG|[130]
+1 Mistbind Clique|SPG|[131]
+1 Wanderwine Prophets|SPG|[132]
+1 Bitterblossom|SPG|[133]
+1 Faerie Macabre|SPG|[134]
+1 Goblin Chieftain|SPG|[135]
+1 Goblin Sharpshooter|SPG|[136]
+1 Heat Shimmer|SPG|[137]
+1 Devoted Druid|SPG|[138]
+1 Helix Pinnacle|SPG|[139]
+1 Leaf-Crowned Visionary|SPG|[140]
+1 Regal Force|SPG|[141]
+1 Manamorphose|SPG|[142]
+1 Risen Reef|SPG|[143]
+1 Slippery Bogle|SPG|[144]
+1 Dolmen Gate|SPG|[145]
+1 Door of Destinies|SPG|[146]
+1 Painter's Servant|SPG|[147]
+1 Thousand-Year Elixir|SPG|[148]
+
+[reversible shocklands]
+1 Hallowed Fountain|ECL|[347]
+1 Steam Vents|ECL|[348]
+1 Blood Crypt|ECL|[349]
+1 Overgrown Tomb|ECL|[350]
+1 Temple Garden|ECL|[351]
 
 [tokens]
 1 c_1_1_shapeshifter_changeling @Jeff Miracola
