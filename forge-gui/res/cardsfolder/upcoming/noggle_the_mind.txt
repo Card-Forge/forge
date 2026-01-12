@@ -1,5 +1,5 @@
 Name:Noggle the Mind
-ManaCost:2 U
+ManaCost:1 U
 Types:Enchantment Aura
 K:Flash
 K:Enchant:Creature
