@@ -194,7 +194,7 @@ public enum Keyword {
     TRANSFIGURE("Transfigure", KeywordWithCost.class, false, "%s, Sacrifice this creature: Search your library for a creature card with the same mana value as this creature and put that card onto the battlefield, then shuffle. Transfigure only as a sorcery."),
     TRANSMUTE("Transmute", KeywordWithCost.class, false, "%s, Discard this card: Search your library for a card with the same mana value as this card, reveal it, and put it into your hand, then shuffle. Transmute only as a sorcery."),
     TRIBUTE("Tribute", KeywordWithAmount.class, false, "As this creature enters, an opponent of your choice may put {%d:+1/+1 counter} on it."),
-    TYPECYCLING("TypeCycling", KeywordWithCostAndType.class, false, "%s, Discard this card: Search your library for a %s card, reveal it, put it into your hand, then shuffle."),
+    TYPECYCLING("TypeCycling", KeywordWithCostAndType.class, false, "%s, Discard this card: Search your library for %s, reveal it, put it into your hand, then shuffle."),
     UMBRA_ARMOR("Umbra armor", SimpleKeyword.class, true, "If enchanted permanent would be destroyed, instead remove all damage marked on it and destroy this Aura."),
     UNDAUNTED("Undaunted", SimpleKeyword.class, false, "This spell costs {1} less to cast for each opponent."),
     UNDYING("Undying", SimpleKeyword.class, false, "When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it."),

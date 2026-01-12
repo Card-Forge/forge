@@ -3280,26 +3280,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     sbAfter.append("exile it haunting target creature.");
                     sbAfter.append(")");
                     sbAfter.append("\r\n");
-                } else if (keyword.startsWith("Splice")) {
-                    final String[] n = keyword.split(":");
-                    final Cost cost = new Cost(n[2], false);
-
-                    String desc;
-
-                    if (n.length > 3) {
-                        desc = n[3];
-                    } else {
-                        String[] k = n[1].split(",");
-                        for (int i = 0; i < k.length; i++) {
-                            if (CardType.isACardType(k[i])) {
-                                k[i] = k[i].toLowerCase();
-                            }
-                        }
-                        desc = StringUtils.join(k, " or ");
-                    }
-
-                    sbAfter.append("Splice onto ").append(desc).append(" ").append(cost.toSimpleString());
-                    sbAfter.append(" (").append(inst.getReminderText()).append(")").append("\r\n");
+                } else if (keyword.startsWith("Splice") && inst instanceof KeywordWithCostAndType splice) {
+                    sbAfter.append(splice.getTitle()).append(" (").append(inst.getReminderText()).append(")").append("\r\n");
                 } else if (keyword.equals("Storm")) {
                     sbAfter.append("Storm (");
 
