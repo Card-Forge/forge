@@ -98,7 +98,7 @@ public enum Keyword {
     GRAVESTORM("Gravestorm", SimpleKeyword.class, false, "When you cast this spell, copy it for each permanent that was put into a graveyard from the battlefield this turn. If the spell has any targets, you may choose new targets for any of the copies."),
     HARMONIZE("Harmonize", KeywordWithCost.class, false, "You may cast this card from your graveyard for its harmonize cost. You may tap a creature you control to reduce that cost by {X}, where X is its power. Then exile this spell."),
     HASTE("Haste", SimpleKeyword.class, true, "This creature can attack and {T} as soon as it comes under your control."),
-    HAUNT("Haunt", SimpleKeyword.class, false, "When this is put into a graveyard, exile it haunting target creature."),
+    HAUNT("Haunt", SimpleKeyword.class, false, "When this is put into a graveyard from the battlefield, exile it haunting target creature."),
     HEXPROOF("Hexproof", Hexproof.class, true, "This can't be the target of %s spells or abilities your opponents control."),
     HIDEAWAY("Hideaway", KeywordWithAmount.class, false, "When this permanent enters, look at the top {%d:card} of your library, exile one face down, then put the rest on the bottom of your library."),
     HIDDEN_AGENDA("Hidden agenda", SimpleKeyword.class, false, "Start the game with this conspiracy face down in the command zone and secretly choose a card name. You may turn this conspiracy face up any time and reveal that name."),

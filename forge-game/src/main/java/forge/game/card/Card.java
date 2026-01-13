@@ -2436,7 +2436,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     // convert a keyword list to the String that should be displayed in game
-    public final String keywordsToText(final Collection<KeywordInterface> keywords) {
+    private String keywordsToText(final Collection<KeywordInterface> keywords) {
         final StringBuilder sb = new StringBuilder();
         final StringBuilder sbLong = new StringBuilder();
 
@@ -2467,13 +2467,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     String desc = kwt.getTypeDescription();
                     sbLong.append("Enchant ").append(desc).append("\r\n");
                 } else if ((keyword.startsWith("Morph") || keyword.startsWith("Megamorph")
-                        || keyword.startsWith("Multikicker")
+                        || keyword.startsWith("Multikicker") || keyword.startsWith("Echo")
                         || keyword.startsWith("Disguise") || keyword.startsWith("Reflect")
                         || keyword.startsWith("Mayhem") || keyword.startsWith("Recover")
                         || keyword.startsWith("Sneak") || keyword.startsWith("Squad")
                         || keyword.startsWith("Emerge") || keyword.startsWith("More Than Meets the Eye")
                         || keyword.startsWith("Level up") || keyword.startsWith("Plot")
-                        || keyword.startsWith("Echo")
                         ) && inst instanceof KeywordWithCost withCost) {
                     sbLong.append(withCost.getTitle()).append(" (").append(inst.getReminderText()).append(")");
                     sbLong.append("\r\n");
@@ -2481,10 +2480,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     sbLong.append(costAndAmount.getTitle()).append(" (").append(inst.getReminderText()).append(")");
                     sbLong.append("\r\n");
                 } else if (keyword.startsWith("Escape") || keyword.startsWith("Foretell:")
-                        || keyword.startsWith("Madness:")
-                        || keyword.startsWith("Reconfigure")
-                        || keyword.startsWith("Miracle")
-                        || keyword.startsWith("Offspring")) {
+                        || keyword.startsWith("Madness:") || keyword.startsWith("Reconfigure")
+                        || keyword.startsWith("Miracle") || keyword.startsWith("Offspring")) {
                     String[] k = keyword.split(":");
                     sbLong.append(k[0]);
                     if (k.length > 1) {
@@ -2577,18 +2574,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 } else if (keyword.startsWith("MayFlash")) {
                     // Pseudo keywords, only print Reminder
                     sbLong.append(inst.getReminderText()).append("\r\n");
-                } else if (keyword.startsWith("Strive") || keyword.startsWith("Escalate")
-                        || keyword.startsWith("ETBReplacement")
-                        || keyword.startsWith("Affinity")) {
                 } else if ((keyword.equals("Provoke") || keyword.equals("Ingest") || keyword.equals("Unleash")
-                        || keyword.equals("Soulbond") || keyword.equals("Retrace")
                         || keyword.equals("Living Weapon") || keyword.equals("Myriad") || keyword.equals("Exploit")
                         || keyword.equals("Changeling") || keyword.equals("Delve") || keyword.equals("Decayed")
-                        || keyword.equals("Split second") || keyword.equals("Sunburst")
+                        || keyword.equals("Split second") || keyword.equals("Sunburst") || keyword.equals("Riot")
+                        || keyword.equals("Soulbond") || keyword.equals("Retrace")
                         || keyword.equals("Double team") || keyword.equals("Living metal")
                         || keyword.equals("Foretell") // for the ones without cost
                         || keyword.equals("Ascend") || keyword.equals("Umbra armor")
-                        || keyword.equals("Battle cry") || keyword.equals("Devoid") || keyword.equals("Riot")
+                        || keyword.equals("Battle cry") || keyword.equals("Devoid")
                         || keyword.equals("Daybound") || keyword.equals("Nightbound")
                         || keyword.equals("Choose a Background") || keyword.equals("Compleated")
                         || keyword.equals("Space sculptor") || keyword.equals("Doctor's companion")
@@ -2639,14 +2633,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 } else if (keyword.startsWith("Starting intensity")) {
                     sbLong.append(TextUtil.fastReplace(keyword, ":", " "));
                 } else if (keyword.contains("Haunt")) {
-                    sb.append("\r\nHaunt (");
-                    if (isCreature()) {
-                        sb.append("When this creature dies, exile it haunting target creature.");
-                    } else {
-                        sb.append("When this spell card is put into a graveyard after resolving, ");
-                        sb.append("exile it haunting target creature.");
-                    }
-                    sb.append(")");
+                    sb.append("\r\nHaunt (").append(inst.getReminderText()).append(")");
                 } else if (keyword.startsWith("Bands with other")) {
                     final String[] k = keyword.split(":");
                     String desc = k.length > 2 ? k[2] : CardType.getPluralType(k[1]);
@@ -2704,25 +2691,27 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     }
                     sbLong.append(type).append(" offering");
                     sbLong.append(" (").append(inst.getReminderText()).append(")");
-                } else if (keyword.startsWith("Equip") || keyword.startsWith("Fortify") || keyword.startsWith("Outlast")
+                } else if (keyword.startsWith("Equip") || keyword.startsWith("Fortify")
                         || keyword.startsWith("Unearth") || keyword.startsWith("Scavenge")
                         || keyword.startsWith("Spectacle") || keyword.startsWith("Evoke")
                         || keyword.startsWith("Bestow") || keyword.startsWith("Surge")
                         || keyword.startsWith("Transmute") || keyword.startsWith("Suspend")
                         || keyword.startsWith("Dash") || keyword.startsWith("Disturb")
                         || keyword.equals("Undaunted") || keyword.startsWith("Monstrosity")
-                        || keyword.startsWith("Embalm") || keyword.equals("Prowess")
-                        || keyword.startsWith("Eternalize") || keyword.startsWith("Reinforce")
-                        || keyword.startsWith("Champion") || keyword.startsWith("Freerunning") || keyword.startsWith("Prowl") || keyword.startsWith("Adapt")
-                        || keyword.startsWith("Amplify") || keyword.startsWith("Ninjutsu") || keyword.startsWith("Chapter")
-                        || keyword.startsWith("Transfigure") || keyword.startsWith("Aura swap")
                         || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")
+                        || keyword.startsWith("Embalm") || keyword.equals("Prowess")
+                        || keyword.startsWith("Strive") || keyword.startsWith("Escalate")
+                        || keyword.startsWith("Eternalize") || keyword.startsWith("Reinforce") || keyword.startsWith("Outlast")
+                        || keyword.startsWith("Champion") || keyword.startsWith("Freerunning") || keyword.startsWith("Prowl")
+                        || keyword.startsWith("Amplify") || keyword.startsWith("Ninjutsu") || keyword.startsWith("Chapter")
+                        || keyword.startsWith("Transfigure") || keyword.startsWith("Aura swap") || keyword.startsWith("ETBReplacement")
                         || keyword.startsWith("Encore") || keyword.startsWith("Mutate") || keyword.startsWith("Dungeon")
                         || keyword.startsWith("Class") || keyword.startsWith("Blitz") || keyword.startsWith("Web-slinging")
                         || keyword.startsWith("Specialize") || keyword.equals("Ravenous") || keyword.startsWith("Firebending")
                         || keyword.equals("For Mirrodin") || keyword.equals("Job select") || keyword.startsWith("Craft")
                         || keyword.startsWith("Landwalk") || keyword.startsWith("Visit") || keyword.startsWith("Mobilize")
-                        || keyword.startsWith("Station") || keyword.startsWith("Warp") || keyword.startsWith("Devour")) {
+                        || keyword.startsWith("Station") || keyword.startsWith("Warp") || keyword.startsWith("Devour")
+                        || keyword.startsWith("Affinity") || keyword.startsWith("Adapt")) {
                     // keyword parsing takes care of adding a proper description
                 } else if (keyword.equals("Read ahead")) {
                     sb.append(Localizer.getInstance().getMessage("lblReadAhead")).append(" (").append(Localizer.getInstance().getMessage("lblReadAheadDesc"));
@@ -2760,7 +2749,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     // need to get SpellDescription from Svar
                     String desc = AbilityFactory.getMapParams(getSVar(k[1])).get("SpellDescription");
                     sbLong.append(desc);
-                } else if (keyword.endsWith(".") && !keyword.startsWith("Haunt")) {
+                } else if (keyword.endsWith(".")) {
                     sbLong.append(keyword).append("\r\n");
                 } else {
                     if (keyword.contains("Strike")) {
@@ -3284,7 +3273,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     sbAfter.append(splice.getTitle()).append(" (").append(inst.getReminderText()).append(")").append("\r\n");
                 } else if (keyword.equals("Storm")) {
                     sbAfter.append("Storm (");
-
                     sbAfter.append("When you cast this spell, copy it for each spell cast before it this turn.");
 
                     if (strSpell.contains("Target") || strSpell.contains("target")) {
