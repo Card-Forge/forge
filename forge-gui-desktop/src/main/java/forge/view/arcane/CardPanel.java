@@ -375,13 +375,13 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
             // Get the game view to access the actual Game object
             final var gameView = matchUI.getGameView();
-                if (gameView == null) {
-                    return false;
+            if (gameView == null) {
+                return false;
             }
 
             final var game = gameView.getGame();
-                if (game == null) {
-                    return false;
+            if (game == null) {
+                return false;
             }
 
             // Find the actual Card object 
