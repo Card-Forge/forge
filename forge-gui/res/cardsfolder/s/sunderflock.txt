@@ -6,6 +6,6 @@ S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.Self+wasCastByYou | Destination$ Battlefield | Execute$ TrigChangeZoneAll | TriggerDescription$ When this creature enters, if you cast it, return all non-Elemental creatures to their owners' hands.
 SVar:TrigChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Creature.nonElemental | Origin$ Battlefield | Destination$ Hand
-SVar:X:Count$Valid Elemental.YouCtrl$GreatestCMC
+SVar:X:Count$Valid Elemental.YouCtrl$GreatestCardManaCost
 DeckHints:Type$Elemental
 Oracle:This spell costs {X} less to cast, where X is the greatest mana value among Elementals you control.\nFlying\nWhen this creature enters, if you cast it, return all non-Elemental creatures to their owners' hands.

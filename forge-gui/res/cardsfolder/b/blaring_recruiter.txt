@@ -2,7 +2,7 @@ Name:Blaring Recruiter
 ManaCost:3 W
 Types:Creature Elf Warrior
 PT:2/2
-K:Partner:Blaring Captain
+K:Partner with:Blaring Captain
 A:AB$ Token | Cost$ 2 W | TokenScript$ w_1_1_warrior | TokenOwner$ You | SpellDescription$ Create a 1/1 white Warrior creature token.
 DeckHints:Name$Blaring Captain
 DeckHas:Ability$Token

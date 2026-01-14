@@ -182,3 +182,18 @@ ScryfallCode=ECC
 174 C Thriving Moor @Titus Lunter
 175 U Unclaimed Territory @Dimitar Marinski
 176 R Woodland Cemetery @Lars Grant-West
+
+[tokens]
+2 w_4_4_elemental_flying @Svetlin Velinov
+3 b_2_2_zombie @Paul Scott Canavan
+4 g_1_1_elf_warrior @William O'Connor
+5 g_0_1_plant @Daren Bader
+6 g_4_4_rhino_warrior @Zoltan Boros
+7 g_1_1_saproling @Brad Rigney
+8 g_1_1_snake_deathtouch @Tyler Jacobson
+9 rg_5_5_elemental @Brad Rigney
+10 gw_x_x_elemental_total_creatures @Mark Winters
+11 c_2_2_scarecrow @Alex Horley-Orlandelli
+
+[other]
+1 copy @Michele Giorgi

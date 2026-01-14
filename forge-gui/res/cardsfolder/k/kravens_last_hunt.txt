@@ -9,5 +9,5 @@ SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | TgtPrompt$ Select target creature you control | SpellDescription$ Target creature you control gets +2/+2 until end of turn.
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouOwn | SpellDescription$ Return target creature card from your graveyard to your hand.
-SVar:X:Count$ValidGraveyard Creature.YouOwn$GreatestPower
+SVar:X:Count$ValidGraveyard Creature.YouOwn$GreatestCardPower
 Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Mill five cards. When you do, this Saga deals damage equal to the greatest power among creature cards in your graveyard to target creature.\nII — Target creature you control gets +2/+2 until end of turn.\nIII — Return target creature card from your graveyard to your hand.

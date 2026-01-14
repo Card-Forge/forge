@@ -3,7 +3,7 @@ ManaCost:2 UR UR
 Types:Legendary Creature Goblin Sorcerer
 PT:2/4
 T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDigUntil | TriggerDescription$ Vivid — At the beginning of your first main phase, reveal cards from the top of your library until you reveal X nonland cards, where X is the number of colors among permanents you control. For each of those colors, you may exile a card of that color from among the revealed cards. Then shuffle. You may cast the exiled cards this turn.
-SVar:DBDigUntil:DB$ DigUntil | Amount$ X | Valid$ Card.nonLand | ValidDescription$ nonland card | RevealedDestination$ Library | RememberRevealed$ True | SubAbility$ DBExileW
+SVar:TrigDigUntil:DB$ DigUntil | Amount$ X | Valid$ Card.nonLand | ValidDescription$ nonland card | RevealedDestination$ Library | RememberRevealed$ True | SubAbility$ DBExileW
 SVar:DBExileW:DB$ ChangeZone | ChooseFromDefined$ Remembered.White | Origin$ Library | Destination$ Exile | ConditionCheckSVar$ HaveW | Imprint$ True | LockInText$ True | SubAbility$ DBExileU
 SVar:DBExileU:DB$ ChangeZone | ChooseFromDefined$ Remembered.Blue | Origin$ Library | Destination$ Exile | ConditionCheckSVar$ HaveU | Imprint$ True | LockInText$ True | SubAbility$ DBExileB
 SVar:DBExileB:DB$ ChangeZone | ChooseFromDefined$ Remembered.Black | Origin$ Library | Destination$ Exile | ConditionCheckSVar$ HaveB | Imprint$ True | LockInText$ True | SubAbility$ DBExileR

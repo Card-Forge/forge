@@ -312,7 +312,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
     @Override
     public Set<String> getCreatureTypes() {
-        final Set<String> creatureTypes = Sets.newHashSet();
+        final Set<String> creatureTypes = Sets.newLinkedHashSet();
         if (!isCreature() && !isKindred()) {
             return creatureTypes;
         }
@@ -327,7 +327,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
     @Override
     public Set<String> getLandTypes() {
-        final Set<String> landTypes = Sets.newHashSet();
+        final Set<String> landTypes = Sets.newLinkedHashSet();
         if (isLand()) {
             for (final String t : subtypes) {
                 if (isALandType(t)) {

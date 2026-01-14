@@ -2,7 +2,7 @@ Name:Kratos, Stoic Father
 ManaCost:2 R W
 Types:Legendary Creature God Warrior
 PT:4/4
-K:Partner - Father & Son
+K:Partner:Father & Son
 T:Mode$ AttackersDeclared | ValidAttackers$ God.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigExperience | TriggerDescription$ Whenever you attack with one or more Gods and whenever a God dies, you get an experience counter.
 T:Mode$ ChangesZone | ValidCard$ God | TriggerZones$ Battlefield | Secondary$ True | Destination$ Graveyard | Execute$ TrigExperience | TriggerDescription$ Whenever you attack with one or more Gods and whenever a God dies, you get an experience counter.
 SVar:TrigExperience:DB$ PutCounter | Defined$ You | CounterType$ Experience | CounterNum$ 1

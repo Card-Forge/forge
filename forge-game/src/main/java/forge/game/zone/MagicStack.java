@@ -921,14 +921,14 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         return true;
     }
 
-    // 400.7f Abilities of Auras that trigger when the enchanted permanent leaves the battlefield
+    // CR 400.7f Abilities of Auras that trigger when the enchanted permanent leaves the battlefield
     // can find the new object that Aura became in its owner’s graveyard
-    public void adjustAuraHost(SpellAbility sa) {
+    private void adjustAuraHost(SpellAbility sa) {
         final Card host = sa.getHostCard();
         final Trigger trig = sa.getTrigger();
         final Card newHost = game.getCardState(host);
-        if (host.isAura() && newHost.isInZone(ZoneType.Graveyard) && trig.getMode() == TriggerType.ChangesZone && 
-                "Battlefield".equals(trig.getParam("Origin")) && "Card.EnchantedBy".equals(trig.getParam("ValidCard"))) {
+        if (host.isAura() && newHost.isInZone(ZoneType.Graveyard) && trig.getMode() == TriggerType.ChangesZone && "Battlefield".equals(trig.getParam("Origin"))
+                && trig.hasParam("ValidCard") && trig.getParam("ValidCard").startsWith("Card.EnchantedBy")) {
             sa.setHostCard(newHost);
         }
     }
