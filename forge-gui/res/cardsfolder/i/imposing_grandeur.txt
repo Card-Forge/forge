@@ -8,7 +8,7 @@ SVar:DBGrandWheel:DB$ RepeatEach | RepeatPlayers$ Player.NotedForDiscard | Repea
 SVar:DBWheelDiscard:DB$ Discard | Mode$ Hand | Defined$ Player.IsRemembered | SubAbility$ DBWheelDraw
 SVar:DBWheelDraw:DB$ Draw | NumCards$ X | Defined$ Player.IsRemembered
 SVar:DBClearNotes:DB$ Pump | Defined$ Player | ClearNotedCardsFor$ Discard | StackDescription$ None
-SVar:X:Count$ValidBattlefield,Command Card.IsCommander+RememberedPlayerOwn$GreatestCMC
+SVar:X:Count$ValidBattlefield,Command Card.IsCommander+RememberedPlayerOwn$GreatestCardManaCost
 AI:RemoveDeck:NonCommander
 DeckHas:Ability$Discard
 Oracle:Each player may discard their hand and draw cards equal to the greatest mana value of a commander they own on the battlefield or in the command zone.

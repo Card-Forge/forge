@@ -39,7 +39,6 @@ import forge.game.staticability.StaticAbilityPanharmonicon;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
-import forge.util.Visitor;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
@@ -185,29 +184,25 @@ public class TriggerHandler {
         }
     }
 
-    private void buildActiveTrigger() {
-        activeTriggers.clear();
-        game.forEachCardInGame(new Visitor<Card>() {
-            @Override
-            public boolean visit(Card c) {
-                for (final Trigger t : c.getTriggers()) {
-                    if (isTriggerActive(t)) {
-                        activeTriggers.add(t);
-                    }
-                }
-                return true;
-            }
-        });
-    }
-
     public final void resetActiveTriggers() {
-        resetActiveTriggers(true);
+        resetActiveTriggers(true, null);
     }
-    public final void resetActiveTriggers(boolean collect) {
+    public final void resetActiveTriggers(boolean collect, CardCollectionView lastStateBattlefield) {
         if (collect) {
             collectTriggerForWaiting();
         }
-        buildActiveTrigger();
+        activeTriggers.clear();
+        game.forEachCardInGame(c -> {
+            for (final Trigger t : c.getTriggers()) {
+                if (c.isInPlay() && lastStateBattlefield != null && !lastStateBattlefield.contains(c) && looksBackInTime(t)) {
+                    continue;
+                }
+                if (isTriggerActive(t)) {
+                    activeTriggers.add(t);
+                }
+            }
+            return true;
+        });
     }
 
     public final void clearActiveTriggers(final Card c, Zone zoneFrom) {
@@ -234,16 +229,19 @@ public class TriggerHandler {
 
     public final void registerActiveLTBTrigger(final Card c) {
         for (final Trigger t : c.getTriggers()) {
-            if (
-                    TriggerType.Exploited.equals(t.getMode()) ||
-                    TriggerType.Destroyed.equals(t.getMode()) ||
-                    TriggerType.Sacrificed.equals(t.getMode()) || TriggerType.SacrificedOnce.equals(t.getMode()) ||
-                    ((TriggerType.ChangesZone.equals(t.getMode()) || TriggerType.ChangesZoneAll.equals(t.getMode()))
-                            && (StringUtils.contains(t.getParam("Origin"), "Battlefield") ||
-                            StringUtils.containsAny(t.getParam("Destination"), "Library", "Hand")))) {
+            if (looksBackInTime(t)) {
                 registerOneTrigger(t);
             }
         }
+    }
+
+    private boolean looksBackInTime(Trigger t) {
+        return TriggerType.Exploited.equals(t.getMode()) ||
+                TriggerType.Destroyed.equals(t.getMode()) ||
+                TriggerType.Sacrificed.equals(t.getMode()) || TriggerType.SacrificedOnce.equals(t.getMode()) ||
+                ((TriggerType.ChangesZone.equals(t.getMode()) || TriggerType.ChangesZoneAll.equals(t.getMode()))
+                        && (StringUtils.contains(t.getParam("Origin"), "Battlefield") ||
+                        StringUtils.containsAny(t.getParam("Destination"), "Library", "Hand")));
     }
 
     public final boolean registerOneTrigger(final Trigger t) {

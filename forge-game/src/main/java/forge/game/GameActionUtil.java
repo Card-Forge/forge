@@ -763,9 +763,8 @@ public final class GameActionUtil {
             }
         }
 
-        // reset active Trigger
         if (reset) {
-            host.getGame().getTriggerHandler().resetActiveTriggers(false);
+            host.getGame().getTriggerHandler().resetActiveTriggers(false, null);
         }
 
         if (result != null) {

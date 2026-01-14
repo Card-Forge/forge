@@ -423,6 +423,11 @@ public class DeckgenUtil {
 
     /** @return {@link forge.deck.Deck} */
     public static Deck getRandomOrPreconOrThemeDeck(String colors, boolean forAi, boolean isTheme, boolean useGeneticAI) {
+        return getRandomOrPreconOrThemeDeck(colors, forAi, isTheme, useGeneticAI, null);
+    }
+
+    /** @return {@link forge.deck.Deck} */
+    public static Deck getRandomOrPreconOrThemeDeck(String colors, boolean forAi, boolean isTheme, boolean useGeneticAI, String[] allowedEditions) {
         final List<String> selection = new ArrayList<>();
         Deck deck = null;
         if (advPrecons.isEmpty()) {
@@ -457,6 +462,10 @@ public class DeckgenUtil {
 
             } else {
                 Predicate<DeckProxy> predicate = deckProxy -> deckProxy.getMainSize() <= 60;
+                if (allowedEditions != null && allowedEditions.length > 0) {
+                    Set<String> editionSet = new HashSet<>(Arrays.asList(allowedEditions));
+                    predicate = predicate.and(dp -> dp.getEdition() != null && editionSet.contains(dp.getEdition().getCode()));
+                }
                 if (!selection.isEmpty() && selection.size() < 4)
                     predicate = predicate.and(deckProxy -> deckProxy.getColorIdentity().hasAllColors(ColorSet.fromNames(colors.toCharArray()).getColor()));
                 List<DeckProxy> source = isTheme ? advThemes : advPrecons;

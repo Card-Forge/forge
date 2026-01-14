@@ -1,6 +1,6 @@
 Name:Bloodboil Sorcerer
 ManaCost:3 R
-Types:Creature Human Shaman
+Types:Creature Human Shaman Sorcerer
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInitiative | TriggerDescription$ When CARDNAME enters, you take the initiative.
 SVar:TrigInitiative:DB$ TakeInitiative

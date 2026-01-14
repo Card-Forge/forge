@@ -2,7 +2,7 @@ Name:Okaun, Eye of Chaos
 ManaCost:4 R
 Types:Legendary Creature Cyclops Berserker
 PT:3/3
-K:Partner:Zndrsplt, Eye of Wisdom:Zndrsplt
+K:Partner with:Zndrsplt, Eye of Wisdom:Zndrsplt
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigFlip | TriggerDescription$ At the beginning of combat on your turn, flip a coin until you lose a flip.
 SVar:TrigFlip:DB$ FlipACoin | FlipUntilYouLose$ True
 T:Mode$ FlippedCoin | ValidResult$ Win | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a player wins a coin flip, double NICKNAME's power and toughness until end of turn.

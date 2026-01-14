@@ -12,6 +12,7 @@ import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
+import forge.game.keyword.Emerge;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.ManaCostBeingPaid;
@@ -245,8 +246,8 @@ public class CostAdjustment {
         if (sa.isSpell() && sa.isOffering()) {
             adjustCostByOffering(cost, sa);
         }
-        if (sa.isSpell() && sa.isEmerge()) {
-            adjustCostByEmerge(cost, sa);
+        if (sa.isSpell() && sa.isEmerge() && sa.getKeyword() instanceof Emerge emerge) {
+            adjustCostByEmerge(cost, sa, emerge);
         }
 
         // Set cost (only used by Trinisphere) is applied last
@@ -398,10 +399,8 @@ public class CostAdjustment {
         toSac.setUsedToPay(true); //stop it from interfering with mana input
     }
 
-    private static void adjustCostByEmerge(final ManaCostBeingPaid cost, final SpellAbility sa) {
-        String kw = sa.getKeyword().getOriginal();
-        String k[] = kw.split(":");
-        String validStr = k.length > 2 ? k[2] : "Creature";
+    private static void adjustCostByEmerge(final ManaCostBeingPaid cost, final SpellAbility sa, final Emerge emerge) {
+        String validStr = emerge.getValidType();
         Player p = sa.getActivatingPlayer();
         CardCollectionView canEmerge = CardLists.filter(p.getCardsIn(ZoneType.Battlefield),
                 CardPredicates.restriction(validStr, p, sa.getHostCard(), sa),

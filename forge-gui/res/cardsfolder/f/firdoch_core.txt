@@ -1,4 +1,5 @@
 Name:Firdoch Core
+ManaCost:3
 Types:Kindred Artifact Shapeshifter
 K:Changeling
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.

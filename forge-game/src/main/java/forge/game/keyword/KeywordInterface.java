@@ -24,6 +24,7 @@ public interface KeywordInterface extends Cloneable, IHasSVars {
     String getReminderText();
 
     int getAmount();
+    String getAmountString();
 
     StaticAbility getStatic();
     void setStatic(StaticAbility st);
