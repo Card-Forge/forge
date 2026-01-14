@@ -541,6 +541,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
     }
 
     public void setWinner(boolean winner, boolean isArena) {
+        IAfterMatch.super.setWinner(winner, isArena);
         if (winner) {
             humanMatch.winner = humanMatch.p1;
             humanMatch.p1.wins++;

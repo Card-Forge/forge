@@ -158,6 +158,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
 
     @Override
     public void setWinner(boolean winner, boolean isArena) {
+        IAfterMatch.super.setWinner(winner, isArena);
         enable = false;
         Array<ArenaRecord> winners = new Array<>();
         Array<EnemySprite> winnersEnemies = new Array<>();
