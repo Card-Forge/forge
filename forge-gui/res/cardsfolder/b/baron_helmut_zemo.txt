@@ -1,4 +1,4 @@
-Name:Baron Helmut Zemo 
+Name:Baron Helmut Zemo
 ManaCost:B B B
 Types:Legendary Creature Human Noble Villain
 PT:3/3
