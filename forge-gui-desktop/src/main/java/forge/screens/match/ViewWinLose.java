@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
-import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JPanel;
