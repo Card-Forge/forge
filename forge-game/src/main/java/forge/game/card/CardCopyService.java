@@ -335,7 +335,10 @@ public class CardCopyService {
         }
 
         newCopy.setIntensity(copyFrom.getIntensity(false));
-        newCopy.setPerpetual(copyFrom);
+        // Don't re-apply perpetual effects - they're already copied via copyFrom().
+        // Re-applying would create duplicate ReplacementEffect objects that cause
+        // infinite recursion in getReplacementList for "enters tapped" effects.
+        newCopy.setPerpetual(copyFrom, false);
 
         newCopy.addRemembered(copyFrom.getRemembered());
         newCopy.addImprintedCards(copyFrom.getImprintedCards());
