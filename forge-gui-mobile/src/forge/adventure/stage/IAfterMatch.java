@@ -6,6 +6,6 @@ public interface IAfterMatch {
         if (winner) {
             playerResultText = "WON!";
         }
-        System.out.println("FORGE_ARCHIPELAGO DETECTED GAME CONCLUSION. THE PLAYER HAS " + playerResultText);
+        System.out.println("FORGE_ARCHIPELAGO: DETECTED GAME CONCLUSION. THE PLAYER HAS " + playerResultText);
     }
 }
