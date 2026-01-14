@@ -1,5 +1,5 @@
 Name:Auntie's Sentence
-ManaCost:2 B
+ManaCost:1 B
 Types:Sorcery
 A:SP$ Charm | Choices$ DBDiscard,DBPump
 SVar:DBDiscard:DB$ Discard | ValidTgts$ Opponent | Mode$ RevealYouChoose | DiscardValid$ Card.Permanent+nonLand | NumCards$ 1 | SpellDescription$ Target opponent reveals their hand. You choose a nonland permanent card from it. That player discards that card.
