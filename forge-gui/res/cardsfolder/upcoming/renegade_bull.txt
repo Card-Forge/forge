@@ -12,4 +12,5 @@ SVar:DBPlay:DB$ Play | Defined$ Remembered | Controller$ You | CopyCard$ True | 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:HasAttackEffect:TRUE
 SVar:BuffedBy:Instant,Sorcery
+DeckHints:Type$Instant|Sorcery
 Oracle:Trample\nWhenever you cast an instant or sorcery spell, this creature gets +X/+0 until end of turn, where X is that spell's mana value.\nWhenever this creature attacks, exile up to one target instant or sorcery card from your graveyard and copy it. You may cast the copy without paying its mana cost.
