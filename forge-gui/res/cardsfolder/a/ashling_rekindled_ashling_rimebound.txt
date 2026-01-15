@@ -18,7 +18,7 @@ ManaCost:no cost
 Colors:blue
 Types:Legendary Creature Elemental Wizard
 PT:1/3
-T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$Whenever this creature transforms into CARDNAME and at the beginning of your first main phase, add two mana of any one color. Spend this mana only to cast spells with mana value 4 or greater.
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$ Whenever this creature transforms into CARDNAME and at the beginning of your first main phase, add two mana of any one color. Spend this mana only to cast spells with mana value 4 or greater.
 T:Mode$ Phase | Phase$ Main1 | Secondary$ True | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ Whenever this creature transforms into CARDNAME and at the beginning of your first main phase, add two mana of any one color. Spend this mana only to cast spells with mana value 4 or greater.
 SVar:TrigMana:DB$ Mana | Produced$ Any | Amount$ 2 | RestrictValid$ Spell.cmcGE4
 T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of your first main phase, you may pay {R}. If you do, transform NICKNAME.
