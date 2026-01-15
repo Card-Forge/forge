@@ -5,6 +5,14 @@ public class Suspend extends KeywordWithCostAndAmount {
     boolean withoutCostAndAmount = false;
 
     @Override
+    public String getTitle() {
+        if (withoutCostAndAmount) {
+            return getKeyword().toString();
+        }
+        return super.getTitle();
+    }
+
+    @Override
     protected void parse(String details) {
         if ("".equals(details)) {
             withoutCostAndAmount = true;

@@ -1,0 +1,28 @@
+Name:Oko, Lorwyn Liege
+ManaCost:2 U
+Types:Legendary Planeswalker Oko
+Loyalty:3
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of your first main phase, you may pay {G}. If you do, transform NICKNAME.
+SVar:TrigTransform:AB$ SetState | Cost$ G | Defined$ Self | Mode$ Transform
+A:AB$ Animate | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Duration$ Permanent | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature | AddAllCreatureTypes$ True | SpellDescription$ Up to one target creature gains all creature types. (This effect doesn't end.)
+A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumAtt$ -2 | IsCurse$ True | Duration$ UntilYourNextTurn | ValidTgts$ Creature | SpellDescription$ Target creature gets -2/-0 until your next turn.
+AlternateMode:DoubleFaced
+Oracle:At the beginning of your first main phase, you may pay {G}. If you do, transform Oko.\n[+2]: Up to one target creature gains all creature types. (This effect doesn't end.)\n[+1]: Target creature gets -2/-0 until your next turn.
+
+ALTERNATE
+
+Name:Oko, Shadowmoor Scion
+ManaCost:no cost
+Colors:green
+Types:Legendary Planeswalker Oko
+Loyalty:0
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of your first main phase, you may pay {U}. If you do, transform NICKNAME.
+SVar:TrigTransform:AB$ SetState | Cost$ U | Defined$ Self | Mode$ Transform
+A:AB$ Mill | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 3 | Defined$ You | RememberMilled$ True | SubAbility$ DBChangeZone | SpellDescription$ Mill three cards. You may put a permanent card from among them into your hand.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Permanent.IsRemembered | Hidden$ True | Optional$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Token | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | TokenAmount$ 2 | TokenScript$ g_3_3_elk | SpellDescription$ Create two 3/3 green Elk creature tokens.
+A:AB$ ChooseType | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | Defined$ You | Type$ Creature | AILogic$ MostProminentInComputerDeck | SubAbility$ DBEffect | SpellDescription$ Choose a creature type. You get an emblem with "Creatures you control of the chosen type get +3/+3 and have vigilance and hexproof."
+SVar:DBEffect:DB$ Effect | Name$ Emblem — Oko, Shadowmoor Scion | Image$ emblem_oko_shadowmoor_scion | StaticAbilities$ STPump | Duration$ Permanent
+SVar:STPump:Mode$ Continuous | Affected$ Creature.YouCtrl+ChosenType | AffectedZone$ Battlefield | AddPower$ 3 | AddToughness$ 3 | AddKeyword$ Vigilance & Hexproof | Description$ Creatures you control of the chosen type get +3/+3 and have vigilance and hexproof.
+Oracle:At the beginning of your first main phase, you may pay {U}. If you do, transform Oko.\n[-1]: Mill three cards. You may put a permanent card from among them into your hand.\n[-3]: Create two 3/3 green Elk creature tokens.\n[-6]: Choose a creature type. You get an emblem with "Creatures you control of the chosen type get +3/+3 and have vigilance and hexproof."

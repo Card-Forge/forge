@@ -35,24 +35,14 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
     private List<SpellAbility> abilities = Lists.newArrayList();
     private List<StaticAbility> staticAbilities = Lists.newArrayList();
 
-
-    /* (non-Javadoc)
-     * @see forge.game.keyword.KeywordInterface#getOriginal()
-     */
     @Override
     public String getOriginal() {
         return original;
     }
-    /* (non-Javadoc)
-     * @see forge.game.keyword.KeywordInterface#getKeyword()
-     */
     @Override
     public Keyword getKeyword() {
         return keyword;
     }
-    /* (non-Javadoc)
-     * @see forge.game.keyword.KeywordInterface#getReminderText()
-     */
     @Override
     public String getReminderText() {
         String result = formatReminderText(keyword.reminderText);
@@ -65,12 +55,13 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
         m.appendTail(sb);
         return sb.toString();
     }
-    /* (non-Javadoc)
-     * @see forge.game.keyword.KeywordInterface#getAmount()
-     */
     @Override
     public int getAmount() {
         return 1;
+    }
+    @Override
+    public String getAmountString() {
+        return String.valueOf(getAmount());
     }
     protected void initialize(String original0, Keyword keyword0, String details) {
         original = original0;

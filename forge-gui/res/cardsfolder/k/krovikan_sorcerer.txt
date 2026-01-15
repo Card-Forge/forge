@@ -1,6 +1,6 @@
 Name:Krovikan Sorcerer
 ManaCost:2 U
-Types:Creature Human Wizard
+Types:Creature Human Wizard Sorcerer
 PT:1/1
 A:AB$ Draw | Cost$ T Discard<1/Card.nonBlack> | NumCards$ 1 | CostDesc$ {T}, Discard a non-black card: | SpellDescription$ Draw a card.
 A:AB$ Draw | Cost$ T Discard<1/Card.Black> | NumCards$ 2 | CostDesc$ {T}, Discard a black card: | RememberDrawn$ True | SubAbility$ DBDiscard | SpellDescription$ Draw two cards, then discard one of them.

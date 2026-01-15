@@ -1,0 +1,10 @@
+Name:Virulent Emissary
+ManaCost:G
+Types:Creature Elf Assassin
+PT:1/1
+K:Deathtouch
+T:Mode$ ChangesZone | ValidCard$ Creature.Other+YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever another creature you control enters, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
+SVar:BuffedBy:Creature
+DeckHas:Ability$LifeGain
+Oracle:Deathtouch\nWhenever another creature you control enters, you gain 1 life.

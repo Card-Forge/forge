@@ -2,9 +2,9 @@ Name:Impetuous Protege
 ManaCost:2 R
 Types:Creature Human Warrior
 PT:0/4
-K:Partner:Proud Mentor
+K:Partner with:Proud Mentor
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +X/+0 until end of turn, where X is the greatest power among tapped creatures your opponents control.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X
-SVar:X:Count$Valid Creature.tapped+OppCtrl$GreatestPower
+SVar:X:Count$Valid Creature.tapped+OppCtrl$GreatestCardPower
 DeckHints:Name$Proud Mentor
 Oracle:Partner with Proud Mentor (When this creature enters, target player may put Proud Mentor into their hand from their library, then shuffle.)\nWhenever Impetuous Protege attacks, it gets +X/+0 until end of turn, where X is the greatest power among tapped creatures your opponents control.

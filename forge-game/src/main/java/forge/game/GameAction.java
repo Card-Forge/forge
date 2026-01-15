@@ -515,7 +515,9 @@ public class GameAction {
             }
             copied.clearMergedCards();
         } else {
-            storeChangesZoneAll(copied, zoneFrom, zoneTo, params);
+            if (!suppress) {
+                storeChangesZoneAll(copied, zoneFrom, zoneTo, params);
+            }
             // "enter the battlefield as a copy" - apply code here
             // but how to query for input here and continue later while the callers assume synchronous result?
             zoneTo.add(copied, position, toBattlefield ? null : lastKnownInfo); // the modified state of the card is also reported here (e.g. for Morbid + Awaken)
@@ -678,7 +680,7 @@ public class GameAction {
             timestamp = game.getNextTimestamp();
             cause.setSVar("StaticEffectTimestamp", String.valueOf(timestamp));
         }
-        String name = "Static Effect #" + source.getGameTimestamp();
+        String name = "Static Effect #" + cause.getId();
         // check if this isn't the first card being moved
         Optional<Card> opt = IterableUtil.tryFind(cause.getActivatingPlayer().getZone(ZoneType.Command).getCards(), CardPredicates.nameEquals(name));
 
@@ -689,7 +691,7 @@ public class GameAction {
             eff.setLayerTimestamp(timestamp);
         } else {
             // otherwise create effect first
-            eff = SpellAbilityEffect.createEffect(cause, cause.getHostCard(), cause.getActivatingPlayer(), name, source.getImageKey(), timestamp);
+            eff = SpellAbilityEffect.createEffect(cause, source, cause.getActivatingPlayer(), name, source.getImageKey(), timestamp);
             eff.setRenderForUI(false);
             StaticAbility stAb = eff.addStaticAbility(AbilityUtils.getSVar(cause, cause.getParam("StaticEffect")));
             stAb.setActiveZone(EnumSet.of(ZoneType.Command));
@@ -947,7 +949,7 @@ public class GameAction {
 
     public void ceaseToExist(Card c, boolean skipTrig) {
         if (c.isInZone(ZoneType.Stack)) {
-            c.getGame().getStack().remove(c);
+            game.getStack().remove(c);
         }
 
         final Zone z = c.getZone();
@@ -1081,8 +1083,10 @@ public class GameAction {
         }
         game.getTracker().freeze(); //prevent views flickering during while updating for state-based effects
 
+        final Map<StaticAbilityLayer, Set<Card>> affectedPerLayer = Maps.newHashMap();
+
         // remove old effects
-        game.getStaticEffects().clearStaticEffects(affectedCards);
+        game.getStaticEffects().clearStaticEffects(affectedCards, affectedPerLayer);
 
         // search for cards with static abilities
         final FCollection<StaticAbility> staticAbilities = new FCollection<>();
@@ -1092,7 +1096,7 @@ public class GameAction {
             dependencies = HashBasedTable.create();
         }
 
-        game.forEachCardInGame(new Visitor<Card>() {
+        game.forEachCardInGame(new Visitor<>() {
             @Override
             public boolean visit(final Card c) {
                 // need to get Card from preList if able
@@ -1148,11 +1152,15 @@ public class GameAction {
                     stAb.applyContinuousAbility(layer, previouslyAffected);
                 }
                 if (affectedHere != null) {
+                    affectedPerLayer.computeIfAbsent(layer, l -> Sets.newHashSet()).addAll(affectedHere);
                     for (final Card c : affectedHere) {
                         for (final StaticAbility st2 : c.getStaticAbilities()) {
                             if (!staticAbilities.contains(st2) && st2.checkMode(StaticAbilityMode.Continuous) && st2.zonesCheck()) {
                                 toAdd.add(st2);
-                                st2.applyContinuousAbilityBefore(layer, preList);
+                                CardCollectionView newAffected = st2.applyContinuousAbilityBefore(layer, preList);
+                                if (newAffected != null) {
+                                    affectedPerLayer.computeIfAbsent(layer, l -> Sets.newHashSet()).addAll(newAffected);
+                                }
                             }
                         }
                     }
@@ -1221,14 +1229,42 @@ public class GameAction {
             game.getView().setDependencies(dependencies);
         }
 
-        // Update P/T and type in the view only once after all the cards have been processed, to avoid flickering
-        for (Card c : affectedCards) {
-            c.updateNameforView();
-            c.updatePTforView();
-            c.updateTypesForView();
-            c.updateKeywords();
+        CardCollection affectedKeywords = new CardCollection();
+        CardCollection affectedPT = new CardCollection();
+        if (affectedPerLayer.containsKey(StaticAbilityLayer.TEXT)) {
+            affectedPerLayer.get(StaticAbilityLayer.TEXT).forEach(Card::updateNameforView);
+            affectedKeywords.addAll(affectedPerLayer.get(StaticAbilityLayer.TEXT));
         }
+        if (affectedPerLayer.containsKey(StaticAbilityLayer.TYPE)) {
+            affectedPerLayer.get(StaticAbilityLayer.TYPE).forEach(Card::updateTypesForView);
+            // setting Basic Land Type case
+            affectedKeywords.addAll(affectedPerLayer.get(StaticAbilityLayer.TYPE));
+            affectedPT.addAll(affectedPerLayer.get(StaticAbilityLayer.TYPE));
+        }
+        if (affectedPerLayer.containsKey(StaticAbilityLayer.ABILITIES)) {
+            affectedKeywords.addAll(affectedPerLayer.get(StaticAbilityLayer.ABILITIES));
+        }
+        // Update P/T and type in the view only once after all the cards have been processed, to avoid flickering
+        if (affectedPerLayer.containsKey(StaticAbilityLayer.CHARACTERISTIC)) {
+            affectedPT.addAll(affectedPerLayer.get(StaticAbilityLayer.CHARACTERISTIC));
+        }
+        if (affectedPerLayer.containsKey(StaticAbilityLayer.SETPT)) {
+            affectedPT.addAll(affectedPerLayer.get(StaticAbilityLayer.SETPT));
+        }
+        if (affectedPerLayer.containsKey(StaticAbilityLayer.MODIFYPT)) {
+            affectedPT.addAll(affectedPerLayer.get(StaticAbilityLayer.MODIFYPT));
+        }
+        /*
+        if (affectedPerLayer.containsKey(StaticAbilityLayer.SWITCHPT)) {
+            affectedPT.addAll(affectedPerLayer.get(StaticAbilityLayer.SWITCHPT));
+        }
+        //*/
+        affectedPT.forEach(Card::updatePTforView);
+        affectedKeywords.forEach(Card::updateKeywords);
 
+        if (affectedPerLayer.containsKey(StaticAbilityLayer.RULES)) {
+            affectedPerLayer.get(StaticAbilityLayer.RULES).forEach(Card::updateNonAbilityTextForView);
+        }
         // TODO filter out old copies from zone change
 
         if (runEvents && !affectedCards.isEmpty()) {
@@ -1353,7 +1389,7 @@ public class GameAction {
     }
 
     private Iterable<Object> generateContinuousEffectChanges(StaticAbilityLayer layer, StaticAbility stAb) {
-        List<Object> result = Collections.EMPTY_LIST;
+        List<Object> result = Collections.emptyList();
         if (layer == StaticAbilityLayer.CONTROL) {
             result = Lists.newArrayList();
             result.addAll(AbilityUtils.getDefinedPlayers(stAb.getHostCard(), stAb.getParam("GainControl"), stAb));
@@ -1805,7 +1841,7 @@ public class GameAction {
         // CR 903.9a
         if (c.isRealCommander() && c.canMoveToCommandZone()) {
             // FIXME: need to flush the tracker to make sure the Commander is properly updated
-            c.getGame().getTracker().flush();
+            game.getTracker().flush();
 
             c.setMoveToCommandZone(false);
             if (c.getOwner().getController().confirmAction(c.getFirstSpellAbility(), PlayerActionConfirmMode.ChangeZoneToAltDestination, c.getDisplayName() + ": If a commander is in a graveyard or in exile and that card was put into that zone since the last time state-based actions were checked, its owner may put it into the command zone.", null)) {
@@ -2304,6 +2340,7 @@ public class GameAction {
 
             game.setAge(GameStage.Mulligan);
             for (final Player p1 : game.getPlayers()) {
+                // Choose starting hand for each player with multiple hands
                 if (StaticData.instance().getFilteredHandsEnabled() ) {
                     drawStartingHand(p1);
                 } else {
@@ -2316,7 +2353,6 @@ public class GameAction {
                 }
             }
 
-            // Choose starting hand for each player with multiple hands
             if (game.getRules().getGameType() != GameType.Puzzle) {
                 new MulliganService(first).perform();
             }

@@ -1,0 +1,13 @@
+Name:Lluwen, Imperfect Naturalist
+ManaCost:BG BG
+Types:Legendary Creature Elf Druid
+PT:1/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When NICKNAME enters, mill four cards, then you may put a creature or land card from among the milled cards on top of your library.
+SVar:TrigMill:DB$ Mill | NumCards$ 4 | RememberMilled$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Creature.IsRemembered,Land.IsRemembered | SelectPrompt$ You may select a creature or land card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Token | Cost$ 2 BG BG BG T Discard<1/Land> | TokenAmount$ X | TokenScript$ bg_1_1_worm | TokenOwner$ You | SpellDescription$ Create a 1/1 black and green Worm creature token for each land card in your graveyard.
+SVar:X:Count$ValidGraveyard Land.YouOwn
+DeckHas:Ability$Mill|Token
+DeckHints:Ability$Graveyard
+Oracle:When Lluwen enters, mill four cards, then you may put a creature or land card from among the milled cards on top of your library.\n{2}{B/G}{B/G}{B/G}, {T}, Discard a land card: Create a 1/1 black and green Worm creature token for each land card in your graveyard.

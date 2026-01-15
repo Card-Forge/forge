@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import com.google.common.collect.ImmutableList;
 
+import com.google.common.collect.Lists;
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
@@ -14,22 +16,33 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
+import forge.game.player.DelayedReveal;
+import forge.game.zone.ZoneType;
 import forge.screens.FScreen;
 import forge.screens.TabPageScreen;
+import forge.screens.match.views.VPlayerPanel;
 import forge.toolbox.FChoiceList;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextField;
+import forge.util.MessageUtil;
+import org.apache.commons.lang3.StringUtils;
 
 public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
     private final FOptionPane optionPane;
 
+    public GameEntityPicker(String title, Collection<? extends GameEntityView> choiceList, DelayedReveal delayedReveal, boolean isOptional, final Consumer<GameEntityView> callback) {
+        this(title, getTabs(choiceList, delayedReveal), isOptional, callback);
+    }
     public GameEntityPicker(String title, Collection<? extends GameEntityView> choiceList, Collection<CardView> revealList, String revealListCaption, FImage revealListImage, boolean isOptional, final Consumer<GameEntityView> callback) {
-        super(new PickerTab[] {
+        this(title, new PickerTab[] {
                 new PickerTab(choiceList, Forge.getLocalizer().getMessage("lblChoices"), Forge.hdbuttons ? FSkinImage.HDCHOICE : FSkinImage.DECKLIST, 1),
                 new PickerTab(revealList, revealListCaption, revealListImage, 0)
-        }, false);
+        }, isOptional, callback);
+    }
+    private GameEntityPicker(String title, PickerTab[] pickerTab, boolean isOptional, final Consumer<GameEntityView> callback) {
+        super(pickerTab, false);
 
         setHeight(FOptionPane.getMaxDisplayObjHeight());
 
@@ -47,6 +60,18 @@ public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
                 return false; //allow list to go straight up against buttons
             }
         };
+    }
+
+    private static PickerTab[] getTabs(Collection<? extends GameEntityView> choiceList, DelayedReveal delayedReveal) {
+        List<PickerTab> tabs = Lists.newArrayList();
+        tabs.add(new PickerTab(choiceList, Forge.getLocalizer().getMessage("lblChoices"), Forge.hdbuttons ? FSkinImage.HDCHOICE : FSkinImage.DECKLIST, 1));
+        for (ZoneType zone : delayedReveal.getZone()) {
+            final Collection<CardView> revealList = delayedReveal.getCards().stream().filter(c -> c.getZone() == zone).collect(Collectors.toList());
+            final String revealListCaption = StringUtils.capitalize(MessageUtil.formatMessage("{player's} " + zone.getTranslatedName(), delayedReveal.getOwner(), delayedReveal.getOwner()));
+            final FImage revealListImage = VPlayerPanel.iconFromZone(zone);
+            tabs.add(new PickerTab(revealList, revealListCaption, revealListImage, 1));
+        }
+        return tabs.toArray(new PickerTab[0]);
     }
 
     public void show() {

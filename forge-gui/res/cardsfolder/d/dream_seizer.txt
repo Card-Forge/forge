@@ -1,0 +1,8 @@
+Name:Dream Seizer
+ManaCost:3 B
+Types:Creature Faerie Rogue
+PT:3/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When this creature enters, you may blight 1. If you do, each opponent discards a card. (To blight 1, put a -1/-1 counter on a creature you control.)
+SVar:TrigDiscard:AB$ Discard | Cost$ Blight<1> | CostDesc$ You may blight 1. | Defined$ Opponent | Mode$ TgtChoose
+Oracle:Flying\nWhen this creature enters, you may blight 1. If you do, each opponent discards a card. (To blight 1, put a -1/-1 counter on a creature you control.)

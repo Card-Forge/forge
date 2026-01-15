@@ -50,3 +50,6 @@ ScryfallCode=SCH
 42 R Bitter Triumph @Aaron J. Riley
 43 R Slickshot Show-Off @Wayne Reynolds
 44 R Fable of the Mirror-Breaker @Warren Mahy
+45 R Goblin Bombardment @Jeff Laubenstein
+46 R Guide of Souls @Alexandr Leskinen
+47 R Ocelot Pride @Rhonda Libbey

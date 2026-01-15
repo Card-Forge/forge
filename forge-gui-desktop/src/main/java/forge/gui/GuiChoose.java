@@ -25,6 +25,7 @@ import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FOptionPane;
 import forge.util.FSerializableFunction;
+import forge.util.IHasName;
 import forge.util.Localizer;
 import forge.view.arcane.ListCardArea;
 
@@ -155,12 +156,7 @@ public class GuiChoose {
                         matchUI.setCard((InventoryItem) list.getSelectedValue());
                         return;
                     } else if (sel instanceof ICardFace || sel instanceof CardFaceView) {
-                        String faceName;
-                        if (sel instanceof ICardFace) {
-                            faceName = ((ICardFace) sel).getName();
-                        } else {
-                            faceName = ((CardFaceView) sel).getOracleName();
-                        }
+                        String faceName = ((IHasName)sel).getName();
                         PaperCard paper = FModel.getMagicDb().getCommonCards().getUniqueByName(faceName);
                         if (paper == null) {
                             paper = FModel.getMagicDb().getVariantCards().getUniqueByName(faceName);

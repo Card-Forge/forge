@@ -372,7 +372,6 @@ public class Game {
 
         sbaCheckedCommandList = new ArrayList<>();
 
-        // update players
         view.updatePlayers(this);
 
         subscribeToEvents(gameLog.getEventVisitor());
@@ -642,7 +641,7 @@ public class Game {
         return cards;
     }
 
-    private static class CardStateVisitor extends Visitor<Card> {
+    private static class CardStateVisitor implements Visitor<Card> {
         Card found = null;
         Card old = null;
 
@@ -672,7 +671,7 @@ public class Game {
         return visit.getFound(notFound);
     }
 
-    private static class CardIdVisitor extends Visitor<Card> {
+    private static class CardIdVisitor implements Visitor<Card> {
         Card found = null;
         int id;
 

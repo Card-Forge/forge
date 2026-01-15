@@ -1,0 +1,7 @@
+Name:Gnarlbark Elm
+ManaCost:2 B
+Types:Creature Treefolk Warlock
+PT:3/4
+K:etbCounter:M1M1:2
+A:AB$ Pump | Cost$ 2 B RemoveAnyCounter<2/Any/Card.Self/this creature> | ValidTgts$ Creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SorcerySpeed$ True | SpellDescription$ Target creature gets -2/-2 until end of turn. Activate only as a sorcery.
+Oracle:This creature enters with two -1/-1 counters on it.\n{2}{B}, Remove two counters from this creature: Target creature gets -2/-2 until end of turn. Activate only as a sorcery.

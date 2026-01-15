@@ -7,6 +7,6 @@ K:Haste
 T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Whenever you cast your second spell each turn, untap target creature, then investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
 SVar:TrigUntap:DB$ Untap | ValidTgts$ Creature | SubAbility$ DBInvestigate
 SVar:DBInvestigate:DB$ Investigate
-K:Friends forever
+K:Partner:Friends forever
 DeckHas:Ability$Investigate|Token|Sacrifice
-Oracle:Haste\nWhenever you cast your second spell each turn, untap target creature, then investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")\nFriends forever (You can have two commanders if both have friends forever.)
+Oracle:Haste\nWhenever you cast your second spell each turn, untap target creature, then investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")\nPartner—Friends forever (You can have two commanders if both have this ability.)

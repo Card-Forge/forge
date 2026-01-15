@@ -68,8 +68,10 @@ public class ManaEffect extends SpellAbilityEffect {
 
             if (abMana.isComboMana()) {
                 int amount = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa) : 1;
-                if (amount <= 0)
+                int each = sa.hasParam("Each") ? AbilityUtils.calculateAmount(host, sa.getParam("Each"), sa) : 1;
+                if (amount <= 0 || each <= 0) {
                     continue;
+                }
 
                 String combo = abMana.getComboColors(sa);
                 if (combo.isBlank()) {
@@ -84,7 +86,7 @@ public class ManaEffect extends SpellAbilityEffect {
                 final StringBuilder choiceString = new StringBuilder();
                 final StringBuilder choiceSymbols = new StringBuilder();
                 // Use specifyManaCombo if possible
-                if (colorsNeeded == null && amount > 1 && !sa.hasParam("TwoEach")) {
+                if (colorsNeeded == null && amount > 1 && !sa.hasParam("Each")) {
                     Map<Byte, Integer> choices = chooser.getController().specifyManaCombo(sa, colorOptions, amount, differentChoice);
                     for (Map.Entry<Byte, Integer> e : choices.entrySet()) {
                         Byte chosenColor = e.getKey();
@@ -123,14 +125,15 @@ public class ManaEffect extends SpellAbilityEffect {
                             choice = MagicColor.toShortString(chosenColor);
                         }
 
-                        if (nMana > 0) {
-                            choiceString.append(" ");
-                        }
-                        choiceString.append(choice);
-                        choiceSymbols.append(MagicColor.toSymbol(choice));
-                        if (sa.hasParam("TwoEach")) {
-                            choiceString.append(" ").append(choice);
-                            choiceSymbols.append(MagicColor.toSymbol(choice));
+                        String symbol = MagicColor.toSymbol(choice);
+                        int count = each;
+                        while (count > 0) {
+                            if (choiceString.length() > 0) {
+                                choiceString.append(" ");
+                            }
+                            choiceString.append(choice);
+                            choiceSymbols.append(symbol);
+                            --count;
                         }
                     }
                 }
@@ -148,13 +151,12 @@ public class ManaEffect extends SpellAbilityEffect {
 
                 String colorsNeeded = abMana.getExpressChoice();
 
-                ColorSet colorMenu = null;
                 byte mask = 0;
                 //loop through colors to make menu
                 for (int nChar = 0; nChar < colorsNeeded.length(); nChar++) {
                     mask |= MagicColor.fromName(colorsNeeded.charAt(nChar));
                 }
-                colorMenu = mask == 0 ? ColorSet.WUBRG : ColorSet.fromMask(mask);
+                ColorSet colorMenu = mask == 0 ? ColorSet.WUBRG : ColorSet.fromMask(mask);
                 byte val = chooser.getController().chooseColor(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa, colorMenu);
                 if (0 == val) {
                     throw new RuntimeException("ManaEffect::resolve() /*any mana*/ - " + p + " color mana choice is empty for " + host.getName());

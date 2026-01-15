@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="60">
+ <editorsettings>
+  <export target="dragons_lair_black.tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzz42Rg8BvFo3gUj+JRPIpH8YjAAAvyrVM=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxz42RgcBvFo3gE4lUcDAyrgXgNB33tfAqkQcCVjn59BsQrOSD2Puakr789oP4FgeVAO18MgJ+9oGFPDz8jxzEorEFsLzqHMz3DGjmc6Rm/IOzOSf+8hBzW9IhXWtgLAD1zph0=
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="282" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" x="197.5" y="220" width="16" height="16">
+   <properties>
+    <property name="hidden" type="bool" value="true"/>
+    <property name="dialog">[
+  {
+    "text": "A mighty dragon slumbers in the depths ahead. Ancient treasure surrounds its lair, but disturbing the beast could prove fatal. Proceed with caution...",
+    "options": [
+      { "name": "(Continue)" }
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="51" template="../../../../../../common/maps/obj/enemy.tx" type="enemy" x="167.5" y="139" width="16" height="16">
+   <properties>
+    <property name="enemy" value="Dracur of Shandalar"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="52" template="../../../../../../common/maps/obj/treasure.tx" type="reward" x="196" y="141" width="16" height="16">
+   <properties>
+    <property name="reward">[
+  { "type": "randomCard", "editions": ["3ED"], "rarity": ["C"], "count": 11 },
+  { "type": "randomCard", "editions": ["3ED"], "rarity": ["U"], "count": 3 },
+  { "type": "randomCard", "editions": ["3ED"], "rarity": ["R"], "count": 1 }
+]</property>
+   </properties>
+  </object>
+  <object id="53" template="../../../../../../common/maps/obj/treasure.tx" type="reward" x="199" y="141" width="16" height="16">
+   <properties>
+    <property name="reward">[
+  { "type": "randomCard", "rarity": ["R"], "count": 3 },
+  { "type": "randomCard", "rarity": ["U"], "count": 3 },
+  { "type": "shards", "count": 15 }
+]</property>
+   </properties>
+  </object>
+  <object id="54" template="../../../../../../common/maps/obj/gold.tx" type="reward" x="194" y="140" width="16" height="16"/>
+  <object id="55" template="../../../../../../common/maps/obj/gold.tx" type="reward" x="201" y="140" width="16" height="16"/>
+  <object id="56" template="../../../../../../common/maps/obj/gold.tx" type="reward" x="197" y="143" width="16" height="16"/>
+  <object id="57" template="../../../../../../common/maps/obj/gold.tx" type="reward" x="200" y="142" width="16" height="16"/>
+ </objectgroup>
+</map>

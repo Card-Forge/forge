@@ -5,6 +5,6 @@ A:SP$ ChooseCard | TargetMin$ 0 | TargetMax$ NumCreatPW | ValidTgts$ Creature,Pl
 SVar:DBDamage:DB$ DealDamage | Defined$ You | NumDmg$ X | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ Targeted | GainControl$ True | Origin$ Graveyard | Destination$ Battlefield
 SVar:NumCreatPW:Count$ValidGraveyard Creature,Planeswalker
-SVar:X:Targeted$SumCMC
+SVar:X:Targeted$CardManaCost
 AI:RemoveDeck:All
 Oracle:Choose any number of target creature and/or planeswalker cards in graveyards. Command the Dreadhorde deals damage to you equal to the total mana value of those cards. Put them onto the battlefield under your control.

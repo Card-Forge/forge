@@ -3,6 +3,9 @@ Name=Adventure - Low White - Blinding Fury
 [Avatar]
 
 [Main]
+6 Plains|S99|1
+6 Plains|S99|2
+5 Plains|S99|3
 1 Archangel|S99|1
 1 Angel of Light|S99|1
 2 Charging Paladin|S99|1
@@ -16,7 +19,6 @@ Name=Adventure - Low White - Blinding Fury
 1 False Peace|S99|1
 2 Path of Peace|S99|1
 1 Vengeance|S99|1
-17 Plains|S99|1
 [Sideboard]
 
 [Planes]

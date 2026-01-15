@@ -867,6 +867,11 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(final CostBlight cost) {
+        return this.visit((CostPutCounter) cost);
+    }
+
+    @Override
     public PaymentDecision visit(final CostReturn cost) {
         int c = cost.getAbilityAmount(ability);
 
@@ -980,6 +985,12 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return null;
         }
         return PaymentDecision.card(inp.getSelected());
+    }
+
+
+    @Override
+    public PaymentDecision visit(final CostBeholdExile cost) {
+        return this.visit((CostBehold) cost);
     }
 
     @Override

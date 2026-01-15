@@ -1,0 +1,7 @@
+Name:Goldmeadow Nomad
+ManaCost:W
+Types:Creature Kithkin Scout
+PT:1/2
+A:AB$ Token | Cost$ W ExileFromGrave<1/CARDNAME/this card> | ActivationZone$ Graveyard | SorcerySpeed$ True | TokenScript$ gw_1_1_kithkin | SpellDescription$ Create a 1/1 green and white Kithkin creature token. Activate only as a sorcery.
+DeckHas:Ability$Token
+Oracle:{W}, Exile this card from your graveyard: Create a 1/1 green and white Kithkin creature token. Activate only as a sorcery.

@@ -10,6 +10,7 @@ import forge.card.CardEdition;
 import forge.deck.Deck;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.util.IterableUtil;
 import forge.util.StreamUtil;
@@ -106,7 +107,7 @@ public class RewardData implements Serializable {
         if (configData.allowedEditions != null && configData.allowedEditions.length > 0) {
             allCards = IterableUtil.filter(allCards, PaperCardPredicates.printedInAnyEditions(configData.allowedEditions));
         } else if (configData.restrictedEditions != null && configData.restrictedEditions.length > 0) {
-            allCards = IterableUtil.filter(allCards, PaperCardPredicates.onlyPrintedInEditions(configData.restrictedEditions).negate());
+            allCards = IterableUtil.filter(allCards, PaperCardPredicates.isObtainableNotRestricted(configData.restrictedEditions));
         } else {
             allCards = IterableUtil.filter(allCards, PaperCardPredicates.isObtainableAnyEdition());
         }
@@ -117,7 +118,8 @@ public class RewardData implements Serializable {
         allCards = IterableUtil.filter(allCards, input -> {
             if (input == null)
                 return false;
-            if (Iterables.contains(input.getRules().getMainPart().getKeywords(), "Remove CARDNAME from your deck before playing if you're not playing for ante."))
+            if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE) &&
+                    Iterables.contains(input.getRules().getMainPart().getKeywords(), "Remove CARDNAME from your deck before playing if you're not playing for ante."))
                 return false;
             // TODO check if commander player
             if (input.getRules().getAiHints().getRemNonCommanderDecks())
