@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
-import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -130,9 +129,7 @@ public class ViewWinLose implements IWinLoseView<FButton> {
 
         // Assemble game log scroller.
         final FTextArea txtLog = new FTextArea();
-        List<GameLogEntry> entries = game.getGameLog().getLogEntries(null);
-        Collections.reverse(entries);
-        txtLog.setText(StringUtils.join(entries, "\r\n").replace("[COMPUTER]", "[AI]"));
+        txtLog.setText(StringUtils.join(game.getGameLog().getLogEntries(null), "\r\n"));
         txtLog.setFont(FSkin.getRelativeFont(14));
         txtLog.setFocusable(true); // allow highlighting and copying of log
 

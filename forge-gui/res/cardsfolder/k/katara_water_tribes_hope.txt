@@ -1,6 +1,6 @@
 Name:Katara, Water Tribe's Hope
 ManaCost:2 W U U
-Types:Legendary Creature Human Warrior Ally 
+Types:Legendary Creature Human Warrior Ally
 PT:3/3
 K:Vigilance
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters, create a 1/1 white Ally creature token.
