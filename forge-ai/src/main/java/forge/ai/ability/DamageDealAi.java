@@ -33,8 +33,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+
+import forge.util.IterableUtil;
 
 public class DamageDealAi extends DamageAiBase {
     @Override
@@ -1186,5 +1189,63 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         return super.willPayUnlessCost(payer, sa, cost, alreadyPaid, payers);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T extends GameEntity> T chooseSingleEntity(Player ai, SpellAbility sa, Collection<T> options,
+            boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
+        final Card source = sa.getHostCard();
+        final boolean noPrevention = sa.hasParam("NoPrevention");
+        int dmg = calculateDamageAmount(sa, source, sa.getParam("NumDmg"));
+
+        // Separate options into creatures and players
+        List<Card> oppCreatures = CardLists.filterControlledBy(
+                IterableUtil.filter(options, Card.class), ai.getOpponents());
+        List<Player> oppPlayers = ai.getOpponents().filter(options::contains);
+
+        // First priority: kill opponent creatures
+        if (!oppCreatures.isEmpty()) {
+            CardCollection killables = CardLists.filter(oppCreatures, c ->
+                    (ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention) <= dmg)
+                            && !ComputerUtil.canRegenerate(ai, c)
+                            && !c.hasSVar("SacMe"));
+            if (!killables.isEmpty()) {
+                return (T) ComputerUtilCard.getBestCreatureAI(killables);
+            }
+        }
+
+        // Second priority: target opponent player if beneficial
+        if (!oppPlayers.isEmpty() && shouldTgtP(ai, sa, dmg, noPrevention)) {
+            return (T) oppPlayers.get(0);
+        }
+
+        // Third priority: target any opponent creature (even if we can't kill it)
+        if (!oppCreatures.isEmpty()) {
+            return (T) ComputerUtilCard.getBestCreatureAI(oppCreatures);
+        }
+
+        // Fourth priority: target opponent player
+        if (!oppPlayers.isEmpty()) {
+            return (T) oppPlayers.get(0);
+        }
+
+        // If optional and only own stuff remains, don't choose
+        if (isOptional) {
+            return null;
+        }
+
+        // Mandatory: target own worst creature or self
+        List<Card> ownCreatures = CardLists.filterControlledBy(
+                IterableUtil.filter(options, Card.class), ai);
+        if (!ownCreatures.isEmpty()) {
+            return (T) ComputerUtilCard.getWorstCreatureAI(ownCreatures);
+        }
+
+        if (options.contains(ai)) {
+            return (T) ai;
+        }
+
+        return null;
     }
 }
