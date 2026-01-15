@@ -835,8 +835,8 @@ public class ComputerUtil {
                 while (sub != null) {
                     if (sub.getApi() == ApiType.LoseLife) {
                         String defined = sub.getParamOrDefault("Defined", "");
-                        // Check if this targets opponents who didn't sacrifice (e.g., OppNonRememberedController)
-                        if (defined.contains("OppNon") || defined.contains("Opponent")) {
+                        // Check if this targets the AI (e.g., OppNonRememberedController, TriggeredPlayer)
+                        if (defined.contains("OppNon") || defined.contains("Opponent") || defined.contains("TriggeredPlayer")) {
                             int lifeAmount = AbilityUtils.calculateAmount(host, sub.getParamOrDefault("LifeAmount", "0"), sub);
                             if (lifeAmount >= ai.getLife()) {
                                 wouldDieFromNotSacrificing = true;

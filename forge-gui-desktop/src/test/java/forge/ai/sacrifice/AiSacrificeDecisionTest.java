@@ -93,4 +93,44 @@ public class AiSacrificeDecisionTest extends AITest {
         // Opponent should have 8 life (lost 2 from not sacrificing)
         AssertJUnit.assertEquals("Opponent should have lost 2 life from not sacrificing", 8, opponent.getLife());
     }
+
+
+    @Test
+    public void testAiSacrificesToPillarTombsToAvoidLethalLifeLoss() {
+        Game game = initAndCreateGame();
+
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+        opponent.setLife(4, null);
+
+        // Player 1 controls Pillar Tombs of Aku
+        addCard("Pillar Tombs of Aku", p);
+
+        // Opponent controls a creature they can sacrifice
+        Card bear = addCard("Runeclaw Bear", opponent);
+
+        // Fill libraries to prevent draw-death
+        for (int i = 0; i < 10; i++) {
+            addCardToZone("Plains", p, ZoneType.Library);
+            addCardToZone("Plains", opponent, ZoneType.Library);
+        }
+
+        // Play two turns - first ends Player 1's turn, second plays through opponent's upkeep
+        // where Pillar Tombs triggers and the AI must decide whether to sacrifice
+        this.playUntilNextTurn(game);
+        this.playUntilNextTurn(game);
+
+        // The game should NOT be over - AI should have sacrificed to survive
+        AssertJUnit.assertFalse("Game should not be over - AI should have sacrificed to survive", game.isGameOver());
+
+        // Bear should be in graveyard (sacrificed)
+        AssertJUnit.assertTrue("Runeclaw Bear should be in graveyard after being sacrificed",
+                opponent.getZone(ZoneType.Graveyard).contains(bear));
+
+        // Opponent should still have 4 life (didn't lose life because they sacrificed)
+        AssertJUnit.assertEquals("Opponent should still have 4 life after sacrificing", 4, opponent.getLife());
+    }
 }
