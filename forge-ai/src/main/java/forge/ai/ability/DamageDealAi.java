@@ -1202,7 +1202,8 @@ public class DamageDealAi extends DamageAiBase {
         // Separate options into creatures and players
         List<Card> oppCreatures = CardLists.filterControlledBy(
                 IterableUtil.filter(options, Card.class), ai.getOpponents());
-        List<Player> oppPlayers = ai.getOpponents().filter(options::contains);
+        Iterable<Player> optionPlayers = IterableUtil.filter(options, Player.class);
+        List<Player> oppPlayers = ai.getOpponents().filter(p -> IterableUtil.any(optionPlayers, p::equals));
 
         // First priority: kill opponent creatures
         if (!oppCreatures.isEmpty()) {
@@ -1235,14 +1236,21 @@ public class DamageDealAi extends DamageAiBase {
             return null;
         }
 
-        // Mandatory: target own worst creature or self
+        // Mandatory: target teammate's worst creature before own
+        List<Card> alliedCreatures = CardLists.filterControlledBy(
+                IterableUtil.filter(options, Card.class), ai.getAllies());
+        if (!alliedCreatures.isEmpty()) {
+            return (T) ComputerUtilCard.getWorstCreatureAI(alliedCreatures);
+        }
+
+        // Mandatory: target own worst creature
         List<Card> ownCreatures = CardLists.filterControlledBy(
                 IterableUtil.filter(options, Card.class), ai);
         if (!ownCreatures.isEmpty()) {
             return (T) ComputerUtilCard.getWorstCreatureAI(ownCreatures);
         }
 
-        if (options.contains(ai)) {
+        if (IterableUtil.any(optionPlayers, ai::equals)) {
             return (T) ai;
         }
 
