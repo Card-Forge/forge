@@ -239,6 +239,13 @@ public class SettingsScene extends UIScene {
                 Config.instance().saveSettings();
             }
         });
+        addSettingField(Forge.getLocalizer().getMessage("lblExcludeAlchemyVariants"), Config.instance().getSettingData().excludeAlchemyVariants, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Config.instance().getSettingData().excludeAlchemyVariants = ((CheckBox) actor).isChecked();
+                Config.instance().saveSettings();
+            }
+        });
         addSettingField(Forge.getLocalizer().getMessage("lblGenerateLDADecks"), Config.instance().getSettingData().generateLDADecks, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
