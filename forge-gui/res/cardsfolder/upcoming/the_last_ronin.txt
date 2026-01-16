@@ -8,7 +8,7 @@ SVar:DBImmediateTrig:DB$ ImmediateTrigger | Execute$ TrigChangeZone | ConditionD
 SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature card in your graveyard | Origin$ Graveyard | Destination$ Hand
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:DBEffect:DB$ Effect | Triggers$ TriggerAttack | SpellDescription$ Whenever a creature you control attacks alone this turn, put three +1/+1 counters on it. It gains trample, lifelink, and indestructible until end of turn.
-SVar:TriggerAttack:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | Execute$ TrigPutCounter | TriggerZones$ Command | TriggerDescription$ Whenever a creature you control attacks alone this turn, put three +1/+1 counters on it. It gains trample, lifelink, and indestructible until end of turn.
+SVar:TriggerAttack:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature you control attacks alone this turn, put three +1/+1 counters on it. It gains trample, lifelink, and indestructible until end of turn.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredAttackerLKICopy | CounterType$ P1P1 | CounterNum$ 3 | SubAbility$ DBPump
 SVar:DBHPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | KW$ Trample & Lifelink & Indestructible
 Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Destroy all creatures.\nII — Mill four cards. When you do, return target creature card from your graveyard to your hand.\nIII — Whenever a creature you control attacks alone this turn, put three +1/+1 counters on it. It gains trample, lifelink, and indestructible until end of turn.
