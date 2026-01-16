@@ -328,6 +328,13 @@ public final class CardEdition implements Comparable<CardEdition> {
         this.cardMap = cardMap;
         this.cardsInSet = new ArrayList<>(cardMap.values());
         Collections.sort(cardsInSet);
+        this.cardsInSetLookupMap = cardsInSet.stream().collect(
+            Multimaps.toMultimap(
+                e -> e.name,
+                e -> e,
+                MultimapBuilder.treeKeys(String.CASE_INSENSITIVE_ORDER).arrayListValues()::build
+            )
+        );
         this.tokenMap = tokens;
         this.customPrintSheetsToParse = customPrintSheetsToParse;
     }
@@ -338,6 +345,13 @@ public final class CardEdition implements Comparable<CardEdition> {
         this.cardMap.replaceValues("cards", cardsList);
         this.cardsInSet = new ArrayList<>(cardsList);
         Collections.sort(cardsInSet);
+        this.cardsInSetLookupMap = cardsInSet.stream().collect(
+            Multimaps.toMultimap(
+                e -> e.name,
+                e -> e,
+                MultimapBuilder.treeKeys(String.CASE_INSENSITIVE_ORDER).arrayListValues()::build
+            )
+        );
         this.tokenMap = tokens;
         this.customPrintSheetsToParse = new HashMap<>();
     }
@@ -419,7 +433,7 @@ public final class CardEdition implements Comparable<CardEdition> {
         return cardsInSet;
     }
 
-    private ListMultimap<String, EditionEntry> cardsInSetLookupMap = null;
+    private final ListMultimap<String, EditionEntry> cardsInSetLookupMap;
 
     /**
      * Get all the CardInSet instances with the input card name.
@@ -427,17 +441,8 @@ public final class CardEdition implements Comparable<CardEdition> {
      * @return A List of all the CardInSet instances for a given name.
      * If not found, an Empty sequence (view) will be returned instead!
      */
-    public List<EditionEntry> getCardInSet(String cardName){
-        if (cardsInSetLookupMap == null) {
-            // initialise
-            cardsInSetLookupMap = Multimaps.newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER), Lists::newArrayList);
-            List<EditionEntry> cardsInSet = this.getAllCardsInSet();
-            for (EditionEntry cis : cardsInSet){
-                String key = cis.name;
-                cardsInSetLookupMap.put(key, cis);
-            }
-        }
-        return this.cardsInSetLookupMap.get(cardName);
+    public List<EditionEntry> getCardInSet(String cardName) {
+        return cardsInSetLookupMap.get(cardName);
     }
 
     public EditionEntry getCardFromCollectorNumber(String collectorNumber) {
