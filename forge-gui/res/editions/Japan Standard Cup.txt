@@ -9,3 +9,5 @@ CardLang=ja
 [cards]
 2025-1 R Tishana's Tidebinder @Hagiya Kaoru
 2025-2 R Brotherhood's End @Takayama Toshiaki
+2026-1 R Sheltered by Ghosts @Naoki Saito
+2026-2 R Unstoppable Slasher @HNCL
