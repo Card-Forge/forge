@@ -9,6 +9,7 @@ Type=Expansion
 27 R Turtles Forever @Devin Elle Kurtz
 29 R April O'Neil, Hacktivist @Xabi Gaztelua
 43 R Krang, Master Mind @Narendra Bintara Adi
+73 R Shark Shredder, Killer Clone @Nicholas Gregory
 83 M Super Shredder @Néstor Ossandón Leal
 87 U Casey Jones, Jury-Rig Justiciar @Lordigan
 105 R Raphael's Technique @Andreas Zafiratos
