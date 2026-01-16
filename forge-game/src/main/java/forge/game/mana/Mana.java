@@ -21,6 +21,7 @@ import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.game.card.Card;
 import forge.game.card.CardCopyService;
+import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 
@@ -30,7 +31,7 @@ import forge.game.spellability.SpellAbility;
  * This represents a single mana 'globe' floating in a player's pool.
  * </p>
  */
-public record Mana(byte color, Card sourceCard, AbilityManaPart manaAbility) {
+public record Mana(byte color, Card sourceCard, AbilityManaPart manaAbility, Player player) {
 
     @Override
     public int hashCode() {
@@ -80,10 +81,11 @@ public record Mana(byte color, Card sourceCard, AbilityManaPart manaAbility) {
         return mp == mp2 || (mp.getManaRestrictions().equals(mp2.getManaRestrictions()) && mp.getExtraManaRestriction().equals(mp2.getExtraManaRestriction()));
     }
 
-    public Mana(final byte color, final Card sourceCard, final AbilityManaPart manaAbility) {
+    public Mana(final byte color, final Card sourceCard, final AbilityManaPart manaAbility, final Player player) {
         this.color = color;
         this.manaAbility = manaAbility;
         this.sourceCard = sourceCard.isInPlay() ? CardCopyService.getLKICopy(sourceCard) : sourceCard.getGame().getChangeZoneLKIInfo(sourceCard);
+        this.player = player;
     }
 
     @Override
@@ -137,6 +139,10 @@ public record Mana(byte color, Card sourceCard, AbilityManaPart manaAbility) {
 
     public AbilityManaPart getManaAbility() {
         return this.manaAbility;
+    }
+
+    public final Player getPlayer() {
+        return this.player;
     }
 
     public boolean isColorless() {
