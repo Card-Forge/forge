@@ -380,20 +380,6 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
             }
         }
 
-        if (params.containsKey("Presence")) {
-            if (hostCard.getCastFrom() == null || hostCard.getCastSA() == null)
-                return false;
-
-            final String type = params.get("Presence");
-
-            int revealed = AbilityUtils.calculateAmount(hostCard, "Revealed$Valid " + type, hostCard.getCastSA());
-            int ctrl = AbilityUtils.calculateAmount(hostCard, "Count$LastStateBattlefield " + type + ".YouCtrl", hostCard.getCastSA());
-
-            if (revealed + ctrl == 0) {
-                return false;
-            }
-        }
-
         if (params.containsKey("LifeTotal")) {
             final String player = params.get("LifeTotal");
             final String lifeCompare = getParamOrDefault("LifeAmount", "GE1");

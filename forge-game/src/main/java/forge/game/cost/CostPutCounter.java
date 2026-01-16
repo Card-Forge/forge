@@ -78,7 +78,7 @@ public class CostPutCounter extends CostPartWithList {
      * @see forge.card.cost.CostPart#toString()
      */
     @Override
-    public final String toString() {
+    public String toString() {
         final StringBuilder sb = new StringBuilder();
         if (this.counter.is(CounterEnumType.LOYALTY)) {
             if (this.getAmount().equals("0")) {
