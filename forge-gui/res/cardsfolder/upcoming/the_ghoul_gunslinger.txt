@@ -7,6 +7,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigRadiation:DB$ Radiation | ValidTgts$ Player | Num$ 2 | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | ConditionCheckSVar$ X
 SVar:X:Targeted$Valid You
-DeckHints:Type$Zombie|Mutant
+DeckHas:Ability$Counters
 DeckHints:Type$Zombie|Mutant
 Oracle:First strike\nWhenever The Ghoul or another nontoken Zombie or Mutant you control dies, target player gets two rad counters. If that player is you, create a Treasure token.
