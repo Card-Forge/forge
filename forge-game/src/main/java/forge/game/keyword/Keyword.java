@@ -265,9 +265,8 @@ public enum Keyword {
         KeywordInstance<?> inst;
         try {
             inst = p.getKey().type.getConstructor().newInstance();
-        }
-        catch (Exception e) {
-            inst = new UndefinedKeyword();
+        } catch (Exception e) {
+            inst = new SimpleKeyword();
         }
         inst.initialize(k, p.getKey(), p.getValue());
         return inst;

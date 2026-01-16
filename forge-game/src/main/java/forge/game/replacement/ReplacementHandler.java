@@ -82,7 +82,7 @@ public class ReplacementHandler {
                 }
             }
 
-            // Rule 614.12 Enter the Battlefield Replacement Effects look at what the card would be on the battlefield
+            // CR 614.12 ETB replacements look at what the card would be on the battlefield
             affectedCard = (Card) runParams.get(AbilityKey.Affected);
             affectedLKI = CardCopyService.getLKICopy(affectedCard);
             affectedLKI.setLastKnownZone(affectedCard.getController().getZone(ZoneType.Battlefield));
