@@ -842,8 +842,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             if (ability.hasParam("UnlessCost") && !confirmAction(cost, Localizer.getInstance().getMessage("lblPutNTypeCounterOnTarget", String.valueOf(c), cost.getCounter().getName(), ability.getHostCard().getDisplayName()))) {
                 return null;
             }
-            cost.setLastPaidAmount(c);
-            return PaymentDecision.number(c);
+            return PaymentDecision.card(source);
         }
 
         // Cards to use this branch: Scarscale Ritual, Wandering Mage - each adds only one counter
