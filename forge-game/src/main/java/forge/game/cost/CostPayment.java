@@ -123,8 +123,10 @@ public class CostPayment extends ManaConversionMatrix {
     public final void refundPayment() {
         Card sourceCard = this.ability.getHostCard();
         for (final CostPart part : this.paidCostParts) {
-            if (part.isUndoable()) {
-                part.refund(sourceCard);
+            part.refund(sourceCard);
+            // Clear lists to prevent accumulation across multiple cancelled activations
+            if (part instanceof CostPartWithList) {
+                ((CostPartWithList) part).resetLists();
             }
         }
 
