@@ -1,7 +1,7 @@
 Name:Ninja Teen
 ManaCost:2 B
 Types:Enchantment Class
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature you control leaves the battlefield, each opponent loses 1 life.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature you control leaves the battlefield, each opponent loses 1 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
 K:Class:2:1 B:AddStaticAbility$ SBoost
 SVar:SBoost:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Creature.YouCtrl | AddPower$ 1 | AddKeyword$ Menace | Secondary$ True | Description$ Creatures you control get +1/+0 and have menace.
