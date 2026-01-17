@@ -748,6 +748,8 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         setFunctionalVariantName(source.getFunctionalVariantName());
         setBasePower(source.getBasePower());
         setBaseToughness(source.getBaseToughness());
+        setBasePowerString(source.getBasePowerString());
+        setBaseToughnessString(source.getBaseToughnessString());
         setBaseLoyalty(source.getBaseLoyalty());
         setBaseDefense(source.getBaseDefense());
         setAttractionLights(source.getAttractionLights());
