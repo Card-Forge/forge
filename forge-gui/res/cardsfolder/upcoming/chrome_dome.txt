@@ -1,0 +1,8 @@
+Name:Chrome Dome
+ManaCost:2
+Types:Artifact Creature Robot Ninja
+PT:1/3
+S:Mode$ Continuous | Affected$ Creature.Artifact+Other+YouCtrl | AddPower$ 1 | Description$ Other artifact creatures you control get +1/+0.
+A:AB$ CopyPermanent | Cost$ 5 | ValidTgts$ Artifact.Other+YouCtrl | TgtPrompt$ Select another target artifact you control | PumpKeywords$ Haste | AtEOT$ Sacrifice | SpellDescription$ Create a token that's a copy of another target artifact you control. That token gains haste. Sacrifice it at the beginning of the next end step.
+SVar:PlayMain1:TRUE
+Oracle:Other artifact creatures you control get +1/+0.\n{5}: Create a token that's a copy of another target artifact you control. That token gains haste. Sacrifice it at the beginning of the next end step.
