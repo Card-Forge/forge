@@ -8,6 +8,6 @@ SVar:TriggerDiscard:Mode$ Discarded | ValidCard$ Card.YouCtrl | TriggerZones$ Ba
 SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 2
 K:Class:3:1 R:AddTrigger$ TriggerClassLevel
 SVar:TriggerClassLevel:Mode$ ClassLevelGained | ClassLevel$ 3 | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigChangeZone | Secondary$ True | TriggerDescription$ When this Class becomes level 3, search your library for a card, put it into your hand, shuffle, then discard a card at random.
-Svar:TrigChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeNum$ 1 | ChangeType$ Card | SubAbility$ DBDiscard
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeNum$ 1 | ChangeType$ Card | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ Random
 Oracle:(Gain the next level as a sorcery to add its ability.)\nWhenever you attack, you may discard a card. If you do, draw a card.\n{1}{R}: Level 2\nWhenever you discard a card, this Class deals 2 damage to each opponent.\n{1}{R}: Level 3\nWhen this Class becomes level 3, search your library for a card, put it into your hand, shuffle, then discard a card at random.
