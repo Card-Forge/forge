@@ -5,15 +5,47 @@ Name=Teenage Mutant Ninja Turtles
 Type=Expansion
 
 [cards]
+15 R Leonardo, Cutting Edge @Chris Seaman
 17 M Leonardo, Sewer Samurai @Ryan Pancoast
+18 R Leonardo's Technique @Andreas Zafiratos
+22 R Prehistoric Pet @Jakob Eirich
+24 R Sally Pride, Lioness Leader @Andrea Tentori Montalto
+25 M Triceraton Commander @Nathaniel Himawan
 27 R Turtles Forever @Devin Elle Kurtz
 29 R April O'Neil, Hacktivist @Xabi Gaztelua
+34 R Does Machines @Aeron Ng
+41 R Kitsune, Dragon's Daughter @Robin Har
+42 R Kitsune's Technique @
 43 R Krang, Master Mind @Narendra Bintara Adi
+46 M Mondo Gecko @Maël Ollivier-Henry
+66 R Madame Null, Power Broker @Irina Nordsol
+67 R Ninja Teen @Justyna Dura
+72 R Savanti Romero, Time's Exile @Michele Giorgi
 73 R Shark Shredder, Killer Clone @Nicholas Gregory
+80 R Splinter's Technique @Jo Cordisco
 83 M Super Shredder @Néstor Ossandón Leal
+86 M Broadcast Takeover @Hokyoung Kim
 87 U Casey Jones, Jury-Rig Justiciar @Lordigan
+89 R Cool but Rude @Lordigan
+102 M Raphael, Ninja Destroyer @Fajareka Setiawan
 105 R Raphael's Technique @Andreas Zafiratos
+108 R Slash, Reptile Rampager @Andrew Mar
+115 R Groundchuck & Dirtbag @Nicholas Gregory
+117 R Leatherhead, Swamp Stalker @Lie Setiawan
+121 M Michelangelo, Improviser @
+122 R Michelangelo's Technique @Dominik Mayer
+124 R Mutagen Man, Living Ooze @Ignatius Budi
+128 R Party Dude @Gabriel Rubio
+134 R Transdimensional Bovine @Lius Lasahido
+135 R Turtle Power! @Hokyoung Kim
 140 R Bebop & Rocksteady @Néstor Ossandón Leal
+142 M Dark Leo & Shredder @Thomas Chamberlain-Keen
+162 M North Wind Avatar @Andrey Kuzinskiy
+169 R Splinter, Radical Rat @Manuel Castañón
+171 R Tokka & Rahzar, Terrible Twos @
+172 R Chrome Dome @Mathias Kollros
+176 M Technodrome @
+182 R Weather Maker @
 253 L Plains @Gaboleps
 254 L Island @Gaboleps
 255 L Swamp @Gaboleps
@@ -26,3 +58,10 @@ Type=Expansion
 312 L Swamp @Gaboleps
 313 L Mountain @Gaboleps
 314 L Forest @Gaboleps
+0 R Casey Jones, Vigilante @
+0 R Improvised Arsenal @
+0 R Raph & Mikey, Troublemakers @Aaron J. Riley
+0 R Renet, Temporal Apprentice @
+0 R South Wind Avatar @
+0 M The Last Ronin @
+0 R Turtle Van @
