@@ -1,0 +1,11 @@
+Name:Technodrome
+ManaCost:2
+Types:Artifact Creature Construct
+PT:3/3
+K:Reach
+K:Trample
+S:Mode$ CantAttack,CantBlock | ValidCard$ Card.Self+powerLT6 | Description$ This creature can't attack or block unless its power is 6 or greater.
+A:AB$ Draw | Cost$ T Sac<1/Artifact.Other/another artifact> | SubAbility$ DBPutCounter | SpellDescription$ Draw a card. Put a +1/+1 counter on this creature.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHints:Type$Artifact
+Oracle:Reach, trample\nThis creature can't attack or block unless its power is 6 or greater.\n{T}, Sacrifice another artifact: Draw a card. Put a +1/+1 counter on this creature.

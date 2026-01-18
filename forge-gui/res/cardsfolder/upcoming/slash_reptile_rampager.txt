@@ -1,0 +1,11 @@
+Name:Slash, Reptile Rampager
+ManaCost:3 R R
+Types:Legendary Creature Mutant Berserker Turtle
+PT:7/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Alliance — Whenever another creature you control enters, NICKNAME deals 2 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever NICKNAME attacks, create a 2/2 red Mutant token.
+SVar:TrigToken:DB$ Token | TokenScript$ r_2_2_mutant | TokenOwner$ You
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token
+Oracle:Alliance — Whenever another creature you control enters, Slash deals 2 damage to each opponent.\nWhenever Slash attacks, create a 2/2 red Mutant token.

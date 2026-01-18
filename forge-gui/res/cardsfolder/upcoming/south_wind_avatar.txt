@@ -1,0 +1,12 @@
+Name:South Wind Avatar
+ManaCost:3 B
+Types:Creature Snake Spirit Avatar
+PT:3/4
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever another creature you control dies, you gain life equal to its toughness.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever you gain life, each opponent loses 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
+SVar:X:TriggeredCard$CardToughness
+DeckHints:Ability$LifeGain
+Oracle:Deathtouch\nWhenever another creature you control dies, you gain life equal to its toughness.\nWhenever you gain life, each opponent loses 1 life.

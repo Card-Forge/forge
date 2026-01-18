@@ -1,0 +1,6 @@
+Name:Dinosaur Soldier Token
+ManaCost:no cost
+Colors:white
+Types:Creature Dinosaur Soldier
+PT:2/2
+Oracle:
