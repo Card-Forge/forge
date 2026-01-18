@@ -1,5 +1,5 @@
 Name:Technodrome
-ManaCost:3
+ManaCost:2
 Types:Artifact Creature Construct
 PT:3/3
 K:Reach
