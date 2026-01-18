@@ -5,6 +5,7 @@ import com.google.common.collect.Maps;
 import forge.game.card.Card;
 import forge.game.card.CardCopyService;
 import forge.game.combat.Combat;
+import forge.game.event.GameEventSnapshotRestored;
 import forge.game.mana.Mana;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
@@ -59,7 +60,10 @@ public class GameSnapshot {
     public void restoreGameState(Game currentGame) {
         System.out.println("Restoring game state with timestamp of :" + newGame.getTimestamp());
         restore = true;
+
+        currentGame.fireEvent(new GameEventSnapshotRestored(true));
         assignGameState(newGame, currentGame, true);
+        currentGame.fireEvent(new GameEventSnapshotRestored(false));
     }
 
     public void assignGameState(Game fromGame, Game toGame, boolean includeStack) {
