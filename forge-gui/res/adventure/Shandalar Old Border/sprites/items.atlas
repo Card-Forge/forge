@@ -1036,3 +1036,30 @@ GladiatorsCestus
 SpineStaff
   xy: 208, 624
   size: 16, 16
+BreathstealersBlade
+  xy: 272, 320
+  size: 16, 16
+ScytheOfYawgmoth
+  xy: 304, 240
+  size: 16, 16
+FeverbringersBlade
+  xy: 304, 320
+  size: 16, 16
+StormGauntlet
+  xy: 0, 256
+  size: 16, 16
+MoltenGauntlet
+  xy: 80, 288
+  size: 16, 16
+InfiltratorsKnife
+  xy: 176, 320
+  size: 16, 16
+IchorKnife
+  xy: 240, 336
+  size: 16, 16
+KoboldKingsBlade
+  xy: 240, 736
+  size: 16, 16
+AcidicBootDagger
+  xy: 272, 336
+  size: 16, 16

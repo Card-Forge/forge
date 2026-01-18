@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Ride Like the Wind
+Description=Ride Like the Wind charges with flanking knights. Red-white aggression at its fastest.
+Deck Type=constructed
+Set=MIR
+Image=ride_like_the_wind.jpg
+[main]
+4 Plains|MIR|1
+4 Plains|MIR|2
+4 Plains|MIR|3
+4 Mountain|MIR|1
+4 Mountain|MIR|2
+4 Mountain|MIR|3
+2 Blistering Barrier|MIR
+1 Crimson Roc|MIR
+3 Burning Shield Askari|MIR
+3 Femeref Knight|MIR
+1 Iron Tusk Elephant|MIR
+1 Melesse Spirit|MIR
+3 Mtenda Herder|MIR
+3 Searing Spear Askari|MIR
+1 Sidar Jabari|MIR
+1 Telim'Tor|MIR
+1 Vigilant Martyr|MIR
+2 Zhalfirin Commander|MIR
+3 Zhalfirin Knight|MIR
+1 Agility|MIR
+2 Favorable Destiny|MIR
+1 Alarum|MIR
+2 Aleatory|MIR
+1 Shadowbane|MIR
+2 Spitting Earth|MIR
+2 Telim'Tor's Darts|MIR
+[sideboard]

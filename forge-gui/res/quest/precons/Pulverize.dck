@@ -1,0 +1,40 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Pulverize
+Description=Pulverize combines storm magic with burn. Build up spell count for devastating finishes.
+Deck Type=constructed
+Set=SCG
+Image=pulverize.jpg
+[main]
+4 Island|ONS|1
+4 Island|ONS|2
+4 Island|ONS|3
+4 Mountain|ONS|1
+4 Mountain|ONS|2
+4 Mountain|ONS|3
+1 Aven Fateshaper|ONS
+1 Bloodstoke Howler|LGN
+3 Chartooth Cougar|SCG
+1 Frenetic Raptor|LGN
+2 Goblin Machinist|ONS
+1 Macetail Hystrodon|LGN
+1 Mischievous Quanar|SCG
+2 Mistform Warchief|SCG
+3 Scornful Egotist|SCG
+2 Shoreline Ranger|SCG
+1 Skittish Valesk|ONS
+1 Thundercloud Elemental|SCG
+2 Carbonize|SCG
+2 Dispersal Shield|SCG
+2 Erratic Explosion|ONS
+2 Rush of Knowledge|SCG
+1 Slice and Dice|ONS
+3 Torrent of Fire|SCG
+2 Dragon Breath|SCG
+1 Parallel Thoughts|SCG
+2 Pyrostatic Pillar|SCG
+[sideboard]

@@ -1,0 +1,40 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Breakdown
+Description=Breakdown combines blue control with green creatures. Counter threats and overwhelm with efficient beaters.
+Deck Type=constructed
+Set=NMS
+Image=breakdown.jpg
+[main]
+4 Island|MMQ
+3 Island|MMQ
+3 Island|MMQ
+4 Forest|MMQ
+3 Forest|MMQ
+3 Forest|MMQ
+2 Hickory Woodlot|MMQ
+2 Saprazzan Skerry|MMQ
+2 Blastoderm|NMS
+4 Cloudskate|NMS
+2 Rusting Golem|NMS
+1 Skyshroud Behemoth|NMS
+4 Skyshroud Ridgeback|NMS
+2 Stronghold Zeppelin|NMS
+1 Vine Trellis|MMQ
+3 Waterfront Bouncer|MMQ
+2 Woodripper|NMS
+1 Dehydration|MMQ
+1 False Demise|ALL
+1 Seal of Strength|NMS
+1 War Tax|MMQ
+1 Seal of Removal|NMS
+4 Accumulated Knowledge|NMS
+2 Ensnare|NMS
+2 Revive|MMQ
+1 Parallax Inhibitor|NMS
+1 Puffer Extract|MMQ
+[sideboard]

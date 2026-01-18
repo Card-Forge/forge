@@ -18,7 +18,9 @@ Image=groundbreaker.jpg
 1 Evincar's Justice|TMP
 3 Flowstone Flood|EXO
 1 Monstrous Hound|EXO
-12 Mountain|TMP
+4 Mountain|TMP|1
+4 Mountain|TMP|2
+4 Mountain|TMP|3
 1 Nausea|EXO
 1 Necrologia|EXO
 3 Rain of Tears|TMP
@@ -26,7 +28,9 @@ Image=groundbreaker.jpg
 1 Searing Touch|TMP
 3 Shock|STH
 4 Stone Rain|TMP
-12 Swamp|TMP
+4 Swamp|TMP|1
+4 Swamp|TMP|2
+4 Swamp|TMP|3
 1 Thopter Squadron|EXO
 2 Thrull Surgeon|EXO
 2 Vampire Hounds|EXO
