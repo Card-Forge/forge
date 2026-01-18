@@ -1,0 +1,11 @@
+Name:Krang & Shredder
+ManaCost:4 UB UB
+Types:Legendary Creature Utrom Human Ninja
+PT:6/7
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDigUntil | TriggerDescription$ Whenever CARDNAME enter or attack, each opponent exiles cards from the top of their library until they exile a nonland card.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDigUntil | Secondary$ True | TriggerDescription$ Whenever CARDNAME enter or attack, each opponent exiles cards from the top of their library until they exile a nonland card.
+SVar:TrigDigUntil:DB$ DigUntil | Defined$ Opponent | Valid$ Card.nonLand | FoundDestination$ Exile | RevealedDestination$ Exile
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Revolt$ True | TriggerZones$ Battlefield | Execute$ TrigPlay | TriggerDescription$ Disappear — At the beginning of your end step, if a permanent left the battlefield under your control this turn, you may cast a card exiled with CARDNAME without paying its mana cost.
+SVar:TrigPlay:DB$ Play | Optional$ True | Valid$ Card.nonLand+ExiledWithSource | ValidZone$ Exile | WithoutManaCost$ True | Amount$ 1
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Krang & Shredder enter or attack, each opponent exiles cards from the top of their library until they exile a nonland card.\nDisappear — At the beginning of your end step, if a permanent left the battlefield under your control this turn, you may cast a card exiled with Krang & Shredder without paying its mana cost.
