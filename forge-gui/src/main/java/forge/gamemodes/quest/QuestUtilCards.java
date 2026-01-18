@@ -375,7 +375,6 @@ public final class QuestUtilCards {
 
         // remove sold cards from all decks:
         for (final Deck deck : questController.getMyDecks()) {
-
             int cntInMain = deck.getMain().count(card);
             int cntInSb = deck.has(DeckSection.Sideboard) ? deck.get(DeckSection.Sideboard).count(card) : 0;
             int nToRemoveFromThisDeck = cntInMain + cntInSb - leftInPool;
@@ -394,9 +393,7 @@ public final class QuestUtilCards {
             }
 
             deck.getMain().remove(card, nToRemoveFromThisDeck);
-
         }
-
     }
 
     /**
