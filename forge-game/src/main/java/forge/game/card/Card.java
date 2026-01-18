@@ -4715,7 +4715,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final void removePerpetual(final long timestamp) {
         PerpetualInterface toRemove = null;
         for (PerpetualInterface p : perpetual) {
-            if (p.getTimestamp() == (timestamp)) {
+            if (p.getTimestamp() == timestamp) {
                 toRemove = p;
                 break;
             }

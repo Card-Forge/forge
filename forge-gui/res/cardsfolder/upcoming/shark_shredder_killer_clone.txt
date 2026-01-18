@@ -1,0 +1,9 @@
+Name:Shark Shredder, Killer Clone
+ManaCost:2 B B
+Types:Legendary Creature Shark Octopus Ninja
+PT:4/4
+K:Sneak:3 B B
+K:First Strike
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigChangeZone | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, put up to one target creature card from that player's graveyard onto the battlefield under your control. It enters tapped and attacking that player.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | ValidTgts$ Creature | TargetsWithDefinedController$ TriggeredTarget | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature in that player's graveyard | Tapped$ True | Attacking$ TriggeredTarget
+Oracle:Sneak {3}{B}{B}\nFirst strike\nWhenever Shark Shredder deals combat damage to a player, put up to one target creature card from that player's graveyard onto the battlefield under your control. It enters tapped and attacking that player.

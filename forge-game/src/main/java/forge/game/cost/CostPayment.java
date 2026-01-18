@@ -123,8 +123,10 @@ public class CostPayment extends ManaConversionMatrix {
     public final void refundPayment() {
         Card sourceCard = this.ability.getHostCard();
         for (final CostPart part : this.paidCostParts) {
-            if (part.isUndoable()) {
-                part.refund(sourceCard);
+            part.refund(sourceCard);
+            // Clear lists to prevent accumulation across multiple cancelled activations
+            if (part instanceof CostPartWithList) {
+                ((CostPartWithList) part).resetLists();
             }
         }
 
@@ -161,10 +163,10 @@ public class CostPayment extends ManaConversionMatrix {
             game.costPaymentStack.pop(); // cost is resolved
         }
 
-        // this clears lists used for undo. 
-        for (final CostPart part1 : this.paidCostParts) {
-            if (part1 instanceof CostPartWithList) {
-                ((CostPartWithList) part1).resetLists();
+        // clear lists used for undo
+        for (final CostPart part : this.paidCostParts) {
+            if (part instanceof CostPartWithList listCost) {
+                listCost.resetLists();
             }
         }
 
