@@ -67,11 +67,14 @@ public final class GamePlayerUtil {
         return createAiPlayer(name, avatarIndex, sleeveIndex, options, "");
     }
     public static LobbyPlayer createAiPlayer(final String name, final int avatarIndex, final int sleeveIndex, final Set<AIOption> options, final String profileOverride) {
+        // TODO: create the appropriate LobbyPlayerAi subclass based on AI selection in the lobby
+        // TODO: use whatever picker was enabled with FPref.UI_ENABLE_AI_PICKER is set
+        // TODO: Don't break when UI_ENABLE_AI_PICKER is disabled
         final LobbyPlayerAi player = new LobbyPlayerAi(name, options);
 
         // TODO: implement specific AI profiles for quest mode.
         String profile = "";
-        if (profileOverride.isEmpty()) {
+        if (profileOverride == null || profileOverride.isEmpty()) {
             String lastProfileChosen = FModel.getPreferences().getPref(FPref.UI_CURRENT_AI_PROFILE);
             if (!AiProfileUtil.getProfilesDisplayList().contains(lastProfileChosen)) {
                 System.out.println("[AI Preferences] Unknown profile " + lastProfileChosen + " was requested, resetting to default.");
@@ -88,8 +91,9 @@ public final class GamePlayerUtil {
             profile = profileOverride;
         }
 
-        assert (!profile.isEmpty());
-        
+        assert (!profile.isEmpty()); // TODO test instead of assert
+
+        System.out.println("[AI Preferences] using profile " + profile);
         player.setAiProfile(profile);
         player.setAvatarIndex(avatarIndex);
         player.setSleeveIndex(sleeveIndex);
