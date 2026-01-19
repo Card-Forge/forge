@@ -932,14 +932,6 @@ public final class GameActionUtil {
         return completeList;
     }
 
-    public static void checkStaticAfterPaying(Card c) {
-        c.getGame().getAction().checkStaticAbilities(false);
-
-        c.updateKeywords();
-
-        c.getGame().getTriggerHandler().resetActiveTriggers();
-    }
-
     public static void rollbackAbility(SpellAbility ability, final Zone fromZone, final int zonePosition, CostPayment payment, Card oldCard) {
         // cancel ability during target choosing
         final Game game = ability.getActivatingPlayer().getGame();

@@ -751,7 +751,8 @@ public class ComputerUtil {
     public static CardCollection chooseUntapType(final Player ai, final String type, final Card activate, final boolean untap, final int amount, SpellAbility sa) {
         CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), activate.getController(), activate, sa);
 
-        typeList = CardLists.filter(typeList, CardPredicates.TAPPED, c -> c.getCounters(CounterEnumType.STUN) == 0 || c.canRemoveCounters(CounterEnumType.STUN));
+        typeList = CardLists.filter(typeList, c -> c.canUntap(null, false) &&
+                (c.getCounters(CounterEnumType.STUN) == 0 || c.canRemoveCounters(CounterEnumType.STUN)));
 
         if (untap) {
             typeList.remove(activate);
