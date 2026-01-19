@@ -6,8 +6,10 @@ import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CounterEnumType;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
@@ -79,8 +81,25 @@ public class BlightAi extends SpellAbilityAi {
             Player targetedPlayer,
             Map<String, Object> params
     ) {
-        Optional<Card> filtered = StreamUtil.stream(options).filter(
+        // First try to find a creature that can't receive -1/-1 counters
+        Optional<Card> immune = StreamUtil.stream(options).filter(
                 c -> !c.canReceiveCounters(CounterEnumType.M1M1)).findAny();
-        return filtered.orElseGet(() -> ComputerUtilCard.getWorstCreatureAI(options));
+        if (immune.isPresent()) {
+            return immune.get();
+        }
+
+        // Prefer creatures with Undying that won't die from the counters
+        int amount = AbilityUtils.calculateAmount(sa.getHostCard(),
+                sa.getParamOrDefault("Num", "1"), sa);
+        CardCollection undying = CardLists.filter(options, c ->
+                c.hasKeyword(Keyword.UNDYING)
+                && c.getCounters(CounterEnumType.P1P1) <= amount
+                && c.getNetToughness() > amount);
+
+        if (!undying.isEmpty()) {
+            return ComputerUtilCard.getWorstCreatureAI(undying);
+        }
+
+        return ComputerUtilCard.getWorstCreatureAI(options);
     }
 }
