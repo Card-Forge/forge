@@ -273,7 +273,7 @@ public final class CardEdition implements Comparable<CardEdition> {
      */
     public static final String UNKNOWN_CODE = "???";
     public static final String UNKNOWN_SET_NAME = "UNKNOWN";
-    public static final CardEdition UNKNOWN = new CardEdition("1990-01-01", UNKNOWN_CODE, "??", Type.UNKNOWN, UNKNOWN_SET_NAME, FoilType.NOT_SUPPORTED, new EditionEntry[]{});
+    public static final CardEdition UNKNOWN = new CardEdition("1990-01-01", UNKNOWN_CODE, "??", Type.UNKNOWN, UNKNOWN_SET_NAME, FoilType.NOT_SUPPORTED);
     private Date date;
     private String code;
     private String code2;
@@ -332,16 +332,6 @@ public final class CardEdition implements Comparable<CardEdition> {
         this.customPrintSheetsToParse = customPrintSheetsToParse;
     }
 
-    private CardEdition(EditionEntry[] cards, ListMultimap<String, EditionEntry> tokens) {
-        List<EditionEntry> cardsList = Arrays.asList(cards);
-        this.cardMap = ArrayListMultimap.create();
-        this.cardMap.replaceValues("cards", cardsList);
-        this.cardsInSet = new ArrayList<>(cardsList);
-        Collections.sort(cardsInSet);
-        this.tokenMap = tokens;
-        this.customPrintSheetsToParse = new HashMap<>();
-    }
-
     /**
      * Instantiates a new card set.
      *
@@ -355,8 +345,8 @@ public final class CardEdition implements Comparable<CardEdition> {
      * @param name the name of the set
      * @param cards the cards in the set
      */
-    private CardEdition(String date, String code, String code2, Type type, String name, FoilType foil, EditionEntry[] cards) {
-        this(cards, ArrayListMultimap.create());
+    private CardEdition(String date, String code, String code2, Type type, String name, FoilType foil) {
+        this(ArrayListMultimap.create(), ArrayListMultimap.create(), new HashMap<>());
         this.code  = code;
         this.code2 = code2;
         this.type  = type;
@@ -916,8 +906,7 @@ public final class CardEdition implements Comparable<CardEdition> {
                 this.add(E);
                 initAliases(E); //Made a method in case the system changes, so it's consistent.
             }
-            CardEdition customBucket = new CardEdition("2990-01-01", "USER", "USER",
-                    Type.CUSTOM_SET, "USER", FoilType.NOT_SUPPORTED, new EditionEntry[]{});
+            CardEdition customBucket = new CardEdition("2990-01-01", "USER", "USER", Type.CUSTOM_SET, "USER", FoilType.NOT_SUPPORTED);
             this.add(customBucket);
             initAliases(customBucket);
             this.lock = true; //Consider it initialized and prevent from writing any more data.
