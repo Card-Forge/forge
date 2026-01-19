@@ -374,12 +374,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
             // Add expend mana
             Map<Player, Integer> expendPlayers = Maps.newHashMap();
-
             for (Mana m : sp.getPayingMana()) {
                 // TODO this currently assumes that all mana came from your own pool
                 // but with Assist some might belong to another player instead
                 Player manaPayer = sp.getActivatingPlayer();
-
                 expendPlayers.put(manaPayer, expendPlayers.getOrDefault(manaPayer, 0) + 1);
             }
 
@@ -590,7 +588,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             game.getPhaseHandler().setPriority(sp.getActivatingPlayer());
         }
 
-        GameActionUtil.checkStaticAfterPaying(sp.getHostCard());
+        sp.getHostCard().getGame().getAction().checkStaticAbilities(false);
+        sp.getHostCard().getGame().getTriggerHandler().resetActiveTriggers();
 
         game.updateStackForView();
         game.fireEvent(new GameEventSpellAbilityCast(sp, si, stackIndex));
