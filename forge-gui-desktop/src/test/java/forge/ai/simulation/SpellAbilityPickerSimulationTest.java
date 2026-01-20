@@ -4,7 +4,9 @@ package forge.ai.simulation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
+import forge.game.ability.SpellApiBased;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import org.testng.AssertJUnit;
@@ -18,6 +20,8 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
+import static junit.framework.Assert.assertNotNull;
 
 public class SpellAbilityPickerSimulationTest extends SimulationTest {
     @Test
@@ -896,5 +900,36 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         pithingNeedle.addNamedCard("Goblin Bombardment");
         game.getAction().checkStateEffects(true);
         AssertJUnit.assertNull(picker.chooseSpellAbilityToPlay(null));
+    }
+
+    @Test
+    public void testCastShapeAnew() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        Card shapeAnew = addCardToZone("Shape Anew", ai, ZoneType.Hand);
+
+        Card batterskull = addCardToZone("Batterskull", ai, ZoneType.Library);
+
+        addCard("Breeding Pool", ai);
+        addCard("Snow-Covered Island", ai);
+        addCard("Ketria Triome", ai);
+        addCard("Stomping Ground", ai);
+        addToken("c_a_treasure_sac", ai);
+        addToken("c_a_food_sac", ai);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, ai);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, ai);
+        List<SpellAbility> candidateSAs = picker.getCandidateSpellsAndAbilities();
+        Predicate<SpellAbility> isShapeAnew = (SpellAbility sa) -> sa instanceof SpellApiBased sab &&  sab.getHostCard().equals(shapeAnew);
+        AssertJUnit.assertTrue("there is a candidate to cast Shape anew", candidateSAs.stream().anyMatch(isShapeAnew));
+
+        SpellAbility best = picker.chooseSpellAbilityToPlay(null);
+        AssertJUnit.assertTrue("the best to play is Shape anew", isShapeAnew.test(best));
+
+        AssertJUnit.assertTrue("Shape Anew brought Batterskull to battlefield", ai.getZone(ZoneType.Battlefield).contains(batterskull));
+        AssertJUnit.assertTrue(ai.getZone(ZoneType.Graveyard).contains(shapeAnew));
     }
 }
