@@ -3382,4 +3382,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return FModel.getPreferences().getPrefBoolean(FPref.UI_ORDER_HAND);
     }
 
+    @Override
+    public void ackSync(long sequenceNumber) {
+        // No-op for local games - delta sync is only used for network play
+    }
+
+    @Override
+    public void reconnectRequest(String sessionId, String token) {
+        // No-op for local games - reconnection is only used for network play
+    }
+
 }

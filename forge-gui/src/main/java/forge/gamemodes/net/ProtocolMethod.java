@@ -80,6 +80,14 @@ public enum ProtocolMethod {
     setRememberedActions(Mode.SERVER, Void.TYPE),
     nextRememberedAction(Mode.SERVER, Void.TYPE),
 
+    // Delta sync - Server -> Client
+    applyDelta          (Mode.SERVER, Void.TYPE, DeltaPacket.class),
+    fullStateSync       (Mode.SERVER, Void.TYPE, FullStatePacket.class),
+    gamePaused          (Mode.SERVER, Void.TYPE, String.class),
+    gameResumed         (Mode.SERVER, Void.TYPE),
+    reconnectAccepted   (Mode.SERVER, Void.TYPE, FullStatePacket.class),
+    reconnectRejected   (Mode.SERVER, Void.TYPE, String.class),
+
     // Client -> Server
     // Note: these should all return void, to avoid awkward situations in
     // which client and server wait for one another's response and block
@@ -97,7 +105,11 @@ public enum ProtocolMethod {
     getActivateDescription    (Mode.CLIENT, String.class, CardView.class),
     concede                   (Mode.CLIENT, Void.TYPE),
     alphaStrike               (Mode.CLIENT, Void.TYPE),
-    reorderHand               (Mode.CLIENT, Void.TYPE, CardView.class, Integer.TYPE);
+    reorderHand               (Mode.CLIENT, Void.TYPE, CardView.class, Integer.TYPE),
+
+    // Delta sync - Client -> Server
+    ackSync                   (Mode.CLIENT, Void.TYPE, Long.TYPE),
+    reconnectRequest          (Mode.CLIENT, Void.TYPE, String.class, String.class);
 
     private enum Mode {
         SERVER(IGuiGame.class),

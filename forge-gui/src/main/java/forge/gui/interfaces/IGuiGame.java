@@ -15,6 +15,8 @@ import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.net.DeltaPacket;
+import forge.gamemodes.net.FullStatePacket;
 import forge.gui.control.PlaybackSpeed;
 import forge.interfaces.IGameController;
 import forge.item.PaperCard;
@@ -278,4 +280,53 @@ public interface IGuiGame {
     void clearAutoYields();
 
     void setCurrentPlayer(PlayerView player);
+
+    // Delta sync and reconnection methods
+    /**
+     * Apply a delta update packet to the local game state.
+     * @param packet the delta packet containing changes
+     */
+    void applyDelta(DeltaPacket packet);
+
+    /**
+     * Handle a full state synchronization.
+     * Used for initial connection and recovery from desync.
+     * @param packet the full state packet
+     */
+    void fullStateSync(FullStatePacket packet);
+
+    /**
+     * Handle game paused notification.
+     * Called when another player disconnects.
+     * @param message the pause message to display
+     */
+    void gamePaused(String message);
+
+    /**
+     * Handle game resumed notification.
+     * Called when the disconnected player reconnects.
+     */
+    void gameResumed();
+
+    /**
+     * Handle successful reconnection.
+     * @param packet the full state packet with restored game state
+     */
+    void reconnectAccepted(FullStatePacket packet);
+
+    /**
+     * Handle rejected reconnection.
+     * @param reason the reason the reconnection was rejected
+     */
+    void reconnectRejected(String reason);
+
+    /**
+     * Set the rememberd actions (for replay/undo support).
+     */
+    void setRememberedActions();
+
+    /**
+     * Move to the next remembered action.
+     */
+    void nextRememberedAction();
 }

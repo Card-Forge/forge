@@ -8,6 +8,8 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.player.PlayerView;
+import forge.gamemodes.net.DeltaPacket;
+import forge.gamemodes.net.FullStatePacket;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.control.PlaybackSpeed;
@@ -850,7 +852,79 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         daytime = null;
     }
 
-    public void updateDependencies() {        
+    public void updateDependencies() {
     }
     // End of Choice code
+
+    // Delta sync and reconnection default implementations
+
+    @Override
+    public void applyDelta(DeltaPacket packet) {
+        // Apply delta changes to the local game state
+        // The actual property changes are handled by the network serialization layer
+        // when the packet is received - this method is called after deserialization.
+
+        // For now, we just need to send an acknowledgment back to the server
+        // to confirm we received the delta packet
+        if (packet != null) {
+            IGameController controller = getGameController();
+            if (controller != null) {
+                controller.ackSync(packet.getSequenceNumber());
+            }
+        }
+    }
+
+    @Override
+    public void fullStateSync(FullStatePacket packet) {
+        // Default implementation - apply the full state
+        if (packet != null && packet.getGameView() != null) {
+            setGameView(packet.getGameView());
+
+            // Send acknowledgment
+            IGameController controller = getGameController();
+            if (controller != null) {
+                controller.ackSync(packet.getSequenceNumber());
+            }
+        }
+    }
+
+    @Override
+    public void gamePaused(String message) {
+        // Default implementation - show a message and pause
+        setgamePause(true);
+        if (message != null && !message.isEmpty()) {
+            message(message, "Game Paused");
+        }
+    }
+
+    @Override
+    public void gameResumed() {
+        // Default implementation - resume the game
+        setgamePause(false);
+    }
+
+    @Override
+    public void reconnectAccepted(FullStatePacket packet) {
+        // Default implementation - treat as a full state sync
+        // The fullStateSync method will handle both state application and acknowledgment
+        fullStateSync(packet);
+    }
+
+    @Override
+    public void reconnectRejected(String reason) {
+        // Default implementation - show an error
+        if (reason != null && !reason.isEmpty()) {
+            showErrorDialog(reason, "Reconnection Failed");
+        }
+    }
+
+    @Override
+    public void setRememberedActions() {
+        // Default implementation - no-op for local games
+    }
+
+    @Override
+    public void nextRememberedAction() {
+        // Default implementation - no-op for local games
+    }
 }

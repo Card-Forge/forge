@@ -13,6 +13,8 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.AbstractGuiGame;
+import forge.gamemodes.net.DeltaPacket;
+import forge.gamemodes.net.FullStatePacket;
 import forge.gamemodes.net.GameProtocolSender;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.item.PaperCard;
@@ -29,9 +31,68 @@ import java.util.Map;
 
 public class NetGuiGame extends AbstractGuiGame {
 
-    private final GameProtocolSender sender;
-    public NetGuiGame(final IToClient client) {
+    private GameProtocolSender sender;
+    private final DeltaSyncManager deltaSyncManager;
+    private final int clientIndex;
+    private boolean useDeltaSync = true; // Enable delta sync by default
+    private boolean initialSyncSent = false;
+
+    public NetGuiGame(final RemoteClient client) {
         this.sender = new GameProtocolSender(client);
+        this.deltaSyncManager = new DeltaSyncManager();
+        this.clientIndex = client.getIndex();
+    }
+
+    /**
+     * Get the client index for this GUI.
+     * @return the client's player index
+     */
+    public int getClientIndex() {
+        return clientIndex;
+    }
+
+    /**
+     * Update the client connection for this GUI.
+     * Called when a player reconnects with a new connection.
+     * @param client the new client connection
+     */
+    public void updateClient(final RemoteClient client) {
+        this.sender = new GameProtocolSender(client);
+        System.out.println("[NetGuiGame] Updated client connection for player " + clientIndex);
+    }
+
+    /**
+     * Enable or disable delta sync mode.
+     * When disabled, falls back to sending full state on every update.
+     * @param enabled true to enable delta sync
+     */
+    public void setDeltaSyncEnabled(boolean enabled) {
+        this.useDeltaSync = enabled;
+    }
+
+    /**
+     * Check if delta sync is enabled.
+     * @return true if delta sync is enabled
+     */
+    public boolean isDeltaSyncEnabled() {
+        return useDeltaSync;
+    }
+
+    /**
+     * Get the delta sync manager for this game.
+     * @return the DeltaSyncManager instance
+     */
+    public DeltaSyncManager getDeltaSyncManager() {
+        return deltaSyncManager;
+    }
+
+    /**
+     * Process a sync acknowledgment from the client.
+     * @param sequenceNumber the acknowledged sequence number
+     * @param clientIndex the client's player index
+     */
+    public void processAcknowledgment(long sequenceNumber, int clientIndex) {
+        deltaSyncManager.processAcknowledgment(clientIndex, sequenceNumber);
     }
 
     private void send(final ProtocolMethod method, final Object... args) {
@@ -42,8 +103,65 @@ public class NetGuiGame extends AbstractGuiGame {
         return sender.sendAndWait(method, args);
     }
 
+    /**
+     * Send a game view update to the client.
+     * Uses delta sync if enabled and initial sync has been sent,
+     * otherwise sends the full game state.
+     */
     public void updateGameView() {
-        send(ProtocolMethod.setGameView, getGameView());
+        GameView gameView = getGameView();
+        if (gameView == null) {
+            return;
+        }
+
+        if (!useDeltaSync || !initialSyncSent) {
+            // Fall back to full state sync
+            send(ProtocolMethod.setGameView, gameView);
+            return;
+        }
+
+        // Use delta sync
+        DeltaPacket delta = deltaSyncManager.collectDeltas(gameView);
+        if (delta != null && !delta.isEmpty()) {
+            send(ProtocolMethod.applyDelta, delta);
+        }
+    }
+
+    /**
+     * Send the full game state to the client.
+     * Used for initial connection and reconnection.
+     */
+    public void sendFullState() {
+        GameView gameView = getGameView();
+        if (gameView == null) {
+            return;
+        }
+
+        FullStatePacket packet = deltaSyncManager.createFullStatePacket(gameView);
+        send(ProtocolMethod.fullStateSync, packet);
+        initialSyncSent = true;
+
+        // Clear all change flags since we've sent everything
+        deltaSyncManager.clearAllChanges(gameView);
+    }
+
+    /**
+     * Send full state for reconnection with session credentials.
+     * @param sessionId the session identifier
+     * @param sessionToken the session token
+     */
+    public void sendFullStateForReconnect(String sessionId, String sessionToken) {
+        GameView gameView = getGameView();
+        if (gameView == null) {
+            return;
+        }
+
+        FullStatePacket packet = deltaSyncManager.createFullStatePacketForReconnect(gameView, sessionId, sessionToken);
+        send(ProtocolMethod.reconnectAccepted, packet);
+        initialSyncSent = true;
+
+        // Clear all change flags since we've sent everything
+        deltaSyncManager.clearAllChanges(gameView);
     }
 
     @Override
@@ -56,11 +174,42 @@ public class NetGuiGame extends AbstractGuiGame {
     public void openView(final TrackableCollection<PlayerView> myPlayers) {
         send(ProtocolMethod.openView, myPlayers);
         updateGameView();
+        // Send session credentials after opening the view
+        sendSessionCredentials();
+    }
+
+    /**
+     * Send session credentials to the client for reconnection support.
+     * This must be called after the initial game view is sent.
+     */
+    private void sendSessionCredentials() {
+        GameSession session = FServerManager.getInstance().getCurrentGameSession();
+        if (session != null) {
+            PlayerSession playerSession = session.getPlayerSession(clientIndex);
+            if (playerSession != null) {
+                // Send credentials via fullStateSync with session info
+                GameView gameView = getGameView();
+                if (gameView != null) {
+                    FullStatePacket packet = new FullStatePacket(
+                            deltaSyncManager.getCurrentSequence(),
+                            gameView,
+                            session.getSessionId(),
+                            playerSession.getSessionToken()
+                    );
+                    send(ProtocolMethod.fullStateSync, packet);
+                    initialSyncSent = true;
+                    // Clear all change flags since we've sent everything
+                    deltaSyncManager.clearAllChanges(gameView);
+                }
+            }
+        }
     }
 
     @Override
     public void afterGameEnd() {
         send(ProtocolMethod.afterGameEnd);
+        // End the game session when the match ends
+        FServerManager.getInstance().onGameEnded();
     }
 
     @Override

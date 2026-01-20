@@ -1,6 +1,7 @@
 package forge.trackable;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.Map;
@@ -129,5 +130,45 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
             set(key, key.deserialize(td, props.get(key)));
         }
         changedProps.clear();
+    }
+
+    // Delta sync support methods
+    /**
+     * Check if this object has any changed properties that need to be synced.
+     * @return true if there are pending changes
+     */
+    public final boolean hasChanges() {
+        return !changedProps.isEmpty();
+    }
+
+    /**
+     * Get an unmodifiable view of the changed properties.
+     * Changes are not cleared until clearChanges() is called.
+     * @return set of properties that have changed
+     */
+    public final Set<TrackableProperty> getChangedProps() {
+        return Collections.unmodifiableSet(changedProps);
+    }
+
+    /**
+     * Clear the change tracking flags after changes have been acknowledged.
+     * Should be called after delta has been sent and acknowledged by client.
+     */
+    public final void clearChanges() {
+        changedProps.clear();
+    }
+
+    /**
+     * Serialize only the changed properties (for delta sync).
+     * Does not clear the change flags - call clearChanges() separately after acknowledgment.
+     * @param ts the serializer to write to
+     */
+    public final void serializeChangedOnly(final TrackableSerializer ts) {
+        ts.write(changedProps.size());
+        for (TrackableProperty key : changedProps) {
+            ts.write(TrackableProperty.serialize(key));
+            key.serialize(ts, props.get(key));
+        }
+        // Note: Does not clear changedProps - that's done on acknowledgment
     }
 }

@@ -121,6 +121,16 @@ public class NetGameController implements IGameController {
         send(ProtocolMethod.reorderHand, card, index);
     }
 
+    @Override
+    public void ackSync(final long sequenceNumber) {
+        send(ProtocolMethod.ackSync, sequenceNumber);
+    }
+
+    @Override
+    public void reconnectRequest(final String sessionId, final String token) {
+        send(ProtocolMethod.reconnectRequest, sessionId, token);
+    }
+
     private IMacroSystem macros;
     @Override
     public IMacroSystem macros() {

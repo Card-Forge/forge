@@ -70,5 +70,9 @@ public final class ServerGameLobby extends GameLobby {
 
     @Override
     protected void onGameStarted() {
+        // Create and initialize the game session for reconnection support
+        FServerManager server = FServerManager.getInstance();
+        server.createGameSession();
+        server.setGameInProgress(true);
     }
 }

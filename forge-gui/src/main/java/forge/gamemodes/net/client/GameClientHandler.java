@@ -11,6 +11,7 @@ import forge.gamemodes.net.IRemote;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.gamemodes.net.ReplyPool;
 import forge.gamemodes.net.event.LoginEvent;
+import forge.gamemodes.net.event.ReconnectRequestEvent;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.ILobbyListener;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -67,6 +68,29 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
     @Override
     protected void beforeCall(final ProtocolMethod protocolMethod, final Object[] args) {
         switch (protocolMethod) {
+            case fullStateSync:
+                // Handle session credentials from the server
+                if (args.length > 0 && args[0] instanceof forge.gamemodes.net.FullStatePacket) {
+                    forge.gamemodes.net.FullStatePacket packet = (forge.gamemodes.net.FullStatePacket) args[0];
+                    if (packet.getSessionId() != null && packet.getSessionToken() != null) {
+                        client.setSessionCredentials(packet.getSessionId(), packet.getSessionToken());
+                        System.out.println("Stored session credentials for reconnection support");
+                    }
+                    // Clear reconnecting flag if this was a reconnection
+                    client.clearReconnecting();
+                }
+                break;
+            case reconnectAccepted:
+                // Handle successful reconnection
+                if (args.length > 0 && args[0] instanceof forge.gamemodes.net.FullStatePacket) {
+                    forge.gamemodes.net.FullStatePacket packet = (forge.gamemodes.net.FullStatePacket) args[0];
+                    if (packet.getSessionId() != null && packet.getSessionToken() != null) {
+                        client.setSessionCredentials(packet.getSessionId(), packet.getSessionToken());
+                    }
+                    client.clearReconnecting();
+                    System.out.println("Reconnection successful - game state restored");
+                }
+                break;
             case openView:
                 // only need one **match**
                 if (this.match == null) {
@@ -288,7 +312,20 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
     @Override
     public void channelActive(final ChannelHandlerContext ctx) {
         // Don't use send() here, as this.channel is not yet set!
-        ctx.channel().writeAndFlush(new LoginEvent(FModel.getPreferences().getPref(FPref.PLAYER_NAME), Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",")[0]), Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_SLEEVES).split(",")[0])));
+        if (client.isReconnecting() && client.canReconnect()) {
+            // Send reconnection request instead of login
+            ctx.channel().writeAndFlush(new ReconnectRequestEvent(
+                    client.getSessionId(),
+                    client.getSessionToken()
+            ));
+        } else {
+            // Normal login
+            ctx.channel().writeAndFlush(new LoginEvent(
+                    FModel.getPreferences().getPref(FPref.PLAYER_NAME),
+                    Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",")[0]),
+                    Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_SLEEVES).split(",")[0])
+            ));
+        }
     }
 
 }

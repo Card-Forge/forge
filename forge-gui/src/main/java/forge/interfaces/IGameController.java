@@ -45,4 +45,19 @@ public interface IGameController {
     String getActivateDescription(CardView card);
 
     void reorderHand(CardView card, int index);
+
+    // Delta sync and reconnection methods (client -> server)
+
+    /**
+     * Acknowledge receipt of a delta or full state packet.
+     * @param sequenceNumber the sequence number being acknowledged
+     */
+    void ackSync(long sequenceNumber);
+
+    /**
+     * Request to reconnect to an existing game session.
+     * @param sessionId the session identifier
+     * @param token the session token for authentication
+     */
+    void reconnectRequest(String sessionId, String token);
 }
