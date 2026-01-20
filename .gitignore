@@ -1,4 +1,4 @@
-# Ignore IDEA config files
+2# Ignore IDEA config files
 
 *.idea
 *.iml
@@ -94,3 +94,7 @@ forge-gui/tools/PerSetTrackingResults
 # Ignore python temporaries
 __pycache__
 *.pyc
+
+# Ignore Claude Code configuration
+CLAUDE.md
+.claude/

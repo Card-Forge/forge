@@ -19,43 +19,67 @@ import java.nio.charset.StandardCharsets;
  */
 public class NetworkTrackableSerializer {
     private final DataOutputStream dos;
+    private int bytesWritten = 0;
 
     public NetworkTrackableSerializer(DataOutputStream dos) {
         this.dos = dos;
     }
 
+    /**
+     * Get the number of bytes written so far.
+     * Used for debugging serialization issues.
+     */
+    public int getBytesWritten() {
+        return bytesWritten;
+    }
+
+    /**
+     * Reset the byte counter.
+     */
+    public void resetBytesWritten() {
+        this.bytesWritten = 0;
+    }
+
     public void write(String value) throws IOException {
         if (value == null) {
             dos.writeInt(-1);
+            bytesWritten += 4;
         } else {
             byte[] bytes = value.getBytes(StandardCharsets.UTF_8);
             dos.writeInt(bytes.length);
             dos.write(bytes);
+            bytesWritten += 4 + bytes.length;
         }
     }
 
     public void write(boolean value) throws IOException {
         dos.writeBoolean(value);
+        bytesWritten += 1;
     }
 
     public void write(int value) throws IOException {
         dos.writeInt(value);
+        bytesWritten += 4;
     }
 
     public void write(byte value) throws IOException {
         dos.writeByte(value);
+        bytesWritten += 1;
     }
 
     public void write(long value) throws IOException {
         dos.writeLong(value);
+        bytesWritten += 8;
     }
 
     public void write(float value) throws IOException {
         dos.writeFloat(value);
+        bytesWritten += 4;
     }
 
     public void write(double value) throws IOException {
         dos.writeDouble(value);
+        bytesWritten += 8;
     }
 
     /**
@@ -66,10 +90,13 @@ public class NetworkTrackableSerializer {
     public void write(TrackableCollection<? extends TrackableObject> collection) throws IOException {
         if (collection == null) {
             dos.writeInt(-1);
+            bytesWritten += 4;
         } else {
             dos.writeInt(collection.size());
+            bytesWritten += 4;
             for (TrackableObject obj : collection) {
                 dos.writeInt(obj == null ? -1 : obj.getId());
+                bytesWritten += 4;
             }
         }
     }
@@ -80,6 +107,7 @@ public class NetworkTrackableSerializer {
      */
     public void writeObjectRef(TrackableObject obj) throws IOException {
         dos.writeInt(obj == null ? -1 : obj.getId());
+        bytesWritten += 4;
     }
 
     /**

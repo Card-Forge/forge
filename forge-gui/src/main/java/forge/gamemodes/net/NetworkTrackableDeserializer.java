@@ -20,43 +20,67 @@ import java.nio.charset.StandardCharsets;
 public class NetworkTrackableDeserializer {
     private final DataInputStream dis;
     private final Tracker tracker;
+    private int bytesRead = 0;
 
     public NetworkTrackableDeserializer(DataInputStream dis, Tracker tracker) {
         this.dis = dis;
         this.tracker = tracker;
     }
 
+    /**
+     * Get the number of bytes read so far.
+     * Used for debugging deserialization issues.
+     */
+    public int getBytesRead() {
+        return bytesRead;
+    }
+
+    /**
+     * Reset the byte counter.
+     */
+    public void resetBytesRead() {
+        this.bytesRead = 0;
+    }
+
     public String readString() throws IOException {
         int length = dis.readInt();
+        bytesRead += 4;
         if (length == -1) {
             return null;
         }
         byte[] bytes = new byte[length];
         dis.readFully(bytes);
+        bytesRead += length;
         return new String(bytes, StandardCharsets.UTF_8);
     }
 
     public boolean readBoolean() throws IOException {
+        bytesRead += 1;
         return dis.readBoolean();
     }
 
     public int readInt() throws IOException {
+        bytesRead += 4;
         return dis.readInt();
     }
 
     public byte readByte() throws IOException {
+        bytesRead += 1;
         return dis.readByte();
     }
 
     public long readLong() throws IOException {
+        bytesRead += 8;
         return dis.readLong();
     }
 
     public float readFloat() throws IOException {
+        bytesRead += 4;
         return dis.readFloat();
     }
 
     public double readDouble() throws IOException {
+        bytesRead += 8;
         return dis.readDouble();
     }
 
@@ -68,6 +92,7 @@ public class NetworkTrackableDeserializer {
     @SuppressWarnings("unchecked")
     public <T extends TrackableObject> T readObject(TrackableObjectType<T> type) throws IOException {
         int id = dis.readInt();
+        bytesRead += 4;
         if (id == -1) {
             return null;
         }
@@ -107,6 +132,7 @@ public class NetworkTrackableDeserializer {
     public <T extends TrackableObject> TrackableCollection<T> readCollection(
             TrackableObjectType<T> type, TrackableCollection<T> oldValue) throws IOException {
         int size = dis.readInt();
+        bytesRead += 4;
         if (size == -1) {
             return null;
         }
@@ -115,6 +141,7 @@ public class NetworkTrackableDeserializer {
         int notFoundCount = 0;
         for (int i = 0; i < size; i++) {
             int id = dis.readInt();
+            bytesRead += 4;
             if (id == -1) {
                 collection.add(null);
             } else if (tracker != null) {

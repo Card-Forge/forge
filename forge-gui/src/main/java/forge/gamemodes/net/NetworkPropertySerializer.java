@@ -9,7 +9,6 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.card.CounterType;
 import forge.game.player.PlayerView;
 import forge.trackable.TrackableCollection;
-import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.trackable.TrackableTypes;
 import forge.trackable.TrackableTypes.TrackableType;
@@ -34,6 +33,9 @@ public final class NetworkPropertySerializer {
     private static final int MARKER_PRESENT = 1;
     private static final int MARKER_INLINE_OBJECT = 2;
     private static final int MARKER_SKIP = 3;
+
+    // Debug flag for verbose logging
+    private static final boolean DEBUG_CSV_SERIALIZATION = true;
 
     /**
      * Data holder for deserialized CardStateView.
@@ -208,21 +210,41 @@ public final class NetworkPropertySerializer {
         }
         // CardStateView - serialize inline with all properties
         else if (type == TrackableTypes.CardStateViewType) {
+            int startPos = nts.getBytesWritten();
             nts.write(MARKER_INLINE_OBJECT);
             CardStateView csv = (CardStateView) value;
             nts.write(csv.getId());
-            nts.write(csv.getState().name());  // CardStateName as string
+            String stateName = csv.getState().name();
+            nts.write(stateName);  // CardStateName as string
             // Serialize all properties of the CardStateView
             @SuppressWarnings("unchecked")
             Map<TrackableProperty, Object> csvProps = csv.getProps();
             if (csvProps != null && !csvProps.isEmpty()) {
                 nts.write(csvProps.size());
+                if (DEBUG_CSV_SERIALIZATION) {
+                    System.out.println(String.format("[CSV-Serialize] Start at byte %d, ID=%d, state=%s, propCount=%d",
+                            startPos, csv.getId(), stateName, csvProps.size()));
+                }
                 for (Map.Entry<TrackableProperty, Object> entry : csvProps.entrySet()) {
+                    int propStartPos = nts.getBytesWritten();
                     nts.write(entry.getKey().ordinal());
                     serialize(nts, entry.getKey(), entry.getValue());  // recursive
+                    if (DEBUG_CSV_SERIALIZATION) {
+                        int propBytes = nts.getBytesWritten() - propStartPos;
+                        System.out.println(String.format("[CSV-Serialize]   Prop %s (ord=%d): %d bytes, type=%s",
+                                entry.getKey(), entry.getKey().ordinal(), propBytes, entry.getKey().getType()));
+                    }
                 }
             } else {
                 nts.write(0);
+                if (DEBUG_CSV_SERIALIZATION) {
+                    System.out.println(String.format("[CSV-Serialize] Start at byte %d, ID=%d, state=%s, propCount=0",
+                            startPos, csv.getId(), stateName));
+                }
+            }
+            if (DEBUG_CSV_SERIALIZATION) {
+                int totalBytes = nts.getBytesWritten() - startPos;
+                System.out.println(String.format("[CSV-Serialize] Total bytes for CSV ID=%d: %d", csv.getId(), totalBytes));
             }
         }
         // StackItemView - skip, will be synced via full state
@@ -266,7 +288,19 @@ public final class NetworkPropertySerializer {
         TrackableType<?> type = prop.getType();
 
         // Check marker
+        int markerPos = ntd.getBytesRead();
         int marker = ntd.readInt();
+
+        // Validate marker value
+        if (marker != MARKER_NULL && marker != MARKER_PRESENT && marker != MARKER_INLINE_OBJECT && marker != MARKER_SKIP) {
+            System.err.println(String.format(
+                    "[Deserialize] WARNING: Unexpected marker %d (0x%08X) at byte %d for property %s (type=%s)",
+                    marker, marker, markerPos, prop, type));
+            System.err.println("[Deserialize] Expected markers: NULL=-1, PRESENT=1, INLINE_OBJECT=2, SKIP=3");
+            throw new IOException(String.format("Invalid marker %d (0x%08X) at byte %d for property %s",
+                    marker, marker, markerPos, prop));
+        }
+
         if (marker == MARKER_NULL) {
             return null;
         }
@@ -415,18 +449,48 @@ public final class NetworkPropertySerializer {
         }
         // CardStateView - read inline data
         else if (type == TrackableTypes.CardStateViewType) {
+            int startPos = ntd.getBytesRead();
             int csvId = ntd.readInt();
             String stateName = ntd.readString();
             CardStateName csvState = CardStateName.valueOf(stateName);
             int propCount = ntd.readInt();
 
+            if (DEBUG_CSV_SERIALIZATION) {
+                System.out.println(String.format("[CSV-Deserialize] Start at byte %d, ID=%d, state=%s, propCount=%d",
+                        startPos, csvId, stateName, propCount));
+            }
+
             Map<TrackableProperty, Object> props = new HashMap<>();
             for (int i = 0; i < propCount; i++) {
+                int propStartPos = ntd.getBytesRead();
                 int ordinal = ntd.readInt();
+
+                // Validate ordinal before deserializing
+                if (ordinal < 0 || ordinal >= TrackableProperty.values().length) {
+                    System.err.println(String.format(
+                            "[CSV-Deserialize] ERROR: Invalid ordinal %d (0x%08X) at byte %d for prop %d/%d in CSV ID=%d",
+                            ordinal, ordinal, propStartPos, i + 1, propCount, csvId));
+                    System.err.println(String.format("[CSV-Deserialize] Valid ordinal range: 0-%d",
+                            TrackableProperty.values().length - 1));
+                    throw new IOException("Invalid TrackableProperty ordinal: " + ordinal +
+                            " at byte position " + propStartPos);
+                }
+
                 TrackableProperty csvProp = TrackableProperty.deserialize(ordinal);
                 // Recursively deserialize the property value
                 Object propValue = deserialize(ntd, csvProp, null);
                 props.put(csvProp, propValue);
+
+                if (DEBUG_CSV_SERIALIZATION) {
+                    int propBytes = ntd.getBytesRead() - propStartPos;
+                    System.out.println(String.format("[CSV-Deserialize]   Prop %s (ord=%d): %d bytes, type=%s",
+                            csvProp, ordinal, propBytes, csvProp.getType()));
+                }
+            }
+
+            if (DEBUG_CSV_SERIALIZATION) {
+                int totalBytes = ntd.getBytesRead() - startPos;
+                System.out.println(String.format("[CSV-Deserialize] Total bytes for CSV ID=%d: %d", csvId, totalBytes));
             }
 
             // Return as CardStateViewData to be handled by applyDeltaToObject

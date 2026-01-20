@@ -4,103 +4,6 @@ This document describes the network optimization features implemented in this br
 
 ---
 
-## Recent Changes (Post-Initial Commit)
-
-The following improvements were made after the initial delta sync and reconnection commit (`910e1d4977`):
-
-### 1. New Object Handling in Delta Sync
-
-**Problem**: Delta sync only sent changed properties for existing objects. When new objects (cards drawn, spells cast) appeared during gameplay, the client had no way to create them - it would just receive property updates for non-existent object IDs.
-
-**Solution**: Extended `DeltaPacket` with `NewObjectData` to send full object data for newly created objects.
-
-**Changes**:
-- `DeltaPacket.java`: Added `NewObjectData` inner class with type constants (`TYPE_CARD_VIEW`, `TYPE_PLAYER_VIEW`, etc.) and `newObjects` map
-- `DeltaSyncManager.java`: Added `sentObjectIds` set to track which objects have been sent; new objects get full serialization via `serializeNewObject()`, existing objects only send changed properties
-- `AbstractGuiGame.java`: Added `createObjectFromData()` to instantiate CardView, PlayerView, StackItemView, and CombatView on the client
-
-### 2. Compact Binary Serialization
-
-**Problem**: Java's built-in `ObjectOutputStream` serialization was producing massive packets (~96KB for a single CardView) because it serialized entire object graphs including all referenced objects.
-
-**Solution**: Implemented custom binary serialization that writes object references as 4-byte IDs only.
-
-**Changes**:
-- `DeltaSyncManager.java`: Switched from `ObjectOutputStream` to `DataOutputStream` with `NetworkTrackableSerializer`
-- `AbstractGuiGame.java`: Added `applyDeltaToObject()` using `NetworkTrackableDeserializer`
-- **NEW FILES**:
-  - `NetworkPropertySerializer.java` - Type-aware property serialization
-  - `NetworkTrackableSerializer.java` - Writes TrackableObjects as IDs
-  - `NetworkTrackableDeserializer.java` - Reads TrackableObjects by ID lookup
-
-**Result**: CardView serialization reduced from ~96KB to ~200 bytes (99.8% reduction).
-
-### 3. Tracker Initialization After Deserialization
-
-**Problem**: The `Tracker` field in `TrackableObject` is transient (not serialized), so deserialized GameViews had null trackers, causing `NullPointerException` when accessing properties.
-
-**Solution**: Added recursive tracker initialization after receiving game state.
-
-**Changes**:
-- `AbstractGuiGame.java`: Added `ensureTrackerInitialized()` and `setTrackerRecursively()` methods that traverse all TrackableObjects in the GameView hierarchy and set their tracker reference
-
-### 4. Session Credential Timing Fix
-
-**Problem**: Session credentials were being sent during `openView()`, but the game session wasn't created until after `startMatch()` completed, resulting in null session/credentials.
-
-**Solution**: Reordered initialization so game session is created BEFORE starting the match.
-
-**Changes**:
-- `GameLobby.java`: Moved `onGameStarted()` call to execute before `hostedMatch.startMatch()`
-- `NetGuiGame.java`: Added null checks and debug logging in `sendSessionCredentials()`
-
-### 5. Immediate GameView Setting
-
-**Problem**: The `setGameView` protocol method was dispatching to the EDT asynchronously, but subsequent handlers (like `openView`) needed the GameView to be available immediately in the Netty thread.
-
-**Solution**: Set the GameView synchronously before EDT dispatch.
-
-**Changes**:
-- `GameClientHandler.java`: Added immediate `gui.setGameView()` call in `beforeCall()` for the `setGameView` method
-
-### 6. Change Flag Management
-
-**Problem**: Change flags on TrackableObjects weren't being cleared after sending deltas, causing delta packets to accumulate all historical changes.
-
-**Solution**: Clear change flags after sending delta packets and mark objects as "sent" after full state sync.
-
-**Changes**:
-- `NetGuiGame.java`: Added `deltaSyncManager.clearAllChanges(gameView)` after sending delta packets
-- `DeltaSyncManager.java`: Added `markObjectsAsSent(GameView)` method to mark all objects in the hierarchy as already sent to the client
-
-### 7. StackItemView Network Constructor
-
-**Problem**: `StackItemView` required a `StackItem` parameter in its constructor, making it impossible to create empty instances for network deserialization.
-
-**Solution**: Added a minimal constructor for network deserialization.
-
-**Changes**:
-- `StackItemView.java`: Added `StackItemView(int id0, Tracker tracker)` constructor
-
-### 8. Bandwidth Monitoring
-
-**Added**: Debug logging to track bandwidth savings from delta sync.
-
-**Changes**:
-- `NetGuiGame.java`: Added bandwidth tracking fields (`totalDeltaBytes`, `totalFullStateBytes`, `deltaPacketCount`)
-- `NetGuiGame.java`: Added `estimateFullStateSize()` to compare delta size vs full state
-- Console logs show per-packet and cumulative bandwidth savings percentage
-
-### 9. Debug Logging
-
-Added diagnostic logging throughout the delta sync path:
-- `FServerManager.java`: Game session creation and player registration
-- `NetGuiGame.java`: Session credential flow
-- `DeltaSyncManager.java`: New object creation and delta collection
-- `AbstractGuiGame.java`: Full state sync object verification
-
----
-
 ## Overview
 
 The NetworkPlay branch introduces two major features to improve the multiplayer experience:
@@ -564,6 +467,132 @@ netGuiGame.setDeltaSyncEnabled(false); // Falls back to full state sync
 
 ---
 
+## Recent Changes (Post-Initial Commit)
+
+The following improvements were made after the initial delta sync and reconnection commit (`910e1d4977`):
+
+### 1. New Object Handling in Delta Sync
+
+**Problem**: Delta sync only sent changed properties for existing objects. When new objects (cards drawn, spells cast) appeared during gameplay, the client had no way to create them - it would just receive property updates for non-existent object IDs.
+
+**Solution**: Extended `DeltaPacket` with `NewObjectData` to send full object data for newly created objects.
+
+**Changes**:
+- `DeltaPacket.java`: Added `NewObjectData` inner class with type constants (`TYPE_CARD_VIEW`, `TYPE_PLAYER_VIEW`, etc.) and `newObjects` map
+- `DeltaSyncManager.java`: Added `sentObjectIds` set to track which objects have been sent; new objects get full serialization via `serializeNewObject()`, existing objects only send changed properties
+- `AbstractGuiGame.java`: Added `createObjectFromData()` to instantiate CardView, PlayerView, StackItemView, and CombatView on the client
+
+### 2. Compact Binary Serialization
+
+**Problem**: Java's built-in `ObjectOutputStream` serialization was producing massive packets (~96KB for a single CardView) because it serialized entire object graphs including all referenced objects.
+
+**Solution**: Implemented custom binary serialization that writes object references as 4-byte IDs only.
+
+**Changes**:
+- `DeltaSyncManager.java`: Switched from `ObjectOutputStream` to `DataOutputStream` with `NetworkTrackableSerializer`
+- `AbstractGuiGame.java`: Added `applyDeltaToObject()` using `NetworkTrackableDeserializer`
+- **NEW FILES**:
+  - `NetworkPropertySerializer.java` - Type-aware property serialization
+  - `NetworkTrackableSerializer.java` - Writes TrackableObjects as IDs
+  - `NetworkTrackableDeserializer.java` - Reads TrackableObjects by ID lookup
+
+**Result**: CardView serialization reduced from ~96KB to ~200 bytes (99.8% reduction).
+
+### 3. Tracker Initialization After Deserialization
+
+**Problem**: The `Tracker` field in `TrackableObject` is transient (not serialized), so deserialized GameViews had null trackers, causing `NullPointerException` when accessing properties.
+
+**Solution**: Added recursive tracker initialization after receiving game state.
+
+**Changes**:
+- `AbstractGuiGame.java`: Added `ensureTrackerInitialized()` and `setTrackerRecursively()` methods that traverse all TrackableObjects in the GameView hierarchy and set their tracker reference
+
+### 4. Session Credential Timing Fix
+
+**Problem**: Session credentials were being sent during `openView()`, but the game session wasn't created until after `startMatch()` completed, resulting in null session/credentials.
+
+**Solution**: Reordered initialization so game session is created BEFORE starting the match.
+
+**Changes**:
+- `GameLobby.java`: Moved `onGameStarted()` call to execute before `hostedMatch.startMatch()`
+- `NetGuiGame.java`: Added null checks and debug logging in `sendSessionCredentials()`
+
+### 5. Immediate GameView Setting
+
+**Problem**: The `setGameView` protocol method was dispatching to the EDT asynchronously, but subsequent handlers (like `openView`) needed the GameView to be available immediately in the Netty thread.
+
+**Solution**: Set the GameView synchronously before EDT dispatch.
+
+**Changes**:
+- `GameClientHandler.java`: Added immediate `gui.setGameView()` call in `beforeCall()` for the `setGameView` method
+
+### 6. Change Flag Management
+
+**Problem**: Change flags on TrackableObjects weren't being cleared after sending deltas, causing delta packets to accumulate all historical changes.
+
+**Solution**: Clear change flags after sending delta packets and mark objects as "sent" after full state sync.
+
+**Changes**:
+- `NetGuiGame.java`: Added `deltaSyncManager.clearAllChanges(gameView)` after sending delta packets
+- `DeltaSyncManager.java`: Added `markObjectsAsSent(GameView)` method to mark all objects in the hierarchy as already sent to the client
+
+### 7. StackItemView Network Constructor
+
+**Problem**: `StackItemView` required a `StackItem` parameter in its constructor, making it impossible to create empty instances for network deserialization.
+
+**Solution**: Added a minimal constructor for network deserialization.
+
+**Changes**:
+- `StackItemView.java`: Added `StackItemView(int id0, Tracker tracker)` constructor
+
+### 8. Bandwidth Monitoring
+
+**Added**: Debug logging to track bandwidth savings from delta sync.
+
+**Changes**:
+- `NetGuiGame.java`: Added bandwidth tracking fields (`totalDeltaBytes`, `totalFullStateBytes`, `deltaPacketCount`)
+- `NetGuiGame.java`: Added `estimateFullStateSize()` to compare delta size vs full state
+- Console logs show per-packet and cumulative bandwidth savings percentage
+
+### 9. Debug Logging
+
+Added diagnostic logging throughout the delta sync path:
+- `FServerManager.java`: Game session creation and player registration
+- `NetGuiGame.java`: Session credential flow
+- `DeltaSyncManager.java`: New object creation and delta collection
+- `AbstractGuiGame.java`: Full state sync object verification
+
+### 10. Delta Sync Deserialization Diagnostics
+
+**Problem**: When deserializing delta packets, CardStateView's nested properties were occasionally being read with invalid ordinal values (e.g., ordinal 1627389952 instead of valid 0-257), causing `ArrayIndexOutOfBoundsException` in `TrackableProperty.deserialize()`. This indicated a byte stream misalignment issue.
+
+**Solution**: Added comprehensive diagnostic infrastructure to identify and debug serialization misalignments.
+
+**Changes**:
+- `NetworkTrackableSerializer.java`: Added `bytesWritten` counter with `getBytesWritten()` and `resetBytesWritten()` methods; all write methods now track byte counts
+- `NetworkTrackableDeserializer.java`: Added `bytesRead` counter with `getBytesRead()` and `resetBytesRead()` methods; all read methods now track byte counts
+- `NetworkPropertySerializer.java`:
+  - Added `DEBUG_CSV_SERIALIZATION` flag for verbose CardStateView logging
+  - Added detailed logging during CardStateView serialize/deserialize (byte positions, property ordinals, byte counts)
+  - Added marker validation at start of `deserialize()` - throws `IOException` with position info if marker is unexpected (catches stream misalignment early)
+  - Added ordinal validation before `TrackableProperty.deserialize()` to prevent `ArrayIndexOutOfBoundsException`
+- `AbstractGuiGame.java`:
+  - Enhanced `applyDeltaToObject()` with detailed logging and ordinal validation
+  - Added `dumpHexBytes()` method for hex dump debugging when errors occur
+  - Enhanced `setPropertyValue()` to handle CardStateView null cases:
+    - If `CurrentState` is null (shouldn't happen), attempts to create it via reflection
+    - If `AlternateState`/`LeftSplitState`/`RightSplitState` doesn't exist, creates it via `createCardStateView()`
+    - Logs warnings when state mismatches occur
+  - Added `createCardStateView()` method using reflection to create CardStateView instances
+
+**Debugging Output**: When deserialization errors occur, the console now shows:
+- Byte position where the error occurred
+- The invalid ordinal/marker value (both decimal and hex)
+- Hex dump of surrounding bytes in the delta packet
+- Which property in which object was being processed
+
+---
+
 ## Future Improvements
 
 1. ~~**Bandwidth Metrics**: Add monitoring for packet sizes to verify delta sync effectiveness~~ ✓ Implemented
@@ -578,7 +607,7 @@ netGuiGame.setDeltaSyncEnabled(false); // Falls back to full state sync
 
 ## Known Limitations
 
-1. `CardStateView` handling for `AlternateState` may skip updates if the state doesn't exist yet on the client
+1. ~~`CardStateView` handling for `AlternateState` may skip updates if the state doesn't exist yet on the client~~ ✓ Fixed - now creates CardStateView on demand
 2. Objects are not explicitly removed from Tracker - relies on garbage collection when no longer referenced
 3. Debug logging is verbose - should be reduced or made configurable for production
 

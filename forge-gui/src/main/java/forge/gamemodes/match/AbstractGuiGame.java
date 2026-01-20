@@ -1167,10 +1167,28 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         NetworkTrackableDeserializer ntd = new NetworkTrackableDeserializer(dis, tracker);
 
         int propCount = dis.readInt();
+        ntd.resetBytesRead(); // Reset counter after the initial propCount read
         Map<TrackableProperty, Object> props = obj.getProps();
 
+        System.out.println(String.format("[DeltaSync] applyDeltaToObject: objId=%d, objType=%s, deltaBytes=%d, propCount=%d",
+                obj.getId(), obj.getClass().getSimpleName(), deltaBytes.length, propCount));
+
         for (int i = 0; i < propCount; i++) {
+            int bytePosBefore = ntd.getBytesRead() + 4; // +4 for the initial propCount
             int ordinal = dis.readInt();
+
+            // Validate ordinal before deserialization
+            if (ordinal < 0 || ordinal >= TrackableProperty.values().length) {
+                System.err.println(String.format(
+                        "[DeltaSync] ERROR: Invalid ordinal %d (0x%08X) at byte %d for prop %d/%d in object %d (%s)",
+                        ordinal, ordinal, bytePosBefore, i + 1, propCount, obj.getId(), obj.getClass().getSimpleName()));
+                System.err.println(String.format("[DeltaSync] Valid ordinal range: 0-%d",
+                        TrackableProperty.values().length - 1));
+                System.err.println("[DeltaSync] Hex dump of delta bytes:");
+                dumpHexBytes(deltaBytes, bytePosBefore);
+                throw new RuntimeException("Invalid TrackableProperty ordinal: " + ordinal);
+            }
+
             TrackableProperty prop = TrackableProperty.deserialize(ordinal);
             Object oldValue = props != null ? props.get(prop) : null;
 
@@ -1179,9 +1197,65 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 // Use reflection to call the protected set method
                 setPropertyValue(obj, prop, value);
             } catch (Exception e) {
-                System.err.println("[DeltaSync] Error deserializing property " + prop + ": " + e.getMessage());
+                int bytePosAfter = ntd.getBytesRead() + 4; // +4 for the initial propCount
+                System.err.println(String.format(
+                        "[DeltaSync] Error deserializing property %s (ordinal=%d) at bytes %d-%d: %s",
+                        prop, ordinal, bytePosBefore, bytePosAfter, e.getMessage()));
+                System.err.println("[DeltaSync] Hex dump of delta bytes:");
+                dumpHexBytes(deltaBytes, bytePosBefore);
+                e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * Dump bytes in hex format for debugging serialization issues.
+     * Shows context around the error position.
+     */
+    private void dumpHexBytes(byte[] bytes, int errorPosition) {
+        StringBuilder sb = new StringBuilder();
+        int start = Math.max(0, errorPosition - 32);
+        int end = Math.min(bytes.length, errorPosition + 64);
+
+        sb.append(String.format("Bytes %d-%d (error at %d):%n", start, end - 1, errorPosition));
+
+        for (int i = start; i < end; i += 16) {
+            sb.append(String.format("%04d: ", i));
+
+            // Hex values
+            for (int j = 0; j < 16 && i + j < end; j++) {
+                if (i + j == errorPosition) {
+                    sb.append("[");
+                }
+                sb.append(String.format("%02X", bytes[i + j] & 0xFF));
+                if (i + j == errorPosition) {
+                    sb.append("]");
+                } else {
+                    sb.append(" ");
+                }
+            }
+
+            // Padding if needed
+            for (int j = Math.min(16, end - i); j < 16; j++) {
+                sb.append("   ");
+            }
+
+            sb.append(" | ");
+
+            // ASCII representation
+            for (int j = 0; j < 16 && i + j < end; j++) {
+                byte b = bytes[i + j];
+                if (b >= 32 && b < 127) {
+                    sb.append((char) b);
+                } else {
+                    sb.append('.');
+                }
+            }
+
+            sb.append(String.format("%n"));
+        }
+
+        System.err.println(sb.toString());
     }
 
     /**
@@ -1200,23 +1274,71 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 // Get the appropriate CardStateView based on the property
                 if (prop == TrackableProperty.CurrentState) {
                     csv = cardView.getCurrentState();
+                    if (csv == null) {
+                        // CurrentState should have been created by CardView constructor
+                        // If it's null, something is wrong - try to create it
+                        System.err.println("[DeltaSync] WARNING: CurrentState is null for CardView " + cardView.getId() +
+                                ", attempting to create with state=" + csvData.state);
+                        csv = createCardStateView(cardView, csvData.state);
+                        if (csv != null) {
+                            // Set the newly created CardStateView as CurrentState
+                            java.lang.reflect.Method setMethod = TrackableObject.class.getDeclaredMethod(
+                                    "set", TrackableProperty.class, Object.class);
+                            setMethod.setAccessible(true);
+                            setMethod.invoke(cardView, TrackableProperty.CurrentState, csv);
+                        }
+                    } else if (csv.getState() != csvData.state) {
+                        // State mismatch - log warning but continue with property application
+                        System.out.println(String.format(
+                                "[DeltaSync] CurrentState state mismatch for CardView %d: existing=%s, data=%s (will apply properties anyway)",
+                                cardView.getId(), csv.getState(), csvData.state));
+                    }
                 } else if (prop == TrackableProperty.AlternateState) {
                     csv = cardView.getAlternateState();
-                    // If AlternateState doesn't exist, we need to create it
-                    // But CardStateView is an inner class, so this is tricky
-                    // For now, skip if it doesn't exist - it will be created when needed
                     if (csv == null) {
-                        System.out.println("[DeltaSync] AlternateState doesn't exist on CardView " + cardView.getId() + ", skipping");
-                        return;
+                        // AlternateState doesn't exist - try to create it
+                        System.out.println("[DeltaSync] Creating AlternateState for CardView " + cardView.getId() +
+                                " with state=" + csvData.state);
+                        csv = createCardStateView(cardView, csvData.state);
+                        if (csv != null) {
+                            // Set the newly created CardStateView as AlternateState
+                            java.lang.reflect.Method setMethod = TrackableObject.class.getDeclaredMethod(
+                                    "set", TrackableProperty.class, Object.class);
+                            setMethod.setAccessible(true);
+                            setMethod.invoke(cardView, TrackableProperty.AlternateState, csv);
+                        }
+                    }
+                } else if (prop == TrackableProperty.LeftSplitState) {
+                    csv = cardView.getLeftSplitState();
+                    if (csv == null) {
+                        csv = createCardStateView(cardView, csvData.state);
+                        if (csv != null) {
+                            java.lang.reflect.Method setMethod = TrackableObject.class.getDeclaredMethod(
+                                    "set", TrackableProperty.class, Object.class);
+                            setMethod.setAccessible(true);
+                            setMethod.invoke(cardView, TrackableProperty.LeftSplitState, csv);
+                        }
+                    }
+                } else if (prop == TrackableProperty.RightSplitState) {
+                    csv = cardView.getRightSplitState();
+                    if (csv == null) {
+                        csv = createCardStateView(cardView, csvData.state);
+                        if (csv != null) {
+                            java.lang.reflect.Method setMethod = TrackableObject.class.getDeclaredMethod(
+                                    "set", TrackableProperty.class, Object.class);
+                            setMethod.setAccessible(true);
+                            setMethod.invoke(cardView, TrackableProperty.RightSplitState, csv);
+                        }
                     }
                 }
 
                 if (csv != null) {
-                    // Apply all deserialized properties to the existing CardStateView
+                    // Apply all deserialized properties to the CardStateView
                     java.lang.reflect.Method setMethod = TrackableObject.class.getDeclaredMethod(
                             "set", TrackableProperty.class, Object.class);
                     setMethod.setAccessible(true);
 
+                    int appliedCount = 0;
                     for (Map.Entry<TrackableProperty, Object> entry : csvData.properties.entrySet()) {
                         TrackableProperty csvProp = entry.getKey();
                         Object csvValue = entry.getValue();
@@ -1228,9 +1350,13 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                         }
 
                         setMethod.invoke(csv, csvProp, csvValue);
+                        appliedCount++;
                     }
-                    System.out.println(String.format("[DeltaSync] Applied %d properties to CardStateView (state=%s) of CardView %d",
-                            csvData.properties.size(), csvData.state, cardView.getId()));
+                    System.out.println(String.format("[DeltaSync] Applied %d/%d properties to CardStateView (state=%s) of CardView %d",
+                            appliedCount, csvData.properties.size(), csvData.state, cardView.getId()));
+                } else {
+                    System.err.println("[DeltaSync] Failed to get/create CardStateView for property " + prop +
+                            " on CardView " + cardView.getId());
                 }
                 return;
             }
@@ -1242,6 +1368,37 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             setMethod.invoke(obj, prop, value);
         } catch (Exception e) {
             System.err.println("[DeltaSync] Error setting property " + prop + " on object " + obj.getId() + ": " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Create a new CardStateView for a CardView using reflection to access the inner class constructor.
+     */
+    private CardStateView createCardStateView(CardView cardView, CardStateName state) {
+        try {
+            // Try to use the createAlternateState method if available
+            java.lang.reflect.Method createMethod = CardView.class.getDeclaredMethod(
+                    "createAlternateState", CardStateName.class);
+            createMethod.setAccessible(true);
+            return (CardStateView) createMethod.invoke(cardView, state);
+        } catch (NoSuchMethodException e) {
+            // Method doesn't exist, try direct constructor approach
+            try {
+                // CardStateView is an inner class, so we need the outer CardView instance
+                Class<?> csvClass = Class.forName("forge.game.card.CardView$CardStateView");
+                java.lang.reflect.Constructor<?> constructor = csvClass.getDeclaredConstructor(
+                        CardView.class, int.class, CardStateName.class, Tracker.class);
+                constructor.setAccessible(true);
+                Tracker tracker = cardView.getTracker();
+                return (CardStateView) constructor.newInstance(cardView, cardView.getId(), state, tracker);
+            } catch (Exception e2) {
+                System.err.println("[DeltaSync] Failed to create CardStateView via constructor: " + e2.getMessage());
+                return null;
+            }
+        } catch (Exception e) {
+            System.err.println("[DeltaSync] Failed to create CardStateView: " + e.getMessage());
+            return null;
         }
     }
 
