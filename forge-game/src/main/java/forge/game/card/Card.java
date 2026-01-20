@@ -120,7 +120,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     // changes by AF animate and continuous static effects
 
-    protected ICardChangedType changedTypeByText; // Layer 3 by Text Change
     // x=timestamp y=StaticAbility id
     private final Table<Long, Long, ICardChangedType> changedCardTypesByText = TreeBasedTable.create(); // Layer 3
     private final Table<Long, Long, ICardChangedType> changedCardTypesCharacterDefining = TreeBasedTable.create(); // Layer 4 CDA
@@ -4140,24 +4139,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         // If there are no changed types, just return an empty immutable list, which actually
         // produces a surprisingly large speedup by avoid lots of temp objects and making iteration
         // over the result much faster. (This function gets called a lot!)
-        if (changedCardTypesByText.isEmpty() && changedTypeByText == null && changedCardTypesCharacterDefining.isEmpty() && changedCardTypes.isEmpty()) {
+        if (changedCardTypesByText.isEmpty() && changedCardTypesCharacterDefining.isEmpty() && changedCardTypes.isEmpty()) {
             return ImmutableList.of();
         }
-        Iterable<ICardChangedType> byText = changedTypeByText == null ? ImmutableList.of() : ImmutableList.of(this.changedTypeByText);
         return ImmutableList.copyOf(Iterables.concat(
                 changedCardTypesByText.values(), // Layer 3
-                byText, // Layer 3 by Word Changes,
                 changedCardTypesCharacterDefining.values(), // Layer 4
-                changedCardTypes.values() // Layer 6
+                changedCardTypes.values() // Layer 4
             ));
     }
 
     public boolean clearChangedCardTypes() {
         boolean changed = false;
-
-        if (changedTypeByText != null)
-            changed = true;
-        changedTypeByText = null;
 
         if (!changedCardTypesByText.isEmpty())
             changed = true;
@@ -4210,18 +4203,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
     }
 
-    public final void addChangedCardTypesByText(final CardType addType, final long timestamp, final long staticId) {
-        changedCardTypesByText.put(timestamp, staticId, new CardChangedType(addType, null, false,
-                EnumSet.of(RemoveType.SuperTypes, RemoveType.CardTypes, RemoveType.SubTypes)));
-
-        // setting card type via text, does overwrite any other word change effects?
-        this.changedTextColors.addEmpty(timestamp, staticId);
-        this.changedTextTypes.addEmpty(timestamp, staticId);
-
-        this.updateChangedText();
+    public final void addChangedCardTypesByText(final CardTypeView addType, final long timestamp, final long staticId) {
+        changedCardTypesByText.put(timestamp, staticId, new StateChangedType(addType));
+        updateTypeCache();
     }
     public final boolean removeChangedCardTypesByText(final long timestamp, final long staticId) {
-        return changedCardTypesByText.remove(timestamp, staticId) != null;
+        boolean removed = changedCardTypesByText.remove(timestamp, staticId) != null;
+        if (removed) {
+            updateTypeCache();
+        }
+        return removed;
     }
 
     public final void addChangedCardTypes(final CardType addType, final CardType removeType, final boolean addAllCreatureTypes,
@@ -4472,7 +4463,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public final void addNewPTByText(final Integer power, final Integer toughness, final long timestamp, final long staticId) {
         newPTText.put(timestamp, staticId, Pair.of(power, toughness));
-        updatePTforView();
     }
     public final boolean removeNewPTbyText(final long timestamp, final long staticId) {
         return newPTText.remove(timestamp, staticId) != null;
@@ -4993,7 +4983,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         changedCardTraitsByText.put(timestamp, staticId, new CardTraitChanges(
             spells, null, trigger, replacements, statics, true, false
         ));
-        updateAbilityTextForView();
+
+        // setting card traits via text, does overwrite any other word change effects?
+        this.changedTextColors.addEmpty(timestamp, staticId);
+        this.changedTextTypes.addEmpty(timestamp, staticId);
+        updateChangedText();
     }
 
     public final CardTraitChanges addChangedCardTraits(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
@@ -5536,10 +5530,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
      */
     public final void addChangedTextTypeWord(final String originalWord, final String newWord, final Long timestamp, final long staticId) {
         changedTextTypes.add(timestamp, staticId, originalWord, newWord);
+        changedCardTypesByText.put(timestamp, staticId, new WordChangedType(originalWord, newWord));
         updateChangedText();
     }
 
     public final void removeChangedTextTypeWord(final Long timestamp, final long staticId) {
+        if (changedCardTypesByText.remove(timestamp, staticId) != null) {
+            updateTypeCache();
+        }
         if (changedTextTypes.remove(timestamp, staticId)) {
             updateChangedText();
         }
@@ -5549,8 +5547,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
      * Update the changed text of the intrinsic spell abilities and keywords.
      */
     public void updateChangedText() {
-        this.changedTypeByText = new TextChangedType(this.changedTextTypes);
-
         currentState.updateChangedText();
 
         // update changed text in the layer, for Volrath's Shapeshifter
