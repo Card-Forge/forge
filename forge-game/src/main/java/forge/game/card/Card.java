@@ -4203,7 +4203,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
     }
 
-    public final void addChangedCardTypesByText(final CardType addType, final long timestamp, final long staticId) {
+    public final void addChangedCardTypesByText(final CardTypeView addType, final long timestamp, final long staticId) {
         changedCardTypesByText.put(timestamp, staticId, new StateChangedType(addType));
         updateTypeCache();
     }
