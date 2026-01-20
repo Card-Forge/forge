@@ -4988,7 +4988,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         // setting card traits via text, does overwrite any other word change effects?
         this.changedTextColors.addEmpty(timestamp, staticId);
         this.changedTextTypes.addEmpty(timestamp, staticId);
-
+        updateChangedText();
         updateAbilityTextForView();
     }
 
