@@ -14,7 +14,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
-import forge.util.StreamUtil;
 
 import java.util.Map;
 import java.util.Optional;
