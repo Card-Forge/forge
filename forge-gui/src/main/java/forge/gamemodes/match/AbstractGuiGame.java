@@ -2,14 +2,21 @@ package forge.gamemodes.match;
 
 import com.google.common.collect.*;
 import forge.game.GameView;
+import forge.card.CardStateName;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
+import forge.game.combat.CombatView;
+import forge.game.spellability.StackItemView;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.player.PlayerView;
 import forge.gamemodes.net.DeltaPacket;
+import forge.gamemodes.net.DeltaPacket.NewObjectData;
 import forge.gamemodes.net.FullStatePacket;
+import forge.gamemodes.net.NetworkPropertySerializer;
+import forge.gamemodes.net.NetworkPropertySerializer.CardStateViewData;
+import forge.gamemodes.net.NetworkTrackableDeserializer;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.control.PlaybackSpeed;
@@ -21,12 +28,17 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
+import forge.trackable.Tracker;
 import forge.trackable.TrackableCollection;
+import forge.trackable.TrackableObject;
+import forge.trackable.TrackableProperty;
 import forge.trackable.TrackableTypes;
 import forge.util.FSerializableFunction;
 import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
 import java.io.Serializable;
 import java.util.*;
 
@@ -104,15 +116,126 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public void setGameView(final GameView gameView0) {
         if (gameView == null || gameView0 == null) {
             if (gameView0 != null) {
+                // When receiving a deserialized GameView from the network,
+                // the tracker field is null (it's transient). We need to:
+                // 1. Create a new Tracker
+                // 2. Set it on the GameView and all contained objects
+                // 3. Call updateObjLookup() to populate the index
+                ensureTrackerInitialized(gameView0);
                 gameView0.updateObjLookup();
             }
             gameView = gameView0;
             return;
         }
 
+        // When updating an existing game view, the incoming gameView0 may not have
+        // its tracker initialized (since tracker is transient and null after deserialization).
+        // We need to ensure it has a tracker before copyChangedProps tries to use it.
+        if (gameView0.getTracker() == null) {
+            // Use the existing gameView's tracker for the incoming gameView0
+            Tracker existingTracker = gameView.getTracker();
+            if (existingTracker != null) {
+                java.util.Set<Integer> visited = new java.util.HashSet<>();
+                setTrackerRecursively(gameView0, existingTracker, visited);
+            }
+        }
+
         //if game view set to another instance without being first cleared,
         //update existing game view object instead of overwriting it
         gameView.copyChangedProps(gameView0);
+    }
+
+    /**
+     * Ensure the Tracker is initialized on a GameView and all its contained objects.
+     * This is necessary after network deserialization because the tracker field is transient.
+     */
+    private void ensureTrackerInitialized(GameView gameView0) {
+        if (gameView0 == null) return;
+
+        // Check if tracker needs to be created
+        Tracker tracker = gameView0.getTracker();
+        if (tracker == null) {
+            tracker = new Tracker();
+            gameView0.setTracker(tracker);
+        }
+
+        // Recursively set tracker on all TrackableObjects in the GameView's properties
+        java.util.Set<Integer> visited = new java.util.HashSet<>();
+        setTrackerRecursively(gameView0, tracker, visited);
+        System.out.println(String.format("[EnsureTracker] Set tracker on %d unique objects", visited.size()));
+
+        // Verify trackers are set on players and their cards
+        if (gameView0.getPlayers() != null) {
+            for (PlayerView player : gameView0.getPlayers()) {
+                boolean playerHasTracker = player.getTracker() != null;
+                int cardsWithTracker = 0;
+                int cardsWithoutTracker = 0;
+                if (player.getHand() != null) {
+                    for (CardView card : player.getHand()) {
+                        if (card.getTracker() != null) cardsWithTracker++;
+                        else cardsWithoutTracker++;
+                    }
+                }
+                if (player.getLibrary() != null) {
+                    for (CardView card : player.getLibrary()) {
+                        if (card.getTracker() != null) cardsWithTracker++;
+                        else cardsWithoutTracker++;
+                    }
+                }
+                System.out.println(String.format(
+                    "[EnsureTracker] Player %d: hasTracker=%b, cards with tracker=%d, cards without=%d",
+                    player.getId(), playerHasTracker, cardsWithTracker, cardsWithoutTracker));
+            }
+        }
+    }
+
+    /**
+     * Recursively set the tracker on a TrackableObject and all objects it references.
+     * Uses a visited set to avoid infinite loops from circular references.
+     */
+    @SuppressWarnings("unchecked")
+    private void setTrackerRecursively(TrackableObject obj, Tracker tracker, java.util.Set<Integer> visited) {
+        if (obj == null) return;
+
+        // Avoid infinite loops
+        int objId = System.identityHashCode(obj);
+        if (visited.contains(objId)) return;
+        visited.add(objId);
+
+        // Set tracker on this object
+        if (obj.getTracker() == null) {
+            obj.setTracker(tracker);
+        }
+
+        // Get all properties and recursively process any TrackableObjects
+        Map<TrackableProperty, Object> props = obj.getProps();
+        if (props == null) return;
+
+        for (Map.Entry<TrackableProperty, Object> entry : props.entrySet()) {
+            Object value = entry.getValue();
+            if (value == null) continue;
+
+            // Handle single TrackableObject
+            if (value instanceof TrackableObject) {
+                setTrackerRecursively((TrackableObject) value, tracker, visited);
+            }
+            // Handle collections of TrackableObjects
+            else if (value instanceof Iterable) {
+                for (Object item : (Iterable<?>) value) {
+                    if (item instanceof TrackableObject) {
+                        setTrackerRecursively((TrackableObject) item, tracker, visited);
+                    }
+                }
+            }
+            // Handle maps that might contain TrackableObjects
+            else if (value instanceof Map) {
+                for (Object mapValue : ((Map<?, ?>) value).values()) {
+                    if (mapValue instanceof TrackableObject) {
+                        setTrackerRecursively((TrackableObject) mapValue, tracker, visited);
+                    }
+                }
+            }
+        }
     }
 
     public final IGameController getGameController() {
@@ -860,17 +983,265 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public void applyDelta(DeltaPacket packet) {
-        // Apply delta changes to the local game state
-        // The actual property changes are handled by the network serialization layer
-        // when the packet is received - this method is called after deserialization.
+        if (packet == null || gameView == null) {
+            return;
+        }
 
-        // For now, we just need to send an acknowledgment back to the server
-        // to confirm we received the delta packet
-        if (packet != null) {
-            IGameController controller = getGameController();
-            if (controller != null) {
-                controller.ackSync(packet.getSequenceNumber());
+        Tracker tracker = gameView.getTracker();
+        if (tracker == null) {
+            System.err.println("[DeltaSync] Cannot apply delta: Tracker is null");
+            return;
+        }
+
+        int newObjectCount = 0;
+        int appliedCount = 0;
+        int skippedCount = 0;
+
+        // STEP 1: Create new objects first (so deltas can reference them)
+        Map<Integer, NewObjectData> newObjects = packet.getNewObjects();
+        if (!newObjects.isEmpty()) {
+            for (NewObjectData newObj : newObjects.values()) {
+                try {
+                    createObjectFromData(newObj, tracker);
+                    newObjectCount++;
+                } catch (Exception e) {
+                    System.err.println("[DeltaSync] Error creating new object " + newObj.getObjectId() + ": " + e.getMessage());
+                    e.printStackTrace();
+                }
             }
+            System.out.println(String.format("[DeltaSync] Created %d new objects", newObjectCount));
+
+            // Verify CardViews are in tracker
+            int verifyCount = 0;
+            for (NewObjectData newObj : newObjects.values()) {
+                if (newObj.getObjectType() == NewObjectData.TYPE_CARD_VIEW) {
+                    CardView cv = tracker.getObj(TrackableTypes.CardViewType, newObj.getObjectId());
+                    if (cv != null) {
+                        verifyCount++;
+                    } else {
+                        System.err.println("[DeltaSync] VERIFY FAILED: CardView " + newObj.getObjectId() + " not in tracker after creation!");
+                    }
+                }
+            }
+            System.out.println(String.format("[DeltaSync] Verified %d CardViews in tracker", verifyCount));
+        }
+
+        // STEP 2: Apply property deltas to existing objects
+        for (Map.Entry<Integer, byte[]> entry : packet.getObjectDeltas().entrySet()) {
+            int objectId = entry.getKey();
+            byte[] deltaBytes = entry.getValue();
+
+            TrackableObject obj = findObjectById(tracker, objectId);
+            if (obj != null) {
+                try {
+                    applyDeltaToObject(obj, deltaBytes, tracker);
+                    appliedCount++;
+                } catch (Exception e) {
+                    System.err.println("[DeltaSync] Error applying delta to object " + objectId + ": " + e.getMessage());
+                    skippedCount++;
+                }
+            } else {
+                // Object not found - this shouldn't happen if new objects were created first
+                System.err.println("[DeltaSync] Object ID " + objectId + " NOT FOUND for delta application");
+                skippedCount++;
+            }
+        }
+
+        // STEP 3: Handle removed objects
+        if (!packet.getRemovedObjectIds().isEmpty()) {
+            System.out.println("[DeltaSync] Packet contains " + packet.getRemovedObjectIds().size() + " removed objects");
+            // Note: Objects are not removed from Tracker - they'll just not be updated anymore
+            // and will be garbage collected when no longer referenced by the game state
+        }
+
+        // Log summary
+        if (newObjectCount > 0 || appliedCount > 0 || skippedCount > 0) {
+            System.out.println(String.format("[DeltaSync] Summary: %d new objects, %d deltas applied, %d skipped",
+                    newObjectCount, appliedCount, skippedCount));
+        }
+
+        // Send acknowledgment
+        IGameController controller = getGameController();
+        if (controller != null) {
+            controller.ackSync(packet.getSequenceNumber());
+        }
+    }
+
+    /**
+     * Create a new TrackableObject from NewObjectData and register it in the Tracker.
+     */
+    private void createObjectFromData(NewObjectData data, Tracker tracker) throws Exception {
+        int objectId = data.getObjectId();
+        int objectType = data.getObjectType();
+        byte[] fullProps = data.getFullProperties();
+
+        // Check if object already exists (shouldn't happen, but be safe)
+        TrackableObject existing = findObjectById(tracker, objectId);
+        if (existing != null) {
+            System.out.println(String.format("[DeltaSync] Object ID %d already exists, applying properties as delta", objectId));
+            applyDeltaToObject(existing, fullProps, tracker);
+            return;
+        }
+
+        // Create the appropriate object type
+        TrackableObject obj = null;
+        switch (objectType) {
+            case NewObjectData.TYPE_CARD_VIEW:
+                obj = new CardView(objectId, tracker);
+                tracker.putObj(TrackableTypes.CardViewType, objectId, (CardView) obj);
+                break;
+            case NewObjectData.TYPE_PLAYER_VIEW:
+                obj = new PlayerView(objectId, tracker);
+                tracker.putObj(TrackableTypes.PlayerViewType, objectId, (PlayerView) obj);
+                break;
+            case NewObjectData.TYPE_STACK_ITEM_VIEW:
+                obj = new StackItemView(objectId, tracker);
+                tracker.putObj(TrackableTypes.StackItemViewType, objectId, (StackItemView) obj);
+                break;
+            case NewObjectData.TYPE_COMBAT_VIEW:
+                // CombatView uses ID -1 (singleton pattern)
+                obj = new CombatView(tracker);
+                // Register with the actual ID from the data
+                tracker.putObj(TrackableTypes.CombatViewType, obj.getId(), (CombatView) obj);
+                break;
+            case NewObjectData.TYPE_GAME_VIEW:
+                // GameView is special - we already have one, update it
+                if (gameView != null) {
+                    applyDeltaToObject(gameView, fullProps, tracker);
+                    return;
+                }
+                break;
+            default:
+                System.err.println("[DeltaSync] Unknown object type: " + objectType);
+                return;
+        }
+
+        if (obj != null) {
+            // Apply all properties to the new object
+            applyDeltaToObject(obj, fullProps, tracker);
+            System.out.println(String.format("[DeltaSync] Created %s ID=%d",
+                    obj.getClass().getSimpleName(), obj.getId()));
+        }
+    }
+
+    /**
+     * Find a TrackableObject by ID in the Tracker.
+     * Searches through known object types (CardView, PlayerView, etc.)
+     */
+    private TrackableObject findObjectById(Tracker tracker, int objectId) {
+        // Try CardView first (most common)
+        TrackableObject obj = tracker.getObj(TrackableTypes.CardViewType, objectId);
+        if (obj != null) return obj;
+
+        // Try PlayerView
+        obj = tracker.getObj(TrackableTypes.PlayerViewType, objectId);
+        if (obj != null) return obj;
+
+        // Try StackItemView
+        obj = tracker.getObj(TrackableTypes.StackItemViewType, objectId);
+        if (obj != null) return obj;
+
+        // Try CombatView
+        obj = tracker.getObj(TrackableTypes.CombatViewType, objectId);
+        if (obj != null) return obj;
+
+        // Check if it's the GameView itself
+        if (gameView != null && gameView.getId() == objectId) {
+            return gameView;
+        }
+
+        // Debug: Log when object not found
+        System.out.println(String.format("[DeltaSync] Object ID %d NOT FOUND in any lookup", objectId));
+
+        return null;
+    }
+
+    /**
+     * Apply deserialized delta bytes to a TrackableObject.
+     * Reads the compact binary format and updates properties.
+     */
+    @SuppressWarnings("unchecked")
+    private void applyDeltaToObject(TrackableObject obj, byte[] deltaBytes, Tracker tracker) throws Exception {
+        ByteArrayInputStream bais = new ByteArrayInputStream(deltaBytes);
+        DataInputStream dis = new DataInputStream(bais);
+        NetworkTrackableDeserializer ntd = new NetworkTrackableDeserializer(dis, tracker);
+
+        int propCount = dis.readInt();
+        Map<TrackableProperty, Object> props = obj.getProps();
+
+        for (int i = 0; i < propCount; i++) {
+            int ordinal = dis.readInt();
+            TrackableProperty prop = TrackableProperty.deserialize(ordinal);
+            Object oldValue = props != null ? props.get(prop) : null;
+
+            try {
+                Object value = NetworkPropertySerializer.deserialize(ntd, prop, oldValue);
+                // Use reflection to call the protected set method
+                setPropertyValue(obj, prop, value);
+            } catch (Exception e) {
+                System.err.println("[DeltaSync] Error deserializing property " + prop + ": " + e.getMessage());
+            }
+        }
+    }
+
+    /**
+     * Set a property value on a TrackableObject.
+     * Uses reflection to access the protected set method.
+     * Handles CardStateViewData specially by applying properties to existing CardStateView.
+     */
+    private void setPropertyValue(TrackableObject obj, TrackableProperty prop, Object value) {
+        try {
+            // Handle CardStateViewData specially - apply to existing CardStateView
+            if (value instanceof CardStateViewData && obj instanceof CardView) {
+                CardView cardView = (CardView) obj;
+                CardStateViewData csvData = (CardStateViewData) value;
+                CardStateView csv = null;
+
+                // Get the appropriate CardStateView based on the property
+                if (prop == TrackableProperty.CurrentState) {
+                    csv = cardView.getCurrentState();
+                } else if (prop == TrackableProperty.AlternateState) {
+                    csv = cardView.getAlternateState();
+                    // If AlternateState doesn't exist, we need to create it
+                    // But CardStateView is an inner class, so this is tricky
+                    // For now, skip if it doesn't exist - it will be created when needed
+                    if (csv == null) {
+                        System.out.println("[DeltaSync] AlternateState doesn't exist on CardView " + cardView.getId() + ", skipping");
+                        return;
+                    }
+                }
+
+                if (csv != null) {
+                    // Apply all deserialized properties to the existing CardStateView
+                    java.lang.reflect.Method setMethod = TrackableObject.class.getDeclaredMethod(
+                            "set", TrackableProperty.class, Object.class);
+                    setMethod.setAccessible(true);
+
+                    for (Map.Entry<TrackableProperty, Object> entry : csvData.properties.entrySet()) {
+                        TrackableProperty csvProp = entry.getKey();
+                        Object csvValue = entry.getValue();
+
+                        // Recursively handle nested CardStateViewData (shouldn't happen, but be safe)
+                        if (csvValue instanceof CardStateViewData) {
+                            System.err.println("[DeltaSync] Nested CardStateViewData not supported for property " + csvProp);
+                            continue;
+                        }
+
+                        setMethod.invoke(csv, csvProp, csvValue);
+                    }
+                    System.out.println(String.format("[DeltaSync] Applied %d properties to CardStateView (state=%s) of CardView %d",
+                            csvData.properties.size(), csvData.state, cardView.getId()));
+                }
+                return;
+            }
+
+            // Normal property setting
+            java.lang.reflect.Method setMethod = TrackableObject.class.getDeclaredMethod(
+                    "set", TrackableProperty.class, Object.class);
+            setMethod.setAccessible(true);
+            setMethod.invoke(obj, prop, value);
+        } catch (Exception e) {
+            System.err.println("[DeltaSync] Error setting property " + prop + " on object " + obj.getId() + ": " + e.getMessage());
         }
     }
 
@@ -878,7 +1249,56 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public void fullStateSync(FullStatePacket packet) {
         // Default implementation - apply the full state
         if (packet != null && packet.getGameView() != null) {
-            setGameView(packet.getGameView());
+            GameView newGameView = packet.getGameView();
+
+            // IMPORTANT: For full state sync, we need to completely replace the game view
+            // and ensure the tracker is properly initialized on all objects.
+            // We can't use copyChangedProps because that doesn't set up trackers.
+            ensureTrackerInitialized(newGameView);
+            newGameView.updateObjLookup();
+
+            // Debug: Log what's in the tracker after updateObjLookup
+            Tracker tracker = newGameView.getTracker();
+            if (tracker != null) {
+                int cardCount = 0;
+                int playerCount = 0;
+                // Count objects by iterating through known collections
+                if (newGameView.getPlayers() != null) {
+                    for (PlayerView player : newGameView.getPlayers()) {
+                        playerCount++;
+                        // Count cards in player zones
+                        cardCount += countCards(player.getHand());
+                        cardCount += countCards(player.getGraveyard());
+                        cardCount += countCards(player.getLibrary());
+                        cardCount += countCards(player.getExile());
+                        cardCount += countCards(player.getBattlefield());
+                    }
+                }
+                System.out.println(String.format("[FullStateSync] After updateObjLookup: %d players, ~%d cards found in zones",
+                        playerCount, cardCount));
+
+                // Verify a few objects are actually in the tracker
+                if (newGameView.getPlayers() != null) {
+                    for (PlayerView player : newGameView.getPlayers()) {
+                        TrackableObject foundPlayer = tracker.getObj(TrackableTypes.PlayerViewType, player.getId());
+                        System.out.println(String.format("[FullStateSync] Player %d: tracker lookup = %s",
+                                player.getId(), foundPlayer != null ? "FOUND" : "NOT FOUND"));
+
+                        // Check a card from hand
+                        if (player.getHand() != null) {
+                            for (CardView card : player.getHand()) {
+                                TrackableObject foundCard = tracker.getObj(TrackableTypes.CardViewType, card.getId());
+                                System.out.println(String.format("[FullStateSync] Card %d (from hand): tracker lookup = %s",
+                                        card.getId(), foundCard != null ? "FOUND" : "NOT FOUND"));
+                                break; // Just check first card
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Replace the game view entirely
+            gameView = newGameView;
 
             // Send acknowledgment
             IGameController controller = getGameController();
@@ -886,6 +1306,15 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 controller.ackSync(packet.getSequenceNumber());
             }
         }
+    }
+
+    private int countCards(Iterable<CardView> cards) {
+        if (cards == null) return 0;
+        int count = 0;
+        for (CardView c : cards) {
+            if (c != null) count++;
+        }
+        return count;
     }
 
     @Override

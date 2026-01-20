@@ -521,6 +521,9 @@ public abstract class GameLobby implements IHasGameType {
 
         //if above checks succeed, return runnable that can be used to finish starting game
         return () -> {
+            // Create game session BEFORE starting match so session credentials can be sent during openView()
+            onGameStarted();
+
             hostedMatch = GuiBase.getInterface().hostMatch();
             hostedMatch.startMatch(GameType.Constructed, variantTypes, players, guis);
 
@@ -532,8 +535,6 @@ public abstract class GameLobby implements IHasGameType {
             }
 
             hostedMatch.gameControllers = gameControllers;
-
-            onGameStarted();
         };
     }
 

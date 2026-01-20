@@ -34,7 +34,9 @@ public class NetGuiGame extends AbstractGuiGame {
     private GameProtocolSender sender;
     private final DeltaSyncManager deltaSyncManager;
     private final int clientIndex;
-    private boolean useDeltaSync = true; // Enable delta sync by default
+    // Delta sync is ENABLED - new objects are now properly handled.
+    // New objects are sent with full property data, existing objects only send changed properties.
+    private boolean useDeltaSync = true;
     private boolean initialSyncSent = false;
 
     public NetGuiGame(final RemoteClient client) {
@@ -103,6 +105,12 @@ public class NetGuiGame extends AbstractGuiGame {
         return sender.sendAndWait(method, args);
     }
 
+    // Bandwidth tracking
+    private long totalDeltaBytes = 0;
+    private long totalFullStateBytes = 0;
+    private int deltaPacketCount = 0;
+    private boolean logBandwidth = true; // Set to true to enable logging
+
     /**
      * Send a game view update to the client.
      * Uses delta sync if enabled and initial sync has been sent,
@@ -115,7 +123,12 @@ public class NetGuiGame extends AbstractGuiGame {
         }
 
         if (!useDeltaSync || !initialSyncSent) {
-            // Fall back to full state sync
+            // Fall back to full state sync - add debug logging
+            if (logBandwidth) {
+                System.out.println(String.format(
+                    "[DeltaSync] Client %d: Fallback to full state - useDeltaSync=%b, initialSyncSent=%b",
+                    clientIndex, useDeltaSync, initialSyncSent));
+            }
             send(ProtocolMethod.setGameView, gameView);
             return;
         }
@@ -124,7 +137,66 @@ public class NetGuiGame extends AbstractGuiGame {
         DeltaPacket delta = deltaSyncManager.collectDeltas(gameView);
         if (delta != null && !delta.isEmpty()) {
             send(ProtocolMethod.applyDelta, delta);
+
+            // CRITICAL: Clear changes after sending to prevent accumulation
+            deltaSyncManager.clearAllChanges(gameView);
+
+            // Track bandwidth savings
+            if (logBandwidth) {
+                int deltaSize = delta.getApproximateSize();
+                int fullStateSize = estimateFullStateSize(gameView);
+                totalDeltaBytes += deltaSize;
+                totalFullStateBytes += fullStateSize;
+                deltaPacketCount++;
+
+                int savings = fullStateSize > 0 ? (int)((1.0 - (double)deltaSize / fullStateSize) * 100) : 0;
+                System.out.println(String.format(
+                    "[DeltaSync] Packet #%d: Delta=%d bytes, FullState=%d bytes, Savings=%d%% | Cumulative: Delta=%d, FullState=%d, Savings=%d%%",
+                    deltaPacketCount, deltaSize, fullStateSize, savings,
+                    totalDeltaBytes, totalFullStateBytes,
+                    totalFullStateBytes > 0 ? (int)((1.0 - (double)totalDeltaBytes / totalFullStateBytes) * 100) : 0
+                ));
+            }
         }
+    }
+
+    /**
+     * Estimate the size of a full state sync for comparison purposes.
+     */
+    private int estimateFullStateSize(GameView gameView) {
+        try {
+            java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
+            java.io.ObjectOutputStream oos = new java.io.ObjectOutputStream(baos);
+            oos.writeObject(gameView);
+            oos.close();
+            return baos.size();
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    /**
+     * Enable or disable bandwidth logging.
+     */
+    public void setLogBandwidth(boolean enabled) {
+        this.logBandwidth = enabled;
+    }
+
+    /**
+     * Get bandwidth statistics.
+     * @return array of [totalDeltaBytes, totalFullStateBytes, packetCount]
+     */
+    public long[] getBandwidthStats() {
+        return new long[] { totalDeltaBytes, totalFullStateBytes, deltaPacketCount };
+    }
+
+    /**
+     * Reset bandwidth statistics.
+     */
+    public void resetBandwidthStats() {
+        totalDeltaBytes = 0;
+        totalFullStateBytes = 0;
+        deltaPacketCount = 0;
     }
 
     /**
@@ -140,6 +212,9 @@ public class NetGuiGame extends AbstractGuiGame {
         FullStatePacket packet = deltaSyncManager.createFullStatePacket(gameView);
         send(ProtocolMethod.fullStateSync, packet);
         initialSyncSent = true;
+
+        // Mark all objects as sent so delta sync knows they don't need full serialization
+        deltaSyncManager.markObjectsAsSent(gameView);
 
         // Clear all change flags since we've sent everything
         deltaSyncManager.clearAllChanges(gameView);
@@ -159,6 +234,9 @@ public class NetGuiGame extends AbstractGuiGame {
         FullStatePacket packet = deltaSyncManager.createFullStatePacketForReconnect(gameView, sessionId, sessionToken);
         send(ProtocolMethod.reconnectAccepted, packet);
         initialSyncSent = true;
+
+        // Mark all objects as sent so delta sync knows they don't need full serialization
+        deltaSyncManager.markObjectsAsSent(gameView);
 
         // Clear all change flags since we've sent everything
         deltaSyncManager.clearAllChanges(gameView);
@@ -183,26 +261,41 @@ public class NetGuiGame extends AbstractGuiGame {
      * This must be called after the initial game view is sent.
      */
     private void sendSessionCredentials() {
+        System.out.println("[DeltaSync] sendSessionCredentials called for client " + clientIndex);
         GameSession session = FServerManager.getInstance().getCurrentGameSession();
-        if (session != null) {
-            PlayerSession playerSession = session.getPlayerSession(clientIndex);
-            if (playerSession != null) {
-                // Send credentials via fullStateSync with session info
-                GameView gameView = getGameView();
-                if (gameView != null) {
-                    FullStatePacket packet = new FullStatePacket(
-                            deltaSyncManager.getCurrentSequence(),
-                            gameView,
-                            session.getSessionId(),
-                            playerSession.getSessionToken()
-                    );
-                    send(ProtocolMethod.fullStateSync, packet);
-                    initialSyncSent = true;
-                    // Clear all change flags since we've sent everything
-                    deltaSyncManager.clearAllChanges(gameView);
-                }
-            }
+        if (session == null) {
+            System.out.println("[DeltaSync] WARN: session is null - cannot send credentials");
+            return;
         }
+
+        PlayerSession playerSession = session.getPlayerSession(clientIndex);
+        if (playerSession == null) {
+            System.out.println("[DeltaSync] WARN: playerSession is null for client " + clientIndex);
+            return;
+        }
+
+        // Send credentials via fullStateSync with session info
+        GameView gameView = getGameView();
+        if (gameView == null) {
+            System.out.println("[DeltaSync] WARN: gameView is null");
+            return;
+        }
+
+        FullStatePacket packet = new FullStatePacket(
+                deltaSyncManager.getCurrentSequence(),
+                gameView,
+                session.getSessionId(),
+                playerSession.getSessionToken()
+        );
+        send(ProtocolMethod.fullStateSync, packet);
+        initialSyncSent = true;
+
+        // Mark all objects as sent so delta sync knows they don't need full serialization
+        deltaSyncManager.markObjectsAsSent(gameView);
+
+        System.out.println("[DeltaSync] Session credentials sent, initialSyncSent = true, objects marked as sent");
+        // Clear all change flags since we've sent everything
+        deltaSyncManager.clearAllChanges(gameView);
     }
 
     @Override

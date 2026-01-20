@@ -3,6 +3,7 @@ package forge.gamemodes.net;
 import forge.gamemodes.net.server.RemoteClient;
 import forge.gamemodes.net.event.NetEvent;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -12,15 +13,53 @@ import java.util.Set;
 /**
  * Packet containing delta updates for TrackableObjects.
  * Contains only the changed properties for each object, plus a list of removed object IDs.
+ * Also includes new objects that need to be created on the client (full serialization).
  */
 public final class DeltaPacket implements NetEvent {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
     private final long sequenceNumber;
     private final long timestamp;
-    private final Map<Integer, byte[]> objectDeltas;
+    private final Map<Integer, byte[]> objectDeltas;      // Changed properties only
+    private final Map<Integer, NewObjectData> newObjects; // Full object data for newly created objects
     private final Set<Integer> removedObjectIds;
     private final int checksum; // For periodic validation
+
+    /**
+     * Data for a newly created object that needs to be sent in full.
+     */
+    public static class NewObjectData implements Serializable {
+        private static final long serialVersionUID = 1L;
+
+        // Object type constants
+        public static final int TYPE_CARD_VIEW = 0;
+        public static final int TYPE_PLAYER_VIEW = 1;
+        public static final int TYPE_STACK_ITEM_VIEW = 2;
+        public static final int TYPE_COMBAT_VIEW = 3;
+        public static final int TYPE_GAME_VIEW = 4;
+
+        private final int objectId;
+        private final int objectType;
+        private final byte[] fullProperties; // ALL properties serialized
+
+        public NewObjectData(int objectId, int objectType, byte[] fullProperties) {
+            this.objectId = objectId;
+            this.objectType = objectType;
+            this.fullProperties = fullProperties;
+        }
+
+        public int getObjectId() {
+            return objectId;
+        }
+
+        public int getObjectType() {
+            return objectType;
+        }
+
+        public byte[] getFullProperties() {
+            return fullProperties;
+        }
+    }
 
     /**
      * Create a new delta packet.
@@ -29,7 +68,7 @@ public final class DeltaPacket implements NetEvent {
      * @param removedObjectIds set of object IDs that have been removed
      */
     public DeltaPacket(long sequenceNumber, Map<Integer, byte[]> objectDeltas, Set<Integer> removedObjectIds) {
-        this(sequenceNumber, objectDeltas, removedObjectIds, 0);
+        this(sequenceNumber, objectDeltas, null, removedObjectIds, 0);
     }
 
     /**
@@ -41,9 +80,23 @@ public final class DeltaPacket implements NetEvent {
      */
     public DeltaPacket(long sequenceNumber, Map<Integer, byte[]> objectDeltas,
                        Set<Integer> removedObjectIds, int checksum) {
+        this(sequenceNumber, objectDeltas, null, removedObjectIds, checksum);
+    }
+
+    /**
+     * Create a new delta packet with new objects and optional checksum.
+     * @param sequenceNumber monotonically increasing sequence number
+     * @param objectDeltas map of object ID to serialized delta bytes (changed properties only)
+     * @param newObjects map of object ID to full object data (for new objects)
+     * @param removedObjectIds set of object IDs that have been removed
+     * @param checksum checksum of the full state for validation (0 if not included)
+     */
+    public DeltaPacket(long sequenceNumber, Map<Integer, byte[]> objectDeltas,
+                       Map<Integer, NewObjectData> newObjects, Set<Integer> removedObjectIds, int checksum) {
         this.sequenceNumber = sequenceNumber;
         this.timestamp = System.currentTimeMillis();
         this.objectDeltas = objectDeltas != null ? new HashMap<>(objectDeltas) : new HashMap<>();
+        this.newObjects = newObjects != null ? new HashMap<>(newObjects) : new HashMap<>();
         this.removedObjectIds = removedObjectIds != null ? new HashSet<>(removedObjectIds) : new HashSet<>();
         this.checksum = checksum;
     }
@@ -73,6 +126,14 @@ public final class DeltaPacket implements NetEvent {
     }
 
     /**
+     * Get the new objects map (full object data for newly created objects).
+     * @return unmodifiable map of object ID to NewObjectData
+     */
+    public Map<Integer, NewObjectData> getNewObjects() {
+        return Collections.unmodifiableMap(newObjects);
+    }
+
+    /**
      * Get the checksum for state validation.
      * @return checksum value, or 0 if not included in this packet
      */
@@ -90,10 +151,10 @@ public final class DeltaPacket implements NetEvent {
 
     /**
      * Check if this packet is empty (no changes).
-     * @return true if there are no deltas and no removals
+     * @return true if there are no deltas, no new objects, and no removals
      */
     public boolean isEmpty() {
-        return objectDeltas.isEmpty() && removedObjectIds.isEmpty();
+        return objectDeltas.isEmpty() && newObjects.isEmpty() && removedObjectIds.isEmpty();
     }
 
     /**
@@ -106,6 +167,9 @@ public final class DeltaPacket implements NetEvent {
         for (byte[] delta : objectDeltas.values()) {
             size += 4 + delta.length; // object ID + delta data
         }
+        for (NewObjectData newObj : newObjects.values()) {
+            size += 4 + 4 + newObj.getFullProperties().length; // objectId + objectType + data
+        }
         size += removedObjectIds.size() * 4; // removed IDs
         return size;
     }
@@ -117,7 +181,7 @@ public final class DeltaPacket implements NetEvent {
 
     @Override
     public String toString() {
-        return String.format("DeltaPacket[seq=%d, deltas=%d, removed=%d, size~%d bytes]",
-                sequenceNumber, objectDeltas.size(), removedObjectIds.size(), getApproximateSize());
+        return String.format("DeltaPacket[seq=%d, newObjects=%d, deltas=%d, removed=%d, size~%d bytes]",
+                sequenceNumber, newObjects.size(), objectDeltas.size(), removedObjectIds.size(), getApproximateSize());
     }
 }

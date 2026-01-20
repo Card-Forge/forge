@@ -492,10 +492,12 @@ public final class FServerManager {
      */
     public GameSession createGameSession() {
         currentGameSession = new GameSession();
+        System.out.println("[GameSession] Creating game session, registering " + clients.size() + " remote clients");
         // Register all current players
         for (RemoteClient client : clients.values()) {
             PlayerSession playerSession = currentGameSession.registerPlayer(client.getIndex());
             playerSession.setPlayerName(client.getUsername());
+            System.out.println("[GameSession] Registered player index=" + client.getIndex() + ", name=" + client.getUsername());
         }
         return currentGameSession;
     }

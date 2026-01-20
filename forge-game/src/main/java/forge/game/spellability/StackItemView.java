@@ -41,6 +41,14 @@ public class StackItemView extends TrackableObject implements IHasCardView {
         updateOptionalCost(si);
     }
 
+    /**
+     * Constructor for network deserialization.
+     * Creates an empty StackItemView that will be populated via property deserialization.
+     */
+    public StackItemView(final int id0, final forge.trackable.Tracker tracker) {
+        super(id0, tracker);
+    }
+
     public String getKey() {
         return get(TrackableProperty.Key);
     }

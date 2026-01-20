@@ -68,6 +68,15 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
     @Override
     protected void beforeCall(final ProtocolMethod protocolMethod, final Object[] args) {
         switch (protocolMethod) {
+            case setGameView:
+                // IMPORTANT: Set gameView immediately in the Netty thread so it's available
+                // for subsequent beforeCall handlers (especially openView which needs it).
+                // The actual setGameView method will also run in EDT, but we need it now.
+                if (args.length > 0 && args[0] instanceof GameView) {
+                    GameView gameView = (GameView) args[0];
+                    gui.setGameView(gameView);
+                }
+                break;
             case fullStateSync:
                 // Handle session credentials from the server
                 if (args.length > 0 && args[0] instanceof forge.gamemodes.net.FullStatePacket) {

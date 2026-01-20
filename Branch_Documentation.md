@@ -1,6 +1,105 @@
-# Network Play Optimization - Branch: NetworkPlay
+# NetworkPlay Branch Documentation
 
 This document describes the network optimization features implemented in this branch, including delta synchronization for bandwidth reduction and robust reconnection support for handling network interruptions.
+
+---
+
+## Recent Changes (Post-Initial Commit)
+
+The following improvements were made after the initial delta sync and reconnection commit (`910e1d4977`):
+
+### 1. New Object Handling in Delta Sync
+
+**Problem**: Delta sync only sent changed properties for existing objects. When new objects (cards drawn, spells cast) appeared during gameplay, the client had no way to create them - it would just receive property updates for non-existent object IDs.
+
+**Solution**: Extended `DeltaPacket` with `NewObjectData` to send full object data for newly created objects.
+
+**Changes**:
+- `DeltaPacket.java`: Added `NewObjectData` inner class with type constants (`TYPE_CARD_VIEW`, `TYPE_PLAYER_VIEW`, etc.) and `newObjects` map
+- `DeltaSyncManager.java`: Added `sentObjectIds` set to track which objects have been sent; new objects get full serialization via `serializeNewObject()`, existing objects only send changed properties
+- `AbstractGuiGame.java`: Added `createObjectFromData()` to instantiate CardView, PlayerView, StackItemView, and CombatView on the client
+
+### 2. Compact Binary Serialization
+
+**Problem**: Java's built-in `ObjectOutputStream` serialization was producing massive packets (~96KB for a single CardView) because it serialized entire object graphs including all referenced objects.
+
+**Solution**: Implemented custom binary serialization that writes object references as 4-byte IDs only.
+
+**Changes**:
+- `DeltaSyncManager.java`: Switched from `ObjectOutputStream` to `DataOutputStream` with `NetworkTrackableSerializer`
+- `AbstractGuiGame.java`: Added `applyDeltaToObject()` using `NetworkTrackableDeserializer`
+- **NEW FILES**:
+  - `NetworkPropertySerializer.java` - Type-aware property serialization
+  - `NetworkTrackableSerializer.java` - Writes TrackableObjects as IDs
+  - `NetworkTrackableDeserializer.java` - Reads TrackableObjects by ID lookup
+
+**Result**: CardView serialization reduced from ~96KB to ~200 bytes (99.8% reduction).
+
+### 3. Tracker Initialization After Deserialization
+
+**Problem**: The `Tracker` field in `TrackableObject` is transient (not serialized), so deserialized GameViews had null trackers, causing `NullPointerException` when accessing properties.
+
+**Solution**: Added recursive tracker initialization after receiving game state.
+
+**Changes**:
+- `AbstractGuiGame.java`: Added `ensureTrackerInitialized()` and `setTrackerRecursively()` methods that traverse all TrackableObjects in the GameView hierarchy and set their tracker reference
+
+### 4. Session Credential Timing Fix
+
+**Problem**: Session credentials were being sent during `openView()`, but the game session wasn't created until after `startMatch()` completed, resulting in null session/credentials.
+
+**Solution**: Reordered initialization so game session is created BEFORE starting the match.
+
+**Changes**:
+- `GameLobby.java`: Moved `onGameStarted()` call to execute before `hostedMatch.startMatch()`
+- `NetGuiGame.java`: Added null checks and debug logging in `sendSessionCredentials()`
+
+### 5. Immediate GameView Setting
+
+**Problem**: The `setGameView` protocol method was dispatching to the EDT asynchronously, but subsequent handlers (like `openView`) needed the GameView to be available immediately in the Netty thread.
+
+**Solution**: Set the GameView synchronously before EDT dispatch.
+
+**Changes**:
+- `GameClientHandler.java`: Added immediate `gui.setGameView()` call in `beforeCall()` for the `setGameView` method
+
+### 6. Change Flag Management
+
+**Problem**: Change flags on TrackableObjects weren't being cleared after sending deltas, causing delta packets to accumulate all historical changes.
+
+**Solution**: Clear change flags after sending delta packets and mark objects as "sent" after full state sync.
+
+**Changes**:
+- `NetGuiGame.java`: Added `deltaSyncManager.clearAllChanges(gameView)` after sending delta packets
+- `DeltaSyncManager.java`: Added `markObjectsAsSent(GameView)` method to mark all objects in the hierarchy as already sent to the client
+
+### 7. StackItemView Network Constructor
+
+**Problem**: `StackItemView` required a `StackItem` parameter in its constructor, making it impossible to create empty instances for network deserialization.
+
+**Solution**: Added a minimal constructor for network deserialization.
+
+**Changes**:
+- `StackItemView.java`: Added `StackItemView(int id0, Tracker tracker)` constructor
+
+### 8. Bandwidth Monitoring
+
+**Added**: Debug logging to track bandwidth savings from delta sync.
+
+**Changes**:
+- `NetGuiGame.java`: Added bandwidth tracking fields (`totalDeltaBytes`, `totalFullStateBytes`, `deltaPacketCount`)
+- `NetGuiGame.java`: Added `estimateFullStateSize()` to compare delta size vs full state
+- Console logs show per-packet and cumulative bandwidth savings percentage
+
+### 9. Debug Logging
+
+Added diagnostic logging throughout the delta sync path:
+- `FServerManager.java`: Game session creation and player registration
+- `NetGuiGame.java`: Session credential flow
+- `DeltaSyncManager.java`: New object creation and delta collection
+- `AbstractGuiGame.java`: Full state sync object verification
+
+---
 
 ## Overview
 
@@ -41,15 +140,21 @@ public void serializeChangedOnly(TrackableSerializer ts)  // Serialize only chan
 
 ##### 2. DeltaPacket (`forge-gui/.../net/DeltaPacket.java`)
 
-A serializable packet containing only changed data:
+A serializable packet containing delta updates and new objects:
 
 | Field | Type | Description |
 |-------|------|-------------|
 | `sequenceNumber` | `long` | Monotonically increasing sequence for ordering |
 | `timestamp` | `long` | When the packet was created |
-| `objectDeltas` | `Map<Integer, byte[]>` | Object ID → serialized changed properties |
+| `objectDeltas` | `Map<Integer, byte[]>` | Object ID → serialized changed properties (existing objects) |
+| `newObjects` | `Map<Integer, NewObjectData>` | Object ID → full object data (newly created objects) |
 | `removedObjectIds` | `Set<Integer>` | IDs of objects that no longer exist |
 | `checksum` | `int` | Optional state checksum for validation |
+
+**NewObjectData** contains:
+- `objectId` - The object's unique ID
+- `objectType` - Type constant (TYPE_CARD_VIEW=0, TYPE_PLAYER_VIEW=1, etc.)
+- `fullProperties` - All properties serialized in compact binary format
 
 ##### 3. FullStatePacket (`forge-gui/.../net/FullStatePacket.java`)
 
@@ -65,7 +170,8 @@ Used for initial connection and reconnection scenarios:
 ##### 4. DeltaSyncManager (`forge-gui/.../net/server/DeltaSyncManager.java`)
 
 Server-side manager that:
-- Tracks which objects exist and which have changed
+- Tracks which objects exist (`trackedObjectIds`) and which have been sent to the client (`sentObjectIds`)
+- Distinguishes new objects (need full serialization) from existing objects (only send changes)
 - Builds delta packets by walking the GameView hierarchy
 - Manages client acknowledgments
 - Detects removed objects
@@ -73,10 +179,16 @@ Server-side manager that:
 
 ```java
 // Key methods:
-DeltaPacket collectDeltas(GameView gameView)  // Build delta packet
+DeltaPacket collectDeltas(GameView gameView)  // Build delta packet (new objects + deltas)
+void markObjectsAsSent(GameView gameView)     // Mark all objects as sent after full sync
 void processAcknowledgment(int clientIndex, long seq)  // Handle client ack
 boolean needsFullResync(int clientIndex)  // Check if client fell too far behind
 ```
+
+**Object Tracking Logic**:
+- Objects in `sentObjectIds`: Only changed properties are serialized (delta)
+- Objects NOT in `sentObjectIds`: Full object data is serialized (new object)
+- After sending, all current objects are added to `sentObjectIds`
 
 #### Protocol Methods
 
@@ -344,30 +456,40 @@ This ensures that on reconnection, the stored `NetGuiGame` (which has the `GameV
 | File | Changes |
 |------|---------|
 | `forge-game/.../trackable/TrackableObject.java` | Added `hasChanges()`, `getChangedProps()`, `clearChanges()`, `serializeChangedOnly()` |
+| `forge-game/.../spellability/StackItemView.java` | Added network deserialization constructor |
 
 ### Network Protocol
 | File | Changes |
 |------|---------|
 | `forge-gui/.../net/ProtocolMethod.java` | Added delta sync and reconnection protocol methods |
-| `forge-gui/.../net/DeltaPacket.java` | **NEW** - Delta update packet |
+| `forge-gui/.../net/DeltaPacket.java` | **NEW** - Delta update packet; added `NewObjectData` inner class |
 | `forge-gui/.../net/FullStatePacket.java` | **NEW** - Full state packet with session info |
+| `forge-gui/.../net/NetworkPropertySerializer.java` | **NEW** - Type-aware compact property serialization |
+| `forge-gui/.../net/NetworkTrackableSerializer.java` | **NEW** - Writes TrackableObjects as 4-byte IDs |
+| `forge-gui/.../net/NetworkTrackableDeserializer.java` | **NEW** - Reads TrackableObjects by ID lookup from Tracker |
 
 ### Server-Side
 | File | Changes |
 |------|---------|
-| `forge-gui/.../net/server/DeltaSyncManager.java` | **NEW** - Delta collection and acknowledgment |
+| `forge-gui/.../net/server/DeltaSyncManager.java` | **NEW** - Delta collection; added `sentObjectIds` tracking, `serializeNewObject()`, `markObjectsAsSent()` |
 | `forge-gui/.../net/server/GameSession.java` | **NEW** - Session state management |
 | `forge-gui/.../net/server/PlayerSession.java` | **NEW** - Per-player session with secure tokens |
-| `forge-gui/.../net/server/NetGuiGame.java` | Delta sync integration, `updateClient()` for reconnection |
-| `forge-gui/.../net/server/FServerManager.java` | Session management, reconnection handling, GUI instance caching |
+| `forge-gui/.../net/server/NetGuiGame.java` | Delta sync integration, bandwidth monitoring, change flag clearing |
+| `forge-gui/.../net/server/FServerManager.java` | Session management, reconnection handling, debug logging |
 | `forge-gui/.../net/server/ServerGameLobby.java` | Initialize game session on game start |
 
 ### Client-Side
 | File | Changes |
 |------|---------|
 | `forge-gui/.../net/client/FGameClient.java` | Session credential storage, reconnection logic |
-| `forge-gui/.../net/client/GameClientHandler.java` | Handle reconnection events, send reconnect requests |
+| `forge-gui/.../net/client/GameClientHandler.java` | Handle reconnection events, immediate GameView setting |
 | `forge-gui/.../net/client/NetGameController.java` | Added `ackSync()` method |
+
+### Match/GUI
+| File | Changes |
+|------|---------|
+| `forge-gui/.../gamemodes/match/AbstractGuiGame.java` | Added `applyDelta()` implementation, tracker initialization, object creation from delta data |
+| `forge-gui/.../gamemodes/match/GameLobby.java` | Reordered `onGameStarted()` to execute before `startMatch()` |
 
 ### Events
 | File | Changes |
@@ -380,7 +502,6 @@ This ensures that on reconnection, the stored `NetGuiGame` (which has the `GameV
 |------|---------|
 | `forge-gui/.../gui/interfaces/IGuiGame.java` | Added delta sync and reconnection method signatures |
 | `forge-gui/.../interfaces/IGameController.java` | Added `ackSync()` and `reconnectRequest()` |
-| `forge-gui/.../gamemodes/match/AbstractGuiGame.java` | Default implementations for new methods |
 | `forge-gui/.../player/PlayerControllerHuman.java` | Stub implementations for new controller methods |
 
 ### Tests
@@ -445,11 +566,21 @@ netGuiGame.setDeltaSyncEnabled(false); // Falls back to full state sync
 
 ## Future Improvements
 
-1. **Bandwidth Metrics**: Add monitoring for packet sizes to verify delta sync effectiveness
+1. ~~**Bandwidth Metrics**: Add monitoring for packet sizes to verify delta sync effectiveness~~ ✓ Implemented
 2. **Compression**: Apply compression to delta packets for further bandwidth reduction
 3. **Partial Reconnection**: Support reconnecting to games after client restart (currently requires same client process)
 4. **Spectator Reconnection**: Allow spectators to disconnect and rejoin
 5. **Mobile Optimization**: Tune delta sync parameters for mobile network conditions
+6. **Configurable Logging**: Make debug logging levels configurable for production use
+7. **Explicit Object Removal**: Remove objects from Tracker when they leave the game (currently relies on GC)
+
+---
+
+## Known Limitations
+
+1. `CardStateView` handling for `AlternateState` may skip updates if the state doesn't exist yet on the client
+2. Objects are not explicitly removed from Tracker - relies on garbage collection when no longer referenced
+3. Debug logging is verbose - should be reduced or made configurable for production
 
 ---
 
