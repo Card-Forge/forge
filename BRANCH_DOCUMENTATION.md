@@ -1,4 +1,4 @@
-2# NetworkPlay Branch Documentation
+# NetworkPlay Branch Documentation
 
 This document describes the network optimization features implemented in this branch, including delta synchronization for bandwidth reduction and robust reconnection support for handling network interruptions.
 
