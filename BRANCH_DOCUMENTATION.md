@@ -8,11 +8,11 @@ This document describes the network optimization features implemented in this br
 
 The NetworkPlay branch introduces three major features to improve the multiplayer experience:
 
-1. **Delta Synchronization**: Instead of sending the complete game state on every update, only changed properties are transmitted, significantly reducing bandwidth usage.
+1. **[Delta Synchronization](#feature-1-delta-synchronization)**: Instead of sending the complete game state on every update, only changed properties are transmitted, significantly reducing bandwidth usage.
 
-2. **Reconnection Support**: Players who disconnect (intentionally or due to network issues) can rejoin an in-progress game within a configurable timeout period (default: 5 minutes).
+2. **[Reconnection Support](#feature-2-reconnection-support)**: Players who disconnect (intentionally or due to network issues) can rejoin an in-progress game within a configurable timeout period (default: 5 minutes).
 
-3. **Enhanced Chat Notifications**: Server events (player join/leave, ready state, game start/end, reconnection status) are clearly communicated through styled system messages, providing better visibility into game state and player actions.
+3. **[Enhanced Chat Notifications](#feature-3-enhanced-chat-notifications)**: Server events (player join/leave, ready state, game start/end, reconnection status) are clearly communicated through styled system messages, providing better visibility into game state and player actions.
 
 ---
 
