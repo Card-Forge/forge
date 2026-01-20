@@ -86,8 +86,15 @@ public class NetConnectUtil {
             public void send(final NetEvent event) {
                 if (event instanceof MessageEvent) {
                     final MessageEvent message = (MessageEvent) event;
-                    chatInterface.addMessage(new ChatMessage(message.getSource(), message.getMessage()));
-                    server.broadcast(event);
+                    String source = message.getSource();
+                    // Append (Host) indicator for the host player
+                    if (source != null) {
+                        source = source + " (Host)";
+                    }
+                    // Add to chat with host indicator
+                    chatInterface.addMessage(new ChatMessage(source, message.getMessage()));
+                    // Broadcast with host indicator
+                    server.broadcast(new MessageEvent(source, message.getMessage()));
                 }
             }
             @Override

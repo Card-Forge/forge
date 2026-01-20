@@ -6,11 +6,13 @@ This document describes the network optimization features implemented in this br
 
 ## Overview
 
-The NetworkPlay branch introduces two major features to improve the multiplayer experience:
+The NetworkPlay branch introduces three major features to improve the multiplayer experience:
 
 1. **Delta Synchronization**: Instead of sending the complete game state on every update, only changed properties are transmitted, significantly reducing bandwidth usage.
 
 2. **Reconnection Support**: Players who disconnect (intentionally or due to network issues) can rejoin an in-progress game within a configurable timeout period (default: 5 minutes).
+
+3. **Enhanced Chat Notifications**: Server events (player join/leave, ready state, game start/end, reconnection status) are clearly communicated through styled system messages, providing better visibility into game state and player actions.
 
 ---
 
@@ -355,6 +357,318 @@ This ensures that on reconnection, the stored `NetGuiGame` (which has the `GameV
 
 ---
 
+## Feature 3: Enhanced Chat Notifications
+
+### Problem Statement
+
+During network play, important server events (player joining, disconnecting, ready state changes, game outcomes) were either not communicated at all or buried in system console output. Players had no clear visibility into:
+- Who was ready to start
+- Whether all players had marked ready
+- When a player disconnected or reconnected
+- How much time remained for reconnection
+- Who won the game
+- The host player's identity
+
+This lack of feedback made network play feel unresponsive and confusing, especially during connection issues.
+
+### Solution Architecture
+
+#### System Message Type System
+
+##### ChatMessage Enhancement (`forge-gui/.../net/ChatMessage.java`)
+
+Added a `MessageType` enum to distinguish player messages from system notifications:
+
+```java
+public enum MessageType {
+    PLAYER,   // Regular player chat message
+    SYSTEM    // System notification (displayed differently)
+}
+```
+
+**Automatic Detection**: Messages with `null` source are automatically classified as SYSTEM.
+
+**New Methods**:
+- `isSystemMessage()` - Check if message is a system notification
+- `getType()` - Get the message type
+- `createSystemMessage(String)` - Factory method for system messages
+
+#### Visual Styling
+
+##### Mobile Platform (`OnlineChatScreen.java`)
+
+System messages appear visually distinct from player messages:
+
+| Attribute | Player Messages | System Messages |
+|-----------|----------------|-----------------|
+| **Color** | Zebra/contrast colors | **Light blue (#6496FF)** |
+| **Alignment** | Left (remote) / Right (local) | **Center** |
+| **Triangle pointer** | Yes | No |
+| **Sender name** | Displayed | Hidden |
+
+##### Desktop Platform (`FNetOverlay.java`)
+
+System messages are prefixed with `[SERVER]` indicator:
+```
+[14:32:15] [SERVER] Alice joined the room
+[14:32:20] [SERVER] Bob is ready (1/2 players ready)
+```
+
+*Note: Full blue color support on desktop would require migrating from `FTextArea` to `JTextPane` with `StyledDocument`.*
+
+#### Server Event Notifications
+
+##### 1. Player Ready Tracking
+
+When a player marks ready, the server:
+1. Counts ready players vs. total players
+2. Broadcasts: `"PlayerName is ready (X/Y players ready)"`
+3. If all ready: Broadcasts `"All players ready! Starting game..."`
+
+**Implementation** (`FServerManager.java`):
+```java
+// In updateSlot() and LobbyInputHandler
+if (updateEvent.getReady() != null && updateEvent.getReady()) {
+    int readyCount = countReadyPlayers();
+    int totalPlayers = countTotalPlayers();
+
+    broadcast(new MessageEvent(String.format(
+        "%s is ready (%d/%d players ready)",
+        playerName, readyCount, totalPlayers
+    )));
+
+    if (readyCount == totalPlayers && totalPlayers > 1) {
+        broadcast(new MessageEvent("All players ready! Starting game..."));
+    }
+}
+```
+
+##### 2. Reconnection Countdown
+
+Instead of a single timeout at 5 minutes, notifications are sent every 30 seconds:
+
+**Timeline**:
+```
+0:00 - Player disconnects → "Alice disconnected. Game paused. Waiting for reconnection..."
+0:30 - "Waiting for Alice to reconnect... (4:30 remaining)"
+1:00 - "Waiting for Alice to reconnect... (4:00 remaining)"
+1:30 - "Waiting for Alice to reconnect... (3:30 remaining)"
+...
+4:30 - "Waiting for Alice to reconnect... (0:30 remaining)"
+5:00 - "Alice failed to reconnect. Timeout expired."
+```
+
+**Implementation** (`FServerManager.scheduleReconnectionTimeout()`):
+```java
+Timer timer = new Timer("ReconnectionTimeout-" + playerIndex);
+long countdownInterval = 30 * 1000; // 30 seconds
+long currentTime = 0;
+
+while (currentTime < timeoutMs) {
+    final long remainingTime = timeoutMs - currentTime;
+
+    timer.schedule(new TimerTask() {
+        public void run() {
+            long minutes = remainingSeconds / 60;
+            long seconds = remainingSeconds % 60;
+            String timeStr = String.format("%d:%02d", minutes, seconds);
+
+            broadcast(new MessageEvent(String.format(
+                "Waiting for %s to reconnect... (%s remaining)",
+                username, timeStr
+            )));
+        }
+    }, currentTime);
+
+    currentTime += countdownInterval;
+}
+
+// Final timeout at 5:00
+timer.schedule(new TimerTask() {
+    public void run() { handleReconnectionTimeout(...); }
+}, timeoutMs);
+```
+
+##### 3. Game End Announcements
+
+When a game ends, the server:
+1. Determines the winner from `HostedMatch.getMatch().getWinner()`
+2. Broadcasts winner announcement
+3. Broadcasts "Returning to lobby..."
+
+**Implementation** (`FServerManager.onGameEnded()`):
+```java
+private void announceGameWinner() {
+    HostedMatch hostedMatch = localLobby.getHostedMatch();
+    if (hostedMatch != null) {
+        forge.game.Match match = hostedMatch.getMatch();
+        RegisteredPlayer winner = match.getWinner();
+
+        String message;
+        if (winner != null) {
+            String winnerName = winner.getPlayer().getName();
+            message = String.format("Game ended. Winner: %s", winnerName);
+        } else {
+            message = "Game ended. Draw";
+        }
+
+        broadcast(new MessageEvent(message));
+    }
+}
+```
+
+##### 4. Host Identification
+
+The host player's name is appended with " (Host)" in all chat messages:
+
+**Server-side** (`FServerManager.MessageHandler`):
+```java
+String username = client.getUsername();
+if (client.getIndex() == 0) {  // Index 0 is always the host
+    username = username + " (Host)";
+}
+broadcast(new MessageEvent(username, message));
+```
+
+**Client-side** (`NetConnectUtil.java` - for host's own messages):
+```java
+String source = message.getSource();
+if (source != null) {
+    source = source + " (Host)";
+}
+chatInterface.addMessage(new ChatMessage(source, message.getMessage()));
+```
+
+#### Complete Notification List
+
+The following system messages are now broadcast during network play:
+
+| Event | Message Format | When Sent |
+|-------|---------------|-----------|
+| **Player Join** | `"PlayerName joined the room"` | Player connects to lobby |
+| **Player Leave** | `"PlayerName left the room"` | Player disconnects from lobby (not during game) |
+| **Player Ready** | `"PlayerName is ready (X/Y players ready)"` | Player marks ready |
+| **All Ready** | `"All players ready! Starting game..."` | All players ready |
+| **Disconnect (Game)** | `"PlayerName disconnected. Game paused. Waiting for reconnection..."` | Player disconnects during game |
+| **Reconnect Timer** | `"Waiting for PlayerName to reconnect... (M:SS remaining)"` | Every 30 seconds during timeout |
+| **Reconnect Success** | `"PlayerName has reconnected!"` | Player rejoins successfully |
+| **Reconnect Timeout** | `"PlayerName failed to reconnect. Timeout expired."` | 5-minute timer expires |
+| **Game End** | `"Game ended. Winner: PlayerName"` or `"Game ended. Draw"` | Match completes |
+| **Return to Lobby** | `"Returning to lobby..."` | After game end |
+
+#### Message Flow
+
+```
+Lobby Phase:
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│   Client    │───>│FServerManager│───>│All Clients  │
+│ (joins)     │    │ broadcasts  │    │ (see join)  │
+└─────────────┘    │ MessageEvent│    └─────────────┘
+                   └─────────────┘
+
+Ready State:
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│   Client    │───>│updateSlot() │───>│All Clients  │
+│ clicks ready│    │ counts ready│    │ (see count) │
+└─────────────┘    │ broadcasts  │    └─────────────┘
+                   └─────────────┘
+
+Reconnection:
+┌─────────────┐    ┌──────────────┐   ┌─────────────┐
+│  Disconnect │───>│scheduleTimer │──>│All Clients  │
+│             │    │ (30s interval)   │ (countdown) │
+└─────────────┘    └──────────────┘   └─────────────┘
+                         │
+                         │ every 30s
+                         ▼
+                   ┌──────────────┐
+                   │ broadcast    │
+                   │ countdown    │
+                   └──────────────┘
+```
+
+### Files Modified
+
+| File | Changes |
+|------|---------|
+| `forge-gui/.../net/ChatMessage.java` | Added `MessageType` enum, constructors, `isSystemMessage()`, `createSystemMessage()` |
+| `forge-gui/.../net/server/FServerManager.java` | Added ready notifications, 30-second countdown timer, winner announcement logic, host indicator |
+| `forge-gui/.../net/NetConnectUtil.java` | Added host indicator to local player messages |
+| `forge-gui/.../match/GameLobby.java` | Added `getHostedMatch()` accessor for winner detection |
+| `forge-gui-desktop/.../gui/FNetOverlay.java` | Added `[SERVER]` prefix for system messages |
+| `forge-gui-mobile/.../screens/online/OnlineChatScreen.java` | Added blue styling, centered alignment for system messages |
+
+### Visual Examples
+
+#### Mobile Chat Display
+
+```
+┌─────────────────────────────────────┐
+│                                     │
+│  ┌──────────────────────────────┐  │
+│  │  Alice joined the room       │  │  ← Blue, centered
+│  │  [14:32:15]                  │  │
+│  └──────────────────────────────┘  │
+│                                     │
+│ ┌──────────────────────────────┐◀  │
+│ │ Alice (Host): Hello everyone │   │  ← Player message
+│ │ [14:32:18]                   │   │
+│ └──────────────────────────────┘   │
+│                                     │
+│  ┌──────────────────────────────┐  │
+│  │  Bob joined the room         │  │  ← Blue, centered
+│  │  [14:32:20]                  │  │
+│  └──────────────────────────────┘  │
+│                                     │
+│  ┌──────────────────────────────┐  │
+│  │  Alice (Host) is ready       │  │  ← Blue, centered
+│  │  (1/2 players ready)         │  │
+│  │  [14:32:25]                  │  │
+│  └──────────────────────────────┘  │
+│                                     │
+│  ┌──────────────────────────────┐  │
+│  │  Bob is ready                │  │  ← Blue, centered
+│  │  (2/2 players ready)         │  │
+│  │  [14:32:28]                  │  │
+│  └──────────────────────────────┘  │
+│                                     │
+│  ┌──────────────────────────────┐  │
+│  │  All players ready!          │  │  ← Blue, centered
+│  │  Starting game...            │  │
+│  │  [14:32:28]                  │  │
+│  └──────────────────────────────┘  │
+└─────────────────────────────────────┘
+```
+
+#### Desktop Chat Display
+
+```
+[14:32:15] [SERVER] Alice joined the room
+[14:32:18] Alice (Host): Hello everyone
+[14:32:20] [SERVER] Bob joined the room
+[14:32:25] [SERVER] Alice (Host) is ready (1/2 players ready)
+[14:32:28] [SERVER] Bob is ready (2/2 players ready)
+[14:32:28] [SERVER] All players ready! Starting game...
+...
+[14:45:12] [SERVER] Bob disconnected. Game paused. Waiting for reconnection...
+[14:45:42] [SERVER] Waiting for Bob to reconnect... (4:30 remaining)
+[14:46:12] [SERVER] Waiting for Bob to reconnect... (4:00 remaining)
+[14:46:23] [SERVER] Bob has reconnected!
+...
+[15:12:45] [SERVER] Game ended. Winner: Alice
+[15:12:45] [SERVER] Returning to lobby...
+```
+
+### Benefits
+
+1. **Clear State Visibility**: Players always know who is ready, who is connected, and what's happening
+2. **Connection Awareness**: Countdown timer provides clear feedback during reconnection attempts
+3. **Host Identification**: Makes it obvious who is hosting the game
+4. **Game Outcome**: Winner is clearly announced to all players
+5. **Professional Polish**: Blue system messages (mobile) and [SERVER] prefix (desktop) distinguish official notifications from player chat
+
+---
+
 ## Files Modified
 
 ### Core Game Engine
@@ -373,6 +687,8 @@ This ensures that on reconnection, the stored `NetGuiGame` (which has the `GameV
 | `forge-gui/.../net/NetworkTrackableSerializer.java` | **NEW** - Writes TrackableObjects as 4-byte IDs |
 | `forge-gui/.../net/NetworkTrackableDeserializer.java` | **NEW** - Reads TrackableObjects by ID lookup from Tracker |
 | `forge-gui/.../net/NetworkDebugLogger.java` | **NEW** - Configurable debug logging with separate console/file verbosity levels |
+| `forge-gui/.../net/ChatMessage.java` | Added `MessageType` enum, `isSystemMessage()`, `createSystemMessage()` for chat notifications |
+| `forge-gui/.../net/NetConnectUtil.java` | Added host indicator " (Host)" to local player chat messages |
 
 ### Server-Side
 | File | Changes |
@@ -381,7 +697,7 @@ This ensures that on reconnection, the stored `NetGuiGame` (which has the `GameV
 | `forge-gui/.../net/server/GameSession.java` | **NEW** - Session state management |
 | `forge-gui/.../net/server/PlayerSession.java` | **NEW** - Per-player session with secure tokens |
 | `forge-gui/.../net/server/NetGuiGame.java` | Delta sync integration, bandwidth monitoring, change flag clearing |
-| `forge-gui/.../net/server/FServerManager.java` | Session management, reconnection handling, debug logging |
+| `forge-gui/.../net/server/FServerManager.java` | Session management, reconnection handling, debug logging, chat notifications (ready state, countdown, winner), host indicator |
 | `forge-gui/.../net/server/ServerGameLobby.java` | Initialize game session on game start |
 
 ### Client-Side
@@ -395,7 +711,9 @@ This ensures that on reconnection, the stored `NetGuiGame` (which has the `GameV
 | File | Changes |
 |------|---------|
 | `forge-gui/.../gamemodes/match/AbstractGuiGame.java` | Added `applyDelta()` implementation, tracker initialization, object creation from delta data |
-| `forge-gui/.../gamemodes/match/GameLobby.java` | Reordered `onGameStarted()` to execute before `startMatch()` |
+| `forge-gui/.../gamemodes/match/GameLobby.java` | Reordered `onGameStarted()` to execute before `startMatch()`; added `getHostedMatch()` accessor |
+| `forge-gui-desktop/.../gui/FNetOverlay.java` | Added `[SERVER]` prefix for system messages in chat display |
+| `forge-gui-mobile/.../screens/online/OnlineChatScreen.java` | Added blue styling, centered alignment, no-triangle rendering for system messages |
 
 ### Events
 | File | Changes |
