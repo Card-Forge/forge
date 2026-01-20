@@ -45,10 +45,7 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.staticability.StaticAbilityCantChangeDayTime;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
-import forge.game.zone.CostPaymentStack;
-import forge.game.zone.MagicStack;
-import forge.game.zone.Zone;
-import forge.game.zone.ZoneType;
+import forge.game.zone.*;
 import forge.trackable.Tracker;
 import forge.util.*;
 import forge.util.collect.FCollection;
@@ -729,6 +726,9 @@ public class Game {
                 return;
             }
             if (!visitor.visitAll(player.getZone(ZoneType.Battlefield).getCards(false))) {
+                return;
+            }
+            if (!visitor.visitAll(((PlayerZoneBattlefield)player.getZone(ZoneType.Battlefield)).getMeldedCards())) {
                 return;
             }
             if (!visitor.visitAll(player.getZone(ZoneType.Exile).getCards())) {
