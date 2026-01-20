@@ -21,9 +21,7 @@ Types:Legendary Creature Goblin Warrior
 PT:2/1
 K:Menace
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME attacks, you may blight 1. If you do, create a tapped and attacking token that's a copy of the blighted creature, except it has "At the beginning of the end step, sacrifice this token."
-SVar:TrigCopy:AB$ CopyPermanent | Cost$ Blight<1> | TokenTapped$ True | TokenAttacking$ True | Defined$ CounterPutCards | AddTriggers$ TriggerPhase
-SVar:TriggerPhase:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, sacrifice this token.
-SVar:TrigSac:DB$ Sacrifice | SacValid$ Self
+SVar:TrigCopy:AB$ CopyPermanent | Cost$ Blight<1> | TokenTapped$ True | TokenAttacking$ True | Defined$ CounterPutCards | AtEOTTrig$ Sacrifice
 T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of your first main phase, you may pay {B}. If you do, transform NICKNAME.
 SVar:TrigTransform:AB$ SetState | Cost$ B | Defined$ Self | Mode$ Transform
 Oracle:Menace\nWhenever Grub attacks, you may blight 1. If you do, create a tapped and attacking token that's a copy of the blighted creature, except it has "At the beginning of the end step, sacrifice this token."\nAt the beginning of your first main phase, you may pay {B}. If you do, transform Grub.

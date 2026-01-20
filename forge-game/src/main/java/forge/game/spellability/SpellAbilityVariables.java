@@ -152,9 +152,6 @@ public class SpellAbilityVariables implements Cloneable {
     /** The b targetsSingleTargeting */
     private boolean targetsSingleTarget = false;
 
-    /** The Presence keyword value containing the relevant condition */
-    private String presenceCondition = "";
-
     /** The class level. */
     private String classLevel = null;
     private String classLevelOperator = "EQ";
@@ -855,20 +852,6 @@ public class SpellAbilityVariables implements Cloneable {
             System.err.println(e);
         }
         return null;
-    }
-
-    /**
-     * @return the condition from the Presence keyword, empty if keyword is absent
-     */
-    public String getPresenceCondition() {
-        return this.presenceCondition;
-    }
-
-    /**
-     * @param s the condition from the Presence keyword
-     */
-    public void setPresenceCondition(String s) {
-        this.presenceCondition = s;
     }
 
     public String getClassLevel() {

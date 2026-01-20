@@ -450,20 +450,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             return isRelevantStage;
         }
 
-        if (hasParam("Presence")) {
-            if (hostCard.getCastFrom() == null || hostCard.getCastSA() == null)
-                return false;
-
-            final String type = getParam("Presence");
-
-            int revealed = AbilityUtils.calculateAmount(hostCard, "Revealed$Valid " + type, hostCard.getCastSA());
-            int ctrl = AbilityUtils.calculateAmount(hostCard, "Count$LastStateBattlefield " + type + ".YouCtrl", hostCard.getCastSA());
-
-            if (revealed + ctrl == 0) {
-                return false;
-            }
-        }
-
         if (hasParam("ClassLevel")) {
             final int level = this.hostCard.getClassLevel();
             final int levelMin = Integer.parseInt(getParam("ClassLevel"));
