@@ -1,4 +1,4 @@
-# NetworkPlay Branch Documentation
+2# NetworkPlay Branch Documentation
 
 This document describes the network optimization features implemented in this branch, including delta synchronization for bandwidth reduction and robust reconnection support for handling network interruptions.
 
@@ -92,6 +92,8 @@ boolean needsFullResync(int clientIndex)  // Check if client fell too far behind
 - Objects in `sentObjectIds`: Only changed properties are serialized (delta)
 - Objects NOT in `sentObjectIds`: Full object data is serialized (new object)
 - After sending, all current objects are added to `sentObjectIds`
+
+**Why new objects need full serialization**: Delta sync only works for objects that already exist on the client. When a new card is drawn, a spell is cast, or a token is created, the client has no prior knowledge of that object - it doesn't exist in the client's Tracker yet. Sending only "changed properties" would be meaningless because there's no base object to apply changes to. Therefore, new objects must include all their properties so the client can instantiate them from scratch. Once created and registered in the client's Tracker, subsequent updates to that object can use efficient delta serialization.
 
 #### Protocol Methods
 
@@ -612,7 +614,3 @@ Added diagnostic logging throughout the delta sync path:
 3. Debug logging is verbose - should be reduced or made configurable for production
 
 ---
-
-## Authors
-
-This implementation was developed as part of the Forge network play optimization initiative.

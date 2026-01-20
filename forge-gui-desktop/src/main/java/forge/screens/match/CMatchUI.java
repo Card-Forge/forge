@@ -73,6 +73,7 @@ import forge.game.spellability.StackItemView;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.AbstractGuiGame;
+import forge.gamemodes.net.NetworkDebugLogger;
 import forge.gui.FNetOverlay;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -123,7 +124,9 @@ import forge.toolbox.imaging.FImagePanel.AutoSizeImageMode;
 import forge.toolbox.imaging.FImageUtil;
 import forge.toolbox.special.PhaseIndicator;
 import forge.toolbox.special.PhaseLabel;
+import forge.trackable.Tracker;
 import forge.trackable.TrackableCollection;
+import forge.trackable.TrackableTypes;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
@@ -293,6 +296,13 @@ public final class CMatchUI
         this.sortedPlayers = sortedPlayers;
         allHands = sortedPlayers.size() == getLocalPlayerCount();
 
+        // Debug logging for network play
+        NetworkDebugLogger.log("[CMatchUI.initMatch] sortedPlayers count=%d", sortedPlayers.size());
+        for (PlayerView p : sortedPlayers) {
+            NetworkDebugLogger.log("[CMatchUI.initMatch]   Player ID=%d, hash=%d, isLocal=%b",
+                    p.getId(), System.identityHashCode(p), (myPlayers != null && myPlayers.contains(p)));
+        }
+
         final String[] indices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
 
         final List<VField> fields = new ArrayList<>();
@@ -435,6 +445,10 @@ public final class CMatchUI
         for (final PlayerZoneUpdate update : zonesToUpdate) {
             final PlayerView owner = update.getPlayer();
 
+            // Debug logging
+            NetworkDebugLogger.log("[CMatchUI.updateZones] Processing update for player %d, zones=%s, ownerHash=%d",
+                    owner.getId(), update.getZones(), System.identityHashCode(owner));
+
             boolean setupPlayZone = false, updateHand = false, updateAnte = false, updateZones = false;
             for (final ZoneType zone : update.getZones()) {
                 switch (zone) {
@@ -460,13 +474,19 @@ public final class CMatchUI
                 cAntes.update();
             }
             final VField vField = getFieldViewFor(owner);
-            if(vField == null)
+            if(vField == null) {
+                NetworkDebugLogger.error("[CMatchUI.updateZones] ERROR: vField is null for player %d, sortedPlayers.indexOf=%d",
+                        owner.getId(), sortedPlayers.indexOf(owner));
                 return;
+            }
             if (setupPlayZone) {
                 vField.getTabletop().update();
             }
             if (updateHand) {
                 final VHand vHand = getHandFor(owner);
+                NetworkDebugLogger.log("[CMatchUI.updateZones] updateHand for player %d, vHand=%s, handSize=%s",
+                        owner.getId(), (vHand != null ? "exists" : "NULL"),
+                        (owner.getHand() != null ? String.valueOf(owner.getHand().size()) : "null"));
                 if (vHand != null) {
                     vHand.getLayoutControl().updateHand();
                 }
@@ -1025,11 +1045,25 @@ public final class CMatchUI
 
     @Override
     public void openView(final TrackableCollection<PlayerView> myPlayers) {
+        NetworkDebugLogger.log("[CMatchUI.openView] Called");
         final GameView gameView = getGameView();
         gameView.getGameLog().addObserver(cLog);
 
         // Sort players
         FCollectionView<PlayerView> players = gameView.getPlayers();
+
+        // Debug: Log PlayerView instances from gameView
+        NetworkDebugLogger.log("[CMatchUI.openView] gameView.getPlayers() count=%d", players.size());
+        for (PlayerView pv : players) {
+            Tracker t = pv.getTracker();
+            PlayerView inTracker = t != null ? t.getObj(TrackableTypes.PlayerViewType, pv.getId()) : null;
+            NetworkDebugLogger.log("[CMatchUI.openView]   Player %d: hash=%d, tracker=%s, inTracker=%b, sameInstance=%b",
+                    pv.getId(), System.identityHashCode(pv),
+                    t != null ? "exists" : "null",
+                    inTracker != null,
+                    pv == inTracker);
+        }
+
         if (players.size() == 2 && myPlayers != null && myPlayers.size() == 1 && myPlayers.get(0).equals(players.get(1))) {
             players = new FCollection<>(new PlayerView[]{players.get(1), players.get(0)});
         }

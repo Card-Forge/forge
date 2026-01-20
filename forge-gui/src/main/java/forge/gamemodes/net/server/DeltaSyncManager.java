@@ -8,6 +8,7 @@ import forge.game.spellability.StackItemView;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.DeltaPacket.NewObjectData;
 import forge.gamemodes.net.FullStatePacket;
+import forge.gamemodes.net.NetworkDebugLogger;
 import forge.gamemodes.net.NetworkPropertySerializer;
 import forge.gamemodes.net.NetworkTrackableSerializer;
 import forge.trackable.TrackableObject;
@@ -204,6 +205,14 @@ public class DeltaSyncManager {
         if (player == null) {
             return;
         }
+
+        // Debug: log player state before collecting
+        boolean isSent = sentObjectIds.contains(player.getId());
+        boolean hasChanges = player.hasChanges();
+        int handSize = player.getHand() != null ? player.getHand().size() : 0;
+        Set<TrackableProperty> changedProps = player.getChangedProps();
+        NetworkDebugLogger.log("[DeltaSync] collectPlayerDeltas: player=%d, isSent=%b, hasChanges=%b, handSize=%d, changedProps=%s",
+                player.getId(), isSent, hasChanges, handSize, changedProps);
 
         collectObjectDelta(player, objectDeltas, newObjects, currentObjectIds);
 

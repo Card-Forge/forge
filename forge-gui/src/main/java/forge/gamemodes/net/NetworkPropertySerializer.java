@@ -34,8 +34,15 @@ public final class NetworkPropertySerializer {
     private static final int MARKER_INLINE_OBJECT = 2;
     private static final int MARKER_SKIP = 3;
 
-    // Debug flag for verbose logging
+    // Debug flag for verbose logging (uses NetworkDebugLogger)
     private static final boolean DEBUG_CSV_SERIALIZATION = true;
+
+    // Convenience method for debug logging
+    private static void debugLog(String format, Object... args) {
+        if (DEBUG_CSV_SERIALIZATION) {
+            NetworkDebugLogger.log(format, args);
+        }
+    }
 
     /**
      * Data holder for deserialized CardStateView.
@@ -129,11 +136,11 @@ public final class NetworkPropertySerializer {
             nts.write(MARKER_PRESENT);
             nts.write((TrackableCollection<PlayerView>) value);
         }
-        // ColorSet - write as int mask
+        // ColorSet - write as int mask (cast byte to int to ensure 4 bytes written)
         else if (type == TrackableTypes.ColorSetType) {
             nts.write(MARKER_PRESENT);
             ColorSet colors = (ColorSet) value;
-            nts.write(colors.getColor());
+            nts.write((int) colors.getColor());
         }
         // ManaCost - write as string
         else if (type == TrackableTypes.ManaCostType) {
@@ -221,30 +228,26 @@ public final class NetworkPropertySerializer {
             Map<TrackableProperty, Object> csvProps = csv.getProps();
             if (csvProps != null && !csvProps.isEmpty()) {
                 nts.write(csvProps.size());
-                if (DEBUG_CSV_SERIALIZATION) {
-                    System.out.println(String.format("[CSV-Serialize] Start at byte %d, ID=%d, state=%s, propCount=%d",
-                            startPos, csv.getId(), stateName, csvProps.size()));
-                }
+                debugLog("[CSV-Serialize] Start at byte %d, ID=%d, state=%s, propCount=%d",
+                        startPos, csv.getId(), stateName, csvProps.size());
                 for (Map.Entry<TrackableProperty, Object> entry : csvProps.entrySet()) {
                     int propStartPos = nts.getBytesWritten();
                     nts.write(entry.getKey().ordinal());
                     serialize(nts, entry.getKey(), entry.getValue());  // recursive
                     if (DEBUG_CSV_SERIALIZATION) {
                         int propBytes = nts.getBytesWritten() - propStartPos;
-                        System.out.println(String.format("[CSV-Serialize]   Prop %s (ord=%d): %d bytes, type=%s",
-                                entry.getKey(), entry.getKey().ordinal(), propBytes, entry.getKey().getType()));
+                        debugLog("[CSV-Serialize]   Prop %s (ord=%d): %d bytes, type=%s",
+                                entry.getKey(), entry.getKey().ordinal(), propBytes, entry.getKey().getType());
                     }
                 }
             } else {
                 nts.write(0);
-                if (DEBUG_CSV_SERIALIZATION) {
-                    System.out.println(String.format("[CSV-Serialize] Start at byte %d, ID=%d, state=%s, propCount=0",
-                            startPos, csv.getId(), stateName));
-                }
+                debugLog("[CSV-Serialize] Start at byte %d, ID=%d, state=%s, propCount=0",
+                        startPos, csv.getId(), stateName);
             }
             if (DEBUG_CSV_SERIALIZATION) {
                 int totalBytes = nts.getBytesWritten() - startPos;
-                System.out.println(String.format("[CSV-Serialize] Total bytes for CSV ID=%d: %d", csv.getId(), totalBytes));
+                debugLog("[CSV-Serialize] Total bytes for CSV ID=%d: %d", csv.getId(), totalBytes);
             }
         }
         // StackItemView - skip, will be synced via full state
@@ -293,10 +296,9 @@ public final class NetworkPropertySerializer {
 
         // Validate marker value
         if (marker != MARKER_NULL && marker != MARKER_PRESENT && marker != MARKER_INLINE_OBJECT && marker != MARKER_SKIP) {
-            System.err.println(String.format(
-                    "[Deserialize] WARNING: Unexpected marker %d (0x%08X) at byte %d for property %s (type=%s)",
-                    marker, marker, markerPos, prop, type));
-            System.err.println("[Deserialize] Expected markers: NULL=-1, PRESENT=1, INLINE_OBJECT=2, SKIP=3");
+            NetworkDebugLogger.error("[Deserialize] WARNING: Unexpected marker %d (0x%08X) at byte %d for property %s (type=%s)",
+                    marker, marker, markerPos, prop, type);
+            NetworkDebugLogger.error("[Deserialize] Expected markers: NULL=-1, PRESENT=1, INLINE_OBJECT=2, SKIP=3");
             throw new IOException(String.format("Invalid marker %d (0x%08X) at byte %d for property %s",
                     marker, marker, markerPos, prop));
         }
@@ -455,10 +457,8 @@ public final class NetworkPropertySerializer {
             CardStateName csvState = CardStateName.valueOf(stateName);
             int propCount = ntd.readInt();
 
-            if (DEBUG_CSV_SERIALIZATION) {
-                System.out.println(String.format("[CSV-Deserialize] Start at byte %d, ID=%d, state=%s, propCount=%d",
-                        startPos, csvId, stateName, propCount));
-            }
+            debugLog("[CSV-Deserialize] Start at byte %d, ID=%d, state=%s, propCount=%d",
+                    startPos, csvId, stateName, propCount);
 
             Map<TrackableProperty, Object> props = new HashMap<>();
             for (int i = 0; i < propCount; i++) {
@@ -467,11 +467,10 @@ public final class NetworkPropertySerializer {
 
                 // Validate ordinal before deserializing
                 if (ordinal < 0 || ordinal >= TrackableProperty.values().length) {
-                    System.err.println(String.format(
-                            "[CSV-Deserialize] ERROR: Invalid ordinal %d (0x%08X) at byte %d for prop %d/%d in CSV ID=%d",
-                            ordinal, ordinal, propStartPos, i + 1, propCount, csvId));
-                    System.err.println(String.format("[CSV-Deserialize] Valid ordinal range: 0-%d",
-                            TrackableProperty.values().length - 1));
+                    NetworkDebugLogger.error("[CSV-Deserialize] ERROR: Invalid ordinal %d (0x%08X) at byte %d for prop %d/%d in CSV ID=%d",
+                            ordinal, ordinal, propStartPos, i + 1, propCount, csvId);
+                    NetworkDebugLogger.error("[CSV-Deserialize] Valid ordinal range: 0-%d",
+                            TrackableProperty.values().length - 1);
                     throw new IOException("Invalid TrackableProperty ordinal: " + ordinal +
                             " at byte position " + propStartPos);
                 }
@@ -483,14 +482,14 @@ public final class NetworkPropertySerializer {
 
                 if (DEBUG_CSV_SERIALIZATION) {
                     int propBytes = ntd.getBytesRead() - propStartPos;
-                    System.out.println(String.format("[CSV-Deserialize]   Prop %s (ord=%d): %d bytes, type=%s",
-                            csvProp, ordinal, propBytes, csvProp.getType()));
+                    debugLog("[CSV-Deserialize]   Prop %s (ord=%d): %d bytes, type=%s",
+                            csvProp, ordinal, propBytes, csvProp.getType());
                 }
             }
 
             if (DEBUG_CSV_SERIALIZATION) {
                 int totalBytes = ntd.getBytesRead() - startPos;
-                System.out.println(String.format("[CSV-Deserialize] Total bytes for CSV ID=%d: %d", csvId, totalBytes));
+                debugLog("[CSV-Deserialize] Total bytes for CSV ID=%d: %d", csvId, totalBytes);
             }
 
             // Return as CardStateViewData to be handled by applyDeltaToObject

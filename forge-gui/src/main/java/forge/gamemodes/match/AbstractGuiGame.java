@@ -11,11 +11,14 @@ import forge.game.spellability.StackItemView;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.player.PlayerView;
+import forge.game.zone.ZoneType;
+import forge.player.PlayerZoneUpdate;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.DeltaPacket.NewObjectData;
 import forge.gamemodes.net.FullStatePacket;
 import forge.gamemodes.net.NetworkPropertySerializer;
 import forge.gamemodes.net.NetworkPropertySerializer.CardStateViewData;
+import forge.gamemodes.net.NetworkDebugLogger;
 import forge.gamemodes.net.NetworkTrackableDeserializer;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -114,6 +117,10 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public void setGameView(final GameView gameView0) {
+        NetworkDebugLogger.log("[setGameView] Called with gameView0=%s, existing gameView=%s",
+                gameView0 != null ? "non-null" : "null",
+                gameView != null ? "non-null" : "null");
+
         if (gameView == null || gameView0 == null) {
             if (gameView0 != null) {
                 // When receiving a deserialized GameView from the network,
@@ -123,6 +130,17 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 // 3. Call updateObjLookup() to populate the index
                 ensureTrackerInitialized(gameView0);
                 gameView0.updateObjLookup();
+
+                // Log PlayerView instances after initialization
+                if (gameView0.getPlayers() != null) {
+                    for (PlayerView pv : gameView0.getPlayers()) {
+                        Tracker t = gameView0.getTracker();
+                        PlayerView inTracker = t != null ? t.getObj(TrackableTypes.PlayerViewType, pv.getId()) : null;
+                        NetworkDebugLogger.log("[setGameView] Initial setup: Player %d hash=%d, inTracker=%b, sameInstance=%b",
+                                pv.getId(), System.identityHashCode(pv),
+                                inTracker != null, pv == inTracker);
+                    }
+                }
             }
             gameView = gameView0;
             return;
@@ -162,7 +180,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         // Recursively set tracker on all TrackableObjects in the GameView's properties
         java.util.Set<Integer> visited = new java.util.HashSet<>();
         setTrackerRecursively(gameView0, tracker, visited);
-        System.out.println(String.format("[EnsureTracker] Set tracker on %d unique objects", visited.size()));
+        NetworkDebugLogger.log("[EnsureTracker] Set tracker on %d unique objects", visited.size());
 
         // Verify trackers are set on players and their cards
         if (gameView0.getPlayers() != null) {
@@ -182,9 +200,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                         else cardsWithoutTracker++;
                     }
                 }
-                System.out.println(String.format(
-                    "[EnsureTracker] Player %d: hasTracker=%b, cards with tracker=%d, cards without=%d",
-                    player.getId(), playerHasTracker, cardsWithTracker, cardsWithoutTracker));
+                NetworkDebugLogger.log("[EnsureTracker] Player %d: hasTracker=%b, cards with tracker=%d, cards without=%d",
+                    player.getId(), playerHasTracker, cardsWithTracker, cardsWithoutTracker);
             }
         }
     }
@@ -981,6 +998,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     // Delta sync and reconnection default implementations
 
+    // Track zone changes during delta application for UI refresh
+    private final Map<PlayerView, Set<ZoneType>> pendingZoneUpdates = new HashMap<>();
+
     @Override
     public void applyDelta(DeltaPacket packet) {
         if (packet == null || gameView == null) {
@@ -989,13 +1009,30 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
         Tracker tracker = gameView.getTracker();
         if (tracker == null) {
-            System.err.println("[DeltaSync] Cannot apply delta: Tracker is null");
+            NetworkDebugLogger.error("[DeltaSync] Cannot apply delta: Tracker is null");
             return;
+        }
+
+        // Debug: Log what PlayerViews are in the tracker at start
+        NetworkDebugLogger.log("[DeltaSync] === START applyDelta seq=%d ===", packet.getSequenceNumber());
+        if (gameView.getPlayers() != null) {
+            for (PlayerView pv : gameView.getPlayers()) {
+                PlayerView inTracker = tracker.getObj(TrackableTypes.PlayerViewType, pv.getId());
+                boolean sameInstance = (pv == inTracker);
+                NetworkDebugLogger.log("[DeltaSync] GameView PlayerView ID=%d hash=%d, inTracker=%s trackerHash=%d, sameInstance=%b",
+                        pv.getId(), System.identityHashCode(pv),
+                        inTracker != null ? "FOUND" : "NULL",
+                        inTracker != null ? System.identityHashCode(inTracker) : 0,
+                        sameInstance);
+            }
         }
 
         int newObjectCount = 0;
         int appliedCount = 0;
         int skippedCount = 0;
+
+        // Clear pending zone updates before processing
+        pendingZoneUpdates.clear();
 
         // STEP 1: Create new objects first (so deltas can reference them)
         Map<Integer, NewObjectData> newObjects = packet.getNewObjects();
@@ -1005,11 +1042,10 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                     createObjectFromData(newObj, tracker);
                     newObjectCount++;
                 } catch (Exception e) {
-                    System.err.println("[DeltaSync] Error creating new object " + newObj.getObjectId() + ": " + e.getMessage());
-                    e.printStackTrace();
+                    NetworkDebugLogger.error("[DeltaSync] Error creating new object " + newObj.getObjectId(), e);
                 }
             }
-            System.out.println(String.format("[DeltaSync] Created %d new objects", newObjectCount));
+            NetworkDebugLogger.log("[DeltaSync] Created %d new objects", newObjectCount);
 
             // Verify CardViews are in tracker
             int verifyCount = 0;
@@ -1019,11 +1055,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                     if (cv != null) {
                         verifyCount++;
                     } else {
-                        System.err.println("[DeltaSync] VERIFY FAILED: CardView " + newObj.getObjectId() + " not in tracker after creation!");
+                        NetworkDebugLogger.error("[DeltaSync] VERIFY FAILED: CardView %d not in tracker after creation!", newObj.getObjectId());
                     }
                 }
             }
-            System.out.println(String.format("[DeltaSync] Verified %d CardViews in tracker", verifyCount));
+            NetworkDebugLogger.log("[DeltaSync] Verified %d CardViews in tracker", verifyCount);
         }
 
         // STEP 2: Apply property deltas to existing objects
@@ -1037,27 +1073,49 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                     applyDeltaToObject(obj, deltaBytes, tracker);
                     appliedCount++;
                 } catch (Exception e) {
-                    System.err.println("[DeltaSync] Error applying delta to object " + objectId + ": " + e.getMessage());
+                    NetworkDebugLogger.error("[DeltaSync] Error applying delta to object " + objectId, e);
                     skippedCount++;
                 }
             } else {
                 // Object not found - this shouldn't happen if new objects were created first
-                System.err.println("[DeltaSync] Object ID " + objectId + " NOT FOUND for delta application");
+                NetworkDebugLogger.error("[DeltaSync] Object ID %d NOT FOUND for delta application", objectId);
                 skippedCount++;
             }
         }
 
         // STEP 3: Handle removed objects
         if (!packet.getRemovedObjectIds().isEmpty()) {
-            System.out.println("[DeltaSync] Packet contains " + packet.getRemovedObjectIds().size() + " removed objects");
+            NetworkDebugLogger.log("[DeltaSync] Packet contains %d removed objects", packet.getRemovedObjectIds().size());
             // Note: Objects are not removed from Tracker - they'll just not be updated anymore
             // and will be garbage collected when no longer referenced by the game state
         }
 
+        // STEP 4: Refresh UI for any changed zones
+        if (!pendingZoneUpdates.isEmpty()) {
+            List<PlayerZoneUpdate> zoneUpdates = new ArrayList<>();
+            for (Map.Entry<PlayerView, Set<ZoneType>> entry : pendingZoneUpdates.entrySet()) {
+                PlayerView player = entry.getKey();
+                Set<ZoneType> zones = entry.getValue();
+                if (!zones.isEmpty()) {
+                    PlayerZoneUpdate update = new PlayerZoneUpdate(player, null);
+                    for (ZoneType zone : zones) {
+                        update.addZone(zone);
+                    }
+                    zoneUpdates.add(update);
+                    NetworkDebugLogger.log("[DeltaSync] UI refresh: player=%d, zones=%s, hash=%d",
+                            player.getId(), zones, System.identityHashCode(player));
+                }
+            }
+            if (!zoneUpdates.isEmpty()) {
+                updateZones(zoneUpdates);
+            }
+            pendingZoneUpdates.clear();
+        }
+
         // Log summary
         if (newObjectCount > 0 || appliedCount > 0 || skippedCount > 0) {
-            System.out.println(String.format("[DeltaSync] Summary: %d new objects, %d deltas applied, %d skipped",
-                    newObjectCount, appliedCount, skippedCount));
+            NetworkDebugLogger.log("[DeltaSync] Summary: %d new objects, %d deltas applied, %d skipped",
+                    newObjectCount, appliedCount, skippedCount);
         }
 
         // Send acknowledgment
@@ -1075,12 +1133,28 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         int objectType = data.getObjectType();
         byte[] fullProps = data.getFullProperties();
 
+        // Log what type of object we're trying to create
+        String typeName = "Unknown";
+        switch (objectType) {
+            case NewObjectData.TYPE_CARD_VIEW: typeName = "CardView"; break;
+            case NewObjectData.TYPE_PLAYER_VIEW: typeName = "PlayerView"; break;
+            case NewObjectData.TYPE_STACK_ITEM_VIEW: typeName = "StackItemView"; break;
+            case NewObjectData.TYPE_COMBAT_VIEW: typeName = "CombatView"; break;
+            case NewObjectData.TYPE_GAME_VIEW: typeName = "GameView"; break;
+        }
+
         // Check if object already exists (shouldn't happen, but be safe)
         TrackableObject existing = findObjectById(tracker, objectId);
         if (existing != null) {
-            System.out.println(String.format("[DeltaSync] Object ID %d already exists, applying properties as delta", objectId));
+            NetworkDebugLogger.log("[DeltaSync] %s ID=%d already exists (hash=%d), applying properties as delta",
+                    typeName, objectId, System.identityHashCode(existing));
             applyDeltaToObject(existing, fullProps, tracker);
             return;
+        }
+
+        // Log when creating new object (especially important for PlayerView)
+        if (objectType == NewObjectData.TYPE_PLAYER_VIEW) {
+            NetworkDebugLogger.log("[DeltaSync] WARNING: Creating NEW PlayerView ID=%d - this may cause identity mismatch!", objectId);
         }
 
         // Create the appropriate object type
@@ -1093,6 +1167,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             case NewObjectData.TYPE_PLAYER_VIEW:
                 obj = new PlayerView(objectId, tracker);
                 tracker.putObj(TrackableTypes.PlayerViewType, objectId, (PlayerView) obj);
+                NetworkDebugLogger.log("[DeltaSync] Created NEW PlayerView ID=%d hash=%d", objectId, System.identityHashCode(obj));
                 break;
             case NewObjectData.TYPE_STACK_ITEM_VIEW:
                 obj = new StackItemView(objectId, tracker);
@@ -1112,15 +1187,15 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 }
                 break;
             default:
-                System.err.println("[DeltaSync] Unknown object type: " + objectType);
+                NetworkDebugLogger.error("[DeltaSync] Unknown object type: %d", objectType);
                 return;
         }
 
         if (obj != null) {
             // Apply all properties to the new object
             applyDeltaToObject(obj, fullProps, tracker);
-            System.out.println(String.format("[DeltaSync] Created %s ID=%d",
-                    obj.getClass().getSimpleName(), obj.getId()));
+            NetworkDebugLogger.log("[DeltaSync] Created %s ID=%d",
+                    obj.getClass().getSimpleName(), obj.getId());
         }
     }
 
@@ -1151,7 +1226,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         }
 
         // Debug: Log when object not found
-        System.out.println(String.format("[DeltaSync] Object ID %d NOT FOUND in any lookup", objectId));
+        NetworkDebugLogger.log("[DeltaSync] Object ID %d NOT FOUND in any lookup", objectId);
 
         return null;
     }
@@ -1170,8 +1245,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         ntd.resetBytesRead(); // Reset counter after the initial propCount read
         Map<TrackableProperty, Object> props = obj.getProps();
 
-        System.out.println(String.format("[DeltaSync] applyDeltaToObject: objId=%d, objType=%s, deltaBytes=%d, propCount=%d",
-                obj.getId(), obj.getClass().getSimpleName(), deltaBytes.length, propCount));
+        NetworkDebugLogger.log("[DeltaSync] applyDeltaToObject: objId=%d, objType=%s, deltaBytes=%d, propCount=%d",
+                obj.getId(), obj.getClass().getSimpleName(), deltaBytes.length, propCount);
 
         for (int i = 0; i < propCount; i++) {
             int bytePosBefore = ntd.getBytesRead() + 4; // +4 for the initial propCount
@@ -1179,13 +1254,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
             // Validate ordinal before deserialization
             if (ordinal < 0 || ordinal >= TrackableProperty.values().length) {
-                System.err.println(String.format(
-                        "[DeltaSync] ERROR: Invalid ordinal %d (0x%08X) at byte %d for prop %d/%d in object %d (%s)",
-                        ordinal, ordinal, bytePosBefore, i + 1, propCount, obj.getId(), obj.getClass().getSimpleName()));
-                System.err.println(String.format("[DeltaSync] Valid ordinal range: 0-%d",
-                        TrackableProperty.values().length - 1));
-                System.err.println("[DeltaSync] Hex dump of delta bytes:");
-                dumpHexBytes(deltaBytes, bytePosBefore);
+                NetworkDebugLogger.error("[DeltaSync] ERROR: Invalid ordinal %d (0x%08X) at byte %d for prop %d/%d in object %d (%s)",
+                        ordinal, ordinal, bytePosBefore, i + 1, propCount, obj.getId(), obj.getClass().getSimpleName());
+                NetworkDebugLogger.error("[DeltaSync] Valid ordinal range: 0-%d",
+                        TrackableProperty.values().length - 1);
+                NetworkDebugLogger.hexDump("[DeltaSync] Hex dump of delta bytes:", deltaBytes, bytePosBefore);
                 throw new RuntimeException("Invalid TrackableProperty ordinal: " + ordinal);
             }
 
@@ -1194,68 +1267,57 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
             try {
                 Object value = NetworkPropertySerializer.deserialize(ntd, prop, oldValue);
+                // Log what's being set for PlayerView
+                if (obj instanceof PlayerView) {
+                    String valueDesc = value == null ? "null" :
+                        (value instanceof TrackableCollection ? "Collection[" + ((TrackableCollection<?>)value).size() + "]" : value.getClass().getSimpleName());
+                    NetworkDebugLogger.log("[DeltaSync] PlayerView %d: setting %s = %s", obj.getId(), prop, valueDesc);
+
+                    // Track zone changes for UI refresh
+                    ZoneType changedZone = getZoneTypeForProperty(prop);
+                    if (changedZone != null) {
+                        trackZoneChange((PlayerView) obj, changedZone);
+                    }
+                }
                 // Use reflection to call the protected set method
                 setPropertyValue(obj, prop, value);
             } catch (Exception e) {
                 int bytePosAfter = ntd.getBytesRead() + 4; // +4 for the initial propCount
-                System.err.println(String.format(
-                        "[DeltaSync] Error deserializing property %s (ordinal=%d) at bytes %d-%d: %s",
-                        prop, ordinal, bytePosBefore, bytePosAfter, e.getMessage()));
-                System.err.println("[DeltaSync] Hex dump of delta bytes:");
-                dumpHexBytes(deltaBytes, bytePosBefore);
-                e.printStackTrace();
+                NetworkDebugLogger.error("[DeltaSync] Error deserializing property %s (ordinal=%d) at bytes %d-%d: %s",
+                        prop, ordinal, bytePosBefore, bytePosAfter, e.getMessage());
+                NetworkDebugLogger.hexDump("[DeltaSync] Hex dump of delta bytes:", deltaBytes, bytePosBefore);
+                NetworkDebugLogger.error("[DeltaSync] Exception details:", e);
             }
         }
     }
 
     /**
-     * Dump bytes in hex format for debugging serialization issues.
-     * Shows context around the error position.
+     * Map a TrackableProperty to its corresponding ZoneType, if any.
+     * @param prop the property to check
+     * @return the ZoneType if this is a zone property, null otherwise
      */
-    private void dumpHexBytes(byte[] bytes, int errorPosition) {
-        StringBuilder sb = new StringBuilder();
-        int start = Math.max(0, errorPosition - 32);
-        int end = Math.min(bytes.length, errorPosition + 64);
-
-        sb.append(String.format("Bytes %d-%d (error at %d):%n", start, end - 1, errorPosition));
-
-        for (int i = start; i < end; i += 16) {
-            sb.append(String.format("%04d: ", i));
-
-            // Hex values
-            for (int j = 0; j < 16 && i + j < end; j++) {
-                if (i + j == errorPosition) {
-                    sb.append("[");
-                }
-                sb.append(String.format("%02X", bytes[i + j] & 0xFF));
-                if (i + j == errorPosition) {
-                    sb.append("]");
-                } else {
-                    sb.append(" ");
-                }
-            }
-
-            // Padding if needed
-            for (int j = Math.min(16, end - i); j < 16; j++) {
-                sb.append("   ");
-            }
-
-            sb.append(" | ");
-
-            // ASCII representation
-            for (int j = 0; j < 16 && i + j < end; j++) {
-                byte b = bytes[i + j];
-                if (b >= 32 && b < 127) {
-                    sb.append((char) b);
-                } else {
-                    sb.append('.');
-                }
-            }
-
-            sb.append(String.format("%n"));
+    private static ZoneType getZoneTypeForProperty(TrackableProperty prop) {
+        switch (prop) {
+            case Hand: return ZoneType.Hand;
+            case Library: return ZoneType.Library;
+            case Graveyard: return ZoneType.Graveyard;
+            case Battlefield: return ZoneType.Battlefield;
+            case Exile: return ZoneType.Exile;
+            case Command: return ZoneType.Command;
+            case Flashback: return ZoneType.Flashback;
+            case Ante: return ZoneType.Ante;
+            case Sideboard: return ZoneType.Sideboard;
+            default: return null;
         }
+    }
 
-        System.err.println(sb.toString());
+    /**
+     * Track a zone change for UI refresh after delta application.
+     * @param player the player whose zone changed
+     * @param zone the zone that changed
+     */
+    private void trackZoneChange(PlayerView player, ZoneType zone) {
+        pendingZoneUpdates.computeIfAbsent(player, k -> EnumSet.noneOf(ZoneType.class)).add(zone);
     }
 
     /**
@@ -1277,8 +1339,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                     if (csv == null) {
                         // CurrentState should have been created by CardView constructor
                         // If it's null, something is wrong - try to create it
-                        System.err.println("[DeltaSync] WARNING: CurrentState is null for CardView " + cardView.getId() +
-                                ", attempting to create with state=" + csvData.state);
+                        NetworkDebugLogger.error("[DeltaSync] WARNING: CurrentState is null for CardView %d, attempting to create with state=%s",
+                                cardView.getId(), csvData.state);
                         csv = createCardStateView(cardView, csvData.state);
                         if (csv != null) {
                             // Set the newly created CardStateView as CurrentState
@@ -1289,16 +1351,15 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                         }
                     } else if (csv.getState() != csvData.state) {
                         // State mismatch - log warning but continue with property application
-                        System.out.println(String.format(
-                                "[DeltaSync] CurrentState state mismatch for CardView %d: existing=%s, data=%s (will apply properties anyway)",
-                                cardView.getId(), csv.getState(), csvData.state));
+                        NetworkDebugLogger.log("[DeltaSync] CurrentState state mismatch for CardView %d: existing=%s, data=%s (will apply properties anyway)",
+                                cardView.getId(), csv.getState(), csvData.state);
                     }
                 } else if (prop == TrackableProperty.AlternateState) {
                     csv = cardView.getAlternateState();
                     if (csv == null) {
                         // AlternateState doesn't exist - try to create it
-                        System.out.println("[DeltaSync] Creating AlternateState for CardView " + cardView.getId() +
-                                " with state=" + csvData.state);
+                        NetworkDebugLogger.log("[DeltaSync] Creating AlternateState for CardView %d with state=%s",
+                                cardView.getId(), csvData.state);
                         csv = createCardStateView(cardView, csvData.state);
                         if (csv != null) {
                             // Set the newly created CardStateView as AlternateState
@@ -1345,18 +1406,18 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
                         // Recursively handle nested CardStateViewData (shouldn't happen, but be safe)
                         if (csvValue instanceof CardStateViewData) {
-                            System.err.println("[DeltaSync] Nested CardStateViewData not supported for property " + csvProp);
+                            NetworkDebugLogger.error("[DeltaSync] Nested CardStateViewData not supported for property %s", csvProp);
                             continue;
                         }
 
                         setMethod.invoke(csv, csvProp, csvValue);
                         appliedCount++;
                     }
-                    System.out.println(String.format("[DeltaSync] Applied %d/%d properties to CardStateView (state=%s) of CardView %d",
-                            appliedCount, csvData.properties.size(), csvData.state, cardView.getId()));
+                    NetworkDebugLogger.log("[DeltaSync] Applied %d/%d properties to CardStateView (state=%s) of CardView %d",
+                            appliedCount, csvData.properties.size(), csvData.state, cardView.getId());
                 } else {
-                    System.err.println("[DeltaSync] Failed to get/create CardStateView for property " + prop +
-                            " on CardView " + cardView.getId());
+                    NetworkDebugLogger.error("[DeltaSync] Failed to get/create CardStateView for property %s on CardView %d",
+                            prop, cardView.getId());
                 }
                 return;
             }
@@ -1367,8 +1428,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             setMethod.setAccessible(true);
             setMethod.invoke(obj, prop, value);
         } catch (Exception e) {
-            System.err.println("[DeltaSync] Error setting property " + prop + " on object " + obj.getId() + ": " + e.getMessage());
-            e.printStackTrace();
+            NetworkDebugLogger.error("[DeltaSync] Error setting property %s on object %d: %s", prop, obj.getId(), e.getMessage());
+            NetworkDebugLogger.error("[DeltaSync] Stack trace:", e);
         }
     }
 
@@ -1393,11 +1454,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 Tracker tracker = cardView.getTracker();
                 return (CardStateView) constructor.newInstance(cardView, cardView.getId(), state, tracker);
             } catch (Exception e2) {
-                System.err.println("[DeltaSync] Failed to create CardStateView via constructor: " + e2.getMessage());
+                NetworkDebugLogger.error("[DeltaSync] Failed to create CardStateView via constructor: %s", e2.getMessage());
                 return null;
             }
         } catch (Exception e) {
-            System.err.println("[DeltaSync] Failed to create CardStateView: " + e.getMessage());
+            NetworkDebugLogger.error("[DeltaSync] Failed to create CardStateView: %s", e.getMessage());
             return null;
         }
     }
@@ -1408,54 +1469,85 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         if (packet != null && packet.getGameView() != null) {
             GameView newGameView = packet.getGameView();
 
-            // IMPORTANT: For full state sync, we need to completely replace the game view
-            // and ensure the tracker is properly initialized on all objects.
-            // We can't use copyChangedProps because that doesn't set up trackers.
-            ensureTrackerInitialized(newGameView);
-            newGameView.updateObjLookup();
+            // CRITICAL FIX: If gameView already exists with a tracker, we must NOT replace it
+            // because the UI (sortedPlayers, CHand, etc.) holds references to the existing PlayerViews.
+            // Replacing gameView would orphan those references and break the UI.
+            if (gameView != null && gameView.getTracker() != null) {
+                NetworkDebugLogger.log("[FullStateSync] gameView already exists - using copyChangedProps to preserve object identity");
 
-            // Debug: Log what's in the tracker after updateObjLookup
-            Tracker tracker = newGameView.getTracker();
-            if (tracker != null) {
-                int cardCount = 0;
-                int playerCount = 0;
-                // Count objects by iterating through known collections
-                if (newGameView.getPlayers() != null) {
-                    for (PlayerView player : newGameView.getPlayers()) {
-                        playerCount++;
-                        // Count cards in player zones
-                        cardCount += countCards(player.getHand());
-                        cardCount += countCards(player.getGraveyard());
-                        cardCount += countCards(player.getLibrary());
-                        cardCount += countCards(player.getExile());
-                        cardCount += countCards(player.getBattlefield());
+                // Initialize tracker on the incoming gameView so copyChangedProps can work
+                if (newGameView.getTracker() == null) {
+                    // Use the existing tracker for the new GameView's objects
+                    Tracker existingTracker = gameView.getTracker();
+                    java.util.Set<Integer> visited = new java.util.HashSet<>();
+                    setTrackerRecursively(newGameView, existingTracker, visited);
+                }
+
+                // Copy changed properties to existing objects (preserves object identity)
+                gameView.copyChangedProps(newGameView);
+
+                NetworkDebugLogger.log("[FullStateSync] Used copyChangedProps - existing PlayerView instances preserved");
+                if (gameView.getPlayers() != null) {
+                    for (PlayerView player : gameView.getPlayers()) {
+                        NetworkDebugLogger.log("[FullStateSync] Preserved Player %d: hash=%d",
+                                player.getId(), System.identityHashCode(player));
                     }
                 }
-                System.out.println(String.format("[FullStateSync] After updateObjLookup: %d players, ~%d cards found in zones",
-                        playerCount, cardCount));
+            } else {
+                // No existing gameView - initialize fresh (this is the first sync or reconnection)
+                NetworkDebugLogger.log("[FullStateSync] No existing gameView - performing fresh initialization");
 
-                // Verify a few objects are actually in the tracker
-                if (newGameView.getPlayers() != null) {
-                    for (PlayerView player : newGameView.getPlayers()) {
-                        TrackableObject foundPlayer = tracker.getObj(TrackableTypes.PlayerViewType, player.getId());
-                        System.out.println(String.format("[FullStateSync] Player %d: tracker lookup = %s",
-                                player.getId(), foundPlayer != null ? "FOUND" : "NOT FOUND"));
+                ensureTrackerInitialized(newGameView);
+                newGameView.updateObjLookup();
 
-                        // Check a card from hand
-                        if (player.getHand() != null) {
-                            for (CardView card : player.getHand()) {
-                                TrackableObject foundCard = tracker.getObj(TrackableTypes.CardViewType, card.getId());
-                                System.out.println(String.format("[FullStateSync] Card %d (from hand): tracker lookup = %s",
-                                        card.getId(), foundCard != null ? "FOUND" : "NOT FOUND"));
-                                break; // Just check first card
+                // Debug: Log what's in the tracker after updateObjLookup
+                Tracker tracker = newGameView.getTracker();
+                if (tracker != null) {
+                    int cardCount = 0;
+                    int playerCount = 0;
+                    // Count objects by iterating through known collections
+                    if (newGameView.getPlayers() != null) {
+                        for (PlayerView player : newGameView.getPlayers()) {
+                            playerCount++;
+                            // Count cards in player zones
+                            cardCount += countCards(player.getHand());
+                            cardCount += countCards(player.getGraveyard());
+                            cardCount += countCards(player.getLibrary());
+                            cardCount += countCards(player.getExile());
+                            cardCount += countCards(player.getBattlefield());
+                        }
+                    }
+                    NetworkDebugLogger.log("[FullStateSync] After updateObjLookup: %d players, ~%d cards found in zones",
+                            playerCount, cardCount);
+
+                    // Verify a few objects are actually in the tracker
+                    if (newGameView.getPlayers() != null) {
+                        for (PlayerView player : newGameView.getPlayers()) {
+                            TrackableObject foundPlayer = tracker.getObj(TrackableTypes.PlayerViewType, player.getId());
+                            boolean sameInstance = (player == foundPlayer);
+                            NetworkDebugLogger.log("[FullStateSync] Player %d: hash=%d, trackerLookup=%s, trackerHash=%d, sameInstance=%b",
+                                    player.getId(),
+                                    System.identityHashCode(player),
+                                    foundPlayer != null ? "FOUND" : "NOT FOUND",
+                                    foundPlayer != null ? System.identityHashCode(foundPlayer) : 0,
+                                    sameInstance);
+
+                            // Check a card from hand
+                            if (player.getHand() != null) {
+                                for (CardView card : player.getHand()) {
+                                    TrackableObject foundCard = tracker.getObj(TrackableTypes.CardViewType, card.getId());
+                                    NetworkDebugLogger.log("[FullStateSync] Card %d (from hand): tracker lookup = %s",
+                                            card.getId(), foundCard != null ? "FOUND" : "NOT FOUND");
+                                    break; // Just check first card
+                                }
                             }
                         }
                     }
                 }
-            }
 
-            // Replace the game view entirely
-            gameView = newGameView;
+                // Set the new game view
+                gameView = newGameView;
+            }
 
             // Send acknowledgment
             IGameController controller = getGameController();

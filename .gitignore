@@ -98,3 +98,6 @@ __pycache__
 # Ignore Claude Code configuration
 CLAUDE.md
 .claude/
+
+# Ignore network debug logs
+forge-gui-desktop/logs
