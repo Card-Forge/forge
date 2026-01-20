@@ -489,6 +489,15 @@ public class RewardScene extends UIScene {
         float spacing = 2;
         int i = 0;
         for (Reward reward : new Array.ArrayIterator<>(newRewards)) {
+            // Todo: Append all cards gained as long as the reward is NOT a shop
+            // Todo: Handle the case where it is a shop and the user buys something
+            if (type != Type.Shop) {
+                if (reward.getType() == Reward.Type.Card) {
+                    String cardName = reward.getCard().getCardName();
+                    System.out.println("FORGE_ARCHIPELAGO: CARD REWARD DETECTED: " + cardName);
+                }
+            }
+
             boolean skipCard = false;
             if (type == Type.Shop) {
                 if (changes.wasCardBought(shopActor.getObjectId(), i)) {
