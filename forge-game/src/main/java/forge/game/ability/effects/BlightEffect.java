@@ -7,6 +7,8 @@ import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardPredicates;
 import forge.game.card.CounterEnumType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -27,23 +29,22 @@ public class BlightEffect extends SpellAbilityEffect {
         sb.append(Lang.joinHomogenous(tgt));
         sb.append(" ");
         sb.append(tgt.size() > 1 ? "blights" : "blight");
-        sb.append(" ");
-        sb.append(amount);
-        sb.append(". ");
+        sb.append(" ").append(amount).append(". ");
 
         return sb.toString();
 	}
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card card = sa.getHostCard();
-        final Game game = card.getGame();
+        final Card host = sa.getHostCard();
+        final Game game = host.getGame();
         GameEntityCounterTable table = new GameEntityCounterTable();
 
-        final int amount = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("Num", "1"), sa);
-		
+        final int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Num", "1"), sa);
+
 		for (final Player p : getTargetPlayers(sa)) {
-			Card tgt = p.getController().chooseSingleEntityForEffect(p.getCreaturesInPlay(), sa, Localizer.getInstance().getMessage("lblChooseaCard"), false, Maps.newHashMap());
+            CardCollection options = p.getCreaturesInPlay().filter(CardPredicates.canReceiveCounters(CounterEnumType.M1M1));
+			Card tgt = p.getController().chooseSingleEntityForEffect(options, sa, Localizer.getInstance().getMessage("lblChooseaCard"), false, Maps.newHashMap());
 			if (tgt == null) {
 				continue;
 			}

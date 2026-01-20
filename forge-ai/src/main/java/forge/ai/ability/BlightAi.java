@@ -23,7 +23,7 @@ public class BlightAi extends SpellAbilityAi {
 
     @Override
     protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
-        return canPlayWithTargeting(ai, sa, /*mandatory=*/ false);
+        return canPlayWithTargeting(ai, sa, false);
     }
 
     @Override
@@ -73,24 +73,9 @@ public class BlightAi extends SpellAbilityAi {
     }
 
     @Override
-    protected Card chooseSingleCard(
-            Player ai,
-            SpellAbility sa,
-            Iterable<Card> options,
-            boolean isOptional,
-            Player targetedPlayer,
-            Map<String, Object> params
-    ) {
-        // First try to find a creature that can't receive -1/-1 counters
-        Optional<Card> immune = StreamUtil.stream(options).filter(
-                c -> !c.canReceiveCounters(CounterEnumType.M1M1)).findAny();
-        if (immune.isPresent()) {
-            return immune.get();
-        }
-
+    protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         // Prefer creatures with Undying that won't die from the counters
-        int amount = AbilityUtils.calculateAmount(sa.getHostCard(),
-                sa.getParamOrDefault("Num", "1"), sa);
+        int amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParamOrDefault("Num", "1"), sa);
         CardCollection undying = CardLists.filter(options, c ->
                 c.hasKeyword(Keyword.UNDYING)
                 && c.getCounters(CounterEnumType.P1P1) <= amount
