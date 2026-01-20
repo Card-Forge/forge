@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import forge.ai.*;
 import forge.game.GameEntity;
 import forge.game.card.*;
+import forge.game.player.GameLossReason;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -58,6 +59,11 @@ public class CountersProliferateAi extends SpellAbilityAi {
         boolean opponentPoison = false;
 
         for (final Player o : ai.getOpponents()) {
+            // Lethal poison - proliferating would win the game
+            if (o.getPoisonCounters() >= 9 && o.canReceiveCounters(CounterEnumType.POISON)
+                    && !o.cantLoseCheck(GameLossReason.Poisoned)) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
             opponentPoison |= o.getPoisonCounters() > 0 && o.canReceiveCounters(CounterEnumType.POISON);
             hperms.addAll(CardLists.filter(o.getCardsIn(ZoneType.Battlefield), crd -> {
                 if (!crd.hasCounters()) {

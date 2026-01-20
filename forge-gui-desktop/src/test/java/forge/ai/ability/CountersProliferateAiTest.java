@@ -97,4 +97,32 @@ public class CountersProliferateAiTest extends AITest {
         assertEquals("AI should not activate proliferate when value below cost",
                 AiPlayDecision.CantPlayAi, decision);
     }
+
+    @Test
+    public void testProliferate_lethalPoison_aiActivates() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+        ai.setTeam(0);
+        opponent.setTeam(1);
+
+        // Add Karn's Bastion and enough lands
+        Card karnsBastion = addCard("Karn's Bastion", ai);
+        addCards("Wastes", 4, ai);
+
+        // Opponent has 9 poison counters - proliferating would win the game
+        opponent.setPoisonCounters(9, null);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, ai);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility proliferateSA = findSAWithPrefix(karnsBastion, "{4}, {T}: Proliferate");
+        assertNotNull(proliferateSA);
+
+        // AI should always activate when it can win by poison
+        SpellAbilityAi aiLogic = SpellApiToAi.Converter.get(ApiType.Proliferate);
+        AiPlayDecision decision = aiLogic.canPlayWithSubs(ai, proliferateSA).decision();
+        assertEquals("AI should activate proliferate for lethal poison",
+                AiPlayDecision.WillPlay, decision);
+    }
 }
