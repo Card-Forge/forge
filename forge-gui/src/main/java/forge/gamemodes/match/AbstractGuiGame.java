@@ -136,7 +136,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                     for (PlayerView pv : gameView0.getPlayers()) {
                         Tracker t = gameView0.getTracker();
                         PlayerView inTracker = t != null ? t.getObj(TrackableTypes.PlayerViewType, pv.getId()) : null;
-                        NetworkDebugLogger.log("[setGameView] Initial setup: Player %d hash=%d, inTracker=%b, sameInstance=%b",
+                        NetworkDebugLogger.debug("[setGameView] Initial setup: Player %d hash=%d, inTracker=%b, sameInstance=%b",
                                 pv.getId(), System.identityHashCode(pv),
                                 inTracker != null, pv == inTracker);
                     }
@@ -200,7 +200,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                         else cardsWithoutTracker++;
                     }
                 }
-                NetworkDebugLogger.log("[EnsureTracker] Player %d: hasTracker=%b, cards with tracker=%d, cards without=%d",
+                NetworkDebugLogger.debug("[EnsureTracker] Player %d: hasTracker=%b, cards with tracker=%d, cards without=%d",
                     player.getId(), playerHasTracker, cardsWithTracker, cardsWithoutTracker);
             }
         }
@@ -1019,7 +1019,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             for (PlayerView pv : gameView.getPlayers()) {
                 PlayerView inTracker = tracker.getObj(TrackableTypes.PlayerViewType, pv.getId());
                 boolean sameInstance = (pv == inTracker);
-                NetworkDebugLogger.log("[DeltaSync] GameView PlayerView ID=%d hash=%d, inTracker=%s trackerHash=%d, sameInstance=%b",
+                NetworkDebugLogger.debug("[DeltaSync] GameView PlayerView ID=%d hash=%d, inTracker=%s trackerHash=%d, sameInstance=%b",
                         pv.getId(), System.identityHashCode(pv),
                         inTracker != null ? "FOUND" : "NULL",
                         inTracker != null ? System.identityHashCode(inTracker) : 0,
@@ -1055,11 +1055,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                     if (cv != null) {
                         verifyCount++;
                     } else {
-                        NetworkDebugLogger.error("[DeltaSync] VERIFY FAILED: CardView %d not in tracker after creation!", newObj.getObjectId());
+                        NetworkDebugLogger.warn("[DeltaSync] VERIFY FAILED: CardView %d not in tracker after creation!", newObj.getObjectId());
                     }
                 }
             }
-            NetworkDebugLogger.log("[DeltaSync] Verified %d CardViews in tracker", verifyCount);
+            NetworkDebugLogger.debug("[DeltaSync] Verified %d CardViews in tracker", verifyCount);
         }
 
         // STEP 2: Apply property deltas to existing objects
@@ -1078,14 +1078,14 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 }
             } else {
                 // Object not found - this shouldn't happen if new objects were created first
-                NetworkDebugLogger.error("[DeltaSync] Object ID %d NOT FOUND for delta application", objectId);
+                NetworkDebugLogger.warn("[DeltaSync] Object ID %d NOT FOUND for delta application", objectId);
                 skippedCount++;
             }
         }
 
         // STEP 3: Handle removed objects
         if (!packet.getRemovedObjectIds().isEmpty()) {
-            NetworkDebugLogger.log("[DeltaSync] Packet contains %d removed objects", packet.getRemovedObjectIds().size());
+            NetworkDebugLogger.debug("[DeltaSync] Packet contains %d removed objects", packet.getRemovedObjectIds().size());
             // Note: Objects are not removed from Tracker - they'll just not be updated anymore
             // and will be garbage collected when no longer referenced by the game state
         }
@@ -1102,7 +1102,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                         update.addZone(zone);
                     }
                     zoneUpdates.add(update);
-                    NetworkDebugLogger.log("[DeltaSync] UI refresh: player=%d, zones=%s, hash=%d",
+                    NetworkDebugLogger.debug("[DeltaSync] UI refresh: player=%d, zones=%s, hash=%d",
                             player.getId(), zones, System.identityHashCode(player));
                 }
             }
@@ -1146,7 +1146,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         // Check if object already exists (shouldn't happen, but be safe)
         TrackableObject existing = findObjectById(tracker, objectId);
         if (existing != null) {
-            NetworkDebugLogger.log("[DeltaSync] %s ID=%d already exists (hash=%d), applying properties as delta",
+            NetworkDebugLogger.debug("[DeltaSync] %s ID=%d already exists (hash=%d), applying properties as delta",
                     typeName, objectId, System.identityHashCode(existing));
             applyDeltaToObject(existing, fullProps, tracker);
             return;
@@ -1154,7 +1154,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
         // Log when creating new object (especially important for PlayerView)
         if (objectType == NewObjectData.TYPE_PLAYER_VIEW) {
-            NetworkDebugLogger.log("[DeltaSync] WARNING: Creating NEW PlayerView ID=%d - this may cause identity mismatch!", objectId);
+            NetworkDebugLogger.warn("[DeltaSync] Creating NEW PlayerView ID=%d - this may cause identity mismatch!", objectId);
         }
 
         // Create the appropriate object type
@@ -1167,7 +1167,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             case NewObjectData.TYPE_PLAYER_VIEW:
                 obj = new PlayerView(objectId, tracker);
                 tracker.putObj(TrackableTypes.PlayerViewType, objectId, (PlayerView) obj);
-                NetworkDebugLogger.log("[DeltaSync] Created NEW PlayerView ID=%d hash=%d", objectId, System.identityHashCode(obj));
+                NetworkDebugLogger.debug("[DeltaSync] Created NEW PlayerView ID=%d hash=%d", objectId, System.identityHashCode(obj));
                 break;
             case NewObjectData.TYPE_STACK_ITEM_VIEW:
                 obj = new StackItemView(objectId, tracker);
@@ -1194,7 +1194,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         if (obj != null) {
             // Apply all properties to the new object
             applyDeltaToObject(obj, fullProps, tracker);
-            NetworkDebugLogger.log("[DeltaSync] Created %s ID=%d",
+            NetworkDebugLogger.debug("[DeltaSync] Created %s ID=%d",
                     obj.getClass().getSimpleName(), obj.getId());
         }
     }
@@ -1226,7 +1226,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         }
 
         // Debug: Log when object not found
-        NetworkDebugLogger.log("[DeltaSync] Object ID %d NOT FOUND in any lookup", objectId);
+        NetworkDebugLogger.warn("[DeltaSync] Object ID %d NOT FOUND in any lookup", objectId);
 
         return null;
     }
@@ -1245,7 +1245,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         ntd.resetBytesRead(); // Reset counter after the initial propCount read
         Map<TrackableProperty, Object> props = obj.getProps();
 
-        NetworkDebugLogger.log("[DeltaSync] applyDeltaToObject: objId=%d, objType=%s, deltaBytes=%d, propCount=%d",
+        NetworkDebugLogger.debug("[DeltaSync] applyDeltaToObject: objId=%d, objType=%s, deltaBytes=%d, propCount=%d",
                 obj.getId(), obj.getClass().getSimpleName(), deltaBytes.length, propCount);
 
         for (int i = 0; i < propCount; i++) {
@@ -1271,7 +1271,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 if (obj instanceof PlayerView) {
                     String valueDesc = value == null ? "null" :
                         (value instanceof TrackableCollection ? "Collection[" + ((TrackableCollection<?>)value).size() + "]" : value.getClass().getSimpleName());
-                    NetworkDebugLogger.log("[DeltaSync] PlayerView %d: setting %s = %s", obj.getId(), prop, valueDesc);
+                    NetworkDebugLogger.debug("[DeltaSync] PlayerView %d: setting %s = %s", obj.getId(), prop, valueDesc);
 
                     // Track zone changes for UI refresh
                     ZoneType changedZone = getZoneTypeForProperty(prop);
@@ -1339,7 +1339,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                     if (csv == null) {
                         // CurrentState should have been created by CardView constructor
                         // If it's null, something is wrong - try to create it
-                        NetworkDebugLogger.error("[DeltaSync] WARNING: CurrentState is null for CardView %d, attempting to create with state=%s",
+                        NetworkDebugLogger.warn("[DeltaSync] CurrentState is null for CardView %d, attempting to create with state=%s",
                                 cardView.getId(), csvData.state);
                         csv = createCardStateView(cardView, csvData.state);
                         if (csv != null) {
@@ -1351,14 +1351,14 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                         }
                     } else if (csv.getState() != csvData.state) {
                         // State mismatch - log warning but continue with property application
-                        NetworkDebugLogger.log("[DeltaSync] CurrentState state mismatch for CardView %d: existing=%s, data=%s (will apply properties anyway)",
+                        NetworkDebugLogger.debug("[DeltaSync] CurrentState state mismatch for CardView %d: existing=%s, data=%s (will apply properties anyway)",
                                 cardView.getId(), csv.getState(), csvData.state);
                     }
                 } else if (prop == TrackableProperty.AlternateState) {
                     csv = cardView.getAlternateState();
                     if (csv == null) {
                         // AlternateState doesn't exist - try to create it
-                        NetworkDebugLogger.log("[DeltaSync] Creating AlternateState for CardView %d with state=%s",
+                        NetworkDebugLogger.debug("[DeltaSync] Creating AlternateState for CardView %d with state=%s",
                                 cardView.getId(), csvData.state);
                         csv = createCardStateView(cardView, csvData.state);
                         if (csv != null) {
@@ -1413,7 +1413,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                         setMethod.invoke(csv, csvProp, csvValue);
                         appliedCount++;
                     }
-                    NetworkDebugLogger.log("[DeltaSync] Applied %d/%d properties to CardStateView (state=%s) of CardView %d",
+                    NetworkDebugLogger.debug("[DeltaSync] Applied %d/%d properties to CardStateView (state=%s) of CardView %d",
                             appliedCount, csvData.properties.size(), csvData.state, cardView.getId());
                 } else {
                     NetworkDebugLogger.error("[DeltaSync] Failed to get/create CardStateView for property %s on CardView %d",
@@ -1489,7 +1489,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 NetworkDebugLogger.log("[FullStateSync] Used copyChangedProps - existing PlayerView instances preserved");
                 if (gameView.getPlayers() != null) {
                     for (PlayerView player : gameView.getPlayers()) {
-                        NetworkDebugLogger.log("[FullStateSync] Preserved Player %d: hash=%d",
+                        NetworkDebugLogger.debug("[FullStateSync] Preserved Player %d: hash=%d",
                                 player.getId(), System.identityHashCode(player));
                     }
                 }
@@ -1525,7 +1525,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                         for (PlayerView player : newGameView.getPlayers()) {
                             TrackableObject foundPlayer = tracker.getObj(TrackableTypes.PlayerViewType, player.getId());
                             boolean sameInstance = (player == foundPlayer);
-                            NetworkDebugLogger.log("[FullStateSync] Player %d: hash=%d, trackerLookup=%s, trackerHash=%d, sameInstance=%b",
+                            NetworkDebugLogger.debug("[FullStateSync] Player %d: hash=%d, trackerLookup=%s, trackerHash=%d, sameInstance=%b",
                                     player.getId(),
                                     System.identityHashCode(player),
                                     foundPlayer != null ? "FOUND" : "NOT FOUND",
@@ -1536,7 +1536,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                             if (player.getHand() != null) {
                                 for (CardView card : player.getHand()) {
                                     TrackableObject foundCard = tracker.getObj(TrackableTypes.CardViewType, card.getId());
-                                    NetworkDebugLogger.log("[FullStateSync] Card %d (from hand): tracker lookup = %s",
+                                    NetworkDebugLogger.debug("[FullStateSync] Card %d (from hand): tracker lookup = %s",
                                             card.getId(), foundCard != null ? "FOUND" : "NOT FOUND");
                                     break; // Just check first card
                                 }

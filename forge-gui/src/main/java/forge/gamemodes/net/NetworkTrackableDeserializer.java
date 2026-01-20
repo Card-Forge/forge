@@ -164,17 +164,17 @@ public class NetworkTrackableDeserializer {
                     }
                     if (!foundInOld) {
                         notFoundCount++;
-                        NetworkDebugLogger.error("[NetworkDeserializer] Collection lookup failed: type=%s, id=%d - NOT FOUND in tracker or oldValue",
+                        NetworkDebugLogger.warn("[NetworkDeserializer] Collection lookup failed: type=%s, id=%d - NOT FOUND in tracker or oldValue",
                                 type.getClass().getSimpleName(), id);
                     }
                 }
             }
         }
         // Always log collection stats for debugging
-        NetworkDebugLogger.log("[NetworkDeserializer] Collection read: type=%s, size=%d, found=%d, notFound=%d",
+        NetworkDebugLogger.debug("[NetworkDeserializer] Collection read: type=%s, size=%d, found=%d, notFound=%d",
                 type.getClass().getSimpleName(), size, foundCount, notFoundCount);
         if (notFoundCount > 0) {
-            NetworkDebugLogger.error("[NetworkDeserializer] Collection has %d missing objects!", notFoundCount);
+            NetworkDebugLogger.warn("[NetworkDeserializer] Collection has %d missing objects!", notFoundCount);
         }
         return collection;
     }

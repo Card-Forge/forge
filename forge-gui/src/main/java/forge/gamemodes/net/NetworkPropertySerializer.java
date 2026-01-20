@@ -40,7 +40,7 @@ public final class NetworkPropertySerializer {
     // Convenience method for debug logging
     private static void debugLog(String format, Object... args) {
         if (DEBUG_CSV_SERIALIZATION) {
-            NetworkDebugLogger.log(format, args);
+            NetworkDebugLogger.debug(format, args);
         }
     }
 

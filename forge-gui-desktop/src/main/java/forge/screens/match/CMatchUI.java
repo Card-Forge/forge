@@ -297,9 +297,9 @@ public final class CMatchUI
         allHands = sortedPlayers.size() == getLocalPlayerCount();
 
         // Debug logging for network play
-        NetworkDebugLogger.log("[CMatchUI.initMatch] sortedPlayers count=%d", sortedPlayers.size());
+        NetworkDebugLogger.debug("[CMatchUI.initMatch] sortedPlayers count=%d", sortedPlayers.size());
         for (PlayerView p : sortedPlayers) {
-            NetworkDebugLogger.log("[CMatchUI.initMatch]   Player ID=%d, hash=%d, isLocal=%b",
+            NetworkDebugLogger.debug("[CMatchUI.initMatch]   Player ID=%d, hash=%d, isLocal=%b",
                     p.getId(), System.identityHashCode(p), (myPlayers != null && myPlayers.contains(p)));
         }
 
@@ -446,7 +446,7 @@ public final class CMatchUI
             final PlayerView owner = update.getPlayer();
 
             // Debug logging
-            NetworkDebugLogger.log("[CMatchUI.updateZones] Processing update for player %d, zones=%s, ownerHash=%d",
+            NetworkDebugLogger.debug("[CMatchUI.updateZones] Processing update for player %d, zones=%s, ownerHash=%d",
                     owner.getId(), update.getZones(), System.identityHashCode(owner));
 
             boolean setupPlayZone = false, updateHand = false, updateAnte = false, updateZones = false;
@@ -484,7 +484,7 @@ public final class CMatchUI
             }
             if (updateHand) {
                 final VHand vHand = getHandFor(owner);
-                NetworkDebugLogger.log("[CMatchUI.updateZones] updateHand for player %d, vHand=%s, handSize=%s",
+                NetworkDebugLogger.debug("[CMatchUI.updateZones] updateHand for player %d, vHand=%s, handSize=%s",
                         owner.getId(), (vHand != null ? "exists" : "NULL"),
                         (owner.getHand() != null ? String.valueOf(owner.getHand().size()) : "null"));
                 if (vHand != null) {
@@ -1053,11 +1053,11 @@ public final class CMatchUI
         FCollectionView<PlayerView> players = gameView.getPlayers();
 
         // Debug: Log PlayerView instances from gameView
-        NetworkDebugLogger.log("[CMatchUI.openView] gameView.getPlayers() count=%d", players.size());
+        NetworkDebugLogger.debug("[CMatchUI.openView] gameView.getPlayers() count=%d", players.size());
         for (PlayerView pv : players) {
             Tracker t = pv.getTracker();
             PlayerView inTracker = t != null ? t.getObj(TrackableTypes.PlayerViewType, pv.getId()) : null;
-            NetworkDebugLogger.log("[CMatchUI.openView]   Player %d: hash=%d, tracker=%s, inTracker=%b, sameInstance=%b",
+            NetworkDebugLogger.debug("[CMatchUI.openView]   Player %d: hash=%d, tracker=%s, inTracker=%b, sameInstance=%b",
                     pv.getId(), System.identityHashCode(pv),
                     t != null ? "exists" : "null",
                     inTracker != null,

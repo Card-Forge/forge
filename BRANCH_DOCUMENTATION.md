@@ -372,6 +372,7 @@ This ensures that on reconnection, the stored `NetGuiGame` (which has the `GameV
 | `forge-gui/.../net/NetworkPropertySerializer.java` | **NEW** - Type-aware compact property serialization |
 | `forge-gui/.../net/NetworkTrackableSerializer.java` | **NEW** - Writes TrackableObjects as 4-byte IDs |
 | `forge-gui/.../net/NetworkTrackableDeserializer.java` | **NEW** - Reads TrackableObjects by ID lookup from Tracker |
+| `forge-gui/.../net/NetworkDebugLogger.java` | **NEW** - Configurable debug logging with separate console/file verbosity levels |
 
 ### Server-Side
 | File | Changes |
@@ -466,6 +467,129 @@ Delta sync can be disabled per-client if needed:
 // In NetGuiGame
 netGuiGame.setDeltaSyncEnabled(false); // Falls back to full state sync
 ```
+
+---
+
+## Debugging
+
+### NetworkDebugLogger
+
+The network play code includes a dedicated debug logging system (`NetworkDebugLogger`) designed for diagnosing synchronization and connectivity issues. It provides configurable verbosity levels for console versus file output.
+
+#### Log Levels
+
+| Level | Priority | Purpose | Console Default | File Default |
+|-------|----------|---------|-----------------|--------------|
+| `DEBUG` | 0 | Detailed tracing (hex dumps, per-property details, collection contents) | OFF | ON |
+| `INFO` | 1 | Normal operation (sync start/end, summaries, important events) | ON | ON |
+| `WARN` | 2 | Potential issues (missing objects, unexpected states) | ON | ON |
+| `ERROR` | 3 | Failures and exceptions | ON | ON |
+
+#### Log File Location
+
+Log files are created in the `logs/` directory (relative to the Forge working directory, typically `forge-gui-desktop/logs/`):
+
+```
+logs/network-debug-20250121-075900-12345.log
+```
+
+The filename includes:
+- Timestamp (YYYYMMDD-HHMMSS)
+- Process ID (for distinguishing multiple Forge instances)
+
+#### Configuring Verbosity
+
+You can adjust log levels at runtime:
+
+```java
+import forge.gamemodes.net.NetworkDebugLogger;
+import forge.gamemodes.net.NetworkDebugLogger.LogLevel;
+
+// Show DEBUG messages on console (very verbose)
+NetworkDebugLogger.setConsoleLevel(LogLevel.DEBUG);
+
+// Only show errors in the file
+NetworkDebugLogger.setFileLevel(LogLevel.ERROR);
+
+// Disable all logging
+NetworkDebugLogger.setEnabled(false);
+
+// Query current levels
+LogLevel consoleLevel = NetworkDebugLogger.getConsoleLevel();
+LogLevel fileLevel = NetworkDebugLogger.getFileLevel();
+```
+
+#### Log Output Examples
+
+**Console Output (Default: INFO and above)**
+```
+[07:59:02.583] [INFO] [setGameView] Called with gameView0=non-null, existing gameView=null
+[07:59:02.787] [INFO] [CMatchUI.openView] Called
+[07:59:03.070] [INFO] [DeltaSync] === START applyDelta seq=1 ===
+[07:59:03.090] [INFO] [DeltaSync] Created 60 new objects
+[07:59:03.119] [INFO] [DeltaSync] Summary: 60 new objects, 5 deltas applied, 0 skipped
+[07:59:03.125] [WARN] [DeltaSync] Object ID 12345 NOT FOUND for delta application
+```
+
+**File Output (Default: DEBUG and above)** - includes additional detail:
+```
+[07:59:03.071] [DEBUG] [DeltaSync] GameView PlayerView ID=0 hash=1234567, inTracker=FOUND, sameInstance=true
+[07:59:03.072] [DEBUG] [DeltaSync] applyDeltaToObject: objId=100, objType=CardView, deltaBytes=245, propCount=8
+[07:59:03.073] [DEBUG] [DeltaSync] PlayerView 0: setting Hand = Collection[7]
+[07:59:03.074] [DEBUG] [NetworkDeserializer] Collection read: type=CardViewType, size=7, found=7, notFound=0
+```
+
+#### Using Debug Logging in Code
+
+```java
+// DEBUG - detailed tracing (file only by default)
+NetworkDebugLogger.debug("[MyFeature] Processing object %d with %d properties", objectId, propCount);
+
+// INFO - normal operation events (console + file)
+NetworkDebugLogger.log("[MyFeature] Sync completed: %d objects processed", count);
+
+// WARN - potential issues (console + file)
+NetworkDebugLogger.warn("[MyFeature] Object %d not found in tracker", objectId);
+
+// ERROR - failures (always logged)
+NetworkDebugLogger.error("[MyFeature] Failed to deserialize: %s", e.getMessage());
+NetworkDebugLogger.error("[MyFeature] Exception details:", exception);
+```
+
+#### Hex Dump for Serialization Debugging
+
+When investigating serialization issues, the logger provides hex dump functionality:
+
+```java
+NetworkDebugLogger.hexDump("[DeltaSync] Delta bytes:", byteArray, errorPosition);
+```
+
+Output (at DEBUG level):
+```
+[07:59:03.500] [DEBUG] HEXDUMP: [DeltaSync] Delta bytes:
+Bytes 0-63 (error at 32):
+0000: 00 00 00 05 00 00 00 01 00 00 00 00 00 00 00 07  | ................
+0016: 00 00 00 02 00 00 00 03 00 00 00 04 00 00 00 05  | ................
+0032: [FF]FF FF FF 00 00 00 00 00 00 00 01 00 00 00 02  | ................
+```
+
+#### Debugging Common Issues
+
+**Issue: Cards not appearing in hand**
+1. Set console level to DEBUG: `NetworkDebugLogger.setConsoleLevel(LogLevel.DEBUG)`
+2. Look for `[DeltaSync] PlayerView X: setting Hand = Collection[N]` messages
+3. Check if `[NetworkDeserializer] Collection has X missing objects!` warnings appear
+4. Verify tracker lookups: `[FullStateSync] Card X (from hand): tracker lookup = FOUND/NOT FOUND`
+
+**Issue: Delta sync errors**
+1. Check for `Invalid ordinal` or `Unexpected marker` errors
+2. Review the hex dump to identify byte stream misalignment
+3. Look for `VERIFY FAILED: CardView X not in tracker` warnings
+
+**Issue: Reconnection failures**
+1. Check for `[FullStateSync]` messages showing state restoration
+2. Look for `[DeltaSync] Creating NEW PlayerView` warnings (indicates identity mismatch)
+3. Verify session credentials are being sent
 
 ---
 
@@ -602,7 +726,7 @@ Added diagnostic logging throughout the delta sync path:
 3. **Partial Reconnection**: Support reconnecting to games after client restart (currently requires same client process)
 4. **Spectator Reconnection**: Allow spectators to disconnect and rejoin
 5. **Mobile Optimization**: Tune delta sync parameters for mobile network conditions
-6. **Configurable Logging**: Make debug logging levels configurable for production use
+6. ~~**Configurable Logging**: Make debug logging levels configurable for production use~~ ✓ Implemented
 7. **Explicit Object Removal**: Remove objects from Tracker when they leave the game (currently relies on GC)
 
 ---
@@ -611,6 +735,6 @@ Added diagnostic logging throughout the delta sync path:
 
 1. ~~`CardStateView` handling for `AlternateState` may skip updates if the state doesn't exist yet on the client~~ ✓ Fixed - now creates CardStateView on demand
 2. Objects are not explicitly removed from Tracker - relies on garbage collection when no longer referenced
-3. Debug logging is verbose - should be reduced or made configurable for production
+3. ~~Debug logging is verbose - should be reduced or made configurable for production~~ ✓ Fixed - logging now has configurable levels (console defaults to INFO, file defaults to DEBUG)
 
 ---

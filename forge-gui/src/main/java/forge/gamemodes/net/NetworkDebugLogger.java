@@ -13,8 +13,39 @@ import java.util.Date;
  *
  * Log files are created in the logs/ directory with unique names
  * based on timestamp and process ID to handle multiple instances.
+ *
+ * Supports configurable verbosity levels for console vs file output:
+ * - DEBUG: Detailed tracing (hex dumps, property details, collection contents)
+ * - INFO: Normal operation (sync start/end, summaries)
+ * - WARN: Potential issues (missing objects, unexpected states)
+ * - ERROR: Failures and exceptions
+ *
+ * By default, console shows INFO and above, file shows DEBUG and above.
  */
 public final class NetworkDebugLogger {
+
+    /**
+     * Log levels from most to least verbose.
+     */
+    public enum LogLevel {
+        DEBUG(0),   // Detailed tracing
+        INFO(1),    // Normal operation
+        WARN(2),    // Potential issues
+        ERROR(3);   // Failures
+
+        private final int priority;
+
+        LogLevel(int priority) {
+            this.priority = priority;
+        }
+
+        /**
+         * Check if this level should be logged when the threshold is set to the given level.
+         */
+        public boolean isLoggable(LogLevel threshold) {
+            return this.priority >= threshold.priority;
+        }
+    }
 
     private static final String LOG_DIR = "logs";
     private static final String LOG_PREFIX = "network-debug";
@@ -22,6 +53,8 @@ public final class NetworkDebugLogger {
     private static PrintWriter fileWriter;
     private static boolean initialized = false;
     private static boolean enabled = true;
+    private static LogLevel consoleLevel = LogLevel.INFO;  // Default: show INFO and above on console
+    private static LogLevel fileLevel = LogLevel.DEBUG;    // Default: show DEBUG and above in file
     private static final Object lock = new Object();
 
     private static final SimpleDateFormat TIMESTAMP_FORMAT = new SimpleDateFormat("HH:mm:ss.SSS");
@@ -43,6 +76,38 @@ public final class NetworkDebugLogger {
      */
     public static boolean isEnabled() {
         return enabled;
+    }
+
+    /**
+     * Set the minimum log level for console output.
+     * Messages below this level will not be printed to console.
+     * Default: INFO
+     */
+    public static void setConsoleLevel(LogLevel level) {
+        consoleLevel = level;
+    }
+
+    /**
+     * Get the current console log level.
+     */
+    public static LogLevel getConsoleLevel() {
+        return consoleLevel;
+    }
+
+    /**
+     * Set the minimum log level for file output.
+     * Messages below this level will not be written to the log file.
+     * Default: DEBUG
+     */
+    public static void setFileLevel(LogLevel level) {
+        fileLevel = level;
+    }
+
+    /**
+     * Get the current file log level.
+     */
+    public static LogLevel getFileLevel() {
+        return fileLevel;
     }
 
     /**
@@ -92,21 +157,63 @@ public final class NetworkDebugLogger {
     }
 
     /**
-     * Log a debug message. Writes to both console and file.
+     * Internal method to log a message at a specific level.
+     * Respects console and file level thresholds.
+     */
+    private static void logAtLevel(LogLevel level, String message) {
+        ensureInitialized();
+
+        String timestamped = formatMessage(level.name(), message);
+
+        // Write to console if level meets threshold
+        if (level.isLoggable(consoleLevel)) {
+            if (level == LogLevel.ERROR) {
+                System.err.println(timestamped);
+            } else {
+                System.out.println(timestamped);
+            }
+        }
+
+        // Write to file if level meets threshold
+        if (level.isLoggable(fileLevel)) {
+            writeToFile(timestamped);
+        }
+    }
+
+    /**
+     * Log a DEBUG level message. Detailed tracing information.
+     * By default, DEBUG messages go to file only, not console.
+     */
+    public static void debug(String message) {
+        if (!enabled) {
+            return;
+        }
+        logAtLevel(LogLevel.DEBUG, message);
+    }
+
+    /**
+     * Log a formatted DEBUG level message.
+     */
+    public static void debug(String format, Object... args) {
+        if (!enabled) {
+            return;
+        }
+        debug(String.format(format, args));
+    }
+
+    /**
+     * Log an INFO level message. Normal operation information.
+     * By default, INFO messages go to both console and file.
      */
     public static void log(String message) {
         if (!enabled) {
             return;
         }
-        ensureInitialized();
-
-        String timestamped = formatMessage("INFO", message);
-        System.out.println(timestamped);
-        writeToFile(timestamped);
+        logAtLevel(LogLevel.INFO, message);
     }
 
     /**
-     * Log a formatted debug message. Writes to both console and file.
+     * Log a formatted INFO level message.
      */
     public static void log(String format, Object... args) {
         if (!enabled) {
@@ -116,47 +223,75 @@ public final class NetworkDebugLogger {
     }
 
     /**
-     * Log an error message. Writes to both console (stderr) and file.
-     * Error messages are logged even when logging is disabled.
+     * Log a WARN level message. Potential issues that don't prevent operation.
+     * By default, WARN messages go to both console and file.
      */
-    public static void error(String message) {
-        ensureInitialized();
-
-        String timestamped = formatMessage("ERROR", message);
-        System.err.println(timestamped);
-        writeToFile(timestamped);
+    public static void warn(String message) {
+        if (!enabled) {
+            return;
+        }
+        logAtLevel(LogLevel.WARN, message);
     }
 
     /**
-     * Log a formatted error message. Writes to both console (stderr) and file.
+     * Log a formatted WARN level message.
+     */
+    public static void warn(String format, Object... args) {
+        if (!enabled) {
+            return;
+        }
+        warn(String.format(format, args));
+    }
+
+    /**
+     * Log an ERROR level message. Writes to both console (stderr) and file.
+     * Error messages are logged even when logging is disabled.
+     */
+    public static void error(String message) {
+        logAtLevel(LogLevel.ERROR, message);
+    }
+
+    /**
+     * Log a formatted ERROR level message.
      */
     public static void error(String format, Object... args) {
         error(String.format(format, args));
     }
 
     /**
-     * Log an error with exception. Writes to both console (stderr) and file.
+     * Log an ERROR with exception. Writes to both console (stderr) and file.
      */
     public static void error(String message, Throwable t) {
         ensureInitialized();
 
         String timestamped = formatMessage("ERROR", message);
-        System.err.println(timestamped);
-        t.printStackTrace(System.err);
 
-        writeToFile(timestamped);
-        if (fileWriter != null) {
-            synchronized (lock) {
-                t.printStackTrace(fileWriter);
-                fileWriter.flush();
+        // Errors always go to console
+        if (LogLevel.ERROR.isLoggable(consoleLevel)) {
+            System.err.println(timestamped);
+            t.printStackTrace(System.err);
+        }
+
+        // Write to file if level meets threshold
+        if (LogLevel.ERROR.isLoggable(fileLevel)) {
+            writeToFile(timestamped);
+            if (fileWriter != null) {
+                synchronized (lock) {
+                    t.printStackTrace(fileWriter);
+                    fileWriter.flush();
+                }
             }
         }
     }
 
     /**
-     * Log a hex dump of bytes. Useful for debugging serialization issues.
+     * Log a hex dump of bytes at DEBUG level. Useful for debugging serialization issues.
+     * By default, hex dumps go to file only, not console.
      */
     public static void hexDump(String label, byte[] bytes, int errorPosition) {
+        if (!enabled) {
+            return;
+        }
         ensureInitialized();
 
         StringBuilder sb = new StringBuilder();
@@ -204,9 +339,17 @@ public final class NetworkDebugLogger {
         }
 
         String output = sb.toString();
-        System.err.print(output);
-        writeToFile(formatMessage("HEXDUMP", label));
-        writeToFile(output);
+
+        // Hex dumps are DEBUG level - respect console level threshold
+        if (LogLevel.DEBUG.isLoggable(consoleLevel)) {
+            System.err.print(output);
+        }
+
+        // Write to file if DEBUG meets file threshold
+        if (LogLevel.DEBUG.isLoggable(fileLevel)) {
+            writeToFile(formatMessage("DEBUG", "HEXDUMP: " + label));
+            writeToFile(output);
+        }
     }
 
     /**

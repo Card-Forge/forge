@@ -211,7 +211,7 @@ public class DeltaSyncManager {
         boolean hasChanges = player.hasChanges();
         int handSize = player.getHand() != null ? player.getHand().size() : 0;
         Set<TrackableProperty> changedProps = player.getChangedProps();
-        NetworkDebugLogger.log("[DeltaSync] collectPlayerDeltas: player=%d, isSent=%b, hasChanges=%b, handSize=%d, changedProps=%s",
+        NetworkDebugLogger.debug("[DeltaSync] collectPlayerDeltas: player=%d, isSent=%b, hasChanges=%b, handSize=%d, changedProps=%s",
                 player.getId(), isSent, hasChanges, handSize, changedProps);
 
         collectObjectDelta(player, objectDeltas, newObjects, currentObjectIds);
