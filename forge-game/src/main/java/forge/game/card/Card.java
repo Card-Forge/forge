@@ -4985,7 +4985,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             spells, null, trigger, replacements, statics, true, false
         ));
 
-        // setting card type via text, does overwrite any other word change effects?
+        // setting card traits via text, does overwrite any other word change effects?
         this.changedTextColors.addEmpty(timestamp, staticId);
         this.changedTextTypes.addEmpty(timestamp, staticId);
 
@@ -5533,7 +5533,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final void addChangedTextTypeWord(final String originalWord, final String newWord, final Long timestamp, final long staticId) {
         changedTextTypes.add(timestamp, staticId, originalWord, newWord);
         changedCardTypesByText.put(timestamp, staticId, new WordChangedType(originalWord, newWord));
-        updateTypeCache();
         updateChangedText();
     }
 
