@@ -628,7 +628,6 @@ public final class StaticAbilityContinuous {
                         // abilities
                         affectedCard.addChangedCardTraitsByText(spellAbilities, trigger, replacementEffects, staticAbilities, se.getTimestamp(), stAb.getId());
                         affectedCard.addChangedCardKeywordsByText(keywords, se.getTimestamp(), stAb.getId(), false);
-
                         // power and toughness
                         affectedCard.addNewPTByText(state.getBasePower(), state.getBaseToughness(), se.getTimestamp(), stAb.getId());
                     }

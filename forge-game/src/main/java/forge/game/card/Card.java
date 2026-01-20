@@ -4463,7 +4463,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public final void addNewPTByText(final Integer power, final Integer toughness, final long timestamp, final long staticId) {
         newPTText.put(timestamp, staticId, Pair.of(power, toughness));
-        updatePTforView();
     }
     public final boolean removeNewPTbyText(final long timestamp, final long staticId) {
         return newPTText.remove(timestamp, staticId) != null;
@@ -4989,7 +4988,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         this.changedTextColors.addEmpty(timestamp, staticId);
         this.changedTextTypes.addEmpty(timestamp, staticId);
         updateChangedText();
-        updateAbilityTextForView();
     }
 
     public final CardTraitChanges addChangedCardTraits(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
