@@ -137,6 +137,10 @@ public abstract class GameLobby implements IHasGameType {
         return hostedMatch.getGameView();
     }
 
+    public HostedMatch getHostedMatch() {
+        return hostedMatch;
+    }
+
     public abstract boolean hasControl();
     public abstract boolean mayEdit(int index);
     public abstract boolean mayControl(int index);

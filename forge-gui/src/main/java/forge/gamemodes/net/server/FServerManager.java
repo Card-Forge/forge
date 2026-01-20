@@ -241,6 +241,32 @@ public final class FServerManager {
 
     public void updateSlot(final int index, final UpdateLobbyPlayerEvent event) {
         localLobby.applyToSlot(index, event);
+
+        // Check if this is a ready state change
+        if (event.getReady() != null && event.getReady()) {
+            // Count ready players and total players
+            int readyCount = 0;
+            int totalPlayers = 0;
+            for (int i = 0; i < localLobby.getNumberOfSlots(); i++) {
+                LobbySlot slot = localLobby.getSlot(i);
+                if (slot.getType() == LobbySlotType.LOCAL || slot.getType() == LobbySlotType.REMOTE) {
+                    totalPlayers++;
+                    if (slot.isReady()) {
+                        readyCount++;
+                    }
+                }
+            }
+
+            // Broadcast ready notification
+            String playerName = localLobby.getSlot(index).getName();
+            broadcast(new MessageEvent(String.format("%s is ready (%d/%d players ready)",
+                playerName, readyCount, totalPlayers)));
+
+            // Check if all players are ready
+            if (readyCount == totalPlayers && totalPlayers > 1) {
+                broadcast(new MessageEvent("All players ready! Starting game..."));
+            }
+        }
     }
 
     public IGuiGame getGui(final int index) {
@@ -354,7 +380,12 @@ public final class FServerManager {
         public final void channelRead(final ChannelHandlerContext ctx, final Object msg) throws Exception {
             final RemoteClient client = clients.get(ctx.channel());
             if (msg instanceof MessageEvent) {
-                broadcast(new MessageEvent(client.getUsername(), ((MessageEvent) msg).getMessage()));
+                String username = client.getUsername();
+                // Append (Host) indicator for the host player
+                if (client.getIndex() == 0) {
+                    username = username + " (Host)";
+                }
+                broadcast(new MessageEvent(username, ((MessageEvent) msg).getMessage()));
             }
             super.channelRead(ctx, msg);
         }
@@ -392,7 +423,34 @@ public final class FServerManager {
                 broadcast(new MessageEvent(String.format("%s joined the room", username)));
                 updateLobbyState();
             } else if (msg instanceof UpdateLobbyPlayerEvent) {
-                localLobby.applyToSlot(client.getIndex(), (UpdateLobbyPlayerEvent) msg);
+                UpdateLobbyPlayerEvent updateEvent = (UpdateLobbyPlayerEvent) msg;
+                localLobby.applyToSlot(client.getIndex(), updateEvent);
+
+                // Check if this is a ready state change
+                if (updateEvent.getReady() != null && updateEvent.getReady()) {
+                    // Count ready players and total players
+                    int readyCount = 0;
+                    int totalPlayers = 0;
+                    for (int i = 0; i < localLobby.getNumberOfSlots(); i++) {
+                        LobbySlot slot = localLobby.getSlot(i);
+                        if (slot.getType() == LobbySlotType.LOCAL || slot.getType() == LobbySlotType.REMOTE) {
+                            totalPlayers++;
+                            if (slot.isReady()) {
+                                readyCount++;
+                            }
+                        }
+                    }
+
+                    // Broadcast ready notification
+                    String playerName = client.getUsername();
+                    broadcast(new MessageEvent(String.format("%s is ready (%d/%d players ready)",
+                        playerName, readyCount, totalPlayers)));
+
+                    // Check if all players are ready
+                    if (readyCount == totalPlayers && totalPlayers > 1) {
+                        broadcast(new MessageEvent("All players ready! Starting game..."));
+                    }
+                }
             }
             super.channelRead(ctx, msg);
         }
@@ -539,10 +597,49 @@ public final class FServerManager {
      */
     public void onGameEnded() {
         if (currentGameSession != null) {
+            // Announce the winner
+            announceGameWinner();
+
+            // Broadcast returning to lobby message
+            broadcast(new MessageEvent("Returning to lobby..."));
+
             // Mark game as no longer in progress
             currentGameSession.setGameInProgress(false);
             // End the session
             endGameSession();
+        }
+    }
+
+    /**
+     * Announce the game winner to all players.
+     */
+    private void announceGameWinner() {
+        if (localLobby == null) {
+            return;
+        }
+
+        try {
+            HostedMatch hostedMatch = localLobby.getHostedMatch();
+            if (hostedMatch != null) {
+                forge.game.Match match = hostedMatch.getMatch();
+                if (match != null) {
+                    forge.game.player.RegisteredPlayer winner = match.getWinner();
+
+                    String message;
+                    if (winner != null) {
+                        String winnerName = winner.getPlayer().getName();
+                        message = String.format("Game ended. Winner: %s", winnerName);
+                    } else {
+                        message = "Game ended. Draw";
+                    }
+
+                    broadcast(new MessageEvent(message));
+                }
+            }
+        } catch (Exception e) {
+            // If we can't determine the winner, just announce game end
+            broadcast(new MessageEvent("Game ended."));
+            System.err.println("Error determining game winner: " + e.getMessage());
         }
     }
 
@@ -563,7 +660,7 @@ public final class FServerManager {
     }
 
     /**
-     * Schedule a timeout for player reconnection.
+     * Schedule a timeout for player reconnection with countdown notifications every 30 seconds.
      */
     private void scheduleReconnectionTimeout(final int playerIndex, final String username) {
         // Cancel any existing timer for this player
@@ -577,6 +674,32 @@ public final class FServerManager {
                 GameSession.DEFAULT_DISCONNECT_TIMEOUT_MS;
 
         Timer timer = new Timer("ReconnectionTimeout-" + playerIndex);
+
+        // Schedule countdown notifications every 30 seconds
+        final long countdownInterval = 30 * 1000; // 30 seconds
+        long currentTime = 0;
+
+        while (currentTime < timeoutMs) {
+            final long remainingTime = timeoutMs - currentTime;
+
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    // Format remaining time as M:SS
+                    long remainingSeconds = remainingTime / 1000;
+                    long minutes = remainingSeconds / 60;
+                    long seconds = remainingSeconds % 60;
+                    String timeStr = String.format("%d:%02d", minutes, seconds);
+
+                    broadcast(new MessageEvent(String.format("Waiting for %s to reconnect... (%s remaining)",
+                        username, timeStr)));
+                }
+            }, currentTime);
+
+            currentTime += countdownInterval;
+        }
+
+        // Schedule the final timeout handler
         timer.schedule(new TimerTask() {
             @Override
             public void run() {

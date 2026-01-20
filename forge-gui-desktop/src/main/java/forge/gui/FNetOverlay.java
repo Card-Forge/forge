@@ -71,6 +71,7 @@ public enum FNetOverlay implements IOnlineChatInterface {
     }
     
     private final FTextArea txtLog = new FTextArea();
+    // Note: To support colored system messages, consider migrating to JTextPane with StyledDocument
     private final FTextField txtInput = new FTextField.Builder().maxLength(255).build();
     private final FLabel cmdSend = new FLabel.ButtonBuilder().text(Localizer.getInstance().getMessage("lblSend")).build(); 
 
@@ -213,6 +214,9 @@ public enum FNetOverlay implements IOnlineChatInterface {
 
     @Override
     public void addMessage(final ChatMessage message) {
-        txtLog.append("\n" + message.getFormattedMessage());
+        // Add visual indicator for system messages
+        String prefix = message.isSystemMessage() ? "[SERVER] " : "";
+        txtLog.append("\n" + prefix + message.getFormattedMessage());
+        // Note: Full blue color support requires migrating txtLog to JTextPane with StyledDocument
     }
 }
