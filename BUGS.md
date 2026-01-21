@@ -8,31 +8,38 @@ This file tracks known bugs in the Forge codebase, particularly for the NetworkP
 
 ### 1. /skipreconnect AI takeover not working properly
 
-**Status:** Tentatively Resolved (Monitoring)
+**Status:** Fix Applied (Awaiting Verification)
 **Branch:** NetworkPlay
 **Severity:** High
 
 **Description:**
 When a client disconnects during a network game and the host uses the `/skipreconnect` command, the player is converted to AI control but the AI does not take any actions. The game appears to stall after the conversion.
 
-**Resolution (2026-01-22):**
-After adding comprehensive logging, subsequent tests showed the AI takeover working correctly. The game loop continued after conversion and the host received priority requests as expected. The exact cause of the original failure is not fully understood, but may have been:
-- A timing/race condition that was inadvertently fixed by code changes
-- Non-deterministic thread scheduling that occasionally caused the game loop to exit
-- Different test conditions between failing and passing tests
+**Root Cause Identified (2026-01-22 07:20):**
+Race condition in `convertPlayerToAI()`. The code was:
+1. Clearing inputs on old controller (releases game thread)
+2. Creating AI controller
+3. Replacing controller
 
-**Successful Test Log (2026-01-22 06:58):**
-```
-06:58:13.946 - Latch released, game thread unblocked
-06:58:13.947 - chooseSpellAbilityToPlay ENTRY for TestHost (MAIN1)
-06:58:13.947 - TestHost returned null (skipPhase)
-06:58:13.952 - AI controller installed
-06:58:13.977 - Game continued with TestHost in COMBAT_BEGIN
-```
-Game proceeded correctly through all phases to END_OF_TURN.
+Between step 1 and step 3, the game thread could unblock and call `chooseSpellAbilityToPlay()` on the **old** human controller, creating a new InputPassPriority that gets stuck.
 
-**Key Difference from Failed Test:**
-In failed test (21:48), no `chooseSpellAbilityToPlay` ENTRY appeared after AI conversion. In successful test, host's method was called immediately after latch release.
+**Log Evidence (07:17:16):**
+```
+07:18:02.714 - clearInputs() releases latch for MAIN1
+07:18:02.715 - TestHost gets priority (MAIN1), skips
+07:18:02.717 - TestClient's HUMAN controller called for COMBAT_BEGIN (still old!)
+07:18:02.719 - AI controller finally installed (too late!)
+```
+After this, no more `chooseSpellAbilityToPlay` calls - game thread blocked forever.
+
+**Fix (2026-01-22 07:23):**
+Reordered operations in `convertPlayerToAI()` to:
+1. Get reference to old controller
+2. Create AI controller
+3. Replace controller (so new calls go to AI)
+4. Clear inputs on old controller (releases game thread)
+
+This ensures when the game thread unblocks, it calls the new AI controller's method.
 
 **Files Involved:**
 - `forge-gui/src/main/java/forge/gamemodes/net/server/FServerManager.java` - AI takeover logic
@@ -74,6 +81,16 @@ In failed test (21:48), no `chooseSpellAbilityToPlay` ENTRY appeared after AI co
    - Game loop continued, host received priority requests
    - `isGameOver=false` throughout
 
+8. **Failed test (2026-01-22 07:17)** - Race condition identified
+   - Log showed clearInputs() called, latch released
+   - Game thread unblocked and called HUMAN controller for COMBAT_BEGIN
+   - AI controller installed AFTER game thread already blocked again
+   - Root cause: operations were in wrong order
+
+9. **Fix applied (2026-01-22 07:23)**
+   - Reordered operations: replace controller BEFORE clearing inputs
+   - This ensures when game thread unblocks, it calls AI controller
+
 **Monitoring:**
 Keep debug logging in place. If the issue recurs, the logs will provide detailed information about the game loop state.
 
@@ -89,33 +106,10 @@ Keep debug logging in place. If the issue recurs, the logs will provide detailed
 
 ## Resolved Bugs
 
-### 2. Phase marker not updating on client
-
-**Status:** Resolved
-**Branch:** NetworkPlay
-
-**Description:**
-The phase indicator on the client side wasn't updating to reflect the current game phase.
-
-**Resolution:**
-Fixed in delta sync implementation by ensuring phase changes are properly tracked and synchronized.
-
----
-
-### 3. Client hand not visible during mulligan
-
-**Status:** Resolved
-**Branch:** NetworkPlay
-**Commit:** f06d2da2a7
-
-**Description:**
-The client couldn't see their hand cards before making a mulligan decision.
-
-**Root Cause:**
-ID collision between GAMEVIEW_DELTA_KEY and card IDs. The delta sync was using ID 0 for the game view delta marker, which conflicted with actual card IDs.
-
-**Resolution:**
-Changed GAMEVIEW_DELTA_KEY from 0 to Integer.MIN_VALUE to avoid collision with card IDs.
+| # | Bug | Branch | Resolution | Commit |
+|---|-----|--------|------------|--------|
+| 2 | Phase marker not updating on client | NetworkPlay | Fixed delta sync to track phase changes | - |
+| 3 | Client hand not visible during mulligan | NetworkPlay | Changed GAMEVIEW_DELTA_KEY from 0 to Integer.MIN_VALUE to avoid ID collision | f06d2da2a7 |
 
 ---
 

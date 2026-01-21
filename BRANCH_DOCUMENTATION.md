@@ -21,7 +21,7 @@ The NetworkPlay branch introduces three major features to improve the multiplaye
 
 ---
 
-## Architectural Overlap with Main Branch
+## Architectural Overlap with Master Branch
 
 **⚠️ Important for Master Branch Developers**
 
@@ -54,7 +54,7 @@ These features are **deeply integrated** with the game state management system, 
 
 ### Available Refactoring Options
 
-If the Main branch team determines that the architectural overlap needs to be addressed, **[NETWORK_ARCHITECTURE.md](NETWORK_ARCHITECTURE.md)** provides detailed refactoring strategies that could be considered:
+If the Master branch team determines that the architectural overlap needs to be addressed, **[NETWORK_ARCHITECTURE.md](NETWORK_ARCHITECTURE.md)** provides detailed refactoring strategies that could be considered:
 
 1. **Isolate TrackableObject changes** using package-private access patterns
 2. **Extract network logic** from AbstractGuiGame to a NetworkGuiGame subclass
@@ -860,10 +860,12 @@ The following system messages are now broadcast during network play:
 
 | Event | Message Format | When Sent |
 |-------|---------------|-----------|
-| **Player Join** | `"PlayerName joined the room"` | Player connects to lobby |
-| **Player Leave** | `"PlayerName left the room"` | Player disconnects from lobby (not during game) |
+| **Lobby Hosted** | `"Lobby hosted by PlayerName"` | Host starts the server |
+| **Player Join** | `"PlayerName joined the lobby"` | Player connects to lobby |
+| **Player Leave** | `"PlayerName left the lobby"` | Player disconnects from lobby (not during game) |
 | **Player Ready** | `"PlayerName is ready (X/Y players ready)"` | Player marks ready |
-| **All Ready** | `"All players ready! Starting game..."` | All players ready |
+| **Player Not Ready** | `"PlayerName is no longer ready (X/Y players ready)"` | Player unmarks ready |
+| **All Ready** | `"All players ready to start game!"` | All players ready |
 | **Disconnect (Game)** | `"PlayerName disconnected. Game paused. Waiting for reconnection..."` | Player disconnects during game |
 | **Reconnect Timer** | `"Waiting for PlayerName to reconnect... (M:SS remaining)"` | Every 30 seconds during timeout |
 | **Reconnect Success** | `"PlayerName has reconnected!"` | Player rejoins successfully |
@@ -919,12 +921,12 @@ Reconnection:
 ### Chat Display Example
 
 ```
-[14:32:15] [SERVER] Alice joined the room
+[14:32:15] [SERVER] Lobby hosted by Alice
 [14:32:18] Alice (Host): Hello everyone
-[14:32:20] [SERVER] Bob joined the room
-[14:32:25] [SERVER] Alice (Host) is ready (1/2 players ready)
+[14:32:20] [SERVER] Bob joined the lobby
+[14:32:25] [SERVER] Alice is ready (1/2 players ready)
 [14:32:28] [SERVER] Bob is ready (2/2 players ready)
-[14:32:28] [SERVER] All players ready! Starting game...
+[14:32:28] [SERVER] All players ready to start game!
 ...
 [14:45:12] [SERVER] Bob disconnected. Game paused. Waiting for reconnection...
 [14:45:42] [SERVER] Waiting for Bob to reconnect... (4:30 remaining)

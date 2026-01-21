@@ -258,7 +258,7 @@ public final class FServerManager {
         localLobby.applyToSlot(index, event);
 
         // Check if this is a ready state change
-        if (event.getReady() != null && event.getReady()) {
+        if (event.getReady() != null) {
             // Count ready players and total players
             int readyCount = 0;
             int totalPlayers = 0;
@@ -272,14 +272,20 @@ public final class FServerManager {
                 }
             }
 
-            // Broadcast ready notification
             String playerName = localLobby.getSlot(index).getName();
-            broadcast(new MessageEvent(String.format("%s is ready (%d/%d players ready)",
-                playerName, readyCount, totalPlayers)));
+            if (event.getReady()) {
+                // Broadcast ready notification
+                broadcast(new MessageEvent(String.format("%s is ready (%d/%d players ready)",
+                    playerName, readyCount, totalPlayers)));
 
-            // Check if all players are ready
-            if (readyCount == totalPlayers && totalPlayers > 1) {
-                broadcast(new MessageEvent("All players ready! Starting game..."));
+                // Check if all players are ready
+                if (readyCount == totalPlayers && totalPlayers > 1) {
+                    broadcast(new MessageEvent("All players ready to start game!"));
+                }
+            } else {
+                // Broadcast no longer ready notification
+                broadcast(new MessageEvent(String.format("%s is not ready (%d/%d players ready)",
+                    playerName, readyCount, totalPlayers)));
             }
         }
     }
@@ -442,14 +448,20 @@ public final class FServerManager {
 
                 // Normal login - no existing session to rejoin
                 client.setUsername(username);
-                broadcast(new MessageEvent(String.format("%s joined the room", username)));
+                if (client.getIndex() == 0) {
+                    // Host player - lobby is now hosted
+                    broadcast(new MessageEvent(String.format("Lobby hosted by %s", username)));
+                } else {
+                    // Regular player joining
+                    broadcast(new MessageEvent(String.format("%s joined the lobby", username)));
+                }
                 updateLobbyState();
             } else if (msg instanceof UpdateLobbyPlayerEvent) {
                 UpdateLobbyPlayerEvent updateEvent = (UpdateLobbyPlayerEvent) msg;
                 localLobby.applyToSlot(client.getIndex(), updateEvent);
 
                 // Check if this is a ready state change
-                if (updateEvent.getReady() != null && updateEvent.getReady()) {
+                if (updateEvent.getReady() != null) {
                     // Count ready players and total players
                     int readyCount = 0;
                     int totalPlayers = 0;
@@ -463,14 +475,20 @@ public final class FServerManager {
                         }
                     }
 
-                    // Broadcast ready notification
                     String playerName = client.getUsername();
-                    broadcast(new MessageEvent(String.format("%s is ready (%d/%d players ready)",
-                        playerName, readyCount, totalPlayers)));
+                    if (updateEvent.getReady()) {
+                        // Broadcast ready notification
+                        broadcast(new MessageEvent(String.format("%s is ready (%d/%d players ready)",
+                            playerName, readyCount, totalPlayers)));
 
-                    // Check if all players are ready
-                    if (readyCount == totalPlayers && totalPlayers > 1) {
-                        broadcast(new MessageEvent("All players ready! Starting game..."));
+                        // Check if all players are ready
+                        if (readyCount == totalPlayers && totalPlayers > 1) {
+                            broadcast(new MessageEvent("All players ready to start game!"));
+                        }
+                    } else {
+                        // Broadcast no longer ready notification
+                        broadcast(new MessageEvent(String.format("%s is not ready (%d/%d players ready)",
+                            playerName, readyCount, totalPlayers)));
                     }
                 }
             }
@@ -565,7 +583,7 @@ public final class FServerManager {
             } else {
                 // Normal disconnect - not in a game or session doesn't support reconnection
                 localLobby.disconnectPlayer(playerIndex);
-                broadcast(new MessageEvent(String.format("%s left the room", username)));
+                broadcast(new MessageEvent(String.format("%s left the lobby", username)));
                 broadcast(new LogoutEvent(username));
             }
 
@@ -917,13 +935,34 @@ public final class FServerManager {
                         playerIndex, targetPlayer != null ? targetPlayer.getName() : "null");
 
                 if (targetPlayer != null) {
-                    // Clear any pending inputs on the old controller before replacing
+                    // IMPORTANT: Order of operations matters here to avoid race conditions!
+                    // 1. Get reference to old controller
+                    // 2. Create AI controller
+                    // 3. Replace controller (so new calls go to AI)
+                    // 4. Clear inputs on old controller (releases game thread)
+                    //
+                    // If we clear inputs before replacing the controller, the game thread
+                    // may unblock and call chooseSpellAbilityToPlay on the OLD controller
+                    // before we replace it, creating a new blocking input.
+
+                    forge.game.player.PlayerController oldController = targetPlayer.getController();
+                    NetworkDebugLogger.log("[AI Takeover] Old controller type: %s", oldController != null ? oldController.getClass().getName() : "null");
+
+                    // Create an AI controller for this player
+                    forge.ai.LobbyPlayerAi aiLobbyPlayer = new forge.ai.LobbyPlayerAi(username + " (AI)", null);
+                    forge.ai.PlayerControllerAi aiController = new forge.ai.PlayerControllerAi(game, targetPlayer, aiLobbyPlayer);
+
+                    // Replace the player's controller with the AI controller BEFORE clearing inputs
+                    targetPlayer.dangerouslySetController(aiController);
+
+                    NetworkDebugLogger.log("[AI Takeover] Converted player %s at index %d to AI control", targetPlayer.getName(), playerIndex);
+                    NetworkDebugLogger.log("[AI Takeover] New controller class: %s", targetPlayer.getController().getClass().getName());
+
+                    // NOW clear pending inputs on the old controller to unblock game thread
                     // IMPORTANT: Only use clearInputs(), NOT resetInputs()!
                     // resetInputs() calls selectButtonCancel() which triggers onCancel() which
                     // may try to communicate with the disconnected client (e.g., showConfirmDialog)
                     // and block. clearInputs() directly calls stop() which safely releases the latch.
-                    forge.game.player.PlayerController oldController = targetPlayer.getController();
-                    NetworkDebugLogger.log("[AI Takeover] Old controller type: %s", oldController != null ? oldController.getClass().getName() : "null");
                     if (oldController instanceof forge.player.PlayerControllerHuman) {
                         forge.player.PlayerControllerHuman humanController = (forge.player.PlayerControllerHuman) oldController;
                         NetworkDebugLogger.log("[AI Takeover] Clearing inputs on old controller to unblock game thread");
@@ -934,20 +973,11 @@ public final class FServerManager {
                         NetworkDebugLogger.warn("[AI Takeover] Old controller is NOT PlayerControllerHuman, cannot clear inputs");
                     }
 
-                    // Create an AI controller for this player
-                    forge.ai.LobbyPlayerAi aiLobbyPlayer = new forge.ai.LobbyPlayerAi(username + " (AI)", null);
-                    forge.ai.PlayerControllerAi aiController = new forge.ai.PlayerControllerAi(game, targetPlayer, aiLobbyPlayer);
-
-                    // Replace the player's controller with the AI controller
-                    targetPlayer.dangerouslySetController(aiController);
-
-                    NetworkDebugLogger.log("[AI Takeover] Converted player %s at index %d to AI control", targetPlayer.getName(), playerIndex);
                     NetworkDebugLogger.log("[AI Takeover] Game state after conversion: isGameOver=%b, phase=%s, priorityPlayer=%s, turnPlayer=%s",
                             game.isGameOver(),
                             game.getPhaseHandler().getPhase(),
                             game.getPhaseHandler().getPriorityPlayer() != null ? game.getPhaseHandler().getPriorityPlayer().getName() : "null",
                             game.getPhaseHandler().getPlayerTurn() != null ? game.getPhaseHandler().getPlayerTurn().getName() : "null");
-                    NetworkDebugLogger.log("[AI Takeover] New controller class: %s", targetPlayer.getController().getClass().getName());
                 }
             }
         }
