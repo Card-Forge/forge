@@ -33,6 +33,10 @@ public class DeltaSyncManager {
     // How often to include a checksum for validation (every N packets)
     private static final int CHECKSUM_INTERVAL = 10;
 
+    // Recursion safety limits to prevent stack overflow
+    private static final int MAX_ATTACHMENT_DEPTH = 20;
+    private static final int MAX_COLLECTION_SIZE = 1000;
+
     private final AtomicLong sequenceNumber = new AtomicLong(0);
     private final Map<Integer, Long> clientAcknowledgedSeq = new ConcurrentHashMap<>();
     private final Set<Integer> trackedObjectIds = ConcurrentHashMap.newKeySet();
@@ -227,8 +231,14 @@ public class DeltaSyncManager {
 
         // Collect battlefield cards
         if (player.getBattlefield() != null) {
+            int battlefieldCount = 0;
             for (CardView card : player.getBattlefield()) {
-                collectCardDelta(card, objectDeltas, newObjects, currentObjectIds);
+                if (battlefieldCount++ >= MAX_COLLECTION_SIZE) {
+                    NetworkDebugLogger.warn("[DeltaSync] Max collection size (%d) exceeded on battlefield for player %d",
+                        MAX_COLLECTION_SIZE, player.getId());
+                    break;
+                }
+                collectCardDelta(card, objectDeltas, newObjects, currentObjectIds, 0);
             }
         }
     }
@@ -241,8 +251,14 @@ public class DeltaSyncManager {
         if (cards == null) {
             return;
         }
+        int cardCount = 0;
         for (CardView card : cards) {
-            collectCardDelta(card, objectDeltas, newObjects, currentObjectIds);
+            if (cardCount++ >= MAX_COLLECTION_SIZE) {
+                NetworkDebugLogger.warn("[DeltaSync] Max collection size (%d) exceeded in zone, skipping remaining cards",
+                    MAX_COLLECTION_SIZE);
+                break;
+            }
+            collectCardDelta(card, objectDeltas, newObjects, currentObjectIds, 0);
         }
     }
 
@@ -250,8 +266,15 @@ public class DeltaSyncManager {
      * Collect delta from a card and its associated objects.
      */
     private void collectCardDelta(CardView card, Map<Integer, byte[]> objectDeltas,
-                                  Map<Integer, NewObjectData> newObjects, Set<Integer> currentObjectIds) {
+                                  Map<Integer, NewObjectData> newObjects, Set<Integer> currentObjectIds, int depth) {
         if (card == null) {
+            return;
+        }
+
+        // Safety check: prevent stack overflow from deep attachment chains
+        if (depth > MAX_ATTACHMENT_DEPTH) {
+            NetworkDebugLogger.warn("[DeltaSync] Max attachment depth (%d) reached for card %d, skipping deeper attachments",
+                MAX_ATTACHMENT_DEPTH, card.getId());
             return;
         }
 
@@ -259,8 +282,14 @@ public class DeltaSyncManager {
 
         // Collect from attached cards
         if (card.getAttachedCards() != null) {
+            int attachmentCount = 0;
             for (CardView attached : card.getAttachedCards()) {
-                collectCardDelta(attached, objectDeltas, newObjects, currentObjectIds);
+                if (attachmentCount++ >= MAX_COLLECTION_SIZE) {
+                    NetworkDebugLogger.warn("[DeltaSync] Max collection size (%d) exceeded for attached cards on card %d",
+                        MAX_COLLECTION_SIZE, card.getId());
+                    break;
+                }
+                collectCardDelta(attached, objectDeltas, newObjects, currentObjectIds, depth + 1);
             }
         }
     }
@@ -287,6 +316,13 @@ public class DeltaSyncManager {
             // Get the props map to read values
             @SuppressWarnings("unchecked")
             Map<TrackableProperty, Object> props = obj.getProps();
+
+            // Critical: if props is null but changedProps is not empty, we have inconsistent state
+            if (props == null && !changedProps.isEmpty()) {
+                System.err.println("CRITICAL: Object " + obj.getId() + " has " + changedProps.size() +
+                    " changed properties but null props map!");
+                return null;
+            }
 
             for (TrackableProperty prop : changedProps) {
                 dos.writeInt(prop.ordinal());

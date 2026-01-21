@@ -41,7 +41,7 @@ import java.util.function.Predicate;
 
 public final class FServerManager {
     private static FServerManager instance = null;
-    private final Map<Channel, RemoteClient> clients = Maps.newTreeMap();
+    private final Map<Channel, RemoteClient> clients = new ConcurrentHashMap<>();
     private boolean isHosting = false;
     private EventLoopGroup bossGroup = new NioEventLoopGroup(1);
     private EventLoopGroup workerGroup = new NioEventLoopGroup();
@@ -908,11 +908,11 @@ public final class FServerManager {
                 // Found a matching disconnected player - reconnect them
                 System.out.println("[Reconnect] Found matching disconnected player at index " + i);
 
-                // Cancel timeout timer
-                Timer timer = disconnectTimeoutTimers.remove(i);
-                if (timer != null) {
+                // Cancel timeout timer atomically to prevent race condition
+                disconnectTimeoutTimers.computeIfPresent(i, (key, timer) -> {
                     timer.cancel();
-                }
+                    return null;  // Remove from map
+                });
 
                 // Update client
                 client.setIndex(i);
@@ -1006,11 +1006,11 @@ public final class FServerManager {
         for (int i = 0; i < 8; i++) { // Max 8 players
             PlayerSession playerSession = currentGameSession.getPlayerSession(i);
             if (playerSession != null && playerSession.validateToken(token)) {
-                // Cancel timeout timer
-                Timer timer = disconnectTimeoutTimers.remove(i);
-                if (timer != null) {
+                // Cancel timeout timer atomically to prevent race condition
+                disconnectTimeoutTimers.computeIfPresent(i, (key, timer) -> {
                     timer.cancel();
-                }
+                    return null;  // Remove from map
+                });
 
                 // Update client index and reconnect
                 client.setIndex(i);
