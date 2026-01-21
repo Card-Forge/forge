@@ -132,7 +132,7 @@ public class FGameClient implements IToServer {
                 public void initChannel(final SocketChannel ch) throws Exception {
                     final ChannelPipeline pipeline = ch.pipeline();
                     pipeline.addLast(
-                            new CompatibleObjectEncoder(),
+                            new CompatibleObjectEncoder(null), // Client doesn't need byte tracking
                             new CompatibleObjectDecoder(9766*1024, ClassResolvers.cacheDisabled(null)),
                             new MessageHandler(),
                             new LobbyUpdateHandler(),

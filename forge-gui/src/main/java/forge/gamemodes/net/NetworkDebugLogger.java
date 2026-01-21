@@ -59,8 +59,24 @@ public final class NetworkDebugLogger {
 
     private static final SimpleDateFormat TIMESTAMP_FORMAT = new SimpleDateFormat("HH:mm:ss.SSS");
 
+    // Apply configuration from NetworkDebug.config on class load
+    static {
+        applyConfig();
+    }
+
     private NetworkDebugLogger() {
         // Utility class
+    }
+
+    /**
+     * Apply configuration from NetworkDebug.config.
+     * Called automatically on class initialization, but can also be called
+     * manually to reload configuration.
+     */
+    public static void applyConfig() {
+        enabled = NetworkDebugConfig.isDebugLoggerEnabled();
+        consoleLevel = NetworkDebugConfig.getConsoleLogLevel();
+        fileLevel = NetworkDebugConfig.getFileLogLevel();
     }
 
     /**
