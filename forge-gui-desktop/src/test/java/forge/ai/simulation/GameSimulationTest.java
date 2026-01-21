@@ -2714,4 +2714,37 @@ public class GameSimulationTest extends SimulationTest {
         return true;  // All words appear exactly once
     }
 
+    @Test
+    public void testPummelerForHireGreatestCardPower() {
+        // Test fix for Pummeler for Hire - was using GreatestPower instead of GreatestCardPower
+        // The card gains life equal to the greatest power among Giants you control on ETB
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        // Add a Giant with power 3 already on battlefield
+        Card hillGiant = addCard("Hill Giant", p); // 3/3 Giant
+        hillGiant.setSickness(false);
+
+        // Add lands to cast Pummeler for Hire (costs 4G)
+        addCards("Forest", 5, p);
+
+        // Put Pummeler for Hire in hand to cast it (ETB triggers on cast, not addCard)
+        Card pummeler = addCardToZone("Pummeler for Hire", p, ZoneType.Hand);
+        SpellAbility pummelerSA = pummeler.getFirstSpellAbility();
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        int initialLife = p.getLife();
+
+        // Simulate casting Pummeler for Hire
+        GameSimulator sim = createSimulator(game, p);
+        sim.simulateSpellAbility(pummelerSA);
+        Game simGame = sim.getSimulatedGameState();
+
+        // Greatest power among Giants is 4 (Pummeler itself), so player should gain 4 life
+        // Before the fix (GreatestPower -> GreatestCardPower), this would gain 0 life
+        AssertJUnit.assertEquals("Pummeler for Hire should grant 4 life (greatest power among Giants)",
+                initialLife + 4, simGame.getPlayers().get(1).getLife());
+    }
 }
