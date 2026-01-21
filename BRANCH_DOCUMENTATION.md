@@ -213,6 +213,50 @@ void resumeGame()
 boolean validateReconnection(int playerIndex, String token)
 ```
 
+#### AI Takeover on Timeout
+
+When a player fails to reconnect within the timeout period, the server now **converts the player to AI control** instead of removing them from the game:
+
+**What happens:**
+1. The disconnected player's lobby slot changes to `LobbySlotType.AI`
+2. Player's name is updated to include " (AI)" suffix
+3. An AI controller (`PlayerControllerAi`) replaces the player's human controller
+4. All game state is preserved (hand, library, battlefield, permanents)
+5. The player is marked as "connected" in the session (AI doesn't disconnect)
+6. Game resumes automatically if no other players are disconnected
+
+**Benefits:**
+- Games continue instead of ending prematurely
+- Player's cards/permanents remain controlled by AI
+- Prevents 1v1 games from becoming unplayable
+- No game state is lost during the transition
+
+#### Host Commands for Reconnection
+
+The host can manually trigger AI takeover using chat commands:
+
+##### `/skipreconnect` Command
+
+Allows the host to bypass the reconnection timer and immediately convert a disconnected player to AI control.
+
+**Usage:**
+```
+/skipreconnect                  - Take over first disconnected player
+/skipreconnect <PlayerName>     - Take over specific player by name
+```
+
+**Features:**
+- Only accessible to the host (player index 0)
+- Cancels the reconnection timeout timer
+- Immediately triggers AI takeover
+- Command is not echoed to chat (processed silently)
+- Broadcasts: `"Host skipped reconnection wait. <Player> replaced with AI."`
+
+**Use Cases:**
+- Player confirms they cannot reconnect (e.g., via external chat)
+- Host knows player has permanently left
+- Avoid waiting full 5 minutes when return is unlikely
+
 ##### 2. PlayerSession (`forge-gui/.../net/server/PlayerSession.java`)
 
 Per-player session state with secure token authentication:
@@ -379,6 +423,133 @@ public IGuiGame getGui(int index) {
 ```
 
 This ensures that on reconnection, the stored `NetGuiGame` (which has the `GameView` already set from game start) can be updated with the new client connection and properly send the game state.
+
+#### AI Takeover Implementation
+
+##### convertPlayerToAI() Method
+
+The core of the AI takeover functionality is the `convertPlayerToAI()` method in `FServerManager.java`:
+
+```java
+private void convertPlayerToAI(int playerIndex, String username) {
+    // 1. Update lobby slot to AI type
+    LobbySlot slot = localLobby.getSlot(playerIndex);
+    if (slot != null) {
+        slot.setType(LobbySlotType.AI);
+        slot.setName(username + " (AI)");
+    }
+
+    // 2. Find the player in the active game
+    if (localLobby.getHostedMatch() != null) {
+        forge.game.Match match = localLobby.getHostedMatch().getMatch();
+        if (match != null) {
+            forge.game.Game game = match.getGame();
+            if (game != null) {
+                // Find player by matching lobby name
+                forge.game.player.Player targetPlayer = null;
+                for (forge.game.player.Player p : game.getPlayers()) {
+                    if (username.equals(p.getLobbyPlayer().getName())) {
+                        targetPlayer = p;
+                        break;
+                    }
+                }
+
+                if (targetPlayer != null) {
+                    // 3. Create AI controller
+                    forge.ai.LobbyPlayerAi aiLobbyPlayer =
+                        new forge.ai.LobbyPlayerAi(username + " (AI)", null);
+                    forge.ai.PlayerControllerAi aiController =
+                        new forge.ai.PlayerControllerAi(game, targetPlayer, aiLobbyPlayer);
+
+                    // 4. Replace controller
+                    targetPlayer.dangerouslySetController(aiController);
+                }
+            }
+        }
+    }
+
+    // 5. Mark player as connected (AI is "connected")
+    currentGameSession.markPlayerConnected(playerIndex);
+
+    // 6. Update lobby state
+    updateLobbyState();
+}
+```
+
+**Key Points:**
+1. **Lobby Slot Update**: Changes the slot type to AI so other players see the change
+2. **Player Lookup**: Finds the in-game Player instance by matching username
+3. **AI Controller Creation**: Creates a new `LobbyPlayerAi` and `PlayerControllerAi`
+4. **Controller Substitution**: Uses `dangerouslySetController()` to replace the human controller with AI
+5. **Session Update**: Marks player as connected so game can resume
+6. **State Broadcast**: Updates all clients about the lobby change
+
+**Why `dangerouslySetController()`?**
+This method bypasses the normal controller creation flow and directly replaces the controller. This is necessary because:
+- The Player object already exists and has game state
+- We don't want to create a new Player instance (would lose state)
+- We need to hot-swap the controller while maintaining all other state
+
+##### Chat Command Handling
+
+The `/skipreconnect` command is parsed in the `MessageHandler` class:
+
+```java
+private void handleSkipReconnectCommand(String message) {
+    // Parse: /skipreconnect or /skipreconnect <playerName>
+    String[] parts = message.trim().split("\\s+", 2);
+
+    // Validation checks
+    if (currentGameSession == null || !currentGameSession.isGameInProgress()) {
+        broadcast(new MessageEvent("No active game session."));
+        return;
+    }
+
+    // Find target player (specific name or first disconnected)
+    String targetPlayerName = parts.length > 1 ? parts[1].trim() : null;
+    int targetIndex = -1;
+    String targetUsername = null;
+
+    if (targetPlayerName != null) {
+        // Find specific disconnected player by name
+        for (int i = 0; i < 8; i++) {
+            PlayerSession ps = currentGameSession.getPlayerSession(i);
+            if (ps != null && ps.isDisconnected()) {
+                if (targetPlayerName.equalsIgnoreCase(ps.getPlayerName())) {
+                    targetIndex = i;
+                    targetUsername = ps.getPlayerName();
+                    break;
+                }
+            }
+        }
+    } else {
+        // Find first disconnected player
+        for (int i = 0; i < 8; i++) {
+            PlayerSession ps = currentGameSession.getPlayerSession(i);
+            if (ps != null && ps.isDisconnected()) {
+                targetIndex = i;
+                targetUsername = ps.getPlayerName();
+                break;
+            }
+        }
+    }
+
+    // Error handling
+    if (targetIndex == -1) {
+        // Broadcast appropriate error message
+        return;
+    }
+
+    // Execute AI takeover
+    skipReconnectionTimeout(targetIndex, targetUsername);
+}
+```
+
+**Security:**
+- Only the host (client index 0) can execute the command
+- Validates game session exists and is in progress
+- Validates player is actually disconnected
+- Command is not echoed to chat (prevents spam)
 
 ---
 
@@ -577,7 +748,11 @@ The following system messages are now broadcast during network play:
 | **Disconnect (Game)** | `"PlayerName disconnected. Game paused. Waiting for reconnection..."` | Player disconnects during game |
 | **Reconnect Timer** | `"Waiting for PlayerName to reconnect... (M:SS remaining)"` | Every 30 seconds during timeout |
 | **Reconnect Success** | `"PlayerName has reconnected!"` | Player rejoins successfully |
-| **Reconnect Timeout** | `"PlayerName failed to reconnect. Timeout expired."` | 5-minute timer expires |
+| **AI Takeover (Timeout)** | `"PlayerName timed out. AI taking over."` | 5-minute timer expires |
+| **AI Takeover (Manual)** | `"Host skipped reconnection wait. PlayerName replaced with AI."` | Host uses `/skipreconnect` command |
+| **No Active Session** | `"No active game session."` | Host uses `/skipreconnect` when no game is active |
+| **No Disconnected Players** | `"No disconnected players found."` | Host uses `/skipreconnect` when no one is disconnected |
+| **Player Not Found** | `"No disconnected player found with name 'PlayerName'."` | Host specifies invalid player name |
 | **Game End** | `"Game ended. Winner: PlayerName"` or `"Game ended. Draw"` | Match completes |
 | **Return to Lobby** | `"Returning to lobby..."` | After game end |
 
@@ -680,6 +855,11 @@ Reconnection:
 [14:46:12] [SERVER] Waiting for Bob to reconnect... (4:00 remaining)
 [14:46:23] [SERVER] Bob has reconnected!
 ...
+[15:00:05] [SERVER] Charlie disconnected. Game paused. Waiting for reconnection...
+[15:00:35] [SERVER] Waiting for Charlie to reconnect... (4:30 remaining)
+[15:01:05] Alice (Host): /skipreconnect Charlie
+[15:01:05] [SERVER] Host skipped reconnection wait. Charlie replaced with AI.
+...
 [15:12:45] [SERVER] Game ended. Winner: Alice
 [15:12:45] [SERVER] Returning to lobby...
 ```
@@ -722,7 +902,7 @@ Reconnection:
 | `forge-gui/.../net/server/GameSession.java` | **NEW** - Session state management |
 | `forge-gui/.../net/server/PlayerSession.java` | **NEW** - Per-player session with secure tokens |
 | `forge-gui/.../net/server/NetGuiGame.java` | Delta sync integration, bandwidth monitoring, change flag clearing |
-| `forge-gui/.../net/server/FServerManager.java` | Session management, reconnection handling, debug logging, chat notifications (ready state, countdown, winner), host indicator |
+| `forge-gui/.../net/server/FServerManager.java` | Session management, reconnection handling, debug logging, chat notifications (ready state, countdown, winner), host indicator, **AI takeover on timeout**, **`/skipreconnect` command handling** |
 | `forge-gui/.../net/server/ServerGameLobby.java` | Initialize game session on game start |
 
 ### Client-Side
