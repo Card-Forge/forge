@@ -1050,36 +1050,6 @@ Reconnection:
 
 ---
 
-## Testing
-
-### Running Unit Tests
-
-```bash
-# Install dependencies first (required once)
-mvn install -DskipTests
-
-# Run network optimization tests
-mvn test -pl forge-gui-desktop -Dtest=NetworkOptimizationTest
-```
-
-### Manual Testing
-
-1. **Start Host**: Launch Forge → Multiplayer → Host Game on port 36743
-2. **Start Client**: Launch second Forge instance → Multiplayer → Join → `localhost:36743`
-3. **Start Game**: Both players ready up and begin
-
-**Testing Delta Sync:**
-- Play several turns
-- Monitor console for `DeltaPacket` messages instead of full `setGameView`
-
-**Testing Reconnection:**
-1. During a game, force-quit the client (Task Manager)
-2. Host should show: "Waiting for [player] to reconnect..."
-3. Restart client and rejoin `localhost:36743`
-4. Client should transition directly to game screen with state restored
-
----
-
 ## Configuration
 
 ### Reconnection Timeout
