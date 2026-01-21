@@ -10,9 +10,12 @@ The NetworkPlay branch introduces three major features to improve the multiplaye
 
 1. **[Delta Synchronization](#feature-1-delta-synchronization)**: Instead of sending the complete game state on every update, only changed properties are transmitted, significantly reducing bandwidth usage.
 
-2. **[Reconnection Support](#feature-2-reconnection-support)**: Players who disconnect (intentionally or due to network issues) can rejoin an in-progress game within a configurable timeout period (default: 5 minutes).
+2. **[Reconnection Support](#feature-2-reconnection-support)**: Players who disconnect (intentionally or due to network issues) can rejoin an in-progress game within a configurable timeout period (default: 5 minutes). If a player fails to reconnect before the timeout expires, they are automatically converted to AI control to allow the game to continue.
 
 3. **[Enhanced Chat Notifications](#feature-3-enhanced-chat-notifications)**: Server events (player join/leave, ready state, game start/end, reconnection status) are clearly communicated through styled system messages, providing better visibility into game state and player actions.
+
+**Additional Resources:**
+- **[Debugging](#debugging)**: Comprehensive debug logging with AI-assisted troubleshooting for diagnosing network synchronization issues
 
 ---
 
