@@ -1073,6 +1073,152 @@ debug.logger.file.level=DEBUG
 
 ---
 
+### NetworkDebugLogger
+
+The network play code includes a dedicated debug logging system (`NetworkDebugLogger`) for diagnosing synchronization and connectivity issues. It provides configurable verbosity levels for console versus file output.
+
+**Control**: Set these options in `NetworkDebug.config`:
+- `debug.logger.enabled=true/false` - Enable/disable all debug logging
+- `debug.logger.console.level=DEBUG/INFO/WARN/ERROR` - Console verbosity
+- `debug.logger.file.level=DEBUG/INFO/WARN/ERROR` - File verbosity
+
+#### Log Levels
+
+| Level | Priority | Purpose | Console Default | File Default |
+|-------|----------|---------|-----------------|--------------|
+| `DEBUG` | 0 | Detailed tracing (hex dumps, per-property details, collection contents) | OFF | ON |
+| `INFO` | 1 | Normal operation (sync start/end, summaries, important events) | ON | ON |
+| `WARN` | 2 | Potential issues (missing objects, unexpected states) | ON | ON |
+| `ERROR` | 3 | Failures and exceptions | ON | ON |
+
+**Default Configuration**:
+```properties
+debug.logger.console.level=INFO  # Console shows important events
+debug.logger.file.level=DEBUG    # File captures everything
+```
+
+#### Log File Location
+
+Log files are created in the `logs/` directory (relative to the Forge working directory, typically `forge-gui-desktop/logs/`):
+
+```
+logs/network-debug-20250121-075900-12345.log
+```
+
+The filename includes:
+- Timestamp (YYYYMMDD-HHMMSS)
+- Process ID (for distinguishing multiple Forge instances)
+
+#### Changing Configuration
+
+Edit `NetworkDebug.config`:
+```properties
+# For maximum verbosity
+debug.logger.console.level=DEBUG
+debug.logger.file.level=DEBUG
+
+# For production (quiet)
+debug.logger.enabled=false
+
+# Show only errors
+debug.logger.console.level=ERROR
+debug.logger.file.level=ERROR
+```
+Requires restart to take effect.
+
+#### Log Output Examples
+
+**Console Output (Default: INFO and above)**
+```
+[07:59:02.583] [INFO] [setGameView] Called with gameView0=non-null, existing gameView=null
+[07:59:02.787] [INFO] [CMatchUI.openView] Called
+[07:59:03.070] [INFO] [DeltaSync] === START applyDelta seq=1 ===
+[07:59:03.090] [INFO] [DeltaSync] Created 60 new objects
+[07:59:03.119] [INFO] [DeltaSync] Summary: 60 new objects, 5 deltas applied, 0 skipped
+[07:59:03.125] [WARN] [DeltaSync] Object ID 12345 NOT FOUND for delta application
+```
+
+**File Output (Default: DEBUG and above)** - includes additional detail:
+```
+[07:59:03.071] [DEBUG] [DeltaSync] GameView PlayerView ID=0 hash=1234567, inTracker=FOUND, sameInstance=true
+[07:59:03.072] [DEBUG] [DeltaSync] applyDeltaToObject: objId=100, objType=CardView, deltaBytes=245, propCount=8
+[07:59:03.073] [DEBUG] [DeltaSync] PlayerView 0: setting Hand = Collection[7]
+[07:59:03.074] [DEBUG] [NetworkDeserializer] Collection read: type=CardViewType, size=7, found=7, notFound=0
+```
+
+#### Using Debug Logging in Code
+
+```java
+// DEBUG - detailed tracing (file only by default)
+NetworkDebugLogger.debug("[MyFeature] Processing object %d with %d properties", objectId, propCount);
+
+// INFO - normal operation events (console + file)
+NetworkDebugLogger.log("[MyFeature] Sync completed: %d objects processed", count);
+
+// WARN - potential issues (console + file)
+NetworkDebugLogger.warn("[MyFeature] Object %d not found in tracker", objectId);
+
+// ERROR - failures (always logged)
+NetworkDebugLogger.error("[MyFeature] Failed to deserialize: %s", e.getMessage());
+NetworkDebugLogger.error("[MyFeature] Exception details:", exception);
+```
+
+#### Hex Dump for Serialization Debugging
+
+When investigating serialization issues, the logger provides hex dump functionality:
+
+```java
+NetworkDebugLogger.hexDump("[DeltaSync] Delta bytes:", byteArray, errorPosition);
+```
+
+Output (at DEBUG level):
+```
+[07:59:03.500] [DEBUG] HEXDUMP: [DeltaSync] Delta bytes:
+Bytes 0-63 (error at 32):
+0000: 00 00 00 05 00 00 00 01 00 00 00 00 00 00 00 07  | ................
+0016: 00 00 00 02 00 00 00 03 00 00 00 04 00 00 00 05  | ................
+0032: [FF]FF FF FF 00 00 00 00 00 00 00 01 00 00 00 02  | ................
+```
+
+#### Debugging Common Issues
+
+**Issue: Cards not appearing in hand**
+1. Enable detailed logging in `NetworkDebug.config`:
+   ```properties
+   debug.logger.console.level=DEBUG
+   debug.logger.file.level=DEBUG
+   ```
+2. Look for `[DeltaSync] PlayerView X: setting Hand = Collection[N]` messages
+3. Check if `[NetworkDeserializer] Collection has X missing objects!` warnings appear
+4. Verify tracker lookups: `[FullStateSync] Card X (from hand): tracker lookup = FOUND/NOT FOUND`
+5. Check log file: `logs/network-debug-*.log` for full details
+
+**Issue: Delta sync errors**
+1. Check for `Invalid ordinal` or `Unexpected marker` errors
+2. Review the hex dump to identify byte stream misalignment
+3. Look for `VERIFY FAILED: CardView X not in tracker` warnings
+4. Enable DEBUG level to see hex dumps of problematic packets
+
+**Issue: Reconnection failures**
+1. Check for `[FullStateSync]` messages showing state restoration
+2. Look for `[DeltaSync] Creating NEW PlayerView` warnings (indicates identity mismatch)
+3. Verify session credentials are being sent
+4. Review log file for complete reconnection flow
+
+**Issue: Bandwidth higher than expected**
+1. Enable bandwidth logging in `NetworkDebug.config`:
+   ```properties
+   bandwidth.logging.enabled=true
+   ```
+2. Check console output for three-way comparison
+3. Compare "Actual Network" bytes to "Full State" estimate
+4. If "Actual" is much larger than "Approximate", check for:
+   - Large ObjectOutputStream overhead (inspect packet types)
+   - Poor compression ratios (inspect data compressibility)
+   - Excessive new object creation (check delta vs full state ratio)
+
+---
+
 ### Bandwidth Logging
 
 **Control**: Set `bandwidth.logging.enabled=true/false` in `NetworkDebug.config`
@@ -1149,171 +1295,6 @@ The example above shows 62% savings for a single packet, but the Overview claims
 - **ActualNetwork=450**: After serialization and compression, 450 bytes were sent
 - **FullState=1200**: Sending the full state would have taken 1200 bytes
 - **Actual Savings=62%**: Delta sync saved 62% of bandwidth compared to full state
-
----
-
-### NetworkDebugLogger
-
-The network play code includes a dedicated debug logging system (`NetworkDebugLogger`) for diagnosing synchronization and connectivity issues. It provides configurable verbosity levels for console versus file output.
-
-**Control**: Set these options in `NetworkDebug.config`:
-- `debug.logger.enabled=true/false` - Enable/disable all debug logging
-- `debug.logger.console.level=DEBUG/INFO/WARN/ERROR` - Console verbosity
-- `debug.logger.file.level=DEBUG/INFO/WARN/ERROR` - File verbosity
-
-#### Log Levels
-
-| Level | Priority | Purpose | Console Default | File Default |
-|-------|----------|---------|-----------------|--------------|
-| `DEBUG` | 0 | Detailed tracing (hex dumps, per-property details, collection contents) | OFF | ON |
-| `INFO` | 1 | Normal operation (sync start/end, summaries, important events) | ON | ON |
-| `WARN` | 2 | Potential issues (missing objects, unexpected states) | ON | ON |
-| `ERROR` | 3 | Failures and exceptions | ON | ON |
-
-**Default Configuration**:
-```properties
-debug.logger.console.level=INFO  # Console shows important events
-debug.logger.file.level=DEBUG    # File captures everything
-```
-
-#### Log File Location
-
-Log files are created in the `logs/` directory (relative to the Forge working directory, typically `forge-gui-desktop/logs/`):
-
-```
-logs/network-debug-20250121-075900-12345.log
-```
-
-The filename includes:
-- Timestamp (YYYYMMDD-HHMMSS)
-- Process ID (for distinguishing multiple Forge instances)
-
-#### Changing Configuration
-
-**Option 1: Edit NetworkDebug.config (Recommended)**
-```properties
-# For maximum verbosity
-debug.logger.console.level=DEBUG
-debug.logger.file.level=DEBUG
-
-# For production (quiet)
-debug.logger.enabled=false
-
-# Show only errors
-debug.logger.console.level=ERROR
-debug.logger.file.level=ERROR
-```
-Requires restart to take effect.
-
-**Option 2: Runtime API (For Testing)**
-```java
-import forge.gamemodes.net.NetworkDebugLogger;
-import forge.gamemodes.net.NetworkDebugLogger.LogLevel;
-
-// Override config at runtime
-NetworkDebugLogger.setConsoleLevel(LogLevel.DEBUG);
-NetworkDebugLogger.setFileLevel(LogLevel.ERROR);
-NetworkDebugLogger.setEnabled(false);
-
-// Reload configuration from file
-NetworkDebugLogger.applyConfig();
-
-// Query current levels
-LogLevel consoleLevel = NetworkDebugLogger.getConsoleLevel();
-LogLevel fileLevel = NetworkDebugLogger.getFileLevel();
-```
-
-#### Log Output Examples
-
-**Console Output (Default: INFO and above)**
-```
-[07:59:02.583] [INFO] [setGameView] Called with gameView0=non-null, existing gameView=null
-[07:59:02.787] [INFO] [CMatchUI.openView] Called
-[07:59:03.070] [INFO] [DeltaSync] === START applyDelta seq=1 ===
-[07:59:03.090] [INFO] [DeltaSync] Created 60 new objects
-[07:59:03.119] [INFO] [DeltaSync] Summary: 60 new objects, 5 deltas applied, 0 skipped
-[07:59:03.125] [WARN] [DeltaSync] Object ID 12345 NOT FOUND for delta application
-```
-
-**File Output (Default: DEBUG and above)** - includes additional detail:
-```
-[07:59:03.071] [DEBUG] [DeltaSync] GameView PlayerView ID=0 hash=1234567, inTracker=FOUND, sameInstance=true
-[07:59:03.072] [DEBUG] [DeltaSync] applyDeltaToObject: objId=100, objType=CardView, deltaBytes=245, propCount=8
-[07:59:03.073] [DEBUG] [DeltaSync] PlayerView 0: setting Hand = Collection[7]
-[07:59:03.074] [DEBUG] [NetworkDeserializer] Collection read: type=CardViewType, size=7, found=7, notFound=0
-```
-
-#### Using Debug Logging in Code
-
-```java
-// DEBUG - detailed tracing (file only by default)
-NetworkDebugLogger.debug("[MyFeature] Processing object %d with %d properties", objectId, propCount);
-
-// INFO - normal operation events (console + file)
-NetworkDebugLogger.log("[MyFeature] Sync completed: %d objects processed", count);
-
-// WARN - potential issues (console + file)
-NetworkDebugLogger.warn("[MyFeature] Object %d not found in tracker", objectId);
-
-// ERROR - failures (always logged)
-NetworkDebugLogger.error("[MyFeature] Failed to deserialize: %s", e.getMessage());
-NetworkDebugLogger.error("[MyFeature] Exception details:", exception);
-```
-
-#### Hex Dump for Serialization Debugging
-
-When investigating serialization issues, the logger provides hex dump functionality:
-
-```java
-NetworkDebugLogger.hexDump("[DeltaSync] Delta bytes:", byteArray, errorPosition);
-```
-
-Output (at DEBUG level):
-```
-[07:59:03.500] [DEBUG] HEXDUMP: [DeltaSync] Delta bytes:
-Bytes 0-63 (error at 32):
-0000: 00 00 00 05 00 00 00 01 00 00 00 00 00 00 00 07  | ................
-0016: 00 00 00 02 00 00 00 03 00 00 00 04 00 00 00 05  | ................
-0032: [FF]FF FF FF 00 00 00 00 00 00 00 01 00 00 00 02  | ................
-```
-
-#### Debugging Common Issues
-
-**Issue: Cards not appearing in hand**
-1. Enable detailed logging in `NetworkDebug.config`:
-   ```properties
-   debug.logger.console.level=DEBUG
-   debug.logger.file.level=DEBUG
-   ```
-   Or at runtime: `NetworkDebugLogger.setConsoleLevel(LogLevel.DEBUG)`
-2. Look for `[DeltaSync] PlayerView X: setting Hand = Collection[N]` messages
-3. Check if `[NetworkDeserializer] Collection has X missing objects!` warnings appear
-4. Verify tracker lookups: `[FullStateSync] Card X (from hand): tracker lookup = FOUND/NOT FOUND`
-5. Check log file: `logs/network-debug-*.log` for full details
-
-**Issue: Delta sync errors**
-1. Check for `Invalid ordinal` or `Unexpected marker` errors
-2. Review the hex dump to identify byte stream misalignment
-3. Look for `VERIFY FAILED: CardView X not in tracker` warnings
-4. Enable DEBUG level to see hex dumps of problematic packets
-
-**Issue: Reconnection failures**
-1. Check for `[FullStateSync]` messages showing state restoration
-2. Look for `[DeltaSync] Creating NEW PlayerView` warnings (indicates identity mismatch)
-3. Verify session credentials are being sent
-4. Review log file for complete reconnection flow
-
-**Issue: Bandwidth higher than expected**
-1. Enable bandwidth logging in `NetworkDebug.config`:
-   ```properties
-   bandwidth.logging.enabled=true
-   ```
-2. Check console output for three-way comparison
-3. Compare "Actual Network" bytes to "Full State" estimate
-4. If "Actual" is much larger than "Approximate", check for:
-   - Large ObjectOutputStream overhead (inspect packet types)
-   - Poor compression ratios (inspect data compressibility)
-   - Excessive new object creation (check delta vs full state ratio)
 
 ---
 
