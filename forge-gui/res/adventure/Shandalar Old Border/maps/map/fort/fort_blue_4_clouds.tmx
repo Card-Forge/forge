@@ -60,7 +60,7 @@
     <property name="enemy" value="Thought Invoker of Shandalar" />
    </properties>
   </object>
-  <object id="55" template="../../../../../../common/maps/obj/enemy.tx" x="92.7585" y="386.594">
+  <object id="55" template="../../../../../../common/maps/obj/enemy.tx" x="210" y="80">
    <properties>
     <property name="enemy" value="Whim of Shandalar" />
     <property name="threatRange" type="int" value="50" />
@@ -83,5 +83,5 @@
    </properties>
   </object>
   <object id="64" template="../../../../../../common/maps/obj/manashards.tx" x="297.095" y="174.815" />
- <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="240" y="50"><properties><property name="enemy" value="The Astral Visionary" /><property name="threatRange" type="int" value="50" /><property name="effect">{"startBattleWithCard": ["Mox Sapphire|LEA", "Zephyr Falcon|LEG", "Yotian Soldier|ATQ"]}</property></properties></object></objectgroup>
+ <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="92.7585" y="386.594"><properties><property name="enemy" value="The Astral Visionary" /><property name="threatRange" type="int" value="50" /><property name="effect">{"startBattleWithCard": ["Mox Sapphire|LEA", "Zephyr Falcon|LEG", "Yotian Soldier|ATQ"]}</property></properties></object></objectgroup>
 </map>
