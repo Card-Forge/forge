@@ -892,24 +892,31 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                     autoSellCards.add(reward.getCard());
                     refreshEditor();
                 }
+                System.out.println("FORGE_ARCHIPELAGO: CARD REWARD DETECTED: " + reward.getCard().getCardName());
                 break;
             case Gold:
                 addGold(reward.getCount());
+                System.out.println("FORGE_ARCHIPELAGO: GOLD REWARD DETECTED: +" + reward.getCount());
                 break;
             case Item:
-                if (reward.getItem() != null)
+                if (reward.getItem() != null) {
                     addItem(reward.getItem().name);
+                    System.out.println("FORGE_ARCHIPELAGO: ITEM REWARD DETECTED: " + reward.getItem().name);
+                }
                 break;
             case CardPack:
                 if (reward.getDeck() != null) {
                     boostersOwned.add(reward.getDeck());
+                    System.out.println("FORGE_ARCHIPELAGO: CARD PACK REWARD DETECTED: " + reward.getDeck().getName());
                 }
                 break;
             case Life:
                 addMaxLife(reward.getCount());
+                System.out.println("FORGE_ARCHIPELAGO: MAX LIFE REWARD DETECTED: +" + reward.getCount());
                 break;
             case Shards:
                 addShards(reward.getCount());
+                System.out.println("FORGE_ARCHIPELAGO: SHARD REWARD DETECTED: +" + reward.getCount());
                 break;
         }
     }
