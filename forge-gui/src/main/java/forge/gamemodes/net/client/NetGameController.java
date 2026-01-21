@@ -131,6 +131,11 @@ public class NetGameController implements IGameController {
         send(ProtocolMethod.reconnectRequest, sessionId, token);
     }
 
+    @Override
+    public void requestResync() {
+        send(ProtocolMethod.requestResync);
+    }
+
     private IMacroSystem macros;
     @Override
     public IMacroSystem macros() {

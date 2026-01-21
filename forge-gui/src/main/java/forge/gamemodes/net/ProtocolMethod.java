@@ -109,6 +109,7 @@ public enum ProtocolMethod {
 
     // Delta sync - Client -> Server
     ackSync                   (Mode.CLIENT, Void.TYPE, Long.TYPE),
+    requestResync             (Mode.CLIENT, Void.TYPE),  // Request full state resync on checksum mismatch
     reconnectRequest          (Mode.CLIENT, Void.TYPE, String.class, String.class);
 
     private enum Mode {

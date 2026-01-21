@@ -55,6 +55,12 @@ public interface IGameController {
     void ackSync(long sequenceNumber);
 
     /**
+     * Request a full state resync from the server.
+     * Called automatically when checksum validation fails to recover from desynchronization.
+     */
+    void requestResync();
+
+    /**
      * Request to reconnect to an existing game session.
      * @param sessionId the session identifier
      * @param token the session token for authentication
