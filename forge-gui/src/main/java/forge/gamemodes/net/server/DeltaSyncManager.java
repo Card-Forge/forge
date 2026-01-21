@@ -31,7 +31,8 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class DeltaSyncManager {
     // How often to include a checksum for validation (every N packets)
-    private static final int CHECKSUM_INTERVAL = 10;
+    // Increased from 10 to 20 to reduce frequency of race-condition-induced mismatches
+    private static final int CHECKSUM_INTERVAL = 20;
 
     // Recursion safety limits to prevent stack overflow
     private static final int MAX_ATTACHMENT_DEPTH = 20;
