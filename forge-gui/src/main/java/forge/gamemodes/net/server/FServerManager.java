@@ -64,7 +64,9 @@ public final class FServerManager {
     private final Map<Integer, NetGuiGame> playerGuis = new ConcurrentHashMap<>(); // Store NetGuiGame instances for reuse
 
     // Network byte tracking for monitoring actual bandwidth usage
-    private final forge.gamemodes.net.NetworkByteTracker networkByteTracker = new forge.gamemodes.net.NetworkByteTracker();
+    // Enable via system property: -Dforge.network.logBandwidth=true
+    private final forge.gamemodes.net.NetworkByteTracker networkByteTracker =
+            Boolean.getBoolean("forge.network.logBandwidth") ? new forge.gamemodes.net.NetworkByteTracker() : null;
 
     private FServerManager() {
     }

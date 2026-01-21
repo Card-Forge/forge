@@ -109,7 +109,8 @@ public class NetGuiGame extends AbstractGuiGame {
     private long totalDeltaBytes = 0;
     private long totalFullStateBytes = 0;
     private int deltaPacketCount = 0;
-    private boolean logBandwidth = true; // Set to true to enable logging
+    // Enable via system property: -Dforge.network.logBandwidth=true
+    private boolean logBandwidth = Boolean.getBoolean("forge.network.logBandwidth");
 
     /**
      * Send a game view update to the client.
