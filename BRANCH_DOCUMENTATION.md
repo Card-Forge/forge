@@ -213,50 +213,6 @@ void resumeGame()
 boolean validateReconnection(int playerIndex, String token)
 ```
 
-#### AI Takeover on Timeout
-
-When a player fails to reconnect within the timeout period, the server now **converts the player to AI control** instead of removing them from the game:
-
-**What happens:**
-1. The disconnected player's lobby slot changes to `LobbySlotType.AI`
-2. Player's name is updated to include " (AI)" suffix
-3. An AI controller (`PlayerControllerAi`) replaces the player's human controller
-4. All game state is preserved (hand, library, battlefield, permanents)
-5. The player is marked as "connected" in the session (AI doesn't disconnect)
-6. Game resumes automatically if no other players are disconnected
-
-**Benefits:**
-- Games continue instead of ending prematurely
-- Player's cards/permanents remain controlled by AI
-- Prevents 1v1 games from becoming unplayable
-- No game state is lost during the transition
-
-#### Host Commands for Reconnection
-
-The host can manually trigger AI takeover using chat commands:
-
-##### `/skipreconnect` Command
-
-Allows the host to bypass the reconnection timer and immediately convert a disconnected player to AI control.
-
-**Usage:**
-```
-/skipreconnect                  - Take over first disconnected player
-/skipreconnect <PlayerName>     - Take over specific player by name
-```
-
-**Features:**
-- Only accessible to the host (player index 0)
-- Cancels the reconnection timeout timer
-- Immediately triggers AI takeover
-- Command is not echoed to chat (processed silently)
-- Broadcasts: `"Host skipped reconnection wait. <Player> replaced with AI."`
-
-**Use Cases:**
-- Player confirms they cannot reconnect (e.g., via external chat)
-- Host knows player has permanently left
-- Avoid waiting full 5 minutes when return is unlikely
-
 ##### 2. PlayerSession (`forge-gui/.../net/server/PlayerSession.java`)
 
 Per-player session state with secure token authentication:
@@ -326,6 +282,14 @@ Player Disconnects:
                        ┌─────────────────┐
                        │ Timeout Timer   │
                        │ (5 minutes)     │
+                       │ OR              │
+                       │ /skipreconnect  │
+                       └────────┬────────┘
+                                │
+                                ▼
+                       ┌─────────────────┐
+                       │ convertPlayerToAI│
+                       │ (AI takeover)   │
                        └─────────────────┘
 ```
 
@@ -424,9 +388,48 @@ public IGuiGame getGui(int index) {
 
 This ensures that on reconnection, the stored `NetGuiGame` (which has the `GameView` already set from game start) can be updated with the new client connection and properly send the game state.
 
-#### AI Takeover Implementation
+#### Timeout Handling and AI Takeover
 
-##### convertPlayerToAI() Method
+When a player fails to reconnect within the timeout period (default: 5 minutes), the server **converts the player to AI control** instead of removing them from the game.
+
+##### What Happens on Timeout
+
+1. The disconnected player's lobby slot changes to `LobbySlotType.AI`
+2. Player's name is updated to include " (AI)" suffix
+3. An AI controller (`PlayerControllerAi`) replaces the player's human controller
+4. All game state is preserved (hand, library, battlefield, permanents)
+5. The player is marked as "connected" in the session (AI doesn't disconnect)
+6. Game resumes automatically if no other players are disconnected
+
+**Benefits:**
+- Games continue instead of ending prematurely
+- Player's cards/permanents remain controlled by AI
+- Prevents 1v1 games from becoming unplayable
+- No game state is lost during the transition
+
+##### Host `/skipreconnect` Command
+
+The host can manually trigger AI takeover before the timeout expires using a chat command.
+
+**Usage:**
+```
+/skipreconnect                  - Take over first disconnected player
+/skipreconnect <PlayerName>     - Take over specific player by name
+```
+
+**Features:**
+- Only accessible to the host (player index 0)
+- Cancels the reconnection timeout timer
+- Immediately triggers AI takeover
+- Command is not echoed to chat (processed silently)
+- Broadcasts: `"Host skipped reconnection wait. <Player> replaced with AI."`
+
+**Use Cases:**
+- Player confirms they cannot reconnect (e.g., via external chat)
+- Host knows player has permanently left
+- Avoid waiting full 5 minutes when return is unlikely
+
+##### Implementation: convertPlayerToAI() Method
 
 The core of the AI takeover functionality is the `convertPlayerToAI()` method in `FServerManager.java`:
 
@@ -490,7 +493,7 @@ This method bypasses the normal controller creation flow and directly replaces t
 - We don't want to create a new Player instance (would lose state)
 - We need to hot-swap the controller while maintaining all other state
 
-##### Chat Command Handling
+##### Implementation: Chat Command Parsing
 
 The `/skipreconnect` command is parsed in the `MessageHandler` class:
 
@@ -651,7 +654,7 @@ Instead of a single timeout at 5 minutes, notifications are sent every 30 second
 1:30 - "Waiting for Alice to reconnect... (3:30 remaining)"
 ...
 4:30 - "Waiting for Alice to reconnect... (0:30 remaining)"
-5:00 - "Alice failed to reconnect. Timeout expired."
+5:00 - "Alice timed out. AI taking over."
 ```
 
 **Implementation** (`FServerManager.scheduleReconnectionTimeout()`):
