@@ -63,6 +63,9 @@ public final class FServerManager {
     private final Map<String, Integer> pendingReconnections = new ConcurrentHashMap<>(); // sessionId+token -> playerIndex
     private final Map<Integer, NetGuiGame> playerGuis = new ConcurrentHashMap<>(); // Store NetGuiGame instances for reuse
 
+    // Network byte tracking for monitoring actual bandwidth usage
+    private final forge.gamemodes.net.NetworkByteTracker networkByteTracker = new forge.gamemodes.net.NetworkByteTracker();
+
     private FServerManager() {
     }
 
@@ -87,6 +90,15 @@ public final class FServerManager {
         return instance;
     }
 
+    /**
+     * Get the network byte tracker for monitoring actual bandwidth usage.
+     *
+     * @return the NetworkByteTracker instance
+     */
+    public forge.gamemodes.net.NetworkByteTracker getNetworkByteTracker() {
+        return networkByteTracker;
+    }
+
     public void startServer(final int port) {
         this.port = port;
         String UPnPOption = FModel.getNetPreferences().getPref(ForgeNetPreferences.FNetPref.UPnP);
@@ -107,7 +119,7 @@ public final class FServerManager {
                         public void initChannel(final SocketChannel ch) throws Exception {
                             final ChannelPipeline p = ch.pipeline();
                             p.addLast(
-                                    new CompatibleObjectEncoder(),
+                                    new CompatibleObjectEncoder(networkByteTracker),
                                     new CompatibleObjectDecoder(9766 * 1024, ClassResolvers.cacheDisabled(null)),
                                     new MessageHandler(),
                                     new RegisterClientHandler(),

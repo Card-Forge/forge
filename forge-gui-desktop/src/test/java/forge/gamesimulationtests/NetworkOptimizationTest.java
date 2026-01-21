@@ -718,4 +718,194 @@ public class NetworkOptimizationTest {
             return 0;
         }
     }
+
+    // ==================== Network Byte Tracking Tests ====================
+
+    /**
+     * Test that NetworkByteTracker correctly tracks bytes sent.
+     */
+    @Test
+    public void testNetworkByteTrackerBasic() {
+        forge.gamemodes.net.NetworkByteTracker tracker = new forge.gamemodes.net.NetworkByteTracker();
+
+        // Initially should be zero
+        Assert.assertEquals(tracker.getTotalBytesSent(), 0L);
+        Assert.assertEquals(tracker.getDeltaBytesSent(), 0L);
+        Assert.assertEquals(tracker.getFullStateBytesSent(), 0L);
+
+        // Record some delta bytes
+        tracker.recordBytesSent(100, "DeltaPacket");
+        Assert.assertEquals(tracker.getTotalBytesSent(), 100L);
+        Assert.assertEquals(tracker.getDeltaBytesSent(), 100L);
+        Assert.assertEquals(tracker.getDeltaPacketCount(), 1L);
+
+        // Record more delta bytes
+        tracker.recordBytesSent(200, "applyDelta");
+        Assert.assertEquals(tracker.getTotalBytesSent(), 300L);
+        Assert.assertEquals(tracker.getDeltaBytesSent(), 300L);
+        Assert.assertEquals(tracker.getDeltaPacketCount(), 2L);
+
+        // Record full state bytes
+        tracker.recordBytesSent(500, "FullStatePacket");
+        Assert.assertEquals(tracker.getTotalBytesSent(), 800L);
+        Assert.assertEquals(tracker.getFullStateBytesSent(), 500L);
+        Assert.assertEquals(tracker.getFullStatePacketCount(), 1L);
+    }
+
+    /**
+     * Test that NetworkByteTracker can be reset.
+     */
+    @Test
+    public void testNetworkByteTrackerReset() {
+        forge.gamemodes.net.NetworkByteTracker tracker = new forge.gamemodes.net.NetworkByteTracker();
+
+        tracker.recordBytesSent(100, "DeltaPacket");
+        tracker.recordBytesSent(200, "FullStatePacket");
+
+        Assert.assertTrue(tracker.getTotalBytesSent() > 0);
+
+        tracker.reset();
+
+        Assert.assertEquals(tracker.getTotalBytesSent(), 0L);
+        Assert.assertEquals(tracker.getDeltaBytesSent(), 0L);
+        Assert.assertEquals(tracker.getFullStateBytesSent(), 0L);
+        Assert.assertEquals(tracker.getDeltaPacketCount(), 0L);
+        Assert.assertEquals(tracker.getFullStatePacketCount(), 0L);
+    }
+
+    /**
+     * Test that NetworkByteTracker can be enabled/disabled.
+     */
+    @Test
+    public void testNetworkByteTrackerEnableDisable() {
+        forge.gamemodes.net.NetworkByteTracker tracker = new forge.gamemodes.net.NetworkByteTracker();
+
+        // Initially enabled
+        Assert.assertTrue(tracker.isEnabled());
+
+        tracker.recordBytesSent(100, "DeltaPacket");
+        Assert.assertEquals(tracker.getTotalBytesSent(), 100L);
+
+        // Disable tracking
+        tracker.setEnabled(false);
+        Assert.assertFalse(tracker.isEnabled());
+
+        // Should not record when disabled
+        tracker.recordBytesSent(200, "DeltaPacket");
+        Assert.assertEquals(tracker.getTotalBytesSent(), 100L); // Still 100, not 300
+
+        // Re-enable
+        tracker.setEnabled(true);
+        tracker.recordBytesSent(300, "DeltaPacket");
+        Assert.assertEquals(tracker.getTotalBytesSent(), 400L); // 100 + 300
+    }
+
+    /**
+     * Test NetworkByteTracker statistics summary.
+     */
+    @Test
+    public void testNetworkByteTrackerStatsSummary() {
+        forge.gamemodes.net.NetworkByteTracker tracker = new forge.gamemodes.net.NetworkByteTracker();
+
+        tracker.recordBytesSent(1000, "DeltaPacket");
+        tracker.recordBytesSent(2000, "DeltaPacket");
+        tracker.recordBytesSent(5000, "FullStatePacket");
+
+        String summary = tracker.getStatsSummary();
+        Assert.assertNotNull(summary);
+        Assert.assertTrue(summary.contains("8000")); // Total bytes
+        Assert.assertTrue(summary.contains("3000")); // Delta bytes
+        Assert.assertTrue(summary.contains("5000")); // Full state bytes
+
+        System.out.println("[NetworkByteTrackerTest] " + summary);
+    }
+
+    /**
+     * Test actual network byte tracking with CompatibleObjectEncoder simulation.
+     * This test simulates what happens in the real network layer.
+     */
+    @Test
+    public void testActualNetworkByteTrackingWithEncoder() throws Exception {
+        forge.gamemodes.net.NetworkByteTracker tracker = new forge.gamemodes.net.NetworkByteTracker();
+
+        // Create a delta packet
+        Map<Integer, byte[]> deltas = new HashMap<>();
+        deltas.put(1, new byte[100]);
+        deltas.put(2, new byte[200]);
+
+        DeltaPacket packet = new DeltaPacket(1L, deltas, new HashSet<>());
+
+        // Simulate encoding (what CompatibleObjectEncoder does)
+        java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
+        java.io.ObjectOutputStream oos = new java.io.ObjectOutputStream(baos);
+        oos.writeObject(packet);
+        oos.close();
+
+        int actualEncodedSize = baos.size();
+        tracker.recordBytesSent(actualEncodedSize, "DeltaPacket");
+
+        // The approximate size should be much smaller than the actual encoded size
+        // (because ObjectOutputStream adds overhead)
+        int approximateSize = packet.getApproximateSize();
+
+        System.out.println(String.format(
+            "[NetworkByteTracking] Approximate=%d, ActualEncoded=%d, Ratio=%.2fx",
+            approximateSize, actualEncodedSize, (double)actualEncodedSize / approximateSize));
+
+        // Verify tracking worked
+        Assert.assertEquals(tracker.getTotalBytesSent(), (long)actualEncodedSize);
+        Assert.assertEquals(tracker.getDeltaBytesSent(), (long)actualEncodedSize);
+
+        // The actual encoded size should be larger than approximate
+        Assert.assertTrue(actualEncodedSize > approximateSize,
+            "Actual encoded size should include ObjectOutputStream overhead");
+    }
+
+    /**
+     * Test comparison accuracy using all three measurements.
+     * This validates the complete picture: approximate, actual network, and full state estimate.
+     */
+    @Test
+    public void testThreeWayComparisonAccuracy() throws Exception {
+        forge.gamemodes.net.NetworkByteTracker tracker = new forge.gamemodes.net.NetworkByteTracker();
+
+        // Create a delta packet
+        Map<Integer, byte[]> deltas = new HashMap<>();
+        deltas.put(1, new byte[100]);
+
+        DeltaPacket packet = new DeltaPacket(1L, deltas, new HashSet<>());
+
+        // 1. Approximate size (custom byte counting)
+        int approximateSize = packet.getApproximateSize();
+
+        // 2. Actual network size (simulated ObjectOutputStream encoding)
+        java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
+        java.io.ObjectOutputStream oos = new java.io.ObjectOutputStream(baos);
+        oos.writeObject(packet);
+        oos.close();
+        int actualNetworkSize = baos.size();
+        tracker.recordBytesSent(actualNetworkSize, "DeltaPacket");
+
+        // 3. Full state estimate (simulated full GameView serialization)
+        byte[] simulatedFullState = new byte[1000]; // Simulate a larger full state
+        int fullStateSize = serializeWithObjectOutputStream(simulatedFullState);
+
+        // Calculate savings for each comparison
+        int approximateSavings = fullStateSize > 0 ? (int)((1.0 - (double)approximateSize / fullStateSize) * 100) : 0;
+        int actualSavings = fullStateSize > 0 ? (int)((1.0 - (double)actualNetworkSize / fullStateSize) * 100) : 0;
+
+        System.out.println(String.format(
+            "[ThreeWayComparison] Approximate=%d bytes (%d%% savings), Actual=%d bytes (%d%% savings), FullState=%d bytes",
+            approximateSize, approximateSavings, actualNetworkSize, actualSavings, fullStateSize));
+
+        // Validations
+        Assert.assertTrue(approximateSize < actualNetworkSize,
+            "Approximate should be smaller than actual (no ObjectOutputStream overhead)");
+        Assert.assertTrue(actualNetworkSize < fullStateSize,
+            "Actual network should be smaller than full state");
+        Assert.assertTrue(actualSavings > 0,
+            "Actual savings should be positive");
+        Assert.assertTrue(actualSavings < approximateSavings,
+            "Actual savings should be less than approximate (due to ObjectOutputStream overhead in actual)");
+    }
 }

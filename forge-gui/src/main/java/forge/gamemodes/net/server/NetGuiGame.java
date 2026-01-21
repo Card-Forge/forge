@@ -136,32 +136,56 @@ public class NetGuiGame extends AbstractGuiGame {
         // Use delta sync
         DeltaPacket delta = deltaSyncManager.collectDeltas(gameView);
         if (delta != null && !delta.isEmpty()) {
+            // Get network byte tracker stats before sending
+            long networkBytesBefore = getActualNetworkBytesSent();
+
             send(ProtocolMethod.applyDelta, delta);
 
             // CRITICAL: Clear changes after sending to prevent accumulation
             deltaSyncManager.clearAllChanges(gameView);
 
-            // Track bandwidth savings
+            // Track bandwidth savings with three measurements
             if (logBandwidth) {
                 int deltaSize = delta.getApproximateSize();
                 int fullStateSize = estimateFullStateSize(gameView);
+                long networkBytesAfter = getActualNetworkBytesSent();
+                int actualNetworkBytes = (int)(networkBytesAfter - networkBytesBefore);
+
                 totalDeltaBytes += deltaSize;
                 totalFullStateBytes += fullStateSize;
                 deltaPacketCount++;
 
                 int savings = fullStateSize > 0 ? (int)((1.0 - (double)deltaSize / fullStateSize) * 100) : 0;
+                int actualSavings = fullStateSize > 0 ? (int)((1.0 - (double)actualNetworkBytes / fullStateSize) * 100) : 0;
+
                 System.out.println(String.format(
-                    "[DeltaSync] Packet #%d: Delta=%d bytes, FullState=%d bytes, Savings=%d%% | Cumulative: Delta=%d, FullState=%d, Savings=%d%%",
-                    deltaPacketCount, deltaSize, fullStateSize, savings,
-                    totalDeltaBytes, totalFullStateBytes,
-                    totalFullStateBytes > 0 ? (int)((1.0 - (double)totalDeltaBytes / totalFullStateBytes) * 100) : 0
+                    "[DeltaSync] Packet #%d: Approximate=%d bytes, ActualNetwork=%d bytes, FullState=%d bytes",
+                    deltaPacketCount, deltaSize, actualNetworkBytes, fullStateSize));
+                System.out.println(String.format(
+                    "[DeltaSync]   Savings: Approximate=%d%%, Actual=%d%% | Cumulative: Approximate=%d, Actual=%d, FullState=%d",
+                    savings, actualSavings,
+                    totalDeltaBytes, networkBytesAfter, totalFullStateBytes
                 ));
             }
         }
     }
 
     /**
+     * Get actual network bytes sent (including compression and all overhead).
+     * This provides ground truth for comparison with estimated sizes.
+     * @return total bytes actually sent over the network
+     */
+    private long getActualNetworkBytesSent() {
+        try {
+            return FServerManager.getInstance().getNetworkByteTracker().getTotalBytesSent();
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    /**
      * Estimate the size of a full state sync for comparison purposes.
+     * This uses ObjectOutputStream serialization (same as network layer before compression).
      */
     private int estimateFullStateSize(GameView gameView) {
         try {
