@@ -698,26 +698,11 @@ public enum MessageType {
 
 #### Visual Styling
 
-##### Mobile Platform (`OnlineChatScreen.java`)
-
-System messages appear visually distinct from player messages:
-
-| Attribute | Player Messages | System Messages |
-|-----------|----------------|-----------------|
-| **Color** | Zebra/contrast colors | **Light blue (#6496FF)** |
-| **Alignment** | Left (remote) / Right (local) | **Center** |
-| **Triangle pointer** | Yes | No |
-| **Sender name** | Displayed | Hidden |
-
-##### Desktop Platform (`FNetOverlay.java`)
-
 System messages are prefixed with `[SERVER]` indicator:
 ```
 [14:32:15] [SERVER] Alice joined the room
 [14:32:20] [SERVER] Bob is ready (1/2 players ready)
 ```
-
-*Note: Full blue color support on desktop would require migrating from `FTextArea` to `JTextPane` with `StyledDocument`.*
 
 #### Server Event Notifications
 
@@ -903,51 +888,8 @@ Reconnection:
 | `forge-gui/.../net/NetConnectUtil.java` | Added host indicator to local player messages |
 | `forge-gui/.../match/GameLobby.java` | Added `getHostedMatch()` accessor for winner detection |
 | `forge-gui-desktop/.../gui/FNetOverlay.java` | Added `[SERVER]` prefix for system messages |
-| `forge-gui-mobile/.../screens/online/OnlineChatScreen.java` | Added blue styling, centered alignment for system messages |
 
-### Visual Examples
-
-#### Mobile Chat Display
-
-```
-┌─────────────────────────────────────┐
-│                                     │
-│  ┌──────────────────────────────┐  │
-│  │  Alice joined the room       │  │  ← Blue, centered
-│  │  [14:32:15]                  │  │
-│  └──────────────────────────────┘  │
-│                                     │
-│ ┌──────────────────────────────┐◀  │
-│ │ Alice (Host): Hello everyone │   │  ← Player message
-│ │ [14:32:18]                   │   │
-│ └──────────────────────────────┘   │
-│                                     │
-│  ┌──────────────────────────────┐  │
-│  │  Bob joined the room         │  │  ← Blue, centered
-│  │  [14:32:20]                  │  │
-│  └──────────────────────────────┘  │
-│                                     │
-│  ┌──────────────────────────────┐  │
-│  │  Alice (Host) is ready       │  │  ← Blue, centered
-│  │  (1/2 players ready)         │  │
-│  │  [14:32:25]                  │  │
-│  └──────────────────────────────┘  │
-│                                     │
-│  ┌──────────────────────────────┐  │
-│  │  Bob is ready                │  │  ← Blue, centered
-│  │  (2/2 players ready)         │  │
-│  │  [14:32:28]                  │  │
-│  └──────────────────────────────┘  │
-│                                     │
-│  ┌──────────────────────────────┐  │
-│  │  All players ready!          │  │  ← Blue, centered
-│  │  Starting game...            │  │
-│  │  [14:32:28]                  │  │
-│  └──────────────────────────────┘  │
-└─────────────────────────────────────┘
-```
-
-#### Desktop Chat Display
+### Chat Display Example
 
 ```
 [14:32:15] [SERVER] Alice joined the room
@@ -977,7 +919,7 @@ Reconnection:
 2. **Connection Awareness**: Countdown timer provides clear feedback during reconnection attempts
 3. **Host Identification**: Makes it obvious who is hosting the game
 4. **Game Outcome**: Winner is clearly announced to all players
-5. **Professional Polish**: Blue system messages (mobile) and [SERVER] prefix (desktop) distinguish official notifications from player chat
+5. **Professional Polish**: [SERVER] prefix distinguishes official notifications from player chat
 
 ---
 
@@ -1027,7 +969,6 @@ Reconnection:
 | `forge-gui/.../gamemodes/match/AbstractGuiGame.java` | Added `applyDelta()` implementation, tracker initialization, object creation from delta data |
 | `forge-gui/.../gamemodes/match/GameLobby.java` | Reordered `onGameStarted()` to execute before `startMatch()`; added `getHostedMatch()` accessor |
 | `forge-gui-desktop/.../gui/FNetOverlay.java` | Added `[SERVER]` prefix for system messages in chat display |
-| `forge-gui-mobile/.../screens/online/OnlineChatScreen.java` | Added blue styling, centered alignment, no-triangle rendering for system messages |
 
 ### Events
 | File | Changes |
@@ -1198,8 +1139,7 @@ Bytes 0-63 (error at 32):
 ## Potential Future Improvements
 
 1. **Partial Reconnection**: Support reconnecting to games after client restart (currently requires same client process)
-2. **Mobile Optimization**: Tune delta sync parameters for mobile network conditions
-3. **Explicit Object Removal**: Remove objects from Tracker when they leave the game (currently relies on GC)
+2. **Explicit Object Removal**: Remove objects from Tracker when they leave the game (currently relies on GC)
 
 ---
 
