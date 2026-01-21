@@ -6,10 +6,10 @@ import java.util.concurrent.atomic.AtomicLong;
  * Tracks actual bytes transmitted over the network.
  * This provides ground truth measurements for comparing with estimated sizes.
  *
- * Enable tracking via system property:
- *   -Dforge.network.logBandwidth=true
+ * Tracking is enabled by default. To disable:
+ *   -Dforge.network.disableBandwidthLogging=true
  *
- * When disabled (default), network byte tracking has zero overhead.
+ * When disabled, network byte tracking has zero overhead.
  */
 public class NetworkByteTracker {
 
