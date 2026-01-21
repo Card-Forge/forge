@@ -17,6 +17,7 @@ import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.DeltaPacket.NewObjectData;
 import forge.gamemodes.net.FullStatePacket;
 import forge.gamemodes.net.NetworkPropertySerializer;
+import forge.gamemodes.net.server.DeltaSyncManager;
 import forge.gamemodes.net.NetworkPropertySerializer.CardStateViewData;
 import forge.gamemodes.net.NetworkDebugLogger;
 import forge.gamemodes.net.NetworkTrackableDeserializer;
@@ -1050,7 +1051,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             // Verify CardViews are in tracker
             int verifyCount = 0;
             for (NewObjectData newObj : newObjects.values()) {
-                if (newObj.getObjectType() == NewObjectData.TYPE_CARD_VIEW) {
+                if (newObj.getObjectType() == DeltaPacket.TYPE_CARD_VIEW) {
                     CardView cv = tracker.getObj(TrackableTypes.CardViewType, newObj.getObjectId());
                     if (cv != null) {
                         verifyCount++;
@@ -1067,7 +1068,13 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             int objectId = entry.getKey();
             byte[] deltaBytes = entry.getValue();
 
-            TrackableObject obj = findObjectById(tracker, objectId);
+            // Handle special GameView key (avoids ID collision with PlayerViews)
+            TrackableObject obj;
+            if (objectId == DeltaSyncManager.GAMEVIEW_DELTA_KEY) {
+                obj = gameView;
+            } else {
+                obj = findObjectById(tracker, objectId);
+            }
             if (obj != null) {
                 try {
                     // Log if this is the GameView
@@ -1195,11 +1202,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         // Log what type of object we're trying to create
         String typeName = "Unknown";
         switch (objectType) {
-            case NewObjectData.TYPE_CARD_VIEW: typeName = "CardView"; break;
-            case NewObjectData.TYPE_PLAYER_VIEW: typeName = "PlayerView"; break;
-            case NewObjectData.TYPE_STACK_ITEM_VIEW: typeName = "StackItemView"; break;
-            case NewObjectData.TYPE_COMBAT_VIEW: typeName = "CombatView"; break;
-            case NewObjectData.TYPE_GAME_VIEW: typeName = "GameView"; break;
+            case DeltaPacket.TYPE_CARD_VIEW: typeName = "CardView"; break;
+            case DeltaPacket.TYPE_PLAYER_VIEW: typeName = "PlayerView"; break;
+            case DeltaPacket.TYPE_STACK_ITEM_VIEW: typeName = "StackItemView"; break;
+            case DeltaPacket.TYPE_COMBAT_VIEW: typeName = "CombatView"; break;
+            case DeltaPacket.TYPE_GAME_VIEW: typeName = "GameView"; break;
         }
 
         // Check if object already exists (shouldn't happen, but be safe)
@@ -1212,33 +1219,33 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         }
 
         // Log when creating new object (especially important for PlayerView)
-        if (objectType == NewObjectData.TYPE_PLAYER_VIEW) {
+        if (objectType == DeltaPacket.TYPE_PLAYER_VIEW) {
             NetworkDebugLogger.warn("[DeltaSync] Creating NEW PlayerView ID=%d - this may cause identity mismatch!", objectId);
         }
 
         // Create the appropriate object type
         TrackableObject obj = null;
         switch (objectType) {
-            case NewObjectData.TYPE_CARD_VIEW:
+            case DeltaPacket.TYPE_CARD_VIEW:
                 obj = new CardView(objectId, tracker);
                 tracker.putObj(TrackableTypes.CardViewType, objectId, (CardView) obj);
                 break;
-            case NewObjectData.TYPE_PLAYER_VIEW:
+            case DeltaPacket.TYPE_PLAYER_VIEW:
                 obj = new PlayerView(objectId, tracker);
                 tracker.putObj(TrackableTypes.PlayerViewType, objectId, (PlayerView) obj);
                 NetworkDebugLogger.debug("[DeltaSync] Created NEW PlayerView ID=%d hash=%d", objectId, System.identityHashCode(obj));
                 break;
-            case NewObjectData.TYPE_STACK_ITEM_VIEW:
+            case DeltaPacket.TYPE_STACK_ITEM_VIEW:
                 obj = new StackItemView(objectId, tracker);
                 tracker.putObj(TrackableTypes.StackItemViewType, objectId, (StackItemView) obj);
                 break;
-            case NewObjectData.TYPE_COMBAT_VIEW:
+            case DeltaPacket.TYPE_COMBAT_VIEW:
                 // CombatView uses ID -1 (singleton pattern)
                 obj = new CombatView(tracker);
                 // Register with the actual ID from the data
                 tracker.putObj(TrackableTypes.CombatViewType, obj.getId(), (CombatView) obj);
                 break;
-            case NewObjectData.TYPE_GAME_VIEW:
+            case DeltaPacket.TYPE_GAME_VIEW:
                 // GameView is special - we already have one, update it
                 if (gameView != null) {
                     applyDeltaToObject(gameView, fullProps, tracker);
@@ -1264,10 +1271,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
      * IMPORTANT: GameView must be checked FIRST because it may have the same ID as a PlayerView
      */
     private TrackableObject findObjectById(Tracker tracker, int objectId) {
-        // Check GameView FIRST - it may have the same ID as other objects
-        if (gameView != null && gameView.getId() == objectId) {
-            return gameView;
-        }
+        // Note: GameView is handled separately via GAMEVIEW_DELTA_KEY to avoid ID collision
+        // with PlayerViews (both can have ID=1)
 
         // Try CardView (most common)
         TrackableObject obj = tracker.getObj(TrackableTypes.CardViewType, objectId);

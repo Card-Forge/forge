@@ -25,18 +25,71 @@ public final class DeltaPacket implements NetEvent {
     private final Set<Integer> removedObjectIds;
     private final int checksum; // For periodic validation
 
+    // Object type constants (shared by NewObjectData and DeltaData)
+    public static final int TYPE_CARD_VIEW = 0;
+    public static final int TYPE_PLAYER_VIEW = 1;
+    public static final int TYPE_STACK_ITEM_VIEW = 2;
+    public static final int TYPE_COMBAT_VIEW = 3;
+    public static final int TYPE_GAME_VIEW = 4;
+
+    /**
+     * Create a composite key that encodes both object type and ID.
+     * This allows disambiguation of objects with the same ID but different types.
+     * Format: type (8 bits) | id (24 bits)
+     */
+    public static int makeCompositeKey(int objectType, int objectId) {
+        return (objectType << 24) | (objectId & 0x00FFFFFF);
+    }
+
+    /**
+     * Extract the object type from a composite key.
+     */
+    public static int getTypeFromKey(int compositeKey) {
+        return (compositeKey >>> 24) & 0xFF;
+    }
+
+    /**
+     * Extract the object ID from a composite key.
+     */
+    public static int getIdFromKey(int compositeKey) {
+        return compositeKey & 0x00FFFFFF;
+    }
+
+    /**
+     * Data for a delta update to an existing object.
+     * Includes type information to disambiguate objects with the same ID.
+     */
+    public static class DeltaData implements Serializable {
+        private static final long serialVersionUID = 1L;
+
+        private final int objectId;
+        private final int objectType;
+        private final byte[] deltaBytes;
+
+        public DeltaData(int objectId, int objectType, byte[] deltaBytes) {
+            this.objectId = objectId;
+            this.objectType = objectType;
+            this.deltaBytes = deltaBytes;
+        }
+
+        public int getObjectId() {
+            return objectId;
+        }
+
+        public int getObjectType() {
+            return objectType;
+        }
+
+        public byte[] getDeltaBytes() {
+            return deltaBytes;
+        }
+    }
+
     /**
      * Data for a newly created object that needs to be sent in full.
      */
     public static class NewObjectData implements Serializable {
         private static final long serialVersionUID = 1L;
-
-        // Object type constants
-        public static final int TYPE_CARD_VIEW = 0;
-        public static final int TYPE_PLAYER_VIEW = 1;
-        public static final int TYPE_STACK_ITEM_VIEW = 2;
-        public static final int TYPE_COMBAT_VIEW = 3;
-        public static final int TYPE_GAME_VIEW = 4;
 
         private final int objectId;
         private final int objectType;

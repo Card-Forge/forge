@@ -179,6 +179,10 @@ public class DeltaSyncManager {
         return packet;
     }
 
+    // Special key for GameView deltas to avoid ID collision with PlayerViews
+    // Uses Integer.MIN_VALUE as a reserved key that won't conflict with normal object IDs
+    public static final int GAMEVIEW_DELTA_KEY = Integer.MIN_VALUE;
+
     /**
      * Collect delta for a single TrackableObject.
      * If the object hasn't been sent before, serialize ALL properties.
@@ -193,6 +197,9 @@ public class DeltaSyncManager {
         int objId = obj.getId();
         currentObjectIds.add(objId);
 
+        // Use special key for GameView to avoid ID collision with PlayerViews
+        int deltaKey = (obj instanceof GameView) ? GAMEVIEW_DELTA_KEY : objId;
+
         // Check if this is a new object (not yet sent to client)
         if (!sentObjectIds.contains(objId)) {
             // New object - serialize ALL properties
@@ -204,7 +211,7 @@ public class DeltaSyncManager {
             // Existing object with changes - serialize only changed properties
             byte[] serialized = serializeChanges(obj);
             if (serialized != null && serialized.length > 0) {
-                objectDeltas.put(objId, serialized);
+                objectDeltas.put(deltaKey, serialized);
             }
         }
     }
@@ -409,18 +416,18 @@ public class DeltaSyncManager {
      */
     private int getObjectType(TrackableObject obj) {
         if (obj instanceof CardView) {
-            return NewObjectData.TYPE_CARD_VIEW;
+            return DeltaPacket.TYPE_CARD_VIEW;
         } else if (obj instanceof PlayerView) {
-            return NewObjectData.TYPE_PLAYER_VIEW;
+            return DeltaPacket.TYPE_PLAYER_VIEW;
         } else if (obj instanceof StackItemView) {
-            return NewObjectData.TYPE_STACK_ITEM_VIEW;
+            return DeltaPacket.TYPE_STACK_ITEM_VIEW;
         } else if (obj instanceof CombatView) {
-            return NewObjectData.TYPE_COMBAT_VIEW;
+            return DeltaPacket.TYPE_COMBAT_VIEW;
         } else if (obj instanceof GameView) {
-            return NewObjectData.TYPE_GAME_VIEW;
+            return DeltaPacket.TYPE_GAME_VIEW;
         }
         // Unknown type - use GameView as fallback
-        return NewObjectData.TYPE_GAME_VIEW;
+        return DeltaPacket.TYPE_GAME_VIEW;
     }
 
     /**
