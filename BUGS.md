@@ -8,21 +8,31 @@ This file tracks known bugs in the Forge codebase, particularly for the NetworkP
 
 ### 1. /skipreconnect AI takeover not working properly
 
-**Status:** In Progress
+**Status:** Tentatively Resolved (Monitoring)
 **Branch:** NetworkPlay
 **Severity:** High
 
 **Description:**
 When a client disconnects during a network game and the host uses the `/skipreconnect` command, the player is converted to AI control but the AI does not take any actions. The game appears to stall after the conversion.
 
-**Symptoms:**
-- AI takeover mechanics work correctly (player found, inputs cleared, latch released, controller replaced)
-- Game loop continues and phase advances (e.g., to COMBAT_BEGIN)
-- But no further priority requests are made - the AI doesn't act
-- Delta syncs continue (game is running) but no InputPassPriority is created for anyone
+**Resolution (2026-01-22):**
+After adding comprehensive logging, subsequent tests showed the AI takeover working correctly. The game loop continued after conversion and the host received priority requests as expected. The exact cause of the original failure is not fully understood, but may have been:
+- A timing/race condition that was inadvertently fixed by code changes
+- Non-deterministic thread scheduling that occasionally caused the game loop to exit
+- Different test conditions between failing and passing tests
 
-**Root Cause Analysis:**
-Still under investigation. Current hypothesis is that the game loop may be stuck or `givePriorityToPlayer` is being set to false unexpectedly.
+**Successful Test Log (2026-01-22 06:58):**
+```
+06:58:13.946 - Latch released, game thread unblocked
+06:58:13.947 - chooseSpellAbilityToPlay ENTRY for TestHost (MAIN1)
+06:58:13.947 - TestHost returned null (skipPhase)
+06:58:13.952 - AI controller installed
+06:58:13.977 - Game continued with TestHost in COMBAT_BEGIN
+```
+Game proceeded correctly through all phases to END_OF_TURN.
+
+**Key Difference from Failed Test:**
+In failed test (21:48), no `chooseSpellAbilityToPlay` ENTRY appeared after AI conversion. In successful test, host's method was called immediately after latch release.
 
 **Files Involved:**
 - `forge-gui/src/main/java/forge/gamemodes/net/server/FServerManager.java` - AI takeover logic
@@ -49,27 +59,23 @@ Still under investigation. Current hypothesis is that the game loop may be stuck
    - Logs show: phase, givePriorityToPlayer flag, priority player, turn player
    - Note: Goes to console, not NetworkDebugLogger (forge-game can't access it)
 
-5. **Log analysis (2026-01-21 21:48)**
-   - Test showed AI takeover worked: player found, inputs cleared, latch released, controller replaced
-   - Phase advanced to COMBAT_BEGIN, priority shifted to host (player 0)
-   - **Critical finding:** No `chooseSpellAbilityToPlay` calls logged after AI takeover
-   - Delta syncs stopped at 21:48:47.361, indicating game loop stopped progressing
-   - The game loop should have called host's `chooseSpellAbilityToPlay` but didn't
+5. **Log analysis (2026-01-21 21:48)** - Failed test
+   - AI takeover mechanics worked but game loop stopped after conversion
+   - No `chooseSpellAbilityToPlay` calls logged after AI takeover
 
-6. **Added comprehensive entry logging** (Current)
-   - `PlayerControllerHuman.chooseSpellAbilityToPlay()`: Added ENTRY log with phase and isGameOver status
+6. **Added comprehensive entry logging** (Commit 80898494b0)
+   - `PlayerControllerHuman.chooseSpellAbilityToPlay()`: ENTRY log with phase and isGameOver
    - Added logging for all early return paths (mayAutoPass, skipPhase, autoYield)
-   - `PlayerControllerAi.chooseSpellAbilityToPlay()`: Added ENTRY and return logging
-   - `FServerManager.convertPlayerToAI()`: Added game state logging after controller replacement
+   - `PlayerControllerAi.chooseSpellAbilityToPlay()`: ENTRY and return logging
+   - `FServerManager.convertPlayerToAI()`: Game state logging after controller replacement
 
-**Current Hypothesis:**
-The game loop may be exiting prematurely (possibly `game.isGameOver()` returning true) or something is preventing the next call to `chooseSpellAbilityToPlay`. The new logging should reveal whether the method is being called at all after the AI takeover.
+7. **Successful test (2026-01-22 06:58)**
+   - AI takeover worked correctly
+   - Game loop continued, host received priority requests
+   - `isGameOver=false` throughout
 
-**Next Steps:**
-- Run test with new comprehensive logging
-- Check if `chooseSpellAbilityToPlay` ENTRY log appears for host after AI takeover
-- Check `isGameOver` status in the logs
-- If no ENTRY log appears, investigate why game loop stopped calling the method
+**Monitoring:**
+Keep debug logging in place. If the issue recurs, the logs will provide detailed information about the game loop state.
 
 **Test Procedure:**
 1. Start host instance, start client instance

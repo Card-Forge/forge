@@ -22,9 +22,9 @@ The NetworkPlay branch introduces three major features to improve the multiplaye
 
 ## Architectural Overlap with Main Branch
 
-**⚠️ Important for Main Branch Developers**
+**⚠️ Important for Master Branch Developers**
 
-The NetworkPlay branch modifies several core (non-network) classes to support delta synchronization and reconnection features. While these modifications enable significant performance improvements, they create potential integration considerations with ongoing Main branch development.
+The NetworkPlay branch modifies several core (non-network) classes to support delta synchronization and reconnection features. While these modifications enable significant performance improvements, they create potential integration considerations with ongoing Master branch development.
 
 ### Summary of Core Class Changes
 
@@ -60,7 +60,7 @@ If the Main branch team determines that the architectural overlap needs to be ad
 3. **Segregate interfaces** to separate network methods from core interfaces
 4. **Document timing dependencies** in GameLobby to prevent accidental breakage
 
-These refactoring options are provided for consideration and may be implemented if the Main branch development team determines they are necessary based on their development plans and integration timeline.
+These refactoring options are provided for consideration and may be implemented if the Master branch development team determines they are necessary based on their development plans and integration timeline.
 
 ---
 
