@@ -66,7 +66,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void beforeCall(final ProtocolMethod protocolMethod, final Object[] args) {
+    protected void beforeCall(final ChannelHandlerContext ctx, final ProtocolMethod protocolMethod, final Object[] args) {
         switch (protocolMethod) {
             case setGameView:
                 // IMPORTANT: Set gameView immediately in the Netty thread so it's available

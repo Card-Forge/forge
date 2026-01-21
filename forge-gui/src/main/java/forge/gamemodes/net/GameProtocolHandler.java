@@ -23,7 +23,7 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
     protected abstract IRemote getRemote(ChannelHandlerContext ctx);
 
     protected abstract T getToInvoke(ChannelHandlerContext ctx);
-    protected abstract void beforeCall(ProtocolMethod protocolMethod, Object[] args);
+    protected abstract void beforeCall(ChannelHandlerContext ctx, ProtocolMethod protocolMethod, Object[] args);
 
     @Override
     public final void channelRead(final ChannelHandlerContext ctx, final Object msg) {
@@ -50,7 +50,7 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
             final Object toInvoke = getToInvoke(ctx);
 
             // Pre-call actions
-            beforeCall(protocolMethod, args);
+            beforeCall(ctx, protocolMethod, args);
 
             final Class<?> returnType = protocolMethod.getReturnType();
             final Runnable toRun = () -> {

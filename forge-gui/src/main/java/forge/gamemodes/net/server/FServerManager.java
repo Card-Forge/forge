@@ -1,7 +1,7 @@
 package forge.gamemodes.net.server;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Maps;
+import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.CompatibleObjectDecoder;
@@ -850,29 +850,26 @@ public final class FServerManager {
 
         // Get the game and player instance
         if (localLobby.getHostedMatch() != null) {
-            forge.game.Match match = localLobby.getHostedMatch().getMatch();
-            if (match != null) {
-                forge.game.Game game = match.getGame();
-                if (game != null) {
-                    // Find the player by matching lobby player name
-                    forge.game.player.Player targetPlayer = null;
-                    for (forge.game.player.Player p : game.getPlayers()) {
-                        if (username.equals(p.getLobbyPlayer().getName())) {
-                            targetPlayer = p;
-                            break;
-                        }
+            forge.game.Game game = localLobby.getHostedMatch().getGame();
+            if (game != null) {
+                // Find the player by matching lobby player name
+                forge.game.player.Player targetPlayer = null;
+                for (forge.game.player.Player p : game.getPlayers()) {
+                    if (username.equals(p.getLobbyPlayer().getName())) {
+                        targetPlayer = p;
+                        break;
                     }
+                }
 
-                    if (targetPlayer != null) {
-                        // Create an AI controller for this player
-                        forge.ai.LobbyPlayerAi aiLobbyPlayer = new forge.ai.LobbyPlayerAi(username + " (AI)", null);
-                        forge.ai.PlayerControllerAi aiController = new forge.ai.PlayerControllerAi(game, targetPlayer, aiLobbyPlayer);
+                if (targetPlayer != null) {
+                    // Create an AI controller for this player
+                    forge.ai.LobbyPlayerAi aiLobbyPlayer = new forge.ai.LobbyPlayerAi(username + " (AI)", null);
+                    forge.ai.PlayerControllerAi aiController = new forge.ai.PlayerControllerAi(game, targetPlayer, aiLobbyPlayer);
 
-                        // Replace the player's controller with the AI controller
-                        targetPlayer.dangerouslySetController(aiController);
+                    // Replace the player's controller with the AI controller
+                    targetPlayer.dangerouslySetController(aiController);
 
-                        System.out.println("[AI Takeover] Converted player " + username + " at index " + playerIndex + " to AI control");
-                    }
+                    System.out.println("[AI Takeover] Converted player " + username + " at index " + playerIndex + " to AI control");
                 }
             }
         }

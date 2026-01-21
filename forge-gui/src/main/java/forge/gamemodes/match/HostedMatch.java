@@ -302,6 +302,9 @@ public class HostedMatch {
     public Game getGame() {
         return game;
     }
+    public Match getMatch() {
+        return match;
+    }
     public GameView getGameView() {
         return game == null ? null : game.getView();
     }

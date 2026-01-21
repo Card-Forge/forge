@@ -103,7 +103,7 @@ public class OnlineChatScreen extends FScreen implements IOnlineChatInterface {
         private static final FSkinFont FONT = FSkinFont.get(12);
         private static final FSkinColor LOCAL_COLOR = FSkinColor.get(Colors.CLR_ZEBRA);
         private static final FSkinColor REMOTE_COLOR = LOCAL_COLOR.getContrastColor(-20);
-        private static final FSkinColor SYSTEM_COLOR = FSkinColor.fromRGB(100, 150, 255); // Light blue for system messages
+        private static final FSkinColor SYSTEM_COLOR = FSkinColor.getStandardColor(100, 150, 255); // Light blue for system messages
         private static final FSkinColor MESSAGE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
         private static final FSkinColor SOURCE_COLOR = MESSAGE_COLOR.alphaColor(0.75f);
         private static final FSkinColor TIMESTAMP_COLOR = MESSAGE_COLOR.alphaColor(0.5f);
