@@ -1122,13 +1122,12 @@ Bytes 0-63 (error at 32):
 
 ---
 
-## Future Improvements
+## Potential Future Improvements
 
 1. **Compression**: Apply compression to delta packets for further bandwidth reduction
 2. **Partial Reconnection**: Support reconnecting to games after client restart (currently requires same client process)
-3. **Spectator Reconnection**: Allow spectators to disconnect and rejoin
-4. **Mobile Optimization**: Tune delta sync parameters for mobile network conditions
-5. **Explicit Object Removal**: Remove objects from Tracker when they leave the game (currently relies on GC)
+3. **Mobile Optimization**: Tune delta sync parameters for mobile network conditions
+4. **Explicit Object Removal**: Remove objects from Tracker when they leave the game (currently relies on GC)
 
 ---
 
