@@ -243,7 +243,6 @@ public class PhaseHandler implements java.io.Serializable {
         if (isSkippingPhase(phase)) {
             skipped = true;
             givePriorityToPlayer = false;
-            System.out.println(String.format("[onPhaseBegin] Skipping phase %s, givePriorityToPlayer=false", phase));
         } else  {
             // Perform turn-based actions
             switch (phase) {
@@ -1042,8 +1041,6 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public void mainLoopStep() {
-        System.out.println(String.format("[mainLoopStep] START: phase=%s, givePriorityToPlayer=%b, pPlayerPriority=%s, playerTurn=%s",
-                phase, givePriorityToPlayer, pPlayerPriority != null ? pPlayerPriority.getName() : "null", playerTurn != null ? playerTurn.getName() : "null"));
         if (givePriorityToPlayer) {
             if (DEBUG_PHASES) {
                 sw.start();
@@ -1056,13 +1053,10 @@ public class PhaseHandler implements java.io.Serializable {
             do {
                 if (checkStateBasedEffects()) {
                     // state-based effects check could lead to game over
-                    System.out.println("[mainLoopStep] Returning early due to state-based effects");
                     return;
                 }
                 game.stashGameState();
 
-                System.out.println(String.format("[mainLoopStep] Calling chooseSpellAbilityToPlay on %s (controller: %s)",
-                        pPlayerPriority.getName(), pPlayerPriority.getController().getClass().getSimpleName()));
                 chosenSa = pPlayerPriority.getController().chooseSpellAbilityToPlay();
 
                 // this needs to come after chosenSa so it sees you conceding on own turn
@@ -1137,7 +1131,6 @@ public class PhaseHandler implements java.io.Serializable {
             System.out.println(TextUtil.concatWithSpace(playerTurn.toString(),TextUtil.addSuffix(phase.toString(),":"), pPlayerPriority.toString(),"is active, previous was", nextPlayer.toString()));
         }
         if (pFirstPriority == nextPlayer) {
-            System.out.println(String.format("[mainLoopStep] All players passed (pFirstPriority == nextPlayer), stack empty: %b", game.getStack().isEmpty()));
             if (game.getStack().isEmpty()) {
                 if (playerTurn.hasLost()) {
                     setPriority(game.getNextPlayerAfter(playerTurn));
@@ -1147,20 +1140,15 @@ public class PhaseHandler implements java.io.Serializable {
 
                 // end phase
                 givePriorityToPlayer = true;
-                System.out.println(String.format("[mainLoopStep] Advancing to next phase from %s", phase));
                 onPhaseEnd();
                 advanceToNextPhase();
-                System.out.println(String.format("[mainLoopStep] Now in phase %s, calling onPhaseBegin", phase));
                 onPhaseBegin();
-                System.out.println(String.format("[mainLoopStep] After onPhaseBegin, givePriorityToPlayer=%b", givePriorityToPlayer));
             }
             else if (!game.getStack().hasSimultaneousStackEntries()) {
-                System.out.println("[mainLoopStep] Stack not empty, resolving stack");
                 game.getStack().resolveStack();
             }
         } else {
             // pass the priority to other player
-            System.out.println(String.format("[mainLoopStep] Passing priority from %s to %s", pPlayerPriority.getName(), nextPlayer.getName()));
             pPlayerPriority = nextPlayer;
         }
 

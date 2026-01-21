@@ -838,12 +838,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public List<SpellAbility> chooseSpellAbilityToPlay() {
-        System.out.println(String.format("[AI chooseSpellAbilityToPlay] ENTRY for player %s, phase=%s, isGameOver=%b",
-                player.getName(), getGame().getPhaseHandler().getPhase(), getGame().isGameOver()));
-        List<SpellAbility> result = brains.chooseSpellAbilityToPlay();
-        System.out.println(String.format("[AI chooseSpellAbilityToPlay] Returning %s for player %s",
-                result != null ? result.toString() : "null", player.getName()));
-        return result;
+        return brains.chooseSpellAbilityToPlay();
     }
 
     @Override
