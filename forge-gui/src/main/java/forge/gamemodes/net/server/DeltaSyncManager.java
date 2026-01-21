@@ -288,6 +288,13 @@ public class DeltaSyncManager {
             @SuppressWarnings("unchecked")
             Map<TrackableProperty, Object> props = obj.getProps();
 
+            // Critical: if props is null but changedProps is not empty, we have inconsistent state
+            if (props == null && !changedProps.isEmpty()) {
+                System.err.println("CRITICAL: Object " + obj.getId() + " has " + changedProps.size() +
+                    " changed properties but null props map!");
+                return null;
+            }
+
             for (TrackableProperty prop : changedProps) {
                 dos.writeInt(prop.ordinal());
                 Object value = props != null ? props.get(prop) : null;
