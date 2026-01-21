@@ -1,9 +1,5 @@
 # NetworkPlay Branch Documentation
 
-This document describes the network optimization features implemented in this branch, including delta synchronization for bandwidth reduction and robust reconnection support for handling network interruptions.
-
----
-
 ## Overview
 
 The NetworkPlay branch introduces three major features to improve the multiplayer experience:
@@ -15,17 +11,16 @@ The NetworkPlay branch introduces three major features to improve the multiplaye
 3. **[Enhanced Chat Notifications](#feature-3-enhanced-chat-notifications)**: Server events (player join/leave, ready state, game start/end, reconnection status) are clearly communicated through styled system messages, providing better visibility into game state and player actions.
 
 **Additional Resources:**
-- **[Debugging](#debugging)**: Comprehensive debug logging for diagnosing network synchronization issues
-- **[Architectural Analysis](#architectural-overlap-with-main-branch)**: Impact on core game logic and merge considerations
-- **[BUGS.md](BUGS.md)**: Known bugs, debugging progress, and resolution status
+- **[Debugging](#debugging)**: Comprehensive debug logging for diagnosing network synchronization issues.
+- **[BUGS.md](BUGS.md)**: Record of known bugs, debugging progress, and resolution status.
 
 ---
 
-## Architectural Overlap with Master Branch
+## Architectural Overlap with Forge Master Branch
 
-**⚠️ Important for Master Branch Developers**
+**⚠️ Important for Forge Developers**
 
-The NetworkPlay branch modifies several core (non-network) classes to support delta synchronization and reconnection features. While these modifications enable significant performance improvements, they create potential integration considerations with ongoing Master branch development.
+The NetworkPlay branch modifies several core (non-network) classes to support delta synchronization and reconnection features. While these modifications enable significant performance improvements, they create potential integration considerations with ongoing Forge development.
 
 ### Summary of Core Class Changes
 
@@ -52,16 +47,7 @@ The following core files have been modified for network functionality:
 
 These features are **deeply integrated** with the game state management system, making isolation from core classes challenging.
 
-### Available Refactoring Options
-
-If the Master branch team determines that the architectural overlap needs to be addressed, **[NETWORK_ARCHITECTURE.md](NETWORK_ARCHITECTURE.md)** provides detailed refactoring strategies that could be considered:
-
-1. **Isolate TrackableObject changes** using package-private access patterns
-2. **Extract network logic** from AbstractGuiGame to a NetworkGuiGame subclass
-3. **Segregate interfaces** to separate network methods from core interfaces
-4. **Document timing dependencies** in GameLobby to prevent accidental breakage
-
-These refactoring options are provided for consideration and may be implemented if the Master branch development team determines they are necessary based on their development plans and integration timeline.
+If the Master branch team determines that the architectural overlap needs to be addressed, **[NETWORK_ARCHITECTURE.md](NETWORK_ARCHITECTURE.md)** provides potential NetworkPlay refactoring strategies that could be considered.
 
 ---
 
@@ -78,6 +64,7 @@ Previously, the network protocol sent the entire `GameView` object on every stat
 
 #### Baseline Comparison
 
+
 **Original System (Pre-Delta Sync):**
 - Sent complete `GameView` object on every update
 - Used `ObjectOutputStream` serialization
@@ -85,12 +72,35 @@ Previously, the network protocol sent the entire `GameView` object on every stat
 - Typical game: ~12.4MB of serialized GameView objects transmitted
 
 **New System (With Delta Sync):**
-- Sends only changed properties for existing objects
 - Sends full data only for new objects (cards drawn, tokens created, etc.)
+- Sends changed properties for existing objects
 - Uses same ObjectOutputStream + LZ4 pipeline
 - Typical game: ~620KB of delta packets transmitted
 
 **Result:** 90-95% bandwidth reduction (12.4MB → 620KB)
+
+```
+Full State Approach (Master Branch):
+┌─────────┐                                      ┌─────────┐
+│ Server  │  Every action sends complete state   │ Client  │
+│         │ ═══════════════════════════════════> │         │
+│ 1.2 MB  │  ObjectOutputStream + LZ4            │ 1.2 MB  │
+└─────────┘                                      └─────────┘
+         Result: 12.4 MB for typical game
+
+
+Delta Sync Approach (NetworkPlay):
+┌─────────┐                                      ┌─────────┐
+│ Server  │  Initial: Full state                 │ Client  │
+│         │ ═══════════════════════════════════> │         │
+│         │  1.2 MB (one time)                   │         │
+│         │                                      │         │
+│         │  Updates: Only changes               │         │
+│         │ ───────────────────────────────────> │         │
+│ 0.3 KB  │  45 bytes delta (per update)         │ 0.3 KB  │
+└─────────┘                                      └─────────┘
+         Result: 620 KB for typical game (95% savings)
+```
 
 ---
 
@@ -169,7 +179,7 @@ Server-side manager that:
 - Builds delta packets by walking the GameView hierarchy
 - Manages client acknowledgments
 - Detects removed objects
-- Periodically includes checksums for validation (every 10 packets)
+- Periodically includes checksums for validation (every 20 packets)
 
 ```java
 // Key methods:
@@ -218,7 +228,7 @@ For detailed explanation of the three measurements (Approximate Size, Actual Net
 To detect and recover from synchronization errors (e.g., packet corruption, missed updates), the system includes automatic checksum validation:
 
 **Server-Side** (`DeltaSyncManager.java`):
-- Computes state checksum every 10 packets
+- Computes state checksum every 20 packets
 - Checksum includes: game ID, turn number, phase, player IDs and life totals
 - Includes checksum in `DeltaPacket` when computed
 
@@ -244,7 +254,7 @@ To detect and recover from synchronization errors (e.g., packet corruption, miss
 **Benefits**:
 - Detects data corruption or missed updates
 - Automatic recovery without user intervention
-- Validation overhead: <0.1% (only every 10 packets)
+- Validation overhead: <0.1% (only every 20 packets)
 - Recovery time: ~50-200ms (one full state send)
 
 **Implementation Files**:
@@ -253,6 +263,8 @@ To detect and recover from synchronization errors (e.g., packet corruption, miss
 - Protocol: `ProtocolMethod.requestResync`
 
 #### Protocol Methods
+
+**This branch introduces a NEW protocol** - clients and servers must both use NetworkPlay branch code.
 
 New protocol methods added to `ProtocolMethod.java`:
 
@@ -554,11 +566,6 @@ The host can manually trigger AI takeover before the timeout expires using a cha
 - Immediately triggers AI takeover
 - Command is not echoed to chat (processed silently)
 - Broadcasts: `"Host skipped reconnection wait. <Player> replaced with AI."`
-
-**Use Cases:**
-- Player confirms they cannot reconnect (e.g., via external chat)
-- Host knows player has permanently left
-- Avoid waiting full 5 minutes when return is unlikely
 
 ##### Implementation: convertPlayerToAI() Method
 
@@ -1044,9 +1051,13 @@ netGuiGame.setDeltaSyncEnabled(false); // Falls back to full state sync
 
 ## Debugging
 
-### NetworkDebug.config - Central Configuration File
+### NetworkDebugLogger
 
-All network debugging and bandwidth logging is controlled by the `NetworkDebug.config` file, located in the `forge-gui/` directory. This file provides user-friendly configuration without requiring command-line flags or code changes.
+The network play code includes a dedicated debug logging system (`NetworkDebugLogger`) for diagnosing synchronization and connectivity issues. It provides configurable verbosity levels for console versus file output.
+
+#### NetworkDebug.config - Central Configuration File
+
+All network debugging and bandwidth logging is controlled by the `NetworkDebug.config` file, located in the `forge-gui/` directory. This file provides user-friendly configuration without requiring command-line flags or code changes. If config file is missing, default values are used (all debugging enabled).
 
 **Configuration File Location**:
 - Development: `forge-gui/NetworkDebug.config`
@@ -1072,19 +1083,6 @@ debug.logger.file.level=DEBUG
 [NetworkDebugConfig]   debug.logger.file.level=DEBUG
 ```
 
-**If config file is missing**, default values are used (all debugging enabled).
-
----
-
-### NetworkDebugLogger
-
-The network play code includes a dedicated debug logging system (`NetworkDebugLogger`) for diagnosing synchronization and connectivity issues. It provides configurable verbosity levels for console versus file output.
-
-**Control**: Set these options in `NetworkDebug.config`:
-- `debug.logger.enabled=true/false` - Enable/disable all debug logging
-- `debug.logger.console.level=DEBUG/INFO/WARN/ERROR` - Console verbosity
-- `debug.logger.file.level=DEBUG/INFO/WARN/ERROR` - File verbosity
-
 #### Log Levels
 
 | Level | Priority | Purpose | Console Default | File Default |
@@ -1093,41 +1091,6 @@ The network play code includes a dedicated debug logging system (`NetworkDebugLo
 | `INFO` | 1 | Normal operation (sync start/end, summaries, important events) | ON | ON |
 | `WARN` | 2 | Potential issues (missing objects, unexpected states) | ON | ON |
 | `ERROR` | 3 | Failures and exceptions | ON | ON |
-
-**Default Configuration**:
-```properties
-debug.logger.console.level=INFO  # Console shows important events
-debug.logger.file.level=DEBUG    # File captures everything
-```
-
-#### Log File Location
-
-Log files are created in the `logs/` directory (relative to the Forge working directory, typically `forge-gui-desktop/logs/`):
-
-```
-logs/network-debug-20250121-075900-12345.log
-```
-
-The filename includes:
-- Timestamp (YYYYMMDD-HHMMSS)
-- Process ID (for distinguishing multiple Forge instances)
-
-#### Changing Configuration
-
-Edit `NetworkDebug.config`:
-```properties
-# For maximum verbosity
-debug.logger.console.level=DEBUG
-debug.logger.file.level=DEBUG
-
-# For production (quiet)
-debug.logger.enabled=false
-
-# Show only errors
-debug.logger.console.level=ERROR
-debug.logger.file.level=ERROR
-```
-Requires restart to take effect.
 
 #### Log Output Examples
 
@@ -1183,52 +1146,11 @@ Bytes 0-63 (error at 32):
 0032: [FF]FF FF FF 00 00 00 00 00 00 00 01 00 00 00 02  | ................
 ```
 
-#### Debugging Common Issues
-
-**Issue: Cards not appearing in hand**
-1. Enable detailed logging in `NetworkDebug.config`:
-   ```properties
-   debug.logger.console.level=DEBUG
-   debug.logger.file.level=DEBUG
-   ```
-2. Look for `[DeltaSync] PlayerView X: setting Hand = Collection[N]` messages
-3. Check if `[NetworkDeserializer] Collection has X missing objects!` warnings appear
-4. Verify tracker lookups: `[FullStateSync] Card X (from hand): tracker lookup = FOUND/NOT FOUND`
-5. Check log file: `logs/network-debug-*.log` for full details
-
-**Issue: Delta sync errors**
-1. Check for `Invalid ordinal` or `Unexpected marker` errors
-2. Review the hex dump to identify byte stream misalignment
-3. Look for `VERIFY FAILED: CardView X not in tracker` warnings
-4. Enable DEBUG level to see hex dumps of problematic packets
-
-**Issue: Reconnection failures**
-1. Check for `[FullStateSync]` messages showing state restoration
-2. Look for `[DeltaSync] Creating NEW PlayerView` warnings (indicates identity mismatch)
-3. Verify session credentials are being sent
-4. Review log file for complete reconnection flow
-
-**Issue: Bandwidth higher than expected**
-1. Enable bandwidth logging in `NetworkDebug.config`:
-   ```properties
-   bandwidth.logging.enabled=true
-   ```
-2. Check console output for three-way comparison
-3. Compare "Actual Network" bytes to "Full State" estimate
-4. If "Actual" is much larger than "Approximate", check for:
-   - Large ObjectOutputStream overhead (inspect packet types)
-   - Poor compression ratios (inspect data compressibility)
-   - Excessive new object creation (check delta vs full state ratio)
-
----
-
 ### Bandwidth Logging
 
 **Control**: Set `bandwidth.logging.enabled=true/false` in `NetworkDebug.config`
 
 When enabled, the system tracks and logs **three different measurements** for each delta sync packet, providing a complete picture of bandwidth usage:
-
-#### The Three Measurements
 
 **1. Approximate Size** - Delta Algorithm Efficiency
 - **Source**: `DeltaPacket.getApproximateSize()`
@@ -1241,7 +1163,7 @@ When enabled, the system tracks and logs **three different measurements** for ea
 **2. Actual Network Bytes** - Ground Truth
 - **Source**: `NetworkByteTracker` (measured in `CompatibleObjectEncoder`)
 - **What it measures**: Real bytes transmitted over the wire
-- **Includes**: ObjectOutputStream overhead (~+20-40%), LZ4 compression (~-30-50%), protocol framing, all metadata
+- **Includes**: ObjectOutputStream overhead (around +20-40%), LZ4 compression (around -30-50%), protocol framing, all metadata
 - **Purpose**: Shows actual bandwidth consumed (this is what matters)
 - **Example**: `450 bytes`
 
