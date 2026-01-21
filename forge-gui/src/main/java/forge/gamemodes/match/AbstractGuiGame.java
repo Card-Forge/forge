@@ -1290,9 +1290,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         obj = tracker.getObj(TrackableTypes.CombatViewType, objectId);
         if (obj != null) return obj;
 
-        // Debug: Log when object not found
-        NetworkDebugLogger.warn("[DeltaSync] Object ID %d NOT FOUND in any lookup", objectId);
-
+        // Object not in tracker - this is normal when creating new objects
+        // Callers that need to warn about missing objects do so themselves
         return null;
     }
 

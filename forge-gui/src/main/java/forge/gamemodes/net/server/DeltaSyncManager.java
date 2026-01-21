@@ -144,6 +144,18 @@ public class DeltaSyncManager {
         nowRemoved.removeAll(currentObjectIds);
         removedObjectIds.addAll(nowRemoved);
 
+        // IMPORTANT: Compute checksum IMMEDIATELY after collecting all deltas,
+        // before any other operations that could allow game state to change.
+        // This fixes a race condition where the game loop could modify gameView
+        // between delta collection and checksum computation, causing mismatches.
+        packetsSinceLastChecksum++;
+        int checksum = 0;
+        if (packetsSinceLastChecksum >= CHECKSUM_INTERVAL) {
+            checksum = computeStateChecksum(gameView);
+            packetsSinceLastChecksum = 0;
+        }
+
+        // Now do bookkeeping operations
         // Also remove from sentObjectIds when objects are removed
         sentObjectIds.removeAll(nowRemoved);
 
@@ -156,14 +168,6 @@ public class DeltaSyncManager {
 
         // Build the packet
         long seq = sequenceNumber.incrementAndGet();
-        packetsSinceLastChecksum++;
-
-        // Include checksum periodically
-        int checksum = 0;
-        if (packetsSinceLastChecksum >= CHECKSUM_INTERVAL) {
-            checksum = computeStateChecksum(gameView);
-            packetsSinceLastChecksum = 0;
-        }
 
         DeltaPacket packet = new DeltaPacket(seq, objectDeltas, newObjects, new HashSet<>(removedObjectIds), checksum);
 
