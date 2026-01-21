@@ -24,21 +24,19 @@ The NetworkPlay branch introduces three major features to improve the multiplaye
 
 **⚠️ Important for Main Branch Developers**
 
-The NetworkPlay branch modifies several core (non-network) classes to support delta synchronization and reconnection features. While these modifications enable significant performance improvements, they create **potential merge conflicts** with ongoing Main branch development.
+The NetworkPlay branch modifies several core (non-network) classes to support delta synchronization and reconnection features. While these modifications enable significant performance improvements, they create potential integration considerations with ongoing Main branch development.
 
 ### Summary of Core Class Changes
 
 The following core files have been modified for network functionality:
 
-| File | Module | Modification Type | Conflict Risk |
-|------|--------|------------------|---------------|
-| `TrackableObject.java` | forge-game | Changed `set()` visibility to public, added 4 delta sync methods | 🔴 High (60%) |
-| `AbstractGuiGame.java` | forge-gui | Added ~846 lines of network deserialization logic | 🔴 High (80%) |
-| `GameLobby.java` | forge-gui | Reordered execution sequence for `onGameStarted()` | 🔴 High (40%) |
-| `IGameController.java` | forge-gui | Added 3 network protocol methods | 🟡 Medium (30%) |
-| `IGuiGame.java` | forge-gui | Added 8 network protocol methods | 🟡 Medium (30%) |
-
-**Overall merge conflict probability**: Estimated at **60-80%** if Main branch actively develops these areas.
+| File | Module | Modification Type |
+|------|--------|------------------|
+| `TrackableObject.java` | forge-game | Changed `set()` visibility to public, added 4 delta sync methods |
+| `AbstractGuiGame.java` | forge-gui | Added ~846 lines of network deserialization logic |
+| `GameLobby.java` | forge-gui | Reordered execution sequence for `onGameStarted()` |
+| `IGameController.java` | forge-gui | Added 3 network protocol methods |
+| `IGuiGame.java` | forge-gui | Added 8 network protocol methods |
 
 ### Why These Changes Were Necessary
 
@@ -53,40 +51,16 @@ The following core files have been modified for network functionality:
 
 These features are **deeply integrated** with the game state management system, making isolation from core classes challenging.
 
-### Refactoring Options
+### Available Refactoring Options
 
-A detailed analysis and refactoring plan is available in **[NETWORK_ARCHITECTURE.md](NETWORK_ARCHITECTURE.md)**, which outlines strategies to:
+If the Main branch team determines that the architectural overlap needs to be addressed, **[NETWORK_ARCHITECTURE.md](NETWORK_ARCHITECTURE.md)** provides detailed refactoring strategies that could be considered:
 
 1. **Isolate TrackableObject changes** using package-private access patterns
 2. **Extract network logic** from AbstractGuiGame to a NetworkGuiGame subclass
 3. **Segregate interfaces** to separate network methods from core interfaces
 4. **Document timing dependencies** in GameLobby to prevent accidental breakage
 
-**Estimated impact of refactoring**: Reduce merge conflict probability from 60-80% to 10-20%.
-
-### Decision Points
-
-The Main branch development team should consider:
-
-1. **Is active development happening on affected files?**
-   - If YES → Refactoring recommended to avoid merge conflicts
-   - If NO → Current architecture acceptable, defer decision
-
-2. **How important is architectural purity?**
-   - High → Implement full refactoring (isolate all network code)
-   - Medium → Partial refactoring (focus on highest-risk items)
-   - Low → Accept current overlap, handle conflicts at merge time
-
-3. **When is NetworkPlay planned to merge to Main?**
-   - Soon (< 3 months) → Refactor proactively
-   - Later (> 6 months) → Monitor Main branch, refactor if conflicts emerge
-   - Uncertain → Document overlap, make case-by-case decisions
-
-### Recommendation
-
-If Main branch development is **active** on game state management or GUI systems, implementing the refactoring strategies in NETWORK_ARCHITECTURE.md is recommended to minimize merge pain and maintain clean separation of concerns.
-
-If Main branch development is **inactive** or focused on unrelated areas, the current architecture is acceptable with the understanding that future integration will require careful conflict resolution.
+These refactoring options are provided for consideration and may be implemented if the Main branch development team determines they are necessary based on their development plans and integration timeline.
 
 ---
 
