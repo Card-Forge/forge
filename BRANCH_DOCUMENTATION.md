@@ -8,7 +8,7 @@ This document describes the network optimization features implemented in this br
 
 The NetworkPlay branch introduces three major features to improve the multiplayer experience:
 
-1. **[Delta Synchronization](#feature-1-delta-synchronization)**: Instead of sending the complete game state on every update, only changed properties are transmitted. Combined with LZ4 compression, this achieves **~97-99% bandwidth reduction** compared to the original full-state approach (typical game: 12.4MB → 80KB).
+1. **[Delta Synchronization](#feature-1-delta-synchronization)**: Instead of sending the complete game state on every update, only changed properties are transmitted. Combined with LZ4 compression, this achieves **~90-95% bandwidth reduction** compared to the original full-state approach (typical game: 12.4MB → 620KB actual network transmission).
 
 2. **[Reconnection Support](#feature-2-reconnection-support)**: Players who disconnect (intentionally or due to network issues) can rejoin an in-progress game within a configurable timeout period (default: 5 minutes). If a player fails to reconnect before the timeout expires, they are automatically converted to AI control to allow the game to continue.
 
