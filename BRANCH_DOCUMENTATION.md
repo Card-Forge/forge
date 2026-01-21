@@ -1015,9 +1015,116 @@ netGuiGame.setDeltaSyncEnabled(false); // Falls back to full state sync
 
 ## Debugging
 
+### NetworkDebug.config - Central Configuration File
+
+All network debugging and bandwidth logging is controlled by the `NetworkDebug.config` file, located in the `forge-gui/` directory. This file provides user-friendly configuration without requiring command-line flags or code changes.
+
+**Configuration File Location**:
+- Development: `forge-gui/NetworkDebug.config`
+- Packaged releases: Should be in the same directory as the Forge JAR
+
+**Example Configuration**:
+```properties
+# Bandwidth Logging
+bandwidth.logging.enabled=true
+
+# Network Debug Logger
+debug.logger.enabled=true
+debug.logger.console.level=INFO
+debug.logger.file.level=DEBUG
+```
+
+**Startup Confirmation**: When Forge starts, it logs the configuration:
+```
+[NetworkDebugConfig] Loaded configuration from: /path/to/forge-gui/NetworkDebug.config
+[NetworkDebugConfig]   bandwidth.logging.enabled=true
+[NetworkDebugConfig]   debug.logger.enabled=true
+[NetworkDebugConfig]   debug.logger.console.level=INFO
+[NetworkDebugConfig]   debug.logger.file.level=DEBUG
+```
+
+**If config file is missing**, default values are used (all debugging enabled).
+
+---
+
+### Bandwidth Logging
+
+**Control**: Set `bandwidth.logging.enabled=true/false` in `NetworkDebug.config`
+
+When enabled, the system tracks and logs **three different measurements** for each delta sync packet, providing a complete picture of bandwidth usage:
+
+#### The Three Measurements
+
+**1. Approximate Size** - Delta Algorithm Efficiency
+- **Source**: `DeltaPacket.getApproximateSize()`
+- **What it measures**: Theoretical minimum packet size using custom byte counting
+- **Includes**: Header (20 bytes) + object IDs (4 bytes each) + delta data
+- **Excludes**: ObjectOutputStream overhead, compression, protocol framing
+- **Purpose**: Shows how efficiently the delta algorithm creates small payloads
+- **Example**: `320 bytes`
+
+**2. Actual Network Bytes** - Ground Truth
+- **Source**: `NetworkByteTracker` (measured in `CompatibleObjectEncoder`)
+- **What it measures**: Real bytes transmitted over the wire
+- **Includes**: ObjectOutputStream overhead (~+20-40%), LZ4 compression (~-30-50%), protocol framing, all metadata
+- **Purpose**: Shows actual bandwidth consumed (this is what matters)
+- **Example**: `450 bytes`
+
+**3. Full State Estimate** - Baseline for Comparison
+- **Source**: `estimateFullStateSize()` (ObjectOutputStream serialization)
+- **What it measures**: What would be sent without delta sync
+- **Includes**: ObjectOutputStream serialization of entire GameView (uncompressed)
+- **Purpose**: Reference point to calculate bandwidth savings
+- **Example**: `1200 bytes`
+
+#### Why Three Measurements Matter
+
+```
+Approximate (320 bytes)
+    ↓ Shows: Delta algorithm creates small deltas
+    ↓ Missing: Serialization overhead, compression
+
+Actual Network (450 bytes)
+    ↓ Shows: Real transmission includes overhead
+    ↓ Benefits: LZ4 compression reduces size
+    ↓ This is ground truth
+
+Full State (1200 bytes)
+    ↓ Shows: Baseline without delta sync
+    ↓ Purpose: Calculate realistic savings
+
+Savings Calculation:
+- Approximate vs Full State = 73% (optimistic, ignores overhead)
+- Actual vs Full State = 62% (realistic, true bandwidth savings)
+```
+
+**Performance Impact**:
+- Enabled: ~1-2% overhead (includes ObjectOutputStream for full state estimates)
+- Disabled: 0% overhead (NetworkByteTracker is null, no tracking occurs)
+
+#### Console Output Example
+
+```
+[DeltaSync] Packet #1: Approximate=320 bytes, ActualNetwork=450 bytes, FullState=1200 bytes
+[DeltaSync]   Savings: Approximate=73%, Actual=62% | Cumulative: Approximate=320, Actual=450, FullState=1200
+```
+
+**Interpretation**:
+- **Approximate=320**: Delta algorithm created a 320-byte payload
+- **ActualNetwork=450**: After serialization and compression, 450 bytes were sent
+- **FullState=1200**: Sending the full state would have taken 1200 bytes
+- **Actual Savings=62%**: Delta sync saved 62% of bandwidth compared to full state
+
+---
+
 ### NetworkDebugLogger
 
-The network play code includes a dedicated debug logging system (`NetworkDebugLogger`) designed for diagnosing synchronization and connectivity issues. It provides configurable verbosity levels for console versus file output.
+The network play code includes a dedicated debug logging system (`NetworkDebugLogger`) for diagnosing synchronization and connectivity issues. It provides configurable verbosity levels for console versus file output.
+
+**Control**: Set these options in `NetworkDebug.config`:
+- `debug.logger.enabled=true/false` - Enable/disable all debug logging
+- `debug.logger.console.level=DEBUG/INFO/WARN/ERROR` - Console verbosity
+- `debug.logger.file.level=DEBUG/INFO/WARN/ERROR` - File verbosity
 
 #### Log Levels
 
@@ -1027,6 +1134,12 @@ The network play code includes a dedicated debug logging system (`NetworkDebugLo
 | `INFO` | 1 | Normal operation (sync start/end, summaries, important events) | ON | ON |
 | `WARN` | 2 | Potential issues (missing objects, unexpected states) | ON | ON |
 | `ERROR` | 3 | Failures and exceptions | ON | ON |
+
+**Default Configuration**:
+```properties
+debug.logger.console.level=INFO  # Console shows important events
+debug.logger.file.level=DEBUG    # File captures everything
+```
 
 #### Log File Location
 
@@ -1040,22 +1153,35 @@ The filename includes:
 - Timestamp (YYYYMMDD-HHMMSS)
 - Process ID (for distinguishing multiple Forge instances)
 
-#### Configuring Verbosity
+#### Changing Configuration
 
-You can adjust log levels at runtime:
+**Option 1: Edit NetworkDebug.config (Recommended)**
+```properties
+# For maximum verbosity
+debug.logger.console.level=DEBUG
+debug.logger.file.level=DEBUG
 
+# For production (quiet)
+debug.logger.enabled=false
+
+# Show only errors
+debug.logger.console.level=ERROR
+debug.logger.file.level=ERROR
+```
+Requires restart to take effect.
+
+**Option 2: Runtime API (For Testing)**
 ```java
 import forge.gamemodes.net.NetworkDebugLogger;
 import forge.gamemodes.net.NetworkDebugLogger.LogLevel;
 
-// Show DEBUG messages on console (very verbose)
+// Override config at runtime
 NetworkDebugLogger.setConsoleLevel(LogLevel.DEBUG);
-
-// Only show errors in the file
 NetworkDebugLogger.setFileLevel(LogLevel.ERROR);
-
-// Disable all logging
 NetworkDebugLogger.setEnabled(false);
+
+// Reload configuration from file
+NetworkDebugLogger.applyConfig();
 
 // Query current levels
 LogLevel consoleLevel = NetworkDebugLogger.getConsoleLevel();
@@ -1119,20 +1245,40 @@ Bytes 0-63 (error at 32):
 #### Debugging Common Issues
 
 **Issue: Cards not appearing in hand**
-1. Set console level to DEBUG: `NetworkDebugLogger.setConsoleLevel(LogLevel.DEBUG)`
+1. Enable detailed logging in `NetworkDebug.config`:
+   ```properties
+   debug.logger.console.level=DEBUG
+   debug.logger.file.level=DEBUG
+   ```
+   Or at runtime: `NetworkDebugLogger.setConsoleLevel(LogLevel.DEBUG)`
 2. Look for `[DeltaSync] PlayerView X: setting Hand = Collection[N]` messages
 3. Check if `[NetworkDeserializer] Collection has X missing objects!` warnings appear
 4. Verify tracker lookups: `[FullStateSync] Card X (from hand): tracker lookup = FOUND/NOT FOUND`
+5. Check log file: `logs/network-debug-*.log` for full details
 
 **Issue: Delta sync errors**
 1. Check for `Invalid ordinal` or `Unexpected marker` errors
 2. Review the hex dump to identify byte stream misalignment
 3. Look for `VERIFY FAILED: CardView X not in tracker` warnings
+4. Enable DEBUG level to see hex dumps of problematic packets
 
 **Issue: Reconnection failures**
 1. Check for `[FullStateSync]` messages showing state restoration
 2. Look for `[DeltaSync] Creating NEW PlayerView` warnings (indicates identity mismatch)
 3. Verify session credentials are being sent
+4. Review log file for complete reconnection flow
+
+**Issue: Bandwidth higher than expected**
+1. Enable bandwidth logging in `NetworkDebug.config`:
+   ```properties
+   bandwidth.logging.enabled=true
+   ```
+2. Check console output for three-way comparison
+3. Compare "Actual Network" bytes to "Full State" estimate
+4. If "Actual" is much larger than "Approximate", check for:
+   - Large ObjectOutputStream overhead (inspect packet types)
+   - Poor compression ratios (inspect data compressibility)
+   - Excessive new object creation (check delta vs full state ratio)
 
 ---
 
