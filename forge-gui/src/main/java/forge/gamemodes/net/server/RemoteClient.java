@@ -53,4 +53,12 @@ public final class RemoteClient implements IToClient {
     ReplyPool getReplyPool() {
         return replies;
     }
+
+    /**
+     * Cancel all pending replies for this client.
+     * This is used when converting a player to AI control to unblock the game thread.
+     */
+    public void cancelPendingReplies() {
+        replies.cancelAll();
+    }
 }

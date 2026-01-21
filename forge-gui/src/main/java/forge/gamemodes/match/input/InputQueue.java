@@ -64,9 +64,15 @@ public class InputQueue extends Observable {
     }
 
     public final void clearInputs() {
+        forge.gamemodes.net.NetworkDebugLogger.log("[InputQueue] clearInputs() called, stack size = %d", inputStack.size());
+        int count = 0;
         while(!inputStack.isEmpty()) {
-            inputStack.pop().stop();
+            InputSynchronized inp = inputStack.pop();
+            forge.gamemodes.net.NetworkDebugLogger.log("[InputQueue] Stopping input #%d: %s", count, inp.getClass().getSimpleName());
+            inp.stop();
+            count++;
         }
+        forge.gamemodes.net.NetworkDebugLogger.log("[InputQueue] clearInputs() done, stopped %d inputs", count);
 
         updateObservers();
     }

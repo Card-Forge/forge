@@ -18,11 +18,13 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
     @Override
     public void awaitLatchRelease() {
         FThreads.assertExecutedByEdt(false);
+        forge.gamemodes.net.NetworkDebugLogger.log("[InputSyncronizedBase] awaitLatchRelease() starting on %s, thread = %s", this.getClass().getSimpleName(), Thread.currentThread().getName());
         try {
             cdlDone.await();
         } catch (final InterruptedException e) {
             BugReporter.reportException(e);
         }
+        forge.gamemodes.net.NetworkDebugLogger.log("[InputSyncronizedBase] awaitLatchRelease() UNBLOCKED on %s, thread = %s", this.getClass().getSimpleName(), Thread.currentThread().getName());
     }
 
     @Override
@@ -37,6 +39,7 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
 
     @Override
     public final void stop() {
+        forge.gamemodes.net.NetworkDebugLogger.log("[InputSyncronizedBase] stop() called on %s, latch count before = %d", this.getClass().getSimpleName(), cdlDone.getCount());
         onStop();
 
         // ensure input won't accept any user actions.
@@ -47,6 +50,7 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
             getController().getInputQueue().removeInput(InputSyncronizedBase.this);
         }
         cdlDone.countDown();
+        forge.gamemodes.net.NetworkDebugLogger.log("[InputSyncronizedBase] stop() done, latch count after = %d", cdlDone.getCount());
     }
 
     protected void onStop() { }

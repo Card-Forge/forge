@@ -6,6 +6,7 @@ import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.CompatibleObjectEncoder;
+import forge.gamemodes.net.NetworkDebugLogger;
 import forge.gamemodes.net.event.*;
 import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiGame;
@@ -397,10 +398,9 @@ public final class FServerManager {
                 String username = client.getUsername();
                 String message = ((MessageEvent) msg).getMessage();
 
-                // Check for host commands
-                if (client.getIndex() == 0 && message.startsWith("/skipreconnect")) {
-                    handleSkipReconnectCommand(message);
-                    return; // Don't broadcast the command itself
+                // Check for host commands (only host can execute commands)
+                if (client.getIndex() == 0 && handleHostCommand(message)) {
+                    return; // Command was handled, don't broadcast
                 }
 
                 // Append (Host) indicator for the host player
@@ -410,74 +410,6 @@ public final class FServerManager {
                 broadcast(new MessageEvent(username, message));
             }
             super.channelRead(ctx, msg);
-        }
-
-        private void handleSkipReconnectCommand(String message) {
-            // Parse command: /skipreconnect <playerName> or just /skipreconnect (for first disconnected player)
-            String[] parts = message.trim().split("\\s+", 2);
-
-            System.out.println("[DEBUG] /skipreconnect command received: " + message);
-            System.out.println("[DEBUG] currentGameSession=" + (currentGameSession != null ? "exists" : "null"));
-            if (currentGameSession != null) {
-                System.out.println("[DEBUG] isGameInProgress=" + currentGameSession.isGameInProgress());
-            }
-
-            if (currentGameSession == null || !currentGameSession.isGameInProgress()) {
-                broadcast(new MessageEvent("No active game session."));
-                return;
-            }
-
-            String targetPlayerName = null;
-            if (parts.length > 1) {
-                targetPlayerName = parts[1].trim();
-            }
-
-            // Find disconnected player
-            int targetIndex = -1;
-            String targetUsername = null;
-
-            if (targetPlayerName != null) {
-                // Find specific player by name
-                for (int i = 0; i < 8; i++) {
-                    PlayerSession playerSession = currentGameSession.getPlayerSession(i);
-                    if (playerSession != null && playerSession.isDisconnected()) {
-                        String playerName = playerSession.getPlayerName();
-                        if (playerName != null && playerName.equalsIgnoreCase(targetPlayerName)) {
-                            targetIndex = i;
-                            targetUsername = playerName;
-                            break;
-                        }
-                    }
-                }
-            } else {
-                // Find first disconnected player
-                System.out.println("[DEBUG] Searching for disconnected players...");
-                for (int i = 0; i < 8; i++) {
-                    PlayerSession playerSession = currentGameSession.getPlayerSession(i);
-                    if (playerSession != null) {
-                        System.out.println("[DEBUG] Player " + i + ": name=" + playerSession.getPlayerName() +
-                                ", isDisconnected=" + playerSession.isDisconnected() +
-                                ", state=" + playerSession.getConnectionState());
-                    }
-                    if (playerSession != null && playerSession.isDisconnected()) {
-                        targetIndex = i;
-                        targetUsername = playerSession.getPlayerName();
-                        break;
-                    }
-                }
-            }
-
-            if (targetIndex == -1) {
-                if (targetPlayerName != null) {
-                    broadcast(new MessageEvent(String.format("No disconnected player found with name '%s'.", targetPlayerName)));
-                } else {
-                    broadcast(new MessageEvent("No disconnected players found."));
-                }
-                return;
-            }
-
-            // Cancel the timeout timer and immediately convert to AI
-            skipReconnectionTimeout(targetIndex, targetUsername);
         }
     }
 
@@ -602,6 +534,11 @@ public final class FServerManager {
                 super.channelInactive(ctx);
                 return;
             }
+
+            // Cancel any pending replies immediately to unblock game thread
+            // This must happen before we process the disconnect to prevent blocking
+            System.out.println("[DEBUG] Canceling pending replies for disconnected client");
+            client.cancelPendingReplies();
 
             final String username = client.getUsername();
             final int playerIndex = client.getIndex();
@@ -856,6 +793,97 @@ public final class FServerManager {
     }
 
     /**
+     * Handle a host command message.
+     * This is called from both the MessageHandler (for remote commands) and NetConnectUtil (for local host commands).
+     * @param message the command message (e.g., "/skipreconnect" or "/skipreconnect PlayerName")
+     * @return true if the message was a command that was handled, false otherwise
+     */
+    public boolean handleHostCommand(String message) {
+        if (message == null || !message.startsWith("/")) {
+            return false;
+        }
+
+        if (message.startsWith("/skipreconnect")) {
+            handleSkipReconnectCommandInternal(message);
+            return true;
+        }
+
+        // Add other host commands here in the future
+        return false;
+    }
+
+    /**
+     * Internal implementation of the /skipreconnect command.
+     */
+    private void handleSkipReconnectCommandInternal(String message) {
+        // Parse command: /skipreconnect <playerName> or just /skipreconnect (for first disconnected player)
+        String[] parts = message.trim().split("\\s+", 2);
+
+        System.out.println("[DEBUG] /skipreconnect command received: " + message);
+        System.out.println("[DEBUG] currentGameSession=" + (currentGameSession != null ? "exists" : "null"));
+        if (currentGameSession != null) {
+            System.out.println("[DEBUG] isGameInProgress=" + currentGameSession.isGameInProgress());
+        }
+
+        if (currentGameSession == null || !currentGameSession.isGameInProgress()) {
+            broadcast(new MessageEvent("No active game session."));
+            return;
+        }
+
+        String targetPlayerName = null;
+        if (parts.length > 1) {
+            targetPlayerName = parts[1].trim();
+        }
+
+        // Find disconnected player
+        int targetIndex = -1;
+        String targetUsername = null;
+
+        if (targetPlayerName != null) {
+            // Find specific player by name
+            for (int i = 0; i < 8; i++) {
+                PlayerSession playerSession = currentGameSession.getPlayerSession(i);
+                if (playerSession != null && playerSession.isDisconnected()) {
+                    String playerName = playerSession.getPlayerName();
+                    if (playerName != null && playerName.equalsIgnoreCase(targetPlayerName)) {
+                        targetIndex = i;
+                        targetUsername = playerName;
+                        break;
+                    }
+                }
+            }
+        } else {
+            // Find first disconnected player
+            System.out.println("[DEBUG] Searching for disconnected players...");
+            for (int i = 0; i < 8; i++) {
+                PlayerSession playerSession = currentGameSession.getPlayerSession(i);
+                if (playerSession != null) {
+                    System.out.println("[DEBUG] Player " + i + ": name=" + playerSession.getPlayerName() +
+                            ", isDisconnected=" + playerSession.isDisconnected() +
+                            ", state=" + playerSession.getConnectionState());
+                }
+                if (playerSession != null && playerSession.isDisconnected()) {
+                    targetIndex = i;
+                    targetUsername = playerSession.getPlayerName();
+                    break;
+                }
+            }
+        }
+
+        if (targetIndex == -1) {
+            if (targetPlayerName != null) {
+                broadcast(new MessageEvent(String.format("No disconnected player found with name '%s'.", targetPlayerName)));
+            } else {
+                broadcast(new MessageEvent("No disconnected players found."));
+            }
+            return;
+        }
+
+        // Cancel the timeout timer and immediately convert to AI
+        skipReconnectionTimeout(targetIndex, targetUsername);
+    }
+
+    /**
      * Convert a disconnected player to AI control.
      * This maintains game state while allowing the game to continue.
      */
@@ -867,20 +895,45 @@ public final class FServerManager {
             slot.setName(username + " (AI)");
         }
 
+        // Cancel any pending network replies for this player to unblock the game thread
+        // This is critical - without this, the game thread may be blocked waiting for input
+        for (final RemoteClient client : clients.values()) {
+            if (client.getIndex() == playerIndex) {
+                NetworkDebugLogger.log("[AI Takeover] Canceling pending replies for client at index %d", playerIndex);
+                client.cancelPendingReplies();
+                break;
+            }
+        }
+
         // Get the game and player instance
         if (localLobby.getHostedMatch() != null) {
             forge.game.Game game = localLobby.getHostedMatch().getGame();
             if (game != null) {
-                // Find the player by matching lobby player name
-                forge.game.player.Player targetPlayer = null;
-                for (forge.game.player.Player p : game.getPlayers()) {
-                    if (username.equals(p.getLobbyPlayer().getName())) {
-                        targetPlayer = p;
-                        break;
-                    }
-                }
+                // Find the player by ID (which corresponds to the lobby index)
+                // Note: We use getPlayer(id) instead of matching by name because the
+                // PlayerSession name might not be updated when a player changes their name in the lobby
+                forge.game.player.Player targetPlayer = game.getPlayer(playerIndex);
+                NetworkDebugLogger.log("[AI Takeover] Looking for player at index %d, found: %s",
+                        playerIndex, targetPlayer != null ? targetPlayer.getName() : "null");
 
                 if (targetPlayer != null) {
+                    // Clear any pending inputs on the old controller before replacing
+                    // IMPORTANT: Only use clearInputs(), NOT resetInputs()!
+                    // resetInputs() calls selectButtonCancel() which triggers onCancel() which
+                    // may try to communicate with the disconnected client (e.g., showConfirmDialog)
+                    // and block. clearInputs() directly calls stop() which safely releases the latch.
+                    forge.game.player.PlayerController oldController = targetPlayer.getController();
+                    NetworkDebugLogger.log("[AI Takeover] Old controller type: %s", oldController != null ? oldController.getClass().getName() : "null");
+                    if (oldController instanceof forge.player.PlayerControllerHuman) {
+                        forge.player.PlayerControllerHuman humanController = (forge.player.PlayerControllerHuman) oldController;
+                        NetworkDebugLogger.log("[AI Takeover] Clearing inputs on old controller to unblock game thread");
+                        NetworkDebugLogger.log("[AI Takeover] InputQueue stack before clear: %s", humanController.getInputQueue().printInputStack());
+                        humanController.getInputQueue().clearInputs();
+                        NetworkDebugLogger.log("[AI Takeover] InputQueue stack after clear: %s", humanController.getInputQueue().printInputStack());
+                    } else {
+                        NetworkDebugLogger.warn("[AI Takeover] Old controller is NOT PlayerControllerHuman, cannot clear inputs");
+                    }
+
                     // Create an AI controller for this player
                     forge.ai.LobbyPlayerAi aiLobbyPlayer = new forge.ai.LobbyPlayerAi(username + " (AI)", null);
                     forge.ai.PlayerControllerAi aiController = new forge.ai.PlayerControllerAi(game, targetPlayer, aiLobbyPlayer);
@@ -888,7 +941,13 @@ public final class FServerManager {
                     // Replace the player's controller with the AI controller
                     targetPlayer.dangerouslySetController(aiController);
 
-                    System.out.println("[AI Takeover] Converted player " + username + " at index " + playerIndex + " to AI control");
+                    NetworkDebugLogger.log("[AI Takeover] Converted player %s at index %d to AI control", targetPlayer.getName(), playerIndex);
+                    NetworkDebugLogger.log("[AI Takeover] Game state after conversion: isGameOver=%b, phase=%s, priorityPlayer=%s, turnPlayer=%s",
+                            game.isGameOver(),
+                            game.getPhaseHandler().getPhase(),
+                            game.getPhaseHandler().getPriorityPlayer() != null ? game.getPhaseHandler().getPriorityPlayer().getName() : "null",
+                            game.getPhaseHandler().getPlayerTurn() != null ? game.getPhaseHandler().getPlayerTurn().getName() : "null");
+                    NetworkDebugLogger.log("[AI Takeover] New controller class: %s", targetPlayer.getController().getClass().getName());
                 }
             }
         }

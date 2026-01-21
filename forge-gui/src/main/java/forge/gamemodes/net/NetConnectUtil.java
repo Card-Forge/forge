@@ -86,15 +86,23 @@ public class NetConnectUtil {
             public void send(final NetEvent event) {
                 if (event instanceof MessageEvent) {
                     final MessageEvent message = (MessageEvent) event;
+                    String msgText = message.getMessage();
+
+                    // Check for host commands first (host is local, so handle commands locally)
+                    if (server.handleHostCommand(msgText)) {
+                        // Command was handled, don't broadcast or add to chat
+                        return;
+                    }
+
                     String source = message.getSource();
                     // Append (Host) indicator for the host player
                     if (source != null) {
                         source = source + " (Host)";
                     }
                     // Add to chat with host indicator
-                    chatInterface.addMessage(new ChatMessage(source, message.getMessage()));
+                    chatInterface.addMessage(new ChatMessage(source, msgText));
                     // Broadcast with host indicator
-                    server.broadcast(new MessageEvent(source, message.getMessage()));
+                    server.broadcast(new MessageEvent(source, msgText));
                 }
             }
             @Override
