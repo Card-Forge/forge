@@ -17,6 +17,7 @@ The NetworkPlay branch introduces three major features to improve the multiplaye
 **Additional Resources:**
 - **[Debugging](#debugging)**: Comprehensive debug logging for diagnosing network synchronization issues
 - **[Architectural Analysis](#architectural-overlap-with-main-branch)**: Impact on core game logic and merge considerations
+- **[BUGS.md](BUGS.md)**: Known bugs, debugging progress, and resolution status
 
 ---
 
