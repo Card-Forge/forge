@@ -416,6 +416,12 @@ public final class FServerManager {
             // Parse command: /skipreconnect <playerName> or just /skipreconnect (for first disconnected player)
             String[] parts = message.trim().split("\\s+", 2);
 
+            System.out.println("[DEBUG] /skipreconnect command received: " + message);
+            System.out.println("[DEBUG] currentGameSession=" + (currentGameSession != null ? "exists" : "null"));
+            if (currentGameSession != null) {
+                System.out.println("[DEBUG] isGameInProgress=" + currentGameSession.isGameInProgress());
+            }
+
             if (currentGameSession == null || !currentGameSession.isGameInProgress()) {
                 broadcast(new MessageEvent("No active game session."));
                 return;
@@ -445,8 +451,14 @@ public final class FServerManager {
                 }
             } else {
                 // Find first disconnected player
+                System.out.println("[DEBUG] Searching for disconnected players...");
                 for (int i = 0; i < 8; i++) {
                     PlayerSession playerSession = currentGameSession.getPlayerSession(i);
+                    if (playerSession != null) {
+                        System.out.println("[DEBUG] Player " + i + ": name=" + playerSession.getPlayerName() +
+                                ", isDisconnected=" + playerSession.isDisconnected() +
+                                ", state=" + playerSession.getConnectionState());
+                    }
                     if (playerSession != null && playerSession.isDisconnected()) {
                         targetIndex = i;
                         targetUsername = playerSession.getPlayerName();
@@ -597,7 +609,12 @@ public final class FServerManager {
             // Check if there's an active game session that supports reconnection
             if (currentGameSession != null && currentGameSession.isGameInProgress()) {
                 // Mark player as disconnected but don't remove from game
+                System.out.println("[DEBUG] Marking player " + playerIndex + " (" + username + ") as disconnected");
                 currentGameSession.markPlayerDisconnected(playerIndex);
+                PlayerSession ps = currentGameSession.getPlayerSession(playerIndex);
+                if (ps != null) {
+                    System.out.println("[DEBUG] After marking: isDisconnected=" + ps.isDisconnected() + ", state=" + ps.getConnectionState());
+                }
 
                 // Pause the game and notify other players
                 String pauseMessage = String.format("Waiting for %s to reconnect...", username);
@@ -650,6 +667,8 @@ public final class FServerManager {
      * Mark the current game session as in progress.
      */
     public void setGameInProgress(boolean inProgress) {
+        System.out.println("[GameSession] setGameInProgress(" + inProgress + "), currentGameSession=" +
+                (currentGameSession != null ? "exists" : "null"));
         if (currentGameSession != null) {
             currentGameSession.setGameInProgress(inProgress);
         }

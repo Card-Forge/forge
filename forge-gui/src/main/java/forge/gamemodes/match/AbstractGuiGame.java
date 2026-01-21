@@ -1070,6 +1070,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             TrackableObject obj = findObjectById(tracker, objectId);
             if (obj != null) {
                 try {
+                    // Log if this is the GameView
+                    if (obj == gameView) {
+                        NetworkDebugLogger.debug("[DeltaSync] Applying delta to GameView ID=%d, bytes=%d",
+                                objectId, deltaBytes.length);
+                    }
                     applyDeltaToObject(obj, deltaBytes, tracker);
                     appliedCount++;
                 } catch (Exception e) {
@@ -1256,9 +1261,15 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     /**
      * Find a TrackableObject by ID in the Tracker.
      * Searches through known object types (CardView, PlayerView, etc.)
+     * IMPORTANT: GameView must be checked FIRST because it may have the same ID as a PlayerView
      */
     private TrackableObject findObjectById(Tracker tracker, int objectId) {
-        // Try CardView first (most common)
+        // Check GameView FIRST - it may have the same ID as other objects
+        if (gameView != null && gameView.getId() == objectId) {
+            return gameView;
+        }
+
+        // Try CardView (most common)
         TrackableObject obj = tracker.getObj(TrackableTypes.CardViewType, objectId);
         if (obj != null) return obj;
 
@@ -1273,11 +1284,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         // Try CombatView
         obj = tracker.getObj(TrackableTypes.CombatViewType, objectId);
         if (obj != null) return obj;
-
-        // Check if it's the GameView itself
-        if (gameView != null && gameView.getId() == objectId) {
-            return gameView;
-        }
 
         // Debug: Log when object not found
         NetworkDebugLogger.warn("[DeltaSync] Object ID %d NOT FOUND in any lookup", objectId);

@@ -16,6 +16,7 @@ import forge.gamemodes.match.AbstractGuiGame;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.FullStatePacket;
 import forge.gamemodes.net.GameProtocolSender;
+import forge.gamemodes.net.NetworkDebugLogger;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
@@ -126,9 +127,8 @@ public class NetGuiGame extends AbstractGuiGame {
         if (!useDeltaSync || !initialSyncSent) {
             // Fall back to full state sync - add debug logging
             if (logBandwidth) {
-                System.out.println(String.format(
-                    "[DeltaSync] Client %d: Fallback to full state - useDeltaSync=%b, initialSyncSent=%b",
-                    clientIndex, useDeltaSync, initialSyncSent));
+                NetworkDebugLogger.log("[DeltaSync] Client %d: Fallback to full state - useDeltaSync=%b, initialSyncSent=%b",
+                    clientIndex, useDeltaSync, initialSyncSent);
             }
             send(ProtocolMethod.setGameView, gameView);
             return;
@@ -159,14 +159,11 @@ public class NetGuiGame extends AbstractGuiGame {
                 int savings = fullStateSize > 0 ? (int)((1.0 - (double)deltaSize / fullStateSize) * 100) : 0;
                 int actualSavings = fullStateSize > 0 ? (int)((1.0 - (double)actualNetworkBytes / fullStateSize) * 100) : 0;
 
-                System.out.println(String.format(
-                    "[DeltaSync] Packet #%d: Approximate=%d bytes, ActualNetwork=%d bytes, FullState=%d bytes",
-                    deltaPacketCount, deltaSize, actualNetworkBytes, fullStateSize));
-                System.out.println(String.format(
-                    "[DeltaSync]   Savings: Approximate=%d%%, Actual=%d%% | Cumulative: Approximate=%d, Actual=%d, FullState=%d",
+                NetworkDebugLogger.log("[DeltaSync] Packet #%d: Approximate=%d bytes, ActualNetwork=%d bytes, FullState=%d bytes",
+                    deltaPacketCount, deltaSize, actualNetworkBytes, fullStateSize);
+                NetworkDebugLogger.log("[DeltaSync]   Savings: Approximate=%d%%, Actual=%d%% | Cumulative: Approximate=%d, Actual=%d, FullState=%d",
                     savings, actualSavings,
-                    totalDeltaBytes, networkBytesAfter, totalFullStateBytes
-                ));
+                    totalDeltaBytes, networkBytesAfter, totalFullStateBytes);
             }
         }
     }
@@ -286,23 +283,23 @@ public class NetGuiGame extends AbstractGuiGame {
      * This must be called after the initial game view is sent.
      */
     private void sendSessionCredentials() {
-        System.out.println("[DeltaSync] sendSessionCredentials called for client " + clientIndex);
+        NetworkDebugLogger.debug("[DeltaSync] sendSessionCredentials called for client %d", clientIndex);
         GameSession session = FServerManager.getInstance().getCurrentGameSession();
         if (session == null) {
-            System.out.println("[DeltaSync] WARN: session is null - cannot send credentials");
+            NetworkDebugLogger.warn("[DeltaSync] session is null - cannot send credentials");
             return;
         }
 
         PlayerSession playerSession = session.getPlayerSession(clientIndex);
         if (playerSession == null) {
-            System.out.println("[DeltaSync] WARN: playerSession is null for client " + clientIndex);
+            NetworkDebugLogger.warn("[DeltaSync] playerSession is null for client %d", clientIndex);
             return;
         }
 
         // Send credentials via fullStateSync with session info
         GameView gameView = getGameView();
         if (gameView == null) {
-            System.out.println("[DeltaSync] WARN: gameView is null");
+            NetworkDebugLogger.warn("[DeltaSync] gameView is null");
             return;
         }
 
@@ -318,7 +315,7 @@ public class NetGuiGame extends AbstractGuiGame {
         // Mark all objects as sent so delta sync knows they don't need full serialization
         deltaSyncManager.markObjectsAsSent(gameView);
 
-        System.out.println("[DeltaSync] Session credentials sent, initialSyncSent = true, objects marked as sent");
+        NetworkDebugLogger.log("[DeltaSync] Session credentials sent, initialSyncSent=true, objects marked as sent");
         // Clear all change flags since we've sent everything
         deltaSyncManager.clearAllChanges(gameView);
     }

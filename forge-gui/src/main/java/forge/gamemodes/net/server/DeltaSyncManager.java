@@ -109,7 +109,15 @@ public class DeltaSyncManager {
         Map<Integer, NewObjectData> newObjects = new HashMap<>();
         Set<Integer> currentObjectIds = new HashSet<>();
 
-        // Collect changes from GameView itself
+        // Collect changes from GameView itself - always log for debugging
+        boolean gvHasChanges = gameView.hasChanges();
+        boolean gvIsSent = sentObjectIds.contains(gameView.getId());
+        NetworkDebugLogger.debug("[DeltaSync] collectDeltas: GameView ID=%d, hasChanges=%b, isSent=%b, phase=%s",
+                gameView.getId(), gvHasChanges, gvIsSent, gameView.getPhase());
+        if (gvHasChanges) {
+            NetworkDebugLogger.debug("[DeltaSync] GameView ID=%d changedProps: %s",
+                    gameView.getId(), gameView.getChangedProps());
+        }
         collectObjectDelta(gameView, objectDeltas, newObjects, currentObjectIds);
 
         // Collect changes from all players
@@ -161,8 +169,8 @@ public class DeltaSyncManager {
 
         // Log new objects for debugging
         if (!newObjects.isEmpty()) {
-            System.out.println(String.format("[DeltaSync] New objects: %d, Deltas: %d, Removed: %d",
-                    newObjects.size(), objectDeltas.size(), removedObjectIds.size()));
+            NetworkDebugLogger.log("[DeltaSync] New objects: %d, Deltas: %d, Removed: %d",
+                    newObjects.size(), objectDeltas.size(), removedObjectIds.size());
         }
 
         // Clear removedObjectIds after including in packet
@@ -319,8 +327,8 @@ public class DeltaSyncManager {
 
             // Critical: if props is null but changedProps is not empty, we have inconsistent state
             if (props == null && !changedProps.isEmpty()) {
-                System.err.println("CRITICAL: Object " + obj.getId() + " has " + changedProps.size() +
-                    " changed properties but null props map!");
+                NetworkDebugLogger.error("[DeltaSync] CRITICAL: Object %d has %d changed properties but null props map!",
+                    obj.getId(), changedProps.size());
                 return null;
             }
 
@@ -337,13 +345,12 @@ public class DeltaSyncManager {
             byte[] result = baos.toByteArray();
             // Debug: log large serializations (threshold lowered since we expect much smaller sizes)
             if (result.length > 5000) {
-                System.out.println(String.format("[DeltaSync DEBUG] Object %d (%s) serialized to %d bytes with %d changed props",
-                    obj.getId(), obj.getClass().getSimpleName(), result.length, changedProps.size()));
+                NetworkDebugLogger.debug("[DeltaSync] Object %d (%s) serialized to %d bytes with %d changed props",
+                    obj.getId(), obj.getClass().getSimpleName(), result.length, changedProps.size());
             }
             return result;
         } catch (Exception e) {
-            System.err.println("Error serializing delta for object " + obj.getId() + ": " + e.getMessage());
-            e.printStackTrace();
+            NetworkDebugLogger.error("[DeltaSync] Error serializing delta for object %d: %s", obj.getId(), e.getMessage());
             return null;
         }
     }
@@ -386,14 +393,13 @@ public class DeltaSyncManager {
             byte[] fullProps = baos.toByteArray();
             int objectType = getObjectType(obj);
 
-            System.out.println(String.format("[DeltaSync] Created NewObjectData: ID=%d, Type=%d (%s), Size=%d bytes, Props=%d",
+            NetworkDebugLogger.debug("[DeltaSync] Created NewObjectData: ID=%d, Type=%d (%s), Size=%d bytes, Props=%d",
                     obj.getId(), objectType, obj.getClass().getSimpleName(), fullProps.length,
-                    props != null ? props.size() : 0));
+                    props != null ? props.size() : 0);
 
             return new NewObjectData(obj.getId(), objectType, fullProps);
         } catch (Exception e) {
-            System.err.println("Error serializing new object " + obj.getId() + ": " + e.getMessage());
-            e.printStackTrace();
+            NetworkDebugLogger.error("[DeltaSync] Error serializing new object %d: %s", obj.getId(), e.getMessage());
             return null;
         }
     }
@@ -445,7 +451,7 @@ public class DeltaSyncManager {
             sentObjectIds.add(gameView.getCombat().getId());
         }
 
-        System.out.println("[DeltaSync] Marked " + sentObjectIds.size() + " objects as sent after full state sync");
+        NetworkDebugLogger.log("[DeltaSync] Marked %d objects as sent after full state sync", sentObjectIds.size());
     }
 
     private void markPlayerObjectsAsSent(PlayerView player) {
