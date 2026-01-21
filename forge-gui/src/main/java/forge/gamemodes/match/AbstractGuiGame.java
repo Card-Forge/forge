@@ -1344,10 +1344,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                         csv = createCardStateView(cardView, csvData.state);
                         if (csv != null) {
                             // Set the newly created CardStateView as CurrentState
-                            java.lang.reflect.Method setMethod = TrackableObject.class.getDeclaredMethod(
-                                    "set", TrackableProperty.class, Object.class);
-                            setMethod.setAccessible(true);
-                            setMethod.invoke(cardView, TrackableProperty.CurrentState, csv);
+                            cardView.set(TrackableProperty.CurrentState, csv);
                         }
                     } else if (csv.getState() != csvData.state) {
                         // State mismatch - log warning but continue with property application
@@ -1363,10 +1360,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                         csv = createCardStateView(cardView, csvData.state);
                         if (csv != null) {
                             // Set the newly created CardStateView as AlternateState
-                            java.lang.reflect.Method setMethod = TrackableObject.class.getDeclaredMethod(
-                                    "set", TrackableProperty.class, Object.class);
-                            setMethod.setAccessible(true);
-                            setMethod.invoke(cardView, TrackableProperty.AlternateState, csv);
+                            cardView.set(TrackableProperty.AlternateState, csv);
                         }
                     }
                 } else if (prop == TrackableProperty.LeftSplitState) {
@@ -1374,10 +1368,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                     if (csv == null) {
                         csv = createCardStateView(cardView, csvData.state);
                         if (csv != null) {
-                            java.lang.reflect.Method setMethod = TrackableObject.class.getDeclaredMethod(
-                                    "set", TrackableProperty.class, Object.class);
-                            setMethod.setAccessible(true);
-                            setMethod.invoke(cardView, TrackableProperty.LeftSplitState, csv);
+                            cardView.set(TrackableProperty.LeftSplitState, csv);
                         }
                     }
                 } else if (prop == TrackableProperty.RightSplitState) {
@@ -1385,20 +1376,13 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                     if (csv == null) {
                         csv = createCardStateView(cardView, csvData.state);
                         if (csv != null) {
-                            java.lang.reflect.Method setMethod = TrackableObject.class.getDeclaredMethod(
-                                    "set", TrackableProperty.class, Object.class);
-                            setMethod.setAccessible(true);
-                            setMethod.invoke(cardView, TrackableProperty.RightSplitState, csv);
+                            cardView.set(TrackableProperty.RightSplitState, csv);
                         }
                     }
                 }
 
                 if (csv != null) {
                     // Apply all deserialized properties to the CardStateView
-                    java.lang.reflect.Method setMethod = TrackableObject.class.getDeclaredMethod(
-                            "set", TrackableProperty.class, Object.class);
-                    setMethod.setAccessible(true);
-
                     int appliedCount = 0;
                     for (Map.Entry<TrackableProperty, Object> entry : csvData.properties.entrySet()) {
                         TrackableProperty csvProp = entry.getKey();
@@ -1410,7 +1394,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                             continue;
                         }
 
-                        setMethod.invoke(csv, csvProp, csvValue);
+                        csv.set(csvProp, csvValue);
                         appliedCount++;
                     }
                     NetworkDebugLogger.debug("[DeltaSync] Applied %d/%d properties to CardStateView (state=%s) of CardView %d",
@@ -1422,11 +1406,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 return;
             }
 
-            // Normal property setting
-            java.lang.reflect.Method setMethod = TrackableObject.class.getDeclaredMethod(
-                    "set", TrackableProperty.class, Object.class);
-            setMethod.setAccessible(true);
-            setMethod.invoke(obj, prop, value);
+            // Normal property setting (direct call - much faster than reflection)
+            obj.set(prop, value);
         } catch (Exception e) {
             NetworkDebugLogger.error("[DeltaSync] Error setting property %s on object %d: %s", prop, obj.getId(), e.getMessage());
             NetworkDebugLogger.error("[DeltaSync] Stack trace:", e);
