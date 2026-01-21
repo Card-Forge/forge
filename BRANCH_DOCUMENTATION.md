@@ -15,7 +15,7 @@ The NetworkPlay branch introduces three major features to improve the multiplaye
 3. **[Enhanced Chat Notifications](#feature-3-enhanced-chat-notifications)**: Server events (player join/leave, ready state, game start/end, reconnection status) are clearly communicated through styled system messages, providing better visibility into game state and player actions.
 
 **Additional Resources:**
-- **[Debugging](#debugging)**: Comprehensive debug logging with AI-assisted troubleshooting for diagnosing network synchronization issues
+- **[Debugging](#debugging)**: Comprehensive debug logging for diagnosing network synchronization issues
 
 ---
 
@@ -1119,88 +1119,6 @@ Bytes 0-63 (error at 32):
 1. Check for `[FullStateSync]` messages showing state restoration
 2. Look for `[DeltaSync] Creating NEW PlayerView` warnings (indicates identity mismatch)
 3. Verify session credentials are being sent
-
-#### AI-Assisted Debugging with Log Files
-
-The debug log files can be provided to Claude (or other AI assistants) for automated analysis and troubleshooting. This is particularly useful for complex synchronization issues that are difficult to diagnose manually.
-
-##### How to Use Logs with Claude
-
-**1. Locate the Log File**
-
-Find the most recent log file in the `logs/` directory:
-```bash
-# On Linux/Mac
-ls -lt forge-gui-desktop/logs/ | head -5
-
-# On Windows
-dir /O-D forge-gui-desktop\logs\ | more
-```
-
-The filename format is `network-debug-YYYYMMDD-HHMMSS-PID.log`
-
-**2. Share the Log File**
-
-Provide the log file to Claude using one of these methods:
-- **Paste the log content** directly into the conversation (recommended for files under 10,000 lines)
-- **Use the Read tool** if working in a local Claude Code session: Claude can read the file directly from the path
-- **Share relevant excerpts** if the full log is too large (focus on ERROR/WARN messages and surrounding context)
-
-**3. Describe the Problem**
-
-When sharing logs, include:
-- **What you were doing** when the issue occurred (e.g., "Player 2 disconnected and reconnected")
-- **Expected behavior** (e.g., "Game should resume with all cards visible")
-- **Actual behavior** (e.g., "Player's hand appeared empty after reconnection")
-- **Timestamp of issue** if known (helps Claude focus on relevant log sections)
-
-**4. What Claude Can Help With**
-
-Claude can analyze logs to:
-- **Identify root causes** by tracing error sequences and state transitions
-- **Spot patterns** in serialization/deserialization mismatches
-- **Detect timing issues** like race conditions or out-of-order message processing
-- **Suggest fixes** based on the error types and context
-- **Explain complex failures** in plain language
-- **Generate test cases** to reproduce the issue
-
-##### Example Usage
-
-```
-User: "I'm seeing cards missing from the hand after reconnection. Here's my debug log:"
-[Pastes log file content or provides path]
-
-Claude will:
-1. Search for reconnection-related messages ([FullStateSync], reconnectAccepted)
-2. Check for tracker lookup failures (NOT FOUND warnings)
-3. Analyze delta/full-state sync sequences
-4. Identify where objects were lost or not properly reconstructed
-5. Suggest specific code changes or configuration adjustments
-```
-
-##### Tips for Better Results
-
-- **Enable DEBUG level logging** before reproducing issues: This provides more detailed information for analysis
-  ```java
-  NetworkDebugLogger.setFileLevel(LogLevel.DEBUG);
-  ```
-- **Include timestamps** when describing issues: "The problem occurred around 14:45:12"
-- **Share both client and server logs** if available: This helps identify which side failed
-- **Reproduce the issue multiple times** if possible: Consistent patterns are easier to diagnose
-- **Include console output** if it contains relevant errors not in the log file
-
-##### Privacy Note
-
-Debug logs contain:
-- Player usernames
-- Game state information (cards, life totals, etc.)
-- Network protocol details
-- Timestamps and process IDs
-
-**No sensitive data** like passwords or authentication tokens are logged. However, if you're concerned about privacy:
-- Redact player names before sharing
-- Share only the relevant time window (use grep/findstr to extract)
-- Focus on ERROR and WARN messages rather than full DEBUG traces
 
 ---
 
