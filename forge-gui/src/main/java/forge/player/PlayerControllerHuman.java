@@ -3388,6 +3388,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public void requestResync() {
+        // No-op for local games - resync is only used for network play
+    }
+
+    @Override
     public void reconnectRequest(String sessionId, String token) {
         // No-op for local games - reconnection is only used for network play
     }

@@ -1118,10 +1118,64 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                     newObjectCount, appliedCount, skippedCount);
         }
 
+        // Validate checksum if present (every 10 packets)
+        if (packet.hasChecksum()) {
+            int serverChecksum = packet.getChecksum();
+            int clientChecksum = computeStateChecksum(gameView);
+
+            if (serverChecksum != clientChecksum) {
+                NetworkDebugLogger.error("[DeltaSync] CHECKSUM MISMATCH! Server=%d, Client=%d at sequence=%d",
+                        serverChecksum, clientChecksum, packet.getSequenceNumber());
+                NetworkDebugLogger.error("[DeltaSync] State desynchronization detected - requesting full state resync");
+
+                // Automatically request full state resync to recover
+                requestFullStateResync();
+                return; // Don't send ack for corrupted state
+            } else {
+                NetworkDebugLogger.log("[DeltaSync] Checksum validated successfully (seq=%d, checksum=%d)",
+                        packet.getSequenceNumber(), serverChecksum);
+            }
+        }
+
         // Send acknowledgment
         IGameController controller = getGameController();
         if (controller != null) {
             controller.ackSync(packet.getSequenceNumber());
+        }
+    }
+
+    /**
+     * Compute a checksum of the current game state for validation.
+     * Uses the same algorithm as the server for consistency.
+     */
+    private int computeStateChecksum(GameView gameView) {
+        int hash = 17;
+        hash = 31 * hash + gameView.getId();
+        hash = 31 * hash + gameView.getTurn();
+        if (gameView.getPhase() != null) {
+            hash = 31 * hash + gameView.getPhase().hashCode();
+        }
+        if (gameView.getPlayers() != null) {
+            for (PlayerView player : gameView.getPlayers()) {
+                hash = 31 * hash + player.getId();
+                hash = 31 * hash + player.getLife();
+            }
+        }
+        return hash;
+    }
+
+    /**
+     * Request a full state resync from the server to recover from desynchronization.
+     * This is called automatically when checksum validation fails.
+     */
+    private void requestFullStateResync() {
+        NetworkDebugLogger.warn("[DeltaSync] Requesting full state resync from server");
+
+        IGameController controller = getGameController();
+        if (controller != null) {
+            controller.requestResync();
+        } else {
+            NetworkDebugLogger.error("[DeltaSync] Cannot request resync: No game controller available");
         }
     }
 
