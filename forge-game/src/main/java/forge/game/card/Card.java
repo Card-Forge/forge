@@ -441,7 +441,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         currentState.getView().updateManaCost(this);
 
         // TODO re-factor Spell ManaCost fallback to CardState ManaCost
-        if (getFirstSpellAbility() != null) {
+        if (getFirstSpellAbility() != null && getFirstSpellAbility().isSpell()) {
             getFirstSpellAbility().setPayCosts(getFirstSpellAbility().getPayCosts().copyWithDefinedMana(getManaCost()));
         }
     }
@@ -7164,7 +7164,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public final FCollectionView<StaticAbility> getHiddenStaticAbilities() {
         FCollection<StaticAbility> result = new FCollection<>();
-        // Suspected
         if (this.isInPlay() && this.isSuspected()) {
             result.add(suspectedStatic);
         }
