@@ -184,14 +184,61 @@ public class DeltaSyncManager {
         return packet;
     }
 
-    // Special keys for delta packets to avoid ID collisions between different object types
-    // GameView uses Integer.MIN_VALUE as a reserved key
-    public static final int GAMEVIEW_DELTA_KEY = Integer.MIN_VALUE;
+    /**
+     * Create a composite delta key that encodes both object type and ID.
+     * This prevents ID collisions between different object types in delta packet maps.
+     *
+     * Problem: Different object types can have the same ID (e.g., CardView id=5 and StackItemView id=5)
+     * causing collisions in Map<Integer, byte[]> objectDeltas when using raw IDs as keys.
+     *
+     * Solution: Encode type in upper 4 bits, ID in lower 28 bits.
+     * - Bits 31-28: Object type (0-15, currently 0-4 used from DeltaPacket.TYPE_*)
+     * - Bits 27-0: Object ID (supports IDs up to 268 million, handles negatives like CombatView id=-1)
+     *
+     * Examples:
+     * - CardView (type=0) id=5 → key=0x00000005 (5)
+     * - PlayerView (type=1) id=5 → key=0x10000005 (268435461)
+     * - StackItemView (type=2) id=5 → key=0x20000005 (536870917)
+     * - CombatView (type=3) id=-1 → key=0x3FFFFFFF (1073741823)
+     *
+     * @param type the object type constant from DeltaPacket (TYPE_CARD_VIEW, TYPE_PLAYER_VIEW, etc.)
+     * @param id the object's ID
+     * @return composite key that uniquely identifies the (type, id) pair
+     */
+    private static int makeDeltaKey(int type, int id) {
+        // Ensure type fits in 4 bits (0-15)
+        if (type < 0 || type > 15) {
+            NetworkDebugLogger.error("[DeltaSync] Invalid object type %d, using 0", type);
+            type = 0;
+        }
+        // For negative IDs (like CombatView id=-1), mask to 28 bits
+        return (type << 28) | (id & 0x0FFFFFFF);
+    }
 
-    // PlayerView uses an offset range to avoid colliding with CardView IDs
-    // PlayerViews typically have IDs 0-7 (max 8 players), so we use MIN_VALUE + 1000 as base
-    // This ensures PlayerView delta keys don't collide with CardView or GameView keys
-    public static final int PLAYERVIEW_DELTA_KEY_OFFSET = Integer.MIN_VALUE + 1000;
+    /**
+     * Extract the object type from a composite delta key.
+     * @param deltaKey the composite key
+     * @return object type (0-15)
+     */
+    public static int getTypeFromDeltaKey(int deltaKey) {
+        return (deltaKey >>> 28) & 0xF;
+    }
+
+    /**
+     * Extract the object ID from a composite delta key.
+     * Handles sign extension for negative IDs.
+     * @param deltaKey the composite key
+     * @return object ID (with proper sign extension)
+     */
+    public static int getIdFromDeltaKey(int deltaKey) {
+        int id = deltaKey & 0x0FFFFFFF;
+        // Check if original ID was negative (bit 27 set in masked value)
+        if ((id & 0x08000000) != 0) {
+            // Sign-extend from 28 bits to 32 bits
+            id |= 0xF0000000;
+        }
+        return id;
+    }
 
     /**
      * Collect delta for a single TrackableObject.
@@ -207,18 +254,10 @@ public class DeltaSyncManager {
         int objId = obj.getId();
         currentObjectIds.add(objId);
 
-        // Use special keys to avoid ID collisions between different object types
-        // - GameView uses Integer.MIN_VALUE
-        // - PlayerView uses Integer.MIN_VALUE + 1000 + playerId
-        // - Everything else (CardView, StackItemView, etc.) uses actual objId
-        int deltaKey;
-        if (obj instanceof GameView) {
-            deltaKey = GAMEVIEW_DELTA_KEY;
-        } else if (obj instanceof PlayerView) {
-            deltaKey = PLAYERVIEW_DELTA_KEY_OFFSET + objId;
-        } else {
-            deltaKey = objId;
-        }
+        // Create composite delta key that includes object type to prevent ID collisions
+        // E.g., CardView id=5 and StackItemView id=5 won't collide anymore
+        int objType = getObjectType(obj);
+        int deltaKey = makeDeltaKey(objType, objId);
 
         // Check if this is a new object (not yet sent to client)
         if (!sentObjectIds.contains(objId)) {
