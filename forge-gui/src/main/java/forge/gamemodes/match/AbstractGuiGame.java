@@ -1065,32 +1065,39 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
         // STEP 2: Apply property deltas to existing objects
         for (Map.Entry<Integer, byte[]> entry : packet.getObjectDeltas().entrySet()) {
-            int objectId = entry.getKey();
+            int deltaKey = entry.getKey();
             byte[] deltaBytes = entry.getValue();
 
-            // Handle special GameView key (avoids ID collision with PlayerViews)
-            TrackableObject obj;
-            if (objectId == DeltaSyncManager.GAMEVIEW_DELTA_KEY) {
-                obj = gameView;
-            } else {
-                obj = findObjectById(tracker, objectId);
-            }
+            // Decode composite delta key to get object type and ID
+            // Key format: upper 4 bits = type, lower 28 bits = ID
+            int objectType = DeltaSyncManager.getTypeFromDeltaKey(deltaKey);
+            int actualObjectId = DeltaSyncManager.getIdFromDeltaKey(deltaKey);
+
+            // Look up object by type and ID
+            TrackableObject obj = findObjectByTypeAndId(tracker, objectType, actualObjectId);
             if (obj != null) {
                 try {
-                    // Log if this is the GameView
+                    // Log if this is the GameView or PlayerView
                     if (obj == gameView) {
-                        NetworkDebugLogger.debug("[DeltaSync] Applying delta to GameView ID=%d, bytes=%d",
-                                objectId, deltaBytes.length);
+                        NetworkDebugLogger.debug("[DeltaSync] Applying delta to GameView ID=%d (type=%d, deltaKey=0x%08X), bytes=%d",
+                                actualObjectId, objectType, deltaKey, deltaBytes.length);
+                    } else if (obj instanceof PlayerView) {
+                        NetworkDebugLogger.debug("[DeltaSync] Applying delta to PlayerView ID=%d (type=%d, deltaKey=0x%08X), bytes=%d",
+                                actualObjectId, objectType, deltaKey, deltaBytes.length);
                     }
                     applyDeltaToObject(obj, deltaBytes, tracker);
                     appliedCount++;
                 } catch (Exception e) {
-                    NetworkDebugLogger.error("[DeltaSync] Error applying delta to object " + objectId, e);
+                    NetworkDebugLogger.error("[DeltaSync] Error applying delta to object ID=%d type=%d (deltaKey=0x%08X)",
+                            actualObjectId, objectType, deltaKey);
+                    NetworkDebugLogger.error("[DeltaSync] Exception details:", e);
                     skippedCount++;
                 }
             } else {
                 // Object not found - this shouldn't happen if new objects were created first
-                NetworkDebugLogger.warn("[DeltaSync] Object ID %d NOT FOUND for delta application", objectId);
+                String typeName = getObjectTypeName(objectType);
+                NetworkDebugLogger.warn("[DeltaSync] %s ID=%d (deltaKey=0x%08X) NOT FOUND for delta application",
+                        typeName, actualObjectId, deltaKey);
                 skippedCount++;
             }
         }
@@ -1266,14 +1273,52 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     /**
-     * Find a TrackableObject by ID in the Tracker.
+     * Find a TrackableObject by type and ID using the composite delta key.
+     * This prevents ID collisions between different object types.
+     *
+     * @param tracker the tracker to search in
+     * @param objectType the object type from DeltaPacket.TYPE_* constants
+     * @param objectId the object's ID
+     * @return the TrackableObject, or null if not found
+     */
+    private TrackableObject findObjectByTypeAndId(Tracker tracker, int objectType, int objectId) {
+        switch (objectType) {
+            case DeltaPacket.TYPE_CARD_VIEW:
+                return tracker.getObj(TrackableTypes.CardViewType, objectId);
+            case DeltaPacket.TYPE_PLAYER_VIEW:
+                return tracker.getObj(TrackableTypes.PlayerViewType, objectId);
+            case DeltaPacket.TYPE_STACK_ITEM_VIEW:
+                return tracker.getObj(TrackableTypes.StackItemViewType, objectId);
+            case DeltaPacket.TYPE_COMBAT_VIEW:
+                return tracker.getObj(TrackableTypes.CombatViewType, objectId);
+            case DeltaPacket.TYPE_GAME_VIEW:
+                return gameView; // GameView is special - return the singleton
+            default:
+                NetworkDebugLogger.warn("[DeltaSync] Unknown object type %d, trying fallback search", objectType);
+                return findObjectById(tracker, objectId);
+        }
+    }
+
+    /**
+     * Get a human-readable name for an object type.
+     */
+    private static String getObjectTypeName(int objectType) {
+        switch (objectType) {
+            case DeltaPacket.TYPE_CARD_VIEW: return "CardView";
+            case DeltaPacket.TYPE_PLAYER_VIEW: return "PlayerView";
+            case DeltaPacket.TYPE_STACK_ITEM_VIEW: return "StackItemView";
+            case DeltaPacket.TYPE_COMBAT_VIEW: return "CombatView";
+            case DeltaPacket.TYPE_GAME_VIEW: return "GameView";
+            default: return "Unknown(type=" + objectType + ")";
+        }
+    }
+
+    /**
+     * Find a TrackableObject by ID in the Tracker (legacy method).
      * Searches through known object types (CardView, PlayerView, etc.)
-     * IMPORTANT: GameView must be checked FIRST because it may have the same ID as a PlayerView
+     * Note: Prefer findObjectByTypeAndId when object type is known.
      */
     private TrackableObject findObjectById(Tracker tracker, int objectId) {
-        // Note: GameView is handled separately via GAMEVIEW_DELTA_KEY to avoid ID collision
-        // with PlayerViews (both can have ID=1)
-
         // Try CardView (most common)
         TrackableObject obj = tracker.getObj(TrackableTypes.CardViewType, objectId);
         if (obj != null) return obj;
@@ -1290,8 +1335,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         obj = tracker.getObj(TrackableTypes.CombatViewType, objectId);
         if (obj != null) return obj;
 
-        // Object not in tracker - this is normal when creating new objects
-        // Callers that need to warn about missing objects do so themselves
+        // Object not in tracker
         return null;
     }
 
