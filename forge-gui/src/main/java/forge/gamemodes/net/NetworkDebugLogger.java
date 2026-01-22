@@ -5,7 +5,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Debug logger for network/delta sync operations.
@@ -47,8 +52,8 @@ public final class NetworkDebugLogger {
         }
     }
 
-    private static final String LOG_DIR = "logs";
     private static final String LOG_PREFIX = "network-debug";
+    private static final long GRACE_PERIOD_MS = 5 * 60 * 1000; // 5 minutes
 
     private static PrintWriter fileWriter;
     private static boolean initialized = false;
@@ -127,8 +132,78 @@ public final class NetworkDebugLogger {
     }
 
     /**
+     * Get list of existing log files in the log directory.
+     * Returns files sorted by last modified time (oldest first).
+     */
+    private static List<File> getExistingLogFiles() {
+        String logDirPath = NetworkDebugConfig.getLogDirectory();
+        File logsDir = new File(logDirPath);
+
+        if (!logsDir.exists() || !logsDir.isDirectory()) {
+            return Collections.emptyList();
+        }
+
+        File[] files = logsDir.listFiles((dir, name) ->
+            name.startsWith(LOG_PREFIX + "-") && name.endsWith(".log")
+        );
+
+        if (files == null) {
+            return Collections.emptyList();
+        }
+
+        // Sort by last modified time (oldest first)
+        return Arrays.stream(files)
+            .sorted(Comparator.comparing(File::lastModified))
+            .collect(Collectors.toList());
+    }
+
+    /**
+     * Clean up old log files if cleanup is enabled and max limit is exceeded.
+     * Respects grace period to avoid deleting logs from other running instances.
+     */
+    private static void cleanupOldLogs() {
+        if (!NetworkDebugConfig.isLogCleanupEnabled()) {
+            return;
+        }
+
+        int maxLogs = NetworkDebugConfig.getMaxLogFiles();
+        if (maxLogs <= 0) {
+            // 0 or negative means no limit
+            return;
+        }
+
+        List<File> logFiles = getExistingLogFiles();
+
+        // Account for the new log file we're about to create
+        int toDelete = logFiles.size() - maxLogs + 1;
+        if (toDelete <= 0) {
+            return;
+        }
+
+        long now = System.currentTimeMillis();
+
+        // Delete oldest files, but respect grace period
+        for (int i = 0; i < toDelete && i < logFiles.size(); i++) {
+            File oldLog = logFiles.get(i);
+
+            // Skip files modified within grace period (likely from other running instances)
+            long age = now - oldLog.lastModified();
+            if (age < GRACE_PERIOD_MS) {
+                continue;
+            }
+
+            try {
+                oldLog.delete();
+                // Silent operation - no console output
+            } catch (SecurityException e) {
+                // Silent failure - continue with other deletions
+            }
+        }
+    }
+
+    /**
      * Initialize the logger if not already done.
-     * Creates the logs/ directory and opens a unique log file.
+     * Creates the log directory and opens a unique log file.
      */
     private static void ensureInitialized() {
         if (initialized) {
@@ -139,11 +214,15 @@ public final class NetworkDebugLogger {
                 return;
             }
             try {
-                // Create logs directory
-                File logDir = new File(LOG_DIR);
+                // Get configurable log directory
+                String logDirPath = NetworkDebugConfig.getLogDirectory();
+                File logDir = new File(logDirPath);
                 if (!logDir.exists()) {
                     logDir.mkdirs();
                 }
+
+                // Clean up old logs before creating new one
+                cleanupOldLogs();
 
                 // Create unique filename with timestamp and PID
                 String timestamp = new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date());
@@ -153,11 +232,20 @@ public final class NetworkDebugLogger {
 
                 fileWriter = new PrintWriter(new FileWriter(logFile, true), true);
 
-                // Log header
+                // Log header with system information
+                Runtime runtime = Runtime.getRuntime();
                 fileWriter.println("=".repeat(80));
                 fileWriter.println("Network Debug Log Started: " + new Date());
                 fileWriter.println("PID: " + pid);
                 fileWriter.println("Log file: " + logFile.getAbsolutePath());
+                fileWriter.println();
+                fileWriter.println("System Information:");
+                fileWriter.println("  Java Version: " + System.getProperty("java.version"));
+                fileWriter.println("  Java Vendor: " + System.getProperty("java.vendor"));
+                fileWriter.println("  Max Memory: " + (runtime.maxMemory() / 1024 / 1024) + " MB");
+                fileWriter.println("  Available Processors: " + runtime.availableProcessors());
+                fileWriter.println("  OS: " + System.getProperty("os.name") + " " + System.getProperty("os.version"));
+                fileWriter.println("  OS Arch: " + System.getProperty("os.arch"));
                 fileWriter.println("=".repeat(80));
                 fileWriter.println();
 
@@ -411,6 +499,7 @@ public final class NetworkDebugLogger {
     public static String getLogFilePath() {
         ensureInitialized();
         // We don't store the path, so just return the directory
-        return new File(LOG_DIR).getAbsolutePath();
+        String logDirPath = NetworkDebugConfig.getLogDirectory();
+        return new File(logDirPath).getAbsolutePath();
     }
 }

@@ -24,6 +24,9 @@ public final class NetworkDebugConfig {
     private static final boolean DEFAULT_DEBUG_LOGGER_ENABLED = true;
     private static final String DEFAULT_CONSOLE_LEVEL = "INFO";
     private static final String DEFAULT_FILE_LEVEL = "DEBUG";
+    private static final int DEFAULT_MAX_LOG_FILES = 20;
+    private static final boolean DEFAULT_LOG_CLEANUP_ENABLED = true;
+    private static final String DEFAULT_LOG_DIRECTORY = "logs";
 
     private NetworkDebugConfig() {
         // Utility class
@@ -57,6 +60,9 @@ public final class NetworkDebugConfig {
             System.out.println("[NetworkDebugConfig]   debug.logger.enabled=" + isDebugLoggerEnabled());
             System.out.println("[NetworkDebugConfig]   debug.logger.console.level=" + getConsoleLogLevel());
             System.out.println("[NetworkDebugConfig]   debug.logger.file.level=" + getFileLogLevel());
+            System.out.println("[NetworkDebugConfig]   debug.logger.max.logs=" + getMaxLogFiles());
+            System.out.println("[NetworkDebugConfig]   debug.logger.cleanup.enabled=" + isLogCleanupEnabled());
+            System.out.println("[NetworkDebugConfig]   debug.logger.directory=" + getLogDirectory());
         } catch (IOException e) {
             System.err.println("[NetworkDebugConfig] Error reading config file: " + e.getMessage());
             System.err.println("[NetworkDebugConfig] Using default settings");
@@ -146,6 +152,48 @@ public final class NetworkDebugConfig {
             System.err.println("[NetworkDebugConfig] Invalid file log level: " + value + ", using DEBUG");
             return NetworkDebugLogger.LogLevel.DEBUG;
         }
+    }
+
+    /**
+     * Get the maximum number of log files to retain.
+     * When log cleanup is enabled, oldest log files are deleted when this limit is exceeded.
+     * Set to 0 to disable limit (keep all logs).
+     *
+     * @return maximum number of log files, or 0 for no limit
+     */
+    public static int getMaxLogFiles() {
+        loadConfig();
+        String value = config.getProperty("debug.logger.max.logs", String.valueOf(DEFAULT_MAX_LOG_FILES));
+        try {
+            int max = Integer.parseInt(value);
+            return Math.max(0, max); // Ensure non-negative
+        } catch (NumberFormatException e) {
+            System.err.println("[NetworkDebugConfig] Invalid max log files: " + value + ", using default " + DEFAULT_MAX_LOG_FILES);
+            return DEFAULT_MAX_LOG_FILES;
+        }
+    }
+
+    /**
+     * Check if automatic log cleanup is enabled.
+     * When enabled, old log files are deleted when the max log limit is exceeded.
+     *
+     * @return true if log cleanup should be performed
+     */
+    public static boolean isLogCleanupEnabled() {
+        loadConfig();
+        String value = config.getProperty("debug.logger.cleanup.enabled", String.valueOf(DEFAULT_LOG_CLEANUP_ENABLED));
+        return Boolean.parseBoolean(value);
+    }
+
+    /**
+     * Get the directory where log files should be stored.
+     * Can be an absolute or relative path. Relative paths are resolved from the working directory.
+     *
+     * @return log directory path
+     */
+    public static String getLogDirectory() {
+        loadConfig();
+        return config.getProperty("debug.logger.directory", DEFAULT_LOG_DIRECTORY);
     }
 
     /**
