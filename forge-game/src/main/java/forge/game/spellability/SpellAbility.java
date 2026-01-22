@@ -391,7 +391,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return result;
     }
 
-    public final boolean isManaAbility() {
+    @Override
+    public boolean isManaAbility() {
         // Check whether spell or ability first
         if (isSpell()) {
             return false;
@@ -402,7 +403,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return false; //Loyalty ability, not a mana ability.
         }
         // CR 605.1b
-        if (isTrigger() && this.getTrigger().getMode() != TriggerType.TapsForMana && this.getTrigger().getMode() != TriggerType.ManaAdded) {
+        if (isTrigger() && !TriggerType.TapsForMana.equals(getTrigger().getMode()) && !TriggerType.ManaAdded.equals(getTrigger().getMode())) {
+            return false;
+        }
+        if (!isActivatedAbility()) {
             return false;
         }
 
