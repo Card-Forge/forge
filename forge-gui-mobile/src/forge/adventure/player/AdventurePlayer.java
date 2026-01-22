@@ -205,7 +205,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public void setSelectedDeckSlot(int slot, boolean switchLoadout) {
         if (slot >= 0 && slot < getDeckCount()) {
-            if (switchLoadout && slot != selectedDeckIndex) {
+            boolean bindLoadouts = Config.instance().getSettingData().bindEquipmentLoadoutsToDecks;
+            if (switchLoadout && bindLoadouts && slot != selectedDeckIndex) {
                 // Save current loadout to old deck
                 deckLoadouts.put(selectedDeckIndex, new HashMap<>(equippedItems));
 
