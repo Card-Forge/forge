@@ -48,6 +48,8 @@ public class NetConnectUtil {
 
         server.startServer(port);
         server.setLobby(lobby);
+        String sessionId = NetworkDebugLogger.generateSessionId();
+        NetworkDebugLogger.log("[NetworkRole] ========== HOST (port %d) Session=%s ==========", port, sessionId);
 
         lobby.setListener(new IUpdateable() {
             @Override
@@ -185,6 +187,9 @@ public class NetConnectUtil {
 
         try {
             client.connect();
+            // Generate a local session ID for the client log (host session ID would need protocol change to share)
+            String sessionId = NetworkDebugLogger.generateSessionId();
+            NetworkDebugLogger.log("[NetworkRole] ========== CLIENT (%s:%d) Session=%s ==========", hostname, port, sessionId);
         }
         catch (Exception ex) {
             //return a message to close the connection so we will not crash...

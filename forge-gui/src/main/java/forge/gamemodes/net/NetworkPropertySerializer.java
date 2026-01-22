@@ -228,26 +228,28 @@ public final class NetworkPropertySerializer {
             Map<TrackableProperty, Object> csvProps = csv.getProps();
             if (csvProps != null && !csvProps.isEmpty()) {
                 nts.write(csvProps.size());
-                debugLog("[CSV-Serialize] Start at byte %d, ID=%d, state=%s, propCount=%d",
-                        startPos, csv.getId(), stateName, csvProps.size());
+                // Collect property names for summary logging
+                StringBuilder propNames = new StringBuilder();
+                int propCount = 0;
                 for (Map.Entry<TrackableProperty, Object> entry : csvProps.entrySet()) {
-                    int propStartPos = nts.getBytesWritten();
                     nts.write(entry.getKey().ordinal());
                     serialize(nts, entry.getKey(), entry.getValue());  // recursive
-                    if (DEBUG_CSV_SERIALIZATION) {
-                        int propBytes = nts.getBytesWritten() - propStartPos;
-                        debugLog("[CSV-Serialize]   Prop %s (ord=%d): %d bytes, type=%s",
-                                entry.getKey(), entry.getKey().ordinal(), propBytes, entry.getKey().getType());
+                    if (propCount < 5) {  // Show first 5 property names
+                        if (propCount > 0) propNames.append(", ");
+                        propNames.append(entry.getKey().name());
                     }
+                    propCount++;
                 }
+                if (propCount > 5) {
+                    propNames.append(", ...");
+                }
+                int totalBytes = nts.getBytesWritten() - startPos;
+                debugLog("[CSV-Serialize] CardStateView ID=%d state=%s: %d props (%s), %d bytes",
+                        csv.getId(), stateName, csvProps.size(), propNames, totalBytes);
             } else {
                 nts.write(0);
-                debugLog("[CSV-Serialize] Start at byte %d, ID=%d, state=%s, propCount=0",
-                        startPos, csv.getId(), stateName);
-            }
-            if (DEBUG_CSV_SERIALIZATION) {
-                int totalBytes = nts.getBytesWritten() - startPos;
-                debugLog("[CSV-Serialize] Total bytes for CSV ID=%d: %d", csv.getId(), totalBytes);
+                debugLog("[CSV-Serialize] CardStateView ID=%d state=%s: 0 props",
+                        csv.getId(), stateName);
             }
         }
         // StackItemView - skip, will be synced via full state
@@ -457,10 +459,10 @@ public final class NetworkPropertySerializer {
             CardStateName csvState = CardStateName.valueOf(stateName);
             int propCount = ntd.readInt();
 
-            debugLog("[CSV-Deserialize] Start at byte %d, ID=%d, state=%s, propCount=%d",
-                    startPos, csvId, stateName, propCount);
-
             Map<TrackableProperty, Object> props = new HashMap<>();
+            StringBuilder propNames = new StringBuilder();
+            int propsLogged = 0;
+
             for (int i = 0; i < propCount; i++) {
                 int propStartPos = ntd.getBytesRead();
                 int ordinal = ntd.readInt();
@@ -480,17 +482,20 @@ public final class NetworkPropertySerializer {
                 Object propValue = deserialize(ntd, csvProp, null);
                 props.put(csvProp, propValue);
 
-                if (DEBUG_CSV_SERIALIZATION) {
-                    int propBytes = ntd.getBytesRead() - propStartPos;
-                    debugLog("[CSV-Deserialize]   Prop %s (ord=%d): %d bytes, type=%s",
-                            csvProp, ordinal, propBytes, csvProp.getType());
+                // Collect property names for summary (first 5 only)
+                if (propsLogged < 5) {
+                    if (propsLogged > 0) propNames.append(", ");
+                    propNames.append(csvProp.name());
+                    propsLogged++;
                 }
             }
 
-            if (DEBUG_CSV_SERIALIZATION) {
-                int totalBytes = ntd.getBytesRead() - startPos;
-                debugLog("[CSV-Deserialize] Total bytes for CSV ID=%d: %d", csvId, totalBytes);
+            if (propCount > 5) {
+                propNames.append(", ...");
             }
+            int totalBytes = ntd.getBytesRead() - startPos;
+            debugLog("[CSV-Deserialize] CardStateView ID=%d state=%s: %d props (%s), %d bytes",
+                    csvId, stateName, propCount, propNames, totalBytes);
 
             // Return as CardStateViewData to be handled by applyDeltaToObject
             return new CardStateViewData(csvId, csvState, props);

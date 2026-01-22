@@ -47,7 +47,7 @@ The following core files have been modified for network functionality:
 
 These features are **deeply integrated** with the game state management system, making isolation from core classes challenging.
 
-If the Master branch team determines that the architectural overlap needs to be addressed, **[NETWORK_ARCHITECTURE.md](NETWORK_ARCHITECTURE.md)** provides potential NetworkPlay refactoring strategies that could be considered.
+If the Master branch team determines that the architectural overlap needs to be addressed, **[REFACTOR_OPTIONS.md](REFACTOR_OPTIONS.md)** provides potential NetworkPlay refactoring strategies that could be considered.
 
 ---
 

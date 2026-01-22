@@ -555,20 +555,28 @@ public final class FServerManager {
 
             // Cancel any pending replies immediately to unblock game thread
             // This must happen before we process the disconnect to prevent blocking
-            System.out.println("[DEBUG] Canceling pending replies for disconnected client");
+            NetworkDebugLogger.log("[Disconnect] Canceling pending replies for disconnected client");
             client.cancelPendingReplies();
 
             final String username = client.getUsername();
             final int playerIndex = client.getIndex();
 
+            NetworkDebugLogger.log("[Disconnect] Client disconnected: index=%d, username=%s", playerIndex, username);
+            NetworkDebugLogger.log("[Disconnect] currentGameSession=%s, isGameInProgress=%b",
+                    currentGameSession != null ? "exists" : "null",
+                    currentGameSession != null && currentGameSession.isGameInProgress());
+
             // Check if there's an active game session that supports reconnection
             if (currentGameSession != null && currentGameSession.isGameInProgress()) {
                 // Mark player as disconnected but don't remove from game
-                System.out.println("[DEBUG] Marking player " + playerIndex + " (" + username + ") as disconnected");
+                NetworkDebugLogger.log("[Disconnect] Marking player %d (%s) as disconnected in game session", playerIndex, username);
                 currentGameSession.markPlayerDisconnected(playerIndex);
                 PlayerSession ps = currentGameSession.getPlayerSession(playerIndex);
                 if (ps != null) {
-                    System.out.println("[DEBUG] After marking: isDisconnected=" + ps.isDisconnected() + ", state=" + ps.getConnectionState());
+                    NetworkDebugLogger.log("[Disconnect] After marking: isDisconnected=%b, state=%s",
+                            ps.isDisconnected(), ps.getConnectionState());
+                } else {
+                    NetworkDebugLogger.warn("[Disconnect] PlayerSession is NULL for index %d - player was not registered!", playerIndex);
                 }
 
                 // Pause the game and notify other players
@@ -600,12 +608,12 @@ public final class FServerManager {
      */
     public GameSession createGameSession() {
         currentGameSession = new GameSession();
-        System.out.println("[GameSession] Creating game session, registering " + clients.size() + " remote clients");
+        NetworkDebugLogger.log("[GameSession] Creating game session, registering %d remote clients", clients.size());
         // Register all current players
         for (RemoteClient client : clients.values()) {
             PlayerSession playerSession = currentGameSession.registerPlayer(client.getIndex());
             playerSession.setPlayerName(client.getUsername());
-            System.out.println("[GameSession] Registered player index=" + client.getIndex() + ", name=" + client.getUsername());
+            NetworkDebugLogger.log("[GameSession] Registered player index=%d, name=%s", client.getIndex(), client.getUsername());
         }
         return currentGameSession;
     }
@@ -622,8 +630,8 @@ public final class FServerManager {
      * Mark the current game session as in progress.
      */
     public void setGameInProgress(boolean inProgress) {
-        System.out.println("[GameSession] setGameInProgress(" + inProgress + "), currentGameSession=" +
-                (currentGameSession != null ? "exists" : "null"));
+        NetworkDebugLogger.log("[GameSession] setGameInProgress(%b), currentGameSession=%s",
+                inProgress, currentGameSession != null ? "exists" : "null");
         if (currentGameSession != null) {
             currentGameSession.setGameInProgress(inProgress);
         }
@@ -821,7 +829,10 @@ public final class FServerManager {
             return false;
         }
 
+        NetworkDebugLogger.log("[HostCommand] Received command: %s", message);
+
         if (message.startsWith("/skipreconnect")) {
+            NetworkDebugLogger.log("[HostCommand] Processing /skipreconnect command");
             handleSkipReconnectCommandInternal(message);
             return true;
         }
@@ -837,13 +848,15 @@ public final class FServerManager {
         // Parse command: /skipreconnect <playerName> or just /skipreconnect (for first disconnected player)
         String[] parts = message.trim().split("\\s+", 2);
 
-        System.out.println("[DEBUG] /skipreconnect command received: " + message);
-        System.out.println("[DEBUG] currentGameSession=" + (currentGameSession != null ? "exists" : "null"));
+        NetworkDebugLogger.log("[/skipreconnect] Command received: %s", message);
+        NetworkDebugLogger.log("[/skipreconnect] currentGameSession=%s", currentGameSession != null ? "exists" : "null");
         if (currentGameSession != null) {
-            System.out.println("[DEBUG] isGameInProgress=" + currentGameSession.isGameInProgress());
+            NetworkDebugLogger.log("[/skipreconnect] isGameInProgress=%b, isPaused=%b",
+                    currentGameSession.isGameInProgress(), currentGameSession.isPaused());
         }
 
         if (currentGameSession == null || !currentGameSession.isGameInProgress()) {
+            NetworkDebugLogger.warn("[/skipreconnect] No active game session - command ignored");
             broadcast(new MessageEvent("No active game session."));
             return;
         }
@@ -857,46 +870,48 @@ public final class FServerManager {
         int targetIndex = -1;
         String targetUsername = null;
 
-        if (targetPlayerName != null) {
-            // Find specific player by name
-            for (int i = 0; i < 8; i++) {
-                PlayerSession playerSession = currentGameSession.getPlayerSession(i);
-                if (playerSession != null && playerSession.isDisconnected()) {
+        NetworkDebugLogger.log("[/skipreconnect] Searching for disconnected players (target=%s)...",
+                targetPlayerName != null ? targetPlayerName : "first disconnected");
+
+        for (int i = 0; i < 8; i++) {
+            PlayerSession playerSession = currentGameSession.getPlayerSession(i);
+            if (playerSession != null) {
+                NetworkDebugLogger.log("[/skipreconnect] Player %d: name=%s, isDisconnected=%b, state=%s",
+                        i, playerSession.getPlayerName(), playerSession.isDisconnected(),
+                        playerSession.getConnectionState());
+
+                if (playerSession.isDisconnected()) {
                     String playerName = playerSession.getPlayerName();
-                    if (playerName != null && playerName.equalsIgnoreCase(targetPlayerName)) {
+                    // If looking for specific player, check name match
+                    if (targetPlayerName != null) {
+                        if (playerName != null && playerName.equalsIgnoreCase(targetPlayerName)) {
+                            targetIndex = i;
+                            targetUsername = playerName;
+                            break;
+                        }
+                    } else {
+                        // First disconnected player
                         targetIndex = i;
                         targetUsername = playerName;
                         break;
                     }
                 }
             }
-        } else {
-            // Find first disconnected player
-            System.out.println("[DEBUG] Searching for disconnected players...");
-            for (int i = 0; i < 8; i++) {
-                PlayerSession playerSession = currentGameSession.getPlayerSession(i);
-                if (playerSession != null) {
-                    System.out.println("[DEBUG] Player " + i + ": name=" + playerSession.getPlayerName() +
-                            ", isDisconnected=" + playerSession.isDisconnected() +
-                            ", state=" + playerSession.getConnectionState());
-                }
-                if (playerSession != null && playerSession.isDisconnected()) {
-                    targetIndex = i;
-                    targetUsername = playerSession.getPlayerName();
-                    break;
-                }
-            }
         }
 
         if (targetIndex == -1) {
             if (targetPlayerName != null) {
+                NetworkDebugLogger.warn("[/skipreconnect] No disconnected player found with name '%s'", targetPlayerName);
                 broadcast(new MessageEvent(String.format("No disconnected player found with name '%s'.", targetPlayerName)));
             } else {
+                NetworkDebugLogger.warn("[/skipreconnect] No disconnected players found in session");
                 broadcast(new MessageEvent("No disconnected players found."));
             }
             return;
         }
 
+        NetworkDebugLogger.log("[/skipreconnect] Found disconnected player: index=%d, name=%s - initiating AI takeover",
+                targetIndex, targetUsername);
         // Cancel the timeout timer and immediately convert to AI
         skipReconnectionTimeout(targetIndex, targetUsername);
     }

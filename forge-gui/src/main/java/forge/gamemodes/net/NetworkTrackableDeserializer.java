@@ -97,15 +97,15 @@ public class NetworkTrackableDeserializer {
             return null;
         }
         if (tracker == null) {
-            System.err.println("[NetworkDeserializer] Warning: Tracker is null, cannot resolve object ID " + id);
+            NetworkDebugLogger.warn("[NetworkDeserializer] Tracker is null, cannot resolve object ID %d", id);
             return null;
         }
         T obj = tracker.getObj(type, id);
         if (obj == null) {
             // Object not yet in tracker - this can happen if it's a new object
             // that will be created from a full state sync
-            System.err.println("[NetworkDeserializer] Warning: Object not found in Tracker: type=" +
-                    type.getClass().getSimpleName() + ", id=" + id);
+            NetworkDebugLogger.warn("[NetworkDeserializer] Object not found in Tracker: type=%s, id=%d",
+                    type.getClass().getSimpleName(), id);
         }
         return obj;
     }

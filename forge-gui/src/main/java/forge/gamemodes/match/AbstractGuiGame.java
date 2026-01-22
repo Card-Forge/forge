@@ -1008,14 +1008,19 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             return;
         }
 
+        long startTime = System.currentTimeMillis();
+
         Tracker tracker = gameView.getTracker();
         if (tracker == null) {
             NetworkDebugLogger.error("[DeltaSync] Cannot apply delta: Tracker is null");
             return;
         }
 
-        // Debug: Log what PlayerViews are in the tracker at start
-        NetworkDebugLogger.log("[DeltaSync] === START applyDelta seq=%d ===", packet.getSequenceNumber());
+        // Log with game context for easier correlation
+        String activePlayerName = gameView.getPlayerTurn() != null ? gameView.getPlayerTurn().getName() : "?";
+        String phaseName = gameView.getPhase() != null ? gameView.getPhase().name() : "?";
+        NetworkDebugLogger.log("[DeltaSync] === START applyDelta seq=%d (Turn %d, %s, Active=%s) ===",
+                packet.getSequenceNumber(), gameView.getTurn(), phaseName, activePlayerName);
         if (gameView.getPlayers() != null) {
             for (PlayerView pv : gameView.getPlayers()) {
                 PlayerView inTracker = tracker.getObj(TrackableTypes.PlayerViewType, pv.getId());
@@ -1131,27 +1136,32 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             pendingZoneUpdates.clear();
         }
 
-        // Log summary
+        // Log summary with timing
+        long elapsed = System.currentTimeMillis() - startTime;
         if (newObjectCount > 0 || appliedCount > 0 || skippedCount > 0) {
-            NetworkDebugLogger.log("[DeltaSync] Summary: %d new objects, %d deltas applied, %d skipped",
-                    newObjectCount, appliedCount, skippedCount);
+            NetworkDebugLogger.log("[DeltaSync] === END seq=%d (%dms, %d new, %d deltas, %d skipped) ===",
+                    packet.getSequenceNumber(), elapsed, newObjectCount, appliedCount, skippedCount);
+        } else {
+            NetworkDebugLogger.log("[DeltaSync] === END seq=%d (%dms, no changes) ===",
+                    packet.getSequenceNumber(), elapsed);
         }
 
-        // Validate checksum if present (every 10 packets)
+        // Validate checksum if present (every 20 packets)
         if (packet.hasChecksum()) {
             int serverChecksum = packet.getChecksum();
             int clientChecksum = computeStateChecksum(gameView);
 
             if (serverChecksum != clientChecksum) {
-                NetworkDebugLogger.error("[DeltaSync] CHECKSUM MISMATCH! Server=%d, Client=%d at sequence=%d",
+                NetworkDebugLogger.error("[DeltaSync] CHECKSUM MISMATCH! Server=%d, Client=%d at seq=%d",
                         serverChecksum, clientChecksum, packet.getSequenceNumber());
-                NetworkDebugLogger.error("[DeltaSync] State desynchronization detected - requesting full state resync");
+                // Log detailed comparison to identify what differs
+                logChecksumDetails(gameView, packet);
 
                 // Automatically request full state resync to recover
                 requestFullStateResync();
                 return; // Don't send ack for corrupted state
             } else {
-                NetworkDebugLogger.log("[DeltaSync] Checksum validated successfully (seq=%d, checksum=%d)",
+                NetworkDebugLogger.log("[DeltaSync] Checksum OK (seq=%d, checksum=%d)",
                         packet.getSequenceNumber(), serverChecksum);
             }
         }
@@ -1181,6 +1191,28 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             }
         }
         return hash;
+    }
+
+    /**
+     * Log detailed checksum comparison to help identify what differs.
+     * Called when checksum mismatch is detected.
+     */
+    private void logChecksumDetails(GameView gameView, DeltaPacket packet) {
+        NetworkDebugLogger.error("[DeltaSync] Checksum details (client state):");
+        NetworkDebugLogger.error("[DeltaSync]   GameView ID: %d", gameView.getId());
+        NetworkDebugLogger.error("[DeltaSync]   Turn: %d", gameView.getTurn());
+        NetworkDebugLogger.error("[DeltaSync]   Phase: %s", gameView.getPhase() != null ? gameView.getPhase().name() : "null");
+        if (gameView.getPlayers() != null) {
+            for (PlayerView player : gameView.getPlayers()) {
+                int handSize = player.getHand() != null ? player.getHand().size() : 0;
+                int graveyardSize = player.getGraveyard() != null ? player.getGraveyard().size() : 0;
+                int battlefieldSize = player.getBattlefield() != null ? player.getBattlefield().size() : 0;
+                NetworkDebugLogger.error("[DeltaSync]   Player %d (%s): Life=%d, Hand=%d, GY=%d, BF=%d",
+                        player.getId(), player.getName(), player.getLife(),
+                        handSize, graveyardSize, battlefieldSize);
+            }
+        }
+        NetworkDebugLogger.error("[DeltaSync] Compare with server state in host log at seq=%d", packet.getSequenceNumber());
     }
 
     /**
@@ -1267,8 +1299,23 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         if (obj != null) {
             // Apply all properties to the new object
             applyDeltaToObject(obj, fullProps, tracker);
-            NetworkDebugLogger.debug("[DeltaSync] Created %s ID=%d",
-                    obj.getClass().getSimpleName(), obj.getId());
+
+            // Log with object name for easier identification
+            String objDesc = obj.getClass().getSimpleName() + " ID=" + obj.getId();
+            if (obj instanceof CardView) {
+                CardView cv = (CardView) obj;
+                String cardName = cv.getName();
+                if (cardName != null && !cardName.isEmpty()) {
+                    objDesc += " \"" + cardName + "\"";
+                }
+            } else if (obj instanceof PlayerView) {
+                PlayerView pv = (PlayerView) obj;
+                String playerName = pv.getName();
+                if (playerName != null && !playerName.isEmpty()) {
+                    objDesc += " \"" + playerName + "\"";
+                }
+            }
+            NetworkDebugLogger.debug("[DeltaSync] Created %s", objDesc);
         }
     }
 

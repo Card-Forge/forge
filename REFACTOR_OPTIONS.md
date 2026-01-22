@@ -507,7 +507,7 @@ return () -> {
     // Local games: Unaffected (onGameStarted typically no-op)
     //
     // See: BRANCH_DOCUMENTATION.md#reconnection-support
-    //      NETWORK_ARCHITECTURE.md for details
+    //      REFACTOR_OPTIONS.md for details
     //
     // DO NOT REORDER without testing network reconnection!
     // ═══════════════════════════════════════════════════════════════════

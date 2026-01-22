@@ -64,6 +64,9 @@ public final class NetworkDebugLogger {
 
     private static final SimpleDateFormat TIMESTAMP_FORMAT = new SimpleDateFormat("HH:mm:ss.SSS");
 
+    // Session identifier for correlating host/client logs
+    private static String sessionId = null;
+
     // Apply configuration from NetworkDebug.config on class load
     static {
         applyConfig();
@@ -129,6 +132,34 @@ public final class NetworkDebugLogger {
      */
     public static LogLevel getFileLevel() {
         return fileLevel;
+    }
+
+    /**
+     * Generate a new session ID for correlating host/client logs.
+     * Should be called by the host when starting a session, and the ID
+     * should be shared with clients.
+     * @return the generated session ID (6 hex characters)
+     */
+    public static String generateSessionId() {
+        // Generate a short random hex string for easy identification
+        sessionId = String.format("%06x", new java.util.Random().nextInt(0xFFFFFF));
+        return sessionId;
+    }
+
+    /**
+     * Set the session ID (used by clients receiving the ID from host).
+     * @param id the session ID to set
+     */
+    public static void setSessionId(String id) {
+        sessionId = id;
+    }
+
+    /**
+     * Get the current session ID, or null if not set.
+     * @return the session ID
+     */
+    public static String getSessionId() {
+        return sessionId;
     }
 
     /**
