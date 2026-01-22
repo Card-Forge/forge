@@ -184,9 +184,14 @@ public class DeltaSyncManager {
         return packet;
     }
 
-    // Special key for GameView deltas to avoid ID collision with PlayerViews
-    // Uses Integer.MIN_VALUE as a reserved key that won't conflict with normal object IDs
+    // Special keys for delta packets to avoid ID collisions between different object types
+    // GameView uses Integer.MIN_VALUE as a reserved key
     public static final int GAMEVIEW_DELTA_KEY = Integer.MIN_VALUE;
+
+    // PlayerView uses an offset range to avoid colliding with CardView IDs
+    // PlayerViews typically have IDs 0-7 (max 8 players), so we use MIN_VALUE + 1000 as base
+    // This ensures PlayerView delta keys don't collide with CardView or GameView keys
+    public static final int PLAYERVIEW_DELTA_KEY_OFFSET = Integer.MIN_VALUE + 1000;
 
     /**
      * Collect delta for a single TrackableObject.
@@ -202,8 +207,18 @@ public class DeltaSyncManager {
         int objId = obj.getId();
         currentObjectIds.add(objId);
 
-        // Use special key for GameView to avoid ID collision with PlayerViews
-        int deltaKey = (obj instanceof GameView) ? GAMEVIEW_DELTA_KEY : objId;
+        // Use special keys to avoid ID collisions between different object types
+        // - GameView uses Integer.MIN_VALUE
+        // - PlayerView uses Integer.MIN_VALUE + 1000 + playerId
+        // - Everything else (CardView, StackItemView, etc.) uses actual objId
+        int deltaKey;
+        if (obj instanceof GameView) {
+            deltaKey = GAMEVIEW_DELTA_KEY;
+        } else if (obj instanceof PlayerView) {
+            deltaKey = PLAYERVIEW_DELTA_KEY_OFFSET + objId;
+        } else {
+            deltaKey = objId;
+        }
 
         // Check if this is a new object (not yet sent to client)
         if (!sentObjectIds.contains(objId)) {

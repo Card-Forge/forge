@@ -1065,32 +1065,47 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
         // STEP 2: Apply property deltas to existing objects
         for (Map.Entry<Integer, byte[]> entry : packet.getObjectDeltas().entrySet()) {
-            int objectId = entry.getKey();
+            int deltaKey = entry.getKey();
             byte[] deltaBytes = entry.getValue();
 
-            // Handle special GameView key (avoids ID collision with PlayerViews)
+            // Handle special delta keys to avoid ID collisions between object types
             TrackableObject obj;
-            if (objectId == DeltaSyncManager.GAMEVIEW_DELTA_KEY) {
+            int actualObjectId;
+            if (deltaKey == DeltaSyncManager.GAMEVIEW_DELTA_KEY) {
+                // Special key for GameView
                 obj = gameView;
+                actualObjectId = gameView != null ? gameView.getId() : -1;
+            } else if (deltaKey >= DeltaSyncManager.PLAYERVIEW_DELTA_KEY_OFFSET &&
+                       deltaKey < DeltaSyncManager.PLAYERVIEW_DELTA_KEY_OFFSET + 100) {
+                // Special key range for PlayerView (offset + playerId)
+                actualObjectId = deltaKey - DeltaSyncManager.PLAYERVIEW_DELTA_KEY_OFFSET;
+                obj = tracker.getObj(TrackableTypes.PlayerViewType, actualObjectId);
             } else {
-                obj = findObjectById(tracker, objectId);
+                // Normal object ID (CardView, StackItemView, etc.)
+                actualObjectId = deltaKey;
+                obj = findObjectById(tracker, actualObjectId);
             }
             if (obj != null) {
                 try {
-                    // Log if this is the GameView
+                    // Log if this is the GameView or PlayerView
                     if (obj == gameView) {
-                        NetworkDebugLogger.debug("[DeltaSync] Applying delta to GameView ID=%d, bytes=%d",
-                                objectId, deltaBytes.length);
+                        NetworkDebugLogger.debug("[DeltaSync] Applying delta to GameView ID=%d (deltaKey=%d), bytes=%d",
+                                actualObjectId, deltaKey, deltaBytes.length);
+                    } else if (obj instanceof PlayerView) {
+                        NetworkDebugLogger.debug("[DeltaSync] Applying delta to PlayerView ID=%d (deltaKey=%d), bytes=%d",
+                                actualObjectId, deltaKey, deltaBytes.length);
                     }
                     applyDeltaToObject(obj, deltaBytes, tracker);
                     appliedCount++;
                 } catch (Exception e) {
-                    NetworkDebugLogger.error("[DeltaSync] Error applying delta to object " + objectId, e);
+                    NetworkDebugLogger.error("[DeltaSync] Error applying delta to object ID=%d (deltaKey=%d)", actualObjectId, deltaKey);
+                    NetworkDebugLogger.error("[DeltaSync] Exception details:", e);
                     skippedCount++;
                 }
             } else {
                 // Object not found - this shouldn't happen if new objects were created first
-                NetworkDebugLogger.warn("[DeltaSync] Object ID %d NOT FOUND for delta application", objectId);
+                NetworkDebugLogger.warn("[DeltaSync] Object ID=%d (deltaKey=%d) NOT FOUND for delta application",
+                        actualObjectId, deltaKey);
                 skippedCount++;
             }
         }
@@ -1268,11 +1283,15 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     /**
      * Find a TrackableObject by ID in the Tracker.
      * Searches through known object types (CardView, PlayerView, etc.)
-     * IMPORTANT: GameView must be checked FIRST because it may have the same ID as a PlayerView
+     *
+     * Note: GameView and PlayerView are handled separately via special delta keys to avoid ID collisions:
+     * - GameView uses GAMEVIEW_DELTA_KEY (Integer.MIN_VALUE)
+     * - PlayerView uses PLAYERVIEW_DELTA_KEY_OFFSET + playerId (Integer.MIN_VALUE + 1000 + id)
+     * - This prevents collisions when GameView id=1, PlayerView id=1, and CardView id=1 all exist
      */
     private TrackableObject findObjectById(Tracker tracker, int objectId) {
-        // Note: GameView is handled separately via GAMEVIEW_DELTA_KEY to avoid ID collision
-        // with PlayerViews (both can have ID=1)
+        // Note: This method is called for normal objects (CardView, StackItemView, etc.)
+        // GameView and PlayerView deltas are handled separately in applyDelta() via special keys
 
         // Try CardView (most common)
         TrackableObject obj = tracker.getObj(TrackableTypes.CardViewType, objectId);
