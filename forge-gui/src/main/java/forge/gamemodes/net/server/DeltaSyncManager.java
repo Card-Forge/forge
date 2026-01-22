@@ -112,7 +112,7 @@ public class DeltaSyncManager {
 
         // Collect changes from GameView itself - always log for debugging
         boolean gvHasChanges = gameView.hasChanges();
-        boolean gvIsSent = sentObjectIds.contains(gameView.getId());
+        boolean gvIsSent = sentObjectIds.contains(makeDeltaKey(DeltaPacket.TYPE_GAME_VIEW, gameView.getId()));
         NetworkDebugLogger.debug("[DeltaSync] collectDeltas: GameView ID=%d, hasChanges=%b, isSent=%b, phase=%s",
                 gameView.getId(), gvHasChanges, gvIsSent, gameView.getPhase());
         if (gvHasChanges) {
@@ -154,6 +154,8 @@ public class DeltaSyncManager {
         if (packetsSinceLastChecksum >= CHECKSUM_INTERVAL) {
             checksum = computeStateChecksum(gameView);
             packetsSinceLastChecksum = 0;
+            // Log checksum details for debugging mismatches (compare with client log)
+            logChecksumDetails(gameView, checksum, sequenceNumber.get() + 1);
         }
 
         // Now do bookkeeping operations
@@ -252,19 +254,22 @@ public class DeltaSyncManager {
         }
 
         int objId = obj.getId();
-        currentObjectIds.add(objId);
 
         // Create composite delta key that includes object type to prevent ID collisions
         // E.g., CardView id=5 and StackItemView id=5 won't collide anymore
         int objType = getObjectType(obj);
         int deltaKey = makeDeltaKey(objType, objId);
 
+        // Track current objects using composite key to prevent type collisions
+        currentObjectIds.add(deltaKey);
+
         // Check if this is a new object (not yet sent to client)
-        if (!sentObjectIds.contains(objId)) {
+        // Use composite key for sentObjectIds to prevent ID collisions between types
+        if (!sentObjectIds.contains(deltaKey)) {
             // New object - serialize ALL properties
             NewObjectData newObjData = serializeNewObject(obj);
             if (newObjData != null) {
-                newObjects.put(objId, newObjData);
+                newObjects.put(deltaKey, newObjData);
             }
         } else if (obj.hasChanges()) {
             // Existing object with changes - serialize only changed properties
@@ -285,7 +290,7 @@ public class DeltaSyncManager {
         }
 
         // Debug: log player state before collecting
-        boolean isSent = sentObjectIds.contains(player.getId());
+        boolean isSent = sentObjectIds.contains(makeDeltaKey(DeltaPacket.TYPE_PLAYER_VIEW, player.getId()));
         boolean hasChanges = player.hasChanges();
         int handSize = player.getHand() != null ? player.getHand().size() : 0;
         Set<TrackableProperty> changedProps = player.getChangedProps();
@@ -499,7 +504,7 @@ public class DeltaSyncManager {
             return;
         }
 
-        sentObjectIds.add(gameView.getId());
+        sentObjectIds.add(makeDeltaKey(DeltaPacket.TYPE_GAME_VIEW, gameView.getId()));
 
         if (gameView.getPlayers() != null) {
             for (PlayerView player : gameView.getPlayers()) {
@@ -509,12 +514,12 @@ public class DeltaSyncManager {
 
         if (gameView.getStack() != null) {
             for (StackItemView stackItem : gameView.getStack()) {
-                sentObjectIds.add(stackItem.getId());
+                sentObjectIds.add(makeDeltaKey(DeltaPacket.TYPE_STACK_ITEM_VIEW, stackItem.getId()));
             }
         }
 
         if (gameView.getCombat() != null) {
-            sentObjectIds.add(gameView.getCombat().getId());
+            sentObjectIds.add(makeDeltaKey(DeltaPacket.TYPE_COMBAT_VIEW, gameView.getCombat().getId()));
         }
 
         NetworkDebugLogger.log("[DeltaSync] Marked %d objects as sent after full state sync", sentObjectIds.size());
@@ -525,7 +530,7 @@ public class DeltaSyncManager {
             return;
         }
 
-        sentObjectIds.add(player.getId());
+        sentObjectIds.add(makeDeltaKey(DeltaPacket.TYPE_PLAYER_VIEW, player.getId()));
 
         markCardsAsSent(player.getHand());
         markCardsAsSent(player.getGraveyard());
@@ -555,7 +560,7 @@ public class DeltaSyncManager {
         if (card == null) {
             return;
         }
-        sentObjectIds.add(card.getId());
+        sentObjectIds.add(makeDeltaKey(DeltaPacket.TYPE_CARD_VIEW, card.getId()));
         if (card.getAttachedCards() != null) {
             for (CardView attached : card.getAttachedCards()) {
                 markCardAsSent(attached);
@@ -580,6 +585,28 @@ public class DeltaSyncManager {
             }
         }
         return hash;
+    }
+
+    /**
+     * Log detailed checksum information for debugging mismatches.
+     * This mirrors the client-side logChecksumDetails for comparison.
+     */
+    private void logChecksumDetails(GameView gameView, int checksum, long seq) {
+        NetworkDebugLogger.log("[DeltaSync] Checksum for seq=%d: %d", seq, checksum);
+        NetworkDebugLogger.log("[DeltaSync] Checksum details (server state):");
+        NetworkDebugLogger.log("[DeltaSync]   GameView ID: %d", gameView.getId());
+        NetworkDebugLogger.log("[DeltaSync]   Turn: %d", gameView.getTurn());
+        NetworkDebugLogger.log("[DeltaSync]   Phase: %s", gameView.getPhase() != null ? gameView.getPhase().name() : "null");
+        if (gameView.getPlayers() != null) {
+            for (PlayerView player : gameView.getPlayers()) {
+                int handSize = player.getHand() != null ? player.getHand().size() : 0;
+                int graveyardSize = player.getGraveyard() != null ? player.getGraveyard().size() : 0;
+                int battlefieldSize = player.getBattlefield() != null ? player.getBattlefield().size() : 0;
+                NetworkDebugLogger.log("[DeltaSync]   Player %d (%s): Life=%d, Hand=%d, GY=%d, BF=%d",
+                        player.getId(), player.getName(), player.getLife(),
+                        handSize, graveyardSize, battlefieldSize);
+            }
+        }
     }
 
     /**
