@@ -570,13 +570,16 @@ public class DeltaSyncManager {
 
     /**
      * Compute a checksum for the current game state.
+     * IMPORTANT: Only use value-based fields here, not identity-based hashCode().
+     * Server and client are separate JVMs, so Object.hashCode() will differ.
      */
     private int computeStateChecksum(GameView gameView) {
         int hash = 17;
         hash = 31 * hash + gameView.getId();
         hash = 31 * hash + gameView.getTurn();
         if (gameView.getPhase() != null) {
-            hash = 31 * hash + gameView.getPhase().hashCode();
+            // Use ordinal() not hashCode() - ordinal is consistent across JVMs
+            hash = 31 * hash + gameView.getPhase().ordinal();
         }
         if (gameView.getPlayers() != null) {
             for (PlayerView player : gameView.getPlayers()) {

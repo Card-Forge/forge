@@ -1176,13 +1176,16 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     /**
      * Compute a checksum of the current game state for validation.
      * Uses the same algorithm as the server for consistency.
+     * IMPORTANT: Only use value-based fields here, not identity-based hashCode().
+     * Server and client are separate JVMs, so Object.hashCode() will differ.
      */
     private int computeStateChecksum(GameView gameView) {
         int hash = 17;
         hash = 31 * hash + gameView.getId();
         hash = 31 * hash + gameView.getTurn();
         if (gameView.getPhase() != null) {
-            hash = 31 * hash + gameView.getPhase().hashCode();
+            // Use ordinal() not hashCode() - ordinal is consistent across JVMs
+            hash = 31 * hash + gameView.getPhase().ordinal();
         }
         if (gameView.getPlayers() != null) {
             for (PlayerView player : gameView.getPlayers()) {
