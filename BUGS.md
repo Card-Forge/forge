@@ -50,7 +50,7 @@ Host computes checksum from server-side GameView while client computes from its 
 | 1 | /skipreconnect AI takeover not working | NetworkPlay | Race condition fix: reorder operations to replace controller before clearing inputs | ea49b699e4 |
 | 2 | Phase marker not updating on client | NetworkPlay | Fixed delta sync to track phase changes | - |
 | 3 | Client hand not visible during mulligan | NetworkPlay | Changed GAMEVIEW_DELTA_KEY from 0 to Integer.MIN_VALUE to avoid ID collision | f06d2da2a7 |
-| 4 | Collection deserialization fails to find object id=1 | NetworkPlay | Implemented composite delta keys throughout: (1) DeltaPacket maps, (2) sentObjectIds tracking, (3) currentObjectIds, (4) newObjects map | TBD |
+| 4 | Collection deserialization fails to find object id=1 | NetworkPlay | Implemented composite delta keys throughout + fixed client-side type-specific lookup in createObjectFromData | TBD |
 
 ---
 

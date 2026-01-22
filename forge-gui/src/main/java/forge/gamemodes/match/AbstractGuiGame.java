@@ -1248,8 +1248,10 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             case DeltaPacket.TYPE_GAME_VIEW: typeName = "GameView"; break;
         }
 
-        // Check if object already exists (shouldn't happen, but be safe)
-        TrackableObject existing = findObjectById(tracker, objectId);
+        // Check if object of the SAME TYPE already exists
+        // Important: Use type-specific lookup to avoid ID collision between different types
+        // (e.g., CardView ID=1 vs PlayerView ID=1 are different objects)
+        TrackableObject existing = findObjectByTypeAndId(tracker, objectType, objectId);
         if (existing != null) {
             NetworkDebugLogger.debug("[DeltaSync] %s ID=%d already exists (hash=%d), applying properties as delta",
                     typeName, objectId, System.identityHashCode(existing));
