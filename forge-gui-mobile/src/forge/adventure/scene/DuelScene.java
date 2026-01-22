@@ -118,9 +118,8 @@ public class DuelScene extends ForgeScene {
                     Current.player().addCard(card);
                 }
                 for (PaperCard card : anteResult.lostCards) {
-                    int remaining = Current.player().getCards().count(card) - 1;
-                    // Clean up existing decks to remove
-                    Current.player().removeLostCardFromPools(card, remaining);
+                    // We could clean this up by trying to combine all the lostCards into a mapping, but good enough for now
+                    Current.player().removeLostCardFromPools(card);
                 }
             }
         } catch (Exception e) {
