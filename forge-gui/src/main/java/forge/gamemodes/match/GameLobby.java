@@ -525,7 +525,27 @@ public abstract class GameLobby implements IHasGameType {
 
         //if above checks succeed, return runnable that can be used to finish starting game
         return () -> {
-            // Create game session BEFORE starting match so session credentials can be sent during openView()
+            // ═══════════════════════════════════════════════════════════════════════════════
+            // CRITICAL EXECUTION ORDER FOR NETWORK GAMES
+            // ═══════════════════════════════════════════════════════════════════════════════
+            //
+            // onGameStarted() MUST be called BEFORE hostedMatch.startMatch()
+            //
+            // Why: Network games require GameSession to exist before sending initial state
+            //      packets to clients. The GameSession is created in onGameStarted() and
+            //      contains session credentials needed for reconnection support.
+            //
+            // Flow: 1. onGameStarted() → creates GameSession (network) or no-op (local)
+            //       2. hostedMatch.startMatch() → calls openView()
+            //       3. openView() → sends FullStatePacket with session credentials (network)
+            //
+            // Impact of reordering: Clients cannot reconnect (no session credentials sent)
+            //
+            // Local games: Unaffected (onGameStarted is typically a no-op for local play)
+            //
+            // See: BRANCH_DOCUMENTATION.md#reconnection-support for details
+            // ═══════════════════════════════════════════════════════════════════════════════
+
             onGameStarted();
 
             hostedMatch = GuiBase.getInterface().hostMatch();
