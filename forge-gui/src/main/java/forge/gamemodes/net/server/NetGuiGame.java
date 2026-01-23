@@ -12,7 +12,7 @@ import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
-import forge.gamemodes.match.AbstractGuiGame;
+import forge.gamemodes.net.NetworkGuiGame;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.FullStatePacket;
 import forge.gamemodes.net.GameProtocolSender;
@@ -30,7 +30,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-public class NetGuiGame extends AbstractGuiGame {
+public class NetGuiGame extends NetworkGuiGame {
 
     private GameProtocolSender sender;
     private final DeltaSyncManager deltaSyncManager;
