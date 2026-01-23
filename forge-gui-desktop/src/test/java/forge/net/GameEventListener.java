@@ -101,7 +101,9 @@ public class GameEventListener {
     @Subscribe
     public void handleTurnBegan(GameEventTurnBegan event) {
         currentTurn = event.turnNumber();
-        NetworkDebugLogger.log("%s Turn %d began - %s's turn", LOG_PREFIX, currentTurn, event.turnOwner().getName());
+        if (verboseLogging) {
+            NetworkDebugLogger.log("%s Turn %d began - %s's turn", LOG_PREFIX, currentTurn, event.turnOwner().getName());
+        }
 
         if (turnBeganHandler != null) {
             try {
@@ -184,7 +186,9 @@ public class GameEventListener {
     @Subscribe
     public void handleGameFinished(GameEventGameFinished event) {
         gameFinished = true;
-        NetworkDebugLogger.log("%s Game finished", LOG_PREFIX);
+        if (verboseLogging) {
+            NetworkDebugLogger.log("%s Game finished", LOG_PREFIX);
+        }
 
         if (gameFinishedHandler != null) {
             try {
@@ -204,7 +208,9 @@ public class GameEventListener {
     public void handleGameOutcome(GameEventGameOutcome event) {
         if (event.result() != null && event.result().getWinningPlayer() != null) {
             winner = event.result().getWinningPlayer().getPlayer().getName();
-            NetworkDebugLogger.log("%s Game outcome: winner = %s", LOG_PREFIX, winner);
+            if (verboseLogging) {
+                NetworkDebugLogger.log("%s Game outcome: winner = %s", LOG_PREFIX, winner);
+            }
         }
 
         if (gameOutcomeHandler != null) {

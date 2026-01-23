@@ -138,8 +138,8 @@ public class LocalGameTestHarness {
             return;
         }
 
-        // Disable verbose logging since NetworkGameEventListener handles logging
-        GameEventListener listener = new GameEventListener().setVerboseLogging(false);
+        // Enable verbose logging for local mode since NetworkGameEventListener only registers for network games
+        GameEventListener listener = new GameEventListener().setVerboseLogging(true);
         hostedMatch.getGame().subscribeToEvents(listener);
         NetworkDebugLogger.log("[LocalGameTestHarness] Event listener registered");
     }
