@@ -377,6 +377,15 @@ public class NetworkClientTestHarness {
             }
         }
 
+        // End game session to clear reconnection state (important for sequential tests)
+        if (server != null) {
+            try {
+                server.endGameSession();
+            } catch (Exception e) {
+                // Ignore - may not have an active session
+            }
+        }
+
         // Stop server
         if (server != null && serverRunning.get()) {
             try {
@@ -386,6 +395,9 @@ public class NetworkClientTestHarness {
             }
             serverRunning.set(false);
         }
+
+        // Clear the last match reference to prevent stale data in next test
+        HeadlessGuiDesktop.clearLastMatch();
 
         // Increment port for next test
         port++;

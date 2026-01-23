@@ -33,9 +33,16 @@ Key capabilities include command-line configuration via system properties (test 
 
 ### Testing Conducted on NetworkPlay Branch
 
-The primary objective was automated validation of delta synchronization and reconnection features without manual two-instance testing. Ten tests were executed with 8 passing and 2 failing due to pre-existing deck validation issues unrelated to network infrastructure.
+The primary objective was automated validation of delta synchronization and reconnection features without manual two-instance testing. Full game completion has been verified with the remote client participating from mulligan through winner determination.
 
-Key validation results: Delta sync functionality verified with 16+ packets received showing 87-98% bandwidth savings vs full state transmission. Network client connectivity confirmed with HeadlessNetworkClient successfully connecting via TCP. Full game execution validated with 2-4 player AI games completing to natural conclusion. Headless operation verified without display server requirements. This successfully transformed network feature validation from manual multi-hour testing to automated multi-minute execution.
+**Phase 9 Results (Full Game Completion):**
+- Game completed in 12 turns with winner determination
+- 610 delta packets received by remote client
+- 1 full state sync (initial connection only)
+- 99% bandwidth savings via delta sync
+- Test duration: ~18 seconds
+
+Key validation results: Delta sync functionality verified with 610+ packets received demonstrating 99% bandwidth savings vs full state transmission. Network client connectivity confirmed with HeadlessNetworkClient successfully connecting via TCP and completing full games. Full game execution validated with 2-4 player AI games completing to natural conclusion with winner determination. Headless operation verified without display server requirements. This successfully transformed network feature validation from manual multi-hour testing to automated multi-minute execution.
 
 Detailed test results, metrics, and component documentation are provided in the sections below.
 
@@ -166,6 +173,9 @@ Extends `GuiDesktop` to bypass Singletons.getControl() requirements, enabling fu
 **Overrides:**
 - `hostMatch()` - Creates HostedMatch without GUI registration
 - `getNewGuiGame()` - Returns NoOpGuiGame instead of CMatchUI
+- `invokeInEdtLater()` / `invokeInEdtNow()` / `invokeInEdtAndWait()` - Execute immediately (no Swing EDT in headless mode)
+
+**EDT Fix (Phase 9):** In normal GUI mode, `invokeInEdtLater` uses `SwingUtilities.invokeLater()` which queues runnables on the Swing Event Dispatch Thread. In headless mode, there is no EDT running, so these runnables would never execute. This caused `InputSelectCardsFromList` (cleanup discard) to never trigger `setSelectables`, blocking game completion. The fix executes runnables immediately instead of queuing them.
 
 #### NoOpGuiGame
 
@@ -1128,20 +1138,21 @@ This section documents the actual test results from validating the NetworkPlay b
 
 The primary objective was to verify delta sync works correctly without manual testing. Results:
 
-**testTrueNetworkTraffic:**
+**testTrueNetworkTraffic (Phase 9 - Full Game Completion):**
 ```
 NetworkTest[success=true, connected=true, started=true, completed=true,
-            deltas=16, fullSyncs=1, bytes=11063, turns=0, winner=null]
+            deltas=610, fullSyncs=1, turns=12, winner=Alice (Host AI)]
 ```
 
 **Delta Sync Metrics:**
 | Metric | Value |
 |--------|-------|
-| Delta packets received | 16 |
+| Delta packets received | 610 |
 | Full state syncs | 1 |
-| Total delta bytes | 11,063 |
-| Bandwidth savings | 87-98% vs full state |
-| Test duration | ~7 seconds |
+| Total turns | 12 |
+| Winner | Alice (Host AI) |
+| Bandwidth savings | 99% vs full state |
+| Test duration | ~18 seconds |
 
 **Server-side Delta Sync Logs:**
 ```
@@ -1220,7 +1231,7 @@ Key log prefixes:
 
 ## Known Limitations
 
-1. **AI Input Handling**: `DeltaLoggingGuiGame` auto-responds to button prompts (OK button clicks) but does not make strategic decisions. The remote client simply accepts default choices for mulligan, priority, and other prompts.
+1. **AI Input Handling**: `DeltaLoggingGuiGame` auto-responds to button prompts (OK button clicks) and selectable cards but does not make strategic decisions. The remote client simply accepts default choices for mulligan, priority, cleanup discard, and other prompts.
 
 2. **True Socket Disconnect**: The ReconnectionScenario tests the infrastructure but doesn't perform actual socket disconnection. This would require extending HeadlessNetworkClient with socket manipulation capabilities.
 
@@ -1311,11 +1322,12 @@ This section summarizes the key components delivered in this testing infrastruct
 ### Validation Results
 
 The infrastructure successfully validated the NetworkPlay branch's delta synchronization:
-- **Delta Sync**: 16+ packets received with 87-98% bandwidth savings vs full state
-- **Network Connectivity**: HeadlessNetworkClient successfully connects and participates
-- **Full Games**: 2-4 player AI games complete to winner determination
+- **Delta Sync**: 610+ packets received with 99% bandwidth savings vs full state (Phase 9)
+- **Network Connectivity**: HeadlessNetworkClient successfully connects and participates as remote player
+- **Full Games**: 2-4 player AI games complete to winner determination (12 turns, Alice wins)
 - **Headless Operation**: All tests run without display server (X11/Wayland not required)
 - **Server Infrastructure**: FServerManager starts, accepts connections, clean shutdown
+- **Input Handling**: Auto-responds to button prompts (mulligan, priority) and selectable cards (cleanup discard)
 
 ---
 

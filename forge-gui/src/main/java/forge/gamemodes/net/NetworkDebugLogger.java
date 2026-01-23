@@ -55,8 +55,13 @@ public final class NetworkDebugLogger {
     private static final String LOG_PREFIX = "network-debug";
     private static final long GRACE_PERIOD_MS = 5 * 60 * 1000; // 5 minutes
 
-    private static PrintWriter fileWriter;
-    private static boolean initialized = false;
+    // Per-thread log file support for parallel test execution
+    // When instanceSuffix is set, each thread gets its own log file
+    // Otherwise, all threads share a single log file (default behavior)
+    private static PrintWriter sharedFileWriter;
+    private static final ThreadLocal<PrintWriter> threadFileWriter = new ThreadLocal<>();
+    private static final ThreadLocal<Boolean> threadInitialized = ThreadLocal.withInitial(() -> false);
+    private static boolean sharedInitialized = false;
     private static boolean enabled = true;
     private static LogLevel consoleLevel = LogLevel.INFO;  // Default: show INFO and above on console
     private static LogLevel fileLevel = LogLevel.DEBUG;    // Default: show DEBUG and above in file
@@ -69,6 +74,10 @@ public final class NetworkDebugLogger {
 
     // Test mode flag - when true, log filenames include "-test" suffix
     private static boolean testMode = false;
+
+    // Instance suffix for parallel test execution - allows each game instance to have its own log file
+    // This is stored per-thread so parallel games don't interfere with each other's logging
+    private static final ThreadLocal<String> instanceSuffix = new ThreadLocal<>();
 
     // Apply configuration from NetworkDebug.config on class load
     static {
@@ -119,6 +128,28 @@ public final class NetworkDebugLogger {
      */
     public static boolean isTestMode() {
         return testMode;
+    }
+
+    /**
+     * Set the instance suffix for parallel test execution.
+     * Each game instance should call this with a unique suffix (e.g., "game0", "game1")
+     * before logging starts. When set, the log filename will include this suffix.
+     *
+     * Must be called BEFORE first log() call on this thread to affect filename.
+     *
+     * @param suffix The instance suffix (e.g., "game0"), or null to clear
+     */
+    public static void setInstanceSuffix(String suffix) {
+        instanceSuffix.set(suffix);
+    }
+
+    /**
+     * Get the current instance suffix for this thread.
+     *
+     * @return The instance suffix, or null if not set
+     */
+    public static String getInstanceSuffix() {
+        return instanceSuffix.get();
     }
 
     /**
@@ -254,62 +285,120 @@ public final class NetworkDebugLogger {
     /**
      * Initialize the logger if not already done.
      * Creates the log directory and opens a unique log file.
+     *
+     * If instanceSuffix is set for this thread, creates a per-thread log file.
+     * Otherwise, creates/uses a shared log file.
      */
     private static void ensureInitialized() {
-        if (initialized) {
+        String suffix = instanceSuffix.get();
+
+        // If instance suffix is set, use per-thread log file
+        if (suffix != null) {
+            if (threadInitialized.get()) {
+                return;
+            }
+            initializeThreadLogger(suffix);
+            return;
+        }
+
+        // Otherwise, use shared log file
+        if (sharedInitialized) {
             return;
         }
         synchronized (lock) {
-            if (initialized) {
+            if (sharedInitialized) {
                 return;
             }
-            try {
-                // Get configurable log directory
-                String logDirPath = NetworkDebugConfig.getLogDirectory();
-                File logDir = new File(logDirPath);
-                if (!logDir.exists()) {
-                    logDir.mkdirs();
-                }
-
-                // Clean up old logs before creating new one
-                cleanupOldLogs();
-
-                // Create unique filename with timestamp and PID
-                // Include "-test" suffix when running from test infrastructure
-                String timestamp = new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date());
-                long pid = ProcessHandle.current().pid();
-                String testSuffix = testMode ? "-test" : "";
-                String filename = String.format("%s-%s-%d%s.log", LOG_PREFIX, timestamp, pid, testSuffix);
-                File logFile = new File(logDir, filename);
-
-                fileWriter = new PrintWriter(new FileWriter(logFile, true), true);
-
-                // Log header with system information
-                Runtime runtime = Runtime.getRuntime();
-                fileWriter.println("=".repeat(80));
-                fileWriter.println("Network Debug Log Started: " + new Date());
-                fileWriter.println("PID: " + pid);
-                fileWriter.println("Log file: " + logFile.getAbsolutePath());
-                fileWriter.println();
-                fileWriter.println("System Information:");
-                fileWriter.println("  Java Version: " + System.getProperty("java.version"));
-                fileWriter.println("  Java Vendor: " + System.getProperty("java.vendor"));
-                fileWriter.println("  Max Memory: " + (runtime.maxMemory() / 1024 / 1024) + " MB");
-                fileWriter.println("  Available Processors: " + runtime.availableProcessors());
-                fileWriter.println("  OS: " + System.getProperty("os.name") + " " + System.getProperty("os.version"));
-                fileWriter.println("  OS Arch: " + System.getProperty("os.arch"));
-                fileWriter.println("=".repeat(80));
-                fileWriter.println();
-
-                System.out.println("[NetworkDebugLogger] Logging to: " + logFile.getAbsolutePath());
-
-                initialized = true;
-            } catch (IOException e) {
-                System.err.println("[NetworkDebugLogger] Failed to initialize log file: " + e.getMessage());
-                // Continue without file logging
-                initialized = true;
-            }
+            sharedFileWriter = initializeLogFile(null);
+            sharedInitialized = true;
         }
+    }
+
+    /**
+     * Initialize a per-thread log file with the given instance suffix.
+     */
+    private static void initializeThreadLogger(String suffix) {
+        synchronized (lock) {
+            if (threadInitialized.get()) {
+                return;
+            }
+            PrintWriter writer = initializeLogFile(suffix);
+            threadFileWriter.set(writer);
+            threadInitialized.set(true);
+        }
+    }
+
+    /**
+     * Create and initialize a log file with optional instance suffix.
+     *
+     * @param suffix Instance suffix (e.g., "game0"), or null for shared log
+     * @return PrintWriter for the log file, or null on failure
+     */
+    private static PrintWriter initializeLogFile(String suffix) {
+        try {
+            // Get configurable log directory
+            String logDirPath = NetworkDebugConfig.getLogDirectory();
+            File logDir = new File(logDirPath);
+            if (!logDir.exists()) {
+                logDir.mkdirs();
+            }
+
+            // Clean up old logs before creating new one (only for shared log)
+            if (suffix == null) {
+                cleanupOldLogs();
+            }
+
+            // Create unique filename with timestamp and PID
+            // Include "-test" suffix when running from test infrastructure
+            // Include instance suffix for parallel test execution
+            String timestamp = new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date());
+            long pid = ProcessHandle.current().pid();
+            String testSuffix = testMode ? "-test" : "";
+            String instancePart = (suffix != null) ? "-" + suffix : "";
+            String filename = String.format("%s-%s-%d%s%s.log", LOG_PREFIX, timestamp, pid, instancePart, testSuffix);
+            File logFile = new File(logDir, filename);
+
+            PrintWriter writer = new PrintWriter(new FileWriter(logFile, true), true);
+
+            // Log header with system information
+            Runtime runtime = Runtime.getRuntime();
+            writer.println("=".repeat(80));
+            writer.println("Network Debug Log Started: " + new Date());
+            writer.println("PID: " + pid);
+            if (suffix != null) {
+                writer.println("Instance: " + suffix);
+            }
+            writer.println("Log file: " + logFile.getAbsolutePath());
+            writer.println();
+            writer.println("System Information:");
+            writer.println("  Java Version: " + System.getProperty("java.version"));
+            writer.println("  Java Vendor: " + System.getProperty("java.vendor"));
+            writer.println("  Max Memory: " + (runtime.maxMemory() / 1024 / 1024) + " MB");
+            writer.println("  Available Processors: " + runtime.availableProcessors());
+            writer.println("  OS: " + System.getProperty("os.name") + " " + System.getProperty("os.version"));
+            writer.println("  OS Arch: " + System.getProperty("os.arch"));
+            writer.println("=".repeat(80));
+            writer.println();
+
+            System.out.println("[NetworkDebugLogger] Logging to: " + logFile.getAbsolutePath());
+
+            return writer;
+        } catch (IOException e) {
+            System.err.println("[NetworkDebugLogger] Failed to initialize log file: " + e.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Get the active file writer for the current thread.
+     * Returns per-thread writer if instance suffix is set, otherwise shared writer.
+     */
+    private static PrintWriter getFileWriter() {
+        String suffix = instanceSuffix.get();
+        if (suffix != null) {
+            return threadFileWriter.get();
+        }
+        return sharedFileWriter;
     }
 
     /**
@@ -431,10 +520,11 @@ public final class NetworkDebugLogger {
         // Write to file if level meets threshold
         if (LogLevel.ERROR.isLoggable(fileLevel)) {
             writeToFile(timestamped);
-            if (fileWriter != null) {
+            PrintWriter writer = getFileWriter();
+            if (writer != null) {
                 synchronized (lock) {
-                    t.printStackTrace(fileWriter);
-                    fileWriter.flush();
+                    t.printStackTrace(writer);
+                    writer.flush();
                 }
             }
         }
@@ -520,27 +610,63 @@ public final class NetworkDebugLogger {
      * Write to log file if available.
      */
     private static void writeToFile(String message) {
-        if (fileWriter != null) {
+        PrintWriter writer = getFileWriter();
+        if (writer != null) {
             synchronized (lock) {
-                fileWriter.println(message);
-                fileWriter.flush();
+                writer.println(message);
+                writer.flush();
             }
         }
     }
 
     /**
      * Close the log file. Call on application shutdown.
+     * Closes both the per-thread writer (if any) and shared writer.
      */
     public static void close() {
         synchronized (lock) {
-            if (fileWriter != null) {
-                fileWriter.println();
-                fileWriter.println("=".repeat(80));
-                fileWriter.println("Network Debug Log Ended: " + new Date());
-                fileWriter.println("=".repeat(80));
-                fileWriter.close();
-                fileWriter = null;
-                initialized = false;
+            // Close per-thread writer if present
+            PrintWriter threadWriter = threadFileWriter.get();
+            if (threadWriter != null) {
+                threadWriter.println();
+                threadWriter.println("=".repeat(80));
+                threadWriter.println("Network Debug Log Ended: " + new Date());
+                threadWriter.println("=".repeat(80));
+                threadWriter.close();
+                threadFileWriter.remove();
+                threadInitialized.remove();
+                instanceSuffix.remove();
+            }
+
+            // Close shared writer
+            if (sharedFileWriter != null) {
+                sharedFileWriter.println();
+                sharedFileWriter.println("=".repeat(80));
+                sharedFileWriter.println("Network Debug Log Ended: " + new Date());
+                sharedFileWriter.println("=".repeat(80));
+                sharedFileWriter.close();
+                sharedFileWriter = null;
+                sharedInitialized = false;
+            }
+        }
+    }
+
+    /**
+     * Close just the per-thread log file for this thread.
+     * Use this when a parallel game instance completes.
+     */
+    public static void closeThreadLogger() {
+        synchronized (lock) {
+            PrintWriter threadWriter = threadFileWriter.get();
+            if (threadWriter != null) {
+                threadWriter.println();
+                threadWriter.println("=".repeat(80));
+                threadWriter.println("Network Debug Log Ended: " + new Date());
+                threadWriter.println("=".repeat(80));
+                threadWriter.close();
+                threadFileWriter.remove();
+                threadInitialized.remove();
+                instanceSuffix.remove();
             }
         }
     }

@@ -29,6 +29,7 @@ The NetworkPlay branch introduces three major features to improve the multiplaye
 **Additional Resources:**
 - **[Debugging](#debugging)**: Comprehensive debug logging for diagnosing network synchronization issues.
 - **[BUGS.md](BUGS.md)**: Record of known bugs, debugging progress, and resolution status.
+- **[TESTING_DOCUMENTATION.md](TESTING_DOCUMENTATION.md)**: Automated testing infrastructure for headless network game execution.
 
 ---
 
@@ -1378,5 +1379,38 @@ The example above shows 62% savings for a single packet, but the Overview claims
 ## Known Limitations
 
 1. Objects are not explicitly removed from Tracker - relies on garbage collection when no longer referenced
+
+---
+
+## Automated Testing Infrastructure
+
+This branch includes a headless testing infrastructure that enables automated validation of network features without manual two-instance testing. Full documentation is in [TESTING_DOCUMENTATION.md](TESTING_DOCUMENTATION.md).
+
+### Key Components
+
+| Component | Purpose |
+|-----------|---------|
+| `HeadlessGuiDesktop` | Extends `GuiDesktop` to run games without display server |
+| `HeadlessNetworkClient` | Remote client that connects via TCP and receives delta packets |
+| `DeltaLoggingGuiGame` | GUI implementation that auto-responds to prompts |
+| `NoOpGuiGame` | No-op `IGuiGame` implementation (~80 methods) |
+
+### Test Results
+
+**Full Game Completion (Phase 9):**
+- Games complete from mulligan through winner determination
+- 610 delta packets received over 12 turns
+- 99% bandwidth savings confirmed
+- ~18 second test duration
+
+### Running Tests
+
+```bash
+# Build
+mvn -pl forge-gui-desktop -am install -DskipTests
+
+# Run network test
+mvn -pl forge-gui-desktop -am verify -Dtest="AutomatedNetworkTest#testTrueNetworkTraffic" -Dsurefire.failIfNoSpecifiedTests=false
+```
 
 ---
