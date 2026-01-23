@@ -1,6 +1,7 @@
 package forge.net;
 
 import forge.deck.Deck;
+import forge.game.Game;
 import forge.gamemodes.match.GameLobby.GameLobbyData;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.match.LobbySlot;
@@ -133,19 +134,27 @@ public class NetworkClientTestHarness {
             boolean completed = waitForGameCompletion(GAME_TIMEOUT_MS);
             result.gameCompleted = completed;
 
-            // 9. Collect metrics
+            // 9. Extract game results (winner, turn count)
+            extractGameResults(result);
+
+            // 10. Collect metrics
             if (remoteClient != null) {
                 result.deltaPacketsReceived = remoteClient.getDeltaPacketsReceived();
                 result.fullStateSyncsReceived = remoteClient.getFullStateSyncsReceived();
                 result.totalDeltaBytes = remoteClient.getTotalDeltaBytes();
             }
 
-            // 10. Check for actual network traffic
+            // 11. Check for actual game completion with network traffic
             result.success = result.gameCompleted &&
-                    result.deltaPacketsReceived > 0;
+                    result.deltaPacketsReceived > 0 &&
+                    result.winner != null;
 
-            if (!result.success && result.deltaPacketsReceived == 0) {
-                result.errorMessage = "No delta packets received - network path not exercised";
+            if (!result.success) {
+                if (result.deltaPacketsReceived == 0) {
+                    result.errorMessage = "No delta packets received - network path not exercised";
+                } else if (result.winner == null) {
+                    result.errorMessage = "Game did not complete with a winner";
+                }
             }
 
         } catch (Exception e) {
@@ -291,38 +300,58 @@ public class NetworkClientTestHarness {
 
     private boolean waitForGameCompletion(long timeoutMs) {
         try {
-            // Wait on client completion or poll hosted match
             HostedMatch hostedMatch = HeadlessGuiDesktop.getLastMatch();
             if (hostedMatch == null) {
                 return gameCompleteLatch.await(timeoutMs, TimeUnit.MILLISECONDS);
             }
 
             long endTime = System.currentTimeMillis() + timeoutMs;
-            int waitIntervalMs = 5000;
-            // For delta sync testing, we consider receiving packets as success
-            // since full game completion requires AI input handling
-            int minDeltaPacketsForSuccess = 2;
+            int waitIntervalMs = 1000;
+            int lastDeltaCount = 0;
+            long lastLogTime = System.currentTimeMillis();
+            long logIntervalMs = 10000; // Log progress every 10 seconds
 
             while (System.currentTimeMillis() < endTime) {
+                // Check for actual game completion
                 if (hostedMatch.getGame() != null && hostedMatch.getGame().isGameOver()) {
+                    NetworkDebugLogger.log("%s Game completed! Deltas received: %d",
+                            LOG_PREFIX, remoteClient != null ? remoteClient.getDeltaPacketsReceived() : 0);
                     return true;
                 }
-                // Early success: if we've received enough delta packets, delta sync is verified
-                if (remoteClient != null && remoteClient.getDeltaPacketsReceived() >= minDeltaPacketsForSuccess) {
-                    NetworkDebugLogger.log("%s Delta sync verified with %d packets received",
-                            LOG_PREFIX, remoteClient.getDeltaPacketsReceived());
-                    return true; // Consider this a success for delta sync testing
-                }
+
                 Thread.sleep(waitIntervalMs);
-                NetworkDebugLogger.log("%s Still waiting for game completion... (deltas received: %d)",
-                        LOG_PREFIX, remoteClient != null ? remoteClient.getDeltaPacketsReceived() : 0);
+
+                // Progress logging every 10 seconds or when deltas change
+                int currentDeltas = remoteClient != null ? (int) remoteClient.getDeltaPacketsReceived() : 0;
+                long now = System.currentTimeMillis();
+                if (currentDeltas > lastDeltaCount || (now - lastLogTime) >= logIntervalMs) {
+                    NetworkDebugLogger.log("%s Game in progress... deltas: %d", LOG_PREFIX, currentDeltas);
+                    lastDeltaCount = currentDeltas;
+                    lastLogTime = now;
+                }
             }
 
+            NetworkDebugLogger.log("%s Game did not complete within timeout", LOG_PREFIX);
             return false;
 
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             return false;
+        }
+    }
+
+    private void extractGameResults(TestResult result) {
+        HostedMatch hostedMatch = HeadlessGuiDesktop.getLastMatch();
+        if (hostedMatch != null && hostedMatch.getGame() != null) {
+            Game game = hostedMatch.getGame();
+            if (game.isGameOver()) {
+                result.turns = game.getPhaseHandler().getTurn();
+                if (game.getOutcome() != null && game.getOutcome().getWinningPlayer() != null) {
+                    result.winner = game.getOutcome().getWinningPlayer().getPlayer().getName();
+                }
+                NetworkDebugLogger.log("%s Game results: winner=%s, turns=%d",
+                        LOG_PREFIX, result.winner, result.turns);
+            }
         }
     }
 

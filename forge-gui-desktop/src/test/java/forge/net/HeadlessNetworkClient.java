@@ -328,7 +328,9 @@ public class HeadlessNetworkClient implements AutoCloseable {
     }
 
     /**
-     * GUI implementation that logs delta packets for debugging.
+     * GUI implementation that logs delta packets and auto-responds to input requests.
+     * This enables headless network games to complete by automatically responding
+     * to prompts like mulligan decisions and priority passes.
      */
     private static class DeltaLoggingGuiGame extends NoOpGuiGame {
         private final HeadlessNetworkClient client;
@@ -371,6 +373,48 @@ public class HeadlessNetworkClient implements AutoCloseable {
         public void setGameController(forge.game.player.PlayerView player, IGameController controller) {
             super.setGameController(player, controller);
             this.gameController = controller;
+            NetworkDebugLogger.log("[DeltaLoggingGuiGame] Game controller set for player: %s",
+                    player != null ? player.getName() : "null");
+        }
+
+        @Override
+        public void showPromptMessage(forge.game.player.PlayerView playerView, String message) {
+            NetworkDebugLogger.log("[DeltaLoggingGuiGame] Prompt: %s", message);
+        }
+
+        @Override
+        public void updateButtons(forge.game.player.PlayerView owner, boolean okEnabled, boolean cancelEnabled, boolean focusOk) {
+            // Auto-respond to button prompts (mulligan, priority, etc.)
+            if (gameController != null && okEnabled) {
+                NetworkDebugLogger.log("[DeltaLoggingGuiGame] Auto-clicking OK for player: %s",
+                        owner != null ? owner.getName() : "unknown");
+                // Use a small delay to ensure the server has finished setting up the input
+                new Thread(() -> {
+                    try {
+                        Thread.sleep(50); // Small delay for server to be ready
+                        gameController.selectButtonOk();
+                    } catch (Exception e) {
+                        NetworkDebugLogger.error("[DeltaLoggingGuiGame] Error auto-clicking OK: %s", e.getMessage());
+                    }
+                }).start();
+            }
+        }
+
+        @Override
+        public void updateButtons(forge.game.player.PlayerView owner, String label1, String label2, boolean enable1, boolean enable2, boolean focus1) {
+            // Auto-respond to labeled button prompts
+            if (gameController != null && enable1) {
+                NetworkDebugLogger.log("[DeltaLoggingGuiGame] Auto-clicking '%s' for player: %s",
+                        label1, owner != null ? owner.getName() : "unknown");
+                new Thread(() -> {
+                    try {
+                        Thread.sleep(50);
+                        gameController.selectButtonOk();
+                    } catch (Exception e) {
+                        NetworkDebugLogger.error("[DeltaLoggingGuiGame] Error auto-clicking button: %s", e.getMessage());
+                    }
+                }).start();
+            }
         }
     }
 

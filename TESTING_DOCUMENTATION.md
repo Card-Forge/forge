@@ -147,8 +147,9 @@ Orchestrates host server + headless client testing.
 2. Connect HeadlessNetworkClient as remote player
 3. Client sends deck and ready status via network protocol
 4. Game starts, delta packets flow to client
-5. Early success exit when 2+ delta packets received
-6. Cleanup and metric collection
+5. Client auto-responds to prompts (mulligan, play/draw, priority)
+6. Wait for game completion with winner determination
+7. Cleanup and metric collection
 
 **Usage:**
 ```java
@@ -1219,11 +1220,9 @@ Key log prefixes:
 
 ## Known Limitations
 
-1. **AI Input Handling**: HeadlessNetworkClient cannot make gameplay decisions (mulligan, priority). Tests exit early once delta sync is verified.
+1. **AI Input Handling**: `DeltaLoggingGuiGame` auto-responds to button prompts (OK button clicks) but does not make strategic decisions. The remote client simply accepts default choices for mulligan, priority, and other prompts.
 
-2. **Full Game Completion**: For complete game testing with remote client, AI decision logic would need to be added to `DeltaLoggingGuiGame`.
-
-3. **True Socket Disconnect**: The ReconnectionScenario tests the infrastructure but doesn't perform actual socket disconnection. This would require extending HeadlessNetworkClient.
+2. **True Socket Disconnect**: The ReconnectionScenario tests the infrastructure but doesn't perform actual socket disconnection. This would require extending HeadlessNetworkClient with socket manipulation capabilities.
 
 ---
 

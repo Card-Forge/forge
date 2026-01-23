@@ -21,6 +21,37 @@ public class TestDeckLoader {
 
     private static final Random random = new Random();
 
+    /** Minimum cards required for a valid constructed deck */
+    private static final int MIN_DECK_SIZE = 60;
+
+    /** Maximum retry attempts when retryOnInvalidDeck is enabled */
+    private static final int MAX_RETRIES = 10;
+
+    /**
+     * When true, getRandomPrecon() will automatically retry if a deck
+     * fails validation (e.g., has fewer than 60 cards).
+     * Default is true for general testing robustness.
+     * Set to false when specifically testing deck validation.
+     */
+    private static boolean retryOnInvalidDeck = true;
+
+    /**
+     * Configure whether to automatically retry when a deck fails validation.
+     *
+     * @param retry true to retry with different deck on validation failure,
+     *              false to return the deck as-is (for deck validation testing)
+     */
+    public static void setRetryOnInvalidDeck(boolean retry) {
+        retryOnInvalidDeck = retry;
+    }
+
+    /**
+     * Get the current retry-on-invalid-deck setting.
+     */
+    public static boolean isRetryOnInvalidDeck() {
+        return retryOnInvalidDeck;
+    }
+
     /**
      * Load a quest precon deck by name.
      * @param name Deck name without .dck extension
@@ -64,6 +95,10 @@ public class TestDeckLoader {
 
     /**
      * Get a random quest precon deck.
+     *
+     * If retryOnInvalidDeck is true (default), this method will automatically
+     * try different decks if the selected one fails validation.
+     *
      * @return Random precon deck with valid cards
      */
     public static Deck getRandomPrecon() {
@@ -72,9 +107,46 @@ public class TestDeckLoader {
             throw new IllegalStateException("No quest precon decks found in " +
                 ForgeConstants.QUEST_PRECON_DIR);
         }
-        String randomName = precons.get(random.nextInt(precons.size()));
-        System.out.println("[TestDeckLoader] Selected random precon: " + randomName);
-        return loadQuestPrecon(randomName);
+
+        // Shuffle to avoid retrying the same decks
+        List<String> shuffled = new java.util.ArrayList<>(precons);
+        Collections.shuffle(shuffled, random);
+
+        int attempts = Math.min(MAX_RETRIES, shuffled.size());
+
+        for (int i = 0; i < attempts; i++) {
+            String deckName = shuffled.get(i);
+            Deck deck = loadQuestPrecon(deckName);
+
+            if (!retryOnInvalidDeck || isValidDeck(deck)) {
+                System.out.println("[TestDeckLoader] Selected random precon: " + deckName);
+                return deck;
+            }
+
+            int cardCount = deck.getMain() != null ? deck.getMain().countAll() : 0;
+            System.out.println("[TestDeckLoader] Deck '" + deckName +
+                "' has " + cardCount + " cards (need " + MIN_DECK_SIZE +
+                "), trying another...");
+        }
+
+        // If we exhausted retries, return the last deck anyway with a warning
+        String lastName = shuffled.get(0);
+        System.err.println("[TestDeckLoader] WARNING: Could not find valid deck after " +
+            attempts + " attempts, returning '" + lastName + "' anyway");
+        return loadQuestPrecon(lastName);
+    }
+
+    /**
+     * Check if a deck meets minimum validation requirements.
+     *
+     * @param deck Deck to validate
+     * @return true if deck has at least MIN_DECK_SIZE cards
+     */
+    public static boolean isValidDeck(Deck deck) {
+        if (deck == null || deck.getMain() == null) {
+            return false;
+        }
+        return deck.getMain().countAll() >= MIN_DECK_SIZE;
     }
 
     /**
