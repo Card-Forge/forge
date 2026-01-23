@@ -67,9 +67,6 @@ public final class GamePlayerUtil {
         return createAiPlayer(name, avatarIndex, sleeveIndex, options, "");
     }
     public static LobbyPlayer createAiPlayer(final String name, final int avatarIndex, final int sleeveIndex, final Set<AIOption> options, final String profileOverride) {
-        // TODO: create the appropriate LobbyPlayerAi subclass based on AI selection in the lobby
-        // TODO: use whatever picker was enabled with FPref.UI_ENABLE_AI_PICKER is set
-        // TODO: Don't break when UI_ENABLE_AI_PICKER is disabled
         final LobbyPlayerAi player = new LobbyPlayerAi(name, options);
 
         // TODO: implement specific AI profiles for quest mode.
