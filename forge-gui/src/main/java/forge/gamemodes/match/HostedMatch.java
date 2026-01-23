@@ -15,6 +15,8 @@ import forge.game.event.IGameEventVisitor;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
+import forge.gamemodes.net.NetworkGameEventListener;
+import forge.gamemodes.net.server.FServerManager;
 import forge.gamemodes.quest.QuestController;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -172,6 +174,12 @@ public class HostedMatch {
 
         game.subscribeToEvents(SoundSystem.instance);
         game.subscribeToEvents(visitor);
+
+        // Subscribe network game event listener for network play
+        // This logs game actions to NetworkDebugLogger for debugging network games
+        if (FServerManager.getInstance().isHosting()) {
+            game.subscribeToEvents(new NetworkGameEventListener());
+        }
 
         final FCollectionView<Player> players = game.getPlayers();
         final String[] avatarIndices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");

@@ -1,5 +1,21 @@
 # NetworkPlay Branch Documentation
 
+## Table of Contents
+
+1. [Overview](#overview)
+2. [Architectural Overlap with Forge Master Branch](#architectural-overlap-with-forge-master-branch)
+3. [Features](#features)
+   - [Delta Synchronization](#feature-1-delta-synchronization)
+   - [Reconnection Support](#feature-2-reconnection-support)
+   - [Enhanced Chat Notifications](#feature-3-enhanced-chat-notifications)
+4. [Files Modified](#files-modified)
+5. [Configuration](#configuration)
+6. [Debugging](#debugging)
+7. [Known Limitations](#known-limitations)
+8. [Future Improvements](#potential-future-improvements)
+
+---
+
 ## Overview
 
 The NetworkPlay branch introduces three major features to improve the multiplayer experience:

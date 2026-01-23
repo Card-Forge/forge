@@ -67,6 +67,9 @@ public final class NetworkDebugLogger {
     // Session identifier for correlating host/client logs
     private static String sessionId = null;
 
+    // Test mode flag - when true, log filenames include "-test" suffix
+    private static boolean testMode = false;
+
     // Apply configuration from NetworkDebug.config on class load
     static {
         applyConfig();
@@ -100,6 +103,22 @@ public final class NetworkDebugLogger {
      */
     public static boolean isEnabled() {
         return enabled;
+    }
+
+    /**
+     * Enable test mode. When enabled, log filenames include "-test" suffix
+     * to distinguish test-generated logs from production logs.
+     * Must be called BEFORE first log() call to affect filename.
+     */
+    public static void setTestMode(boolean enabled) {
+        testMode = enabled;
+    }
+
+    /**
+     * Check if test mode is enabled.
+     */
+    public static boolean isTestMode() {
+        return testMode;
     }
 
     /**
@@ -256,9 +275,11 @@ public final class NetworkDebugLogger {
                 cleanupOldLogs();
 
                 // Create unique filename with timestamp and PID
+                // Include "-test" suffix when running from test infrastructure
                 String timestamp = new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date());
                 long pid = ProcessHandle.current().pid();
-                String filename = String.format("%s-%s-%d.log", LOG_PREFIX, timestamp, pid);
+                String testSuffix = testMode ? "-test" : "";
+                String filename = String.format("%s-%s-%d%s.log", LOG_PREFIX, timestamp, pid, testSuffix);
                 File logFile = new File(logDir, filename);
 
                 fileWriter = new PrintWriter(new FileWriter(logFile, true), true);

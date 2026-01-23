@@ -1,0 +1,168 @@
+package forge.net;
+
+import forge.GuiDesktop;
+import forge.gamemodes.match.HostedMatch;
+import forge.gamemodes.net.NetworkDebugLogger;
+import forge.gui.interfaces.IGuiGame;
+import forge.localinstance.skin.FSkinProp;
+import forge.localinstance.skin.ISkinImage;
+
+import java.util.List;
+
+/**
+ * Headless implementation of GuiDesktop for automated testing.
+ * Overrides methods that require Singletons.getControl() or FSkin to be initialized.
+ *
+ * This allows running full AI games without a display server because:
+ * 1. GuiDesktop.hostMatch() normally calls Singletons.getControl().addMatch()
+ * 2. GuiDesktop.getNewGuiGame() returns CMatchUI which requires full GUI
+ * 3. showSpellShop/showBazaar require Singletons.getControl()
+ * 4. Dialog methods use FSkin which isn't initialized in headless mode
+ *
+ * Part of the Headless Full Game Testing infrastructure.
+ */
+public class HeadlessGuiDesktop extends GuiDesktop {
+
+    // Track the last match for result extraction
+    private static HostedMatch lastMatch;
+
+    // Flag to track if testing environment message has been logged
+    private static boolean testingEnvironmentLogged = false;
+
+    // Static initialization - enable test mode and log banner
+    static {
+        NetworkDebugLogger.setTestMode(true);
+        logTestingEnvironment();
+    }
+
+    /**
+     * Create a HostedMatch without registering it with Singletons.getControl().
+     * This allows games to run without full GUI initialization.
+     * The match is stored for later result extraction.
+     *
+     * @return A new HostedMatch instance
+     */
+    @Override
+    public HostedMatch hostMatch() {
+        // Skip Singletons.getControl().addMatch() which requires full GUI init
+        lastMatch = new HostedMatch();
+        return lastMatch;
+    }
+
+    /**
+     * Log a message indicating this is a testing environment.
+     * Called once when the first match is hosted.
+     */
+    private static synchronized void logTestingEnvironment() {
+        if (!testingEnvironmentLogged) {
+            testingEnvironmentLogged = true;
+            NetworkDebugLogger.log("================================================================================");
+            NetworkDebugLogger.log("TESTING ENVIRONMENT - HeadlessGuiDesktop Active");
+            NetworkDebugLogger.log("This log was created from automated test infrastructure.");
+            NetworkDebugLogger.log("================================================================================");
+        }
+    }
+
+    /**
+     * Get the last hosted match for result extraction.
+     *
+     * @return The last HostedMatch, or null if none
+     */
+    public static HostedMatch getLastMatch() {
+        return lastMatch;
+    }
+
+    /**
+     * Clear the last match reference.
+     */
+    public static void clearLastMatch() {
+        lastMatch = null;
+    }
+
+    /**
+     * Return a no-op GUI implementation for AI spectating.
+     * In headless mode, we don't need a real GUI.
+     *
+     * @return A NoOpGuiGame instance
+     */
+    @Override
+    public IGuiGame getNewGuiGame() {
+        return new NoOpGuiGame();
+    }
+
+    /**
+     * No-op in headless mode - requires Singletons.getControl().
+     */
+    @Override
+    public void showSpellShop() {
+        // No-op - requires Singletons.getControl().setCurrentScreen()
+    }
+
+    /**
+     * No-op in headless mode - requires Singletons.getControl().
+     */
+    @Override
+    public void showBazaar() {
+        // No-op - requires Singletons.getControl().setCurrentScreen()
+    }
+
+    // ========== Dialog methods - override to avoid FSkin dependency ==========
+
+    /**
+     * Show option dialog without GUI - prints to stderr and returns default option.
+     * This prevents NPE when FSkin images aren't loaded.
+     */
+    @Override
+    public int showOptionDialog(final String message, final String title,
+                                final FSkinProp icon, final List<String> options,
+                                final int defaultOption) {
+        System.err.println("[HeadlessGuiDesktop] " + title + ": " + message);
+        if (options != null && !options.isEmpty()) {
+            System.err.println("[HeadlessGuiDesktop] Options: " + options + ", returning: " + defaultOption);
+        }
+        return defaultOption;
+    }
+
+    /**
+     * Show image dialog without GUI - prints to stderr.
+     */
+    @Override
+    public void showImageDialog(final ISkinImage image, final String message, final String title) {
+        System.err.println("[HeadlessGuiDesktop] " + title + ": " + message);
+    }
+
+    /**
+     * Show input dialog without GUI - returns initial input or first option.
+     */
+    @Override
+    public String showInputDialog(final String message, final String title,
+                                  final FSkinProp icon, final String initialInput,
+                                  final List<String> inputOptions, boolean isNumeric) {
+        System.err.println("[HeadlessGuiDesktop] Input: " + title + ": " + message);
+        if (initialInput != null) {
+            return initialInput;
+        }
+        if (inputOptions != null && !inputOptions.isEmpty()) {
+            return inputOptions.get(0);
+        }
+        return isNumeric ? "0" : "";
+    }
+
+    /**
+     * Show file dialog without GUI - returns null (no file selected).
+     */
+    @Override
+    public String showFileDialog(final String title, final String defaultDir) {
+        System.err.println("[HeadlessGuiDesktop] File dialog: " + title);
+        return null;
+    }
+
+    /**
+     * Show bug report dialog without GUI - prints to stderr.
+     */
+    @Override
+    public void showBugReportDialog(final String title, final String text, final boolean showExitAppBtn) {
+        System.err.println("[HeadlessGuiDesktop] Bug Report - " + title + ":");
+        System.err.println(text);
+    }
+}
