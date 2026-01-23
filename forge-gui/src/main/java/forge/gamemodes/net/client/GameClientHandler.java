@@ -328,9 +328,13 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
                     client.getSessionToken()
             ));
         } else {
-            // Normal login
+            // Normal login - use client's username if provided, otherwise fall back to preferences
+            String loginName = client.getUsername();
+            if (loginName == null || loginName.isEmpty()) {
+                loginName = FModel.getPreferences().getPref(FPref.PLAYER_NAME);
+            }
             ctx.channel().writeAndFlush(new LoginEvent(
-                    FModel.getPreferences().getPref(FPref.PLAYER_NAME),
+                    loginName,
                     Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",")[0]),
                     Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_SLEEVES).split(",")[0])
             ));

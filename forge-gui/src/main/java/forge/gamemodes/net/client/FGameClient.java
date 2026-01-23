@@ -26,6 +26,7 @@ public class FGameClient implements IToServer {
     private final IGuiGame clientGui;
     private final String hostname;
     private final Integer port;
+    private final String username;
     private final List<ILobbyListener> lobbyListeners = Lists.newArrayList();
     private final ReplyPool replies = new ReplyPool();
     private Channel channel;
@@ -37,9 +38,18 @@ public class FGameClient implements IToServer {
     private boolean isReconnecting = false;
 
     public FGameClient(String username, String roomKey, IGuiGame clientGui, String hostname, int port) {
+        this.username = username;
         this.clientGui = clientGui;
         this.hostname = hostname;
         this.port = port;
+    }
+
+    /**
+     * Get the username for this client.
+     * @return the username
+     */
+    public String getUsername() {
+        return username;
     }
 
     /**
