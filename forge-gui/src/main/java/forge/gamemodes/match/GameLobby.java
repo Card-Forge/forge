@@ -542,8 +542,6 @@ public abstract class GameLobby implements IHasGameType {
             // Impact of reordering: Clients cannot reconnect (no session credentials sent)
             //
             // Local games: Unaffected (onGameStarted is typically a no-op for local play)
-            //
-            // See: BRANCH_DOCUMENTATION.md#reconnection-support for details
             // ═══════════════════════════════════════════════════════════════════════════════
 
             onGameStarted();
