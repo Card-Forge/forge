@@ -1392,7 +1392,7 @@ This branch includes a headless testing infrastructure that enables automated va
 |-----------|---------|
 | `HeadlessGuiDesktop` | Extends `GuiDesktop` to run games without display server |
 | `HeadlessNetworkClient` | Remote client that connects via TCP and receives delta packets |
-| `DeltaLoggingGuiGame` | GUI implementation that auto-responds to prompts |
+| `SequentialGameExecutor` | Runs multiple games with isolated log files |
 | `NoOpGuiGame` | No-op `IGuiGame` implementation (~80 methods) |
 
 ### Test Results
@@ -1409,8 +1409,11 @@ This branch includes a headless testing infrastructure that enables automated va
 # Build
 mvn -pl forge-gui-desktop -am install -DskipTests
 
-# Run network test
+# Run single network test
 mvn -pl forge-gui-desktop -am verify -Dtest="AutomatedNetworkTest#testTrueNetworkTraffic" -Dsurefire.failIfNoSpecifiedTests=false
+
+# Run multiple games for log generation
+mvn -pl forge-gui-desktop -am verify -Dtest="SequentialGameTest#testThreeSequentialGames" -Dsurefire.failIfNoSpecifiedTests=false
 ```
 
 ---
