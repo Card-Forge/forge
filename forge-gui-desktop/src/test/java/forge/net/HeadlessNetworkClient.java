@@ -370,11 +370,23 @@ public class HeadlessNetworkClient implements AutoCloseable {
         }
 
         @Override
+        public void setOriginalGameController(forge.game.player.PlayerView view, IGameController controller) {
+            super.setOriginalGameController(view, controller);
+            if (controller != null) {
+                this.gameController = controller;
+                NetworkDebugLogger.log("[DeltaLoggingGuiGame] Original game controller set for player: %s",
+                        view != null ? view.getName() : "null");
+            }
+        }
+
+        @Override
         public void setGameController(forge.game.player.PlayerView player, IGameController controller) {
             super.setGameController(player, controller);
-            this.gameController = controller;
-            NetworkDebugLogger.log("[DeltaLoggingGuiGame] Game controller set for player: %s",
-                    player != null ? player.getName() : "null");
+            if (controller != null) {
+                this.gameController = controller;
+                NetworkDebugLogger.log("[DeltaLoggingGuiGame] Game controller set for player: %s",
+                        player != null ? player.getName() : "null");
+            }
         }
 
         @Override
@@ -384,6 +396,8 @@ public class HeadlessNetworkClient implements AutoCloseable {
 
         @Override
         public void updateButtons(forge.game.player.PlayerView owner, boolean okEnabled, boolean cancelEnabled, boolean focusOk) {
+            NetworkDebugLogger.log("[DeltaLoggingGuiGame] updateButtons(ok): okEnabled=%s, cancelEnabled=%s, controller=%s",
+                    okEnabled, cancelEnabled, gameController != null ? "set" : "null");
             // Auto-respond to button prompts (mulligan, priority, etc.)
             if (gameController != null && okEnabled) {
                 NetworkDebugLogger.log("[DeltaLoggingGuiGame] Auto-clicking OK for player: %s",
@@ -402,18 +416,47 @@ public class HeadlessNetworkClient implements AutoCloseable {
 
         @Override
         public void updateButtons(forge.game.player.PlayerView owner, String label1, String label2, boolean enable1, boolean enable2, boolean focus1) {
-            // Auto-respond to labeled button prompts
-            if (gameController != null && enable1) {
+            NetworkDebugLogger.log("[DeltaLoggingGuiGame] updateButtons(labels): '%s'/%s, '%s'/%s, controller=%s",
+                    label1, enable1, label2, enable2, gameController != null ? "set" : "null");
+            // Auto-respond to labeled button prompts - click first enabled button
+            if (gameController != null && (enable1 || enable2)) {
+                String clickTarget = enable1 ? label1 : label2;
                 NetworkDebugLogger.log("[DeltaLoggingGuiGame] Auto-clicking '%s' for player: %s",
-                        label1, owner != null ? owner.getName() : "unknown");
+                        clickTarget, owner != null ? owner.getName() : "unknown");
                 new Thread(() -> {
                     try {
                         Thread.sleep(50);
-                        gameController.selectButtonOk();
+                        if (enable1) {
+                            gameController.selectButtonOk();
+                        } else {
+                            gameController.selectButtonCancel();
+                        }
                     } catch (Exception e) {
                         NetworkDebugLogger.error("[DeltaLoggingGuiGame] Error auto-clicking button: %s", e.getMessage());
                     }
                 }).start();
+            }
+        }
+
+        @Override
+        public void setSelectables(Iterable<forge.game.card.CardView> cards) {
+            super.setSelectables(cards);
+            // Auto-select the first selectable card when cards become selectable
+            if (gameController != null && cards != null) {
+                java.util.Iterator<forge.game.card.CardView> iter = cards.iterator();
+                if (iter.hasNext()) {
+                    forge.game.card.CardView firstCard = iter.next();
+                    NetworkDebugLogger.log("[DeltaLoggingGuiGame] Auto-selecting first selectable card: %s",
+                            firstCard.getName());
+                    new Thread(() -> {
+                        try {
+                            Thread.sleep(100); // Small delay for server to be ready
+                            gameController.selectCard(firstCard, null, null);
+                        } catch (Exception e) {
+                            NetworkDebugLogger.error("[DeltaLoggingGuiGame] Error auto-selecting card: %s", e.getMessage());
+                        }
+                    }).start();
+                }
             }
         }
     }
