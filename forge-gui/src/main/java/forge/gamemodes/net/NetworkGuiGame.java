@@ -8,14 +8,9 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.AbstractGuiGame;
-import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.DeltaPacket.NewObjectData;
-import forge.gamemodes.net.FullStatePacket;
-import forge.gamemodes.net.NetworkPropertySerializer;
-import forge.gamemodes.net.server.DeltaSyncManager;
 import forge.gamemodes.net.NetworkPropertySerializer.CardStateViewData;
-import forge.gamemodes.net.NetworkDebugLogger;
-import forge.gamemodes.net.NetworkTrackableDeserializer;
+import forge.gamemodes.net.server.DeltaSyncManager;
 import forge.interfaces.IGameController;
 import forge.player.PlayerZoneUpdate;
 import forge.trackable.Tracker;
@@ -37,7 +32,7 @@ import java.util.*;
  * reconnection handling) is contained in this subclass, allowing the base
  * AbstractGuiGame to remain focused on core local game functionality.
  */
-public class NetworkGuiGame extends AbstractGuiGame {
+public abstract class NetworkGuiGame extends AbstractGuiGame {
 
     // Track zone changes during delta application for UI refresh
     private final Map<PlayerView, Set<ZoneType>> pendingZoneUpdates = new HashMap<>();

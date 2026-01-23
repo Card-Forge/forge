@@ -2,17 +2,12 @@ package forge.gamemodes.match;
 
 import com.google.common.collect.*;
 import forge.game.GameView;
-import forge.card.CardStateName;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
-import forge.game.combat.CombatView;
-import forge.game.spellability.StackItemView;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.player.PlayerView;
-import forge.game.zone.ZoneType;
-import forge.player.PlayerZoneUpdate;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.FullStatePacket;
 import forge.gui.FThreads;
@@ -26,17 +21,12 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
-import forge.trackable.Tracker;
 import forge.trackable.TrackableCollection;
-import forge.trackable.TrackableObject;
-import forge.trackable.TrackableProperty;
 import forge.trackable.TrackableTypes;
 import forge.util.FSerializableFunction;
 import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
 import java.io.Serializable;
 import java.util.*;
 
