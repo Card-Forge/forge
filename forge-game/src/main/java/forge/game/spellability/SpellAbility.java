@@ -403,10 +403,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return false; //Loyalty ability, not a mana ability.
         }
         // CR 605.1b
-        if (isTrigger() && !TriggerType.TapsForMana.equals(getTrigger().getMode()) && !TriggerType.ManaAdded.equals(getTrigger().getMode())) {
-            return false;
-        }
-        if (!isActivatedAbility()) {
+        if (isTrigger()) {
+            if (!TriggerType.TapsForMana.equals(getTrigger().getMode()) && !TriggerType.ManaAdded.equals(getTrigger().getMode())) {
+                return false;
+            }
+        } else if (!isActivatedAbility()) {
             return false;
         }
 
