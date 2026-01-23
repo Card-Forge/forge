@@ -29,25 +29,47 @@ The following core files have been modified for network functionality:
 | File | Module | Modification Type |
 |------|--------|------------------|
 | `TrackableObject.java` | forge-game | Changed `set()` visibility to public, added 4 delta sync methods |
-| `AbstractGuiGame.java` | forge-gui | Added ~846 lines of network deserialization logic |
-| `GameLobby.java` | forge-gui | Reordered execution sequence for `onGameStarted()` |
+| `AbstractGuiGame.java` | forge-gui | Simplified (network code extracted to subclass) |
+| `NetworkGuiGame.java` | forge-gui | **NEW** - Contains ~850 lines of network deserialization logic |
+| `GameLobby.java` | forge-gui | Reordered execution sequence for `onGameStarted()` with documentation |
 | `IGameController.java` | forge-gui | Added 3 network protocol methods |
 | `IGuiGame.java` | forge-gui | Added 8 network protocol methods |
+
+### Architecture: Network Code Isolation
+
+Network-specific deserialization logic has been isolated into a dedicated subclass hierarchy:
+
+```
+AbstractGuiGame (core game logic, ~900 lines)
+    ↑ extends
+NetworkGuiGame (network deserialization, ~850 lines)
+    ↑ extends
+NetGuiGame (server-side network proxy)
+```
+
+**Benefits:**
+- AbstractGuiGame restored to core game logic only (no network bloat)
+- Network code clearly separated and maintainable independently
+- Master branch merges will have minimal conflicts in AbstractGuiGame
+- Network functionality can be developed/tested in isolation
 
 ### Why These Changes Were Necessary
 
 **Delta Synchronization** requires:
 - Access to TrackableObject internals to detect and serialize property changes
-- Network deserialization in AbstractGuiGame to apply delta packets
+- Network deserialization (isolated in NetworkGuiGame subclass)
 - Protocol methods in interfaces for client-server communication
 
 **Reconnection Support** requires:
 - Modified game initialization sequence to establish sessions before sending state
-- Tracker management for deserialized game objects
+- Tracker management for deserialized game objects (isolated in NetworkGuiGame)
 
-These features are **deeply integrated** with the game state management system, making isolation from core classes challenging.
+**Network Code Isolation:**
+- Network-specific logic extracted from AbstractGuiGame into NetworkGuiGame subclass
+- Prevents bloat in core game classes while maintaining full functionality
+- Enables clean merges with Master branch development
 
-If the Master branch team determines that the architectural overlap needs to be addressed, **[REFACTOR_OPTIONS.md](REFACTOR_OPTIONS.md)** provides potential NetworkPlay refactoring strategies that could be considered.
+The core interfaces (IGuiGame, IGameController) still contain network methods, but the implementation details are isolated in the NetworkGuiGame subclass hierarchy. Further refactoring to segregate these interfaces is documented in **[REFACTOR_OPTIONS.md](REFACTOR_OPTIONS.md)** if needed.
 
 ---
 
@@ -232,7 +254,7 @@ To detect and recover from synchronization errors (e.g., packet corruption, miss
 - Checksum includes: game ID, turn number, phase, player IDs and life totals
 - Includes checksum in `DeltaPacket` when computed
 
-**Client-Side** (`AbstractGuiGame.java`):
+**Client-Side** (`NetworkGuiGame.java`):
 - Validates checksum when present in received packet
 - Computes local state checksum using same algorithm
 - On mismatch: Automatically requests full state resync
@@ -259,7 +281,7 @@ To detect and recover from synchronization errors (e.g., packet corruption, miss
 
 **Implementation Files**:
 - Server: `GameServerHandler.java` (handles requestResync)
-- Client: `AbstractGuiGame.java` (validates checksums)
+- Client: `NetworkGuiGame.java` (validates checksums and manages delta sync)
 - Protocol: `ProtocolMethod.requestResync`
 
 #### Protocol Methods
@@ -1002,8 +1024,9 @@ Reconnection:
 ### Match/GUI
 | File | Changes |
 |------|---------|
-| `forge-gui/.../gamemodes/match/AbstractGuiGame.java` | Added `applyDelta()` implementation, tracker initialization, object creation from delta data |
-| `forge-gui/.../gamemodes/match/GameLobby.java` | Reordered `onGameStarted()` to execute before `startMatch()`; added `getHostedMatch()` accessor |
+| `forge-gui/.../gamemodes/match/AbstractGuiGame.java` | Simplified - network methods reduced to no-op stubs (network logic moved to NetworkGuiGame) |
+| `forge-gui/.../gamemodes/net/NetworkGuiGame.java` | **NEW** - Network-specific subclass with delta sync deserialization (~850 lines) |
+| `forge-gui/.../gamemodes/match/GameLobby.java` | Reordered `onGameStarted()` to execute before `startMatch()` with inline documentation; added `getHostedMatch()` accessor |
 | `forge-gui-desktop/.../gui/FNetOverlay.java` | Added `[SERVER]` prefix for system messages in chat display |
 
 ### Events

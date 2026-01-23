@@ -6,15 +6,18 @@ The NetworkPlay branch contains significant architectural changes to core non-ne
 
 **Current State:**
 - 8 core files modified
-- ~846 lines added to AbstractGuiGame.java alone
+- ✅ **AbstractGuiGame.java refactored** - Network code extracted into NetworkGuiGame subclass
 - Core interfaces extended with 11 network methods
 - Network functionality integrated with core game state management
 
-**Available Refactoring Approaches:**
+**Completed Refactorings:**
+- ✅ Inheritance pattern applied to AbstractGuiGame (network logic isolated in NetworkGuiGame)
+- ✅ GameLobby.java documented with execution order requirements
+
+**Available Refactoring Approaches (Future):**
 - Adapter pattern for TrackableObject access
-- Inheritance pattern to extract network logic from AbstractGuiGame
 - Interface segregation to separate network and core concerns
-- Enhanced documentation for behavioral dependencies
+- Further isolation of network-specific methods
 
 ---
 
@@ -53,78 +56,83 @@ public final void clearChanges() { changedProps.clear(); }
 
 ---
 
-#### 2. `AbstractGuiGame.java` (forge-gui module)
+#### 2. `AbstractGuiGame.java` (forge-gui module) - ✅ REFACTORED
 
 **Location**: Core GUI game implementation
 
-**Current Changes:**
-- ~846 lines of modifications (largest single-file change)
-- Added `applyDelta()` method (~500 lines of network deserialization logic)
-- Added `fullStateSync()` method
-- Modified `setGameView()` with network-specific tracker initialization
-- Added 4 helper methods: `ensureTrackerInitialized()`, `setTrackerRecursively()`, `computeStateChecksum()`, `requestFullStateResync()`
+**Status**: ✅ **Network code successfully isolated** (as of latest commit)
 
-**Characteristics:**
-- setGameView() modification changes fundamental initialization behavior
-- Large code footprint in base GUI class
-- Network delta application logic embedded alongside local game logic
-- Tracker management code serves network deserialization needs
+**Refactoring Completed:**
+- Created `NetworkGuiGame.java` subclass containing all network-specific logic (~850 lines)
+- Restored `AbstractGuiGame.java` to core game logic only (~900 lines)
+- Network methods in AbstractGuiGame reduced to simple no-op stubs
+- `setGameView()` simplified to basic property copying (network tracker init moved to NetworkGuiGame)
 
-**Integration Considerations:**
-- AbstractGuiGame is used by both local and network games
-- setGameView() is a core initialization method
-- Main branch modifications to game state initialization would interact with network logic
-
-**Potential Conflict Scenario:**
+**Architecture:**
 ```java
-// If Main branch modifies setGameView():
-public void setGameView(final GameView gameView0) {
-    // Add new initialization logic
-    gameView = gameView0;
-}
-
-// NetworkPlay has extensive tracker management:
-public void setGameView(final GameView gameView0) {
-    if (gameView0.getTracker() == null) {
-        // 50+ lines of tracker initialization
-    }
-    // ... existing logic
-}
-// → Would require careful merging of both initialization approaches
+AbstractGuiGame (core game logic, ~900 lines)
+    ↑ extends
+NetworkGuiGame (network deserialization, ~850 lines)
+    ↑ extends
+NetGuiGame (server-side network proxy)
 ```
+
+**Benefits:**
+- AbstractGuiGame restored to pre-network state (no bloat)
+- Clear separation between local and network game functionality
+- Main branch merges will have minimal conflicts in AbstractGuiGame
+- Network code can be maintained independently
+
+**Integration Impact:**
+- Main branch modifications to AbstractGuiGame will no longer conflict with network code
+- Network functionality isolated in separate subclass hierarchy
+- Local games unaffected by network implementation details
 
 ---
 
-#### 3. `GameLobby.java`
+#### 3. `GameLobby.java` - ✅ DOCUMENTED
 
 **Location**: Core game lobby implementation
+
+**Status**: ✅ **Comprehensive inline documentation added** (as of latest commit)
 
 **Current Changes:**
 - Reordered game start sequence: `onGameStarted()` now called BEFORE `hostedMatch.startMatch()`
 - Added public getter `getHostedMatch()`
+- **Added detailed inline comments** explaining critical execution order for network games
 
-**Characteristics:**
-- Execution order change affects all game types
-- Behavioral modification to support network session establishment
-- Change is subtle and not immediately apparent from code inspection
+**Documentation Added:**
+```java
+// ═══════════════════════════════════════════════════════════════════════════════
+// CRITICAL EXECUTION ORDER FOR NETWORK GAMES
+// ═══════════════════════════════════════════════════════════════════════════════
+//
+// onGameStarted() MUST be called BEFORE hostedMatch.startMatch()
+//
+// Why: Network games require GameSession to exist before sending initial state
+//      packets to clients. The GameSession is created in onGameStarted() and
+//      contains session credentials needed for reconnection support.
+//
+// Flow: 1. onGameStarted() → creates GameSession (network) or no-op (local)
+//       2. hostedMatch.startMatch() → calls openView()
+//       3. openView() → sends FullStatePacket with session credentials (network)
+//
+// Impact of reordering: Clients cannot reconnect (no session credentials sent)
+//
+// Local games: Unaffected (onGameStarted is typically a no-op for local play)
+// ═══════════════════════════════════════════════════════════════════════════════
+```
+
+**Benefits:**
+- Execution order requirement clearly documented inline
+- Prevents accidental reordering during refactoring
+- Explains impact for both network and local games
+- Visual separators make critical section highly visible
 
 **Integration Considerations:**
-- Timing dependency specific to network game session creation
-- Local games unaffected (onGameStarted typically no-op)
-- Main branch features depending on original execution order would need adjustment
-
-**Potential Conflict Scenario:**
-```java
-// Original order:
-hostedMatch.startMatch();
-onGameStarted();
-
-// NetworkPlay requires:
-onGameStarted();  // Creates session first
-hostedMatch.startMatch();
-
-// If Main adds logic assuming original order → conflict
-```
+- Documentation prevents merge conflicts from accidental reordering
+- Local games explicitly noted as unaffected
+- Main branch developers can see network dependency immediately
 
 ---
 
