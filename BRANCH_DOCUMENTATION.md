@@ -29,7 +29,7 @@ The following core files have been modified for network functionality:
 | File | Module | Modification Type |
 |------|--------|------------------|
 | `TrackableObject.java` | forge-game | Changed `set()` visibility to public, added 4 delta sync methods |
-| `AbstractGuiGame.java` | forge-gui | Simplified (network code extracted to subclass) |
+| `AbstractGuiGame.java` | forge-gui | Minor changes: Added 2 network imports + 8 stub method implementations (network logic extracted to NetworkGuiGame) |
 | `NetworkGuiGame.java` | forge-gui | **NEW** - Contains ~850 lines of network deserialization logic |
 | `GameLobby.java` | forge-gui | Reordered execution sequence for `onGameStarted()` with documentation |
 | `IGameController.java` | forge-gui | Added 3 network protocol methods |
@@ -47,8 +47,13 @@ NetworkGuiGame (network deserialization, ~850 lines)
 NetGuiGame (server-side network proxy)
 ```
 
+**What Remains in AbstractGuiGame:**
+- 2 network imports (`DeltaPacket`, `FullStatePacket`) - required for interface compliance
+- 8 stub method implementations (~40 lines total) - required because `AbstractGuiGame implements IGuiGame`
+- All network logic (~850 lines) extracted to NetworkGuiGame subclass
+
 **Benefits:**
-- AbstractGuiGame restored to core game logic only (no network bloat)
+- AbstractGuiGame network bloat reduced by ~95% (846 lines → ~40 lines)
 - Network code clearly separated and maintainable independently
 - Master branch merges will have minimal conflicts in AbstractGuiGame
 - Network functionality can be developed/tested in isolation
