@@ -154,16 +154,16 @@ public final class MagicColor {
         COLORLESS(Constant.COLORLESS, MagicColor.COLORLESS, "C", null, "lblColorless");
 
         private final String name, shortName, symbol;
-        private final String basicLand;
+        private final String basicLandType;
         private final String label;
         private final byte colormask;
 
-        Color(String name0, byte colormask0, String shortName, String basicLand, String label) {
+        Color(String name0, byte colormask0, String shortName, String basicLandType, String label) {
             name = name0;
             colormask = colormask0;
             this.shortName = shortName;
             symbol = "{" + shortName + "}";
-            this.basicLand = basicLand;
+            this.basicLandType = basicLandType;
             this.label = label;
         }
 
@@ -196,8 +196,8 @@ public final class MagicColor {
             return shortName;
         }
 
-        public String getBasicLand() {
-            return basicLand;
+        public String getBasicLandType() {
+            return basicLandType;
         }
 
         @Override
