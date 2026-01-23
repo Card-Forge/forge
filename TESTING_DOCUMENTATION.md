@@ -1089,7 +1089,9 @@ public void testBulkGameCompletion() {
 | NetworkAIPlayerFactory | Configures AI player slots |
 | GameTestMetrics | Aggregates game and network metrics |
 | GameEventListener | Monitors game events for test scenarios |
-| ParallelTestExecutor | Runs multiple games concurrently |
+| SequentialGameExecutor | Runs multiple games sequentially with isolated logs |
+| MultiProcessGameExecutor | Runs multiple games in parallel JVM processes |
+| SingleGameRunner | Standalone runner for multi-process execution |
 
 ### File Structure
 
@@ -1109,7 +1111,11 @@ forge-gui-desktop/src/test/java/forge/net/
 ├── NetworkAIPlayerFactory.java    # AI player configuration
 ├── GameTestMetrics.java           # Metrics aggregation
 ├── GameEventListener.java         # Event monitoring
-├── ParallelTestExecutor.java      # Parallel test execution
+├── SequentialGameExecutor.java    # Sequential multi-game execution
+├── SequentialGameTest.java        # Tests for sequential execution
+├── MultiProcessGameExecutor.java  # Multi-process parallel execution
+├── MultiProcessGameTest.java      # Tests for multi-process execution
+├── SingleGameRunner.java          # Standalone game runner for multi-process
 ├── ConsoleNetworkTestRunner.java  # CLI entry point
 └── scenarios/
     ├── BasicGameScenario.java
@@ -1215,6 +1221,80 @@ mvn -pl forge-gui-desktop -am test -Dtest=AutomatedNetworkTest#testTrueNetworkTr
 mvn -pl forge-gui-desktop -am test -Dtest=AutomatedNetworkTest#testFullAutomatedGame
 ```
 
+### Multi-Game Execution
+
+Two modes are available for running multiple games to generate logs for analysis:
+
+#### Sequential Execution
+
+Runs multiple games one at a time within the same JVM. Each game gets its own log file.
+
+```bash
+# Run 3 sequential games
+mvn -pl forge-gui-desktop -am verify -Dtest=SequentialGameTest#testThreeGamesSequential \
+    -Dsurefire.failIfNoSpecifiedTests=false
+
+# Configurable game count
+mvn -pl forge-gui-desktop -am verify -Dtest=SequentialGameTest#testConfigurableGameCount \
+    -Dtest.gameCount=5 -Dsurefire.failIfNoSpecifiedTests=false
+```
+
+**Limitations:** Due to the `FServerManager` singleton, only one game can run at a time within a single JVM.
+
+#### Multi-Process Parallel Execution
+
+Runs multiple games truly in parallel by spawning separate JVM processes. Each process has its own `FServerManager` instance, enabling true parallelism.
+
+```bash
+# Run 2 parallel games
+mvn -pl forge-gui-desktop -am verify -Dtest=MultiProcessGameTest#testTwoParallelProcesses \
+    -Dsurefire.failIfNoSpecifiedTests=false
+
+# Run 3 parallel games
+mvn -pl forge-gui-desktop -am verify -Dtest=MultiProcessGameTest#testThreeParallelProcesses \
+    -Dsurefire.failIfNoSpecifiedTests=false
+
+# Run 5 parallel games (for larger log datasets)
+mvn -pl forge-gui-desktop -am verify -Dtest=MultiProcessGameTest#testFiveParallelProcesses \
+    -Dsurefire.failIfNoSpecifiedTests=false
+
+# Configurable game count
+mvn -pl forge-gui-desktop -am verify -Dtest=MultiProcessGameTest#testConfigurableGameCount \
+    -Dtest.gameCount=10 -Dsurefire.failIfNoSpecifiedTests=false
+```
+
+**How It Works:**
+1. `MultiProcessGameExecutor` spawns N JVM processes using `ProcessBuilder`
+2. Each process runs `SingleGameRunner` with a unique port number
+3. Games execute truly in parallel across separate JVMs
+4. Each game creates its own log file: `network-debug-*-gameN-test.log`
+5. Results are aggregated and returned to the parent process
+
+**Example Output:**
+```
+Multi-Process Parallel Game Execution Report
+================================================================================
+
+Summary: MultiProcess[games=3, success=3, failed=0, errors=0, timeouts=0,
+         totalDeltas=1371, totalBytes=70000, successRate=100%]
+
+Individual Game Results:
+----------------------------------------
+Game 0: SUCCESS - deltas=560, turns=14, winner=Alice (Host AI)
+Game 1: SUCCESS - deltas=449, turns=10, winner=Alice (Host AI)
+Game 2: SUCCESS - deltas=362, turns=10, winner=Alice (Host AI)
+```
+
+**Log Files Generated:**
+```
+forge-gui-desktop/logs/
+├── network-debug-20260124-093757-4580-game0-test.log
+├── network-debug-20260124-093757-21292-game1-test.log
+└── network-debug-20260124-093757-9224-game2-test.log
+```
+
+Note: The PID in each filename is different (4580, 21292, 9224), confirming true parallel JVM execution.
+
 ### Log Analysis
 
 Network debug logs are written to `forge-gui-desktop/logs/network-debug-*.log`.
@@ -1285,6 +1365,24 @@ This section summarizes the key components delivered in this testing infrastruct
 - Single entry point for all test modes (LOCAL, NETWORK_LOCAL, NETWORK_REMOTE)
 - Batch testing with aggregate statistics
 - Comparative testing (local vs network performance analysis)
+
+### Multi-Game Execution Components
+
+**SequentialGameExecutor** - Sequential multi-game execution
+- Runs multiple games one at a time within the same JVM
+- Each game gets isolated log file via `NetworkDebugLogger.setInstanceSuffix()`
+- Returns aggregated results for all games
+
+**MultiProcessGameExecutor** - Multi-process parallel execution
+- Spawns separate JVM processes for true parallelism
+- Each process has its own `FServerManager` instance (bypasses singleton limitation)
+- Uses `ProcessBuilder` to launch `SingleGameRunner` processes
+- Aggregates results from all child processes
+
+**SingleGameRunner** - Standalone game runner
+- Main class invoked by `MultiProcessGameExecutor`
+- Runs a single network game and outputs result to stdout
+- Exit codes: 0=success, 1=failure, 2=error
 
 ### Configuration and Utilities
 
