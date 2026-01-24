@@ -10,6 +10,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Comprehensive delta sync validation test.
@@ -71,6 +75,7 @@ public class ComprehensiveDeltaSyncTest {
 
         // 2. Run all games
         NetworkDebugLogger.log("%s Executing %d games...", LOG_PREFIX, executor.getTotalGames());
+        LocalDateTime testStartTime = LocalDateTime.now();
         long startTime = System.currentTimeMillis();
 
         MultiProcessGameExecutor.ExecutionResult executionResult = executor.execute();
@@ -81,10 +86,10 @@ public class ComprehensiveDeltaSyncTest {
         // 3. Log execution summary
         System.out.println("\n" + executionResult.toDetailedReport());
 
-        // 4. Analyze log files
-        NetworkDebugLogger.log("%s Analyzing log files in %s", LOG_PREFIX, LOG_DIRECTORY.getAbsolutePath());
+        // 4. Analyze log files (only those from this test run)
+        NetworkDebugLogger.log("%s Analyzing log files in %s (created after %s)", LOG_PREFIX, LOG_DIRECTORY.getAbsolutePath(), testStartTime);
         NetworkLogAnalyzer analyzer = new NetworkLogAnalyzer();
-        AnalysisResult analysisResult = analyzer.analyzeComprehensiveTestAndAggregate(LOG_DIRECTORY);
+        AnalysisResult analysisResult = analyzer.analyzeComprehensiveTestAndAggregate(LOG_DIRECTORY, testStartTime);
 
         // 5. Generate and print report
         String report = analysisResult.generateReport();
@@ -92,10 +97,13 @@ public class ComprehensiveDeltaSyncTest {
         System.out.println(report);
         System.out.println("=".repeat(80));
 
-        // 6. Log summary
+        // 6. Save report to file for future reference
+        saveReportToFile(report, "comprehensive-test-results");
+
+        // 7. Log summary
         NetworkDebugLogger.log("%s Analysis complete: %s", LOG_PREFIX, analysisResult.toSummary());
 
-        // 7. Validate results
+        // 8. Validate results
         validateResults(executionResult, analysisResult);
     }
 
@@ -115,15 +123,18 @@ public class ComprehensiveDeltaSyncTest {
 
         NetworkDebugLogger.log("%s Configuration:\n%s", LOG_PREFIX, executor.getConfigurationSummary());
 
+        LocalDateTime testStartTime = LocalDateTime.now();
         MultiProcessGameExecutor.ExecutionResult executionResult = executor.execute();
 
         System.out.println("\n" + executionResult.toDetailedReport());
 
         // Analyze and validate with relaxed criteria for quick test
         NetworkLogAnalyzer analyzer = new NetworkLogAnalyzer();
-        AnalysisResult analysisResult = analyzer.analyzeComprehensiveTestAndAggregate(LOG_DIRECTORY);
+        AnalysisResult analysisResult = analyzer.analyzeComprehensiveTestAndAggregate(LOG_DIRECTORY, testStartTime);
 
-        System.out.println("\n" + analysisResult.generateReport());
+        String report = analysisResult.generateReport();
+        System.out.println("\n" + report);
+        saveReportToFile(report, "quick-test-results");
 
         // Quick test uses relaxed validation (80% success rate)
         Assert.assertTrue(executionResult.getSuccessRate() >= 0.80,
@@ -234,6 +245,27 @@ public class ComprehensiveDeltaSyncTest {
         }
 
         NetworkDebugLogger.log("%s All validation criteria PASSED", LOG_PREFIX);
+    }
+
+    /**
+     * Save the analysis report to a timestamped file in the logs directory.
+     * This allows easy reference to comprehensive test results without reconstructing from logs.
+     *
+     * @param report The markdown report content
+     * @param prefix Filename prefix (e.g., "comprehensive-test-results" or "quick-test-results")
+     */
+    private void saveReportToFile(String report, String prefix) {
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
+        File reportFile = new File(LOG_DIRECTORY, prefix + "-" + timestamp + ".md");
+
+        try (FileWriter writer = new FileWriter(reportFile)) {
+            writer.write(report);
+            NetworkDebugLogger.log("%s Report saved to: %s", LOG_PREFIX, reportFile.getAbsolutePath());
+            System.out.println("Report saved to: " + reportFile.getAbsolutePath());
+        } catch (IOException e) {
+            NetworkDebugLogger.log("%s WARNING: Failed to save report to file: %s", LOG_PREFIX, e.getMessage());
+            System.err.println("WARNING: Failed to save report to file: " + e.getMessage());
+        }
     }
 
     /**

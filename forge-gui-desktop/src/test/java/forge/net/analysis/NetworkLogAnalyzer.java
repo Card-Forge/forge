@@ -8,6 +8,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -269,6 +272,52 @@ public class NetworkLogAnalyzer {
     }
 
     /**
+     * Analyze comprehensive test logs created after a specific time.
+     * This allows analyzing only logs from the current test run without clearing old logs.
+     *
+     * @param logDirectory Directory containing log files
+     * @param afterTime Only include logs created after this time
+     * @return List of GameLogMetrics for matching logs
+     */
+    public List<GameLogMetrics> analyzeComprehensiveTestLogsSince(File logDirectory, LocalDateTime afterTime) {
+        List<GameLogMetrics> allLogs = analyzeComprehensiveTestLogs(logDirectory);
+        return filterLogsByTime(allLogs, logDirectory, afterTime);
+    }
+
+    /**
+     * Filter logs by timestamp extracted from filename.
+     * Log filenames are formatted as: network-debug-YYYYMMDD-HHMMSS-PID-test.log
+     */
+    private List<GameLogMetrics> filterLogsByTime(List<GameLogMetrics> metrics, File logDirectory, LocalDateTime afterTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
+
+        return metrics.stream()
+                .filter(m -> {
+                    LocalDateTime logTime = extractTimestampFromFilename(m.getLogFileName(), formatter);
+                    return logTime != null && logTime.isAfter(afterTime);
+                })
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Extract timestamp from log filename.
+     * Expected format: network-debug-YYYYMMDD-HHMMSS-PID-*.log
+     */
+    private LocalDateTime extractTimestampFromFilename(String filename, DateTimeFormatter formatter) {
+        // Pattern: network-debug-20260124-105844-21236-game0-4p-test.log
+        Pattern timestampPattern = Pattern.compile("network-debug-(\\d{8}-\\d{6})-");
+        Matcher matcher = timestampPattern.matcher(filename);
+        if (matcher.find()) {
+            try {
+                return LocalDateTime.parse(matcher.group(1), formatter);
+            } catch (DateTimeParseException e) {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Truncate a log line to prevent memory bloat.
      */
     private String truncateLine(String line) {
@@ -307,6 +356,20 @@ public class NetworkLogAnalyzer {
      */
     public AnalysisResult analyzeComprehensiveTestAndAggregate(File logDirectory) {
         List<GameLogMetrics> metrics = analyzeComprehensiveTestLogs(logDirectory);
+        return buildAnalysisResult(metrics);
+    }
+
+    /**
+     * Analyze comprehensive test logs created after a specific time and return an aggregated result.
+     * This allows analyzing only logs from the current test run without clearing old logs.
+     *
+     * @param logDirectory Directory containing log files
+     * @param afterTime Only include logs created after this time
+     * @return Aggregated analysis result
+     */
+    public AnalysisResult analyzeComprehensiveTestAndAggregate(File logDirectory, LocalDateTime afterTime) {
+        List<GameLogMetrics> metrics = analyzeComprehensiveTestLogsSince(logDirectory, afterTime);
+        System.out.println("[NetworkLogAnalyzer] Filtered to " + metrics.size() + " logs created after " + afterTime);
         return buildAnalysisResult(metrics);
     }
 }

@@ -13,6 +13,9 @@ import forge.interfaces.IGameController;
 import forge.interfaces.ILobbyListener;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -333,6 +336,10 @@ public class HeadlessNetworkClient implements AutoCloseable {
      * Extends HeadlessNetworkGuiGame to get proper delta packet processing
      * (deserialization, tracker updates, object creation) while providing
      * auto-response behavior for headless testing.
+     *
+     * IMPORTANT: All auto-responses are serialized through a single-threaded executor
+     * to prevent race conditions where multiple response threads interfere with each other.
+     * Each new prompt cancels any pending auto-response from the previous prompt.
      */
     private static class DeltaLoggingGuiGame extends HeadlessNetworkGuiGame {
         private final HeadlessNetworkClient client;
@@ -341,8 +348,59 @@ public class HeadlessNetworkClient implements AutoCloseable {
         private final java.util.List<forge.game.card.CardView> pendingSelectables = new java.util.ArrayList<>();
         private int selectableIndex = 0;
 
+        // Single-threaded executor to serialize all auto-responses and prevent race conditions
+        private final ScheduledExecutorService autoResponseExecutor = Executors.newSingleThreadScheduledExecutor(r -> {
+            Thread t = new Thread(r, "HeadlessClient-AutoResponse");
+            t.setDaemon(true);
+            return t;
+        });
+        // Track the current pending auto-response so we can cancel it when a new prompt arrives
+        private volatile ScheduledFuture<?> pendingAutoResponse = null;
+        // Lock for coordinating auto-response scheduling
+        private final Object autoResponseLock = new Object();
+
         DeltaLoggingGuiGame(HeadlessNetworkClient client) {
             this.client = client;
+        }
+
+        /**
+         * Cancel any pending auto-response. Called when a new prompt arrives
+         * to prevent stale responses from interfering with the new prompt.
+         */
+        private void cancelPendingAutoResponse(String reason) {
+            synchronized (autoResponseLock) {
+                if (pendingAutoResponse != null && !pendingAutoResponse.isDone()) {
+                    pendingAutoResponse.cancel(false);
+                    NetworkDebugLogger.log("[DeltaLoggingGuiGame] Cancelled pending auto-response: %s", reason);
+                }
+                pendingAutoResponse = null;
+            }
+        }
+
+        /**
+         * Schedule an auto-response action with the given delay.
+         * Cancels any previously pending auto-response first.
+         */
+        private void scheduleAutoResponse(Runnable action, long delayMs, String description) {
+            synchronized (autoResponseLock) {
+                // Cancel any pending response first
+                cancelPendingAutoResponse("scheduling new: " + description);
+
+                pendingAutoResponse = autoResponseExecutor.schedule(() -> {
+                    try {
+                        // Verify we still have a controller before executing
+                        if (gameController != null) {
+                            action.run();
+                        } else {
+                            NetworkDebugLogger.log("[DeltaLoggingGuiGame] Skipping auto-response (no controller): %s", description);
+                        }
+                    } catch (Exception e) {
+                        NetworkDebugLogger.error("[DeltaLoggingGuiGame] Error in auto-response '%s': %s", description, e.getMessage());
+                    }
+                }, delayMs, TimeUnit.MILLISECONDS);
+
+                NetworkDebugLogger.log("[DeltaLoggingGuiGame] Scheduled auto-response in %dms: %s", delayMs, description);
+            }
         }
 
         @Override
@@ -374,12 +432,6 @@ public class HeadlessNetworkClient implements AutoCloseable {
         }
 
         @Override
-        public void afterGameEnd() {
-            super.afterGameEnd();
-            client.onGameEnd();
-        }
-
-        @Override
         public void setOriginalGameController(forge.game.player.PlayerView view, IGameController controller) {
             super.setOriginalGameController(view, controller);
             if (controller != null) {
@@ -407,33 +459,28 @@ public class HeadlessNetworkClient implements AutoCloseable {
             // These contain "Click on the portrait" in the message
             if (message != null && message.contains("Click on the portrait") && gameController != null) {
                 NetworkDebugLogger.log("[DeltaLoggingGuiGame] Detected player selection prompt, auto-selecting...");
-                new Thread(() -> {
-                    try {
-                        Thread.sleep(100); // Small delay for server to be ready
-                        // Get the game view and select the first player (or self)
-                        GameView gv = getGameView();
-                        if (gv != null && gv.getPlayers() != null && !gv.getPlayers().isEmpty()) {
-                            forge.game.player.PlayerView toSelect = null;
-                            // Prefer to select self if possible
-                            for (forge.game.player.PlayerView pv : gv.getPlayers()) {
-                                if (pv.getName().equals(client.username)) {
-                                    toSelect = pv;
-                                    break;
-                                }
+                scheduleAutoResponse(() -> {
+                    // Get the game view and select the first player (or self)
+                    GameView gv = getGameView();
+                    if (gv != null && gv.getPlayers() != null && !gv.getPlayers().isEmpty()) {
+                        forge.game.player.PlayerView toSelect = null;
+                        // Prefer to select self if possible
+                        for (forge.game.player.PlayerView pv : gv.getPlayers()) {
+                            if (pv.getName().equals(client.username)) {
+                                toSelect = pv;
+                                break;
                             }
-                            // Otherwise select first player
-                            if (toSelect == null) {
-                                toSelect = gv.getPlayers().iterator().next();
-                            }
-                            NetworkDebugLogger.log("[DeltaLoggingGuiGame] Auto-selecting player: %s", toSelect.getName());
-                            gameController.selectPlayer(toSelect, null);
-                        } else {
-                            NetworkDebugLogger.error("[DeltaLoggingGuiGame] Cannot auto-select player - no game view or players");
                         }
-                    } catch (Exception e) {
-                        NetworkDebugLogger.error("[DeltaLoggingGuiGame] Error auto-selecting player: %s", e.getMessage());
+                        // Otherwise select first player
+                        if (toSelect == null) {
+                            toSelect = gv.getPlayers().iterator().next();
+                        }
+                        NetworkDebugLogger.log("[DeltaLoggingGuiGame] Auto-selecting player: %s", toSelect.getName());
+                        gameController.selectPlayer(toSelect, null);
+                    } else {
+                        NetworkDebugLogger.error("[DeltaLoggingGuiGame] Cannot auto-select player - no game view or players");
                     }
-                }).start();
+                }, 100, "player selection");
             }
         }
 
@@ -445,15 +492,7 @@ public class HeadlessNetworkClient implements AutoCloseable {
             if (gameController != null && okEnabled) {
                 NetworkDebugLogger.log("[DeltaLoggingGuiGame] Auto-clicking OK for player: %s",
                         owner != null ? owner.getName() : "unknown");
-                // Use a small delay to ensure the server has finished setting up the input
-                new Thread(() -> {
-                    try {
-                        Thread.sleep(50); // Small delay for server to be ready
-                        gameController.selectButtonOk();
-                    } catch (Exception e) {
-                        NetworkDebugLogger.error("[DeltaLoggingGuiGame] Error auto-clicking OK: %s", e.getMessage());
-                    }
-                }).start();
+                scheduleAutoResponse(() -> gameController.selectButtonOk(), 50, "click OK button");
             }
         }
 
@@ -466,18 +505,11 @@ public class HeadlessNetworkClient implements AutoCloseable {
                 String clickTarget = enable1 ? label1 : label2;
                 NetworkDebugLogger.log("[DeltaLoggingGuiGame] Auto-clicking '%s' for player: %s",
                         clickTarget, owner != null ? owner.getName() : "unknown");
-                new Thread(() -> {
-                    try {
-                        Thread.sleep(50);
-                        if (enable1) {
-                            gameController.selectButtonOk();
-                        } else {
-                            gameController.selectButtonCancel();
-                        }
-                    } catch (Exception e) {
-                        NetworkDebugLogger.error("[DeltaLoggingGuiGame] Error auto-clicking button: %s", e.getMessage());
-                    }
-                }).start();
+                if (enable1) {
+                    scheduleAutoResponse(() -> gameController.selectButtonOk(), 50, "click '" + label1 + "'");
+                } else {
+                    scheduleAutoResponse(() -> gameController.selectButtonCancel(), 50, "click '" + label2 + "'");
+                }
             } else if (gameController != null && !enable1 && selectableIndex < pendingSelectables.size()) {
                 // OK is disabled but we have more cards to select (multi-selection prompt)
                 NetworkDebugLogger.log("[DeltaLoggingGuiGame] OK disabled, selecting next card (%d/%d remaining)",
@@ -504,22 +536,30 @@ public class HeadlessNetworkClient implements AutoCloseable {
             }
         }
 
-        // Helper to select the next card from the pending list
+        /**
+         * Select the next card from the pending list.
+         * Uses the serialized auto-response executor to prevent race conditions.
+         */
         private void selectNextCard() {
             if (selectableIndex < pendingSelectables.size()) {
                 forge.game.card.CardView card = pendingSelectables.get(selectableIndex);
                 selectableIndex++;
                 NetworkDebugLogger.log("[DeltaLoggingGuiGame] Auto-selecting card %d/%d: %s",
                         selectableIndex, pendingSelectables.size(), card.getName());
-                new Thread(() -> {
-                    try {
-                        Thread.sleep(100); // Small delay for server to be ready
-                        gameController.selectCard(card, null, null);
-                    } catch (Exception e) {
-                        NetworkDebugLogger.error("[DeltaLoggingGuiGame] Error auto-selecting card: %s", e.getMessage());
-                    }
-                }).start();
+                scheduleAutoResponse(() -> gameController.selectCard(card, null, null),
+                        100, "select card " + card.getName());
             }
+        }
+
+        /**
+         * Shutdown the auto-response executor when the game ends.
+         */
+        @Override
+        public void afterGameEnd() {
+            super.afterGameEnd();
+            // Shutdown the executor to clean up resources
+            autoResponseExecutor.shutdownNow();
+            client.onGameEnd();
         }
     }
 
