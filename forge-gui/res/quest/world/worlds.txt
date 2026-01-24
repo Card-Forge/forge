@@ -7,7 +7,7 @@ Name:Evolving Wilds
 Name:Amonkhet|Dir:Amonkhet|Sets:AKH, HOU, AKR
 Name:Jamuraa|Dir:jamuraa|Sets:5ED, ARN, MIR, VIS, WTH
 Name:Kamigawa|Dir:2004 Kamigawa|Sets:CHK, BOK, SOK
-Name:Lorwyn|Dir:lorwyn|Sets:SHM, EVE, LRW, MOR, 10E
+Name:Lorwyn|Dir:lorwyn|Sets:SHM, EVE, LRW, MOR, 10E, ECL
 Name:Mirrodin|Dir:mirrodin|Sets:MRD, DST, 5DN, SOM, MBS, NPH
 Name:Ravnica|Dir:ravnica|Sets:RAV, GPT, DIS, RTR, GTC, DGM
 Name:Shandalar|Dir:shandalar|Sets:2ED, ARN, ATQ, 3ED, LEG, DRK, 4ED|Banned:Chaos Orb; Falling Star
