@@ -491,6 +491,9 @@ public final class FServerManager {
                             playerName, readyCount, totalPlayers)));
                     }
                 }
+                // Return after handling UpdateLobbyPlayerEvent to prevent duplicate processing
+                // by LobbyInputHandler which also calls updateSlot()
+                return;
             }
             super.channelRead(ctx, msg);
         }

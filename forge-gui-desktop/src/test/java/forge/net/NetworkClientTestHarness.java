@@ -169,7 +169,7 @@ public class NetworkClientTestHarness {
         }
 
         long duration = System.currentTimeMillis() - startTime;
-        NetworkDebugLogger.log("%s Test completed in %dms: %s", LOG_PREFIX, duration, result.toSummary());
+        NetworkDebugLogger.log("%s Test completed in %.1fs: %s", LOG_PREFIX, duration / 1000.0, result.toSummary());
         return result;
     }
 

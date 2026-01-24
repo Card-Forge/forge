@@ -74,8 +74,8 @@ public class GameTestMetrics {
         sb.append(String.format("Game %s: ", gameCompleted ? "COMPLETED" : "FAILED"));
 
         if (gameCompleted) {
-            sb.append(String.format("Turns=%d, Duration=%dms, Winner=%s",
-                turnCount, gameDurationMs, winner != null ? winner : "N/A"));
+            sb.append(String.format("Turns=%d, Duration=%.1fs, Winner=%s",
+                turnCount, gameDurationMs / 1000.0, winner != null ? winner : "N/A"));
         } else if (errorMessage != null) {
             sb.append("Error: " + errorMessage);
         }

@@ -39,6 +39,7 @@ public class NetGuiGame extends NetworkGuiGame {
     // New objects are sent with full property data, existing objects only send changed properties.
     private boolean useDeltaSync = true;
     private boolean initialSyncSent = false;
+    private boolean fallbackLogged = false;  // Prevent duplicate fallback log messages
 
     public NetGuiGame(final RemoteClient client) {
         this.sender = new GameProtocolSender(client);
@@ -125,10 +126,11 @@ public class NetGuiGame extends NetworkGuiGame {
         }
 
         if (!useDeltaSync || !initialSyncSent) {
-            // Fall back to full state sync - add debug logging
-            if (logBandwidth) {
+            // Fall back to full state sync - add debug logging (only once)
+            if (logBandwidth && !fallbackLogged) {
                 NetworkDebugLogger.log("[DeltaSync] Client %d: Fallback to full state - useDeltaSync=%b, initialSyncSent=%b",
                     clientIndex, useDeltaSync, initialSyncSent);
+                fallbackLogged = true;
             }
             send(ProtocolMethod.setGameView, gameView);
             return;
