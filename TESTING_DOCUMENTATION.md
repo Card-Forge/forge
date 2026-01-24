@@ -453,9 +453,9 @@ The only difference from live play is that AI makes decisions instantly rather t
 
 | Players | Approximate | ActualNetwork | FullState | Savings |
 |---------|-------------|---------------|-----------|---------|
-| 2 | 10,373,783 | 29,076,110 | 5,037,330,006 | 99.4% |
-| 3 | 15,171,768 | 45,540,799 | 9,503,034,088 | 99.5% |
-| 4 | 19,772,334 | 69,991,428 | 16,245,580,646 | 99.6% |
+| 2 | 10.4 MB | 29.1 MB | 5.0 GB | 99.4% |
+| 3 | 15.2 MB | 45.5 MB | 9.5 GB | 99.5% |
+| 4 | 19.8 MB | 70.0 MB | 16.2 GB | 99.6% |
 
 ### Validation Criteria
 
