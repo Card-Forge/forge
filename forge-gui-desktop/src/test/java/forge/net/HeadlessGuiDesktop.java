@@ -166,6 +166,32 @@ public class HeadlessGuiDesktop extends GuiDesktop {
         System.err.println(text);
     }
 
+    // ========== Audio methods - disable in headless mode ==========
+
+    /**
+     * Return null to disable audio clips in headless mode.
+     */
+    @Override
+    public forge.sound.IAudioClip createAudioClip(final String filename) {
+        return null;  // No audio in headless mode
+    }
+
+    /**
+     * Return null to disable music in headless mode.
+     */
+    @Override
+    public forge.sound.IAudioMusic createAudioMusic(final String filename) {
+        return null;  // No audio in headless mode
+    }
+
+    /**
+     * No-op in headless mode - don't start sound system.
+     */
+    @Override
+    public void startAltSoundSystem(final String filename, final boolean isSynchronized) {
+        // No-op - no audio in headless mode
+    }
+
     // ========== EDT methods - execute immediately in headless mode ==========
 
     /**
