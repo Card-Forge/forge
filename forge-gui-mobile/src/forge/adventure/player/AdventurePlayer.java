@@ -1555,8 +1555,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             }
 
             for(DeckSection section : DeckSection.values()) {
-                if (section == DeckSection.Main) {
-                    continue; // handled later
+                if (section == DeckSection.Main || deck.get(section) == null) {
+                    continue;
                 }
                 int cntInSection = deck.get(section).count(card);
                 int nToRemoveFromSection = Math.min(cntInSection, nToRemoveFromThisDeck);
