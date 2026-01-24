@@ -1,6 +1,7 @@
 package forge.gamemodes.match.input;
 
 import forge.game.Game;
+import forge.game.GameView;
 import forge.game.card.Card;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
@@ -8,6 +9,7 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
+import forge.gui.interfaces.IGuiGame;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
@@ -76,6 +78,7 @@ public class InputLockUI implements Input {
 
         // In network games, show who we're waiting for
         if (GuiBase.isNetworkplay()) {
+            // First try: Get priority player from the local Game object (works on host)
             Player player = controller.getPlayer();
             if (player != null) {
                 Game game = player.getGame();
@@ -90,10 +93,42 @@ public class InputLockUI implements Input {
                     }
                 }
             }
+
+            // Fallback: Get priority player from the GameView (works on client)
+            // On the network client, the Game object is on the server, but GameView is synced
+            IGuiGame gui = controller.getGui();
+            if (gui != null) {
+                GameView gameView = gui.getGameView();
+                if (gameView != null && !gameView.isGameOver()) {
+                    PlayerView priorityPlayer = findPriorityPlayer(gameView);
+                    // Show the waiting message if priority player exists and is different from our player
+                    PlayerView localPlayer = controller.getLocalPlayerView();
+                    if (priorityPlayer != null && (localPlayer == null || priorityPlayer.getId() != localPlayer.getId())) {
+                        return localizer.getMessage("lblWaitingForPlayer", priorityPlayer.getName());
+                    }
+                }
+            }
         }
 
         // Default message for local games or when player info not available
         return localizer.getMessage("lblWaitingforActions");
+    }
+
+    /**
+     * Find the player with priority from the GameView.
+     * Checks PlayerView.getHasPriority() for each player.
+     * Falls back to getPlayerTurn() during game setup when no priority is set.
+     */
+    private PlayerView findPriorityPlayer(GameView gameView) {
+        if (gameView.getPlayers() != null) {
+            for (PlayerView pv : gameView.getPlayers()) {
+                if (pv.getHasPriority()) {
+                    return pv;
+                }
+            }
+        }
+        // Fallback to player turn during game setup (mulligan phase)
+        return gameView.getPlayerTurn();
     }
 
     protected final boolean isActive() {

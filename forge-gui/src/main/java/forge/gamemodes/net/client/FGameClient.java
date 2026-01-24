@@ -5,6 +5,7 @@ import forge.game.player.PlayerView;
 import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.CompatibleObjectEncoder;
 import forge.gamemodes.net.ReplyPool;
+import forge.gamemodes.net.NetworkDebugLogger;
 import forge.gamemodes.net.event.IdentifiableNetEvent;
 import forge.gamemodes.net.event.LobbyUpdateEvent;
 import forge.gamemodes.net.event.MessageEvent;
@@ -231,6 +232,8 @@ public class FGameClient implements IToServer {
 
         @Override
         public void channelInactive(final ChannelHandlerContext ctx) throws Exception {
+            NetworkDebugLogger.log("[ClientDisconnect] Channel became inactive, notifying %d listeners", lobbyListeners.size());
+            NetworkDebugLogger.log("[ClientDisconnect] Remote address was: %s", ctx.channel().remoteAddress());
             for (final ILobbyListener listener : lobbyListeners) {
                 listener.close();
             }

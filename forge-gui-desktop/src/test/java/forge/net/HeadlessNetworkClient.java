@@ -330,10 +330,11 @@ public class HeadlessNetworkClient implements AutoCloseable {
 
     /**
      * GUI implementation that logs delta packets and auto-responds to input requests.
-     * This enables headless network games to complete by automatically responding
-     * to prompts like mulligan decisions and priority passes.
+     * Extends HeadlessNetworkGuiGame to get proper delta packet processing
+     * (deserialization, tracker updates, object creation) while providing
+     * auto-response behavior for headless testing.
      */
-    private static class DeltaLoggingGuiGame extends NoOpGuiGame {
+    private static class DeltaLoggingGuiGame extends HeadlessNetworkGuiGame {
         private final HeadlessNetworkClient client;
         private IGameController gameController;
         // Track selectable cards for multi-selection prompts (e.g., "discard 2 cards")
@@ -346,6 +347,10 @@ public class HeadlessNetworkClient implements AutoCloseable {
 
         @Override
         public void applyDelta(DeltaPacket packet) {
+            // First, process the delta packet (deserialize, update tracker, etc.)
+            super.applyDelta(packet);
+
+            // Then notify the client for logging/verification
             client.onDeltaPacketReceived(packet);
 
             // Send acknowledgment if we have a controller
@@ -361,10 +366,11 @@ public class HeadlessNetworkClient implements AutoCloseable {
 
         @Override
         public void fullStateSync(FullStatePacket packet) {
+            // First, process the full state sync (tracker setup, etc.)
+            super.fullStateSync(packet);
+
+            // Then notify the client for logging/verification
             client.onFullStateSyncReceived(packet);
-            if (packet.getGameView() != null) {
-                setGameView(packet.getGameView());
-            }
         }
 
         @Override

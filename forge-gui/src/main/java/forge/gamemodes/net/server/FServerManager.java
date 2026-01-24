@@ -460,6 +460,16 @@ public final class FServerManager {
                 UpdateLobbyPlayerEvent updateEvent = (UpdateLobbyPlayerEvent) msg;
                 localLobby.applyToSlot(client.getIndex(), updateEvent);
 
+                // Check if this is a name change
+                if (updateEvent.getName() != null) {
+                    String oldName = client.getUsername();
+                    String newName = updateEvent.getName();
+                    if (!newName.equals(oldName)) {
+                        client.setUsername(newName);
+                        broadcast(new MessageEvent(String.format("%s changed their name to %s", oldName, newName)));
+                    }
+                }
+
                 // Check if this is a ready state change
                 if (updateEvent.getReady() != null) {
                     // Count ready players and total players

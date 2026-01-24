@@ -96,6 +96,17 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
 
     @Override
     public final void exceptionCaught(final ChannelHandlerContext ctx, final Throwable cause) {
+        NetworkDebugLogger.log("[ExceptionCaught] Connection exception: %s", cause.getClass().getName());
+        NetworkDebugLogger.log("[ExceptionCaught] Message: %s", cause.getMessage());
+        if (cause.getCause() != null) {
+            NetworkDebugLogger.log("[ExceptionCaught] Cause: %s - %s",
+                cause.getCause().getClass().getName(), cause.getCause().getMessage());
+        }
+        // Log stack trace elements
+        StackTraceElement[] stack = cause.getStackTrace();
+        for (int i = 0; i < Math.min(stack.length, 10); i++) {
+            NetworkDebugLogger.log("[ExceptionCaught]   at %s", stack[i].toString());
+        }
         cause.printStackTrace();
         ctx.close();
     }

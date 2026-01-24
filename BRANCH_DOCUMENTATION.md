@@ -50,7 +50,7 @@ The following core files have been modified for network functionality:
 |------|--------|------------------|
 | `TrackableObject.java` | forge-game | Changed `set()` visibility to public, added 4 delta sync methods |
 | `AbstractGuiGame.java` | forge-gui | Minor changes: Added 2 network imports + 8 stub method implementations (network logic extracted to NetworkGuiGame) |
-| `NetworkGuiGame.java` | forge-gui | **NEW** - Contains ~850 lines of network deserialization logic |
+| `NetworkGuiGame.java` | forge-gui | **NEW** - Contains ~930 lines of network deserialization logic |
 | `GameLobby.java` | forge-gui | Reordered execution sequence for `onGameStarted()` with documentation |
 | `IGameController.java` | forge-gui | Added 3 network protocol methods |
 | `IGuiGame.java` | forge-gui | Added 8 network protocol methods |
@@ -62,7 +62,7 @@ Network-specific deserialization logic has been isolated into a dedicated subcla
 ```
 AbstractGuiGame (core game logic, ~900 lines)
     ↑ extends
-NetworkGuiGame (network deserialization, ~850 lines)
+NetworkGuiGame (network deserialization, ~930 lines)
     ↑ extends
 NetGuiGame (server-side network proxy)
 ```
@@ -72,7 +72,7 @@ NetGuiGame (server-side network proxy)
 - 8 stub method implementations (~40 lines total) - required because `AbstractGuiGame implements IGuiGame`
 
 **Benefits:**
-- All network logic (~850 lines) extracted to NetworkGuiGame subclass
+- All network logic (~930 lines) extracted to NetworkGuiGame subclass
 - Network code clearly separated and maintainable independently
 - Master branch merges will have minimal conflicts in AbstractGuiGame
 - Network functionality can be developed/tested in isolation
@@ -115,37 +115,37 @@ Previously, the network protocol sent the entire `GameView` object on every stat
 - Sent complete `GameView` object on every update
 - Used `ObjectOutputStream` serialization
 - Applied LZ4 compression to all packets (via `CompatibleObjectEncoder`)
-- Typical game: ~12.4MB of serialized GameView objects transmitted
+- Typical game: ~307MB of serialized GameView objects transmitted
 
 **New System (With Delta Sync):**
 - Sends full data only for new objects (cards drawn, tokens created, etc.)
 - Sends changed properties for existing objects
 - Uses same ObjectOutputStream + LZ4 pipeline
-- Typical game: ~620KB of delta packets transmitted
+- Typical game: ~1.45MB of delta packets transmitted
 
-**Result:** 90-95% bandwidth reduction (12.4MB → 620KB)
+**Result:** 99.5% bandwidth reduction (307MB → 1.45MB)
 
 ```
 Full State Approach (Master Branch):
 ┌─────────┐                                      ┌─────────┐
 │ Server  │  Every action sends complete state   │ Client  │
 │         │ ═══════════════════════════════════> │         │
-│ 1.2 MB  │  ObjectOutputStream + LZ4            │ 1.2 MB  │
+│ ~1.2 MB │  ObjectOutputStream + LZ4            │ ~1.2 MB │
 └─────────┘                                      └─────────┘
-         Result: 12.4 MB for typical game
+         Result: ~307 MB for typical game
 
 
 Delta Sync Approach (NetworkPlay):
 ┌─────────┐                                      ┌─────────┐
 │ Server  │  Initial: Full state                 │ Client  │
 │         │ ═══════════════════════════════════> │         │
-│         │  1.2 MB (one time)                   │         │
+│         │  ~1.2 MB (one time)                  │         │
 │         │                                      │         │
 │         │  Updates: Only changes               │         │
 │         │ ───────────────────────────────────> │         │
-│ 0.3 KB  │  45 bytes delta (per update)         │ 0.3 KB  │
+│ ~38 B   │  ~38 bytes delta (per update)        │ ~38 B   │
 └─────────┘                                      └─────────┘
-         Result: 620 KB for typical game (95% savings)
+         Result: ~1.45 MB for typical game (99.5% savings)
 ```
 
 ---
@@ -168,7 +168,7 @@ The LZ4 compression layer is applied transparently at the network protocol level
 Packet → ObjectOutputStream → LZ4BlockOutputStream → Network
 ```
 
-**Impact on Delta Sync:** Delta synchronization reduces the payload size before it reaches the LZ4 compression layer. Since delta packets are already small, they compress more efficiently than full state packets. The 90-95% bandwidth reduction figure represents the combined effect of sending smaller payloads (delta sync) through the existing compression pipeline (LZ4).
+**Impact on Delta Sync:** Delta synchronization reduces the payload size before it reaches the LZ4 compression layer. Since delta packets are already small, they compress more efficiently than full state packets. The 99.5% bandwidth reduction figure (from comprehensive testing) represents the combined effect of sending smaller payloads (delta sync) through the existing compression pipeline (LZ4).
 
 ---
 
@@ -1124,8 +1124,10 @@ Connection failures now show diagnostic details instead of generic errors.
 ### Tests
 | File | Description |
 |------|-------------|
-| `forge-gui-desktop/.../gamesimulationtests/NetworkOptimizationTest.java` | **NEW** - Unit tests for delta sync and sessions |
-| `forge-gui-desktop/.../gamesimulationtests/LocalNetworkTestHarness.java` | **NEW** - Test infrastructure |
+| `forge-gui-desktop/src/test/java/forge/gamesimulationtests/NetworkOptimizationTest.java` | **NEW** - Unit tests for delta sync and sessions |
+| `forge-gui-desktop/src/test/java/forge/gamesimulationtests/LocalNetworkTestHarness.java` | **NEW** - Test infrastructure |
+
+**Note:** The main test infrastructure (headless testing, multi-process execution, comprehensive test runners) is in `forge-gui-desktop/src/test/java/forge/net/` (23 files). The files above are unit tests in the `gamesimulationtests/` package.
 
 ---
 
@@ -1398,14 +1400,14 @@ Savings Calculation:
 - Actual vs Full State = 62% (realistic, true bandwidth savings)
 ```
 
-**Why cumulative savings (90-95%) exceed per-packet savings (60-70%):**
+**Why cumulative savings (99.5%) exceed per-packet savings (60-70%):**
 
-The example above shows 62% savings for a single packet, but the Overview claims 90-95% reduction for a full game. This difference is expected:
+The example above shows 62% savings for a single packet, but comprehensive testing demonstrates 99.5% reduction across full games. This difference is expected:
 
 - **Early game**: Many new objects (cards drawn, permanents entering) require full serialization, resulting in lower per-packet savings (50-70%)
 - **Mid-game**: Mix of new objects and delta updates on existing objects (70-85% savings)
 - **Late game**: Mostly small deltas on existing objects with few new objects (95-99% savings per packet)
-- **Full game average**: The 90-95% figure represents bandwidth saved across an entire game session
+- **Full game average**: Comprehensive testing (100 games) shows 99.5% savings—see [TESTING_DOCUMENTATION.md](TESTING_DOCUMENTATION.md) for detailed results
 
 **Performance Impact**:
 - Enabled: ~1-2% overhead (includes ObjectOutputStream for full state estimates)
@@ -1450,7 +1452,7 @@ This branch includes a headless testing infrastructure that enables automated va
 | `HeadlessGuiDesktop` | Extends `GuiDesktop` to run games without display server |
 | `HeadlessNetworkClient` | Remote client that connects via TCP and receives delta packets |
 | `SequentialGameExecutor` | Runs multiple games with isolated log files |
-| `NoOpGuiGame` | No-op `IGuiGame` implementation (~80 methods) |
+| `NoOpGuiGame` | No-op `IGuiGame` implementation (693 lines) |
 
 ### Test Results
 

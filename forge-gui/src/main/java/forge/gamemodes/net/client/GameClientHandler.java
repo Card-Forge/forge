@@ -74,6 +74,13 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
                 // The actual setGameView method will also run in EDT, but we need it now.
                 if (args.length > 0 && args[0] instanceof GameView) {
                     GameView gameView = (GameView) args[0];
+                    // Ensure the incoming gameView has a tracker before setGameView tries to
+                    // copy properties (copyChangedProps requires tracker for collection handling)
+                    if (this.tracker != null && gameView.getTracker() == null) {
+                        gameView.setTracker(this.tracker);
+                        // Also update trackers on nested objects
+                        updateTrackers(new Object[]{gameView});
+                    }
                     gui.setGameView(gameView);
                 }
                 break;

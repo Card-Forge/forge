@@ -575,7 +575,10 @@ public class DeltaSyncManager {
      */
     private int computeStateChecksum(GameView gameView) {
         int hash = 17;
-        hash = 31 * hash + gameView.getId();
+        // NOTE: Do NOT include gameView.getId() in the checksum.
+        // The GameView ID is a local JVM identifier that differs between server and client
+        // because each side creates its own Game/GameView instances. Only include actual
+        // game state properties that should be synchronized.
         hash = 31 * hash + gameView.getTurn();
         if (gameView.getPhase() != null) {
             // Use ordinal() not hashCode() - ordinal is consistent across JVMs

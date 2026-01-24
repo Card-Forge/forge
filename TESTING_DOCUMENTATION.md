@@ -39,7 +39,7 @@ All test code resides in `forge-gui-desktop/src/test/java/forge/net/`.
 | Component | Purpose |
 |-----------|---------|
 | `HeadlessGuiDesktop` | Extends `GuiDesktop` to bypass display requirements |
-| `NoOpGuiGame` | No-op `IGuiGame` implementation (~80 methods) for AI games |
+| `NoOpGuiGame` | No-op `IGuiGame` implementation (693 lines) for AI games |
 
 **HeadlessGuiDesktop** enables games to run without Swing EDT by executing runnables immediately rather than queuing them on the Event Dispatch Thread.
 
@@ -418,15 +418,16 @@ The only difference from live play is that AI makes decisions instantly rather t
 | Success Rate | **100%** |
 | Checksum Mismatches | **0** |
 | Games with Errors | 0 |
-| Average Turns per Game | 22.5 |
+| Average Turns per Game | 23.5 |
+| Unique Decks Used | ~200 (of 424 available) |
 
 ### Bandwidth Usage Breakdown
 
 | Metric | Total | Avg/Game | Description |
 |--------|-------|----------|-------------|
-| Approximate | 45.3 MB | 391 KB | Estimated delta size from object diffs |
-| ActualNetwork | 144.6 MB | 1.25 MB | Actual bytes sent over network |
-| FullState | 30.8 GB | 265 MB | Size if full state was sent |
+| Approximate | 45.4 MB | 454 KB | Estimated delta size from object diffs |
+| ActualNetwork | 144.6 MB | 1.45 MB | Actual bytes sent over network |
+| FullState | 30.7 GB | 307 MB | Size if full state was sent |
 
 **Three-Tier Bandwidth Metrics Explained:**
 
@@ -470,6 +471,8 @@ The only difference from live play is that AI makes decisions instantly rather t
 
 ## Known Limitations
 
+### Test Infrastructure Limitations
+
 1. **AI Input Handling**: Remote client auto-responds to prompts with default choices; no strategic decision-making.
 
 2. **Single JVM Limitation**: `FServerManager` singleton prevents multiple servers in one JVM; use multi-process execution for parallelism.
@@ -477,6 +480,32 @@ The only difference from live play is that AI makes decisions instantly rather t
 3. **Timeout Interpretation**: Games exceeding timeout are not network failures—they indicate complex/long games. Increase `test.timeoutMs` if needed.
 
 4. **Deck Availability**: Deck tests require the `res/` directory to be populated. Tests use quest precon decks from `forge-gui/res/quest/precons/`.
+
+### Network Simulation Gaps
+
+While the testing infrastructure exercises production network code, some real-world conditions are not fully simulated:
+
+5. **Single-Machine Latency**: Tests run on localhost without real network latency. Packet transmission is effectively instantaneous, which may not reveal timing-sensitive bugs that occur with 50-200ms latency.
+
+6. **No Packet Loss Simulation**: Tests do not simulate dropped, duplicated, or out-of-order packets. The delta sync protocol's resilience to packet loss is not validated.
+
+7. **Fixed Response Timing**: Auto-responses use fixed delays (50-100ms) rather than variable human response times. This may not exercise timeout handling or race conditions that occur with unpredictable input timing.
+
+8. **AI Decision Paths Only**: Tests exercise AI decision-making code paths, which may differ from human player interactions (e.g., target selection order, mana payment preferences).
+
+9. **Host-Only Game Logic**: The `Game` object runs exclusively on the host. Tests verify that clients correctly receive and apply delta packets, but do not validate scenarios where the client's local representation would be used for gameplay decisions beyond display.
+
+10. **UI Rendering Validation**: Tests verify that data arrives correctly via delta sync, but do not validate that the data would render correctly in the actual UI (CardView properties, zone layouts, card positioning, etc.).
+
+11. **Reconnection Stress Testing**: The reconnection test uses a controlled scenario with a clean disconnect. It does not stress-test mid-combat reconnects, rapid disconnect/reconnect cycles, or reconnection during complex stack resolution.
+
+12. **Client Input Edge Cases**: Auto-responses always succeed immediately. Tests do not exercise:
+    - Input timeout handling (what happens if client doesn't respond)
+    - Invalid input rejection (malformed or illegal game actions)
+    - Input queue overflow or race conditions
+    - Concurrent input from multiple clients during multiplayer priority
+
+13. **State Divergence Detection**: While checksum validation catches major desyncs, subtle state divergences (e.g., incorrect card ordering within a zone, missing UI-only properties) may not be detected if they don't affect the checksum.
 
 ---
 
