@@ -88,6 +88,30 @@ public final class NetworkDebugLogger {
         // Utility class
     }
 
+    // Cached user home path for sanitization (computed once)
+    private static final String USER_HOME = System.getProperty("user.home");
+
+    /**
+     * Sanitize a file path to remove user-specific information.
+     * Replaces the user home directory with "~" for privacy.
+     *
+     * @param path The path to sanitize
+     * @return The sanitized path with user home replaced by "~"
+     */
+    private static String sanitizePath(String path) {
+        if (path == null || USER_HOME == null) {
+            return path;
+        }
+        // Replace user home with ~ (works for both Windows and Unix)
+        // Use File.separator-aware replacement
+        String normalizedHome = USER_HOME.replace('\\', '/');
+        String normalizedPath = path.replace('\\', '/');
+        if (normalizedPath.startsWith(normalizedHome)) {
+            return "~" + normalizedPath.substring(normalizedHome.length());
+        }
+        return path;
+    }
+
     /**
      * Apply configuration from NetworkDebug.config.
      * Called automatically on class initialization, but can also be called
@@ -368,7 +392,7 @@ public final class NetworkDebugLogger {
             if (suffix != null) {
                 writer.println("Instance: " + suffix);
             }
-            writer.println("Log file: " + logFile.getAbsolutePath());
+            writer.println("Log file: " + sanitizePath(logFile.getAbsolutePath()));
             writer.println();
             writer.println("System Information:");
             writer.println("  Java Version: " + System.getProperty("java.version"));
@@ -380,7 +404,7 @@ public final class NetworkDebugLogger {
             writer.println("=".repeat(80));
             writer.println();
 
-            System.out.println("[NetworkDebugLogger] Logging to: " + logFile.getAbsolutePath());
+            System.out.println("[NetworkDebugLogger] Logging to: " + sanitizePath(logFile.getAbsolutePath()));
 
             return writer;
         } catch (IOException e) {
