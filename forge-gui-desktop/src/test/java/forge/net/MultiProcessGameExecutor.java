@@ -87,9 +87,10 @@ public class MultiProcessGameExecutor {
      */
     public ExecutionResult runGamesWithPlayerCounts(int[] playerCounts) {
         int gameCount = playerCounts.length;
-        NetworkDebugLogger.log("%s Starting %d games with varying player counts", LOG_PREFIX, gameCount);
+        NetworkDebugLogger.log("%s Starting %d games in PARALLEL", LOG_PREFIX, gameCount);
 
         List<ProcessInfo> processes = new ArrayList<>();
+        List<ProcessMonitor> monitors = new ArrayList<>();
         ExecutionResult result = new ExecutionResult(gameCount);
 
         try {
@@ -98,20 +99,40 @@ public class MultiProcessGameExecutor {
             String javaHome = System.getProperty("java.home");
             String javaBin = javaHome + File.separator + "bin" + File.separator + "java";
 
-            // Start all processes
+            // Start all processes AND their output readers immediately
             for (int i = 0; i < gameCount; i++) {
                 int port = basePort + i;
                 int playerCount = playerCounts[i];
                 ProcessInfo info = startGameProcess(javaBin, classpath, port, i, playerCount);
                 processes.add(info);
+
+                // Start monitoring immediately to prevent output buffer deadlock
+                ProcessMonitor monitor = new ProcessMonitor(info);
+                monitor.startReading();
+                monitors.add(monitor);
+
                 NetworkDebugLogger.log("%s Started process for game %d (%d players, port %d, pid %d)",
                         LOG_PREFIX, i, playerCount, port, info.process.pid());
             }
 
-            // Wait for all processes to complete
-            for (ProcessInfo info : processes) {
-                waitForProcess(info, result);
+            // Wait for all processes to complete IN PARALLEL
+            // Each monitor runs in its own thread, so we just wait for all to finish
+            CountDownLatch allDone = new CountDownLatch(gameCount);
+
+            for (int i = 0; i < gameCount; i++) {
+                final int index = i;
+                final ProcessMonitor monitor = monitors.get(i);
+                new Thread(() -> {
+                    try {
+                        monitor.waitForCompletion(timeoutMs, result);
+                    } finally {
+                        allDone.countDown();
+                    }
+                }, "wait-game-" + index).start();
             }
+
+            // Wait for all games to complete
+            allDone.await();
 
         } catch (Exception e) {
             NetworkDebugLogger.error("%s Error: %s", LOG_PREFIX, e.getMessage());
@@ -120,6 +141,83 @@ public class MultiProcessGameExecutor {
 
         NetworkDebugLogger.log("%s Execution complete: %s", LOG_PREFIX, result.toSummary());
         return result;
+    }
+
+    /**
+     * Monitors a single game process, reading output and waiting for completion.
+     */
+    private class ProcessMonitor {
+        private final ProcessInfo info;
+        private final StringBuilder output = new StringBuilder();
+        private final AtomicReference<String> resultLine = new AtomicReference<>();
+        private final CountDownLatch readerDone = new CountDownLatch(1);
+        private Thread readerThread;
+
+        ProcessMonitor(ProcessInfo info) {
+            this.info = info;
+        }
+
+        void startReading() {
+            readerThread = new Thread(() -> {
+                try (BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(info.process.getInputStream()))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        output.append(line).append("\n");
+                        System.out.println("[Game " + info.gameIndex + "] " + line);
+                        if (line.startsWith("RESULT:")) {
+                            resultLine.set(line.substring(7));
+                        }
+                    }
+                } catch (Exception e) {
+                    NetworkDebugLogger.error("%s Error reading output for game %d: %s",
+                            LOG_PREFIX, info.gameIndex, e.getMessage());
+                } finally {
+                    readerDone.countDown();
+                }
+            }, "process-reader-" + info.gameIndex);
+            readerThread.setDaemon(true);
+            readerThread.start();
+        }
+
+        void waitForCompletion(long timeoutMs, ExecutionResult result) {
+            try {
+                boolean completed = info.process.waitFor(timeoutMs, TimeUnit.MILLISECONDS);
+
+                if (!completed) {
+                    info.process.destroyForcibly();
+                    result.addTimeout(info.gameIndex);
+                    NetworkDebugLogger.error("%s Game %d timed out after %dms",
+                            LOG_PREFIX, info.gameIndex, timeoutMs);
+                    return;
+                }
+
+                // Wait for reader thread to finish
+                readerDone.await(5, TimeUnit.SECONDS);
+
+                int exitCode = info.process.exitValue();
+
+                if (resultLine.get() != null) {
+                    parseResult(resultLine.get(), result);
+                }
+
+                if (exitCode == 0) {
+                    NetworkDebugLogger.log("%s Game %d completed successfully",
+                            LOG_PREFIX, info.gameIndex);
+                } else if (exitCode == 1) {
+                    NetworkDebugLogger.log("%s Game %d failed (exit code 1)",
+                            LOG_PREFIX, info.gameIndex);
+                } else {
+                    result.addError(info.gameIndex, "Process exited with code " + exitCode);
+                    NetworkDebugLogger.error("%s Game %d error (exit code %d)",
+                            LOG_PREFIX, info.gameIndex, exitCode);
+                }
+            } catch (Exception e) {
+                result.addError(info.gameIndex, "Exception: " + e.getMessage());
+                NetworkDebugLogger.error("%s Game %d exception: %s",
+                        LOG_PREFIX, info.gameIndex, e.getMessage());
+            }
+        }
     }
 
     /**
@@ -199,75 +297,6 @@ public class MultiProcessGameExecutor {
 
         Process process = pb.start();
         return new ProcessInfo(gameIndex, port, playerCount, process);
-    }
-
-    private void waitForProcess(ProcessInfo info, ExecutionResult result) {
-        // Start a thread to read output concurrently (prevents buffer deadlock)
-        StringBuilder output = new StringBuilder();
-        AtomicReference<String> resultLine = new AtomicReference<>();
-        CountDownLatch readerDone = new CountDownLatch(1);
-
-        Thread readerThread = new Thread(() -> {
-            try (BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(info.process.getInputStream()))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    output.append(line).append("\n");
-                    // Log output to help debug process issues
-                    System.out.println("[Game " + info.gameIndex + "] " + line);
-                    if (line.startsWith("RESULT:")) {
-                        resultLine.set(line.substring(7));
-                    }
-                }
-            } catch (Exception e) {
-                NetworkDebugLogger.error("%s Error reading output for game %d: %s",
-                        LOG_PREFIX, info.gameIndex, e.getMessage());
-            } finally {
-                readerDone.countDown();
-            }
-        }, "process-reader-" + info.gameIndex);
-        readerThread.setDaemon(true);
-        readerThread.start();
-
-        try {
-            boolean completed = info.process.waitFor(timeoutMs, TimeUnit.MILLISECONDS);
-
-            if (!completed) {
-                info.process.destroyForcibly();
-                result.addTimeout(info.gameIndex);
-                NetworkDebugLogger.error("%s Game %d timed out after %dms",
-                        LOG_PREFIX, info.gameIndex, timeoutMs);
-                return;
-            }
-
-            // Wait for reader thread to finish (should be quick after process exits)
-            readerDone.await(5, TimeUnit.SECONDS);
-
-            int exitCode = info.process.exitValue();
-
-            // Parse the result line if we got one
-            if (resultLine.get() != null) {
-                parseResult(resultLine.get(), result);
-            }
-
-            if (exitCode == 0) {
-                NetworkDebugLogger.log("%s Game %d completed successfully (exit code 0)",
-                        LOG_PREFIX, info.gameIndex);
-            } else if (exitCode == 1) {
-                NetworkDebugLogger.log("%s Game %d failed (exit code 1)",
-                        LOG_PREFIX, info.gameIndex);
-            } else {
-                result.addError(info.gameIndex, "Process exited with code " + exitCode);
-                NetworkDebugLogger.error("%s Game %d error (exit code %d)\nOutput:\n%s",
-                        LOG_PREFIX, info.gameIndex, exitCode, output.toString());
-            }
-
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            result.addError(info.gameIndex, "Interrupted");
-        } catch (Exception e) {
-            result.addError(info.gameIndex, e.getMessage());
-        }
     }
 
     private void parseResult(String resultLine, ExecutionResult result) {
