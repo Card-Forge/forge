@@ -1,0 +1,45 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Heavy Duty
+Description=Heavy Duty deploys efficient green-white creatures. Solid bodies and combat tricks win through quality.
+Deck Type=constructed
+Set=INV
+Image=heavy_duty.jpg
+[main]
+4 Plains|INV|1
+4 Plains|INV|2
+3 Plains|INV|3
+4 Forest|INV|1
+4 Forest|INV|2
+3 Forest|INV|3
+2 Elfhame Palace|INV
+2 Angel of Mercy|INV
+1 Ardent Soldier|INV
+1 Benalish Emissary|INV
+1 Benalish Lancer|INV
+1 Benalish Trapper|INV
+1 Capashen Unicorn|INV
+2 Charging Troll|INV
+1 Crimson Acolyte|INV
+2 Kavu Chameleon|INV
+1 Kavu Climber|INV
+2 Llanowar Cavalry|INV
+1 Llanowar Elite|INV
+2 Llanowar Knight|INV
+1 Noble Panther|INV
+1 Obsidian Acolyte|INV
+1 Pincer Spider|INV
+2 Rampant Elephant|INV
+2 Razorfoot Griffin|INV
+1 Rooting Kavu|INV
+1 Thicket Elemental|INV
+1 Treefolk Healer|INV
+2 Armadillo Cloak|INV
+2 Shackles|INV
+2 Explosive Growth|INV
+2 Wax // Wane|INV
+[sideboard]

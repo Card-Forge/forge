@@ -14,12 +14,16 @@ Image=the_spikes.jpg
 1 Canopy Spider|TMP
 1 Elven Rite|STH
 1 Fanning the Flames|STH
-12 Forest|TMP
+4 Forest|TMP|1
+4 Forest|TMP|2
+4 Forest|TMP|3
 2 Heartstone|STH
 1 Hermit Druid|STH
 4 Kindle|TMP
 1 Lowland Basilisk|STH
-9 Mountain|TMP
+3 Mountain|TMP|1
+3 Mountain|TMP|2
+3 Mountain|TMP|3
 2 Pincher Beetles|TMP
 2 Rampant Growth|TMP
 2 Shock|STH

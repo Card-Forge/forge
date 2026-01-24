@@ -3395,6 +3395,11 @@ public class Player extends GameEntity implements Comparable<Player> {
             return;
         }
 
+        if (!card.getGame().getRules().useAnte()) {
+            // Only track permanent ownership changes when ante is used
+            return;
+        }
+
         if (lostOwnership.contains(card)) {
             lostOwnership.remove(card);
         } else {
@@ -3406,6 +3411,14 @@ public class Player extends GameEntity implements Comparable<Player> {
         } else {
             oldOwner.lostOwnership.add(card);
         }
+    }
+
+    public void destroyPhysicalCard(Card card) {
+        if(!card.isCollectible()) {
+            return;
+        }
+
+        card.getOwner().lostOwnership.add(card);
     }
 
     public CardCollectionView getLostOwnership() {

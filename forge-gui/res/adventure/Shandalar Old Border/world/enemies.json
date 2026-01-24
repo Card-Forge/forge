@@ -24341,6 +24341,11 @@
         "probability": 1,
         "count": 1,
         "cardName": "Toxin Sliver|LGN"
+      },
+      {
+        "type": "life",
+        "probability": 1,
+        "count": 1
       }
     ],
     "colors": "BGRUW",

@@ -654,4 +654,12 @@ public abstract class Trigger extends TriggerReplacementBase {
     public boolean isLastChapter() {
         return isChapter() && getChapter() == getCardState().getFinalChapterNr();
     }
+
+    @Override
+    public boolean isManaAbility() {
+        if (!TriggerType.TapsForMana.equals(getMode()) && !TriggerType.ManaAdded.equals(getMode())) {
+            return false;
+        }
+        return ensureAbility().isManaAbility();
+    }
 }

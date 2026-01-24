@@ -28,5 +28,7 @@ Image=migraine.jpg
 2 Pit Imp|TMP
 1 Portcullis|STH
 1 Rabid Rats|STH
-24 Swamp|TMP
+8 Swamp|TMP|1
+8 Swamp|TMP|2
+8 Swamp|TMP|3
 [sideboard]
