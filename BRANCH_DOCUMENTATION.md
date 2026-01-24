@@ -14,6 +14,7 @@
 6. [Debugging](#debugging)
 7. [Known Limitations](#known-limitations)
 8. [Future Improvements](#potential-future-improvements)
+9. [Authorship](#authorship)
 
 ---
 
@@ -32,7 +33,7 @@ The NetworkPlay branch introduces four major features to improve the multiplayer
 **Additional Resources:**
 - **[Debugging](#debugging)**: Comprehensive debug logging for diagnosing network synchronization issues.
 - **[BUGS.md](BUGS.md)**: Record of known bugs, debugging progress, and resolution status.
-- **[TESTING_DOCUMENTATION.md](TESTING_DOCUMENTATION.md)**: Automated testing infrastructure for headless network game execution.
+- **[TESTING_DOCUMENTATION.md](TESTING_DOCUMENTATION.md)**: Automated headless testing infrastructure and comprehensive validation results (100 games: 97% success rate, 1 checksum mismatch auto-recovered, 99.5% bandwidth savings across 2-4 player configurations).
 
 ---
 
@@ -1459,44 +1460,6 @@ The example above shows 62% savings for a single packet, but comprehensive testi
 ## Known Limitations
 
 1. Objects are not explicitly removed from Tracker - relies on garbage collection when no longer referenced
-
----
-
-## Automated Testing Infrastructure
-
-This branch includes a headless testing infrastructure that enables automated validation of network features without manual two-instance testing. Full documentation is in [TESTING_DOCUMENTATION.md](TESTING_DOCUMENTATION.md).
-
-### Key Components
-
-| Component | Purpose |
-|-----------|---------|
-| `HeadlessGuiDesktop` | Extends `GuiDesktop` to run games without display server |
-| `HeadlessNetworkClient` | Remote client that connects via TCP and receives delta packets |
-| `SequentialGameExecutor` | Runs multiple games with isolated log files |
-| `NoOpGuiGame` | No-op `IGuiGame` implementation (693 lines) |
-
-### Test Results
-
-**Comprehensive Validation (100 Games):**
-- 100% success rate across all player configurations
-- 0 checksum mismatches (no desync events)
-- 99.5% bandwidth savings (ActualNetwork vs FullState)
-- Distribution: 50 x 2-player, 30 x 3-player, 20 x 4-player
-
-See [TESTING_DOCUMENTATION.md](TESTING_DOCUMENTATION.md) for detailed results and bandwidth breakdown.
-
-### Running Tests
-
-```bash
-# Build
-mvn -pl forge-gui-desktop -am install -DskipTests
-
-# Run single network test
-mvn -pl forge-gui-desktop -am verify -Dtest="AutomatedNetworkTest#testTrueNetworkTraffic" -Dsurefire.failIfNoSpecifiedTests=false
-
-# Run multiple games for log generation
-mvn -pl forge-gui-desktop -am verify -Dtest="SequentialGameTest#testThreeSequentialGames" -Dsurefire.failIfNoSpecifiedTests=false
-```
 
 ---
 
