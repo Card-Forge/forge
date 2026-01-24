@@ -394,6 +394,28 @@ public class NetGuiGame extends NetworkGuiGame {
             priorityPlayer = ph.getPlayerTurn();
         }
 
+        // During mulligan/setup, both may be null - find the other player(s)
+        if (priorityPlayer == null) {
+            // If forPlayer is known, find someone else
+            if (forPlayer != null) {
+                for (Player p : game.getPlayers()) {
+                    if (p.getView().getId() != forPlayer.getId()) {
+                        priorityPlayer = p;
+                        break;
+                    }
+                }
+            }
+            // If forPlayer is null or we couldn't find anyone, find any player not in our local set
+            if (priorityPlayer == null) {
+                for (Player p : game.getPlayers()) {
+                    if (!isLocalPlayer(p.getView())) {
+                        priorityPlayer = p;
+                        break;
+                    }
+                }
+            }
+        }
+
         if (priorityPlayer == null) {
             return message;
         }

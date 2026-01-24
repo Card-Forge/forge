@@ -275,7 +275,7 @@ To detect and recover from synchronization errors (e.g., packet corruption, miss
 
 **Server-Side** (`DeltaSyncManager.java`):
 - Computes state checksum every 20 packets
-- Checksum includes: game ID, turn number, phase, player IDs and life totals
+- Checksum includes: turn number, phase, player IDs and life totals
 - Includes checksum in `DeltaPacket` when computed
 
 **Client-Side** (`NetworkGuiGame.java`):

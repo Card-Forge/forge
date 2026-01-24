@@ -20,6 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class InputLockUI implements Input {
     private final AtomicInteger iCall = new AtomicInteger();
+    private volatile long waitStartTime = 0;
 
     private final InputQueue inputQueue;
     private final PlayerControllerHuman controller;
@@ -36,6 +37,7 @@ public class InputLockUI implements Input {
     @Override
     public void showMessageInitial() {
         final int ixCall = 1 + iCall.getAndIncrement();
+        waitStartTime = System.currentTimeMillis();
         ThreadUtil.delay(500, new InputUpdater(ixCall));
     }
 
@@ -53,10 +55,14 @@ public class InputLockUI implements Input {
 
         @Override
         public void run() {
-            if ( ixCall != iCall.get() || !isActive()) {
+            if (ixCall != iCall.get() || !isActive()) {
                 return;
             }
             FThreads.invokeInEdtLater(showMessageFromEdt);
+            // Reschedule to update timer display every second (only in network games)
+            if (GuiBase.isNetworkplay()) {
+                ThreadUtil.delay(1000, this);
+            }
         }
     }
 
@@ -70,7 +76,7 @@ public class InputLockUI implements Input {
 
     /**
      * Get a descriptive waiting message.
-     * In network games, shows which player we're waiting for.
+     * In network games, shows which player we're waiting for with elapsed time.
      * In local games, shows the generic "Waiting for Actions" message.
      */
     private String getWaitingMessage() {
@@ -78,6 +84,8 @@ public class InputLockUI implements Input {
 
         // In network games, show who we're waiting for
         if (GuiBase.isNetworkplay()) {
+            String playerName = null;
+
             // First try: Get priority player from the local Game object (works on host)
             Player player = controller.getPlayer();
             if (player != null) {
@@ -87,8 +95,7 @@ public class InputLockUI implements Input {
                     if (ph != null) {
                         Player priorityPlayer = ph.getPriorityPlayer();
                         if (priorityPlayer != null && priorityPlayer != player) {
-                            // Show "Waiting for [Player Name]..."
-                            return localizer.getMessage("lblWaitingForPlayer", priorityPlayer.getName());
+                            playerName = priorityPlayer.getName();
                         }
                     }
                 }
@@ -96,22 +103,58 @@ public class InputLockUI implements Input {
 
             // Fallback: Get priority player from the GameView (works on client)
             // On the network client, the Game object is on the server, but GameView is synced
-            IGuiGame gui = controller.getGui();
-            if (gui != null) {
-                GameView gameView = gui.getGameView();
-                if (gameView != null && !gameView.isGameOver()) {
-                    PlayerView priorityPlayer = findPriorityPlayer(gameView);
-                    // Show the waiting message if priority player exists and is different from our player
-                    PlayerView localPlayer = controller.getLocalPlayerView();
-                    if (priorityPlayer != null && (localPlayer == null || priorityPlayer.getId() != localPlayer.getId())) {
-                        return localizer.getMessage("lblWaitingForPlayer", priorityPlayer.getName());
+            if (playerName == null) {
+                IGuiGame gui = controller.getGui();
+                if (gui != null) {
+                    GameView gameView = gui.getGameView();
+                    if (gameView != null && !gameView.isGameOver()) {
+                        PlayerView priorityPlayer = findPriorityPlayer(gameView);
+                        // Show the waiting message if priority player exists and is different from our player
+                        PlayerView localPlayer = controller.getLocalPlayerView();
+                        if (priorityPlayer != null && (localPlayer == null || priorityPlayer.getId() != localPlayer.getId())) {
+                            playerName = priorityPlayer.getName();
+                        }
                     }
                 }
+            }
+
+            // Build the waiting message with player name and elapsed time
+            if (playerName != null) {
+                String timeStr = getElapsedTimeString();
+                if (timeStr != null) {
+                    return localizer.getMessage("lblWaitingForPlayerWithTime", playerName, timeStr);
+                }
+                return localizer.getMessage("lblWaitingForPlayer", playerName);
             }
         }
 
         // Default message for local games or when player info not available
         return localizer.getMessage("lblWaitingforActions");
+    }
+
+    /**
+     * Get elapsed time as a formatted string (e.g., "5s", "1:23").
+     * Returns null if wait just started (less than 2 seconds).
+     */
+    private String getElapsedTimeString() {
+        if (waitStartTime == 0) {
+            return null;
+        }
+        long elapsedMs = System.currentTimeMillis() - waitStartTime;
+        long elapsedSec = elapsedMs / 1000;
+
+        // Don't show timer for very short waits
+        if (elapsedSec < 2) {
+            return null;
+        }
+
+        if (elapsedSec < 60) {
+            return elapsedSec + "s";
+        } else {
+            long minutes = elapsedSec / 60;
+            long seconds = elapsedSec % 60;
+            return String.format("%d:%02d", minutes, seconds);
+        }
     }
 
     /**

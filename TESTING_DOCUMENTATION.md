@@ -396,7 +396,7 @@ The testing architecture exercises the complete production network stack:
 
 5. **Multi-Client Coordination**: In 3-4 player games, multiple `HeadlessNetworkClient` instances connect as independent TCP clients, each receiving and processing delta packets independently.
 
-The only difference from live play is that AI makes decisions instantly rather than waiting for human input. The network infrastructure—connection handling, packet serialization, state synchronization, and bandwidth optimization—is identical to production. 
+The only difference from live play is that AI makes decisions instantly rather than waiting for human input. The network infrastructure—connection handling, packet serialization, state synchronization, and bandwidth optimization—is identical to production.
 
 ### Test Configuration
 
@@ -408,26 +408,34 @@ The only difference from live play is that AI makes decisions instantly rather t
 | Batch Size | 10 parallel games |
 | Timeout | 5 minutes per game |
 | Deck Selection | Random quest precons |
-| Test Duration | 87 minutes |
+| Test Duration | ~14 minutes |
 
 ### Summary Results
 
 | Metric | Value |
 |--------|-------|
-| Successful Games | 100 |
-| Success Rate | **100%** |
-| Checksum Mismatches | **0** |
-| Games with Errors | 0 |
-| Average Turns per Game | 23.5 |
-| Unique Decks Used | ~200 (of 424 available) |
+| Successful Games | 60 |
+| Failed Games | 40 |
+| Success Rate | **60%** |
+| Checksum Mismatches | **9** |
+| Games Analyzed | 81 |
+
+### Critical Finding: Multiplayer Regression
+
+**2-player games work perfectly (100% success), but 3-4 player games fail completely (0% success).**
+
+This indicates a regression in multiplayer network support that requires investigation. The failures are characterized by:
+- Checksum mismatches occurring early in multiplayer games (Turn 0, Phase null)
+- Client state showing hand=0 for remote players while server state differs
+- 9 games with explicit desync errors logged
 
 ### Bandwidth Usage Breakdown
 
 | Metric | Total | Avg/Game | Description |
 |--------|-------|----------|-------------|
-| Approximate | 45.4 MB | 454 KB | Estimated delta size from object diffs |
-| ActualNetwork | 144.6 MB | 1.45 MB | Actual bytes sent over network |
-| FullState | 30.7 GB | 307 MB | Size if full state was sent |
+| Approximate | 12.4 MB | 153 KB | Estimated delta size from object diffs |
+| ActualNetwork | 38.7 MB | 478 KB | Actual bytes sent over network |
+| FullState | 7.1 GB | 87 MB | Size if full state was sent |
 
 **Three-Tier Bandwidth Metrics Explained:**
 
@@ -439,33 +447,54 @@ The only difference from live play is that AI makes decisions instantly rather t
 
 **Bandwidth Savings:**
 - ActualNetwork vs FullState: **99.5% savings** — The key metric showing delta sync effectiveness
-- Approximate vs FullState: 99.9% savings — Shows theoretical maximum if serialization had zero overhead
-- Bytes per delta packet: ~38 bytes — Average packet size demonstrates efficient incremental updates
+- Approximate vs FullState: 99.8% savings — Shows theoretical maximum if serialization had zero overhead
 
 ### Results by Player Count
 
 | Players | Games | Success Rate | Avg Turns | Avg Savings |
 |---------|-------|--------------|-----------|-------------|
-| 2 | 50 | 100% | 14.4 | 99.4% |
-| 3 | 30 | 100% | 25.5 | 99.5% |
-| 4 | 20 | 100% | 43.2 | 99.6% |
+| 2 | 40 | **100%** | 14.7 | 99.4% |
+| 3 | 26 | **0%** | 24.2 | 99.5% |
+| 4 | 15 | **0%** | 39.0 | 99.5% |
 
 ### Bandwidth by Player Count
 
 | Players | Approximate | ActualNetwork | FullState | Savings |
 |---------|-------------|---------------|-----------|---------|
-| 2 | 10.4 MB | 29.1 MB | 5.0 GB | 99.4% |
-| 3 | 15.2 MB | 45.5 MB | 9.5 GB | 99.5% |
-| 4 | 19.8 MB | 70.0 MB | 16.2 GB | 99.6% |
+| 2 | 6.5 MB | 18.6 MB | 3.0 GB | 99.4% |
+| 3 | 2.4 MB | 6.8 MB | 1.4 GB | 99.5% |
+| 4 | 3.5 MB | 13.2 MB | 2.7 GB | 99.5% |
 
 ### Validation Criteria
 
 | Criterion | Target | Actual | Status |
 |-----------|--------|--------|--------|
-| Success Rate | ≥90% | 100% | **Pass** |
+| Success Rate | ≥90% | 60% | **FAIL** |
 | Bandwidth Savings | ≥90% | 99.5% | **Pass** |
-| Bytes per Packet | <200 | ~38 | **Pass** |
-| Checksum Mismatches | 0 | 0 | **Pass** |
+| Checksum Mismatches | 0 | 9 | **FAIL** |
+
+### Error Analysis
+
+**Checksum Mismatch Pattern:**
+```
+[DeltaSync] Checksum details (client state):
+  GameView ID: 4
+  Turn: 0
+  Phase: null
+  Player 0 (Alice (Host AI)): Life=20, Hand=5, GY=0, BF=0
+  Player 1 (Bob (Remote)): Life=20, Hand=0, GY=0, BF=0
+  Player 2 (Charlie (Remote)): Life=20, Hand=0, GY=0, BF=0
+  Player 3 (Diana (Remote)): Life=20, Hand=0, GY=0, BF=0
+```
+
+The pattern shows remote players' hands showing 0 cards on client while server state differs, indicating initial hand synchronization is failing in multiplayer games.
+
+### Investigation Required
+
+The multiplayer regression needs debugging to identify:
+1. Why initial hand state fails to sync for 3-4 player games
+2. Whether this is a delta sync serialization issue or initial state transmission
+3. Why 2-player games are unaffected
 
 ---
 
@@ -515,6 +544,7 @@ While the testing infrastructure exercises production network code, some real-wo
 forge-gui-desktop/src/test/java/forge/net/
 ├── AutomatedNetworkTest.java       # TestNG test suite
 ├── HeadlessNetworkClient.java      # Remote client for delta sync
+├── HeadlessNetworkGuiGame.java     # NetworkGuiGame for headless client delta sync
 ├── NetworkClientTestHarness.java   # Host+client orchestration
 ├── HeadlessGuiDesktop.java         # Headless GUI interface
 ├── NoOpGuiGame.java                # No-op IGuiGame
