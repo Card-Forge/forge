@@ -8,6 +8,7 @@
    - [Delta Synchronization](#feature-1-delta-synchronization)
    - [Reconnection Support](#feature-2-reconnection-support)
    - [Enhanced Chat Notifications](#feature-3-enhanced-chat-notifications)
+   - [Network Play UI Improvements](#feature-4-network-play-ui-improvements)
 4. [Files Modified](#files-modified)
 5. [Configuration](#configuration)
 6. [Debugging](#debugging)
@@ -18,13 +19,15 @@
 
 ## Overview
 
-The NetworkPlay branch introduces three major features to improve the multiplayer experience:
+The NetworkPlay branch introduces four major features to improve the multiplayer experience:
 
-1. **[Delta Synchronization](#feature-1-delta-synchronization)**: Instead of sending the complete game state on every update, only changed properties are transmitted. Combined with LZ4 compression, this achieves **~90-95% bandwidth reduction** compared to the original full-state approach (typical game: 12.4MB → 620KB actual network transmission).
+1. **[Delta Synchronization](#feature-1-delta-synchronization)**: Instead of sending the complete game state on every update, only changed properties are transmitted. Combined with LZ4 compression, this achieves **~99.5% bandwidth reduction** compared to the original full-state approach.
 
 2. **[Reconnection Support](#feature-2-reconnection-support)**: Players who disconnect (intentionally or due to network issues) can rejoin an in-progress game within a configurable timeout period (default: 5 minutes). If a player fails to reconnect before the timeout expires, they are automatically converted to AI control to allow the game to continue.
 
 3. **[Enhanced Chat Notifications](#feature-3-enhanced-chat-notifications)**: Server events (player join/leave, ready state, game start/end, reconnection status) are clearly communicated through styled system messages, providing better visibility into game state and player actions.
+
+4. **[Network Play UI Improvements](#feature-4-network-play-ui-improvements)**: Visual enhancements including distinct styling for system messages, "Waiting for Player X" indicator, and improved connection error diagnostics.
 
 **Additional Resources:**
 - **[Debugging](#debugging)**: Comprehensive debug logging for diagnosing network synchronization issues.
@@ -1002,6 +1005,61 @@ Reconnection:
 
 ---
 
+## Feature 4: Network Play UI Improvements
+
+### Overview
+
+Visual enhancements to improve user experience during network play, making game state and player actions clearer.
+
+### 4.1 Visual Distinction for System Messages
+
+System messages (server notifications, connection status) are now visually distinct from player chat messages.
+
+**Implementation** (`forge-gui-desktop/.../gui/FNetOverlay.java`):
+- Replaced `FTextArea` with `JTextPane` + `StyledDocument`
+- System messages: Light blue color RGB(100, 150, 255) - consistent with mobile client
+- Player messages: Default foreground color from skin theme
+
+**Visual Result**:
+```
+[14:32:15] Alice (Host): Hello everyone          <- Default color
+[14:32:18] [SERVER] Bob joined the lobby         <- Light blue
+[14:32:20] [SERVER] Alice is ready (1/2 ready)   <- Light blue
+```
+
+### 4.2 "Waiting for Player" Indicator
+
+During network play, when waiting for another player's input, the UI now shows WHO you're waiting for instead of a generic message.
+
+**Implementation** (`forge-gui/.../match/input/InputLockUI.java`):
+- Modified `getWaitingMessage()` to detect network games via `GuiBase.isNetworkplay()`
+- In network games: Shows "Waiting for [Player Name]..." with the active player's name
+- In local games: Shows generic "Waiting for opponent..." message
+
+**Localization**: Added `lblWaitingForPlayer` key to `en-US.properties`
+
+### 4.3 Better Connection Error Messages
+
+Connection failures now show diagnostic details instead of generic errors.
+
+**Implementation**:
+- `VSubmenuOnlineLobby.closeConn()` - Follows mobile pattern for cleanup and error display
+- `NetConnectUtil.join()` - Logs exception type, message, and cause to network debug log
+
+**Localization**: Added `lblConnectionError` key to `en-US.properties`
+
+### Files Modified
+
+| File | Changes |
+|------|---------|
+| `forge-gui-desktop/.../gui/FNetOverlay.java` | JTextPane + StyledDocument for colored system messages |
+| `forge-gui/.../match/input/InputLockUI.java` | Network-aware waiting message with player name |
+| `forge-gui-desktop/.../online/VSubmenuOnlineLobby.java` | Connection cleanup and error display |
+| `forge-gui/.../net/NetConnectUtil.java` | Detailed exception logging |
+| `forge-gui/res/languages/en-US.properties` | New localization keys |
+
+---
+
 ## Files Modified
 
 ### Core Game Engine
@@ -1396,11 +1454,13 @@ This branch includes a headless testing infrastructure that enables automated va
 
 ### Test Results
 
-**Full Game Completion (Phase 9):**
-- Games complete from mulligan through winner determination
-- 610 delta packets received over 12 turns
-- 99% bandwidth savings confirmed
-- ~18 second test duration
+**Comprehensive Validation (100 Games):**
+- 100% success rate across all player configurations
+- 0 checksum mismatches (no desync events)
+- 99.5% bandwidth savings (ActualNetwork vs FullState)
+- Distribution: 50 x 2-player, 30 x 3-player, 20 x 4-player
+
+See [TESTING_DOCUMENTATION.md](TESTING_DOCUMENTATION.md) for detailed results and bandwidth breakdown.
 
 ### Running Tests
 
