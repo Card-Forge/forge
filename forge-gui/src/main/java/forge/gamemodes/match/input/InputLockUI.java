@@ -1,10 +1,13 @@
 package forge.gamemodes.match.input;
 
+import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.gui.FThreads;
+import forge.gui.GuiBase;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
@@ -59,9 +62,39 @@ public class InputLockUI implements Input {
         @Override
         public void run() {
             controller.getGui().updateButtons(InputLockUI.this.getOwner(), "", "", false, false, false);
-            showMessage(Localizer.getInstance().getMessage("lblWaitingforActions"));
+            showMessage(getWaitingMessage());
         }
     };
+
+    /**
+     * Get a descriptive waiting message.
+     * In network games, shows which player we're waiting for.
+     * In local games, shows the generic "Waiting for Actions" message.
+     */
+    private String getWaitingMessage() {
+        Localizer localizer = Localizer.getInstance();
+
+        // In network games, show who we're waiting for
+        if (GuiBase.isNetworkplay()) {
+            Player player = controller.getPlayer();
+            if (player != null) {
+                Game game = player.getGame();
+                if (game != null && !game.isGameOver()) {
+                    PhaseHandler ph = game.getPhaseHandler();
+                    if (ph != null) {
+                        Player priorityPlayer = ph.getPriorityPlayer();
+                        if (priorityPlayer != null && priorityPlayer != player) {
+                            // Show "Waiting for [Player Name]..."
+                            return localizer.getMessage("lblWaitingForPlayer", priorityPlayer.getName());
+                        }
+                    }
+                }
+            }
+        }
+
+        // Default message for local games or when player info not available
+        return localizer.getMessage("lblWaitingforActions");
+    }
 
     protected final boolean isActive() {
         return inputQueue.getInput() == this;

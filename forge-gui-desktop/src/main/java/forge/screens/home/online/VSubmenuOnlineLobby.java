@@ -186,5 +186,24 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
 
     @Override
     public void closeConn(String msg) {
+        // Clean up connection state
+        if (client != null) {
+            client.close();
+            client = null;
+        }
+        FServerManager server = FServerManager.getInstance();
+        if (server.isHosting()) {
+            server.stopServer();
+        }
+        FNetOverlay.SINGLETON_INSTANCE.reset();
+
+        // Clear lobby and repopulate
+        this.lobby = null;
+        populate();
+
+        // Show error message if provided
+        if (msg != null && !msg.isEmpty()) {
+            SOptionPane.showErrorDialog(msg, Localizer.getInstance().getMessage("lblConnectionError"));
+        }
     }
 }
