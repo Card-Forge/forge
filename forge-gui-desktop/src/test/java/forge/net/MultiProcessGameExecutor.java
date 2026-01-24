@@ -25,6 +25,8 @@ import java.util.concurrent.atomic.AtomicReference;
  * - Writes to its own log file
  *
  * This enables true parallel execution for rapid log generation.
+ *
+ * Supports 2-4 player games with configurable player counts for comprehensive testing.
  */
 public class MultiProcessGameExecutor {
 
@@ -34,6 +36,9 @@ public class MultiProcessGameExecutor {
 
     private final long timeoutMs;
     private final int basePort;
+
+    // Runner class for different game types
+    private String runnerClass = "forge.net.SingleGameRunner"; // Default for 2-player
 
     public MultiProcessGameExecutor() {
         this(DEFAULT_TIMEOUT_MS);
@@ -49,13 +54,39 @@ public class MultiProcessGameExecutor {
     }
 
     /**
-     * Run multiple games in parallel processes.
+     * Set the runner class for game execution.
+     * Use ComprehensiveGameRunner for multi-player support.
+     */
+    public MultiProcessGameExecutor withRunnerClass(String runnerClass) {
+        this.runnerClass = runnerClass;
+        return this;
+    }
+
+    /**
+     * Run multiple games in parallel processes (2-player games).
      *
      * @param gameCount Number of games to run in parallel
      * @return Aggregated results from all games
      */
     public ExecutionResult runGames(int gameCount) {
-        NetworkDebugLogger.log("%s Starting %d parallel processes", LOG_PREFIX, gameCount);
+        // Create array of all 2-player games
+        int[] playerCounts = new int[gameCount];
+        for (int i = 0; i < gameCount; i++) {
+            playerCounts[i] = 2;
+        }
+        return runGamesWithPlayerCounts(playerCounts);
+    }
+
+    /**
+     * Run multiple games with specified player counts.
+     * Games are run in batches to respect parallel limits.
+     *
+     * @param playerCounts Array of player counts for each game (2, 3, or 4)
+     * @return Aggregated results from all games
+     */
+    public ExecutionResult runGamesWithPlayerCounts(int[] playerCounts) {
+        int gameCount = playerCounts.length;
+        NetworkDebugLogger.log("%s Starting %d games with varying player counts", LOG_PREFIX, gameCount);
 
         List<ProcessInfo> processes = new ArrayList<>();
         ExecutionResult result = new ExecutionResult(gameCount);
@@ -69,10 +100,11 @@ public class MultiProcessGameExecutor {
             // Start all processes
             for (int i = 0; i < gameCount; i++) {
                 int port = basePort + i;
-                ProcessInfo info = startGameProcess(javaBin, classpath, port, i);
+                int playerCount = playerCounts[i];
+                ProcessInfo info = startGameProcess(javaBin, classpath, port, i, playerCount);
                 processes.add(info);
-                NetworkDebugLogger.log("%s Started process for game %d (port %d, pid %d)",
-                        LOG_PREFIX, i, port, info.process.pid());
+                NetworkDebugLogger.log("%s Started process for game %d (%d players, port %d, pid %d)",
+                        LOG_PREFIX, i, playerCount, port, info.process.pid());
             }
 
             // Wait for all processes to complete
@@ -89,22 +121,83 @@ public class MultiProcessGameExecutor {
         return result;
     }
 
+    /**
+     * Run games in sequential batches to avoid overwhelming the system.
+     * Useful for running 100+ games with limited parallelism.
+     *
+     * @param playerCounts Array of player counts for each game
+     * @param batchSize Maximum number of parallel processes per batch
+     * @return Aggregated results from all games
+     */
+    public ExecutionResult runGamesInBatches(int[] playerCounts, int batchSize) {
+        int totalGames = playerCounts.length;
+        NetworkDebugLogger.log("%s Running %d games in batches of %d", LOG_PREFIX, totalGames, batchSize);
+
+        ExecutionResult aggregatedResult = new ExecutionResult(totalGames);
+        int currentPortOffset = 0;
+
+        for (int batchStart = 0; batchStart < totalGames; batchStart += batchSize) {
+            int batchEnd = Math.min(batchStart + batchSize, totalGames);
+            int batchLength = batchEnd - batchStart;
+
+            // Extract player counts for this batch
+            int[] batchPlayerCounts = new int[batchLength];
+            System.arraycopy(playerCounts, batchStart, batchPlayerCounts, 0, batchLength);
+
+            NetworkDebugLogger.log("%s Starting batch %d-%d of %d games",
+                    LOG_PREFIX, batchStart, batchEnd - 1, totalGames);
+
+            // Create executor for this batch with offset ports
+            MultiProcessGameExecutor batchExecutor = new MultiProcessGameExecutor(
+                    this.timeoutMs, this.basePort + currentPortOffset);
+            batchExecutor.withRunnerClass(this.runnerClass);
+
+            ExecutionResult batchResult = batchExecutor.runGamesWithPlayerCounts(batchPlayerCounts);
+
+            // Merge batch results into aggregated result
+            for (Map.Entry<Integer, GameResult> entry : batchResult.getResults().entrySet()) {
+                int originalIndex = batchStart + entry.getKey();
+                aggregatedResult.addResult(originalIndex, entry.getValue());
+            }
+
+            currentPortOffset += batchLength;
+
+            NetworkDebugLogger.log("%s Batch complete. Running total: %d/%d games",
+                    LOG_PREFIX, aggregatedResult.getSuccessCount() + aggregatedResult.getFailureCount(), totalGames);
+        }
+
+        NetworkDebugLogger.log("%s All batches complete: %s", LOG_PREFIX, aggregatedResult.toSummary());
+        return aggregatedResult;
+    }
+
     private ProcessInfo startGameProcess(String javaBin, String classpath, int port, int gameIndex)
             throws Exception {
-        ProcessBuilder pb = new ProcessBuilder(
-                javaBin,
-                "-cp", classpath,
-                "-Xmx512m",  // Limit memory per process
-                "forge.net.SingleGameRunner",
-                String.valueOf(port),
-                String.valueOf(gameIndex)
-        );
+        return startGameProcess(javaBin, classpath, port, gameIndex, 2); // Default to 2 players
+    }
+
+    private ProcessInfo startGameProcess(String javaBin, String classpath, int port, int gameIndex, int playerCount)
+            throws Exception {
+        List<String> command = new ArrayList<>();
+        command.add(javaBin);
+        command.add("-cp");
+        command.add(classpath);
+        command.add("-Xmx512m");  // Limit memory per process
+        command.add(runnerClass);
+        command.add(String.valueOf(port));
+        command.add(String.valueOf(gameIndex));
+
+        // Add player count for ComprehensiveGameRunner
+        if (runnerClass.equals("forge.net.ComprehensiveGameRunner")) {
+            command.add(String.valueOf(playerCount));
+        }
+
+        ProcessBuilder pb = new ProcessBuilder(command);
 
         // Merge stderr into stdout for easier capture
         pb.redirectErrorStream(true);
 
         Process process = pb.start();
-        return new ProcessInfo(gameIndex, port, process);
+        return new ProcessInfo(gameIndex, port, playerCount, process);
     }
 
     private void waitForProcess(ProcessInfo info, ExecutionResult result) {
@@ -178,9 +271,23 @@ public class MultiProcessGameExecutor {
 
     private void parseResult(String resultLine, ExecutionResult result) {
         try {
-            // Format: gameIndex|success|deltas|turns|bytes|winner
+            // Format for ComprehensiveGameRunner: gameIndex|success|playerCount|deltas|turns|bytes|winner
+            // Format for SingleGameRunner: gameIndex|success|deltas|turns|bytes|winner
             String[] parts = resultLine.split("\\|");
-            if (parts.length >= 6) {
+            if (parts.length >= 7) {
+                // ComprehensiveGameRunner format with player count
+                int gameIndex = Integer.parseInt(parts[0]);
+                boolean success = Boolean.parseBoolean(parts[1]);
+                int playerCount = Integer.parseInt(parts[2]);
+                long deltas = Long.parseLong(parts[3]);
+                int turns = Integer.parseInt(parts[4]);
+                long bytes = Long.parseLong(parts[5]);
+                String winner = "null".equals(parts[6]) ? null : parts[6];
+
+                GameResult gameResult = new GameResult(success, playerCount, deltas, turns, bytes, winner);
+                result.addResult(gameIndex, gameResult);
+            } else if (parts.length >= 6) {
+                // SingleGameRunner format (backward compatibility)
                 int gameIndex = Integer.parseInt(parts[0]);
                 boolean success = Boolean.parseBoolean(parts[1]);
                 long deltas = Long.parseLong(parts[2]);
@@ -199,11 +306,17 @@ public class MultiProcessGameExecutor {
     private static class ProcessInfo {
         final int gameIndex;
         final int port;
+        final int playerCount;
         final Process process;
 
         ProcessInfo(int gameIndex, int port, Process process) {
+            this(gameIndex, port, 2, process); // Default to 2 players
+        }
+
+        ProcessInfo(int gameIndex, int port, int playerCount, Process process) {
             this.gameIndex = gameIndex;
             this.port = port;
+            this.playerCount = playerCount;
             this.process = process;
         }
     }
@@ -213,13 +326,19 @@ public class MultiProcessGameExecutor {
      */
     public static class GameResult {
         public final boolean success;
+        public final int playerCount;
         public final long deltaPackets;
         public final int turns;
         public final long bytes;
         public final String winner;
 
         public GameResult(boolean success, long deltaPackets, int turns, long bytes, String winner) {
+            this(success, 2, deltaPackets, turns, bytes, winner); // Default to 2 players
+        }
+
+        public GameResult(boolean success, int playerCount, long deltaPackets, int turns, long bytes, String winner) {
             this.success = success;
+            this.playerCount = playerCount;
             this.deltaPackets = deltaPackets;
             this.turns = turns;
             this.bytes = bytes;
@@ -289,6 +408,61 @@ public class MultiProcessGameExecutor {
             return (double) getSuccessCount() / totalGames;
         }
 
+        // Player count aggregation methods
+
+        /**
+         * Get count of games by player count.
+         */
+        public int getGameCountByPlayers(int playerCount) {
+            return (int) results.values().stream()
+                    .filter(r -> r.playerCount == playerCount)
+                    .count();
+        }
+
+        /**
+         * Get success count by player count.
+         */
+        public int getSuccessCountByPlayers(int playerCount) {
+            return (int) results.values().stream()
+                    .filter(r -> r.playerCount == playerCount && r.success)
+                    .count();
+        }
+
+        /**
+         * Get success rate by player count.
+         */
+        public double getSuccessRateByPlayers(int playerCount) {
+            long total = results.values().stream()
+                    .filter(r -> r.playerCount == playerCount)
+                    .count();
+            if (total == 0) return 0.0;
+            long success = results.values().stream()
+                    .filter(r -> r.playerCount == playerCount && r.success)
+                    .count();
+            return (double) success / total;
+        }
+
+        /**
+         * Get total bytes by player count.
+         */
+        public long getTotalBytesByPlayers(int playerCount) {
+            return results.values().stream()
+                    .filter(r -> r.playerCount == playerCount)
+                    .mapToLong(r -> r.bytes)
+                    .sum();
+        }
+
+        /**
+         * Get average turns by player count.
+         */
+        public double getAverageTurnsByPlayers(int playerCount) {
+            return results.values().stream()
+                    .filter(r -> r.playerCount == playerCount && r.success)
+                    .mapToInt(r -> r.turns)
+                    .average()
+                    .orElse(0.0);
+        }
+
         public String toSummary() {
             return String.format(
                     "MultiProcess[games=%d, success=%d, failed=%d, errors=%d, timeouts=%d, " +
@@ -306,6 +480,20 @@ public class MultiProcessGameExecutor {
 
             sb.append("Summary: ").append(toSummary()).append("\n\n");
 
+            // Summary by player count
+            sb.append("Results by Player Count:\n");
+            sb.append("-".repeat(40)).append("\n");
+            for (int p = 2; p <= 4; p++) {
+                int count = getGameCountByPlayers(p);
+                if (count > 0) {
+                    sb.append(String.format("  %d-player: %d games, %d success (%.0f%%), avg %.1f turns\n",
+                            p, count, getSuccessCountByPlayers(p),
+                            getSuccessRateByPlayers(p) * 100,
+                            getAverageTurnsByPlayers(p)));
+                }
+            }
+            sb.append("\n");
+
             sb.append("Individual Game Results:\n");
             sb.append("-".repeat(40)).append("\n");
 
@@ -318,8 +506,8 @@ public class MultiProcessGameExecutor {
                 } else if (results.containsKey(i)) {
                     GameResult r = results.get(i);
                     sb.append(r.success ? "SUCCESS" : "FAILED");
-                    sb.append(String.format(" - deltas=%d, turns=%d, winner=%s\n",
-                            r.deltaPackets, r.turns, r.winner));
+                    sb.append(String.format(" - %dp, deltas=%d, turns=%d, winner=%s\n",
+                            r.playerCount, r.deltaPackets, r.turns, r.winner));
                 } else {
                     sb.append("NO RESULT\n");
                 }

@@ -1,6 +1,7 @@
 package forge.net;
 
 import forge.deck.Deck;
+import forge.game.GameView;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.FullStatePacket;
 import forge.gamemodes.match.GameLobby.GameLobbyData;
@@ -392,6 +393,39 @@ public class HeadlessNetworkClient implements AutoCloseable {
         @Override
         public void showPromptMessage(forge.game.player.PlayerView playerView, String message) {
             NetworkDebugLogger.log("[DeltaLoggingGuiGame] Prompt: %s", message);
+
+            // Detect player selection prompts (like "who goes first")
+            // These contain "Click on the portrait" in the message
+            if (message != null && message.contains("Click on the portrait") && gameController != null) {
+                NetworkDebugLogger.log("[DeltaLoggingGuiGame] Detected player selection prompt, auto-selecting...");
+                new Thread(() -> {
+                    try {
+                        Thread.sleep(100); // Small delay for server to be ready
+                        // Get the game view and select the first player (or self)
+                        GameView gv = getGameView();
+                        if (gv != null && gv.getPlayers() != null && !gv.getPlayers().isEmpty()) {
+                            forge.game.player.PlayerView toSelect = null;
+                            // Prefer to select self if possible
+                            for (forge.game.player.PlayerView pv : gv.getPlayers()) {
+                                if (pv.getName().equals(client.username)) {
+                                    toSelect = pv;
+                                    break;
+                                }
+                            }
+                            // Otherwise select first player
+                            if (toSelect == null) {
+                                toSelect = gv.getPlayers().iterator().next();
+                            }
+                            NetworkDebugLogger.log("[DeltaLoggingGuiGame] Auto-selecting player: %s", toSelect.getName());
+                            gameController.selectPlayer(toSelect, null);
+                        } else {
+                            NetworkDebugLogger.error("[DeltaLoggingGuiGame] Cannot auto-select player - no game view or players");
+                        }
+                    } catch (Exception e) {
+                        NetworkDebugLogger.error("[DeltaLoggingGuiGame] Error auto-selecting player: %s", e.getMessage());
+                    }
+                }).start();
+            }
         }
 
         @Override
