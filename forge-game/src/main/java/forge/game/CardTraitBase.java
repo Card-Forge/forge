@@ -190,6 +190,7 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
         }
         return level == Integer.parseInt(classLevel);
     }
+    public boolean isManaAbility() { return false; }
 
     /**
      * <p>
