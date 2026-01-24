@@ -19,7 +19,7 @@ import forge.net.scenarios.MultiplayerNetworkScenario;
  *   2 = Error (exception during execution)
  *
  * Output format (for parent process parsing):
- *   RESULT:gameIndex|success|playerCount|deltas|turns|bytes|winner
+ *   RESULT:gameIndex|success|playerCount|deltas|turns|bytes|winner|deck1,deck2,...
  */
 public class ComprehensiveGameRunner {
 
@@ -116,7 +116,8 @@ public class ComprehensiveGameRunner {
                 testResult.turns,
                 testResult.deltaPacketsReceived,
                 testResult.totalDeltaBytes,
-                testResult.winner
+                testResult.winner,
+                testResult.deckNames
         );
     }
 
@@ -137,23 +138,26 @@ public class ComprehensiveGameRunner {
                 scenarioResult.turnCount,
                 scenarioResult.totalDeltaPackets,
                 scenarioResult.totalDeltaBytes,
-                scenarioResult.winner
+                scenarioResult.winner,
+                scenarioResult.deckNames
         );
     }
 
     /**
      * Format result for parent process parsing.
-     * Format: gameIndex|success|playerCount|deltas|turns|bytes|winner
+     * Format: gameIndex|success|playerCount|deltas|turns|bytes|winner|deck1,deck2,...
      */
     private static String formatResult(int gameIndex, int playerCount, GameRunResult result) {
-        return String.format("%d|%s|%d|%d|%d|%d|%s",
+        String decksStr = result.deckNames.isEmpty() ? "" : String.join(",", result.deckNames);
+        return String.format("%d|%s|%d|%d|%d|%d|%s|%s",
                 gameIndex,
                 result.success,
                 playerCount,
                 result.deltaPackets,
                 result.turns,
                 result.bytes,
-                result.winner != null ? result.winner : "null");
+                result.winner != null ? result.winner : "null",
+                decksStr);
     }
 
     /**
@@ -165,13 +169,19 @@ public class ComprehensiveGameRunner {
         final long deltaPackets;
         final long bytes;
         final String winner;
+        final java.util.List<String> deckNames;
 
         GameRunResult(boolean success, int turns, long deltaPackets, long bytes, String winner) {
+            this(success, turns, deltaPackets, bytes, winner, java.util.Collections.emptyList());
+        }
+
+        GameRunResult(boolean success, int turns, long deltaPackets, long bytes, String winner, java.util.List<String> deckNames) {
             this.success = success;
             this.turns = turns;
             this.deltaPackets = deltaPackets;
             this.bytes = bytes;
             this.winner = winner;
+            this.deckNames = deckNames != null ? deckNames : java.util.Collections.emptyList();
         }
     }
 }

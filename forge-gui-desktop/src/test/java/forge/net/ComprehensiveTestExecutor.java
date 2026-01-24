@@ -26,7 +26,7 @@ public class ComprehensiveTestExecutor {
     private int fourPlayerGames = 20;
 
     // Execution settings
-    private int parallelBatchSize = 5; // Run 5 games at a time
+    private int parallelBatchSize = 10; // Run 10 games at a time
     private long gameTimeoutMs = 300000; // 5 minutes per game
 
     /**
@@ -167,7 +167,7 @@ public class ComprehensiveTestExecutor {
                 .twoPlayerGames(50)
                 .threePlayerGames(30)
                 .fourPlayerGames(20)
-                .parallelBatchSize(5)
+                .parallelBatchSize(10)
                 .gameTimeout(300000);
     }
 
@@ -177,7 +177,7 @@ public class ComprehensiveTestExecutor {
      *   -Dtest.2pGames=50
      *   -Dtest.3pGames=30
      *   -Dtest.4pGames=20
-     *   -Dtest.batchSize=5
+     *   -Dtest.batchSize=10
      *   -Dtest.timeoutMs=300000
      */
     public static ComprehensiveTestExecutor fromSystemProperties() {

@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -271,7 +272,7 @@ public class MultiProcessGameExecutor {
 
     private void parseResult(String resultLine, ExecutionResult result) {
         try {
-            // Format for ComprehensiveGameRunner: gameIndex|success|playerCount|deltas|turns|bytes|winner
+            // Format for ComprehensiveGameRunner: gameIndex|success|playerCount|deltas|turns|bytes|winner|decks
             // Format for SingleGameRunner: gameIndex|success|deltas|turns|bytes|winner
             String[] parts = resultLine.split("\\|");
             if (parts.length >= 7) {
@@ -284,7 +285,18 @@ public class MultiProcessGameExecutor {
                 long bytes = Long.parseLong(parts[5]);
                 String winner = "null".equals(parts[6]) ? null : parts[6];
 
-                GameResult gameResult = new GameResult(success, playerCount, deltas, turns, bytes, winner);
+                // Parse deck names if present (part 7)
+                List<String> deckNames = new ArrayList<>();
+                if (parts.length >= 8 && !parts[7].isEmpty()) {
+                    String[] decks = parts[7].split(",");
+                    for (String deck : decks) {
+                        if (!deck.trim().isEmpty()) {
+                            deckNames.add(deck.trim());
+                        }
+                    }
+                }
+
+                GameResult gameResult = new GameResult(success, playerCount, deltas, turns, bytes, winner, deckNames);
                 result.addResult(gameIndex, gameResult);
             } else if (parts.length >= 6) {
                 // SingleGameRunner format (backward compatibility)
@@ -331,18 +343,24 @@ public class MultiProcessGameExecutor {
         public final int turns;
         public final long bytes;
         public final String winner;
+        public final List<String> deckNames;
 
         public GameResult(boolean success, long deltaPackets, int turns, long bytes, String winner) {
-            this(success, 2, deltaPackets, turns, bytes, winner); // Default to 2 players
+            this(success, 2, deltaPackets, turns, bytes, winner, Collections.emptyList());
         }
 
         public GameResult(boolean success, int playerCount, long deltaPackets, int turns, long bytes, String winner) {
+            this(success, playerCount, deltaPackets, turns, bytes, winner, Collections.emptyList());
+        }
+
+        public GameResult(boolean success, int playerCount, long deltaPackets, int turns, long bytes, String winner, List<String> deckNames) {
             this.success = success;
             this.playerCount = playerCount;
             this.deltaPackets = deltaPackets;
             this.turns = turns;
             this.bytes = bytes;
             this.winner = winner;
+            this.deckNames = deckNames != null ? new ArrayList<>(deckNames) : Collections.emptyList();
         }
     }
 
@@ -397,6 +415,44 @@ public class MultiProcessGameExecutor {
 
         public long getTotalBytes() {
             return results.values().stream().mapToLong(r -> r.bytes).sum();
+        }
+
+        /**
+         * Get total turns across all successful games.
+         */
+        public int getTotalTurns() {
+            return results.values().stream()
+                    .filter(r -> r.success)
+                    .mapToInt(r -> r.turns)
+                    .sum();
+        }
+
+        /**
+         * Get count of unique decks used across all games.
+         */
+        public int getUniqueDecksCount() {
+            return (int) results.values().stream()
+                    .flatMap(r -> r.deckNames.stream())
+                    .distinct()
+                    .count();
+        }
+
+        /**
+         * Get set of unique deck names used across all games.
+         */
+        public java.util.Set<String> getUniqueDeckNames() {
+            return results.values().stream()
+                    .flatMap(r -> r.deckNames.stream())
+                    .collect(java.util.stream.Collectors.toCollection(java.util.TreeSet::new));
+        }
+
+        /**
+         * Get total number of deck usages (sum of decks across all games).
+         */
+        public int getTotalDeckUsages() {
+            return results.values().stream()
+                    .mapToInt(r -> r.deckNames.size())
+                    .sum();
         }
 
         public Map<Integer, GameResult> getResults() {
@@ -466,10 +522,10 @@ public class MultiProcessGameExecutor {
         public String toSummary() {
             return String.format(
                     "MultiProcess[games=%d, success=%d, failed=%d, errors=%d, timeouts=%d, " +
-                            "totalDeltas=%d, totalBytes=%d, successRate=%.0f%%]",
+                            "totalTurns=%d, uniqueDecks=%d, totalDeltas=%d, totalBytes=%d, successRate=%.0f%%]",
                     totalGames, getSuccessCount(), getFailureCount(),
                     getErrorCount(), getTimeoutCount(),
-                    getTotalDeltaPackets(), getTotalBytes(), getSuccessRate() * 100);
+                    getTotalTurns(), getUniqueDecksCount(), getTotalDeltaPackets(), getTotalBytes(), getSuccessRate() * 100);
         }
 
         public String toDetailedReport() {
@@ -478,18 +534,38 @@ public class MultiProcessGameExecutor {
             sb.append("Multi-Process Parallel Game Execution Report\n");
             sb.append("=".repeat(80)).append("\n\n");
 
-            sb.append("Summary: ").append(toSummary()).append("\n\n");
+            // Overall metrics
+            sb.append("Overall Metrics:\n");
+            sb.append("-".repeat(40)).append("\n");
+            sb.append(String.format("  Total Games:     %d\n", totalGames));
+            sb.append(String.format("  Successful:      %d (%.0f%%)\n", getSuccessCount(), getSuccessRate() * 100));
+            sb.append(String.format("  Failed:          %d\n", getFailureCount()));
+            sb.append(String.format("  Errors:          %d\n", getErrorCount()));
+            sb.append(String.format("  Timeouts:        %d\n", getTimeoutCount()));
+            sb.append(String.format("  Total Turns:     %d\n", getTotalTurns()));
+            sb.append(String.format("  Unique Decks:    %d (from %d total usages)\n", getUniqueDecksCount(), getTotalDeckUsages()));
+            sb.append(String.format("  Delta Packets:   %d\n", getTotalDeltaPackets()));
+            sb.append(String.format("  Total Bytes:     %d (%.2f MB)\n", getTotalBytes(), getTotalBytes() / 1024.0 / 1024.0));
+            double bytesPerPacket = getTotalDeltaPackets() > 0 ? (double) getTotalBytes() / getTotalDeltaPackets() : 0;
+            sb.append(String.format("  Bytes/Packet:    %.1f\n", bytesPerPacket));
+            sb.append("\n");
 
-            // Summary by player count
-            sb.append("Results by Player Count:\n");
+            // Breakdown by player count
+            sb.append("Breakdown by Player Count:\n");
             sb.append("-".repeat(40)).append("\n");
             for (int p = 2; p <= 4; p++) {
                 int count = getGameCountByPlayers(p);
                 if (count > 0) {
-                    sb.append(String.format("  %d-player: %d games, %d success (%.0f%%), avg %.1f turns\n",
-                            p, count, getSuccessCountByPlayers(p),
-                            getSuccessRateByPlayers(p) * 100,
-                            getAverageTurnsByPlayers(p)));
+                    final int playerCount = p; // Final copy for lambda
+                    int successCount = getSuccessCountByPlayers(p);
+                    double successRate = getSuccessRateByPlayers(p) * 100;
+                    double avgTurns = getAverageTurnsByPlayers(p);
+                    int totalTurnsForP = results.values().stream()
+                            .filter(r -> r.playerCount == playerCount && r.success)
+                            .mapToInt(r -> r.turns)
+                            .sum();
+                    sb.append(String.format("  %d-player: %d games, %d success (%.0f%%), %d total turns (avg %.1f)\n",
+                            p, count, successCount, successRate, totalTurnsForP, avgTurns));
                 }
             }
             sb.append("\n");

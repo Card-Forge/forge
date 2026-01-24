@@ -66,6 +66,7 @@ public class NetworkClientTestHarness {
         public int turns;
         public String winner;
         public String errorMessage;
+        public java.util.List<String> deckNames = new java.util.ArrayList<>();
 
         public String toSummary() {
             return String.format(
@@ -98,10 +99,12 @@ public class NetworkClientTestHarness {
             // 3. Configure host player (local AI)
             Deck hostDeck = TestDeckLoader.getRandomPrecon();
             configureHostPlayer("Alice (Host AI)", hostDeck);
+            result.deckNames.add(hostDeck.getName());
 
             // 4. Load client's deck (will be sent via network protocol)
             clientDeck = TestDeckLoader.getRandomPrecon();
             NetworkDebugLogger.log("%s Client deck loaded: %s", LOG_PREFIX, clientDeck.getName());
+            result.deckNames.add(clientDeck.getName());
 
             // 5. Start remote client in separate thread
             clientExecutor = Executors.newSingleThreadExecutor();

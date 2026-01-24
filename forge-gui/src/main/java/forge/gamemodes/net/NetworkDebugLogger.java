@@ -55,12 +55,11 @@ public final class NetworkDebugLogger {
     private static final String LOG_PREFIX = "network-debug";
     private static final long GRACE_PERIOD_MS = 5 * 60 * 1000; // 5 minutes
 
-    // Per-thread log file support for parallel test execution
-    // When instanceSuffix is set, each thread gets its own log file
-    // Otherwise, all threads share a single log file (default behavior)
+    // Per-instance log file support for parallel test execution
+    // When instanceSuffix is set, all threads with that suffix share a log file
+    // Otherwise, all threads share a single default log file
     private static PrintWriter sharedFileWriter;
-    private static final ThreadLocal<PrintWriter> threadFileWriter = new ThreadLocal<>();
-    private static final ThreadLocal<Boolean> threadInitialized = ThreadLocal.withInitial(() -> false);
+    private static final java.util.concurrent.ConcurrentHashMap<String, PrintWriter> suffixWriters = new java.util.concurrent.ConcurrentHashMap<>();
     private static boolean sharedInitialized = false;
     private static boolean enabled = true;
     private static LogLevel consoleLevel = LogLevel.INFO;  // Default: show INFO and above on console
@@ -78,6 +77,10 @@ public final class NetworkDebugLogger {
     // Instance suffix for parallel test execution - allows each game instance to have its own log file
     // This is stored per-thread so parallel games don't interfere with each other's logging
     private static final ThreadLocal<String> instanceSuffix = new ThreadLocal<>();
+
+    // Global instance suffix for single-JVM test mode - used as fallback when thread has no suffix
+    // This allows server threads to log to the same file as the test harness thread
+    private static volatile String globalInstanceSuffix = null;
 
     // Apply configuration from NetworkDebug.config on class load
     static {
@@ -161,19 +164,32 @@ public final class NetworkDebugLogger {
      *
      * Must be called BEFORE first log() call on this thread to affect filename.
      *
+     * In single-JVM test mode, also sets the global suffix so server threads
+     * (which run on different threads) can log to the same file.
+     *
      * @param suffix The instance suffix (e.g., "game0"), or null to clear
      */
     public static void setInstanceSuffix(String suffix) {
         instanceSuffix.set(suffix);
+        // In test mode, also set global suffix for server threads within same JVM
+        if (testMode) {
+            globalInstanceSuffix = suffix;
+        }
     }
 
     /**
      * Get the current instance suffix for this thread.
+     * Falls back to global suffix if thread-local is not set (for server threads in test mode).
      *
      * @return The instance suffix, or null if not set
      */
     public static String getInstanceSuffix() {
-        return instanceSuffix.get();
+        String suffix = instanceSuffix.get();
+        if (suffix == null && testMode) {
+            // Fallback to global suffix for server threads in test mode
+            suffix = globalInstanceSuffix;
+        }
+        return suffix;
     }
 
     /**
@@ -310,18 +326,19 @@ public final class NetworkDebugLogger {
      * Initialize the logger if not already done.
      * Creates the log directory and opens a unique log file.
      *
-     * If instanceSuffix is set for this thread, creates a per-thread log file.
-     * Otherwise, creates/uses a shared log file.
+     * If instanceSuffix is set, uses/creates a log file for that suffix.
+     * All threads with the same suffix share the same log file.
+     * Otherwise, creates/uses a shared default log file.
      */
     private static void ensureInitialized() {
-        String suffix = instanceSuffix.get();
+        String suffix = getInstanceSuffix();
 
-        // If instance suffix is set, use per-thread log file
+        // If instance suffix is set, use suffix-specific log file
         if (suffix != null) {
-            if (threadInitialized.get()) {
-                return;
+            if (suffixWriters.containsKey(suffix)) {
+                return;  // Already initialized for this suffix
             }
-            initializeThreadLogger(suffix);
+            initializeSuffixLogger(suffix);
             return;
         }
 
@@ -339,17 +356,11 @@ public final class NetworkDebugLogger {
     }
 
     /**
-     * Initialize a per-thread log file with the given instance suffix.
+     * Initialize a log file for a specific instance suffix.
+     * Uses ConcurrentHashMap for thread-safe lazy initialization.
      */
-    private static void initializeThreadLogger(String suffix) {
-        synchronized (lock) {
-            if (threadInitialized.get()) {
-                return;
-            }
-            PrintWriter writer = initializeLogFile(suffix);
-            threadFileWriter.set(writer);
-            threadInitialized.set(true);
-        }
+    private static void initializeSuffixLogger(String suffix) {
+        suffixWriters.computeIfAbsent(suffix, s -> initializeLogFile(s));
     }
 
     /**
@@ -414,13 +425,13 @@ public final class NetworkDebugLogger {
     }
 
     /**
-     * Get the active file writer for the current thread.
-     * Returns per-thread writer if instance suffix is set, otherwise shared writer.
+     * Get the active file writer for the current context.
+     * Returns suffix-specific writer if instance suffix is set, otherwise shared writer.
      */
     private static PrintWriter getFileWriter() {
-        String suffix = instanceSuffix.get();
+        String suffix = getInstanceSuffix();
         if (suffix != null) {
-            return threadFileWriter.get();
+            return suffixWriters.get(suffix);
         }
         return sharedFileWriter;
     }
@@ -645,22 +656,23 @@ public final class NetworkDebugLogger {
 
     /**
      * Close the log file. Call on application shutdown.
-     * Closes both the per-thread writer (if any) and shared writer.
+     * Closes all suffix-specific writers and the shared writer.
      */
     public static void close() {
         synchronized (lock) {
-            // Close per-thread writer if present
-            PrintWriter threadWriter = threadFileWriter.get();
-            if (threadWriter != null) {
-                threadWriter.println();
-                threadWriter.println("=".repeat(80));
-                threadWriter.println("Network Debug Log Ended: " + new Date());
-                threadWriter.println("=".repeat(80));
-                threadWriter.close();
-                threadFileWriter.remove();
-                threadInitialized.remove();
-                instanceSuffix.remove();
+            // Close all suffix-specific writers
+            for (PrintWriter writer : suffixWriters.values()) {
+                if (writer != null) {
+                    writer.println();
+                    writer.println("=".repeat(80));
+                    writer.println("Network Debug Log Ended: " + new Date());
+                    writer.println("=".repeat(80));
+                    writer.close();
+                }
             }
+            suffixWriters.clear();
+            instanceSuffix.remove();
+            globalInstanceSuffix = null;
 
             // Close shared writer
             if (sharedFileWriter != null) {
@@ -676,21 +688,26 @@ public final class NetworkDebugLogger {
     }
 
     /**
-     * Close just the per-thread log file for this thread.
-     * Use this when a parallel game instance completes.
+     * Close the log file for the current instance suffix.
+     * Use this when a game instance completes.
      */
     public static void closeThreadLogger() {
         synchronized (lock) {
-            PrintWriter threadWriter = threadFileWriter.get();
-            if (threadWriter != null) {
-                threadWriter.println();
-                threadWriter.println("=".repeat(80));
-                threadWriter.println("Network Debug Log Ended: " + new Date());
-                threadWriter.println("=".repeat(80));
-                threadWriter.close();
-                threadFileWriter.remove();
-                threadInitialized.remove();
+            String suffix = instanceSuffix.get();
+            if (suffix != null) {
+                PrintWriter writer = suffixWriters.remove(suffix);
+                if (writer != null) {
+                    writer.println();
+                    writer.println("=".repeat(80));
+                    writer.println("Network Debug Log Ended: " + new Date());
+                    writer.println("=".repeat(80));
+                    writer.close();
+                }
                 instanceSuffix.remove();
+                // Clear global suffix if it matches
+                if (suffix.equals(globalInstanceSuffix)) {
+                    globalInstanceSuffix = null;
+                }
             }
         }
     }

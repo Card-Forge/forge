@@ -336,6 +336,9 @@ public class HeadlessNetworkClient implements AutoCloseable {
     private static class DeltaLoggingGuiGame extends NoOpGuiGame {
         private final HeadlessNetworkClient client;
         private IGameController gameController;
+        // Track selectable cards for multi-selection prompts (e.g., "discard 2 cards")
+        private final java.util.List<forge.game.card.CardView> pendingSelectables = new java.util.ArrayList<>();
+        private int selectableIndex = 0;
 
         DeltaLoggingGuiGame(HeadlessNetworkClient client) {
             this.client = client;
@@ -469,28 +472,47 @@ public class HeadlessNetworkClient implements AutoCloseable {
                         NetworkDebugLogger.error("[DeltaLoggingGuiGame] Error auto-clicking button: %s", e.getMessage());
                     }
                 }).start();
+            } else if (gameController != null && !enable1 && selectableIndex < pendingSelectables.size()) {
+                // OK is disabled but we have more cards to select (multi-selection prompt)
+                NetworkDebugLogger.log("[DeltaLoggingGuiGame] OK disabled, selecting next card (%d/%d remaining)",
+                        pendingSelectables.size() - selectableIndex, pendingSelectables.size());
+                selectNextCard();
             }
         }
 
         @Override
         public void setSelectables(Iterable<forge.game.card.CardView> cards) {
             super.setSelectables(cards);
-            // Auto-select the first selectable card when cards become selectable
-            if (gameController != null && cards != null) {
-                java.util.Iterator<forge.game.card.CardView> iter = cards.iterator();
-                if (iter.hasNext()) {
-                    forge.game.card.CardView firstCard = iter.next();
-                    NetworkDebugLogger.log("[DeltaLoggingGuiGame] Auto-selecting first selectable card: %s",
-                            firstCard.getName());
-                    new Thread(() -> {
-                        try {
-                            Thread.sleep(100); // Small delay for server to be ready
-                            gameController.selectCard(firstCard, null, null);
-                        } catch (Exception e) {
-                            NetworkDebugLogger.error("[DeltaLoggingGuiGame] Error auto-selecting card: %s", e.getMessage());
-                        }
-                    }).start();
+            // Track selectable cards for multi-selection prompts
+            pendingSelectables.clear();
+            selectableIndex = 0;
+            if (cards != null) {
+                for (forge.game.card.CardView card : cards) {
+                    pendingSelectables.add(card);
                 }
+            }
+
+            // Auto-select the first selectable card when cards become selectable
+            if (gameController != null && !pendingSelectables.isEmpty()) {
+                selectNextCard();
+            }
+        }
+
+        // Helper to select the next card from the pending list
+        private void selectNextCard() {
+            if (selectableIndex < pendingSelectables.size()) {
+                forge.game.card.CardView card = pendingSelectables.get(selectableIndex);
+                selectableIndex++;
+                NetworkDebugLogger.log("[DeltaLoggingGuiGame] Auto-selecting card %d/%d: %s",
+                        selectableIndex, pendingSelectables.size(), card.getName());
+                new Thread(() -> {
+                    try {
+                        Thread.sleep(100); // Small delay for server to be ready
+                        gameController.selectCard(card, null, null);
+                    } catch (Exception e) {
+                        NetworkDebugLogger.error("[DeltaLoggingGuiGame] Error auto-selecting card: %s", e.getMessage());
+                    }
+                }).start();
             }
         }
     }

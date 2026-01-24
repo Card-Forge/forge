@@ -26,7 +26,7 @@ import java.io.File;
  * - -Dtest.2pGames=50
  * - -Dtest.3pGames=30
  * - -Dtest.4pGames=20
- * - -Dtest.batchSize=5
+ * - -Dtest.batchSize=10
  * - -Dtest.timeoutMs=300000
  *
  * Usage:

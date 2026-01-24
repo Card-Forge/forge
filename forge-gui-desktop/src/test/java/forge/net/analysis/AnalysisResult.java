@@ -23,6 +23,7 @@ public class AnalysisResult {
     private int gamesWithWarnings;
     private int gamesWithChecksumMismatches;
 
+    private long totalApproximateBytes;
     private long totalDeltaBytes;
     private long totalFullStateBytes;
     private double averageBandwidthSavings;
@@ -44,6 +45,7 @@ public class AnalysisResult {
         gamesWithWarnings = (int) allMetrics.stream().filter(m -> !m.getWarnings().isEmpty()).count();
         gamesWithChecksumMismatches = (int) allMetrics.stream().filter(GameLogMetrics::hasChecksumMismatch).count();
 
+        totalApproximateBytes = allMetrics.stream().mapToLong(GameLogMetrics::getTotalApproximateBytes).sum();
         totalDeltaBytes = allMetrics.stream().mapToLong(GameLogMetrics::getTotalDeltaBytes).sum();
         totalFullStateBytes = allMetrics.stream().mapToLong(GameLogMetrics::getTotalFullStateBytes).sum();
 
@@ -100,6 +102,10 @@ public class AnalysisResult {
 
     public int getGamesWithChecksumMismatches() {
         return gamesWithChecksumMismatches;
+    }
+
+    public long getTotalApproximateBytes() {
+        return totalApproximateBytes;
     }
 
     public long getTotalDeltaBytes() {
@@ -171,21 +177,59 @@ public class AnalysisResult {
         sb.append(String.format("| Games with Errors | %d |\n", gamesWithErrors));
         sb.append(String.format("| Games with Warnings | %d |\n", gamesWithWarnings));
         sb.append(String.format("| Average Turns per Game | %.1f |\n", averageTurns));
-        sb.append(String.format("| Total Delta Bytes | %,d |\n", totalDeltaBytes));
-        sb.append(String.format("| Total Full State Bytes | %,d |\n", totalFullStateBytes));
+        sb.append("\n");
+
+        // Bandwidth Usage Breakdown
+        sb.append("### Bandwidth Usage Breakdown\n\n");
+        sb.append("| Metric | Total Bytes | Avg per Game | Description |\n");
+        sb.append("|--------|-------------|--------------|-------------|\n");
+        double avgApprox = totalGames > 0 ? (double) totalApproximateBytes / totalGames : 0;
+        double avgDelta = totalGames > 0 ? (double) totalDeltaBytes / totalGames : 0;
+        double avgFull = totalGames > 0 ? (double) totalFullStateBytes / totalGames : 0;
+        sb.append(String.format("| Approximate | %,d | %,.0f | Estimated delta size from object diffs |\n",
+                totalApproximateBytes, avgApprox));
+        sb.append(String.format("| ActualNetwork | %,d | %,.0f | Actual bytes sent over network |\n",
+                totalDeltaBytes, avgDelta));
+        sb.append(String.format("| FullState | %,d | %,.0f | Size if full state was sent |\n",
+                totalFullStateBytes, avgFull));
+        sb.append("\n");
+
+        // Bandwidth savings calculations
+        double approxVsFull = totalFullStateBytes > 0 ? 100.0 * (1.0 - (double) totalApproximateBytes / totalFullStateBytes) : 0;
+        double actualVsFull = totalFullStateBytes > 0 ? 100.0 * (1.0 - (double) totalDeltaBytes / totalFullStateBytes) : 0;
+        double actualVsApprox = totalApproximateBytes > 0 ? 100.0 * (1.0 - (double) totalDeltaBytes / totalApproximateBytes) : 0;
+        sb.append("**Bandwidth Savings:**\n");
+        sb.append(String.format("- Approximate vs FullState: %.1f%% savings\n", approxVsFull));
+        sb.append(String.format("- ActualNetwork vs FullState: %.1f%% savings\n", actualVsFull));
+        sb.append(String.format("- ActualNetwork vs Approximate: %.1f%% %s (compression effect)\n",
+                Math.abs(actualVsApprox), actualVsApprox >= 0 ? "savings" : "overhead"));
         sb.append("\n");
 
         // Results by Player Count
         if (!statsByPlayerCount.isEmpty()) {
             sb.append("### Results by Player Count\n\n");
-            sb.append("| Players | Games | Success Rate | Avg Turns | Avg Savings | Total Bytes |\n");
-            sb.append("|---------|-------|--------------|-----------|-------------|-------------|\n");
+            sb.append("| Players | Games | Success Rate | Avg Turns | Avg Savings |\n");
+            sb.append("|---------|-------|--------------|-----------|-------------|\n");
             for (int p = 2; p <= 4; p++) {
                 PlayerCountStats stats = statsByPlayerCount.get(p);
                 if (stats != null) {
-                    sb.append(String.format("| %d | %d | %.1f%% | %.1f | %.1f%% | %,d |\n",
+                    sb.append(String.format("| %d | %d | %.1f%% | %.1f | %.1f%% |\n",
                             p, stats.gameCount, stats.successRate, stats.averageTurns,
-                            stats.averageBandwidthSavings, stats.totalDeltaBytes));
+                            stats.averageBandwidthSavings));
+                }
+            }
+            sb.append("\n");
+
+            // Bandwidth by player count
+            sb.append("### Bandwidth by Player Count\n\n");
+            sb.append("| Players | Approximate | ActualNetwork | FullState | Savings |\n");
+            sb.append("|---------|-------------|---------------|-----------|--------|\n");
+            for (int p = 2; p <= 4; p++) {
+                PlayerCountStats stats = statsByPlayerCount.get(p);
+                if (stats != null) {
+                    sb.append(String.format("| %d | %,d | %,d | %,d | %.1f%% |\n",
+                            p, stats.totalApproximateBytes, stats.totalDeltaBytes,
+                            stats.totalFullStateBytes, stats.averageBandwidthSavings));
                 }
             }
             sb.append("\n");
@@ -264,6 +308,7 @@ public class AnalysisResult {
         public final double successRate;
         public final double averageTurns;
         public final double averageBandwidthSavings;
+        public final long totalApproximateBytes;
         public final long totalDeltaBytes;
         public final long totalFullStateBytes;
 
@@ -279,6 +324,7 @@ public class AnalysisResult {
                     .average()
                     .orElse(0.0);
 
+            this.totalApproximateBytes = metrics.stream().mapToLong(GameLogMetrics::getTotalApproximateBytes).sum();
             this.totalDeltaBytes = metrics.stream().mapToLong(GameLogMetrics::getTotalDeltaBytes).sum();
             this.totalFullStateBytes = metrics.stream().mapToLong(GameLogMetrics::getTotalFullStateBytes).sum();
 

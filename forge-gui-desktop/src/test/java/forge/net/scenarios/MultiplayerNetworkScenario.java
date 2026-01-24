@@ -15,6 +15,7 @@ import forge.net.TestDeckLoader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -59,6 +60,7 @@ public class MultiplayerNetworkScenario {
         public final long totalDeltaPackets;
         public final long totalDeltaBytes;
         public final String errorMessage;
+        public final List<String> deckNames;
 
         public ScenarioResult(boolean gameStarted, boolean gameCompleted,
                               int playerCount, int remoteClientCount,
@@ -66,6 +68,17 @@ public class MultiplayerNetworkScenario {
                               String description,
                               long totalDeltaPackets, long totalDeltaBytes,
                               String errorMessage) {
+            this(gameStarted, gameCompleted, playerCount, remoteClientCount,
+                 turnCount, winner, description, totalDeltaPackets, totalDeltaBytes,
+                 errorMessage, Collections.emptyList());
+        }
+
+        public ScenarioResult(boolean gameStarted, boolean gameCompleted,
+                              int playerCount, int remoteClientCount,
+                              int turnCount, String winner,
+                              String description,
+                              long totalDeltaPackets, long totalDeltaBytes,
+                              String errorMessage, List<String> deckNames) {
             this.gameStarted = gameStarted;
             this.gameCompleted = gameCompleted;
             this.playerCount = playerCount;
@@ -76,6 +89,7 @@ public class MultiplayerNetworkScenario {
             this.totalDeltaPackets = totalDeltaPackets;
             this.totalDeltaBytes = totalDeltaBytes;
             this.errorMessage = errorMessage;
+            this.deckNames = deckNames != null ? new ArrayList<>(deckNames) : Collections.emptyList();
         }
 
         public boolean passed() {
@@ -130,6 +144,7 @@ public class MultiplayerNetworkScenario {
         ServerGameLobby lobby = null;
         ExecutorService clientExecutor = null;
         List<HeadlessNetworkClient> remoteClients = new ArrayList<>();
+        List<String> deckNames = new ArrayList<>();
 
         boolean gameStarted = false;
         boolean gameCompleted = false;
@@ -187,10 +202,9 @@ public class MultiplayerNetworkScenario {
             // Decks are pre-loaded so clients don't need to send them
             NetworkDebugLogger.log("%s Configuring %d player slots on server...", LOG_PREFIX, playerCount);
 
-            List<Deck> allDecks = new ArrayList<>();
             for (int i = 0; i < playerCount; i++) {
                 Deck deck = TestDeckLoader.getRandomPrecon();
-                allDecks.add(deck);
+                deckNames.add(deck.getName());
 
                 LobbySlot slot = lobby.getSlot(i);
                 if (i == 0) {
@@ -386,7 +400,7 @@ public class MultiplayerNetworkScenario {
             return new ScenarioResult(
                     gameStarted, gameCompleted, playerCount, remoteClientCount,
                     turnCount, winner, playerCount + "-player network",
-                    totalDeltaPackets, totalDeltaBytes, null);
+                    totalDeltaPackets, totalDeltaBytes, null, deckNames);
 
         } catch (Exception e) {
             NetworkDebugLogger.error("%s Error: %s", LOG_PREFIX, e.getMessage());
@@ -394,7 +408,7 @@ public class MultiplayerNetworkScenario {
             return new ScenarioResult(
                     gameStarted, gameCompleted, playerCount, remoteClientCount,
                     turnCount, winner, playerCount + "-player network",
-                    totalDeltaPackets, totalDeltaBytes, e.getMessage());
+                    totalDeltaPackets, totalDeltaBytes, e.getMessage(), deckNames);
 
         } finally {
             // Cleanup

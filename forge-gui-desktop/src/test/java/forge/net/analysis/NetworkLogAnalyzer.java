@@ -75,6 +75,7 @@ public class NetworkLogAnalyzer {
         try (BufferedReader reader = new BufferedReader(new FileReader(logFile))) {
             String line;
             int packetCount = 0;
+            long totalApproximateBytes = 0;
             long totalDeltaBytes = 0;
             long totalFullStateBytes = 0;
 
@@ -88,6 +89,7 @@ public class NetworkLogAnalyzer {
                     long actualBytes = Long.parseLong(packetMatcher.group(3));
                     long fullStateBytes = Long.parseLong(packetMatcher.group(4));
 
+                    totalApproximateBytes += approxBytes;
                     totalDeltaBytes += actualBytes;
                     totalFullStateBytes += fullStateBytes;
 
@@ -169,6 +171,7 @@ public class NetworkLogAnalyzer {
 
             // Set aggregated metrics
             metrics.setDeltaPacketCount(packetCount);
+            metrics.setTotalApproximateBytes(totalApproximateBytes);
             metrics.setTotalDeltaBytes(totalDeltaBytes);
             metrics.setTotalFullStateBytes(totalFullStateBytes);
             metrics.setTurnCount(maxTurn);

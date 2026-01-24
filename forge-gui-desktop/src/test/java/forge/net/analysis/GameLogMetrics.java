@@ -20,8 +20,9 @@ public class GameLogMetrics {
 
     // Delta sync metrics
     private int deltaPacketCount;
-    private long totalDeltaBytes;
-    private long totalFullStateBytes;
+    private long totalApproximateBytes;  // Estimated delta size from object diffs
+    private long totalDeltaBytes;         // Actual bytes sent over network (ActualNetwork)
+    private long totalFullStateBytes;     // Size if full state was sent
     private double averageBandwidthSavingsApproximate;
     private double averageBandwidthSavingsActual;
 
@@ -107,6 +108,14 @@ public class GameLogMetrics {
 
     public void setDeltaPacketCount(int deltaPacketCount) {
         this.deltaPacketCount = deltaPacketCount;
+    }
+
+    public long getTotalApproximateBytes() {
+        return totalApproximateBytes;
+    }
+
+    public void setTotalApproximateBytes(long totalApproximateBytes) {
+        this.totalApproximateBytes = totalApproximateBytes;
     }
 
     public long getTotalDeltaBytes() {
