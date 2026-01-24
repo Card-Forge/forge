@@ -23,6 +23,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import forge.net.PortAllocator;
+
 /**
  * Multiplayer network scenario with actual remote clients.
  *
@@ -40,7 +42,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class MultiplayerNetworkScenario {
 
     private static final String LOG_PREFIX = "[MultiplayerNetworkScenario]";
-    private static final AtomicInteger portCounter = new AtomicInteger(59000);
     private static final String[] PLAYER_NAMES = {"Alice (Host AI)", "Bob (Remote)", "Charlie (Remote)", "Diana (Remote)"};
 
     private static final long CONNECTION_TIMEOUT_MS = 30000;
@@ -110,6 +111,7 @@ public class MultiplayerNetworkScenario {
     // Configuration
     private int playerCount = 3;
     private long gameTimeoutMs = GAME_TIMEOUT_MS;
+    private int specifiedPort = -1; // -1 means auto-allocate
 
     /**
      * Set the number of players (3-4 supported).
@@ -119,6 +121,14 @@ public class MultiplayerNetworkScenario {
             throw new IllegalArgumentException("Player count must be 3 or 4, got: " + count);
         }
         this.playerCount = count;
+        return this;
+    }
+
+    /**
+     * Set a specific port to use instead of auto-allocating.
+     */
+    public MultiplayerNetworkScenario port(int port) {
+        this.specifiedPort = port;
         return this;
     }
 
@@ -134,7 +144,7 @@ public class MultiplayerNetworkScenario {
      * Execute the multiplayer network scenario.
      */
     public ScenarioResult execute() {
-        int port = portCounter.getAndIncrement();
+        int port = (specifiedPort > 0) ? specifiedPort : PortAllocator.allocatePort();
         int remoteClientCount = playerCount - 1; // All except host are remote
 
         NetworkDebugLogger.log("%s Starting %d-player network game with %d remote clients on port %d",

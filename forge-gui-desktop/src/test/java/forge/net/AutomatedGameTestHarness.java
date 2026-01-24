@@ -17,7 +17,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Core network test orchestration using validated Phase 0 patterns.
@@ -27,8 +26,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Phase 2 of the Automated Network Testing Plan.
  */
 public class AutomatedGameTestHarness {
-
-    private static final AtomicInteger portCounter = new AtomicInteger(55555);
 
     private FServerManager server;
     private ServerGameLobby lobby;
@@ -60,7 +57,7 @@ public class AutomatedGameTestHarness {
 
         try {
             // 1. Start server
-            port = portCounter.getAndIncrement();
+            port = PortAllocator.allocatePort();
             server = FServerManager.getInstance();
             server.startServer(port);
             logServerInstanceBanner("BasicTwoPlayerGame", 2, port);

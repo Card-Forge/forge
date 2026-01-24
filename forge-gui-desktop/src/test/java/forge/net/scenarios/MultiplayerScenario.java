@@ -20,7 +20,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
+
+import forge.net.PortAllocator;
 
 /**
  * Tests multiplayer games with 3-4 AI players.
@@ -38,8 +39,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  * </ul>
  */
 public class MultiplayerScenario {
-
-    private static final AtomicInteger portCounter = new AtomicInteger(57000);
     private static final String[] PLAYER_NAMES = {"Alice", "Bob", "Charlie", "Diana"};
 
     /**
@@ -142,7 +141,7 @@ public class MultiplayerScenario {
 
         try {
             // 1. Start server
-            int port = portCounter.getAndIncrement();
+            int port = PortAllocator.allocatePort();
             server = FServerManager.getInstance();
             server.startServer(port);
             logServerInstanceBanner("MultiplayerScenario", playerCount, port);

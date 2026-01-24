@@ -128,6 +128,7 @@ public class ComprehensiveGameRunner {
     private static GameRunResult runMultiplayerGame(int port, int gameIndex, int playerCount) {
         MultiplayerNetworkScenario scenario = new MultiplayerNetworkScenario()
                 .playerCount(playerCount)
+                .port(port) // Use the port assigned by the parent process
                 .gameTimeout(300000); // 5 minute timeout in ms
 
         MultiplayerNetworkScenario.ScenarioResult scenarioResult = scenario.execute();

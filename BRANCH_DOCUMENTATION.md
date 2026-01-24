@@ -1142,14 +1142,35 @@ The default reconnection timeout is 5 minutes. To modify:
 gameSession.setDisconnectTimeoutMs(10 * 60 * 1000); // 10 minutes
 ```
 
-### Delta Sync Toggle
+### Delta Sync Toggle & Backwards Compatibility
 
-Delta sync can be disabled per-client if needed:
+Delta synchronization is designed with backwards compatibility and fallback mechanisms:
+
+**Default Behavior:**
+- Delta sync is **enabled by default** (`useDeltaSync = true` in `NetGuiGame.java:44`)
+- All clients receive delta updates automatically once initial sync is complete
+
+**Programmatic Toggle:**
+- `setDeltaSyncEnabled(boolean enabled)` in `NetGuiGame.java:77-79` allows per-client control
+- Disabling falls back to full state sync for that specific client
 
 ```java
 // In NetGuiGame
 netGuiGame.setDeltaSyncEnabled(false); // Falls back to full state sync
 ```
+
+**Automatic Fallback Scenarios:**
+The system automatically falls back to full state sync when:
+1. **Delta sync is explicitly disabled** via `setDeltaSyncEnabled(false)`
+2. **Initial sync hasn't been sent yet** (first connection or reconnection)
+3. **Any error occurs during delta serialization** (graceful degradation)
+
+**Key Implementation Files:**
+- `NetGuiGame.java:77-79` - Toggle method (`setDeltaSyncEnabled`)
+- `NetGuiGame.java:132-137` - Fallback logic (checks `useDeltaSync` and `initialSyncSent`)
+- `NetGuiGame.java:44` - Default state (`useDeltaSync = true`)
+
+**Note:** Currently there is no user-facing preference in settings to toggle delta sync. The toggle is programmatic only. Adding a user preference would require changes to `ForgeNetPreferences` and the settings UI (see Configuration section if needed).
 
 ---
 

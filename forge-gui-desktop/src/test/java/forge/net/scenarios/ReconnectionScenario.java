@@ -20,7 +20,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
+
+import forge.net.PortAllocator;
 
 /**
  * Tests player disconnection and AI takeover scenarios.
@@ -64,8 +65,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  * </p>
  */
 public class ReconnectionScenario {
-
-    private static final AtomicInteger portCounter = new AtomicInteger(56000);
 
     /**
      * Result of the reconnection scenario.
@@ -159,7 +158,7 @@ public class ReconnectionScenario {
 
         try {
             // 1. Start server
-            int port = portCounter.getAndIncrement();
+            int port = PortAllocator.allocatePort();
             server = FServerManager.getInstance();
             server.startServer(port);
             logServerInstanceBanner("ReconnectionScenario", 2, port);

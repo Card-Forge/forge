@@ -47,6 +47,12 @@ public class DeltaSyncManager {
     // Objects not in this set need full serialization when first encountered
     private final Set<Integer> sentObjectIds = ConcurrentHashMap.newKeySet();
 
+    // Track the last sent property values for each object (per-client change tracking)
+    // Key: composite delta key (type + id), Value: map of property ordinal to serialized checksum
+    // This allows each DeltaSyncManager to independently track what has been sent to its client,
+    // rather than relying on the global hasChanges() flags which get cleared by other clients.
+    private final Map<Integer, Map<Integer, Integer>> lastSentPropertyChecksums = new ConcurrentHashMap<>();
+
     private long packetsSinceLastChecksum = 0;
 
     /**
@@ -245,7 +251,12 @@ public class DeltaSyncManager {
     /**
      * Collect delta for a single TrackableObject.
      * If the object hasn't been sent before, serialize ALL properties.
-     * If already sent, only serialize changed properties.
+     * If already sent, compare current state to per-client tracking and serialize changed properties.
+     *
+     * IMPORTANT: Uses per-client change tracking (lastSentPropertyChecksums) instead of relying
+     * solely on obj.hasChanges(). This fixes a bug where multiple remote clients share the same
+     * GameView, and the first client's clearAllChanges() would prevent subsequent clients from
+     * seeing any changes (causing 3-4 player games to desync).
      */
     private void collectObjectDelta(TrackableObject obj, Map<Integer, byte[]> objectDeltas,
                                     Map<Integer, NewObjectData> newObjects, Set<Integer> currentObjectIds) {
@@ -270,13 +281,138 @@ public class DeltaSyncManager {
             NewObjectData newObjData = serializeNewObject(obj);
             if (newObjData != null) {
                 newObjects.put(deltaKey, newObjData);
+                // Record the property checksums for future delta comparison
+                recordPropertyChecksums(deltaKey, obj);
             }
-        } else if (obj.hasChanges()) {
-            // Existing object with changes - serialize only changed properties
-            byte[] serialized = serializeChanges(obj);
+        } else {
+            // Existing object - use per-client tracking to detect changes
+            // This is more reliable than obj.hasChanges() because it doesn't get cleared
+            // by other clients' DeltaSyncManagers
+            byte[] serialized = serializeChangesPerClient(deltaKey, obj);
             if (serialized != null && serialized.length > 0) {
                 objectDeltas.put(deltaKey, serialized);
             }
+        }
+    }
+
+    /**
+     * Record checksums of all current property values for an object.
+     * Used for per-client change tracking.
+     */
+    private void recordPropertyChecksums(int deltaKey, TrackableObject obj) {
+        Map<Integer, Integer> checksums = new HashMap<>();
+        Map<TrackableProperty, Object> props = obj.getProps();
+        if (props != null) {
+            for (Map.Entry<TrackableProperty, Object> entry : props.entrySet()) {
+                int propOrdinal = entry.getKey().ordinal();
+                int checksum = computePropertyChecksum(entry.getValue());
+                checksums.put(propOrdinal, checksum);
+            }
+        }
+        lastSentPropertyChecksums.put(deltaKey, checksums);
+    }
+
+    /**
+     * Compute a checksum for a property value.
+     * Uses Objects.hashCode for simplicity - collisions are acceptable since
+     * we're only using this to detect changes, not for cryptographic purposes.
+     */
+    private int computePropertyChecksum(Object value) {
+        if (value == null) {
+            return 0;
+        }
+        // For collections, hash the size and first few elements for efficiency
+        if (value instanceof Iterable) {
+            int hash = 17;
+            int count = 0;
+            for (Object item : (Iterable<?>) value) {
+                hash = 31 * hash + (item != null ? item.hashCode() : 0);
+                if (++count >= 10) break; // Only check first 10 elements
+            }
+            hash = 31 * hash + count;
+            return hash;
+        }
+        return value.hashCode();
+    }
+
+    /**
+     * Serialize properties that have changed for THIS client, using per-client tracking.
+     * Compares current property values to the last sent values (stored in lastSentPropertyChecksums).
+     * This is more reliable than using hasChanges() which can be cleared by other clients.
+     */
+    private byte[] serializeChangesPerClient(int deltaKey, TrackableObject obj) {
+        Map<TrackableProperty, Object> props = obj.getProps();
+        if (props == null || props.isEmpty()) {
+            return null;
+        }
+
+        Map<Integer, Integer> lastChecksums = lastSentPropertyChecksums.get(deltaKey);
+        boolean noLastChecksums = (lastChecksums == null);
+        if (lastChecksums == null) {
+            // No previous record - shouldn't happen for sent objects, but handle gracefully
+            // Serialize all properties as if it's a new object
+            lastChecksums = new HashMap<>();
+            NetworkDebugLogger.debug("[DeltaSync] serializeChangesPerClient: No lastChecksums for deltaKey=0x%08X, treating as new object", deltaKey);
+        }
+
+        // Find properties that have changed since last send to THIS client
+        Set<TrackableProperty> changedProps = new HashSet<>();
+        Map<Integer, Integer> newChecksums = new HashMap<>();
+
+        for (Map.Entry<TrackableProperty, Object> entry : props.entrySet()) {
+            TrackableProperty prop = entry.getKey();
+            Object value = entry.getValue();
+            int propOrdinal = prop.ordinal();
+            int currentChecksum = computePropertyChecksum(value);
+            newChecksums.put(propOrdinal, currentChecksum);
+
+            Integer lastChecksum = lastChecksums.get(propOrdinal);
+            if (lastChecksum == null || lastChecksum != currentChecksum) {
+                changedProps.add(prop);
+            }
+        }
+
+        // Check for properties that were removed (in lastChecksums but not in current props)
+        for (Integer propOrdinal : lastChecksums.keySet()) {
+            if (!newChecksums.containsKey(propOrdinal)) {
+                // Property was removed - need to send null value
+                TrackableProperty prop = TrackableProperty.deserialize(propOrdinal);
+                if (prop != null) {
+                    changedProps.add(prop);
+                }
+            }
+        }
+
+        if (changedProps.isEmpty()) {
+            return null;
+        }
+
+        // Log that we detected changes via per-client tracking
+        int objType = getTypeFromDeltaKey(deltaKey);
+        int objId = getIdFromDeltaKey(deltaKey);
+        NetworkDebugLogger.debug("[DeltaSync] Per-client tracking detected %d changed props for type=%d id=%d (deltaKey=0x%08X): %s",
+                changedProps.size(), objType, objId, deltaKey, changedProps);
+
+        // Serialize the changed properties
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            DataOutputStream dos = new DataOutputStream(baos);
+            NetworkTrackableSerializer nts = new NetworkTrackableSerializer(dos);
+
+            dos.writeInt(changedProps.size());
+            for (TrackableProperty prop : changedProps) {
+                dos.writeInt(prop.ordinal());
+                Object value = props.get(prop);
+                NetworkPropertySerializer.serialize(nts, prop, value);
+            }
+
+            // Update the recorded checksums for this client
+            lastSentPropertyChecksums.put(deltaKey, newChecksums);
+
+            return baos.toByteArray();
+        } catch (Exception e) {
+            NetworkDebugLogger.error("[DeltaSync] Error serializing changes per-client: %s", e.getMessage());
+            return null;
         }
     }
 
@@ -498,13 +634,18 @@ public class DeltaSyncManager {
      * Mark objects as sent to client. Called after initial fullStateSync.
      * This ensures that subsequent delta packets only send changed properties,
      * not full object data.
+     *
+     * IMPORTANT: Also records property checksums for per-client change tracking.
+     * This is essential for 3-4 player games where multiple clients share the same GameView.
      */
     public void markObjectsAsSent(GameView gameView) {
         if (gameView == null) {
             return;
         }
 
-        sentObjectIds.add(makeDeltaKey(DeltaPacket.TYPE_GAME_VIEW, gameView.getId()));
+        int gameViewKey = makeDeltaKey(DeltaPacket.TYPE_GAME_VIEW, gameView.getId());
+        sentObjectIds.add(gameViewKey);
+        recordPropertyChecksums(gameViewKey, gameView);
 
         if (gameView.getPlayers() != null) {
             for (PlayerView player : gameView.getPlayers()) {
@@ -514,15 +655,20 @@ public class DeltaSyncManager {
 
         if (gameView.getStack() != null) {
             for (StackItemView stackItem : gameView.getStack()) {
-                sentObjectIds.add(makeDeltaKey(DeltaPacket.TYPE_STACK_ITEM_VIEW, stackItem.getId()));
+                int key = makeDeltaKey(DeltaPacket.TYPE_STACK_ITEM_VIEW, stackItem.getId());
+                sentObjectIds.add(key);
+                recordPropertyChecksums(key, stackItem);
             }
         }
 
         if (gameView.getCombat() != null) {
-            sentObjectIds.add(makeDeltaKey(DeltaPacket.TYPE_COMBAT_VIEW, gameView.getCombat().getId()));
+            int key = makeDeltaKey(DeltaPacket.TYPE_COMBAT_VIEW, gameView.getCombat().getId());
+            sentObjectIds.add(key);
+            recordPropertyChecksums(key, gameView.getCombat());
         }
 
-        NetworkDebugLogger.log("[DeltaSync] Marked %d objects as sent after full state sync", sentObjectIds.size());
+        NetworkDebugLogger.log("[DeltaSync] Marked %d objects as sent after full state sync, recorded %d checksum entries",
+                sentObjectIds.size(), lastSentPropertyChecksums.size());
     }
 
     private void markPlayerObjectsAsSent(PlayerView player) {
@@ -530,7 +676,9 @@ public class DeltaSyncManager {
             return;
         }
 
-        sentObjectIds.add(makeDeltaKey(DeltaPacket.TYPE_PLAYER_VIEW, player.getId()));
+        int key = makeDeltaKey(DeltaPacket.TYPE_PLAYER_VIEW, player.getId());
+        sentObjectIds.add(key);
+        recordPropertyChecksums(key, player);
 
         markCardsAsSent(player.getHand());
         markCardsAsSent(player.getGraveyard());
@@ -560,7 +708,9 @@ public class DeltaSyncManager {
         if (card == null) {
             return;
         }
-        sentObjectIds.add(makeDeltaKey(DeltaPacket.TYPE_CARD_VIEW, card.getId()));
+        int key = makeDeltaKey(DeltaPacket.TYPE_CARD_VIEW, card.getId());
+        sentObjectIds.add(key);
+        recordPropertyChecksums(key, card);
         if (card.getAttachedCards() != null) {
             for (CardView attached : card.getAttachedCards()) {
                 markCardAsSent(attached);
