@@ -1499,3 +1499,26 @@ mvn -pl forge-gui-desktop -am verify -Dtest="SequentialGameTest#testThreeSequent
 ```
 
 ---
+
+## Authorship
+
+All code implementation on the NetworkPlay branch was written by **Claude Code** (Anthropic's AI coding assistant) under human direction and review. This includes:
+
+- Delta synchronization system (~2,500 lines)
+- Reconnection support with session management (~1,200 lines)
+- Enhanced chat notifications and UI improvements (~400 lines)
+- Automated testing infrastructure (~4,000 lines)
+- Debug logging system (~600 lines)
+- Documentation (BRANCH_DOCUMENTATION.md, TESTING_DOCUMENTATION.md, BUGS.md)
+
+**Human contributions:**
+- Project direction and feature requirements
+- Code review and approval
+- Manual testing and bug reporting
+- Architecture guidance
+
+**Tools used:**
+- Claude Code (claude-opus-4-5-20251101)
+- Human instruction via natural language prompts
+
+---
