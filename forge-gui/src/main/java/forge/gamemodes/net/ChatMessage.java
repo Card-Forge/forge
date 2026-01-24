@@ -63,6 +63,7 @@ public class ChatMessage {
 
     public String getFormattedMessage() {
         if (source == null) {
+            // System messages show timestamp only (no prefix needed, message is self-descriptive)
             return String.format("[%s] %s", timestamp, message);
         }
         return String.format("[%s] %s: %s", timestamp, source, message);

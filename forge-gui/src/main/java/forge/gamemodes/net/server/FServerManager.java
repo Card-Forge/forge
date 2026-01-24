@@ -539,10 +539,9 @@ public final class FServerManager {
                 }
             } else if (msg instanceof UpdateLobbyPlayerEvent) {
                 updateSlot(client.getIndex(), (UpdateLobbyPlayerEvent) msg);
-            } else if (msg instanceof MessageEvent) {
-                final MessageEvent event = (MessageEvent) msg;
-                lobbyListener.message(event.getSource(), event.getMessage());
             }
+            // Note: MessageEvent is handled by MessageHandler, not here
+            // to avoid duplicate display on host's chat
             super.channelRead(ctx, msg);
         }
     }
