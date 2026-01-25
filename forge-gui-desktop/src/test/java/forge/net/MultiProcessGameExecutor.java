@@ -86,11 +86,25 @@ public class MultiProcessGameExecutor {
      * @return Aggregated results from all games
      */
     public ExecutionResult runGamesWithPlayerCounts(int[] playerCounts) {
-        int gameCount = playerCounts.length;
-
         // Generate batch ID for correlating all logs from this run
         String batchId = NetworkDebugLogger.generateBatchId();
-        NetworkDebugLogger.log("%s Starting %d games in PARALLEL (batch: %s)", LOG_PREFIX, gameCount, batchId);
+        return runGamesWithPlayerCounts(playerCounts, 0, batchId);
+    }
+
+    /**
+     * Run multiple games with specified player counts and batch info.
+     * Used by runGamesInBatches to maintain unique game indices across batches.
+     *
+     * @param playerCounts Array of player counts for each game (2, 3, or 4)
+     * @param batchNumber Batch number (0-based) for unique log filenames
+     * @param batchId Batch ID for correlating logs from the same test run
+     * @return Aggregated results from all games
+     */
+    public ExecutionResult runGamesWithPlayerCounts(int[] playerCounts, int batchNumber, String batchId) {
+        int gameCount = playerCounts.length;
+
+        NetworkDebugLogger.log("%s Starting %d games in PARALLEL (batch: %s, batchNum=%d)",
+                LOG_PREFIX, gameCount, batchId, batchNumber);
 
         List<ProcessInfo> processes = new ArrayList<>();
         List<ProcessMonitor> monitors = new ArrayList<>();
@@ -106,7 +120,7 @@ public class MultiProcessGameExecutor {
             for (int i = 0; i < gameCount; i++) {
                 int port = basePort + i;
                 int playerCount = playerCounts[i];
-                ProcessInfo info = startGameProcess(javaBin, classpath, port, i, playerCount, batchId);
+                ProcessInfo info = startGameProcess(javaBin, classpath, port, i, playerCount, batchId, batchNumber);
                 processes.add(info);
 
                 // Start monitoring immediately to prevent output buffer deadlock
@@ -114,8 +128,8 @@ public class MultiProcessGameExecutor {
                 monitor.startReading();
                 monitors.add(monitor);
 
-                NetworkDebugLogger.log("%s Started process for game %d (%d players, port %d, pid %d)",
-                        LOG_PREFIX, i, playerCount, port, info.process.pid());
+                NetworkDebugLogger.log("%s Started process for batch%d-game%d (%d players, port %d, pid %d)",
+                        LOG_PREFIX, batchNumber, i, playerCount, port, info.process.pid());
             }
 
             // Wait for all processes to complete IN PARALLEL
@@ -131,7 +145,7 @@ public class MultiProcessGameExecutor {
                     } finally {
                         allDone.countDown();
                     }
-                }, "wait-game-" + index).start();
+                }, "wait-batch" + batchNumber + "-game" + index).start();
             }
 
             // Wait for all games to complete
@@ -233,10 +247,16 @@ public class MultiProcessGameExecutor {
      */
     public ExecutionResult runGamesInBatches(int[] playerCounts, int batchSize) {
         int totalGames = playerCounts.length;
-        NetworkDebugLogger.log("%s Running %d games in batches of %d", LOG_PREFIX, totalGames, batchSize);
+        int totalBatches = (totalGames + batchSize - 1) / batchSize;
+
+        // Generate a single batch ID for the entire test run
+        String batchId = NetworkDebugLogger.generateBatchId();
+        NetworkDebugLogger.log("%s Running %d games in %d batches of %d (run: %s)",
+                LOG_PREFIX, totalGames, totalBatches, batchSize, batchId);
 
         ExecutionResult aggregatedResult = new ExecutionResult(totalGames);
         int currentPortOffset = 0;
+        int batchNumber = 0;
 
         for (int batchStart = 0; batchStart < totalGames; batchStart += batchSize) {
             int batchEnd = Math.min(batchStart + batchSize, totalGames);
@@ -246,15 +266,16 @@ public class MultiProcessGameExecutor {
             int[] batchPlayerCounts = new int[batchLength];
             System.arraycopy(playerCounts, batchStart, batchPlayerCounts, 0, batchLength);
 
-            NetworkDebugLogger.log("%s Starting batch %d-%d of %d games",
-                    LOG_PREFIX, batchStart, batchEnd - 1, totalGames);
+            NetworkDebugLogger.log("%s Starting batch %d (games %d-%d of %d)",
+                    LOG_PREFIX, batchNumber, batchStart, batchEnd - 1, totalGames);
 
             // Create executor for this batch with offset ports
             MultiProcessGameExecutor batchExecutor = new MultiProcessGameExecutor(
                     this.timeoutMs, this.basePort + currentPortOffset);
             batchExecutor.withRunnerClass(this.runnerClass);
 
-            ExecutionResult batchResult = batchExecutor.runGamesWithPlayerCounts(batchPlayerCounts);
+            // Pass batch number and shared batch ID for unique log filenames
+            ExecutionResult batchResult = batchExecutor.runGamesWithPlayerCounts(batchPlayerCounts, batchNumber, batchId);
 
             // Merge batch results into aggregated result
             for (Map.Entry<Integer, GameResult> entry : batchResult.getResults().entrySet()) {
@@ -263,16 +284,27 @@ public class MultiProcessGameExecutor {
             }
 
             currentPortOffset += batchLength;
+            batchNumber++;
 
             NetworkDebugLogger.log("%s Batch complete. Running total: %d/%d games",
                     LOG_PREFIX, aggregatedResult.getSuccessCount() + aggregatedResult.getFailureCount(), totalGames);
+
+            // Brief delay between batches to allow port cleanup
+            // This helps prevent "Address already in use" errors on rapid test execution
+            if (batchNumber < numBatches) {
+                try {
+                    Thread.sleep(500); // 500ms delay between batches
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
         }
 
         NetworkDebugLogger.log("%s All batches complete: %s", LOG_PREFIX, aggregatedResult.toSummary());
         return aggregatedResult;
     }
 
-    private ProcessInfo startGameProcess(String javaBin, String classpath, int port, int gameIndex, int playerCount, String batchId)
+    private ProcessInfo startGameProcess(String javaBin, String classpath, int port, int gameIndex, int playerCount, String batchId, int batchNumber)
             throws Exception {
         List<String> command = new ArrayList<>();
         command.add(javaBin);
@@ -283,10 +315,11 @@ public class MultiProcessGameExecutor {
         command.add(String.valueOf(port));
         command.add(String.valueOf(gameIndex));
 
-        // Add player count and batch ID for ComprehensiveGameRunner
+        // Add player count, batch ID, and batch number for ComprehensiveGameRunner
         if (runnerClass.equals("forge.net.ComprehensiveGameRunner")) {
             command.add(String.valueOf(playerCount));
             command.add(batchId);
+            command.add(String.valueOf(batchNumber));
         }
 
         ProcessBuilder pb = new ProcessBuilder(command);

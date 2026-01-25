@@ -71,21 +71,43 @@ The mismatch occurs because:
 - Client receives packet with checksum=656358674 (from UPKEEP)
 - Client's state after applying delta has checksum=-1831154159 (UNTAP state)
 
-**Revised Hypothesis:** The client is computing checksum BEFORE fully applying all phase transition deltas, OR the deltas for the phase change are not being applied correctly to this particular client. The per-client property tracking may be incorrectly filtering out some phase change deltas.
+**ROOT CAUSE IDENTIFIED:**
+
+The PlayerView IDs are assigned in different order on server vs client:
+
+| Player | Server ID | Client ID |
+|--------|-----------|-----------|
+| Bob (Remote) | 0 | 1 |
+| Charlie (Remote) | 1 | 2 |
+| Diana (Remote) | 2 | 3 |
+| Alice (Host AI) | 3 | 0 |
+
+**Impact:** When server sends delta for "PlayerView ID=2" (Diana on server), the client applies it to Charlie (ID=2 on client). This corrupts game state and causes checksum mismatch.
+
+**Why this happens:**
+- Server assigns IDs based on join order: remote clients first (0,1,2), host last (3)
+- Client assigns IDs based on local order: host first (0), remote clients after (1,2,3)
+
+**Evidence from log:**
+```
+Server delta: "Applying delta to PlayerView ID=2... setting HasPriority = null"
+Server ID=2 is Diana, but Client ID=2 is Charlie → wrong player updated
+```
 
 **Fix Direction:**
-1. Verify delta application completes before checksum validation
-2. Check if phase property changes are correctly tracked per-client
-3. Ensure `lastSentPropertyChecksums` in DeltaSyncManager is not causing phase updates to be skipped
+1. Ensure consistent player ID assignment between server and client
+2. Option A: Client should receive and use the same player IDs as server via FullStateSync
+3. Option B: Use player names or unique identifiers instead of positional IDs
+4. The FullStatePacket already sends PlayerViews with their IDs - client needs to respect these IDs
 
-**Files to investigate:**
-- `NetworkGuiGame.java:applyDelta()` - Client-side delta application, line ~186-346
-- `DeltaSyncManager.java` - Per-client tracking at line 50-54
-- `HeadlessNetworkGuiGame.java` - Client-side game view
+**Files to fix:**
+- `GameClientHandler.java` - How client receives player data
+- `FullStatePacket.java` - How player IDs are serialized/deserialized
+- `NetworkGuiGame.java:fullStateSync()` - How client initializes player mappings
 
 ### Bug #11: "Address already in use: bind" port conflict during tests
 
-**Status:** Open - Needs Investigation
+**Status:** Fixed
 **Discovered:** 2026-01-25 via comprehensive test (run20260125-140616)
 **Frequency:** 1 in 100 games (batch8-game7-2p)
 **Severity:** Low (test infrastructure issue)
@@ -100,10 +122,18 @@ The mismatch occurs because:
 [14:25:02.781] [ERROR] [NetworkClientTestHarness] Test failed: Address already in use: bind
 ```
 
-**Likely Cause:**
-Previous game's port not fully released when new game started. May need longer delay between games or better port cleanup.
+**Root Cause:**
+Previous game's server socket not fully released when new game tried to bind to the same port. This can occur due to TCP TIME_WAIT state.
 
-**Investigation:** TODO - Review port allocation in MultiProcessGameExecutor
+**Fix Applied:**
+1. Added `SO_REUSEADDR` option to server socket in `FServerManager.java`
+   - Allows immediate rebinding to a port in TIME_WAIT state
+2. Added 500ms delay between batches in `MultiProcessGameExecutor.java`
+   - Gives extra time for port cleanup between batch executions
+
+**Files changed:**
+- `FServerManager.java` - Added ChannelOption.SO_REUSEADDR
+- `MultiProcessGameExecutor.java` - Added inter-batch delay
 
 ---
 
