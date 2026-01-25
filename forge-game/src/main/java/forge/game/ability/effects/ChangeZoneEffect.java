@@ -24,13 +24,13 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.*;
 import forge.util.collect.FCollectionView;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 public class ChangeZoneEffect extends SpellAbilityEffect {
@@ -1296,7 +1296,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             List<ZoneType> origin = HiddenOriginChoicesMap.get(player).origin;
             ZoneType destination = HiddenOriginChoicesMap.get(player).destination;
             CardCollection movedCards = new CardCollection();
-            Player decider = ObjectUtils.firstNonNull(chooser, player);
+            Player decider = Objects.requireNonNullElse(chooser, player);
 
             for (final Card c : chosenCards) {
                 Card movedCard;

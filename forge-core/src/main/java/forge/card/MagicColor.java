@@ -135,8 +135,8 @@ public final class MagicColor {
         /** The Basic lands. */
         public static final ImmutableList<String> BASIC_LANDS = ImmutableList.of("Plains", "Island", "Swamp", "Mountain", "Forest");
         public static final ImmutableList<String> SNOW_LANDS = ImmutableList.of("Snow-Covered Plains", "Snow-Covered Island", "Snow-Covered Swamp", "Snow-Covered Mountain", "Snow-Covered Forest");
-        public static final String ANY_COLOR_CONVERSION = "AnyType->AnyColor";
 
+        public static final String ANY_COLOR_CONVERSION = "AnyType->AnyColor";
         public static final String ANY_TYPE_CONVERSION = "AnyType->AnyType";
         /**
          * Private constructor to prevent instantiation.
