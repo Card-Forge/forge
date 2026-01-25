@@ -7,9 +7,9 @@ import com.google.common.collect.Table;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
-import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class ActivationTable extends ForwardingTable<SpellAbility, Optional<StaticAbility>, List<Player>> {
@@ -28,7 +28,7 @@ public class ActivationTable extends ForwardingTable<SpellAbility, Optional<Stat
         if (root.isTrigger()) {
             original = root.getTrigger().getOverridingAbility();
         } else {
-            original = ObjectUtils.defaultIfNull(root.getOriginalAbility(), root);
+            original = Objects.requireNonNullElse(root.getOriginalAbility(), root);
         }
         return original;
     }

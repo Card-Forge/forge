@@ -48,11 +48,11 @@ import forge.util.collect.FCollectionView;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -141,7 +141,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     }
 
     public CardTypeView getTypeWithChanges() {
-        return ObjectUtils.firstNonNull(this.changedType, getType());
+        return Objects.requireNonNullElse(this.changedType, getType());
     }
 
     public void updateTypes() {

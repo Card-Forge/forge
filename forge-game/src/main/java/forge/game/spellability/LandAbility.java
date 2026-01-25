@@ -27,8 +27,9 @@ import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.Objects;
 
 public class LandAbility extends AbilityStatic {
 
@@ -54,7 +55,7 @@ public class LandAbility extends AbilityStatic {
             return false;
         }
  
-        land = ObjectUtils.firstNonNull(getAlternateHost(land), land);
+        land = Objects.requireNonNullElse(getAlternateHost(land), land);
 
         return p.canPlayLand(land, false, this);
     }
