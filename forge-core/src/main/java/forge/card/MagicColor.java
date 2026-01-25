@@ -195,7 +195,6 @@ public final class MagicColor {
         public String getShortName() {
             return shortName;
         }
-
         public String getBasicLandType() {
             return basicLandType;
         }
