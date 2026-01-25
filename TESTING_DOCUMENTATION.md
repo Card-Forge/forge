@@ -407,96 +407,82 @@ The only difference from live play is that AI makes decisions instantly rather t
 | Distribution | 50 x 2-player, 30 x 3-player, 20 x 4-player |
 | Batch Size | 10 parallel games |
 | Timeout | 5 minutes per game |
-| Deck Selection | Random quest precons (206 unique decks used) |
-| Test Duration | ~30 minutes |
+| Deck Selection | Random quest precons (205 unique decks used) |
+| Test Duration | ~31 minutes |
 
 ### Summary Results
 
 | Metric | Value |
 |--------|-------|
 | Total Games | 100 |
-| Successful Games | 97 |
-| Failed Games | 3 |
-| Success Rate | **97%** |
-| Checksum Mismatches | **1** (auto-recovered) |
-| Total Turns Played | 2,222 |
-| Total Delta Packets | 205,579 |
+| Successful Games | 96 |
+| Failed Games | 4 |
+| Success Rate | **96%** |
+| Checksum Mismatches | **0** |
+| Total Turns Played | 2,195 |
+| Total Delta Packets | 214,380 |
 
-### Key Finding: Multiplayer Support Fixed
+### Key Finding: Multiplayer Support Stable
 
-**All player configurations now work reliably** after implementing per-client property tracking in the delta sync system. The previous multiplayer regression (0% success for 3-4 player games) has been resolved.
-
-The single checksum mismatch was a **timing issue** where the game phase advanced between server checksum computation and client validation. The auto-resync mechanism successfully detected and recovered from this, demonstrating the robustness of the checksum validation system.
+The test achieved **zero checksum mismatches**, demonstrating the robustness of the delta sync protocol.
 
 ### Bandwidth Usage Breakdown
 
 | Metric | Total | Avg/Game | Description |
 |--------|-------|----------|-------------|
-| Delta Bytes | 9.4 MB | 94 KB | Actual delta bytes sent over network |
-| Delta Packets | 205,579 | 2,056 | Number of incremental updates sent |
-| Bytes/Packet | 46 bytes | - | Average packet size |
+| Delta Bytes | 9.3 MB | 93 KB | Actual delta bytes sent over network |
+| Delta Packets | 214,380 | 2,144 | Number of incremental updates sent |
+| Bytes/Packet | 43 bytes | - | Average packet size |
 
 **Bandwidth Savings:**
-- Delta sync achieves **~99.5% bandwidth reduction** compared to full state synchronization
-- Average of ~46 bytes per delta packet (vs ~1.2 MB for full state)
-- 2,222 turns played across 100 games with minimal network overhead
+- Delta sync achieves **~99% bandwidth reduction** compared to full state synchronization
+- Average of ~43 bytes per delta packet (vs ~1.2 MB for full state)
+- 2,195 turns played across 100 games with minimal network overhead
 
 ### Results by Player Count
 
 | Players | Games | Successes | Success Rate | Avg Turns | Notes |
 |---------|-------|-----------|--------------|-----------|-------|
-| 2 | 50 | 50 | **100%** | 15.0 | All games completed |
-| 3 | 30 | 29 | **97%** | 26.1 | 1 timeout |
-| 4 | 20 | 18 | **90%** | 39.8 | 1 connection failure, 1 timeout |
+| 2 | 50 | 48 | **96%** | 14.7 | 2 timeouts |
+| 3 | 30 | 29 | **97%** | 22.5 | 1 failed setup |
+| 4 | 20 | 19 | **95%** | 39.0 | 1 failed setup |
 
-*Note: Log analysis found 98 games with full metrics; 2 games (1 connection failure early, 1 timeout) produced incomplete logs.*
+*Note: Setup failures (2 games) produced 0 deltas/turns due to failing during connection phase, not gameplay.*
 
 ### Validation Criteria
 
 | Criterion | Target | Actual | Status |
 |-----------|--------|--------|--------|
-| Success Rate | ≥90% | 97% | **PASS** |
-| Bandwidth Savings | ≥90% | 99.5% | **PASS** |
-| Checksum Mismatches | 0 | 1 | **PASS*** |
-
-*\*The single checksum mismatch was automatically detected and recovered via the resync protocol. The game continued successfully after recovery, demonstrating the checksum validation system working as designed.*
+| Success Rate | ≥90% | 96% | **PASS** |
+| Bandwidth Savings | ≥90% | 99% | **PASS** |
+| Checksum Mismatches | 0 | 0 | **PASS** |
 
 ### Error Analysis
 
-#### 3 Game Failures Explained
+#### 4 Game Failures Explained
 
-The comprehensive test had 3 failures out of 100 games:
+The comprehensive test had 4 failures out of 100 games:
 
 | Failure | Type | Player Count | Root Cause |
 |---------|------|--------------|------------|
-| Batch 4, Game 5 | Connection failure | 4-player | Client 3 (Diana) connection hung |
-| Batch 4, Game 7 | Timeout | 4-player | Game exceeded 5-minute limit |
-| Batch 6, Game 5 | Timeout | 3-player | Game exceeded 5-minute limit |
+| Batch 1, Game 2 | Timeout | 2-player | Game exceeded 5-minute limit |
+| Batch 2, Game 1 | Timeout | 2-player | Game exceeded 5-minute limit |
+| Batch 3, Game 6 | Setup failure | 4-player | "Player not ready" race condition |
+| Batch 9, Game 7 | Setup failure | 4-player | "Player not ready" race condition |
 
-**Connection Failure Details (Batch 4, Game 5):**
+**Setup Failures (2 games):**
 
-Timeline analysis of the 4-player game failure:
-```
-06:29:38.602 - Waiting for 3 clients (30s timeout)
-06:29:39.336 - Bob connected to slot 0
-06:29:39.336 - Charlie connected to slot 0 (same slot - suspicious)
-06:29:39.591 - Diana starts connecting
-06:29:40.056 - 2/3 clients marked ready
-... 28 seconds pass with no Diana activity ...
-06:30:08.609 - Timeout: 2/3 connected successfully
-06:30:08.610 - InterruptedException during Diana's connection
-```
-
-**Root Cause**: Diana's connection attempt hung during the `connectedLatch.await()` in `HeadlessNetworkClient.connect()`. The lobby assignment never arrived from the server within the 30-second timeout. When the scenario's client latch timed out, it triggered cleanup which interrupted Diana's pending connection.
-
-**Contributing Factor**: Both Bob and Charlie logged "connected to slot 0" which suggests a potential race condition in slot assignment during rapid concurrent connections. This may have caused the server to not properly assign Diana's slot.
+Both 4-player setup failures showed the error: `"Player Diana (Remote) is not ready"`. This occurs when `startGame()` is called before all clients have sent their ready status. This is a **test infrastructure race condition**, not a protocol bug:
+- All 3 remote clients connect successfully
+- Ready status messages arrive asynchronously
+- If `startGame()` is called before the last ready status arrives, it returns null
 
 **Timeout Failures (2 games):**
 
 These failures are **not network bugs** - they occur when:
 - Complex board states require extended AI computation
 - Games naturally take longer than the 5-minute timeout
-- Multiple players lead to longer turn sequences
+- Both timeouts were 2-player games with unusually long turn counts
 
 The 5-minute timeout is appropriate for most games (avg 22.9 turns at ~13 seconds/turn), but some complex 4-player games can legitimately exceed this.
 

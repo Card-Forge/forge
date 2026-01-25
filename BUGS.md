@@ -12,23 +12,25 @@ This file tracks known bugs in the Forge codebase, particularly for the NetworkP
 
 ## Current Test Status
 
-**Quick Test Results (2026-01-25, post-race-fix):**
+**Comprehensive Test Results (2026-01-25):**
 
 | Metric | Value |
 |--------|-------|
-| Total Games | 10 |
-| Success Rate | **100%** (10/10) |
+| Total Games | 100 |
+| Success Rate | **96%** (96/100) |
 | Bandwidth Savings | **99%** |
 | Checksum Mismatches | 0 |
 
 **By Player Count:**
 | Players | Success Rate |
 |---------|-------------|
-| 2-player | 100% (5/5) |
-| 3-player | 100% (3/3) |
-| 4-player | 100% (2/2) |
+| 2-player | 96% (48/50) - 2 timeouts |
+| 3-player | 97% (29/30) - 1 setup failure |
+| 4-player | 95% (19/20) - 1 setup failure |
 
-All validation criteria passed after fixing auto-response race condition in HeadlessNetworkClient.
+**4 Failures Explained:**
+1. **Timeouts** (2 games): Games exceeded 5-minute limit (not protocol bugs)
+2. **Setup failures** (2 games): Race condition where `startGame()` called before all clients ready (test infrastructure issue)
 
 ---
 
@@ -43,7 +45,7 @@ All validation criteria passed after fixing auto-response race condition in Head
 | 5 | Checksum mismatch every 20 packets | NetworkPlay | Changed `getPhase().hashCode()` to `getPhase().ordinal()` - hashCode differs between JVMs, ordinal is consistent | 12aeccaac4 |
 | 6 | GameView ID in checksum causing mismatch | NetworkPlay | Removed `gameView.getId()` from checksum in both DeltaSyncManager and NetworkGuiGame - GameView ID is a local JVM identifier that differs between server and client | - |
 | 7 | Multiplayer (3-4 player) games failing with 0% success | NetworkPlay | Per-client property tracking: Multiple clients share GameView; first client's clearAllChanges() cleared state for all. Added independent checksum tracking per client in DeltaSyncManager. Comprehensive test: 97% success (97/100 games) | 715cc4da68 |
-| 8 | HeadlessNetworkClient auto-response race condition causing game timeouts | NetworkPlay | Replaced unsynchronized `new Thread()` calls with single-threaded `ScheduledExecutorService` to serialize all auto-responses. Each new prompt cancels pending responses to prevent stale actions. Quick test: 100% success (10/10 games) | - |
+| 8 | HeadlessNetworkClient auto-response race condition causing game timeouts | NetworkPlay | Replaced unsynchronized `new Thread()` calls with single-threaded `ScheduledExecutorService` to serialize all auto-responses. Each new prompt cancels pending responses to prevent stale actions. Comprehensive test: 96% success (96/100 games) | 2aad2f9938 |
 
 ---
 
