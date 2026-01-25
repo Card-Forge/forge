@@ -50,25 +50,53 @@ import java.util.stream.Collectors;
 
 public class ComputerUtilMana {
     private final static boolean DEBUG_MANA_PAYMENT = false;
+    private final static boolean VIBE_MANA_PAYMENT = true;
 
     public static boolean canPayManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean effect) {
+        if (VIBE_MANA_PAYMENT) {
+            return ManaPaymentService.canPayMana(cost, sa, ai, effect);
+        }
+
         cost = new ManaCostBeingPaid(cost); //check copy of cost so it doesn't modify the exist cost being paid
         return payManaCost(cost, sa, ai, true, true, effect);
     }
     public static boolean canPayManaCost(final SpellAbility sa, final Player ai, final int extraMana, final boolean effect) {
+        if (VIBE_MANA_PAYMENT) {
+            return ManaPaymentService.canPayMana(sa.getPayCosts(), sa, ai, extraMana, effect);
+        }
+
         return canPayManaCost(sa.getPayCosts(), sa, ai, extraMana, effect);
     }
     public static boolean canPayManaCost(final Cost cost, final SpellAbility sa, final Player ai, final int extraMana, final boolean effect) {
+       if (VIBE_MANA_PAYMENT) {
+            return ManaPaymentService.canPayMana(cost, sa, ai, extraMana, effect);
+       }
+
         return payManaCost(cost, sa, ai, true, extraMana, true, effect);
     }
 
     public static boolean payManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean effect) {
+        if (VIBE_MANA_PAYMENT) {
+            ManaPaymentService service = new ManaPaymentService(cost, sa, ai, effect);
+            return service.payManaCost();
+        }
+
         return payManaCost(cost, sa, ai, false, true, effect);
     }
     public static boolean payManaCost(final Cost cost, final Player ai, final SpellAbility sa, final boolean effect) {
+        if (VIBE_MANA_PAYMENT) {
+            ManaPaymentService service = new ManaPaymentService(cost, ai, sa, effect);
+            return service.payManaCost();
+        }
+
         return payManaCost(cost, sa, ai, false, 0, true, effect);
     }
     private static boolean payManaCost(final Cost cost, final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable, final boolean effect) {
+        if (VIBE_MANA_PAYMENT) {
+            ManaPaymentService service = new ManaPaymentService(cost, sa, ai, extraMana, effect);
+            return service.payManaCost();
+        }
+
         ManaCostBeingPaid manaCost = calculateManaCost(cost, sa, ai, test, extraMana, effect);
         return payManaCost(manaCost, sa, ai, test, checkPlayable, effect);
     }
