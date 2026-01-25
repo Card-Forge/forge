@@ -238,7 +238,16 @@ mvn -pl forge-gui-desktop -am verify \
 
 **Location**: `forge-gui-desktop/logs/`
 
-**Format**: `network-debug-YYYYMMDD-HHMMSS-PID-[gameN-Xp]-test.log`
+**Format**: `network-debug-BATCHID-gameN-Pp-test.log`
+
+Where:
+- `BATCHID` = `runYYYYMMDD-HHMMSS` (timestamp when batch started, shared across all games in same run)
+- `N` = game index (0, 1, 2, ...)
+- `P` = player count (2, 3, 4)
+
+**Example**: `network-debug-run20260125-091914-game0-2p-test.log`
+
+All logs from the same batch test share the same `runYYYYMMDD-HHMMSS` prefix, making them easily groupable and sortable.
 
 **Key prefixes**:
 - `[DeltaSync]` - Delta synchronization with bandwidth metrics
@@ -378,6 +387,12 @@ mvn -pl forge-gui-desktop -am verify \
 
 ## Comprehensive Validation Results for NetworkPlay Branch
 
+> **Source:** `comprehensive-test-results-20260125-143015.md`
+>
+> **Verification:** Test artifacts (results file and 100 game logs) are archived in [`testlogs/`](testlogs/) for independent verification.
+>
+> **IMPORTANT:** All metrics below are copied directly from the verified test results file. No values are estimated or interpolated.
+
 ### Objective
 
 To conduct comprehensive testing of the delta synchronisation network protocol in the NetworkPlay Branch via large scale AI-vs-AI Forge games played from mulligan to completion using complete network infrastructure, using a variety of different player counts and unique decks. This is intended to validate effectiveness of network code changes across a wide range of use cases.
@@ -403,114 +418,89 @@ The only difference from live play is that AI makes decisions instantly rather t
 | Parameter | Value |
 |-----------|-------|
 | Test Date | 2026-01-25 |
-| Total Games | 100 |
-| Distribution | 50 x 2-player, 30 x 3-player, 20 x 4-player |
+| Results File | `comprehensive-test-results-20260125-143015.md` |
+| Configured Games | 100 (50 x 2p, 30 x 3p, 20 x 4p) |
+| Games Analyzed | 100 |
 | Batch Size | 10 parallel games |
 | Timeout | 5 minutes per game |
-| Deck Selection | Random quest precons (205 unique decks used) |
-| Test Duration | ~31 minutes |
 
 ### Summary Results
 
 | Metric | Value |
 |--------|-------|
-| Total Games | 100 |
-| Successful Games | 96 |
-| Failed Games | 4 |
-| Success Rate | **96%** |
-| Checksum Mismatches | **0** |
-| Total Turns Played | 2,195 |
-| Total Delta Packets | 214,380 |
+| Total Games Run | 100 |
+| Successful Games | 98 |
+| Failed Games | 2 |
+| Success Rate | **98.0%** |
+| Checksum Mismatches | 1 |
+| Games with Errors | 2 |
+| Games with Warnings | 24 |
+| Total Turns | 2355 |
+| Average Turns per Game | 23.8 |
+| Unique Decks Used | 42 |
 
-### Key Finding: Multiplayer Support Stable
+### Key Finding: High Success Rate with Rare Desync
 
-The test achieved **zero checksum mismatches**, demonstrating the robustness of the delta sync protocol.
+The test achieved **98% success rate** across all player counts. One checksum mismatch occurred in a 4-player game (batch1-game2-4p at Turn 10), requiring investigation.
 
 ### Bandwidth Usage Breakdown
 
-| Metric | Total | Avg/Game | Description |
-|--------|-------|----------|-------------|
-| Delta Bytes | 9.3 MB | 93 KB | Actual delta bytes sent over network |
-| Delta Packets | 214,380 | 2,144 | Number of incremental updates sent |
-| Bytes/Packet | 43 bytes | - | Average packet size |
+| Metric | Total | Avg per Game | Description |
+|--------|-------|--------------|-------------|
+| Approximate | 45.65 MB | 467.4 KB | Estimated delta size from object diffs |
+| ActualNetwork | 300.61 MB | 3.01 MB | Actual bytes sent over network |
+| FullState | 48438.26 MB | 484.38 MB | Size if full state was sent |
 
 **Bandwidth Savings:**
-- Delta sync achieves **~99% bandwidth reduction** compared to full state synchronization
-- Average of ~43 bytes per delta packet (vs ~1.2 MB for full state)
-- 2,195 turns played across 100 games with minimal network overhead
+- Approximate vs FullState: **99.9%** savings
+- ActualNetwork vs FullState: **99.4%** savings
 
 ### Results by Player Count
 
-| Players | Games | Successes | Success Rate | Avg Turns | Notes |
-|---------|-------|-----------|--------------|-----------|-------|
-| 2 | 50 | 48 | **96%** | 14.7 | 2 timeouts |
-| 3 | 30 | 29 | **97%** | 22.5 | 1 failed setup |
-| 4 | 20 | 19 | **95%** | 39.0 | 1 failed setup |
+| Players | Games | Success Rate | Avg Turns | Avg Savings |
+|---------|-------|--------------|-----------|-------------|
+| 2 | 50 | **98.0%** | 15.0 | 99.4% |
+| 3 | 30 | **100.0%** | 26.5 | 99.5% |
+| 4 | 20 | **95.0%** | 41.3 | 99.3% |
 
-*Note: Setup failures (2 games) produced 0 deltas/turns due to failing during connection phase, not gameplay.*
+### Bandwidth by Player Count
+
+| Players | Approximate | ActualNetwork | FullState | Savings |
+|---------|-------------|---------------|-----------|---------|
+| 2 | 7.54 MB | 21.39 MB | 3867.64 MB | 99.4% |
+| 3 | 15.39 MB | 65.38 MB | 13717.01 MB | 99.5% |
+| 4 | 22.71 MB | 213.84 MB | 30853.61 MB | 99.3% |
 
 ### Validation Criteria
 
 | Criterion | Target | Actual | Status |
 |-----------|--------|--------|--------|
-| Success Rate | ≥90% | 96% | **PASS** |
-| Bandwidth Savings | ≥90% | 99% | **PASS** |
-| Checksum Mismatches | 0 | 0 | **PASS** |
+| Success Rate | ≥90% | 98.0% | **PASS** |
+| Bandwidth Savings | ≥90% | 99.4% | **PASS** |
+| Checksum Mismatches | 0 | 1 | **INVESTIGATE** |
 
 ### Error Analysis
 
-#### 4 Game Failures Explained
+**Unique Errors from Results File:**
+- `[14:09:26.294] [ERROR] [DeltaSync] Checksum details (client state):` - Checksum mismatch in 4-player game
+- `[14:25:02.781] [ERROR] [NetworkClientTestHarness] Test failed: Address already in use: bind`
 
-The comprehensive test had 4 failures out of 100 games:
+**2 Game Failures Explained:**
 
-| Failure | Type | Player Count | Root Cause |
-|---------|------|--------------|------------|
-| Batch 1, Game 2 | Timeout | 2-player | Game exceeded 5-minute limit |
-| Batch 2, Game 1 | Timeout | 2-player | Game exceeded 5-minute limit |
-| Batch 3, Game 6 | Setup failure | 4-player | "Player not ready" race condition |
-| Batch 9, Game 7 | Setup failure | 4-player | "Player not ready" race condition |
+The comprehensive test had 2 failures out of 100 games:
 
-**Setup Failures (2 games):**
+**1. Checksum Mismatch (batch1-game2-4p):**
+A 4-player game experienced a desync at Turn 10, UNTAP phase. Client state diverged from server:
+```
+Player 3 (Diana): GY=0, BF=3 (client) vs server state (needs investigation)
+```
+This is a **protocol bug** requiring investigation - see BUGS.md #10.
 
-Both 4-player setup failures showed the error: `"Player Diana (Remote) is not ready"`. This occurs when `startGame()` is called before all clients have sent their ready status. This is a **test infrastructure race condition**, not a protocol bug:
-- All 3 remote clients connect successfully
-- Ready status messages arrive asynchronously
-- If `startGame()` is called before the last ready status arrives, it returns null
+**2. Port Binding Error (batch8-game7-2p):**
+This occurs during rapid parallel test execution when port cleanup is incomplete between batches. This is a **test infrastructure issue**, not a protocol bug.
 
-**Timeout Failures (2 games):**
-
-These failures are **not network bugs** - they occur when:
-- Complex board states require extended AI computation
-- Games naturally take longer than the 5-minute timeout
-- Both timeouts were 2-player games with unusually long turn counts
-
-The 5-minute timeout is appropriate for most games (avg 22.9 turns at ~13 seconds/turn), but some complex 4-player games can legitimately exceed this.
-
-**Recommended Actions:**
-1. The connection race condition is rare (1/100 games) and may be mitigated by increasing client stagger delay
-2. Timeout failures are acceptable for comprehensive testing - can increase timeout if needed
-3. None of these failures indicate bugs in the delta sync protocol itself
-
-#### Single Checksum Mismatch
-
-**Checksum Mismatch (Game 35, 4-player):**
-- **Cause**: Timing issue - game phase advanced from MAIN2 to COMBAT_END between server checksum computation and client validation
-- **Recovery**: Auto-resync protocol successfully requested and received full state
-- **Result**: Game continued to completion after resync
-
-This timing edge case occurs rarely (<1% of games) and is handled gracefully by the auto-recovery mechanism.
-
-### Fixes Applied
-
-1. **Per-Client Property Tracking** (Bug #7 fix):
-   - Added `lastSentPropertyChecksums` map in `DeltaSyncManager` for independent tracking per client
-   - Each client now maintains its own view of what has been sent, preventing shared state issues in multiplayer
-   - Files: `DeltaSyncManager.java`, `NetGuiGame.java`
-
-2. **Port Allocation Fix**:
-   - Created `PortAllocator` utility for safe port allocation with availability checking
-   - Updated `MultiplayerNetworkScenario` to accept explicit port from parent process
-   - Prevents "Address already in use" errors in rapid parallel test execution
+**Warning Analysis:**
+24 games showed `NetworkDeserializer` collection lookup warnings. These are non-fatal warnings where collection IDs were not found in the tracker - games completed successfully despite these warnings.
 
 ---
 

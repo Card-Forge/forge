@@ -1,0 +1,31 @@
+================================================================================
+Network Debug Log Started: Sun Jan 25 14:24:48 ACDT 2026
+Batch ID: run20260125-140616
+PID: 6224
+Instance: batch8-game7-2p
+Log file: ~/IdeaProjects/forge/forge-gui-desktop/logs/network-debug-run20260125-140616-batch8-game7-2p-test.log
+
+System Information:
+  Java Version: 25.0.1
+  Java Vendor: Oracle Corporation
+  Max Memory: 512 MB
+  Available Processors: 20
+  OS: Windows 11 10.0
+  OS Arch: amd64
+================================================================================
+
+[14:24:48.134] [INFO] ================================================================================
+[14:24:48.134] [INFO] TESTING ENVIRONMENT - HeadlessGuiDesktop Active
+[14:24:48.134] [INFO] This log was created from automated test infrastructure.
+[14:24:48.135] [INFO] ================================================================================
+[14:25:02.397] [INFO] [ComprehensiveGameRunner] Starting game 7 with 2 players on port 58087
+[14:25:02.400] [INFO] [NetworkClientTestHarness] Starting server on port 58087
+[14:25:02.781] [ERROR] [NetworkClientTestHarness] Test failed: Address already in use: bind
+[14:25:02.782] [INFO] [NetworkClientTestHarness] Cleaning up...
+[14:25:02.782] [INFO] [NetworkClientTestHarness] Cleanup complete
+[14:25:02.782] [INFO] [NetworkClientTestHarness] Test completed in 0.4s: NetworkTest[success=false, connected=false, started=false, completed=false, deltas=0, fullSyncs=0, bytes=0, turns=0, winner=null]
+[14:25:02.782] [INFO] [ComprehensiveGameRunner] Game 7 result: success=false, turns=0, winner=null
+
+================================================================================
+Network Debug Log Ended: Sun Jan 25 14:25:02 ACDT 2026
+================================================================================
