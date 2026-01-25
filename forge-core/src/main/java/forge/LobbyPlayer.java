@@ -35,23 +35,6 @@ public abstract class LobbyPlayer {
         return result;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        LobbyPlayer other = (LobbyPlayer) obj;
-        if (name == null) {
-            return other.name == null;
-        } else return name.equals(other.name);
-    }
-
     public int getAvatarIndex() {
         return avatarIndex;
     }
