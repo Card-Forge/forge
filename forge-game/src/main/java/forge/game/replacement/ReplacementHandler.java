@@ -19,7 +19,6 @@ package forge.game.replacement;
 
 import java.util.*;
 
-import com.google.common.base.MoreObjects;
 import forge.game.card.*;
 import forge.game.phase.PhaseType;
 
@@ -310,7 +309,7 @@ public class ReplacementHandler {
                         replacementEffect.getParam("OptionalDecider"), effectSA).get(0);
             }
 
-            String name = MoreObjects.firstNonNull(host.getRenderForUI() ? host.getCardForUi() : null, host).getTranslatedName();
+            String name = Objects.requireNonNullElse(host.getRenderForUI() ? host.getCardForUi() : null, host).getTranslatedName();
             String effectDesc = TextUtil.fastReplace(replacementEffect.getDescription(), "CARDNAME", name);
             final String question = runParams.containsKey(AbilityKey.Card)
                 ? Localizer.getInstance().getMessage("lblApplyCardReplacementEffectToCardConfirm", name, runParams.get(AbilityKey.Card).toString(), effectDesc)
