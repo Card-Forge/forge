@@ -1042,6 +1042,7 @@ public class ManaPaymentService {
         }); // CardListFilter
 
         final CardCollection sortedManaSources = new CardCollection();
+        final CardCollection multiManaSources = new CardCollection();
         final CardCollection otherManaSources = new CardCollection();
         final CardCollection useLastManaSources = new CardCollection();
         final CardCollection colorlessManaSources = new CardCollection();
@@ -1053,12 +1054,35 @@ public class ManaPaymentService {
         final CardCollection anyColorManaSources = new CardCollection();
 
         // Sort mana sources
+        // 0. Multi-mana sources (produce more than 1 mana per activation, including repeated symbols)
         // 1. Use lands that can only produce colorless mana without
         // drawback/cost first
         // 2. Search for mana sources that have a certain number of abilities
         // 3. Use lands that produce any color mana
         // 4. all other sources (creature, costs, drawback, etc.)
         for (Card card : manaSources) {
+            boolean isMultiMana = false;
+            for (SpellAbility m : getAIPlayableMana(card)) {
+                AbilityManaPart manaPart = m.getManaPart();
+                if (manaPart != null) {
+                    String manaProduced = manaPart.mana(m);
+                    int produced = 0;
+                    // Count all mana symbols, including repeats and numbers
+                    for (char c : manaProduced.toCharArray()) {
+                        if (c == 'W' || c == 'U' || c == 'B' || c == 'R' || c == 'G' || c == 'C') produced++;
+                        else if (Character.isDigit(c)) produced += Character.getNumericValue(c);
+                    }
+                    int amount = m.amountOfManaGenerated(false);
+                    if (produced > 1 || amount > 1) {
+                        isMultiMana = true;
+                        break;
+                    }
+                }
+            }
+            if (isMultiMana) {
+                multiManaSources.add(card);
+                continue;
+            }
             // exclude creature sources that will tap as a part of an attack declaration
             if (card.isCreature()) {
                 if (card.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS, ai)) {
@@ -1093,27 +1117,21 @@ public class ManaPaymentService {
                 otherManaSources.add(card);
                 continue; // don't use creatures before other permanents
             }
-
             int usableManaAbilities = 0;
             boolean needsLimitedResources = false;
             boolean unpreferredCost = false;
             boolean producesAnyColor = false;
             final List<SpellAbility> manaAbilities = getAIPlayableMana(card);
-
             for (final SpellAbility m : manaAbilities) {
                 if (m.getManaPart().isAnyMana()) {
                     producesAnyColor = true;
                 }
-
                 final Cost cost = m.getPayCosts();
-
                 if (cost != null) {
-                    // if the AI can't pay the additional costs skip the mana ability
                     m.setActivatingPlayer(ai);
                     if (!CostPayment.canPayAdditionalCosts(m.getPayCosts(), m, false)) {
                         continue;
                     }
-
                     if (!cost.isReusuableResource()) {
                         for(CostPart part : cost.getCostParts()) {
                             if (part instanceof CostSacrifice && !part.payCostFromSource()) {
@@ -1123,18 +1141,15 @@ public class ManaPaymentService {
                         needsLimitedResources = !unpreferredCost;
                     }
                 }
-
                 AbilitySub sub = m.getSubAbility();
-                // We really shouldn't be hardcoding names here. ChkDrawback should just return true for them
                 if (sub != null && !card.getName().equals("Pristine Talisman") && !card.getName().equals("Zhur-Taa Druid")) {
                     if (!SpellApiToAi.Converter.get(sub).chkDrawbackWithSubs(ai, sub).willingToPlay()) {
                         continue;
                     }
-                    needsLimitedResources = true; // TODO: check for good drawbacks (gainLife)
+                    needsLimitedResources = true;
                 }
                 usableManaAbilities++;
             }
-
             if (unpreferredCost) {
                 useLastManaSources.add(card);
             } else if (needsLimitedResources) {
@@ -1157,21 +1172,23 @@ public class ManaPaymentService {
                 fiveManaSources.add(card);
             }
         }
-        sortedManaSources.addAll(sortedManaSources.size(), colorlessManaSources);
-        sortedManaSources.addAll(sortedManaSources.size(), oneManaSources);
-        sortedManaSources.addAll(sortedManaSources.size(), twoManaSources);
-        sortedManaSources.addAll(sortedManaSources.size(), threeManaSources);
-        sortedManaSources.addAll(sortedManaSources.size(), fourManaSources);
-        sortedManaSources.addAll(sortedManaSources.size(), fiveManaSources);
-        sortedManaSources.addAll(sortedManaSources.size(), anyColorManaSources);
+        sortedManaSources.clear();
+        sortedManaSources.addAll(multiManaSources);
+        sortedManaSources.addAll(colorlessManaSources);
+        sortedManaSources.addAll(oneManaSources);
+        sortedManaSources.addAll(twoManaSources);
+        sortedManaSources.addAll(threeManaSources);
+        sortedManaSources.addAll(fourManaSources);
+        sortedManaSources.addAll(fiveManaSources);
+        sortedManaSources.addAll(anyColorManaSources);
         //use better creatures later
         ComputerUtilCard.sortByEvaluateCreature(otherManaSources);
         Collections.reverse(otherManaSources);
-        sortedManaSources.addAll(sortedManaSources.size(), otherManaSources);
+        sortedManaSources.addAll(otherManaSources);
         // This should be things like sacrifice other stuff.
         ComputerUtilCard.sortByEvaluateCreature(useLastManaSources);
         Collections.reverse(useLastManaSources);
-        sortedManaSources.addAll(sortedManaSources.size(), useLastManaSources);
+        sortedManaSources.addAll(useLastManaSources);
 
         if (DEBUG_MANA_PAYMENT) {
             System.out.println("DEBUG_MANA_PAYMENT: sortedManaSources = " + sortedManaSources);
