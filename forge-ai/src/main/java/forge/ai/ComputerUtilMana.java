@@ -1299,7 +1299,7 @@ public class ComputerUtilMana {
                 if (ai.getManaPool().canPayForShardWithColor(shard, colorint.byteValue())) {
                     for (SpellAbility sa : manaAbilityMap.get(colorint)) {
                         if (!res.get(shard).contains(sa)) {
-                            res.get(shard).add(sa);
+                            res.put(shard, sa);
                         }
                     }
                 }
@@ -1627,7 +1627,7 @@ public class ComputerUtilMana {
                     continue;
                 }
 
-                manaMap.get(ManaAtom.GENERIC).add(m); // add to generic source list
+                manaMap.put(ManaAtom.GENERIC, m); // add to generic source list
 
                 SpellAbility tail = m;
                 while (tail != null) {
