@@ -1,0 +1,15 @@
+[metadata]
+Code=PL26
+Date=2026-02-17
+Name=Year of the Horse 2026
+Type=Promo
+ScryfallCode=PL26
+
+[cards]
+1 R Caustic Bronco @Song Qijin
+3 M Emiel the Blessed @Fang Bing
+4 R Calamity, Galloping Inferno @Chen Lu
+5 L Plains @Luca
+
+[tokens]
+2 c_a_treasure_sac @Chen Lu
