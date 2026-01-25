@@ -59,6 +59,11 @@ public class NetGuiGame extends NetworkGuiGame {
         return clientIndex;
     }
 
+    @Override
+    protected boolean isServerSide() {
+        return true; // NetGuiGame is the server-side GUI
+    }
+
     /**
      * Update the client connection for this GUI.
      * Called when a player reconnects with a new connection.

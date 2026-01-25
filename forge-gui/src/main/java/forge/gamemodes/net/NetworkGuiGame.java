@@ -38,13 +38,31 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
     private final Map<PlayerView, Set<ZoneType>> pendingZoneUpdates = new HashMap<>();
 
     /**
+     * Returns whether this is a server-side GUI (NetGuiGame) or client-side.
+     * Used for log prefixing to distinguish server vs client messages.
+     * @return true for server-side (NetGuiGame), false for client-side
+     */
+    protected boolean isServerSide() {
+        return false; // Default is client-side; NetGuiGame overrides to return true
+    }
+
+    /**
+     * Get the log prefix for this GUI instance.
+     * @return "[Server]" or "[Client]" based on isServerSide()
+     */
+    protected String getLogPrefix() {
+        return isServerSide() ? "[Server]" : "[Client]";
+    }
+
+    /**
      * Override setGameView to add network-specific tracker initialization.
      * When receiving a deserialized GameView from the network, the tracker field
      * is null (it's transient). We need to create and populate it before use.
      */
     @Override
     public void setGameView(final GameView gameView0) {
-        NetworkDebugLogger.log("[setGameView] Called with gameView0=%s, existing gameView=%s",
+        NetworkDebugLogger.log("%s [setGameView] Called with gameView0=%s, existing gameView=%s",
+                getLogPrefix(),
                 gameView0 != null ? "non-null" : "null",
                 getGameView() != null ? "non-null" : "null");
 

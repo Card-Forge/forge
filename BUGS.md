@@ -6,49 +6,82 @@ This file tracks known bugs in the Forge codebase, particularly for the NetworkP
 
 ## Active Bugs
 
-### Bug #9: HeadlessNetworkClient prints log messages twice
+### Bug #9: Log messages appear duplicated in single-JVM network tests
 
-**Status:** Open - Needs Investigation
+**Status:** Fixed
 **Discovered:** 2026-01-25 via comprehensive test observation
 **Severity:** Low (cosmetic - does not affect functionality)
 
 **Description:**
-The HeadlessNetworkClient appears to be printing log messages twice during test execution. This may be due to:
-- Duplicate logger configuration (both parent and child loggers active)
-- Console handler attached at multiple points in the logging hierarchy
-- NetworkDebugLogger and standard Java logging both writing to console
+In single-JVM network tests (where server and client run in the same process), log messages appeared duplicated because both NetGuiGame (server) and HeadlessNetworkGuiGame (client) extend NetworkGuiGame and log to the same file.
 
-**Impact:**
-- Log files are larger than necessary
-- Makes log analysis more difficult due to duplicate entries
+**Root Cause:**
+Both server and client instances call methods like setGameView(), which log via NetworkDebugLogger. In single-JVM tests, both write to the same log file with the same instance suffix, causing apparent duplicates.
 
-**Investigation:** TODO - Check logger configuration in HeadlessNetworkClient and NetworkDebugLogger
+**Fix:**
+Added `isServerSide()` and `getLogPrefix()` methods to NetworkGuiGame:
+- NetGuiGame overrides `isServerSide()` to return `true`
+- Log messages now include `[Server]` or `[Client]` prefix to distinguish the source
+
+**Files changed:**
+- `NetworkGuiGame.java` - Added isServerSide(), getLogPrefix(), updated log format
+- `NetGuiGame.java` - Override isServerSide() to return true
 
 ### Bug #10: Intermittent checksum mismatch in 4-player games
 
-**Status:** Open - Needs Investigation
+**Status:** Open - Root Cause Identified
 **Discovered:** 2026-01-25 via comprehensive test (run20260125-140616)
 **Frequency:** 1 in 100 games (batch1-game2-4p)
 **Severity:** Medium
 
 **Details:**
 - Game: `network-debug-run20260125-140616-batch1-game2-4p-test.log`
-- Status: DESYNC at Turn 10, UNTAP phase
+- Status: DESYNC at Turn 10, seq=1180
 - 4-player game
 
-**Error:**
-```
-[14:09:26.294] [ERROR] [DeltaSync] Checksum details (client state):
-  GameView ID: 3
-  Turn: 10
-  Phase: UNTAP
-  Player 0 (Alice (Host AI)): Life=20, Hand=7, GY=2, BF=0
-  Player 1 (Bob (Remote)): Life=20, Hand=7, GY=2, BF=0
-  Player 2 (Charlie (Remote)): Life=20, Hand=7, GY=2, BF=0
-  Player 3 (Diana (Remote)): Life=20, Hand=7, GY=0, BF=3
-```
+**Root Cause Analysis:**
 
-**Investigation:** TODO - Compare server state at seq=1180 to identify divergence source
+Client and server are computing checksums on **different GameView objects**:
+
+| Property | Server State | Client State |
+|----------|-------------|--------------|
+| GameView ID | **1** | **3** (wrong!) |
+| Turn | 10 | 10 |
+| Phase | **UPKEEP** | **UNTAP** (wrong!) |
+| Player 0 | Bob (Remote) | Alice (Host AI) |
+| Player 1 | Charlie (Remote) | Bob (Remote) |
+| Player 2 | Diana (Remote) | Charlie (Remote) |
+| Player 3 | Alice (Host AI) | Diana (Remote) |
+
+**The client has a completely different GameView object** with:
+1. Wrong GameView ID (3 vs 1)
+2. Wrong phase (UNTAP vs UPKEEP)
+3. Wrong player ordering (rotated)
+
+**Additional Log Analysis:**
+
+Looking at the log more carefully, there are MULTIPLE server-side checksum computations for seq=1180:
+1. First server logs checksum=-41803267 at END_OF_TURN
+2. Second server logs checksum=-1831154159 at UNTAP
+3. Third server logs checksum=656358674 at UPKEEP
+
+This is because each remote client has its own DeltaSyncManager with its own sequence counter. All three reach seq=1180 at different game phases.
+
+The mismatch occurs because:
+- Client receives packet with checksum=656358674 (from UPKEEP)
+- Client's state after applying delta has checksum=-1831154159 (UNTAP state)
+
+**Revised Hypothesis:** The client is computing checksum BEFORE fully applying all phase transition deltas, OR the deltas for the phase change are not being applied correctly to this particular client. The per-client property tracking may be incorrectly filtering out some phase change deltas.
+
+**Fix Direction:**
+1. Verify delta application completes before checksum validation
+2. Check if phase property changes are correctly tracked per-client
+3. Ensure `lastSentPropertyChecksums` in DeltaSyncManager is not causing phase updates to be skipped
+
+**Files to investigate:**
+- `NetworkGuiGame.java:applyDelta()` - Client-side delta application, line ~186-346
+- `DeltaSyncManager.java` - Per-client tracking at line 50-54
+- `HeadlessNetworkGuiGame.java` - Client-side game view
 
 ### Bug #11: "Address already in use: bind" port conflict during tests
 
