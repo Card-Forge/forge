@@ -74,6 +74,10 @@ public final class NetworkDebugLogger {
     // Test mode flag - when true, log filenames include "-test" suffix
     private static boolean testMode = false;
 
+    // Batch ID for correlating logs from the same test run
+    // Generated once by the parent process and passed to all child processes
+    private static String batchId = null;
+
     // Instance suffix for parallel test execution - allows each game instance to have its own log file
     // This is stored per-thread so parallel games don't interfere with each other's logging
     private static final ThreadLocal<String> instanceSuffix = new ThreadLocal<>();
@@ -155,6 +159,41 @@ public final class NetworkDebugLogger {
      */
     public static boolean isTestMode() {
         return testMode;
+    }
+
+    /**
+     * Set the batch ID for correlating logs from the same test run.
+     * The batch ID is generated once by the parent process and passed to all
+     * child processes, ensuring all logs from the same batch share this ID.
+     *
+     * Format recommendation: "runYYYYMMDD-HHMMSS" (e.g., "run20260125-091914")
+     *
+     * Must be called BEFORE first log() call to affect filename.
+     *
+     * @param id The batch ID, or null to clear
+     */
+    public static void setBatchId(String id) {
+        batchId = id;
+    }
+
+    /**
+     * Get the current batch ID.
+     * @return The batch ID, or null if not set
+     */
+    public static String getBatchId() {
+        return batchId;
+    }
+
+    /**
+     * Generate a new batch ID based on current timestamp.
+     * Use this in the parent process before spawning child processes.
+     *
+     * @return The generated batch ID in format "runYYYYMMDD-HHMMSS"
+     */
+    public static String generateBatchId() {
+        String timestamp = new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date());
+        batchId = "run" + timestamp;
+        return batchId;
     }
 
     /**
@@ -383,22 +422,35 @@ public final class NetworkDebugLogger {
                 cleanupOldLogs();
             }
 
-            // Create unique filename with timestamp and PID
+            // Create unique filename
+            // When batch ID is set, use it for grouping logs from the same test run
+            // Otherwise, use timestamp and PID for uniqueness
             // Include "-test" suffix when running from test infrastructure
             // Include instance suffix for parallel test execution
-            String timestamp = new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date());
-            long pid = ProcessHandle.current().pid();
             String testSuffix = testMode ? "-test" : "";
             String instancePart = (suffix != null) ? "-" + suffix : "";
-            String filename = String.format("%s-%s-%d%s%s.log", LOG_PREFIX, timestamp, pid, instancePart, testSuffix);
+            String filename;
+            if (batchId != null) {
+                // Batch mode: use batch ID for grouping, instance suffix for uniqueness
+                filename = String.format("%s-%s%s%s.log", LOG_PREFIX, batchId, instancePart, testSuffix);
+            } else {
+                // Legacy mode: use timestamp and PID for uniqueness
+                String timestamp = new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date());
+                long pid = ProcessHandle.current().pid();
+                filename = String.format("%s-%s-%d%s%s.log", LOG_PREFIX, timestamp, pid, instancePart, testSuffix);
+            }
             File logFile = new File(logDir, filename);
 
             PrintWriter writer = new PrintWriter(new FileWriter(logFile, true), true);
 
             // Log header with system information
             Runtime runtime = Runtime.getRuntime();
+            long pid = ProcessHandle.current().pid();
             writer.println("=".repeat(80));
             writer.println("Network Debug Log Started: " + new Date());
+            if (batchId != null) {
+                writer.println("Batch ID: " + batchId);
+            }
             writer.println("PID: " + pid);
             if (suffix != null) {
                 writer.println("Instance: " + suffix);
@@ -673,6 +725,7 @@ public final class NetworkDebugLogger {
             suffixWriters.clear();
             instanceSuffix.remove();
             globalInstanceSuffix = null;
+            batchId = null;
 
             // Close shared writer
             if (sharedFileWriter != null) {

@@ -54,6 +54,9 @@ public class NetworkLogAnalyzer {
     private static final Pattern GAME_INDEX_PATTERN = Pattern.compile(
             "game(\\d+)");
 
+    private static final Pattern DECK_NAME_PATTERN = Pattern.compile(
+            "(?:deck(?:\\s+loaded)?:|with deck:|Sending deck:)\\s*(.+?)(?:\\s*\\(|$)", Pattern.CASE_INSENSITIVE);
+
     /**
      * Analyze a single log file.
      *
@@ -157,6 +160,14 @@ public class NetworkLogAnalyzer {
                             }
                         }
                     }
+                    continue;
+                }
+
+                // Deck names
+                Matcher deckMatcher = DECK_NAME_PATTERN.matcher(line);
+                if (deckMatcher.find()) {
+                    String deckName = deckMatcher.group(1).trim();
+                    metrics.addDeckName(deckName);
                     continue;
                 }
 

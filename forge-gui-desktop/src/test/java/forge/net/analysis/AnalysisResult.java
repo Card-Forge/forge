@@ -3,8 +3,10 @@ package forge.net.analysis;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -27,7 +29,9 @@ public class AnalysisResult {
     private long totalDeltaBytes;
     private long totalFullStateBytes;
     private double averageBandwidthSavings;
+    private int totalTurns;
     private double averageTurns;
+    private Set<String> uniqueDeckNames;
 
     private Map<Integer, PlayerCountStats> statsByPlayerCount;
 
@@ -53,11 +57,22 @@ public class AnalysisResult {
             averageBandwidthSavings = 100.0 * (1.0 - (double) totalDeltaBytes / totalFullStateBytes);
         }
 
+        totalTurns = allMetrics.stream()
+                .filter(GameLogMetrics::isGameCompleted)
+                .mapToInt(GameLogMetrics::getTurnCount)
+                .sum();
+
         averageTurns = allMetrics.stream()
                 .filter(GameLogMetrics::isGameCompleted)
                 .mapToInt(GameLogMetrics::getTurnCount)
                 .average()
                 .orElse(0.0);
+
+        // Collect unique deck names across all games
+        uniqueDeckNames = new HashSet<>();
+        for (GameLogMetrics m : allMetrics) {
+            uniqueDeckNames.addAll(m.getDeckNames());
+        }
 
         // Aggregate by player count
         statsByPlayerCount = new HashMap<>();
@@ -124,6 +139,31 @@ public class AnalysisResult {
         return averageTurns;
     }
 
+    public int getTotalTurns() {
+        return totalTurns;
+    }
+
+    public Set<String> getUniqueDeckNames() {
+        return uniqueDeckNames;
+    }
+
+    public int getUniqueDeckCount() {
+        return uniqueDeckNames != null ? uniqueDeckNames.size() : 0;
+    }
+
+    /**
+     * Format bytes in human-readable form (B, KB, MB).
+     */
+    private static String formatBytes(long bytes) {
+        if (bytes < 1024) {
+            return bytes + " B";
+        } else if (bytes < 1024 * 1024) {
+            return String.format("%.1f KB", bytes / 1024.0);
+        } else {
+            return String.format("%.2f MB", bytes / (1024.0 * 1024.0));
+        }
+    }
+
     public Map<Integer, PlayerCountStats> getStatsByPlayerCount() {
         return statsByPlayerCount;
     }
@@ -172,26 +212,29 @@ public class AnalysisResult {
         sb.append(String.format("| Successful Games | %d |\n", successfulGames));
         sb.append(String.format("| Failed Games | %d |\n", failedGames));
         sb.append(String.format("| Overall Success Rate | %.1f%% |\n", getSuccessRate()));
+        sb.append(String.format("| Total Turns | %d |\n", totalTurns));
+        sb.append(String.format("| Average Turns per Game | %.1f |\n", averageTurns));
+        sb.append(String.format("| Unique Decks Used | %d |\n", getUniqueDeckCount()));
         sb.append(String.format("| Average Bandwidth Savings | %.1f%% |\n", averageBandwidthSavings));
+        sb.append(String.format("| Total Network Traffic | %s |\n", formatBytes(totalDeltaBytes)));
         sb.append(String.format("| Checksum Mismatches | %d |\n", gamesWithChecksumMismatches));
         sb.append(String.format("| Games with Errors | %d |\n", gamesWithErrors));
         sb.append(String.format("| Games with Warnings | %d |\n", gamesWithWarnings));
-        sb.append(String.format("| Average Turns per Game | %.1f |\n", averageTurns));
         sb.append("\n");
 
         // Bandwidth Usage Breakdown
         sb.append("### Bandwidth Usage Breakdown\n\n");
-        sb.append("| Metric | Total Bytes | Avg per Game | Description |\n");
-        sb.append("|--------|-------------|--------------|-------------|\n");
-        double avgApprox = totalGames > 0 ? (double) totalApproximateBytes / totalGames : 0;
-        double avgDelta = totalGames > 0 ? (double) totalDeltaBytes / totalGames : 0;
-        double avgFull = totalGames > 0 ? (double) totalFullStateBytes / totalGames : 0;
-        sb.append(String.format("| Approximate | %,d | %,.0f | Estimated delta size from object diffs |\n",
-                totalApproximateBytes, avgApprox));
-        sb.append(String.format("| ActualNetwork | %,d | %,.0f | Actual bytes sent over network |\n",
-                totalDeltaBytes, avgDelta));
-        sb.append(String.format("| FullState | %,d | %,.0f | Size if full state was sent |\n",
-                totalFullStateBytes, avgFull));
+        sb.append("| Metric | Total | Avg per Game | Description |\n");
+        sb.append("|--------|-------|--------------|-------------|\n");
+        long avgApprox = totalGames > 0 ? totalApproximateBytes / totalGames : 0;
+        long avgDelta = totalGames > 0 ? totalDeltaBytes / totalGames : 0;
+        long avgFull = totalGames > 0 ? totalFullStateBytes / totalGames : 0;
+        sb.append(String.format("| Approximate | %s | %s | Estimated delta size from object diffs |\n",
+                formatBytes(totalApproximateBytes), formatBytes(avgApprox)));
+        sb.append(String.format("| ActualNetwork | %s | %s | Actual bytes sent over network |\n",
+                formatBytes(totalDeltaBytes), formatBytes(avgDelta)));
+        sb.append(String.format("| FullState | %s | %s | Size if full state was sent |\n",
+                formatBytes(totalFullStateBytes), formatBytes(avgFull)));
         sb.append("\n");
 
         // Bandwidth savings calculations
@@ -227,9 +270,9 @@ public class AnalysisResult {
             for (int p = 2; p <= 4; p++) {
                 PlayerCountStats stats = statsByPlayerCount.get(p);
                 if (stats != null) {
-                    sb.append(String.format("| %d | %,d | %,d | %,d | %.1f%% |\n",
-                            p, stats.totalApproximateBytes, stats.totalDeltaBytes,
-                            stats.totalFullStateBytes, stats.averageBandwidthSavings));
+                    sb.append(String.format("| %d | %s | %s | %s | %.1f%% |\n",
+                            p, formatBytes(stats.totalApproximateBytes), formatBytes(stats.totalDeltaBytes),
+                            formatBytes(stats.totalFullStateBytes), stats.averageBandwidthSavings));
                 }
             }
             sb.append("\n");
@@ -257,6 +300,24 @@ public class AnalysisResult {
             }
         }
 
+        // Warning Analysis
+        if (gamesWithWarnings > 0) {
+            sb.append("### Warning Analysis\n\n");
+            sb.append(String.format("**Games with Warnings:** %d\n\n", gamesWithWarnings));
+
+            List<String> warnings = getAllWarnings();
+            if (!warnings.isEmpty()) {
+                sb.append("**Unique Warnings:**\n");
+                for (String warning : warnings.subList(0, Math.min(10, warnings.size()))) {
+                    sb.append(String.format("- `%s`\n", warning));
+                }
+                if (warnings.size() > 10) {
+                    sb.append(String.format("- ... and %d more\n", warnings.size() - 10));
+                }
+                sb.append("\n");
+            }
+        }
+
         // Validation Summary
         sb.append("### Validation Status\n\n");
         boolean passed = getSuccessRate() >= 90.0 &&
@@ -274,6 +335,31 @@ public class AnalysisResult {
                 averageBandwidthSavings >= 90.0 ? "x" : " ", averageBandwidthSavings));
         sb.append(String.format("- [%s] Zero checksum mismatches (actual: %d)\n",
                 gamesWithChecksumMismatches == 0 ? "x" : " ", gamesWithChecksumMismatches));
+        sb.append("\n");
+
+        // List of analyzed log files
+        sb.append("### Analyzed Log Files\n\n");
+        sb.append(String.format("**Total files analyzed:** %d\n\n", totalGames));
+        if (!allMetrics.isEmpty()) {
+            // Sort by game index for consistent ordering
+            List<GameLogMetrics> sortedMetrics = allMetrics.stream()
+                    .sorted((a, b) -> Integer.compare(a.getGameIndex(), b.getGameIndex()))
+                    .collect(Collectors.toList());
+
+            sb.append("| # | Log File | Status | Players | Turns | Winner |\n");
+            sb.append("|---|----------|--------|---------|-------|--------|\n");
+            for (GameLogMetrics m : sortedMetrics) {
+                String status = m.isSuccessful() ? "OK" : (m.hasChecksumMismatch() ? "DESYNC" : "FAIL");
+                String winner = m.getWinner() != null ? m.getWinner() : "-";
+                sb.append(String.format("| %d | `%s` | %s | %d | %d | %s |\n",
+                        m.getGameIndex(),
+                        m.getLogFileName(),
+                        status,
+                        m.getPlayerCount(),
+                        m.getTurnCount(),
+                        winner));
+            }
+        }
 
         return sb.toString();
     }

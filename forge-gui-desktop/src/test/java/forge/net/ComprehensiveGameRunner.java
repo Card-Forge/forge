@@ -11,7 +11,13 @@ import forge.net.scenarios.MultiplayerNetworkScenario;
  *
  * Designed to be invoked as a separate JVM process for parallel execution.
  *
- * Usage: java -cp <classpath> forge.net.ComprehensiveGameRunner <port> <gameIndex> <playerCount>
+ * Usage: java -cp <classpath> forge.net.ComprehensiveGameRunner <port> <gameIndex> <playerCount> [batchId]
+ *
+ * Arguments:
+ *   port        - Network port for the game server
+ *   gameIndex   - Index of this game (for identification in logs)
+ *   playerCount - Number of players (2, 3, or 4)
+ *   batchId     - Optional batch ID for correlating logs from the same test run
  *
  * Exit codes:
  *   0 = Success (game completed with winner and delta packets)
@@ -25,17 +31,21 @@ public class ComprehensiveGameRunner {
 
     public static void main(String[] args) {
         if (args.length < 3) {
-            System.err.println("Usage: ComprehensiveGameRunner <port> <gameIndex> <playerCount>");
+            System.err.println("Usage: ComprehensiveGameRunner <port> <gameIndex> <playerCount> [batchId]");
             System.exit(2);
         }
 
         int port;
         int gameIndex;
         int playerCount;
+        String batchId = null;
         try {
             port = Integer.parseInt(args[0]);
             gameIndex = Integer.parseInt(args[1]);
             playerCount = Integer.parseInt(args[2]);
+            if (args.length >= 4) {
+                batchId = args[3];
+            }
         } catch (NumberFormatException e) {
             System.err.println("Invalid arguments: port, gameIndex, and playerCount must be integers");
             System.exit(2);
@@ -48,7 +58,7 @@ public class ComprehensiveGameRunner {
             return;
         }
 
-        System.exit(runGame(port, gameIndex, playerCount));
+        System.exit(runGame(port, gameIndex, playerCount, batchId));
     }
 
     /**
@@ -60,9 +70,25 @@ public class ComprehensiveGameRunner {
      * @return Exit code: 0=success, 1=failure, 2=error
      */
     public static int runGame(int port, int gameIndex, int playerCount) {
+        return runGame(port, gameIndex, playerCount, null);
+    }
+
+    /**
+     * Run a single game and return exit code.
+     *
+     * @param port Network port for the game server
+     * @param gameIndex Index of this game (for identification)
+     * @param playerCount Number of players (2, 3, or 4)
+     * @param batchId Optional batch ID for correlating logs from the same test run
+     * @return Exit code: 0=success, 1=failure, 2=error
+     */
+    public static int runGame(int port, int gameIndex, int playerCount, String batchId) {
         try {
             // Set up logging for this game instance
             NetworkDebugLogger.setTestMode(true);
+            if (batchId != null) {
+                NetworkDebugLogger.setBatchId(batchId);
+            }
             NetworkDebugLogger.setInstanceSuffix("game" + gameIndex + "-" + playerCount + "p");
 
             // Initialize FModel

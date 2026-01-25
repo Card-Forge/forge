@@ -87,7 +87,10 @@ public class MultiProcessGameExecutor {
      */
     public ExecutionResult runGamesWithPlayerCounts(int[] playerCounts) {
         int gameCount = playerCounts.length;
-        NetworkDebugLogger.log("%s Starting %d games in PARALLEL", LOG_PREFIX, gameCount);
+
+        // Generate batch ID for correlating all logs from this run
+        String batchId = NetworkDebugLogger.generateBatchId();
+        NetworkDebugLogger.log("%s Starting %d games in PARALLEL (batch: %s)", LOG_PREFIX, gameCount, batchId);
 
         List<ProcessInfo> processes = new ArrayList<>();
         List<ProcessMonitor> monitors = new ArrayList<>();
@@ -103,7 +106,7 @@ public class MultiProcessGameExecutor {
             for (int i = 0; i < gameCount; i++) {
                 int port = basePort + i;
                 int playerCount = playerCounts[i];
-                ProcessInfo info = startGameProcess(javaBin, classpath, port, i, playerCount);
+                ProcessInfo info = startGameProcess(javaBin, classpath, port, i, playerCount, batchId);
                 processes.add(info);
 
                 // Start monitoring immediately to prevent output buffer deadlock
@@ -269,12 +272,7 @@ public class MultiProcessGameExecutor {
         return aggregatedResult;
     }
 
-    private ProcessInfo startGameProcess(String javaBin, String classpath, int port, int gameIndex)
-            throws Exception {
-        return startGameProcess(javaBin, classpath, port, gameIndex, 2); // Default to 2 players
-    }
-
-    private ProcessInfo startGameProcess(String javaBin, String classpath, int port, int gameIndex, int playerCount)
+    private ProcessInfo startGameProcess(String javaBin, String classpath, int port, int gameIndex, int playerCount, String batchId)
             throws Exception {
         List<String> command = new ArrayList<>();
         command.add(javaBin);
@@ -285,9 +283,10 @@ public class MultiProcessGameExecutor {
         command.add(String.valueOf(port));
         command.add(String.valueOf(gameIndex));
 
-        // Add player count for ComprehensiveGameRunner
+        // Add player count and batch ID for ComprehensiveGameRunner
         if (runnerClass.equals("forge.net.ComprehensiveGameRunner")) {
             command.add(String.valueOf(playerCount));
+            command.add(batchId);
         }
 
         ProcessBuilder pb = new ProcessBuilder(command);

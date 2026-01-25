@@ -26,6 +26,9 @@ public class GameLogMetrics {
     private double averageBandwidthSavingsApproximate;
     private double averageBandwidthSavingsActual;
 
+    // Deck tracking
+    private List<String> deckNames = new ArrayList<>();
+
     // Error tracking
     private List<String> warnings = new ArrayList<>();
     private List<String> errors = new ArrayList<>();
@@ -148,6 +151,16 @@ public class GameLogMetrics {
 
     public void setAverageBandwidthSavingsActual(double averageBandwidthSavingsActual) {
         this.averageBandwidthSavingsActual = averageBandwidthSavingsActual;
+    }
+
+    public List<String> getDeckNames() {
+        return deckNames;
+    }
+
+    public void addDeckName(String deckName) {
+        if (deckName != null && !deckName.isEmpty() && !deckNames.contains(deckName)) {
+            deckNames.add(deckName);
+        }
     }
 
     public List<String> getWarnings() {
