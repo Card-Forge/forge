@@ -8,6 +8,7 @@ import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
 import forge.game.CardTraitPredicates;
 import forge.game.Game;
+import forge.game.GameActionUtil;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -163,7 +164,7 @@ public class ManaPaymentService {
         return manaProducedCount > manaNeeded;
     }
 
-    private void sortManaAbilities(final Multimap<ManaCostShard, SpellAbility> manaAbilityMap, final SpellAbility sa) {
+    private void sortManaAbilities(final Multimap<ManaCostShard, SpellAbility> manaAbilityMap, final SpellAbility sa, final CardCollection sortedManaSources) {
         final Map<Card, Integer> manaCardMap = Maps.newHashMap();
         final List<Card> orderedCards = Lists.newArrayList();
 
@@ -182,49 +183,39 @@ public class ManaPaymentService {
             final Collection<SpellAbility> abilities = manaAbilityMap.get(shard);
             final List<SpellAbility> newAbilities = new ArrayList<>(abilities);
 
-            // Prioritize multi-mana sources if they do not overpay
+            // Strictly sort: multi-mana sources that can pay for multiple shards always first
             newAbilities.sort((ability1, ability2) -> {
                 boolean multi1 = isMultiManaAbility(ability1);
                 boolean multi2 = isMultiManaAbility(ability2);
-                boolean overpay1 = wouldOverpayWithAbility(ability1, cost);
-                boolean overpay2 = wouldOverpayWithAbility(ability2, cost);
-                if (multi1 && !overpay1 && (!multi2 || overpay2)) return -1;
-                if (multi2 && !overpay2 && (!multi1 || overpay1)) return 1;
-                if (multi1 && multi2) {
-                    if (overpay1 && !overpay2) return 1;
-                    if (overpay2 && !overpay1) return -1;
-                }
-                int preOrder = orderedCards.indexOf(ability1.getHostCard()) - orderedCards.indexOf(ability2.getHostCard());
-                if (preOrder != 0) return preOrder;
-                String shardMana = shard.toShortString();
-                boolean payWithAb1 = ability1.getManaPart().mana(ability1).contains(shardMana);
-                boolean payWithAb2 = ability2.getManaPart().mana(ability2).contains(shardMana);
-                if (payWithAb1 && !payWithAb2) return -1;
-                else if (payWithAb2 && !payWithAb1) return 1;
-                return ability1.compareTo(ability2);
+                if (multi1 && !multi2) return -1;
+                if (multi2 && !multi1) return 1;
+                // If both are multi or both are single, preserve sortedManaSources order
+                int idx1 = sortedManaSources.indexOf(ability1.getHostCard());
+                int idx2 = sortedManaSources.indexOf(ability2.getHostCard());
+                return Integer.compare(idx1, idx2);
             });
             manaAbilityMap.replaceValues(shard, newAbilities);
+            // Debug output for order verification
+            if (DEBUG_MANA_PAYMENT) {
+                System.out.println("DEBUG_MANA_PAYMENT: sourcesForShards[" + shard + "] sorted = " + newAbilities);
+            }
             // Sort the first N abilities so that the preferred shard is selected, e.g. Adamant
             String manaPref = sa.getParamOrDefault("AIManaPref", "");
             if (manaPref.isEmpty() && sa.getHostCard() != null && sa.getHostCard().hasSVar("AIManaPref")) {
                 manaPref = sa.getHostCard().getSVar("AIManaPref");
             }
-
             if (!manaPref.isEmpty()) {
                 final String[] prefShardInfo = manaPref.split(":");
                 final String preferredShard = prefShardInfo[0];
                 final int preferredShardAmount = prefShardInfo.length > 1 ? Integer.parseInt(prefShardInfo[1]) : 3;
-
                 if (!preferredShard.isEmpty()) {
                     final List<SpellAbility> prefSortedAbilities = new ArrayList<>(newAbilities);
                     final List<SpellAbility> otherSortedAbilities = new ArrayList<>(newAbilities);
-
                     prefSortedAbilities.sort((ability1, ability2) -> {
                         if (ability1.getManaPart().mana(ability1).contains(preferredShard))
                             return -1;
                         else if (ability2.getManaPart().mana(ability2).contains(preferredShard))
                             return 1;
-
                         return 0;
                     });
                     otherSortedAbilities.sort((ability1, ability2) -> {
@@ -232,10 +223,8 @@ public class ManaPaymentService {
                             return 1;
                         else if (ability2.getManaPart().mana(ability2).contains(preferredShard))
                             return -1;
-
                         return 0;
                     });
-
                     final List<SpellAbility> finalAbilities = new ArrayList<>();
                     for (int i = 0; i < preferredShardAmount && i < prefSortedAbilities.size(); i++) {
                         finalAbilities.add(prefSortedAbilities.get(i));
@@ -460,7 +449,7 @@ public class ManaPaymentService {
 //        // select which abilities may be used for each shard
 //        Multimap<ManaCostShard, SpellAbility> sourcesForShards = groupAndOrderToPayShards();
 //
-//        sortManaAbilities(sourcesForShards, sa);
+//        sortManaAbilities(sourcesForShards, sa, sortedManaSources);
 //
 //        ManaCostShard toPay;
 //        // Loop over mana needed
@@ -575,6 +564,12 @@ public class ManaPaymentService {
                                 manapool.payManaFromAbility(sa, cost, ability);
                             }
                             paymentList.add(ability);
+                            // Remove this multi-mana source from all other shard lists for this payment
+                            if (sourcesForShards != null) {
+                                for (ManaCostShard shard : sourcesForShards.keySet()) {
+                                    sourcesForShards.get(shard).removeIf(sa2 -> sa2.getHostCard() == manaSource);
+                                }
+                            }
                             if (cost.isPaid()) {
                                 return true;
                             }
@@ -838,7 +833,7 @@ public class ManaPaymentService {
             }
         }
 
-        sortManaAbilities(sourcesForShards, sa);
+        sortManaAbilities(sourcesForShards, sa, sortedManaSources);
         if (DEBUG_MANA_PAYMENT) {
             System.out.println("DEBUG_MANA_PAYMENT: sourcesForShards = " + sourcesForShards);
         }
@@ -1063,9 +1058,11 @@ public class ManaPaymentService {
         for (Card card : manaSources) {
             boolean isMultiMana = false;
             for (SpellAbility m : getAIPlayableMana(card)) {
+
                 AbilityManaPart manaPart = m.getManaPart();
                 if (manaPart != null) {
-                    String manaProduced = manaPart.mana(m);
+                    //String manaProduced = manaPart.mana(m);
+                    String manaProduced = predictManafromSpellAbility(m, ai);
                     int produced = 0;
                     // Count all mana symbols, including repeats and numbers
                     for (char c : manaProduced.toCharArray()) {
@@ -1422,6 +1419,75 @@ public class ManaPaymentService {
                 cost.decreaseGenericMana(1);
             }
         }
+    }
+
+    /**
+     * Duplicate of ComputerUtilMana.predictManafromSpellAbility, but without ManaCostShard.
+     * Predicts the mana that would be produced by a SpellAbility, including triggers.
+     */
+
+    public static String predictManafromSpellAbility(SpellAbility saPayment, Player ai, ManaCostShard shard) {
+        // TOOD Copy this over to here
+        return ComputerUtilMana.predictManafromSpellAbility(saPayment, ai, shard);
+    }
+
+    public static String predictManafromSpellAbility(SpellAbility saPayment, Player ai) {
+        Card hostCard = saPayment.getHostCard();
+        // Use the base mana produced by the ability
+        StringBuilder manaProduced = new StringBuilder(GameActionUtil.generatedTotalMana(saPayment));
+        String originalProduced = manaProduced.toString();
+
+        if (originalProduced.isEmpty()) {
+            return originalProduced;
+        }
+
+        // Run triggers like Nissa, Wild Growth, etc.
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(hostCard);
+        runParams.put(AbilityKey.Activator, ai); // assuming AI would only ever give itself mana
+        runParams.put(AbilityKey.AbilityMana, saPayment);
+        runParams.put(AbilityKey.Produced, originalProduced);
+        for (Trigger tr : ai.getGame().getTriggerHandler().getActiveTrigger(forge.game.trigger.TriggerType.TapsForMana, runParams)) {
+            SpellAbility trSA = tr.ensureAbility();
+            if (trSA == null) {
+                continue;
+            }
+            if (ApiType.Mana.equals(trSA.getApi())) {
+                int pAmount = AbilityUtils.calculateAmount(trSA.getHostCard(), trSA.getParamOrDefault("Amount", "1"), trSA);
+                String produced = trSA.getParam("Produced");
+                if (produced.equals("Chosen")) {
+                    produced = MagicColor.toShortString(trSA.getHostCard().getChosenColor());
+                }
+                manaProduced.append(" ").append(StringUtils.repeat(produced, " ", pAmount));
+            } else if (ApiType.ManaReflected.equals(trSA.getApi())) {
+                final String colorOrType = trSA.getParamOrDefault("ColorOrType", "Color");
+                final String reflectProperty = trSA.getParam("ReflectProperty");
+                if (reflectProperty.equals("Produced") && !originalProduced.isEmpty()) {
+                    if (originalProduced.length() == 1) {
+                        if (colorOrType.equals("Type") || !originalProduced.equals("C")) {
+                            manaProduced.append(" ").append(originalProduced);
+                        }
+                    } else {
+                        boolean found = false;
+                        for (String s : originalProduced.split(" ")) {
+                            if (colorOrType.equals("Type") || !s.equals("C")) {
+                                found = true;
+                                manaProduced.append(" ").append(s);
+                                break;
+                            }
+                        }
+                        if (!found) {
+                            for (String s : originalProduced.split(" ")) {
+                                if (colorOrType.equals("Type") || !s.equals("C")) {
+                                    manaProduced.append(" ").append(s);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return manaProduced.toString();
     }
 
     // isManaSourceReserved returns true if sourceCard is reserved as a mana source for payment
