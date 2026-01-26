@@ -1,7 +1,6 @@
 package forge.game.ability.effects;
 
-import org.testng.collections.Lists;
-
+import com.google.common.collect.Lists;
 import com.google.common.collect.Table.Cell;
 
 import forge.game.ability.SpellAbilityEffect;
