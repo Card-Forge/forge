@@ -124,15 +124,17 @@ public class AutoPaymentTest extends SimulationTest {
         // AI doesn't know how to use Signets. So the score here is going to be bad
 
         int score = sim.simulateSpellAbility(strix.getFirstSpellAbility()).value;
-        AssertJUnit.assertFalse(score > 0);
+        AssertJUnit.assertTrue(score > 0);
 
-        // Once the AI learns how to use Signets, this test will pass
-        // Uncomment below when the AI is fixed
+        Game simGame = sim.getSimulatedGameState();
+        Card strixBF = findCardWithName(simGame, strix.getName());
+        AssertJUnit.assertNotNull(strixBF);
+        AssertJUnit.assertEquals(ZoneType.Battlefield, strixBF.getZone().getZoneType());
 
-//        Game simGame = sim.getSimulatedGameState();
-//        Card strixBF = findCardWithName(simGame, strix.getName());
-//        AssertJUnit.assertNotNull(strixBF);
-//        AssertJUnit.assertEquals(ZoneType.Battlefield, strixBF.getZone().getZoneType());
+        Card signetBF = findCardWithName(simGame, signet.getName());
+        Card islandBF = findCardWithName(simGame, island.getName());
+        AssertJUnit.assertTrue(signetBF.isTapped());
+        AssertJUnit.assertTrue(islandBF.isTapped());
     }
 
     @Test

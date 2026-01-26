@@ -578,7 +578,7 @@ public class ManaPaymentService {
                             paymentList.add(ability);
                             // Remove this multi-mana source from all other shard lists for this payment
                             if (sourcesForShards != null) {
-                                for (ManaCostShard shard : sourcesForShards.keySet()) {
+                                for (ManaCostShard shard : new ArrayList<>(sourcesForShards.keySet())) {
                                     sourcesForShards.get(shard).removeIf(sa2 -> sa2.getHostCard() == manaSource);
                                 }
                             }
@@ -1214,9 +1214,11 @@ public class ManaPaymentService {
             // if a mana ability has a mana cost the AI will miscalculate
             // if there is a parent ability the AI can't use it
             final Cost cost = a.getPayCosts();
-            if (cost.hasManaCost() || (a.getApi() != ApiType.Mana && a.getApi() != ApiType.ManaReflected)) {
-                continue;
-            }
+            // Previously AI didn't know how to handle mana abilities with mana costs
+            // We're trying to fix that, so commenting this out for now
+//            if (cost.hasManaCost() || (a.getApi() != ApiType.Mana && a.getApi() != ApiType.ManaReflected)) {
+//                continue;
+//            }
 
             if (a.getRestrictions() != null && a.getRestrictions().isInstantSpeed()) {
                 continue;
