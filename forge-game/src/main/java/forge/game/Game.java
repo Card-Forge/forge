@@ -49,7 +49,6 @@ import forge.game.zone.*;
 import forge.trackable.Tracker;
 import forge.util.*;
 import forge.util.collect.FCollection;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
@@ -277,7 +276,7 @@ public class Game {
         if (c == null) {
             return null;
         }
-        return ObjectUtils.defaultIfNull(changeZoneLKIInfo.get(c.getId(), c.getGameTimestamp()), c);
+        return Objects.requireNonNullElse(changeZoneLKIInfo.get(c.getId(), c.getGameTimestamp()), c);
     }
     public final void clearChangeZoneLKIInfo() {
         changeZoneLKIInfo.clear();
