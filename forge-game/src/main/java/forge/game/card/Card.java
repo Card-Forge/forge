@@ -135,7 +135,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     // x=timestamp y=StaticAbility id
     private final Table<Long, Long, CardTraitChanges> changedCardTraitsByText = TreeBasedTable.create(); // Layer 3 by Text Change
-    private final Table<Long, Long, CardTraitChanges> changedCardTraits = TreeBasedTable.create(); // Layer 6
+    private final Table<Long, Long, ICardTraitChanges> changedCardTraits = TreeBasedTable.create(); // Layer 6
 
     // stores the card traits created by static abilities
     private final Table<StaticAbility, String, SpellAbility> storedSpellAbility = TreeBasedTable.create();
@@ -4941,27 +4941,25 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         updateChangedText();
     }
 
-    public final CardTraitChanges addChangedCardTraits(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
+    public final ICardTraitChanges addChangedCardTraits(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
             Collection<Trigger> trigger, Collection<ReplacementEffect> replacements, Collection<StaticAbility> statics,
             Predicate<CardTraitBase> remove, long timestamp, long staticId) {
         return addChangedCardTraits(spells, removedAbilities, trigger, replacements, statics, remove, timestamp, staticId, true);
     }
-    public final CardTraitChanges addChangedCardTraits(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
+    public final ICardTraitChanges addChangedCardTraits(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
             Collection<Trigger> trigger, Collection<ReplacementEffect> replacements, Collection<StaticAbility> statics,
             Predicate<CardTraitBase> remove, long timestamp, long staticId, boolean updateView) {
         CardTraitChanges result = new CardTraitChanges(
             spells, removedAbilities, trigger, replacements, statics, remove
         );
-        changedCardTraits.put(timestamp, staticId, result);
+        return addChangedCardTraits(result, timestamp, staticId, updateView);
+    }
+    public final ICardTraitChanges addChangedCardTraits(ICardTraitChanges changes, long timestamp, long staticId, boolean updateView) {
+        changedCardTraits.put(timestamp, staticId, changes);
         if (updateView) {
             updateAbilityTextForView();
         }
-        return result;
-    }
-
-    public final void addChangedCardTraits(CardTraitChanges ctc, long timestamp, long staticId) {
-        changedCardTraits.put(timestamp, staticId, ctc);
-        updateAbilityTextForView();
+        return changes;
     }
 
     public final boolean removeChangedCardTraits(long timestamp, long staticId) {
@@ -4979,13 +4977,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         );
     }
 
-    public final Table<Long, Long, CardTraitChanges> getChangedCardTraits() {
+    public final Table<Long, Long, ICardTraitChanges> getChangedCardTraits() {
         return changedCardTraits;
     }
 
-    public final void setChangedCardTraits(Table<Long, Long, CardTraitChanges> changes) {
+    public final void setChangedCardTraits(Table<Long, Long, ICardTraitChanges> changes) {
         changedCardTraits.clear();
-        for (Table.Cell<Long, Long, CardTraitChanges> e : changes.cellSet()) {
+        for (Table.Cell<Long, Long, ICardTraitChanges> e : changes.cellSet()) {
             changedCardTraits.put(e.getRowKey(), e.getColumnKey(), e.getValue().copy(this, true));
         }
     }
