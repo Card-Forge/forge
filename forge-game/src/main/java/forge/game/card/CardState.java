@@ -531,6 +531,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             }
             return list;
         }
+        public ICardTraitChanges copy(Card host, boolean lki) { return this; }
     }
 
     public final Iterable<SpellAbility> getIntrinsicSpellAbilities() {
