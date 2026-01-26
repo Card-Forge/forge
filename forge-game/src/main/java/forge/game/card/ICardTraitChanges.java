@@ -14,4 +14,5 @@ public interface ICardTraitChanges {
     default List<StaticAbility> applyStaticAbility(List<StaticAbility> list) { return list;}
     
     default void changeText() {}
+    ICardTraitChanges copy(Card host, boolean lki);
 }
