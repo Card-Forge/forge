@@ -187,8 +187,10 @@ public class ManaPaymentService {
             newAbilities.sort((ability1, ability2) -> {
                 boolean multi1 = isMultiManaAbility(ability1);
                 boolean multi2 = isMultiManaAbility(ability2);
-                if (multi1 && !multi2) return -1;
-                if (multi2 && !multi1) return 1;
+
+                if (isReusableCost(ability1) && multi1 && !multi2) return -1;
+                if (isReusableCost(ability2) && multi2 && !multi1) return 1;
+
                 // If both are multi or both are single, preserve sortedManaSources order
                 int idx1 = sortedManaSources.indexOf(ability1.getHostCard());
                 int idx2 = sortedManaSources.indexOf(ability2.getHostCard());
@@ -238,6 +240,16 @@ public class ManaPaymentService {
                 }
             }
         }
+    }
+
+    public boolean isReusableCost(SpellAbility sa) {
+        for(CostPart cost : sa.getPayCosts().getCostParts()) {
+            if (!cost.isReusable()) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public SpellAbility chooseManaAbility(ManaCostShard toPay, Collection<SpellAbility> saList, boolean checkCosts) {
@@ -1058,6 +1070,9 @@ public class ManaPaymentService {
         for (Card card : manaSources) {
             boolean isMultiMana = false;
             for (SpellAbility m : getAIPlayableMana(card)) {
+                if (!isReusableCost(m)) {
+                    continue;
+                }
 
                 AbilityManaPart manaPart = m.getManaPart();
                 if (manaPart != null) {
