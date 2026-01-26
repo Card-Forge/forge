@@ -989,7 +989,9 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
         KeywordsChange cks = new KeywordsChange(kws, removeKeywords, false);
-        getKeywordCard().addChangedCardTraits(cks, timestamp, staticId, true);
+        if (cks.hasTraits()) {
+            getKeywordCard().addChangedCardTraits(cks, timestamp, staticId, true);
+        }
         changedKeywords.put(timestamp, staticId, cks);
         updateKeywords();
         game.fireEvent(new GameEventPlayerStatsChanged(this, true));

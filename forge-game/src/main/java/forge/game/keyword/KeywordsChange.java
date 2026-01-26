@@ -175,6 +175,20 @@ public class KeywordsChange implements ICardTraitChanges, Cloneable {
         return list;
     }
 
+    public boolean hasTraits() {
+        for (KeywordInterface k : this.keywords.getValues()) {
+            if (!k.getAbilities().isEmpty())
+                return true;
+            if (!k.getTriggers().isEmpty())
+                return true;
+            if (!k.getReplacements().isEmpty())
+                return true;
+            if (!k.getStaticAbilities().isEmpty())
+                return true;
+        }
+        return false;
+    }
+
     /* (non-Javadoc)
      * @see java.lang.Object#toString()
      */
