@@ -989,10 +989,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
         KeywordsChange cks = new KeywordsChange(kws, removeKeywords, false);
-        if (!cks.getAbilities().isEmpty() || !cks.getTriggers().isEmpty() || !cks.getReplacements().isEmpty() || !cks.getStaticAbilities().isEmpty()) {
-            getKeywordCard().addChangedCardTraits(
-                cks.getAbilities(), null, cks.getTriggers(), cks.getReplacements(), cks.getStaticAbilities(), null, timestamp, staticId);
-        }
+        getKeywordCard().addChangedCardTraits(cks, timestamp, staticId, true);
         changedKeywords.put(timestamp, staticId, cks);
         updateKeywords();
         game.fireEvent(new GameEventPlayerStatsChanged(this, true));
@@ -1021,14 +1018,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return change;
     }
 
-    /**
-     * Append a keyword change which adds the specified keyword.
-     * @param keyword the keyword to add.
-     */
-    public final void addKeyword(final String keyword) {
-        addChangedKeywords(ImmutableList.of(keyword), ImmutableList.of(), getGame().getNextTimestamp(), 0);
-    }
-
     @Override
     public final boolean hasKeyword(final String keyword) {
         return keywords.contains(keyword);
@@ -1042,18 +1031,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         keywords.clear();
 
         // see if keyword changes are in effect
-        for (final KeywordsChange ck : changedKeywords.values()) {
-            if (ck.isRemoveAllKeywords()) {
-                keywords.clear();
-            }
-            else if (ck.getRemoveKeywords() != null) {
-                keywords.removeAll(ck.getRemoveKeywords());
-            }
-
-            if (ck.getKeywords() != null) {
-                keywords.insertAll(ck.getKeywords());
-            }
-        }
+        keywords.applyChanges(changedKeywords.values());
         view.updateKeywords(this);
         updateKeywordCardAbilityText();
     }

@@ -1,10 +1,12 @@
 package forge.game.ability.effects;
 
+import org.testng.collections.Lists;
+
 import com.google.common.collect.Table.Cell;
 
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardTraitChanges;
+import forge.game.card.ICardTraitChanges;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 
@@ -17,8 +19,8 @@ public class LosePerpetualEffect extends SpellAbilityEffect {
         // currently only part of perpetual triggers... expand in future as needed
         if (sa.getTrigger() != null) {
             Trigger trig = sa.getTrigger();
-            for (Cell<Long, Long, CardTraitChanges> cell : host.getChangedCardTraits().cellSet()) {
-                if (cell.getValue().getTriggers().contains(trig)) {
+            for (Cell<Long, Long, ICardTraitChanges> cell : host.getChangedCardTraits().cellSet()) {
+                if (cell.getValue().applyTrigger(Lists.newArrayList()).contains(trig)) {
                     toRemove = cell.getRowKey();
                     break;
                 }
