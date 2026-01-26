@@ -135,7 +135,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     // x=timestamp y=StaticAbility id
     private final Table<Long, Long, CardTraitChanges> changedCardTraitsByText = TreeBasedTable.create(); // Layer 3 by Text Change
-    private final Table<Long, Long, CardTraitChanges> changedCardTraits = TreeBasedTable.create(); // Layer 6
+    private final Table<Long, Long, ICardTraitChanges> changedCardTraits = TreeBasedTable.create(); // Layer 6
 
     // stores the card traits created by static abilities
     private final Table<StaticAbility, String, SpellAbility> storedSpellAbility = TreeBasedTable.create();
@@ -349,8 +349,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private final CardView view;
 
     private String overlayText = null;
-
-    private SpellAbility[] basicLandAbilities = new SpellAbility[MagicColor.WUBRG.length];
 
     private int planeswalkerAbilityActivated;
     private boolean planeswalkerActivationLimitUsed;
@@ -3451,7 +3449,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 continue;
             }
             // while Adventure and Omen are part of Secondary
-            if ((sa.isAdventure() || sa.isOmen()) && !getCurrentStateName().equals(sa.getCardState())) {
+            if ((sa.isAdventure() || sa.isOmen()) && !getCurrentStateName().equals(sa.getCardStateName())) {
                 continue;
             }
             if (!(sa instanceof SpellPermanent && sa.isBasicSpell())) {
@@ -3461,30 +3459,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return true;
     }
 
-    public void updateSpellAbilities(List<SpellAbility> list, CardState state, Boolean mana) {
-        for (final CardTraitChanges ck : getChangedCardTraitsList(state)) {
-            if (ck.isRemoveNonMana()) {
-                // List only has nonMana
-                if (null == mana) {
-                    list.removeIf(Predicate.not(SpellAbility::isManaAbility));
-                } else if (false == mana) {
-                    list.clear();
-                }
-            } else if (ck.isRemoveAll()) {
-                list.clear();
-            }
-            list.removeAll(ck.getRemovedAbilities());
-            for (SpellAbility sa : ck.getAbilities()) {
-                if (mana == null || mana == sa.isManaAbility()) {
-                    list.add(sa);
-                }
-            }
+    public void updateSpellAbilities(List<SpellAbility> list, CardState state) {
+        for (final ICardTraitChanges ck : getChangedCardTraitsList(state)) {
+            ck.applySpellAbility(list);
         }
 
         // add Facedown abilities from Original state but only if this state is face down
         // need CardStateView#getState or might crash in StackOverflow
         if (isInPlay()) {
-            if ((null == mana || false == mana) && isFaceDown() && state.getStateName() == CardStateName.FaceDown) {
+            if (isFaceDown() && state.getStateName() == CardStateName.FaceDown) {
                 for (SpellAbility sa : getState(CardStateName.Original).getNonManaAbilities()) {
                     if (sa.isTurnFaceUp()) {
                         list.add(sa);
@@ -3493,44 +3476,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             }
         } else if (hasState(CardStateName.Secondary) && state.getStateName() == CardStateName.Original) {
             // Adventure and Omen may only be cast not from Battlefield
-            for (SpellAbility sa : getState(CardStateName.Secondary).getSpellAbilities()) {
-                if (mana == null || mana == sa.isManaAbility()) {
-                    list.add(sa);
-                }
-            }
+            list.addAll(getState(CardStateName.Secondary).getSpellAbilities());
         }
 
         // keywords should already been cleanup by layers
         for (KeywordInterface kw : getUnhiddenKeywords(state)) {
-            for (SpellAbility sa : kw.getAbilities()) {
-                if (mana == null || mana == sa.isManaAbility()) {
-                    list.add(sa);
-                }
-            }
-        }
-    }
-
-    private void updateBasicLandAbilities(List<SpellAbility> list, CardState state) {
-        final CardTypeView type = state.getTypeWithChanges();
-
-        if (!type.isLand()) {
-            // no land, do nothing there
-            return;
-        }
-
-        for (int i = 0; i < MagicColor.WUBRG.length; i++ ) {
-            byte c = MagicColor.WUBRG[i];
-            if (type.hasSubtype(MagicColor.Constant.BASIC_LANDS.get(i))) {
-                SpellAbility sa = basicLandAbilities[i];
-
-                // no Ability for this type yet, make a new one
-                if (sa == null) {
-                    sa = CardFactory.buildBasicLandAbility(state, c);
-                    basicLandAbilities[i] = sa;
-                }
-
-                list.add(sa);
-            }
+            list.addAll(kw.getAbilities());
         }
     }
 
@@ -4981,7 +4932,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final void addChangedCardTraitsByText(Collection<SpellAbility> spells,
             Collection<Trigger> trigger, Collection<ReplacementEffect> replacements, Collection<StaticAbility> statics, long timestamp, long staticId) {
         changedCardTraitsByText.put(timestamp, staticId, new CardTraitChanges(
-            spells, null, trigger, replacements, statics, true, false
+            spells, null, trigger, replacements, statics, e -> true
         ));
 
         // setting card traits via text, does overwrite any other word change effects?
@@ -4990,27 +4941,25 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         updateChangedText();
     }
 
-    public final CardTraitChanges addChangedCardTraits(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
+    public final ICardTraitChanges addChangedCardTraits(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
             Collection<Trigger> trigger, Collection<ReplacementEffect> replacements, Collection<StaticAbility> statics,
-            boolean removeAll, boolean removeNonMana, long timestamp, long staticId) {
-        return addChangedCardTraits(spells, removedAbilities, trigger, replacements, statics, removeAll, removeNonMana, timestamp, staticId, true);
+            Predicate<CardTraitBase> remove, long timestamp, long staticId) {
+        return addChangedCardTraits(spells, removedAbilities, trigger, replacements, statics, remove, timestamp, staticId, true);
     }
-    public final CardTraitChanges addChangedCardTraits(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
+    public final ICardTraitChanges addChangedCardTraits(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
             Collection<Trigger> trigger, Collection<ReplacementEffect> replacements, Collection<StaticAbility> statics,
-            boolean removeAll, boolean removeNonMana, long timestamp, long staticId, boolean updateView) {
+            Predicate<CardTraitBase> remove, long timestamp, long staticId, boolean updateView) {
         CardTraitChanges result = new CardTraitChanges(
-            spells, removedAbilities, trigger, replacements, statics, removeAll, removeNonMana
+            spells, removedAbilities, trigger, replacements, statics, remove
         );
-        changedCardTraits.put(timestamp, staticId, result);
+        return addChangedCardTraits(result, timestamp, staticId, updateView);
+    }
+    public final ICardTraitChanges addChangedCardTraits(ICardTraitChanges changes, long timestamp, long staticId, boolean updateView) {
+        changedCardTraits.put(timestamp, staticId, changes);
         if (updateView) {
             updateAbilityTextForView();
         }
-        return result;
-    }
-
-    public final void addChangedCardTraits(CardTraitChanges ctc, long timestamp, long staticId) {
-        changedCardTraits.put(timestamp, staticId, ctc);
-        updateAbilityTextForView();
+        return changes;
     }
 
     public final boolean removeChangedCardTraits(long timestamp, long staticId) {
@@ -5020,24 +4969,21 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return changedCardTraitsByText.remove(timestamp, staticId) != null;
     }
 
-    public Iterable<CardTraitChanges> getChangedCardTraitsList(CardState state) {
-        List<SpellAbility> landManaAbilities = Lists.newArrayList();
-        this.updateBasicLandAbilities(landManaAbilities, state);
-
-        return Iterables.concat(
+    public Iterable<ICardTraitChanges> getChangedCardTraitsList(CardState state) {
+        return Iterables.<ICardTraitChanges>concat(
             changedCardTraitsByText.values(), // Layer 3
-            ImmutableList.of(new CardTraitChanges(landManaAbilities, null, null, null, null, hasRemoveIntrinsic(), false)), // Layer 4
+            ImmutableList.of(state.getLandTraitChanges()), // Layer 4
             changedCardTraits.values() // Layer 6
         );
     }
 
-    public final Table<Long, Long, CardTraitChanges> getChangedCardTraits() {
+    public final Table<Long, Long, ICardTraitChanges> getChangedCardTraits() {
         return changedCardTraits;
     }
 
-    public final void setChangedCardTraits(Table<Long, Long, CardTraitChanges> changes) {
+    public final void setChangedCardTraits(Table<Long, Long, ICardTraitChanges> changes) {
         changedCardTraits.clear();
-        for (Table.Cell<Long, Long, CardTraitChanges> e : changes.cellSet()) {
+        for (Table.Cell<Long, Long, ICardTraitChanges> e : changes.cellSet()) {
             changedCardTraits.put(e.getRowKey(), e.getColumnKey(), e.getValue().copy(this, true));
         }
     }
@@ -7149,11 +7095,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public void updateStaticAbilities(List<StaticAbility> list, CardState state) {
-        for (final CardTraitChanges ck : getChangedCardTraitsList(state)) {
-            if (ck.isRemoveAll()) {
-                list.clear();
-            }
-            list.addAll(ck.getStaticAbilities());
+        for (final ICardTraitChanges ck : getChangedCardTraitsList(state)) {
+            ck.applyStaticAbility(list);
         }
 
         // keywords are already sorted by Layer
@@ -7191,11 +7134,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public void updateTriggers(List<Trigger> list, CardState state) {
-        for (final CardTraitChanges ck : getChangedCardTraitsList(state)) {
-            if (ck.isRemoveAll()) {
-                list.clear();
-            }
-            list.addAll(ck.getTriggers());
+        for (final ICardTraitChanges ck : getChangedCardTraitsList(state)) {
+            ck.applyTrigger(list);
         }
 
         // Keywords are already sorted by Layer
@@ -7214,11 +7154,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public void updateReplacementEffects(List<ReplacementEffect> list, CardState state) {
-        for (final CardTraitChanges ck : getChangedCardTraitsList(state)) {
-            if (ck.isRemoveAll()) {
-                list.clear();
-            }
-            list.addAll(ck.getReplacements());
+        for (final ICardTraitChanges ck : getChangedCardTraitsList(state)) {
+            ck.applyReplacementEffect(list);
         }
 
         // Keywords are already sorted by Layer
