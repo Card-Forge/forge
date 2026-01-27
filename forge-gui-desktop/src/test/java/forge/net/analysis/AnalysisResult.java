@@ -332,6 +332,56 @@ public class AnalysisResult {
     }
 
     /**
+     * Get files that contain a specific error (normalized for grouping).
+     * @param normalizedError the normalized error string
+     * @return list of log file names containing this error
+     */
+    public List<String> getFilesWithError(String normalizedError) {
+        return allMetrics.stream()
+                .filter(m -> m.getErrors().stream()
+                        .anyMatch(e -> normalizeError(e).equals(normalizedError)))
+                .map(GameLogMetrics::getLogFileName)
+                .limit(5)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Get files that contain a specific warning (normalized for grouping).
+     * @param normalizedWarning the normalized warning string
+     * @return list of log file names containing this warning
+     */
+    public List<String> getFilesWithWarning(String normalizedWarning) {
+        return allMetrics.stream()
+                .filter(m -> m.getWarnings().stream()
+                        .anyMatch(w -> normalizeError(w).equals(normalizedWarning)))
+                .map(GameLogMetrics::getLogFileName)
+                .limit(5)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Get all files that have any warnings.
+     * @return list of log file names that have warnings
+     */
+    public List<String> getFilesWithAnyWarnings() {
+        return allMetrics.stream()
+                .filter(m -> !m.getWarnings().isEmpty())
+                .map(GameLogMetrics::getLogFileName)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Get all files that have any errors.
+     * @return list of log file names that have errors
+     */
+    public List<String> getFilesWithAnyErrors() {
+        return allMetrics.stream()
+                .filter(m -> !m.getErrors().isEmpty())
+                .map(GameLogMetrics::getLogFileName)
+                .collect(Collectors.toList());
+    }
+
+    /**
      * Generate a markdown report.
      */
     public String generateReport() {
@@ -424,6 +474,16 @@ public class AnalysisResult {
                         gamesWithChecksumMismatches));
             }
 
+            // List files with errors for quick reference
+            List<String> filesWithErrors = getFilesWithAnyErrors();
+            if (!filesWithErrors.isEmpty()) {
+                sb.append("**Files with Errors:**\n");
+                for (String file : filesWithErrors) {
+                    sb.append(String.format("- `%s`\n", file));
+                }
+                sb.append("\n");
+            }
+
             List<String> errors = getAllErrors();
             if (!errors.isEmpty()) {
                 sb.append("**Unique Errors:**\n");
@@ -441,6 +501,16 @@ public class AnalysisResult {
         if (gamesWithWarnings > 0) {
             sb.append("### Warning Analysis\n\n");
             sb.append(String.format("**Games with Warnings:** %d\n\n", gamesWithWarnings));
+
+            // List files with warnings for quick reference
+            List<String> filesWithWarnings = getFilesWithAnyWarnings();
+            if (!filesWithWarnings.isEmpty()) {
+                sb.append("**Files with Warnings:**\n");
+                for (String file : filesWithWarnings) {
+                    sb.append(String.format("- `%s`\n", file));
+                }
+                sb.append("\n");
+            }
 
             List<String> warnings = getAllWarnings();
             if (!warnings.isEmpty()) {

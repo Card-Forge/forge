@@ -443,6 +443,8 @@ public class DeltaSyncManager {
         collectCardsFromZone(player.getFlashback(), objectDeltas, newObjects, currentObjectIds);
         collectCardsFromZone(player.getCommanders(), objectDeltas, newObjects, currentObjectIds);
         collectCardsFromZone(player.getAnte(), objectDeltas, newObjects, currentObjectIds);
+        collectCardsFromZone(player.getSideboard(), objectDeltas, newObjects, currentObjectIds);
+        collectCardsFromZone(player.getCommand(), objectDeltas, newObjects, currentObjectIds);
 
         // Collect battlefield cards
         if (player.getBattlefield() != null) {
@@ -687,6 +689,8 @@ public class DeltaSyncManager {
         markCardsAsSent(player.getFlashback());
         markCardsAsSent(player.getCommanders());
         markCardsAsSent(player.getAnte());
+        markCardsAsSent(player.getSideboard());
+        markCardsAsSent(player.getCommand());
 
         if (player.getBattlefield() != null) {
             for (CardView card : player.getBattlefield()) {
@@ -850,6 +854,8 @@ public class DeltaSyncManager {
         clearCardsChanges(player.getFlashback());
         clearCardsChanges(player.getCommanders());
         clearCardsChanges(player.getAnte());
+        clearCardsChanges(player.getSideboard());
+        clearCardsChanges(player.getCommand());
 
         if (player.getBattlefield() != null) {
             for (CardView card : player.getBattlefield()) {
