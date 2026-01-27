@@ -1,1 +1,10 @@
 * text=auto
+
+# Prevent merging of branch-specific documentation and test logs
+# These files use "ours" merge strategy - local version is always kept during merges
+testlogs/ merge=ours
+testlogs/** merge=ours
+TESTING_DOCUMENTATION.md merge=ours
+BRANCH_DOCUMENTATION.md merge=ours
+BUGS.md merge=ours
+REFACTOR_OPTIONS.md merge=ours
