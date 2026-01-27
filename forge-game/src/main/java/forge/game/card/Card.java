@@ -3481,7 +3481,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         // keywords should already been cleanup by layers
         for (KeywordInterface kw : getUnhiddenKeywords(state)) {
-            list.addAll(kw.getAbilities());
+            kw.applySpellAbility(list);
         }
     }
 
@@ -7101,7 +7101,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         // keywords are already sorted by Layer
         for (KeywordInterface kw : getUnhiddenKeywords(state)) {
-            list.addAll(kw.getStaticAbilities());
+            kw.applyStaticAbility(list);
         }
     }
 
@@ -7140,7 +7140,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         // Keywords are already sorted by Layer
         for (KeywordInterface kw : getUnhiddenKeywords(state)) {
-            list.addAll(kw.getTriggers());
+            kw.applyTrigger(list);
         }
     }
 
@@ -7160,7 +7160,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         // Keywords are already sorted by Layer
         for (KeywordInterface kw : getUnhiddenKeywords(state)) {
-            list.addAll(kw.getReplacements());
+            kw.applyReplacementEffect(list);
         }
 
         // Shield Counter aren't affected by Changed Card Traits

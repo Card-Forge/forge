@@ -152,39 +152,34 @@ public class KeywordsChange implements ICardTraitChanges, Cloneable {
 
     public List<SpellAbility> applySpellAbility(List<SpellAbility> list) {
         for (KeywordInterface k : this.keywords.getValues()) {
-            list.addAll(k.getAbilities());
+            k.applySpellAbility(list);
         }
         return list;
     }
     public List<Trigger> applyTrigger(List<Trigger> list) {
         for (KeywordInterface k : this.keywords.getValues()) {
-            list.addAll(k.getTriggers());
+            k.applyTrigger(list);
         }
         return list;
     }
     public List<ReplacementEffect> applyReplacementEffect(List<ReplacementEffect> list) {
         for (KeywordInterface k : this.keywords.getValues()) {
-            list.addAll(k.getReplacements());
+            k.applyReplacementEffect(list);
         }
         return list;
     }
     public List<StaticAbility> applyStaticAbility(List<StaticAbility> list) {
         for (KeywordInterface k : this.keywords.getValues()) {
-            list.addAll(k.getStaticAbilities());
+            k.applyStaticAbility(list);
         }
         return list;
     }
 
     public boolean hasTraits() {
         for (KeywordInterface k : this.keywords.getValues()) {
-            if (!k.getAbilities().isEmpty())
+            if (k.hasTraits()) {
                 return true;
-            if (!k.getTriggers().isEmpty())
-                return true;
-            if (!k.getReplacements().isEmpty())
-                return true;
-            if (!k.getStaticAbilities().isEmpty())
-                return true;
+            }
         }
         return false;
     }
