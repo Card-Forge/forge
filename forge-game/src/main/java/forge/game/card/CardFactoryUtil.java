@@ -3607,7 +3607,7 @@ public class CardFactoryUtil {
             final AbilitySub repeatSub = (AbilitySub) AbilityFactory.getAbility(repeatStr, card);
             sa.setSubAbility(repeatSub);
 
-            final String effectStr = "DB$ Effect | RememberObjects$ Imprinted,ImprintedRemembered | ExileOnMoved$ Battlefield | StaticAbilities$ AttackChosen";
+            final String effectStr = "DB$ Effect | RememberObjects$ Imprinted & ImprintedRemembered | ExileOnMoved$ Battlefield | StaticAbilities$ AttackChosen";
             final AbilitySub effectSub = (AbilitySub) AbilityFactory.getAbility(effectStr, card);
             repeatSub.setAdditionalAbility("RepeatSubAbility", effectSub);
 
