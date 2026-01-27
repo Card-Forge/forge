@@ -13,12 +13,9 @@
 5. [Files Modified](#files-modified)
 6. [Configuration](#configuration)
 7. [Debugging](#debugging)
-8. [Known Limitations](#known-limitations)
-9. [Future Improvements](#potential-future-improvements)
-10. [Authorship](#authorship)
+8. [Known Limitations](#known-limitations)9[Authorship](#authorship)
 
 ---
-
 ## Overview
 
 The NetworkPlay branch introduces four major features to improve the multiplayer experience:

@@ -1,0 +1,3 @@
+2026-01-27 20:15:00
+Last reviewed: Test infrastructure consolidation (deleted ParallelTestExecutor, BasicGameScenario, SingleGameRunner, SequentialGameTest, MultiProcessGameTest; added BatchGameTest)
+Applied best practices: Accuracy (remove deleted file references), Completeness (add scriptReferences.md to /documentation skill, update class catalogs)

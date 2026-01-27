@@ -8,6 +8,21 @@ import java.util.List;
  */
 public class GameLogMetrics {
 
+    /**
+     * Classification of how a game failed (or NONE if it succeeded).
+     */
+    public enum FailureMode {
+        NONE,              // Game completed successfully
+        TIMEOUT,           // Game exceeded time limit
+        CHECKSUM_MISMATCH, // Delta sync desync detected
+        EXCEPTION,         // Exception/error logged
+        INCOMPLETE         // Game didn't complete for unknown reason
+    }
+
+    // Failure tracking
+    private FailureMode failureMode = FailureMode.NONE;
+    private int firstErrorTurn = -1;  // Turn when first error occurred (-1 = no error)
+
     // Game identification
     private String logFileName;
     private int gameIndex = -1;
@@ -56,6 +71,22 @@ public class GameLogMetrics {
     }
 
     // Getters and setters
+
+    public FailureMode getFailureMode() {
+        return failureMode;
+    }
+
+    public void setFailureMode(FailureMode failureMode) {
+        this.failureMode = failureMode;
+    }
+
+    public int getFirstErrorTurn() {
+        return firstErrorTurn;
+    }
+
+    public void setFirstErrorTurn(int firstErrorTurn) {
+        this.firstErrorTurn = firstErrorTurn;
+    }
 
     public String getLogFileName() {
         return logFileName;
@@ -212,10 +243,11 @@ public class GameLogMetrics {
         return String.format(
                 "GameLogMetrics[file=%s, players=%d, completed=%b, turns=%d, winner=%s, " +
                 "packets=%d, deltaBytes=%d, fullStateBytes=%d, savings=%.1f%%, " +
-                "warnings=%d, errors=%d, checksumMismatch=%b]",
+                "warnings=%d, errors=%d, checksumMismatch=%b, failureMode=%s, firstErrorTurn=%d]",
                 logFileName, playerCount, gameCompleted, turnCount, winner,
                 deltaPacketCount, totalDeltaBytes, totalFullStateBytes,
-                calculateBandwidthSavings(), warnings.size(), errors.size(), hasChecksumMismatch);
+                calculateBandwidthSavings(), warnings.size(), errors.size(), hasChecksumMismatch,
+                failureMode, firstErrorTurn);
     }
 
     /**

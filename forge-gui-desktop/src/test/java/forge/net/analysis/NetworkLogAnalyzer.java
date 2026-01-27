@@ -45,6 +45,9 @@ public class NetworkLogAnalyzer {
     private static final Pattern ERROR_PATTERN = Pattern.compile(
             "\\[ERROR\\]|ERROR:|Exception|exception", Pattern.CASE_INSENSITIVE);
 
+    private static final Pattern TIMEOUT_PATTERN = Pattern.compile(
+            "timeout|timed out|time limit exceeded", Pattern.CASE_INSENSITIVE);
+
     private static final Pattern WARN_PATTERN = Pattern.compile(
             "\\[WARN\\]|WARN:|WARNING:", Pattern.CASE_INSENSITIVE);
 
@@ -201,9 +204,13 @@ public class NetworkLogAnalyzer {
                     continue;
                 }
 
-                // Errors
+                // Errors - track first error turn for failure analysis
                 if (ERROR_PATTERN.matcher(line).find()) {
                     metrics.addError(truncateLine(line));
+                    // Record the turn when first error occurred
+                    if (metrics.getFirstErrorTurn() < 0 && maxTurn > 0) {
+                        metrics.setFirstErrorTurn(maxTurn);
+                    }
                     continue;
                 }
 
@@ -237,11 +244,45 @@ public class NetworkLogAnalyzer {
                 metrics.setAverageBandwidthSavingsActual(avgActual);
             }
 
+            // Determine failure mode based on log content
+            metrics.setFailureMode(determineFailureMode(metrics));
+
         } catch (IOException e) {
             metrics.addError("Failed to read log file: " + e.getMessage());
+            metrics.setFailureMode(GameLogMetrics.FailureMode.EXCEPTION);
         }
 
         return metrics;
+    }
+
+    /**
+     * Determine the failure mode based on metrics collected during parsing.
+     * Priority: CHECKSUM_MISMATCH > TIMEOUT > EXCEPTION > INCOMPLETE > NONE
+     */
+    private GameLogMetrics.FailureMode determineFailureMode(GameLogMetrics metrics) {
+        // Check for checksum mismatch (desync) first - most critical
+        if (metrics.hasChecksumMismatch()) {
+            return GameLogMetrics.FailureMode.CHECKSUM_MISMATCH;
+        }
+
+        // Check for timeout in error messages
+        for (String error : metrics.getErrors()) {
+            if (TIMEOUT_PATTERN.matcher(error).find()) {
+                return GameLogMetrics.FailureMode.TIMEOUT;
+            }
+        }
+
+        // Check for any other exceptions/errors
+        if (!metrics.getErrors().isEmpty()) {
+            return GameLogMetrics.FailureMode.EXCEPTION;
+        }
+
+        // Check if game didn't complete for unknown reason
+        if (!metrics.isGameCompleted()) {
+            return GameLogMetrics.FailureMode.INCOMPLETE;
+        }
+
+        return GameLogMetrics.FailureMode.NONE;
     }
 
     /**
@@ -308,7 +349,9 @@ public class NetworkLogAnalyzer {
      * @return List of GameLogMetrics for comprehensive test logs
      */
     public List<GameLogMetrics> analyzeComprehensiveTestLogs(File logDirectory) {
-        // Match patterns like: network-debug-20260124-105844-21236-game0-4p-test.log
+        // Match patterns like:
+        // - Old: network-debug-20260124-105844-21236-game0-4p-test.log
+        // - New: network-debug-run20260127-213221-game0-4p-test.log
         return analyzeDirectory(logDirectory, "network-debug-.*-game\\d+-\\d+p-test\\.log");
     }
 
@@ -328,25 +371,33 @@ public class NetworkLogAnalyzer {
     /**
      * Filter logs by timestamp extracted from filename.
      * Log filenames are formatted as: network-debug-YYYYMMDD-HHMMSS-PID-test.log
+     * Note: Filename timestamps have second precision, so we truncate afterTime
+     * to seconds to avoid excluding logs from the same second as the test start.
      */
     private List<GameLogMetrics> filterLogsByTime(List<GameLogMetrics> metrics, File logDirectory, LocalDateTime afterTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
+        // Truncate to seconds since filename timestamps don't have sub-second precision
+        LocalDateTime afterTimeSeconds = afterTime.truncatedTo(java.time.temporal.ChronoUnit.SECONDS);
 
         return metrics.stream()
                 .filter(m -> {
                     LocalDateTime logTime = extractTimestampFromFilename(m.getLogFileName(), formatter);
-                    return logTime != null && logTime.isAfter(afterTime);
+                    // Use !isBefore to include logs from the same second
+                    return logTime != null && !logTime.isBefore(afterTimeSeconds);
                 })
                 .collect(Collectors.toList());
     }
 
     /**
      * Extract timestamp from log filename.
-     * Expected format: network-debug-YYYYMMDD-HHMMSS-PID-*.log
+     * Supports two formats:
+     * - Old: network-debug-YYYYMMDD-HHMMSS-PID-*.log
+     * - New: network-debug-runYYYYMMDD-HHMMSS-*.log
      */
     private LocalDateTime extractTimestampFromFilename(String filename, DateTimeFormatter formatter) {
-        // Pattern: network-debug-20260124-105844-21236-game0-4p-test.log
-        Pattern timestampPattern = Pattern.compile("network-debug-(\\d{8}-\\d{6})-");
+        // Pattern handles both old format (network-debug-20260124-105844-...)
+        // and new format (network-debug-run20260127-213221-...)
+        Pattern timestampPattern = Pattern.compile("network-debug-(?:run)?(\\d{8}-\\d{6})-");
         Matcher matcher = timestampPattern.matcher(filename);
         if (matcher.find()) {
             try {

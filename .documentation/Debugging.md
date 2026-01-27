@@ -6,7 +6,47 @@ This file tracks known bugs in the Forge codebase, particularly for the NetworkP
 
 ## Active Bugs
 
-*No active bugs at this time.*
+### Bug #12: Multiplayer (3+ player) Desync - Collection Lookup Failures
+
+**Status:** INVESTIGATING
+**Severity:** HIGH
+**Affected:** 3-player and 4-player network games
+
+**Symptoms:**
+- All 2-player games pass (100% success rate)
+- All 3+ player games fail with CHECKSUM_MISMATCH
+- Desync occurs early (often Turn 0-1)
+
+**Key Error Pattern:**
+```
+[WARN] [NetworkDeserializer] Collection lookup failed: type=, id=220 - NOT FOUND in tracker or oldValue
+[ERROR] [DeltaSync] Checksum details (client state):
+[ERROR] [DeltaSync]   GameView ID: 4
+[ERROR] [DeltaSync]   Turn: 0
+[ERROR] [DeltaSync]   Phase: null
+```
+
+**Analysis:**
+- The "Collection lookup failed" warnings indicate delta sync is referencing object IDs that don't exist in the client's tracker
+- Empty `type=` field suggests the type information is missing or not being transmitted
+- Multiple sequential IDs (220, 221, 222...) failing suggests a batch of objects not being tracked
+- This may be related to how multiple clients share GameView state
+
+**Investigation Notes:**
+- Compare with Bug #7 (previously fixed multiplayer issue) - similar symptoms but different root cause
+- Check if recent changes to per-client property tracking introduced regression
+- Review `NetworkDeserializer.createObjectFromData()` for type-specific lookup logic
+- Check if client registration order affects object ID assignment
+
+**Relevant Files:**
+- `forge-game/src/main/java/forge/game/GameView.java`
+- `forge-gui/src/main/java/forge/gamemodes/net/server/DeltaSyncManager.java`
+- `forge-gui/src/main/java/forge/gamemodes/net/client/NetworkDeserializer.java`
+
+**Test Command:**
+```bash
+mvn -pl forge-gui-desktop -am verify -Dtest="ComprehensiveDeltaSyncTest#analyzeExistingLogs" -Dtest.batchId=20260127-213221 -Dsurefire.failIfNoSpecifiedTests=false -Dcheckstyle.skip=true
+```
 
 ---
 
