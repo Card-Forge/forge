@@ -856,12 +856,14 @@ public class Game {
             }
         }
 
-        for (Card c : getActivePlanes()) {
-            if (c.getController().equals(p)) {
-                planarControllerLost = true;
-            }
-            if (c.getOwner().equals(p)) {
-                planarOwnerLost = true;
+        if (getActivePlanes() != null) {
+            for (Card c : getActivePlanes()) {
+                if (c.getController().equals(p)) {
+                    planarControllerLost = true;
+                }
+                if (c.getOwner().equals(p)) {
+                    planarOwnerLost = true;
+                }
             }
         }
 
