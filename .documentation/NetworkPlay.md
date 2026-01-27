@@ -101,7 +101,7 @@ The core interfaces (IGuiGame, IGameController) still contain network methods, b
 
 ## Feature Breakdown and Dependencies
 
-This branch contains ~10,000+ lines of changes that can be disaggregated into 5 independent feature categories:
+This branch can be disaggregated into 5 feature categories:
 
 | # | Feature | Lines | Complexity | Dependencies |
 |---|---------|-------|------------|--------------|
@@ -140,7 +140,7 @@ This branch contains ~10,000+ lines of changes that can be disaggregated into 5 
 └─────────────────────┘                              └─────────────────────┘
 ```
 
-For detailed file inventories, PR sequencing recommendations, and review guidance, see **[FeatureDependencies.md](FeatureDependencies.md)**.
+For detailed file inventories, dependency outline, and review guidance, see **[FeatureDependencies.md](FeatureDependencies.md)**.
 
 ---
 
