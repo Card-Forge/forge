@@ -5,7 +5,6 @@ PT:4/4
 K:Flying
 S:Mode$ Continuous | Affected$ Robot.Other+YouCtrl,Construct.Other+YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Other Robots and Constructs you control get +2/+2.
 SVar:PlayMain1:TRUE
-SVar:BuffedBy:Robot
-SVar:BuffedBy:Construct
+SVar:BuffedBy:Robot|Construct
 DeckHints:Type$Robot|Construct
 Oracle:Flying\nOther Robots and Constructs you control get +2/+2.
