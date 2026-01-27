@@ -78,6 +78,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbWorkshopSyntax = new OptionsCheckBox(localizer.getMessage("cbWorkshopSyntax"));
     private final JCheckBox cbEnforceDeckLegality = new OptionsCheckBox(localizer.getMessage("cbEnforceDeckLegality"));
     private final JCheckBox cbExperimentalRestore = new OptionsCheckBox(localizer.getMessage("cbExperimentalRestore"));
+    private final JCheckBox cbExperimentalAiManaPayment = new OptionsCheckBox("Experimental AI Mana Payment"); // TODO: localize
     private final JCheckBox cbPerformanceMode = new OptionsCheckBox(localizer.getMessage("cbPerformanceMode"));
     private final JCheckBox cbSROptimize = new OptionsCheckBox(localizer.getMessage("cbSROptimize"));
     private final JCheckBox cbFilteredHands = new OptionsCheckBox(localizer.getMessage("cbFilteredHands"));
@@ -243,6 +244,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbExperimentalRestore, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlExperimentalRestore")), descriptionConstraints);
+        pnlPrefs.add(cbExperimentalAiManaPayment, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Enable experimental AI mana payment logic."), descriptionConstraints); // TODO: localize
 
         pnlPrefs.add(cbpAiTimeout, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAITimeout")), descriptionConstraints);
@@ -892,6 +895,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public JCheckBox getCbExperimentalRestore() {
         return cbExperimentalRestore;
+    }
+    public JCheckBox getCbExperimentalAiManaPayment() {
+        return cbExperimentalAiManaPayment;
     }
 
     public JCheckBox getCbOrderHand() {

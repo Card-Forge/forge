@@ -50,10 +50,17 @@ import java.util.stream.Collectors;
 
 public class ComputerUtilMana {
     private final static boolean DEBUG_MANA_PAYMENT = false;
-    private final static boolean VIBE_MANA_PAYMENT = true;
+
+    private static volatile boolean experimentalManaPaymentEnabled = false;
+    public static void setExperimentalManaPaymentEnabled(boolean enabled) {
+        experimentalManaPaymentEnabled = enabled;
+    }
+    public static boolean isExperimentalManaPaymentEnabled() {
+        return experimentalManaPaymentEnabled;
+    }
 
     public static boolean canPayManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean effect) {
-        if (VIBE_MANA_PAYMENT) {
+        if (isExperimentalManaPaymentEnabled()) {
             return ManaPaymentService.canPayMana(cost, sa, ai, effect);
         }
 
@@ -61,14 +68,14 @@ public class ComputerUtilMana {
         return payManaCost(cost, sa, ai, true, true, effect);
     }
     public static boolean canPayManaCost(final SpellAbility sa, final Player ai, final int extraMana, final boolean effect) {
-        if (VIBE_MANA_PAYMENT) {
+        if (isExperimentalManaPaymentEnabled()) {
             return ManaPaymentService.canPayMana(sa.getPayCosts(), sa, ai, extraMana, effect);
         }
 
         return canPayManaCost(sa.getPayCosts(), sa, ai, extraMana, effect);
     }
     public static boolean canPayManaCost(final Cost cost, final SpellAbility sa, final Player ai, final int extraMana, final boolean effect) {
-       if (VIBE_MANA_PAYMENT) {
+       if (isExperimentalManaPaymentEnabled()) {
             return ManaPaymentService.canPayMana(cost, sa, ai, extraMana, effect);
        }
 
@@ -76,7 +83,7 @@ public class ComputerUtilMana {
     }
 
     public static boolean payManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean effect) {
-        if (VIBE_MANA_PAYMENT) {
+        if (isExperimentalManaPaymentEnabled()) {
             ManaPaymentService service = new ManaPaymentService(cost, sa, ai, effect);
             return service.payManaCost();
         }
@@ -84,7 +91,7 @@ public class ComputerUtilMana {
         return payManaCost(cost, sa, ai, false, true, effect);
     }
     public static boolean payManaCost(final Cost cost, final Player ai, final SpellAbility sa, final boolean effect) {
-        if (VIBE_MANA_PAYMENT) {
+        if (isExperimentalManaPaymentEnabled()) {
             ManaPaymentService service = new ManaPaymentService(cost, ai, sa, effect);
             return service.payManaCost();
         }
@@ -92,7 +99,7 @@ public class ComputerUtilMana {
         return payManaCost(cost, sa, ai, false, 0, true, effect);
     }
     private static boolean payManaCost(final Cost cost, final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable, final boolean effect) {
-        if (VIBE_MANA_PAYMENT) {
+        if (isExperimentalManaPaymentEnabled()) {
             ManaPaymentService service = new ManaPaymentService(cost, sa, ai, extraMana, effect);
             return service.payManaCost();
         }
