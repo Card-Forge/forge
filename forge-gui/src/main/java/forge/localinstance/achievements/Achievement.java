@@ -251,7 +251,12 @@ public abstract class Achievement {
         if (timestamp == 0) { return null; }
 
         final DateFormat formatter = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.getDefault());
-        return formatter.format(new Date(timestamp));
+
+        return formatter.format(new Date(timestamp))
+            // Replace characters that often cause boxes in macOS GUIs
+            .replace('\u00A0', ' ')  // non-breaking space → normal space
+            .replace('\u2009', ' ')  // thin space -> normal space
+            .replace('\u202F', ' '); // narrow nbsp -> normal space
     }
 
     public String getSubTitle(final boolean includeTimestamp) {
