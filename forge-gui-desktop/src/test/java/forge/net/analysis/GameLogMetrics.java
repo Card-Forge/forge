@@ -48,6 +48,7 @@ public class GameLogMetrics {
     private List<String> warnings = new ArrayList<>();
     private List<String> errors = new ArrayList<>();
     private boolean hasChecksumMismatch;
+    private LogContextExtractor.ErrorContext errorContext;
 
     // Timing
     private long gameDurationMs;
@@ -220,6 +221,14 @@ public class GameLogMetrics {
 
     public void setHasChecksumMismatch(boolean hasChecksumMismatch) {
         this.hasChecksumMismatch = hasChecksumMismatch;
+    }
+
+    public LogContextExtractor.ErrorContext getErrorContext() {
+        return errorContext;
+    }
+
+    public void setErrorContext(LogContextExtractor.ErrorContext errorContext) {
+        this.errorContext = errorContext;
     }
 
     public long getGameDurationMs() {

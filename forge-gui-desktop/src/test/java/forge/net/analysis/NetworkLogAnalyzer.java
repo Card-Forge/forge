@@ -247,6 +247,13 @@ public class NetworkLogAnalyzer {
             // Determine failure mode based on log content
             metrics.setFailureMode(determineFailureMode(metrics));
 
+            // Extract error context if there are errors
+            if (!metrics.getErrors().isEmpty() || metrics.hasChecksumMismatch()) {
+                LogContextExtractor extractor = new LogContextExtractor();
+                LogContextExtractor.ErrorContext context = extractor.extractAroundFirstError(logFile);
+                metrics.setErrorContext(context);
+            }
+
         } catch (IOException e) {
             metrics.addError("Failed to read log file: " + e.getMessage());
             metrics.setFailureMode(GameLogMetrics.FailureMode.EXCEPTION);

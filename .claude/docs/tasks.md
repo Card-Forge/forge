@@ -147,3 +147,80 @@ mvn -pl forge-gui-desktop -am verify -Dtest="ComprehensiveDeltaSyncTest#analyzeE
 ```
 
 **See Also:** `.documentation/Debugging.md` Bug #12 for full details
+
+---
+
+### 9. Implement Remote AI Actions for Network Testing
+
+**Status:** NOT STARTED
+**Priority:** MEDIUM
+
+**Issue:** Remote clients in network tests (`HeadlessNetworkClient`) auto-pass priority every time instead of making actual gameplay decisions. This results in:
+- Host AI (Alice) winning 100% of games
+- Limited network protocol coverage (mostly server→client, not client→server actions)
+- Less diverse game states for delta sync testing
+- Logs that don't show realistic bidirectional gameplay
+
+**Root Cause Analysis:**
+- Host (Slot 0): Uses `LobbySlotType.AI` → gets full `PlayerControllerAi` decision-making
+- Remote clients (Slots 1-3): Use `LobbySlotType.OPEN` → `DeltaLoggingGuiGame` just auto-clicks OK
+- In `HeadlessNetworkClient.java:492-496`, `updateButtons()` immediately schedules `selectButtonOk()` when OK is enabled
+
+**Technical Challenge:**
+- `PlayerControllerAi` requires the actual `Game` object (server-side only)
+- Remote clients only have `GameView` (read-only view layer)
+
+**Potential Solutions:**
+1. **Server-side AI for remote slots** - Change remote slots to `LobbySlotType.AI` while keeping network clients connected for delta verification. AI decisions made server-side, clients just observe/verify.
+2. **Client-side simplified AI** - Implement basic decision logic using `GameView` (limited but tests full round-trip)
+3. **Hybrid approach** - Server runs AI, clients verify state matches their view
+
+**Implementation Steps:**
+1. Research how `LobbySlotType.AI` slots interact with connected network clients
+2. Test if changing remote slots to AI type breaks client connectivity
+3. If option 1 works, update `MultiplayerNetworkScenario` to use AI for all slots
+4. Verify delta sync still functions with server-side AI for remote players
+5. Update documentation to reflect that all players are AI-controlled
+
+**Relevant Files:**
+- `forge-gui-desktop/src/test/java/forge/net/HeadlessNetworkClient.java` (DeltaLoggingGuiGame class)
+- `forge-gui-desktop/src/test/java/forge/net/scenarios/MultiplayerNetworkScenario.java` (slot configuration)
+- `forge-gui/src/main/java/forge/gamemodes/match/LobbySlot.java`
+- `forge-gui/src/main/java/forge/gamemodes/match/LobbySlotType.java`
+
+**Benefits of Fix:**
+- More comprehensive network protocol testing
+- Diverse game states reveal edge cases in delta sync
+- Bidirectional traffic testing (client actions → server → broadcast)
+- More useful debug logs showing actual gameplay from all players
+
+---
+
+### 10. Verify Error Context Extraction Feature
+
+**Status:** NOT STARTED
+**Priority:** LOW
+
+**Background:** Implemented error context extraction feature to help Claude debug test failures. The feature adds:
+- `LogContextExtractor.java`: New class that extracts game state and log lines around errors
+- `GameLogMetrics.java`: Added `errorContext` field to store extracted context
+- `NetworkLogAnalyzer.java`: Calls extractor after detecting errors
+- `AnalysisResult.java`: New "Error Context for Failed Games" section in reports
+
+**Verification Steps:**
+1. Run quick test to generate logs with potential errors:
+   ```bash
+   mvn -pl forge-gui-desktop -am verify -Dtest="ComprehensiveDeltaSyncTest#runQuickDeltaSyncTest" -Dsurefire.failIfNoSpecifiedTests=false -Dcheckstyle.skip=true
+   ```
+2. Review generated `comprehensive-test-results-*.md` for new "Error Context for Failed Games" section
+3. Verify the section shows:
+   - Turn and phase at error
+   - Player states table (Life, Hand, GY, Battlefield)
+   - Warnings before error
+   - Lines around error with context
+
+**Files Created/Modified:**
+- `forge-gui-desktop/src/test/java/forge/net/analysis/LogContextExtractor.java` (NEW)
+- `forge-gui-desktop/src/test/java/forge/net/analysis/GameLogMetrics.java` (modified)
+- `forge-gui-desktop/src/test/java/forge/net/analysis/NetworkLogAnalyzer.java` (modified)
+- `forge-gui-desktop/src/test/java/forge/net/analysis/AnalysisResult.java` (modified)

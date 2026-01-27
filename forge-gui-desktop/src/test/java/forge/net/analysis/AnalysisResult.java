@@ -495,6 +495,24 @@ public class AnalysisResult {
                 }
                 sb.append("\n");
             }
+
+            // Error Context section for failed games
+            List<GameLogMetrics> failedGames = allMetrics.stream()
+                    .filter(m -> !m.isSuccessful() && m.getErrorContext() != null)
+                    .sorted(Comparator.comparingInt(GameLogMetrics::getGameIndex))
+                    .limit(5) // Limit to 5 most detailed error contexts
+                    .collect(Collectors.toList());
+
+            if (!failedGames.isEmpty()) {
+                sb.append("### Error Context for Failed Games\n\n");
+                for (GameLogMetrics m : failedGames) {
+                    LogContextExtractor.ErrorContext ctx = m.getErrorContext();
+                    if (ctx != null) {
+                        sb.append(ctx.toMarkdown());
+                        sb.append("\n");
+                    }
+                }
+            }
         }
 
         // Warning Analysis
