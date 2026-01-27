@@ -451,7 +451,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean gainLife(int lifeGain, final Card source, final SpellAbility sa) {
-        if (!canGainLife()) {
+        if (!canGainLife() || lifeGain <= 0) {
             return false;
         }
 
@@ -466,10 +466,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             // check if this is still the affected player
             if (this.equals(repParams.get(AbilityKey.Affected))) {
                 lifeGain = (int) repParams.get(AbilityKey.LifeGained);
-                // there is nothing that changes lifegain into lifeloss this way
-                if (lifeGain <= 0) {
-                    return false;
-                }
             } else {
                 return false;
             }
@@ -478,32 +474,31 @@ public class Player extends GameEntity implements Comparable<Player> {
             return false;
         }
 
-        if (lifeGain > 0) {
-            int oldLife = life;
-            life += lifeGain;
-            view.updateLife(this);
-            boolean firstGain = lifeGainedTimesThisTurn == 0;
-            lifeGainedThisTurn += lifeGain;
-            lifeGainedTimesThisTurn++;
-
-            // team mates need to be notified about life gained
-            for (final Player p : getTeamMates(true)) {
-                p.addLifeGainedByTeamThisTurn(lifeGain);
-            }
-
-            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
-            runParams.put(AbilityKey.LifeAmount, lifeGain);
-            runParams.put(AbilityKey.Source, source);
-            runParams.put(AbilityKey.SourceSA, sa);
-            runParams.put(AbilityKey.FirstTime, firstGain);
-            game.getTriggerHandler().runTrigger(TriggerType.LifeGained, runParams, false);
-
-            game.fireEvent(new GameEventPlayerLivesChanged(this, oldLife, life));
-            return true;
+        if (lifeGain <= 0) {
+            return false;
         }
 
-        System.out.println("Player - trying to gain negative or 0 life");
-        return false;
+        int oldLife = life;
+        life += lifeGain;
+        view.updateLife(this);
+        boolean firstGain = lifeGainedTimesThisTurn == 0;
+        lifeGainedThisTurn += lifeGain;
+        lifeGainedTimesThisTurn++;
+
+        // team mates need to be notified about life gained
+        for (final Player p : getTeamMates(true)) {
+            p.addLifeGainedByTeamThisTurn(lifeGain);
+        }
+
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
+        runParams.put(AbilityKey.LifeAmount, lifeGain);
+        runParams.put(AbilityKey.Source, source);
+        runParams.put(AbilityKey.SourceSA, sa);
+        runParams.put(AbilityKey.FirstTime, firstGain);
+        game.getTriggerHandler().runTrigger(TriggerType.LifeGained, runParams, false);
+
+        game.fireEvent(new GameEventPlayerLivesChanged(this, oldLife, life));
+        return true;
     }
 
     public final boolean canGainLife() {
@@ -994,9 +989,8 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
         KeywordsChange cks = new KeywordsChange(kws, removeKeywords, false);
-        if (!cks.getAbilities().isEmpty() || !cks.getTriggers().isEmpty() || !cks.getReplacements().isEmpty() || !cks.getStaticAbilities().isEmpty()) {
-            getKeywordCard().addChangedCardTraits(
-                cks.getAbilities(), null, cks.getTriggers(), cks.getReplacements(), cks.getStaticAbilities(), false, false, timestamp, staticId);
+        if (cks.hasTraits()) {
+            getKeywordCard().addChangedCardTraits(cks, timestamp, staticId, true);
         }
         changedKeywords.put(timestamp, staticId, cks);
         updateKeywords();
@@ -1026,14 +1020,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return change;
     }
 
-    /**
-     * Append a keyword change which adds the specified keyword.
-     * @param keyword the keyword to add.
-     */
-    public final void addKeyword(final String keyword) {
-        addChangedKeywords(ImmutableList.of(keyword), ImmutableList.of(), getGame().getNextTimestamp(), 0);
-    }
-
     @Override
     public final boolean hasKeyword(final String keyword) {
         return keywords.contains(keyword);
@@ -1047,18 +1033,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         keywords.clear();
 
         // see if keyword changes are in effect
-        for (final KeywordsChange ck : changedKeywords.values()) {
-            if (ck.isRemoveAllKeywords()) {
-                keywords.clear();
-            }
-            else if (ck.getRemoveKeywords() != null) {
-                keywords.removeAll(ck.getRemoveKeywords());
-            }
-
-            if (ck.getKeywords() != null) {
-                keywords.insertAll(ck.getKeywords());
-            }
-        }
+        keywords.applyChanges(changedKeywords.values());
         view.updateKeywords(this);
         updateKeywordCardAbilityText();
     }
@@ -3395,6 +3370,11 @@ public class Player extends GameEntity implements Comparable<Player> {
             return;
         }
 
+        if (!card.getGame().getRules().useAnte()) {
+            // Only track permanent ownership changes when ante is used
+            return;
+        }
+
         if (lostOwnership.contains(card)) {
             lostOwnership.remove(card);
         } else {
@@ -3406,6 +3386,14 @@ public class Player extends GameEntity implements Comparable<Player> {
         } else {
             oldOwner.lostOwnership.add(card);
         }
+    }
+
+    public void destroyPhysicalCard(Card card) {
+        if(!card.isCollectible()) {
+            return;
+        }
+
+        card.getOwner().lostOwnership.add(card);
     }
 
     public CardCollectionView getLostOwnership() {

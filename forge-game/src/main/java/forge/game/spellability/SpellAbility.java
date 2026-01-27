@@ -27,7 +27,6 @@ import forge.game.card.*;
 import forge.game.cost.CostSacrifice;
 import forge.game.staticability.StaticAbilityCantBeCopied;
 import forge.util.*;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -391,7 +390,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return result;
     }
 
-    public final boolean isManaAbility() {
+    @Override
+    public boolean isManaAbility() {
         // Check whether spell or ability first
         if (isSpell()) {
             return false;
@@ -402,7 +402,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return false; //Loyalty ability, not a mana ability.
         }
         // CR 605.1b
-        if (isTrigger() && this.getTrigger().getMode() != TriggerType.TapsForMana && this.getTrigger().getMode() != TriggerType.ManaAdded) {
+        if (isTrigger()) {
+            if (!TriggerType.TapsForMana.equals(getTrigger().getMode()) && !TriggerType.ManaAdded.equals(getTrigger().getMode())) {
+                return false;
+            }
+        } else if (!isActivatedAbility()) {
             return false;
         }
 
@@ -835,9 +839,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public List<Mana> getPayingMana() {
         return payingMana;
     }
-    public void setPayingMana(List<Mana> paying) {
-        payingMana = Lists.newArrayList(paying);
-    }
     public final void clearManaPaid() {
         payingMana.clear();
     }
@@ -845,8 +846,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public final int getSpendPhyrexianMana() {
         return this.spentPhyrexian;
     }
-    public final void setSpendPhyrexianMana(boolean bool) {
-        this.spentPhyrexian = bool ? this.spentPhyrexian + 2 : 0;
+    public final void setSpendPhyrexianMana(boolean inc) {
+        this.spentPhyrexian = inc ? this.spentPhyrexian + 2 : 0;
     }
 
     public final int getAmountLifePaid() {
@@ -2499,7 +2500,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public SpellAbility getOriginalAbility() {
-        return grantorOriginal == null ? null : ObjectUtils.firstNonNull(grantorOriginal.getOriginalAbility(), grantorOriginal);
+        return grantorOriginal == null ? null : Objects.requireNonNullElse(grantorOriginal.getOriginalAbility(), grantorOriginal);
     }
     public void setOriginalAbility(final SpellAbility sa) {
         grantorOriginal = sa;
@@ -2666,7 +2667,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public int getOptionalKeywordAmount(KeywordInterface kw) {
         long staticId = kw.getStatic() == null ? 0 : kw.getStatic().getId();
-        return ObjectUtils.firstNonNull(this.optionalKeywordAmount.get(kw.getKeyword(), Pair.of(kw.getIdx(), staticId)), 0);
+        return Objects.requireNonNullElse(this.optionalKeywordAmount.get(kw.getKeyword(), Pair.of(kw.getIdx(), staticId)), 0);
     }
     public int getOptionalKeywordAmount(Keyword kw) {
         return this.optionalKeywordAmount.row(kw).values().stream().mapToInt(i->i).sum();

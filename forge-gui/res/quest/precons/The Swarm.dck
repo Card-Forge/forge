@@ -14,7 +14,9 @@ Image=the_swarm.jpg
 1 Disenchant|TMP
 1 Elven Warhounds|TMP
 1 Elvish Fury|TMP
-14 Forest|TMP
+5 Forest|TMP|1
+5 Forest|TMP|2
+4 Forest|TMP|3
 1 Krakilin|TMP
 3 Master Decoy|TMP
 4 Muscle Sliver|TMP
@@ -22,7 +24,9 @@ Image=the_swarm.jpg
 2 Overrun|TMP
 3 Pacifism|TMP
 3 Pincher Beetles|TMP
-7 Plains|TMP
+3 Plains|TMP|1
+2 Plains|TMP|2
+2 Plains|TMP|3
 2 Ranger en-Vec|TMP
 1 Recycle|TMP
 3 Rootwalla|TMP

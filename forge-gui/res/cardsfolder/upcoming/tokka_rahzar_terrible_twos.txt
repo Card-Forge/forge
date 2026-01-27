@@ -1,0 +1,10 @@
+Name:Tokka & Rahzar, Terrible Twos
+ManaCost:BR BR
+Types:Legendary Creature Turtle Wolf Mutant
+PT:3/2
+R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
+K:Menace
+T:Mode$ SpellCast | ValidCard$ Card | Execute$ TrigDamage | TriggerZones$ Battlefield | ValidSAonCard$ Spell.ManaSpent LTX | TriggerDescription$ Whenever a player casts a spell, if the amount of mana spent to cast it was less than its mana value, NICKNAME deal 3 damage to that player.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 3
+SVar:X:Count$CardManaCost
+Oracle:This spell can't be countered.\nMenace\nWhenever a player casts a spell, if the amount of mana spent to cast it was less than its mana value, Tokka & Rahzar deal 3 damage to that player.

@@ -48,14 +48,14 @@ import forge.util.collect.FCollectionView;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class CardState implements GameObject, IHasSVars, ITranslatable {
     private String name = "";
@@ -104,6 +104,8 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     private SpellAbility manifestUp;
     private SpellAbility cloakUp;
 
+    private LandTraitChanges landTraitChanges = new LandTraitChanges(this);
+
     public CardState(Card card, CardStateName name) {
         this(card.getView().createAlternateState(name), card);
     }
@@ -141,7 +143,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     }
 
     public CardTypeView getTypeWithChanges() {
-        return ObjectUtils.firstNonNull(this.changedType, getType());
+        return Objects.requireNonNullElse(this.changedType, getType());
     }
 
     public void updateTypes() {
@@ -396,59 +398,41 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
 
     public final FCollectionView<SpellAbility> getSpellAbilities() {
         FCollection<SpellAbility> newCol = new FCollection<>();
-        updateSpellAbilities(newCol, null);
+        updateSpellAbilities(newCol);
         newCol.addAll(abilities);
-        card.updateSpellAbilities(newCol, this, null);
+        card.updateSpellAbilities(newCol, this);
         return newCol;
     }
     public final FCollectionView<SpellAbility> getManaAbilities() {
         FCollection<SpellAbility> newCol = new FCollection<>();
-        updateSpellAbilities(newCol, true);
-        // stream().toList() causes crash on Android 8-13, use Collectors.toList()
-        newCol.addAll(abilities.stream().filter(SpellAbility::isManaAbility).collect(Collectors.toList()));
-        card.updateSpellAbilities(newCol, this, true);
+        updateSpellAbilities(newCol);
+        newCol.addAll(abilities);
+        card.updateSpellAbilities(newCol, this);
+        newCol.removeIf(Predicate.not(SpellAbility::isManaAbility));
         return newCol;
     }
     public final FCollectionView<SpellAbility> getNonManaAbilities() {
         FCollection<SpellAbility> newCol = new FCollection<>();
-        updateSpellAbilities(newCol, false);
-        // stream().toList() causes crash on Android 8-13, use Collectors.toList()
-        newCol.addAll(abilities.stream().filter(Predicate.not(SpellAbility::isManaAbility)).collect(Collectors.toList()));
-        card.updateSpellAbilities(newCol, this, false);
+        updateSpellAbilities(newCol);
+        newCol.addAll(abilities);
+        card.updateSpellAbilities(newCol, this);
+        newCol.removeIf(SpellAbility::isManaAbility);
         return newCol;
     }
 
-    protected final void updateSpellAbilities(FCollection<SpellAbility> newCol, Boolean mana) {
+    protected final void updateSpellAbilities(FCollection<SpellAbility> newCol) {
         // add Split to Original
         if (getStateName().equals(CardStateName.Original)) {
             if (getCard().hasState(CardStateName.LeftSplit)) {
                 CardState leftState = getCard().getState(CardStateName.LeftSplit);
-                Collection<SpellAbility> leftAbilities = leftState.abilities;
-                if (null != mana) {
-                    leftAbilities = leftAbilities.stream()
-                            .filter(mana ? SpellAbility::isManaAbility : Predicate.not(SpellAbility::isManaAbility))
-                            // stream().toList() causes crash on Android 8-13, use Collectors.toList()
-                            .collect(Collectors.toList());
-                }
-                newCol.addAll(leftAbilities);
-                leftState.updateSpellAbilities(newCol, mana);
+                newCol.addAll(leftState.abilities);
+                leftState.updateSpellAbilities(newCol);
             }
             if (getCard().hasState(CardStateName.RightSplit)) {
                 CardState rightState = getCard().getState(CardStateName.RightSplit);
-                Collection<SpellAbility> rightAbilities = rightState.abilities;
-                if (null != mana) {
-                    rightAbilities = rightAbilities.stream()
-                            .filter(mana ? SpellAbility::isManaAbility : Predicate.not(SpellAbility::isManaAbility))
-                            // stream().toList() causes crash on Android 8-13, use Collectors.toList()
-                            .collect(Collectors.toList());
-                }
-                newCol.addAll(rightAbilities);
-                rightState.updateSpellAbilities(newCol, mana);
+                newCol.addAll(rightState.abilities);
+                rightState.updateSpellAbilities(newCol);
             }
-        }
-
-        if (null != mana && true == mana) {
-            return;
         }
 
         // SpellPermanent only for Original State
@@ -495,6 +479,59 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             }
             newCol.add(permanentAbility);
         }
+    }
+
+    public LandTraitChanges getLandTraitChanges() { return this.landTraitChanges; }
+
+    record LandTraitChanges(CardState state, Map<MagicColor.Color, SpellAbility> map) implements ICardTraitChanges
+    {
+        LandTraitChanges(CardState state) {
+            this(state, Maps.newEnumMap(MagicColor.Color.class));
+        }
+
+        public List<SpellAbility> applySpellAbility(List<SpellAbility> list) {
+            if (state.getCard().hasRemoveIntrinsic()) {
+                list.clear();
+            }
+            CardTypeView type = state.getTypeWithChanges();
+            if (!type.isLand()) {
+                return list;
+            }
+            for (MagicColor.Color c : MagicColor.Color.values()) {
+               if (c.getBasicLandType() == null) {
+                   continue;
+               }
+               if (type.hasSubtype(c.getBasicLandType())) {
+                   list.add(map.computeIfAbsent(c, a -> {
+                       String abString  = "AB$ Mana | Cost$ T | Produced$ " + a.getShortName() +
+                               " | Secondary$ True | SpellDescription$ Add " + a.getSymbol() + ".";
+                       SpellAbility sa = AbilityFactory.getAbility(abString, state);
+                       sa.setIntrinsic(true); // always intrinsic
+                       return sa;
+                   }));
+               }
+            }
+            return list;
+        }
+        public List<Trigger> applyTrigger(List<Trigger> list) {
+            if (state.getCard().hasRemoveIntrinsic()) {
+                list.clear();
+            }
+            return list;
+        }
+        public List<ReplacementEffect> applyReplacementEffect(List<ReplacementEffect> list) {
+            if (state.getCard().hasRemoveIntrinsic()) {
+                list.clear();
+            }
+            return list;
+        }
+        public List<StaticAbility> applyStaticAbility(List<StaticAbility> list) {
+            if (state.getCard().hasRemoveIntrinsic()) {
+                list.clear();
+            }
+            return list;
+        }
+        public ICardTraitChanges copy(Card host, boolean lki) { return this; }
     }
 
     public final Iterable<SpellAbility> getIntrinsicSpellAbilities() {

@@ -103,6 +103,10 @@ public class RewardData implements Serializable {
         if(legals != null)
             allCards = IterableUtil.filter(allCards, new CardUtil.CardPredicate(legals, true));
 
+        if (Config.instance().getSettingData().excludeAlchemyVariants) {
+            allCards = IterableUtil.filter(allCards, PaperCardPredicates.IS_REBALANCED.negate());
+        }
+        
         // Filter out by editions and obtainability
         if (configData.allowedEditions != null && configData.allowedEditions.length > 0) {
             allCards = IterableUtil.filter(allCards, PaperCardPredicates.printedInAnyEditions(configData.allowedEditions));
