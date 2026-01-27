@@ -857,7 +857,7 @@ public class Game {
         }
 
         for (Card c : cards) {
-            if (c.isPlane() || c.isPhenomenon()) {
+            if ((c.isPlane() || c.isPhenomenon()) && c.isInZone(ZoneType.Command)) {
                 if (c.getController().equals(p)) {
                     planarControllerLost = true;
                 }
