@@ -4,7 +4,7 @@ This directory contains archived test artifacts from comprehensive test runs. Th
 
 ## Contents
 
-When comprehensive tests are run and results are documented in `TESTING_DOCUMENTATION.md`, the following artifacts are archived here:
+When comprehensive tests are run and results are documented in `.documentation/Testing.md`, the following artifacts are archived here:
 
 - `comprehensive-test-results-YYYYMMDD-HHMMSS.md` - Analysis report with aggregated metrics
 - `network-debug-runYYYYMMDD-HHMMSS-gameN-Pp-test.log` - Individual game logs
@@ -23,4 +23,4 @@ These files provide:
 
 ## Policy
 
-Test artifacts MUST be archived here BEFORE updating `TESTING_DOCUMENTATION.md` with any test metrics. This ensures all documented numbers can be independently verified.
+Test artifacts MUST be archived here BEFORE updating `.documentation/Testing.md` with any test metrics. This ensures all documented numbers can be independently verified.

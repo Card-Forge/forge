@@ -54,8 +54,21 @@ public class NetworkLogAnalyzer {
     private static final Pattern GAME_INDEX_PATTERN = Pattern.compile(
             "game(\\d+)");
 
+    // Pattern for "deck=[name], ready=" format (deck names may contain commas)
+    private static final Pattern DECK_EQUALS_PATTERN = Pattern.compile(
+            "deck=(.+?),\\s*ready=", Pattern.CASE_INSENSITIVE);
+
+    // Pattern for "deck pre-loaded: [name])" format - capture until final ) at end of line
+    // Handles deck names with parentheses like "Core Set 2019 Welcome Deck (BG)"
+    private static final Pattern DECK_PRELOADED_PATTERN = Pattern.compile(
+            "deck\\s+pre-loaded:\\s*(.+)\\)\\s*$", Pattern.CASE_INSENSITIVE);
+
+    // Matches other deck name formats:
+    // - "deck:" or "deck loaded:"
+    // - "with deck:" or "Sending deck:"
+    // - "Client deck loaded:"
     private static final Pattern DECK_NAME_PATTERN = Pattern.compile(
-            "(?:deck(?:\\s+loaded)?:|with deck:|Sending deck:)\\s*(.+?)(?:\\s*\\(|$)", Pattern.CASE_INSENSITIVE);
+            "(?:deck(?:\\s+loaded)?:|with deck:|Sending deck:|Client deck loaded:)\\s*(.+?)(?:\\s*\\(|$)", Pattern.CASE_INSENSITIVE);
 
     /**
      * Analyze a single log file.
@@ -163,7 +176,24 @@ public class NetworkLogAnalyzer {
                     continue;
                 }
 
-                // Deck names
+                // Deck names - try multiple patterns to handle different log formats
+                // First try "deck=[name], ready=" format (handles deck names with commas)
+                Matcher deckEqualsMatcher = DECK_EQUALS_PATTERN.matcher(line);
+                if (deckEqualsMatcher.find()) {
+                    String deckName = deckEqualsMatcher.group(1).trim();
+                    metrics.addDeckName(deckName);
+                    continue;
+                }
+
+                // Try "deck pre-loaded: [name])" format
+                Matcher deckPreloadedMatcher = DECK_PRELOADED_PATTERN.matcher(line);
+                if (deckPreloadedMatcher.find()) {
+                    String deckName = deckPreloadedMatcher.group(1).trim();
+                    metrics.addDeckName(deckName);
+                    continue;
+                }
+
+                // Try other deck formats
                 Matcher deckMatcher = DECK_NAME_PATTERN.matcher(line);
                 if (deckMatcher.find()) {
                     String deckName = deckMatcher.group(1).trim();

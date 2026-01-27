@@ -514,8 +514,8 @@ return () -> {
     //
     // Local games: Unaffected (onGameStarted typically no-op)
     //
-    // See: BRANCH_DOCUMENTATION.md#reconnection-support
-    //      REFACTOR_OPTIONS.md for details
+    // See: NetworkPlay.md#reconnection-support
+    //      RefactorOptions.md for details
     //
     // DO NOT REORDER without testing network reconnection!
     // ═══════════════════════════════════════════════════════════════════
@@ -615,7 +615,7 @@ If refactoring is pursued, the following checklist outlines the implementation s
 
 ### Phase 5: Documentation
 - [ ] Add extensive comments to `GameLobby.java`
-- [ ] Update `BRANCH_DOCUMENTATION.md`
+- [ ] Update `NetworkPlay.md`
 - [ ] Final regression test suite
 
 ---

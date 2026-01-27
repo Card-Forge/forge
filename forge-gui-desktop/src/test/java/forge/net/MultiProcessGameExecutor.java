@@ -291,7 +291,7 @@ public class MultiProcessGameExecutor {
 
             // Brief delay between batches to allow port cleanup
             // This helps prevent "Address already in use" errors on rapid test execution
-            if (batchNumber < numBatches) {
+            if (batchNumber < totalBatches) {
                 try {
                     Thread.sleep(500); // 500ms delay between batches
                 } catch (InterruptedException e) {
@@ -580,6 +580,21 @@ public class MultiProcessGameExecutor {
                     .orElse(0.0);
         }
 
+        /**
+         * Format bytes in human-readable form (B, KB, MB, GB).
+         */
+        private String formatBytes(long bytes) {
+            if (bytes < 1024) {
+                return bytes + " B";
+            } else if (bytes < 1024 * 1024) {
+                return String.format("%.1f KB", bytes / 1024.0);
+            } else if (bytes < 1024L * 1024L * 1024L) {
+                return String.format("%.2f MB", bytes / (1024.0 * 1024.0));
+            } else {
+                return String.format("%.2f GB", bytes / (1024.0 * 1024.0 * 1024.0));
+            }
+        }
+
         public String toSummary() {
             return String.format(
                     "MultiProcess[games=%d, success=%d, failed=%d, errors=%d, timeouts=%d, " +
@@ -606,7 +621,7 @@ public class MultiProcessGameExecutor {
             sb.append(String.format("  Total Turns:     %d\n", getTotalTurns()));
             sb.append(String.format("  Unique Decks:    %d (from %d total usages)\n", getUniqueDecksCount(), getTotalDeckUsages()));
             sb.append(String.format("  Delta Packets:   %d\n", getTotalDeltaPackets()));
-            sb.append(String.format("  Total Bytes:     %d (%.2f MB)\n", getTotalBytes(), getTotalBytes() / 1024.0 / 1024.0));
+            sb.append(String.format("  Total Bytes:     %d (%s)\n", getTotalBytes(), formatBytes(getTotalBytes())));
             double bytesPerPacket = getTotalDeltaPackets() > 0 ? (double) getTotalBytes() / getTotalDeltaPackets() : 0;
             sb.append(String.format("  Bytes/Packet:    %.1f\n", bytesPerPacket));
             sb.append("\n");

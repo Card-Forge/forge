@@ -32,8 +32,8 @@ The NetworkPlay branch introduces four major features to improve the multiplayer
 
 **Additional Resources:**
 - **[Debugging](#debugging)**: Comprehensive debug logging for diagnosing network synchronization issues.
-- **[BUGS.md](BUGS.md)**: Record of known bugs, debugging progress, and resolution status.
-- **[TESTING_DOCUMENTATION.md](TESTING_DOCUMENTATION.md)**: Automated headless testing infrastructure and comprehensive validation results (100 games: 97% success rate, 1 checksum mismatch auto-recovered, 99.5% bandwidth savings across 2-4 player configurations).
+- **[Debugging.md](Debugging.md)**: Record of known bugs, debugging progress, and resolution status.
+- **[Testing.md](Testing.md)**: Automated headless testing infrastructure and comprehensive validation results (100 games: 97% success rate, 1 checksum mismatch auto-recovered, 99.5% bandwidth savings across 2-4 player configurations).
 
 ---
 
@@ -94,7 +94,7 @@ NetGuiGame (server-side network proxy)
 - Prevents bloat in core game classes while maintaining full functionality
 - Enables clean merges with Master branch development
 
-The core interfaces (IGuiGame, IGameController) still contain network methods, but the implementation details are isolated in the NetworkGuiGame subclass hierarchy. Further refactoring to segregate these interfaces is documented in **[REFACTOR_OPTIONS.md](REFACTOR_OPTIONS.md)** if needed.
+The core interfaces (IGuiGame, IGameController) still contain network methods, but the implementation details are isolated in the NetworkGuiGame subclass hierarchy. Further refactoring to segregate these interfaces is documented in **[RefactorOptions.md](RefactorOptions.md)** if needed.
 
 ---
 
@@ -1429,7 +1429,7 @@ The example above shows 62% savings for a single packet, but comprehensive testi
 - **Early game**: Many new objects (cards drawn, permanents entering) require full serialization, resulting in lower per-packet savings (50-70%)
 - **Mid-game**: Mix of new objects and delta updates on existing objects (70-85% savings)
 - **Late game**: Mostly small deltas on existing objects with few new objects (95-99% savings per packet)
-- **Full game average**: Comprehensive testing (100 games) shows 99.5% savings—see [TESTING_DOCUMENTATION.md](TESTING_DOCUMENTATION.md) for detailed results
+- **Full game average**: Comprehensive testing (100 games) shows 99.5% savings—see [Testing.md](Testing.md) for detailed results
 
 **Performance Impact**:
 - Enabled: ~1-2% overhead (includes ObjectOutputStream for full state estimates)
@@ -1472,7 +1472,7 @@ All code implementation on the NetworkPlay branch was written by **Claude Code**
 - Enhanced chat notifications and UI improvements (~400 lines)
 - Automated testing infrastructure (~4,000 lines)
 - Debug logging system (~600 lines)
-- Documentation (BRANCH_DOCUMENTATION.md, TESTING_DOCUMENTATION.md, BUGS.md)
+- Documentation (NetworkPlay.md, Testing.md, Debugging.md)
 
 **Human contributions:**
 - Project direction and feature requirements

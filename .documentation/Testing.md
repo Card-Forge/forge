@@ -437,11 +437,13 @@ The only difference from live play is that AI makes decisions instantly rather t
 | Games with Warnings | 24 |
 | Total Turns | 2355 |
 | Average Turns per Game | 23.8 |
-| Unique Decks Used | 42 |
+| Unique Decks Used | 42* |
+
+*\* Deck count is an undercount due to log parsing limitations in archived results. Log analyzer regex has since been fixed to capture all deck name formats.*
 
 ### Key Finding: High Success Rate with Rare Desync
 
-The test achieved **98% success rate** across all player counts. One checksum mismatch occurred in a 4-player game (batch1-game2-4p at Turn 10), requiring investigation.
+The test achieved **98% success rate** across all player counts. One checksum mismatch occurred in a 4-player game (batch1-game2-4p at Turn 10), caused by PlayerView ID mismatch (now fixed).
 
 ### Bandwidth Usage Breakdown
 
@@ -494,7 +496,7 @@ A 4-player game experienced a desync at Turn 10, UNTAP phase. Client state diver
 ```
 Player 3 (Diana): GY=0, BF=3 (client) vs server state (needs investigation)
 ```
-This is a **protocol bug** requiring investigation - see BUGS.md #10.
+This was a **protocol bug** caused by PlayerView ID mismatch between server and client - now fixed (see Debugging.md #10).
 
 **2. Port Binding Error (batch8-game7-2p):**
 This occurs during rapid parallel test execution when port cleanup is incomplete between batches. This is a **test infrastructure issue**, not a protocol bug.

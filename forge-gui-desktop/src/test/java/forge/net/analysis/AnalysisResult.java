@@ -152,15 +152,17 @@ public class AnalysisResult {
     }
 
     /**
-     * Format bytes in human-readable form (B, KB, MB).
+     * Format bytes in human-readable form (B, KB, MB, GB).
      */
     private static String formatBytes(long bytes) {
         if (bytes < 1024) {
             return bytes + " B";
         } else if (bytes < 1024 * 1024) {
             return String.format("%.1f KB", bytes / 1024.0);
-        } else {
+        } else if (bytes < 1024L * 1024L * 1024L) {
             return String.format("%.2f MB", bytes / (1024.0 * 1024.0));
+        } else {
+            return String.format("%.2f GB", bytes / (1024.0 * 1024.0 * 1024.0));
         }
     }
 
