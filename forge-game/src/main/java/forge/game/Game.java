@@ -866,8 +866,6 @@ public class Game {
         }
 
         for (Card c : cards) {
-
-
             if (isMultiplayer) {
                 // unattach all "Enchant Player"
                 c.removeAttachedTo(p);
