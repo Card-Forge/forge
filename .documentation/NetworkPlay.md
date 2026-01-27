@@ -4,17 +4,18 @@
 
 1. [Overview](#overview)
 2. [Architectural Overlap with Forge Master Branch](#architectural-overlap-with-forge-master-branch)
-3. [Features](#features)
+3. [Feature Breakdown and Dependencies](#feature-breakdown-and-dependencies)
+4. [Features](#features)
    - [Delta Synchronization](#feature-1-delta-synchronization)
    - [Reconnection Support](#feature-2-reconnection-support)
    - [Enhanced Chat Notifications](#feature-3-enhanced-chat-notifications)
    - [Network Play UI Improvements](#feature-4-network-play-ui-improvements)
-4. [Files Modified](#files-modified)
-5. [Configuration](#configuration)
-6. [Debugging](#debugging)
-7. [Known Limitations](#known-limitations)
-8. [Future Improvements](#potential-future-improvements)
-9. [Authorship](#authorship)
+5. [Files Modified](#files-modified)
+6. [Configuration](#configuration)
+7. [Debugging](#debugging)
+8. [Known Limitations](#known-limitations)
+9. [Future Improvements](#potential-future-improvements)
+10. [Authorship](#authorship)
 
 ---
 
@@ -95,6 +96,51 @@ NetGuiGame (server-side network proxy)
 - Enables clean merges with Master branch development
 
 The core interfaces (IGuiGame, IGameController) still contain network methods, but the implementation details are isolated in the NetworkGuiGame subclass hierarchy. Further refactoring to segregate these interfaces is documented in **[RefactorOptions.md](RefactorOptions.md)** if needed.
+
+---
+
+## Feature Breakdown and Dependencies
+
+This branch contains ~10,000+ lines of changes that can be disaggregated into 5 independent feature categories:
+
+| # | Feature | Lines | Complexity | Dependencies |
+|---|---------|-------|------------|--------------|
+| 1 | Chat Improvements | ~200 | LOW | None |
+| 2 | Testing Tools | ~9,650 | LOW | None |
+| 3 | New Network Protocol | ~4,500 | HIGH | None (foundational) |
+| 4 | Other UI Improvements | ~500 | MEDIUM | Partial protocol dependency |
+| 5 | Reconnection Support | ~1,250 | MEDIUM | Requires protocol |
+
+### Dependency Diagram
+
+```
+┌─────────────────────┐
+│  Chat Improvements  │─────────────────────────────► INDEPENDENT
+│      (~200 lines)   │
+└─────────────────────┘
+
+┌─────────────────────┐
+│   Testing Tools     │─────────────────────────────► INDEPENDENT
+│    (~9,650 lines)   │
+└─────────────────────┘
+
+┌─────────────────────┐
+│  Network Protocol   │─────────────────────────────► FOUNDATIONAL
+│    (~4,500 lines)   │
+└──────────┬──────────┘
+           │
+           ├──────────────────────────────────────────────────────┐
+           │                                                      │
+           ▼                                                      ▼
+┌─────────────────────┐                              ┌─────────────────────┐
+│ UI Improvements     │                              │ Reconnection Support│
+│ (partial, ~200 ln)  │                              │    (~1,250 lines)   │
+│ - Player ID sync    │                              │                     │
+│ - Bandwidth metrics │                              │                     │
+└─────────────────────┘                              └─────────────────────┘
+```
+
+For detailed file inventories, PR sequencing recommendations, and review guidance, see **[FeatureDependencies.md](FeatureDependencies.md)**.
 
 ---
 

@@ -3,7 +3,7 @@
 ## Executive Summary
 
 The NetworkPlay branch introduces a modern network protocol for Forge's multiplayer functionality, achieving **99.5% bandwidth reduction** through delta synchronization. This document outlines a staged approach to submitting the ~10,000+ lines of changes for upstream review.
-
+ 
 ### Key Achievements
 - **Delta Synchronization Protocol**: Only transmits changed game state instead of full snapshots
 - **Reconnection Support**: Players can rejoin games within 5-minute timeout with AI takeover fallback
