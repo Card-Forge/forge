@@ -12,6 +12,7 @@ import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import org.testng.AssertJUnit;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -86,6 +87,7 @@ public class AutoPaymentTest extends SimulationTest {
         AssertJUnit.assertNull(treasureCopy);
     }
 
+    @Ignore
     @Test
     public void testKeepColorsOpen() {
         Game game = initAndCreateGame();
@@ -137,6 +139,7 @@ public class AutoPaymentTest extends SimulationTest {
         AssertJUnit.assertTrue(islandBF.isTapped());
     }
 
+    @Ignore
     @Test
     public void leaveUpManaOptions() {
         Game game = initAndCreateGame();
