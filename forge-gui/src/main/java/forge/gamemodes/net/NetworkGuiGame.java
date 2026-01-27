@@ -22,6 +22,7 @@ import forge.trackable.TrackableTypes;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.util.*;
+import java.util.AbstractMap;
 
 /**
  * Extension of AbstractGuiGame with network delta synchronization support.
@@ -238,19 +239,28 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
         pendingZoneUpdates.clear();
 
         // STEP 1: Create new objects first (so deltas can reference them)
+        // BUG FIX for Bug #12: Split into two phases to handle object cross-references
+        // Phase 1a: Create all objects and register in tracker (without properties)
+        // Phase 1b: Apply properties to all objects (now all objects exist for cross-references)
         Map<Integer, NewObjectData> newObjects = packet.getNewObjects();
+        List<Map.Entry<TrackableObject, byte[]>> pendingPropertyApplications = new ArrayList<>();
+
         if (!newObjects.isEmpty()) {
+            // Phase 1a: Create all objects first (without applying properties)
             for (NewObjectData newObj : newObjects.values()) {
                 try {
-                    createObjectFromData(newObj, tracker);
-                    newObjectCount++;
+                    TrackableObject created = createObjectOnly(newObj, tracker);
+                    if (created != null) {
+                        pendingPropertyApplications.add(new AbstractMap.SimpleEntry<>(created, newObj.getFullProperties()));
+                        newObjectCount++;
+                    }
                 } catch (Exception e) {
                     NetworkDebugLogger.error("[DeltaSync] Error creating new object " + newObj.getObjectId(), e);
                 }
             }
-            NetworkDebugLogger.log("[DeltaSync] Created %d new objects", newObjectCount);
+            NetworkDebugLogger.log("[DeltaSync] Created %d new objects (phase 1a)", newObjectCount);
 
-            // Verify CardViews are in tracker
+            // Verify CardViews are in tracker before property application
             int verifyCount = 0;
             for (NewObjectData newObj : newObjects.values()) {
                 if (newObj.getObjectType() == DeltaPacket.TYPE_CARD_VIEW) {
@@ -263,6 +273,19 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
                 }
             }
             NetworkDebugLogger.debug("[DeltaSync] Verified %d CardViews in tracker", verifyCount);
+
+            // Phase 1b: Now apply properties to all objects (all objects exist for cross-references)
+            int propsApplied = 0;
+            for (Map.Entry<TrackableObject, byte[]> pending : pendingPropertyApplications) {
+                try {
+                    applyDeltaToObject(pending.getKey(), pending.getValue(), tracker);
+                    propsApplied++;
+                } catch (Exception e) {
+                    NetworkDebugLogger.error("[DeltaSync] Error applying properties to object %d: %s",
+                            pending.getKey().getId(), e.getMessage());
+                }
+            }
+            NetworkDebugLogger.debug("[DeltaSync] Applied properties to %d objects (phase 1b)", propsApplied);
         }
 
         // STEP 2: Apply property deltas to existing objects
@@ -375,6 +398,10 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
      * Uses the same algorithm as the server for consistency.
      * IMPORTANT: Only use value-based fields here, not identity-based hashCode().
      * Server and client are separate JVMs, so Object.hashCode() will differ.
+     *
+     * BUG FIX (Bug #13): Sort players by ID before computing checksum.
+     * The player collection order may differ between server and client,
+     * causing checksum mismatches even when all values are identical.
      */
     private int computeStateChecksum(GameView gameView) {
         int hash = 17;
@@ -388,7 +415,13 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
             hash = 31 * hash + gameView.getPhase().ordinal();
         }
         if (gameView.getPlayers() != null) {
-            for (PlayerView player : gameView.getPlayers()) {
+            // Sort players by ID for consistent iteration order across server and client
+            List<PlayerView> sortedPlayers = new ArrayList<>();
+            for (PlayerView p : gameView.getPlayers()) {
+                sortedPlayers.add(p);
+            }
+            sortedPlayers.sort(Comparator.comparingInt(PlayerView::getId));
+            for (PlayerView player : sortedPlayers) {
                 hash = 31 * hash + player.getId();
                 hash = 31 * hash + player.getLife();
             }
@@ -399,6 +432,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
     /**
      * Log detailed checksum comparison to help identify what differs.
      * Called when checksum mismatch is detected.
+     * Players are sorted by ID to match the checksum computation order.
      */
     private void logChecksumDetails(GameView gameView, DeltaPacket packet) {
         NetworkDebugLogger.error("[DeltaSync] Checksum details (client state):");
@@ -406,7 +440,13 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
         NetworkDebugLogger.error("[DeltaSync]   Turn: %d", gameView.getTurn());
         NetworkDebugLogger.error("[DeltaSync]   Phase: %s", gameView.getPhase() != null ? gameView.getPhase().name() : "null");
         if (gameView.getPlayers() != null) {
-            for (PlayerView player : gameView.getPlayers()) {
+            // Sort players by ID to match checksum computation order
+            List<PlayerView> sortedPlayers = new ArrayList<>();
+            for (PlayerView p : gameView.getPlayers()) {
+                sortedPlayers.add(p);
+            }
+            sortedPlayers.sort(Comparator.comparingInt(PlayerView::getId));
+            for (PlayerView player : sortedPlayers) {
                 int handSize = player.getHand() != null ? player.getHand().size() : 0;
                 int graveyardSize = player.getGraveyard() != null ? player.getGraveyard().size() : 0;
                 int battlefieldSize = player.getBattlefield() != null ? player.getBattlefield().size() : 0;
@@ -522,6 +562,71 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
             }
             NetworkDebugLogger.debug("[DeltaSync] Created %s", objDesc);
         }
+    }
+
+    /**
+     * Create a new TrackableObject and register it in the Tracker, but do NOT apply properties yet.
+     * This is Phase 1a of the two-phase object creation process (Bug #12 fix).
+     * Properties are applied in Phase 1b after ALL objects have been created, so cross-references work.
+     *
+     * @param data the new object data from the delta packet
+     * @param tracker the tracker to register the object in
+     * @return the created object, or null if it already existed or creation failed
+     */
+    private TrackableObject createObjectOnly(NewObjectData data, Tracker tracker) {
+        int objectId = data.getObjectId();
+        int objectType = data.getObjectType();
+
+        // Log what type of object we're trying to create
+        String typeName = getObjectTypeName(objectType);
+
+        // Check if object of the SAME TYPE already exists
+        TrackableObject existing = findObjectByTypeAndId(tracker, objectType, objectId);
+        if (existing != null) {
+            NetworkDebugLogger.debug("[DeltaSync] %s ID=%d already exists (hash=%d), will apply properties in phase 1b",
+                    typeName, objectId, System.identityHashCode(existing));
+            return existing; // Return existing so properties get applied in phase 1b
+        }
+
+        // Log when creating new object (especially important for PlayerView)
+        if (objectType == DeltaPacket.TYPE_PLAYER_VIEW) {
+            NetworkDebugLogger.warn("[DeltaSync] Creating NEW PlayerView ID=%d - this may cause identity mismatch!", objectId);
+        }
+
+        // Create the appropriate object type and register in tracker
+        TrackableObject obj = null;
+        switch (objectType) {
+            case DeltaPacket.TYPE_CARD_VIEW:
+                obj = new CardView(objectId, tracker);
+                tracker.putObj(TrackableTypes.CardViewType, objectId, (CardView) obj);
+                NetworkDebugLogger.debug("[DeltaSync] Created CardView ID=%d, registered in tracker", objectId);
+                break;
+            case DeltaPacket.TYPE_PLAYER_VIEW:
+                obj = new PlayerView(objectId, tracker);
+                tracker.putObj(TrackableTypes.PlayerViewType, objectId, (PlayerView) obj);
+                NetworkDebugLogger.debug("[DeltaSync] Created PlayerView ID=%d hash=%d, registered in tracker", objectId, System.identityHashCode(obj));
+                break;
+            case DeltaPacket.TYPE_STACK_ITEM_VIEW:
+                obj = new forge.game.spellability.StackItemView(objectId, tracker);
+                tracker.putObj(TrackableTypes.StackItemViewType, objectId, (forge.game.spellability.StackItemView) obj);
+                break;
+            case DeltaPacket.TYPE_COMBAT_VIEW:
+                // CombatView uses ID -1 (singleton pattern)
+                obj = new forge.game.combat.CombatView(tracker);
+                tracker.putObj(TrackableTypes.CombatViewType, obj.getId(), (forge.game.combat.CombatView) obj);
+                break;
+            case DeltaPacket.TYPE_GAME_VIEW:
+                // GameView is special - return the existing one for property application
+                if (getGameView() != null) {
+                    return getGameView();
+                }
+                break;
+            default:
+                NetworkDebugLogger.error("[DeltaSync] Unknown object type: %d", objectType);
+                return null;
+        }
+
+        return obj;
     }
 
     /**

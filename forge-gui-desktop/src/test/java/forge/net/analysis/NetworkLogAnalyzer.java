@@ -352,7 +352,8 @@ public class NetworkLogAnalyzer {
         // Match patterns like:
         // - Old: network-debug-20260124-105844-21236-game0-4p-test.log
         // - New: network-debug-run20260127-213221-game0-4p-test.log
-        return analyzeDirectory(logDirectory, "network-debug-.*-game\\d+-\\d+p-test\\.log");
+        // - Batched: network-debug-run20260128-064643-batch0-game0-4p-test.log
+        return analyzeDirectory(logDirectory, "network-debug-.*-(?:batch\\d+-)?game\\d+-\\d+p-test\\.log");
     }
 
     /**

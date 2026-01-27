@@ -207,7 +207,8 @@ public class ComprehensiveDeltaSyncTest {
 
         if (!batchId.isEmpty()) {
             // Analyze only logs from the specified batch
-            String pattern = "network-debug-run" + batchId + "-game\\d+-\\d+p-test\\.log";
+            // Pattern supports both old format (game0-4p) and new format with batch (batch0-game0-4p)
+            String pattern = "network-debug-run" + batchId + "-(?:batch\\d+-)?game\\d+-\\d+p-test\\.log";
             System.out.println("Analyzing batch: " + batchId + " (pattern: " + pattern + ")");
             metrics = analyzer.analyzeDirectory(logDir, pattern);
         } else {

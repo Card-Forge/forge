@@ -722,6 +722,10 @@ public class DeltaSyncManager {
      * Compute a checksum for the current game state.
      * IMPORTANT: Only use value-based fields here, not identity-based hashCode().
      * Server and client are separate JVMs, so Object.hashCode() will differ.
+     *
+     * BUG FIX (Bug #13): Sort players by ID before computing checksum.
+     * The player collection order may differ between server and client,
+     * causing checksum mismatches even when all values are identical.
      */
     private int computeStateChecksum(GameView gameView) {
         int hash = 17;
@@ -735,7 +739,13 @@ public class DeltaSyncManager {
             hash = 31 * hash + gameView.getPhase().ordinal();
         }
         if (gameView.getPlayers() != null) {
-            for (PlayerView player : gameView.getPlayers()) {
+            // Sort players by ID for consistent iteration order across server and client
+            java.util.List<PlayerView> sortedPlayers = new java.util.ArrayList<>();
+            for (PlayerView p : gameView.getPlayers()) {
+                sortedPlayers.add(p);
+            }
+            sortedPlayers.sort(java.util.Comparator.comparingInt(PlayerView::getId));
+            for (PlayerView player : sortedPlayers) {
                 hash = 31 * hash + player.getId();
                 hash = 31 * hash + player.getLife();
             }
@@ -746,6 +756,7 @@ public class DeltaSyncManager {
     /**
      * Log detailed checksum information for debugging mismatches.
      * This mirrors the client-side logChecksumDetails for comparison.
+     * Players are sorted by ID to match the checksum computation order.
      */
     private void logChecksumDetails(GameView gameView, int checksum, long seq) {
         NetworkDebugLogger.log("[DeltaSync] Checksum for seq=%d: %d", seq, checksum);
@@ -754,7 +765,13 @@ public class DeltaSyncManager {
         NetworkDebugLogger.log("[DeltaSync]   Turn: %d", gameView.getTurn());
         NetworkDebugLogger.log("[DeltaSync]   Phase: %s", gameView.getPhase() != null ? gameView.getPhase().name() : "null");
         if (gameView.getPlayers() != null) {
-            for (PlayerView player : gameView.getPlayers()) {
+            // Sort players by ID to match checksum computation order
+            java.util.List<PlayerView> sortedPlayers = new java.util.ArrayList<>();
+            for (PlayerView p : gameView.getPlayers()) {
+                sortedPlayers.add(p);
+            }
+            sortedPlayers.sort(java.util.Comparator.comparingInt(PlayerView::getId));
+            for (PlayerView player : sortedPlayers) {
                 int handSize = player.getHand() != null ? player.getHand().size() : 0;
                 int graveyardSize = player.getGraveyard() != null ? player.getGraveyard().size() : 0;
                 int battlefieldSize = player.getBattlefield() != null ? player.getBattlefield().size() : 0;
