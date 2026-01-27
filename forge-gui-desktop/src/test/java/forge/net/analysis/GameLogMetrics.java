@@ -10,6 +10,7 @@ public class GameLogMetrics {
 
     // Game identification
     private String logFileName;
+    private int batchNumber = -1;  // -1 means not from a batch run
     private int gameIndex = -1;
     private int playerCount = 2;
 
@@ -63,6 +64,14 @@ public class GameLogMetrics {
 
     public void setLogFileName(String logFileName) {
         this.logFileName = logFileName;
+    }
+
+    public int getBatchNumber() {
+        return batchNumber;
+    }
+
+    public void setBatchNumber(int batchNumber) {
+        this.batchNumber = batchNumber;
     }
 
     public int getGameIndex() {
@@ -209,11 +218,12 @@ public class GameLogMetrics {
 
     @Override
     public String toString() {
+        String batchStr = batchNumber >= 0 ? "batch" + batchNumber + "-" : "";
         return String.format(
-                "GameLogMetrics[file=%s, players=%d, completed=%b, turns=%d, winner=%s, " +
+                "GameLogMetrics[file=%s, %sgame%d, players=%d, completed=%b, turns=%d, winner=%s, " +
                 "packets=%d, deltaBytes=%d, fullStateBytes=%d, savings=%.1f%%, " +
                 "warnings=%d, errors=%d, checksumMismatch=%b]",
-                logFileName, playerCount, gameCompleted, turnCount, winner,
+                logFileName, batchStr, gameIndex, playerCount, gameCompleted, turnCount, winner,
                 deltaPacketCount, totalDeltaBytes, totalFullStateBytes,
                 calculateBandwidthSavings(), warnings.size(), errors.size(), hasChecksumMismatch);
     }

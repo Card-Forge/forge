@@ -54,6 +54,9 @@ public class NetworkLogAnalyzer {
     private static final Pattern GAME_INDEX_PATTERN = Pattern.compile(
             "game(\\d+)");
 
+    private static final Pattern BATCH_NUMBER_PATTERN = Pattern.compile(
+            "batch(\\d+)");
+
     private static final Pattern DECK_NAME_PATTERN = Pattern.compile(
             "(?:deck(?:\\s+loaded)?:|with deck:|Sending deck:)\\s*(.+?)(?:\\s*\\(|$)", Pattern.CASE_INSENSITIVE);
 
@@ -66,6 +69,12 @@ public class NetworkLogAnalyzer {
     public GameLogMetrics analyzeLogFile(File logFile) {
         GameLogMetrics metrics = new GameLogMetrics();
         metrics.setLogFileName(logFile.getName());
+
+        // Try to extract batch number from filename (e.g., "batch0" -> 0)
+        Matcher batchMatcher = BATCH_NUMBER_PATTERN.matcher(logFile.getName());
+        if (batchMatcher.find()) {
+            metrics.setBatchNumber(Integer.parseInt(batchMatcher.group(1)));
+        }
 
         // Try to extract game index from filename (e.g., "game5" -> 5)
         Matcher indexMatcher = GAME_INDEX_PATTERN.matcher(logFile.getName());
@@ -278,7 +287,9 @@ public class NetworkLogAnalyzer {
      * @return List of GameLogMetrics for comprehensive test logs
      */
     public List<GameLogMetrics> analyzeComprehensiveTestLogs(File logDirectory) {
-        // Match patterns like: network-debug-20260124-105844-21236-game0-4p-test.log
+        // Match patterns like:
+        //   Old: network-debug-20260124-105844-21236-game0-4p-test.log
+        //   New: network-debug-run20260125-124431-batch0-game5-3p-test.log
         return analyzeDirectory(logDirectory, "network-debug-.*-game\\d+-\\d+p-test\\.log");
     }
 
@@ -298,6 +309,9 @@ public class NetworkLogAnalyzer {
     /**
      * Filter logs by timestamp extracted from filename.
      * Log filenames are formatted as: network-debug-YYYYMMDD-HHMMSS-PID-test.log
+     *
+     * Uses !isBefore() instead of isAfter() to include logs created at exactly
+     * the start time (>= comparison rather than > comparison).
      */
     private List<GameLogMetrics> filterLogsByTime(List<GameLogMetrics> metrics, File logDirectory, LocalDateTime afterTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
@@ -305,7 +319,7 @@ public class NetworkLogAnalyzer {
         return metrics.stream()
                 .filter(m -> {
                     LocalDateTime logTime = extractTimestampFromFilename(m.getLogFileName(), formatter);
-                    return logTime != null && logTime.isAfter(afterTime);
+                    return logTime != null && !logTime.isBefore(afterTime);
                 })
                 .collect(Collectors.toList());
     }
@@ -313,10 +327,11 @@ public class NetworkLogAnalyzer {
     /**
      * Extract timestamp from log filename.
      * Expected format: network-debug-YYYYMMDD-HHMMSS-PID-*.log
+     *              or: network-debug-runYYYYMMDD-HHMMSS-gameX-*.log (new format)
      */
     private LocalDateTime extractTimestampFromFilename(String filename, DateTimeFormatter formatter) {
-        // Pattern: network-debug-20260124-105844-21236-game0-4p-test.log
-        Pattern timestampPattern = Pattern.compile("network-debug-(\\d{8}-\\d{6})-");
+        // Pattern handles both old (network-debug-20260124-...) and new (network-debug-run20260125-...) formats
+        Pattern timestampPattern = Pattern.compile("network-debug-(?:run)?(\\d{8}-\\d{6})-");
         Matcher matcher = timestampPattern.matcher(filename);
         if (matcher.find()) {
             try {

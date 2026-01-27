@@ -99,5 +99,9 @@ __pycache__
 CLAUDE.md
 .claude/
 
-# Ignore network debug logs
+# Ignore network debug logs (working directory)
 forge-gui-desktop/logs
+
+# BUT keep archived test logs for GitHub verification
+!testlogs/
+!testlogs/**

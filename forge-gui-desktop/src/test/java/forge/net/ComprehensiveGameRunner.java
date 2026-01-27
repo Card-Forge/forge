@@ -11,13 +11,14 @@ import forge.net.scenarios.MultiplayerNetworkScenario;
  *
  * Designed to be invoked as a separate JVM process for parallel execution.
  *
- * Usage: java -cp <classpath> forge.net.ComprehensiveGameRunner <port> <gameIndex> <playerCount> [batchId]
+ * Usage: java -cp <classpath> forge.net.ComprehensiveGameRunner <port> <gameIndex> <playerCount> [batchId] [batchNumber]
  *
  * Arguments:
  *   port        - Network port for the game server
- *   gameIndex   - Index of this game (for identification in logs)
+ *   gameIndex   - Index of this game within its batch (0-9 for batch size 10)
  *   playerCount - Number of players (2, 3, or 4)
  *   batchId     - Optional batch ID for correlating logs from the same test run
+ *   batchNumber - Optional batch number (0-based) for unique log filenames
  *
  * Exit codes:
  *   0 = Success (game completed with winner and delta packets)
@@ -31,7 +32,7 @@ public class ComprehensiveGameRunner {
 
     public static void main(String[] args) {
         if (args.length < 3) {
-            System.err.println("Usage: ComprehensiveGameRunner <port> <gameIndex> <playerCount> [batchId]");
+            System.err.println("Usage: ComprehensiveGameRunner <port> <gameIndex> <playerCount> [batchId] [batchNumber]");
             System.exit(2);
         }
 
@@ -39,6 +40,7 @@ public class ComprehensiveGameRunner {
         int gameIndex;
         int playerCount;
         String batchId = null;
+        int batchNumber = -1;  // -1 means not specified
         try {
             port = Integer.parseInt(args[0]);
             gameIndex = Integer.parseInt(args[1]);
@@ -46,8 +48,11 @@ public class ComprehensiveGameRunner {
             if (args.length >= 4) {
                 batchId = args[3];
             }
+            if (args.length >= 5) {
+                batchNumber = Integer.parseInt(args[4]);
+            }
         } catch (NumberFormatException e) {
-            System.err.println("Invalid arguments: port, gameIndex, and playerCount must be integers");
+            System.err.println("Invalid arguments: port, gameIndex, playerCount, and batchNumber must be integers");
             System.exit(2);
             return;
         }
@@ -58,7 +63,7 @@ public class ComprehensiveGameRunner {
             return;
         }
 
-        System.exit(runGame(port, gameIndex, playerCount, batchId));
+        System.exit(runGame(port, gameIndex, playerCount, batchId, batchNumber));
     }
 
     /**
@@ -70,7 +75,7 @@ public class ComprehensiveGameRunner {
      * @return Exit code: 0=success, 1=failure, 2=error
      */
     public static int runGame(int port, int gameIndex, int playerCount) {
-        return runGame(port, gameIndex, playerCount, null);
+        return runGame(port, gameIndex, playerCount, null, -1);
     }
 
     /**
@@ -80,16 +85,22 @@ public class ComprehensiveGameRunner {
      * @param gameIndex Index of this game (for identification)
      * @param playerCount Number of players (2, 3, or 4)
      * @param batchId Optional batch ID for correlating logs from the same test run
+     * @param batchNumber Batch number (0-based) for unique log filenames, or -1 if not specified
      * @return Exit code: 0=success, 1=failure, 2=error
      */
-    public static int runGame(int port, int gameIndex, int playerCount, String batchId) {
+    public static int runGame(int port, int gameIndex, int playerCount, String batchId, int batchNumber) {
         try {
             // Set up logging for this game instance
             NetworkDebugLogger.setTestMode(true);
             if (batchId != null) {
                 NetworkDebugLogger.setBatchId(batchId);
             }
-            NetworkDebugLogger.setInstanceSuffix("game" + gameIndex + "-" + playerCount + "p");
+            // Include batch number in suffix for unique log filenames across batches
+            // Format: batch0-game5-3p or game5-3p (if no batch number)
+            String suffix = (batchNumber >= 0)
+                    ? "batch" + batchNumber + "-game" + gameIndex + "-" + playerCount + "p"
+                    : "game" + gameIndex + "-" + playerCount + "p";
+            NetworkDebugLogger.setInstanceSuffix(suffix);
 
             // Initialize FModel
             if (GuiBase.getInterface() == null) {

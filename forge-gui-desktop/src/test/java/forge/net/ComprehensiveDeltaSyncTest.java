@@ -14,6 +14,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 /**
  * Comprehensive delta sync validation test.
@@ -75,7 +76,8 @@ public class ComprehensiveDeltaSyncTest {
 
         // 2. Run all games
         NetworkDebugLogger.log("%s Executing %d games...", LOG_PREFIX, executor.getTotalGames());
-        LocalDateTime testStartTime = LocalDateTime.now();
+        // Truncate to seconds since log filenames only have second precision
+        LocalDateTime testStartTime = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
         long startTime = System.currentTimeMillis();
 
         MultiProcessGameExecutor.ExecutionResult executionResult = executor.execute();
@@ -123,7 +125,8 @@ public class ComprehensiveDeltaSyncTest {
 
         NetworkDebugLogger.log("%s Configuration:\n%s", LOG_PREFIX, executor.getConfigurationSummary());
 
-        LocalDateTime testStartTime = LocalDateTime.now();
+        // Truncate to seconds since log filenames only have second precision
+        LocalDateTime testStartTime = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
         MultiProcessGameExecutor.ExecutionResult executionResult = executor.execute();
 
         System.out.println("\n" + executionResult.toDetailedReport());

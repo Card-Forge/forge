@@ -24,8 +24,8 @@ public final class NetworkDebugConfig {
     private static final boolean DEFAULT_DEBUG_LOGGER_ENABLED = true;
     private static final String DEFAULT_CONSOLE_LEVEL = "INFO";
     private static final String DEFAULT_FILE_LEVEL = "DEBUG";
-    private static final int DEFAULT_MAX_LOG_FILES = 20;
-    private static final boolean DEFAULT_LOG_CLEANUP_ENABLED = true;
+    private static final int DEFAULT_MAX_LOG_FILES = 0;  // 0 = no limit
+    private static final boolean DEFAULT_LOG_CLEANUP_ENABLED = false;  // Disabled for testing
     private static final String DEFAULT_LOG_DIRECTORY = "logs";
 
     private NetworkDebugConfig() {
