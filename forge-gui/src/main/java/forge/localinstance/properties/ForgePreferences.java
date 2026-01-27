@@ -330,6 +330,20 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
                 BRAWL_P5_DECK_STATE, BRAWL_P6_DECK_STATE,
                 BRAWL_P7_DECK_STATE, BRAWL_P8_DECK_STATE };
 
+        public static  FPref[] PHASES_AI = {
+                PHASE_AI_UPKEEP, PHASE_AI_DRAW, PHASE_AI_MAIN1,
+                PHASE_AI_BEGINCOMBAT, PHASE_AI_DECLAREATTACKERS,
+                PHASE_AI_DECLAREBLOCKERS, PHASE_AI_FIRSTSTRIKE,
+                PHASE_AI_COMBATDAMAGE, PHASE_AI_ENDCOMBAT,
+                PHASE_AI_MAIN2, PHASE_AI_EOT, PHASE_AI_CLEANUP,
+        };
+        public static  FPref[] PHASES_HUMAN= {
+                PHASE_HUMAN_UPKEEP, PHASE_HUMAN_DRAW, PHASE_HUMAN_MAIN1,
+                PHASE_HUMAN_BEGINCOMBAT, PHASE_HUMAN_DECLAREATTACKERS,
+                PHASE_HUMAN_DECLAREBLOCKERS, PHASE_HUMAN_FIRSTSTRIKE ,
+                PHASE_HUMAN_COMBATDAMAGE , PHASE_HUMAN_ENDCOMBAT ,
+                PHASE_HUMAN_MAIN2, PHASE_HUMAN_EOT , PHASE_HUMAN_CLEANUP,
+        };
     }
 
     /** Instantiates a ForgePreferences object. */
