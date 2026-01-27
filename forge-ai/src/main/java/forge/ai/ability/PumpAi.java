@@ -315,10 +315,14 @@ public class PumpAi extends PumpAiBase {
 
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
+
+                // Pump can have negative effects as well.
+                if (ComputerUtilCard.shouldPumpCard(ai, sa, card, defense, attack, keywords, false)) {
+                    return new AiAbilityDecision(50, AiPlayDecision.WillPlay);
+                }
+
                 if (!card.getController().isOpponentOf(ai)) {
-                    if (ComputerUtilCard.shouldPumpCard(ai, sa, card, defense, attack, keywords, false)) {
-                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                    } else if (containsUsefulKeyword(ai, keywords, card, sa, attack)) {
+                    if (containsUsefulKeyword(ai, keywords, card, sa, attack)) {
                         if (game.getPhaseHandler().is(PhaseType.MAIN1) && isSorcerySpeed(sa, ai) ||
                                 game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS, ai) ||
                                 game.getPhaseHandler().is(PhaseType.COMBAT_BEGIN, ai)) {
