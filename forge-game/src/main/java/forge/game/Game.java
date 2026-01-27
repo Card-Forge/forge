@@ -856,8 +856,8 @@ public class Game {
             }
         }
 
-        for (Card c : cards) {
-            if (c.isPlane() || c.isPhenomenon()) {
+        if (getActivePlanes() != null) {
+            for (Card c : getActivePlanes()) {
                 if (c.getController().equals(p)) {
                     planarControllerLost = true;
                 }
@@ -865,7 +865,9 @@ public class Game {
                     planarOwnerLost = true;
                 }
             }
+        }
 
+        for (Card c : cards) {
             if (isMultiplayer) {
                 // unattach all "Enchant Player"
                 c.removeAttachedTo(p);
