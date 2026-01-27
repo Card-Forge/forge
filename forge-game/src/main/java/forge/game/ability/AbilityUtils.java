@@ -3197,17 +3197,19 @@ public class AbilityUtils {
         } else if (s[0].contains("Thrice")) {
             return num * 3;
         } else if (s[0].contains("HalfUp")) {
-            return (int) (Math.ceil(num / 2.0));
+            return (int) Math.ceil(num / 2.0);
         } else if (s[0].contains("HalfDown")) {
-            return (int) (Math.floor(num / 2.0));
+            return (int) Math.floor(num / 2.0);
         } else if (s[0].contains("ThirdUp")) {
-            return (int) (Math.ceil(num / 3.0));
+            return (int) Math.ceil(num / 3.0);
         } else if (s[0].contains("ThirdDown")) {
-            return (int) (Math.floor(num / 3.0));
+            return (int) Math.floor(num / 3.0);
         } else if (s[0].contains("Negative")) {
             return num * -1;
         } else if (s[0].contains("Times")) {
             return num * secondaryNum;
+        } else if (s[0].contains("Pow")) {
+            return (int) Math.pow(num, secondaryNum);
         } else if (s[0].contains("DivideEvenlyUp")) {
             if (secondaryNum == 0) {
                 return 0;
