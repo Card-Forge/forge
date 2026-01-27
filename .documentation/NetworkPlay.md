@@ -1128,7 +1128,7 @@ Connection failures now show diagnostic details instead of generic errors.
 | `forge-gui-desktop/src/test/java/forge/gamesimulationtests/NetworkOptimizationTest.java` | **NEW** - Unit tests for delta sync and sessions |
 | `forge-gui-desktop/src/test/java/forge/gamesimulationtests/LocalNetworkTestHarness.java` | **NEW** - Test infrastructure |
 
-**Note:** The main test infrastructure (headless testing, multi-process execution, comprehensive test runners) is in `forge-gui-desktop/src/test/java/forge/net/` (23 files). The files above are unit tests in the `gamesimulationtests/` package.
+**Note:** The main test infrastructure (headless testing, multi-process execution, comprehensive test runners) is in `forge-gui-desktop/src/test/java/forge/net/` (29 files). The files above are unit tests in the `gamesimulationtests/` package.
 
 ---
 

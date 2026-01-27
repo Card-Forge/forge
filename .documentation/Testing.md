@@ -68,7 +68,6 @@ All test code resides in `forge-gui-desktop/src/test/java/forge/net/`.
 
 | Scenario | Description |
 |----------|-------------|
-| `BasicGameScenario` | 2-player AI game completion |
 | `MultiplayerScenario` | 3-4 player games with local AI |
 | `MultiplayerNetworkScenario` | 3-4 player games with remote HeadlessNetworkClient connections |
 | `ReconnectionScenario` | Game with disconnect/AI takeover |
@@ -167,7 +166,7 @@ mvn -pl forge-gui-desktop -am verify \
 
 # Sequential games with increased timeout
 mvn -pl forge-gui-desktop -am verify \
-    -Dtest="SequentialGameTest#testConfigurableGameCount" \
+    -Dtest="BatchGameTest#testConfigurableSequential" \
     -Dtest.gameCount=10 -Dtest.timeoutMs=600000 \
     -Dsurefire.failIfNoSpecifiedTests=false
 ```
@@ -204,14 +203,14 @@ mvn -pl forge-gui-desktop test -Dtest=AutomatedNetworkTest#testReconnection
 **Sequential** (same JVM, one game at a time):
 ```bash
 mvn -pl forge-gui-desktop -am verify \
-    -Dtest="SequentialGameTest#testConfigurableGameCount" \
+    -Dtest="BatchGameTest#testConfigurableSequential" \
     -Dtest.gameCount=5 -Dsurefire.failIfNoSpecifiedTests=false
 ```
 
 **Multi-Process Parallel** (separate JVMs, true parallelism):
 ```bash
 mvn -pl forge-gui-desktop -am verify \
-    -Dtest="MultiProcessGameTest#testConfigurableGameCount" \
+    -Dtest="BatchGameTest#testConfigurableParallel" \
     -Dtest.gameCount=10 -Dsurefire.failIfNoSpecifiedTests=false
 ```
 
@@ -551,36 +550,49 @@ While the testing infrastructure exercises production network code, some real-wo
 ```
 forge-gui-desktop/src/test/java/forge/net/
 ├── AutomatedNetworkTest.java       # TestNG test suite
-├── HeadlessNetworkClient.java      # Remote client for delta sync
-├── HeadlessNetworkGuiGame.java     # NetworkGuiGame for headless client delta sync
+├── ComprehensiveDeltaSyncTest.java # 100-game validation test entry point
+├── BatchGameTest.java              # Sequential and parallel batch test entry point
+│
+├── # Headless Execution
+├── HeadlessGuiDesktop.java         # Headless GUI interface (bypasses display)
+├── HeadlessNetworkClient.java      # Remote TCP client for delta sync
+├── HeadlessNetworkGuiGame.java     # NetworkGuiGame for headless client
+├── NoOpGuiGame.java                # No-op IGuiGame implementation
+│
+├── # Game Harnesses
+├── AutomatedGameTestHarness.java   # Network game harness (ServerGameLobby)
+├── LocalGameTestHarness.java       # Non-network harness (LocalLobby)
 ├── NetworkClientTestHarness.java   # Host+client orchestration
-├── HeadlessGuiDesktop.java         # Headless GUI interface
-├── NoOpGuiGame.java                # No-op IGuiGame
-├── AutomatedGameTestHarness.java   # Network game harness
-├── LocalGameTestHarness.java       # Non-network game harness
-├── GameTestHarnessFactory.java     # Unified test execution
-├── GameTestMode.java               # Test mode enum
-├── TestConfiguration.java          # Command-line configuration
-├── TestDeckLoader.java             # Quest precon loading
-├── GameTestMetrics.java            # Metrics collection
-├── SequentialGameExecutor.java     # Sequential execution
-├── SequentialGameTest.java         # Sequential test entry point
-├── MultiProcessGameExecutor.java   # Parallel execution
-├── MultiProcessGameTest.java       # Multi-process test entry point
-├── SingleGameRunner.java           # Standalone 2-player runner
-├── ComprehensiveGameRunner.java    # 2-4 player runner
-├── ComprehensiveTestExecutor.java  # Test orchestration
-├── ComprehensiveDeltaSyncTest.java # Validation test entry point
+├── GameTestHarnessFactory.java     # Unified entry point for all modes
+│
+├── # Executors
+├── SequentialGameExecutor.java     # Sequential multi-game execution
+├── MultiProcessGameExecutor.java   # Parallel execution via JVM processes
+├── ComprehensiveTestExecutor.java  # Orchestrates mixed 2-4 player batches
+├── ComprehensiveGameRunner.java    # 2-4 player runner (subprocess entry)
+│
+├── # Utilities
+├── GameTestMode.java               # Enum: LOCAL, NETWORK_LOCAL, NETWORK_REMOTE
+├── TestConfiguration.java          # System properties configuration
+├── TestDeckLoader.java             # Quest precon deck loading
+├── GameTestMetrics.java            # Game and network metrics collection
+├── GameEventListener.java          # Game event logging interface
+├── PortAllocator.java              # Network port management
+├── NetworkAIPlayerFactory.java     # AI player creation for tests
+├── ConsoleNetworkTestRunner.java   # Standalone CI/CD entry point
+│
 ├── analysis/
-│   ├── NetworkLogAnalyzer.java     # Log parser
-│   ├── GameLogMetrics.java         # Per-game metrics
-│   └── AnalysisResult.java         # Aggregate results
+│   ├── NetworkLogAnalyzer.java     # Log file parsing
+│   ├── GameLogMetrics.java         # Per-game metrics storage
+│   └── AnalysisResult.java         # Aggregate results and reporting
+│
 └── scenarios/
-    ├── BasicGameScenario.java
-    ├── ReconnectionScenario.java
-    ├── MultiplayerScenario.java
-    └── MultiplayerNetworkScenario.java
+    ├── ReconnectionScenario.java       # Disconnect/AI takeover test
+    ├── MultiplayerScenario.java        # 3-4 player with local AI
+    └── MultiplayerNetworkScenario.java # 3-4 player with remote clients
 
 forge-gui/src/main/java/forge/gamemodes/net/
 └── NetworkGameEventListener.java   # Production game event logging
 ```
+
+**File Count:** 29 test files (23 main + 3 scenarios + 3 analysis)

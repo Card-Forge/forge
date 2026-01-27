@@ -39,7 +39,7 @@ public class MultiProcessGameExecutor {
     private final int basePort;
 
     // Runner class for different game types
-    private String runnerClass = "forge.net.SingleGameRunner"; // Default for 2-player
+    private String runnerClass = "forge.net.ComprehensiveGameRunner"; // Supports 2-4 players
 
     public MultiProcessGameExecutor() {
         this(DEFAULT_TIMEOUT_MS);
@@ -314,13 +314,9 @@ public class MultiProcessGameExecutor {
         command.add(runnerClass);
         command.add(String.valueOf(port));
         command.add(String.valueOf(gameIndex));
-
-        // Add player count, batch ID, and batch number for ComprehensiveGameRunner
-        if (runnerClass.equals("forge.net.ComprehensiveGameRunner")) {
-            command.add(String.valueOf(playerCount));
-            command.add(batchId);
-            command.add(String.valueOf(batchNumber));
-        }
+        command.add(String.valueOf(playerCount));
+        command.add(batchId);
+        command.add(String.valueOf(batchNumber));
 
         ProcessBuilder pb = new ProcessBuilder(command);
 
@@ -334,10 +330,8 @@ public class MultiProcessGameExecutor {
     private void parseResult(String resultLine, ExecutionResult result) {
         try {
             // Format for ComprehensiveGameRunner: gameIndex|success|playerCount|deltas|turns|bytes|winner|decks
-            // Format for SingleGameRunner: gameIndex|success|deltas|turns|bytes|winner
             String[] parts = resultLine.split("\\|");
             if (parts.length >= 7) {
-                // ComprehensiveGameRunner format with player count
                 int gameIndex = Integer.parseInt(parts[0]);
                 boolean success = Boolean.parseBoolean(parts[1]);
                 int playerCount = Integer.parseInt(parts[2]);
@@ -358,17 +352,6 @@ public class MultiProcessGameExecutor {
                 }
 
                 GameResult gameResult = new GameResult(success, playerCount, deltas, turns, bytes, winner, deckNames);
-                result.addResult(gameIndex, gameResult);
-            } else if (parts.length >= 6) {
-                // SingleGameRunner format (backward compatibility)
-                int gameIndex = Integer.parseInt(parts[0]);
-                boolean success = Boolean.parseBoolean(parts[1]);
-                long deltas = Long.parseLong(parts[2]);
-                int turns = Integer.parseInt(parts[3]);
-                long bytes = Long.parseLong(parts[4]);
-                String winner = "null".equals(parts[5]) ? null : parts[5];
-
-                GameResult gameResult = new GameResult(success, deltas, turns, bytes, winner);
                 result.addResult(gameIndex, gameResult);
             }
         } catch (Exception e) {
