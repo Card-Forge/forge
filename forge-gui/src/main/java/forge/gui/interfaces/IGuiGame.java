@@ -269,6 +269,8 @@ public interface IGuiGame {
 
     boolean shouldAutoYieldForPlayer(PlayerView player);
 
+    YieldMode getYieldMode(PlayerView player);
+
     int getPlayerCount();
 
     boolean shouldAutoYield(String key);

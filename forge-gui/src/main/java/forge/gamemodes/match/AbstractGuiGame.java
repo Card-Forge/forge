@@ -445,7 +445,12 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public final boolean mayAutoPass(final PlayerView player) {
-        return autoPassUntilEndOfTurn.contains(player);
+        // Check legacy auto-pass first
+        if (autoPassUntilEndOfTurn.contains(player)) {
+            return true;
+        }
+        // Check experimental yield system
+        return shouldAutoYieldForPlayer(player);
     }
 
     private Timer awaitNextInputTimer;
@@ -562,6 +567,16 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         showPromptMessage(player, "");
         updateButtons(player, false, false, false);
         awaitNextInput();
+    }
+
+    @Override
+    public final YieldMode getYieldMode(final PlayerView player) {
+        // Check legacy auto-pass first
+        if (autoPassUntilEndOfTurn.contains(player)) {
+            return YieldMode.UNTIL_END_OF_TURN;
+        }
+        YieldMode mode = playerYieldMode.get(player);
+        return mode != null ? mode : YieldMode.NONE;
     }
 
     @Override

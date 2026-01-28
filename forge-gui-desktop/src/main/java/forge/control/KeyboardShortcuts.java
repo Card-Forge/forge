@@ -121,6 +121,8 @@ public class KeyboardShortcuts {
                 if (matchUI == null) { return; }
                 if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
                 matchUI.getGameController().yieldUntilStackClears();
+                // Also pass priority to actually start yielding
+                matchUI.getGameController().selectButtonOk();
             }
         };
 
@@ -133,6 +135,8 @@ public class KeyboardShortcuts {
                 if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
                 if (matchUI.getPlayerCount() >= 3) {
                     matchUI.getGameController().yieldUntilYourNextTurn();
+                    // Also pass priority to actually start yielding
+                    matchUI.getGameController().selectButtonOk();
                 }
             }
         };

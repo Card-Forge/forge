@@ -234,6 +234,8 @@ public class VPrompt implements IVDoc<CPrompt> {
         stackItem.addActionListener(evt -> {
             if (controller.getMatchUI() != null && controller.getMatchUI().getGameController() != null) {
                 controller.getMatchUI().getGameController().yieldUntilStackClears();
+                // Also pass priority to actually start yielding
+                controller.getMatchUI().getGameController().selectButtonOk();
             }
         });
         menu.add(stackItem);
@@ -253,6 +255,8 @@ public class VPrompt implements IVDoc<CPrompt> {
             yourNextTurnItem.addActionListener(evt -> {
                 if (controller.getMatchUI().getGameController() != null) {
                     controller.getMatchUI().getGameController().yieldUntilYourNextTurn();
+                    // Also pass priority to actually start yielding
+                    controller.getMatchUI().getGameController().selectButtonOk();
                 }
             });
             menu.add(yourNextTurnItem);

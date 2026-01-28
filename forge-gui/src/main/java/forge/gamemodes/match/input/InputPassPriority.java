@@ -50,6 +50,10 @@ public class InputPassPriority extends InputSyncronizedBase {
 
     private List<SpellAbility> chosenSa;
 
+    // Pending yield suggestion state for prompt integration
+    private YieldMode pendingSuggestion = null;
+    private String pendingSuggestionMessage = null;
+
     public InputPassPriority(final PlayerControllerHuman controller) {
         super(controller);
     }
@@ -58,34 +62,51 @@ public class InputPassPriority extends InputSyncronizedBase {
     @Override
     public final void showMessage() {
         // Check if experimental yield features are enabled and show smart suggestions
-        if (isExperimentalYieldEnabled()) {
+        // Only show suggestions if not already yielding
+        if (isExperimentalYieldEnabled() && !isAlreadyYielding()) {
             ForgePreferences prefs = FModel.getPreferences();
+            Localizer loc = Localizer.getInstance();
 
             // Suggestion 1: Stack items but can't respond
             if (prefs.getPrefBoolean(FPref.YIELD_SUGGEST_STACK_YIELD) && shouldShowStackYieldPrompt()) {
-                if (showStackYieldPrompt()) {
-                    getController().getGui().setYieldMode(getOwner(), YieldMode.UNTIL_STACK_CLEARS);
-                    stop();
-                    return;
-                }
+                pendingSuggestion = YieldMode.UNTIL_STACK_CLEARS;
+                pendingSuggestionMessage = loc.getMessage("lblCannotRespondToStackYieldPrompt");
+                showYieldSuggestionPrompt();
+                return;
             }
             // Suggestion 2: Has cards but no mana
             else if (prefs.getPrefBoolean(FPref.YIELD_SUGGEST_NO_MANA) && shouldShowNoManaPrompt()) {
-                if (showNoManaPrompt()) {
-                    getController().getGui().setYieldMode(getOwner(), getDefaultYieldMode());
-                    stop();
-                    return;
-                }
+                pendingSuggestion = getDefaultYieldMode();
+                pendingSuggestionMessage = loc.getMessage("lblNoManaAvailableYieldPrompt");
+                showYieldSuggestionPrompt();
+                return;
             }
             // Suggestion 3: No available actions (empty hand, no abilities)
             else if (prefs.getPrefBoolean(FPref.YIELD_SUGGEST_NO_ACTIONS) && shouldShowNoActionsPrompt()) {
-                if (showNoActionsPrompt()) {
-                    getController().getGui().setYieldMode(getOwner(), getDefaultYieldMode());
-                    stop();
-                    return;
-                }
+                pendingSuggestion = getDefaultYieldMode();
+                pendingSuggestionMessage = loc.getMessage("lblNoActionsAvailableYieldPrompt");
+                showYieldSuggestionPrompt();
+                return;
             }
         }
+
+        showNormalPrompt();
+    }
+
+    private void showYieldSuggestionPrompt() {
+        Localizer loc = Localizer.getInstance();
+        showMessage(pendingSuggestionMessage);
+        chosenSa = null;
+        getController().getGui().updateButtons(getOwner(),
+            loc.getMessage("lblAccept"),
+            loc.getMessage("lblDecline"),
+            true, true, true);
+        getController().getGui().alertUser();
+    }
+
+    private void showNormalPrompt() {
+        pendingSuggestion = null;
+        pendingSuggestionMessage = null;
 
         showMessage(getTurnPhasePriorityMessage(getController().getGame()));
         chosenSa = null;
@@ -100,9 +121,24 @@ public class InputPassPriority extends InputSyncronizedBase {
         getController().getGui().alertUser();
     }
 
+    private boolean isAlreadyYielding() {
+        YieldMode currentMode = getController().getGui().getYieldMode(getOwner());
+        return currentMode != null && currentMode != YieldMode.NONE;
+    }
+
     /** {@inheritDoc} */
     @Override
     protected final void onOk() {
+        // If accepting a yield suggestion
+        if (pendingSuggestion != null) {
+            YieldMode mode = pendingSuggestion;
+            pendingSuggestion = null;
+            pendingSuggestionMessage = null;
+            getController().getGui().setYieldMode(getOwner(), mode);
+            stop();
+            return;
+        }
+
         passPriority(() -> {
             getController().macros().addRememberedAction(new PassPriorityAction());
             stop();
@@ -112,6 +148,12 @@ public class InputPassPriority extends InputSyncronizedBase {
     /** {@inheritDoc} */
     @Override
     protected final void onCancel() {
+        // If declining a yield suggestion, show normal prompt
+        if (pendingSuggestion != null) {
+            showNormalPrompt();
+            return;
+        }
+
         if (!getController().tryUndoLastAction()) { //undo if possible
             //otherwise end turn
             passPriority(() -> {
@@ -253,16 +295,6 @@ public class InputPassPriority extends InputSyncronizedBase {
         return false;
     }
 
-    private boolean showStackYieldPrompt() {
-        Localizer loc = Localizer.getInstance();
-        return getController().getGui().showConfirmDialog(
-            loc.getMessage("lblCannotRespondToStackYieldPrompt"),
-            loc.getMessage("lblYieldSuggestion"),
-            loc.getMessage("lblAccept"),
-            loc.getMessage("lblDecline")
-        );
-    }
-
     private boolean shouldShowNoManaPrompt() {
         Game game = getController().getGame();
         Player player = getController().getPlayer();
@@ -300,16 +332,6 @@ public class InputPassPriority extends InputSyncronizedBase {
         return false;
     }
 
-    private boolean showNoManaPrompt() {
-        Localizer loc = Localizer.getInstance();
-        return getController().getGui().showConfirmDialog(
-            loc.getMessage("lblNoManaAvailableYieldPrompt"),
-            loc.getMessage("lblYieldSuggestion"),
-            loc.getMessage("lblAccept"),
-            loc.getMessage("lblDecline")
-        );
-    }
-
     private boolean shouldShowNoActionsPrompt() {
         Player player = getController().getPlayer();
         Game game = getController().getGame();
@@ -326,27 +348,21 @@ public class InputPassPriority extends InputSyncronizedBase {
     }
 
     private boolean hasAvailableActions(Game game, Player player) {
-        if (!player.getCardsIn(ZoneType.Hand).isEmpty()) {
-            return true;
+        // Check hand for actually playable spells (filters by timing, mana, etc.)
+        for (Card card : player.getCardsIn(ZoneType.Hand)) {
+            if (!card.getAllPossibleAbilities(player, true).isEmpty()) {
+                return true;
+            }
         }
 
+        // Check battlefield for activatable abilities (excluding mana abilities)
         for (Card card : player.getCardsIn(ZoneType.Battlefield)) {
-            for (SpellAbility sa : card.getAllSpellAbilities()) {
-                if (sa.canPlay() && !sa.isTrigger() && !sa.isManaAbility()) {
+            for (SpellAbility sa : card.getAllPossibleAbilities(player, true)) {
+                if (!sa.isManaAbility()) {
                     return true;
                 }
             }
         }
         return false;
-    }
-
-    private boolean showNoActionsPrompt() {
-        Localizer loc = Localizer.getInstance();
-        return getController().getGui().showConfirmDialog(
-            loc.getMessage("lblNoActionsAvailableYieldPrompt"),
-            loc.getMessage("lblYieldSuggestion"),
-            loc.getMessage("lblAccept"),
-            loc.getMessage("lblDecline")
-        );
     }
 }
