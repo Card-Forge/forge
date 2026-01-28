@@ -202,7 +202,7 @@ public class Forge implements ApplicationListener {
         destroyThis = true; //Prevent back()
         if (Files.exists(Paths.get(ForgeConstants.DEFAULT_SKINS_DIR+ForgeConstants.ADV_TEXTURE_BG_FILE)))
             selector = getForgePreferences().getPref(FPref.UI_SELECTOR_MODE);
-        boolean landscapeMode = GuiBase.isAndroid() ? !isPortraitMode : screenWidth > screenHeight;
+        boolean landscapeMode = !isPortraitMode;
         //update landscape mode preference if it doesn't match what the app loaded as
         if (getForgePreferences().getPrefBoolean(FPref.UI_LANDSCAPE_MODE) != landscapeMode) {
             getForgePreferences().setPref(FPref.UI_LANDSCAPE_MODE, landscapeMode);
@@ -728,9 +728,7 @@ public class Forge implements ApplicationListener {
     }
 
     public static boolean isLandscapeMode() {
-        if (GuiBase.isAndroid())
-            return !isPortraitMode;
-        return screenWidth > screenHeight;
+        return !isPortraitMode;
     }
 
     public static boolean isLoadingaMatch() {
