@@ -58,11 +58,9 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
         // Need to copy paid costs
 
         if (sa.hasParam("RememberObjects")) {
-            for (final String rem : sa.getParam("RememberObjects").split(",")) {
-                for (final Object o : AbilityUtils.getDefinedEntities(host, rem, sa)) {
-                    immediateTrig.addRemembered(o);
-                }
-            }
+            immediateTrig.addRemembered(
+                    AbilityUtils.getDefinedEntities(host, sa.getParam("RememberObjects").split(" & "), sa)
+            );
         }
 
         if (sa.hasParam("RememberSVarAmount")) {

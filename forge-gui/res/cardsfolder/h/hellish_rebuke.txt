@@ -1,7 +1,7 @@
 Name:Hellish Rebuke
 ManaCost:2 B
 Types:Instant
-A:SP$ Effect | StaticAbilities$ OppPerms | RememberObjects$ Caster,Valid Permanent.OppCtrl | SpellDescription$ Until end of turn, permanents your opponents control gain "When this permanent deals damage to the player who cast CARDNAME, sacrifice this permanent. You lose 2 life."
+A:SP$ Effect | StaticAbilities$ OppPerms | RememberObjects$ Caster & Valid Permanent.OppCtrl | SpellDescription$ Until end of turn, permanents your opponents control gain "When this permanent deals damage to the player who cast CARDNAME, sacrifice this permanent. You lose 2 life."
 SVar:OppPerms:Mode$ Continuous | Affected$ Permanent.IsRemembered | AddTrigger$ DamageTrig | Description$ Until end of turn, permanents your opponents control gain "When this permanent deals damage to the player who cast EFFECTSOURCE, sacrifice this permanent. You lose 2 life."
 SVar:DamageTrig:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player.OriginalHostRemembered | Execute$ TrigSac | TriggerDescription$ When CARDNAME deals damage to the player who cast Hellish Rebuke, sacrifice CARDNAME. You lose 2 life.
 SVar:TrigSac:DB$ Sacrifice | SubAbility$ DBLoseLife
