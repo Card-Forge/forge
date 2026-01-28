@@ -418,7 +418,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     // Extended yield mode tracking (experimental feature)
     private final Map<PlayerView, YieldMode> playerYieldMode = Maps.newHashMap();
-    private final Map<PlayerView, forge.game.player.Player> yieldTurnOwner = Maps.newHashMap();
 
     /**
      * Automatically pass priority until reaching the Cleanup phase of the
@@ -552,16 +551,12 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         }
 
         playerYieldMode.put(player, mode);
-        if (getGameView() != null && getGameView().getGame() != null) {
-            yieldTurnOwner.put(player, getGameView().getGame().getPhaseHandler().getPlayerTurn());
-        }
         updateAutoPassPrompt();
     }
 
     @Override
     public final void clearYieldMode(final PlayerView player) {
         playerYieldMode.remove(player);
-        yieldTurnOwner.remove(player);
         autoPassUntilEndOfTurn.remove(player); // Legacy compatibility
 
         showPromptMessage(player, "");
@@ -610,10 +605,23 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
         return switch (mode) {
             case UNTIL_STACK_CLEARS -> !game.getStack().isEmpty();
-            case UNTIL_END_OF_TURN -> yieldTurnOwner.get(player) != null && yieldTurnOwner.get(player).equals(ph.getPlayerTurn());
+            case UNTIL_END_OF_TURN -> {
+                // Yield until the current turn ends - clear when any new turn starts (UNTAP phase)
+                if (ph.getPhase() == forge.game.phase.PhaseType.UNTAP) {
+                    clearYieldMode(player);
+                    yield false;
+                }
+                yield true;
+            }
             case UNTIL_YOUR_NEXT_TURN -> {
+                // Yield until our turn starts
                 forge.game.player.Player playerObj = game.getPlayer(player);
-                yield !ph.getPlayerTurn().equals(playerObj);
+                boolean isOurTurn = ph.getPlayerTurn().equals(playerObj);
+                if (isOurTurn) {
+                    clearYieldMode(player);
+                    yield false;
+                }
+                yield true;
             }
             default -> false;
         };
@@ -630,15 +638,17 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         forge.game.phase.PhaseType phase = game.getPhaseHandler().getPhase();
 
         if (prefs.getPrefBoolean(ForgePreferences.FPref.YIELD_INTERRUPT_ON_ATTACKERS)) {
+            // Only interrupt if there are creatures attacking THIS player specifically
             if (phase == forge.game.phase.PhaseType.COMBAT_DECLARE_ATTACKERS &&
-                game.getCombat() != null && game.getCombat().getDefenders().contains(p)) {
+                game.getCombat() != null && !game.getCombat().getAttackersOf(p).isEmpty()) {
                 return true;
             }
         }
 
         if (prefs.getPrefBoolean(ForgePreferences.FPref.YIELD_INTERRUPT_ON_BLOCKERS)) {
+            // Only interrupt if there are creatures attacking THIS player specifically
             if (phase == forge.game.phase.PhaseType.COMBAT_DECLARE_BLOCKERS &&
-                game.getCombat() != null && game.getCombat().getDefenders().contains(p)) {
+                game.getCombat() != null && !game.getCombat().getAttackersOf(p).isEmpty()) {
                 return true;
             }
         }

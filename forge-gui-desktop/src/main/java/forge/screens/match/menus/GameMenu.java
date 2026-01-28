@@ -233,7 +233,18 @@ public final class GameMenu {
     }
 
     private JCheckBoxMenuItem createYieldCheckbox(String label, FPref pref) {
-        final JCheckBoxMenuItem item = new JCheckBoxMenuItem(label);
+        // Custom checkbox that doesn't close the menu when clicked
+        final JCheckBoxMenuItem item = new JCheckBoxMenuItem(label) {
+            @Override
+            protected void processMouseEvent(java.awt.event.MouseEvent e) {
+                if (e.getID() == java.awt.event.MouseEvent.MOUSE_RELEASED && contains(e.getPoint())) {
+                    doClick(0);
+                    setArmed(true);
+                } else {
+                    super.processMouseEvent(e);
+                }
+            }
+        };
         item.setSelected(prefs.getPrefBoolean(pref));
         item.addActionListener(e -> {
             prefs.setPref(pref, item.isSelected());
