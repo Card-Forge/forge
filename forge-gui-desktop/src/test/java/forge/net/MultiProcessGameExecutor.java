@@ -311,6 +311,12 @@ public class MultiProcessGameExecutor {
         command.add("-cp");
         command.add(classpath);
         command.add("-Xmx512m");  // Limit memory per process
+
+        // Pass through test configuration properties to child processes
+        if (Boolean.getBoolean("test.useAiForRemote")) {
+            command.add("-Dtest.useAiForRemote=true");
+        }
+
         command.add(runnerClass);
         command.add(String.valueOf(port));
         command.add(String.valueOf(gameIndex));

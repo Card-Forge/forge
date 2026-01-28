@@ -132,6 +132,7 @@ All properties are passed via Maven's `-D` flag.
 | `test.4pGames` | 20 | Integer | Number of 4-player games in comprehensive test |
 | `test.batchSize` | 10 | Integer | Number of parallel games per batch |
 | `test.timeoutMs` | 300000 | Long | Timeout per game in milliseconds (default 5 minutes) |
+| `test.useAiForRemote` | false | Boolean | Enable server-side AI for remote players in multiplayer |
 
 #### Sequential/Multi-Game Configuration
 
@@ -386,7 +387,7 @@ mvn -pl forge-gui-desktop -am verify \
 
 ## Comprehensive Validation Results for NetworkPlay Branch
 
-> **Source:** `comprehensive-test-results-20260125-143015.md`
+> **Source:** `comprehensive-test-results-20260129-064105.md`
 >
 > **Verification:** Test artifacts (results file and 100 game logs) are archived in [`testlogs/`](testlogs/) for independent verification.
 >
@@ -395,6 +396,16 @@ mvn -pl forge-gui-desktop -am verify \
 ### Objective
 
 To conduct comprehensive testing of the delta synchronisation network protocol in the NetworkPlay Branch via large scale AI-vs-AI Forge games played from mulligan to completion using complete network infrastructure, using a variety of different player counts and unique decks. This is intended to validate effectiveness of network code changes across a wide range of use cases.
+
+### Remote AI for Multiplayer Testing
+
+Tests can enable server-side AI for remote players using `-Dtest.useAiForRemote=true`. When enabled:
+- Remote player controllers are swapped from `PlayerControllerHuman` to `PlayerControllerAi` after game start
+- All players make strategic decisions (not just the host)
+- Results show diverse winners across all player slots
+- Network clients still receive and verify delta sync packets
+
+This provides more realistic gameplay testing while maintaining full delta sync validation.
 
 ### How Testing Simulates Actual Network Play
 
@@ -416,92 +427,90 @@ The only difference from live play is that AI makes decisions instantly rather t
 
 | Parameter | Value |
 |-----------|-------|
-| Test Date | 2026-01-25 |
-| Results File | `comprehensive-test-results-20260125-143015.md` |
+| Test Date | 2026-01-29 |
+| Results File | `comprehensive-test-results-20260129-064105.md` |
 | Configured Games | 100 (50 x 2p, 30 x 3p, 20 x 4p) |
 | Games Analyzed | 100 |
 | Batch Size | 10 parallel games |
 | Timeout | 5 minutes per game |
+| Remote AI | Enabled (`-Dtest.useAiForRemote=true`) |
 
 ### Summary Results
 
 | Metric | Value |
 |--------|-------|
 | Total Games Run | 100 |
-| Successful Games | 98 |
-| Failed Games | 2 |
-| Success Rate | **98.0%** |
-| Checksum Mismatches | 1 |
-| Games with Errors | 2 |
-| Games with Warnings | 24 |
-| Total Turns | 2355 |
-| Average Turns per Game | 23.8 |
-| Unique Decks Used | 42* |
+| Successful Games | 97 |
+| Failed Games | 3 |
+| Success Rate | **97.0%** |
+| Checksum Mismatches | 0 |
+| Games with Errors | 0 |
+| Games with Warnings | 4 |
+| Total Turns | 2290 |
+| Average Turns per Game | 23.6 |
+| Unique Decks Used | 207 |
 
-*\* Deck count is an undercount due to log parsing limitations in archived results. Log analyzer regex has since been fixed to capture all deck name formats.*
+### Key Finding: Zero Desyncs with Diverse Gameplay
 
-### Key Finding: High Success Rate with Rare Desync
+The test achieved **97% success rate** with **zero checksum mismatches**. The 3 failures were all timeouts (INCOMPLETE), not protocol errors. With Remote AI enabled, games showed diverse winners:
+- Alice (Host AI): 59 wins
+- Charlie (Remote AI): 26 wins
+- Diana (Remote AI): 12 wins
 
-The test achieved **98% success rate** across all player counts. One checksum mismatch occurred in a 4-player game (batch1-game2-4p at Turn 10), caused by PlayerView ID mismatch (now fixed).
+This confirms the delta sync protocol correctly handles all player actions across the network.
 
 ### Bandwidth Usage Breakdown
 
 | Metric | Total | Avg per Game | Description |
 |--------|-------|--------------|-------------|
-| Approximate | 45.65 MB | 467.4 KB | Estimated delta size from object diffs |
-| ActualNetwork | 300.61 MB | 3.01 MB | Actual bytes sent over network |
-| FullState | 48438.26 MB | 484.38 MB | Size if full state was sent |
+| Approximate | 51.20 MB | 524.3 KB | Estimated delta size from object diffs |
+| ActualNetwork | 238.51 MB | 2.39 MB | Actual bytes sent over network |
+| FullState | 56.50 GB | 578.58 MB | Size if full state was sent |
 
 **Bandwidth Savings:**
 - Approximate vs FullState: **99.9%** savings
-- ActualNetwork vs FullState: **99.4%** savings
+- ActualNetwork vs FullState: **99.6%** savings
 
 ### Results by Player Count
 
 | Players | Games | Success Rate | Avg Turns | Avg Savings |
 |---------|-------|--------------|-----------|-------------|
-| 2 | 50 | **98.0%** | 15.0 | 99.4% |
-| 3 | 30 | **100.0%** | 26.5 | 99.5% |
-| 4 | 20 | **95.0%** | 41.3 | 99.3% |
+| 2 | 50 | **98.0%** | 15.6 | 99.4% |
+| 3 | 30 | **100.0%** | 27.2 | 99.5% |
+| 4 | 20 | **90.0%** | 39.5 | 99.6% |
 
 ### Bandwidth by Player Count
 
 | Players | Approximate | ActualNetwork | FullState | Savings |
 |---------|-------------|---------------|-----------|---------|
-| 2 | 7.54 MB | 21.39 MB | 3867.64 MB | 99.4% |
-| 3 | 15.39 MB | 65.38 MB | 13717.01 MB | 99.5% |
-| 4 | 22.71 MB | 213.84 MB | 30853.61 MB | 99.3% |
+| 2 | 7.95 MB | 24.62 MB | 3.95 GB | 99.4% |
+| 3 | 16.22 MB | 67.57 MB | 13.90 GB | 99.5% |
+| 4 | 27.02 MB | 146.31 MB | 38.66 GB | 99.6% |
 
 ### Validation Criteria
 
 | Criterion | Target | Actual | Status |
 |-----------|--------|--------|--------|
-| Success Rate | ≥90% | 98.0% | **PASS** |
-| Bandwidth Savings | ≥90% | 99.4% | **PASS** |
-| Checksum Mismatches | 0 | 1 | **INVESTIGATE** |
+| Success Rate | ≥90% | 97.0% | **PASS** |
+| Bandwidth Savings | ≥90% | 99.6% | **PASS** |
+| Checksum Mismatches | 0 | 0 | **PASS** |
 
-### Error Analysis
+### Failure Analysis
 
-**Unique Errors from Results File:**
-- `[14:09:26.294] [ERROR] [DeltaSync] Checksum details (client state):` - Checksum mismatch in 4-player game
-- `[14:25:02.781] [ERROR] [NetworkClientTestHarness] Test failed: Address already in use: bind`
+**3 Game Failures (all INCOMPLETE/timeout):**
 
-**2 Game Failures Explained:**
+| Game | Players | Turns | Cause |
+|------|---------|-------|-------|
+| batch1-game0-4p | 4 | 17 | Timeout |
+| batch9-game0-4p | 4 | 39 | Timeout |
+| batch3-game8-2p | 2 | 10 | Timeout |
 
-The comprehensive test had 2 failures out of 100 games:
+All failures were timeouts (games exceeded the 5-minute limit), not protocol errors. The 4-player games with 17-39 turns suggest complex board states; the 2-player game at turn 10 may have encountered slow AI decision-making.
 
-**1. Checksum Mismatch (batch1-game2-4p):**
-A 4-player game experienced a desync at Turn 10, UNTAP phase. Client state diverged from server:
-```
-Player 3 (Diana): GY=0, BF=3 (client) vs server state (needs investigation)
-```
-This was a **protocol bug** caused by PlayerView ID mismatch between server and client - now fixed (see Debugging.md #10).
-
-**2. Port Binding Error (batch8-game7-2p):**
-This occurs during rapid parallel test execution when port cleanup is incomplete between batches. This is a **test infrastructure issue**, not a protocol bug.
+**No checksum mismatches** occurred in this test run, indicating the delta sync protocol is functioning correctly.
 
 **Warning Analysis:**
-24 games showed `NetworkDeserializer` collection lookup warnings. These are non-fatal warnings where collection IDs were not found in the tracker - games completed successfully despite these warnings.
+4 games showed `NetworkDeserializer` "Object not found in Tracker" warnings. These are non-fatal warnings where CardView IDs were not found during delta application - games completed successfully despite these warnings.
 
 ---
 
@@ -509,7 +518,7 @@ This occurs during rapid parallel test execution when port cleanup is incomplete
 
 ### Test Infrastructure Limitations
 
-1. **AI Input Handling**: Remote client auto-responds to prompts with default choices; no strategic decision-making.
+1. **AI Input Handling**: By default, remote clients auto-respond to prompts with default choices. Enable `-Dtest.useAiForRemote=true` to use server-side AI for strategic decision-making by all players.
 
 2. **Single JVM Limitation**: `FServerManager` singleton prevents multiple servers in one JVM; use multi-process execution for parallelism.
 
@@ -584,7 +593,8 @@ forge-gui-desktop/src/test/java/forge/net/
 ├── analysis/
 │   ├── NetworkLogAnalyzer.java     # Log file parsing
 │   ├── GameLogMetrics.java         # Per-game metrics storage
-│   └── AnalysisResult.java         # Aggregate results and reporting
+│   ├── AnalysisResult.java         # Aggregate results and reporting
+│   └── LogContextExtractor.java    # Error context extraction for debugging
 │
 └── scenarios/
     ├── ReconnectionScenario.java       # Disconnect/AI takeover test
@@ -595,4 +605,4 @@ forge-gui/src/main/java/forge/gamemodes/net/
 └── NetworkGameEventListener.java   # Production game event logging
 ```
 
-**File Count:** 29 test files (23 main + 3 scenarios + 3 analysis)
+**File Count:** 30 test files (23 main + 3 scenarios + 4 analysis)

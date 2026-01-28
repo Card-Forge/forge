@@ -169,11 +169,18 @@ public class ComprehensiveGameRunner {
     /**
      * Run a 3-4 player multiplayer game using MultiplayerNetworkScenario.
      * All non-host players are remote network clients to test delta sync.
+     *
+     * Set system property 'test.useAiForRemote=true' to enable server-side AI
+     * for remote players, providing realistic gameplay and diverse game states.
      */
     private static GameRunResult runMultiplayerGame(int port, int gameIndex, int playerCount) {
+        // Check if AI mode is enabled via system property
+        boolean useAiForRemote = Boolean.getBoolean("test.useAiForRemote");
+
         MultiplayerNetworkScenario scenario = new MultiplayerNetworkScenario()
                 .playerCount(playerCount)
                 .port(port) // Use the port assigned by the parent process
+                .useAiForRemotePlayers(useAiForRemote) // Enable AI if configured
                 .gameTimeout(300000); // 5 minute timeout in ms
 
         MultiplayerNetworkScenario.ScenarioResult scenarioResult = scenario.execute();
