@@ -29,6 +29,7 @@ import forge.game.IHasSVars;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.ApiType;
 import forge.game.card.CardView.CardStateView;
+import forge.game.keyword.IKeywordsChange;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordCollection;
 import forge.game.keyword.KeywordInterface;
@@ -483,7 +484,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
 
     public LandTraitChanges getLandTraitChanges() { return this.landTraitChanges; }
 
-    record LandTraitChanges(CardState state, Map<MagicColor.Color, SpellAbility> map) implements ICardTraitChanges
+    record LandTraitChanges(CardState state, Map<MagicColor.Color, SpellAbility> map) implements ICardTraitChanges, IKeywordsChange
     {
         LandTraitChanges(CardState state) {
             this(state, Maps.newEnumMap(MagicColor.Color.class));
@@ -531,7 +532,12 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             }
             return list;
         }
-        public ICardTraitChanges copy(Card host, boolean lki) { return this; }
+        public void applyKeywords(KeywordCollection list) {
+            if (state.getCard().hasRemoveIntrinsic()) {
+                list.clear();
+            }
+        }
+        public LandTraitChanges copy(Card host, boolean lki) { return this; }
     }
 
     public final Iterable<SpellAbility> getIntrinsicSpellAbilities() {

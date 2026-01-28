@@ -36,7 +36,7 @@ import forge.game.trigger.Trigger;
  *
  * @author Forge
  */
-public class KeywordsChange implements ICardTraitChanges, Cloneable {
+public class KeywordsChange implements ICardTraitChanges, IKeywordsChange, Cloneable {
     private KeywordCollection keywords = new KeywordCollection();
     private List<KeywordInterface> removeKeywordInterfaces = Lists.newArrayList();
     private List<String> removeKeywords = Lists.newArrayList();
@@ -173,6 +173,21 @@ public class KeywordsChange implements ICardTraitChanges, Cloneable {
             k.applyStaticAbility(list);
         }
         return list;
+    }
+
+    public void applyKeywords(KeywordCollection list) {
+        if (isRemoveAllKeywords()) {
+            list.clear();
+        }
+        else if (getRemoveKeywords() != null) {
+            list.removeAll(getRemoveKeywords());
+        }
+
+        list.removeInstances(getRemovedKeywordInstances());
+
+        if (getKeywords() != null) {
+            list.insertAll(getKeywords());
+        }
     }
 
     public boolean hasTraits() {
