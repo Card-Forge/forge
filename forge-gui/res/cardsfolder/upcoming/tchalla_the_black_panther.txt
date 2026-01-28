@@ -1,0 +1,13 @@
+Name:T'Challa, the Black Panther
+ManaCost:1 G W
+Types:Legendary Creature Human Noble Hero
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever NICKNAME enters or attacks, create a tapped Vibranium token. (It's an artifact with indestructible and "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME enters or attacks, create a tapped Vibranium token. (It's an artifact with indestructible and "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
+SVar:TrigToken:DB$ Token | TokenTapped$ True | TokenScript$ c_a_vibranium | TokenOwner$ You
+T:Mode$ SpellCast | ValidCard$ Artifact.cmcGE4 | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an artifact spell with mana value 4 or greater, put two +1/+1 counters on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token
+DeckHints:Type$Artifact
+Oracle:Whenever T'Challa enters or attacks, create a tapped Vibranium token. (It's an artifact with indestructible and "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")\nWhenever you cast an artifact spell with mana value 4 or greater, put two +1/+1 counters on T'Challa.

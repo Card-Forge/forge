@@ -1,0 +1,9 @@
+Name:Ultron, Machine Overlord
+ManaCost:5
+Types:Legendary Artifact Creature Robot Villain
+PT:4/4
+K:Flying
+S:Mode$ Continuous | Affected$ Robot.Other+YouCtrl,Construct.Other+YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Other Robots and Constructs you control get +2/+2.
+SVar:PlayMain1:TRUE
+DeckHints:Type$Robot|Construct
+Oracle:Flying\nOther Robots and Constructs you control get +2/+2.

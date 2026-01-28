@@ -1,0 +1,10 @@
+Name:Rootha, Mastering the Moment
+ManaCost:2 U R
+Types:Legendary Creature Orc Sorcerer
+PT:3/4
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | CheckSVar$ X | TriggerDescription$ At the beginning of combat on your turn, if you've cast an instant or sorcery spell this turn, create an X/X blue and red Elemental creature token with flying and haste, where X is the greatest mana value among instant and sorcery spells you've cast this turn.
+SVar:TrigToken:DB$ Token | TokenScript$ ur_x_x_elemental_flying_haste | TokenOwner$ You | TokenPower$ Y | TokenToughness$ Y
+SVar:X:Count$ThisTurnCast_Instant.YouCtrl,Sorcery.YouCtrl
+SVar:Y:Count$ThisTurnCast_Instant.YouCtrl,Sorcery.YouCtrl$GreatestCardManaCost
+SVar:PlayMain1:TRUE
+Oracle:At the beginning of combat on your turn, if you've cast an instant or sorcery spell this turn, create an X/X blue and red Elemental creature token with flying and haste, where X is the greatest mana value among instant and sorcery spells you've cast this turn.

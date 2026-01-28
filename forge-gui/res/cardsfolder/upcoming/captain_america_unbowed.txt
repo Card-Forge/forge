@@ -1,0 +1,9 @@
+Name:Captain America, Unbowed
+ManaCost:3 W
+Types:Legendary Creature Human Soldier Hero
+PT:3/4
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When NICKNAME enters, Soldiers and Heroes you control gain indestructible until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Soldier.YouCtrl,Hero.YouCtrl | KW$ Indestructible
+DeckHints:Type$Soldier|Hero
+Oracle:Flash\nWhen Captain America enters, Soldiers and Heroes you control gain indestructible until end of turn.
