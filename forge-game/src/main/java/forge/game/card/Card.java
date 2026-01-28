@@ -4134,11 +4134,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return changedCardKeywordsByText;
     }
 
-    public Iterable<IKeywordsChange> getChangedCardKeywordsList() {
+    public Iterable<IKeywordsChange> getChangedCardKeywordsList(final CardState state) {
         return Iterables.concat(
             changedCardKeywordsByText.values(), // Layer 3
             ImmutableList.of(changedCardKeywordsByWord), // Layer 3
-            ImmutableList.of(getCurrentState().getLandTraitChanges()), // Layer 4
+            ImmutableList.of(state.getLandTraitChanges()), // Layer 4
             changedCardKeywords.values() // Layer 6
         );
     }
@@ -5236,7 +5236,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             }
         }
 
-        keywords.applyChanges(getChangedCardKeywordsList());
+        keywords.applyChanges(getChangedCardKeywordsList(state));
 
         // remove Can't have keywords
         for (Keyword k : getCantHaveKeyword()) {
