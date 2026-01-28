@@ -50,9 +50,10 @@ public final class GameMenu {
         menu.addSeparator();
         menu.add(getMenuItem_TargetingArcs());
         menu.add(new CardOverlaysMenu(matchUI).getMenu());
-        menu.add(getMenuItem_AutoYields());
         if (prefs.getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) {
             menu.add(getYieldOptionsMenu());
+        } else {
+            menu.add(getMenuItem_AutoYields());
         }
         menu.addSeparator();
         menu.add(getMenuItem_ViewDeckList());
@@ -212,6 +213,10 @@ public final class GameMenu {
     private JMenu getYieldOptionsMenu() {
         final Localizer localizer = Localizer.getInstance();
         final JMenu yieldMenu = new JMenu(localizer.getMessage("lblYieldOptions"));
+
+        // Auto-Yields (manage per-ability yields)
+        yieldMenu.add(getMenuItem_AutoYields());
+        yieldMenu.addSeparator();
 
         // Sub-menu 1: Interrupt Settings
         final JMenu interruptMenu = new JMenu(localizer.getMessage("lblInterruptSettings"));

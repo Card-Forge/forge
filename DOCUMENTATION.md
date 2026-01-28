@@ -2,18 +2,18 @@
 
 ## Summary
 
-This PR adds an experimental, feature-gated yield system to reduce micromanagement in multiplayer games. The feature is **disabled by default** and must be explicitly enabled in preferences.
+This PR adds an expanded yield system to reduce micromanagement in multiplayer games. The feature is **disabled by default** and must be explicitly enabled in preferences.
 
 ## Problem Statement
 
 In multiplayer Magic games (3+ players), the current priority system requires excessive clicking:
-- Dozens of priority passes every turn in a 4-player game
+- Dozens of priority passes every turn in multiplayer game
 - Players must manually pass priority even when they have no possible actions
 - This can create click fatigue and slow down gameplay significantly
 
 ## Solution
 
-Extended yield options that allow players to automatically pass priority until specific conditions are met, with configurable interrupts for important game events.
+Extended yield options that allow players to automatically pass priority until specific conditions are met, set yield interrupts for important game events, and smart suggestions prompting players to enable auto-yield in situations where they cannot take actions. All configurable through in-game menu options.
 
 ## Feature Overview
 
@@ -34,7 +34,7 @@ Extended yield options that allow players to automatically pass priority until s
 
 ### Smart Yield Suggestions
 
-When enabled, the system prompts players to enable auto-yield in situations where they likely cannot act. Suggestions are **integrated into the prompt area** (not modal dialogs) with Accept/Decline buttons:
+When enabled, the system prompts players to enable auto-yield in situations where they likely cannot act. Suggestions are **integrated into the prompt area** with Accept/Decline buttons:
 
 1. **Cannot respond to stack**: Player has no instant-speed responses available (checks `getAllPossibleAbilities()`)
 2. **No mana available**: Player has cards but no mana sources untapped (not on player's turn)
@@ -46,7 +46,7 @@ Each suggestion can be individually enabled/disabled.
 
 ### Interrupt Conditions
 
-Existing interrupt conditions while on auto-yield is now configurable in game options menu.
+Existing interrupt conditions while on auto-yield are now configurable through in-game options menu.
 Yield modes can be configured to automatically cancel when:
 - Attackers are declared against **you specifically** (default: ON) - uses `getAttackersOf(player)` to only trigger when creatures attack you, not when any player is attacked
 - **You** can declare blockers (default: ON) - only triggers when creatures are attacking you
@@ -59,14 +59,14 @@ Yield modes can be configured to automatically cancel when:
 ## How to Enable
 
 1. Open Forge Preferences
-2. Find `YIELD_EXPERIMENTAL_OPTIONS`
+2. Find `Experimental Yield Options`
 3. Set to `true`
 4. Restart the game
 
 Once enabled:
 - Right-click menu appears on End Turn button
 - Keyboard shortcuts become active
-- Yield Options submenu appears in Game menu
+- Yield Options submenu appears in: Forge > Game > Yield Options.
 - Smart suggestions begin appearing (if enabled)
 
 ## Technical Implementation
@@ -102,11 +102,30 @@ forge-gui-desktop/   (desktop-specific)
 4. **Network-aware**: Protocol methods added for multiplayer sync
 5. **Individual toggles**: Each suggestion/interrupt can be configured separately
 
+### End Turn Button Behavior
+
+The "End Turn" button (Cancel button during priority) has different behavior depending on whether experimental yields are enabled:
+
+**Legacy Mode (experimental yields OFF):**
+- Uses `autoPassUntilEndOfTurn` system
+- Cancelled when ANY opponent casts a spell or activates an ability (even if it doesn't affect you)
+- Cancelled at cleanup phase for all players
+- Good for 1v1 where you always want to respond to opponent actions
+
+**Experimental Mode (experimental yields ON):**
+- Uses `YieldMode.UNTIL_END_OF_TURN` with smart interrupts
+- Only interrupted based on your configured interrupt settings:
+  - When you're attacked (if enabled)
+  - When you or your permanents are targeted (if enabled)
+  - When opponents cast spells (if enabled) - excludes triggered abilities
+- Better for multiplayer where you don't need to respond to actions between other players
+
 ### State Management
 
 ```java
 // In AbstractGuiGame.java
 private final Map<PlayerView, YieldMode> playerYieldMode = Maps.newHashMap();
+private final Map<PlayerView, Integer> yieldStartTurn = Maps.newHashMap(); // Track turn when yield was set
 ```
 
 The `shouldAutoYieldForPlayer()` method checks:
@@ -115,7 +134,7 @@ The `shouldAutoYieldForPlayer()` method checks:
 3. Interrupt conditions
 4. Mode-specific end conditions:
    - `UNTIL_STACK_CLEARS`: Continues while stack is non-empty
-   - `UNTIL_END_OF_TURN`: Clears when UNTAP phase detected (new turn started)
+   - `UNTIL_END_OF_TURN`: Clears when turn number changes (tracked via `yieldStartTurn`)
    - `UNTIL_YOUR_NEXT_TURN`: Clears when player becomes the active player
 
 ## Files Changed
@@ -189,6 +208,8 @@ SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN("17 16 78") // Ctrl+Shift+N
 - [ ] Right-click End Turn button shows popup menu
 - [ ] Keyboard shortcuts trigger correct yield modes
 - [ ] Menu options reflect player count (hide 3+ player options in 2-player)
+- [ ] "End Turn" button (Cancel) uses experimental yield when feature enabled
+- [ ] "End Turn" button uses legacy behavior when feature disabled
 
 #### Smart Suggestions
 - [ ] Stack suggestion appears when player can't respond (in prompt area, not dialog)
@@ -206,6 +227,8 @@ SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN("17 16 78") // Ctrl+Shift+N
 - [ ] Blockers phase cancels yield only when creatures are attacking YOU
 - [ ] Being targeted (you or your permanents) cancels yield
 - [ ] Spells targeting other players does NOT cancel your yield
+- [ ] "Opponent spell" only triggers for spells and activated abilities, NOT triggered abilities
+  - Triggered abilities that target you are handled by the "targeting" interrupt instead
 - [ ] Each interrupt respects its toggle setting
 
 #### Visual Feedback
@@ -231,10 +254,20 @@ SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN("17 16 78") // Ctrl+Shift+N
 
 ## Changelog
 
-### 2026-01-28 - Multiplayer Fixes & Simplified Yield Logic
+### 2026-01-29 - End Turn Button Integration & Trigger Exclusion
 
-**Breaking Changes:**
-- `UNTIL_END_OF_TURN` now ends at UNTAP phase of any new turn (previously was tied to turn owner tracking)
+**Improvements:**
+1. **End Turn button uses experimental yields** - When experimental yield options are enabled, the "End Turn" button now uses `YieldMode.UNTIL_END_OF_TURN` with smart interrupts instead of the legacy behavior that cancels on any opponent spell.
+
+2. **Opponent spell excludes triggers** - The "interrupt on opponent spell" setting now only triggers for spells and activated abilities, NOT triggered abilities. Triggered abilities that target you are handled by the "targeting" interrupt instead. This prevents unwanted interrupts from attack triggers when other players are attacked.
+
+3. **Menu consolidation** - When experimental yields are enabled, "Auto-Yields" menu item is moved inside the "Yield Options" submenu instead of being a separate item. When disabled, Auto-Yields appears in the main Game menu as before.
+
+4. **End of turn yield fix** - `UNTIL_END_OF_TURN` now tracks the turn number when the yield was set and clears when the turn number changes. This ensures phase stops on the next turn work correctly, since UNTAP/CLEANUP phases don't give priority.
+
+5. **Yield re-enable fix** - Fixed issue where accepting a yield suggestion after an interrupt would immediately clear the yield. If turn number wasn't tracked when yield was set, it's now tracked on first check.
+
+### 2026-01-28 - Multiplayer Fixes & Simplified Yield Logic
 
 **Bug Fixes:**
 1. **Multiplayer interrupt scoping** - Attack/blocker interrupts now only trigger when the player specifically is being attacked, not when any player is attacked. Changed from `getDefenders().contains(p)` to `!getAttackersOf(p).isEmpty()`.
@@ -242,7 +275,7 @@ SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN("17 16 78") // Ctrl+Shift+N
 2. **Yield continuation bug** - Fixed issue where yields would continue past the player's turn. Simplified logic to clear all yields when player's turn starts.
 
 3. **Separated yield mode end conditions**:
-   - `UNTIL_END_OF_TURN`: Clears on UNTAP phase (any new turn)
+   - `UNTIL_END_OF_TURN`: Clears when turn number changes (superseded by 2026-01-29 fix)
    - `UNTIL_YOUR_NEXT_TURN`: Clears when player's specific turn starts
 
 4. **Smart suggestions re-prompting** - Added `isAlreadyYielding()` check to prevent re-prompting when already yielding.

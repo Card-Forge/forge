@@ -418,6 +418,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     // Extended yield mode tracking (experimental feature)
     private final Map<PlayerView, YieldMode> playerYieldMode = Maps.newHashMap();
+    private final Map<PlayerView, Integer> yieldStartTurn = Maps.newHashMap(); // Track turn when yield was set
 
     /**
      * Automatically pass priority until reaching the Cleanup phase of the
@@ -551,12 +552,17 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         }
 
         playerYieldMode.put(player, mode);
+        // Track turn number for UNTIL_END_OF_TURN mode
+        if (mode == YieldMode.UNTIL_END_OF_TURN && getGameView() != null && getGameView().getGame() != null) {
+            yieldStartTurn.put(player, getGameView().getGame().getPhaseHandler().getTurn());
+        }
         updateAutoPassPrompt();
     }
 
     @Override
     public final void clearYieldMode(final PlayerView player) {
         playerYieldMode.remove(player);
+        yieldStartTurn.remove(player);
         autoPassUntilEndOfTurn.remove(player); // Legacy compatibility
 
         showPromptMessage(player, "");
@@ -606,8 +612,15 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return switch (mode) {
             case UNTIL_STACK_CLEARS -> !game.getStack().isEmpty();
             case UNTIL_END_OF_TURN -> {
-                // Yield until the current turn ends - clear when any new turn starts (UNTAP phase)
-                if (ph.getPhase() == forge.game.phase.PhaseType.UNTAP) {
+                // Yield until end of the turn when yield was set - clear when turn number changes
+                Integer startTurn = yieldStartTurn.get(player);
+                int currentTurn = ph.getTurn();
+                if (startTurn == null) {
+                    // Turn wasn't tracked when yield was set - track it now
+                    yieldStartTurn.put(player, currentTurn);
+                    yield true;
+                }
+                if (currentTurn > startTurn) {
                     clearYieldMode(player);
                     yield false;
                 }
@@ -664,7 +677,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         if (prefs.getPrefBoolean(ForgePreferences.FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL)) {
             if (!game.getStack().isEmpty()) {
                 forge.game.spellability.SpellAbility topSa = game.getStack().peekAbility();
-                if (topSa != null && !topSa.getActivatingPlayer().equals(p)) {
+                // Exclude triggered abilities - if they target you, the "targeting" setting handles that
+                if (topSa != null && !topSa.isTrigger() && !topSa.getActivatingPlayer().equals(p)) {
                     return true;
                 }
             }

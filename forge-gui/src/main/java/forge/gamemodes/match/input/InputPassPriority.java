@@ -157,7 +157,13 @@ public class InputPassPriority extends InputSyncronizedBase {
         if (!getController().tryUndoLastAction()) { //undo if possible
             //otherwise end turn
             passPriority(() -> {
-                getController().autoPassUntilEndOfTurn();
+                if (isExperimentalYieldEnabled()) {
+                    // Use experimental yield system with smart interrupts
+                    getController().getGui().setYieldMode(getOwner(), YieldMode.UNTIL_END_OF_TURN);
+                } else {
+                    // Legacy behavior - cancels on any opponent spell
+                    getController().autoPassUntilEndOfTurn();
+                }
                 stop();
             });
         }
