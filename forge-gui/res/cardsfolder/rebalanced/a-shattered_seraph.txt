@@ -5,7 +5,7 @@ PT:4/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters, you gain 3 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
-A:AB$ Effect | Cost$ 1 ExileFromHand<1/CARDNAME> | ActivationZone$ Hand | ValidTgts$ Land | RememberObjects$ Targeted,Self | StaticAbilities$ Land,MayPlay | Triggers$ Cast | ImprintCards$ Self | Duration$ Permanent | ForgetOnMoved$ Exile | SpellDescription$ Target land gains "{T}: Add {W}, {U}, or {B}" until CARDNAME is cast from exile. You may cast CARDNAME for as long as it remains exiled.
+A:AB$ Effect | Cost$ 1 ExileFromHand<1/CARDNAME> | ActivationZone$ Hand | ValidTgts$ Land | RememberObjects$ Targeted & Self | StaticAbilities$ Land,MayPlay | Triggers$ Cast | ImprintCards$ Self | Duration$ Permanent | ForgetOnMoved$ Exile | SpellDescription$ Target land gains "{T}: Add {W}, {U}, or {B}" until CARDNAME is cast from exile. You may cast CARDNAME for as long as it remains exiled.
 SVar:Land:Mode$ Continuous | AffectedZone$ Battlefield | Affected$ Card.IsRemembered+IsNotImprinted | AddAbility$ Mana | Description$ Target land gains "{T}: Add {W}, {U}, or {B}" until EFFECTSOURCE is cast from exile. You may cast EFFECTSOURCE for as long as it remains exiled.
 SVar:Mana:AB$ Mana | Cost$ T | Produced$ Combo W U B | Amount$ 1 | SpellDescription$ Add {W}, {U}, or {B}.
 SVar:MayPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsImprinted+IsRemembered | AffectedZone$ Exile | Secondary$ True | Description$ You may cast EFFECTSOURCE for as long as it remains exiled.
