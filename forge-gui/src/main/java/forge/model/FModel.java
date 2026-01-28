@@ -23,6 +23,7 @@ import com.google.common.collect.Maps;
 import forge.*;
 import forge.CardStorageReader.ProgressObserver;
 import forge.ai.AiProfileUtil;
+import forge.ai.ComputerUtilMana;
 import forge.card.CardRulesPredicates;
 import forge.card.CardType;
 import forge.deck.CardArchetypeLDAGenerator;
@@ -239,6 +240,8 @@ public final class FModel {
 
         ForgePreferences.DEV_MODE = preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
         ForgePreferences.UPLOAD_DRAFT = ForgePreferences.NET_CONN;
+        // Set AI experimental mana payment flag
+        ComputerUtilMana.setExperimentalManaPaymentEnabled(preferences.getPrefBoolean(FPref.MATCH_EXPERIMENTAL_AI_MANA_PAYMENT));
 
         getMagicDb().setStandardPredicate(getFormats().getStandard().getFilterRules());
         getMagicDb().setPioneerPredicate(getFormats().getPioneer().getFilterRules());

@@ -224,6 +224,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.MATCH_EXPERIMENTAL_RESTORE,
             Forge.getLocalizer().getMessage("cbExperimentalRestore"),
             Forge.getLocalizer().getMessage("nlExperimentalRestore")), 1);
+        lstSettings.addItem(new BooleanSetting(FPref.MATCH_EXPERIMENTAL_AI_MANA_PAYMENT,
+            "Experimental AI Mana Payment",
+            "Enable experimental AI mana payment logic."), 1); // TODO: localize
         lstSettings.addItem(new CustomSelectSetting(FPref.MATCH_AI_TIMEOUT, Forge.getLocalizer().getMessage("cbAITimeout"),
             Forge.getLocalizer().getMessage("nlAITimeout"),
             Lists.newArrayList("5", "10", "60", "120", "240", "300", "600")), 1);
@@ -999,3 +1002,5 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         }
     }
 }
+
+
