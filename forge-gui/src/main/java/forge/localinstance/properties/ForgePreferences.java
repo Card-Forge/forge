@@ -134,6 +134,18 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_HIDE_GAME_TABS ("false"), // Visibility of tabs in match screen.
         UI_CLOSE_ACTION ("NONE"),
         UI_MANA_LOST_PROMPT ("false"), // Prompt on losing mana when passing priority
+
+        // Experimental yield options (feature-gated)
+        YIELD_EXPERIMENTAL_OPTIONS("false"),
+        YIELD_SUGGEST_STACK_YIELD("true"),
+        YIELD_SUGGEST_NO_MANA("true"),
+        YIELD_SUGGEST_NO_ACTIONS("true"),
+        YIELD_INTERRUPT_ON_ATTACKERS("true"),
+        YIELD_INTERRUPT_ON_BLOCKERS("true"),
+        YIELD_INTERRUPT_ON_TARGETING("true"),
+        YIELD_INTERRUPT_ON_OPPONENT_SPELL("false"),
+        YIELD_INTERRUPT_ON_COMBAT("false"),
+
         UI_STACK_EFFECT_NOTIFICATION_POLICY ("Never"),
         UI_LAND_PLAYED_NOTIFICATION_POLICY ("Never"),
         UI_PAUSE_WHILE_MINIMIZED("false"),
@@ -286,6 +298,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         SHORTCUT_MACRO_RECORD ("16 82"),
         SHORTCUT_MACRO_NEXT_ACTION ("16 50"),
         SHORTCUT_CARD_ZOOM("90"),
+        SHORTCUT_YIELD_UNTIL_STACK_CLEARS("17 16 83"), // Ctrl+Shift+S
+        SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN("17 16 78"), // Ctrl+Shift+N
 
         LAST_IMPORTED_CUBE_ID("");
 

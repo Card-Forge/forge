@@ -28,6 +28,11 @@ public interface IGameController {
 
     void passPriorityUntilEndOfTurn();
 
+    // Extended yield methods (experimental feature)
+    void yieldUntilStackClears();
+
+    void yieldUntilYourNextTurn();
+
     void selectPlayer(PlayerView playerView, ITriggerEvent triggerEvent);
 
     boolean selectCard(CardView cardView, List<CardView> otherCardViewsToSelect, ITriggerEvent triggerEvent);

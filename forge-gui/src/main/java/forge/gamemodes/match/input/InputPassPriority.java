@@ -22,6 +22,9 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.actions.PassPriorityAction;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
+import forge.gamemodes.match.YieldMode;
+import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
@@ -54,6 +57,36 @@ public class InputPassPriority extends InputSyncronizedBase {
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
+        // Check if experimental yield features are enabled and show smart suggestions
+        if (isExperimentalYieldEnabled()) {
+            ForgePreferences prefs = FModel.getPreferences();
+
+            // Suggestion 1: Stack items but can't respond
+            if (prefs.getPrefBoolean(FPref.YIELD_SUGGEST_STACK_YIELD) && shouldShowStackYieldPrompt()) {
+                if (showStackYieldPrompt()) {
+                    getController().getGui().setYieldMode(getOwner(), YieldMode.UNTIL_STACK_CLEARS);
+                    stop();
+                    return;
+                }
+            }
+            // Suggestion 2: Has cards but no mana
+            else if (prefs.getPrefBoolean(FPref.YIELD_SUGGEST_NO_MANA) && shouldShowNoManaPrompt()) {
+                if (showNoManaPrompt()) {
+                    getController().getGui().setYieldMode(getOwner(), getDefaultYieldMode());
+                    stop();
+                    return;
+                }
+            }
+            // Suggestion 3: No available actions (empty hand, no abilities)
+            else if (prefs.getPrefBoolean(FPref.YIELD_SUGGEST_NO_ACTIONS) && shouldShowNoActionsPrompt()) {
+                if (showNoActionsPrompt()) {
+                    getController().getGui().setYieldMode(getOwner(), getDefaultYieldMode());
+                    stop();
+                    return;
+                }
+            }
+        }
+
         showMessage(getTurnPhasePriorityMessage(getController().getGame()));
         chosenSa = null;
         Localizer localizer = Localizer.getInstance();
@@ -175,5 +208,145 @@ public class InputPassPriority extends InputSyncronizedBase {
             return true;
         }
     	return false;
+    }
+
+    // Smart yield suggestion helper methods
+
+    private boolean isExperimentalYieldEnabled() {
+        return FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS);
+    }
+
+    private YieldMode getDefaultYieldMode() {
+        return getController().getGame().getPlayers().size() >= 3
+            ? YieldMode.UNTIL_YOUR_NEXT_TURN
+            : YieldMode.UNTIL_END_OF_TURN;
+    }
+
+    private boolean shouldShowStackYieldPrompt() {
+        Game game = getController().getGame();
+        Player player = getController().getPlayer();
+
+        if (game.getStack().isEmpty()) {
+            return false;
+        }
+
+        return !canRespondToStack(game, player);
+    }
+
+    private boolean canRespondToStack(Game game, Player player) {
+        // Check hand for playable spells (getAllPossibleAbilities already filters by timing)
+        for (Card card : player.getCardsIn(ZoneType.Hand)) {
+            if (!card.getAllPossibleAbilities(player, true).isEmpty()) {
+                return true;
+            }
+        }
+
+        // Check battlefield for activatable abilities (excluding mana abilities)
+        for (Card card : player.getCardsIn(ZoneType.Battlefield)) {
+            for (SpellAbility sa : card.getAllPossibleAbilities(player, true)) {
+                if (!sa.isManaAbility()) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private boolean showStackYieldPrompt() {
+        Localizer loc = Localizer.getInstance();
+        return getController().getGui().showConfirmDialog(
+            loc.getMessage("lblCannotRespondToStackYieldPrompt"),
+            loc.getMessage("lblYieldSuggestion"),
+            loc.getMessage("lblAccept"),
+            loc.getMessage("lblDecline")
+        );
+    }
+
+    private boolean shouldShowNoManaPrompt() {
+        Game game = getController().getGame();
+        Player player = getController().getPlayer();
+
+        if (!game.getStack().isEmpty()) {
+            return false;
+        }
+
+        if (game.getPhaseHandler().getPlayerTurn().equals(player)) {
+            return false;
+        }
+
+        if (player.getCardsIn(ZoneType.Hand).isEmpty()) {
+            return false;
+        }
+
+        return !hasManaAvailable(player);
+    }
+
+    private boolean hasManaAvailable(Player player) {
+        if (player.getManaPool().totalMana() > 0) {
+            return true;
+        }
+
+        for (Card card : player.getCardsIn(ZoneType.Battlefield)) {
+            if (card.isUntapped()) {
+                for (SpellAbility sa : card.getManaAbilities()) {
+                    if (sa.canPlay()) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private boolean showNoManaPrompt() {
+        Localizer loc = Localizer.getInstance();
+        return getController().getGui().showConfirmDialog(
+            loc.getMessage("lblNoManaAvailableYieldPrompt"),
+            loc.getMessage("lblYieldSuggestion"),
+            loc.getMessage("lblAccept"),
+            loc.getMessage("lblDecline")
+        );
+    }
+
+    private boolean shouldShowNoActionsPrompt() {
+        Player player = getController().getPlayer();
+        Game game = getController().getGame();
+
+        if (!game.getStack().isEmpty()) {
+            return false;
+        }
+
+        if (game.getPhaseHandler().getPlayerTurn().equals(player)) {
+            return false;
+        }
+
+        return !hasAvailableActions(game, player);
+    }
+
+    private boolean hasAvailableActions(Game game, Player player) {
+        if (!player.getCardsIn(ZoneType.Hand).isEmpty()) {
+            return true;
+        }
+
+        for (Card card : player.getCardsIn(ZoneType.Battlefield)) {
+            for (SpellAbility sa : card.getAllSpellAbilities()) {
+                if (sa.canPlay() && !sa.isTrigger() && !sa.isManaAbility()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean showNoActionsPrompt() {
+        Localizer loc = Localizer.getInstance();
+        return getController().getGui().showConfirmDialog(
+            loc.getMessage("lblNoActionsAvailableYieldPrompt"),
+            loc.getMessage("lblYieldSuggestion"),
+            loc.getMessage("lblAccept"),
+            loc.getMessage("lblDecline")
+        );
     }
 }

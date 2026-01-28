@@ -10,6 +10,7 @@ import forge.game.card.CardView;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.phase.PhaseType;
+import forge.gamemodes.match.YieldMode;
 import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
@@ -260,6 +261,15 @@ public interface IGuiGame {
     void autoPassCancel(PlayerView player);
 
     void updateAutoPassPrompt();
+
+    // Extended yield mode methods (experimental feature)
+    void setYieldMode(PlayerView player, YieldMode mode);
+
+    void clearYieldMode(PlayerView player);
+
+    boolean shouldAutoYieldForPlayer(PlayerView player);
+
+    int getPlayerCount();
 
     boolean shouldAutoYield(String key);
 

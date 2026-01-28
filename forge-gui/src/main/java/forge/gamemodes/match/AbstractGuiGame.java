@@ -416,6 +416,10 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     private final Set<PlayerView> autoPassUntilEndOfTurn = Sets.newHashSet();
 
+    // Extended yield mode tracking (experimental feature)
+    private final Map<PlayerView, YieldMode> playerYieldMode = Maps.newHashMap();
+    private final Map<PlayerView, forge.game.player.Player> yieldTurnOwner = Maps.newHashMap();
+
     /**
      * Automatically pass priority until reaching the Cleanup phase of the
      * current turn.
@@ -499,13 +503,183 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public final void updateAutoPassPrompt() {
-        if (!autoPassUntilEndOfTurn.isEmpty()) {
-            //allow user to cancel auto-pass
-            cancelAwaitNextInput(); //don't overwrite prompt with awaiting opponent
-            showPromptMessage(getCurrentPlayer(), Localizer.getInstance().getMessage("lblYieldingUntilEndOfTurn"));
-            updateButtons(getCurrentPlayer(), false, true, false);
+        PlayerView player = getCurrentPlayer();
+
+        // Check legacy auto-pass first
+        if (autoPassUntilEndOfTurn.contains(player)) {
+            cancelAwaitNextInput();
+            showPromptMessage(player, Localizer.getInstance().getMessage("lblYieldingUntilEndOfTurn"));
+            updateButtons(player, false, true, false);
+            return;
+        }
+
+        // Check experimental yield modes
+        YieldMode mode = playerYieldMode.get(player);
+        if (mode != null && mode != YieldMode.NONE) {
+            cancelAwaitNextInput();
+            Localizer loc = Localizer.getInstance();
+            String message = switch (mode) {
+                case UNTIL_STACK_CLEARS -> loc.getMessage("lblYieldingUntilStackClears");
+                case UNTIL_END_OF_TURN -> loc.getMessage("lblYieldingUntilEndOfTurn");
+                case UNTIL_YOUR_NEXT_TURN -> loc.getMessage("lblYieldingUntilYourNextTurn");
+                default -> "";
+            };
+            showPromptMessage(player, message);
+            updateButtons(player, false, true, false);
         }
     }
+
+    // Extended yield mode methods (experimental feature)
+    @Override
+    public final void setYieldMode(final PlayerView player, final YieldMode mode) {
+        if (!isYieldExperimentalEnabled()) {
+            // Fall back to legacy behavior for UNTIL_END_OF_TURN
+            if (mode == YieldMode.UNTIL_END_OF_TURN) {
+                autoPassUntilEndOfTurn.add(player);
+                updateAutoPassPrompt();
+            }
+            return;
+        }
+
+        if (mode == YieldMode.NONE) {
+            clearYieldMode(player);
+            return;
+        }
+
+        playerYieldMode.put(player, mode);
+        if (getGameView() != null && getGameView().getGame() != null) {
+            yieldTurnOwner.put(player, getGameView().getGame().getPhaseHandler().getPlayerTurn());
+        }
+        updateAutoPassPrompt();
+    }
+
+    @Override
+    public final void clearYieldMode(final PlayerView player) {
+        playerYieldMode.remove(player);
+        yieldTurnOwner.remove(player);
+        autoPassUntilEndOfTurn.remove(player); // Legacy compatibility
+
+        showPromptMessage(player, "");
+        updateButtons(player, false, false, false);
+        awaitNextInput();
+    }
+
+    @Override
+    public final boolean shouldAutoYieldForPlayer(final PlayerView player) {
+        // Check legacy system first
+        if (autoPassUntilEndOfTurn.contains(player)) {
+            return true;
+        }
+
+        if (!isYieldExperimentalEnabled()) {
+            return false;
+        }
+
+        YieldMode mode = playerYieldMode.get(player);
+        if (mode == null || mode == YieldMode.NONE) {
+            return false;
+        }
+
+        // Check interrupt conditions
+        if (shouldInterruptYield(player)) {
+            clearYieldMode(player);
+            return false;
+        }
+
+        if (getGameView() == null || getGameView().getGame() == null) {
+            return false;
+        }
+
+        forge.game.Game game = getGameView().getGame();
+        forge.game.phase.PhaseHandler ph = game.getPhaseHandler();
+
+        return switch (mode) {
+            case UNTIL_STACK_CLEARS -> !game.getStack().isEmpty();
+            case UNTIL_END_OF_TURN -> yieldTurnOwner.get(player) != null && yieldTurnOwner.get(player).equals(ph.getPlayerTurn());
+            case UNTIL_YOUR_NEXT_TURN -> {
+                forge.game.player.Player playerObj = game.getPlayer(player);
+                yield !ph.getPlayerTurn().equals(playerObj);
+            }
+            default -> false;
+        };
+    }
+
+    private boolean shouldInterruptYield(final PlayerView player) {
+        if (getGameView() == null || getGameView().getGame() == null) {
+            return false;
+        }
+
+        forge.game.Game game = getGameView().getGame();
+        forge.game.player.Player p = game.getPlayer(player);
+        ForgePreferences prefs = FModel.getPreferences();
+        forge.game.phase.PhaseType phase = game.getPhaseHandler().getPhase();
+
+        if (prefs.getPrefBoolean(ForgePreferences.FPref.YIELD_INTERRUPT_ON_ATTACKERS)) {
+            if (phase == forge.game.phase.PhaseType.COMBAT_DECLARE_ATTACKERS &&
+                game.getCombat() != null && game.getCombat().getDefenders().contains(p)) {
+                return true;
+            }
+        }
+
+        if (prefs.getPrefBoolean(ForgePreferences.FPref.YIELD_INTERRUPT_ON_BLOCKERS)) {
+            if (phase == forge.game.phase.PhaseType.COMBAT_DECLARE_BLOCKERS &&
+                game.getCombat() != null && game.getCombat().getDefenders().contains(p)) {
+                return true;
+            }
+        }
+
+        if (prefs.getPrefBoolean(ForgePreferences.FPref.YIELD_INTERRUPT_ON_TARGETING)) {
+            for (forge.game.spellability.StackItemView si : getGameView().getStack()) {
+                if (targetsPlayerOrPermanents(si, p)) {
+                    return true;
+                }
+            }
+        }
+
+        if (prefs.getPrefBoolean(ForgePreferences.FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL)) {
+            if (!game.getStack().isEmpty()) {
+                forge.game.spellability.SpellAbility topSa = game.getStack().peekAbility();
+                if (topSa != null && !topSa.getActivatingPlayer().equals(p)) {
+                    return true;
+                }
+            }
+        }
+
+        if (prefs.getPrefBoolean(ForgePreferences.FPref.YIELD_INTERRUPT_ON_COMBAT)) {
+            if (phase == forge.game.phase.PhaseType.COMBAT_BEGIN) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean targetsPlayerOrPermanents(forge.game.spellability.StackItemView si, forge.game.player.Player p) {
+        PlayerView pv = p.getView();
+
+        for (PlayerView target : si.getTargetPlayers()) {
+            if (target.equals(pv)) return true;
+        }
+
+        for (CardView target : si.getTargetCards()) {
+            if (target.getController() != null && target.getController().equals(pv)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isYieldExperimentalEnabled() {
+        return FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.YIELD_EXPERIMENTAL_OPTIONS);
+    }
+
+    @Override
+    public int getPlayerCount() {
+        return getGameView() != null && getGameView().getGame() != null
+            ? getGameView().getGame().getPlayers().size()
+            : 0;
+    }
+
     // End auto-yield/input code
 
     // Abilities to auto-yield to

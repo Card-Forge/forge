@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
 
@@ -50,6 +51,9 @@ public final class GameMenu {
         menu.add(getMenuItem_TargetingArcs());
         menu.add(new CardOverlaysMenu(matchUI).getMenu());
         menu.add(getMenuItem_AutoYields());
+        if (prefs.getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) {
+            menu.add(getYieldOptionsMenu());
+        }
         menu.addSeparator();
         menu.add(getMenuItem_ViewDeckList());
         menu.addSeparator();
@@ -203,5 +207,38 @@ public final class GameMenu {
 
     private ActionListener getViewDeckListAction() {
         return e -> matchUI.viewDeckList();
+    }
+
+    private JMenu getYieldOptionsMenu() {
+        final Localizer localizer = Localizer.getInstance();
+        final JMenu yieldMenu = new JMenu(localizer.getMessage("lblYieldOptions"));
+
+        // Sub-menu 1: Interrupt Settings
+        final JMenu interruptMenu = new JMenu(localizer.getMessage("lblInterruptSettings"));
+        interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnAttackers"), FPref.YIELD_INTERRUPT_ON_ATTACKERS));
+        interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnBlockers"), FPref.YIELD_INTERRUPT_ON_BLOCKERS));
+        interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnTargeting"), FPref.YIELD_INTERRUPT_ON_TARGETING));
+        interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnOpponentSpell"), FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL));
+        interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnCombat"), FPref.YIELD_INTERRUPT_ON_COMBAT));
+        yieldMenu.add(interruptMenu);
+
+        // Sub-menu 2: Automatic Suggestions
+        final JMenu suggestionsMenu = new JMenu(localizer.getMessage("lblAutomaticSuggestions"));
+        suggestionsMenu.add(createYieldCheckbox(localizer.getMessage("lblSuggestStackYield"), FPref.YIELD_SUGGEST_STACK_YIELD));
+        suggestionsMenu.add(createYieldCheckbox(localizer.getMessage("lblSuggestNoMana"), FPref.YIELD_SUGGEST_NO_MANA));
+        suggestionsMenu.add(createYieldCheckbox(localizer.getMessage("lblSuggestNoActions"), FPref.YIELD_SUGGEST_NO_ACTIONS));
+        yieldMenu.add(suggestionsMenu);
+
+        return yieldMenu;
+    }
+
+    private JCheckBoxMenuItem createYieldCheckbox(String label, FPref pref) {
+        final JCheckBoxMenuItem item = new JCheckBoxMenuItem(label);
+        item.setSelected(prefs.getPrefBoolean(pref));
+        item.addActionListener(e -> {
+            prefs.setPref(pref, item.isSelected());
+            prefs.save();
+        });
+        return item;
     }
 }

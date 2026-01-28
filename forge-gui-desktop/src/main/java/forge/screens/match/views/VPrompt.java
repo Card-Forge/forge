@@ -25,9 +25,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import forge.game.card.CardView;
 import forge.gui.framework.DragCell;
@@ -99,6 +102,16 @@ public class VPrompt implements IVDoc<CPrompt> {
 
         btnOK.addKeyListener(buttonKeyAdapter);
         btnCancel.addKeyListener(buttonKeyAdapter);
+
+        // Add right-click menu for yield options (experimental feature)
+        btnCancel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (SwingUtilities.isRightMouseButton(e) && isYieldExperimentalEnabled()) {
+                    showYieldOptionsMenu(e);
+                }
+            }
+        });
 
         tarMessage.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         tarMessage.setMargin(new Insets(3, 3, 3, 3));
@@ -204,5 +217,47 @@ public class VPrompt implements IVDoc<CPrompt> {
     /** @return {@link javax.swing.JLabel} */
     public JLabel getLblGames() {
         return this.lblGames;
+    }
+
+    // Yield options menu support (experimental feature)
+
+    private boolean isYieldExperimentalEnabled() {
+        return FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS);
+    }
+
+    private void showYieldOptionsMenu(MouseEvent e) {
+        JPopupMenu menu = new JPopupMenu();
+        Localizer loc = Localizer.getInstance();
+
+        // Until Stack Clears
+        JMenuItem stackItem = new JMenuItem(loc.getMessage("lblYieldUntilStackClears"));
+        stackItem.addActionListener(evt -> {
+            if (controller.getMatchUI() != null && controller.getMatchUI().getGameController() != null) {
+                controller.getMatchUI().getGameController().yieldUntilStackClears();
+            }
+        });
+        menu.add(stackItem);
+
+        // Until End of Turn
+        JMenuItem turnItem = new JMenuItem(loc.getMessage("lblYieldUntilEndOfTurn"));
+        turnItem.addActionListener(evt -> {
+            if (controller.getMatchUI() != null && controller.getMatchUI().getGameController() != null) {
+                controller.getMatchUI().getGameController().passPriorityUntilEndOfTurn();
+            }
+        });
+        menu.add(turnItem);
+
+        // Until Your Next Turn (only in 3+ player games)
+        if (controller.getMatchUI() != null && controller.getMatchUI().getPlayerCount() >= 3) {
+            JMenuItem yourNextTurnItem = new JMenuItem(loc.getMessage("lblYieldUntilYourNextTurn"));
+            yourNextTurnItem.addActionListener(evt -> {
+                if (controller.getMatchUI().getGameController() != null) {
+                    controller.getMatchUI().getGameController().yieldUntilYourNextTurn();
+                }
+            });
+            menu.add(yourNextTurnItem);
+        }
+
+        menu.show(btnCancel, e.getX(), e.getY());
     }
 }

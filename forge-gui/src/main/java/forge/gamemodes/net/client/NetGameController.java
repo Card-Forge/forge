@@ -74,6 +74,16 @@ public class NetGameController implements IGameController {
     }
 
     @Override
+    public void yieldUntilStackClears() {
+        send(ProtocolMethod.yieldUntilStackClears);
+    }
+
+    @Override
+    public void yieldUntilYourNextTurn() {
+        send(ProtocolMethod.yieldUntilYourNextTurn);
+    }
+
+    @Override
     public void passPriority() {
         send(ProtocolMethod.passPriority);
     }

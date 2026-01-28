@@ -3255,6 +3255,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         getGui().autoPassCancel(getLocalPlayerView());
     }
 
+    public void yieldUntilStackClears() {
+        getGui().setYieldMode(getLocalPlayerView(), forge.gamemodes.match.YieldMode.UNTIL_STACK_CLEARS);
+    }
+
+    public void yieldUntilYourNextTurn() {
+        getGui().setYieldMode(getLocalPlayerView(), forge.gamemodes.match.YieldMode.UNTIL_YOUR_NEXT_TURN);
+    }
+
+    public int getPlayerCount() {
+        return getGui().getPlayerCount();
+    }
+
     @Override
     public void awaitNextInput() {
         getGui().awaitNextInput();
