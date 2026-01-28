@@ -77,6 +77,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_AVATARS ("0,1"),
         UI_SLEEVES ("0,1"),
         UI_SHOW_CARD_OVERLAYS ("true"),
+        UI_SHOW_CASTABLE_BORDER ("false"),
         UI_OVERLAY_CARD_NAME ("true"),
         UI_OVERLAY_CARD_POWER ("true"),
         UI_OVERLAY_CARD_MANA_COST ("true"),
