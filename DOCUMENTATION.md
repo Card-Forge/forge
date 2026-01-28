@@ -290,3 +290,7 @@ SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN("17 16 78") // Ctrl+Shift+N
 
 **Removed:**
 - `yieldTurnNumber` map (turn tracking simplified)
+
+## Authorship
+
+All code in this PR was written by Claude AI (Anthropic) under human instruction and direction. The human collaborator provided requirements, design decisions, testing feedback, and iterative guidance throughout development. Claude AI implemented all code changes, documentation, and technical solutions.
