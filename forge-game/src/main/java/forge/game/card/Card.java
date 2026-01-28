@@ -126,7 +126,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private final Table<Long, Long, ICardChangedType> changedCardTypes = TreeBasedTable.create(); // Layer 4
 
     private final Table<Long, Long, CardChangedName> changedCardNames = TreeBasedTable.create(); // Layer 3
-    private final Table<Long, Long, KeywordsChange> changedCardKeywordsByText = TreeBasedTable.create(); // Layer 3 by Text Change
+    private final Table<Long, Long, IKeywordsChange> changedCardKeywordsByText = TreeBasedTable.create(); // Layer 3 by Text Change
     protected KeywordsChange changedCardKeywordsByWord = new KeywordsChange(ImmutableList.<KeywordInterface>of(), ImmutableList.<KeywordInterface>of(), false); // Layer 3 by Word Change
     private final Table<Long, Long, KeywordsChange> changedCardKeywords = TreeBasedTable.create(); // Layer 6
 
@@ -3481,7 +3481,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         // keywords should already been cleanup by layers
         for (KeywordInterface kw : getUnhiddenKeywords(state)) {
-            list.addAll(kw.getAbilities());
+            kw.applySpellAbility(list);
         }
     }
 
@@ -4130,15 +4130,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return changed;
     }
 
-    public Table<Long, Long, KeywordsChange> getChangedCardKeywordsByText() {
+    public Table<Long, Long, IKeywordsChange> getChangedCardKeywordsByText() {
         return changedCardKeywordsByText;
     }
 
-    public Iterable<KeywordsChange> getChangedCardKeywordsList() {
+    public Iterable<IKeywordsChange> getChangedCardKeywordsList(final CardState state) {
         return Iterables.concat(
             changedCardKeywordsByText.values(), // Layer 3
             ImmutableList.of(changedCardKeywordsByWord), // Layer 3
-            ImmutableList.of(new KeywordsChange(ImmutableList.<KeywordInterface>of(), ImmutableList.<KeywordInterface>of(), this.hasRemoveIntrinsic())), // Layer 4
+            ImmutableList.of(state.getLandTraitChanges()), // Layer 4
             changedCardKeywords.values() // Layer 6
         );
     }
@@ -5146,9 +5146,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
     }
 
-    public void setChangedCardKeywordsByText(Table<Long, Long, KeywordsChange> changedCardKeywords) {
+    public void setChangedCardKeywordsByText(Table<Long, Long, IKeywordsChange> changedCardKeywords) {
         this.changedCardKeywordsByText.clear();
-        for (Table.Cell<Long, Long, KeywordsChange> entry : changedCardKeywords.cellSet()) {
+        for (Table.Cell<Long, Long, IKeywordsChange> entry : changedCardKeywords.cellSet()) {
             this.changedCardKeywordsByText.put(entry.getRowKey(), entry.getColumnKey(), entry.getValue().copy(this, true));
         }
     }
@@ -5236,7 +5236,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             }
         }
 
-        keywords.applyChanges(getChangedCardKeywordsList());
+        keywords.applyChanges(getChangedCardKeywordsList(state));
 
         // remove Can't have keywords
         for (Keyword k : getCantHaveKeyword()) {
@@ -7101,7 +7101,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         // keywords are already sorted by Layer
         for (KeywordInterface kw : getUnhiddenKeywords(state)) {
-            list.addAll(kw.getStaticAbilities());
+            kw.applyStaticAbility(list);
         }
     }
 
@@ -7140,7 +7140,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         // Keywords are already sorted by Layer
         for (KeywordInterface kw : getUnhiddenKeywords(state)) {
-            list.addAll(kw.getTriggers());
+            kw.applyTrigger(list);
         }
     }
 
@@ -7160,7 +7160,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         // Keywords are already sorted by Layer
         for (KeywordInterface kw : getUnhiddenKeywords(state)) {
-            list.addAll(kw.getReplacements());
+            kw.applyReplacementEffect(list);
         }
 
         // Shield Counter aren't affected by Changed Card Traits
