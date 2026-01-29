@@ -181,9 +181,13 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
         // give static abilities (should only be used by cards to give
         // itself a static ability)
+        boolean costChange = false;
         final List<StaticAbility> addedStaticAbilities = Lists.newArrayList();
         for (final String s : stAbs) {
             addedStaticAbilities.add(StaticAbility.create(AbilityUtils.getSVar(sa, s), c, sa.getCardState(), false));
+            if ("ReduceCost".equals(s) || "RaiseCost".equals(s)) {
+                costChange = true;
+            }
         }
 
         final GameCommand unanimate = new GameCommand() {
@@ -235,6 +239,9 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             } else {
                 addUntilCommand(sa, unanimate);
             }
+        }
+        if (costChange) {
+            c.calculatePerpetualAdjustedManaCost();
         }
     }
 
