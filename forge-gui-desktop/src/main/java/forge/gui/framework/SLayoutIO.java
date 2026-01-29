@@ -77,6 +77,7 @@ public final class SLayoutIO {
 
             FThreads.invokeInEdtLater(() -> {
                 SLayoutIO.loadLayout(loadFile);
+                Singletons.getControl().getCurrentScreen().getView().populate();
                 SLayoutIO.saveLayout(null);
                 SOverlayUtils.hideOverlay();
             });
@@ -89,6 +90,7 @@ public final class SLayoutIO {
 
         FThreads.invokeInEdtLater(() -> {
             SLayoutIO.loadLayout(null);
+            Singletons.getControl().getCurrentScreen().getView().populate();
             SOverlayUtils.hideOverlay();
         });
     }
