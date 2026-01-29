@@ -338,6 +338,27 @@ public class ConsoleCommandInterpreter {
             System.out.println("POI Names - Types\n" + String.join("\n", poiNames));
             return "POI lists dumped to stdout.";
         });
+        registerCommand(new String[]{"reveal", "caves", "dungeons"}, s -> {
+            WorldSave save = WorldSave.getCurrentSave();
+            if (save == null || save.getWorld() == null) {
+                return "No world loaded.";
+            }
+            int revealed = 0;
+            for (PointOfInterest poi : save.getWorld().getAllPointOfInterest()) {
+                PointOfInterestData data = poi.getData();
+                if (data == null || data.type == null) {
+                    continue;
+                }
+                if (!"cave".equalsIgnoreCase(data.type) && !"dungeon".equalsIgnoreCase(data.type)) {
+                    continue;
+                }
+                if (!save.getPointOfInterestChanges(poi.getID()).isVisited()) {
+                    save.getPointOfInterestChanges(poi.getID()).visit();
+                    revealed++;
+                }
+            }
+            return "Revealed " + revealed + " cave/dungeon names on the map.";
+        });
         registerCommand(new String[]{"setColorID"}, s -> {
             if (s.length < 1)
                 return "Please specify color ID: Valid choices: B, G, R, U, W, C. Example:\n\"setColorID G\"";
