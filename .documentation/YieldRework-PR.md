@@ -30,14 +30,15 @@ Extended yield options that automatically pass priority until specific condition
 ### Yield Modes
 | Mode | End Condition | Hotkey |
 |------|---------------|--------|
-| Until End of Turn | Turn number changes | F1 |
+| Next Turn | Turn number changes | F1 |
 | Until Stack Clears | Stack empty (including simultaneous triggers) | F2 |
-| Until Before Combat | COMBAT_BEGIN phase or later | F3 |
-| Until End Step | END_OF_TURN or CLEANUP phase | F4 |
-| Until Your Next Turn | Your turn starts (3+ players only) | F5 |
+| Until Before Combat | Next COMBAT_BEGIN phase (tracks start turn/phase) | F3 |
+| Until End Step | Next END_OF_TURN phase (tracks start turn/phase) | F4 |
+| Until Your Next Turn | Your turn starts again (tracks if started during own turn) | F5 |
 
 ### Access Methods
-- Right-click "End Turn" button for yield options menu
+- **Yield Options Panel**: Dockable panel with dedicated yield buttons (appears with Stack panel)
+- Right-click "End Turn" button for yield options menu (configurable)
 - Keyboard shortcuts: F1-F5 for yield modes, ESC to cancel
 - Game menu → Yield Options submenu
 
@@ -53,15 +54,19 @@ Prompts appear when player likely cannot act:
 - **You or your permanents** targeted
 - Any opponent spell cast
 - Combat begins
+- Cards revealed (can be disabled to auto-dismiss reveal dialogs)
 
 ## Files Changed
 
-**New (1):**
-- `forge-gui/.../YieldMode.java`
+**New (3):**
+- `forge-gui/.../YieldMode.java` - Yield mode enum
+- `forge-gui-desktop/.../VYield.java` - Yield panel view
+- `forge-gui-desktop/.../CYield.java` - Yield panel controller
 
-**Modified (12):**
+**Modified (15):**
 - `forge-gui`: AbstractGuiGame, InputPassPriority, IGuiGame, IGameController, PlayerControllerHuman, ForgePreferences, NetGameController, ProtocolMethod, en-US.properties
-- `forge-gui-desktop`: VPrompt, GameMenu, KeyboardShortcuts
+- `forge-gui-desktop`: VPrompt, VMatchUI, CMatchUI, EDocID, FButton, GameMenu, KeyboardShortcuts
+- `forge-gui/res`: match.xml (default layout)
 
 ## How to Enable
 
@@ -77,6 +82,11 @@ Prompts appear when player likely cannot act:
 - [ ] Smart suggestions appear in prompt area (not modal dialogs)
 - [ ] Menu checkboxes stay open when toggled
 - [ ] Network play: no desync with extended yields
+- [ ] Yield Options panel appears when feature enabled
+- [ ] Yield buttons disabled during mulligan
+- [ ] Active yield button highlighted in red
+- [ ] "Interrupt on Reveal" setting works (dialogs skipped when disabled)
+- [ ] Combat yield stops at correct combat (not same turn's M2)
 
 ## Risk Assessment
 

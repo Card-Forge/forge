@@ -419,6 +419,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     // Extended yield mode tracking (experimental feature)
     private final Map<PlayerView, YieldMode> playerYieldMode = Maps.newHashMap();
     private final Map<PlayerView, Integer> yieldStartTurn = Maps.newHashMap(); // Track turn when yield was set
+    private final Map<PlayerView, Integer> yieldCombatStartTurn = Maps.newHashMap(); // Track turn when combat yield was set
+    private final Map<PlayerView, Boolean> yieldCombatStartedAtOrAfterCombat = Maps.newHashMap(); // Was yield set at/after combat?
+    private final Map<PlayerView, Integer> yieldEndStepStartTurn = Maps.newHashMap(); // Track turn when end step yield was set
+    private final Map<PlayerView, Boolean> yieldEndStepStartedAtOrAfterEndStep = Maps.newHashMap(); // Was yield set at/after end step?
+    private final Map<PlayerView, Boolean> yieldYourTurnStartedDuringOurTurn = Maps.newHashMap(); // Was yield set during our turn?
 
     /**
      * Automatically pass priority until reaching the Cleanup phase of the
@@ -558,6 +563,31 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         if (mode == YieldMode.UNTIL_END_OF_TURN && getGameView() != null && getGameView().getGame() != null) {
             yieldStartTurn.put(player, getGameView().getGame().getPhaseHandler().getTurn());
         }
+        // Track turn and phase state for UNTIL_BEFORE_COMBAT mode
+        if (mode == YieldMode.UNTIL_BEFORE_COMBAT && getGameView() != null && getGameView().getGame() != null) {
+            forge.game.phase.PhaseHandler ph = getGameView().getGame().getPhaseHandler();
+            yieldCombatStartTurn.put(player, ph.getTurn());
+            forge.game.phase.PhaseType phase = ph.getPhase();
+            boolean atOrAfterCombat = phase != null &&
+                (phase == forge.game.phase.PhaseType.COMBAT_BEGIN || phase.isAfter(forge.game.phase.PhaseType.COMBAT_BEGIN));
+            yieldCombatStartedAtOrAfterCombat.put(player, atOrAfterCombat);
+        }
+        // Track turn and phase state for UNTIL_END_STEP mode
+        if (mode == YieldMode.UNTIL_END_STEP && getGameView() != null && getGameView().getGame() != null) {
+            forge.game.phase.PhaseHandler ph = getGameView().getGame().getPhaseHandler();
+            yieldEndStepStartTurn.put(player, ph.getTurn());
+            forge.game.phase.PhaseType phase = ph.getPhase();
+            boolean atOrAfterEndStep = phase != null &&
+                (phase == forge.game.phase.PhaseType.END_OF_TURN || phase == forge.game.phase.PhaseType.CLEANUP);
+            yieldEndStepStartedAtOrAfterEndStep.put(player, atOrAfterEndStep);
+        }
+        // Track if UNTIL_YOUR_NEXT_TURN was started during our turn
+        if (mode == YieldMode.UNTIL_YOUR_NEXT_TURN && getGameView() != null && getGameView().getGame() != null) {
+            forge.game.phase.PhaseHandler ph = getGameView().getGame().getPhaseHandler();
+            forge.game.player.Player playerObj = getGameView().getGame().getPlayer(player);
+            boolean isOurTurn = ph.getPlayerTurn().equals(playerObj);
+            yieldYourTurnStartedDuringOurTurn.put(player, isOurTurn);
+        }
         updateAutoPassPrompt();
     }
 
@@ -565,6 +595,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public final void clearYieldMode(final PlayerView player) {
         playerYieldMode.remove(player);
         yieldStartTurn.remove(player);
+        yieldCombatStartTurn.remove(player);
+        yieldCombatStartedAtOrAfterCombat.remove(player);
+        yieldEndStepStartTurn.remove(player);
+        yieldEndStepStartedAtOrAfterEndStep.remove(player);
+        yieldYourTurnStartedDuringOurTurn.remove(player);
         autoPassUntilEndOfTurn.remove(player); // Legacy compatibility
 
         showPromptMessage(player, "");
@@ -639,25 +674,92 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 // Yield until our turn starts
                 forge.game.player.Player playerObj = game.getPlayer(player);
                 boolean isOurTurn = ph.getPlayerTurn().equals(playerObj);
+                Boolean startedDuringOurTurn = yieldYourTurnStartedDuringOurTurn.get(player);
+
+                if (startedDuringOurTurn == null) {
+                    // Tracking wasn't set - initialize it now
+                    yieldYourTurnStartedDuringOurTurn.put(player, isOurTurn);
+                    startedDuringOurTurn = isOurTurn;
+                }
+
                 if (isOurTurn) {
-                    clearYieldMode(player);
-                    yield false;
+                    // If we started during our turn, we need to wait until it's our turn AGAIN
+                    // (i.e., we left our turn and came back)
+                    // If we started during opponent's turn, stop when we reach our turn
+                    if (!Boolean.TRUE.equals(startedDuringOurTurn)) {
+                        clearYieldMode(player);
+                        yield false;
+                    }
+                } else {
+                    // Not our turn - if we started during our turn, mark that we've left it
+                    if (Boolean.TRUE.equals(startedDuringOurTurn)) {
+                        // We've left our turn, now waiting for it to come back
+                        yieldYourTurnStartedDuringOurTurn.put(player, false);
+                    }
                 }
                 yield true;
             }
             case UNTIL_BEFORE_COMBAT -> {
                 forge.game.phase.PhaseType phase = ph.getPhase();
-                if (phase == forge.game.phase.PhaseType.COMBAT_BEGIN || phase.isAfter(forge.game.phase.PhaseType.COMBAT_BEGIN)) {
-                    clearYieldMode(player);
-                    yield false;
+                Integer startTurn = yieldCombatStartTurn.get(player);
+                Boolean startedAtOrAfterCombat = yieldCombatStartedAtOrAfterCombat.get(player);
+                int currentTurn = ph.getTurn();
+
+                if (startTurn == null) {
+                    // Tracking wasn't set - initialize it now
+                    yieldCombatStartTurn.put(player, currentTurn);
+                    boolean atOrAfterCombat = phase != null &&
+                        (phase == forge.game.phase.PhaseType.COMBAT_BEGIN || phase.isAfter(forge.game.phase.PhaseType.COMBAT_BEGIN));
+                    yieldCombatStartedAtOrAfterCombat.put(player, atOrAfterCombat);
+                    startTurn = currentTurn;
+                    startedAtOrAfterCombat = atOrAfterCombat;
+                }
+
+                // Check if we should stop: we're at or past combat on a DIFFERENT turn than when we started,
+                // OR we're at combat on the SAME turn but we started BEFORE combat
+                boolean atOrAfterCombatNow = phase != null &&
+                    (phase == forge.game.phase.PhaseType.COMBAT_BEGIN || phase.isAfter(forge.game.phase.PhaseType.COMBAT_BEGIN));
+
+                if (atOrAfterCombatNow) {
+                    boolean differentTurn = currentTurn > startTurn;
+                    boolean sameTurnButStartedBeforeCombat = (currentTurn == startTurn.intValue()) && !Boolean.TRUE.equals(startedAtOrAfterCombat);
+
+                    if (differentTurn || sameTurnButStartedBeforeCombat) {
+                        clearYieldMode(player);
+                        yield false;
+                    }
                 }
                 yield true;
             }
             case UNTIL_END_STEP -> {
                 forge.game.phase.PhaseType phase = ph.getPhase();
-                if (phase == forge.game.phase.PhaseType.END_OF_TURN || phase == forge.game.phase.PhaseType.CLEANUP) {
-                    clearYieldMode(player);
-                    yield false;
+                Integer startTurn = yieldEndStepStartTurn.get(player);
+                Boolean startedAtOrAfterEndStep = yieldEndStepStartedAtOrAfterEndStep.get(player);
+                int currentTurn = ph.getTurn();
+
+                if (startTurn == null) {
+                    // Tracking wasn't set - initialize it now
+                    yieldEndStepStartTurn.put(player, currentTurn);
+                    boolean atOrAfterEndStep = phase != null &&
+                        (phase == forge.game.phase.PhaseType.END_OF_TURN || phase == forge.game.phase.PhaseType.CLEANUP);
+                    yieldEndStepStartedAtOrAfterEndStep.put(player, atOrAfterEndStep);
+                    startTurn = currentTurn;
+                    startedAtOrAfterEndStep = atOrAfterEndStep;
+                }
+
+                // Check if we should stop: we're at or past end step on a DIFFERENT turn than when we started,
+                // OR we're at end step on the SAME turn but we started BEFORE end step
+                boolean atOrAfterEndStepNow = phase != null &&
+                    (phase == forge.game.phase.PhaseType.END_OF_TURN || phase == forge.game.phase.PhaseType.CLEANUP);
+
+                if (atOrAfterEndStepNow) {
+                    boolean differentTurn = currentTurn > startTurn;
+                    boolean sameTurnButStartedBeforeEndStep = (currentTurn == startTurn.intValue()) && !Boolean.TRUE.equals(startedAtOrAfterEndStep);
+
+                    if (differentTurn || sameTurnButStartedBeforeEndStep) {
+                        clearYieldMode(player);
+                        yield false;
+                    }
                 }
                 yield true;
             }

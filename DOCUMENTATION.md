@@ -21,17 +21,28 @@ Extended yield options that allow players to automatically pass priority until s
 
 | Mode | Description | End Condition | Availability |
 |------|-------------|---------------|--------------|
-| Until End of Turn | Auto-pass until end of current turn | Turn number changes | Always |
+| Next Turn | Auto-pass until next turn | Turn number changes | Always |
 | Until Stack Clears | Auto-pass while stack has items | Stack becomes empty (including simultaneous triggers) | Always |
-| Until Before Combat | Auto-pass until combat begins | COMBAT_BEGIN phase or later | Always |
-| Until End Step | Auto-pass until end step | END_OF_TURN or CLEANUP phase | Always |
-| Until Your Next Turn | Auto-pass until you become active player | Your turn starts | 3+ player games only |
+| Until Before Combat | Auto-pass until combat begins | Next COMBAT_BEGIN phase (tracks start turn/phase) | Always |
+| Until End Step | Auto-pass until end step | Next END_OF_TURN phase (tracks start turn/phase) | Always |
+| Until Your Next Turn | Auto-pass until you become active player | Your turn starts again (tracks if started during own turn) | 3+ player games only |
 
 ### Access Methods
 
-1. **Right-Click Menu**: Right-click the "End Turn" button to see yield options
-2. **Keyboard Shortcuts** (F-keys to avoid conflict with ability selection 1-9):
-   - `F1` - Yield until end of turn
+1. **Yield Options Panel**: A dockable panel with dedicated yield buttons:
+   - **Clear Stack** - Yield until stack clears (only enabled when stack has items)
+   - **Combat** - Yield until before combat
+   - **End Step** - Yield until end step
+   - **Next Turn** - Yield until next turn
+   - **Your Turn** - Yield until your next turn (only visible in 3+ player games)
+   - Buttons are blue by default, red when that yield mode is active
+   - Panel appears as a tab alongside the Stack panel when experimental yields are enabled
+   - Buttons are disabled during mulligan and pre-game phases
+
+2. **Right-Click Menu**: Right-click the "End Turn" button to see yield options (configurable)
+
+3. **Keyboard Shortcuts** (F-keys to avoid conflict with ability selection 1-9):
+   - `F1` - Yield until next turn
    - `F2` - Yield until stack clears
    - `F3` - Yield until before combat
    - `F4` - Yield until end step
@@ -59,6 +70,7 @@ Yield modes can be configured to automatically cancel when:
 - **You or your permanents** are targeted by a spell/ability (default: ON)
 - An opponent casts any spell (default: OFF)
 - Combat begins (default: OFF)
+- Cards are revealed (default: ON) - when disabled, reveal dialogs are auto-dismissed during yield
 
 **Multiplayer Note:** Attack/blocker interrupts are scoped to the individual player - if Player A attacks Player B, Player C's yield will NOT be interrupted.
 
@@ -95,8 +107,14 @@ forge-gui/           (shared GUI code)
 └── en-US.properties                  # Localization
 
 forge-gui-desktop/   (desktop-specific)
+├── VYield.java                       # Yield Options panel view (NEW)
+├── CYield.java                       # Yield Options panel controller (NEW)
+├── EDocID.java                       # Added REPORT_YIELD doc ID
 ├── VPrompt.java                      # Right-click menu
+├── VMatchUI.java                     # Dynamic panel visibility
+├── CMatchUI.java                     # Yield panel registration
 ├── GameMenu.java                     # Yield Options submenu
+├── FButton.java                      # Added highlight mode for buttons
 └── KeyboardShortcuts.java            # New shortcuts
 ```
 
@@ -132,6 +150,11 @@ The "End Turn" button (Cancel button during priority) has different behavior dep
 // In AbstractGuiGame.java
 private final Map<PlayerView, YieldMode> playerYieldMode = Maps.newHashMap();
 private final Map<PlayerView, Integer> yieldStartTurn = Maps.newHashMap(); // Track turn when yield was set
+private final Map<PlayerView, Integer> yieldCombatStartTurn = Maps.newHashMap(); // Track turn when combat yield was set
+private final Map<PlayerView, Boolean> yieldCombatStartedAtOrAfterCombat = Maps.newHashMap(); // Was yield set at/after combat?
+private final Map<PlayerView, Integer> yieldEndStepStartTurn = Maps.newHashMap(); // Track turn when end step yield was set
+private final Map<PlayerView, Boolean> yieldEndStepStartedAtOrAfterEndStep = Maps.newHashMap(); // Was yield set at/after end step?
+private final Map<PlayerView, Boolean> yieldYourTurnStartedDuringOurTurn = Maps.newHashMap(); // Was yield set during our turn?
 ```
 
 The `shouldAutoYieldForPlayer()` method checks:
@@ -141,32 +164,41 @@ The `shouldAutoYieldForPlayer()` method checks:
 4. Mode-specific end conditions:
    - `UNTIL_STACK_CLEARS`: Clears when stack is empty AND no simultaneous stack entries
    - `UNTIL_END_OF_TURN`: Clears when turn number changes (tracked via `yieldStartTurn`)
-   - `UNTIL_YOUR_NEXT_TURN`: Clears when player becomes the active player
-   - `UNTIL_BEFORE_COMBAT`: Clears at COMBAT_BEGIN phase or any phase after
-   - `UNTIL_END_STEP`: Clears at END_OF_TURN or CLEANUP phase
+   - `UNTIL_YOUR_NEXT_TURN`: Clears when player becomes active player; if started during own turn, waits until turn comes back around
+   - `UNTIL_BEFORE_COMBAT`: Clears at next COMBAT_BEGIN; if started at/after combat, waits for next turn's combat
+   - `UNTIL_END_STEP`: Clears at next END_OF_TURN; if started at/after end step, waits for next turn's end step
 
 ## Files Changed
 
-### New Files (1)
-- `forge-gui/src/main/java/forge/gamemodes/match/YieldMode.java`
+### New Files (3)
+- `forge-gui/src/main/java/forge/gamemodes/match/YieldMode.java` - Yield mode enum
+- `forge-gui-desktop/src/main/java/forge/screens/match/views/VYield.java` - Yield panel view
+- `forge-gui-desktop/src/main/java/forge/screens/match/controllers/CYield.java` - Yield panel controller
 
-### Modified Files (12)
+### Modified Files (14)
 
-**forge-gui (8 files):**
-- `AbstractGuiGame.java` - Yield mode tracking, interrupt logic
+**forge-gui (9 files):**
+- `AbstractGuiGame.java` - Yield mode tracking, interrupt logic, combat yield tracking
 - `InputPassPriority.java` - Smart suggestion prompts
 - `IGuiGame.java` - Interface methods
 - `IGameController.java` - Controller interface
-- `PlayerControllerHuman.java` - Controller implementation
-- `ForgePreferences.java` - 11 new preferences
+- `PlayerControllerHuman.java` - Controller implementation, reveal skip during yield
+- `ForgePreferences.java` - 13 new preferences
 - `NetGameController.java` - Network protocol implementation
 - `ProtocolMethod.java` - Protocol enum values
-- `en-US.properties` - 25+ localization strings
+- `en-US.properties` - 30+ localization strings
 
-**forge-gui-desktop (3 files):**
+**forge-gui-desktop (7 files):**
 - `VPrompt.java` - Right-click menu on End Turn button
-- `GameMenu.java` - Yield Options submenu
+- `VMatchUI.java` - Dynamic panel visibility based on preferences
+- `CMatchUI.java` - Yield panel registration and updates
+- `EDocID.java` - Added REPORT_YIELD document ID
+- `FButton.java` - Added highlight mode for yield button coloring
+- `GameMenu.java` - Yield Options submenu with Display Options
 - `KeyboardShortcuts.java` - New keyboard shortcuts
+
+**Resources (1):**
+- `match.xml` - Added REPORT_YIELD to default layout
 
 ## New Preferences
 
@@ -185,6 +217,10 @@ YIELD_INTERRUPT_ON_BLOCKERS("true")
 YIELD_INTERRUPT_ON_TARGETING("true")
 YIELD_INTERRUPT_ON_OPPONENT_SPELL("false")
 YIELD_INTERRUPT_ON_COMBAT("false")
+YIELD_INTERRUPT_ON_REVEAL("true")
+
+// Display options
+YIELD_SHOW_RIGHT_CLICK_MENU("false")   // Right-click menu on End Turn button
 
 // Keyboard shortcuts (F-keys)
 SHORTCUT_YIELD_UNTIL_END_OF_TURN("112")        // F1
@@ -240,12 +276,18 @@ SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN("116")     // F5
 - [ ] Spells targeting other players does NOT cancel your yield
 - [ ] "Opponent spell" only triggers for spells and activated abilities, NOT triggered abilities
   - Triggered abilities that target you are handled by the "targeting" interrupt instead
+- [ ] Reveal dialogs interrupt yield when "Interrupt on Reveal" is ON (default)
+- [ ] Reveal dialogs auto-dismissed when "Interrupt on Reveal" is OFF
 - [ ] Each interrupt respects its toggle setting
 
 #### Visual Feedback
 - [ ] Prompt area shows "Yielding until..." message
 - [ ] Cancel button allows breaking out of yield
 - [ ] Yield Options submenu checkboxes stay open when toggled (menu doesn't close)
+- [ ] Yield Options panel appears as tab with Stack panel
+- [ ] Active yield button highlighted in red, others blue
+- [ ] Yield buttons disabled during mulligan/pre-game phases
+- [ ] "Clear Stack" button disabled when stack is empty
 
 #### Network Play
 - [ ] Yield modes sync correctly between clients
@@ -264,6 +306,32 @@ SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN("116")     // F5
 - **Preferences**: New preferences added; old preference files compatible
 
 ## Changelog
+
+### 2026-01-29 - Yield Options Panel & Reveal Interrupt Setting
+
+**New Features:**
+1. **Yield Options Panel** - A dedicated dockable panel with yield control buttons:
+   - Appears as a tab alongside the Stack panel when experimental yields are enabled
+   - Contains buttons: Clear Stack, Combat, End Step, End Turn, Your Turn
+   - Buttons use highlight mode: blue (normal), red (active yield mode)
+   - "Your Turn" button only visible in 3+ player games
+   - "Clear Stack" only enabled when stack has items
+   - All buttons disabled during mulligan and pre-game phases
+
+2. **Interrupt on Reveal setting** - New interrupt option under Yield Options > Interrupt Settings:
+   - "When cards are revealed" (default: ON)
+   - When disabled, reveal dialogs are auto-dismissed during active yield
+   - Useful for avoiding interrupts when opponents tutor or reveal cards
+
+3. **Display Options submenu** - New submenu under Yield Options:
+   - "Show Right-Click Menu" - Toggle right-click yield menu on End Turn button (default: OFF)
+
+**Technical Changes:**
+1. **FButton highlight mode** - Added `setUseHighlightMode()` and `setHighlighted()` to FButton for inverted color scheme (blue default, red when active)
+
+2. **Combat yield tracking** - Fixed issue where clicking Combat during an existing combat phase would skip past the next combat. Now tracks turn number and whether yield started at/after combat.
+
+3. **Panel visibility** - Yield Options panel dynamically shown/hidden based on `YIELD_EXPERIMENTAL_OPTIONS` preference
 
 ### 2026-01-29 - New Yield Modes and F-Key Hotkeys
 
