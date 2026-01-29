@@ -273,6 +273,11 @@ public interface IGuiGame {
 
     int getPlayerCount();
 
+    // Smart suggestion decline tracking
+    void declineSuggestion(PlayerView player, String suggestionType);
+
+    boolean isSuggestionDeclined(PlayerView player, String suggestionType);
+
     boolean shouldAutoYield(String key);
 
     void setShouldAutoYield(String key, boolean autoYield);

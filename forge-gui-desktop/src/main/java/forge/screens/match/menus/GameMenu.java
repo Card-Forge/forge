@@ -225,6 +225,7 @@ public final class GameMenu {
         interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnTargeting"), FPref.YIELD_INTERRUPT_ON_TARGETING));
         interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnOpponentSpell"), FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL));
         interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnCombat"), FPref.YIELD_INTERRUPT_ON_COMBAT));
+        interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnReveal"), FPref.YIELD_INTERRUPT_ON_REVEAL));
         yieldMenu.add(interruptMenu);
 
         // Sub-menu 2: Automatic Suggestions
@@ -233,6 +234,11 @@ public final class GameMenu {
         suggestionsMenu.add(createYieldCheckbox(localizer.getMessage("lblSuggestNoMana"), FPref.YIELD_SUGGEST_NO_MANA));
         suggestionsMenu.add(createYieldCheckbox(localizer.getMessage("lblSuggestNoActions"), FPref.YIELD_SUGGEST_NO_ACTIONS));
         yieldMenu.add(suggestionsMenu);
+
+        // Sub-menu 3: Display Options
+        final JMenu displayMenu = new JMenu(localizer.getMessage("lblDisplayOptions"));
+        displayMenu.add(createYieldCheckbox(localizer.getMessage("lblShowRightClickMenu"), FPref.YIELD_SHOW_RIGHT_CLICK_MENU));
+        yieldMenu.add(displayMenu);
 
         return yieldMenu;
     }

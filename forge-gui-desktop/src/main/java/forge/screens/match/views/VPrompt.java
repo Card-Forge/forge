@@ -70,7 +70,7 @@ public class VPrompt implements IVDoc<CPrompt> {
     private final FScrollPane messageScroller = new FScrollPane(tarMessage, false,
     		ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     private final JLabel lblGames;
-    private CardView card = null ; 
+    private CardView card = null ;
 
     public void setCardView(final CardView card) {
 	this.card = card ;
@@ -123,7 +123,8 @@ public class VPrompt implements IVDoc<CPrompt> {
         btnCancel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                if (SwingUtilities.isRightMouseButton(e) && isYieldExperimentalEnabled()) {
+                if (SwingUtilities.isRightMouseButton(e) && isYieldExperimentalEnabled()
+                    && FModel.getPreferences().getPrefBoolean(FPref.YIELD_SHOW_RIGHT_CLICK_MENU)) {
                     showYieldOptionsMenu(e);
                 }
             }

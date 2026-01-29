@@ -425,6 +425,10 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private final Map<PlayerView, Boolean> yieldEndStepStartedAtOrAfterEndStep = Maps.newHashMap(); // Was yield set at/after end step?
     private final Map<PlayerView, Boolean> yieldYourTurnStartedDuringOurTurn = Maps.newHashMap(); // Was yield set during our turn?
 
+    // Smart suggestion decline tracking (reset each turn)
+    private final Map<PlayerView, Set<String>> declinedSuggestionsThisTurn = Maps.newHashMap();
+    private final Map<PlayerView, Integer> declinedSuggestionsTurn = Maps.newHashMap();
+
     /**
      * Automatically pass priority until reaching the Cleanup phase of the
      * current turn.
@@ -543,7 +547,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     // Extended yield mode methods (experimental feature)
     @Override
-    public final void setYieldMode(final PlayerView player, final YieldMode mode) {
+    public final void setYieldMode(PlayerView player, final YieldMode mode) {
+        player = TrackableTypes.PlayerViewType.lookup(player); // ensure we use the correct player instance
         if (!isYieldExperimentalEnabled()) {
             // Fall back to legacy behavior for UNTIL_END_OF_TURN
             if (mode == YieldMode.UNTIL_END_OF_TURN) {
@@ -592,7 +597,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
-    public final void clearYieldMode(final PlayerView player) {
+    public final void clearYieldMode(PlayerView player) {
+        player = TrackableTypes.PlayerViewType.lookup(player); // ensure we use the correct player instance
         playerYieldMode.remove(player);
         yieldStartTurn.remove(player);
         yieldCombatStartTurn.remove(player);
@@ -608,7 +614,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
-    public final YieldMode getYieldMode(final PlayerView player) {
+    public final YieldMode getYieldMode(PlayerView player) {
+        player = TrackableTypes.PlayerViewType.lookup(player); // ensure we use the correct player instance
         // Check legacy auto-pass first
         if (autoPassUntilEndOfTurn.contains(player)) {
             return YieldMode.UNTIL_END_OF_TURN;
@@ -618,7 +625,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
-    public final boolean shouldAutoYieldForPlayer(final PlayerView player) {
+    public final boolean shouldAutoYieldForPlayer(PlayerView player) {
+        player = TrackableTypes.PlayerViewType.lookup(player); // ensure we use the correct player instance
         // Check legacy system first
         if (autoPassUntilEndOfTurn.contains(player)) {
             return true;
@@ -774,21 +782,24 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
         forge.game.Game game = getGameView().getGame();
         forge.game.player.Player p = game.getPlayer(player);
+        if (p == null) {
+            return false; // Can't determine player, don't interrupt
+        }
         ForgePreferences prefs = FModel.getPreferences();
         forge.game.phase.PhaseType phase = game.getPhaseHandler().getPhase();
 
         if (prefs.getPrefBoolean(ForgePreferences.FPref.YIELD_INTERRUPT_ON_ATTACKERS)) {
-            // Only interrupt if there are creatures attacking THIS player specifically
+            // Only interrupt if there are creatures attacking THIS player or their planeswalkers/battles
             if (phase == forge.game.phase.PhaseType.COMBAT_DECLARE_ATTACKERS &&
-                game.getCombat() != null && !game.getCombat().getAttackersOf(p).isEmpty()) {
+                game.getCombat() != null && isBeingAttacked(game, p)) {
                 return true;
             }
         }
 
         if (prefs.getPrefBoolean(ForgePreferences.FPref.YIELD_INTERRUPT_ON_BLOCKERS)) {
-            // Only interrupt if there are creatures attacking THIS player specifically
+            // Only interrupt if there are creatures attacking THIS player or their planeswalkers/battles
             if (phase == forge.game.phase.PhaseType.COMBAT_DECLARE_BLOCKERS &&
-                game.getCombat() != null && !game.getCombat().getAttackersOf(p).isEmpty()) {
+                game.getCombat() != null && isBeingAttacked(game, p)) {
                 return true;
             }
         }
@@ -824,6 +835,30 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return false;
     }
 
+    private boolean isBeingAttacked(forge.game.Game game, forge.game.player.Player p) {
+        forge.game.combat.Combat combat = game.getCombat();
+        if (combat == null) {
+            return false;
+        }
+
+        // Check if player is being attacked directly
+        if (!combat.getAttackersOf(p).isEmpty()) {
+            return true;
+        }
+
+        // Check if any planeswalkers or battles controlled by the player are being attacked
+        for (forge.game.GameEntity defender : combat.getDefenders()) {
+            if (defender instanceof forge.game.card.Card) {
+                forge.game.card.Card card = (forge.game.card.Card) defender;
+                if (card.getController().equals(p) && !combat.getAttackersOf(defender).isEmpty()) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     private boolean targetsPlayerOrPermanents(forge.game.spellability.StackItemView si, forge.game.player.Player p) {
         PlayerView pv = p.getView();
 
@@ -848,6 +883,39 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return getGameView() != null && getGameView().getGame() != null
             ? getGameView().getGame().getPlayers().size()
             : 0;
+    }
+
+    @Override
+    public void declineSuggestion(PlayerView player, String suggestionType) {
+        player = TrackableTypes.PlayerViewType.lookup(player); // ensure we use the correct player instance
+        if (getGameView() == null || getGameView().getGame() == null) return;
+
+        int currentTurn = getGameView().getGame().getPhaseHandler().getTurn();
+        Integer storedTurn = declinedSuggestionsTurn.get(player);
+
+        // Reset if turn changed
+        if (storedTurn == null || storedTurn != currentTurn) {
+            declinedSuggestionsThisTurn.put(player, Sets.newHashSet());
+            declinedSuggestionsTurn.put(player, currentTurn);
+        }
+
+        declinedSuggestionsThisTurn.get(player).add(suggestionType);
+    }
+
+    @Override
+    public boolean isSuggestionDeclined(PlayerView player, String suggestionType) {
+        player = TrackableTypes.PlayerViewType.lookup(player); // ensure we use the correct player instance
+        if (getGameView() == null || getGameView().getGame() == null) return false;
+
+        int currentTurn = getGameView().getGame().getPhaseHandler().getTurn();
+        Integer storedTurn = declinedSuggestionsTurn.get(player);
+
+        if (storedTurn == null || storedTurn != currentTurn) {
+            return false; // Turn changed, reset
+        }
+
+        Set<String> declined = declinedSuggestionsThisTurn.get(player);
+        return declined != null && declined.contains(suggestionType);
     }
 
     // End auto-yield/input code

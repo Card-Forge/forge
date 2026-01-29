@@ -70,7 +70,7 @@ Yield modes can be configured to automatically cancel when:
 - **You or your permanents** are targeted by a spell/ability (default: ON)
 - An opponent casts any spell (default: OFF)
 - Combat begins (default: OFF)
-- Cards are revealed (default: ON) - when disabled, reveal dialogs are auto-dismissed during yield
+- Cards are revealed or choices are made (default: OFF) - when disabled, reveal dialogs and opponent choice notifications are auto-dismissed during yield
 
 **Multiplayer Note:** Attack/blocker interrupts are scoped to the individual player - if Player A attacks Player B, Player C's yield will NOT be interrupted.
 
@@ -155,6 +155,10 @@ private final Map<PlayerView, Boolean> yieldCombatStartedAtOrAfterCombat = Maps.
 private final Map<PlayerView, Integer> yieldEndStepStartTurn = Maps.newHashMap(); // Track turn when end step yield was set
 private final Map<PlayerView, Boolean> yieldEndStepStartedAtOrAfterEndStep = Maps.newHashMap(); // Was yield set at/after end step?
 private final Map<PlayerView, Boolean> yieldYourTurnStartedDuringOurTurn = Maps.newHashMap(); // Was yield set during our turn?
+
+// Smart suggestion decline tracking (resets each turn)
+private final Map<PlayerView, Set<String>> declinedSuggestionsThisTurn = Maps.newHashMap();
+private final Map<PlayerView, Integer> declinedSuggestionsTurn = Maps.newHashMap();
 ```
 
 The `shouldAutoYieldForPlayer()` method checks:
@@ -217,7 +221,7 @@ YIELD_INTERRUPT_ON_BLOCKERS("true")
 YIELD_INTERRUPT_ON_TARGETING("true")
 YIELD_INTERRUPT_ON_OPPONENT_SPELL("false")
 YIELD_INTERRUPT_ON_COMBAT("false")
-YIELD_INTERRUPT_ON_REVEAL("true")
+YIELD_INTERRUPT_ON_REVEAL("false")  // Also covers opponent choices
 
 // Display options
 YIELD_SHOW_RIGHT_CLICK_MENU("false")   // Right-click menu on End Turn button
@@ -267,6 +271,10 @@ SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN("116")     // F5
 - [ ] Each suggestion respects its individual toggle
 - [ ] Accept button activates yield mode
 - [ ] Decline button shows normal priority prompt
+- [ ] **Declined suggestions are suppressed** - After declining, same suggestion type does NOT appear again on same turn
+- [ ] **Suppression resets on turn change** - Declined suggestions can appear again on next turn
+- [ ] **Hint text shown** - "(Declining disables this prompt until next turn)" appears in suggestion prompt
+- [ ] **Yield buttons override suggestions** - Clicking a yield button while suggestion is showing activates the clicked yield, not the suggested one
 
 #### Interrupts
 - [ ] Attackers declared against you cancels yield
@@ -276,8 +284,9 @@ SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN("116")     // F5
 - [ ] Spells targeting other players does NOT cancel your yield
 - [ ] "Opponent spell" only triggers for spells and activated abilities, NOT triggered abilities
   - Triggered abilities that target you are handled by the "targeting" interrupt instead
-- [ ] Reveal dialogs interrupt yield when "Interrupt on Reveal" is ON (default)
-- [ ] Reveal dialogs auto-dismissed when "Interrupt on Reveal" is OFF
+- [ ] Reveal dialogs interrupt yield when "Interrupt on Reveal/Choices" is ON
+- [ ] Reveal dialogs auto-dismissed when "Interrupt on Reveal/Choices" is OFF (default)
+- [ ] Opponent choice notifications (e.g., Unclaimed Territory) auto-dismissed when setting is OFF
 - [ ] Each interrupt respects its toggle setting
 
 #### Visual Feedback
@@ -287,6 +296,7 @@ SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN("116")     // F5
 - [ ] Yield Options panel appears as tab with Stack panel
 - [ ] Active yield button highlighted in red, others blue
 - [ ] Yield buttons disabled during mulligan/pre-game phases
+- [ ] Yield buttons disabled during cleanup/discard phase
 - [ ] "Clear Stack" button disabled when stack is empty
 
 #### Network Play
@@ -306,6 +316,31 @@ SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN("116")     // F5
 - **Preferences**: New preferences added; old preference files compatible
 
 ## Changelog
+
+### 2026-01-29 - Auto-Suppress Suggestions & Bug Fixes
+
+**New Features:**
+1. **Auto-suppress declined suggestions** - When a smart yield suggestion is declined, that suggestion type is automatically suppressed for the rest of the turn. At turn change, suppression resets. A hint is now shown: "(Declining disables this prompt until next turn)"
+
+2. **Yield button priority over suggestions** - Clicking a yield button while a smart suggestion is showing now properly activates the selected yield mode instead of the suggested one.
+
+3. **Extended reveal interrupt** - The "interrupt on reveal" setting now also covers opponent choices (e.g., Unclaimed Territory creature type selection). Label updated to "When cards revealed or choices made".
+
+4. **Yield buttons disabled during discard** - Yield buttons are now greyed out and disabled during the cleanup/discard phase, similar to mulligan.
+
+**Bug Fixes:**
+1. **PlayerView instance matching** - Added `TrackableTypes.PlayerViewType.lookup(player)` to all yield-related methods (`setYieldMode`, `clearYieldMode`, `getYieldMode`, `shouldAutoYieldForPlayer`, `declineSuggestion`, `isSuggestionDeclined`). This fixes potential map key mismatches that could cause yield modes to not be tracked correctly.
+
+2. **Combat interrupt scoping** - Added null check for player lookup and improved `isBeingAttacked()` helper that checks if the player OR their planeswalkers/battles are being attacked. This prevents interrupts when other players are attacked in multiplayer.
+
+3. **Default for reveal interrupt** - Changed `YIELD_INTERRUPT_ON_REVEAL` default from `true` to `false` to reduce interruptions.
+
+**Technical Changes:**
+- Added `declineSuggestion()` and `isSuggestionDeclined()` methods to `IGuiGame` interface and `AbstractGuiGame`
+- Added `declinedSuggestionsThisTurn` and `declinedSuggestionsTurn` tracking maps
+- Added `pendingSuggestionType` field to `InputPassPriority`
+- Added yield check to `notifyOfValue()` in `PlayerControllerHuman`
+- Added cleanup phase check to `canYieldNow()` in `CYield`
 
 ### 2026-01-29 - Yield Options Panel & Reveal Interrupt Setting
 

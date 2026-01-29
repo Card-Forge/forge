@@ -52,6 +52,7 @@ public class InputPassPriority extends InputSyncronizedBase {
 
     // Pending yield suggestion state for prompt integration
     private YieldMode pendingSuggestion = null;
+    private String pendingSuggestionType = null; // "STACK_YIELD", "NO_MANA", "NO_ACTIONS"
     private String pendingSuggestionMessage = null;
 
     public InputPassPriority(final PlayerControllerHuman controller) {
@@ -68,22 +69,31 @@ public class InputPassPriority extends InputSyncronizedBase {
             Localizer loc = Localizer.getInstance();
 
             // Suggestion 1: Stack items but can't respond
-            if (prefs.getPrefBoolean(FPref.YIELD_SUGGEST_STACK_YIELD) && shouldShowStackYieldPrompt()) {
+            if (prefs.getPrefBoolean(FPref.YIELD_SUGGEST_STACK_YIELD)
+                && shouldShowStackYieldPrompt()
+                && !getController().getGui().isSuggestionDeclined(getOwner(), "STACK_YIELD")) {
                 pendingSuggestion = YieldMode.UNTIL_STACK_CLEARS;
+                pendingSuggestionType = "STACK_YIELD";
                 pendingSuggestionMessage = loc.getMessage("lblCannotRespondToStackYieldPrompt");
                 showYieldSuggestionPrompt();
                 return;
             }
             // Suggestion 2: Has cards but no mana
-            else if (prefs.getPrefBoolean(FPref.YIELD_SUGGEST_NO_MANA) && shouldShowNoManaPrompt()) {
+            else if (prefs.getPrefBoolean(FPref.YIELD_SUGGEST_NO_MANA)
+                && shouldShowNoManaPrompt()
+                && !getController().getGui().isSuggestionDeclined(getOwner(), "NO_MANA")) {
                 pendingSuggestion = getDefaultYieldMode();
+                pendingSuggestionType = "NO_MANA";
                 pendingSuggestionMessage = loc.getMessage("lblNoManaAvailableYieldPrompt");
                 showYieldSuggestionPrompt();
                 return;
             }
             // Suggestion 3: No available actions (empty hand, no abilities)
-            else if (prefs.getPrefBoolean(FPref.YIELD_SUGGEST_NO_ACTIONS) && shouldShowNoActionsPrompt()) {
+            else if (prefs.getPrefBoolean(FPref.YIELD_SUGGEST_NO_ACTIONS)
+                && shouldShowNoActionsPrompt()
+                && !getController().getGui().isSuggestionDeclined(getOwner(), "NO_ACTIONS")) {
                 pendingSuggestion = getDefaultYieldMode();
+                pendingSuggestionType = "NO_ACTIONS";
                 pendingSuggestionMessage = loc.getMessage("lblNoActionsAvailableYieldPrompt");
                 showYieldSuggestionPrompt();
                 return;
@@ -95,7 +105,8 @@ public class InputPassPriority extends InputSyncronizedBase {
 
     private void showYieldSuggestionPrompt() {
         Localizer loc = Localizer.getInstance();
-        showMessage(pendingSuggestionMessage);
+        String fullMessage = pendingSuggestionMessage + "\n" + loc.getMessage("lblYieldSuggestionDeclineHint");
+        showMessage(fullMessage);
         chosenSa = null;
         getController().getGui().updateButtons(getOwner(),
             loc.getMessage("lblAccept"),
@@ -106,6 +117,7 @@ public class InputPassPriority extends InputSyncronizedBase {
 
     private void showNormalPrompt() {
         pendingSuggestion = null;
+        pendingSuggestionType = null;
         pendingSuggestionMessage = null;
 
         showMessage(getTurnPhasePriorityMessage(getController().getGame()));
@@ -129,10 +141,22 @@ public class InputPassPriority extends InputSyncronizedBase {
     /** {@inheritDoc} */
     @Override
     protected final void onOk() {
-        // If accepting a yield suggestion
+        // If accepting a yield suggestion (but not if a yield was already set externally)
         if (pendingSuggestion != null) {
+            // Check if a yield mode was already set (e.g., by clicking a yield button)
+            YieldMode currentMode = getController().getGui().getYieldMode(getOwner());
+            if (currentMode != null && currentMode != YieldMode.NONE) {
+                // A yield mode is already active - clear suggestion and pass through
+                pendingSuggestion = null;
+                pendingSuggestionType = null;
+                pendingSuggestionMessage = null;
+                stop();
+                return;
+            }
+
             YieldMode mode = pendingSuggestion;
             pendingSuggestion = null;
+            pendingSuggestionType = null;
             pendingSuggestionMessage = null;
             getController().getGui().setYieldMode(getOwner(), mode);
             stop();
@@ -148,8 +172,15 @@ public class InputPassPriority extends InputSyncronizedBase {
     /** {@inheritDoc} */
     @Override
     protected final void onCancel() {
-        // If declining a yield suggestion, show normal prompt
+        // If declining a yield suggestion, track the decline and show normal prompt
         if (pendingSuggestion != null) {
+            // Track that this suggestion was declined for this turn
+            if (pendingSuggestionType != null) {
+                getController().getGui().declineSuggestion(getOwner(), pendingSuggestionType);
+            }
+            pendingSuggestion = null;
+            pendingSuggestionType = null;
+            pendingSuggestionMessage = null;
             showNormalPrompt();
             return;
         }

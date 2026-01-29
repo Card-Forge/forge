@@ -955,6 +955,21 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     protected void reveal(final CardCollectionView cards, final ZoneType zone, final PlayerView owner, String message, boolean addSuffix) {
+        // Skip reveal dialog during active yield if "Interrupt on Reveal" is disabled
+        forge.gamemodes.match.YieldMode yieldMode = getGui().getYieldMode(getLocalPlayerView());
+        if (yieldMode != null && yieldMode != forge.gamemodes.match.YieldMode.NONE) {
+            if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_INTERRUPT_ON_REVEAL)) {
+                // Still show the cards temporarily but skip the dialog that requires user input
+                if (!cards.isEmpty()) {
+                    tempShowCards(cards);
+                    TrackableCollection<CardView> collection = CardView.getCollection(cards);
+                    getGui().updateRevealedCards(collection);
+                    endTempShowCards();
+                }
+                return;
+            }
+        }
+
         if (StringUtils.isBlank(message)) {
             message = localizer.getMessage("lblLookCardInPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase());
         } else if (addSuffix) {
@@ -1750,6 +1765,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (sa != null && sa.isManaAbility()) {
             getGame().getGameLog().add(GameLogEntryType.LAND, message);
         } else {
+            // Skip notification dialog during active yield if "Interrupt on Reveal/Choices" is disabled
+            forge.gamemodes.match.YieldMode yieldMode = getGui().getYieldMode(getLocalPlayerView());
+            if (yieldMode != null && yieldMode != forge.gamemodes.match.YieldMode.NONE) {
+                if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_INTERRUPT_ON_REVEAL)) {
+                    // Log the message but don't show a dialog
+                    getGame().getGameLog().add(GameLogEntryType.INFORMATION, message);
+                    return;
+                }
+            }
+
             if (sa != null && sa.getHostCard() != null && GuiBase.getInterface().isLibgdxPort()) {
                 CardView cardView;
                 IPaperCard iPaperCard = sa.getHostCard().getPaperCard();

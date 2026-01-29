@@ -13,8 +13,10 @@ import forge.gui.framework.IVTopLevelUI;
 import forge.gui.framework.SRearrangingUtil;
 import forge.gui.framework.VEmptyDoc;
 import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
 import forge.screens.match.views.VDev;
 import forge.screens.match.views.VField;
+import forge.screens.match.views.VYield;
 import forge.screens.match.views.VHand;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
@@ -61,6 +63,27 @@ public class VMatchUI implements IVTopLevelUI {
         } else if (vDev.getParentCell() == null) {
             // Dev mode enabled? May already by added, or put in message cell by default.
             getControl().getCPrompt().getView().getParentCell().addDoc(vDev);
+        }
+
+        // Yield panel - only show when experimental yield options are enabled
+        final VYield vYield = getControl().getCYield().getView();
+        final boolean yieldEnabled = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.YIELD_EXPERIMENTAL_OPTIONS);
+        if (!yieldEnabled) {
+            if (vYield.getParentCell() != null) {
+                final DragCell parent = vYield.getParentCell();
+                parent.removeDoc(vYield);
+                vYield.setParentCell(null);
+
+                if (parent.getDocs().size() > 0) {
+                    parent.setSelected(parent.getDocs().get(0));
+                }
+            }
+        } else if (vYield.getParentCell() == null) {
+            // Yield enabled but not in layout - add to stack cell by default
+            final DragCell stackCell = EDocID.REPORT_STACK.getDoc().getParentCell();
+            if (stackCell != null) {
+                stackCell.addDoc(vYield);
+            }
         }
 
         //focus first enabled Prompt button if returning to match screen
