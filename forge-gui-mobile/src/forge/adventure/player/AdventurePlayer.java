@@ -72,6 +72,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private final ArrayList<ItemData> inventoryItems = new ArrayList<>();
     private final Array<Deck> boostersOwned = new Array<>();
     private final HashMap<String, Long> equippedItems = new HashMap<>();
+    private final HashMap<Integer, HashMap<String, Long>> deckLoadouts = new HashMap<>();
     private final List<AdventureQuestData> quests = new ArrayList<>();
     private final List<AdventureEventData> events = new ArrayList<>();
     private final Set<PaperCard> unsupportedCards = new HashSet<>();
@@ -199,7 +200,39 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void setSelectedDeckSlot(int slot) {
+        setSelectedDeckSlot(slot, true);
+    }
+
+    public void setSelectedDeckSlot(int slot, boolean switchLoadout) {
         if (slot >= 0 && slot < getDeckCount()) {
+            boolean bindLoadouts = Config.instance().getSettingData().bindEquipmentLoadoutsToDecks;
+            if (switchLoadout && bindLoadouts && slot != selectedDeckIndex) {
+                // Save current loadout to old deck
+                deckLoadouts.put(selectedDeckIndex, new HashMap<>(equippedItems));
+
+                // Clear current equipment
+                for (ItemData item : inventoryItems) {
+                    if (item != null) {
+                        item.isEquipped = false;
+                    }
+                }
+                equippedItems.clear();
+
+                // Restore loadout for new deck (if any)
+                if (deckLoadouts.containsKey(slot)) {
+                    HashMap<String, Long> newLoadout = deckLoadouts.get(slot);
+                    for (Map.Entry<String, Long> entry : newLoadout.entrySet()) {
+                        ItemData item = getItemFromInventory(entry.getValue());
+                        if (item != null) {
+                            item.isEquipped = true;
+                            equippedItems.put(entry.getKey(), entry.getValue());
+                        }
+                    }
+                }
+
+                onEquipmentChange.emit();
+            }
+
             selectedDeckIndex = slot;
             deck = decks.get(selectedDeckIndex);
             setColorIdentity(DeckProxy.getColorIdentity(deck));
@@ -630,7 +663,25 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             }
         }
 
-        setSelectedDeckSlot(data.readInt("selectedDeckIndex"));
+        // Load deck loadouts (equipment tied to each deck)
+        for (int i = 0; i < getDeckCount(); i++) {
+            if (data.containsKey("deckLoadout_slots_" + i) && data.containsKey("deckLoadout_items_" + i)) {
+                try {
+                    String[] loadoutSlots = (String[]) data.readObject("deckLoadout_slots_" + i);
+                    Long[] loadoutItems = (Long[]) data.readObject("deckLoadout_items_" + i);
+                    if (loadoutSlots.length == loadoutItems.length) {
+                        HashMap<String, Long> loadout = new HashMap<>();
+                        for (int j = 0; j < loadoutSlots.length; j++) {
+                            loadout.put(loadoutSlots[j], loadoutItems[j]);
+                        }
+                        deckLoadouts.put(i, loadout);
+                    }
+                } catch (Exception ignored) {}
+            }
+        }
+
+        // Use false to skip loadout switching during load (equippedItems already loaded correctly above)
+        setSelectedDeckSlot(data.readInt("selectedDeckIndex"), false);
         CardPool cardPool = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("cards")));
         cards.addAll(cardPool.getFilteredPool(isValid));
         unsupportedCards.addAll(cardPool.getFilteredPool(isUnsupported).toFlatList());
@@ -823,6 +874,24 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             if (decks.get(i).get(DeckSection.Commander) != null)
                 data.storeObject("commanderCards_" + i, decks.get(i).get(DeckSection.Commander).toCardList("\n").split("\n"));
         }
+
+        // Save deck loadouts (equipment tied to each deck)
+        // First, save current equipment to current deck's loadout
+        deckLoadouts.put(selectedDeckIndex, new HashMap<>(equippedItems));
+        for (int i = 0; i < getDeckCount(); i++) {
+            if (deckLoadouts.containsKey(i)) {
+                HashMap<String, Long> loadout = deckLoadouts.get(i);
+                ArrayList<String> loadoutSlots = new ArrayList<>();
+                ArrayList<Long> loadoutItems = new ArrayList<>();
+                for (Map.Entry<String, Long> entry : loadout.entrySet()) {
+                    loadoutSlots.add(entry.getKey());
+                    loadoutItems.add(entry.getValue());
+                }
+                data.storeObject("deckLoadout_slots_" + i, loadoutSlots.toArray(new String[0]));
+                data.storeObject("deckLoadout_items_" + i, loadoutItems.toArray(new Long[0]));
+            }
+        }
+
         data.store("selectedDeckIndex", selectedDeckIndex);
         data.storeObject("cards", cards.toCardList("\n").split("\n"));
 
