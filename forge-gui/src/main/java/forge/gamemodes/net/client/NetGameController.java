@@ -84,6 +84,21 @@ public class NetGameController implements IGameController {
     }
 
     @Override
+    public void yieldUntilBeforeCombat() {
+        // Stub for network play - yield modes handled locally
+    }
+
+    @Override
+    public void yieldUntilEndStep() {
+        // Stub for network play - yield modes handled locally
+    }
+
+    @Override
+    public void yieldUntilEndOfTurn() {
+        // Stub for network play - yield modes handled locally
+    }
+
+    @Override
     public void passPriority() {
         send(ProtocolMethod.passPriority);
     }

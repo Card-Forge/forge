@@ -33,6 +33,8 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import forge.game.card.CardView;
+import forge.game.player.PlayerView;
+import forge.gamemodes.match.YieldMode;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -78,6 +80,20 @@ public class VPrompt implements IVDoc<CPrompt> {
         @Override
         public void keyPressed(final KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                // Try to cancel yield first if experimental options enabled
+                if (FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) {
+                    if (controller.getMatchUI() != null) {
+                        PlayerView player = controller.getMatchUI().getCurrentPlayer();
+                        if (player != null) {
+                            YieldMode currentYield = controller.getMatchUI().getYieldMode(player);
+                            if (currentYield != null && currentYield != YieldMode.NONE) {
+                                controller.getMatchUI().clearYieldMode(player);
+                                return;
+                            }
+                        }
+                    }
+                }
+                // Existing ESC behavior
                 if (btnCancel.isEnabled()) {
                     if (FModel.getPreferences().getPrefBoolean(FPref.UI_ALLOW_ESC_TO_END_TURN) || !btnCancel.getText().equals("End Turn")) {
                         btnCancel.doClick();
@@ -244,10 +260,31 @@ public class VPrompt implements IVDoc<CPrompt> {
         JMenuItem turnItem = new JMenuItem(loc.getMessage("lblYieldUntilEndOfTurn"));
         turnItem.addActionListener(evt -> {
             if (controller.getMatchUI() != null && controller.getMatchUI().getGameController() != null) {
-                controller.getMatchUI().getGameController().passPriorityUntilEndOfTurn();
+                controller.getMatchUI().getGameController().yieldUntilEndOfTurn();
+                controller.getMatchUI().getGameController().selectButtonOk();
             }
         });
         menu.add(turnItem);
+
+        // Until Combat
+        JMenuItem combatItem = new JMenuItem(loc.getMessage("lblYieldUntilBeforeCombat"));
+        combatItem.addActionListener(evt -> {
+            if (controller.getMatchUI() != null && controller.getMatchUI().getGameController() != null) {
+                controller.getMatchUI().getGameController().yieldUntilBeforeCombat();
+                controller.getMatchUI().getGameController().selectButtonOk();
+            }
+        });
+        menu.add(combatItem);
+
+        // Until End Step
+        JMenuItem endStepItem = new JMenuItem(loc.getMessage("lblYieldUntilEndStep"));
+        endStepItem.addActionListener(evt -> {
+            if (controller.getMatchUI() != null && controller.getMatchUI().getGameController() != null) {
+                controller.getMatchUI().getGameController().yieldUntilEndStep();
+                controller.getMatchUI().getGameController().selectButtonOk();
+            }
+        });
+        menu.add(endStepItem);
 
         // Until Your Next Turn (only in 3+ player games)
         if (controller.getMatchUI() != null && controller.getMatchUI().getPlayerCount() >= 3) {

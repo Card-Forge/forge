@@ -141,6 +141,42 @@ public class KeyboardShortcuts {
             }
         };
 
+        /** Yield until end of turn (experimental). */
+        final Action actYieldUntilEndOfTurn = new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
+                if (matchUI == null) { return; }
+                if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
+                matchUI.getGameController().yieldUntilEndOfTurn();
+                matchUI.getGameController().selectButtonOk();
+            }
+        };
+
+        /** Yield until before combat (experimental). */
+        final Action actYieldUntilBeforeCombat = new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
+                if (matchUI == null) { return; }
+                if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
+                matchUI.getGameController().yieldUntilBeforeCombat();
+                matchUI.getGameController().selectButtonOk();
+            }
+        };
+
+        /** Yield until end step (experimental). */
+        final Action actYieldUntilEndStep = new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
+                if (matchUI == null) { return; }
+                if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
+                matchUI.getGameController().yieldUntilEndStep();
+                matchUI.getGameController().selectButtonOk();
+            }
+        };
+
         /** Alpha Strike. */
         final Action actAllAttack = new AbstractAction() {
             @Override
@@ -236,7 +272,10 @@ public class KeyboardShortcuts {
         list.add(new Shortcut(FPref.SHORTCUT_SHOWDEV, localizer.getMessage("lblSHORTCUT_SHOWDEV"), actShowDev, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_CONCEDE, localizer.getMessage("lblSHORTCUT_CONCEDE"), actConcede, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_ENDTURN, localizer.getMessage("lblSHORTCUT_ENDTURN"), actEndTurn, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_YIELD_UNTIL_END_OF_TURN, localizer.getMessage("lblSHORTCUT_YIELD_UNTIL_END_OF_TURN"), actYieldUntilEndOfTurn, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_YIELD_UNTIL_STACK_CLEARS, localizer.getMessage("lblSHORTCUT_YIELD_UNTIL_STACK_CLEARS"), actYieldUntilStackClears, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_YIELD_UNTIL_BEFORE_COMBAT, localizer.getMessage("lblSHORTCUT_YIELD_UNTIL_BEFORE_COMBAT"), actYieldUntilBeforeCombat, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_YIELD_UNTIL_END_STEP, localizer.getMessage("lblSHORTCUT_YIELD_UNTIL_END_STEP"), actYieldUntilEndStep, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN, localizer.getMessage("lblSHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN"), actYieldUntilYourNextTurn, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_ALPHASTRIKE, localizer.getMessage("lblSHORTCUT_ALPHASTRIKE"), actAllAttack, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_SHOWTARGETING, localizer.getMessage("lblSHORTCUT_SHOWTARGETING"), actTgtOverlay, am, im));

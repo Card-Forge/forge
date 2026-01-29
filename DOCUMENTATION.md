@@ -21,16 +21,22 @@ Extended yield options that allow players to automatically pass priority until s
 
 | Mode | Description | End Condition | Availability |
 |------|-------------|---------------|--------------|
-| Until Stack Clears | Auto-pass while stack has items | Stack becomes empty | Always |
-| Until End of Turn | Auto-pass until end of current turn | UNTAP phase of any new turn | Always |
+| Until End of Turn | Auto-pass until end of current turn | Turn number changes | Always |
+| Until Stack Clears | Auto-pass while stack has items | Stack becomes empty (including simultaneous triggers) | Always |
+| Until Before Combat | Auto-pass until combat begins | COMBAT_BEGIN phase or later | Always |
+| Until End Step | Auto-pass until end step | END_OF_TURN or CLEANUP phase | Always |
 | Until Your Next Turn | Auto-pass until you become active player | Your turn starts | 3+ player games only |
 
 ### Access Methods
 
 1. **Right-Click Menu**: Right-click the "End Turn" button to see yield options
-2. **Keyboard Shortcuts** (configurable):
-   - `Ctrl+Shift+S` - Yield until stack clears
-   - `Ctrl+Shift+N` - Yield until your next turn
+2. **Keyboard Shortcuts** (F-keys to avoid conflict with ability selection 1-9):
+   - `F1` - Yield until end of turn
+   - `F2` - Yield until stack clears
+   - `F3` - Yield until before combat
+   - `F4` - Yield until end step
+   - `F5` - Yield until your next turn (3+ players)
+   - `ESC` - Cancel active yield
 
 ### Smart Yield Suggestions
 
@@ -133,9 +139,11 @@ The `shouldAutoYieldForPlayer()` method checks:
 2. Current yield mode
 3. Interrupt conditions
 4. Mode-specific end conditions:
-   - `UNTIL_STACK_CLEARS`: Continues while stack is non-empty
+   - `UNTIL_STACK_CLEARS`: Clears when stack is empty AND no simultaneous stack entries
    - `UNTIL_END_OF_TURN`: Clears when turn number changes (tracked via `yieldStartTurn`)
    - `UNTIL_YOUR_NEXT_TURN`: Clears when player becomes the active player
+   - `UNTIL_BEFORE_COMBAT`: Clears at COMBAT_BEGIN phase or any phase after
+   - `UNTIL_END_STEP`: Clears at END_OF_TURN or CLEANUP phase
 
 ## Files Changed
 
@@ -178,9 +186,12 @@ YIELD_INTERRUPT_ON_TARGETING("true")
 YIELD_INTERRUPT_ON_OPPONENT_SPELL("false")
 YIELD_INTERRUPT_ON_COMBAT("false")
 
-// Keyboard shortcuts
-SHORTCUT_YIELD_UNTIL_STACK_CLEARS("17 16 83")  // Ctrl+Shift+S
-SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN("17 16 78") // Ctrl+Shift+N
+// Keyboard shortcuts (F-keys)
+SHORTCUT_YIELD_UNTIL_END_OF_TURN("112")        // F1
+SHORTCUT_YIELD_UNTIL_STACK_CLEARS("113")       // F2
+SHORTCUT_YIELD_UNTIL_BEFORE_COMBAT("114")      // F3
+SHORTCUT_YIELD_UNTIL_END_STEP("115")           // F4
+SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN("116")     // F5
 ```
 
 ## Testing Guide
@@ -253,6 +264,26 @@ SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN("17 16 78") // Ctrl+Shift+N
 - **Preferences**: New preferences added; old preference files compatible
 
 ## Changelog
+
+### 2026-01-29 - New Yield Modes and F-Key Hotkeys
+
+**New Features:**
+1. **UNTIL_BEFORE_COMBAT mode** - Yield until entering the COMBAT_BEGIN phase. Useful for taking actions in main phase before combat.
+
+2. **UNTIL_END_STEP mode** - Yield until the END_OF_TURN or CLEANUP phase. Useful for end-of-turn effects.
+
+3. **F-key hotkeys** - Updated hotkey scheme to avoid conflicts with ability selection (1-9):
+   - F1: Yield until end of turn
+   - F2: Yield until stack clears
+   - F3: Yield until before combat
+   - F4: Yield until end step
+   - F5: Yield until your next turn
+   - ESC: Cancel active yield
+
+**Bug Fixes:**
+1. **Stack clears with simultaneous triggers** - UNTIL_STACK_CLEARS now checks `hasSimultaneousStackEntries()` in addition to `isEmpty()` to properly wait for all triggers to resolve.
+
+2. **End of turn on own turn** - UNTIL_END_OF_TURN no longer gets interrupted by YIELD_INTERRUPT_ON_COMBAT when it's the player's own turn, allowing the yield to continue through combat.
 
 ### 2026-01-29 - End Turn Button Integration & Trigger Exclusion
 

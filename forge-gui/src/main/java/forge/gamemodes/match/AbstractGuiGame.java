@@ -527,6 +527,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 case UNTIL_STACK_CLEARS -> loc.getMessage("lblYieldingUntilStackClears");
                 case UNTIL_END_OF_TURN -> loc.getMessage("lblYieldingUntilEndOfTurn");
                 case UNTIL_YOUR_NEXT_TURN -> loc.getMessage("lblYieldingUntilYourNextTurn");
+                case UNTIL_BEFORE_COMBAT -> loc.getMessage("lblYieldingUntilBeforeCombat");
+                case UNTIL_END_STEP -> loc.getMessage("lblYieldingUntilEndStep");
                 default -> "";
             };
             showPromptMessage(player, message);
@@ -610,7 +612,14 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         forge.game.phase.PhaseHandler ph = game.getPhaseHandler();
 
         return switch (mode) {
-            case UNTIL_STACK_CLEARS -> !game.getStack().isEmpty();
+            case UNTIL_STACK_CLEARS -> {
+                boolean stackEmpty = game.getStack().isEmpty() && !game.getStack().hasSimultaneousStackEntries();
+                if (stackEmpty) {
+                    clearYieldMode(player);
+                    yield false;
+                }
+                yield true;
+            }
             case UNTIL_END_OF_TURN -> {
                 // Yield until end of the turn when yield was set - clear when turn number changes
                 Integer startTurn = yieldStartTurn.get(player);
@@ -631,6 +640,22 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 forge.game.player.Player playerObj = game.getPlayer(player);
                 boolean isOurTurn = ph.getPlayerTurn().equals(playerObj);
                 if (isOurTurn) {
+                    clearYieldMode(player);
+                    yield false;
+                }
+                yield true;
+            }
+            case UNTIL_BEFORE_COMBAT -> {
+                forge.game.phase.PhaseType phase = ph.getPhase();
+                if (phase == forge.game.phase.PhaseType.COMBAT_BEGIN || phase.isAfter(forge.game.phase.PhaseType.COMBAT_BEGIN)) {
+                    clearYieldMode(player);
+                    yield false;
+                }
+                yield true;
+            }
+            case UNTIL_END_STEP -> {
+                forge.game.phase.PhaseType phase = ph.getPhase();
+                if (phase == forge.game.phase.PhaseType.END_OF_TURN || phase == forge.game.phase.PhaseType.CLEANUP) {
                     clearYieldMode(player);
                     yield false;
                 }
@@ -686,7 +711,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
         if (prefs.getPrefBoolean(ForgePreferences.FPref.YIELD_INTERRUPT_ON_COMBAT)) {
             if (phase == forge.game.phase.PhaseType.COMBAT_BEGIN) {
-                return true;
+                YieldMode mode = playerYieldMode.get(player);
+                // Don't interrupt UNTIL_END_OF_TURN on our own turn
+                if (!(mode == YieldMode.UNTIL_END_OF_TURN && game.getPhaseHandler().getPlayerTurn().equals(p))) {
+                    return true;
+                }
             }
         }
 

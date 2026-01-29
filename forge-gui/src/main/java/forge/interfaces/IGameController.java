@@ -33,6 +33,12 @@ public interface IGameController {
 
     void yieldUntilYourNextTurn();
 
+    void yieldUntilBeforeCombat();
+
+    void yieldUntilEndStep();
+
+    void yieldUntilEndOfTurn();
+
     void selectPlayer(PlayerView playerView, ITriggerEvent triggerEvent);
 
     boolean selectCard(CardView cardView, List<CardView> otherCardViewsToSelect, ITriggerEvent triggerEvent);
