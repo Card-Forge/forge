@@ -2871,7 +2871,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
 
         // Check if the saga card does not have the keyword Read ahead
-        if (type.hasSubtype("Saga") && !state.hasKeyword(Keyword.READ_AHEAD)) {
+        if (type.hasSubtype("Saga") && !state.hasKeyword(Keyword.READ_AHEAD) && state.getFinalChapterNr() > 0) {
             sb.append("(").append(Localizer.getInstance().getMessage("lblSagaHeader"));
             if (!state.getCard().isTransformable()) {
                 sb.append(" ").append(Localizer.getInstance().getMessage("lblSagaFooter")).append(" ").append(TextUtil.toRoman(state.getFinalChapterNr())).append(".");
