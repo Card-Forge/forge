@@ -226,6 +226,7 @@ public final class GameMenu {
         interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnOpponentSpell"), FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL));
         interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnCombat"), FPref.YIELD_INTERRUPT_ON_COMBAT));
         interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnReveal"), FPref.YIELD_INTERRUPT_ON_REVEAL));
+        interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnMassRemoval"), FPref.YIELD_INTERRUPT_ON_MASS_REMOVAL));
         yieldMenu.add(interruptMenu);
 
         // Sub-menu 2: Automatic Suggestions

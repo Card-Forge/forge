@@ -71,6 +71,7 @@ Yield modes can be configured to automatically cancel when:
 - An opponent casts any spell (default: OFF)
 - Combat begins (default: OFF)
 - Cards are revealed or choices are made (default: OFF) - when disabled, reveal dialogs and opponent choice notifications are auto-dismissed during yield
+- Mass removal spell cast by opponent (default: ON) - detects DestroyAll, ChangeZoneAll (exile/graveyard), DamageAll, SacrificeAll effects; only interrupts if you have permanents matching the spell's filter
 
 **Multiplayer Note:** Attack/blocker interrupts are scoped to the individual player - if Player A attacks Player B, Player C's yield will NOT be interrupted.
 
@@ -91,7 +92,14 @@ Once enabled:
 
 ### Architecture
 
-All changes are in the **GUI layer only** - no modifications to core game logic or rules engine:
+All changes are in the **GUI layer only** - no modifications to core game logic, rules engine, or network protocol:
+
+**Key Point: Network Independence**
+- The yield system operates entirely at the GUI/client layer
+- It automates *when* to pass priority, not *how* priority is passed
+- Standard priority pass messages are sent through the existing network protocol
+- Each client manages its own yield state independently - no yield state is synchronized between clients
+- Compatible with existing network play without any protocol changes
 
 ```
 forge-gui/           (shared GUI code)
@@ -102,8 +110,8 @@ forge-gui/           (shared GUI code)
 ├── IGameController.java              # Controller interface
 ├── PlayerControllerHuman.java        # Controller implementation
 ├── ForgePreferences.java             # New preferences
-├── NetGameController.java            # Network protocol
-├── ProtocolMethod.java               # Protocol enum
+├── NetGameController.java            # Controller interface implementation (no protocol changes)
+├── ProtocolMethod.java               # Interface method declarations
 └── en-US.properties                  # Localization
 
 forge-gui-desktop/   (desktop-specific)
@@ -121,9 +129,9 @@ forge-gui-desktop/   (desktop-specific)
 ### Key Design Decisions
 
 1. **Feature-gated**: Master toggle prevents accidental activation; default OFF
-2. **GUI layer only**: No changes to `forge-game` rules engine
-3. **Backward compatible**: Existing Ctrl+E behavior unchanged
-4. **Network-aware**: Protocol methods added for multiplayer sync
+2. **GUI layer only**: No changes to `forge-game` rules engine or network protocol
+3. **Network independent**: Yield state is client-local; no synchronization needed
+4. **Backward compatible**: Existing Ctrl+E behavior unchanged
 5. **Individual toggles**: Each suggestion/interrupt can be configured separately
 
 ### End Turn Button Behavior
@@ -188,8 +196,8 @@ The `shouldAutoYieldForPlayer()` method checks:
 - `IGameController.java` - Controller interface
 - `PlayerControllerHuman.java` - Controller implementation, reveal skip during yield
 - `ForgePreferences.java` - 13 new preferences
-- `NetGameController.java` - Network protocol implementation
-- `ProtocolMethod.java` - Protocol enum values
+- `NetGameController.java` - Controller interface implementation (no network protocol changes)
+- `ProtocolMethod.java` - Interface method declarations
 - `en-US.properties` - 30+ localization strings
 
 **forge-gui-desktop (7 files):**
@@ -222,6 +230,7 @@ YIELD_INTERRUPT_ON_TARGETING("true")
 YIELD_INTERRUPT_ON_OPPONENT_SPELL("false")
 YIELD_INTERRUPT_ON_COMBAT("false")
 YIELD_INTERRUPT_ON_REVEAL("false")  // Also covers opponent choices
+YIELD_INTERRUPT_ON_MASS_REMOVAL("true")  // Board wipes, exile all, etc.
 
 // Display options
 YIELD_SHOW_RIGHT_CLICK_MENU("false")   // Right-click menu on End Turn button
@@ -300,22 +309,40 @@ SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN("116")     // F5
 - [ ] "Clear Stack" button disabled when stack is empty
 
 #### Network Play
-- [ ] Yield modes sync correctly between clients
-- [ ] No desync when one player uses extended yields
+- [ ] Yield modes work correctly in network games (each client manages its own yield state)
+- [ ] No desync when one player uses extended yields (yield is client-local)
 
 ## Risk Assessment
 
 ### Low Risk
 - Feature-gated with default OFF
 - No changes to game rules or logic
+- No changes to network protocol or synchronization
+- GUI layer changes only - game rules unaffected
 - Existing behavior unchanged when feature disabled
 
 ### Considerations
 - **Mobile**: Changes are desktop-only (VPrompt, GameMenu, KeyboardShortcuts)
-- **Network**: Protocol changes require matching client versions
 - **Preferences**: New preferences added; old preference files compatible
 
 ## Changelog
+
+### 2026-01-30 - Mass Removal Interrupt Option
+
+**New Feature:**
+1. **Mass removal spell interrupt** - New interrupt option that triggers when an opponent casts a mass removal spell that could affect your permanents (default: ON). Detects:
+   - `DestroyAll` - Wrath of God, Day of Judgment, Damnation
+   - `ChangeZoneAll` (exile/graveyard) - Farewell, Merciless Eviction
+   - `DamageAll` - Blasphemous Act, Chain Reaction
+   - `SacrificeAll` - All Is Dust, Bane of Progress
+
+   The interrupt only triggers if you have permanents matching the spell's filter - empty board = no interrupt.
+
+**Files Changed:**
+- `ForgePreferences.java` - Added `YIELD_INTERRUPT_ON_MASS_REMOVAL` preference
+- `en-US.properties` - Added localization string
+- `GameMenu.java` - Added menu checkbox
+- `AbstractGuiGame.java` - Added detection logic (`hasMassRemovalOnStack`, `isMassRemovalSpell`, `checkSingleAbilityForMassRemoval`, `playerHasMatchingPermanents`)
 
 ### 2026-01-29 - Auto-Suppress Suggestions & Bug Fixes
 

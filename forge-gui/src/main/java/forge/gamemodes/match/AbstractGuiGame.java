@@ -832,6 +832,12 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             }
         }
 
+        if (prefs.getPrefBoolean(ForgePreferences.FPref.YIELD_INTERRUPT_ON_MASS_REMOVAL)) {
+            if (hasMassRemovalOnStack(game, p)) {
+                return true;
+            }
+        }
+
         return false;
     }
 
@@ -871,6 +877,126 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 return true;
             }
         }
+        return false;
+    }
+
+    /**
+     * Check if there's a mass removal spell on the stack that could affect the player's permanents.
+     * Only interrupts if the spell was cast by an opponent AND the player has permanents that match.
+     */
+    private boolean hasMassRemovalOnStack(forge.game.Game game, forge.game.player.Player p) {
+        if (game.getStack().isEmpty()) {
+            return false;
+        }
+
+        for (forge.game.spellability.SpellAbilityStackInstance si : game.getStack()) {
+            forge.game.spellability.SpellAbility sa = si.getSpellAbility();
+            if (sa == null) continue;
+
+            // Only interrupt for opponent's spells
+            if (sa.getActivatingPlayer() == null || sa.getActivatingPlayer().equals(p)) {
+                continue;
+            }
+
+            // Check if this is a mass removal spell type
+            if (isMassRemovalSpell(sa, game, p)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Determine if a spell ability is a mass removal effect that could affect the player.
+     */
+    private boolean isMassRemovalSpell(forge.game.spellability.SpellAbility sa, forge.game.Game game, forge.game.player.Player p) {
+        forge.game.ability.ApiType api = sa.getApi();
+        if (api == null) {
+            return false;
+        }
+
+        // Check the main ability and all sub-abilities (for modal spells like Farewell)
+        forge.game.spellability.SpellAbility current = sa;
+        while (current != null) {
+            if (checkSingleAbilityForMassRemoval(current, game, p)) {
+                return true;
+            }
+            current = current.getSubAbility();
+        }
+
+        return false;
+    }
+
+    /**
+     * Check if a single ability (not including sub-abilities) is mass removal affecting the player.
+     */
+    private boolean checkSingleAbilityForMassRemoval(forge.game.spellability.SpellAbility sa, forge.game.Game game, forge.game.player.Player p) {
+        forge.game.ability.ApiType api = sa.getApi();
+        if (api == null) {
+            return false;
+        }
+
+        String apiName = api.name();
+
+        // DestroyAll - Wrath of God, Day of Judgment, Damnation
+        if ("DestroyAll".equals(apiName)) {
+            return playerHasMatchingPermanents(sa, game, p, "ValidCards");
+        }
+
+        // ChangeZoneAll with Destination=Exile or Graveyard - Farewell, Merciless Eviction
+        if ("ChangeZoneAll".equals(apiName)) {
+            String destination = sa.getParam("Destination");
+            if ("Exile".equals(destination) || "Graveyard".equals(destination)) {
+                // Check Origin - only care about Battlefield
+                String origin = sa.getParam("Origin");
+                if (origin != null && origin.contains("Battlefield")) {
+                    return playerHasMatchingPermanents(sa, game, p, "ChangeType");
+                }
+            }
+        }
+
+        // DamageAll - Blasphemous Act, Chain Reaction
+        if ("DamageAll".equals(apiName)) {
+            return playerHasMatchingPermanents(sa, game, p, "ValidCards");
+        }
+
+        // SacrificeAll - All Is Dust, Bane of Progress
+        if ("SacrificeAll".equals(apiName)) {
+            return playerHasMatchingPermanents(sa, game, p, "ValidCards");
+        }
+
+        return false;
+    }
+
+    /**
+     * Check if the player has any permanents that match the spell's filter parameter.
+     */
+    private boolean playerHasMatchingPermanents(forge.game.spellability.SpellAbility sa, forge.game.Game game, forge.game.player.Player p, String filterParam) {
+        String validFilter = sa.getParam(filterParam);
+
+        // Get all permanents controlled by the player
+        forge.game.card.CardCollectionView playerPermanents = p.getCardsIn(forge.game.zone.ZoneType.Battlefield);
+        if (playerPermanents.isEmpty()) {
+            return false;  // No permanents = no reason to interrupt
+        }
+
+        // If no filter specified, assume it affects all permanents
+        if (validFilter == null || validFilter.isEmpty()) {
+            return true;
+        }
+
+        // Check if any of the player's permanents match the filter
+        for (forge.game.card.Card card : playerPermanents) {
+            try {
+                if (card.isValid(validFilter.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
+                    return true;
+                }
+            } catch (Exception e) {
+                // If validation fails, be conservative and assume it might affect us
+                return true;
+            }
+        }
+
         return false;
     }
 
