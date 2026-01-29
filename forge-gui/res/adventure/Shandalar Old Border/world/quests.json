@@ -6924,6 +6924,10 @@
 								"setMapFlag": {
 									"key": ""
 								},
+								"setCharacterFlag": {
+									"key": "noQuest",
+									"val": 0
+								},
 								"issueQuest": "53",
 								"POIReference": ""
 							}
@@ -7024,34 +7028,6 @@
 					}
 				],
 				"isDisabled": true
-			},
-			{
-				"condition": [
-					{
-						"checkCharacterFlag": "newGamePlus"
-					}
-				],
-				"name": "Been here, done that. Show me to the enemies. (New Game+)",
-				"text": "Okay, skipping all that hard work somebody put into dialog, the portal opens and you can leave.",
-				"options": [
-					{
-						"action": [
-							{
-								"removeItem": "",
-								"setColorIdentity": "",
-								"advanceQuestFlag": "",
-								"advanceMapFlag": "",
-								"setCharacterFlag": {
-									"key": "noQuest",
-									"val": "1"
-								},
-								"issueQuest": "",
-								"POIReference": ""
-							}
-						],
-						"name": "(Continue)"
-					}
-				]
 			}
 		]
 	},
@@ -7296,23 +7272,25 @@
 								"text": "Perhaps the most intriguing of all, however, is the town hall with a notice board out front, advertising work for adventurers. What better way to make some coin while you explore?",
 								"options": [
 									{
-										"action": [
+										"name": "(Continue)",
+										"text": "As you take in your surroundings, you recall the tales of powerful creatures lurking in hidden lairs across Shandalar. Perhaps hunting them down would prove your worth as a true adventurer.",
+										"options": [
 											{
-												"removeItem": "",
-												"setColorIdentity": "",
-												"advanceQuestFlag": "",
-												"advanceMapFlag": "",
-												"setQuestFlag": {
-													"key": ""
-												},
-												"setMapFlag": {
-													"key": ""
-												},
-												"issueQuest": "43",
-												"POIReference": ""
+												"action": [
+													{
+														"issueQuest": "43"
+													},
+													{
+														"issueQuest": "54",
+														"setCharacterFlag": {
+															"key": "dungeonMasterQuestGiven",
+															"val": 1
+														}
+													}
+												],
+												"name": "(Continue)"
 											}
-										],
-										"name": "(Continue)"
+										]
 									}
 								]
 							}
@@ -11268,25 +11246,456 @@
 							"name": "(Continue)",
 							"action": [
 								{
-									"removeItem": "",
-									"setColorIdentity": "",
-									"advanceQuestFlag": "",
-									"advanceMapFlag": "",
 									"setQuestFlag": {
 										"key": "shandRep1",
 										"val": 1
 									},
-									"setMapFlag": {
-										"key": ""
-									},
-									"issueQuest": "30",
-									"POIReference": ""
+									"issueQuest": "30"
 								}
 							]
 						}
 					]
 				},
 				"POIToken": ""
+			}
+		],
+		"storyQuest": true
+	},
+	{
+		"id": 54,
+		"isTemplate": true,
+		"name": "Dungeon Master",
+		"description": "There are powerful creatures lurking in the hidden lairs of Shandalar. Prove your worth by clearing them all.",
+		"offerDialog": {},
+		"prologue": {
+			"text": "Tales of powerful creatures dwelling in hidden lairs across Shandalar have reached your ears. Fungal horrors, mad artificers, vampire lords, and worse await those brave enough to seek them out. Perhaps clearing these threats would be a worthy challenge.",
+			"options": [
+				{
+					"name": "(Begin the hunt)"
+				}
+			]
+		},
+		"epilogue": {},
+		"failureDialog": {},
+		"declinedDialog": {},
+		"stages": [
+			{
+				"id": 1,
+				"name": "Clear Thallid Grove",
+				"description": "Seek out the Thallid Grove in the swamps and defeat the Thallid Lord and his fungal minions.",
+				"mapFlag": "",
+				"mapFlagValue": 1,
+				"POITags": [
+					"Slimefoot"
+				],
+				"objective": "Clear",
+				"allowInactivePOI": true,
+				"POIToken": "",
+				"prologue": {
+					"text": "TIER I: CREATURE LAIRS\n\nThe first tier of your challenge awaits. Five creature lairs, each home to a dangerous miniboss, must be cleared. Begin with the Thallid Grove, where the Thallid Lord has taken root.",
+					"options": [
+						{
+							"name": "(Hunt the fungus)"
+						}
+					]
+				},
+				"epilogue": {}
+			},
+			{
+				"id": 2,
+				"name": "Clear Squee's Factory",
+				"description": "Find Squee's Factory in the wastes and defeat Squee, the Goblin Nabob.",
+				"mapFlag": "",
+				"mapFlagValue": 1,
+				"POITags": [
+					"Slobad"
+				],
+				"objective": "Clear",
+				"allowInactivePOI": true,
+				"POIToken": "",
+				"prerequisiteIDs": [ 1 ],
+				"prologue": {
+					"text": "The fungal grove has been cleansed. Next, seek out Squee's Factory, where Squee the Goblin Nabob tinkers with dangerous machinery.",
+					"options": [
+						{
+							"name": "(Seek the factory)"
+						}
+					]
+				},
+				"epilogue": {}
+			},
+			{
+				"id": 3,
+				"name": "Clear Xira's Hive",
+				"description": "Locate Xira's Hive and destroy the insectoid menace within.",
+				"mapFlag": "",
+				"mapFlagValue": 1,
+				"POITags": [
+					"Xira"
+				],
+				"objective": "Clear",
+				"allowInactivePOI": true,
+				"POIToken": "",
+				"prerequisiteIDs": [ 2 ],
+				"prologue": {
+					"text": "The factory falls silent. A buzzing plague emanates from Xira's Hive. The insectoid queen must be dealt with.",
+					"options": [
+						{
+							"name": "(Enter the hive)"
+						}
+					]
+				},
+				"epilogue": {}
+			},
+			{
+				"id": 4,
+				"name": "Clear Castle Sengir",
+				"description": "Storm Castle Sengir and defeat Baron Sengir.",
+				"mapFlag": "",
+				"mapFlagValue": 1,
+				"POITags": [
+					"Sorin"
+				],
+				"objective": "Clear",
+				"allowInactivePOI": true,
+				"POIToken": "",
+				"prerequisiteIDs": [ 3 ],
+				"prologue": {
+					"text": "The hive is silenced. But darkness gathers at Castle Sengir, where Baron Sengir holds court. End his reign.",
+					"options": [
+						{
+							"name": "(Storm the castle)"
+						}
+					]
+				},
+				"epilogue": {}
+			},
+			{
+				"id": 5,
+				"name": "Clear The Lake of the Hydra",
+				"description": "Journey to The Lake of the Hydra and slay The Hydra of Shandalaar.",
+				"mapFlag": "",
+				"mapFlagValue": 1,
+				"POITags": [
+					"HydraLair"
+				],
+				"objective": "Clear",
+				"allowInactivePOI": true,
+				"POIToken": "",
+				"prerequisiteIDs": [ 4 ],
+				"prologue": {
+					"text": "Castle Sengir lies in ruins. The final creature lair awaits at The Lake of the Hydra. The Hydra of Shandalaar grows a new head for every one severed - strike true.",
+					"options": [
+						{
+							"name": "(Face the Hydra)"
+						}
+					]
+				},
+				"epilogue": {
+					"text": "TIER I COMPLETE\n\nThe creature lairs have been cleared! But greater challenges await. Powerful mages have established footholds on Shandalar and must be confronted next.",
+					"options": [
+						{
+							"name": "(Continue to Tier II)"
+						}
+					]
+				}
+			},
+			{
+				"id": 6,
+				"name": "Clear Teferi's Hideout",
+				"description": "Find Teferi's Hideout and defeat the time mage.",
+				"mapFlag": "",
+				"mapFlagValue": 1,
+				"POITags": [
+					"Teferi"
+				],
+				"objective": "Clear",
+				"allowInactivePOI": true,
+				"POIToken": "",
+				"prerequisiteIDs": [ 5 ],
+				"prologue": {
+					"text": "TIER II: MAGE HIDEOUTS\n\nFive powerful mages have established footholds on Shandalar. These are no mere creatures - they are beings of immense power. Begin with Teferi, master of time magic.",
+					"options": [
+						{
+							"name": "(Challenge the time mage)"
+						}
+					]
+				},
+				"epilogue": {}
+			},
+			{
+				"id": 7,
+				"name": "Clear Court of Empress Galina",
+				"description": "Journey to the Court of Empress Galina and defeat the Empress.",
+				"mapFlag": "",
+				"mapFlagValue": 1,
+				"POITags": [
+					"Empress Galina"
+				],
+				"objective": "Clear",
+				"allowInactivePOI": true,
+				"POIToken": "",
+				"prerequisiteIDs": [ 6 ],
+				"prologue": {
+					"text": "Teferi has been defeated. Empress Galina rules the merfolk from her underwater court. The sea will not protect her.",
+					"options": [
+						{
+							"name": "(Brave the depths)"
+						}
+					]
+				},
+				"epilogue": {}
+			},
+			{
+				"id": 8,
+				"name": "Clear Arcanis's Holdout",
+				"description": "Storm Arcanis's Holdout and defeat Arcanis the Omnipotent.",
+				"mapFlag": "",
+				"mapFlagValue": 1,
+				"POITags": [
+					"Arcanis"
+				],
+				"objective": "Clear",
+				"allowInactivePOI": true,
+				"POIToken": "",
+				"prerequisiteIDs": [ 7 ],
+				"prologue": {
+					"text": "The seas calm with the Empress's defeat. But Arcanis the Omnipotent lurks in his holdout. Guard your thoughts well.",
+					"options": [
+						{
+							"name": "(Confront the mind mage)"
+						}
+					]
+				},
+				"epilogue": {}
+			},
+			{
+				"id": 9,
+				"name": "Clear Specter's Fortress",
+				"description": "Infiltrate the Specter's Fortress and defeat the Specter King.",
+				"mapFlag": "",
+				"mapFlagValue": 1,
+				"POITags": [
+					"Tibalt"
+				],
+				"objective": "Clear",
+				"allowInactivePOI": true,
+				"POIToken": "",
+				"prerequisiteIDs": [ 8 ],
+				"prologue": {
+					"text": "Arcanis's illusions shatter. The Specter King revels in suffering from his fortress. Put an end to his cruelty.",
+					"options": [
+						{
+							"name": "(End the suffering)"
+						}
+					]
+				},
+				"epilogue": {}
+			},
+			{
+				"id": 10,
+				"name": "Clear the Mysterious City",
+				"description": "Explore the Mysterious City and defeat the Portal Master.",
+				"mapFlag": "",
+				"mapFlagValue": 1,
+				"POITags": [
+					"Zedruu"
+				],
+				"objective": "Clear",
+				"allowInactivePOI": true,
+				"POIToken": "",
+				"prerequisiteIDs": [ 9 ],
+				"prologue": {
+					"text": "The Specter King's screams fade. The enigmatic Portal Master dwells within a Mysterious City. His gifts are not always what they seem.",
+					"options": [
+						{
+							"name": "(Unravel the mystery)"
+						}
+					]
+				},
+				"epilogue": {
+					"text": "TIER II COMPLETE\n\nThe mages have been driven from their hideouts! But ancient legends speak of five beings who have ruled Shandalar since time immemorial. The true masters await.",
+					"options": [
+						{
+							"name": "(Continue to Tier III)"
+						}
+					]
+				}
+			},
+			{
+				"id": 11,
+				"name": "Clear Fort of the Sainted One",
+				"description": "Storm the Fort of the Sainted One and defeat The Sainted One.",
+				"mapFlag": "",
+				"mapFlagValue": 1,
+				"POITags": [
+					"SaintedOne"
+				],
+				"objective": "Clear",
+				"allowInactivePOI": true,
+				"POIToken": "",
+				"prerequisiteIDs": [ 10 ],
+				"prologue": {
+					"text": "TIER III: THE ANCIENT MASTERS\n\nThe five ancient masters of Shandalar await. These beings have ruled their domains since before recorded history. Begin with The Sainted One, who commands legions from her fortress of light.",
+					"options": [
+						{
+							"name": "(Challenge the Sainted One)"
+						}
+					]
+				},
+				"epilogue": {}
+			},
+			{
+				"id": 12,
+				"name": "Clear Palace of the Visionary",
+				"description": "Ascend to the Palace of the Visionary and defeat The Astral Visionary.",
+				"mapFlag": "",
+				"mapFlagValue": 1,
+				"POITags": [
+					"AstralVisionary"
+				],
+				"objective": "Clear",
+				"allowInactivePOI": true,
+				"POIToken": "",
+				"prerequisiteIDs": [ 11 ],
+				"prologue": {
+					"text": "The Sainted One falls from grace. High above the clouds, The Astral Visionary peers into futures yet unwritten. Prove that fate can be defied.",
+					"options": [
+						{
+							"name": "(Ascend to the palace)"
+						}
+					]
+				},
+				"epilogue": {}
+			},
+			{
+				"id": 13,
+				"name": "Clear Grave of the Lich Lord",
+				"description": "Descend into the Grave of the Lich Lord and defeat The Lichlord of Azar.",
+				"mapFlag": "",
+				"mapFlagValue": 1,
+				"POITags": [
+					"LichlordAzar"
+				],
+				"objective": "Clear",
+				"allowInactivePOI": true,
+				"POIToken": "",
+				"prerequisiteIDs": [ 12 ],
+				"prologue": {
+					"text": "The Visionary's prophecies end. In the depths of the swamp, The Lichlord of Azar commands an army of the dead. Put him back in his grave permanently.",
+					"options": [
+						{
+							"name": "(Enter the grave)"
+						}
+					]
+				},
+				"epilogue": {}
+			},
+			{
+				"id": 14,
+				"name": "Clear Temple of the Dragon Lord",
+				"description": "Enter the Temple of the Dragon Lord and defeat The Dragon Lord.",
+				"mapFlag": "",
+				"mapFlagValue": 1,
+				"POITags": [
+					"DragonLord"
+				],
+				"objective": "Clear",
+				"allowInactivePOI": true,
+				"POIToken": "",
+				"prerequisiteIDs": [ 13 ],
+				"prologue": {
+					"text": "The undead crumble without their master. Fire and fury await at the Temple of the Dragon Lord. Face the flames.",
+					"options": [
+						{
+							"name": "(Face the Dragon Lord)"
+						}
+					]
+				},
+				"epilogue": {}
+			},
+			{
+				"id": 15,
+				"name": "Clear Great Druid's Grove",
+				"description": "Journey to the Great Druid's Grove and defeat The Great Druid.",
+				"mapFlag": "",
+				"mapFlagValue": 1,
+				"POITags": [
+					"GreatDruid"
+				],
+				"objective": "Clear",
+				"allowInactivePOI": true,
+				"POIToken": "",
+				"prerequisiteIDs": [ 14 ],
+				"prologue": {
+					"text": "The dragon's fire is extinguished. The final ancient master, The Great Druid, communes with nature in her sacred grove. Nature itself will rise against you.",
+					"options": [
+						{
+							"name": "(Enter the sacred grove)"
+						}
+					]
+				},
+				"epilogue": {
+					"text": "TIER III COMPLETE\n\nThe ancient masters have fallen! You have proven yourself the mightiest warrior in all of Shandalar. But whispers speak of two final challenges - hidden places of unimaginable power...",
+					"options": [
+						{
+							"name": "(Continue to the Bonus Challenges)"
+						}
+					]
+				}
+			},
+			{
+				"id": 16,
+				"name": "Clear the Halls of Time",
+				"description": "Find the mysterious Halls of Time and defeat whatever lurks within.",
+				"mapFlag": "",
+				"mapFlagValue": 1,
+				"POITags": [
+					"HallsOfTime"
+				],
+				"objective": "Clear",
+				"allowInactivePOI": true,
+				"POIToken": "",
+				"prerequisiteIDs": [ 15 ],
+				"prologue": {
+					"text": "BONUS: THE HIDDEN DEPTHS\n\nLegends speak of the Halls of Time - a place where past, present, and future intertwine. Few who enter ever return. Fewer still return unchanged.",
+					"options": [
+						{
+							"name": "(Step through time)"
+						}
+					]
+				},
+				"epilogue": {}
+			},
+			{
+				"id": 17,
+				"name": "Clear the Ancient Diamond Mine",
+				"description": "Descend into the Ancient Diamond Mine and claim its treasures.",
+				"mapFlag": "",
+				"mapFlagValue": 1,
+				"POITags": [
+					"DiamondMine"
+				],
+				"objective": "Clear",
+				"allowInactivePOI": true,
+				"POIToken": "",
+				"prerequisiteIDs": [ 16 ],
+				"prologue": {
+					"text": "Time bends to your will. One final challenge remains - the Ancient Diamond Mine. Untold riches await within, guarded by creatures that have never seen the light of day.",
+					"options": [
+						{
+							"name": "(Descend into darkness)"
+						}
+					]
+				},
+				"epilogue": {
+					"text": "DUNGEON MASTER COMPLETE\n\nYou have cleared every dungeon, defeated every miniboss, and conquered every challenge Shandalar has to offer. You are truly the Dungeon Master of this plane. Your legend will be told for generations to come.",
+					"options": [
+						{
+							"name": "(Bask in your glory)"
+						}
+					]
+				}
 			}
 		],
 		"storyQuest": true

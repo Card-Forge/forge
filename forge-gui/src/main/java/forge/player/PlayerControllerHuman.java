@@ -68,7 +68,6 @@ import forge.util.*;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import io.sentry.Sentry;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -284,7 +283,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             // maindeck and max sideboard sizes
             // No longer need 1:1 sideboarding in non-limited formats
             List<PaperCard> resp = getGui().sideboard(sideboard, main, message);
-            newMain = ObjectUtils.getIfNull(resp, main.toFlatList());
+            newMain = Objects.requireNonNullElse(resp, main.toFlatList());
         } while (conform && (newMain.size() < deckMinSize || combinedDeckSize - newMain.size() > sbMax));
 
         return newMain;
@@ -1776,6 +1775,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public List<AbilitySub> chooseModeForAbility(final SpellAbility sa, List<AbilitySub> possible, final int min, final int num,
                                                  boolean allowRepeat) {
+        if (!allowRepeat && min == num && num == possible.size()) {
+            return possible;
+        }
         boolean trackerFrozen = getGame().getTracker().isFrozen();
         if (trackerFrozen) {
             // The view tracker needs to be unfrozen to update the SpellAbilityViews at this point, or it may crash

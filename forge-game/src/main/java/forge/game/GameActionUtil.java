@@ -763,9 +763,8 @@ public final class GameActionUtil {
             }
         }
 
-        // reset active Trigger
         if (reset) {
-            host.getGame().getTriggerHandler().resetActiveTriggers(false);
+            host.getGame().getTriggerHandler().resetActiveTriggers(false, null);
         }
 
         if (result != null) {
@@ -931,14 +930,6 @@ public final class GameActionUtil {
             completeList.remove(eff);
         }
         return completeList;
-    }
-
-    public static void checkStaticAfterPaying(Card c) {
-        c.getGame().getAction().checkStaticAbilities(false);
-
-        c.updateKeywords();
-
-        c.getGame().getTriggerHandler().resetActiveTriggers();
     }
 
     public static void rollbackAbility(SpellAbility ability, final Zone fromZone, final int zonePosition, CostPayment payment, Card oldCard) {

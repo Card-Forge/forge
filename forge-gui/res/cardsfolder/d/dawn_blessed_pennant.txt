@@ -1,0 +1,10 @@
+Name:Dawn-Blessed Pennant
+ManaCost:1
+Types:Artifact
+K:ETBReplacement:Other:ChooseCT
+SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | ValidTypes$ Elemental,Elf,Faerie,Giant,Goblin,Kithkin,Merfolk,Treefolk | SpellDescription$ As this artifact enters, choose Elemental, Elf, Faerie, Giant, Goblin, Kithkin, Merfolk, or Treefolk. | AILogic$ MostProminentInComputerDeck
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Permanent.ChosenType+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a permanent you control of the chosen type enters, you gain 1 life.
+A:AB$ ChangeZone | Cost$ 2 T Sac<1/CARDNAME> | TgtPrompt$ Select target card of the chosen type in your graveyard | ValidTgts$ Card.ChosenType+YouOwn | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target card of the chosen type from your graveyard to your hand.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
+DeckHas:Ability$Graveyard
+Oracle:As this artifact enters, choose Elemental, Elf, Faerie, Giant, Goblin, Kithkin, Merfolk, or Treefolk.\nWhenever a permanent you control of the chosen type enters, you gain 1 life.\n{2}, {T}, Sacrifice this artifact: Return target card of the chosen type from your graveyard to your hand.

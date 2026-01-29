@@ -62,7 +62,7 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         btnContinue.setEnabled(!game0.isMatchOver());
 
         lblLog = add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblGameLog")).align(Align.center).font(FSkinFont.get(18)).build());
-        txtLog = add(new FTextArea(true, StringUtils.join(game.getGameLog().getLogEntries(null), "\r\n").replace("[COMPUTER]", "[AI]")) {
+        txtLog = add(new FTextArea(true, StringUtils.join(game.getGameLog().getLogEntries(null), "\r\n")) {
             @Override
             public boolean tap(float x, float y, int count) {
                 if (txtLog.getMaxScrollTop() > 0) {
@@ -82,8 +82,7 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         );
         lblTitle.setText(composeTitle(game0));
 
-        // Control of the win/lose is handled differently for various game
-        // modes.
+        // Control of the win/lose is handled differently for various game modes
         ControlWinLose control = null;
         switch (game0.getGameType()) {
         case Quest:

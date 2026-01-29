@@ -2,7 +2,7 @@ Name:Jenny Flint
 ManaCost:1 U R
 Types:Legendary Creature Human Detective
 PT:2/2
-K:Partner:Madame Vastra
+K:Partner with:Madame Vastra
 K:First Strike
 K:Training
 T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Clue,Food | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you sacrifice a Clue or Food, put a +1/+1 counter on another target creature you control.

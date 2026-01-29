@@ -53,7 +53,7 @@
     "type": "item",
     "count": 1,
     "probability": 0.1,
-    "itemName": "Dark Boots"
+    "itemName": "Drudge Spellbook"
   },
   {
     "type": "item",
@@ -65,7 +65,7 @@
     "type": "item",
     "count": 1,
     "probability": 0.1,
-    "itemName": "Dark Armor"
+    "itemName": "Spine Staff"
   },
   {
     "type": "item",

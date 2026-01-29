@@ -15,8 +15,12 @@ Image=trounce-o-matic.jpg
 2 Crashing Centaur|ODY
 1 Deluge|ODY
 2 Diligent Farmhand|ODY
-13 Forest|ODY
-9 Island|ODY
+5 Forest|ODY|1
+4 Forest|ODY|2
+4 Forest|ODY|3
+3 Island|ODY|1
+3 Island|ODY|2
+3 Island|ODY|3
 1 Ivy Elemental|ODY
 2 Krosan Avenger|ODY
 2 Metamorphic Wurm|ODY

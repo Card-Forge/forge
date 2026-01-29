@@ -1,0 +1,13 @@
+Name:Dark Leo & Shredder
+ManaCost:W B
+Types:Legendary Creature Mutant Ninja Turtle Human
+PT:1/3
+K:Sneak:W B
+S:Mode$ Continuous | Affected$ Ninja.attacking+YouCtrl | AddKeyword$ Deathtouch | Description$ Attacking Ninjas you control have deathtouch.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME deal combat damage to a player, create a 1/1 black Ninja creature token. Then if you control five or more Ninjas, that player loses half their life, rounded up.
+SVar:TrigToken:DB$ Token | TokenScript$ b_1_1_ninja | SubAbility$ TrigLoseLife
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredTarget | LifeAmount$ X | ConditionPresent$ Ninja.YouCtrl | ConditionCompare$ GE5
+SVar:X:TriggeredTarget$LifeTotal/HalfUp
+DeckHas:Ability$Token
+DeckHints:Type$Ninja
+Oracle:Sneak {W}{B}\nAttacking Ninjas you control have deathtouch.\nWhenever Dark Leo & Shredder deal combat damage to a player, create a 1/1 black Ninja creature token. Then if you control five or more Ninjas, that player loses half their life, rounded up.

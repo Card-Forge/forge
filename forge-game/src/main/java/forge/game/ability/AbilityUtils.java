@@ -1,5 +1,6 @@
 package forge.game.ability;
 
+import com.google.common.base.Function;
 import com.google.common.collect.*;
 import com.google.common.math.IntMath;
 import forge.card.CardStateName;
@@ -19,6 +20,7 @@ import forge.game.cost.CostAdjustment;
 import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
+import forge.game.keyword.KeywordWithCostAndType;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
@@ -36,7 +38,6 @@ import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -45,6 +46,7 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class AbilityUtils {
     private final static ImmutableList<String> cmpList = ImmutableList.of("LT", "LE", "EQ", "GE", "GT", "NE");
@@ -573,8 +575,7 @@ public class AbilityUtils {
         }
 
         // All the following only work for SpellAbilities
-        else if (ability instanceof SpellAbility) {
-            final SpellAbility sa = (SpellAbility) ability;
+        else if (ability instanceof SpellAbility sa) {
             // Player attribute counting
             if (calcX[0].startsWith("TargetedPlayer")) {
                 final List<Player> players = new ArrayList<>();
@@ -663,7 +664,7 @@ public class AbilityUtils {
                     count = (Integer) to;
                 }
 
-                val = doXMath(ObjectUtils.firstNonNull(count, 0), m, card, ability);
+                val = doXMath(Objects.requireNonNullElse(count, 0), m, card, ability);
             }
             else if (calcX[0].startsWith("ReplaceCount")) {
                 // ReplaceCount is similar to a regular Count, but just
@@ -673,7 +674,7 @@ public class AbilityUtils {
                 final String m = CardFactoryUtil.extractOperators(calcX[1]);
                 final Integer count = (Integer) root.getReplacingObject(AbilityKey.fromString(l[0]));
 
-                val = doXMath(ObjectUtils.firstNonNull(count, 0), m, card, ability);
+                val = doXMath(Objects.requireNonNullElse(count, 0), m, card, ability);
             } else { // these ones only for handling lists
                 Iterable<Card> list = null;
                 if (calcX[0].startsWith("Targeted")) {
@@ -1697,6 +1698,10 @@ public class AbilityUtils {
                     return doXMath(calculateAmount(c, sq[kicked ? 1 : 2], ctb), expr, c, ctb);
                 }
 
+                if (sq[0].startsWith("OptionalGenericCostPaid")) {
+                    return doXMath(calculateAmount(c, sq[sa.isOptionalCostPaid(OptionalCost.Generic) ? 1 : 2], ctb), expr, c, ctb);
+                }
+
                 if (sq[0].startsWith("Bargain")) {
                     return doXMath(calculateAmount(c, sq[sa.isBargained() ? 1 : 2], ctb), expr, c, ctb);
                 }
@@ -2022,7 +2027,7 @@ public class AbilityUtils {
         if (game != null) {
             // CR 608.2h
             // we'll want to avoid grabbing LKI for params that can handle internal information
-            // e. g. the remembering on Xenagos, the Reveler
+            // e.g. the remembering on Xenagos, the Reveler
             c = game.getChangeZoneLKIInfo(c);
         }
 
@@ -2058,9 +2063,6 @@ public class AbilityUtils {
         }
         if (sq[0].startsWith("AltCost")) {
             return doXMath(calculateAmount(c, sq[c.isOptionalCostPaid(OptionalCost.AltCost) ? 1 : 2], ctb), expr, c, ctb);
-        }
-        if (sq[0].startsWith("OptionalGenericCostPaid")) {
-            return doXMath(calculateAmount(c, sq[c.isOptionalCostPaid(OptionalCost.Generic) ? 1 : 2], ctb), expr, c, ctb);
         }
 
         if (sq[0].equals("CardPower")) {
@@ -2252,9 +2254,6 @@ public class AbilityUtils {
         if (sq[0].equals("Delirium")) {
             return doXMath(calculateAmount(c, sq[player.hasDelirium() ? 1 : 2], ctb), expr, c, ctb);
         }
-        if (sq[0].equals("MaxSpeed")) {
-            return doXMath(calculateAmount(c, sq[player.maxSpeed() ? 1 : 2], ctb), expr, c, ctb);
-        }
         if (sq[0].equals("FatefulHour")) {
             return doXMath(calculateAmount(c, sq[player.getLife() <= 5 ? 1 : 2], ctb), expr, c, ctb);
         }
@@ -2299,7 +2298,6 @@ public class AbilityUtils {
         if (sq[0].equals("YouDrewThisTurn")) {
             return doXMath(player.getNumDrawnThisTurn(), expr, c, ctb);
         }
-
         if (sq[0].equals("YouDrewLastTurn")) {
             return doXMath(player.getNumDrawnLastTurn(), expr, c, ctb);
         }
@@ -2311,7 +2309,6 @@ public class AbilityUtils {
         if (sq[0].equals("YouRollThisTurn")) {
             return doXMath(player.getNumRollsThisTurn(), expr, c, ctb);
         }
-
         if (sq[0].startsWith("YouRolledThisTurn")) {
             int n = calculateAmount(c, sq[0].substring(17), ctb);
             return doXMath(Collections.frequency(player.getDiceRollsThisTurn(), n), expr, c, ctb);
@@ -2332,6 +2329,10 @@ public class AbilityUtils {
         if (sq[0].equals("YourSpeed")) {
             return doXMath(player.getSpeed(), expr, c, ctb);
         }
+        if (sq[0].equals("MaxSpeed")) {
+            return doXMath(calculateAmount(c, sq[player.maxSpeed() ? 1 : 2], ctb), expr, c, ctb);
+        }
+
         if (sq[0].equals("AllFourBend")) {
             return doXMath(calculateAmount(c, sq[player.hasAllElementBend() ? 1 : 2], ctb), expr, c, ctb);
         }
@@ -2348,7 +2349,6 @@ public class AbilityUtils {
             // only used by Opal Palace, and it does add the trigger to the card
             return doXMath(player.getCommanderCast(c), expr, c, ctb);
         }
-
         if (l[0].startsWith("TotalCommanderCastFromCommandZone")) {
             return doXMath(player.getTotalCommanderCast(), expr, c, ctb);
         }
@@ -2525,8 +2525,6 @@ public class AbilityUtils {
             final String validFilter = workingCopy[1];
             return doXMath(CardLists.getValidCardCount(game.getLeftBattlefieldThisTurn(), validFilter, player, c, ctb), expr, c, ctb);
         }
-
-        // Count$LeftBattlefieldThisTurn <Valid>
         if (sq[0].startsWith("LeftGraveyardThisTurn")) {
             final String[] workingCopy = l[0].split(" ", 2);
             final String validFilter = workingCopy[1];
@@ -2536,7 +2534,6 @@ public class AbilityUtils {
         if (sq[0].equals("UnlockedDoors")) {
             return doXMath(player.getUnlockedDoors().size(), expr, c, ctb);
         }
-
         // Counts the distinct names of unlocked doors. Used for the "Promising Stairs"
         if (sq[0].equals("DistinctUnlockedDoors")) {
             return doXMath(Sets.newHashSet(player.getUnlockedDoors()).size(), expr, c, ctb);
@@ -2870,14 +2867,6 @@ public class AbilityUtils {
         }
 
         // TODO move below to handlePaid
-        if (sq[0].startsWith("DifferentPower_")) {
-            final String restriction = l[0].substring(15);
-            final int uniquePowers = (int) game.getCardsIn(ZoneType.Battlefield).stream()
-                    .filter(CardPredicates.restriction(restriction, player, c, ctb))
-                    .map(Card::getNetPower)
-                    .distinct().count();
-            return doXMath(uniquePowers, expr, c, ctb);
-        }
         if (sq[0].startsWith("DifferentCounterKinds_")) {
             final Set<CounterType> kinds = Sets.newHashSet();
             final String rest = l[0].substring(22);
@@ -3117,17 +3106,16 @@ public class AbilityUtils {
         }
 
         final CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
-
         if (hand.isEmpty()) {
             return sa;
         }
 
         final CardCollection splices = CardLists.filter(hand, input -> {
             for (final KeywordInterface inst : input.getKeywords(Keyword.SPLICE)) {
-                String k = inst.getOriginal();
-                final String[] n = k.split(":");
-                if (source.isValid(n[1].split(","), player, input, sa)) {
-                    return true;
+                if (inst instanceof KeywordWithCostAndType splice) {
+                    if (source.isValid(splice.getValidType().split(","), player, input, sa)) {
+                        return true;
+                    }
                 }
             }
             return false;
@@ -3140,7 +3128,6 @@ public class AbilityUtils {
         }
 
         final List<Card> choosen = player.getController().chooseCardsForSplice(sa, splices);
-
         if (choosen.isEmpty()) {
             return sa;
         }
@@ -3156,9 +3143,10 @@ public class AbilityUtils {
         Cost spliceCost = null;
         // This Function thinks that Splice exist only once on the card
         for (final KeywordInterface inst : c.getKeywords(Keyword.SPLICE)) {
-            final String k = inst.getOriginal();
-            final String[] n = k.split(":");
-            spliceCost = new Cost(n[2], false);
+            if (inst instanceof KeywordWithCostAndType splice) {
+                spliceCost = splice.getCost();
+                break;
+            }
         }
 
         if (spliceCost == null)
@@ -3177,7 +3165,7 @@ public class AbilityUtils {
 
         // update master SpellAbility
         sa.setBasicSpell(false);
-        sa.setPayCosts(spliceCost.add(sa.getPayCosts()));
+        sa.getPayCosts().add(spliceCost);
         sa.setDescription(sa.getDescription() + " (Splicing " + c + " onto it)");
         sa.addSplicedCards(c);
     }
@@ -3209,17 +3197,19 @@ public class AbilityUtils {
         } else if (s[0].contains("Thrice")) {
             return num * 3;
         } else if (s[0].contains("HalfUp")) {
-            return (int) (Math.ceil(num / 2.0));
+            return (int) Math.ceil(num / 2.0);
         } else if (s[0].contains("HalfDown")) {
-            return (int) (Math.floor(num / 2.0));
+            return (int) Math.floor(num / 2.0);
         } else if (s[0].contains("ThirdUp")) {
-            return (int) (Math.ceil(num / 3.0));
+            return (int) Math.ceil(num / 3.0);
         } else if (s[0].contains("ThirdDown")) {
-            return (int) (Math.floor(num / 3.0));
+            return (int) Math.floor(num / 3.0);
         } else if (s[0].contains("Negative")) {
             return num * -1;
         } else if (s[0].contains("Times")) {
             return num * secondaryNum;
+        } else if (s[0].contains("Pow")) {
+            return (int) Math.pow(num, secondaryNum);
         } else if (s[0].contains("DivideEvenlyUp")) {
             if (secondaryNum == 0) {
                 return 0;
@@ -3632,44 +3622,33 @@ public class AbilityUtils {
      *
      * @param paidList
      *            a {@link forge.game.card.CardCollectionView} object.
-     * @param string
+     * @param def
      *            a {@link java.lang.String} object.
      * @param source
      *            a {@link forge.game.card.Card} object.
      * @return a int.
      */
-    public static int handlePaid(final Iterable<Card> paidList, final String string, final Card source, CardTraitBase ctb) {
+    public static int handlePaid(final Iterable<Card> paidList, final String def, final Card source, final CardTraitBase ctb) {
         if (Iterables.isEmpty(paidList)) {
-            return doXMath(0, CardFactoryUtil.extractOperators(string), source, ctb);
+            return doXMath(0, CardFactoryUtil.extractOperators(def), source, ctb);
         }
-        if (string.startsWith("Amount")) {
-            return doXMath(Iterables.size(paidList), CardFactoryUtil.extractOperators(string), source, ctb);
-        }
-
-        if (string.startsWith("GreatestPower")) {
-            return Aggregates.max(paidList, Card::getNetPower);
-        }
-        if (string.startsWith("GreatestToughness")) {
-            return Aggregates.max(paidList, Card::getNetToughness);
+        if (def.startsWith("Amount")) {
+            return doXMath(Iterables.size(paidList), CardFactoryUtil.extractOperators(def), source, ctb);
         }
 
-        if (string.startsWith("TapPowerValue")) {
+        if (def.startsWith("TapPowerValue")) {
             return CardLists.getTotalPower(paidList, ctb);
         }
 
-        if (string.startsWith("GreatestCMC")) {
-            return Aggregates.max(paidList, Card::getCMC);
-        }
-
-        if (string.equals("Colors")) {
+        if (def.equals("Colors")) {
             return CardUtil.getColorsFromCards(paidList).countColors();
         }
 
-        if (string.startsWith("DifferentCardNames")) {
-            return doXMath(CardLists.getDifferentNamesCount(paidList), CardFactoryUtil.extractOperators(string), source, ctb);
+        if (def.startsWith("DifferentCardNames")) {
+            return doXMath(CardLists.getDifferentNamesCount(paidList), CardFactoryUtil.extractOperators(def), source, ctb);
         }
 
-        if (string.equals("DifferentColorPair")) {
+        if (def.equals("DifferentColorPair")) {
             final Set<ColorSet> diffPair = new HashSet<>();
             for (final Card card : paidList) {
                 if (card.getColor().countColors() == 2) {
@@ -3679,63 +3658,49 @@ public class AbilityUtils {
             return diffPair.size();
         }
 
-        if (string.startsWith("DifferentCMC")) {
-            final Set<Integer> diffCMC = new HashSet<>();
-            for (final Card card : paidList) {
-                diffCMC.add(card.getCMC());
-            }
-            return diffCMC.size();
-        }
-
-        if (string.startsWith("SumCMC")) {
-            return Aggregates.sum(paidList, Card::getCMC);
-        }
-
-        if (string.startsWith("Valid")) {
-            final String[] splitString = string.split("/", 2);
+        // shortcut to filter from Defined directly
+        if (def.startsWith("Valid")) {
+            final String[] splitString = def.split("/", 2);
             String valid = splitString[0].substring(6);
             final int num = CardLists.getValidCardCount(paidList, valid, source.getController(), source, ctb);
             return doXMath(num, splitString.length > 1 ? splitString[1] : null, source, ctb);
         }
 
-        if (string.startsWith("AllTypes")) {
+        if (def.startsWith("AllTypes")) {
             return countCardTypesFromList(paidList, false) +
                     countSuperTypesFromList(paidList) +
                     countSubTypesFromList(paidList);
         }
 
-        if (string.startsWith("CardTypes")) {
-            return doXMath(countCardTypesFromList(paidList, string.startsWith("CardTypesPermanent")), CardFactoryUtil.extractOperators(string), source, ctb);
+        if (def.startsWith("CardTypes")) {
+            return doXMath(countCardTypesFromList(paidList, def.startsWith("CardTypesPermanent")), CardFactoryUtil.extractOperators(def), source, ctb);
         }
 
-        if (string.startsWith("CreatureType")) {
+        if (def.startsWith("CreatureType")) {
             final Set<String> creatTypes = Sets.newHashSet();
             for (Card card : paidList) {
                 creatTypes.addAll(card.getType().getCreatureTypes());
             }
             // filter out fun types?
-            return doXMath(creatTypes.size(), CardFactoryUtil.extractOperators(string), source, ctb);
+            return doXMath(creatTypes.size(), CardFactoryUtil.extractOperators(def), source, ctb);
         }
 
-        String filteredString = string;
-        Iterable<Card> filteredList = paidList;
-        final String[] filter = filteredString.split("_");
-
-        if (string.startsWith("FilterControlledBy")) {
-            final String pString = filter[0].substring(18);
-            FCollectionView<Player> controllers = getDefinedPlayers(source, pString, ctb);
-            filteredList = CardLists.filterControlledByAsList(filteredList, controllers);
-            filteredString = TextUtil.fastReplace(filteredString, pString, "");
-            filteredString = TextUtil.fastReplace(filteredString, "FilterControlledBy_", "");
+        Function<IntStream, Integer> func;
+        String finalDef;
+        if (def.startsWith("Least")) {
+            func = s -> s.min().getAsInt();
+            finalDef = def.substring(5);
+        } else if (def.startsWith("Greatest")) {
+            func = s -> s.max().getAsInt();
+            finalDef = def.substring(8);
+        } else if (def.startsWith("Different")) {
+            func = s -> Math.toIntExact(s.distinct().count());
+            finalDef = def.substring(9);
+        } else {
+            func = IntStream::sum;
+            finalDef = def;
         }
-
-        int tot = 0;
-
-        for (final Card c : filteredList) {
-            tot += xCount(c, filteredString, ctb);
-        }
-
-        return tot;
+        return func.apply(StreamUtil.stream(paidList).mapToInt(c -> xCount(c, finalDef, ctb)));
     }
 
     private static CardCollectionView getCardListForXCount(final Card c, final Player cc, final String[] sq, CardTraitBase ctb) {

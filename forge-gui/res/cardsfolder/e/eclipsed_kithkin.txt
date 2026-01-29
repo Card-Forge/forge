@@ -1,0 +1,8 @@
+Name:Eclipsed Kithkin
+ManaCost:GW GW
+Types:Creature Kithkin Scout
+PT:2/1
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ DBDig | TriggerDescription$ When CARDNAME enters, look at the top four cards of your library. You may reveal a Kithkin, Forest or Plains card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+SVar:DBDig:DB$ Dig | DigNum$ 4 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Kithkin,Forest,Plains | RestRandomOrder$ True
+DeckHints:Type$Kithkin|Forest|Plains
+Oracle:When Eclipsed Kithkin enters, look at the top four cards of your library. You may reveal a Kithkin, Forest or Plains card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.

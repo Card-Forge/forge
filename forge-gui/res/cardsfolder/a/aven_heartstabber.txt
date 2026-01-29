@@ -4,7 +4,7 @@ Types:Creature Bird Assassin
 PT:1/1
 K:Flying
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Deathtouch | CheckSVar$ X | SVarCompare$ GE5 | Description$ As long as there are five or more mana values among cards in your graveyard, this creature gets +2/+2 and has deathtouch.
-SVar:X:Count$ValidGraveyard Card.YouOwn$DifferentCMC
+SVar:X:Count$ValidGraveyard Card.YouOwn$DifferentCardManaCost
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When this creature dies, mill two cards, then draw a card.
 SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You | SubAbility$ TrigDraw
 SVar:TrigDraw:DB$ Draw | Defined$ You

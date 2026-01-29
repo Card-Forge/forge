@@ -1,9 +1,9 @@
 package forge.game.ability.effects;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -67,7 +67,7 @@ public class ReplaceTokenEffect extends SpellAbilityEffect {
                     continue;
                 }
                 Player contoller = e.getKey().getController();
-                int old = ObjectUtils.defaultIfNull(byController.get(contoller), 0);
+                int old = Objects.requireNonNullElse(byController.get(contoller), 0);
                 byController.put(contoller, old + e.getValue());
             }
 

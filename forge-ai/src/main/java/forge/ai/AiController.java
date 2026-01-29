@@ -293,7 +293,7 @@ public class AiController {
             }
 
             // can't fetch partner isn't problematic
-            if (tr.isKeyword(Keyword.PARTNER)) {
+            if (tr.isKeyword(Keyword.PARTNER_WITH)) {
                 continue;
             }
 

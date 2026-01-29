@@ -3,7 +3,7 @@ ManaCost:0
 Types:Artifact
 A:AB$ ChangeZone | Cost$ 1 T Sac<1/CARDNAME> | TargetMin$ 0 | TargetMax$ 4 | TargetsWithSameController$ True | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 0 | TgtPrompt$ Choose target basic land card in a graveyard | ValidTgts$ Land.Basic | Chooser$ You | SubAbility$ ChooseZero | SpellDescription$ Put up to four target basic land cards from a player's graveyard on top of their library in any order. That player draws a card at the beginning of the next turn's upkeep.
 SVar:ChooseZero:DB$ ChoosePlayer | Choices$ Player | ConditionDefined$ Targeted | ConditionNotPresent$ Card | SubAbility$ DelTrigSlowtrip
-SVar:DelTrigSlowtrip:DB$ DelayedTrigger | NextTurn$ True | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ DrawSlowtrip | RememberObjects$ TargetedOwner,ChosenPlayer | TriggerDescription$ Draw a card.
+SVar:DelTrigSlowtrip:DB$ DelayedTrigger | NextTurn$ True | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ DrawSlowtrip | RememberObjects$ TargetedOwner & ChosenPlayer | TriggerDescription$ Draw a card.
 SVar:DrawSlowtrip:DB$ Draw | Defined$ DelayTriggerRemembered
 AI:RemoveDeck:Random
 Oracle:{1}, {T}, Sacrifice Lodestone Bauble: Put up to four target basic land cards from a player's graveyard on top of their library in any order. That player draws a card at the beginning of the next turn's upkeep.

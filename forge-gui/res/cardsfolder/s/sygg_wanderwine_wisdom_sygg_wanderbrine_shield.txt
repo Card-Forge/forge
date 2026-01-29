@@ -6,7 +6,7 @@ S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ NICKNAME can't
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAnimate | TriggerDescription$ Whenever this creature enters or transforms into CARDNAME, target creature gains "Whenever this creature deals combat damage to a player or planeswalker, draw a card" until end of turn.
 T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigAnimate | Secondary$ True | TriggerDescription$ Whenever this creature enters or transforms into CARDNAME, target creature gains "Whenever this creature deals combat damage to a player or planeswalker, draw a card" until end of turn.
 SVar:TrigAnimate:DB$ Animate | ValidTgts$ Creature | Triggers$ DamageTrig
-SVar:DamageTrig:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player,Planeswalker | Execute$ TrigDraw | CombatDamage$ True | TriggerDescription$ Whenever this creature deals combat damage to a player or planeswalker, draw a card
+SVar:DamageTrig:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player,Planeswalker | Execute$ TrigDraw | CombatDamage$ True | TriggerDescription$ Whenever this creature deals combat damage to a player or planeswalker, draw a card.
 SVar:TrigDraw:DB$ Draw
 T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of your first main phase, you may pay {W}. If you do, transform NICKNAME.
 SVar:TrigTransform:AB$ SetState | Cost$ W | Defined$ Self | Mode$ Transform

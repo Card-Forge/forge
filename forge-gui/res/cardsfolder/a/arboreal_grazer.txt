@@ -1,6 +1,6 @@
 Name:Arboreal Grazer
 ManaCost:G
-Types:Creature Beast
+Types:Creature Sloth Beast
 PT:0/3
 K:Reach
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When this creature enters, you may put a land card from your hand onto the battlefield tapped.

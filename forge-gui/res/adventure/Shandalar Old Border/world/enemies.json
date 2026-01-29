@@ -558,7 +558,7 @@
         "type": "item",
         "probability": 0.3,
         "count": 1,
-        "itemName": "Dragon Blood"
+        "itemName": "Dragon Blood Necklace"
       }
     ],
     "colors": "U",
@@ -816,7 +816,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Serra's Shield"
+        "itemName": "Blessed Halo"
       },
       {
         "type": "card",
@@ -5103,7 +5103,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Yellow Scarves Horseshoe"
+        "itemName": "Yellow Scarves Spear"
       },
       {
         "type": "shards",
@@ -5320,7 +5320,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "War Beast Rider's Boots"
+        "itemName": "War Beast Gauntlet"
       }
     ],
     "colors": "GB",
@@ -11050,7 +11050,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Explorer's Boots"
+        "itemName": "Explorer's Hat"
       },
       {
         "type": "gold",
@@ -11178,7 +11178,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Overwhelming Axe"
+        "itemName": "Overwhelming Armor"
       },
       {
         "type": "shards",
@@ -11274,7 +11274,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Vampire Bite"
+        "itemName": "Vampire's Dagger"
       },
       {
         "type": "life",
@@ -11924,7 +11924,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Infiltrator's Mask"
+        "itemName": "Infiltrator's Knife"
       }
     ],
     "colors": "UG",
@@ -12289,7 +12289,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Symbol of the Pit"
+        "itemName": "Lance of Lurking Evil"
       },
       {
         "type": "gold",
@@ -12394,7 +12394,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Worry Beads"
+        "itemName": "Belt of Worry Beads"
       },
       {
         "type": "shards",
@@ -14255,7 +14255,7 @@
       "IdentityGreen",
       "IdentityBlack",
       "BiomeGreen",
-      "Minion"
+      "Leader"
     ]
   },
   {
@@ -15213,7 +15213,7 @@
         "type": "item",
         "probability": 0.2,
         "count": 1,
-        "itemName": "Molten Mantle"
+        "itemName": "Molten Gauntlet"
       },
       {
         "type": "deckCard",
@@ -15272,7 +15272,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Molten Mantle"
+        "itemName": "Molten Gauntlet"
       },
       {
         "type": "life",
@@ -16606,7 +16606,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Kobold King's Crown"
+        "itemName": "Kobold King's Blade"
       }
     ],
     "colors": "RB",
@@ -19260,7 +19260,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Disrupting Scepter"
+        "itemName": "Disruptor's Robes"
       },
       {
         "type": "life",
@@ -20107,7 +20107,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Gooey Shoes"
+        "itemName": "Consumptive Vial"
       },
       {
         "type": "gold",
@@ -20816,7 +20816,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Ring of Ma'r\u00fbf"
+        "itemName": "Djinn's Silks"
       }
     ],
     "questTags": [
@@ -21670,7 +21670,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Phyrexian Grimoire"
+        "itemName": "Phyrexian Implant"
       }
     ],
     "colors": "WG",
@@ -24180,7 +24180,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Warren Tender's Cloak"
+        "itemName": "Warren Tender's Baton"
       },
       {
         "type": "shards",
@@ -24341,6 +24341,11 @@
         "probability": 1,
         "count": 1,
         "cardName": "Toxin Sliver|LGN"
+      },
+      {
+        "type": "life",
+        "probability": 1,
+        "count": 1
       }
     ],
     "colors": "BGRUW",
@@ -24495,7 +24500,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Winter Boots"
+        "itemName": "Winter Cap"
       }
     ],
     "colors": "UG",
@@ -25106,7 +25111,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Map to the Vale"
+        "itemName": "Crown of the Vale"
       },
       {
         "type": "shards",
@@ -25305,7 +25310,7 @@
       },
       {
         "type": "item",
-        "itemName": "Attendant's Robes"
+        "itemName": "Attendant's Prayerbook"
       },
       {
         "type": "shards",
@@ -25821,7 +25826,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Joven's Tools"
+        "itemName": "Joven's Boots"
       },
       {
         "type": "shards",
@@ -25938,7 +25943,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Crown of Madness"
+        "itemName": "Armor of Madness"
       },
       {
         "type": "shards",
@@ -28073,7 +28078,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Hivecaller's Helm"
+        "itemName": "Hivecaller's Staff"
       },
       {
         "type": "shards",
@@ -28254,7 +28259,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Crowcaller's Charm"
+        "itemName": "Storm Gauntlet"
       },
       {
         "type": "shards",
@@ -28660,7 +28665,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Cave Diver's Boots"
+        "itemName": "Rhystic Amulet"
       }
     ],
     "colors": "B",
@@ -32495,7 +32500,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Groundbreaker Boots"
+        "itemName": "Groundbreaker Mace"
       },
       {
         "type": "card",
@@ -32639,7 +32644,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Ashnod's Battle Gear"
+        "itemName": "Ashnod's Greaves"
       },
       {
         "type": "card",
@@ -32791,7 +32796,7 @@
       },
       {
         "type": "item",
-        "itemName": "Copper Angel's Amulet"
+        "itemName": "Copper Angel's Axe"
       }
     ]
   },
@@ -32968,7 +32973,7 @@
       },
       {
         "type": "item",
-        "itemName": "Map to Paradise",
+        "itemName": "Circlet of Paradise",
         "count": 1,
         "probability": 1
       },
@@ -33088,7 +33093,7 @@
       },
       {
         "type": "item",
-        "itemName": "Ivy Seer's Amulet"
+        "itemName": "Ivy Seer's Tome"
       }
     ]
   },
@@ -33131,7 +33136,7 @@
       },
       {
         "type": "item",
-        "itemName": "Multani's Boots"
+        "itemName": "Mask of Multani"
       }
     ]
   },
@@ -33227,7 +33232,7 @@
       },
       {
         "type": "item",
-        "itemName": "Ankh of Purgatory"
+        "itemName": "Purgatory Priest's Robes"
       }
     ]
   },
@@ -33274,7 +33279,7 @@
       },
       {
         "type": "item",
-        "itemName": "Paladin's Greaves"
+        "itemName": "Paladin's Shield"
       }
     ]
   },
@@ -33417,7 +33422,7 @@
       },
       {
         "type": "item",
-        "itemName": "Barrin's Codex"
+        "itemName": "Barrin's Robes"
       }
     ]
   },
@@ -33554,13 +33559,13 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Armor of Yawgmoth"
+        "itemName": "Scythe of Yawgmoth"
       },
       {
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Eye of Yawgmoth"
+        "itemName": "Yawgmoth's Armor"
       },
       {
         "type": "life",
@@ -33657,7 +33662,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Sulfuric Staff"
+        "itemName": "Sulfuric Amulet"
       },
       {
         "type": "landSketchbookShop",
@@ -34708,7 +34713,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 0.3,
+    "spawnRate": 0,
     "difficulty": 0.8,
     "speed": 20,
     "life": 40,
@@ -34758,6 +34763,12 @@
         "probability": 1,
         "count": 1,
         "cardName": "Armageddon|LEA"
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Windwalker's Blessing"
       }
     ],
     "colors": "W",
@@ -34852,7 +34863,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 0.3,
+    "spawnRate": 0,
     "difficulty": 0.8,
     "speed": 20,
     "life": 40,
@@ -34896,6 +34907,12 @@
         "probability": 1,
         "count": 1,
         "cardName": "Psionic Blast|LEA"
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Windwalker's Blessing"
       }
     ],
     "colors": "U",
@@ -34990,7 +35007,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 0.3,
+    "spawnRate": 0,
     "difficulty": 0.8,
     "speed": 20,
     "life": 40,
@@ -35011,7 +35028,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Amulet of Azar"
+        "itemName": "Staff of Azar"
       },
       {
         "type": "life",
@@ -35034,6 +35051,12 @@
         "probability": 1,
         "count": 1,
         "cardName": "Mind Twist|LEA"
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Windwalker's Blessing"
       }
     ],
     "colors": "B",
@@ -35128,7 +35151,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 0.3,
+    "spawnRate": 0,
     "difficulty": 0.8,
     "speed": 20,
     "life": 40,
@@ -35178,6 +35201,12 @@
         "probability": 1,
         "count": 1,
         "cardName": "Nalathni Dragon|DRC94"
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Windwalker's Blessing"
       }
     ],
     "colors": "R",
@@ -35272,7 +35301,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 0.3,
+    "spawnRate": 0,
     "difficulty": 0.8,
     "speed": 20,
     "life": 40,
@@ -35322,6 +35351,12 @@
         "probability": 1,
         "count": 1,
         "cardName": "Birds of Paradise|LEA"
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Windwalker's Blessing"
       }
     ],
     "colors": "G",
@@ -35760,7 +35795,7 @@
       {
         "type": "item",
         "probability": 1,
-        "itemName": "Guard's Armor"
+        "itemName": "Guard's Shield"
       },
       {
         "type": "gold",
@@ -36648,7 +36683,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Breathstealer's Robe"
+        "itemName": "Breathstealer's Blade"
       }
     ],
     "colors": "B",
@@ -36777,7 +36812,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Dementia Mask"
+        "itemName": "Ichor Knife"
       }
     ],
     "colors": "B",
@@ -36909,7 +36944,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Bog Glider Greaves"
+        "itemName": "Bog Glider Glove"
       }
     ],
     "colors": "B",
@@ -37073,7 +37108,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Garments of Gaea"
+        "itemName": "Amulet of Gaea"
       },
       {
         "type": "life",
@@ -37267,7 +37302,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Lump of Coal"
+        "itemName": "Krampus's Horns"
       }
     ],
     "colors": "BR",
@@ -37292,7 +37327,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Christmas Gift"
+        "itemName": "Santa's Hat"
       },
       {
         "type": "card",
@@ -37511,7 +37546,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Kry Shield"
+        "itemName": "Kry Greaves"
       },
       {
         "type": "card",
@@ -37557,7 +37592,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Ring of Immortals"
+        "itemName": "Immortal Anklet"
       },
       {
         "type": "card",
