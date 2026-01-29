@@ -30,16 +30,22 @@ Extended yield options that allow players to automatically pass priority until s
 
 ### Access Methods
 
-1. **Yield Options Panel**: A dockable panel with dedicated yield buttons:
+1. **Yield Options Panel**: A dockable panel with dedicated yield buttons in a 2-row layout:
+
+   **Row 1:**
    - **Next Phase** - Yield until next phase begins
    - **Combat** - Yield until before combat
    - **End Step** - Yield until end step
-   - **Next Turn** - Yield until next turn
+
+   **Row 2:**
+   - **End Turn** - Yield until next turn
    - **Your Turn** - Yield until your next turn (only visible in 3+ player games)
    - **Clear Stack** - Yield until stack clears (only enabled when stack has items)
-   - Buttons are blue by default, red when that yield mode is active
+
+   **Visual Feedback:**
+   - Buttons are **blue** by default, **red** when that yield mode is active
    - Panel appears as a tab alongside the Stack panel when experimental yields are enabled
-   - Buttons are disabled during mulligan and pre-game phases
+   - All buttons disabled during mulligan, pre-game, and cleanup/discard phases
 
 2. **Right-Click Menu**: Right-click the "End Turn" button to see yield options (configurable)
 
@@ -54,15 +60,31 @@ Extended yield options that allow players to automatically pass priority until s
 
 ### Smart Yield Suggestions
 
-When enabled, the system prompts players to enable auto-yield in situations where they likely cannot act. Suggestions are **integrated into the prompt area** with Accept/Decline buttons:
+When enabled, the system prompts players to enable auto-yield in situations where they likely cannot act. Suggestions are **integrated into the prompt area** (not modal dialogs) with Accept/Decline buttons:
 
-1. **Cannot respond to stack**: Player has no instant-speed responses available (checks `getAllPossibleAbilities()`)
-2. **No mana available**: Player has cards but no mana sources untapped (not on player's turn)
-3. **No actions available**: No playable cards in hand and no activatable non-mana abilities (not on player's turn)
+1. **Cannot respond to stack** (`YIELD_SUGGEST_STACK_YIELD`): Player has no instant-speed responses available
+   - Checks if stack has items
+   - Uses `getAllPossibleAbilities(removeUnplayable=true)` to verify no responses
+   - Suggests `UNTIL_STACK_CLEARS` mode
 
-Each suggestion can be individually enabled/disabled.
+2. **No mana available** (`YIELD_SUGGEST_NO_MANA`): Player has cards but no mana sources untapped
+   - Only triggers when not on player's turn
+   - Checks for untapped lands with mana abilities or mana in pool
+   - Suggests default yield mode (based on game type)
 
-**Note:** Suggestions will not appear if the player is already yielding.
+3. **No actions available** (`YIELD_SUGGEST_NO_ACTIONS`): No playable cards in hand and no activatable non-mana abilities
+   - Only triggers when not on player's turn and stack is empty
+   - Uses `getAllPossibleAbilities(removeUnplayable=true)` to verify
+   - Suggests default yield mode (based on game type)
+
+**Suggestion Behavior:**
+- Each suggestion type can be individually enabled/disabled via preferences
+- Suggestions will **not appear** if:
+  - The player is already yielding
+  - The suggestion was declined earlier in the same turn (auto-suppression)
+- Declining a suggestion shows hint: "(Declining disables this prompt until next turn)"
+- Suppression automatically resets when turn number changes
+- If a yield button is clicked while a suggestion is showing, the clicked yield mode takes precedence
 
 ### Interrupt Conditions
 
@@ -73,7 +95,7 @@ Yield modes can be configured to automatically cancel when:
 - **You or your permanents** are targeted by a spell/ability (default: ON)
 - An opponent casts any spell (default: OFF)
 - Combat begins (default: OFF)
-- Cards are revealed or choices are made (default: OFF) - when disabled, reveal dialogs and opponent choice notifications are auto-dismissed during yield
+- Cards are revealed or choices are made (default: OFF) - when **disabled**, reveal dialogs and opponent choice notifications are auto-dismissed during yield
 - Mass removal spell cast by opponent (default: ON) - detects DestroyAll, ChangeZoneAll (exile/graveyard), DamageAll, SacrificeAll effects; only interrupts if you have permanents matching the spell's filter
 
 **Multiplayer Note:** Attack/blocker interrupts are scoped to the individual player - if Player A attacks Player B, Player C's yield will NOT be interrupted.
@@ -93,40 +115,243 @@ Once enabled:
 
 ## Technical Implementation
 
-### Architecture
+### Architecture Overview
 
-All changes are in the **GUI layer only** - no modifications to core game logic, rules engine, or network protocol:
+The yield system is implemented entirely in the **GUI layer** with zero changes to the core game engine or network protocol. This design ensures backward compatibility and allows each client to manage its own yield preferences independently.
 
-**Key Point: Network Independence**
-- The yield system operates entirely at the GUI/client layer
-- It automates *when* to pass priority, not *how* priority is passed
-- Standard priority pass messages are sent through the existing network protocol
-- Each client manages its own yield state independently - no yield state is synchronized between clients
-- Compatible with existing network play without any protocol changes
+#### Component Hierarchy
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                      GUI Layer (Client)                      │
+│  ┌────────────────────────────────────────────────────────┐  │
+│  │  Desktop UI Components (forge-gui-desktop)             │  │
+│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐            │  │
+│  │  │  VYield  │  │  CYield  │  │ VPrompt  │            │  │
+│  │  │  (View)  │  │  (Ctrl)  │  │ (Menu)   │            │  │
+│  │  └─────┬────┘  └─────┬────┘  └─────┬────┘            │  │
+│  └────────┼─────────────┼─────────────┼─────────────────┘  │
+│           │             │             │                     │
+│  ┌────────┴─────────────┴─────────────┴─────────────────┐  │
+│  │  Shared GUI Logic (forge-gui)                        │  │
+│  │  ┌──────────────────────────────────────────────┐    │  │
+│  │  │         AbstractGuiGame                       │    │  │
+│  │  │  (Implements IGuiGame interface)              │    │  │
+│  │  │                                               │    │  │
+│  │  │  ┌─────────────────────────────────┐         │    │  │
+│  │  │  │    YieldController (delegate)    │         │    │  │
+│  │  │  │  - State management              │         │    │  │
+│  │  │  │  - Interrupt logic               │         │    │  │
+│  │  │  │  - End condition checks          │         │    │  │
+│  │  │  └─────────────┬───────────────────┘         │    │  │
+│  │  │                ▲                              │    │  │
+│  │  │                │ YieldCallback                │    │  │
+│  │  │                │ (for GUI updates)            │    │  │
+│  │  └────────────────┼───────────────────────────────┘    │  │
+│  │                   │                                    │  │
+│  │  ┌────────────────┴───────────────────────────────┐   │  │
+│  │  │      InputPassPriority                         │   │  │
+│  │  │  - Smart suggestions                           │   │  │
+│  │  │  - Prompt integration                          │   │  │
+│  │  └────────────────────────────────────────────────┘   │  │
+│  └────────────────────────┬───────────────────────────────┘  │
+└───────────────────────────┼──────────────────────────────────┘
+                            │
+                            ▼
+          ┌─────────────────────────────────────┐
+          │      IGameController Interface       │
+          │  (Priority pass abstraction)         │
+          └──────────────┬──────────────────────┘
+                         │
+          ┌──────────────┴──────────────┐
+          ▼                             ▼
+┌──────────────────────┐    ┌──────────────────────────┐
+│ PlayerControllerHuman│    │  NetGameController       │
+│ (Local games)        │    │  (Network games)         │
+└──────────────────────┘    └──────────┬───────────────┘
+                                       │
+                                       ▼
+                          ┌──────────────────────────┐
+                          │   Network Protocol       │
+                          │   (unchanged)            │
+                          │   - Standard priority    │
+                          │     pass messages only   │
+                          └──────────────────────────┘
+```
+
+#### Key Components
+
+**1. YieldController** (New - `forge-gui/YieldController.java`)
+- **Purpose**: Core yield logic and state management
+- **Responsibilities**:
+  - Manages yield state maps for each player
+  - Implements interrupt condition checking
+  - Evaluates mode-specific end conditions
+  - Provides YieldCallback interface for GUI updates
+- **State Tracking**: Uses Maps keyed by PlayerView to track:
+  - `playerYieldMode` - Current yield mode per player
+  - `yieldStartTurn` - Turn number when yield was set
+  - `yieldCombatStartTurn` - Turn when combat yield was set
+  - `yieldNextPhaseStartPhase` - Phase when next phase yield was set
+  - `declinedSuggestionsThisTurn` - Declined suggestion tracking
+- **Design Pattern**: Uses callback pattern to decouple from GUI
+
+**2. AbstractGuiGame** (`forge-gui/AbstractGuiGame.java`)
+- **Purpose**: GUI game implementation that delegates to YieldController
+- **Responsibilities**:
+  - Lazily initializes YieldController with callback implementation
+  - Exposes yield methods through IGuiGame interface
+  - Provides callback implementations for GUI updates
+- **Delegation**: All yield operations delegate to `getYieldController()`
+  ```java
+  public void setYieldMode(PlayerView player, YieldMode mode) {
+      getYieldController().setYieldMode(player, mode);
+  }
+  ```
+- **Design Pattern**: Delegate pattern for separation of concerns
+
+**3. InputPassPriority** (`forge-gui/InputPassPriority.java`)
+- **Purpose**: Priority pass input handler with smart suggestions
+- **Responsibilities**:
+  - Detects situations where yield suggestions are helpful
+  - Integrates suggestions into prompt area (not modal dialogs)
+  - Tracks pending suggestion state
+  - Respects decline tracking (suppression per turn)
+- **Integration**: Checks experimental yield flag and player yield state before showing suggestions
+
+**4. Desktop UI Components** (`forge-gui-desktop/`)
+- **VYield**: Yield panel view with 6 buttons in 2-row layout
+  - Row 1: Next Phase | Combat | End Step
+  - Row 2: End Turn | Your Turn | Clear Stack
+  - Uses `FButton.setUseHighlightMode(true)` for blue/red coloring
+  - Dynamic tooltip updates with keyboard shortcuts
+- **CYield**: Controller that registers action listeners and updates button states
+- **VPrompt**: Right-click menu on End Turn button (if preference enabled)
+
+#### Network Independence
+
+**Client-Local State:**
+- Each client maintains its own `YieldController` instance
+- Yield modes are **never synchronized** between clients
+- No yield state is sent over the network
+
+**Protocol Compatibility:**
+- Yield system only affects **when** priority is passed, not **how**
+- Uses existing `selectButtonOk()` / `passPriority()` protocol methods
+- Network layer sees only standard priority pass messages
+- NetGameController implements IGameController with zero yield-specific methods
+
+**Example Multi-Player Scenario:**
+```
+3-Player Game:
+- Player A: Sets UNTIL_YOUR_NEXT_TURN (auto-passing in background)
+- Player B: Sets UNTIL_COMBAT (auto-passing in background)
+- Player C: Manual priority passing
+
+Network traffic from all three players:
+- A sends: passPriority message (automated by yield system)
+- B sends: passPriority message (automated by yield system)
+- C sends: passPriority message (manual click)
+
+Server behavior: Identical for all three - no awareness of yield state
+```
+
+#### Data Flow
+
+**1. User Activates Yield:**
+```
+User clicks yield button (VYield)
+    ↓
+CYield calls matchUI.setYieldMode(player, mode)
+    ↓
+AbstractGuiGame.setYieldMode(player, mode)
+    ↓
+YieldController.setYieldMode(player, mode)
+    ├─ Stores mode in playerYieldMode map
+    ├─ Initializes tracking (turn number, phase, etc.)
+    └─ Calls callback.showPromptMessage("Yielding until...")
+    ↓
+CYield calls gameController.selectButtonOk()
+    ↓
+Priority is passed (network message if online)
+```
+
+**2. Auto-Yield Check (Game Loop):**
+```
+Priority prompt would normally appear
+    ↓
+YieldController.shouldAutoYieldForPlayer(player)
+    ├─ Check if yield mode is active
+    ├─ Check interrupt conditions (attacks, targeting, mass removal, etc.)
+    ├─ Check mode-specific end conditions
+    └─ Return true/false
+    ↓
+If true: Automatically call selectButtonOk() (pass priority)
+If false: Show priority prompt to user
+```
+
+**3. Interrupt Condition:**
+```
+Game event occurs (e.g., player is attacked)
+    ↓
+YieldController.shouldInterruptYield(player)
+    ├─ Check preference settings
+    ├─ Check if condition affects this specific player
+    └─ Return true if should interrupt
+    ↓
+If true: YieldController.clearYieldMode(player)
+    ├─ Remove from all tracking maps
+    └─ Call callback.showPromptMessage("")
+    ↓
+User sees normal priority prompt
+```
+
+**4. Smart Suggestion Flow:**
+```
+Priority prompt triggered
+    ↓
+InputPassPriority.showMessage()
+    ├─ Check if experimental yield enabled
+    ├─ Check if already yielding (skip if yes)
+    ├─ Check each suggestion condition (stack, no mana, no actions)
+    ├─ Check if suggestion was declined this turn
+    └─ Show suggestion or normal prompt
+    ↓
+User accepts suggestion:
+    ├─ Set yield mode
+    └─ Pass priority
+    ↓
+User declines suggestion:
+    ├─ Track decline in declinedSuggestionsThisTurn
+    └─ Show normal prompt
+```
+
+#### File Organization
 
 ```
 forge-gui/           (shared GUI code)
-├── YieldMode.java                    # New enum for yield modes
-├── AbstractGuiGame.java              # Yield state tracking & logic
+├── YieldMode.java                    # Yield mode enum definitions
+├── YieldController.java              # Core yield logic and state management
+├── AbstractGuiGame.java              # Yield delegation and GUI integration
 ├── InputPassPriority.java            # Smart suggestion prompts
-├── IGuiGame.java                     # Interface updates
-├── IGameController.java              # Controller interface
-├── PlayerControllerHuman.java        # Controller implementation
-├── ForgePreferences.java             # New preferences
-├── NetGameController.java            # Controller interface implementation (no protocol changes)
-├── ProtocolMethod.java               # Interface method declarations
-└── en-US.properties                  # Localization
+├── IGuiGame.java                     # Interface with yield methods
+├── IGameController.java              # Controller interface (no yield-specific methods)
+├── PlayerControllerHuman.java        # Local game controller implementation
+├── ForgePreferences.java             # 13 new preferences
+├── NetGameController.java            # Network controller (no protocol changes)
+└── en-US.properties                  # 30+ localization strings
 
 forge-gui-desktop/   (desktop-specific)
 ├── VYield.java                       # Yield Options panel view (NEW)
 ├── CYield.java                       # Yield Options panel controller (NEW)
-├── EDocID.java                       # Added REPORT_YIELD doc ID
-├── VPrompt.java                      # Right-click menu
-├── VMatchUI.java                     # Dynamic panel visibility
-├── CMatchUI.java                     # Yield panel registration
-├── GameMenu.java                     # Yield Options submenu
-├── FButton.java                      # Added highlight mode for buttons
-└── KeyboardShortcuts.java            # New shortcuts
+├── VPrompt.java                      # Right-click menu on End Turn button
+├── VMatchUI.java                     # Dynamic panel visibility based on preferences
+├── CMatchUI.java                     # Yield panel registration and updates
+├── GameMenu.java                     # Yield Options submenu with Display Options
+└── KeyboardShortcuts.java            # F-key shortcuts for yield modes
+
+forge-gui-desktop/res/layouts/
+└── match.xml                         # Added REPORT_YIELD to default layout
 ```
 
 ### Key Design Decisions
@@ -136,6 +361,7 @@ forge-gui-desktop/   (desktop-specific)
 3. **Network independent**: Yield state is client-local; no synchronization needed
 4. **Backward compatible**: Existing Ctrl+E behavior unchanged
 5. **Individual toggles**: Each suggestion/interrupt can be configured separately
+6. **PlayerView consistency**: All yield methods use `TrackableTypes.PlayerViewType.lookup(player)` to ensure Map key consistency and prevent instance mismatch bugs
 
 ### End Turn Button Behavior
 
@@ -157,65 +383,116 @@ The "End Turn" button (Cancel button during priority) has different behavior dep
 
 ### State Management
 
+All yield state is managed by `YieldController` and accessed through `AbstractGuiGame`:
+
 ```java
 // In AbstractGuiGame.java
+private YieldController yieldController;
+
+private YieldController getYieldController() {
+    if (yieldController == null) {
+        yieldController = new YieldController(new YieldController.YieldCallback() {
+            @Override
+            public void showPromptMessage(PlayerView player, String message) {
+                AbstractGuiGame.this.showPromptMessage(player, message);
+            }
+            @Override
+            public void updateButtons(PlayerView player, boolean ok, boolean cancel, boolean focusOk) {
+                AbstractGuiGame.this.updateButtons(player, ok, cancel, focusOk);
+            }
+            @Override
+            public void awaitNextInput() {
+                AbstractGuiGame.this.awaitNextInput();
+            }
+            @Override
+            public void cancelAwaitNextInput() {
+                AbstractGuiGame.this.cancelAwaitNextInput();
+            }
+            @Override
+            public GameView getGameView() {
+                return AbstractGuiGame.this.getGameView();
+            }
+        });
+    }
+    return yieldController;
+}
+
+// Delegation methods
+public void setYieldMode(PlayerView player, YieldMode mode) {
+    getYieldController().setYieldMode(player, mode);
+}
+```
+
+**YieldController Internal State Maps:**
+```java
+// In YieldController.java
 private final Map<PlayerView, YieldMode> playerYieldMode = Maps.newHashMap();
-private final Map<PlayerView, Integer> yieldStartTurn = Maps.newHashMap(); // Track turn when yield was set
-private final Map<PlayerView, Integer> yieldCombatStartTurn = Maps.newHashMap(); // Track turn when combat yield was set
-private final Map<PlayerView, Boolean> yieldCombatStartedAtOrAfterCombat = Maps.newHashMap(); // Was yield set at/after combat?
-private final Map<PlayerView, Integer> yieldEndStepStartTurn = Maps.newHashMap(); // Track turn when end step yield was set
-private final Map<PlayerView, Boolean> yieldEndStepStartedAtOrAfterEndStep = Maps.newHashMap(); // Was yield set at/after end step?
-private final Map<PlayerView, Boolean> yieldYourTurnStartedDuringOurTurn = Maps.newHashMap(); // Was yield set during our turn?
-private final Map<PlayerView, PhaseType> yieldNextPhaseStartPhase = Maps.newHashMap(); // Track phase when next phase yield was set
+private final Map<PlayerView, Integer> yieldStartTurn = Maps.newHashMap();
+private final Map<PlayerView, Integer> yieldCombatStartTurn = Maps.newHashMap();
+private final Map<PlayerView, Boolean> yieldCombatStartedAtOrAfterCombat = Maps.newHashMap();
+private final Map<PlayerView, Integer> yieldEndStepStartTurn = Maps.newHashMap();
+private final Map<PlayerView, Boolean> yieldEndStepStartedAtOrAfterEndStep = Maps.newHashMap();
+private final Map<PlayerView, Boolean> yieldYourTurnStartedDuringOurTurn = Maps.newHashMap();
+private final Map<PlayerView, PhaseType> yieldNextPhaseStartPhase = Maps.newHashMap();
 
 // Smart suggestion decline tracking (resets each turn)
 private final Map<PlayerView, Set<String>> declinedSuggestionsThisTurn = Maps.newHashMap();
 private final Map<PlayerView, Integer> declinedSuggestionsTurn = Maps.newHashMap();
+
+// Legacy auto-pass tracking (backward compatibility)
+private final Set<PlayerView> autoPassUntilEndOfTurn = Sets.newHashSet();
 ```
 
-The `shouldAutoYieldForPlayer()` method checks:
-1. Legacy auto-pass set (backward compatibility)
+**Key Implementation Details:**
+
+1. **PlayerView Lookup**: All methods use `TrackableTypes.PlayerViewType.lookup(player)` to ensure map key consistency
+2. **Callback Pattern**: YieldController uses callback interface to avoid direct GUI dependencies
+3. **Lazy Initialization**: YieldController is created on first access to avoid overhead when feature is disabled
+4. **Turn-Based Reset**: Declined suggestions automatically reset when turn number changes
+
+The `shouldAutoYieldForPlayer()` method evaluates:
+1. Legacy auto-pass state (backward compatibility)
 2. Current yield mode
-3. Interrupt conditions
-4. Mode-specific end conditions:
-   - `UNTIL_NEXT_PHASE`: Clears when phase changes (tracked via `yieldNextPhaseStartPhase`)
-   - `UNTIL_STACK_CLEARS`: Clears when stack is empty AND no simultaneous stack entries
-   - `UNTIL_END_OF_TURN`: Clears when turn number changes (tracked via `yieldStartTurn`)
-   - `UNTIL_YOUR_NEXT_TURN`: Clears when player becomes active player; if started during own turn, waits until turn comes back around
-   - `UNTIL_BEFORE_COMBAT`: Clears at next COMBAT_BEGIN; if started at/after combat, waits for next turn's combat
-   - `UNTIL_END_STEP`: Clears at next END_OF_TURN; if started at/after end step, waits for next turn's end step
+3. Interrupt conditions (configured via preferences)
+4. Mode-specific end conditions (see table below)
+
+**Mode-Specific End Conditions:**
+
+| Mode | Tracking State | End Condition Logic |
+|------|----------------|---------------------|
+| `UNTIL_NEXT_PHASE` | `yieldNextPhaseStartPhase` | Current phase ≠ start phase |
+| `UNTIL_STACK_CLEARS` | None | Stack.isEmpty() && !hasSimultaneousStackEntries() |
+| `UNTIL_END_OF_TURN` | `yieldStartTurn` | Current turn > start turn |
+| `UNTIL_YOUR_NEXT_TURN` | `yieldYourTurnStartedDuringOurTurn` | Player becomes active player (with wrap-around logic) |
+| `UNTIL_BEFORE_COMBAT` | `yieldCombatStartTurn`, `yieldCombatStartedAtOrAfterCombat` | Next COMBAT_BEGIN phase (skips current turn's combat if already passed) |
+| `UNTIL_END_STEP` | `yieldEndStepStartTurn`, `yieldEndStepStartedAtOrAfterEndStep` | Next END_OF_TURN phase (skips current turn's end step if already passed) |
 
 ## Files Changed
 
-### New Files (3)
+### New Files (4)
 - `forge-gui/src/main/java/forge/gamemodes/match/YieldMode.java` - Yield mode enum
+- `forge-gui/src/main/java/forge/gamemodes/match/YieldController.java` - Core yield logic and state management
 - `forge-gui-desktop/src/main/java/forge/screens/match/views/VYield.java` - Yield panel view
 - `forge-gui-desktop/src/main/java/forge/screens/match/controllers/CYield.java` - Yield panel controller
 
-### Modified Files (14)
+### Modified Files (13)
 
-**forge-gui (9 files):**
-- `AbstractGuiGame.java` - Yield mode tracking, interrupt logic, combat yield tracking
-- `InputPassPriority.java` - Smart suggestion prompts
-- `IGuiGame.java` - Interface methods
-- `IGameController.java` - Controller interface
+**forge-gui (8 files):**
+- `AbstractGuiGame.java` - Yield controller delegation, callback implementation
+- `InputPassPriority.java` - Smart suggestion prompts with decline tracking
+- `IGuiGame.java` - Interface methods for yield operations
+- `IGameController.java` - Controller interface (no yield-specific methods)
 - `PlayerControllerHuman.java` - Controller implementation, reveal skip during yield
 - `ForgePreferences.java` - 13 new preferences
-- `NetGameController.java` - Controller interface implementation (no network protocol changes)
-- `ProtocolMethod.java` - Interface method declarations
+- `NetGameController.java` - Controller interface implementation (no protocol changes)
 - `en-US.properties` - 30+ localization strings
 
-**forge-gui-desktop (7 files):**
-- `VPrompt.java` - Right-click menu on End Turn button
+**forge-gui-desktop (5 files):**
+- `VPrompt.java` - Right-click menu on End Turn button, ESC key handler
 - `VMatchUI.java` - Dynamic panel visibility based on preferences
 - `CMatchUI.java` - Yield panel registration and updates
-- `EDocID.java` - Added REPORT_YIELD document ID
-- `FButton.java` - Added highlight mode for yield button coloring
 - `GameMenu.java` - Yield Options submenu with Display Options
-- `KeyboardShortcuts.java` - New keyboard shortcuts
-
-**Resources (1):**
-- `match.xml` - Added REPORT_YIELD to default layout
+- `KeyboardShortcuts.java` - F-key shortcuts for yield modes
 
 ## New Preferences
 
@@ -318,6 +595,45 @@ SHORTCUT_YIELD_UNTIL_STACK_CLEARS("117")       // F6
 - [ ] Yield modes work correctly in network games (each client manages its own yield state)
 - [ ] No desync when one player uses extended yields (yield is client-local)
 
+## Troubleshooting
+
+### Yield Not Working
+
+**Yield doesn't activate when clicking button:**
+- Verify `YIELD_EXPERIMENTAL_OPTIONS` is set to `true` in preferences
+- Restart Forge after changing the preference
+- Yield buttons are disabled during mulligan, pre-game, and cleanup phases
+
+**Yield clears unexpectedly:**
+- Check interrupt settings in Forge > Game > Yield Options > Interrupt Settings
+- If being attacked or targeted, yield will clear (if those interrupts are enabled)
+- Yield modes clear automatically when their end condition is met
+
+**Smart suggestions not appearing:**
+- Verify individual suggestion preferences are enabled
+- Suggestions don't appear if you're already yielding
+- If you declined a suggestion, it won't appear again until next turn
+- Suggestions only appear when experimental yields are enabled
+
+### Network Play Issues
+
+**Yield behaves differently for different players:**
+- This is expected - each client manages its own yield state
+- Yield preferences are client-local, not synchronized
+- Each player sees their own yield settings
+
+**Desync concerns:**
+- Yield system cannot cause desync - it's GUI-only
+- Network protocol is unchanged
+- Server only sees standard priority pass messages
+
+### Performance
+
+**Game feels slow when yielding:**
+- This is normal - the game loop checks yield conditions on each priority check
+- Performance impact is minimal (Map lookups and boolean checks)
+- Consider disabling interrupt conditions you don't need to simplify checks
+
 ## Risk Assessment
 
 ### Low Risk
@@ -332,6 +648,19 @@ SHORTCUT_YIELD_UNTIL_STACK_CLEARS("117")       // F6
 - **Preferences**: New preferences added; old preference files compatible
 
 ## Changelog
+
+### Initial Implementation - YieldController Architecture
+
+**Core Design:**
+1. **YieldController class** - Separated yield logic from AbstractGuiGame using delegate pattern
+2. **YieldCallback interface** - Decoupled yield logic from GUI implementation for testability
+3. **PlayerView lookup** - Used `TrackableTypes.PlayerViewType.lookup()` throughout for Map key consistency
+4. **State tracking maps** - Separate maps for different yield modes' timing requirements
+
+**Design Pattern Rationale:**
+- Delegate pattern allows AbstractGuiGame to remain focused on GUI coordination
+- Callback interface enables testing without full GUI stack
+- Lazy initialization avoids overhead when feature is disabled
 
 ### 2026-01-30 - Yield Until Next Phase & Dynamic Hotkeys
 
