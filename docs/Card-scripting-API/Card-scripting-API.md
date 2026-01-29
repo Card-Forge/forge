@@ -162,6 +162,10 @@ number of instant and sorcery cards you own in exile and in your graveyard
 >`SVar:X:Count$xPaid`  
 used for effects with X in their costs
 
+> XMath
+
+> Context switching
+
 # Common AI specific SVars
 * `AIEvaluationModifier:{ValidAmount}`
 

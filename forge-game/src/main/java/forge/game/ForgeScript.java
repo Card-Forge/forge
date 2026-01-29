@@ -113,8 +113,6 @@ public class ForgeScript {
             return !type.hasStringType(source.getChosenType());
         } else if (property.equals("ChosenType2")) {
             return type.hasStringType(source.getChosenType2());
-        } else if (property.equals("IsNotChosenType2")) {
-            return !type.hasStringType(source.getChosenType2());
         } else if (property.equals("NotedType")) {
             boolean found = false;
             for (String s : source.getNotedTypes()) {

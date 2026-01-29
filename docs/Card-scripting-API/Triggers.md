@@ -1,11 +1,11 @@
 Triggers define when an ability should be automatically added to the stack.
 
 The base syntax looks like this:
-`T:Mode$ <TriggerType> | <Type-specific params> | [TriggerDescription$ {String}]`
+`T:Mode$ <TriggerType> | <Type-specific parameters> | [TriggerDescription$ {String}]`
 
 - `Mode` - Specifies what game event the trigger should wait for
-- `Execute` - Specifies the name of the SVar that holds the ability to run when the trigger goes off
 - `TriggerDescription` - Describes the trigger, much like AF's SpellDescription parameter
+- `Execute$ {SVar}` - Specifies the name that holds the ability to run when the trigger goes off
 
 Optional parameters that triggers can use are:
 - `Secondary$ True` - This means that its trigger description won't show up in a card's text box. This can be used if you need to use several triggers to emulate a single effect on a real card
@@ -23,9 +23,9 @@ You can use Triggered-variables that return a card or a player directly in `Defi
 You can get the controller or owner of a card returned by a Triggered-variable by appending "Controller" or "Owner" to the variable.
 Triggered-variables that return an integer can be accessed from their own Count-subfunction, i.e. `SVar:X:TriggerCount$TriggeredLifeAmount`.
 
-Depending on which Mode is specified, different Triggered-variables are available and other parameters may be expected.  
-A few modes also have "Once" variants to handle "One or more" conditions.  
-Below are the currently available modes.
+Depending on which type is specified, different triggered-variables are available and other parameters may be expected.  
+A few types also have "Once" variants to handle "One or more" conditions.  
+Below are either frequently used or more complicated modes.
 
 # Always
 Always-triggers represent State triggers, a special kind of triggers with their own rule ([CR 603.8](https://yawgatog.com/resources/magic-rules/#R6038)).
