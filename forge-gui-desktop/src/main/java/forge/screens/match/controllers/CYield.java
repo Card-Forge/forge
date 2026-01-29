@@ -45,6 +45,7 @@ public class CYield implements ICDoc {
     private boolean isMultiplayer = false;
 
     // Yield button action listeners
+    private final ActionListener actNextPhase = evt -> yieldUntilNextPhase();
     private final ActionListener actClearStack = evt -> yieldUntilStackClears();
     private final ActionListener actCombat = evt -> yieldUntilCombat();
     private final ActionListener actEndStep = evt -> yieldUntilEndStep();
@@ -74,6 +75,7 @@ public class CYield implements ICDoc {
         isMultiplayer = matchUI.getPlayerCount() >= 3;
 
         // Initialize button action listeners
+        initButton(view.getBtnNextPhase(), actNextPhase);
         initButton(view.getBtnClearStack(), actClearStack);
         initButton(view.getBtnCombat(), actCombat);
         initButton(view.getBtnEndStep(), actEndStep);
@@ -94,38 +96,58 @@ public class CYield implements ICDoc {
         updateYieldButtons();
     }
 
-    // Yield action methods
+    // Yield action methods - set yield mode directly on GUI, then pass priority
+    private void yieldUntilNextPhase() {
+        if (matchUI != null && matchUI.getCurrentPlayer() != null) {
+            matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_NEXT_PHASE);
+            if (matchUI.getGameController() != null) {
+                matchUI.getGameController().selectButtonOk();
+            }
+        }
+    }
+
     private void yieldUntilStackClears() {
-        if (matchUI != null && matchUI.getGameController() != null) {
-            matchUI.getGameController().yieldUntilStackClears();
-            matchUI.getGameController().selectButtonOk();
+        if (matchUI != null && matchUI.getCurrentPlayer() != null) {
+            matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_STACK_CLEARS);
+            if (matchUI.getGameController() != null) {
+                matchUI.getGameController().selectButtonOk();
+            }
         }
     }
 
     private void yieldUntilCombat() {
-        if (matchUI != null && matchUI.getGameController() != null) {
-            matchUI.getGameController().yieldUntilBeforeCombat();
-            matchUI.getGameController().selectButtonOk();
+        if (matchUI != null && matchUI.getCurrentPlayer() != null) {
+            matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_BEFORE_COMBAT);
+            if (matchUI.getGameController() != null) {
+                matchUI.getGameController().selectButtonOk();
+            }
         }
     }
 
     private void yieldUntilEndStep() {
-        if (matchUI != null && matchUI.getGameController() != null) {
-            matchUI.getGameController().yieldUntilEndStep();
-            matchUI.getGameController().selectButtonOk();
+        if (matchUI != null && matchUI.getCurrentPlayer() != null) {
+            matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_END_STEP);
+            if (matchUI.getGameController() != null) {
+                matchUI.getGameController().selectButtonOk();
+            }
         }
     }
 
     private void yieldUntilEndTurn() {
-        if (matchUI != null && matchUI.getGameController() != null) {
-            matchUI.getGameController().passPriorityUntilEndOfTurn();
+        if (matchUI != null && matchUI.getCurrentPlayer() != null) {
+            matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_END_OF_TURN);
+            if (matchUI.getGameController() != null) {
+                matchUI.getGameController().selectButtonOk();
+            }
         }
     }
 
     private void yieldUntilYourTurn() {
-        if (matchUI != null && matchUI.getGameController() != null) {
-            matchUI.getGameController().yieldUntilYourNextTurn();
-            matchUI.getGameController().selectButtonOk();
+        if (matchUI != null && matchUI.getCurrentPlayer() != null) {
+            matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_YOUR_NEXT_TURN);
+            if (matchUI.getGameController() != null) {
+                matchUI.getGameController().selectButtonOk();
+            }
         }
     }
 
@@ -144,6 +166,7 @@ public class CYield implements ICDoc {
         boolean canYield = yieldEnabled && canYieldNow();
 
         // Enable/disable all yield buttons based on whether we can yield
+        view.getBtnNextPhase().setEnabled(canYield);
         view.getBtnCombat().setEnabled(canYield);
         view.getBtnEndStep().setEnabled(canYield);
         view.getBtnEndTurn().setEnabled(canYield);
@@ -176,6 +199,7 @@ public class CYield implements ICDoc {
 
         // Set highlight state based on active yield mode
         // Highlighted = red (active), not highlighted = blue (normal)
+        view.getBtnNextPhase().setHighlighted(currentMode == YieldMode.UNTIL_NEXT_PHASE);
         view.getBtnClearStack().setHighlighted(currentMode == YieldMode.UNTIL_STACK_CLEARS);
         view.getBtnCombat().setHighlighted(currentMode == YieldMode.UNTIL_BEFORE_COMBAT);
         view.getBtnEndStep().setHighlighted(currentMode == YieldMode.UNTIL_END_STEP);

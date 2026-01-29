@@ -249,10 +249,11 @@ public class VPrompt implements IVDoc<CPrompt> {
         // Until Stack Clears
         JMenuItem stackItem = new JMenuItem(loc.getMessage("lblYieldUntilStackClears"));
         stackItem.addActionListener(evt -> {
-            if (controller.getMatchUI() != null && controller.getMatchUI().getGameController() != null) {
-                controller.getMatchUI().getGameController().yieldUntilStackClears();
-                // Also pass priority to actually start yielding
-                controller.getMatchUI().getGameController().selectButtonOk();
+            if (controller.getMatchUI() != null && controller.getMatchUI().getCurrentPlayer() != null) {
+                controller.getMatchUI().setYieldMode(controller.getMatchUI().getCurrentPlayer(), YieldMode.UNTIL_STACK_CLEARS);
+                if (controller.getMatchUI().getGameController() != null) {
+                    controller.getMatchUI().getGameController().selectButtonOk();
+                }
             }
         });
         menu.add(stackItem);
@@ -260,9 +261,11 @@ public class VPrompt implements IVDoc<CPrompt> {
         // Until End of Turn
         JMenuItem turnItem = new JMenuItem(loc.getMessage("lblYieldUntilEndOfTurn"));
         turnItem.addActionListener(evt -> {
-            if (controller.getMatchUI() != null && controller.getMatchUI().getGameController() != null) {
-                controller.getMatchUI().getGameController().yieldUntilEndOfTurn();
-                controller.getMatchUI().getGameController().selectButtonOk();
+            if (controller.getMatchUI() != null && controller.getMatchUI().getCurrentPlayer() != null) {
+                controller.getMatchUI().setYieldMode(controller.getMatchUI().getCurrentPlayer(), YieldMode.UNTIL_END_OF_TURN);
+                if (controller.getMatchUI().getGameController() != null) {
+                    controller.getMatchUI().getGameController().selectButtonOk();
+                }
             }
         });
         menu.add(turnItem);
@@ -270,9 +273,11 @@ public class VPrompt implements IVDoc<CPrompt> {
         // Until Combat
         JMenuItem combatItem = new JMenuItem(loc.getMessage("lblYieldUntilBeforeCombat"));
         combatItem.addActionListener(evt -> {
-            if (controller.getMatchUI() != null && controller.getMatchUI().getGameController() != null) {
-                controller.getMatchUI().getGameController().yieldUntilBeforeCombat();
-                controller.getMatchUI().getGameController().selectButtonOk();
+            if (controller.getMatchUI() != null && controller.getMatchUI().getCurrentPlayer() != null) {
+                controller.getMatchUI().setYieldMode(controller.getMatchUI().getCurrentPlayer(), YieldMode.UNTIL_BEFORE_COMBAT);
+                if (controller.getMatchUI().getGameController() != null) {
+                    controller.getMatchUI().getGameController().selectButtonOk();
+                }
             }
         });
         menu.add(combatItem);
@@ -280,9 +285,11 @@ public class VPrompt implements IVDoc<CPrompt> {
         // Until End Step
         JMenuItem endStepItem = new JMenuItem(loc.getMessage("lblYieldUntilEndStep"));
         endStepItem.addActionListener(evt -> {
-            if (controller.getMatchUI() != null && controller.getMatchUI().getGameController() != null) {
-                controller.getMatchUI().getGameController().yieldUntilEndStep();
-                controller.getMatchUI().getGameController().selectButtonOk();
+            if (controller.getMatchUI() != null && controller.getMatchUI().getCurrentPlayer() != null) {
+                controller.getMatchUI().setYieldMode(controller.getMatchUI().getCurrentPlayer(), YieldMode.UNTIL_END_STEP);
+                if (controller.getMatchUI().getGameController() != null) {
+                    controller.getMatchUI().getGameController().selectButtonOk();
+                }
             }
         });
         menu.add(endStepItem);
@@ -291,10 +298,11 @@ public class VPrompt implements IVDoc<CPrompt> {
         if (controller.getMatchUI() != null && controller.getMatchUI().getPlayerCount() >= 3) {
             JMenuItem yourNextTurnItem = new JMenuItem(loc.getMessage("lblYieldUntilYourNextTurn"));
             yourNextTurnItem.addActionListener(evt -> {
-                if (controller.getMatchUI().getGameController() != null) {
-                    controller.getMatchUI().getGameController().yieldUntilYourNextTurn();
-                    // Also pass priority to actually start yielding
-                    controller.getMatchUI().getGameController().selectButtonOk();
+                if (controller.getMatchUI().getCurrentPlayer() != null) {
+                    controller.getMatchUI().setYieldMode(controller.getMatchUI().getCurrentPlayer(), YieldMode.UNTIL_YOUR_NEXT_TURN);
+                    if (controller.getMatchUI().getGameController() != null) {
+                        controller.getMatchUI().getGameController().selectButtonOk();
+                    }
                 }
             });
             menu.add(yourNextTurnItem);

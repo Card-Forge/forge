@@ -17,12 +17,20 @@
  */
 package forge.screens.match.views;
 
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.swing.JPanel;
+
+import org.apache.commons.lang3.StringUtils;
 
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
+import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.match.controllers.CYield;
@@ -44,6 +52,7 @@ public class VYield implements IVDoc<CYield> {
     private final DragTab tab = new DragTab(localizer.getMessage("lblYieldOptions"));
 
     // Yield control buttons
+    private final FButton btnNextPhase = new FButton(localizer.getMessage("lblYieldBtnNextPhase"));
     private final FButton btnClearStack = new FButton(localizer.getMessage("lblYieldBtnClearStack"));
     private final FButton btnCombat = new FButton(localizer.getMessage("lblYieldBtnCombat"));
     private final FButton btnEndStep = new FButton(localizer.getMessage("lblYieldBtnEndStep"));
@@ -57,6 +66,7 @@ public class VYield implements IVDoc<CYield> {
 
         // Use smaller font to fit button text
         java.awt.Font smallFont = FSkin.getBoldFont(11).getBaseFont();
+        btnNextPhase.setFont(smallFont);
         btnClearStack.setFont(smallFont);
         btnCombat.setFont(smallFont);
         btnEndStep.setFont(smallFont);
@@ -64,18 +74,57 @@ public class VYield implements IVDoc<CYield> {
         btnYourTurn.setFont(smallFont);
 
         // Enable highlight mode: blue by default, red when active yield
+        btnNextPhase.setUseHighlightMode(true);
         btnClearStack.setUseHighlightMode(true);
         btnCombat.setUseHighlightMode(true);
         btnEndStep.setUseHighlightMode(true);
         btnEndTurn.setUseHighlightMode(true);
         btnYourTurn.setUseHighlightMode(true);
 
-        // Set tooltips on yield buttons
-        btnClearStack.setToolTipText(localizer.getMessage("lblYieldBtnClearStackTooltip"));
-        btnCombat.setToolTipText(localizer.getMessage("lblYieldBtnCombatTooltip"));
-        btnEndStep.setToolTipText(localizer.getMessage("lblYieldBtnEndStepTooltip"));
-        btnEndTurn.setToolTipText(localizer.getMessage("lblYieldBtnEndTurnTooltip"));
-        btnYourTurn.setToolTipText(localizer.getMessage("lblYieldBtnYourTurnTooltip"));
+        // Set tooltips on yield buttons with dynamic hotkey text
+        updateTooltips();
+    }
+
+    /**
+     * Update button tooltips with current keyboard shortcut bindings.
+     * Call this after keyboard shortcuts are changed.
+     */
+    public void updateTooltips() {
+        ForgePreferences prefs = FModel.getPreferences();
+        btnNextPhase.setToolTipText(localizer.getMessage("lblYieldBtnNextPhaseTooltip",
+            getShortcutDisplayText(prefs.getPref(FPref.SHORTCUT_YIELD_UNTIL_NEXT_PHASE))));
+        btnClearStack.setToolTipText(localizer.getMessage("lblYieldBtnClearStackTooltip",
+            getShortcutDisplayText(prefs.getPref(FPref.SHORTCUT_YIELD_UNTIL_STACK_CLEARS))));
+        btnCombat.setToolTipText(localizer.getMessage("lblYieldBtnCombatTooltip",
+            getShortcutDisplayText(prefs.getPref(FPref.SHORTCUT_YIELD_UNTIL_BEFORE_COMBAT))));
+        btnEndStep.setToolTipText(localizer.getMessage("lblYieldBtnEndStepTooltip",
+            getShortcutDisplayText(prefs.getPref(FPref.SHORTCUT_YIELD_UNTIL_END_STEP))));
+        btnEndTurn.setToolTipText(localizer.getMessage("lblYieldBtnEndTurnTooltip",
+            getShortcutDisplayText(prefs.getPref(FPref.SHORTCUT_YIELD_UNTIL_END_OF_TURN))));
+        btnYourTurn.setToolTipText(localizer.getMessage("lblYieldBtnYourTurnTooltip",
+            getShortcutDisplayText(prefs.getPref(FPref.SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN))));
+    }
+
+    /**
+     * Convert a keyboard shortcut preference string (space-separated key codes) to display text.
+     * e.g., "112" becomes "F1", "17 67" becomes "Ctrl C"
+     */
+    private String getShortcutDisplayText(String codeString) {
+        if (codeString == null || codeString.isEmpty()) {
+            return "";
+        }
+        List<String> codes = new ArrayList<>(Arrays.asList(codeString.trim().split(" ")));
+        List<String> displayText = new ArrayList<>();
+        for (String s : codes) {
+            if (!s.isEmpty()) {
+                try {
+                    displayText.add(KeyEvent.getKeyText(Integer.parseInt(s)));
+                } catch (NumberFormatException e) {
+                    displayText.add(s);
+                }
+            }
+        }
+        return StringUtils.join(displayText, '+');
     }
 
     @Override
@@ -87,17 +136,18 @@ public class VYield implements IVDoc<CYield> {
             ? "w 10:33%, h 40px:40px:60px"
             : "w 10:33%, hmin 24px";
 
-        // Two-row layout: 3 buttons on top, 2 on bottom
+        // Two-row layout: 3 buttons on top, 3 on bottom
         container.setLayout(new MigLayout("wrap 3, gap 2px!, insets 3px"));
 
-        // Row 1: Clear Stack, Combat, End Step
-        container.add(btnClearStack, buttonConstraints);
+        // Row 1: Next Phase, Combat, End Step
+        container.add(btnNextPhase, buttonConstraints);
         container.add(btnCombat, buttonConstraints);
         container.add(btnEndStep, buttonConstraints);
 
-        // Row 2: End Turn, Your Turn
+        // Row 2: End Turn, Your Turn, Clear Stack
         container.add(btnEndTurn, buttonConstraints);
         container.add(btnYourTurn, buttonConstraints);
+        container.add(btnClearStack, buttonConstraints);
     }
 
     @Override
@@ -126,6 +176,7 @@ public class VYield implements IVDoc<CYield> {
     }
 
     // Button getters
+    public FButton getBtnNextPhase() { return btnNextPhase; }
     public FButton getBtnClearStack() { return btnClearStack; }
     public FButton getBtnCombat() { return btnCombat; }
     public FButton getBtnEndStep() { return btnEndStep; }

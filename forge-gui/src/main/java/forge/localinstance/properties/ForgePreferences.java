@@ -301,11 +301,13 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         SHORTCUT_MACRO_RECORD ("16 82"),
         SHORTCUT_MACRO_NEXT_ACTION ("16 50"),
         SHORTCUT_CARD_ZOOM("90"),
-        SHORTCUT_YIELD_UNTIL_END_OF_TURN("112"),        // F1 key
-        SHORTCUT_YIELD_UNTIL_STACK_CLEARS("113"),       // F2 key
-        SHORTCUT_YIELD_UNTIL_BEFORE_COMBAT("114"),      // F3 key
-        SHORTCUT_YIELD_UNTIL_END_STEP("115"),           // F4 key
+        SHORTCUT_YIELD_UNTIL_NEXT_PHASE("112"),         // F1 key
+        SHORTCUT_YIELD_UNTIL_BEFORE_COMBAT("113"),      // F2 key
+        SHORTCUT_YIELD_UNTIL_END_STEP("114"),           // F3 key
+        SHORTCUT_YIELD_UNTIL_END_OF_TURN("115"),        // F4 key
         SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN("116"),     // F5 key
+        SHORTCUT_YIELD_UNTIL_STACK_CLEARS("117"),       // F6 key
+        SHORTCUT_YIELD_CANCEL("27"),                    // ESC key
 
         LAST_IMPORTED_CUBE_ID("");
 

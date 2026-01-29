@@ -21,6 +21,7 @@ Extended yield options that allow players to automatically pass priority until s
 
 | Mode | Description | End Condition | Availability |
 |------|-------------|---------------|--------------|
+| Next Phase | Auto-pass until phase changes | Any phase transition | Always |
 | Next Turn | Auto-pass until next turn | Turn number changes | Always |
 | Until Stack Clears | Auto-pass while stack has items | Stack becomes empty (including simultaneous triggers) | Always |
 | Until Before Combat | Auto-pass until combat begins | Next COMBAT_BEGIN phase (tracks start turn/phase) | Always |
@@ -30,11 +31,12 @@ Extended yield options that allow players to automatically pass priority until s
 ### Access Methods
 
 1. **Yield Options Panel**: A dockable panel with dedicated yield buttons:
-   - **Clear Stack** - Yield until stack clears (only enabled when stack has items)
+   - **Next Phase** - Yield until next phase begins
    - **Combat** - Yield until before combat
    - **End Step** - Yield until end step
    - **Next Turn** - Yield until next turn
    - **Your Turn** - Yield until your next turn (only visible in 3+ player games)
+   - **Clear Stack** - Yield until stack clears (only enabled when stack has items)
    - Buttons are blue by default, red when that yield mode is active
    - Panel appears as a tab alongside the Stack panel when experimental yields are enabled
    - Buttons are disabled during mulligan and pre-game phases
@@ -42,11 +44,12 @@ Extended yield options that allow players to automatically pass priority until s
 2. **Right-Click Menu**: Right-click the "End Turn" button to see yield options (configurable)
 
 3. **Keyboard Shortcuts** (F-keys to avoid conflict with ability selection 1-9):
-   - `F1` - Yield until next turn
-   - `F2` - Yield until stack clears
-   - `F3` - Yield until before combat
-   - `F4` - Yield until end step
+   - `F1` - Yield until next phase
+   - `F2` - Yield until before combat
+   - `F3` - Yield until end step
+   - `F4` - Yield until next turn
    - `F5` - Yield until your next turn (3+ players)
+   - `F6` - Yield until stack clears
    - `ESC` - Cancel active yield
 
 ### Smart Yield Suggestions
@@ -163,6 +166,7 @@ private final Map<PlayerView, Boolean> yieldCombatStartedAtOrAfterCombat = Maps.
 private final Map<PlayerView, Integer> yieldEndStepStartTurn = Maps.newHashMap(); // Track turn when end step yield was set
 private final Map<PlayerView, Boolean> yieldEndStepStartedAtOrAfterEndStep = Maps.newHashMap(); // Was yield set at/after end step?
 private final Map<PlayerView, Boolean> yieldYourTurnStartedDuringOurTurn = Maps.newHashMap(); // Was yield set during our turn?
+private final Map<PlayerView, PhaseType> yieldNextPhaseStartPhase = Maps.newHashMap(); // Track phase when next phase yield was set
 
 // Smart suggestion decline tracking (resets each turn)
 private final Map<PlayerView, Set<String>> declinedSuggestionsThisTurn = Maps.newHashMap();
@@ -174,6 +178,7 @@ The `shouldAutoYieldForPlayer()` method checks:
 2. Current yield mode
 3. Interrupt conditions
 4. Mode-specific end conditions:
+   - `UNTIL_NEXT_PHASE`: Clears when phase changes (tracked via `yieldNextPhaseStartPhase`)
    - `UNTIL_STACK_CLEARS`: Clears when stack is empty AND no simultaneous stack entries
    - `UNTIL_END_OF_TURN`: Clears when turn number changes (tracked via `yieldStartTurn`)
    - `UNTIL_YOUR_NEXT_TURN`: Clears when player becomes active player; if started during own turn, waits until turn comes back around
@@ -236,11 +241,12 @@ YIELD_INTERRUPT_ON_MASS_REMOVAL("true")  // Board wipes, exile all, etc.
 YIELD_SHOW_RIGHT_CLICK_MENU("false")   // Right-click menu on End Turn button
 
 // Keyboard shortcuts (F-keys)
-SHORTCUT_YIELD_UNTIL_END_OF_TURN("112")        // F1
-SHORTCUT_YIELD_UNTIL_STACK_CLEARS("113")       // F2
-SHORTCUT_YIELD_UNTIL_BEFORE_COMBAT("114")      // F3
-SHORTCUT_YIELD_UNTIL_END_STEP("115")           // F4
+SHORTCUT_YIELD_UNTIL_NEXT_PHASE("112")         // F1
+SHORTCUT_YIELD_UNTIL_BEFORE_COMBAT("113")      // F2
+SHORTCUT_YIELD_UNTIL_END_STEP("114")           // F3
+SHORTCUT_YIELD_UNTIL_END_OF_TURN("115")        // F4
 SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN("116")     // F5
+SHORTCUT_YIELD_UNTIL_STACK_CLEARS("117")       // F6
 ```
 
 ## Testing Guide
@@ -326,6 +332,34 @@ SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN("116")     // F5
 - **Preferences**: New preferences added; old preference files compatible
 
 ## Changelog
+
+### 2026-01-30 - Yield Until Next Phase & Dynamic Hotkeys
+
+**New Feature:**
+1. **Yield Until Next Phase** - New yield mode that automatically passes priority until the next phase begins. This is a simple, predictable yield that clears on any phase transition.
+
+2. **Dynamic Hotkey Display** - All hotkey references in button tooltips and yield prompt messages now dynamically update based on user preferences instead of showing hardcoded values. If a user changes their keyboard shortcuts, the UI will reflect the new bindings.
+
+**Button Layout Change:**
+- Row 1: Next Phase, Combat, End Step
+- Row 2: End Turn, Your Turn, Clear Stack
+
+**Hotkey Reorder (defaults):**
+- F1: Next Phase (new)
+- F2: Combat
+- F3: End Step
+- F4: End Turn
+- F5: Your Turn
+- F6: Clear Stack
+
+**Files Changed:**
+- `YieldMode.java` - Added `UNTIL_NEXT_PHASE` enum value
+- `YieldController.java` - Added `yieldNextPhaseStartPhase` tracking, setYieldMode/shouldAutoYield/clearYieldMode logic, `getCancelShortcutDisplayText()` method
+- `VYield.java` - Added btnNextPhase button, reordered layout, `updateTooltips()` method with dynamic shortcut text, `getShortcutDisplayText()` utility
+- `CYield.java` - Added actNextPhase action listener, yieldUntilNextPhase method, highlight logic
+- `KeyboardShortcuts.java` - Added actYieldUntilNextPhase action, reordered shortcut list
+- `ForgePreferences.java` - Added SHORTCUT_YIELD_UNTIL_NEXT_PHASE, reordered F-key assignments
+- `en-US.properties` - Added localization strings, updated tooltips and prompts to use `{0}` placeholder for dynamic hotkeys
 
 ### 2026-01-30 - Mass Removal Interrupt Option
 

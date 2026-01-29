@@ -18,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.Singletons;
 import forge.game.spellability.StackItemView;
+import forge.gamemodes.match.YieldMode;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
 import forge.localinstance.properties.ForgePreferences;
@@ -113,16 +114,31 @@ public class KeyboardShortcuts {
             }
         };
 
+        /** Yield until next phase (experimental). */
+        final Action actYieldUntilNextPhase = new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
+                if (matchUI == null || matchUI.getCurrentPlayer() == null) { return; }
+                if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
+                matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_NEXT_PHASE);
+                if (matchUI.getGameController() != null) {
+                    matchUI.getGameController().selectButtonOk();
+                }
+            }
+        };
+
         /** Yield until stack clears (experimental). */
         final Action actYieldUntilStackClears = new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
-                if (matchUI == null) { return; }
+                if (matchUI == null || matchUI.getCurrentPlayer() == null) { return; }
                 if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
-                matchUI.getGameController().yieldUntilStackClears();
-                // Also pass priority to actually start yielding
-                matchUI.getGameController().selectButtonOk();
+                matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_STACK_CLEARS);
+                if (matchUI.getGameController() != null) {
+                    matchUI.getGameController().selectButtonOk();
+                }
             }
         };
 
@@ -131,12 +147,13 @@ public class KeyboardShortcuts {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
-                if (matchUI == null) { return; }
+                if (matchUI == null || matchUI.getCurrentPlayer() == null) { return; }
                 if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
                 if (matchUI.getPlayerCount() >= 3) {
-                    matchUI.getGameController().yieldUntilYourNextTurn();
-                    // Also pass priority to actually start yielding
-                    matchUI.getGameController().selectButtonOk();
+                    matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_YOUR_NEXT_TURN);
+                    if (matchUI.getGameController() != null) {
+                        matchUI.getGameController().selectButtonOk();
+                    }
                 }
             }
         };
@@ -146,10 +163,12 @@ public class KeyboardShortcuts {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
-                if (matchUI == null) { return; }
+                if (matchUI == null || matchUI.getCurrentPlayer() == null) { return; }
                 if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
-                matchUI.getGameController().yieldUntilEndOfTurn();
-                matchUI.getGameController().selectButtonOk();
+                matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_END_OF_TURN);
+                if (matchUI.getGameController() != null) {
+                    matchUI.getGameController().selectButtonOk();
+                }
             }
         };
 
@@ -158,10 +177,12 @@ public class KeyboardShortcuts {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
-                if (matchUI == null) { return; }
+                if (matchUI == null || matchUI.getCurrentPlayer() == null) { return; }
                 if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
-                matchUI.getGameController().yieldUntilBeforeCombat();
-                matchUI.getGameController().selectButtonOk();
+                matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_BEFORE_COMBAT);
+                if (matchUI.getGameController() != null) {
+                    matchUI.getGameController().selectButtonOk();
+                }
             }
         };
 
@@ -170,10 +191,26 @@ public class KeyboardShortcuts {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
-                if (matchUI == null) { return; }
+                if (matchUI == null || matchUI.getCurrentPlayer() == null) { return; }
                 if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
-                matchUI.getGameController().yieldUntilEndStep();
-                matchUI.getGameController().selectButtonOk();
+                matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_END_STEP);
+                if (matchUI.getGameController() != null) {
+                    matchUI.getGameController().selectButtonOk();
+                }
+            }
+        };
+
+        /** Cancel current yield mode (experimental). */
+        final Action actCancelYield = new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
+                if (matchUI == null || matchUI.getCurrentPlayer() == null) { return; }
+                if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
+                YieldMode currentYield = matchUI.getYieldMode(matchUI.getCurrentPlayer());
+                if (currentYield != null && currentYield != YieldMode.NONE) {
+                    matchUI.clearYieldMode(matchUI.getCurrentPlayer());
+                }
             }
         };
 
@@ -272,11 +309,13 @@ public class KeyboardShortcuts {
         list.add(new Shortcut(FPref.SHORTCUT_SHOWDEV, localizer.getMessage("lblSHORTCUT_SHOWDEV"), actShowDev, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_CONCEDE, localizer.getMessage("lblSHORTCUT_CONCEDE"), actConcede, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_ENDTURN, localizer.getMessage("lblSHORTCUT_ENDTURN"), actEndTurn, am, im));
-        list.add(new Shortcut(FPref.SHORTCUT_YIELD_UNTIL_END_OF_TURN, localizer.getMessage("lblSHORTCUT_YIELD_UNTIL_END_OF_TURN"), actYieldUntilEndOfTurn, am, im));
-        list.add(new Shortcut(FPref.SHORTCUT_YIELD_UNTIL_STACK_CLEARS, localizer.getMessage("lblSHORTCUT_YIELD_UNTIL_STACK_CLEARS"), actYieldUntilStackClears, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_YIELD_UNTIL_NEXT_PHASE, localizer.getMessage("lblSHORTCUT_YIELD_UNTIL_NEXT_PHASE"), actYieldUntilNextPhase, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_YIELD_UNTIL_BEFORE_COMBAT, localizer.getMessage("lblSHORTCUT_YIELD_UNTIL_BEFORE_COMBAT"), actYieldUntilBeforeCombat, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_YIELD_UNTIL_END_STEP, localizer.getMessage("lblSHORTCUT_YIELD_UNTIL_END_STEP"), actYieldUntilEndStep, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_YIELD_UNTIL_END_OF_TURN, localizer.getMessage("lblSHORTCUT_YIELD_UNTIL_END_OF_TURN"), actYieldUntilEndOfTurn, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN, localizer.getMessage("lblSHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN"), actYieldUntilYourNextTurn, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_YIELD_UNTIL_STACK_CLEARS, localizer.getMessage("lblSHORTCUT_YIELD_UNTIL_STACK_CLEARS"), actYieldUntilStackClears, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_YIELD_CANCEL, localizer.getMessage("lblSHORTCUT_YIELD_CANCEL"), actCancelYield, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_ALPHASTRIKE, localizer.getMessage("lblSHORTCUT_ALPHASTRIKE"), actAllAttack, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_SHOWTARGETING, localizer.getMessage("lblSHORTCUT_SHOWTARGETING"), actTgtOverlay, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_AUTOYIELD_ALWAYS_YES, localizer.getMessage("lblSHORTCUT_AUTOYIELD_ALWAYS_YES"), actAutoYieldAndYes, am, im));
