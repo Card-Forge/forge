@@ -2891,10 +2891,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         view.setHasLost(b);
     }
 
-    public void setAvatarLifeDifference(int val) {
-        view.setAvatarLifeDifference(val);
-    }
-
     public int getExtraTurnCount() {
         return view.getExtraTurnCount();
     }
