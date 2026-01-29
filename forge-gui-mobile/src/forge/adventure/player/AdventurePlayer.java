@@ -347,16 +347,15 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     @Override
     public void load(SaveFileData data) {
-        boolean migration = false;
         clear(); // Reset player data.
+
+        int saveVersion = WorldSave.getSaveVersion();
+        if(saveVersion < WorldSave.ADVENTURE_SAVE_VERSION)
+            saveVersionBumpPreProcess(data, saveVersion);
+
         this.statistic.load(data.readSubData("statistic"));
         this.difficultyData.startingLife = data.readInt("startingLife");
-        // Support for old typo
-        if (data.containsKey("staringMoney")) {
-            this.difficultyData.startingMoney = data.readInt("staringMoney");
-        } else {
-            this.difficultyData.startingMoney = data.readInt("startingMoney");
-        }
+        this.difficultyData.startingMoney = data.readInt("startingMoney");
         this.difficultyData.startingDifficulty = data.readBool("startingDifficulty");
         this.difficultyData.name = data.readString("difficultyName");
         this.difficultyData.enemyLifeFactor = data.readFloat("enemyLifeFactor");
@@ -364,49 +363,18 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         if (this.difficultyData.sellFactor == 0)
             this.difficultyData.sellFactor = 0.2f;
 
-        //BEGIN SPECIAL CASES
-        //Previously these were not being read from or written to save files, causing defaults to appear after reload
-        //Pull from config if appropriate
-        DifficultyData configuredDifficulty = null;
-        for (DifficultyData candidate : Config.instance().getConfigData().difficulties) {
-            if (candidate.name.equals(this.difficultyData.name)) {
-                configuredDifficulty = candidate;
-                break;
-            }
-        }
-
-        if (configuredDifficulty != null && (this.difficultyData.shardSellRatio == data.readFloat("shardSellRatio") || data.readFloat("shardSellRatio") == 0))
-            this.difficultyData.shardSellRatio = configuredDifficulty.shardSellRatio;
-        else
-            this.difficultyData.shardSellRatio = data.readFloat("shardSellRatio");
-        if (configuredDifficulty != null && !data.containsKey("goldLoss"))
-            this.difficultyData.goldLoss = configuredDifficulty.goldLoss;
-        else
-            this.difficultyData.goldLoss = data.readFloat("goldLoss");
-        if (configuredDifficulty != null && !data.containsKey("lifeLoss"))
-            this.difficultyData.lifeLoss = configuredDifficulty.lifeLoss;
-        else
-            this.difficultyData.lifeLoss = data.readFloat("lifeLoss");
-        if (configuredDifficulty != null && !data.containsKey("spawnRank"))
-            this.difficultyData.spawnRank = configuredDifficulty.spawnRank;
-        else
-            this.difficultyData.spawnRank = data.readInt("spawnRank");
-        if (configuredDifficulty != null && !data.containsKey("rewardMaxFactor"))
-            this.difficultyData.rewardMaxFactor = configuredDifficulty.rewardMaxFactor;
-        else
-            this.difficultyData.rewardMaxFactor = data.readFloat("rewardMaxFactor");
-        // END SPECIAL CASES
+        this.difficultyData.shardSellRatio = data.readFloat("shardSellRatio");
+        this.difficultyData.goldLoss = data.readFloat("goldLoss");
+        this.difficultyData.lifeLoss = data.readFloat("lifeLoss");
+        this.difficultyData.spawnRank = data.readInt("spawnRank");
+        this.difficultyData.rewardMaxFactor = data.readFloat("rewardMaxFactor");
 
         name = data.readString("name");
         heroRace = data.readInt("heroRace");
         avatarIndex = data.readInt("avatarIndex");
         isFemale = data.readBool("isFemale");
 
-        String _mode = data.readString("adventure_mode");
-        if (_mode == null)
-            adventureMode = AdventureModes.Standard;
-        else
-            adventureMode = AdventureModes.valueOf(_mode);
+        adventureMode = AdventureModes.valueOf(data.readString("adventure_mode"));
 
         if (data.containsKey("colorIdentity")) {
             String temp = data.readString("colorIdentity");
@@ -433,35 +401,13 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         if (data.containsKey("inventory")) {
             try {
                 ItemData[] inv = (ItemData[]) data.readObject("inventory");
-                for (int i = 0; i < inv.length; i++) {
-                    ItemData itemData = inv[i];
+                for (ItemData itemData : inv) {
                     if (itemData != null) {
                         inventoryItems.add(itemData);
                     }
                 }
-            } catch (Exception ignored) {
-                migration = true;
-                // migrate from string..
-                try {
-                    String[] inv = (String[]) data.readObject("inventory");
-                    // Prevent items with wrong names from getting through. Hell breaks loose if it causes null pointers.
-                    // This only needs to be done on load.
-                    for (int j = 0; j < inv.length; j++) {
-                        String i = inv[j];
-                        ItemData itemData = ItemListData.getItem(i);
-                        if (itemData != null) {
-                            inventoryItems.add(itemData);
-                        } else {
-                            System.err.printf("Cannot find item name %s\n", i);
-                            // Allow official© permission for the player to get a refund. We will allow it this time.
-                            // TODO: Divine retribution if the player refunds too much. Use the orbital laser cannon.
-                            System.out.println("Developers have blessed you! You are allowed to cheat the cost of the item back!");
-                        }
-                    }
-                } catch (Exception e) {
-                    //shouldn't crash if coming from string...
-                    e.printStackTrace();
-                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
         if (data.containsKey("equippedSlots") && data.containsKey("equippedItems")) {
@@ -563,71 +509,46 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         }
 
         // Load decks
-        // Check if this save has dynamic deck count, use set-count load if not
-        boolean hasDynamicDeckCount = data.containsKey("deckCount");
-        if (hasDynamicDeckCount) {
-            int dynamicDeckCount = data.readInt("deckCount");
-            // In case the save had previously saved more decks than the current version allows (in case of the max being lowered)
-            dynamicDeckCount = Math.min(MAX_DECK_COUNT, dynamicDeckCount);
-            for (int i = 0; i < dynamicDeckCount; i++){
-                // The first x elements are pre-created
-                if (i < MIN_DECK_COUNT) {
-                    decks.set(i, new Deck(data.readString("deck_name_" + i)));
-                }
-                else {
-                    decks.add(new Deck(data.readString("deck_name_" + i)));
-                }
-                CardPool mainCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("deck_" + i)));
-                decks.get(i).getMain().addAll(mainCards.getFilteredPool(isValid));
-                unsupportedCards.addAll(mainCards.getFilteredPool(isUnsupported).toFlatList());
-                if (data.containsKey("sideBoardCards_" + i)) {
-                    CardPool sideBoardCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("sideBoardCards_" + i)));
-                    decks.get(i).getOrCreate(DeckSection.Sideboard).addAll(sideBoardCards.getFilteredPool(isValid));
-                    unsupportedCards.addAll(sideBoardCards.getFilteredPool(isUnsupported).toFlatList());
-                }
-                if (data.containsKey("attractionDeckCards_" + i)) {
-                    CardPool attractionCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("attractionDeckCards_" + i)));
-                    decks.get(i).getOrCreate(DeckSection.Attractions).addAll(attractionCards.getFilteredPool(isValid));
-                    unsupportedCards.addAll(attractionCards.getFilteredPool(isUnsupported).toFlatList());
-                }
-                if (data.containsKey("contraptionDeckCards_" + i)) {
-                    CardPool contraptionCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("contraptionDeckCards_" + i)));
-                    decks.get(i).getOrCreate(DeckSection.Contraptions).addAll(contraptionCards.getFilteredPool(isValid));
-                    unsupportedCards.addAll(contraptionCards.getFilteredPool(isUnsupported).toFlatList());
-                }
-                if (data.containsKey("commanderCards_" + i)) {
-                    CardPool commanderCards = CardPool.fromCardList(List.of((String[]) data.readObject("commanderCards_" + i)));
-                    decks.get(i).getOrCreate(DeckSection.Commander).addAll(commanderCards.getFilteredPool(isValid));
-                    unsupportedCards.addAll(commanderCards.getFilteredPool(isUnsupported).toFlatList());
-                }
-            }
-            // In case we allow removing decks from the deck selection GUI, populate up to the minimum
-            for (int i = dynamicDeckCount++; i < MIN_DECK_COUNT; i++) {
-                decks.set(i, new Deck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
-            }
-        // Legacy load
-        } else {
-            for (int i = 0; i < MIN_DECK_COUNT; i++) {
-                if (!data.containsKey("deck_name_" + i)) {
-                    if (i == 0) decks.set(i, deck);
-                    else decks.set(i, new Deck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
-                    continue;
-                }
+        int deckCount = data.readInt("deckCount");
+        // In case the save had previously saved more decks than the current version allows (in case of the max being lowered)
+        deckCount = Math.min(MAX_DECK_COUNT, deckCount);
+        for (int i = 0; i < deckCount; i++){
+            // The first x elements are pre-created
+            if (i < MIN_DECK_COUNT) {
                 decks.set(i, new Deck(data.readString("deck_name_" + i)));
-                CardPool mainCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("deck_" + i)));
-                decks.get(i).getMain().addAll(mainCards.getFilteredPool(isValid));
-                unsupportedCards.addAll(mainCards.getFilteredPool(isUnsupported).toFlatList());
-                if (data.containsKey("sideBoardCards_" + i)) {
-                    CardPool sideBoardCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("sideBoardCards_" + i)));
-                    decks.get(i).getOrCreate(DeckSection.Sideboard).addAll(sideBoardCards.getFilteredPool(isValid));
-                    unsupportedCards.addAll(sideBoardCards.getFilteredPool(isUnsupported).toFlatList());
-                }
-                if (data.containsKey("commanderCards_" + i)) {
-                    CardPool commanderCards = CardPool.fromCardList(List.of((String[]) data.readObject("commanderCards_" + i)));
-                    decks.get(i).getOrCreate(DeckSection.Commander).addAll(commanderCards.getFilteredPool(isValid));
-                    unsupportedCards.addAll(commanderCards.getFilteredPool(isUnsupported).toFlatList());
-                }
             }
+            else {
+                decks.add(new Deck(data.readString("deck_name_" + i)));
+            }
+            if (!data.containsKey("deck_" + i))
+                continue;
+            CardPool mainCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("deck_" + i)));
+            decks.get(i).getMain().addAll(mainCards.getFilteredPool(isValid));
+            unsupportedCards.addAll(mainCards.getFilteredPool(isUnsupported).toFlatList());
+            if (data.containsKey("sideBoardCards_" + i)) {
+                CardPool sideBoardCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("sideBoardCards_" + i)));
+                decks.get(i).getOrCreate(DeckSection.Sideboard).addAll(sideBoardCards.getFilteredPool(isValid));
+                unsupportedCards.addAll(sideBoardCards.getFilteredPool(isUnsupported).toFlatList());
+            }
+            if (data.containsKey("attractionDeckCards_" + i)) {
+                CardPool attractionCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("attractionDeckCards_" + i)));
+                decks.get(i).getOrCreate(DeckSection.Attractions).addAll(attractionCards.getFilteredPool(isValid));
+                unsupportedCards.addAll(attractionCards.getFilteredPool(isUnsupported).toFlatList());
+            }
+            if (data.containsKey("contraptionDeckCards_" + i)) {
+                CardPool contraptionCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("contraptionDeckCards_" + i)));
+                decks.get(i).getOrCreate(DeckSection.Contraptions).addAll(contraptionCards.getFilteredPool(isValid));
+                unsupportedCards.addAll(contraptionCards.getFilteredPool(isUnsupported).toFlatList());
+            }
+            if (data.containsKey("commanderCards_" + i)) {
+                CardPool commanderCards = CardPool.fromCardList(List.of((String[]) data.readObject("commanderCards_" + i)));
+                decks.get(i).getOrCreate(DeckSection.Commander).addAll(commanderCards.getFilteredPool(isValid));
+                unsupportedCards.addAll(commanderCards.getFilteredPool(isUnsupported).toFlatList());
+            }
+        }
+        // In case we allow removing decks from the deck selection GUI, populate up to the minimum
+        for (int i = deckCount; i < MIN_DECK_COUNT; i++) {
+            decks.set(i, new Deck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
         }
 
         setSelectedDeckSlot(data.readInt("selectedDeckIndex"));
@@ -644,51 +565,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                     else
                         newCards.add(pc);
                 }
-            }
-        }
-        if (data.containsKey("noSellCards")) {
-            // Legacy list of unsellable cards. Now done via CardRequest flags. Convert the corresponding cards.
-            PaperCard[] items = (PaperCard[]) data.readObject("noSellCards");
-            CardPool noSellPool = new CardPool();
-            for (PaperCard pc : items) {
-                if (isUnsupported.test(pc))
-                    unsupportedCards.add(pc);
-                else
-                    noSellPool.add(pc);
-            }
-            for (Map.Entry<PaperCard, Integer> noSellEntry : noSellPool) {
-                PaperCard item = noSellEntry.getKey();
-                if (item == null)
-                    continue;
-                int totalCopies = cards.count(item);
-                int noSellCopies = Math.min(noSellEntry.getValue(), totalCopies);
-                if (!cards.remove(item, noSellCopies)) {
-                    System.err.printf("Failed to update noSellValue flag - %s%n", item);
-                    continue;
-                }
-
-                int remainingSellableCopies = totalCopies - noSellCopies;
-
-                PaperCard noSellVersion = item.getNoSellVersion();
-                cards.add(noSellVersion, noSellCopies);
-
-                System.out.printf("Converted legacy noSellCards item - %s (%d / %d copies)%n", item, noSellCopies, totalCopies);
-
-                // Also go through their decks and update cards there.
-                for (Deck deck : decks) {
-                    int inUse = 0;
-                    for (Map.Entry<DeckSection, CardPool> section : deck) {
-                        CardPool pool = section.getValue();
-                        inUse += pool.count(item);
-                        if(inUse > remainingSellableCopies) {
-                            int toConvert = inUse - remainingSellableCopies;
-                            pool.remove(item, toConvert);
-                            pool.add(noSellVersion, toConvert);
-                            System.out.printf("- Converted %d copies in deck - %s/%s%n", toConvert, deck.getName(), section.getKey());
-                        }
-                    }
-                }
-
             }
         }
         if (data.containsKey("autoSellCards")) {
@@ -714,9 +590,25 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         announceFantasy = data.containsKey("announceFantasy") && data.readBool("announceFantasy");
         usingCustomDeck = data.containsKey("usingCustomDeck") && data.readBool("usingCustomDeck");
         announceCustom = data.containsKey("announceCustom") && data.readBool("announceCustom");
-        if (migration) {
-            getCurrentGameStage().setExtraAnnouncement(Forge.getLocalizer().getMessage("lblDataMigrationMsg"));
+
+        for (Deck entries : decks) {
+            ItemPool<PaperCard> missingDeckCards = entries.getAllCardsInASinglePool(true, true).skimOverflow(cards);
+            if (!missingDeckCards.isEmpty()) {
+                System.err.printf("%d cards in deck '%s' are not available in the card pool. Granting...%n", missingDeckCards.countAll(), entries.getName());
+                cards.addAll(missingDeckCards);
+                //TODO: In the future, we should just remove these cards from the decks.
+            }
         }
+
+        ItemPool<PaperCard> sellableCards = getSellableCards();
+        ItemPool<PaperCard> missingAutoSellCards = autoSellCards.skimOverflow(sellableCards);
+        if(!missingAutoSellCards.isEmpty()) {
+            System.err.printf("%d cards on the autoSellList are not available in the card pool. Removing...%n", missingAutoSellCards.countAll());
+            autoSellCards.removeAll(missingAutoSellCards);
+        }
+
+        if(saveVersion < WorldSave.ADVENTURE_SAVE_VERSION)
+            saveVersionBumpPostProcess(data, saveVersion);
 
         onLifeTotalChangeList.emit();
         onShardsChangeList.emit();
@@ -831,6 +723,128 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         data.storeObject("favoriteCards", favoriteCards.toArray(new PaperCard[0]));
 
         return data;
+    }
+
+    /**
+     * Called when ADVENTURE_SAVE_VERSION has been incremented, and a save from before the increment is loaded.
+     * Handles data from fields that have had their format changed, by replacing them in the data map before loading.
+     * @param data Save data being loaded.
+     * @param oldVersion The ADVENTURE_SAVE_VERSION used when the save file was written.
+     */
+    protected void saveVersionBumpPreProcess(SaveFileData data, int oldVersion) {
+        System.out.printf("Migrating save version %d -> %d (pre-stage)%n", oldVersion, WorldSave.ADVENTURE_SAVE_VERSION);
+        if (oldVersion < 1) {
+
+            //Previously these were not being read from or written to save files, causing defaults to appear after reload
+            //Pull from config if appropriate
+            String difficultyName = data.readString("difficultyName");
+            DifficultyData configuredDifficulty = Config.instance().getDifficultyByName(difficultyName);
+            if(configuredDifficulty == null)
+                configuredDifficulty = Config.instance().getDifficultyByName("Normal");
+
+            if (configuredDifficulty != null) {
+                if (this.difficultyData.shardSellRatio == data.readFloat("shardSellRatio") || data.readFloat("shardSellRatio") == 0) {
+                    data.store("shardSellRatio", configuredDifficulty.shardSellRatio);
+                }
+                if (!data.containsKey("goldLoss"))
+                    data.store("goldLoss", configuredDifficulty.goldLoss);
+                if (!data.containsKey("lifeLoss"))
+                    data.store("lifeLoss", configuredDifficulty.lifeLoss);
+                if (!data.containsKey("spawnRank"))
+                    data.store("spawnRank", configuredDifficulty.spawnRank);
+                if (!data.containsKey("rewardMaxFactor"))
+                    data.store("rewardMaxFactor", configuredDifficulty.rewardMaxFactor);
+            }
+
+            // Used to always be 10 decks.
+            if (!data.containsKey("deckCount"))
+                data.store("deckCount", 10);
+            if (data.containsKey("inventory") && data.readObject("inventory") instanceof String[] inv) {
+                System.out.println("Replacing string inventory with object inventory.");
+                // migrate from string if needed.
+                try {
+                    // Prevent items with wrong names from getting through. Hell breaks loose if it causes null pointers.
+                    // This only needs to be done on load.
+                    List<ItemData> newInventory = new ArrayList<>(inv.length);
+                    for (String i : inv) {
+                        ItemData itemData = ItemListData.getItem(i);
+                        if (itemData != null)
+                            newInventory.add(itemData);
+                        else
+                            System.err.printf(" - Cannot find item name %s\n", i);
+                    }
+                    data.storeObject("inventory", newInventory.toArray(new ItemData[0]));
+                    getCurrentGameStage().setExtraAnnouncement(Forge.getLocalizer().getMessage("lblDataMigrationMsg"));
+                } catch (Exception e) {
+                    //shouldn't crash if coming from string...
+                    e.printStackTrace();
+                }
+            }
+            if (!data.containsKey("adventure_mode"))
+                data.store("adventure_mode", AdventureModes.Standard.toString());
+        }
+    }
+
+    /**
+     * Called when ADVENTURE_SAVE_VERSION has been incremented, and a save from before the increment is loaded.
+     * Loads additional data from deprecated fields into the player fields.
+     * @param data Save data being loaded.
+     * @param oldVersion The ADVENTURE_SAVE_VERSION used when the save file was written.
+     */
+    protected void saveVersionBumpPostProcess(SaveFileData data, int oldVersion) {
+        System.out.printf("Migrating save version %d -> %d (post-stage)%n", oldVersion, WorldSave.ADVENTURE_SAVE_VERSION);
+        //This function is only run after processing SaveFileData, but we could also have one run before processing if
+        //we needed to convert raw fields.
+        if (oldVersion < 1) {
+            //Legacy list of unsellable cards. Now done via CardRequest flags. Convert the corresponding cards.
+            if (data.containsKey("noSellCards")) {
+                PaperCard[] items = (PaperCard[]) data.readObject("noSellCards");
+                CardPool noSellPool = new CardPool();
+                noSellPool.addAllFlat(List.of(items));
+                for (Map.Entry<PaperCard, Integer> noSellEntry : noSellPool) {
+                    PaperCard item = noSellEntry.getKey();
+                    if (item == null)
+                        continue;
+                    if (isUnsupported.test(item)) {
+                        unsupportedCards.add(item);
+                        continue;
+                    }
+                    int totalCopies = cards.count(item);
+                    int noSellCopies = Math.min(noSellEntry.getValue(), totalCopies);
+                    if (!cards.remove(item, noSellCopies)) {
+                        System.err.printf("Failed to update noSellValue flag - %s%n", item);
+                        continue;
+                    }
+
+                    int remainingSellableCopies = totalCopies - noSellCopies;
+
+                    PaperCard noSellVersion = item.getNoSellVersion();
+                    cards.add(noSellVersion, noSellCopies);
+
+                    System.out.printf("Converted legacy noSellCards item - %s (%d / %d copies)%n", item, noSellCopies, totalCopies);
+
+                    //Also go through their decks and update cards there.
+                    for (Deck deck : decks) {
+                        int inUse = 0;
+                        for (Map.Entry<DeckSection, CardPool> section : deck) {
+                            CardPool pool = section.getValue();
+                            inUse += pool.count(item);
+                            if (inUse > remainingSellableCopies) {
+                                int toConvert = inUse - remainingSellableCopies;
+                                pool.remove(item, toConvert);
+                                pool.add(noSellVersion, toConvert);
+                                System.out.printf("- Converted %d copies in deck - %s/%s%n", toConvert, deck.getName(), section.getKey());
+                            }
+                        }
+                    }
+                }
+            }
+            // Support for old typo.
+            if (data.containsKey("staringMoney")) {
+                this.difficultyData.startingMoney = data.readInt("staringMoney");
+            }
+        }
+        //if (oldVersion < 2) and so on...
     }
 
     public String spriteName() {
