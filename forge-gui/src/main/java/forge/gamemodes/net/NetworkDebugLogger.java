@@ -320,6 +320,7 @@ public final class NetworkDebugLogger {
     /**
      * Clean up old log files if cleanup is enabled and max limit is exceeded.
      * Respects grace period to avoid deleting logs from other running instances.
+     * Never deletes logs from the current batch run (when batch ID is set).
      */
     private static void cleanupOldLogs() {
         if (!NetworkDebugConfig.isLogCleanupEnabled()) {
@@ -341,9 +342,11 @@ public final class NetworkDebugLogger {
         }
 
         long now = System.currentTimeMillis();
+        String currentBatchId = batchId;  // Capture current batch ID
 
-        // Delete oldest files, but respect grace period
-        for (int i = 0; i < toDelete && i < logFiles.size(); i++) {
+        // Delete oldest files, but respect grace period and current batch
+        int deleted = 0;
+        for (int i = 0; i < logFiles.size() && deleted < toDelete; i++) {
             File oldLog = logFiles.get(i);
 
             // Skip files modified within grace period (likely from other running instances)
@@ -352,8 +355,15 @@ public final class NetworkDebugLogger {
                 continue;
             }
 
+            // Skip files from current batch run - never delete logs from the current batch
+            if (currentBatchId != null && oldLog.getName().contains(currentBatchId)) {
+                continue;
+            }
+
             try {
-                oldLog.delete();
+                if (oldLog.delete()) {
+                    deleted++;
+                }
                 // Silent operation - no console output
             } catch (SecurityException e) {
                 // Silent failure - continue with other deletions
