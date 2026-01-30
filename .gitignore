@@ -95,13 +95,5 @@ forge-gui/tools/PerSetTrackingResults
 __pycache__
 *.pyc
 
-# Ignore Claude Code configuration
-CLAUDE.md
-.claude/
-
-# Ignore network debug logs (working directory)
+# Ignore network debug logs
 forge-gui-desktop/logs
-
-# BUT keep archived test logs for GitHub verification
-!testlogs/
-!testlogs/**

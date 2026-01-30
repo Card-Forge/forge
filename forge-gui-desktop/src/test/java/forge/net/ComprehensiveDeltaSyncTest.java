@@ -4,8 +4,11 @@ import forge.gamemodes.net.NetworkDebugLogger;
 import forge.gui.GuiBase;
 import forge.model.FModel;
 import forge.net.analysis.AnalysisResult;
+import forge.net.analysis.GameLogMetrics;
 import forge.net.analysis.NetworkLogAnalyzer;
 import org.testng.Assert;
+
+import java.util.List;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -187,6 +190,56 @@ public class ComprehensiveDeltaSyncTest {
         Assert.assertTrue(result.getSuccessRate() >= 0.70,
                 String.format("Multiplayer test success rate should be >= 70%%, was %.1f%%",
                         result.getSuccessRate() * 100));
+    }
+
+    /**
+     * Utility test to analyze existing logs without running new games.
+     * Useful for testing report generation changes.
+     * Set -Dtest.batchId=20260127-213221 to analyze a specific batch.
+     */
+    @Test
+    public void analyzeExistingLogs() {
+        NetworkDebugLogger.log("%s Analyzing existing logs...", LOG_PREFIX);
+
+        File logDir = new File("logs");
+        NetworkLogAnalyzer analyzer = new NetworkLogAnalyzer();
+
+        // Check for specific batch ID
+        String batchId = System.getProperty("test.batchId", "");
+        List<GameLogMetrics> metrics;
+
+        if (!batchId.isEmpty()) {
+            // Analyze only logs from the specified batch
+            // Pattern supports both old format (game0-4p) and new format with batch (batch0-game0-4p)
+            String pattern = "network-debug-run" + batchId + "-(?:batch\\d+-)?game\\d+-\\d+p-test\\.log";
+            System.out.println("Analyzing batch: " + batchId + " (pattern: " + pattern + ")");
+            metrics = analyzer.analyzeDirectory(logDir, pattern);
+        } else {
+            // Analyze all comprehensive test logs (no time filter)
+            metrics = analyzer.analyzeComprehensiveTestLogs(logDir);
+        }
+        NetworkDebugLogger.log("%s Found %d log files", LOG_PREFIX, metrics.size());
+
+        if (metrics.isEmpty()) {
+            System.out.println("No comprehensive test logs found in " + logDir.getAbsolutePath());
+            return;
+        }
+
+        // Build and print report
+        AnalysisResult result = analyzer.buildAnalysisResult(metrics);
+        String report = result.generateReport();
+        System.out.println("\n" + report);
+
+        // Save report
+        String timestamp = java.time.LocalDateTime.now()
+                .format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
+        java.nio.file.Path reportPath = logDir.toPath().resolve("analysis-results-" + timestamp + ".md");
+        try {
+            java.nio.file.Files.write(reportPath, report.getBytes());
+            System.out.println("Report saved to: " + reportPath);
+        } catch (java.io.IOException e) {
+            System.err.println("Failed to save report: " + e.getMessage());
+        }
     }
 
     /**

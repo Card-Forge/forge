@@ -39,7 +39,7 @@ public class MultiProcessGameExecutor {
     private final int basePort;
 
     // Runner class for different game types
-    private String runnerClass = "forge.net.SingleGameRunner"; // Default for 2-player
+    private String runnerClass = "forge.net.ComprehensiveGameRunner"; // Supports 2-4 players
 
     public MultiProcessGameExecutor() {
         this(DEFAULT_TIMEOUT_MS);
@@ -291,7 +291,7 @@ public class MultiProcessGameExecutor {
 
             // Brief delay between batches to allow port cleanup
             // This helps prevent "Address already in use" errors on rapid test execution
-            if (batchNumber < numBatches) {
+            if (batchNumber < totalBatches) {
                 try {
                     Thread.sleep(500); // 500ms delay between batches
                 } catch (InterruptedException e) {
@@ -311,16 +311,18 @@ public class MultiProcessGameExecutor {
         command.add("-cp");
         command.add(classpath);
         command.add("-Xmx512m");  // Limit memory per process
+
+        // Pass through test configuration properties to child processes
+        if (Boolean.getBoolean("test.useAiForRemote")) {
+            command.add("-Dtest.useAiForRemote=true");
+        }
+
         command.add(runnerClass);
         command.add(String.valueOf(port));
         command.add(String.valueOf(gameIndex));
-
-        // Add player count, batch ID, and batch number for ComprehensiveGameRunner
-        if (runnerClass.equals("forge.net.ComprehensiveGameRunner")) {
-            command.add(String.valueOf(playerCount));
-            command.add(batchId);
-            command.add(String.valueOf(batchNumber));
-        }
+        command.add(String.valueOf(playerCount));
+        command.add(batchId);
+        command.add(String.valueOf(batchNumber));
 
         ProcessBuilder pb = new ProcessBuilder(command);
 
@@ -334,10 +336,8 @@ public class MultiProcessGameExecutor {
     private void parseResult(String resultLine, ExecutionResult result) {
         try {
             // Format for ComprehensiveGameRunner: gameIndex|success|playerCount|deltas|turns|bytes|winner|decks
-            // Format for SingleGameRunner: gameIndex|success|deltas|turns|bytes|winner
             String[] parts = resultLine.split("\\|");
             if (parts.length >= 7) {
-                // ComprehensiveGameRunner format with player count
                 int gameIndex = Integer.parseInt(parts[0]);
                 boolean success = Boolean.parseBoolean(parts[1]);
                 int playerCount = Integer.parseInt(parts[2]);
@@ -358,17 +358,6 @@ public class MultiProcessGameExecutor {
                 }
 
                 GameResult gameResult = new GameResult(success, playerCount, deltas, turns, bytes, winner, deckNames);
-                result.addResult(gameIndex, gameResult);
-            } else if (parts.length >= 6) {
-                // SingleGameRunner format (backward compatibility)
-                int gameIndex = Integer.parseInt(parts[0]);
-                boolean success = Boolean.parseBoolean(parts[1]);
-                long deltas = Long.parseLong(parts[2]);
-                int turns = Integer.parseInt(parts[3]);
-                long bytes = Long.parseLong(parts[4]);
-                String winner = "null".equals(parts[5]) ? null : parts[5];
-
-                GameResult gameResult = new GameResult(success, deltas, turns, bytes, winner);
                 result.addResult(gameIndex, gameResult);
             }
         } catch (Exception e) {
@@ -580,6 +569,21 @@ public class MultiProcessGameExecutor {
                     .orElse(0.0);
         }
 
+        /**
+         * Format bytes in human-readable form (B, KB, MB, GB).
+         */
+        private String formatBytes(long bytes) {
+            if (bytes < 1024) {
+                return bytes + " B";
+            } else if (bytes < 1024 * 1024) {
+                return String.format("%.1f KB", bytes / 1024.0);
+            } else if (bytes < 1024L * 1024L * 1024L) {
+                return String.format("%.2f MB", bytes / (1024.0 * 1024.0));
+            } else {
+                return String.format("%.2f GB", bytes / (1024.0 * 1024.0 * 1024.0));
+            }
+        }
+
         public String toSummary() {
             return String.format(
                     "MultiProcess[games=%d, success=%d, failed=%d, errors=%d, timeouts=%d, " +
@@ -606,7 +610,7 @@ public class MultiProcessGameExecutor {
             sb.append(String.format("  Total Turns:     %d\n", getTotalTurns()));
             sb.append(String.format("  Unique Decks:    %d (from %d total usages)\n", getUniqueDecksCount(), getTotalDeckUsages()));
             sb.append(String.format("  Delta Packets:   %d\n", getTotalDeltaPackets()));
-            sb.append(String.format("  Total Bytes:     %d (%.2f MB)\n", getTotalBytes(), getTotalBytes() / 1024.0 / 1024.0));
+            sb.append(String.format("  Total Bytes:     %d (%s)\n", getTotalBytes(), formatBytes(getTotalBytes())));
             double bytesPerPacket = getTotalDeltaPackets() > 0 ? (double) getTotalBytes() / getTotalDeltaPackets() : 0;
             sb.append(String.format("  Bytes/Packet:    %.1f\n", bytesPerPacket));
             sb.append("\n");

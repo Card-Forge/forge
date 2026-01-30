@@ -182,9 +182,22 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
         final IGuiGame gui = client.getGui();
         GameView gameView = gui.getGameView();
 
+        // BUG FIX: Build a map of player name -> server-assigned ID
+        // This ensures client uses the same PlayerView IDs as server
+        // Without this, multiplayer games desync because server and client
+        // assign PlayerView IDs in different order (server: remote clients first,
+        // client: based on lobby order)
+        java.util.Map<String, Integer> serverPlayerIds = new java.util.HashMap<>();
+        if (gameView != null && gameView.getPlayers() != null) {
+            for (PlayerView pv : gameView.getPlayers()) {
+                serverPlayerIds.put(pv.getName(), pv.getId());
+                System.out.println("[GameClientHandler] Server PlayerView: " + pv.getName() + " -> ID " + pv.getId());
+            }
+        }
+
         final GameType gameType = getGameType();
         final GameRules gameRules = createGameRules(gameType, gameView);
-        final List<RegisteredPlayer> registeredPlayers = createRegisteredPlayers(gameType);
+        final List<RegisteredPlayer> registeredPlayers = createRegisteredPlayers(gameType, serverPlayerIds);
 
         // pull the title from the existing (incomplete) GameView
         final String title = gameView.getTitle();
@@ -216,11 +229,11 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
      * This method retrieves existing information about the players to
      * build a list of <b>RegisteredPlayers</b>.
      *
-     *
-     * @param gameType
+     * @param gameType the game type
+     * @param serverPlayerIds map of player name to server-assigned ID (for multiplayer sync)
      * @return List<RegisteredPlayer>
      */
-    private List<RegisteredPlayer> createRegisteredPlayers(GameType gameType) {
+    private List<RegisteredPlayer> createRegisteredPlayers(GameType gameType, java.util.Map<String, Integer> serverPlayerIds) {
         // get all lobby players
         List<ILobbyListener> lobbyListeners = client.getLobbyListeners();
         ILobbyListener lobbyListener = lobbyListeners.get(0);
@@ -246,6 +259,18 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
             );
             player.setPlayer(lobbyPlayer);
             player.setTeamNumber(playerSlot.getTeam());
+
+            // BUG FIX: Use server-assigned PlayerView ID to ensure client and server
+            // have matching IDs. Without this, delta sync applies updates to wrong players.
+            String playerName = playerSlot.getName();
+            if (serverPlayerIds.containsKey(playerName)) {
+                Integer serverId = serverPlayerIds.get(playerName);
+                player.setId(serverId);
+                System.out.println("[GameClientHandler] Set RegisteredPlayer ID for " + playerName + " -> " + serverId);
+            } else {
+                System.out.println("[GameClientHandler] WARNING: No server ID found for player: " + playerName);
+            }
+
             players.add(player);
         }
 

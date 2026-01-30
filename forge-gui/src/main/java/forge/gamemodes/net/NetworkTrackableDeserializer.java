@@ -105,7 +105,7 @@ public class NetworkTrackableDeserializer {
             // Object not yet in tracker - this can happen if it's a new object
             // that will be created from a full state sync
             NetworkDebugLogger.warn("[NetworkDeserializer] Object not found in Tracker: type=%s, id=%d",
-                    type.getClass().getSimpleName(), id);
+                    getTypeName(type), id);
         }
         return obj;
     }
@@ -165,14 +165,14 @@ public class NetworkTrackableDeserializer {
                     if (!foundInOld) {
                         notFoundCount++;
                         NetworkDebugLogger.warn("[NetworkDeserializer] Collection lookup failed: type=%s, id=%d - NOT FOUND in tracker or oldValue",
-                                type.getClass().getSimpleName(), id);
+                                getTypeName(type), id);
                     }
                 }
             }
         }
         // Always log collection stats for debugging
         NetworkDebugLogger.debug("[NetworkDeserializer] Collection read: type=%s, size=%d, found=%d, notFound=%d",
-                type.getClass().getSimpleName(), size, foundCount, notFoundCount);
+                getTypeName(type), size, foundCount, notFoundCount);
         if (notFoundCount > 0) {
             NetworkDebugLogger.warn("[NetworkDeserializer] Collection has %d missing objects!", notFoundCount);
         }
@@ -205,5 +205,28 @@ public class NetworkTrackableDeserializer {
      */
     public DataInputStream getInputStream() {
         return dis;
+    }
+
+    /**
+     * Get a human-readable name for a TrackableObjectType.
+     * Anonymous classes return empty string for getSimpleName(), so we map known types.
+     */
+    private static <T extends TrackableObject> String getTypeName(TrackableObjectType<T> type) {
+        if (type == TrackableTypes.CardViewType) {
+            return "CardView";
+        } else if (type == TrackableTypes.PlayerViewType) {
+            return "PlayerView";
+        } else if (type == TrackableTypes.StackItemViewType) {
+            return "StackItemView";
+        } else if (type == TrackableTypes.CombatViewType) {
+            return "CombatView";
+        } else if (type == TrackableTypes.GameEntityViewType) {
+            return "GameEntityView";
+        } else if (type == TrackableTypes.CardStateViewType) {
+            return "CardStateView";
+        }
+        // Fallback to class name (will be empty for anonymous classes, but at least we tried)
+        String simpleName = type.getClass().getSimpleName();
+        return simpleName.isEmpty() ? "UnknownType" : simpleName;
     }
 }

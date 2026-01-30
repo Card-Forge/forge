@@ -222,7 +222,7 @@ public class NetworkClientTestHarness {
         slot.setName(name);
         slot.setDeck(deck);
         slot.setIsReady(true);
-        NetworkDebugLogger.log("%s Host player configured: %s", LOG_PREFIX, name);
+        NetworkDebugLogger.log("%s Host player configured: %s with deck: %s", LOG_PREFIX, name, deck.getName());
     }
 
     private void runRemoteClient(String playerName) {

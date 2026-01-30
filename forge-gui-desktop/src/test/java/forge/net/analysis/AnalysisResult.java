@@ -2,8 +2,11 @@ package forge.net.analysis;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -34,6 +37,20 @@ public class AnalysisResult {
     private Set<String> uniqueDeckNames;
 
     private Map<Integer, PlayerCountStats> statsByPlayerCount;
+
+    // Enhanced error and failure pattern analysis
+    private Map<GameLogMetrics.FailureMode, Integer> failureModeCounts;
+    private Map<String, Integer> errorFrequency; // Sorted by frequency descending
+    private Map<Integer, BatchStats> batchStats; // Batch number -> stats
+
+    // Failure patterns
+    private int maxConsecutiveFailures;
+    private double firstHalfSuccessRate;
+    private double secondHalfSuccessRate;
+    private int warningsLeadingToFailure;
+
+    // Turn distribution histogram: [0]=1-5, [1]=6-10, [2]=11-20, [3]=21-30, [4]=30+
+    private int[] turnHistogram = new int[5];
 
     public AnalysisResult(List<GameLogMetrics> metrics) {
         this.allMetrics = metrics;
@@ -86,6 +103,92 @@ public class AnalysisResult {
                 statsByPlayerCount.put(playerCount, new PlayerCountStats(playerCount, filtered));
             }
         }
+
+        // Enhanced analysis: failure modes
+        failureModeCounts = new EnumMap<>(GameLogMetrics.FailureMode.class);
+        for (GameLogMetrics m : allMetrics) {
+            GameLogMetrics.FailureMode mode = m.getFailureMode();
+            failureModeCounts.merge(mode, 1, Integer::sum);
+        }
+
+        // Error frequency analysis (normalize errors for grouping)
+        Map<String, Integer> tempErrorFreq = new HashMap<>();
+        for (GameLogMetrics m : allMetrics) {
+            for (String error : m.getErrors()) {
+                String normalized = normalizeError(error);
+                tempErrorFreq.merge(normalized, 1, Integer::sum);
+            }
+        }
+        // Sort by frequency descending, limit to top 20
+        errorFrequency = tempErrorFreq.entrySet().stream()
+                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+                .limit(20)
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                        (e1, e2) -> e1, LinkedHashMap::new));
+
+        // Batch stats (10 games per batch)
+        batchStats = new LinkedHashMap<>();
+        List<GameLogMetrics> sorted = allMetrics.stream()
+                .sorted(Comparator.comparingInt(GameLogMetrics::getGameIndex))
+                .collect(Collectors.toList());
+        for (int i = 0; i < sorted.size(); i += 10) {
+            int batchNum = i / 10;
+            List<GameLogMetrics> batch = sorted.subList(i, Math.min(i + 10, sorted.size()));
+            batchStats.put(batchNum, new BatchStats(batchNum, batch));
+        }
+
+        // Consecutive failures tracking
+        int currentStreak = 0;
+        maxConsecutiveFailures = 0;
+        for (GameLogMetrics m : sorted) {
+            if (!m.isSuccessful()) {
+                currentStreak++;
+                maxConsecutiveFailures = Math.max(maxConsecutiveFailures, currentStreak);
+            } else {
+                currentStreak = 0;
+            }
+        }
+
+        // First half vs second half success rates
+        int midpoint = sorted.size() / 2;
+        if (midpoint > 0) {
+            long firstHalfSuccess = sorted.subList(0, midpoint).stream()
+                    .filter(GameLogMetrics::isSuccessful).count();
+            long secondHalfSuccess = sorted.subList(midpoint, sorted.size()).stream()
+                    .filter(GameLogMetrics::isSuccessful).count();
+            firstHalfSuccessRate = 100.0 * firstHalfSuccess / midpoint;
+            secondHalfSuccessRate = 100.0 * secondHalfSuccess / (sorted.size() - midpoint);
+        }
+
+        // Warnings leading to failure
+        warningsLeadingToFailure = (int) allMetrics.stream()
+                .filter(m -> !m.getWarnings().isEmpty() && !m.isSuccessful())
+                .count();
+
+        // Turn distribution histogram
+        for (GameLogMetrics m : allMetrics) {
+            int turns = m.getTurnCount();
+            if (turns <= 5) turnHistogram[0]++;
+            else if (turns <= 10) turnHistogram[1]++;
+            else if (turns <= 20) turnHistogram[2]++;
+            else if (turns <= 30) turnHistogram[3]++;
+            else turnHistogram[4]++;
+        }
+    }
+
+    /**
+     * Normalize error messages for grouping by removing timestamps, IDs, and other variable data.
+     */
+    private String normalizeError(String error) {
+        // Remove timestamps like [HH:mm:ss.SSS]
+        String normalized = error.replaceAll("\\[\\d{2}:\\d{2}:\\d{2}\\.\\d{3}\\]", "");
+        // Remove id=NNNNN patterns
+        normalized = normalized.replaceAll("id=\\d+", "id=X");
+        // Remove large numbers (likely IDs or memory addresses)
+        normalized = normalized.replaceAll("\\d{5,}", "NNNN");
+        // Remove file paths (keep just filename)
+        normalized = normalized.replaceAll("[A-Za-z]:[/\\\\][^\\s]+[/\\\\]", "");
+        return normalized.trim();
     }
 
     // Getters
@@ -152,15 +255,17 @@ public class AnalysisResult {
     }
 
     /**
-     * Format bytes in human-readable form (B, KB, MB).
+     * Format bytes in human-readable form (B, KB, MB, GB).
      */
     private static String formatBytes(long bytes) {
         if (bytes < 1024) {
             return bytes + " B";
         } else if (bytes < 1024 * 1024) {
             return String.format("%.1f KB", bytes / 1024.0);
-        } else {
+        } else if (bytes < 1024L * 1024L * 1024L) {
             return String.format("%.2f MB", bytes / (1024.0 * 1024.0));
+        } else {
+            return String.format("%.2f GB", bytes / (1024.0 * 1024.0 * 1024.0));
         }
     }
 
@@ -170,6 +275,38 @@ public class AnalysisResult {
 
     public List<GameLogMetrics> getAllMetrics() {
         return allMetrics;
+    }
+
+    public Map<GameLogMetrics.FailureMode, Integer> getFailureModeCounts() {
+        return failureModeCounts;
+    }
+
+    public Map<String, Integer> getErrorFrequency() {
+        return errorFrequency;
+    }
+
+    public Map<Integer, BatchStats> getBatchStats() {
+        return batchStats;
+    }
+
+    public int getMaxConsecutiveFailures() {
+        return maxConsecutiveFailures;
+    }
+
+    public double getFirstHalfSuccessRate() {
+        return firstHalfSuccessRate;
+    }
+
+    public double getSecondHalfSuccessRate() {
+        return secondHalfSuccessRate;
+    }
+
+    public int getWarningsLeadingToFailure() {
+        return warningsLeadingToFailure;
+    }
+
+    public int[] getTurnHistogram() {
+        return turnHistogram;
     }
 
     /**
@@ -191,6 +328,56 @@ public class AnalysisResult {
                 .flatMap(m -> m.getWarnings().stream())
                 .distinct()
                 .limit(100)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Get files that contain a specific error (normalized for grouping).
+     * @param normalizedError the normalized error string
+     * @return list of log file names containing this error
+     */
+    public List<String> getFilesWithError(String normalizedError) {
+        return allMetrics.stream()
+                .filter(m -> m.getErrors().stream()
+                        .anyMatch(e -> normalizeError(e).equals(normalizedError)))
+                .map(GameLogMetrics::getLogFileName)
+                .limit(5)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Get files that contain a specific warning (normalized for grouping).
+     * @param normalizedWarning the normalized warning string
+     * @return list of log file names containing this warning
+     */
+    public List<String> getFilesWithWarning(String normalizedWarning) {
+        return allMetrics.stream()
+                .filter(m -> m.getWarnings().stream()
+                        .anyMatch(w -> normalizeError(w).equals(normalizedWarning)))
+                .map(GameLogMetrics::getLogFileName)
+                .limit(5)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Get all files that have any warnings.
+     * @return list of log file names that have warnings
+     */
+    public List<String> getFilesWithAnyWarnings() {
+        return allMetrics.stream()
+                .filter(m -> !m.getWarnings().isEmpty())
+                .map(GameLogMetrics::getLogFileName)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Get all files that have any errors.
+     * @return list of log file names that have errors
+     */
+    public List<String> getFilesWithAnyErrors() {
+        return allMetrics.stream()
+                .filter(m -> !m.getErrors().isEmpty())
+                .map(GameLogMetrics::getLogFileName)
                 .collect(Collectors.toList());
     }
 
@@ -287,6 +474,16 @@ public class AnalysisResult {
                         gamesWithChecksumMismatches));
             }
 
+            // List files with errors for quick reference
+            List<String> filesWithErrors = getFilesWithAnyErrors();
+            if (!filesWithErrors.isEmpty()) {
+                sb.append("**Files with Errors:**\n");
+                for (String file : filesWithErrors) {
+                    sb.append(String.format("- `%s`\n", file));
+                }
+                sb.append("\n");
+            }
+
             List<String> errors = getAllErrors();
             if (!errors.isEmpty()) {
                 sb.append("**Unique Errors:**\n");
@@ -298,12 +495,40 @@ public class AnalysisResult {
                 }
                 sb.append("\n");
             }
+
+            // Error Context section for failed games
+            List<GameLogMetrics> failedGames = allMetrics.stream()
+                    .filter(m -> !m.isSuccessful() && m.getErrorContext() != null)
+                    .sorted(Comparator.comparingInt(GameLogMetrics::getGameIndex))
+                    .limit(5) // Limit to 5 most detailed error contexts
+                    .collect(Collectors.toList());
+
+            if (!failedGames.isEmpty()) {
+                sb.append("### Error Context for Failed Games\n\n");
+                for (GameLogMetrics m : failedGames) {
+                    LogContextExtractor.ErrorContext ctx = m.getErrorContext();
+                    if (ctx != null) {
+                        sb.append(ctx.toMarkdown());
+                        sb.append("\n");
+                    }
+                }
+            }
         }
 
         // Warning Analysis
         if (gamesWithWarnings > 0) {
             sb.append("### Warning Analysis\n\n");
             sb.append(String.format("**Games with Warnings:** %d\n\n", gamesWithWarnings));
+
+            // List files with warnings for quick reference
+            List<String> filesWithWarnings = getFilesWithAnyWarnings();
+            if (!filesWithWarnings.isEmpty()) {
+                sb.append("**Files with Warnings:**\n");
+                for (String file : filesWithWarnings) {
+                    sb.append(String.format("- `%s`\n", file));
+                }
+                sb.append("\n");
+            }
 
             List<String> warnings = getAllWarnings();
             if (!warnings.isEmpty()) {
@@ -317,6 +542,107 @@ public class AnalysisResult {
                 sb.append("\n");
             }
         }
+
+        // Turn Distribution Section
+        sb.append("### Turn Distribution\n\n");
+        sb.append("| Range | Count | % | Notes |\n");
+        sb.append("|-------|-------|---|-------|\n");
+        String[] turnRanges = {"1-5", "6-10", "11-20", "21-30", "30+"};
+        for (int i = 0; i < turnHistogram.length; i++) {
+            double pct = totalGames > 0 ? 100.0 * turnHistogram[i] / totalGames : 0;
+            String notes = "";
+            if (i == 0 && pct > 5.0) {
+                notes = "Early termination";
+            }
+            sb.append(String.format("| %s | %d | %.1f%% | %s |\n",
+                    turnRanges[i], turnHistogram[i], pct, notes));
+        }
+        sb.append("\n");
+
+        // Failure Mode Analysis Section
+        if (failedGames > 0 && failureModeCounts != null && !failureModeCounts.isEmpty()) {
+            sb.append("### Failure Mode Analysis\n\n");
+            sb.append("| Mode | Count | % | Affected Games |\n");
+            sb.append("|------|-------|---|----------------|\n");
+            for (GameLogMetrics.FailureMode mode : GameLogMetrics.FailureMode.values()) {
+                if (mode == GameLogMetrics.FailureMode.NONE) continue;
+                int count = failureModeCounts.getOrDefault(mode, 0);
+                if (count > 0) {
+                    double pct = totalGames > 0 ? 100.0 * count / totalGames : 0;
+                    // List affected games
+                    String affected = allMetrics.stream()
+                            .filter(m -> m.getFailureMode() == mode)
+                            .map(m -> "game" + m.getGameIndex())
+                            .limit(5)
+                            .collect(Collectors.joining(", "));
+                    if (count > 5) {
+                        affected += ", ...";
+                    }
+                    sb.append(String.format("| %s | %d | %.1f%% | %s |\n",
+                            mode.name(), count, pct, affected));
+                }
+            }
+            sb.append("\n");
+        }
+
+        // Batch Performance Section
+        if (batchStats != null && !batchStats.isEmpty()) {
+            sb.append("### Batch Performance\n\n");
+            sb.append("| Batch | Games | Success Rate | Failures |\n");
+            sb.append("|-------|-------|--------------|----------|\n");
+            for (BatchStats batch : batchStats.values()) {
+                String failures = batch.failedGames.isEmpty() ? "-" :
+                        batch.failedGames.stream().limit(3).collect(Collectors.joining(", "));
+                if (batch.failedGames.size() > 3) {
+                    failures += ", ...";
+                }
+                sb.append(String.format("| %d | %d | %.0f%% | %s |\n",
+                        batch.batchNumber, batch.gameCount, batch.successRate, failures));
+            }
+            sb.append("\n");
+        }
+
+        // Top Errors by Frequency Section
+        if (errorFrequency != null && !errorFrequency.isEmpty()) {
+            sb.append("### Top Errors (by frequency)\n\n");
+            sb.append("| Error Pattern | Count |\n");
+            sb.append("|---------------|-------|\n");
+            int shown = 0;
+            for (Map.Entry<String, Integer> entry : errorFrequency.entrySet()) {
+                if (shown++ >= 10) break;
+                String errorTruncated = entry.getKey().length() > 80 ?
+                        entry.getKey().substring(0, 77) + "..." : entry.getKey();
+                sb.append(String.format("| `%s` | %d |\n", errorTruncated, entry.getValue()));
+            }
+            sb.append("\n");
+        }
+
+        // Failure Patterns Section
+        sb.append("### Failure Patterns\n\n");
+        sb.append("| Pattern | Value | Status |\n");
+        sb.append("|---------|-------|--------|\n");
+        String consecutiveStatus = maxConsecutiveFailures > 2 ? "Concerning" : "OK";
+        sb.append(String.format("| Max Consecutive Failures | %d | %s |\n",
+                maxConsecutiveFailures, consecutiveStatus));
+        sb.append(String.format("| First Half Success (0-%d) | %.1f%% | |\n",
+                (totalGames / 2) - 1, firstHalfSuccessRate));
+        double dropRate = firstHalfSuccessRate - secondHalfSuccessRate;
+        String dropStatus = dropRate > 5.0 ? "Degrading" : "";
+        sb.append(String.format("| Second Half Success (%d-%d) | %.1f%% | %s |\n",
+                totalGames / 2, totalGames - 1, secondHalfSuccessRate, dropStatus));
+        int gamesWithWarningsAndFailed = warningsLeadingToFailure;
+        double warnFailPct = gamesWithWarnings > 0 ?
+                100.0 * gamesWithWarningsAndFailed / gamesWithWarnings : 0;
+        sb.append(String.format("| Warnings -> Failures | %d/%d (%.1f%%) | |\n",
+                gamesWithWarningsAndFailed, gamesWithWarnings, warnFailPct));
+        sb.append("\n");
+
+        // Stability Trend
+        String trend = "STABLE";
+        if (maxConsecutiveFailures > 2 || dropRate > 5.0) {
+            trend = "DEGRADING";
+        }
+        sb.append(String.format("**Stability Trend:** %s\n\n", trend));
 
         // Validation Summary
         sb.append("### Validation Status\n\n");
@@ -417,6 +743,33 @@ public class AnalysisResult {
             this.averageBandwidthSavings = totalFullStateBytes > 0
                     ? 100.0 * (1.0 - (double) totalDeltaBytes / totalFullStateBytes)
                     : 0.0;
+        }
+    }
+
+    /**
+     * Statistics for a batch of games (typically 10 games per batch).
+     */
+    public static class BatchStats {
+        public final int batchNumber;
+        public final int gameCount;
+        public final int successCount;
+        public final int failureCount;
+        public final double successRate;
+        public final List<String> failedGames;
+
+        public BatchStats(int batchNumber, List<GameLogMetrics> games) {
+            this.batchNumber = batchNumber;
+            this.gameCount = games.size();
+            this.successCount = (int) games.stream().filter(GameLogMetrics::isSuccessful).count();
+            this.failureCount = gameCount - successCount;
+            this.successRate = gameCount > 0 ? 100.0 * successCount / gameCount : 0.0;
+            this.failedGames = games.stream()
+                    .filter(m -> !m.isSuccessful())
+                    .map(m -> {
+                        String reason = m.getFailureMode().name().toLowerCase();
+                        return m.getLogFileName() + " (" + reason + ")";
+                    })
+                    .collect(Collectors.toList());
         }
     }
 }

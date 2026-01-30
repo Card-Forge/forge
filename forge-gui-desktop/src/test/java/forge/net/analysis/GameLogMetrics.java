@@ -8,9 +8,23 @@ import java.util.List;
  */
 public class GameLogMetrics {
 
+    /**
+     * Classification of how a game failed (or NONE if it succeeded).
+     */
+    public enum FailureMode {
+        NONE,              // Game completed successfully
+        TIMEOUT,           // Game exceeded time limit
+        CHECKSUM_MISMATCH, // Delta sync desync detected
+        EXCEPTION,         // Exception/error logged
+        INCOMPLETE         // Game didn't complete for unknown reason
+    }
+
+    // Failure tracking
+    private FailureMode failureMode = FailureMode.NONE;
+    private int firstErrorTurn = -1;  // Turn when first error occurred (-1 = no error)
+
     // Game identification
     private String logFileName;
-    private int batchNumber = -1;  // -1 means not from a batch run
     private int gameIndex = -1;
     private int playerCount = 2;
 
@@ -34,6 +48,7 @@ public class GameLogMetrics {
     private List<String> warnings = new ArrayList<>();
     private List<String> errors = new ArrayList<>();
     private boolean hasChecksumMismatch;
+    private LogContextExtractor.ErrorContext errorContext;
 
     // Timing
     private long gameDurationMs;
@@ -58,20 +73,28 @@ public class GameLogMetrics {
 
     // Getters and setters
 
+    public FailureMode getFailureMode() {
+        return failureMode;
+    }
+
+    public void setFailureMode(FailureMode failureMode) {
+        this.failureMode = failureMode;
+    }
+
+    public int getFirstErrorTurn() {
+        return firstErrorTurn;
+    }
+
+    public void setFirstErrorTurn(int firstErrorTurn) {
+        this.firstErrorTurn = firstErrorTurn;
+    }
+
     public String getLogFileName() {
         return logFileName;
     }
 
     public void setLogFileName(String logFileName) {
         this.logFileName = logFileName;
-    }
-
-    public int getBatchNumber() {
-        return batchNumber;
-    }
-
-    public void setBatchNumber(int batchNumber) {
-        this.batchNumber = batchNumber;
     }
 
     public int getGameIndex() {
@@ -200,6 +223,14 @@ public class GameLogMetrics {
         this.hasChecksumMismatch = hasChecksumMismatch;
     }
 
+    public LogContextExtractor.ErrorContext getErrorContext() {
+        return errorContext;
+    }
+
+    public void setErrorContext(LogContextExtractor.ErrorContext errorContext) {
+        this.errorContext = errorContext;
+    }
+
     public long getGameDurationMs() {
         return gameDurationMs;
     }
@@ -218,14 +249,14 @@ public class GameLogMetrics {
 
     @Override
     public String toString() {
-        String batchStr = batchNumber >= 0 ? "batch" + batchNumber + "-" : "";
         return String.format(
-                "GameLogMetrics[file=%s, %sgame%d, players=%d, completed=%b, turns=%d, winner=%s, " +
+                "GameLogMetrics[file=%s, players=%d, completed=%b, turns=%d, winner=%s, " +
                 "packets=%d, deltaBytes=%d, fullStateBytes=%d, savings=%.1f%%, " +
-                "warnings=%d, errors=%d, checksumMismatch=%b]",
-                logFileName, batchStr, gameIndex, playerCount, gameCompleted, turnCount, winner,
+                "warnings=%d, errors=%d, checksumMismatch=%b, failureMode=%s, firstErrorTurn=%d]",
+                logFileName, playerCount, gameCompleted, turnCount, winner,
                 deltaPacketCount, totalDeltaBytes, totalFullStateBytes,
-                calculateBandwidthSavings(), warnings.size(), errors.size(), hasChecksumMismatch);
+                calculateBandwidthSavings(), warnings.size(), errors.size(), hasChecksumMismatch,
+                failureMode, firstErrorTurn);
     }
 
     /**

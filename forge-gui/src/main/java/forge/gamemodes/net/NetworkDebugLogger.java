@@ -1,5 +1,7 @@
 package forge.gamemodes.net;
 
+import forge.localinstance.properties.ForgeConstants;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -296,7 +298,7 @@ public final class NetworkDebugLogger {
      * Returns files sorted by last modified time (oldest first).
      */
     private static List<File> getExistingLogFiles() {
-        String logDirPath = NetworkDebugConfig.getLogDirectory();
+        String logDirPath = ForgeConstants.NETWORK_LOGS_DIR;
         File logsDir = new File(logDirPath);
 
         if (!logsDir.exists() || !logsDir.isDirectory()) {
@@ -320,6 +322,7 @@ public final class NetworkDebugLogger {
     /**
      * Clean up old log files if cleanup is enabled and max limit is exceeded.
      * Respects grace period to avoid deleting logs from other running instances.
+     * Never deletes logs from the current batch run (when batch ID is set).
      */
     private static void cleanupOldLogs() {
         if (!NetworkDebugConfig.isLogCleanupEnabled()) {
@@ -341,9 +344,11 @@ public final class NetworkDebugLogger {
         }
 
         long now = System.currentTimeMillis();
+        String currentBatchId = batchId;  // Capture current batch ID
 
-        // Delete oldest files, but respect grace period
-        for (int i = 0; i < toDelete && i < logFiles.size(); i++) {
+        // Delete oldest files, but respect grace period and current batch
+        int deleted = 0;
+        for (int i = 0; i < logFiles.size() && deleted < toDelete; i++) {
             File oldLog = logFiles.get(i);
 
             // Skip files modified within grace period (likely from other running instances)
@@ -352,8 +357,15 @@ public final class NetworkDebugLogger {
                 continue;
             }
 
+            // Skip files from current batch run - never delete logs from the current batch
+            if (currentBatchId != null && oldLog.getName().contains(currentBatchId)) {
+                continue;
+            }
+
             try {
-                oldLog.delete();
+                if (oldLog.delete()) {
+                    deleted++;
+                }
                 // Silent operation - no console output
             } catch (SecurityException e) {
                 // Silent failure - continue with other deletions
@@ -411,7 +423,7 @@ public final class NetworkDebugLogger {
     private static PrintWriter initializeLogFile(String suffix) {
         try {
             // Get configurable log directory
-            String logDirPath = NetworkDebugConfig.getLogDirectory();
+            String logDirPath = ForgeConstants.NETWORK_LOGS_DIR;
             File logDir = new File(logDirPath);
             if (!logDir.exists()) {
                 logDir.mkdirs();
@@ -771,7 +783,7 @@ public final class NetworkDebugLogger {
     public static String getLogFilePath() {
         ensureInitialized();
         // We don't store the path, so just return the directory
-        String logDirPath = NetworkDebugConfig.getLogDirectory();
+        String logDirPath = ForgeConstants.NETWORK_LOGS_DIR;
         return new File(logDirPath).getAbsolutePath();
     }
 }

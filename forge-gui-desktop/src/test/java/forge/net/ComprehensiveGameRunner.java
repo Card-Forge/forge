@@ -11,14 +11,13 @@ import forge.net.scenarios.MultiplayerNetworkScenario;
  *
  * Designed to be invoked as a separate JVM process for parallel execution.
  *
- * Usage: java -cp <classpath> forge.net.ComprehensiveGameRunner <port> <gameIndex> <playerCount> [batchId] [batchNumber]
+ * Usage: java -cp <classpath> forge.net.ComprehensiveGameRunner <port> <gameIndex> <playerCount> [batchId]
  *
  * Arguments:
  *   port        - Network port for the game server
- *   gameIndex   - Index of this game within its batch (0-9 for batch size 10)
+ *   gameIndex   - Index of this game (for identification in logs)
  *   playerCount - Number of players (2, 3, or 4)
  *   batchId     - Optional batch ID for correlating logs from the same test run
- *   batchNumber - Optional batch number (0-based) for unique log filenames
  *
  * Exit codes:
  *   0 = Success (game completed with winner and delta packets)
@@ -40,7 +39,7 @@ public class ComprehensiveGameRunner {
         int gameIndex;
         int playerCount;
         String batchId = null;
-        int batchNumber = -1;  // -1 means not specified
+        int batchNumber = 0;
         try {
             port = Integer.parseInt(args[0]);
             gameIndex = Integer.parseInt(args[1]);
@@ -75,7 +74,7 @@ public class ComprehensiveGameRunner {
      * @return Exit code: 0=success, 1=failure, 2=error
      */
     public static int runGame(int port, int gameIndex, int playerCount) {
-        return runGame(port, gameIndex, playerCount, null, -1);
+        return runGame(port, gameIndex, playerCount, null, 0);
     }
 
     /**
@@ -85,7 +84,20 @@ public class ComprehensiveGameRunner {
      * @param gameIndex Index of this game (for identification)
      * @param playerCount Number of players (2, 3, or 4)
      * @param batchId Optional batch ID for correlating logs from the same test run
-     * @param batchNumber Batch number (0-based) for unique log filenames, or -1 if not specified
+     * @return Exit code: 0=success, 1=failure, 2=error
+     */
+    public static int runGame(int port, int gameIndex, int playerCount, String batchId) {
+        return runGame(port, gameIndex, playerCount, batchId, 0);
+    }
+
+    /**
+     * Run a single game and return exit code.
+     *
+     * @param port Network port for the game server
+     * @param gameIndex Index of this game (for identification within the batch)
+     * @param playerCount Number of players (2, 3, or 4)
+     * @param batchId Optional batch ID for correlating logs from the same test run
+     * @param batchNumber Batch number for unique log filenames across batches
      * @return Exit code: 0=success, 1=failure, 2=error
      */
     public static int runGame(int port, int gameIndex, int playerCount, String batchId, int batchNumber) {
@@ -95,12 +107,8 @@ public class ComprehensiveGameRunner {
             if (batchId != null) {
                 NetworkDebugLogger.setBatchId(batchId);
             }
-            // Include batch number in suffix for unique log filenames across batches
-            // Format: batch0-game5-3p or game5-3p (if no batch number)
-            String suffix = (batchNumber >= 0)
-                    ? "batch" + batchNumber + "-game" + gameIndex + "-" + playerCount + "p"
-                    : "game" + gameIndex + "-" + playerCount + "p";
-            NetworkDebugLogger.setInstanceSuffix(suffix);
+            // Include batch number in log filename to prevent overwrites across batches
+            NetworkDebugLogger.setInstanceSuffix("batch" + batchNumber + "-game" + gameIndex + "-" + playerCount + "p");
 
             // Initialize FModel
             if (GuiBase.getInterface() == null) {
@@ -161,11 +169,18 @@ public class ComprehensiveGameRunner {
     /**
      * Run a 3-4 player multiplayer game using MultiplayerNetworkScenario.
      * All non-host players are remote network clients to test delta sync.
+     *
+     * Set system property 'test.useAiForRemote=true' to enable server-side AI
+     * for remote players, providing realistic gameplay and diverse game states.
      */
     private static GameRunResult runMultiplayerGame(int port, int gameIndex, int playerCount) {
+        // Check if AI mode is enabled via system property
+        boolean useAiForRemote = Boolean.getBoolean("test.useAiForRemote");
+
         MultiplayerNetworkScenario scenario = new MultiplayerNetworkScenario()
                 .playerCount(playerCount)
                 .port(port) // Use the port assigned by the parent process
+                .useAiForRemotePlayers(useAiForRemote) // Enable AI if configured
                 .gameTimeout(300000); // 5 minute timeout in ms
 
         MultiplayerNetworkScenario.ScenarioResult scenarioResult = scenario.execute();

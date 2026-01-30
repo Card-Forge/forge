@@ -112,6 +112,7 @@ public class MultiplayerNetworkScenario {
     private int playerCount = 3;
     private long gameTimeoutMs = GAME_TIMEOUT_MS;
     private int specifiedPort = -1; // -1 means auto-allocate
+    private boolean useAiForRemotePlayers = false; // If true, swap remote player controllers to AI
 
     /**
      * Set the number of players (3-4 supported).
@@ -137,6 +138,22 @@ public class MultiplayerNetworkScenario {
      */
     public MultiplayerNetworkScenario gameTimeout(long timeoutMs) {
         this.gameTimeoutMs = timeoutMs;
+        return this;
+    }
+
+    /**
+     * Enable server-side AI for remote players.
+     *
+     * When enabled, remote player controllers are swapped to AI after the game starts.
+     * This allows:
+     * - Realistic gameplay with all players making strategic decisions
+     * - Diverse game states for delta sync testing
+     * - Bidirectional network traffic testing
+     *
+     * Remote clients still receive delta updates for verification.
+     */
+    public MultiplayerNetworkScenario useAiForRemotePlayers(boolean enable) {
+        this.useAiForRemotePlayers = enable;
         return this;
     }
 
@@ -373,10 +390,18 @@ public class MultiplayerNetworkScenario {
             startRunnable.run();
             gameStarted = true;
 
-            NetworkDebugLogger.log("%s Game started successfully! Waiting for completion...", LOG_PREFIX);
+            NetworkDebugLogger.log("%s Game started successfully!", LOG_PREFIX);
 
-            // 8. Wait for game completion
+            // If AI mode is enabled, swap remote player controllers to AI
+            // This must happen after the game starts but before the game loop begins
             HostedMatch hostedMatch = HeadlessGuiDesktop.getLastMatch();
+            if (useAiForRemotePlayers && hostedMatch != null && hostedMatch.getGame() != null) {
+                swapRemotePlayersToAi(hostedMatch.getGame());
+            }
+
+            NetworkDebugLogger.log("%s Waiting for game completion...", LOG_PREFIX);
+
+            // 8. Wait for game completion (reuse hostedMatch from above)
             if (hostedMatch != null) {
                 long endTime = System.currentTimeMillis() + gameTimeoutMs;
                 while (System.currentTimeMillis() < endTime) {
@@ -469,23 +494,86 @@ public class MultiplayerNetworkScenario {
     }
 
     /**
+     * Swap remote player controllers to AI.
+     *
+     * This method finds players at indices 1+ (remote slots) and replaces their
+     * PlayerControllerHuman with PlayerControllerAi. The network connection
+     * remains intact, so clients still receive delta updates for verification.
+     *
+     * This approach mimics what happens during AI takeover in the reconnection
+     * feature, using the same dangerouslySetController() mechanism.
+     *
+     * @param game the Game instance
+     */
+    private void swapRemotePlayersToAi(Game game) {
+        NetworkDebugLogger.log("%s Swapping remote player controllers to AI...", LOG_PREFIX);
+
+        for (forge.game.player.Player player : game.getPlayers()) {
+            // Skip the first player (host AI at index 0)
+            if (player.getId() == 0) {
+                NetworkDebugLogger.log("%s   Player %d (%s): keeping as host AI",
+                        LOG_PREFIX, player.getId(), player.getName());
+                continue;
+            }
+
+            // Check if this player has a human controller (remote players do)
+            if (player.getController() instanceof forge.player.PlayerControllerHuman) {
+                String originalControllerType = player.getController().getClass().getSimpleName();
+
+                // Create an AI controller for this player
+                forge.ai.LobbyPlayerAi aiLobbyPlayer =
+                        new forge.ai.LobbyPlayerAi(player.getName(), null);
+                forge.ai.PlayerControllerAi aiController =
+                        new forge.ai.PlayerControllerAi(game, player, aiLobbyPlayer);
+
+                // Swap the controller
+                player.dangerouslySetController(aiController);
+
+                NetworkDebugLogger.log("%s   Player %d (%s): swapped %s -> PlayerControllerAi",
+                        LOG_PREFIX, player.getId(), player.getName(), originalControllerType);
+            } else {
+                NetworkDebugLogger.log("%s   Player %d (%s): already using %s",
+                        LOG_PREFIX, player.getId(), player.getName(),
+                        player.getController().getClass().getSimpleName());
+            }
+        }
+
+        NetworkDebugLogger.log("%s Controller swap complete - all players now use AI", LOG_PREFIX);
+    }
+
+    /**
      * Main method for standalone testing.
+     *
+     * Usage: MultiplayerNetworkScenario [playerCount] [--ai]
+     *   playerCount: 3 or 4 (default: 3)
+     *   --ai: Enable server-side AI for remote players (recommended for testing)
      */
     public static void main(String[] args) {
         System.out.println("Multiplayer Network Scenario Test");
         System.out.println("=".repeat(60));
 
         int playerCount = 3;
-        if (args.length > 0) {
-            try {
-                playerCount = Integer.parseInt(args[0]);
-            } catch (NumberFormatException e) {
-                System.err.println("Invalid player count: " + args[0] + ", using default 3");
+        boolean useAi = false;
+
+        for (String arg : args) {
+            if (arg.equals("--ai")) {
+                useAi = true;
+            } else {
+                try {
+                    playerCount = Integer.parseInt(arg);
+                } catch (NumberFormatException e) {
+                    System.err.println("Invalid argument: " + arg);
+                }
             }
         }
 
+        System.out.println("Players: " + playerCount);
+        System.out.println("AI for remote players: " + useAi);
+        System.out.println();
+
         MultiplayerNetworkScenario scenario = new MultiplayerNetworkScenario()
                 .playerCount(playerCount)
+                .useAiForRemotePlayers(useAi)
                 .gameTimeout(300000);
 
         ScenarioResult result = scenario.execute();
