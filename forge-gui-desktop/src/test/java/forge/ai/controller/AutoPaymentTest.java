@@ -87,9 +87,10 @@ public class AutoPaymentTest extends SimulationTest {
         AssertJUnit.assertNull(treasureCopy);
     }
 
-    @Ignore
     @Test
     public void testKeepColorsOpen() {
+        //ComputerUtilMana.setExperimentalManaPaymentEnabled(false);
+
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
@@ -142,6 +143,8 @@ public class AutoPaymentTest extends SimulationTest {
     @Ignore
     @Test
     public void leaveUpManaOptions() {
+        // This is an idealist test that doesn't work at this time, but it would
+        // be nice if the AI could leave up the most mana options possible after casting a spell.
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 

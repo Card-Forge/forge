@@ -164,7 +164,7 @@ public class ManaPaymentService {
         return manaProducedCount > manaNeeded;
     }
 
-    private void sortManaAbilities(final Multimap<ManaCostShard, SpellAbility> manaAbilityMap, final SpellAbility sa, final CardCollection sortedManaSources) {
+    private void sortManaAbilities(final ListMultimap<ManaCostShard, SpellAbility> manaAbilityMap, final SpellAbility sa, final CardCollection sortedManaSources) {
         final Map<Card, Integer> manaCardMap = Maps.newHashMap();
         final List<Card> orderedCards = Lists.newArrayList();
 
@@ -179,8 +179,33 @@ public class ManaPaymentService {
         }
         orderedCards.sort(Comparator.comparingInt(manaCardMap::get));
 
+        if (DEBUG_MANA_PAYMENT) {
+            System.out.print("Ordered Cards: " + orderedCards.size());
+            for (Card card : orderedCards) {
+                System.out.print(card.getName() + ", ");
+            }
+            System.out.println();
+        }
+
+        String[] colorsMostCommon;
+        if (manaAbilityMap.keySet().stream().anyMatch(ManaCostShard::isGeneric)) {
+            // early tempo is more important so we only look at hand here
+            CardCollection hand = new CardCollection(sa.getActivatingPlayer().getCardsIn(ZoneType.Hand));
+            hand.remove(sa.getHostCard());
+            AiDeckStatistics stats = AiDeckStatistics.fromCards(hand);
+            Integer[] orderedColorsIdx = {0, 1, 2, 3, 4};
+            // order common colors to the front, increases chance AI can play a second spell after
+            Arrays.sort(orderedColorsIdx, Comparator.comparingInt(o -> stats.maxPips[(int) o]).reversed());
+            colorsMostCommon = Arrays.stream(orderedColorsIdx)
+                    .filter(idx -> stats.maxPips[idx] > 0)
+                    .map(idx -> MagicColor.toShortString(MagicColor.WUBRG[idx]))
+                    .toArray(String[]::new);
+        } else {
+            colorsMostCommon = null;
+        }
+
         for (final ManaCostShard shard : manaAbilityMap.keySet()) {
-            final Collection<SpellAbility> abilities = manaAbilityMap.get(shard);
+            final List<SpellAbility> abilities = manaAbilityMap.get(shard);
             final List<SpellAbility> newAbilities = new ArrayList<>(abilities);
 
             // Strictly sort: multi-mana sources that can pay for multiple shards always first
@@ -191,7 +216,27 @@ public class ManaPaymentService {
                 if (isReusableCost(ability1) && multi1 && !multi2) return -1;
                 if (isReusableCost(ability2) && multi2 && !multi1) return 1;
 
-                // If both are multi or both are single, preserve sortedManaSources order
+                int preOrder = orderedCards.indexOf(ability1.getHostCard()) - orderedCards.indexOf(ability2.getHostCard());
+
+                if (preOrder != 0) {
+                    // if the score is identical (most likely basics) try keep access to more colors longer
+                    if (shard.isGeneric() && manaCardMap.get(ability1.getHostCard()) == manaCardMap.get(ability2.getHostCard())) {
+                        for (String col : colorsMostCommon) {
+                            if (ability1.canProduce(col) && !ability2.canProduce(col)) {
+                                return 1;
+                            }
+                            if (!ability1.canProduce(col) && ability2.canProduce(col)) {
+                                return -1;
+                            }
+                        }
+                    }
+
+                    // sources were previously sorted, so add their index to connect those values to some degree
+                    preOrder += abilities.indexOf(ability1) - abilities.indexOf(ability2);
+
+                    return preOrder;
+                }
+
                 int idx1 = sortedManaSources.indexOf(ability1.getHostCard());
                 int idx2 = sortedManaSources.indexOf(ability2.getHostCard());
                 return Integer.compare(idx1, idx2);
