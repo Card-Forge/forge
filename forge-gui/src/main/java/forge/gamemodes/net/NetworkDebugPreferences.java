@@ -42,8 +42,7 @@ public class NetworkDebugPreferences extends PreferencesStore<NetworkDebugPrefer
 
         // Log management
         MAX_LOG_FILES("20"),
-        LOG_CLEANUP_ENABLED("true"),
-        LOG_DIRECTORY("logs/network");
+        LOG_CLEANUP_ENABLED("true");
 
         private final String strDefaultVal;
 

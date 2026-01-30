@@ -100,16 +100,6 @@ public final class NetworkDebugConfig {
     }
 
     /**
-     * Get the directory where log files should be stored.
-     * Can be an absolute or relative path. Relative paths are resolved from the working directory.
-     *
-     * @return log directory path
-     */
-    public static String getLogDirectory() {
-        return getPrefs().getPref(NetworkDebugPreferences.NDPref.LOG_DIRECTORY);
-    }
-
-    /**
      * Reload configuration from file.
      * Useful for testing or if you want to allow config changes without restart.
      */

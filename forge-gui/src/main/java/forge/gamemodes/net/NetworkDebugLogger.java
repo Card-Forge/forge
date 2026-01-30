@@ -1,5 +1,7 @@
 package forge.gamemodes.net;
 
+import forge.localinstance.properties.ForgeConstants;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -296,7 +298,7 @@ public final class NetworkDebugLogger {
      * Returns files sorted by last modified time (oldest first).
      */
     private static List<File> getExistingLogFiles() {
-        String logDirPath = NetworkDebugConfig.getLogDirectory();
+        String logDirPath = ForgeConstants.NETWORK_LOGS_DIR;
         File logsDir = new File(logDirPath);
 
         if (!logsDir.exists() || !logsDir.isDirectory()) {
@@ -421,7 +423,7 @@ public final class NetworkDebugLogger {
     private static PrintWriter initializeLogFile(String suffix) {
         try {
             // Get configurable log directory
-            String logDirPath = NetworkDebugConfig.getLogDirectory();
+            String logDirPath = ForgeConstants.NETWORK_LOGS_DIR;
             File logDir = new File(logDirPath);
             if (!logDir.exists()) {
                 logDir.mkdirs();
@@ -781,7 +783,7 @@ public final class NetworkDebugLogger {
     public static String getLogFilePath() {
         ensureInitialized();
         // We don't store the path, so just return the directory
-        String logDirPath = NetworkDebugConfig.getLogDirectory();
+        String logDirPath = ForgeConstants.NETWORK_LOGS_DIR;
         return new File(logDirPath).getAbsolutePath();
     }
 }
