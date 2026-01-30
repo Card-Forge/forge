@@ -1,0 +1,53 @@
+# Network Debug Preferences Example
+# Copy this file to ~/.forge/preferences/network.preferences (Linux/Mac)
+# or %APPDATA%\Forge\preferences\network.preferences (Windows)
+#
+# NOTE: Comments are supported when reading the file, but will be removed
+# when Forge saves preferences. This is a limitation of the PreferencesStore
+# pattern used by Forge.
+#
+# Changes require restarting Forge to take effect.
+
+# Bandwidth Logging
+# Enable bandwidth tracking and delta sync comparison logging
+# Shows message sizes, compression ratios, and game state changes
+# Performance impact: ~1-2% when enabled
+BANDWIDTH_LOGGING_ENABLED=true
+
+# Debug Logger
+# Enable network debug logger (creates log files and console output)
+# Set to false to completely disable all network debug logging
+DEBUG_LOGGER_ENABLED=true
+
+# Console Log Level
+# Controls console output verbosity
+# Options: DEBUG, INFO, WARN, ERROR
+# DEBUG = Very verbose (hex dumps, property details)
+# INFO = Normal operation (sync start/end, summaries)
+# WARN = Potential issues (missing objects, unexpected states)
+# ERROR = Failures and exceptions only
+CONSOLE_LOG_LEVEL=INFO
+
+# File Log Level
+# Controls log file verbosity
+# Options: DEBUG, INFO, WARN, ERROR
+# Recommended: DEBUG (captures everything for debugging)
+FILE_LOG_LEVEL=DEBUG
+
+# Log Management
+# Maximum number of log files to retain
+# When exceeded, oldest logs from previous runs are deleted
+# Current batch run logs are never deleted
+# Set to 0 for unlimited (useful for development)
+MAX_LOG_FILES=20
+
+# Log Cleanup
+# Enable automatic cleanup of old log files
+# When disabled, logs accumulate indefinitely
+LOG_CLEANUP_ENABLED=true
+
+# Log Directory
+# Directory where network debug logs are stored
+# Can be absolute or relative path
+# Directory is created automatically if it doesn't exist
+LOG_DIRECTORY=logs/network
