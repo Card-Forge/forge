@@ -97,6 +97,3 @@ __pycache__
 
 # Ignore network debug logs
 forge-gui-desktop/logs
-
-# Ignore test log artifacts
-testlogs/
