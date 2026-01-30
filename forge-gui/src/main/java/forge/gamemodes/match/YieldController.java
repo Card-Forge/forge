@@ -508,6 +508,8 @@ public class YieldController {
 
     /**
      * Check if a stack item targets the player or their permanents.
+     * Recursively checks sub-instances to handle abilities with targeting in sub-abilities
+     * (e.g., Oona, Queen of the Fae whose targeting is in a sub-ability).
      */
     private boolean targetsPlayerOrPermanents(forge.game.spellability.StackItemView si, forge.game.player.Player p) {
         PlayerView pv = p.getView();
@@ -521,6 +523,13 @@ public class YieldController {
                 return true;
             }
         }
+
+        // Recursively check sub-instances for targeting (handles abilities like Oona)
+        forge.game.spellability.StackItemView subInstance = si.getSubInstance();
+        if (subInstance != null && targetsPlayerOrPermanents(subInstance, p)) {
+            return true;
+        }
+
         return false;
     }
 
