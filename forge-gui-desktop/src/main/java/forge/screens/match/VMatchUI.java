@@ -13,12 +13,15 @@ import forge.gui.framework.IVTopLevelUI;
 import forge.gui.framework.SRearrangingUtil;
 import forge.gui.framework.VEmptyDoc;
 import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
 import forge.screens.match.views.VDev;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VHand;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.FButton;
+import forge.toolbox.FLabel;
+import java.awt.Color;
 import forge.view.FView;
 
 /** 
@@ -130,6 +133,18 @@ public class VMatchUI implements IVTopLevelUI {
                 }
             }
         });
+
+        // Add experimental features indicator if any are enabled
+        if (FModel.getPreferences().usingExperimentalFeatures()) {
+            FLabel experimentalLabel = new FLabel.Builder()
+                .text("EXPERIMENTAL FEATURES ENABLED")
+                .fontSize(18)
+                .build();
+            experimentalLabel.setTextColor(255, 0, 0);
+            forge.view.FView.SINGLETON_INSTANCE.getPnlInsets().add(experimentalLabel, java.awt.BorderLayout.NORTH);
+            forge.view.FView.SINGLETON_INSTANCE.getPnlInsets().revalidate();
+            forge.view.FView.SINGLETON_INSTANCE.getPnlInsets().repaint();
+        }
     }
 
     public CMatchUI getControl() {

@@ -68,6 +68,8 @@ import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FScrollPane;
+import forge.toolbox.FLabel;
+import forge.assets.FSkinFont;
 
 public class MatchScreen extends FScreen {
     public static FSkinColor getBorderColor() {
@@ -100,6 +102,19 @@ public class MatchScreen extends FScreen {
 
     public MatchScreen(List<VPlayerPanel> playerPanels0) {
         super(new FMenuBar());
+
+        // Add experimental features indicator if any are enabled
+        if (FModel.getPreferences().usingExperimentalFeatures()) {
+            FLabel experimentalLabel = new FLabel.Builder()
+                .text("EXPERIMENTAL FEATURES ENABLED")
+                .font(FSkinFont.get(18))
+                .textColor(FSkinColor.getStandardColor(255, 0, 0)) // Red color
+                .align(com.badlogic.gdx.utils.Align.center)
+                .build();
+            add(experimentalLabel);
+            experimentalLabel.setPosition(0, 0);
+            experimentalLabel.setSize(getWidth(), experimentalLabel.getHeight());
+        }
 
         scroller = add(new FieldScroller());
 
