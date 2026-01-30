@@ -381,25 +381,6 @@ public class InputPassPriority extends InputSyncronizedBase {
             return false;
         }
 
-        return !hasAvailableActions(game, player);
-    }
-
-    private boolean hasAvailableActions(Game game, Player player) {
-        // Check hand for actually playable spells (filters by timing, mana, etc.)
-        for (Card card : player.getCardsIn(ZoneType.Hand)) {
-            if (!card.getAllPossibleAbilities(player, true).isEmpty()) {
-                return true;
-            }
-        }
-
-        // Check battlefield for activatable abilities (excluding mana abilities)
-        for (Card card : player.getCardsIn(ZoneType.Battlefield)) {
-            for (SpellAbility sa : card.getAllPossibleAbilities(player, true)) {
-                if (!sa.isManaAbility()) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return !canRespondToStack(game, player);
     }
 }
