@@ -74,6 +74,9 @@ public class YieldController {
     private final Map<PlayerView, Set<String>> declinedSuggestionsThisTurn = Maps.newHashMap();
     private final Map<PlayerView, Integer> declinedSuggestionsTurn = Maps.newHashMap();
 
+    // Track when yield just ended this priority (to suppress suggestions)
+    private final Set<PlayerView> yieldJustEnded = Sets.newHashSet();
+
     /**
      * Create a new YieldController with the given callback for GUI updates.
      * @param callback the callback interface for GUI operations
@@ -86,14 +89,16 @@ public class YieldController {
      * Automatically pass priority until reaching the Cleanup phase of the current turn.
      * This is the legacy auto-pass behavior.
      */
-    public void autoPassUntilEndOfTurn(final PlayerView player) {
+    public void autoPassUntilEndOfTurn(PlayerView player) {
+        player = TrackableTypes.PlayerViewType.lookup(player); // ensure consistent PlayerView instance
         autoPassUntilEndOfTurn.add(player);
     }
 
     /**
      * Cancel auto-pass for the given player.
      */
-    public void autoPassCancel(final PlayerView player) {
+    public void autoPassCancel(PlayerView player) {
+        player = TrackableTypes.PlayerViewType.lookup(player); // ensure consistent PlayerView instance
         if (!autoPassUntilEndOfTurn.remove(player)) {
             return;
         }
@@ -169,6 +174,10 @@ public class YieldController {
             clearYieldMode(player);
             return;
         }
+
+        // Clear any legacy auto-pass state to prevent interference
+        // (legacy check in shouldAutoYieldForPlayer runs first and would override experimental mode)
+        autoPassUntilEndOfTurn.remove(player);
 
         playerYieldMode.put(player, mode);
         GameView gameView = callback.getGameView();
@@ -246,6 +255,16 @@ public class YieldController {
     }
 
     /**
+     * Check if the player's yield just ended this priority pass (due to end condition or interrupt).
+     * Used to suppress smart suggestions immediately after a yield ends.
+     * This method clears the flag after checking.
+     */
+    public boolean didYieldJustEnd(PlayerView player) {
+        player = TrackableTypes.PlayerViewType.lookup(player);
+        return yieldJustEnded.remove(player);
+    }
+
+    /**
      * Check if auto-yield should be active for a player based on current game state.
      * Uses network-safe GameView properties to work correctly for non-host players in multiplayer.
      */
@@ -268,6 +287,7 @@ public class YieldController {
         // Check interrupt conditions
         if (shouldInterruptYield(player)) {
             clearYieldMode(player);
+            yieldJustEnded.add(player); // Track that yield just ended
             return false;
         }
 
@@ -290,6 +310,7 @@ public class YieldController {
                 }
                 if (currentPhase != startPhase) {
                     clearYieldMode(player);
+                    yieldJustEnded.add(player);
                     yield false;
                 }
                 yield true;
@@ -299,6 +320,7 @@ public class YieldController {
                 boolean stackEmpty = gameView.getStack() == null || gameView.getStack().isEmpty();
                 if (stackEmpty) {
                     clearYieldMode(player);
+                    yieldJustEnded.add(player);
                     yield false;
                 }
                 yield true;
@@ -313,6 +335,7 @@ public class YieldController {
                 }
                 if (currentTurn > startTurn) {
                     clearYieldMode(player);
+                    yieldJustEnded.add(player);
                     yield false;
                 }
                 yield true;
@@ -334,6 +357,7 @@ public class YieldController {
                     // If we started during opponent's turn, stop when we reach our turn
                     if (!Boolean.TRUE.equals(startedDuringOurTurn)) {
                         clearYieldMode(player);
+                        yieldJustEnded.add(player);
                         yield false;
                     }
                 } else {
@@ -370,6 +394,7 @@ public class YieldController {
 
                     if (differentTurn || sameTurnButStartedBeforeCombat) {
                         clearYieldMode(player);
+                        yieldJustEnded.add(player);
                         yield false;
                     }
                 }
@@ -400,6 +425,7 @@ public class YieldController {
 
                     if (differentTurn || sameTurnButStartedBeforeEndStep) {
                         clearYieldMode(player);
+                        yieldJustEnded.add(player);
                         yield false;
                     }
                 }

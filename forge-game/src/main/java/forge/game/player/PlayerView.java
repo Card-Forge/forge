@@ -556,6 +556,22 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.Mana, mana);
     }
 
+    public boolean hasAvailableActions() {
+        Boolean val = get(TrackableProperty.HasAvailableActions);
+        return val != null && val;
+    }
+    void updateHasAvailableActions(Player p) {
+        set(TrackableProperty.HasAvailableActions, p.hasAvailableActions());
+    }
+
+    public boolean willLoseManaAtEndOfPhase() {
+        Boolean val = get(TrackableProperty.WillLoseManaAtEndOfPhase);
+        return val != null && val;
+    }
+    void updateWillLoseManaAtEndOfPhase(Player p) {
+        set(TrackableProperty.WillLoseManaAtEndOfPhase, p.getManaPool().willManaBeLostAtEndOfPhase());
+    }
+
     private List<String> getDetailsList() {
         final List<String> details = Lists.newArrayListWithCapacity(8);
         details.add(Localizer.getInstance().getMessage("lblLifeHas", String.valueOf(getLife())));

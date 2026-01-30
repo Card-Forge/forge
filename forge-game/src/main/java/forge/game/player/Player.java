@@ -1759,6 +1759,35 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public void updateManaForView() {
         view.updateMana(this);
+        view.updateWillLoseManaAtEndOfPhase(this);
+    }
+
+    /**
+     * Check if this player has any available actions (playable spells/abilities).
+     * Used for smart yield suggestions in network play.
+     */
+    public boolean hasAvailableActions() {
+        // Check hand for playable spells
+        for (Card card : getCardsIn(ZoneType.Hand)) {
+            if (!card.getAllPossibleAbilities(this, true).isEmpty()) {
+                return true;
+            }
+        }
+
+        // Check battlefield for non-mana activated abilities
+        for (Card card : getCardsIn(ZoneType.Battlefield)) {
+            for (SpellAbility sa : card.getAllPossibleAbilities(this, true)) {
+                if (!sa.isManaAbility()) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public void updateAvailableActionsForView() {
+        view.updateHasAvailableActions(this);
     }
 
     public final int getNumPowerSurgeLands() {

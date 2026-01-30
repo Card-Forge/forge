@@ -1163,6 +1163,12 @@ public class PhaseHandler implements java.io.Serializable {
         for (final Player p : game.getPlayers()) {
             p.setHasPriority(getPriorityPlayer() == p);
         }
+
+        // Update available actions for the player receiving priority (for network-safe yield suggestions)
+        Player priorityPlayer = getPriorityPlayer();
+        if (priorityPlayer != null) {
+            priorityPlayer.updateAvailableActionsForView();
+        }
     }
 
     private boolean checkStateBasedEffects() {

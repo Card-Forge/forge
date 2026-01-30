@@ -649,6 +649,78 @@ SHORTCUT_YIELD_UNTIL_STACK_CLEARS("117")       // F6
 
 ## Changelog
 
+### 2026-01-31 - Network-Safe GameView Refactor
+
+**Problem:** Non-host players in multiplayer experienced freezing and yield malfunctions. The yield system was using `gameView.getGame()` which returns a transient `Game` object that is not serialized over the network. For non-host clients, this returned a dummy local `Game` instance with no actual state.
+
+**Solution:** Comprehensive refactoring of all network-unsafe code in both `YieldController` and `InputPassPriority` to use network-synchronized TrackableProperties and View classes exclusively.
+
+**Core Changes:**
+
+| Component | Before | After |
+|-----------|--------|-------|
+| Phase tracking | `game.getPhaseHandler().getPhase()` | `gameView.getPhase()` |
+| Turn tracking | `game.getPhaseHandler().getTurn()` | `gameView.getTurn()` |
+| Current player | `game.getPhaseHandler().getPlayerTurn()` | `gameView.getPlayerTurn()` |
+| Stack access | `game.getStack()` | `gameView.getStack()` |
+| Combat access | `game.getCombat()` | `gameView.getCombat()` |
+| Player lookup | `game.getPlayer(playerView)` | Direct `PlayerView` comparison |
+| Player actions check | `player.getCardsIn().getAllPossibleAbilities()` | `playerView.hasAvailableActions()` |
+| Mana loss check | `player.getManaPool().willManaBeLostAtEndOfPhase()` | `playerView.willLoseManaAtEndOfPhase()` |
+| Mana availability | `player.getManaPool().totalMana()` | `playerView.getMana()` + battlefield scan |
+| Hand contents | `player.getCardsIn(ZoneType.Hand)` | `playerView.getHand()` |
+| Battlefield | `player.getCardsIn(ZoneType.Battlefield)` | `playerView.getBattlefield()` |
+
+**New TrackableProperties:**
+- `TrackableProperty.HasAvailableActions` - Whether player has playable spells/abilities
+- `TrackableProperty.WillLoseManaAtEndOfPhase` - Whether floating mana will be lost
+- `TrackableProperty.ApiType` - Spell API type for mass removal detection
+
+**New PlayerView Methods:**
+- `hasAvailableActions()` - Network-safe check for available actions
+- `willLoseManaAtEndOfPhase()` - Network-safe mana loss warning
+
+**New Player Methods:**
+- `hasAvailableActions()` - Checks hand and battlefield for playable abilities
+- `updateAvailableActionsForView()` - Updates the view property
+
+**Update Call Sites:**
+- `Player.updateManaForView()` - Now also updates `WillLoseManaAtEndOfPhase`
+- `PhaseHandler.passPriority()` - Now updates `HasAvailableActions` for priority player
+
+**InputPassPriority Refactoring:**
+- `getGameView()` / `getPlayerView()` - New helper methods for view access
+- `getDefaultYieldMode()` - Now uses `gameView.getPlayers().size()`
+- `shouldShowStackYieldPrompt()` - Uses `gameView.getStack()` and `playerView.hasAvailableActions()`
+- `shouldShowNoManaPrompt()` - Uses `gameView.getStack()`, `gameView.getPlayerTurn()`, `playerView.getHand()`, `hasManaAvailable(PlayerView)`
+- `hasManaAvailable(PlayerView)` - Replaced `Player` version with view-based implementation
+- `shouldShowNoActionsPrompt()` - Uses view properties exclusively
+- `passPriority()` - Uses `playerView.willLoseManaAtEndOfPhase()` for mana warning
+
+**YieldController Refactoring:**
+- `setYieldMode()` - Phase/turn tracking now uses GameView
+- `shouldAutoYieldForPlayer()` - All yield termination checks use GameView
+- `shouldInterruptYield()` - Uses CombatView, StackItemView, PlayerView
+- `isBeingAttacked()` - Refactored to use CombatView instead of Combat
+- `targetsPlayerOrPermanents()` - Uses PlayerView directly
+- `hasMassRemovalOnStack()` - Uses StackItemView.getApiType()
+- `getPlayerCount()` - Uses gameView.getPlayers()
+- `declineSuggestion()` / `isSuggestionDeclined()` - Uses gameView.getTurn()
+
+**Bug Fix - Suggestions appearing after yield ends:**
+- **Problem:** Smart suggestions (e.g., "no mana available") would appear immediately after a yield ended, even though the player had just been yielding. This occurred because `shouldAutoYieldForPlayer()` would clear the yield mode before `showMessage()` ran, so `isAlreadyYielding()` returned false.
+- **Solution:** Added `yieldJustEnded` tracking set in YieldController. When a yield ends due to an end condition or interrupt, the player is added to this set. `InputPassPriority.showMessage()` now checks `didYieldJustEnd()` (which clears the flag) and skips suggestions if true.
+- **Files:** `YieldController.java`, `IGuiGame.java`, `AbstractGuiGame.java`, `InputPassPriority.java`
+
+**Bug Fix - Wrong yield mode active after clicking yield button:**
+- **Problem:** On network clients, clicking a yield button (e.g., "Combat") would highlight correctly but the actual behavior would be UNTIL_END_OF_TURN instead of the selected mode. This was caused by two issues:
+  1. The legacy `autoPassUntilEndOfTurn` set wasn't being cleared when setting an experimental yield mode
+  2. The `autoPassUntilEndOfTurn()` and `autoPassCancel()` methods were missing the PlayerView lookup, causing set membership mismatches
+- **Solution:**
+  1. Added `autoPassUntilEndOfTurn.remove(player)` at the start of `setYieldMode()` when experimental yields are enabled
+  2. Added `TrackableTypes.PlayerViewType.lookup(player)` to `autoPassUntilEndOfTurn()` and `autoPassCancel()` methods
+- **Files:** `YieldController.java`
+
 ### Initial Implementation - YieldController Architecture
 
 **Core Design:**

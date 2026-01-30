@@ -17,11 +17,16 @@
  */
 package forge.gamemodes.match.input;
 
+import forge.card.mana.ManaAtom;
 import forge.game.Game;
+import forge.game.GameView;
 import forge.game.card.Card;
+import forge.game.card.CardView;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.game.player.actions.PassPriorityAction;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.YieldMode;
 import forge.localinstance.properties.ForgePreferences;
@@ -32,6 +37,7 @@ import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
 import forge.util.ThreadUtil;
+import forge.util.collect.FCollectionView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,8 +69,10 @@ public class InputPassPriority extends InputSyncronizedBase {
     @Override
     public final void showMessage() {
         // Check if experimental yield features are enabled and show smart suggestions
-        // Only show suggestions if not already yielding
-        if (isExperimentalYieldEnabled() && !isAlreadyYielding()) {
+        // Only show suggestions if not already yielding and yield didn't just end
+        // (suppresses suggestions immediately after a yield expires or is interrupted)
+        if (isExperimentalYieldEnabled() && !isAlreadyYielding()
+            && !getController().getGui().didYieldJustEnd(getOwner())) {
             ForgePreferences prefs = FModel.getPreferences();
             Localizer loc = Localizer.getInstance();
 
@@ -104,6 +112,16 @@ public class InputPassPriority extends InputSyncronizedBase {
     }
 
     private void showYieldSuggestionPrompt() {
+        // Double-check yield state right before showing - it may have been set
+        // between the initial check and now (e.g., async button click in multiplayer)
+        if (isAlreadyYielding()) {
+            pendingSuggestion = null;
+            pendingSuggestionType = null;
+            pendingSuggestionMessage = null;
+            showNormalPrompt();
+            return;
+        }
+
         Localizer loc = Localizer.getInstance();
         String fullMessage = pendingSuggestionMessage + "\n" + loc.getMessage("lblYieldSuggestionDeclineHint");
         showMessage(fullMessage);
@@ -208,16 +226,25 @@ public class InputPassPriority extends InputSyncronizedBase {
     private void passPriority(final Runnable runnable) {
         if (FModel.getPreferences().getPrefBoolean(FPref.UI_MANA_LOST_PROMPT)) {
             //if gui player has mana floating that will be lost if phase ended right now, prompt before passing priority
-            final Game game = getController().getGame();
-            if (game.getStack().isEmpty()) { //phase can't end right now if stack isn't empty
-                Player player = game.getPhaseHandler().getPriorityPlayer();
-                if (player != null && player.getManaPool().willManaBeLostAtEndOfPhase() && player.getLobbyPlayer() == GamePlayerUtil.getGuiPlayer()) {
+            GameView gv = getGameView();
+            PlayerView pv = getPlayerView();
+            if (gv != null && pv != null) {
+                FCollectionView<StackItemView> stack = gv.getStack();
+                if ((stack == null || stack.isEmpty()) &&
+                    pv.willLoseManaAtEndOfPhase() &&
+                    pv.isLobbyPlayer(GamePlayerUtil.getGuiPlayer())) {
                     //must invoke in game thread so dialog can be shown on mobile game
                     ThreadUtil.invokeInGameThread(() -> {
                         Localizer localizer = Localizer.getInstance();
                         String message = localizer.getMessage("lblYouHaveManaFloatingInYourManaPoolCouldBeLostIfPassPriority");
-                        if (player.getManaPool().hasBurn()) {
-                            message += " " + localizer.getMessage("lblYouWillTakeManaBurnDamageEqualAmountFloatingManaLostThisWay");
+                        // Note: hasBurn check still needs the transient Game access for now
+                        // This is acceptable as the mana burn message is just supplementary info
+                        final Game game = getController().getGame();
+                        if (game != null) {
+                            Player player = game.getPhaseHandler().getPriorityPlayer();
+                            if (player != null && player.getManaPool().hasBurn()) {
+                                message += " " + localizer.getMessage("lblYouWillTakeManaBurnDamageEqualAmountFloatingManaLostThisWay");
+                            }
                         }
                         if (getController().getGui().showConfirmDialog(message, localizer.getMessage("lblManaFloating"), localizer.getMessage("lblOK"), localizer.getMessage("lblCancel"))) {
                             runnable.run();
@@ -295,35 +322,69 @@ public class InputPassPriority extends InputSyncronizedBase {
         return FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS);
     }
 
+    private GameView getGameView() {
+        return getController().getGui().getGameView();
+    }
+
+    private PlayerView getPlayerView() {
+        return getController().getPlayer().getView();
+    }
+
     private YieldMode getDefaultYieldMode() {
-        return getController().getGame().getPlayers().size() >= 3
+        GameView gv = getGameView();
+        return gv != null && gv.getPlayers().size() >= 3
             ? YieldMode.UNTIL_YOUR_NEXT_TURN
             : YieldMode.UNTIL_END_OF_TURN;
     }
 
     private boolean shouldShowStackYieldPrompt() {
-        Game game = getController().getGame();
-        Player player = getController().getPlayer();
+        GameView gv = getGameView();
+        PlayerView pv = getPlayerView();
+        if (gv == null || pv == null) return false;
 
-        if (game.getStack().isEmpty()) {
+        FCollectionView<StackItemView> stack = gv.getStack();
+        if (stack == null || stack.isEmpty()) {
             return false;
         }
 
-        return !canRespondToStack(game, player);
+        // Use TrackableProperty - player has no available actions
+        return !pv.hasAvailableActions();
     }
 
-    private boolean canRespondToStack(Game game, Player player) {
-        // Check hand for playable spells (getAllPossibleAbilities already filters by timing)
-        for (Card card : player.getCardsIn(ZoneType.Hand)) {
-            if (!card.getAllPossibleAbilities(player, true).isEmpty()) {
-                return true;
-            }
+    private boolean shouldShowNoManaPrompt() {
+        GameView gv = getGameView();
+        PlayerView pv = getPlayerView();
+        if (gv == null || pv == null) return false;
+
+        FCollectionView<StackItemView> stack = gv.getStack();
+        if (stack != null && !stack.isEmpty()) {
+            return false;
         }
 
-        // Check battlefield for activatable abilities (excluding mana abilities)
-        for (Card card : player.getCardsIn(ZoneType.Battlefield)) {
-            for (SpellAbility sa : card.getAllPossibleAbilities(player, true)) {
-                if (!sa.isManaAbility()) {
+        PlayerView currentTurn = gv.getPlayerTurn();
+        if (currentTurn != null && currentTurn.equals(pv)) {
+            return false;
+        }
+
+        FCollectionView<CardView> hand = pv.getHand();
+        if (hand == null || hand.isEmpty()) {
+            return false;
+        }
+
+        return !hasManaAvailable(pv);
+    }
+
+    private boolean hasManaAvailable(PlayerView pv) {
+        // Check floating mana
+        for (byte manaType : ManaAtom.MANATYPES) {
+            if (pv.getMana(manaType) > 0) return true;
+        }
+
+        // Check for untapped lands (simplified check using view data)
+        FCollectionView<CardView> battlefield = pv.getBattlefield();
+        if (battlefield != null) {
+            for (CardView cv : battlefield) {
+                if (!cv.isTapped() && cv.getCurrentState().isLand()) {
                     return true;
                 }
             }
@@ -332,55 +393,22 @@ public class InputPassPriority extends InputSyncronizedBase {
         return false;
     }
 
-    private boolean shouldShowNoManaPrompt() {
-        Game game = getController().getGame();
-        Player player = getController().getPlayer();
-
-        if (!game.getStack().isEmpty()) {
-            return false;
-        }
-
-        if (game.getPhaseHandler().getPlayerTurn().equals(player)) {
-            return false;
-        }
-
-        if (player.getCardsIn(ZoneType.Hand).isEmpty()) {
-            return false;
-        }
-
-        return !hasManaAvailable(player);
-    }
-
-    private boolean hasManaAvailable(Player player) {
-        if (player.getManaPool().totalMana() > 0) {
-            return true;
-        }
-
-        for (Card card : player.getCardsIn(ZoneType.Battlefield)) {
-            if (card.isUntapped()) {
-                for (SpellAbility sa : card.getManaAbilities()) {
-                    if (sa.canPlay()) {
-                        return true;
-                    }
-                }
-            }
-        }
-
-        return false;
-    }
-
     private boolean shouldShowNoActionsPrompt() {
-        Player player = getController().getPlayer();
-        Game game = getController().getGame();
+        GameView gv = getGameView();
+        PlayerView pv = getPlayerView();
+        if (gv == null || pv == null) return false;
 
-        if (!game.getStack().isEmpty()) {
+        FCollectionView<StackItemView> stack = gv.getStack();
+        if (stack != null && !stack.isEmpty()) {
             return false;
         }
 
-        if (game.getPhaseHandler().getPlayerTurn().equals(player)) {
+        PlayerView currentTurn = gv.getPlayerTurn();
+        if (currentTurn != null && currentTurn.equals(pv)) {
             return false;
         }
 
-        return !canRespondToStack(game, player);
+        // Use TrackableProperty
+        return !pv.hasAvailableActions();
     }
 }

@@ -271,6 +271,8 @@ public interface IGuiGame {
 
     YieldMode getYieldMode(PlayerView player);
 
+    boolean didYieldJustEnd(PlayerView player);
+
     int getPlayerCount();
 
     // Smart suggestion decline tracking
