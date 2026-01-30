@@ -173,38 +173,41 @@ public class YieldController {
         playerYieldMode.put(player, mode);
         GameView gameView = callback.getGameView();
 
+        // Use network-safe GameView properties instead of gameView.getGame()
+        // This ensures proper operation for non-host players in multiplayer
+        if (gameView == null) {
+            return;
+        }
+
+        forge.game.phase.PhaseType phase = gameView.getPhase();
+        int currentTurn = gameView.getTurn();
+        PlayerView currentPlayerTurn = gameView.getPlayerTurn();
+
         // Track current phase for UNTIL_NEXT_PHASE mode
-        if (mode == YieldMode.UNTIL_NEXT_PHASE && gameView != null && gameView.getGame() != null) {
-            forge.game.phase.PhaseHandler ph = gameView.getGame().getPhaseHandler();
-            yieldNextPhaseStartPhase.put(player, ph.getPhase());
+        if (mode == YieldMode.UNTIL_NEXT_PHASE) {
+            yieldNextPhaseStartPhase.put(player, phase);
         }
         // Track turn number for UNTIL_END_OF_TURN mode
-        if (mode == YieldMode.UNTIL_END_OF_TURN && gameView != null && gameView.getGame() != null) {
-            yieldStartTurn.put(player, gameView.getGame().getPhaseHandler().getTurn());
+        if (mode == YieldMode.UNTIL_END_OF_TURN) {
+            yieldStartTurn.put(player, currentTurn);
         }
         // Track turn and phase state for UNTIL_BEFORE_COMBAT mode
-        if (mode == YieldMode.UNTIL_BEFORE_COMBAT && gameView != null && gameView.getGame() != null) {
-            forge.game.phase.PhaseHandler ph = gameView.getGame().getPhaseHandler();
-            yieldCombatStartTurn.put(player, ph.getTurn());
-            forge.game.phase.PhaseType phase = ph.getPhase();
+        if (mode == YieldMode.UNTIL_BEFORE_COMBAT) {
+            yieldCombatStartTurn.put(player, currentTurn);
             boolean atOrAfterCombat = phase != null &&
                 (phase == forge.game.phase.PhaseType.COMBAT_BEGIN || phase.isAfter(forge.game.phase.PhaseType.COMBAT_BEGIN));
             yieldCombatStartedAtOrAfterCombat.put(player, atOrAfterCombat);
         }
         // Track turn and phase state for UNTIL_END_STEP mode
-        if (mode == YieldMode.UNTIL_END_STEP && gameView != null && gameView.getGame() != null) {
-            forge.game.phase.PhaseHandler ph = gameView.getGame().getPhaseHandler();
-            yieldEndStepStartTurn.put(player, ph.getTurn());
-            forge.game.phase.PhaseType phase = ph.getPhase();
+        if (mode == YieldMode.UNTIL_END_STEP) {
+            yieldEndStepStartTurn.put(player, currentTurn);
             boolean atOrAfterEndStep = phase != null &&
                 (phase == forge.game.phase.PhaseType.END_OF_TURN || phase == forge.game.phase.PhaseType.CLEANUP);
             yieldEndStepStartedAtOrAfterEndStep.put(player, atOrAfterEndStep);
         }
         // Track if UNTIL_YOUR_NEXT_TURN was started during our turn
-        if (mode == YieldMode.UNTIL_YOUR_NEXT_TURN && gameView != null && gameView.getGame() != null) {
-            forge.game.phase.PhaseHandler ph = gameView.getGame().getPhaseHandler();
-            forge.game.player.Player playerObj = gameView.getGame().getPlayer(player);
-            boolean isOurTurn = ph.getPlayerTurn().equals(playerObj);
+        if (mode == YieldMode.UNTIL_YOUR_NEXT_TURN) {
+            boolean isOurTurn = currentPlayerTurn != null && currentPlayerTurn.equals(player);
             yieldYourTurnStartedDuringOurTurn.put(player, isOurTurn);
         }
     }
@@ -244,6 +247,7 @@ public class YieldController {
 
     /**
      * Check if auto-yield should be active for a player based on current game state.
+     * Uses network-safe GameView properties to work correctly for non-host players in multiplayer.
      */
     public boolean shouldAutoYieldForPlayer(PlayerView player) {
         player = TrackableTypes.PlayerViewType.lookup(player); // ensure we use the correct player instance
@@ -268,17 +272,18 @@ public class YieldController {
         }
 
         GameView gameView = callback.getGameView();
-        if (gameView == null || gameView.getGame() == null) {
+        if (gameView == null) {
             return false;
         }
 
-        forge.game.Game game = gameView.getGame();
-        forge.game.phase.PhaseHandler ph = game.getPhaseHandler();
+        // Use network-safe GameView properties instead of gameView.getGame()
+        forge.game.phase.PhaseType currentPhase = gameView.getPhase();
+        int currentTurn = gameView.getTurn();
+        PlayerView currentPlayerTurn = gameView.getPlayerTurn();
 
         return switch (mode) {
             case UNTIL_NEXT_PHASE -> {
                 forge.game.phase.PhaseType startPhase = yieldNextPhaseStartPhase.get(player);
-                forge.game.phase.PhaseType currentPhase = ph.getPhase();
                 if (startPhase == null) {
                     yieldNextPhaseStartPhase.put(player, currentPhase);
                     yield true;
@@ -290,7 +295,8 @@ public class YieldController {
                 yield true;
             }
             case UNTIL_STACK_CLEARS -> {
-                boolean stackEmpty = game.getStack().isEmpty() && !game.getStack().hasSimultaneousStackEntries();
+                // Use GameView.getStack() which is network-synchronized
+                boolean stackEmpty = gameView.getStack() == null || gameView.getStack().isEmpty();
                 if (stackEmpty) {
                     clearYieldMode(player);
                     yield false;
@@ -300,7 +306,6 @@ public class YieldController {
             case UNTIL_END_OF_TURN -> {
                 // Yield until end of the turn when yield was set - clear when turn number changes
                 Integer startTurn = yieldStartTurn.get(player);
-                int currentTurn = ph.getTurn();
                 if (startTurn == null) {
                     // Turn wasn't tracked when yield was set - track it now
                     yieldStartTurn.put(player, currentTurn);
@@ -313,9 +318,8 @@ public class YieldController {
                 yield true;
             }
             case UNTIL_YOUR_NEXT_TURN -> {
-                // Yield until our turn starts
-                forge.game.player.Player playerObj = game.getPlayer(player);
-                boolean isOurTurn = ph.getPlayerTurn().equals(playerObj);
+                // Yield until our turn starts - use PlayerView comparison (network-safe)
+                boolean isOurTurn = currentPlayerTurn != null && currentPlayerTurn.equals(player);
                 Boolean startedDuringOurTurn = yieldYourTurnStartedDuringOurTurn.get(player);
 
                 if (startedDuringOurTurn == null) {
@@ -342,16 +346,14 @@ public class YieldController {
                 yield true;
             }
             case UNTIL_BEFORE_COMBAT -> {
-                forge.game.phase.PhaseType phase = ph.getPhase();
                 Integer startTurn = yieldCombatStartTurn.get(player);
                 Boolean startedAtOrAfterCombat = yieldCombatStartedAtOrAfterCombat.get(player);
-                int currentTurn = ph.getTurn();
 
                 if (startTurn == null) {
                     // Tracking wasn't set - initialize it now
                     yieldCombatStartTurn.put(player, currentTurn);
-                    boolean atOrAfterCombat = phase != null &&
-                        (phase == forge.game.phase.PhaseType.COMBAT_BEGIN || phase.isAfter(forge.game.phase.PhaseType.COMBAT_BEGIN));
+                    boolean atOrAfterCombat = currentPhase != null &&
+                        (currentPhase == forge.game.phase.PhaseType.COMBAT_BEGIN || currentPhase.isAfter(forge.game.phase.PhaseType.COMBAT_BEGIN));
                     yieldCombatStartedAtOrAfterCombat.put(player, atOrAfterCombat);
                     startTurn = currentTurn;
                     startedAtOrAfterCombat = atOrAfterCombat;
@@ -359,8 +361,8 @@ public class YieldController {
 
                 // Check if we should stop: we're at or past combat on a DIFFERENT turn than when we started,
                 // OR we're at combat on the SAME turn but we started BEFORE combat
-                boolean atOrAfterCombatNow = phase != null &&
-                    (phase == forge.game.phase.PhaseType.COMBAT_BEGIN || phase.isAfter(forge.game.phase.PhaseType.COMBAT_BEGIN));
+                boolean atOrAfterCombatNow = currentPhase != null &&
+                    (currentPhase == forge.game.phase.PhaseType.COMBAT_BEGIN || currentPhase.isAfter(forge.game.phase.PhaseType.COMBAT_BEGIN));
 
                 if (atOrAfterCombatNow) {
                     boolean differentTurn = currentTurn > startTurn;
@@ -374,16 +376,14 @@ public class YieldController {
                 yield true;
             }
             case UNTIL_END_STEP -> {
-                forge.game.phase.PhaseType phase = ph.getPhase();
                 Integer startTurn = yieldEndStepStartTurn.get(player);
                 Boolean startedAtOrAfterEndStep = yieldEndStepStartedAtOrAfterEndStep.get(player);
-                int currentTurn = ph.getTurn();
 
                 if (startTurn == null) {
                     // Tracking wasn't set - initialize it now
                     yieldEndStepStartTurn.put(player, currentTurn);
-                    boolean atOrAfterEndStep = phase != null &&
-                        (phase == forge.game.phase.PhaseType.END_OF_TURN || phase == forge.game.phase.PhaseType.CLEANUP);
+                    boolean atOrAfterEndStep = currentPhase != null &&
+                        (currentPhase == forge.game.phase.PhaseType.END_OF_TURN || currentPhase == forge.game.phase.PhaseType.CLEANUP);
                     yieldEndStepStartedAtOrAfterEndStep.put(player, atOrAfterEndStep);
                     startTurn = currentTurn;
                     startedAtOrAfterEndStep = atOrAfterEndStep;
@@ -391,8 +391,8 @@ public class YieldController {
 
                 // Check if we should stop: we're at or past end step on a DIFFERENT turn than when we started,
                 // OR we're at end step on the SAME turn but we started BEFORE end step
-                boolean atOrAfterEndStepNow = phase != null &&
-                    (phase == forge.game.phase.PhaseType.END_OF_TURN || phase == forge.game.phase.PhaseType.CLEANUP);
+                boolean atOrAfterEndStepNow = currentPhase != null &&
+                    (currentPhase == forge.game.phase.PhaseType.END_OF_TURN || currentPhase == forge.game.phase.PhaseType.CLEANUP);
 
                 if (atOrAfterEndStepNow) {
                     boolean differentTurn = currentTurn > startTurn;
@@ -411,25 +411,23 @@ public class YieldController {
 
     /**
      * Check if yield should be interrupted based on game conditions.
+     * Uses network-safe GameView properties to work correctly for non-host players in multiplayer.
      */
     private boolean shouldInterruptYield(final PlayerView player) {
         GameView gameView = callback.getGameView();
-        if (gameView == null || gameView.getGame() == null) {
+        if (gameView == null) {
             return false;
         }
 
-        forge.game.Game game = gameView.getGame();
-        forge.game.player.Player p = game.getPlayer(player);
-        if (p == null) {
-            return false; // Can't determine player, don't interrupt
-        }
         ForgePreferences prefs = FModel.getPreferences();
-        forge.game.phase.PhaseType phase = game.getPhaseHandler().getPhase();
+        forge.game.phase.PhaseType phase = gameView.getPhase();
+        PlayerView currentPlayerTurn = gameView.getPlayerTurn();
+        forge.game.combat.CombatView combatView = gameView.getCombat();
 
         if (prefs.getPrefBoolean(ForgePreferences.FPref.YIELD_INTERRUPT_ON_ATTACKERS)) {
             // Only interrupt if there are creatures attacking THIS player or their planeswalkers/battles
             if (phase == forge.game.phase.PhaseType.COMBAT_DECLARE_ATTACKERS &&
-                game.getCombat() != null && isBeingAttacked(game, p)) {
+                combatView != null && isBeingAttacked(combatView, player)) {
                 return true;
             }
         }
@@ -437,24 +435,31 @@ public class YieldController {
         if (prefs.getPrefBoolean(ForgePreferences.FPref.YIELD_INTERRUPT_ON_BLOCKERS)) {
             // Only interrupt if there are creatures attacking THIS player or their planeswalkers/battles
             if (phase == forge.game.phase.PhaseType.COMBAT_DECLARE_BLOCKERS &&
-                game.getCombat() != null && isBeingAttacked(game, p)) {
+                combatView != null && isBeingAttacked(combatView, player)) {
                 return true;
             }
         }
 
         if (prefs.getPrefBoolean(ForgePreferences.FPref.YIELD_INTERRUPT_ON_TARGETING)) {
-            for (forge.game.spellability.StackItemView si : gameView.getStack()) {
-                if (targetsPlayerOrPermanents(si, p)) {
-                    return true;
+            forge.util.collect.FCollectionView<forge.game.spellability.StackItemView> stack = gameView.getStack();
+            if (stack != null) {
+                for (forge.game.spellability.StackItemView si : stack) {
+                    if (targetsPlayerOrPermanents(si, player)) {
+                        return true;
+                    }
                 }
             }
         }
 
         if (prefs.getPrefBoolean(ForgePreferences.FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL)) {
-            if (!game.getStack().isEmpty()) {
-                forge.game.spellability.SpellAbility topSa = game.getStack().peekAbility();
-                // Exclude triggered abilities - if they target you, the "targeting" setting handles that
-                if (topSa != null && !topSa.isTrigger() && !topSa.getActivatingPlayer().equals(p)) {
+            // Use network-safe stack access via GameView
+            forge.game.spellability.StackItemView topItem = gameView.peekStack();
+            if (topItem != null) {
+                PlayerView activatingPlayer = topItem.getActivatingPlayer();
+                boolean isOpponent = activatingPlayer != null && !activatingPlayer.equals(player);
+
+                // Interrupt for any opponent spell/ability that targets player or their permanents
+                if (isOpponent && targetsPlayerOrPermanents(topItem, player)) {
                     return true;
                 }
             }
@@ -464,14 +469,16 @@ public class YieldController {
             if (phase == forge.game.phase.PhaseType.COMBAT_BEGIN) {
                 YieldMode mode = playerYieldMode.get(player);
                 // Don't interrupt UNTIL_END_OF_TURN on our own turn
-                if (!(mode == YieldMode.UNTIL_END_OF_TURN && game.getPhaseHandler().getPlayerTurn().equals(p))) {
+                boolean isOurTurn = currentPlayerTurn != null && currentPlayerTurn.equals(player);
+                if (!(mode == YieldMode.UNTIL_END_OF_TURN && isOurTurn)) {
                     return true;
                 }
             }
         }
 
         if (prefs.getPrefBoolean(ForgePreferences.FPref.YIELD_INTERRUPT_ON_MASS_REMOVAL)) {
-            if (hasMassRemovalOnStack(game, p)) {
+            // Use network-safe StackItemView.getApiType() for mass removal detection
+            if (hasMassRemovalOnStack(gameView, player)) {
                 return true;
             }
         }
@@ -481,24 +488,29 @@ public class YieldController {
 
     /**
      * Check if the player is being attacked (directly or via planeswalkers/battles).
+     * Uses network-safe CombatView instead of Combat.
      */
-    private boolean isBeingAttacked(forge.game.Game game, forge.game.player.Player p) {
-        forge.game.combat.Combat combat = game.getCombat();
-        if (combat == null) {
+    private boolean isBeingAttacked(forge.game.combat.CombatView combatView, PlayerView player) {
+        if (combatView == null) {
             return false;
         }
 
-        // Check if player is being attacked directly
-        if (!combat.getAttackersOf(p).isEmpty()) {
+        // Check if player is being attacked directly (player as defender)
+        forge.util.collect.FCollection<CardView> attackersOfPlayer = combatView.getAttackersOf(player);
+        if (attackersOfPlayer != null && !attackersOfPlayer.isEmpty()) {
             return true;
         }
 
         // Check if any planeswalkers or battles controlled by the player are being attacked
-        for (forge.game.GameEntity defender : combat.getDefenders()) {
-            if (defender instanceof forge.game.card.Card) {
-                forge.game.card.Card card = (forge.game.card.Card) defender;
-                if (card.getController().equals(p) && !combat.getAttackersOf(defender).isEmpty()) {
-                    return true;
+        for (forge.game.GameEntityView defender : combatView.getDefenders()) {
+            if (defender instanceof CardView) {
+                CardView cardDefender = (CardView) defender;
+                PlayerView controller = cardDefender.getController();
+                if (controller != null && controller.equals(player)) {
+                    forge.util.collect.FCollection<CardView> attackers = combatView.getAttackersOf(defender);
+                    if (attackers != null && !attackers.isEmpty()) {
+                        return true;
+                    }
                 }
             }
         }
@@ -510,23 +522,28 @@ public class YieldController {
      * Check if a stack item targets the player or their permanents.
      * Recursively checks sub-instances to handle abilities with targeting in sub-abilities
      * (e.g., Oona, Queen of the Fae whose targeting is in a sub-ability).
+     * Uses network-safe PlayerView comparisons.
      */
-    private boolean targetsPlayerOrPermanents(forge.game.spellability.StackItemView si, forge.game.player.Player p) {
-        PlayerView pv = p.getView();
-
-        for (PlayerView target : si.getTargetPlayers()) {
-            if (target.equals(pv)) return true;
+    private boolean targetsPlayerOrPermanents(forge.game.spellability.StackItemView si, PlayerView player) {
+        forge.util.collect.FCollectionView<PlayerView> targetPlayers = si.getTargetPlayers();
+        if (targetPlayers != null) {
+            for (PlayerView target : targetPlayers) {
+                if (target.equals(player)) return true;
+            }
         }
 
-        for (CardView target : si.getTargetCards()) {
-            if (target.getController() != null && target.getController().equals(pv)) {
-                return true;
+        forge.util.collect.FCollectionView<CardView> targetCards = si.getTargetCards();
+        if (targetCards != null) {
+            for (CardView target : targetCards) {
+                if (target.getController() != null && target.getController().equals(player)) {
+                    return true;
+                }
             }
         }
 
         // Recursively check sub-instances for targeting (handles abilities like Oona)
         forge.game.spellability.StackItemView subInstance = si.getSubInstance();
-        if (subInstance != null && targetsPlayerOrPermanents(subInstance, p)) {
+        if (subInstance != null && targetsPlayerOrPermanents(subInstance, player)) {
             return true;
         }
 
@@ -535,24 +552,25 @@ public class YieldController {
 
     /**
      * Check if there's a mass removal spell on the stack that could affect the player's permanents.
-     * Only interrupts if the spell was cast by an opponent AND the player has permanents that match.
+     * Uses network-safe StackItemView.getApiType() for detection.
+     * Only interrupts if the spell was cast by an opponent.
      */
-    private boolean hasMassRemovalOnStack(forge.game.Game game, forge.game.player.Player p) {
-        if (game.getStack().isEmpty()) {
+    private boolean hasMassRemovalOnStack(GameView gameView, PlayerView player) {
+        forge.util.collect.FCollectionView<forge.game.spellability.StackItemView> stack = gameView.getStack();
+        if (stack == null || stack.isEmpty()) {
             return false;
         }
 
-        for (forge.game.spellability.SpellAbilityStackInstance si : game.getStack()) {
-            forge.game.spellability.SpellAbility sa = si.getSpellAbility();
-            if (sa == null) continue;
+        for (forge.game.spellability.StackItemView si : stack) {
+            PlayerView activatingPlayer = si.getActivatingPlayer();
 
             // Only interrupt for opponent's spells
-            if (sa.getActivatingPlayer() == null || sa.getActivatingPlayer().equals(p)) {
+            if (activatingPlayer == null || activatingPlayer.equals(player)) {
                 continue;
             }
 
-            // Check if this is a mass removal spell type
-            if (isMassRemovalSpell(sa, game, p)) {
+            // Check if this is a mass removal spell type (including sub-instances)
+            if (isMassRemovalStackItem(si)) {
                 return true;
             }
         }
@@ -560,97 +578,40 @@ public class YieldController {
     }
 
     /**
-     * Determine if a spell ability is a mass removal effect that could affect the player.
+     * Determine if a stack item is a mass removal effect.
+     * Recursively checks sub-instances for modal spells like Farewell.
      */
-    private boolean isMassRemovalSpell(forge.game.spellability.SpellAbility sa, forge.game.Game game, forge.game.player.Player p) {
-        forge.game.ability.ApiType api = sa.getApi();
-        if (api == null) {
-            return false;
-        }
-
-        // Check the main ability and all sub-abilities (for modal spells like Farewell)
-        forge.game.spellability.SpellAbility current = sa;
-        while (current != null) {
-            if (checkSingleAbilityForMassRemoval(current, game, p)) {
-                return true;
-            }
-            current = current.getSubAbility();
-        }
-
-        return false;
-    }
-
-    /**
-     * Check if a single ability (not including sub-abilities) is mass removal affecting the player.
-     */
-    private boolean checkSingleAbilityForMassRemoval(forge.game.spellability.SpellAbility sa, forge.game.Game game, forge.game.player.Player p) {
-        forge.game.ability.ApiType api = sa.getApi();
-        if (api == null) {
-            return false;
-        }
-
-        String apiName = api.name();
-
-        // DestroyAll - Wrath of God, Day of Judgment, Damnation
-        if ("DestroyAll".equals(apiName)) {
-            return playerHasMatchingPermanents(sa, game, p, "ValidCards");
-        }
-
-        // ChangeZoneAll with Destination=Exile or Graveyard - Farewell, Merciless Eviction
-        if ("ChangeZoneAll".equals(apiName)) {
-            String destination = sa.getParam("Destination");
-            if ("Exile".equals(destination) || "Graveyard".equals(destination)) {
-                // Check Origin - only care about Battlefield
-                String origin = sa.getParam("Origin");
-                if (origin != null && origin.contains("Battlefield")) {
-                    return playerHasMatchingPermanents(sa, game, p, "ChangeType");
-                }
-            }
-        }
-
-        // DamageAll - Blasphemous Act, Chain Reaction
-        if ("DamageAll".equals(apiName)) {
-            return playerHasMatchingPermanents(sa, game, p, "ValidCards");
-        }
-
-        // SacrificeAll - All Is Dust, Bane of Progress
-        if ("SacrificeAll".equals(apiName)) {
-            return playerHasMatchingPermanents(sa, game, p, "ValidCards");
-        }
-
-        return false;
-    }
-
-    /**
-     * Check if the player has any permanents that match the spell's filter parameter.
-     */
-    private boolean playerHasMatchingPermanents(forge.game.spellability.SpellAbility sa, forge.game.Game game, forge.game.player.Player p, String filterParam) {
-        String validFilter = sa.getParam(filterParam);
-
-        // Get all permanents controlled by the player
-        forge.game.card.CardCollectionView playerPermanents = p.getCardsIn(forge.game.zone.ZoneType.Battlefield);
-        if (playerPermanents.isEmpty()) {
-            return false;  // No permanents = no reason to interrupt
-        }
-
-        // If no filter specified, assume it affects all permanents
-        if (validFilter == null || validFilter.isEmpty()) {
+    private boolean isMassRemovalStackItem(forge.game.spellability.StackItemView si) {
+        // Check the main ability
+        if (isMassRemovalApiType(si.getApiType())) {
             return true;
         }
 
-        // Check if any of the player's permanents match the filter
-        for (forge.game.card.Card card : playerPermanents) {
-            try {
-                if (card.isValid(validFilter.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
-                    return true;
-                }
-            } catch (Exception e) {
-                // If validation fails, be conservative and assume it might affect us
-                return true;
-            }
+        // Check sub-instances for modal spells like Farewell
+        forge.game.spellability.StackItemView subInstance = si.getSubInstance();
+        if (subInstance != null && isMassRemovalStackItem(subInstance)) {
+            return true;
         }
 
         return false;
+    }
+
+    /**
+     * Check if an API type name represents a mass removal effect.
+     */
+    private boolean isMassRemovalApiType(String apiType) {
+        if (apiType == null) {
+            return false;
+        }
+
+        // DestroyAll - Wrath of God, Day of Judgment, Damnation
+        // DamageAll - Blasphemous Act, Chain Reaction
+        // SacrificeAll - All Is Dust, Bane of Progress
+        // ChangeZoneAll - Farewell, Merciless Eviction (covers exile/bounce effects)
+        return "DestroyAll".equals(apiType) ||
+               "DamageAll".equals(apiType) ||
+               "SacrificeAll".equals(apiType) ||
+               "ChangeZoneAll".equals(apiType);
     }
 
     /**
@@ -662,23 +623,27 @@ public class YieldController {
 
     /**
      * Get the total number of players in the game.
+     * Uses network-safe GameView.getPlayers() instead of Game.getPlayers().
      */
     public int getPlayerCount() {
         GameView gameView = callback.getGameView();
-        return gameView != null && gameView.getGame() != null
-            ? gameView.getGame().getPlayers().size()
-            : 0;
+        if (gameView == null) {
+            return 0;
+        }
+        forge.util.collect.FCollectionView<PlayerView> players = gameView.getPlayers();
+        return players != null ? players.size() : 0;
     }
 
     /**
      * Mark a suggestion as declined for the current turn.
+     * Uses network-safe GameView.getTurn() instead of Game.getPhaseHandler().getTurn().
      */
     public void declineSuggestion(PlayerView player, String suggestionType) {
         player = TrackableTypes.PlayerViewType.lookup(player); // ensure we use the correct player instance
         GameView gameView = callback.getGameView();
-        if (gameView == null || gameView.getGame() == null) return;
+        if (gameView == null) return;
 
-        int currentTurn = gameView.getGame().getPhaseHandler().getTurn();
+        int currentTurn = gameView.getTurn();
         Integer storedTurn = declinedSuggestionsTurn.get(player);
 
         // Reset if turn changed
@@ -692,13 +657,14 @@ public class YieldController {
 
     /**
      * Check if a suggestion has been declined for the current turn.
+     * Uses network-safe GameView.getTurn() instead of Game.getPhaseHandler().getTurn().
      */
     public boolean isSuggestionDeclined(PlayerView player, String suggestionType) {
         player = TrackableTypes.PlayerViewType.lookup(player); // ensure we use the correct player instance
         GameView gameView = callback.getGameView();
-        if (gameView == null || gameView.getGame() == null) return false;
+        if (gameView == null) return false;
 
-        int currentTurn = gameView.getGame().getPhaseHandler().getTurn();
+        int currentTurn = gameView.getTurn();
         Integer storedTurn = declinedSuggestionsTurn.get(player);
 
         if (storedTurn == null || storedTurn != currentTurn) {

@@ -275,6 +275,7 @@ public enum TrackableProperty {
     Ability(TrackableTypes.BooleanType),
     OptionalTrigger(TrackableTypes.BooleanType),
     OptionalCosts(TrackableTypes.StringType),
+    ApiType(TrackableTypes.StringType),
 
     //Combat
     AttackersWithDefenders(TrackableTypes.GenericMapType, FreezeMode.IgnoresFreeze),
