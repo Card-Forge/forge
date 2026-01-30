@@ -10,6 +10,8 @@ By default `Affected-/EffectZone` are both Battlefield.
 Here's an example for layer 7c:  
 `Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures you control get +1/+1.`
 
+Sometimes, the value for P/T can be relative to the affected card - e.g. **Bruenor Battlehammer**. This distinction is signaled to the engine by using an SVar name that's prefixed with "Affected".
+
 `CharacteristicDefining$ True`
 
 See [StaticAbility.generateLayer()](https://github.com/Card-Forge/forge/blob/master/forge-game/src/main/java/forge/game/staticability/StaticAbility.java) for the full list of params on each Layer.

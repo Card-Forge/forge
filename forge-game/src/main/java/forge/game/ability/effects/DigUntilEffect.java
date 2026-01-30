@@ -157,16 +157,20 @@ public class DigUntilEffect extends SpellAbilityEffect {
             CardCollection found = new CardCollection();
             CardCollection revealed = new CardCollection();
             CardCollection moved = new CardCollection();
+            Integer restCMC = totalCMC;
 
             final PlayerZone library = p.getZone(digSite);
-            final int maxToDig = maxRevealed != null ? maxRevealed : library.size();
+            int maxToDig = library.size();
+            if (maxRevealed != null) {
+                maxToDig = Math.min(maxRevealed, maxToDig);
+            }
 
             for (int i = 0; i < maxToDig; i++) {
                 final Card c = library.get(i);
                 revealed.add(c);
-                if (totalCMC != null) {
-                    totalCMC -= c.getCMC();
-                    if (totalCMC <= 0) {
+                if (restCMC != null) {
+                    restCMC -= c.getCMC();
+                    if (restCMC <= 0) {
                         break;
                     }
                 } else if (c.isValid(type, sa.getActivatingPlayer(), host, sa)) {

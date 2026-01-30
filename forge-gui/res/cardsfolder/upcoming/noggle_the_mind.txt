@@ -1,8 +1,0 @@
-Name:Noggle the Mind
-ManaCost:2 U
-Types:Enchantment Aura
-K:Flash
-K:Enchant:Creature
-SVar:AttachAILogic:Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | RemoveAllAbilities$ True | SetColor$ Colorless | AddType$ Noggle | RemoveCreatureTypes$ True | SetPower$ 1 | SetToughness$ 1 | Description$ Enchanted creature loses all abilities and is a colorless Noggle with base power and toughness 1/1. (It loses all colors and all other creature types.)
-Oracle:Flash\nEnchant creature\nEnchanted creature loses all abilities and is a colorless Noggle with base power and toughness 1/1. (It loses all colors and all other creature types.)

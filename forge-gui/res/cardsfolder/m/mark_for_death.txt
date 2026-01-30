@@ -1,7 +1,7 @@
 Name:Mark for Death
 ManaCost:3 R
 Types:Sorcery
-A:SP$ Effect | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | IsCurse$ True | RememberObjects$ Targeted,TargetedController | StaticAbilities$ MustBlock,KWPump | SubAbility$ DBUntap | StackDescription$ {c:Targeted} blocks this turn if able. | SpellDescription$ Target creature an opponent controls blocks this turn if able.
+A:SP$ Effect | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | IsCurse$ True | RememberObjects$ Targeted & TargetedController | StaticAbilities$ MustBlock,KWPump | SubAbility$ DBUntap | StackDescription$ {c:Targeted} blocks this turn if able. | SpellDescription$ Target creature an opponent controls blocks this turn if able.
 SVar:MustBlock:Mode$ MustBlock | ValidCreature$ Card.IsRemembered | Description$ This creature blocks this turn if able.
 SVar:KWPump:Mode$ Continuous | AffectedZone$ Battlefield | Affected$ Creature.IsNotRemembered+RememberedPlayerCtrl | AddHiddenKeyword$ CARDNAME can't block. | Description$ Other creatures that player controls can't block this turn.
 SVar:DBUntap:DB$ Untap | Defined$ Targeted | SubAbility$ DBDesc | SpellDescription$ Untap that creature.

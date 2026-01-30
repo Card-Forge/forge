@@ -20816,7 +20816,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Ring of Ma'r\u00fbf"
+        "itemName": "Djinn's Silks"
       }
     ],
     "questTags": [
@@ -24341,6 +24341,11 @@
         "probability": 1,
         "count": 1,
         "cardName": "Toxin Sliver|LGN"
+      },
+      {
+        "type": "life",
+        "probability": 1,
+        "count": 1
       }
     ],
     "colors": "BGRUW",
@@ -34708,7 +34713,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 0.3,
+    "spawnRate": 0,
     "difficulty": 0.8,
     "speed": 20,
     "life": 40,
@@ -34758,6 +34763,12 @@
         "probability": 1,
         "count": 1,
         "cardName": "Armageddon|LEA"
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Windwalker's Blessing"
       }
     ],
     "colors": "W",
@@ -34852,7 +34863,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 0.3,
+    "spawnRate": 0,
     "difficulty": 0.8,
     "speed": 20,
     "life": 40,
@@ -34896,6 +34907,12 @@
         "probability": 1,
         "count": 1,
         "cardName": "Psionic Blast|LEA"
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Windwalker's Blessing"
       }
     ],
     "colors": "U",
@@ -34990,7 +35007,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 0.3,
+    "spawnRate": 0,
     "difficulty": 0.8,
     "speed": 20,
     "life": 40,
@@ -35034,6 +35051,12 @@
         "probability": 1,
         "count": 1,
         "cardName": "Mind Twist|LEA"
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Windwalker's Blessing"
       }
     ],
     "colors": "B",
@@ -35128,7 +35151,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 0.3,
+    "spawnRate": 0,
     "difficulty": 0.8,
     "speed": 20,
     "life": 40,
@@ -35178,6 +35201,12 @@
         "probability": 1,
         "count": 1,
         "cardName": "Nalathni Dragon|DRC94"
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Windwalker's Blessing"
       }
     ],
     "colors": "R",
@@ -35272,7 +35301,7 @@
     ],
     "ai": "",
     "boss": true,
-    "spawnRate": 0.3,
+    "spawnRate": 0,
     "difficulty": 0.8,
     "speed": 20,
     "life": 40,
@@ -35322,6 +35351,12 @@
         "probability": 1,
         "count": 1,
         "cardName": "Birds of Paradise|LEA"
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Windwalker's Blessing"
       }
     ],
     "colors": "G",
@@ -37292,7 +37327,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Christmas Gift"
+        "itemName": "Santa's Hat"
       },
       {
         "type": "card",

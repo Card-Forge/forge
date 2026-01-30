@@ -1,0 +1,41 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=The Flames of Rath
+Description=The Flames of Rath deck harnesses the power of fire and fury. With Furnace of Rath doubling all damage, burn your opponents to cinders.
+Deck Type=constructed
+Set=TMP
+Image=the_flames_of_rath.jpg
+[main]
+2 Plains|TMP|1
+2 Plains|TMP|2
+1 Plains|TMP|3
+7 Mountain|TMP|1
+6 Mountain|TMP|2
+6 Mountain|TMP|3
+1 Maze of Shadows|TMP
+1 Coiled Tinviper|TMP
+1 Firefly|TMP
+3 Fireslinger|TMP
+1 Flowstone Giant|TMP
+1 Flowstone Salamander|TMP
+2 Lightning Elemental|TMP
+1 Magmasaur|TMP
+4 Mogg Fanatic|TMP
+1 Sandstone Warrior|TMP
+1 Soltari Guerrillas|TMP
+2 Wild Wurm|TMP
+1 Furnace of Rath|TMP
+1 Goblin Bombardment|TMP
+1 Tahngarth's Rage|TMP
+1 Blood Frenzy|TMP
+2 Disenchant|TMP
+4 Kindle|TMP
+3 Lightning Blast|TMP
+1 Searing Touch|TMP
+2 Rolling Thunder|TMP
+1 Squee's Toy|TMP
+[sideboard]

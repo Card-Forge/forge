@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Avatar: The Last Airbender #05
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2026/01/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Dollmaker's Shop // Porcelain Gallery;On the Job;Feather of Flight;Jeong Jeong's Deserters
+p0battlefield=The Legend of Yangchen|Transformed;Suki, Courageous Rescuer;Skyknight Squire|Counters:P1P1=2;Plains;Plains;Plains;Plains;Plains;Plains;T:w_1_1_ally;T:w_1_1_ally
+p1life=24
+p1battlefield=High Fae Negotiator;Deceit

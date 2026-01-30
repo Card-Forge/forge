@@ -1,0 +1,8 @@
+Name:Groundchuck & Dirtbag
+ManaCost:4 G G
+Types:Legendary Creature Ox Mole Mutant
+PT:8/8
+K:Trample
+T:Mode$ TapsForMana | ValidCard$ Land | Activator$ You | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever you tap a land for mana, add {G}.
+SVar:TrigMana:DB$ Mana | Produced$ G | Amount$ 1 | Defined$ You
+Oracle:Trample\nWhenever you tap a land for mana, add {G}.

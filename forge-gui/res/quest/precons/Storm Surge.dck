@@ -1,0 +1,45 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Storm Surge
+Description=Storm Surge rides the wave of spells. Blue-white storm with protective magic.
+Deck Type=constructed
+Set=SCG
+Image=storm_surge.jpg
+[main]
+5 Plains|ONS|1
+5 Plains|ONS|2
+4 Plains|ONS|3
+2 Island|ONS|1
+2 Island|ONS|2
+2 Island|ONS|3
+2 Lonely Sandbar|ONS
+2 Secluded Steppe|ONS
+1 Ageless Sentinels|SCG
+2 Aven Farseer|SCG
+2 Aven Liberator|SCG
+1 Coast Watcher|SCG
+1 Daru Mender|LGN
+1 Deftblade Elite|LGN
+1 Echo Tracer|LGN
+3 Frontline Strategist|SCG
+1 Noble Templar|SCG
+1 Shoreline Ranger|SCG
+2 Silver Knight|SCG
+1 Whipcorder|ONS
+1 White Knight|LEA
+1 Willbender|LGN
+2 Zealous Inquisitor|SCG
+3 Astral Steel|SCG
+1 Chain of Vapor|ONS
+2 Hindering Touch|SCG
+1 Rain of Blades|SCG
+2 Reward the Faithful|SCG
+1 Spy Network|ONS
+3 Wing Shards|SCG
+1 Mind's Desire|SCG
+1 Temporal Fissure|SCG
+[sideboard]

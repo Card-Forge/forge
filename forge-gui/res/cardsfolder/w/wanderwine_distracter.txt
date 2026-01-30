@@ -1,0 +1,7 @@
+Name:Wanderwine Distracter
+ManaCost:3 U
+Types:Creature Merfolk Wizard
+PT:4/3
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever this creature becomes tapped, target creature an opponent controls gets -3/-0 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -3 | IsCurse$ True
+Oracle:Whenever this creature becomes tapped, target creature an opponent controls gets -3/-0 until end of turn.

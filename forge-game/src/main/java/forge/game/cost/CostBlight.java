@@ -7,6 +7,10 @@ public class CostBlight extends CostPutCounter {
         super(counters, CounterEnumType.M1M1, "Creature.YouCtrl", "a creature you control");
     }
 
+    public String toString() {
+        return "Blight " + getAmount();
+    }
+
     @Override
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);

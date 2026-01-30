@@ -1313,8 +1313,7 @@ public class CardFactoryUtil {
             sbUnExiled.append("ValidCard$ Card.Self | Static$ True | Secondary$ True | ");
             sbUnExiled.append("TriggerDescription$ Blank");
 
-            final Trigger haunterUnExiled = TriggerHandler.parseTrigger(sbUnExiled.toString(), card,
-                    intrinsic);
+            final Trigger haunterUnExiled = TriggerHandler.parseTrigger(sbUnExiled.toString(), card, intrinsic);
 
             final SpellAbility unhaunt = AbilityFactory.getAbility("DB$ Haunt", card);
 
@@ -1328,8 +1327,7 @@ public class CardFactoryUtil {
             sbHauntRemoved.append("ValidCard$ Creature.HauntedBy | Static$ True | Secondary$ True | ");
             sbHauntRemoved.append("TriggerDescription$ Blank");
 
-            final Trigger trigHauntRemoved = TriggerHandler.parseTrigger(sbHauntRemoved.toString(), card,
-                    intrinsic);
+            final Trigger trigHauntRemoved = TriggerHandler.parseTrigger(sbHauntRemoved.toString(), card, intrinsic);
             trigHauntRemoved.setOverridingAbility(unhaunt);
 
             triggers.add(trigHauntRemoved);
@@ -1363,7 +1361,6 @@ public class CardFactoryUtil {
             haunterDies.setOverridingAbility(hauntDiesAbility);
 
             triggers.add(haunterDies);
-
             triggers.add(hauntedDies);
 
             for (final Trigger trigger : triggers) {
@@ -3610,7 +3607,7 @@ public class CardFactoryUtil {
             final AbilitySub repeatSub = (AbilitySub) AbilityFactory.getAbility(repeatStr, card);
             sa.setSubAbility(repeatSub);
 
-            final String effectStr = "DB$ Effect | RememberObjects$ Imprinted,ImprintedRemembered | ExileOnMoved$ Battlefield | StaticAbilities$ AttackChosen";
+            final String effectStr = "DB$ Effect | RememberObjects$ Imprinted & ImprintedRemembered | ExileOnMoved$ Battlefield | StaticAbilities$ AttackChosen";
             final AbilitySub effectSub = (AbilitySub) AbilityFactory.getAbility(effectStr, card);
             repeatSub.setAdditionalAbility("RepeatSubAbility", effectSub);
 
@@ -3850,27 +3847,14 @@ public class CardFactoryUtil {
             SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
-        } else if (keyword.startsWith("TypeCycling")) {
-            final String[] k = keyword.split(":");
-            final String type = k[1];
-            final String manacost = k[2];
-
+        } else if (keyword.startsWith("TypeCycling") && inst instanceof KeywordWithCostAndType typeCycling) {
             StringBuilder sb = new StringBuilder();
-            sb.append("AB$ ChangeZone | Cost$ ").append(manacost);
+            sb.append("AB$ ChangeZone | Cost$ ").append(typeCycling.getCostString());
 
-            String desc = type;
-            if (type.equals("Basic")) {
-                desc = "Basic land";
-            } else if (type.equals("Land.Artifact")) {
-                desc = "Artifact land";
-            } else if (type.startsWith("Card.with")) {
-                desc = type.substring(9);
-            }
-
-            sb.append(" Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ ").append(desc).append("cycling ");
-            sb.append(" | CostDesc$ ").append(ManaCostParser.parse(manacost));
-            sb.append("| Origin$ Library | Destination$ Hand |");
-            sb.append("ChangeType$ ").append(type);
+            sb.append(" Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ ").append(typeCycling.getTitleWithoutCost());
+            sb.append(" | CostDesc$ ").append(typeCycling.getCost().toSimpleString());
+            sb.append(" | Origin$ Library | Destination$ Hand");
+            sb.append(" | ChangeType$ ").append(typeCycling.getValidType());
             sb.append(" | SpellDescription$ (").append(inst.getReminderText()).append(")");
 
             SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);

@@ -1,0 +1,15 @@
+[metadata]
+Code=YECL
+Date=2026-02-03
+Name=Alchemy: Lorwyn Eclipsed
+Type=Online
+ScryfallCode=YECL
+
+[cards]
+0 M Aquatic Subtlety @Margaret Organ-Kean
+0 M Infestation @John Tedrick
+0 M Limitless Rekindling @Tiffany Turrill
+0 R Pep, Raucous Raider @Heather Hudson
+0 M Providence of Night @Justin Gerard
+0 R The Grand Goatnapper @Edgar Sánchez Hidalgo
+0 R Thorna and Twigtooth @Pete Venters
