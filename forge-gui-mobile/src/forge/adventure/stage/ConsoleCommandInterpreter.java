@@ -29,7 +29,9 @@ import forge.util.Aggregates;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.function.Function;
 import java.util.regex.Matcher;
@@ -338,10 +340,28 @@ public class ConsoleCommandInterpreter {
             System.out.println("POI Names - Types\n" + String.join("\n", poiNames));
             return "POI lists dumped to stdout.";
         });
-        registerCommand(new String[]{"reveal", "caves", "dungeons"}, s -> {
+        registerCommand(new String[]{"reveal"}, s -> {
             WorldSave save = WorldSave.getCurrentSave();
             if (save == null || save.getWorld() == null) {
                 return "No world loaded.";
+            }
+            if (s.length < 1) {
+                return "Please specify at least one PointOfInterest type (e.g. \"reveal cave\", \"reveal dungeon\", \"reveal city\", \"reveal capital\").";
+            }
+            HashSet<String> types = new HashSet<>();
+            for (String type : s) {
+                String normalized = type.toLowerCase();
+                if (normalized.endsWith("ies")) {
+                    normalized = normalized.substring(0, normalized.length() - 3) + "y";
+                } else if (normalized.endsWith("s") && normalized.length() > 1) {
+                    normalized = normalized.substring(0, normalized.length() - 1);
+                }
+                if (!normalized.isEmpty()) {
+                    types.add(normalized);
+                }
+            }
+            if (types.isEmpty()) {
+                return "Please specify at least one PointOfInterest type (e.g. \"reveal cave\", \"reveal dungeon\", \"reveal city\", \"reveal capital\").";
             }
             int revealed = 0;
             for (PointOfInterest poi : save.getWorld().getAllPointOfInterest()) {
@@ -349,7 +369,7 @@ public class ConsoleCommandInterpreter {
                 if (data == null || data.type == null) {
                     continue;
                 }
-                if (!"cave".equalsIgnoreCase(data.type) && !"dungeon".equalsIgnoreCase(data.type)) {
+                if (!types.contains(data.type.toLowerCase())) {
                     continue;
                 }
                 if (!save.getPointOfInterestChanges(poi.getID()).isVisited()) {
@@ -357,7 +377,9 @@ public class ConsoleCommandInterpreter {
                     revealed++;
                 }
             }
-            return "Revealed " + revealed + " cave/dungeon names on the map.";
+            ArrayList<String> sortedTypes = new ArrayList<>(types);
+            Collections.sort(sortedTypes);
+            return "Revealed " + revealed + " " + String.join("/", sortedTypes) + " names on the map.";
         });
         registerCommand(new String[]{"setColorID"}, s -> {
             if (s.length < 1)
