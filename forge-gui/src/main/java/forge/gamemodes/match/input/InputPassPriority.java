@@ -28,6 +28,7 @@ import forge.game.player.actions.PassPriorityAction;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.StackItemView;
 import forge.gamemodes.match.YieldMode;
+import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
@@ -318,6 +319,10 @@ public class InputPassPriority extends InputSyncronizedBase {
     // Smart yield suggestion helper methods
 
     private boolean isExperimentalYieldEnabled() {
+        // Smart suggestions are desktop-only (mobile GUI doesn't support yield panel)
+        if (GuiBase.getInterface().isLibgdxPort()) {
+            return false;
+        }
         return FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS);
     }
 
