@@ -65,6 +65,14 @@ public class CYield implements ICDoc {
         return view;
     }
 
+    /**
+     * Returns true if this is a multiplayer game (3+ players).
+     * Used by VYield to adjust layout for the "Your Turn" button.
+     */
+    public boolean isMultiplayer() {
+        return isMultiplayer;
+    }
+
     @Override
     public void register() {
     }

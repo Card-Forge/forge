@@ -144,10 +144,15 @@ public class VYield implements IVDoc<CYield> {
         container.add(btnCombat, buttonConstraints);
         container.add(btnEndStep, buttonConstraints);
 
-        // Row 2: End Turn, Your Turn, Clear Stack
+        // Row 2: End Turn, [Your Turn if multiplayer], Clear Stack
         container.add(btnEndTurn, buttonConstraints);
-        container.add(btnYourTurn, buttonConstraints);
-        container.add(btnClearStack, buttonConstraints);
+        if (controller.isMultiplayer()) {
+            container.add(btnYourTurn, buttonConstraints);
+            container.add(btnClearStack, buttonConstraints);
+        } else {
+            // In 2-player games, Clear Stack moves to middle position
+            container.add(btnClearStack, buttonConstraints);
+        }
     }
 
     @Override

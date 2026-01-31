@@ -78,11 +78,15 @@ public class VMatchUI implements IVTopLevelUI {
                     parent.setSelected(parent.getDocs().get(0));
                 }
             }
-        } else if (vYield.getParentCell() == null) {
-            // Yield enabled but not in layout - add to stack cell by default
-            final DragCell stackCell = EDocID.REPORT_STACK.getDoc().getParentCell();
-            if (stackCell != null) {
-                stackCell.addDoc(vYield);
+        } else if (vYield.getParentCell() == null ||
+                   !FView.SINGLETON_INSTANCE.getDragCells().contains(vYield.getParentCell())) {
+            // Yield enabled but not in any cell or has stale reference - add to prompt cell by default
+            DragCell promptCell = EDocID.REPORT_MESSAGE.getDoc().getParentCell();
+            if (promptCell == null) {
+                promptCell = EDocID.REPORT_LOG.getDoc().getParentCell();
+            }
+            if (promptCell != null) {
+                promptCell.addDoc(vYield);
             }
         }
 

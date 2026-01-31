@@ -78,6 +78,11 @@ public final class SLayoutIO {
             FThreads.invokeInEdtLater(() -> {
                 SLayoutIO.loadLayout(loadFile);
                 SLayoutIO.saveLayout(null);
+                // Repopulate the current screen to handle dynamic panels (yield, dev mode, etc.)
+                FScreen currentScreen = Singletons.getControl().getCurrentScreen();
+                if (currentScreen != null) {
+                    currentScreen.getView().populate();
+                }
                 SOverlayUtils.hideOverlay();
             });
         }
@@ -89,6 +94,11 @@ public final class SLayoutIO {
 
         FThreads.invokeInEdtLater(() -> {
             SLayoutIO.loadLayout(null);
+            // Repopulate the current screen to handle dynamic panels (yield, dev mode, etc.)
+            FScreen currentScreen = Singletons.getControl().getCurrentScreen();
+            if (currentScreen != null) {
+                currentScreen.getView().populate();
+            }
             SOverlayUtils.hideOverlay();
         });
     }
