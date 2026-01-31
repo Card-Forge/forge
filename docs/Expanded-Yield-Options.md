@@ -40,7 +40,7 @@ The Yield Options panel and keyboard shortcuts provide the following yield modes
 
 If you engage a yield mode, the button for that mode will be highlighted in the Yield Options panel to signify the yield is active. The prompt area will also describe what event you are yielding to.
 
-A yield can be cancelled at any time by pressing the ESC key. You will then be given priority passes as normal.
+A yield can be cancelled at any time by pressing the ESC key, or by clicking the highlighted yield button again (toggle behavior). You will then be given priority passes as normal.
 
 Yield buttons are disabled during pre-game, mulligan and cleanup/discard phases.
 

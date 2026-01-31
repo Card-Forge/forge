@@ -104,60 +104,30 @@ public class CYield implements ICDoc {
         updateYieldButtons();
     }
 
-    // Yield action methods - set yield mode directly on GUI, then pass priority
-    private void yieldUntilNextPhase() {
-        if (matchUI != null && matchUI.getCurrentPlayer() != null) {
-            matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_NEXT_PHASE);
+    /**
+     * Toggle yield mode: if the mode is already active, clear it; otherwise activate it.
+     * When activating, also pass priority. When clearing, just cancel auto-yield.
+     */
+    private void toggleYieldMode(YieldMode mode) {
+        if (matchUI == null || matchUI.getCurrentPlayer() == null) return;
+        PlayerView player = matchUI.getCurrentPlayer();
+        if (matchUI.getYieldMode(player) == mode) {
+            matchUI.clearYieldMode(player);
+        } else {
+            matchUI.setYieldMode(player, mode);
             if (matchUI.getGameController() != null) {
                 matchUI.getGameController().selectButtonOk();
             }
         }
     }
 
-    private void yieldUntilStackClears() {
-        if (matchUI != null && matchUI.getCurrentPlayer() != null) {
-            matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_STACK_CLEARS);
-            if (matchUI.getGameController() != null) {
-                matchUI.getGameController().selectButtonOk();
-            }
-        }
-    }
-
-    private void yieldUntilCombat() {
-        if (matchUI != null && matchUI.getCurrentPlayer() != null) {
-            matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_BEFORE_COMBAT);
-            if (matchUI.getGameController() != null) {
-                matchUI.getGameController().selectButtonOk();
-            }
-        }
-    }
-
-    private void yieldUntilEndStep() {
-        if (matchUI != null && matchUI.getCurrentPlayer() != null) {
-            matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_END_STEP);
-            if (matchUI.getGameController() != null) {
-                matchUI.getGameController().selectButtonOk();
-            }
-        }
-    }
-
-    private void yieldUntilEndTurn() {
-        if (matchUI != null && matchUI.getCurrentPlayer() != null) {
-            matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_END_OF_TURN);
-            if (matchUI.getGameController() != null) {
-                matchUI.getGameController().selectButtonOk();
-            }
-        }
-    }
-
-    private void yieldUntilYourTurn() {
-        if (matchUI != null && matchUI.getCurrentPlayer() != null) {
-            matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_YOUR_NEXT_TURN);
-            if (matchUI.getGameController() != null) {
-                matchUI.getGameController().selectButtonOk();
-            }
-        }
-    }
+    // Yield action methods - toggle yield mode on/off
+    private void yieldUntilNextPhase() { toggleYieldMode(YieldMode.UNTIL_NEXT_PHASE); }
+    private void yieldUntilStackClears() { toggleYieldMode(YieldMode.UNTIL_STACK_CLEARS); }
+    private void yieldUntilCombat() { toggleYieldMode(YieldMode.UNTIL_BEFORE_COMBAT); }
+    private void yieldUntilEndStep() { toggleYieldMode(YieldMode.UNTIL_END_STEP); }
+    private void yieldUntilEndTurn() { toggleYieldMode(YieldMode.UNTIL_END_OF_TURN); }
+    private void yieldUntilYourTurn() { toggleYieldMode(YieldMode.UNTIL_YOUR_NEXT_TURN); }
 
     /**
      * Update yield buttons enabled state based on game state.
