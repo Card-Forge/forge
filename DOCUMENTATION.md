@@ -49,13 +49,13 @@ Extended yield options that allow players to automatically pass priority until s
 
 2. **Right-Click Menu**: Right-click the "End Turn" button to see yield options (configurable)
 
-3. **Keyboard Shortcuts** (F-keys to avoid conflict with ability selection 1-9):
-   - `F1` - Yield until next phase
-   - `F2` - Yield until before combat
-   - `F3` - Yield until end step
-   - `F4` - Yield until next turn
-   - `F5` - Yield until your next turn (3+ players)
-   - `F6` - Yield until stack clears
+3. **Keyboard Shortcuts** (F2-F7 to avoid conflict with F1=Help):
+   - `F2` - Yield until next phase
+   - `F3` - Yield until before combat
+   - `F4` - Yield until end step
+   - `F5` - Yield until next turn
+   - `F6` - Yield until your next turn (3+ players)
+   - `F7` - Yield until stack clears
    - `ESC` - Cancel active yield
 
 ### Smart Yield Suggestions
@@ -873,12 +873,13 @@ SHORTCUT_YIELD_UNTIL_STACK_CLEARS("117")       // F6
 
 2. **UNTIL_END_STEP mode** - Yield until the END_OF_TURN or CLEANUP phase. Useful for end-of-turn effects.
 
-3. **F-key hotkeys** - Updated hotkey scheme to avoid conflicts with ability selection (1-9):
-   - F1: Yield until end of turn
-   - F2: Yield until stack clears
+3. **F-key hotkeys** - Updated hotkey scheme (F2-F7 to avoid conflict with F1=Help):
+   - F2: Yield until next phase
    - F3: Yield until before combat
    - F4: Yield until end step
-   - F5: Yield until your next turn
+   - F5: Yield until end of turn
+   - F6: Yield until your next turn
+   - F7: Yield until stack clears
    - ESC: Cancel active yield
 
 **Bug Fixes:**

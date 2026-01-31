@@ -29,14 +29,14 @@ These features are highly configurable through the in-game menu, and can be set 
 
 The Yield Options panel and keyboard shortcuts provide the following yield modes:
 
-| Mode | Description | Ends When | Default Hotkey | 
+| Mode | Description | Ends When | Default Hotkey |
 |------|-------------|-----------|----------------|
-| **Next Phase** | Auto-pass until phase changes | Any phase transition | F1             |
-| **Until Combat** | Auto-pass until combat begins | Next COMBAT_BEGIN phase | F2             |
-| **Until End Step** | Auto-pass until end step | Next END_OF_TURN phase | F3             |
-| **Until Next Turn** | Auto-pass until next turn | Turn number changes | F4             |
-| **Until Your Next Turn** | Auto-pass until you become active player | Your turn starts (3+ player games only) | F5             |
-| **Until Stack Clears** | Auto-pass while stack has items | Stack becomes empty | F6             |
+| **Next Phase** | Auto-pass until phase changes | Any phase transition | F2             |
+| **Until Combat** | Auto-pass until combat begins | Next COMBAT_BEGIN phase | F3             |
+| **Until End Step** | Auto-pass until end step | Next END_OF_TURN phase | F4             |
+| **Until Next Turn** | Auto-pass until next turn | Turn number changes | F5             |
+| **Until Your Next Turn** | Auto-pass until you become active player | Your turn starts (3+ player games only) | F6             |
+| **Until Stack Clears** | Auto-pass while stack has items | Stack becomes empty | F7             |
 
 If you engage a yield mode, the button for that mode will be highlighted in the Yield Options panel to signify the yield is active. The prompt area will also describe what event you are yielding to.
 
