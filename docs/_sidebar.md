@@ -8,6 +8,7 @@
     - [Network FAQ](Network-FAQ.md)
     - [Network Extra](Networking-Extras.md)
   - [Advanced search](Advanced-Search.md)
+  - [Expanded Yield Options](Expanded-Yield-Options.md)
 
 - Adventure Mode
 
