@@ -65,15 +65,24 @@ public class YieldController {
     // Legacy auto-pass tracking
     private final Set<PlayerView> autoPassUntilEndOfTurn = Sets.newHashSet();
 
+    /**
+     * Consolidated yield state for a player.
+     * Tracks mode and all mode-specific timing data.
+     */
+    private static class YieldState {
+        YieldMode mode;
+        Integer startTurn;                          // For UNTIL_END_OF_TURN, UNTIL_BEFORE_COMBAT, UNTIL_END_STEP
+        Boolean startedAtOrAfterPhase;              // For UNTIL_BEFORE_COMBAT and UNTIL_END_STEP
+        forge.game.phase.PhaseType startPhase;      // For UNTIL_NEXT_PHASE
+        Boolean startedDuringOurTurn;               // For UNTIL_YOUR_NEXT_TURN
+
+        YieldState(YieldMode mode) {
+            this.mode = mode;
+        }
+    }
+
     // Extended yield mode tracking (experimental feature)
-    private final Map<PlayerView, YieldMode> playerYieldMode = Maps.newHashMap();
-    private final Map<PlayerView, Integer> yieldStartTurn = Maps.newHashMap(); // Track turn when yield was set
-    private final Map<PlayerView, Integer> yieldCombatStartTurn = Maps.newHashMap(); // Track turn when combat yield was set
-    private final Map<PlayerView, Boolean> yieldCombatStartedAtOrAfterCombat = Maps.newHashMap(); // Was yield set at/after combat?
-    private final Map<PlayerView, Integer> yieldEndStepStartTurn = Maps.newHashMap(); // Track turn when end step yield was set
-    private final Map<PlayerView, Boolean> yieldEndStepStartedAtOrAfterEndStep = Maps.newHashMap(); // Was yield set at/after end step?
-    private final Map<PlayerView, Boolean> yieldYourTurnStartedDuringOurTurn = Maps.newHashMap(); // Was yield set during our turn?
-    private final Map<PlayerView, forge.game.phase.PhaseType> yieldNextPhaseStartPhase = Maps.newHashMap(); // Track phase when next phase yield was set
+    private final Map<PlayerView, YieldState> yieldStates = Maps.newHashMap();
 
     // Smart suggestion decline tracking (reset each turn)
     private final Map<PlayerView, Set<String>> declinedSuggestionsThisTurn = Maps.newHashMap();
@@ -143,8 +152,9 @@ public class YieldController {
         }
 
         // Check experimental yield modes
-        YieldMode mode = playerYieldMode.get(player);
-        if (mode != null && mode != YieldMode.NONE) {
+        YieldState state = yieldStates.get(player);
+        if (state != null && state.mode != null && state.mode != YieldMode.NONE) {
+            YieldMode mode = state.mode;
             callback.cancelAwaitNextInput();
             Localizer loc = Localizer.getInstance();
             String cancelKey = getCancelShortcutDisplayText();
@@ -184,7 +194,9 @@ public class YieldController {
         // (legacy check in shouldAutoYieldForPlayer runs first and would override experimental mode)
         autoPassUntilEndOfTurn.remove(player);
 
-        playerYieldMode.put(player, mode);
+        YieldState state = new YieldState(mode);
+        yieldStates.put(player, state);
+
         GameView gameView = callback.getGameView();
 
         // Use network-safe GameView properties instead of gameView.getGame()
@@ -197,32 +209,27 @@ public class YieldController {
         int currentTurn = gameView.getTurn();
         PlayerView currentPlayerTurn = gameView.getPlayerTurn();
 
-        // Track current phase for UNTIL_NEXT_PHASE mode
-        if (mode == YieldMode.UNTIL_NEXT_PHASE) {
-            yieldNextPhaseStartPhase.put(player, phase);
-        }
-        // Track turn number for UNTIL_END_OF_TURN mode
-        if (mode == YieldMode.UNTIL_END_OF_TURN) {
-            yieldStartTurn.put(player, currentTurn);
-        }
-        // Track turn and phase state for UNTIL_BEFORE_COMBAT mode
-        if (mode == YieldMode.UNTIL_BEFORE_COMBAT) {
-            yieldCombatStartTurn.put(player, currentTurn);
-            boolean atOrAfterCombat = phase != null &&
-                (phase == forge.game.phase.PhaseType.COMBAT_BEGIN || phase.isAfter(forge.game.phase.PhaseType.COMBAT_BEGIN));
-            yieldCombatStartedAtOrAfterCombat.put(player, atOrAfterCombat);
-        }
-        // Track turn and phase state for UNTIL_END_STEP mode
-        if (mode == YieldMode.UNTIL_END_STEP) {
-            yieldEndStepStartTurn.put(player, currentTurn);
-            boolean atOrAfterEndStep = phase != null &&
-                (phase == forge.game.phase.PhaseType.END_OF_TURN || phase == forge.game.phase.PhaseType.CLEANUP);
-            yieldEndStepStartedAtOrAfterEndStep.put(player, atOrAfterEndStep);
-        }
-        // Track if UNTIL_YOUR_NEXT_TURN was started during our turn
-        if (mode == YieldMode.UNTIL_YOUR_NEXT_TURN) {
-            boolean isOurTurn = currentPlayerTurn != null && currentPlayerTurn.equals(player);
-            yieldYourTurnStartedDuringOurTurn.put(player, isOurTurn);
+        // Track mode-specific state
+        switch (mode) {
+            case UNTIL_NEXT_PHASE:
+                state.startPhase = phase;
+                break;
+            case UNTIL_END_OF_TURN:
+                state.startTurn = currentTurn;
+                break;
+            case UNTIL_BEFORE_COMBAT:
+                state.startTurn = currentTurn;
+                state.startedAtOrAfterPhase = isAtOrAfterCombat(phase);
+                break;
+            case UNTIL_END_STEP:
+                state.startTurn = currentTurn;
+                state.startedAtOrAfterPhase = isAtOrAfterEndStep(phase);
+                break;
+            case UNTIL_YOUR_NEXT_TURN:
+                state.startedDuringOurTurn = currentPlayerTurn != null && currentPlayerTurn.equals(player);
+                break;
+            default:
+                break;
         }
     }
 
@@ -264,21 +271,14 @@ public class YieldController {
         // Clear legacy auto-pass to prevent interference
         autoPassUntilEndOfTurn.remove(player);
         // Just set the mode - detailed tracking is managed by server
-        playerYieldMode.put(player, mode);
+        yieldStates.put(player, new YieldState(mode));
     }
 
     /**
      * Internal method to clear yield state without callbacks.
      */
     private void clearYieldModeInternal(PlayerView player) {
-        playerYieldMode.remove(player);
-        yieldStartTurn.remove(player);
-        yieldCombatStartTurn.remove(player);
-        yieldCombatStartedAtOrAfterCombat.remove(player);
-        yieldEndStepStartTurn.remove(player);
-        yieldEndStepStartedAtOrAfterEndStep.remove(player);
-        yieldYourTurnStartedDuringOurTurn.remove(player);
-        yieldNextPhaseStartPhase.remove(player);
+        yieldStates.remove(player);
         autoPassUntilEndOfTurn.remove(player); // Legacy compatibility
     }
 
@@ -291,8 +291,8 @@ public class YieldController {
         if (autoPassUntilEndOfTurn.contains(player)) {
             return YieldMode.UNTIL_END_OF_TURN;
         }
-        YieldMode mode = playerYieldMode.get(player);
-        return mode != null ? mode : YieldMode.NONE;
+        YieldState state = yieldStates.get(player);
+        return state != null && state.mode != null ? state.mode : YieldMode.NONE;
     }
 
     /**
@@ -320,8 +320,8 @@ public class YieldController {
             return false;
         }
 
-        YieldMode mode = playerYieldMode.get(player);
-        if (mode == null || mode == YieldMode.NONE) {
+        YieldState state = yieldStates.get(player);
+        if (state == null || state.mode == null || state.mode == YieldMode.NONE) {
             return false;
         }
 
@@ -342,14 +342,25 @@ public class YieldController {
         int currentTurn = gameView.getTurn();
         PlayerView currentPlayerTurn = gameView.getPlayerTurn();
 
-        return switch (mode) {
+        return switch (state.mode) {
             case UNTIL_NEXT_PHASE -> {
-                forge.game.phase.PhaseType startPhase = yieldNextPhaseStartPhase.get(player);
-                if (startPhase == null) {
-                    yieldNextPhaseStartPhase.put(player, currentPhase);
+                if (state.startPhase == null) {
+                    // startPhase wasn't set in setYieldMode (gameView was null or timing issue).
+                    // Set it now, but only continue if we're in a "starting" phase.
+                    // If we appear to be past the starting point (e.g., in M2 when we
+                    // probably started in M1), end the yield to avoid skipping too far.
+                    state.startPhase = currentPhase;
+
+                    // Safety check: if this is the second main phase and we just set
+                    // startPhase, we likely missed our stop point due to timing
+                    if (currentPhase == forge.game.phase.PhaseType.MAIN2) {
+                        clearYieldMode(player);
+                        yieldJustEnded.add(player);
+                        yield false;
+                    }
                     yield true;
                 }
-                if (currentPhase != startPhase) {
+                if (currentPhase != state.startPhase) {
                     clearYieldMode(player);
                     yieldJustEnded.add(player);
                     yield false;
@@ -368,13 +379,12 @@ public class YieldController {
             }
             case UNTIL_END_OF_TURN -> {
                 // Yield until end of the turn when yield was set - clear when turn number changes
-                Integer startTurn = yieldStartTurn.get(player);
-                if (startTurn == null) {
+                if (state.startTurn == null) {
                     // Turn wasn't tracked when yield was set - track it now
-                    yieldStartTurn.put(player, currentTurn);
+                    state.startTurn = currentTurn;
                     yield true;
                 }
-                if (currentTurn > startTurn) {
+                if (currentTurn > state.startTurn) {
                     clearYieldMode(player);
                     yieldJustEnded.add(player);
                     yield false;
@@ -384,54 +394,42 @@ public class YieldController {
             case UNTIL_YOUR_NEXT_TURN -> {
                 // Yield until our turn starts - use PlayerView comparison (network-safe)
                 boolean isOurTurn = currentPlayerTurn != null && currentPlayerTurn.equals(player);
-                Boolean startedDuringOurTurn = yieldYourTurnStartedDuringOurTurn.get(player);
 
-                if (startedDuringOurTurn == null) {
+                if (state.startedDuringOurTurn == null) {
                     // Tracking wasn't set - initialize it now
-                    yieldYourTurnStartedDuringOurTurn.put(player, isOurTurn);
-                    startedDuringOurTurn = isOurTurn;
+                    state.startedDuringOurTurn = isOurTurn;
                 }
 
                 if (isOurTurn) {
                     // If we started during our turn, we need to wait until it's our turn AGAIN
                     // (i.e., we left our turn and came back)
                     // If we started during opponent's turn, stop when we reach our turn
-                    if (!Boolean.TRUE.equals(startedDuringOurTurn)) {
+                    if (!Boolean.TRUE.equals(state.startedDuringOurTurn)) {
                         clearYieldMode(player);
                         yieldJustEnded.add(player);
                         yield false;
                     }
                 } else {
                     // Not our turn - if we started during our turn, mark that we've left it
-                    if (Boolean.TRUE.equals(startedDuringOurTurn)) {
+                    if (Boolean.TRUE.equals(state.startedDuringOurTurn)) {
                         // We've left our turn, now waiting for it to come back
-                        yieldYourTurnStartedDuringOurTurn.put(player, false);
+                        state.startedDuringOurTurn = false;
                     }
                 }
                 yield true;
             }
             case UNTIL_BEFORE_COMBAT -> {
-                Integer startTurn = yieldCombatStartTurn.get(player);
-                Boolean startedAtOrAfterCombat = yieldCombatStartedAtOrAfterCombat.get(player);
-
-                if (startTurn == null) {
+                if (state.startTurn == null) {
                     // Tracking wasn't set - initialize it now
-                    yieldCombatStartTurn.put(player, currentTurn);
-                    boolean atOrAfterCombat = currentPhase != null &&
-                        (currentPhase == forge.game.phase.PhaseType.COMBAT_BEGIN || currentPhase.isAfter(forge.game.phase.PhaseType.COMBAT_BEGIN));
-                    yieldCombatStartedAtOrAfterCombat.put(player, atOrAfterCombat);
-                    startTurn = currentTurn;
-                    startedAtOrAfterCombat = atOrAfterCombat;
+                    state.startTurn = currentTurn;
+                    state.startedAtOrAfterPhase = isAtOrAfterCombat(currentPhase);
                 }
 
                 // Check if we should stop: we're at or past combat on a DIFFERENT turn than when we started,
                 // OR we're at combat on the SAME turn but we started BEFORE combat
-                boolean atOrAfterCombatNow = currentPhase != null &&
-                    (currentPhase == forge.game.phase.PhaseType.COMBAT_BEGIN || currentPhase.isAfter(forge.game.phase.PhaseType.COMBAT_BEGIN));
-
-                if (atOrAfterCombatNow) {
-                    boolean differentTurn = currentTurn > startTurn;
-                    boolean sameTurnButStartedBeforeCombat = (currentTurn == startTurn.intValue()) && !Boolean.TRUE.equals(startedAtOrAfterCombat);
+                if (isAtOrAfterCombat(currentPhase)) {
+                    boolean differentTurn = currentTurn > state.startTurn;
+                    boolean sameTurnButStartedBeforeCombat = (currentTurn == state.startTurn.intValue()) && !Boolean.TRUE.equals(state.startedAtOrAfterPhase);
 
                     if (differentTurn || sameTurnButStartedBeforeCombat) {
                         clearYieldMode(player);
@@ -442,27 +440,17 @@ public class YieldController {
                 yield true;
             }
             case UNTIL_END_STEP -> {
-                Integer startTurn = yieldEndStepStartTurn.get(player);
-                Boolean startedAtOrAfterEndStep = yieldEndStepStartedAtOrAfterEndStep.get(player);
-
-                if (startTurn == null) {
+                if (state.startTurn == null) {
                     // Tracking wasn't set - initialize it now
-                    yieldEndStepStartTurn.put(player, currentTurn);
-                    boolean atOrAfterEndStep = currentPhase != null &&
-                        (currentPhase == forge.game.phase.PhaseType.END_OF_TURN || currentPhase == forge.game.phase.PhaseType.CLEANUP);
-                    yieldEndStepStartedAtOrAfterEndStep.put(player, atOrAfterEndStep);
-                    startTurn = currentTurn;
-                    startedAtOrAfterEndStep = atOrAfterEndStep;
+                    state.startTurn = currentTurn;
+                    state.startedAtOrAfterPhase = isAtOrAfterEndStep(currentPhase);
                 }
 
                 // Check if we should stop: we're at or past end step on a DIFFERENT turn than when we started,
                 // OR we're at end step on the SAME turn but we started BEFORE end step
-                boolean atOrAfterEndStepNow = currentPhase != null &&
-                    (currentPhase == forge.game.phase.PhaseType.END_OF_TURN || currentPhase == forge.game.phase.PhaseType.CLEANUP);
-
-                if (atOrAfterEndStepNow) {
-                    boolean differentTurn = currentTurn > startTurn;
-                    boolean sameTurnButStartedBeforeEndStep = (currentTurn == startTurn.intValue()) && !Boolean.TRUE.equals(startedAtOrAfterEndStep);
+                if (isAtOrAfterEndStep(currentPhase)) {
+                    boolean differentTurn = currentTurn > state.startTurn;
+                    boolean sameTurnButStartedBeforeEndStep = (currentTurn == state.startTurn.intValue()) && !Boolean.TRUE.equals(state.startedAtOrAfterPhase);
 
                     if (differentTurn || sameTurnButStartedBeforeEndStep) {
                         clearYieldMode(player);
@@ -534,7 +522,8 @@ public class YieldController {
 
         if (prefs.getPrefBoolean(ForgePreferences.FPref.YIELD_INTERRUPT_ON_COMBAT)) {
             if (phase == forge.game.phase.PhaseType.COMBAT_BEGIN) {
-                YieldMode mode = playerYieldMode.get(player);
+                YieldState state = yieldStates.get(player);
+                YieldMode mode = state != null ? state.mode : null;
                 // Don't interrupt UNTIL_END_OF_TURN on our own turn
                 boolean isOurTurn = currentPlayerTurn != null && currentPlayerTurn.equals(player);
                 if (!(mode == YieldMode.UNTIL_END_OF_TURN && isOurTurn)) {
@@ -689,6 +678,22 @@ public class YieldController {
     }
 
     /**
+     * Check if the phase is at or after the beginning of combat.
+     */
+    private boolean isAtOrAfterCombat(forge.game.phase.PhaseType phase) {
+        return phase != null &&
+            (phase == forge.game.phase.PhaseType.COMBAT_BEGIN || phase.isAfter(forge.game.phase.PhaseType.COMBAT_BEGIN));
+    }
+
+    /**
+     * Check if the phase is at or after the end step.
+     */
+    private boolean isAtOrAfterEndStep(forge.game.phase.PhaseType phase) {
+        return phase != null &&
+            (phase == forge.game.phase.PhaseType.END_OF_TURN || phase == forge.game.phase.PhaseType.CLEANUP);
+    }
+
+    /**
      * Get the total number of players in the game.
      * Uses network-safe GameView.getPlayers() instead of Game.getPlayers().
      */
@@ -757,11 +762,11 @@ public class YieldController {
     }
 
     /**
-     * Get the display text for the yield cancel keyboard shortcut.
-     * @return Human-readable shortcut text, e.g., "Escape" or "Ctrl+Escape"
+     * Convert a keyboard shortcut preference string to display text.
+     * @param codeString Space-separated key codes (e.g., "17 67" for Ctrl+C)
+     * @return Human-readable shortcut text (e.g., "Ctrl+C")
      */
-    public String getCancelShortcutDisplayText() {
-        String codeString = FModel.getPreferences().getPref(FPref.SHORTCUT_YIELD_CANCEL);
+    public static String formatShortcutDisplayText(String codeString) {
         if (codeString == null || codeString.isEmpty()) {
             return "";
         }
@@ -777,5 +782,13 @@ public class YieldController {
             }
         }
         return String.join("+", displayText);
+    }
+
+    /**
+     * Get the display text for the yield cancel keyboard shortcut.
+     * @return Human-readable shortcut text, e.g., "Escape" or "Ctrl+Escape"
+     */
+    public String getCancelShortcutDisplayText() {
+        return formatShortcutDisplayText(FModel.getPreferences().getPref(FPref.SHORTCUT_YIELD_CANCEL));
     }
 }

@@ -355,18 +355,25 @@ public class InputPassPriority extends InputSyncronizedBase {
         return !pv.hasAvailableActions();
     }
 
+    /**
+     * Check if current game state is valid for showing yield suggestions.
+     * Returns false if stack is non-empty or it's the player's turn.
+     */
+    private boolean isValidSuggestionContext(GameView gv, PlayerView pv) {
+        FCollectionView<StackItemView> stack = gv.getStack();
+        if (stack != null && !stack.isEmpty()) {
+            return false;
+        }
+        PlayerView currentTurn = gv.getPlayerTurn();
+        return currentTurn == null || !currentTurn.equals(pv);
+    }
+
     private boolean shouldShowNoManaPrompt() {
         GameView gv = getGameView();
         PlayerView pv = getPlayerView();
         if (gv == null || pv == null) return false;
 
-        FCollectionView<StackItemView> stack = gv.getStack();
-        if (stack != null && !stack.isEmpty()) {
-            return false;
-        }
-
-        PlayerView currentTurn = gv.getPlayerTurn();
-        if (currentTurn != null && currentTurn.equals(pv)) {
+        if (!isValidSuggestionContext(gv, pv)) {
             return false;
         }
 
@@ -402,17 +409,10 @@ public class InputPassPriority extends InputSyncronizedBase {
         PlayerView pv = getPlayerView();
         if (gv == null || pv == null) return false;
 
-        FCollectionView<StackItemView> stack = gv.getStack();
-        if (stack != null && !stack.isEmpty()) {
+        if (!isValidSuggestionContext(gv, pv)) {
             return false;
         }
 
-        PlayerView currentTurn = gv.getPlayerTurn();
-        if (currentTurn != null && currentTurn.equals(pv)) {
-            return false;
-        }
-
-        // Use TrackableProperty
         return !pv.hasAvailableActions();
     }
 }

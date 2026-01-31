@@ -17,15 +17,9 @@
  */
 package forge.screens.match.views;
 
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import javax.swing.JPanel;
 
-import org.apache.commons.lang3.StringUtils;
-
+import forge.gamemodes.match.YieldController;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -105,26 +99,8 @@ public class VYield implements IVDoc<CYield> {
             getShortcutDisplayText(prefs.getPref(FPref.SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN))));
     }
 
-    /**
-     * Convert a keyboard shortcut preference string (space-separated key codes) to display text.
-     * e.g., "112" becomes "F1", "17 67" becomes "Ctrl C"
-     */
     private String getShortcutDisplayText(String codeString) {
-        if (codeString == null || codeString.isEmpty()) {
-            return "";
-        }
-        List<String> codes = new ArrayList<>(Arrays.asList(codeString.trim().split(" ")));
-        List<String> displayText = new ArrayList<>();
-        for (String s : codes) {
-            if (!s.isEmpty()) {
-                try {
-                    displayText.add(KeyEvent.getKeyText(Integer.parseInt(s)));
-                } catch (NumberFormatException e) {
-                    displayText.add(s);
-                }
-            }
-        }
-        return StringUtils.join(displayText, '+');
+        return YieldController.formatShortcutDisplayText(codeString);
     }
 
     @Override
