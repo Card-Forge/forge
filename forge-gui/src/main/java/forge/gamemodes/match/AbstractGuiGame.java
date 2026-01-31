@@ -557,11 +557,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         getYieldController().setYieldMode(player, mode);
     }
 
-    /**
-     * Look up a PlayerView by ID from the current GameView's player list.
-     * Used for network play where deserialized PlayerViews have different trackers.
-     */
-    private PlayerView lookupPlayerViewById(PlayerView networkPlayer) {
+    @Override
+    public PlayerView lookupPlayerViewById(PlayerView networkPlayer) {
         if (networkPlayer == null) {
             return null;
         }

@@ -315,4 +315,12 @@ public interface IGuiGame {
     void clearAutoYields();
 
     void setCurrentPlayer(PlayerView player);
+
+    /**
+     * Look up a PlayerView by ID from the current GameView's player list.
+     * Used for network play where deserialized PlayerViews have different trackers.
+     * @param player the PlayerView to look up (uses its ID for matching)
+     * @return the matching PlayerView from GameView, or the input player if not found
+     */
+    PlayerView lookupPlayerViewById(PlayerView player);
 }

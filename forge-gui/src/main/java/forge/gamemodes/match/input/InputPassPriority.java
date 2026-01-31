@@ -326,24 +326,7 @@ public class InputPassPriority extends InputSyncronizedBase {
     }
 
     private PlayerView getPlayerView() {
-        // For network clients, we need to get the PlayerView from the GameView
-        // because that's where the synchronized TrackableProperty values are.
-        // The local Player's view won't have the network-updated properties.
-        GameView gv = getGameView();
-        if (gv == null) {
-            return getController().getPlayer().getView();
-        }
-        PlayerView owner = getOwner();
-        if (owner == null) {
-            return null;
-        }
-        // Look up the matching PlayerView from GameView to get network-synchronized state
-        for (PlayerView pv : gv.getPlayers()) {
-            if (pv.getId() == owner.getId()) {
-                return pv;
-            }
-        }
-        return owner; // Fallback to local if not found
+        return getController().getGui().lookupPlayerViewById(getOwner());
     }
 
     private YieldMode getDefaultYieldMode() {
