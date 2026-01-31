@@ -1136,13 +1136,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** Represents a section with its header and preference items */
     private static class Section {
         final Component header;           // SectionLabel
-        final String name;                // Section name for searching
-        final List<PreferenceItem> items; // Preferences in this section
+        final List<PreferenceItem> items = new ArrayList<>();
 
-        Section(Component header, String name) {
+        Section(Component header) {
             this.header = header;
-            this.name = name.toLowerCase();
-            this.items = new ArrayList<>();
         }
     }
 
@@ -1151,41 +1148,28 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         sections.clear();
         Section currentSection = null;
         String currentSectionName = "";
-        List<Component> currentPrefComponents = new ArrayList<>();
-        StringBuilder currentSearchText = new StringBuilder();
+        List<Component> prefComponents = new ArrayList<>();
+        StringBuilder searchText = new StringBuilder();
 
-        Component[] components = pnlPrefs.getComponents();
-        for (int i = 0; i < components.length; i++) {
-            Component comp = components[i];
-
+        for (Component comp : pnlPrefs.getComponents()) {
             // Skip the search panel (which contains txtSearch)
-            if (comp instanceof JPanel) {
-                boolean isSearchPanel = false;
-                for (Component child : ((JPanel) comp).getComponents()) {
-                    if (child == txtSearch) {
-                        isSearchPanel = true;
-                        break;
-                    }
-                }
-                if (isSearchPanel) {
-                    continue;
-                }
+            if (comp instanceof JPanel && containsComponent((JPanel) comp, txtSearch)) {
+                continue;
             }
 
             if (comp instanceof SectionLabel) {
                 // Finish previous preference if any
-                if (!currentPrefComponents.isEmpty() && currentSection != null) {
-                    currentSection.items.add(new PreferenceItem(
-                            new ArrayList<>(currentPrefComponents),
-                            currentSectionName + " " + currentSearchText.toString()));
-                    currentPrefComponents.clear();
-                    currentSearchText.setLength(0);
+                if (!prefComponents.isEmpty() && currentSection != null) {
+                    currentSection.items.add(new PreferenceItem(new ArrayList<>(prefComponents),
+                            currentSectionName + " " + searchText));
+                    prefComponents.clear();
+                    searchText.setLength(0);
                 }
 
-                // Start new section (skip Troubleshooting section - it has action buttons, not preferences)
+                // Start new section (skip Troubleshooting - it has action buttons, not preferences)
                 String sectionName = ((SectionLabel) comp).getText();
                 if (!sectionName.equals(localizer.getMessage("Troubleshooting"))) {
-                    currentSection = new Section(comp, sectionName);
+                    currentSection = new Section(comp);
                     currentSectionName = sectionName;
                     sections.add(currentSection);
                 } else {
@@ -1193,36 +1177,36 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
                     currentSectionName = "";
                 }
             } else if (currentSection != null) {
-                // Determine if this is the start of a new preference or a continuation
-                boolean isNewPreference = isPreferenceControl(comp);
-
-                if (isNewPreference && !currentPrefComponents.isEmpty()) {
-                    // Save the previous preference (include section name for searching)
-                    currentSection.items.add(new PreferenceItem(
-                            new ArrayList<>(currentPrefComponents),
-                            currentSectionName + " " + currentSearchText.toString()));
-                    currentPrefComponents.clear();
-                    currentSearchText.setLength(0);
+                // Start new preference if this is a control component
+                if (isPreferenceControl(comp) && !prefComponents.isEmpty()) {
+                    currentSection.items.add(new PreferenceItem(new ArrayList<>(prefComponents),
+                            currentSectionName + " " + searchText));
+                    prefComponents.clear();
+                    searchText.setLength(0);
                 }
 
-                // Add component to current preference
-                currentPrefComponents.add(comp);
+                prefComponents.add(comp);
                 String text = getComponentText(comp);
                 if (!text.isEmpty()) {
-                    if (currentSearchText.length() > 0) {
-                        currentSearchText.append(" ");
-                    }
-                    currentSearchText.append(text);
+                    if (searchText.length() > 0) searchText.append(" ");
+                    searchText.append(text);
                 }
             }
         }
 
-        // Don't forget the last preference
-        if (!currentPrefComponents.isEmpty() && currentSection != null) {
-            currentSection.items.add(new PreferenceItem(
-                    new ArrayList<>(currentPrefComponents),
-                    currentSectionName + " " + currentSearchText.toString()));
+        // Save the last preference
+        if (!prefComponents.isEmpty() && currentSection != null) {
+            currentSection.items.add(new PreferenceItem(new ArrayList<>(prefComponents),
+                    currentSectionName + " " + searchText));
         }
+    }
+
+    /** Checks if a panel contains a specific component */
+    private boolean containsComponent(JPanel panel, Component target) {
+        for (Component child : panel.getComponents()) {
+            if (child == target) return true;
+        }
+        return false;
     }
 
     /** Determines if a component is a preference control (starts a new preference) */
@@ -1241,15 +1225,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         } else if (comp instanceof JLabel) {
             return ((JLabel) comp).getText();
         } else if (comp instanceof FComboBoxPanel) {
-            // Get caption from the label child component
             for (Component child : ((FComboBoxPanel<?>) comp).getComponents()) {
-                if (child instanceof JLabel) {
-                    return ((JLabel) child).getText();
-                }
+                if (child instanceof JLabel) return ((JLabel) child).getText();
             }
-            return "";
         } else if (comp instanceof JPanel) {
-            // Recursively get text from panel children
             StringBuilder sb = new StringBuilder();
             for (Component child : ((JPanel) comp).getComponents()) {
                 String text = getComponentText(child);
@@ -1259,8 +1238,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
                 }
             }
             return sb.toString();
-        } else if (comp instanceof JTextField) {
-            return "";  // Don't search text field contents
         }
         return "";
     }
@@ -1269,12 +1246,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private void setupSearchListener() {
         searchTimer = new Timer(200, e -> applySearch());
         searchTimer.setRepeats(false);
-
         txtSearch.addChangeListener(new FTextField.ChangeListener() {
-            @Override
-            public void textChanged() {
-                searchTimer.restart();
-            }
+            @Override public void textChanged() { searchTimer.restart(); }
         });
     }
 
