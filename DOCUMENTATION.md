@@ -721,6 +721,42 @@ SHORTCUT_YIELD_UNTIL_STACK_CLEARS("117")       // F6
   2. Added `TrackableTypes.PlayerViewType.lookup(player)` to `autoPassUntilEndOfTurn()` and `autoPassCancel()` methods
 - **Files:** `YieldController.java`
 
+**Bug Fix - Yield mode not working on network clients:**
+- **Problem:** Network clients could set yield mode locally (button highlighted correctly), but the server didn't know about it. When priority passed back to the client, the server would check yield state on its own `NetGuiGame` instance which had no knowledge of the client's yield settings, resulting in smart suggestions being shown despite yielding.
+- **Root Cause:** Yield state was stored client-side only. The client's `CMatchUI.setYieldMode()` updated its local `YieldController`, but the server's `NetGuiGame` (which handles priority logic for remote players) had its own separate `YieldController` that was never updated.
+- **Solution:** Added network protocol support for yield mode synchronization:
+  1. Added `notifyYieldModeChanged(PlayerView, YieldMode)` to `IGameController` interface with default no-op implementation
+  2. Added `notifyYieldModeChanged` to `ProtocolMethod` enum (CLIENT -> SERVER)
+  3. Implemented in `NetGameController` to send yield changes to server
+  4. Implemented in `PlayerControllerHuman` to receive and update server's GUI state
+  5. Added `setYieldModeFromRemote()` to `IGuiGame`/`AbstractGuiGame` to update yield without triggering notification loop
+  6. Modified `AbstractGuiGame.setYieldMode()` to call `notifyYieldModeChanged()` on the game controller
+- **Files:** `IGameController.java`, `ProtocolMethod.java`, `NetGameController.java`, `PlayerControllerHuman.java`, `IGuiGame.java`, `AbstractGuiGame.java`
+
+**Bug Fix - Yield button stays highlighted after yield ends on network client:**
+- **Problem:** When a yield mode ended due to its end condition (e.g., "yield until next turn" expires when turn changes), the yield button on the client remained highlighted even though the yield had stopped.
+- **Root Cause:** The server's YieldController detected the end condition and cleared the yield mode, but this wasn't synchronized back to the client. The client's local YieldController still thought the yield was active, keeping the button highlighted.
+- **Solution:** Added server→client yield state synchronization:
+  1. Added `syncYieldMode` to `ProtocolMethod` enum (SERVER -> CLIENT)
+  2. Added `syncYieldMode(PlayerView, YieldMode)` to `IGuiGame` interface
+  3. Implemented in `NetGuiGame` to send yield state to client
+  4. Implemented in `AbstractGuiGame` to receive and update local state
+  5. Added `syncYieldModeToClient` to `YieldCallback` interface
+  6. Modified `YieldController.clearYieldMode()` to call the callback, notifying the client
+- **Files:** `ProtocolMethod.java`, `IGuiGame.java`, `NetGuiGame.java`, `AbstractGuiGame.java`, `YieldController.java`
+
+**Bug Fix - Wrong prompt shown after setting yield on network client:**
+- **Problem:** Client set "End Step" yield (button correctly highlighted in red), but prompt showed "Yielding until end of turn" text.
+- **Root Cause:** When client set yield mode, `AbstractGuiGame.setYieldMode()` showed the correct prompt locally, then notified the server. The server's `setYieldModeFromRemote()` was calling `updateAutoPassPrompt()` which sent another prompt back to the client, overwriting the correct one. Due to timing or state differences, the server sent the wrong message.
+- **Solution:** Removed `updateAutoPassPrompt()` call from `setYieldModeFromRemote()` since the client already showed the correct prompt when it set the yield mode locally.
+- **Files:** `AbstractGuiGame.java`
+
+**Bug Fix - Network PlayerView tracker mismatch causing yield lookup failures:**
+- **Problem:** Yield mode set by client wasn't being found when server checked `mayAutoPass()`.
+- **Root Cause:** Network-deserialized PlayerViews have a different `Tracker` instance than the server's PlayerViews. When `notifyYieldModeChanged` stored the yield mode using the network PlayerView's tracker, the `TrackableTypes.PlayerViewType.lookup()` later failed because the server's `mayAutoPass()` used a different PlayerView instance with a different tracker.
+- **Solution:** Added `lookupPlayerViewById()` helper method that finds the matching PlayerView from `GameView.getPlayers()` by ID comparison, ensuring yield mode is stored against the server's canonical PlayerView instance.
+- **Files:** `AbstractGuiGame.java`
+
 ### Initial Implementation - YieldController Architecture
 
 **Core Design:**

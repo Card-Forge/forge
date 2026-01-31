@@ -265,6 +265,24 @@ public interface IGuiGame {
     // Extended yield mode methods (experimental feature)
     void setYieldMode(PlayerView player, YieldMode mode);
 
+    /**
+     * Update yield mode from remote client without triggering notification.
+     * Used by server to receive yield state from network clients.
+     */
+    void setYieldModeFromRemote(PlayerView player, YieldMode mode);
+
+    /**
+     * Clear yield mode from remote client without triggering notification.
+     * Used by server to receive yield state from network clients.
+     */
+    void clearYieldModeFromRemote(PlayerView player);
+
+    /**
+     * Sync yield mode from server to client.
+     * Used when server clears yield (end condition met) and needs to update client UI.
+     */
+    void syncYieldMode(PlayerView player, YieldMode mode);
+
     void clearYieldMode(PlayerView player);
 
     boolean shouldAutoYieldForPlayer(PlayerView player);

@@ -440,6 +440,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 public GameView getGameView() {
                     return AbstractGuiGame.this.getGameView();
                 }
+                @Override
+                public void syncYieldModeToClient(PlayerView player, YieldMode mode) {
+                    // Sync yield state to network client (for server->client updates)
+                    AbstractGuiGame.this.syncYieldMode(player, mode);
+                }
             });
         }
         return yieldController;
@@ -528,6 +533,77 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public final void setYieldMode(PlayerView player, final YieldMode mode) {
         getYieldController().setYieldMode(player, mode);
         updateAutoPassPrompt();
+
+        // Notify remote server if this is a network client
+        IGameController controller = getGameController(player);
+        if (controller != null) {
+            controller.notifyYieldModeChanged(player, mode);
+        }
+    }
+
+    @Override
+    public final void setYieldModeFromRemote(PlayerView player, final YieldMode mode) {
+        // Update yield state without triggering notification (to avoid loops)
+        // Used when server receives yield state from network client
+        // Note: Don't call updateAutoPassPrompt() here - the client already showed
+        // the correct prompt when it set the yield mode locally
+
+        // The PlayerView from network has a different tracker than server's PlayerViews.
+        // We need to find the matching PlayerView from the GameView using ID comparison.
+        player = lookupPlayerViewById(player);
+        if (player == null) {
+            return; // Player not found in game
+        }
+        getYieldController().setYieldMode(player, mode);
+    }
+
+    /**
+     * Look up a PlayerView by ID from the current GameView's player list.
+     * Used for network play where deserialized PlayerViews have different trackers.
+     */
+    private PlayerView lookupPlayerViewById(PlayerView networkPlayer) {
+        if (networkPlayer == null) {
+            return null;
+        }
+        GameView gv = getGameView();
+        if (gv == null) {
+            return networkPlayer; // Fall back to using the network instance
+        }
+        int playerId = networkPlayer.getId();
+        for (PlayerView pv : gv.getPlayers()) {
+            if (pv.getId() == playerId) {
+                return pv;
+            }
+        }
+        return networkPlayer; // Fall back if not found
+    }
+
+    @Override
+    public final void clearYieldModeFromRemote(PlayerView player) {
+        // Clear yield state from remote client without triggering notification
+        // Look up the correct PlayerView instance by ID (network PlayerViews have different trackers)
+        player = lookupPlayerViewById(player);
+        if (player == null) {
+            return;
+        }
+        getYieldController().clearYieldMode(player);
+    }
+
+    @Override
+    public void syncYieldMode(PlayerView player, YieldMode mode) {
+        // Receive yield state sync from server (when server clears yield due to end condition)
+        // Look up the correct PlayerView instance by ID (network PlayerViews have different trackers)
+        player = lookupPlayerViewById(player);
+        if (player == null) {
+            return;
+        }
+        // Use silent methods to avoid triggering callback which would loop back here
+        if (mode == null || mode == YieldMode.NONE) {
+            getYieldController().clearYieldModeSilent(player);
+        } else {
+            getYieldController().setYieldModeSilent(player, mode);
+        }
+        // Note: Don't call updateAutoPassPrompt() - server already sent the correct prompt
     }
 
     @Override

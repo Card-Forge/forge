@@ -315,6 +315,12 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
+    public void syncYieldMode(final PlayerView player, final forge.gamemodes.match.YieldMode mode) {
+        // Send yield state to client (when server clears yield due to end condition)
+        send(ProtocolMethod.syncYieldMode, player, mode);
+    }
+
+    @Override
     protected void updateCurrentPlayer(final PlayerView player) {
         // TODO Auto-generated method stub
     }

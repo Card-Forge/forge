@@ -53,6 +53,11 @@ public class YieldController {
         void awaitNextInput();
         void cancelAwaitNextInput();
         GameView getGameView();
+        /**
+         * Sync yield mode to network client.
+         * Called when yield mode is cleared due to end condition.
+         */
+        void syncYieldModeToClient(PlayerView player, YieldMode mode);
     }
 
     private final YieldCallback callback;
@@ -226,6 +231,46 @@ public class YieldController {
      */
     public void clearYieldMode(PlayerView player) {
         player = TrackableTypes.PlayerViewType.lookup(player); // ensure we use the correct player instance
+        clearYieldModeInternal(player);
+
+        callback.showPromptMessage(player, "");
+        callback.updateButtons(player, false, false, false);
+        callback.awaitNextInput();
+
+        // Notify client to update its local yield state (for network play)
+        callback.syncYieldModeToClient(player, YieldMode.NONE);
+    }
+
+    /**
+     * Clear yield mode silently without triggering callbacks.
+     * Used when receiving sync from server to avoid recursive loops.
+     */
+    public void clearYieldModeSilent(PlayerView player) {
+        player = TrackableTypes.PlayerViewType.lookup(player);
+        clearYieldModeInternal(player);
+    }
+
+    /**
+     * Set yield mode silently without triggering callbacks.
+     * Used when receiving sync from server to avoid recursive loops.
+     * Only sets the mode itself - server manages the detailed tracking state.
+     */
+    public void setYieldModeSilent(PlayerView player, YieldMode mode) {
+        player = TrackableTypes.PlayerViewType.lookup(player);
+        if (mode == null || mode == YieldMode.NONE) {
+            clearYieldModeInternal(player);
+            return;
+        }
+        // Clear legacy auto-pass to prevent interference
+        autoPassUntilEndOfTurn.remove(player);
+        // Just set the mode - detailed tracking is managed by server
+        playerYieldMode.put(player, mode);
+    }
+
+    /**
+     * Internal method to clear yield state without callbacks.
+     */
+    private void clearYieldModeInternal(PlayerView player) {
         playerYieldMode.remove(player);
         yieldStartTurn.remove(player);
         yieldCombatStartTurn.remove(player);
@@ -235,10 +280,6 @@ public class YieldController {
         yieldYourTurnStartedDuringOurTurn.remove(player);
         yieldNextPhaseStartPhase.remove(player);
         autoPassUntilEndOfTurn.remove(player); // Legacy compatibility
-
-        callback.showPromptMessage(player, "");
-        callback.updateButtons(player, false, false, false);
-        callback.awaitNextInput();
     }
 
     /**

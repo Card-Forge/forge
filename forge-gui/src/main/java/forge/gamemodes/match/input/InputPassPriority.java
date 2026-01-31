@@ -27,7 +27,6 @@ import forge.game.player.PlayerView;
 import forge.game.player.actions.PassPriorityAction;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.StackItemView;
-import forge.game.zone.ZoneType;
 import forge.gamemodes.match.YieldMode;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -327,7 +326,24 @@ public class InputPassPriority extends InputSyncronizedBase {
     }
 
     private PlayerView getPlayerView() {
-        return getController().getPlayer().getView();
+        // For network clients, we need to get the PlayerView from the GameView
+        // because that's where the synchronized TrackableProperty values are.
+        // The local Player's view won't have the network-updated properties.
+        GameView gv = getGameView();
+        if (gv == null) {
+            return getController().getPlayer().getView();
+        }
+        PlayerView owner = getOwner();
+        if (owner == null) {
+            return null;
+        }
+        // Look up the matching PlayerView from GameView to get network-synchronized state
+        for (PlayerView pv : gv.getPlayers()) {
+            if (pv.getId() == owner.getId()) {
+                return pv;
+            }
+        }
+        return owner; // Fallback to local if not found
     }
 
     private YieldMode getDefaultYieldMode() {

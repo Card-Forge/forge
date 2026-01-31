@@ -3320,6 +3320,19 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public void notifyYieldModeChanged(final PlayerView playerView, final forge.gamemodes.match.YieldMode mode) {
+        // Update the server's GUI with the client's yield mode
+        // This syncs yield state from network client to server
+        // Uses FromRemote methods to avoid triggering another notification and to handle
+        // PlayerView tracker mismatch (network PlayerViews have different trackers than server's)
+        if (mode == null) {
+            getGui().clearYieldModeFromRemote(playerView);
+        } else {
+            getGui().setYieldModeFromRemote(playerView, mode);
+        }
+    }
+
+    @Override
     public String chooseCardName(SpellAbility sa, List<ICardFace> faces, String message) {
         ICardFace face = chooseSingleCardFace(sa, faces, message);
         return face == null ? "" : face.getName();
