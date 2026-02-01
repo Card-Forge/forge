@@ -79,6 +79,8 @@ When enabled, the system detects situations where you likely cannot take action 
 - Suggestions will not appear if you're already yielding
 - Declining a suggestion suppresses that kind of suggestion until the next turn (i.e. this stops you repeatedly recieving the same prompt).
 - Clicking a yield button while a suggestion is showing activates the clicked yield mode instead of the suggested one.
+- **On your own turn:** By default, the "no mana" and "no actions" suggestions are suppressed on your own turn since you typically want to take actions during your turn. This can be disabled in Game > Yield Options > Automatic Suggestions > "Suppress On Own Turn". Note: Suggestions are always suppressed on your first turn regardless of this setting, since you won't have any lands or mana yet.
+- **After a yield ends:** By default, suggestions are suppressed for one priority pass when a yield expires or is interrupted. This gives you time to assess the game state before deciding whether to re-yield. The system assumes you may want to take an action at the moment the yield ends. This behavior can be disabled in Game > Yield Options > Automatic Suggestions > "Suppress After Yield Ends".
 
 
 

@@ -234,6 +234,9 @@ public final class GameMenu {
         suggestionsMenu.add(createYieldCheckbox(localizer.getMessage("lblSuggestStackYield"), FPref.YIELD_SUGGEST_STACK_YIELD));
         suggestionsMenu.add(createYieldCheckbox(localizer.getMessage("lblSuggestNoMana"), FPref.YIELD_SUGGEST_NO_MANA));
         suggestionsMenu.add(createYieldCheckbox(localizer.getMessage("lblSuggestNoActions"), FPref.YIELD_SUGGEST_NO_ACTIONS));
+        suggestionsMenu.addSeparator();
+        suggestionsMenu.add(createYieldCheckbox(localizer.getMessage("lblSuppressOnOwnTurn"), FPref.YIELD_SUPPRESS_ON_OWN_TURN));
+        suggestionsMenu.add(createYieldCheckbox(localizer.getMessage("lblSuppressAfterYield"), FPref.YIELD_SUPPRESS_AFTER_END));
         yieldMenu.add(suggestionsMenu);
 
         // Sub-menu 3: Display Options

@@ -148,6 +148,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         YIELD_INTERRUPT_ON_REVEAL("false"),   // When opponent reveals cards
         YIELD_INTERRUPT_ON_MASS_REMOVAL("true"),  // When mass removal spell cast
         YIELD_SHOW_RIGHT_CLICK_MENU("false"),  // Show right-click yield menu on End Turn
+        YIELD_SUPPRESS_ON_OWN_TURN("true"),  // Suppress suggestions on player's own turn
+        YIELD_SUPPRESS_AFTER_END("true"),  // Suppress suggestions for one priority pass after yield ends
 
         UI_STACK_EFFECT_NOTIFICATION_POLICY ("Never"),
         UI_LAND_PLAYED_NOTIFICATION_POLICY ("Never"),

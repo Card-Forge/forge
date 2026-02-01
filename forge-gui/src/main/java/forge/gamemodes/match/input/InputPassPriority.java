@@ -68,10 +68,12 @@ public class InputPassPriority extends InputSyncronizedBase {
     @Override
     public final void showMessage() {
         // Check if experimental yield features are enabled and show smart suggestions
-        // Only show suggestions if not already yielding and yield didn't just end
-        // (suppresses suggestions immediately after a yield expires or is interrupted)
-        if (isExperimentalYieldEnabled() && !isAlreadyYielding()
-            && !getController().getGui().didYieldJustEnd(getOwner())) {
+        // Only show suggestions if not already yielding
+        // Check if yield just ended and suppression is enabled
+        boolean suppressDueToYieldEnd = FModel.getPreferences().getPrefBoolean(FPref.YIELD_SUPPRESS_AFTER_END)
+            && getController().getGui().didYieldJustEnd(getOwner());
+
+        if (isExperimentalYieldEnabled() && !isAlreadyYielding() && !suppressDueToYieldEnd) {
             ForgePreferences prefs = FModel.getPreferences();
             Localizer loc = Localizer.getInstance();
 
@@ -356,15 +358,28 @@ public class InputPassPriority extends InputSyncronizedBase {
 
     /**
      * Check if current game state is valid for showing yield suggestions.
-     * Returns false if stack is non-empty or it's the player's turn.
+     * Returns false if stack is non-empty or if own-turn suppression applies.
      */
     private boolean isValidSuggestionContext(GameView gv, PlayerView pv) {
         FCollectionView<StackItemView> stack = gv.getStack();
         if (stack != null && !stack.isEmpty()) {
             return false;
         }
+        // Check if it's the player's own turn
         PlayerView currentTurn = gv.getPlayerTurn();
-        return currentTurn == null || !currentTurn.equals(pv);
+        if (currentTurn != null && currentTurn.equals(pv)) {
+            // Always suppress on player's first turn (no lands/mana yet)
+            // First round = turn number <= player count
+            int numPlayers = gv.getPlayers().size();
+            if (gv.getTurn() <= numPlayers) {
+                return false;
+            }
+            // Otherwise check the preference
+            if (FModel.getPreferences().getPrefBoolean(FPref.YIELD_SUPPRESS_ON_OWN_TURN)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private boolean shouldShowNoManaPrompt() {
