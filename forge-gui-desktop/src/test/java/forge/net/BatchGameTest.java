@@ -3,6 +3,7 @@ package forge.net;
 import forge.gamemodes.net.NetworkDebugLogger;
 import forge.gui.GuiBase;
 import forge.model.FModel;
+import org.testng.SkipException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -29,6 +30,7 @@ public class BatchGameTest {
 
     @BeforeClass
     public void setUp() {
+        skipUnlessStressTestsEnabled();
         // Initialize headless environment (must be before NetworkDebugLogger)
         if (GuiBase.getInterface() == null) {
             GuiBase.setInterface(new HeadlessGuiDesktop());
@@ -36,6 +38,12 @@ public class BatchGameTest {
         }
         // Enable test mode for log file naming
         NetworkDebugLogger.setTestMode(true);
+    }
+
+    private void skipUnlessStressTestsEnabled() {
+        if (!"true".equalsIgnoreCase(System.getProperty("run.stress.tests"))) {
+            throw new SkipException("Stress tests skipped. Use -Drun.stress.tests=true to run.");
+        }
     }
 
     // ==================== Sequential Tests ====================
