@@ -29,11 +29,8 @@ public class HeadlessGuiDesktop extends GuiDesktop {
     // Flag to track if testing environment message has been logged
     private static boolean testingEnvironmentLogged = false;
 
-    // Static initialization - enable test mode and log banner
-    static {
-        NetworkDebugLogger.setTestMode(true);
-        logTestingEnvironment();
-    }
+    // Note: No static initializer - tests must call NetworkDebugLogger.setTestMode(true)
+    // AFTER setting GuiBase.setInterface() to avoid initialization order issues.
 
     /**
      * Create a HostedMatch without registering it with Singletons.getControl().
@@ -44,6 +41,8 @@ public class HeadlessGuiDesktop extends GuiDesktop {
      */
     @Override
     public HostedMatch hostMatch() {
+        // Log testing environment banner on first match (lazy initialization)
+        logTestingEnvironment();
         // Skip Singletons.getControl().addMatch() which requires full GUI init
         lastMatch = new HostedMatch();
         return lastMatch;
@@ -51,7 +50,7 @@ public class HeadlessGuiDesktop extends GuiDesktop {
 
     /**
      * Log a message indicating this is a testing environment.
-     * Called once when the first match is hosted.
+     * Called lazily on first match to avoid static initialization issues.
      */
     private static synchronized void logTestingEnvironment() {
         if (!testingEnvironmentLogged) {
