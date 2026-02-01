@@ -1164,12 +1164,10 @@ public class PhaseHandler implements java.io.Serializable {
             p.setHasPriority(getPriorityPlayer() == p);
         }
 
-        // Update available actions for yield suggestions (only if tracking enabled)
-        if (game.getRules().tracksAvailableActions()) {
-            Player priorityPlayer = getPriorityPlayer();
-            if (priorityPlayer != null) {
-                priorityPlayer.updateAvailableActionsForView();
-            }
+        // Update available actions for yield suggestions (per-player, based on controller preference)
+        Player priorityPlayer = getPriorityPlayer();
+        if (priorityPlayer != null && priorityPlayer.getController().shouldTrackAvailableActions()) {
+            priorityPlayer.getView().updateHasAvailableActions(priorityPlayer);
         }
     }
 

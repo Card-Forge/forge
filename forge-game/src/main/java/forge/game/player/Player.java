@@ -1762,63 +1762,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         view.updateWillLoseManaAtEndOfPhase(this);
     }
 
-    /**
-     * Check if this player has any available actions (playable spells/abilities).
-     * Used for smart yield suggestions in network play.
-     *
-     * Note: This uses a heuristic for mana checking since CostPartMana.canPay()
-     * always returns true. We estimate available mana from floating mana plus
-     * untapped mana sources and compare to spell CMCs.
-     */
-    public boolean hasAvailableActions() {
-        // Estimate available mana: floating mana + untapped mana-producing permanents
-        int availableMana = getManaPool().totalMana();
-        for (Card card : getCardsIn(ZoneType.Battlefield)) {
-            if (!card.isTapped() && !card.getManaAbilities().isEmpty()) {
-                // Count each untapped mana source as ~1 mana (simplified estimate)
-                availableMana++;
-            }
-        }
-
-        // Check hand for playable spells that we can afford
-        for (Card card : getCardsIn(ZoneType.Hand)) {
-            for (SpellAbility sa : card.getAllPossibleAbilities(this, true)) {
-                // Check if this is a spell we could potentially afford
-                if (sa.isSpell()) {
-                    int cmc = sa.getPayCosts().getTotalMana().getCMC();
-                    if (cmc <= availableMana) {
-                        return true;
-                    }
-                } else if (sa.isLandAbility()) {
-                    // Land abilities are already filtered by canPlay() for timing
-                    return true;
-                }
-            }
-        }
-
-        // Check battlefield for non-mana activated abilities we can afford
-        for (Card card : getCardsIn(ZoneType.Battlefield)) {
-            for (SpellAbility sa : card.getAllPossibleAbilities(this, true)) {
-                if (!sa.isManaAbility()) {
-                    // Check if we can afford the activation cost
-                    int activationCost = 0;
-                    if (sa.getPayCosts() != null && sa.getPayCosts().hasManaCost()) {
-                        activationCost = sa.getPayCosts().getTotalMana().getCMC();
-                    }
-                    if (activationCost <= availableMana) {
-                        return true;
-                    }
-                }
-            }
-        }
-
-        return false;
-    }
-
-    public void updateAvailableActionsForView() {
-        view.updateHasAvailableActions(this);
-    }
-
     public final int getNumPowerSurgeLands() {
         return numPowerSurgeLands;
     }

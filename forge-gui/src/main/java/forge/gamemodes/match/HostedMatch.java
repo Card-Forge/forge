@@ -76,11 +76,6 @@ public class HostedMatch {
         gameRules.setOrderCombatants(FModel.getPreferences().getPrefBoolean(FPref.LEGACY_ORDER_COMBATANTS));
         gameRules.setUseGrayText(FModel.getPreferences().getPrefBoolean(FPref.UI_GRAY_INACTIVE_TEXT));
         gameRules.setGamesPerMatch(FModel.getPreferences().getPrefInt(FPref.UI_MATCHES_PER_GAME));
-        // Enable available actions tracking when experimental yield features are on.
-        // Individual suggestion toggles control client display, not computation.
-        // Checking per-client preferences would require network protocol changes.
-        gameRules.setTrackAvailableActions(
-            FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS));
         // AI specific sideboarding rules
         switch (AiProfileUtil.getAISideboardingMode()) {
             case Off:
