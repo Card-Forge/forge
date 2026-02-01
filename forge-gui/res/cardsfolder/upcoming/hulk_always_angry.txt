@@ -1,0 +1,9 @@
+Name:Hulk, Always Angry
+ManaCost:5 R R
+Types:Legendary Creature Gamma Berserker Hero
+PT:9/9
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroyAll | TriggerDescription$ When NICKNAME enters, destroy all artifacts.
+SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Artifact
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ NICKNAME attacks each combat if able.
+Oracle:Trample\nWhen Hulk enters, destroy all artifacts.\nHulk attacks each combat if able.

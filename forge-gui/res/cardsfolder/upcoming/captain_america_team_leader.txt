@@ -1,0 +1,9 @@
+Name:Captain America, Team Leader
+ManaCost:R W U
+Types:Legendary Creature Human Soldier Hero
+PT:3/3
+T:Mode$ ChangesZone | ValidCard$ Hero.Other+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever another Hero you control enters, it gains vigilance and haste until end of turn. Put a +1/+1 counter on that Hero and a +1/+1 counter on NICKNAME.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredCardLKICopy | KW$ Vigilance & Haste | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ TriggeredCardLKICopy & Self | CounterType$ P1P1
+DeckHas:Ability$Counters
+Oracle:Whenever another Hero you control enters, it gains vigilance and haste until end of turn. Put a +1/+1 counter on that Hero and a +1/+1 counter on Captain America.
