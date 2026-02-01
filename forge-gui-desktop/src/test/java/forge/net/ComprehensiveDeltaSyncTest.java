@@ -7,6 +7,7 @@ import forge.net.analysis.AnalysisResult;
 import forge.net.analysis.GameLogMetrics;
 import forge.net.analysis.NetworkLogAnalyzer;
 import org.testng.Assert;
+import org.testng.SkipException;
 
 import java.util.List;
 import org.testng.annotations.BeforeClass;
@@ -49,6 +50,7 @@ public class ComprehensiveDeltaSyncTest {
 
     @BeforeClass
     public void setUp() {
+        skipUnlessStressTestsEnabled();
         // Initialize headless environment
         if (GuiBase.getInterface() == null) {
             GuiBase.setInterface(new HeadlessGuiDesktop());
@@ -56,6 +58,12 @@ public class ComprehensiveDeltaSyncTest {
         }
         NetworkDebugLogger.setTestMode(true);
         NetworkDebugLogger.log("%s Test environment initialized", LOG_PREFIX);
+    }
+
+    private void skipUnlessStressTestsEnabled() {
+        if (!"true".equalsIgnoreCase(System.getProperty("run.stress.tests"))) {
+            throw new SkipException("Stress tests skipped. Use -Drun.stress.tests=true to run.");
+        }
     }
 
     /**
