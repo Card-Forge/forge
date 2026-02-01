@@ -158,7 +158,11 @@ public class LogContextExtractor {
                 // Track turn changes
                 Matcher turnMatcher = TURN_PATTERN.matcher(line);
                 if (turnMatcher.find()) {
-                    currentTurn = Integer.parseInt(turnMatcher.group(1));
+                    try {
+                        currentTurn = Integer.parseInt(turnMatcher.group(1));
+                    } catch (NumberFormatException e) {
+                        // Skip malformed turn line
+                    }
                 }
 
                 // Track phase changes (try delta sync pattern first, then general)
@@ -245,14 +249,18 @@ public class LogContextExtractor {
             String line = lines.get(i);
             Matcher matcher = PLAYER_STATE_PATTERN.matcher(line);
             if (matcher.find()) {
-                states.add(new PlayerState(
-                        Integer.parseInt(matcher.group(1)),
-                        matcher.group(2).trim(),
-                        Integer.parseInt(matcher.group(3)),
-                        Integer.parseInt(matcher.group(4)),
-                        Integer.parseInt(matcher.group(5)),
-                        Integer.parseInt(matcher.group(6))
-                ));
+                try {
+                    states.add(new PlayerState(
+                            Integer.parseInt(matcher.group(1)),
+                            matcher.group(2).trim(),
+                            Integer.parseInt(matcher.group(3)),
+                            Integer.parseInt(matcher.group(4)),
+                            Integer.parseInt(matcher.group(5)),
+                            Integer.parseInt(matcher.group(6))
+                    ));
+                } catch (NumberFormatException e) {
+                    // Skip malformed player state line
+                }
             }
         }
 

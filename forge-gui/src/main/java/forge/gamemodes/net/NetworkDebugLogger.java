@@ -637,13 +637,18 @@ public final class NetworkDebugLogger {
         if (!enabled) {
             return;
         }
+        if (bytes == null || bytes.length == 0) {
+            return;
+        }
         ensureInitialized();
 
         StringBuilder sb = new StringBuilder();
         sb.append(label).append("\n");
 
-        int start = Math.max(0, errorPosition - 32);
-        int end = Math.min(bytes.length, errorPosition + 64);
+        // Bounds-check errorPosition to prevent negative indices
+        int safeErrorPosition = Math.max(0, Math.min(errorPosition, bytes.length - 1));
+        int start = Math.max(0, safeErrorPosition - 32);
+        int end = Math.min(bytes.length, safeErrorPosition + 64);
 
         sb.append(String.format("Bytes %d-%d (error at %d):%n", start, end - 1, errorPosition));
 

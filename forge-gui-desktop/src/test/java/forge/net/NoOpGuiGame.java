@@ -48,9 +48,19 @@ public class NoOpGuiGame implements IGuiGame {
     private PlaybackSpeed gameSpeed = PlaybackSpeed.NORMAL;
     private String dayTime = null;
 
-    // Controllers (mostly unused in headless mode)
+    // Controllers - used by setOriginalGameController/setGameController for interface compliance
+    // and to support potential future features like controller inspection
     private final Map<PlayerView, IGameController> gameControllers = new HashMap<>();
     private IGameController spectator;
+
+    /**
+     * Get the game controller for a player (for testing/debugging).
+     * @param player the player view
+     * @return the associated controller, or null if not set
+     */
+    public IGameController getGameController(PlayerView player) {
+        return gameControllers.get(player);
+    }
 
     // Auto-yield tracking (for interface compliance)
     private final java.util.Set<String> autoYields = new java.util.HashSet<>();
