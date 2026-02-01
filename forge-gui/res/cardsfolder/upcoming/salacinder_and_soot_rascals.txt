@@ -1,0 +1,12 @@
+Name:Salacinder and Soot, Rascals
+ManaCost:2 U R
+Types:Legendary Creature Elemental
+PT:3/3
+K:Prowess
+K:Trample
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigCharm | TriggerDescription$ When NICKNAME enters and whenever you cast an Elemental spell, ABILITY
+T:Mode$ SpellCast | ValidCard$ Elemental | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigCharm | TriggerDescription$ When NICKNAME enters and whenever you cast an Elemental spell, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBConjureRite,DBConjureTake
+SVar:DBConjureRite:DB$ MakeCard | Conjure$ True | Name$ Rite of Flame | Zone$ Hand | SpellDescription$ Conjure a card named Rite of Flame into your hand
+SVar:DBConjureTake:DB$ MakeCard | Conjure$ True | Name$ Take Inventory | Zone$ Hand | SpellDescription$ Conjure a card named Take Inventory into your hand.
+Oracle:Prowess, trample\nWhen Salacinder and Soot enters and whenever you cast an Elemental spell, choose one —\n• Conjure a card named Rite of Flame into your hand.\n• Conjure a card named Take Inventory into your hand.
