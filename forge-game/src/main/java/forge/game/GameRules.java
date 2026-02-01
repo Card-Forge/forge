@@ -17,6 +17,9 @@ public class GameRules {
     private final Set<GameType> appliedVariants = EnumSet.noneOf(GameType.class);
     private int simTimeout = 120;
 
+    // Whether to track available actions for yield suggestions (performance optimization)
+    private boolean trackAvailableActions = false;
+
     // it's a preference, not rule... but I could hardly find a better place for it
     private boolean useGrayText;
 
@@ -132,5 +135,12 @@ public class GameRules {
 
     public void setSimTimeout(final int duration) {
         this.simTimeout = duration;
+    }
+
+    public boolean tracksAvailableActions() {
+        return trackAvailableActions;
+    }
+    public void setTrackAvailableActions(boolean track) {
+        this.trackAvailableActions = track;
     }
 }

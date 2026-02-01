@@ -564,6 +564,29 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.HasAvailableActions, p.hasAvailableActions());
     }
 
+    /**
+     * Check if player has any mana available (floating or from untapped lands).
+     * Used by yield suggestion system to determine if player can cast spells.
+     */
+    public boolean hasManaAvailable() {
+        // Check floating mana
+        for (byte manaType : ManaAtom.MANATYPES) {
+            if (getMana(manaType) > 0) return true;
+        }
+
+        // Check for untapped lands
+        FCollectionView<CardView> battlefield = getBattlefield();
+        if (battlefield != null) {
+            for (CardView cv : battlefield) {
+                if (!cv.isTapped() && cv.getCurrentState().isLand()) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     public boolean willLoseManaAtEndOfPhase() {
         Boolean val = get(TrackableProperty.WillLoseManaAtEndOfPhase);
         return val != null && val;

@@ -17,7 +17,6 @@
  */
 package forge.gamemodes.match.input;
 
-import forge.card.mana.ManaAtom;
 import forge.game.Game;
 import forge.game.GameView;
 import forge.game.card.Card;
@@ -382,26 +381,7 @@ public class InputPassPriority extends InputSyncronizedBase {
             return false;
         }
 
-        return !hasManaAvailable(pv);
-    }
-
-    private boolean hasManaAvailable(PlayerView pv) {
-        // Check floating mana
-        for (byte manaType : ManaAtom.MANATYPES) {
-            if (pv.getMana(manaType) > 0) return true;
-        }
-
-        // Check for untapped lands (simplified check using view data)
-        FCollectionView<CardView> battlefield = pv.getBattlefield();
-        if (battlefield != null) {
-            for (CardView cv : battlefield) {
-                if (!cv.isTapped() && cv.getCurrentState().isLand()) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
+        return !pv.hasManaAvailable();
     }
 
     private boolean shouldShowNoActionsPrompt() {
