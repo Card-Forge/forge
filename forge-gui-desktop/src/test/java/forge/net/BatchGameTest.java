@@ -1,6 +1,8 @@
 package forge.net;
 
 import forge.gamemodes.net.NetworkDebugLogger;
+import forge.gui.GuiBase;
+import forge.model.FModel;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -27,6 +29,11 @@ public class BatchGameTest {
 
     @BeforeClass
     public void setUp() {
+        // Initialize headless environment (must be before NetworkDebugLogger)
+        if (GuiBase.getInterface() == null) {
+            GuiBase.setInterface(new HeadlessGuiDesktop());
+            FModel.initialize(null, preferences -> null);
+        }
         // Enable test mode for log file naming
         NetworkDebugLogger.setTestMode(true);
     }
