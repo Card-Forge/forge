@@ -694,4 +694,12 @@ public class NetGuiGame extends NetworkGuiGame {
         // TODO Auto-generated method stub
     }
 
+    @Override
+    public String toString() {
+        GameView gv = getGameView();
+        return String.format("NetGuiGame[client=%d, deltaSyncEnabled=%b, initialSyncSent=%b, gameView=%s]",
+                clientIndex, useDeltaSync, initialSyncSent,
+                gv != null ? "GameView@" + Integer.toHexString(System.identityHashCode(gv)) : "null");
+    }
+
 }

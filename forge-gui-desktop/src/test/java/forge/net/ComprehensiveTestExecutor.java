@@ -185,27 +185,47 @@ public class ComprehensiveTestExecutor {
 
         String twoP = System.getProperty("test.2pGames");
         if (twoP != null) {
-            executor.twoPlayerGames(Integer.parseInt(twoP));
+            try {
+                executor.twoPlayerGames(Integer.parseInt(twoP));
+            } catch (NumberFormatException e) {
+                System.err.println("Invalid test.2pGames value: " + twoP + ", using default");
+            }
         }
 
         String threeP = System.getProperty("test.3pGames");
         if (threeP != null) {
-            executor.threePlayerGames(Integer.parseInt(threeP));
+            try {
+                executor.threePlayerGames(Integer.parseInt(threeP));
+            } catch (NumberFormatException e) {
+                System.err.println("Invalid test.3pGames value: " + threeP + ", using default");
+            }
         }
 
         String fourP = System.getProperty("test.4pGames");
         if (fourP != null) {
-            executor.fourPlayerGames(Integer.parseInt(fourP));
+            try {
+                executor.fourPlayerGames(Integer.parseInt(fourP));
+            } catch (NumberFormatException e) {
+                System.err.println("Invalid test.4pGames value: " + fourP + ", using default");
+            }
         }
 
         String batchSize = System.getProperty("test.batchSize");
         if (batchSize != null) {
-            executor.parallelBatchSize(Integer.parseInt(batchSize));
+            try {
+                executor.parallelBatchSize(Integer.parseInt(batchSize));
+            } catch (NumberFormatException e) {
+                System.err.println("Invalid test.batchSize value: " + batchSize + ", using default");
+            }
         }
 
         String timeout = System.getProperty("test.timeoutMs");
         if (timeout != null) {
-            executor.gameTimeout(Long.parseLong(timeout));
+            try {
+                executor.gameTimeout(Long.parseLong(timeout));
+            } catch (NumberFormatException e) {
+                System.err.println("Invalid test.timeoutMs value: " + timeout + ", using default");
+            }
         }
 
         return executor;

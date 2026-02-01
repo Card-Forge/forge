@@ -86,7 +86,11 @@ public class NetworkLogAnalyzer {
         // Try to extract game index from filename (e.g., "game5" -> 5)
         Matcher indexMatcher = GAME_INDEX_PATTERN.matcher(logFile.getName());
         if (indexMatcher.find()) {
-            metrics.setGameIndex(Integer.parseInt(indexMatcher.group(1)));
+            try {
+                metrics.setGameIndex(Integer.parseInt(indexMatcher.group(1)));
+            } catch (NumberFormatException e) {
+                // Invalid game index in filename, leave as default
+            }
         }
 
         // Track packet-level metrics
@@ -105,30 +109,34 @@ public class NetworkLogAnalyzer {
                 // Delta packet metrics
                 Matcher packetMatcher = DELTA_PACKET_PATTERN.matcher(line);
                 if (packetMatcher.find()) {
-                    packetCount++;
-                    int packetNum = Integer.parseInt(packetMatcher.group(1));
-                    long approxBytes = Long.parseLong(packetMatcher.group(2));
-                    long actualBytes = Long.parseLong(packetMatcher.group(3));
-                    long fullStateBytes = Long.parseLong(packetMatcher.group(4));
+                    try {
+                        packetCount++;
+                        int packetNum = Integer.parseInt(packetMatcher.group(1));
+                        long approxBytes = Long.parseLong(packetMatcher.group(2));
+                        long actualBytes = Long.parseLong(packetMatcher.group(3));
+                        long fullStateBytes = Long.parseLong(packetMatcher.group(4));
 
-                    totalApproximateBytes += approxBytes;
-                    totalDeltaBytes += actualBytes;
-                    totalFullStateBytes += fullStateBytes;
+                        totalApproximateBytes += approxBytes;
+                        totalDeltaBytes += actualBytes;
+                        totalFullStateBytes += fullStateBytes;
 
-                    // Look for savings line (usually follows immediately)
-                    String nextLine = reader.readLine();
-                    if (nextLine != null) {
-                        Matcher savingsMatcher = SAVINGS_PATTERN.matcher(nextLine);
-                        if (savingsMatcher.find()) {
-                            double approxSavings = Double.parseDouble(savingsMatcher.group(1));
-                            double actualSavings = Double.parseDouble(savingsMatcher.group(2));
-                            approximateSavingsList.add(approxSavings);
-                            actualSavingsList.add(actualSavings);
+                        // Look for savings line (usually follows immediately)
+                        String nextLine = reader.readLine();
+                        if (nextLine != null) {
+                            Matcher savingsMatcher = SAVINGS_PATTERN.matcher(nextLine);
+                            if (savingsMatcher.find()) {
+                                double approxSavings = Double.parseDouble(savingsMatcher.group(1));
+                                double actualSavings = Double.parseDouble(savingsMatcher.group(2));
+                                approximateSavingsList.add(approxSavings);
+                                actualSavingsList.add(actualSavings);
 
-                            metrics.addPacket(new GameLogMetrics.PacketMetrics(
-                                    packetNum, approxBytes, actualBytes, fullStateBytes,
-                                    approxSavings, actualSavings));
+                                metrics.addPacket(new GameLogMetrics.PacketMetrics(
+                                        packetNum, approxBytes, actualBytes, fullStateBytes,
+                                        approxSavings, actualSavings));
+                            }
                         }
+                    } catch (NumberFormatException e) {
+                        // Skip malformed packet line
                     }
                     continue;
                 }
@@ -144,9 +152,13 @@ public class NetworkLogAnalyzer {
                 // Turn tracking
                 Matcher turnMatcher = TURN_PATTERN.matcher(line);
                 if (turnMatcher.find()) {
-                    int turn = Integer.parseInt(turnMatcher.group(1));
-                    if (turn > maxTurn) {
-                        maxTurn = turn;
+                    try {
+                        int turn = Integer.parseInt(turnMatcher.group(1));
+                        if (turn > maxTurn) {
+                            maxTurn = turn;
+                        }
+                    } catch (NumberFormatException e) {
+                        // Skip malformed turn line
                     }
                     continue;
                 }
@@ -169,10 +181,14 @@ public class NetworkLogAnalyzer {
                     for (int i = 1; i <= playerMatcher.groupCount(); i++) {
                         String match = playerMatcher.group(i);
                         if (match != null) {
-                            int count = Integer.parseInt(match);
-                            if (count >= 2 && count <= 4) {
-                                metrics.setPlayerCount(count);
-                                break;
+                            try {
+                                int count = Integer.parseInt(match);
+                                if (count >= 2 && count <= 4) {
+                                    metrics.setPlayerCount(count);
+                                    break;
+                                }
+                            } catch (NumberFormatException e) {
+                                // Skip malformed player count
                             }
                         }
                     }
