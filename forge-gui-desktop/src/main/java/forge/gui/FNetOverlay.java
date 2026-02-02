@@ -1,18 +1,12 @@
 package forge.gui;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JTextPane;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -30,6 +24,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
+import forge.toolbox.FTextArea;
 import forge.toolbox.FTextField;
 import forge.toolbox.SmartScroller;
 import forge.util.Localizer;
@@ -75,12 +70,7 @@ public enum FNetOverlay implements IOnlineChatInterface {
         return this.window;
     }
     
-    // JTextPane with StyledDocument for colored system messages
-    private final JTextPane txtLog = new JTextPane();
-    private StyledDocument doc;
-    private SimpleAttributeSet systemStyle;
-    private SimpleAttributeSet playerStyle;
-
+    private final FTextArea txtLog = new FTextArea();
     private final FTextField txtInput = new FTextField.Builder().maxLength(255).build();
     private final FLabel cmdSend = new FLabel.ButtonBuilder().text(Localizer.getInstance().getMessage("lblSend")).build(); 
 
@@ -113,19 +103,6 @@ public enum FNetOverlay implements IOnlineChatInterface {
      * Semi-transparent overlay panel. Should be used with layered panes.
      */
     FNetOverlay() {
-        // Initialize styled document for colored messages
-        doc = txtLog.getStyledDocument();
-        systemStyle = new SimpleAttributeSet();
-        playerStyle = new SimpleAttributeSet();
-
-        // Configure system message style: light blue RGB(100, 150, 255) - matches mobile implementation
-        StyleConstants.setForeground(systemStyle, new Color(100, 150, 255));
-
-        // Configure player message style (default foreground color from skin, with fallback)
-        FSkin.SkinColor skinTextColor = FSkin.getColor(FSkin.Colors.CLR_TEXT);
-        Color playerColor = (skinTextColor != null) ? skinTextColor.getColor() : Color.WHITE;
-        StyleConstants.setForeground(playerStyle, playerColor);
-
         window.setTitle(Localizer.getInstance().getMessage("lblChat"));
         window.setVisible(false);
         window.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
@@ -133,12 +110,10 @@ public enum FNetOverlay implements IOnlineChatInterface {
 
         window.setLayout(new MigLayout("insets 0, gap 0, ax center, wrap 2"));
 
-        // Configure JTextPane as read-only chat log
+        // Block all input events below the overlay
         txtLog.setOpaque(true);
         txtLog.setFocusable(true);
-        txtLog.setEditable(false);
-        FSkin.SkinColor skinZebraColor = FSkin.getColor(FSkin.Colors.CLR_ZEBRA);
-        txtLog.setBackground((skinZebraColor != null) ? skinZebraColor.getColor() : Color.DARK_GRAY);
+        txtLog.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
 
         FScrollPane _operationLogScroller = new FScrollPane(txtLog, false);
         _operationLogScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -155,11 +130,7 @@ public enum FNetOverlay implements IOnlineChatInterface {
 
     public void reset() {
         setGameClient(null);
-        try {
-            doc.remove(0, doc.getLength());
-        } catch (BadLocationException e) {
-            // Ignore - document is being cleared
-        }
+        txtLog.setText("");
         hide();
     }
 
@@ -182,14 +153,7 @@ public enum FNetOverlay implements IOnlineChatInterface {
             });
         }
         if (message != null) {
-            try {
-                doc.remove(0, doc.getLength());
-                SimpleAttributeSet style = message.isSystemMessage() ? systemStyle : playerStyle;
-                doc.insertString(0, message.getFormattedMessage(), style);
-            } catch (BadLocationException e) {
-                // Fallback to plain text if styled insert fails
-                txtLog.setText(message.getFormattedMessage());
-            }
+            txtLog.setText(message.getFormattedMessage());
         }
         window.setVisible(true);
     }
@@ -249,14 +213,6 @@ public enum FNetOverlay implements IOnlineChatInterface {
 
     @Override
     public void addMessage(final ChatMessage message) {
-        try {
-            // Choose style based on message type
-            SimpleAttributeSet style = message.isSystemMessage() ? systemStyle : playerStyle;
-            String text = "\n" + message.getFormattedMessage();
-            doc.insertString(doc.getLength(), text, style);
-        } catch (BadLocationException e) {
-            // Fallback - should not occur in normal operation
-            e.printStackTrace();
-        }
+        txtLog.append("\n" + message.getFormattedMessage());
     }
 }
