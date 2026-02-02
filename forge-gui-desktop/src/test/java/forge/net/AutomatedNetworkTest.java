@@ -6,6 +6,7 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 
 import org.testng.Assert;
+import org.testng.SkipException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -21,6 +22,7 @@ public class AutomatedNetworkTest {
 
     @BeforeClass
     public static void setUp() {
+        skipUnlessStressTestsEnabled();
         if (!initialized) {
             // Use HeadlessGuiDesktop for testing without display server
             GuiBase.setInterface(new HeadlessGuiDesktop());
@@ -30,6 +32,19 @@ public class AutomatedNetworkTest {
                 return null;
             });
             initialized = true;
+        }
+    }
+
+    /**
+     * Skip all tests in this class unless stress tests are explicitly enabled.
+     * Run with -Drun.stress.tests=true to enable these tests.
+     *
+     * These tests run full MTG game simulations which take 50-120+ seconds each,
+     * making them unsuitable for CI pipelines with time constraints.
+     */
+    private static void skipUnlessStressTestsEnabled() {
+        if (!"true".equalsIgnoreCase(System.getProperty("run.stress.tests"))) {
+            throw new SkipException("Stress tests skipped. Use -Drun.stress.tests=true to run.");
         }
     }
 
