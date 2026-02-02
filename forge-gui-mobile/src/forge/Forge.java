@@ -128,6 +128,7 @@ public class Forge implements ApplicationListener {
     public static boolean forcedEnglishonCJKMissing = false;
     public static boolean createNewAdventureMap = false;
     private static Localizer localizer;
+    private static boolean desktopAutoOrientation = true;
 
     public static ApplicationListener getApp(HWInfo hwInfo, Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean propertyConfig, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI) {
         if (app == null) {
@@ -190,6 +191,11 @@ public class Forge implements ApplicationListener {
         //screenWidth and screenHeight should be set initially and only change upon restarting the app
         screenWidth = Gdx.app.getGraphics().getWidth();
         screenHeight = Gdx.app.getGraphics().getHeight();
+
+        // Desktop default: auto-detect from initial window/backbuffer aspect ratio
+        if (!GuiBase.isAndroid() && desktopAutoOrientation) {
+            isPortraitMode = screenHeight > screenWidth;
+        }
 
         Gdx.input.setInputProcessor(inputProcessor);
         /*
@@ -1658,5 +1664,9 @@ public class Forge implements ApplicationListener {
         Controllers.addListener(controllerListener);
         if (Controllers.getCurrent() != null)
             System.out.println("Gamepad: " + Controllers.getCurrent().getName());
+    }
+
+    public static void setDesktopAutoOrientation(boolean auto) {
+        desktopAutoOrientation = auto;
     }
 }

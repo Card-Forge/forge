@@ -1,6 +1,7 @@
 package forge.app;
 
 import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Graphics.DisplayMode;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Clipboard;
@@ -58,28 +59,60 @@ public class GameLauncher {
         }
 
         // Retrieve command line parameters
-        int windowHeight = 0;
-        int windowWidth = 0;
-        boolean isPortrait = false;
-        boolean manualWindowSize = false;
+        Integer widthArg = null;
+        Integer heightArg = null;
+        boolean portraitArg = false;
+        boolean landscapeArg = false;
         for(String arg : args) {
-            if(arg.startsWith("width=")) {
-                windowWidth = Integer.parseInt(arg.substring(6));
-                manualWindowSize = true;
-            }
-            if(arg.startsWith("height=")) {
-                windowHeight = Integer.parseInt(arg.substring(7));
-                manualWindowSize = true;
-            }
-            if(arg.equalsIgnoreCase("portrait")) {
-                isPortrait = true;
-            }
+            if(arg.startsWith("width=")) widthArg = Integer.parseInt(arg.substring(6));
+            else if(arg.startsWith("height=")) heightArg = Integer.parseInt(arg.substring(7));
+            else if(arg.equalsIgnoreCase("portrait")) portraitArg = true;
+            else if(arg.equalsIgnoreCase("landscape")) landscapeArg = true;
         }
 
-        // Check if the manually supplied window size indicates portrait mode
-        if ((windowHeight > 0) && (windowWidth > 0)) {
-            if (windowHeight > windowWidth) {
-                isPortrait = true;
+        boolean hasAnyDimArg = (widthArg != null || heightArg != null);
+        boolean hasBothDims = (widthArg != null && heightArg != null);
+
+        boolean manualWindowSize = hasAnyDimArg;
+        
+        // Only disable desktop auto-orientation when the user *really* overrides it
+        boolean overrideOrientation = portraitArg || landscapeArg || hasBothDims;
+        Forge.setDesktopAutoOrientation(!overrideOrientation);
+
+        // Determine desired portrait/landscape only if we are overriding orientation.
+        boolean isPortrait = false;
+        if (portraitArg) isPortrait = true;
+        else if (landscapeArg) isPortrait = false;
+        else if (hasBothDims) isPortrait = (heightArg > widthArg);
+
+        // Initialize window size
+        int windowWidth = 0, windowHeight = 0;
+
+        if (manualWindowSize) {
+            float aspect = getPrimaryScreenAspect(); // width/height
+
+            // If explicit portrait/landscape requested, coerce aspect direction
+            if (portraitArg && aspect > 1f) aspect = 1f / aspect;
+            if (landscapeArg && aspect < 1f) aspect = 1f / aspect;
+
+            if (widthArg != null && heightArg == null) {
+                windowWidth = widthArg;
+                windowHeight = Math.max(1, Math.round(windowWidth / aspect));
+            } else if (heightArg != null && widthArg == null) {
+                windowHeight = heightArg;
+                windowWidth = Math.max(1, Math.round(windowHeight * aspect));
+            } else { // both provided
+                windowWidth = widthArg;
+                windowHeight = heightArg;
+            }
+
+            // If user explicitly overrode orientation (portrait/landscape or both dims), normalize by swapping
+            if (overrideOrientation) {
+                if (isPortrait && windowHeight < windowWidth) {
+                    int tmp = windowHeight; windowHeight = windowWidth; windowWidth = tmp;
+                } else if (!isPortrait && windowWidth < windowHeight) {
+                    int tmp = windowHeight; windowHeight = windowWidth; windowWidth = tmp;
+                }
             }
         }
 
@@ -137,5 +170,11 @@ public class GameLauncher {
         config.setHdpiMode(HdpiMode.Logical);
 
         new Lwjgl3Application(start, config);
+    }
+
+    private static float getPrimaryScreenAspect() {
+        DisplayMode dm = Lwjgl3ApplicationConfiguration.getDisplayMode();
+        if (dm == null || dm.height == 0) return 16f / 9f; // sane fallback
+        return (float) dm.width / (float) dm.height; // width/height
     }
 }
