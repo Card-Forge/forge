@@ -853,6 +853,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         daytime = null;
     }
 
+    @Override
     public void updateDependencies() {
     }
     // End of Choice code

@@ -313,4 +313,12 @@ public class GameView extends TrackableObject {
     public AnteResult getAnteResult(PlayerView player) {
         return getOutcome().getAnteResult(player);
     }
+
+    @Override
+    public String toString() {
+        return String.format("GameView[id=%d, turn=%d, phase=%s, players=%d, gameOver=%b]",
+                getId(), getTurn(), getPhase(),
+                getPlayers() != null ? getPlayers().size() : 0,
+                isGameOver());
+    }
 }

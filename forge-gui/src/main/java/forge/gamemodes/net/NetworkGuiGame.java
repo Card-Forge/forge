@@ -95,7 +95,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
         // When updating an existing game view, the incoming gameView0 may not have
         // its tracker initialized (since tracker is transient and null after deserialization).
         // We need to ensure it has a tracker before copyChangedProps tries to use it.
-        if (gameView0.getTracker() == null) {
+        if (gameView0.getTracker() == null && getGameView() != null) {
             // Use the existing gameView's tracker for the incoming gameView0
             Tracker existingTracker = getGameView().getTracker();
             if (existingTracker != null) {
