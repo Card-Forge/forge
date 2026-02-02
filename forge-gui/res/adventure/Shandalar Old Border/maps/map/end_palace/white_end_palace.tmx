@@ -90,37 +90,11 @@
 								"op": "&gt;=",
 								"val": 4
 							}
-						},
-						{
-                            "checkQuestFlag": "mainQuest",
-                            "not": true
-                        }
+						}
 					],
 					"text": "With an extremely loud blast, the gate burst open, leaving only ashes in your path. You are now free to pass.",
 					"options": [ { "name": "(continue)" } ]
 				},
-					{
-                	    "name": "Serra, I've defeated your guardians! It's time to end this!",
-                		"action": [ { "deleteMapObject": 55 } ],
-                		"condition": [
-                			{
-                				"getMapFlag": {
-                					"key": "enemiesDefeated",
-                					"op": "&gt;=",
-                					"val": 4
-                				}
-                			},
-                			{
-                                "checkQuestFlag": "Ch1WhiteCastleComplete",
-                                "not": true
-                            },
-                            {
-                                "checkQuestFlag": "mainQuest"
-                            }
-                		],
-                		"text": "With an extremely loud blast, the gate burst open, leaving only ashes in your path. You are now free to pass.",
-                		"options": [ { "name": "(continue)" } ]
-                	},
 				{
 					"name": "You knock on the door",
 					"condition": [ { "checkMapFlag": "intro" } ],
@@ -140,7 +114,7 @@
   </object>
   <object id="65" template="../../../../../../common/maps/obj/entry_down.tx" x="353" y="543.5" width="46" height="21.5">
    <properties>
-    <property name="teleport" value="../common/maps/map/main_story/castles/white_castle_f1.tmx" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/end_palace/white_end_palace_f1.tmx" />
    </properties>
   </object>
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="674.667" y="597.666">

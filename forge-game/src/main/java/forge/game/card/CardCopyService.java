@@ -130,7 +130,6 @@ public class CardCopyService {
         }
 
         c.setState(in.getCurrentStateName(), false);
-        c.setRules(in.getRules());
         c.setBackSide(in.isBackSide());
 
         return c;
@@ -236,8 +235,6 @@ public class CardCopyService {
         newCopy.setCommander(copyFrom.isCommander());
         newCopy.setCollectible(copyFrom.isCollectible());
 
-        newCopy.setRules(copyFrom.getRules());
-
         // needed to ensure that the LKI object has correct CMC info no matter what state the original card was in
         // (e.g. Scrap Trawler + transformed Harvest Hand)
         newCopy.setLKICMC(copyFrom.getCMC());
@@ -338,7 +335,10 @@ public class CardCopyService {
         }
 
         newCopy.setIntensity(copyFrom.getIntensity(false));
-        newCopy.setPerpetual(copyFrom);
+        // Don't re-apply perpetual effects - they're already copied via copyFrom().
+        // Re-applying would create duplicate ReplacementEffect objects that cause
+        // infinite recursion in getReplacementList for "enters tapped" effects.
+        newCopy.setPerpetual(copyFrom, false);
 
         newCopy.addRemembered(copyFrom.getRemembered());
         newCopy.addImprintedCards(copyFrom.getImprintedCards());
@@ -358,7 +358,6 @@ public class CardCopyService {
         newCopy.setStoredReplacements(copyFrom.getStoredReplacements());
 
         newCopy.copyChangedTextFrom(copyFrom);
-        newCopy.changedTypeByText = copyFrom.changedTypeByText;
         newCopy.changedCardKeywordsByWord = copyFrom.changedCardKeywordsByWord.copy(newCopy, true);
 
         newCopy.setGameTimestamp(copyFrom.getGameTimestamp());
@@ -377,7 +376,7 @@ public class CardCopyService {
 
         // update keyword cache on all states
         for (CardStateName s : newCopy.getStates()) {
-            newCopy.updateKeywordsCache(newCopy.getState(s));
+            newCopy.getState(s).updateKeywordsCache();
         }
 
         if (copyFrom.getCastSA() != null) {

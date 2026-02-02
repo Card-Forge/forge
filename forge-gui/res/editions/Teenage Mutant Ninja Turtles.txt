@@ -5,14 +5,75 @@ Name=Teenage Mutant Ninja Turtles
 Type=Expansion
 
 [cards]
+2 R Agent Bishop, Man in Black @Adrián Rodríguez Pérez
+13 R Leader's Talent @Manuel Castañón
+15 R Leonardo, Cutting Edge @Chris Seaman
 17 M Leonardo, Sewer Samurai @Ryan Pancoast
+18 R Leonardo's Technique @Andreas Zafiratos
+22 R Prehistoric Pet @Jakob Eirich
+24 R Sally Pride, Lioness Leader @Andrea Tentori Montalto
+25 M Triceraton Commander @Nathaniel Himawan
+26 R Turncoat Kunoichi @Manuel Castañón
 27 R Turtles Forever @Devin Elle Kurtz
 29 R April O'Neil, Hacktivist @Xabi Gaztelua
+34 R Does Machines @Aeron Ng
+35 R Donatello, Gadget Master @Svetlin Velinov
+36 M Donatello, Mutant Mechanic @Zoltan Boros
+41 R Kitsune, Dragon's Daughter @Robin Har
+42 R Kitsune's Technique @Rose Benjamin
 43 R Krang, Master Mind @Narendra Bintara Adi
+46 M Mondo Gecko @Maël Ollivier-Henry
+50 R Renet, Temporal Apprentice @Yuhong Ding
+55 M Turtles in Time @Inkognit
+58 R Armaggon, Future Shark @Mathias Kollros
+60 M The Cloning of Shredder @Chris Seaman
+66 R Madame Null, Power Broker @Irina Nordsol
+67 R Ninja Teen @Justyna Dura
+71 R Rat King, Verminister @Miklós Ligeti
+72 R Savanti Romero, Time's Exile @Michele Giorgi
+73 R Shark Shredder, Killer Clone @Nicholas Gregory
+78 R South Wind Avatar @InHyuk Lee
+80 R Splinter's Technique @Jo Cordisco
 83 M Super Shredder @Néstor Ossandón Leal
+86 M Broadcast Takeover @Hokyoung Kim
 87 U Casey Jones, Jury-Rig Justiciar @Lordigan
+88 R Casey Jones, Vigilante @Xavier Ribeiro
+89 R Cool but Rude @Lordigan
+92 R Improvised Arsenal @Leanna Crossan
+102 M Raphael, Ninja Destroyer @Fajareka Setiawan
+103 R Raphael, the Nightwatcher @Greg Staples
 105 R Raphael's Technique @Andreas Zafiratos
+106 R Ravenous Robots @Kevin Sidharta
+108 R Slash, Reptile Rampager @Andrew Mar
+115 R Groundchuck & Dirtbag @Nicholas Gregory
+117 R Leatherhead, Swamp Stalker @Lie Setiawan
+119 M Michelangelo, Improviser @Narendra Bintara Adi
+121 R Michelangelo, Weirdness to 11 @Jason Kiantoro
+122 R Michelangelo's Technique @Dominik Mayer
+124 R Mutagen Man, Living Ooze @Ignatius Budi
+128 R Party Dude @Gabriel Rubio
+134 R Transdimensional Bovine @Lius Lasahido
+135 R Turtle Power! @Hokyoung Kim
 140 R Bebop & Rocksteady @Néstor Ossandón Leal
+142 M Dark Leo & Shredder @Thomas Chamberlain-Keen
+143 R Don & Leo, Problem Solvers @Néstor Ossandón Leal
+144 R Don & Raph, Hard Science @Anthony Devine
+153 R Krang & Shredder @Néstor Ossandón Leal
+154 M The Last Ronin @Hokyoung Kim
+157 R Mikey & Don, Party Planners @Gabriel Rubio
+158 R Mikey & Leo, Chaos & Order @Jason Rainville
+162 M North Wind Avatar @Andrey Kuzinskiy
+166 R Raph & Leo, Sibling Rivals @Fajareka Setiawan
+167 R Raph & Mikey, Troublemakers @Aaron J. Riley
+169 R Splinter, Radical Rat @Manuel Castañón
+171 R Tokka & Rahzar, Terrible Twos @Yuhong Ding
+172 R Chrome Dome @Mathias Kollros
+175 M Krang, Utrom Warlord @Lordigan
+177 R The Ooze @Gabriel Tanko
+179 M Technodrome @Greg Staples
+181 R Turtle Van @Jakob Eirich
+182 R Weather Maker @Florent Lebrun
+188 R Northampton Farm @Marina Ortega Lorente
 253 L Plains @Gaboleps
 254 L Island @Gaboleps
 255 L Swamp @Gaboleps

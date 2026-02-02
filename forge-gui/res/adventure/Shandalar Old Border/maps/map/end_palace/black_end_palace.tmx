@@ -83,37 +83,11 @@
 								"op": "&gt;=",
 								"val": 4
 							}
-						},
-						{
-                            "checkQuestFlag": "mainQuest",
-                            "not": true
-                        }
+						}
 					],
 					"text": "With a gust of black wind, the door scatters into thousands of pieces. You are now free to pass.",
 					"options": [ { "name": "(continue)" } ]
 				},
-				{
-                	"name": "Yawgmoth, your guardians have fallen! It's time to end this!",
-                	"action": [ { "deleteMapObject": 55 } ],
-                	"condition": [
-                	{
-                		"getMapFlag": {
-                	    	"key": "enemiesDefeated",
-                			"op": "&gt;=",
-                			"val": 4
-                		}
-                	},
-                    {
-                        "checkQuestFlag": "Ch1BlackCastleComplete",
-                        "not": true
-                    },
-                    {
-                        "checkQuestFlag": "mainQuest"
-                    }
-                	],
-                		"text": "With a gust of black wind, the door scatters into thousands of pieces. You are now free to pass.",
-                		"options": [ { "name": "(continue)" } ]
-                },
 				{
 					"name": "You knock on the door",
 					"condition": [ { "checkMapFlag": "intro" } ],
@@ -133,7 +107,7 @@
   </object>
   <object id="65" template="../../../../../../common/maps/obj/entry_up.tx" x="355" y="543.5" width="44.5" height="52">
    <properties>
-    <property name="teleport" value="../common/maps/map/main_story/castles/black_castle_f1.tmx" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/end_palace/black_end_palace_f1.tmx" />
    </properties>
   </object>
   <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="89.5" y="601">

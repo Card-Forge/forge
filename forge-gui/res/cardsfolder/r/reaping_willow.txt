@@ -1,0 +1,8 @@
+Name:Reaping Willow
+ManaCost:1 WB WB WB
+Types:Creature Treefolk Cleric
+PT:3/6
+K:Lifelink
+K:etbCounter:M1M1:2
+A:AB$ ChangeZone | Cost$ 1 WB RemoveAnyCounter<2/Any/Card.Self/this creature> | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.cmcLE3+YouOwn | TgtPrompt$ Select target creature card with mana value 3 or less in your graveyard | SorcerySpeed$ True | SpellDescription$ Return target creature card with mana value 3 or less from your graveyard to the battlefield. Activate only as a sorcery.
+Oracle:Lifelink\nThis creature enters with two -1/-1 counters on it.\n{1}{W/B}, Remove two counters from this creature: Return target creature card with mana value 3 or less from your graveyard to the battlefield. Activate only as a sorcery.

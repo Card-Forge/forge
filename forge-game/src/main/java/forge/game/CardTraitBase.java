@@ -190,6 +190,7 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
         }
         return level == Integer.parseInt(classLevel);
     }
+    public boolean isManaAbility() { return false; }
 
     /**
      * <p>
@@ -376,20 +377,6 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
                     return false;
                 }
             } else if (StringUtils.countMatches(payingMana, MagicColor.toShortString(color)) < 3) {
-                return false;
-            }
-        }
-
-        if (params.containsKey("Presence")) {
-            if (hostCard.getCastFrom() == null || hostCard.getCastSA() == null)
-                return false;
-
-            final String type = params.get("Presence");
-
-            int revealed = AbilityUtils.calculateAmount(hostCard, "Revealed$Valid " + type, hostCard.getCastSA());
-            int ctrl = AbilityUtils.calculateAmount(hostCard, "Count$LastStateBattlefield " + type + ".YouCtrl", hostCard.getCastSA());
-
-            if (revealed + ctrl == 0) {
                 return false;
             }
         }

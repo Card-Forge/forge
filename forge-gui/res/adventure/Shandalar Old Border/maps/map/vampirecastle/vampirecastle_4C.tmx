@@ -41,6 +41,27 @@
   </object>
   <object id="79" template="../../../../../../common/maps/obj/enemy.tx" x="744.5" y="143.954">
    <properties>
+    <property name="dialog">[
+    {
+        "condition": [
+            { "checkQuestFlag": "mainQuest" },
+            { "checkCharacterFlag": "dungeonMasterQuestGiven", "not": true }
+        ],
+        "text": "You sense this creature is one of many powerful beings lurking in the hidden lairs of Shandalar. Perhaps you should track your progress in clearing them.",
+        "options": [
+            {
+                "name": "(Accept the challenge)",
+                "action": [
+                    {
+                        "issueQuest": "54",
+                        "setCharacterFlag": { "key": "dungeonMasterQuestGiven", "val": 1 }
+                    }
+                ],
+                "text": "[Quest Added: Dungeon Master]"
+            }
+        ]
+    }
+]</property>
     <property name="effect">{ "startBattleWithCard": [ "Castle Sengir|HML", "Ebon Stronghold|FEM", "Subversion|ULG" ] }</property>
     <property name="enemy" value="Sorin" />
     <property name="reward">[

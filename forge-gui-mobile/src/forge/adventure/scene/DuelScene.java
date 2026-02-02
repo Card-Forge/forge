@@ -24,8 +24,11 @@ import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
+import forge.game.GameOutcome;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.quest.QuestUtil;
+import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
 import forge.gui.FThreads;
 import forge.gui.interfaces.IGuiGame;
 import forge.item.IPaperCard;
@@ -105,6 +108,18 @@ public class DuelScene extends ForgeScene {
                     if (humans.size() == 1) {
                         Current.player().setShards(humans.get(0).getPlayer().getNumManaShards());
                     }
+                }
+            }
+
+            // Mostly for ante handling, but also blacker lotus
+            GameOutcome.AnteResult anteResult = hostedMatch.getGame().getOutcome().getAnteResult(humanPlayer);
+            if (anteResult != null) {
+                for (PaperCard card : anteResult.wonCards) {
+                    Current.player().addCard(card);
+                }
+                for (PaperCard card : anteResult.lostCards) {
+                    // We could clean this up by trying to combine all the lostCards into a mapping, but good enough for now
+                    Current.player().removeLostCardFromPools(card);
                 }
             }
         } catch (Exception e) {
@@ -371,8 +386,8 @@ public class DuelScene extends ForgeScene {
             rules = new GameRules(GameType.Adventure);
             rules.setGamesPerMatch(enemy.getData().gamesPerMatch);
         }
-        rules.setPlayForAnte(false);
-        rules.setMatchAnteRarity(true);
+        rules.setPlayForAnte(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ANTE));
+        rules.setMatchAnteRarity(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ANTE_MATCH_RARITY));
         rules.setManaBurn(false);
         rules.setWarnAboutAICards(false);
 

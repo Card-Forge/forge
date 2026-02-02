@@ -3,6 +3,6 @@ ManaCost:1 W
 Types:Creature Human Knight
 PT:2/2
 K:First Strike
-K:Hexproof:Card.Black:black
+K:Hexproof:Black
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | IsPresent$ Permanent.Black | Description$ CARDNAME gets +1/+0 as long as any player controls a black permanent.
 Oracle:First strike\nHexproof from black (This creature can't be the target of black spells or abilities your opponents control.)\nKnight of Grace gets +1/+0 as long as any player controls a black permanent.

@@ -2,7 +2,7 @@ Name:Famished Foragers
 ManaCost:3 R
 Types:Creature Vampire
 PT:4/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigMana | TriggerDescription$ When CARDNAME enters, if an opponent lost life this turn, add {R}{R}{R}.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ X | Execute$ TrigMana | TriggerDescription$ When CARDNAME enters, if an opponent lost life this turn, add {R}{R}{R}.
 SVar:TrigMana:DB$ Mana | Produced$ R | Amount$ 3
 A:AB$ Draw | Cost$ 2 R Discard<1/Card> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:X:Count$LifeOppsLostThisTurn

@@ -89,37 +89,11 @@
 								"op": "&gt;=",
 								"val": 4
 							}
-						},
-						{
-                            "checkQuestFlag": "mainQuest",
-                            "not": true
-                        }
+						}
 					],
 					"text": "With an extremely loud roar, the gate burst open, leaving only ashes in your path. You are now free to pass.",
 					"options": [ { "name": "(continue)" } ]
 				},
-				{
-                	"name": "Gaea, I've defeated your guardians! It's time to end this!",
-                	"action": [ { "deleteMapObject": 55 } ],
-                	"condition": [
-                		{
-                			"getMapFlag": {
-                				"key": "enemiesDefeated",
-                				"op": "&gt;=",
-                				"val": 4
-                			}
-                		},
-                		{
-                               "checkQuestFlag": "Ch1GreenCastleComplete",
-                               "not": true
-                        },
-                        {
-                            "checkQuestFlag": "mainQuest"
-                        }
-                	],
-                	"text": "With an extremely loud roar, the gate burst open, leaving only ashes in your path. You are now free to pass.",
-                	"options": [ { "name": "(continue)" } ]
-                },
 				{
 					"name": "You knock on the door",
 					"condition": [ { "checkMapFlag": "intro" } ],
@@ -139,7 +113,7 @@
   </object>
   <object id="65" template="../../../../../../common/maps/obj/entry_down.tx" x="347.5" y="544.5" width="56.5" height="16">
    <properties>
-    <property name="teleport" value="../common/maps/map/main_story/castles/green_castle_f1.tmx" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/end_palace/green_end_palace_f1.tmx" />
    </properties>
   </object>
   <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="79.3333" y="603">

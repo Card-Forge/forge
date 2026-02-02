@@ -3,6 +3,6 @@ ManaCost:4 G
 Types:Creature Elf Soldier
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters, you become the monarch.
-SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
+SVar:TrigMonarch:DB$ BecomeMonarch
 S:Mode$ CanBlockAmount | ValidCard$ Card.Self | Amount$ 1 | Condition$ Monarch | Description$ CARDNAME can block an additional creature each combat as long as you're the monarch.
 Oracle:When Entourage of Trest enters, you become the monarch.\nEntourage of Trest can block an additional creature each combat as long as you're the monarch.

@@ -1,0 +1,10 @@
+Name:Soulbright Seeker
+ManaCost:R
+Types:Creature Elemental Sorcerer
+PT:2/1
+K:AlternateAdditionalCost:Behold<1/Elemental>:2
+A:AB$ Pump | Cost$ R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Trample | SubAbility$ DBMana | SpellDescription$ Target creature you control gains trample until end of turn. If this is the third time this ability has resolved this turn, add {R}{R}{R}{R}.
+SVar:DBMana:DB$ Mana | Produced$ R | Amount$ 4 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ3
+SVar:X:Count$ResolvedThisTurn
+DeckHints:Type$Elemental
+Oracle:As an additional cost to cast this spell, behold an Elemental or pay {2}. (To behold an Elemental, choose an Elemental you control or reveal an Elemental card from your hand.)\n{R}: Target creature you control gains trample until end of turn. If this is the third time this ability has resolved this turn, add {R}{R}{R}{R}.

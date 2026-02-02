@@ -13,8 +13,6 @@ import com.google.common.collect.*;
 import forge.util.IterableUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.google.common.primitives.Ints;
-
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.card.Card;
@@ -116,7 +114,7 @@ public class AttackConstraints {
      */
     public Pair<Map<Card, GameEntity>, Integer> getLegalAttackers() {
         final int globalMax = globalRestrictions.getMax();
-        final int myMax = Ints.min(globalMax == -1 ? Integer.MAX_VALUE : globalMax, possibleAttackers.size());
+        final int myMax = Math.min(globalMax == -1 ? Integer.MAX_VALUE : globalMax, possibleAttackers.size());
         if (myMax == 0) {
             return Pair.of(Collections.emptyMap(), 0);
         }
@@ -301,10 +299,10 @@ public class AttackConstraints {
             // need two other attackers: set that number to the number of attackers we still need (but never < 0)
             if (restrictions.get(req.attacker).getTypes().contains(AttackRestrictionType.NEED_TWO_OTHERS)) {
                 final int previousNeeded = attackersNeeded;
-                attackersNeeded = Ints.max(3 - (myAttackers.size() + reserved.size()), 0);
-                localMaximum -= Ints.max(attackersNeeded - previousNeeded, 0);
+                attackersNeeded = Math.max(3 - (myAttackers.size() + reserved.size()), 0);
+                localMaximum -= Math.max(attackersNeeded - previousNeeded, 0);
             } else if (restrictions.get(req.attacker).getTypes().contains(AttackRestrictionType.NOT_ALONE)) {
-                attackersNeeded = Ints.max(2 - (myAttackers.size() + reserved.size()), 0);
+                attackersNeeded = Math.max(2 - (myAttackers.size() + reserved.size()), 0);
             }
         }
 

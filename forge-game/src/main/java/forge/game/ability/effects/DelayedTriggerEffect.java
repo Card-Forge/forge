@@ -26,7 +26,8 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         if (sa.hasParam("TriggerDescription")) {
             return sa.getParam("TriggerDescription");
-        } else if (sa.hasParam("SpellDescription")) {
+        }
+        if (sa.hasParam("SpellDescription")) {
             return sa.getParam("SpellDescription");
         }
 
@@ -50,11 +51,9 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
         delTrig.setActiveZone(null);
 
         if (sa.hasParam("RememberObjects")) {
-            for (final String rem : sa.getParam("RememberObjects").split(",")) {
-                for (final Object o : AbilityUtils.getDefinedEntities(host, rem, sa)) {
-                    delTrig.addRemembered(o);
-                }
-            }
+            delTrig.addRemembered(
+                    AbilityUtils.getDefinedEntities(host, sa.getParam("RememberObjects").split(" & "), sa)
+            );
         }
 
         if (sa.hasParam("RememberNumber")) {

@@ -1,8 +1,8 @@
 # Affected
 A `Defined` parameter states what is receiving the action. Remember this is non-targeted!
 
-To combine multiple entities use `&`.
-Example: `Defined$ Valid Creature & Player`
+To combine multiple entities use `&`, e.g.:  
+`Defined$ Valid Creature & Player`
 
 You can combine Defined with Valid Syntax (explained in the [Targets](#Targets) section) like so:
 `{Defined}.{Valid}`
@@ -90,8 +90,7 @@ Examples:
 For the full list of all available properties see the classes [CardProperty](https://github.com/Card-Forge/forge/blob/master/forge-game/src/main/java/forge/game/card/CardProperty.java) or respectively [PlayerProperty](https://github.com/Card-Forge/forge/blob/master/forge-game/src/main/java/forge/game/player/PlayerProperty.java).
 
 ## TgtZone$ {ZoneType}
-
-Redundant for AF where the specified zone already matches with a `Origin$` parameter.
+Redundant for AF that can only target the Stack or where the specified zone already matches with a `Origin$` parameter.
 
 ## TargetType
 

@@ -6,7 +6,7 @@ SVar:DBResetCheck:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ Number | Express
 SVar:DBRepeatChoice:DB$ RepeatEach | StartingWith$ You | RepeatSubAbility$ DBChoice | RepeatPlayers$ Player
 SVar:DBChoice:DB$ ChooseNumber | Defined$ Remembered | Max$ LifeTotal | AILogic$ Vermin | ListTitle$ amount of life to pay | SubAbility$ DBCheckPaid
 SVar:DBCheckPaid:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ CountSVar | Expression$ NumPlayerGiveup/Plus.1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBStore
-SVar:DBStore:DB$ StoreSVar | SVar$ EachPlayer | Type$ AdditiveForEach | Expression$ X | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | UnlessCost$ PayLife<X> | UnlessPayer$ Remembered | UnlessSwitched$ True | UnlessResolveSubs$ WhenNotPaid | SubAbility$ DBGiveUp | SpellDescription$ Pay the chosen amount of life.
+SVar:DBStore:DB$ StoreSVar | SVar$ EachPlayer | Type$ AdditiveForEach | Expression$ X | ConditionCheckSVar$ X | UnlessCost$ PayLife<X> | UnlessPayer$ Remembered | UnlessSwitched$ True | UnlessResolveSubs$ WhenNotPaid | SubAbility$ DBGiveUp | SpellDescription$ Pay the chosen amount of life.
 SVar:DBGiveUp:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ CountSVar | Expression$ NumPlayerGiveup/Plus.1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
 SVar:DBRepeatToken:DB$ RepeatEach | ChangeZoneTable$ True | RepeatSubAbility$ DBToken | RepeatPlayers$ Player | SubAbility$ DBFinalReset
 SVar:DBToken:DB$ Token | TokenAmount$ LifePaidAmount | TokenScript$ b_1_1_rat | TokenOwner$ Remembered | StackDescription$ None

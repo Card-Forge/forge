@@ -1,0 +1,11 @@
+Name:The Ghoul, Gunslinger
+ManaCost:1 B B
+Types:Legendary Creature Zombie Mutant Rogue
+PT:2/3
+K:First Strike
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Zombie.!token+Other+YouCtrl,Mutant.!token+Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigRadiation | TriggerDescription$ Whenever NICKNAME or another nontoken Zombie or Mutant you control dies, target player gets two rad counters. If that player is you, create a Treasure token.
+SVar:TrigRadiation:DB$ Radiation | ValidTgts$ Player | Num$ 2 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | ConditionDefined$ Targeted | ConditionPresent$ You
+DeckHas:Ability$Counters
+DeckHints:Type$Zombie|Mutant
+Oracle:First strike\nWhenever The Ghoul or another nontoken Zombie or Mutant you control dies, target player gets two rad counters. If that player is you, create a Treasure token.

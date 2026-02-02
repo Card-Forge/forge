@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="54">
+ <editorsettings>
+  <export target="riddles_lair.tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzz42Rg8BvFo3gUj+JRPIpH8YjAAAvyrVM=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxz42RgcBvFo3gE4lUcDAyrgXgNB33tfAqkQcCVjn59BsQrOSD2Puakr789oP4FgeVAO18MgJ+9oGFPDz8jxzEorEFsLzqHMz3DGjmc6Rm/IOzOSf+8hBzW9IhXWtgLAD1zph0=
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="282" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" x="197.5" y="154.75" width="32" height="32">
+   <properties>
+    <property name="sprite" value="sprites/enemy/monstrosity/androsphinx.atlas"/>
+    <property name="hidden" type="bool" value="false"/>
+    <property name="dialog">[
+  {
+    "text": "A spectral sphinx materializes before you, its eyes gleaming with ancient knowledge.\n\n'Seeker of wisdom, answer my riddles six, and great power shall be yours. Fail, and you must return another day.'\n\n'At the dawn of magic, in the Alpha times, one creature had more power than the rest. What was its name?'",
+    "options": [
+      {
+        "name": "Shivan Dragon",
+        "text": "'The dragon was iconic, but not the mightiest. Return when your memory has cleared.'"
+      },
+      {
+        "name": "Force of Nature",
+        "text": "'Correct! The 8/8 elemental was unmatched in those early days.'\n\n'Now then... Later in the age of Antiquities, another great creature rose to surpass its power. What was it called?'",
+        "options": [
+          {
+            "name": "Triskelion",
+            "text": "'The construct was clever, but not the most powerful. Return when your memory has cleared.'"
+          },
+          {
+            "name": "Su-Chi",
+            "text": "'The artifact creature was valuable, but another was mightier. Return when your memory has cleared.'"
+          },
+          {
+            "name": "Colossus of Sardia",
+            "text": "'Yes! The 9/9 artifact giant towered over all others.'\n\n'Yet still from the Dark, another still surpassed that being's power. What name was whispered of it?'",
+            "options": [
+              {
+                "name": "Nameless Race",
+                "text": "'That creature had no name, but neither had it the power. Return when your memory has cleared.'"
+              },
+              {
+                "name": "Leviathan",
+                "text": "'Indeed! The 10/10 sea beast rose from the depths.'\n\n'The world was frozen in an Ice Age when next this mighty being fell to another creature's hands...'",
+                "options": [
+                  {
+                    "name": "Lhurgoyf",
+                    "text": "'Ach! Hans, run! ...But no, that is not the answer. Return when your memory has cleared.'"
+                  },
+                  {
+                    "name": "Scaled Wurm",
+                    "text": "'The wurm was large, but another was larger still. Return when your memory has cleared.'"
+                  },
+                  {
+                    "name": "Polar Kraken",
+                    "text": "'Correct! The 11/11 kraken ruled the frozen seas.'\n\n'And then, in a time of Mirages, another took the crown...'",
+                    "options": [
+                      {
+                        "name": "Phyrexian Dreadnought",
+                        "text": "'Yes! The 12/12 horror, though demanding a terrible price.'\n\n'And last in this age, there was a final surpassing of power...'",
+                        "options": [
+                          {
+                            "name": "Silvos, Rogue Elemental",
+                            "text": "'No, the elemental was powerful but another surpassed it. Return when your memory has cleared.'"
+                          },
+                          {
+                            "name": "Akroma, Angel of Wrath",
+                            "text": "'Alas, no. The angel was mighty, but not the mightiest. Return when your memory has cleared.'"
+                          },
+                          {
+                            "name": "Krosan Cloudscraper",
+                            "text": "'MAGNIFICENT! You have proven your knowledge of the ancient powers!'\n\nThe sphinx's form shimmers and dissolves, leaving behind treasures of great value.",
+                            "action": [
+                              {
+                                "advanceQuestFlag": "riddlesLairComplete",
+                                "deleteMapObject": 50,
+                                "addGold": 8000,
+                                "addShards": 250,
+                                "grantRewards": [
+                                  { "type": "randomCard", "sourceDeck": "decks/custom_lists/3ED_List.dck", "rarity": ["R"], "count": 3 },
+                                  { "type": "randomCard", "sourceDeck": "decks/custom_lists/2ED_List.dck", "rarity": ["R"], "count": 1 }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "name": "Spirit of the Night",
+                        "text": "'No, the spirit was fearsome but not the most powerful. Return when your memory has cleared.'"
+                      },
+                      {
+                        "name": "Taniwha",
+                        "text": "'The serpent was tricky, but not the answer I sought. Return when your memory has cleared.'"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "Wormwood Treefolk",
+                "text": "'The treefolk was dark indeed, but not the mightiest. Return when your memory has cleared.'"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Lord of the Pit",
+        "text": "'Close, but the demon demanded sacrifice without being the strongest. Return when your memory has cleared.'"
+      }
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

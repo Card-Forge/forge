@@ -1,0 +1,10 @@
+Name:Glen Elendra Guardian
+ManaCost:2 U
+Types:Creature Faerie Wizard
+PT:3/4
+K:Flash
+K:Flying
+K:etbCounter:M1M1:1
+A:AB$ Counter | Cost$ 1 U RemoveAnyCounter<1/Any/Card.Self/this creature> | TargetType$ Spell | ValidTgts$ Card.nonCreature | TgtPrompt$ Select target noncreature spell | SubAbility$ DBDraw | SpellDescription$ Counter target noncreature spell. Its controller draws a card.
+SVar:DBDraw:DB$ Draw | Defined$ TargetedController
+Oracle:Flash\nFlying\nThis creature enters with a -1/-1 counter on it.\n{1}{U}, Remove a counter from this creature: Counter target noncreature spell. Its controller draws a card.
