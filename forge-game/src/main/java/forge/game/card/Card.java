@@ -2540,8 +2540,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     sbLong.append(inst.getTitle());
                     // skip reminder text for more complicated Hexproofs
                     if (k.length <= 2 || !k[2].contains(" and ") && !k[2].contains("each")) {
-                        sbLong.append(" (").append(inst.getReminderText());
-                        sbLong.append(")");
+                        sbLong.append(" (").append(inst.getReminderText()).append(")");
                     }
                     sbLong.append("\r\n");
                 } else if (keyword.startsWith("Protection:")) {
