@@ -2538,18 +2538,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     sbLong.append(kickerDesc(keyword, inst.getReminderText())).append("\r\n");
                 } else if (keyword.startsWith("Trample:")) {
                     sbLong.append("Trample over planeswalkers").append(" (").append(inst.getReminderText()).append(")").append("\r\n");
-                } else if (keyword.startsWith("Hexproof:")) {
+                } else if (keyword.startsWith("Hexproof:") && inst instanceof Hexproof hexproof) {
                     final String[] k = keyword.split(":");
-                    if(!k[2].equals("Secondary")) {
-                        sbLong.append("Hexproof from ");
-                        sbLong.append(k[2]);
-                        // skip reminder text for more complicated Hexproofs
-                        if (!k[2].contains(" and ") && !k[2].contains("each")) {
-                            sbLong.append(" (").append(inst.getReminderText());
-                            sbLong.append(")");
-                        }
-                        sbLong.append("\r\n");
+                    sbLong.append(hexproof.getTitle());
+                    // skip reminder text for more complicated Hexproofs
+                    if (k.length <= 2 || !k[2].contains(" and ") && !k[2].contains("each")) {
+                        sbLong.append(" (").append(inst.getReminderText());
+                        sbLong.append(")");
                     }
+                    sbLong.append("\r\n");
                 } else if (keyword.startsWith("Protection:")) {
                     final String[] k = keyword.split(":");
                     sbLong.append("Protection from ");
@@ -6884,43 +6881,46 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
     public String getHexproofKey() {
         String hexproofKey = "";
-        boolean hR = false; boolean hG = false; boolean hB = false; boolean hU = false; boolean hW = false;
+        boolean generic = false;
+        Set<MagicColor.Color> colors = EnumSet.noneOf(MagicColor.Color.class);
         for (final KeywordInterface inst : getKeywords(Keyword.HEXPROOF)) {
             String kw = inst.getOriginal();
             if (kw.equals("Hexproof")) {
-                hexproofKey += "generic:";
+                generic = true;
             }
             if (kw.startsWith("Hexproof:")) {
                 String[] k = kw.split(":");
-                if (k[2].toString().equals("red")) {
-                    if (!hR) {
-                        hR = true;
-                        hexproofKey += "R:";
-                    }
-                } else if (k[2].toString().equals("green")) {
-                    if (!hG) {
-                        hG = true;
-                        hexproofKey += "G:";
-                    }
-                } else if (k[2].toString().equals("black")) {
-                    if (!hB) {
-                        hB = true;
-                        hexproofKey += "B:";
-                    }
-                } else if (k[2].toString().equals("blue")) {
-                    if (!hU) {
-                        hU = true;
-                        hexproofKey += "U:";
-                    }
-                } else if (k[2].toString().equals("white")) {
-                    if (!hW) {
-                        hW = true;
-                        hexproofKey += "W:";
-                    }
-                } else if (k[2].toString().equals("monocolored")) {
+                if (k[1].equals("Red")) {
+                    colors.add(MagicColor.Color.RED);
+                } else if (k[1].equals("Green")) {
+                    colors.add(MagicColor.Color.GREEN);
+                } else if (k[1].equals("Black")) {
+                    colors.add(MagicColor.Color.BLACK);
+                } else if (k[1].equals("Blue")) {
+                    colors.add(MagicColor.Color.BLUE);
+                } else if (k[1].equals("White")) {
+                    colors.add(MagicColor.Color.WHITE);
+                } else if (k.length > 2 && k[2].equals("monocolored")) {
                     hexproofKey += "monocolored:";
+                } else if (k.length > 2 && k[2].equals("multicolored")) {
+                    generic = true; // no multicolored icon yet
+                } else if (k.length > 2 && k[2].equals("each color")) {
+                    colors.add(MagicColor.Color.RED);
+                    colors.add(MagicColor.Color.GREEN);
+                    colors.add(MagicColor.Color.BLACK);
+                    colors.add(MagicColor.Color.BLUE);
+                    colors.add(MagicColor.Color.WHITE);
+                } else {
+                    // no extra icon
+                    generic = true;
                 }
             }
+        }
+        if (generic) {
+            hexproofKey += "generic:";
+        }
+        for (MagicColor.Color c : colors) {
+            hexproofKey += c.getShortName() + ":";
         }
         return hexproofKey;
     }
