@@ -22,6 +22,7 @@ public interface KeywordInterface extends Cloneable, IHasSVars, ICardTraitChange
 
     Keyword getKeyword();
 
+    String getTitle();
     String getReminderText();
 
     int getAmount();
