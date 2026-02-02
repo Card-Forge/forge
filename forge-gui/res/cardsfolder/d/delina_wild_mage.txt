@@ -14,4 +14,4 @@ SVar:DBRepeat:DB$ StoreSVar | SVar$ RepeatCheck | Type$ Number | Expression$ 1
 SVar:RepeatCheck:Number$1
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Token
-Oracle:Whenever Delina, Wild Mage attacks, choose target creature you control, then roll a d20.\n1—14 | Create a tapped and attacking token that's a copy of that creature, except it's not legendary and it has "At end of combat, exile this token."\n15—20 | Create one of those tokens. You may roll again.
+Oracle:Whenever Delina attacks, choose target creature you control, then roll a d20.\n1—14 | Create a tapped and attacking token that's a copy of that creature, except it's not legendary and it has "At end of combat, exile this token."\n15—20 | Create one of those tokens. You may roll again.
