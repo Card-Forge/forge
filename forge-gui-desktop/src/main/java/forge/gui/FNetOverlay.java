@@ -121,8 +121,10 @@ public enum FNetOverlay implements IOnlineChatInterface {
         // Configure system message style: light blue RGB(100, 150, 255) - matches mobile implementation
         StyleConstants.setForeground(systemStyle, new Color(100, 150, 255));
 
-        // Configure player message style (default foreground color from skin)
-        StyleConstants.setForeground(playerStyle, FSkin.getColor(FSkin.Colors.CLR_TEXT).getColor());
+        // Configure player message style (default foreground color from skin, with fallback)
+        FSkin.SkinColor skinTextColor = FSkin.getColor(FSkin.Colors.CLR_TEXT);
+        Color playerColor = (skinTextColor != null) ? skinTextColor.getColor() : Color.WHITE;
+        StyleConstants.setForeground(playerStyle, playerColor);
 
         window.setTitle(Localizer.getInstance().getMessage("lblChat"));
         window.setVisible(false);
@@ -135,7 +137,8 @@ public enum FNetOverlay implements IOnlineChatInterface {
         txtLog.setOpaque(true);
         txtLog.setFocusable(true);
         txtLog.setEditable(false);
-        txtLog.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA).getColor());
+        FSkin.SkinColor skinZebraColor = FSkin.getColor(FSkin.Colors.CLR_ZEBRA);
+        txtLog.setBackground((skinZebraColor != null) ? skinZebraColor.getColor() : Color.DARK_GRAY);
 
         FScrollPane _operationLogScroller = new FScrollPane(txtLog, false);
         _operationLogScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
