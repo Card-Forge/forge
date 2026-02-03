@@ -195,7 +195,6 @@ public class NetworkPlayIntegrationTest {
                     .gameTimeout(60000)  // Reduced timeout - game should finish very quickly
                     .execute();
 
-            NetworkDebugLogger.log("%s Network test result: %s", LOG_PREFIX, result.toSummary());
             // Log bandwidth comparison (skip full analysis for minimal deck games)
             String bandwidthSummary = result.getBandwidthSummary();
             if (bandwidthSummary != null) {
@@ -223,7 +222,6 @@ public class NetworkPlayIntegrationTest {
                 .gameTimeout(180000)
                 .execute();
 
-        NetworkDebugLogger.log("%s 3-player result: %s", LOG_PREFIX, result);
         System.out.println(result.toDetailedReport());
 
         if (result.passed()) {
@@ -245,7 +243,6 @@ public class NetworkPlayIntegrationTest {
                 .gameTimeout(180000)
                 .execute();
 
-        NetworkDebugLogger.log("%s 4-player result: %s", LOG_PREFIX, result);
         System.out.println(result.toDetailedReport());
 
         if (result.passed()) {
@@ -511,8 +508,6 @@ public class NetworkPlayIntegrationTest {
                     .remoteClients(remoteClients)
                     .decks(config.getDeck1(), config.getDeck2())
                     .execute();
-
-            NetworkDebugLogger.log("%s Result: %s", LOG_PREFIX, result.toSummary());
 
             Assert.assertNotNull(result, "Result should not be null");
             Assert.assertEquals(result.remoteClientCount, remoteClients, "Remote client count should match mode");
