@@ -1,5 +1,5 @@
 Name:Kithkin Brinefarer
-ManaCost:1 W G
+ManaCost:1 G W
 Types:Creature Kithkin Warrior Bard
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Library | Destination$ Hand | ValidCard$ Kithkin.YouOwn | TriggerZones$ Battlefield | Execute$ TrigConjure | TriggerDescription$ Whenever a Kithkin card is put into your hand from your library, conjure a duplicate of that card into your hand.

@@ -1,0 +1,9 @@
+Name:Current Curriculum
+ManaCost:1 W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Merfolk.YouCtrl | AffectedZone$ Stack | CheckSVar$ X | SVarCompare$ EQ0 | AddKeyword$ Convoke | Description$ The first Merfolk spell you cast each turn has convoke.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigConjure | TriggerZones$ Battlefield | IsPresent$ Creature.YouCtrl+tapped | PresentCompare$ GE2 | TriggerDescription$ At the beginning of your end step, if you control two or more tapped creatures, conjure a card named Stonybrook Schoolmaster onto the battlefield tapped.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Stonybrook Schoolmaster | Zone$ Battlefield | Tapped$ True
+SVar:X:Count$ThisTurnCast_Merfolk.YouCtrl
+DeckHints:Type$Merfolk
+Oracle:The first Merfolk spell you cast each turn has convoke.\nAt the beginning of your end step, if you control two or more tapped creatures, conjure a card named Stonybrook Schoolmaster onto the battlefield tapped.
