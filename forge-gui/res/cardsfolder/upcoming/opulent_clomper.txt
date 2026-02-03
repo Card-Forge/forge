@@ -1,5 +1,5 @@
 Name:Opulent Clomper
-ManaCost:1 W1 G
+ManaCost:1 G
 Types:Creature Ouphe
 PT:*/*
 S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ Vivid — CARDNAME's power and toughness are each equal to the number of colors among permanents you control.
