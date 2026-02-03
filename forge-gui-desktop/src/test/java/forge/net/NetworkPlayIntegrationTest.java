@@ -409,7 +409,7 @@ public class NetworkPlayIntegrationTest {
         System.out.println(report);
         System.out.println("=".repeat(80));
 
-        saveReportToFile(report, "comprehensive-test-results");
+        saveReportToFile(report);
 
         validateComprehensiveResults(executionResult, analysisResult);
     }
@@ -434,7 +434,7 @@ public class NetworkPlayIntegrationTest {
 
         String report = analysisResult.generateReport();
         System.out.println("\n" + report);
-        saveReportToFile(report, "quick-test-results");
+        saveReportToFile(report);
 
         Assert.assertTrue(executionResult.getSuccessRate() >= 0.80,
                 String.format("Quick test success rate should be >= 80%%, was %.1f%%", executionResult.getSuccessRate() * 100));
@@ -508,8 +508,15 @@ public class NetworkPlayIntegrationTest {
         String report = result.generateReport();
         System.out.println("\n" + report);
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
-        java.nio.file.Path reportPath = logDir.toPath().resolve("analysis-results-" + timestamp + ".md");
+        // Use batchId if provided, otherwise timestamp - keep network-debug- prefix for consistency
+        String filename;
+        if (!batchId.isEmpty()) {
+            filename = "network-debug-run" + batchId + "-results.md";
+        } else {
+            String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
+            filename = "network-debug-analysis-" + timestamp + "-results.md";
+        }
+        java.nio.file.Path reportPath = logDir.toPath().resolve(filename);
         try {
             java.nio.file.Files.write(reportPath, report.getBytes());
             System.out.println("Report saved to: " + reportPath);
@@ -597,13 +604,29 @@ public class NetworkPlayIntegrationTest {
         NetworkDebugLogger.log("%s All validation criteria PASSED", LOG_PREFIX);
     }
 
-    private void saveReportToFile(String report, String prefix) {
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
+    /**
+     * Save a report to file using consistent naming with log files.
+     * Uses the batchId from NetworkDebugLogger to keep results files grouped with their logs.
+     * Pattern: network-debug-{batchId}-results.md
+     */
+    private void saveReportToFile(String report) {
         File logDir = new File(ForgeConstants.NETWORK_LOGS_DIR);
         if (!logDir.exists()) {
             logDir.mkdirs();
         }
-        File reportFile = new File(logDir, prefix + "-" + timestamp + ".md");
+
+        // Use batchId for consistent naming with log files
+        String batchId = NetworkDebugLogger.getBatchId();
+        String filename;
+        if (batchId != null) {
+            filename = "network-debug-" + batchId + "-results.md";
+        } else {
+            // Fallback to timestamp if no batchId (shouldn't happen in normal test flow)
+            String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
+            filename = "network-debug-" + timestamp + "-results.md";
+        }
+
+        File reportFile = new File(logDir, filename);
 
         try (FileWriter writer = new FileWriter(reportFile)) {
             writer.write(report);
