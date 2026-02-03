@@ -30,21 +30,17 @@ import java.util.List;
  * - 3-4 player multiplayer with remote clients
  *
  * Test categories:
- * - Unit tests: Always run (deck loader, metrics, configuration)
- * - Single game tests: Integration tests for individual games
- * - Batch tests: Sequential and parallel multi-game execution
- * - Comprehensive tests: Large-scale delta sync validation
- *
- * All tests require -Drun.stress.tests=true to execute (skipped otherwise).
+ * - Unit tests: Always run in CI (deck loader, metrics, configuration, server start/stop)
+ * - Core integration test: testTrueNetworkTraffic runs in CI to validate delta sync
+ * - Stress tests: Require -Drun.stress.tests=true (batch, parallel, comprehensive)
  *
  * Usage examples:
  *
- * Run all tests:
- *   mvn -pl forge-gui-desktop -am verify -Drun.stress.tests=true
+ * Run default CI tests (unit tests + testTrueNetworkTraffic):
+ *   mvn -pl forge-gui-desktop -am verify
  *
- * Run specific test:
- *   mvn -pl forge-gui-desktop -am verify -Dtest="NetworkPlayIntegrationTest#testTrueNetworkTraffic" \
- *       -Drun.stress.tests=true -Dsurefire.failIfNoSpecifiedTests=false
+ * Run all tests including stress tests:
+ *   mvn -pl forge-gui-desktop -am verify -Drun.stress.tests=true
  *
  * Run comprehensive test with custom configuration:
  *   mvn -pl forge-gui-desktop -am verify -Dtest="NetworkPlayIntegrationTest#runComprehensiveDeltaSyncTest" \
@@ -58,7 +54,6 @@ public class NetworkPlayIntegrationTest {
 
     @BeforeClass
     public static void setUp() {
-        skipUnlessStressTestsEnabled();
         if (!initialized) {
             GuiBase.setInterface(new HeadlessGuiDesktop());
             FModel.initialize(null, preferences -> {
@@ -159,6 +154,7 @@ public class NetworkPlayIntegrationTest {
 
     @Test(timeOut = 120000, description = "Full 2-player AI game test over network infrastructure")
     public void testFullAutomatedGame() {
+        skipUnlessStressTestsEnabled();
         NetworkDebugLogger.log("%s Starting full automated game test...", LOG_PREFIX);
 
         UnifiedNetworkHarness.GameResult result = new UnifiedNetworkHarness()
@@ -201,6 +197,7 @@ public class NetworkPlayIntegrationTest {
 
     @Test(timeOut = 200000, description = "3-player multiplayer network game test")
     public void testMultiplayer3Player() {
+        skipUnlessStressTestsEnabled();
         NetworkDebugLogger.log("%s Starting 3-player multiplayer network test...", LOG_PREFIX);
 
         UnifiedNetworkHarness.GameResult result = new UnifiedNetworkHarness()
@@ -222,6 +219,7 @@ public class NetworkPlayIntegrationTest {
 
     @Test(timeOut = 200000, description = "4-player multiplayer network game test")
     public void testMultiplayer4Player() {
+        skipUnlessStressTestsEnabled();
         NetworkDebugLogger.log("%s Starting 4-player multiplayer network test...", LOG_PREFIX);
 
         UnifiedNetworkHarness.GameResult result = new UnifiedNetworkHarness()
@@ -243,6 +241,7 @@ public class NetworkPlayIntegrationTest {
 
     @Test(timeOut = 150000, description = "UnifiedNetworkHarness local mode test")
     public void testUnifiedHarnessLocalMode() {
+        skipUnlessStressTestsEnabled();
         NetworkDebugLogger.log("%s Testing UnifiedNetworkHarness local mode...", LOG_PREFIX);
 
         // Test local AI mode (no remote clients)
@@ -262,6 +261,7 @@ public class NetworkPlayIntegrationTest {
 
     @Test(timeOut = 360000, description = "Small batch testing (3 games)")
     public void testBatchTesting() {
+        skipUnlessStressTestsEnabled();
         NetworkDebugLogger.log("%s Starting batch testing...", LOG_PREFIX);
 
         int iterations = 3;
@@ -291,6 +291,7 @@ public class NetworkPlayIntegrationTest {
 
     @Test(timeOut = 900000, description = "Sequential 3 games")
     public void testSequentialThreeGames() {
+        skipUnlessStressTestsEnabled();
         MultiProcessGameExecutor.ExecutionResult result = ComprehensiveTestExecutor.runSequentialGames(3, 300000);
 
         NetworkDebugLogger.log("%s Sequential 3 games: %s", LOG_PREFIX, result.toSummary());
@@ -302,6 +303,7 @@ public class NetworkPlayIntegrationTest {
 
     @Test(timeOut = 600000, description = "Parallel 3 games")
     public void testParallelThreeGames() {
+        skipUnlessStressTestsEnabled();
         MultiProcessGameExecutor executor = new MultiProcessGameExecutor(300000);
         MultiProcessGameExecutor.ExecutionResult result = executor.runGames(3);
 
@@ -314,6 +316,7 @@ public class NetworkPlayIntegrationTest {
 
     @Test(timeOut = 300000, description = "Quick parallel 2 games")
     public void testParallelTwoGames() {
+        skipUnlessStressTestsEnabled();
         MultiProcessGameExecutor executor = new MultiProcessGameExecutor(180000);
         MultiProcessGameExecutor.ExecutionResult result = executor.runGames(2);
 
@@ -329,6 +332,7 @@ public class NetworkPlayIntegrationTest {
      */
     @Test(timeOut = 3600000, description = "Configurable sequential batch")
     public void testConfigurableSequential() {
+        skipUnlessStressTestsEnabled();
         int gameCount = Integer.getInteger("test.gameCount", 3);
         long timeoutMs = Long.getLong("test.timeoutMs", 300000);
 
@@ -348,6 +352,7 @@ public class NetworkPlayIntegrationTest {
      */
     @Test(timeOut = 1800000, description = "Configurable parallel batch")
     public void testConfigurableParallel() {
+        skipUnlessStressTestsEnabled();
         int gameCount = Integer.getInteger("test.gameCount", 3);
         long timeoutMs = Long.getLong("test.timeoutMs", 300000);
 
@@ -384,6 +389,7 @@ public class NetworkPlayIntegrationTest {
      */
     @Test(timeOut = 7200000, description = "Comprehensive 100-game delta sync validation")
     public void runComprehensiveDeltaSyncTest() {
+        skipUnlessStressTestsEnabled();
         NetworkDebugLogger.log("%s Starting comprehensive delta sync validation", LOG_PREFIX);
 
         ComprehensiveTestExecutor executor = ComprehensiveTestExecutor.fromSystemProperties();
@@ -416,6 +422,7 @@ public class NetworkPlayIntegrationTest {
 
     @Test(timeOut = 1200000, description = "Quick 10-game delta sync validation")
     public void runQuickDeltaSyncTest() {
+        skipUnlessStressTestsEnabled();
         NetworkDebugLogger.log("%s Starting quick delta sync validation (10 games)", LOG_PREFIX);
 
         ComprehensiveTestExecutor executor = new ComprehensiveTestExecutor()
@@ -442,6 +449,7 @@ public class NetworkPlayIntegrationTest {
 
     @Test(timeOut = 600000, description = "2-player only test")
     public void runTwoPlayerOnlyTest() {
+        skipUnlessStressTestsEnabled();
         NetworkDebugLogger.log("%s Starting 2-player only test", LOG_PREFIX);
 
         ComprehensiveTestExecutor executor = new ComprehensiveTestExecutor()
@@ -459,6 +467,7 @@ public class NetworkPlayIntegrationTest {
 
     @Test(timeOut = 900000, description = "Multiplayer only test (3 and 4 players)")
     public void runMultiplayerOnlyTest() {
+        skipUnlessStressTestsEnabled();
         NetworkDebugLogger.log("%s Starting multiplayer only test", LOG_PREFIX);
 
         ComprehensiveTestExecutor executor = new ComprehensiveTestExecutor()
@@ -481,6 +490,7 @@ public class NetworkPlayIntegrationTest {
      */
     @Test
     public void analyzeExistingLogs() {
+        skipUnlessStressTestsEnabled();
         NetworkDebugLogger.log("%s Analyzing existing logs...", LOG_PREFIX);
 
         File logDir = new File(ForgeConstants.NETWORK_LOGS_DIR);
@@ -537,6 +547,7 @@ public class NetworkPlayIntegrationTest {
      */
     @Test(timeOut = 600000, description = "Configurable test via system properties")
     public void testWithSystemProperties() {
+        skipUnlessStressTestsEnabled();
         NetworkDebugLogger.log("%s Starting configurable test with system properties...", LOG_PREFIX);
 
         TestConfiguration config = new TestConfiguration();
