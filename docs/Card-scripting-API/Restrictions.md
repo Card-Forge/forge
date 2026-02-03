@@ -2,9 +2,9 @@
 
 ## `Activation$ {Option}`
 This can accept several different values which basically follow the text of the card:
-- Metalcraft
-- Threshold
-- Hellbent
+- `Metalcraft`
+- `Threshold`
+- `Hellbent`
 
 ## ActivationLimit
 `[Game]ActivationLimit$ {Integer}` for cards that have a limited amount of uses per game/turn.
@@ -40,4 +40,7 @@ If SVarCompare is **missing**, the comparator defaults to `GE1`.
 `IsPresent$ {ValidCards}` can be considered a shortcut to check if specific cards exist in a zone.
 
 # Conditions
-Condition is similar to a restriction, except it's checked on Resolution of the spell and not on Activation.
+Condition is similar to a restriction, except it's checked on resolution of the ability and not on activation.
+
+## ConditionCheckSVar
+Follows the same logic as the restriction version.

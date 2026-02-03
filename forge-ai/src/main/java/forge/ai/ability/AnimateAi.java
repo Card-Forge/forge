@@ -559,9 +559,9 @@ public class AnimateAi extends SpellAbilityAi {
                 timestamp, "Permanent");
 
         // check if animate added static Abilities
-        CardTraitChanges traits = card.getChangedCardTraits().get(timestamp, 0);
+        ICardTraitChanges traits = card.getChangedCardTraits().get(timestamp, 0);
         if (traits != null) {
-            for (StaticAbility stAb : traits.getStaticAbilities()) {
+            for (StaticAbility stAb : traits.applyStaticAbility(Lists.newArrayList())) {
                 if (stAb.checkMode(StaticAbilityMode.Continuous)) {
                     for (final StaticAbilityLayer layer : stAb.getLayers()) {
                         StaticAbilityContinuous.applyContinuousAbility(stAb, new CardCollection(card), layer);

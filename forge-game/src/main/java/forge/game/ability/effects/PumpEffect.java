@@ -477,12 +477,11 @@ public class PumpEffect extends SpellAbilityEffect {
             }
 
             if (sa.hasParam("NumAtt") && sa.getParam("NumAtt").equals("Triple")) {
-                a = tgtC.getNetPower()*2;
+                a = tgtC.getNetPower() *2;
             }
             if (sa.hasParam("NumDef") && sa.getParam("NumDef").equals("Triple")) {
-                d = tgtC.getNetToughness()*2;
+                d = tgtC.getNetToughness() *2;
             }
-
 
             applyPump(sa, tgtC, a, d, affectedKeywords, timestamp);
         }
