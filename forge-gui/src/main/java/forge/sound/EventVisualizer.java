@@ -14,6 +14,7 @@ import forge.util.TextUtil;
 import forge.util.maps.MapOfLists;
 
 import java.util.Collection;
+import java.util.Objects;
 
 /**
  * This class is in charge of converting any forge.game.event.Event to a SoundEffectType.
@@ -115,7 +116,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
      */
     @Override
     public SoundEffectType visit(final GameEventGameOutcome event) {
-        final boolean humanWonTheDuel = event.result().getWinningLobbyPlayer().equals(player);
+        final boolean humanWonTheDuel = Objects.equals(event.result().getWinningLobbyPlayer(), player);
         return humanWonTheDuel ? SoundEffectType.WinDuel : SoundEffectType.LoseDuel;
     }
 
