@@ -3,7 +3,7 @@ ManaCost:1 R W
 Types:Instant
 A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ 3 | SubAbility$ DBEffect | RememberTargets$ True | SpellDescription$ CARDNAME deals 3 damage to target creature. Other creatures can't attack this turn.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ ForbidAttack | SubAbility$ DBCleanup
-SVar:ForbidAttack:Mode$ CantAttack | ValidCard$ ValidCards$ Creature.IsNotRemembered | Description$ Other creatures can't attack this turn.
+SVar:ForbidAttack:Mode$ CantAttack | ValidCard$ Creature.IsNotRemembered | Description$ Other creatures can't attack this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 Oracle:Intimidation Bolt deals 3 damage to target creature. Other creatures can't attack this turn.
