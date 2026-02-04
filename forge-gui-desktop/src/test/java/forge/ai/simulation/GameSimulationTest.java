@@ -70,6 +70,13 @@ public class GameSimulationTest extends SimulationTest {
         return count;
     }
 
+    private Map<AbilityKey, Object> destroyParams(Game game) {
+        Map<AbilityKey, Object> params = AbilityKey.newMap();
+        params.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
+        params.put(AbilityKey.LastStateGraveyard, game.copyLastStateGraveyard());
+        return params;
+    }
+
     @Test
     public void testActivateAbilityTriggers() {
         Game game = initAndCreateGame();
@@ -1426,7 +1433,7 @@ public class GameSimulationTest extends SimulationTest {
 
         Card simCathar = findCardWithName(afterCathar, "Brutal Cathar");
         AssertJUnit.assertNotNull(simCathar);
-        afterCathar.getAction().destroy(simCathar, null, true, AbilityKey.newMap());
+        afterCathar.getAction().destroy(simCathar, null, true, destroyParams(afterCathar));
         playUntilStackClear(afterCathar);
 
         Game afterShock = afterCathar;
@@ -1587,20 +1594,19 @@ public class GameSimulationTest extends SimulationTest {
         Player opponent = game.getPlayers().get(1);
 
         addCards("Plains", 3, catharController);
-        Card specialist = addCardToZone("Slaughter Specialist", opponent, ZoneType.Battlefield);
-        addCardToZone("Raging Goblin", opponent, ZoneType.Battlefield);
+        addCardToZone("Slaughter Specialist", opponent, ZoneType.Battlefield);
         Card brutalCathar = addCardToZone("Brutal Cathar", catharController, ZoneType.Hand);
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, catharController);
         SpellAbility catharSa = brutalCathar.getFirstSpellAbility();
         AssertJUnit.assertNotNull(catharSa);
-        catharSa.setTargetCard(specialist);
         game.getTriggerHandler().resetActiveTriggers();
         GameSimulator sim = createSimulator(game, catharController);
         sim.simulateSpellAbility(catharSa);
         Game afterCathar = sim.getSimulatedGameState();
         AssertJUnit.assertEquals(1, countCardsWithName(afterCathar, "Slaughter Specialist", ZoneType.Exile));
         AssertJUnit.assertEquals(0, countCardsWithName(afterCathar, "Slaughter Specialist", ZoneType.Battlefield));
+        addCardToZone("Raging Goblin", afterCathar.getPlayers().get(1), ZoneType.Battlefield);
 
         Card simCathar = findCardWithName(afterCathar, "Brutal Cathar");
         AssertJUnit.assertNotNull(simCathar);
@@ -1615,8 +1621,9 @@ public class GameSimulationTest extends SimulationTest {
 
         afterCathar.getTriggerHandler().resetActiveTriggers();
         // Queue both deaths before processing the stack so Specialist stays exiled while Goblin dies.
-        afterCathar.getAction().destroy(simGoblin, null, true, AbilityKey.newMap());
-        afterCathar.getAction().destroy(simCathar, null, true, AbilityKey.newMap());
+        Map<AbilityKey, Object> destroyParams = destroyParams(afterCathar);
+        afterCathar.getAction().destroy(simGoblin, null, true, destroyParams);
+        afterCathar.getAction().destroy(simCathar, null, true, destroyParams);
         playUntilStackClear(afterCathar);
         Game afterWrath = afterCathar;
 
@@ -1656,14 +1663,12 @@ public class GameSimulationTest extends SimulationTest {
         Player opponent = game.getPlayers().get(1);
 
         addCards("Swamp", 3, oublietteController);
-        Card goblin = addCardToZone("Raging Goblin", opponent, ZoneType.Battlefield);
+        addCardToZone("Raging Goblin", opponent, ZoneType.Battlefield);
         Card oubliette = addCardToZone("Oubliette", oublietteController, ZoneType.Hand);
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, oublietteController);
         SpellAbility oublietteSa = oubliette.getFirstSpellAbility();
         AssertJUnit.assertNotNull(oublietteSa);
-        oublietteSa.setTargetCard(goblin);
-
         game.getTriggerHandler().resetActiveTriggers();
         GameSimulator sim = createSimulator(game, oublietteController);
         sim.simulateSpellAbility(oublietteSa);
@@ -1671,7 +1676,7 @@ public class GameSimulationTest extends SimulationTest {
 
         Card simOubliette = findCardWithName(afterOubliette, "Oubliette");
         AssertJUnit.assertNotNull(simOubliette);
-        afterOubliette.getAction().destroy(simOubliette, null, true, AbilityKey.newMap());
+        afterOubliette.getAction().destroy(simOubliette, null, true, destroyParams(afterOubliette));
         playUntilStackClear(afterOubliette);
 
         Card returnedGoblin = null;
@@ -1702,7 +1707,6 @@ public class GameSimulationTest extends SimulationTest {
         SpellAbility murderSa = murder.getFirstSpellAbility();
         AssertJUnit.assertNotNull(murderSa);
         murderSa.setTargetCard(owlKeeper);
-
         game.getTriggerHandler().resetActiveTriggers();
         GameSimulator sim = createSimulator(game, p);
         sim.simulateSpellAbility(murderSa);
@@ -1719,21 +1723,19 @@ public class GameSimulationTest extends SimulationTest {
         Player opponent = game.getPlayers().get(1);
 
         addCards("Plains", 3, hunterController);
-        Card specialist = addCardToZone("Slaughter Specialist", opponent, ZoneType.Battlefield);
-        addCardToZone("Raging Goblin", opponent, ZoneType.Battlefield);
+        addCardToZone("Slaughter Specialist", opponent, ZoneType.Battlefield);
         Card fiendHunter = addCardToZone("Fiend Hunter", hunterController, ZoneType.Hand);
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, hunterController);
         SpellAbility fiendHunterSa = fiendHunter.getFirstSpellAbility();
         AssertJUnit.assertNotNull(fiendHunterSa);
-        fiendHunterSa.setTargetCard(specialist);
-
         game.getTriggerHandler().resetActiveTriggers();
         GameSimulator sim = createSimulator(game, hunterController);
         sim.simulateSpellAbility(fiendHunterSa);
         Game afterHunter = sim.getSimulatedGameState();
         AssertJUnit.assertEquals(1, countCardsWithName(afterHunter, "Slaughter Specialist", ZoneType.Exile));
         AssertJUnit.assertEquals(0, countCardsWithName(afterHunter, "Slaughter Specialist", ZoneType.Battlefield));
+        addCardToZone("Raging Goblin", afterHunter.getPlayers().get(1), ZoneType.Battlefield);
 
         Card simGoblin = null;
         for (Card c : afterHunter.getCardsIn(ZoneType.Battlefield)) {
@@ -1746,8 +1748,9 @@ public class GameSimulationTest extends SimulationTest {
         Card simHunter = findCardWithName(afterHunter, "Fiend Hunter");
         AssertJUnit.assertNotNull(simHunter);
 
-        afterHunter.getAction().destroy(simGoblin, null, true, AbilityKey.newMap());
-        afterHunter.getAction().destroy(simHunter, null, true, AbilityKey.newMap());
+        Map<AbilityKey, Object> destroyParams = destroyParams(afterHunter);
+        afterHunter.getAction().destroy(simGoblin, null, true, destroyParams);
+        afterHunter.getAction().destroy(simHunter, null, true, destroyParams);
         playUntilStackClear(afterHunter);
 
         int specialistOnBattlefield = countCardsWithName(afterHunter, "Slaughter Specialist", ZoneType.Battlefield);
@@ -1768,21 +1771,19 @@ public class GameSimulationTest extends SimulationTest {
         Player opponent = game.getPlayers().get(1);
 
         addCards("Plains", 3, priestController);
-        Card specialist = addCardToZone("Slaughter Specialist", opponent, ZoneType.Battlefield);
-        addCardToZone("Raging Goblin", opponent, ZoneType.Battlefield);
+        addCardToZone("Slaughter Specialist", opponent, ZoneType.Battlefield);
         Card banisherPriest = addCardToZone("Banisher Priest", priestController, ZoneType.Hand);
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, priestController);
         SpellAbility priestSa = banisherPriest.getFirstSpellAbility();
         AssertJUnit.assertNotNull(priestSa);
-        priestSa.setTargetCard(specialist);
-
         game.getTriggerHandler().resetActiveTriggers();
         GameSimulator sim = createSimulator(game, priestController);
         sim.simulateSpellAbility(priestSa);
         Game afterPriest = sim.getSimulatedGameState();
         AssertJUnit.assertEquals(1, countCardsWithName(afterPriest, "Slaughter Specialist", ZoneType.Exile));
         AssertJUnit.assertEquals(0, countCardsWithName(afterPriest, "Slaughter Specialist", ZoneType.Battlefield));
+        addCardToZone("Raging Goblin", afterPriest.getPlayers().get(1), ZoneType.Battlefield);
 
         Card simGoblin = null;
         for (Card c : afterPriest.getCardsIn(ZoneType.Battlefield)) {
@@ -1795,9 +1796,9 @@ public class GameSimulationTest extends SimulationTest {
         Card simPriest = findCardWithName(afterPriest, "Banisher Priest");
         AssertJUnit.assertNotNull(simPriest);
 
-        afterPriest.getAction().destroy(simGoblin, null, true, AbilityKey.newMap());
+        afterPriest.getAction().destroy(simGoblin, null, true, destroyParams(afterPriest));
         playUntilStackClear(afterPriest);
-        afterPriest.getAction().destroy(simPriest, null, true, AbilityKey.newMap());
+        afterPriest.getAction().destroy(simPriest, null, true, destroyParams(afterPriest));
         playUntilStackClear(afterPriest);
 
         Card returnedSpecialist = findCardWithName(afterPriest, "Slaughter Specialist");
@@ -1845,14 +1846,12 @@ public class GameSimulationTest extends SimulationTest {
 
         addCards("Plains", 3, p);
         addCardToZone("Rest in Peace", p, ZoneType.Battlefield);
-        Card goblin = addCardToZone("Raging Goblin", opp, ZoneType.Battlefield);
+        addCardToZone("Raging Goblin", opp, ZoneType.Battlefield);
         Card skyclave = addCardToZone("Skyclave Apparition", p, ZoneType.Hand);
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         SpellAbility skyclaveSa = skyclave.getFirstSpellAbility();
         AssertJUnit.assertNotNull(skyclaveSa);
-        skyclaveSa.setTargetCard(goblin);
-
         GameSimulator sim = createSimulator(game, p);
         sim.simulateSpellAbility(skyclaveSa);
         Game afterApparition = sim.getSimulatedGameState();
@@ -1861,7 +1860,7 @@ public class GameSimulationTest extends SimulationTest {
         Card simApparition = findCardWithName(afterApparition, "Skyclave Apparition");
         AssertJUnit.assertNotNull(simApparition);
         afterApparition.getTriggerHandler().resetActiveTriggers();
-        afterApparition.getAction().destroy(simApparition, null, true, AbilityKey.newMap());
+        afterApparition.getAction().destroy(simApparition, null, true, destroyParams(afterApparition));
         playUntilStackClear(afterApparition);
 
         AssertJUnit.assertEquals(1, countCardsWithName(afterApparition, "Illusion Token", ZoneType.Battlefield));
