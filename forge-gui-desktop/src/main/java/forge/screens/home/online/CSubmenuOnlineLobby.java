@@ -90,11 +90,6 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
         if(Objects.equals(message, ForgeConstants.CLOSE_CONN_COMMAND)) {
             FOptionPane.showErrorDialog(Localizer.getInstance().getMessage("UnableConnectToServer", url));
             SOverlayUtils.hideOverlay();
-        } else if (message != null && message.startsWith(ForgeConstants.CONN_ERROR_PREFIX)) {
-            // Show detailed connection error
-            String errorDetail = message.substring(ForgeConstants.CONN_ERROR_PREFIX.length());
-            FOptionPane.showErrorDialog(errorDetail, Localizer.getInstance().getMessage("lblConnectionError"));
-            SOverlayUtils.hideOverlay();
         } else if (Objects.equals(message, ForgeConstants.INVALID_HOST_COMMAND)) {
             FOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblDetectedInvalidHostAddress", url));
             SOverlayUtils.hideOverlay();

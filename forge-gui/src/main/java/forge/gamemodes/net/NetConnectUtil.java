@@ -198,54 +198,9 @@ public class NetConnectUtil {
             NetworkDebugLogger.log("[NetworkRole] ========== CLIENT (%s:%d) Session=%s ==========", hostname, port, sessionId);
         }
         catch (Exception ex) {
-            // Log detailed connection error for debugging
-            NetworkDebugLogger.log("[Connection] ERROR: Failed to connect to %s:%d", hostname, port);
-            NetworkDebugLogger.log("[Connection] Exception type: %s", ex.getClass().getName());
-            NetworkDebugLogger.log("[Connection] Message: %s", ex.getMessage());
-            if (ex.getCause() != null) {
-                NetworkDebugLogger.log("[Connection] Cause: %s - %s", ex.getCause().getClass().getName(), ex.getCause().getMessage());
-            }
-            // Return error with details for GUI display
-            String errorDetail = getConnectionErrorMessage(ex, hostname, port);
-            return new ChatMessage(null, ForgeConstants.CONN_ERROR_PREFIX + errorDetail);
+            return new ChatMessage(null, ForgeConstants.CLOSE_CONN_COMMAND);
         }
 
         return new ChatMessage(null, Localizer.getInstance().getMessage("lblConnectedIPPort", hostname, String.valueOf(port)));
-    }
-
-    /**
-     * Generate a user-friendly error message for connection failures.
-     */
-    private static String getConnectionErrorMessage(Exception ex, String hostname, int port) {
-        Localizer localizer = Localizer.getInstance();
-        StringBuilder sb = new StringBuilder();
-
-        // Get the root cause for better error messages
-        Throwable cause = ex.getCause() != null ? ex.getCause() : ex;
-        String causeName = cause.getClass().getSimpleName();
-
-        sb.append(localizer.getMessage("lblConnectionFailedTo", hostname, String.valueOf(port)));
-        sb.append("\n\n");
-
-        // Provide specific messages for common error types
-        if (causeName.contains("ConnectException") || causeName.contains("ConnectionRefused")) {
-            sb.append(localizer.getMessage("lblConnectionRefused"));
-        } else if (causeName.contains("UnknownHost")) {
-            sb.append(localizer.getMessage("lblUnknownHost"));
-        } else if (causeName.contains("Timeout") || causeName.contains("TimedOut")) {
-            sb.append(localizer.getMessage("lblConnectionTimeout"));
-        } else if (causeName.contains("NoRouteToHost")) {
-            sb.append(localizer.getMessage("lblNoRouteToHost"));
-        } else {
-            // Generic error with the exception message
-            String msg = cause.getMessage();
-            if (msg != null && !msg.isEmpty()) {
-                sb.append(msg);
-            } else {
-                sb.append(causeName);
-            }
-        }
-
-        return sb.toString();
     }
 }
