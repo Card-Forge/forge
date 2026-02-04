@@ -11,17 +11,17 @@ import java.io.File;
  * Supported System Properties:
  * - deck1: Path to first deck file (default: random precon)
  * - deck2: Path to second deck file (default: random precon)
- * - testMode: LOCAL, NETWORK_LOCAL, or NETWORK_REMOTE (default: LOCAL)
+ * - testMode: NETWORK_REMOTE or NETWORK_LOCAL (default: NETWORK_REMOTE)
  * - playerCount: Number of players for multiplayer (2, 3, or 4) (default: 2)
  * - iterations: Number of iterations for batch testing (default: 1)
  * - precon1: Name of quest precon for player 1 (alternative to deck1)
  * - precon2: Name of quest precon for player 2 (alternative to deck2)
  *
  * Example usage:
- * mvn test -Dtest=AutomatedNetworkTest#testWithSystemProperties \
+ * mvn test -Dtest=NetworkPlayIntegrationTest#testWithSystemProperties \
  *     -Ddeck1=/path/to/deck1.dck \
  *     -Ddeck2=/path/to/deck2.dck \
- *     -DtestMode=LOCAL \
+ *     -DtestMode=NETWORK_REMOTE \
  *     -Diterations=5
  */
 public class TestConfiguration {
@@ -106,7 +106,7 @@ public class TestConfiguration {
 
     /**
      * Loads test mode from system properties.
-     * Default: LOCAL
+     * Default: NETWORK_REMOTE (true delta sync testing with real TCP client)
      */
     private GameTestMode loadTestMode() {
         String mode = System.getProperty(PROP_TEST_MODE);
@@ -117,12 +117,12 @@ public class TestConfiguration {
                 return testMode;
             } catch (IllegalArgumentException e) {
                 System.err.println("[TestConfiguration] WARNING: Invalid test mode: " + mode +
-                    ". Valid values: LOCAL, NETWORK_LOCAL, NETWORK_REMOTE. Using LOCAL.");
+                    ". Valid values: NETWORK_REMOTE, NETWORK_LOCAL. Using NETWORK_REMOTE.");
             }
         }
 
-        System.out.println("[TestConfiguration] Using default test mode: LOCAL");
-        return GameTestMode.LOCAL;
+        System.out.println("[TestConfiguration] Using default test mode: NETWORK_REMOTE");
+        return GameTestMode.NETWORK_REMOTE;
     }
 
     /**

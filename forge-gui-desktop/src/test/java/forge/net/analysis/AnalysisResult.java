@@ -506,7 +506,7 @@ public class AnalysisResult {
             if (!failedGames.isEmpty()) {
                 sb.append("### Error Context for Failed Games\n\n");
                 for (GameLogMetrics m : failedGames) {
-                    LogContextExtractor.ErrorContext ctx = m.getErrorContext();
+                    NetworkLogAnalyzer.ErrorContext ctx = m.getErrorContext();
                     if (ctx != null) {
                         sb.append(ctx.toMarkdown());
                         sb.append("\n");

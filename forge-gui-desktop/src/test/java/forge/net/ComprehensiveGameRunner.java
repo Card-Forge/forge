@@ -125,7 +125,7 @@ public class ComprehensiveGameRunner {
                 // Use NetworkClientTestHarness for 2-player games
                 result = runTwoPlayerGame(port, gameIndex);
             } else {
-                // Use MultiplayerScenario for 3-4 player games
+                // Use MultiplayerNetworkScenario for 3-4 player games
                 result = runMultiplayerGame(port, gameIndex, playerCount);
             }
 

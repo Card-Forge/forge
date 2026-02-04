@@ -37,7 +37,6 @@ import forge.util.ITriggerEvent;
  * without requiring a real display.
  *
  * Most GUI methods are no-ops that return safe defaults.
- * This class mirrors NoOpGuiGame but extends NetworkGuiGame for network testing.
  */
 public class HeadlessNetworkGuiGame extends NetworkGuiGame {
 

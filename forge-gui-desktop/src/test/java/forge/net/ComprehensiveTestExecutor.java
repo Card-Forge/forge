@@ -1,6 +1,8 @@
 package forge.net;
 
 import forge.gamemodes.net.NetworkDebugLogger;
+import forge.gui.GuiBase;
+import forge.model.FModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,11 +16,14 @@ import java.util.List;
  * - 30 x 3-player games (30%)
  * - 20 x 4-player games (20%)
  *
- * Games are executed in parallel batches using MultiProcessGameExecutor.
+ * Supports both execution modes:
+ * - Parallel: Games run in separate JVM processes (default)
+ * - Sequential: Games run one-by-one in the same JVM (useful for debugging)
  */
 public class ComprehensiveTestExecutor {
 
     private static final String LOG_PREFIX = "[ComprehensiveTestExecutor]";
+    private static final int BASE_PORT = 58000;
 
     // Default game distribution
     private int twoPlayerGames = 50;
@@ -28,6 +33,7 @@ public class ComprehensiveTestExecutor {
     // Execution settings
     private int parallelBatchSize = 10; // Run 10 games at a time
     private long gameTimeoutMs = 300000; // 5 minutes per game
+    private boolean sequential = false; // Run sequentially instead of parallel
 
     /**
      * Set the number of 2-player games.
@@ -70,6 +76,15 @@ public class ComprehensiveTestExecutor {
     }
 
     /**
+     * Enable sequential execution (games run one-by-one in same JVM).
+     * Default is parallel execution (separate JVM per game).
+     */
+    public ComprehensiveTestExecutor sequential(boolean seq) {
+        this.sequential = seq;
+        return this;
+    }
+
+    /**
      * Get total number of games to run.
      */
     public int getTotalGames() {
@@ -83,7 +98,8 @@ public class ComprehensiveTestExecutor {
      */
     public MultiProcessGameExecutor.ExecutionResult execute() {
         int totalGames = getTotalGames();
-        NetworkDebugLogger.log("%s Starting comprehensive test: %d total games", LOG_PREFIX, totalGames);
+        String mode = sequential ? "sequential" : "parallel";
+        NetworkDebugLogger.log("%s Starting comprehensive test: %d total games (%s)", LOG_PREFIX, totalGames, mode);
         NetworkDebugLogger.log("%s Distribution: %d x 2-player, %d x 3-player, %d x 4-player",
                 LOG_PREFIX, twoPlayerGames, threePlayerGames, fourPlayerGames);
         NetworkDebugLogger.log("%s Batch size: %d, Timeout: %dms", LOG_PREFIX, parallelBatchSize, gameTimeoutMs);
@@ -93,18 +109,108 @@ public class ComprehensiveTestExecutor {
         // Build player count array with shuffled distribution
         int[] playerCounts = buildShuffledPlayerCounts();
 
-        // Create executor with ComprehensiveGameRunner
-        MultiProcessGameExecutor executor = new MultiProcessGameExecutor(gameTimeoutMs)
-                .withRunnerClass("forge.net.ComprehensiveGameRunner");
+        MultiProcessGameExecutor.ExecutionResult result;
 
-        // Run all games in batches
-        MultiProcessGameExecutor.ExecutionResult result = executor.runGamesInBatches(playerCounts, parallelBatchSize);
+        if (sequential) {
+            // Run games sequentially in same JVM
+            result = executeSequentially(playerCounts);
+        } else {
+            // Create executor with ComprehensiveGameRunner for parallel execution
+            MultiProcessGameExecutor executor = new MultiProcessGameExecutor(gameTimeoutMs)
+                    .withRunnerClass("forge.net.ComprehensiveGameRunner");
+
+            // Run all games in batches
+            result = executor.runGamesInBatches(playerCounts, parallelBatchSize);
+        }
 
         long duration = System.currentTimeMillis() - startTime;
         NetworkDebugLogger.log("%s Comprehensive test completed in %d ms (%.1f minutes)",
                 LOG_PREFIX, duration, duration / 60000.0);
 
         return result;
+    }
+
+    /**
+     * Execute games sequentially in the same JVM.
+     * Useful for debugging as all games run in same process.
+     */
+    private MultiProcessGameExecutor.ExecutionResult executeSequentially(int[] playerCounts) {
+        ensureFModelInitialized();
+
+        NetworkDebugLogger.log("%s Starting %d sequential games", LOG_PREFIX, playerCounts.length);
+
+        MultiProcessGameExecutor.ExecutionResult result = new MultiProcessGameExecutor.ExecutionResult(playerCounts.length);
+        int port = BASE_PORT;
+
+        for (int i = 0; i < playerCounts.length; i++) {
+            int players = playerCounts[i];
+            NetworkClientTestHarness.TestResult gameResult = runSingleGame(i, port++, players);
+            result.addResult(i, gameResult, players);
+
+            String status = gameResult.success ? "SUCCESS" : "FAILED";
+            NetworkDebugLogger.log("%s Game %d (%dp): %s (deltas=%d, turns=%d, winner=%s)",
+                    LOG_PREFIX, i, players, status,
+                    gameResult.deltaPacketsReceived,
+                    gameResult.turns,
+                    gameResult.winner);
+        }
+
+        NetworkDebugLogger.log("%s Sequential execution complete: %s", LOG_PREFIX, result.toSummary());
+        return result;
+    }
+
+    /**
+     * Run a single game with isolated logging.
+     */
+    private NetworkClientTestHarness.TestResult runSingleGame(int gameIndex, int port, int playerCount) {
+        // Set instance-specific log suffix so this game writes to its own log file
+        NetworkDebugLogger.setInstanceSuffix("game" + gameIndex + "-" + playerCount + "p");
+
+        try {
+            NetworkDebugLogger.log("%s Starting game %d (%d players) on port %d", LOG_PREFIX, gameIndex, playerCount, port);
+
+            NetworkClientTestHarness harness = new NetworkClientTestHarness();
+            harness.setPort(port);
+
+            if (playerCount == 2) {
+                return harness.runTwoPlayerNetworkTest();
+            } else {
+                // For 3-4 player games, use multiplayer network scenario with real clients
+                forge.net.scenarios.MultiplayerNetworkScenario scenario =
+                    new forge.net.scenarios.MultiplayerNetworkScenario()
+                        .playerCount(playerCount)
+                        .gameTimeout(gameTimeoutMs)
+                        .useAiForRemotePlayers(true);  // Enable AI for realistic gameplay
+
+                forge.net.scenarios.MultiplayerNetworkScenario.ScenarioResult scenarioResult = scenario.execute();
+
+                // Convert scenario result to test result format
+                NetworkClientTestHarness.TestResult testResult = new NetworkClientTestHarness.TestResult();
+                testResult.success = scenarioResult.passed();
+                testResult.gameStarted = scenarioResult.gameStarted;
+                testResult.clientConnected = scenarioResult.remoteClientCount > 0;
+                testResult.turns = scenarioResult.turnCount;
+                testResult.winner = scenarioResult.winner;
+                testResult.errorMessage = scenarioResult.errorMessage;
+                testResult.deltaPacketsReceived = (int) scenarioResult.totalDeltaPackets;
+                testResult.totalDeltaBytes = scenarioResult.totalDeltaBytes;
+                return testResult;
+            }
+        } finally {
+            // Close this game's log file
+            NetworkDebugLogger.closeThreadLogger();
+        }
+    }
+
+    /**
+     * Ensure FModel is initialized before running games.
+     */
+    private static synchronized void ensureFModelInitialized() {
+        if (GuiBase.getInterface() == null) {
+            NetworkDebugLogger.log("%s Initializing FModel with HeadlessGuiDesktop", LOG_PREFIX);
+            GuiBase.setInterface(new HeadlessGuiDesktop());
+            FModel.initialize(null, preferences -> null);
+        }
     }
 
     /**
@@ -140,6 +246,7 @@ public class ComprehensiveTestExecutor {
      * Generate a summary report of the test configuration.
      */
     public String getConfigurationSummary() {
+        int total = getTotalGames();
         return String.format(
                 "ComprehensiveTestExecutor Configuration:\n" +
                 "  Total Games: %d\n" +
@@ -147,15 +254,34 @@ public class ComprehensiveTestExecutor {
                 "    - 2-player: %d (%.0f%%)\n" +
                 "    - 3-player: %d (%.0f%%)\n" +
                 "    - 4-player: %d (%.0f%%)\n" +
+                "  Execution Mode: %s\n" +
                 "  Batch Size: %d\n" +
                 "  Game Timeout: %d ms",
-                getTotalGames(),
-                twoPlayerGames, (100.0 * twoPlayerGames / getTotalGames()),
-                threePlayerGames, (100.0 * threePlayerGames / getTotalGames()),
-                fourPlayerGames, (100.0 * fourPlayerGames / getTotalGames()),
+                total,
+                twoPlayerGames, total > 0 ? (100.0 * twoPlayerGames / total) : 0,
+                threePlayerGames, total > 0 ? (100.0 * threePlayerGames / total) : 0,
+                fourPlayerGames, total > 0 ? (100.0 * fourPlayerGames / total) : 0,
+                sequential ? "Sequential (same JVM)" : "Parallel (multi-process)",
                 parallelBatchSize,
                 gameTimeoutMs
         );
+    }
+
+    /**
+     * Run N sequential 2-player games.
+     * Convenience method replacing SequentialGameExecutor.runGames().
+     *
+     * @param gameCount Number of 2-player games to run
+     * @return Execution result
+     */
+    public static MultiProcessGameExecutor.ExecutionResult runSequentialGames(int gameCount, long timeoutMs) {
+        return new ComprehensiveTestExecutor()
+                .twoPlayerGames(gameCount)
+                .threePlayerGames(0)
+                .fourPlayerGames(0)
+                .gameTimeout(timeoutMs)
+                .sequential(true)
+                .execute();
     }
 
     /**

@@ -79,14 +79,14 @@ public class HeadlessGuiDesktop extends GuiDesktop {
     }
 
     /**
-     * Return a no-op GUI implementation for AI spectating.
-     * In headless mode, we don't need a real GUI.
+     * Return a headless network GUI implementation for AI spectating.
+     * Uses HeadlessNetworkGuiGame which supports delta sync testing.
      *
-     * @return A NoOpGuiGame instance
+     * @return A HeadlessNetworkGuiGame instance
      */
     @Override
     public IGuiGame getNewGuiGame() {
-        return new NoOpGuiGame();
+        return new HeadlessNetworkGuiGame();
     }
 
     /**
