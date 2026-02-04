@@ -198,6 +198,22 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return null;
     }
 
+    /**
+     * Removes a card from any section it's found in, prioritizing the sideboard over other sections.
+     */
+    public void removeAnteCard(PaperCard card) {
+        if (has(DeckSection.Sideboard) && get(DeckSection.Sideboard).contains(card)) {
+            get(DeckSection.Sideboard).remove(card);
+            return;
+        }
+        for (CardPool pool : parts.values()) {
+            if(pool.contains(card)) {
+                pool.remove(card);
+                return;
+            }
+        }
+    }
+
     // will return new if it was absent
     public CardPool getOrCreate(DeckSection deckSection) {
         CardPool p = get(deckSection);
