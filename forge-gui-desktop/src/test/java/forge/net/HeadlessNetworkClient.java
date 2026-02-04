@@ -300,17 +300,34 @@ public class HeadlessNetworkClient implements AutoCloseable {
      * Lobby listener that handles server updates.
      */
     private class ClientLobbyListener implements ILobbyListener {
+        /** Special value indicating the client hasn't been assigned a slot yet.
+         * Must match RemoteClient.UNASSIGNED_SLOT on the server. */
+        private static final int UNASSIGNED_SLOT = -1;
+
         @Override
         public void update(GameLobbyData state, int slot) {
-            assignedSlot.set(slot);
-            lobby.setLocalPlayer(slot);
+            // Always update the lobby data
             lobby.setData(state);
 
-            NetworkDebugLogger.log("%s Lobby update: assigned to slot %d",
-                    LOG_PREFIX, slot);
+            // Only update slot assignment if we received a valid slot.
+            // The first LobbyUpdateEvent after connection may have slot=-1 (UNASSIGNED_SLOT)
+            // because the server hasn't processed our LoginEvent yet.
+            if (slot >= 0) {
+                int previousSlot = assignedSlot.get();
+                assignedSlot.set(slot);
+                lobby.setLocalPlayer(slot);
 
-            // Signal connected once we have a slot
-            connectedLatch.countDown();
+                NetworkDebugLogger.log("%s Lobby update: assigned to slot %d (previous=%d)",
+                        LOG_PREFIX, slot, previousSlot);
+
+                // Signal connected once we have a valid slot assignment
+                if (previousSlot == -1 && slot >= 0) {
+                    connectedLatch.countDown();
+                }
+            } else {
+                NetworkDebugLogger.log("%s Lobby update: slot not yet assigned (slot=%d)",
+                        LOG_PREFIX, slot);
+            }
         }
 
         @Override

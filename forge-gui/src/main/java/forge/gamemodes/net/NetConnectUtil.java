@@ -168,8 +168,14 @@ public class NetConnectUtil {
             }
             @Override
             public void update(final GameLobbyData state, final int slot) {
-                lobby.setLocalPlayer(slot);
+                // Always update the lobby data
                 lobby.setData(state);
+                // Only set local player if we have a valid slot assignment.
+                // The first update after connection may have slot=-1 (unassigned)
+                // before the server processes our LoginEvent.
+                if (slot >= 0) {
+                    lobby.setLocalPlayer(slot);
+                }
             }
             @Override
             public void close() {
