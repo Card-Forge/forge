@@ -783,12 +783,59 @@ public final class NetworkDebugLogger {
     }
 
     /**
-     * Get the path to the current log file, or null if not initialized.
+     * Get the path to the log directory.
      */
     public static String getLogFilePath() {
         ensureInitialized();
-        // We don't store the path, so just return the directory
         String logDirPath = ForgeConstants.NETWORK_LOGS_DIR;
         return new File(logDirPath).getAbsolutePath();
+    }
+
+    /**
+     * Get the current log file for the active context.
+     * Returns the log file for the current instance suffix if set,
+     * otherwise returns the shared log file.
+     *
+     * @return The current log file, or null if logging not initialized
+     */
+    public static File getCurrentLogFile() {
+        ensureInitialized();
+        String suffix = getInstanceSuffix();
+        String logDirPath = ForgeConstants.NETWORK_LOGS_DIR;
+        File logDir = new File(logDirPath);
+
+        if (!logDir.exists()) {
+            return null;
+        }
+
+        // Build the expected filename pattern
+        String testSuffix = testMode ? "-test" : "";
+        String instancePart = (suffix != null) ? "-" + suffix : "";
+
+        // Find matching log file
+        String prefix;
+        if (batchId != null) {
+            prefix = LOG_PREFIX + "-" + batchId + instancePart + testSuffix + ".log";
+        } else {
+            // For non-batch mode, we need to find the most recent file matching the pattern
+            String pattern = LOG_PREFIX + "-.*" + instancePart.replace("-", "\\-") + testSuffix + "\\.log";
+            File[] matches = logDir.listFiles((dir, name) -> name.matches(pattern));
+            if (matches == null || matches.length == 0) {
+                return null;
+            }
+            // Return the most recently modified
+            File mostRecent = null;
+            long mostRecentTime = 0;
+            for (File f : matches) {
+                if (f.lastModified() > mostRecentTime) {
+                    mostRecentTime = f.lastModified();
+                    mostRecent = f;
+                }
+            }
+            return mostRecent;
+        }
+
+        File logFile = new File(logDir, prefix);
+        return logFile.exists() ? logFile : null;
     }
 }

@@ -3,7 +3,6 @@ package forge.net;
 import forge.gamemodes.net.NetworkDebugLogger;
 import forge.gui.GuiBase;
 import forge.model.FModel;
-import forge.net.scenarios.MultiplayerNetworkScenario;
 
 /**
  * Standalone runner for comprehensive network game testing.
@@ -119,15 +118,8 @@ public class ComprehensiveGameRunner {
             NetworkDebugLogger.log("[ComprehensiveGameRunner] Starting game %d with %d players on port %d",
                     gameIndex, playerCount, port);
 
-            GameRunResult result;
-
-            if (playerCount == 2) {
-                // Use NetworkClientTestHarness for 2-player games
-                result = runTwoPlayerGame(port, gameIndex);
-            } else {
-                // Use MultiplayerNetworkScenario for 3-4 player games
-                result = runMultiplayerGame(port, gameIndex, playerCount);
-            }
+            // Use UnifiedNetworkHarness for all player counts
+            GameRunResult result = runGame(port, playerCount);
 
             // Log result
             NetworkDebugLogger.log("[ComprehensiveGameRunner] Game %d result: success=%s, turns=%d, winner=%s",
@@ -149,50 +141,25 @@ public class ComprehensiveGameRunner {
     }
 
     /**
-     * Run a 2-player network game using NetworkClientTestHarness.
-     */
-    private static GameRunResult runTwoPlayerGame(int port, int gameIndex) {
-        NetworkClientTestHarness harness = new NetworkClientTestHarness();
-        harness.setPort(port);
-        NetworkClientTestHarness.TestResult testResult = harness.runTwoPlayerNetworkTest();
-
-        return new GameRunResult(
-                testResult.success,
-                testResult.turns,
-                testResult.deltaPacketsReceived,
-                testResult.totalDeltaBytes,
-                testResult.winner,
-                testResult.deckNames
-        );
-    }
-
-    /**
-     * Run a 3-4 player multiplayer game using MultiplayerNetworkScenario.
+     * Run a game using UnifiedNetworkHarness.
      * All non-host players are remote network clients to test delta sync.
-     *
-     * Set system property 'test.useAiForRemote=true' to enable server-side AI
-     * for remote players, providing realistic gameplay and diverse game states.
      */
-    private static GameRunResult runMultiplayerGame(int port, int gameIndex, int playerCount) {
-        // Check if AI mode is enabled via system property
-        boolean useAiForRemote = Boolean.getBoolean("test.useAiForRemote");
-
-        MultiplayerNetworkScenario scenario = new MultiplayerNetworkScenario()
+    private static GameRunResult runGame(int port, int playerCount) {
+        UnifiedNetworkHarness.GameResult gameResult = new UnifiedNetworkHarness()
                 .playerCount(playerCount)
-                .port(port) // Use the port assigned by the parent process
-                .useAiForRemotePlayers(useAiForRemote) // Enable AI if configured
-                .gameTimeout(300000); // 5 minute timeout in ms
+                .remoteClients(playerCount - 1)  // All but host are remote
+                .port(port)
+                .gameTimeout(300000)  // 5 minute timeout
+                .useAiForRemotePlayers(true)  // Enable AI for realistic gameplay
+                .execute();
 
-        MultiplayerNetworkScenario.ScenarioResult scenarioResult = scenario.execute();
-
-        // Multiplayer games now have actual remote clients receiving delta packets
         return new GameRunResult(
-                scenarioResult.passed(),
-                scenarioResult.turnCount,
-                scenarioResult.totalDeltaPackets,
-                scenarioResult.totalDeltaBytes,
-                scenarioResult.winner,
-                scenarioResult.deckNames
+                gameResult.success,
+                gameResult.turnCount,
+                gameResult.deltaPacketsReceived,
+                gameResult.totalDeltaBytes,
+                gameResult.winner,
+                gameResult.deckNames
         );
     }
 

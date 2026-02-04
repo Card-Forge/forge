@@ -260,6 +260,111 @@ public class GameLogMetrics {
     }
 
     /**
+     * Generate a concise summary report for single-game analysis.
+     * Shows key validation metrics without overwhelming detail.
+     */
+    public String toSummaryReport() {
+        StringBuilder sb = new StringBuilder();
+
+        // Header
+        sb.append("\n");
+        sb.append("-".repeat(60)).append("\n");
+        sb.append("Delta Sync Analysis Report\n");
+        sb.append("-".repeat(60)).append("\n");
+
+        // Status
+        String status = isSuccessful() ? "PASSED" : "FAILED";
+        String statusReason = "";
+        if (!isSuccessful()) {
+            if (hasChecksumMismatch) {
+                statusReason = " (checksum mismatch)";
+            } else if (!gameCompleted) {
+                statusReason = " (game incomplete)";
+            } else if (!errors.isEmpty()) {
+                statusReason = " (errors detected)";
+            }
+        }
+        sb.append(String.format("Status: %s%s\n", status, statusReason));
+        sb.append(String.format("Failure Mode: %s\n", failureMode));
+        sb.append("\n");
+
+        // Game metrics
+        sb.append("Game Metrics:\n");
+        sb.append(String.format("  Players: %d\n", playerCount));
+        sb.append(String.format("  Turns: %d\n", turnCount));
+        sb.append(String.format("  Winner: %s\n", winner != null ? winner : "none"));
+        if (gameDurationMs > 0) {
+            sb.append(String.format("  Duration: %.1f seconds\n", gameDurationMs / 1000.0));
+        }
+        sb.append("\n");
+
+        // Bandwidth metrics (the key validation data)
+        sb.append("Bandwidth Metrics:\n");
+        sb.append(String.format("  Delta Packets: %d\n", deltaPacketCount));
+        sb.append(String.format("  Approximate Size: %s\n", formatBytes(totalApproximateBytes)));
+        sb.append(String.format("  ActualNetwork Size: %s\n", formatBytes(totalDeltaBytes)));
+        sb.append(String.format("  FullState Baseline: %s\n", formatBytes(totalFullStateBytes)));
+        sb.append("\n");
+
+        // Bandwidth savings (the primary validation metric)
+        sb.append("Bandwidth Savings:\n");
+        double actualVsFull = calculateBandwidthSavings();
+        double approxVsFull = totalFullStateBytes > 0 ?
+                100.0 * (1.0 - (double) totalApproximateBytes / totalFullStateBytes) : 0;
+        sb.append(String.format("  ActualNetwork vs FullState: %.1f%% %s\n",
+                actualVsFull, actualVsFull >= 90 ? "(PASS >= 90%)" : "(FAIL < 90%)"));
+        sb.append(String.format("  Approximate vs FullState: %.1f%%\n", approxVsFull));
+        if (deltaPacketCount > 0) {
+            sb.append(String.format("  Avg bytes per packet: %.0f\n",
+                    (double) totalDeltaBytes / deltaPacketCount));
+        }
+        sb.append("\n");
+
+        // Validation summary
+        sb.append("Validation:\n");
+        sb.append(String.format("  Checksum Mismatches: %d %s\n",
+                hasChecksumMismatch ? 1 : 0, hasChecksumMismatch ? "(FAIL)" : "(PASS)"));
+        sb.append(String.format("  Errors: %d\n", errors.size()));
+        sb.append(String.format("  Warnings: %d\n", warnings.size()));
+
+        // Show first error if any
+        if (!errors.isEmpty()) {
+            sb.append("\n");
+            sb.append("First Error:\n");
+            sb.append("  ").append(errors.get(0)).append("\n");
+            if (firstErrorTurn >= 0) {
+                sb.append(String.format("  (occurred at turn %d)\n", firstErrorTurn));
+            }
+        }
+
+        // Error context if available
+        if (errorContext != null && errorContext.errorMessage() != null) {
+            sb.append("\n");
+            sb.append("Error Context:\n");
+            for (String line : errorContext.linesBefore()) {
+                sb.append("  ").append(line).append("\n");
+            }
+            sb.append(">>> ").append(errorContext.errorMessage()).append("\n");
+            for (String line : errorContext.linesAfter()) {
+                sb.append("  ").append(line).append("\n");
+            }
+        }
+
+        sb.append("-".repeat(60)).append("\n");
+
+        return sb.toString();
+    }
+
+    /**
+     * Format bytes in human-readable form.
+     */
+    private static String formatBytes(long bytes) {
+        if (bytes < 1024) return bytes + " B";
+        if (bytes < 1024 * 1024) return String.format("%.1f KB", bytes / 1024.0);
+        return String.format("%.1f MB", bytes / (1024.0 * 1024.0));
+    }
+
+    /**
      * Represents metrics for a single delta sync packet.
      */
     public static class PacketMetrics {

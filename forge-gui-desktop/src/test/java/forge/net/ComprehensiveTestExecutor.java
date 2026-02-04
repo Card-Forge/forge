@@ -144,14 +144,29 @@ public class ComprehensiveTestExecutor {
 
         for (int i = 0; i < playerCounts.length; i++) {
             int players = playerCounts[i];
-            NetworkClientTestHarness.TestResult gameResult = runSingleGame(i, port++, players);
-            result.addResult(i, gameResult, players);
+            UnifiedNetworkHarness.GameResult gameResult = runSingleGame(i, port++, players);
+
+            if (gameResult.errorMessage != null && !gameResult.success) {
+                result.addError(i, gameResult.errorMessage);
+            } else {
+                // Convert to ExecutionResult format using constructor
+                MultiProcessGameExecutor.GameResult execResult = new MultiProcessGameExecutor.GameResult(
+                        gameResult.success,
+                        gameResult.playerCount,
+                        gameResult.deltaPacketsReceived,
+                        gameResult.turnCount,
+                        gameResult.totalDeltaBytes,
+                        gameResult.winner,
+                        gameResult.deckNames
+                );
+                result.addResult(i, execResult);
+            }
 
             String status = gameResult.success ? "SUCCESS" : "FAILED";
             NetworkDebugLogger.log("%s Game %d (%dp): %s (deltas=%d, turns=%d, winner=%s)",
                     LOG_PREFIX, i, players, status,
                     gameResult.deltaPacketsReceived,
-                    gameResult.turns,
+                    gameResult.turnCount,
                     gameResult.winner);
         }
 
@@ -160,42 +175,23 @@ public class ComprehensiveTestExecutor {
     }
 
     /**
-     * Run a single game with isolated logging.
+     * Run a single game with isolated logging using UnifiedNetworkHarness.
      */
-    private NetworkClientTestHarness.TestResult runSingleGame(int gameIndex, int port, int playerCount) {
+    private UnifiedNetworkHarness.GameResult runSingleGame(int gameIndex, int port, int playerCount) {
         // Set instance-specific log suffix so this game writes to its own log file
         NetworkDebugLogger.setInstanceSuffix("game" + gameIndex + "-" + playerCount + "p");
 
         try {
             NetworkDebugLogger.log("%s Starting game %d (%d players) on port %d", LOG_PREFIX, gameIndex, playerCount, port);
 
-            NetworkClientTestHarness harness = new NetworkClientTestHarness();
-            harness.setPort(port);
-
-            if (playerCount == 2) {
-                return harness.runTwoPlayerNetworkTest();
-            } else {
-                // For 3-4 player games, use multiplayer network scenario with real clients
-                forge.net.scenarios.MultiplayerNetworkScenario scenario =
-                    new forge.net.scenarios.MultiplayerNetworkScenario()
-                        .playerCount(playerCount)
-                        .gameTimeout(gameTimeoutMs)
-                        .useAiForRemotePlayers(true);  // Enable AI for realistic gameplay
-
-                forge.net.scenarios.MultiplayerNetworkScenario.ScenarioResult scenarioResult = scenario.execute();
-
-                // Convert scenario result to test result format
-                NetworkClientTestHarness.TestResult testResult = new NetworkClientTestHarness.TestResult();
-                testResult.success = scenarioResult.passed();
-                testResult.gameStarted = scenarioResult.gameStarted;
-                testResult.clientConnected = scenarioResult.remoteClientCount > 0;
-                testResult.turns = scenarioResult.turnCount;
-                testResult.winner = scenarioResult.winner;
-                testResult.errorMessage = scenarioResult.errorMessage;
-                testResult.deltaPacketsReceived = (int) scenarioResult.totalDeltaPackets;
-                testResult.totalDeltaBytes = scenarioResult.totalDeltaBytes;
-                return testResult;
-            }
+            // Use UnifiedNetworkHarness for all player counts
+            return new UnifiedNetworkHarness()
+                    .playerCount(playerCount)
+                    .remoteClients(playerCount - 1)  // All but host are remote
+                    .port(port)
+                    .gameTimeout(gameTimeoutMs)
+                    .useAiForRemotePlayers(true)
+                    .execute();
         } finally {
             // Close this game's log file
             NetworkDebugLogger.closeThreadLogger();

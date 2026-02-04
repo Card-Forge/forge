@@ -23,6 +23,10 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 
+import forge.net.analysis.GameLogMetrics;
+import forge.net.analysis.NetworkLogAnalyzer;
+
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -836,6 +840,76 @@ public class UnifiedNetworkHarness {
         @Override
         public String toString() {
             return toSummary();
+        }
+
+        /**
+         * Analyze the log file for this game and return a detailed analysis report.
+         * This provides bandwidth savings metrics, checksum validation, and error context
+         * that aren't available from the basic GameResult metrics.
+         *
+         * @return Analysis report string, or null if log file not available
+         */
+        public String analyzeLogFile() {
+            File logFile = NetworkDebugLogger.getCurrentLogFile();
+            if (logFile == null || !logFile.exists()) {
+                return null;
+            }
+
+            try {
+                NetworkLogAnalyzer analyzer = new NetworkLogAnalyzer();
+                GameLogMetrics metrics = analyzer.analyzeLogFile(logFile);
+                return metrics.toSummaryReport();
+            } catch (Exception e) {
+                return "Log analysis failed: " + e.getMessage();
+            }
+        }
+
+        /**
+         * Get the combined summary and analysis report.
+         * Shows both the basic GameResult info and the detailed log analysis.
+         * Also saves the report to the network logs directory.
+         */
+        public String toDetailedReport() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(toSummary());
+
+            String analysis = analyzeLogFile();
+            if (analysis != null) {
+                sb.append("\n");
+                sb.append(analysis);
+            }
+
+            // Save report alongside the log file
+            saveAnalysisReport(sb.toString());
+
+            return sb.toString();
+        }
+
+        /**
+         * Save the analysis report to the network logs directory.
+         * Report filename matches the log file with "-analysis.md" suffix.
+         */
+        private void saveAnalysisReport(String report) {
+            File logFile = NetworkDebugLogger.getCurrentLogFile();
+            if (logFile == null) {
+                return;
+            }
+
+            // Create report filename based on log filename
+            String logName = logFile.getName();
+            String reportName = logName.replace(".log", "-analysis.md");
+            File reportFile = new File(logFile.getParentFile(), reportName);
+
+            try (java.io.FileWriter writer = new java.io.FileWriter(reportFile)) {
+                writer.write("# Delta Sync Analysis Report\n\n");
+                writer.write("**Source Log:** `" + logName + "`\n\n");
+                writer.write("```\n");
+                writer.write(report);
+                writer.write("\n```\n");
+                NetworkDebugLogger.log("[GameResult] Analysis report saved to: %s", reportFile.getAbsolutePath());
+            } catch (java.io.IOException e) {
+                NetworkDebugLogger.warn("[GameResult] Failed to save analysis report: %s", e.getMessage());
+            }
         }
     }
 }

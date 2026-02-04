@@ -2,6 +2,7 @@ package forge.net;
 
 import forge.gamemodes.net.NetworkDebugLogger;
 import forge.gui.GuiBase;
+import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.net.analysis.AnalysisResult;
@@ -53,7 +54,6 @@ import java.util.List;
 public class NetworkPlayIntegrationTest {
 
     private static final String LOG_PREFIX = "[NetworkPlayIntegrationTest]";
-    private static final File LOG_DIRECTORY = new File(System.getProperty("user.dir"), "logs");
     private static boolean initialized = false;
 
     @BeforeClass
@@ -168,6 +168,7 @@ public class NetworkPlayIntegrationTest {
                 .execute();
 
         NetworkDebugLogger.log("%s Game result: %s", LOG_PREFIX, result.toSummary());
+        System.out.println(result.toDetailedReport());
 
         if (result.gameCompleted) {
             Assert.assertTrue(result.turnCount > 0, "Should have at least one turn");
@@ -190,8 +191,7 @@ public class NetworkPlayIntegrationTest {
                 .execute();
 
         NetworkDebugLogger.log("%s Network test result: %s", LOG_PREFIX, result.toSummary());
-        NetworkDebugLogger.log("%s Delta packets received: %d", LOG_PREFIX, result.deltaPacketsReceived);
-        NetworkDebugLogger.log("%s Total delta bytes: %d", LOG_PREFIX, result.totalDeltaBytes);
+        System.out.println(result.toDetailedReport());
 
         if (result.success) {
             Assert.assertTrue(result.deltaPacketsReceived > 0, "Should have received delta sync packets");
@@ -211,7 +211,7 @@ public class NetworkPlayIntegrationTest {
                 .execute();
 
         NetworkDebugLogger.log("%s 3-player result: %s", LOG_PREFIX, result);
-        NetworkDebugLogger.log("%s Delta packets: %d, bytes: %d", LOG_PREFIX, result.deltaPacketsReceived, result.totalDeltaBytes);
+        System.out.println(result.toDetailedReport());
 
         if (result.passed()) {
             Assert.assertEquals(result.playerCount, 3, "Should have 3 players");
@@ -233,7 +233,7 @@ public class NetworkPlayIntegrationTest {
                 .execute();
 
         NetworkDebugLogger.log("%s 4-player result: %s", LOG_PREFIX, result);
-        NetworkDebugLogger.log("%s Delta packets: %d, bytes: %d", LOG_PREFIX, result.deltaPacketsReceived, result.totalDeltaBytes);
+        System.out.println(result.toDetailedReport());
 
         if (result.passed()) {
             Assert.assertEquals(result.playerCount, 4, "Should have 4 players");
@@ -252,6 +252,8 @@ public class NetworkPlayIntegrationTest {
                 .playerCount(2)
                 .remoteClients(0)
                 .execute();
+
+        System.out.println(result.toDetailedReport());
 
         Assert.assertNotNull(result, "Result should not be null");
         Assert.assertEquals(result.remoteClientCount, 0, "Should have no remote clients");
@@ -402,7 +404,7 @@ public class NetworkPlayIntegrationTest {
 
         // Analyze log files
         NetworkLogAnalyzer analyzer = new NetworkLogAnalyzer();
-        AnalysisResult analysisResult = analyzer.analyzeComprehensiveTestAndAggregate(LOG_DIRECTORY, testStartTime);
+        AnalysisResult analysisResult = analyzer.analyzeComprehensiveTestAndAggregate(new File(ForgeConstants.NETWORK_LOGS_DIR), testStartTime);
 
         String report = analysisResult.generateReport();
         System.out.println("\n" + "=".repeat(80));
@@ -430,7 +432,7 @@ public class NetworkPlayIntegrationTest {
         System.out.println("\n" + executionResult.toDetailedReport());
 
         NetworkLogAnalyzer analyzer = new NetworkLogAnalyzer();
-        AnalysisResult analysisResult = analyzer.analyzeComprehensiveTestAndAggregate(LOG_DIRECTORY, testStartTime);
+        AnalysisResult analysisResult = analyzer.analyzeComprehensiveTestAndAggregate(new File(ForgeConstants.NETWORK_LOGS_DIR), testStartTime);
 
         String report = analysisResult.generateReport();
         System.out.println("\n" + report);
@@ -483,7 +485,7 @@ public class NetworkPlayIntegrationTest {
     public void analyzeExistingLogs() {
         NetworkDebugLogger.log("%s Analyzing existing logs...", LOG_PREFIX);
 
-        File logDir = new File("logs");
+        File logDir = new File(ForgeConstants.NETWORK_LOGS_DIR);
         NetworkLogAnalyzer analyzer = new NetworkLogAnalyzer();
 
         String batchId = System.getProperty("test.batchId", "");
@@ -599,7 +601,11 @@ public class NetworkPlayIntegrationTest {
 
     private void saveReportToFile(String report, String prefix) {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
-        File reportFile = new File(LOG_DIRECTORY, prefix + "-" + timestamp + ".md");
+        File logDir = new File(ForgeConstants.NETWORK_LOGS_DIR);
+        if (!logDir.exists()) {
+            logDir.mkdirs();
+        }
+        File reportFile = new File(logDir, prefix + "-" + timestamp + ".md");
 
         try (FileWriter writer = new FileWriter(reportFile)) {
             writer.write(report);
