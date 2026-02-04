@@ -575,16 +575,21 @@ public final class FServerManager {
             final int playerIndex = client.getIndex();
 
             NetworkDebugLogger.log("[Disconnect] Client disconnected: index=%d, username=%s", playerIndex, username);
-            NetworkDebugLogger.log("[Disconnect] currentGameSession=%s, isGameInProgress=%b",
-                    currentGameSession != null ? "exists" : "null",
-                    currentGameSession != null && currentGameSession.isGameInProgress());
+
+            // Capture session reference in local variable to avoid race condition
+            // (game thread may set currentGameSession = null between check and use)
+            final GameSession session = currentGameSession;
+
+            NetworkDebugLogger.log("[Disconnect] session=%s, isGameInProgress=%b",
+                    session != null ? "exists" : "null",
+                    session != null && session.isGameInProgress());
 
             // Check if there's an active game session that supports reconnection
-            if (currentGameSession != null && currentGameSession.isGameInProgress()) {
+            if (session != null && session.isGameInProgress()) {
                 // Mark player as disconnected but don't remove from game
                 NetworkDebugLogger.log("[Disconnect] Marking player %d (%s) as disconnected in game session", playerIndex, username);
-                currentGameSession.markPlayerDisconnected(playerIndex);
-                PlayerSession ps = currentGameSession.getPlayerSession(playerIndex);
+                session.markPlayerDisconnected(playerIndex);
+                PlayerSession ps = session.getPlayerSession(playerIndex);
                 if (ps != null) {
                     NetworkDebugLogger.log("[Disconnect] After marking: isDisconnected=%b, state=%s",
                             ps.isDisconnected(), ps.getConnectionState());
@@ -594,7 +599,7 @@ public final class FServerManager {
 
                 // Pause the game and notify other players
                 String pauseMessage = String.format("Waiting for %s to reconnect...", username);
-                currentGameSession.pauseGame(pauseMessage);
+                session.pauseGame(pauseMessage);
                 broadcastGamePaused(pauseMessage, client);
 
                 // Schedule timeout for reconnection

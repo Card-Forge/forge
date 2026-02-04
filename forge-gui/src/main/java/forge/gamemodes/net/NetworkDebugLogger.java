@@ -107,7 +107,7 @@ public final class NetworkDebugLogger {
      * @param path The path to sanitize
      * @return The sanitized path with user home replaced by "~"
      */
-    private static String sanitizePath(String path) {
+    public static String sanitizePath(String path) {
         if (path == null || USER_HOME == null) {
             return path;
         }

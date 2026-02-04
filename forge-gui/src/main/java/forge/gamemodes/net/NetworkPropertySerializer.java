@@ -151,9 +151,10 @@ public final class NetworkPropertySerializer {
         // String List
         else if (type == TrackableTypes.StringListType) {
             nts.write(MARKER_PRESENT);
-            List<String> list = (List<String>) value;
-            nts.write(list.size());
-            for (String s : list) {
+            // Handle both List and Set (some properties like CantHaveKeyword store Set in List-typed fields)
+            Collection<String> collection = (Collection<String>) value;
+            nts.write(collection.size());
+            for (String s : collection) {
                 nts.write(s);
             }
         }

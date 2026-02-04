@@ -944,7 +944,7 @@ public class UnifiedNetworkHarness {
                 writer.write("```\n");
                 writer.write(report);
                 writer.write("\n```\n");
-                NetworkDebugLogger.log("[GameResult] Analysis report saved to: %s", reportFile.getAbsolutePath());
+                NetworkDebugLogger.log("[GameResult] Analysis report saved to: %s", NetworkDebugLogger.sanitizePath(reportFile.getAbsolutePath()));
             } catch (java.io.IOException e) {
                 NetworkDebugLogger.warn("[GameResult] Failed to save analysis report: %s", e.getMessage());
             }

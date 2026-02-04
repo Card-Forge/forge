@@ -15,6 +15,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import forge.gamemodes.net.NetworkDebugLogger;
+
 /**
  * Parses network debug log files to extract delta sync metrics and errors.
  *
@@ -432,7 +434,7 @@ public class NetworkLogAnalyzer {
      */
     public List<GameLogMetrics> analyzeDirectory(File logDirectory, String pattern) {
         if (!logDirectory.exists() || !logDirectory.isDirectory()) {
-            System.err.println("[NetworkLogAnalyzer] Directory not found: " + logDirectory.getAbsolutePath());
+            System.err.println("[NetworkLogAnalyzer] Directory not found: " + NetworkDebugLogger.sanitizePath(logDirectory.getAbsolutePath()));
             return new ArrayList<>();
         }
 

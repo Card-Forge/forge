@@ -451,7 +451,7 @@ public class NetworkPlayIntegrationTest {
         NetworkDebugLogger.log("%s Found %d log files", LOG_PREFIX, metrics.size());
 
         if (metrics.isEmpty()) {
-            System.out.println("No comprehensive test logs found in " + logDir.getAbsolutePath());
+            System.out.println("No comprehensive test logs found in " + NetworkDebugLogger.sanitizePath(logDir.getAbsolutePath()));
             return;
         }
 
@@ -470,7 +470,7 @@ public class NetworkPlayIntegrationTest {
         java.nio.file.Path reportPath = logDir.toPath().resolve(filename);
         try {
             java.nio.file.Files.write(reportPath, report.getBytes());
-            System.out.println("Report saved to: " + reportPath);
+            System.out.println("Report saved to: " + NetworkDebugLogger.sanitizePath(reportPath.toString()));
         } catch (IOException e) {
             System.err.println("Failed to save report: " + e.getMessage());
         }
@@ -580,8 +580,9 @@ public class NetworkPlayIntegrationTest {
 
         try (FileWriter writer = new FileWriter(reportFile)) {
             writer.write(report);
-            NetworkDebugLogger.log("%s Report saved to: %s", LOG_PREFIX, reportFile.getAbsolutePath());
-            System.out.println("Report saved to: " + reportFile.getAbsolutePath());
+            String sanitizedPath = NetworkDebugLogger.sanitizePath(reportFile.getAbsolutePath());
+            NetworkDebugLogger.log("%s Report saved to: %s", LOG_PREFIX, sanitizedPath);
+            System.out.println("Report saved to: " + sanitizedPath);
         } catch (IOException e) {
             NetworkDebugLogger.log("%s WARNING: Failed to save report: %s", LOG_PREFIX, e.getMessage());
             System.err.println("WARNING: Failed to save report: " + e.getMessage());
