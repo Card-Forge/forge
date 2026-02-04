@@ -346,7 +346,7 @@ public class ConsoleCommandInterpreter {
                 return "No world loaded.";
             }
             if (s.length < 1) {
-                return "Please specify at least one PointOfInterest type (e.g. \"reveal cave\", \"reveal dungeon\", \"reveal city\", \"reveal capital\").";
+                return "Please specify at least one PointOfInterest type (e.g. \"reveal cave\", \"reveal dungeon\", \"reveal town\", \"reveal capital\").";
             }
             HashSet<String> types = new HashSet<>();
             for (String type : s) {
@@ -356,12 +356,15 @@ public class ConsoleCommandInterpreter {
                 } else if (normalized.endsWith("s") && normalized.length() > 1) {
                     normalized = normalized.substring(0, normalized.length() - 1);
                 }
+                if ("city".equals(normalized)) {
+                    normalized = "town";
+                }
                 if (!normalized.isEmpty()) {
                     types.add(normalized);
                 }
             }
             if (types.isEmpty()) {
-                return "Please specify at least one PointOfInterest type (e.g. \"reveal cave\", \"reveal dungeon\", \"reveal city\", \"reveal capital\").";
+                return "Please specify at least one PointOfInterest type (e.g. \"reveal cave\", \"reveal dungeon\", \"reveal town\", \"reveal capital\").";
             }
             int revealed = 0;
             for (PointOfInterest poi : save.getWorld().getAllPointOfInterest()) {
