@@ -177,9 +177,10 @@ public final class CMatchUI
     private int nextNotifiableStackIndex = 0;
 
     // Timer for "Waiting for..." messages in network games
+    // Fields accessed from Swing Timer callbacks must be volatile for thread safety
     private javax.swing.Timer waitingTimer;
-    private long waitingStartTime;
-    private String waitingBaseMessage;
+    private volatile long waitingStartTime;
+    private volatile String waitingBaseMessage;
 
     public CMatchUI() {
         this.view = new VMatchUI(this);
@@ -1035,44 +1036,31 @@ public final class CMatchUI
 
     /**
      * Find the name of the player we're waiting for.
+     * Uses GameView data only to work correctly on both host and client.
      * Checks priority player, turn player, or falls back to finding other players.
      */
     private String findWaitingForPlayerName(GameView gameView, PlayerView forPlayer) {
-        // Try to get priority player from Game object (host has access to this)
-        forge.game.Game game = gameView.getGame();
-        if (game != null && !game.isGameOver()) {
-            forge.game.phase.PhaseHandler ph = game.getPhaseHandler();
-            if (ph != null) {
-                forge.game.player.Player priorityPlayer = ph.getPriorityPlayer();
-                if (priorityPlayer == null) {
-                    priorityPlayer = ph.getPlayerTurn();
-                }
-                // During mulligan, both may be null - find other players
-                if (priorityPlayer == null) {
-                    // If forPlayer is known, find someone else
-                    if (forPlayer != null) {
-                        for (forge.game.player.Player p : game.getPlayers()) {
-                            if (p.getView().getId() != forPlayer.getId()) {
-                                return p.getName();
-                            }
-                        }
-                    }
-                    // If forPlayer is null, find any non-local player
-                    for (forge.game.player.Player p : game.getPlayers()) {
-                        if (!isLocalPlayer(p.getView())) {
-                            return p.getName();
-                        }
-                    }
-                }
-                if (priorityPlayer != null && (forPlayer == null || priorityPlayer.getView().getId() != forPlayer.getId())) {
-                    return priorityPlayer.getName();
-                }
-            }
+        if (gameView.isGameOver()) {
+            return null;
         }
 
-        // Fallback: use GameView's player list to find non-local players
+        // First, try to find the player with priority from GameView
+        PlayerView priorityPlayer = findPriorityPlayer(gameView);
+
+        // If we found a priority player different from forPlayer, use them
+        if (priorityPlayer != null && (forPlayer == null || priorityPlayer.getId() != forPlayer.getId())) {
+            return priorityPlayer.getName();
+        }
+
+        // During mulligan or game setup, priority may not be set
+        // Fall back to finding any non-local player (in network games, that's who we're waiting for)
         if (gameView.getPlayers() != null) {
             for (PlayerView pv : gameView.getPlayers()) {
+                // Skip forPlayer if specified
+                if (forPlayer != null && pv.getId() == forPlayer.getId()) {
+                    continue;
+                }
+                // Skip local players - we want the remote player we're waiting for
                 if (!isLocalPlayer(pv)) {
                     return pv.getName();
                 }
@@ -1082,15 +1070,43 @@ public final class CMatchUI
         return null;
     }
 
+    /**
+     * Find the player with priority from the GameView.
+     * Checks PlayerView.getHasPriority() for each player.
+     * Falls back to getPlayerTurn() during game setup when no priority is set.
+     */
+    private PlayerView findPriorityPlayer(GameView gameView) {
+        if (gameView.getPlayers() != null) {
+            for (PlayerView pv : gameView.getPlayers()) {
+                if (pv.getHasPriority()) {
+                    return pv;
+                }
+            }
+        }
+        // Fallback to player turn during game setup (mulligan phase)
+        return gameView.getPlayerTurn();
+    }
+
     private boolean isWaitingMessage(String message) {
         Localizer localizer = Localizer.getInstance();
         String waitingForOpponent = localizer.getMessage("lblWaitingForOpponent");
         String waitingForActions = localizer.getMessage("lblWaitingforActions");
-        // Also match "Waiting for PlayerName..." and "Yielding ... Waiting for PlayerName..." patterns
+
+        // Extract the localized prefix from "Waiting for {0}..." to match player-specific messages
+        // This avoids hardcoding English strings and works with any locale
+        String waitingForPlayerTemplate = localizer.getMessage("lblWaitingForPlayer", "");
+        // The template with empty string gives us the prefix before the player name
+        // e.g., "Waiting for ..." -> we use "Waiting for " as prefix
+        String localizedWaitingPrefix = waitingForPlayerTemplate.replace("...", "").trim();
+
+        // Also get the yielding+waiting pattern for completeness
+        String yieldingTemplate = localizer.getMessage("lblYieldingWaitingForPlayer", "");
+
         return message.equals(waitingForOpponent)
             || message.equals(waitingForActions)
-            || message.startsWith("Waiting for ")
-            || message.contains("Waiting for ");
+            || message.startsWith(localizedWaitingPrefix)
+            || message.contains(localizedWaitingPrefix)
+            || message.startsWith(yieldingTemplate.split("\\{")[0]);
     }
 
     private String extractBaseWaitingMessage(String message) {
