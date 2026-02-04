@@ -890,7 +890,7 @@
   </object>
   <object id="267" template="../../../../../../common/maps/obj/enemy.tx" x="330" y="540">
    <properties>
-    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"commandersDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="effect">{ "startBattleWithCard": [ "Metallic Sliver|TMP", "Metallic Sliver|TMP", "Metallic Sliver|TMP" ] }</property>
     <property name="enemy" value="Metallic Sliver" />
     <property name="threatRange" type="int" value="60" />
