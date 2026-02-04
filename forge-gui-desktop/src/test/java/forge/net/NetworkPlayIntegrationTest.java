@@ -207,7 +207,6 @@ public class NetworkPlayIntegrationTest {
                 .playerCount(3)
                 .remoteClients(2)
                 .gameTimeout(180000)
-                .useAiForRemotePlayers(true)
                 .execute();
 
         NetworkDebugLogger.log("%s 3-player result: %s", LOG_PREFIX, result);
@@ -229,7 +228,6 @@ public class NetworkPlayIntegrationTest {
                 .playerCount(4)
                 .remoteClients(3)
                 .gameTimeout(180000)
-                .useAiForRemotePlayers(true)
                 .execute();
 
         NetworkDebugLogger.log("%s 4-player result: %s", LOG_PREFIX, result);

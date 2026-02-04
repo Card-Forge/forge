@@ -83,7 +83,7 @@ public class UnifiedNetworkHarness {
     private long connectionTimeoutMs = DEFAULT_CONNECTION_TIMEOUT_MS;
     private long gameTimeoutMs = DEFAULT_GAME_TIMEOUT_MS;
     private int specifiedPort = -1; // -1 means auto-allocate
-    private boolean useAiForRemotePlayers = false;
+    private boolean useAiForRemotePlayers = true;
     private List<Deck> decks = null; // null means use random precons
 
     // Runtime state

@@ -101,19 +101,20 @@ public class ComprehensiveGameRunner {
      */
     public static int runGame(int port, int gameIndex, int playerCount, String batchId, int batchNumber) {
         try {
-            // Set up logging for this game instance
+            // Initialize FModel FIRST - required before NetworkDebugLogger is accessed
+            // because the logger's static initialization chain requires GuiBase.getInterface()
+            if (GuiBase.getInterface() == null) {
+                GuiBase.setInterface(new HeadlessGuiDesktop());
+                FModel.initialize(null, preferences -> null);
+            }
+
+            // Set up logging for this game instance (must be after GuiBase initialization)
             NetworkDebugLogger.setTestMode(true);
             if (batchId != null) {
                 NetworkDebugLogger.setBatchId(batchId);
             }
             // Include batch number in log filename to prevent overwrites across batches
             NetworkDebugLogger.setInstanceSuffix("batch" + batchNumber + "-game" + gameIndex + "-" + playerCount + "p");
-
-            // Initialize FModel
-            if (GuiBase.getInterface() == null) {
-                GuiBase.setInterface(new HeadlessGuiDesktop());
-                FModel.initialize(null, preferences -> null);
-            }
 
             NetworkDebugLogger.log("[ComprehensiveGameRunner] Starting game %d with %d players on port %d",
                     gameIndex, playerCount, port);
@@ -150,7 +151,6 @@ public class ComprehensiveGameRunner {
                 .remoteClients(playerCount - 1)  // All but host are remote
                 .port(port)
                 .gameTimeout(300000)  // 5 minute timeout
-                .useAiForRemotePlayers(true)  // Enable AI for realistic gameplay
                 .execute();
 
         return new GameRunResult(

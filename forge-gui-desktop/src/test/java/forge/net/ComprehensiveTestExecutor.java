@@ -190,7 +190,6 @@ public class ComprehensiveTestExecutor {
                     .remoteClients(playerCount - 1)  // All but host are remote
                     .port(port)
                     .gameTimeout(gameTimeoutMs)
-                    .useAiForRemotePlayers(true)
                     .execute();
         } finally {
             // Close this game's log file

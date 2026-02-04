@@ -29,6 +29,7 @@ import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
+import net.jpountz.lz4.LZ4BlockOutputStream;
 
 import java.util.Collection;
 import java.util.List;
@@ -197,12 +198,14 @@ public class NetGuiGame extends NetworkGuiGame {
 
     /**
      * Estimate the size of a full state sync for comparison purposes.
-     * This uses ObjectOutputStream serialization (same as network layer before compression).
+     * This uses LZ4 compression (same as the network layer) to provide
+     * an apples-to-apples comparison with actual network bytes.
      */
     private int estimateFullStateSize(GameView gameView) {
         try {
             java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
-            java.io.ObjectOutputStream oos = new java.io.ObjectOutputStream(baos);
+            LZ4BlockOutputStream lz4Out = new LZ4BlockOutputStream(baos);
+            java.io.ObjectOutputStream oos = new java.io.ObjectOutputStream(lz4Out);
             oos.writeObject(gameView);
             oos.close();
             return baos.size();
