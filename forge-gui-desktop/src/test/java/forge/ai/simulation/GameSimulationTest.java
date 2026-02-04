@@ -1735,11 +1735,11 @@ public class GameSimulationTest extends SimulationTest {
         Game afterHunter = sim.getSimulatedGameState();
         AssertJUnit.assertEquals(1, countCardsWithName(afterHunter, "Slaughter Specialist", ZoneType.Exile));
         AssertJUnit.assertEquals(0, countCardsWithName(afterHunter, "Slaughter Specialist", ZoneType.Battlefield));
-        addCardToZone("Raging Goblin", afterHunter.getPlayers().get(1), ZoneType.Battlefield);
+        addCardToZone("Raging Goblin", afterHunter.getPlayers().get(0), ZoneType.Battlefield);
 
         Card simGoblin = null;
         for (Card c : afterHunter.getCardsIn(ZoneType.Battlefield)) {
-            if ("Raging Goblin".equals(c.getName()) && c.getController().equals(afterHunter.getPlayers().get(1))) {
+            if ("Raging Goblin".equals(c.getName()) && c.getController().equals(afterHunter.getPlayers().get(0))) {
                 simGoblin = c;
                 break;
             }
@@ -1783,11 +1783,11 @@ public class GameSimulationTest extends SimulationTest {
         Game afterPriest = sim.getSimulatedGameState();
         AssertJUnit.assertEquals(1, countCardsWithName(afterPriest, "Slaughter Specialist", ZoneType.Exile));
         AssertJUnit.assertEquals(0, countCardsWithName(afterPriest, "Slaughter Specialist", ZoneType.Battlefield));
-        addCardToZone("Raging Goblin", afterPriest.getPlayers().get(1), ZoneType.Battlefield);
+        addCardToZone("Raging Goblin", afterPriest.getPlayers().get(0), ZoneType.Battlefield);
 
         Card simGoblin = null;
         for (Card c : afterPriest.getCardsIn(ZoneType.Battlefield)) {
-            if ("Raging Goblin".equals(c.getName()) && c.getController().equals(afterPriest.getPlayers().get(1))) {
+            if ("Raging Goblin".equals(c.getName()) && c.getController().equals(afterPriest.getPlayers().get(0))) {
                 simGoblin = c;
                 break;
             }
