@@ -5,6 +5,7 @@ import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
+import forge.deck.Deck;
 import forge.net.analysis.AnalysisResult;
 import forge.net.analysis.GameLogMetrics;
 import forge.net.analysis.NetworkLogAnalyzer;
@@ -30,9 +31,12 @@ import java.util.List;
  * - 3-4 player multiplayer with remote clients
  *
  * Test categories:
- * - Unit tests: Always run in CI (deck loader, metrics, configuration, server start/stop)
- * - Core integration test: testTrueNetworkTraffic runs in CI to validate delta sync
- * - Stress tests: Require -Drun.stress.tests=true (batch, parallel, comprehensive)
+ * - Unit tests (6): Always run in CI - deck loader, metrics, configuration, server start/stop
+ * - Single-game tests (4): testTrueNetworkTraffic (CI), testUnifiedHarnessLocalMode,
+ *   testMultiplayer3Player, testMultiplayer4Player
+ * - Configurable batch tests (2): testConfigurableSequential, testConfigurableParallel
+ * - Comprehensive tests (2): runComprehensiveDeltaSyncTest, runQuickDeltaSyncTest
+ * - Utility tests (3): testBatchTesting, analyzeExistingLogs, testWithSystemProperties
  *
  * Usage examples:
  *
@@ -41,6 +45,17 @@ import java.util.List;
  *
  * Run all tests including stress tests:
  *   mvn -pl forge-gui-desktop -am verify -Drun.stress.tests=true
+ *
+ * Run configurable batch tests (replaces removed hardcoded tests):
+ *   mvn -pl forge-gui-desktop -am verify -Dtest="NetworkPlayIntegrationTest#testConfigurableSequential" \
+ *       -Dtest.gameCount=3 -Drun.stress.tests=true -Dsurefire.failIfNoSpecifiedTests=false
+ *   mvn -pl forge-gui-desktop -am verify -Dtest="NetworkPlayIntegrationTest#testConfigurableParallel" \
+ *       -Dtest.gameCount=2 -Drun.stress.tests=true -Dsurefire.failIfNoSpecifiedTests=false
+ *
+ * Run player-count specific tests via comprehensive executor:
+ *   mvn -pl forge-gui-desktop -am verify -Dtest="NetworkPlayIntegrationTest#runComprehensiveDeltaSyncTest" \
+ *       -Dtest.2pGames=10 -Dtest.3pGames=0 -Dtest.4pGames=0 \
+ *       -Drun.stress.tests=true -Dsurefire.failIfNoSpecifiedTests=false
  *
  * Run comprehensive test with custom configuration:
  *   mvn -pl forge-gui-desktop -am verify -Dtest="NetworkPlayIntegrationTest#runComprehensiveDeltaSyncTest" \
@@ -152,47 +167,49 @@ public class NetworkPlayIntegrationTest {
 
     // ==================== Single Game Integration Tests ====================
 
-    @Test(timeOut = 120000, description = "Full 2-player AI game test over network infrastructure")
-    public void testFullAutomatedGame() {
-        skipUnlessStressTestsEnabled();
-        NetworkDebugLogger.log("%s Starting full automated game test...", LOG_PREFIX);
-
-        UnifiedNetworkHarness.GameResult result = new UnifiedNetworkHarness()
-                .playerCount(2)
-                .remoteClients(0)
-                .gameTimeout(120000)
-                .execute();
-
-        NetworkDebugLogger.log("%s Game result: %s", LOG_PREFIX, result.toSummary());
-        System.out.println(result.toDetailedReport());
-
-        if (result.gameCompleted) {
-            Assert.assertTrue(result.turnCount > 0, "Should have at least one turn");
-        }
-        Assert.assertNotNull(result, "Result should not be null");
-    }
-
     /**
      * Key test for delta sync validation - uses actual TCP network client.
+     * Uses 10-card basic land decks for fast CI execution.
+     * Games end in ~3 turns as players deck out (no spells to cast).
+     * Deck legality is temporarily disabled for this test only.
      */
-    @Test(timeOut = 300000, description = "True network traffic test with remote client")
+    @Test(timeOut = 60000, description = "True network traffic test with remote client")
     public void testTrueNetworkTraffic() {
         NetworkDebugLogger.log("%s Starting true network traffic test...", LOG_PREFIX);
-        NetworkDebugLogger.log("%s This test connects an actual network client to verify delta sync", LOG_PREFIX);
+        NetworkDebugLogger.log("%s Using minimal 10-card basic land decks for fast CI execution", LOG_PREFIX);
 
-        UnifiedNetworkHarness.GameResult result = new UnifiedNetworkHarness()
-                .playerCount(2)
-                .remoteClients(1)
-                .gameTimeout(300000)
-                .execute();
+        // Temporarily disable deck legality for this test only
+        boolean originalLegality = FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY);
+        FModel.getPreferences().setPref(FPref.ENFORCE_DECK_LEGALITY, false);
 
-        NetworkDebugLogger.log("%s Network test result: %s", LOG_PREFIX, result.toSummary());
-        System.out.println(result.toDetailedReport());
+        try {
+            // Use 10-card basic land decks for fast game completion
+            // With 7-card starting hand + 3 draws, game ends when first player decks out
+            Deck deck1 = TestDeckLoader.createMinimalDeck("Mountain", 10);
+            Deck deck2 = TestDeckLoader.createMinimalDeck("Forest", 10);
 
-        if (result.success) {
-            Assert.assertTrue(result.deltaPacketsReceived > 0, "Should have received delta sync packets");
+            UnifiedNetworkHarness.GameResult result = new UnifiedNetworkHarness()
+                    .playerCount(2)
+                    .remoteClients(1)
+                    .decks(deck1, deck2)
+                    .gameTimeout(60000)  // Reduced timeout - game should finish very quickly
+                    .execute();
+
+            NetworkDebugLogger.log("%s Network test result: %s", LOG_PREFIX, result.toSummary());
+            // Log bandwidth comparison (skip full analysis for minimal deck games)
+            String bandwidthSummary = result.getBandwidthSummary();
+            if (bandwidthSummary != null) {
+                NetworkDebugLogger.log("%s %s", LOG_PREFIX, bandwidthSummary);
+            }
+
+            if (result.success) {
+                Assert.assertTrue(result.deltaPacketsReceived > 0, "Should have received delta sync packets");
+            }
+            Assert.assertTrue(result.gameStarted, "Game should have started");
+        } finally {
+            // Restore original deck legality setting
+            FModel.getPreferences().setPref(FPref.ENFORCE_DECK_LEGALITY, originalLegality);
         }
-        Assert.assertTrue(result.gameStarted, "Game should have started");
     }
 
     @Test(timeOut = 200000, description = "3-player multiplayer network game test")
@@ -287,43 +304,6 @@ public class NetworkPlayIntegrationTest {
                 LOG_PREFIX, completed, iterations, completed > 0 ? (double) totalTurns / completed : 0);
 
         Assert.assertEquals(completed, iterations, "All games should complete");
-    }
-
-    @Test(timeOut = 900000, description = "Sequential 3 games")
-    public void testSequentialThreeGames() {
-        skipUnlessStressTestsEnabled();
-        MultiProcessGameExecutor.ExecutionResult result = ComprehensiveTestExecutor.runSequentialGames(3, 300000);
-
-        NetworkDebugLogger.log("%s Sequential 3 games: %s", LOG_PREFIX, result.toSummary());
-        System.out.println(result.toDetailedReport());
-
-        Assert.assertTrue(result.getSuccessCount() >= 3, "All 3 sequential games should succeed: " + result.toSummary());
-        Assert.assertTrue(result.getTotalDeltaPackets() > 0, "Delta packets should be received across games");
-    }
-
-    @Test(timeOut = 600000, description = "Parallel 3 games")
-    public void testParallelThreeGames() {
-        skipUnlessStressTestsEnabled();
-        MultiProcessGameExecutor executor = new MultiProcessGameExecutor(300000);
-        MultiProcessGameExecutor.ExecutionResult result = executor.runGames(3);
-
-        NetworkDebugLogger.log("%s Parallel 3 games: %s", LOG_PREFIX, result.toSummary());
-        System.out.println(result.toDetailedReport());
-
-        Assert.assertTrue(result.getSuccessCount() >= 2, "At least 2 of 3 parallel games should succeed: " + result.toSummary());
-        Assert.assertTrue(result.getTotalDeltaPackets() > 0, "Delta packets should be received across games");
-    }
-
-    @Test(timeOut = 300000, description = "Quick parallel 2 games")
-    public void testParallelTwoGames() {
-        skipUnlessStressTestsEnabled();
-        MultiProcessGameExecutor executor = new MultiProcessGameExecutor(180000);
-        MultiProcessGameExecutor.ExecutionResult result = executor.runGames(2);
-
-        NetworkDebugLogger.log("%s Parallel 2 games: %s", LOG_PREFIX, result.toSummary());
-        System.out.println(result.toDetailedReport());
-
-        Assert.assertTrue(result.getSuccessCount() >= 1, "At least 1 of 2 parallel games should succeed: " + result.toSummary());
     }
 
     /**
@@ -445,42 +425,6 @@ public class NetworkPlayIntegrationTest {
 
         Assert.assertTrue(executionResult.getSuccessRate() >= 0.80,
                 String.format("Quick test success rate should be >= 80%%, was %.1f%%", executionResult.getSuccessRate() * 100));
-    }
-
-    @Test(timeOut = 600000, description = "2-player only test")
-    public void runTwoPlayerOnlyTest() {
-        skipUnlessStressTestsEnabled();
-        NetworkDebugLogger.log("%s Starting 2-player only test", LOG_PREFIX);
-
-        ComprehensiveTestExecutor executor = new ComprehensiveTestExecutor()
-                .twoPlayerGames(10)
-                .threePlayerGames(0)
-                .fourPlayerGames(0)
-                .parallelBatchSize(5);
-
-        MultiProcessGameExecutor.ExecutionResult result = executor.execute();
-        System.out.println("\n" + result.toDetailedReport());
-
-        Assert.assertTrue(result.getSuccessRate() >= 0.80,
-                String.format("2-player test success rate should be >= 80%%, was %.1f%%", result.getSuccessRate() * 100));
-    }
-
-    @Test(timeOut = 900000, description = "Multiplayer only test (3 and 4 players)")
-    public void runMultiplayerOnlyTest() {
-        skipUnlessStressTestsEnabled();
-        NetworkDebugLogger.log("%s Starting multiplayer only test", LOG_PREFIX);
-
-        ComprehensiveTestExecutor executor = new ComprehensiveTestExecutor()
-                .twoPlayerGames(0)
-                .threePlayerGames(5)
-                .fourPlayerGames(5)
-                .parallelBatchSize(3);
-
-        MultiProcessGameExecutor.ExecutionResult result = executor.execute();
-        System.out.println("\n" + result.toDetailedReport());
-
-        Assert.assertTrue(result.getSuccessRate() >= 0.70,
-                String.format("Multiplayer test success rate should be >= 70%%, was %.1f%%", result.getSuccessRate() * 100));
     }
 
     /**

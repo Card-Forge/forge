@@ -843,6 +843,44 @@ public class UnifiedNetworkHarness {
         }
 
         /**
+         * Get a concise bandwidth summary from log analysis.
+         * Shows Approximate/ActualNetwork/FullState comparison without full report.
+         *
+         * @return Bandwidth summary string, or null if log file not available
+         */
+        public String getBandwidthSummary() {
+            File logFile = NetworkDebugLogger.getCurrentLogFile();
+            if (logFile == null || !logFile.exists()) {
+                return null;
+            }
+
+            try {
+                NetworkLogAnalyzer analyzer = new NetworkLogAnalyzer();
+                GameLogMetrics metrics = analyzer.analyzeLogFile(logFile);
+
+                long approx = metrics.getTotalApproximateBytes();
+                long actual = metrics.getTotalDeltaBytes();
+                long full = metrics.getTotalFullStateBytes();
+
+                double approxSavings = full > 0 ? 100.0 * (1.0 - (double) approx / full) : 0;
+                double actualSavings = full > 0 ? 100.0 * (1.0 - (double) actual / full) : 0;
+
+                return String.format("Bandwidth: Approximate=%s (%.1f%% savings), ActualNetwork=%s (%.1f%% savings), FullState=%s",
+                        formatBytes(approx), approxSavings,
+                        formatBytes(actual), actualSavings,
+                        formatBytes(full));
+            } catch (Exception e) {
+                return "Bandwidth analysis failed: " + e.getMessage();
+            }
+        }
+
+        private static String formatBytes(long bytes) {
+            if (bytes < 1024) return bytes + " B";
+            if (bytes < 1024 * 1024) return String.format("%.1f KB", bytes / 1024.0);
+            return String.format("%.1f MB", bytes / (1024.0 * 1024.0));
+        }
+
+        /**
          * Analyze the log file for this game and return a detailed analysis report.
          * This provides bandwidth savings metrics, checksum validation, and error context
          * that aren't available from the basic GameResult metrics.

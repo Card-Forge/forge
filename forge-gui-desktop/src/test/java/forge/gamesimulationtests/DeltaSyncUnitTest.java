@@ -17,12 +17,18 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Test cases for the network play optimization features:
- * - Delta sync (sending only changed properties)
- * - Reconnection support
- * - Session management
+ * Unit tests for delta sync components.
+ *
+ * Tests individual classes used by the delta sync system:
+ * - DeltaPacket / FullStatePacket - packet structures
+ * - DeltaSyncManager - client tracking and sequence management
+ * - GameSession / PlayerSession - session and reconnection support
+ * - NetworkByteTracker - bandwidth monitoring
+ *
+ * These are fast unit tests that don't involve actual network I/O.
+ * For integration tests with real network traffic, see NetworkPlayIntegrationTest.
  */
-public class NetworkOptimizationTest {
+public class DeltaSyncUnitTest {
 
     private LocalNetworkTestHarness harness;
 
@@ -563,40 +569,9 @@ public class NetworkOptimizationTest {
             size1, size2, size3));
     }
 
-    /**
-     * Test that the comparison between delta and full state sizes is meaningful.
-     * This validates that we're not comparing wildly different units.
-     */
-    @Test
-    public void testDeltaVsFullStateComparison() {
-        // Create a delta packet with known size
-        Map<Integer, byte[]> deltas = new HashMap<>();
-        deltas.put(1, new byte[100]);
-        deltas.put(2, new byte[200]);
-
-        DeltaPacket packet = new DeltaPacket(1L, deltas, new HashSet<>());
-        int deltaSize = packet.getApproximateSize();
-
-        // Simulate what would be a "full state" for the same data
-        // If we were to serialize the same 300 bytes of data using ObjectOutputStream
-        byte[] simulatedFullState = new byte[300];
-        int fullStateSize = serializeWithObjectOutputStream(simulatedFullState);
-
-        // Calculate savings percentage (as done in NetGuiGame.java:152)
-        int savings = fullStateSize > 0 ? (int)((1.0 - (double)deltaSize / fullStateSize) * 100) : 0;
-
-        System.out.println(String.format(
-            "[SerializationValidation] Delta=%d bytes, FullState=%d bytes, Savings=%d%%",
-            deltaSize, fullStateSize, savings));
-
-        // The delta should be smaller than the full state (due to ObjectOutputStream overhead)
-        Assert.assertTrue(deltaSize < fullStateSize,
-            "Delta size should be less than full state with ObjectOutputStream overhead");
-
-        // The savings should be positive but reasonable (not 99%)
-        Assert.assertTrue(savings >= 0 && savings < 100,
-            "Savings percentage should be between 0% and 100%");
-    }
+    // testDeltaVsFullStateComparison removed: had conceptual flaw comparing DeltaPacket
+    // (with protocol overhead) against raw byte[] serialization. Real delta sync validation
+    // is done by NetworkPlayIntegrationTest which tests actual GameView serialization.
 
     /**
      * Test that delta vs full state comparison produces reasonable results with varying sizes.
