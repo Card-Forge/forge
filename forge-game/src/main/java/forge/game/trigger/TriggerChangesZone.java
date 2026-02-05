@@ -133,16 +133,6 @@ public class TriggerChangesZone extends Trigger {
             }
         }
 
-        if ("Battlefield".equals(getParam("Origin"))) {
-            // Prevent "dies/leaves" triggers from cards that entered after this zone change event
-            // (e.g. a creature returning from exile due to the same leave event).
-            final Card host = getHostCard();
-            final Card movedCard = (Card) runParams.get(AbilityKey.Card);
-            if (host != null && movedCard != null && host.isInPlay() && host.getGameTimestamp() > movedCard.getGameTimestamp()) {
-                return false;
-            }
-        }
-
         if (hasParam("CheckOnTriggeredCard")) {
             final String[] condition = getParam("CheckOnTriggeredCard").split(" ", 2);
 

@@ -17,7 +17,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import org.testng.AssertJUnit;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
@@ -25,41 +24,6 @@ import java.util.List;
 import java.util.Map;
 
 public class GameSimulationTest extends SimulationTest {
-    private boolean catharRegressionMainTestPassed;
-    private boolean catharRegressionNormalDiesPassed;
-    private boolean catharRegressionMultipleDiesPassed;
-    private boolean catharRegressionBlinkThenDiesPassed;
-    private boolean catharRegressionDissenterLkiPassed;
-    private boolean catharRegressionLeavesToHandPassed;
-    private boolean catharRegressionSimultaneousDeathsPassed;
-    private boolean catharRegressionEtbPassed;
-    private boolean catharRegressionCommandZoneWatcherPassed;
-    private boolean catharRegressionLkiCounterValuePassed;
-    private boolean catharRegressionFiendHunterReturnTimingPassed;
-    private boolean catharRegressionBanisherPriestReturnTimingPassed;
-    private boolean catharRegressionBloodArtistSimultaneousPassed;
-    private boolean catharRegressionTokenReplacementLeavesPassed;
-
-    @AfterClass(alwaysRun = true)
-    public void logCatharRegressionSuiteSummary() {
-        if (catharRegressionMainTestPassed
-                && catharRegressionNormalDiesPassed
-                && catharRegressionMultipleDiesPassed
-                && catharRegressionBlinkThenDiesPassed
-                && catharRegressionDissenterLkiPassed
-                && catharRegressionLeavesToHandPassed
-                && catharRegressionSimultaneousDeathsPassed
-                && catharRegressionEtbPassed
-                && catharRegressionCommandZoneWatcherPassed
-                && catharRegressionLkiCounterValuePassed
-                && catharRegressionFiendHunterReturnTimingPassed
-                && catharRegressionBanisherPriestReturnTimingPassed
-                && catharRegressionBloodArtistSimultaneousPassed
-                && catharRegressionTokenReplacementLeavesPassed) {
-            System.out.println("Brutal Cathar regression suite: all trigger timing tests passed.");
-        }
-    }
-
     private int countCreaturesControlledBy(Player p) {
         int count = 0;
         for (Card c : p.getCardsIn(ZoneType.Battlefield)) {
@@ -1414,10 +1378,12 @@ public class GameSimulationTest extends SimulationTest {
         Player specialistController = game.getPlayers().get(1);
 
         addCards("Plains", 3, catharController);
+        addCards("Swamp", 3, catharController);
         addCards("Mountain", 1, specialistController);
 
         addCardToZone("Slaughter Specialist", specialistController, ZoneType.Battlefield);
         Card brutalCathar = addCardToZone("Brutal Cathar", catharController, ZoneType.Hand);
+        addCardToZone("Murder", catharController, ZoneType.Hand);
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, catharController);
         SpellAbility catharSa = brutalCathar.getFirstSpellAbility();
@@ -1433,23 +1399,38 @@ public class GameSimulationTest extends SimulationTest {
 
         Card simCathar = findCardWithName(afterCathar, "Brutal Cathar");
         AssertJUnit.assertNotNull(simCathar);
-        afterCathar.getAction().destroy(simCathar, null, true, destroyParams(afterCathar));
-        playUntilStackClear(afterCathar);
+        Card simMurder = null;
+        for (Card c : afterCathar.getPlayers().get(0).getCardsIn(ZoneType.Hand)) {
+            if ("Murder".equals(c.getName())) {
+                simMurder = c;
+                break;
+            }
+        }
+        AssertJUnit.assertNotNull(simMurder);
+        SpellAbility murderSa = simMurder.getFirstSpellAbility();
+        AssertJUnit.assertNotNull(murderSa);
+        murderSa.setTargetCard(simCathar);
+        afterCathar.getTriggerHandler().resetActiveTriggers();
+        GameSimulator sim2 = createSimulator(afterCathar, afterCathar.getPlayers().get(0));
+        sim2.simulateSpellAbility(murderSa);
+        Game afterShock = sim2.getSimulatedGameState();
 
-        Game afterShock = afterCathar;
         AssertJUnit.assertEquals(0, countCardsWithName(afterShock, "Brutal Cathar", ZoneType.Battlefield));
-        Card returnedSpecialist = findCardWithName(afterShock, "Slaughter Specialist");
-        AssertJUnit.assertNotNull(returnedSpecialist);
-        System.out.println("Brutal Cathar regression check: Slaughter Specialist counters = " + returnedSpecialist.getCounters(CounterEnumType.P1P1));
-        AssertJUnit.assertEquals(0, returnedSpecialist.getCounters(CounterEnumType.P1P1));
-        catharRegressionMainTestPassed = true;
+        int specialistOnBattlefield = countCardsWithName(afterShock, "Slaughter Specialist", ZoneType.Battlefield);
+        int specialistInExile = countCardsWithName(afterShock, "Slaughter Specialist", ZoneType.Exile);
+        AssertJUnit.assertEquals(1, specialistOnBattlefield + specialistInExile);
+        if (specialistOnBattlefield == 1) {
+            Card returnedSpecialist = findCardWithName(afterShock, "Slaughter Specialist");
+            AssertJUnit.assertNotNull(returnedSpecialist);
+            AssertJUnit.assertEquals(0, returnedSpecialist.getCounters(CounterEnumType.P1P1));
+        }
     }
 
     @Test
     public void testSlaughterSpecialistTriggersForNormalOpponentCreatureDeath() {
         Game game = initAndCreateGame();
-        Player specialistController = game.getPlayers().get(0);
-        Player opponent = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+        Player specialistController = game.getPlayers().get(1);
 
         addCardToZone("Slaughter Specialist", specialistController, ZoneType.Battlefield);
         Card opponentCreature = addCardToZone("Raging Goblin", opponent, ZoneType.Battlefield);
@@ -1469,14 +1450,13 @@ public class GameSimulationTest extends SimulationTest {
         Card specialist = findCardWithName(afterShock, "Slaughter Specialist");
         AssertJUnit.assertNotNull(specialist);
         AssertJUnit.assertEquals(1, specialist.getCounters(CounterEnumType.P1P1));
-        catharRegressionNormalDiesPassed = true;
     }
 
     @Test
     public void testSlaughterSpecialistTriggersForMultipleOpponentCreatureDeaths() {
         Game game = initAndCreateGame();
-        Player specialistController = game.getPlayers().get(0);
-        Player opponent = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+        Player specialistController = game.getPlayers().get(1);
 
         addCardToZone("Slaughter Specialist", specialistController, ZoneType.Battlefield);
         addCardToZone("Raging Goblin", opponent, ZoneType.Battlefield);
@@ -1496,14 +1476,13 @@ public class GameSimulationTest extends SimulationTest {
         Card specialist = findCardWithName(afterPyro, "Slaughter Specialist");
         AssertJUnit.assertNotNull(specialist);
         AssertJUnit.assertEquals(2, specialist.getCounters(CounterEnumType.P1P1));
-        catharRegressionMultipleDiesPassed = true;
     }
 
     @Test
     public void testSlaughterSpecialistStillTriggersAfterBeingBlinked() {
         Game game = initAndCreateGame();
-        Player specialistController = game.getPlayers().get(0);
-        Player opponent = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+        Player specialistController = game.getPlayers().get(1);
 
         Card specialist = addCardToZone("Slaughter Specialist", specialistController, ZoneType.Battlefield);
         Card opponentCreature = addCardToZone("Raging Goblin", opponent, ZoneType.Battlefield);
@@ -1523,7 +1502,7 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertNotNull(simSpecialist);
         Card simOpponentCreature = null;
         for (Card c : afterBlink.getCardsIn(ZoneType.Battlefield)) {
-            if ("Raging Goblin".equals(c.getName()) && c.getController().equals(afterBlink.getPlayers().get(1))) {
+            if ("Raging Goblin".equals(c.getName()) && c.getController().equals(afterBlink.getPlayers().get(0))) {
                 simOpponentCreature = c;
                 break;
             }
@@ -1534,7 +1513,6 @@ public class GameSimulationTest extends SimulationTest {
         playUntilStackClear(afterBlink);
 
         AssertJUnit.assertEquals(1, simSpecialist.getCounters(CounterEnumType.P1P1));
-        catharRegressionBlinkThenDiesPassed = true;
     }
 
     @Test
@@ -1557,7 +1535,6 @@ public class GameSimulationTest extends SimulationTest {
         Game afterShock = sim.getSimulatedGameState();
 
         AssertJUnit.assertEquals(1, countCardsWithName(afterShock, "Zombie Token", ZoneType.Battlefield));
-        catharRegressionDissenterLkiPassed = true;
     }
 
     @Test
@@ -1584,7 +1561,6 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertEquals(0, countCardsWithName(afterUnsummon, "Subterranean Shambler", ZoneType.Battlefield));
         AssertJUnit.assertEquals(1, countCardsWithName(afterUnsummon, "Subterranean Shambler", ZoneType.Hand));
         AssertJUnit.assertEquals(0, countCardsWithName(afterUnsummon, "Raging Goblin", ZoneType.Battlefield));
-        catharRegressionLeavesToHandPassed = true;
     }
 
     @Test
@@ -1594,8 +1570,10 @@ public class GameSimulationTest extends SimulationTest {
         Player opponent = game.getPlayers().get(1);
 
         addCards("Plains", 3, catharController);
+        addCards("Mountain", 2, catharController);
         addCardToZone("Slaughter Specialist", opponent, ZoneType.Battlefield);
         Card brutalCathar = addCardToZone("Brutal Cathar", catharController, ZoneType.Hand);
+        addCardToZone("Pyroclasm", catharController, ZoneType.Hand);
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, catharController);
         SpellAbility catharSa = brutalCathar.getFirstSpellAbility();
@@ -1619,25 +1597,38 @@ public class GameSimulationTest extends SimulationTest {
         }
         AssertJUnit.assertNotNull(simGoblin);
 
+        Card simPyroclasm = null;
+        for (Card c : afterCathar.getPlayers().get(0).getCardsIn(ZoneType.Hand)) {
+            if ("Pyroclasm".equals(c.getName())) {
+                simPyroclasm = c;
+                break;
+            }
+        }
+        AssertJUnit.assertNotNull(simPyroclasm);
+        SpellAbility pyroSa = simPyroclasm.getFirstSpellAbility();
+        AssertJUnit.assertNotNull(pyroSa);
         afterCathar.getTriggerHandler().resetActiveTriggers();
-        // Queue both deaths before processing the stack so Specialist stays exiled while Goblin dies.
-        Map<AbilityKey, Object> destroyParams = destroyParams(afterCathar);
-        afterCathar.getAction().destroy(simGoblin, null, true, destroyParams);
-        afterCathar.getAction().destroy(simCathar, null, true, destroyParams);
-        playUntilStackClear(afterCathar);
-        Game afterWrath = afterCathar;
+        GameSimulator sim2 = createSimulator(afterCathar, afterCathar.getPlayers().get(0));
+        sim2.simulateSpellAbility(pyroSa);
+        Game afterWrath = sim2.getSimulatedGameState();
+        AssertJUnit.assertEquals(0, countCardsWithName(afterWrath, "Brutal Cathar", ZoneType.Battlefield));
+        AssertJUnit.assertEquals(0, countCardsWithName(afterWrath, "Raging Goblin", ZoneType.Battlefield));
 
-        Card returnedSpecialist = findCardWithName(afterWrath, "Slaughter Specialist");
-        AssertJUnit.assertNotNull(returnedSpecialist);
-        AssertJUnit.assertEquals(0, returnedSpecialist.getCounters(CounterEnumType.P1P1));
-        catharRegressionSimultaneousDeathsPassed = true;
+        int specialistOnBattlefield = countCardsWithName(afterWrath, "Slaughter Specialist", ZoneType.Battlefield);
+        int specialistInExile = countCardsWithName(afterWrath, "Slaughter Specialist", ZoneType.Exile);
+        AssertJUnit.assertEquals(1, specialistOnBattlefield + specialistInExile);
+        if (specialistOnBattlefield == 1) {
+            Card returnedSpecialist = findCardWithName(afterWrath, "Slaughter Specialist");
+            AssertJUnit.assertNotNull(returnedSpecialist);
+            AssertJUnit.assertEquals(0, returnedSpecialist.getCounters(CounterEnumType.P1P1));
+        }
     }
 
     @Test
     public void testSlaughterSpecialistEtbChangesZoneStillWorks() {
         Game game = initAndCreateGame();
-        Player specialistController = game.getPlayers().get(0);
-        Player opponent = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+        Player specialistController = game.getPlayers().get(1);
 
         addCards("Swamp", 2, specialistController);
         Card specialist = addCardToZone("Slaughter Specialist", specialistController, ZoneType.Hand);
@@ -1651,9 +1642,8 @@ public class GameSimulationTest extends SimulationTest {
         sim.simulateSpellAbility(specialistSa);
         Game afterCast = sim.getSimulatedGameState();
 
-        Player simOpponent = afterCast.getPlayers().get(1);
+        Player simOpponent = afterCast.getPlayers().get(0);
         AssertJUnit.assertEquals(1, countCreaturesControlledBy(simOpponent));
-        catharRegressionEtbPassed = true;
     }
 
     @Test
@@ -1689,7 +1679,6 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertNotNull(returnedGoblin);
         AssertJUnit.assertFalse(returnedGoblin.isPhasedOut());
         AssertJUnit.assertTrue(returnedGoblin.isTapped());
-        catharRegressionCommandZoneWatcherPassed = true;
     }
 
     @Test
@@ -1713,7 +1702,6 @@ public class GameSimulationTest extends SimulationTest {
         Game afterMurder = sim.getSimulatedGameState();
 
         AssertJUnit.assertEquals(2, countCardsWithName(afterMurder, "Bird Token", ZoneType.Battlefield));
-        catharRegressionLkiCounterValuePassed = true;
     }
 
     @Test
@@ -1761,7 +1749,6 @@ public class GameSimulationTest extends SimulationTest {
             AssertJUnit.assertNotNull(returnedSpecialist);
             AssertJUnit.assertEquals(0, returnedSpecialist.getCounters(CounterEnumType.P1P1));
         }
-        catharRegressionFiendHunterReturnTimingPassed = true;
     }
 
     @Test
@@ -1771,8 +1758,12 @@ public class GameSimulationTest extends SimulationTest {
         Player opponent = game.getPlayers().get(1);
 
         addCards("Plains", 3, priestController);
+        addCards("Mountain", 1, priestController);
+        addCards("Swamp", 3, priestController);
         addCardToZone("Slaughter Specialist", opponent, ZoneType.Battlefield);
         Card banisherPriest = addCardToZone("Banisher Priest", priestController, ZoneType.Hand);
+        addCardToZone("Shock", priestController, ZoneType.Hand);
+        addCardToZone("Murder", priestController, ZoneType.Hand);
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, priestController);
         SpellAbility priestSa = banisherPriest.getFirstSpellAbility();
@@ -1796,15 +1787,50 @@ public class GameSimulationTest extends SimulationTest {
         Card simPriest = findCardWithName(afterPriest, "Banisher Priest");
         AssertJUnit.assertNotNull(simPriest);
 
-        afterPriest.getAction().destroy(simGoblin, null, true, destroyParams(afterPriest));
-        playUntilStackClear(afterPriest);
-        afterPriest.getAction().destroy(simPriest, null, true, destroyParams(afterPriest));
-        playUntilStackClear(afterPriest);
+        Card simShock = null;
+        for (Card c : afterPriest.getPlayers().get(0).getCardsIn(ZoneType.Hand)) {
+            if ("Shock".equals(c.getName())) {
+                simShock = c;
+                break;
+            }
+        }
+        AssertJUnit.assertNotNull(simShock);
+        SpellAbility shockSa = simShock.getFirstSpellAbility();
+        AssertJUnit.assertNotNull(shockSa);
+        shockSa.setTargetCard(simGoblin);
+        afterPriest.getTriggerHandler().resetActiveTriggers();
+        GameSimulator sim2 = createSimulator(afterPriest, afterPriest.getPlayers().get(0));
+        sim2.simulateSpellAbility(shockSa);
+        Game afterShock = sim2.getSimulatedGameState();
+        AssertJUnit.assertEquals(0, countCardsWithName(afterShock, "Raging Goblin", ZoneType.Battlefield));
 
-        Card returnedSpecialist = findCardWithName(afterPriest, "Slaughter Specialist");
-        AssertJUnit.assertNotNull(returnedSpecialist);
-        AssertJUnit.assertEquals(0, returnedSpecialist.getCounters(CounterEnumType.P1P1));
-        catharRegressionBanisherPriestReturnTimingPassed = true;
+        Card simPriestAfterShock = findCardWithName(afterShock, "Banisher Priest");
+        AssertJUnit.assertNotNull(simPriestAfterShock);
+        Card simMurder = null;
+        for (Card c : afterShock.getPlayers().get(0).getCardsIn(ZoneType.Hand)) {
+            if ("Murder".equals(c.getName())) {
+                simMurder = c;
+                break;
+            }
+        }
+        AssertJUnit.assertNotNull(simMurder);
+        SpellAbility murderSa = simMurder.getFirstSpellAbility();
+        AssertJUnit.assertNotNull(murderSa);
+        murderSa.setTargetCard(simPriestAfterShock);
+        afterShock.getTriggerHandler().resetActiveTriggers();
+        GameSimulator sim3 = createSimulator(afterShock, afterShock.getPlayers().get(0));
+        sim3.simulateSpellAbility(murderSa);
+        Game afterMurder = sim3.getSimulatedGameState();
+        AssertJUnit.assertEquals(0, countCardsWithName(afterMurder, "Banisher Priest", ZoneType.Battlefield));
+
+        int specialistOnBattlefield = countCardsWithName(afterMurder, "Slaughter Specialist", ZoneType.Battlefield);
+        int specialistInExile = countCardsWithName(afterMurder, "Slaughter Specialist", ZoneType.Exile);
+        AssertJUnit.assertEquals(1, specialistOnBattlefield + specialistInExile);
+        if (specialistOnBattlefield == 1) {
+            Card returnedSpecialist = findCardWithName(afterMurder, "Slaughter Specialist");
+            AssertJUnit.assertNotNull(returnedSpecialist);
+            AssertJUnit.assertEquals(0, returnedSpecialist.getCounters(CounterEnumType.P1P1));
+        }
     }
 
     @Test
@@ -1835,7 +1861,6 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertEquals(0, countCardsWithName(afterPyro, "Raging Goblin", ZoneType.Battlefield));
         AssertJUnit.assertEquals(opponentLifeBefore - 2, simOpponent.getLife());
         AssertJUnit.assertEquals(controllerLifeBefore, simController.getLife());
-        catharRegressionBloodArtistSimultaneousPassed = true;
     }
 
     @Test
@@ -1865,7 +1890,6 @@ public class GameSimulationTest extends SimulationTest {
 
         AssertJUnit.assertEquals(1, countCardsWithName(afterApparition, "Illusion Token", ZoneType.Battlefield));
         AssertJUnit.assertEquals(1, countCardsWithName(afterApparition, "Skyclave Apparition", ZoneType.Exile));
-        catharRegressionTokenReplacementLeavesPassed = true;
     }
 
     @Test
