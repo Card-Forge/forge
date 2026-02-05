@@ -90,12 +90,6 @@ public class NetConnectUtil {
                     final MessageEvent message = (MessageEvent) event;
                     String msgText = message.getMessage();
 
-                    // Check for host commands first (host is local, so handle commands locally)
-                    if (server.handleHostCommand(msgText)) {
-                        // Command was handled, don't broadcast or add to chat
-                        return;
-                    }
-
                     String source = message.getSource();
                     // Append (Host) indicator for the host player
                     if (source != null) {

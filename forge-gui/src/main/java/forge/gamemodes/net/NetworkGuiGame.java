@@ -1013,36 +1013,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
     }
 
     @Override
-    public void gamePaused(String message) {
-        // Default implementation - show a message and pause
-        setgamePause(true);
-        if (message != null && !message.isEmpty()) {
-            message(message, "Game Paused");
-        }
-    }
-
-    @Override
-    public void gameResumed() {
-        // Default implementation - resume the game
-        setgamePause(false);
-    }
-
-    @Override
-    public void reconnectAccepted(FullStatePacket packet) {
-        // Default implementation - treat as a full state sync
-        // The fullStateSync method will handle both state application and acknowledgment
-        fullStateSync(packet);
-    }
-
-    @Override
-    public void reconnectRejected(String reason) {
-        // Default implementation - show an error
-        if (reason != null && !reason.isEmpty()) {
-            showErrorDialog(reason, "Reconnection Failed");
-        }
-    }
-
-    @Override
     public void setRememberedActions() {
         // Default implementation - no-op for local games
     }

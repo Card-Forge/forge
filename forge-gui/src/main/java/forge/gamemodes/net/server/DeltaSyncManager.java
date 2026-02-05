@@ -952,18 +952,6 @@ public class DeltaSyncManager {
     }
 
     /**
-     * Create a full state packet for reconnection with session info.
-     * @param gameView the complete game view
-     * @param sessionId the session identifier
-     * @param sessionToken the session token
-     * @return a FullStatePacket
-     */
-    public FullStatePacket createFullStatePacketForReconnect(GameView gameView, String sessionId, String sessionToken) {
-        long seq = sequenceNumber.get();
-        return new FullStatePacket(seq, gameView, sessionId, sessionToken);
-    }
-
-    /**
      * Clear all tracked changes for all objects.
      * Should be called after all clients have acknowledged.
      * @param gameView the game view to clear changes from

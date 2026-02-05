@@ -83,10 +83,6 @@ public enum ProtocolMethod {
     // Delta sync - Server -> Client
     applyDelta          (Mode.SERVER, Void.TYPE, DeltaPacket.class),
     fullStateSync       (Mode.SERVER, Void.TYPE, FullStatePacket.class),
-    gamePaused          (Mode.SERVER, Void.TYPE, String.class),
-    gameResumed         (Mode.SERVER, Void.TYPE),
-    reconnectAccepted   (Mode.SERVER, Void.TYPE, FullStatePacket.class),
-    reconnectRejected   (Mode.SERVER, Void.TYPE, String.class),
 
     // Client -> Server
     // Note: these should all return void, to avoid awkward situations in
@@ -110,7 +106,7 @@ public enum ProtocolMethod {
     // Delta sync - Client -> Server
     ackSync                   (Mode.CLIENT, Void.TYPE, Long.TYPE),
     requestResync             (Mode.CLIENT, Void.TYPE),  // Request full state resync on checksum mismatch
-    reconnectRequest          (Mode.CLIENT, Void.TYPE, String.class, String.class);
+    ;
 
     private enum Mode {
         SERVER(IGuiGame.class),

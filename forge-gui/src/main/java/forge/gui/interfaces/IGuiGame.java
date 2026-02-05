@@ -296,31 +296,6 @@ public interface IGuiGame {
     void fullStateSync(FullStatePacket packet);
 
     /**
-     * Handle game paused notification.
-     * Called when another player disconnects.
-     * @param message the pause message to display
-     */
-    void gamePaused(String message);
-
-    /**
-     * Handle game resumed notification.
-     * Called when the disconnected player reconnects.
-     */
-    void gameResumed();
-
-    /**
-     * Handle successful reconnection.
-     * @param packet the full state packet with restored game state
-     */
-    void reconnectAccepted(FullStatePacket packet);
-
-    /**
-     * Handle rejected reconnection.
-     * @param reason the reason the reconnection was rejected
-     */
-    void reconnectRejected(String reason);
-
-    /**
      * Set the rememberd actions (for replay/undo support).
      */
     void setRememberedActions();

@@ -60,10 +60,4 @@ public interface IGameController {
      */
     void requestResync();
 
-    /**
-     * Request to reconnect to an existing game session.
-     * @param sessionId the session identifier
-     * @param token the session token for authentication
-     */
-    void reconnectRequest(String sessionId, String token);
 }

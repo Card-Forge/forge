@@ -871,28 +871,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
-    public void gamePaused(String message) {
-        // Simple implementation for local games
-        setgamePause(true);
-    }
-
-    @Override
-    public void gameResumed() {
-        // Simple implementation for local games
-        setgamePause(false);
-    }
-
-    @Override
-    public void reconnectAccepted(FullStatePacket packet) {
-        // No-op for local games - network implementation is in NetworkGuiGame
-    }
-
-    @Override
-    public void reconnectRejected(String reason) {
-        // No-op for local games - network implementation is in NetworkGuiGame
-    }
-
-    @Override
     public void setRememberedActions() {
         // No-op for local games - network implementation is in NetworkGuiGame
     }

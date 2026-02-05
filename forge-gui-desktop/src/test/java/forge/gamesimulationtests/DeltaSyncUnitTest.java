@@ -3,9 +3,6 @@ package forge.gamesimulationtests;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.FullStatePacket;
 import forge.gamemodes.net.server.DeltaSyncManager;
-import forge.gamemodes.net.server.GameSession;
-import forge.gamemodes.net.server.PlayerSession;
-
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -22,7 +19,6 @@ import java.util.Set;
  * Tests individual classes used by the delta sync system:
  * - DeltaPacket / FullStatePacket - packet structures
  * - DeltaSyncManager - client tracking and sequence management
- * - GameSession / PlayerSession - session and reconnection support
  * - NetworkByteTracker - bandwidth monitoring
  *
  * These are fast unit tests that don't involve actual network I/O.
@@ -107,21 +103,6 @@ public class DeltaSyncUnitTest {
         FullStatePacket packet = new FullStatePacket(1L, null);
 
         Assert.assertEquals(packet.getSequenceNumber(), 1L);
-        Assert.assertFalse(packet.isReconnect());
-        Assert.assertNull(packet.getSessionId());
-    }
-
-    @Test
-    public void testFullStatePacketForReconnect() {
-        // Test full state packet with reconnection info
-        String sessionId = "test-session-123";
-        String token = "test-token-456";
-
-        FullStatePacket packet = new FullStatePacket(1L, null, sessionId, token);
-
-        Assert.assertTrue(packet.isReconnect());
-        Assert.assertEquals(packet.getSessionId(), sessionId);
-        Assert.assertEquals(packet.getSessionToken(), token);
     }
 
     // ==================== Delta Sync Manager Tests ====================
@@ -198,121 +179,6 @@ public class DeltaSyncUnitTest {
         Assert.assertTrue(manager.needsFullResync(99));
     }
 
-    // ==================== Game Session Tests ====================
-
-    @Test
-    public void testGameSessionCreation() {
-        GameSession session = new GameSession();
-
-        Assert.assertNotNull(session.getSessionId());
-        Assert.assertFalse(session.isGameInProgress());
-        Assert.assertFalse(session.isPaused());
-    }
-
-    @Test
-    public void testPlayerSessionRegistration() {
-        GameSession session = new GameSession();
-
-        PlayerSession player1 = session.registerPlayer(0);
-        PlayerSession player2 = session.registerPlayer(1);
-
-        Assert.assertNotNull(player1);
-        Assert.assertNotNull(player2);
-        Assert.assertEquals(player1.getPlayerIndex(), 0);
-        Assert.assertEquals(player2.getPlayerIndex(), 1);
-        Assert.assertNotNull(player1.getSessionToken());
-        Assert.assertNotEquals(player1.getSessionToken(), player2.getSessionToken());
-    }
-
-    @Test
-    public void testPlayerSessionConnectionState() {
-        GameSession session = new GameSession();
-        PlayerSession player = session.registerPlayer(0);
-
-        Assert.assertEquals(player.getConnectionState(), PlayerSession.ConnectionState.CONNECTED);
-        Assert.assertTrue(player.isConnected());
-        Assert.assertFalse(player.isDisconnected());
-
-        session.markPlayerDisconnected(0);
-        Assert.assertEquals(player.getConnectionState(), PlayerSession.ConnectionState.DISCONNECTED);
-        Assert.assertFalse(player.isConnected());
-        Assert.assertTrue(player.isDisconnected());
-        Assert.assertTrue(player.getDisconnectTime() > 0);
-
-        session.markPlayerConnected(0);
-        Assert.assertEquals(player.getConnectionState(), PlayerSession.ConnectionState.CONNECTED);
-        Assert.assertTrue(player.isConnected());
-    }
-
-    @Test
-    public void testGamePauseResume() {
-        GameSession session = new GameSession();
-        session.setGameInProgress(true);
-
-        Assert.assertFalse(session.isPaused());
-
-        session.pauseGame("Test pause message");
-        Assert.assertTrue(session.isPaused());
-        Assert.assertEquals(session.getPauseMessage(), "Test pause message");
-
-        session.resumeGame();
-        Assert.assertFalse(session.isPaused());
-        Assert.assertNull(session.getPauseMessage());
-    }
-
-    @Test
-    public void testTokenValidation() {
-        GameSession session = new GameSession();
-        PlayerSession player = session.registerPlayer(0);
-        String token = player.getSessionToken();
-
-        Assert.assertTrue(player.validateToken(token));
-        Assert.assertFalse(player.validateToken("wrong-token"));
-        Assert.assertFalse(player.validateToken(null));
-    }
-
-    @Test
-    public void testReconnectionValidation() {
-        GameSession session = new GameSession();
-        PlayerSession player = session.registerPlayer(0);
-        String token = player.getSessionToken();
-
-        Assert.assertTrue(session.validateReconnection(0, token));
-        Assert.assertFalse(session.validateReconnection(0, "wrong-token"));
-        Assert.assertFalse(session.validateReconnection(1, token)); // Wrong player index
-    }
-
-    @Test
-    public void testDisconnectedPlayersTracking() {
-        GameSession session = new GameSession();
-        session.registerPlayer(0);
-        session.registerPlayer(1);
-
-        Assert.assertFalse(session.hasDisconnectedPlayers());
-        Assert.assertTrue(session.allPlayersConnected());
-
-        session.markPlayerDisconnected(0);
-        Assert.assertTrue(session.hasDisconnectedPlayers());
-        Assert.assertFalse(session.allPlayersConnected());
-
-        session.markPlayerConnected(0);
-        Assert.assertFalse(session.hasDisconnectedPlayers());
-        Assert.assertTrue(session.allPlayersConnected());
-    }
-
-    @Test
-    public void testReconnectionTimeout() {
-        GameSession session = new GameSession();
-        session.setDisconnectTimeoutMs(1000); // 1 second for testing
-        PlayerSession player = session.registerPlayer(0);
-
-        session.markPlayerDisconnected(0);
-
-        // Immediately after disconnect, timeout should not be expired
-        Assert.assertFalse(session.isReconnectionTimeoutExpired(0));
-        Assert.assertTrue(session.getRemainingReconnectionTime(0) > 0);
-    }
-
     // ==================== Mock Client Tests ====================
 
     @Test
@@ -326,21 +192,6 @@ public class DeltaSyncUnitTest {
 
         client.simulateDisconnect();
         Assert.assertFalse(client.isConnected());
-    }
-
-    @Test
-    public void testMockClientReconnection() {
-        LocalNetworkTestHarness.MockNetworkClient client = harness.createClient("TestPlayer");
-        client.connect();
-
-        // Can't reconnect without session credentials
-        client.simulateDisconnect();
-        Assert.assertFalse(client.simulateReconnect());
-
-        // Set credentials and try again
-        client.setSessionCredentials("session-123", "token-456");
-        Assert.assertTrue(client.simulateReconnect());
-        Assert.assertTrue(client.isConnected());
     }
 
     @Test
@@ -410,41 +261,6 @@ public class DeltaSyncUnitTest {
 
         // If client 1 falls too far behind, it needs full resync
         // (This would happen if sequence - acked > 100)
-    }
-
-    @Test
-    public void testSessionLifecycle() {
-        // Test complete session lifecycle
-        GameSession session = new GameSession();
-
-        // Pre-game setup
-        PlayerSession player0 = session.registerPlayer(0);
-        player0.setPlayerName("Alice");
-        PlayerSession player1 = session.registerPlayer(1);
-        player1.setPlayerName("Bob");
-
-        Assert.assertFalse(session.isGameInProgress());
-
-        // Game starts
-        session.setGameInProgress(true);
-        Assert.assertTrue(session.isGameInProgress());
-
-        // Player disconnects
-        session.markPlayerDisconnected(1);
-        session.pauseGame("Waiting for Bob to reconnect...");
-
-        Assert.assertTrue(session.isPaused());
-        Assert.assertTrue(session.hasDisconnectedPlayers());
-
-        // Player reconnects
-        String token = player1.getSessionToken();
-        Assert.assertTrue(session.validateReconnection(1, token));
-
-        session.markPlayerConnected(1);
-        session.resumeGame();
-
-        Assert.assertFalse(session.isPaused());
-        Assert.assertTrue(session.allPlayersConnected());
     }
 
     // ==================== Serialization Method Validation Tests ====================

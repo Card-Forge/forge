@@ -406,7 +406,7 @@ public class NetworkPlayIntegrationTest {
                 .twoPlayerGames(5)
                 .threePlayerGames(3)
                 .fourPlayerGames(2)
-                .parallelBatchSize(3);
+                .parallelBatchSize(10);
 
         LocalDateTime testStartTime = LocalDateTime.now();
         MultiProcessGameExecutor.ExecutionResult executionResult = executor.execute();

@@ -127,11 +127,6 @@ public class NetGameController implements IGameController {
     }
 
     @Override
-    public void reconnectRequest(final String sessionId, final String token) {
-        send(ProtocolMethod.reconnectRequest, sessionId, token);
-    }
-
-    @Override
     public void requestResync() {
         send(ProtocolMethod.requestResync);
     }

@@ -403,7 +403,6 @@ public class UnifiedNetworkHarness {
                 return result;
             }
 
-            server.createGameSession();
             startRunnable.run();
             result.gameStarted = true;
             NetworkDebugLogger.log("%s Game started successfully!", LOG_PREFIX);
@@ -740,10 +739,10 @@ public class UnifiedNetworkHarness {
             clientExecutor = null;
         }
 
-        // End game session
+        // Clear player GUIs between games
         if (server != null) {
             try {
-                server.endGameSession();
+                server.clearPlayerGuis();
             } catch (Exception e) {
                 // Ignore
             }

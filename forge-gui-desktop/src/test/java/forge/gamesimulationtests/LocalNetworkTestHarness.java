@@ -71,15 +71,6 @@ public class LocalNetworkTestHarness {
     }
 
     /**
-     * Simulate a client reconnect.
-     * @param client the client to reconnect
-     * @return true if reconnection was successful
-     */
-    public boolean simulateReconnect(MockNetworkClient client) {
-        return client.simulateReconnect();
-    }
-
-    /**
      * Clean up all test resources.
      */
     public void cleanup() {
@@ -113,8 +104,6 @@ public class LocalNetworkTestHarness {
         private final String playerName;
         private final int port;
         private boolean connected = false;
-        private String sessionId;
-        private String sessionToken;
         private final List<DeltaPacket> receivedDeltas = new ArrayList<>();
         private FullStatePacket lastFullState;
         private long lastAcknowledgedSequence = 0;
@@ -139,34 +128,12 @@ public class LocalNetworkTestHarness {
         }
 
         /**
-         * Simulate reconnecting to the server.
-         * @return true if reconnection credentials are available
-         */
-        public boolean simulateReconnect() {
-            if (sessionId == null || sessionToken == null) {
-                return false;
-            }
-            connected = true;
-            return true;
-        }
-
-        /**
          * Close the client connection.
          */
         public void close() {
             connected = false;
             receivedDeltas.clear();
             lastFullState = null;
-        }
-
-        /**
-         * Store session credentials.
-         * @param sessionId the session ID
-         * @param token the session token
-         */
-        public void setSessionCredentials(String sessionId, String token) {
-            this.sessionId = sessionId;
-            this.sessionToken = token;
         }
 
         /**
@@ -240,20 +207,5 @@ public class LocalNetworkTestHarness {
             return playerName;
         }
 
-        /**
-         * Get the session ID.
-         * @return the session ID
-         */
-        public String getSessionId() {
-            return sessionId;
-        }
-
-        /**
-         * Get the session token.
-         * @return the session token
-         */
-        public String getSessionToken() {
-            return sessionToken;
-        }
     }
 }

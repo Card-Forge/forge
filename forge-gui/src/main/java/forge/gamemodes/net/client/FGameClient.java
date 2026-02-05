@@ -32,12 +32,6 @@ public class FGameClient implements IToServer {
     private final ReplyPool replies = new ReplyPool();
     private Channel channel;
 
-    // Session info for reconnection support
-    private String sessionId;
-    private String sessionToken;
-    private boolean wasConnected = false;
-    private boolean isReconnecting = false;
-
     public FGameClient(String username, String roomKey, IGuiGame clientGui, String hostname, int port) {
         this.username = username;
         this.clientGui = clientGui;
@@ -51,78 +45,6 @@ public class FGameClient implements IToServer {
      */
     public String getUsername() {
         return username;
-    }
-
-    /**
-     * Store session credentials for reconnection.
-     * Called when receiving session info from server.
-     * @param sessionId the session identifier
-     * @param token the session token
-     */
-    public void setSessionCredentials(String sessionId, String token) {
-        this.sessionId = sessionId;
-        this.sessionToken = token;
-        this.wasConnected = true;
-    }
-
-    /**
-     * Get the session ID.
-     * @return the session ID, or null if not set
-     */
-    public String getSessionId() {
-        return sessionId;
-    }
-
-    /**
-     * Get the session token.
-     * @return the session token, or null if not set
-     */
-    public String getSessionToken() {
-        return sessionToken;
-    }
-
-    /**
-     * Check if this client has reconnection credentials.
-     * @return true if credentials are available
-     */
-    public boolean canReconnect() {
-        return wasConnected && sessionId != null && sessionToken != null;
-    }
-
-    /**
-     * Check if this is a reconnection attempt.
-     * @return true if currently reconnecting
-     */
-    public boolean isReconnecting() {
-        return isReconnecting;
-    }
-
-    /**
-     * Attempt to reconnect to the server.
-     * @return true if reconnection was initiated successfully
-     */
-    public boolean reconnect() {
-        if (!canReconnect()) {
-            return false;
-        }
-
-        try {
-            isReconnecting = true;
-            connect();
-            // The GameClientHandler.channelActive() will send the ReconnectRequestEvent
-            return true;
-        } catch (Exception e) {
-            System.err.println("Reconnection failed: " + e.getMessage());
-            isReconnecting = false;
-            return false;
-        }
-    }
-
-    /**
-     * Reset the reconnection flag after reconnection is complete.
-     */
-    void clearReconnecting() {
-        isReconnecting = false;
     }
 
     final IGuiGame getGui() {

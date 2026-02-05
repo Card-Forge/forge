@@ -66,16 +66,6 @@ public class NetGuiGame extends NetworkGuiGame {
     }
 
     /**
-     * Update the client connection for this GUI.
-     * Called when a player reconnects with a new connection.
-     * @param client the new client connection
-     */
-    public void updateClient(final RemoteClient client) {
-        this.sender = new GameProtocolSender(client);
-        System.out.println("[NetGuiGame] Updated client connection for player " + clientIndex);
-    }
-
-    /**
      * Enable or disable delta sync mode.
      * When disabled, falls back to sending full state on every update.
      * @param enabled true to enable delta sync
@@ -259,28 +249,6 @@ public class NetGuiGame extends NetworkGuiGame {
         deltaSyncManager.clearAllChanges(gameView);
     }
 
-    /**
-     * Send full state for reconnection with session credentials.
-     * @param sessionId the session identifier
-     * @param sessionToken the session token
-     */
-    public void sendFullStateForReconnect(String sessionId, String sessionToken) {
-        GameView gameView = getGameView();
-        if (gameView == null) {
-            return;
-        }
-
-        FullStatePacket packet = deltaSyncManager.createFullStatePacketForReconnect(gameView, sessionId, sessionToken);
-        send(ProtocolMethod.reconnectAccepted, packet);
-        initialSyncSent = true;
-
-        // Mark all objects as sent so delta sync knows they don't need full serialization
-        deltaSyncManager.markObjectsAsSent(gameView);
-
-        // Clear all change flags since we've sent everything
-        deltaSyncManager.clearAllChanges(gameView);
-    }
-
     @Override
     public void setGameView(final GameView gameView) {
         super.setGameView(gameView);
@@ -291,57 +259,13 @@ public class NetGuiGame extends NetworkGuiGame {
     public void openView(final TrackableCollection<PlayerView> myPlayers) {
         send(ProtocolMethod.openView, myPlayers);
         updateGameView();
-        // Send session credentials after opening the view
-        sendSessionCredentials();
-    }
-
-    /**
-     * Send session credentials to the client for reconnection support.
-     * This must be called after the initial game view is sent.
-     */
-    private void sendSessionCredentials() {
-        NetworkDebugLogger.debug("[DeltaSync] sendSessionCredentials called for client %d", clientIndex);
-        GameSession session = FServerManager.getInstance().getCurrentGameSession();
-        if (session == null) {
-            NetworkDebugLogger.warn("[DeltaSync] session is null - cannot send credentials");
-            return;
-        }
-
-        PlayerSession playerSession = session.getPlayerSession(clientIndex);
-        if (playerSession == null) {
-            NetworkDebugLogger.warn("[DeltaSync] playerSession is null for client %d", clientIndex);
-            return;
-        }
-
-        // Send credentials via fullStateSync with session info
-        GameView gameView = getGameView();
-        if (gameView == null) {
-            NetworkDebugLogger.warn("[DeltaSync] gameView is null");
-            return;
-        }
-
-        FullStatePacket packet = new FullStatePacket(
-                deltaSyncManager.getCurrentSequence(),
-                gameView,
-                session.getSessionId(),
-                playerSession.getSessionToken()
-        );
-        send(ProtocolMethod.fullStateSync, packet);
-        initialSyncSent = true;
-
-        // Mark all objects as sent so delta sync knows they don't need full serialization
-        deltaSyncManager.markObjectsAsSent(gameView);
-
-        NetworkDebugLogger.log("[DeltaSync] Session credentials sent, initialSyncSent=true, objects marked as sent");
-        // Clear all change flags since we've sent everything
-        deltaSyncManager.clearAllChanges(gameView);
+        // Initialize delta sync by sending the initial full state
+        sendFullState();
     }
 
     @Override
     public void afterGameEnd() {
         send(ProtocolMethod.afterGameEnd);
-        // End the game session when the match ends
-        FServerManager.getInstance().onGameEnded();
     }
 
     @Override
