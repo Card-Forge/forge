@@ -38,7 +38,6 @@ import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -665,7 +664,7 @@ public class AbilityUtils {
                     count = (Integer) to;
                 }
 
-                val = doXMath(ObjectUtils.firstNonNull(count, 0), m, card, ability);
+                val = doXMath(Objects.requireNonNullElse(count, 0), m, card, ability);
             }
             else if (calcX[0].startsWith("ReplaceCount")) {
                 // ReplaceCount is similar to a regular Count, but just
@@ -675,7 +674,7 @@ public class AbilityUtils {
                 final String m = CardFactoryUtil.extractOperators(calcX[1]);
                 final Integer count = (Integer) root.getReplacingObject(AbilityKey.fromString(l[0]));
 
-                val = doXMath(ObjectUtils.firstNonNull(count, 0), m, card, ability);
+                val = doXMath(Objects.requireNonNullElse(count, 0), m, card, ability);
             } else { // these ones only for handling lists
                 Iterable<Card> list = null;
                 if (calcX[0].startsWith("Targeted")) {
@@ -3198,17 +3197,19 @@ public class AbilityUtils {
         } else if (s[0].contains("Thrice")) {
             return num * 3;
         } else if (s[0].contains("HalfUp")) {
-            return (int) (Math.ceil(num / 2.0));
+            return (int) Math.ceil(num / 2.0);
         } else if (s[0].contains("HalfDown")) {
-            return (int) (Math.floor(num / 2.0));
+            return (int) Math.floor(num / 2.0);
         } else if (s[0].contains("ThirdUp")) {
-            return (int) (Math.ceil(num / 3.0));
+            return (int) Math.ceil(num / 3.0);
         } else if (s[0].contains("ThirdDown")) {
-            return (int) (Math.floor(num / 3.0));
+            return (int) Math.floor(num / 3.0);
         } else if (s[0].contains("Negative")) {
             return num * -1;
         } else if (s[0].contains("Times")) {
             return num * secondaryNum;
+        } else if (s[0].contains("Pow")) {
+            return (int) Math.pow(num, secondaryNum);
         } else if (s[0].contains("DivideEvenlyUp")) {
             if (secondaryNum == 0) {
                 return 0;

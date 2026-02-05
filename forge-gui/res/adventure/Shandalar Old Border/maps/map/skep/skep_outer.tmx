@@ -185,6 +185,7 @@
   </object>
   <object id="123" template="../../../../../../common/maps/obj/enemy.tx" x="1263" y="814" width="16" height="16" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_Green" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -195,6 +196,7 @@
   </object>
   <object id="124" template="../../../../../../common/maps/obj/enemy.tx" x="508" y="699" width="16" height="16" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_Green" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -205,6 +207,7 @@
   </object>
   <object id="125" template="../../../../../../common/maps/obj/enemy.tx" x="175.333" y="820" width="16" height="16" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_Green" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -215,6 +218,7 @@
   </object>
   <object id="126" template="../../../../../../common/maps/obj/enemy.tx" x="672" y="1069" width="16" height="16" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_Green" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -225,6 +229,7 @@
   </object>
   <object id="127" template="../../../../../../common/maps/obj/enemy.tx" x="642" y="925.667" width="16" height="16" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_Black" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -235,6 +240,7 @@
   </object>
   <object id="128" template="../../../../../../common/maps/obj/enemy.tx" x="1019" y="910" width="16" height="16" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_Black" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -245,6 +251,7 @@
   </object>
   <object id="129" template="../../../../../../common/maps/obj/enemy.tx" x="1157.33" y="591.333" width="16" height="16" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_Black" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -255,6 +262,7 @@
   </object>
   <object id="130" template="../../../../../../common/maps/obj/enemy.tx" x="530.334" y="440.666" width="16" height="16" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_Black" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -265,6 +273,7 @@
   </object>
   <object id="131" template="../../../../../../common/maps/obj/enemy.tx" x="776" y="395" width="20" height="17" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_White" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -275,6 +284,7 @@
   </object>
   <object id="132" template="../../../../../../common/maps/obj/enemy.tx" x="286" y="483.5" width="20" height="17" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_Green" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -285,6 +295,7 @@
   </object>
   <object id="133" template="../../../../../../common/maps/obj/enemy.tx" x="0.666667" y="746.833" width="20" height="17" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_White" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -295,6 +306,7 @@
   </object>
   <object id="134" template="../../../../../../common/maps/obj/enemy.tx" x="1401" y="1100.5" width="20" height="17" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_White" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -305,6 +317,7 @@
   </object>
   <object id="135" template="../../../../../../common/maps/obj/enemy.tx" x="769" y="989.833" width="20" height="17" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_White" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -315,6 +328,7 @@
   </object>
   <object id="136" template="../../../../../../common/maps/obj/enemy.tx" x="373" y="673.833" width="20" height="17" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_White" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -325,6 +339,7 @@
   </object>
   <object id="137" template="../../../../../../common/maps/obj/enemy.tx" x="950.333" y="328.166" width="20" height="17" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_Black" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -335,6 +350,7 @@
   </object>
   <object id="139" template="../../../../../../common/maps/obj/enemy.tx" x="1116.67" y="1108.5" width="20" height="17" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_Red" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -345,6 +361,7 @@
   </object>
   <object id="140" template="../../../../../../common/maps/obj/enemy.tx" x="1021" y="1165.17" width="20" height="17" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_Red" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -355,6 +372,7 @@
   </object>
   <object id="141" template="../../../../../../common/maps/obj/enemy.tx" x="1018.67" y="752.833" width="20" height="17" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_Red" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -365,6 +383,7 @@
   </object>
   <object id="142" template="../../../../../../common/maps/obj/enemy.tx" x="758" y="590" width="16" height="16" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_Black" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -375,6 +394,7 @@
   </object>
   <object id="143" template="../../../../../../common/maps/obj/enemy.tx" x="106" y="885" width="16" height="16" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_Black" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -385,6 +405,7 @@
   </object>
   <object id="144" template="../../../../../../common/maps/obj/enemy.tx" x="365.333" y="1051" width="16" height="16" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_Black" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -395,6 +416,7 @@
   </object>
   <object id="145" template="../../../../../../common/maps/obj/enemy.tx" x="697" y="1227" width="16" height="16" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_Black" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -405,6 +427,7 @@
   </object>
   <object id="146" template="../../../../../../common/maps/obj/enemy.tx" x="899" y="1104" width="16" height="16" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_Black" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -415,6 +438,7 @@
   </object>
   <object id="147" template="../../../../../../common/maps/obj/enemy.tx" x="537.667" y="1058.5" width="20" height="17" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_White" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -425,6 +449,7 @@
   </object>
   <object id="148" template="../../../../../../common/maps/obj/enemy.tx" x="343.334" y="772.5" width="20" height="17" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_White" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -435,6 +460,7 @@
   </object>
   <object id="149" template="../../../../../../common/maps/obj/enemy.tx" x="167" y="595.833" width="20" height="17" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_White" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -445,16 +471,6 @@
   </object>
   <object id="150" template="../../../../../../common/maps/obj/enemy.tx" x="1131" y="1334" width="16" height="16" visible="1">
    <properties>
-    <property name="dialog">[
-  {
-    "text": "G'day to you, adventurer",
-    "options": [
-      {
-        "name": "leave"
-      }
-    ]
-  }
-]</property>
     <property name="enemy" value="Archer" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -464,16 +480,6 @@
   </object>
   <object id="151" template="../../../../../../common/maps/obj/enemy.tx" x="1439" y="1308" width="16" height="16" visible="1">
    <properties>
-    <property name="dialog">[
-  {
-    "text": "G'day to you, adventurer",
-    "options": [
-      {
-        "name": "leave"
-      }
-    ]
-  }
-]</property>
     <property name="enemy" value="Archer" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -490,25 +496,16 @@
   </object>
   <object id="268" template="../../../../../../common/maps/obj/enemy.tx" x="841.833" y="798.667" width="16" height="16" visible="1">
    <properties>
-    <property name="dialog">[
-  {
-    "text": "**A wounded sliver lies in your path. Its eyes gleam with desperate fury - wounded slivers are the most dangerous.**",
-    "options": [
-      {
-        "name": "leave"
-      }
-    ]
-  }
-]</property>
     <property name="enemy" value="Wounded Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
-    <property name="threatRange" type="int" value="10" />
+    <property name="threatRange" type="int" value="40" />
    </properties>
   </object>
   <object id="154" template="../../../../../../common/maps/obj/enemy.tx" x="1156.33" y="768.833" width="20" height="17" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_Red" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -552,6 +549,7 @@
   <object id="187" template="../../../../../../common/maps/obj/waypoint.tx" x="1281" y="545" />
   <object id="188" template="../../../../../../common/maps/obj/enemy.tx" x="1374" y="597.667" width="16" height="16" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_Red" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -616,6 +614,7 @@
   <object id="226" template="../../../../../../common/maps/obj/waypoint.tx" x="932.333" y="696.667" />
   <object id="227" template="../../../../../../common/maps/obj/enemy.tx" x="1071.67" y="510" width="16" height="16" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_Green" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -628,6 +627,7 @@
   <object id="229" template="../../../../../../common/maps/obj/waypoint.tx" x="608.667" y="607.667" />
   <object id="230" template="../../../../../../common/maps/obj/enemy.tx" x="673.333" y="580.667" width="16" height="16" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_Blue" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -643,6 +643,7 @@
   <object id="236" template="../../../../../../common/maps/obj/waypoint.tx" x="1291" y="996.667" />
   <object id="237" template="../../../../../../common/maps/obj/enemy.tx" x="535" y="1132" width="16" height="16" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_Green" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -655,7 +656,7 @@
    <properties>
     <property name="dialog">[
   {
-    "text": "Those things won't get past this gate. You can count on that, adventurer.",
+    "text": "We're hunting the Sliver Queen, but her commanders and foot soldiers stand in our way.\n\nKill her three Commanders, or slaughter eight of the lesser ones to get to her. That should aggravate her sufficiently.",
     "options": [
       {
         "name": "leave"
@@ -672,16 +673,6 @@
   </object>
   <object id="239" template="../../../../../../common/maps/obj/enemy.tx" x="110.667" y="1151" width="16" height="16" visible="1">
    <properties>
-    <property name="dialog">[
-  {
-    "text": "G'day to you, adventurer",
-    "options": [
-      {
-        "name": "leave"
-      }
-    ]
-  }
-]</property>
     <property name="enemy" value="Archer" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -691,16 +682,6 @@
   </object>
   <object id="240" template="../../../../../../common/maps/obj/enemy.tx" x="17.6667" y="1343.67" width="16" height="16" visible="1">
    <properties>
-    <property name="dialog">[
-  {
-    "text": "G'day to you, adventurer",
-    "options": [
-      {
-        "name": "leave"
-      }
-    ]
-  }
-]</property>
     <property name="enemy" value="Archer" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -717,16 +698,6 @@
   <object id="248" template="../../../../../../common/maps/obj/waypoint.tx" x="114" y="976" />
   <object id="250" template="../../../../../../common/maps/obj/enemy.tx" x="550.667" y="1260.67" width="16" height="16" visible="1">
    <properties>
-    <property name="dialog">[
-  {
-    "text": "**The horse looks at you without interest**",
-    "options": [
-      {
-        "name": "leave"
-      }
-    ]
-  }
-]</property>
     <property name="enemy" value="Horse" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -773,6 +744,26 @@
             "getMapFlag": {
               "key": "commandersDefeated",
               "op": "&gt;=",
+              "val": 3
+            }
+          }
+        ]
+      },
+      {
+        "name": "*The red field melts before your eyes. You are free to go forward.*",
+        "action": [ { "deleteMapObject": -1 } ],
+        "condition": [
+          {
+            "getMapFlag": {
+              "key": "sliversDefeated",
+              "op": "&gt;=",
+              "val": 8
+            }
+          },
+          {
+            "getMapFlag": {
+              "key": "commandersDefeated",
+              "op": "&lt;",
               "val": 3
             }
           }
@@ -863,6 +854,7 @@
   </object>
   <object id="263" template="../../../../../../common/maps/obj/enemy.tx" x="1525.67" y="1161.67" width="16" height="16" visible="1">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"sliversDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="enemy" value="Sliver_Blue" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -889,31 +881,6 @@
   </object>
   <object id="266" template="../../../../../../common/maps/obj/enemy.tx" x="333" y="1328" width="16" height="16" visible="1">
    <properties>
-    <property name="dialog">[
-  {
-    "text": "Many mouths to feed, little time for smalltalk.",
-    "options": [
-      {
-        "name": "leave"
-      }
-    ]
-  },
-  {
-   "condition": [
-      { "checkQuestFlag": "SliverQueenDefeated" }
-    ],
-    "text":"Where did all those fancy folk just go to? Did someone say free ale?",
-    "options": [
-      {
-        "name": "(Continue)"
-      }
-    ]
-    
-  }
-]
-
-</property>
-    <property name="displayNameOverride" value="Exhausted Farmer" />
     <property name="enemy" value="Farmer" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
@@ -923,6 +890,7 @@
   </object>
   <object id="267" template="../../../../../../common/maps/obj/enemy.tx" x="330" y="540">
    <properties>
+    <property name="defeatDialog">[{"action":[{"advanceMapFlag":"commandersDefeated"},{"deleteMapObject":-1}]}]</property>
     <property name="effect">{ "startBattleWithCard": [ "Metallic Sliver|TMP", "Metallic Sliver|TMP", "Metallic Sliver|TMP" ] }</property>
     <property name="enemy" value="Metallic Sliver" />
     <property name="threatRange" type="int" value="60" />

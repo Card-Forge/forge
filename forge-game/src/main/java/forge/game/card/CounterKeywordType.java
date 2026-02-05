@@ -5,7 +5,10 @@ import java.util.Map;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 
-public record CounterKeywordType(String keyword) implements CounterType {
+import forge.game.keyword.Keyword;
+import forge.game.keyword.KeywordInterface;
+
+public record CounterKeywordType(String keyword, KeywordInterface inst) implements CounterType {
 
     // Rule 122.1b
     static ImmutableList<String> keywordCounter = ImmutableList.of(
@@ -16,7 +19,7 @@ public record CounterKeywordType(String keyword) implements CounterType {
 
     public static CounterKeywordType get(String s) {
         if (!sMap.containsKey(s)) {
-            sMap.put(s, new CounterKeywordType(s));
+            sMap.put(s, new CounterKeywordType(s, isKeywordCounter(s) ? Keyword.getInstance(s) : null));
         }
         return sMap.get(s);
     }
@@ -35,12 +38,8 @@ public record CounterKeywordType(String keyword) implements CounterType {
     }
 
     private String getKeywordDescription() {
-        if (keyword.startsWith("Hexproof:")) {
-            final String[] k = keyword.split(":");
-            return "Hexproof from " + k[2];
-        }
-        if (keyword.startsWith("Trample:")) {
-            return "Trample over Planeswalkers";
+        if (inst != null) {
+            return inst.getTitle();
         }
         return keyword;
     }
@@ -50,6 +49,9 @@ public record CounterKeywordType(String keyword) implements CounterType {
     }
 
     public boolean isKeywordCounter() {
+        return isKeywordCounter(keyword);
+    }
+    public static boolean isKeywordCounter(String keyword) {
         if (keyword.startsWith("Hexproof:")) {
             return true;
         }
@@ -58,7 +60,6 @@ public record CounterKeywordType(String keyword) implements CounterType {
         }
         return keywordCounter.contains(keyword);
     }
-    
 
     public int getRed() {
         return 255;

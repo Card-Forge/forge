@@ -492,6 +492,7 @@ public class CardFactoryUtil {
                     }
                 } else if (inst.getKeyword().equals(Keyword.HEXPROOF)) {
                     hexproofkw.add(k);
+                    // "Hexproof from each color" isn't split into parts there
                 } else if (inst.getKeyword().equals(Keyword.TRAMPLE)) {
                     tramplekw.add(k);
                 } else {
@@ -3607,7 +3608,7 @@ public class CardFactoryUtil {
             final AbilitySub repeatSub = (AbilitySub) AbilityFactory.getAbility(repeatStr, card);
             sa.setSubAbility(repeatSub);
 
-            final String effectStr = "DB$ Effect | RememberObjects$ Imprinted,ImprintedRemembered | ExileOnMoved$ Battlefield | StaticAbilities$ AttackChosen";
+            final String effectStr = "DB$ Effect | RememberObjects$ Imprinted & ImprintedRemembered | ExileOnMoved$ Battlefield | StaticAbilities$ AttackChosen";
             final AbilitySub effectSub = (AbilitySub) AbilityFactory.getAbility(effectStr, card);
             repeatSub.setAdditionalAbility("RepeatSubAbility", effectSub);
 
@@ -3877,10 +3878,7 @@ public class CardFactoryUtil {
                     desc = typeText.substring(typeText.indexOf(" with ") + 6);
                 else
                     desc = typeText + "s";
-            }
-            else if ("Artifact".equals(t))
-                desc = "artifacts";
-            else
+            } else
                 desc = CardType.getPluralType(t);
 
             StringBuilder sb = new StringBuilder();
@@ -4048,21 +4046,17 @@ public class CardFactoryUtil {
             StaticAbility stAb = StaticAbility.create(reduceEffect, state.getCard(), state, intrinsic);
             stAb.setSVar("AffectedX", "Count$OptionalKeywordAmount");
             inst.addStaticAbility(stAb);
-        } else if (keyword.startsWith("Hexproof")) {
-            final StringBuilder sbDesc = new StringBuilder("Hexproof");
+        } else if (keyword.startsWith("Hexproof") && inst instanceof Hexproof hexproof) {
             final StringBuilder sbValid = new StringBuilder();
 
-            if (!keyword.equals("Hexproof")) {
-                final String[] k = keyword.split(":");
-
-                sbDesc.append(" from ").append(k[2]);
-                final String param = k[2].contains("abilities") ? "ValidSA$ " : "ValidSource$ ";
-                sbValid.append("| ").append(param).append(k[1]);
+            if (!hexproof.getValidType().isEmpty()) {
+                final String param = hexproof.getTypeDescription().contains("abilities") ? "ValidSA$ " : "ValidSource$ ";
+                sbValid.append("| ").append(param).append(hexproof.getValidType());
             }
 
             String effect = "Mode$ CantTarget | ValidTarget$ Card.Self | Secondary$ True"
                     + sbValid.toString() + " | Activator$ Opponent | Description$ "
-                    + sbDesc.toString() + " (" + inst.getReminderText() + ")";
+                    + inst.getTitle() + " (" + inst.getReminderText() + ")";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Horsemanship")) {
             String effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withoutHorsemanship | Secondary$ True " +

@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=White Heat
+Description=White Heat combines efficient white creatures with red's direct damage. Swarm the board and burn away any resistance.
+Deck Type=constructed
+Set=EXO
+Image=white_heat.jpg
+[main]
+3 Mountain|TMP|1
+3 Mountain|TMP|2
+3 Mountain|TMP|3
+5 Plains|TMP|1
+4 Plains|TMP|2
+4 Plains|TMP|3
+4 Soltari Foot Soldier|TMP
+2 Master Decoy|TMP
+4 Welkin Hawk|EXO
+2 Knight of Dawn|TMP
+1 Paladin en-Vec|EXO
+3 Soltari Visionary|EXO
+1 Wall of Nets|EXO
+1 Goblin Bombardment|TMP
+1 Limited Resources|EXO
+1 Onslaught|EXO
+2 Pegasus Stampede|EXO
+1 Reconnaissance|EXO
+1 Shackles|EXO
+2 Searing Touch|TMP
+1 Shattering Pulse|EXO
+2 Shock|STH
+2 Sonic Burst|EXO
+2 Lightning Blast|TMP
+4 Kindle|TMP
+1 Temper|STH
+[sideboard]

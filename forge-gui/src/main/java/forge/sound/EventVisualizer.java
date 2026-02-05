@@ -160,7 +160,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
      * Plays the sound corresponding to the change of the card's tapped state
      * (when a card is tapped or untapped).
      *
-     * @param tapped_state if true, the "tap" sound is played; otherwise, the
+     * @param event if true, the "tap" sound is played; otherwise, the
      * "untap" sound is played
      * @return the sound effect type
      */
@@ -172,7 +172,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
     /**
      * Plays the sound corresponding to the land type when the land is played.
      *
-     * @param land the land card that was played
+     * @param event the land card that was played
      * @return the sound effect type
      */
     @Override
@@ -371,5 +371,13 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
     @Override
     public SoundEffectType visit(final GameEventCardPhased event) {
         return SoundEffectType.Phasing;
+    }
+
+    @Override
+    public SoundEffectType visit(final GameEventSnapshotRestored gameEventSnapshotRestored) {
+        SoundSystem.instance.setIgnorePlayRequests(gameEventSnapshotRestored.start());
+
+        // How often do people cancel/undo is a rewind noise too repetitive?
+        return SoundEffectType.SnapshotRestored;
     }
 }

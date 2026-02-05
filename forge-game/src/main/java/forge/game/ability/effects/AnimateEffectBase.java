@@ -20,6 +20,7 @@ package forge.game.ability.effects;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import com.google.common.collect.Lists;
 
@@ -29,12 +30,13 @@ import forge.card.ColorSet;
 import forge.card.RemoveType;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
+import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardTraitChanges;
+import forge.game.card.ICardTraitChanges;
 import forge.game.card.perpetual.*;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.keyword.Keyword;
@@ -74,8 +76,12 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         if (sa.hasParam("RemoveEnchantmentTypes"))
             remove.add(RemoveType.EnchantmentTypes);
 
-        boolean removeNonManaAbilities = sa.hasParam("RemoveNonManaAbilities");
-        boolean removeAll = sa.hasParam("RemoveAllAbilities");
+        Predicate<CardTraitBase> removeAbilities = null;
+        if (sa.hasParam("RemoveAllAbilities")) {
+            removeAbilities = e -> true;
+        } else if (sa.hasParam("RemoveNonManaAbilities")) {
+            removeAbilities = Predicate.not(CardTraitBase::isManaAbility);
+        }
 
         if (sa.hasParam("RememberAnimated")) {
             source.addRemembered(c);
@@ -106,11 +112,11 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             c.addChangedCardTypes(addType, removeType, addAllCreatureTypes, remove, timestamp, 0, true, false);
         }
 
-        if (!keywords.isEmpty() || !removeKeywords.isEmpty() || removeAll) {
+        if (!keywords.isEmpty() || !removeKeywords.isEmpty() || removeAbilities != null) {
             if (perpetual) {
-                c.addPerpetual(new PerpetualKeywords(timestamp, keywords, removeKeywords, removeAll));
+                c.addPerpetual(new PerpetualKeywords(timestamp, keywords, removeKeywords, removeAbilities != null));
             }
-            c.addChangedCardKeywords(keywords, removeKeywords, removeAll, timestamp, null);
+            c.addChangedCardKeywords(keywords, removeKeywords, removeAbilities != null, timestamp, null);
         }
 
         // do this after changing types in case it wasn't a creature before
@@ -213,11 +219,11 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         }
 
         // after unanimate to add RevertCost
-        if (removeAll || removeNonManaAbilities
+        if (removeAbilities != null
                 || !addedAbilities.isEmpty() || !removedAbilities.isEmpty() || !addedTriggers.isEmpty()
                 || !addedReplacements.isEmpty() || !addedStaticAbilities.isEmpty()) {
-            CardTraitChanges changes = c.addChangedCardTraits(addedAbilities, removedAbilities, addedTriggers, addedReplacements,
-                addedStaticAbilities, removeAll, removeNonManaAbilities, timestamp, 0);
+            ICardTraitChanges changes = c.addChangedCardTraits(addedAbilities, removedAbilities, addedTriggers, addedReplacements,
+                addedStaticAbilities, removeAbilities, timestamp, 0);
             if (perpetual) {
                 c.addPerpetual(new PerpetualAbilities(timestamp, changes));
             }

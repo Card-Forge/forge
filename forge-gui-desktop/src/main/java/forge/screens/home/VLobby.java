@@ -293,6 +293,7 @@ public class VLobby implements ILobbyView {
                 panel.setMayEdit(lobby.mayEdit(i));
                 panel.setMayControl(lobby.mayControl(i));
                 panel.setMayRemove(lobby.mayRemove(i));
+                panel.setAiProfile(slot.getAiProfile());
                 panel.update();
 
                 final boolean isSlotAI = slot.getType() == LobbySlotType.AI;
@@ -383,7 +384,14 @@ public class VLobby implements ILobbyView {
 
     private UpdateLobbyPlayerEvent getSlot(final int index) {
         final PlayerPanel panel = getPlayerPanel(index);
-        return UpdateLobbyPlayerEvent.create(panel.getType(), panel.getPlayerName(), panel.getAvatarIndex(), -1/*TODO panel.getSleeveIndex()*/, panel.getTeam(), panel.isArchenemy(), panel.isReady(), panel.isDevMode(), panel.getAiOptions());
+        return UpdateLobbyPlayerEvent.create(panel.getType(),
+                panel.getPlayerName(),
+                panel.getAvatarIndex(), -1 /*TODO panel.getSleeveIndex()*/,
+                panel.getTeam(), panel.isArchenemy(),
+                panel.isReady(),
+                panel.isDevMode(),
+                panel.getAiOptions(),
+                panel.getAiProfile());
     }
 
     /** Builds the actual deck panel layouts for each player.

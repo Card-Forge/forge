@@ -741,7 +741,7 @@
     "name": "Acidic Boot Dagger",
     "description": "Pay 4 to give old-fashioned deathtouch.",
     "equipmentSlot": "Boots",
-    "iconName": "AcidicDagger",
+    "iconName": "AcidicBootDagger",
     "cost": 3000,
     "effect": {
       "startBattleWithCard": [
@@ -1340,7 +1340,7 @@
     "name": "Feverbringer's Blade",
     "description": "Pay 2BB to put a -1/-1 counter on target creature.",
     "equipmentSlot": "Right",
-    "iconName": "FeverbringersCloak",
+    "iconName": "FeverbringersBlade",
     "cost": 3000,
     "effect": {
       "startBattleWithCard": [
@@ -1618,7 +1618,7 @@
   {
     "name": "Storm Gauntlet",
     "equipmentSlot": "Right",
-    "iconName": "CrowcallersCharm",
+    "iconName": "StormGauntlet",
     "effect": {
       "startBattleWithCard": [
         "Storm Crow|POR"
@@ -1664,7 +1664,7 @@
   {
     "name": "Molten Gauntlet",
     "equipmentSlot": "Right",
-    "iconName": "MoltenMantle",
+    "iconName": "MoltenGauntlet",
     "effect": {
       "lifeModifier": -3,
       "startBattleWithCard": [
@@ -1870,7 +1870,7 @@
   {
     "name": "Infiltrator's Knife",
     "equipmentSlot": "Right",
-    "iconName": "InfiltratorsMask",
+    "iconName": "InfiltratorsKnife",
     "effect": {
       "lifeModifier": -4,
       "startBattleWithCard": [
@@ -1894,7 +1894,7 @@
   {
     "name": "Scythe of Yawgmoth",
     "equipmentSlot": "Right",
-    "iconName": "ArmorOfYawgmoth",
+    "iconName": "ScytheOfYawgmoth",
     "effect": {
       "startBattleWithCard": [
         "Order of Yawgmoth|USG"
@@ -2263,7 +2263,7 @@
     "name": "Breathstealer's Blade",
     "description": "-2 life. A 2/2. Pay B to give +1/-1.",
     "equipmentSlot": "Right",
-    "iconName": "BreathstealersRobe",
+    "iconName": "BreathstealersBlade",
     "effect": {
       "lifeModifier": -2,
       "startBattleWithCard": [
@@ -2275,7 +2275,7 @@
     "name": "Ichor Knife",
     "description": "A 3/1 haste that returns from graveyard by exiling a black creature.",
     "equipmentSlot": "Right",
-    "iconName": "DementiaMask",
+    "iconName": "IchorKnife",
     "effect": {
       "startBattleWithCard": [
         "Ichorid|TOR"
@@ -2502,7 +2502,7 @@
   {
     "name": "Kobold King's Blade",
     "equipmentSlot": "Right",
-    "iconName": "KoboldKingsCrown",
+    "iconName": "KoboldKingsBlade",
     "effect": {
       "changeStartCards": -1,
       "startBattleWithCard": [
@@ -2908,6 +2908,15 @@
       "startBattleWithCard": [
         "Marble Priest|LEG"
       ]
+    }
+  },
+  {
+    "name": "Windwalker's Blessing",
+    "description": "A blessing from the winds grants permanent swiftness. +35% movement speed.",
+    "equipmentSlot": "Blessing",
+    "iconName": "MovementSpeed",
+    "effect": {
+      "moveSpeed": 1.35
     }
   }
 ]

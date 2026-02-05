@@ -20,6 +20,7 @@ import forge.adventure.data.EffectData;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.RewardData;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.adventure.util.MapDialog;
 import forge.adventure.util.Reward;
@@ -503,7 +504,8 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
         if(data.rewards != null) { //Collect standard rewards.
             Deck enemyDeck = Current.latestDeck();
             // By popular demand, remove basic lands from the reward pool.
-            CardPool deckNoBasicLands = enemyDeck.getMain().getFilteredPool(PaperCardPredicates.fromRules(CardRulesPredicates.NOT_BASIC_LAND));
+            CardPool deckNoRestrictedEditions = enemyDeck.getMain().getFilteredPool(PaperCardPredicates.onlyPrintedInEditions(Config.instance().getConfigData().restrictedEditions).negate());
+            CardPool deckNoBasicLands = deckNoRestrictedEditions.getFilteredPool(PaperCardPredicates.fromRules(CardRulesPredicates.NOT_BASIC_LAND));
 
             for (RewardData rdata : data.rewards) {
                 rewards.addAll(rdata.generate(false,  enemyDeck == null ? null : deckNoBasicLands.toFlatList(),true ));

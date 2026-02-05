@@ -55,19 +55,16 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
         final Trigger immediateTrig = TriggerHandler.parseTrigger(mapParams, host, sa.isIntrinsic(), null);
         immediateTrig.setSpawningAbility(sa.copy(host, true));
 
-        // Need to copy paid costs
-
         if (sa.hasParam("RememberObjects")) {
-            for (final String rem : sa.getParam("RememberObjects").split(",")) {
-                for (final Object o : AbilityUtils.getDefinedEntities(host, rem, sa)) {
-                    immediateTrig.addRemembered(o);
-                }
-            }
+            immediateTrig.addRemembered(
+                    AbilityUtils.getDefinedEntities(host, sa.getParam("RememberObjects").split(" & "), sa)
+            );
         }
 
         if (sa.hasParam("RememberSVarAmount")) {
-            immediateTrig.addRemembered(AbilityUtils.calculateAmount(host,
-                    sa.getSVar(sa.getParam("RememberSVarAmount")), sa));
+            immediateTrig.addRemembered(
+                    AbilityUtils.calculateAmount(host, sa.getSVar(sa.getParam("RememberSVarAmount")), sa)
+            );
         }
 
         if (sa.hasAdditionalAbility("Execute")) {

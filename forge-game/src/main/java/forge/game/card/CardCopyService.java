@@ -358,7 +358,6 @@ public class CardCopyService {
         newCopy.setStoredReplacements(copyFrom.getStoredReplacements());
 
         newCopy.copyChangedTextFrom(copyFrom);
-        newCopy.changedTypeByText = copyFrom.changedTypeByText;
         newCopy.changedCardKeywordsByWord = copyFrom.changedCardKeywordsByWord.copy(newCopy, true);
 
         newCopy.setGameTimestamp(copyFrom.getGameTimestamp());
