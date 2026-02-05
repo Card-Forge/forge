@@ -511,13 +511,16 @@ public abstract class GameLobby implements IHasGameType {
             if (!isAI) {
                 guis.put(rp, gui);
             }
-            //override starting life for 1v1 Brawl
-            if (hasVariant(GameType.Brawl) && activeSlots.size() == 2){
-                for (RegisteredPlayer player : players){
-                    player.setStartingLife(25);
-                }
-            }
             playerToSlot.put(rp, slot);
+        }
+
+        // Set starting life for all players if not Archenemy/ArchenemyRumble and customStartingLife > 0
+        boolean isArchenemy = hasVariant(GameType.Archenemy);
+        boolean isArchenemyRumble = hasVariant(GameType.ArchenemyRumble);
+        if (!isArchenemy && !isArchenemyRumble && customStartingLife > 0) {
+            for (RegisteredPlayer player : players) {
+                player.setStartingLife(customStartingLife);
+            }
         }
 
         //if above checks succeed, return runnable that can be used to finish starting game
@@ -536,6 +539,29 @@ public abstract class GameLobby implements IHasGameType {
 
             onGameStarted();
         };
+    }
+
+    // Restore the field for custom starting life
+    private int customStartingLife = -1;
+    public void setCustomStartingLife(int value) {
+        this.customStartingLife = value;
+    }
+
+    /**
+     * Returns the starting life value and whether the spinner should be enabled, based on selected variants.
+     * @return int[0] = value, int[1] = enabled (1 for true, 0 for false)
+     */
+    public int[] getStartingLifeSettings() {
+        int value = 20;
+        boolean enabled = true;
+        if (hasVariant(GameType.Commander)) {
+            value = 40;
+        } else if (hasVariant(GameType.Brawl) || hasVariant(GameType.TinyLeaders)) {
+            value = 25;
+        } else if (hasVariant(GameType.Archenemy)) {
+            enabled = false;
+        }
+        return new int[] { value, enabled ? 1 : 0 };
     }
 
     public final static class GameLobbyData implements Serializable {

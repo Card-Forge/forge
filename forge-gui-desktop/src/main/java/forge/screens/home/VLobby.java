@@ -74,7 +74,7 @@ public class VLobby implements ILobbyView {
     private int playerWithFocus = 0; // index of the player that currently has focus
 
     private final StartButton btnStart  = new StartButton();
-    private final JPanel pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
+    private final JPanel pnlStart = new JPanel(new MigLayout("insets 0, gap 0"));
     private final JComboBox<String> gamesInMatch = new JComboBox<String>(new String[] {"1","3","5"});
     private final SwingPrefBinders.ComboBox gamesInMatchBinder =
       new SwingPrefBinders.ComboBox(FPref.UI_MATCHES_PER_GAME, gamesInMatch);
@@ -129,6 +129,11 @@ public class VLobby implements ILobbyView {
     private final Vector<Object> humanListData = new Vector<>();
     private final Vector<Object> aiListData = new Vector<>();
 
+    // Add these fields only once at the top of the class
+    private final JSpinner startingLifeSpinner = new JSpinner(new SpinnerNumberModel(20, 1, 999, 1));
+    private final JPanel startingLifeFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
+    private int selectedStartingLife = 20;
+
     // CTR
     public VLobby(final GameLobby lobby) {
         this.lobby = lobby;
@@ -180,9 +185,10 @@ public class VLobby implements ILobbyView {
         // Start Button
         if (lobby.hasControl()) {
             pnlStart.setOpaque(false);
-            pnlStart.add(btnStart, "align center");
+            pnlStart.add(btnStart, "align center, gapright 20px");
             // Start button event handling
             btnStart.addActionListener(arg0 -> {
+                lobby.setCustomStartingLife((Integer) startingLifeSpinner.getValue());
                 Runnable startGame = lobby.startGame();
                 if (startGame != null) {
                     startGame.run();
@@ -198,7 +204,36 @@ public class VLobby implements ILobbyView {
         gamesInMatchFrame.add(gamesInMatch, "w 50px!, h 30px!");
         gamesInMatchFrame.setOpaque(false);
 
-        pnlStart.add(gamesInMatchFrame);
+        // Starting life spinner
+        startingLifeFrame.add(newLabel("Starting Life Total"), "w 150px!, h 30px!");
+        startingLifeFrame.add(startingLifeSpinner, "w 50px!, h 30px!");
+        startingLifeFrame.setOpaque(false);
+
+        pnlStart.add(gamesInMatchFrame, "gapleft 20px");
+        pnlStart.add(startingLifeFrame, "gapleft 20px");
+
+        // Set up variant listeners to update starting life
+        for (final VariantCheckBox vcb : vntBoxesLocal) {
+            vcb.addItemListener(e -> updateStartingLifeSpinnerFromLobby());
+        }
+        for (final VariantCheckBox vcb : vntBoxesNetwork) {
+            vcb.addItemListener(e -> updateStartingLifeSpinnerFromLobby());
+        }
+        updateStartingLifeSpinnerFromLobby(); // Initial sync
+    }
+
+    private void updateStartingLifeSpinnerFromLobby() {
+        int[] settings = lobby.getStartingLifeSettings();
+        setStartingLifeSpinner(settings[0], settings[1] == 1);
+    }
+
+    // Add this public method to VLobby
+    public void setStartingLifeSpinner(int value, boolean enabled) {
+        startingLifeSpinner.setEnabled(enabled);
+        if (enabled) {
+            startingLifeSpinner.setValue(value);
+            selectedStartingLife = value;
+        }
     }
 
     public void updateDeckPanel() {
@@ -330,6 +365,7 @@ public class VLobby implements ILobbyView {
             populateDeckPanel(lobby.getGameType());
         }
         refreshPanels(true, true);
+        updateStartingLifeSpinnerFromLobby(); // Ensure spinner is updated after variant state changes
     }
 
     public void setPlayerChangeListener(final IPlayerChangeListener listener) {
@@ -905,5 +941,9 @@ public class VLobby implements ILobbyView {
         if (-1 == vgdList.getSelectedIndex()) {
             vgdList.setSelectedIndex(0);
         }
+    }
+
+    public int getSelectedStartingLife() {
+        return selectedStartingLife;
     }
 }
