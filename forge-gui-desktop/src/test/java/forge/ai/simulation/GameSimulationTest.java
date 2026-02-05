@@ -24,16 +24,6 @@ import java.util.List;
 import java.util.Map;
 
 public class GameSimulationTest extends SimulationTest {
-    private int countCreaturesControlledBy(Player p) {
-        int count = 0;
-        for (Card c : p.getCardsIn(ZoneType.Battlefield)) {
-            if (c.isCreature()) {
-                count++;
-            }
-        }
-        return count;
-    }
-
     private Map<AbilityKey, Object> destroyParams(Game game) {
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         params.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
@@ -1643,7 +1633,7 @@ public class GameSimulationTest extends SimulationTest {
         Game afterCast = sim.getSimulatedGameState();
 
         Player simOpponent = afterCast.getPlayers().get(0);
-        AssertJUnit.assertEquals(1, countCreaturesControlledBy(simOpponent));
+        AssertJUnit.assertEquals(1, simOpponent.getCreaturesInPlay().size());
     }
 
     @Test
