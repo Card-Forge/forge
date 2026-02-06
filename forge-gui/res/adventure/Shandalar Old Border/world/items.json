@@ -1165,7 +1165,7 @@
     "iconName": "MadStaff",
     "effect": {
       "startBattleWithCard": [
-        "Power Struggle|PAST"
+        "Power Struggle"
       ]
     },
     "description": "Randomly swap artifacts, creatures, or lands each upkeep."
