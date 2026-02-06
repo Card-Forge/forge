@@ -176,12 +176,6 @@ public final class CMatchUI
     private final CStack cStack = new CStack(this);
     private int nextNotifiableStackIndex = 0;
 
-    // Timer for "Waiting for..." messages in network games
-    // Fields accessed from Swing Timer callbacks must be volatile for thread safety
-    private javax.swing.Timer waitingTimer;
-    private volatile long waitingStartTime;
-    private volatile String waitingBaseMessage;
-
     public CMatchUI() {
         this.view = new VMatchUI(this);
         this.screen = FScreen.getMatchScreen(this, view);
@@ -825,7 +819,6 @@ public final class CMatchUI
 
     @Override
     public void finishGame() {
-        stopWaitingTimer(); // Clean up waiting timer
         FloatingZone.closeAll(); //ensure floating card areas cleared and closed after the game
         final GameView gameView = getGameView();
         if (hasLocalPlayers() || gameView.isMatchOver()) {
@@ -970,190 +963,7 @@ public final class CMatchUI
 
     @Override
     public void showPromptMessage(final PlayerView playerView, final String message) {
-        // First, enhance generic waiting messages with player name (for host)
-        String enhancedMessage = enhanceWaitingMessageForHost(message, playerView);
-
-        // Handle timer for "Waiting for..." messages in network games
-        if (GuiBase.isNetworkplay() && enhancedMessage != null && isWaitingMessage(enhancedMessage)) {
-            // Check if this is the same base message (just timer update) or a new waiting message
-            String baseMsg = extractBaseWaitingMessage(enhancedMessage);
-            if (!baseMsg.equals(waitingBaseMessage)) {
-                // New waiting message - start timer
-                stopWaitingTimer();
-                waitingBaseMessage = baseMsg;
-                waitingStartTime = System.currentTimeMillis();
-                startWaitingTimer();
-            }
-            // Display message with current timer
-            cPrompt.setMessage(getWaitingMessageWithTimer());
-        } else {
-            // Not a waiting message - stop timer and show message directly
-            stopWaitingTimer();
-            waitingBaseMessage = null;
-            cPrompt.setMessage(enhancedMessage);
-        }
-    }
-
-    /**
-     * Enhance generic "Waiting for opponent" and "Yielding" messages with the actual player name.
-     * This is used on the host side where messages aren't sent through NetGuiGame.
-     */
-    private String enhanceWaitingMessageForHost(final String message, final PlayerView forPlayer) {
-        if (!GuiBase.isNetworkplay() || message == null || message.isEmpty()) {
-            return message;
-        }
-
-        Localizer localizer = Localizer.getInstance();
-        String waitingForOpponent = localizer.getMessage("lblWaitingForOpponent");
-        String yieldingMessage = localizer.getMessage("lblYieldingUntilEndOfTurn");
-
-        boolean isWaitingOpponent = message.equals(waitingForOpponent);
-        boolean isYielding = message.equals(yieldingMessage);
-
-        if (!isWaitingOpponent && !isYielding) {
-            return message;
-        }
-
-        // Get the priority player from the Game object
-        GameView gameView = getGameView();
-        if (gameView == null) {
-            return message;
-        }
-
-        // Find the player we're waiting for
-        String waitingForName = findWaitingForPlayerName(gameView, forPlayer);
-        if (waitingForName == null) {
-            return message;
-        }
-
-        // Return enhanced message with player name
-        if (isYielding) {
-            return localizer.getMessage("lblYieldingWaitingForPlayer", waitingForName);
-        } else {
-            return localizer.getMessage("lblWaitingForPlayer", waitingForName);
-        }
-    }
-
-    /**
-     * Find the name of the player we're waiting for.
-     * Uses GameView data only to work correctly on both host and client.
-     * Checks priority player, turn player, or falls back to finding other players.
-     */
-    private String findWaitingForPlayerName(GameView gameView, PlayerView forPlayer) {
-        if (gameView.isGameOver()) {
-            return null;
-        }
-
-        // First, try to find the player with priority from GameView
-        PlayerView priorityPlayer = findPriorityPlayer(gameView);
-
-        // If we found a priority player different from forPlayer, use them
-        if (priorityPlayer != null && (forPlayer == null || priorityPlayer.getId() != forPlayer.getId())) {
-            return priorityPlayer.getName();
-        }
-
-        // During mulligan or game setup, priority may not be set
-        // Fall back to finding any non-local player (in network games, that's who we're waiting for)
-        if (gameView.getPlayers() != null) {
-            for (PlayerView pv : gameView.getPlayers()) {
-                // Skip forPlayer if specified
-                if (forPlayer != null && pv.getId() == forPlayer.getId()) {
-                    continue;
-                }
-                // Skip local players - we want the remote player we're waiting for
-                if (!isLocalPlayer(pv)) {
-                    return pv.getName();
-                }
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * Find the player with priority from the GameView.
-     * Checks PlayerView.getHasPriority() for each player.
-     * Falls back to getPlayerTurn() during game setup when no priority is set.
-     */
-    private PlayerView findPriorityPlayer(GameView gameView) {
-        if (gameView.getPlayers() != null) {
-            for (PlayerView pv : gameView.getPlayers()) {
-                if (pv.getHasPriority()) {
-                    return pv;
-                }
-            }
-        }
-        // Fallback to player turn during game setup (mulligan phase)
-        return gameView.getPlayerTurn();
-    }
-
-    private boolean isWaitingMessage(String message) {
-        Localizer localizer = Localizer.getInstance();
-        String waitingForOpponent = localizer.getMessage("lblWaitingForOpponent");
-        String waitingForActions = localizer.getMessage("lblWaitingforActions");
-
-        // Extract the localized prefix from "Waiting for {0}..." to match player-specific messages
-        // This avoids hardcoding English strings and works with any locale
-        String waitingForPlayerTemplate = localizer.getMessage("lblWaitingForPlayer", "");
-        // The template with empty string gives us the prefix before the player name
-        // e.g., "Waiting for ..." -> we use "Waiting for " as prefix
-        String localizedWaitingPrefix = waitingForPlayerTemplate.replace("...", "").trim();
-
-        // Also get the yielding+waiting pattern for completeness
-        String yieldingTemplate = localizer.getMessage("lblYieldingWaitingForPlayer", "");
-
-        return message.equals(waitingForOpponent)
-            || message.equals(waitingForActions)
-            || message.startsWith(localizedWaitingPrefix)
-            || message.contains(localizedWaitingPrefix)
-            || message.startsWith(yieldingTemplate.split("\\{")[0]);
-    }
-
-    private String extractBaseWaitingMessage(String message) {
-        // Remove any existing timer suffix like " (5s)" or " (1:23)"
-        return message.replaceAll(" \\(\\d+s\\)$", "").replaceAll(" \\(\\d+:\\d{2}\\)$", "");
-    }
-
-    private String getWaitingMessageWithTimer() {
-        if (waitingBaseMessage == null) {
-            return "";
-        }
-        long elapsedMs = System.currentTimeMillis() - waitingStartTime;
-        long elapsedSec = elapsedMs / 1000;
-
-        // Don't show timer for very short waits
-        if (elapsedSec < 2) {
-            return waitingBaseMessage;
-        }
-
-        String timeStr;
-        if (elapsedSec < 60) {
-            timeStr = elapsedSec + "s";
-        } else {
-            long minutes = elapsedSec / 60;
-            long seconds = elapsedSec % 60;
-            timeStr = String.format("%d:%02d", minutes, seconds);
-        }
-        return waitingBaseMessage + " (" + timeStr + ")";
-    }
-
-    private void startWaitingTimer() {
-        if (waitingTimer != null) {
-            return; // Already running
-        }
-        waitingTimer = new javax.swing.Timer(1000, e -> {
-            if (waitingBaseMessage != null) {
-                cPrompt.setMessage(getWaitingMessageWithTimer());
-            }
-        });
-        waitingTimer.start();
-    }
-
-    private void stopWaitingTimer() {
-        if (waitingTimer != null) {
-            waitingTimer.stop();
-            waitingTimer = null;
-        }
+        cPrompt.setMessage(message);
     }
 
     @Override
