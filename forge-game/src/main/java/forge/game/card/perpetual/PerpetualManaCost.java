@@ -2,15 +2,12 @@ package forge.game.card.perpetual;
 
 import forge.card.mana.ManaCost;
 import forge.game.card.Card;
+import forge.game.staticability.StaticAbility;
 
-public record PerpetualManaCost(long timestamp, ManaCost manaCost) implements PerpetualInterface {
+public record PerpetualManaCost(ManaCost manaCost) implements PerpetualInterface {
     @Override
-    public long getTimestamp() {
-        return timestamp;
-    }
-
-    @Override
-    public void applyEffect(Card c) {
-        c.addChangedManaCost(manaCost, false, timestamp, (long) 0);
+    public StaticAbility createEffect(Card c) {
+        String s = "Mode$ Continuous | AffectedDefined$ Self | EffectZone$ All | ManaCost$ " + manaCost.getShortString();
+        return StaticAbility.create(s, c, c.getCurrentState(), true);
     }
 }

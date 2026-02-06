@@ -70,7 +70,7 @@ public class ReplacementHandlerTest extends SimulationTest {
             Lists.newArrayList(re),
             null, null
         );
-        creature.addPerpetual(new PerpetualAbilities(timestamp, changes));
+        creature.addPerpetual(new PerpetualAbilities(timestamp, changes), timestamp);
         creature.addChangedCardTraits(null, null, null,
             Lists.newArrayList(re), null, null, timestamp, 0);
 

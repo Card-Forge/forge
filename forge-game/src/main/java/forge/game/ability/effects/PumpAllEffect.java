@@ -49,15 +49,16 @@ public class PumpAllEffect extends SpellAbilityEffect {
 
             if (a != 0 || d != 0) {
                 if (perpetual) {
-                    tgtC.addPerpetual(new PerpetualPTBoost(timestamp, a, d));
+                    tgtC.addPerpetual(new PerpetualPTBoost(a, d), timestamp);
+                } else {
+                    tgtC.addPTBoost(a, d, timestamp, 0);
                 }
-                tgtC.addPTBoost(a, d, timestamp, 0);
                 redrawPT = true;
             }
 
             if (!kws.isEmpty()) {
                 if (perpetual) {
-                    tgtC.addPerpetual(new PerpetualKeywords(timestamp, kws, null, false));
+                    tgtC.addPerpetual(new PerpetualKeywords(timestamp, kws, null, false), timestamp);
                 }
                 tgtC.addChangedCardKeywords(kws, null, false, timestamp, null);
             }
