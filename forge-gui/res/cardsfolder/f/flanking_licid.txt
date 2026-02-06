@@ -1,0 +1,9 @@
+Name:Flanking Licid
+ManaCost:1 R
+Types:Creature Licid
+PT:1/1
+A:AB$ Animate | Cost$ R T | Defined$ Self | RemoveThisAbility$ True | Duration$ Permanent | RevertCost$ R | Keywords$ Enchant:Creature | Types$ Enchantment,Aura | RemoveCardTypes$ True | RemoveEnchantmentTypes$ True | SubAbility$ DBAttach | SpellDescription$ CARDNAME loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {R} to end this effect.
+SVar:DBAttach:DB$ Attach | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flanking | Description$ Enchanted creature has flanking.
+AI:RemoveDeck:All
+Oracle:{R}, {T}: Flanking Licid loses this ability and becomes a creature enchantment that reads “Enchanted creature gains flanking” instead of a creature. Move Flanking Licid onto target creature. You may pay {R} to end this effect.
