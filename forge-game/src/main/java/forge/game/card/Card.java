@@ -4670,10 +4670,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             }
         }
 
+        long currentGameTimestamp = this.getGame().getTimestamp();
         for (Map.Entry<PerpetualInterface, StaticAbility> e : oldCard.perpetualEffects.entries()) {
             StaticAbility st = e.getValue().copy(this, lki);
-            if (!lki) { // change zone sets the timestamp of negative infinite, but -1 is good enough
-                st.putParam("Timestamp", String.valueOf(-1));
+            long oldTimestamp = Long.valueOf(st.getParam("Timestamp"));
+            if (!lki && oldTimestamp > 0) {
+                // change zone sets the timestamp of negative infinite, but still relative
+                // use current game timestamp to shift these timestamps back
+                st.putParam("Timestamp", String.valueOf(oldTimestamp - currentGameTimestamp));
             }
             this.perpetualEffects.put(e.getKey(), st);
         }
