@@ -186,6 +186,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         } else if (c.isGoaded()) {
             value -= subValue(5, "goaded");
         } else {
+            // TODO lower the values slightly if they're only temporary
             List<GameEntity> mAEnt = StaticAbilityMustAttack.entitiesMustAttack(c);
             if (mAEnt.contains(c)) {
                 value -= subValue(10, "must-attack");

@@ -27,6 +27,7 @@ import forge.ai.simulation.GameStateEvaluator;
 import forge.ai.simulation.SpellAbilityPicker;
 import forge.card.CardStateName;
 import forge.card.CardType;
+import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
@@ -602,15 +603,14 @@ public class AiController {
         // Choose first land to be able to play a one drop
         if (player.getLandsInPlay().isEmpty()) {
             CardCollection oneDrops = CardLists.filter(nonLandsInHand, CardPredicates.hasCMC(1));
-            for (int i = 0; i < MagicColor.WUBRG.length; i++) {
-                byte color = MagicColor.WUBRG[i];
-                if (oneDrops.anyMatch(CardPredicates.isColor(color))) {
+            for (MagicColor.Color color : ColorSet.WUBRG) {
+                if (oneDrops.anyMatch(CardPredicates.isColor(color.getColorMask()))) {
                     for (Card land : landList) {
-                        if (land.getType().hasSubtype(MagicColor.Constant.BASIC_LANDS.get(i))) {
+                        if (land.getType().hasSubtype(color.getBasicLandType())) {
                             return land;
                         }
                         for (final SpellAbility m : ComputerUtilMana.getAIPlayableMana(land)) {
-                            if (m.canProduce(MagicColor.toShortString(color))) {
+                            if (m.canProduce(color.getShortName())) {
                                 return land;
                             }
                         }
