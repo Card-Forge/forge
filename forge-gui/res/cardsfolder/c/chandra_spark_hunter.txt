@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Legendary Planeswalker Chandra
 Loyalty:4
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ At the beginning of combat on your turn, choose up to one target Vehicle you control. Until end of turn, it becomes an artifact creature and gains haste.
-SVar:TrigAnimate:DB$ Animate | ValidTgts$ Vehicle | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose target Vehicle | Types$ Artifact,Creature | Keywords$ Haste
+SVar:TrigAnimate:DB$ Animate | ValidTgts$ Vehicle.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose target Vehicle | Types$ Artifact,Creature | Keywords$ Haste
 A:AB$ GenericChoice | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Choices$ DBSacToDraw,DBDiscardToDraw | SpellDescription$ You may sacrifice an artifact or discard a card. If you do, draw a card.
 SVar:DBSacToDraw:DB$ Draw | UnlessCost$ Sac<1/Artifact> | UnlessPayer$ You | UnlessSwitched$ True | SpellDescription$ Sacrifice an artifact.
 SVar:DBDiscardToDraw:DB$ Draw | UnlessCost$ Discard<1/Card> | UnlessPayer$ You | UnlessSwitched$ True | SpellDescription$ Discard a card.

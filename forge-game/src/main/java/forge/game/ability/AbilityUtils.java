@@ -2101,7 +2101,7 @@ public class AbilityUtils {
             return doXMath(c.getIntensity(true), expr, c, ctb);
         }
 
-        if (sq[0].contains("CardCounters")) {
+        if (sq[0].startsWith("CardCounters")) {
             // CardCounters.ALL to be used for Kinsbaile Borderguard and anything that cares about all counters
             int count = 0;
             if (sq[1].equals("ALL")) count = c.getNumAllCounters();
@@ -2220,7 +2220,7 @@ public class AbilityUtils {
         }
 
         // Count$CardManaCost
-        if (sq[0].contains("CardManaCost")) {
+        if (sq[0].startsWith("CardManaCost")) {
             int cmc = c.getCMC();
 
             if (sq[0].contains("LKI") && !c.isInZone(ZoneType.Stack) && c.getManaCost() != null) {
