@@ -10,7 +10,6 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
 import forge.card.mana.ManaCostShard;
 import forge.game.*;
 import forge.game.ability.AbilityFactory.AbilityRecordType;
@@ -1449,7 +1448,7 @@ public class AbilityUtils {
         final Card source = sa.getHostCard();
         Cost cost;
         if (unlessCost.equals("ChosenNumber")) {
-            cost = new Cost(new ManaCost(new ManaCostParser(String.valueOf(source.getChosenNumber()))), true);
+            cost = new Cost(new ManaCost(String.valueOf(source.getChosenNumber())), true);
         }
         else if (unlessCost.startsWith("DefinedCost")) {
             CardCollection definedCards = getDefinedCards(source, unlessCost.split("_")[1], sa);

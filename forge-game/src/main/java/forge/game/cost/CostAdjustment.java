@@ -5,7 +5,6 @@ import com.google.common.collect.Lists;
 import forge.card.CardStateName;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.GameObject;
@@ -219,7 +218,7 @@ public class CostAdjustment {
             int num = AbilityUtils.calculateAmount(host, amt, sa);
 
             if (sa.hasParam("ReduceAmount") && num > 0) {
-                cost.subtractManaCost(new ManaCost(new ManaCostParser(Strings.repeat(cst + " ", num))));
+                cost.subtractManaCost(new ManaCost(Strings.repeat(cst + " ", num)));
             } else {
                 sumGeneric += num;
             }
@@ -491,7 +490,7 @@ public class CostAdjustment {
                 } else if (staticAbility.hasParam("IgnoreGeneric")) {
                     manaCost.decreaseShard(ManaCostShard.parseNonGeneric(cost), value);
                 } else {
-                    manaCost.subtractManaCost(new ManaCost(new ManaCostParser(Strings.repeat(cost + " ", value))));
+                    manaCost.subtractManaCost(new ManaCost(Strings.repeat(cost + " ", value)));
                 }
             }
             return sumGeneric;

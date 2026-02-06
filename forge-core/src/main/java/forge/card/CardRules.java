@@ -21,7 +21,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
@@ -730,8 +729,7 @@ public final class CardRules implements ICardCharacteristics {
 
                 case 'M':
                     if ("ManaCost".equals(key)) {
-                        face.setManaCost("no cost".equals(value) ? ManaCost.NO_COST
-                                : new ManaCost(new ManaCostParser(value)));
+                        face.setManaCost("no cost".equals(value) ? ManaCost.NO_COST : new ManaCost(value));
                     } else if ("MeldPair".equals(key)) {
                         this.meldWith = value;
                     }
