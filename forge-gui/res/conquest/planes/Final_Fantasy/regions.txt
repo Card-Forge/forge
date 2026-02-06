@@ -1,0 +1,5 @@
+Name:Ishgard, the Holy See|Art:Ishgard, the Holy See|Colors:W
+Name:Guadosalam, Farplane Gateway|Art:Guadosalam, Farplane Gateway|Colors:U
+Name:Lindblum, Industrial Regency|Art:Lindblum, Industrial Regency|Colors:R
+Name:Zanarkand, Ancient Metropolis|Art:Zanarkand, Ancient Metropolis|Colors:G
+Name:Midgar, City of Mako|Art:Midgar, City of Mako|Colors:B
