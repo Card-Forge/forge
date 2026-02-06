@@ -31,7 +31,6 @@ import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
@@ -633,12 +632,12 @@ public final class StaticAbilityContinuous {
                     }
                 }
                 if (stAb.hasParam("Incorporate")) {
-                    final ManaCost manaCost = new ManaCost(new ManaCostParser(stAb.getParam("Incorporate")));
+                    final ManaCost manaCost = new ManaCost(stAb.getParam("Incorporate"));
                     affectedCard.addChangedManaCost(manaCost, true, se.getTimestamp(), stAb.getId());
                     affectedCard.addColorByText(ColorSet.fromMask(manaCost.getColorProfile()), true, se.getTimestamp(), stAb);
                 }
                 if (stAb.hasParam("ManaCost")) {
-                    final ManaCost manaCost = new ManaCost(new ManaCostParser(stAb.getParam("ManaCost")));
+                    final ManaCost manaCost = new ManaCost(stAb.getParam("ManaCost"));
                     affectedCard.addChangedManaCost(manaCost, false, se.getTimestamp(), stAb.getId());
                 }
 

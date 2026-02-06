@@ -23,7 +23,6 @@ import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.*;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
@@ -499,7 +498,7 @@ public class CardFactory {
         }
 
         if (cause.hasParam("SetManaCost")) {
-            manaCost = new ManaCost(new ManaCostParser(cause.getParam("SetManaCost")));
+            manaCost = new ManaCost(cause.getParam("SetManaCost"));
             if (cause.hasParam("SetColorByManaCost")) {
                 colors = ColorSet.fromManaCost(manaCost);
             }
