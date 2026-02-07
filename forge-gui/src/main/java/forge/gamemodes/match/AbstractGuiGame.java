@@ -44,8 +44,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public boolean isNetGame() {
         return networkGame;
     }
-
-    public void setNetworkGame() {
+    @Override
+    public void setNetGame() {
         networkGame = true;
     }
 

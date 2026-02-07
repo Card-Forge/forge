@@ -283,5 +283,6 @@ public interface IGuiGame {
     default void showWaitingTimer(PlayerView forPlayer, String waitingForPlayerName) {}
 
     /** Returns true if this game instance is a network game. */
-    default boolean isNetGame() { return false; }
+    boolean isNetGame();
+    void setNetGame();
 }

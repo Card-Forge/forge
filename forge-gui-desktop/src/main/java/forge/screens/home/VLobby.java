@@ -247,8 +247,6 @@ public class VLobby implements ILobbyView {
 
         final boolean allowNetworking = lobby.isAllowNetworking();
 
-        GuiBase.setNetworkplay(allowNetworking);
-
         ImmutableList<VariantCheckBox> vntBoxes = null;
         if (allowNetworking) {
             vntBoxes = vntBoxesNetwork;

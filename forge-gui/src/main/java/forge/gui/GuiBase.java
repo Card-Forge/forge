@@ -8,7 +8,6 @@ import forge.localinstance.properties.ForgePreferences;
 public class GuiBase {
     private static IGuiBase guiInterface;
     private static boolean propertyConfig = true;
-    private static boolean networkplay = false;
     private static boolean isAndroidport = false;
     private static String adventureDirectory = null;
     private static boolean interrupted = false;
@@ -61,7 +60,6 @@ public class GuiBase {
     public static int getAndroidAPILevel() { return androidAPI; }
     public static int getDeviceRAM() { return deviceRAM; }
 
-    public static boolean isNetworkplay() { return networkplay; }
     public static boolean isNetworkplay(IGuiGame game) {
         if (game != null) {
             // query AbstractGuiGame implementation if provided
@@ -71,7 +69,6 @@ public class GuiBase {
         // to check all available IGuiGame
         return getInterface().hasNetGame();
     }
-    public static void setNetworkplay(boolean value) { networkplay = value; }
 
     public static boolean hasPropertyConfig() { return propertyConfig; }
     public static void enablePropertyConfig(boolean value) { propertyConfig = value; }

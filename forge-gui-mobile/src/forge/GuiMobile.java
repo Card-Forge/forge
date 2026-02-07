@@ -364,7 +364,7 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public boolean hasNetGame() {
-        return GuiBase.isNetworkplay();
+        return MatchController.instance.isNetGame();
     }
 
     @Override

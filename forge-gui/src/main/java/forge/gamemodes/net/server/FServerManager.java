@@ -270,9 +270,7 @@ public final class FServerManager {
         final LobbySlotType type = slot.getType();
         if (type == LobbySlotType.LOCAL) {
             final IGuiGame gui = GuiBase.getInterface().getNewGuiGame();
-            if (gui instanceof AbstractGuiGame) {
-                ((AbstractGuiGame) gui).setNetworkGame();
-            }
+            gui.setNetGame();
             return gui;
         } else if (type == LobbySlotType.REMOTE) {
             for (final RemoteClient client : clients.values()) {
