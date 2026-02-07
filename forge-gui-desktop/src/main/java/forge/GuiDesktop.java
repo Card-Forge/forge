@@ -371,7 +371,10 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public boolean hasNetGame() {
-        return GuiBase.isNetworkplay(); // fallback to existing static flag
+        if (Singletons.getView() == null || Singletons.getView().getNavigationBar() == null) {
+            return false;
+        }
+        return Singletons.getView().getNavigationBar().hasNetGame();
     }
 
     @Override
