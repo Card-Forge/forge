@@ -685,10 +685,9 @@ public class UnifiedNetworkHarness {
         NetworkDebugLogger.log("%s Swapping remote player controllers to AI...", LOG_PREFIX);
 
         for (Player player : game.getPlayers()) {
-            if (player.getId() == 0) {
-                continue; // Skip host
-            }
-
+            // The instanceof check naturally skips the AI host (which has PlayerControllerAi).
+            // Do NOT skip by player ID — HostedMatch sorts LobbyPlayerHuman before LobbyPlayerAi,
+            // so the first remote player may have ID 0 instead of the host.
             if (player.getController() instanceof PlayerControllerHuman) {
                 String originalControllerType = player.getController().getClass().getSimpleName();
                 LobbyPlayerAi aiLobbyPlayer = new LobbyPlayerAi(player.getName(), null);
@@ -697,6 +696,9 @@ public class UnifiedNetworkHarness {
 
                 NetworkDebugLogger.log("%s   Player %d (%s): swapped %s -> PlayerControllerAi",
                         LOG_PREFIX, player.getId(), player.getName(), originalControllerType);
+            } else {
+                NetworkDebugLogger.log("%s   Player %d (%s): kept %s (not PlayerControllerHuman)",
+                        LOG_PREFIX, player.getId(), player.getName(), player.getController().getClass().getSimpleName());
             }
         }
     }

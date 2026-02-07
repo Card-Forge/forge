@@ -103,7 +103,6 @@ public class OnlineChatScreen extends FScreen implements IOnlineChatInterface {
         private static final FSkinFont FONT = FSkinFont.get(12);
         private static final FSkinColor LOCAL_COLOR = FSkinColor.get(Colors.CLR_ZEBRA);
         private static final FSkinColor REMOTE_COLOR = LOCAL_COLOR.getContrastColor(-20);
-        private static final FSkinColor SYSTEM_COLOR = FSkinColor.getStandardColor(100, 150, 255); // Light blue for system messages
         private static final FSkinColor MESSAGE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
         private static final FSkinColor SOURCE_COLOR = MESSAGE_COLOR.alphaColor(0.75f);
         private static final FSkinColor TIMESTAMP_COLOR = MESSAGE_COLOR.alphaColor(0.5f);
@@ -114,15 +113,13 @@ public class OnlineChatScreen extends FScreen implements IOnlineChatInterface {
 
         private final ChatMessage message;
         private final boolean isLocal;
-        private final boolean isSystem;
         private final String header;
         private final TextRenderer textRenderer = new TextRenderer();
 
         private ChatMessageBubble(ChatMessage message0) {
             message = message0;
             isLocal = message.isLocal();
-            isSystem = message.isSystemMessage();
-            if (isLocal || message.getSource() == null || isSystem) {
+            if (isLocal || message.getSource() == null) {
                 header = null;
             }
             else {
@@ -141,38 +138,36 @@ public class OnlineChatScreen extends FScreen implements IOnlineChatInterface {
 
         @Override
         public void draw(Graphics g) {
-            float x = isSystem ? TRIANGLE_WIDTH / 2 : (isLocal ? 0 : TRIANGLE_WIDTH);
+            float x = isLocal ? 0 : TRIANGLE_WIDTH;
             float y = TEXT_INSET;
-            float w = getWidth() - (isSystem ? TRIANGLE_WIDTH / 2 : TRIANGLE_WIDTH);
+            float w = getWidth() - TRIANGLE_WIDTH;
             float h = getHeight() - TEXT_INSET;
-            FSkinColor color = isSystem ? SYSTEM_COLOR : (isLocal ? LOCAL_COLOR : REMOTE_COLOR);
-            int horzAlignment = isSystem ? Align.center : (isLocal ? Align.right : Align.left);
+            FSkinColor color = isLocal ? LOCAL_COLOR : REMOTE_COLOR;
+            int horzAlignment = isLocal ? Align.right : Align.left;
             float timestampHeight = FONT.getCapHeight();
-            
+
             //draw bubble fill
             g.fillRect(color, x, y, w, h);
             g.drawRect(BORDER_THICKNESS, BORDER_COLOR, x, y, w, h);
 
-            //draw triangle to make this look like chat bubble (skip for system messages)
-            if (!isSystem) {
-                float x1, x2;
-                if (isLocal) {
-                    x1 = w - 1;
-                    x2 = w + TRIANGLE_WIDTH;
-                }
-                else {
-                    x1 = TRIANGLE_WIDTH + 1;
-                    x2 = 0;
-                }
-                float x3 = x1;
-                float y1 = y + timestampHeight + TEXT_INSET;
-                float y3 = y1 + TRIANGLE_WIDTH * 1.25f;
-                float y2 = (y1 + y3) / 2;
-
-                g.fillTriangle(color, x1, y1, x2, y2, x3, y3);
-                g.drawLine(BORDER_THICKNESS, BORDER_COLOR, x1, y1, x2, y2);
-                g.drawLine(BORDER_THICKNESS, BORDER_COLOR, x2, y2, x3, y3);
+            //draw triangle to make this look like chat bubble
+            float x1, x2;
+            if (isLocal) {
+                x1 = w - 1;
+                x2 = w + TRIANGLE_WIDTH;
             }
+            else {
+                x1 = TRIANGLE_WIDTH + 1;
+                x2 = 0;
+            }
+            float x3 = x1;
+            float y1 = y + timestampHeight + TEXT_INSET;
+            float y3 = y1 + TRIANGLE_WIDTH * 1.25f;
+            float y2 = (y1 + y3) / 2;
+
+            g.fillTriangle(color, x1, y1, x2, y2, x3, y3);
+            g.drawLine(BORDER_THICKNESS, BORDER_COLOR, x1, y1, x2, y2);
+            g.drawLine(BORDER_THICKNESS, BORDER_COLOR, x2, y2, x3, y3);
 
             //draw text
             x += TEXT_INSET;
