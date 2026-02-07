@@ -475,8 +475,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         for (final Shortcut s : shortcuts) {
             // Skip yield shortcuts if experimental options not enabled
-            if (!yieldExperimentalEnabled && (s.getPrefKey() == FPref.SHORTCUT_YIELD_UNTIL_STACK_CLEARS
-                    || s.getPrefKey() == FPref.SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN)) {
+            if (!yieldExperimentalEnabled && s.getPrefKey().name().startsWith("SHORTCUT_YIELD_")) {
                 continue;
             }
             pnlPrefs.add(new FLabel.Builder().text(s.getDescription())

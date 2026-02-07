@@ -748,13 +748,6 @@ public class YieldController {
     }
 
     /**
-     * Check if the legacy auto-pass is in the set (for AbstractGuiGame internal use).
-     */
-    public boolean isInLegacyAutoPass(PlayerView player) {
-        return autoPassUntilEndOfTurn.contains(player);
-    }
-
-    /**
      * Remove a player from legacy auto-pass (for AbstractGuiGame internal use).
      */
     public void removeFromLegacyAutoPass(PlayerView player) {
