@@ -4677,7 +4677,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             if (!lki && oldTimestamp > 0) {
                 // change zone sets the timestamp of negative infinite, but still relative
                 // use current game timestamp to shift these timestamps back
-                st.putParam("Timestamp", String.valueOf(oldTimestamp - currentGameTimestamp));
+                st.putParam("Timestamp", String.valueOf(Long.MIN_VALUE + oldTimestamp));
             }
             this.perpetualEffects.put(e.getKey(), st);
         }
