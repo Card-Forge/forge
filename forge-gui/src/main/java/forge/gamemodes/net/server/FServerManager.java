@@ -2,7 +2,6 @@ package forge.gamemodes.net.server;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
-import forge.gamemodes.match.AbstractGuiGame;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.CompatibleObjectDecoder;
