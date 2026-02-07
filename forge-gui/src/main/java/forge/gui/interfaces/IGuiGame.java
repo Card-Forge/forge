@@ -278,4 +278,7 @@ public interface IGuiGame {
     void clearAutoYields();
 
     void setCurrentPlayer(PlayerView player);
+
+    /** Returns true if this game instance is a network game. */
+    default boolean isNetGame() { return false; }
 }

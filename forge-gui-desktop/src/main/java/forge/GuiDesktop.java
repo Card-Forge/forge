@@ -33,6 +33,7 @@ import forge.gui.BoxedProductCardListViewer;
 import forge.gui.CardListChooser;
 import forge.gui.CardListViewer;
 import forge.gui.FThreads;
+import forge.gui.GuiBase;
 import forge.gui.GuiChoose;
 import forge.gui.download.GuiDownloadService;
 import forge.gui.framework.FScreen;
@@ -367,6 +368,11 @@ public class GuiDesktop implements IGuiBase {
         return (float) Math.min(scaleX, scaleY);
     }
     static float screenScale = initializeScreenScale();
+
+    @Override
+    public boolean hasNetGame() {
+        return GuiBase.isNetworkplay(); // fallback to existing static flag
+    }
 
     @Override
     public float getScreenScale() {

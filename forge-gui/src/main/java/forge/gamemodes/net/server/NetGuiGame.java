@@ -315,6 +315,9 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
+    public boolean isNetGame() { return true; }
+
+    @Override
     protected void updateCurrentPlayer(final PlayerView player) {
         // TODO Auto-generated method stub
     }

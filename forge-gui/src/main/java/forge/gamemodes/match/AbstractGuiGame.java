@@ -462,7 +462,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                         if (awaitNextInputTask != null) {
                             updatePromptForAwait(getCurrentPlayer());
                             // In network games, reschedule every second to update elapsed time
-                            if (GuiBase.isNetworkplay()) {
+                            if (GuiBase.isNetworkplay(AbstractGuiGame.this)) {
                                 scheduleTimerUpdate();
                             } else {
                                 awaitNextInputTask = null;
@@ -514,7 +514,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private String getWaitingMessage(final PlayerView forPlayer) {
         Localizer localizer = Localizer.getInstance();
 
-        if (GuiBase.isNetworkplay() && gameView != null && !gameView.isGameOver()) {
+        if (GuiBase.isNetworkplay(this) && gameView != null && !gameView.isGameOver()) {
             String name = findWaitingForPlayerName(forPlayer);
             if (name != null) {
                 String timeStr = getElapsedTimeString();
