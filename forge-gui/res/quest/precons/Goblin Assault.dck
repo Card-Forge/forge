@@ -1,0 +1,28 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Goblin Assault
+Description=Goblin Assault brings the heat. Red direct damage and fast creatures.
+Deck Type=constructed
+Set=S99
+Image=goblin_assault.jpg
+[main]
+6 Mountain|S99|1
+6 Mountain|S99|2
+5 Mountain|S99|3
+3 Goblin Chariot|S99
+2 Goblin General|S99
+2 Goblin Glider|S99
+2 Hulking Goblin|S99
+3 Raging Goblin|S99
+1 Volcanic Dragon|S99
+1 Jagged Lightning|S99
+2 Lava Axe|S99
+1 Relentless Assault|S99
+2 Scorching Spear|S99
+1 Spitting Earth|S99
+3 Volcanic Hammer|S99
+[sideboard]

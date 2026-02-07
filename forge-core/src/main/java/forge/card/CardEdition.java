@@ -142,7 +142,6 @@ public final class CardEdition implements Comparable<CardEdition> {
         PRERELEASE_PROMO("prerelease promo"),
         BUNDLE("bundle"),
         BOX_TOPPER("box topper"),
-        DUNGEONS("dungeons"),
         JUMPSTART("jumpstart"),
         REBALANCED("rebalanced"),
         ETERNAL("eternal"),
@@ -273,7 +272,8 @@ public final class CardEdition implements Comparable<CardEdition> {
      * Equivalent to the set code of CardEdition.UNKNOWN
      */
     public static final String UNKNOWN_CODE = "???";
-    public static final CardEdition UNKNOWN = new CardEdition("1990-01-01", UNKNOWN_CODE, "??", Type.UNKNOWN, "Undefined", FoilType.NOT_SUPPORTED, new EditionEntry[]{});
+    public static final String UNKNOWN_SET_NAME = "UNKNOWN";
+    public static final CardEdition UNKNOWN = new CardEdition("1990-01-01", UNKNOWN_CODE, "??", Type.UNKNOWN, UNKNOWN_SET_NAME, FoilType.NOT_SUPPORTED);
     private Date date;
     private String code;
     private String code2;
@@ -328,18 +328,15 @@ public final class CardEdition implements Comparable<CardEdition> {
         this.cardMap = cardMap;
         this.cardsInSet = new ArrayList<>(cardMap.values());
         Collections.sort(cardsInSet);
+        this.cardsInSetLookupMap = cardsInSet.stream().collect(
+            Multimaps.toMultimap(
+                e -> e.name,
+                e -> e,
+                MultimapBuilder.treeKeys(String.CASE_INSENSITIVE_ORDER).arrayListValues()::build
+            )
+        );
         this.tokenMap = tokens;
         this.customPrintSheetsToParse = customPrintSheetsToParse;
-    }
-
-    private CardEdition(EditionEntry[] cards, ListMultimap<String, EditionEntry> tokens) {
-        List<EditionEntry> cardsList = Arrays.asList(cards);
-        this.cardMap = ArrayListMultimap.create();
-        this.cardMap.replaceValues("cards", cardsList);
-        this.cardsInSet = new ArrayList<>(cardsList);
-        Collections.sort(cardsInSet);
-        this.tokenMap = tokens;
-        this.customPrintSheetsToParse = new HashMap<>();
     }
 
     /**
@@ -353,10 +350,9 @@ public final class CardEdition implements Comparable<CardEdition> {
      *   it uses the 3-letter codes for the folder no matter the age of the set.
      * @param type the set type
      * @param name the name of the set
-     * @param cards the cards in the set
      */
-    private CardEdition(String date, String code, String code2, Type type, String name, FoilType foil, EditionEntry[] cards) {
-        this(cards, ArrayListMultimap.create());
+    private CardEdition(String date, String code, String code2, Type type, String name, FoilType foil) {
+        this(ArrayListMultimap.create(), ArrayListMultimap.create(), new HashMap<>());
         this.code  = code;
         this.code2 = code2;
         this.type  = type;
@@ -419,7 +415,7 @@ public final class CardEdition implements Comparable<CardEdition> {
         return cardsInSet;
     }
 
-    private ListMultimap<String, EditionEntry> cardsInSetLookupMap = null;
+    private final ListMultimap<String, EditionEntry> cardsInSetLookupMap;
 
     /**
      * Get all the CardInSet instances with the input card name.
@@ -427,17 +423,8 @@ public final class CardEdition implements Comparable<CardEdition> {
      * @return A List of all the CardInSet instances for a given name.
      * If not found, an Empty sequence (view) will be returned instead!
      */
-    public List<EditionEntry> getCardInSet(String cardName){
-        if (cardsInSetLookupMap == null) {
-            // initialise
-            cardsInSetLookupMap = Multimaps.newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER), Lists::newArrayList);
-            List<EditionEntry> cardsInSet = this.getAllCardsInSet();
-            for (EditionEntry cis : cardsInSet){
-                String key = cis.name;
-                cardsInSetLookupMap.put(key, cis);
-            }
-        }
-        return this.cardsInSetLookupMap.get(cardName);
+    public List<EditionEntry> getCardInSet(String cardName) {
+        return cardsInSetLookupMap.get(cardName);
     }
 
     public EditionEntry getCardFromCollectorNumber(String collectorNumber) {
@@ -916,8 +903,7 @@ public final class CardEdition implements Comparable<CardEdition> {
                 this.add(E);
                 initAliases(E); //Made a method in case the system changes, so it's consistent.
             }
-            CardEdition customBucket = new CardEdition("2990-01-01", "USER", "USER",
-                    Type.CUSTOM_SET, "USER", FoilType.NOT_SUPPORTED, new EditionEntry[]{});
+            CardEdition customBucket = new CardEdition("2990-01-01", "USER", "USER", Type.CUSTOM_SET, "USER", FoilType.NOT_SUPPORTED);
             this.add(customBucket);
             initAliases(customBucket);
             this.lock = true; //Consider it initialized and prevent from writing any more data.

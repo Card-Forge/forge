@@ -10,7 +10,7 @@ public class LondonMulligan extends AbstractMulligan {
 
     @Override
     public boolean canMulligan() {
-        return !kept && timesMulliganed < player.getMaxHandSize();
+        return !kept && tuckCardsDuringMulligan() <= player.getMaxHandSize();
     }
 
     @Override
@@ -21,15 +21,15 @@ public class LondonMulligan extends AbstractMulligan {
     @Override
     public void mulliganDraw() {
         player.drawCards(handSizeAfterNextMulligan());
-        int tuckingCards = tuckCardsAfterKeepHand();
+        int tuckingCards = tuckCardsDuringMulligan();
 
-        for (final Card c : player.getController().londonMulliganReturnCards(player, tuckingCards)) {
+        for (final Card c : player.getController().tuckCardsViaMulligan(player, tuckingCards)) {
             player.getGame().getAction().moveToLibrary(c, -1, null);
         }
     }
 
     @Override
-    public int tuckCardsAfterKeepHand() {
+    public int tuckCardsDuringMulligan() {
         if (timesMulliganed == 0) {
             return 0;
         }

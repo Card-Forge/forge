@@ -1,42 +1,81 @@
 package forge.game.keyword;
 
+import java.util.Arrays;
+
 import org.apache.commons.lang3.StringUtils;
 
-import forge.card.CardType;
 import forge.game.cost.Cost;
+import forge.util.Lang;
 
-public class KeywordWithCostAndType extends KeywordInstance<KeywordWithCostAndType> {
+public class KeywordWithCostAndType extends KeywordInstance<KeywordWithCostAndType>
+    implements KeywordWithCostInterface, KeywordWithTypeInterface {
     private Cost cost;
+    private String costString;
     private String type;
-    private String strType = null;
+    private String descType = null;
+    private String reminderType = null;
+
+    @Override
+    public String getValidType() { return "Affinity".equals(type) ? "Card.withAffinity" : type; }
+    @Override
+    public String getTypeDescription() { return descType; }
+
+    @Override
+    public Cost getCost() { return cost; }
+    @Override
+    public String getCostString() { return costString; }
+
+    public String getTitle() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getTitleWithoutCost());
+        if (!cost.isOnlyManaCost()) {
+            sb.append("—");
+        } else {
+            sb.append(" ");
+        }
+        sb.append(cost.toSimpleString());
+        return sb.toString();
+    }
+
+    @Override
+    public String getTitleWithoutCost() {
+        if (getKeyword().equals(Keyword.SPLICE)) {
+            return "Splice onto " + descType;
+        }
+        return StringUtils.capitalize(descType) + "cycling";
+    }
 
     @Override
     protected void parse(String details) {
         final String[] k = details.split(":");
         type = k[0];
-        cost = new Cost(k[1], false);
+        costString = k[1];
+        cost = new Cost(costString, false);
         if (k.length > 2) {
-            strType = k[2];
+            reminderType = descType = k[2];
         } else {
-            String[] n = type.split(",");
-            for (int i = 0; i < n.length; i++) {
-                if (CardType.isACardType(n[i])) {
-                    n[i] = n[i].toLowerCase();
-                } else if (n[i].equals("Basic")) {
-                    n[i] = "basic land";
-                } else if (n[i].equals("Land.Artifact")) {
-                    n[i] = "artifact land";
-                } else if (n[i].startsWith("Card.with")) {
-                    n[i] = n[i].substring(9);
-                }
-            }
+            descType = switch (type) {
+            case "Basic" -> "basic land";
+            default -> Lang.getInstance().buildValidDesc(Arrays.asList(type.split(",")), false);
+            };
 
-            strType = StringUtils.join(n, " or ");
+            reminderType = descType;
+            if ("Affinity".equals(type)) {
+                reminderType = "card with affinity";
+            }
         }
     }
 
     @Override
     protected String formatReminderText(String reminderText) {
-        return String.format(reminderText, cost.toSimpleString(), strType);
+        String str = reminderType;
+        if (getKeyword().equals(Keyword.TYPECYCLING)) {
+            if ("Affinity".equals(type)) {
+                str = "a card with affinity";
+            } else {
+                str = Lang.nounWithAmount(1, reminderType + " card");
+            }
+        }
+        return String.format(reminderText, cost.toSimpleString(), str);
     }
 }

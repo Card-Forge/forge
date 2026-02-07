@@ -89,7 +89,7 @@ public class ComputerUtilCost {
                 // ignore Loyality abilities with Zero as Cost
                 if (!type.is(CounterEnumType.LOYALTY)) {
                     PaymentDecision pay = decision.visit(remCounter);
-                    if (pay == null || pay.c <= 0) {
+                    if (pay == null || pay.counterTable.totalValues() <= 0) {
                         return false;
                     }
                 }

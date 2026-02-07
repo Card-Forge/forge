@@ -5,13 +5,13 @@ import com.google.common.collect.Lists;
 import forge.card.CardStateName;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
+import forge.game.keyword.Emerge;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.ManaCostBeingPaid;
@@ -218,7 +218,7 @@ public class CostAdjustment {
             int num = AbilityUtils.calculateAmount(host, amt, sa);
 
             if (sa.hasParam("ReduceAmount") && num > 0) {
-                cost.subtractManaCost(new ManaCost(new ManaCostParser(Strings.repeat(cst + " ", num))));
+                cost.subtractManaCost(new ManaCost(Strings.repeat(cst + " ", num)));
             } else {
                 sumGeneric += num;
             }
@@ -245,8 +245,8 @@ public class CostAdjustment {
         if (sa.isSpell() && sa.isOffering()) {
             adjustCostByOffering(cost, sa);
         }
-        if (sa.isSpell() && sa.isEmerge()) {
-            adjustCostByEmerge(cost, sa);
+        if (sa.isSpell() && sa.isEmerge() && sa.getKeyword() instanceof Emerge emerge) {
+            adjustCostByEmerge(cost, sa, emerge);
         }
 
         // Set cost (only used by Trinisphere) is applied last
@@ -398,10 +398,8 @@ public class CostAdjustment {
         toSac.setUsedToPay(true); //stop it from interfering with mana input
     }
 
-    private static void adjustCostByEmerge(final ManaCostBeingPaid cost, final SpellAbility sa) {
-        String kw = sa.getKeyword().getOriginal();
-        String k[] = kw.split(":");
-        String validStr = k.length > 2 ? k[2] : "Creature";
+    private static void adjustCostByEmerge(final ManaCostBeingPaid cost, final SpellAbility sa, final Emerge emerge) {
+        String validStr = emerge.getValidType();
         Player p = sa.getActivatingPlayer();
         CardCollectionView canEmerge = CardLists.filter(p.getCardsIn(ZoneType.Battlefield),
                 CardPredicates.restriction(validStr, p, sa.getHostCard(), sa),
@@ -492,7 +490,7 @@ public class CostAdjustment {
                 } else if (staticAbility.hasParam("IgnoreGeneric")) {
                     manaCost.decreaseShard(ManaCostShard.parseNonGeneric(cost), value);
                 } else {
-                    manaCost.subtractManaCost(new ManaCost(new ManaCostParser(Strings.repeat(cost + " ", value))));
+                    manaCost.subtractManaCost(new ManaCost(Strings.repeat(cost + " ", value)));
                 }
             }
             return sumGeneric;

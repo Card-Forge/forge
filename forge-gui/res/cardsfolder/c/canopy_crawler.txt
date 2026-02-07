@@ -2,7 +2,7 @@ Name:Canopy Crawler
 ManaCost:3 G
 Types:Creature Beast
 PT:2/2
-K:Amplify:1:Beast
+K:Amplify:1
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | NumAtt$ +X | NumDef$ +X | SpellDescription$ Target creature gets +1/+1 until end of turn for each +1/+1 counter on CARDNAME.
 SVar:X:Count$CardCounters.P1P1
 Oracle:Amplify 1 (As this creature enters, put a +1/+1 counter on it for each Beast card you reveal in your hand.)\n{T}: Target creature gets +1/+1 until end of turn for each +1/+1 counter on Canopy Crawler.

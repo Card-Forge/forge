@@ -220,7 +220,7 @@ public abstract class Lang {
         return name.split(" ")[0];
     }
 
-    public String buildValidDesc(List<String> valid, boolean multiple) {
+    public String buildValidDesc(Collection<String> valid, boolean multiple) {
         return joinHomogenous(valid.stream().map(s -> formatValidDesc(s)).collect(Collectors.toList()), null, multiple ? "and/or" : "or");
     }
 

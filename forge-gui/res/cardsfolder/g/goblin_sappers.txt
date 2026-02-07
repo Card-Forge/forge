@@ -7,6 +7,6 @@ SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Descript
 A:AB$ Effect | Cost$ R R R R T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | SubAbility$ DelTrigFriend | StackDescription$ {c:Targeted} can't be blocked this turn. Destroy it at end of combat. | SpellDescription$ Target creature you control can't be blocked this turn. Destroy it at end of combat.
 SVar:DelTrigFriend:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | RememberObjects$ Targeted | Execute$ TrigDestroy | TriggerDescription$ Destroy it at end of combat.
 SVar:TrigDestroy:DB$ Destroy | Defined$ DelayTriggerRememberedLKI
-SVar:DelTrigBoth:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | RememberObjects$ Self,Targeted | Execute$ TrigDestroy | TriggerDescription$ Destroy it and CARDNAME at end of combat.
+SVar:DelTrigBoth:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | RememberObjects$ Self & Targeted | Execute$ TrigDestroy | TriggerDescription$ Destroy it and CARDNAME at end of combat.
 AI:RemoveDeck:All
 Oracle:{R}{R}, {T}: Target creature you control can't be blocked this turn. Destroy it and Goblin Sappers at end of combat.\n{R}{R}{R}{R}, {T}: Target creature you control can't be blocked this turn. Destroy it at end of combat.

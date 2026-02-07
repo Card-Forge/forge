@@ -1,0 +1,9 @@
+Name:Casey Jones, Vigilante
+ManaCost:1 R R
+Types:Legendary Creature Human Berserker
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When NICKNAME enters, draw three cards. At the beginning of your next upkeep, discard three cards at random.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 3 | SubAbility$ DelTrig
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | RememberObjects$ Targeted | Execute$ TrigDiscard
+SVar:TrigDiscard:DB$ Discard | Defined$ You | NumCards$ 3 | Mode$ Random
+Oracle:When Casey Jones enters, draw three cards. At the beginning of your next upkeep, discard three cards at random.

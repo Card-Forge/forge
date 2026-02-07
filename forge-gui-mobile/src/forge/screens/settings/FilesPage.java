@@ -12,6 +12,7 @@ import com.google.common.collect.ImmutableList;
 import forge.StaticData;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
+import forge.gui.download.*;
 import forge.screens.LoadingOverlay;
 import forge.util.ZipUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -23,10 +24,6 @@ import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
-import forge.gui.download.GuiDownloadPrices;
-import forge.gui.download.GuiDownloadService;
-import forge.gui.download.GuiDownloadSkins;
-import forge.gui.download.GuiDownloadZipService;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgeProfileProperties;
 import forge.screens.TabPageScreen.TabPage;
@@ -130,13 +127,13 @@ public class FilesPage extends TabPage<SettingsScreen> {
 //                return new GuiDownloadSetPicturesLQ();
 //            }
 //        }, 2);
-//        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadQuestImages"),
-//                Forge.getLocalizer().getMessage("lblDownloadQuestImages")) {
-//            @Override
-//            protected GuiDownloadService createService() {
-//                return new GuiDownloadQuestImages();
-//            }
-//        }, 2);
+        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadQuestImages"),
+                Forge.getLocalizer().getMessage("lblDownloadQuestImages")) {
+            @Override
+            protected GuiDownloadService createService() {
+                return new GuiDownloadQuestImages();
+            }
+        }, 2);
 //        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadAchievementImages"),
 //                Forge.getLocalizer().getMessage("lblDownloadAchievementImages")) {
 //            @Override

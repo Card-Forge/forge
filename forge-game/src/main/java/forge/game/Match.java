@@ -90,9 +90,8 @@ public class Match {
 
         game.getAction().startGame(this.lastOutcome, startGameHook);
 
-        if (rules.useAnte()) {
-            executeAnte(game);
-        }
+        // Typically ante, but also tearing up a blacker lotus
+        executeOwnershipChanges(game);
 
         game.clearCaches();
 
@@ -366,7 +365,7 @@ public class Match {
         }
     }
 
-    private void executeAnte(Game lastGame) {
+    private void executeOwnershipChanges(Game lastGame) {
         GameOutcome outcome = lastGame.getOutcome();
 
         // remove all the lost cards from owners' decks
@@ -374,12 +373,12 @@ public class Match {
         int cntPlayers = players.size();
         int iWinner = -1;
         for (int i = 0; i < cntPlayers; i++) {
-            Player fromGame = lastGame.getRegisteredPlayers().get(i);
-            RegisteredPlayer registered = fromGame.getRegisteredPlayer();
+            Player gamePlayer = lastGame.getRegisteredPlayers().get(i);
+            RegisteredPlayer registered = gamePlayer.getRegisteredPlayer();
 
             // Add/Remove Cards lost via ChangeOwnership cards like Darkpact
-            CardCollectionView lostOwnership = fromGame.getLostOwnership();
-            CardCollectionView gainedOwnership = fromGame.getGainedOwnership();
+            CardCollectionView lostOwnership = gamePlayer.getLostOwnership();
+            CardCollectionView gainedOwnership = gamePlayer.getGainedOwnership();
 
             if (!lostOwnership.isEmpty()) {
                 List<PaperCard> lostPaperOwnership = new ArrayList<>();
@@ -397,18 +396,22 @@ public class Match {
                 outcome.addAnteWon(registered, gainedPaperOwnership);
             }
 
+            if (!getRules().useAnte()) {
+                continue;
+            }
+
             if (outcome.isDraw()) {
                 continue;
             }
 
-            if (!fromGame.hasLost()) {
+            if (!gamePlayer.hasLost()) {
                 iWinner = i;
                 continue; // not a loser
             }
 
             Deck losersDeck = players.get(i).getDeck();
             List<PaperCard> personalLosses = new ArrayList<>();
-            for (Card c : fromGame.getCardsIn(ZoneType.Ante)) {
+            for (Card c : gamePlayer.getCardsIn(ZoneType.Ante)) {
                 if(!c.isCollectible())
                     continue;
                 PaperCard toRemove = (PaperCard) c.getPaperCard();
@@ -422,7 +425,7 @@ public class Match {
             outcome.addAnteLost(registered, personalLosses);
         }
 
-        if (iWinner >= 0) {
+        if (rules.useAnte() && iWinner >= 0) {
             // Winner gains these cards always
             Player fromGame = lastGame.getRegisteredPlayers().get(iWinner);
             RegisteredPlayer registered = fromGame.getRegisteredPlayer();

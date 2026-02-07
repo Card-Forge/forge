@@ -39,8 +39,6 @@ public class WrappedAbility extends Ability {
     private final SpellAbility sa;
     private Player decider;
 
-    boolean mandatory = false;
-
     public WrappedAbility(final Trigger regtrig0, final SpellAbility sa0, final Player decider0) {
         super(sa0.getHostCard(), ManaCost.ZERO);
         setTrigger(regtrig0);

@@ -2,7 +2,7 @@ Name:Pir, Imaginative Rascal
 ManaCost:2 G
 Types:Legendary Creature Human
 PT:1/1
-K:Partner:Toothy, Imaginary Friend:Toothy
+K:Partner with:Toothy, Imaginary Friend:Toothy
 R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Permanent.YourTeamCtrl+inZoneBattlefield | ReplaceWith$ AddOneMoreCounters | Description$ If one or more counters would be put on a permanent your team controls, that many plus one of each of those kinds of counters are put on that permanent instead.
 SVar:AddOneMoreCounters:DB$ ReplaceCounter | ChooseCounter$ True | Amount$ X
 SVar:X:ReplaceCount$CounterNum/Plus.1

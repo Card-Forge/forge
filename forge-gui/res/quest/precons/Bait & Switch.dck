@@ -1,0 +1,43 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Bait & Switch
+Description=Bait & Switch uses morph creatures to deceive opponents. Flip your creatures at the perfect moment.
+Deck Type=constructed
+Set=ONS
+Image=bait_and_switch.jpg
+[main]
+4 Island|ONS|1
+4 Island|ONS|2
+3 Island|ONS|3
+3 Swamp|ONS|1
+3 Swamp|ONS|2
+3 Swamp|ONS|3
+2 Barren Moor|ONS
+2 Lonely Sandbar|ONS
+2 Boneknitter|ONS
+2 Cabal Slaver|ONS
+1 Fallen Cleric|ONS
+1 Frightshroud Courier|ONS
+4 Imagecrafter|ONS
+1 Information Dealer|ONS
+1 Ghosthelm Courier|ONS
+3 Mistform Dreamer|ONS
+1 Mistform Mutant|ONS
+2 Mistform Shrieker|ONS
+2 Mistform Stalker|ONS
+4 Mistform Wall|ONS
+1 Feeding Frenzy|ONS
+1 Ixidor's Will|ONS
+1 Mage's Guile|ONS
+1 Misery Charm|ONS
+1 Smother|ONS
+3 Swat|ONS
+1 Trickery Charm|ONS
+1 Endemic Plague|ONS
+1 Peer Pressure|ONS
+1 Crown of Suspicion|ONS
+[sideboard]

@@ -1,0 +1,12 @@
+Name:Ninja Teen
+ManaCost:2 B
+Types:Enchantment Class
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature you control leaves the battlefield, each opponent loses 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
+K:Class:2:1 B:AddStaticAbility$ SBoost
+SVar:SBoost:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Creature.YouCtrl | AddPower$ 1 | AddKeyword$ Menace | Secondary$ True | Description$ Creatures you control get +1/+0 and have menace.
+K:Class:3:B:AddStaticAbility$ SSneak & SMayPlay
+SVar:SSneak:Mode$ Continuous | EffectZone$ Battlefield | AffectedZone$ Graveyard | Affected$ Creature.YouOwn | AddKeyword$ Sneak:3 B | Secondary$ True | Description$ Creature cards in your graveyard have sneak {3}{B}.
+SVar:SMayPlay:Mode$ Continuous | Affected$ Creature.YouCtrl | MayPlay$ True | EffectZone$ Battlefield | AffectedZone$ Graveyard | ValidSA$ Spell.Sneak | Secondary$ True | Description$ You may cast creature spells from your graveyard using their sneak abilities.
+SVar:PlayMain1:TRUE
+Oracle:(Gain the next level as a sorcery to add its ability.)\nWhenever a creature you control leaves the battlefield, each opponent loses 1 life.\n{1}{B}: Level 2\nCreatures you control get +1/+0 and have menace.\n{B}: Level 3\nCreature cards in your graveyard have sneak {3}{B}.\nYou may cast creature spells from your graveyard using their sneak abilities.

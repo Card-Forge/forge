@@ -1,8 +1,8 @@
 # Affected
 A `Defined` parameter states what is receiving the action. Remember this is non-targeted!
 
-To combine multiple entities use `&`.
-Example: `Defined$ Valid Creature & Player`
+To combine multiple entities use `&`, e.g.:  
+`Defined$ Valid Creature & Player`
 
 You can combine Defined with Valid Syntax (explained in the [Targets](#Targets) section) like so:
 `{Defined}.{Valid}`

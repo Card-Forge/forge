@@ -20,9 +20,7 @@ package forge.card;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import forge.card.mana.IParserManaCost;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostShard;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
@@ -52,6 +50,7 @@ public final class CardRules implements ICardCharacteristics {
     private ColorSet deckbuildingColors;
     private String meldWith;
     private String partnerWith;
+    private String partnerType;
     private boolean addsWildCardColor;
     private int setColorID;
     private boolean custom;
@@ -77,6 +76,7 @@ public final class CardRules implements ICardCharacteristics {
         aiHints = cah;
         meldWith = "";
         partnerWith = "";
+        partnerType = "";
         addsWildCardColor = false;
         setColorID = 0;
 
@@ -321,44 +321,37 @@ public final class CardRules implements ICardCharacteristics {
         if (!(canBePartnerCommander() && b.canBePartnerCommander())) {
             return false;
         }
-        boolean legal = false;
         if (hasKeyword("Partner") && b.hasKeyword("Partner")) {
-            legal = true; // normal partner commander
+            return true; // normal partner commander
         }
         if (getName().equals(b.getPartnerWith()) && b.getName().equals(getPartnerWith())) {
-            legal = true; // paired partner commander
+            return true; // paired partner commander
         }
-        if (hasKeyword("Friends forever") && b.hasKeyword("Friends forever")) {
-            legal = true; // Stranger Things Secret Lair gimmick partner commander
-        }  
-        if (hasKeyword("Partner - Survivors") && b.hasKeyword("Partner - Survivors")) {
-            legal = true; // The Last of Us Secret Lair gimmick partner commander
+
+        if (!this.partnerType.isEmpty() && this.partnerType.equals(b.partnerType)) {
+            return true;
         }
-        if (hasKeyword("Partner - Father & Son") && b.hasKeyword("Partner - Father & Son")) {
-            legal = true; // God of War Secret Lair gimmick partner commander
-        }
-        if (hasKeyword("Partner - Character select") && b.hasKeyword("Partner - Character select")) {
-            legal = true; // TMNT Commander deck gimmick partner commander
-        }
+
         if (hasKeyword("Choose a Background") && b.canBeBackground()
                 || b.hasKeyword("Choose a Background") && canBeBackground()) {
-            legal = true; // commander with background
+            return true; // commander with background
         }
         if (isDoctor() && b.hasKeyword("Doctor's companion")
                 || hasKeyword("Doctor's companion") && b.isDoctor()) {
-            legal = true; // Doctor Who partner commander
+            return true; // Doctor Who partner commander
         }
-        return legal;
+        return false;
     }
 
     public boolean canBePartnerCommander() {
         if (canBeBackground()) {
             return true;
         }
-        return canBeCommander() && (hasKeyword("Partner") || !this.partnerWith.isEmpty() ||
-                hasKeyword("Friends forever") || hasKeyword("Choose a Background") ||
-                hasKeyword("Partner - Father & Son") || hasKeyword("Partner - Survivors") || hasKeyword("Partner - Character select") ||
-                hasKeyword("Doctor's companion") || isDoctor());
+        if (!canBeCommander()) {
+            return false;
+        }
+        return hasKeyword("Partner") || !this.partnerWith.isEmpty() || !this.partnerType.isEmpty() ||
+                hasKeyword("Choose a Background") || hasKeyword("Doctor's companion") || isDoctor();
     }
 
     public boolean canBeBackground() {
@@ -538,6 +531,7 @@ public final class CardRules implements ICardCharacteristics {
         private CardSplitType altMode = CardSplitType.None;
         private String meldWith = "";
         private String partnerWith = "";
+        private String partnerType = "";
         private boolean addsWildCardColor = false;
         private int setColorID = 0;
         private String handLife = null;
@@ -579,6 +573,7 @@ public final class CardRules implements ICardCharacteristics {
             this.has = null;
             this.meldWith = "";
             this.partnerWith = "";
+            this.partnerType = "";
             this.addsWildCardColor = false;
             this.normalizedName = "";
             this.supportedFunctionalVariants = null;
@@ -604,6 +599,7 @@ public final class CardRules implements ICardCharacteristics {
             result.setNormalizedName(this.normalizedName);
             result.meldWith = this.meldWith;
             result.partnerWith = this.partnerWith;
+            result.partnerType = this.partnerType;
             result.addsWildCardColor = this.addsWildCardColor;
             result.setColorID = this.setColorID;
             if (!tokens.isEmpty()) {
@@ -713,8 +709,11 @@ public final class CardRules implements ICardCharacteristics {
                 case 'K':
                     if ("K".equals(key)) {
                         face.addKeyword(value);
-                        if (value.startsWith("Partner:")) {
+                        if (value.startsWith("Partner with:")) {
                             this.partnerWith = value.split(":")[1];
+                        }
+                        if (value.startsWith("Partner:")) {
+                            this.partnerType = value.split(":")[1];
                         }
                     }
                     break;
@@ -730,8 +729,7 @@ public final class CardRules implements ICardCharacteristics {
 
                 case 'M':
                     if ("ManaCost".equals(key)) {
-                        face.setManaCost("no cost".equals(value) ? ManaCost.NO_COST
-                                : new ManaCost(new ManaCostParser(value)));
+                        face.setManaCost("no cost".equals(value) ? ManaCost.NO_COST : new ManaCost(value));
                     } else if ("MeldPair".equals(key)) {
                         this.meldWith = value;
                     }
@@ -814,62 +812,6 @@ public final class CardRules implements ICardCharacteristics {
                     }
                     break;
             }
-        }
-
-        /**
-         * The Class ParserCardnameTxtManaCost.
-         */
-        private static class ManaCostParser implements IParserManaCost {
-            private final StringTokenizer st;
-            private int genericCost;
-
-            public ManaCostParser(final String cost) {
-                st = new StringTokenizer(cost, " ");
-                this.genericCost = 0;
-            }
-
-            @Override
-            public final int getTotalGenericCost() {
-                if (this.hasNext()) {
-                    throw new RuntimeException("Generic cost should be obtained after iteration is complete");
-                }
-                return this.genericCost;
-            }
-
-            /*
-             * (non-Javadoc)
-             *
-             * @see java.util.Iterator#hasNext()
-             */
-            @Override
-            public final boolean hasNext() {
-                return st.hasMoreTokens();
-            }
-
-            /*
-             * (non-Javadoc)
-             *
-             * @see java.util.Iterator#next()
-             */
-            @Override
-            public final ManaCostShard next() {
-                final String unparsed = st.nextToken();
-                if (StringUtils.isNumeric(unparsed)) {
-                    this.genericCost += Integer.parseInt(unparsed);
-                    return null;
-                }
-
-                return ManaCostShard.parseNonGeneric(unparsed);
-            }
-
-            /*
-             * (non-Javadoc)
-             *
-             * @see java.util.Iterator#remove()
-             */
-            @Override
-            public void remove() {
-            } // unsupported
         }
     }
 

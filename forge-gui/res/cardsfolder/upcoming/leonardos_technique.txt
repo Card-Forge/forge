@@ -1,0 +1,6 @@
+Name:Leonardo's Technique
+ManaCost:3 W
+Types:Sorcery
+K:Sneak:1 W
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn+cmcLE3 | TargetMin$ 1 | TargetMax$ 2 | TgtPrompt$ Choose one or two target creature cards each with mana value 3 or less in your graveyard | SpellDescription$ Return one or two target creature cards each with mana value 3 or less from your graveyard to the battlefield.
+Oracle:Sneak {1}{W} (You may cast this spell for {1}{W} if you also return an unblocked attacker you control to hand during the declare blockers step.)\nReturn one or two target creature cards each with mana value 3 or less from your graveyard to the battlefield.

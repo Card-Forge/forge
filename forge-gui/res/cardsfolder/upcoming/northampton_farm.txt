@@ -1,0 +1,9 @@
+Name:Northampton Farm
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ ChangeZone | Cost$ 1 T | ValidTgts$ Creature.YouOwn | TgtPrompt$ Choose target creature you own. | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature you own.
+A:AB$ ChangeZone | Cost$ 2 T Sac<1/CARDNAME/this land> | Origin$ Exile | Destination$ Battlefield | GainControl$ True | Mandatory$ True | Hidden$ True | ChangeType$ Card.ExiledWithSource | SubAbility$ DBChangeZoneAll | SpellDescription$ Return a creature card exiled with this land to the battlefield under your control. Return each other card exiled with this land to its owner's hand.
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Card.ExiledWithSource | Origin$ Exile | Destination$ Hand
+DeckHas:Ability$Sacrifice
+Oracle:{T}: Add {C}.\n{1}, {T}: Exile target creature you own.\n{2}, {T}, Sacrifice this land: Return a creature card exiled with this land to the battlefield under your control. Return each other card exiled with this land to its owner's hand.

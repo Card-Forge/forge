@@ -8,5 +8,6 @@ SVar:PayLife:AB$ StoreSVar | Cost$ Mandatory PayLife<X> | SVar$ LifePaidOnETB | 
 S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ LifePaidOnETB | SetToughness$ LifePaidOnETB | Description$ CARDNAME's power and toughness are each equal to the life paid as it entered.
 SVar:X:Count$xPaid
 SVar:LifePaidOnETB:Number$0
+SVar:NoZeroToughnessAI:True
 AI:RemoveDeck:All
 Oracle:Trample\nAs Minion of the Wastes enters, pay any amount of life.\nMinion of the Wastes's power and toughness are each equal to the life paid as it entered.

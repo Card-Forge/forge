@@ -2,7 +2,7 @@ Name:Rory Williams
 ManaCost:W U
 Types:Legendary Creature Human Soldier
 PT:3/3
-K:Partner:Amy Pond
+K:Partner with:Amy Pond
 K:First Strike
 K:Lifelink
 T:Mode$ SpellCast | ValidCard$ Card.Self+!wasCastFromExile | Execute$ TrigExile | TriggerDescription$ The Last Centurion — When you cast this spell from anywhere other than exile, exile it with three time counters on it. It gains suspend. Then investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")

@@ -7,6 +7,6 @@ SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You | RememberMilled$ True | Sub
 SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigDebuff | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ3 | SubAbility$ DBCleanup | TriggerDescription$ When you do, target creature an opponent controls gets -X/-X until end of turn, where X is the greatest mana value among cards in your graveyard.
 SVar:TrigDebuff:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -X | NumDef$ -X | IsCurse$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Count$ValidGraveyard Card.YouCtrl$GreatestCMC
+SVar:X:Count$ValidGraveyard Card.YouCtrl$GreatestCardManaCost
 DeckHas:Ability$Graveyard
 Oracle:When Wick's Patrol enters, mill three cards. When you do, target creature an opponent controls gets -X/-X until end of turn, where X is the greatest mana value among cards in your graveyard.

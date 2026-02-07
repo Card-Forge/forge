@@ -1,0 +1,7 @@
+Name:Clachan Festival
+ManaCost:2 W
+Types:Kindred Enchantment Kithkin
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this enchantment enters, create two 1/1 green and white Kithkin creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ gw_1_1_kithkin
+A:AB$ Token | Cost$ 4 W | TokenScript$ gw_1_1_kithkin | TokenOwner$ You | SpellDescription$ Create a 1/1 green and white Kithkin creature token.
+Oracle:When this enchantment enters, create two 1/1 green and white Kithkin creature tokens.\n{4}{W}: Create a 1/1 green and white Kithkin creature token.

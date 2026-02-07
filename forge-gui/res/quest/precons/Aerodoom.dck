@@ -1,0 +1,58 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Aerodoom
+Description=A blue-black control deck from Beatdown. Survive early with removal, then dominate the skies with Drakes, Djinns, and Elementals.
+Deck Type=constructed
+Set=BTD
+Image=aerodoom.jpg
+[main]
+4 Island|TMP|1
+4 Island|TMP|2
+3 Island|TMP|3
+4 Swamp|TMP|1
+4 Swamp|TMP|2
+3 Swamp|TMP|3
+1 Ebon Stronghold|FEM
+1 Polluted Mire|USG
+1 Remote Isle|USG
+1 Svyelunite Temple|FEM
+1 Air Elemental|4ED
+1 Blizzard Elemental|UDS
+1 Clockwork Avian|4ED
+1 Cloud Djinn|WTH
+1 Cloud Elemental|VIS
+1 Fallen Angel|LEG
+1 Feral Shadow|MIR
+1 Fog Elemental|WTH
+1 Giant Crab|TMP
+1 Gravedigger|TMP
+1 Hollow Dogs|USG
+1 Killer Whale|EXO
+1 Leviathan|DRK
+1 Mahamoti Djinn|4ED
+1 Sengir Vampire|4ED
+1 Skittering Horror|UDS
+1 Skittering Skirge|USG
+1 Snapping Drake|S99
+1 Tar Pit Warrior|VIS
+1 Vigilant Drake|ULG
+1 Wayward Soul|EXO
+1 Bone Harvest|MIR
+1 Brainstorm|ICE
+1 Counterspell|4ED
+1 Dark Ritual|4ED
+1 Diabolic Edict|TMP
+1 Impulse|VIS
+1 Power Sink|4ED
+1 Terror|4ED
+1 Tolarian Winds|USG
+1 Coercion|VIS
+1 Death Stroke|STH
+1 Diabolic Vision|ICE
+1 Drain Life|4ED
+1 Gaseous Form|TMP
+[sideboard]
