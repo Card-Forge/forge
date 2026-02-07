@@ -41,9 +41,6 @@ public class CYield implements ICDoc {
     private final CMatchUI matchUI;
     private final VYield view;
 
-    // Cache multiplayer state (doesn't change during game)
-    private boolean isMultiplayer = false;
-
     // Yield button action listeners
     private final ActionListener actNextPhase = evt -> yieldUntilNextPhase();
     private final ActionListener actClearStack = evt -> yieldUntilStackClears();
@@ -65,23 +62,12 @@ public class CYield implements ICDoc {
         return view;
     }
 
-    /**
-     * Returns true if this is a multiplayer game (3+ players).
-     * Used by VYield to adjust layout for the "Your Turn" button.
-     */
-    public boolean isMultiplayer() {
-        return isMultiplayer;
-    }
-
     @Override
     public void register() {
     }
 
     @Override
     public void initialize() {
-        // Cache multiplayer state once
-        isMultiplayer = matchUI.getPlayerCount() >= 3;
-
         // Initialize button action listeners
         initButton(view.getBtnNextPhase(), actNextPhase);
         initButton(view.getBtnClearStack(), actClearStack);
@@ -155,9 +141,6 @@ public class CYield implements ICDoc {
             && matchUI.getGameView().getStack() != null
             && !matchUI.getGameView().getStack().isEmpty();
         view.getBtnClearStack().setEnabled(canYield && stackHasItems);
-
-        // Show/hide Your Turn based on player count (only for 3+ players)
-        view.getBtnYourTurn().setVisible(isMultiplayer);
 
         // Highlight active yield button
         updateActiveYieldHighlight();

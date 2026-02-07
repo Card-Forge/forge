@@ -239,11 +239,6 @@ public final class GameMenu {
         suggestionsMenu.add(createYieldCheckbox(localizer.getMessage("lblSuppressAfterYield"), FPref.YIELD_SUPPRESS_AFTER_END));
         yieldMenu.add(suggestionsMenu);
 
-        // Sub-menu 3: Display Options
-        final JMenu displayMenu = new JMenu(localizer.getMessage("lblDisplayOptions"));
-        displayMenu.add(createYieldCheckbox(localizer.getMessage("lblShowRightClickMenu"), FPref.YIELD_SHOW_RIGHT_CLICK_MENU));
-        yieldMenu.add(displayMenu);
-
         return yieldMenu;
     }
 
