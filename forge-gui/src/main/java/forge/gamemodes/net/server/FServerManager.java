@@ -252,34 +252,6 @@ public final class FServerManager {
 
     public void updateSlot(final int index, final UpdateLobbyPlayerEvent event) {
         localLobby.applyToSlot(index, event);
-
-        if (event.getReady() != null) {
-            broadcastReadyState(localLobby.getSlot(index).getName(), event.getReady());
-        }
-    }
-
-    private void broadcastReadyState(String playerName, boolean isReady) {
-        int readyCount = 0;
-        int totalPlayers = 0;
-        for (int i = 0; i < localLobby.getNumberOfSlots(); i++) {
-            LobbySlot slot = localLobby.getSlot(i);
-            if (slot.getType() == LobbySlotType.LOCAL || slot.getType() == LobbySlotType.REMOTE) {
-                totalPlayers++;
-                if (slot.isReady()) {
-                    readyCount++;
-                }
-            }
-        }
-        if (isReady) {
-            broadcast(new MessageEvent(String.format("%s is ready (%d/%d players ready)",
-                playerName, readyCount, totalPlayers)));
-            if (readyCount == totalPlayers && totalPlayers > 1) {
-                broadcast(new MessageEvent("All players ready to start game!"));
-            }
-        } else {
-            broadcast(new MessageEvent(String.format("%s is not ready (%d/%d players ready)",
-                playerName, readyCount, totalPlayers)));
-        }
     }
 
     public IGuiGame getGui(final int index) {
@@ -401,14 +373,7 @@ public final class FServerManager {
         public final void channelRead(final ChannelHandlerContext ctx, final Object msg) throws Exception {
             final RemoteClient client = clients.get(ctx.channel());
             if (msg instanceof MessageEvent) {
-                String username = client.getUsername();
-                String message = ((MessageEvent) msg).getMessage();
-
-                // Append (Host) indicator for the host player
-                if (client.getIndex() == 0) {
-                    username = username + " (Host)";
-                }
-                broadcast(new MessageEvent(username, message));
+                broadcast(new MessageEvent(client.getUsername(), ((MessageEvent) msg).getMessage()));
             }
             super.channelRead(ctx, msg);
         }
@@ -430,35 +395,12 @@ public final class FServerManager {
             if (msg instanceof LoginEvent) {
                 final LoginEvent event = (LoginEvent) msg;
                 final String username = event.getUsername();
-
                 client.setUsername(username);
-                if (client.getIndex() == 0) {
-                    // Host player - lobby is now hosted
-                    broadcast(new MessageEvent(String.format("Lobby hosted by %s", username)));
-                } else {
-                    // Regular player joining
-                    broadcast(new MessageEvent(String.format("%s joined the lobby", username)));
-                }
+                broadcast(new MessageEvent(String.format("%s joined the room", username)));
                 updateLobbyState();
             } else if (msg instanceof UpdateLobbyPlayerEvent) {
-                UpdateLobbyPlayerEvent updateEvent = (UpdateLobbyPlayerEvent) msg;
-                localLobby.applyToSlot(client.getIndex(), updateEvent);
-
-                // Check if this is a name change
-                if (updateEvent.getName() != null) {
-                    String oldName = client.getUsername();
-                    String newName = updateEvent.getName();
-                    if (!newName.equals(oldName)) {
-                        client.setUsername(newName);
-                        broadcast(new MessageEvent(String.format("%s changed their name to %s", oldName, newName)));
-                    }
-                }
-
-                if (updateEvent.getReady() != null) {
-                    broadcastReadyState(client.getUsername(), updateEvent.getReady());
-                }
-                // Return after handling UpdateLobbyPlayerEvent to prevent duplicate processing
-                // by LobbyInputHandler which also calls updateSlot()
+                localLobby.applyToSlot(client.getIndex(), (UpdateLobbyPlayerEvent) msg);
+                // Return to prevent duplicate processing by LobbyInputHandler
                 return;
             }
             super.channelRead(ctx, msg);
@@ -507,7 +449,7 @@ public final class FServerManager {
             NetworkDebugLogger.log("[Disconnect] Client disconnected: index=%d, username=%s", playerIndex, username);
 
             localLobby.disconnectPlayer(playerIndex);
-            broadcast(new MessageEvent(String.format("%s left the lobby", username)));
+            broadcast(new MessageEvent(String.format("%s left the room", username)));
             broadcast(new LogoutEvent(username));
 
             super.channelInactive(ctx);
