@@ -7,4 +7,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
 A:AB$ Mana | Cost$ T | Produced$ Combo U B | SpellDescription$ Add {U} or {B}.
 DeckHas:Ability$LifeGain
+Tag:Gain Lands
 Oracle:Dismal Backwater enters tapped.\nWhen Dismal Backwater enters, you gain 1 life.\n{T}: Add {U} or {B}.

@@ -4,4 +4,5 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Mana | Cost$ RG T | Produced$ Combo R G | Amount$ 2 | SpellDescription$ Add {R}{R}, {R}{G}, or {G}{G}.
 AI:RemoveDeck:All
+Tag:Filter Lands
 Oracle:{T}: Add {C}.\n{R/G}, {T}: Add {R}{R}, {R}{G}, or {G}{G}.

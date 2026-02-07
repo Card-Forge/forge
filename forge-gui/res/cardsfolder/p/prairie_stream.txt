@@ -1,6 +1,7 @@
 Name:Prairie Stream
 ManaCost:no cost
 Types:Land Plains Island
+Tag:Battle Lands
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ CARDNAME enters tapped unless you control two or more basic lands.
 SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Land.Basic+YouCtrl | ConditionCompare$ LE1
 Oracle:({T}: Add {W} or {U}.)\nPrairie Stream enters tapped unless you control two or more basic lands.

@@ -1,4 +1,5 @@
 Name:Savannah
 ManaCost:no cost
 Types:Land Forest Plains
+Tag:OG DualLands
 Oracle:({T}: Add {G} or {W}.)

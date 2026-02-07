@@ -4,4 +4,5 @@ Types:Land Island Swamp
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 K:Cycling:2
+Tag:Bicycle Lands
 Oracle:({T}: Add {U} or {B}.)\nFetid Pools enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)

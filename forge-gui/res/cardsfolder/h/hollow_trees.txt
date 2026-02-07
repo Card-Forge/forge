@@ -9,4 +9,5 @@ SVar:TrigStore:DB$ PutCounter | Defined$ Self | CounterType$ STORAGE | CounterNu
 A:AB$ Mana | Cost$ T SubCounter<X/STORAGE> | Produced$ G | Amount$ X | AILogic$ ManaRitualBattery | SpellDescription$ Add {G} for each storage counter removed this way.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
+Tag:Storage Lands
 Oracle:Hollow Trees enters tapped.\nYou may choose not to untap Hollow Trees during your untap step.\nAt the beginning of your upkeep, if Hollow Trees is tapped, put a storage counter on it.\n{T}, Remove any number of storage counters from Hollow Trees: Add {G} for each storage counter removed this way.

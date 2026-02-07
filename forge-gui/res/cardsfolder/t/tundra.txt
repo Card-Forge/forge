@@ -1,4 +1,5 @@
 Name:Tundra
 ManaCost:no cost
 Types:Land Plains Island
+Tag:OG DualLands
 Oracle:({T}: Add {W} or {U}.)

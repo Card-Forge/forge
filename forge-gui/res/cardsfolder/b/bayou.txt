@@ -1,4 +1,5 @@
 Name:Bayou
 ManaCost:no cost
 Types:Land Swamp Forest
+Tag:OG DualLands
 Oracle:({T}: Add {B} or {G}.)

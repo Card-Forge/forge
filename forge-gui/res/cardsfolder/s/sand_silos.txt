@@ -1,6 +1,7 @@
 Name:Sand Silos
 ManaCost:no cost
 Types:Land
+Tag:Storage Lands
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 K:You may choose not to untap CARDNAME during your untap step.

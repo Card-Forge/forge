@@ -3,4 +3,5 @@ ManaCost:no cost
 Types:Land Mountain Forest
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ CARDNAME enters tapped unless you control two or more basic lands.
 SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Land.Basic+YouCtrl | ConditionCompare$ LE1
+Tag:Battle Lands
 Oracle:({T}: Add {R} or {G}.)\nCinder Glade enters tapped unless you control two or more basic lands.

@@ -1,4 +1,5 @@
 Name:Underground Sea
 ManaCost:no cost
 Types:Land Island Swamp
+Tag:OG DualLands
 Oracle:({T}: Add {U} or {B}.)

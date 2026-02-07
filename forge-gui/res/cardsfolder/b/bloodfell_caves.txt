@@ -7,4 +7,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
 A:AB$ Mana | Cost$ T | Produced$ Combo B R | SpellDescription$ Add {B} or {R}.
 DeckHas:Ability$LifeGain
+Tag:Gain Lands
 Oracle:Bloodfell Caves enters tapped.\nWhen Bloodfell Caves enters, you gain 1 life.\n{T}: Add {B} or {R}.

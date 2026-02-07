@@ -1,7 +1,8 @@
 Name:Overgrown Farmland
 ManaCost:no cost
 Types:Land
+Tag:Slow Lands
+Oracle:Overgrown Farmland enters tapped unless you control two or more other lands.\n{T}: Add {G} or {W}.
 A:AB$ Mana | Cost$ T | Produced$ Combo G W | SpellDescription$ Add {G} or {W}.
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ CARDNAME enters tapped unless you control two or more other lands.
 SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Land.YouCtrl | ConditionCompare$ LT2
-Oracle:Overgrown Farmland enters tapped unless you control two or more other lands.\n{T}: Add {G} or {W}.

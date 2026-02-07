@@ -1,4 +1,5 @@
 Name:Plateau
 ManaCost:no cost
 Types:Land Mountain Plains
+Tag:OG DualLands
 Oracle:({T}: Add {R} or {W}.)

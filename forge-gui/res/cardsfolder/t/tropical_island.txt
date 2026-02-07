@@ -1,4 +1,5 @@
 Name:Tropical Island
 ManaCost:no cost
 Types:Land Forest Island
+Tag:OG DualLands
 Oracle:({T}: Add {G} or {U}.)

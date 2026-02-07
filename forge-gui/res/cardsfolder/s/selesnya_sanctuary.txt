@@ -1,6 +1,7 @@
 Name:Selesnya Sanctuary
 ManaCost:no cost
 Types:Land
+Tag:Bounce Lands
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ G W | SpellDescription$ Add {G}{W}.

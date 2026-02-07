@@ -1,4 +1,5 @@
 Name:Scrubland
 ManaCost:no cost
 Types:Land Plains Swamp
+Tag:OG DualLands
 Oracle:({T}: Add {W} or {B}.)
