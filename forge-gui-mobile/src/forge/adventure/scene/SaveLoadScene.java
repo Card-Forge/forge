@@ -52,6 +52,9 @@ public class SaveLoadScene extends UIScene {
     ScrollPane scrollPane;
     char ASCII_179 = '│';
     Dialog saveDialog;
+    TextraButton sortToggleButton;
+    enum SortMode { SLOT, RECENT }
+    SortMode sortMode = SortMode.SLOT;
 
     private SaveLoadScene() {
         super(Forge.isLandscapeMode() ? "ui/save_load.json" : "ui/save_load_portrait.json");
@@ -100,8 +103,65 @@ public class SaveLoadScene extends UIScene {
         difficulty.setAlignment(Align.center);
         difficulty.setX(scrollPane.getWidth() - difficulty.getWidth() + 5);
         difficulty.setY(scrollPane.getTop() - difficulty.getHeight() - 5);
+
+        // Add sort toggle button logic
+        sortToggleButton = ui.findActor("sortToggle");
+        if (sortToggleButton != null) {
+            sortToggleButton.setText("Sort by Recent");
+            sortToggleButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    toggleSortMode();
+                }
+            });
+        }
     }
 
+    private void toggleSortMode() {
+        if (sortMode == SortMode.SLOT) {
+            sortMode = SortMode.RECENT;
+            if (sortToggleButton != null) {
+                sortToggleButton.setText("Sort by Slot");
+            }
+        } else {
+            sortMode = SortMode.SLOT;
+            if (sortToggleButton != null) {
+                sortToggleButton.setText("Sort by Recent");
+            }
+        }
+        refreshSaveSlots();
+    }
+
+    private void refreshSaveSlots() {
+        layout.clear();
+        buttons.clear();
+        addSaveSlot(Forge.getLocalizer().getMessage("lblAutoSave"), WorldSave.AUTO_SAVE_SLOT);
+        addSaveSlot(Forge.getLocalizer().getMessage("lblQuickSave"), WorldSave.QUICK_SAVE_SLOT);
+        java.util.List<Integer> slotOrder = new java.util.ArrayList<>();
+        for (int i = 1; i < NUMBEROFSAVESLOTS; i++) {
+            slotOrder.add(i);
+        }
+        if (sortMode == SortMode.RECENT) {
+            // Sort by most recent save date (descending)
+            java.util.Map<Integer, java.util.Date> slotDates = new java.util.HashMap<>();
+            for (int i : slotOrder) {
+                WorldSaveHeader h = previews.get(i);
+                if (h != null && h.saveDate != null) slotDates.put(i, h.saveDate);
+            }
+            slotOrder.sort((a, b) -> {
+                java.util.Date da = slotDates.get(a);
+                java.util.Date db = slotDates.get(b);
+                if (da == null && db == null) return Integer.compare(a, b);
+                if (da == null) return 1;
+                if (db == null) return -1;
+                return db.compareTo(da);
+            });
+        }
+        for (int i : slotOrder) {
+            addSaveSlot(Forge.getLocalizer().getMessage("lblSlot") + ": " + i, i);
+        }
+        layout.invalidateHierarchy();
+    }
 
     private static SaveLoadScene object;
 
@@ -140,8 +200,16 @@ public class SaveLoadScene extends UIScene {
     }
 
     private Selectable<TextraButton> addSaveSlot(String name, int i) {
+        String displayName = name;
+        if (previews.containsKey(i)) {
+            WorldSaveHeader header = previews.get(i);
+            if (header != null) {
+                displayName = getSplitHeaderName(header, false);
+            }
+        }
         layout.add(Controls.newLabel(name)).align(Align.left).pad(2, 5, 2, 10);
         SaveSlot button = new SaveSlot(i);
+        button.actor.setText(displayName);
         layout.add(button.actor).fill(true, false).expand(true, false).align(Align.left).expandX();
         buttons.put(i, button);
         layout.row();
@@ -311,8 +379,6 @@ public class SaveLoadScene extends UIScene {
                          ObjectInputStream oos = new ObjectInputStream(inf)) {
                         int slot = WorldSave.filenameToSlot(name.getName());
                         WorldSaveHeader worldSaveHeader = (WorldSaveHeader) oos.readObject();
-                        //get header name
-                        buttons.get(slot).actor.setText(getSplitHeaderName(worldSaveHeader, false));
                         previews.put(slot, worldSaveHeader);
                     }
                 } catch (ClassNotFoundException | IOException | GdxRuntimeException e) {
@@ -320,7 +386,7 @@ public class SaveLoadScene extends UIScene {
                 }
             }
         }
-
+        refreshSaveSlots();
     }
 
     private String getSplitHeaderName(WorldSaveHeader worldSaveHeader, boolean getLocation) {
