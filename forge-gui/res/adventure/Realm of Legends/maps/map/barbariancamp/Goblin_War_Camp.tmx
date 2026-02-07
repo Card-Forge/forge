@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="120">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Goblin Warchief&quot;, &quot;Boggart Shenanigans&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="22017" source="../../../../common/maps/tileset/dungeon/animatedtiles.tsx"/>
+ <tileset firstgid="38401" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="11" name="Collision" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJwz4WMgCZjwQTClgBQzqGUnqfZSE5Dq38Fk71ReBoYZQHyJD4JnAtnTeQmbRYzd6OYi8y9h0U8Nu0F2XEaSv8iHyscGzIlQQ4zdhOSQMbF2Ems2LnGQPfc1GRgeaBJvFyX2wuysncPAUDeHPDsJ2WuGFg/I4fkXaOe/Oah+FhOFYBDYAqSvCeO3l5DdfALkxeFmUfzyhPIUyN5LSPFJbBgXiyD8j8teYuL5N9DOP5qIMCYF4LKf3PxEKUDPj+iYlvYOBBgIe2kdliPVTnqk01EwcAAAAVI8Iw==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJyL5GRgiBzFo3iQYW6BgXcDvfxJDb9eZB4YewfKv0PJ3huiI8e/FtwDF84guwfC3isk5r1RPIpH8SimBAMAS5kcNw==
+  </data>
+ </layer>
+ <layer id="7" name="Dirt Above" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJytlktOxDAMhrOlHbFBLY9DsJ2CukKCO7CHYcEFEBvmGuV1DU4AN6BMB8GCkxCT/KrrSdKkwtKvjqqJP9txEytlrM6VWmndZ0YPmZpk51tKNZ71jfXd5f27d/271XrW7yv9PM4317kMDOJBc5uDZBPjKTOSRmsqzzoXc21jBBP+Kf4YHzImWhfKGcxH/fxw/I+zu0g+fB4FuIjPxXTlEJN7nQ/3mOpXzox2tQ7z4X6OWWzda0/9OqqD1r5mH8ziuZzt2zvUWMZGTGLd5EYp+fJ8XDnzXuGxke/C1vlLv//ONplXO73GcpZ9w+vLv0HyT/l+2jgLVuOTiyGTtCzDORMXZwj5p3iwp7xfkdctixNcyST9FOGcyaev15qs/+7AoF7m3FWRzpUxSLbsP7DPFloeXiqXzPXt8LqDTVyyEDuVO3YXcO7f78g6++4ncFHnt2uthUeXPRd5nwrdlX7fsM7euaEz3mehPLi5zipitRFnvIvpujtets3zdW8Yl7yTU1mYR2Lqw1lj53OIubb3VDXCbDyxye/jP5nwj3kpdIdLhuyVeQKTs1N6xjWTYeZrE+uUYlPmoimGeZbPzHymTZkJU+wXnEHSBg==
+  </data>
+ </layer>
+ <layer id="8" name="Lava" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYCANHEsG4gwSNVEIYHb+52JgSETCNLc3BULP4yZCMTFqSLSXGDCbTvYeSmBgcEqH4EMkuI8QQDcXxEcWc4pnYDiRBMFOadSxG2x+EsJcEAaZeyIJOz4EspsK9jolAs2KQzX3UDqq2AmYWBp17ITbjRaOThmQMHAC5q1LVExD6OBQPO3CEx9wSsAMa1x2ulHZLTC7QXHoI8DAcEOUuubTAlA7DIaa/djAscyBdsEoGAWjYBRgAgBBUVPH
+  </data>
+ </layer>
+ <layer id="9" name="Forest" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJx9Vj1vE0EQXSc2Baek8B0fFb2LUFCAA7JxrriGll8A2EABFRUS8CtAiWNjB6NIQGXhSBRUkbgGCko6aIGCkiJOYF52Jjte73mk0d3tx7zZmTdzm90zJ9KNjdkhPaga00qMuZrYd2iRjPk5oH2GdDkuXlsne31el9+xY2V6/1d1uG9qxryt2febtXkbJQ8Dfq6Tpokbm9LeU54fWNdMLC7mgfkytvuA9YmwctKfa2HMK4n127er5dWCGAC3wb5eT+bnRR6v2OeE7Q1Jt0kv056jQB62IxdXrBH/JgpXZKzGIdGqVQhinT2w73WOlSj8XYvcvovqHWfaIszX3pkzws2YW49WZuc0LuzmhPv8tLWL7/SuVUh6a3Yv1gh+gzmqZexhQ5DvJZUXfZZjjM48ji9fImc/JHv8FGzhNTgmPn6NCjaz7JMP+x2289BhipQD3MKYnA25Bmc2Y5szPXepABuYaduY75T/H+BAZ35NKxDnuso7cOuK13quCBd8e9Iz5mnPfueU76wdXlvicwi3W4ylua19xdznAG5K6//2jTkkzKOeO/Mx9m1P247bpoDbiG+FfTusutwAG/kTzG9njHm3ahUiz5BI/OvcK2BX173Eusk1L73B54WcTcf4QwBvyvZPYsA5EA6FzoxeOGLsnod7QJjTmouxyI0Ls5ioDd1PBV/6eEnPqd4pPSn1+CgiZ3z2wo392jXm967L58jrlRD0RfRezfX8fhhDi9/bPi6H1w04XhIz9AvEssTc0b6AA9PqfL9/X17sC+xhz1lad470fNmeZ8vjCcYQ/6H3XwHuIJDTPxXnj84LBOPgg9//IfL/GnENYV+T87jOcc4o73k73Ms1T/DUfqEGNgJ7IA2ujZHK9Z6aF8yi+wWwZO9mXMw17afUn3AM+/o6p4wZupv4mPqfIb0vdKdoeHeJAZ/1Gnpjh5Xrucs50JySPiL50La6sbsf6fuA9mOi7PQDdwDxUe58i+6GENSfcFjqCPES/FBNSL2GYiT/Ic1xv14FQzhc4p6O7yH7XcRviNhf8vIk91LJY8h3zWE/Fxvq7iX7K9wr8PwPyB75uQ==
+  </data>
+ </layer>
+ <layer id="10" name="Bridge" width="30" height="25">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYCAOzOYmUiGVAV57aeimuUCzNTgZGBK5sMuBxJHxQIGBihdYGNAyDvCBQZkeR+0d8vZqctLPrv9I5cc8GvuXnnYhg5GUfv7TOWxhYCSF8UDZOxBxO1LsBIGRlJaoYS8A+WEbLA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192.667" y="400.167" width="66" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="53" template="../../../../common/maps/obj/enemy.tx" x="378.5" y="156.834">
+   <properties>
+    <property name="enemy" value="Muxus"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="55" template="../../../../common/maps/obj/enemy.tx" x="283.334" y="194">
+   <properties>
+    <property name="enemy" value="Kiki-Jiki"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="57" template="../../../../common/maps/obj/enemy.tx" x="215.833" y="30.834">
+   <properties>
+    <property name="enemy" value="Pashalik Mons"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/enemy.tx" x="264.167" y="292.834">
+   <properties>
+    <property name="enemy" value="General Kreat"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="59" template="../../../../common/maps/obj/enemy.tx" x="137.667" y="301.833">
+   <properties>
+    <property name="enemy" value="Toggo and Krark"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="75" template="../../../../common/maps/obj/manashards.tx" x="395.833" y="392.167"/>
+  <object id="77" template="../../../../common/maps/obj/enemy.tx" x="406.333" y="354.167">
+   <properties>
+    <property name="enemy" value="Redshift"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="84" template="../../obj/treasure.tx" x="131.5" y="273">
+   <properties>
+    <property name="reward">[
+	{
+		&quot;type&quot;: &quot;randomCard&quot;,
+		&quot;colors&quot;: [ &quot;Red&quot; ],
+		&quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ],
+		&quot;count&quot;: 1
+	},
+	{
+		&quot;type&quot;: &quot;randomCard&quot;,
+		&quot;colors&quot;: [ &quot;Red&quot; ],
+		&quot;subTypes&quot;: [ &quot;goblin&quot; ],
+		&quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ],
+		&quot;count&quot;: 2
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="86" template="../../../../common/maps/obj/gold.tx" x="430" y="371.5"/>
+  <object id="87" template="../../../../common/maps/obj/collision.tx" x="-2.73" y="401" width="483.96" height="16"/>
+  <object id="88" template="../../../../common/maps/obj/collision.tx" x="-2.98" y="-16" width="483.96" height="16"/>
+  <object id="89" template="../../../../common/maps/obj/collision.tx" x="479.5" y="-16.472" width="16" height="434.944"/>
+  <object id="90" template="../../../../common/maps/obj/collision.tx" x="-17" y="-15.472" width="16" height="434.944"/>
+  <object id="91" template="../../../../common/maps/obj/enemy.tx" x="111" y="81.5">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;Krekno stumbles back from the force of your final strike, landing against the mound of dead goblins that piled up during your battle.
+
+'Looks like da mob life finally caught up wit' me...' With that, his body falls limp and lifeless.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Torch Courier|GRN&quot;, &quot;Goblin Burrows|ONS&quot;, &quot;krenko's enforcer|m15&quot;, &quot;Krenko's Buzzcrusher|M15&quot;, &quot;Goblin Influx Array|YDMU&quot;, &quot;Goblin Warrens|FEM&quot; ] }"/>
+    <property name="enemy" value="Krenko"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/collision.tx" x="224.52" y="195" width="55.71" height="26.5"/>
+  <object id="93" template="../../../../common/maps/obj/collision.tx" x="282.895" y="147.375" width="49.335" height="26.5"/>
+  <object id="94" template="../../../../common/maps/obj/gold.tx" x="90" y="63.5"/>
+  <object id="95" template="../../../../common/maps/obj/gold.tx" x="89.5" y="82"/>
+  <object id="96" template="../../../../common/maps/obj/gold.tx" x="91" y="95"/>
+  <object id="97" template="../../../../common/maps/obj/gold.tx" x="70.5" y="97.5"/>
+  <object id="98" template="../../../../common/maps/obj/gold.tx" x="65.3333" y="61.3333"/>
+  <object id="99" template="../../../../common/maps/obj/gold.tx" x="49.3333" y="79"/>
+  <object id="100" template="../../../../common/maps/obj/gold.tx" x="64" y="110.667"/>
+  <object id="101" template="../../../../common/maps/obj/gold.tx" x="48.6667" y="97.3333"/>
+  <object id="102" template="../../../../common/maps/obj/gold.tx" x="33.3333" y="79"/>
+  <object id="103" template="../../../../common/maps/obj/gold.tx" x="33" y="94.6667"/>
+  <object id="104" template="../../../../common/maps/obj/scroll.tx" x="154" y="273">
+   <properties>
+    <property name="reward">[ { &quot;type&quot;: &quot;card&quot;, 
+&quot;cardName&quot;: &quot;Krark's Thumb&quot;, 
+&quot;editions&quot;: [ &quot;MRD&quot;] ,
+&quot;count&quot;: 1 } ]</property>
+   </properties>
+  </object>
+  <object id="105" template="../../../../common/maps/obj/scroll.tx" x="450.5" y="56.5">
+   <properties>
+    <property name="reward">[ { &quot;type&quot;: &quot;card&quot;, 
+&quot;cardName&quot;: &quot;Goblin Burrows&quot;, 
+&quot;editions&quot;: [ &quot;ONS&quot; ],
+&quot;count&quot;: 1 } ]</property>
+   </properties>
+  </object>
+  <object id="106" template="../../../../common/maps/obj/dialog.tx" x="101.417" y="367.5" width="187.417" height="15.75" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Rivers of lava flow like water through the scorched land ahead. The whoops and yells of goblins can be heard from all over, an invitation to chaotic battle.
+
+Your manasight stone glows brightly, sensing a truly mighty legend in this place.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="107" template="../../../../common/maps/obj/dialog.tx" x="176.613" y="44.5612" width="16.5837" height="12.5003" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A goblin wearing oddly fashionable clothes stands ahead of you, his easy confidence marking him as different than the others.
+
+'So, youse finally made it. Now normally, I'd put on a bit of a show, see? Feign politeness. Act the good host. Maybe let ya off with just some protection money. But you - you've been makin' a mess of my whole operation. I'd say I'd be sending ya ta sleep wit' da fishes, but there ain't nothin' swimmin' in dese rivers.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="110" template="../../obj/treasure.tx" x="254.333" y="189.667">
+   <properties>
+    <property name="reward">[
+	{
+		&quot;type&quot;: &quot;randomCard&quot;,
+		&quot;colors&quot;: [ &quot;Red&quot; ],
+		&quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ],
+		&quot;count&quot;: 2
+	},
+	{
+		&quot;type&quot;: &quot;randomCard&quot;,
+		&quot;colors&quot;: [ &quot;Red&quot; ],
+		&quot;subTypes&quot;: [ &quot;goblin&quot; ],
+		&quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ],
+		&quot;count&quot;: 2
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="111" template="../../obj/treasure.tx" x="67" y="82.3333">
+   <properties>
+    <property name="reward">[
+	{
+		&quot;type&quot;: &quot;randomCard&quot;,
+		&quot;colors&quot;: [ &quot;Red&quot; ],
+		&quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ],
+		&quot;count&quot;: 3
+	},
+	{
+		&quot;type&quot;: &quot;randomCard&quot;,
+		&quot;colors&quot;: [ &quot;Red&quot; ],
+		&quot;subTypes&quot;: [ &quot;goblin&quot; ],
+		&quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ],
+		&quot;count&quot;: 3
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="112" template="../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="352.667" y="294.333" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;:&quot;GOBLINZ ONLY!!!
+EXCEPT THE MEAT PIE LADY!&quot;,
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;Continue&quot; }
+]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="115" template="../../../../common/maps/obj/collision.tx" x="94.9177" y="14.5682" width="35.5282" height="33"/>
+  <object id="116" template="../../../../common/maps/obj/collision.tx" x="398.145" y="162.75" width="31.71" height="10.5"/>
+  <object id="118" template="../../../../common/maps/obj/collision.tx" x="341.145" y="162" width="43.71" height="13"/>
+  <object id="119" template="../../../../common/maps/obj/collision.tx" x="419.145" y="166.75" width="9.71" height="36"/>
+ </objectgroup>
+</map>

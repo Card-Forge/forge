@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="144">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Tribute to the World Tree&quot;, &quot;Renata, called to the hunt&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJx7ws7A8GQUj+JRPIrJwKxWA++GUTyKRyLuZUHFDSToBQCKIdHC
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzrZWFg6B2kOJqXgeGvICrexYPAtLJ3N9BsbEBBAIGp7U9i7KSm3SBz9kExMmjjZ2Bo5Yew9wlg4ihe2oQtIbCTh3y7Zcm0EwakyUxrQ9VeUD6DmYXMHgn2koJB+uq5ybOzlpt8e0F4Lw/pdoPsbGCnvOwgxW6QnX+YKLeTFLtBdu6hQf0AsruOG4JhbqjlRohR2z58aZ3csgGGAaY30SI=
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzt1UEKgCAQBdBZW6A3MI9qUsfqMtE9MmrABnXAZhHUhwE3+hb6EeCdWRXA2PGzKXlzMPnB2F7O5szUlbLRdPGsxdxn1gCTPtc0T200c7HRcxmT2q1u8VzG5fb/7rfdUhc4FzvYkloPa27a+9aU7JIrYdbsnCtpUhsnXHfnyX8kadJ44obG93NkBxWZNok=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy1VUsOgjAQnWv4QRJjXEn4JKJL9xpvAAsg3grcGG4FZ/E1hVBL+VV4yQstM31vZhYt0XisLKI1uAG31oSDmtg/+PcMLx+8gFfrN7YEXqdmXbhEpauOzYmj1E/gEYVes7/56rx/kUt6BTxLsHD68/5BAO3Qaa+HYmNhREQ70Iz4/nOHjq1Zq83Py7rvsJ2b4n/GYpXvATMrbb1+C5ufl3VVvkaMukAz1uuxC6Iu85W9U/zPWKzyrees0684Z1FX5WskqAs0E76v56wDcc6irmrOXZjab/7Uq1WFsfcBy5vTt74P+voV85aAfBcvdTfXGHpzlnyT5sYXldxQzA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="274.665" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/enemy.tx" x="142.666" y="176.667">
+   <properties>
+    <property name="enemy" value="Kilvori"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/enemy.tx" x="198.008" y="141.274">
+   <properties>
+    <property name="enemy" value="Nylea"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="86" template="../../../../common/maps/obj/enemy.tx" x="197.666" y="87.6667">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Font of Fertility|JOU&quot;, &quot;Basking Capybara|LCI&quot;, &quot;Hunter's blowgun|LCI&quot;, &quot;Shapers' Sanctuary|XLN&quot;]}"/>
+    <property name="enemy" value="Ojer Kaslem"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="87" template="../../../../common/maps/obj/enemy.tx" x="254.378" y="176.275">
+   <properties>
+    <property name="enemy" value="Rhonas"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="113" template="../../../../common/maps/obj/collision.tx" x="226.244" y="149.837" width="24.0078" height="5.4"/>
+  <object id="114" template="../../../../common/maps/obj/collision.tx" x="226.196" y="181.7" width="24.0078" height="5.4"/>
+  <object id="115" template="../../../../common/maps/obj/collision.tx" x="226.996" y="213.5" width="24.0078" height="5.4"/>
+  <object id="116" template="../../../../common/maps/obj/collision.tx" x="275.396" y="181.9" width="24.0078" height="5.4"/>
+  <object id="117" template="../../../../common/maps/obj/collision.tx" x="274.596" y="117.3" width="24.0078" height="5.4"/>
+  <object id="118" template="../../../../common/maps/obj/collision.tx" x="274.596" y="148.9" width="24.0078" height="5.4"/>
+  <object id="119" template="../../../../common/maps/obj/collision.tx" x="226.596" y="116.7" width="24.0078" height="5.4"/>
+  <object id="120" template="../../../../common/maps/obj/collision.tx" x="227.196" y="85.7" width="24.0078" height="5.4"/>
+  <object id="121" template="../../../../common/maps/obj/collision.tx" x="274.996" y="85.3" width="24.0078" height="5.4"/>
+  <object id="122" template="../../../../common/maps/obj/collision.tx" x="324.196" y="99.5" width="7.0078" height="23"/>
+  <object id="123" template="../../../../common/maps/obj/collision.tx" x="323.896" y="147.7" width="7.0078" height="23"/>
+  <object id="124" template="../../../../common/maps/obj/collision.tx" x="99.0961" y="147.9" width="7.0078" height="23"/>
+  <object id="125" template="../../../../common/maps/obj/collision.tx" x="98.4961" y="100.3" width="7.0078" height="23"/>
+  <object id="126" template="../../../../common/maps/obj/collision.tx" x="115.896" y="116.9" width="22.6078" height="6.6"/>
+  <object id="127" template="../../../../common/maps/obj/collision.tx" x="115.496" y="148.7" width="22.6078" height="6.6"/>
+  <object id="128" template="../../../../common/maps/obj/collision.tx" x="115.696" y="180.9" width="22.6078" height="6.6"/>
+  <object id="129" template="../../../../common/maps/obj/collision.tx" x="163.296" y="212.9" width="22.6078" height="6.6"/>
+  <object id="130" template="../../../../common/maps/obj/collision.tx" x="163.296" y="180.5" width="22.6078" height="6.6"/>
+  <object id="131" template="../../../../common/maps/obj/collision.tx" x="163.696" y="148.5" width="22.6078" height="6.6"/>
+  <object id="132" template="../../../../common/maps/obj/collision.tx" x="163.496" y="116.3" width="22.6078" height="6.6"/>
+  <object id="133" template="../../../../common/maps/obj/collision.tx" x="163.296" y="84.1" width="22.6078" height="6.6"/>
+  <object id="134" template="../../../../common/maps/obj/collision.tx" x="115.696" y="84.1" width="22.6078" height="6.6"/>
+  <object id="136" template="../../../../common/maps/obj/collision.tx" x="192.496" y="31.9" width="31.2078" height="36.8"/>
+  <object id="138" template="../../../../common/maps/obj/booster.tx" x="224.667" y="48.3333">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;colors&quot;: [&quot;Green&quot;],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;colors&quot;: [&quot;Green&quot;],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;colors&quot;: [&quot;Green&quot;],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="139" template="../../../../common/maps/obj/dialog.tx" x="172.417" y="240.083" width="91.5" height="22.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A sense of overwhelming reverence fills you as you enter the overgrown church ahead. It is clear you are in the presence of mighty gods, pure embodiments of green mana.
+
+Your manasight stone glows, sensing the power of the legends here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="143" template="../../../../common/maps/obj/booster.tx" x="177.782" y="48.9159">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;colors&quot;: [&quot;Green&quot;],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;colors&quot;: [&quot;Green&quot;],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;colors&quot;: [&quot;Green&quot;],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

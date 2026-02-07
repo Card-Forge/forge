@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="111">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Bear Cub&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <layer id="6" name="Collision" width="30" height="35">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20JT6AAAAAAPgYQaAAB
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="35">
+  <data encoding="base64" compression="zlib">
+   eJztwzENAAAMA6C+M1r/EmpiJyT0kqqqqqo+HP9Ix1Y=
+  </data>
+ </layer>
+ <layer id="2" name="Grass" width="30" height="35">
+  <data encoding="base64" compression="zlib">
+   eJy9l/9OE0EQxzfB3O31qvgWRhLkMagvgL6AifxBa+4xqPwKRJ4BqrwHSmIRX8EChoo/IuFPZ7L7zU3H2+OuzTHJZO/a3f3Mj53Z1phq8tka87hlzK/ImLexMWMaN2l8k+Rz1uj5I837RHpC+ojmz3s9tRVBgsfrmHmtmF/ou4etSW5E78f0+RyND1r/21CVz3sxbz0uZ7Kk9P7VOnbs+atJbgP4VdjM3SDOD+Jt07gTYEr2mXX814njQucE+y6BD2Azl9cNbXnuEHPpt2QXCecU+w79eerSmi1i9mMXc+jPqPj8sL1tEXfJfpUUc5HT30KZ8YTWXtHzMz+y/2wH5sAG6b/OOasNxDnzvo09A7pkXW6Rv0XxHWxgdi/J48Y2IOftVq4hf2VMeS/wcJ7kXkX5Zx7bX6d+Mn+G4YvuD1oQS9j6J3LzYT/b0itZL/dpKw3VjYzRop30mc/jgnXvZXbPItpnzk23pr/TSqZ8Rl9t0l/cG7LOZV+t2h/rSiZqHjxZ36ht9CNt89BrXdtkzXNPWfL1LfsLehyfd8gB2XBIOqh5b2huX9S7rG3d4yDfUmOOaN5FOh0b99aV+j0gaxLnfRxNrl0mZid17Euvg4psXfNF9Y6YPFX7wedOmivbgPjPeh5l/9I2S/Z7Gj+QjvxnA3Eep7EhxIXIXF96f7+n0+dec/sBrmTLmHdmZMseHhId8xC7Tv+TPfwuYTbnWPOfp+53Q92+izu2qoA/8uN5Wu1+1MKx7jZ4N5Vxr0vy25TUjfOsIv/v3FeccTevUHxfeL1P5j7F9y+Ntw1zi5isNw1yQ37u0vNeQ+eqzM9ug/XLtaKZrO9id6Zekv4D/sv9og==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="35">
+  <data encoding="base64" compression="zlib">
+   eJy9V21ugzAMza8KgradYjtKs1Vcpdq0O20S3cdVpqpnKGv7ZzvCYg0LYxKSgOFJEQJCXvzx7KCULCqt1M6Oc9Fe37QwiQPG8tyzcSraffA9VNr/LgVHu8an7nPTPdD1S3v/bu8/7PguxvMiN6zj438g65fEH1LxAP7aYf+m4QUfXxp7Yd5Ue138lPvUrG8c9kuDc+MzibimcM+Nn5VSv6sudz2St5qotTF8uyYHpXN/CGVAi3MAtbY0L6+7Ulr/ytp8ubFjn3Xfl4RPUnPb/N8mrNvXjBvzX1rjz3m3bqHttJ+m5O7LWqnXdXheoVtesPlCrrSuxvbJW6PUnYnbo6tnh/qYBEI929e7h+pXFREj8LWrNrgG9NB91up64/FBbK8LnRVQS5DXkPOhXmbI/BgM+Zye09CHXO8A9EVqPqTk2VPe/x5j5ovBGJu5zx8ZL63nY/Kf1kfXGQ3WzHTfXsPmpILmTUHyqCbPDza2V0xXvN4s3ad9fUT6zBB7Jpb2Q6xepWvuccBGF+9SsUdQXaTqewpobZj7jObiXuI/heIPMEDBQg==
+  </data>
+ </layer>
+ <layer id="7" name="Trees" width="30" height="35">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJylWG1u2zAMNeSj5G9zg/4ZCqeN23RHyW7Qpc2cuD1VgW4Yhl2icZY6TXaHich7EM3KH8AICIplSY8iH0k5SXKSzCXJ1zRJ3ny/9v3B96/4LTL27eVLEpWZn3fj2/f46yTH+8TsQUzBeUjD81/fjzrwiHnl2x/3cfzWt0nL+1xhfvP9Z3c66zEyNyYyd+9OOoqcqXGx3aPf8z4NduM5a7wXTNHr3bfC/974/s73ly3YF/NTv/Bzdn7O1IW5mQt7xewj56Q9qR/1KqAnbaDlh9mrADZxeJantDmP+ry6YF/ii3yaN/dcm/UxkXM/KZ3tGvrzDRySVrumf/9XxujJb+FmbewpcgAvyoFn65MY/w/giz5XhbGbAWfNEIs54qRtzcW8+Ww5IPssMdYVN4zHZRr4sI+cQcuLeS6wVnQlH/r4I/7ZQl9Zw7hkDA3lRW3iixz45X3zW/mHeaAC90TH6hxj5ydO9NlKhD4vFO+1LyqlzwhjM9h3DUyNK60emNvOzHOm7FRhD60LbUMc4lJ07HaJzvXM6zwjY0rLAT4UPmTI9dqfP/shPwhzCPWtIzwhj8jjreLxZB7ft09srViommBjs8S7owsxNCTmYyL2ljZSYyXO9xDxGesPsa1PGnv34D4nzdz23KNrobAtLv0/ce01VER8REx7T8mxPmZLOfcqwuMK+X8F/wlvryM6tNWgHDw/gmcTrG/Tg1LD77eYz3prcyFz5rXhsLblETlyi993kfki4h/mr60L95wYT2izXSTHk1/MxRtwSfbbdOCXmN+VS7imUNhtfNAxtoR/WRfabK/vsDpm6DvBGnKf0/pNkLdjtiQnJc/E9rtXWHL20jy3YdP+bbWzgo/36Hnf1DFdqjOwtm8wl7zsisVM2VLfD3bgMnkRu9dq/k5d8N8KOnAN72y8y0pN0LWkBsYUNmYfiyURqXv8JuLZeY+SdcTVPOHzFXA5lzG0gY15X6CeVmp1VmLzN3H1vYA+Iq94V2UMHQxmm+hvDp2r9HdV5dprQeWa947KNWuqtZXOywvE/Eo1nQPs3jl4xzui+DB3ITZ0nS0H3ktmJhfx+1TjkkfW9ppDeU88iDCnEOPdYFh/FWmoPePIPtRD5xXOyxBzly58B1juC98Ls557cw2/s22+4f8BWv4BMIdUDQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="214.2" y="560.233" width="65.6" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/treasure.tx" x="224.367" y="192.25">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;colors&quot;: [ &quot;Green&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;Green&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="282.756" y="318.37">
+   <properties>
+    <property name="displayNameOverride" value=""/>
+    <property name="enemy" value="Hurska"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="52" template="../../../../common/maps/obj/gold.tx" x="78.783" y="69.25"/>
+  <object id="57" template="../../../../common/maps/obj/enemy.tx" x="250.733" y="237.679">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Grizzly Bears|10E&quot;, &quot;Bearscape|ODY&quot;]
+}</property>
+    <property name="enemy" value="Goreclaw"/>
+    <property name="speedModifier" type="float" value="5"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="82" template="../../../../common/maps/obj/manashards.tx" x="441.821" y="470.157"/>
+  <object id="83" template="../../../../common/maps/obj/enemy.tx" x="143.9" y="290.8">
+   <properties>
+    <property name="displayNameOverride" value=""/>
+    <property name="enemy" value="Ruxa"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="95,96,97,98,97,96,95"/>
+   </properties>
+  </object>
+  <object id="85" template="../../../../common/maps/obj/enemy.tx" x="164.887" y="409.808">
+   <properties>
+    <property name="deckOverride" value=""/>
+    <property name="displayNameOverride" value=""/>
+    <property name="enemy" value="Duskana"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="87,88,86,94,86,88"/>
+   </properties>
+  </object>
+  <object id="86" template="../../../../common/maps/obj/waypoint.tx" x="47.565" y="315.763"/>
+  <object id="87" template="../../../../common/maps/obj/waypoint.tx" x="231.887" y="438.731"/>
+  <object id="88" template="../../../../common/maps/obj/waypoint.tx" x="119.543" y="392.472"/>
+  <object id="89" template="../../../../common/maps/obj/collision.tx" x="0.171222" y="-15.2693" width="478.77" height="16"/>
+  <object id="90" template="../../../../common/maps/obj/collision.tx" x="2.48425" y="559.666" width="478.77" height="16"/>
+  <object id="91" template="../../../../common/maps/obj/collision.tx" x="478.382" y="-17.1519" width="16" height="592.718"/>
+  <object id="92" template="../../../../common/maps/obj/collision.tx" x="-13.9476" y="-14.1782" width="16" height="592.718"/>
+  <object id="94" template="../../../../common/maps/obj/waypoint.tx" x="47.5" y="191"/>
+  <object id="95" template="../../../../common/maps/obj/waypoint.tx" x="205.5" y="323"/>
+  <object id="96" template="../../../../common/maps/obj/waypoint.tx" x="120" y="264.5"/>
+  <object id="97" template="../../../../common/maps/obj/waypoint.tx" x="96.5" y="191"/>
+  <object id="98" template="../../../../common/maps/obj/waypoint.tx" x="69" y="154"/>
+  <object id="101" template="../../../../common/maps/obj/enemy.tx" x="405" y="371.5">
+   <properties>
+    <property name="displayNameOverride" value=""/>
+    <property name="enemy" value="Ayula"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="102" template="../../../../common/maps/obj/enemy.tx" x="79.5" y="116">
+   <properties>
+    <property name="displayNameOverride" value=""/>
+    <property name="enemy" value="Kudo"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="103" template="../../../../common/maps/obj/dialog.tx" x="213.25" y="513.977" width="62" height="22.5455" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A vast stretch of woods sprawls out before you. The refreshing scent of pine fills your nose, giving you a sense of peace that is only somewhat lessened by the fact that you see several large bears plodding about in the distance.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="105" template="../../../../common/maps/obj/scroll.tx" x="10.5" y="199.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Bear Cub&quot;, &quot;editions&quot;: [ &quot;po2&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="106" template="../../../../common/maps/obj/dialog.tx" x="250" y="262.227" width="62" height="22.5455" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The deliciously sweet smell of honey is thick in the air as you approach a clearing stuffed with a great many jars overflowing with the sticky substance. Its clear the bears who call this place home value the stuff highly.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="107" template="../../../../common/maps/obj/scroll.tx" x="386" y="288">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Muraganda Petroglyphs&quot;, &quot;editions&quot;: [ &quot;FUT&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="108" template="../../../../common/maps/obj/collision.tx" x="355.998" y="264.208" width="25.5047" height="21.0833"/>
+  <object id="109" template="../../../../common/maps/obj/collision.tx" x="197.248" y="176.458" width="25.5047" height="47.5833"/>
+  <object id="110" template="../../../../common/maps/obj/collision.tx" x="243.748" y="175.958" width="25.5047" height="30.5833"/>
+ </objectgroup>
+</map>

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="108">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Giggling Skitterspike&quot;, &quot;Found footage&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="6" name="Collision" width="30" height="22">
+  <data encoding="base64" compression="zlib">
+   eJzt1dEJgCAQBmAfDW6DaJxs1GiEapxoj4o8uEwl9ZSIfriX5Pz4oUhVQqiXjxnOu1xxuTnj6/tF12WU6kt7x74nId66TwNC1HA9x2cLs40mNWzuES6bmkcmOAfPzGcctmmGJMW27WG3Wfcb4d7Xtx/rltj/+5brO8i43V6mf0vUftI31XTZvnCZITa3SW2cTt/fZvwf2XzTjc0GSO1G/w==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="22">
+  <data encoding="base64" compression="zlib">
+   eJxjYBhZwI2TeEyJXkrwcLD3CTvxGARIUT+KR/EoHsWjeBSP4sGFARkE62E=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="22">
+  <data encoding="base64" compression="zlib">
+   eJxjYBj84Ak7Kh4oe+ll906JweFfSsAOHuIxur2k6JVBw8ToieZlYNjFg8AggMyP4qWevTB5kJ27gXSGI8S+VCidBqVB4g9sCdtNin9hdhIDdhLwN7H2kmInyL+E7CbGXlLsJNbfxNgri8VOWLwSA6TJ9C82e0kBo/YObnv3AnE9N3l21gL17SHTXhky7YbZic1cUspJUuzGZyep5SSxdhOyk1R7ke2u44ZgmBtquRFihOwkx150PbC0Lk2G+5ExAAHs4Uo=
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="30" height="22">
+  <data encoding="base64" compression="zlib">
+   eJzt1TEOgCAQBMCrkQ9YGZ+KPNVY+wUbL8ELGljW7ja5hkCmgA0ibTnn+vydmuGuu2j2ILJNz1GzXDsC31zj974l8uxWk2n3miwbMa2NuiNx1923c2gXtINI0B6ivR+xGWavzTStrZPvu0vmj2KaNsm4eeDdXx51O/I=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="22">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUIANRY+qbOd2UgWEGEK/XZGDYoIkqBxObCrRX3IR6doL8IW7GwCABxKeB5p9BsxdZ7B07dewUNob4Axv4J4kp1g8MkwlALEJhmE8mUT8/MEwEgHgKhfa2ATGvOQMDHxDzA7ECDwQr8kDk5XkQYsjq2iizFgx6geb0AXG/OXXUEQt4LYD+AGJ+CwL+RVJHDdALNKcPiPsJmEesOmIAejzh8y8+fUMVEOtfegFuM9rbIWSKyhc2xa5uFGACAOjfJZo=
+  </data>
+ </layer>
+ <layer id="8" name="Overhang" width="30" height="22">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2BkAwWegXbByAAZjgPtAvqANDR/pg5jf2PzG7r/qQmINZtWaQ2b/aAwGI3jUTAKGBgAQ14IAA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="208.333" y="350.665">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="208.402" y="144.809">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Valgavoth's Faithful|DSK&quot;, &quot;Bear Trap|DSK&quot;, &quot;Keys to the House|DSK&quot;, &quot;Solitary study|YDSK&quot;, &quot;funeral room|DSK&quot;]}"/>
+    <property name="enemy" value="Victor"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Victor's Key&quot;
+  }
+]
+</property>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/booster.tx" x="207.25" y="51.75">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;DSK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DSK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DSK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/enemy.tx" x="206.329" y="235.07">
+   <properties>
+    <property name="enemy" value="The Jolly Balloon Man"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/enemy.tx" x="207.109" y="267.351">
+   <properties>
+    <property name="enemy" value="Winter"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="74" template="../../../../common/maps/obj/enemy.tx" x="207.703" y="72.8517" visible="1">
+   <properties>
+    <property name="enemy" value="Arabella"/>
+    <property name="inactive" type="bool" value="true"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="75" template="../../../../common/maps/obj/enemy.tx" x="207.422" y="197.36">
+   <properties>
+    <property name="enemy" value="Marina"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="85" template="../../../../common/maps/obj/manashards.tx" x="249" y="161.5"/>
+  <object id="86" template="../../../../common/maps/obj/gate.tx" x="207.75" y="124.5" width="16.4999" height="22">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;This gated door is locked. Somehow, you feel like it's mocking you.&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Leave&quot; },
+    {      
+        &quot;name&quot;:&quot;Unlock with Victor's Key&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Victor's Key&quot;}],    
+        &quot;text&quot;:&quot;The gated door swing open with a slow metallic groan.&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:93}, {&quot;removeItem&quot;:&quot;Victor's Key&quot;}, {&quot;deleteMapObject&quot;:-1}]} ]
+    }
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="87" template="../../../../common/maps/obj/manashards.tx" x="167.336" y="162.242"/>
+  <object id="89" template="../../../../common/maps/obj/entry_up.tx" gid="1073753167" x="178.86" y="63.8636" rotation="0">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/evilgrove/Church_of_Valgavoth_2.tmx"/>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="170.25" y="92" width="81.5" height="13.5" visible="1">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;text&quot;: &quot;A child's laughter echoes, seemingly from nowhere.
+
+'Come play with me. Forever.'&quot;,
+		&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;Continue.&quot;,
+				&quot;action&quot;: [
+					{ &quot;activateMapObject&quot;: 74 },			{ &quot;deleteMapObject&quot;: -1 }
+
+				]
+
+			}
+
+		]
+
+	}
+
+]</property>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/dialog.tx" x="171.25" y="305.75" width="91.5" height="22.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The church ahead is distinctly unsettling, down to your very bones. Though superficially a place of worship and reassurance, elements of a decaying mansion creep into its design in odd ways, and a cluster of horrific characters wait ahead, eager to bring you to a gruesome end.
+
+Your manasight stone glows brightly, sensing a truly mighty legend in this place.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/dialog.tx" x="168.75" y="176.75" width="91.5" height="22.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The wild-eyed cultist at the pulpit cries out to you as you approach.
+
+'Valgavoth wants our pain, our terror! We cannot join him unless we suffer! Let me give you the key!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/collision.tx" x="93.8551" y="238.181" width="18.9828" height="20.5924"/>
+  <object id="95" template="../../../../common/maps/obj/collision.tx" x="274.188" y="175.736" width="45.4828" height="67.3424"/>
+  <object id="96" template="../../../../common/maps/obj/collision.tx" x="113.759" y="172.579" width="45.4828" height="67.3424"/>
+  <object id="97" template="../../../../common/maps/obj/collision.tx" x="318.759" y="238.704" width="18.9828" height="20.5924"/>
+  <object id="98" template="../../../../common/maps/obj/collision.tx" x="244.009" y="110.204" width="26.9828" height="31.5924"/>
+  <object id="99" template="../../../../common/maps/obj/collision.tx" x="162.009" y="112.704" width="26.9828" height="31.5924"/>
+  <object id="100" template="../../../../common/maps/obj/collision.tx" x="160.509" y="270.204" width="39.4828" height="9.5924"/>
+  <object id="101" template="../../../../common/maps/obj/collision.tx" x="160.259" y="238.204" width="39.4828" height="9.5924"/>
+  <object id="102" template="../../../../common/maps/obj/collision.tx" x="160.759" y="207.704" width="39.4828" height="9.5924"/>
+  <object id="103" template="../../../../common/maps/obj/collision.tx" x="160.259" y="176.704" width="39.4828" height="9.5924"/>
+  <object id="104" template="../../../../common/maps/obj/collision.tx" x="232.259" y="270.954" width="39.4828" height="9.5924"/>
+  <object id="105" template="../../../../common/maps/obj/collision.tx" x="232.009" y="238.954" width="39.4828" height="9.5924"/>
+  <object id="106" template="../../../../common/maps/obj/collision.tx" x="232.509" y="208.454" width="39.4828" height="9.5924"/>
+  <object id="107" template="../../../../common/maps/obj/collision.tx" x="232.009" y="177.454" width="39.4828" height="9.5924"/>
+ </objectgroup>
+</map>
