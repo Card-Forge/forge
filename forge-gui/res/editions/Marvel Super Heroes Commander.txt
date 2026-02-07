@@ -16,7 +16,7 @@ ScryfallCode=MSC
 0 R Abomination, Irradiated Brute @
 0 R Absorbing Man and Titania @
 0 R Black Widow, Intel Expert @
-0 R Captain America, Unbound @
+0 R Captain America, Unbowed @
 0 R Hawkeye, Trick Shot @
 0 R Hulk, Always Angry @
 0 R Iron Man, Futurist Paragon @
