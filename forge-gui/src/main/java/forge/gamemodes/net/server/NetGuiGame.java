@@ -315,6 +315,11 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
+    public void showWaitingTimer(final PlayerView forPlayer, final String waitingForPlayerName) {
+        send(ProtocolMethod.showWaitingTimer, forPlayer, waitingForPlayerName);
+    }
+
+    @Override
     public boolean isNetGame() { return true; }
 
     @Override

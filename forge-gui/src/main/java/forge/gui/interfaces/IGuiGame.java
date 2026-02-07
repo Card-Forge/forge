@@ -279,6 +279,9 @@ public interface IGuiGame {
 
     void setCurrentPlayer(PlayerView player);
 
+    /** Signal to start a client-side elapsed timer for waiting display. */
+    default void showWaitingTimer(PlayerView forPlayer, String waitingForPlayerName) {}
+
     /** Returns true if this game instance is a network game. */
     default boolean isNetGame() { return false; }
 }

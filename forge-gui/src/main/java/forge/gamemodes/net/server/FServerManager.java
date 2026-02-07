@@ -2,6 +2,7 @@ package forge.gamemodes.net.server;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
+import forge.gamemodes.match.AbstractGuiGame;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.CompatibleObjectDecoder;
@@ -268,7 +269,11 @@ public final class FServerManager {
         final LobbySlot slot = localLobby.getSlot(index);
         final LobbySlotType type = slot.getType();
         if (type == LobbySlotType.LOCAL) {
-            return GuiBase.getInterface().getNewGuiGame();
+            final IGuiGame gui = GuiBase.getInterface().getNewGuiGame();
+            if (gui instanceof AbstractGuiGame) {
+                ((AbstractGuiGame) gui).setNetworkGame();
+            }
+            return gui;
         } else if (type == LobbySlotType.REMOTE) {
             for (final RemoteClient client : clients.values()) {
                 if (client.getIndex() == index) {

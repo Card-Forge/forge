@@ -79,6 +79,11 @@ public class MatchController extends AbstractGuiGame {
     private static MatchScreen view;
     private static GameState phaseGameState;
 
+    private java.util.Timer waitingTimer;
+    private String waitingPlayerName;
+    private long waitingStartTime;
+    private PlayerView waitingPlayerView;
+
     private GameState getPhaseGameState() {
         return phaseGameState;
     }
@@ -211,12 +216,59 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public void showPromptMessage(final PlayerView player, final String message) {
+        cancelWaitingTimer();
         view.getPrompt(player).setMessage(message);
     }
 
     @Override
     public void showCardPromptMessage(final PlayerView player, final String message, final CardView card) {
+        cancelWaitingTimer();
         view.getPrompt(player).setMessage(message, card);
+    }
+
+    @Override
+    public void showWaitingTimer(final PlayerView forPlayer, final String waitingForPlayerName) {
+        cancelWaitingTimer();
+        if (waitingForPlayerName == null) {
+            return;
+        }
+        this.waitingPlayerName = waitingForPlayerName;
+        this.waitingStartTime = System.currentTimeMillis();
+        this.waitingPlayerView = forPlayer;
+        waitingTimer = new java.util.Timer("waitingTimer");
+        waitingTimer.schedule(new java.util.TimerTask() {
+            @Override
+            public void run() {
+                FThreads.invokeInEdtLater(MatchController.this::updateWaitingDisplay);
+            }
+        }, 1000, 1000);
+    }
+
+    private void updateWaitingDisplay() {
+        long elapsedSec = (System.currentTimeMillis() - waitingStartTime) / 1000;
+        if (elapsedSec < 2) {
+            return;
+        }
+        String timeStr;
+        if (elapsedSec < 60) {
+            timeStr = elapsedSec + "s";
+        } else {
+            timeStr = String.format("%d:%02d", elapsedSec / 60, elapsedSec % 60);
+        }
+        view.getPrompt(waitingPlayerView).setMessage(
+                Forge.getLocalizer().getMessage("lblWaitingForPlayerWithTime", waitingPlayerName, timeStr));
+    }
+
+    @Override
+    protected void onWaitingStopped() {
+        cancelWaitingTimer();
+    }
+
+    private void cancelWaitingTimer() {
+        if (waitingTimer != null) {
+            waitingTimer.cancel();
+            waitingTimer = null;
+        }
     }
 
     @Override

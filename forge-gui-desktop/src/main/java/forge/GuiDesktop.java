@@ -33,7 +33,6 @@ import forge.gui.BoxedProductCardListViewer;
 import forge.gui.CardListChooser;
 import forge.gui.CardListViewer;
 import forge.gui.FThreads;
-import forge.gui.GuiBase;
 import forge.gui.GuiChoose;
 import forge.gui.download.GuiDownloadService;
 import forge.gui.framework.FScreen;
