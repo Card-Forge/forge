@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="118">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Weatherlight&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" name="dungeon large" tilewidth="16" tileheight="16" tilecount="16384" columns="128">
+  <image source="../../../../common/maps/tileset/dungeon/dungeon_bis.png" width="2048" height="2048"/>
+ </tileset>
+ <tileset firstgid="28289" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="38401" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="6" name="Collision" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFIxmIlZCPqWEvOfpGmr2U2D1Q9sLMGGn2wsygZ17C5xZ62jkKRsEoGAWjYBSMgqEJAKEgH0U=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt1UEKgzAQBdBZtbsuvZOuCh7EFl14AvE4PYrQW3iK0kUhhMxkfjIJIl38VYKP7yTaTETNP6fM66rbt7V43i1vat1hIRrBPJe8rpYu0tXaRc7BkdxHhnuZ6/V1Zyu5v33f7CvRvcPSd7wZcy3ufsgs7fr3Jmb679kN6vqmdrapLte1dF9/XWNqniW5qV1T3NA7KeVyM7AyufnGZuyaiKvpIzmSKd0Z7TdJ8rie6L9YayJnJbVP7nnNcWtZNbqU6HWb47GcWciV1q3dD/t/HZE=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt1E0OgjAQBeBuPYWH8BJgoCwkcgwXYqLuVS7gMVx5DYP3YO0BbEMm1mY69A/cOMlLDAs+XzuBsf/AdA1ji5NfQsxfujK3uX+wKWv8eYgz5FbCnO1xlyeMFck4fUvCbYX5jOCauhr7pnHu18Utmk9iu3DG2YF2wd6cw121a4e4ctqluN9leGeY+/a76+WIuzFHNaHrdRfXWPE+JcdN6BrbBRvcymAOuY807D9g52vjZmK31iKVCJe/Dd9VbNSurq509NiMfq8urqspLRjd1O/W1qWsV91HtyjTZZ9VY8jSz9fVtelDxdQVXKxLiJUTHgTbPV/LxoP4mj6WmiktH5fakRiu2imP2E/P2O+n3CkcPW/kj+sO
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzFlb9PAjEUxx+HP2Ag6qSrGBOjMGGCm3HgxwQm5+6iMdHFQSBhFxz0byDo4mSUxdXdAQZNdNe/wB19Ta9eKb32enfoN/nmeNDrp6/vtQB4K3fubdnv/cL4mCBScXUOI5bDoDCak0lsugb2TrUIsFs0j8Oqj3MM0I95apM4jKolXD86v0VtEgeVXRbWcOE+mfk4Ksm4OkfFZf3JxGLG4WP+d5XOUnq22J8s/s2Ri2Xjg0rsz//o55PW3/TzC94Dr5xPkfuGz3fuDjpAxmHJOw6i+TbAguA6shstd8wHMj4djl0ZjaNUTeCKIuy9yvj3VhwgFqefGz762ZQr6tuiTKYYx58k189ZDcvdL1OrdPsQPffJovbS6j3AWg9gJQBb5HYNavU8BZB1rBLbN37vRO62MEcN61n3qOnRNM2ZWCfxPKbwDM+1x8eRHv2aVc9FuH7VwbWlnXrYmnktyZ4vZgCWMv64Q8udp4vMa/SNYS80nb3OIXNTwRXrQvaM5LqM/ZcmPdiTz0/WxveLyscC9zIBcJVwYz/3CX8PkTzIO0PJGepkqYl2hDqtJwE2knoWL7a2uxnKJXMSLnmqHIVYfqxusnwnIR236eNuDvLfFCbfH1GI3pg=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="269.5" y="479.417" width="21.25" height="34">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="52" template="../../../../common/maps/obj/gold.tx" x="252.333" y="96.333"/>
+  <object id="54" template="../../../../common/maps/obj/enemy.tx" x="176.334" y="135.916">
+   <properties>
+    <property name="enemy" value="Raff"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="55" template="../../../../common/maps/obj/enemy.tx" x="175.833" y="214.834">
+   <properties>
+    <property name="enemy" value="Arvad"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/collision.tx" x="-0.5" y="480.5" width="481" height="16"/>
+  <object id="70" template="../../../../common/maps/obj/collision.tx" x="0" y="-17.5" width="481" height="16"/>
+  <object id="71" template="../../../../common/maps/obj/collision.tx" x="481" y="-19.5415" width="16" height="516.083"/>
+  <object id="72" template="../../../../common/maps/obj/collision.tx" x="-16" y="-19.5415" width="16" height="516.083"/>
+  <object id="76" template="../../../../common/maps/obj/manashards.tx" x="190" y="101.333"/>
+  <object id="79" template="../../../../common/maps/obj/enemy.tx" x="312" y="133.5">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Jhoira's Familiar&quot;, &quot;Jhoira's Timebug|TSP&quot;]
+}</property>
+    <property name="enemy" value="Jhoira"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="80" template="../../../../common/maps/obj/enemy.tx" x="199.333" y="334.667">
+   <properties>
+    <property name="enemy" value="Shanna"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="81" template="../../../../common/maps/obj/enemy.tx" x="250" y="155">
+   <properties>
+    <property name="enemy" value="Slimefoot"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="82" template="../../../../common/maps/obj/gold.tx" x="317" y="96.5"/>
+  <object id="83" template="../../../../common/maps/obj/enemy.tx" x="249.5" y="124">
+   <properties>
+    <property name="enemy" value="Tiana"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="84" template="../../../../common/maps/obj/booster.tx" x="348.818" y="111.136">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;DOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="86" template="../../../../common/maps/obj/scroll.tx" x="118.5" y="214">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Board the Weatherlight&quot;, &quot;editions&quot;: [ &quot;DOM&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="87" template="../../../../common/maps/obj/scroll.tx" x="144" y="415.333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Memorial to Glory&quot;, &quot;editions&quot;: [ &quot;DOM&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="88" template="../../../../common/maps/obj/scroll.tx" x="434.5" y="320">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Memorial to Genius&quot;, &quot;editions&quot;: [ &quot;DOM&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="89" template="../../../../common/maps/obj/dialog.tx" x="272.896" y="407.323" width="16" height="16.1335" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Ahead, at a seaside dock rather than its usual home in the sky, the proud Skyship Weatherlight can be seen. Its crew bustles about it, likely preparing for their next voyage. From what you recall, this seems to be the Weatherlight's newer design, indicating this version of the ship is from the near past rather than the distant past.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/collision.tx" x="383" y="238.5" width="32.5" height="16"/>
+  <object id="91" template="../../../../common/maps/obj/collision.tx" x="416.75" y="225" width="32.5" height="16"/>
+  <object id="92" template="../../../../common/maps/obj/collision.tx" x="445.75" y="238.5" width="32.5" height="16"/>
+  <object id="93" template="../../../../common/maps/obj/collision.tx" x="254.75" y="384.5" width="17.5" height="16"/>
+  <object id="94" template="../../../../common/maps/obj/collision.tx" x="226.25" y="399" width="32.5" height="16"/>
+  <object id="95" template="../../../../common/maps/obj/collision.tx" x="240.341" y="431.182" width="15.0455" height="48.2273"/>
+  <object id="96" template="../../../../common/maps/obj/collision.tx" x="224.659" y="415.455" width="15.5909" height="16"/>
+  <object id="97" template="../../../../common/maps/obj/collision.tx" x="287.477" y="400.727" width="31.4091" height="16"/>
+  <object id="98" template="../../../../common/maps/obj/booster.tx" x="349.515" y="138.242">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;DMU&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DMU&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DMU&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="99" template="../../../../common/maps/obj/scroll.tx" x="349.273" y="124.364">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Weatherlight&quot;, &quot;editions&quot;: [ &quot;DOM&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="100" template="../../../../common/maps/obj/enemy.tx" x="334.088" y="385.574">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;text&quot;: &quot;Hail, {var=player_name}. I see your travels have taken you far. I have been wandering as well, and have acquired some rare spells I am not in need of along the way. Take a look, perhaps they will be of use. Traveling this place does have its costs though, so I cannot simply give you them, but my prices are fair.&quot;,
+		&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;(Continue)&quot; }
+		]
+	}
+]</property>
+    <property name="enemy" value="Mysterious Mage"/>
+   </properties>
+  </object>
+  <object id="101" template="../../../../common/maps/obj/shop.tx" x="384.421" y="388.241">
+   <properties>
+    <property name="commonShopList" value="WanderingMerchantMulticolor"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="102" template="../../../../common/maps/obj/collision.tx" x="197.25" y="174" width="32.5" height="16"/>
+  <object id="103" template="../../../../common/maps/obj/collision.tx" x="161.75" y="165.5" width="12.5" height="19"/>
+  <object id="104" template="../../../../common/maps/obj/collision.tx" x="160.25" y="71" width="28" height="19"/>
+  <object id="105" template="../../../../common/maps/obj/collision.tx" x="223.75" y="70" width="30" height="19"/>
+  <object id="106" template="../../../../common/maps/obj/collision.tx" x="353.127" y="70.0316" width="12.5" height="19"/>
+  <object id="107" template="../../../../common/maps/obj/collision.tx" x="352.295" y="166.5" width="12.5" height="19"/>
+  <object id="108" template="../../../../common/maps/obj/collision.tx" x="288.841" y="165.955" width="28.8636" height="19"/>
+  <object id="109" template="../../../../common/maps/obj/collision.tx" x="224.841" y="167.773" width="28.8636" height="19"/>
+  <object id="110" template="../../../../common/maps/obj/collision.tx" x="288.295" y="71.7727" width="28.8636" height="19"/>
+  <object id="111" template="../../../../common/maps/obj/collision.tx" x="142.387" y="66.3332" width="230.227" height="7.33367"/>
+  <object id="112" template="../../../../common/maps/obj/collision.tx" x="231.553" y="186.333" width="148.894" height="7.33367"/>
+  <object id="113" template="../../../../common/maps/obj/collision.tx" x="364.886" y="61.8333" width="8.22732" height="137"/>
+  <object id="114" template="../../../../common/maps/obj/collision.tx" x="137.886" y="58.1667" width="8.22732" height="137"/>
+  <object id="115" template="../../../../common/maps/obj/collision.tx" x="145.311" y="172" width="32.0455" height="22"/>
+  <object id="116" template="../../../../common/maps/obj/collision.tx" x="306.144" y="417.553" width="15.0455" height="60.5606"/>
+ </objectgroup>
+</map>

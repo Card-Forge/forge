@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="73">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Kher Keep&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy1lLkRwyAQRQmUQD/W4a6sq1Fh2T24CS3DbKIRy18LgpcxPB6Xt8b4Ez0xOWN+jcyLxozE82IOLagz8LGR7YZrsHHt7AzzIW7u1jaf+7iBQd3aZsmZ8l6N0zZLc2nRuHMdWtD9Lu3ltxXuqdRe2ovuO3JnarjR+1r6zJH/qIZ3oX3oKnd/E2e8Z7rvriH1tmYnd9fyIv5/fA+iJVaH/SXvQl6p8wBa/68t
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJytlU1OAkEQhcshwDQQF15APIPGROOaAyBbf+JNZK2gCxM8gfEUIngTdSvighhFsV66Kl0MOEKcSb70dE9PvarqSlenQNQRrpjtYmCPWSFPK0c0iIhGzJA54/l5zs/fmDqzH/k1/TaU/S/MBc/J2FFNta/cxURdZuL8eB/7f9rCQOwNjA+Yt3OzQNPahh2rabWoRHToAt8u+NAVH2CvlWI/DeSWRDOplcaRCzbe8+H9kW08MTUZLTUzbsoZHiyoZ+NH7q0mOC0TNRcA8S4Ta7M4q21jvuW1rVVPmu6y+Z0Xt9YddNcrbI7XqjKCsvNal2tBd9n8pulr3U3kXX2Zl/tP/v4QZ6P9W+0hB9UEeLLU7rGdvvDlpmv8uURTD2oCZBWjrXG8o9Z2uM5uXFjTPScZ5fbYhXhUW2tto+L17Les6gvxdgrT96/e3aARed0P1v/M+zMe/+Oce+ZMtcdoX3lN3OUN6QvX5o6Gfj+e5S9/EOduopchp/VEjxqJNnRxVyJuQIVw5vYs1J+kPuIcu7DX5lT74jAKjAR7FuqD1bb6ybutJ3m1ezWn8/qh5Qcth/LM
+  </data>
+ </layer>
+ <layer id="6" name="Clutter" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFIFDNC6F1dQfWHTAgA8RVvMSrN+GDYGqAXdQxBgz6dahoGBqIo5I5NUjhLMbCwCCOhCVYsOsx5kOEuSkf+f78AaUv8UNoaQLqLwLtugTFl5Himxz7GQnIb8bh90BW0u0iBLYghfknHOa/p4K9sPjdBvUbsl9+EqH/B5obHLCoeYQnYD+w4vcjPjv3YLEfH6hDSteg8o1QfBPrDhibkFtIKb9w2YduJ7o7YHbA/LaTMivxugUZMKLR9ALUshcAE/YkqQ==
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzNlUtOw0AMhp0Fk24alPQUrECiwIKKJSDYsgdxAA7R8lryUHmIh8SBKtFyBVQeJ0AICrbGJu50JgjIgl/61WQmnc927QagWC9j3zzwR7UNQCMe5URlnF0FOGGfVkeZrh5xvYXrT+Z3DPEZup5Ynyu2zlNY5G2OpRkX8yPl6SRnkNcmrPXaTMJfNDmTWBH43WR2aB8c7hy6x571cKXGfeZfZQDrqfVGOnwuqaX4roh7mNkc5Xy3DrQuTNrb51zfkPXO/mD+debPXXRQsZ9dleOdw6VYKKavOjv10twQn3SP3N64J2nUpOrTyBOP9BPtPZswVzxIc+6OMwNTeH9srLcqw1yfiE17febO1wAuMK/NAq5maJav19qe2dUx7eJZyya/F752o2b3OvjsQ6C3wbmW31b/rq6EHZoVyZVy883VAGv3qkwz2nX6rIi9ZIZNsRxxPW+57xfxes+Z90snjpvAvGkVvQMollWT13iFmVqUa12tLcT+/9+fSnLoxOW8L/47V9hlcD8BTzl45Q==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="176" y="272" width="80" height="16"/>
+  <object id="50" template="../../obj/treasure.tx" x="402" y="97">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
+  &quot;colors&quot;: [ &quot;red&quot; ]
+}, 
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;red&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="52" template="../../../../common/maps/obj/gold.tx" x="29" y="103">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 110,
+    &quot;addMaxCount&quot;: 50
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="53" template="../../../../common/maps/obj/gold.tx" x="30" y="149.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 110,
+    &quot;addMaxCount&quot;: 50
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="54" template="../../../../common/maps/obj/gold.tx" x="28" y="124.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 110,
+    &quot;addMaxCount&quot;: 50
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="55" template="../../../../common/maps/obj/enemy.tx" x="158.688" y="197.246">
+   <properties>
+    <property name="enemy" value="Nogi"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../common/maps/obj/enemy.tx" x="55.0776" y="126.697">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Kobold Taskmaster&quot;, &quot;Kobolds of Kher Keep|LEG&quot;, &quot;Crimson Kobolds|LEG&quot;, &quot;Crookshank Kobolds|LEG&quot;]}"/>
+    <property name="enemy" value="Prossh"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/enemy.tx" x="250.613" y="155.704">
+   <properties>
+    <property name="enemy" value="Rograkh and Ardenn"/>
+   </properties>
+  </object>
+  <object id="59" template="../../../../common/maps/obj/enemy.tx" x="367" y="124">
+   <properties>
+    <property name="enemy" value="Rohgahh"/>
+   </properties>
+  </object>
+  <object id="60" template="../../../../common/maps/obj/collision.tx" x="-0.741192" y="272.104" width="482.422" height="16"/>
+  <object id="61" template="../../../../common/maps/obj/collision.tx" x="-1.33275" y="-16.8734" width="480.943" height="16"/>
+  <object id="62" template="../../../../common/maps/obj/collision.tx" x="-15.6903" y="-0.236625" width="16" height="272"/>
+  <object id="63" template="../../../../common/maps/obj/collision.tx" x="479.447" y="-1.41975" width="16" height="272"/>
+  <object id="64" template="../../../../common/maps/obj/enemy.tx" x="212.948" y="118.89">
+   <properties>
+    <property name="enemy" value="Rosnakht"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/dialog.tx" x="181.167" y="230" width="60.1667" height="21.5">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A boiling lake of lava ahead gives off sweltering heat, though the dragon slumbering beside it clearly enjoys the warmth. To the east, a rickety keep stands, surrounded by dozens of kobolds.&quot;,
+   &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}],
+   &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="70" template="../../obj/treasure.tx" x="5" y="122.5">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
+  &quot;colors&quot;: [ &quot;red&quot; ]
+}, 
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;red&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="288" y="121.333" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;:&quot;KHER KEEP. 
+POPULATION: 2 to 24 million, depending on how hungry Prossh has been lately.&quot;,
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;Continue&quot; }
+]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/scroll.tx" x="378" y="96">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Kher Keep&quot;, &quot;editions&quot;: [ &quot;ONC&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

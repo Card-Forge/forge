@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="18" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="81">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Quandrix Campus&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="6" name="Collision" width="30" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAPonkZGKR5GBh2IeEooNgjRggNkkeWk4XKUwrquCFmg+whBoPsBOmhFIDcT6ydMAwKn1F7h5a9bpyoNAxjEx/176h/B6t/95Jh7x4q2Asr95HL38v8CD66/C4q1Qvo4QwKQ2R7scUDLeJ3uNsLSleg+hSG96DZgy4PU0MIAAB2OLWO
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxbIcXAsAIPzuBmYPjFBaGfsBPPx2cmMZgcO0E0pfaSYyeIT6m95NhJLf+Oxu9o/I7GL+XxO5cFYiaIRrYDxkeXB9GU2ovNTGL41IhfUu2kln9JtZNW8UsMfzR+UTEALdmVdA==
+  </data>
+ </layer>
+ <layer id="2" name="Ground and Walls" width="30" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAPODkZGLiwYAUeCMYmx81JwFAiwHKgGY8YScMrqWQvTywDAy8Q88Vi2tFlBqGR1VDL3h6gWb1A3Ae1l9MUGJ5AzG2KsBdZDdX8Gwf0CxDzxUHs6ATZB8Tdpgh/I6uhlr3oYYsv3KkZv+jmooc7vexFD3d62UuvfDRq7/C1F1YvgMyDlfnIdiDLI6uhtn9XovGxhQctwnm42+vKxcDghoTduVDtQJeHqSEEAKRAtZY=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="18">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYCAMzmowMKiqIDAyQBYH4TMaRBhIJHgJNOuwCgIjA2RxEH5BRXuxgURVBoaTEhCa1qBWGYFBoMsMgmkJQOaD7IPRyOLINLUAZywDg4guJDxB9sFoGICFM4wWBqrliqXc3k6oGf+h9v1Hs/e/KioNAl1UsBcE4lSJ9y81AchMUvxLDcCOJX6R/YYtfjmoEM7tZMRvB5Xil5Sy7ywVyytSyr6XVLQXVheg1wkwkCKJnU0pgNUF6HUCDDBJYWdTAlxJNOeUBHXsBQFC4UwrewmFswbQLk0g1pKAsIkBAL/sRZ8=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="207.09" y="288.3" width="51" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="161.006" y="191.459">
+   <properties>
+    <property name="enemy" value="Esix"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="52" template="../../../../common/maps/obj/gold.tx" x="270.167" y="270.5"/>
+  <object id="53" template="../../../../common/maps/obj/enemy.tx" x="223.16" y="41.762">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;The Biblioplex|STX&quot;, &quot;Quandrix Apprentice|STX&quot;]}"/>
+    <property name="enemy" value="Tanazir"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Quandrix Key&quot;
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="57" template="../../../../common/maps/obj/booster.tx" x="294.308" y="269.487">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;STX&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;STX&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;STX&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/manashards.tx" x="317.975" y="272.958"/>
+  <object id="59" template="../../../../common/maps/obj/enemy.tx" x="254.878" y="125.935">
+   <properties>
+    <property name="enemy" value="Kianne"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="60" template="../../../../common/maps/obj/enemy.tx" x="191.392" y="125.555">
+   <properties>
+    <property name="enemy" value="Adrix and Nev"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="61" template="../../../../common/maps/obj/enemy.tx" x="288.444" y="192.133">
+   <properties>
+    <property name="enemy" value="Zimone"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="66" template="../../../../common/maps/obj/dialog.tx" x="190.333" y="219.583" width="80" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The classrom ahead of you whirls with dizzying fractals of energy. At the class's front, a dragon pauses its lecture and gives you a derisive glare.
+
+'Quandrix isn't accepting new students at the moment. Leave now, or you'll learn what it feels like to be divided  by zero.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/gate.tx" gid="1073745949" x="286.599" y="216.606" width="34.1665" height="20.1818" rotation="0">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;This gate is locked.&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Leave&quot; },
+    {      
+        &quot;name&quot;:&quot;Unlock with Quandrix Key&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Quandrix Key&quot;}],    
+        &quot;text&quot;:&quot;The gate swings open.&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:69}, {&quot;removeItem&quot;:&quot;Quandrix Key&quot;}, {&quot;deleteMapObject&quot;:-1}]} ]
+    }
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/scroll.tx" x="158.635" y="246.507">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Vineglimmer Snarl&quot;, &quot;editions&quot;: [ &quot;STX&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/collision.tx" x="207.534" y="47.4473" width="46.7036" height="30.75"/>
+  <object id="71" template="../../../../common/maps/obj/collision.tx" x="160.283" y="-1.41449" width="46.7036" height="24.8436"/>
+  <object id="72" template="../../../../common/maps/obj/collision.tx" x="257.469" y="0.464827" width="61.738" height="24.8436"/>
+  <object id="73" template="../../../../common/maps/obj/collision.tx" x="142.564" y="-0.072116" width="18.2456" height="31.8239"/>
+  <object id="74" template="../../../../common/maps/obj/collision.tx" x="320.56" y="0.196333" width="18.2456" height="31.8239"/>
+  <object id="75" template="../../../../common/maps/obj/collision.tx" x="322.171" y="174.703" width="13.2456" height="31.8239"/>
+  <object id="76" template="../../../../common/maps/obj/collision.tx" x="145.814" y="174.703" width="12.5789" height="31.8239"/>
+  <object id="77" template="../../../../common/maps/obj/collision.tx" x="129.377" y="81.7547" width="14.9122" height="28.4906"/>
+  <object id="78" template="../../../../common/maps/obj/collision.tx" x="128.211" y="143.755" width="14.9122" height="28.4906"/>
+  <object id="79" template="../../../../common/maps/obj/collision.tx" x="337.211" y="145.421" width="14.9122" height="28.4906"/>
+  <object id="80" template="../../../../common/maps/obj/collision.tx" x="337.544" y="83.088" width="14.9122" height="28.4906"/>
+ </objectgroup>
+</map>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="112">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Murmuration&quot;, &quot;Soulcatcher&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxr4mZgaBqk+A8TYTwQdlLbblLspJbduMx148TE1LKbHH9Sw+7BYm+IJAKb8DEw7JRAYGz6t+MQpwQTYy+5GNl/6JiW9n5lw435uVAxsj5c4tSwl1hMCz+/B+IPNLIXn9297AwMfezUt4/cMKd23hkIO2mFAYIbV2A=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyt1c8NgjAUBvCmnqQQrx7wxFGPxhXUFXQKB1D3cAN1AME/RyfQFdQ17IuQPpvCe234ki+UBPqjTYA8FiInmjLqOwfn+mUixDmu7yKh5+K6KTIv+tiUgmH7uByTa3NcX5NjU26oSdkcdyLDzCpjGeYOrLXuOqYPaQrB56f+r5A2XJymvahcaKjbi9y13VXXtA0XstfOQfcYGQfvKxQ/0xPtfYh7K92pEmKmO1fGzdBah2g8QuOrY27u+wv2S3tv3Q9yXbmXx7Vym77fK7C36n9drmSE6ftfwLYdvK+U6etie6PqS5khruueNv6/X2eK1jQ=
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBi8wIKJgeEyHmzJRBs7rxAw9xKV7SbGTmrbDbPzDwl6KLUbZmcYO+l6KbU7hnytZAMzpPBFD2czGqRdGEDPJ8QCmJtMyHQbuX6ihr3u/BC2Lgn6YOFDrr3XgPpmMELYMPvX8zEwbADijXy49YHUTgPqu05BGkC2GwR8gWb6AbE/P6ZdMECpndjsfg00/w0Qv+XHrpZadqLb3SnAwNAFxN0CqPLUCFt8dk9nhGAQgLFhmBZ20goAAEMwNBI=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF6MCMaeTae0MbE490YEKleMEVv5eZsKsj1150e64MULoa7uAaheF6fTRehhyYzohKo4sPFQAAnbsL8A==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="89" template="../../../../common/maps/obj/enemy.tx" x="163.348" y="139.925">
+   <properties>
+    <property name="enemy" value="Zinnia"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/door_up.tx" x="309.833" y="159" width="37.0004" height="48">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/fort/aerie_1.tmx"/>
+    <property name="teleportObjectId" value="83"/>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/door_up.tx" x="218.166" y="159.667" width="37.0004" height="39">
+   <properties>
+    <property name="direction" value="left"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/fort/aerie_3.tmx"/>
+    <property name="teleportObjectId" value="88"/>
+   </properties>
+  </object>
+  <object id="93" template="../../../../common/maps/obj/enemy.tx" x="279.333" y="79">
+   <properties>
+    <property name="enemy" value="Zoraline"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="96" template="../../../../common/maps/obj/enemy.tx" x="272.333" y="170">
+   <properties>
+    <property name="enemy" value="Kastral"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="106" template="../../../../common/maps/obj/gold.tx" x="220.167" y="42.5"/>
+  <object id="110" template="../../obj/treasure.tx" x="112.5" y="112">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;Card&quot;,
+  &quot;count&quot;: 20,
+  &quot;cardName&quot;: &quot;Tempest Hawk&quot;,
+  &quot;Editions&quot;: [ &quot;TDM&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="111" template="../../obj/treasure.tx" x="237" y="251">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;Card&quot;,
+  &quot;count&quot;: 20,
+  &quot;cardName&quot;: &quot;Tempest Hawk&quot;,
+  &quot;Editions&quot;: [ &quot;TDM&quot; ]
+}]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="37" height="33" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="170">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Henge of Ramos&quot;, &quot;Mercadian Atlas&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../../../common/maps/tileset/buildingsbosses.tsx"/>
+ <layer id="1" name="Background" width="37" height="33">
+  <data encoding="base64" compression="zlib">
+   eJzt1DEKACAMQ9EOLl604CG8uxRcnRPqD7z9T8kZkQDsrUvd0aXdrQcAAPS2h74BcFJTN+CtPuuH3zqk9BFg
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="37" height="33">
+  <data encoding="base64" compression="zlib">
+   eJztlktOwzAQhr1AJYnLYwOII8ACrlFQz8GuAZUFD3EDHhXHKHAR2CAeGx5iB4hKUOAEzMgddWrGsVuaiEVH+tU2qeMvv8d/otSohlF3iVL3f9R8WT7+ACqPGfVTe1qp7Zy0o0dMIdrtk2lTGxXJdBkpNZVk8xTJhDzTwNMuZfMUyVSLDc/B+P9iagDP+z/zaRHW79jjU5H7DnsJfZKYOFfeTDyfqJcWIpmJV94+oT9fHR7spSOHT0UytS2e6wCftnJmOgSOj5JZM+SZsDJzLf7NNAPP9FlLT8lgDI9J73XmQLdRt7fXhfmRSeLi51CDeoc9jXmNSmPzSbnkY7K56Fg6BKY07gqZ6hlMnKdIJu7TRgATfkbJcJlo3YgJs4DyO5QpZSwkqe9DhD3NewlFWRCydqQm3Mdp4j5P0onZQxcB+UL+pJ1nHGbTchTGhDwt8HtFZ/dbv0XvJd/MI1c2STwV0KoejMc1ps78WYpMftu9ZI/nPGfw/VXwycdm9yX/P99r6M+N4BEfF8qDvXDu6B0fP8+kSZjjytODVYvHNQeJuGxP+G+7iGkf9FmS143XM3C8aLc/PqHPb9q9V4mJnr1SLkmeU/HM9XGcdNRyrDmfoxZ3cwDfB0KY7Gu47rfJOCpCD7rG1+PerPStnes60vGqxUJrnuU/5WWDvcf5mKR94vKKM9kZ5pLtkZSVP7RUtDY=
+  </data>
+ </layer>
+ <layer id="7" name="ClutterSubGround" width="37" height="33">
+  <data encoding="base64" compression="zlib">
+   eJztls9Kw0AQxocUFPFQfIqe9OItKXj0D4pv0mq9eO1B8FWsr+BbeNK7KAitrejZb5IMjnE2tdmNp/3BR8Km/eZjM7sbokgopinRDHqD5tAiLcZv9okm0C20u0M0NMaXeTRlkKEedAadQ6PMrsGZXOOWhw9T/H+WFXMxx3WR2TVctfOspQffi4fXPPXhBV1uog6uo/53DUbXkHH+rYzzvXgw4hEK9tc1dE6dv1p7mP6WD1aPSLaqqvD7dnn4UNefOks1213nbx5NsHpcY82Py4MJ2eOM1Z+S6aFH9Nhr5rEquicvjDmRTB/I8wm9U/HeRPxc7mVvbaPHrUwW0l//1eN1a6463laPM3oftDJZGfN5amkfZ6Q/uS9k73Fl0c/EgzOF3scliyuThTy77/6ULycJ0WliZ3LNkc7MyLpjBht+eba3iMbwu4KOk2LMdd4IrnXGWUQ+dNaIjpDlAHoqM7m+SWTfca2zEHmYvXWiF2R5hq7LM8xaizpT3ToLkYl5RZ7Dsqdy3yVnRZvfS5FIJBKJrMoXVkT0BA==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="37" height="33">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy1WMtOFEEULWcyDIRW4jfADDICLvARjUhMRJBo/AtXRhds3Bk1ylMJ0chDIrrTz4ABRUYWBsLCpY8oqHvxgd6Tupe+U9PVPZpwkpvu6a6uOnXuubdnZqDemPnAmHaKPMVBFS0UrykW1PEVx4JzbOLxC875eF0YUfMsUhT5mRHiMq74CKdGHotnlymANw02ZO6WblOGTRpXolgJ7HmRzwGMX2Ruerx7XmJerY4+jcx7jLjepbhH0dFevldfYNzVE3b+5z3VPePuK0cxx1zyrLXosqR0lb3uVgBt++0xxzxEp+agUlcZu9ucdtZjHuI50WSMc6Yhz1+r3x1O92tDnQ4FpgJFlUPNyafX//CE71yd1tgzy+znIaULvAq0nq7UycdJh4ukGgE2HQ0KXH/u9SRObk4BH7c4TuJZjTZPDoVT3D71enGoxt8aL1RPEm8/qA3v+zj51nzbXD0vQPyt8/QysFyWlLdlHPhIL4zjJbny7d9XBz4UVR8Y5feNAHr1x9SVy0lrksRHj3G9PMDvEdReSWkFfUQv33y+mnPr0cepP6JOAeTsgPI5OA84elXTA9za82mlfSB9R2PdWG/D5/DVIOvl9tMoTuI1vW6UXm5fjeqXGqMqXyV+x6wE5TnUiPOFr2dqTqsN5RGFgrPuVsaYdI0934NjTXjvQsqYi6ny3hDVJ+L2AIi2V5xeIEC/xNo/mMuRrDFdWXtvhj53ZC0v9NobaWNuU5xP+TVLevcJF4kowDfgMU3rPqbYzoTa4PpD5gW+fcSll+JjDCd4Rb7X+XhpPlF1l+PcTdCaUzX2+FTlq5P4HGXtPhOXTxSD6WROcTol+Xs+ghP06m+qHP+F+JxjT/k4acTd9/Fa4u/k6AezrI9wA3D9knoOfnpHfK6nQ14uh8t7jXlWZ6Obxpyl6KGo3xdGHKDTMOcTfv5NXvqVsTqBi8Saega8htNh/gTgImsKp/fE5QP7T1+PQ4F/pxjWaZLiEcXJbPxzQcReoziB/02KW2nbY1DbPylWPfMOsJdaFacn7KUkPlGcNLQWOP+esTWMWjmWtZ8RLnL8e2WO+9PhrNVpysNJuCCkd55J2f3/4f37+AmHbdYKvcblNMY+kt+Zs5yz6RidwKWPPdvLPod3O50eBrg1i/Vl31inK1vJSb4HyH8CUmtSe2vlw3f0gWc3OODdbyk7N3id4rxEYYtrR7yhddPIKU4zPNbtl9iv8JEevsF9U7xbDSY4D/DT8Wx0ntdN6Kc85w7aQ1vdm0Qj4QNtvrI+gKunhtyDRnreIzF6FphPPgjfa5OOToIh7pX/qg8g9Rw1rwudO6BT1Sqw7oy/QzxG0pXXk6Df73GArqUg/D/rLyScyn8=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="240" y="527.5" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="63" template="../../../../common/maps/obj/gold.tx" x="77.5298" y="324.464"/>
+  <object id="69" template="../../../../common/maps/obj/enemy.tx" x="316.751" y="369.389">
+   <properties>
+    <property name="enemy" value="Crosis"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/manashards.tx" x="304.36" y="106.248"/>
+  <object id="90" template="../../../../common/maps/obj/collision.tx" x="-0.25084" y="-16.4141" width="594.021" height="16"/>
+  <object id="91" template="../../../../common/maps/obj/collision.tx" x="-18.9643" y="527.204" width="626.271" height="16"/>
+  <object id="92" template="../../../../common/maps/obj/collision.tx" x="-14.9827" y="-11.9607" width="16" height="539.164"/>
+  <object id="93" template="../../../../common/maps/obj/collision.tx" x="592.502" y="-10.7662" width="16" height="538.766"/>
+  <object id="94" template="../../../../common/maps/obj/manashards.tx" x="452.753" y="400.988"/>
+  <object id="95" template="../../../../common/maps/obj/manashards.tx" x="51.881" y="138.745"/>
+  <object id="96" template="../../../../common/maps/obj/manashards.tx" x="80.7893" y="288.628"/>
+  <object id="97" template="../../../../common/maps/obj/manashards.tx" x="70.8667" y="513.332"/>
+  <object id="99" template="../../../../common/maps/obj/gold.tx" x="305.857" y="85.094"/>
+  <object id="100" template="../../../../common/maps/obj/gold.tx" x="490.515" y="364.699"/>
+  <object id="115" template="../../obj/treasure.tx" x="304.583" y="67.25">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 5,
+  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
+  &quot;colors&quot;: [ &quot;white&quot;, &quot;blue&quot;, &quot;black&quot;, &quot;red&quot;, &quot;green&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="120" template="../../../../common/maps/obj/enemy.tx" x="304.166" y="130.5">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;With a deafening crash, the great dragon engine falls, thoroughly broken. As it does, the bright, shimmering light from the crystal in the henge's center fades to darkness.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ramosian Greatsword|MOM&quot;, &quot;Dragonstorm Globe|TDM&quot;, &quot;Obsidian Obelisk|DMC&quot;, &quot;The Mana Rig|DMC&quot;, &quot;Henge Guardian|DDG&quot;, &quot;Dragon Engine|DMR&quot;, &quot;Fallaji Wayfarer|DMC&quot;]}"/>
+    <property name="enemy" value="Ramos"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="123" template="../../../../common/maps/obj/collision.tx" x="231" y="289.95" width="24.6666" height="56.0994"/>
+  <object id="132" template="../../../../common/maps/obj/enemy.tx" x="105.333" y="372">
+   <properties>
+    <property name="enemy" value="Rith"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="133" template="../../../../common/maps/obj/enemy.tx" x="95.3333" y="469.333">
+   <properties>
+    <property name="enemy" value="Darigaaz"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="134" template="../../../../common/maps/obj/enemy.tx" x="83.3333" y="142">
+   <properties>
+    <property name="enemy" value="Treva"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="135" template="../../../../common/maps/obj/enemy.tx" x="469.333" y="328.667">
+   <properties>
+    <property name="enemy" value="Dromar"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="136" template="../../../../common/maps/obj/gold.tx" x="108" y="517.333"/>
+  <object id="137" template="../../../../common/maps/obj/gold.tx" x="59.3333" y="180"/>
+  <object id="140" template="../../../../common/maps/obj/collision.tx" x="308.333" y="158.617" width="26" height="34.5236"/>
+  <object id="141" template="../../../../common/maps/obj/enemy.tx" x="360.667" y="264.667">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dragonstorm Globe|TDM&quot;, &quot;Corroding Dragonstorm|TDM&quot;, &quot;Skull of Ramos|MMQ&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
+    <property name="enemy" value="Teneb"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="142" template="../../../../common/maps/obj/enemy.tx" x="281" y="268.5">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dragonstorm Globe|TDM&quot;, &quot;Breaching Dragonstorm|TDM&quot;, &quot;Heart of Ramos|MMQ&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
+    <property name="enemy" value="Numot"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="143" template="../../../../common/maps/obj/enemy.tx" x="382.5" y="191.5">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dragonstorm Globe|TDM&quot;, &quot;Encroaching Dragonstorm|TDM&quot;, &quot;Horn of Ramos|MMQ&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
+    <property name="enemy" value="Vorosh"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="144" template="../../../../common/maps/obj/enemy.tx" x="243.5" y="190.5">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dragonstorm Globe|TDM&quot;, &quot;Roiling Dragonstorm|TDM&quot;, &quot;Eye of Ramos|MMQ&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
+    <property name="enemy" value="Intet"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="145" template="../../../../common/maps/obj/enemy.tx" x="312.5" y="213">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dragonstorm Globe|TDM&quot;, &quot;Teeming Dragonstorm|TDM&quot;, &quot;Tooth of Ramos|MMQ&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
+    <property name="enemy" value="Oros"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="146" template="../../../../common/maps/obj/dialog.tx" x="265.151" y="445.571" width="139.697" height="20.858" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A henge of great stone monoliths stands in a clearing ahead. Dragons flock all around, perhaps drawn to the massive outpouring of mana from the crystal in the henge's center. In the distance, a colossal mechanical dragon looms taller than the others, its head constantly scanning for intruders on what seems to be a sacred place.
+
+Your manasight stone glows brightly, sensing a truly mighty legend in this place.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="147" template="../../obj/treasure.tx" x="317.583" y="49.5">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
+  &quot;colors&quot;: [ &quot;white&quot;, &quot;blue&quot;, &quot;green&quot; ]
+},
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
+  &quot;colors&quot;: [ &quot;blue&quot;, &quot;black&quot;, &quot;green&quot; ]
+},
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
+  &quot;colors&quot;: [ &quot;black&quot;, &quot;red&quot;, &quot;white&quot; ]
+},
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
+  &quot;colors&quot;: [ &quot;white&quot;, &quot;blue&quot;, &quot;red&quot; ]
+},
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
+  &quot;colors&quot;: [ &quot;blue&quot;, &quot;red&quot;, &quot;green&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="148" template="../../obj/treasure.tx" x="288.917" y="48">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
+  &quot;colors&quot;: [ &quot;white&quot;, &quot;blue&quot;, &quot;black&quot; ]
+},
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
+  &quot;colors&quot;: [ &quot;blue&quot;, &quot;black&quot;, &quot;red&quot; ]
+},
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
+  &quot;colors&quot;: [ &quot;black&quot;, &quot;red&quot;, &quot;green&quot; ]
+},
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
+  &quot;colors&quot;: [ &quot;white&quot;, &quot;blue&quot;, &quot;green&quot; ]
+},
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
+  &quot;colors&quot;: [ &quot;white&quot;, &quot;red&quot;, &quot;green&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="149" template="../../../../common/maps/obj/collision.tx" x="277.667" y="290.284" width="24" height="56.0994"/>
+  <object id="150" template="../../../../common/maps/obj/collision.tx" x="357.333" y="291.45" width="24" height="56.0994"/>
+  <object id="151" template="../../../../common/maps/obj/collision.tx" x="406" y="289.784" width="24" height="56.0994"/>
+  <object id="152" template="../../../../common/maps/obj/collision.tx" x="143.333" y="198.783" width="24" height="56.0994"/>
+  <object id="153" template="../../../../common/maps/obj/collision.tx" x="194" y="197.117" width="24" height="56.0994"/>
+  <object id="154" template="../../../../common/maps/obj/collision.tx" x="146.333" y="116.117" width="24" height="56.0994"/>
+  <object id="155" template="../../../../common/maps/obj/collision.tx" x="197" y="114.451" width="24" height="56.0994"/>
+  <object id="156" template="../../../../common/maps/obj/collision.tx" x="147.333" y="36.7833" width="24" height="56.0994"/>
+  <object id="157" template="../../../../common/maps/obj/collision.tx" x="198" y="35.1173" width="24" height="56.0994"/>
+  <object id="158" template="../../../../common/maps/obj/collision.tx" x="228" y="53.1166" width="24" height="56.0994"/>
+  <object id="159" template="../../../../common/maps/obj/collision.tx" x="278.667" y="51.4506" width="24" height="56.0994"/>
+  <object id="160" template="../../../../common/maps/obj/collision.tx" x="323.333" y="53.45" width="24" height="56.0994"/>
+  <object id="161" template="../../../../common/maps/obj/collision.tx" x="374" y="51.784" width="24" height="56.0994"/>
+  <object id="162" template="../../../../common/maps/obj/collision.tx" x="419.333" y="36.7833" width="24" height="56.0994"/>
+  <object id="163" template="../../../../common/maps/obj/collision.tx" x="470" y="35.1173" width="24" height="56.0994"/>
+  <object id="164" template="../../../../common/maps/obj/collision.tx" x="419" y="115.117" width="24" height="56.0994"/>
+  <object id="165" template="../../../../common/maps/obj/collision.tx" x="469.667" y="113.451" width="24" height="56.0994"/>
+  <object id="166" template="../../../../common/maps/obj/collision.tx" x="420.333" y="196.117" width="24" height="56.0994"/>
+  <object id="167" template="../../../../common/maps/obj/collision.tx" x="471" y="194.451" width="24" height="56.0994"/>
+  <object id="168" template="../../../../common/maps/obj/collision.tx" x="338.5" y="34.9503" width="44.75" height="10.8494"/>
+  <object id="169" template="../../../../common/maps/obj/collision.tx" x="242.875" y="34.0753" width="44.75" height="10.8494"/>
+ </objectgroup>
+</map>

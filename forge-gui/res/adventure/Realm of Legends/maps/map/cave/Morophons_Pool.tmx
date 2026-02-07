@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="84">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Mutavault&quot;, &quot;Pygmy Hippo&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzr42Rg6BvFVMEPGKhn1jFWCF7ATpy9lNoNswsfprafibETl92U2EusndjsJtdeUu1EthcWv6TaTY6duOymt73khDU17KRXHGOzk5ppGmQWLjvb0NIUNcstXBjdvjY62jWQfqWlPynBADEUPkU=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNlVkKwjAQhgcqmOYaxeXJep2qeB89gp7Jc4jWNx9aFcEZ2mAap2lSovjDUBgy/WbJAvCpkwDYxE07CmbhF0Tsiax4U/kbZiidMecR5nxhesX5bFpGAGu0VdS9dizfczI5iWMPFa+seQV+r6IyWx6KvY2bfi4Xjll21FdY2LRXzH2p+mCr++HQ0y62KdsMSC616np6rG2bgS+T5FOzYpvn1LW/ujKMufeI03XD+N0AYOH4nxBMk6+zMyYf8u0H4ZhKM5xBWttctvv+SXRf+t6LIaTOS9JyV3OiXHNRxeR1TDr0Z+tvqwvTfIeJf+jB1dn0jxfB+ECv
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy9lT0OwjAMhV0h8VOJDcHEEeAcXKadKKwcCDExwS24Q3cO0IFY5SmWFYe0BT4pSvoTPzt9SYmIqjlRmRPtXQ92ZHOe+fHx3T8mRMuMaOXaOvP3Q0idrui4fH11ejfX7pkdv8jbvszTtRBHz+H6Q/U1o7bntQBVpFb5Xmy9JVIXc6ArKVTOqfH7kvJNpW/6ghihmsEhkEs9XNrUhd4QX3+iNrT/gazL2j/Sy0NBLFlvlZDDt2Bd9tli017rvfRLXdaErgT7F/4PeZy5jP14K/J+Tv1YzuV42lddfcyaujExv1rPdF2hfYv8QrrWORc7KyWWt+R954cTNz1m4NPYWac1rPXW/46YrgViy3VlP78AYU5B7g==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="280.333" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/treasure.tx" x="254.063" y="34.9616">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Keen Duelist&quot;,
+  &quot;sourceDeck&quot;: &quot;decks/rewards/Sheldon_SLD.dck&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Teferi's Protection&quot;,
+  &quot;sourceDeck&quot;: &quot;decks/rewards/Sheldon_SLD.dck&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Eladamri's Vineyard&quot;,
+  &quot;sourceDeck&quot;: &quot;decks/rewards/Sheldon_SLD.dck&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Greater Good|SLD&quot;,
+  &quot;sourceDeck&quot;: &quot;decks/rewards/Sheldon_SLD.dck&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Inkshield|SLD&quot;,
+  &quot;sourceDeck&quot;: &quot;decks/rewards/Sheldon_SLD.dck&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Sol Ring&quot;,
+  &quot;sourceDeck&quot;: &quot;decks/rewards/Sheldon_SLD.dck&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Command Tower&quot;,
+  &quot;sourceDeck&quot;: &quot;decks/rewards/Sheldon_SLD.dck&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="54" template="../../../../common/maps/obj/enemy.tx" x="272.296" y="136.571">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Abundant Countryside|ECC&quot;, &quot;Runed Stalactite|LRW&quot;, &quot;Birthing boughs|MH1&quot;, &quot;Three Tree Mascot|FDN&quot;, &quot;wayfarer's bauble|5DN&quot;]}"/>
+    <property name="enemy" value="Morophon"/>
+    <property name="speedModifier" type="float" value="15"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="61" template="../../../../common/maps/obj/enemy.tx" x="249.188" y="53.5002">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Keen Duelist|SLD|[828]&quot;, &quot;Eladamri's Vineyard|SLD|[1692]&quot;, &quot;Command Tower|SLD|[1697]&quot;, &quot;Sol Ring|SLD|[1696]&quot;]}"/>
+    <property name="enemy" value="Sheldon"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/manashards.tx" x="209.909" y="81.5884"/>
+  <object id="73" template="../../../../common/maps/obj/collision.tx" x="-16" y="-16" width="16" height="304"/>
+  <object id="74" template="../../../../common/maps/obj/collision.tx" x="480" y="-16" width="16" height="304"/>
+  <object id="75" template="../../../../common/maps/obj/collision.tx" x="0" y="-16" width="480" height="16"/>
+  <object id="76" template="../../../../common/maps/obj/collision.tx" x="0" y="272" width="480" height="16"/>
+  <object id="77" template="../../../../common/maps/obj/enemy.tx" x="176" y="134.5">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Questing Phelddagrif|PLS&quot;, &quot;Bull Hippo|POR&quot;]}"/>
+    <property name="enemy" value="Phelddagrif"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="70"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="78" template="../../../../common/maps/obj/dialog.tx" x="184.167" y="241.25" width="65.6667" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A beautiful oasis shimmers ahead, with two very strange creatures lounging in its waters. Behind them, a giant of a man towers, the very essence of command.
+
+Your manasight stone glows, sensing the power of the legends here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="79" template="../../../../common/maps/obj/dialog.tx" x="238.667" y="72.5" width="36.6667" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;As you approach the giant before you, you feel a deep sense of reverence, as if somehow he is the one who made your entire journey possible.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="80" template="../../../../common/maps/obj/scroll.tx" x="17.5" y="31.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Questing Phelddagrif&quot;, &quot;editions&quot;: [ &quot;pls&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="81" template="../../../../common/maps/obj/scroll.tx" x="401" y="29">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Amoeboid Changeling&quot;, &quot;editions&quot;: [ &quot;lrw&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

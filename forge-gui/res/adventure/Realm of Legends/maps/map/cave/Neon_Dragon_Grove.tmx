@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="137">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;The dragon-kami reborn&quot;, &quot;The Modern Age&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon.tsx"/>
+ <tileset firstgid="16385" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="1" name="Collision" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzFVkFSwzAMNKS0Tk4MpH1SPgKlTQ85AV+M23JkgOdgT63JZrGdhMzAQRPHsbrSSiu3ypVaFEpV+f9Zba3VSq3+OI6TxbwpLs+ztzk5sI3BdU/JX9v1zq6zott/svbgayR7Ys7nqLu18e+pONnHYTZ2vZ+QJ8bn1mf4PcaqAvtouxn81hQP+2SJfgqdn4KLPMZ8hdsm79d6iiZS32O5hDAZV2LnfeN7ItU/8p19RUfcpxz3KsDDkP4OgRhOejgnObfwfYo6Gttb/FvMt3vn+cXch/gwuh9z7FwoZtQizu8YJvaSi+26uGCjliWWLfgYnxfOIMnVwHfOQ86IBrhWMS3iTHH2CDwdfF/XeVdTnJ+Ih/0/RkOp2BCX9amp5sjRHNzY+dprAfnEmmfFzztlT7Uce88yLs9ZrLXUCLXpzm7zrh4N+VxFuELcMXM2Zh+lUp/Wvsq0fws9LHvI41Tc57VSL9Ze1+n7WPocOTUz8r3bKHVvrdyk+x71Knvv9n1JHMi8lGfoP8gUC92Bt16vy0BfjeFgaIYKZkv5Ym6/wQ3dc66eb7qfJ2sGZ2dIRzhXUVOiW9n/BopaHa4=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJyVVstuhDAMDFvoBn6zgrIc+o29VFC2H9VYZKSJcUL2YAHB8djjR9IOznVBHr1zb+HZBnn644l1LWv4/+vTNeyFsE3Yk6dIye49/NsM+7DFe0V/86l+zgbW9R759mH9qz/k0/BL+6j1sbYbvIEXPP+CzvuQ2tgNTjTHY3/WHzN7r3zOxToZwjXBOS1hrtHvpT9j1nB8Jcgh8oz3yeCqxHGpvrhOUCvMBWq6JdxF4YnObUjt6NrTdWvVBf7pnpiM3M6GLyyoPejpukL9ck3rnmuGtN6lpmfiUL4tbI4H+5+0JvEt5Cdz00S/0D/gCu+auxIm4vl2Bx734x5zhnzzXvy34uN1xvzozzNPcPVcFEzR5frTec3lCn526lvXt+DqPhJeb1HXRT52FQf7mushsQ0p9e09xnmLnGMWLHEu1PTpK7jIAXwXPc5PQ7zVzh7uQwsXdtk3EWAg1ho86fGN/CzlEvVj1fpq2LjCtfLNuGITceUwOcerr8PF7M3xrPvSwsQMAXc154k173S8PGdmsoG5hb7UPV+a9bLnx9l6m8/fFZBTnqE4J/C0Zph1HvLMGEnHurPp+YJzsTP443th6e4HDl/tfwifIaV+zeWhth/1fl2PfFdgn/i7GdJ7MnQs/y3O5f0fDYxLww==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="25">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJydVk1uEzEUdpqkmQxSF5AGOAMSYqYnSNM0SCAugVCbLroCJGAVRDkEV0DqGagqkbTpGpCADSfhfdhf/MaxJxGWPo3Hfs/f+/ObGewZM4igrRDbXwet19lA/qy0ciOH5n9wUr9VWow3OAc6kGsUxmwJhnsW22UVsXPaSp9j0rUYJrhHpdeB3EA49wWzzJgsN+ZangvBlsyvMm8L43LontQP0Sji3KOyqjMVufeFqYxvPWO+C3700nPqt0S3LdgurJ0D58PQ2afjC/lL2f8aYOb4X+4a80rwejc9J++B6IwEh+DPrR+N3M4HyJXKySyL55L5ut035o6g10/PyftBeM4EH1WujhnL0uYF5/6UGP0S/O5Zm1gT1MHQMjcPPfQ6eevycFFan3H2G4nRW8E7FysOcI7F5s87VRnNG+oCdXk4cT435ey7EqN7gvv9qp/gJK+W0byhLlCXB/g6df6i5sL4nHY976WrL577rLS2aGiZJ7dW8WnH5xeA38eR+Nxknrepap4IebVMM/d1wgHeeWbze1F6GfitY4L1ltsbuvp7XHiE/MNE39C86D847yjYw1i4PeqNXc/EPMZLdAqLVC2Dl+9hLDCYa827H+GlHO/cC8F5P13L4OX7un5HXtbMF+F40LFcXMNAjtCPzmt6Cnj5nrJN2zB7JLnGd4O137G50GvsgeDNVP5Qs8gp84sYhXWk59oGzfu8a3n/1axbY11OXJxxD8ira5a2IR+49xio707un9oGzXvkeK+Uv3V9MTU/XdNLaTM5YC9423mVd5NvlZ7jfq77pumYTiJxruuLdf1y3TdNc8yzeJyXuSzqQVnewT+NVWD9aWlBjkW2GueGOg+9spUAe+gs6EsxLHmV3jLO/EdVvOiVBwmwh57U8IW8uveSl2vTwvsxz/ydYCzBg/rdzu067vdfMuZc3g==
+  </data>
+ </layer>
+ <layer id="7" name="ClutterAbove" width="30" height="25">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBheoE0Vwe5Uxa2O2kBFjYHhlxAEq6vRz15qARUc4uvEUDEtALod2DA+gMvt1AJHSRQfaABzF6MhplyXJnY9uMRJBaC4cMRiLz1AI5XtncVHXfMosRdbXKIDSvMBNnvJjUtK3YIel6TmNfYBSoPExBMtAL54omU5RU6eozRtgMLY24hCQ8gAjgNkbyON7CUmXZCSnqmZ9kkpd0BqDzBAsAZUjNw0T0p6bkSy9wCZ9iEDYtwMUwMAgv0muw==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="193.5" y="399" width="48" height="30">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/enemy.tx" x="384.873" y="280.412">
+   <properties>
+    <property name="enemy" value="Junji"/>
+    <property name="threatRange" type="int" value="10"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/enemy.tx" x="152.761" y="70.78">
+   <properties>
+    <property name="enemy" value="Ao"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/enemy.tx" x="281.501" y="232.083">
+   <properties>
+    <property name="enemy" value="Kairi"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="89" template="../../../../common/maps/obj/booster.tx" x="119.268" y="70.0918">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;NEO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NEO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NEO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/collision.tx" x="-16" y="-16" width="512" height="16"/>
+  <object id="91" template="../../../../common/maps/obj/collision.tx" x="-32.4098" y="400.102" width="512" height="16"/>
+  <object id="92" template="../../../../common/maps/obj/collision.tx" x="-16" y="0" width="16" height="410.954"/>
+  <object id="93" template="../../../../common/maps/obj/collision.tx" x="480.265" y="-2.64674" width="16" height="418.1"/>
+  <object id="94" template="../../../../common/maps/obj/enemy.tx" x="168.146" y="232.343">
+   <properties>
+    <property name="enemy" value="Kura"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/enemy.tx" x="237.586" y="144.178">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Enormous Energy Blade|NEO&quot;, &quot;Weaver of Harmony|NEO&quot;, &quot;Experimental Synthesizer|NEO&quot;, &quot;Era of Enlightenment|NEO&quot;, &quot;Moonsnare Prototype|NEO&quot;]}"/>
+    <property name="enemy" value="Go-Shintai"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="99" template="../../../../common/maps/obj/enemy.tx" x="132.088" y="330.667">
+   <properties>
+    <property name="enemy" value="Atsushi"/>
+    <property name="threatRange" type="int" value="10"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="102" template="../../../../common/maps/obj/scroll.tx" x="373" y="50">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Eater of Virtue&quot;, &quot;editions&quot;: [ &quot;neo&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="103" template="../../../../common/maps/obj/dialog.tx" x="177.333" y="306.25" width="80" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Tall, old growth bamboo lines the grove ahead, interspersed with younger violet trees, bred with magic and technology to shimmer in unnatural patterns. The whole area ahead of you is a similar fusion of old and new, technology and magic. But it is not empty - powerful dragon spirits lurk among the leaves.
+
+Your manasight stone glows, sensing the power of the legends here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="104" template="../../../../common/maps/obj/scroll.tx" x="32.667" y="187.167">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Secluded Courtyard&quot;, &quot;editions&quot;: [ &quot;neo&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="105" template="../../../../common/maps/obj/booster.tx" x="456" y="279.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;NEO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NEO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NEO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="106" template="../../obj/treasure.tx" x="87.5" y="392.5">
+   <properties>
+    <property name="reward">[{
+    &quot;editions&quot;: [ &quot;NEC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="107" template="../../../../common/maps/obj/collision.tx" x="160.667" y="240.283" width="32.6667" height="156.1"/>
+  <object id="108" template="../../../../common/maps/obj/collision.tx" x="239" y="243.95" width="32.6667" height="156.1"/>
+  <object id="109" template="../../../../common/maps/obj/collision.tx" x="180.333" y="61.2833" width="137.333" height="50.7667"/>
+  <object id="110" template="../../../../common/maps/obj/collision.tx" x="178.667" y="111.283" width="47.9997" height="48.1"/>
+  <object id="111" template="../../../../common/maps/obj/collision.tx" x="273.333" y="111.283" width="47.9997" height="48.1"/>
+  <object id="112" template="../../../../common/maps/obj/collision.tx" x="303.333" y="159.283" width="33.333" height="48.1"/>
+  <object id="113" template="../../../../common/maps/obj/collision.tx" x="161.334" y="163.95" width="31.333" height="41.85"/>
+  <object id="114" template="../../../../common/maps/obj/collision.tx" x="355.333" y="113.283" width="89.333" height="48.1"/>
+  <object id="115" template="../../../../common/maps/obj/collision.tx" x="338" y="205.283" width="89.333" height="48.1"/>
+  <object id="116" template="../../../../common/maps/obj/collision.tx" x="272.667" y="287.283" width="208" height="48.1"/>
+  <object id="119" template="../../../../common/maps/obj/collision.tx" x="-0.6665" y="239.283" width="96.6663" height="48.1"/>
+  <object id="120" template="../../../../common/maps/obj/collision.tx" x="94.6668" y="253.283" width="47.9997" height="48.1"/>
+  <object id="121" template="../../../../common/maps/obj/collision.tx" x="16.3335" y="303.95" width="93.9997" height="48.1"/>
+  <object id="124" template="../../../../common/maps/obj/collision.tx" x="65.3335" y="159.95" width="47.9997" height="48.1"/>
+  <object id="125" template="../../../../common/maps/obj/collision.tx" x="30.0001" y="112.617" width="47.9997" height="48.1"/>
+  <object id="126" template="../../../../common/maps/obj/collision.tx" x="63.8335" y="81.1166" width="96.833" height="30.7667"/>
+  <object id="127" template="../../../../common/maps/obj/collision.tx" x="360.788" y="72.8591" width="30.9088" height="28.8273"/>
+  <object id="128" template="../../../../common/maps/obj/collision.tx" x="415.637" y="55.95" width="16.5452" height="28.8273"/>
+  <object id="129" template="../../../../common/maps/obj/collision.tx" x="464.455" y="80.6773" width="16.5452" height="44.4637"/>
+  <object id="130" template="../../../../common/maps/obj/collision.tx" x="462.455" y="143.95" width="16.5452" height="44.4637"/>
+  <object id="131" template="../../../../common/maps/obj/collision.tx" x="449.727" y="208.435" width="29.8785" height="48.797"/>
+  <object id="132" template="../../../../common/maps/obj/collision.tx" x="-0.6665" y="128.408" width="16.9997" height="78.1833"/>
+  <object id="133" template="../../../../common/maps/obj/collision.tx" x="32.1668" y="200.242" width="16.9997" height="27.5166"/>
+  <object id="134" template="../../../../common/maps/obj/collision.tx" x="110.833" y="138.908" width="16.9997" height="27.5166"/>
+  <object id="135" template="../../../../common/maps/obj/collision.tx" x="95.5001" y="41.2417" width="16.9997" height="27.5166"/>
+  <object id="136" template="../../../../common/maps/obj/collision.tx" x="288.167" y="248.908" width="16.9997" height="27.5166"/>
+ </objectgroup>
+</map>

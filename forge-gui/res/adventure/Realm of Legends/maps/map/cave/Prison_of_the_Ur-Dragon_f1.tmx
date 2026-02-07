@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="91">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Dragonbroods' Relic&quot;, &quot;Maelstrom Nexus&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/buildingsbosses.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyL5mVg2MVDXxwFtFMWSNMbSPOM2jtq76i9o/aO2jtqL6q9e4G4npt+dtYC7doDtHMnneteEN4NxAD/oTSv
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzr5GRg6BzFo3gUj+JRPIpH8YjAAGRZIuw=
+  </data>
+ </layer>
+ <layer id="7" name="Floor" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJz7w8TA8GcUj+JRPIpH8SgexSMCAwCWUPoU
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMArIBwcNIDhEn4EhFIjD9OlnJwgXAO0rBOIiOtvbA7SvF4j76GAvNvthmFQAACDpEd4=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="77" template="../../../../common/maps/obj/collision.tx" x="-17.3333" y="-14.6667" width="512" height="16"/>
+  <object id="78" template="../../../../common/maps/obj/collision.tx" x="-22.6667" y="272" width="512" height="16"/>
+  <object id="81" template="../../../../common/maps/obj/collision.tx" x="481.333" y="-13.05" width="16" height="294.1"/>
+  <object id="82" template="../../../../common/maps/obj/collision.tx" x="-16" y="-11.05" width="16" height="294.1"/>
+  <object id="83" template="../../../../common/maps/obj/enemy.tx" x="243.222" y="69.2578">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;With a roar that somehow shakes the very fabric of space itself, the progenitor of all dragons falls back into the void, vanishing from sight.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Haven of the Spirit Dragon|DTK&quot;, &quot;Maelstrom of the Spirit Dragon|TDM&quot;, &quot;Opal Palace|C13&quot;, &quot;Call the Spirit Dragons|TDM&quot;, &quot;Dragon Tempest|DTK&quot;, &quot;Dragon's Hoard|M19&quot;]}"/>
+    <property name="enemy" value="The Ur-Dragon"/>
+    <property name="speedModifier" type="float" value="60"/>
+    <property name="threatRange" type="int" value="80"/>
+   </properties>
+  </object>
+  <object id="84" template="../../../../common/maps/obj/dialog.tx" x="-11.3391" y="185.315" width="499.864" height="20.858" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The portal leads to a seemingly endless starry void. Dominating the distance is a dragon of a size that boggles the mind, making a normal dragon look like a tiny bird in comparison. You're not sure how killing such an opponent is possible, but you didn't come this far to let something being impossible stop you.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="85" template="../../../../common/maps/obj/entry_up.tx" x="235" y="226.542" width="31.3333" height="21.3333">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="86" template="../../../../common/maps/obj/treasure.tx" x="241.879" y="21.697">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 8,
+  &quot;rarity&quot;: [ &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;black&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="87" template="../../../../common/maps/obj/treasure.tx" x="299.402" y="22.9697">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 8,
+  &quot;rarity&quot;: [ &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;green&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="88" template="../../../../common/maps/obj/treasure.tx" x="271.583" y="22.0606">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 8,
+  &quot;rarity&quot;: [ &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;red&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="89" template="../../../../common/maps/obj/treasure.tx" x="175.75" y="21.1515">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 8,
+  &quot;rarity&quot;: [ &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;white&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/treasure.tx" x="208.424" y="20.6667">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 8,
+  &quot;rarity&quot;: [ &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;blue&quot; ]
+}]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="90">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Obelisk of Alara&quot;, &quot;Terramorphic expanse&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx"/>
+ <tileset firstgid="28319" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <layer id="8" name="toggle" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgwE480EwpWootRfGxyZGS4DN3sEIpnHS1vzB7v9RQD54rMnA8EST/vb+B9mphV1OlZ1+7njESNheWruHnv4dDPaOglEwnMA01oF2wSgYBcMXAABymAsk
+  </data>
+ </layer>
+ <layer id="6" name="Collision" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzdlzsOwjAMhiuWErEgIaRegIWRQ3SFU/QA0HuwIMSU43AedhaUwcJx/jyaBAnVkkWUUH92bBfTNPOWxSr/2V7FlXOklvBS/EDx5XB37VeNPI72Hqlmfr2WZVzJNNKd3DPJ3ba2nZJ4Qz5JLslV4fxSPlD+kP2pXK1sJq1RXaDcIZVsrdwzzeLtxTqXi+JF+8Srxb2ruJrvoV5GvTmwdYyF7t4n6B2Swg3xUtixdxdxQ7HW4sp4kX3aQz6lsGV+Odd8Dp54npt4rCH2r/rIp2TXV8//xE3JZS6X7p73Mc8PytsUbqieZV0j+z4/cnoqJqiHYzG/zy5z6qzj61/EPYwub18wY3Guzyd5r2PF+UpyJft2qculOu/W7hn6jUPzaw0u6k3UozVmaCOImyol/xfmIB982Gtw
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztlrFqAkEQhodt9IxgQso0NqmDQezS5lFsD3I2tnmAEA1cGdLmISz1AUydvIKFZZrsoMuN687dzJ4EDvzh42B3me9mD9c1FwDmTKN5TAo0azFfpgCT78dxns4hmzbAXQfgw9b5TOp5/eTMOGZu5172aL0Ire17pF7H0Mi/S5mnzPse8L4Ke0VGhq+NXs5N+8VQL6aOt6zn0D5rvOOEx+93cXPMslPMt7o6byjjwB6HvHlyiPT7ntIr6VPrvW39r9fV47yYWG+IdfvwPTgvjtN9iTk3qsJ5XWLOq+deQWy03tU1wNa+d/8y3hnrpU+asjM6FKn3p7/zOTT5Tu0eTW2NtJ43FO6/YZYB3E8Afp8ABva5tswzuZf26rv9M8EPOh/S3RO56sqc9I5Q5fXdzuU45T2nqmfnfMvivdwa6vXvdm7NRFhLA94L8EzS/Dab7G0yf7Ekrcw=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJyllz1vE0EQhscHUrgPlCBkxwkFIGJaJGRF1BTUJG0aKsogoSA7KAUfEiVCFJCKDiR+BFDw8QOwmwRDwV+gpGFf7Q43NzfnW8NIr87r25nndnZ39m6UE/ULouOMaN1d77v2PDsK/cZ5qTYf6btWeHWdek7fM6/VYr7vyDFmWemDa5uP9B0Hf2kvOkQvhQ47dd9uJMeKddCQn2FC9CgvtZnEjcMyKxZz+8X8vh+XvNjwe5LU/2fDvSuZ18TgIlc/snqeNfeyi31VjPnwZl3ntvw99LveI3qaer1N7dxhjvdzv8a+Bf7XxD/nZhjTJ8Ht7zht1bW+Y3OhLAgxp4KL+cWe2FfzjHEOghbhPk+rXOhZWo19ELizsHdu1aerYm1cGMbL1sTlPPcDs427uu36Glrbtrm/Tvmr5vI+xLpmLsvatzDM070TZXvP/R5cqgt9PmdeE7UXk9wL69ra47fTumB6T1tc2ceKDS7Gbe1xi1uc9IrlYl0ifzo27x/NRd//4f7szOdynYzlxub5770GLtd3rhcszWW7ZtTrmDzL2FORZ5isW5PE1nRBrjSuzeO8rFNH6syH38Plqt9j1Z5n1vPBRqJOMXMmznxwz68QXRC6uBLPbbJRqFPI60FeZcJQny1uzHk8WKpqQ5yX3aJ8pxnl9rlgcRHnlap7bc+woc5prlfWuxy47xznyXI8dyjWH2yi2porc8w1jfMp2W15HoZ7N+4Q/b5L9GaXHpwJtVC+qzFXzquuH1/OevZ7pw8t6wq+6Wmi17u+vZfb7xvM1b6aO1Dzo9t6vGxNXFknmrjW/Oi2NjmvTe9Xej3petm0/2NMx8I4Y79JYPxtoXOziOlvmxgu19X+P7I1U9eoWPaxsS7afHtBiMFj/QNqHvUt
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy9lkFO3TAQhv1CpQpIsgBV4vUAhSCVBUK9QA/QskagJx5HYIm6LbS0u1Ku0Rs8Ib0egNd9JWCJ2CDBEmZk/8owySRxgf7SyJZj+5tx7LGdc+4ydW4xd+4wc7Vaom9Fgx3QuP3Ml9YcdfoSxi3n3cdov3gsyi5qi/W5VBfr735ZP+t5a5LVZ/t1M1fGyn0HZDtk75LqnDObzh1/8KXmcv9JsLWkGoOU/ifD4ONY9X+1Hvwk3sJHX0qtJp4LMXcQ5tppiFtqklTbFjZ8mRIvI8sN7g3Vb8lORewxWjX6HxLvG9n3lnjTF97WIrmW0i2Klyzfqn5j7qhfMp+C+4P+76/ZartsY+77lZLJ9Riu3JcT9Z/03qnrhz67U1UufLK4rK9z9D/nfP1t+MYxsIH7uXDunOyi8HUti6vXjs8bc0+oXszTGZu3fcWcd8xbLtvhF/oMxTmSXBjyC+KdzryxTsQ4zf2UPSzr4h2r/QYmfBqEPMXraq2znHNPsCyuzB/gXqUlG0K8cp1HIX/9UfuK9bcozYqXBSbfRW/ykq25Wrq97oywf3JNpMBcDHc22JauX9ZzT41zZIm5uP+WcvudAB5krUNXgQuWvgstvrV+MZL3n/U+0fG2Sfv1GD9j2RDOeUx+/tnzdqzeLm3+j8Rb4ahXztNF2yp/SLXtq2mxR2S+sN46WkOVL1mjftx+xvp2feNAY8Gx7sKmf8ff9BsNumzIFU8t5Ffkq/8t5CuI/WjKlVKT5GEZy5U5Crkjhv8vAucea76UYQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="210" y="447.167" width="48" height="22.75">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="52" template="../../../../common/maps/obj/gold.tx" x="338" y="89.5"/>
+  <object id="53" template="../../../../common/maps/obj/enemy.tx" x="278.5" y="214.5">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Crumbling Necropolis|ALA&quot;, &quot;Demon's Herald|ALA&quot;, &quot;Executioner's Capsule|ALA&quot;, &quot;Unscythe, Killer of Kings|ARB&quot;, &quot;Grixis Grimblade|ARB&quot;]}"/>
+    <property name="enemy" value="Sedris"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="54" template="../../../../common/maps/obj/enemy.tx" x="188.501" y="219.083" width="16" height="20">
+   <properties>
+    <property name="enemy" value="Mayael"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="55" template="../../../../common/maps/obj/enemy.tx" x="348.333" y="129.167">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seaside Citadel|ALA&quot;, &quot;Angel's Herald|ALA&quot;, &quot;Angelic Benediction|ALA&quot;, &quot;Dispeller's Capsule|ALA&quot;, &quot;Bant Sureblade|ARB&quot;]}"/>
+    <property name="enemy" value="Rafiq"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../common/maps/obj/enemy.tx" x="172.167" y="342.833" width="16" height="20">
+   <properties>
+    <property name="enemy" value="Kresh"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="57" template="../../../../common/maps/obj/enemy.tx" x="334.833" y="346.667" width="16" height="20">
+   <properties>
+    <property name="enemy" value="Sen Triplets"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/gold.tx" x="86.333" y="282.667"/>
+  <object id="60" template="../../../../common/maps/obj/manashards.tx" x="376.75" y="362"/>
+  <object id="61" template="../../../../common/maps/obj/manashards.tx" x="248.75" y="89"/>
+  <object id="62" template="../../../../common/maps/obj/manashards.tx" x="170.25" y="89.75"/>
+  <object id="63" template="../../../../common/maps/obj/booster.tx" x="280" y="121">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ALA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ALA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ALA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="65" template="../../../../common/maps/obj/gold.tx" x="319.75" y="182"/>
+  <object id="72" template="../../../../common/maps/obj/enemy.tx" x="208.203" y="125.343">
+   <properties>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Kaleidostone|CON&quot;, &quot;Armillary Sphere|CON&quot;, &quot;Manaforce Mace|CON&quot;, &quot;Maelstrom Nexus|ARB&quot;, &quot;Rupture Spire|CON&quot;, &quot;Exotic Orchard|CON&quot; 
+]}</property>
+    <property name="enemy" value="Child of Alara"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="73" name="Ward" type="dialog" gid="28296" x="199.5" y="177.75" width="48" height="16">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;text&quot;: &quot;A translucent, shimmering barrier blocks your path.&quot;,
+		&quot;options&quot;: [
+			{ &quot;name&quot;: &quot;Leave&quot; },
+			{
+				&quot;name&quot;: &quot;Place your hand on the barrier&quot;,
+				&quot;text&quot;: &quot;The barrier fades into infinity before you.&quot;,
+				&quot;action&quot;: [
+					{ &quot;deleteMapObject&quot;: -1 },
+					{ &quot;deleteMapObject&quot;: 89 }
+				],
+				&quot;condition&quot;: [
+					{
+						&quot;getMapFlag&quot;: {
+							&quot;key&quot;: &quot;enemiesDefeated&quot;,
+							&quot;op&quot;: &quot;&gt;=&quot;,
+							&quot;val&quot;: 5
+						}
+					}
+				]
+			}
+		]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="74" template="../../../../common/maps/obj/enemy.tx" x="328.864" y="233.818">
+   <properties>
+    <property name="enemy" value="Thraximundar"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="75" template="../../../../common/maps/obj/enemy.tx" x="352.5" y="173">
+   <properties>
+    <property name="enemy" value="Jenara"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/enemy.tx" x="325" y="389" width="16" height="20">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Arcane Sanctum|ALA&quot;, &quot;Sphinx's Herald|ALA&quot;, &quot;Courier's Capsule|ALA&quot;, &quot;Etherwrought Page|ARB&quot;, &quot;Esper Stormblade|ARB&quot;]}"/>
+    <property name="enemy" value="Sharuum"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="77" template="../../../../common/maps/obj/enemy.tx" x="91.5" y="322.5" width="16" height="20">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Savage Lands|ALA&quot;, &quot;Dragon's Herald|ALA&quot;, &quot;Where Ancients Tread|ALA&quot;, &quot;Jund Hackblade|ARB&quot;]}"/>
+    <property name="enemy" value="Karrthus"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="78" template="../../../../common/maps/obj/enemy.tx" x="92.5" y="225" width="16" height="20">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Jungle Shrine|ALA&quot;, &quot;Behemoth's Herald|ALA&quot;, &quot;Mayael's Aria|ARB&quot;, &quot;Armillary Sphere|CON&quot;, &quot;Naya Hushblade|ARB&quot;]}"/>
+    <property name="enemy" value="Uril"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="79" template="../../../../common/maps/obj/manashards.tx" x="89" y="189"/>
+  <object id="81" template="../../../../common/maps/obj/booster.tx" x="280" y="99">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;CON&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;CON&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;CON&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="82" template="../../../../common/maps/obj/booster.tx" x="280" y="148">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ARB&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ARB&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ARB&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="84" template="../../../../common/maps/obj/booster.tx" x="124.667" y="121">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ALA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ALA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ALA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="85" template="../../../../common/maps/obj/booster.tx" x="124.667" y="99">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;CON&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;CON&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;CON&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="86" template="../../../../common/maps/obj/booster.tx" x="124.667" y="148">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ARB&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ARB&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ARB&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="87" template="../../../../common/maps/obj/dialog.tx" x="205.151" y="402.071" width="52.697" height="20.858" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Five distinct areas pulsing with different tri-colored whirls of mana stand ahead of you. The architecture is distinctive of a plane, or series of planes, known as Alara.
+
+Your manasight stone glows brightly, sensing a truly mighty legend in this place.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="88" template="../../../../common/maps/obj/dialog.tx" x="194.151" y="161.571" width="61.697" height="14.358" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Beyond the barrier, a truly odd being can be seen clearly - what appears to be a massive baby formed entirely from energy. The idea of fighting it seems odd, but the raw power it emits means it seems quite dangerous indeed.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
