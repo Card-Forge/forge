@@ -158,17 +158,4 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
         changedProps.clear();
     }
 
-    /**
-     * Serialize only the changed properties (for delta sync).
-     * Does not clear the change flags - call clearChanges() separately after acknowledgment.
-     * @param ts the serializer to write to
-     */
-    public final void serializeChangedOnly(final TrackableSerializer ts) {
-        ts.write(changedProps.size());
-        for (TrackableProperty key : changedProps) {
-            ts.write(TrackableProperty.serialize(key));
-            key.serialize(ts, props.get(key));
-        }
-        // Note: Does not clear changedProps - that's done on acknowledgment
-    }
 }

@@ -2,6 +2,7 @@ package forge.gamemodes.net.server;
 
 import forge.gamemodes.net.GameProtocolHandler;
 import forge.gamemodes.net.IRemote;
+import forge.gamemodes.net.NetworkDebugLogger;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.gamemodes.net.ReplyPool;
 import forge.gui.interfaces.IGuiGame;
@@ -51,14 +52,14 @@ final class GameServerHandler extends GameProtocolHandler<IGameController> {
             // Handle resync request
             RemoteClient client = getClient(ctx);
             if (client != null) {
-                System.out.println("[DeltaSync] Resync requested by client " + client.getIndex());
+                NetworkDebugLogger.debug("[DeltaSync] Resync requested by client %d", client.getIndex());
                 IGuiGame gui = server.getGui(client.getIndex());
                 if (gui instanceof NetGuiGame) {
                     NetGuiGame netGui = (NetGuiGame) gui;
-                    System.out.println("[DeltaSync] Sending full state to client " + client.getIndex());
+                    NetworkDebugLogger.debug("[DeltaSync] Sending full state to client %d", client.getIndex());
                     netGui.sendFullState();
                 } else {
-                    System.err.println("[DeltaSync] WARNING: GUI is not NetGuiGame, cannot resync");
+                    NetworkDebugLogger.warn("[DeltaSync] GUI is not NetGuiGame, cannot resync");
                 }
             }
         }

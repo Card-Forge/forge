@@ -33,13 +33,6 @@ public class NetworkTrackableSerializer {
         return bytesWritten;
     }
 
-    /**
-     * Reset the byte counter.
-     */
-    public void resetBytesWritten() {
-        this.bytesWritten = 0;
-    }
-
     public void write(String value) throws IOException {
         if (value == null) {
             dos.writeInt(-1);
@@ -67,19 +60,9 @@ public class NetworkTrackableSerializer {
         bytesWritten += 1;
     }
 
-    public void write(long value) throws IOException {
-        dos.writeLong(value);
-        bytesWritten += 8;
-    }
-
     public void write(float value) throws IOException {
         dos.writeFloat(value);
         bytesWritten += 4;
-    }
-
-    public void write(double value) throws IOException {
-        dos.writeDouble(value);
-        bytesWritten += 8;
     }
 
     /**
@@ -101,19 +84,4 @@ public class NetworkTrackableSerializer {
         }
     }
 
-    /**
-     * Write a single TrackableObject reference as just its ID.
-     * The client will look up the object by ID in its Tracker.
-     */
-    public void writeObjectRef(TrackableObject obj) throws IOException {
-        dos.writeInt(obj == null ? -1 : obj.getId());
-        bytesWritten += 4;
-    }
-
-    /**
-     * Get the underlying DataOutputStream for direct access when needed.
-     */
-    public DataOutputStream getOutputStream() {
-        return dos;
-    }
 }

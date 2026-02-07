@@ -90,8 +90,8 @@ public class DeltaSyncUnitTest {
 
         DeltaPacket packet = new DeltaPacket(1L, deltas, new HashSet<>());
 
-        // Size should be: 8 (seq) + 8 (timestamp) + 4 (checksum) + 2*(4 + delta size)
-        int expectedMinSize = 8 + 8 + 4 + (4 + 100) + (4 + 200);
+        // Size should be: 8 (seq) + 4 (checksum) + 2*(4 + delta size)
+        int expectedMinSize = 8 + 4 + (4 + 100) + (4 + 200);
         Assert.assertTrue(packet.getApproximateSize() >= expectedMinSize);
     }
 
@@ -111,8 +111,9 @@ public class DeltaSyncUnitTest {
     public void testDeltaSyncManagerClientRegistration() {
         DeltaSyncManager manager = new DeltaSyncManager();
 
-        manager.registerClient(0);
-        manager.registerClient(1);
+        // Register clients via processAcknowledgment (the production path)
+        manager.processAcknowledgment(0, 0L);
+        manager.processAcknowledgment(1, 0L);
 
         // Both clients start at sequence 0
         Assert.assertEquals(manager.getMinAcknowledgedSequence(), 0L);
@@ -122,8 +123,8 @@ public class DeltaSyncUnitTest {
     public void testDeltaSyncManagerAcknowledgment() {
         DeltaSyncManager manager = new DeltaSyncManager();
 
-        manager.registerClient(0);
-        manager.registerClient(1);
+        manager.processAcknowledgment(0, 0L);
+        manager.processAcknowledgment(1, 0L);
 
         // Client 0 acknowledges sequence 5
         manager.processAcknowledgment(0, 5L);
@@ -151,26 +152,10 @@ public class DeltaSyncUnitTest {
     }
 
     @Test
-    public void testDeltaSyncManagerClientUnregistration() {
-        DeltaSyncManager manager = new DeltaSyncManager();
-
-        manager.registerClient(0);
-        manager.registerClient(1);
-        manager.processAcknowledgment(0, 5L);
-        manager.processAcknowledgment(1, 3L);
-
-        Assert.assertEquals(manager.getMinAcknowledgedSequence(), 3L);
-
-        // Unregister client 1
-        manager.unregisterClient(1);
-        Assert.assertEquals(manager.getMinAcknowledgedSequence(), 5L);
-    }
-
-    @Test
     public void testNeedsFullResync() {
         DeltaSyncManager manager = new DeltaSyncManager();
 
-        manager.registerClient(0);
+        manager.processAcknowledgment(0, 0L);
 
         // New client should not need resync initially
         Assert.assertFalse(manager.needsFullResync(0));
@@ -240,8 +225,8 @@ public class DeltaSyncUnitTest {
         // Simulate a scenario with multiple clients receiving deltas
         DeltaSyncManager manager = new DeltaSyncManager();
 
-        manager.registerClient(0);
-        manager.registerClient(1);
+        manager.processAcknowledgment(0, 0L);
+        manager.processAcknowledgment(1, 0L);
 
         // Simulate sending multiple delta packets
         for (int i = 1; i <= 5; i++) {
@@ -285,11 +270,11 @@ public class DeltaSyncUnitTest {
         DeltaPacket packet = new DeltaPacket(1L, deltas, removed);
 
         // Calculate expected size manually
-        // Header: 8 (seq) + 8 (timestamp) + 4 (checksum) = 20 bytes
+        // Header: 8 (seq) + 4 (checksum) = 12 bytes
         // Deltas: 3 objects * (4 byte ID + data length) = (4 + 100) + (4 + 200) + (4 + 50) = 362 bytes
         // Removed: 2 objects * 4 bytes = 8 bytes
-        // Total: 20 + 362 + 8 = 390 bytes
-        int expectedSize = 20 + (4 + 100) + (4 + 200) + (4 + 50) + (2 * 4);
+        // Total: 12 + 362 + 8 = 382 bytes
+        int expectedSize = 12 + (4 + 100) + (4 + 200) + (4 + 50) + (2 * 4);
 
         int approximateSize = packet.getApproximateSize();
 
@@ -297,8 +282,8 @@ public class DeltaSyncUnitTest {
             "Delta size calculation should match expected value");
 
         // Verify it's at least the minimum expected size
-        Assert.assertTrue(approximateSize >= 390,
-            "Delta packet should be at least 390 bytes, got: " + approximateSize);
+        Assert.assertTrue(approximateSize >= 382,
+            "Delta packet should be at least 382 bytes, got: " + approximateSize);
     }
 
     /**
@@ -316,12 +301,12 @@ public class DeltaSyncUnitTest {
         DeltaPacket packet = new DeltaPacket(1L, deltas, newObjects, new HashSet<>(), 0);
 
         // Expected size:
-        // Header: 20 bytes
+        // Header: 12 bytes
         // Delta: (4 + 50) = 54 bytes
         // New object 100: (4 + 4 + 150) = 158 bytes
         // New object 101: (4 + 4 + 200) = 208 bytes
-        // Total: 20 + 54 + 158 + 208 = 440 bytes
-        int expectedSize = 20 + 54 + 158 + 208;
+        // Total: 12 + 54 + 158 + 208 = 432 bytes
+        int expectedSize = 12 + 54 + 158 + 208;
 
         Assert.assertEquals(packet.getApproximateSize(), expectedSize,
             "Delta packet with new objects should match expected size");
@@ -457,8 +442,8 @@ public class DeltaSyncUnitTest {
         DeltaPacket packet = new DeltaPacket(1L, new HashMap<>(), new HashSet<>());
         int size = packet.getApproximateSize();
 
-        // Empty packet should just have header: 8 + 8 + 4 = 20 bytes
-        Assert.assertEquals(size, 20, "Empty delta packet should be exactly 20 bytes (header only)");
+        // Empty packet should just have header: 8 + 4 = 12 bytes
+        Assert.assertEquals(size, 12, "Empty delta packet should be exactly 12 bytes (header only)");
     }
 
     /**

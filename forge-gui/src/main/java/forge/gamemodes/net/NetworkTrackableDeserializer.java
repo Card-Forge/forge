@@ -69,19 +69,9 @@ public class NetworkTrackableDeserializer {
         return dis.readByte();
     }
 
-    public long readLong() throws IOException {
-        bytesRead += 8;
-        return dis.readLong();
-    }
-
     public float readFloat() throws IOException {
         bytesRead += 4;
         return dis.readFloat();
-    }
-
-    public double readDouble() throws IOException {
-        bytesRead += 8;
-        return dis.readDouble();
     }
 
     /**
@@ -198,13 +188,6 @@ public class NetworkTrackableDeserializer {
      */
     public Tracker getTracker() {
         return tracker;
-    }
-
-    /**
-     * Get the underlying DataInputStream for direct access when needed.
-     */
-    public DataInputStream getInputStream() {
-        return dis;
     }
 
     /**

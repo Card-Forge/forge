@@ -253,36 +253,32 @@ public final class FServerManager {
     public void updateSlot(final int index, final UpdateLobbyPlayerEvent event) {
         localLobby.applyToSlot(index, event);
 
-        // Check if this is a ready state change
         if (event.getReady() != null) {
-            // Count ready players and total players
-            int readyCount = 0;
-            int totalPlayers = 0;
-            for (int i = 0; i < localLobby.getNumberOfSlots(); i++) {
-                LobbySlot slot = localLobby.getSlot(i);
-                if (slot.getType() == LobbySlotType.LOCAL || slot.getType() == LobbySlotType.REMOTE) {
-                    totalPlayers++;
-                    if (slot.isReady()) {
-                        readyCount++;
-                    }
+            broadcastReadyState(localLobby.getSlot(index).getName(), event.getReady());
+        }
+    }
+
+    private void broadcastReadyState(String playerName, boolean isReady) {
+        int readyCount = 0;
+        int totalPlayers = 0;
+        for (int i = 0; i < localLobby.getNumberOfSlots(); i++) {
+            LobbySlot slot = localLobby.getSlot(i);
+            if (slot.getType() == LobbySlotType.LOCAL || slot.getType() == LobbySlotType.REMOTE) {
+                totalPlayers++;
+                if (slot.isReady()) {
+                    readyCount++;
                 }
             }
-
-            String playerName = localLobby.getSlot(index).getName();
-            if (event.getReady()) {
-                // Broadcast ready notification
-                broadcast(new MessageEvent(String.format("%s is ready (%d/%d players ready)",
-                    playerName, readyCount, totalPlayers)));
-
-                // Check if all players are ready
-                if (readyCount == totalPlayers && totalPlayers > 1) {
-                    broadcast(new MessageEvent("All players ready to start game!"));
-                }
-            } else {
-                // Broadcast no longer ready notification
-                broadcast(new MessageEvent(String.format("%s is not ready (%d/%d players ready)",
-                    playerName, readyCount, totalPlayers)));
+        }
+        if (isReady) {
+            broadcast(new MessageEvent(String.format("%s is ready (%d/%d players ready)",
+                playerName, readyCount, totalPlayers)));
+            if (readyCount == totalPlayers && totalPlayers > 1) {
+                broadcast(new MessageEvent("All players ready to start game!"));
             }
+        } else {
+            broadcast(new MessageEvent(String.format("%s is not ready (%d/%d players ready)",
+                playerName, readyCount, totalPlayers)));
         }
     }
 
@@ -458,36 +454,8 @@ public final class FServerManager {
                     }
                 }
 
-                // Check if this is a ready state change
                 if (updateEvent.getReady() != null) {
-                    // Count ready players and total players
-                    int readyCount = 0;
-                    int totalPlayers = 0;
-                    for (int i = 0; i < localLobby.getNumberOfSlots(); i++) {
-                        LobbySlot slot = localLobby.getSlot(i);
-                        if (slot.getType() == LobbySlotType.LOCAL || slot.getType() == LobbySlotType.REMOTE) {
-                            totalPlayers++;
-                            if (slot.isReady()) {
-                                readyCount++;
-                            }
-                        }
-                    }
-
-                    String playerName = client.getUsername();
-                    if (updateEvent.getReady()) {
-                        // Broadcast ready notification
-                        broadcast(new MessageEvent(String.format("%s is ready (%d/%d players ready)",
-                            playerName, readyCount, totalPlayers)));
-
-                        // Check if all players are ready
-                        if (readyCount == totalPlayers && totalPlayers > 1) {
-                            broadcast(new MessageEvent("All players ready to start game!"));
-                        }
-                    } else {
-                        // Broadcast no longer ready notification
-                        broadcast(new MessageEvent(String.format("%s is not ready (%d/%d players ready)",
-                            playerName, readyCount, totalPlayers)));
-                    }
+                    broadcastReadyState(client.getUsername(), updateEvent.getReady());
                 }
                 // Return after handling UpdateLobbyPlayerEvent to prevent duplicate processing
                 // by LobbyInputHandler which also calls updateSlot()

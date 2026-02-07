@@ -128,10 +128,4 @@ public class NetworkGameEventListener {
         }
     }
 
-    /**
-     * Get the current turn number.
-     */
-    public int getCurrentTurn() {
-        return currentTurn;
-    }
 }

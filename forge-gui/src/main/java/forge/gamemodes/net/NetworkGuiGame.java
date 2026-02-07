@@ -1,6 +1,5 @@
 package forge.gamemodes.net;
 
-import com.google.common.collect.*;
 import forge.game.GameView;
 import forge.card.CardStateName;
 import forge.game.card.CardView;
@@ -470,97 +469,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
             controller.requestResync();
         } else {
             NetworkDebugLogger.error("[DeltaSync] Cannot request resync: No game controller available");
-        }
-    }
-
-    /**
-     * Create a new TrackableObject from NewObjectData and register it in the Tracker.
-     */
-    private void createObjectFromData(NewObjectData data, Tracker tracker) throws Exception {
-        int objectId = data.getObjectId();
-        int objectType = data.getObjectType();
-        byte[] fullProps = data.getFullProperties();
-
-        // Log what type of object we're trying to create
-        String typeName = "Unknown";
-        switch (objectType) {
-            case DeltaPacket.TYPE_CARD_VIEW: typeName = "CardView"; break;
-            case DeltaPacket.TYPE_PLAYER_VIEW: typeName = "PlayerView"; break;
-            case DeltaPacket.TYPE_STACK_ITEM_VIEW: typeName = "StackItemView"; break;
-            case DeltaPacket.TYPE_COMBAT_VIEW: typeName = "CombatView"; break;
-            case DeltaPacket.TYPE_GAME_VIEW: typeName = "GameView"; break;
-        }
-
-        // Check if object of the SAME TYPE already exists
-        // Important: Use type-specific lookup to avoid ID collision between different types
-        // (e.g., CardView ID=1 vs PlayerView ID=1 are different objects)
-        TrackableObject existing = findObjectByTypeAndId(tracker, objectType, objectId);
-        if (existing != null) {
-            NetworkDebugLogger.debug("[DeltaSync] %s ID=%d already exists (hash=%d), applying properties as delta",
-                    typeName, objectId, System.identityHashCode(existing));
-            applyDeltaToObject(existing, fullProps, tracker);
-            return;
-        }
-
-        // Log when creating new object (especially important for PlayerView)
-        if (objectType == DeltaPacket.TYPE_PLAYER_VIEW) {
-            NetworkDebugLogger.warn("[DeltaSync] Creating NEW PlayerView ID=%d - this may cause identity mismatch!", objectId);
-        }
-
-        // Create the appropriate object type
-        TrackableObject obj = null;
-        switch (objectType) {
-            case DeltaPacket.TYPE_CARD_VIEW:
-                obj = new CardView(objectId, tracker);
-                tracker.putObj(TrackableTypes.CardViewType, objectId, (CardView) obj);
-                break;
-            case DeltaPacket.TYPE_PLAYER_VIEW:
-                obj = new PlayerView(objectId, tracker);
-                tracker.putObj(TrackableTypes.PlayerViewType, objectId, (PlayerView) obj);
-                NetworkDebugLogger.debug("[DeltaSync] Created NEW PlayerView ID=%d hash=%d", objectId, System.identityHashCode(obj));
-                break;
-            case DeltaPacket.TYPE_STACK_ITEM_VIEW:
-                obj = new forge.game.spellability.StackItemView(objectId, tracker);
-                tracker.putObj(TrackableTypes.StackItemViewType, objectId, (forge.game.spellability.StackItemView) obj);
-                break;
-            case DeltaPacket.TYPE_COMBAT_VIEW:
-                // CombatView uses ID -1 (singleton pattern)
-                obj = new forge.game.combat.CombatView(tracker);
-                // Register with the actual ID from the data
-                tracker.putObj(TrackableTypes.CombatViewType, obj.getId(), (forge.game.combat.CombatView) obj);
-                break;
-            case DeltaPacket.TYPE_GAME_VIEW:
-                // GameView is special - we already have one, update it
-                if (getGameView() != null) {
-                    applyDeltaToObject(getGameView(), fullProps, tracker);
-                    return;
-                }
-                break;
-            default:
-                NetworkDebugLogger.error("[DeltaSync] Unknown object type: %d", objectType);
-                return;
-        }
-
-        if (obj != null) {
-            // Apply all properties to the new object
-            applyDeltaToObject(obj, fullProps, tracker);
-
-            // Log with object name for easier identification
-            String objDesc = obj.getClass().getSimpleName() + " ID=" + obj.getId();
-            if (obj instanceof CardView) {
-                CardView cv = (CardView) obj;
-                String cardName = cv.getName();
-                if (cardName != null && !cardName.isEmpty()) {
-                    objDesc += " \"" + cardName + "\"";
-                }
-            } else if (obj instanceof PlayerView) {
-                PlayerView pv = (PlayerView) obj;
-                String playerName = pv.getName();
-                if (playerName != null && !playerName.isEmpty()) {
-                    objDesc += " \"" + playerName + "\"";
-                }
-            }
-            NetworkDebugLogger.debug("[DeltaSync] Created %s", objDesc);
         }
     }
 

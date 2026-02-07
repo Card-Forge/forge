@@ -52,42 +52,9 @@ public class NetGuiGame extends NetworkGuiGame {
         this.clientIndex = client.getIndex();
     }
 
-    /**
-     * Get the client index for this GUI.
-     * @return the client's player index
-     */
-    public int getClientIndex() {
-        return clientIndex;
-    }
-
     @Override
     protected boolean isServerSide() {
         return true; // NetGuiGame is the server-side GUI
-    }
-
-    /**
-     * Enable or disable delta sync mode.
-     * When disabled, falls back to sending full state on every update.
-     * @param enabled true to enable delta sync
-     */
-    public void setDeltaSyncEnabled(boolean enabled) {
-        this.useDeltaSync = enabled;
-    }
-
-    /**
-     * Check if delta sync is enabled.
-     * @return true if delta sync is enabled
-     */
-    public boolean isDeltaSyncEnabled() {
-        return useDeltaSync;
-    }
-
-    /**
-     * Get the delta sync manager for this game.
-     * @return the DeltaSyncManager instance
-     */
-    public DeltaSyncManager getDeltaSyncManager() {
-        return deltaSyncManager;
     }
 
     /**
@@ -202,30 +169,6 @@ public class NetGuiGame extends NetworkGuiGame {
         } catch (Exception e) {
             return 0;
         }
-    }
-
-    /**
-     * Enable or disable bandwidth logging.
-     */
-    public void setLogBandwidth(boolean enabled) {
-        this.logBandwidth = enabled;
-    }
-
-    /**
-     * Get bandwidth statistics.
-     * @return array of [totalDeltaBytes, totalFullStateBytes, packetCount]
-     */
-    public long[] getBandwidthStats() {
-        return new long[] { totalDeltaBytes, totalFullStateBytes, deltaPacketCount };
-    }
-
-    /**
-     * Reset bandwidth statistics.
-     */
-    public void resetBandwidthStats() {
-        totalDeltaBytes = 0;
-        totalFullStateBytes = 0;
-        deltaPacketCount = 0;
     }
 
     /**

@@ -96,14 +96,6 @@ public class NetworkByteTracker {
     }
 
     /**
-     * Get statistics array for delta sync.
-     * @return [deltaBytes, deltaPacketCount]
-     */
-    public long[] getDeltaStats() {
-        return new long[] { deltaBytesSent.get(), deltaPacketCount.get() };
-    }
-
-    /**
      * Reset all statistics.
      */
     public void reset() {

@@ -34,16 +34,6 @@ public final class NetworkPropertySerializer {
     private static final int MARKER_INLINE_OBJECT = 2;
     private static final int MARKER_SKIP = 3;
 
-    // Debug flag for verbose logging (uses NetworkDebugLogger)
-    private static final boolean DEBUG_CSV_SERIALIZATION = true;
-
-    // Convenience method for debug logging
-    private static void debugLog(String format, Object... args) {
-        if (DEBUG_CSV_SERIALIZATION) {
-            NetworkDebugLogger.debug(format, args);
-        }
-    }
-
     /**
      * Data holder for deserialized CardStateView.
      * Used to pass CardStateView property data to the caller for application.
@@ -245,11 +235,11 @@ public final class NetworkPropertySerializer {
                     propNames.append(", ...");
                 }
                 int totalBytes = nts.getBytesWritten() - startPos;
-                debugLog("[CSV-Serialize] CardStateView ID=%d state=%s: %d props (%s), %d bytes",
+                NetworkDebugLogger.debug("[CSV-Serialize] CardStateView ID=%d state=%s: %d props (%s), %d bytes",
                         csv.getId(), stateName, csvProps.size(), propNames, totalBytes);
             } else {
                 nts.write(0);
-                debugLog("[CSV-Serialize] CardStateView ID=%d state=%s: 0 props",
+                NetworkDebugLogger.debug("[CSV-Serialize] CardStateView ID=%d state=%s: 0 props",
                         csv.getId(), stateName);
             }
         }
@@ -495,7 +485,7 @@ public final class NetworkPropertySerializer {
                 propNames.append(", ...");
             }
             int totalBytes = ntd.getBytesRead() - startPos;
-            debugLog("[CSV-Deserialize] CardStateView ID=%d state=%s: %d props (%s), %d bytes",
+            NetworkDebugLogger.debug("[CSV-Deserialize] CardStateView ID=%d state=%s: %d props (%s), %d bytes",
                     csvId, stateName, propCount, propNames, totalBytes);
 
             // Return as CardStateViewData to be handled by applyDeltaToObject

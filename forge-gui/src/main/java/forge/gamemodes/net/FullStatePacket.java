@@ -12,7 +12,6 @@ public final class FullStatePacket implements NetEvent {
     private static final long serialVersionUID = 1L;
 
     private final long sequenceNumber;
-    private final long timestamp;
     private final GameView gameView;
     private final int stateChecksum;
 
@@ -23,17 +22,12 @@ public final class FullStatePacket implements NetEvent {
      */
     public FullStatePacket(long sequenceNumber, GameView gameView) {
         this.sequenceNumber = sequenceNumber;
-        this.timestamp = System.currentTimeMillis();
         this.gameView = gameView;
         this.stateChecksum = computeChecksum(gameView);
     }
 
     public long getSequenceNumber() {
         return sequenceNumber;
-    }
-
-    public long getTimestamp() {
-        return timestamp;
     }
 
     public GameView getGameView() {
@@ -65,15 +59,6 @@ public final class FullStatePacket implements NetEvent {
             hash = 31 * hash + gameView.getPlayers().size();
         }
         return hash;
-    }
-
-    /**
-     * Verify that a local game state matches this packet's checksum.
-     * @param localGameView the local game view to verify
-     * @return true if checksums match
-     */
-    public boolean verifyChecksum(GameView localGameView) {
-        return computeChecksum(localGameView) == stateChecksum;
     }
 
     @Override

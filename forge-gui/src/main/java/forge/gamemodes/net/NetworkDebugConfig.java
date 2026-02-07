@@ -99,11 +99,4 @@ public final class NetworkDebugConfig {
         return getPrefs().getPrefBoolean(NetworkDebugPreferences.NDPref.LOG_CLEANUP_ENABLED);
     }
 
-    /**
-     * Reload configuration from file.
-     * Useful for testing or if you want to allow config changes without restart.
-     */
-    public static void reload() {
-        prefs = new NetworkDebugPreferences();
-    }
 }

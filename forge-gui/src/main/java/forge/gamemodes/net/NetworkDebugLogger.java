@@ -6,7 +6,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -62,23 +63,23 @@ public final class NetworkDebugLogger {
     // Otherwise, all threads share a single default log file
     private static PrintWriter sharedFileWriter;
     private static final java.util.concurrent.ConcurrentHashMap<String, PrintWriter> suffixWriters = new java.util.concurrent.ConcurrentHashMap<>();
-    private static boolean sharedInitialized = false;
-    private static boolean enabled = true;
-    private static LogLevel consoleLevel = LogLevel.INFO;  // Default: show INFO and above on console
-    private static LogLevel fileLevel = LogLevel.DEBUG;    // Default: show DEBUG and above in file
+    private static volatile boolean sharedInitialized = false;
+    private static volatile boolean enabled = true;
+    private static volatile LogLevel consoleLevel = LogLevel.INFO;  // Default: show INFO and above on console
+    private static volatile LogLevel fileLevel = LogLevel.DEBUG;    // Default: show DEBUG and above in file
     private static final Object lock = new Object();
 
-    private static final SimpleDateFormat TIMESTAMP_FORMAT = new SimpleDateFormat("HH:mm:ss.SSS");
+    private static final DateTimeFormatter TIMESTAMP_FORMAT = DateTimeFormatter.ofPattern("HH:mm:ss.SSS");
 
     // Session identifier for correlating host/client logs
-    private static String sessionId = null;
+    private static volatile String sessionId = null;
 
     // Test mode flag - when true, log filenames include "-test" suffix
-    private static boolean testMode = false;
+    private static volatile boolean testMode = false;
 
     // Batch ID for correlating logs from the same test run
     // Generated once by the parent process and passed to all child processes
-    private static String batchId = null;
+    private static volatile String batchId = null;
 
     // Instance suffix for parallel test execution - allows each game instance to have its own log file
     // This is stored per-thread so parallel games don't interfere with each other's logging
@@ -133,34 +134,12 @@ public final class NetworkDebugLogger {
     }
 
     /**
-     * Enable or disable logging. When disabled, log() calls are no-ops
-     * but error() calls still go to System.err (not to file).
-     */
-    public static void setEnabled(boolean enabled) {
-        NetworkDebugLogger.enabled = enabled;
-    }
-
-    /**
-     * Check if logging is enabled.
-     */
-    public static boolean isEnabled() {
-        return enabled;
-    }
-
-    /**
      * Enable test mode. When enabled, log filenames include "-test" suffix
      * to distinguish test-generated logs from production logs.
      * Must be called BEFORE first log() call to affect filename.
      */
     public static void setTestMode(boolean enabled) {
         testMode = enabled;
-    }
-
-    /**
-     * Check if test mode is enabled.
-     */
-    public static boolean isTestMode() {
-        return testMode;
     }
 
     /**
@@ -193,7 +172,7 @@ public final class NetworkDebugLogger {
      * @return The generated batch ID in format "runYYYYMMDD-HHMMSS"
      */
     public static String generateBatchId() {
-        String timestamp = new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date());
+        String timestamp = java.time.LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
         batchId = "run" + timestamp;
         return batchId;
     }
@@ -234,38 +213,6 @@ public final class NetworkDebugLogger {
     }
 
     /**
-     * Set the minimum log level for console output.
-     * Messages below this level will not be printed to console.
-     * Default: INFO
-     */
-    public static void setConsoleLevel(LogLevel level) {
-        consoleLevel = level;
-    }
-
-    /**
-     * Get the current console log level.
-     */
-    public static LogLevel getConsoleLevel() {
-        return consoleLevel;
-    }
-
-    /**
-     * Set the minimum log level for file output.
-     * Messages below this level will not be written to the log file.
-     * Default: DEBUG
-     */
-    public static void setFileLevel(LogLevel level) {
-        fileLevel = level;
-    }
-
-    /**
-     * Get the current file log level.
-     */
-    public static LogLevel getFileLevel() {
-        return fileLevel;
-    }
-
-    /**
      * Generate a new session ID for correlating host/client logs.
      * Should be called by the host when starting a session, and the ID
      * should be shared with clients.
@@ -274,22 +221,6 @@ public final class NetworkDebugLogger {
     public static String generateSessionId() {
         // Generate a short random hex string for easy identification
         sessionId = String.format("%06x", new java.util.Random().nextInt(0xFFFFFF));
-        return sessionId;
-    }
-
-    /**
-     * Set the session ID (used by clients receiving the ID from host).
-     * @param id the session ID to set
-     */
-    public static void setSessionId(String id) {
-        sessionId = id;
-    }
-
-    /**
-     * Get the current session ID, or null if not set.
-     * @return the session ID
-     */
-    public static String getSessionId() {
         return sessionId;
     }
 
@@ -447,7 +378,7 @@ public final class NetworkDebugLogger {
                 filename = String.format("%s-%s%s%s.log", LOG_PREFIX, batchId, instancePart, testSuffix);
             } else {
                 // Legacy mode: use timestamp and PID for uniqueness
-                String timestamp = new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date());
+                String timestamp = java.time.LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
                 long pid = ProcessHandle.current().pid();
                 filename = String.format("%s-%s-%d%s%s.log", LOG_PREFIX, timestamp, pid, instancePart, testSuffix);
             }
@@ -706,7 +637,7 @@ public final class NetworkDebugLogger {
      * Format a message with timestamp and level.
      */
     private static String formatMessage(String level, String message) {
-        String timestamp = TIMESTAMP_FORMAT.format(new Date());
+        String timestamp = LocalTime.now().format(TIMESTAMP_FORMAT);
         return String.format("[%s] [%s] %s", timestamp, level, message);
     }
 
@@ -719,40 +650,6 @@ public final class NetworkDebugLogger {
             synchronized (lock) {
                 writer.println(message);
                 writer.flush();
-            }
-        }
-    }
-
-    /**
-     * Close the log file. Call on application shutdown.
-     * Closes all suffix-specific writers and the shared writer.
-     */
-    public static void close() {
-        synchronized (lock) {
-            // Close all suffix-specific writers
-            for (PrintWriter writer : suffixWriters.values()) {
-                if (writer != null) {
-                    writer.println();
-                    writer.println("=".repeat(80));
-                    writer.println("Network Debug Log Ended: " + new Date());
-                    writer.println("=".repeat(80));
-                    writer.close();
-                }
-            }
-            suffixWriters.clear();
-            instanceSuffix.remove();
-            globalInstanceSuffix = null;
-            batchId = null;
-
-            // Close shared writer
-            if (sharedFileWriter != null) {
-                sharedFileWriter.println();
-                sharedFileWriter.println("=".repeat(80));
-                sharedFileWriter.println("Network Debug Log Ended: " + new Date());
-                sharedFileWriter.println("=".repeat(80));
-                sharedFileWriter.close();
-                sharedFileWriter = null;
-                sharedInitialized = false;
             }
         }
     }
@@ -780,15 +677,6 @@ public final class NetworkDebugLogger {
                 }
             }
         }
-    }
-
-    /**
-     * Get the path to the log directory.
-     */
-    public static String getLogFilePath() {
-        ensureInitialized();
-        String logDirPath = ForgeConstants.NETWORK_LOGS_DIR;
-        return new File(logDirPath).getAbsolutePath();
     }
 
     /**

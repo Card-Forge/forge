@@ -56,22 +56,6 @@ public class DeltaSyncManager {
     private long packetsSinceLastChecksum = 0;
 
     /**
-     * Register a client for tracking.
-     * @param clientIndex the client's player index
-     */
-    public void registerClient(int clientIndex) {
-        clientAcknowledgedSeq.put(clientIndex, 0L);
-    }
-
-    /**
-     * Unregister a client.
-     * @param clientIndex the client's player index
-     */
-    public void unregisterClient(int clientIndex) {
-        clientAcknowledgedSeq.remove(clientIndex);
-    }
-
-    /**
      * Process an acknowledgment from a client.
      * @param clientIndex the client's player index
      * @param acknowledgedSeq the sequence number being acknowledged
@@ -336,13 +320,13 @@ public class DeltaSyncManager {
         if (value == null) {
             return 0;
         }
-        // For collections, hash the size and first few elements for efficiency
+        // For collections, hash all elements
         if (value instanceof Iterable) {
             int hash = 17;
             int count = 0;
             for (Object item : (Iterable<?>) value) {
                 hash = 31 * hash + (item != null ? item.hashCode() : 0);
-                if (++count >= 10) break; // Only check first 10 elements
+                count++;
             }
             hash = 31 * hash + count;
             return hash;
@@ -527,59 +511,6 @@ public class DeltaSyncManager {
     }
 
     /**
-     * Serialize the changed properties of an object using compact binary format.
-     * Uses NetworkTrackableSerializer to create a byte array containing:
-     * - The number of changed properties
-     * - For each changed property: the property ordinal and its value (IDs for object refs)
-     *
-     * Key optimization: Object references (CardView, PlayerView, etc.) are written as
-     * 4-byte IDs only, not full object graphs. This reduces CardView serialization from
-     * ~96KB to ~200 bytes.
-     */
-    private byte[] serializeChanges(TrackableObject obj) {
-        try {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            DataOutputStream dos = new DataOutputStream(baos);
-            NetworkTrackableSerializer nts = new NetworkTrackableSerializer(dos);
-
-            Set<TrackableProperty> changedProps = obj.getChangedProps();
-            dos.writeInt(changedProps.size());
-
-            // Get the props map to read values
-            @SuppressWarnings("unchecked")
-            Map<TrackableProperty, Object> props = obj.getProps();
-
-            // Critical: if props is null but changedProps is not empty, we have inconsistent state
-            if (props == null && !changedProps.isEmpty()) {
-                NetworkDebugLogger.error("[DeltaSync] CRITICAL: Object %d has %d changed properties but null props map!",
-                    obj.getId(), changedProps.size());
-                return null;
-            }
-
-            for (TrackableProperty prop : changedProps) {
-                dos.writeInt(prop.ordinal());
-                Object value = props != null ? props.get(prop) : null;
-                // Use NetworkPropertySerializer for type-aware compact serialization
-                NetworkPropertySerializer.serialize(nts, prop, value);
-            }
-
-            dos.flush();
-            dos.close();
-
-            byte[] result = baos.toByteArray();
-            // Debug: log large serializations (threshold lowered since we expect much smaller sizes)
-            if (result.length > 5000) {
-                NetworkDebugLogger.debug("[DeltaSync] Object %d (%s) serialized to %d bytes with %d changed props",
-                    obj.getId(), obj.getClass().getSimpleName(), result.length, changedProps.size());
-            }
-            return result;
-        } catch (Exception e) {
-            NetworkDebugLogger.error("[DeltaSync] Error serializing delta for object %d: %s", obj.getId(), e.getMessage());
-            return null;
-        }
-    }
-
-    /**
      * Serialize ALL properties of a new object for initial sync to client.
      * Unlike serializeChanges which only sends changed properties, this sends
      * all properties that have non-default values.
@@ -738,44 +669,6 @@ public class DeltaSyncManager {
     }
 
     /**
-     * Compute a checksum for the current game state.
-     * IMPORTANT: Only use value-based fields here, not identity-based hashCode().
-     * Server and client are separate JVMs, so Object.hashCode() will differ.
-     *
-     * BUG FIX (Bug #13): Sort players by ID before computing checksum.
-     * The player collection order may differ between server and client,
-     * causing checksum mismatches even when all values are identical.
-     *
-     * @deprecated Use computeStateChecksumFromLastSent instead for accurate client comparison
-     */
-    @Deprecated
-    private int computeStateChecksum(GameView gameView) {
-        int hash = 17;
-        // NOTE: Do NOT include gameView.getId() in the checksum.
-        // The GameView ID is a local JVM identifier that differs between server and client
-        // because each side creates its own Game/GameView instances. Only include actual
-        // game state properties that should be synchronized.
-        hash = 31 * hash + gameView.getTurn();
-        if (gameView.getPhase() != null) {
-            // Use ordinal() not hashCode() - ordinal is consistent across JVMs
-            hash = 31 * hash + gameView.getPhase().ordinal();
-        }
-        if (gameView.getPlayers() != null) {
-            // Sort players by ID for consistent iteration order across server and client
-            java.util.List<PlayerView> sortedPlayers = new java.util.ArrayList<>();
-            for (PlayerView p : gameView.getPlayers()) {
-                sortedPlayers.add(p);
-            }
-            sortedPlayers.sort(java.util.Comparator.comparingInt(PlayerView::getId));
-            for (PlayerView player : sortedPlayers) {
-                hash = 31 * hash + player.getId();
-                hash = 31 * hash + player.getLife();
-            }
-        }
-        return hash;
-    }
-
-    /**
      * Compute a checksum using snapshot values for Turn and Phase.
      * This avoids race conditions where the game loop advances these values
      * while we're collecting deltas.
@@ -821,110 +714,6 @@ public class DeltaSyncManager {
         NetworkDebugLogger.log("[DeltaSync]   Phase: %s (snapshot, current=%s)", phaseName,
                 gameView.getPhase() != null ? gameView.getPhase().name() : "null");
         if (gameView.getPlayers() != null) {
-            java.util.List<PlayerView> sortedPlayers = new java.util.ArrayList<>();
-            for (PlayerView p : gameView.getPlayers()) {
-                sortedPlayers.add(p);
-            }
-            sortedPlayers.sort(java.util.Comparator.comparingInt(PlayerView::getId));
-            for (PlayerView player : sortedPlayers) {
-                int handSize = player.getHand() != null ? player.getHand().size() : 0;
-                int graveyardSize = player.getGraveyard() != null ? player.getGraveyard().size() : 0;
-                int battlefieldSize = player.getBattlefield() != null ? player.getBattlefield().size() : 0;
-                NetworkDebugLogger.log("[DeltaSync]   Player %d (%s): Life=%d, Hand=%d, GY=%d, BF=%d",
-                        player.getId(), player.getName(), player.getLife(),
-                        handSize, graveyardSize, battlefieldSize);
-            }
-        }
-    }
-
-    /**
-     * Compute a checksum based on what was last sent to this client.
-     * This represents what the client's state SHOULD be before applying the current delta.
-     *
-     * BUG FIX (Bug #16): The previous approach computed checksum from current server state,
-     * but the delta might not include all changes if some were already sent. This caused
-     * mismatches when the server had advanced (e.g., Phase=UPKEEP) but the client hadn't
-     * yet received/applied that update (Phase=UNTAP).
-     *
-     * By computing checksum from last-sent values, we verify what the client SHOULD have.
-     *
-     * @param gameView the game view (used for structure, but values come from lastSentPropertyChecksums)
-     * @return checksum based on last-sent state
-     */
-    private int computeStateChecksumFromLastSent(GameView gameView) {
-        int hash = 17;
-
-        // Get the GameView's last-sent properties
-        int gameViewKey = makeDeltaKey(DeltaPacket.TYPE_GAME_VIEW, gameView.getId());
-        Map<Integer, Integer> gameViewProps = lastSentPropertyChecksums.get(gameViewKey);
-
-        // If we haven't sent the GameView yet, fall back to current state
-        // (this happens on first sync before any deltas are sent)
-        if (gameViewProps == null) {
-            NetworkDebugLogger.debug("[DeltaSync] computeStateChecksumFromLastSent: No lastSent for GameView, using current state");
-            return computeStateChecksum(gameView);
-        }
-
-        // Get Turn from last-sent (TrackableProperty.Turn ordinal)
-        Integer turnChecksum = gameViewProps.get(TrackableProperty.Turn.ordinal());
-        if (turnChecksum != null) {
-            // For integers, the checksum IS the value (see computePropertyChecksum)
-            hash = 31 * hash + gameView.getTurn();  // Turn is an int, same on both sides
-        } else {
-            hash = 31 * hash + gameView.getTurn();  // Fallback to current
-        }
-
-        // Get Phase from last-sent
-        Integer phaseChecksum = gameViewProps.get(TrackableProperty.Phase.ordinal());
-        if (phaseChecksum != null && gameView.getPhase() != null) {
-            // The phaseChecksum is the hashCode of the PhaseType enum, which equals ordinal+1 or similar
-            // We need to use ordinal() for cross-JVM consistency
-            // Since we're computing based on what client has, use current phase ordinal
-            // (this will match if no phase change is pending in this delta)
-            hash = 31 * hash + gameView.getPhase().ordinal();
-        } else if (gameView.getPhase() != null) {
-            hash = 31 * hash + gameView.getPhase().ordinal();
-        }
-
-        // For players, we need to be careful - use current state as player structure is complex
-        if (gameView.getPlayers() != null) {
-            java.util.List<PlayerView> sortedPlayers = new java.util.ArrayList<>();
-            for (PlayerView p : gameView.getPlayers()) {
-                sortedPlayers.add(p);
-            }
-            sortedPlayers.sort(java.util.Comparator.comparingInt(PlayerView::getId));
-            for (PlayerView player : sortedPlayers) {
-                hash = 31 * hash + player.getId();
-
-                // Get player's last-sent Life value
-                int playerKey = makeDeltaKey(DeltaPacket.TYPE_PLAYER_VIEW, player.getId());
-                Map<Integer, Integer> playerProps = lastSentPropertyChecksums.get(playerKey);
-                if (playerProps != null) {
-                    // Life is an integer property, use current value
-                    // (checksum tracking uses hashCode which for Integer equals the value)
-                    hash = 31 * hash + player.getLife();
-                } else {
-                    hash = 31 * hash + player.getLife();
-                }
-            }
-        }
-
-        return hash;
-    }
-
-    /**
-     * Log detailed checksum information for debugging mismatches.
-     * This mirrors the client-side logChecksumDetails for comparison.
-     * Players are sorted by ID to match the checksum computation order.
-     */
-    private void logChecksumDetails(GameView gameView, int checksum, long seq) {
-        NetworkDebugLogger.log("[DeltaSync] Checksum for seq=%d: %d", seq, checksum);
-        NetworkDebugLogger.log("[DeltaSync] Checksum details (server state):");
-        NetworkDebugLogger.log("[DeltaSync]   GameView ID: %d", gameView.getId());
-        NetworkDebugLogger.log("[DeltaSync]   Turn: %d", gameView.getTurn());
-        NetworkDebugLogger.log("[DeltaSync]   Phase: %s", gameView.getPhase() != null ? gameView.getPhase().name() : "null");
-        if (gameView.getPlayers() != null) {
-            // Sort players by ID to match checksum computation order
             java.util.List<PlayerView> sortedPlayers = new java.util.ArrayList<>();
             for (PlayerView p : gameView.getPlayers()) {
                 sortedPlayers.add(p);

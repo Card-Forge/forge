@@ -167,7 +167,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
         if (gameView != null && gameView.getPlayers() != null) {
             for (PlayerView pv : gameView.getPlayers()) {
                 serverPlayerIds.put(pv.getName(), pv.getId());
-                System.out.println("[GameClientHandler] Server PlayerView: " + pv.getName() + " -> ID " + pv.getId());
+                forge.gamemodes.net.NetworkDebugLogger.debug("[GameClientHandler] Server PlayerView: %s -> ID %d", pv.getName(), pv.getId());
             }
         }
 
@@ -242,9 +242,9 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
             if (serverPlayerIds.containsKey(playerName)) {
                 Integer serverId = serverPlayerIds.get(playerName);
                 player.setId(serverId);
-                System.out.println("[GameClientHandler] Set RegisteredPlayer ID for " + playerName + " -> " + serverId);
+                forge.gamemodes.net.NetworkDebugLogger.debug("[GameClientHandler] Set RegisteredPlayer ID for %s -> %d", playerName, serverId);
             } else {
-                System.out.println("[GameClientHandler] WARNING: No server ID found for player: " + playerName);
+                forge.gamemodes.net.NetworkDebugLogger.warn("[GameClientHandler] No server ID found for player: %s", playerName);
             }
 
             players.add(player);
@@ -323,7 +323,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
     private void replicatePlayerView(final PlayerView newPlayerView) {
         PlayerView existingPlayerView = tracker.getObj(TrackableTypes.PlayerViewType, newPlayerView.getId());
         existingPlayerView.copyChangedProps(newPlayerView);
-        System.err.println("replicated PlayerView properties - " + existingPlayerView.toString());
+        forge.gamemodes.net.NetworkDebugLogger.debug("replicated PlayerView properties - %s", existingPlayerView.toString());
     }
 
     @Override
