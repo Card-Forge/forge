@@ -33,7 +33,6 @@ import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
 import forge.gui.CardDetailPanel;
-import forge.gui.GuiBase;
 import forge.gui.SwingPrefBinders;
 import forge.gui.interfaces.ILobbyView;
 import forge.gui.util.SOptionPane;
