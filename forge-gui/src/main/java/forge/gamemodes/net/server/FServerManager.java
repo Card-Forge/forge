@@ -181,8 +181,7 @@ public final class FServerManager {
     }
 
     public void broadcast(final NetEvent event) {
-        if (event instanceof MessageEvent) {
-            MessageEvent msgEvent = (MessageEvent) event;
+        if (event instanceof MessageEvent msgEvent) {
             lobbyListener.message(msgEvent.getSource(), msgEvent.getMessage());
         }
         broadcastTo(event, clients.values());
@@ -395,8 +394,7 @@ public final class FServerManager {
         @Override
         public void channelRead(final ChannelHandlerContext ctx, final Object msg) throws Exception {
             final RemoteClient client = clients.get(ctx.channel());
-            if (msg instanceof LoginEvent) {
-                final LoginEvent event = (LoginEvent) msg;
+            if (msg instanceof LoginEvent event) {
                 final String username = event.getUsername();
                 client.setUsername(username);
                 if (client.getIndex() == 0) {
@@ -405,19 +403,18 @@ public final class FServerManager {
                     broadcast(new MessageEvent(String.format("%s joined the lobby", username)));
                 }
                 updateLobbyState();
-            } else if (msg instanceof UpdateLobbyPlayerEvent) {
-                UpdateLobbyPlayerEvent updateEvent = (UpdateLobbyPlayerEvent) msg;
-                localLobby.applyToSlot(client.getIndex(), updateEvent);
-                if (updateEvent.getName() != null) {
+            } else if (msg instanceof UpdateLobbyPlayerEvent event) {
+                localLobby.applyToSlot(client.getIndex(), event);
+                if (event.getName() != null) {
                     String oldName = client.getUsername();
-                    String newName = updateEvent.getName();
+                    String newName = event.getName();
                     if (!newName.equals(oldName)) {
                         client.setUsername(newName);
                         broadcast(new MessageEvent(String.format("%s changed their name to %s", oldName, newName)));
                     }
                 }
-                if (updateEvent.getReady() != null) {
-                    broadcastReadyState(client.getUsername(), updateEvent.getReady());
+                if (event.getReady() != null) {
+                    broadcastReadyState(client.getUsername(), event.getReady());
                 }
                 // Return to prevent duplicate processing by LobbyInputHandler
                 return;
@@ -430,8 +427,7 @@ public final class FServerManager {
         @Override
         public void channelRead(final ChannelHandlerContext ctx, final Object msg) throws Exception {
             final RemoteClient client = clients.get(ctx.channel());
-            if (msg instanceof LoginEvent) {
-                final LoginEvent event = (LoginEvent) msg;
+            if (msg instanceof LoginEvent event) {
                 final int index = localLobby.connectPlayer(event.getUsername(), event.getAvatarIndex(), event.getSleeveIndex());
                 if (index == -1) {
                     ctx.close();
@@ -440,8 +436,8 @@ public final class FServerManager {
                     broadcast(event);
                     updateLobbyState();
                 }
-            } else if (msg instanceof UpdateLobbyPlayerEvent) {
-                updateSlot(client.getIndex(), (UpdateLobbyPlayerEvent) msg);
+            } else if (msg instanceof UpdateLobbyPlayerEvent event) {
+                updateSlot(client.getIndex(), event);
             }
             // Note: MessageEvent is handled by MessageHandler, not here
             // to avoid duplicate display on host's chat

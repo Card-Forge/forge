@@ -126,7 +126,7 @@ public class MatchScreen extends FScreen {
                 e -> getGameController().selectButtonOk(),
                 e -> getGameController().selectButtonCancel()));
 
-        if (humanCount < 2 || MatchController.instance.hotSeatMode() || GuiBase.isNetworkplay(null))
+        if (humanCount < 2 || MatchController.instance.hotSeatMode() || GuiBase.isNetworkplay(MatchController.instance))
             topPlayerPrompt = null;
         else {
             //show top prompt if multiple human players and not playing in Hot Seat mode and not in network play
