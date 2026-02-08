@@ -178,6 +178,8 @@ public class Forge implements ApplicationListener {
 
         GuiBase.setIsAndroid(Gdx.app.getType() == Application.ApplicationType.Android);
 
+        ((GuiMobile) GuiBase.getInterface()).captureGlThread();
+
         if (!GuiBase.isAndroid() || (androidVersion > 25 && totalDeviceRAM > 3400)) {
             allowCardBG = true;
         }
