@@ -2,12 +2,12 @@ package forge.gui;
 
 import forge.util.HWInfo;
 import forge.gui.interfaces.IGuiBase;
+import forge.gui.interfaces.IGuiGame;
 import forge.localinstance.properties.ForgePreferences;
 
 public class GuiBase {
     private static IGuiBase guiInterface;
     private static boolean propertyConfig = true;
-    private static boolean networkplay = false;
     private static boolean isAndroidport = false;
     private static String adventureDirectory = null;
     private static boolean interrupted = false;
@@ -60,8 +60,15 @@ public class GuiBase {
     public static int getAndroidAPILevel() { return androidAPI; }
     public static int getDeviceRAM() { return deviceRAM; }
 
-    public static boolean isNetworkplay() { return networkplay; }
-    public static void setNetworkplay(boolean value) { networkplay = value; }
+    public static boolean isNetworkplay(IGuiGame game) {
+        if (game != null) {
+            // query AbstractGuiGame implementation if provided
+            return game.isNetGame();
+        }
+        // both IGuiBase implementations should have (at least indirect) access to matches
+        // to check all available IGuiGame
+        return getInterface().hasNetGame();
+    }
 
     public static boolean hasPropertyConfig() { return propertyConfig; }
     public static void enablePropertyConfig(boolean value) { propertyConfig = value; }

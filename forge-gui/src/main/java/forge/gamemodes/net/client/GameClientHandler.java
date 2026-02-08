@@ -68,6 +68,8 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
     protected void beforeCall(final ProtocolMethod protocolMethod, final Object[] args) {
         switch (protocolMethod) {
             case openView:
+                gui.setNetGame();
+
                 // only need one **match**
                 if (this.match == null) {
                     this.match = createMatch();
