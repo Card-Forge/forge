@@ -8,7 +8,7 @@
  <tileset firstgid="11905" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzdld0OwjAIhZts08mD7VHmz4uuOh9KTjISTGqh2u7Ci+9qCwc4QOdTCPOXnJmrQUchPEd/zAf/uxoMZOuCW0EtF0c8DwvnN9J7PT211dWa0EO/xZtfvPP0V/yaNq/FG9TcJ7z3emfNlBVHz10NzVr5TTvm8S9gviNzZ46UBt9qasIn2SnsaMs90jXq27GHbupGHjL3qqVuDuQUtx6leuf1v/Q90oh+VF6V9KP7cBNbvb25nr8ADq3ivg==
+   eJzdlEsOgzAMRCNBKfhgHIV+Lkr6ORQeCUuuFMUGEhZdvBXIY8/YmYYQpp3cmIdBQyF8e3/NN//7MbiQrQueG2a5O+p5mLm/nn7naamurtaEHvyWbI5k5/FX8hrXrCUbzNwmsvdmZ+2UVUfvXQnNUv2NJ/bxL2C/I/NirpQG30pqIie5KdxozTvSM+q34wzd1BvZZd6rmro50FNcPUp5582/ycxmIfpRZbXFj726pXLQni/dFuK3
   </data>
  </layer>
  <layer id="2" name="Ground" width="30" height="17">
