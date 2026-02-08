@@ -1002,7 +1002,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         tempShowCards(topN);
         if (FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) &&
-                (!GuiBase.getInterface().isLibgdxPort()) && (!GuiBase.isNetworkplay())) { //prevent crash for desktop vs mobile port it will crash the netplay since mobile doesnt have manipulatecardlist, send the alternate below
+                (!GuiBase.getInterface().isLibgdxPort()) && (!GuiBase.isNetworkplay(getGui()))) { //prevent crash for desktop vs mobile port it will crash the netplay since mobile doesnt have manipulatecardlist, send the alternate below
             CardCollectionView cardList = player.getCardsIn(ZoneType.Library);
             ImmutablePair<CardCollection, CardCollection> result =
                     arrangeForMove(localizer.getMessage("lblMoveCardstoToporBbottomofLibrary"), cardList, topN, true, true);
@@ -1942,7 +1942,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         for (int i = 1; i < res.size(); i++) {
             // prompt user if there are multiple different options
             if (!res.get(i).equals(firstStr)) {
-                if (!GuiBase.isNetworkplay()) //non network game don't need serialization
+                if (!GuiBase.isNetworkplay(getGui())) //non network game don't need serialization
                     return getGui().one(prompt, possibleReplacers);
                 ReplacementEffectView rev = getGui().one(prompt, possibleReplacers.stream().map(ReplacementEffect::getView).collect(Collectors.toList()));
                 return possibleReplacers.stream().filter(re -> re.getId() == rev.getId()).findAny().orElse(first);
@@ -1963,7 +1963,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         for (int i = 1; i < sts.size(); i++) {
             // prompt user if there are multiple different options
             if (!sts.get(i).equals(firstStr)) {
-                if (!GuiBase.isNetworkplay()) //non network game don't need serialization
+                if (!GuiBase.isNetworkplay(getGui())) //non network game don't need serialization
                     return getGui().one(prompt, possibleStatics);
                 StaticAbilityView stv = getGui().one(prompt, possibleStatics.stream().map(StaticAbility::getView).collect(Collectors.toList()));
                 return possibleStatics.stream().filter(st -> st.getId() == stv.getId()).findAny().orElse(first);
