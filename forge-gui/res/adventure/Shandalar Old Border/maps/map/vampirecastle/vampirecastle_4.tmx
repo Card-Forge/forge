@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="106">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="107">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx" />
  </editorsettings>
@@ -271,7 +271,7 @@
         "text": "Thanks... Thank you brave hero, please take this item as a token of my gratitude",
         "options": [
           {
-              "name": "(Take the Challenge Coin)",            
+              "name": "(Take the Challenge Coin)",
               "action": [
               { "deleteMapObject": -1 },
               { "addItem": "Challenge Coin" }
@@ -286,6 +286,32 @@
     <property name="enemy" value="Farmer" />
     <property name="speedModifier" type="float" value="30" />
     <property name="threatRange" type="int" value="20" />
+   </properties>
+  </object>
+  <object id="106" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="80" y="305" width="120" height="60">
+   <properties>
+    <property name="dialog">[
+    {
+        "condition": [
+            { "checkQuestFlag": "mainQuest" },
+            { "checkCharacterFlag": "dungeonMasterQuestGiven", "not": true }
+        ],
+        "text": "You sense powerful creatures lurking in hidden lairs across Shandalar. Perhaps you should track your progress in clearing them.",
+        "options": [
+            {
+                "name": "(Accept the challenge)",
+                "action": [
+                    {
+                        "issueQuest": "54",
+                        "setCharacterFlag": { "key": "dungeonMasterQuestGiven", "val": 1 }
+                    },
+                    { "deleteMapObject": -1 }
+                ],
+                "text": "[Quest Added: Dungeon Master]"
+            }
+        ]
+    }
+]</property>
    </properties>
   </object>
  </objectgroup>

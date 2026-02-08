@@ -10,7 +10,6 @@ import forge.card.ColorSet;
 import forge.card.GamePieceType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -21,11 +20,11 @@ import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.item.PaperToken;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class TokenInfo {
     final String name;
@@ -118,7 +117,7 @@ public class TokenInfo {
         c.setName(name);
         c.setImageKey(ImageKeys.getTokenKey(imageName));
 
-        c.setColor(color == null ? ColorSet.fromManaCost(new ManaCost(new ManaCostParser(manaCost))) : color);
+        c.setColor(color == null ? ColorSet.fromManaCost(new ManaCost(manaCost)) : color);
         c.setGamePieceType(GamePieceType.TOKEN);
 
         for (final String t : types) {
@@ -288,8 +287,8 @@ public class TokenInfo {
         if (sa.getKeyword() != null && sa.getKeyword().getStatic() != null) {
             editionHost = sa.getKeyword().getStatic().getHostCard();
         }
-        String edition = ObjectUtils.firstNonNull(editionHost, host).getSetCode();
-        edition = ObjectUtils.firstNonNull(StaticData.instance().getCardEdition(edition).getTokenSet(script), edition);
+        String edition = Objects.requireNonNullElse(editionHost, host).getSetCode();
+        edition = Objects.requireNonNullElse(StaticData.instance().getCardEdition(edition).getTokenSet(script), edition);
         PaperToken token = StaticData.instance().getAllTokens().getToken(script, edition);
 
         if (token == null) {

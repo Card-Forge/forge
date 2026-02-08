@@ -4,7 +4,7 @@ Types:Creature Elf Druid Rogue
 PT:5/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 1/1 green and white Citizen creature token.
 SVar:TrigToken:DB$ Token | TokenScript$ gw_1_1_citizen
-A:AB$ Effect | Cost$ 1 ExileFromHand<1/CARDNAME> | ActivationZone$ Hand | ValidTgts$ Land | RememberObjects$ Targeted,Self | StaticAbilities$ Land,MayPlay | Triggers$ Cast | ImprintCards$ Self | Duration$ Permanent | ForgetOnMoved$ Exile | SpellDescription$ Target land gains "{T}: Add {R}, {G}, or {W}" until CARDNAME is cast from exile. You may cast CARDNAME for as long as it remains exiled.
+A:AB$ Effect | Cost$ 1 ExileFromHand<1/CARDNAME> | ActivationZone$ Hand | ValidTgts$ Land | RememberObjects$ Targeted & Self | StaticAbilities$ Land,MayPlay | Triggers$ Cast | ImprintCards$ Self | Duration$ Permanent | ForgetOnMoved$ Exile | SpellDescription$ Target land gains "{T}: Add {R}, {G}, or {W}" until CARDNAME is cast from exile. You may cast CARDNAME for as long as it remains exiled.
 SVar:Land:Mode$ Continuous | AffectedZone$ Battlefield | Affected$ Card.IsRemembered+IsNotImprinted | AddAbility$ Mana | Description$ Target land gains "{T}: Add {R}, {G}, or {W}" until EFFECTSOURCE is cast from exile. You may cast EFFECTSOURCE for as long as it remains exiled.
 SVar:Mana:AB$ Mana | Cost$ T | Produced$ Combo R G W | Amount$ 1 | SpellDescription$ Add {R}, {G}, or {W}.
 SVar:MayPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsImprinted+IsRemembered | AffectedZone$ Exile | Secondary$ True | Description$ You may cast EFFECTSOURCE for as long as it remains exiled.

@@ -2909,5 +2909,14 @@
         "Marble Priest|LEG"
       ]
     }
+  },
+  {
+    "name": "Windwalker's Blessing",
+    "description": "A blessing from the winds grants permanent swiftness. +35% movement speed.",
+    "equipmentSlot": "Blessing",
+    "iconName": "MovementSpeed",
+    "effect": {
+      "moveSpeed": 1.35
+    }
   }
 ]

@@ -7,4 +7,4 @@ K:Flash
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When this creature enters, return up to one other target creature you control to its owner's hand.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select up to one other target creature you control
-Oracle:Changeling (This card is every creature type.)\nFlash\nFlying\When this creature enters, return up to one other target creature you control to its owner's hand.
+Oracle:Changeling (This card is every creature type.)\nFlash\nFlying\nWhen this creature enters, return up to one other target creature you control to its owner's hand.

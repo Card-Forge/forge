@@ -2422,7 +2422,7 @@ public class ComputerUtil {
                     chosen = ComputerUtilCard.getMostProminentType(list, validTypes);
                 } else  if (logic.equals("MostNeededType")) {
                     // Choose a type that is in the deck, but not in hand or on the battlefield
-                    final List<String> basics = new ArrayList<>(CardType.Constant.BASIC_TYPES);
+                    final Collection<String> basics = CardType.getBasicTypes();
                     CardCollectionView presentCards = CardCollection.combine(ai.getCardsIn(ZoneType.Battlefield), ai.getCardsIn(ZoneType.Hand));
                     CardCollectionView possibleCards = ai.getAllCards();
 
@@ -2441,7 +2441,7 @@ public class ComputerUtil {
                 }
                 else if (logic.equals("ChosenLandwalk")) {
                     for (Card c : AiAttackController.choosePreferredDefenderPlayer(ai).getLandsInPlay()) {
-                        for (String t : c.getType()) {
+                        for (String t : c.getType().getLandTypes()) {
                             if (CardType.isABasicLandType(t)) {
                                 chosen = t;
                                 break;
