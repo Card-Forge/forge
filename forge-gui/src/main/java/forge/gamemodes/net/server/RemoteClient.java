@@ -9,12 +9,23 @@ import java.util.concurrent.TimeoutException;
 
 public final class RemoteClient implements IToClient {
 
+    /** Special value indicating the client hasn't been assigned a slot yet. */
+    public static final int UNASSIGNED_SLOT = -1;
+
     private final Channel channel;
     private String username;
-    private int index;
+    private int index = UNASSIGNED_SLOT;  // Initialize to -1 to indicate not yet assigned
     private ReplyPool replies = new ReplyPool();
     public RemoteClient(final Channel channel) {
         this.channel = channel;
+    }
+
+    /**
+     * Check if this client has been assigned a valid lobby slot.
+     * @return true if the client has a valid slot (index >= 0)
+     */
+    public boolean hasValidSlot() {
+        return index >= 0;
     }
 
     @Override
