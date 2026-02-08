@@ -94,3 +94,7 @@ forge-gui/tools/PerSetTrackingResults
 # Ignore python temporaries
 __pycache__
 *.pyc
+
+# Ignore Claude configuration
+.claude
+CLAUDE.md

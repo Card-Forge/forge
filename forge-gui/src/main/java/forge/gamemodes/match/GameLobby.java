@@ -55,6 +55,10 @@ public abstract class GameLobby implements IHasGameType {
         return hostedMatch != null && hostedMatch.isMatchOver() == false;
     }
 
+    public HostedMatch getHostedMatch() {
+        return hostedMatch;
+    }
+
     public void setListener(final IUpdateable listener) {
         this.listener = listener;
     }

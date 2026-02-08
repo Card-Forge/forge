@@ -1,7 +1,11 @@
 package forge.gamemodes.net.server;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Maps;
+import forge.ai.LobbyPlayerAi;
+import forge.ai.PlayerControllerAi;
+import forge.game.Game;
+import forge.game.player.Player;
+import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.CompatibleObjectDecoder;
@@ -13,6 +17,7 @@ import forge.gui.util.SOptionPane;
 import forge.interfaces.IGameController;
 import forge.interfaces.ILobbyListener;
 import forge.model.FModel;
+import forge.player.PlayerControllerHuman;
 import forge.util.IterableUtil;
 import forge.util.Localizer;
 import forge.localinstance.properties.ForgeNetPreferences;
@@ -36,11 +41,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 
 public final class FServerManager {
+    private static final int RECONNECT_TIMEOUT_SECONDS = 120;
+
     private static FServerManager instance = null;
-    private final Map<Channel, RemoteClient> clients = Maps.newTreeMap();
+    private final Map<Channel, RemoteClient> clients = new ConcurrentHashMap<>();
+    private final Map<String, RemoteClient> disconnectedClients = new ConcurrentHashMap<>();
+    private final Map<String, Timer> reconnectTimers = new ConcurrentHashMap<>();
     private boolean isHosting = false;
     private EventLoopGroup bossGroup = new NioEventLoopGroup(1);
     private EventLoopGroup workerGroup = new NioEventLoopGroup();
@@ -161,6 +171,13 @@ public final class FServerManager {
     }
 
     private void stopServer(final boolean removeShutdownHook) {
+        // Cancel all reconnect timers
+        for (final Timer timer : reconnectTimers.values()) {
+            timer.cancel();
+        }
+        reconnectTimers.clear();
+        disconnectedClients.clear();
+
         bossGroup.shutdownGracefully();
         workerGroup.shutdownGracefully();
         if (upnpService != null) {
@@ -334,6 +351,122 @@ public final class FServerManager {
         }
     }
 
+    // --- Reconnection helper methods ---
+
+    private PlayerControllerHuman findRemoteController(final int slotIndex) {
+        final IGameController controller = localLobby.getController(slotIndex);
+        if (controller instanceof PlayerControllerHuman) {
+            return (PlayerControllerHuman) controller;
+        }
+        return null;
+    }
+
+    private void pauseNetGuiGame(final int slotIndex) {
+        final HostedMatch hostedMatch = localLobby.getHostedMatch();
+        if (hostedMatch == null) { return; }
+        final Game game = hostedMatch.getGame();
+        if (game == null) { return; }
+
+        for (final Player p : game.getPlayers()) {
+            if (p.getName().equals(localLobby.getSlot(slotIndex).getName())) {
+                final IGuiGame gui = findGuiForPlayer(p);
+                if (gui instanceof NetGuiGame) {
+                    ((NetGuiGame) gui).pause();
+                }
+                return;
+            }
+        }
+    }
+
+    private IGuiGame findGuiForPlayer(final Player player) {
+        final HostedMatch hostedMatch = localLobby.getHostedMatch();
+        if (hostedMatch == null) { return null; }
+        // The NetGuiGame is stored per RegisteredPlayer in HostedMatch's guis map,
+        // but we don't have direct access. Look up via the slot-based getGui.
+        for (int i = 0; i < localLobby.getNumberOfSlots(); i++) {
+            final LobbySlot slot = localLobby.getSlot(i);
+            if (slot != null && player.getName().equals(slot.getName())) {
+                // For REMOTE slots, getGui creates a new NetGuiGame wrapper each time.
+                // We need the actual one in use. Find it via the player's controller.
+                if (player.getController() instanceof PlayerControllerHuman) {
+                    return ((PlayerControllerHuman) player.getController()).getGui();
+                }
+            }
+        }
+        return null;
+    }
+
+    private void resumeAndResync(final RemoteClient client) {
+        final int slotIndex = client.getIndex();
+        final HostedMatch hostedMatch = localLobby.getHostedMatch();
+        if (hostedMatch == null) { return; }
+        final Game game = hostedMatch.getGame();
+        if (game == null) { return; }
+
+        for (final Player p : game.getPlayers()) {
+            if (p.getName().equals(client.getUsername())) {
+                final IGuiGame gui = findGuiForPlayer(p);
+                if (gui instanceof NetGuiGame) {
+                    final NetGuiGame netGui = (NetGuiGame) gui;
+                    netGui.resume();
+
+                    // Send full game state to the reconnected client
+                    netGui.openView(new forge.trackable.TrackableCollection<>(netGui.getLocalPlayers()));
+
+                    // Replay current prompt
+                    final PlayerControllerHuman pch = findRemoteController(slotIndex);
+                    if (pch != null) {
+                        pch.getInputQueue().updateObservers();
+                    }
+                }
+                return;
+            }
+        }
+    }
+
+    private void handleReconnectTimeout(final String username) {
+        reconnectTimers.remove(username);
+        final RemoteClient client = disconnectedClients.remove(username);
+        if (client == null) { return; }
+
+        // If match already ended, just clean up
+        if (!isMatchActive()) {
+            localLobby.disconnectPlayer(client.getIndex());
+            return;
+        }
+
+        System.out.println("Reconnect timeout for " + username + ". Converting to AI.");
+        convertToAI(client.getIndex(), username);
+
+        // Reset lobby slot
+        localLobby.disconnectPlayer(client.getIndex());
+
+        broadcast(new MessageEvent(String.format("%s did not reconnect in time. AI has taken over.", username)));
+    }
+
+    private void convertToAI(final int slotIndex, final String username) {
+        final HostedMatch hostedMatch = localLobby.getHostedMatch();
+        if (hostedMatch == null) { return; }
+        final Game game = hostedMatch.getGame();
+        if (game == null) { return; }
+
+        for (final Player p : game.getPlayers()) {
+            if (p.getName().equals(username)) {
+                // Create AI controller using the player's existing LobbyPlayer
+                final LobbyPlayerAi aiLobbyPlayer = new LobbyPlayerAi(username, null);
+                final PlayerControllerAi aiCtrl = new PlayerControllerAi(game, p, aiLobbyPlayer);
+                p.dangerouslySetController(aiCtrl);
+
+                // Clear InputQueue to unblock Path A (game thread waiting on cdlDone)
+                final PlayerControllerHuman pch = findRemoteController(slotIndex);
+                if (pch != null) {
+                    pch.getInputQueue().clearInputs();
+                }
+                return;
+            }
+        }
+    }
+
     private class MessageHandler extends ChannelInboundHandlerAdapter {
         @Override
         public final void channelRead(final ChannelHandlerContext ctx, final Object msg) throws Exception {
@@ -376,13 +509,41 @@ public final class FServerManager {
             final RemoteClient client = clients.get(ctx.channel());
             if (msg instanceof LoginEvent) {
                 final LoginEvent event = (LoginEvent) msg;
-                final int index = localLobby.connectPlayer(event.getUsername(), event.getAvatarIndex(), event.getSleeveIndex());
-                if (index == -1) {
-                    ctx.close();
+                final String username = event.getUsername();
+
+                // Check if this is a reconnecting player
+                final RemoteClient disconnected = disconnectedClients.remove(username);
+                if (disconnected != null) {
+                    // Cancel timeout timer
+                    final Timer timer = reconnectTimers.remove(username);
+                    if (timer != null) {
+                        timer.cancel();
+                    }
+
+                    // Remove the temporary client entry for the new channel
+                    clients.remove(ctx.channel());
+
+                    // Swap channel on the original RemoteClient
+                    disconnected.swapChannel(ctx.channel());
+
+                    // Re-register under the new channel
+                    clients.put(ctx.channel(), disconnected);
+
+                    // Resume and resync
+                    resumeAndResync(disconnected);
+
+                    broadcast(new MessageEvent(String.format("%s has reconnected", username)));
+                    System.out.println("Player reconnected: " + username);
                 } else {
-                    client.setIndex(index);
-                    broadcast(event);
-                    updateLobbyState();
+                    // Normal login flow
+                    final int index = localLobby.connectPlayer(event.getUsername(), event.getAvatarIndex(), event.getSleeveIndex());
+                    if (index == -1) {
+                        ctx.close();
+                    } else {
+                        client.setIndex(index);
+                        broadcast(event);
+                        updateLobbyState();
+                    }
                 }
             } else if (msg instanceof UpdateLobbyPlayerEvent) {
                 updateSlot(client.getIndex(), (UpdateLobbyPlayerEvent) msg);
@@ -398,10 +559,44 @@ public final class FServerManager {
         @Override
         public void channelInactive(final ChannelHandlerContext ctx) throws Exception {
             final RemoteClient client = clients.remove(ctx.channel());
+            if (client == null) {
+                // Already handled (e.g. reconnect swapped the channel)
+                super.channelInactive(ctx);
+                return;
+            }
             final String username = client.getUsername();
-            localLobby.disconnectPlayer(client.getIndex());
-            broadcast(new MessageEvent(String.format("%s left the room", username)));
-            broadcast(new LogoutEvent(username));
+
+            if (isMatchActive() && client.hasValidSlot()) {
+                // Game is active — enter reconnection mode
+                client.setDisconnected(true);
+
+                // Pause the NetGuiGame so sends become no-ops
+                pauseNetGuiGame(client.getIndex());
+
+                // Unblock any Path B waiter (sendAndWait)
+                client.getReplyPool().cancelAll();
+
+                // Store for reconnection lookup
+                disconnectedClients.put(username, client);
+
+                // Start timeout timer
+                final Timer timer = new Timer("reconnect-timeout-" + username, true);
+                reconnectTimers.put(username, timer);
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        handleReconnectTimeout(username);
+                    }
+                }, RECONNECT_TIMEOUT_SECONDS * 1000L);
+
+                broadcast(new MessageEvent(String.format("%s disconnected. Waiting %d seconds for reconnect...", username, RECONNECT_TIMEOUT_SECONDS)));
+                System.out.println("Player disconnected mid-game: " + username + " (slot " + client.getIndex() + "). Waiting for reconnect.");
+            } else {
+                // Normal disconnect (lobby or no valid slot)
+                localLobby.disconnectPlayer(client.getIndex());
+                broadcast(new MessageEvent(String.format("%s left the room", username)));
+                broadcast(new LogoutEvent(username));
+            }
             super.channelInactive(ctx);
         }
     }

@@ -12,12 +12,32 @@ public final class RemoteClient implements IToClient {
     /** Special value indicating the client hasn't been assigned a slot yet. */
     public static final int UNASSIGNED_SLOT = -1;
 
-    private final Channel channel;
+    private volatile Channel channel;
     private String username;
     private int index = UNASSIGNED_SLOT;  // Initialize to -1 to indicate not yet assigned
-    private ReplyPool replies = new ReplyPool();
+    private volatile ReplyPool replies = new ReplyPool();
+    private volatile boolean disconnected;
+
     public RemoteClient(final Channel channel) {
         this.channel = channel;
+    }
+
+    public boolean isDisconnected() {
+        return disconnected;
+    }
+
+    public void setDisconnected(final boolean disconnected) {
+        this.disconnected = disconnected;
+    }
+
+    /**
+     * Swap the underlying channel for a reconnecting client.
+     * Updates the channel, creates a fresh ReplyPool, and clears the disconnected flag.
+     */
+    public void swapChannel(final Channel newChannel) {
+        this.channel = newChannel;
+        this.replies = new ReplyPool();
+        this.disconnected = false;
     }
 
     /**
