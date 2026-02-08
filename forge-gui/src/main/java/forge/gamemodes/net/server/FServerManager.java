@@ -13,6 +13,7 @@ import forge.gui.util.SOptionPane;
 import forge.interfaces.IGameController;
 import forge.interfaces.ILobbyListener;
 import forge.model.FModel;
+import forge.util.BuildInfo;
 import forge.util.IterableUtil;
 import forge.util.Localizer;
 import forge.localinstance.properties.ForgeNetPreferences;
@@ -433,6 +434,20 @@ public final class FServerManager {
                     ctx.close();
                 } else {
                     client.setIndex(index);
+                    // Warn if client version differs from host
+                    final String clientVersion = event.getVersion();
+                    final String hostVersion = BuildInfo.getVersionString();
+                    if (clientVersion == null) {
+                        broadcast(new MessageEvent(String.format(
+                            "Warning: Could not determine %s's Forge version. "
+                            + "Please use the same version as the host to avoid network compatibility issues.",
+                            event.getUsername())));
+                    } else if (!clientVersion.equals(hostVersion)) {
+                        broadcast(new MessageEvent(String.format(
+                            "Warning: %s is using Forge version %s (host: %s). "
+                            + "Please use the same version as the host to avoid network compatibility issues.",
+                            event.getUsername(), clientVersion, hostVersion)));
+                    }
                     broadcast(event);
                     updateLobbyState();
                 }
