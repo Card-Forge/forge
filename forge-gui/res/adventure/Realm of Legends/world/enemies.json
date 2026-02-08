@@ -914,7 +914,7 @@
     "name": "Zhulodok",
     "sprite": "sprites/enemy/aberration/eldrazi/eldrazi_large.atlas",
     "deck": [
-      "decks/legends/Zhulodok.dck"
+      "decks/legends/zhulodok.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -2415,7 +2415,7 @@
     "name": "Child of Alara",
     "sprite": "sprites/enemy/celestial/seraphim.atlas",
     "deck": [
-      "decks/legends/deckname.dck"
+      "decks/legends/child_of_alara.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -2722,7 +2722,7 @@
     "name": "Klothys",
     "sprite": "sprites/enemy/fiend/warden_2.atlas",
     "deck": [
-      "decks/legends/deckname.dck"
+      "decks/legends/klothys.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -3397,7 +3397,7 @@
     "name": "Palladia-Mors",
     "sprite": "sprites/enemy/dragon/firedragon.atlas",
     "deck": [
-      "decks/legends/Palladia-Mors.dck"
+      "decks/legends/palladia-mors.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -3521,7 +3521,7 @@
     "name": "Chromium",
     "sprite": "sprites/enemy/dragon/ancientsilverdragon.atlas",
     "deck": [
-      "decks/legends/Chromium.dck"
+      "decks/legends/chromium.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -3583,7 +3583,7 @@
     "name": "O-Kagachi",
     "sprite": "sprites/enemy/monstrosity/hydra_large.atlas",
     "deck": [
-      "decks/legends/O-Kagachi.dck"
+      "decks/legends/o-kagachi.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -5200,7 +5200,7 @@
     "name": "Commodore Guff",
     "sprite": "sprites/enemy/humanoid/dwarf/dwarf_5.atlas",
     "deck": [
-      "decks/legends/Commodore_Guff.dck"
+      "decks/legends/commodore_guff.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -5266,7 +5266,7 @@
     "name": "Marath",
     "sprite": "sprites/enemy/beast/deer_2.atlas",
     "deck": [
-      "decks/legends/Marath.dck"
+      "decks/legends/marath.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -5549,7 +5549,7 @@
     "name": "Gahiji",
     "sprite": "sprites/enemy/beast/ancient_2.atlas",
     "deck": [
-      "decks/legends/Gahiji.dck"
+      "decks/legends/gahiji.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -5679,7 +5679,7 @@
     "name": "Isshin",
     "sprite": "sprites/enemy/humanoid/human/knight/false_knight.atlas",
     "deck": [
-      "decks/legends/Isshin.dck"
+      "decks/legends/isshin.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -7037,7 +7037,7 @@
     "name": "Karametra",
     "sprite": "sprites/enemy/humanoid/human/wizard/green_wiz2.atlas",
     "deck": [
-      "decks/legends/deckname.dck"
+      "decks/legends/karametra.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -7107,7 +7107,7 @@
     "name": "Phenax",
     "sprite": "sprites/enemy/undead/lich_2.atlas",
     "deck": [
-      "decks/legends/Phenax.dck"
+      "decks/legends/phenax.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -7177,7 +7177,7 @@
     "name": "Omarthis",
     "sprite": "sprites/enemy/humanoid/naga/nagawarrior.atlas",
     "deck": [
-      "decks/legends/Omarthis.dck"
+      "decks/legends/omarthis.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -7392,7 +7392,7 @@
     "name": "Agatha",
     "sprite": "sprites/enemy/humanoid/human/warlock/witchlarge.atlas",
     "deck": [
-      "decks/legends/Agatha.dck"
+      "decks/legends/agatha.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -7963,7 +7963,7 @@
     "name": "Griselbrand",
     "sprite": "sprites/enemy/fiend/griselbrand.atlas",
     "deck": [
-      "decks/legends/Griselbrand.dck"
+      "decks/legends/griselbrand.dck"
     ],
     "ai": "",
     "flying": true,
@@ -8246,7 +8246,7 @@
     "name": "Jin-Gitaxias",
     "sprite": "sprites/enemy/aberration/gitaxianscientist.atlas",
     "deck": [
-      "decks/legends/Jin-Gitaxias.dck"
+      "decks/legends/jin-gitaxias.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -9382,7 +9382,7 @@
     "name": "Karrthus",
     "sprite": "sprites/enemy/dragon/dragonlarge.atlas",
     "deck": [
-      "decks/legends/Karrthus.dck"
+      "decks/legends/karrthus.dck"
     ],
     "ai": "",
     "flying": true,
@@ -9692,7 +9692,7 @@
     "name": "The Mimeoplasm",
     "sprite": "sprites/enemy/ooze/giant_slime.atlas",
     "deck": [
-      "decks/legends/The_Mimeoplasm .dck"
+      "decks/legends/the_mimeoplasm .dck"
     ],
     "ai": "",
     "speed": 45,
@@ -9762,7 +9762,7 @@
     "name": "Sliver Overlord",
     "sprite": "sprites/enemy/aberration/sliver.atlas",
     "deck": [
-      "decks/legends/Sliver_Overlord.dck"
+      "decks/legends/sliver_overlord.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -9833,7 +9833,7 @@
     "name": "Sliver Weftwinder",
     "sprite": "sprites/enemy/aberration/sliver_blue.atlas",
     "deck": [
-      "decks/legends/Sliver_Weftwinder.dck"
+      "decks/legends/sliver_weftwinder.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -9904,7 +9904,7 @@
     "name": "Sliver Legion",
     "sprite": "sprites/enemy/aberration/sliver_red.atlas",
     "deck": [
-      "decks/legends/Sliver_Legion.dck"
+      "decks/legends/sliver_legion.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -9975,7 +9975,7 @@
     "name": "Rukarumel",
     "sprite": "sprites/enemy/humanoid/human/wizard/corrupted_greenwiz.atlas",
     "deck": [
-      "decks/legends/Rukarumel.dck"
+      "decks/legends/rukarumel.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -10045,7 +10045,7 @@
     "name": "Sliver Hivelord",
     "sprite": "sprites/enemy/aberration/sliver_green.atlas",
     "deck": [
-      "decks/legends/Sliver_Hivelord.dck"
+      "decks/legends/sliver_hivelord.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -10115,7 +10115,7 @@
     "name": "Sliver Gravemother",
     "sprite": "sprites/enemy/aberration/sliver_white.atlas",
     "deck": [
-      "decks/legends/Sliver_Gravemother.dck"
+      "decks/legends/sliver_gravemother.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -10185,7 +10185,7 @@
     "name": "Sliver Queen",
     "sprite": "sprites/enemy/aberration/sliver_queen.atlas",
     "deck": [
-      "decks/legends/Sliver_Queen.dck"
+      "decks/legends/sliver_queen.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -10256,7 +10256,7 @@
     "name": "Reaper King",
     "sprite": "sprites/enemy/construct/scarecrow.atlas",
     "deck": [
-      "decks/legends/Reaper_King.dck"
+      "decks/legends/reaper_king.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -10331,7 +10331,7 @@
     "name": "Teferi",
     "sprite": "sprites/enemy/humanoid/human/wizard/teferi.atlas",
     "deck": [
-      "decks/legends/Teferi.dck"
+      "decks/legends/teferi.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -10406,7 +10406,7 @@
     "name": "Asmira",
     "sprite": "sprites/enemy/humanoid/human/cleric/priest.atlas",
     "deck": [
-      "decks/legends/Asmira.dck"
+      "decks/legends/asmira.dck"
     ],
     "ai": "",
     "flying": true,
@@ -10539,7 +10539,7 @@
     "name": "Aphemia",
     "sprite": "sprites/enemy/monstrosity/harpy_2.atlas",
     "deck": [
-      "decks/legends/Aphemia.dck"
+      "decks/legends/aphemia.dck"
     ],
     "ai": "",
     "flying": true,
@@ -10680,7 +10680,7 @@
     "name": "Phlage",
     "sprite": "sprites/enemy/giant/firegiant.atlas",
     "deck": [
-      "decks/legends/Phlage.dck"
+      "decks/legends/phlage.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -10905,7 +10905,7 @@
     "name": "Vorinclex",
     "sprite": "sprites/enemy/aberration/phyrexianangel.atlas",
     "deck": [
-      "decks/legends/Vorinclex.dck"
+      "decks/legends/vorinclex.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -10985,7 +10985,7 @@
     "name": "Heliod",
     "sprite": "sprites/enemy/humanoid/human/soldier/hoplite.atlas",
     "deck": [
-      "decks/legends/Heliod.dck"
+      "decks/legends/heliod.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -11065,7 +11065,7 @@
     "name": "Inalla",
     "sprite": "sprites/enemy/humanoid/elf/druid.atlas",
     "deck": [
-      "decks/legends/Inalla.dck"
+      "decks/legends/inalla.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -11216,7 +11216,7 @@
     "name": "Mina and Denn",
     "sprite": "sprites/enemy/humanoid/elf/lizardrider.atlas",
     "deck": [
-      "decks/legends/Mina_and_denn.dck"
+      "decks/legends/mina_and_denn.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -11286,7 +11286,7 @@
     "name": "Nahiri",
     "sprite": "sprites/enemy/humanoid/kor/nahiri.atlas",
     "deck": [
-      "decks/legends/Nahiri.dck"
+      "decks/legends/nahiri.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -11361,7 +11361,7 @@
     "name": "General Tazri",
     "sprite": "sprites/enemy/humanoid/swordsman_3.atlas",
     "deck": [
-      "decks/legends/General_Tazri.dck"
+      "decks/legends/general_tazri.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -11534,7 +11534,7 @@
     "name": "Grand Arbiter",
     "sprite": "sprites/enemy/humanoid/human/wizard/archmage.atlas",
     "deck": [
-      "decks/legends/Grand_Arbiter.dck"
+      "decks/legends/grand_arbiter.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -11622,7 +11622,7 @@
     "name": "Aurelia",
     "sprite": "sprites/enemy/celestial/akroma.atlas",
     "deck": [
-      "decks/legends/Aurelia.dck"
+      "decks/legends/aurelia.dck"
     ],
     "ai": "",
     "flying": true,
@@ -11810,7 +11810,7 @@
     "name": "Inniaz",
     "sprite": "sprites/enemy/elemental/airelemental.atlas",
     "deck": [
-      "decks/legends/Inniaz.dck"
+      "decks/legends/inniaz.dck"
     ],
     "ai": "",
     "flying": true,
@@ -11899,7 +11899,7 @@
     "name": "Queen Marchesa",
     "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz3.atlas",
     "deck": [
-      "decks/legends/Queen_Marchesa.dck"
+      "decks/legends/queen_marchesa.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -12276,7 +12276,7 @@
     "name": "Borborygmos and Fblthp",
     "sprite": "sprites/enemy/giant/cyclops_2.atlas",
     "deck": [
-      "decks/legends/Borborygmos_and_Fblthp.dck"
+      "decks/legends/borborygmos_and_fblthp.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -12902,7 +12902,7 @@
     "name": "Jarad",
     "sprite": "sprites/enemy/undead/lich.atlas",
     "deck": [
-      "decks/legends/Jarad.dck"
+      "decks/legends/jarad.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -12990,7 +12990,7 @@
     "name": "Borborygmos",
     "sprite": "sprites/enemy/giant/cyclops_2.atlas",
     "deck": [
-      "decks/legends/Borborygmos.dck"
+      "decks/legends/borborygmos.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -13085,7 +13085,7 @@
     "name": "Wilhelt",
     "sprite": "sprites/enemy/undead/graverevenant.atlas",
     "deck": [
-      "decks/legends/Wilhelt.dck"
+      "decks/legends/wilhelt.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -13558,7 +13558,7 @@
     "name": "Niv-Mizzet",
     "sprite": "sprites/enemy/dragon/dragonlarge.atlas",
     "deck": [
-      "decks/legends/Niv-Mizzet.dck"
+      "decks/legends/niv-mizzet.dck"
     ],
     "ai": "",
     "flying": true,
@@ -14111,7 +14111,7 @@
     "name": "Illuna",
     "sprite": "sprites/enemy/dragon/ancientsilverdragon.atlas",
     "deck": [
-      "decks/legends/Illuna.dck"
+      "decks/legends/illuna.dck"
     ],
     "ai": "",
     "flying": true,
@@ -14200,7 +14200,7 @@
     "name": "Brokkos",
     "sprite": "sprites/enemy/beast/rhino.atlas",
     "deck": [
-      "decks/legends/Brokkos.dck"
+      "decks/legends/brokkos.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -14288,7 +14288,7 @@
     "name": "Vadrok",
     "sprite": "sprites/enemy/dragon/firedragon.atlas",
     "deck": [
-      "decks/legends/Vadrok.dck"
+      "decks/legends/vadrok.dck"
     ],
     "ai": "",
     "flying": true,
@@ -14377,7 +14377,7 @@
     "name": "Snapdax",
     "sprite": "sprites/enemy/beast/tiger.atlas",
     "deck": [
-      "decks/legends/Snapdax.dck"
+      "decks/legends/snapdax.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -14646,7 +14646,7 @@
     "name": "Velomachus",
     "sprite": "sprites/enemy/dragon/firedragon.atlas",
     "deck": [
-      "decks/legends/Velomachus.dck"
+      "decks/legends/velomachus.dck"
     ],
     "ai": "",
     "flying": true,
@@ -14735,7 +14735,7 @@
     "name": "Zurgo",
     "sprite": "sprites/enemy/humanoid/orc/orc_warrior.atlas",
     "deck": [
-      "decks/legends/Zurgo.dck"
+      "decks/legends/zurgo.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -14834,7 +14834,7 @@
     "name": "Phelddagrif",
     "sprite": "sprites/enemy/beast/hippo.atlas",
     "deck": [
-      "decks/legends/Phelddagrif.dck"
+      "decks/legends/phelddagrif.dck"
     ],
     "ai": "",
     "flying": true,
@@ -15172,7 +15172,7 @@
     "name": "Sisay",
     "sprite": "sprites/enemy/humanoid/elf/shaman.atlas",
     "deck": [
-      "decks/legends/Sisay.dck"
+      "decks/legends/sisay.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -15353,7 +15353,7 @@
     "name": "Baron Bertram",
     "sprite": "sprites/enemy/undead/vampire_4.atlas",
     "deck": [
-      "decks/legends/Baron_Bertram.dck"
+      "decks/legends/baron_bertram.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -15540,7 +15540,7 @@
     "name": "Galazeth",
     "sprite": "sprites/enemy/dragon/lathiss.atlas",
     "deck": [
-      "decks/legends/Galazeth.dck"
+      "decks/legends/galazeth.dck"
     ],
     "ai": "",
     "flying": true,
@@ -15718,7 +15718,7 @@
     "name": "Raffine",
     "sprite": "sprites/enemy/monstrosity/androsphinx.atlas",
     "deck": [
-      "decks/legends/deckname.dck"
+      "decks/legends/raffine.dck"
     ],
     "ai": "",
     "flying": true,
@@ -15907,7 +15907,7 @@
     "name": "Marrow-Gnawer",
     "sprite": "sprites/enemy/humanoid/nezumi/nezumi_berserker.atlas",
     "deck": [
-      "decks/legends/Marrow-Gnawer.dck"
+      "decks/legends/marrow-gnawer.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -16363,7 +16363,7 @@
     "name": "Prime Speaker Zegana",
     "sprite": "sprites/enemy/humanoid/merfolk/merfolk_lord.atlas",
     "deck": [
-      "decks/legends/Prime_Speaker_Zegana.dck"
+      "decks/legends/prime_speaker_zegana.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -16456,7 +16456,7 @@
     "name": "Infinite Guideline Station",
     "sprite": "sprites/enemy/construct/juggernaut.atlas",
     "deck": [
-      "decks/legends/Infinite_Guideline_Station.dck"
+      "decks/legends/infinite_guideline_station.dck"
     ],
     "ai": "",
     "flying": true,
@@ -17173,7 +17173,7 @@
     "name": "The Infamous Cruelclaw",
     "sprite": "sprites/enemy/humanoid/human/bandit/bandittrapster.atlas",
     "deck": [
-      "decks/legends/The_Infamous_Cruelclaw.dck"
+      "decks/legends/the_infamous_cruelclaw.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -18338,7 +18338,7 @@
     "name": "Albiorix",
     "sprite": "sprites/enemy/beast/chicken.atlas",
     "deck": [
-      "decks/legends/Albiorix.dck"
+      "decks/legends/albiorix.dck"
     ],
     "ai": "",
     "flying": true,
@@ -18405,7 +18405,7 @@
     "name": "Balmor",
     "sprite": "sprites/enemy/beast/owl.atlas",
     "deck": [
-      "decks/legends/Balmor.dck"
+      "decks/legends/balmor.dck"
     ],
     "ai": "",
     "flying": true,
@@ -18544,7 +18544,7 @@
     "name": "Commander Eesha",
     "sprite": "sprites/enemy/beast/falcon.atlas",
     "deck": [
-      "decks/legends/Commander_Eesha.dck"
+      "decks/legends/commander_eesha.dck"
     ],
     "ai": "",
     "flying": true,
@@ -19181,7 +19181,7 @@
     "name": "Halfdane",
     "sprite": "sprites/enemy/humanoid/human/warrior/caribou_elite.atlas",
     "deck": [
-      "decks/legends/Halfdane.dck"
+      "decks/legends/halfdane.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -19229,7 +19229,7 @@
     "name": "Hazezon",
     "sprite": "sprites/enemy/humanoid/human/wizard/red_wiz2.atlas",
     "deck": [
-      "decks/legends/Hazezon.dck"
+      "decks/legends/hazezon.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -19660,7 +19660,7 @@
     "name": "Aclazotz",
     "sprite": "sprites/enemy/beast/bat.atlas",
     "deck": [
-      "decks/legends/Aclazotz.dck"
+      "decks/legends/aclazotz.dck"
     ],
     "ai": "",
     "flying": true,
@@ -19727,7 +19727,7 @@
     "name": "Bontu",
     "sprite": "sprites/enemy/humanoid/viashino/dreamwalker.atlas",
     "deck": [
-      "decks/legends/Bontu.dck"
+      "decks/legends/bontu.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -20001,7 +20001,7 @@
     "name": "Cosima",
     "sprite": "sprites/enemy/humanoid/human/artificer/esper_artificer.atlas",
     "deck": [
-      "decks/legends/Cosima.dck"
+      "decks/legends/cosima.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -20067,7 +20067,7 @@
     "name": "Kefnet",
     "sprite": "sprites/enemy/humanoid/aven/ibisheadedaven.atlas",
     "deck": [
-      "decks/legends/Kefnet.dck"
+      "decks/legends/kefnet.dck"
     ],
     "ai": "",
     "flying": true,
@@ -20139,7 +20139,7 @@
     "name": "Ojer Pakpatiq",
     "sprite": "sprites/enemy/monstrosity/basilisk_3.atlas",
     "deck": [
-      "decks/legends/Ojer_Pakpatiq.dck"
+      "decks/legends/ojer_pakpatiq.dck"
     ],
     "ai": "",
     "flying": true,
@@ -20206,7 +20206,7 @@
     "name": "Brallin and Shabraz",
     "sprite": "sprites/enemy/humanoid/human/bandit/banditarcher.atlas",
     "deck": [
-      "decks/legends/Brallin_and_Shabraz.dck"
+      "decks/legends/brallin_and_shabraz.dck"
     ],
     "ai": "",
     "flying": true,
@@ -20278,7 +20278,7 @@
     "name": "Cazur and Ukkima",
     "sprite": "sprites/enemy/humanoid/human/warrior/antlered_elite.atlas",
     "deck": [
-      "decks/legends/Cazur_and_Ukkima.dck"
+      "decks/legends/cazur_and_ukkima.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -20349,7 +20349,7 @@
     "name": "Haldan and Pako",
     "sprite": "sprites/enemy/humanoid/human/wizard/green_wiz1.atlas",
     "deck": [
-      "decks/legends/Haldan_and_Pako.dck"
+      "decks/legends/haldan_and_pako.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -20420,7 +20420,7 @@
     "name": "Nikara and Yannik",
     "sprite": "sprites/enemy/humanoid/human/wizard/corrupted_greenwiz.atlas",
     "deck": [
-      "decks/legends/Nikara_and_Yannik.dck"
+      "decks/legends/nikara_and_yannik.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -20491,7 +20491,7 @@
     "name": "Trynn and Silvar",
     "sprite": "sprites/enemy/humanoid/human/cleric/monk_2.atlas",
     "deck": [
-      "decks/legends/Trynn_and_Silvar.dck"
+      "decks/legends/trynn_and_silvar.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -20562,7 +20562,7 @@
     "name": "Ascendant Evincar",
     "sprite": "sprites/enemy/undead/vampire_3.atlas",
     "deck": [
-      "decks/legends/Ascendant_Evincar.dck"
+      "decks/legends/ascendant_evincar.dck"
     ],
     "ai": "",
     "flying": true,
@@ -20696,7 +20696,7 @@
     "name": "Grandmother Sengir",
     "sprite": "sprites/enemy/humanoid/human/warlock/witchlarge.atlas",
     "deck": [
-      "decks/legends/Grandmother_Sengir.dck"
+      "decks/legends/grandmother_sengir.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -20762,7 +20762,7 @@
     "name": "Kazarov",
     "sprite": "sprites/enemy/undead/vampire_4.atlas",
     "deck": [
-      "decks/legends/Kazarov.dck"
+      "decks/legends/kazarov.dck"
     ],
     "ai": "",
     "flying": true,
@@ -20896,7 +20896,7 @@
     "name": "Shauku",
     "sprite": "sprites/enemy/undead/shade.atlas",
     "deck": [
-      "decks/legends/Shauku.dck"
+      "decks/legends/shauku.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -21166,7 +21166,7 @@
     "name": "Henrika",
     "sprite": "sprites/enemy/humanoid/human/warlock/witch.atlas",
     "deck": [
-      "decks/legends/Henrika.dck"
+      "decks/legends/henrika.dck"
     ],
     "ai": "",
     "flying": true,
@@ -21365,7 +21365,7 @@
     "name": "Strefan",
     "sprite": "sprites/enemy/undead/vampire_3.atlas",
     "deck": [
-      "decks/legends/Strefan.dck"
+      "decks/legends/strefan.dck"
     ],
     "ai": "",
     "flying": true,
@@ -21432,7 +21432,7 @@
     "name": "Timothar",
     "sprite": "sprites/enemy/undead/vampire_4.atlas",
     "deck": [
-      "decks/legends/Timothar.dck"
+      "decks/legends/timothar.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -21564,7 +21564,7 @@
     "name": "Dragonhawk",
     "sprite": "sprites/enemy/dragon/firedragon.atlas",
     "deck": [
-      "decks/legends/Dragonhawk.dck"
+      "decks/legends/dragonhawk.dck"
     ],
     "ai": "",
     "flying": true,
@@ -21764,7 +21764,7 @@
     "name": "Maha",
     "sprite": "sprites/enemy/beast/owl.atlas",
     "deck": [
-      "decks/legends/Maha.dck"
+      "decks/legends/maha.dck"
     ],
     "ai": "",
     "flying": true,
@@ -22041,7 +22041,7 @@
     "name": "Liesa",
     "sprite": "sprites/enemy/celestial/fallen_angel.atlas",
     "deck": [
-      "decks/legends/Liesa.dck"
+      "decks/legends/liesa.dck"
     ],
     "ai": "",
     "flying": true,
@@ -22113,7 +22113,7 @@
     "name": "Sigarda",
     "sprite": "sprites/enemy/celestial/maelstrom_angel.atlas",
     "deck": [
-      "decks/legends/Sigarda.dck"
+      "decks/legends/sigarda.dck"
     ],
     "ai": "",
     "flying": true,
@@ -22186,7 +22186,7 @@
     "name": "Taborax",
     "sprite": "sprites/enemy/fiend/abyssalbaron.atlas",
     "deck": [
-      "decks/legends/Taborax.dck"
+      "decks/legends/taborax.dck"
     ],
     "ai": "",
     "flying": true,
@@ -22320,7 +22320,7 @@
     "name": "Skithiryx",
     "sprite": "sprites/enemy/dragon/bonedragon.atlas",
     "deck": [
-      "decks/legends/Skithiryx.dck"
+      "decks/legends/skithiryx.dck"
     ],
     "ai": "",
     "flying": true,
@@ -22388,7 +22388,7 @@
     "name": "Arabella",
     "sprite": "sprites/enemy/humanoid/human/cleric/priest.atlas",
     "deck": [
-      "decks/legends/Arabella.dck"
+      "decks/legends/arabella.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -22530,7 +22530,7 @@
     "name": "Marina",
     "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz3.atlas",
     "deck": [
-      "decks/legends/Marina_Vendrell.dck"
+      "decks/legends/marina_vendrell.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -22596,7 +22596,7 @@
     "name": "Rendmaw",
     "sprite": "sprites/enemy/construct/scarecrow.atlas",
     "deck": [
-      "decks/legends/Rendmaw.dck"
+      "decks/legends/rendmaw.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -22861,7 +22861,7 @@
     "name": "The Mindskinner",
     "sprite": "sprites/enemy/monstrosity/homarid.atlas",
     "deck": [
-      "decks/legends/The_Mindskinner.dck"
+      "decks/legends/the_mindskinner.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -23070,7 +23070,7 @@
     "name": "Wayta",
     "sprite": "sprites/enemy/humanoid/elf/shaman_2.atlas",
     "deck": [
-      "decks/legends/Wayta.dck"
+      "decks/legends/wayta.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -23136,7 +23136,7 @@
     "name": "Huatli",
     "sprite": "sprites/enemy/humanoid/elf/green_wiz3.atlas",
     "deck": [
-      "decks/legends/Huatli.dck"
+      "decks/legends/huatli.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -23202,7 +23202,7 @@
     "name": "Nezahal",
     "sprite": "sprites/enemy/monstrosity/sandwurm2.atlas",
     "deck": [
-      "decks/legends/Nezahal.dck"
+      "decks/legends/nezahal.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -23334,7 +23334,7 @@
     "name": "Ghalta",
     "sprite": "sprites/enemy/beast/ghalta.atlas",
     "deck": [
-      "decks/legends/Ghalta.dck"
+      "decks/legends/ghalta.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -23471,7 +23471,7 @@
     "name": "Tsagan",
     "sprite": "sprites/enemy/humanoid/viashino/scout_2.atlas",
     "deck": [
-      "decks/legends/Tsagan.dck"
+      "decks/legends/tsagan.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -23537,7 +23537,7 @@
     "name": "Zetalpa",
     "sprite": "sprites/enemy/dragon/drake.atlas",
     "deck": [
-      "decks/legends/Zetalpa.dck"
+      "decks/legends/zetalpa.dck"
     ],
     "ai": "",
     "flying": true,
@@ -23604,7 +23604,7 @@
     "name": "Zilortha",
     "sprite": "sprites/enemy/beast/ancient.atlas",
     "deck": [
-      "decks/legends/Zilortha.dck"
+      "decks/legends/zilortha.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -23671,7 +23671,7 @@
     "name": "Amalia",
     "sprite": "sprites/enemy/humanoid/human/cleric/cleric_orzhov.atlas",
     "deck": [
-      "decks/legends/Amalia.dck"
+      "decks/legends/amalia.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -23737,7 +23737,7 @@
     "name": "Carmen",
     "sprite": "sprites/enemy/humanoid/human/cleric/monk_2.atlas",
     "deck": [
-      "decks/legends/Carmen.dck"
+      "decks/legends/carmen.dck"
     ],
     "ai": "",
     "flying": true,
@@ -23804,7 +23804,7 @@
     "name": "Clavileño",
     "sprite": "sprites/enemy/undead/vampire_3.atlas",
     "deck": [
-      "decks/legends/Clavileño.dck"
+      "decks/legends/clavileño.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -23936,7 +23936,7 @@
     "name": "Saint Elenda",
     "sprite": "sprites/enemy/humanoid/paladin_2.atlas",
     "deck": [
-      "decks/legends/Saint_Elenda.dck"
+      "decks/legends/saint_elenda.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -24012,7 +24012,7 @@
     "name": "Evereth",
     "sprite": "sprites/enemy/humanoid/human/knight/death_knight.atlas",
     "deck": [
-      "decks/legends/Evereth.dck"
+      "decks/legends/evereth.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -24078,7 +24078,7 @@
     "name": "Vito",
     "sprite": "sprites/enemy/undead/vampire_2.atlas",
     "deck": [
-      "decks/legends/Vito.dck"
+      "decks/legends/vito.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -24220,7 +24220,7 @@
     "name": "Brimaz",
     "sprite": "sprites/enemy/humanoid/leonin/lion_2.atlas",
     "deck": [
-      "decks/legends/Brimaz.dck"
+      "decks/legends/brimaz.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -24291,7 +24291,7 @@
     "name": "Ria Ivor",
     "sprite": "sprites/enemy/humanoid/human/knight/death_knight.atlas",
     "deck": [
-      "decks/legends/Ria_Ivor.dck"
+      "decks/legends/ria_ivor.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -24428,7 +24428,7 @@
     "name": "Skrelv",
     "sprite": "sprites/enemy/beast/spider_cave.atlas",
     "deck": [
-      "decks/legends/Skrelv.dck"
+      "decks/legends/skrelv.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -24495,7 +24495,7 @@
     "name": "Clement",
     "sprite": "sprites/enemy/humanoid/viashino/lizardwizard.atlas",
     "deck": [
-      "decks/legends/Clement.dck"
+      "decks/legends/clement.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -24561,7 +24561,7 @@
     "name": "Flubs",
     "sprite": "sprites/enemy/humanoid/viashino/pikelizard.atlas",
     "deck": [
-      "decks/legends/Flubs.dck"
+      "decks/legends/flubs.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -24825,7 +24825,7 @@
     "name": "Ishkanah",
     "sprite": "sprites/enemy/beast/spider_purple.atlas",
     "deck": [
-      "decks/legends/Ishkanah.dck"
+      "decks/legends/ishkanah.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -24896,7 +24896,7 @@
     "name": "Muldrotha",
     "sprite": "sprites/enemy/elemental/waterelemental_3.atlas",
     "deck": [
-      "decks/legends/Muldrotha.dck"
+      "decks/legends/muldrotha.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -25028,7 +25028,7 @@
     "name": "Saryth",
     "sprite": "sprites/enemy/humanoid/elf/shaman_2.atlas",
     "deck": [
-      "decks/legends/Saryth.dck"
+      "decks/legends/saryth.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -25094,7 +25094,7 @@
     "name": "Tatsunari",
     "sprite": "sprites/enemy/beast/frog.atlas",
     "deck": [
-      "decks/legends/Tatsunari.dck"
+      "decks/legends/tatsunari.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -25160,7 +25160,7 @@
     "name": "Uurg",
     "sprite": "sprites/enemy/aberration/froghemoth.atlas",
     "deck": [
-      "decks/legends/Uurg.dck"
+      "decks/legends/uurg.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -25226,7 +25226,7 @@
     "name": "Yargle and Multani",
     "sprite": "sprites/enemy/aberration/froghemoth.atlas",
     "deck": [
-      "decks/legends/Yargle_and_Multani.dck"
+      "decks/legends/yargle_and_multani.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -25363,7 +25363,7 @@
     "name": "Pashalik Mons",
     "sprite": "sprites/enemy/humanoid/goblin/goblin.atlas",
     "deck": [
-      "decks/legends/Pashalik_Mons.dck"
+      "decks/legends/pashalik_mons.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -25429,7 +25429,7 @@
     "name": "Kiki-Jiki",
     "sprite": "sprites/enemy/humanoid/goblin/goblin_2.atlas",
     "deck": [
-      "decks/legends/Kiki-Jiki.dck"
+      "decks/legends/kiki-jiki.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -25566,7 +25566,7 @@
     "name": "Muxus",
     "sprite": "sprites/enemy/humanoid/goblin/goblinking.atlas",
     "deck": [
-      "decks/legends/Muxus.dck"
+      "decks/legends/muxus.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -25632,7 +25632,7 @@
     "name": "Redshift",
     "sprite": "sprites/enemy/humanoid/goblin/wolf_rider_2.atlas",
     "deck": [
-      "decks/legends/Redshift.dck"
+      "decks/legends/redshift.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -25698,7 +25698,7 @@
     "name": "Kolvori",
     "sprite": "sprites/enemy/humanoid/elf/druid.atlas",
     "deck": [
-      "decks/legends/Kolvori.dck"
+      "decks/legends/kolvori.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -25764,7 +25764,7 @@
     "name": "Nylea",
     "sprite": "sprites/enemy/humanoid/elf/hunter.atlas",
     "deck": [
-      "decks/legends/Nylea.dck"
+      "decks/legends/nylea.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -25835,7 +25835,7 @@
     "name": "Rhonas",
     "sprite": "sprites/enemy/humanoid/viashino/dreamwalker_2.atlas",
     "deck": [
-      "decks/legends/Rhonas.dck"
+      "decks/legends/rhonas.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -26068,7 +26068,7 @@
     "name": "Akroma and Keleth",
     "sprite": "sprites/enemy/celestial/akroma.atlas",
     "deck": [
-      "decks/legends/Akroma_and_Keleth.dck"
+      "decks/legends/akroma_and_keleth.dck"
     ],
     "ai": "",
     "flying": true,
@@ -26299,7 +26299,7 @@
     "name": "Radiant",
     "sprite": "sprites/enemy/celestial/peerlesssolar.atlas",
     "deck": [
-      "decks/legends/Radiant.dck"
+      "decks/legends/radiant.dck"
     ],
     "ai": "",
     "flying": true,
@@ -26371,7 +26371,7 @@
     "name": "Rienne",
     "sprite": "sprites/enemy/celestial/maelstrom_angel.atlas",
     "deck": [
-      "decks/legends/Rienne.dck"
+      "decks/legends/rienne.dck"
     ],
     "ai": "",
     "flying": true,
@@ -26505,7 +26505,7 @@
     "name": "Darigaaz",
     "sprite": "sprites/enemy/dragon/dragon.atlas",
     "deck": [
-      "decks/legends/Darigaaz.dck"
+      "decks/legends/darigaaz.dck"
     ],
     "ai": "",
     "flying": true,
@@ -26582,7 +26582,7 @@
     "name": "Dromar",
     "sprite": "sprites/enemy/dragon/ancientsilverdragon.atlas",
     "deck": [
-      "decks/legends/Dromar.dck"
+      "decks/legends/dromar.dck"
     ],
     "ai": "",
     "flying": true,
@@ -26649,7 +26649,7 @@
     "name": "Rith",
     "sprite": "sprites/enemy/dragon/adultgreendragon.atlas",
     "deck": [
-      "decks/legends/Rith.dck"
+      "decks/legends/rith.dck"
     ],
     "ai": "",
     "flying": true,
@@ -26721,7 +26721,7 @@
     "name": "Treva",
     "sprite": "sprites/enemy/dragon/ancientsilverdragon.atlas",
     "deck": [
-      "decks/legends/Treva.dck"
+      "decks/legends/treva.dck"
     ],
     "ai": "",
     "flying": true,
@@ -26788,7 +26788,7 @@
     "name": "Grakmaw",
     "sprite": "sprites/enemy/monstrosity/hydra.atlas",
     "deck": [
-      "decks/legends/Grakmaw.dck"
+      "decks/legends/grakmaw.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -26854,7 +26854,7 @@
     "name": "Gyrus",
     "sprite": "sprites/enemy/monstrosity/hydra_large.atlas",
     "deck": [
-      "decks/legends/Gyrus.dck"
+      "decks/legends/gyrus.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -26920,7 +26920,7 @@
     "name": "Polukranos",
     "sprite": "sprites/enemy/monstrosity/hydra.atlas",
     "deck": [
-      "decks/legends/Polukranos.dck"
+      "decks/legends/polukranos.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -26996,7 +26996,7 @@
     "name": "Ulasht",
     "sprite": "sprites/enemy/monstrosity/sandwurm.atlas",
     "deck": [
-      "decks/legends/Ulasht.dck"
+      "decks/legends/ulasht.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -27062,7 +27062,7 @@
     "name": "Zaxara",
     "sprite": "sprites/enemy/monstrosity/hydra_large.atlas",
     "deck": [
-      "decks/legends/Zaxara.dck"
+      "decks/legends/zaxara.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -27194,7 +27194,7 @@
     "name": "Kothophed",
     "sprite": "sprites/enemy/fiend/demon_3.atlas",
     "deck": [
-      "decks/legends/Kothophed.dck"
+      "decks/legends/kothophed.dck"
     ],
     "ai": "",
     "flying": true,
@@ -27261,7 +27261,7 @@
     "name": "Belzenlok",
     "sprite": "sprites/enemy/fiend/archfiend.atlas",
     "deck": [
-      "decks/legends/Belzenlok.dck"
+      "decks/legends/belzenlok.dck"
     ],
     "ai": "",
     "flying": true,
@@ -27328,7 +27328,7 @@
     "name": "Razaketh",
     "sprite": "sprites/enemy/fiend/scourgemaster.atlas",
     "deck": [
-      "decks/legends/Razaketh.dck"
+      "decks/legends/razaketh.dck"
     ],
     "ai": "",
     "flying": true,
@@ -27395,7 +27395,7 @@
     "name": "Ayara",
     "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz3.atlas",
     "deck": [
-      "decks/legends/Ayara.dck"
+      "decks/legends/ayara.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -27466,7 +27466,7 @@
     "name": "Gadwick",
     "sprite": "sprites/enemy/humanoid/human/wizard/blue_wiz2.atlas",
     "deck": [
-      "decks/legends/Gadwick.dck"
+      "decks/legends/gadwick.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -27537,7 +27537,7 @@
     "name": "Linden",
     "sprite": "sprites/enemy/humanoid/elf/shaman_2.atlas",
     "deck": [
-      "decks/legends/Linden.dck"
+      "decks/legends/linden.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -27735,7 +27735,7 @@
     "name": "Syr Elenora",
     "sprite": "sprites/enemy/humanoid/knight.atlas",
     "deck": [
-      "decks/legends/Syr_Elenora.dck"
+      "decks/legends/syr_elenora.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -27801,7 +27801,7 @@
     "name": "Syr Faren",
     "sprite": "sprites/enemy/humanoid/dwarf/bear_cavalry.atlas",
     "deck": [
-      "decks/legends/Syr_Faren.dck"
+      "decks/legends/syr_faren.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -27867,7 +27867,7 @@
     "name": "Syr Konrad",
     "sprite": "sprites/enemy/humanoid/human/knight/death_knight.atlas",
     "deck": [
-      "decks/legends/Syr_Konrad.dck"
+      "decks/legends/syr_konrad.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -27933,7 +27933,7 @@
     "name": "Torbran",
     "sprite": "sprites/enemy/humanoid/dwarf/dwarf_5.atlas",
     "deck": [
-      "decks/legends/Torbran.dck"
+      "decks/legends/torbran.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -28004,7 +28004,7 @@
     "name": "Yorvo",
     "sprite": "sprites/enemy/giant/forestgiant.atlas",
     "deck": [
-      "decks/legends/Yorvo.dck"
+      "decks/legends/yorvo.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -28070,7 +28070,7 @@
     "name": "Emperor Mihail",
     "sprite": "sprites/enemy/humanoid/merfolk/naga.atlas",
     "deck": [
-      "decks/legends/Emperor_Mihail.dck"
+      "decks/legends/emperor_mihail.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -28136,7 +28136,7 @@
     "name": "Hakbal",
     "sprite": "sprites/enemy/humanoid/viashino/lizardwizard.atlas",
     "deck": [
-      "decks/legends/Hakbal.dck"
+      "decks/legends/hakbal.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -28202,7 +28202,7 @@
     "name": "Kenessos",
     "sprite": "sprites/enemy/humanoid/merfolk/merfolk.atlas",
     "deck": [
-      "decks/legends/Kenessos.dck"
+      "decks/legends/kenessos.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -28268,7 +28268,7 @@
     "name": "Svyelun",
     "sprite": "sprites/enemy/humanoid/merfolk/merfolk_lord.atlas",
     "deck": [
-      "decks/legends/Svyelun.dck"
+      "decks/legends/svyelun.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -28334,7 +28334,7 @@
     "name": "Tatyova",
     "sprite": "sprites/enemy/humanoid/merfolk/mermaid.atlas",
     "deck": [
-      "decks/legends/Tatyova.dck"
+      "decks/legends/tatyova.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -28405,7 +28405,7 @@
     "name": "Tishana",
     "sprite": "sprites/enemy/humanoid/viashino/dreamwalker_2.atlas",
     "deck": [
-      "decks/legends/Tishana.dck"
+      "decks/legends/tishana.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -28471,7 +28471,7 @@
     "name": "Brudiclad",
     "sprite": "sprites/enemy/construct/myr.atlas",
     "deck": [
-      "decks/legends/Brudiclad.dck"
+      "decks/legends/brudiclad.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -28537,7 +28537,7 @@
     "name": "Rona",
     "sprite": "sprites/enemy/humanoid/elf/shaman.atlas",
     "deck": [
-      "decks/legends/Rona.dck"
+      "decks/legends/rona.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -28613,7 +28613,7 @@
     "name": "Tekuthal",
     "sprite": "sprites/enemy/fiend/aerie_guard.atlas",
     "deck": [
-      "decks/legends/Tekuthal.dck"
+      "decks/legends/tekuthal.dck"
     ],
     "ai": "",
     "flying": true,
@@ -28680,7 +28680,7 @@
     "name": "Unctus",
     "sprite": "sprites/enemy/aberration/gitaxianunderling.atlas",
     "deck": [
-      "decks/legends/Unctus.dck"
+      "decks/legends/unctus.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -28746,7 +28746,7 @@
     "name": "Ashnod",
     "sprite": "sprites/enemy/humanoid/human/shaman/chandra.atlas",
     "deck": [
-      "decks/legends/Ashnod.dck"
+      "decks/legends/ashnod.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -28817,7 +28817,7 @@
     "name": "Farid",
     "sprite": "sprites/enemy/humanoid/human/soldier/hoplite.atlas",
     "deck": [
-      "decks/legends/Farid.dck"
+      "decks/legends/farid.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -28883,7 +28883,7 @@
     "name": "Hajar",
     "sprite": "sprites/enemy/humanoid/human/soldier/legionite.atlas",
     "deck": [
-      "decks/legends/Hajar.dck"
+      "decks/legends/hajar.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -28949,7 +28949,7 @@
     "name": "Ao",
     "sprite": "sprites/enemy/monstrosity/sandwurm2.atlas",
     "deck": [
-      "decks/legends/Ao.dck"
+      "decks/legends/ao.dck"
     ],
     "ai": "",
     "flying": true,
@@ -29016,7 +29016,7 @@
     "name": "Atsushi",
     "sprite": "sprites/enemy/dragon/firedragon.atlas",
     "deck": [
-      "decks/legends/Atsushi.dck"
+      "decks/legends/atsushi.dck"
     ],
     "ai": "",
     "flying": true,
@@ -29083,7 +29083,7 @@
     "name": "Junji",
     "sprite": "sprites/enemy/aberration/leech_2.atlas",
     "deck": [
-      "decks/legends/Junji.dck"
+      "decks/legends/junji.dck"
     ],
     "ai": "",
     "flying": true,
@@ -29150,7 +29150,7 @@
     "name": "Kairi",
     "sprite": "sprites/enemy/dragon/ancientsilverdragon.atlas",
     "deck": [
-      "decks/legends/Kairi.dck"
+      "decks/legends/kairi.dck"
     ],
     "ai": "",
     "flying": true,
@@ -29222,7 +29222,7 @@
     "name": "Kura",
     "sprite": "sprites/enemy/beast/big_snake.atlas",
     "deck": [
-      "decks/legends/Kura.dck"
+      "decks/legends/kura.dck"
     ],
     "ai": "",
     "flying": true,
@@ -29289,7 +29289,7 @@
     "name": "Ertai",
     "sprite": "sprites/enemy/aberration/gitaxianscientist.atlas",
     "deck": [
-      "decks/legends/Ertai.dck"
+      "decks/legends/ertai.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -29365,7 +29365,7 @@
     "name": "Greven",
     "sprite": "sprites/enemy/aberration/furnacetormentor.atlas",
     "deck": [
-      "decks/legends/Greven.dck"
+      "decks/legends/greven.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -29436,7 +29436,7 @@
     "name": "Tsabo Tavoc",
     "sprite": "sprites/enemy/aberration/drossgrimnarch.atlas",
     "deck": [
-      "decks/legends/Tsabo_Tavoc.dck"
+      "decks/legends/tsabo_tavoc.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -29502,7 +29502,7 @@
     "name": "Birgi",
     "sprite": "sprites/enemy/humanoid/elf/shaman.atlas",
     "deck": [
-      "decks/legends/Birgi.dck"
+      "decks/legends/birgi.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -29568,7 +29568,7 @@
     "name": "Hazoret",
     "sprite": "sprites/enemy/humanoid/khenra/jackalwarrior.atlas",
     "deck": [
-      "decks/legends/Hazoret.dck"
+      "decks/legends/hazoret.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -29644,7 +29644,7 @@
     "name": "Ilharg",
     "sprite": "sprites/enemy/beast/boar.atlas",
     "deck": [
-      "decks/legends/Ilharg.dck"
+      "decks/legends/ilharg.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -29710,7 +29710,7 @@
     "name": "Purphoros",
     "sprite": "sprites/enemy/giant/godlytitan.atlas",
     "deck": [
-      "decks/legends/Purphoros.dck"
+      "decks/legends/purphoros.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -29781,7 +29781,7 @@
     "name": "Toralf",
     "sprite": "sprites/enemy/humanoid/dwarf/dwarf_5.atlas",
     "deck": [
-      "decks/legends/Toralf.dck"
+      "decks/legends/toralf.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -29847,7 +29847,7 @@
     "name": "Eladamri",
     "sprite": "sprites/enemy/humanoid/elf/druid.atlas",
     "deck": [
-      "decks/legends/Eladamri.dck"
+      "decks/legends/eladamri.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -29918,7 +29918,7 @@
     "name": "Rhys",
     "sprite": "sprites/enemy/fey/satyr.atlas",
     "deck": [
-      "decks/legends/Rhys.dck"
+      "decks/legends/rhys.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -29994,7 +29994,7 @@
     "name": "Harald",
     "sprite": "sprites/enemy/humanoid/human/warrior/gladiator.atlas",
     "deck": [
-      "decks/legends/Harald.dck"
+      "decks/legends/harald.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -30060,7 +30060,7 @@
     "name": "Marwyn",
     "sprite": "sprites/enemy/humanoid/elf/hunter.atlas",
     "deck": [
-      "decks/legends/Marwyn.dck"
+      "decks/legends/marwyn.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -30131,7 +30131,7 @@
     "name": "Miara and Numa",
     "sprite": "sprites/enemy/humanoid/elf/shaman_2.atlas",
     "deck": [
-      "decks/legends/Miara_and_Numa.dck"
+      "decks/legends/miara_and_numa.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -30202,7 +30202,7 @@
     "name": "Aesi",
     "sprite": "sprites/enemy/beast/big_snake.atlas",
     "deck": [
-      "decks/legends/Aesi.dck"
+      "decks/legends/aesi.dck"
     ],
     "ai": "",
     "flying": true,
@@ -30269,7 +30269,7 @@
     "name": "Arixmethes",
     "sprite": "sprites/enemy/beast/turtle.atlas",
     "deck": [
-      "decks/legends/Arixmethes.dck"
+      "decks/legends/arixmethes.dck"
     ],
     "ai": "",
     "flying": true,
@@ -30336,7 +30336,7 @@
     "name": "Charix",
     "sprite": "sprites/enemy/beast/crab.atlas",
     "deck": [
-      "decks/legends/Charix.dck"
+      "decks/legends/charix.dck"
     ],
     "ai": "",
     "flying": true,
@@ -30404,7 +30404,7 @@
     "name": "Plagon",
     "sprite": "sprites/enemy/beast/octopus.atlas",
     "deck": [
-      "decks/legends/Plagon.dck"
+      "decks/legends/plagon.dck"
     ],
     "ai": "",
     "flying": true,
@@ -30471,7 +30471,7 @@
     "name": "Xolatoyac",
     "sprite": "sprites/enemy/monstrosity/sandwurm.atlas",
     "deck": [
-      "decks/legends/Xolatoyac.dck"
+      "decks/legends/xolatoyac.dck"
     ],
     "ai": "",
     "flying": true,
@@ -30538,7 +30538,7 @@
     "name": "Jenara",
     "sprite": "sprites/enemy/celestial/maelstrom_angel.atlas",
     "deck": [
-      "decks/legends/Jenara.dck"
+      "decks/legends/jenara.dck"
     ],
     "ai": "",
     "flying": true,
@@ -30605,7 +30605,7 @@
     "name": "Kresh",
     "sprite": "sprites/enemy/humanoid/human/barbarian/barbarian.atlas",
     "deck": [
-      "decks/legends/Kresh.dck"
+      "decks/legends/kresh.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -30671,7 +30671,7 @@
     "name": "Mayael",
     "sprite": "sprites/enemy/humanoid/elf/druid_2.atlas",
     "deck": [
-      "decks/legends/Mayael.dck"
+      "decks/legends/mayael.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -30737,7 +30737,7 @@
     "name": "Sen Triplets",
     "sprite": "sprites/enemy/humanoid/human/warlock/witch.atlas",
     "deck": [
-      "decks/legends/Sen_Triplets.dck"
+      "decks/legends/sen_triplets.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -30803,7 +30803,7 @@
     "name": "Thraximundar",
     "sprite": "sprites/enemy/undead/pestilencelord.atlas",
     "deck": [
-      "decks/legends/Thraximundar.dck"
+      "decks/legends/thraximundar.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -30869,7 +30869,7 @@
     "name": "Drivnod",
     "sprite": "sprites/enemy/aberration/drossgrimnarch.atlas",
     "deck": [
-      "decks/legends/Drivnod.dck"
+      "decks/legends/drivnod.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -30935,7 +30935,7 @@
     "name": "Vraan",
     "sprite": "sprites/enemy/aberration/drossgladiator.atlas",
     "deck": [
-      "decks/legends/Vraan.dck"
+      "decks/legends/vraan.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -31001,7 +31001,7 @@
     "name": "Kinzu",
     "sprite": "sprites/enemy/humanoid/human/warlock/witch.atlas",
     "deck": [
-      "decks/legends/Kinzu.dck"
+      "decks/legends/kinzu.dck"
     ],
     "ai": "",
     "flying": true,
@@ -31068,7 +31068,7 @@
     "name": "Elas il-Kor",
     "sprite": "sprites/enemy/humanoid/kor/kor_blue.atlas",
     "deck": [
-      "decks/legends/Elas_il-Kor.dck"
+      "decks/legends/elas_il-kor.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -31134,7 +31134,7 @@
     "name": "Aeve",
     "sprite": "sprites/enemy/ooze/giant_slime.atlas",
     "deck": [
-      "decks/legends/Aeve.dck"
+      "decks/legends/aeve.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -31266,7 +31266,7 @@
     "name": "Mitotic Ultimus",
     "sprite": "sprites/enemy/ooze/giant_slime.atlas",
     "deck": [
-      "decks/legends/Mitotic_Ultimus.dck"
+      "decks/legends/mitotic_ultimus.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -31332,7 +31332,7 @@
     "name": "Slogurk",
     "sprite": "sprites/enemy/ooze/oozeboss.atlas",
     "deck": [
-      "decks/legends/Slogurk.dck"
+      "decks/legends/slogurk.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -31398,7 +31398,7 @@
     "name": "Terrian",
     "sprite": "sprites/enemy/ooze/oozeboss.atlas",
     "deck": [
-      "decks/legends/Terrian.dck"
+      "decks/legends/terrian.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -31464,7 +31464,7 @@
     "name": "Toxrill",
     "sprite": "sprites/enemy/beast/scarab.atlas",
     "deck": [
-      "decks/legends/Toxrill.dck"
+      "decks/legends/toxrill.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -31531,7 +31531,7 @@
     "name": "Yennet",
     "sprite": "sprites/enemy/monstrosity/criosphinx.atlas",
     "deck": [
-      "decks/legends/Yennet.dck"
+      "decks/legends/yennet.dck"
     ],
     "ai": "",
     "flying": true,
@@ -31598,7 +31598,7 @@
     "name": "Atemsis",
     "sprite": "sprites/enemy/monstrosity/criosphinx.atlas",
     "deck": [
-      "decks/legends/Atemsis.dck"
+      "decks/legends/atemsis.dck"
     ],
     "ai": "",
     "flying": true,
@@ -31804,7 +31804,7 @@
     "name": "Medomai",
     "sprite": "sprites/enemy/monstrosity/androsphinx.atlas",
     "deck": [
-      "decks/legends/Medomai.dck"
+      "decks/legends/medomai.dck"
     ],
     "ai": "",
     "flying": true,
@@ -31871,7 +31871,7 @@
     "name": "Camellia",
     "sprite": "sprites/enemy/beast/squirrel.atlas",
     "deck": [
-      "decks/legends/Camellia.dck"
+      "decks/legends/camellia.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -31937,7 +31937,7 @@
     "name": "Hazel",
     "sprite": "sprites/enemy/beast/squirrel.atlas",
     "deck": [
-      "decks/legends/Hazel.dck"
+      "decks/legends/hazel.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -32003,7 +32003,7 @@
     "name": "Euru",
     "sprite": "sprites/enemy/beast/squirrel.atlas",
     "deck": [
-      "decks/legends/Euru.dck"
+      "decks/legends/euru.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -32069,7 +32069,7 @@
     "name": "Toski",
     "sprite": "sprites/enemy/beast/squirrel.atlas",
     "deck": [
-      "decks/legends/Toski.dck"
+      "decks/legends/toski.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -32135,7 +32135,7 @@
     "name": "Calamity",
     "sprite": "sprites/enemy/beast/horseblack.atlas",
     "deck": [
-      "decks/legends/Calamity.dck"
+      "decks/legends/calamity.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -32201,7 +32201,7 @@
     "name": "Felix",
     "sprite": "sprites/enemy/ooze/giant_slime.atlas",
     "deck": [
-      "decks/legends/Felix.dck"
+      "decks/legends/felix.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -32267,7 +32267,7 @@
     "name": "Honest Rutstein",
     "sprite": "sprites/enemy/humanoid/human/artificer/archaeologist.atlas",
     "deck": [
-      "decks/legends/Honest_Rutstein.dck"
+      "decks/legends/honest_rutstein.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -32338,7 +32338,7 @@
     "name": "Jolene",
     "sprite": "sprites/enemy/humanoid/elf/hunter_2.atlas",
     "deck": [
-      "decks/legends/Jolene.dck"
+      "decks/legends/jolene.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -32409,7 +32409,7 @@
     "name": "Laughing Jasper Flint",
     "sprite": "sprites/enemy/humanoid/viashino/scout_2.atlas",
     "deck": [
-      "decks/legends/Laughing_Jasper_Flint.dck"
+      "decks/legends/laughing_jasper_flint.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -32475,7 +32475,7 @@
     "name": "Obeka",
     "sprite": "sprites/enemy/giant/troll.atlas",
     "deck": [
-      "decks/legends/Obeka.dck"
+      "decks/legends/obeka.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -32612,7 +32612,7 @@
     "name": "Satoru",
     "sprite": "sprites/enemy/humanoid/human/rogue/rogue.atlas",
     "deck": [
-      "decks/legends/Satoru.dck"
+      "decks/legends/satoru.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -32977,7 +32977,7 @@
     "name": "Niambi",
     "sprite": "sprites/enemy/humanoid/human/cleric/cleric.atlas",
     "deck": [
-      "decks/legends/Niambi.dck"
+      "decks/legends/niambi.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -33181,7 +33181,7 @@
     "name": "Anikthea",
     "sprite": "sprites/enemy/humanoid/elf/shaman.atlas",
     "deck": [
-      "decks/legends/Anikthea.dck"
+      "decks/legends/anikthea.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -33379,7 +33379,7 @@
     "name": "Atris",
     "sprite": "sprites/enemy/undead/lich_3.atlas",
     "deck": [
-      "decks/legends/Atris.dck"
+      "decks/legends/atris.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -33445,7 +33445,7 @@
     "name": "Kunoros",
     "sprite": "sprites/enemy/fiend/hellhound_2.atlas",
     "deck": [
-      "decks/legends/Kunoros.dck"
+      "decks/legends/kunoros.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -33715,7 +33715,7 @@
     "name": "Solphim",
     "sprite": "sprites/enemy/aberration/drossgrimnarch.atlas",
     "deck": [
-      "decks/legends/Solphim.dck"
+      "decks/legends/solphim.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -34742,7 +34742,7 @@
     "name": "Adeliz",
     "sprite": "sprites/enemy/humanoid/human/shaman/chandra.atlas",
     "deck": [
-      "decks/legends/Adeliz.dck"
+      "decks/legends/adeliz.dck"
     ],
     "ai": "",
     "flying": true,
@@ -35145,7 +35145,7 @@
     "name": "Mairsil",
     "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz2.atlas",
     "deck": [
-      "decks/legends/Mairsil.dck"
+      "decks/legends/mairsil.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -35480,7 +35480,7 @@
     "name": "The Archimandrite",
     "sprite": "sprites/enemy/humanoid/human/cleric/monk_3.atlas",
     "deck": [
-      "decks/legends/The_Archimandrite.dck"
+      "decks/legends/the_archimandrite.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -35612,7 +35612,7 @@
     "name": "Jori En",
     "sprite": "sprites/enemy/humanoid/merfolk/merfolk.atlas",
     "deck": [
-      "decks/legends/Jori_en.dck"
+      "decks/legends/jori_en.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -36057,7 +36057,7 @@
     "name": "Anafenza",
     "sprite": "sprites/enemy/humanoid/human/knight/braveknight.atlas",
     "deck": [
-      "decks/legends/Anafenza.dck"
+      "decks/legends/anafenza.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -36203,7 +36203,7 @@
     "name": "Daghatar",
     "sprite": "sprites/enemy/humanoid/swordsman_2.atlas",
     "deck": [
-      "decks/legends/Daghatar.dck"
+      "decks/legends/daghatar.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -36268,7 +36268,7 @@
     "name": "Hamza",
     "sprite": "sprites/enemy/beast/elephant.atlas",
     "deck": [
-      "decks/legends/Hamza.dck"
+      "decks/legends/hamza.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -36338,7 +36338,7 @@
     "name": "Azor",
     "sprite": "sprites/enemy/monstrosity/androsphinx.atlas",
     "deck": [
-      "decks/legends/Azor.dck"
+      "decks/legends/azor.dck"
     ],
     "ai": "",
     "flying": true,
@@ -36409,7 +36409,7 @@
     "name": "Bruvac",
     "sprite": "sprites/enemy/humanoid/human/wizard/archivist.atlas",
     "deck": [
-      "decks/legends/Bruvac.dck"
+      "decks/legends/bruvac.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -36474,7 +36474,7 @@
     "name": "Isperia",
     "sprite": "sprites/enemy/monstrosity/criosphinx.atlas",
     "deck": [
-      "decks/legends/Isperia.dck"
+      "decks/legends/isperia.dck"
     ],
     "ai": "",
     "flying": true,
@@ -36545,7 +36545,7 @@
     "name": "Lavinia",
     "sprite": "sprites/enemy/humanoid/human/cleric/cleric.atlas",
     "deck": [
-      "decks/legends/Lavinia.dck"
+      "decks/legends/lavinia.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -36696,7 +36696,7 @@
     "name": "Feather",
     "sprite": "sprites/enemy/celestial/angel_1.atlas",
     "deck": [
-      "decks/legends/Feather.dck"
+      "decks/legends/feather.dck"
     ],
     "ai": "",
     "flying": true,
@@ -36832,7 +36832,7 @@
     "name": "Tajic",
     "sprite": "sprites/enemy/humanoid/human/soldier/legionite.atlas",
     "deck": [
-      "decks/legends/Tajic.dck"
+      "decks/legends/tajic.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -36978,7 +36978,7 @@
     "name": "Najal",
     "sprite": "sprites/enemy/elemental/efreet_2.atlas",
     "deck": [
-      "decks/legends/Najal.dck"
+      "decks/legends/najal.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -37043,7 +37043,7 @@
     "name": "Zahid",
     "sprite": "sprites/enemy/elemental/djinn_2.atlas",
     "deck": [
-      "decks/legends/Zahid.dck"
+      "decks/legends/zahid.dck"
     ],
     "ai": "",
     "flying": true,
@@ -37175,7 +37175,7 @@
     "name": "Muzzio",
     "sprite": "sprites/enemy/humanoid/human/wizard/wizard.atlas",
     "deck": [
-      "decks/legends/Muzzio.dck"
+      "decks/legends/muzzio.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -37240,7 +37240,7 @@
     "name": "Selvala",
     "sprite": "sprites/enemy/humanoid/elf/hunter_2.atlas",
     "deck": [
-      "decks/legends/Selvala.dck"
+      "decks/legends/selvala.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -37310,7 +37310,7 @@
     "name": "Cadric",
     "sprite": "sprites/enemy/humanoid/dwarf/dwarf_5.atlas",
     "deck": [
-      "decks/legends/Cadric.dck"
+      "decks/legends/cadric.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -37375,7 +37375,7 @@
     "name": "Cayth",
     "sprite": "sprites/enemy/humanoid/dwarf/polar_cavalry.atlas",
     "deck": [
-      "decks/legends/Cayth.dck"
+      "decks/legends/cayth.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -37440,7 +37440,7 @@
     "name": "Depala",
     "sprite": "sprites/enemy/humanoid/dwarf/dwarfpilot.atlas",
     "deck": [
-      "decks/legends/Depala.dck"
+      "decks/legends/depala.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -37505,7 +37505,7 @@
     "name": "Hofri",
     "sprite": "sprites/enemy/humanoid/dwarf/carver.atlas",
     "deck": [
-      "decks/legends/Hofri.dck"
+      "decks/legends/hofri.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -37570,7 +37570,7 @@
     "name": "Irini",
     "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz3.atlas",
     "deck": [
-      "decks/legends/Irini.dck"
+      "decks/legends/irini.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -37635,7 +37635,7 @@
     "name": "Koll",
     "sprite": "sprites/enemy/humanoid/dwarf/dwarf_7.atlas",
     "deck": [
-      "decks/legends/Koll.dck"
+      "decks/legends/koll.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -37700,7 +37700,7 @@
     "name": "Reveka",
     "sprite": "sprites/enemy/humanoid/human/wizard/mage.atlas",
     "deck": [
-      "decks/legends/Reveka.dck"
+      "decks/legends/reveka.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -37765,7 +37765,7 @@
     "name": "Reyav",
     "sprite": "sprites/enemy/humanoid/dwarf/miner.atlas",
     "deck": [
-      "decks/legends/Reyav.dck"
+      "decks/legends/reyav.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -37830,7 +37830,7 @@
     "name": "Migloz",
     "sprite": "sprites/enemy/aberration/copperhostbrutalizer.atlas",
     "deck": [
-      "decks/legends/Migloz.dck"
+      "decks/legends/migloz.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -37895,7 +37895,7 @@
     "name": "Sethron",
     "sprite": "sprites/enemy/humanoid/minotaur/minotaurlarge.atlas",
     "deck": [
-      "decks/legends/Sethron.dck"
+      "decks/legends/sethron.dck"
     ],
     "ai": "",
     "scale": 0.5,
@@ -37961,7 +37961,7 @@
     "name": "Vnwxt",
     "sprite": "sprites/enemy/aberration/eye.atlas",
     "deck": [
-      "decks/legends/Vnwxt.dck"
+      "decks/legends/vnwxt.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -38092,7 +38092,7 @@
     "name": "Firesong and Sunspeaker",
     "sprite": "sprites/enemy/humanoid/minotaur/minotaur.atlas",
     "deck": [
-      "decks/legends/Firesong_and_Sunspeaker.dck"
+      "decks/legends/firesong_and_sunspeaker.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -38157,7 +38157,7 @@
     "name": "Isu",
     "sprite": "sprites/enemy/monstrosity/yeti_2.atlas",
     "deck": [
-      "decks/legends/Isu.dck"
+      "decks/legends/isu.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -38222,7 +38222,7 @@
     "name": "Moritte",
     "sprite": "sprites/enemy/humanoid/human/warrior/caribou_elite.atlas",
     "deck": [
-      "decks/legends/Moritte.dck"
+      "decks/legends/moritte.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -38287,7 +38287,7 @@
     "name": "Narfi",
     "sprite": "sprites/enemy/undead/lich_2.atlas",
     "deck": [
-      "decks/legends/Narfi.dck"
+      "decks/legends/narfi.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -38352,7 +38352,7 @@
     "name": "Svella",
     "sprite": "sprites/enemy/giant/troll.atlas",
     "deck": [
-      "decks/legends/Svella.dck"
+      "decks/legends/svella.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -38483,7 +38483,7 @@
     "name": "Gonti",
     "sprite": "sprites/enemy/undead/doppelganger.atlas",
     "deck": [
-      "decks/legends/Gonti.dck"
+      "decks/legends/gonti.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -38558,7 +38558,7 @@
     "name": "Hope of Ghirapur",
     "sprite": "sprites/enemy/beast/dragonfly.atlas",
     "deck": [
-      "decks/legends/Hope_of_Ghirapur.dck"
+      "decks/legends/hope_of_ghirapur.dck"
     ],
     "ai": "",
     "flying": true,
@@ -38624,7 +38624,7 @@
     "name": "Kambal",
     "sprite": "sprites/enemy/humanoid/human/wizard/teferi.atlas",
     "deck": [
-      "decks/legends/Kambal.dck"
+      "decks/legends/kambal.dck"
     ],
     "ai": "",
     "scale": 1,
@@ -38695,7 +38695,7 @@
     "name": "Oviya",
     "sprite": "sprites/enemy/humanoid/human/wizard/green_wiz2.atlas",
     "deck": [
-      "decks/legends/Oviya.dck"
+      "decks/legends/oviya.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -38765,7 +38765,7 @@
     "name": "Padeem",
     "sprite": "sprites/enemy/humanoid/merfolk/merfolk.atlas",
     "deck": [
-      "decks/legends/Padeem.dck"
+      "decks/legends/padeem.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -38830,7 +38830,7 @@
     "name": "Pia Nalaar",
     "sprite": "sprites/enemy/humanoid/human/shaman/chandra.atlas",
     "deck": [
-      "decks/legends/Pia_Nalaar.dck"
+      "decks/legends/pia_nalaar.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -38905,7 +38905,7 @@
     "name": "Saheeli",
     "sprite": "sprites/enemy/humanoid/elf/shaman.atlas",
     "deck": [
-      "decks/legends/Saheeli.dck"
+      "decks/legends/saheeli.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -38980,7 +38980,7 @@
     "name": "Sram",
     "sprite": "sprites/enemy/humanoid/dwarf/dwarfpilot.atlas",
     "deck": [
-      "decks/legends/Sram.dck"
+      "decks/legends/sram.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -39045,7 +39045,7 @@
     "name": "Yahenni",
     "sprite": "sprites/enemy/undead/doppelganger.atlas",
     "deck": [
-      "decks/legends/Yahenni.dck"
+      "decks/legends/yahenni.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -39110,7 +39110,7 @@
     "name": "Izoni",
     "sprite": "sprites/enemy/humanoid/elf/shaman_2.atlas",
     "deck": [
-      "decks/legends/Izoni.dck"
+      "decks/legends/izoni.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -39180,7 +39180,7 @@
     "name": "Mazirek",
     "sprite": "sprites/enemy/humanoid/nantuko/deadlymantis.atlas",
     "deck": [
-      "decks/legends/Mazirek.dck"
+      "decks/legends/mazirek.dck"
     ],
     "ai": "",
     "flying": true,
@@ -39312,7 +39312,7 @@
     "name": "Varolz",
     "sprite": "sprites/enemy/giant/swamptroll.atlas",
     "deck": [
-      "decks/legends/Varolz.dck"
+      "decks/legends/varolz.dck"
     ],
     "ai": "",
     "scale": 0.5,
@@ -39378,7 +39378,7 @@
     "name": "Anzrag",
     "sprite": "sprites/enemy/beast/nakedmolerat.atlas",
     "deck": [
-      "decks/legends/Anzrag.dck"
+      "decks/legends/anzrag.dck"
     ],
     "ai": "",
     "scale": 3,
@@ -39444,7 +39444,7 @@
     "name": "Nikya",
     "sprite": "sprites/enemy/fey/centaur_2.atlas",
     "deck": [
-      "decks/legends/Nikya.dck"
+      "decks/legends/nikya.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -39509,7 +39509,7 @@
     "name": "Ruric Thar",
     "sprite": "sprites/enemy/giant/troll_2.atlas",
     "deck": [
-      "decks/legends/Ruric_Thar.dck"
+      "decks/legends/ruric_thar.dck"
     ],
     "ai": "",
     "scale": 2,
@@ -39706,7 +39706,7 @@
     "name": "Jadar",
     "sprite": "sprites/enemy/undead/lich_2.atlas",
     "deck": [
-      "decks/legends/Jadar.dck"
+      "decks/legends/jadar.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -39846,7 +39846,7 @@
     "name": "Mikaeus",
     "sprite": "sprites/enemy/undead/lich.atlas",
     "deck": [
-      "decks/legends/Mikaeus.dck"
+      "decks/legends/mikaeus.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -39916,7 +39916,7 @@
     "name": "Umbris",
     "sprite": "sprites/enemy/undead/shade.atlas",
     "deck": [
-      "decks/legends/Umbris.dck"
+      "decks/legends/umbris.dck"
     ],
     "ai": "",
     "scale": 0.5,
@@ -39982,7 +39982,7 @@
     "name": "Ozox",
     "sprite": "sprites/enemy/undead/skeleton_2.atlas",
     "deck": [
-      "decks/legends/Ozox.dck"
+      "decks/legends/ozox.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -40047,7 +40047,7 @@
     "name": "Millicent",
     "sprite": "sprites/enemy/undead/ghost_2.atlas",
     "deck": [
-      "decks/legends/Millicent.dck"
+      "decks/legends/millicent.dck"
     ],
     "ai": "",
     "flying": true,
@@ -40113,7 +40113,7 @@
     "name": "Circu",
     "sprite": "sprites/enemy/humanoid/human/bandit/bandittorturer.atlas",
     "deck": [
-      "decks/legends/Circu.dck"
+      "decks/legends/circu.dck"
     ],
     "ai": "",
     "scale": 0.5,
@@ -40179,7 +40179,7 @@
     "name": "Etrata",
     "sprite": "sprites/enemy/undead/doppelganger.atlas",
     "deck": [
-      "decks/legends/Etrata.dck"
+      "decks/legends/etrata.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -40249,7 +40249,7 @@
     "name": "Mirko",
     "sprite": "sprites/enemy/undead/vampire.atlas",
     "deck": [
-      "decks/legends/Mirko.dck"
+      "decks/legends/mirko.dck"
     ],
     "ai": "",
     "flying": true,
@@ -40320,7 +40320,7 @@
     "name": "Szadek",
     "sprite": "sprites/enemy/undead/vampire_3.atlas",
     "deck": [
-      "decks/legends/Szadek.dck"
+      "decks/legends/szadek.dck"
     ],
     "ai": "",
     "flying": true,
@@ -40612,7 +40612,7 @@
     "name": "Ramirez",
     "sprite": "sprites/enemy/humanoid/human/rogue/pirate.atlas",
     "deck": [
-      "decks/legends/Ramirez_DePietro.dck"
+      "decks/legends/ramirez_depietro.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -40687,7 +40687,7 @@
     "name": "Sala",
     "sprite": "sprites/enemy/fiend/aerie_guard.atlas",
     "deck": [
-      "decks/legends/Sala.dck"
+      "decks/legends/sala.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -40752,7 +40752,7 @@
     "name": "Zara",
     "sprite": "sprites/enemy/humanoid/human/shaman/chandra.atlas",
     "deck": [
-      "decks/legends/Zara.dck"
+      "decks/legends/zara.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -40882,7 +40882,7 @@
     "name": "Duskana",
     "sprite": "sprites/enemy/beast/polarbear.atlas",
     "deck": [
-      "decks/legends/Duskana.dck"
+      "decks/legends/duskana.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -40947,7 +40947,7 @@
     "name": "Hurska",
     "sprite": "sprites/enemy/beast/bear.atlas",
     "deck": [
-      "decks/legends/Hurska.dck"
+      "decks/legends/hurska.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -41012,7 +41012,7 @@
     "name": "Kudo",
     "sprite": "sprites/enemy/beast/bear.atlas",
     "deck": [
-      "decks/legends/Kudo.dck"
+      "decks/legends/kudo.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -41077,7 +41077,7 @@
     "name": "Ruxa",
     "sprite": "sprites/enemy/beast/bear_large.atlas",
     "deck": [
-      "decks/legends/Ruxa.dck"
+      "decks/legends/ruxa.dck"
     ],
     "ai": "",
     "scale": 0.5,
@@ -41143,7 +41143,7 @@
     "name": "Aatchik",
     "sprite": "sprites/enemy/aberration/copperhostinfector.atlas",
     "deck": [
-      "decks/legends/Aatchik.dck"
+      "decks/legends/aatchik.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -41208,7 +41208,7 @@
     "name": "Amzu",
     "sprite": "sprites/enemy/humanoid/nantuko/deadlymantis.atlas",
     "deck": [
-      "decks/legends/Amzu.dck"
+      "decks/legends/amzu.dck"
     ],
     "ai": "",
     "flying": true,
@@ -41274,7 +41274,7 @@
     "name": "Fumulus",
     "sprite": "sprites/enemy/beast/giantfly.atlas",
     "deck": [
-      "decks/legends/Fumulus.dck"
+      "decks/legends/fumulus.dck"
     ],
     "ai": "",
     "flying": true,
@@ -41341,7 +41341,7 @@
     "name": "Grist",
     "sprite": "sprites/enemy/aberration/leech.atlas",
     "deck": [
-      "decks/legends/Grist.dck"
+      "decks/legends/grist.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -41411,7 +41411,7 @@
     "name": "Vishgraz",
     "sprite": "sprites/enemy/aberration/copperhostbrutalizer.atlas",
     "deck": [
-      "decks/legends/Vishgraz.dck"
+      "decks/legends/vishgraz.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -41476,7 +41476,7 @@
     "name": "Zabaz",
     "sprite": "sprites/enemy/beast/wasp.atlas",
     "deck": [
-      "decks/legends/Zabaz.dck"
+      "decks/legends/zabaz.dck"
     ],
     "ai": "",
     "flying": true,
@@ -41542,7 +41542,7 @@
     "name": "Zask",
     "sprite": "sprites/enemy/beast/scarab.atlas",
     "deck": [
-      "decks/legends/Zask.dck"
+      "decks/legends/zask.dck"
     ],
     "ai": "",
     "scale": 4,
@@ -41678,7 +41678,7 @@
     "name": "Ral",
     "sprite": "sprites/enemy/humanoid/human/wizard/geistmage.atlas",
     "deck": [
-      "decks/legends/Ral.dck"
+      "decks/legends/ral.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -41743,7 +41743,7 @@
     "name": "Mizzix",
     "sprite": "sprites/enemy/humanoid/goblin/goblin_bomber.atlas",
     "deck": [
-      "decks/legends/Mizzix.dck"
+      "decks/legends/mizzix.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -41813,7 +41813,7 @@
     "name": "Elsha",
     "sprite": "sprites/enemy/elemental/djinn_2.atlas",
     "deck": [
-      "decks/legends/Elsha.dck"
+      "decks/legends/elsha.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -41883,7 +41883,7 @@
     "name": "Shiko",
     "sprite": "sprites/enemy/dragon/ancientsilverdragon.atlas",
     "deck": [
-      "decks/legends/Shiko.dck"
+      "decks/legends/shiko.dck"
     ],
     "ai": "",
     "scale": 2,
@@ -42015,7 +42015,7 @@
     "name": "Xho Cai",
     "sprite": "sprites/enemy/humanoid/aven/ibisheadedaven.atlas",
     "deck": [
-      "decks/legends/Xho_Cai.dck"
+      "decks/legends/xho_cai.dck"
     ],
     "ai": "",
     "flying": true,
@@ -42081,7 +42081,7 @@
     "name": "Jinnie Fay",
     "sprite": "sprites/enemy/humanoid/human/wizard/green_wiz2.atlas",
     "deck": [
-      "decks/legends/Jinnie_Fay.dck"
+      "decks/legends/jinnie_fay.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -42146,7 +42146,7 @@
     "name": "Kitt Kanto",
     "sprite": "sprites/enemy/humanoid/leonin/lion.atlas",
     "deck": [
-      "decks/legends/Kitt_Kanto.dck"
+      "decks/legends/kitt_kanto.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -42276,7 +42276,7 @@
     "name": "Rocco",
     "sprite": "sprites/enemy/fiend/tibalt.atlas",
     "deck": [
-      "decks/legends/Rocco.dck"
+      "decks/legends/rocco.dck"
     ],
     "ai": "",
     "scale": 1,
@@ -42613,7 +42613,7 @@
     "name": "Orvar",
     "sprite": "sprites/enemy/undead/ghost.atlas",
     "deck": [
-      "decks/legends/Orvar.dck"
+      "decks/legends/orvar.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -42745,7 +42745,7 @@
     "name": "Varragoth",
     "sprite": "sprites/enemy/fiend/krampus.atlas",
     "deck": [
-      "decks/legends/Varragoth.dck"
+      "decks/legends/varragoth.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -42810,7 +42810,7 @@
     "name": "Liberator",
     "sprite": "sprites/enemy/construct/juggernaut.atlas",
     "deck": [
-      "decks/legends/Liberator.dck"
+      "decks/legends/liberator.dck"
     ],
     "ai": "",
     "flying": true,
@@ -43072,7 +43072,7 @@
     "name": "Rograkh and Ardenn",
     "sprite": "sprites/enemy/humanoid/kobold/koboldwarrior.atlas",
     "deck": [
-      "decks/legends/Rograkh_and_Ardenn.dck"
+      "decks/legends/rograkh_and_ardenn.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -43142,7 +43142,7 @@
     "name": "Rohgahh",
     "sprite": "sprites/enemy/humanoid/kobold/koboldshaman.atlas",
     "deck": [
-      "decks/legends/Rohgahh.dck"
+      "decks/legends/rohgahh.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -43207,7 +43207,7 @@
     "name": "Rosnakht",
     "sprite": "sprites/enemy/humanoid/kobold/koboldworker.atlas",
     "deck": [
-      "decks/legends/Rosnakht.dck"
+      "decks/legends/rosnakht.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -43469,7 +43469,7 @@
     "name": "Kalamax",
     "sprite": "sprites/enemy/beast/dinosaur/dinosaur_stegosaurus.atlas",
     "deck": [
-      "decks/legends/Kalamax.dck"
+      "decks/legends/kalamax.dck"
     ],
     "ai": "",
     "scale": 1.5,
@@ -44191,7 +44191,7 @@
     "name": "Arahbo",
     "sprite": "sprites/enemy/beast/cat.atlas",
     "deck": [
-      "decks/legends/Arahbo.dck"
+      "decks/legends/arahbo.dck"
     ],
     "ai": "",
     "scale": 2,
@@ -45005,7 +45005,7 @@
     "name": "Akawalli",
     "sprite": "sprites/enemy/plant/fungus_golgari.atlas",
     "deck": [
-      "decks/legends/Akawalli.dck"
+      "decks/legends/akawalli.dck"
     ],
     "ai": "",
     "scale": 2,
@@ -45816,7 +45816,7 @@
     "name": "Tahngarth",
     "sprite": "sprites/enemy/humanoid/minotaur/minotaurlarge.atlas",
     "deck": [
-      "decks/legends/Tahngarth.dck"
+      "decks/legends/tahngarth.dck"
     ],
     "ai": "",
     "scale": 0.5,
@@ -46704,7 +46704,7 @@
     "name": "Taii Wakeen",
     "sprite": "sprites/enemy/humanoid/elf/hunter_2.atlas",
     "deck": [
-      "decks/legends/Taii_Wakeen.dck"
+      "decks/legends/taii_wakeen.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -47175,7 +47175,7 @@
     "name": "Ellivere",
     "sprite": "sprites/enemy/humanoid/human/warrior/warrior.atlas",
     "deck": [
-      "decks/legends/Ellivere.dck"
+      "decks/legends/ellivere.dck"
     ],
     "ai": "",
     "scale": 1.5,
@@ -47990,7 +47990,7 @@
     "name": "Alandra",
     "sprite": "sprites/enemy/humanoid/merfolk/kiora.atlas",
     "deck": [
-      "decks/legends/Alandra.dck"
+      "decks/legends/alandra.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -48651,7 +48651,7 @@
     "name": "Shorikai",
     "sprite": "sprites/enemy/construct/arcane_golem.atlas",
     "deck": [
-      "decks/legends/Shorikai.dck"
+      "decks/legends/shorikai.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -48977,7 +48977,7 @@
     "name": "Chishiro",
     "sprite": "sprites/enemy/humanoid/viashino/scout.atlas",
     "deck": [
-      "decks/legends/Chishiro.dck"
+      "decks/legends/chishiro.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -50841,7 +50841,7 @@
     "name": "Ratadrabik",
     "sprite": "sprites/enemy/undead/lich.atlas",
     "deck": [
-      "decks/legends/Ratadrabik.dck"
+      "decks/legends/ratadrabik.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -51051,7 +51051,7 @@
     "name": "Endrek",
     "sprite": "sprites/enemy/humanoid/human/wizard/black_wizard.atlas",
     "deck": [
-      "decks/legends/Endrek.dck"
+      "decks/legends/endrek.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -51443,7 +51443,7 @@
     "name": "Syrix",
     "sprite": "sprites/enemy/elemental/phoenix.atlas",
     "deck": [
-      "decks/legends/Syrix.dck"
+      "decks/legends/syrix.dck"
     ],
     "ai": "",
     "flying": true,
@@ -51807,7 +51807,7 @@
     "name": "Archelos",
     "sprite": "sprites/enemy/beast/turtle.atlas",
     "deck": [
-      "decks/legends/Archelos.dck"
+      "decks/legends/archelos.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -52468,7 +52468,7 @@
     "name": "Sevinne",
     "sprite": "sprites/enemy/humanoid/human/wizard/teferi.atlas",
     "deck": [
-      "decks/legends/Sevinne.dck"
+      "decks/legends/sevinne.dck"
     ],
     "ai": "",
     "scale": 1,
@@ -53063,7 +53063,7 @@
     "name": "Shattergang Brothers",
     "sprite": "sprites/enemy/humanoid/goblin/goblin_group.atlas",
     "deck": [
-      "decks/legends/Shattergang_Brothers.dck"
+      "decks/legends/shattergang_brothers.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -53193,7 +53193,7 @@
     "name": "Aminatou",
     "sprite": "sprites/enemy/humanoid/elf/green_wiz3.atlas",
     "deck": [
-      "decks/legends/Aminatou.dck"
+      "decks/legends/aminatou.dck"
     ],
     "ai": "",
     "scale": 0.6,
@@ -53591,7 +53591,7 @@
     "name": "Kyodai",
     "sprite": "sprites/enemy/dragon/ancientsilverdragon.atlas",
     "deck": [
-      "decks/legends/ktodai.dck"
+      "decks/legends/kyodai.dck"
     ],
     "ai": "",
     "scale": 2,
@@ -53724,7 +53724,7 @@
     "name": "Kethis",
     "sprite": "sprites/enemy/humanoid/elf/green_wiz3.atlas",
     "deck": [
-      "decks/legends/Kethis.dck"
+      "decks/legends/kethis.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -53789,7 +53789,7 @@
     "name": "Licia",
     "sprite": "sprites/enemy/humanoid/paladin_2.atlas",
     "deck": [
-      "decks/legends/Licia.dck"
+      "decks/legends/licia.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -54055,7 +54055,7 @@
     "name": "Atogatog",
     "sprite": "sprites/enemy/humanoid/viashino/dreamwalker_2.atlas",
     "deck": [
-      "decks/legends/Atogatog.dck"
+      "decks/legends/atogatog.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -54513,7 +54513,7 @@
     "name": "Kianne",
     "sprite": "sprites/enemy/humanoid/aven/falconheadedaven.atlas",
     "deck": [
-      "decks/legends/Kianne.dck"
+      "decks/legends/kianne.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -55054,7 +55054,7 @@
     "name": "Tesak",
     "sprite": "sprites/enemy/fiend/hellhound_2.atlas",
     "deck": [
-      "decks/legends/Tesak.dck"
+      "decks/legends/tesak.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -55119,7 +55119,7 @@
     "name": "Juri",
     "sprite": "sprites/enemy/humanoid/human/wizard/rakdos_wiz.atlas",
     "deck": [
-      "decks/legends/Juri.dck"
+      "decks/legends/juri.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -56542,7 +56542,7 @@
     "name": "Shaile",
     "sprite": "sprites/enemy/humanoid/human/wizard/black_wizard.atlas",
     "deck": [
-      "decks/legends/Shaile.dck"
+      "decks/legends/shaile.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -56937,7 +56937,7 @@
     "name": "Roalesk",
     "sprite": "sprites/enemy/humanoid/viashino/lizardwizard.atlas",
     "deck": [
-      "decks/legends/deckname.dck"
+      "decks/legends/roalesk.dck"
     ],
     "ai": "",
     "flying": true,
@@ -57209,7 +57209,7 @@
     "name": "Alpharael",
     "sprite": "sprites/enemy/humanoid/human/warlock/high_cultist.atlas",
     "deck": [
-      "decks/legends/Alpharael.dck"
+      "decks/legends/alpharael.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -57419,7 +57419,7 @@
     "name": "Mm'menon",
     "sprite": "sprites/enemy/beast/jellyfish.atlas",
     "deck": [
-      "decks/legends/Mm'menon.dck"
+      "decks/legends/mm'menon.dck"
     ],
     "ai": "",
     "flying": true,
@@ -57702,7 +57702,7 @@
     "name": "Tannuk",
     "sprite": "sprites/enemy/monstrosity/kavu.atlas",
     "deck": [
-      "decks/legends/Tannuk.dck"
+      "decks/legends/tannuk.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -57772,7 +57772,7 @@
     "name": "Bennie Bracks",
     "sprite": "sprites/enemy/humanoid/human/wizard/teferi.atlas",
     "deck": [
-      "decks/legends/Bennie_Bracks.dck"
+      "decks/legends/bennie_bracks.dck"
     ],
     "ai": "",
     "scale": 1,
@@ -57838,7 +57838,7 @@
     "name": "Lagrella",
     "sprite": "sprites/enemy/humanoid/human/cleric/priest.atlas",
     "deck": [
-      "decks/legends/Lagrella.dck"
+      "decks/legends/lagrella.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -59605,7 +59605,7 @@
     "name": "Tegwyll",
     "sprite": "sprites/enemy/fey/pixie_dimir.atlas",
     "deck": [
-      "decks/legends/Tegwyll.dck"
+      "decks/legends/tegwyll.dck"
     ],
     "ai": "",
     "flying": true,
