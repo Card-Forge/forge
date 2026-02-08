@@ -8,7 +8,7 @@
  <tileset firstgid="11905" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJyr4GZgqBjFo3gU0wS7cUIwMWqbsOAKNDY17cVmHy43UBNT015izSLGLlB4EWs3tewdKP+SaveovfSxe6DSFS3sp3X5QE17sekjZCYp5QU13EMPPGrvqL2j9o5cewEBJ9RW
+   eJyr4GZgqBjFo3gU0wS7cUIwMWqbsOAKNDY17cVmHy43UBNT015izSLGLlLsppa9A+VfUu0etZc+dg9UuqKF/bQuH6hpLzZ9hMwEla+U+pUU99ADj9o7au+ovSPXXgAwO9SU
   </data>
  </layer>
  <layer id="2" name="Ground" width="30" height="30">
@@ -21,12 +21,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo4B2YAcLA4M0jfEuFkx7Q1lJd+sUDtLUY7ODHHtJBdS211iHgcFEB8E2NoKwjbQhNCxcyLGX1DDFBqjpXx2o3wygtJ4RQs4Q6l8TbfLtFQeGnwQQTybS301aEEzIDnQx5DjDxgcBXSOI2fpQ2hBKGxuh2mtMgX+pASi19z07Kk0IaDBit+MrCfZSkq5J8e9hoFvdNRkYPIBYjxNTHj3vYmOTYy81wA62gbEX2Q70fAizl5j4I5SHdYywixPrX2LKCEFjwmrw2fGFlbw6lJR6+xuSveh+IhTO6G4mJ10QW9ZS215yACn2UqPuJMdeagJy7aXU70PNv4PFXgB1kDep
+   eJxjYBgFo4B2YAcLA4M0jfEuFkx7Q1lJd+sUDtLUY7ODHHtJBdS2dw8zBBtpQ2hjI4g4iA8CsHAhx15SwxQboKZ/daB+M4DSekYIOUOof020ybdXXIeBQQKIJxPp7yYtCCZkB7qYMdAOEx3cfBDQNYKYrQ+lDaG0sRGqvcYU+JcagFJ737Oj0oSABiN2O76SYC8l6ZoU/x4GutVdk4HBA4j1ODHlkeMdF5sce6kBdrANjL3IdqDnQ5i9xMQfoTysY4RdnFj/ElNGCBoTVoPPji+s5NWhpNTb35DsRfcToXBGdzM56YLYspba9pIDSLGXGnUnOfZSE5BrL6V+H2r+HSz2AgBXrTkl
   </data>
  </layer>
  <layer id="5" name="Overlay" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AU0Ars1mJg2APEd5gRGBdo4saOyQHXgXbe0CJOLcwefSMIbWxEvr0jDYjrMDBI6CD4uOK4SQs/pgYglL5oBQbKXnqAm9oMDLe0IWxtTQYGHU3s6pDTAS72KBj84LQ+ddSQCp4TYSYxakbBKBgFo4BcAACsjSA8
+   eJxjYBgFo2AU0Ars1mJg2APEd5gRGBdo4saOyQHXgXbe0CJOLcyePcwQulKXfHtHGhDXYWCQ0EHwccVxkxZ+TA1AKH3RCgyUvfQAN7UZGG5pQ9jamgwMOprY1SGnA1zsUTD4wWl96qghFTwnwkxi1IyCUTAKRgG5AADjjyDb
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

@@ -2,7 +2,7 @@
   "screenWidth": 480,
   "screenHeight": 270,
   "skin": "skin/ui_skin.json",
-  "playerBaseSpeed": 60,
+  "playerBaseSpeed": 120,
   "minDeckSize": 99,         
   "colorIds":["W","U","B","R","G"],  
   "colorIdNames":["tr(lblWhite) [+W]","tr(lblBlue) [+U]","tr(lblBlack) [+B]","tr(lblRed) [+R]","tr(lblGreen) [+G]"],

@@ -168,7 +168,7 @@
    <properties>
     <property name="dialog">[
 {
-   &quot;text&quot;: &quot;An ominous feeling comes over you, causing you to shudder involuntarily.&quot;,
+   &quot;text&quot;: &quot;An ominous feeling comes over you as you cross the lefthand path, causing you to shudder involuntarily.&quot;,
    &quot;options&quot;: [{
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }
@@ -240,7 +240,7 @@
    <properties>
     <property name="dialog">[
 {
-   &quot;text&quot;: &quot;An ominous feeling comes over you, causing you to shudder involuntarily.&quot;,
+   &quot;text&quot;: &quot;An ominous feeling comes over you as you pass the righthand path, causing you to shudder involuntarily.&quot;,
    &quot;options&quot;: [{
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }

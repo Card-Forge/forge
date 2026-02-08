@@ -1507,12 +1507,7 @@ A rare few items are also slotless or use a custom slot. They won't show up on y
   </object>
   <object id="156" template="../../../../common/maps/obj/treasure.tx" x="107.333" y="272">
    <properties>
-    <property name="reward">[{
-        &quot;type&quot;: &quot;item&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;itemName&quot;: &quot;Gold Blessing of Speed&quot;
- },
+    <property name="reward">[
 {
         &quot;type&quot;: &quot;item&quot;,
         &quot;probability&quot;: 1,
@@ -1551,7 +1546,7 @@ A rare few items are also slotless or use a custom slot. They won't show up on y
    <properties>
     <property name="dialog">[
 {
-   &quot;text&quot;: &quot;Thanks for being a playtester! Since the game is currently only around half-finished, the map is going to be very empty. Take a slotless speed doubler and all the capitol runes as a courtesy.&quot;,
+   &quot;text&quot;: &quot;Thanks for being a playtester! Since the game is currently only around half-finished, the map is going to be very empty. Take all the capitol runes as a courtesy.&quot;,
    &quot;options&quot;: [{
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }

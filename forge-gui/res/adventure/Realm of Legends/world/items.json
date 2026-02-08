@@ -2104,16 +2104,14 @@
     }
   },
     {
-    "name": "Tome of Doom",
-    "description": "Destroy a nonblack creature",
+    "name": "Tome of the Executioner",
+    "description": "Pay 1B and sacrifice to destroy a nonblack creature",
     "equipmentSlot": "Left",
     "iconName": "TomeofDoom",
     "cost": 5000,
     "effect": {
-        "changeStartCards": -1,
-        "lifeModifier": -3,
         "startBattleWithCard": [
-        "Seal of Doom|NEM"
+        "Executioner's Capsule|ALA"
      ]
     }
   },
@@ -2277,16 +2275,14 @@
     }
   },
     {
-    "name": "Tome of Cleansing",
-    "description": "Destroy an artifact or enchantment",
+    "name": "Tome of Dispelling",
+    "description": "Pay 2W and sac to destroy an artifact or enchantment",
     "equipmentSlot": "Left",
     "iconName": "TomeofCleansing",
     "cost": 5000,
     "effect": {
-        "changeStartCards": -1,
-        "lifeModifier": -2,
         "startBattleWithCard": [
-        "Seal of Cleansing|NEM"
+        "Dispeller's Capsule|ALA"
      ]
     }
   },
@@ -2663,14 +2659,17 @@
   },
     {
     "name": "Mask of Pyromania",
-    "description": "1R and random discard to ping 1 or 1R and sac to ping 1",
+    "description": "1R and random discard to ping 1 or 1R and sac to ping 1. Also lowers opp life.",
     "equipmentSlot": "Neck",
     "iconName": "MaskofPyromania",
     "cost": 5000,
     "effect": {
         "startBattleWithCard": [
         "Pyromania|TOR"
-     ]
+     ],
+     "opponent": {
+      "lifeModifier": -2
+    }
     }
   },
     {
