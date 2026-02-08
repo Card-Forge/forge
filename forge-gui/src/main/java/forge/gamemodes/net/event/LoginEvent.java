@@ -7,10 +7,12 @@ public class LoginEvent implements NetEvent {
 
     private final String username;
     private final int avatarIndex, sleeveIndex;
-    public LoginEvent(final String username, final int avatarIndex, final int sleeveIndex) {
+    private final String version;
+    public LoginEvent(final String username, final int avatarIndex, final int sleeveIndex, final String version) {
         this.username = username;
         this.avatarIndex = avatarIndex;
         this.sleeveIndex = sleeveIndex;
+        this.version = version;
     }
 
     @Override
@@ -27,5 +29,9 @@ public class LoginEvent implements NetEvent {
 
     public int getSleeveIndex() {
         return sleeveIndex;
+    }
+
+    public String getVersion() {
+        return version;
     }
 }
