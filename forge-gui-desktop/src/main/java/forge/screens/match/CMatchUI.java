@@ -165,10 +165,6 @@ public final class CMatchUI
 
     private IVDoc<? extends ICDoc> selectedDocBeforeCombat;
 
-    private javax.swing.Timer waitingTimer;
-    private String waitingPlayerName;
-    private long waitingStartTime;
-
     private final CAntes cAntes = new CAntes(this);
     private final CCombat cCombat = new CCombat();
     private final CDependencies cDependencies = new CDependencies(this);
@@ -970,6 +966,9 @@ public final class CMatchUI
         cancelWaitingTimer();
         cPrompt.setMessage(message);
     }
+    public void showPromptMessageNoCancel(final PlayerView playerView, final String message) {
+        cPrompt.setMessage(message);
+    }
 
     @Override
     public void showCardPromptMessage(PlayerView playerView, String message, CardView card) {
@@ -981,44 +980,6 @@ public final class CMatchUI
     public void showPromptMessage(final PlayerView playerView, final String message, final CardView card ) {
         cancelWaitingTimer();
         cPrompt.setMessage(message,card);
-    }
-
-    @Override
-    public void showWaitingTimer(final PlayerView forPlayer, final String waitingForPlayerName) {
-        cancelWaitingTimer();
-        if (waitingForPlayerName == null) {
-            return;
-        }
-        this.waitingPlayerName = waitingForPlayerName;
-        this.waitingStartTime = System.currentTimeMillis();
-        waitingTimer = new javax.swing.Timer(1000, e -> updateWaitingDisplay());
-        waitingTimer.start();
-    }
-
-    private void updateWaitingDisplay() {
-        long elapsedSec = (System.currentTimeMillis() - waitingStartTime) / 1000;
-        if (elapsedSec < 2) {
-            return;
-        }
-        String timeStr;
-        if (elapsedSec < 60) {
-            timeStr = elapsedSec + "s";
-        } else {
-            timeStr = String.format("%d:%02d", elapsedSec / 60, elapsedSec % 60);
-        }
-        cPrompt.setMessage(Localizer.getInstance().getMessage("lblWaitingForPlayerWithTime", waitingPlayerName, timeStr));
-    }
-
-    @Override
-    protected void onWaitingStopped() {
-        cancelWaitingTimer();
-    }
-
-    private void cancelWaitingTimer() {
-        if (waitingTimer != null) {
-            waitingTimer.stop();
-            waitingTimer = null;
-        }
     }
 
     @Override

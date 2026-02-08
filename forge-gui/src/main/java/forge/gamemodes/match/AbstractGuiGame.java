@@ -40,6 +40,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private boolean ignoreConcedeChain = false;
     private boolean networkGame = false;
 
+    private java.util.Timer waitingTimer;
+    private long waitingStartTime;
+
     @Override
     public boolean isNetGame() {
         return networkGame;
@@ -491,22 +494,48 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     protected final void updatePromptForAwait(final PlayerView playerView) {
-        showPromptMessage(playerView, getWaitingMessage(playerView));
+        showPromptMessage(playerView, Localizer.getInstance().getMessage("lblWaitingForOpponent"));
         updateButtons(playerView, false, false, false);
     }
 
-    private String getWaitingMessage(final PlayerView forPlayer) {
-        Localizer localizer = Localizer.getInstance();
-
-        if (GuiBase.isNetworkplay(this) && gameView != null && !gameView.isGameOver()) {
-            String name = findWaitingForPlayerName(forPlayer);
-            if (name != null) {
-                return localizer.getMessage("lblWaitingForPlayer", name);
-            }
+    @Override
+    public void showWaitingTimer(final PlayerView forPlayer, final String waitingForPlayerName) {
+        cancelWaitingTimer();
+        if (waitingForPlayerName == null) {
+            return;
         }
-
-        return localizer.getMessage("lblWaitingForOpponent");
+        this.waitingStartTime = System.currentTimeMillis();
+        waitingTimer = new java.util.Timer("waitingTimer");
+        waitingTimer.schedule(new java.util.TimerTask() {
+            @Override
+            public void run() {
+                FThreads.invokeInEdtLater(() -> updateWaitingDisplay(forPlayer, waitingForPlayerName));
+            }
+        }, 1000, 1000);
     }
+
+    private void updateWaitingDisplay(final PlayerView forPlayer, final String waitingForPlayerName) {
+        long elapsedSec = (System.currentTimeMillis() - waitingStartTime) / 1000;
+        if (elapsedSec < 2) {
+            return;
+        }
+        String timeStr;
+        if (elapsedSec < 60) {
+            timeStr = elapsedSec + "s";
+        } else {
+            timeStr = String.format("%d:%02d", elapsedSec / 60, elapsedSec % 60);
+        }
+        showPromptMessageNoCancel(forPlayer, Localizer.getInstance().getMessage("lblWaitingForPlayerWithTime", waitingForPlayerName, timeStr));
+    }
+
+    protected void cancelWaitingTimer() {
+        if (waitingTimer != null) {
+            waitingTimer.cancel();
+            waitingTimer = null;
+        }
+    }
+
+    public void showPromptMessageNoCancel(final PlayerView playerView, final String message) {}
 
     private String findWaitingForPlayerName(final PlayerView forPlayer) {
         if (gameView.getPlayers() != null) {
@@ -549,10 +578,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 awaitNextInputTask = null;
             }
         }
-        onWaitingStopped();
+        cancelWaitingTimer();
     }
-
-    protected void onWaitingStopped() {}
 
     @Override
     public final void updateAutoPassPrompt() {
