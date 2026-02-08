@@ -1,0 +1,8 @@
+Name:North Wind Avatar
+ManaCost:2 U U R
+Types:Creature Dragon Spirit Avatar
+PT:5/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+wasCastByYou | Execute$ TrigChangeZone | TriggerDescription$ When this creature enters, if you cast it, you may put a card you own from outside the game into your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Sideboard | Destination$ Hand | ChangeType$ Card.YouOwn | ChangeTypeDesc$ card they own | ChangeNum$ 1 | Hidden$ True
+Oracle:Flying\nWhen this creature enters, if you cast it, you may put a card you own from outside the game into your hand.

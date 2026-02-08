@@ -1,0 +1,28 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Time Curse
+Description=Time Curse controls the flow of time. Blue spell-denial and tempo.
+Deck Type=constructed
+Set=S99
+Image=time_curse.jpg
+[main]
+6 Island|S99|1
+6 Island|S99|2
+5 Island|S99|3
+2 Air Elemental|S99
+3 Ingenious Thief|S99
+2 Giant Octopus|S99
+3 Wind Drake|S99
+2 Counterspell|S99
+2 Extinguish|S99
+3 Remove Soul|S99
+1 Exhaustion|S99
+1 Ransack|S99
+1 Time Warp|S99
+2 Touch of Brilliance|S99
+1 Undo|S99
+[sideboard]

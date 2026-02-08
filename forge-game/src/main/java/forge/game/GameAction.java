@@ -1234,6 +1234,7 @@ public class GameAction {
         if (affectedPerLayer.containsKey(StaticAbilityLayer.TEXT)) {
             affectedPerLayer.get(StaticAbilityLayer.TEXT).forEach(Card::updateNameforView);
             affectedKeywords.addAll(affectedPerLayer.get(StaticAbilityLayer.TEXT));
+            affectedPT.addAll(affectedPerLayer.get(StaticAbilityLayer.TEXT));
         }
         if (affectedPerLayer.containsKey(StaticAbilityLayer.TYPE)) {
             affectedPerLayer.get(StaticAbilityLayer.TYPE).forEach(Card::updateTypesForView);

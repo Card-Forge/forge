@@ -111,21 +111,15 @@ public class DuelScene extends ForgeScene {
                 }
             }
 
-            // Handle ante card transfers
-            if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ANTE)) {
-                GameOutcome.AnteResult anteResult = hostedMatch.getGame().getOutcome()
-                        .getAnteResult(humanPlayer);
-                if (anteResult != null) {
-                    if (anteResult.wonCards != null) {
-                        for (PaperCard card : anteResult.wonCards) {
-                            Current.player().addCard(card);
-                        }
-                    }
-                    if (anteResult.lostCards != null) {
-                        for (PaperCard card : anteResult.lostCards) {
-                            Current.player().getCards().remove(card, 1);
-                        }
-                    }
+            // Mostly for ante handling, but also blacker lotus
+            GameOutcome.AnteResult anteResult = hostedMatch.getGame().getOutcome().getAnteResult(humanPlayer);
+            if (anteResult != null) {
+                for (PaperCard card : anteResult.wonCards) {
+                    Current.player().addCard(card);
+                }
+                for (PaperCard card : anteResult.lostCards) {
+                    // We could clean this up by trying to combine all the lostCards into a mapping, but good enough for now
+                    Current.player().removeLostCardFromPools(card);
                 }
             }
         } catch (Exception e) {

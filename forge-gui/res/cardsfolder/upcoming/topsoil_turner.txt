@@ -1,0 +1,9 @@
+Name:Topsoil Turner
+ManaCost:2 G
+Types:Creature Treefolk Druid
+PT:2/4
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAnimateAll | TriggerDescription$ When this creature enters, each Forest and Treefolk card in your hand perpetually gains "{T}: Add {G}{G}."
+SVar:TrigAnimateAll:DB$ AnimateAll | Zone$ Hand | ValidCards$ Forest.YouOwn,Treefolk.YouOwn | Abilities$ TwoG | Duration$ Perpetual
+SVar:TwoG:AB$ Mana | Cost$ T | Produced$ G | Amount$ 2 | SpellDescription$ Add {G}{G}.
+Oracle:Reach\nWhen this creature enters, each Forest and Treefolk card in your hand perpetually gains "{T}: Add {G}{G}."

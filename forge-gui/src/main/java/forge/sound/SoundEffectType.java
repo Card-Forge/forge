@@ -88,6 +88,7 @@ public enum SoundEffectType {
     Sacrifice("sacrifice", true),
     ScriptedEffect("", false), // Plays the effect defined by SVar:SoundEffect
     Shuffle("shuffle", false),
+    SnapshotRestored("rewind", false),
     SpeedUp("speedup", false),
     Sorcery("sorcery", false),
     Sprocket("sprocket", true),

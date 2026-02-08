@@ -1,0 +1,8 @@
+Name:Craterous Stomp
+ManaCost:1 R
+Types:Kindred Instant Giant
+A:SP$ DealDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | RememberTargets$ True | NumDmg$ 3 | SubAbility$ DBAnimateAll | SpellDescription$ CARDNAME deals 3 damage to target creature an opponent controls. Each other creature that player controls becomes a Coward in addition to its other types and gains "This creature can't block Giants or Warriors."
+SVar:DBAnimateAll:DB$ AnimateAll | ValidCards$ Creature.ControlledBy RememberedController+IsNotRemembered | Types$ Coward | staticAbilities$ Cowardly | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:Cowardly:Mode$ CantBlockBy | ValidAttacker$ Giant,Warrior | ValidBlocker$ Creature.Self | Description$ This creature can't block Giants or Warriors.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Craterous Stomp deals 3 damage to target creature an opponent controls. Each other creature that player controls becomes a Coward in addition to its other types and gains "This creature can't block Giants or Warriors."

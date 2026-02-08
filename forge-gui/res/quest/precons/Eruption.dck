@@ -1,0 +1,45 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Eruption
+Description=Eruption explodes with aggressive creatures and direct damage. Fast and furious, this deck ends games quickly.
+Deck Type=constructed
+Set=NMS
+Image=eruption.jpg
+[main]
+4 Plains|MMQ
+3 Plains|MMQ
+3 Plains|MMQ
+5 Mountain|MMQ
+5 Mountain|MMQ
+4 Mountain|MMQ
+2 Alabaster Wall|MMQ
+1 Arc Mage|NMS
+2 Chieftain en-Dal|NMS
+1 Crenellated Wall|MMQ
+1 Defender en-Vec|NMS
+2 Flowstone Crusher|NMS
+1 Flowstone Overseer|NMS
+1 Kris Mage|MMQ
+3 Laccolith Grunt|NMS
+2 Laccolith Warrior|NMS
+2 Laccolith Whelp|NMS
+1 Oracle's Attendants|NMS
+2 Trap Runner|MMQ
+1 Flaming Sword|MMQ
+1 Inviolability|MMQ
+1 Seal of Cleansing|NMS
+3 Seal of Fire|NMS
+1 Disenchant|LEA
+1 Downhill Charge|NMS
+1 Ramosian Rally|MMQ
+1 Sivvi's Ruse|NMS
+1 Thunderclap|MMQ
+1 Volcanic Wind|MMQ
+1 Belbe's Armor|NMS
+1 Flowstone Armor|NMS
+1 Iron Lance|MMQ
+[sideboard]

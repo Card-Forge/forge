@@ -136,18 +136,18 @@ public class TriggerHandler {
     }
 
     public static Trigger parseTrigger(final Map<String, String> mapParams, final Card host, final boolean intrinsic, final IHasSVars sVarHolder) {
-        Trigger ret = null;
+        Trigger result;
 
         try {
             final TriggerType type = TriggerType.smartValueOf(mapParams.get("Mode"));
-            ret = type.createTrigger(mapParams, host, intrinsic);
+            result = type.createTrigger(mapParams, host, intrinsic);
             if (sVarHolder != null) {
-                ret.ensureAbility(sVarHolder);
+                result.ensureAbility(sVarHolder);
 
                 if (sVarHolder instanceof CardState) {
-                    ret.setCardState((CardState)sVarHolder);
+                    result.setCardState((CardState)sVarHolder);
                 } else if (sVarHolder instanceof CardTraitBase) {
-                    ret.setCardState(((CardTraitBase)sVarHolder).getCardState());
+                    result.setCardState(((CardTraitBase)sVarHolder).getCardState());
                 }
             }
         } catch (Exception e) {
@@ -162,7 +162,7 @@ public class TriggerHandler {
             throw new RuntimeException("Error in Trigger for Card: " + host.getName(), e);
         }
 
-        return ret;
+        return result;
     }
 
     private static Map<String, String> parseParams(final String trigParse) {

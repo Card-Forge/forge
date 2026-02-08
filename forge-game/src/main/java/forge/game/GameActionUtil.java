@@ -816,8 +816,6 @@ public final class GameActionUtil {
 
         SpellAbilityEffect.addForgetOnMovedTrigger(eff, "Stack");
 
-        eff.updateStateForView();
-
         game.getAction().moveToCommand(eff, sa);
 
         return eff;
@@ -930,14 +928,6 @@ public final class GameActionUtil {
             completeList.remove(eff);
         }
         return completeList;
-    }
-
-    public static void checkStaticAfterPaying(Card c) {
-        c.getGame().getAction().checkStaticAbilities(false);
-
-        c.updateKeywords();
-
-        c.getGame().getTriggerHandler().resetActiveTriggers();
     }
 
     public static void rollbackAbility(SpellAbility ability, final Zone fromZone, final int zonePosition, CostPayment payment, Card oldCard) {
