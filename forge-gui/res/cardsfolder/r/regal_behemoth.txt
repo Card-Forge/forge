@@ -4,7 +4,7 @@ Types:Creature Dinosaur
 PT:5/5
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters, you become the monarch.
-SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
+SVar:TrigMonarch:DB$ BecomeMonarch
 T:Mode$ TapsForMana | ValidCard$ Land | Activator$ You | CheckDefinedPlayer$ You.isMonarch | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever you tap a land for mana while you're the monarch, add an additional one mana of any color.
 SVar:TrigMana:DB$ Mana | Produced$ Combo Any | Amount$ 1
 Oracle:Trample\nWhen Regal Behemoth enters, you become the monarch.\nWhenever you tap a land for mana while you're the monarch, add an additional one mana of any color.

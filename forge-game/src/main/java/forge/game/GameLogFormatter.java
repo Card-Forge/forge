@@ -144,6 +144,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         for (Entry<RegisteredPlayer, String> entry : players.entrySet()) {
             int amount = winCount.getOrDefault(entry.getKey(), 0);
 
+            //String name = entry.getValue() + " [" + entry.getKey().getPlayer().getType() + "]";
             sb.append(entry.getValue()).append(": ").append(amount).append(" ");
         }
 

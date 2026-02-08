@@ -32,6 +32,7 @@ public class SoundSystem {
 
     private boolean shouldPlayMusic = true;
     private boolean hasWindowFocus = true;
+    private boolean ignorePlayRequests = false;
 
     private SoundSystem() {
         this.visualizer = new EventVisualizer(GamePlayerUtil.getGuiPlayer());
@@ -112,6 +113,10 @@ public class SoundSystem {
      * ("synchronized" with other sounds of the same kind means: only one can play at a time).
      */
     public void play(final String resourceFileName, final boolean isSynchronized) {
+        if (ignorePlayRequests) {
+            return;
+        }
+
         if (isUsingAltSystem()) {
             File file = getSoundResource(resourceFileName);
             if(file == null)
@@ -130,6 +135,10 @@ public class SoundSystem {
      * Play the sound associated with the Sounds enumeration element.
      */
     public void play(final SoundEffectType type, final boolean isSynchronized) {
+        if (ignorePlayRequests) {
+            return;
+        }
+
         if (isUsingAltSystem()) {
             File file = getSoundResource(type.getResourceFileName());
             if(file == null)
@@ -470,5 +479,9 @@ public class SoundSystem {
         Collections.sort(availableSets);
         availableSets.add(0, "Default");
         return availableSets;
+    }
+
+    public void setIgnorePlayRequests(boolean ignorePlayRequests) {
+        this.ignorePlayRequests = ignorePlayRequests;
     }
 }

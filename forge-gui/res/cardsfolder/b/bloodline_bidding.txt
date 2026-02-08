@@ -1,0 +1,7 @@
+Name:Bloodline Bidding
+ManaCost:6 B B
+Types:Sorcery
+K:Convoke
+A:SP$ ChooseType | Defined$ You | Type$ Creature | SubAbility$ DBChangeZoneAll | AILogic$ MostProminentInComputerGraveyard | SpellDescription$ Choose a creature type. Return all creature cards of the chosen type from your graveyard to the battlefield.
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Creature.ChosenType+YouOwn | Origin$ Graveyard | Destination$ Battlefield
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nChoose a creature type. Return all creature cards of the chosen type from your graveyard to the battlefield.

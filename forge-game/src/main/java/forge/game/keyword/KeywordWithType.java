@@ -2,15 +2,27 @@ package forge.game.keyword;
 
 import java.util.Arrays;
 
+import org.apache.commons.lang3.StringUtils;
+
+import forge.card.MagicColor;
 import forge.util.Lang;
 
-public class KeywordWithType extends KeywordInstance<KeywordWithType> {
+public class KeywordWithType extends KeywordInstance<KeywordWithType> implements KeywordWithTypeInterface {
     protected String type = null;
     protected String descType = null;
     protected String reminderType = null;
 
+    @Override
     public String getValidType() { return type; }
+    @Override
     public String getTypeDescription() { return descType; }
+
+    @Override
+    public String getTitle() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.getKeyword()).append(" ").append(descType);
+        return sb.toString();
+    }
 
     @Override
     protected void parse(String details) {
@@ -32,12 +44,18 @@ public class KeywordWithType extends KeywordInstance<KeywordWithType> {
                 descType = k[0];
             }
         } else {
-            descType = type = details;
-            boolean multiple = switch(getKeyword()) {
-                case AFFINITY -> true;
-                default -> false;
-            };
-            descType = Lang.getInstance().buildValidDesc(Arrays.asList(type.split(",")), multiple);
+            MagicColor.Color color = MagicColor.Color.fromName(details);
+            if (color != MagicColor.Color.COLORLESS) {
+                type = "Card." + StringUtils.capitalize(color.getName());
+                descType = color.getName();
+            } else {
+                descType = type = details;
+                boolean multiple = switch(getKeyword()) {
+                    case AFFINITY -> true;
+                    default -> false;
+                };
+                descType = Lang.getInstance().buildValidDesc(Arrays.asList(type.split(",")), multiple);
+            }
         }
 
         if (descType.equalsIgnoreCase("Outlaw")) {

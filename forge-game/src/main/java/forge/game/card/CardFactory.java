@@ -23,7 +23,6 @@ import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.*;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
@@ -256,7 +255,7 @@ public class CardFactory {
         card.setState(CardStateName.Original, false);
         // need to update keyword cache for original spell
         if (card.isSplitCard()) {
-            card.updateKeywordsCache(card.getCurrentState());
+            card.updateKeywordsCache();
         }
 
         // ******************************************************************
@@ -288,15 +287,6 @@ public class CardFactory {
             re.setOverridingAbility(AbilityFactory.getAbility(abProtector, card));
             card.addReplacementEffect(re);
         }
-    }
-
-    public static SpellAbility buildBasicLandAbility(final CardState state, byte color) {
-        String strcolor = MagicColor.toShortString(color);
-        String abString  = "AB$ Mana | Cost$ T | Produced$ " + strcolor +
-                " | Secondary$ True | SpellDescription$ Add {" + strcolor + "}.";
-        SpellAbility sa = AbilityFactory.getAbility(abString, state);
-        sa.setIntrinsic(true); // always intrinsic
-        return sa;
     }
 
     private static Card readCard(final IPaperCard paperCard, int cardId, Game game) {
@@ -508,7 +498,7 @@ public class CardFactory {
         }
 
         if (cause.hasParam("SetManaCost")) {
-            manaCost = new ManaCost(new ManaCostParser(cause.getParam("SetManaCost")));
+            manaCost = new ManaCost(cause.getParam("SetManaCost"));
             if (cause.hasParam("SetColorByManaCost")) {
                 colors = ColorSet.fromManaCost(manaCost);
             }

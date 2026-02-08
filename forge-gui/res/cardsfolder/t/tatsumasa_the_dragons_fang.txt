@@ -4,6 +4,6 @@ Types:Legendary Artifact Equipment
 K:Equip:3
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 5 | AddToughness$ 5 | Description$ Equipped creature gets +5/+5.
 A:AB$ Token | Cost$ 6 Exile<1/CARDNAME> | TokenScript$ u_5_5_dragon_spirit_flying | TokenOwner$ You | RememberTokens$ True | SubAbility$ DelTrig | SpellDescription$ Create a 5/5 blue Dragon Spirit creature token with flying. Return NICKNAME to the battlefield under its owner's control when that token dies.
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ ChangesZone | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigReturn | RememberObjects$ Remembered,ExiledCards | TriggerDescription$ Return NICKNAME to the battlefield under its owner's control when that token dies.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ ChangesZone | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigReturn | RememberObjects$ Remembered & ExiledCards | TriggerDescription$ Return NICKNAME to the battlefield under its owner's control when that token dies.
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ DelayTriggerRememberedLKI
 Oracle:Equipped creature gets +5/+5.\n{6}, Exile Tatsumasa, the Dragon's Fang: Create a 5/5 blue Dragon Spirit creature token with flying. Return Tatsumasa to the battlefield under its owner's control when that token dies.\nEquip {3}

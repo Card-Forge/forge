@@ -1,0 +1,13 @@
+Name:Celestial Reunion
+ManaCost:X G
+Types:Sorcery
+S:Mode$ OptionalCost | EffectZone$ All | ValidCard$ Card.Self | ValidSA$ Spell | Cost$ ChooseCreatureType<1> Behold<2/Creature.ChosenType> | Description$ As an additional cost to cast this spell, you may choose a creature type and behold two creatures of that type.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Library | ChangeType$ Creature.cmcLEX | ChangeNum$ 1 | NoShuffle$ True | RememberChanged$ True | SubAbility$ DBBranch | StackDescription$ Search your library for a creature card with mana value X or less, reveal it, put it into your hand, then shuffle. If this spell's additional cost was paid and the revealed card is the chosen type, put that card onto the battlefield instead of putting it into your hand.
+SVar:DBBranch:DB$ Branch | BranchConditionSVar$ Y | TrueSubAbility$ DBChangeZoneAll1 | FalseSubAbility$ DBChangeZoneAll2
+SVar:DBChangeZoneAll1:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Battlefield | SubAbility$ DBShuffle
+SVar:DBChangeZoneAll2:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand | SubAbility$ DBShuffle
+SVar:DBShuffle:DB$ Shuffle | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$xPaid
+SVar:Y:Remembered$Valid Card.ChosenType
+Oracle:As an additional cost to cast this spell, you may choose a creature type and behold two creatures of that type.\nSearch your library for a creature card with mana value X or less, reveal it, put it into your hand, then shuffle. If this spell's additional cost was paid and the revealed card is the chosen type, put that card onto the battlefield instead of putting it into your hand.

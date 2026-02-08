@@ -79,7 +79,7 @@ public class CostUntap extends CostPart {
     @Override
     public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
-        return source.isTapped() && !source.isAbilitySick() &&
+        return source.canUntap(null, false) && !source.isAbilitySick() &&
                 (source.getCounters(CounterEnumType.STUN) == 0 || source.canRemoveCounters(CounterEnumType.STUN));
     }
 

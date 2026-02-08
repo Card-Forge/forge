@@ -107,10 +107,16 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
                         final IOnlineChatInterface chatInterface = (IOnlineChatInterface)OnlineScreen.Chat.getScreen();
                         if (joinServer) {
                             result[0] = NetConnectUtil.join(url, OnlineLobbyScreen.this, chatInterface);
-                            if (result[0].getMessage() == ForgeConstants.CLOSE_CONN_COMMAND) { //this message is returned via netconnectutil on exception
+                            String message = result[0].getMessage();
+                            if (ForgeConstants.CLOSE_CONN_COMMAND.equals(message)) { //this message is returned via netconnectutil on exception
                                 closeConn(Forge.getLocalizer().getMessage("UnableConnectToServer", url));
                                 return;
-                            } else if (result[0].getMessage() == ForgeConstants.INVALID_HOST_COMMAND) {
+                            } else if (message != null && message.startsWith(ForgeConstants.CONN_ERROR_PREFIX)) {
+                                // Show detailed connection error
+                                String errorDetail = message.substring(ForgeConstants.CONN_ERROR_PREFIX.length());
+                                closeConn(errorDetail);
+                                return;
+                            } else if (ForgeConstants.INVALID_HOST_COMMAND.equals(message)) {
                                 closeConn(Forge.getLocalizer().getMessage("lblDetectedInvalidHostAddress", url));
                                 return;
                             }

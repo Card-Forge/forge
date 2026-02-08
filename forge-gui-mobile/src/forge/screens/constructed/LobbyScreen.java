@@ -602,8 +602,6 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
         final boolean allowNetworking = lobby.isAllowNetworking();
 
-        GuiBase.setNetworkplay(allowNetworking);
-
         setStartButtonAvailability();
 
         for (int i = 0; i < cbPlayerCount.getSelectedItem(); i++) {
@@ -857,6 +855,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         updateDeck(index);
         //fireReady(index, playerPanels.get(index).isReady());
     }
+
     public void removePlayer(final int index) {
         lobby.removeSlot(index);
     }
@@ -866,7 +865,16 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
     private UpdateLobbyPlayerEvent getSlot(final int index) {
         final PlayerPanel panel = playerPanels.get(index);
-        return UpdateLobbyPlayerEvent.create(panel.getType(), panel.getPlayerName(), panel.getAvatarIndex(), panel.getSleeveIndex(), panel.getTeam(), panel.isArchenemy(), panel.isReady(), panel.isDevMode(), panel.getAiOptions());
+        return UpdateLobbyPlayerEvent.create(panel.getType(),
+                panel.getPlayerName(),
+                panel.getAvatarIndex(),
+                panel.getSleeveIndex(),
+                panel.getTeam(),
+                panel.isArchenemy(),
+                panel.isReady(),
+                panel.isDevMode(),
+                panel.getAiOptions(),
+                null); // TODO implement AI profile support for mobile
     }
 
     public List<PlayerPanel> getPlayerPanels() {

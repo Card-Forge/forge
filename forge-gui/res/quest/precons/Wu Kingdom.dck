@@ -1,0 +1,29 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Wu Kingdom
+Description=A blue deck from Portal Three Kingdoms led by the wise Sun Quan. Control magic and counterspells protect your horsemanship army.
+Deck Type=constructed
+Set=PTK
+Image=wu_kingdom.jpg
+[main]
+5 Island|PTK|1
+5 Island|PTK|2
+5 Island|PTK|3
+3 Straw Soldiers|PTK
+3 Wu Light Cavalry|PTK
+2 Wu Scout|PTK
+2 Wu Longbowman|PTK
+2 Wu Elite Cavalry|PTK
+1 Lu Xun, Scholar General|PTK
+2 Wu Admiral|PTK
+1 Sun Quan, Lord of Wu|PTK
+2 Extinguish|PTK
+1 Exhaustion|PTK
+2 Preemptive Strike|PTK
+2 Forced Retreat|PTK
+2 Brilliant Plan|PTK
+[sideboard]

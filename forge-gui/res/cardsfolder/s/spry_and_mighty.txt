@@ -1,0 +1,9 @@
+Name:Spry and Mighty
+ManaCost:4 G
+Types:Sorcery
+A:SP$ ChooseCard | Choices$ Creature.YouCtrl | ChoiceZone$ Battlefield | SubAbility$ DBDraw | Amount$ 2 | SpellDescription$ Choose two creatures you control. You draw X cards and the chosen creatures get +X/+X and gain trample until end of turn, where X is the difference between the chosen creatures' powers.
+SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ ChosenCard | NumAtt$ +X | NumDef$ +X | KW$ Trample
+SVar:X:Count$Valid Creature.ChosenCard$GreatestCardPower/Minus.Y
+SVar:Y:Count$Valid Creature.ChosenCard$LeastCardPower
+Oracle:Choose two creatures you control. You draw X cards and the chosen creatures get +X/+X and gain trample until end of turn, where X is the difference between the chosen creatures' powers.

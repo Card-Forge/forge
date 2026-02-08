@@ -1777,6 +1777,14 @@ public class CardProperty {
                 return false;
             }
             return card.getCastSA().isSpectacle();
+        } else if (property.equals("sneaked")) {
+            if (card.getCastSA() == null) {
+                return false;
+            }
+            if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
+                return false;
+            }
+            return card.getCastSA().isSneak();
         } else if (property.equals("foretold")) {
             if (!card.isForetold()) {
                 return false;

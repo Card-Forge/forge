@@ -1,0 +1,34 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Dominator
+Description=The Dominator deck establishes complete control over the game. Counter spells, bounce permanents, and dominate the board with evasive creatures.
+Deck Type=constructed
+Set=EXO
+Image=dominator.jpg
+[main]
+9 Island|TMP|1
+9 Island|TMP|2
+8 Island|TMP|3
+2 Cloud Spirit|STH
+4 Thalakos Scout|EXO
+1 Dominating Licid|EXO
+2 Mirozel|EXO
+2 Wayward Soul|EXO
+2 Killer Whale|EXO
+1 Erratic Portal|EXO
+1 Equilibrium|EXO
+1 Legacy's Allure|TMP
+1 Propaganda|TMP
+1 Treasure Trove|EXO
+2 Capsize|TMP
+4 Counterspell|TMP
+2 Forbid|EXO
+3 Mana Leak|STH
+2 Mind Games|STH
+2 Fade Away|EXO
+1 Time Ebb|TMP
+[sideboard]

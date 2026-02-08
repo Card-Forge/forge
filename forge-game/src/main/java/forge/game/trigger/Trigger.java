@@ -446,13 +446,6 @@ public abstract class Trigger extends TriggerReplacementBase {
             if (game.getCombat().getAttackersAndDefenders().values().containsAll(attacker.getOpponents())) {
                 return false;
             }
-        } else if (condition.startsWith("FromNamedAbility")) {
-            var rest = condition.substring(16);
-            final SpellAbility trigSA = (SpellAbility) runParams.get(AbilityKey.Cause);
-
-            if (trigSA != null && !trigSA.getName().equals(rest)) {
-                return false;
-            }
         }
         
         return true;
@@ -516,8 +509,11 @@ public abstract class Trigger extends TriggerReplacementBase {
         this.id = id;
     }
 
-    public void addRemembered(Object o) {
+    public <T> void addRemembered(T o) {
         this.triggerRemembered.add(o);
+    }
+    public <T> void addRemembered(Collection<T> o) {
+        this.triggerRemembered.addAll(o);
     }
 
     @Override
@@ -660,5 +656,13 @@ public abstract class Trigger extends TriggerReplacementBase {
     }
     public boolean isLastChapter() {
         return isChapter() && getChapter() == getCardState().getFinalChapterNr();
+    }
+
+    @Override
+    public boolean isManaAbility() {
+        if (!TriggerType.TapsForMana.equals(getMode()) && !TriggerType.ManaAdded.equals(getMode())) {
+            return false;
+        }
+        return ensureAbility().isManaAbility();
     }
 }

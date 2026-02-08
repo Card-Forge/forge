@@ -4,5 +4,5 @@ Types:Creature Ape
 PT:*/4
 K:Reach
 S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the highest mana value among creatures you control.
-SVar:X:Count$Valid Creature.YouCtrl$GreatestCMC
+SVar:X:Count$Valid Creature.YouCtrl$GreatestCardManaCost
 Oracle:Reach\nTowering Gibbon's power is equal to the greatest mana value among creatures you control.
