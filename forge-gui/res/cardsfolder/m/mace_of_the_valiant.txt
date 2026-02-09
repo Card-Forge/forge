@@ -3,11 +3,10 @@ ManaCost:2 W
 Types:Artifact Equipment
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | AddKeyword$ Vigilance | Description$ Equipped creature gets +1/+1 for each charge counter on CARDNAME and has vigilance.
 SVar:X:Count$CardCounters.CHARGE
-SVar:NeedsToPlayVar:X GE3
-AI:RemoveDeck:Random
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature you control enters, put a charge counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1
-SVar:BuffedBy:Creature
 K:Equip:3
+SVar:BuffedBy:Creature
+AI:RemoveDeck:Random
 DeckHas:Ability$Counters
 Oracle:Equipped creature gets +1/+1 for each charge counter on Mace of the Valiant and has vigilance.\nWhenever a creature you control enters, put a charge counter on Mace of the Valiant.\nEquip {3}

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="82">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Seraph Sanctuary&quot;, &quot;Avacynian Priest&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAOonkZGHbxoOIoXoQ4MhtdDSVAlgdTTJoHIY7MRldDC3uR/Usve4kBw8leesQvrrSKbO9wT8/EgOFk70CWGyMpPRMDhku6quVmYNiDJrYXyK/npq696PEGwuhmymJRs4tIewF12C1k
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzr42Rg6MOCNbjJx22chDE2O0ftHbV31N5Re0ftHbV31F7a2gsAxCrEbw==
+  </data>
+ </layer>
+ <layer id="2" name="Walls and Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy1VdsNwjAM9GdS5kCCD8YAvgCJSZiENRBf5dE9GKRQOgKxgtXDJFVLyklRlMTy1cmdS0RUGKK1bcbFra2bMzVGah2LQdSQU6O0n7wbNw72O+7o9m4Tot3Uz7EYRm7aOUPcjxbe0vGNZ35u410FOPeBeOF+vM9CObtAeEuoQUPz4zqVl3H/IUfbHfaJieFswvc+z4gWaiyz/jEM1tjJeC4Bv0Fl/d7TNmep9UotOXi0gvzoH/FQLGcX6G/bqvyV0h16aCherpnzX03Tm9BXcoaaH1pX6NEY+E2G1FUMqGfpb//2kYb01JT3Ze2gNwSxPlmDvlJ4tX41vwb+D1PuWXszxo31c08tEnWleUPcL5aHcgI=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy9lD0SgjAQhXfGiiJyCnUsbKCAO3gZS8WeTriFXsI74DXwFG4GdliXRAIEv5kMSTbZ/LxHABqqoPleFXyhEoA1ljABI7a4zCOR8W0EsIu69g3zFVhKy7qmuMxBZO1ar6Afu+P4B5ujUjwPljDt+jaH33GZozKsw9d+rnCvMe41btq5Pg/mK7CUaX8uiHje9lEOnW+IbECPuZCeb9ZXs7rpTuZg0vKs3O7iH0gvnvZu8/g4m59taA2kF6dAObiWF+Ef6Sfp5zFIP4/B5AOfcN9SvTYPnczQW8lZ0ldcU74n/U/59BXhop1PX9neBtJzaS+54OudPrZf7l+u6QfF4j+G
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="281" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/treasure.tx" x="112.504" y="95.8562">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;AVR&quot;, &quot;SOI&quot;, &quot;MID&quot;, &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;cardTypes&quot;: [&quot;Creature&quot;],
+    &quot;subTypes&quot;: [&quot;Angel&quot;],
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="52" template="../../../../common/maps/obj/gold.tx" x="290.496" y="142.19"/>
+  <object id="56" template="../../../../common/maps/obj/enemy.tx" x="207.435" y="193.094">
+   <properties>
+    <property name="enemy" value="Thalia"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="57" template="../../../../common/maps/obj/enemy.tx" x="207.184" y="80.9197">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Scroll of avacyn|AVR&quot;, &quot;Mask of avacyn|ISD&quot;, &quot;Avacyn, guardian angel&quot;, &quot;Ghost Quarter|ISD&quot;, &quot;helvault|DKA&quot;]}"/>
+    <property name="enemy" value="Avacyn"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/enemy.tx" x="178.981" y="151.313">
+   <properties>
+    <property name="enemy" value="Gisela"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="59" template="../../../../common/maps/obj/enemy.tx" x="237.626" y="149.646">
+   <properties>
+    <property name="enemy" value="Bruna"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="60" template="../../../../common/maps/obj/enemy.tx" x="239.959" y="232.636">
+   <properties>
+    <property name="enemy" value="Sigarda"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="61" template="../../../../common/maps/obj/enemy.tx" x="177.981" y="232.969">
+   <properties>
+    <property name="enemy" value="Liesa"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/manashards.tx" x="126.973" y="225.447"/>
+  <object id="71" template="../../../../common/maps/obj/manashards.tx" x="288" y="226"/>
+  <object id="72" template="../../../../common/maps/obj/gold.tx" x="129.333" y="142.333"/>
+  <object id="74" template="../../obj/treasure.tx" x="303.5" y="95">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;AVR&quot;, &quot;SOI&quot;, &quot;MID&quot;, &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;cardTypes&quot;: [&quot;Creature&quot;],
+    &quot;subTypes&quot;: [&quot;Angel&quot;],
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="75" template="../../obj/treasure.tx" x="208.875" y="57.0417">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;AVR&quot;, &quot;SOI&quot;, &quot;MID&quot;, &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;cardTypes&quot;: [&quot;Creature&quot;],
+    &quot;subTypes&quot;: [&quot;Angel&quot;],
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/dialog.tx" x="184" y="250.917" width="65.6667" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The cathedral ahead is filled with angelic chanting, all praising the majestic angel at its back. Silver symbols adorn the church walls, depicing Avacyn's Collar, the symbol of her church.
+
+Your manasight stone glows, sensing the power of the legends here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="77" template="../../../../common/maps/obj/collision.tx" x="257.882" y="6.3102" width="44.2679" height="56.1083"/>
+  <object id="78" template="../../../../common/maps/obj/collision.tx" x="129.284" y="6.31019" width="44.2679" height="56.1083"/>
+  <object id="79" template="../../../../common/maps/obj/collision.tx" x="191.569" y="16.5121" width="17.4208" height="31.4089"/>
+  <object id="80" template="../../../../common/maps/obj/collision.tx" x="227.007" y="15.9752" width="17.4208" height="31.4089"/>
+  <object id="81" template="../../../../common/maps/obj/collision.tx" x="207.979" y="15.5658" width="17.4208" height="14.6589"/>
+ </objectgroup>
+</map>

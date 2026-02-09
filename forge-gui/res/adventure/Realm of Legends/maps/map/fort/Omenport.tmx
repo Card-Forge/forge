@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="44" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="33" nextobjectid="348">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Omenport Vigilante&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/FarmFood.tsx"/>
+ <layer id="28" name="Collision" width="44" height="23">
+  <data encoding="base64" compression="zlib">
+   eJztl18KwjAMxvvYIXgRXz3DHB61equxe0jQYIjtmqZJ2YMfhLH++fiRphmbpxBmFlx8fi9qWj5r7pW1KYbwjDqWRcCxKngf8R2cK5F3PifJj4SXekl4qVbCDrGxNZRZcpZSXvRr5ZUImWusKVNDeyp5wXirFxXWO/LS88DQqHRfe1hB9H5Cri+n39CI81qwgiiv5F5LpelxEnnxclnzWubAU9DzoG69eS28r+dvoKcXtxVvju/ovD3eI2veIr9/3rKOyJvjwX7Qy+DRS0q8e8wSDo/ex7/ft0nGS/eOYqXe+GzhpXtz4173rJe3559Sy8vrgY9rfUcpl6sXKqBHEw==
+  </data>
+ </layer>
+ <layer id="24" name="Background" width="44" height="23">
+  <data encoding="base64" compression="zlib">
+   eJzt00EKgCAQhWFXWXSadl2lM3SJoEN1Iq9Q24gQdFAaK3kjuPhXhfMhjmmUMsxWHY97Rqypu0v9hsw1USPaaz0l3Klr5VSaF21+40W67eyxfw7p3Vp/dsh3/SfFS2eHrNRLzZK8nDeBegvSvaFdl7Bvi/ZDet2diDUPaefl8nKsqe2MO/56v7ncB7O/Z9dqtRqqE+kwKa0=
+  </data>
+ </layer>
+ <layer id="25" name="Walls" width="44" height="23">
+  <data encoding="base64" compression="zlib">
+   eJztlVtKAzEUhtNCE5xuYbqMOhZmUd1Bi7oG6VRUXJTtQymF0ou++uTtoecwhsnESTK5IYg//MwlOYeP5J9MkRAyB9+CXXXJCHmh5X3WJ+QCPOo3z33tVFfuXJgr1+HYIals6m/L/AR9FuClhlfnJg7OimOm/i7Me3Ch2LcDVdffJaVFHWnFHEO7b17Vvul4deJrHFqct2nfnuH9NXPrG5t3L62jDytK5H3rufeR1cTry4qKlV/85q4k+7KiYvHG0s7xO/3X39Y7nA0f4E9wPrCr3UCmtpK/zuoOrRktXVA7XmSdsnaOwZsxO95JS9bQzJzXNg+2vKHYTXkYK/59rrw63XTb89rk4T71W18dt4lZzMMKeB9T/fwHGF8P4vGaJOYBpWPmrDZnQ6z8ZkIfVS7yAKy+zEOoPWd1XlzjbvrTIXLAPQl4xonadurPv817ArelwZg=
+  </data>
+ </layer>
+ <layer id="26" name="Clutter" width="44" height="23">
+  <data encoding="base64" compression="zlib">
+   eJzVlstKAzEUhtNpp0WhXXnZ1LWdloI6XkAEH8CVbnwIsboV30KlVnBTwQdw6ULBy0LBlS5FFyJ9AFetIpiYxCZpMjmZdhb+8JN2cpL55kxyJgiZ1fYjOgXte/YYda6PFDVEreGuxbnahvGtLELvk3rb+FbLCK2V9TGc2YX9b34cf4Dz1AwQOgl6eeNqE7PWDLxxpL6nC8x6Gehj+5lX1ViB2ta/k+9e4+vhd372PsIMQrPMT5n4vDbZeE0xe3gNLE1Ejzsd19sm6H51VdS8W3433zrr3gHkWXQaLfRaJ5Jf036vWXJk639LUbvw2hSHdySI7udSec+n9Yy2nKq8Jtl48ll5fTwq62UugT3bD6+oZprG3w/R/8dpuV/MbUfJM0SfjOUZ83pFfL9ibwyEt1Kh7XKGxt8x3kVAbm9ChG5DGC/Rl8N+gtSxFZy3qxJC1yU4wyDlsh6INjDvC2Z9TZjXlGco7+7M4FggWsjR1kvLJrzqtUGo49P9w/NEvlmioQqVerTtJ1ef6rgWNrCP2Pmv7sF5+XPyPcW/HyS//Df03ADVocIrMsfRQ9V9v7loNifzVqdo2885KUleIpH3jF37L7xcUbyNrGxxrMvZKq7IPb99uZ5y3vWU7HlWw0jLzeuayJw0r8rcVlpRP0htjFs=
+  </data>
+ </layer>
+ <layer id="27" name="ClutterBis" width="44" height="23">
+  <data encoding="base64" compression="zlib">
+   eJy1l89rE0EUxyeb7m40WLEHvbR60ENS20BoUz14EEGl3vRPUAperHoXsWmhd1uaevHS9uS/Ii3qTShIK6IHLyKSqKDvMfPYN28nu7Np+oUv+yO7M599892ZjVJ++hopdbem1L1aso3BFXbsqx8l7bz+vkV6vxUrNQe+EqevWwuUWo5t47kV2D4CpsVasr0IvsSOs/hcvNySFftrx5q5Fyr1G/wntK9bD+zjel2pSfAX85wzI0rNCr8329aIHy+yyHpIr7A6InMH7tkEv4qS87+gzSnWLu7fBNZbhnfnnNuLYbLvq7OjxczzgPXGZ94qu9umscnjfTOlfRy8PA8vHXnl4/LBjPMwed85ctXPmDOehy70d/JUfz8Os/t+Etptk7Lygc8YNWF+yXGlqa/neUDe1+N2fWif+uT1w/37MCYPAr2Vv2dpp+rPi6zT8O406nYeumGaMY+XWBccvO1JOAHvQmB8bcJm3a76884D6516Og8o11yF5uMt5zD0KJtjXHK1iff45hffH5kH1MPL2qiFILE8RmN9SlC7f4F2lqi+29Wkztfhnq2SbZQ8d8P05coDSdbZVd+nhtdHxMuZ94Fj1WTte9N9X3tWX4e8lIdNx1hSnc/A+jpm1lieXZrDfHQI7X+cSJ/fZ2PCeVfZnFKUdxpYG4K3caIYLzFLPSvrsUbtAe9bh3ebfry+eSgiztw1GURmmVfp5+V8Xh8VqS/pINL+ZOaknmlDfnORaA08HR2Nl9oYVC9izdyK7Xe9A2O/wXLN54W/YT5v1np3VBFzz8xRP9l3ITLjc8gcDMI7LF2oaNarcZoXhd+2ebzz8Fy3xdx/ULK3w9CSyQFfYwfh/Ry4mY9Dhya/xIvftD3G7MO7BHNHG7zsuW4Ng7nD/uNwZuKl74a5uP//TSmeBbl2D6LzFW3MMOclZvxvu27WCczJuOj3PyGkKPo=
+  </data>
+ </layer>
+ <layer id="30" name="Ground" width="44" height="23">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAf+MSIysaFBwvA58bB6F4QeMSIwMMdPOMaaBeMAlqBcl4IXcmLnz+YQDkvfnowgUpe0vijYBTQAyhxDrQLRsFQAKPpZGgBc3bccmd06eeOUTAKSAGmeNLtYAQA6AQcsw==
+  </data>
+ </layer>
+ <layer id="32" name="AboveSprites" width="44" height="23">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYCAerNbBjnEBKQLm/WAlTu0zLgRGBvkaDAwFQFyoQR33ooNHjKgYn/uJcW830J09QNyLw72UgNnqDAxz1MnXj829y4HuXAHEK2ng3u1At+6Aurecl4Ghkpd4Gpd78YH/ILs0MGl0eXSALVwreEnDMECKe6WBbpHRwKTR5dHdiByulAJS3EsKoKYbkQGye5HjE1vc4opvYuWpAZDdixyf6HGNS4wY+VuylLtzFOAG82QG2gWDH2hrMjDoaFJmBqX1GynAHehWDwrdS6sybhTgB7+AbbLfONplwxkQqu+oDQK1GBiCtMjXT6i+ozbIBbo1jwL3gsAZXeq4hV5gKLoXV19rMIPB5F4AWCxcCQ==
+  </data>
+ </layer>
+ <objectgroup id="12" name="Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
+  <object id="119" template="../../../../common/maps/obj/enemy.tx" x="79.0765" y="73.6979">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Thunder Lasso|OTJ&quot;, &quot;Sterling Keykeeper|OTJ&quot; ] }"/>
+    <property name="enemy" value="Baron Bertram"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="122" template="../../../../common/maps/obj/enemy.tx" x="140.709" y="184.104">
+   <properties>
+    <property name="enemy" value="Lilah"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="173,310"/>
+   </properties>
+  </object>
+  <object id="173" template="../../../../common/maps/obj/waypoint.tx" x="81.1753" y="181.105" width="13" height="11.6667"/>
+  <object id="178" template="../../../../common/maps/obj/enemy.tx" x="542.342" y="177.105">
+   <properties>
+    <property name="enemy" value="Bruse Tarl"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="185" template="../../../../common/maps/obj/manashards.tx" x="613.41" y="88.0366"/>
+  <object id="188" template="../../../../common/maps/obj/manashards.tx" x="288.297" y="40.5447"/>
+  <object id="195" template="../../../../common/maps/obj/collision.tx" x="-17.158" y="-30.4362" width="16" height="413.083"/>
+  <object id="206" template="../../../../common/maps/obj/enemy.tx" x="605.676" y="246.105">
+   <properties>
+    <property name="enemy" value="Kellan"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="211" template="../../../../common/maps/obj/enemy.tx" x="252.675" y="86.271">
+   <properties>
+    <property name="enemy" value="Taii Wakeen"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="311,312"/>
+   </properties>
+  </object>
+  <object id="214" template="../../../../common/maps/obj/enemy.tx" x="389.342" y="151.772">
+   <properties>
+    <property name="enemy" value="Annie Flash"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="235" template="../../../../common/maps/obj/gold.tx" x="44.0088" y="71.7717"/>
+  <object id="240" template="../../../../common/maps/obj/enemy.tx" x="554.842" y="86.6053">
+   <properties>
+    <property name="enemy" value="Kirri"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="269,270"/>
+   </properties>
+  </object>
+  <object id="254" template="../../../../common/maps/obj/enemy.tx" x="204.009" y="205.939">
+   <properties>
+    <property name="enemy" value="Stella Lee"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="313,314"/>
+   </properties>
+  </object>
+  <object id="266" template="../../../../common/maps/obj/entry_up.tx" x="599.509" y="358.105" width="26.6667" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="267" template="../../../../common/maps/obj/dialog.tx" x="587.342" y="307.355" width="49.5" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A path ahead leads to a ranch seemingly growing cacti. Several folks mill about, dressed like cowfolk. This seems to be Omenport, a frontier town of sorts created at a place where many portals known as omenpaths opened up in close proximity.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="268" template="../../../../common/maps/obj/booster.tx" x="494.842" y="216.105">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;OTJ&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;OTJ&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;OTJ&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="269" template="../../../../common/maps/obj/waypoint.tx" x="638.342" y="87.6053"/>
+  <object id="270" template="../../../../common/maps/obj/waypoint.tx" x="480.342" y="87.1053"/>
+  <object id="271" template="../../../../common/maps/obj/enemy.tx" x="460.925" y="117.522">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Bucolic Ranch|OTJ&quot;, &quot;Bristlepack Sentry|OTJ&quot; ] }"/>
+    <property name="enemy" value="Yuma"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="295,296"/>
+   </properties>
+  </object>
+  <object id="272" template="../../../../common/maps/obj/collision.tx" x="699.342" y="-28.9362" width="16" height="413.083"/>
+  <object id="273" template="../../../../common/maps/obj/collision.tx" x="-32.1579" y="360.064" width="748" height="13.083"/>
+  <object id="274" template="../../../../common/maps/obj/collision.tx" x="-21.1579" y="-22.4362" width="748" height="13.083"/>
+  <object id="275" template="../../../../common/maps/obj/collision.tx" x="556.092" y="104.314" width="17.25" height="15.333"/>
+  <object id="276" template="../../../../common/maps/obj/collision.tx" x="587.967" y="104.439" width="17.25" height="15.333"/>
+  <object id="277" template="../../../../common/maps/obj/collision.tx" x="539.717" y="89.1888" width="17.25" height="15.333"/>
+  <object id="278" template="../../../../common/maps/obj/collision.tx" x="604.717" y="88.6888" width="17.25" height="15.333"/>
+  <object id="279" template="../../../../common/maps/obj/collision.tx" x="525.467" y="103.689" width="17.25" height="15.333"/>
+  <object id="280" template="../../../../common/maps/obj/collision.tx" x="492.467" y="103.189" width="17.25" height="15.333"/>
+  <object id="281" template="../../../../common/maps/obj/collision.tx" x="476.217" y="88.9388" width="17.25" height="15.333"/>
+  <object id="288" template="../../../../common/maps/obj/collision.tx" x="460.217" y="40.1888" width="190.583" height="29.9997"/>
+  <object id="290" template="../../../../common/maps/obj/collision.tx" x="542.55" y="121.772" width="11.25" height="12.6663"/>
+  <object id="291" template="../../../../common/maps/obj/collision.tx" x="607.55" y="121.439" width="11.25" height="12.6663"/>
+  <object id="292" template="../../../../common/maps/obj/collision.tx" x="574.884" y="91.4388" width="11.25" height="12.6663"/>
+  <object id="293" template="../../../../common/maps/obj/collision.tx" x="511.884" y="90.1054" width="11.25" height="12.6663"/>
+  <object id="294" template="../../../../common/maps/obj/collision.tx" x="479.884" y="121.772" width="11.25" height="12.6663"/>
+  <object id="295" template="../../../../common/maps/obj/waypoint.tx" x="461.592" y="152.605"/>
+  <object id="296" template="../../../../common/maps/obj/waypoint.tx" x="460.842" y="87.6053"/>
+  <object id="297" template="../../../../common/maps/obj/waypoint.tx" x="602.175" y="152.105"/>
+  <object id="300" template="../../../../common/maps/obj/waypoint.tx" x="481.842" y="151.772"/>
+  <object id="301" template="../../../../common/maps/obj/collision.tx" x="621.217" y="105.105" width="32.25" height="30.6663"/>
+  <object id="302" template="../../../../common/maps/obj/enemy.tx" x="544.509" y="151.772">
+   <properties>
+    <property name="enemy" value="Bristly Bill"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="297,300"/>
+   </properties>
+  </object>
+  <object id="305" template="../../../../common/maps/obj/enemy.tx" x="636.175" y="154.772">
+   <properties>
+    <property name="enemy" value="Miriam"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="307" template="../../../../common/maps/obj/gold.tx" x="62.8421" y="230.105"/>
+  <object id="308" template="../../../../common/maps/obj/booster.tx" x="593.842" y="88.0144">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;A25&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;A25&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;A25&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="309" template="../../obj/treasure.tx" x="60.9936" y="71.9537">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;rarity&quot;: [ &quot;mythic rare&quot; ],
+  &quot;editions&quot;: [ &quot;BIG&quot; ]
+}]</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="310" template="../../../../common/maps/obj/waypoint.tx" x="176.342" y="182.272" width="13" height="11.6667"/>
+  <object id="311" template="../../../../common/maps/obj/waypoint.tx" x="254.842" y="146.272" width="13" height="11.6667"/>
+  <object id="312" template="../../../../common/maps/obj/waypoint.tx" x="253.842" y="57.7719" width="13" height="11.6667"/>
+  <object id="313" template="../../../../common/maps/obj/waypoint.tx" x="205.842" y="151.272" width="13" height="11.6667"/>
+  <object id="314" template="../../../../common/maps/obj/waypoint.tx" x="206.842" y="256.772" width="13" height="11.6667"/>
+  <object id="315" template="../../../../common/maps/obj/waypoint.tx" x="193.706" y="230.317" width="13" height="11.6667"/>
+  <object id="316" template="../../../../common/maps/obj/waypoint.tx" x="87.3421" y="230.772" width="13" height="11.6667"/>
+  <object id="319" template="../../../../common/maps/obj/enemy.tx" x="126.66" y="229.923">
+   <properties>
+    <property name="enemy" value="Ertha Jo"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="315,316"/>
+   </properties>
+  </object>
+  <object id="320" template="../../../../common/maps/obj/waypoint.tx" x="238.675" y="100.939" width="13" height="11.6667"/>
+  <object id="321" template="../../../../common/maps/obj/waypoint.tx" x="144.509" y="101.939" width="13" height="11.6667"/>
+  <object id="322" template="../../../../common/maps/obj/enemy.tx" x="186.175" y="103.439">
+   <properties>
+    <property name="enemy" value="Vihaan"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="320,321"/>
+   </properties>
+  </object>
+  <object id="323" template="../../../../common/maps/obj/enemy.tx" x="124.092" y="272.772">
+   <properties>
+    <property name="enemy" value="Bonny Pall"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="324" template="../../../../common/maps/obj/booster.tx" x="125.842" y="326.772">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;OTJ&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;OTJ&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;OTJ&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="326" template="../../../../common/maps/obj/shop.tx" x="160.175" y="141.439" width="16" height="16">
+   <properties>
+    <property name="commonShopList" value="Blue,Blue,Enchantment4Blue,Creature2Blue,Instant4Blue"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,PhyrexianBlue"/>
+    <property name="rareShopList" value="Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle,Colorless"/>
+    <property name="uncommonShopList" value="Artifact,Merfolk,Wizard,Bird4Blue,Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Wand,Equip,Multicolor"/>
+   </properties>
+  </object>
+  <object id="332" template="../../../../common/maps/obj/shop.tx" gid="11363" x="287.073" y="140.79" width="16" height="16" rotation="0">
+   <properties>
+    <property name="commonShopList" value="OmenStones"/>
+   </properties>
+  </object>
+  <object id="335" template="../../../../common/maps/obj/shop.tx" x="31.0921" y="140.855" width="16" height="16">
+   <properties>
+    <property name="commonShopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="336" template="../../../../common/maps/obj/shop.tx" x="80.8421" y="141.105" width="16" height="16">
+   <properties>
+    <property name="commonShopList" value="Green,Green,Enchantment4Green,Creature2Green,Instant4Green"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,PhyrexianGreen"/>
+    <property name="rareShopList" value="Land4Green,Simic,Golgari,Gruul,Selesnya,Vehicle,Colorless"/>
+    <property name="uncommonShopList" value="Artifact,Elf,Wolf4Green,Druid,Squirrel,Sliver2Green,Wand,Equip,Multicolor"/>
+   </properties>
+  </object>
+  <object id="337" template="../../../../common/maps/obj/shop.tx" x="191.092" y="92.6052" width="16" height="16">
+   <properties>
+    <property name="commonShopList" value="Red,Red,Enchantment4Red,Creature2Red,Instant4Red,Goblin"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,PhyrexianRed"/>
+    <property name="rareShopList" value="Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle,Colorless"/>
+    <property name="uncommonShopList" value="Artifact,Wolf4Red,Devil,Dwarf,Dragon,Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red,Wand,Equip,Multicolor,Giant,SnowShop"/>
+   </properties>
+  </object>
+  <object id="338" template="../../../../common/maps/obj/shop.tx" x="223.967" y="93.4803" width="16" height="16">
+   <properties>
+    <property name="commonShopList" value="White,White,Enchantment4White,Creature2White,Instant4White"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,PhyrexianWhite"/>
+    <property name="rareShopList" value="Land4White,Azorius,Boros,Selesnya,Orzhov,Vehicle,Colorless"/>
+    <property name="uncommonShopList" value="Artifact,Knight4White,Bird4White,Soldier4White,Angel,Sliver2White,Spirit4White,Wand,Equip,Multicolor"/>
+   </properties>
+  </object>
+  <object id="339" template="../../../../common/maps/obj/shop.tx" x="161.134" y="92.6469" width="16" height="16">
+   <properties>
+    <property name="commonShopList" value="Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,PhyrexianBlack"/>
+    <property name="rareShopList" value="Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle,Colorless"/>
+    <property name="uncommonShopList" value="Artifact,Vampire,Zombie,Skeleton,Demon,Knight4Black,Rogue4Black,Sliver2Black,Wand,Equip,Multicolor"/>
+   </properties>
+  </object>
+  <object id="340" template="../../../../common/maps/obj/shop.tx" x="287.236" y="94.2303" width="16" height="16">
+   <properties>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
+    <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black,FlipShop,Saga"/>
+    <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature,Battle"/>
+   </properties>
+  </object>
+  <object id="341" template="../../../../common/maps/obj/RotatingShop.tx" x="94.342" y="301" width="16" height="16">
+   <properties>
+    <property name="rotation" value="White,Blue,Black,Green,Red,Colorless"/>
+    <property name="signYOffset" type="float" value="-2"/>
+   </properties>
+  </object>
+  <object id="342" template="../../../../common/maps/obj/RotatingShop.tx" x="142.675" y="299" width="16" height="16">
+   <properties>
+    <property name="rotation" value="White,Blue,Black,Green,Red,Colorless"/>
+    <property name="signYOffset" type="float" value="-2"/>
+   </properties>
+  </object>
+  <object id="343" template="../../../../common/maps/obj/dialog.tx" x="114.167" y="79.6222" width="16" height="16" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A huge manor stis on the corner hill overlooking the town below. A vampire in a fine white suit stands near it. 
+
+'Mighty bold of 'ya to come into my town and cause a ruckus like you've been doin'. I'm the mayor 'round these parts, but I'm also in charge 'a the local law enforcement. And under that authority, I'm skipping the arrest, and we're gonna string ya up right here.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="344" template="../../../../common/maps/obj/dialog.tx" x="300.464" y="155.191" width="32" height="32" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A nearby shopkeep tips her hat and smiles.
+
+'Well howdy stranger! Welcome to Omenport! Lotta outlaws and gunslingers roaming the streets, but don't worry - plenty'a shops still open for business! Mine in particular might be of interest - I sell omenstones - teleporters to places all across this world! Only place that sells em', and fine prices to boot!'
+
+'Also, jus' so you know, lotta shops round here you gotta come in through the back. Keeps the varmints out.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="345" template="../../../../common/maps/obj/inn.tx" x="148.842" y="220.689" width="16" height="16"/>
+  <object id="347" template="../../../../common/maps/obj/manashards.tx" x="157.842" y="39.7719"/>
+ </objectgroup>
+</map>

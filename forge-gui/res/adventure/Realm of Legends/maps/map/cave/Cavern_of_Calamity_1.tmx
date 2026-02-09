@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="81">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Where Ancients Tread&quot;, &quot;Primal Rage&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/FarmFood.tsx"/>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt100KgCAQBlB3EUWb8EadJTxI6+7SDUMiiMG/0ZmxpMW31KcwM6gZlTJE2ft4KPfCRNpLcblMn83tQVfKe7rSZq67DN9wt4nOXQvdUHSXF5cL7dBZqFzs/TndGve9bd+84nRD8/l323Ql6graUvVcY2680Z31FSnXrju0Oy24rp6ldmGvxN7PJXVF9e+xSTEpPYyN2esE7imC0w==
+  </data>
+ </layer>
+ <layer id="6" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAfeMpImvo0TuKwEzf13OjCjd8uZLfRAgyUvbjsRhbHB0BxS2r8ErKbln5FtxeZTw8wkPbi4yODn6oMDL/Q8G9Vyu0lFLfT1RgYJuPA5NhLbHoiZK8rEwODGxC7M5HuDnSwnoOB4T3QPRs4CNv7GGjfEyB+SgV7XwPtfAPFhOxtZGZgaALiZmbK7UUG1IxfathLCGzkGBh731JYJpiqMzCYYcGjgDogFpgf4/DgP1TIr9jAb6jZ+PCovQwMwqIQTC97/wgyMPiLYcfDwV50QC17ZzKTl54otXcUYAIA3c2c+A==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJylV1tOAjEUnS8z9VddEmJIADOLmH83wjKUh4kIbsUVIGAiIkuwN9OTOZTbB3qSmzot9tzb+2qLIoynsii2pijGbmSROYh8f1q5s7K0329W3i8aGZhGFnau534T45P9ZK+pHT/sOHMj5Lk8XhNZ279H5pRTZG8aXvmfECfzrQP6rdxaTTJyApuZd2Baeydlw4ORbQzx+QBnDlbunLpOh43JszHEy2MKsDmH78Wu/9i1uRvrgLwGfMfomMbe1JkK58HzU00jyz6DG7yxuNY4Nb6adElxp3hDnClekWHC15sIbxXgFHm8DPPmADH9F16fO5dTgLPW8GX03M+R1DkjdyeBOOibtrb6OsjcjnSTb9SpHN5bxz0uT/krt9+3OdZh6eY49u5Nq2sMqMMCyWHxtc9fubyYu/3ZFj/eh06PHHBvkNqJPgOfc2wJ/4Hys2+Ozx3rOdByqEexJrEFH7KPweHHE3ySghbLWm/uJ7h2Tr8czo6yP3zuz4vdiFWOW9iOfpHTF5BDPqfWJyRe4FPNvxzjKaAHC3A/CvWmyjtn/8xT+arZPC2P70caYjWTY+nhOo9X87GGWM0811YB5wzj6qYVjdvPqZx4YsT6ggac93/8i/gN1WYNnE9+rdLyCHdUiVvcWRG/M6rN20wdNH8jvviNAQ7s7+cMarOmA+sL+D1hUbZ8bA/uqLx/7B3A7xHWRbjn5Wm95DfIuffvGNCnu5E8Tr25fPwCBj0yhA==
+  </data>
+ </layer>
+ <layer id="7" name="Foreground" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYMAN3DhJw4TAU0b8akkxixDwBeLXUBrZbFx2kgOcuAmrISW8lnFRz15sdqODOl7S7CZkL6GwxgWWAu12AZp9noOB4QIQX+RAZZPiX1IByN5coL48IM7nRGXT2l5uoL95gJiXC5VNqr2++JVh2IsLEGOvK1rcvqaTvY/JzKMge7Gl7SVE5jVKAChdo+NRQBiQWn7M4iHfLi8ku7CVlxa8uPVSArxw+JEadd9gs3cmD3Z7qVXXEwLIdtDLTnT76W3ncAZ1NMqT5AJi68ChDohpn1MaN+jmk9vfmImjTjBHch85fRpy+z7k2kfIDGoDAKI+POM=
+  </data>
+ </layer>
+ <layer id="9" name="Clutter" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF6KDdCBNjk6OX3bjcQi5wZWJgcANidyZUNq3tfQy04wkQP2VCZdMCIPurkZmBoQmIm5lR2bQA2Py1ghOCkd1EbYDNXzB7aR3W6ABmL7qb7LnpYz86wGbvVzYGBic6u8dBmYFhKRdlZtAyDeEDyGmInm5ATkPEpGNQGNPSDaNgFIyCwQ2ERBkYhIFYBEojY5AYPYG/GARvoqO9MDtHir3IdtPb3uEGAMQVQG4=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="66" template="../../../../common/maps/obj/manashards.tx" x="12.1501" y="170.933"/>
+  <object id="67" template="../../../../common/maps/obj/manashards.tx" x="441.503" y="388.93"/>
+  <object id="69" template="../../../../common/maps/obj/entry_up.tx" x="311.5" y="12.5" width="130" height="8">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/cave/Cavern_of_Calamity_2.tmx"/>
+    <property name="teleportObjectId" value="153"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/entry_up.tx" x="175.319" y="476.868" width="124.62" height="10.7111">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/enemy.tx" x="242.981" y="124.032">
+   <properties>
+    <property name="enemy" value="Beza"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/enemy.tx" x="407.329" y="185.344">
+   <properties>
+    <property name="enemy" value="Eluge"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/enemy.tx" x="391.174" y="368.67">
+   <properties>
+    <property name="enemy" value="Maha"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="74" template="../../../../common/maps/obj/enemy.tx" x="110.802" y="339.529">
+   <properties>
+    <property name="enemy" value="Dragonhawk"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="75" template="../../../../common/maps/obj/enemy.tx" x="82.1583" y="170.599">
+   <properties>
+    <property name="enemy" value="Lumra"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/manashards.tx" x="17.1112" y="375.637"/>
+  <object id="77" template="../../../../common/maps/obj/manashards.tx" x="442.923" y="126.273"/>
+  <object id="78" template="../../../../common/maps/obj/manashards.tx" x="241.738" y="96.7236"/>
+  <object id="79" template="../../../../common/maps/obj/dialog.tx" x="141.102" y="446.076" width="187.697" height="20.858" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A truly massive cavern stretches out before you, so huge that it would hardly feel like being inside at all save for the ceiling high, high above. Massive beasts nest ahead, their size bewildering. You loosely recognize them as Bloomburrow's calamity beasts, though they seem to have kept their relative size from their home plane, leaving them just as colossal to you as they would be to the animals of Valley.
+
+Your manasight stone glows, sensing the power of the legends here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="80" template="../../../../common/maps/obj/scroll.tx" x="216.54" y="262.935">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Repel Calamity&quot;, &quot;editions&quot;: [ &quot;BLB&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

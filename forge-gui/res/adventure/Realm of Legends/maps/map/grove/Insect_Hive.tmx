@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="110">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Hornet Nest&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="11" name="Collision" width="40" height="26">
+  <data encoding="base64" compression="zlib">
+   eJzVl11uwkAMhHnMPsBtegWKckDOgNqehjOgwjHIKrLqjDz+WZUHRhopJNn1F6/3h2Pb7Y5v5NPi7+nPXZX2uq12tq2WfuYpionfg0IO65nV1sqdvh9pTr53a1sjQ+a7Ti3XZoSPSWLflbN8+NviiPgidhy/DB/jxVhz8+tAP2Pv4Liz2hQei81jZHPCm6OePD6PDd+NYjCmbL4rfJU84JhafDh/u9j6lGWTa0vn/WqMgzG99ZGpwhf18XGoxa6yZfis2rweVr+Sy1tTIr5MPN0f67vCZvWB7BHTf9tbVzSflY8Kl9SD5VG+aNwz+cvUqWbFfrJ8LHcsjrBpXabVkTAXbMxG1h3Nqpku6twYcbJ9ITN3qvJq65PUDzLgPTlXjKwrFcYMX/fXkuufactm7ZeZ+Jb6WEv/3p7LWHueZnXNpM+60XpiKbsPsxpj7YULc47nzJHcix7kO3/b9n+AZdZOz03L7DvRjO3V9sYt8hMoNu4z
+  </data>
+ </layer>
+ <layer id="8" name="Background" width="40" height="26">
+  <data encoding="base64" compression="zlib">
+   eJzt10sOgjAQBmC2XoGCJkY9hbj0WCa68Bjq0lO48hTq0oXHYCYwsTalxT6mmLj4A4FFv8y0E6hEllWRUpb+iWVzsU4hL/HOLJFP9xxt5/wzC0afyS3bru39ruDtr8l3geyLJuT8xrceNfFxHGDNI+SUm/flU6TxLdvrylJLH5+P8Qa5Qx6BfbItRB1te5F8mLmjL7RRnnnyfMEaDqF26tzD4FneRvLp1usbck2gt2NLf0PWTmdR35GLYvJxngu5Zq6+kB7V0RVbf2VnrNqZ3H33H4dNF/J1zemUPpx9Nh8Z/77u/nJ/57v6hmj8JV9qi+qikG9j+VZIYVP7y/UPbVpX9dUM5HZH
+  </data>
+ </layer>
+ <layer id="9" name="Walls" width="40" height="26">
+  <data encoding="base64" compression="zlib">
+   eJy1VkFuwkAQ4x1tkkoI5ZstOfQt5QuVWrXwFQ59RjMCC2M8u1mVrmRBlN0Zx+OZZOhXq2HG0z/gHmsQfusZP48XbBo56XnE+Cu/73Pct4fV6rU7If4HNJ/yZk44w9h21zmxfwlv1u84n5m6S95jkg/YLNynz7ZLeJf4xTPFGfCLa8R56U7QvNib8XNn9OxSfsgxiiYRR/cAuldr2p/vlZ6thd/Y39aW+X32t/EdP3AL7OmXz2vdMy8i9178viON2KOcQ/2E/X0Bz0nNMy+6+cL5hv52j+rgdCvB6e1qvTG5+SxrpzNcc0zE7Uv48PXaPBuvnVxzbtaOfad7tKau3jpPnBccv1J9WZOMX23WLcXSleXW2g5JbWrAbAmPoTcwT3GvlZ/Tjudfae5yfvQyZoz+57lT48faOH64jx6NmMqTOQEfM96TPm6pr/oqvHwQ7SYzP1hzx8E9Z/a90cKPNeR3M+dWPyJPxq/mX8eX+fF3Vfbe5fxZL3OOzL81D0/dNb89xQlvBc+D4ccaLpk1zDPi8jsm83BgS/yYZ6lvmV/LrMm8WfOw82GNHzQpzRVXO/VlK79YoQlqUftmd/Xg2K523D8uPvhBF12YIU6zbP6yzq5vXZzsPRwYEn7sp1L9RsMhQ9ZDmBOKMdEtFno2Q/Zt18qv1iv3XjUNXf+3rF+BadQa
+  </data>
+ </layer>
+ <layer id="10" name="Clutter" width="40" height="26">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALSwCqpoW3+YAcjxf9tMhCM7N/VaH5H59MLNAHdJS8LwU+kB8YNhMALaQgeBUMHDMe8Tamf6BUmQynsh5Jb6QWGa5gMB38NBz+MAtIAADg8EBo=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects" opacity="0.9">
+  <object id="67" template="../../../../common/maps/obj/enemy.tx" x="350" y="56.6638" width="16" height="17.6724">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Xira Arien|LEG&quot;, &quot;Vial of Poison|m14&quot;]
+}</property>
+    <property name="enemy" value="Xira"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/entry_up.tx" x="401.5" y="416.5" width="61.5" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/manashards.tx" x="435.5" y="287"/>
+  <object id="70" template="../../../../common/maps/obj/manashards.tx" x="60" y="266.5"/>
+  <object id="71" template="../../../../common/maps/obj/manashards.tx" x="55.5" y="390.5"/>
+  <object id="74" template="../../../../common/maps/obj/gold.tx" x="599.5" y="41.5"/>
+  <object id="76" template="../../obj/treasure.tx" x="477" y="60.5">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
+  &quot;addMaxCount&quot;: 2
+}]</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="77" template="../../../../common/maps/obj/enemy.tx" x="519.5" y="182.664" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Grist"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="88,89,81,82,98,91,81,101,90,101"/>
+   </properties>
+  </object>
+  <object id="79" template="../../../../common/maps/obj/enemy.tx" x="543" y="320.664" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Fumulus"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="0"/>
+   </properties>
+  </object>
+  <object id="80" template="../../../../common/maps/obj/enemy.tx" x="154.5" y="355.664" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Zabaz"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="97,100,83,82,98,91,98,99,100"/>
+   </properties>
+  </object>
+  <object id="81" template="../../../../common/maps/obj/waypoint.tx" x="388" y="194"/>
+  <object id="82" template="../../../../common/maps/obj/waypoint.tx" x="264" y="221"/>
+  <object id="83" template="../../../../common/maps/obj/waypoint.tx" x="254" y="324"/>
+  <object id="87" template="../../../../common/maps/obj/waypoint.tx" x="336" y="307.5"/>
+  <object id="88" template="../../../../common/maps/obj/waypoint.tx" x="597" y="154"/>
+  <object id="89" template="../../../../common/maps/obj/waypoint.tx" x="599.5" y="54.5"/>
+  <object id="90" template="../../../../common/maps/obj/waypoint.tx" x="422" y="90.5"/>
+  <object id="91" template="../../../../common/maps/obj/waypoint.tx" x="242.5" y="163.5"/>
+  <object id="92" template="../../../../common/maps/obj/waypoint.tx" x="109.5" y="119"/>
+  <object id="93" template="../../../../common/maps/obj/waypoint.tx" x="115.5" y="42"/>
+  <object id="94" template="../../../../common/maps/obj/waypoint.tx" x="45.5" y="255.5"/>
+  <object id="95" template="../../../../common/maps/obj/waypoint.tx" x="201" y="81.5"/>
+  <object id="96" template="../../../../common/maps/obj/waypoint.tx" x="125.5" y="73"/>
+  <object id="97" template="../../../../common/maps/obj/waypoint.tx" x="100" y="389.5"/>
+  <object id="98" template="../../../../common/maps/obj/waypoint.tx" x="202" y="201.5"/>
+  <object id="99" template="../../../../common/maps/obj/waypoint.tx" x="168" y="265"/>
+  <object id="100" template="../../../../common/maps/obj/waypoint.tx" x="174" y="367.5"/>
+  <object id="101" template="../../../../common/maps/obj/waypoint.tx" x="491.5" y="177" visible="1"/>
+  <object id="102" template="../../../../common/maps/obj/enemy.tx" x="592.5" y="115.664" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Zask"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="103" template="../../../../common/maps/obj/enemy.tx" x="68.5" y="231.164" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Vishgraz"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="104" template="../../../../common/maps/obj/enemy.tx" x="465" y="116.664" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Amzu"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="105" template="../../../../common/maps/obj/enemy.tx" x="289" y="124.164" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Aatchik"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="106" template="../../../../common/maps/obj/dialog.tx" x="376.667" y="378.727" width="125" height="22.5455" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Buzzing, chittering, and chirping fill the hive, an unsettling cacaphony made worse by the fact every surface of the hive and even the very air are all thick with  tiny but countless crawling and flying things.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="108" template="../../../../common/maps/obj/scroll.tx" x="42" y="94">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Swarmyard&quot;, &quot;editions&quot;: [ &quot;TSR&quot; ], &quot;count&quot;: 1 } ]"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

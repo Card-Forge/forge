@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters or attacks, exile up to one target card from a graveyard.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Card | TgtPrompt$ Select up to one target card in a graveyard
 A:AB$ ChooseColor | PrecostDesc$ Coven — | Cost$ 1 W | Defined$ You | AILogic$ MostProminentInHumanDeck | CheckSVar$ X | SVarCompare$ GE3 | SubAbility$ DBPump | SpellDescription$ Choose a color. CARDNAME gains hexproof from that color until end of turn and can't be blocked by creatures of that color this turn. Activate only if you control three or more creatures with different powers.
-SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Hexproof:Card.ChosenColor:chosenColor | DefinedKW$ ChosenColor | SubAbility$ DBEffect | StackDescription$ CARDNAME gains hexproof from that color until end of turn and can't be blocked by creatures of that color this turn.
+SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Hexproof:ChosenColor | DefinedKW$ ChosenColor | SubAbility$ DBEffect | StackDescription$ CARDNAME gains hexproof from that color until end of turn and can't be blocked by creatures of that color this turn.
 SVar:DBEffect:DB$ Effect | RememberObjects$ Self | StaticAbilities$ CantBlockBy | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenColor$ True
 SVar:CantBlockBy:Mode$ CantBlockBy | ValidAttacker$ Creature.IsRemembered | ValidBlocker$ Creature.ChosenColor | Description$ EFFECTSOURCE can't be blocked by creatures of the chosen color this turn.

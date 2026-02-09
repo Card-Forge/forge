@@ -323,4 +323,11 @@ public interface IGuiGame {
      * @return the matching PlayerView from GameView, or the input player if not found
      */
     PlayerView lookupPlayerViewById(PlayerView player);
+
+    /** Signal to start a client-side elapsed timer for waiting display. */
+    void showWaitingTimer(PlayerView forPlayer, String waitingForPlayerName);
+
+    /** Returns true if this game instance is a network game. */
+    boolean isNetGame();
+    void setNetGame();
 }

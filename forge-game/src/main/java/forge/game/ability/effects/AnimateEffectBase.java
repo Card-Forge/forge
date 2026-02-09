@@ -29,7 +29,6 @@ import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.RemoveType;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
@@ -91,13 +90,13 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
         // Alchemy "incorporate" cost
         if (sa.hasParam("Incorporate")) {
-            final ManaCost incMCost = new ManaCost(new ManaCostParser(sa.getParam("Incorporate")));
+            final ManaCost incMCost = new ManaCost(sa.getParam("Incorporate"));
             PerpetualIncorporate p = new PerpetualIncorporate(timestamp, incMCost);
             c.addPerpetual(p);
             p.applyEffect(c);
         }
         if (sa.hasParam("ManaCost")) {
-            final ManaCost manaCost = new ManaCost(new ManaCostParser(sa.getParam("ManaCost")));
+            final ManaCost manaCost = new ManaCost(sa.getParam("ManaCost"));
             if (perpetual) {
                 PerpetualManaCost p = new PerpetualManaCost(timestamp, manaCost);
                 c.addPerpetual(p);
@@ -203,7 +202,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         };
 
         if (sa.hasParam("RevertCost")) {
-            final ManaCost cost = new ManaCost(new ManaCostParser(sa.getParam("RevertCost")));
+            final ManaCost cost = new ManaCost(sa.getParam("RevertCost"));
             final String desc = sa.getStackDescription();
             final SpellAbility revertSA = new AbilityStatic(c, cost) {
                 @Override

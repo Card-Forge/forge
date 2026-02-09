@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="94">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Bonders' Enclave&quot;, &quot;Crystalline Giant&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="7" name="SubBackground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjILBD/w4B8bOgbB3FIwCWgIAFFIBBg==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzz42Rg8CMDa3AjMDn6KbWTlvai24MNw9ReZcONaWEvPvtoZe80Vgimtr247IbZR0t70c1At5MYe8mxG5+9xNgHw6Skf1LMxWcfqfmOGvYi269FRp6n1N4eLgaGYwNgLyXl10izdyj4mVL/URsDAJ7fCgE=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJytlV9uwjAMxv0wTW1yELaDrK320BtwoAHdMSYYPO0O/L3GRMcxZiux6obAnHafZLW1hH+x8yUUOUAxID4zgE12nVv7vHwfUv8W84zP77yry7kSXP7NAMww5sbxh6wh7IPqt1j/yToGPSn3AY53xO+TdflnDFLr15PCr0QfVJ9VebbUxPM4Dtb1TKrxt1+PAC/KfluMVQYqbZHzbjruAt/3tlsnsbVcnq1WxG6Mi72YR+3npuU2pl83/NaKvXb5p16lf2Iin7HXXkfu7fShH/e40ntabqxf8mwql0Oe+XtR+nNJqpRcPsN8fkJ/a3qmOS+z/qzJr7sg2LfEDO+M0N/aWct9Lm+P86q32Ox/cp2fU+8PvjcWwdllpf4XyP3+S1sbZ45h011djawxlEtK8UYsfgHCC6IT
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzVlF8OgjAMxvdkVsOpTECyc3Adz8EUn7wS/uEYroHGUjedbDz4JQ3JsvW3r+1Q6n9VgVInPV+7wfjtYT1uUyi1XzG/T63zOTjm3cVRf9+fg/eAkYk1Put4z5fNcibxrjD20sCci3tC/ndFHKd2+Q7bV5iJiTzuu2ZcM9XeCn6b0IuS5ZS+STjH3Y/1/yRZ407PeeTfBuqwVL2HFboTBvqV3Cayv7Hifedra7/tHt7rQPNFs0V9yCnf2ynF7GMfqkQu3Z1i8Lxh+pdZxkzlGpaHghiSIyNFgzgfYuRg5dITO0ZXEA==
+  </data>
+ </layer>
+ <layer id="6" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzl0ksOQDAQBmARrwVL4RQWczw7b0fhljqhadVIiI5E/MmkFuUz0zqO3dSgnis432fbRMsFZdq0u2y/SpM76OkmhuorL+j3xxv/KC291yu2mejBXEzvKxkY70Igvt2J8kWFmnPnbM8ypWuZ8Tev32zp4j2z0eucrhUTdgNq1fstE945Yzw4uhhuF9MQBqc7E7PnNmXal+eLnmn+PQvsKyFT
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="281" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="400.118" y="61.4004">
+   <properties>
+    <property name="enemy" value="Trynn and Silvar"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="53" template="../../../../common/maps/obj/enemy.tx" x="323.341" y="201.641">
+   <properties>
+    <property name="enemy" value="Brallin and Shabraz"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../common/maps/obj/manashards.tx" x="365.412" y="32.5837"/>
+  <object id="57" template="../../../../common/maps/obj/manashards.tx" x="413.141" y="173.27"/>
+  <object id="61" template="../../../../common/maps/obj/enemy.tx" x="162.186" y="142.07">
+   <properties>
+    <property name="enemy" value="Haldan and Pako"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="70,69"/>
+   </properties>
+  </object>
+  <object id="62" template="../../../../common/maps/obj/enemy.tx" x="268.272" y="185.625">
+   <properties>
+    <property name="enemy" value="Cazur and Ukkima"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="71,72"/>
+   </properties>
+  </object>
+  <object id="63" template="../../../../common/maps/obj/enemy.tx" x="331.009" y="87.869">
+   <properties>
+    <property name="enemy" value="Nikara and Yannik"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="65" template="../../../../common/maps/obj/enemy.tx" x="423.499" y="134.099">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Maned Serval|IKO&quot;, &quot;Weaponize the monsters|IKO&quot;, &quot;sanctuary lockdown|IKO&quot;, &quot;bonders' enclave|IKO&quot;, &quot;ferocity of the wilds|ELD&quot;]}"/>
+    <property name="enemy" value="Winota"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/waypoint.tx" x="179.489" y="188.457"/>
+  <object id="70" template="../../../../common/maps/obj/waypoint.tx" x="179.744" y="91.103"/>
+  <object id="71" template="../../../../common/maps/obj/waypoint.tx" x="232.799" y="209.073"/>
+  <object id="72" template="../../../../common/maps/obj/waypoint.tx" x="311.792" y="133.372"/>
+  <object id="75" template="../../../../common/maps/obj/enemy.tx" x="215" y="68.6667">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Bonder's Ornament|C20&quot;, &quot;Humble Naturalist|IKO&quot;, &quot;Aegis Turtle|IKO&quot;, &quot;Almighty Brushwagg|IKO&quot;]}"/>
+    <property name="enemy" value="Kinnan"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/booster.tx" x="240" y="62.6667">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="80" template="../../../../common/maps/obj/manashards.tx" x="453.667" y="176.667"/>
+  <object id="81" template="../../../../common/maps/obj/booster.tx" x="351.667" y="202.333">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="83" template="../../../../common/maps/obj/manashards.tx" x="307.5" y="49.5"/>
+  <object id="84" template="../../../../common/maps/obj/manashards.tx" x="448" y="101"/>
+  <object id="86" template="../../../../common/maps/obj/manashards.tx" x="434.333" y="174"/>
+  <object id="87" template="../../../../common/maps/obj/manashards.tx" x="433.333" y="194.333"/>
+  <object id="89" template="../../../../common/maps/obj/manashards.tx" x="368.25" y="194.75"/>
+  <object id="90" template="../../../../common/maps/obj/booster.tx" x="414.5" y="219">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/dialog.tx" x="186.5" y="232.75" width="80" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The cave ahead sparkles with dozens upon dozens of glowing crystals jutting out from the walls and ceiling. Humans and strange monsters walk about, seemingly getting along quite well. You recall stories of the bonders of Ikoria, and presume this must be what you're seeing.
+
+Your manasight stone glows, sensing the power of the legends here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/scroll.tx" x="223" y="44.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Bonders' Enclave&quot;, &quot;editions&quot;: [ &quot;IKO&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="93" template="../../../../common/maps/obj/manashards.tx" x="241" y="45"/>
+ </objectgroup>
+</map>

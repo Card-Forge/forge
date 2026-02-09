@@ -1,0 +1,10 @@
+Name:Oura, the Imitator
+ManaCost:1 U B
+Types:Legendary Creature Faerie Noble
+PT:2/2
+K:Flash
+K:Flying
+K:Lifelink
+S:Mode$ Continuous | Affected$ Faerie.TopLibrary+YouOwn,Instant.TopLibrary+YouOwn | AffectedZone$ Library | EffectZone$ Battlefield | MayPlay$ True | MayLookAt$ You | Description$ As long as the top card of your library is a Faerie or instant card, you may look at it any time and you may cast it.
+S:Mode$ CastWithFlash | ValidCard$ Faerie | ValidSA$ Spell | Caster$ You | Description$ You may cast Faerie spells as though they had flash.
+Oracle:Flash\nFlying\nLifelink\nAs long as the top card of your library is a Faerie or instant card, you may look at it any time and you may cast it.\nYou may cast Faerie spells as though they had flash.

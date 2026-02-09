@@ -10,7 +10,6 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
 import forge.card.mana.ManaCostShard;
 import forge.game.*;
 import forge.game.ability.AbilityFactory.AbilityRecordType;
@@ -1449,7 +1448,7 @@ public class AbilityUtils {
         final Card source = sa.getHostCard();
         Cost cost;
         if (unlessCost.equals("ChosenNumber")) {
-            cost = new Cost(new ManaCost(new ManaCostParser(String.valueOf(source.getChosenNumber()))), true);
+            cost = new Cost(new ManaCost(String.valueOf(source.getChosenNumber())), true);
         }
         else if (unlessCost.startsWith("DefinedCost")) {
             CardCollection definedCards = getDefinedCards(source, unlessCost.split("_")[1], sa);
@@ -2101,7 +2100,7 @@ public class AbilityUtils {
             return doXMath(c.getIntensity(true), expr, c, ctb);
         }
 
-        if (sq[0].contains("CardCounters")) {
+        if (sq[0].startsWith("CardCounters")) {
             // CardCounters.ALL to be used for Kinsbaile Borderguard and anything that cares about all counters
             int count = 0;
             if (sq[1].equals("ALL")) count = c.getNumAllCounters();
@@ -2220,7 +2219,7 @@ public class AbilityUtils {
         }
 
         // Count$CardManaCost
-        if (sq[0].contains("CardManaCost")) {
+        if (sq[0].startsWith("CardManaCost")) {
             int cmc = c.getCMC();
 
             if (sq[0].contains("LKI") && !c.isInZone(ZoneType.Stack) && c.getManaCost() != null) {
@@ -3197,17 +3196,19 @@ public class AbilityUtils {
         } else if (s[0].contains("Thrice")) {
             return num * 3;
         } else if (s[0].contains("HalfUp")) {
-            return (int) (Math.ceil(num / 2.0));
+            return (int) Math.ceil(num / 2.0);
         } else if (s[0].contains("HalfDown")) {
-            return (int) (Math.floor(num / 2.0));
+            return (int) Math.floor(num / 2.0);
         } else if (s[0].contains("ThirdUp")) {
-            return (int) (Math.ceil(num / 3.0));
+            return (int) Math.ceil(num / 3.0);
         } else if (s[0].contains("ThirdDown")) {
-            return (int) (Math.floor(num / 3.0));
+            return (int) Math.floor(num / 3.0);
         } else if (s[0].contains("Negative")) {
             return num * -1;
         } else if (s[0].contains("Times")) {
             return num * secondaryNum;
+        } else if (s[0].contains("Pow")) {
+            return (int) Math.pow(num, secondaryNum);
         } else if (s[0].contains("DivideEvenlyUp")) {
             if (secondaryNum == 0) {
                 return 0;

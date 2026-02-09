@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="153">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="preventEscape" type="bool" value="true"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJyr4GZgqBjFo5hEvJYFggfCTmRMC3OJEaOWvfj8Rm17CfkRHyYnbrDZR297ycW0sleBj3y7aWUfLeylRngPdXvncZJvLz69tLCXGv4m115axDW5ZT+lYUFumYyLjc8ecu2kRjxQaicx4YBuF7XtxWY+PfxLir20COuBsJfe6Yqe4TicMABR4A3L
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztlUEOgjAQRYuwsHUBie6N5wCrS+MtPIMnUO9hvIi68lzahk4cSivTujGmP/kBEfo6v2VgLCnp9/QcM7YSrRnvGl/LOG28M+8bjwWstXDfO1Ju1H+5OhbKUtDYj6l7PKql6M/Nx4bMdD2+Og4lY0fjU0mfB9S/FC0L5+ZjYc+r9/mionOhfqi3CMzP5u5mranPXwyXUiOFi/0pa8g5dL/E5oxr1dJrHZJ1DFfX6XqX6gB2DFeiPYtr1u8PdZ0p3C0hax9z8wV3PxnmAtPua75+9c2+gswzw9Ms2N+w3j7uVbFuxvcILrCl1eehf2mu7RiGzznKVx9tF2iOQ9866LXwbM67xteHVDvm0lhj4994vZKSkv5TLzcW4hs=
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxz42RgcBvFOHEGDwQPhJ0we2ltP7J9yHZhE6OVndjsoKbdqzgYGFaTiddwkO9HDyC9QpSBoVAEgguA+LIwhIbhQixiID1eFIQtzF50DALcvAiMTQ017MUGFAQgGAb28yBoWvoX2d6B9C8sDRRSGL8gPBD+RbYXlk7x+RcZkGsvLP8PdPwi500YRra3EBoWyPn3hSD59s4Qwu4XEIbZi0ueGv5FTqsgnMODsBdUbqDL0yo9L9BlYGizYGBoB+JcHuqn52dQe59zIjCoLG4RZ2Bgs2RgYLeEsEFiyGrA8UuBvcTgAhlMTEv7RvEoHsUjGwMAUz1Hcg==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="69" template="../../../../common/maps/obj/enemy.tx" gid="11419" x="215.166" y="258.333">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;After a battle of unrivaled intensity, Jodah finally falls. A smile crosses his face as his blood pools on the ground. 'Excellent... Well done {var=player_name}. I am truly sorry for all the trouble...' With that he collapses, dead despite his immortality.&quot;,
+	   &quot;options&quot;: [{
+		  &quot;name&quot;: &quot;(Continue)&quot;,
+&quot;text&quot;: &quot;Congratulations on completing the Realm of Legends! You can now continue exploring this world if you wish - the Mirror Gallery you can now access contains difficult post-game challenges. You can also use new game plus to experience the adventure again. You'll keep your cards and non-key items, but lose all life upgrades and all enemies will respawn. You can also choose a new difficulty. More content may be added in the future, but just dungeons here and there; this is the only planned 'main story'.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]}
+   ] }
+
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Command Tower|CM1&quot;, &quot;Command Beacon|C15&quot;, &quot;Opal Palace|CMM&quot;, &quot;Path of Ancestry|C17&quot;, &quot;Plaza of Heroes|DMU&quot;, &quot;Swiftfoot Boots|C13&quot;, &quot;Helm of the Host|DOM&quot;, &quot;Platinum Angel|MRD&quot;, &quot;Chimil, the Inner Sun|LCI&quot;, &quot;Jodah's Codex|DMU&quot;]}"/>
+    <property name="enemy" value="Jodah"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/entry_down.tx" x="216.333" y="156.666">
+   <properties>
+    <property name="noExit" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="78" template="../../../../common/maps/obj/portal.tx" type="portal" x="216" y="118.583">
+   <properties>
+    <property name="portalState" value="active"/>
+    <property name="sprite" value="sprites/portal3.atlas"/>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="144" template="../../../../common/maps/obj/dialog.tx" x="182.068" y="184.69" width="83.1977" height="10.1913" visible="1">
+   <properties>
+    <property name="dialog">[
+    {
+        &quot;text&quot;: &quot;The mysterious mage who you've seen many times before stands before you. He lowers his hood as he addresses you. 
+
+'Look familiar, {var=player_name}? This hall is what I modeled the library where you arrived after. It felt fitting to have new entrants to this world begin somewhere that was so similar to its exit. I imagine you have a lot of questions, like why I was helping you, and what I'm doing here.'&quot;,
+        &quot;options&quot;: [
+          {
+                &quot;name&quot;: &quot;So, care to explain?&quot;,
+                &quot;text&quot;: &quot;Well, I am Jodah the Unifier, the accidental architect of this realm of legends. It was a foolish idea, in truth - to weave a spell to bring about multiversal peace using the mana of an entire plane to fuel it. I thought my thousands of years of magical study would be enough to weave such a complex enchantment but alas, I've never been able to shake my hubris even after all these milennia.&quot;,
+                &quot;options&quot;: [
+                    {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;text&quot;: &quot;The spell I cast essentially had the opposite of its intended effect, driving all of time and space's most powerful figures into violent madness. Its why you've met so many eager to fight to the death at a moment's notice. I managed to trap all the affected legends here so that the consequences of my mistake would be confined to a single plane. That, at least, worked well.&quot;,
+                        &quot;options&quot;: [
+                            {
+                                &quot;name&quot;: &quot;(Continue)&quot;,
+                                &quot;text&quot;: &quot;I knew I wouldn't be able to contain the greatest of the legends I trapped here forever. So I decided to call on planeswalkers like you to try and rid this world of the beings most likely to be able to break free of this world. Hence why I hid the keys to this exit behind the task of slaying the most powerful legends.&quot;,
+                                &quot;options&quot;: [
+                                    {
+                                        &quot;name&quot;: &quot;(Continue)&quot;,
+                                        &quot;text&quot;: &quot;The problem was, none were up to the task. I was simply leading more and more lambs to the slaughter. Until you, {var=player_name}. I decided to take a heavier hand with you, giving you both power and guidance, chiefly your ability to respawn after death, but also the various gifts I hid about the world for you to find.&quot;,
+                                        &quot;options&quot;: [
+                                            {
+                                                &quot;name&quot;: &quot;(Continue)&quot;,
+                                                &quot;text&quot;: &quot;There are a few final gifts here, the last of my rare spells. A small token of appreciation - you deserve far more, certainly, but its all I have left to give.&quot;,
+                                                &quot;options&quot;: [
+                                                    {
+                                                        &quot;name&quot;: &quot;(Continue)&quot;,
+                                                        &quot;text&quot;: &quot;So now, only one last task remains before you can leave this accursed plane behind - killing me.&quot;,
+                                                        &quot;options&quot;: [
+                                                            {
+                                                                &quot;name&quot;: &quot;(Continue)&quot;,
+                                                                &quot;text&quot;: &quot;You see, I too am affected by the curse of violence I wrought. Being its architect, even if unwittingly, I am much more able to resist it than most, but still, it eats away at me, slowly but surely. There were others able to resist too but... most were slaughtered in the early days.&quot;,
+                                                                &quot;options&quot;: [
+                                                                    {
+                                                                        &quot;name&quot;: &quot;(Continue)&quot;,
+                                                                        &quot;text&quot;: &quot;In any case, aside from the danger I pose, I certainly deserve death for the pain and destruction I have wrought. Shandalar is a plane in ruins because of me, and who knows what chaos I've caused by whisking away so many hundreds of legendary heroes from their home planes?&quot;,
+                                                                        &quot;options&quot;: [
+                                                                            {
+                                                                                &quot;name&quot;: &quot;(Continue)&quot;,
+                                                                                &quot;text&quot;: &quot;I am afraid however that the nature of the curse prevents me from truly holding back. Well, I have actually been holding back the urge to crush you since you arrived, but I can feel my restraint finally slipping. But that's just as well, because I'm confident you now possess the power to defeat me, once and for all.&quot;,
+                                                                                &quot;options&quot;: [
+                                                                                    {
+                                                                                        &quot;name&quot;: &quot;(Continue)&quot;,
+                                                                                        &quot;text&quot;: &quot;So, {var=player_name}, slayer of legends, savior of what remains of Shandalar... shall we duel?&quot;
+                                                                                        &quot;options&quot;: [
+                                                                                            {
+                                                                                                &quot;name&quot;: &quot;It's a duel.&quot;,
+                                                                                                &quot;text&quot;: &quot;Good luck. I am rooting for you, though it may not seem like it. After all you've been through, you deserve to go home, and I certainly deserve the death you shall give to me.&quot;
+                                                                                                   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;You ready yourself for the final battle&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+                                                                                                       
+                                                                                                                                                                              }
+                                                                                                                    ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+           }
+          ]
+        }
+    ]
+}
+]
+}
+]
+}
+]
+        
+</property>
+   </properties>
+  </object>
+  <object id="146" template="../../../../common/maps/obj/treasure.tx" x="192.25" y="224">
+   <properties>
+    <property name="reward">[{
+        &quot;type&quot;: &quot;card&quot;
+        &quot;count&quot;: 20,
+        &quot;rarity&quot;: [&quot;rare&quot;, &quot;mythic rare&quot;]
+ }
+]
+</property>
+   </properties>
+  </object>
+  <object id="148" template="../../../../common/maps/obj/dialog.tx" x="189.5" y="278.917" width="70.0001" height="10.5" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The mirror ahead ripples and shimmers, as if it was a portal.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="149" template="../../../../common/maps/obj/treasure.tx" x="240.333" y="224">
+   <properties>
+    <property name="reward">[{
+        &quot;type&quot;: &quot;card&quot;
+        &quot;count&quot;: 20,
+        &quot;rarity&quot;: [&quot;rare&quot;, &quot;mythic rare&quot;]
+ }
+]
+</property>
+   </properties>
+  </object>
+  <object id="150" template="../../../../common/maps/obj/door_down.tx" x="203.333" y="301" width="42.6667" height="16">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/magetower/Mirror_Gallery_1.tmx"/>
+    <property name="teleportObjectId" value="70"/>
+   </properties>
+  </object>
+  <object id="151" template="../../../../common/maps/obj/collision.tx" x="109.623" y="99.0039" width="17.4208" height="221.992"/>
+  <object id="152" template="../../../../common/maps/obj/collision.tx" x="319.623" y="99.0039" width="17.4208" height="221.992"/>
+ </objectgroup>
+</map>

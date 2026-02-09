@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="104">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Dragonbroods' Relic&quot;, &quot;Maelstrom Nexus&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/buildingsbosses.tsx"/>
+ <layer id="1" name="Background" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt2LEJACEQRUFTsyvhqrZeuRrc049MMJksDxUER29tAAAAXOx9subATt+9rXKqP2mOfv369etfn7fz3Tn1zqXuv379Kf1Va/Tr169f///9lf8K1RLPKJn++/snqiFdMg==
+  </data>
+ </layer>
+ <layer id="6" name="Floor" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJztmGEKwjAMRnuD9gQO0YvOobfSXcoDKIj/xpbYL+3A9yD/QvI22iUsJQAAAAAAAABYYswpXYQx5bb+Q9HWO4rrbfH1v77f26P8Hrfc17+2r6pOr7749+27Z//n4RO1dSLw+K89g9rfOpfO4vNzKpo5551LKn9Vv3vjueOdg7PonP3D96dlnYi+o+HO7dlflRMB/vacCPC350SAvz3Hg3d/W9u7VDmR+1trVPubZ8er/UcRsb9Z6HU3VeBv4wXbyIKc
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt1yEOgDAMQNFZDOEAhHAd7i8wHIMDkAWBwKAoHe8lzWS/arJSAAC+Y+miCwDyGYfznYbYDgB4auvvk80+XZNR5nZowRp896L3w1+18H+fE7dX+mPpj1PvT+13f+K80X8AaXoOlw==
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="48" height="48">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmE1OxDAMhbNlUY7AFbqZ7QhYsgfOwcw5gAMgJH7mTmxgxCU4AKmmkUoUxy+NnSKwpbcYNbK/ZtI8J6tj51Ymk8lkMv1xnXt9KOisEf+p18WRvNbGD/PHQTGVxJL8EmH8mHadc8+AXroD1xM4/rVrw1/6P7Wa1//Cj/rXfuR/B8fX+hfHFfJrf7/I/KTelfOldSN+xB9Ta9L4jb+WH82vzY+OleBH/ZXyZyn+3ZiT4gn+Huef609UHqo/mbJRvcaQk+Oh6sb79mXv3JXXdY/5CFKXGhNqD57J+eWeqDvl+Tpx7sZzb7y2/eE3t07egLqBLfavmm+S4r/13Hde9yD/nJqa/LGMn+YvPZNo8WufdVI1Jflrzgq5vjXXO5euB4QfYSnxX6SmJD/CYvw/n8V7AHX/QPUhS/NT+Urq1fDn+rfcnA2e/pnQ9Pyee55iS+3ngS23d3L9m1bvz80tx4b2b6k5kwyutkb/tkRI9j9LxNz+p0SP4/75oJC7xV3vb73/NH5ZfQM1M2h3
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt17ENgEAMA8Bs8BswATMC8zAfA4BERUUJVu4kN6lcWUoVAABAb8uoWq9s4+smANDHMT2TJrk7AKRK/d/3+c7bDfiv1P2hlxPHow/V
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="55" template="../../../../common/maps/obj/gate.tx" x="366.852" y="640.239" width="17.75" height="17.625">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;The gate is sealed by complex wards. While the guardians stand, its impenetrable.&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;With the guardians defeated, you fire a blast of magic to test the gate.&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: 98 }, { &quot;deleteMapObject&quot;: 55 } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 5
+							}
+						}
+					],
+					&quot;text&quot;: &quot;With a gust of golden wind, the door shatters and dissolves into raw mana. You are now free to pass.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;You attempt to open the gate normally.&quot;,
+					&quot;text&quot;: &quot;The gate remains closed.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="60" template="../../../../common/maps/obj/entry_up.tx" x="357" y="768" width="38" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="65" template="../../../../common/maps/obj/entry_down.tx" x="355.25" y="479" width="46" height="21.5">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/cave/Prison_of_the_Ur-Dragon_f1.tmx"/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/enemy.tx" x="642.667" y="603.666">
+   <properties>
+    <property name="deckOverride" value=""/>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="enemy" value="Jared"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/enemy.tx" x="641.334" y="389">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="enemy" value="Progenitus"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/enemy.tx" x="365.5" y="229.667">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="enemy" value="Scion of the Ur-Dragon"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/enemy.tx" x="104.167" y="609.667">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="enemy" value="Garth"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/enemy.tx" x="110.333" y="387">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="enemy" value="Golos"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="85" template="../../../../common/maps/obj/dialog.tx" x="335.07" y="708.277" width="85.697" height="23.1913" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Though similar in construction to the other castles you had to conquer to obtain the keys to this place, there is an undeniable sense of power and importance that hangs in the air here.
+
+Your manasight stone blazes with power, near-blindingly bright.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="86" template="../../../../common/maps/obj/treasure.tx" x="312.165" y="474.874">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="88" template="../../../../common/maps/obj/gate.tx" x="367.542" y="736.167" width="17.2083" height="16.875">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;This gate is sealed by immensely powerful magic. It'll take five keys to open.&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Leave&quot; },
+    {      
+        &quot;name&quot;:&quot;Unlock with the five keys.&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;White Key to the Ur-Dragon&quot;}, {&quot;item&quot;:&quot;Blue Key to the Ur-Dragon&quot;}, {&quot;item&quot;:&quot;Black Key to the Ur-Dragon&quot;}, {&quot;item&quot;:&quot;Red Key to the Ur-Dragon&quot;}, {&quot;item&quot;:&quot;Green Key to the Ur-Dragon&quot;}],    
+        &quot;text&quot;:&quot;As the keys are inserted, the gate dissolves in a massive flash of golden light.&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1}, {&quot;deleteMapObject&quot;:97}, {&quot;removeItem&quot;:&quot;White Key to the Ur-Dragon&quot;}, {&quot;removeItem&quot;:&quot;Blue Key to the Ur-Dragon&quot;}, {&quot;removeItem&quot;:&quot;Black Key to the Ur-Dragon&quot;}, {&quot;removeItem&quot;:&quot;Red Key to the Ur-Dragon&quot;}, {&quot;removeItem&quot;:&quot;Green Key to the Ur-Dragon&quot;}]} ]
+    }
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="89" template="../../../../common/maps/obj/treasure.tx" x="311.333" y="515.333">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="93" template="../../../../common/maps/obj/treasure.tx" x="427.083" y="474.87">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/treasure.tx" x="426.251" y="515.33">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/treasure.tx" x="426.25" y="544.67">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="96" template="../../../../common/maps/obj/treasure.tx" x="311.33" y="544.667">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="99" template="../../../../common/maps/obj/dialog.tx" x="26.1515" y="659.404" width="85.697" height="23.1913" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A man leans against the wall of this huge, heavily warded cell. His single eye glows with power. He grins as he addresses you.
+
+'Let me show you the power of old magic.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="100" template="../../../../common/maps/obj/dialog.tx" x="25.1515" y="454.404" width="85.697" height="23.1913" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A simple-looking construct stands in this heavily warded cell. It turns its eyeless face towards you, and you feel a massive swell of energy surround it. Clearly, it is more than it seems.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="101" template="../../../../common/maps/obj/dialog.tx" x="637.151" y="655.404" width="85.697" height="23.1913" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;An older man stands in the heavily warded cell before you, his muscles still rippling and his gaze still intense. He levels his mighty sword at you as he speaks.
+
+'I may have been made both prisoner and jailer by the magic of this place, but I still have my pride as a Carthalion. You shall go no further.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="102" template="../../../../common/maps/obj/dialog.tx" x="637.151" y="452.404" width="85.697" height="23.1913" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Though the warded cell before you is wider and significantly taller than the others, the massive hydra before you strains against the walls, barely able to be contained. Without hesitate, its many heads begin lunging towards you.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="103" template="../../../../common/maps/obj/dialog.tx" x="333.151" y="293.404" width="85.697" height="23.1913" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A majestic dragon sits before you - at first you believe it might be the Ur-Dragon you seek, but on closer inspection it is merely its scion. Still, its eyes show a fierce cunning, and magic of all five colors swirls about it.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

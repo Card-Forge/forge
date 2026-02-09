@@ -1,0 +1,10 @@
+Name:Thoughtsteal Sprites
+ManaCost:1 U
+Types:Creature Faerie Rogue
+PT:2/1
+K:Flying
+K:Double team
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OpponentTurn$ True | Execute$ TrigDraft | ActivationLimit$ 1 | TriggerDescription$ Whenever you cast a spell during an opponent's turn, draft a card from CARDNAME's spellbook, then discard a card. This ability triggers only once each turn.
+SVar:TrigDraft:DB$ Draft | Spellbook$ Bitterblossom,Brazen Borrower,Faebloom Trick,Faerie Fencing,Faerie Mastermind,Flitterwing Nuisance,Glen Elendra Guardian,High Fae Prankster,Hypnotic Sprite,Likeness Looter,Pestermite,Picklock Prankster,Spell Stutter,Vendillion Clique,Voracious Tome-Skimmer | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+Oracle:Flying\nDouble team\nWhenever you cast a spell during an opponent's turn, draft a card from Thoughtsteal Sprites's spellbook, then discard a card. This ability triggers only once each turn.
