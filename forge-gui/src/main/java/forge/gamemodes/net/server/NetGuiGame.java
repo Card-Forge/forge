@@ -30,10 +30,16 @@ import java.util.Map;
 public class NetGuiGame extends AbstractGuiGame {
 
     private final GameProtocolSender sender;
+    private final int slotIndex;
     private volatile boolean paused;
 
-    public NetGuiGame(final IToClient client) {
+    public NetGuiGame(final IToClient client, final int slotIndex) {
         this.sender = new GameProtocolSender(client);
+        this.slotIndex = slotIndex;
+    }
+
+    public int getSlotIndex() {
+        return slotIndex;
     }
 
     public void pause() {

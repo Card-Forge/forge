@@ -73,14 +73,6 @@ public class HostedMatch {
         return guis.get(player.getRegisteredPlayer());
     }
 
-    public void dumpGuis() {
-        if (guis == null) { System.out.println("[dumpGuis] guis is null"); return; }
-        System.out.println("[dumpGuis] guis map has " + guis.size() + " entries:");
-        for (final Map.Entry<RegisteredPlayer, IGuiGame> e : guis.entrySet()) {
-            System.out.println("[dumpGuis]   key=" + System.identityHashCode(e.getKey()) + " name=" + e.getKey().getPlayer().getName() + " -> " + (e.getValue() == null ? "null" : e.getValue().getClass().getSimpleName()));
-        }
-    }
-
     public void setStartGameHook(Runnable hook) {
         startGameHook = hook;
     }
