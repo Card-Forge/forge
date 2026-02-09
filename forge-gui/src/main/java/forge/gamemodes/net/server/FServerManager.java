@@ -45,7 +45,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 
 public final class FServerManager {
-    private static final int RECONNECT_TIMEOUT_SECONDS = 120;
+    private static final int RECONNECT_TIMEOUT_SECONDS = 300;
 
     private static FServerManager instance = null;
     private final Map<Channel, RemoteClient> clients = new ConcurrentHashMap<>();
@@ -369,11 +369,13 @@ public final class FServerManager {
 
         for (final Player p : game.getPlayers()) {
             if (p.getName().equals(localLobby.getSlot(slotIndex).getName())) {
-                final IGuiGame gui = findGuiForPlayer(p);
+                final IGuiGame gui = hostedMatch.getGuiForPlayer(p);
                 if (gui instanceof NetGuiGame) {
                     ((NetGuiGame) gui).pause();
+                    return;
                 }
-                return;
+                // Name matched but GUI is not NetGuiGame (e.g. host has same name),
+                // keep looking for the remote player
             }
         }
     }
@@ -398,30 +400,52 @@ public final class FServerManager {
 
     private void resumeAndResync(final RemoteClient client) {
         final int slotIndex = client.getIndex();
+        System.out.println("[resumeAndResync] Starting for slot " + slotIndex + ", username=" + client.getUsername());
         final HostedMatch hostedMatch = localLobby.getHostedMatch();
-        if (hostedMatch == null) { return; }
+        if (hostedMatch == null) { System.out.println("[resumeAndResync] hostedMatch is null, aborting"); return; }
         final Game game = hostedMatch.getGame();
-        if (game == null) { return; }
+        if (game == null) { System.out.println("[resumeAndResync] game is null, aborting"); return; }
+
+        // Diagnostic: dump all players and guis map
+        for (final Player p : game.getPlayers()) {
+            final IGuiGame g = hostedMatch.getGuiForPlayer(p);
+            System.out.println("[resumeAndResync] Player: '" + p.getName() + "' regPlayer=" + System.identityHashCode(p.getRegisteredPlayer()) + " gui=" + (g == null ? "null" : g.getClass().getSimpleName()));
+        }
+        hostedMatch.dumpGuis();
 
         for (final Player p : game.getPlayers()) {
             if (p.getName().equals(client.getUsername())) {
-                final IGuiGame gui = findGuiForPlayer(p);
+                // Use HostedMatch.guis map (authoritative) instead of controller's GUI
+                // (PlayerControllerHuman.getGui() may not point to the NetGuiGame)
+                final IGuiGame gui = hostedMatch.getGuiForPlayer(p);
+                System.out.println("[resumeAndResync] Found player, gui=" + (gui == null ? "null" : gui.getClass().getSimpleName()) + " isPaused=" + (gui instanceof NetGuiGame ? ((NetGuiGame) gui).isPaused() : "N/A"));
                 if (gui instanceof NetGuiGame) {
                     final NetGuiGame netGui = (NetGuiGame) gui;
                     netGui.resume();
 
+                    // Send current GameView before openView (matches HostedMatch.startGame() ordering)
+                    netGui.updateGameView();
+
                     // Send full game state to the reconnected client
                     netGui.openView(new forge.trackable.TrackableCollection<>(netGui.getLocalPlayers()));
+                    System.out.println("[resumeAndResync] Sent updateGameView + openView");
 
                     // Replay current prompt
                     final PlayerControllerHuman pch = findRemoteController(slotIndex);
                     if (pch != null) {
                         pch.getInputQueue().updateObservers();
+                        System.out.println("[resumeAndResync] Replayed prompt");
+                    } else {
+                        System.out.println("[resumeAndResync] No PlayerControllerHuman found for prompt replay");
                     }
+                    return;
                 }
-                return;
+                // Name matched but GUI is not NetGuiGame (e.g. host has same name),
+                // keep looking for the remote player
+                System.out.println("[resumeAndResync] GUI is not NetGuiGame, continuing search");
             }
         }
+        System.out.println("[resumeAndResync] No matching player with NetGuiGame found for username=" + client.getUsername());
     }
 
     private void handleReconnectTimeout(final String username) {
