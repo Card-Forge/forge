@@ -73,7 +73,6 @@ public class DuelScene extends ForgeScene {
     boolean arenaBattleChallenge = false;
     boolean isArena = false;
     AdventureEventData eventData;
-    private LoadingOverlay matchOverlay;
     final int enemyAvatarKey = 90001;
     final int playerAvatarKey = 90000;
     FOptionPane bossDialogue;
@@ -395,6 +394,7 @@ public class DuelScene extends ForgeScene {
         hostedMatch.startMatch(rules, appliedVariants, players, guiMap, bossBattle ? MusicPlaylist.BOSS : MusicPlaylist.MATCH);
         MatchController.instance.setGameView(hostedMatch.getGameView());
         boolean showMessages = enemy.getData().boss || (enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck());
+        LoadingOverlay matchOverlay;
         if (chaosBattle || showMessages || isDeckMissing) {
             final FBufferedImage fb = getFBEnemyAvatar();
             bossDialogue = createFOption(isDeckMissing ? isDeckMissingMsg : Forge.getLocalizer().getMessage("AdvBossIntro" + Aggregates.randomInt(1, 35)),
@@ -496,23 +496,14 @@ public class DuelScene extends ForgeScene {
     private String selectAI(String ai) { //Decide opponent AI.
         String AI = ""; //Use user settings if it's null.
         if (ai != null) {
-            switch (ai.toLowerCase()) { //We use this way to ensure capitalization is exact.
+            AI = switch (ai.toLowerCase()) { //We use this way to ensure capitalization is exact.
                 //We don't want misspellings here.
-                case "default":
-                    AI = "Default";
-                    break;
-                case "reckless":
-                    AI = "Reckless";
-                    break;
-                case "cautious":
-                    AI = "Cautious";
-                    break;
-                case "experimental":
-                    AI = "Experimental";
-                    break;
-                default:
-                    AI = ""; //User settings.
-            }
+                case "default" -> "Default";
+                case "reckless" -> "Reckless";
+                case "cautious" -> "Cautious";
+                case "experimental" -> "Experimental";
+                default -> ""; //User settings.
+            };
         }
         return AI;
     }

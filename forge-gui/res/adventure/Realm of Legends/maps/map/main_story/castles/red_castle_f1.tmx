@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="63">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Absolute Law&quot;, &quot;Chill&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7C+8w/VWyFLIL2kqqqqvjuO1S8b
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJwz4WNgMBnFo3gUj2IKsQ0Q30HDt6B4vQAEP+SD4C0CEIysVlSAPHutgBgdVGhgiuESF6LQ3kZ+BoYmEnAzP3XslQfqVyABKwqM2jtq7+Czl1+AMnudyLBz1F7627sXSO/DglVxiO+nkr24gBIB+VF7icPFwPpsAS92vJAXYu98HPIgvJyXPHvxYXs+iL22VDZ3uNsLAF8a49A=
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjBRQoQHBA2UvvezGZd9A+H0UDB+AK/2MpqtRQAkYTVejgBZgNF2NAlIAAI9SCWE=
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjARQoYGJB8JOWtl7HslcdDuw2X2GSu54TaI5L+gQ7qNgFIyCUYANnCWx/LlApfLqJYnmvBktJ0fBKKArAABGOhGB
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="51" template="../../../../../common/maps/obj/entry_up.tx" x="209" y="480">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="57" template="../../../../../common/maps/obj/dialog.tx" x="131.97" y="427.516" width="167.197" height="20.858" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A fearsome phyrexian angel hovers before you, skittering legions of horrors waiting beneath for her orders.
+
+'In the new of New Phyrexia, you will never enter the prison of the Ur-Dragon. Submit to glorious compleation!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="58" template="../../../../../common/maps/obj/enemy.tx" x="208.325" y="265.81">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;Atraxa plummets to the ground from your final strike, colliding with a loud crack. Oil leaks from her barely mobile body as she struggles to get out a few last words.
+
+'Mother of Machines... forgive my imperfection...'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Swamp|C16|[344]&quot;, &quot;Forest|C16|[350]&quot;, &quot;Island|C16|[341]&quot;, &quot;Plains|C16|[338]&quot;, &quot;Witch-Maw Nephilim|GPT&quot;, &quot;Atraxa's Skitterfang|ONE&quot;]}"/>
+    <property name="enemy" value="Atraxa"/>
+    <property name="pursueRange" type="int" value="0"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="59" template="../../../../../common/maps/obj/treasure.tx" x="260.838" y="171.763">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;green&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="60" template="../../../../../common/maps/obj/treasure.tx" x="230.838" y="171.763">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;black&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="61" template="../../../../../common/maps/obj/treasure.tx" x="198.338" y="171.763">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;blue&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="62" template="../../../../../common/maps/obj/treasure.tx" x="168.338" y="171.763">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;white&quot; ]
+}]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

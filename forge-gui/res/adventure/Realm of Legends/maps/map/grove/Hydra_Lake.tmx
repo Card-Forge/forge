@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="137">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Benevolent Hydra&quot;, &quot;Lair of the Hydra&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <layer id="1" name="Background" width="60" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt1EEOgDAIRNFuvaj3P4L7RlvBDr+tkLBTnAeJ51HKCfabIvMRbjpbese4RtUfjLSXKKVhJmcv08q3+vLuSs5WpqdnZjXWtdt/RW0a4R2xH8po8UbNoL3eGbQnwlvPo00e9y4uy51nyHOXT2GNMkfvtlfkjVu78WazeiP3ofiGtdTz1Tv0ZmrlIi0qO51T7abzZGdnZ2fv3Rde8Ezx
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="60" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztWVFOwzAMzRfrkiEkTsMNxlDPwR8CcRTGJTrWHWZwhcLgmyH4I6a16nqJNGVNFqo8yYq6NrGfnUzP7fZEiG1j39oeR0LcjcUfbvT4oK9/DPcLKcSTrJ+719efZB1uOO+WzfMF8PGuWlsQnzymdSbEaXNP6fElqznPR937U73OlTLnha6J8yAG8PtB5vkCxHbJDH3auGKeIC8Tbc9ZbZg7GjfPy5zlp2h4LvX4qsc3j3zRF+c7a3zauGKeZmr3N4i7lN24FcnJhOQI1qzU7vO+kDOePMc2roVl71We63MoMLeloSYAqION6zJQTY4NyJHvc5aQkJDgC9fjdjTZ0IC8qDYF7TVkvgCqTTfKv/Y/FrC2XJtyvbkPcI+EzJVLXwY6ZCW7fBH7rEV7pNDaLXfsy1B7obnMDdU74D7CHG968Akcvs7ba5f97Qv0vwb206rn8xNb74TnD89OFVFsvhBbDRISEuwI8b43JkwddcV/w8VZPZreqQ4ZMfGlveSi0dL8ewc+53oGY9rP9F19KVsNDhqI9pb5ATWKQV/QvsjEoyKc+beavvELF+C0gQ==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="60" height="30">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <layer id="7" name="Bridge" width="60" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmFtPE1EQx092g6BJ1ZQmPGp8844g0Q8gpRer8Uv4NYAqoFy8fQpf9Rv44oPhS1AaoFIDKN7enPHMZKfTs9tt2bY06T+Z7O3s2fM7M2d2do3pnz6dsn6G6o8WUo3HQ382avNKv0cwVJTmU63buPTkst1+SWwkg6PPjnMlr+fD6Io2Z+xW57UC8BXBHhLnXoK8H0eMeTNq7cNIcv2i0C+PI8a6P+E+v+gbswL2zLfH2x3y3hoL9plR20mFvnkENufZcb/wg2s6VsfuxeuzE/++ApaDtDG/0pabLTPSPm9UexzbFtiSb5ldavc9vN8G7zHw/QQ7Ans3bszVjDGH4tzGqGWOUlgsSF5ec8+Bc823Y/zmNV7H2J6lbZxczG0W/chm/xkPmQcY34LNAOck2F2wG2RTYAdnjFkX4w7zXau4f6nW3LKKZeSfh+MczcODGD7j+I/Kz7+B8RpwrI1bnutgNzPutppVc51EOmY5B5XVPMRRWL5C1u9p68+pEEapOLHM6rSWSEKYE7KOXD8NjOvA+gOY/1BMY36K0obw49OzjRalpGv/sP4KlBPKlBe0cI3eofWJa/V2xjKj7//S9kjMQepcsN8Ob6+0LHJCHOH6xVw1TesYc/Tr8eZ2xzQfWq76rheauGTtpJoMyV/TNC+nRUnxDoKG/wXCa7VB1sXzgb1X+TJP76Si1x57iep5tiIZH+M7rkB9z4n6r9uSrC7eKoyhRpZvwTwr5gbrubq4t0qGNX6F+sqJfnNUB3aLGbnQJCuuX72GK17AvEvfI+wnZuP9Bb+Zj++t0z7XtnIeue8dup4VMdEJvysPuXi1b1E5Mf48MbGPmKEu2kgGFy9f2yI+bvfVs98CZVH/chwUaT6lyf8SUSpRu/sXAmZU2Pt+R4y7Tpan2quizte85hiWW77G360cD3iMtT3XzuwfrP1XiV3aakTdp7VHMcM5o9U7aFvwVMWWfS3ngtmk7zR3nZ6P93K/+N2WxD9Dzh9Z8in2iXXijngOi/+P6PXCPpB+ZOaq41jPRU3dp9cArluuW3nu49SWsk3JC/LHrhesA84DnDvl2sipZ7PYV7xmNTeeX3HE24qYV/Yzt+fz+Lw4MdlK/A8AbUnEjvaJHrfr2f8AycZAnQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="488.817" y="478.704" width="41.5" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/treasure.tx" x="210.657" y="215.069">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;Green&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="63" template="../../../../common/maps/obj/gold.tx" x="161.717" y="241.173"/>
+  <object id="68" template="../../../../common/maps/obj/gold.tx" x="848.875" y="426.747"/>
+  <object id="71" template="../../../../common/maps/obj/manashards.tx" x="224.784" y="245.533"/>
+  <object id="107" template="../../../../common/maps/obj/enemy.tx" x="388.902" y="262.155">
+   <properties>
+    <property name="enemy" value="Polukranos"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="108" template="../../../../common/maps/obj/collision.tx" x="-0.122016" y="479.744" width="962.195" height="16"/>
+  <object id="109" template="../../../../common/maps/obj/collision.tx" x="-2.27555" y="-17.028" width="962.195" height="16"/>
+  <object id="110" template="../../../../common/maps/obj/collision.tx" x="960" y="-17.383" width="16" height="514.099"/>
+  <object id="111" template="../../../../common/maps/obj/collision.tx" x="-17.3333" y="-15.0495" width="16" height="514.099"/>
+  <object id="112" template="../../../../common/maps/obj/enemy.tx" x="517.167" y="243.667">
+   <properties>
+    <property name="enemy" value="Zaxara"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="115" template="../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="847.591" y="71.9091" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;:&quot;WARNING: MANY HEADS AHEAD&quot;,
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;Leave&quot; }
+]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="116" template="../../../../common/maps/obj/enemy.tx" x="883.833" y="107.834">
+   <properties>
+    <property name="enemy" value="Ulasht"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="123" template="../../../../common/maps/obj/enemy.tx" x="264.333" y="260">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Oran-Rief, the Vastwood&quot;, &quot;Chimeric Coils|5DN&quot;, &quot;Colossal Dreadmask|MH3&quot;, &quot;Managorger Hydra|ORI&quot; ]
+}</property>
+    <property name="enemy" value="Gargos"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="124" template="../../../../common/maps/obj/enemy.tx" x="865.667" y="383.5">
+   <properties>
+    <property name="enemy" value="Gyrus"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="125" template="../../../../common/maps/obj/enemy.tx" x="678.333" y="200.167">
+   <properties>
+    <property name="enemy" value="Grakmaw"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="126" template="../../../../common/maps/obj/gold.tx" x="867" y="419.5"/>
+  <object id="127" template="../../../../common/maps/obj/gold.tx" x="831" y="442.5"/>
+  <object id="128" template="../../../../common/maps/obj/gold.tx" x="139.5" y="238.5"/>
+  <object id="130" template="../../../../common/maps/obj/manashards.tx" x="239.5" y="221"/>
+  <object id="131" template="../../obj/treasure.tx" x="186.5" y="248.5">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;Green&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="134" template="../../../../common/maps/obj/dialog.tx" x="631.774" y="406.721" width="63" height="21.3788" rotation="63.6515" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A pristine, shimmering lake is visible ahead of you, surrounded by tall pines. It seems like quite a peaceful place, at least until you spot massive, multiheaded creatures walking about in the distance on the isle in the lake's center.
+
+Your manasight stone glows, sensing the power of the legends here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="136" template="../../../../common/maps/obj/dialog.tx" x="325.82" y="307.555" width="74.3333" height="19.2122" rotation="262.857" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Finally, you have found the most vicious-looking hydra of them all, every one of its heads trained intently upon you, ready to strike viciously in an instant.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

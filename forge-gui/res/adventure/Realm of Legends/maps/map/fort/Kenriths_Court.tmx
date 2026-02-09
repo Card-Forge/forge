@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="157">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Virtue of Loyalty&quot;, &quot;Youthful Knight&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <layer id="7" name="CollisionBis" width="40" height="35">
+  <data encoding="base64" compression="zlib">
+   eJzt0ssJgDAQRdGAa0PAgsSmbMaNYBuWYjG6EEYSEfFDHuEemP3lMc4BAPCPzucuSA21nULf4u0UemKtYNORet+0/dm4nzrFLefKjr536CtbE9LDfez3vbNN411L3T30uQuuqfcBeGYFHpcSLg==
+  </data>
+ </layer>
+ <layer id="6" name="Collision" width="40" height="35">
+  <data encoding="base64" compression="zlib">
+   eJzV100OgjAQBWASVywgLr2KC0Bj4lE8l8o1vIULr2MmZJKXSYcZyk/LSyaGFMvXQisWhS9tbdfWeZT780mrbEvho88xQ0ofl3X9ULvlnjuuPfj4U1sHW68PNp3rodB3Oubho0rt+7bjPp7H383vuxhG6muKTxrRhU7cB62Q8VkVRSOsZPP62Kb5ZGG/dG2tpHOuT3NpkXMi00G7dW7IhDb00bg6R39r+dCDPjSm8kmP5uvhOXpV4b5ifNo+QeE9zOPDfUKbyyk+Co1ZW4teH5/j8VF4/5B1DXynqcd91r2N8U2J9KHRY9Oejdx8n8NQe/H1xm/DXJ/XhuPB95XQf5+YOV3LJ9cLVWhO5bzKtnc1zeJdHxz03ctw8bw2ynlr+jB8PXoH5MrBh/c9x/lDX0y2ur9L+KzjVD7vcQqfNznbKJZv7jpYInv25ZCQ7Q/6N3Pw
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="40" height="35">
+  <data encoding="base64" compression="zlib">
+   eJztlkEOgjAQAHs1XvQLnkBMPKAmpHDy4kt8geFNAnpSzz7D77jVNDSlWzHQUk03mZCwBIZlt2U/ImT/Z8wT8gp2FHHBS4fLbiy8n/fzfu75tY2h/AJKyAKIEj2lpTWQ+YQColuY1tj0DCQf3lfys6sUpzTod6TNno8ShWeGw4Jft6Tm/WRYXaoMp0zM+QVCX500rrp7dPG7z/T5x7ZGV8u2fn3/z3A3Fphf9OGZ8ix9quFu3J+fbi0pkVzfPSjOinJ2v8SWn8oTq5kNPzbLc4kTbfrpvq1JP3GWxZl25fuq/Pj6qKorq+GZ1uf4dVFqsX7InhsDK2CtyBWG/JQ9iey5F3C4Are0mQsze35HZM+NgRWwVuQKi34YF3C4ArcOLpvDm6HfBWOSEzLNh/f41fp5PK7yBEx1e+Q=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="40" height="35">
+  <data encoding="base64" compression="zlib">
+   eJy9mEtSFEEQhms1r1YHbyGD6AJYCDPrEYI1cAnEYMElVCZ4qFfAGcYNEIanQMErgGj4ChRDd+ZvV9p/Zz+GNoCMyGio7qr6OjPrr5qeKzk3L74gfqPm3JB4o+LcWtm5h1VXyJbl+TkZ57n0PZPrL/FN+fuFjNmrhc/sy9hvKuE8X+X+Y7n/Wa6rcl2qRs/gvo6l4zyoRn3y+Br3IlfrTTm3KM+vS7/fpZDvZylk+xg4NxNE82KOU8N2IPeu15JsG+Ukm/YZxMcGvkDGfSfj/6DYtYVrW9rfB2F8eY5PA9jwjhjPst2tRH2KxE9zvF6O8mpj16H3x/0Pcq/r82/Z4Gl1kMXGXNaVDzE8rERs9z0fz7Pm52j7+xpfywbPYuOaHsTI8YMxm/LZefSZPLazHDb0nQ6Kxw82S2w6f8fUzpG09QewoYa/iA/7PuDqmryodZvC0AyvY+Lj4hPNqL3fjJ7VNfGyFr4j1nWH8qq1g3ZwPM1gQw1rPdic6Hv/i13LuZFWeN0Rll3xvWbUPtqKnkVs0Fev4KivOHdzJa5xaXq5QZqCd9GYYyy8bxrb3/jJ/L1WeB0THxefaEXtfXBOuVRbpvipZqGN9ZI1GK5xZi0B43GQZLO2Iyy74nutePuo8DW8KyvryhrtEWBTvVyneF2rRboDP8zROWt9E59GM+7bdJ/1kHVF+ZRN6+3A/w1rU50VsV5G/tS2Uvh0bdg9VhkRH46RXQdXxadrV3PH2sptrE1XwYf86nnI7inKpW3QIqudl8WHtfJ6Mowf+IaNRpwE8TwqH9ce6++W19leMznv//DBXk3GtQW1x4zWmdlq3C2vsyNGM9gQk2HSEOu3DR/eh/lw/n1bSTKCBXvdsd/z+in6u+V1tpfDV9SY75H491Kcse/3wJMguWauwpTvSTnc58H4zTPijF+vJWuyW4v8snn5TM2Mp/58j3iiJvk8YdfLZfPBmPFOJTzXg1VrcjZjPZ9k8PFaHrSmz8OnjId+fwWr1iTyzbXIfFn6x2t50Jo+j9mz+GJKTWqebX7TapDXcpE13c2Is+ZP16jme7QS5RnnLru3TV9wDTYy3qNtaooZWRutLs7Qe13Eeu5m8Om5UufWmFhttPvLtOG9bJ2051/wIcdDK/GzNT9na5J18iI4085Tappj/W0CvlWJY4fcxt5yFo0nn835tyByte/3jLrf42D624n357TxrDYW5cwaR/d+5Eq/XyzQPrxYjWuh/eZj13Se8/6orHlcWkP2u8+zcsgIFt6fcUa0MWyb8dizzmmsE7Omf99w1VO+++hvyaVqXGf4/KCMeb8p085p/D9qir9TqFmuefP9guMHSzvjLFWTPGmm/MpwZGKUZvpdwHLxN4JN0pOs/QT2B2UyJhI=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="35">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzNmMtOwkAUhrtCli6wUCAacCPBGN3rM3CJL8DOuDA+hxuNcocHgJ36BsS4MC7EJ9K/KZMex7m1M034ky8tdDrzz+mcmWk9T62venQstDxvD/igCEogAGVQAdWWpiLou64vk0Yr0Ef7AzAEIzAGEzAFMzA38Nc0aGeVwltIoY34AR8UQQkEoAwqoNpOWLFDb6H6aH8AhmAExmACpmAG5ht/uhhlpUIH8QM+KIISCEAZVEC18/+ex5rnPdXkdequJ1Ef7Q/AEIzAGEzAFMzAfOOPPqNT5MOZIidU15M+60IX8QM+KIISCEAZVEC1G5V7T1gvr7vArBwf+8W5uvxSc92VWP/52B9dqO9rKK4/+573Al59a3tSLTT+ltz1pOMnjWznCpv8XG+eXbh+MVxLlJ+sz6K1TpRbWfgyER+Ty0Z8pOfbord6fKTntvOVK/H+VuS/pHK1xtL8oZ5s/fFK65fmD++P/WczB/QM1yJeojZl40+3hqv0k9KfqE2Zv22Ryt/tfkQWe0vT8aPKX+YvC5mOH9384nIvm0Y6fzZ5otPuQYRKvcP4SM9PduIyWa0lJv5k6+9V/q/HrJVmX0g9sn0Fy2XTcXljkF9p3nFFHqlsxyXztK7b76k/NM9Z1v8md59qHj1G2ftcxEMufjeRvZ/QusIYhveJ4sjKiTzq+kV9Xef1ZUOpviWpfFKPzKfMH42VyJftfMF8Uqhnmb+ksRKJz0vTPBXFlvkT+XKxNxT9ltXL+kFj+0l8qfopyi3X3yz5foQxo/FyvU7+AmTWxEU=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="48" template="../../obj/treasure.tx" x="268.275" y="85">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;The Kenriths' Royal Funeral&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="53" template="../../../../common/maps/obj/enemy.tx" x="328.963" y="236.178">
+   <properties>
+    <property name="enemy" value="Ayara"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="124,123"/>
+   </properties>
+  </object>
+  <object id="55" template="../../../../common/maps/obj/enemy.tx" x="156.557" y="317.615">
+   <properties>
+    <property name="enemy" value="Yorvo"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="125,126"/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../common/maps/obj/collision.tx" x="-0.133321" y="559.568" width="641.207" height="16"/>
+  <object id="57" template="../../../../common/maps/obj/collision.tx" x="-1.04312" y="-17.702" width="641.207" height="16"/>
+  <object id="58" template="../../../../common/maps/obj/collision.tx" x="640.655" y="-0.844722" width="23.6121" height="577.141"/>
+  <object id="59" template="../../../../common/maps/obj/collision.tx" x="-23.9336" y="-13.2756" width="23.6121" height="577.141"/>
+  <object id="62" template="../../../../common/maps/obj/enemy.tx" x="263.9" y="177.508">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Rowan's Battleguard|ELD&quot;, &quot;Bespoke Battlegarb|WOE&quot;, &quot;Dark Tutelage|WOT&quot;]}"/>
+    <property name="enemy" value="Rowan"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="64" template="../../../../common/maps/obj/enemy.tx" x="183.466" y="178.731">
+   <properties>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Shield of the Righteous|ARB&quot;, &quot;Knight of the Keep|ELD&quot;, &quot;Honden of Cleaning Fire|EMA&quot;
+]}</property>
+    <property name="enemy" value="Will"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="65" template="../../../../common/maps/obj/enemy.tx" x="557.674" y="260.894">
+   <properties>
+    <property name="enemy" value="Syr Carah"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="113,114"/>
+   </properties>
+  </object>
+  <object id="66" template="../../../../common/maps/obj/enemy.tx" x="558.419" y="345.163">
+   <properties>
+    <property name="enemy" value="Syr Faren"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="112,111"/>
+   </properties>
+  </object>
+  <object id="75" template="../../../../common/maps/obj/enemy.tx" x="223.849" y="76.0451">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;Eldraine... I have failed you...&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Venerable Knight|ELD&quot;, &quot;Court of Ardenvale|WOC&quot;, &quot;Court of Vantress|WOC&quot;, &quot;Court of Locthwain|WOC&quot;, &quot;Court of Embereth|WOC&quot;, &quot;Court of Garenbrig|WOC&quot;]}"/>
+    <property name="enemy" value="Kenrith"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="86" template="../../../../common/maps/obj/enemy.tx" x="328.022" y="340.709">
+   <properties>
+    <property name="enemy" value="Gadwick"/>
+    <property name="waypoints" value="121,122"/>
+   </properties>
+  </object>
+  <object id="87" template="../../../../common/maps/obj/enemy.tx" x="242.221" y="325.387">
+   <properties>
+    <property name="enemy" value="Linden"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="129,130"/>
+   </properties>
+  </object>
+  <object id="88" template="../../../../common/maps/obj/enemy.tx" x="114.928" y="237.092">
+   <properties>
+    <property name="enemy" value="Torbran"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="127,128"/>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/enemy.tx" x="580.5" y="423">
+   <properties>
+    <property name="enemy" value="Syr Alin"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/enemy.tx" x="589.667" y="167.833">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Steelclaw Lance|ELD&quot;, &quot;Venerable Knight|ELD&quot;, &quot;Tournament Grounds|ELD&quot;, &quot;Shining Armor|ELD&quot;]}"/>
+    <property name="enemy" value="Syr Gwyn"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Key to the Castle&quot;
+  }
+]
+</property>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/entry_up.tx" x="251.5" y="559" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/dialog.tx" x="196" y="526.75" width="152.5" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A mighty castle stands proudly before you. The architecture is remniscent of the plane of Eldraine. Knights and nobles can be seen from high on the ramparts, looking down upon you as you approach.
+
+Your manasight stone glows brightly, sensing a truly mighty legend in this place.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="97" template="../../../../common/maps/obj/dialog.tx" x="558.698" y="435.382" width="39.566" height="12.5" rotation="90" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The sounds of horses, clashing metal, and cheers emanate from the jousting grounds ahead of you. A great many knights are gathered, participating in the contests, though you suspect any would relish the chance to claim even more glory by defeating you.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="98" template="../../../../common/maps/obj/dialog.tx" x="200.417" y="130.917" width="61.8333" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;As you climb the steps to the throne room, the king stands and addresses you.
+
+'I am Kenrith, rightful king of all Eldraine. You, who has invaded this palace, shall meet your end!&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="99" template="../../../../common/maps/obj/booster.tx" x="574" y="164">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [  &quot;ELD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ELD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ELD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="100" template="../../../../common/maps/obj/gate.tx" x="260.417" y="394.492" width="39.5415" height="17.4318">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;The castle's mighty front gate is down. Oddly, there's a keyhole off to the side.&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Leave&quot; },
+    {      
+        &quot;name&quot;:&quot;Turn the key in the keyhole&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Key to the Castle&quot;}],    
+        &quot;text&quot;:&quot;The portcullis lifts, allowing you passage.&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1}, {&quot;deleteMapObject&quot;:133}, {&quot;removeItem&quot;:&quot;Key to the Castle&quot;}]} ]
+    }
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="104" template="../../../../common/maps/obj/scroll.tx" x="50.6667" y="236">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Castle Ardenvale&quot;, &quot;editions&quot;: [ &quot;ELD&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="106" template="../../../../common/maps/obj/scroll.tx" x="436" y="24.6667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Castle Vantress&quot;, &quot;editions&quot;: [ &quot;ELD&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="107" template="../../../../common/maps/obj/scroll.tx" x="569.333" y="30">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Castle Locthwain&quot;, &quot;editions&quot;: [ &quot;ELD&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="108" template="../../../../common/maps/obj/scroll.tx" x="616.667" y="460">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Castle Embereth&quot;, &quot;editions&quot;: [ &quot;ELD&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="109" template="../../../../common/maps/obj/scroll.tx" x="7.33333" y="404">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Castle Garenbrig&quot;, &quot;editions&quot;: [ &quot;ELD&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="110" template="../../../../common/maps/obj/booster.tx" x="607.333" y="164">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [  &quot;WOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;WOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;WOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="111" template="../../../../common/maps/obj/waypoint.tx" x="558.667" y="386"/>
+  <object id="112" template="../../../../common/maps/obj/waypoint.tx" x="560" y="312"/>
+  <object id="113" template="../../../../common/maps/obj/waypoint.tx" x="560.303" y="293.333"/>
+  <object id="114" template="../../../../common/maps/obj/waypoint.tx" x="559.273" y="223.455"/>
+  <object id="115" template="../../../../common/maps/obj/enemy.tx" x="606.352" y="262.833">
+   <properties>
+    <property name="enemy" value="Syr Konrad"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="120,119"/>
+   </properties>
+  </object>
+  <object id="116" template="../../../../common/maps/obj/enemy.tx" x="607.097" y="347.102">
+   <properties>
+    <property name="enemy" value="Syr Elenora"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="117,118"/>
+   </properties>
+  </object>
+  <object id="117" template="../../../../common/maps/obj/waypoint.tx" x="607.345" y="387.939"/>
+  <object id="118" template="../../../../common/maps/obj/waypoint.tx" x="608.678" y="313.939"/>
+  <object id="119" template="../../../../common/maps/obj/waypoint.tx" x="608.981" y="295.272"/>
+  <object id="120" template="../../../../common/maps/obj/waypoint.tx" x="607.951" y="225.394"/>
+  <object id="121" template="../../../../common/maps/obj/waypoint.tx" x="360" y="309.333"/>
+  <object id="122" template="../../../../common/maps/obj/waypoint.tx" x="303.333" y="368"/>
+  <object id="123" template="../../../../common/maps/obj/waypoint.tx" x="330" y="194"/>
+  <object id="124" template="../../../../common/maps/obj/waypoint.tx" x="330" y="291.333"/>
+  <object id="125" template="../../../../common/maps/obj/waypoint.tx" x="200" y="361.333"/>
+  <object id="126" template="../../../../common/maps/obj/waypoint.tx" x="120.667" y="288"/>
+  <object id="127" template="../../../../common/maps/obj/waypoint.tx" x="163.333" y="241.333"/>
+  <object id="128" template="../../../../common/maps/obj/waypoint.tx" x="70" y="237.333"/>
+  <object id="129" template="../../../../common/maps/obj/waypoint.tx" x="192" y="323"/>
+  <object id="130" template="../../../../common/maps/obj/waypoint.tx" x="300" y="322.333"/>
+  <object id="131" template="../../../../common/maps/obj/dialog.tx" x="541.083" y="194.583" width="94.5" height="6.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;As you reach the end of the jousting tilt, yet another knight stands before you, though she seems more brazenly confident than the others, a flaming sword clutched in her hand.
+
+'So, you want into the castle, then? You'll have to defeat me, Syr Gwyn, the Hero of Ashvale!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="132" template="../../obj/treasure.tx" x="179.667" y="85">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Throne of Eldraine&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="134" template="../../../../common/maps/obj/collision.tx" x="548.194" y="206.43" width="7.1121" height="177.391"/>
+  <object id="135" template="../../../../common/maps/obj/collision.tx" x="580.444" y="207.805" width="7.1121" height="177.391"/>
+  <object id="136" template="../../../../common/maps/obj/collision.tx" x="596.694" y="208.055" width="7.1121" height="177.391"/>
+  <object id="137" template="../../../../common/maps/obj/collision.tx" x="628.694" y="207.305" width="7.1121" height="177.391"/>
+  <object id="138" template="../../../../common/maps/obj/collision.tx" x="578.694" y="383.305" width="26.8621" height="14.141"/>
+  <object id="139" template="../../../../common/maps/obj/collision.tx" x="539.319" y="383.93" width="15.8621" height="14.141"/>
+  <object id="140" template="../../../../common/maps/obj/collision.tx" x="628.444" y="383.93" width="12.6121" height="14.141"/>
+  <object id="141" template="../../../../common/maps/obj/collision.tx" x="383.069" y="318.93" width="33.3621" height="32.141"/>
+  <object id="142" template="../../../../common/maps/obj/collision.tx" x="368.819" y="159.93" width="33.3621" height="32.141"/>
+  <object id="143" template="../../../../common/maps/obj/collision.tx" x="367.819" y="63.9295" width="33.3621" height="32.141"/>
+  <object id="144" template="../../../../common/maps/obj/collision.tx" x="494.819" y="63.4295" width="33.3621" height="32.141"/>
+  <object id="145" template="../../../../common/maps/obj/collision.tx" x="-0.18105" y="270.93" width="33.3621" height="32.141"/>
+  <object id="146" template="../../../../common/maps/obj/collision.tx" x="31.819" y="352.43" width="33.3621" height="32.141"/>
+  <object id="147" template="../../../../common/maps/obj/collision.tx" x="191.319" y="526.429" width="33.3621" height="32.141"/>
+  <object id="148" template="../../../../common/maps/obj/collision.tx" x="320.319" y="526.929" width="33.3621" height="32.141"/>
+  <object id="149" template="../../../../common/maps/obj/collision.tx" x="30.819" y="512.429" width="33.3621" height="32.141"/>
+  <object id="150" template="../../../../common/maps/obj/collision.tx" x="125.319" y="414.93" width="33.3621" height="32.141"/>
+  <object id="151" template="../../../../common/maps/obj/collision.tx" x="604.819" y="496.43" width="33.3621" height="32.141"/>
+  <object id="152" template="../../../../common/maps/obj/collision.tx" x="463.819" y="270.93" width="33.3621" height="32.141"/>
+  <object id="153" template="../../../../common/maps/obj/collision.tx" x="494.819" y="239.93" width="33.3621" height="32.141"/>
+  <object id="154" template="../../../../common/maps/obj/collision.tx" x="532.319" y="441.263" width="23.0288" height="9.47433"/>
+  <object id="155" template="../../../../common/maps/obj/collision.tx" x="533.152" y="463.263" width="23.0288" height="9.47433"/>
+ </objectgroup>
+</map>

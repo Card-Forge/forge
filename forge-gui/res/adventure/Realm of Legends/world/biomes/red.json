@@ -1,0 +1,137 @@
+{
+	"startPointX": 0.31,
+	"startPointY": 0.78,
+	"noiseWeight": 0.5,
+	"distWeight": 1.5,
+	"name": "red",
+	"tilesetAtlas": "world/tilesets/terrain.atlas",
+	"tilesetName": "Red",
+	"terrain": [
+		{
+			"spriteName": "Red_1",
+			"max": 0.2,
+			"resolution": 10
+		},
+		{
+			"spriteName": "Red_2",
+			"min": 0.8,
+			"max": 1,
+			"resolution": 10
+		}
+	],
+	"width": 0.7,
+	"height": 0.7,
+	"color": "b63729",
+	"spriteNames": [
+		"Gravel"
+	],
+	"enemies": [
+		"Chishiro",
+		"Kalemne",
+		"Ghired",
+		"Shanid",
+		"Leori",
+		"Shattergang Brothers",
+		"Nemesis"
+	],
+	"pointsOfInterest": [
+		"Red Castle",
+		"Mountain Capital",
+		"Mountain Town Generic",
+		"Mountain Town Identity",
+		"Mountain Town",
+        "Mountain Town Tribal",
+		"Church of Kaalia",
+		"Dwarven Mine",
+		"Goblin War Camp",
+		"Gruul Stomping Grounds",
+		"Mardu War Camp",
+		"Mishra's Foundry",
+		"Sphinx of Riddles Red",
+		"Urabrask's Furnace",
+		"Ziatora's Proving Ground"
+	],
+	"structures": [
+		{
+			"N": 2,
+			"x": 0.5,
+			"y": 0.5,
+			"structureAtlasPath": "world/structures/red_structures.atlas",
+			"sourcePath": "world/structures/models/red.png",
+			"maskPath": "world/structures/masks/ring.png",
+			"height": 0.5,
+			"width": 0.5,
+			"symmetry": 8,
+			"mappingInfo": [
+				{
+					"name": "mountain",
+					"color": "ff0000",
+					"collision": true
+				},
+				{
+					"name": "tree",
+					"color": "00ff00",
+					"collision": true
+				},
+				{
+					"name": "tree2",
+					"color": "00ffff",
+					"collision": true
+				},
+				{
+					"name": "tree3",
+					"color": "0000ff",
+					"collision": true
+				},
+				{
+					"name": "tree4",
+					"color": "ff00ff",
+					"collision": true
+				},
+				{
+					"name": "rock",
+					"color": "ffff00",
+					"collision": true
+				}
+			]
+		},
+		{
+			"x": 0.5,
+			"y": 0.5,
+			"structureAtlasPath": "world/structures/red_structures.atlas",
+			"sourcePath": "world/structures/models/volcano.png",
+			"maskPath": "world/structures/masks/circle.png",
+			"height": 0.2,
+			"width": 0.2,
+			"N": 2,
+			"symmetry": 8,
+			"mappingInfo": [
+				{
+					"name": "lava",
+					"color": "ffff00",
+					"collision": true
+				},
+				{
+					"name": "mountain",
+					"color": "ff0000",
+					"collision": true
+				},
+				{
+					"name": "dead_tree",
+					"color": "000000",
+					"collision": true
+				},
+				{
+					"name": "dead_tree2",
+					"color": "808080",
+					"collision": true
+				},
+				{
+					"name": "rock",
+					"color": "0000ff",
+					"collision": true
+				}
+			]
+		}
+	]
+}

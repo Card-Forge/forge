@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="81">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Sliver Hive&quot;, &quot;Sliver Construct&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt17sJACAMBFA7EWzd0Wmc2VYEP4nJKZLi2rzmDCZH57JQSlhHchYlaG/H1TJHtrbXuyivddGmuW8keV7Mfcsd7StNd7afzf3T5XonfTb3fxfR51su4v32u3/1fz5xpe6e3b5JehSbMqsC5Sl0Zg==
+  </data>
+ </layer>
+ <layer id="6" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztlksKwjAQhkfcJLdKewARL2JbH9fyufQ0gitfqa+1/9CFEYRGnEaRfPBBVvNnEpopUTg2rYBhDXM0RNaEz+0nRFnyeR2LGiU8CdRi+G597jdLiXJYpDK5pUEPRqbWO+Q4t0Lo7CK/w0Th29aVU6xnqtkczmAt1h3Hg24me4u6O8eles5lu1o+99U+FuqxhzncB8h16Xn2Kn0P3LtPr6HP4x84402+wCu81bzPa8H/kQHm2RCO4LhmtknPXl+kZ2+kYtX+9g4iERnusu05cQ==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJytV21OAjEQXWNitgdbISSA2YNxDUFMRPCn1/ACImgiIEewk52XHYbpB7ovmXR3C32dzptOWxRh3JdF8emKYsqtNPoGo/cvb31vK//+4u3tprGRa2zpvw34NzE+Go/GevDth2/n3MIey9M+so1/nrhzTrKDa3jpPyFOybcJzG9t9E2YFz5L3pFr/Z2VDQ9a6WOI7z9Y8zr1eA5bl+djF4DPOXxPvv/H9y24lc/U4vk5EDuJyjX+ptaUOI/uPFbQ6E7E85DBDd6YrmOc0Cj8P4pvMe4Ub4ozZuOEPrYR3vqPnDmAprvizQXW2sK3s3O/i3VG7s4COhgK3eo5QMv4Tu/QdQ7vLXNPy3P+msfbu9M5rPib1N6da+caA/ZhAuUwxVrz15wXCx5f+qL1PuZ55EDWBto7UWcQc6mtA+co8nPoTtcd/TmwcmggtEbaQgxljMFh7V/7DG5Ly1ZtHia4djy/HM7KGB8x1/Mhv6FVqVv4fkldQA5pTtSJ96u2j/SCmFrxlRpPATWYQOej1+vG+swpeWu1znrNU/lq+Qw+zSsR2zNztSRRCV7A4o3tmZf6qv0Ftgav5tY5laMniUqtM5CqUf+JL/Sr40sI1WSZT9a5Q/uNMyrpFmdW5Aydty1txWDFG/qSdwxwYO/XZ2TszXPxG3kXwXwBXROWZcsn/cEZVY4fuwfI+4icy6xsa5NeZ9xBujx/o073InmcunNp/AJPwjzj
+  </data>
+ </layer>
+ <layer id="7" name="Foreground" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYMAN3DhJw4TAU0b8akkxixDwBeLXUBrZbFx20gpQEl7Uthsd1PFS1z5CYU1rMBB2DgZ7ffEroypwRYvb13Sy9/EAhfEooD8gtfyYxUO+XV5IdmErLy2oXEZisxcZ0LosGQh7Z/Jgt5ee9SC97US3f6DqiOEIqN1uoRTsYR5oF9AHENN2pTRu0M0nt/08E0edYI7kPnL6NJS05anRh6J1HwIA4S8pPw==
+  </data>
+ </layer>
+ <layer id="9" name="Clutter" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF5IAPfghMLbOorZYYc0i1m5p20jPsPjgxMHwE4k9OlNtJir20AANl7ygYBaNgFAxGgK1uIVRO0qouxWcmreq/r074zaS2vehmEqPuk9PA1F3U9jc59o+CUTAUAAACUUzT
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="66" template="../../../../common/maps/obj/manashards.tx" x="16.1501" y="189.433"/>
+  <object id="67" template="../../../../common/maps/obj/manashards.tx" x="456.503" y="368.93"/>
+  <object id="69" template="../../../../common/maps/obj/entry_up.tx" x="311.5" y="12.5" width="130" height="8">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/cave/Sliver_Hive_2.tmx"/>
+    <property name="teleportObjectId" value="153"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/entry_up.tx" x="175.319" y="476.868" width="124.62" height="10.7111">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/enemy.tx" x="363.848" y="73.9779">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Wayfarer's Bauble|C14&quot;, &quot;Stoneforge Masterwork|OGW&quot;, &quot;Descendants' Path|LCC&quot;, &quot;Acidic Sliver|STH&quot;]}"/>
+    <property name="enemy" value="Sliver Overlord"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/enemy.tx" x="395.996" y="196.677">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Wayfarer's Bauble|C14&quot;, &quot;Stoneforge Masterwork|OGW&quot;, &quot;Descendants' Path|LCC&quot;, &quot;Enduring Sliver|MH1&quot;]}"/>
+    <property name="enemy" value="Sliver Legion"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/enemy.tx" x="391.174" y="368.67">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Wayfarer's Bauble|C14&quot;, &quot;Stoneforge Masterwork|OGW&quot;, &quot;Descendants' Path|LCC&quot;, &quot;Sliversmith|FUT&quot;]}"/>
+    <property name="enemy" value="Sliver Weftwinder"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="74" template="../../../../common/maps/obj/enemy.tx" x="85.7657" y="165.6">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Wayfarer's Bauble|C14&quot;, &quot;Stoneforge Masterwork|OGW&quot;, &quot;Descendants' Path|LCC&quot;, &quot;Plated Sliver|LGN&quot;]}"/>
+    <property name="enemy" value="Sliver Hivelord"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="75" template="../../../../common/maps/obj/enemy.tx" x="222.396" y="90.0519">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Wayfarer's Bauble|C14&quot;, &quot;Stoneforge Masterwork|OGW&quot;, &quot;Descendants' Path|LCC&quot;, &quot;Spectral Sliver|LGN&quot;]}"/>
+    <property name="enemy" value="Sliver Gravemother"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="77" template="../../../../common/maps/obj/manashards.tx" x="452.256" y="195.606"/>
+  <object id="78" template="../../../../common/maps/obj/manashards.tx" x="210.072" y="47.7236"/>
+  <object id="79" template="../../../../common/maps/obj/dialog.tx" x="141.102" y="446.076" width="187.697" height="20.858" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A cacaphony of chittering echoes through the colossal cave ahead of you. Massive worm-like creatures, the legendary and much-feared slivers, writhe all over the walls and ceiling ahead, their giant lords looming above the endless swarms of lesser ones all about the hive. All at once, a thousand eyeless heads turn towards you in unison - if you press on, you'll have a hell of a fight on your hands.
+
+Your manasight stone glows brightly, sensing a truly mighty legend in this place.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="80" template="../../../../common/maps/obj/scroll.tx" x="232.04" y="245.435">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Sliver Hive&quot;, &quot;editions&quot;: [ &quot;M15&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

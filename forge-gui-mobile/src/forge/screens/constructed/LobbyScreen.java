@@ -602,8 +602,6 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
         final boolean allowNetworking = lobby.isAllowNetworking();
 
-        GuiBase.setNetworkplay(allowNetworking);
-
         setStartButtonAvailability();
 
         for (int i = 0; i < cbPlayerCount.getSelectedItem(); i++) {

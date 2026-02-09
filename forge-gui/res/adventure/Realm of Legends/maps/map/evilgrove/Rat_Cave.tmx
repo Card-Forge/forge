@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="45" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="103">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Rat Colony&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="22017" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="6" name="Sub" width="45" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzt1DEKACAMBMH0Nv7/tRJESGEgjeLJDlwZ2CpmAACc0fqcGsXu1azW7WL7btnNS6rdAICc4u+k+Y6fmwdjZwK/
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="45" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzllzEOwjAMRSM2CgMDTD1ape5cAIlbMLFzCy4DZ0GhMv1YduI0SYuEJauhbZwX9ycOzv2nbXZLE6SZ59WYV+ewlzAeL8SDz2+n8UouMWM/vE9xYuORtf3oUhw+LvFxv64H5/el/Er9pX6WebTdwB5i0lzjTmXV+HmetXc1Nus8clg5J+qLM1vyaf0Gufm1+hRmrgvOPFXTksakZ4/GuWcT5z7uw3PVtFxC27TuUCOHrY07pvkS609yba/I4a7JS8yYF9x/PbfXiuaatvi3LM7cj9dQzfglf2uj+66DSzOZmKF2L82Too25fWp+eB3M3ffnYP5oQ9ija/Pm1Ebc62rnR+O9uLS4eL7DM3sNjRCf5vdNGrO32rylmD967r7zTOx8zFSdcA2kMMf+eyE71kTMO/22MmPfGC8xh9YmtUPa8PzIizF4W8qLhTd0xsZ4ZL79An0rCH8=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="45" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztVktOxTAMLCsS2HAVxIITvILeAblCoeUc7xas+h6w4gw0qkYZXDdxQpetZKm/2OOxM87psWlOu+22W7X1rmnOfrbBzYb7d7dtnIFiScO3XMzg5zL9t3aNBh9WLhDnRcSTz7mYn9P3Vzfbm4vr7q/i/dHXYQ0Yf66jH9xLjNo7a8xnxVc3xf8uxMx+OHfGp+GuwRw4Z66Bty/s76cMnhzuEp5a/5ejg1/2++jz+GXuKcxsHLekDy9irdYvFt8Wrhm71S/rz6DoR1gbOPtSeMvVz4r542Zpo19qImtwTuewRv6X2iOyx+QV8tV42PrqXNTEEG+N41bZAxJrWNv6qLNr2BHTkpvUJ6kfOe3gPci+RqoxzzzZf5ybzB/f2Nb6ltda9jU4TPnmPLj/MAdDLbAvwLlWX1mvA9UR72rn+drM0up/FDxZZgwwcs6Mu0RDU1oC/7I/Rr/U3ZIYmC3Qw9CjNVyjhrd3en9oeotaWOciMHPOHdWx9OwksaPfc7qgxeHzxDmRM/JFLrWYcz3DWqNxLLXkQTmH8Z4t3RdW3uXZDFqTwitzY43CDOB9WHNGtfRLal4FY+1J5ab53xKv1XrSgP9y9gt1eRRc
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="45" height="25">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUDAeQIgnBgxXIszMwKAGxAjtCjEkKggcDaEPjg9z7iJWB4QCQ3g119zROhPxKUbo6DwV8hobhezEGhg9iCPG9QHEXqJtB+CErIrwPSgysm0GgjpeBoVecgaFPHFUc2d3OQHofO3b9Aw0+o7kL5O4WtsHr3pEK0PPyKBgFMDBQaePnANlLazBc/TUKyAOj6QE7ALV9RsEoIAQAN7Ia0Q==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="435.333" y="397.333" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="54" template="../../../../common/maps/obj/gold.tx" x="493.991" y="88.765"/>
+  <object id="59" template="../../../../common/maps/obj/enemy.tx" x="181.41" y="157.167">
+   <properties>
+    <property name="enemy" value="Nashi"/>
+    <property name="speedModifier" type="float" value="15"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="60" template="../../../../common/maps/obj/enemy.tx" x="323.963" y="329.526" visible="1">
+   <properties>
+    <property name="enemy" value="Karumonix"/>
+    <property name="hidden" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="15"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="62" template="../../../../common/maps/obj/booster.tx" x="279.862" y="128.705">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;NEO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NEO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NEO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/enemy.tx" x="289.944" y="164.038">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Gnat Miser|SOK&quot;, &quot;Swarm of Rats|9ED&quot; ] }"/>
+    <property name="enemy" value="Marrow-Gnawer"/>
+    <property name="speedModifier" type="float" value="15"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/enemy.tx" x="415.765" y="236.565">
+   <properties>
+    <property name="enemy" value="Ashcoat"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="75" template="../../../../common/maps/obj/enemy.tx" x="613.913" y="214.693">
+   <properties>
+    <property name="enemy" value="Vren"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/enemy.tx" x="534.385" y="158.5">
+   <properties>
+    <property name="enemy" value="Greasefang"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="95,96"/>
+   </properties>
+  </object>
+  <object id="77" template="../../../../common/maps/obj/enemy.tx" x="649.063" y="303.937">
+   <properties>
+    <property name="enemy" value="Wick"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="83" template="../../../../common/maps/obj/manashards.tx" x="667.332" y="179.605"/>
+  <object id="84" template="../../../../common/maps/obj/manashards.tx" x="643.711" y="257.741"/>
+  <object id="88" template="../../obj/treasure.tx" x="666" y="361">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 15,
+  &quot;cardName&quot;: &quot;Relentless Rats&quot;,
+  &quot;editions&quot;: [ &quot;A25&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/booster.tx" x="303" y="128">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;CHK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;CHK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;CHK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/gold.tx" x="271.75" y="103.75">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/gold.tx" x="266" y="116.25">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/waypoint.tx" x="527.5" y="108"/>
+  <object id="96" template="../../../../common/maps/obj/waypoint.tx" x="533.5" y="247.5"/>
+  <object id="97" template="../../obj/treasure.tx" x="616.5" y="160.5">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 15,
+  &quot;cardName&quot;: &quot;Relentless Rats&quot;,
+  &quot;editions&quot;: [ &quot;A25&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="98" template="../../obj/treasure.tx" x="574" y="110.5">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 15,
+  &quot;cardName&quot;: &quot;Relentless Rats&quot;,
+  &quot;editions&quot;: [ &quot;A25&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="99" template="../../obj/treasure.tx" x="303" y="358.5">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 15,
+  &quot;cardName&quot;: &quot;Rat Colony&quot;,
+  &quot;editions&quot;: [ &quot;DOM&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="100" template="../../obj/treasure.tx" x="95" y="249.5">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 15,
+  &quot;cardName&quot;: &quot;Rat Colony&quot;,
+  &quot;editions&quot;: [ &quot;DOM&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="101" template="../../obj/treasure.tx" x="180" y="112">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 15,
+  &quot;cardName&quot;: &quot;Rat Colony&quot;,
+  &quot;editions&quot;: [ &quot;DOM&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="102" template="../../../../common/maps/obj/dialog.tx" x="550.334" y="361.917" width="16" height="32" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A dank, filthy cave slopes down before you. Chittering can be heard from all around, and in the shadows, you can already see dozens of rats running about - and from the sound of it, thousands more make their nest here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
