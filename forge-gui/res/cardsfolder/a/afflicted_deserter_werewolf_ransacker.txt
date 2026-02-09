@@ -2,10 +2,10 @@ Name:Afflicted Deserter
 ManaCost:3 R
 Types:Creature Human Werewolf
 PT:3/2
-T:Mode$ Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
+T:Mode$ Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform this creature.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
-Oracle:At the beginning of each upkeep, if no spells were cast last turn, transform Afflicted Deserter.
+Oracle:At the beginning of each upkeep, if no spells were cast last turn, transform this creature.
 
 ALTERNATE
 
@@ -14,11 +14,11 @@ ManaCost:no cost
 Colors:red
 Types:Creature Werewolf
 PT:5/4
-T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ Whenever this creature transforms into CARDNAME, you may destroy target artifact. If that artifact is put into a graveyard this way, CARDNAME deals 3 damage to that artifact's controller.
-SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ DBDamage
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ Whenever this creature transforms into CARDNAME, you may destroy target artifact. If that artifact is put into a graveyard this way, this creature deals 3 damage to that artifact's controller.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 3 | SubAbility$ DBCleanup | ConditionCheckSVar$ IsDestroyed | ConditionSVarCompare$ GE1
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:IsDestroyed:Count$ThisTurnEntered_Graveyard_from_Battlefield_Artifact.IsRemembered
-T:Mode$ Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
+T:Mode$ Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform this creature.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
-Oracle:Whenever this creature transforms into Werewolf Ransacker, you may destroy target artifact. If that artifact is put into a graveyard this way, Werewolf Ransacker deals 3 damage to that artifact's controller.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Werewolf Ransacker.
+Oracle:Whenever this creature transforms into Werewolf Ransacker, you may destroy target artifact. If that artifact is put into a graveyard this way, this creature deals 3 damage to that artifact's controller.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform this creature.

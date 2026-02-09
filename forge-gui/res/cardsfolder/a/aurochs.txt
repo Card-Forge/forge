@@ -3,9 +3,9 @@ ManaCost:3 G
 Types:Creature Aurochs
 PT:2/3
 K:Trample
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +1/+0 until end of turn for each other attacking Aurochs.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever this creature attacks, it gets +1/+0 until end of turn for each other attacking Aurochs.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X
 SVar:X:Count$Valid Aurochs.attacking+Other
 SVar:HasAttackEffect:TRUE
 DeckHints:Type$Aurochs
-Oracle:Trample\nWhenever Aurochs attacks, it gets +1/+0 until end of turn for each other attacking Aurochs.
+Oracle:Trample\nWhenever this creature attacks, it gets +1/+0 until end of turn for each other attacking Aurochs.

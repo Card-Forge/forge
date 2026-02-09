@@ -3,10 +3,10 @@ ManaCost:4 W
 Types:Creature Lammasu
 PT:4/3
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAbsolve | TriggerDescription$ When CARDNAME enters, all suspected creatures are no longer suspected.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAbsolve | TriggerDescription$ When this creature enters, all suspected creatures are no longer suspected.
 SVar:TrigAbsolve:DB$ AlterAttribute | Defined$ Valid Creature.IsSuspected | Attributes$ Suspected | Activate$ False
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME dies, you gain 3 life and suspect up to one target creature an opponent controls. (A suspected creature has menace and can't block.)
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When this creature dies, you gain 3 life and suspect up to one target creature an opponent controls. (A suspected creature has menace and can't block.)
 SVar:TrigGainLife:DB$ GainLife | Defined$ TriggeredCardController | LifeAmount$ 3 | SubAbility$ DBSuspect
 SVar:DBSuspect:DB$ AlterAttribute | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select up to one target creature an opponent controls | TargetMin$ 0 | TargetMax$ 1 | Attributes$ Suspected
 DeckHas:Ability$LifeGain
-Oracle:Flying\nWhen Absolving Lammasu enters, all suspected creatures are no longer suspected.\nWhen Absolving Lammasu dies, you gain 3 life and suspect up to one target creature an opponent controls. (A suspected creature has menace and can't block.)
+Oracle:Flying\nWhen this creature enters, all suspected creatures are no longer suspected.\nWhen this creature dies, you gain 3 life and suspect up to one target creature an opponent controls. (A suspected creature has menace and can't block.)

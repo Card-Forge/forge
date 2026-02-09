@@ -2,7 +2,7 @@ Name:Arbalest Elite
 ManaCost:2 W W
 Types:Creature Human Archer
 PT:2/3
-A:AB$ DealDamage | Cost$ 2 W T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 3 | SubAbility$ DBStayTapped | SpellDescription$ CARDNAME deals 3 damage to target attacking or blocking creature. CARDNAME doesn't untap during your next untap step.
+A:AB$ DealDamage | Cost$ 2 W T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 3 | SubAbility$ DBStayTapped | SpellDescription$ This creature deals 3 damage to target attacking or blocking creature. This creature doesn't untap during your next untap step.
 SVar:DBStayTapped:DB$ Effect | ReplacementEffects$ DontUntap | RememberObjects$ Self | ExileOnMoved$ Battlefield | Duration$ UntilTheEndOfYourNextUntap
 SVar:DontUntap:Event$ Untap | ValidCard$ Card.IsRemembered | ValidStepTurnToController$ Player.Activator | Layer$ CantHappen | Description$ EFFECTSOURCE doesn't untap during your next untap step.
-Oracle:{2}{W}, {T}: Arbalest Elite deals 3 damage to target attacking or blocking creature. Arbalest Elite doesn't untap during your next untap step.
+Oracle:{2}{W}, {T}: This creature deals 3 damage to target attacking or blocking creature. This creature doesn't untap during your next untap step.

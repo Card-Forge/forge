@@ -2,6 +2,6 @@ Name:Ambassador Oak
 ManaCost:3 G
 Types:Creature Treefolk Warrior
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 1/1 green Elf Warrior creature token.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create a 1/1 green Elf Warrior creature token.
 SVar:TrigToken:DB$ Token | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You
-Oracle:When Ambassador Oak enters, create a 1/1 green Elf Warrior creature token.
+Oracle:When this creature enters, create a 1/1 green Elf Warrior creature token.
