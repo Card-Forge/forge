@@ -560,6 +560,14 @@ public class NetGuiGame extends NetworkGuiGame {
     }
 
     @Override
+    public void showWaitingTimer(final PlayerView forPlayer, final String waitingForPlayerName) {
+        send(ProtocolMethod.showWaitingTimer, forPlayer, waitingForPlayerName);
+    }
+
+    @Override
+    public boolean isNetGame() { return true; }
+
+    @Override
     protected void updateCurrentPlayer(final PlayerView player) {
         // TODO Auto-generated method stub
     }

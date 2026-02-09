@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="19" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="125">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Giggling Skitterspike&quot;, &quot;Found footage&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx"/>
+ <tileset firstgid="11935" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="6" name="Collision" width="30" height="19">
+  <data encoding="base64" compression="zlib">
+   eJxjYBi8wI2TMKaFnU8JmPuYynYTYye17SbFTmrZjctOdDOx2UGJ3SB903gxMUh8Nw9x6si1FxsAmYmPj6yfHLuxhScuc7DJDXV76aUfpG8lB3l6l3NQnpdgdhMbzpTaiW43MfZSy050u/EBatuJbDe+dEurOgnZHnz84WgvtcIWAIOHLCo=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="19">
+  <data encoding="base64" compression="zlib">
+   eJx7ws7A8GQI4UJ54jE1zCAVD4Sd+Oynt33UjD9y7B6u4QyzE91uevkRXYxe4YzN/8MtXvHZTUt34Ms/tPY/NrMHMv8OZN1ArDtM+BhQQBM3+XaBzCIFIwNS9Q4GDAAw7Fue
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="19">
+  <data encoding="base64" compression="zlib">
+   eJzVlNkNwjAMhs3x1pbrtSCW4L2UMWAKBuBcoOUYplwjsBOOIJKp3GBXBYlf+tUqqfPZSePMB8h+4H7OkphZAHD2iz0NquPaecO84NOlk4CtqVfClLKlXA1TwpZwDfMYAbTHAB10gu9pxLN2OL5Hd/G7HvoQ8WwJd/CqM8F1UvR86HZeYcl6LZeTJIdKuBOe7cqp6no3MT/ewNyaJL9v7LPRPXTPW+6opePe0CvPvXaRFhh3LVlvX8E2e7+O35ncupo+Sdlb5mxr5ExdTG2fpOw6819LmVouZS+9p+k9tWOfmGW4+RjaI7T5U2vl6o//oAcKReYB
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="30" height="19">
+  <data encoding="base64" compression="zlib">
+   eJzl1G0OQDAMBuD+ZnoFcRXBwdzFvTDugcwSZsOqPhJv0tik2xM/CuCbkQFAGR5XH/CbidjviwWffdbktF1mFaky11y26zszXO9T3PZom+p2450S18/JLWYrR+Xa+q64tjTjne3s1qj2Puep7t3n/+hSZ0HPICXUOfT913DYHKavzWmatq5llu85TTM294m86ZpFzQDLEj8K
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="19">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2DkgDZHCN3siF++BUo34VBHLADpb0AzowWNj80tTE6U2Yus/7EmA8MTTezqMOQotBcZ/AeZq0W63FADIg4MDKIOxKsXJkEtPjAFaM5UB+LjdzKV7IWBkRK/gw3UU1gmkQuYgWUDCxXLB3oCAFEYGiE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="75" template="../../../../common/maps/obj/enemy.tx" x="295.904" y="144.808">
+   <properties>
+    <property name="enemy" value="The Master of Keys"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="86" template="../../../../common/maps/obj/entry_up.tx" x="208.316" y="175.684">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/evilgrove/Church_of_Valgavoth_1.tmx"/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/enemy.tx" x="207.333" y="241.727">
+   <properties>
+    <property name="enemy" value="The Mindskinner"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/enemy.tx" x="119.879" y="143.06">
+   <properties>
+    <property name="enemy" value="Rendmaw"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="108" name="Ward" type="dialog" gid="11912" x="192.063" y="128.292" width="48" height="16">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;A current of enchanted blood blocks your way forward. You experimentally try to push through it, but the waves of overwhelming fear and pain that fill you swiftly change your mind. It seems the only way through is by killing the captives whose endless agony feed the barrier. Twisted, but likely an act of mercy.&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Leave&quot; } 
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="109" name="Sacrifice1" type="dialog" gid="11905" x="99.0003" y="124" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    &quot;text&quot;:&quot;A captive lies tied to the altar. As you approach, you sense their fear being feasted upon.&quot;, 
+    &quot;options&quot;:[ 
+	{ 
+		&quot;text&quot;:&quot;As the third captive is freed, you hear the sound of shattering as the barrier in the center of the chamber fails. Time to end this.&quot;,
+		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
+		&quot;name&quot;:&quot;Put them out of their misery&quot; 
+			&quot;options&quot;:[{
+			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:3}}],
+			&quot;action&quot;:[{&quot;deleteMapObject&quot;:108}, {&quot;deleteMapObject&quot;:124}],
+			&quot;name&quot;:&quot;Continue&quot; }]
+	},
+	{ &quot;name&quot;:&quot;Leave&quot; } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="110" name="Sacrifice2" type="dialog" gid="11906" x="319" y="125" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    &quot;text&quot;:&quot;A captive lies tied to the altar. As you approach, you sense their fear being feasted upon.&quot;, 
+    &quot;options&quot;:[ 
+	{ 
+		&quot;text&quot;:&quot;As the third captive is freed, you hear the sound of shattering as the barrier in the center of the chamber fails. Time to end this.&quot;,
+		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
+		&quot;name&quot;:&quot;Put them out of their misery&quot; 
+			&quot;options&quot;:[{
+			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:3}}],
+			&quot;action&quot;:[{&quot;deleteMapObject&quot;:108}, {&quot;deleteMapObject&quot;:124}],
+			&quot;name&quot;:&quot;Continue&quot; }]
+	},
+	{ &quot;name&quot;:&quot;Leave&quot; } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="111" name="Sacrifice3" type="dialog" gid="11907" x="209.333" y="285" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    &quot;text&quot;:&quot;A captive lies tied to the altar. As you approach, you sense their fear being feasted upon.&quot;, 
+    &quot;options&quot;:[ 
+	{ 
+		&quot;text&quot;:&quot;As the third captive is freed, you hear the sound of shattering as the barrier in the center of the chamber fails. Time to end this.&quot;,
+		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
+		&quot;name&quot;:&quot;Put them out of their misery&quot; 
+			&quot;options&quot;:[{
+			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:3}}],
+			&quot;action&quot;:[{&quot;deleteMapObject&quot;:108}, {&quot;deleteMapObject&quot;:124}],
+			&quot;name&quot;:&quot;ok&quot; }]
+	},
+	{ &quot;name&quot;:&quot;Leave&quot; } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="116" template="../../../../common/maps/obj/enemy.tx" x="204.899" y="72.2358" width="24" height="24">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;As the great demon is slain, the whole church shudders around you, beginning to slowly collapse. It gasps out a few final words
+
+'Impossible... I am... fear itself...' Ironically, panic is evident in the demon's final words.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Murky Sewer|DSK&quot;, &quot;Neglected Manor|DSK&quot;, &quot;Razortrap Gorge|DSK&quot;, &quot;Strangled Cemetery|DSK&quot;, &quot;Valgavoth, Harrower of Souls|DSC&quot;, &quot;Keys to the House|DSK&quot;, &quot;nowhere to run|DSK&quot;]}"/>
+    <property name="enemy" value="Valgavoth"/>
+   </properties>
+  </object>
+  <object id="117" template="../../../../common/maps/obj/booster.tx" x="123.333" y="79.6667">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;DSK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DSK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DSK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="118" template="../../../../common/maps/obj/booster.tx" x="155.333" y="47.3333">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;DSK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DSK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DSK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="119" template="../../../../common/maps/obj/booster.tx" x="261" y="50">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;DSK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DSK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DSK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="120" template="../../../../common/maps/obj/booster.tx" x="294" y="81.3333">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;DSK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DSK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DSK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="122" template="../../obj/treasure.tx" x="210" y="48">
+   <properties>
+    <property name="reward">[{
+    &quot;editions&quot;: [ &quot;DSC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="123" template="../../../../common/maps/obj/dialog.tx" x="177.917" y="92.0833" width="76.8333" height="14.1667" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Despite your efforts to resist, pure, animal terror fills your mind as you approach the elder demon ahead of you. You want nothing more than to flee this place and never return, yet still, some deep part of you knows this is mere dark magic and hangs on.
+
+'You still have hope. Excellent. The despair you shall feel when I tear you apart will be all the sweeter for your foolish overconfidence.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="124" template="../../../../common/maps/obj/collision.tx" x="182.259" y="92.7417" width="67.4828" height="23.85"/>
+ </objectgroup>
+</map>

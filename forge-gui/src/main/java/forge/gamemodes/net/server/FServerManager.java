@@ -13,6 +13,7 @@ import forge.gui.util.SOptionPane;
 import forge.interfaces.IGameController;
 import forge.interfaces.ILobbyListener;
 import forge.model.FModel;
+import forge.util.BuildInfo;
 import forge.util.IterableUtil;
 import forge.util.Localizer;
 import forge.localinstance.properties.ForgeNetPreferences;
@@ -199,8 +200,7 @@ public final class FServerManager {
     }
 
     public void broadcast(final NetEvent event) {
-        if (event instanceof MessageEvent) {
-            MessageEvent msgEvent = (MessageEvent) event;
+        if (event instanceof MessageEvent msgEvent) {
             lobbyListener.message(msgEvent.getSource(), msgEvent.getMessage());
         }
         broadcastTo(event, clients.values());
@@ -252,13 +252,43 @@ public final class FServerManager {
 
     public void updateSlot(final int index, final UpdateLobbyPlayerEvent event) {
         localLobby.applyToSlot(index, event);
+
+        if (event.getReady() != null) {
+            broadcastReadyState(localLobby.getSlot(index).getName(), event.getReady());
+        }
+    }
+
+    private void broadcastReadyState(String playerName, boolean isReady) {
+        int readyCount = 0;
+        int totalPlayers = 0;
+        for (int i = 0; i < localLobby.getNumberOfSlots(); i++) {
+            LobbySlot slot = localLobby.getSlot(i);
+            if (slot.getType() == LobbySlotType.LOCAL || slot.getType() == LobbySlotType.REMOTE) {
+                totalPlayers++;
+                if (slot.isReady()) {
+                    readyCount++;
+                }
+            }
+        }
+        if (isReady) {
+            broadcast(new MessageEvent(String.format("%s is ready (%d/%d players ready)",
+                playerName, readyCount, totalPlayers)));
+            if (readyCount == totalPlayers && totalPlayers > 1) {
+                broadcast(new MessageEvent("All players ready to start game!"));
+            }
+        } else {
+            broadcast(new MessageEvent(String.format("%s is not ready (%d/%d players ready)",
+                playerName, readyCount, totalPlayers)));
+        }
     }
 
     public IGuiGame getGui(final int index) {
         final LobbySlot slot = localLobby.getSlot(index);
         final LobbySlotType type = slot.getType();
         if (type == LobbySlotType.LOCAL) {
-            return GuiBase.getInterface().getNewGuiGame();
+            final IGuiGame gui = GuiBase.getInterface().getNewGuiGame();
+            gui.setNetGame();
+            return gui;
         } else if (type == LobbySlotType.REMOTE) {
             // Check if we already have a stored NetGuiGame for this player
             NetGuiGame existingGui = playerGuis.get(index);
@@ -373,7 +403,14 @@ public final class FServerManager {
         public final void channelRead(final ChannelHandlerContext ctx, final Object msg) throws Exception {
             final RemoteClient client = clients.get(ctx.channel());
             if (msg instanceof MessageEvent) {
-                broadcast(new MessageEvent(client.getUsername(), ((MessageEvent) msg).getMessage()));
+                String username = client.getUsername();
+                String message = ((MessageEvent) msg).getMessage();
+
+                // Append (Host) indicator for the host player
+                if (client.getIndex() == 0) {
+                    username = username + " (Host)";
+                }
+                broadcast(new MessageEvent(username, message));
             }
             super.channelRead(ctx, msg);
         }
@@ -392,14 +429,28 @@ public final class FServerManager {
         @Override
         public void channelRead(final ChannelHandlerContext ctx, final Object msg) throws Exception {
             final RemoteClient client = clients.get(ctx.channel());
-            if (msg instanceof LoginEvent) {
-                final LoginEvent event = (LoginEvent) msg;
+            if (msg instanceof LoginEvent event) {
                 final String username = event.getUsername();
                 client.setUsername(username);
-                broadcast(new MessageEvent(String.format("%s joined the room", username)));
+                if (client.getIndex() == 0) {
+                    broadcast(new MessageEvent(String.format("Lobby hosted by %s", username)));
+                } else {
+                    broadcast(new MessageEvent(String.format("%s joined the lobby", username)));
+                }
                 updateLobbyState();
-            } else if (msg instanceof UpdateLobbyPlayerEvent) {
-                localLobby.applyToSlot(client.getIndex(), (UpdateLobbyPlayerEvent) msg);
+            } else if (msg instanceof UpdateLobbyPlayerEvent event) {
+                localLobby.applyToSlot(client.getIndex(), event);
+                if (event.getName() != null) {
+                    String oldName = client.getUsername();
+                    String newName = event.getName();
+                    if (!newName.equals(oldName)) {
+                        client.setUsername(newName);
+                        broadcast(new MessageEvent(String.format("%s changed their name to %s", oldName, newName)));
+                    }
+                }
+                if (event.getReady() != null) {
+                    broadcastReadyState(client.getUsername(), event.getReady());
+                }
                 // Return to prevent duplicate processing by LobbyInputHandler
                 return;
             }
@@ -411,18 +462,31 @@ public final class FServerManager {
         @Override
         public void channelRead(final ChannelHandlerContext ctx, final Object msg) throws Exception {
             final RemoteClient client = clients.get(ctx.channel());
-            if (msg instanceof LoginEvent) {
-                final LoginEvent event = (LoginEvent) msg;
+            if (msg instanceof LoginEvent event) {
                 final int index = localLobby.connectPlayer(event.getUsername(), event.getAvatarIndex(), event.getSleeveIndex());
                 if (index == -1) {
                     ctx.close();
                 } else {
                     client.setIndex(index);
+                    // Warn if client version differs from host
+                    final String clientVersion = event.getVersion();
+                    final String hostVersion = BuildInfo.getVersionString();
+                    if (clientVersion == null) {
+                        broadcast(new MessageEvent(String.format(
+                            "Warning: Could not determine %s's Forge version. "
+                            + "Please use the same version as the host to avoid network compatibility issues.",
+                            event.getUsername())));
+                    } else if (!clientVersion.equals(hostVersion)) {
+                        broadcast(new MessageEvent(String.format(
+                            "Warning: %s is using Forge version %s (host: %s). "
+                            + "Please use the same version as the host to avoid network compatibility issues.",
+                            event.getUsername(), clientVersion, hostVersion)));
+                    }
                     broadcast(event);
                     updateLobbyState();
                 }
-            } else if (msg instanceof UpdateLobbyPlayerEvent) {
-                updateSlot(client.getIndex(), (UpdateLobbyPlayerEvent) msg);
+            } else if (msg instanceof UpdateLobbyPlayerEvent event) {
+                updateSlot(client.getIndex(), event);
             }
             // Note: MessageEvent is handled by MessageHandler, not here
             // to avoid duplicate display on host's chat
@@ -449,7 +513,7 @@ public final class FServerManager {
             NetworkDebugLogger.log("[Disconnect] Client disconnected: index=%d, username=%s", playerIndex, username);
 
             localLobby.disconnectPlayer(playerIndex);
-            broadcast(new MessageEvent(String.format("%s left the room", username)));
+            broadcast(new MessageEvent(String.format("%s left the lobby", username)));
             broadcast(new LogoutEvent(username));
 
             super.channelInactive(ctx);

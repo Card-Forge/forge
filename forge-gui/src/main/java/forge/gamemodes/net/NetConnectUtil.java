@@ -48,8 +48,6 @@ public class NetConnectUtil {
 
         server.startServer(port);
         server.setLobby(lobby);
-        String sessionId = NetworkDebugLogger.generateSessionId();
-        NetworkDebugLogger.log("[NetworkRole] ========== HOST (port %d) Session=%s ==========", port, sessionId);
 
         lobby.setListener(new IUpdateable() {
             @Override
@@ -88,17 +86,8 @@ public class NetConnectUtil {
             public void send(final NetEvent event) {
                 if (event instanceof MessageEvent) {
                     final MessageEvent message = (MessageEvent) event;
-                    String msgText = message.getMessage();
-
-                    String source = message.getSource();
-                    // Append (Host) indicator for the host player
-                    if (source != null) {
-                        source = source + " (Host)";
-                    }
-                    // Add to chat with host indicator
-                    chatInterface.addMessage(new ChatMessage(source, msgText));
-                    // Broadcast with host indicator
-                    server.broadcast(new MessageEvent(source, msgText));
+                    chatInterface.addMessage(new ChatMessage(message.getSource(), message.getMessage()));
+                    server.broadcast(event);
                 }
             }
             @Override
@@ -162,14 +151,8 @@ public class NetConnectUtil {
             }
             @Override
             public void update(final GameLobbyData state, final int slot) {
-                // Always update the lobby data
+                lobby.setLocalPlayer(slot);
                 lobby.setData(state);
-                // Only set local player if we have a valid slot assignment.
-                // The first update after connection may have slot=-1 (unassigned)
-                // before the server processes our LoginEvent.
-                if (slot >= 0) {
-                    lobby.setLocalPlayer(slot);
-                }
             }
             @Override
             public void close() {
@@ -187,14 +170,49 @@ public class NetConnectUtil {
 
         try {
             client.connect();
-            // Generate a local session ID for the client log (host session ID would need protocol change to share)
-            String sessionId = NetworkDebugLogger.generateSessionId();
-            NetworkDebugLogger.log("[NetworkRole] ========== CLIENT (%s:%d) Session=%s ==========", hostname, port, sessionId);
         }
         catch (Exception ex) {
-            return new ChatMessage(null, ForgeConstants.CLOSE_CONN_COMMAND);
+            // Return error with details for GUI display
+            String errorDetail = getConnectionErrorMessage(ex, hostname, port);
+            return new ChatMessage(null, ForgeConstants.CONN_ERROR_PREFIX + errorDetail);
         }
 
         return new ChatMessage(null, Localizer.getInstance().getMessage("lblConnectedIPPort", hostname, String.valueOf(port)));
+    }
+
+    /**
+     * Generate a user-friendly error message for connection failures.
+     */
+    private static String getConnectionErrorMessage(Exception ex, String hostname, int port) {
+        Localizer localizer = Localizer.getInstance();
+        StringBuilder sb = new StringBuilder();
+
+        // Get the root cause for better error messages
+        Throwable cause = ex.getCause() != null ? ex.getCause() : ex;
+        String causeName = cause.getClass().getSimpleName();
+
+        sb.append(localizer.getMessage("lblConnectionFailedTo", hostname, String.valueOf(port)));
+        sb.append("\n\n");
+
+        // Provide specific messages for common error types
+        if (causeName.contains("ConnectException") || causeName.contains("ConnectionRefused")) {
+            sb.append(localizer.getMessage("lblConnectionRefused"));
+        } else if (causeName.contains("UnknownHost")) {
+            sb.append(localizer.getMessage("lblUnknownHost"));
+        } else if (causeName.contains("Timeout") || causeName.contains("TimedOut")) {
+            sb.append(localizer.getMessage("lblConnectionTimeout"));
+        } else if (causeName.contains("NoRouteToHost")) {
+            sb.append(localizer.getMessage("lblNoRouteToHost"));
+        } else {
+            // Generic error with the exception message
+            String msg = cause.getMessage();
+            if (msg != null && !msg.isEmpty()) {
+                sb.append(msg);
+            } else {
+                sb.append(causeName);
+            }
+        }
+
+        return sb.toString();
     }
 }

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="131">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Voldaren Estate&quot;, &quot;Voldaren Bloodcaster&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_2.tsx"/>
+ <tileset firstgid="36241" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="1" name="Background" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7C+8w/VWw37E0gvqaqqqqqqqqqqqu8DFRHS7A==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmW0OgyAMhvlrhifYdh0PsZ1l7lz7uttMNhJtQFssSps2eX+QUMczKS9I1zjXDTp53eqaqfYejwTea+vc06d1aaf9YJs7b9y3BO950FwcQT/Y5s4b992D9/H/z18+3tbGmxtSeW8H5/pB90O8rY1XW/1+/O99pfROjJuah6370rzUeZAaC+f6UJIX44ex9RnroYEXW/eleW19Nt5aebG1GKsvSbw574ry+zmR4l3ysbGXaeBdo8ALPQMTFP/PCfh8DC88O6Z4JQSGd2kuBN6e4OUhKP6fE/D5nLxBEup3zkOW5r5EXk7/xaz1qfNLad5azkdb8ebkSua189E+vNiah9+vqOsD535SwvcNzv3kFvcLFB9dk2f3C9vy2v0CLqTuN7juFyih4X6hlv0G9p4g9INt7rxa/LcGGa9uGa9uBc4vNVqY7w==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="60" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt1zkKwkAUBuAnWihoYSHYuDRWnsQLuGDlFaxFcD1BprAwTuklbDyF1xBxKR3RYMCgmTjjZOT/4GemyPJeEpIJEYB660Jw4m5bDI5Oe34f+4/xwPWezy9qv7i/4Rw50Ym/n8eRrff3ppknavnSzpuuCAAgWCOj5jgdvOde2Pr9jWriEk1FZiLJFVFKZC7mI5Gxa6amXT18QK9uznQFv9VLm65AnVri8zabrP464L/g/QxgD1X/C4OFmuMAgF5Lh8h1nqOsoWXr/hIjKrPneLMSfXPJ3ju+uS3XYMHuqYhUmelqfsPrOayzvlIikf2WyvTq8Z7fi/yuymHtAADwnSuXFG9r
+  </data>
+ </layer>
+ <layer id="8" name="Clutter" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmU9SgzAUxnMAulahuxb1CJ5Fr6EdF44rT0DpDA0sMlPwzw1c6K3U6dKPqUzBJhFtIIDvN/PNSx+ZkJeXBEgZI4j9uTsw19a12NjZl70S5truGsW4eYutzWVyPG1y9rQtT+aMTaFJAAv5QbWcX/Pn9vpqgudSvCvEkkIrxJZCWVAt59eynseropjPZaK4+fvm60Y4u7Kxng6T9u9pkzby+1tulrsyRRfzK4sv9/GIsRhKor+33dX8ynDh96DxHvnuYn5VcMQZQ4lmrg/p+ety5Bca86q/HPuQnr8cccZQwvX1TO9xfaCJvb0PULzD5SFk7DH8P/P6BN8Lp5JvBoIgCKJ5Xp2NfXHs9qMtLkYbez6y2w+iOW47ltviHDLFu10G3YfVchvYGJMp3u186HhRLdflUsj9a0V9ld8WsvNwHW9C7v+eu59+DwVdXOsadUxRPmt4F4x9CPn5gy7fR1jnLuSF+v8l2oxLxYyrVZcl4uRQ3NL+RhAE0Qc+ARrJmPU=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="65" template="../../../../common/maps/obj/door_down.tx" x="816.832" y="303.333">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/evilgrove/Castle_Voldaren_2.tmx"/>
+    <property name="teleportObjectId" value="67"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/entry_left.tx" x="3.66667" y="305"/>
+  <object id="80" template="../../../../common/maps/obj/manashards.tx" x="532" y="517.333"/>
+  <object id="93" template="../../../../common/maps/obj/enemy.tx" x="225.333" y="308">
+   <properties>
+    <property name="enemy" value="Anje"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="107" template="../../../../common/maps/obj/enemy.tx" x="416.333" y="99.6667">
+   <properties>
+    <property name="enemy" value="Strefan"/>
+    <property name="speedModifier" type="float" value="60"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="108" template="../../../../common/maps/obj/enemy.tx" x="607.667" y="305.333">
+   <properties>
+    <property name="enemy" value="Florian"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="109" template="../../../../common/maps/obj/enemy.tx" x="673" y="166">
+   <properties>
+    <property name="enemy" value="Timothar"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="110" template="../../../../common/maps/obj/enemy.tx" x="416" y="304">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Olivia's Bloodsworn|SOI&quot;, &quot;bride's gown|VOW&quot;, &quot;wedding invitation|VOW&quot;, &quot;wedding security|VOW&quot;, &quot;Call the bloodline|SOI&quot;]}"/>
+    <property name="enemy" value="Olivia"/>
+    <property name="speedModifier" type="float" value="60"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="111" template="../../../../common/maps/obj/scroll.tx" x="816.667" y="514">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wedding Ring&quot;, &quot;editions&quot;: [ &quot;VOC&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="116" template="../../../../common/maps/obj/booster.tx" x="582" y="96.6667">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;VOW&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;VOW&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;VOW&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="117" template="../../../../common/maps/obj/booster.tx" x="789.334" y="155.333">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="118" template="../../../../common/maps/obj/enemy.tx" x="415" y="512.333">
+   <properties>
+    <property name="enemy" value="Henrika"/>
+    <property name="speedModifier" type="float" value="60"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="119" template="../../../../common/maps/obj/dialog.tx" x="188.333" y="313.5" width="32" height="32" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Grand classical music swirls ahead, the air thick with the heady scent of blood. The magnificence of the elite vampiric families of Innistrad certainly doesn't disappoint. Still, its less impressive when you are the one one the menu.
+
+Your manasight stone glows brightly, sensing a truly mighty legend in this place.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="120" template="../../../../common/maps/obj/dialog.tx" x="248.333" y="313.583" width="32" height="32" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The bride of the hour, Olivia Voldaren herself, twirls through the air ahead, the train of her majestic crimson dress trailing far behind her. 
+
+'Ever since my castle was brought to this accursed place, my husband-to-be has taken over. Its simply infuriating - a veritable queen such as myself reduced to the role of mere second fiddle. Unfortunately for you, I have a tendency to eat my feelings.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="123" template="../../../../common/maps/obj/dialog.tx" x="665.333" y="534.75" width="32" height="32" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Among the bones of countless exsanguinated victims of the Voldaren family, an artifact gleams, its abanonment a testament to the sad lie it always represented. Just a petty political tool, nothing more.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="124" template="../../../../common/maps/obj/manashards.tx" x="258" y="514.667"/>
+  <object id="125" template="../../../../common/maps/obj/gold.tx" x="415.5" y="548"/>
+  <object id="127" template="../../../../common/maps/obj/collision.tx" x="545.815" y="166.271" width="43.0363" height="70.1238"/>
+  <object id="128" template="../../../../common/maps/obj/collision.tx" x="640.542" y="67.7866" width="15.8242" height="24.9116"/>
+  <object id="129" template="../../../../common/maps/obj/collision.tx" x="337.482" y="243.938" width="172.036" height="14.1238"/>
+  <object id="130" template="../../../../common/maps/obj/collision.tx" x="335.982" y="337.938" width="172.036" height="14.1238"/>
+ </objectgroup>
+</map>

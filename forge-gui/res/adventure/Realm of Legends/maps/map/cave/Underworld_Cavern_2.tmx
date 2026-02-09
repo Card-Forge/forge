@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="105">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Underworld Dreams|THB|[121]&quot;, &quot;Underworld Sentinel&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="22017" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="23809" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="40193" source="../../../../common/maps/tileset/FarmFood.tsx"/>
+ <layer id="1" name="Background" width="30" height="60">
+  <data encoding="base64" compression="zlib">
+   eJzt0zEOgCAQRUEqEy9mye29jwUNscDuozjFtPt2Sah7KRUGzq1J92Z3k/10t5+fvnfUXvW9n/qzun/41/d2stu3010AAAC+7XjBDgCs7QKLZ34b
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="60">
+  <data encoding="base64" compression="zlib">
+   eJzlmF9OwzAMxiseUCPBgTjA/qgPnINj7DKIUbgFR2EEjkGt8Ekmc9J0tc0DkaxuD92vn2N/dbYNXbddEPspaG0W3rc2wB0cmWPfdR8/3Pfp+tr7Mmk9Td+/nJlvdz55jlM89/5cih3T61lXOZfq6qW3ra18f7107wtMcEcj3cgx9c5nVmOUb8qFhe4YEg/9Kum39pHaXluxS0zqZwqrOo9sb2mvj336zrlWdU7sI/Nm7D2vNev+KuXCo85qbM/ZgPupJ5dr1uAu8UKwNfaYPGr3mHqzpT+R7zVs+AVxD1fpWvOH3F8uzTe0gtsSfF3KjQUu3k9SaPVTFH67Nk/yd9Z/8RCu2cuv85r2mANzrVjaZ4yReQl9PoXz+cCCyc9qXvNuPs9LuZ3rOa19tMptC5czr29TaHJjOJ+taHGfsOBKs63HmVyqKw9vyrl/8f+DJRN+RN4kncWt/JfPTR71BA8u+aAmE6waT+pXzZqpLS2tLUycQ7U8X2LeF+oH/rfGA3F/7f2CNWT3eHEtZsMlerWitYa1fWluZsnZJyV+DPJ/JF7aW/a4pH1NfUP3Uu2boDfT0DPAl3AtPcsQdHp6Lh/5c2CvrbgIyWu4ZmtuZJo9ZjquC71P3Ieb3yHd+w33EkoP
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="60">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztWG1qwkAQHQs1pdBDaKT0CuJRpDfof13wLMZ8KN7Dk9Q7+MdfnalZXNMk9EfnTUJ9MGQXQl58zpuZDdEdXURh/QIGOEwvgcJgRvQww/F5JMy5MeD12AG5qhqj/uNQY8+JzC2PkHeIp//GE5BL6lZUrq0074Kvo/ZbVWHVO5B1pQpLvfuMdE2UceRrLO8n8x05Th9Y3lFCNOaIk9/dL3nVhd7xX/Bo/QJgSK22qpsWfVJmEYv5V3P2eqdbLVG+PVP9nKuNOV30tOy5Fp55BvOJV6w0tjqrWMBrbDm/ooA8CwrCs4hGLsdLhYe2YFLypXzNOPJyj/LpyPH8yhE7/XzdL67rut/3CtBeeLfBfq/ImbKmGUfufvrkzenxCqLKOtelo9XL7b7pm0GYA3+JJt8i61M4s/neruXjgvNnK55115mtKZe1e2+Yy76GiMeQ2t+/1/QDXzURS4g=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="66" template="../../../../common/maps/obj/door_up.tx" x="289.667" y="958" width="45.3333" height="16">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/cave/Underworld_Cavern_1.tmx"/>
+    <property name="teleportObjectId" value="67"/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/door_down.tx" x="195.333" y="18.3333" width="42.6667" height="16">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/cave/Underworld_Cavern_3.tmx"/>
+    <property name="teleportObjectId" value="83"/>
+   </properties>
+  </object>
+  <object id="75" template="../../../../common/maps/obj/enemy.tx" x="193" y="728">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Nykthos, Shrine to Nyx|THS&quot;, &quot;Archetype of Finality|BNG&quot;, &quot;Keepsake Gorgon|THS&quot;]}"/>
+    <property name="enemy" value="Hythonia"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/enemy.tx" x="228" y="215.333">
+   <properties>
+    <property name="enemy" value="Atris"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="77" template="../../../../common/maps/obj/manashards.tx" x="196.667" y="227.667"/>
+  <object id="85" template="../../../../common/maps/obj/dialog.tx" x="47.8182" y="832.238" width="228.364" height="20.858" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Shattered statues litter the cavern, and the gorgon ahead confirms your theory that they all were once travelers like yourself. She calls out to you, as you make sure to avert your eyes from her gaze.
+
+'Come, intruder. Stare into my eyes and take the only escape from death you will ever be offered.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="86" template="../../../../common/maps/obj/dialog.tx" x="239.818" y="265.571" width="149.697" height="20.858" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A voice rings out once more from the cave ahead, this time from a masked figure.
+
+'You've made it quite far into the underworld, traveler. The prisons of the titans and their keeper, the goddess Klothys lie ahead. You may as well keep going - she wrote your destiny long ago, and all you can do now is play your part.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="87" template="../../../../common/maps/obj/scroll.tx" x="404.5" y="512.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Field of Ruin&quot;, &quot;editions&quot;: [ &quot;THB&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="88" template="../../../../common/maps/obj/gold.tx" x="213.333" y="242.667"/>
+  <object id="89" template="../../../../common/maps/obj/dialog.tx" x="317.882" y="401.343" width="37.19" height="25.7642" rotation="270.712" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;As you head into the side passage, something unusual catches your eye - a cart which seems to have been set up as a traveling shop of sorts. From within, a voice speaks softly, though you can't see its owner.
+
+'You look like you shouldn't be here. Which means you're a perfect customer. I sell items designed to help those attempting to escape the underworld - items which help move you faster, avoid enemies, and more. The truth is, most don't work down here... but you're from the world above, so I'm sure they would be quite helpful to you.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/shop.tx" x="169" y="380.5">
+   <properties>
+    <property name="commonShopList" value="GrayMerchant"/>
+    <property name="noRestock" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/scroll.tx" x="210" y="367.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Gray Merchant of Asphodel&quot;, &quot;editions&quot;: [ &quot;THS&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/collision.tx" x="288.5" y="512.95" width="31.25" height="29.599"/>
+  <object id="93" template="../../../../common/maps/obj/collision.tx" x="399.375" y="464.701" width="31.25" height="29.599"/>
+  <object id="94" template="../../../../common/maps/obj/collision.tx" x="270.875" y="225.701" width="31.25" height="29.599"/>
+  <object id="95" template="../../../../common/maps/obj/collision.tx" x="158.375" y="146.201" width="31.25" height="29.599"/>
+  <object id="96" template="../../../../common/maps/obj/collision.tx" x="175.375" y="98.2005" width="31.25" height="29.599"/>
+  <object id="97" template="../../../../common/maps/obj/collision.tx" x="140.875" y="716.201" width="24.75" height="29.599"/>
+  <object id="98" template="../../../../common/maps/obj/collision.tx" x="189.875" y="769.201" width="17.75" height="26.599"/>
+  <object id="99" template="../../../../common/maps/obj/collision.tx" x="143.375" y="848.201" width="31.25" height="29.599"/>
+  <object id="102" template="../../../../common/maps/obj/collision.tx" x="175.625" y="866.201" width="17.75" height="26.599"/>
+  <object id="103" template="../../../../common/maps/obj/collision.tx" x="109.125" y="863.201" width="22.25" height="12.599"/>
+  <object id="104" template="../../../../common/maps/obj/collision.tx" x="92.375" y="784.201" width="22.25" height="12.599"/>
+ </objectgroup>
+</map>

@@ -111,6 +111,11 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
                             if (ForgeConstants.CLOSE_CONN_COMMAND.equals(message)) { //this message is returned via netconnectutil on exception
                                 closeConn(Forge.getLocalizer().getMessage("UnableConnectToServer", url));
                                 return;
+                            } else if (message != null && message.startsWith(ForgeConstants.CONN_ERROR_PREFIX)) {
+                                // Show detailed connection error
+                                String errorDetail = message.substring(ForgeConstants.CONN_ERROR_PREFIX.length());
+                                closeConn(errorDetail);
+                                return;
                             } else if (ForgeConstants.INVALID_HOST_COMMAND.equals(message)) {
                                 closeConn(Forge.getLocalizer().getMessage("lblDetectedInvalidHostAddress", url));
                                 return;

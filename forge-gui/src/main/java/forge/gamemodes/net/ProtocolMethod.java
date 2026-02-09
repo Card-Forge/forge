@@ -79,6 +79,7 @@ public enum ProtocolMethod {
     isUiSetToSkipPhase  (Mode.SERVER, Boolean.TYPE, PlayerView.class, PhaseType.class),
     setRememberedActions(Mode.SERVER, Void.TYPE),
     nextRememberedAction(Mode.SERVER, Void.TYPE),
+    showWaitingTimer    (Mode.SERVER, Void.TYPE, PlayerView.class, String.class),
 
     // Delta sync - Server -> Client
     applyDelta          (Mode.SERVER, Void.TYPE, DeltaPacket.class),

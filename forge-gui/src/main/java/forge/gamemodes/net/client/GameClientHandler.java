@@ -8,6 +8,7 @@ import forge.gamemodes.net.ProtocolMethod;
 import forge.gamemodes.net.ReplyPool;
 import forge.gamemodes.net.event.LoginEvent;
 import forge.gui.interfaces.IGuiGame;
+import forge.util.BuildInfo;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.PlayerZoneUpdate;
@@ -72,6 +73,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
                 }
                 break;
             case openView:
+                gui.setNetGame();
                 // Use the tracker from the existing server gameView (already initialized
                 // by ensureTrackerInitialized during the first setGameView call).
                 // No need to create a local Match/Game — the server's gameView already
@@ -173,7 +175,8 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
         ctx.channel().writeAndFlush(new LoginEvent(
                 loginName,
                 Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",")[0]),
-                Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_SLEEVES).split(",")[0])
+                Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_SLEEVES).split(",")[0]),
+                BuildInfo.getVersionString()
         ));
     }
 

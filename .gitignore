@@ -95,7 +95,5 @@ forge-gui/tools/PerSetTrackingResults
 __pycache__
 *.pyc
 
-# Ignore Claude configuration files
+# Ignore Claude configuration
 .claude
-CLAUDE.md
-

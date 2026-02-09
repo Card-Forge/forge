@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="72" height="66" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="95">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="38401" source="../../../../common/maps/tileset/dungeon/animatedtiles.tsx"/>
+ <tileset firstgid="54785" source="../../../../common/maps/tileset/buildingsbosses.tsx"/>
+ <layer id="1" name="Background" width="72" height="66">
+  <data encoding="base64" compression="zlib">
+   eJzt3M1NAzEQBeC9IMSBAwcaoAFALBIV5EoRnOiBYmgBkOiJAz2gEbJkbWJ7PPbO888gvQPKxtr5MnGyljeHi2U5WCyd5uZ5Wc7O40GfIyKudvKJZUan3yuezdYJfd5aNpQcG4kPZ0xE/am5RGKT68MdE2EjqZ3rwzHKGRPRN3v5cIxyxxvJJmUkGUvL5u5Wx2ZrVPq6aPhoutSM2WBtevXRsunRR9OGoj0v9+bTWw/9XJ6O+aTdzCYc+g61hxG6rpp5eqhr1NvcrNlHI9o4H/orsdG6DkUl18JdK1PPjNw3Ehf0eaNsXO0hm1H75FSoVn/O8R/bztWz2fg9FLKb3SYVs4nHbOIxG/MxH/MxnzZjPuHQmpD5HMe/pvhYzShkY0Zpm9mNaI5J2cxqRDa566n3K/68NZO7vhzzGWWNlfqGIll/D/l8r/8Z4T1YsleY6t+up9H/ZDPKPFW6l5rq//Li2/jHoOtE+XCDrtN8zMd82svee6LMZ2ybGffUpe4bcnt7ZrRx+XzUmVdKXWrcGyHtIYSRxIaeh9gjgzCS2KB8EEYSG6SPtpHEBu1DIR8NI4kN5fUN60PR+q7sfya9MH/fgHxS8WvhHB96LtpHkvfrdPxaOMe7cI1a9eHWKfXhGs3s44xinwOt+eTWV+qT6qOWfCS11fBxRnvc//YHarSDdA==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="72" height="66">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmstuEzEUhp12Q9VCE0RScRELKh4CicuiK1ZseQige8QteQR2rEIeA4l3ANSkCQvoErGoBEgsAIHw6cxPTjy2xzNje6akR/pVSicZ+5vj89seb68LsX2iRqm1J8TKXv3taKr6ks1AqtWVnHK02q2/vTF12JFcxgmbWz0hdpg+TIX4KHUwnf/fjd7/xen+RiIrHw0b0g/J5afUr2n2b6MCfFzysi7meXzAZmWSZdCdCdGT2ppl/zbs2mvWvY2krv05p2evUxHmPuTy3KjtfclmoOFjE/EZ5NR0YnNdXnvqdP64rYsP8sfUTxpfpCJsUIcwHj535ve88y4R2KyMs3xM4zYmH4ybUHz640VGnA/Y0DUDDR/TuCU+NC5t8slmh/FZm81VlIVOrUlSs1RGxGeY9hPXqHxs9QcRgk+L1RR+3xB8eM2C5/OaRn3BNUX4+MwTVfT9b9b19/bNxyTUH/ST2Kh8MF+noLFNgZwPWXM4H13NCc3GhQ8F5uuofTHYuPCJLWP+jBNfi8nmZTe516qDp9ct+FosNuBD+QM/aTIf+Bq197ATlw/dH4zq5mDMn9TXVN8LvQYbpkwod5rOiKTOTcnXdHNOH9LNCWMz4u0pwuhfXqW+VoWRaa9vyDjw+hyakamdZb4LvkZRhhFnbModlU9oRj75wNcQRRlxxiY2Oj4hGXnNn9TXEEX8X2VsYmNTCEYubXbOn9TX+DqySP292VtUETahGHEWVRmVXYfxPCmz1xeSkU8+JN0eGdYFeWx8yhej74b5L3iVbZfaf12tDsVGbct6un5cd9ynMeWQrzqNdqH/iJGGWyg24BHS16o+O+o/38sHnxhsOKNRAD6+xPfyR924bPizauJa7cF0cS9/1K3vWTaREfG5OpsLfEzvz0LrWgOYqHy4wMf23nsZxPfveYCP7b33MghrcBOf3WlWdbc5av6wfQ4dn7rbB/0+V1P+sH0Ovu4kX28Sn7o8Dfsc6vwZe0JiyRn1DWx8MHrx9vgzsrExMYLn5bEJwScmIxc2nBHaBM+LxediW4hXUgdnkp8X2uFrYxE2CLQJnheLz3nJY7wvxERqX2orMJ8ybDgfeJ76nTznffP5Irl8lfqW8gk1xsqyWcifyeIZU3VfLQQf/vtW+nsIRvzcWNFAe/i+s8ob18TgE4JRFT7ov3p+TY2jvSMHj/PBxzejqnxcgu7h4nGuerwpxMPN5N/089Fm9hrO6PnZrJrGBx5Xtp1lBEafOlk1jY/O4yCfY8+VUdP4qB7H5XPscd1eE+LKTM+oKXzgZ7Z3qy7zy7J8THnUBD6q15vaYBt7vviojFw+X2Vu6IvNUTssY88nH85IPU+hUyw2eXx8nGsoIjCqI8DG9T0QztMEWTtZfLEORjxvXN4D8etDrL/zfDE2oyG7V957IN35B+/54+CLMRlxPnljSq1PQfLH0RdjMRo69NHkmUHyJ8cXeY2MwQj5U5QN+Ng+S3oi16FPpZ5p1qPa/MnxRV4jeRtCBT2DsvMJfPa9QfRsL7WFeL0qxOW2/kyoTiZv3FXOp8TgEzLU8VekL7r9IOJzdzYX7nFcowofCpXR7lR/RuW4RlU+FHn7isvOh8LG6IRPEiYfqboe/QtrzqyC
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="63" template="../../../../common/maps/obj/entry_up.tx" x="509" y="1056.33" width="62" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/gate.tx" x="522.75" y="975.666" width="26.4166" height="17.6667">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;This gate is sealed by immensely powerful magic. It'll take five keys to open.&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Leave&quot; },
+    {      
+        &quot;name&quot;:&quot;Unlock with the five keys.&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Eldrazi Pentakey Shard 1&quot;}, {&quot;item&quot;:&quot;Eldrazi Pentakey Shard 2&quot;}, {&quot;item&quot;:&quot;Eldrazi Pentakey Shard 3&quot;}, {&quot;item&quot;:&quot;Eldrazi Pentakey Shard 4&quot;}, {&quot;item&quot;:&quot;Eldrazi Pentakey Shard 5&quot;}],    
+        &quot;text&quot;:&quot;As the keys are inserted, the gate is sucked into a distortion in space.&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:92}, {&quot;removeItem&quot;:&quot;Eldrazi Pentakey Shard 1&quot;}, {&quot;removeItem&quot;:&quot;Eldrazi Pentakey Shard 2&quot;}, {&quot;removeItem&quot;:&quot;Eldrazi Pentakey Shard 3&quot;}, {&quot;removeItem&quot;:&quot;Eldrazi Pentakey Shard 4&quot;}, {&quot;removeItem&quot;:&quot;Eldrazi Pentakey Shard 5&quot;}, {&quot;deleteMapObject&quot;:-1}]} ]
+    }
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/gate.tx" x="569.246" y="765.519" width="27.4583" height="16.875">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;This gate is sealed by immensely powerful magic. You'll need the Ur-Dragon's Key and all six hexkeys to open it.&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Leave&quot; },
+    {      
+        &quot;name&quot;:&quot;Unlock the gate to the portal.&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Ur-Dragon's Key&quot;}, {&quot;item&quot;:&quot;Ulalek's Hexkey&quot;}, {&quot;item&quot;:&quot;Azlask's Hexkey&quot;}, {&quot;item&quot;:&quot;Zhulodok's Hexkey&quot;}, {&quot;item&quot;:&quot;Ulamog's Hexkey&quot;}, {&quot;item&quot;:&quot;Kozilek's Hexkey&quot;}, {&quot;item&quot;:&quot;Emrakul's Hexkey&quot;}],    
+        &quot;text&quot;:&quot;As the keys are inserted, the gate is sucked into a distortion in space.&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:93}, {&quot;removeItem&quot;:&quot;Ur-Dragon's Key&quot;}, {&quot;removeItem&quot;:&quot;Ulalek's Hexkey&quot;}, {&quot;removeItem&quot;:&quot;Azlask's Hexkey&quot;}, {&quot;removeItem&quot;:&quot;Zhulodok's Hexkey&quot;}, {&quot;removeItem&quot;:&quot;Ulamog's Hexkey&quot;}, {&quot;removeItem&quot;:&quot;Kozilek's Hexkey&quot;}, {&quot;removeItem&quot;:&quot;Emrakul's Hexkey&quot;}, {&quot;deleteMapObject&quot;:-1}]} ]
+    }
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="77" template="../../../../common/maps/obj/dialog.tx" x="471.401" y="952.404" width="127.197" height="28.1913" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A massive chamber, bigger than any building you've been in before looms before you. Huge tendrils emerging from the spaces between reality itself wiggle and writge about all over, and while the place seems otherwise empty, these give indication of the horrific aberrations imprisoned herein.
+
+Your manasight stone blazes with power, near-blindingly bright.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="78" template="../../../../common/maps/obj/dialog.tx" x="545.075" y="777.799" width="76.2425" height="21.5549" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Within the colossal chamber, a much smaller building stands, a swirling portal visible through the bars of its magically secured gate. Of the many heavily warded gates you've seen so far, this one seems the most well-protected of them all.
+
+You are confident that this portal is the one you've been looking for throughout your entire quest - a way to leave this realm and return to your home.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="81" template="../../../../common/maps/obj/door_down.tx" x="918.667" y="149.75" width="42.6667" height="16">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/cave/Eldrazi_Prison_Emrakul.tmx"/>
+    <property name="teleportObjectId" value="70"/>
+   </properties>
+  </object>
+  <object id="86" template="../../../../common/maps/obj/door_down.tx" x="564.848" y="710.818" width="42.6667" height="36.7273">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/cave/Hall_of_the_Unifier.tmx"/>
+    <property name="teleportObjectId" value="70"/>
+   </properties>
+  </object>
+  <object id="87" template="../../../../common/maps/obj/door_down.tx" x="564" y="104" width="42.6667" height="16">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/cave/Eldrazi_Prison_Ulamog.tmx"/>
+    <property name="teleportObjectId" value="70"/>
+   </properties>
+  </object>
+  <object id="88" template="../../../../common/maps/obj/door_down.tx" x="1094.42" y="484.545" width="42.6667" height="16">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/cave/Eldrazi_Prison_Kozilek.tmx"/>
+    <property name="teleportObjectId" value="70"/>
+   </properties>
+  </object>
+  <object id="89" template="../../../../common/maps/obj/door_down.tx" x="838" y="980" width="42.6667" height="16">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/cave/Eldrazi_Prison_Ulalek.tmx"/>
+    <property name="teleportObjectId" value="70"/>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/door_down.tx" x="182.667" y="915.333" width="42.6667" height="16">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/cave/Eldrazi_Prison_Zhulodok.tmx"/>
+    <property name="teleportObjectId" value="70"/>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/door_down.tx" x="21.3333" y="550" width="42.6667" height="16">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/cave/Eldrazi_Prison_Azlask.tmx"/>
+    <property name="teleportObjectId" value="70"/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/treasure.tx" x="974.5" y="294.5">
+   <properties>
+    <property name="reward">[{
+        &quot;type&quot;: &quot;item&quot;,
+        &quot;count&quot;: 1,
+        &quot;itemName&quot;: &quot;Eldrazi Rune&quot;
+ }
+]
+</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
