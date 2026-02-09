@@ -18,6 +18,12 @@
       {
         "type": "card",
         "count": 1,
+        "cardName": "Black Lotus",
+        "editions": [ "LEA" ]
+      },
+      {
+        "type": "card",
+        "count": 1,
         "cardName": "Jodah, the Unifier",
         "editions": [ "DMU" ]
       },
@@ -47456,7 +47462,7 @@
      {
         "type": "card",
         "count": 1,
-        "cardName": "Commander"
+        "cardName": "Jyoti, Moag Ancient"
       },
       {
         "type": "deckCard",
