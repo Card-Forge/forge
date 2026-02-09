@@ -422,7 +422,6 @@ public final class FServerManager {
             final RemoteClient client = new RemoteClient(ctx.channel());
             clients.put(ctx.channel(), client);
             System.out.println("Client connected to server at " + ctx.channel().remoteAddress());
-            updateLobbyState();
             super.channelActive(ctx);
         }
 
@@ -437,7 +436,6 @@ public final class FServerManager {
                 } else {
                     broadcast(new MessageEvent(String.format("%s joined the lobby", username)));
                 }
-                updateLobbyState();
             } else if (msg instanceof UpdateLobbyPlayerEvent event) {
                 localLobby.applyToSlot(client.getIndex(), event);
                 if (event.getName() != null) {

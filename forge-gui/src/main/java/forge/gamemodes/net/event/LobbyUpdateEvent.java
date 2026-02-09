@@ -14,13 +14,7 @@ public class LobbyUpdateEvent implements NetEvent {
 
     @Override
     public void updateForClient(final RemoteClient client) {
-        // Only set the slot if the client has been assigned a valid slot.
-        // This prevents sending slot=0 (which is the host slot) to newly connected
-        // clients before they've been assigned their actual slot.
-        if (client.hasValidSlot()) {
-            this.slot = client.getIndex();
-        }
-        // Otherwise, slot remains UNASSIGNED_SLOT (-1) to indicate pending assignment
+        this.slot = client.hasValidSlot() ? client.getIndex() : RemoteClient.UNASSIGNED_SLOT;
     }
 
     public GameLobbyData getState() {
