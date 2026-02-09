@@ -26,10 +26,10 @@
  </layer>
  <layer id="5" name="Overlay" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AU0Ars1mJg2APEd5gRGBdo4saOyQHXgXbe0CJOLcwefSMIbWxEvr0jDYjrMDBI6CD4uOK4SQs/pgYglL5oBQbKXnqAm9oMDLe0IWxtTQYGHU3s6pDTAS72KBjc4LQ+ddURC54TaR6x6kbBKBgFo4AcAAC0zSA8
+   eJxjYBgFo2AU0Ars1mJg2APEd5gRGBdo4saOyQHXgXbe0CJOLcyeR4yo9CggDMR1GBgkdBB8XHHcpIUfUwMQSl+0AgNlLz3ATW0GhlvaELa2JgODjiZ2dcjpABd7FAxucFqfuuqIBc+JNI9YdaNgFIyCUUAOAAC11SE8
   </data>
  </layer>
- <objectgroup id="4" name="Objects" visible="0">
+ <objectgroup id="4" name="Objects">
   <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="204" y="368" width="56" height="16"/>
   <object id="41" template="../../../../common/maps/obj/shop.tx" x="159.5" y="210">
    <properties>
