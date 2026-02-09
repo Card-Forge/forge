@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="27" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="97">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="27" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="98">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -45,7 +45,7 @@
    </properties>
   </object>
   <object id="52" template="../../../../common/maps/obj/gold.tx" x="161.496" y="193.356"/>
-  <object id="57" template="../../../../common/maps/obj/enemy.tx" x="231.641" y="207.989">
+  <object id="57" template="../../../../common/maps/obj/enemy.tx" x="231.974" y="215.989">
    <properties>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Orzhova, the Church of Deals |GPT&quot;, &quot;Orzhov Guildmage|GPT&quot; ] }"/>
     <property name="enemy" value="Teysa"/>
@@ -103,13 +103,13 @@
     &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
   }
 ]</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
    </properties>
   </object>
   <object id="72" template="../../../../common/maps/obj/scroll.tx" x="302.667" y="353.667">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Orzhov Guildgate&quot;, &quot;editions&quot;: [ &quot;RNA&quot; ], &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Orzhov Charm&quot;, &quot;editions&quot;: [ &quot;GTC&quot; ], &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
   <object id="73" template="../../../../common/maps/obj/scroll.tx" x="303.333" y="274">
@@ -181,5 +181,10 @@
   <object id="94" template="../../../../common/maps/obj/collision.tx" x="288.245" y="142.988" width="46.7826" height="16.5694"/>
   <object id="95" template="../../../../common/maps/obj/collision.tx" x="271.7" y="144.624" width="15.5099" height="31.6603"/>
   <object id="96" template="../../../../common/maps/obj/collision.tx" x="272.245" y="207.352" width="15.5099" height="16.5694"/>
+  <object id="97" template="../../../../common/maps/obj/scroll.tx" x="232.333" y="199">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;godless shrine&quot;, &quot;editions&quot;: [ &quot;gpt&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

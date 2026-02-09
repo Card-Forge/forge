@@ -24,6 +24,11 @@
       {
         "type": "card",
         "count": 1,
+        "cardName": "Mana Crypt"
+      },
+      {
+        "type": "card",
+        "count": 1,
         "cardName": "Jodah, the Unifier",
         "editions": [ "DMU" ]
       },
@@ -90,47 +95,6 @@
       {
         "type": "card",
         "count": 1,
-        "cardName": "Black Lotus",
-        "editions": [ "VMA" ]
-      },
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Mox Pearl",
-        "editions": [ "VMA" ]
-      },
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Mox Sapphire",
-        "editions": [ "VMA" ]
-      },
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Mox Jet",
-        "editions": [ "VMA" ]
-      },
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Mox Ruby",
-        "editions": [ "VMA" ]
-      },
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Mox Emerald",
-        "editions": [ "VMA" ]
-      },
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Mox Opal"
-      },
-      {
-        "type": "card",
-        "count": 1,
         "cardName": "Ancestral Recall",
         "editions": [ "VMA" ]
       },
@@ -145,11 +109,6 @@
         "count": 1,
         "cardName": "Timetwister",
         "editions": [ "VMA" ]
-      },
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Mana Crypt"
       },
       {
         "type": "gold",
@@ -5137,21 +5096,20 @@
     "spawnRate": 0
   },
   {
-    "name": "Chulane",
-    "sprite": "sprites/enemy/humanoid/human/wizard/blue_wiz2.atlas",
+    "name": "Amareth",
+    "sprite": "sprites/enemy/dragon/adultgreendragon.atlas",
     "deck": [
-      "decks/legends/chulane.dck"
+      "decks/legends/amareth.dck"
     ],
     "ai": "",
     "speed": 45,
-    "scale": 1,
+    "scale": 2,
     "life": 40,
     "rewards": [
       {
         "type": "card",
         "count": 1,
-        "cardName": "Chulane, Teller of Tales",
-        "editions": [ "ELD" ]
+        "cardName": "Amareth, the Lustrous"
       },
       {
         "type": "deckCard",
@@ -5437,6 +5395,11 @@
         "editions": [ "CMD" ]
       },
       {
+        "type": "card",
+        "count": 1,
+        "cardName": "Riku of Many Paths"
+      },
+      {
         "type": "deckCard",
         "count": 4,
         "addMaxCount": 4, 
@@ -5448,7 +5411,7 @@
       {
         "type": "randomCard",
         "count": 3,
-        "addMaxCount": 6, 
+        "addMaxCount": 4, 
         "rarity": [
           "Rare",
           "Mythic Rare"
