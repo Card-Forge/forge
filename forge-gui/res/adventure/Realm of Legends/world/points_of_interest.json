@@ -1456,7 +1456,7 @@
 		"count": 5,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "ForestTown",
-		"map": "../Realm of Legends/maps/map/towns/forest_town_3.tmx.tmx",
+		"map": "../Realm of Legends/maps/map/towns/forest_town_3.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Town",
@@ -1472,7 +1472,7 @@
 		"count": 5,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "ForestTown",
-		"map": "../Realm of Legends/maps/map/towns/forest_town_4.tmx.tmx",
+		"map": "../Realm of Legends/maps/map/towns/forest_town_4.tmx",
 		"radiusFactor": 0.8
 	},
 	{
