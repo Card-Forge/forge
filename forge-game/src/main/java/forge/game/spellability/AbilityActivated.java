@@ -24,6 +24,8 @@ import forge.game.cost.CostPayment;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.FullControlFlag;
 import forge.game.staticability.StaticAbilityCantBeCast;
+import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityMode;
 
 /**
  * <p>
@@ -87,8 +89,18 @@ public abstract class AbilityActivated extends SpellAbility implements Cloneable
         }
 
         final Card c = this.getHostCard();
+        
+        boolean cantBeActivated = c.hasKeyword("CARDNAME's activated abilities can't be activated.");
+        if (!cantBeActivated) {
+            for (final StaticAbility sa : c.getStaticAbilities()) {
+                if (sa.checkConditions(StaticAbilityMode.CantBeActivated)) {
+                    cantBeActivated = true;
+                    break;
+                }
+            }
+        }
 
-        if (c.hasKeyword("CARDNAME's activated abilities can't be activated.") || this.isSuppressed()) {
+        if (cantBeActivated || this.isSuppressed()) {
             return false;
         }
 

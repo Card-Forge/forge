@@ -172,7 +172,17 @@ public class GameAction {
                 lastKnownInfo = CardCopyService.getLKICopy(c);
             }
 
-            if (!lastKnownInfo.hasKeyword("Counters remain on CARDNAME as it moves to any zone other than a player's hand or library.")) {
+            boolean retainCounters = lastKnownInfo.hasKeyword("Counters remain on CARDNAME as it moves to any zone other than a player's hand or library.");
+            if (!retainCounters) {
+                for (final StaticAbility sa : lastKnownInfo.getStaticAbilities()) {
+                    if (sa.checkConditions(StaticAbilityMode.RetainCounters)) {
+                        retainCounters = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!retainCounters) {
                 copied.clearCounters();
             }
         } else {
@@ -248,7 +258,16 @@ public class GameAction {
             }
 
             // need to copy counters when card enters another zone than hand or library
-            if (lastKnownInfo.hasKeyword("Counters remain on CARDNAME as it moves to any zone other than a player's hand or library.") &&
+            boolean retainCounters = lastKnownInfo.hasKeyword("Counters remain on CARDNAME as it moves to any zone other than a player's hand or library.");
+            if (!retainCounters) {
+                for (final StaticAbility sa : lastKnownInfo.getStaticAbilities()) {
+                    if (sa.checkConditions(StaticAbilityMode.RetainCounters)) {
+                        retainCounters = true;
+                        break;
+                    }
+                }
+            }
+            if (retainCounters &&
                     !(zoneTo.is(ZoneType.Hand) || zoneTo.is(ZoneType.Library))) {
                 copied.setCounters(Maps.newHashMap(lastKnownInfo.getCounters()));
             }

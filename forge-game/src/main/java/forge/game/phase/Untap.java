@@ -37,7 +37,9 @@ import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantPhase;
+import forge.game.staticability.StaticAbilityMode;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
@@ -90,6 +92,19 @@ public class Untap extends Phase {
 
         CardZoneTable triggerList = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
         CardCollection bounceList = CardLists.getKeyword(untapList, "During your next untap step, as you untap your permanents, return CARDNAME to its owner's hand.");
+        
+        for (final Card c : untapList) {
+            if (bounceList.contains(c)) {
+                continue;
+            }
+            for (final StaticAbility sa : c.getStaticAbilities()) {
+                if (sa.checkConditions(StaticAbilityMode.BounceAtUntap)) {
+                    bounceList.add(c);
+                    break;
+                }
+            }
+        }
+        
         for (final Card c : bounceList) {
             Card moved = game.getAction().moveToHand(c, null);
             triggerList.put(ZoneType.Battlefield, moved.getZone().getZoneType(), moved);
