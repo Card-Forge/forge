@@ -1,8 +1,12 @@
 Name:Dream Harvest
 ManaCost:5 UB UB
 Types:Sorcery
-A:SP$ DigUntil | Defined$ Opponent | Valid$ Card | FoundDestination$ Exile | RevealedDestination$ Exile | MinTotalCMC$ 5 | RememberRevealed$ True | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ Each opponent exiles cards from the top of their library until they have exiled cards with total mana value 5 or greater this way. Until end of turn, you may cast cards exiled this way without paying their mana costs.
-SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ForgetOnMoved$ Exile | RememberObjects$ Remembered | SubAbility$ DBCleanup
+A:SP$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBRepeat | StackDescription$ SpellDescription | SpellDescription$ Each opponent exiles cards from the top of their library until they have exiled cards with total mana value 5 or greater this way. Until end of turn, you may cast cards exiled this way without paying their mana costs.
+SVar:DBRepeat:DB$ Repeat | RepeatSubAbility$ DBExile | RepeatCheckSVar$ X | RepeatSVarCompare$ LT5 | MaxRepeat$ Y | SubAbility$ | SubAbility$ DBEffect
+SVar:DBExile:DB$ Dig | Defined$ Remembered | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | Imprint$ True
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ForgetOnMoved$ Exile | RememberObjects$ Imprinted | SubAbility$ DBCleanup
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | Description$ Until end of turn, you may cast cards exiled this way without paying their mana costs.
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
+SVar:X:Imprinted$CardManaCost
+SVar:Y:PlayerCountRemembered$CardsInLibrary
 Oracle:Each opponent exiles cards from the top of their library until they have exiled cards with total mana value 5 or greater this way. Until end of turn, you may cast cards exiled this way without paying their mana costs.
