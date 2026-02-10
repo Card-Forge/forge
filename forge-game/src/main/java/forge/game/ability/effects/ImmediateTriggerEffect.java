@@ -62,7 +62,10 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
             }
         }
 
-        List<GameEntity> remember = AbilityUtils.getDefinedEntities(host, sa.getParam("RememberObjects").split(" & "), sa);
+        List<GameEntity> remember = null;
+        if (sa.hasParam("RememberObjects")) {
+            remember = AbilityUtils.getDefinedEntities(host, sa.getParam("RememberObjects").split(" & "), sa);
+        }
 
         for (int i = 0; i < amt; i++) {
             final Trigger immediateTrig = TriggerHandler.parseTrigger(mapParams, host, sa.isIntrinsic(), null);
@@ -71,7 +74,7 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
                 immediateTrig.setOverridingAbility(overridingSA);
             }
 
-            if (sa.hasParam("RememberObjects")) {
+            if (remember != null) {
                 immediateTrig.addRemembered(
                         sa.hasParam("RememberEach") ? remember.get(i) : remember
                 );
