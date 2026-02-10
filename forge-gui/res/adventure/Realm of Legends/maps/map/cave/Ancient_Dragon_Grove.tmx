@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="140">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Untaidake, the Cloud Keeper&quot;, &quot;Tatsumasa, the Dragon's Fang&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon.tsx"/>
+ <tileset firstgid="16385" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="1" name="Collision" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzFVltShDAQRFl3A1+eai+i+4APrgmKnx7ITJEu2iaBoFW6VVOE7CQ9M+mecK6K4vzP1njrXVGc6r/FfXPT8z08R/e7HNS21jzV3/N3/v3mx2U9/WfzV28v3g4019AaywHjwc05pawnH2B2fnzfkSfHZ+OR9kthpva7/aC++o54dE25wqeYf+65au1j/lzbLnAMNdujiVTsTeJ9C5N5EstpCHGvxeQivAUeuKAauISYbO4UYkIM4FBKf+bTSg6GaXjQRS85wZf9sD/XZEurzCHsxetLwuf+xX6xvmC+OAfb48NNGuS4sBdrHzhcuwPhpjDBJZzTYz1j2xr7Yc+LrDE87kGIYQh84XgYz+aZG3v6C/jwWs11aolDfPYxPOZ/Dq72Uj7rtlrmoFo4V0s+5uDm1kS1wLHwPVJKTSy+ezVr22qUe88qrvZZ/M89RWsH3cOYHw+JWmm/0j7L2ttTw5TOWVOse+2dA+khFzd2RzDGKBwdIvl28syxtbuG9Yq5T/9+lBqgX46B17FvkJTFcGP30XPQ61F4lfsNhTPhNcw5YCrHkJPeObm4o1vWAn2c81TNcO9UTO2rrCnoFvNf1ZoeIg==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJyVVltuhDAMDFu2GzhOr1TBUj56jJ6rPxUp20M1FhlpYpzAfliB4Hjs8YO0vXPXKB+dcy9xbaM8/LZiX8sSv//6fA9nIWwT9mQVqdm9xW/BsA9bfFb0g8/1Szawr8/Iu4/7n90md8Mv7aPWx95q8AZesP5Fndc+t7EanGiOh26vPxTOHvlcinU0hGuCc1rDXJLfc7fHLHH89VYWy36gPON5NLiqcVyrL64T1ApzgZpuCXdWeKJz6XM7uvZ03Vp1gW+6J0Yjt5PhCwtqD3q6rlC/XNO655o+r3ep6Yk4lHcLm+PB+QftSXwz+cncNMkv9A+4wrPmroaJeL7dhsf9uKacId98Ft+t+HifMd+7/cwTXD0XBVN0uf50Xku5gq2j/hRc3UfC6yXpusTHquJgX0s9JLYhtblwS3FeEueYBXOaC2f69Blc5AC+ix7nB3V1FlPPZQsXdtk3EWAg1jN40uOB/KzlEvVj1fpi2DjCtfLNuGITcZUwOceLP4eL2VviWfelhYkZAu6OchoK807Hy3NmIhuYW+hL3fO1WS9nfpytF3z5roCc8gzFfwKrNcOs/yHPjIF0rDubni/4L14N/vheWLv7gcNn+x/C/5Bav5bycLYf9Xldj3xXYJ/4venzezJ0LP8tzuX5H2E4TtQ=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="25">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJydVVFu2zAMlRM7ln2VAcOknMB10+xj2CWGoks+eods6861oOucLj3FTjK9iIxoRXaNCniII4t85CMpN0ulmgQKgdT71yDtygnnH6w/tyLM38DJ9rn1WE/wAxucy4xSM4d26bGwfaT8FMKe16byaAe4VzbY4FzjOK8cOq2UrpX6636PDjP3/KxDLKzLDf2yfYzMpLlXtm+zc+e+GdVbj+7/nxF0Jtjn7rlwWBgfZ0M5tBSf1BfnU7474p/b8Rp1NvBeO5uVww34a59HVvvnBrUSNel0upZcL2j02/QR9wbz/nDvHhx+ilp9ZS2trwv8Sl0QE/cE22C1okdTkHWKdevIL97trc8ZvqUueMcLnGvj/cD2s71Eqo++R5rJGmwp53nd10XmCU4AtS3JlvmkRjEvarIQkDVArjvKFz0X9+F9leZl7lijRrxvabYYvVkhXuTNNZe+XrTgjWKOe4f9nfOtQ5/wQn4H7eu7t+EM9qUv7Of0rqWYP5qAWNv9QK153Vb+/oG/u+gd1lGH3tuQ1jPiGeNF3I80X0/Ux08JcG/Hi2stea8SvHyOZ+6W+ilfev/5Mg3UqzBpxLw8R78cx7sy3Jt8lyHXjOpx/QrWI/GwXvDbfQj9fOr90tdC7mWiR7So35ZqirUjjU73xUA8cxGD5P1Sed5Tz9Ie9yX2/mV+DphX9izHhnq8vPexoL/LOvy2IgbJe0e8z/pypvl+nNJX91X6Gye/aYiZORAveIs6zTu1r3Lq527kPpWabhI6yzma2lcyTplvfDcxx0EP63yq5cB8xHPCMxh/dzmmT9aDOY76UufMXOo8pC/rIu+lFM68wu6sM+01gndMZ85lO8IX87bCjnl5bye+nQcdZoK1BA/6d1H7fcz3f9NAT8k=
+  </data>
+ </layer>
+ <layer id="7" name="ClutterAbove" width="30" height="25">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF1ABL4hgYlgPxsjgIe6gBlYF2AAWA1m4/SqL4QAOYuxgN6W83KC4cB8BeEGiksr0DEX4ggC38iHELpfkAW/iRG5fUdgupeY19gOJuoOzFlz5oWU6Rkz6oUV5TO68TCwZTmUApICZdkBLOAxk2BxggWAMqRo+6uRHJ3gNUMI8YN8PUAACMDxgv
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="193.5" y="399" width="48" height="30">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/enemy.tx" x="384.873" y="280.412">
+   <properties>
+    <property name="enemy" value="Kokusho"/>
+    <property name="threatRange" type="int" value="10"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/enemy.tx" x="152.761" y="70.78">
+   <properties>
+    <property name="enemy" value="Yosei"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/enemy.tx" x="281.501" y="232.083">
+   <properties>
+    <property name="enemy" value="Keiga"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="89" template="../../../../common/maps/obj/booster.tx" x="119.268" y="70.0918">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;SOK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;SOK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;SOK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/collision.tx" x="-16" y="-16" width="512" height="16"/>
+  <object id="91" template="../../../../common/maps/obj/collision.tx" x="-32.4098" y="400.102" width="512" height="16"/>
+  <object id="92" template="../../../../common/maps/obj/collision.tx" x="-16" y="0" width="16" height="410.954"/>
+  <object id="93" template="../../../../common/maps/obj/collision.tx" x="480.265" y="-2.64674" width="16" height="418.1"/>
+  <object id="94" template="../../../../common/maps/obj/enemy.tx" x="168.146" y="232.343">
+   <properties>
+    <property name="enemy" value="Jugan"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/enemy.tx" x="208.086" y="167.178">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;That Which Was Taken|SOK&quot;, &quot;Gods' Eye, Gate to the Reikai|BOK&quot;, &quot;petalmane baku|BOK&quot;, &quot;Long-Forgotten Gohei|chk&quot;, &quot;Elder Pine of Jukai|SOK&quot;]}"/>
+    <property name="enemy" value="O-Kagachi"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="99" template="../../../../common/maps/obj/enemy.tx" x="132.088" y="330.667">
+   <properties>
+    <property name="enemy" value="Ryusei"/>
+    <property name="threatRange" type="int" value="10"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="100" template="../../../../common/maps/obj/booster.tx" x="65.1169" y="392.252">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;CHK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;CHK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;CHK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="101" template="../../../../common/maps/obj/booster.tx" x="455.284" y="279.425">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;BOK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;BOK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;BOK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="102" template="../../../../common/maps/obj/scroll.tx" x="375.261" y="63.8153">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Long-Forgotten Gohei&quot;, &quot;editions&quot;: [ &quot;chk&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="103" template="../../../../common/maps/obj/dialog.tx" x="177.333" y="306.25" width="80" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Tall stalks of bamboo line this serene grove. Ahead, you see a massive and powerful spirit dragon, clearly the guardian of this place. It is unlikely to take kindly to intruders hoping to disrupt the peace of this sacred place.
+
+Your manasight stone glows, sensing the power of the legends here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="106" template="../../../../common/maps/obj/scroll.tx" x="457.153" y="395.061">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Tatsumasa, the Dragon's Fang&quot;, &quot;editions&quot;: [ &quot;chk&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="107" template="../../../../common/maps/obj/collision.tx" x="242.667" y="240.95" width="28" height="158.767"/>
+  <object id="108" template="../../../../common/maps/obj/collision.tx" x="162.667" y="242.616" width="28" height="158.767"/>
+  <object id="109" template="../../../../common/maps/obj/collision.tx" x="178.667" y="62.6165" width="139.333" height="64.1003"/>
+  <object id="110" template="../../../../common/maps/obj/collision.tx" x="353" y="111.95" width="76.6663" height="61.4336"/>
+  <object id="111" template="../../../../common/maps/obj/collision.tx" x="33.6669" y="303.95" width="76.6663" height="61.4336"/>
+  <object id="112" template="../../../../common/maps/obj/collision.tx" x="0.333517" y="248.617" width="97.333" height="37.4336"/>
+  <object id="113" template="../../../../common/maps/obj/collision.tx" x="98.3335" y="258.283" width="41.333" height="42.4336"/>
+  <object id="114" template="../../../../common/maps/obj/collision.tx" x="62.3335" y="81.7832" width="97.333" height="28.4336"/>
+  <object id="115" template="../../../../common/maps/obj/collision.tx" x="321.334" y="208.783" width="159.833" height="41.9336"/>
+  <object id="116" template="../../../../common/maps/obj/collision.tx" x="322.084" y="288.533" width="159.833" height="41.9336"/>
+  <object id="117" template="../../../../common/maps/obj/collision.tx" x="320.584" y="343.033" width="127.333" height="39.4336"/>
+  <object id="118" template="../../../../common/maps/obj/collision.tx" x="161.333" y="129.283" width="30" height="74.9337"/>
+  <object id="119" template="../../../../common/maps/obj/collision.tx" x="249.667" y="151.2" width="30" height="29.6004"/>
+  <object id="120" template="../../../../common/maps/obj/collision.tx" x="301.667" y="160.533" width="18" height="44.2671"/>
+  <object id="121" template="../../../../common/maps/obj/collision.tx" x="465" y="144.533" width="18" height="44.2671"/>
+  <object id="122" template="../../../../common/maps/obj/collision.tx" x="462.333" y="79.1998" width="18" height="44.2671"/>
+  <object id="123" template="../../../../common/maps/obj/collision.tx" x="360.333" y="71.8665" width="30" height="29.6004"/>
+  <object id="124" template="../../../../common/maps/obj/collision.tx" x="416.333" y="55.8664" width="18" height="32.2671"/>
+  <object id="125" template="../../../../common/maps/obj/collision.tx" x="432.333" y="164.533" width="18" height="32.2671"/>
+  <object id="126" template="../../../../common/maps/obj/collision.tx" x="288.083" y="260.783" width="18" height="32.2671"/>
+  <object id="127" template="../../../../common/maps/obj/collision.tx" x="287.25" y="308.533" width="18" height="32.2671"/>
+  <object id="128" template="../../../../common/maps/obj/collision.tx" x="270.25" y="358.2" width="18" height="32.2671"/>
+  <object id="129" template="../../../../common/maps/obj/collision.tx" x="464" y="342.366" width="18" height="32.2671"/>
+  <object id="132" template="../../../../common/maps/obj/collision.tx" x="73.6667" y="165.866" width="30" height="29.6004"/>
+  <object id="133" template="../../../../common/maps/obj/collision.tx" x="40.3333" y="119.866" width="30" height="29.6004"/>
+  <object id="134" template="../../../../common/maps/obj/collision.tx" x="111.667" y="132.533" width="18" height="32.2671"/>
+  <object id="135" template="../../../../common/maps/obj/collision.tx" x="31" y="199.2" width="18" height="32.2671"/>
+  <object id="136" template="../../../../common/maps/obj/collision.tx" x="95.1818" y="37.6846" width="18" height="32.2671"/>
+  <object id="139" template="../../../../common/maps/obj/collision.tx" x="-0.5" y="126.366" width="18" height="80.7671"/>
+ </objectgroup>
+</map>

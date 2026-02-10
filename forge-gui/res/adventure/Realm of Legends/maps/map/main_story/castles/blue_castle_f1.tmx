@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="63">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Magnetic Mountain&quot;, &quot;Eyes of the Wisent&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7C+8w/VWyFLIL2kqqqqvjuO1S8b
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzjE2Bg4BvFo3gUj2IKsSMfA8MdNHwLip9A8VUo3iIAwchqHfjIs9cFqI8SIESmf2H2NvIzMDSRgJv5qWOvPJCtQAJWFBi1d9TewWevFYX2GpNZbozaS1979wLZ+7BgVRzi+6lkLy6gJIBfftRe4vBiXgaGBTjwQl6IvfPxqFnES569+LA9H8ReWzL9NFLtBQDRwJIR
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUDDYgrEtbs2lpPiG76WkPzK/ImNb2YrNnuIf3YLKXVnZjS0v0SFuEzB21l3r24jOb1mUyujvoUWbRq1wcBaNgFAx+AADWqgtB
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjBQgrIvA1AZufJTZKypAmf0XNEhTf4ZE9bjAGxLNeUEle0fB4AG0yE+jYBTQApwnsfw5R6Xy6jWJ5rwaLSeHBJjHS5n+GRTqHwXUAwDyVwus
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="51" template="../../../../../common/maps/obj/entry_up.tx" x="209" y="480">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="57" template="../../../../../common/maps/obj/enemy.tx" x="210" y="272.667">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;The formerly pristine room is scattered with blood and rubble after your sprawling battle. Your foe staggers back against a wall, your last strike finally too much for her to handle.
+
+'That was... a hell of a final battle...'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Plains|C16|[337]&quot;, &quot;Swamp|C16|[343]&quot;, &quot;Mountain|C16|[346]&quot;, &quot;Forest|C16|[349]&quot;, &quot;Dune-Brood Nephilim|GPT&quot;, &quot;Gloryscale Viashino|ARB&quot;]}"/>
+    <property name="enemy" value="Saskia"/>
+    <property name="pursueRange" type="int" value="0"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../../common/maps/obj/treasure.tx" x="200.667" y="172">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;black&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="59" template="../../../../../common/maps/obj/treasure.tx" x="262.917" y="172">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;green&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="60" template="../../../../../common/maps/obj/treasure.tx" x="232.917" y="172">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;red&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="61" template="../../../../../common/maps/obj/treasure.tx" x="170.417" y="172">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;white&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="62" template="../../../../../common/maps/obj/dialog.tx" x="133.068" y="427.238" width="167.197" height="20.858" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A single warrior stands before you, but despite her simple appearance, she radiates raw power.
+
+'Here for the key to the prison of the Ur-Dragon? Well, you won't be the first to die trying to get it. Come on, let's see what you're made of!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,0 +1,95 @@
+
+autotiles.png
+size: 192,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Colorless 
+  xy: 0, 64
+  size: 48, 64 
+Colorless_1 
+  xy: 48, 64
+  size: 48, 64 
+Colorless_2 
+  xy: 96, 64
+  size: 48, 64 
+Colorless_3 
+  xy: 144, 64
+  size: 48, 64 
+White 
+  xy: 0, 192
+  size: 48, 64 
+White_1 
+  xy: 48, 192
+  size: 48, 64 
+White_2 
+  xy: 96, 192
+  size: 48, 64 
+White_3 
+  xy: 144, 192
+  size: 48, 64 
+Red 
+  xy: 0, 128
+  size: 48, 64 
+Red_1 
+  xy: 48, 128
+  size: 48, 64 
+Red_2 
+  xy: 96, 128
+  size: 48, 64 
+Red_3 
+  xy: 144, 128
+  size: 48, 64 
+Green
+  xy: 0, 256
+  size: 48, 64
+Green_1
+  xy: 48, 256
+  size: 48, 64
+Green_2
+  rotate: false
+  xy: 96, 256
+  size: 48, 64 
+Green_3
+  rotate: false
+  xy: 144, 256
+  size: 48, 64 
+Blue
+  xy: 0, 384
+  size: 48, 64
+Blue_1
+  xy: 48, 384
+  size: 48, 64
+Blue_2
+  xy: 96, 384
+  size: 48, 64
+Blue_3
+  xy: 144, 384
+  size: 48, 64
+Black 
+  xy: 0, 320
+  size: 48, 64 
+Black_1 
+  xy: 48, 320
+  size: 48, 64 
+Black_2 
+  xy: 96, 320
+  size: 48, 64 
+Black_3 
+  xy: 144, 320
+  size: 48, 64 
+Base 
+  xy: 0, 0
+  size: 48, 64 
+Base_1 
+  xy: 48, 0
+  size: 48, 64 
+Base_2 
+  xy: 96, 0
+  size: 48, 64 
+Base_3 
+  xy: 144, 0
+  size: 48, 64 
+Road 
+  xy: 96, 512
+  size: 48, 64 

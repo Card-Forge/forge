@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="29" height="34" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="78">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;The Hunter Maze&quot;, &quot;Blightwidow&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/phyrexia/Copperhost_Tiles.tsx"/>
+ <layer id="6" name="Collision" width="29" height="34">
+  <data encoding="base64" compression="zlib">
+   eJztlksOgzAMRLPpsrkMlJ60cC7gQlUWkSw3dhw8gCplJK8CeRr/lBC6kj7P65lDDGEzxivimFahmCvzMpF73+xsBzG5qG+Ur1rPnMG09EwWqqeoj+R5boyF5OkIs6VnSxwUc6jkzsvkc0JnQjvzMKV6ppppZx6mlFvtzjPquQp5RDGlmmlxtJ6W2bPIyhyjHKU7tO/HBp+WvGX13ff/uy/ryt2Xdcfumx+/0XefjemVlVnyNlX+5e9cxHu35h315uxMP/MLiOKyFQ==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="29" height="34">
+  <data encoding="base64" compression="zlib">
+   eJztzTENAAAIBLFXhEecM6KAhfSSm5tI0tZ1P5PJZDKZTCaT+dkc0SKrTw==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="29" height="34">
+  <data encoding="base64" compression="zlib">
+   eJztk0EOgCAMBLma+BafwVv8hj/3DlJa2LI2ocmeiB2Y1nyklHdoeS5dojNbd2C4js7Uzg85XzZzxhHyO81ZNLd/mae3W8YOrXTbKzSzlS8mom/Ze/SN1vtoypPJ2FvpHMlkue39L55Myd991vFieuyf5Lb0JxV6npqyOrLs8mzvzYzNfAHr9F3H
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="29" height="34">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztV01PwzAM7S/Kv5yEujEmqk5oGhsc9qEdGIhD22mHHeDAAQ5cy4CfQiw9a66XTk0JNyxZaecmjt+znSyK/oXk3ERR3+oZxn7NO+mFCeNzYNcprS5OrLeD7SqQzyHWyezYFTq3eg2d4JvLQD6ndp0bqyOMK6sx/CzxG9tvf+Gzc2IuxZ0ExlLnjMwVet4KnxuHXT43zalhzXex4HGN572p2ntqblMc2OdM5UyB/KUxE/kj82iMPXWR501zin2OsW+ZJ6RvVr+gr8q2Erinxj9OEpq/UVwRn1SPHXPM57alz4E5cHev5jDea2BXKix5n23i5Hl3Dk55XbblyCXmmPY5A78+fMq9aj5XWL+osaWwLzyxzbD31MHns8ihJ3Ncu2lLbJknrkOtc/G8AJZcM4xt0aJW3k21r8v6z4TvXPDMNn5vGuejwE7qt2M+4fdZ8z3pgwefJDHikP0sNlWMXdjLc9a3J1DuEr5jc3xOsugzVdd0Gz5JqB747GzS+7hue561QjLDnut6Hwnb9DlXYq4PttxHkpo5Em+tjG2o3qfzhOL5gO6FLx59e98Oo6u/1XHNva9NnBnqoHDwqXtfqLOMMMsdmOq7h+s+kphD72tzZkspETvzxvdNnU+yFzblc6o4GoEnkheRW5SfHOfSVO/AIe67A+CVI5Y1NDF+vPn6lLWqfYb6zyBlqHjLhU7+MM5T4hvnD0fAb1k=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="160" y="546.582" width="112" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="100.532" y="326.928">
+   <properties>
+    <property name="enemy" value="Glissa"/>
+    <property name="threatRange" value="30"/>
+    <property name="waypoints" value="57,62,60,58,57,61,59,58"/>
+   </properties>
+  </object>
+  <object id="54" template="../../../../common/maps/obj/gold.tx" x="223.441" y="366.796"/>
+  <object id="55" template="../../../../common/maps/obj/gold.tx" x="207" y="239.5"/>
+  <object id="56" template="../../../../common/maps/obj/booster.tx" x="144.5" y="79">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;colors&quot;: [ &quot;green&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;colors&quot;: [ &quot;green&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;colors&quot;: [ &quot;green&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/enemy.tx" x="322.667" y="453.667">
+   <properties>
+    <property name="enemy" value="Vexyr"/>
+    <property name="threatRange" value="30"/>
+    <property name="waypoints" value="60,58,57,62,60,58,57,62,60,59,61,62"/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/enemy.tx" x="108.333" y="280">
+   <properties>
+    <property name="enemy" value="Zopandrel"/>
+    <property name="threatRange" value="30"/>
+    <property name="waypoints" value="66,68,65,63,66,67,64,63"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/enemy.tx" x="338.666" y="164.333">
+   <properties>
+    <property name="enemy" value="Rothga"/>
+    <property name="threatRange" value="30"/>
+    <property name="waypoints" value="68,65,63,66,68,65,63,66,68,65,64,67"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/enemy.tx" x="215.667" y="99">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Shrine of Boundless Growth|NPH&quot;, &quot;Maze Skullbomb|ONE&quot;, &quot;Death-Hood Cobra|NPH&quot;, &quot;Rotted Hystrix|NPH&quot; ] }"/>
+    <property name="enemy" value="Vorinclex"/>
+    <property name="threatRange" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="75" template="../../../../common/maps/obj/dialog.tx" x="139.991" y="476.345" width="154.307" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The copper walls ahead shudder and move as if alive. You recall hearing this place called a maze, and though it seems rather straightforward, you feel a distinct sense of being hunted.
+
+Your manasight stone glows, sensing the power of the legends here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/dialog.tx" x="193.846" y="120.917" width="58.6403" height="15.1667" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A massive, horrific monster lurks ahead, clearly the apex predator of this cursed place. In a voice like a roar, it addresses you.
+
+'Domination by the strongest. That is all that matters. Come, fall before my might.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="77" template="../../../../common/maps/obj/booster.tx" x="288" y="77">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;colors&quot;: [ &quot;green&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;colors&quot;: [ &quot;green&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;colors&quot;: [ &quot;green&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="7" name="Waypoints">
+  <object id="57" template="../../../../common/maps/obj/waypoint.tx" x="88.5" y="327.167"/>
+  <object id="58" template="../../../../common/maps/obj/waypoint.tx" x="343.667" y="327"/>
+  <object id="59" template="../../../../common/maps/obj/waypoint.tx" x="344" y="390.333"/>
+  <object id="60" template="../../../../common/maps/obj/waypoint.tx" x="343.333" y="452.667"/>
+  <object id="61" template="../../../../common/maps/obj/waypoint.tx" x="91" y="391.667"/>
+  <object id="62" template="../../../../common/maps/obj/waypoint.tx" x="88.3333" y="457"/>
+  <object id="63" template="../../../../common/maps/obj/waypoint.tx" x="89" y="278.667"/>
+  <object id="64" template="../../../../common/maps/obj/waypoint.tx" x="90" y="215.667"/>
+  <object id="65" template="../../../../common/maps/obj/waypoint.tx" x="89.6667" y="151.667"/>
+  <object id="66" template="../../../../common/maps/obj/waypoint.tx" x="343.667" y="279"/>
+  <object id="67" template="../../../../common/maps/obj/waypoint.tx" x="343.333" y="213.667"/>
+  <object id="68" template="../../../../common/maps/obj/waypoint.tx" x="341" y="152"/>
+ </objectgroup>
+</map>

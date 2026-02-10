@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="89">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Karn's Bastion&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzFldENAiEMhvFZzgWIU3g6zN0sOoeOItElHMFJPKJ/wjXttcWH+xMegMLXljaEsJ7GLoQc9TF0X9t+xw/s12fKvKxz2ke7j8VW4iZyj7ROudfJr9dkd6ti8iiR/Fi5xx/nwMSiaclO456qcxJXepMl7kM483S+L/TezPfuVY4h1CMnWoMDU9+w8dQgpOWZ8zuTGDxcra7q2msRzTfmGnds7BurrHmG/q1nxO3ltvrYM/3IqfTRZWsb4J6FfXDonJPlT0B/gZui/T/JjnxySnHObenltbkf1ltVDg==
+  </data>
+ </layer>
+ <layer id="7" name="Floor" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxTZWdgUB1API8TN6a1vYTYw83e0XAevuE8ikfxKB7FxGIAZfNnhA==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzbwcPAsIMOWAYNg8QuM9EeY7PXDChOLMCn1gSHnAkV7MUHhqO9AxXO+NReQkpHMIAvXZGSLsmNE1r6l5b2kgNonZ5paS85bhxs9k5nJB7L8kDMmkaCHhDGZi8pdQrMvzA/kFsn0cvegfIvur0AFC+Ruw==
+  </data>
+ </layer>
+ <layer id="8" name="Walls Supplementary" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBg4YMZEHbUmOORwiQ80kGdnYFACYgV2+tq7H2jfASA+SGd79wLti+NgYNhHZ3tpBXClK1LSMzXtpTUYrPloFNAWUKt8xgVG09XAAQDw5AcX
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBg6IFCDgSEIiNuBuANEawFpLcrMPKJBWE0uUE0eEC8G4iUgGmjnEqi9JZoMDA/VGRgeqZPnnhWaEFwLNLcOi1seMWJnWwL1/AXa+U8d1T3EgstA/VeAeCbQzlk47IXZB6JhYU8peA+08wMQBwHxGzz2wjAs7GkJkP2J7G9aA2z2YnMDqW66CAzbS5qYNLp5hHAjMNybCIT9bKC5czTxqyHV3rlAO+cRsHc70M4dVLaX3LgHpeMVRKbnVqCaNg2EHLoaXKCYSL+i2/1ZB0IvBNq5SAORj2H2UStf43MDtnxMj3xNaxA30A6gAAAAoO9yLA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="270.665" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="112.181" y="166.351">
+   <properties>
+    <property name="enemy" value="Liberator"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="86,87"/>
+   </properties>
+  </object>
+  <object id="62" template="../../../../common/maps/obj/gold.tx" x="21.1853" y="40.0443"/>
+  <object id="65" template="../../../../common/maps/obj/gold.tx" x="53.724" y="210.029"/>
+  <object id="66" template="../../../../common/maps/obj/gold.tx" x="25.3334" y="144"/>
+  <object id="67" template="../../../../common/maps/obj/enemy.tx" x="258.671" y="154.858">
+   <properties>
+    <property name="enemy" value="Traxos"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="78,79,85,92"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/enemy.tx" x="183.178" y="72.0046">
+   <properties>
+    <property name="enemy" value="The Peregrine Dynamo"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/enemy.tx" x="360.086" y="110.375">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Karn, Silver Golem|USG&quot;, &quot;Silverskin Armor|MBS&quot;]}"/>
+    <property name="enemy" value="Karn"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/gold.tx" x="392.167" y="85.8333"/>
+  <object id="74" template="../../../../common/maps/obj/booster.tx" x="27.5" y="107.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;DMU&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DMU&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DMU&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="75" template="../../obj/treasure.tx" x="324" y="85.5">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;cardTypes&quot;: [&quot;Artifact&quot;]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
+  &quot;cardTypes&quot;: [&quot;Artifact&quot;]
+}]</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/manashards.tx" x="359.333" y="220"/>
+  <object id="78" template="../../../../common/maps/obj/waypoint.tx" x="219.833" y="188.167"/>
+  <object id="79" template="../../../../common/maps/obj/waypoint.tx" x="223.333" y="104.5"/>
+  <object id="82" template="../../../../common/maps/obj/waypoint.tx" x="342.333" y="188"/>
+  <object id="85" template="../../../../common/maps/obj/waypoint.tx" x="309" y="123"/>
+  <object id="86" template="../../../../common/maps/obj/waypoint.tx" x="171" y="168.5"/>
+  <object id="87" template="../../../../common/maps/obj/waypoint.tx" x="68.5" y="165.5"/>
+  <object id="88" template="../../../../common/maps/obj/dialog.tx" x="186.417" y="226.75" width="64.167" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The factory ahead of you is abuzz with activity, golems bustling about fabricating all manner of strange devices.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="36" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="115">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Tendril of the Mycotyrant&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="22017" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="7" name="Clutter" width="36" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1LENACAIAEEncCT3H8tSGylMjETvEmqehlLgP62OySDqudGarSdysuenW3dk6+FtfmG+nnkvAADASgdepg0R
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="36" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztzrENwCAQBMELLMAZFVEW3RjZlQLJl2Dxgg0mn3pLFQAAAL/pQVJc/7DLOy+fg49dvHye6Otjp5Kk5uQDAAD2ceX1B5xhAPGOzKg=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="36" height="40">
+  <data encoding="base64" compression="zlib">
+   eJy1WE1z00AMzQEOidMEdz3DDyoOxSX0mMLkwI1f1rpNHUyPBdo7PyilcGI10RsrimS700EzO/la776Vnp60GQz+jxXZYHASx/s4qjAYrOP4Gvz3ozimYX+dCX+fGL95lsa5h3GE0Lyn9V+FfWze+xMe0obx+XEc13G8y7br97F5nLuKcw/iOI7vP4jPhwKXts+vm6ENWC55nTdxzZsn+CiP8y/i/KNs61/gwnd9/H07at6X7Bd6/jw0fuyzxvc4foy2mGaM4YBjdix8RX665bnwgfTdMtm+puwbOseY+eXt/SdpBuH4G1/P4nhMmn3mzIUVrwlM5O+FmFsJnGQLxlPHz984VuQj7Rf4AHt741Oy+5zkFZ3zKo5NnHM/2s4t+PcrBw9heWtg6cLh4SErhK9uQrPeR55bhoaniBee0ViAuQ8WHTNtOa9P/nmI4zfvXQl+EJ4u3j8Fz5k4d18rBYcIj+STZYh3Hyw/R825LZsYe0EnwK1V6NaZvj565LyzYgZ9s3JXcqjsoVfLJ8TL81Gt8gV1acTaixwrhH55cevrHw9Lavim5FpKGGXOk+VKQ6X1zXcPy5DPT5p/KvK3EBoATgcDk45v31hZ2gPOnBsaS1YznjnHSO9dq++eq4Ula/6VwwPgseKJ549En7FU8XhoyX1Ld+YtOksGLQTXtQ/n2W7+L4z9FgLfHWO869Adz2o+v8wvGPLvWJxH7o39tN63WRrae7qS66bm18Th3eYZZwcnPO6QIR56Tt2SA7BhaHpu2RtbJs932rIm9pb1Afrg9WCYg/XRG1PcLUypoTcpnwF9vtYZibnkfbwcwFmh9UPmmKUXOO81YxmyP8eCJ131smz5Xd83qMahxxw7z1Xi+4pxrFmH0A9LvugeOM92axzqaqqw4L5RiPuM9g/wY7+c587UIJ4Ch9ZbGRfJI9Q73H10L1s7eYFYdRl0A/pKmnIv+hTZD8i7GH03U5xDDuh4aYzwgdfDAhc0ZSP8k7MfsZfX35NVTi5LLqL29ekZpy36UXCMLX6QebUPeOTdpa0fmnL+W1zwcFlzoA9t/QPZxqgpE9Yf5D/ufLI/TQ1fyTuwNsRVG3TK0gCpQ2ulAZoXVdjvn3GnoP7cw6WtDLbfodfoTS8Yy5r9PFPnQ2+me1XwHrgkJst/peIUOAIs50LHrJyVljuYJC7JBfhP9mDaz8jBldCxseFD62yoSV5Pb9kysf/TgO/pM/wBjsyyfSyWJqBPQ530ajcZ8Zbqs+RY251d37u6sJBVzHXZ65OO4L/AaWh6BNTTJOz+d0L268XW96iN6Jlkrsj/biQW6CKZ7jnmzLWcYyD9LPkPP2HNLy+3NQnDul9sxO86Rpc8z9M+z4psnwvAIy135rWt+Q+U3rUI
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="36" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmEtOwzAURT0shI6oxApYCrAO5kmUFkhbVRXsBsqOYBXpP1FUiWuhqC8mL3YTm3bQI10p/dk3fh+7EUKIb1Gmc71XEggxhxYBf0157ZZffwl7SD9RKEQfGoT8tW6MQ3nr8p8lmG8OLUL+2oQmvuoo4nB1+6umyHtX86Mt0s8GebOF0kD/fRdEPvIFGkBjxCiGhtDIMF62SeBjDi2gDB420BZKpTe8N4RGftm3SyLEpQ8NlPjkmHcDbaHUL/t2yZiJywT+YmgIjQLed1OWGGcFrZXxMk2e5Mp60Dp8vGnu5wnzPkMvyvxTjZ9JxXrU9QXTvr3EvCtoHZbvcafxk1XkS5s+xVGMOdH4Gf9DH6L7SK7xszOsJ8/DPXrNPRVw9VUwDf7mdBUzePm04IerL9r/qnLaBWoPiPv7z1z0v7rzhoTrARLb/Y+D1irtATro+bA4Y55xy6HnN9vnPUrb86gLmvjR1eiZM6bI82AhFV29qP+367BVd6dWvxzq3qLrazafVVRhutfV9RabvflU9t4L+LiEvCP6oR7eoQ9odkQ/1MNdT4h76KFn/nvbeUI90LU6pP+0hc577Hh1lHnbxsuEuv4k40Dn5eLF5YXtMx99hqyKrtUPbQKt3Q==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="268" y="638" width="90.5" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="53" template="../../../../common/maps/obj/enemy.tx" x="221.771" y="197.194" width="16" height="17.6724">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Synapse Necromage|LCI&quot;, &quot;Deathspore Thallid|TSP&quot;]}"/>
+    <property name="enemy" value="The Mycotyrant"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/collision.tx" x="-2.51" y="-16.5" width="803.52" height="16"/>
+  <object id="70" template="../../../../common/maps/obj/collision.tx" x="-4.76" y="639.5" width="803.52" height="16"/>
+  <object id="73" template="../../../../common/maps/obj/collision.tx" x="576.173" y="-7.4655" width="15.6533" height="681.931"/>
+  <object id="76" template="../../../../common/maps/obj/manashards.tx" x="193" y="428.5"/>
+  <object id="77" template="../../../../common/maps/obj/enemy.tx" x="474.833" y="352.497" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Akawalli"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="81" template="../../../../common/maps/obj/gold.tx" x="2" y="28.5"/>
+  <object id="82" template="../../../../common/maps/obj/enemy.tx" x="176.833" y="458.164" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="The Necrobloom"/>
+    <property name="hidden" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="84" template="../../../../common/maps/obj/enemy.tx" x="499" y="57.9973" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Thelon"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/enemy.tx" x="357.833" y="437.664" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Ghave"/>
+    <property name="hidden" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/collision.tx" x="-17.8267" y="-28.9655" width="15.6533" height="681.931"/>
+  <object id="95" template="../../../../common/maps/obj/manashards.tx" x="351.5" y="408"/>
+  <object id="96" template="../../../../common/maps/obj/enemy.tx" x="16.5" y="157.664" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Xavier Sal"/>
+    <property name="hidden" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="98" template="../../../../common/maps/obj/manashards.tx" x="481" y="261.5"/>
+  <object id="99" template="../../obj/treasure.tx" x="223.333" y="152">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardText&quot;: &quot;saproling&quot;
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="100" template="../../../../common/maps/obj/gold.tx" x="554" y="107.333"/>
+  <object id="101" template="../../../../common/maps/obj/dialog.tx" x="202.75" y="586" width="182.5" height="9.25" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The overwhelming but not entirely unpleasant smell of mushrooms assaults your nostrils as you step into the forest of fungi ahead. The soft, spongey ground is uncomfortable beneath your feet, and you are certain that all sorts of dangerous things must grow here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="102" template="../../../../common/maps/obj/dialog.tx" x="184.084" y="276.917" width="86.4997" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The massive mushroom creature before you seems to have a dark sentience behind its eyes. Indeed, you feel an unpleasant telepathic intrusion on your mind as you approach.
+
+'Come, fleshling. Be consumed by the spores. Join the grand mycelium network.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="103" template="../../../../common/maps/obj/collision.tx" x="288.526" y="152.942" width="14.0363" height="99.4571"/>
+  <object id="104" template="../../../../common/maps/obj/collision.tx" x="160.482" y="131.771" width="14.0363" height="122.457"/>
+  <object id="105" template="../../../../common/maps/obj/collision.tx" x="148.482" y="258.771" width="43.0363" height="48.9571"/>
+  <object id="106" template="../../../../common/maps/obj/collision.tx" x="258.482" y="245.521" width="43.0363" height="48.9571"/>
+  <object id="107" template="../../../../common/maps/obj/collision.tx" x="274.982" y="100.521" width="89.5363" height="48.9571"/>
+  <object id="108" template="../../../../common/maps/obj/collision.tx" x="161.482" y="86.5215" width="43.0363" height="48.9571"/>
+  <object id="109" template="../../../../common/maps/obj/collision.tx" x="223.982" y="64.0215" width="43.0363" height="48.9571"/>
+  <object id="110" template="../../../../common/maps/obj/collision.tx" x="129.482" y="3.52145" width="143.036" height="48.9571"/>
+  <object id="111" template="../../../../common/maps/obj/collision.tx" x="66.4819" y="145.021" width="43.0363" height="48.9571"/>
+  <object id="112" template="../../../../common/maps/obj/collision.tx" x="207.482" y="86.1124" width="14.5363" height="26.0935"/>
+  <object id="113" template="../../../../common/maps/obj/collision.tx" x="257.232" y="117.271" width="14.5363" height="27.1844"/>
+  <object id="114" template="../../../../common/maps/obj/collision.tx" x="307.649" y="229.605" width="14.0363" height="26.7904"/>
+ </objectgroup>
+</map>

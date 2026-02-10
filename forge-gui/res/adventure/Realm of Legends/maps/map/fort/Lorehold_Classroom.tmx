@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="18" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="91">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Lorehold Campus&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="6" name="Collision" width="30" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAPonkZGB4xkoajeAkYSgQg1U4YHrV31F5i7HXjZGDYwwyhkc2H8ZHFM7iHh3/R/YVPnN7+BcXFSPLvULcXVC/s4oGYBaKjkOoJUFwiyyOroRTI8qD6QxqNjy4PUzOU7QWVP8hmwvIKLe3dS8C/IPk6blS8hwh7AWYnyIU=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxbIcXAsAIPzuBmYPjFBaGfsBPPx2cmMZgcO0E0pfaSYyeIT6m95NhJLf+Oxu9o/I7GL+XxO5cFYiaIBvFBAJmPLg+iKbUXm5nE8KkRv6TaSS3/kmonreKXGP5o/KJiAMvKlQE=
+  </data>
+ </layer>
+ <layer id="2" name="Ground and Walls" width="30" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAPODkZGLiAWFUFgUF8BR4IRhaHyXFzEjCUCLAcasZhFQR+xIiQRxYHYRBYSUV7kQHI3i4zBoaTEhAaHdDKXk5TYHgCMbcpfe3tBNkHxN2mCDFk+2llLyEwau+ovUPJ3gzugbGXEKCGvbB6AQRgZf5FfuzyyGooBej+XYlmL7bwoEU4D3d7XbkYGNyQsDsXqr3o8jA1hAAAF2gzaA==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="18">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy9lbEKwkAMhqOD4KxIddRWTsHVyVXaPobga7iJg0/grkjfw0kHfQdHfYiacA09z2JbGv0g5Li75ie5kgB8R/kAVwXguamZmPtkN7zr+DlBCxBhjAfGOgYAJ1ebCe/t8fyA9sS7OwFdoh8CDMP3vYUHcHa0JwZ47qKp8PP7qqwGqRHbqTaTjVCubT/VID32DOva+iLaE11P0mPPcJ3Ztyay2nGiF1u6sffuiU5QXa850292rxXLVxKKWSZfKez3NXPLet+1wD/dSN7q3/lSz6PeVxTqqUogX+p5zxK61FMjod7Bs8CeCcyym72uCs8CeyYw9V72ugrzknEujowukVfnX+nm1Vmh1ght7Oh1EV5mtUt6
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="207.09" y="288.3" width="51" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="161.006" y="191.459">
+   <properties>
+    <property name="enemy" value="Alibou"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="52" template="../../../../common/maps/obj/gold.tx" x="270.167" y="270.5"/>
+  <object id="53" template="../../../../common/maps/obj/enemy.tx" x="223.16" y="41.762">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Access Tunnel|STX&quot;, &quot;Lorehold Apprentice|STX&quot;]}"/>
+    <property name="enemy" value="Velomachus"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Lorehold Key&quot;
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="57" template="../../../../common/maps/obj/booster.tx" x="294.308" y="269.487">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;STX&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;STX&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;STX&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/manashards.tx" x="317.975" y="272.958"/>
+  <object id="59" template="../../../../common/maps/obj/enemy.tx" x="254.878" y="125.935">
+   <properties>
+    <property name="enemy" value="Plargg"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="60" template="../../../../common/maps/obj/enemy.tx" x="191.392" y="125.555">
+   <properties>
+    <property name="enemy" value="Osgir"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="61" template="../../../../common/maps/obj/enemy.tx" x="288.444" y="192.133">
+   <properties>
+    <property name="enemy" value="Quintorius"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="66" template="../../../../common/maps/obj/dialog.tx" x="190.333" y="219.583" width="80" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The classrom ahead of you feels unusually old and dusty for a place that clearly sees a lot of use. At the class's front, a dragon pauses its lecture and gives you a derisive glare.
+
+'Lorehold isn't accepting new students at the moment. Leave now, or you'll be nothing but another failure lost to history.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/gate.tx" gid="1073745949" x="287.471" y="216.97" width="34.1665" height="20.1818" rotation="0">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;This gate is locked.&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Leave&quot; },
+    {      
+        &quot;name&quot;:&quot;Unlock with Lorehold Key&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Lorehold Key&quot;}],    
+        &quot;text&quot;:&quot;The gate swings open.&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:69}, {&quot;removeItem&quot;:&quot;Lorehold Key&quot;}, {&quot;deleteMapObject&quot;:-1}]} ]
+    }
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/scroll.tx" x="159.163" y="248.676">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Furycalm Snarl&quot;, &quot;editions&quot;: [ &quot;STX&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/collision.tx" x="256.469" y="0.961627" width="63.2019" height="23.85"/>
+  <object id="71" template="../../../../common/maps/obj/collision.tx" x="143.442" y="0.424684" width="63.2019" height="23.85"/>
+  <object id="72" template="../../../../common/maps/obj/collision.tx" x="207.876" y="48.7495" width="47.6306" height="31.3672"/>
+  <object id="73" template="../../../../common/maps/obj/collision.tx" x="287.732" y="25.075" width="33.5352" height="17.5167"/>
+  <object id="74" template="../../../../common/maps/obj/collision.tx" x="319.899" y="1.90832" width="16.2019" height="60.5167"/>
+  <object id="75" template="../../../../common/maps/obj/collision.tx" x="336.899" y="2.74165" width="16.2019" height="26.85"/>
+  <object id="76" template="../../../../common/maps/obj/collision.tx" x="144.232" y="31.4083" width="16.2019" height="18.1834"/>
+  <object id="77" template="../../../../common/maps/obj/collision.tx" x="161.232" y="22.575" width="16.2019" height="18.1834"/>
+  <object id="78" template="../../../../common/maps/obj/collision.tx" x="128.899" y="12.575" width="16.2019" height="18.1834"/>
+  <object id="79" template="../../../../common/maps/obj/collision.tx" x="127.232" y="64.2416" width="12.8686" height="15.1834"/>
+  <object id="80" template="../../../../common/maps/obj/collision.tx" x="144.566" y="112.908" width="12.8686" height="12.1834"/>
+  <object id="81" template="../../../../common/maps/obj/collision.tx" x="142.232" y="177.575" width="16.2019" height="30.1834"/>
+  <object id="82" template="../../../../common/maps/obj/collision.tx" x="320.232" y="177.242" width="29.8686" height="30.1834"/>
+  <object id="83" template="../../../../common/maps/obj/collision.tx" x="334.899" y="144.242" width="16.2019" height="15.1834"/>
+  <object id="84" template="../../../../common/maps/obj/collision.tx" x="336.232" y="99.2416" width="16.2019" height="10.8501"/>
+  <object id="85" template="../../../../common/maps/obj/collision.tx" x="143.899" y="208.242" width="16.2019" height="22.1834"/>
+  <object id="86" template="../../../../common/maps/obj/collision.tx" x="175.566" y="208.908" width="16.2019" height="22.1834"/>
+  <object id="87" template="../../../../common/maps/obj/collision.tx" x="176.232" y="255.908" width="16.2019" height="22.1834"/>
+  <object id="88" template="../../../../common/maps/obj/collision.tx" x="142.899" y="256.908" width="16.2019" height="22.1834"/>
+  <object id="89" template="../../../../common/maps/obj/collision.tx" x="271.899" y="216.908" width="16.2019" height="22.1834"/>
+  <object id="90" template="../../../../common/maps/obj/collision.tx" x="319.232" y="216.242" width="16.2019" height="22.1834"/>
+ </objectgroup>
+</map>

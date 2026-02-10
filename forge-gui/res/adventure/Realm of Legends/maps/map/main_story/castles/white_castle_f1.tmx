@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="61">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Gloom&quot;, &quot;Havoc&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7C+8w/VWyFLIL2kqqqqvjuO1S8b
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJyz5GNgsBzFo3gUj2IKsQ0Q3wLim1joG0AMAtdwyINoazLttYKajQz0dTHFcIlbUGhvIz8DQxMJuJmfOvbKCzAwKJCAFQVG7R21d9TeUXsHxt69QHP2YcGqOMT3U8leXEBJAL/8qL3E4Xm8DAyzceA5vBB7Z+FRM5eXPHsJhQXIXnL9NFLtBQAU5PA2
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztzkENACAMBMFqqA+CVxTzx8A1YcbAbhXwk9OZZqL72it9AAAwywUtFwJJ
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjBQwSQiBqQ0EBRgY7vCh4vUCEPyQD4KvQvEWAQhGVisqQJ69/FB9ZzUIq9XXRbDPQNULUWjvSyLsRQYvqGQvuWDU3lF7B5O9LnyU2WtMpv6Rau8FEsurcxrUsfcNifa+opK95IJRe4kDK3gZGBbgwAt5IWrm41Ezg5cyd2MD9lC/2FIYJiPNXgDnfSr1
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="51" template="../../../../../common/maps/obj/entry_up.tx" x="209" y="480">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="55" template="../../../../../common/maps/obj/dialog.tx" x="134.24" y="430.542" width="167.197" height="20.858" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A four-armed ogre stands before you, each hand blazing with a different color of mana.
+
+'You think you can take my key?! You're far too weak to face the Ur-Dragon! DIE!!!!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="56" template="../../../../../common/maps/obj/enemy.tx" x="209.838" y="271.105">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;As you land your final blow, Yidris begins to glow in with a pulsing radiant light. Seconds later, he is ripped apart from the inside by a chaotic explosion of magical energy. You manage to shield yourself from the worst of it, but you have discovered that the inside of an ogre smells even worse than the outside.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Swamp|C16|[344]&quot;, &quot;Forest|C16|[350]&quot;, &quot;Island|C16|[341]&quot;, &quot;Mountain|C16|[347]&quot;, &quot;Glint-Eye Nephilim|GPT&quot;, &quot;Audacious Knuckleblade|YTDM&quot;]}"/>
+    <property name="enemy" value="Yidris"/>
+    <property name="pursueRange" type="int" value="0"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="57" template="../../../../../common/maps/obj/treasure.tx" x="263.762" y="172.31">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;green&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="58" template="../../../../../common/maps/obj/treasure.tx" x="233.762" y="172.31">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;red&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="59" template="../../../../../common/maps/obj/treasure.tx" x="201.262" y="172.31">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;black&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="60" template="../../../../../common/maps/obj/treasure.tx" x="168.171" y="172.31">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;blue&quot; ]
+}]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

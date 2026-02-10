@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="18" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="85">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Silverquill campus&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="6" name="Collision" width="30" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAPonkZGKR5GBh2IeEoXog4jN6FRZ5SIMsDMfsRI3E4CupOathLrJ0wPGov7e014aeuvW6cqDQMYxMfDuE86t/h6d+9ZNi7hwr2wsp9kHmwMh/ZDmR5ZDWUAvRwlkbjY4sHWsTvYLV3DzP10lUdNwLvQbMHXR6mhhAAALP0tBE=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxbIcXAsAIPzuBmYPjFBaGfsBPPx2cmMZgcO0E0pfaSYyeIT6m95NhJLf+Oxu9o/I7GL+XxO5cFYiaIBvFBAJmPLg+iKbUXm5nE8KkRv6TaSS3/kmonreKXGP5o/KJiAMvKlQE=
+  </data>
+ </layer>
+ <layer id="2" name="Ground and Walls" width="30" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAPODkZGLiwYAUeCMYmx81JwFAiwHIsZjxixM6GgZU0tLfLjIHhpASEppe9nKbA8ARiblP62tsJsg+Iu00RYsj208peQmDU3lF7h5K9GdwDYy8hQA17YfUCCMDK/Iv82OWR1VAK0P27Es1ebOFBi3Ae7va6cjEwuCFhdy5Ue9HlYWoIAQDt4yyA
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="18">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy1lUEKwjAQRQcXegBdVMGVDVShGwVpV668hiB4DbcK3sHTuNKN3kPvUPOJQ9NQaELGB8OEkMxnfmBC1M0zI1JpHTb2PuKVeRT05K1r3dI6bOx9xEdI97okOhVE/U1zf6+I7onJDM6cC3MnlulK1ytNzeOsDnBZm7B1B6W5IwHqsS50WJe1OfM5CeDZKDd+Qo8zwz5zHuZyPoPqp1c5upVqZvtOLDvl368U8Aw1Q/qV8tl9X7u3tveV8hmE9CsBPAuZfZipUj6HzD7MVCmf+S9w/wTmMG5fx8J/gfsnML1J+zqGbWCdRyKjC7p8/pdul8+Z1prrWCRm7cMXXv5M5w==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="207.09" y="288.3" width="51" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="161.006" y="191.459">
+   <properties>
+    <property name="enemy" value="Felisa"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="52" template="../../../../common/maps/obj/gold.tx" x="270.167" y="270.5"/>
+  <object id="53" template="../../../../common/maps/obj/enemy.tx" x="223.16" y="41.762">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Hall of Oracles|STX&quot;, &quot;Silverquill Apprentice|STX&quot;]}"/>
+    <property name="enemy" value="Shadrix"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Silverquill Key&quot;
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="57" template="../../../../common/maps/obj/booster.tx" x="294.308" y="269.487">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;STX&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;STX&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;STX&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/manashards.tx" x="317.975" y="272.958"/>
+  <object id="59" template="../../../../common/maps/obj/enemy.tx" x="254.878" y="125.935">
+   <properties>
+    <property name="enemy" value="Shaile"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="60" template="../../../../common/maps/obj/enemy.tx" x="191.392" y="125.555">
+   <properties>
+    <property name="enemy" value="Breena"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="61" template="../../../../common/maps/obj/enemy.tx" x="288.444" y="192.133">
+   <properties>
+    <property name="enemy" value="Killian"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="66" template="../../../../common/maps/obj/dialog.tx" x="203.833" y="219.583" width="52" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The inhabitants of the classrom ahead are embroiled in a heated debate as you approach. Instantly, the chatter falls to silence. At the class's front, a dragon pauses its lecture and gives you a derisive glare.
+
+'Silverquill isn't accepting new students at the moment. Leave now, or become an object lesson on how deadly words can be when applied with the right magical backing.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/gate.tx" gid="1073745949" x="287.508" y="215.561" width="34.1665" height="20.1818" rotation="0">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;This gate is locked.&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Leave&quot; },
+    {      
+        &quot;name&quot;:&quot;Unlock with Silverquill Key&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Silverquill Key&quot;}],    
+        &quot;text&quot;:&quot;The gate swings open.&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1}, {&quot;deleteMapObject&quot;:69}, {&quot;removeItem&quot;:&quot;Silverquill Key&quot;}]} ]
+    }
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/scroll.tx" x="158.624" y="248.676">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Shineshadow Snarl&quot;, &quot;editions&quot;: [ &quot;STX&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/collision.tx" x="209.218" y="45.5279" width="45.4828" height="33.515"/>
+  <object id="71" template="../../../../common/maps/obj/collision.tx" x="257.543" y="-0.649217" width="77.6994" height="25.9978"/>
+  <object id="72" template="../../../../common/maps/obj/collision.tx" x="144.248" y="-3.33393" width="61.5911" height="25.9978"/>
+  <object id="73" template="../../../../common/maps/obj/collision.tx" x="144.785" y="31.0304" width="16.4879" height="33.515"/>
+  <object id="74" template="../../../../common/maps/obj/collision.tx" x="318.754" y="31.5674" width="16.4879" height="33.515"/>
+  <object id="75" template="../../../../common/maps/obj/collision.tx" x="319.291" y="173.32" width="16.4879" height="33.515"/>
+  <object id="76" template="../../../../common/maps/obj/collision.tx" x="143.174" y="174.394" width="16.4879" height="33.515"/>
+  <object id="77" template="../../../../common/maps/obj/collision.tx" x="337.256" y="88.7425" width="14.4879" height="20.515"/>
+  <object id="78" template="../../../../common/maps/obj/collision.tx" x="336.756" y="41.7425" width="14.4879" height="20.515"/>
+  <object id="79" template="../../../../common/maps/obj/collision.tx" x="336.756" y="136.243" width="14.4879" height="20.515"/>
+  <object id="80" template="../../../../common/maps/obj/collision.tx" x="335.756" y="184.243" width="14.4879" height="20.515"/>
+  <object id="81" template="../../../../common/maps/obj/collision.tx" x="128.256" y="184.743" width="14.4879" height="20.515"/>
+  <object id="82" template="../../../../common/maps/obj/collision.tx" x="128.756" y="137.243" width="14.4879" height="20.515"/>
+  <object id="83" template="../../../../common/maps/obj/collision.tx" x="127.756" y="89.7425" width="14.4879" height="20.515"/>
+  <object id="84" template="../../../../common/maps/obj/collision.tx" x="129.256" y="39.2425" width="14.4879" height="20.515"/>
+ </objectgroup>
+</map>

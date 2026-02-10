@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="91">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Relic Amulet&quot;, &quot;Prodigal Sorcerer&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyL5mVg2MVDXxwFtFMWSNMbSPOM2jtq76i9o/aO2jtqL6q9e4G4npt+dtYC7doDtHMnneteEN4NxAD/oTSv
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzr5GRg6BzFo3gUj+JRPIpH8YjAAGRZIuw=
+  </data>
+ </layer>
+ <layer id="7" name="Floor" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJz7w8TA8GcUj+JRPIpH8SgexSMCAwCWUPoU
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAN7qozMNxTJ56mFMDM+QnEv0igKbUfZs5ZXfL0kQtg7ibV3lH/Eg9Adg2Ef0F2jcYvafrIBaP+JU0fuWDUv6TpIxfQw78A0Ehu9w==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAooA2f4B8beLk3amn9XnYHhnjrxNLXAT6BZv9SJp0kBAA0ZG0s=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="203.885" y="244.979" width="24.0285" height="25.6343">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/merfolkpool/Wizard_Palace_3.tmx"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/enemy.tx" x="211.712" y="91.281">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;You expect some grand speech from the mad mage as he succumbs to death, but instead he merely laughs wildly until his cackles turn to gurgling blood and then at last fall silent.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Zuran Spellcaster|ICE&quot;, &quot;Zuran Enchanter|ICE&quot;, &quot;Arcane Sanctum|C17&quot;, &quot;Reliquary Tower|M13&quot;, &quot;Karmic Justice|ODY&quot;, &quot;Phyrexian Arena|APC&quot;, &quot;Propaganda|TMP&quot;, &quot;Seal of Cleansing|NEM&quot;, &quot;Seal of Doom|NEM&quot;, &quot;Seal of Removal|NEM&quot;, &quot;Zuran Orb|ICE&quot; ]}"/>
+    <property name="enemy" value="Zur"/>
+    <property name="speedModifier" type="float" value="60"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="80" template="../../../../common/maps/obj/dialog.tx" x="93" y="194" width="226.5" height="23" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A mage floats in the void before you, enchanted orbs swirling around him, a maddened look in his eyes.
+
+'So, you think you can kill the greatest enchanter in the multiverse? Well, let's see what you can do!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="83" template="../../obj/treasure.tx" x="232" y="54">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 4,
+  &quot;subTypes&quot;: [ &quot;Instant&quot;, &quot;Sorcery&quot; ], 
+  &quot;rarity&quot; [ &quot;rare&quot;, &quot;mythic rare&quot;]
+}]</property>
+   </properties>
+  </object>
+  <object id="84" template="../../obj/treasure.tx" x="194.818" y="54">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 4,
+  &quot;subTypes&quot;: [ &quot;Instant&quot;, &quot;Sorcery&quot; ], 
+  &quot;rarity&quot; [ &quot;rare&quot;, &quot;mythic rare&quot;]
+}]</property>
+   </properties>
+  </object>
+  <object id="85" template="../../obj/treasure.tx" x="256.5" y="54">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 4,
+  &quot;subTypes&quot;: [ &quot;Enchantment&quot; ], 
+  &quot;rarity&quot; [ &quot;rare&quot;, &quot;mythic rare&quot;]
+}]</property>
+   </properties>
+  </object>
+  <object id="86" template="../../obj/treasure.tx" x="170.864" y="54">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 4,
+  &quot;subTypes&quot;: [ &quot;Enchantment&quot; ], 
+  &quot;rarity&quot; [ &quot;rare&quot;, &quot;mythic rare&quot;]
+}]</property>
+   </properties>
+  </object>
+  <object id="87" template="../../../../common/maps/obj/collision.tx" x="85.6476" y="20.0632" width="23.6151" height="250.36"/>
+  <object id="88" template="../../../../common/maps/obj/collision.tx" x="308.747" y="21.4054" width="23.6151" height="250.36"/>
+  <object id="89" template="../../../../common/maps/obj/collision.tx" x="109.542" y="247.634" width="201.88" height="25.7418"/>
+  <object id="90" template="../../../../common/maps/obj/collision.tx" x="104.56" y="6.6291" width="201.88" height="25.7418"/>
+ </objectgroup>
+</map>

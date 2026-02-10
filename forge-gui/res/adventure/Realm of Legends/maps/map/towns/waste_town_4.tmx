@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="68">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJyr4GZgqBjFo3gU0wS7cUIwMWqbsOAKNDY17YWZC1KHj6Z2mGDzJy6/U8ssQn6tQBOjtr0D4V9C8YqsbiD8S4yfaWHnQPqXkJ8HKl3Rwn5alw/UtBebPkJmUsOvpLiHHnjU3lF7R+0dufYCAB/+0TA=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzVl0tOwzAQhg0skB89Q2BdzlAUQeEIHKBwB7bAEXqAgoRAuRNIiJI1q7DGI3vUievE0yREYqSR86q/fzrxeDIzQuxrIQ6sj2ELJcS1cswxuXt6wwQ/NU7Hjfo7JsQ6M3XuGHGHsaK/Wy1PI3OH5l1Ntq+tLOPN1OOkthxWwhb70Xss1lvtPGVfDe8hvV6S41RMHK6WztHudfsYs7VyGi8axvD42fIOGf5i/dg0cwvpdEk7HpmNK+kcj2GEGHPPh99c+hGdnueqPV7kPjBymhk3n2rRSPWVLbXoTte53yftbBpH04j64LyJnXl9wOXk7kzx8nuu3LyvMs4FKzw3Z9RozjPh/zI2N2WQ47lyz1ZTIX6mw3BT8WKOPxi54+b303NpfhcRzVmwJkDHPKgdpf9P1uQ6dXx34T6sZRnUDtiXUvt8ZuprFHXkZE66fqnOGBP3/l37jIzUg3BOvE/rW3g/3AuBz2UXnsupbTEL939uj9OXu+rYc/TlgnXpc4bipphhr9SXW0269XNDxNvF/jMXv5N2+T7hcuG9qCJ9NNgv/fxydg==
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztlUsOgjAQhscIPpauNPECKhWlxTPoBbyQV9DDELceyI26loYSoYBtpyVq4p9Mhj7C179PgL/+ak+JBzBtOc5elbv3zcd6Gpj1r2NguKZyzWUUoLsBoEGWeZmLl7nyecFwTee0Ti79EuFtLXJIX22R8BsHeO6YAEzSOGr6PiyyUDHkOpYyYtJc5lrS7N8rkSORGS1zmYVfF7LlXvvlrNKsU8+4G3Bt9rWJ30s61u0cYJdGOKy2F9e96RvDdaGk9xlukSGfw5yrs36qM0xofb2uX507YsTUfd4xbj7uDTV5tx8FruxJNc/ymDH7Qveudc3FyITr4u3EcF0Ky7X1/mt+v4X7BD3YN70=
+  </data>
+ </layer>
+ <layer id="5" name="Overlay" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AU0Ars1mJg2APEd5gRGBdo4saOyQHXgXbe0CJOLcyePcyo9CggDMR1GBgkdBB8XHHcpIUfUwMQSl+0AgNlLz3ATW0GhlvaELa2JgODjiZ2dcjpABd7FAxucFqfuuqIBc+JNI9YdaNgFIyCUUAOAADlpCD0
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="204" y="368" width="56" height="16"/>
+  <object id="47" template="../../../../common/maps/obj/inn.tx" x="150" y="273"/>
+  <object id="48" template="../../../../common/maps/obj/shop.tx" x="104.5" y="274">
+   <properties>
+    <property name="commonShopList" value="Equipment"/>
+    <property name="noRestock" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/shop.tx" x="97" y="209">
+   <properties>
+    <property name="commonShopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="62" template="../../../../common/maps/obj/shardtrader.tx" x="400" y="288"/>
+  <object id="64" template="../../../../common/maps/obj/shop.tx" x="351.752" y="273.358">
+   <properties>
+    <property name="commonShopList" value="Creature,Creature2Blue,Creature2Red,Creature2Black,Creature2White,Creature2Green,Creature2Colorless,Sliver,Wall,Assembly,Human"/>
+    <property name="mythicShopList" value="Assassin,Squirrel,Dragon,Vampire,Minotaur,Dwarf,Devil,Soldier,Demon,Druid,Bird,Wolf,Knight,Skeleton,Shaman,Wizard,Pirate,Rogue,Dinosaur,Ogre,Planeswalker,Legend,WUBRG,Gods"/>
+    <property name="rareShopList" value="Human,Zombie,Goblin,Elf,Merfolk,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,PhyrexianColorless,Giant,Spiders,Shapeshifter"/>
+    <property name="uncommonShopList" value="Land,Vehicle,Equip,Wand,Artifact,Multicolor,Golem,Colorless,Enchantment,Instant"/>
+   </properties>
+  </object>
+  <object id="65" template="../../../../common/maps/obj/shop.tx" x="304.501" y="272.284">
+   <properties>
+    <property name="commonShopList" value="Creature,Creature2Blue,Creature2Red,Creature2Black,Creature2White,Creature2Green,Creature2Colorless,Sliver,Wall,Assembly,Human"/>
+    <property name="mythicShopList" value="Assassin,Squirrel,Dragon,Vampire,Minotaur,Dwarf,Devil,Soldier,Demon,Druid,Bird,Wolf,Knight,Skeleton,Shaman,Wizard,Pirate,Rogue,Dinosaur,Ogre,Planeswalker,Legend,WUBRG,Gods"/>
+    <property name="rareShopList" value="Human,Zombie,Goblin,Elf,Merfolk,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,PhyrexianColorless,Giant,Spiders,Shapeshifter"/>
+    <property name="uncommonShopList" value="Land,Vehicle,Equip,Wand,Artifact,Multicolor,Golem,Colorless,Enchantment,Instant"/>
+   </properties>
+  </object>
+  <object id="66" template="../../../../common/maps/obj/shop.tx" x="257.25" y="273.895">
+   <properties>
+    <property name="commonShopList" value="Creature,Creature2Blue,Creature2Red,Creature2Black,Creature2White,Creature2Green,Creature2Colorless,Sliver,Wall,Assembly,Human"/>
+    <property name="mythicShopList" value="Assassin,Squirrel,Dragon,Vampire,Minotaur,Dwarf,Devil,Soldier,Demon,Druid,Bird,Wolf,Knight,Skeleton,Shaman,Wizard,Pirate,Rogue,Dinosaur,Ogre,Planeswalker,Legend,WUBRG,Gods"/>
+    <property name="rareShopList" value="Human,Zombie,Goblin,Elf,Merfolk,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,PhyrexianColorless,Giant,Spiders,Shapeshifter"/>
+    <property name="uncommonShopList" value="Land,Vehicle,Equip,Wand,Artifact,Multicolor,Golem,Colorless,Enchantment,Instant"/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/shop.tx" x="160.063" y="211.073">
+   <properties>
+    <property name="commonShopList" value="Creature,Creature2Blue,Creature2Red,Creature2Black,Creature2White,Creature2Green,Creature2Colorless,Sliver,Wall,Assembly,Human"/>
+    <property name="mythicShopList" value="Assassin,Squirrel,Dragon,Vampire,Minotaur,Dwarf,Devil,Soldier,Demon,Druid,Bird,Wolf,Knight,Skeleton,Shaman,Wizard,Pirate,Rogue,Dinosaur,Ogre,Planeswalker,Legend,WUBRG,Gods"/>
+    <property name="rareShopList" value="Human,Zombie,Goblin,Elf,Merfolk,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,PhyrexianColorless,Giant,Spiders,Shapeshifter"/>
+    <property name="uncommonShopList" value="Land,Vehicle,Equip,Wand,Artifact,Multicolor,Golem,Colorless,Enchantment,Instant"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

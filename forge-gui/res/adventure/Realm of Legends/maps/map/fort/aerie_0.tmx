@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="150">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Murmuration&quot;, &quot;Soulcatcher&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon.tsx"/>
+ <tileset firstgid="16385" source="../../../../common/maps/tileset/FarmFood.tsx"/>
+ <layer id="10" name="Collision" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt00EKgCAQRmH3dYPqqp2s7lYuBiqIRkdplPeBO43/LQoBAACgX+vwfbzbRt29XXnvD9oG4bEltUF4asltEB5apnPDYtxR4htWdNzRUQYddz10ePjPo9m4wfq+lLgjd4vlbWmyJXVP7rtarnu0m3Le1NZLR/TclXK86aFBvG1tqQEAgNYcP2EZKg==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1z0Kg0AQhuFFbATb7STHtfQMXsDreJ4whCEpFnaZEOYjvANPYyHzFuvPvpSyAwAA/Kn7UcpU3yL3sMnu2Na+7B1HGnpzVu2WkYbPUWvxnSKj0vJNg1ILHVodxvawZxAd+Q10vEbtnRjt8Aab7AYXbVDUmtZ15Qbfd+R71/sOgZ1bRs/JWbU7vKUne8eIa47/FyrxswAAAH7jCXgt53o=
+  </data>
+ </layer>
+ <layer id="8" name="Ground" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJy9WUtuU0EQHAMSfrG9ZJEVN4EDgE1kcQOTHfsQ5TCBAyBMwopLxAcIB4jzcY7Aa/mVXHS652ebkkaxnHk9XT013f3G834IP9tRgmU7bpsQfrXPPbR/5xU2NH4YNqat7aNm/flk9O/cR/qfYNF+vm9CFcDlov/UxpeR/QzjjOaMm3VMmAu+u1K2OYarLo4MKyaCRYTnbSQON53NVcaenbacLikesqbYlr237IOLcLzob2wIhP+Hyr1hOwD2X9a5NPas1J6GcLkz4sixzdEFcObMxTre/wVXhm52CY9HzKda+9DeNrY97d8U2knFFRqxzqDsm9ad2AI/zF8qv3P30dsTK5beGdYaXxh5ybMvcyddfuW8+z7tejG8s5YzH74hriejp3MlJyH3eBqx9sXbKyvu2o8YPP1q3zVieT31rLXutLHrHdvKsbsPlKwbi8v/BueKVI7zavsusDqsfxa1Nbev22f8hUcpF4k7OExobNN/CKxzW+JfDZcx+V/b6+T6VeKbN9+qW7wXVr7ZBT6/rtd8DnetJ09Lug6VnnHty8fD+LCe9/yfq56ZtRTrneQ8TTN6B8+PFIcSHuKHaMzTEXiu1HshgPOUy8XjkQuLB2vJ0xH6yzuHY+l52qYe6OdZS5Oupy3RBmxAiyW9X4pHKpfx91NVH2ryk+4vc1FTCwDWoFXntK5yeynU8dKer4YLP/Pq5eZcQg/eXUwuvPeBEr9y5zNwbrGu1xtxnYzd5WyDFJeaur8vpHpl9tUbpdC1WWtlGWzss2+PwdIy9+r6nXR2EMKnA9sWnrPylpydXWmS7wticcO5wf0hfJfxZhjCn6H/HO5PZb/E/qm6I7HWtGLZG4Tw/UUIv521AOt+V84z+6x9/zpYj28D3y644N6FOSyM77xYzro9P+7+encSuEdB7zdzfPZ8P3a0JRh3GuI8Z9XKaaTeyH48a8dztS7z0e8bM+W/+Mx13qopb4c+Fy9/i67vm82d36OhiRiP2D0Rc+CYI35YW+N6uOFSer+qe0or92kesbtHj0OqLgrOB2suet8teL+n8BlijcAv4YFYsSatuZoD453jh0Bi2hvE9RWDdy/KHDCwhqVB8SHGIQXRBfZE1tE5rnZoDszFm5+jCQ9SFx46Ljq3bTOuHR5WDs2pAylwn39k6K72t5Vzg0tKN3gXtPIA+4EczPpkHvJ96je5EvTUXkA3ON86v/HvObF7f+u9+y9EEbFd
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1UEKwjAQheHUjRTEXYLiol6kZuEVPIZ4FPEOHtAr2BGnibW2SYRmKO+DEQQL82NClQIAAACYp1uplF6GzZBrOc2+fXi/03Z8Qlpy4L0eAQ00/jNSdPcJ6ZDWktrQbcmN7wOL7fDvS05j97qP1I5fu9HsNm6Oa9n/x1BHtwkdcjqk33OW2rDa5++4VM2Hdt9T3h9F8/y5yrJ+izpqo14tse8RQg3WyOgg3BKDG4iUDlKbuGet93tJHf/I3fEl8GwVkWdwanS2Fvpz7u85GDc28gwCAADA/D0BI19YEg==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmEFKQzEQhkO7s27EFuymfSoqdmcX7nsExQuoqBstrnoAT+JGQW8guNEDqKCgnsIrOKEdXjImeUmapEH9YXh9eUnefMnMpDzGGDvfZFEVc37d3FfQfh2ZK4UegOHxF3CkkmnfVc9yjRPTvquexYwT3RrNcu183q1bo1nmmOnducWmrz+51bDc/LFRbrHgK5e1D8nc7zDWKKptqxPeD8rsW085wzz4+ATXZ4O9gM0pWELHvU89FRlu4LrXLm2nx9hur7y/LfQsVCnzgzJ8tWU7A4ZhT2azZUl1Hij3YUH2GXnENt7HZV9UChmHw646lriZRPfltFs+ixFLVXNyDu4DZahiEfvgHKgY51zVnOhDvS7HEf5+rcm2XSs57tvjcZRDp5g5Tzlojt8tlXbZmo7DdZ9cuHX7EYPD1W8dt4pPlx/IQePqrfazrw+Hyhfb/VL14z5g3RTPPFprxXvxXOxP6q0rR+hawOvmp3AGiGcezRVkwj549rxP6rZJKc71UVdmuWiMTVeL+TORYRQhx305KIuOAWNJZLDhSCH0RWQx/WenDLlwLBayTx+dahP7t4pZE5SiLLaWEwNKx9LUtIdmoDVtmu+SnKUpGPqqaw8pWtNSf5f819/7LmSTK2sDxtbBNgbufizDmBWwVY+xLrLJlSPw4RjsxMOXfRhzAHYYmSO1bGtl7nlhWyv/62fe+gb5FSVq
+  </data>
+ </layer>
+ <layer id="9" name="Shades" width="50" height="40" opacity="0.6" tintcolor="#000000">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt0jkRADAMwLDsXcofSeCVQ5c8JyHw4AgAAOBHVgcwnofoxpMA0N+51QUAsNsD084CRA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="90" template="../../../../common/maps/obj/door_left.tx" x="399.25" y="498.25" width="20" height="20">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/fort/aerie_1.tmx"/>
+    <property name="teleportObjectId" value="38"/>
+   </properties>
+  </object>
+  <object id="105" template="../../../../common/maps/obj/manashards.tx" x="371.712" y="418.546"/>
+  <object id="106" template="../../../../common/maps/obj/manashards.tx" x="393.712" y="418.546"/>
+  <object id="111" template="../../../../common/maps/obj/booster.tx" x="394.5" y="402">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;cardText&quot;: &quot;flying&quot;,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;cardText&quot;: &quot;flying&quot;,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardText&quot;: &quot;flying&quot;,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="113" template="../../../../common/maps/obj/enemy.tx" x="325" y="324">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;With your final blow, the bird wizard plummets to the ground, colliding with a sickening thud. 
+
+'Outmaneuvered... how fascinating...'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Aerie Mystics|C13&quot;, &quot;Sunbird Standard|LCI&quot;, &quot;Animal Sanctuary|M21&quot;, &quot;Valley Floodcaller|BLB&quot;, &quot;Soulcatchers' Aerie|JUD&quot;, &quot;Knightfisher|BLB&quot;, &quot;Mask of Memory|CMR&quot;]}"/>
+    <property name="enemy" value="Derevi"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="116" template="../../../../common/maps/obj/shop.tx" x="275.659" y="578.068" width="42" height="42.75">
+   <properties>
+    <property name="commonShopList" value="Bird4Azorius"/>
+    <property name="noRestock" type="bool" value="false"/>
+    <property name="signXOffset" type="float" value="30"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="129" template="../../../../common/maps/obj/entry_up.tx" x="384.5" y="640.5" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="130" template="../../../../common/maps/obj/door_left.tx" x="384.75" y="335.25" width="60" height="39.5">
+   <properties>
+    <property name="direction" value="right"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/fort/aerie_4.tmx"/>
+    <property name="teleportObjectId" value="103"/>
+   </properties>
+  </object>
+  <object id="131" template="../../../../common/maps/obj/collision.tx" x="-4.23" y="641" width="807.46" height="16"/>
+  <object id="132" template="../../../../common/maps/obj/collision.tx" x="1.27" y="-17" width="794.46" height="16"/>
+  <object id="133" template="../../../../common/maps/obj/collision.tx" x="799" y="-13.472" width="16" height="667.944"/>
+  <object id="134" template="../../../../common/maps/obj/collision.tx" x="-16" y="-11.972" width="16" height="667.944"/>
+  <object id="135" template="../../../../common/maps/obj/booster.tx" x="414.182" y="402.182">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;cardText&quot;: &quot;flying&quot;,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;cardText&quot;: &quot;flying&quot;,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardText&quot;: &quot;flying&quot;,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="136" template="../../../../common/maps/obj/booster.tx" x="373.091" y="402">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;cardText&quot;: &quot;flying&quot;,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;cardText&quot;: &quot;flying&quot;,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardText&quot;: &quot;flying&quot;,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="137" template="../../../../common/maps/obj/manashards.tx" x="414.667" y="419.167"/>
+  <object id="138" template="../../../../common/maps/obj/dialog.tx" x="368" y="511.75" width="80" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Great flocks of thousands of birds darken the skies above the towering aerie ahead, guided by aven warriors and wizards. Echoing squawks and whispered words from your aven observers let you know your presence is already well known.
+
+Your manasight stone glows brightly, sensing a truly mighty legend in this place.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="139" template="../../../../common/maps/obj/dialog.tx" x="272" y="592.75" width="52" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The stall of a birdseller sits in front of the grand and imposing aerie ahead. 
+
+'Hail, traveler! I have many fine feathered friends for sale! Up ahead, powerful aven warriors keep watch, but they don't keep all the birds that flock here to see them. I take the strays and nurse them back to health. Perhaps they may be of use on your travels!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="140" template="../../../../common/maps/obj/dialog.tx" x="522" y="459.25" width="287" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A vast, trackless waste stretches behind the towering aerie ahead. It seems entirely empty, but perhaps something hides within.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="142" template="../../../../common/maps/obj/dialog.tx" x="1.16667" y="462.917" width="287" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A vast, trackless waste stretches behind the towering aerie ahead. It seems entirely empty, but perhaps something hides within.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="144" template="../../../../common/maps/obj/dialog.tx" x="373.752" y="346.817" width="56" height="66.496" rotation="269.646" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;So, you've finally reached me, landwalker! I am Derevi, former chief tactician of the Empyrial Army on the Alaran shard of Bant, and current grand protector of this aerie. I considered arranging a proper defense of this place rather than letting you stroll through and take out my allies one by one... but then I considered that your presence would serve as an excellent way to cull my flock of the weak-wings and traitors that have infested it. Now, I imagine you will want to defeat me as well. You're welcome to try, but you'll find my magic far superior to that of all my allies.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="145" template="../../../../common/maps/obj/scroll.tx" x="401.667" y="32">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Soulcatchers' Aerie&quot;, &quot;editions&quot;: [ &quot;JUD&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="146" template="../../../../common/maps/obj/scroll.tx" x="767.333" y="29.6667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Seaside Haven&quot;, &quot;editions&quot;: [ &quot;ONS&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="147" template="../../../../common/maps/obj/scroll.tx" x="16.3333" y="30">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Sunbird Standard&quot;, &quot;editions&quot;: [ &quot;LCI&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="148" template="../../../../common/maps/obj/shop.tx" x="511.667" y="578.333" width="33" height="31.3333">
+   <properties>
+    <property name="commonShopList" value="WanderingMerchantWhite"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="signXOffset" type="float" value="30"/>
+    <property name="signYOffset" type="float" value="0"/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="149" template="../../../../common/maps/obj/enemy.tx" x="481" y="580.667">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;text&quot;: &quot;Hail, {var=player_name}. I see your travels have taken you far. I have been wandering as well, and have acquired some rare spells I am not in need of along the way. Take a look, perhaps they will be of use. Traveling this place does have its costs though, so I cannot simply give you them, but my prices are fair.&quot;,
+		&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;(Continue)&quot; }
+		]
+	}
+]</property>
+    <property name="enemy" value="Mysterious Mage"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

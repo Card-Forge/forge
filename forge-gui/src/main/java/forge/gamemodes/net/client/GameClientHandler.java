@@ -13,6 +13,7 @@ import forge.gamemodes.net.ReplyPool;
 import forge.gamemodes.net.event.LoginEvent;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.ILobbyListener;
+import forge.util.BuildInfo;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.LobbyPlayerHuman;
@@ -77,6 +78,8 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
                 }
                 break;
             case openView:
+                gui.setNetGame();
+
                 // only need one **match**
                 if (this.match == null) {
                     this.match = createMatch();
@@ -304,7 +307,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
     @Override
     public void channelActive(final ChannelHandlerContext ctx) {
         // Don't use send() here, as this.channel is not yet set!
-        ctx.channel().writeAndFlush(new LoginEvent(FModel.getPreferences().getPref(FPref.PLAYER_NAME), Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",")[0]), Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_SLEEVES).split(",")[0])));
+        ctx.channel().writeAndFlush(new LoginEvent(FModel.getPreferences().getPref(FPref.PLAYER_NAME), Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",")[0]), Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_SLEEVES).split(",")[0]), BuildInfo.getVersionString()));
     }
 
 }

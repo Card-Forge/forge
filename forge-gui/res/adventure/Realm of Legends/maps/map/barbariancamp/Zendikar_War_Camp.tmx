@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="115">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Evolving Wilds&quot;, &quot;Zendikar Incarnate&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="1" name="Background" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1KENACAMAMEmKEbs2CQMhOoEFRWcOP/qc0ckAADQdtZ8A0C5ngQAfO4B4qxlhg==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJy1WFFuU0EMXKlqlJdrAMdAhd4jgHILoPAHHCtpwi1aodyjpWGtdpTpxPbuS4qlVV9f1vasn9ez64ehlDIr5cPwfHy09yJ39d1wVqef7eetp6Vs6vgr8+fDoc21M09lWefsAkyZP8iP81J+1vHr/HH+Qx3XU38tZuf3dG87msvYgMtw3Dv4vLixvJqU8rqON5O9zqdEx3CaH8OZxY+xsU2sD3hZ/219/lZ1LujddcW1rmMz2fttxQU4s2+LfFAc8yAvDNv3iu22/v3TEZ9WXrUE+aB2vHUxtha+sWK2L06wp9je1fF15s/Tb5/ZtLk2zPbVrF9X5XPVuxzasds+/X7V4WdL9nj06Gb2OHa2v3gPbEf4sTW/Hx7HZQdG1MDdcPjOMMAeY7O9z/tU49wbC9XTGKykzrD/sD45dcnkRmLh5YLGXTGyzt3wvJ7b4LoY1VnW4fptfr4EvnjdXs3XbwRBvds8jcXQ5sZ5Y47ni9fd4iSWg3qXfVfSsRhmPKayGPp5N5OeMwUwjuEIzqVeH56MickYOfb7qmBdXONP4R8I4ndK7FjG1FtIi+MWSU3wRGvRkp6PqbfMcR7OLGe9tc1pLyE/WMZi9Ob3isffyAnDiNzNfHrcs0p42EZv7kb5pPcCry5BN+Ke/8HDqgec5mtFZwPoetzTi/EYHo70OJa99wjcO5SLPR7mM4m3l/ns5Z2D4RMYe2uptze9uPM9+BSee6l7jme3h+cQ590Ja8gk45/obgZc3C94Kb5RbMfe94Ddy+lIliPjzLUsuu+p8D0Tz5rTy8D/ojNXtL70YsOawIsWey/miyAf9C7k/a74DWN012Pd3prp8S8wZ32fqB+idjWPWndA5g8+O7I+9lHUY4Oeh1v1vT5Ki3sQQ57L+vdUA70+SVQntDeW9QS9nlfG9yqoY+iT9HA9n5V76oSuM+N7FT0vYU1RzrMt+Bt7l4J4Pvj/rHc1T74b63v8ofUowubldpSrwKb8E2HktUV70dNt2ff2E+eC1xNRGxp35IXuG29fa59f5xzT49Y9rDmL2LfOLlzro7voP2E87KQ=
+  </data>
+ </layer>
+ <layer id="7" name="Mountain Walls" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmFkOwjAMRNs7tMBRCxIqZ6JhOR7JRyTLZBJ3i43ESPOFhR+TNDE9tk1zFLrzfjD3K+rWmvd5enM50r8T1K3hlfAguQX1czi7md+/lZyQ8bQj2+B9yXx+UOYLGb29z4BTmy8yhnW8t9+MpTWutfdyjLkM984uxch7WuGLLCHD0TAf74v2oMa5R/dhKcPa2VEWno0Vvqv3JHxGNPhS2Vnj433DHTgl+FJn5Z66eb8y2dEZqlfIMJVdUJy3KLdTuj/irDAWq3XWmJ5/JU6t54TO+2j2Ghrd2TnKMc7oSSk7JDQjWObTXlsqK/dHSuj+sML3i3vPEh+an2vfHTlZz/DPt06Iz8IeROeflQxL74i0+MJ/OTqrINde40HIxRnROzrUY05tarZb4siJWOlvR7lvySNlRb0kNUv9AaPvfHM=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztWL1OAzEMzlGoVEAgSmEAxABC6gkJiRmegJ2nYOJH6soD8AqwwBuAxM/Gz9QdFmDtUB6AjiQqFj7XSZxr7rrwSVHanM/+Yvsc3ykVhlpFqclK4E0jwN64XPZrujgenI3TieLtSfFA/q9XlVrVY0OPludezm8vTfd1CbBd0AFrj5rXkx7P1UEZmHsW/8aIs0tH7DzCvgyFzQe+awYrQhv3YjZZLJH/tjyL5c8QPcBlOYLdFpk5DBNjgxv0u8vsk9ouKn/P60pd1OXy1FZeXlLOO/NK7erxnir1kQ5edz0TOBdAjoup77mS4Ftz6yF+XExDQO/31WwOhw2ljn7Hq/bhmx4HSA89Q6id7Vp2DeZFt9kMrh3XcCyONceThltXSJxA1nC+c8i58tDwm13ojxA+VKfvPObAxYaDjZ/k+eJkYE16lkjhqsvtpjy2bU+fgtdCa7SNQ0fruUxko8PYLLpP/Rzrz/uo/sxsDspdTf3JlokQm0YW4tAlfaGvpuY9b3z81pL+nCaj81+aZNfOmLMQZA1ozcaI0d8bQDxC41s2wCb1IQWNL+SdpfyLAf626YH42vpyzNvIxowpBVcDcc21+RDWQRbvJRY32/PP1WeAqz5vzWX15Dmn4R68xxj7hfeDPJyk4HhK+w6JrlDAXmnvMaxunNM4h2L4VqLD1cvH6LOAA95nnrPQ14NxdmLApc/GlX5figFqi743YFuUsyRHbwNkfXDt26efi2PZdYaiSPs2hL4jlfG9+R8y/ABRUKUv
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="256.285" y="345.467">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ally Encampment|BFZ&quot;, &quot;Retreat to Emeria|BFZ&quot;, &quot;Captain's Claws|OGW&quot;, &quot;Veteran Warleader|BFZ&quot;, &quot;Cliffside Lookout|BFZ&quot;]}"/>
+    <property name="enemy" value="General Tazri"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="51" template="../../obj/treasure.tx" x="43.6966" y="210.378">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 4,
+  &quot;subTypes&quot;: [ &quot;Equipment&quot; ],
+  &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="57" template="../../../../common/maps/obj/enemy.tx" x="465.131" y="75.0777">
+   <properties>
+    <property name="enemy" value="Kazuul"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="59" template="../../../../common/maps/obj/enemy.tx" x="262.885" y="444.395">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Adventuring Gear|ZEN&quot;, &quot;Zendikar's Roil|ZNC&quot;, &quot;Cinder Glade|BFZ&quot;, &quot;Mul Daya Channelers|ROE&quot;]}"/>
+    <property name="enemy" value="Mina and Denn"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="61" template="../../../../common/maps/obj/entry_up.tx" x="605.699" y="312.652">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/gold.tx" x="16.5" y="207"/>
+  <object id="68" template="../../../../common/maps/obj/enemy.tx" x="208.087" y="93.4317">
+   <properties>
+    <property name="enemy" value="Jori En"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="0"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/enemy.tx" x="105.536" y="331.533">
+   <properties>
+    <property name="enemy" value="Moraug"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="81,82"/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/enemy.tx" x="321.157" y="493.149">
+   <properties>
+    <property name="enemy" value="Kaza"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="73,74"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/enemy.tx" x="501.568" y="446.145">
+   <properties>
+    <property name="enemy" value="Zagras"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="76,75,76,77"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/waypoint.tx" x="196.473" y="493.497"/>
+  <object id="74" template="../../../../common/maps/obj/waypoint.tx" x="410.093" y="487.04"/>
+  <object id="75" template="../../../../common/maps/obj/waypoint.tx" x="443.455" y="363.28"/>
+  <object id="76" template="../../../../common/maps/obj/waypoint.tx" x="507.487" y="407.941"/>
+  <object id="77" template="../../../../common/maps/obj/waypoint.tx" x="472.511" y="481.659"/>
+  <object id="78" template="../../../../common/maps/obj/waypoint.tx" x="261.915" y="193.418"/>
+  <object id="79" template="../../../../common/maps/obj/waypoint.tx" x="378.324" y="167.954"/>
+  <object id="80" template="../../../../common/maps/obj/waypoint.tx" x="421.204" y="269.312"/>
+  <object id="81" template="../../../../common/maps/obj/waypoint.tx" x="106.612" y="410.093"/>
+  <object id="82" template="../../../../common/maps/obj/waypoint.tx" x="114.146" y="122.755"/>
+  <object id="86" template="../../../../common/maps/obj/gold.tx" x="16.004" y="221.542"/>
+  <object id="87" template="../../../../common/maps/obj/booster.tx" x="223.933" y="317.583">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;BFZ&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;BFZ&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;BFZ&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="88" template="../../../../common/maps/obj/manashards.tx" x="459.597" y="219.072"/>
+  <object id="89" template="../../../../common/maps/obj/manashards.tx" x="173.289" y="62.6417"/>
+  <object id="90" template="../../../../common/maps/obj/manashards.tx" x="307.857" y="623.175"/>
+  <object id="91" template="../../../../common/maps/obj/dialog.tx" x="490.745" y="293.86" width="59.5" height="12.5" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A sprawling wilderness spreads out before you. The odd floating rocks hanging overhead in various places make you recall tales of the wild plane of Zendikar, where this place seems to have originally come from.
+
+Your manasight stone glows, sensing the power of the legends here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="93" template="../../../../common/maps/obj/enemy.tx" x="40" y="230.167">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Kor Halberd|MOM&quot;, &quot;Nahiri's Resolve|MAT&quot;, &quot;Armament Master|ZEN&quot;]}"/>
+    <property name="enemy" value="Nahiri"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/enemy.tx" x="341.333" y="256">
+   <properties>
+    <property name="enemy" value="Phylath"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="78,79,80"/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/dialog.tx" x="30.4167" y="242.583" width="50.8333" height="8.3333" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A fierce-eyed Kor woman works a forge heated by lava, hammering away at a magnificent blade of stone.
+
+'Another fool come to rob me of my masterwork blades? Back off, or the sword you intend to steal will be the last thing you'll see before I plunge it between your eyes.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="96" template="../../../../common/maps/obj/collision.tx" x="32.52" y="161.5" width="28.96" height="31"/>
+  <object id="97" template="../../../../common/maps/obj/collision.tx" x="62.27" y="175.5" width="32.21" height="62.25"/>
+  <object id="98" template="../../../../common/maps/obj/dialog.tx" x="477.439" y="117.823" width="61.3882" height="18.8333" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+    {
+    &quot;text&quot;: &quot;A towering ogre stands ahead, blocking the way out of the narrow valley. 
+
+'Ho there, small one! There's a 500 gold piece toll to pass this way!'&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;I'll be paying the iron price, actually.&quot;,
+        &quot;text&quot;: &quot;'Brave! Let's see if that bravery lasts, small one!'&quot;,
+        &quot;options&quot;: [
+          {
+            &quot;name&quot;: &quot;(Continue)&quot;,
+            &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]
+          },
+          {
+            &quot;name&quot;: &quot;That seems reasonable.&quot;,
+            &quot;text&quot;: &quot;'I'm glad you see reason! Enjoy our little slice of Zendikar.'&quot;,
+            &quot;options&quot;: [{&quot;name&quot;: &quot;Continue&quot;}],
+            &quot;action&quot;: [
+                {
+                  &quot;grantRewards&quot;: [
+                    {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: -500},
+                    {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Kazuul, Tyrant of the Cliffs&quot;},
+                    {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Kazuul's Toll Collector&quot;}                
+                  ],
+            &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]
+          }
+            ]
+        }]}]}]</property>
+   </properties>
+  </object>
+  <object id="99" template="../../../../common/maps/obj/collision.tx" x="194.895" y="15.375" width="44.71" height="62.25"/>
+  <object id="100" template="../../../../common/maps/obj/dialog.tx" x="232.25" y="455.083" width="72.5" height="12.8333" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Elven twins quickly jump up from their boredom of guard duty.
+
+'Looks like we got ourselves an intruder, Mina!'
+
+'Told you today would be fun, Denn!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="101" template="../../../../common/maps/obj/dialog.tx" x="184.75" y="378.25" width="173" height="11" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A proud, heavily armored woman stands before you, an angelic halo around her neck.
+
+'So, you stroll into the camp of the Zendikari alliance and expect to just take whatever you wish? You'll find that together our alliance can defeat anyone!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="102" template="../../../../common/maps/obj/gold.tx" x="315" y="319.5"/>
+  <object id="103" template="../../../../common/maps/obj/gold.tx" x="193" y="319"/>
+  <object id="104" template="../../../../common/maps/obj/booster.tx" x="297" y="318.75">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;OGW&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;OGW&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;OGW&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="105" template="../../../../common/maps/obj/manashards.tx" x="538.667" y="394.667"/>
+  <object id="106" template="../../../../common/maps/obj/booster.tx" x="190.5" y="342">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ZEN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ZEN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ZEN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="107" template="../../../../common/maps/obj/booster.tx" x="315.5" y="343">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;WWK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;WWK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;WWK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="108" template="../../../../common/maps/obj/manashards.tx" x="16.6667" y="436"/>
+  <object id="112" template="../../../../common/maps/obj/scroll.tx" x="279.227" y="318.045">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Zendikar Resurgent&quot;, &quot;editions&quot;: [ &quot;OGW&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="113" template="../../../../common/maps/obj/scroll.tx" x="160.667" y="620.667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Zendikar's Roil&quot;, &quot;editions&quot;: [ &quot;ORI&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="114" template="../../../../common/maps/obj/scroll.tx" x="239.333" y="317.576">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Ally Encampment&quot;, &quot;editions&quot;: [ &quot;BFZ&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

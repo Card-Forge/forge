@@ -369,6 +369,14 @@ public class GuiDesktop implements IGuiBase {
     static float screenScale = initializeScreenScale();
 
     @Override
+    public boolean hasNetGame() {
+        if (Singletons.getView() == null || Singletons.getView().getNavigationBar() == null) {
+            return false;
+        }
+        return Singletons.getView().getNavigationBar().hasNetGame();
+    }
+
+    @Override
     public float getScreenScale() {
         return screenScale;
     }
