@@ -116,10 +116,12 @@ public class DuelScene extends ForgeScene {
                 if (eventData != null) {
                     //In an event. Apply the ante result to the current event deck.
                     eventData.registeredDeck.getOrCreate(DeckSection.Sideboard).add(anteResult.wonCards);
-                    eventData.draftedDeck.getOrCreate(DeckSection.Sideboard).add(anteResult.wonCards);
+                    if(eventData.draftedDeck != null)
+                        eventData.draftedDeck.getOrCreate(DeckSection.Sideboard).add(anteResult.wonCards);
                     for(PaperCard card : anteResult.lostCards) {
                         eventData.registeredDeck.removeAnteCard(card);
-                        eventData.draftedDeck.removeAnteCard(card);
+                        if(eventData.draftedDeck != null)
+                            eventData.draftedDeck.removeAnteCard(card);
                     }
                     //Could also add the cards to the opponent's pool, but their games aren't simulated and they never edit their decks.
                 }
