@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="131">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="132">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -35,6 +35,14 @@
   </object>
   <object id="54" template="../../../../common/maps/obj/enemy.tx" x="53.4849" y="125.167">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Gev"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="50"/>
@@ -42,13 +50,29 @@
   </object>
   <object id="55" template="../../../../common/maps/obj/enemy.tx" x="433.001" y="66.166">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Mr. Foxglove"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="56" template="../../../../common/maps/obj/enemy.tx" x="157" y="425.667">
+  <object id="56" template="../../../../common/maps/obj/enemy.tx" x="147.5" y="431.667">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Finneas"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="50"/>
@@ -56,6 +80,14 @@
   </object>
   <object id="63" template="../../../../common/maps/obj/enemy.tx" x="457.995" y="184.608">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Scavenger's Talent|BLB&quot;, &quot;Brightblade Stoat|BLB&quot; ] }"/>
     <property name="enemy" value="The Infamous Cruelclaw"/>
     <property name="speedModifier" type="float" value="0"/>
@@ -64,6 +96,14 @@
   </object>
   <object id="67" template="../../../../common/maps/obj/enemy.tx" x="247.333" y="196.667">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Artist's Talent|BLB&quot;, &quot;Brambleguard Veteran|BLB&quot; ] }"/>
     <property name="enemy" value="Bello"/>
     <property name="speedModifier" type="float" value="40"/>
@@ -105,8 +145,16 @@
   <object id="79" template="../../../../common/maps/obj/manashards.tx" x="208.167" y="24.5"/>
   <object id="80" template="../../../../common/maps/obj/gold.tx" x="448.5" y="273.333"/>
   <object id="84" template="../../../../common/maps/obj/inn.tx" x="328" y="150"/>
-  <object id="85" template="../../../../common/maps/obj/enemy.tx" x="323" y="359.833">
+  <object id="85" template="../../../../common/maps/obj/enemy.tx" x="392.5" y="374.333">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Byrke"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="50"/>
@@ -114,21 +162,45 @@
   </object>
   <object id="87" template="../../../../common/maps/obj/enemy.tx" x="152.667" y="197.25">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Fortune Teller's Talent|BLC&quot;, &quot;Brambleguard Captain|BLB&quot; ] }"/>
     <property name="enemy" value="Arthur"/>
     <property name="speedModifier" type="float" value="40"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
-  <object id="89" template="../../../../common/maps/obj/enemy.tx" x="220.5" y="366.5">
+  <object id="89" template="../../../../common/maps/obj/enemy.tx" x="162" y="323.5">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Mabel"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="90" template="../../../../common/maps/obj/enemy.tx" x="158.333" y="307.667">
+  <object id="90" template="../../../../common/maps/obj/enemy.tx" x="159.333" y="270.667">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Buxton"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="50"/>
@@ -136,6 +208,14 @@
   </object>
   <object id="94" template="../../../../common/maps/obj/enemy.tx" x="198" y="178.5">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Gourmand's Talent|BLC&quot;, &quot;Burrowguard Mentor|BLB&quot; ] }"/>
     <property name="enemy" value="Baylen"/>
     <property name="speedModifier" type="float" value="40"/>
@@ -144,6 +224,14 @@
   </object>
   <object id="96" template="../../../../common/maps/obj/enemy.tx" x="328" y="167">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Caretaker's Talent|BLB&quot;, &quot;Bumbleflower's Sharepot|BLB&quot; ] }"/>
     <property name="enemy" value="Ms. Bumbleflower"/>
     <property name="speedModifier" type="float" value="30"/>
@@ -152,6 +240,14 @@
   </object>
   <object id="97" template="../../../../common/maps/obj/enemy.tx" x="219" y="48.5">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Hugs"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="50"/>
@@ -341,5 +437,57 @@ Though uprooted from our home in Valley, still we stand together.&quot;,
   <object id="128" template="../../../../common/maps/obj/collision.tx" x="190.902" y="82" width="32.195" height="32.6667"/>
   <object id="129" template="../../../../common/maps/obj/collision.tx" x="191.486" y="132.042" width="32.195" height="29.3334"/>
   <object id="130" template="../../../../common/maps/obj/collision.tx" x="143.777" y="144.542" width="32.195" height="32.6667"/>
+  <object id="131" template="../../../../common/maps/obj/enemy.tx" x="218" y="417.5">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'Do you see this?! I am a PENGUIN!'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;Not sure how I feel about it, but the task is done.&quot;,
+					&quot;text&quot;: &quot;'You know, while you were busy, I found out it wasn't the animals fault that I became a penguin at all - its something to do with this very place's innate magic. Oh well. Spreading a bit more suffering in the world is always worthwhile.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Ashiok, Nightmare Muse&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Ashiok, Nightmare Weaver&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Ashiok, Dream Render&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Ashiok, Sculptor of Fears&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Ashiok, Wicked Manipulator&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Ashiok's Erasure&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Ashiok's Reaper&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;shards&quot;, &quot;count&quot;: 60}                
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 12
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Is that not normal for you?&quot;,
+					&quot;text&quot;: &quot;'No! I am Ashiok! Dream render! Nightmare weaver! Sculptor of fears! Not some flightless bird! Its ridiculous. If I was going to be an animal, I should at least be something like a snake. But I'm rambling. I want all dozen of these animals dead for what they did to me. Its a shame they're all ready to fight anyway from the curse of violence in this world, but in lieu of making them properly suffer I suppose execution will do. Oh, and I'll reward you of course. A great deal of mana shards will be yours, plus a healthy helping of my nightmare power as well.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;I don't have time for this.&quot;,
+					&quot;text&quot;: &quot;'See you in your nightmares.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Ashiok"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
