@@ -1,7 +1,9 @@
 package forge.screens.match;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.SwingUtilities;
 
@@ -10,9 +12,13 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.IVTopLevelUI;
+import forge.gui.framework.RectangleOfDouble;
 import forge.gui.framework.SRearrangingUtil;
+import forge.gui.framework.SResizingUtil;
 import forge.gui.framework.VEmptyDoc;
 import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 import forge.screens.match.views.VDev;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VHand;
@@ -31,6 +37,11 @@ import forge.view.FView;
 public class VMatchUI implements IVTopLevelUI {
     private List<VField> lstFields = new ArrayList<>();
     private List<VHand> lstHands = new ArrayList<>();
+
+    // Tracking for dynamic split-mode cells so they can be cleaned up on relayout.
+    private final List<DragCell> dynamicCells = new ArrayList<>();
+    private RectangleOfDouble baseRoughBounds0; // percentage bounds before splitting
+    private RectangleOfDouble baseRoughBounds1;
 
     // Other instantiations
     private final CMatchUI control;
@@ -70,14 +81,15 @@ public class VMatchUI implements IVTopLevelUI {
             getBtnCancel().requestFocusInWindow();
         }
 
-        // Add extra players alternatively to existing user/AI field panels.
-        for (int i = 2; i < lstFields.size(); i++) {
-            // If already in layout, no need to add again.
-            VField vField = lstFields.get(i);
-            if (vField.getParentCell() == null) {
-                lstFields.get(i % 2).getParentCell().addDoc(vField);
-            }
+        // Save original base cell rough bounds before any splitting.
+        if (lstFields.size() > 2 && baseRoughBounds0 == null) {
+            final DragCell c0 = lstFields.get(0).getParentCell();
+            final DragCell c1 = lstFields.get(1).getParentCell();
+            baseRoughBounds0 = c0.getRoughBounds();
+            baseRoughBounds1 = c1.getRoughBounds();
         }
+
+        assignExtraFieldsToCells();
 
         // Determine (an) existing hand panel
         DragCell cellWithHands = null;
@@ -130,6 +142,108 @@ public class VMatchUI implements IVTopLevelUI {
                 }
             }
         });
+    }
+
+    /**
+     * Assigns extra player fields (index 2+) to cells based on current
+     * layout and panel style preferences. Split mode uses percentage-based
+     * rough bounds so the layout is resolution-independent.
+     */
+    private void assignExtraFieldsToCells() {
+        if (lstFields.size() <= 2) {
+            return;
+        }
+        final ForgePreferences preferences = FModel.getPreferences();
+        final String layout = preferences.getPref(FPref.UI_MULTIPLAYER_FIELD_LAYOUT);
+        // OFF disables all field layout features — use vanilla i%2 tabbed behavior.
+        final boolean rowsMode = "ROWS".equals(layout);
+        final boolean splitMode = !"OFF".equals(layout)
+                && "SPLIT".equals(preferences.getPref(FPref.UI_MULTIPLAYER_FIELD_PANELS));
+
+        // Collect extra fields grouped by target cell index.
+        // Skip fields that already have a parent cell (populate() may be called multiple times).
+        final Map<Integer, List<VField>> fieldsByCell = new LinkedHashMap<>();
+        for (int i = 2; i < lstFields.size(); i++) {
+            if (lstFields.get(i).getParentCell() != null) {
+                continue;
+            }
+            final int target = rowsMode ? 1 : (i % 2);
+            fieldsByCell.computeIfAbsent(target, k -> new ArrayList<>()).add(lstFields.get(i));
+        }
+
+        for (final Map.Entry<Integer, List<VField>> entry : fieldsByCell.entrySet()) {
+            final DragCell cell = lstFields.get(entry.getKey()).getParentCell();
+            final List<VField> fields = entry.getValue();
+
+            if (!splitMode) {
+                for (final VField vField : fields) {
+                    cell.addDoc(vField);
+                }
+            } else {
+                // Split using percentage-based rough bounds.
+                final RectangleOfDouble rb = cell.getRoughBounds();
+                final int totalSlots = 1 + fields.size();
+                final double slotW = rb.getW() / totalSlots;
+
+                // Shrink original cell to leftmost slot.
+                cell.setRoughBounds(new RectangleOfDouble(rb.getX(), rb.getY(), slotW, rb.getH()));
+
+                // Create a new cell for each extra field.
+                for (int i = 0; i < fields.size(); i++) {
+                    final DragCell newCell = new DragCell();
+                    final double newX = rb.getX() + slotW * (i + 1);
+                    final double newW = (i < fields.size() - 1) ? slotW : (rb.getW() - slotW * (i + 1));
+                    newCell.setRoughBounds(new RectangleOfDouble(newX, rb.getY(), newW, rb.getH()));
+                    FView.SINGLETON_INSTANCE.addDragCell(newCell);
+                    newCell.addDoc(fields.get(i));
+                    dynamicCells.add(newCell);
+                }
+            }
+        }
+
+        // Apply rough bounds to pixel positions via the resize system.
+        if (splitMode) {
+            SResizingUtil.resizeWindow();
+        }
+    }
+
+    /**
+     * Re-applies field layout and panel style preferences to the current
+     * match view. Called from menu when preferences change mid-game.
+     */
+    public void relayoutMultiplayerFields() {
+        if (lstFields.size() <= 2 || baseRoughBounds0 == null) {
+            return;
+        }
+
+        // 1. Remove extra fields from their current cells.
+        for (int i = 2; i < lstFields.size(); i++) {
+            final VField vField = lstFields.get(i);
+            final DragCell parent = vField.getParentCell();
+            if (parent != null) {
+                parent.removeDoc(vField);
+                vField.setParentCell(null);
+            }
+        }
+
+        // 2. Remove dynamically created split cells.
+        for (final DragCell cell : dynamicCells) {
+            FView.SINGLETON_INSTANCE.removeDragCell(cell);
+        }
+        dynamicCells.clear();
+
+        // 3. Restore original base cell rough bounds.
+        final DragCell c0 = lstFields.get(0).getParentCell();
+        final DragCell c1 = lstFields.get(1).getParentCell();
+        c0.setRoughBounds(baseRoughBounds0);
+        c1.setRoughBounds(baseRoughBounds1);
+
+        // 4. Re-assign with current preferences.
+        assignExtraFieldsToCells();
+
+        // 5. Recalculate pixel layout from rough bounds and refresh.
+        SResizingUtil.resizeWindow();
+        SRearrangingUtil.updateBorders();
     }
 
     public CMatchUI getControl() {

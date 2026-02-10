@@ -17,11 +17,13 @@ import forge.control.FControl;
 import forge.gui.GuiChoose;
 import forge.gui.MouseUtil;
 import forge.gui.framework.FScreen;
+import forge.gui.framework.IVTopLevelUI;
 import forge.gui.framework.SLayoutIO;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
+import forge.screens.match.VMatchUI;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedMenuItem;
 import forge.util.Localizer;
@@ -66,7 +68,11 @@ public final class LayoutMenu {
         menu.add(getMenuItem_ShowTabs());
         if (currentScreen != null && currentScreen.isMatchScreen()) {
             menu.add(getMenuItem_ShowBackgroundImage());
-            menu.add(getMenuItem_SortPlayersByTurnOrder());
+            final JMenu layoutMenu = getMenu_MultiplayerFieldLayout();
+            final JMenu panelsMenu = getMenu_MultiplayerFieldPanels();
+            menu.add(getMenuItem_SortMultiplayerFields(layoutMenu, panelsMenu));
+            menu.add(layoutMenu);
+            menu.add(panelsMenu);
         }
         return menu;
     }
@@ -132,15 +138,87 @@ public final class LayoutMenu {
         };
     }
 
-    private static JMenuItem getMenuItem_SortPlayersByTurnOrder() {
+    private static JCheckBoxMenuItem getMenuItem_SortMultiplayerFields(
+            final JMenu layoutMenu, final JMenu panelsMenu) {
         final Localizer localizer = Localizer.getInstance();
-        final JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(localizer.getMessage("lblSortPlayersByTurnOrder"));
-        menuItem.setState(prefs.getPrefBoolean(FPref.UI_SORT_PLAYERS_BY_TURN_ORDER));
+        final boolean enabled = !"OFF".equals(prefs.getPref(FPref.UI_MULTIPLAYER_FIELD_LAYOUT));
+        final JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(
+                localizer.getMessage("lblSortMultiplayerFields"));
+        menuItem.setToolTipText(localizer.getMessage("lblSortMultiplayerFieldsTooltip"));
+        menuItem.setState(enabled);
+        layoutMenu.setEnabled(enabled);
+        panelsMenu.setEnabled(enabled);
         menuItem.addActionListener(e -> {
-            prefs.setPref(FPref.UI_SORT_PLAYERS_BY_TURN_ORDER, menuItem.getState());
+            final boolean on = menuItem.getState();
+            prefs.setPref(FPref.UI_MULTIPLAYER_FIELD_LAYOUT, on ? "GRID" : "OFF");
             prefs.save();
+            layoutMenu.setEnabled(on);
+            panelsMenu.setEnabled(on);
+            relayoutMatchFields();
         });
         return menuItem;
+    }
+
+    private static JMenu getMenu_MultiplayerFieldLayout() {
+        final Localizer localizer = Localizer.getInstance();
+        final JMenu menu = new JMenu(localizer.getMessage("lblMultiplayerFieldLayout"));
+        final ButtonGroup group = new ButtonGroup();
+        final String current = prefs.getPref(FPref.UI_MULTIPLAYER_FIELD_LAYOUT);
+
+        final String[] values = {"GRID", "ROWS"};
+        final String[] labelKeys = {"lblFieldLayoutGrid", "lblFieldLayoutRows"};
+        final String[] tooltipKeys = {"lblFieldLayoutGridTooltip", "lblFieldLayoutRowsTooltip"};
+
+        for (int i = 0; i < values.length; i++) {
+            final JRadioButtonMenuItem item = new JRadioButtonMenuItem(localizer.getMessage(labelKeys[i]));
+            item.setToolTipText(localizer.getMessage(tooltipKeys[i]));
+            item.setSelected(values[i].equals(current));
+            final String value = values[i];
+            item.addActionListener(e -> {
+                prefs.setPref(FPref.UI_MULTIPLAYER_FIELD_LAYOUT, value);
+                prefs.save();
+                relayoutMatchFields();
+            });
+            group.add(item);
+            menu.add(item);
+        }
+        return menu;
+    }
+
+    private static JMenu getMenu_MultiplayerFieldPanels() {
+        final Localizer localizer = Localizer.getInstance();
+        final JMenu menu = new JMenu(localizer.getMessage("lblMultiplayerFieldPanels"));
+        final ButtonGroup group = new ButtonGroup();
+        final String current = prefs.getPref(FPref.UI_MULTIPLAYER_FIELD_PANELS);
+
+        final String[] values = {"TABBED", "SPLIT"};
+        final String[] labelKeys = {"lblFieldPanelsTabbed", "lblFieldPanelsSplit"};
+        final String[] tooltipKeys = {"lblFieldPanelsTabbedTooltip", "lblFieldPanelsSplitTooltip"};
+
+        for (int i = 0; i < values.length; i++) {
+            final JRadioButtonMenuItem item = new JRadioButtonMenuItem(localizer.getMessage(labelKeys[i]));
+            item.setToolTipText(localizer.getMessage(tooltipKeys[i]));
+            item.setSelected(values[i].equals(current));
+            final String value = values[i];
+            item.addActionListener(e -> {
+                prefs.setPref(FPref.UI_MULTIPLAYER_FIELD_PANELS, value);
+                prefs.save();
+                relayoutMatchFields();
+            });
+            group.add(item);
+            menu.add(item);
+        }
+        return menu;
+    }
+
+    private static void relayoutMatchFields() {
+        final FScreen screen = Singletons.getControl().getCurrentScreen();
+        if (screen != null && screen.isMatchScreen()) {
+            final IVTopLevelUI view = screen.getView();
+            if (view instanceof VMatchUI) {
+                ((VMatchUI) view).relayoutMultiplayerFields();
+            }
+        }
     }
 
     private static JMenuItem getMenuItem_ShowTabs() {
