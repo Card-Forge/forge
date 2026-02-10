@@ -1039,6 +1039,11 @@ public final class CMatchUI
         if (players.size() == 2 && myPlayers != null && myPlayers.size() == 1 && myPlayers.get(0).equals(players.get(1))) {
             players = new FCollection<>(new PlayerView[]{players.get(1), players.get(0)});
         }
+        // Multiplayer: sort by turn order with local player first
+        if (players.size() > 2 && myPlayers != null && myPlayers.size() >= 1
+                && FModel.getPreferences().getPrefBoolean(FPref.UI_SORT_PLAYERS_BY_TURN_ORDER)) {
+            players = new FCollection<>(sortPlayersForMultiplayer(players, myPlayers.get(0)));
+        }
         initMatch(players, myPlayers);
         clearSelectables(); //fix uncleared selection
 
@@ -1054,6 +1059,45 @@ public final class CMatchUI
             FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_MATCH), true);
         else
             FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage((Image)null);
+    }
+
+    /**
+     * Reorders players for counterclockwise visual flow in the panel layout.
+     * The local player is placed at index 0 (bottom-left), then subsequent
+     * turn-order players fill the top row left-to-right, then the bottom row
+     * right-to-left. This accounts for VMatchUI.populate() placing even indices
+     * in the bottom cell and odd indices in the top cell.
+     */
+    static List<PlayerView> sortPlayersForMultiplayer(
+            final FCollectionView<PlayerView> players, final PlayerView localPlayer) {
+        final List<PlayerView> turnOrder = new ArrayList<>();
+        for (final PlayerView p : players) {
+            turnOrder.add(p);
+        }
+        final int localIndex = turnOrder.indexOf(localPlayer);
+        if (localIndex > 0) {
+            Collections.rotate(turnOrder, -localIndex);
+        }
+        final int n = turnOrder.size();
+        if (n <= 3) {
+            return turnOrder;
+        }
+        // Assign players to panel indices for counterclockwise visual flow:
+        // idx 0 (bottom-left): local player
+        // idx 1,3,5,... (top row, left to right): next players in turn order
+        // idx ...,4,2 (bottom row, right to left): remaining players
+        final PlayerView[] result = new PlayerView[n];
+        result[0] = turnOrder.get(0);
+        int turnPos = 1;
+        final int topCount = n / 2;
+        for (int i = 0; i < topCount; i++) {
+            result[1 + 2 * i] = turnOrder.get(turnPos++);
+        }
+        final int bottomExtra = (n - 1) / 2;
+        for (int i = bottomExtra - 1; i >= 0; i--) {
+            result[2 + 2 * i] = turnOrder.get(turnPos++);
+        }
+        return Arrays.asList(result);
     }
 
     @Override

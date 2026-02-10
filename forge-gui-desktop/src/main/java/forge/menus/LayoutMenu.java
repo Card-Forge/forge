@@ -66,6 +66,7 @@ public final class LayoutMenu {
         menu.add(getMenuItem_ShowTabs());
         if (currentScreen != null && currentScreen.isMatchScreen()) {
             menu.add(getMenuItem_ShowBackgroundImage());
+            menu.add(getMenuItem_SortPlayersByTurnOrder());
         }
         return menu;
     }
@@ -129,6 +130,17 @@ public final class LayoutMenu {
             }
             FView.SINGLETON_INSTANCE.getPnlInsets().repaint();
         };
+    }
+
+    private static JMenuItem getMenuItem_SortPlayersByTurnOrder() {
+        final Localizer localizer = Localizer.getInstance();
+        final JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(localizer.getMessage("lblSortPlayersByTurnOrder"));
+        menuItem.setState(prefs.getPrefBoolean(FPref.UI_SORT_PLAYERS_BY_TURN_ORDER));
+        menuItem.addActionListener(e -> {
+            prefs.setPref(FPref.UI_SORT_PLAYERS_BY_TURN_ORDER, menuItem.getState());
+            prefs.save();
+        });
+        return menuItem;
     }
 
     private static JMenuItem getMenuItem_ShowTabs() {
