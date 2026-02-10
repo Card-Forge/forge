@@ -191,6 +191,8 @@ public enum StaticAbilityMode {
     TurnReversed,
     PhaseReversed,
 
+    // StaticAbilityCountersRemain
+    CountersRemain,
     ;
 
     public static StaticAbilityMode smartValueOf(final String value) {
