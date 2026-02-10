@@ -6,7 +6,7 @@ T:Mode$ ChangesZoneAll | ValidCards$ Card.YouOwn | Origin$ Graveyard | Destinati
 SVar:TrigToken:DB$ Token | TokenScript$ rw_3_2_spirit
 A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 2 | UnlessCost$ Discard<1/Card> | UnlessSwitched$ True | UnlessPayer$ You | UnlessResolveSubs$ WhenPaid | SubAbility$ DBMill | SpellDescription$ You may discard a card. If you do, draw two cards, then mill a card.
 SVar:DBMill:DB$ Mill | Defined$ You | NumCards$ 1
-A:AB$ PumpAll | Cost$ SubCounter<4/LOYALTY> | ValidCards$ Spirit.YouCtrl | KW$ Double Strike & Vigilance | SpellDescription$ Spirits you control gain double strike and vigilance until end of turn.
+A:AB$ PumpAll | Cost$ SubCounter<4/LOYALTY> | Planeswalker$ True | ValidCards$ Spirit.YouCtrl | KW$ Double Strike & Vigilance | SpellDescription$ Spirits you control gain double strike and vigilance until end of turn.
 Text:CARDNAME can be your commander.
 DeckHas:Ability$Token
 SVar:PlayMain1:TRUE
