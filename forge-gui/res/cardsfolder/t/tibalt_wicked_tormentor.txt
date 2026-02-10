@@ -2,9 +2,10 @@ Name:Tibalt, Wicked Tormentor
 ManaCost:3 R R
 Types:Legendary Planeswalker Tibalt
 Loyalty:3
-A:AB$ Mana | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Produced$ R | Amount$ 2 | SubAbility$ DBDraft | SpellDescription$ Add {R}{R}.
-SVar:DBDraft:DB$ Draft | Spellbook$ Chained Brute,Charmbreaker Devils,Festival Crasher,Forge Devil,Frenzied Devils,Havoc Jester,Hellrider,Hobblefiend,Pitchburn Devils,Sin Prodder,Spiteful Prankster,Tibalt's Rager,Torch Fiend,Brimstone Vandal,Devil's Play | Zone$ Exile | RememberDrafted$ True | SubAbility$ DBEffect | SpellDescription$ Draft a card from CARDNAME's spellbook, then exile it.
-SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | ExileOnMoved$ Exile | SubAbility$ DBCleanup | SpellDescription$ Until end of turn, you may cast that card.
+A:AB$ Mana | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Produced$ R | Amount$ 2 | SubAbility$ DBDraft | StackDescription$ REP Add_{p:You} adds & Draft_{p:You} drafts & then exile_then they exile & you may_{p:You} may | SpellDescription$ Add {R}{R}. Draft a card from CARDNAME's spellbook, then exile it. Until end of turn, you may cast that card.
+SVar:DBDraft:DB$ Draft | Spellbook$ Chained Brute,Charmbreaker Devils,Festival Crasher,Forge Devil,Frenzied Devils,Havoc Jester,Hellrider,Hobblefiend,Pitchburn Devils,Sin Prodder,Spiteful Prankster,Tibalt's Rager,Torch Fiend,Brimstone Vandal,Devil's Play | RememberDrafted$ True | SubAbility$ DBExile | StackDescription$ None
+SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | Defined$ Remembered | SubAbility$ DBEffect | StackDescription$ None
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | ExileOnMoved$ Exile | SubAbility$ DBCleanup | StackDescription$ None
 SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until the end of turn, you may cast that card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ DealDamage | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 4 | UnlessCost$ DamageYou<4> | UnlessPayer$ TargetedController | UnlessResolveSubs$ WhenPaid | SubAbility$ DBDiscardDraw | StackDescription$ CARDNAME deals 4 damage to {c:Targeted} unless {p:TargetedController} has NICKNAME deal 4 damage to them. | SpellDescription$ CARDNAME deals 4 damage to target creature or planeswalker unless its controller has NICKNAME deal 4 damage to them.
