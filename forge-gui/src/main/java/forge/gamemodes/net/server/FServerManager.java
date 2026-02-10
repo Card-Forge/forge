@@ -476,7 +476,7 @@ public final class FServerManager {
         if (game == null) { return; }
 
         // Match by slot index — player names may be deduped by the game engine
-        // (e.g. "2nd MostCromulent") so name matching is unreliable
+        // so name matching is unreliable
         for (final Player p : game.getPlayers()) {
             final IGuiGame gui = hostedMatch.getGuiForPlayer(p);
             if (gui instanceof NetGuiGame && ((NetGuiGame) gui).getSlotIndex() == slotIndex) {
@@ -532,7 +532,7 @@ public final class FServerManager {
                 final PlayerControllerAi aiCtrl = new PlayerControllerAi(game, p, aiLobbyPlayer);
                 p.dangerouslySetController(aiCtrl);
 
-                // Clear InputQueue to unblock Path A (game thread waiting on cdlDone)
+                // Clear InputQueue to unblock the game thread (waiting on cdlDone)
                 final PlayerControllerHuman pch = findRemoteController(slotIndex);
                 if (pch != null) {
                     pch.getInputQueue().clearInputs();
@@ -681,12 +681,10 @@ public final class FServerManager {
 
             if (isMatchActive() && client.hasValidSlot()) {
                 // Game is active — enter reconnection mode
-                client.setDisconnected(true);
-
                 // Pause the NetGuiGame so sends become no-ops
                 pauseNetGuiGame(client.getIndex());
 
-                // Unblock any Path B waiter (sendAndWait)
+                // Unblock any pending sendAndWait calls
                 client.getReplyPool().cancelAll();
 
                 // Store for reconnection lookup

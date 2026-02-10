@@ -16,28 +16,18 @@ public final class RemoteClient implements IToClient {
     private String username;
     private int index = UNASSIGNED_SLOT;  // Initialize to -1 to indicate not yet assigned
     private volatile ReplyPool replies = new ReplyPool();
-    private volatile boolean disconnected;
 
     public RemoteClient(final Channel channel) {
         this.channel = channel;
     }
 
-    public boolean isDisconnected() {
-        return disconnected;
-    }
-
-    public void setDisconnected(final boolean disconnected) {
-        this.disconnected = disconnected;
-    }
-
     /**
      * Swap the underlying channel for a reconnecting client.
-     * Updates the channel, creates a fresh ReplyPool, and clears the disconnected flag.
+     * Updates the channel and creates a fresh ReplyPool.
      */
     public void swapChannel(final Channel newChannel) {
         this.channel = newChannel;
         this.replies = new ReplyPool();
-        this.disconnected = false;
     }
 
     /**
