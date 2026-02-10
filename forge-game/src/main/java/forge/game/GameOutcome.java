@@ -58,11 +58,21 @@ public final class GameOutcome implements Iterable<Entry<RegisteredPlayer, Playe
         }
 
         public void addWon(List<PaperCard> cards) {
-            this.wonCards.addAll(cards);
+            for(PaperCard c : cards) {
+                if(lostCards.contains(c))
+                    lostCards.remove(c);
+                else
+                    wonCards.add(c);
+            }
         }
 
         public void addLost(List<PaperCard> cards) {
-            this.lostCards.addAll(cards);
+            for(PaperCard c : cards) {
+                if(wonCards.contains(c))
+                    wonCards.remove(c);
+                else
+                    lostCards.add(c);
+            }
         }
     }
 
