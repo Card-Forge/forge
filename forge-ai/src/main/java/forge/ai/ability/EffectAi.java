@@ -33,6 +33,7 @@ import forge.util.collect.FCollectionView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.Map;
 
 public class EffectAi extends SpellAbilityAi {
@@ -392,7 +393,7 @@ public class EffectAi extends SpellAbilityAi {
 
             for (String st : sa.getParam("StaticAbilities").split(",")) {
                 Map<String, String> params = FileSection.parseToMap(sa.getSVar(st), FileSection.DOLLAR_SIGN_KV_SEPARATOR);
-                List<StaticAbilityMode> modes = StaticAbilityMode.listValueOf(params.get("Mode"));
+                Set<StaticAbilityMode> modes = StaticAbilityMode.setValueOf(params.get("Mode"));
 
                 if (modes.contains(StaticAbilityMode.CantAttack) && matchStr.equals(params.get("ValidCard"))) {
                     cantAttack = true;
