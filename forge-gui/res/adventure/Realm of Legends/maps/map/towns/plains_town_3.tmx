@@ -51,7 +51,8 @@
   <object id="59" template="../../../../common/maps/obj/shardtrader.tx" x="128" y="130"/>
   <object id="63" template="../../../../common/maps/obj/shop.tx" x="256.176" y="307.722">
    <properties>
-    <property name="shopList" value="Legend4White"/>
+    <property name="commonShopList" value="Legend4White"/>
+    <property name="shopList" value=""/>
    </properties>
   </object>
   <object id="64" template="../../../../common/maps/obj/shop.tx" x="142.344" y="308.259">
