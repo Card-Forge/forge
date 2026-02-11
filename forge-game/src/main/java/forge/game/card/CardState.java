@@ -215,7 +215,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     }
     public final void setManaCost(final ManaCost manaCost0) {
         manaCost = manaCost0;
-        calculatePerpetualAdjustedManaCost();
+        view.updateManaCost(this);
     }
 
     /**
@@ -292,7 +292,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     }
 
     public ManaCost getPerpetualAdjustedManaCost() {
-        return perpetualAdjustedManaCost;
+        return perpetualAdjustedManaCost == null ? getManaCost() : perpetualAdjustedManaCost;
     }
 
     private void setPerpetualAdjustedManaCost(ManaCost manaCost) {
