@@ -173,7 +173,7 @@ If you cannot configure port forwarding (public hotspot, cellular, restricted ne
 ## Troubleshooting
 
 ### Version Compatibility
-While network play between different versions of Forge can be possible, mismatched versions may cause desync or crashes mid-game. Forge warns when a client's version differs from the host's but **does not block the connection**. Always use the same version on all devices to avoid network compatibility issues.
+Forge automatically warns in the lobby chat when a client's version differs from the host's but **does not block the connection**. While network play between different versions of Forge can be possible, mismatched versions may cause desync or crashes mid-game. Always use the same version on all devices to avoid network compatibility issues.
 
 ### Lag / High Bandwidth
 Network play currently lacks traffic optimization. A single game can transfer hundreds of megabytes. Slow connections will experience significant lag.
