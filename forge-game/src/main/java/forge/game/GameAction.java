@@ -43,6 +43,7 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellPermanent;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityCountersRemain;
 import forge.game.staticability.StaticAbilityContinuous;
 import forge.game.staticability.StaticAbilityLayer;
 import forge.game.staticability.StaticAbilityMode;
@@ -172,17 +173,7 @@ public class GameAction {
                 lastKnownInfo = CardCopyService.getLKICopy(c);
             }
 
-            boolean retainCounters = lastKnownInfo.hasKeyword("Counters remain on CARDNAME as it moves to any zone other than a player's hand or library.");
-            if (!retainCounters) {
-                for (final StaticAbility sa : lastKnownInfo.getStaticAbilities()) {
-                    if (sa.checkConditions(StaticAbilityMode.RetainCounters)) {
-                        retainCounters = true;
-                        break;
-                    }
-                }
-            }
-
-            if (!retainCounters) {
+            if (!StaticAbilityCountersRemain.countersRemain(lastKnownInfo, zoneTo)) {
                 copied.clearCounters();
             }
         } else {
@@ -258,17 +249,7 @@ public class GameAction {
             }
 
             // need to copy counters when card enters another zone than hand or library
-            boolean retainCounters = lastKnownInfo.hasKeyword("Counters remain on CARDNAME as it moves to any zone other than a player's hand or library.");
-            if (!retainCounters) {
-                for (final StaticAbility sa : lastKnownInfo.getStaticAbilities()) {
-                    if (sa.checkConditions(StaticAbilityMode.RetainCounters)) {
-                        retainCounters = true;
-                        break;
-                    }
-                }
-            }
-            if (retainCounters &&
-                    !(zoneTo.is(ZoneType.Hand) || zoneTo.is(ZoneType.Library))) {
+            if (StaticAbilityCountersRemain.countersRemain(lastKnownInfo, zoneTo)) {
                 copied.setCounters(Maps.newHashMap(lastKnownInfo.getCounters()));
             }
 

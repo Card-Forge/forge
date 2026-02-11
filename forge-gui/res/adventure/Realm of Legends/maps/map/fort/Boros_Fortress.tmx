@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="31" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="95">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="31" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="97">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -134,8 +134,8 @@
     &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
   }
 ]</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
    </properties>
   </object>
   <object id="81" template="../../obj/treasure.tx" x="347" y="165">
@@ -177,7 +177,7 @@
   </object>
   <object id="84" template="../../../../common/maps/obj/scroll.tx" x="431" y="393.25">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Boros Guildgate&quot;, &quot;editions&quot;: [ &quot;GRN&quot; ], &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Boros Charm&quot;, &quot;editions&quot;: [ &quot;GTC&quot; ], &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
   <object id="85" template="../../../../common/maps/obj/collision.tx" x="494.903" y="-30" width="20.195" height="529"/>
@@ -189,5 +189,11 @@
   <object id="92" template="../../../../common/maps/obj/collision.tx" x="304.065" y="127.5" width="33.9536" height="40"/>
   <object id="93" template="../../../../common/maps/obj/collision.tx" x="255.273" y="131" width="18.2036" height="29.75"/>
   <object id="94" template="../../../../common/maps/obj/collision.tx" x="190.898" y="131.125" width="18.2036" height="29.75"/>
+  <object id="95" template="../../../../common/maps/obj/gold.tx" x="346.5" y="188.75"/>
+  <object id="96" template="../../../../common/maps/obj/scroll.tx" x="281.5" y="167.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Sacred Foundry&quot;, &quot;editions&quot;: [ &quot;RAV&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

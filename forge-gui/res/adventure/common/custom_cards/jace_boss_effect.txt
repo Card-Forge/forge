@@ -6,7 +6,7 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | 
 SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$GE10 | TrueSubAbility$ DBChoose | FalseSubAbility$ DBConjureSpellBook
 SVar:DBChoose:DB$ ChooseCard | Choices$ Creature | ChoiceZone$ Library | AtRandom$ True | SubAbility$ DBConjure
 SVar:DBConjure:DB$ MakeCard | Conjure$ True | DefinedName$ ChosenCard | Zone$ Battlefield | RememberMade$ True | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Animate | Defined$ Remembered | Power$ 2 | Toughness$ 2 | Colors$ Blue | OverwriteColors$ True | Types$ Creature,Illusion | RemoveCardTypes$ True |Triggers$ DismissTarget | Duration$ Perpetual | SubAbility$ DBCleanup
+SVar:DBEffect:DB$ Animate | Defined$ Remembered | Power$ 2 | Toughness$ 2 | Colors$ Blue | OverwriteColors$ True | Types$ Creature,Illusion | RemoveCardTypes$ True | Triggers$ DismissTarget | Duration$ Perpetual | SubAbility$ DBCleanup
 SVar:DismissTarget:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ DismissSac | TriggerDescription$ When this creature becomes the target of a spell or ability, sacrifice it.
 SVar:DismissSac:DB$ Sacrifice
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True

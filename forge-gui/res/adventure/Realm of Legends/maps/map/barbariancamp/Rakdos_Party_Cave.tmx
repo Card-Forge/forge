@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="75">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="76">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -143,21 +143,21 @@
     &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
   }
 ]</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="68" template="../../../../common/maps/obj/scroll.tx" x="119.5" y="345">
+  <object id="68" template="../../../../common/maps/obj/scroll.tx" x="129.5" y="338.5">
    <properties>
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Rakdos Carnarium&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
-  <object id="69" template="../../../../common/maps/obj/scroll.tx" x="197" y="113.5">
+  <object id="69" template="../../../../common/maps/obj/scroll.tx" x="270" y="306.5">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Rakdos Guildgate&quot;, &quot;editions&quot;: [ &quot;RNA&quot; ], &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Rakdos Charm&quot;, &quot;editions&quot;: [ &quot;RNA&quot; ], &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
-  <object id="70" template="../../../../common/maps/obj/manashards.tx" x="271.455" y="308"/>
+  <object id="70" template="../../../../common/maps/obj/manashards.tx" x="108.455" y="360"/>
   <object id="71" template="../../../../common/maps/obj/dialog.tx" x="200.5" y="335.75" width="80" height="15.5" visible="1">
    <properties>
     <property name="dialog">[
@@ -195,5 +195,10 @@ Only masochists are advised to jump in.&quot;,
    </properties>
   </object>
   <object id="74" template="../../../../common/maps/obj/collision.tx" x="337.459" y="176.548" width="30.7495" height="30.5704"/>
+  <object id="75" template="../../../../common/maps/obj/scroll.tx" x="188" y="117.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Blood Crypt&quot;, &quot;editions&quot;: [ &quot;DIS&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

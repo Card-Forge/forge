@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="72">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="75">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -47,24 +47,33 @@
    </properties>
   </object>
   <object id="50" template="../../../../common/maps/obj/shardtrader.tx" x="98" y="98"/>
-  <object id="63" template="../../../../common/maps/obj/shop.tx" x="176.171" y="83.8172">
-   <properties>
-    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic"/>
-   </properties>
-  </object>
   <object id="69" template="../../../../common/maps/obj/shop.tx" x="223.959" y="161.137">
    <properties>
     <property name="shopList" value="Legend4Green"/>
    </properties>
   </object>
-  <object id="70" template="../../../../common/maps/obj/shop.tx" x="209.999" y="50.5268">
+  <object id="72" template="../../../../common/maps/obj/shop.tx" x="209.462" y="52.6745">
    <properties>
-    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic"/>
+    <property name="commonShopList" value="Green,Green,Enchantment4Green,Creature2Green,Instant4Green"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,PhyrexianGreen"/>
+    <property name="rareShopList" value="Land4Green,Simic,Golgari,Gruul,Selesnya,Vehicle,Colorless"/>
+    <property name="uncommonShopList" value="Artifact,Elf,Wolf4Green,Druid,Squirrel,Sliver2Green,Wand,Equip,Multicolor"/>
    </properties>
   </object>
-  <object id="71" template="../../../../common/maps/obj/shop.tx" x="127.31" y="82.7433">
+  <object id="73" template="../../../../common/maps/obj/shop.tx" x="175.097" y="81.1325">
    <properties>
-    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic"/>
+    <property name="commonShopList" value="Elf,Wolf,Druid,Squirrel,Sliver2Green,Wolf4Green"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green"/>
+    <property name="rareShopList" value="Simic,Golgari,Gruul,Selesnya,Creature6Green,Multicolor,Land4Green,PhyrexianGreen"/>
+    <property name="uncommonShopList" value="Creature2Green,Creature,Green"/>
+   </properties>
+  </object>
+  <object id="74" template="../../../../common/maps/obj/shop.tx" x="127.31" y="83.2803">
+   <properties>
+    <property name="commonShopList" value="Green,Green,Enchantment4Green,Creature2Green,Instant4Green"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green,Hydra"/>
+    <property name="rareShopList" value="RGU,UWG,UGB,RWG,RGB,GWB,Land4Green,Creature6Green"/>
+    <property name="uncommonShopList" value="Simic,Golgari,Gruul,Selesnya,Simic,Golgari,Gruul,Selesnya,Land"/>
    </properties>
   </object>
  </objectgroup>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="70" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="183">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="70" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="188">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -136,6 +136,24 @@
       &quot;count&quot;:1, 
       &quot;cardName&quot;: &quot;last one standing&quot;,
       &quot;editions&quot;: [&quot;BBD&quot;]
+},
+{
+      &quot;type&quot;: &quot;card&quot;,
+      &quot;count&quot;:1, 
+      &quot;cardName&quot;: &quot;Phyrexian Arena&quot;,
+      &quot;editions&quot;: [&quot;SCD&quot;]
+},
+{
+      &quot;type&quot;: &quot;card&quot;,
+      &quot;count&quot;:1, 
+      &quot;cardName&quot;: &quot;Arena of Glory&quot;,
+      &quot;editions&quot;: [&quot;MH3&quot;]
+},
+{
+      &quot;type&quot;: &quot;card&quot;,
+      &quot;count&quot;:1, 
+      &quot;cardName&quot;: &quot;Arena&quot;,
+      &quot;editions&quot;: [&quot;TSB&quot;]
 }
 ]</property>
    </properties>
@@ -565,5 +583,44 @@
   <object id="180" template="../../../../common/maps/obj/collision.tx" x="750.22" y="558.924" width="16.8925" height="35.4844"/>
   <object id="181" template="../../../../common/maps/obj/collision.tx" x="575.554" y="398.424" width="30.6425" height="16.6511"/>
   <object id="182" template="../../../../common/maps/obj/collision.tx" x="367.054" y="463.424" width="16.8925" height="31.9011"/>
+  <object id="183" template="../../../../common/maps/obj/gold.tx" x="841.25" y="249"/>
+  <object id="186" template="../../../../common/maps/obj/gold.tx" x="897.5" y="249.25"/>
+  <object id="187" template="../../../../common/maps/obj/enemy.tx" x="310.667" y="1102.33">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'Welcome, customer, to Gwafa Hazid's emporium of spells!'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;I'll buy some spells. (Spend 2000 gold)&quot;,
+					&quot;text&quot;: &quot;'See you next time, valued customer! There's always more in stock!'&quot;,
+					&quot;action&quot;: [ 
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;randomCard&quot;, &quot;count&quot;: 50 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: -2000}                
+                      ]
+                    } ],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;What are you selling?&quot;,
+					&quot;text&quot;: &quot;'Spells at a great discount! Why, for just twice the price of a 'spell pack' that other merchants sell, I give you more than three times as many spells! That's FIFTY spells! And far more importantly, the spells I sell can be ANYTHING! Why, you might get 50 rare spells! Of course, I can't guarantee that, but I CAN guarantee my mystery boxes haven't been searched or seeded, they're one hundred percent genuine random. Straight from falling off the back of a caravan to your pocket, my friend!'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;I'll think on it.&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;No spells for me today, thanks.&quot;,
+					&quot;text&quot;: &quot;'See you next time.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Gwafa Hazid"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

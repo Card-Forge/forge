@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="70">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="73">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -26,7 +26,7 @@
  </layer>
  <layer id="5" name="Overlay" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AU0Ars1mJg2APEd5gRGBdo4saOyQHXgXbe0CJOLcyeR4yo9CggDMR1GBgkdBB8XHHcpIUfUwMQSl+0AgNlLz3ATW0GhlvaELa2JgODjiZ2dcjpABd7FAxucFqfuuqIBc+JNI9YdaNgFIyCUUAOAAC11SE8
+   eJxjYBgFo2AU0Ars1mJg2APEd5gRGBdo4saOyQHXgXbe0CJOLcyeR4yo9CggDMR1GBgkdBB8XHHcpIUfUwMQSl+0AgNlLz3ATW0GhlvaELa2JgODjiZ2dcjpABd7FFAGQOUSLcFpfeqqIxY8J9I8YtWNglEwCkYBOQAAfcsiHw==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -42,6 +42,7 @@
    <properties>
     <property name="commonShopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop"/>
     <property name="mythicShopList" value=""/>
+    <property name="noRestock" type="bool" value="false"/>
     <property name="rareShopList" value=""/>
     <property name="uncommonShopList" value=""/>
    </properties>
@@ -49,22 +50,33 @@
   <object id="62" template="../../../../common/maps/obj/shardtrader.tx" x="400" y="288"/>
   <object id="64" template="../../../../common/maps/obj/shop.tx" x="161.137" y="211.073">
    <properties>
+    <property name="noRestock" type="bool" value="false"/>
     <property name="shopList" value="Legend"/>
    </properties>
   </object>
-  <object id="67" template="../../../../common/maps/obj/shop.tx" x="255.639" y="274.969">
+  <object id="70" template="../../../../common/maps/obj/shop.tx" x="257.25" y="274.432">
    <properties>
-    <property name="shopList" value=" Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic"/>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
+    <property name="noRestock" type="bool" value="false"/>
+    <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black,FlipShop,Saga"/>
+    <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature,Battle"/>
    </properties>
   </object>
-  <object id="68" template="../../../../common/maps/obj/shop.tx" x="303.427" y="273.358">
+  <object id="71" template="../../../../common/maps/obj/shop.tx" x="305.575" y="273.895">
    <properties>
-    <property name="shopList" value=" Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic"/>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Vehicle,Equip,Wand"/>
+    <property name="mythicShopList" value="White,Blue,Red,Green,Black,Legend"/>
+    <property name="rareShopList" value="Land4Colorless,Land4Colorless,Creature2Eldrazi,Saga"/>
+    <property name="uncommonShopList" value="Land,Enchantment,Instant,Creature"/>
    </properties>
   </object>
-  <object id="69" template="../../../../common/maps/obj/shop.tx" x="352.289" y="273.895">
+  <object id="72" template="../../../../common/maps/obj/shop.tx" x="353.362" y="273.895">
    <properties>
-    <property name="shopList" value=" Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic"/>
+    <property name="commonShopList" value="Creature,Creature2Blue,Creature2Red,Creature2Black,Creature2White,Creature2Green,Creature2Colorless,Sliver,Wall,Assembly,Human"/>
+    <property name="mythicShopList" value="Assassin,Squirrel,Dragon,Vampire,Minotaur,Dwarf,Devil,Soldier,Demon,Druid,Bird,Wolf,Knight,Skeleton,Shaman,Wizard,Pirate,Rogue,Dinosaur,Ogre,Planeswalker,Legend,WUBRG,Gods"/>
+    <property name="rareShopList" value="Human,Zombie,Goblin,Elf,Merfolk,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,PhyrexianColorless,Giant,Spiders,Shapeshifter"/>
+    <property name="uncommonShopList" value="Land,Vehicle,Equip,Wand,Artifact,Multicolor,Golem,Colorless,Enchantment,Instant"/>
    </properties>
   </object>
  </objectgroup>
