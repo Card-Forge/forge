@@ -331,11 +331,6 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         return sa;
     }
 
-    @Override
-    public List<Object> getTriggerRemembered() {
-        return ImmutableList.of();
-    }
-
     protected boolean canReplaceETB(Map<AbilityKey, Object> runParams) {
         // if Card does affect something other than itself
         if (!hasParam("ValidCard") || !getParam("ValidCard").startsWith("Card.Self")) {
