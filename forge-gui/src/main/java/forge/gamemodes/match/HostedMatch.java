@@ -63,6 +63,16 @@ public class HostedMatch {
 
     public HostedMatch() {}
 
+    /**
+     * Look up the IGuiGame for a given Player from the guis map.
+     * This is the authoritative source for the GUI assigned to each player,
+     * unlike PlayerControllerHuman.getGui() which may be overwritten.
+     */
+    public IGuiGame getGuiForPlayer(final Player player) {
+        if (guis == null || player == null) { return null; }
+        return guis.get(player.getRegisteredPlayer());
+    }
+
     public void setStartGameHook(Runnable hook) {
         startGameHook = hook;
     }
