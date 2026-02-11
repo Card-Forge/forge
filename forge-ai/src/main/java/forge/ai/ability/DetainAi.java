@@ -1,7 +1,6 @@
 package forge.ai.ability;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 import forge.ai.AiAttackController;
 import forge.ai.ComputerUtil;
@@ -20,19 +19,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 public class DetainAi extends SpellAbilityAi {
-
-    Predicate<Card> CREATURE_OR_TAP_ABILITY = c -> {
-        if (c.isCreature()) {
-            return true;
-        }
-
-        for (final SpellAbility sa : c.getSpellAbilities()) {
-            if (sa.isAbility() && sa.getPayCosts().hasTapCost()) {
-                return true;
-            }
-        }
-        return false;
-    };
 
     protected boolean prefTargeting(final Player ai, final Card source, final SpellAbility sa, final boolean mandatory) {
         final Game game = ai.getGame();

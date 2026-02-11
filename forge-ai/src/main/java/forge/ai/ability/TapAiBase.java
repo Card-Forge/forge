@@ -20,19 +20,6 @@ import java.util.function.Predicate;
 
 public abstract class TapAiBase extends SpellAbilityAi {
 
-    Predicate<Card> CREATURE_OR_TAP_ABILITY = c -> {
-        if (c.isCreature()) {
-            return true;
-        }
-
-        for (final SpellAbility sa : c.getSpellAbilities()) {
-            if (sa.isAbility() && sa.getPayCosts().hasTapCost()) {
-                return true;
-            }
-        }
-        return false;
-    };
-
     /**
      * <p>
      * tapTargetList.
