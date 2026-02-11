@@ -33,7 +33,7 @@
     "Humility",
     "Stasis",
     "Presence of the Master",
-    "Arena of Legends",
+    "Arena of the Ancients",
     "Cursed Totem",
     "Null Rod",
     "Ensnaring Bridge",
@@ -230,7 +230,7 @@
     }
     ,{
       "name": "Normal",
-      "startingLife": 20,
+      "startingLife": 25,
       "startingShards": 20,
       "startingMoney": 2000,
       "startingDifficulty": true,
@@ -254,7 +254,7 @@
       ]
     },{
       "name": "Hard",
-      "startingLife": 15,
+      "startingLife": 20,
       "startingShards": 10,
       "startingMoney": 500,
       "enemyLifeFactor": 1.5,
@@ -276,7 +276,7 @@
       ]
     },{
       "name": "Insane",
-      "startingLife": 10,
+      "startingLife": 15,
       "startingShards": 10,
       "startingMoney": 0,
       "enemyLifeFactor": 2.0,

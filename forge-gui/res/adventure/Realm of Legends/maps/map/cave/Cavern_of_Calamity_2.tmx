@@ -54,7 +54,7 @@
     <property name="threatRange" type="int" value="150"/>
    </properties>
   </object>
-  <object id="79" template="../../../../common/maps/obj/dialog.tx" x="294.269" y="444.576" width="167.197" height="20.858" visible="1">
+  <object id="79" template="../../../../common/maps/obj/dialog.tx" x="274.269" y="438.576" width="174.197" height="20.858" visible="1">
    <properties>
     <property name="dialog">[
 {
@@ -123,10 +123,10 @@
     <property name="spawn.Hard" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="90" template="../../../../common/maps/obj/entry_up.tx" x="322.5" y="469.5" width="130" height="8">
+  <object id="90" template="../../../../common/maps/obj/entry_up.tx" x="327.5" y="479.5" width="130" height="8">
    <properties>
     <property name="teleport" value="../Realm of Legends/maps/map/cave/Cavern_of_Calamity_1.tmx"/>
-    <property name="teleportObjectId" value="153"/>
+    <property name="teleportObjectId" value="81"/>
    </properties>
   </object>
   <object id="94" template="../../../../common/maps/obj/collision.tx" x="272.012" y="126.555" width="20.4408" height="28.2431"/>
