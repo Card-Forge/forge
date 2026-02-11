@@ -12,13 +12,18 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class ForgetOnMovedTest {
 
     @BeforeClass
     public void initLocalization() {
-        Localizer.getInstance().initialize("en-US", "/Users/calaespi/Desktop/Proyectos/Personales/forge/forge-gui/res/languages");
+        File file = new File("../forge-gui/res/languages");
+        if (!file.exists()) {
+            file = new File("forge-gui/res/languages");
+        }
+        Localizer.getInstance().initialize("en-US", file.getAbsolutePath());
         Lang.createInstance("en-US");
     }
 
