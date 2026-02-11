@@ -98,9 +98,10 @@ public class VMatchUI implements IVTopLevelUI {
         DragCell cellWithHands = null;
         for (final EDocID handId : EDocID.Hands) {
             cellWithHands = handId.getDoc().getParentCell();
-            if (cellWithHands != null) {
+            if (cellWithHands != null && cellWithHands.isShowing()) {
                 break;
             }
+            cellWithHands = null;
         }
         if (cellWithHands == null) {
             // Default to a cell we know exists
