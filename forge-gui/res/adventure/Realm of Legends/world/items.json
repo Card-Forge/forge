@@ -1482,10 +1482,10 @@
     }
   },
     {
-    "name": "Victual Slivermark",
+    "name": "Victual Sliverband",
     "description": "2/2 sliver; slivers gain 2 and sac: gain 4",
     "equipmentSlot": "Boots",
-    "iconName": "VictualSlivermark",
+    "iconName": "VictualSliverband",
     "effect": {
         "startBattleWithCard": [
         "Victual Sliver|STH"

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="127">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="128">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -47,11 +47,27 @@
   <object id="54" template="../../../../common/maps/obj/gold.tx" x="225.917" y="339.583"/>
   <object id="57" template="../../../../common/maps/obj/enemy.tx" gid="2147495067" x="239.423" y="134.96">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Koll"/>
    </properties>
   </object>
   <object id="58" template="../../../../common/maps/obj/enemy.tx" x="103.663" y="442.664">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Cayth"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
@@ -62,28 +78,62 @@
    </properties>
   </object>
   <object id="63" template="../../../../common/maps/obj/gold.tx" x="648" y="393.333"/>
-  <object id="64" template="../../../../common/maps/obj/enemy.tx" x="314.097" y="511.301">
+  <object id="64" template="../../../../common/maps/obj/enemy.tx" x="202.764" y="513.301">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Depala"/>
+    <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value=""/>
    </properties>
   </object>
-  <object id="65" template="../../../../common/maps/obj/enemy.tx" x="431.588" y="439.725">
+  <object id="65" template="../../../../common/maps/obj/enemy.tx" x="424.921" y="369.058">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Cadric"/>
-    <property name="threatRange" type="int" value="0"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value=""/>
    </properties>
   </object>
   <object id="67" template="../../../../common/maps/obj/enemy.tx" gid="2147495067" x="499.105" y="172.408">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Hofri"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
   <object id="69" template="../../../../common/maps/obj/enemy.tx" x="177.863" y="131.217">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Goldvein Pick|KHM&quot;, &quot;Fearless Liberator|KHM&quot;]}"/>
     <property name="enemy" value="Magda"/>
     <property name="threatRange" type="int" value="20"/>
@@ -92,6 +142,14 @@
   <object id="70" template="../../../../common/maps/obj/gold.tx" x="512.696" y="349.285"/>
   <object id="71" template="../../../../common/maps/obj/enemy.tx" gid="2147495067" x="472.514" y="322.299">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Reveka"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
@@ -114,6 +172,14 @@
   </object>
   <object id="82" template="../../../../common/maps/obj/enemy.tx" x="811.334" y="408">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Irini"/>
     <property name="threatRange" type="int" value="0"/>
     <property name="waypoints" value=""/>
@@ -133,6 +199,14 @@
   </object>
   <object id="102" template="../../../../common/maps/obj/enemy.tx" gid="2147495067" x="174.667" y="355.333">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Reyav"/>
     <property name="threatRange" type="int" value="20"/>
     <property name="waypoints" value=""/>
@@ -164,6 +238,14 @@
   </object>
   <object id="115" template="../../../../common/maps/obj/enemy.tx" x="686.667" y="212">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Cabal Trainee|JUD&quot;, &quot;Barbarian Bully|JUD&quot;]}"/>
     <property name="enemy" value="Balthor"/>
    </properties>
@@ -216,6 +298,51 @@
   &quot;editions&quot;: [ &quot;ELD&quot; ]
 }
 ]</property>
+   </properties>
+  </object>
+  <object id="127" template="../../../../common/maps/obj/enemy.tx" gid="11419" x="530" y="518">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'Come, smallfolk. Listen to my tale.'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;I have demolished all the dwarves.&quot;,
+					&quot;text&quot;: &quot;'Wonderful! Wonderful! Now I need to figure out how to actually run this place...'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Bartel Runeaxe&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 7500}                
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 10
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Lets hear your tale then.&quot;,
+					&quot;text&quot;: &quot;'I am Bartel Runeaxe, and this mine is rightfully... mine. But when the mine and myself were stripped from our home plane and brought here, it took me a while to find it. When I got here, dwarves were infesting it. I'd be happy to kill them but I simply don't fit down these tunnels. My magic detects ten intruders. Kill them all and I'll share the bounty of a literal gold mine with you for your help in restoring my rightful property.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;I don't have time for this.&quot;,
+					&quot;text&quot;: &quot;'So be it.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Bartel"/>
+    <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
  </objectgroup>

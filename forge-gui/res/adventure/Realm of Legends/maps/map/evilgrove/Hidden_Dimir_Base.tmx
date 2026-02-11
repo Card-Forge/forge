@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="45" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="16" nextobjectid="185">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="45" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="16" nextobjectid="188">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -83,7 +83,6 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="117" template="../../../../common/maps/obj/manashards.tx" x="398.872" y="25.3907"/>
   <object id="118" template="../../../../common/maps/obj/manashards.tx" x="699.396" y="168.359"/>
   <object id="136" template="../../../../common/maps/obj/enemy.tx" x="643.682" y="166.829">
    <properties>
@@ -99,7 +98,7 @@
   <object id="143" template="../../../../common/maps/obj/collision.tx" x="-1.86317" y="175.689" width="277.276" height="46.7511"/>
   <object id="144" template="../../../../common/maps/obj/collision.tx" x="460.201" y="96.04" width="258.669" height="46.7511"/>
   <object id="145" template="../../../../common/maps/obj/collision.tx" x="459.875" y="177.322" width="258.669" height="46.7511"/>
-  <object id="150" template="../../obj/treasure.tx" x="377.375" y="25.2083">
+  <object id="150" template="../../obj/treasure.tx" x="393.011" y="24.481">
    <properties>
     <property name="reward">[
   {
@@ -160,8 +159,8 @@
   }
 ]
 </property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
    </properties>
   </object>
   <object id="152" template="../../../../common/maps/obj/dialog.tx" x="275" y="220.583" width="27.5" height="15.5" visible="1">
@@ -182,7 +181,7 @@
   </object>
   <object id="154" template="../../../../common/maps/obj/scroll.tx" x="669.333" y="167.333">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Dimir Guildgate&quot;, &quot;editions&quot;: [ &quot;GRN&quot; ], &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Dimir Charm&quot;, &quot;editions&quot;: [ &quot;GTC&quot; ], &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
   <object id="155" template="../../../../common/maps/obj/dialog.tx" x="416.417" y="405.75" width="19.1667" height="19.1667" visible="1">
@@ -247,5 +246,12 @@
 ]</property>
    </properties>
   </object>
+  <object id="185" template="../../../../common/maps/obj/scroll.tx" x="372.939" y="22.0303">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Watery Grave&quot;, &quot;editions&quot;: [ &quot;RAV&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="186" template="../../../../common/maps/obj/manashards.tx" x="440.667" y="154"/>
+  <object id="187" template="../../../../common/maps/obj/manashards.tx" x="279.333" y="150"/>
  </objectgroup>
 </map>
