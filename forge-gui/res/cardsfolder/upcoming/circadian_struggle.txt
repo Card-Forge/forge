@@ -2,11 +2,11 @@ Name:Circadian Struggle
 ManaCost:4 GU GU
 Types:Instant
 A:SP$ Seek | Num$ X | Type$ Card.SharesColorWith Valid Permanent.YouCtrl | RememberFound$ True | SubAbility$ DBAnimateW | SpellDescription$ Vivid — Seek X cards that each share a color with one or more permanents you control, where X is the number of colors among permanents you control. For each color among permanents you control, those cards perpetually gain "This spell costs {1} less to cast."
-SVar:DBAnimateW:DB$ AnimateAll | Zone$ Hand | Duration$ Perpetual | ValidCards$ Card.IsRemembered | staticAbilities$ ReduceCost | ConditionPresent$ Permanent.YouCtrl+White | SubAbility$ DBAnimateU
-SVar:DBAnimateU:DB$ AnimateAll | Zone$ Hand | Duration$ Perpetual | ValidCards$ Card.IsRemembered | staticAbilities$ ReduceCost | ConditionPresent$ Permanent.YouCtrl+Blue | SubAbility$ DBAnimateB
-SVar:DBAnimateB:DB$ AnimateAll | Zone$ Hand | Duration$ Perpetual | ValidCards$ Card.IsRemembered | staticAbilities$ ReduceCost | ConditionPresent$ Permanent.YouCtrl+Black | SubAbility$ DBAnimateR
-SVar:DBAnimateR:DB$ AnimateAll | Zone$ Hand | Duration$ Perpetual | ValidCards$ Card.IsRemembered | staticAbilities$ ReduceCost | ConditionPresent$ Permanent.YouCtrl+Red | SubAbility$ DBAnimateG
-SVar:DBAnimateG:DB$ AnimateAll | Zone$ Hand | Duration$ Perpetual | ValidCards$ Card.IsRemembered | staticAbilities$ ReduceCost | ConditionPresent$ Permanent.YouCtrl+Green | SubAbility$ DBCleanup
+SVar:DBAnimateW:DB$ AnimateAll | Zone$ Hand | Duration$ Perpetual | ValidCards$ Card.IsRemembered | staticAbilities$ ReduceCost | ConditionPresent$ Permanent.YouCtrl+White | LockInText$ True | SubAbility$ DBAnimateU
+SVar:DBAnimateU:DB$ AnimateAll | Zone$ Hand | Duration$ Perpetual | ValidCards$ Card.IsRemembered | staticAbilities$ ReduceCost | ConditionPresent$ Permanent.YouCtrl+Blue | LockInText$ True | SubAbility$ DBAnimateB
+SVar:DBAnimateB:DB$ AnimateAll | Zone$ Hand | Duration$ Perpetual | ValidCards$ Card.IsRemembered | staticAbilities$ ReduceCost | ConditionPresent$ Permanent.YouCtrl+Black | LockInText$ True | SubAbility$ DBAnimateR
+SVar:DBAnimateR:DB$ AnimateAll | Zone$ Hand | Duration$ Perpetual | ValidCards$ Card.IsRemembered | staticAbilities$ ReduceCost | ConditionPresent$ Permanent.YouCtrl+Red | LockInText$ True | SubAbility$ DBAnimateG
+SVar:DBAnimateG:DB$ AnimateAll | Zone$ Hand | Duration$ Perpetual | ValidCards$ Card.IsRemembered | staticAbilities$ ReduceCost | ConditionPresent$ Permanent.YouCtrl+Green | LockInText$ True | SubAbility$ DBCleanup
 SVar:ReduceCost:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | Description$ This spell costs {1} less to cast.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBEffect
 SVar:X:Count$Valid Permanent.YouCtrl$Colors

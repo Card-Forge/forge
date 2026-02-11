@@ -50,9 +50,8 @@
   <object id="62" template="../../../../common/maps/obj/shardtrader.tx" x="400" y="288"/>
   <object id="64" template="../../../../common/maps/obj/shop.tx" x="161.137" y="211.073">
    <properties>
-    <property name="commonShopList" value="Legend"/>
     <property name="noRestock" type="bool" value="false"/>
-    <property name="shopList" value=""/>
+    <property name="shopList" value="Legend"/>
    </properties>
   </object>
   <object id="70" template="../../../../common/maps/obj/shop.tx" x="257.25" y="274.432">

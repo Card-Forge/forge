@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="28" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="125">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="28" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="119">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -176,9 +176,5 @@
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Temple Garden&quot;, &quot;editions&quot;: [ &quot;RAV&quot; ], &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
-  <object id="121" template="../../../../common/maps/obj/collision.tx" x="113.776" y="129.583" width="15.1144" height="29.5"/>
-  <object id="122" template="../../../../common/maps/obj/collision.tx" x="111.109" y="94.9167" width="17.4478" height="14.8333"/>
-  <object id="123" template="../../../../common/maps/obj/manashards.tx" x="176" y="83.3333"/>
-  <object id="124" template="../../../../common/maps/obj/manashards.tx" x="381.667" y="115.333"/>
  </objectgroup>
 </map>

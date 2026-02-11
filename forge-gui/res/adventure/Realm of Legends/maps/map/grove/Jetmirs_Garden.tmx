@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="28" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="116">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="28" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="111">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -177,15 +177,10 @@
 </property>
    </properties>
   </object>
-  <object id="110" template="../../../../common/maps/obj/scroll.tx" x="373.667" y="128.833">
+  <object id="110" template="../../../../common/maps/obj/scroll.tx" x="93" y="203.333">
    <properties>
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Cabaretti Charm&quot;, &quot;editions&quot;: [ &quot;SNC&quot; ], &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
-  <object id="111" template="../../../../common/maps/obj/gold.tx" x="190" y="174.667"/>
-  <object id="112" template="../../../../common/maps/obj/gold.tx" x="203.667" y="205.667"/>
-  <object id="113" template="../../../../common/maps/obj/gold.tx" x="177.667" y="238.667"/>
-  <object id="114" template="../../../../common/maps/obj/gold.tx" x="179" y="81.6667"/>
-  <object id="115" template="../../../../common/maps/obj/gold.tx" x="126.667" y="82.3333"/>
  </objectgroup>
 </map>

@@ -77,5 +77,29 @@
     <property name="uncommonShopList" value="Creature2Black,Creature,Black,Horrors,Insects,Spiders"/>
    </properties>
   </object>
+  <object id="58" template="../../../../common/maps/obj/shop.tx" x="110.664" y="197.649">
+   <properties>
+    <property name="commonShopList" value="Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,PhyrexianBlack"/>
+    <property name="rareShopList" value="Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle,Colorless"/>
+    <property name="uncommonShopList" value="Artifact,Vampire,Zombie,Skeleton,Demon,Knight4Black,Rogue4Black,Sliver2Black,Wand,Equip,Multicolor"/>
+   </properties>
+  </object>
+  <object id="59" template="../../../../common/maps/obj/shop.tx" x="336.717" y="181.541">
+   <properties>
+    <property name="commonShopList" value="Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Black"/>
+    <property name="rareShopList" value="RWB,RUB,RGB,UWB,UGB,UWB,Land4Black,Creature6Black"/>
+    <property name="uncommonShopList" value="Dimir,Rakdos,Orzhov,Golgari,Dimir,Rakdos,Orzhov,Golgari,Land"/>
+   </properties>
+  </object>
+  <object id="60" template="../../../../common/maps/obj/shop.tx" x="272.821" y="133.753">
+   <properties>
+    <property name="commonShopList" value="Vampire,Zombie,Skeleton,Demon,Knight4Black,Rogue4Black,Sliver2Black"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand"/>
+    <property name="rareShopList" value="Dimir,Rakdos,Orzhov,Golgari,Multicolor,Land4Black,Creature6Black,PhyrexianBlack"/>
+    <property name="uncommonShopList" value="Creature2Black,Creature,Black,Horrors,Insects,Spiders"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
