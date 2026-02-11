@@ -17,9 +17,9 @@
 > [!CAUTION]
 > **Network play is a work-in-progress.** You will encounter bugs. When they appear, they will likely be mid-game and require restarting both the client and host. Please report bugs and issues to help improve stability.
 
-**Discord:** A dedicated network play channel is available at https://discord.gg/nsAhGwD
-
-**FAQ:** See the Networking FAQ in the sidebar.
+> [!TIP]
+> - The **[Forge Discord](https://discord.gg/nsAhGwD)** has a dedicated network play channel. Folks there will be happy to help you with any issues!
+> - Also see the **[Network FAQs](Network-FAQ)** page for further information.
 
 ---
 
@@ -166,7 +166,7 @@ Share the external IP shown on that page with the client. Remember the client ne
 
 ### Alternative: VPN / Software-Defined Networks
 
-If you cannot configure port forwarding (public hotspot, cellular, restricted network), see the [Networking Extras](Networking-Extras) page for VPN and SDN setup options. Once connected through a VPN or SDN, follow the **Local Network Setup** above.
+If you cannot configure port forwarding (public hotspot, cellular, restricted network), see the **[Networking Extras](Networking-Extras)** page for VPN and SDN setup options. Once connected through a VPN or SDN, follow the **Local Network Setup** above.
 
 ---
 
