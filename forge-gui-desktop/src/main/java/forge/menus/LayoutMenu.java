@@ -50,8 +50,8 @@ public final class LayoutMenu {
         final JMenu menu = new JMenu(localizer.getMessage("lblLayout"));
         menu.setMnemonic(KeyEvent.VK_L);
         if (currentScreen != FScreen.HOME_SCREEN) {
-            menu.add(getMenu_ViewOptions());
             menu.add(getMenu_FileOptions());
+            menu.add(getMenu_ViewOptions());
         }
         menu.add(getMenu_ThemeOptions());
         menu.addSeparator();
