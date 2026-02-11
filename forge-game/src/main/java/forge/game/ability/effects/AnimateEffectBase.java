@@ -185,7 +185,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         final List<StaticAbility> addedStaticAbilities = Lists.newArrayList();
         for (final String s : stAbs) {
             addedStaticAbilities.add(StaticAbility.create(AbilityUtils.getSVar(sa, s), c, sa.getCardState(), false));
-            if ("ReduceCost".equals(s) || "RaiseCost".equals(s)) {
+            if (s != null && (s.contains("ReduceCost") || s.contains("RaiseCost"))) {
                 costChange = true;
             }
         }
@@ -230,8 +230,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
                 addedStaticAbilities, removeAbilities, timestamp, 0);
             if (perpetual) {
                 c.addPerpetual(new PerpetualAbilities(timestamp, changes));
-                if (changes.getStaticAbilities() != null && changes.getStaticAbilities().stream()
-                        .anyMatch(stAb -> stAb.checkMode(StaticAbilityMode.ReduceCost) || stAb.checkMode(StaticAbilityMode.RaiseCost))) {
+                if (costChange) {
                     c.calculatePerpetualAdjustedManaCost();
                 }
             }
@@ -243,9 +242,6 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             } else {
                 addUntilCommand(sa, unanimate);
             }
-        }
-        if (costChange) {
-            c.calculatePerpetualAdjustedManaCost();
         }
     }
 
