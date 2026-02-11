@@ -2,5 +2,5 @@ Name:Seedborn Muse
 ManaCost:3 G G
 Types:Creature Spirit
 PT:2/4
-S:Mode$ Continuous | Affected$ Permanent.YouCtrl | AddHiddenKeyword$ CARDNAME untaps during each other player's untap step. | Description$ Untap all permanents you control during each other player's untap step.
+S:UntapOtherPlayer | ValidCard$ Permanent.YouCtrl | Description$ Untap all permanents you control during each other player's untap step.
 Oracle:Untap all permanents you control during each other player's untap step.
