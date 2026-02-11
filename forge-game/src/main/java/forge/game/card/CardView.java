@@ -204,6 +204,13 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.ExertedThisTurn, exerted);
     }
 
+    public boolean isDetained() {
+        return get(TrackableProperty.Detained);
+    }
+    void updateDetained(Card c) {
+        set(TrackableProperty.Detained, c.isDetained());
+    }
+
     public boolean isBlocking() {
         return get(TrackableProperty.Blocking);
     }

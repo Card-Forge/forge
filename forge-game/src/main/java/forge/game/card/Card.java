@@ -6461,9 +6461,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public boolean isDetained() { return !detainedByPlayer.isEmpty(); }
     public void detain(final Player player) {
         detainedByPlayer.add(player);
+        view.updateDetained(this);
     }
     public void removeDetainedBy(final Player player) {
         detainedByPlayer.remove(player);
+        view.updateDetained(this);
     }
 
     public boolean isMadness() {
