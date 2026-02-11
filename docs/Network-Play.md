@@ -111,12 +111,16 @@ The host can type these commands in the lobby chat during the reconnection windo
 Test from a **different device** on the same network to confirm the host is accepting connections on port 36743.
 
 - **Android:** Use [PortDroid](https://play.google.com/store/apps/details?id=com.stealthcopter.portdroid) — scan the host's internal IP for port 36743.
-- **Windows:** Use telnet ([enable it first](https://social.technet.microsoft.com/wiki/contents/articles/38433.windows-10-enabling-telnet-client.aspx)):
+- **Windows (PowerShell):** Open PowerShell and run:
+  ```powershell
+  Test-NetConnection -ComputerName <HOST_IP> -Port 36743
   ```
-  telnet <HOST_IP> 36743
+  Success: `TcpTestSucceeded : True`. Failure: `TcpTestSucceeded : False`.
+- **macOS / Linux:** Use netcat:
+  ```bash
+  nc -vz <HOST_IP> 36743
   ```
-  Success: the title bar changes to show the host's IP. Failure: "Connect failed" message.
-- **macOS / Linux:** Use `telnet <HOST_IP> 36743` or any port scanner app.
+  Success: "Connection to ... succeeded". Failure: "Connection refused" or timeout.
 
 Once validated, provide the host's internal IP and port to the client (e.g., `192.168.1.50:36743`).
 
