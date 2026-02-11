@@ -1619,13 +1619,6 @@ public class AttachAi extends SpellAbilityAi {
             return card.getNetCombatDamage() >= 1 && ComputerUtilCombat.canAttackNextTurn(card);
         } else if (keyword.endsWith("CARDNAME can't block.")) {
             return CombatUtil.canBlock(card, true);
-        } else if (keyword.endsWith("CARDNAME's activated abilities can't be activated.")) {
-            for (SpellAbility ability : card.getSpellAbilities()) {
-                if (ability.isAbility()) {
-                    return true;
-                }
-            }
-            return false;
         } else if (keyword.endsWith("Prevent all combat damage that would be dealt by CARDNAME.")) {
             return card.getNetCombatDamage() >= 1 && ComputerUtilCombat.canAttackNextTurn(card);
         } else if (keyword.endsWith("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")

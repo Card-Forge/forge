@@ -94,9 +94,6 @@ public abstract class AbilityActivated extends SpellAbility implements Cloneable
         if (c.isDetained()) {
             return false;
         }
-        if (c.hasKeyword("CARDNAME's activated abilities can't be activated.")) {
-            return false;
-        }
 
         if (!getRestrictions().canPlay(c, this)) {
             return false;
