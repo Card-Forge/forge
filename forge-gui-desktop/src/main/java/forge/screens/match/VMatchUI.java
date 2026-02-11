@@ -58,8 +58,6 @@ public class VMatchUI implements IVTopLevelUI {
      * horizontal span between adjacent non-field cells.
      */
     private RectangleOfDouble computeFieldRegion(final DragCell baseFieldCell) {
-        final DragCell c0 = lstFields.get(0).getParentCell();
-        final DragCell c1 = lstFields.get(1).getParentCell();
         final RectangleOfDouble fieldBounds = baseFieldCell.getRoughBounds();
         final double rowY = fieldBounds.getY();
         final double rowH = fieldBounds.getH();
@@ -68,8 +66,10 @@ public class VMatchUI implements IVTopLevelUI {
         double rightBoundary = 1.0;
 
         for (final DragCell cell : FView.SINGLETON_INSTANCE.getDragCells()) {
-            // Skip the base field cells and any dynamic cells.
-            if (cell == c0 || cell == c1 || dynamicCells.contains(cell)) {
+            // Skip only the target cell and dynamic cells. The other base
+            // field cell is included so it acts as a boundary when both
+            // base cells share the same row (e.g. side-by-side layouts).
+            if (cell == baseFieldCell || dynamicCells.contains(cell)) {
                 continue;
             }
             final RectangleOfDouble cb = cell.getRoughBounds();
@@ -99,24 +99,34 @@ public class VMatchUI implements IVTopLevelUI {
         final DragCell c0 = lstFields.get(0).getParentCell();
         final DragCell c1 = lstFields.get(1).getParentCell();
 
-        // Strip extra fields (index 2+) from their parent cells.
+        // Strip extra fields (index 2+) and remove their parent cells if
+        // emptied. This handles both dynamic split cells and cells loaded
+        // from a saved layout that contained extra field slots.
         for (int i = 2; i < lstFields.size(); i++) {
             final VField vField = lstFields.get(i);
             final DragCell parent = vField.getParentCell();
             if (parent != null) {
                 parent.removeDoc(vField);
                 vField.setParentCell(null);
+                if (parent != c0 && parent != c1 && parent.getDocs().isEmpty()) {
+                    SRearrangingUtil.fillGap(parent);
+                    FView.SINGLETON_INSTANCE.removeDragCell(parent);
+                }
             }
         }
 
-        // Remove any non-base cell that is now empty. This covers both
-        // dynamically created split cells and cells loaded from a saved
-        // layout that contained extra field slots.
+        // Force-remove any remaining tracked dynamic cells that weren't
+        // already removed above (e.g., if non-field docs were added to them).
+        for (final DragCell cell : dynamicCells) {
+            FView.SINGLETON_INSTANCE.removeDragCell(cell);
+        }
         dynamicCells.clear();
+
+        // Sync rough bounds with actual pixel positions before computing
+        // field regions. This ensures boundary detection works with accurate
+        // positions even if rough bounds drifted from earlier operations.
         for (final DragCell cell : FView.SINGLETON_INSTANCE.getDragCells()) {
-            if (cell != c0 && cell != c1 && cell.getDocs().isEmpty()) {
-                FView.SINGLETON_INSTANCE.removeDragCell(cell);
-            }
+            cell.updateRoughBounds();
         }
 
         // Restore base cells to full width via dynamic computation.
@@ -231,6 +241,31 @@ public class VMatchUI implements IVTopLevelUI {
         final boolean splitMode = !"OFF".equals(layout)
                 && "SPLIT".equals(preferences.getPref(FPref.UI_MULTIPLAYER_FIELD_PANELS));
 
+        // When ROWS mode is active and c0/c1 share the same row (e.g.
+        // side-by-side layout after gap-fill), rearrange them vertically
+        // so opponents (c1) are on top and player (c0) is on bottom.
+        boolean rearrangedRows = false;
+        if (rowsMode) {
+            final DragCell c0 = lstFields.get(0).getParentCell();
+            final DragCell c1 = lstFields.get(1).getParentCell();
+            if (c0 != null && c1 != null) {
+                final RectangleOfDouble rb0 = c0.getRoughBounds();
+                final RectangleOfDouble rb1 = c1.getRoughBounds();
+                if (Math.abs(rb0.getY() - rb1.getY()) < 0.01) {
+                    final double left = Math.min(rb0.getX(), rb1.getX());
+                    final double right = Math.max(rb0.getX() + rb0.getW(),
+                            rb1.getX() + rb1.getW());
+                    final double fullW = right - left;
+                    final double halfH = rb0.getH() / 2.0;
+                    c1.setRoughBounds(new RectangleOfDouble(
+                            left, rb0.getY(), fullW, halfH));
+                    c0.setRoughBounds(new RectangleOfDouble(
+                            left, rb0.getY() + halfH, fullW, halfH));
+                    rearrangedRows = true;
+                }
+            }
+        }
+
         // Collect extra fields grouped by target cell index.
         final Map<Integer, List<VField>> fieldsByCell = new LinkedHashMap<>();
         for (int i = 2; i < lstFields.size(); i++) {
@@ -269,7 +304,7 @@ public class VMatchUI implements IVTopLevelUI {
         }
 
         // Apply rough bounds to pixel positions via the resize system.
-        if (splitMode) {
+        if (splitMode || rearrangedRows) {
             SResizingUtil.resizeWindow();
         }
     }

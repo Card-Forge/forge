@@ -4,6 +4,7 @@ import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
@@ -138,11 +139,41 @@ public final class LayoutMenu {
         };
     }
 
+    /** Creates a JCheckBoxMenuItem that stays open on click. */
+    private static JCheckBoxMenuItem createStayOpenCheckBox(final String text) {
+        return new JCheckBoxMenuItem(text) {
+            @Override
+            protected void processMouseEvent(final MouseEvent e) {
+                if (e.getID() == MouseEvent.MOUSE_RELEASED && contains(e.getPoint())) {
+                    doClick(0);
+                    setArmed(true);
+                } else {
+                    super.processMouseEvent(e);
+                }
+            }
+        };
+    }
+
+    /** Creates a JRadioButtonMenuItem that stays open on click. */
+    private static JRadioButtonMenuItem createStayOpenRadioButton(final String text) {
+        return new JRadioButtonMenuItem(text) {
+            @Override
+            protected void processMouseEvent(final MouseEvent e) {
+                if (e.getID() == MouseEvent.MOUSE_RELEASED && contains(e.getPoint())) {
+                    doClick(0);
+                    setArmed(true);
+                } else {
+                    super.processMouseEvent(e);
+                }
+            }
+        };
+    }
+
     private static JCheckBoxMenuItem getMenuItem_SortMultiplayerFields(
             final JMenu layoutMenu, final JMenu panelsMenu) {
         final Localizer localizer = Localizer.getInstance();
         final boolean enabled = !"OFF".equals(prefs.getPref(FPref.UI_MULTIPLAYER_FIELD_LAYOUT));
-        final JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(
+        final JCheckBoxMenuItem menuItem = createStayOpenCheckBox(
                 localizer.getMessage("lblSortMultiplayerFields"));
         menuItem.setToolTipText(localizer.getMessage("lblSortMultiplayerFieldsTooltip"));
         menuItem.setState(enabled);
@@ -170,7 +201,8 @@ public final class LayoutMenu {
         final String[] tooltipKeys = {"lblFieldLayoutGridTooltip", "lblFieldLayoutRowsTooltip"};
 
         for (int i = 0; i < values.length; i++) {
-            final JRadioButtonMenuItem item = new JRadioButtonMenuItem(localizer.getMessage(labelKeys[i]));
+            final JRadioButtonMenuItem item = createStayOpenRadioButton(
+                    localizer.getMessage(labelKeys[i]));
             item.setToolTipText(localizer.getMessage(tooltipKeys[i]));
             item.setSelected(values[i].equals(current));
             final String value = values[i];
@@ -196,7 +228,8 @@ public final class LayoutMenu {
         final String[] tooltipKeys = {"lblFieldPanelsTabbedTooltip", "lblFieldPanelsSplitTooltip"};
 
         for (int i = 0; i < values.length; i++) {
-            final JRadioButtonMenuItem item = new JRadioButtonMenuItem(localizer.getMessage(labelKeys[i]));
+            final JRadioButtonMenuItem item = createStayOpenRadioButton(
+                    localizer.getMessage(labelKeys[i]));
             item.setToolTipText(localizer.getMessage(tooltipKeys[i]));
             item.setSelected(values[i].equals(current));
             final String value = values[i];
