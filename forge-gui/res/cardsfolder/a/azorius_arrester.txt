@@ -3,6 +3,6 @@ ManaCost:1 W
 Types:Creature Human Soldier
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ Detain | TriggerDescription$ When CARDNAME enters, detain target creature an opponent controls. (Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)
-SVar:Detain:DB$ Pump | KW$ HIDDEN CARDNAME can't attack or block. & HIDDEN CARDNAME's activated abilities can't be activated. | IsCurse$ True | Duration$ UntilYourNextTurn | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature your opponent controls to detain.
+SVar:Detain:DB$ Detain | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature your opponent controls to detain.
 SVar:PlayMain1:TRUE
 Oracle:When Azorius Arrester enters, detain target creature an opponent controls. (Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)

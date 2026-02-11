@@ -4,6 +4,6 @@ Types:Creature Archon
 PT:4/5
 K:Flying
 T:Mode$ Attacks | TriggerZones$ Battlefield | ValidCard$ Card.Self | Execute$ Detain | TriggerDescription$ Whenever CARDNAME attacks, detain up to two target nonland permanents your opponents control. (Until your next turn, those permanents can't attack or block and their activated abilities can't be activated.)
-SVar:Detain:DB$ Pump | TargetMin$ 0 | TargetMax$ 2 | KW$ HIDDEN CARDNAME can't attack or block. & HIDDEN CARDNAME's activated abilities can't be activated. | IsCurse$ True | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent your opponent controls to detain. | Duration$ UntilYourNextTurn | AILogic$ DetainNonLand
+SVar:Detain:DB$ Detain | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent your opponent controls to detain.
 SVar:HasAttackEffect:TRUE
 Oracle:Flying\nWhenever Archon of the Triumvirate attacks, detain up to two target nonland permanents your opponents control. (Until your next turn, those permanents can't attack or block and their activated abilities can't be activated.)
