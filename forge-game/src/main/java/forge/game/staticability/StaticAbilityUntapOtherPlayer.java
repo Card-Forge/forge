@@ -30,7 +30,7 @@ public class StaticAbilityUntapOtherPlayer {
                     continue;
                 }
 
-                if (applyUntapAbility(stAb, attacker, defender)) {
+                if (applyUntapAbility(stAb, card, player)) {
                     return true;
                 }
             }
