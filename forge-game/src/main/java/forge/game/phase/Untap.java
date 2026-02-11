@@ -37,9 +37,8 @@ import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.SpellAbility;
-import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityBounceAtUntap;
 import forge.game.staticability.StaticAbilityCantPhase;
-import forge.game.staticability.StaticAbilityMode;
 import forge.game.staticability.StaticAbilityUntapOtherPlayer;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -98,11 +97,8 @@ public class Untap extends Phase {
             if (bounceList.contains(c)) {
                 continue;
             }
-            for (final StaticAbility sa : c.getStaticAbilities()) {
-                if (sa.checkConditions(StaticAbilityMode.BounceAtUntap)) {
-                    bounceList.add(c);
-                    break;
-                }
+            if (StaticAbilityBounceAtUntap.shouldBounceAtUntap(c)) {
+                bounceList.add(c);
             }
         }
         

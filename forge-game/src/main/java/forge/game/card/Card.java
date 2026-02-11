@@ -6025,15 +6025,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     // this is the amount of damage a creature needs to receive before it dies
     public final int getLethal() {
-        boolean lethalByPower = hasKeyword("Lethal damage dealt to CARDNAME is determined by its power rather than its toughness.");
-        if (!lethalByPower) {
-            for (final StaticAbility sa : this.getStaticAbilities()) {
-                if (sa.checkConditions(StaticAbilityMode.LethalDamageByPower)) {
-                    lethalByPower = true;
-                    break;
-                }
-            }
-        }
+        boolean lethalByPower = hasKeyword("Lethal damage dealt to CARDNAME is determined by its power rather than its toughness.") || StaticAbilityLethalDamageByPower.isLethalDamageByPower(this);
 
         if (lethalByPower) {
             return getNetPower();
