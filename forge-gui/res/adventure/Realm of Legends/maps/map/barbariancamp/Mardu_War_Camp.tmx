@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="126">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="127">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -178,5 +178,33 @@
   <object id="123" template="../../../../common/maps/obj/collision.tx" x="335.948" y="175.36" width="46.1754" height="31.5833"/>
   <object id="124" template="../../../../common/maps/obj/collision.tx" x="333.8" y="241.941" width="34.0047" height="31.5833"/>
   <object id="125" template="../../../../common/maps/obj/collision.tx" x="275.498" y="303.458" width="41.5047" height="47.3333"/>
+  <object id="126" template="../../obj/treasure.tx" x="176.5" y="78.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;KTK&quot;, &quot;TDM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;black&quot;, &quot;white&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;KTK&quot;, &quot;TDM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;black&quot;, &quot;white&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;KTK&quot;, &quot;TDM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;black&quot;, &quot;white&quot; ],
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
  </objectgroup>
 </map>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="63">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="66">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -47,24 +47,33 @@
     <property name="uncommonShopList" value=""/>
    </properties>
   </object>
-  <object id="56" template="../../../../common/maps/obj/shop.tx" x="351.752" y="97.2408">
-   <properties>
-    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic"/>
-   </properties>
-  </object>
   <object id="58" template="../../../../common/maps/obj/shop.tx" x="304.501" y="97.7777">
    <properties>
     <property name="shopList" value="Legend4Blue"/>
    </properties>
   </object>
-  <object id="61" template="../../../../common/maps/obj/shop.tx" x="367.323" y="161.674">
+  <object id="63" template="../../../../common/maps/obj/shop.tx" x="351.752" y="97.2408">
    <properties>
-    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic"/>
+    <property name="commonShopList" value="Blue,Blue,Enchantment4Blue,Creature2Blue,Instant4Blue"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,PhyrexianBlue"/>
+    <property name="rareShopList" value="Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle,Colorless"/>
+    <property name="uncommonShopList" value="Artifact,Merfolk,Wizard,Bird4Blue,Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Wand,Equip,Multicolor"/>
    </properties>
   </object>
-  <object id="62" template="../../../../common/maps/obj/shop.tx" x="304.501" y="161.674">
+  <object id="64" template="../../../../common/maps/obj/shop.tx" x="368.397" y="162.748">
    <properties>
-    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic"/>
+    <property name="commonShopList" value="Blue,Blue,Enchantment4Blue,Creature2Blue,Instant4Blue"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Blue"/>
+    <property name="rareShopList" value="RWU,RGU,UWG,RUB,UWB,UGB,Land4Blue,Creature6Blue"/>
+    <property name="uncommonShopList" value="Azorius,Izzet,Simic,Dimir,Azorius,Izzet,Simic,Dimir,Land"/>
+   </properties>
+  </object>
+  <object id="65" template="../../../../common/maps/obj/shop.tx" x="304.501" y="164.359">
+   <properties>
+    <property name="commonShopList" value="Merfolk,Wizard,Bird4Blue,Sliver2Blue,     Rogue4Blue,Spirit4Blue,Pirate4Blue"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Blue,Mutants"/>
+    <property name="rareShopList" value="Azorius,Izzet,Simic,Dimir,Creature6Blue,Multicolor,Land4Blue,PhyrexianBlue,Mutants,Horrors,Shapeshifter,Sphinx,LargeSeaCreatures"/>
+    <property name="uncommonShopList" value="Creature2Blue,Creature,Blue"/>
    </properties>
   </object>
  </objectgroup>

@@ -238,27 +238,17 @@ public class AbilityUtils {
                     cards.add((Card) o);
                 }
             }
-        } else if (defined.equals("DelayTriggerRememberedLKI") && sa instanceof SpellAbility) {
-            SpellAbility root = ((SpellAbility)sa).getRootAbility();
-            if (root != null) {
-                for (Object o : root.getTriggerRemembered()) {
-                    if (o instanceof Card) {
-                        cards.add((Card)o);
-                    }
+        } else if (defined.equals("DelayTriggerRememberedLKI")) {
+            for (Object o : sa.getTriggerRemembered()) {
+                if (o instanceof Card) {
+                    cards.add((Card)o);
                 }
-            } else {
-                System.err.println("Warning: couldn't find trigger SA in the chain of SpellAbility " + sa);
             }
-        } else if (defined.equals("DelayTriggerRemembered") && sa instanceof SpellAbility) {
-            SpellAbility root = ((SpellAbility)sa).getRootAbility();
-            if (root != null) {
-                for (Object o : root.getTriggerRemembered()) {
-                    if (o instanceof Card) {
-                        cards.addAll(addRememberedFromCardState(game, (Card)o));
-                    }
+        } else if (defined.equals("DelayTriggerRemembered")) {
+            for (Object o : sa.getTriggerRemembered()) {
+                if (o instanceof Card) {
+                    cards.addAll(addRememberedFromCardState(game, (Card)o));
                 }
-            } else {
-                System.err.println("Warning: couldn't find trigger SA in the chain of SpellAbility " + sa);
             }
         } else if (defined.equals("RememberedFirst")) {
             Object o = hostCard.getFirstRemembered();
@@ -697,8 +687,7 @@ public class AbilityUtils {
                     }
                 }
                 else if (calcX[0].startsWith("TriggerRemembered")) {
-                    final SpellAbility root = sa.getRootAbility();
-                    list = IterableUtil.filter(root.getTriggerRemembered(), Card.class);
+                    list = IterableUtil.filter(sa.getTriggerRemembered(), Card.class);
                 }
                 else if (calcX[0].startsWith("TriggerObjects")) {
                     final SpellAbility root = sa.getRootAbility();
@@ -1006,12 +995,7 @@ public class AbilityUtils {
                 addPlayer(Lists.newArrayList(originalHost), defined, players);
             }
         } else if (defined.startsWith("DelayTriggerRemembered") && sa instanceof SpellAbility) {
-            SpellAbility root = ((SpellAbility)sa).getRootAbility();
-            if (root != null) {
-                addPlayer(root.getTriggerRemembered(), defined, players);
-            } else {
-                System.err.println("Warning: couldn't find trigger SA in the chain of SpellAbility " + sa);
-            }
+            addPlayer(sa.getTriggerRemembered(), defined, players);
         } else if (defined.startsWith("Triggered") && sa instanceof SpellAbility) {
             String defParsed = defined.endsWith("AndYou") ? defined.substring(0, defined.indexOf("AndYou")) : defined;
             if (defined.endsWith("AndYou")) {
@@ -1723,9 +1707,8 @@ public class AbilityUtils {
                     return sum;
                 }
                 if (sq[0].startsWith("TriggerRememberAmount")) {
-                    SpellAbility root = sa.getRootAbility();
                     int count = 0;
-                    for (final Object o : root.getTriggerRemembered()) {
+                    for (final Object o : sa.getTriggerRemembered()) {
                         if (o instanceof Integer) {
                             count += (Integer) o;
                         }
