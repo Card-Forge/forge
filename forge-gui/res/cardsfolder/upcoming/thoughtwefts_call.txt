@@ -1,0 +1,10 @@
+Name:Thoughtweft's Call
+ManaCost:W
+Types:Sorcery
+A:SP$ Charm | Choices$ DBSeek,DBPumpAll
+SVar:DBSeek:DB$ Seek | Type$ Kithkin | RememberFound$ True | SubAbility$ DBDelayTrig | SpellDescription$ Seek a Kithkin card. At the beginning of the next end step, if that card is in your hand, exile it.
+SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | PresentZone$ Hand | IsPresent$ Card.IsTriggerRemembered | Execute$ TrigExile | RememberObjects$ Remembered | SubAbility$ DBCleanup | TriggerDescription$ Exile that card at the beginning of the next end step.
+SVar:TrigExile:DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Hand | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | PumpZone$ Hand | Duration$ Perpetual | NumAtt$ +1 | NumDef$ +1 | StackDescription$ REP your_{p:You}'s | SpellDescription$ Creature cards in your hand perpetually get +1/+1.
+Oracle:Choose one —\n• Seek a Kithkin card. At the beginning of the next end step, if that card is in your hand, exile it.\n• Creature cards in your hand perpetually get +1/+1.

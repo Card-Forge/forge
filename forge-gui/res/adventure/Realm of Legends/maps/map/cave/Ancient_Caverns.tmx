@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Black Lotus&quot;, &quot;Jayemdae Tome&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Icy Manipulator|LEA&quot;, &quot;Jayemdae Tome|LEA&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -154,7 +154,7 @@
   </object>
   <object id="108" template="../../../../common/maps/obj/enemy.tx" x="300.333" y="552">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Tolaria|LEG&quot;, &quot;Hammerheim|LEG&quot;, &quot;Urborg|LEG&quot;, &quot;Draconian Cylix|FEM&quot;, &quot;Wall of Shadows|LEG&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Tolaria|LEG&quot;, &quot;Hammerheim|LEG&quot;, &quot;Urborg|LEG&quot;, &quot;Draconian Cylix|FEM&quot;, &quot;Wall of Putrid Flesh|LEG&quot;]}"/>
     <property name="enemy" value="Nicol Bolas"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="50"/>
