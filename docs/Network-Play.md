@@ -5,18 +5,20 @@
 - [Requirements](#requirements)
 - [Quick Start](#quick-start)
 - [Reconnect Support](#reconnect-support)
-- [Troubleshooting](#troubleshooting)
 - [Network Configuration](#network-configuration)
   - [Local Network Setup](#local-network-setup)
   - [Remote Network Setup](#remote-network-setup)
-
+- [Troubleshooting](#troubleshooting)
+  
 ---
 
 ## Status & Support
 
-> **Network play is a work in progress.** You will encounter bugs. When they appear, they will likely be mid-game and require restarting both the client and host. Please report bugs and issues to help improve stability.
+> [!CAUTION]
+> **Network play is a work-in-progress.** You will encounter bugs. When they appear, they will likely be mid-game and require restarting both the client and host. Please report bugs and issues to help improve stability.
 
 **Discord:** A dedicated network play channel is available at https://discord.gg/nsAhGwD
+
 **FAQ:** See the Networking FAQ in the sidebar.
 
 ---
@@ -25,7 +27,6 @@
 
 | Requirement | Details |
 |---|---|
-| **Devices** | At least two devices running the **same version** of Forge (see [Version Compatibility](#version-compatibility)) |
 | **Players** | Up to **8 players** per game (1 host + up to 7 remote players) |
 | **Roles** | **Host** runs Forge as the server; **Client** connects to it |
 | **Game Types** | **Constructed** formats only (no Draft or Sealed). Supported variants: Commander, Oathbreaker, Tiny Leaders, Brawl, Archenemy, Planechase, Vanguard. |
@@ -39,33 +40,33 @@
 
 ## Quick Start
 
-1. **Verify versions** — Confirm all devices are running the same Forge version.
-2. **Launch Forge** on all devices.
-   - Mobile: Choose "Classic Mode", then "Play Online"
-   - Desktop: "Online Multiplayer" > "Lobby" > "Connect to Server"
-3. **Host** leaves the server address field **empty** and clicks OK.
-   - On first host, Forge will ask whether to **automatically open the port via UPnP** (see [UPnP](#upnp-automatic-port-forwarding) below). If your router supports UPnP, choosing "Just Once" or "Always" can skip manual port forwarding entirely.
-4. **Determine the host's address to share with the client:**
-   - Use the **Copy Server URL** button in the lobby — this copies the address in the correct format.
-   - Alternatively, determine the IP manually:
-     - **Local play:** Forge displays the host's IP (typically `192.168.x.x`). Verify against the device's network settings. Ignore any suggestion to use `localhost`.
+1. **Configure network** — Host must configure network settings to enable external connections (see [Network Configuration](#network-configuration) below).
+2. **Verify versions** — Confirm all devices are running the same Forge version (see [Version Compatibility](#version-compatibility) below).
+3. **Launch Forge** on all devices.
+     - Mobile: Choose "Classic Mode", then "Play Online"
+     - Desktop: "Online Multiplayer" > "Lobby" > "Connect to Server"
+4. **Host** leaves the server address field **empty** and clicks OK.
+     - On first host, Forge will ask whether to **automatically open the port via UPnP** (see [UPnP](#upnp-automatic-port-forwarding) below). If your router supports UPnP, choosing "Just Once" or "Always" can skip manual port forwarding entirely.
+5. **Host** determines address to share with clients:
+     - **Local play:** Use the **Copy Server URL** button in the lobby — this copies the address in the correct format. Forge displays the host's IP (typically `192.168.x.x`). Verify against the device's network settings. Ignore any suggestion to use `localhost`.
      - **Remote play:** Verify the host's external IP at [canyouseeme.org](http://canyouseeme.org).
-5. **Client** enters the host's address in the connection dialog and clicks OK.
-   - The address format is **`IP:port`** — for example: `192.168.1.50:36743` (local) or `203.0.113.45:36743` (remote).
-   - If the port is omitted, Forge defaults to 36743.
-6. **Configure the match:**
-   - Host selects match type, teams, and game settings.
-   - All players select decks, sleeves, and avatars.
-   - Each player toggles their **Ready** switch.
-7. **Host starts the match** once all players are ready.
-
-> **Important:** The host's device is the server. If the host disconnects or closes Forge, the game ends immediately for all players — there is no host migration. Choose the most stable device/connection as the host.
+ 7. **Client** enters the host's address in the connection dialog and clicks OK.
+     - The address format is **`IP:port`** — for example: `192.168.1.50:36743` (local) or `203.0.113.45:36743` (remote).
+     - If the port is omitted, Forge defaults to 36743.
+8. **Configure the match:**
+     - Host selects match type, teams, and game settings.
+     - All players select decks, sleeves, and avatars.
+     - Each player toggles their **Ready** switch.
+9. **Host starts the match** once all players are ready.
 
 ---
 
 ## Reconnect Support
 
-If a player disconnects during an active game, the server enters **reconnection mode** instead of immediately ending the match. This applies to **client** disconnections only — if the host disconnects, the game ends for everyone.
+> [!IMPORTANT]
+> **The host's device is the server.** If the host disconnects or closes Forge, the game ends immediately for all players — there is no host migration or disconnect support for server crashes. Choose the most stable device/connection as the host.
+
+If a client player disconnects during an active game, the server enters **reconnection mode** instead of immediately ending the match.
 
 ### What Happens on Disconnect
 
@@ -89,27 +90,9 @@ The host can type these commands in the lobby chat during the reconnection windo
 
 ---
 
-## Troubleshooting
-
-### "Disconnected From Lobby"
-A common cause is mismatched resource (**res**) folder content between client and server. Check the game log for an `IOException` referring to "Card ... not found". See [#175](https://github.com/Card-Forge/forge/issues/175).
-
-### No Indication of Opponent's Turn
-Some game states do not clearly indicate when the game is waiting on an opponent's action. See [#158](https://github.com/Card-Forge/forge/issues/158).
-
-### Public Wi-Fi / Mobile Connectivity
-On public Wi-Fi, devices are typically isolated from each other (VLAN separation). Use **Wi-Fi Direct** or a **personal hotspot** instead.
-
-### Lag / High Bandwidth
-Network play currently lacks traffic optimization. A single game can transfer hundreds of megabytes. Slow connections will experience significant lag.
-
-### Version Compatibility
-Forge warns when a client's version differs from the host's but **does not block the connection**. Mismatched versions may cause desync or crashes mid-game. Always use the same version on all devices.
-
----
-
 ## Network Configuration
 
+> [!IMPORTANT]
 > Complete the **Local Network Setup** first, even if your goal is remote play. Remote setup builds on a working local configuration.
 
 ### Local Network Setup
@@ -180,3 +163,13 @@ Share the external IP shown on that page with the client. Remember the client ne
 ### Alternative: VPN / Software-Defined Networks
 
 If you cannot configure port forwarding (public hotspot, cellular, restricted network), see the [Networking Extras](Networking-Extras) page for VPN and SDN setup options. Once connected through a VPN or SDN, follow the **Local Network Setup** above.
+
+---
+
+## Troubleshooting
+
+### Version Compatibility
+While network play between different versions of Forge can be possible, mismatched versions may cause desync or crashes mid-game. Forge warns when a client's version differs from the host's but **does not block the connection**. Always use the same version on all devices to avoid network compatibility issues.
+
+### Lag / High Bandwidth
+Network play currently lacks traffic optimization. A single game can transfer hundreds of megabytes. Slow connections will experience significant lag.
