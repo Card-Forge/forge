@@ -38,7 +38,7 @@ import forge.util.collect.FCollectionView;
  */
 public abstract class SpellAbilityAi {
 
-    Predicate<Card> CREATURE_OR_TAP_ABILITY = c -> {
+    public Predicate<Card> CREATURE_OR_TAP_ABILITY = c -> {
         if (c.isCreature()) {
             return true;
         }
