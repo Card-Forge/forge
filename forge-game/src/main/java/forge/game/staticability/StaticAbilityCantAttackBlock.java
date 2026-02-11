@@ -42,6 +42,10 @@ public class StaticAbilityCantAttackBlock {
             return true;
         }
 
+        if (attacker.isDetained()) {
+            return true;
+        }
+
         for (final Card ca : attacker.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.CantAttack)) {

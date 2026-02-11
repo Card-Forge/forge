@@ -485,6 +485,9 @@ public class CombatUtil {
             return false;
         }
 
+        if (blocker.isDetained()) {
+            return false;
+        }
         if (blocker.hasKeyword("CARDNAME can't block.") || blocker.hasKeyword("CARDNAME can't attack or block.")) {
             return false;
         }

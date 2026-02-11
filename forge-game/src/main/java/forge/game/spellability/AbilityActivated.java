@@ -88,7 +88,13 @@ public abstract class AbilityActivated extends SpellAbility implements Cloneable
 
         final Card c = this.getHostCard();
 
-        if (c.hasKeyword("CARDNAME's activated abilities can't be activated.") || this.isSuppressed()) {
+        if (isSuppressed()) {
+            return false;
+        }
+        if (c.isDetained()) {
+            return false;
+        }
+        if (c.hasKeyword("CARDNAME's activated abilities can't be activated.")) {
             return false;
         }
 
