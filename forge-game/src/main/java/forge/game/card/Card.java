@@ -437,8 +437,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public void updateManaCostForView() {
         currentState.getView().updateManaCost(this);
-        currentState.calculatePerpetualAdjustedManaCost();
-
         // TODO re-factor Spell ManaCost fallback to CardState ManaCost
         if (getFirstSpellAbility() != null && getFirstSpellAbility().isSpell()) {
             getFirstSpellAbility().setPayCosts(getFirstSpellAbility().getPayCosts().copyWithDefinedMana(getManaCost()));
@@ -2074,6 +2072,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public void calculatePerpetualAdjustedManaCost() {
         currentState.calculatePerpetualAdjustedManaCost();
+        if (isSplitCard()) {
+            if (currentState.getCard().getState(CardStateName.LeftSplit) != null) {
+                currentState.getCard().getState(CardStateName.LeftSplit).calculatePerpetualAdjustedManaCost();
+            }
+            if (currentState.getCard().getState(CardStateName.RightSplit) != null) {
+                currentState.getCard().getState(CardStateName.RightSplit).calculatePerpetualAdjustedManaCost();
+            }
+        }
     }
 
     public ManaCost getPerpetualAdjustedManaCost() {

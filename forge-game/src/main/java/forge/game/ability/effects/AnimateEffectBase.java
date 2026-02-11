@@ -44,6 +44,7 @@ import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityMode;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 
@@ -229,6 +230,10 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
                 addedStaticAbilities, removeAbilities, timestamp, 0);
             if (perpetual) {
                 c.addPerpetual(new PerpetualAbilities(timestamp, changes));
+                if (changes.getStaticAbilities() != null && changes.getStaticAbilities().stream()
+                        .anyMatch(stAb -> stAb.checkMode(StaticAbilityMode.ReduceCost) || stAb.checkMode(StaticAbilityMode.RaiseCost))) {
+                    c.calculatePerpetualAdjustedManaCost();
+                }
             }
         }
 

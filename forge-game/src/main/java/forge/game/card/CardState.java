@@ -230,14 +230,12 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             setPerpetualAdjustedManaCost(manaCost);
             return;
         }
-        ManaCost manaCost = getCard().getManaCost();
-        // I don't know why refetching the card data like in this next line is necessary but in some cases (when the cost reduction
-        // wasn't added when the card was in the current zone, I think) the static abilities are missing. There's probably
-        // a better way to do this.
-        for (final StaticAbility stAb : getCard().getGame().getCardsInGame().get(getCard()).getStaticAbilities()) {
-//        for (final StaticAbility stAb : getStaticAbilities()) { // For some reason the current state sometimes doesn't have static abilities
-            // Only collect perpetual cost changes
-            if ("Card.Self".equals(stAb.getParam("ValidCard")) && "DBCleanup".equals(stAb.getParam("SubAbility"))) {
+        ManaCost manaCost = getManaCost();
+        // I don't know why refetching the card data like in this next line is necessary but in some cases (e.g. when
+        // the cost reduction wasn't added when the card was in the current zone) the static abilities are missing.
+        for (final StaticAbility stAb : getCard().getGame().getCardState(getCard()).getStaticAbilities()) {
+            // Only collect perpetual cost changes to this card (not cost changes that this card applies to other cards)
+            if ("Card.Self".equals(stAb.getParam("ValidCard"))) {
                 if (stAb.checkMode(StaticAbilityMode.ReduceCost)) {
                     reduceAbilities.add(stAb);
                 } else if (stAb.checkMode(StaticAbilityMode.RaiseCost)) {
@@ -248,15 +246,26 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
 
         int totalGenericCostAdjustment = 0;
         for (final StaticAbility stAb : raiseAbilities) {
-            int amount = Integer.parseInt(stAb.getParamOrDefault("Amount", "1"));
-            totalGenericCostAdjustment = totalGenericCostAdjustment + amount;
+            try {
+                int amount = Integer.parseInt(stAb.getParamOrDefault("Amount", "1"));
+                totalGenericCostAdjustment = totalGenericCostAdjustment + amount;
+            } catch (NumberFormatException e) {
+                // We only care about adjustments with a specific numeric value.
+                // Some cost adjustment abilities put non-numeric values here, such as affinity
+            }
         }
         for (final StaticAbility stAb : reduceAbilities) {
-            int amount = Integer.parseInt(stAb.getParamOrDefault("Amount", "1"));
-            totalGenericCostAdjustment = totalGenericCostAdjustment - amount;
+            try {
+                int amount = Integer.parseInt(stAb.getParamOrDefault("Amount", "1"));
+                totalGenericCostAdjustment = totalGenericCostAdjustment - amount;
+            } catch (NumberFormatException e) {
+                // We only care about adjustments with a specific numeric value.
+                // Some cost adjustment abilities put non-numeric values here, such as affinity
+            }
         }
 
         if (totalGenericCostAdjustment != 0) {
+            // This doesn't work on hybrid costs such as "Advice from the Fae"
             int genericCost = manaCost.getGenericCost();
             int genericCostAdjustment;
             int remainingGenericCostAdjustment;

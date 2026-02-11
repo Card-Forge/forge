@@ -856,18 +856,26 @@ public class CardRenderer {
                 g.drawOutlinedText(CardTranslation.getTranslatedName(details.getName()), FSkinFont.forHeight(h * multiplier), Color.WHITE, Color.BLACK, cx + padding - 1f, cy + padding, cw - 2 * padding, ch * 0.4f, true, Align.left, false, true);
             }
             if (CardRendererUtils.showCardManaCostOverlay(card)) {
+                boolean showPerpetualManaCost = CardRendererUtils.showCardPerpetualManaCostOverlay();
                 float manaSymbolSize = w / 4.5f;
                 if (card.isSplitCard() && card.hasAlternateState() && !card.isFaceDown() && card.getZone() != ZoneType.Stack && card.getZone() != ZoneType.Battlefield) {
                     if (isChoiceList) {
-                        drawManaCost(g, details.getManaCost(), x - padding, y, w + 2 * padding, h, manaSymbolSize);
+                        ManaCost manaCost = showPerpetualManaCost ? details.getManaCost() : details.getOriginalManaCost();
+                        drawManaCost(g, manaCost, x - padding, y, w + 2 * padding, h, manaSymbolSize);
                     } else {
-                        ManaCost leftManaCost = card.getLeftSplitState().getManaCost();
-                        ManaCost rightManaCost = card.getRightSplitState().getManaCost();
+                        ManaCost leftManaCost = showPerpetualManaCost ? card.getLeftSplitState().getManaCost() : card.getLeftSplitState().getOriginalManaCost();
+                        ManaCost rightManaCost = showPerpetualManaCost ? card.getRightSplitState().getManaCost() : card.getRightSplitState().getOriginalManaCost();
                         drawManaCost(g, leftManaCost, x - padding, y-(manaSymbolSize/1.5f), w + 2 * padding, h, manaSymbolSize);
                         drawManaCost(g, rightManaCost, x - padding, y+(manaSymbolSize/1.5f), w + 2 * padding, h, manaSymbolSize);
                     }
                 } else {
-                    drawManaCost(g, showAltState ? card.getAlternateState().getManaCost() : card.getCurrentState().getManaCost(), cx - padding, cy, cw + 2 * padding, ch, manaSymbolSize);
+                    ManaCost manaCost;
+                    if (showAltState) {
+                        manaCost = showPerpetualManaCost ? card.getAlternateState().getManaCost() : card.getAlternateState().getOriginalManaCost();
+                    } else {
+                        manaCost = showPerpetualManaCost ? card.getCurrentState().getManaCost() : card.getCurrentState().getOriginalManaCost();
+                    }
+                    drawManaCost(g, manaCost, cx - padding, cy, cw + 2 * padding, ch, manaSymbolSize);
                 }
             }
         }

@@ -88,6 +88,10 @@ public class CardRendererUtils {
                 isPreferenceEnabled(ForgePreferences.FPref.UI_OVERLAY_CARD_MANA_COST);
     }
 
+    public static boolean showCardPerpetualManaCostOverlay() {
+        return isPreferenceEnabled(ForgePreferences.FPref.UI_OVERLAY_CARD_PERPETUAL_MANA_COST);
+    }
+
     public static boolean showAbilityIcons(final CardView card) {
         return isShowingOverlays(card) && isPreferenceEnabled(ForgePreferences.FPref.UI_OVERLAY_ABILITY_ICONS);
     }
