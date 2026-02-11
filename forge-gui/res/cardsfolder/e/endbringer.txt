@@ -2,7 +2,7 @@ Name:Endbringer
 ManaCost:5 C
 Types:Creature Eldrazi
 PT:5/5
-K:CARDNAME untaps during each other player's untap step.
+S:Mode$ UntapOtherPlayer | ValidCard$ Card.Self | Description$ Untap CARDNAME during each other player's untap step.
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 A:AB$ Pump | Cost$ C T | ValidTgts$ Creature | IsCurse$ True | KW$ HIDDEN CARDNAME can't attack or block. | SpellDescription$ Target creature can't attack or block this turn.
 A:AB$ Draw | Cost$ C C T | NumCards$ 1 | SpellDescription$ Draw a card.

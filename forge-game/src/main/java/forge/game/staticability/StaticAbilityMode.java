@@ -187,6 +187,9 @@ public enum StaticAbilityMode {
     // StaticAbilityManaConvert
     ManaConvert,
 
+    // StaticAbilityUntapOtherPlayer
+    UntapOtherPlayer,
+
     // StaticAbilityTurnPhaseReversed
     TurnReversed,
     PhaseReversed,
