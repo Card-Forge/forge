@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="84">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="85">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -153,13 +153,13 @@
   }
 ]
 </property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
    </properties>
   </object>
   <object id="69" template="../../../../common/maps/obj/scroll.tx" x="342.5" y="61">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Simic Guildgate&quot;, &quot;editions&quot;: [ &quot;RNA&quot; ], &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Simic Charm&quot;, &quot;editions&quot;: [ &quot;GTC&quot; ], &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
   <object id="70" template="../../../../common/maps/obj/scroll.tx" x="106.5" y="60">
@@ -202,5 +202,10 @@
   <object id="81" template="../../../../common/maps/obj/collision.tx" x="368.956" y="87.0833" width="13.088" height="24.8333"/>
   <object id="82" template="../../../../common/maps/obj/collision.tx" x="305.456" y="94.5833" width="13.088" height="16.8333"/>
   <object id="83" template="../../../../common/maps/obj/collision.tx" x="304.956" y="161.583" width="13.088" height="11.3333"/>
+  <object id="84" template="../../../../common/maps/obj/scroll.tx" x="275.5" y="53.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Breeding Pool&quot;, &quot;editions&quot;: [ &quot;DIS&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

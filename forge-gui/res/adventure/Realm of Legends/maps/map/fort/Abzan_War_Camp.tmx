@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="121">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="122">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -159,5 +159,34 @@
   <object id="118" template="../../../../common/maps/obj/collision.tx" x="333.331" y="241.542" width="34.0047" height="31.5833"/>
   <object id="119" template="../../../../common/maps/obj/collision.tx" x="192.664" y="178.542" width="34.0047" height="31.5833"/>
   <object id="120" template="../../../../common/maps/obj/collision.tx" x="141.998" y="176.542" width="34.0047" height="31.5833"/>
+  <object id="121" template="../../obj/treasure.tx" x="176.167" y="76.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;KTK&quot;, &quot;TDM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;black&quot;, &quot;white&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;KTK&quot;, &quot;TDM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;black&quot;, &quot;white&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;KTK&quot;, &quot;TDM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;black&quot;, &quot;white&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
  </objectgroup>
 </map>
