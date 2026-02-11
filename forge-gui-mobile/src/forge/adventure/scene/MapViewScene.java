@@ -180,7 +180,15 @@ public class MapViewScene extends UIScene {
         for (PointOfInterest poi : allPois) {
             for (AdventureEventData data : AdventurePlayer.current().getEvents()) {
                 if (data.sourceID.equals(poi.getID())) {
-                    TypingLabel label = Controls.newTypingLabel("[%?BLACKEN] " + data.getCardBlock());
+                    StringBuilder sb = new StringBuilder();
+
+                    sb.append("[%?BLACKEN]");
+                    if (data.isDraftComplete) {
+                        sb.append("[red]!!![]");
+                    }
+                    sb.append(" ").append(data.getCardBlock());
+
+                    TypingLabel label = Controls.newTypingLabel(sb.toString());
                     table.addActor(label);
                     details.add(label);
                     label.setPosition(img.getScaleX()*(getMapX(poi.getPosition().x) - label.getWidth() / 2) + img.getX(), img.getScaleY()*(getMapY(poi.getPosition().y) - label.getHeight() / 2) + img.getY());
