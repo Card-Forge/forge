@@ -267,9 +267,12 @@ public class VMatchUI implements IVTopLevelUI {
         }
 
         // Collect extra fields grouped by target cell index.
+        // For odd player counts in grid mode, prefer the top row (index 1)
+        // so the local player is alone on the bottom row.
+        final boolean preferTop = !rowsMode && (lstFields.size() % 2 == 1);
         final Map<Integer, List<VField>> fieldsByCell = new LinkedHashMap<>();
         for (int i = 2; i < lstFields.size(); i++) {
-            final int target = rowsMode ? 1 : (i % 2);
+            final int target = rowsMode ? 1 : (preferTop ? ((i + 1) % 2) : (i % 2));
             fieldsByCell.computeIfAbsent(target, k -> new ArrayList<>()).add(lstFields.get(i));
         }
 
