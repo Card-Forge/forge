@@ -324,6 +324,7 @@ public final class NetworkDebugLogger {
                 logSystemInfo();
                 systemInfoLogged.set(Boolean.TRUE);
             }
+            cleanupOldLogs();
         } else {
             MDC.remove("instanceSuffix");
             MDC.remove("logfileKey");
@@ -393,6 +394,69 @@ public final class NetworkDebugLogger {
      */
     private static void updateLogfileKey() {
         MDC.put("logfileKey", computeLogfileKey());
+    }
+
+    /**
+     * Delete old log files from the network logs directory, respecting:
+     * - Grace period: skip files modified within the last 5 minutes
+     * - Current batch protection: skip files whose name contains the current batchId
+     * - Max file limit from NET_MAX_LOG_FILES preference
+     * - Cleanup can be disabled via NET_LOG_CLEANUP_ENABLED preference
+     *
+     * Runs once per setInstanceSuffix() call (same trigger as the old implementation).
+     */
+    private static void cleanupOldLogs() {
+        try {
+            if (FModel.getPreferences() == null) {
+                return;
+            }
+            if (!FModel.getPreferences().getPrefBoolean(FPref.NET_LOG_CLEANUP_ENABLED)) {
+                return;
+            }
+            int maxFiles = FModel.getPreferences().getPrefInt(FPref.NET_MAX_LOG_FILES);
+            if (maxFiles <= 0) {
+                return;
+            }
+
+            File logDir = new File(ForgeConstants.NETWORK_LOGS_DIR);
+            if (!logDir.exists() || !logDir.isDirectory()) {
+                return;
+            }
+
+            File[] logFiles = logDir.listFiles((dir, name) -> name.startsWith(LOG_PREFIX) && name.endsWith(".log"));
+            if (logFiles == null || logFiles.length <= maxFiles) {
+                return;
+            }
+
+            // Sort oldest first
+            java.util.Arrays.sort(logFiles, java.util.Comparator.comparingLong(File::lastModified));
+
+            long gracePeriodMs = 5 * 60 * 1000L;
+            long now = System.currentTimeMillis();
+            String currentBatch = batchId;
+            int deleted = 0;
+
+            for (int i = 0; i < logFiles.length - maxFiles; i++) {
+                File f = logFiles[i];
+                // Grace period: skip recently modified files
+                if (now - f.lastModified() < gracePeriodMs) {
+                    continue;
+                }
+                // Batch protection: skip files from the current batch
+                if (currentBatch != null && f.getName().contains(currentBatch)) {
+                    continue;
+                }
+                if (f.delete()) {
+                    deleted++;
+                }
+            }
+
+            if (deleted > 0) {
+                logger.debug("Log cleanup: deleted {} old log files", deleted);
+            }
+        } catch (Exception e) {
+            // Non-critical — don't let cleanup failures affect logging
+        }
     }
 
     /**

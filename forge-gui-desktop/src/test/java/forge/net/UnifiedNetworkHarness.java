@@ -456,8 +456,11 @@ public class UnifiedNetworkHarness {
                                         CountDownLatch finishedLatch) {
         HeadlessNetworkClient client = null;
         try {
-            // Stagger connections
-            long staggerDelay = 500L + (clientIndex * 300L);
+            // Stagger connections — must be long enough that each client's LoginEvent
+            // is fully processed (including updateLobbyState broadcast) before the next
+            // client connects, to avoid a Netty event loop deadlock in RemoteClient.send()
+            // when two broadcast() calls run concurrently on different event loop threads.
+            long staggerDelay = 500L + (clientIndex * 3000L);
             Thread.sleep(staggerDelay);
 
             client = new HeadlessNetworkClient(clientName, "localhost", port);

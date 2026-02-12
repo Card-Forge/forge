@@ -40,10 +40,10 @@ public class NetworkLogAnalyzer {
             "Savings: Approximate=(\\d+)%, Actual=(\\d+)%");
 
     private static final Pattern GAME_OUTCOME_PATTERN = Pattern.compile(
-            "\\[GameEvent\\] Game outcome: winner = (.+)");
+            "\\[GAME EVENT\\] Game outcome: winner = (.+)");
 
     private static final Pattern TURN_PATTERN = Pattern.compile(
-            "\\[GameEvent\\] Turn (\\d+) began");
+            "\\[GAME EVENT\\] Turn (\\d+) began");
 
     private static final Pattern GAME_COMPLETED_PATTERN = Pattern.compile(
             "Game completed|game finished|Game COMPLETED|isGameOver.*true");

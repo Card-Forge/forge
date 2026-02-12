@@ -14,7 +14,7 @@
       <level>INFO</level>
     </filter>
     <encoder>
-      <pattern>[%d{HH:mm:ss.SSS}] [%-5level] %msg%n</pattern>
+      <pattern>[%d{HH:mm:ss.SSS}] [%level] %msg%n</pattern>
     </encoder>
   </appender>
 
@@ -31,7 +31,7 @@
         <file>${forge.networklogs.dir}network-debug-${logfileKey}.log</file>
         <append>true</append>
         <encoder>
-          <pattern>[%d{HH:mm:ss.SSS}] [%-5level] %msg%n</pattern>
+          <pattern>[%d{HH:mm:ss.SSS}] [%level] %msg%n</pattern>
         </encoder>
       </appender>
     </sift>
