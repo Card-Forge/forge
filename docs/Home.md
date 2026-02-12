@@ -13,7 +13,7 @@ Forge creates a unique experience by combining this enormous card library with s
 
 Forge also features a wide variety of puzzles. For more details and features see the other pages in this wiki.
 
-Currently, Forge functions best in Human vs. AI matches. Playing against another human player over the Internet with [Online Multiplayer mode](Network-FAQ.md) is functional, but may still result in game play errors.
+Currently, Forge functions best in Human vs. AI matches. Playing against another human player over the Internet with [Online Multiplayer mode](Network-Play.md) is functional, but may still result in game play errors.
 
 # Adventure Mode
 Forge now includes a Graphical Map Based game mode, along with the Classic deck building and match game modes with AI.

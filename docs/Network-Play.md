@@ -8,8 +8,10 @@
 - [Network Configuration](#network-configuration)
   - [Local Network Setup](#local-network-setup)
   - [Remote Network Setup](#remote-network-setup)
-- [Troubleshooting](#troubleshooting)
-  
+  - [VPN / Software-Defined Networks](#vpn--software-defined-networks)
+- [FAQs](#faqs)
+- [Known Issues](#known-issues)
+- [Bug Reports](#bug-reports)
 ---
 
 ## Status & Support
@@ -19,7 +21,7 @@
 
 > [!TIP]
 > - The **[Forge Discord](https://discord.gg/nsAhGwD)** has a dedicated network play channel. Folks there will be happy to help you with any issues!
-> - Also see the **[Network FAQs](Network-FAQ)** page for further information.
+> - Also see the **[FAQs](#faqs)** section below for common questions.
 
 ---
 
@@ -164,16 +166,66 @@ Router-specific guides: [portforward.com/router.htm](https://portforward.com/rou
 
 Share the external IP shown on that page with the client. Remember the client needs to enter it as **`IP:36743`** (e.g., `203.0.113.45:36743`).
 
-### Alternative: VPN / Software-Defined Networks
+### VPN / Software-Defined Networks
 
-If you cannot configure port forwarding (public hotspot, cellular, restricted network), see the **[Networking Extras](Networking-Extras)** page for VPN and SDN setup options. Once connected through a VPN or SDN, follow the **Local Network Setup** above.
+If you cannot configure port forwarding — for example on a cellular connection, public Wi-Fi hotspot, or a network you don't control — you can use a **Virtual Private Network (VPN)** or **Software-Defined Network (SDN)** to create a private network between players.
+
+> [!CAUTION]
+> Forge cannot provide support for third-party VPN or SDN software. Refer to each provider's documentation for setup help.
+
+#### How It Works
+
+A VPN or SDN creates a virtual local network between devices over the internet. Once connected, all players appear to be on the same LAN — so you can follow the **[Local Network Setup](#local-network-setup)** steps instead of dealing with port forwarding.
+
+#### Recommended Options
+
+| Tool | Type | Cost | Notes |
+|---|---|---|---|
+| [ZeroTier](https://www.zerotier.com/download/) | SDN | Free (personal use) | Easiest setup. Create a network, share the network ID, approve joiners. No server needed. |
+| [RadminVPN](https://www.radmin-vpn.com/) | VPN | Free | Simple LAN-style VPN. Install on both devices and join the same network. |
+| [Hamachi](https://www.vpn.net/) | VPN | Free (up to 5 devices) | Established option, but requires a LogMeIn account. |
+
+For self-hosted options (e.g. OpenVPN on your own server or router), you will need control of a network or a rented server with a public IP. Both players install the VPN client and connect to that server. This adds complexity but gives full control.
+
+#### Quick Setup (ZeroTier Example)
+
+1. All players install [ZeroTier](https://www.zerotier.com/download/).
+2. One player creates a network at [my.zerotier.com](https://my.zerotier.com) and shares the **Network ID**.
+3. All other players join using that Network ID.
+4. The network creator approves each device in the ZeroTier web console.
+5. Once connected, follow the **[Local Network Setup](#local-network-setup)** — use the ZeroTier-assigned IP addresses instead of your normal LAN IPs.
+
+#### Security Note
+
+Any player on a shared private network can see other devices on that network. Only share access with people you trust, and disconnect when you're not playing.
 
 ---
 
-## Troubleshooting
+## FAQs
+
+**Is Forge cross-platform?**
+Yes. Forge runs on Java, so players on Android, Windows, macOS, and Linux can all play together. (iOS is not supported — it does not run Java.)
+
+**Can I play against random players?**
+There is no built-in matchmaking. Network play is designed for playing against people you know and manually sharing connection details. To find opponents, visit the [Forge Discord](https://discord.gg/nsAhGwD) and ask in the network play channel.
+
+**Does network play support Draft or Sealed?**
+No. Only Constructed formats are currently supported (including Commander, Oathbreaker, Tiny Leaders, Brawl, Archenemy, Planechase, and Vanguard).
+
+---
+
+## Known Issues
 
 ### Version Compatibility
 Forge automatically warns in the lobby chat when a client's version differs from the host's but **does not block the connection**. While network play between different versions of Forge can be possible, mismatched versions may cause desync or crashes mid-game. Always use the same version on all devices to avoid network compatibility issues.
 
 ### Lag / High Bandwidth
 Network play currently lacks traffic optimization. A single game can transfer hundreds of megabytes. Slow connections will experience significant lag.
+
+---
+## Bug Reports
+
+Bug reports can be made to the network play channel on the [Forge Discord](https://discord.gg/nsAhGwD) or by raising an issue on the [Forge Github](https://github.com/Card-Forge/forge/issues).
+
+Please make sure your bug report includes a copy of the game logs from when the issue arose.
+
