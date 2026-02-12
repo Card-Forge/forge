@@ -104,29 +104,6 @@ public class HiddenKeywordsMetaTest extends SimulationTest {
     }
 
     @Test
-    public void testSkullbriar() {
-        Game game = initAndCreateGame();
-        Player p1 = game.getPlayers().get(0);
-
-        Card skullbriar = createCard("Grizzly Bears", p1);
-        skullbriar.setName("Skullbriar, the Walking Grave");
-        skullbriar.addIntrinsicKeyword("Counters remain on CARDNAME as it moves to any zone other than a player's hand or library.");
-        p1.getZone(ZoneType.Battlefield).add(skullbriar);
-        skullbriar.setGameTimestamp(game.getNextTimestamp());
-
-        // Add counters
-    skullbriar.setCounters(CounterEnumType.P1P1, 2);
-    Assert.assertEquals(skullbriar.getCounters(CounterEnumType.P1P1), 2, "Skullbriar should have 2 counters");
-
-        // Move to Graveyard
-        game.getAction().moveTo(ZoneType.Graveyard, skullbriar, null, null);
-        
-        // Find the card in graveyard (it might be a new instance depending on how moveTo works)
-        Card skullInGrave = p1.getZone(ZoneType.Graveyard).get(0);
-        Assert.assertEquals(skullInGrave.getCounters(CounterEnumType.P1P1), 2, "Skullbriar should retain counters in graveyard");
-    }
-
-    @Test
     public void testZilortha() {
         Game game = initAndCreateGame();
         Player p1 = game.getPlayers().get(0);

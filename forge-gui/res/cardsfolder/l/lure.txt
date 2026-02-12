@@ -3,6 +3,5 @@ ManaCost:1 G G
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddStaticAbility$ SMustBlock | Description$ All creatures able to block enchanted creature do so.
-SVar:SMustBlock:Mode$ MustBeBlockedByAll
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ All creatures able to block CARDNAME do so. | Description$ All creatures able to block enchanted creature do so.
 Oracle:Enchant creature\nAll creatures able to block enchanted creature do so.

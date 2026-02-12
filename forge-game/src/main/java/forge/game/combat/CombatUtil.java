@@ -32,7 +32,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
-import forge.game.staticability.StaticAbilityMode;
 import forge.game.staticability.StaticAbilityBlockRestrict;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.staticability.StaticAbilityMustBlock;
@@ -833,28 +832,9 @@ public class CombatUtil {
     }
 
     private static boolean attackerLureSatisfied(final Card attacker, final Card blocker, final CardCollection blockers) {
-        boolean lure = attacker.hasStartOfKeyword("All creatures able to block CARDNAME do so.");
-        if (!lure) {
-            for (StaticAbility sa : attacker.getStaticAbilities()) {
-                if (sa.checkConditions(StaticAbilityMode.MustBeBlockedByAll)) {
-                    lure = true;
-                    break;
-                }
-            }
-        }
-        
-        boolean mustBeBlocked = attacker.hasStartOfKeyword("CARDNAME must be blocked if able.");
-        if (!mustBeBlocked) {
-            for (StaticAbility sa : attacker.getStaticAbilities()) {
-                if (sa.checkConditions(StaticAbilityMode.MustBeBlocked)) {
-                    mustBeBlocked = true;
-                    break;
-                }
-            }
-        }
-
-        if (lure
-                || (mustBeBlocked && blockers.isEmpty())
+        if (attacker.hasStartOfKeyword("All creatures able to block CARDNAME do so.")
+                || (attacker.hasStartOfKeyword("CARDNAME must be blocked if able.")
+                        && blockers.isEmpty())
                 || (attacker.hasStartOfKeyword("CARDNAME must be blocked by exactly one creature if able.")
                         && blockers.size() != 1)
                 || (attacker.hasStartOfKeyword("CARDNAME must be blocked by two or more creatures if able.")
@@ -945,7 +925,6 @@ public class CombatUtil {
         }
 
         // TODO remove with HiddenKeyword or Static Ability
-        final java.util.List<Card> currentBlockers = combat != null ? combat.getBlockers(attacker) : java.util.Collections.emptyList();
         boolean mustBeBlockedBy = false;
         for (KeywordInterface inst : attacker.getKeywords()) {
             String keyword = inst.getOriginal();
@@ -953,7 +932,7 @@ public class CombatUtil {
             if (keyword.startsWith("MustBeBlockedBy ")) {
                 final String valid = keyword.substring("MustBeBlockedBy ".length());
                 if (blocker.isValid(valid, null, null, null) &&
-                        CardLists.getValidCardCount(currentBlockers, valid, null, null, null) == 0) {
+                        CardLists.getValidCardCount(combat.getBlockers(attacker), valid, null, null, null) == 0) {
                     mustBeBlockedBy = true;
                     break;
                 }
@@ -970,29 +949,10 @@ public class CombatUtil {
 
         // if the attacker has no lure effect, but the blocker can block another
         // attacker with lure, the blocker can't block the former
-        boolean lure = attacker.hasKeyword("All creatures able to block CARDNAME do so.");
-        if (!lure) {
-            for (final StaticAbility sa : attacker.getStaticAbilities()) {
-                if (sa.checkConditions(StaticAbilityMode.MustBeBlockedByAll)) {
-                    lure = true;
-                    break;
-                }
-            }
-        }
-        boolean mustBeBlockedIfAble = attacker.hasKeyword("CARDNAME must be blocked if able.");
-        if (!mustBeBlockedIfAble) {
-             for (final StaticAbility sa : attacker.getStaticAbilities()) {
-                if (sa.checkConditions(StaticAbilityMode.MustBeBlocked)) {
-                    mustBeBlockedIfAble = true;
-                    break;
-                }
-            }
-        }
-
-        if (!lure
-                && !(mustBeBlockedIfAble && currentBlockers.isEmpty())
-                && !(attacker.hasKeyword("CARDNAME must be blocked by exactly one creature if able.") && currentBlockers.size() != 1)
-                && !(attacker.hasKeyword("CARDNAME must be blocked by two or more creatures if able.") && currentBlockers.size() < 2)
+        if (!attacker.hasKeyword("All creatures able to block CARDNAME do so.")
+                && !(attacker.hasKeyword("CARDNAME must be blocked if able.") && combat.getBlockers(attacker).isEmpty())
+                && !(attacker.hasKeyword("CARDNAME must be blocked by exactly one creature if able.") && combat.getBlockers(attacker).size() != 1)
+                && !(attacker.hasKeyword("CARDNAME must be blocked by two or more creatures if able.") && combat.getBlockers(attacker).size() < 2)
                 && !blocker.getMustBlockCards().contains(attacker)
                 && !mustBeBlockedBy
                 && mustBlockAnAttacker(blocker, combat, null)) {

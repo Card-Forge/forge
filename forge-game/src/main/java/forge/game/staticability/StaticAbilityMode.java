@@ -46,8 +46,6 @@ public enum StaticAbilityMode {
     PlayerMustAttack,
     // StaticAbilityMustBlock
     MustBlock,
-    MustBeBlockedByAll,
-    MustBeBlocked,
 
     // StaticAbilityAssignCombatDamageAsUnblocked
     AssignCombatDamageAsUnblocked,
@@ -200,9 +198,6 @@ public enum StaticAbilityMode {
     // StaticAbilityTurnPhaseReversed
     TurnReversed,
     PhaseReversed,
-
-    // StaticAbilityCountersRemain
-    CountersRemain,
     ;
 
     public static StaticAbilityMode smartValueOf(final String value) {
