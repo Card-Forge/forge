@@ -693,11 +693,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
-    public int getPlayerCount() {
-        return getYieldController().getPlayerCount();
-    }
-
-    @Override
     public void declineSuggestion(PlayerView player, String suggestionType) {
         getYieldController().declineSuggestion(player, suggestionType);
     }

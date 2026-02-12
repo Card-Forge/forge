@@ -285,8 +285,6 @@ public interface IGuiGame {
 
     boolean didYieldJustEnd(PlayerView player);
 
-    int getPlayerCount();
-
     // Smart suggestion decline tracking
     void declineSuggestion(PlayerView player, String suggestionType);
 

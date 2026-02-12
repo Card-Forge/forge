@@ -3277,10 +3277,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         getGui().autoPassCancel(getLocalPlayerView());
     }
 
-    public int getPlayerCount() {
-        return getGui().getPlayerCount();
-    }
-
     @Override
     public void awaitNextInput() {
         getGui().awaitNextInput();

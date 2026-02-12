@@ -684,18 +684,6 @@ public class YieldController {
             (phase == forge.game.phase.PhaseType.END_OF_TURN || phase == forge.game.phase.PhaseType.CLEANUP);
     }
 
-    /**
-     * Get the total number of players in the game.
-     * Uses network-safe GameView.getPlayers() instead of Game.getPlayers().
-     */
-    public int getPlayerCount() {
-        GameView gameView = callback.getGameView();
-        if (gameView == null) {
-            return 0;
-        }
-        forge.util.collect.FCollectionView<PlayerView> players = gameView.getPlayers();
-        return players != null ? players.size() : 0;
-    }
 
     /**
      * Mark a suggestion as declined for the current turn.
