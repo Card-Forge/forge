@@ -2,6 +2,7 @@ package forge.gui.control;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
 import com.google.common.eventbus.Subscribe;
 import forge.game.Game;
 import forge.game.card.Card;
@@ -20,7 +21,6 @@ import forge.player.PlayerControllerHuman;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
 import forge.util.Lang;
-import forge.util.maps.MapOfLists;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -363,10 +363,9 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventBlockersDeclared event) {
         final Set<Card> cards = new HashSet<>();
-        for (final MapOfLists<Card, Card> kv : event.blockers().values()) {
-            for (final Collection<Card> blockers : kv.values()) {
-                cards.addAll(blockers);
-            }
+
+        for (final Multimap<Card, Card> kv : event.blockers().values()) {
+            cards.addAll(kv.values());
         }
         return processCards(cards, cardsUpdate);
     }

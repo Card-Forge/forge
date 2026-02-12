@@ -147,7 +147,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 return false;
             }
             return ph.isPlayerTurn(ai) || (combat != null && combat.isAttacking(card) && card.getNetCombatDamage() > 0);
-        } else return !keyword.endsWith("CARDNAME's activated abilities can't be activated."); //too complex
+        } else return true;
     }
 
     /**
