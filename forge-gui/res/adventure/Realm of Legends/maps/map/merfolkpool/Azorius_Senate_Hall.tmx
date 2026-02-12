@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="104">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="109">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -31,7 +31,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYCAOnG2nrjpiwHxm/PLHDBgYjhsQr55YYMuCyhdhY2DodGNg4ATibjcIHwROGGBXTy6Y6IbKn6sDtNOdgYELiLndIXx86smy05eBoZlAnD1ihGAYAKkH6aMECPoxMBwGmtPlxcDA60EcBqkH6aMEIPsXZCYxgBb+7fFCuAHmDmSa1v5FD1tkMWr6F5dd2MSp4d/BAkB5NZSdgcHPiIEhrw9Cg/joeZhWYC3QzndAvL6PdnYENKNibPYiy8FoarsBn73I9lPDrjvAsv4uC3570dXQAryF2vuezPgFANdgWzA=
+   eJxjYCAOnG2nrjpiwHxm/PLHDBgYjhsQr55YYMuCyhdhY2DodGNg4ATibjcIHwROGGBXTy6Y6IbKn6sDtNOdgYELiLndIXx86smy05eBoRktzmD+Q+Y/YkTwQepB+igBgn4MDIeB5nR5MTDwehCHQepB+igByP4FmUkMoIV/e7wQboC5A5mmtX/RwxZZjJr+xWUXNnFq+HewAFBeDWVnYPAzYmDI64PQID56HqYVWAu08x0Qr++jnR0BzagYm73IcjCa2m7AZy+y/dSw6w6wrL/Lgt9edDW0AG+h9r4nM34B3M1agQ==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -50,14 +50,16 @@
   <object id="53" template="../../../../common/maps/obj/enemy.tx" x="222.874" y="114.19">
    <properties>
     <property name="enemy" value="Lavinia"/>
-    <property name="threatRange" type="int" value="20"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="0"/>
    </properties>
   </object>
   <object id="55" template="../../../../common/maps/obj/enemy.tx" x="271.413" y="114.192">
    <properties>
     <property name="enemy" value="Bruvac"/>
-    <property name="threatRange" type="int" value="20"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="0"/>
    </properties>
   </object>
@@ -104,8 +106,8 @@
   }
 ]
 </property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
    </properties>
   </object>
   <object id="74" template="../../obj/treasure.tx" x="312.5" y="229">
@@ -142,7 +144,7 @@
   </object>
   <object id="75" template="../../../../common/maps/obj/scroll.tx" x="282.833" y="229">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Azorius Guildgate&quot;, &quot;editions&quot;: [ &quot;RNA&quot; ], &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Azorius Charm&quot;, &quot;editions&quot;: [ &quot;RTR&quot; ], &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
   <object id="78" template="../../../../common/maps/obj/scroll.tx" x="195.667" y="229">
@@ -205,5 +207,14 @@
   <object id="101" template="../../../../common/maps/obj/collision.tx" x="336.148" y="18.4583" width="15.0369" height="28.4167"/>
   <object id="102" template="../../../../common/maps/obj/collision.tx" x="323.815" y="0.79165" width="8.37023" height="13.75"/>
   <object id="103" template="../../../../common/maps/obj/collision.tx" x="164.148" y="0.458333" width="8.37023" height="13.75"/>
+  <object id="104" template="../../../../common/maps/obj/scroll.tx" x="246.864" y="85.4545">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Hallowed Fountain&quot;, &quot;editions&quot;: [ &quot;DIS&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="105" template="../../../../common/maps/obj/collision.tx" x="274.815" y="30.4583" width="10.0369" height="16.0834"/>
+  <object id="106" template="../../../../common/maps/obj/collision.tx" x="211.982" y="30.9583" width="10.0369" height="16.0834"/>
+  <object id="107" template="../../../../common/maps/obj/collision.tx" x="274.891" y="64.0492" width="10.0369" height="16.0834"/>
+  <object id="108" template="../../../../common/maps/obj/collision.tx" x="210.891" y="63.9583" width="10.0369" height="16.0834"/>
  </objectgroup>
 </map>

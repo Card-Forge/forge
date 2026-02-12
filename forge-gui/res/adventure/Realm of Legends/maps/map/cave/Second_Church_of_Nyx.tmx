@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="85">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="97">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -68,7 +68,7 @@
   <object id="67" template="../../../../common/maps/obj/manashards.tx" x="107.973" y="135.78"/>
   <object id="71" template="../../../../common/maps/obj/enemy.tx" x="209.462" y="90.7975">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Triumph&quot;, &quot;Iroas's Champion|ORI&quot;, &quot;Armory of Iroas|JOU&quot;, &quot;Font of Ire|JOU&quot;, &quot;Font of Vigor|JOU&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Triumph&quot;, &quot;Favored of Iroas&quot;, &quot;Armory of Iroas|JOU&quot;, &quot;Font of Ire|JOU&quot;, &quot;Font of Vigor|JOU&quot;]}"/>
     <property name="enemy" value="Iroas"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>
@@ -96,7 +96,7 @@
    </properties>
   </object>
   <object id="78" template="../../../../common/maps/obj/manashards.tx" x="107.98" y="257.787"/>
-  <object id="80" template="../../../../common/maps/obj/gold.tx" x="112.275" y="32.2707">
+  <object id="80" template="../../../../common/maps/obj/gold.tx" x="108.504" y="32.2707">
    <properties>
     <property name="spawn.Hard" type="bool" value="false"/>
    </properties>
@@ -117,6 +117,52 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }
 ]</property>
+   </properties>
+  </object>
+  <object id="85" template="../../../../common/maps/obj/gold.tx" x="147.134" y="29.7062">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="86" template="../../../../common/maps/obj/gold.tx" x="264.562" y="28.6289">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="87" template="../../../../common/maps/obj/manashards.tx" x="289.5" y="168.5">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/manashards.tx" x="287.5" y="144"/>
+  <object id="91" template="../../../../common/maps/obj/manashards.tx" x="288.75" y="225">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/manashards.tx" x="287.75" y="245">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="93" template="../../../../common/maps/obj/manashards.tx" x="128" y="223.75">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/manashards.tx" x="128" y="241.5">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/manashards.tx" x="128" y="144.75">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="96" template="../../../../common/maps/obj/manashards.tx" x="128" y="162.75">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
    </properties>
   </object>
  </objectgroup>

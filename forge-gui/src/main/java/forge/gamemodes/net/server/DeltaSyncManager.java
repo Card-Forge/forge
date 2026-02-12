@@ -56,6 +56,20 @@ public class DeltaSyncManager {
     private long packetsSinceLastChecksum = 0;
 
     /**
+     * Reset all tracking state for reconnection.
+     * After reset, the next sync will be treated as a fresh initial sync.
+     */
+    public void reset() {
+        sequenceNumber.set(0);
+        clientAcknowledgedSeq.clear();
+        trackedObjectIds.clear();
+        removedObjectIds.clear();
+        sentObjectIds.clear();
+        lastSentPropertyChecksums.clear();
+        packetsSinceLastChecksum = 0;
+    }
+
+    /**
      * Process an acknowledgment from a client.
      * @param clientIndex the client's player index
      * @param acknowledgedSeq the sequence number being acknowledged

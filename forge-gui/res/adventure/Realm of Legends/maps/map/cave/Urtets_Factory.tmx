@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="90">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="92">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -33,7 +33,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBg64KkmA8MzIG7XYGDo0EDwKQFHNAirYdRiYGAC4sVAtUs0EHwQKAHa/1CdgeGROnnuWaEJwbVAc+uwuOURI3a2JVDPX6Cd/9RR3UMsgLl1JtDOWTjshdkHorcD1ewgIqwIAZhbg4B2S7HhtheGLwPtvEIFe/EBZH8i+5vWAJu92NxAqpsuAsP2kiYmjW4eIdwIDPcmAmE/G2juHCLTPLH2zgXaOY+AvduBdu6gsr3kxj0oHa8gMj23Av3VpoGQQ1eDCxSTUc4hm7sQaOciDUQ+holTK18TcgN6PqZHvqY1iBtoB1AAAGtlcWg=
+   eJxjYBg64KkmA8MzIG7XYGDo0EDwKQFHNAirYdRiYGAC4sVAtUs0EHwQKAHa/1CdgeGROnnuWaEJwbVAc+uwuOURI3a2JVDPX6Cd/9RR3UMsgLl1JtDOWTjshdkHorcD1ewgIqwIAZhbkc3HZi8MXwbaeYUK9uIDyP7E5S562YvNDaS66SIwXi9pYtLo5hHCjcBwbyIQ9rOB5s4hMs0Ta+9coJ3zCNi7HWjnDirbS27cS7FB8jCIJmR3K9BfbRoIOXQ1uEAxGeUcsrkLgXYu0kDkY5g4tfI1ITeg52N65Gtag7iBdgAFAADVYHKT
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -50,8 +50,6 @@
     <property name="waypoints" value="86,87"/>
    </properties>
   </object>
-  <object id="62" template="../../../../common/maps/obj/gold.tx" x="21.1853" y="40.0443"/>
-  <object id="65" template="../../../../common/maps/obj/gold.tx" x="53.724" y="210.029"/>
   <object id="66" template="../../../../common/maps/obj/gold.tx" x="25.3334" y="144"/>
   <object id="67" template="../../../../common/maps/obj/enemy.tx" x="258.671" y="154.858">
    <properties>
@@ -59,14 +57,6 @@
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="78,79,85,92"/>
-   </properties>
-  </object>
-  <object id="68" template="../../../../common/maps/obj/enemy.tx" x="183.178" y="72.0046">
-   <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Shield of Kaldra|DST&quot;, &quot;Leonin Lightbringer|ONE&quot;]}"/>
-    <property name="enemy" value="Neyali"/>
-    <property name="threatRange" type="int" value="10"/>
-    <property name="waypoints" value=""/>
    </properties>
   </object>
   <object id="69" template="../../../../common/maps/obj/enemy.tx" x="360.086" y="110.375">
@@ -78,7 +68,7 @@
    </properties>
   </object>
   <object id="72" template="../../../../common/maps/obj/gold.tx" x="392.167" y="85.8333"/>
-  <object id="74" template="../../../../common/maps/obj/booster.tx" x="27.5" y="107.5">
+  <object id="74" template="../../../../common/maps/obj/booster.tx" x="57" y="206">
    <properties>
     <property name="reward">[
   {
@@ -114,7 +104,7 @@
    <properties>
     <property name="dialog">[
 {
-   &quot;text&quot;: &quot;The factory ahead of you is full of myr running back and forth, working endlessly at all manner of tasks. To one side, a small group of humans huddles near great furnaces for warmth.&quot;,
+   &quot;text&quot;: &quot;The factory ahead of you is full of myr running back and forth, working endlessly at all manner of tasks. Other more fearsome constructs also move about, the sound of metal scraping on metal breaking through even the constant din of the machinery.&quot;,
    &quot;options&quot;: [{
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }
@@ -144,6 +134,27 @@
   }
 ]
 </property>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/shop.tx" x="128.5" y="84.625" width="16" height="16">
+   <properties>
+    <property name="commonShopList" value="Assembly"/>
+    <property name="noRestock" type="bool" value="false"/>
+    <property name="signXOffset" type="float" value="30"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/dialog.tx" x="123.916" y="91.25" width="36.167" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The robotic voice of a myr rings out from the fortified storefront ahead. 
+
+'Insert gold and select your wares. Many fine myr and other constructs are available to purchase.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
    </properties>
   </object>
  </objectgroup>

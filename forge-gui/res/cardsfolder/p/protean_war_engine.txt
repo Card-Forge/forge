@@ -3,7 +3,9 @@ ManaCost:R W
 Types:Artifact Vehicle
 PT:0/4
 K:ETBReplacement:Other:DBDraft
-SVar:DBDraft:DB$ Draft | TriggerZones$ Battlefield | Spellbook$ Serra Angel,Resplendent Angel,Steel-Plume Marshal,Duelcraft Trainer,Falconer Adept,Seraph of Dawn,Star-Crowned Stag,Benalish Marshal,Blade Historian,Captivating Crew,Manaform Hellkite,Serra Paragon,Moonveil Regent,Skyship Stalker,Ogre Battledriver | Zone$ Exile | SpellDescription$ As CARDNAME enters, draft a card from CARDNAME's spellbook and exile it.
+SVar:DBDraft:DB$ Draft | TriggerZones$ Battlefield | Spellbook$ Serra Angel,Resplendent Angel,Steel-Plume Marshal,Duelcraft Trainer,Falconer Adept,Seraph of Dawn,Star-Crowned Stag,Benalish Marshal,Blade Historian,Captivating Crew,Manaform Hellkite,Serra Paragon,Moonveil Regent,Skyship Stalker,Ogre Battledriver | RememberDrafted$ True | SubAbility$ DBExile | SpellDescription$ As CARDNAME enters, draft a card from CARDNAME's spellbook and exile it.
+SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ BecomesCrewed | ValidCard$ Card.Self | Execute$ TrigClone | TriggerDescription$ Whenever CARDNAME becomes crewed, until end of turn, it becomes a copy of the exiled card, except it's a Vehicle artifact in addition to its other types.
 SVar:TrigClone:DB$ Clone | Defined$ ExiledWith | CloneTarget$ Self | AddTypes$ Vehicle & Artifact | Duration$ UntilEndOfTurn
 K:Crew:3

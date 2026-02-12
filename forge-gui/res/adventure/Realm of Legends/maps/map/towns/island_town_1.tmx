@@ -13,7 +13,7 @@
  </layer>
  <layer id="2" name="Ground" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFQwHosw+MvWeB9pby0s78SWwMDJOxYCOgvZ2cEDXIfqc0HMp4IebCMDo4y06YTQ7AZR8MnGNH+D2XA8HO40C4m1w78dl9lh2/u5DNIgWUIoUzLOyQzTiLJU7RaUqBATRMr7Mg7McWp+g0pfbDzMlBisfzOOIXmQ+La3JBNhb96OkWFgekxicxoIQXQVOaX8gFo/YSBwD6ai5h
+   eJxjYBgFQwHosw+MvWeB9pby0s78SWwMDJOxYCOgvZ2cEDXIfqc0HMp4IebCMAggs88imY+LTQ5AtgOb2Dl2hN9zORDsPA6Eu8m1E5vdMHCWHbcculmkgFKkcIaFHbIZZ7HEKTpNKTCAhul1FoT92OIUnabUfpg5OUjxeB5H/CLzYXFNLsjGoh893SKneWqDEl4ETWl+IReM2kscAAC6GzCp
   </data>
  </layer>
  <layer id="3" name="Foreground" width="30" height="17">

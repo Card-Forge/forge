@@ -103,14 +103,14 @@ public class ArenaScene extends UIScene implements IAfterMatch {
                     "\n" + Forge.getLocalizer().getMessage("lblConcedeCurrentGame"),
                     Forge.getLocalizer().getMessage("lblYes"),
                     Forge.getLocalizer().getMessage("lblNo"), () -> {
-                        this.loose();
+                        this.lose();
                         removeDialog();
                     }, this::removeDialog);
         }
         showDialog(concedeDialog);
     }
 
-    private void loose() {
+    private void lose() {
         doneButton.setText("[%80][+Exit]");
         doneButton.layout();
         startButton.setDisabled(true);
@@ -185,7 +185,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
             markLostFighter(fighters.get(fighters.size - 1).actor);
             moveFighter(fighters.get(fighters.size - 2).actor, true);
             winners.add(fighters.get(fighters.size - 2));
-            loose();
+            lose();
         }
 
         fighters = winners;
