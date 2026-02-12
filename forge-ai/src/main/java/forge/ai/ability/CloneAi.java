@@ -68,7 +68,7 @@ public class CloneAi extends SpellAbilityAi {
             }
         } else {
             sa.resetTargets();
-            useAbility &= cloneTgtAI(sa);
+            useAbility &= cloneTgtAI(sa, false);
         }
 
         return useAbility ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
@@ -81,7 +81,7 @@ public class CloneAi extends SpellAbilityAi {
         boolean chance = true;
 
         if (sa.usesTargeting()) {
-            chance = cloneTgtAI(sa);
+            chance = cloneTgtAI(sa, false);
         }
 
         return chance ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
@@ -94,7 +94,7 @@ public class CloneAi extends SpellAbilityAi {
         boolean chance = true;
 
         if (sa.usesTargeting()) {
-            chance = cloneTgtAI(sa);
+            chance = cloneTgtAI(sa, mandatory);
         } else {
             if (sa.isReplacementAbility() && host.isCloned()) {
                 // prevent StackOverflow from infinite loop copying another ETB RE
@@ -131,15 +131,22 @@ public class CloneAi extends SpellAbilityAi {
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private boolean cloneTgtAI(final SpellAbility sa) {
+    private boolean cloneTgtAI(final SpellAbility sa, boolean mandatory) {
         // Specific logic for cards
+        List<Card> targets = CardUtil.getValidCardsToTarget(sa);
+        if (mandatory && targets.isEmpty()) {
+            return false;
+        }
         if ("CloneAttacker".equals(sa.getParam("AILogic"))) {
-            CardCollection valid = CardLists.getValidCards(sa.getHostCard().getController().getCardsIn(ZoneType.Battlefield), sa.getParam("ValidTgts"), sa.getHostCard().getController(), sa.getHostCard(), sa);
-            sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(valid));
+            sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(targets));
             return true;
         } else if ("CloneBestCreature".equals(sa.getParam("AILogic"))) {
-            CardCollection valid = CardLists.getValidCards(sa.getHostCard().getController().getGame().getCardsIn(ZoneType.Battlefield), sa.getParam("ValidTgts"), sa.getHostCard().getController(), sa.getHostCard(), sa);
-            sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(valid));
+            sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(targets));
+            return true;
+        }
+
+        if (mandatory) {
+            sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(targets));
             return true;
         }
 

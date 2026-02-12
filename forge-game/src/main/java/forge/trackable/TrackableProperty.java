@@ -115,6 +115,7 @@ public enum TrackableProperty {
     Room(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
     HiddenId(TrackableTypes.IntegerType),
     ExertedThisTurn(TrackableTypes.BooleanType),
+    Detained(TrackableTypes.BooleanType),
 
     //Card State
     Name(TrackableTypes.StringType),
