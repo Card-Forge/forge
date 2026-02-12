@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="28" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="118">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="28" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="119">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -42,13 +42,13 @@
     <property name="enemy" value="Emmara"/>
    </properties>
   </object>
-  <object id="76" template="../../../../common/maps/obj/enemy.tx" x="72.7301" y="131.002">
+  <object id="76" template="../../../../common/maps/obj/enemy.tx" x="72.1846" y="126.775">
    <properties>
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Vitu-Ghazi, the City-Tree|RAV&quot;, &quot;Selesnya Guildmage|RAV&quot;]
 }</property>
     <property name="enemy" value="Trostani"/>
     <property name="speedModifier" type="float" value="40"/>
-    <property name="threatRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
   <object id="91" template="../../../../common/maps/obj/enemy.tx" x="358.377" y="168.629">
@@ -82,10 +82,10 @@
   </object>
   <object id="108" template="../../../../common/maps/obj/scroll.tx" x="151.273" y="84.7273">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Selesnya Guildgate&quot;, &quot;editions&quot;: [ &quot;GRN&quot; ], &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Selesnya Charm&quot;, &quot;editions&quot;: [ &quot;RTR&quot; ], &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
-  <object id="110" template="../../obj/treasure.tx" x="55.5" y="137">
+  <object id="110" template="../../obj/treasure.tx" x="34.4091" y="117.545">
    <properties>
     <property name="reward">[
   {
@@ -117,7 +117,7 @@
     <property name="spawn.Hard" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="111" template="../../obj/treasure.tx" x="33.5" y="136.5">
+  <object id="111" template="../../obj/treasure.tx" x="34.0455" y="140.136">
    <properties>
     <property name="reward">[
   {
@@ -146,8 +146,8 @@
   }
 ]
 </property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
    </properties>
   </object>
   <object id="112" template="../../../../common/maps/obj/manashards.tx" x="382.5" y="121"/>
@@ -168,5 +168,10 @@
   <object id="115" template="../../../../common/maps/obj/collision.tx" x="32.5171" y="143.93" width="79.7811" height="14.8333"/>
   <object id="116" template="../../../../common/maps/obj/collision.tx" x="32.2665" y="80.7852" width="80.1144" height="14.8333"/>
   <object id="117" template="../../../../common/maps/obj/collision.tx" x="52.3124" y="158.964" width="59.7375" height="14.8333"/>
+  <object id="118" template="../../../../common/maps/obj/scroll.tx" x="51.6364" y="126.182">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Temple Garden&quot;, &quot;editions&quot;: [ &quot;RAV&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="64">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="67">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -49,24 +49,33 @@
    </properties>
   </object>
   <object id="59" template="../../../../common/maps/obj/shardtrader.tx" x="128" y="130"/>
-  <object id="60" template="../../../../common/maps/obj/shop.tx" x="304.501" y="308.796">
-   <properties>
-    <property name="shopList" value="Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant"/>
-   </properties>
-  </object>
-  <object id="61" template="../../../../common/maps/obj/shop.tx" x="191.743" y="307.722">
-   <properties>
-    <property name="shopList" value="Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant"/>
-   </properties>
-  </object>
-  <object id="62" template="../../../../common/maps/obj/shop.tx" x="142.344" y="307.722">
-   <properties>
-    <property name="shopList" value="Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant"/>
-   </properties>
-  </object>
   <object id="63" template="../../../../common/maps/obj/shop.tx" x="256.176" y="307.722">
    <properties>
     <property name="shopList" value="Legend4White"/>
+   </properties>
+  </object>
+  <object id="64" template="../../../../common/maps/obj/shop.tx" x="142.344" y="308.259">
+   <properties>
+    <property name="commonShopList" value="White,White,Enchantment4White,Creature2White,Instant4White"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,PhyrexianWhite"/>
+    <property name="rareShopList" value="Land4White,Azorius,Boros,Selesnya,Orzhov,Vehicle,Colorless"/>
+    <property name="uncommonShopList" value="Artifact,Knight4White,Bird4White,Soldier4White,Angel,Sliver2White,Spirit4White,Wand,Equip,Multicolor"/>
+   </properties>
+  </object>
+  <object id="65" template="../../../../common/maps/obj/shop.tx" x="191.743" y="308.259">
+   <properties>
+    <property name="commonShopList" value="White,White,Enchantment4White,Creature2White,Instant4White"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White"/>
+    <property name="rareShopList" value="RWG,RWU,RWB,UWG,UWB,GWB,Land4White,Creature6White,Nobles"/>
+    <property name="uncommonShopList" value="Azorius,Boros,Selesnya,Orzhov,Azorius,Boros,Selesnya,Orzhov,Land"/>
+   </properties>
+  </object>
+  <object id="66" template="../../../../common/maps/obj/shop.tx" x="305.038" y="306.112">
+   <properties>
+    <property name="commonShopList" value="Knight4White,Bird4White,Soldier4White,Angel,Sliver2White,Spirit4White"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White,Gods"/>
+    <property name="rareShopList" value="Azorius,Boros,Selesnya,Orzhov,Creature6White,Multicolor,Land4White,PhyrexianWhite"/>
+    <property name="uncommonShopList" value="Creature2White,Creature,White,SmallCats"/>
    </properties>
   </object>
  </objectgroup>

@@ -1512,7 +1512,7 @@ A rare few items are also slotless or use a custom slot. They won't show up on y
         &quot;type&quot;: &quot;item&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;itemName&quot;: &quot;Gold Blessing of Speed&quot;
+        &quot;itemName&quot;: &quot;Silver Blessing of Speed&quot;
  },
 {
         &quot;type&quot;: &quot;item&quot;,

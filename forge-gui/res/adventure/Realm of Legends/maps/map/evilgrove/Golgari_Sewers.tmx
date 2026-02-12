@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="45" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="16" nextobjectid="162">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="45" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="16" nextobjectid="164">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -96,7 +96,7 @@
   <object id="147" template="../../../../common/maps/obj/collision.tx" x="-40.8715" y="202.352" width="40.6127" height="267.092"/>
   <object id="148" template="../../../../common/maps/obj/collision.tx" x="424.61" y="186.615" width="54.684" height="43.6816"/>
   <object id="149" template="../../../../common/maps/obj/collision.tx" x="589.077" y="146.797" width="87.4262" height="28.1816"/>
-  <object id="150" template="../../obj/treasure.tx" x="159.875" y="170.208">
+  <object id="150" template="../../obj/treasure.tx" x="178.125" y="163.708">
    <properties>
     <property name="reward">[
   {
@@ -128,7 +128,7 @@
     <property name="spawn.Hard" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="151" template="../../obj/treasure.tx" x="160" y="148.958">
+  <object id="151" template="../../obj/treasure.tx" x="143.5" y="164.458">
    <properties>
     <property name="reward">[
   {
@@ -157,8 +157,8 @@
   }
 ]
 </property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
    </properties>
   </object>
   <object id="152" template="../../../../common/maps/obj/dialog.tx" x="371" y="575.25" width="80" height="15.5" visible="1">
@@ -179,7 +179,7 @@
   </object>
   <object id="154" template="../../../../common/maps/obj/scroll.tx" x="669.333" y="359.333">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Golgari Guildgate&quot;, &quot;editions&quot;: [ &quot;GRN&quot; ], &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Golgari Charm&quot;, &quot;editions&quot;: [ &quot;RTR&quot; ], &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
   <object id="155" template="../../../../common/maps/obj/collision.tx" x="597.287" y="176.909" width="21.4262" height="116.682"/>
@@ -189,5 +189,11 @@
   <object id="159" template="../../../../common/maps/obj/collision.tx" x="138.325" y="526.993" width="35.3507" height="32.6816"/>
   <object id="160" template="../../../../common/maps/obj/collision.tx" x="109.658" y="512.326" width="35.3507" height="32.6816"/>
   <object id="161" template="../../../../common/maps/obj/collision.tx" x="76.3246" y="497.659" width="35.3507" height="32.6816"/>
+  <object id="162" template="../../../../common/maps/obj/scroll.tx" x="159.167" y="152.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Overgrown Tomb&quot;, &quot;editions&quot;, [ &quot;RAV&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="163" template="../../../../common/maps/obj/gold.tx" x="441.058" y="268.623"/>
  </objectgroup>
 </map>

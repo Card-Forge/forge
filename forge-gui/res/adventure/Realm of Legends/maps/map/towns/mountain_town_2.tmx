@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="59">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="62">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -52,24 +52,33 @@
     <property name="uncommonShopList" value=""/>
    </properties>
   </object>
-  <object id="55" template="../../../../common/maps/obj/shop.tx" x="288.64" y="99.9255">
-   <properties>
-    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros"/>
-   </properties>
-  </object>
   <object id="56" template="../../../../common/maps/obj/shop.tx" x="128.92" y="179.393">
    <properties>
     <property name="shopList" value="Legend4Red"/>
    </properties>
   </object>
-  <object id="57" template="../../../../common/maps/obj/shop.tx" x="367.86" y="164.896">
+  <object id="59" template="../../../../common/maps/obj/shop.tx" x="111.5" y="116">
    <properties>
-    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros"/>
+    <property name="commonShopList" value="Red,Red,Enchantment4Red,Creature2Red,Instant4Red,Goblin"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,PhyrexianRed"/>
+    <property name="rareShopList" value="Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle,Colorless"/>
+    <property name="uncommonShopList" value="Artifact,Wolf4Red,Devil,Dwarf,Dragon,Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red,Wand,Equip,Multicolor,Giant,SnowShop"/>
    </properties>
   </object>
-  <object id="58" template="../../../../common/maps/obj/shop.tx" x="112.812" y="117.645">
+  <object id="60" template="../../../../common/maps/obj/shop.tx" x="369" y="164.5">
    <properties>
-    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros"/>
+    <property name="commonShopList" value="Red,Red,Enchantment4Red,Creature2Red,Instant4Red"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
+    <property name="rareShopList" value="RGU,RWG,RWU,RUB,RWB,RGB,Land4Red,Creature6Red"/>
+    <property name="uncommonShopList" value="Gruul,Izzet,Rakdos,Boros,Gruul,Izzet,Rakdos,Boros,Land"/>
+   </properties>
+  </object>
+  <object id="61" template="../../../../common/maps/obj/shop.tx" x="288.5" y="99">
+   <properties>
+    <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,     Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red,Giant"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
+    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red,PhyrexianRed"/>
+    <property name="uncommonShopList" value="Creature2Red,Creature,Red"/>
    </properties>
   </object>
  </objectgroup>

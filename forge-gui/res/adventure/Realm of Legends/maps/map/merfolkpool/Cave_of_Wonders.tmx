@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="88">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="89">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -40,6 +40,14 @@
   <object id="49" template="../../../../common/maps/obj/gold.tx" x="11.5634" y="206.796"/>
   <object id="50" template="../../../../common/maps/obj/enemy.tx" x="87.1401" y="62.008">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Skywise Teachings|DTK&quot;, &quot;Breezekeeper|VIS&quot;]}"/>
     <property name="enemy" value="Inniaz"/>
     <property name="speedModifier" type="float" value="10"/>
@@ -50,6 +58,14 @@
   <object id="52" template="../../../../common/maps/obj/gold.tx" x="227.413" y="113.208"/>
   <object id="53" template="../../../../common/maps/obj/enemy.tx" x="107.561" y="219.841">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Chance Encounter|MH2&quot;, &quot;Fickle Efreet|PCY&quot;, &quot;Impulsive Manuvers|ODY&quot;, &quot;Goblin Kites|FEM&quot;]}"/>
     <property name="enemy" value="Yusri"/>
     <property name="threatRange" type="int" value="0"/>
@@ -58,6 +74,14 @@
   </object>
   <object id="54" template="../../../../common/maps/obj/enemy.tx" x="259.101" y="87.9652">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Zahid"/>
     <property name="threatRange" type="int" value="20"/>
     <property name="waypoints" value=""/>
@@ -65,6 +89,14 @@
   </object>
   <object id="55" template="../../../../common/maps/obj/enemy.tx" x="344.448" y="187.192">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Siani and Esior"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>
@@ -87,6 +119,14 @@
   <object id="69" template="../../../../common/maps/obj/gold.tx" x="382.395" y="220.414"/>
   <object id="70" template="../../../../common/maps/obj/enemy.tx" x="330.254" y="26.937">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Najal"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
@@ -132,5 +172,51 @@
   <object id="85" template="../../../../common/maps/obj/collision.tx" x="113.321" y="112.917" width="17.1297" height="29.75"/>
   <object id="86" template="../../../../common/maps/obj/collision.tx" x="63.9224" y="111.843" width="17.1297" height="29.75"/>
   <object id="87" template="../../../../common/maps/obj/collision.tx" x="63.3855" y="66.2034" width="17.1297" height="29.75"/>
+  <object id="88" template="../../../../common/maps/obj/enemy.tx" x="256.713" y="157.915">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;An illusory projection of a woman shimmers before you. 'You. You'll do. I need a job done, and am willing to offer quite the sum to see it done.'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;Your wish is granted.&quot;,
+					&quot;text&quot;: &quot;'Well, at least someone can do as they're told. Now be on your way.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Princess Lucrezia&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 3000}                
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 5
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;What do you need?&quot;,
+					&quot;text&quot;: &quot;'As you likely know, I am the illustrious Princess Lucrezia, ruler of the indominable city-state of Lucrezia. I obtained the services of one of the djinni here, but the impetuous cur twisted my whims. Now I have a new wish - all of them dead. I have quite quite deep coffers, so I can assure you it will be worth your while.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Your wish is my command&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;I don't have time for this.&quot;,
+					&quot;text&quot;: &quot;The woman huffs. 'Commoners, I swear.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Lucrezia"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

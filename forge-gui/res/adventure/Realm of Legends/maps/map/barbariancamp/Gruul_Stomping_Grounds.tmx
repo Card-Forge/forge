@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="93">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="94">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -44,7 +44,7 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="52" template="../../../../common/maps/obj/gold.tx" x="401.159" y="71.432"/>
+  <object id="52" template="../../../../common/maps/obj/gold.tx" x="299.677" y="34.3829"/>
   <object id="55" template="../../../../common/maps/obj/enemy.tx" x="389.398" y="102.04">
    <properties>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Skarrg, the Rage Pits|GPT&quot;, &quot;Gruul Guildmage|GPT&quot; ] }"/>
@@ -153,8 +153,8 @@
     &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic Rare&quot; ]
   }
 ]</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
    </properties>
   </object>
   <object id="90" template="../../../../common/maps/obj/scroll.tx" x="16.6667" y="99.6667">
@@ -164,7 +164,7 @@
   </object>
   <object id="91" template="../../../../common/maps/obj/scroll.tx" x="400.333" y="247.333">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Gruul Guildgate&quot;, &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Gruul Charm&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
   <object id="92" template="../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="240.5" y="70" width="16" height="16" visible="1">
@@ -179,6 +179,11 @@
 ]
 }
 ]</property>
+   </properties>
+  </object>
+  <object id="93" template="../../../../common/maps/obj/scroll.tx" x="396.855" y="82.7433">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Stomping Ground&quot;, &quot;editions&quot;: [ &quot;GPT&quot; ], &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
  </objectgroup>
