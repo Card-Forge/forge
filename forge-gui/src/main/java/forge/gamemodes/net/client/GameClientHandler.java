@@ -162,7 +162,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
     private void replicatePlayerView(final PlayerView newPlayerView) {
         PlayerView existingPlayerView = tracker.getObj(TrackableTypes.PlayerViewType, newPlayerView.getId());
         existingPlayerView.copyChangedProps(newPlayerView);
-        forge.gamemodes.net.NetworkDebugLogger.debug("replicated PlayerView properties - %s", existingPlayerView.toString());
+        forge.gamemodes.net.NetworkDebugLogger.trace("replicated PlayerView properties - %s", existingPlayerView.toString());
     }
 
     @Override

@@ -18,10 +18,13 @@ import java.time.format.DateTimeFormatter;
  * via the {@code forge.gamemodes.net} logger defined in logback.xml.
  *
  * Supports configurable verbosity levels for console vs file output:
- * - DEBUG: Detailed tracing (hex dumps, property details, collection contents)
- * - INFO: Normal operation (sync start/end, summaries)
+ * - TRACE: Per-object/per-property detail (serialization, collection stats, tracker verification)
+ * - DEBUG: Diagnostic events (state mismatches, creation tracking, summary stats)
+ * - INFO: Normal operation (sync start/end, summaries, game events)
  * - WARN: Potential issues (missing objects, unexpected states)
  * - ERROR: Failures and exceptions
+ *
+ * Default file level is DEBUG; TRACE is only enabled when explicitly configured.
  */
 public final class NetworkDebugLogger {
 
@@ -79,7 +82,7 @@ public final class NetworkDebugLogger {
             Object netLogger = getLogger.invoke(factory, "forge.gamemodes.net");
             Class<?> levelClass = Class.forName("ch.qos.logback.classic.Level");
             java.lang.reflect.Method toLevel = levelClass.getMethod("toLevel", String.class, (Class<?>) levelClass);
-            Object defaultLevel = levelClass.getField("DEBUG").get(null);
+            Object defaultLevel = levelClass.getField("TRACE").get(null);
             Object level = toLevel.invoke(null, fileLevel, defaultLevel);
             netLogger.getClass().getMethod("setLevel", levelClass).invoke(netLogger, level);
         } catch (Exception e) {
@@ -111,7 +114,7 @@ public final class NetworkDebugLogger {
      * Log a DEBUG level message. Detailed tracing information.
      */
     public static void debug(String message) {
-        if (!enabled) return;
+        if (!enabled || !logger.isDebugEnabled()) return;
         ensureMDC();
         logger.debug(message);
     }
@@ -120,9 +123,27 @@ public final class NetworkDebugLogger {
      * Log a formatted DEBUG level message.
      */
     public static void debug(String format, Object... args) {
-        if (!enabled) return;
+        if (!enabled || !logger.isDebugEnabled()) return;
         ensureMDC();
         logger.debug(String.format(format, args));
+    }
+
+    /**
+     * Log a TRACE level message. Per-object/per-property detail.
+     */
+    public static void trace(String message) {
+        if (!enabled || !logger.isTraceEnabled()) return;
+        ensureMDC();
+        logger.trace(message);
+    }
+
+    /**
+     * Log a formatted TRACE level message.
+     */
+    public static void trace(String format, Object... args) {
+        if (!enabled || !logger.isTraceEnabled()) return;
+        ensureMDC();
+        logger.trace(String.format(format, args));
     }
 
     /**

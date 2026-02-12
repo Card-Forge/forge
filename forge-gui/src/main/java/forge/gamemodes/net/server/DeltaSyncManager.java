@@ -111,10 +111,10 @@ public class DeltaSyncManager {
         // Collect changes from GameView itself - always log for debugging
         boolean gvHasChanges = gameView.hasChanges();
         boolean gvIsSent = sentObjectIds.contains(makeDeltaKey(DeltaPacket.TYPE_GAME_VIEW, gameView.getId()));
-        NetworkDebugLogger.debug("[DeltaSync] collectDeltas: GameView ID=%d, hasChanges=%b, isSent=%b, phase=%s",
+        NetworkDebugLogger.trace("[DeltaSync] collectDeltas: GameView ID=%d, hasChanges=%b, isSent=%b, phase=%s",
                 gameView.getId(), gvHasChanges, gvIsSent, gameView.getPhase());
         if (gvHasChanges) {
-            NetworkDebugLogger.debug("[DeltaSync] GameView ID=%d changedProps: %s",
+            NetworkDebugLogger.trace("[DeltaSync] GameView ID=%d changedProps: %s",
                     gameView.getId(), gameView.getChangedProps());
         }
         collectObjectDelta(gameView, objectDeltas, newObjects, currentObjectIds);
@@ -389,7 +389,7 @@ public class DeltaSyncManager {
         // Log that we detected changes via per-client tracking
         int objType = getTypeFromDeltaKey(deltaKey);
         int objId = getIdFromDeltaKey(deltaKey);
-        NetworkDebugLogger.debug("[DeltaSync] Per-client tracking detected %d changed props for type=%d id=%d (deltaKey=0x%08X): %s",
+        NetworkDebugLogger.trace("[DeltaSync] Per-client tracking detected %d changed props for type=%d id=%d (deltaKey=0x%08X): %s",
                 changedProps.size(), objType, objId, deltaKey, changedProps);
 
         // Serialize the changed properties
@@ -429,7 +429,7 @@ public class DeltaSyncManager {
         boolean hasChanges = player.hasChanges();
         int handSize = player.getHand() != null ? player.getHand().size() : 0;
         Set<TrackableProperty> changedProps = player.getChangedProps();
-        NetworkDebugLogger.debug("[DeltaSync] collectPlayerDeltas: player=%d, isSent=%b, hasChanges=%b, handSize=%d, changedProps=%s",
+        NetworkDebugLogger.trace("[DeltaSync] collectPlayerDeltas: player=%d, isSent=%b, hasChanges=%b, handSize=%d, changedProps=%s",
                 player.getId(), isSent, hasChanges, handSize, changedProps);
 
         collectObjectDelta(player, objectDeltas, newObjects, currentObjectIds);
@@ -548,7 +548,7 @@ public class DeltaSyncManager {
             byte[] fullProps = baos.toByteArray();
             int objectType = getObjectType(obj);
 
-            NetworkDebugLogger.debug("[DeltaSync] Created NewObjectData: ID=%d, Type=%d (%s), Size=%d bytes, Props=%d",
+            NetworkDebugLogger.trace("[DeltaSync] Created NewObjectData: ID=%d, Type=%d (%s), Size=%d bytes, Props=%d",
                     obj.getId(), objectType, obj.getClass().getSimpleName(), fullProps.length,
                     props != null ? props.size() : 0);
 

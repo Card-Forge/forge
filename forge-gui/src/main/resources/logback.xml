@@ -38,7 +38,7 @@
   </appender>
 
   <!-- Network logger: isolated from root logger via additivity=false -->
-  <logger name="forge.gamemodes.net" level="DEBUG" additivity="false">
+  <logger name="forge.gamemodes.net" level="TRACE" additivity="false">
     <appender-ref ref="NET_CONSOLE"/>
     <appender-ref ref="NET_SIFT"/>
   </logger>

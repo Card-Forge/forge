@@ -10,6 +10,7 @@ import forge.game.event.GameEventPlayerLivesChanged;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellResolved;
 import forge.game.event.GameEventTurnBegan;
+import forge.game.event.GameEventTurnPhase;
 
 /**
  * Listener for game events during network play.
@@ -21,11 +22,12 @@ import forge.game.event.GameEventTurnBegan;
  * game.subscribeToEvents(new NetworkGameEventListener());
  * </pre>
  *
- * Log output uses the [GameEvent] prefix for easy filtering.
+ * Log output uses the [GAME EVENT] prefix for easy filtering and
+ * clear visual separation from network categories like [DeltaSync].
  */
 public class NetworkGameEventListener {
 
-    private static final String LOG_PREFIX = "[GameEvent]";
+    private static final String LOG_PREFIX = "[GAME EVENT]";
 
     // Track current turn for context
     private volatile int currentTurn = 0;
@@ -47,6 +49,14 @@ public class NetworkGameEventListener {
         currentTurn = event.turnNumber();
         NetworkDebugLogger.log("%s Turn %d began - %s's turn",
                 LOG_PREFIX, currentTurn, event.turnOwner().getName());
+    }
+
+    /**
+     * EventBus subscriber method for phase change events.
+     */
+    @Subscribe
+    public void handlePhaseChange(GameEventTurnPhase event) {
+        NetworkDebugLogger.log("%s %s", LOG_PREFIX, event.toString());
     }
 
     // ====== Game Action Events ======
