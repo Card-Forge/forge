@@ -18,11 +18,14 @@
 package forge.game.zone;
 
 import java.util.*;
-import java.util.Map.Entry;
 import java.util.function.Predicate;
 
+import org.testng.collections.Maps;
+
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.MultimapBuilder;
 
 import forge.game.Game;
 import forge.game.GameType;
@@ -31,8 +34,6 @@ import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventZone;
 import forge.game.player.Player;
 import forge.util.MyRandom;
-import forge.util.maps.EnumMapOfLists;
-import forge.util.maps.MapOfLists;
 
 /**
  * <p>
@@ -49,8 +50,9 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     protected final ZoneType zoneType;
     protected final Game game;
 
-    protected final transient MapOfLists<ZoneType, Card> cardsAddedThisTurn = new EnumMapOfLists<>(ZoneType.class, ArrayList::new);
-    protected final transient MapOfLists<ZoneType, Card> cardsAddedLastTurn = new EnumMapOfLists<>(ZoneType.class, ArrayList::new);
+    protected final transient ListMultimap<ZoneType, Card> cardsAddedThisTurn = MultimapBuilder.enumKeys(ZoneType.class).arrayListValues().build();
+    protected final transient ListMultimap<ZoneType, Card> cardsAddedLastTurn = MultimapBuilder.enumKeys(ZoneType.class).arrayListValues().build();
+    protected final transient Map<Card, ZoneType> enteredFromThisTurn = Maps.newHashMap();
 
     // might support different order via preference later
     private static final Comparator<Card> COMPARATOR = Comparator.comparingInt((Card c) -> c.getCMC())
@@ -116,7 +118,8 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
                     c.setTurnInController(getPlayer());
                     c.setTurnInZone(game.getPhaseHandler().getTurn());
                     if (latestState != null) {
-                        cardsAddedThisTurn.add(zt, latestState);
+                        cardsAddedThisTurn.put(zt, latestState);
+                        enteredFromThisTurn.put(latestState, zt);
                     }
                 }
             }
@@ -220,39 +223,15 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     }
 
     public final boolean isCardAddedThisTurn(final Card card, final ZoneType origin) {
-        if (!cardsAddedThisTurn.containsKey(origin)) {
-            return false;
-        }
-        if (cardsAddedThisTurn.get(origin).contains(card)) {
-            List<Card> cardsAddedThisTurnOrigin = getCardsAddedThisTurn(origin);
-            int cardIndexOrigin = cardsAddedThisTurnOrigin.lastIndexOf(card);
-            long cardTimestampOrigin = cardsAddedThisTurnOrigin.get(cardIndexOrigin).getGameTimestamp();
-            // need to check other zones if card didn't change again
-            for (ZoneType z : cardsAddedThisTurn.keySet()) {
-                if (z == origin) {
-                    continue;
-                }
-
-                if (cardsAddedThisTurn.get(z).contains(card)) {
-                    List<Card> cardsAddedThisTurnNonOrigin = getCardsAddedThisTurn(z);
-                    int cardIndex = cardsAddedThisTurnNonOrigin.lastIndexOf(card);
-                    long cardTimestamp = cardsAddedThisTurnNonOrigin.get(cardIndex).getGameTimestamp();
-                    // the most recent version of this card did not come from the requested zone
-                    if (cardTimestamp > cardTimestampOrigin) {
-                        return false;
-                    }
-                }
-            }
-
-            return true;
+        if (cardsAddedThisTurn.containsEntry(origin, card)) {
+            return origin.equals(enteredFromThisTurn.get(card));
         }
         return false;
     }
 
-    private static List<Card> getCardsAdded(final MapOfLists<ZoneType, Card> cardsAdded, final ZoneType origin) {
+    private static List<Card> getCardsAdded(final ListMultimap<ZoneType, Card> cardsAdded, final ZoneType origin) {
         if (origin != null) {
-            final Collection<Card> cards = cardsAdded.get(origin);
-            return cards == null ? ImmutableList.of() : Lists.newArrayList(cards);
+            return Lists.newArrayList(cardsAdded.get(origin));
         }
 
         if (cardsAdded.isEmpty()) {
@@ -260,19 +239,14 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         }
 
         // all cards if key == null
-        final List<Card> ret = Lists.newArrayList();
-        for (final Collection<Card> kv : cardsAdded.values()) {
-            ret.addAll(kv);
-        }
-        return ret;
+        return Lists.newArrayList(cardsAdded.values());
     }
 
     public final void resetCardsAddedThisTurn() {
         cardsAddedLastTurn.clear();
-        for (final Entry<ZoneType, Collection<Card>> entry : cardsAddedThisTurn.entrySet()) {
-            cardsAddedLastTurn.addAll(entry.getKey(), entry.getValue());
-        }
+        cardsAddedLastTurn.putAll(cardsAddedThisTurn);
         cardsAddedThisTurn.clear();
+        enteredFromThisTurn.clear();
     }
 
     @Override
@@ -304,6 +278,6 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         if (zt == zoneType) {
             return;
         }
-        cardsAddedThisTurn.add(zt, CardCopyService.getLKICopy(c));
+        cardsAddedThisTurn.put(zt, CardCopyService.getLKICopy(c));
     }
 }
