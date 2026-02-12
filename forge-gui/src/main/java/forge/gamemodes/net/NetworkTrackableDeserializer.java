@@ -161,7 +161,7 @@ public class NetworkTrackableDeserializer {
             }
         }
         // Always log collection stats for debugging
-        NetworkDebugLogger.debug("[NetworkDeserializer] Collection read: type=%s, size=%d, found=%d, notFound=%d",
+        NetworkDebugLogger.trace("[NetworkDeserializer] Collection read: type=%s, size=%d, found=%d, notFound=%d",
                 getTypeName(type), size, foundCount, notFoundCount);
         if (notFoundCount > 0) {
             NetworkDebugLogger.warn("[NetworkDeserializer] Collection has %d missing objects!", notFoundCount);

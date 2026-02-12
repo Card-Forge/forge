@@ -234,11 +234,11 @@ public final class NetworkPropertySerializer {
                     propNames.append(", ...");
                 }
                 int totalBytes = nts.getBytesWritten() - startPos;
-                NetworkDebugLogger.debug("[CSV-Serialize] CardStateView ID=%d state=%s: %d props (%s), %d bytes",
+                NetworkDebugLogger.trace("[CSV-Serialize] CardStateView ID=%d state=%s: %d props (%s), %d bytes",
                         csv.getId(), stateName, csvProps.size(), propNames, totalBytes);
             } else {
                 nts.write(0);
-                NetworkDebugLogger.debug("[CSV-Serialize] CardStateView ID=%d state=%s: 0 props",
+                NetworkDebugLogger.trace("[CSV-Serialize] CardStateView ID=%d state=%s: 0 props",
                         csv.getId(), stateName);
             }
         }
@@ -484,7 +484,7 @@ public final class NetworkPropertySerializer {
                 propNames.append(", ...");
             }
             int totalBytes = ntd.getBytesRead() - startPos;
-            NetworkDebugLogger.debug("[CSV-Deserialize] CardStateView ID=%d state=%s: %d props (%s), %d bytes",
+            NetworkDebugLogger.trace("[CSV-Deserialize] CardStateView ID=%d state=%s: %d props (%s), %d bytes",
                     csvId, stateName, propCount, propNames, totalBytes);
 
             // Return as CardStateViewData to be handled by applyDeltaToObject
