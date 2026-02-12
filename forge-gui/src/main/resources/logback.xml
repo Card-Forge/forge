@@ -7,4 +7,39 @@
   <root level="ALL">
     <appender-ref ref="A1"/>
   </root>
+
+  <!-- Network debug console appender (INFO+ threshold) -->
+  <appender name="NET_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>INFO</level>
+    </filter>
+    <encoder>
+      <pattern>[%d{HH:mm:ss.SSS}] [%-5level] %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <!-- Network debug file appender: routes to per-instance log files via MDC.
+       The logfileKey MDC value is a composite of batchId, instanceSuffix, and testMode,
+       computed by NetworkDebugLogger whenever any component changes. -->
+  <appender name="NET_SIFT" class="ch.qos.logback.classic.sift.SiftingAppender">
+    <discriminator>
+      <key>logfileKey</key>
+      <defaultValue>default</defaultValue>
+    </discriminator>
+    <sift>
+      <appender name="NET_FILE-${logfileKey}" class="ch.qos.logback.core.FileAppender">
+        <file>${forge.networklogs.dir}network-debug-${logfileKey}.log</file>
+        <append>true</append>
+        <encoder>
+          <pattern>[%d{HH:mm:ss.SSS}] [%-5level] %msg%n</pattern>
+        </encoder>
+      </appender>
+    </sift>
+  </appender>
+
+  <!-- Network logger: isolated from root logger via additivity=false -->
+  <logger name="forge.gamemodes.net" level="DEBUG" additivity="false">
+    <appender-ref ref="NET_CONSOLE"/>
+    <appender-ref ref="NET_SIFT"/>
+  </logger>
 </configuration>

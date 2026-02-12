@@ -24,6 +24,7 @@ import forge.gamemodes.net.NetworkDebugLogger;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
+import forge.model.FModel;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
@@ -78,8 +79,7 @@ public class NetGuiGame extends NetworkGuiGame {
     private long totalDeltaBytes = 0;
     private long totalFullStateBytes = 0;
     private int deltaPacketCount = 0;
-    // Controlled via NetworkDebug.config: bandwidth.logging.enabled=true/false
-    private boolean logBandwidth = forge.gamemodes.net.NetworkDebugConfig.isBandwidthLoggingEnabled();
+    private boolean logBandwidth = FModel.getPreferences().getPrefBoolean(forge.localinstance.properties.ForgePreferences.FPref.NET_BANDWIDTH_LOGGING);
 
     /**
      * Send a game view update to the client.
