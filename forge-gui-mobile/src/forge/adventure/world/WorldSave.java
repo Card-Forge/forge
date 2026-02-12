@@ -16,7 +16,9 @@ import forge.card.CardEdition;
 import forge.card.ColorSet;
 import forge.deck.Deck;
 import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgePreferences;
 import forge.player.GamePlayerUtil;
+import forge.util.BuildInfo;
 
 import java.io.*;
 import java.util.Date;
@@ -27,12 +29,18 @@ import java.util.zip.InflaterInputStream;
  * Represents everything that will be saved, like the player and the world.
  */
 public class WorldSave {
+    /**
+     * Increment this any time a breaking change to a save is made that will require conversion.
+     * Conversion logic can be applied in onSaveVersionBump.
+     */
+    public static final int ADVENTURE_SAVE_VERSION = 1;
 
     static final public int AUTO_SAVE_SLOT = -1;
     static final public int QUICK_SAVE_SLOT = -2;
     static final public int INVALID_SAVE_SLOT = -3;
     static final WorldSave currentSave = new WorldSave();
     public WorldSaveHeader header = new WorldSaveHeader();
+    private int saveVersion = ADVENTURE_SAVE_VERSION;
     private final AdventurePlayer player = new AdventurePlayer();
     private final World world = new World();
     private final PointOfInterestChanges.Map pointOfInterestChanges = new PointOfInterestChanges.Map();
@@ -70,6 +78,10 @@ public class WorldSave {
                  ObjectInputStream oos = new ObjectInputStream(inf)) {
                 currentSave.header = (WorldSaveHeader) oos.readObject();
                 SaveFileData mainData = (SaveFileData) oos.readObject();
+
+                if(ForgePreferences.DEV_MODE)
+                    System.out.printf("Loading file - Forge version '%s'%n", mainData.containsKey("saveFileForgeVersion") ? mainData.readString("saveFileForgeVersion") : "Unknown");
+                currentSave.saveVersion = mainData.readInt("saveFileVersion");
                 currentSave.player.load(mainData.readSubData("player"));
                 GamePlayerUtil.getGuiPlayer().setName(currentSave.player.getName());
                 try {
@@ -121,6 +133,11 @@ public class WorldSave {
 
     public static String getSaveFile(int slot) {
         return ForgeConstants.USER_ADVENTURE_DIR + Config.instance().getPlane() + File.separator + filename(slot);
+    }
+
+    public static int getSaveVersion() {
+        return currentSave.saveVersion;
+        //TODO: Supply this via load method.
     }
 
     public static WorldSave getCurrentSave() {
@@ -184,6 +201,9 @@ public class WorldSave {
                 }
 
                 SaveFileData mainData = new SaveFileData();
+                mainData.store("saveFileVersion", ADVENTURE_SAVE_VERSION);
+                mainData.store("saveFileForgeVersion", BuildInfo.getVersionString());
+
                 mainData.store("player", player);
                 mainData.store("world", world);
                 mainData.store("worldStage", worldStage);

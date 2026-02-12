@@ -28,6 +28,7 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -315,6 +316,12 @@ public class Config {
             poiSprites.put(d, sprites);
         }
         return sprites;
+    }
+
+    public DifficultyData getDifficultyByName(String difficultyName) {
+        return Arrays.stream(configData.difficulties)
+                .filter(d -> d.name.equals(difficultyName))
+                .findAny().orElse(null);
     }
 
     public Array<Sprite> getAnimatedSprites(String path, String animationName) {
