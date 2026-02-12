@@ -1,3 +1,29 @@
+# Table of Contents
+- [Downloads](#downloads)
+  - [Snapshots](#snapshots)
+  - [Releases](#releases)
+- [System Requirements](#system-requirements)
+- [Install and Run](#install-and-run)
+  - [Install Wizard (jar)](#install-wizard-jar)
+  - [Manual Extraction (tar.bz2)](#manual-extraction-tarbz2)
+- [User data migration](#user-data-migration)
+  - [Import Data](#import-data)
+- [Accessibility](#accessibility)
+- [Play Adventure Mode on Desktop](#play-adventure-mode-on-desktop)
+- [Gameplay](#gameplay)
+  - [Targeting Arrows](#targeting-arrows)
+  - [Card Zoomer](#card-zoomer)
+  - [Easier creature type selection](#easier-creature-type-selection)
+  - [Auto-Target](#auto-target)
+  - [Auto-Pay](#auto-pay)
+  - [Auto-Yield](#auto-yield)
+  - [Shift Key helper](#shift-key-helper)
+  - [Full Control](#full-control)
+  - [Repeatable Sequences (Macros)](#repeatable-sequences-macros)
+- [User Interface](#user-interface)
+  - [Layout](#layout)
+  - [Auto-Sort Multiplayer Fields](#auto-sort-multiplayer-fields)
+
 # Downloads
 
 ## Snapshots
@@ -186,3 +212,41 @@ e.g. the opposite cost order is needed if activating an animated "Halo Fountain"
 A feature for advanced users: during a match, you can use the default shortcut shift-R to specify a sequence of actions (mouse clicks, essentially, in the desktop paradigm). Type the IDs of cards/players you'd like to interact with, in order. Then the default shortcut @ (shift-2) will execute your sequence, one "click" at a time, repeating when it reaches the end. This is useful for executing repeated combos, such as sacrificing a recurring creature to Goblin Bombardment. You can see the IDs of cards by turning them on under "Card Overlays" in the "Game" menu.
 
 The macro will dutifully execute your click sequence without regard to changes in game state (so if an opponent kills your specified creature mid-macro, and you continue to execute it, you will be essentially clicking on the creature in the graveyard, which may or may not be what you want).
+
+# User Interface
+
+> [!TIP]
+> The features described in this section apply to the **desktop GUI** only.
+
+## Layout
+
+The desktop match UI is built from draggable, resizable cells. Each cell contains one or more tabbed panels (e.g. battlefield, hand, log, stack, card detail, etc). 
+
+The layout is highly customisable and can be re-arranged to suit your preferences.
+
+- **Move a single tab:** Click and drag a tab's label to another cell (it becomes a new tab there) or to the edge of a cell (splitting it to create a new cell).
+- **Move an entire cell:** Click and drag the handle on the left side of a cell's header to move all its tabs as a unit.
+- **Drop zones:** Dragging to the left, right, top, or bottom edge of a target cell splits it in that direction. Dragging to the centre adds the panel as a tab. A visual preview shows where the panel will land.
+
+Layouts are saved as XML files and  adapt to different window sizes and resolutions.
+
+- **Save/Load:** Use **Layout > File** in the menu bar to save, open, or revert layouts.
+- **Default layouts** ship with Forge and are restored when you select **Revert to Default Layout**.
+- **User layouts** are stored in your Forge user data directory under `preferences/` (e.g., `%APPDATA%/Forge/preferences/match.xml` on Windows).
+- **Tab visibility:** Toggle panel tabs on or off via **Layout > View > Show Panel Tabs**.
+
+## Auto-Sort Multiplayer Fields
+
+In multiplayer games (3+ players), Forge can automatically arrange opponent battlefield panels in turn order. This is controlled via the **Layout > View** menu during a match.
+
+**Enabling the feature:**
+- **Layout > View > Sort Multiplayer Fields** — Toggle the feature on or off. When off, extra player fields are simply added as tabs to existing panels (the default behaviour) without regard to turn order.
+
+**When enabled, two additional settings become available in the Layout > View menu:**
+
+| Setting | Options | Description                                                                                                                    |
+|---------|---------|--------------------------------------------------------------------------------------------------------------------------------|
+| **Multiplayer Field Layout** | Grid, Rows | **Grid** distributes opponents across both top and bottom rows. **Rows** stacks all opponents in the top row above the player. |
+| **Multiplayer Field Panels** | Tabbed, Split | **Tabbed** groups multiple fields as tabs in the same panel. **Split** gives each field its own side-by-side panel.            |
+
+All three settings can be changed mid-game and take effect immediately. The feature only activates when three or more players are in the match — standard two-player games are unaffected.
