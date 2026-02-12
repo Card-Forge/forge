@@ -9,6 +9,11 @@ import forge.game.spellability.SpellAbility;
 public class DetainEffect extends SpellAbilityEffect {
 
     @Override
+    protected String getStackDescription(SpellAbility sa) {
+        return "Detain " + getTargetCards(sa) + " .";
+    }
+
+    @Override
     public void resolve(SpellAbility sa) {
         final Player pl = sa.getActivatingPlayer();
         final Game game = pl.getGame();

@@ -387,8 +387,7 @@ public class EffectAi extends SpellAbilityAi {
             boolean cantBlock = false;
             boolean cantActivate = false;
 
-            String duraction = sa.getParam("Duration");
-
+            String duration = sa.getParam("Duration");
             String matchStr = "Card.IsRemembered";
 
             for (String st : sa.getParam("StaticAbilities").split(",")) {
@@ -414,7 +413,7 @@ public class EffectAi extends SpellAbilityAi {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
-            if (cantBlock && duraction == null && phase.isPlayerTurn(ai) && !phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+            if (cantBlock && duration == null && phase.isPlayerTurn(ai) && !phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
@@ -444,8 +443,6 @@ public class EffectAi extends SpellAbilityAi {
                         }
                     }
                 }
-
-
 
                 while (sa.canAddMoreTarget()) {
                     Card choice = null;

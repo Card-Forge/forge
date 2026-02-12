@@ -1869,10 +1869,10 @@ public class ComputerUtilCard {
         if (c.hasKeyword("CARDNAME can't attack or block.")) {
             return true;
         }
-        if (c.isTapped() && !c.canUntap(ai, true)) {
+        if (c.getOwner() == ai && ai.getOpponents().contains(c.getController())) {
             return true;
         }
-        if (c.getOwner() == ai && ai.getOpponents().contains(c.getController())) {
+        if (c.isTapped() && !c.canUntap(ai, true)) {
             return true;
         }
         return false;

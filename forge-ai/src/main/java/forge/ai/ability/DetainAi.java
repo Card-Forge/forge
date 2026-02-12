@@ -2,7 +2,9 @@ package forge.ai.ability;
 
 import java.util.List;
 
+import forge.ai.AiAbilityDecision;
 import forge.ai.AiAttackController;
+import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
@@ -20,28 +22,45 @@ import forge.game.zone.ZoneType;
 
 public class DetainAi extends SpellAbilityAi {
 
-    protected boolean prefTargeting(final Player ai, final Card source, final SpellAbility sa, final boolean mandatory) {
+    @Override
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
+        return doTriggerNoCost(ai, sa, false);
+    }
+
+    @Override
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        if (prefTargeting(ai, sa, mandatory)) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlaySa);
+    }
+
+    protected boolean prefTargeting(final Player ai, final SpellAbility sa, final boolean mandatory) {
+        if (!sa.usesTargeting()) {
+            return mandatory;
+        }
+
         final Game game = ai.getGame();
-        CardCollection list = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
-        list = CardLists.filter(list, CREATURE_OR_TAP_ABILITY);
+        final Card source = sa.getHostCard();
+        CardCollection targetables = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
+        CardCollection list = CardLists.filter(targetables, CREATURE_OR_TAP_ABILITY);
 
         // Filter AI-specific targets if provided
         list = ComputerUtil.filterAITgts(sa, ai, list, true);
 
-
         if (list.isEmpty()) {
-            return false;
+            if (!mandatory) {
+                return false;
+            }
+            list = targetables;
         }
+        sa.resetTargets();
 
         while (sa.canAddMoreTarget()) {
             Card choice = null;
             if (list.isEmpty()) {
                 if (!sa.isMinTargetChosen() || sa.isZeroTargets()) {
-                    if (!mandatory) {
-                        sa.resetTargets();
-                    }
                     return false;
-
                 }
             }
 
@@ -84,9 +103,6 @@ public class DetainAi extends SpellAbilityAi {
 
             if (choice == null) { // can't find anything left
                 if (!sa.isMinTargetChosen() || sa.isZeroTargets()) {
-                    if (!mandatory) {
-                        sa.resetTargets();
-                    }
                     return false;
                 } else {
                     if (!ComputerUtil.shouldCastLessThanMax(ai, source)) {

@@ -153,6 +153,10 @@ public class StaticAbilityCantAttackBlock {
     }
 
     public static boolean cantBlock(final Card blocker) {
+        if (blocker.isDetained()) {
+            return true;
+        }
+
         CardCollection list = new CardCollection(blocker.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
         // add blocker in case of LKI
         list.add(blocker);
