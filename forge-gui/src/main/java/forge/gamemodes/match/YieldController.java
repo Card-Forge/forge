@@ -249,15 +249,6 @@ public class YieldController {
     }
 
     /**
-     * Clear yield mode silently without triggering callbacks.
-     * Used when receiving sync from server to avoid recursive loops.
-     */
-    public void clearYieldModeSilent(PlayerView player) {
-        player = TrackableTypes.PlayerViewType.lookup(player);
-        clearYieldModeInternal(player);
-    }
-
-    /**
      * Set yield mode silently without triggering callbacks.
      * Used when receiving sync from server to avoid recursive loops.
      * Only sets the mode itself - server manages the detailed tracking state.

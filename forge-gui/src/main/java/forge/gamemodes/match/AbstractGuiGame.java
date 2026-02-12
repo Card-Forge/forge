@@ -679,11 +679,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             return;
         }
         // Use silent methods to avoid triggering callback which would loop back here
-        if (mode == null || mode == YieldMode.NONE) {
-            getYieldController().clearYieldModeSilent(player);
-        } else {
-            getYieldController().setYieldModeSilent(player, mode);
-        }
+        getYieldController().setYieldModeSilent(player, mode);
         // Note: Don't call updateAutoPassPrompt() - server already sent the correct prompt
     }
 
