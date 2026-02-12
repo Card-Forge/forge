@@ -660,17 +660,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
-    public final void clearYieldModeFromRemote(PlayerView player) {
-        // Clear yield state from remote client without triggering notification
-        // Look up the correct PlayerView instance by ID (network PlayerViews have different trackers)
-        player = lookupPlayerViewById(player);
-        if (player == null) {
-            return;
-        }
-        getYieldController().clearYieldMode(player);
-    }
-
-    @Override
     public void syncYieldMode(PlayerView player, YieldMode mode) {
         // Receive yield state sync from server (when server clears yield due to end condition)
         // Look up the correct PlayerView instance by ID (network PlayerViews have different trackers)

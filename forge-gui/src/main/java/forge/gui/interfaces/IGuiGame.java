@@ -272,12 +272,6 @@ public interface IGuiGame {
     void setYieldModeFromRemote(PlayerView player, YieldMode mode);
 
     /**
-     * Clear yield mode from remote client without triggering notification.
-     * Used by server to receive yield state from network clients.
-     */
-    void clearYieldModeFromRemote(PlayerView player);
-
-    /**
      * Sync yield mode from server to client.
      * Used when server clears yield (end condition met) and needs to update client UI.
      */

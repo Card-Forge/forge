@@ -91,7 +91,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      * library.
      */
     private boolean mayLookAtAllCards = false;
-    private boolean disableAutoYields = false;
 
     private IGuiGame gui;
 
@@ -133,13 +132,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     public PlayerView getLocalPlayerView() {
         return player == null ? null : player.getView();
-    }
-
-    public boolean getDisableAutoYields() {
-        return disableAutoYields;
-    }
-    public void setDisableAutoYields(final boolean disableAutoYields0) {
-        disableAutoYields = disableAutoYields0;
     }
 
     @Override
@@ -3330,11 +3322,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // This syncs yield state from network client to server
         // Uses FromRemote methods to avoid triggering another notification and to handle
         // PlayerView tracker mismatch (network PlayerViews have different trackers than server's)
-        if (mode == null) {
-            getGui().clearYieldModeFromRemote(playerView);
-        } else {
-            getGui().setYieldModeFromRemote(playerView, mode);
-        }
+        getGui().setYieldModeFromRemote(playerView, mode);
     }
 
     @Override

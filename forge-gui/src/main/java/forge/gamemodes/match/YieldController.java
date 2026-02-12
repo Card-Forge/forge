@@ -185,7 +185,7 @@ public class YieldController {
             return;
         }
 
-        if (mode == YieldMode.NONE) {
+        if (mode == null || mode == YieldMode.NONE) {
             clearYieldMode(player);
             return;
         }
