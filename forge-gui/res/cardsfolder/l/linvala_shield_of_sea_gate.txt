@@ -4,7 +4,8 @@ Types:Legendary Creature Angel Wizard
 PT:3/3
 K:Flying
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ EQ4 | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, if you have a full party, choose target nonland permanent an opponent controls. Until your next turn, it can't attack or block, and its activated abilities can't be activated.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Choose target nonland permanent an opponent controls | KW$ HIDDEN CARDNAME can't attack or block. & HIDDEN CARDNAME's activated abilities can't be activated. | IsCurse$ True | Duration$ UntilYourNextTurn | AILogic$ DetainNonLand
+SVar:TrigPump:DB$ Effect | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Choose target nonland permanent an opponent controls | RememberObjects$ Targeted | StaticAbilities$ DBCantStatic | ForgetOnMoved$ Battlefield | IsCurse$ True | Duration$ UntilYourNextTurn
+SVar:DBCantStatic:Mode$ CantAttack,CantBlock,CantBeActivated | ValidCard$ Card.IsRemembered | Description$ Remembered can't attack or block, and its activated abilities can't be activated.
 A:AB$ Pump | Cost$ Sac<1/NICKNAME> | Defined$ Valid Creature.YouCtrl | KWChoice$ Hexproof,Indestructible | StackDescription$ {p:You} chooses hexproof or indestructible. Creatures {p:You} controls gain that ability until end of turn. | SpellDescription$ Choose hexproof or indestructible. Creatures you control gain that ability until end of turn.
 SVar:X:Count$Party
 SVar:BuffedBy:Rogue,Warrior,Wizard

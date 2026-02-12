@@ -1,4 +1,4 @@
-This is a list of basic troubleshooting questions that come up for most new players, before running to the discord about your issue, please review this document for some of the more common issues.
+This is a list of basic troubleshooting questions that come up for most new players, before jumping to the Discord about your issue, please review this document for some of the more common issues.
 
 * Check the FAQ in Discord (probably more up-to-date if things break unexpectedly on us)
 https://discord.com/channels/267367946135928833/1095026912927154176

@@ -30,7 +30,7 @@ import static forge.lda.lda.inference.InferenceMethod.CGS;
 /**
  * Created by maustin on 09/05/2017.
  */
-public final class LDAModelGenetrator {
+public final class LDAModelGenerator {
 
     public static final String SUPPORTED_LDA_FORMATS = "Historic|Modern|Pioneer|Standard|Legacy|Vintage|Pauper";
     public static Map<String, Map<String,List<List<Pair<String, Double>>>>> ldaPools = new HashMap<>();
