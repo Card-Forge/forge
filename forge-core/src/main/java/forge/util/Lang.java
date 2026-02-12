@@ -56,21 +56,6 @@ public abstract class Lang {
         return instance;
     }
 
-    /**
-     * Return a name that is unique among {@code existingNames}, applying an
-     * ordinal prefix ("2nd", "3rd", ...) if necessary.
-     */
-    public static String deduplicateName(final String name, final Collection<String> existingNames) {
-        String candidate = name;
-        for (int i = 2; i <= 8; i++) {
-            if (!existingNames.contains(candidate)) {
-                return candidate;
-            }
-            candidate = getInstance().getOrdinal(i) + " " + name;
-        }
-        return candidate;
-    }
-
     public static Lang getEnglishInstance() {
         return englishInstance;
     }

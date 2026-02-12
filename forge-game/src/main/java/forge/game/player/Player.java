@@ -240,11 +240,21 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     private String chooseName(String originalName) {
-        final List<String> existingNames = new ArrayList<>();
-        for (Player p : game.getPlayers()) {
-            existingNames.add(p.getName());
+        String nameCandidate = originalName;
+        for (int i = 2; i <= 8; i++) { // several tries, not matter how many
+            boolean haveDuplicates = false;
+            for (Player p : game.getPlayers()) {
+                if (p.getName().equals(nameCandidate)) {
+                    haveDuplicates = true;
+                    break;
+                }
+            }
+            if (!haveDuplicates) {
+                return nameCandidate;
+            }
+            nameCandidate = Lang.getInstance().getOrdinal(i) + " " + originalName;
         }
-        return Lang.deduplicateName(originalName, existingNames);
+        return nameCandidate;
     }
 
     @Override

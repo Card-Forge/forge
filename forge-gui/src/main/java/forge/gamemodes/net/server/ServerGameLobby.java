@@ -6,11 +6,7 @@ import forge.gamemodes.match.LobbySlotType;
 import forge.gui.interfaces.IGuiGame;
 import org.apache.commons.lang3.StringUtils;
 
-import forge.util.Lang;
-
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public final class ServerGameLobby extends GameLobby {
 
@@ -33,15 +29,7 @@ public final class ServerGameLobby extends GameLobby {
     }
     private void connectPlayer(final String name, final int avatarIndex, final int sleeveIndex, final LobbySlot slot) {
         slot.setType(LobbySlotType.REMOTE);
-        final List<String> existingNames = new ArrayList<>();
-        final int nSlots = getNumberOfSlots();
-        for (int s = 0; s < nSlots; s++) {
-            final LobbySlot existing = getSlot(s);
-            if (existing.getType() != LobbySlotType.OPEN && existing != slot) {
-                existingNames.add(existing.getName());
-            }
-        }
-        slot.setName(Lang.deduplicateName(name, existingNames));
+        slot.setName(name);
         slot.setAvatarIndex(avatarIndex);
         slot.setSleeveIndex(sleeveIndex);
         updateView(false);
