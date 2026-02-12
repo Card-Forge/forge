@@ -81,7 +81,7 @@ public class CloneAi extends SpellAbilityAi {
         boolean chance = true;
 
         if (sa.usesTargeting()) {
-            chance = cloneTgtAI(sa);
+            chance = cloneTgtAI(sa, false);
         }
 
         return chance ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
