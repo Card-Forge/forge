@@ -1,7 +1,5 @@
 package forge.gamemodes.net;
 
-import ch.qos.logback.classic.Level;
-import ch.qos.logback.classic.LoggerContext;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
@@ -72,14 +70,20 @@ public final class NetworkDebugLogger {
             }
             enabled = FModel.getPreferences().getPrefBoolean(FPref.NET_DEBUG_LOGGER_ENABLED);
 
-            // Apply log levels programmatically
-            LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
-            ch.qos.logback.classic.Logger netLogger = context.getLogger("forge.gamemodes.net");
-
+            // Apply log level programmatically via reflection so we don't need
+            // a compile-time dependency on logback-classic (avoids pulling it
+            // into Android builds where it's unused).
             String fileLevel = FModel.getPreferences().getPref(FPref.NET_FILE_LOG_LEVEL).toUpperCase();
-            netLogger.setLevel(Level.toLevel(fileLevel, Level.DEBUG));
+            Object factory = LoggerFactory.getILoggerFactory();
+            java.lang.reflect.Method getLogger = factory.getClass().getMethod("getLogger", String.class);
+            Object netLogger = getLogger.invoke(factory, "forge.gamemodes.net");
+            Class<?> levelClass = Class.forName("ch.qos.logback.classic.Level");
+            java.lang.reflect.Method toLevel = levelClass.getMethod("toLevel", String.class, (Class<?>) levelClass);
+            Object defaultLevel = levelClass.getField("DEBUG").get(null);
+            Object level = toLevel.invoke(null, fileLevel, defaultLevel);
+            netLogger.getClass().getMethod("setLevel", levelClass).invoke(netLogger, level);
         } catch (Exception e) {
-            // Preferences not yet initialized — use logback.xml defaults
+            // Logback not available (e.g. Android) or preferences not initialized — use defaults
         }
     }
 
