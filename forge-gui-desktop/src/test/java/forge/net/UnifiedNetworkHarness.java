@@ -17,10 +17,7 @@ import forge.gamemodes.net.NetworkDebugLogger;
 import forge.gamemodes.net.client.ClientGameLobby;
 import forge.gamemodes.net.server.FServerManager;
 import forge.gamemodes.net.server.ServerGameLobby;
-import forge.gui.GuiBase;
 import forge.interfaces.ILobbyListener;
-import forge.localinstance.properties.ForgePreferences.FPref;
-import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 
 import forge.net.analysis.GameLogMetrics;
@@ -511,15 +508,7 @@ public class UnifiedNetworkHarness {
     // ==================== Helper Methods ====================
 
     private void ensureFModelInitialized() {
-        if (GuiBase.getInterface() == null) {
-            NetworkDebugLogger.log("%s Initializing FModel with HeadlessGuiDesktop", LOG_PREFIX);
-            GuiBase.setInterface(new HeadlessGuiDesktop());
-            FModel.initialize(null, preferences -> {
-                preferences.setPref(FPref.LOAD_CARD_SCRIPTS_LAZILY, false);
-                preferences.setPref(FPref.UI_LANGUAGE, "en-US");
-                return null;
-            });
-        }
+        TestUtils.ensureFModelInitialized();
     }
 
     private List<Deck> getDecks(int count) {
@@ -870,18 +859,12 @@ public class UnifiedNetworkHarness {
                 double actualSavings = full > 0 ? 100.0 * (1.0 - (double) actual / full) : 0;
 
                 return String.format("Bandwidth: Approximate=%s (%.1f%% savings), ActualNetwork=%s (%.1f%% savings), FullState=%s",
-                        formatBytes(approx), approxSavings,
-                        formatBytes(actual), actualSavings,
-                        formatBytes(full));
+                        TestUtils.formatBytes(approx), approxSavings,
+                        TestUtils.formatBytes(actual), actualSavings,
+                        TestUtils.formatBytes(full));
             } catch (Exception e) {
                 return "Bandwidth analysis failed: " + e.getMessage();
             }
-        }
-
-        private static String formatBytes(long bytes) {
-            if (bytes < 1024) return bytes + " B";
-            if (bytes < 1024 * 1024) return String.format("%.1f KB", bytes / 1024.0);
-            return String.format("%.1f MB", bytes / (1024.0 * 1024.0));
         }
 
         /**

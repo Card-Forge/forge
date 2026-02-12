@@ -38,27 +38,12 @@ public final class FullStatePacket implements NetEvent {
         return stateChecksum;
     }
 
-    /**
-     * Compute a checksum for the game state.
-     * Used for validation after delta application.
-     * @param gameView the game view to checksum
-     * @return checksum value
-     */
     private static int computeChecksum(GameView gameView) {
         if (gameView == null) {
             return 0;
         }
-        // Simple checksum based on key game state
-        int hash = 17;
-        hash = 31 * hash + gameView.getId();
-        hash = 31 * hash + (gameView.getTurn());
-        if (gameView.getPhase() != null) {
-            hash = 31 * hash + gameView.getPhase().hashCode();
-        }
-        if (gameView.getPlayers() != null) {
-            hash = 31 * hash + gameView.getPlayers().size();
-        }
-        return hash;
+        int phaseOrdinal = gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1;
+        return NetworkChecksumUtil.computeStateChecksum(gameView.getTurn(), phaseOrdinal, gameView.getPlayers());
     }
 
     @Override

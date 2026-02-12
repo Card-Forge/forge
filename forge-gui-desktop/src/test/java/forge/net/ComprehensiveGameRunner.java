@@ -1,8 +1,6 @@
 package forge.net;
 
 import forge.gamemodes.net.NetworkDebugLogger;
-import forge.gui.GuiBase;
-import forge.model.FModel;
 
 /**
  * Standalone runner for comprehensive network game testing.
@@ -78,10 +76,7 @@ public class ComprehensiveGameRunner {
         try {
             // Initialize FModel FIRST - required before NetworkDebugLogger is accessed
             // because the logger's static initialization chain requires GuiBase.getInterface()
-            if (GuiBase.getInterface() == null) {
-                GuiBase.setInterface(new HeadlessGuiDesktop());
-                FModel.initialize(null, preferences -> null);
-            }
+            TestUtils.ensureFModelInitialized();
 
             // Set up logging for this game instance (must be after GuiBase initialization)
             NetworkDebugLogger.setTestMode(true);

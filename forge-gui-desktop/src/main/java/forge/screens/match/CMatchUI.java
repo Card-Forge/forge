@@ -73,6 +73,7 @@ import forge.game.spellability.StackItemView;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.net.NetworkDebugLogger;
+import forge.gamemodes.net.NetworkGuiGame;
 import forge.gui.FNetOverlay;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -146,7 +147,7 @@ import net.miginfocom.swing.MigLayout;
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
 public final class CMatchUI
-    extends forge.gamemodes.net.NetworkGuiGame
+    extends NetworkGuiGame
     implements ICDoc, IMenuProvider {
 
     public static final EnumSet<ZoneType> FLOATING_ZONE_TYPES = EnumSet.of(ZoneType.Library, ZoneType.Graveyard, ZoneType.Exile,

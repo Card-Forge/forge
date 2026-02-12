@@ -80,14 +80,14 @@ public class FGameClient implements IToServer {
                 try {
                     ch.sync();
                 } catch (final InterruptedException e) {
-                    System.out.println(e.getMessage());
+                    NetworkDebugLogger.log("[FGameClient] Channel closed: %s", e.getMessage());
                     e.printStackTrace();
                 } finally {
                     group.shutdownGracefully();
                 }
             }).start();
         } catch (final InterruptedException e) {
-            System.out.println(e.getMessage());
+            NetworkDebugLogger.log("[FGameClient] Connection interrupted: %s", e.getMessage());
             e.printStackTrace();
         }
     }
@@ -99,7 +99,7 @@ public class FGameClient implements IToServer {
 
     @Override
     public void send(final NetEvent event) {
-        System.out.println("Client sent " + event);
+        NetworkDebugLogger.log("[FGameClient] Client sent %s", event);
         channel.writeAndFlush(event);
     }
 

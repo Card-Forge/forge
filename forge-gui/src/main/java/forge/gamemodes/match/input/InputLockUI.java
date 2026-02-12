@@ -48,7 +48,7 @@ public class InputLockUI implements Input {
 
         @Override
         public void run() {
-            if (ixCall != iCall.get() || !isActive()) {
+            if ( ixCall != iCall.get() || !isActive()) {
                 return;
             }
             FThreads.invokeInEdtLater(showMessageFromEdt);

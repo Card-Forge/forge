@@ -1,5 +1,7 @@
 package forge.net.analysis;
 
+import forge.net.TestUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -258,9 +260,9 @@ public class GameLogMetrics {
         // Bandwidth metrics (the key validation data)
         sb.append("Bandwidth Metrics:\n");
         sb.append(String.format("  Delta Packets: %d\n", deltaPacketCount));
-        sb.append(String.format("  Approximate Size: %s\n", formatBytes(totalApproximateBytes)));
-        sb.append(String.format("  ActualNetwork Size: %s\n", formatBytes(totalDeltaBytes)));
-        sb.append(String.format("  FullState Baseline: %s\n", formatBytes(totalFullStateBytes)));
+        sb.append(String.format("  Approximate Size: %s\n", TestUtils.formatBytes(totalApproximateBytes)));
+        sb.append(String.format("  ActualNetwork Size: %s\n", TestUtils.formatBytes(totalDeltaBytes)));
+        sb.append(String.format("  FullState Baseline: %s\n", TestUtils.formatBytes(totalFullStateBytes)));
         sb.append("\n");
 
         // Bandwidth savings (the primary validation metric)
@@ -312,14 +314,7 @@ public class GameLogMetrics {
         return sb.toString();
     }
 
-    /**
-     * Format bytes in human-readable form.
-     */
-    private static String formatBytes(long bytes) {
-        if (bytes < 1024) return bytes + " B";
-        if (bytes < 1024 * 1024) return String.format("%.1f KB", bytes / 1024.0);
-        return String.format("%.1f MB", bytes / (1024.0 * 1024.0));
-    }
+
 
     /**
      * Represents metrics for a single delta sync packet.

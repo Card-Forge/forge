@@ -1,7 +1,6 @@
 package forge.trackable;
 
 import java.io.Serializable;
-import java.util.Collections;
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.Map;
@@ -147,7 +146,10 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
      * @return set of properties that have changed
      */
     public final Set<TrackableProperty> getChangedProps() {
-        return Collections.unmodifiableSet(changedProps);
+        if (changedProps.isEmpty()) {
+            return EnumSet.noneOf(TrackableProperty.class);
+        }
+        return EnumSet.copyOf(changedProps);
     }
 
     /**

@@ -38,7 +38,7 @@ import java.util.Map;
 
 public class NetGuiGame extends NetworkGuiGame {
 
-    private GameProtocolSender sender;
+    private final GameProtocolSender sender;
     private final DeltaSyncManager deltaSyncManager;
     private final int clientIndex;
     // Delta sync is ENABLED - new objects are now properly handled.

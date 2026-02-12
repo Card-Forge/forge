@@ -28,7 +28,7 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
     @Override
     public final void channelRead(final ChannelHandlerContext ctx, final Object msg) {
         final String[] catchedError = {""};
-        System.out.println("Received: " + msg);
+        NetworkDebugLogger.log("[GameProtocolHandler] Received: %s", msg);
         if (msg instanceof ReplyEvent) {
             final ReplyEvent event = (ReplyEvent) msg;
             getReplyPool(ctx).complete(event.getIndex(), event.getReply());

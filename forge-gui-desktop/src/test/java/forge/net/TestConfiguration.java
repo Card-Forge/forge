@@ -11,7 +11,7 @@ import java.io.File;
  * Supported System Properties:
  * - deck1: Path to first deck file (default: random precon)
  * - deck2: Path to second deck file (default: random precon)
- * - testMode: NETWORK_REMOTE or NETWORK_LOCAL (default: NETWORK_REMOTE)
+ * - testMode: NETWORK_LOCAL to disable remote client (default: remote enabled)
  * - playerCount: Number of players for multiplayer (2, 3, or 4) (default: 2)
  * - iterations: Number of iterations for batch testing (default: 1)
  * - precon1: Name of quest precon for player 1 (alternative to deck1)
@@ -36,7 +36,7 @@ public class TestConfiguration {
 
     private Deck deck1;
     private Deck deck2;
-    private GameTestMode testMode;
+    private boolean useRemoteClient;
     private int playerCount;
     private int iterations;
 
@@ -47,7 +47,7 @@ public class TestConfiguration {
     public TestConfiguration() {
         this.deck1 = loadDeck1();
         this.deck2 = loadDeck2();
-        this.testMode = loadTestMode();
+        this.useRemoteClient = loadUseRemoteClient();
         this.playerCount = loadPlayerCount();
         this.iterations = loadIterations();
     }
@@ -105,24 +105,20 @@ public class TestConfiguration {
     }
 
     /**
-     * Loads test mode from system properties.
-     * Default: NETWORK_REMOTE (true delta sync testing with real TCP client)
+     * Loads remote client flag from system properties.
+     * Default: true (delta sync testing with real TCP client)
+     * Set -DtestMode=NETWORK_LOCAL to disable remote client.
      */
-    private GameTestMode loadTestMode() {
+    private boolean loadUseRemoteClient() {
         String mode = System.getProperty(PROP_TEST_MODE);
         if (mode != null && !mode.isEmpty()) {
-            try {
-                GameTestMode testMode = GameTestMode.valueOf(mode.toUpperCase());
-                System.out.println("[TestConfiguration] Using test mode: " + testMode);
-                return testMode;
-            } catch (IllegalArgumentException e) {
-                System.err.println("[TestConfiguration] WARNING: Invalid test mode: " + mode +
-                    ". Valid values: NETWORK_REMOTE, NETWORK_LOCAL. Using NETWORK_REMOTE.");
-            }
+            boolean remote = !"NETWORK_LOCAL".equalsIgnoreCase(mode);
+            System.out.println("[TestConfiguration] Using remote client: " + remote);
+            return remote;
         }
 
-        System.out.println("[TestConfiguration] Using default test mode: NETWORK_REMOTE");
-        return GameTestMode.NETWORK_REMOTE;
+        System.out.println("[TestConfiguration] Using default: remote client enabled");
+        return true;
     }
 
     /**
@@ -187,8 +183,8 @@ public class TestConfiguration {
         return deck2;
     }
 
-    public GameTestMode getTestMode() {
-        return testMode;
+    public boolean isUseRemoteClient() {
+        return useRemoteClient;
     }
 
     public int getPlayerCount() {
@@ -208,7 +204,7 @@ public class TestConfiguration {
         System.out.println("========================================");
         System.out.println("Deck 1: " + (deck1 != null ? deck1.getName() : "null"));
         System.out.println("Deck 2: " + (deck2 != null ? deck2.getName() : "null"));
-        System.out.println("Test Mode: " + testMode);
+        System.out.println("Remote Client: " + useRemoteClient);
         System.out.println("Player Count: " + playerCount);
         System.out.println("Iterations: " + iterations);
         System.out.println("========================================\n");

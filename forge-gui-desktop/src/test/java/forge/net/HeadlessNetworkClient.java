@@ -495,29 +495,35 @@ public class HeadlessNetworkClient implements AutoCloseable {
                 } else {
                     scheduleAutoResponse(() -> gameController.selectButtonCancel(), 50, "click '" + label2 + "'");
                 }
-            } else if (gameController != null && !enable1 && selectableIndex < pendingSelectables.size()) {
-                // OK is disabled but we have more cards to select (multi-selection prompt)
-                NetworkDebugLogger.log("[DeltaLoggingGuiGame] OK disabled, selecting next card (%d/%d remaining)",
-                        pendingSelectables.size() - selectableIndex, pendingSelectables.size());
-                selectNextCard();
+            } else if (gameController != null && !enable1) {
+                // OK is disabled but we may have more cards to select (multi-selection prompt)
+                synchronized (pendingSelectables) {
+                    if (selectableIndex < pendingSelectables.size()) {
+                        NetworkDebugLogger.log("[DeltaLoggingGuiGame] OK disabled, selecting next card (%d/%d remaining)",
+                                pendingSelectables.size() - selectableIndex, pendingSelectables.size());
+                        selectNextCard();
+                    }
+                }
             }
         }
 
         @Override
         public void setSelectables(Iterable<forge.game.card.CardView> cards) {
             super.setSelectables(cards);
-            // Track selectable cards for multi-selection prompts
-            pendingSelectables.clear();
-            selectableIndex = 0;
-            if (cards != null) {
-                for (forge.game.card.CardView card : cards) {
-                    pendingSelectables.add(card);
+            synchronized (pendingSelectables) {
+                // Track selectable cards for multi-selection prompts
+                pendingSelectables.clear();
+                selectableIndex = 0;
+                if (cards != null) {
+                    for (forge.game.card.CardView card : cards) {
+                        pendingSelectables.add(card);
+                    }
                 }
-            }
 
-            // Auto-select the first selectable card when cards become selectable
-            if (gameController != null && !pendingSelectables.isEmpty()) {
-                selectNextCard();
+                // Auto-select the first selectable card when cards become selectable
+                if (gameController != null && !pendingSelectables.isEmpty()) {
+                    selectNextCard();
+                }
             }
         }
 
@@ -526,13 +532,15 @@ public class HeadlessNetworkClient implements AutoCloseable {
          * Uses the serialized auto-response executor to prevent race conditions.
          */
         private void selectNextCard() {
-            if (selectableIndex < pendingSelectables.size()) {
-                forge.game.card.CardView card = pendingSelectables.get(selectableIndex);
-                selectableIndex++;
-                NetworkDebugLogger.log("[DeltaLoggingGuiGame] Auto-selecting card %d/%d: %s",
-                        selectableIndex, pendingSelectables.size(), card.getName());
-                scheduleAutoResponse(() -> gameController.selectCard(card, null, null),
-                        100, "select card " + card.getName());
+            synchronized (pendingSelectables) {
+                if (selectableIndex < pendingSelectables.size()) {
+                    forge.game.card.CardView card = pendingSelectables.get(selectableIndex);
+                    selectableIndex++;
+                    NetworkDebugLogger.log("[DeltaLoggingGuiGame] Auto-selecting card %d/%d: %s",
+                            selectableIndex, pendingSelectables.size(), card.getName());
+                    scheduleAutoResponse(() -> gameController.selectCard(card, null, null),
+                            100, "select card " + card.getName());
+                }
             }
         }
 

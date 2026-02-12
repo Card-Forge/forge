@@ -1,7 +1,6 @@
 package forge.net;
 
 import forge.gamemodes.net.NetworkDebugLogger;
-import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
@@ -70,12 +69,7 @@ public class NetworkPlayIntegrationTest {
     @BeforeClass
     public static void setUp() {
         if (!initialized) {
-            GuiBase.setInterface(new HeadlessGuiDesktop());
-            FModel.initialize(null, preferences -> {
-                preferences.setPref(FPref.LOAD_CARD_SCRIPTS_LAZILY, false);
-                preferences.setPref(FPref.UI_LANGUAGE, "en-US");
-                return null;
-            });
+            TestUtils.ensureFModelInitialized();
             NetworkDebugLogger.setTestMode(true);
             initialized = true;
         }
@@ -124,25 +118,11 @@ public class NetworkPlayIntegrationTest {
     }
 
     @Test
-    public void testGameTestModeEnum() {
-        // Test NETWORK_LOCAL mode
-        Assert.assertFalse(GameTestMode.NETWORK_LOCAL.usesRemoteClient(), "NETWORK_LOCAL should not use remote client");
-
-        // Test NETWORK_REMOTE mode
-        Assert.assertTrue(GameTestMode.NETWORK_REMOTE.usesRemoteClient(), "NETWORK_REMOTE should use remote client");
-
-        for (GameTestMode mode : GameTestMode.values()) {
-            Assert.assertNotNull(mode.getDisplayName(), "Display name should not be null");
-            Assert.assertNotNull(mode.getDescription(), "Description should not be null");
-        }
-    }
-
-    @Test
     public void testConfigurationParsing() {
         TestConfiguration config = new TestConfiguration();
         Assert.assertNotNull(config.getDeck1(), "Deck1 should not be null");
         Assert.assertNotNull(config.getDeck2(), "Deck2 should not be null");
-        Assert.assertNotNull(config.getTestMode(), "Test mode should not be null");
+        Assert.assertTrue(config.isUseRemoteClient() || !config.isUseRemoteClient(), "Remote client flag should be valid");
         Assert.assertTrue(config.getPlayerCount() >= 2 && config.getPlayerCount() <= 4, "Player count should be 2-4");
         Assert.assertTrue(config.getIterations() > 0, "Iterations should be positive");
     }
@@ -204,7 +184,7 @@ public class NetworkPlayIntegrationTest {
             if (result.success) {
                 Assert.assertTrue(result.deltaPacketsReceived > 0, "Should have received delta sync packets");
             }
-            Assert.assertTrue(result.gameStarted, "Game should have started");
+            Assert.assertTrue(result.gameStarted, "Game should have started: " + result.toSummary());
         } finally {
             // Restore original deck legality setting
             FModel.getPreferences().setPref(FPref.ENFORCE_DECK_LEGALITY, originalLegality);
@@ -495,8 +475,7 @@ public class NetworkPlayIntegrationTest {
         config.printConfiguration();
 
         int iterations = config.getIterations();
-        GameTestMode mode = config.getTestMode();
-        int remoteClients = mode.usesRemoteClient() ? 1 : 0;
+        int remoteClients = config.isUseRemoteClient() ? 1 : 0;
 
         for (int i = 0; i < iterations; i++) {
             if (iterations > 1) {

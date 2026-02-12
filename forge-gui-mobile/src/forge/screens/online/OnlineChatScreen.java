@@ -145,7 +145,7 @@ public class OnlineChatScreen extends FScreen implements IOnlineChatInterface {
             FSkinColor color = isLocal ? LOCAL_COLOR : REMOTE_COLOR;
             int horzAlignment = isLocal ? Align.right : Align.left;
             float timestampHeight = FONT.getCapHeight();
-
+            
             //draw bubble fill
             g.fillRect(color, x, y, w, h);
             g.drawRect(BORDER_THICKNESS, BORDER_COLOR, x, y, w, h);

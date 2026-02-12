@@ -23,6 +23,7 @@ public final class DeltaPacket implements NetEvent {
     private final Map<Integer, NewObjectData> newObjects; // Full object data for newly created objects
     private final Set<Integer> removedObjectIds;
     private final int checksum; // For periodic validation
+    private final boolean checksumIncluded;
 
     // Object type constants (shared by NewObjectData and DeltaData)
     public static final int TYPE_CARD_VIEW = 0;
@@ -67,7 +68,7 @@ public final class DeltaPacket implements NetEvent {
      * @param removedObjectIds set of object IDs that have been removed
      */
     public DeltaPacket(long sequenceNumber, Map<Integer, byte[]> objectDeltas, Set<Integer> removedObjectIds) {
-        this(sequenceNumber, objectDeltas, null, removedObjectIds, 0);
+        this(sequenceNumber, objectDeltas, null, removedObjectIds, 0, false);
     }
 
     /**
@@ -79,7 +80,7 @@ public final class DeltaPacket implements NetEvent {
      */
     public DeltaPacket(long sequenceNumber, Map<Integer, byte[]> objectDeltas,
                        Set<Integer> removedObjectIds, int checksum) {
-        this(sequenceNumber, objectDeltas, null, removedObjectIds, checksum);
+        this(sequenceNumber, objectDeltas, null, removedObjectIds, checksum, true);
     }
 
     /**
@@ -88,15 +89,18 @@ public final class DeltaPacket implements NetEvent {
      * @param objectDeltas map of object ID to serialized delta bytes (changed properties only)
      * @param newObjects map of object ID to full object data (for new objects)
      * @param removedObjectIds set of object IDs that have been removed
-     * @param checksum checksum of the full state for validation (0 if not included)
+     * @param checksum checksum of the full state for validation
+     * @param checksumIncluded true if this packet includes a checksum for validation
      */
     public DeltaPacket(long sequenceNumber, Map<Integer, byte[]> objectDeltas,
-                       Map<Integer, NewObjectData> newObjects, Set<Integer> removedObjectIds, int checksum) {
+                       Map<Integer, NewObjectData> newObjects, Set<Integer> removedObjectIds,
+                       int checksum, boolean checksumIncluded) {
         this.sequenceNumber = sequenceNumber;
         this.objectDeltas = objectDeltas != null ? new HashMap<>(objectDeltas) : new HashMap<>();
         this.newObjects = newObjects != null ? new HashMap<>(newObjects) : new HashMap<>();
         this.removedObjectIds = removedObjectIds != null ? new HashSet<>(removedObjectIds) : new HashSet<>();
         this.checksum = checksum;
+        this.checksumIncluded = checksumIncluded;
     }
 
     public long getSequenceNumber() {
@@ -140,7 +144,7 @@ public final class DeltaPacket implements NetEvent {
      * @return true if checksum is included
      */
     public boolean hasChecksum() {
-        return checksum != 0;
+        return checksumIncluded;
     }
 
     /**

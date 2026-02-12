@@ -298,7 +298,7 @@ public class DeltaSyncUnitTest {
         newObjects.put(100, new DeltaPacket.NewObjectData(100, 0, new byte[150]));
         newObjects.put(101, new DeltaPacket.NewObjectData(101, 1, new byte[200]));
 
-        DeltaPacket packet = new DeltaPacket(1L, deltas, newObjects, new HashSet<>(), 0);
+        DeltaPacket packet = new DeltaPacket(1L, deltas, newObjects, new HashSet<>(), 0, false);
 
         // Expected size:
         // Header: 12 bytes

@@ -1,5 +1,7 @@
 package forge.net.analysis;
 
+import forge.net.TestUtils;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
@@ -169,21 +171,6 @@ public class AnalysisResult {
         return gamesWithChecksumMismatches;
     }
 
-    /**
-     * Format bytes in human-readable form (B, KB, MB, GB).
-     */
-    private static String formatBytes(long bytes) {
-        if (bytes < 1024) {
-            return bytes + " B";
-        } else if (bytes < 1024 * 1024) {
-            return String.format("%.1f KB", bytes / 1024.0);
-        } else if (bytes < 1024L * 1024L * 1024L) {
-            return String.format("%.2f MB", bytes / (1024.0 * 1024.0));
-        } else {
-            return String.format("%.2f GB", bytes / (1024.0 * 1024.0 * 1024.0));
-        }
-    }
-
     public List<GameLogMetrics> getAllMetrics() {
         return allMetrics;
     }
@@ -259,7 +246,7 @@ public class AnalysisResult {
         sb.append(String.format("| Average Turns per Game | %.1f |\n", averageTurns));
         sb.append(String.format("| Unique Decks Used | %d |\n", getUniqueDeckCount()));
         sb.append(String.format("| Average Bandwidth Savings | %.1f%% |\n", averageBandwidthSavings));
-        sb.append(String.format("| Total Network Traffic | %s |\n", formatBytes(totalDeltaBytes)));
+        sb.append(String.format("| Total Network Traffic | %s |\n", TestUtils.formatBytes(totalDeltaBytes)));
         sb.append(String.format("| Checksum Mismatches | %d |\n", gamesWithChecksumMismatches));
         sb.append(String.format("| Games with Errors | %d |\n", gamesWithErrors));
         sb.append(String.format("| Games with Warnings | %d |\n", gamesWithWarnings));
@@ -273,11 +260,11 @@ public class AnalysisResult {
         long avgDelta = totalGames > 0 ? totalDeltaBytes / totalGames : 0;
         long avgFull = totalGames > 0 ? totalFullStateBytes / totalGames : 0;
         sb.append(String.format("| Approximate | %s | %s | Estimated delta size from object diffs |\n",
-                formatBytes(totalApproximateBytes), formatBytes(avgApprox)));
+                TestUtils.formatBytes(totalApproximateBytes), TestUtils.formatBytes(avgApprox)));
         sb.append(String.format("| ActualNetwork | %s | %s | Actual bytes sent over network |\n",
-                formatBytes(totalDeltaBytes), formatBytes(avgDelta)));
+                TestUtils.formatBytes(totalDeltaBytes), TestUtils.formatBytes(avgDelta)));
         sb.append(String.format("| FullState | %s | %s | Size if full state was sent |\n",
-                formatBytes(totalFullStateBytes), formatBytes(avgFull)));
+                TestUtils.formatBytes(totalFullStateBytes), TestUtils.formatBytes(avgFull)));
         sb.append("\n");
 
         // Bandwidth savings calculations
@@ -317,8 +304,8 @@ public class AnalysisResult {
                     long avgFullPerGame = stats.gameCount > 0 ? stats.totalFullStateBytes / stats.gameCount : 0;
                     sb.append(String.format("| %d | %d | %s | %s | %s | %s | %.1f%% |\n",
                             p, stats.gameCount,
-                            formatBytes(stats.totalDeltaBytes), formatBytes(avgActualPerGame),
-                            formatBytes(stats.totalFullStateBytes), formatBytes(avgFullPerGame),
+                            TestUtils.formatBytes(stats.totalDeltaBytes), TestUtils.formatBytes(avgActualPerGame),
+                            TestUtils.formatBytes(stats.totalFullStateBytes), TestUtils.formatBytes(avgFullPerGame),
                             stats.averageBandwidthSavings));
                 }
             }

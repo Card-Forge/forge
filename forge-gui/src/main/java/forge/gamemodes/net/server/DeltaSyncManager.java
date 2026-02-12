@@ -6,6 +6,7 @@ import forge.game.combat.CombatView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
 import forge.gamemodes.net.DeltaPacket;
+import forge.gamemodes.net.NetworkChecksumUtil;
 import forge.gamemodes.net.DeltaPacket.NewObjectData;
 import forge.gamemodes.net.FullStatePacket;
 import forge.gamemodes.net.NetworkDebugLogger;
@@ -41,7 +42,7 @@ public class DeltaSyncManager {
     private final AtomicLong sequenceNumber = new AtomicLong(0);
     private final Map<Integer, Long> clientAcknowledgedSeq = new ConcurrentHashMap<>();
     private final Set<Integer> trackedObjectIds = ConcurrentHashMap.newKeySet();
-    private final Set<Integer> removedObjectIds = new HashSet<>();
+    private final Set<Integer> removedObjectIds = ConcurrentHashMap.newKeySet();
 
     // Objects that have been fully sent to the client (initial sync done)
     // Objects not in this set need full serialization when first encountered
@@ -53,6 +54,7 @@ public class DeltaSyncManager {
     // rather than relying on the global hasChanges() flags which get cleared by other clients.
     private final Map<Integer, Map<Integer, Integer>> lastSentPropertyChecksums = new ConcurrentHashMap<>();
 
+    // Not atomic: only accessed from game thread (unlike sequenceNumber which is read from Netty threads)
     private long packetsSinceLastChecksum = 0;
 
     /**
@@ -174,7 +176,8 @@ public class DeltaSyncManager {
         // after applying the delta.
         packetsSinceLastChecksum++;
         int checksum = 0;
-        if (packetsSinceLastChecksum >= CHECKSUM_INTERVAL) {
+        boolean includeChecksum = packetsSinceLastChecksum >= CHECKSUM_INTERVAL;
+        if (includeChecksum) {
             // Use snapshot values for Turn and Phase to avoid race condition
             checksum = computeStateChecksumWithSnapshot(gameView, snapshotTurn, snapshotPhaseOrdinal);
             packetsSinceLastChecksum = 0;
@@ -186,7 +189,7 @@ public class DeltaSyncManager {
         // Build the packet
         long seq = sequenceNumber.incrementAndGet();
 
-        DeltaPacket packet = new DeltaPacket(seq, objectDeltas, newObjects, new HashSet<>(removedObjectIds), checksum);
+        DeltaPacket packet = new DeltaPacket(seq, objectDeltas, newObjects, new HashSet<>(removedObjectIds), checksum, includeChecksum);
 
         // Log new objects for debugging
         if (!newObjects.isEmpty()) {
@@ -425,6 +428,24 @@ public class DeltaSyncManager {
     }
 
     /**
+     * Iterate over all non-battlefield player zones.
+     * Battlefield is excluded because it requires special handling (size limits, attachment traversal).
+     * If a new zone is added to PlayerView, add it here to ensure it's tracked everywhere.
+     */
+    private static void forEachNonBattlefieldZone(PlayerView player,
+                                                   java.util.function.Consumer<Iterable<CardView>> action) {
+        action.accept(player.getHand());
+        action.accept(player.getGraveyard());
+        action.accept(player.getLibrary());
+        action.accept(player.getExile());
+        action.accept(player.getFlashback());
+        action.accept(player.getCommanders());
+        action.accept(player.getAnte());
+        action.accept(player.getSideboard());
+        action.accept(player.getCommand());
+    }
+
+    /**
      * Collect deltas from a PlayerView and all its associated objects.
      */
     private void collectPlayerDeltas(PlayerView player, Map<Integer, byte[]> objectDeltas,
@@ -444,15 +465,8 @@ public class DeltaSyncManager {
         collectObjectDelta(player, objectDeltas, newObjects, currentObjectIds);
 
         // Collect from player's cards in various zones
-        collectCardsFromZone(player.getHand(), objectDeltas, newObjects, currentObjectIds);
-        collectCardsFromZone(player.getGraveyard(), objectDeltas, newObjects, currentObjectIds);
-        collectCardsFromZone(player.getLibrary(), objectDeltas, newObjects, currentObjectIds);
-        collectCardsFromZone(player.getExile(), objectDeltas, newObjects, currentObjectIds);
-        collectCardsFromZone(player.getFlashback(), objectDeltas, newObjects, currentObjectIds);
-        collectCardsFromZone(player.getCommanders(), objectDeltas, newObjects, currentObjectIds);
-        collectCardsFromZone(player.getAnte(), objectDeltas, newObjects, currentObjectIds);
-        collectCardsFromZone(player.getSideboard(), objectDeltas, newObjects, currentObjectIds);
-        collectCardsFromZone(player.getCommand(), objectDeltas, newObjects, currentObjectIds);
+        forEachNonBattlefieldZone(player, zone ->
+                collectCardsFromZone(zone, objectDeltas, newObjects, currentObjectIds));
 
         // Collect battlefield cards
         if (player.getBattlefield() != null) {
@@ -637,15 +651,7 @@ public class DeltaSyncManager {
         sentObjectIds.add(key);
         recordPropertyChecksums(key, player);
 
-        markCardsAsSent(player.getHand());
-        markCardsAsSent(player.getGraveyard());
-        markCardsAsSent(player.getLibrary());
-        markCardsAsSent(player.getExile());
-        markCardsAsSent(player.getFlashback());
-        markCardsAsSent(player.getCommanders());
-        markCardsAsSent(player.getAnte());
-        markCardsAsSent(player.getSideboard());
-        markCardsAsSent(player.getCommand());
+        forEachNonBattlefieldZone(player, this::markCardsAsSent);
 
         if (player.getBattlefield() != null) {
             for (CardView card : player.getBattlefield()) {
@@ -688,25 +694,7 @@ public class DeltaSyncManager {
      * @return checksum based on snapshot values
      */
     private int computeStateChecksumWithSnapshot(GameView gameView, int snapshotTurn, int snapshotPhaseOrdinal) {
-        int hash = 17;
-        // Use snapshot values for Turn and Phase to avoid race condition
-        hash = 31 * hash + snapshotTurn;
-        if (snapshotPhaseOrdinal >= 0) {
-            hash = 31 * hash + snapshotPhaseOrdinal;
-        }
-        if (gameView.getPlayers() != null) {
-            // Sort players by ID for consistent iteration order
-            java.util.List<PlayerView> sortedPlayers = new java.util.ArrayList<>();
-            for (PlayerView p : gameView.getPlayers()) {
-                sortedPlayers.add(p);
-            }
-            sortedPlayers.sort(java.util.Comparator.comparingInt(PlayerView::getId));
-            for (PlayerView player : sortedPlayers) {
-                hash = 31 * hash + player.getId();
-                hash = 31 * hash + player.getLife();
-            }
-        }
-        return hash;
+        return NetworkChecksumUtil.computeStateChecksum(snapshotTurn, snapshotPhaseOrdinal, gameView.getPlayers());
     }
 
     /**
@@ -722,20 +710,13 @@ public class DeltaSyncManager {
         NetworkDebugLogger.log("[DeltaSync]   Turn: %d (snapshot)", snapshotTurn);
         NetworkDebugLogger.log("[DeltaSync]   Phase: %s (snapshot, current=%s)", phaseName,
                 gameView.getPhase() != null ? gameView.getPhase().name() : "null");
-        if (gameView.getPlayers() != null) {
-            java.util.List<PlayerView> sortedPlayers = new java.util.ArrayList<>();
-            for (PlayerView p : gameView.getPlayers()) {
-                sortedPlayers.add(p);
-            }
-            sortedPlayers.sort(java.util.Comparator.comparingInt(PlayerView::getId));
-            for (PlayerView player : sortedPlayers) {
-                int handSize = player.getHand() != null ? player.getHand().size() : 0;
-                int graveyardSize = player.getGraveyard() != null ? player.getGraveyard().size() : 0;
-                int battlefieldSize = player.getBattlefield() != null ? player.getBattlefield().size() : 0;
-                NetworkDebugLogger.log("[DeltaSync]   Player %d (%s): Life=%d, Hand=%d, GY=%d, BF=%d",
-                        player.getId(), player.getName(), player.getLife(),
-                        handSize, graveyardSize, battlefieldSize);
-            }
+        for (PlayerView player : NetworkChecksumUtil.getSortedPlayers(gameView)) {
+            int handSize = player.getHand() != null ? player.getHand().size() : 0;
+            int graveyardSize = player.getGraveyard() != null ? player.getGraveyard().size() : 0;
+            int battlefieldSize = player.getBattlefield() != null ? player.getBattlefield().size() : 0;
+            NetworkDebugLogger.log("[DeltaSync]   Player %d (%s): Life=%d, Hand=%d, GY=%d, BF=%d",
+                    player.getId(), player.getName(), player.getLife(),
+                    handSize, graveyardSize, battlefieldSize);
         }
     }
 
@@ -788,15 +769,7 @@ public class DeltaSyncManager {
 
         player.clearChanges();
 
-        clearCardsChanges(player.getHand());
-        clearCardsChanges(player.getGraveyard());
-        clearCardsChanges(player.getLibrary());
-        clearCardsChanges(player.getExile());
-        clearCardsChanges(player.getFlashback());
-        clearCardsChanges(player.getCommanders());
-        clearCardsChanges(player.getAnte());
-        clearCardsChanges(player.getSideboard());
-        clearCardsChanges(player.getCommand());
+        forEachNonBattlefieldZone(player, this::clearCardsChanges);
 
         if (player.getBattlefield() != null) {
             for (CardView card : player.getBattlefield()) {

@@ -66,6 +66,13 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
                 gameView0 != null ? "non-null" : "null",
                 getGameView() != null ? "non-null" : "null");
 
+        // Skip if this exact instance was already set (e.g., beforeCall on Netty thread
+        // followed by EDT dispatch). Running tracker init + copyChangedProps twice on the
+        // same object is wasteful and not thread-safe.
+        if (gameView0 != null && gameView0 == getGameView()) {
+            return;
+        }
+
         if (getGameView() == null || gameView0 == null) {
             if (gameView0 != null) {
                 // When receiving a deserialized GameView from the network,
@@ -98,7 +105,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
             // Use the existing gameView's tracker for the incoming gameView0
             Tracker existingTracker = getGameView().getTracker();
             if (existingTracker != null) {
-                java.util.Set<Integer> visited = new java.util.HashSet<>();
+                java.util.Set<TrackableObject> visited = java.util.Collections.newSetFromMap(new java.util.IdentityHashMap<>());
                 setTrackerRecursively(gameView0, existingTracker, visited);
             }
         }
@@ -122,7 +129,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
         }
 
         // Recursively set tracker on all TrackableObjects in the GameView's properties
-        java.util.Set<Integer> visited = new java.util.HashSet<>();
+        java.util.Set<TrackableObject> visited = java.util.Collections.newSetFromMap(new java.util.IdentityHashMap<>());
         setTrackerRecursively(gameView0, tracker, visited);
         NetworkDebugLogger.log("[EnsureTracker] Set tracker on %d unique objects", visited.size());
 
@@ -155,13 +162,11 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
      * Uses a visited set to avoid infinite loops from circular references.
      */
     @SuppressWarnings("unchecked")
-    private void setTrackerRecursively(TrackableObject obj, Tracker tracker, java.util.Set<Integer> visited) {
+    private void setTrackerRecursively(TrackableObject obj, Tracker tracker, java.util.Set<TrackableObject> visited) {
         if (obj == null) return;
 
-        // Avoid infinite loops
-        int objId = System.identityHashCode(obj);
-        if (visited.contains(objId)) return;
-        visited.add(objId);
+        // Avoid infinite loops (uses identity comparison via IdentityHashMap-backed set)
+        if (!visited.add(obj)) return;
 
         // Set tracker on this object
         if (obj.getTracker() == null) {
@@ -403,29 +408,8 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
      * causing checksum mismatches even when all values are identical.
      */
     private int computeStateChecksum(GameView gameView) {
-        int hash = 17;
-        // NOTE: Do NOT include gameView.getId() in the checksum.
-        // The GameView ID is a local JVM identifier that differs between server and client
-        // because each side creates its own Game/GameView instances. Only include actual
-        // game state properties that should be synchronized.
-        hash = 31 * hash + gameView.getTurn();
-        if (gameView.getPhase() != null) {
-            // Use ordinal() not hashCode() - ordinal is consistent across JVMs
-            hash = 31 * hash + gameView.getPhase().ordinal();
-        }
-        if (gameView.getPlayers() != null) {
-            // Sort players by ID for consistent iteration order across server and client
-            List<PlayerView> sortedPlayers = new ArrayList<>();
-            for (PlayerView p : gameView.getPlayers()) {
-                sortedPlayers.add(p);
-            }
-            sortedPlayers.sort(Comparator.comparingInt(PlayerView::getId));
-            for (PlayerView player : sortedPlayers) {
-                hash = 31 * hash + player.getId();
-                hash = 31 * hash + player.getLife();
-            }
-        }
-        return hash;
+        int phaseOrdinal = gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1;
+        return NetworkChecksumUtil.computeStateChecksum(gameView.getTurn(), phaseOrdinal, gameView.getPlayers());
     }
 
     /**
@@ -438,21 +422,13 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
         NetworkDebugLogger.error("[DeltaSync]   GameView ID: %d", gameView.getId());
         NetworkDebugLogger.error("[DeltaSync]   Turn: %d", gameView.getTurn());
         NetworkDebugLogger.error("[DeltaSync]   Phase: %s", gameView.getPhase() != null ? gameView.getPhase().name() : "null");
-        if (gameView.getPlayers() != null) {
-            // Sort players by ID to match checksum computation order
-            List<PlayerView> sortedPlayers = new ArrayList<>();
-            for (PlayerView p : gameView.getPlayers()) {
-                sortedPlayers.add(p);
-            }
-            sortedPlayers.sort(Comparator.comparingInt(PlayerView::getId));
-            for (PlayerView player : sortedPlayers) {
-                int handSize = player.getHand() != null ? player.getHand().size() : 0;
-                int graveyardSize = player.getGraveyard() != null ? player.getGraveyard().size() : 0;
-                int battlefieldSize = player.getBattlefield() != null ? player.getBattlefield().size() : 0;
-                NetworkDebugLogger.error("[DeltaSync]   Player %d (%s): Life=%d, Hand=%d, GY=%d, BF=%d",
-                        player.getId(), player.getName(), player.getLife(),
-                        handSize, graveyardSize, battlefieldSize);
-            }
+        for (PlayerView player : NetworkChecksumUtil.getSortedPlayers(gameView)) {
+            int handSize = player.getHand() != null ? player.getHand().size() : 0;
+            int graveyardSize = player.getGraveyard() != null ? player.getGraveyard().size() : 0;
+            int battlefieldSize = player.getBattlefield() != null ? player.getBattlefield().size() : 0;
+            NetworkDebugLogger.error("[DeltaSync]   Player %d (%s): Life=%d, Hand=%d, GY=%d, BF=%d",
+                    player.getId(), player.getName(), player.getLife(),
+                    handSize, graveyardSize, battlefieldSize);
         }
         NetworkDebugLogger.error("[DeltaSync] Compare with server state in host log at seq=%d", packet.getSequenceNumber());
     }
@@ -807,7 +783,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
                 if (newGameView.getTracker() == null) {
                     // Use the existing tracker for the new GameView's objects
                     Tracker existingTracker = getGameView().getTracker();
-                    java.util.Set<Integer> visited = new java.util.HashSet<>();
+                    java.util.Set<TrackableObject> visited = java.util.Collections.newSetFromMap(new java.util.IdentityHashMap<>());
                     setTrackerRecursively(newGameView, existingTracker, visited);
                 }
 

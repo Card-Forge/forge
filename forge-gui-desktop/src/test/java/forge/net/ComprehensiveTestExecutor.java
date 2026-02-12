@@ -1,8 +1,6 @@
 package forge.net;
 
 import forge.gamemodes.net.NetworkDebugLogger;
-import forge.gui.GuiBase;
-import forge.model.FModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -197,15 +195,8 @@ public class ComprehensiveTestExecutor {
         }
     }
 
-    /**
-     * Ensure FModel is initialized before running games.
-     */
     private static synchronized void ensureFModelInitialized() {
-        if (GuiBase.getInterface() == null) {
-            NetworkDebugLogger.log("%s Initializing FModel with HeadlessGuiDesktop", LOG_PREFIX);
-            GuiBase.setInterface(new HeadlessGuiDesktop());
-            FModel.initialize(null, preferences -> null);
-        }
+        TestUtils.ensureFModelInitialized();
     }
 
     /**

@@ -195,9 +195,14 @@ public final class FServerManager {
         }
         reconnectTimers.clear();
         disconnectedClients.clear();
+        clients.clear();
 
-        bossGroup.shutdownGracefully();
-        workerGroup.shutdownGracefully();
+        try {
+            bossGroup.shutdownGracefully().sync();
+            workerGroup.shutdownGracefully().sync();
+        } catch (final InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
         if (upnpService != null) {
             upnpService.shutdown();
             upnpService = null;

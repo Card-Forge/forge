@@ -24,7 +24,7 @@ import java.util.List;
 public class HeadlessGuiDesktop extends GuiDesktop {
 
     // Track the last match for result extraction
-    private static HostedMatch lastMatch;
+    private static volatile HostedMatch lastMatch;
 
     // Flag to track if testing environment message has been logged
     private static boolean testingEnvironmentLogged = false;
