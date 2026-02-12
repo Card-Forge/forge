@@ -97,12 +97,27 @@ public class VMatchUI implements IVTopLevelUI {
             getBtnCancel().requestFocusInWindow();
         }
 
-        // Add extra players alternatively to existing user/AI field panels.
-        for (int i = 2; i < lstFields.size(); i++) {
-            // If already in layout, no need to add again.
+        // Ensure all field views are added to the layout
+        for (int i = 0; i < lstFields.size(); i++) {
             VField vField = lstFields.get(i);
-            if (vField.getParentCell() == null) {
-                lstFields.get(i % 2).getParentCell().addDoc(vField);
+            // Check if field is in a visible cell (not a stale reference from old layout)
+            DragCell parentCell = vField.getParentCell();
+            if (parentCell != null && parentCell.isShowing()) {
+                continue;
+            }
+
+            if (i < 2) {
+                // Base fields: use REPORT_LOG's cell as fallback
+                DragCell fallbackCell = EDocID.REPORT_LOG.getDoc().getParentCell();
+                if (fallbackCell != null) {
+                    fallbackCell.addDoc(vField);
+                }
+            } else {
+                // Extra players: add to corresponding base field's cell
+                DragCell baseFieldCell = lstFields.get(i % 2).getParentCell();
+                if (baseFieldCell != null) {
+                    baseFieldCell.addDoc(vField);
+                }
             }
         }
 
@@ -110,9 +125,10 @@ public class VMatchUI implements IVTopLevelUI {
         DragCell cellWithHands = null;
         for (final EDocID handId : EDocID.Hands) {
             cellWithHands = handId.getDoc().getParentCell();
-            if (cellWithHands != null) {
+            if (cellWithHands != null && cellWithHands.isShowing()) {
                 break;
             }
+            cellWithHands = null;
         }
         if (cellWithHands == null) {
             // Default to a cell we know exists
@@ -136,11 +152,12 @@ public class VMatchUI implements IVTopLevelUI {
                     handId.setDoc(new VEmptyDoc(handId));
                 }
             } else {
-                // Hand present, add it if necessary
-                if (parentCell == null) {
+                // Hand present, add it if necessary (check isShowing for stale references)
+                if (parentCell == null || !parentCell.isShowing()) {
                     final EDocID fieldDoc = EDocID.Fields[iHandId];
-                    if (fieldDoc.getDoc().getParentCell() != null) {
-                        fieldDoc.getDoc().getParentCell().addDoc(myVHand);
+                    DragCell fieldCell = fieldDoc.getDoc().getParentCell();
+                    if (fieldCell != null && fieldCell.isShowing()) {
+                        fieldCell.addDoc(myVHand);
                         continue;
                     }
                     cellWithHands.addDoc(myVHand);
