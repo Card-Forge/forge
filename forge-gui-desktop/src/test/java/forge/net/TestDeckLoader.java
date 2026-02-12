@@ -39,23 +39,6 @@ public class TestDeckLoader {
     private static boolean retryOnInvalidDeck = true;
 
     /**
-     * Configure whether to automatically retry when a deck fails validation.
-     *
-     * @param retry true to retry with different deck on validation failure,
-     *              false to return the deck as-is (for deck validation testing)
-     */
-    public static void setRetryOnInvalidDeck(boolean retry) {
-        retryOnInvalidDeck = retry;
-    }
-
-    /**
-     * Get the current retry-on-invalid-deck setting.
-     */
-    public static boolean isRetryOnInvalidDeck() {
-        return retryOnInvalidDeck;
-    }
-
-    /**
      * Load a quest precon deck by name.
      * @param name Deck name without .dck extension
      * @return Deck with valid cards

@@ -38,9 +38,6 @@ public class GameLogMetrics {
     private long totalApproximateBytes;  // Estimated delta size from object diffs
     private long totalDeltaBytes;         // Actual bytes sent over network (ActualNetwork)
     private long totalFullStateBytes;     // Size if full state was sent
-    private double averageBandwidthSavingsApproximate;
-    private double averageBandwidthSavingsActual;
-
     // Deck tracking
     private List<String> deckNames = new ArrayList<>();
 
@@ -50,11 +47,6 @@ public class GameLogMetrics {
     private boolean hasChecksumMismatch;
     private NetworkLogAnalyzer.ErrorContext errorContext;
 
-    // Timing
-    private long gameDurationMs;
-
-    // Raw packet data for detailed analysis
-    private List<PacketMetrics> packets = new ArrayList<>();
 
     /**
      * Calculate bandwidth savings percentage based on delta vs full state bytes.
@@ -169,22 +161,6 @@ public class GameLogMetrics {
         this.totalFullStateBytes = totalFullStateBytes;
     }
 
-    public double getAverageBandwidthSavingsApproximate() {
-        return averageBandwidthSavingsApproximate;
-    }
-
-    public void setAverageBandwidthSavingsApproximate(double averageBandwidthSavingsApproximate) {
-        this.averageBandwidthSavingsApproximate = averageBandwidthSavingsApproximate;
-    }
-
-    public double getAverageBandwidthSavingsActual() {
-        return averageBandwidthSavingsActual;
-    }
-
-    public void setAverageBandwidthSavingsActual(double averageBandwidthSavingsActual) {
-        this.averageBandwidthSavingsActual = averageBandwidthSavingsActual;
-    }
-
     public List<String> getDeckNames() {
         return deckNames;
     }
@@ -229,22 +205,6 @@ public class GameLogMetrics {
 
     public void setErrorContext(NetworkLogAnalyzer.ErrorContext errorContext) {
         this.errorContext = errorContext;
-    }
-
-    public long getGameDurationMs() {
-        return gameDurationMs;
-    }
-
-    public void setGameDurationMs(long gameDurationMs) {
-        this.gameDurationMs = gameDurationMs;
-    }
-
-    public List<PacketMetrics> getPackets() {
-        return packets;
-    }
-
-    public void addPacket(PacketMetrics packet) {
-        packets.add(packet);
     }
 
     @Override
@@ -293,9 +253,6 @@ public class GameLogMetrics {
         sb.append(String.format("  Players: %d\n", playerCount));
         sb.append(String.format("  Turns: %d\n", turnCount));
         sb.append(String.format("  Winner: %s\n", winner != null ? winner : "none"));
-        if (gameDurationMs > 0) {
-            sb.append(String.format("  Duration: %.1f seconds\n", gameDurationMs / 1000.0));
-        }
         sb.append("\n");
 
         // Bandwidth metrics (the key validation data)
@@ -367,22 +324,4 @@ public class GameLogMetrics {
     /**
      * Represents metrics for a single delta sync packet.
      */
-    public static class PacketMetrics {
-        public final int packetNumber;
-        public final long approximateBytes;
-        public final long actualNetworkBytes;
-        public final long fullStateBytes;
-        public final double approximateSavings;
-        public final double actualSavings;
-
-        public PacketMetrics(int packetNumber, long approximateBytes, long actualNetworkBytes,
-                             long fullStateBytes, double approximateSavings, double actualSavings) {
-            this.packetNumber = packetNumber;
-            this.approximateBytes = approximateBytes;
-            this.actualNetworkBytes = actualNetworkBytes;
-            this.fullStateBytes = fullStateBytes;
-            this.approximateSavings = approximateSavings;
-            this.actualSavings = actualSavings;
-        }
-    }
 }

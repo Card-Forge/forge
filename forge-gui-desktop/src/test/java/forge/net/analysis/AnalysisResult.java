@@ -43,14 +43,6 @@ public class AnalysisResult {
     private Map<String, Integer> errorFrequency; // Sorted by frequency descending
     private Map<Integer, BatchStats> batchStats; // Batch number -> stats
 
-    // Failure patterns
-    private int maxConsecutiveFailures;
-    private double firstHalfSuccessRate;
-    private double secondHalfSuccessRate;
-    private int warningsLeadingToFailure;
-
-    // Turn distribution histogram: [0]=1-5, [1]=6-10, [2]=11-20, [3]=21-30, [4]=30+
-    private int[] turnHistogram = new int[5];
 
     public AnalysisResult(List<GameLogMetrics> metrics) {
         this.allMetrics = metrics;
@@ -137,43 +129,6 @@ public class AnalysisResult {
             batchStats.put(batchNum, new BatchStats(batchNum, batch));
         }
 
-        // Consecutive failures tracking
-        int currentStreak = 0;
-        maxConsecutiveFailures = 0;
-        for (GameLogMetrics m : sorted) {
-            if (!m.isSuccessful()) {
-                currentStreak++;
-                maxConsecutiveFailures = Math.max(maxConsecutiveFailures, currentStreak);
-            } else {
-                currentStreak = 0;
-            }
-        }
-
-        // First half vs second half success rates
-        int midpoint = sorted.size() / 2;
-        if (midpoint > 0) {
-            long firstHalfSuccess = sorted.subList(0, midpoint).stream()
-                    .filter(GameLogMetrics::isSuccessful).count();
-            long secondHalfSuccess = sorted.subList(midpoint, sorted.size()).stream()
-                    .filter(GameLogMetrics::isSuccessful).count();
-            firstHalfSuccessRate = 100.0 * firstHalfSuccess / midpoint;
-            secondHalfSuccessRate = 100.0 * secondHalfSuccess / (sorted.size() - midpoint);
-        }
-
-        // Warnings leading to failure
-        warningsLeadingToFailure = (int) allMetrics.stream()
-                .filter(m -> !m.getWarnings().isEmpty() && !m.isSuccessful())
-                .count();
-
-        // Turn distribution histogram
-        for (GameLogMetrics m : allMetrics) {
-            int turns = m.getTurnCount();
-            if (turns <= 5) turnHistogram[0]++;
-            else if (turns <= 10) turnHistogram[1]++;
-            else if (turns <= 20) turnHistogram[2]++;
-            else if (turns <= 30) turnHistogram[3]++;
-            else turnHistogram[4]++;
-        }
     }
 
     /**
@@ -210,48 +165,8 @@ public class AnalysisResult {
         return 100.0 * successfulGames / totalGames;
     }
 
-    public int getGamesWithErrors() {
-        return gamesWithErrors;
-    }
-
-    public int getGamesWithWarnings() {
-        return gamesWithWarnings;
-    }
-
     public int getGamesWithChecksumMismatches() {
         return gamesWithChecksumMismatches;
-    }
-
-    public long getTotalApproximateBytes() {
-        return totalApproximateBytes;
-    }
-
-    public long getTotalDeltaBytes() {
-        return totalDeltaBytes;
-    }
-
-    public long getTotalFullStateBytes() {
-        return totalFullStateBytes;
-    }
-
-    public double getAverageBandwidthSavings() {
-        return averageBandwidthSavings;
-    }
-
-    public double getAverageTurns() {
-        return averageTurns;
-    }
-
-    public int getTotalTurns() {
-        return totalTurns;
-    }
-
-    public Set<String> getUniqueDeckNames() {
-        return uniqueDeckNames;
-    }
-
-    public int getUniqueDeckCount() {
-        return uniqueDeckNames != null ? uniqueDeckNames.size() : 0;
     }
 
     /**
@@ -269,44 +184,12 @@ public class AnalysisResult {
         }
     }
 
-    public Map<Integer, PlayerCountStats> getStatsByPlayerCount() {
-        return statsByPlayerCount;
-    }
-
     public List<GameLogMetrics> getAllMetrics() {
         return allMetrics;
     }
 
-    public Map<GameLogMetrics.FailureMode, Integer> getFailureModeCounts() {
-        return failureModeCounts;
-    }
-
-    public Map<String, Integer> getErrorFrequency() {
-        return errorFrequency;
-    }
-
-    public Map<Integer, BatchStats> getBatchStats() {
-        return batchStats;
-    }
-
-    public int getMaxConsecutiveFailures() {
-        return maxConsecutiveFailures;
-    }
-
-    public double getFirstHalfSuccessRate() {
-        return firstHalfSuccessRate;
-    }
-
-    public double getSecondHalfSuccessRate() {
-        return secondHalfSuccessRate;
-    }
-
-    public int getWarningsLeadingToFailure() {
-        return warningsLeadingToFailure;
-    }
-
-    public int[] getTurnHistogram() {
-        return turnHistogram;
+    private int getUniqueDeckCount() {
+        return uniqueDeckNames != null ? uniqueDeckNames.size() : 0;
     }
 
     /**
@@ -328,34 +211,6 @@ public class AnalysisResult {
                 .flatMap(m -> m.getWarnings().stream())
                 .distinct()
                 .limit(100)
-                .collect(Collectors.toList());
-    }
-
-    /**
-     * Get files that contain a specific error (normalized for grouping).
-     * @param normalizedError the normalized error string
-     * @return list of log file names containing this error
-     */
-    public List<String> getFilesWithError(String normalizedError) {
-        return allMetrics.stream()
-                .filter(m -> m.getErrors().stream()
-                        .anyMatch(e -> normalizeError(e).equals(normalizedError)))
-                .map(GameLogMetrics::getLogFileName)
-                .limit(5)
-                .collect(Collectors.toList());
-    }
-
-    /**
-     * Get files that contain a specific warning (normalized for grouping).
-     * @param normalizedWarning the normalized warning string
-     * @return list of log file names containing this warning
-     */
-    public List<String> getFilesWithWarning(String normalizedWarning) {
-        return allMetrics.stream()
-                .filter(m -> m.getWarnings().stream()
-                        .anyMatch(w -> normalizeError(w).equals(normalizedWarning)))
-                .map(GameLogMetrics::getLogFileName)
-                .limit(5)
                 .collect(Collectors.toList());
     }
 
@@ -520,66 +375,6 @@ public class AnalysisResult {
             }
         }
 
-        // Win Rate Distribution
-        {
-            // Overall wins per player
-            Map<String, Integer> overallWins = new LinkedHashMap<>();
-            for (GameLogMetrics m : allMetrics) {
-                if (m.getWinner() != null && !m.getWinner().isEmpty()) {
-                    overallWins.merge(m.getWinner(), 1, Integer::sum);
-                }
-            }
-
-            if (!overallWins.isEmpty()) {
-                sb.append("### Win Rate Distribution\n\n");
-
-                // Sort by wins descending
-                List<Map.Entry<String, Integer>> sortedOverall = overallWins.entrySet().stream()
-                        .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-                        .collect(Collectors.toList());
-
-                sb.append("**Overall**\n\n");
-                sb.append("| Player | Wins | Total | Win % |\n");
-                sb.append("|--------|------|-------|-------|\n");
-                for (Map.Entry<String, Integer> e : sortedOverall) {
-                    int pct = totalGames > 0 ? (e.getValue() * 100) / totalGames : 0;
-                    sb.append(String.format("| %s | %d | %d | %d%% |\n",
-                            e.getKey(), e.getValue(), totalGames, pct));
-                }
-                sb.append("\n");
-
-                // Wins by player count
-                Map<Integer, Map<String, Integer>> winsByPlayerCount = new LinkedHashMap<>();
-                Map<Integer, Integer> gamesByPlayerCount = new LinkedHashMap<>();
-                for (GameLogMetrics m : allMetrics) {
-                    int pc = m.getPlayerCount();
-                    gamesByPlayerCount.merge(pc, 1, Integer::sum);
-                    if (m.getWinner() != null && !m.getWinner().isEmpty()) {
-                        winsByPlayerCount.computeIfAbsent(pc, k -> new LinkedHashMap<>())
-                                .merge(m.getWinner(), 1, Integer::sum);
-                    }
-                }
-
-                sb.append("**By Player Count**\n\n");
-                sb.append("| Players | Player | Wins | Games | Win % | Expected |\n");
-                sb.append("|---------|--------|------|-------|-------|----------|\n");
-                for (int pc : winsByPlayerCount.keySet().stream().sorted().collect(Collectors.toList())) {
-                    int gamesForPc = gamesByPlayerCount.getOrDefault(pc, 0);
-                    String expected = String.format("~%d%%", gamesForPc > 0 ? 100 / pc : 0);
-                    Map<String, Integer> wins = winsByPlayerCount.get(pc);
-                    List<Map.Entry<String, Integer>> sorted = wins.entrySet().stream()
-                            .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-                            .collect(Collectors.toList());
-                    for (Map.Entry<String, Integer> e : sorted) {
-                        int pct = gamesForPc > 0 ? (e.getValue() * 100) / gamesForPc : 0;
-                        sb.append(String.format("| %dp | %s | %d | %d | %d%% | %s |\n",
-                                pc, e.getKey(), e.getValue(), gamesForPc, pct, expected));
-                    }
-                }
-                sb.append("\n");
-            }
-        }
-
         // Warning Analysis
         if (gamesWithWarnings > 0) {
             sb.append("### Warning Analysis\n\n");
@@ -607,22 +402,6 @@ public class AnalysisResult {
                 sb.append("\n");
             }
         }
-
-        // Turn Distribution Section
-        sb.append("### Turn Distribution\n\n");
-        sb.append("| Range | Count | % | Notes |\n");
-        sb.append("|-------|-------|---|-------|\n");
-        String[] turnRanges = {"1-5", "6-10", "11-20", "21-30", "30+"};
-        for (int i = 0; i < turnHistogram.length; i++) {
-            double pct = totalGames > 0 ? 100.0 * turnHistogram[i] / totalGames : 0;
-            String notes = "";
-            if (i == 0 && pct > 5.0) {
-                notes = "Early termination";
-            }
-            sb.append(String.format("| %s | %d | %.1f%% | %s |\n",
-                    turnRanges[i], turnHistogram[i], pct, notes));
-        }
-        sb.append("\n");
 
         // Failure Mode Analysis Section
         if (failedGames > 0 && failureModeCounts != null && !failureModeCounts.isEmpty()) {
@@ -681,33 +460,6 @@ public class AnalysisResult {
             }
             sb.append("\n");
         }
-
-        // Failure Patterns Section
-        sb.append("### Failure Patterns\n\n");
-        sb.append("| Pattern | Value | Status |\n");
-        sb.append("|---------|-------|--------|\n");
-        String consecutiveStatus = maxConsecutiveFailures > 2 ? "Concerning" : "OK";
-        sb.append(String.format("| Max Consecutive Failures | %d | %s |\n",
-                maxConsecutiveFailures, consecutiveStatus));
-        sb.append(String.format("| First Half Success (0-%d) | %.1f%% | |\n",
-                (totalGames / 2) - 1, firstHalfSuccessRate));
-        double dropRate = firstHalfSuccessRate - secondHalfSuccessRate;
-        String dropStatus = dropRate > 5.0 ? "Degrading" : "";
-        sb.append(String.format("| Second Half Success (%d-%d) | %.1f%% | %s |\n",
-                totalGames / 2, totalGames - 1, secondHalfSuccessRate, dropStatus));
-        int gamesWithWarningsAndFailed = warningsLeadingToFailure;
-        double warnFailPct = gamesWithWarnings > 0 ?
-                100.0 * gamesWithWarningsAndFailed / gamesWithWarnings : 0;
-        sb.append(String.format("| Warnings -> Failures | %d/%d (%.1f%%) | |\n",
-                gamesWithWarningsAndFailed, gamesWithWarnings, warnFailPct));
-        sb.append("\n");
-
-        // Stability Trend
-        String trend = "STABLE";
-        if (maxConsecutiveFailures > 2 || dropRate > 5.0) {
-            trend = "DEGRADING";
-        }
-        sb.append(String.format("**Stability Trend:** %s\n\n", trend));
 
         // Validation Summary
         sb.append("### Validation Status\n\n");

@@ -237,10 +237,6 @@ public class NetworkLogAnalyzer {
                                 double actualSavings = Double.parseDouble(savingsMatcher.group(2));
                                 approximateSavingsList.add(approxSavings);
                                 actualSavingsList.add(actualSavings);
-
-                                metrics.addPacket(new GameLogMetrics.PacketMetrics(
-                                        packetNum, approxBytes, actualBytes, fullStateBytes,
-                                        approxSavings, actualSavings));
                             }
                         }
                     } catch (NumberFormatException e) {
@@ -351,23 +347,6 @@ public class NetworkLogAnalyzer {
             metrics.setTotalFullStateBytes(totalFullStateBytes);
             metrics.setTurnCount(maxTurn);
 
-            // Calculate average savings
-            if (!approximateSavingsList.isEmpty()) {
-                double avgApprox = approximateSavingsList.stream()
-                        .mapToDouble(Double::doubleValue)
-                        .average()
-                        .orElse(0.0);
-                metrics.setAverageBandwidthSavingsApproximate(avgApprox);
-            }
-
-            if (!actualSavingsList.isEmpty()) {
-                double avgActual = actualSavingsList.stream()
-                        .mapToDouble(Double::doubleValue)
-                        .average()
-                        .orElse(0.0);
-                metrics.setAverageBandwidthSavingsActual(avgActual);
-            }
-
             // Determine failure mode based on log content
             metrics.setFailureMode(determineFailureMode(metrics));
 
@@ -416,16 +395,6 @@ public class NetworkLogAnalyzer {
     }
 
     /**
-     * Analyze all log files in a directory.
-     *
-     * @param logDirectory Directory containing log files
-     * @return List of GameLogMetrics for each file
-     */
-    public List<GameLogMetrics> analyzeDirectory(File logDirectory) {
-        return analyzeDirectory(logDirectory, "network-debug-*.log");
-    }
-
-    /**
      * Analyze log files matching a pattern in a directory.
      *
      * @param logDirectory Directory containing log files
@@ -460,16 +429,6 @@ public class NetworkLogAnalyzer {
             System.err.println("[NetworkLogAnalyzer] Error scanning log directory: " + e.getMessage());
             return new ArrayList<>();
         }
-    }
-
-    /**
-     * Analyze recent test logs (those with "-test" suffix).
-     *
-     * @param logDirectory Directory containing log files
-     * @return List of GameLogMetrics for test logs only
-     */
-    public List<GameLogMetrics> analyzeTestLogs(File logDirectory) {
-        return analyzeDirectory(logDirectory, "network-debug-*-test.log");
     }
 
     /**
@@ -558,28 +517,6 @@ public class NetworkLogAnalyzer {
      */
     public AnalysisResult buildAnalysisResult(List<GameLogMetrics> metrics) {
         return new AnalysisResult(metrics);
-    }
-
-    /**
-     * Analyze a directory and return an aggregated result.
-     *
-     * @param logDirectory Directory containing log files
-     * @return Aggregated analysis result
-     */
-    public AnalysisResult analyzeAndAggregate(File logDirectory) {
-        List<GameLogMetrics> metrics = analyzeDirectory(logDirectory);
-        return buildAnalysisResult(metrics);
-    }
-
-    /**
-     * Analyze comprehensive test logs and return an aggregated result.
-     *
-     * @param logDirectory Directory containing log files
-     * @return Aggregated analysis result
-     */
-    public AnalysisResult analyzeComprehensiveTestAndAggregate(File logDirectory) {
-        List<GameLogMetrics> metrics = analyzeComprehensiveTestLogs(logDirectory);
-        return buildAnalysisResult(metrics);
     }
 
     /**

@@ -280,19 +280,6 @@ public class ComprehensiveTestExecutor {
     }
 
     /**
-     * Create a default executor with standard configuration.
-     * 100 games: 50 x 2p, 30 x 3p, 20 x 4p
-     */
-    public static ComprehensiveTestExecutor defaultConfiguration() {
-        return new ComprehensiveTestExecutor()
-                .twoPlayerGames(50)
-                .threePlayerGames(30)
-                .fourPlayerGames(20)
-                .parallelBatchSize(10)
-                .gameTimeout(300000);
-    }
-
-    /**
      * Create an executor from system properties.
      * Properties:
      *   -Dtest.2pGames=50
@@ -352,20 +339,4 @@ public class ComprehensiveTestExecutor {
         return executor;
     }
 
-    /**
-     * Main method for standalone execution.
-     */
-    public static void main(String[] args) {
-        System.out.println("Starting Comprehensive Delta Sync Test");
-        System.out.println("=".repeat(60));
-
-        ComprehensiveTestExecutor executor = fromSystemProperties();
-        System.out.println(executor.getConfigurationSummary());
-        System.out.println();
-
-        MultiProcessGameExecutor.ExecutionResult result = executor.execute();
-
-        System.out.println();
-        System.out.println(result.toDetailedReport());
-    }
 }

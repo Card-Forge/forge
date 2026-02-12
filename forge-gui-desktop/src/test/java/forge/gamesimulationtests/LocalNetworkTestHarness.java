@@ -1,6 +1,5 @@
 package forge.gamesimulationtests;
 
-import forge.gamemodes.net.server.FServerManager;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.FullStatePacket;
 
@@ -12,44 +11,7 @@ import java.util.List;
  * Provides utilities to simulate client connections, disconnections, and reconnections.
  */
 public class LocalNetworkTestHarness {
-    private static final int DEFAULT_TEST_PORT = 36750; // Different from default to avoid conflicts
-
-    private FServerManager server;
     private final List<MockNetworkClient> clients = new ArrayList<>();
-    private int port;
-    private boolean serverStarted = false;
-
-    public LocalNetworkTestHarness() {
-        this(DEFAULT_TEST_PORT);
-    }
-
-    public LocalNetworkTestHarness(int port) {
-        this.port = port;
-    }
-
-    /**
-     * Start the test server.
-     */
-    public void startServer() {
-        if (serverStarted) {
-            return;
-        }
-        server = FServerManager.getInstance();
-        // Note: In a real test, you'd need to handle the server lifecycle properly
-        // For unit tests, you may need to mock certain aspects
-        serverStarted = true;
-    }
-
-    /**
-     * Stop the test server and clean up all clients.
-     */
-    public void stopServer() {
-        cleanup();
-        if (server != null && serverStarted) {
-            server.stopServer();
-            serverStarted = false;
-        }
-    }
 
     /**
      * Create a mock network client for testing.
@@ -57,17 +19,9 @@ public class LocalNetworkTestHarness {
      * @return the mock client
      */
     public MockNetworkClient createClient(String playerName) {
-        MockNetworkClient client = new MockNetworkClient(playerName, port);
+        MockNetworkClient client = new MockNetworkClient(playerName);
         clients.add(client);
         return client;
-    }
-
-    /**
-     * Simulate a client disconnect.
-     * @param client the client to disconnect
-     */
-    public void simulateDisconnect(MockNetworkClient client) {
-        client.simulateDisconnect();
     }
 
     /**
@@ -81,36 +35,18 @@ public class LocalNetworkTestHarness {
     }
 
     /**
-     * Get the test port.
-     * @return the port number
-     */
-    public int getPort() {
-        return port;
-    }
-
-    /**
-     * Get the server instance.
-     * @return the FServerManager instance
-     */
-    public FServerManager getServer() {
-        return server;
-    }
-
-    /**
      * Mock network client for testing.
      * Simulates client-side network behavior without actual network connections.
      */
     public static class MockNetworkClient {
         private final String playerName;
-        private final int port;
         private boolean connected = false;
         private final List<DeltaPacket> receivedDeltas = new ArrayList<>();
         private FullStatePacket lastFullState;
         private long lastAcknowledgedSequence = 0;
 
-        public MockNetworkClient(String playerName, int port) {
+        public MockNetworkClient(String playerName) {
             this.playerName = playerName;
-            this.port = port;
         }
 
         /**

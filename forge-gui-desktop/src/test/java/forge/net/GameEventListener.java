@@ -12,36 +12,18 @@ import forge.game.event.GameEventSpellResolved;
 import forge.game.event.GameEventTurnBegan;
 import forge.gamemodes.net.NetworkDebugLogger;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Consumer;
 
 /**
  * Helper class for listening to game events in automated tests.
  * Uses Guava EventBus subscription pattern.
  *
- * Logs all game actions to NetworkDebugLogger for test interpretability.
- *
- * Usage:
- * <pre>
- * GameEventListener listener = new GameEventListener();
- * listener.onTurnBegan(event -> {
- *     if (event.turnNumber() == 3) {
- *         // Do something on turn 3
- *     }
- * });
- * game.subscribeToEvents(listener);
- * </pre>
+ * Logs game actions to NetworkDebugLogger for test interpretability.
+ * Tracks turn count, game completion, and winner for test assertions.
  */
 public class GameEventListener {
 
     private static final String LOG_PREFIX = "[GameEvent]";
 
-    private Consumer<GameEventTurnBegan> turnBeganHandler;
-    private Consumer<GameEventGameFinished> gameFinishedHandler;
-    private Consumer<GameEventGameOutcome> gameOutcomeHandler;
-
-    private final CountDownLatch gameFinishedLatch = new CountDownLatch(1);
     private volatile int currentTurn = 0;
     private volatile boolean gameFinished = false;
     private volatile String winner = null;
@@ -60,39 +42,6 @@ public class GameEventListener {
         return this;
     }
 
-    /**
-     * Set handler for turn began events.
-     *
-     * @param handler Consumer that receives GameEventTurnBegan
-     * @return this for method chaining
-     */
-    public GameEventListener onTurnBegan(Consumer<GameEventTurnBegan> handler) {
-        this.turnBeganHandler = handler;
-        return this;
-    }
-
-    /**
-     * Set handler for game finished events.
-     *
-     * @param handler Consumer that receives GameEventGameFinished
-     * @return this for method chaining
-     */
-    public GameEventListener onGameFinished(Consumer<GameEventGameFinished> handler) {
-        this.gameFinishedHandler = handler;
-        return this;
-    }
-
-    /**
-     * Set handler for game outcome events.
-     *
-     * @param handler Consumer that receives GameEventGameOutcome
-     * @return this for method chaining
-     */
-    public GameEventListener onGameOutcome(Consumer<GameEventGameOutcome> handler) {
-        this.gameOutcomeHandler = handler;
-        return this;
-    }
-
     // ====== Turn Events ======
 
     /**
@@ -103,14 +52,6 @@ public class GameEventListener {
         currentTurn = event.turnNumber();
         if (verboseLogging) {
             NetworkDebugLogger.log("%s Turn %d began - %s's turn", LOG_PREFIX, currentTurn, event.turnOwner().getName());
-        }
-
-        if (turnBeganHandler != null) {
-            try {
-                turnBeganHandler.accept(event);
-            } catch (Exception e) {
-                NetworkDebugLogger.error(LOG_PREFIX + " Error in turn handler: " + e.getMessage(), e);
-            }
         }
     }
 
@@ -189,16 +130,6 @@ public class GameEventListener {
         if (verboseLogging) {
             NetworkDebugLogger.log("%s Game finished", LOG_PREFIX);
         }
-
-        if (gameFinishedHandler != null) {
-            try {
-                gameFinishedHandler.accept(event);
-            } catch (Exception e) {
-                NetworkDebugLogger.error(LOG_PREFIX + " Error in game finished handler: " + e.getMessage(), e);
-            }
-        }
-
-        gameFinishedLatch.countDown();
     }
 
     /**
@@ -212,28 +143,9 @@ public class GameEventListener {
                 NetworkDebugLogger.log("%s Game outcome: winner = %s", LOG_PREFIX, winner);
             }
         }
-
-        if (gameOutcomeHandler != null) {
-            try {
-                gameOutcomeHandler.accept(event);
-            } catch (Exception e) {
-                NetworkDebugLogger.error(LOG_PREFIX + " Error in game outcome handler: " + e.getMessage(), e);
-            }
-        }
     }
 
     // ====== Query Methods ======
-
-    /**
-     * Wait for the game to finish.
-     *
-     * @param timeout Maximum time to wait
-     * @param unit Time unit for timeout
-     * @return true if game finished, false if timeout
-     */
-    public boolean waitForGameFinished(long timeout, TimeUnit unit) throws InterruptedException {
-        return gameFinishedLatch.await(timeout, unit);
-    }
 
     /**
      * Get the current turn number.
@@ -254,14 +166,5 @@ public class GameEventListener {
      */
     public String getWinner() {
         return winner;
-    }
-
-    /**
-     * Reset the listener state for reuse.
-     */
-    public void reset() {
-        currentTurn = 0;
-        gameFinished = false;
-        winner = null;
     }
 }

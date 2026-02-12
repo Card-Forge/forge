@@ -371,10 +371,6 @@ public class MultiProcessGameExecutor {
         final int playerCount;
         final Process process;
 
-        ProcessInfo(int gameIndex, int port, Process process) {
-            this(gameIndex, port, 2, process); // Default to 2 players
-        }
-
         ProcessInfo(int gameIndex, int port, int playerCount, Process process) {
             this.gameIndex = gameIndex;
             this.port = port;
@@ -394,14 +390,6 @@ public class MultiProcessGameExecutor {
         public final long bytes;
         public final String winner;
         public final List<String> deckNames;
-
-        public GameResult(boolean success, long deltaPackets, int turns, long bytes, String winner) {
-            this(success, 2, deltaPackets, turns, bytes, winner, Collections.emptyList());
-        }
-
-        public GameResult(boolean success, int playerCount, long deltaPackets, int turns, long bytes, String winner) {
-            this(success, playerCount, deltaPackets, turns, bytes, winner, Collections.emptyList());
-        }
 
         public GameResult(boolean success, int playerCount, long deltaPackets, int turns, long bytes, String winner, List<String> deckNames) {
             this.success = success;

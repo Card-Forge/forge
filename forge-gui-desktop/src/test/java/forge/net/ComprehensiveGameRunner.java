@@ -68,31 +68,6 @@ public class ComprehensiveGameRunner {
      * Run a single game and return exit code.
      *
      * @param port Network port for the game server
-     * @param gameIndex Index of this game (for identification)
-     * @param playerCount Number of players (2, 3, or 4)
-     * @return Exit code: 0=success, 1=failure, 2=error
-     */
-    public static int runGame(int port, int gameIndex, int playerCount) {
-        return runGame(port, gameIndex, playerCount, null, 0);
-    }
-
-    /**
-     * Run a single game and return exit code.
-     *
-     * @param port Network port for the game server
-     * @param gameIndex Index of this game (for identification)
-     * @param playerCount Number of players (2, 3, or 4)
-     * @param batchId Optional batch ID for correlating logs from the same test run
-     * @return Exit code: 0=success, 1=failure, 2=error
-     */
-    public static int runGame(int port, int gameIndex, int playerCount, String batchId) {
-        return runGame(port, gameIndex, playerCount, batchId, 0);
-    }
-
-    /**
-     * Run a single game and return exit code.
-     *
-     * @param port Network port for the game server
      * @param gameIndex Index of this game (for identification within the batch)
      * @param playerCount Number of players (2, 3, or 4)
      * @param batchId Optional batch ID for correlating logs from the same test run
@@ -190,10 +165,6 @@ public class ComprehensiveGameRunner {
         final long bytes;
         final String winner;
         final java.util.List<String> deckNames;
-
-        GameRunResult(boolean success, int turns, long deltaPackets, long bytes, String winner) {
-            this(success, turns, deltaPackets, bytes, winner, java.util.Collections.emptyList());
-        }
 
         GameRunResult(boolean success, int turns, long deltaPackets, long bytes, String winner, java.util.List<String> deckNames) {
             this.success = success;

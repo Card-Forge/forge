@@ -1,6 +1,5 @@
 package forge.net;
 
-import forge.deck.Deck;
 import forge.game.GameView;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.FullStatePacket;
@@ -196,27 +195,6 @@ public class HeadlessNetworkClient implements AutoCloseable {
      */
     public FGameClient getClient() {
         return client;
-    }
-
-    /**
-     * Send a deck selection to the server for this client's slot.
-     *
-     * @param deck The deck to use
-     */
-    public void sendDeck(Deck deck) {
-        if (client != null && connected.get()) {
-            NetworkDebugLogger.log("%s Sending deck: %s", LOG_PREFIX, deck.getName());
-            UpdateLobbyPlayerEvent event = UpdateLobbyPlayerEvent.deckUpdate(deck);
-            // Apply to local lobby AND send to server
-            int slot = assignedSlot.get();
-            if (slot >= 0 && lobby != null) {
-                lobby.applyToSlot(slot, event);
-                NetworkDebugLogger.log("%s Applied deck to local lobby slot %d", LOG_PREFIX, slot);
-            }
-            client.send(event);
-        } else {
-            NetworkDebugLogger.error("%s Cannot send deck - not connected", LOG_PREFIX);
-        }
     }
 
     /**
@@ -427,16 +405,6 @@ public class HeadlessNetworkClient implements AutoCloseable {
 
             // Then notify the client for logging/verification
             client.onDeltaPacketReceived(packet);
-
-            // Send acknowledgment if we have a controller
-            if (gameController != null) {
-                try {
-                    // Note: NetGameController.ackSync sends the acknowledgment
-                    // This tells the server we processed the delta
-                } catch (Exception e) {
-                    NetworkDebugLogger.error("[DeltaLoggingGuiGame] Error in delta handling: %s", e.getMessage());
-                }
-            }
         }
 
         @Override

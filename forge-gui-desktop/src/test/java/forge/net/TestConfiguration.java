@@ -214,24 +214,4 @@ public class TestConfiguration {
         System.out.println("========================================\n");
     }
 
-    /**
-     * Checks if a specific system property is set.
-     */
-    public static boolean hasProperty(String propertyName) {
-        String value = System.getProperty(propertyName);
-        return value != null && !value.isEmpty();
-    }
-
-    /**
-     * Checks if any test configuration properties are set.
-     */
-    public static boolean hasAnyConfigurationProperties() {
-        return hasProperty(PROP_DECK1) ||
-               hasProperty(PROP_DECK2) ||
-               hasProperty(PROP_PRECON1) ||
-               hasProperty(PROP_PRECON2) ||
-               hasProperty(PROP_TEST_MODE) ||
-               hasProperty(PROP_PLAYER_COUNT) ||
-               hasProperty(PROP_ITERATIONS);
-    }
 }

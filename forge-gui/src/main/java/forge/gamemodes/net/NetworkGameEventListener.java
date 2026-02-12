@@ -29,9 +29,6 @@ public class NetworkGameEventListener {
 
     private static final String LOG_PREFIX = "[GAME EVENT]";
 
-    // Track current turn for context
-    private volatile int currentTurn = 0;
-
     /**
      * Create a new listener for network game events.
      */
@@ -46,9 +43,8 @@ public class NetworkGameEventListener {
      */
     @Subscribe
     public void handleTurnBegan(GameEventTurnBegan event) {
-        currentTurn = event.turnNumber();
         NetworkDebugLogger.log("%s Turn %d began - %s's turn",
-                LOG_PREFIX, currentTurn, event.turnOwner().getName());
+                LOG_PREFIX, event.turnNumber(), event.turnOwner().getName());
     }
 
     /**

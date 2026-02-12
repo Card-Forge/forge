@@ -89,17 +89,4 @@ public class PortAllocator {
         }
     }
 
-    /**
-     * Reset the port counter (useful for test isolation).
-     */
-    public static void reset() {
-        portCounter.set(BASE_PORT);
-    }
-
-    /**
-     * Get the current port counter value (for debugging).
-     */
-    public static int getCurrentCounter() {
-        return portCounter.get();
-    }
 }

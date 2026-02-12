@@ -559,8 +559,8 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
             case DeltaPacket.TYPE_GAME_VIEW:
                 return getGameView(); // GameView is special - return the singleton
             default:
-                NetworkDebugLogger.warn("[DeltaSync] Unknown object type %d, trying fallback search", objectType);
-                return findObjectById(tracker, objectId);
+                NetworkDebugLogger.warn("[DeltaSync] Unknown object type %d for object %d", objectType, objectId);
+                return null;
         }
     }
 
@@ -576,32 +576,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
             case DeltaPacket.TYPE_GAME_VIEW: return "GameView";
             default: return "Unknown(type=" + objectType + ")";
         }
-    }
-
-    /**
-     * Find a TrackableObject by ID in the Tracker (legacy method).
-     * Searches through known object types (CardView, PlayerView, etc.)
-     * Note: Prefer findObjectByTypeAndId when object type is known.
-     */
-    private TrackableObject findObjectById(Tracker tracker, int objectId) {
-        // Try CardView (most common)
-        TrackableObject obj = tracker.getObj(TrackableTypes.CardViewType, objectId);
-        if (obj != null) return obj;
-
-        // Try PlayerView
-        obj = tracker.getObj(TrackableTypes.PlayerViewType, objectId);
-        if (obj != null) return obj;
-
-        // Try StackItemView
-        obj = tracker.getObj(TrackableTypes.StackItemViewType, objectId);
-        if (obj != null) return obj;
-
-        // Try CombatView
-        obj = tracker.getObj(TrackableTypes.CombatViewType, objectId);
-        if (obj != null) return obj;
-
-        // Object not in tracker
-        return null;
     }
 
     /**
@@ -920,13 +894,4 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
         return count;
     }
 
-    @Override
-    public void setRememberedActions() {
-        // Default implementation - no-op for local games
-    }
-
-    @Override
-    public void nextRememberedAction() {
-        // Default implementation - no-op for local games
-    }
 }

@@ -80,11 +80,6 @@ public class DeltaSyncManager {
             return Math.max(v, acknowledgedSeq);
         });
 
-        // Check if all clients have acknowledged - if so, we can clear changes
-        long minAcked = getMinAcknowledgedSequence();
-        if (minAcked > 0) {
-            // All clients have caught up, changes for older sequences can be cleared
-        }
     }
 
     /**
