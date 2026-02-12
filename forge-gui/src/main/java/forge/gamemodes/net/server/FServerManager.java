@@ -575,15 +575,9 @@ public final class FServerManager {
         @Override
         public void channelRead(final ChannelHandlerContext ctx, final Object msg) throws Exception {
             final RemoteClient client = clients.get(ctx.channel());
-            if (msg instanceof LoginEvent event) {
-                final String username = event.getUsername();
-                client.setUsername(username);
-                if (client.getIndex() == 0) {
-                    broadcast(new MessageEvent(String.format("Lobby hosted by %s.", username)));
-                } else {
-                    broadcast(new MessageEvent(String.format("%s joined the lobby.", username)));
-                }
-                updateLobbyState();
+            if (msg instanceof LoginEvent) {
+                // Login is handled by LobbyInputHandler; join message
+                // is broadcast there after name deduplication.
             } else if (msg instanceof UpdateLobbyPlayerEvent event) {
                 localLobby.applyToSlot(client.getIndex(), event);
                 if (event.getName() != null) {
@@ -641,6 +635,9 @@ public final class FServerManager {
                         ctx.close();
                     } else {
                         client.setIndex(index);
+                        // Update client username to match deduplicated slot name
+                        final String slotName = localLobby.getSlot(index).getName();
+                        client.setUsername(slotName);
                         // Warn if client version differs from host
                         final String clientVersion = event.getVersion();
                         final String hostVersion = BuildInfo.getVersionString();
@@ -648,14 +645,14 @@ public final class FServerManager {
                             broadcast(new MessageEvent(String.format(
                                 "Warning: Could not determine %s's Forge version. "
                                 + "Please use the same version as the host to avoid network compatibility issues.",
-                                event.getUsername())));
+                                slotName)));
                         } else if (!clientVersion.equals(hostVersion)) {
                             broadcast(new MessageEvent(String.format(
                                 "Warning: %s is using Forge version %s (host: %s). "
                                 + "Please use the same version as the host to avoid network compatibility issues.",
-                                event.getUsername(), clientVersion, hostVersion)));
+                                slotName, clientVersion, hostVersion)));
                         }
-                        broadcast(event);
+                        broadcast(new MessageEvent(String.format("%s joined the lobby.", slotName)));
                         updateLobbyState();
                     }
                 }
