@@ -88,7 +88,7 @@ public class InputPassPriority extends InputSyncronizedBase {
                 return;
             }
             // Suggestion 2: Has cards but no mana
-            else if (prefs.getPrefBoolean(FPref.YIELD_SUGGEST_NO_MANA)
+            if (prefs.getPrefBoolean(FPref.YIELD_SUGGEST_NO_MANA)
                 && shouldShowNoManaPrompt()
                 && !getController().getGui().isSuggestionDeclined(getOwner(), "NO_MANA")) {
                 pendingSuggestion = getDefaultYieldMode();
@@ -98,7 +98,7 @@ public class InputPassPriority extends InputSyncronizedBase {
                 return;
             }
             // Suggestion 3: No available actions (empty hand, no abilities)
-            else if (prefs.getPrefBoolean(FPref.YIELD_SUGGEST_NO_ACTIONS)
+            if (prefs.getPrefBoolean(FPref.YIELD_SUGGEST_NO_ACTIONS)
                 && shouldShowNoActionsPrompt()
                 && !getController().getGui().isSuggestionDeclined(getOwner(), "NO_ACTIONS")) {
                 pendingSuggestion = getDefaultYieldMode();
