@@ -1,6 +1,4 @@
-# Network Play
-
-## Table of Contents
+# Chapters
 - [Status & Support](#status--support)
 - [Requirements](#requirements)
 - [Quick Start](#quick-start)
@@ -9,23 +7,22 @@
   - [Local Network Setup](#local-network-setup)
   - [Remote Network Setup](#remote-network-setup)
   - [VPN / Software-Defined Networks](#vpn--software-defined-networks)
-- [FAQs](#faqs)
-- [Known Issues](#known-issues)
-- [Bug Reports](#bug-reports)
+- [Known Limitations](#known-limitations)
 ---
 
-## Status & Support
+# Status & Support
 
 > [!CAUTION]
 > **Network play is a work-in-progress.** You will encounter bugs. When they appear, they will likely be mid-game and require restarting both the client and host. Please report bugs and issues to help improve stability.
 
-> [!TIP]
-> - The **[Forge Discord](https://discord.gg/nsAhGwD)** has a dedicated network play channel. Folks there will be happy to help you with any issues!
-> - Also see the **[FAQs](#faqs)** section below for common questions.
+Cross-platform play is supported.  
+There is no built-in matchmaking. Network play is designed for playing against people you know and manually sharing connection details.
 
+> [!TIP]
+> The **[Forge Discord](https://discord.gg/nsAhGwD)** has a dedicated network play channel. You can use it to find opponents and folks there will be happy to help you with any issues!
 ---
 
-## Requirements
+# Requirements
 
 | Requirement | Details |
 |---|---|
@@ -40,7 +37,7 @@
 
 ---
 
-## Quick Start
+# Quick Start
 
 1. **Configure network** — Host must configure network settings to enable external connections (see [Network Configuration](#network-configuration) below).
 2. **Verify versions** — Confirm all devices are running the same Forge version (see [Version Compatibility](#version-compatibility) below).
@@ -63,25 +60,25 @@
 
 ---
 
-## Reconnect Support
+# Reconnect Support
 
 > [!IMPORTANT]
 > **The host's device is the server.** If the host disconnects or closes Forge, the game ends immediately for all players — there is no host migration or disconnect support for server crashes. Choose the most stable device/connection as the host.
 
 If a client player disconnects during an active game, the server enters **reconnection mode** instead of immediately ending the match.
 
-### What Happens on Disconnect
+## What happens on Disconnect
 
 - The game **pauses** for the disconnected player — all other players see a notification.
 - A **5-minute countdown** begins, with status messages broadcast every 30 seconds.
 - The disconnected player can rejoin by reconnecting to the same server with the **same username**.
 - On successful reconnect, the full game state is re-sent to the player and the game resumes normally.
 
-### If the Player Does Not Reconnect
+## If the Player doesn't Reconnect
 
 When the 5-minute timeout expires, the disconnected player is **replaced by an AI** and the game continues.
 
-### Host Commands
+## Host Commands
 
 The host can type these commands in the lobby chat during the reconnection window. These commands are **host-only** — clients cannot use them.
 
@@ -92,14 +89,14 @@ The host can type these commands in the lobby chat during the reconnection windo
 
 ---
 
-## Network Configuration
+# Network Configuration
 
 > [!IMPORTANT]
 > Complete the **Local Network Setup** first, even if your goal is remote play. Remote setup builds on a working local configuration.
 
-### Local Network Setup
+## Local Network Setup
 
-#### 1. Configure the Host Firewall
+### 1. Configure the Host Firewall
 
 | Platform | Action |
 |---|---|
@@ -108,7 +105,7 @@ The host can type these commands in the lobby chat during the reconnection windo
 | **macOS** | Allow incoming connections for Forge in System Settings > Firewall. |
 | **Linux** | Allow port 36743 through your firewall (e.g., `ufw allow 36743/tcp`). |
 
-#### 2. Validate the Port is Open
+### 2. Validate the Port is Open
 
 Test from a **different device** on the same network to confirm the host is accepting connections on port 36743.
 
@@ -126,9 +123,9 @@ Test from a **different device** on the same network to confirm the host is acce
 
 Once validated, provide the host's internal IP and port to the client (e.g., `192.168.1.50:36743`).
 
-### Remote Network Setup
+## Remote Network Setup
 
-#### UPnP (Automatic Port Forwarding)
+### UPnP (Automatic Port Forwarding)
 
 Forge has built-in **UPnP** support that can automatically configure your router's port forwarding. When you host a server, Forge will prompt:
 
@@ -145,7 +142,7 @@ Forge has built-in **UPnP** support that can automatically configure your router
 
 **If UPnP fails**, Forge will notify you that the port could not be opened automatically. You will need to configure port forwarding manually using the steps below. Common reasons for failure: UPnP is disabled on the router, the router doesn't support UPnP, or a firewall is blocking UPnP discovery.
 
-#### 1. Manual Port Forwarding on the Router
+### 1. Manual Port Forwarding on the Router
 
 Access your router's admin interface (typically `http://192.168.x.1/`, where `x` matches your local IP subnet). Navigate to port forwarding settings (may be under "Advanced") and create a rule:
 
@@ -156,9 +153,9 @@ Access your router's admin interface (typically `http://192.168.x.1/`, where `x`
 | Internal IP | Host machine's local IP |
 | Internal Port | 36743 |
 
-Router-specific guides: [portforward.com/router.htm](https://portforward.com/router.htm) (use the guides only — their software is not recommended).
+Router-specific guides: [portforward.com/router.htm](https://portforward.com/router.htm) (use the guides only — their software isn't recommended).
 
-#### 2. Validate External Access
+### 2. Validate External Access
 
 - Go to [canyouseeme.org](http://canyouseeme.org) **from the host machine** while Forge is hosting.
 - Enter port **36743** and click "Check Port".
@@ -166,18 +163,21 @@ Router-specific guides: [portforward.com/router.htm](https://portforward.com/rou
 
 Share the external IP shown on that page with the client. Remember the client needs to enter it as **`IP:36743`** (e.g., `203.0.113.45:36743`).
 
-### VPN / Software-Defined Networks
+Here's how a typical network topology might look, when playing with through Firewall and Port Forwarding:
+![netplay](netplay.png)
+
+## VPN / Software-Defined Networks
 
 If you cannot configure port forwarding — for example on a cellular connection, public Wi-Fi hotspot, or a network you don't control — you can use a **Virtual Private Network (VPN)** or **Software-Defined Network (SDN)** to create a private network between players.
 
 > [!CAUTION]
 > Forge cannot provide support for third-party VPN or SDN software. Refer to each provider's documentation for setup help.
 
-#### How It Works
+### How It Works
 
 A VPN or SDN creates a virtual local network between devices over the internet. Once connected, all players appear to be on the same LAN — so you can follow the **[Local Network Setup](#local-network-setup)** steps instead of dealing with port forwarding.
 
-#### Recommended Options
+### Recommended Options
 
 | Tool | Type | Cost | Notes |
 |---|---|---|---|
@@ -187,7 +187,7 @@ A VPN or SDN creates a virtual local network between devices over the internet. 
 
 For self-hosted options (e.g. OpenVPN on your own server or router), you will need control of a network or a rented server with a public IP. Both players install the VPN client and connect to that server. This adds complexity but gives full control.
 
-#### Quick Setup (ZeroTier Example)
+### Quick Setup (ZeroTier Example)
 
 1. All players install [ZeroTier](https://www.zerotier.com/download/).
 2. One player creates a network at [my.zerotier.com](https://my.zerotier.com) and shares the **Network ID**.
@@ -195,37 +195,18 @@ For self-hosted options (e.g. OpenVPN on your own server or router), you will ne
 4. The network creator approves each device in the ZeroTier web console.
 5. Once connected, follow the **[Local Network Setup](#local-network-setup)** — use the ZeroTier-assigned IP addresses instead of your normal LAN IPs.
 
-#### Security Note
+### Security Note
 
 Any player on a shared private network can see other devices on that network. Only share access with people you trust, and disconnect when you're not playing.
 
 ---
 
-## FAQs
+# Known limitations
 
-**Is Forge cross-platform?**
-Yes. Forge runs on Java, so players on Android, Windows, macOS, and Linux can all play together. (iOS is not supported — it does not run Java.)
+## "Disconnected From Lobby"
+A common cause for this is that the client and server resource (res) folder content differs. This can be verified by checking the game log and looking for an IOException referring to a "Card ... not found".
 
-**Can I play against random players?**
-There is no built-in matchmaking. Network play is designed for playing against people you know and manually sharing connection details. To find opponents, visit the [Forge Discord](https://discord.gg/nsAhGwD) and ask in the network play channel.
+Forge automatically warns in the lobby chat when a client's version differs from the host's but **does not block the connection**. While network play between different versions of Forge can be possible, mismatched versions may cause desync or crashes mid-game. If possible always use the same version on all devices to avoid network compatibility issues.
 
-**Does network play support Draft or Sealed?**
-No. Only Constructed formats are currently supported (including Commander, Oathbreaker, Tiny Leaders, Brawl, Archenemy, Planechase, and Vanguard).
-
----
-
-## Known Issues
-
-### Version Compatibility
-Forge automatically warns in the lobby chat when a client's version differs from the host's but **does not block the connection**. While network play between different versions of Forge can be possible, mismatched versions may cause desync or crashes mid-game. Always use the same version on all devices to avoid network compatibility issues.
-
-### Lag / High Bandwidth
+## Lag / High Bandwidth
 Network play currently lacks traffic optimization. A single game can transfer hundreds of megabytes. Slow connections will experience significant lag.
-
----
-## Bug Reports
-
-Bug reports can be made to the network play channel on the [Forge Discord](https://discord.gg/nsAhGwD) or by raising an issue on the [Forge Github](https://github.com/Card-Forge/forge/issues).
-
-Please make sure your bug report includes a copy of the game logs from when the issue arose.
-
