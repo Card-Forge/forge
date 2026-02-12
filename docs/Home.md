@@ -7,13 +7,13 @@ Forge is a "Rules Engine" for the game Magic: the Gathering.
 Forge is not related in any way with Wizards of the Coast.  
 Forge is open source software released under the GNU Public License.
 
-Up to 8 players are supported, with each assigned to human or AI control. Player decks can be imported, user-created with the Deck Editor, or automatically generated. Over [99%](Missing-Cards-in-Forge.md) (and counting) of all cards in Magic's existence are available, with the missing ones mostly being pointless to implement in the context (e.g. the notorious Chaos Orb) or impossible. That's more than the official Magic Online!
+Up to 8 players are supported, with each assigned to human or AI control. Player decks can be imported, user-created with the Deck Editor, or automatically generated. Over [99%](Missing-Cards-in-Forge.md) (and counting) of all cards in Magic's existence are available, with the missing ones mostly being pointless to implement in the context (e.g. the notorious *Chaos Orb*) or impossible. That's more than the official Magic Online!
 
 Forge creates a unique experience by combining this enormous card library with some RPG elements in [**Quest mode**](https://www.slightlymagic.net/forum/viewtopic.php?f=26&t=9258) on the desktop version, and **Planar Conquest** on the mobile version.
 
 Forge also features a wide variety of puzzles. For more details and features see the other pages in this wiki.
 
-Currently, Forge functions best in Human vs. AI matches. Playing against another human player over the Internet with [Online Multiplayer mode](Network-FAQ.md) is functional, but may still result in game play errors.
+Currently, Forge functions best in Human vs. AI matches. Playing against another human player over the Internet with [Online Multiplayer mode](Network-Play.md) is functional, but may still result in game play errors.
 
 # Adventure Mode
 Forge now includes a Graphical Map Based game mode, along with the Classic deck building and match game modes with AI.

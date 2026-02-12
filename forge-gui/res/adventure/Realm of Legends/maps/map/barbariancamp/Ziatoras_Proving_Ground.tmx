@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="27" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="113">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="27" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="115">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -66,7 +66,7 @@
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Ziatora's Proving Ground&quot;, &quot;editions&quot;: [ &quot;snc&quot; ], &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
-  <object id="100" template="../../obj/treasure.tx" x="391.833" y="47.1364">
+  <object id="100" template="../../obj/treasure.tx" x="362.833" y="48.1364">
    <properties>
     <property name="reward">[
   {
@@ -195,5 +195,39 @@
    </properties>
   </object>
   <object id="111" template="../../../../common/maps/obj/gold.tx" x="545.25" y="112.333"/>
+  <object id="113" template="../../../../common/maps/obj/scroll.tx" x="719" y="306">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Riveteers Charm&quot;, &quot;editions&quot;: [ &quot;snc&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="114" template="../../obj/treasure.tx" x="420" y="48">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;SNC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;black&quot;, &quot;red&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;SNC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;black&quot;, &quot;red&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;SNC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;black&quot;, &quot;red&quot; ],
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
  </objectgroup>
 </map>

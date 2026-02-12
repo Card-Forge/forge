@@ -1,0 +1,16 @@
+Name:Tend to the Kiln
+ManaCost:1 R
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAnimateAll | TriggerDescription$ When this enchantment enters, all non-Elemental instant and sorcery cards you own perpetually become Elemental kindreds in addition to their other types.
+SVar:TrigAnimateAll:DB$ AnimateAll | ValidCards$ Instant.nonElemental+YouOwn,Sorcery.nonElemental+YouOwn | Types$ Kindred,Elemental | Zone$ All | Duration$ Perpetual
+T:Mode$ SpellCast | ValidCard$ Elemental | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast an Elemental spell, put a flame counter on this enchantment. Then if it has three or more flame counters on it, remove them, conjure a card named Flamebraider onto the battlefield, and it gains haste and "At the beginning of the end step, sacrifice this creature."
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ FLAME | CounterNum$ 1 | SubAbility$ DBBranch
+SVar:DBBranch:DB$ Branch | BranchConditionSVar$ FlameTimer | TrueSubAbility$ DBRemoveCtrs
+SVar:DBRemoveCtrs:DB$ RemoveCounter | Defined$ Self | CounterType$ FLAME | CounterNum$ All | SubAbility$ DBConjure
+SVar:DBConjure:DB$ MakeCard | Conjure$ True | Name$ Flamebraider | Zone$ Battlefield | RememberMade$ True | SubAbility$ DBPump
+SVar:DBPump:DB$ Animate | Defined$ Remembered | Keywords$ Haste | Triggers$ PhaseTrig | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:PhaseTrig:Mode$ Phase| Phase$ End of Turn | Execute$ TrigSacrifice | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the end step, sacrifice this creature.
+SVar:TrigSacrifice:DB$ Sacrifice
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearNamedCard$ True
+SVar:FlameTimer:Count$Valid Card.Self+counters_GE3_FLAME
+Oracle:When this enchantment enters, all non-Elemental instant and sorcery cards you own perpetually become Elemental kindreds in addition to their other types.\nWhenever you cast an Elemental spell, put a flame counter on this enchantment. Then if it has three or more flame counters on it, remove them, conjure a card named Flamebraider onto the battlefield, and it gains haste and "At the beginning of the end step, sacrifice this creature."

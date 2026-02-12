@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="34" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="84">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="34" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="86">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -37,7 +37,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztVklOAkEUrZ0L0xdwp8yDGEnAlboyNjTNwmii3MOYeBY3gMqM0ZtoNFEP4MZL+H/Ksj9ldXVVg6x8yUvX/P5Q1Iexf8TBY5Uxv7J8XdR8qv6tRqHOWM/jX6TAqsMpxum6Yj38PBOUvvdnGsHY2v6sLvYFcR1+txak22sEmjr25tB9hdy9Ad8rXDfhM5YEpny9Zgbms3583VO4L2fAFnAI+0cSN+v87JxiTnA8Z5wHYP9QIsZg6nGfRn5AMY/tsW92fonY13aDdq7JWF4i1cV+oRmsF/0iGYtC1p3td1z1OtQtNWZzmAQ7UsC0Z64nkDjUz1+DHTchtiBua7/HehDvvmHMTSHikZXspf0MxDtrEXOBe+JDTnFHcb4POgPgFDg65H1TDEJiIf8OhxExi8qFjFxILGTdfIyYxcG876wNjg44scaqdLc9Trn+XlvEV6eL0OnKSMIdu9rj7TvLWli2fGfpPGpS2oK+k2FvVphm17W/0wLrcN4G1j+Fr+K/DdUUtqFuosbjnVK8XTJovUW04cwOsCudXa4tpsYJ0Hr7o1Ob9WUZMNGKm0MT3BvkiKK1C7bAO3rr87axzop+3iQOKXhH001z3WfI7QuwAesvHT6G9+iB+FzW3Cf6/8LG1+Mdxk6AHuw5d/gXbaDvVUnSRa1JRIwQF45+XmhRDIjWROGvao8NxP4Pg7WYB9dCM6xkq/ZHXSETTWHfp2YNzUHUmaZ+0th9AfzVq+s=
+   eJztVs1OAjEQ7s2D4QW8Kf8/YiQBTurJsLAsB6OJ8go+gInP4oUf+QeDb6LRRH0ALr6EM6l1h7rdbRfk5Jd8oe20/WamZbqM/SMMnkqMOcXN66Lmc+lvNbI1xvo2/0UKbEc4xTidl6up99NB/nt9su6O7Zws62JfEOfh78GadPt1V9OP/RV03+Ds3oEfRa4bdRiLAeOOv2YS7CknvO4l3JcrYBM4gvVjifs1vnfawyY4WTHPQ/B/JBFzMLN5TGPHpbBje+Lo7Z8n/rUst51uMJaRSHWxn22480U/R8aCkLKW+23Lex7q5uvLZxgDP+LAhK2vJxCt+Nu74Me9whdEr/p7rA/5HmjmXBciHynJX9pPQr5TBjkXmJMY0h53FO0D0BkCZ8Bxhfd1MVTkQv4fjgJyFnQWMtKKXMi6mRA5C4NV66wJzk458Y310j20OeX3t2uQXz9dhJ+ujBjcsbtj3n4wfAsLhnWW2lGT0hS0TqpqlkqzY5nfaYFd2G8P3z+PWMW3DdUUvqFutMrzHfeoXTLoe4towZ5tYEfau1BdzxsnQN/bH53qciybgI5W2DPUwVzjjCiaR+AL1NGew9vaOlv+dp08xKGOJhr6ui9wtq9AG+bfRvgY3qNHEnPB5z7R7wuTWM/LjF2UuW4deL3NSetVXtJFrWlAjhA3EX+70ESgJmJItKYe8dI1YSDWL5gbqwp4DpaBpurJluMM0pXXBPn3qbDT89TR1Y1zQdpfBhKvig==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -49,6 +49,14 @@
   <object id="52" template="../../../../common/maps/obj/gold.tx" x="338.371" y="263.481"/>
   <object id="54" template="../../../../common/maps/obj/enemy.tx" x="296.638" y="55.2568">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Koma's Coil|TKHM&quot;, &quot;Koma's Coil|TKHM&quot;,  &quot;Koma's Coil|TKHM&quot; ]
 }</property>
     <property name="enemy" value="Koma"/>
@@ -60,6 +68,14 @@
   <object id="57" template="../../../../common/maps/obj/manashards.tx" x="166" y="178"/>
   <object id="63" template="../../../../common/maps/obj/enemy.tx" x="221.121" y="212.335">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Charix"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="40"/>
@@ -67,6 +83,14 @@
   </object>
   <object id="65" template="../../../../common/maps/obj/enemy.tx" x="174.762" y="310.579">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Arixmethes"/>
     <property name="hidden" type="bool" value="true"/>
     <property name="speedModifier" type="float" value="40"/>
@@ -76,6 +100,14 @@
   </object>
   <object id="66" template="../../../../common/maps/obj/enemy.tx" x="310.19" y="311.674">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Xolatoyac"/>
     <property name="hidden" type="bool" value="true"/>
     <property name="speedModifier" type="float" value="40"/>
@@ -85,18 +117,19 @@
   <object id="68" template="../../../../common/maps/obj/collision.tx" x="-1" y="543.5" width="482" height="16"/>
   <object id="69" template="../../../../common/maps/obj/collision.tx" x="481" y="-11.7082" width="16" height="572.75"/>
   <object id="70" template="../../../../common/maps/obj/collision.tx" x="-15.5" y="-11.5415" width="16" height="566.083"/>
-  <object id="71" template="../../../../common/maps/obj/manashards.tx" x="119.627" y="538.665"/>
+  <object id="71" template="../../../../common/maps/obj/manashards.tx" x="164.46" y="205.498"/>
   <object id="72" template="../../../../common/maps/obj/gold.tx" x="272.402" y="99"/>
-  <object id="74" template="../../../../common/maps/obj/enemy.tx" x="138.167" y="525.667">
-   <properties>
-    <property name="enemy" value="Plagon"/>
-    <property name="speedModifier" type="float" value="20"/>
-    <property name="threatRange" type="int" value="10"/>
-   </properties>
-  </object>
   <object id="75" template="../../../../common/maps/obj/collision.tx" x="-15.6667" y="-16" width="517.333" height="16"/>
   <object id="76" template="../../../../common/maps/obj/enemy.tx" x="260.5" y="360">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Aesi"/>
     <property name="hidden" type="bool" value="true"/>
     <property name="speedModifier" type="float" value="40"/>
@@ -148,6 +181,53 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }
 ]</property>
+   </properties>
+  </object>
+  <object id="85" template="../../../../common/maps/obj/enemy.tx" x="122" y="534">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'Hello, landwalker. I have need of you.'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;Serpents have been slain, Ms. Empress&quot;,
+					&quot;text&quot;: &quot;'Well, your work left quite the mess, but you got the job done quite efficiently for a landwalker.''&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Llawan, Cephalid Empress&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;randomCard&quot;, &quot;colors&quot;: [ &quot;Blue&quot;], &quot;rarity&quot;: [&quot;Rare&quot;, &quot;Mythic Rare&quot;], &quot;count&quot;: 4 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 5000}                
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 5
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;What do you need?&quot;,
+					&quot;text&quot;: &quot;'I am Empress Llawan of the cephalid empire. But as you can see, here I am... on land like some sort of dog. Absolutely inelegant. The temple ahead is meant to be mine, but massive serpents swirl around it, making it uninhabitable. It may seem empty... but they're there. Five creatures in total terrorize what is rightfully mine. Slay them all, and you shall have a reward only an empress could offer.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;I don't have time for this.&quot;,
+					&quot;text&quot;: &quot;'Hmph. Landwalkers have no respect for their betters.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Llawan"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
  </objectgroup>

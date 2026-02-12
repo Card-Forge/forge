@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="45" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="16" nextobjectid="165">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="45" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="16" nextobjectid="166">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -44,6 +44,14 @@
  <objectgroup id="11" name="Objects">
   <object id="89" template="../../../../common/maps/obj/enemy.tx" x="485.107" y="272.737">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Terrian"/>
     <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="40"/>
@@ -52,12 +60,28 @@
   </object>
   <object id="98" template="../../../../common/maps/obj/enemy.tx" x="440.574" y="357.397">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Aeve"/>
     <property name="threatRange" type="int" value="10"/>
    </properties>
   </object>
   <object id="100" template="../../../../common/maps/obj/enemy.tx" x="198.005" y="207.888">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Ooze Garden|ALA&quot;, &quot;March of the World Ooze|DFT&quot;, &quot;Biowaste Blob|CMR&quot;, &quot;Murky Sewer|DSK&quot; ] }"/>
     <property name="enemy" value="The Mimeoplasm"/>
     <property name="speedModifier" type="float" value="20"/>
@@ -66,6 +90,14 @@
   </object>
   <object id="101" template="../../../../common/maps/obj/enemy.tx" x="283.44" y="358.077">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Experiment Kraj"/>
     <property name="threatRange" type="int" value="10"/>
    </properties>
@@ -82,12 +114,29 @@
   <object id="131" template="../../../../common/maps/obj/waypoint.tx" x="562.727" y="270.417"/>
   <object id="135" template="../../../../common/maps/obj/enemy.tx" x="139.089" y="545.569">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Toxrill"/>
+    <property name="speedModifier" type="float" value="-20"/>
     <property name="threatRange" type="int" value="10"/>
    </properties>
   </object>
-  <object id="136" template="../../../../common/maps/obj/enemy.tx" x="475.682" y="481.496">
+  <object id="136" template="../../../../common/maps/obj/enemy.tx" x="530.45" y="447.669">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Mitotic Ultimus"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="40"/>
@@ -110,12 +159,20 @@
   <object id="153" template="../../../../common/maps/obj/manashards.tx" x="556.667" y="216"/>
   <object id="154" template="../../../../common/maps/obj/enemy.tx" x="52" y="359.333">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Slogurk"/>
     <property name="threatRange" type="int" value="10"/>
    </properties>
   </object>
-  <object id="155" template="../../../../common/maps/obj/waypoint.tx" x="390.667" y="529.333"/>
-  <object id="156" template="../../../../common/maps/obj/waypoint.tx" x="576.667" y="440.667"/>
+  <object id="155" template="../../../../common/maps/obj/waypoint.tx" x="405.97" y="442.348"/>
+  <object id="156" template="../../../../common/maps/obj/waypoint.tx" x="635.462" y="450.332"/>
   <object id="157" template="../../obj/treasure.tx" x="190" y="156">
    <properties>
     <property name="reward">[{
@@ -168,5 +225,51 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
    </properties>
   </object>
   <object id="164" template="../../../../common/maps/obj/gold.tx" x="693.333" y="454.667"/>
+  <object id="165" template="../../../../common/maps/obj/enemy.tx" x="349.333" y="542">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'Ey you. Gotta dirty job for ya. Can't pay in gold or crystals or what have ya but I got lotsa rare spells I can teach ya.'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;I've cleaned the sewer. Well... sort of.&quot;,
+					&quot;text&quot;: &quot;'Eh, I don't mind regular dirty one bit. Good job squashin. The next generation o' trolls thanks ya for yer service.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Bortuk Bonerattle&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;randomCard&quot;, &quot;subTypes&quot;: [&quot;Troll&quot;], &quot;rarity&quot;: [&quot;Rare&quot;, &quot;Mythic Rare&quot;], &quot;count&quot;: 6 },
+                        { &quot;type&quot;: &quot;randomCard&quot;, &quot;cardTypes&quot;: [&quot;Sorcery&quot;], &quot;colors&quot;: [&quot;green&quot;], &quot;rarity&quot;: [&quot;Rare&quot;, &quot;Mythic Rare&quot;], &quot;count&quot;: 8 }             
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 7
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;I don't mind dirty.&quot;,
+					&quot;text&quot;: &quot;'This place may not look like much, but I had big plans for this stretch o' sewer. Gonna resurrect the next generation of trolls down here, I was. But now there's huge slimes and slugs and such all over the damn place. I tried killin' em but they're too... spongey fer my magic. Ye might have better luck though. Kill em' all and I'll give ya that reward I mentioned.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;I don't have time for this.&quot;,
+					&quot;text&quot;: &quot;'Too prissy to get yer hands dirty. I see. Might as well leave this place, its too filthy for your delicateness.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Bortuk"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

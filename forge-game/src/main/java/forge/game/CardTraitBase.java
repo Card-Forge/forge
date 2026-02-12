@@ -746,6 +746,14 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
         copy.keyword = this.keyword;
     }
 
-    abstract public List<Object> getTriggerRemembered();
+    public List<Object> getTriggerRemembered() {
+        if (this instanceof SpellAbility sa && sa.isTrigger()) {
+            return sa.getTrigger().getTriggerRemembered();
+        }
+        if (this instanceof Trigger trig) {
+            return trig.getTriggerRemembered();
+        }
+        return ImmutableList.of();
+    }
 
 }

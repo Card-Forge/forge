@@ -5,8 +5,6 @@
   - [SteamDeck/Bazzite](Steam-Deck-and-Bazzite-Install.md)
   - [AI](ai.md)
   - [Network Play](network-play.md)
-    - [Network FAQ](Network-FAQ.md)
-    - [Network Extra](Networking-Extras.md)
   - [Advanced search](Advanced-Search.md)
   - [Expanded Yield Options](Expanded-Yield-Options.md)
 

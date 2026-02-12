@@ -24,6 +24,11 @@
       {
         "type": "card",
         "count": 1,
+        "cardName": "Mana Crypt"
+      },
+      {
+        "type": "card",
+        "count": 1,
         "cardName": "Jodah, the Unifier",
         "editions": [ "DMU" ]
       },
@@ -90,47 +95,6 @@
       {
         "type": "card",
         "count": 1,
-        "cardName": "Black Lotus",
-        "editions": [ "VMA" ]
-      },
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Mox Pearl",
-        "editions": [ "VMA" ]
-      },
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Mox Sapphire",
-        "editions": [ "VMA" ]
-      },
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Mox Jet",
-        "editions": [ "VMA" ]
-      },
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Mox Ruby",
-        "editions": [ "VMA" ]
-      },
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Mox Emerald",
-        "editions": [ "VMA" ]
-      },
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Mox Opal"
-      },
-      {
-        "type": "card",
-        "count": 1,
         "cardName": "Ancestral Recall",
         "editions": [ "VMA" ]
       },
@@ -145,11 +109,6 @@
         "count": 1,
         "cardName": "Timetwister",
         "editions": [ "VMA" ]
-      },
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Mana Crypt"
       },
       {
         "type": "gold",
@@ -2969,7 +2928,7 @@
     "name": "Arcades",
     "sprite": "sprites/enemy/dragon/adultgreendragon.atlas",
     "deck": [
-      "decks/legends/arcades.dck"
+      "decks/legends/arcades_sabboth.dck"
     ],
     "ai": "",
     "scale": 2,
@@ -3155,7 +3114,7 @@
     "name": "Vaevictis",
     "sprite": "sprites/enemy/dragon/dragon.atlas",
     "deck": [
-      "decks/legends/vaevictis.dck"
+      "decks/legends/vaevictis_asmadi.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -4270,7 +4229,7 @@
     ],
     "ai": "",
     "speed": 45,
-    "scale": 1,
+    "scale": 1.5,
     "life": 40,
     "rewards": [
       {
@@ -5137,21 +5096,20 @@
     "spawnRate": 0
   },
   {
-    "name": "Chulane",
-    "sprite": "sprites/enemy/humanoid/human/wizard/blue_wiz2.atlas",
+    "name": "Amareth",
+    "sprite": "sprites/enemy/dragon/adultgreendragon.atlas",
     "deck": [
-      "decks/legends/chulane.dck"
+      "decks/legends/amareth.dck"
     ],
     "ai": "",
     "speed": 45,
-    "scale": 1,
+    "scale": 2,
     "life": 40,
     "rewards": [
       {
         "type": "card",
         "count": 1,
-        "cardName": "Chulane, Teller of Tales",
-        "editions": [ "ELD" ]
+        "cardName": "Amareth, the Lustrous"
       },
       {
         "type": "deckCard",
@@ -5437,6 +5395,11 @@
         "editions": [ "CMD" ]
       },
       {
+        "type": "card",
+        "count": 1,
+        "cardName": "Riku of Many Paths"
+      },
+      {
         "type": "deckCard",
         "count": 4,
         "addMaxCount": 4, 
@@ -5448,7 +5411,7 @@
       {
         "type": "randomCard",
         "count": 3,
-        "addMaxCount": 6, 
+        "addMaxCount": 4, 
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -21908,7 +21871,7 @@
     "ai": "",
     "flying": true,
     "speed": 60,
-    "scale": 1,
+    "scale": 1.5,
     "life": 30,
     "rewards": [
       {
@@ -61359,6 +61322,186 @@
     "spawnRate": 0
   },
   {
+    "name": "Withengar",
+    "sprite": "sprites/enemy/fiend/abyssalbaron.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 0.3,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Alania",
+    "sprite": "sprites/enemy/beast/raccoon.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Adriana",
+    "sprite": "sprites/enemy/humanoid/swordsman_2.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Lucrezia",
+    "sprite": "sprites/enemy/humanoid/human/warlock/witch.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Llawan",
+    "sprite": "sprites/enemy/fiend/aerie_guard.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Anep",
+    "sprite": "sprites/enemy/humanoid/khenra/jackalwarrior.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Dovin",
+    "sprite": "sprites/enemy/undead/doppelganger.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Bortuk",
+    "sprite": "sprites/enemy/giant/swamptroll.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 0.5,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Bartel",
+    "sprite": "sprites/enemy/giant/godlytitan.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Raddic",
+    "sprite": "sprites/enemy/humanoid/human/knight/cavalier_2.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Ashiok",
+    "sprite": "sprites/enemy/beast/penguin.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Gwafa Hazid",
+    "sprite": "sprites/enemy/humanoid/human/wizard/archivist.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
     "name": "Mysterious Mage",
     "sprite": "sprites/enemy/humanoid/conjurer.atlas",
     "deck": [
@@ -61369,7 +61512,7 @@
     "difficulty": 0.1,
     "scale": 0.8,
     "speed": 0,
-    "life": 100,
+    "life": 1,
     "rewards": [
     ]
   }

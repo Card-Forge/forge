@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="36" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="98">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="36" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="99">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -65,42 +65,85 @@
   </object>
   <object id="50" template="../../../../common/maps/obj/enemy.tx" gid="2147495067" x="497.189" y="345.433">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Neheb"/>
-    <property name="threatRange" type="int" value="60"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value=""/>
    </properties>
   </object>
   <object id="52" template="../../../../common/maps/obj/gold.tx" x="253.064" y="193.386"/>
-  <object id="53" template="../../../../common/maps/obj/enemy.tx" x="271.889" y="266.293">
+  <object id="53" template="../../../../common/maps/obj/enemy.tx" x="274.722" y="224.126">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ipnu Rivulet|HOU&quot;, &quot;ifnir deadlands|HOU&quot;, &quot;dagger of the worthy|HOU&quot;, &quot;accursed horde|HOU&quot;]}"/>
     <property name="enemy" value="The Scarab God"/>
-    <property name="speedModifier" type="float" value="2"/>
+    <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
-  <object id="54" template="../../../../common/maps/obj/enemy.tx" gid="2147495067" x="394.566" y="299.913">
+  <object id="54" template="../../../../common/maps/obj/enemy.tx" gid="2147495067" x="421.066" y="363.413">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ipnu Rivulet|HOU&quot;, &quot;ramunap ruins|HOU&quot;, &quot;crook of condemnation|HOU&quot;, &quot;bloodwater entity|HOU&quot;]}"/>
     <property name="enemy" value="The Locust God"/>
     <property name="hidden" type="bool" value="false"/>
-    <property name="speedModifier" type="float" value="0"/>
+    <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
   <object id="55" template="../../../../common/maps/obj/enemy.tx" x="82.7339" y="344.568">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Unesh"/>
     <property name="hidden" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
   <object id="56" template="../../../../common/maps/obj/gold.tx" x="322.613" y="193.966"/>
-  <object id="58" template="../../../../common/maps/obj/enemy.tx" x="191.725" y="303.797">
+  <object id="58" template="../../../../common/maps/obj/enemy.tx" x="174.725" y="352.797">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;ramunap ruins|HOU&quot;, &quot;ifnir deadlands|HOU&quot;, &quot;everlasting torment|C16&quot;, &quot;Moaning Wall|HOU&quot;]}"/>
     <property name="enemy" value="The Scorpion God"/>
-    <property name="threatRange" type="int" value="30"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value=""/>
    </properties>
   </object>
@@ -131,7 +174,7 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
 ]</property>
    </properties>
   </object>
-  <object id="75" template="../../obj/treasure.tx" x="288" y="113.333">
+  <object id="75" template="../../obj/treasure.tx" x="289" y="113.333">
    <properties>
     <property name="reward">[
   {
@@ -154,7 +197,7 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
   }
 ]
 </property>
-    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
    </properties>
   </object>
   <object id="76" template="../../../../common/maps/obj/scroll.tx" x="10" y="335.333">
@@ -184,5 +227,50 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
   <object id="93" template="../../../../common/maps/obj/collision.tx" x="511.627" y="226.861" width="16.2461" height="29.2782"/>
   <object id="94" template="../../../../common/maps/obj/collision.tx" x="46.877" y="226.861" width="16.2461" height="29.2782"/>
   <object id="97" template="../../../../common/maps/obj/collision.tx" x="271.366" y="113.861" width="50.267" height="58.2782"/>
+  <object id="98" template="../../../../common/maps/obj/enemy.tx" x="343.5" y="287.5">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'Look what has become of my beloved city. My home. My people's home. Justice must be enacted in blood.'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;Justice is served.&quot;,
+					&quot;text&quot;: &quot;'Justice cannot bring back what they took. But with them gone, perhaps we can someday rebuild.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Anep, Vizier of Hazoret&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;randomCard&quot;, &quot;editions&quot;: [ &quot;AKH&quot;, &quot;HOU&quot; ], &quot;rarity&quot;: [&quot;Rare&quot;, &quot;Mythic Rare&quot;], &quot;count&quot;: 10 },
+                        {&quot;type&quot;: &quot;shards&quot;, &quot;count&quot;: 50}                
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 5
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;I'll help you enact justice.&quot;,
+					&quot;text&quot;: &quot;'These dark gods and their wretched minions have betrayed my people and ruined once-glorious Naktamun. I am the last vizier of the last surviving true god of Amonkhet, Hazoret the Fervent. Slay all the abominations and I shall give you all I have left.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;I don't have time for this.&quot;,
+					&quot;text&quot;: &quot;'Leave then. And may no one seek justice for your death.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Anep"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
