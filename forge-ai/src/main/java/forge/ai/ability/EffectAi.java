@@ -23,26 +23,29 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.staticability.StaticAbilityMode;
 import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
+import forge.util.FileSection;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.Map;
 
 public class EffectAi extends SpellAbilityAi {
     @Override
     protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
         final Game game = ai.getGame();
+        final PhaseHandler phase = game.getPhaseHandler();
         boolean randomReturn = MyRandom.getRandom().nextFloat() <= .6667;
         String logic = "";
 
         if (sa.hasParam("AILogic")) {
             logic = sa.getParam("AILogic");
-            final PhaseHandler phase = game.getPhaseHandler();
             if (logic.equals("BeginningOfOppTurn")) {
                 if (!phase.getPlayerTurn().isOpponentOf(ai) || phase.getPhase().isAfter(PhaseType.DRAW)) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
@@ -379,6 +382,115 @@ public class EffectAi extends SpellAbilityAi {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             }
+        } else if (sa.hasParam("RememberObjects")) { //generic
+            boolean cantAttack = false;
+            boolean cantBlock = false;
+            boolean cantActivate = false;
+
+            String duration = sa.getParam("Duration");
+            String matchStr = "Card.IsRemembered";
+
+            for (String st : sa.getParamOrDefault("StaticAbilities", "").split(",")) {
+                Map<String, String> params = FileSection.parseToMap(sa.getSVar(st), FileSection.DOLLAR_SIGN_KV_SEPARATOR);
+                Set<StaticAbilityMode> modes = StaticAbilityMode.setValueOf(params.get("Mode"));
+
+                if (modes.contains(StaticAbilityMode.CantAttack) && matchStr.equals(params.get("ValidCard"))) {
+                    cantAttack = true;
+                }
+                if (modes.contains(StaticAbilityMode.CantBlock) && matchStr.equals(params.get("ValidCard"))) {
+                    cantBlock = true;
+                }
+                if (modes.contains(StaticAbilityMode.CantBlockBy) && matchStr.equals(params.get("ValidBlocker"))) {
+                    cantBlock = true;
+                }
+                if (modes.contains(StaticAbilityMode.CantBeActivated) && matchStr.equals(params.get("ValidCard"))) {
+                    cantActivate = true;
+                }
+            }
+
+            // TODO add more cases later
+            if (!cantAttack && !cantBlock && !cantActivate) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
+
+            if (cantBlock && duration == null && phase.isPlayerTurn(ai) && !phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
+
+            if (sa.usesTargeting()) {
+                final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
+
+                CardCollection list = new CardCollection(CardUtil.getValidCardsToTarget(sa));
+
+                list = ComputerUtil.filterAITgts(sa, ai, list, true);
+
+                if (list.isEmpty()) {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
+
+                List<Card> oppCreatures = CardLists.filterAsList(list, c -> {
+                    return c.isCreature() && c.getController().isOpponentOf(ai);
+                });
+
+                List<Card> oppWithAbilities = CardLists.filterAsList(list, c -> {
+                    return !c.isCreature() && c.getController().isOpponentOf(ai) && c.getSpellAbilities().anyMatch(SpellAbility::isActivatedAbility);
+                });
+
+                if (cantAttack || cantBlock) {
+                    if (oppCreatures.isEmpty()) {
+                        if (!cantActivate || oppWithAbilities.isEmpty()) {
+                            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                        }
+                    }
+                }
+
+                while (sa.canAddMoreTarget()) {
+                    Card choice = null;
+                    if (cantAttack && cantBlock && !oppCreatures.isEmpty()) {
+                        Card primeTarget = ComputerUtil.getKilledByTargeting(sa, oppCreatures);
+                        if (primeTarget != null) {
+                            choice = primeTarget;
+                        } else if (phase.isPlayerTurn(ai) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                            // Tap creatures possible blockers before combat during AI's turn.
+                            List<Card> attackers;
+                            if (phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+                                //Combat has already started
+                                attackers = game.getCombat().getAttackers();
+                            } else {
+                                attackers = CardLists.filter(ai.getCreaturesInPlay(), c -> CombatUtil.canAttack(c, opp));
+                            }
+                            List<Card> creatureList = CardLists.filter(list, CardPredicates.possibleBlockerForAtLeastOne(attackers));
+
+                            // TODO check if own creature would be forced to attack and we want to keep it alive
+
+                            if (!attackers.isEmpty() && !creatureList.isEmpty()) {
+                                choice = ComputerUtilCard.getBestCreatureAI(creatureList);
+                            } else if (sa.isTrigger() || ComputerUtil.castSpellInMain1(ai, sa)) {
+                                choice = ComputerUtilCard.getMostExpensivePermanentAI(list);
+                            }
+                        }
+                    } // TODO add logic to tap non creatures with activated abilities if cantActivate is true
+
+                    if (choice == null) { // can't find anything left
+                        if (!sa.isMinTargetChosen() || sa.isZeroTargets()) {
+                            sa.resetTargets();
+                            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                        } else {
+                            if (!ComputerUtil.shouldCastLessThanMax(ai, sa.getHostCard())) {
+                                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                            }
+                            break;
+                        }
+                    }
+
+                    list.remove(choice);
+                    oppCreatures.remove(choice);
+                    sa.getTargets().add(choice);
+                }
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
+
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         } else { //no AILogic
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }

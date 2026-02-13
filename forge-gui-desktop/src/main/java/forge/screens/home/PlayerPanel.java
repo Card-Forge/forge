@@ -277,6 +277,10 @@ public class PlayerPanel extends FPanel {
                     return;
                 }
                 setType(type);
+                if (type == LobbySlotType.AI && getPlayerName().isEmpty()) {
+                    final String newName = NameGenerator.getRandomName("Any", "Any", lobby.getPlayerNames());
+                    setPlayerName(newName);
+                }
                 lobby.firePlayerChangeListener(index);
                 avatarLabel.requestFocusInWindow();
                 lobby.updateVanguardList(index);

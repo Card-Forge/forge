@@ -12,7 +12,6 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardCopyService;
 import forge.game.card.CounterEnumType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -77,7 +76,7 @@ public class EarthbendEffect extends SpellAbilityEffect {
         final Game game = source.getGame();
         String trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ " + zone + " | Destination$ Battlefield | Tapped$ True | GainControl$ You";
 
-        final Trigger trig = TriggerHandler.parseTrigger(sbTrig, CardCopyService.getLKICopy(source), sa.isIntrinsic());
+        final Trigger trig = TriggerHandler.parseTrigger(sbTrig, source, sa.isIntrinsic());
         final SpellAbility newSa = AbilityFactory.getAbility(trigSA, sa.getHostCard());
         newSa.setIntrinsic(sa.isIntrinsic());
         trig.addRemembered(c);
