@@ -26,13 +26,6 @@ public class CloneAi extends SpellAbilityAi {
 
         boolean useAbility = true;
 
-//        if (card.getController().isComputer()) {
-//            final List<Card> creatures = AllZoneUtil.getCreaturesInPlay();
-//            if (!creatures.isEmpty()) {
-//                cardToCopy = CardFactoryUtil.getBestCreatureAI(creatures);
-//            }
-//        }
-
         // TODO - add some kind of check to answer
         // "Am I going to attack with this?"
         // TODO - add some kind of check for during human turn to answer
@@ -40,7 +33,10 @@ public class CloneAi extends SpellAbilityAi {
 
         PhaseHandler phase = game.getPhaseHandler();
 
-        if (!sa.usesTargeting()) {
+        if (sa.usesTargeting()) {
+            sa.resetTargets();
+            useAbility &= cloneTgtAI(sa, false);
+        } else {
             final List<Card> defined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
 
             boolean bFlag = false;
@@ -66,9 +62,6 @@ public class CloneAi extends SpellAbilityAi {
             if (!bFlag) { // All of the defined stuff is cloned, not very useful
                 return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
             }
-        } else {
-            sa.resetTargets();
-            useAbility &= cloneTgtAI(sa);
         }
 
         return useAbility ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
@@ -81,7 +74,7 @@ public class CloneAi extends SpellAbilityAi {
         boolean chance = true;
 
         if (sa.usesTargeting()) {
-            chance = cloneTgtAI(sa);
+            chance = cloneTgtAI(sa, false);
         }
 
         return chance ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
@@ -94,7 +87,7 @@ public class CloneAi extends SpellAbilityAi {
         boolean chance = true;
 
         if (sa.usesTargeting()) {
-            chance = cloneTgtAI(sa);
+            chance = cloneTgtAI(sa, mandatory);
         } else {
             if (sa.isReplacementAbility() && host.isCloned()) {
                 // prevent StackOverflow from infinite loop copying another ETB RE
@@ -131,15 +124,15 @@ public class CloneAi extends SpellAbilityAi {
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private boolean cloneTgtAI(final SpellAbility sa) {
+    private boolean cloneTgtAI(final SpellAbility sa, boolean mandatory) {
         // Specific logic for cards
-        if ("CloneAttacker".equals(sa.getParam("AILogic"))) {
-            CardCollection valid = CardLists.getValidCards(sa.getHostCard().getController().getCardsIn(ZoneType.Battlefield), sa.getParam("ValidTgts"), sa.getHostCard().getController(), sa.getHostCard(), sa);
-            sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(valid));
-            return true;
-        } else if ("CloneBestCreature".equals(sa.getParam("AILogic"))) {
-            CardCollection valid = CardLists.getValidCards(sa.getHostCard().getController().getGame().getCardsIn(ZoneType.Battlefield), sa.getParam("ValidTgts"), sa.getHostCard().getController(), sa.getHostCard(), sa);
-            sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(valid));
+        List<Card> targets = CardUtil.getValidCardsToTarget(sa);
+        if (mandatory && targets.isEmpty()) {
+            return false;
+        }
+
+        if (mandatory || "CloneBestCreature".equals(sa.getParam("AILogic"))) {
+            sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(targets));
             return true;
         }
 

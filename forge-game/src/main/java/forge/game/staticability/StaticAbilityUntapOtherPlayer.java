@@ -22,8 +22,8 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class StaticAbilityUntapOtherPlayer {
-    public static boolean untap(final Card card, final Player player) {
 
+    public static boolean untap(final Card card, final Player player) {
         for (final Card ca : card.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.UntapOtherPlayer)) {
