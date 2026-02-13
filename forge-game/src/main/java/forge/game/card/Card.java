@@ -2083,10 +2083,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
     }
 
-    public ManaCost getPerpetualAdjustedManaCost() {
-        return currentState.getPerpetualAdjustedManaCost();
-    }
-
     public void addChangedManaCost(ManaCost cost, boolean additional, long timestamp, long staticId) {
         changedCardManaCost.put(timestamp, staticId, new CardManaCost(cost, additional));
         updateManaCostForView();

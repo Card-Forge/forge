@@ -1403,7 +1403,7 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.OriginalManaCost, c.getManaCost());
         }
         void updateManaCost(Card c) {
-            set(TrackableProperty.ManaCost, c.getPerpetualAdjustedManaCost());
+            set(TrackableProperty.ManaCost, c.getCurrentState().getPerpetualAdjustedManaCost());
             set(TrackableProperty.OriginalManaCost, c.getManaCost());
         }
 

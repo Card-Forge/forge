@@ -19,11 +19,10 @@ package forge.game.card;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.card.*;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
+import forge.card.mana.ManaCostShard;
 import forge.game.CardTraitBase;
 import forge.game.ForgeScript;
 import forge.game.GameObject;
@@ -223,85 +222,50 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
      * effects for display.
      */
     public void calculatePerpetualAdjustedManaCost() {
-        final List<StaticAbility> raiseAbilities = Lists.newArrayList();
-        final List<StaticAbility> reduceAbilities = Lists.newArrayList();
-        // Separate abilities to apply them in proper order
-        if (getCard() == null || getCard().getGame() == null) {
+        // If the total amount reduced is more than the generic mana cost,
+        // keep track of the extra in case it could be applied to an X cost
+        if (getCard() == null || getCard().getGame() == null
+                || (manaCost.getGenericCost() == 0 && manaCost.getShardCount(ManaCostShard.X) == 0)) {
             return;
         }
-        ManaCost manaCost = getManaCost();
-        // I don't know why refetching the card data like in this next line is necessary but in some cases (e.g. when
-        // the cost reduction wasn't added when the card was in the current zone) the static abilities are missing.
-        for (final StaticAbility stAb : getCard().getGame().getCardState(getCard()).getStaticAbilities()) {
+
+        int genericCostAdjustment = 0;
+        for (final StaticAbility stAb : getStaticAbilities()) {
             // Only collect perpetual cost changes to this card (not cost changes that this card applies to other cards)
             if ("Card.Self".equals(stAb.getParam("ValidCard"))) {
+                int reduceOrRaise = 0;
                 if (stAb.checkMode(StaticAbilityMode.ReduceCost)) {
-                    reduceAbilities.add(stAb);
+                    reduceOrRaise = 1;
                 } else if (stAb.checkMode(StaticAbilityMode.RaiseCost)) {
-                    raiseAbilities.add(stAb);
+                    reduceOrRaise = -1;
+                }
+                if (reduceOrRaise != 0) {
+                    try {
+                        genericCostAdjustment += Integer.parseInt(stAb.getParamOrDefault("Amount", "1")) * reduceOrRaise;
+                    } catch (NumberFormatException e) {
+                        // We only care about adjustments with a specific numeric value
+                    }
                 }
             }
         }
-        int totalGenericCostAdjustment = 0;
-        for (final StaticAbility stAb : raiseAbilities) {
-            try {
-                int amount = Integer.parseInt(stAb.getParamOrDefault("Amount", "1"));
-                totalGenericCostAdjustment = totalGenericCostAdjustment + amount;
-            } catch (NumberFormatException e) {
-                // We only care about adjustments with a specific numeric value.
-                // Some cost adjustment abilities put non-numeric values here, such as affinity
-            }
+
+        if (genericCostAdjustment == 0) {
+            return;
         }
-        for (final StaticAbility stAb : reduceAbilities) {
-            try {
-                int amount = Integer.parseInt(stAb.getParamOrDefault("Amount", "1"));
-                totalGenericCostAdjustment = totalGenericCostAdjustment - amount;
-            } catch (NumberFormatException e) {
-                // We only care about adjustments with a specific numeric value.
-                // Some cost adjustment abilities put non-numeric values here, such as affinity
-            }
-        }
-        if (totalGenericCostAdjustment != 0) {
-            // This doesn't work on hybrid costs such as "Advice from the Fae"
-            int genericCost = manaCost.getGenericCost();
-            int genericCostAdjustment;
-            int remainingGenericCostAdjustment;
-            // If the total amount reduced is more than the generic mana cost, keep track of the
-            // extra in case it could be applied to an X cost.
-            if (genericCost + totalGenericCostAdjustment < 0) {
-                genericCostAdjustment = -genericCost;
-                remainingGenericCostAdjustment = totalGenericCostAdjustment + genericCost;
-            } else {
-                genericCostAdjustment = totalGenericCostAdjustment;
-                remainingGenericCostAdjustment = 0;
-            }
-            // If there is a cost adjustment to apply, update the mana cost to reflect that
-            String manaCostString = manaCost.getShortString();
-            boolean costChange = false;
-            if (genericCostAdjustment != 0) { // Replace the original generic mana cost with the adjusted value
-                manaCostString = manaCostString.replace("" + genericCost, "" + (genericCost + genericCostAdjustment));
-                costChange = true;
-            }
-            if (remainingGenericCostAdjustment != 0 && manaCostString.contains("X")) {
-                // If there is extra cost reduction beyond the numeric generic mana cost, save it to apply to X
-                // Store extra cost adjustment as a negative generic value for display
-                manaCostString = manaCostString + " " + remainingGenericCostAdjustment;
-                costChange = true;
-            }
-            if (costChange) {
-                manaCost = new ManaCost(new ManaCostParser(manaCostString));
-            }
-        }
-        setPerpetualAdjustedManaCost(manaCost);
+
+        // This doesn't work on hybrid generic costs
+        int newGeneric = manaCost.getGenericCost() - genericCostAdjustment;
+
+        // Replace the original generic mana cost with the adjusted value
+        perpetualAdjustedManaCost = new ManaCost(
+                (newGeneric != 0 ? newGeneric + " " : "") +
+                        manaCost.getShortString().replace("" + manaCost.getGenericCost(), "")
+        );
         view.updateManaCost(this);
     }
 
     public ManaCost getPerpetualAdjustedManaCost() {
         return perpetualAdjustedManaCost == null ? getManaCost() : perpetualAdjustedManaCost;
-    }
-
-    private void setPerpetualAdjustedManaCost(ManaCost manaCost) {
-        perpetualAdjustedManaCost = manaCost;
     }
 
     public final ColorSet getColor() {
