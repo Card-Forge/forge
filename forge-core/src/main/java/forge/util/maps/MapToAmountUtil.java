@@ -7,6 +7,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 
@@ -126,7 +127,7 @@ public final class MapToAmountUtil {
         return set;
     }
 
-    public static <T> List<Pair<T, Integer>> sort(final MapToAmount<T> map) {
+    public static <T> List<Pair<T, Integer>> sort(final Map<T, Integer> map) {
         final List<Pair<T, Integer>> entries = Lists.newArrayListWithCapacity(map.size());
         for (final Entry<T, Integer> entry : map.entrySet()) {
             entries.add(Pair.of(entry.getKey(), entry.getValue()));
