@@ -1,10 +1,8 @@
 package forge.player;
 
 import com.google.common.collect.Iterables;
-import forge.card.CardStateName;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
-import forge.game.GameActionUtil;
 import forge.game.GameEntityView;
 import forge.game.GameEntityViewMap;
 import forge.game.ability.AbilityKey;
@@ -14,10 +12,9 @@ import forge.game.cost.*;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.mana.ManaRefundService;
+import forge.game.player.PlaySpellAbility;
 import forge.game.player.Player;
-import forge.game.player.PlayerController;
 import forge.game.player.PlayerView;
-import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityManaConvert;
 import forge.game.zone.ZoneType;
@@ -43,98 +40,6 @@ public class HumanPlay {
 
     /**
      * <p>
-     * playSpellAbility.
-     * </p>
-     *
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     */
-    public final static boolean playSpellAbility(final PlayerControllerHuman controller, final Player p, SpellAbility sa) {
-        FThreads.assertExecutedByEdt(false);
-
-        // Should I be storing state here? It should be the same as last stored state though?
-
-        Card source = sa.getHostCard();
-        sa.setActivatingPlayer(p);
-
-        if (sa.isLandAbility()) {
-            if (sa.canPlay()) {
-                sa.resolve();
-            }
-            return true;
-        }
-
-        boolean castFaceDown = sa.isCastFaceDown();
-        boolean flippedToCast = sa.isSpell() && source.isFaceDown();
-
-        sa = chooseOptionalAdditionalCosts(p, sa);
-        if (sa == null) {
-            return false;
-        }
-
-        final CardStateName oldState = source.getCurrentStateName();
-        source.setSplitStateToPlayAbility(sa);
-
-        // extra play check
-        if (sa.isSpell() && !sa.canPlay()) {
-            // in case human won't pay optional cost
-            if (source.getCurrentStateName() != oldState) {
-                source.setState(oldState, true);
-            }
-            return false;
-        }
-
-        if (flippedToCast && !castFaceDown) {
-            source.forceTurnFaceUp();
-        }
-
-        final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa);
-        if (!req.playAbility(true, false, false)) {
-            if (!controller.getGame().EXPERIMENTAL_RESTORE_SNAPSHOT) {
-                Card rollback = p.getGame().getCardState(source);
-                if (castFaceDown) {
-                    rollback.setFaceDown(false);
-                    rollback.updateStateForView();
-                } else if (flippedToCast) {
-                    // need to get the changed card if able
-                    rollback.turnFaceDown(true);
-                    if (rollback.isInZone(ZoneType.Exile)) {
-                        rollback.addMayLookFaceDownExile(p);
-                    }
-                }
-            }
-
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * choose optional additional costs. For HUMAN only
-     * @param p
-     *
-     * @param original
-     *            the original sa
-     * @return an ArrayList<SpellAbility>.
-     */
-    static SpellAbility chooseOptionalAdditionalCosts(Player p, final SpellAbility original) {
-        PlayerController c = p.getController();
-
-        // choose alternative additional cost
-        final List<SpellAbility> abilities = GameActionUtil.getAdditionalCostSpell(original);
-
-        final SpellAbility choosen = c.getAbilityToPlay(original.getHostCard(), abilities);
-
-        List<OptionalCostValue> list = GameActionUtil.getOptionalCostValues(choosen);
-        if (!list.isEmpty()) {
-            list = c.chooseOptionalCosts(choosen, list);
-        }
-
-        return GameActionUtil.addOptionalCosts(choosen, list);
-    }
-
-    /**
-     * <p>
      * playSpellAbilityForFree.
      * </p>
      *
@@ -147,7 +52,7 @@ public class HumanPlay {
 
         source.setSplitStateToPlayAbility(sa);
 
-        final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa);
+        final PlaySpellAbility req = new PlaySpellAbility(controller, sa);
         req.playAbility(mayChooseNewTargets, true, false);
     }
 
@@ -165,7 +70,7 @@ public class HumanPlay {
     public final static boolean playSpellAbilityNoStack(final PlayerControllerHuman controller, final Player player, final SpellAbility sa, boolean useOldTargets) {
         sa.setActivatingPlayer(player);
 
-        final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa);
+        final PlaySpellAbility req = new PlaySpellAbility(controller, sa);
         return req.playAbility(!useOldTargets, false, true);
     }
 

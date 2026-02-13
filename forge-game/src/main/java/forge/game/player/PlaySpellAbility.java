@@ -15,9 +15,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.player;
+package forge.game.player;
 
 import com.google.common.collect.Iterables;
+import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameActionUtil;
@@ -30,13 +31,16 @@ import forge.game.card.CardPlayOption;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
 import forge.game.mana.ManaPool;
-import forge.game.player.Player;
-import forge.game.player.PlayerController;
+import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityManaConvert;
 import forge.game.zone.Zone;
+import forge.game.zone.ZoneType;
 import forge.util.Localizer;
+import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
 
 /**
  * <p>
@@ -46,19 +50,111 @@ import org.apache.commons.lang3.StringUtils;
  * @author Forge
  * @version $Id: HumanPlaySpellAbility.java 24317 2014-01-17 08:32:39Z Max mtg $
  */
-public class HumanPlaySpellAbility {
-    private final PlayerControllerHuman controller;
+public class PlaySpellAbility {
+    private final PlayerController controller;
     private SpellAbility ability;
     private boolean needX = true;
 
-    public HumanPlaySpellAbility(final PlayerControllerHuman controller0, final SpellAbility ability0) {
-        controller = controller0;
-        ability = ability0;
+    public PlaySpellAbility(final PlayerController controller, final SpellAbility ability) {
+        this.controller = controller;
+        this.ability = ability;
+    }
+
+    /**
+     * <p>
+     * playSpellAbility.
+     * </p>
+     *
+     * @param sa
+     *            a {@link SpellAbility} object.
+     */
+    public static boolean playSpellAbility(final PlayerController controller, final Player p, SpellAbility sa) {
+        //FThreads.assertExecutedByEdt(false); //TODO: Find a new home for this.
+
+        // Should I be storing state here? It should be the same as last stored state though?
+
+        Card source = sa.getHostCard();
+        sa.setActivatingPlayer(p);
+
+        if (sa.isLandAbility()) {
+            if (sa.canPlay()) {
+                sa.resolve();
+            }
+            return true;
+        }
+
+        boolean castFaceDown = sa.isCastFaceDown();
+        boolean flippedToCast = sa.isSpell() && source.isFaceDown();
+
+        sa = chooseOptionalAdditionalCosts(p, sa);
+        if (sa == null) {
+            return false;
+        }
+
+        final CardStateName oldState = source.getCurrentStateName();
+        source.setSplitStateToPlayAbility(sa);
+
+        // extra play check
+        if (sa.isSpell() && !sa.canPlay()) {
+            // in case human won't pay optional cost
+            if (source.getCurrentStateName() != oldState) {
+                source.setState(oldState, true);
+            }
+            return false;
+        }
+
+        if (flippedToCast && !castFaceDown) {
+            source.forceTurnFaceUp();
+        }
+
+        final PlaySpellAbility req = new PlaySpellAbility(controller, sa);
+        if (!req.playAbility(true, false, false)) {
+            if (!controller.getGame().EXPERIMENTAL_RESTORE_SNAPSHOT) {
+                Card rollback = p.getGame().getCardState(source);
+                if (castFaceDown) {
+                    rollback.setFaceDown(false);
+                    rollback.updateStateForView();
+                } else if (flippedToCast) {
+                    // need to get the changed card if able
+                    rollback.turnFaceDown(true);
+                    if (rollback.isInZone(ZoneType.Exile)) {
+                        rollback.addMayLookFaceDownExile(p);
+                    }
+                }
+            }
+
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * choose optional additional costs. For HUMAN only
+     * @param p
+     *
+     * @param original
+     *            the original sa
+     * @return an ArrayList<SpellAbility>.
+     */
+    static SpellAbility chooseOptionalAdditionalCosts(Player p, final SpellAbility original) {
+        PlayerController c = p.getController();
+
+        // choose alternative additional cost
+        final List<SpellAbility> abilities = GameActionUtil.getAdditionalCostSpell(original);
+
+        final SpellAbility choosen = c.getAbilityToPlay(original.getHostCard(), abilities);
+
+        List<OptionalCostValue> list = GameActionUtil.getOptionalCostValues(choosen);
+        if (!list.isEmpty()) {
+            list = c.chooseOptionalCosts(choosen, list);
+        }
+
+        return GameActionUtil.addOptionalCosts(choosen, list);
     }
 
     public final boolean playAbility(final boolean mayChooseTargets, final boolean isFree, final boolean skipStack) {
-        final Player human = ability.getActivatingPlayer();
-        final Game game = human.getGame();
+        final Player player = ability.getActivatingPlayer();
+        final Game game = player.getGame();
         boolean refreeze = game.getStack().isFrozen();
 
         if (!skipStack) {
@@ -89,7 +185,7 @@ public class HumanPlaySpellAbility {
         // used to rollback
         Zone fromZone = null;
         int zonePosition = 0;
-        final ManaPool manapool = human.getManaPool();
+        final ManaPool manapool = player.getManaPool();
 
         final Card c = ability.getHostCard();
         final CardPlayOption option = c.mayPlay(ability.getMayPlay());
@@ -133,7 +229,7 @@ public class HumanPlaySpellAbility {
                 manaColorConversion = true;
             }
 
-            if (StaticAbilityManaConvert.manaConvert(payment, human, ability.getHostCard(), ability)) {
+            if (StaticAbilityManaConvert.manaConvert(payment, player, ability.getHostCard(), ability)) {
                 manaColorConversion = true;
             }
 
@@ -152,14 +248,14 @@ public class HumanPlaySpellAbility {
         // because of Selective Snare do announceType first
 
         boolean preCostRequisites = announceType() && announceValuesLikeX() &&
-            ability.checkRestrictions(human) &&
+            ability.checkRestrictions(player) &&
             (!mayChooseTargets || ability.setupTargets()) &&
-            ability.canCastTiming(human) &&
+            ability.canCastTiming(player) &&
             ability.isLegalAfterStack();
 
         // Freeze the stack just before we start paying costs but after the ability is fully set up
         game.getStack().freezeStack(ability);
-        final boolean prerequisitesMet = preCostRequisites && (isFree || payment.payCost(new HumanCostDecision(controller, human, ability, ability.isTrigger())));
+        final boolean prerequisitesMet = preCostRequisites && (isFree || payment.payCost(controller.getCostDecisionMaker(player, ability, ability.isTrigger())));
 
         game.clearTopLibsCast(ability);
 
@@ -193,7 +289,7 @@ public class HumanPlaySpellAbility {
 
         if (isFree || payment.isFullyPaid()) {
             //track when planeswalker ultimates are activated
-            human.getAchievementTracker().onSpellAbilityPlayed(ability);
+            player.getAchievementTracker().onSpellAbilityPlayed(ability);
 
             if (skipStack) {
                 AbilityUtils.resolve(ability);

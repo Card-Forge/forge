@@ -27,6 +27,7 @@ import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
+import forge.game.cost.CostDecisionMakerBase;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.keyword.KeywordInterface;
@@ -686,6 +687,11 @@ public class PlayerControllerForTests extends PlayerController {
         // TODO Auto-generated method stub
         ManaCostBeingPaid cost = new ManaCostBeingPaid(toPay);
         return ComputerUtilMana.payManaCost(cost, sa, player, effect);
+    }
+
+    @Override
+    public CostDecisionMakerBase getCostDecisionMaker(Player player, SpellAbility ability, boolean effect) {
+        return new AiCostDecision(player, ability, effect);
     }
 
     @Override

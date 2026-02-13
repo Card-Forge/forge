@@ -22,6 +22,7 @@ import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
+import forge.game.cost.CostDecisionMakerBase;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.event.GameEventPlayerStatsChanged;
@@ -1585,7 +1586,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public boolean playChosenSpellAbility(final SpellAbility chosenSa) {
-        return HumanPlay.playSpellAbility(this, player, chosenSa);
+        return PlaySpellAbility.playSpellAbility(this, player, chosenSa);
     }
 
     @Override
@@ -2075,7 +2076,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         for (int i = orderedSAs.size() - 1; i >= 0; i--) {
             final SpellAbility next = orderedSAs.get(i);
             if (next.isTrigger() && !next.isCopied()) {
-                HumanPlay.playSpellAbility(this, player, next);
+                PlaySpellAbility.playSpellAbility(this, player, next);
             } else {
                 if (next.isCopied()) {
                     if (next.isSpell()) {
@@ -2103,7 +2104,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public boolean playSaFromPlayEffect(final SpellAbility tgtSA) {
-        return HumanPlay.playSpellAbility(this, player, tgtSA);
+        return PlaySpellAbility.playSpellAbility(this, player, tgtSA);
     }
 
     @Override
@@ -2308,6 +2309,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public boolean payManaCost(final ManaCost toPay, final CostPartMana costPartMana, final SpellAbility sa,
                                final String prompt, ManaConversionMatrix matrix, final boolean effect) {
         return HumanPlay.payManaCost(this, toPay, costPartMana, sa, player, prompt, matrix, effect);
+    }
+
+    @Override
+    public CostDecisionMakerBase getCostDecisionMaker(Player player, SpellAbility ability, boolean effect) {
+        return new HumanCostDecision(this, player, ability, effect);
     }
 
     @Override

@@ -1217,6 +1217,11 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public CostDecisionMakerBase getCostDecisionMaker(Player player, SpellAbility ability, boolean effect) {
+        return new AiCostDecision(player, ability, effect);
+    }
+
+    @Override
     public boolean payCombatCost(Card c, Cost cost, SpellAbility sa, String prompt) {
         if (ComputerUtil.playNoStack(c.getController(), sa, getGame(), true)) {
             return true;
