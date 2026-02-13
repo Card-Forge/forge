@@ -509,8 +509,11 @@ public abstract class Trigger extends TriggerReplacementBase {
         this.id = id;
     }
 
-    public void addRemembered(Object o) {
+    public <T> void addRemembered(T o) {
         this.triggerRemembered.add(o);
+    }
+    public <T> void addRemembered(Collection<T> o) {
+        this.triggerRemembered.addAll(o);
     }
 
     @Override

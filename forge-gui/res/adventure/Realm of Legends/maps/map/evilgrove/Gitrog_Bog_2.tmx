@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="21" nextobjectid="221">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Rampant Frogantua&quot;, &quot;Haunted Cloak&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="22017" source="../../../../common/maps/tileset/FarmFood.tsx"/>
+ <tileset firstgid="26113" source="../../../../common/maps/tileset/dungeon/animatedtiles.tsx"/>
+ <tileset firstgid="42497" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="17" name="Collision" width="30" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztksENwjAMRQO3XLggpK7AnQk4ZCsGYAnG6Twdoaogwgq25bQJUdT/JEtpHf/vOHEOAAD2wdS6AQAAAAAAAMAuCffWHeTRqt/e5gT6wD/qab+8nHtW9O2V4N8R5xaE+WlzpRwuzh0/IWlx2pqvFNw5gqLFcTv91tIYz3o+rbdC92r1Um7tea2+lvocUt9cn9K+y71dh+865v/hy625t7XV17p/i1+qo/2j3yU8ow7Vs0YNSvrOwZIqkA==
+  </data>
+ </layer>
+ <layer id="13" name="Background" width="30" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztmEtOwzAQhq12EVi3qQAJKAuOAWyq3gIQgiOxa0WbM7QSKxBsKnEbTgBklIwymNgznrwW5Jd+xbXj+fyq48SYXl1pN+ItrctpFYdxpXE1XJ+a4ralUO5rVKRfIvd9IVzQW+S3La6c03le54ThTknsU0G7JFzw9R7P/jSZJeMh5SL7xsNvimvzbVPucVTka1TGdRm5wLpV8jRcMO4fNK3Z00K59+NuuNw4tLn39erVq9d/0HpjTLIprqhheg67G5fXWcbl+SGabo052xZXKhe3TFWeC3jW03DtulXUFNeeUxSOWVNcnFNXHSkXzwBScWuhS27IWPfcMC63npN8v3o4bKc9tBw8OJLF+yLtr7K/uM7Lkpiha1/K5WJC+WxSH5e+Q3DcKv11MbXcx7m/Xlm5hltWx5WPZU1wfe+hHFeiut5DtQod76rc+T7PxXJfO5PAMx5wwd/pvA3izDSNBtHf9j1DJRe+G2J6ERffMWjfQJD/lN8PV9w7tP2FOOvcKw8X8oD3PvvLxVg4d1Lu80FmysVvN2DgoLG/yK6TSzm22+TiGIOX1rq7mui5EPdj9Ds+NRWuI8qqwt15uPS5Vxf3Ih2nS8v2f9g3rlpu03V/AJoWA9I=
+  </data>
+ </layer>
+ <layer id="18" name="Foreground" width="30" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztmN9qE0EUxkclrAVbSDRpbhKKTVJ7reSmphX0ouo7COKTCP5D0EtvrI17a30FrVqsLyFCvcidtG+g8zE57MnJmf2XqeSiH3ywu5k5v50zZ3Z3shIZM2gYc6FuzPtT9DnrLcsZVZyPrFdOmS2Z8Kdokr1pfb4e1pKJ+8AYiX01mvZ2ZTaPKtNM3AflF+x2NNnmSzSbj40zjxVb1o0lZ2LPyvFxD67rXHhYkHvbjuHBRecsLr82CxdM6M2CM3RHmZeyXJ++RgmTvD9uH4I7qujco/H1k7Gh36wt1VIZLtV02piJuy9yE4JLfcl5udxl8qz1hSVXzuutvnMe7sMrSZ1ozxFuzt3qJxxprN3PkYsNp3FJYNMald7sJ+0G9viXx2iHmJwLSS6ZxK9p17l2FxLLdZaX6+Nxafci70HGkVx6B5LxvOb3X9Z4//C4eBfx+ZWKA3Fjz7fA/+aCNY/cgfjeyTPnci5pPotwtTnJyoFvLovM7xn3jBuaq60HWhNYS5DG3fH00/Y/GjdOiZ3221DJx+NlPQ+Sm5XPolxf/jk3zzwW5VL+NO6wns3tRknOQnK1ugWLc4uOl9dLEa5khp7fLK42vxp73rgyPnH5Oe3H+bsXouPdgOOVzB+XndHnUsuYReulVlLPWmz03bB9f7LnFITz3RSuZJI/WN6e9ceWO/dx0+rN918RBObzqjEvx35RdX2228bctb7XLs9FnjQ2+oDZqRlzbezVmmPzsSMnNxvFub51jPM1xiSv1/Ix07hcZbi+Wk3jfms6rzXLc3055OOS145tfk6s/zSSvRHnDnNwDwVbchBT7gFf2Xp6bd3xjBfcrmU8qybMp/a4V3PtqY5Rl/KZAX1X6pzvo2kfyrn0nERssA/HBnOxlZj2D/SdIxWL68SXe1D+zpd7Eoq/15q2jO/jcvH/ZTlXcxyQC1FcH5e0w+L8Zfv4jYYe953MszhPG6P2HU3qdpwfsXvA8f2ec5bKcg86zpKbV2W5ZVghuevN6eMny3rbMty3nvpcbU4e5x3/rOPlApMckivz12s6y/PQ3JCaF+4/W1tDlQ==
+  </data>
+ </layer>
+ <layer id="19" name="Above" width="30" height="60">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztlE1KxDAYhj8cdFYuqqhM8Rf0BB5CDyBqF650J7hxLwiCXsCN+DNzhpFZil7FpYPrQWfjF2JIbNM030yaKTYPvEwJmTx9mzYAfjltALxPT8b50vy/zrMGD3O+eeyp8urZy3wivr2283zfm+oO3vKdPr1XMzKuvWLdOtJeqIb3cqlcn1h/Un1V2D2oqaN33P22+X+V+urI6zDqs6l63+D14/0q0XnfBXjoZuc94tiTZlxlJ5GhepefAVYw+xHAAeYw4vNWcWwN89ED6Pf0a10nMoyBpVdwp/Q6+v29nSvukO67a+it29MYe+1Ff8e25/X/v5iV1+m+NwRvG7t2CvYxD2pflXXsuoH5xuutJg/bJ5v3yrZv3nfD9ncA0ski3isTtn3zvHHB+nmofftA75v+hhhJlJ2XhtLXBeIco+yva05aPCZsvOebNO9UzDOu14TpzPSJenYV0SF0HtJvxYnXJVQv5VnWic9F/87jVjYUxJlBPTtcYOsctVsgEAhUmR8DyZyH
+  </data>
+ </layer>
+ <layer id="20" name="AboveSprites" width="30" height="60">
+  <data encoding="base64" compression="zlib">
+   eJzt1LEJACAQA0CncAEXsXBxN7O1EwUV8a4NPCnChwAAAADALqncbjDntb78ow62OcpX5bjnLvT8XuC0BlnLA5Y=
+  </data>
+ </layer>
+ <objectgroup id="12" name="Objects" opacity="0.9">
+  <object id="166" template="../../../../common/maps/obj/manashards.tx" x="308.162" y="872.554"/>
+  <object id="167" template="../../../../common/maps/obj/booster.tx" x="332.766" y="832.094">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;SOI&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;SOI&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;SOI&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="168" template="../../../../common/maps/obj/gate.tx" gid="3221229597" x="287.943" y="843.397" width="14.0077" height="18.6486" rotation="90.4687" visible="1">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;This gate has a single magical lock afixed to it.&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Leave&quot; },
+    {      
+        &quot;name&quot;:&quot;Unlock with Gitrog's Key&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Gitrog's Key&quot;}],    
+        &quot;text&quot;:&quot;The gate is unlocked.&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Gitrog's Key&quot;}]} ]
+    }
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="170" template="../../../../common/maps/obj/door_down.tx" x="112.057" y="895.107" width="34.2466" height="35.0741" rotation="0.284412">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/evilgrove/Gitrog_Bog_1.tmx"/>
+   </properties>
+  </object>
+  <object id="182" template="../../../../common/maps/obj/enemy.tx" x="248.038" y="148.747" width="16" height="17.6724">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;The great frog-horror lets out a final, echoing croak as it staggers back, its corpse plunging into the pool of horrid muck behind it. A great splash of filth erupts from the pool, but you quickly cast a simple spell and deflect it, leaving you clean and fresh to celebrate your victory.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Thalia and The Gitrog Monster|MOM&quot;, &quot;Sinister Concoction|SOI&quot;, &quot;Haunted Cloak|SOI&quot;, &quot;Foul orchard|SOI&quot;, &quot;drownyard temple|SOI&quot;, &quot;Crawling sensation|SOI&quot;]
+}</property>
+    <property name="enemy" value="Gitrog"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Gitrog's Key&quot;
+  }
+]
+</property>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="189" template="../../../../common/maps/obj/enemy.tx" x="317.5" y="720.331" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Uurg"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="191" template="../../../../common/maps/obj/enemy.tx" x="151" y="578.997" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Ishkanah"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="192" template="../../../../common/maps/obj/enemy.tx" x="142" y="790.497" width="16" height="21.0057">
+   <properties>
+    <property name="enemy" value="Frog"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="195" template="../../../../common/maps/obj/manashards.tx" x="158.333" y="486.5"/>
+  <object id="205" template="../../../../common/maps/obj/enemy.tx" x="243" y="517.997" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Grolnok"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="211" template="../../../../common/maps/obj/booster.tx" x="332" y="854">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;EMN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;EMN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;EMN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="212" template="../../../../common/maps/obj/booster.tx" x="331" y="872">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;MID&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;YMID&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;YMID&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="213" template="../../../../common/maps/obj/manashards.tx" x="309" y="836.5"/>
+  <object id="214" template="../../../../common/maps/obj/gold.tx" x="311.136" y="849.682"/>
+  <object id="215" template="../../../../common/maps/obj/gold.tx" x="368.5" y="482.5"/>
+  <object id="216" template="../../../../common/maps/obj/gold.tx" x="368.5" y="511"/>
+  <object id="217" template="../../../../common/maps/obj/manashards.tx" x="128.333" y="498.833"/>
+  <object id="218" template="../../../../common/maps/obj/dialog.tx" x="233.917" y="235.25" width="47.8333" height="17.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;After your long trek through the bog and this sprawling basement beneath it, you come upon a vast, nauseating lake of slime. Rising above it, there is a massive, deformed frog creature - the legendary Gitrog Monster itself. It opens it mouth and lets out a deafening cry.
+
+'RRRRRRRRIIIIIIIIBBBBBBBBBBBBBBBIIIIIIIIIIIIITTTTTTTT!!!!!!!!!!!!!!&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="219" template="../../../../common/maps/obj/gate.tx" x="223.795" y="827.227" width="17.5" height="19">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;This is no ordinary gate. It has been sealed by three magical locks.&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Leave&quot; },
+    {      
+        &quot;name&quot;:&quot;Unlock with the three keys&quot;,     
+        &quot;condition&quot;:[
+                    {&quot;item&quot;: &quot;Hylda's Key&quot; },
+		    {&quot;item&quot;: &quot;Agatha's Key&quot; },
+		    {&quot;item&quot;: &quot;Eriette's Key&quot; }
+                    ],    
+        &quot;text&quot;:&quot;The gate is unlocked.&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, 
+&quot;action&quot;:[ 
+{&quot;deleteMapObject&quot;:-1},
+{&quot;deleteMapObject&quot;:220},
+{&quot;removeItem&quot;: &quot;Hylda's Key&quot; },
+{&quot;removeItem&quot;: &quot;Agatha's Key&quot; },
+{&quot;removeItem&quot;: &quot;Eriette's Key&quot; }
+]} ]
+    }
+    ]
+}]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

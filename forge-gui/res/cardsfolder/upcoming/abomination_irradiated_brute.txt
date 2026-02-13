@@ -1,0 +1,10 @@
+Name:Abomination, Irradiated Brute
+ManaCost:2 G G
+Types:Legendary Creature Gamma Villain
+PT:4/4
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Gamma.YouCtrl,Villain.YouCtrl | ValidTarget$ Player | TriggerZones$ Battlefield | CombatDamage$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever a Gamma or Villain you control deals combat damage to a player, put that many +1/+1 counters on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
+SVar:X:TriggerCount$DamageAmount
+DeckHints:Type$Gamma|Villain
+Oracle:Trample\nWhenever a Gamma or Villain you control deals combat damage to a player, put that many +1/+1 counters on Abomination.

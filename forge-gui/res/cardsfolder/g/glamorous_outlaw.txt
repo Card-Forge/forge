@@ -5,7 +5,7 @@ PT:4/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters, it deals 2 damage to each opponent and you scry 2.
 SVar:TrigDealDamage:DB$ DealDamage | NumDmg$ 2 | Defined$ Opponent | SubAbility$ DBScry
 SVar:DBScry:DB$ Scry | ScryNum$ 2
-A:AB$ Effect | Cost$ 2 ExileFromHand<1/CARDNAME> | ActivationZone$ Hand | ValidTgts$ Land | RememberObjects$ Targeted,Self | StaticAbilities$ Land,MayPlay | Triggers$ Cast | ImprintCards$ Self | Duration$ Permanent | ForgetOnMoved$ Exile | SpellDescription$ Target land gains "{T}: Add {U}, {B}, or {R}" until CARDNAME is cast from exile. You may cast CARDNAME for as long as it remains exiled.
+A:AB$ Effect | Cost$ 2 ExileFromHand<1/CARDNAME> | ActivationZone$ Hand | ValidTgts$ Land | RememberObjects$ Targeted & Self | StaticAbilities$ Land,MayPlay | Triggers$ Cast | ImprintCards$ Self | Duration$ Permanent | ForgetOnMoved$ Exile | SpellDescription$ Target land gains "{T}: Add {U}, {B}, or {R}" until CARDNAME is cast from exile. You may cast CARDNAME for as long as it remains exiled.
 SVar:Land:Mode$ Continuous | AffectedZone$ Battlefield | Affected$ Card.IsRemembered+IsNotImprinted | AddAbility$ Mana | Description$ Target land gains "{T}: Add {U}, {B}, or {R}" until EFFECTSOURCE is cast from exile. You may cast EFFECTSOURCE for as long as it remains exiled.
 SVar:Mana:AB$ Mana | Cost$ T | Produced$ Combo U B R | Amount$ 1 | SpellDescription$ Add {U}, {B}, or {R}.
 SVar:MayPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsImprinted+IsRemembered | AffectedZone$ Exile | Secondary$ True | Description$ You may cast EFFECTSOURCE for as long as it remains exiled.

@@ -95,8 +95,8 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 //        pnlContent.add(btnDownloadSetPics, constraintsBTN);
 //        pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadSetPics")), constraintsLBL);
 //
-//        pnlContent.add(btnDownloadQuestImages, constraintsBTN);
-//        pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadQuestImages")), constraintsLBL);
+        pnlContent.add(btnDownloadQuestImages, constraintsBTN);
+        pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadQuestImages")), constraintsLBL);
 //
 //        pnlContent.add(btnDownloadAchievementImages, constraintsBTN);
 //        pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadAchievementImages")), constraintsLBL);

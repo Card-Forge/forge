@@ -4,7 +4,7 @@ Types:Enchantment
 R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.withoutFlying | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Creatures without flying don't untap during their controllers' untap steps.
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ DBCleanup | TriggerDescription$ At the beginning of each player's upkeep, that player may choose any number of tapped creatures without flying they control and pay {2} for each creature chosen this way. If the player does, untap those creatures.
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | SubAbility$ TrigChoose
-SVar:TrigChoose:DB$ ChooseCard | Defined$ TriggeredPlayer | Amount$ X | Choices$ Creature.tapped+withoutFlying | TargetControls$ True | ChoiceTitle$ Choose any number of tapped nongreen creatures you control | ChoiceZone$ Battlefield | SubAbility$ DBUntap
+SVar:TrigChoose:DB$ ChooseCard | Defined$ TriggeredPlayer | Amount$ X | Choices$ Creature.tapped+withoutFlying | TargetControls$ True | ChoiceTitle$ Choose any number of tapped creatures without flying you control | ChoiceZone$ Battlefield | SubAbility$ DBUntap
 SVar:DBUntap:DB$ RepeatEach | DefinedCards$ ChosenCard | RepeatSubAbility$ UntapEach
 SVar:UntapEach:DB$ Untap | Defined$ Remembered | UnlessCost$ 2 | UnlessPayer$ RememberedController | UnlessSwitched$ True | ShowCurrentCard$ Remembered
 SVar:X:Count$Valid Creature.tapped+withoutFlying+ActivePlayerCtrl

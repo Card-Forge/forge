@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="123">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Xander's Lounge&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="22017" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="7" name="SubBackGround" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBj8oIkbP5+e7hgIu4eTf9HNxBa3yJia7sBlLzY3YXMHNQA+v2Oze7jZS0x8U8teQhibG8mxgxz1A1WWjALKASjejPkH2hWUAQDPsyHc
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxr4mZgaBrkWJoHlS/LQ7mZIECqnqFsLzmYFvbu4oFgfHbs5kGNc3Q9tPbbI0YEBqkjJ87IDVOYvaJxDAxicdSzF2QmMfZS27+7ifAvTB017cWFkQGyGDlmUZIuaZGmRzF9sDH/wNktw4PAlJgDANnjE4A=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy91F0KwjAMB/C+Sjf25FO3Q4i30bM4wZPoLebX3WyYYVnoR1Kqfwgd1fZnU9nUGDP9oXpWkjXH1phHE69DW8/Fz8F8+vG2McZ9R153ga05L5oYR555crbUBZMn5eZsiUt7C+H3GZtL2RJ3CNxjLNCDi12XKzwvdXOhva/poj1E7vZX7q6bx5QL36nlYnBPyXnpHOxz3erct6+zXfbR/J9Pft2r8Lx9wJYEzdC+mvckt2mveX9TpvY9ye2YmzO1LrVHO7v7bnFhbhSYJS5fQ6P9/bQ+n7LsnQ==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzNUrtuwkAQXOognYOwSQlUcaT8Bl/hR0sfCWoMIgIhBSIgKaFLmR+A/EvgP2DMgnwGA2frCo80Wt3odufmtET5xn+B648ZUdZ1o+gQCY95Dlkvunp9R47iPc2+qqhr+G+BjMYxZ09E+iMylVzWyqgmaLnseboncDYyZv+A5/joWzeIWjbR7zPRBPM+XdamqDNwDrZt1g69OI8z+lawK09g8BD5voFf0L491maoc4912deEZiXsoAoWA6LlIJ43nF/x8R6fNRPV8uO+4Tvl3rSoDolqw0tflbxyb+q86FtKvn26nbdPka/cmxUd7Og7GJzxmtYV92eqYIUM6xT8M/T4nrDBX27t23q4U7qxC2e/qOs60XhN1poJep6xBxSgWj0=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="69" template="../../../../common/maps/obj/enemy.tx" x="127.367" y="80.9333" width="16.6667" height="16">
+   <properties>
+    <property name="enemy" value="Anhelo"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/enemy.tx" x="207.984" y="116.131">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Maestros Initiate|SNC&quot;, &quot;Mestros Ascendancy|SNC&quot;]}"/>
+    <property name="enemy" value="Xander"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/enemy.tx" x="286.784" y="80.4097">
+   <properties>
+    <property name="enemy" value="Ob Nixilis"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="105" template="../../../../common/maps/obj/entry_up.tx" x="178.53" y="262.394" width="59.3333" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="106" template="../../../../common/maps/obj/enemy.tx" x="295" y="185.667">
+   <properties>
+    <property name="enemy" value="Cormela"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="107" template="../../../../common/maps/obj/enemy.tx" x="119.667" y="185">
+   <properties>
+    <property name="enemy" value="Evelyn"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="108" template="../../obj/treasure.tx" x="194.333" y="52.6666">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;SNC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;blue&quot;, &quot;black&quot;, &quot;red&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;SNC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;blue&quot;, &quot;black&quot;, &quot;red&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;SNC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;blue&quot;, &quot;black&quot;, &quot;red&quot; ],
+    &quot;colorType&quot;: &quot;multicolor&quot;,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="109" template="../../../../common/maps/obj/scroll.tx" x="207" y="74">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Xander's Lounge&quot;, &quot;editions&quot;: [ &quot;snc&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="110" template="../../../../common/maps/obj/scroll.tx" x="249" y="74">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;crumbling necropolis&quot;, &quot;editions&quot;: [ &quot;ncc&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="111" name="switch" type="dialog" gid="4426" x="159.334" y="37" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    &quot;text&quot;:&quot;A big switch is embedded into the wall.&quot;, 
+    &quot;options&quot;:[ 
+	{ 
+		&quot;text&quot;:&quot;You hear some loud sounds from the center.&quot;,
+		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
+		&quot;name&quot;:&quot;Flip the switch&quot; 
+			&quot;options&quot;:[{
+			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:2}}],
+			&quot;action&quot;:[{&quot;deleteMapObject&quot;:114}, {&quot;deleteMapObject&quot;:119}],
+			&quot;name&quot;:&quot;Continue&quot; }]
+	},
+	{ &quot;name&quot;:&quot;Leave&quot; } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="112" name="switch" type="dialog" gid="4426" x="253" y="36.6666" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    &quot;text&quot;:&quot;A big switch is embedded into the wall.&quot;, 
+    &quot;options&quot;:[ 
+	{ 
+		&quot;text&quot;:&quot;You hear some loud sounds from the center.&quot;,
+		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
+		&quot;name&quot;:&quot;Flip the switch&quot; 
+			&quot;options&quot;:[{
+			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:2}}],
+			&quot;action&quot;:[{&quot;deleteMapObject&quot;:114}, {&quot;deleteMapObject&quot;:119}],
+			&quot;name&quot;:&quot;Continue&quot; }]
+	},
+	{ &quot;name&quot;:&quot;Leave&quot; } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="113" template="../../../../common/maps/obj/manashards.tx" x="110.334" y="136"/>
+  <object id="114" template="../../../../common/maps/obj/gate.tx" x="207.333" y="191">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;A gate is blocking the path. It looks like it is opened from elsewhere.&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Continue&quot; } 
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="115" template="../../../../common/maps/obj/dialog.tx" x="170.333" y="211.25" width="74" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A decadent lounge can be seen before you, soft jazz giving the place a smooth ambiance. Shadowed faces can be seen chatting in the distance, their eyes subtly turned towards you as you enter.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="116" template="../../../../common/maps/obj/dialog.tx" x="162" y="141.917" width="106" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A demonic vampire wearing a luxurious fur coat stands before you, a glass of glowing liquor in his hand.
+
+'How far the Maestros have fallen, that someone can just waltz into our headquarters and make such a mess. Well, you've come this far. Let's see if you can take down the big boss.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="117" template="../../../../common/maps/obj/gold.tx" x="191.667" y="73.6667"/>
+  <object id="118" template="../../../../common/maps/obj/gold.tx" x="223.333" y="73.3333"/>
+  <object id="120" template="../../obj/treasure.tx" x="219.333" y="54">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;KTK&quot;, &quot;TDM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;black&quot;, &quot;blue&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;KTK&quot;, &quot;TDM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;black&quot;, &quot;blue&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;KTK&quot;, &quot;TDM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;black&quot;, &quot;blue&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="121" template="../../../../common/maps/obj/gold.tx" x="304.667" y="128.667"/>
+  <object id="122" template="../../../../common/maps/obj/scroll.tx" x="164.667" y="71.3333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;maestros charm&quot;, &quot;editions&quot;: [ &quot;snc&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

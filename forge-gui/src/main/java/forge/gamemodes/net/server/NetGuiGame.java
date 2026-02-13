@@ -30,15 +30,37 @@ import java.util.Map;
 public class NetGuiGame extends AbstractGuiGame {
 
     private final GameProtocolSender sender;
-    public NetGuiGame(final IToClient client) {
+    private final int slotIndex;
+    private volatile boolean paused;
+
+    public NetGuiGame(final IToClient client, final int slotIndex) {
         this.sender = new GameProtocolSender(client);
+        this.slotIndex = slotIndex;
+    }
+
+    public int getSlotIndex() {
+        return slotIndex;
+    }
+
+    public void pause() {
+        paused = true;
+    }
+
+    public void resume() {
+        paused = false;
+    }
+
+    public boolean isPaused() {
+        return paused;
     }
 
     private void send(final ProtocolMethod method, final Object... args) {
+        if (paused) { return; }
         sender.send(method, args);
     }
 
     private <T> T sendAndWait(final ProtocolMethod method, final Object... args) {
+        if (paused) { return null; }
         return sender.sendAndWait(method, args);
     }
 
@@ -227,12 +249,14 @@ public class NetGuiGame extends AbstractGuiGame {
 
     @Override
     public boolean showConfirmDialog(final String message, final String title, final String yesButtonText, final String noButtonText, final boolean defaultYes) {
-        return sendAndWait(ProtocolMethod.showConfirmDialog, message, title, yesButtonText, noButtonText, defaultYes);
+        final Boolean result = sendAndWait(ProtocolMethod.showConfirmDialog, message, title, yesButtonText, noButtonText, defaultYes);
+        return result != null ? result : defaultYes;
     }
 
     @Override
     public int showOptionDialog(final String message, final String title, final FSkinProp icon, final List<String> options, final int defaultOption) {
-        return sendAndWait(ProtocolMethod.showOptionDialog, message, title, icon, options, defaultOption);
+        final Integer result = sendAndWait(ProtocolMethod.showOptionDialog, message, title, icon, options, defaultOption);
+        return result != null ? result : defaultOption;
     }
 
     @Override
@@ -242,7 +266,8 @@ public class NetGuiGame extends AbstractGuiGame {
 
     @Override
     public boolean confirm(final CardView c, final String question, final boolean defaultIsYes, final List<String> options) {
-        return sendAndWait(ProtocolMethod.confirm, c, question, defaultIsYes, options);
+        final Boolean result = sendAndWait(ProtocolMethod.confirm, c, question, defaultIsYes, options);
+        return result != null ? result : defaultIsYes;
     }
 
     @Override
@@ -311,8 +336,17 @@ public class NetGuiGame extends AbstractGuiGame {
 
     @Override
     public boolean isUiSetToSkipPhase(final PlayerView playerTurn, final PhaseType phase) {
-        return sendAndWait(ProtocolMethod.isUiSetToSkipPhase, playerTurn, phase);
+        final Boolean result = sendAndWait(ProtocolMethod.isUiSetToSkipPhase, playerTurn, phase);
+        return Boolean.TRUE.equals(result);
     }
+
+    @Override
+    public void showWaitingTimer(final PlayerView forPlayer, final String waitingForPlayerName) {
+        send(ProtocolMethod.showWaitingTimer, forPlayer, waitingForPlayerName);
+    }
+
+    @Override
+    public boolean isNetGame() { return true; }
 
     @Override
     protected void updateCurrentPlayer(final PlayerView player) {

@@ -1,0 +1,13 @@
+Name:Quintorius, History Chaser
+ManaCost:2 R W
+Types:Legendary Planeswalker Quintorius
+Loyalty:5
+T:Mode$ ChangesZoneAll | ValidCards$ Card.YouOwn | Origin$ Graveyard | Destination$ Any | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever one or more cards leave your graveyard, create a 3/2 red and white Spirit creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ rw_3_2_spirit
+A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 2 | UnlessCost$ Discard<1/Card> | UnlessSwitched$ True | UnlessPayer$ You | UnlessResolveSubs$ WhenPaid | SubAbility$ DBMill | SpellDescription$ You may discard a card. If you do, draw two cards, then mill a card.
+SVar:DBMill:DB$ Mill | Defined$ You | NumCards$ 1
+A:AB$ PumpAll | Cost$ SubCounter<4/LOYALTY> | Planeswalker$ True | ValidCards$ Spirit.YouCtrl | KW$ Double Strike & Vigilance | SpellDescription$ Spirits you control gain double strike and vigilance until end of turn.
+Text:CARDNAME can be your commander.
+DeckHas:Ability$Token
+SVar:PlayMain1:TRUE
+Oracle:Whenever one or more cards leave your graveyard, create a 3/2 red and white Spirit creature token.\n[+1]: You may discard a card. If you do, draw two cards, then mill a card.\n[-4]: Spirits you control gain double strike and vigilance until end of turn.\nQuintorius, History Chaser can be your commander.

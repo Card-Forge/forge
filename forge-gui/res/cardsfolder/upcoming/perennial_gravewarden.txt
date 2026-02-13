@@ -1,0 +1,13 @@
+Name:Perennial Gravewarden
+ManaCost:B G
+Types:Creature Elf Warlock
+PT:1/1
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When this creature enters, it perpetually gets +1/+1.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | Duration$ Perpetual
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Graveyard | CheckSVar$ X | SVarCompare$ EQ2 | Execute$ TrigChangeZone | TriggerDescription$ At the beginning of your end step, if a creature entered and a creature died this turn, return this card from your graveyard to the battlefield tapped.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True
+SVar:X:SVar$Y/Plus.Z
+SVar:Y:Count$ThisTurnEntered_Battlefield_Creature/LimitMax.1
+SVar:Z:Count$Morbid.1.0
+Oracle:Menace\nWhen this creature enters, it perpetually gets +1/+1.\nAt the beginning of your end step, if a creature entered and a creature died this turn, return this card from your graveyard to the battlefield tapped.

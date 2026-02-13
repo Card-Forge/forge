@@ -7,6 +7,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl,Vehicle.YouCtrl | TgtPrompt$ Select target creature or Vehicle you control | CounterType$ P1P1
 T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl+HasCounters | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ Whenever one or more creatures you control with counters on them deal combat damage to a player, put target creature or Vehicle card from that player's graveyard onto the battlefield under your control.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | ValidTgts$ Creature,Vehicle | TgtPrompt$ Choose target creature or Vehicle card in that player's graveyard | TargetsWithDefinedController$ TriggeredTarget | SpellDescription$ Put target creature card from that player's graveyard onto the battlefield under your control.
-ASVar:PlayMain1:TRUE
+SVar:PlayMain1:TRUE
 DeckHas:Ability$Counters
 Oracle:Menace\nWhen this creature enters, put a +1/+1 counter on target creature or Vehicle you control.\nWhenever one or more creatures you control with counters on them deal combat damage to a player, put target creature or Vehicle card from that player's graveyard onto the battlefield under your control.

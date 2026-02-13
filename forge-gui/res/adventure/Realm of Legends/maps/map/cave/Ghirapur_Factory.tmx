@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="141">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Chief of the Foundry&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="6" name="Collision" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmV8OgyAMxvu6qCdwXmeHcLfY+7Zz6djdFjPJzCJF/ljA9pf0SSL9ACt8AAjCvtwrgIchnlXq7OLT1gCjIbp6//4V0r+OtyWP0SHPFmlLoXdLH1iOGGvjcGS9ru+i0Ns3ANfGvJb181ik1ksNN70DUhdfB9Qr7E9IvY1Zq6kQvTjLPW7MfxMFJeYck+Vcl7hWXeGmlxs+83sr+Fwu65kek+cx+QxH9HiG+dy55mnZvBVBEPzh5FfY9uK6BuUCt/9tTnrVBl8/lFR6L6dfaPQeA2sTSk56fdq4kpPec/0NrE0oKqPvN/Y9xj+T1pagRuRCP48lJy/L5d5WEIS0fADYmUFl
+  </data>
+ </layer>
+ <layer id="7" name="Floor and Walls" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmE0OwiAQhVm1Gj1Cl+rRPIiL6imMZ9EeTIlpRNMBHp2JbWcWL9pEHnxA58dm61yjTI+aR4gX97yIDq8x17Vz+/ot6ntMu/rjhfzW+7eVc2dClyrPa068/vlGKOU3hpfSUnm1na82Xk33OYdJgrd/1sR7r+nc2gnxDuW9WF4ckvfK9aHmjeVhaj0oL7UHJXs3dR8v6h5R94wag/og3qn1SL2/yHsa01AeKPGWjlfGa7xz4I3VV6H6mNEBYyS9pXnbIB9y85Z4S/P+1r6cKvE2XuM1Xl28SA9E9UElfc1Yb87+iEucfQ2XJP9vp/oa7nnRMziuxgl59zhjQGm8QtjCOkgDb7heDbxhXa+BN7UHqTVy9lj/4kV6G84ey+JVPu9p8/1p8WpZ8Sr3fOdeb6D1OVLr9+vi6AusX5iepsb7BCl1fKY=
+  </data>
+ </layer>
+ <layer id="8" name="Walls Supplementary" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt2MENgjAUxvEnB1jEmDbxaBzHHYxDOIIruAJeTfToIC6hNy9taWmF8Pr/JS9pAjz4AoEXROqzb/J77Jr4Xin7xvYCfEwnch8o2819leVsIrKsybtYj2+Wcxuup6K80OWyyu8xZt4oeV74pcx1JWfBEr3H3N/eitxs+nGH7a+WhLx1eRn3Wqu3ca+hA88zpnC07vq300zfKl/eKTJrUtv8XBv+t+e5Bt4noW0AAABaME9Ciw/70jCi
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="60" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmE1OwkAUgB+rmlC5AsVNLYkHgLvQBbjAW2jcKltcwpad0a1/O6+hKz2BiVHjm5CGsTOUjvPXNu9LXqbMtNP38UppB4DQ5fqoOHwTjQF6483nL8355gnAVSLOzffrks9ZhQUet/znsTJu0Ok2Eefm+3XRyTma4Hc1MZMH47W1iWxutp2NmcB0zoyXGPOLxXYXvJsstvF8KN92xTe6/cRiuwveScW3jsi8muwbjgD2MTqjv/3Mc9tYnblAl0uMmcSpaKyuhCnWEKOTqo0R9WIh+W+U9TWF6LhcH0EQ1UXnva2OmH7XrDo23tsIgrBL2efJT/upOIGeJ6vPdABwMvCdhTve0PW94b4zbv1xOsT6Dt2du8yyh+mlkVWJ9VZXdAO8xwV2z+HLl7kd5PzucPs+KN5HF1++D+jwiPFU4FJmH1V8+bJapntiPfP1zu+jS5V+v/nr2SRn7XWb+Z637ZynCJf3Z+Z72gdo9detLd8PO9Mqk9WXuTJ81Ncl3RDvDVz0Qt8ZEYQ6v71Zdnk=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="392.003" y="638.664">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="106.181" y="166.685">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Gonti"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="62" template="../../../../common/maps/obj/gold.tx" x="754.519" y="366.044"/>
+  <object id="68" template="../../../../common/maps/obj/enemy.tx" x="172.678" y="299.838">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Yahenni"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/enemy.tx" x="678.586" y="171.209">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Pia Nalaar"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/gold.tx" x="337.334" y="116.667"/>
+  <object id="73" template="../../../../common/maps/obj/enemy.tx" x="392.5" y="392.167">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Baral"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="74" template="../../../../common/maps/obj/booster.tx" x="512.667" y="47.3337">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;DFT&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DFT&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DFT&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="75" template="../../../../common/maps/obj/enemy.tx" x="600.667" y="295.333">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Oviya"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="77" template="../../../../common/maps/obj/gold.tx" x="27.3334" y="561.334"/>
+  <object id="79" template="../../../../common/maps/obj/manashards.tx" x="449" y="120.5"/>
+  <object id="80" template="../../../../common/maps/obj/manashards.tx" x="752" y="585.333"/>
+  <object id="82" template="../../../../common/maps/obj/enemy.tx" x="274.667" y="524">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Padeem"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="83" template="../../../../common/maps/obj/enemy.tx" x="507.333" y="522.667">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Kambal"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="84" template="../../../../common/maps/obj/enemy.tx" x="390.834" y="165.333">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ornithopter|KLD&quot;, &quot;Planar Bridge|MPS&quot;, &quot;Ornithopter of Paradise|CMM&quot;]}"/>
+    <property name="enemy" value="Rashmi"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="110" template="../../../../common/maps/obj/enemy.tx" x="391.333" y="220.667">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Saheeli"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="112" template="../../../../common/maps/obj/enemy.tx" x="297.333" y="296.667">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Sram"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="75"/>
+    <property name="waypoints" value="119, 120"/>
+   </properties>
+  </object>
+  <object id="113" template="../../../../common/maps/obj/booster.tx" x="270.667" y="53.3333">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;AER&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;AER&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;AER&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="114" template="../../../../common/maps/obj/booster.tx" x="428.333" y="119">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;KLD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;KLD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;KLD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="115" template="../../../../common/maps/obj/manashards.tx" x="105" y="308.667"/>
+  <object id="116" template="../../../../common/maps/obj/gold.tx" x="29.3333" y="506.667"/>
+  <object id="117" template="../../../../common/maps/obj/manashards.tx" x="752" y="464.667"/>
+  <object id="118" template="../../../../common/maps/obj/enemy.tx" x="519.333" y="296">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Hope of Ghirapur"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="75"/>
+    <property name="waypoints" value="121, 122"/>
+   </properties>
+  </object>
+  <object id="119" template="../../../../common/maps/obj/waypoint.tx" x="301.333" y="226.667"/>
+  <object id="120" template="../../../../common/maps/obj/waypoint.tx" x="253.333" y="370"/>
+  <object id="121" template="../../../../common/maps/obj/waypoint.tx" x="538.667" y="228"/>
+  <object id="122" template="../../../../common/maps/obj/waypoint.tx" x="542" y="379.333"/>
+  <object id="123" template="../../../../common/maps/obj/dialog.tx" x="358.667" y="602.917" width="80" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A vast factory spreads out before you, its brass pipework, flashing aether, and elaborate filigree marking it as originally from the city of Ghirapur, capitol of Avishkar, formerly known as Kaladesh. &quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="124" template="../../../../common/maps/obj/dialog.tx" x="382.5" y="190.917" width="33.5" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The room ahead is more magically charged than the others in the factory, huge swirls of aetheric energy flowing through the air according to the whims of complex devices and spellwork. A woman turns from her experiments and speaks to you.
+
+'I'd really rather not fight, but if you're here to take my treasures I suppose I have no choice.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="125" template="../../../../common/maps/obj/booster.tx" x="358" y="117.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;KLD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;KLD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;KLD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="126" template="../../../../common/maps/obj/enemy.tx" x="148.75" y="458">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;text&quot;: &quot;Hail, {var=player_name}. I see your travels have taken you far. I have been wandering as well, and have acquired some rare spells I am not in need of along the way. Take a look, perhaps they will be of use. Traveling this place does have its costs though, so I cannot simply give you them, but my prices are fair.&quot;,
+		&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;(Continue)&quot; }
+		]
+	}
+]</property>
+    <property name="enemy" value="Mysterious Mage"/>
+   </properties>
+  </object>
+  <object id="127" template="../../../../common/maps/obj/shop.tx" x="115.795" y="458.818">
+   <properties>
+    <property name="commonShopList" value="WanderingMerchantColorless"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="128" template="../../../../common/maps/obj/collision.tx" x="388.334" y="274.45" width="27.583" height="39.6"/>
+  <object id="129" template="../../../../common/maps/obj/collision.tx" x="388.209" y="35.5333" width="27.583" height="39.6"/>
+  <object id="130" template="../../../../common/maps/obj/collision.tx" x="740.208" y="35.5333" width="27.583" height="39.6"/>
+  <object id="131" template="../../../../common/maps/obj/collision.tx" x="20.8752" y="34.8667" width="27.583" height="39.6"/>
+  <object id="132" template="../../../../common/maps/obj/collision.tx" x="353.542" y="369.533" width="14.833" height="27.6"/>
+  <object id="133" template="../../../../common/maps/obj/collision.tx" x="433.584" y="366.7" width="14.833" height="27.6"/>
+  <object id="134" template="../../../../common/maps/obj/collision.tx" x="433.084" y="193.45" width="14.833" height="27.6"/>
+  <object id="135" template="../../../../common/maps/obj/collision.tx" x="353.334" y="192.2" width="14.833" height="27.6"/>
+  <object id="136" template="../../../../common/maps/obj/enemy.tx" x="445.333" y="474.667">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'You have the look of a mercenary, or at least one would would find a lucrative offer of such work enticing. Am I correct in my assessment?'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;I've finally gotten rid of everyone.&quot;,
+					&quot;text&quot;: &quot;'Everything seems to be in order. Good day.' With that, he teleports away.&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Dovin Baan&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Dovin, Grand Arbiter&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Emergency Powers&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 6000}                
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 11
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Correct enough. What's the work?&quot;,
+					&quot;text&quot;: &quot;'Quite simply, I have need of this factory, and I find it infested with would-be artificers and their ilk. I need them all eliminated. My scans indicate eleven in need of removal for my ambitions to be fulfilled. I am offering 6000 gold. Do exceptionally and there may be an additional bonus as well.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;I don't have time for this.&quot;,
+					&quot;text&quot;: &quot;'Very well. I will be here for some time.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Dovin"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="137" template="../../../../common/maps/obj/scroll.tx" x="743" y="108">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Aetherworks Marvel&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="138" template="../../../../common/maps/obj/scroll.tx" x="27" y="102">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Gonti's Aether Heart&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="139" template="../../../../common/maps/obj/scroll.tx" x="751.833" y="515.667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Aether Hub&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="140" template="../../obj/treasure.tx" x="394.591" y="97">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardName&quot;: &quot;Electrostatic Pummeler&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardName&quot;: &quot;Multiform Wonder&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardName&quot;: &quot;Aethersphere Harvester&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardName&quot;: &quot;Aetherflux Conduit&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardName&quot;: &quot;Aetheric Amplifier&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardName&quot;: &quot;Dynavolt Tower&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardName&quot;: &quot;Decoction Module&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardName&quot;: &quot;Fabrication Module&quot;
+  }
+]
+</property>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

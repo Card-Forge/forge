@@ -33,14 +33,14 @@ public class GuiDownloadQuestImages extends GuiDownloadService {
         // read all card names and urls
         final Map<String, String> urls = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
-        addMissingItems(urls, ForgeConstants.IMAGE_LIST_QUEST_OPPONENT_ICONS_FILE,  ForgeConstants.CACHE_ICON_PICS_DIR);
-        addMissingItems(urls, ForgeConstants.IMAGE_LIST_QUEST_BOOSTERS_FILE,        ForgeConstants.CACHE_BOOSTER_PICS_DIR);
-        addMissingItems(urls, ForgeConstants.IMAGE_LIST_QUEST_FATPACKS_FILE,        ForgeConstants.CACHE_FATPACK_PICS_DIR);
-        addMissingItems(urls, ForgeConstants.IMAGE_LIST_QUEST_BOOSTERBOXES_FILE,    ForgeConstants.CACHE_BOOSTERBOX_PICS_DIR);
-        addMissingItems(urls, ForgeConstants.IMAGE_LIST_QUEST_PRECONS_FILE,         ForgeConstants.CACHE_PRECON_PICS_DIR);
-        addMissingItems(urls, ForgeConstants.IMAGE_LIST_QUEST_TOURNAMENTPACKS_FILE, ForgeConstants.CACHE_TOURNAMENTPACK_PICS_DIR);
-        addMissingItems(urls, ForgeConstants.IMAGE_LIST_QUEST_TOKENS_FILE,          ForgeConstants.CACHE_TOKEN_PICS_DIR);
-        addMissingItems(urls, ForgeConstants.IMAGE_LIST_PLANES_IMAGES_FILE,         ForgeConstants.CACHE_PLANECHASE_PICS_DIR);
+//        addMissingItems(urls, ForgeConstants.IMAGE_LIST_QUEST_OPPONENT_ICONS_FILE,  ForgeConstants.CACHE_ICON_PICS_DIR);
+//        addMissingItems(urls, ForgeConstants.IMAGE_LIST_QUEST_BOOSTERS_FILE,        ForgeConstants.CACHE_BOOSTER_PICS_DIR);
+//        addMissingItems(urls, ForgeConstants.IMAGE_LIST_QUEST_FATPACKS_FILE,        ForgeConstants.CACHE_FATPACK_PICS_DIR);
+//        addMissingItems(urls, ForgeConstants.IMAGE_LIST_QUEST_BOOSTERBOXES_FILE,    ForgeConstants.CACHE_BOOSTERBOX_PICS_DIR);
+//        addMissingItems(urls, ForgeConstants.IMAGE_LIST_QUEST_PRECONS_FILE,         ForgeConstants.CACHE_PRECON_PICS_DIR);
+//        addMissingItems(urls, ForgeConstants.IMAGE_LIST_QUEST_TOURNAMENTPACKS_FILE, ForgeConstants.CACHE_TOURNAMENTPACK_PICS_DIR);
+          addMissingItems(urls, ForgeConstants.IMAGE_LIST_QUEST_TOKENS_FILE,          ForgeConstants.CACHE_TOKEN_PICS_DIR);
+//        addMissingItems(urls, ForgeConstants.IMAGE_LIST_PLANES_IMAGES_FILE,         ForgeConstants.CACHE_PLANECHASE_PICS_DIR);
 
         return urls;
     }

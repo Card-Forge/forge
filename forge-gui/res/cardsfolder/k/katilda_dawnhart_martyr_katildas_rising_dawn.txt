@@ -10,6 +10,7 @@ S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ 
 SVar:X:Count$Valid Spirit.YouCtrl,Enchantment.YouCtrl
 SVar:NeedsToPlayVar:X GE2
 SVar:BuffedBy:Enchantment,Spirit
+SVar:NoZeroToughnessAI:True
 DeckHints:Type$Spirit|Enchantment
 DeckHas:Ability$LifeGain|Graveyard
 AlternateMode:DoubleFaced

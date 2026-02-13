@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="118">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Sliver Hive&quot;, &quot;Sliver Construct&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../../../common/maps/tileset/dungeon/animatedtiles.tsx"/>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzL4GFgyKAS7uMkjKlpFimY3vYRYy+t7MRlN63tQ7eXXvYh20tvO0ftHRxYlJ08PGrv4LIXV3lFS3vxlc+j9g5Pe4dzeh6J5cZwsJdSO2ltL762JL3LDErKDUrtxYZpFc7UsJsUewGdZYKl
+  </data>
+ </layer>
+ <layer id="6" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAfeMpIR8tGAV0BKG5H43cUDHWwnoOB4T0nBG8Asjdy0NYekB0g/AHI9kPC7zhpY/droLlvkPAWDlR7QTiAk/r2YnPHZg6EGzYB8Vs62IsMgoj0K7XjAeR3YvxK7/CgBdjDzMDQOAz8MQpGwSgYBbQGA1VWwuwFAHZVH5Y=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJytl3tOAkEMxjcxMTsHE5QEMNzIC3ANeZiI4p9egxPwTATkCE6z/bLdodMZkCbN7APn18587axFEbfXsii2rihGPEqnZ3C633l/9D7391/eF/eV91zln/5Zh39j8Wg+mmvix5UfpzzC38rmO/K1vx66cyb50VVc+psYU/LWkfiWyrshc5Gz5PZcne+4rDgYZY4x3n9syevU5hg2Li/HWxhyzuG9+/e//t2MR3lNI64/Insn7cFV+abWlJgnd75X0Ohe7Ocxgw2upWuLCY0i/5N4ZrFT3BTT8n5CHxuDO7iSmWPQ9K24uYa11uzH6bV/i3VG7Y4jOugK3YYxQMt4TvfQdQ63xexRec4f8HwH14xhzs+k9p5dHatl6MNkVMO01yF/wHUx4/llLqHe+xxHjsmzgXonzhnsudTWkWsU9dl1zXXH+xzTaqgjtEbawh7KPQZD618Hg42zR9OydjZ3E6w9x2cxv++q+mmxh/HsFC7lDa1K3SL33HOho3DleR+eE6QX7Km2v1Ljl3DxfRQ7m6Br2ftDLeeY5E7K5veRZlbPTGkpxrXOQZjVM3NzDbmx/myxw5rK+c64lkuG9b5kf6l+NG6sN2sm60n77gjzJqZ0yZ2K3rzNjEHbb+grZGlczI/erMWg/Y8S8yfhFjfsVzKGlRLLuKzPpnCdU0xyfLdrXM0QZ9uoY8xt1eWLq+f6A2CAOrI=
+  </data>
+ </layer>
+ <layer id="7" name="Foreground" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzFl9sJwkAQRYP+JB82YRNWECEWJViPKcFuhGAZusjiMMzjzj7wwhBjJnvWndmbOAy6zlO/8HgR3Uc71lEft4QXUXQNED32v4iwua6Hcm5m88+U21IWk3J7yfrdvbkSn3K9PpDGRPpHyp1ZbSNs3icR7rPBfkFz6bGG909u6f09uVoeP0f9A+FatUjnF8KS/NLyPI2r+YTGpeJ7qyakcV4AF1m7yBxvyjMIqTPqFZYoI9JbSE7kOYwo6qctfcqrN5KDsuj3yJysMTyedr2V0PVrwY34XQ+u18s1PZJ03H1D46Lvzxr3RN55M0sKbe41/3m2TyyTzUxeaa1ZKXtxapa5b6wVtg4=
+  </data>
+ </layer>
+ <layer id="9" name="Clutter" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzlVtsNwjAMtMQ2nSIdAfbgOR878ZiA5iPqcdhJ7PCBxElVU1r7coeTWOR3sZ1EdtN6197xWHv28u2X6wB3BP5WxhznRYm7bj4113QyX4/uzKHxsGZNJ3NwrMVfOPPF+UvMI4k80/qd5ZGm2/IBeVl3iTnPIpf5/ZsoeB4lF+rG+Wn+RKDl65lfy/MWLL0tsOdeaP+vF5E4rtkIL3ruAdZQRPeI57hu8viWRO7Jn2PE84zjMv/T7IvPKJ5HED1LMtBzL3hteT2P+s21HfE8UuOoN1qjnhrXzlf0rNdv3ON7PNfOV4zr8Rvz57Hld62X4HyteWvvrPqu9RIWt+a3pwasHrClGf2OrBmrB+zpBb/Zc9T6RA2RPbzGz2ML0T18FCMe/xNeuci7/g==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="71" template="../../../../common/maps/obj/enemy.tx" x="149.981" y="169.866">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;The sliver lets out a horrid shriek as it succumbs to your killing blow, and immediately the countless other slivers writing around the hive slither away and retreat, leaving you to the spoils of your victory.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Ancient Ziggurat|CON&quot;, &quot;Wayfarer's Bauble|C14&quot;, &quot;Stoneforge Masterwork|OGW&quot;, &quot;Descendants' Path|LCC&quot;, &quot;First Sliver's Chosen|MH1&quot;, &quot;Gemhide Sliver|CMM&quot;, &quot;Birthing Boughs|MH1&quot;]}"/>
+    <property name="enemy" value="The First Sliver"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/enemy.tx" x="244.004" y="253.825">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Wayfarer's Bauble|C14&quot;, &quot;Stoneforge Masterwork|OGW&quot;, &quot;Descendants' Path|LCC&quot;, &quot;Victual Sliver|STH&quot;]}"/>
+    <property name="enemy" value="Sliver Queen"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="150"/>
+   </properties>
+  </object>
+  <object id="79" template="../../../../common/maps/obj/dialog.tx" x="294.269" y="444.576" width="167.197" height="20.858" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;As you breach the inner hive, the endless chittering softens somewhat. However, the sense of immense danger only grows. Millions of eggs line the walls and floors of the other side of the hive from you, with two more of the massive sliver lords in your way.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="81" template="../../obj/treasure.tx" x="48.6667" y="134">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;rarity&quot;: [ &quot;Rare, Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="83" template="../../obj/treasure.tx" x="48.6667" y="158.667">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;rarity&quot;: [ &quot;Rare, Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/entry_up.tx" x="322.5" y="469.5" width="130" height="8">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/cave/Sliver_Hive_1.tmx"/>
+    <property name="teleportObjectId" value="153"/>
+   </properties>
+  </object>
+  <object id="91" template="../../obj/treasure.tx" x="81.25" y="193.417">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;subTypes&quot;: [ &quot;Sliver&quot; ],
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="93" template="../../obj/treasure.tx" x="101.083" y="114.583">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 8,
+    &quot;subTypes&quot;: [ &quot;Sliver&quot; ],
+    &quot;rarity&quot;: [ &quot;common&quot;, &quot;uncommon&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/manashards.tx" x="64" y="171.583"/>
+  <object id="95" template="../../../../common/maps/obj/manashards.tx" x="83.9167" y="153.333"/>
+  <object id="96" template="../../../../common/maps/obj/manashards.tx" x="82" y="130"/>
+  <object id="97" template="../../../../common/maps/obj/manashards.tx" x="69.3333" y="108.917"/>
+  <object id="98" template="../../../../common/maps/obj/enemy.tx" x="192" y="368">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Wayfarer's Bauble|C14&quot;, &quot;Stoneforge Masterwork|OGW&quot;, &quot;Descendants' Path|LCC&quot;, &quot;Mistform Sliver|LGN&quot;]}"/>
+    <property name="enemy" value="Rukarumel"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="99" template="../../../../common/maps/obj/scroll.tx" x="165.5" y="356.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Hivestone&quot;, &quot;editions&quot;: [ &quot;TSR&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="100" template="../../../../common/maps/obj/dialog.tx" x="237.313" y="390.301" width="53.4917" height="58.2022" rotation="268.171" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A wild-eyed human woman crouches behind the massive bones lining the inner hive
+
+'You!' She whisper-shouts 'Stay away from me! You'll ruin a unique opportunity to study slivers in their natural habitat!'.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="101" template="../../../../common/maps/obj/collision.tx" x="402.138" y="319.985" width="32.75" height="32.9323"/>
+  <object id="102" template="../../../../common/maps/obj/collision.tx" x="372.244" y="270.162" width="32.75" height="32.9323"/>
+  <object id="103" template="../../../../common/maps/obj/collision.tx" x="337.075" y="222.098" width="32.75" height="32.9323"/>
+  <object id="104" template="../../../../common/maps/obj/collision.tx" x="291.941" y="172.861" width="32.75" height="32.9323"/>
+  <object id="105" template="../../../../common/maps/obj/collision.tx" x="242.704" y="125.383" width="32.75" height="32.9323"/>
+  <object id="106" template="../../../../common/maps/obj/collision.tx" x="194.054" y="77.9043" width="32.75" height="32.9323"/>
+  <object id="107" template="../../../../common/maps/obj/collision.tx" x="111.406" y="205.099" width="32.75" height="32.9323"/>
+  <object id="108" template="../../../../common/maps/obj/collision.tx" x="165.918" y="255.508" width="32.75" height="32.9323"/>
+  <object id="109" template="../../../../common/maps/obj/collision.tx" x="259.117" y="399.702" width="32.75" height="32.9323"/>
+  <object id="110" template="../../../../common/maps/obj/collision.tx" x="228.05" y="349.293" width="32.75" height="32.9323"/>
+  <object id="111" template="../../../../common/maps/obj/collision.tx" x="196.398" y="301.228" width="32.75" height="32.9323"/>
+  <object id="112" template="../../../../common/maps/obj/collision.tx" x="175.883" y="112.487" width="32.75" height="32.9323"/>
+  <object id="113" template="../../../../common/maps/obj/collision.tx" x="128.405" y="99.592" width="32.75" height="32.9323"/>
+  <object id="114" template="../../../../common/maps/obj/collision.tx" x="158.298" y="78.4905" width="32.75" height="32.9323"/>
+  <object id="115" template="../../../../common/maps/obj/collision.tx" x="92.0631" y="62.6644" width="67.333" height="32.9323"/>
+  <object id="116" template="../../../../common/maps/obj/collision.tx" x="45.171" y="178.723" width="32.75" height="32.9323"/>
+  <object id="117" template="../../../../common/maps/obj/collision.tx" x="14.1049" y="105.453" width="32.75" height="89.7891"/>
+ </objectgroup>
+</map>

@@ -8,14 +8,16 @@ import forge.game.cost.Cost;
 import forge.util.Lang;
 
 public class KeywordWithCostAndType extends KeywordInstance<KeywordWithCostAndType>
-    implements KeywordWithCostInterface {
+    implements KeywordWithCostInterface, KeywordWithTypeInterface {
     private Cost cost;
     private String costString;
     private String type;
     private String descType = null;
     private String reminderType = null;
 
+    @Override
     public String getValidType() { return "Affinity".equals(type) ? "Card.withAffinity" : type; }
+    @Override
     public String getTypeDescription() { return descType; }
 
     @Override

@@ -1,0 +1,41 @@
+green_structures.png
+size: 192,192
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+water
+    xy: 0, 0
+    size: 48, 64
+tree
+    xy: 48,0
+    size:48,64
+tree2
+    xy: 96,0
+    size: 48,64
+vine
+    xy: 144,0
+    size: 48,64
+tree3
+    xy: 0,64
+    size: 48,64
+tree4
+    xy: 48,64
+    size: 48,64
+tree5
+    xy: 96,64
+    size: 48,64
+tree6
+    xy: 144, 64
+    size: 48,64
+rock
+    xy: 0, 128
+    size: 48, 64
+mountain
+    xy: 48, 128
+    size: 48,64
+plant
+    xy:96,128
+    size:48,64
+bush
+    xy:144,128
+    size:48,64

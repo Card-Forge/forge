@@ -110,7 +110,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private Trigger triggerObj;
     private boolean optionalTrigger = false;
     private ReplacementEffect replacementEffect;
-    private List<Object> triggerRemembered = Lists.newArrayList();
 
     private AlternativeCost altCost = null;
     private EnumSet<OptionalCost> optionalCosts = EnumSet.noneOf(OptionalCost.class);
@@ -968,17 +967,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         triggeringObjects = AbilityKey.newMap();
     }
 
-    @Override
-    public List<Object> getTriggerRemembered() {
-        return triggerRemembered;
-    }
-    public void setTriggerRemembered(List<Object> list) {
-        triggerRemembered = list;
-    }
-    public void resetTriggerRemembered() {
-        triggerRemembered = Lists.newArrayList();
-    }
-
     public Map<AbilityKey, Object> getReplacingObjects() {
         return replacingObjects;
     }
@@ -1008,7 +996,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             resetTargets();
         }
         resetTriggeringObjects();
-        resetTriggerRemembered();
 
         if (isActivatedAbility()) {
             setXManaCostPaid(null);

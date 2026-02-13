@@ -20,7 +20,6 @@ package forge.game.cost;
 import com.google.common.collect.Lists;
 import forge.card.CardType;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
 import forge.game.CardTraitBase;
 import forge.game.card.Card;
 import forge.game.card.CounterEnumType;
@@ -266,7 +265,7 @@ public class Cost implements Serializable {
         }
 
         if (parsedMana == null && (manaParts.length() > 0 || !xMin.isEmpty())) {
-            parsedMana = new CostPartMana(new ManaCost(new ManaCostParser(manaParts.toString())), xMin.isEmpty() ? null : xMin);
+            parsedMana = new CostPartMana(new ManaCost(manaParts.toString()), xMin.isEmpty() ? null : xMin);
         }
         if (parsedMana != null) {
             costParts.add(parsedMana);
@@ -281,7 +280,7 @@ public class Cost implements Serializable {
         if (parse.startsWith("Mana<")) {
             final String[] splitStr = TextUtil.split(abCostParse(parse, 1)[0], '\\');
             final String restriction = splitStr.length > 1 ? splitStr[1] : null;
-            return new CostPartMana(new ManaCost(new ManaCostParser(splitStr[0])), restriction);
+            return new CostPartMana(new ManaCost(splitStr[0]), restriction);
         }
 
         if (parse.startsWith("tapXType<")) {
@@ -646,7 +645,7 @@ public class Cost implements Serializable {
     }
 
     public final Cost copyWithDefinedMana(String manaCost) {
-        return copyWithDefinedMana(new ManaCost(new ManaCostParser(manaCost)));
+        return copyWithDefinedMana(new ManaCost(manaCost));
     }
     public final Cost copyWithDefinedMana(ManaCost manaCost) {
         Cost toRet = copyWithNoMana();

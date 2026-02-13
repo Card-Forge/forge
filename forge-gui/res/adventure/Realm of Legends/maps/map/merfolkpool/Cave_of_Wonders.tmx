@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="89">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Ring of Three Wishes&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzz42Rg8BvFNMerOAbeDaN4FI9i4vACdlRMSzvQxQba76N4+GMAPumv3g==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzz42Rg8APiVRwQmp4YZOdTOtuJDWtwMzCcAOJuroGx+yob/e0G2Quz+ySd/Q6zG4Q1ueljpzr3wNh7FMkeetqLbH8vMG6P08DeZ0C8EpiH3RkgfAYGwno6gW7pgmJK0hzMbmLUguw8BfR/LAsE44qDBewIvBxo9nNOBEZXi00Mm50aOOwF2XGUC4KR7fWiQnz3Ac3sAeJj3BAMi3tke7BhaqQ1bOmMlva6Q9OdK5F2wuQo9asH1F70+KJV2CLb+xSLvaRiAPyCxpE=
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJydVMFtwzAM1FN2Ngm6RuLAj+5VJM0adpOuUaCdw02TMSpCOvjCipZSAgfbMM3TmUduG+e2ARJnX4d3H785pefvJoLvBcizwPHSOve1cm4frs/q3TU8v4VaU6p7aWKOxuBj7m2BU/BD9Z9W8fpJ3FLnRrmjj/wWZ4mPsUvcH4Hv2M7cUqs3zprj3jzAybysGdxTplfS20v6ZiD9uVwLXAMBzQjUg5eQD40daUb/2YMlrRL7tXOHtfsTfaoPPu7nzvBYrkcW7xA4x4DXdtaN+tLXa/IWe9biXeq35tUBzpO/n9MzzW9upkrehjdLnNoDNWcteUtz8+zXcuIbqdM3swfZjwD+nbzDThhJI7zLNS0+PuPUzGfFPevs6J3etTyfOd16H1r/JffPu0we54/+fkdCb02tpT1t8Vq+gPf1XOa0/sfL1tx1Bi/mGqj1Mvyk94Gl99H9r/ELMPnZtA==
+  </data>
+ </layer>
+ <layer id="6" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBi6YCmVzGGjkjkk2cmMnU1rcFYDOxsXoFbYvNTAzqYVgKUN5LBdQYF53VoMDD1ahNXB7CA1nHGB5UA7VxBhLwzAwpaLgT7hTAlYNtAOoAOgVhk11AGx+YdSPeiA1PyDrIfe9cIPHQimBwAAjIUXpw==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="281" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="49" template="../../../../common/maps/obj/gold.tx" x="11.5634" y="206.796"/>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="87.1401" y="62.008">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Skywise Teachings|DTK&quot;, &quot;Breezekeeper|VIS&quot;]}"/>
+    <property name="enemy" value="Inniaz"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="52" template="../../../../common/maps/obj/gold.tx" x="227.413" y="113.208"/>
+  <object id="53" template="../../../../common/maps/obj/enemy.tx" x="107.561" y="219.841">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Chance Encounter|MH2&quot;, &quot;Fickle Efreet|PCY&quot;, &quot;Impulsive Manuvers|ODY&quot;, &quot;Goblin Kites|FEM&quot;]}"/>
+    <property name="enemy" value="Yusri"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="54" template="../../../../common/maps/obj/enemy.tx" x="259.101" y="87.9652">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Zahid"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="55" template="../../../../common/maps/obj/enemy.tx" x="344.448" y="187.192">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Siani and Esior"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/treasure.tx" x="86.5605" y="162.377">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;rarity&quot;: [&quot;mythic rare&quot;],
+  &quot;count&quot;: 3,
+}]</property>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/manashards.tx" x="35.5433" y="119.967">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/gold.tx" x="382.395" y="220.414"/>
+  <object id="70" template="../../../../common/maps/obj/enemy.tx" x="330.254" y="26.937">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Najal"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/manashards.tx" x="136.438" y="118.182">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/gold.tx" x="354.973" y="25.2905"/>
+  <object id="75" template="../../../../common/maps/obj/dialog.tx" x="180.404" y="220.451" width="72.5758" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A thin, fragrant haze of incense fills the cave ahead, lit by the light of several oversized old-fashioned oil lamps. To your left, you see an efreet flipping a coin over and over, and to your right, a voice echoes forth: 
+
+'You better not expect three wishes, trespasser. The wonders of this cave are for djinns alone.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="77" template="../../../../common/maps/obj/gold.tx" x="10.6667" y="241.333"/>
+  <object id="78" template="../../../../common/maps/obj/scroll.tx" x="10.3636" y="223.636">
+   <properties>
+    <property name="reward">[ { &quot;type&quot;: &quot;card&quot;, 
+&quot;cardName&quot;: &quot;Chance Encounter&quot;, 
+&quot;editions&quot;: [ &quot;MH2&quot; ],
+&quot;count&quot;: 1 } ]</property>
+   </properties>
+  </object>
+  <object id="79" template="../../../../common/maps/obj/scroll.tx" x="88" y="92.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Ring of Three Wishes&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="80" template="../../../../common/maps/obj/collision.tx" x="349.039" y="97.346" width="33.7749" height="29.75"/>
+  <object id="81" template="../../../../common/maps/obj/collision.tx" x="318.165" y="209.567" width="33.7749" height="29.75"/>
+  <object id="82" template="../../../../common/maps/obj/collision.tx" x="45.9349" y="224.601" width="33.7749" height="29.75"/>
+  <object id="83" template="../../../../common/maps/obj/collision.tx" x="77.6145" y="96.2722" width="33.7749" height="29.75"/>
+  <object id="84" template="../../../../common/maps/obj/collision.tx" x="111.979" y="64.5925" width="17.1297" height="29.75"/>
+  <object id="85" template="../../../../common/maps/obj/collision.tx" x="113.321" y="112.917" width="17.1297" height="29.75"/>
+  <object id="86" template="../../../../common/maps/obj/collision.tx" x="63.9224" y="111.843" width="17.1297" height="29.75"/>
+  <object id="87" template="../../../../common/maps/obj/collision.tx" x="63.3855" y="66.2034" width="17.1297" height="29.75"/>
+  <object id="88" template="../../../../common/maps/obj/enemy.tx" x="256.713" y="157.915">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;An illusory projection of a woman shimmers before you. 'You. You'll do. I need a job done, and am willing to offer quite the sum to see it done.'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;Your wish is granted.&quot;,
+					&quot;text&quot;: &quot;'Well, at least someone can do as they're told. Now be on your way.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Princess Lucrezia&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 3000}                
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 5
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;What do you need?&quot;,
+					&quot;text&quot;: &quot;'As you likely know, I am the illustrious Princess Lucrezia, ruler of the indominable city-state of Lucrezia. I obtained the services of one of the djinni here, but the impetuous cur twisted my whims. Now I have a new wish - all of them dead. I have quite quite deep coffers, so I can assure you it will be worth your while.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Your wish is my command&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;I don't have time for this.&quot;,
+					&quot;text&quot;: &quot;The woman huffs. 'Commoners, I swear.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Lucrezia"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

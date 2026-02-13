@@ -70,7 +70,7 @@ public class LifeExchangeVariantEffect extends SpellAbilityEffect {
             return;
         }
 
-        if ((pLife > num) && p.canLoseLife()) {
+        if (pLife > num && p.canLoseLife()) {
             final int diff = pLife - num;
             final int lost = p.loseLife(diff, false, false);
             source.addNewPT(power, toughness, timestamp, 0);
@@ -82,7 +82,7 @@ public class LifeExchangeVariantEffect extends SpellAbilityEffect {
                 final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPIMap(lossMap);
                 source.getGame().getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runParams, false);
             }
-        } else if ((num > pLife) && p.canGainLife()) {
+        } else if (num > pLife && p.canGainLife()) {
             final int diff = num - pLife;
             p.gainLife(diff, source, sa);
             source.addNewPT(power, toughness, timestamp, 0);

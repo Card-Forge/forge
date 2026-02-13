@@ -5,7 +5,7 @@ PT:4/3
 K:First Strike
 T:Mode$ AttackersDeclaredOneTarget | AttackedTarget$ Player | ValidAttackers$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGoad | TriggerDescription$ Whenever you attack a player, goad target creature that player controls.
 SVar:TrigGoad:DB$ Goad | ValidTgts$ Creature | TargetsWithDefinedController$ TriggeredAttackedTarget | TgtPrompt$ Select target creature that player controls
-T:Mode$ AttackerBlocked | ValidCard$ Creature.attacking Opponent | ValidBlocker$ Creature | Execute$ TrigPump | ValidBlockerAmount$ GE2 | TriggerDescription$ Whenever a creature attacking one of your opponents becomes blocked by two or more creatures, that attacking creature gains deathtouch until end of turn.
+T:Mode$ AttackerBlocked | ValidCard$ Creature.attacking Opponent | ValidBlocker$ Creature | Execute$ TrigPump | ValidBlockerAmount$ GE2 | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature attacking one of your opponents becomes blocked by two or more creatures, that attacking creature gains deathtouch until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttacker | KW$ Deathtouch
 SVar:PlayMain1:TRUE
 Oracle:First strike\nWhenever you attack a player, goad target creature that player controls.\nWhenever a creature attacking one of your opponents becomes blocked by two or more creatures, that attacking creature gains deathtouch until end of turn.

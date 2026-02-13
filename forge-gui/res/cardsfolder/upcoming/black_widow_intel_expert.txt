@@ -1,0 +1,8 @@
+Name:Black Widow, Intel Expert
+ManaCost:2 W
+Types:Legendary Creature Human Spy Hero
+PT:3/3
+K:First Strike
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever NICKNAME deals combat damage to an opponent, you and that player each draw two cards.
+SVar:TrigDraw:DB$ Draw | Defined$ You & TriggeredTarget | NumCards$ 2
+Oracle:First strike\nWhenever Black Widow deals combat damage to an opponent, you and that player each draw two cards.

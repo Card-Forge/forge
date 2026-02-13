@@ -6,8 +6,8 @@ K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a number of Food tokens equal to the number of opponents you have. (Food tokens are artifacts with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_food_sac | TokenOwner$ You
 SVar:X:PlayerCountOpponents$Amount
+A:AB$ Pump | Cost$ 1 G Sac<1/Permanent.Other+nonLand/another nonland permanent> | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Token|LifeGain|Food|Sacrifice
 SVar:AIPreference:SacCost$Card.Food,Card.token,Card.cmcEQ1,Card.cmcEQ2
-A:AB$ Pump | Cost$ 1 G Sac<1/Permanent.Other+nonLand/another nonland permanent> | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
 Oracle:Trample\nWhen Gluttonous Troll enters, create a number of Food tokens equal to the number of opponents you have. (Food tokens are artifacts with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\n{1}{G}, Sacrifice another nonland permanent: Gluttonous Troll gets +2/+2 until end of turn.

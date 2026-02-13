@@ -409,14 +409,6 @@ public class AbilityManaPart implements java.io.Serializable {
                 continue;
             }
 
-            if (restriction.equals("MorphOrManifest")) {
-                if ((sa.isSpell() && sa.getHostCard().isCreature() && sa.isCastFaceDown())
-                        || sa.isManifestUp() || sa.isMorphUp()) {
-                    return true;
-                }
-                continue;
-            }
-
             //handled in meetsManaShardRestrictions
             if (restriction.equals("CantPayGenericCosts")) {
                 return true;

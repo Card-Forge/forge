@@ -6,7 +6,7 @@ K:Flying
 K:Ward:Discard<1/Card>
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigChooseTgt | TriggerDescription$ When you cast this spell, target opponent drafts a card from CARDNAME's spellbook. They may cast that card without paying its mana cost.
 SVar:TrigChooseTgt:DB$ Pump | ValidTgts$ Opponent | IsCurse$ True | SubAbility$ DBDraft
-SVar:DBDraft:DB$ Draft | Defined$ Targeted | Spellbook$ Demonic Bargain,Ever After,Demonic Pact | RememberDrafted$ True | Zone$ Hand | SubAbility$ DBPlay
+SVar:DBDraft:DB$ Draft | Defined$ Targeted | Spellbook$ Demonic Bargain,Ever After,Demonic Pact | RememberDrafted$ True | SubAbility$ DBPlay
 SVar:DBPlay:DB$ Play | Controller$ Targeted | Defined$ Remembered | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:When you cast this spell, target opponent drafts a card from Razor Demon's spellbook. They may cast that card without paying its mana cost.\nFlying\nWard-Discard a card.

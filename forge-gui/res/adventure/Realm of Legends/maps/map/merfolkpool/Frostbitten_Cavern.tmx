@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="51">
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Avalanche Caller&quot; ]}"/>
+  <property name="preventEscape" type="bool" value="false"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJx7L8DA8H4UD2k8QXDg3TCKR/EoHsWjeBSPYgQGAOukVWk=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJytlUFOwzAQRSu1iA1JNoWEE4QeolDEnRAiXAAu0VZILHoAVj0AVyhiyUHwyPnK72TiuqZfGiVy4nme74mzKUejzYlC690Yg07F/A936WJR2bFK4Eq+cxWrss+11neT+etdYC1LysfMe/fOLvMBTYp+DSFfLGEtkn9Nc8FkVY733fI/FHeu3mXNsuFnv7WPBa1Dq846tuaCPXHXs4jasQfgSoin14Uff8n7c55ym8v8GDZrpzxhb2O5h/pMNMu6vpEaJd4uhtnidQw35PkP+Sl6NDxl1jH1DnleK++kRnD5GbxJ5cZ8Y+AKS/oLes7376+K47lcy6eb31DOIZ9RK5hfLsdtlVYvemeq2I1io9bt2PeXCOdLDNM6f3Sdklt0WXShJWzrnEzZW10zC2sRvbYeie/rhFrhMe/1tK2vUT2kxw5x+X9o+ftQ7QdLe6z7LcTFeaHPjHFp92LoTOV9QJ/F+MxrCPV/6F+GfZBvCHn+ALgg3is=
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="30" height="20">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYKAeuC9APKYmINfeLD4GBlZ+7Dibj3R7sZkHMgfd3gwks68rI9iWygwNLHjcAjIfZh6ynWz8CDNu8TIwfFKDsNH9kEGEnxK1GRiSgDgZiGFuAZmfxofbTmRQogJRiww4+OH+IwkUqyDcAHMHPoBuL8zuk8AwOQXE5iTaTyzAZi+y/SC7QcCCCPtvANWWYTHPiJE0e0EAFN/4/HyDFzubECBkL3KY44rzVarE20esvcj2nyLCP5W6+Pmk2gsCxOQxGLipDsyv6gi+GFr6ppW9X4F2fgPi2UqYcsziDAycBPIZKfaKQM0qUEEVF0Mrs9KwlJO4AK7yBz1NiaCpQbYTVkaC7CamrAcBmF/zVfCrIxYQE7/4ylpq24tcfyHbCSp7grkheRoZg8RAADmcQWEMrAMaSLEXVl7AygwYOMELSYt2AqiY2PwNcw8x4YzsBnzpn4OIuBDjR5gDAEC7XeY=
+  </data>
+ </layer>
+ <layer id="4" name="Overlay" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgwE8YiRfr6MEppg9FjFqAnQ7yXU/Pn1P1CEYl52U2IvPLTB7ke2mFQDZSU0/EGsfLnu7ePDrpdRuYs2hdrzi8jcuNrXsxGWuBi/10xc10lKBCv3s3sNMnl3E2E2s2ZSWk8T4Gdkt1MhD+PIvrcBA2UspIDc9UwKYxRFsALTGMKE=
+  </data>
+ </layer>
+ <objectgroup id="5" name="Objects">
+  <object id="8" template="../../../../common/maps/obj/enemy.tx" x="350" y="120">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Mouth of Ronom|CSP&quot;, &quot;Zombie Musher|CSP&quot;]}"/>
+    <property name="enemy" value="Heidar"/>
+   </properties>
+  </object>
+  <object id="10" template="../../../../common/maps/obj/enemy.tx" x="413" y="186">
+   <properties>
+    <property name="enemy" value="Narfi"/>
+    <property name="pursueRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="11" template="../../../../common/maps/obj/enemy.tx" x="97" y="79">
+   <properties>
+    <property name="enemy" value="Isu"/>
+    <property name="pursueRange" type="int" value="60"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="13" template="../../../../common/maps/obj/gold.tx" x="96" y="298.631">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="14" template="../../../../common/maps/obj/enemy.tx" x="143" y="304">
+   <properties>
+    <property name="enemy" value="Moritte"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="15" template="../../../../common/maps/obj/enemy.tx" x="208" y="112">
+   <properties>
+    <property name="enemy" value="Svella"/>
+    <property name="pursueRange" type="int" value="60"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="23" template="../../../../common/maps/obj/dialog.tx" x="269.666" y="283.957" width="23" height="18.8333" rotation="0">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The cavern is absolutely frigid, your current outfit not built to withstand such intense chill. Cruel eyes reflect off the shimmering ice of the walls, letting you know your presence here is not welcome.&quot;,
+   &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}],
+   &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="28" template="../../../../common/maps/obj/gold.tx" x="62.3395" y="62.3395">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="31" template="../../obj/treasure.tx" x="117.339" y="299.206">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ICE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Plains&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;ICE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Island&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;ICE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Swamp&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;ICE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Mountain&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;ICE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Forest&quot;
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="35" template="../../../../common/maps/obj/entry_up.tx" x="337.333" y="319.333" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="36" template="../../../../common/maps/obj/booster.tx" x="367" y="206.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="37" template="../../../../common/maps/obj/booster.tx" x="317.5" y="207">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ICE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ICE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ICE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="40" template="../../obj/treasure.tx" x="366.5" y="161.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Plains&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Island&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Swamp&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Mountain&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Forest&quot;
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="42" template="../../obj/treasure.tx" x="316" y="160.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Plains&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Island&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Swamp&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Mountain&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Forest&quot;
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="43" template="../../obj/treasure.tx" x="416.5" y="279.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Plains&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Island&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Swamp&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Mountain&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Forest&quot;
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="46" template="../../obj/treasure.tx" x="61" y="85.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ICE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Plains&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;ICE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Island&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;ICE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Swamp&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;ICE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Mountain&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;ICE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Forest&quot;
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="47" template="../../obj/treasure.tx" x="272.5" y="106.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ICE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Plains&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;ICE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Island&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;ICE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Swamp&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;ICE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Mountain&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;ICE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Forest&quot;
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="48" template="../../../../common/maps/obj/dialog.tx" x="401.728" y="145.877" width="48.3621" height="11.401" rotation="0">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A wild-eyed man dressed in concerningly little given the freezing temperature, stands ahead of you.
+
+'You! You violate the perfection of snow with your disgustingly warm presence! Let the cold take you!'&quot;,
+   &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}],
+   &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="49" template="../../../../common/maps/obj/collision.tx" x="340.27" y="177.057" width="25.4592" height="31.5833"/>
+  <object id="50" template="../../../../common/maps/obj/collision.tx" x="194.725" y="64.572" width="45.4592" height="15.7651"/>
+ </objectgroup>
+</map>

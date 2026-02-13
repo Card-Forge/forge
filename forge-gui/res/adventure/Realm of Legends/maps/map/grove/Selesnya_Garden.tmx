@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="28" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="119">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Conclave Guildmage&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="8" name="Collision" width="28" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxz42RgcBthGAYo0U+qXZTah0+/CR+mXSAAEscGsKnFJYfLPmwAJF7HzcBwnROCQWwQBomv4IBgmByMj8st6PaxCpDmD1IBMf6jJiDGPlr6b44Ofe2jNSAmP9DCLnz5nR520SrOSCnXaG0XLD5BNLGYXLsI2YMtHEixDwC+Sk2C
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="28" height="17" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJxjYEAAN05MPBjALy78+AonBBMDWAUgmE0AoY8STMiuHBnq2ofNTncuhF20sA+bnfjsq+KCYGzm4JPDZycs3pDjD2Y/MiY2rRBj3x1OVAwC9LQPWS0h+/YrkG4feniSkh6uc47ahy1P0Mo+XIAW9hEC1LSPWNDEjR9jyxMwQIo95AB0+/ABAJu5+ik=
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="28" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYEAAN07cmBbgMRcDQxM3A4MiD3HqCOGnXMTbdRuPn5bjkVsJlZPnwW0nNn9Rat8FTtx2guzjBMqzCkAwNeyDAXz+JNY+V6BeNyiGARjfHSp2BYiz0OyEARDbFmi+HRKuA+p7LMfA8IRE/BSIa3kRZmsj2YFsHzb/NMozMFwHijfJo2J8oBkqvwbJvEvsxNl3BSimoEAc3q+Aap8Kmlno9lUCw68KCTuRmMcb5RH2/WBFiMuxYLcPHeBLL4TswwbQ7UNPr5TYdxAqdgvot9ssiPwNA9jyCKX+c2GC0LjKSHQ7SbEPlK7Q7TuFxy5sdpJq3305hH1t3MSX/ehlAT41MNyMph4mTsguGCC1DpQh0lwQAAAPSWyB
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="28" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYEAAN07smNoAZu5jLgaGJm7iMC3AcqAbpithYhDwFGNg8BLDpEkFrAKo9v1UxMSU2gcKR06g2d1CDAw9Qgh6OVrcvUJiH5bAjokBoPiYo8PAoCnMwKAljKBdge5w40Koc0PjUxt4YgmfJ3IQ/BSIH8sh+DD8gIT0fIUTFd8F4iZ50jAl9oH8Z8dJHLaHuu02kfaB4g89vYDsW0QkvkuifSCAnl5IAeTYhw38FiIOU8s+XOAVGp9a9l0VIQ6j2wdKD7QCyHmHVuGJDMB1BlIepCWQ4cG0D199BQAwWno7
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="288" y="263.832" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="150.434" y="102.827">
+   <properties>
+    <property name="enemy" value="Emmara"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/enemy.tx" x="72.1846" y="126.775">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Vitu-Ghazi, the City-Tree|RAV&quot;, &quot;Selesnya Guildmage|RAV&quot;]
+}</property>
+    <property name="enemy" value="Trostani"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/enemy.tx" x="358.377" y="168.629">
+   <properties>
+    <property name="enemy" value="Chorus of the Conclave"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/enemy.tx" x="263.052" y="103.678">
+   <properties>
+    <property name="enemy" value="Tolsimir"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="104" template="../../../../common/maps/obj/dialog.tx" x="279.583" y="239.227" width="65.8333" height="22.5455" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A meticulously maintained garden blossoms before you, flowery scents and beautiful plants of all shapes and colors filling the space. Prominent signage informs you that this is the territory of Ravnica's Selesnya Conclave.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="107" template="../../../../common/maps/obj/scroll.tx" x="262.5" y="87.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Selesnya Sanctuary&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="108" template="../../../../common/maps/obj/scroll.tx" x="151.273" y="84.7273">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Selesnya Charm&quot;, &quot;editions&quot;: [ &quot;RTR&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="110" template="../../obj/treasure.tx" x="34.4091" y="117.545">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;RAV&quot;, &quot;RTR&quot;, &quot;GRN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;white&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;RAV&quot;, &quot;RTR&quot;, &quot;GRN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;white&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;RAV&quot;, &quot;RTR&quot;, &quot;GRN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;white&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="111" template="../../obj/treasure.tx" x="34.0455" y="140.136">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;RAV&quot;, &quot;RTR&quot;, &quot;GRN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;white&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;RAV&quot;, &quot;RTR&quot;, &quot;GRN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;white&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;RAV&quot;, &quot;RTR&quot;, &quot;GRN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;white&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="112" template="../../../../common/maps/obj/manashards.tx" x="382.5" y="121"/>
+  <object id="113" template="../../../../common/maps/obj/manashards.tx" x="382" y="144"/>
+  <object id="114" template="../../../../common/maps/obj/dialog.tx" x="111.897" y="130.102" width="16" height="16" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A trio of dryads emerge from the ground before you.
+
+'This garden may have been torn away from its proper place on Ravnica, but the will of Mat'Selesnya flows through us. You will bow before nature's might!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="115" template="../../../../common/maps/obj/collision.tx" x="32.5171" y="143.93" width="79.7811" height="14.8333"/>
+  <object id="116" template="../../../../common/maps/obj/collision.tx" x="32.2665" y="80.7852" width="80.1144" height="14.8333"/>
+  <object id="117" template="../../../../common/maps/obj/collision.tx" x="52.3124" y="158.964" width="59.7375" height="14.8333"/>
+  <object id="118" template="../../../../common/maps/obj/scroll.tx" x="51.6364" y="126.182">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Temple Garden&quot;, &quot;editions&quot;: [ &quot;RAV&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

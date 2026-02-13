@@ -963,16 +963,22 @@ public final class CMatchUI
 
     @Override
     public void showPromptMessage(final PlayerView playerView, final String message) {
+        cancelWaitingTimer();
+        cPrompt.setMessage(message);
+    }
+    public void showPromptMessageNoCancel(final PlayerView playerView, final String message) {
         cPrompt.setMessage(message);
     }
 
     @Override
     public void showCardPromptMessage(PlayerView playerView, String message, CardView card) {
+        cancelWaitingTimer();
         cPrompt.setMessage(message, card);
     }
 
     //  no override for now
     public void showPromptMessage(final PlayerView playerView, final String message, final CardView card ) {
+        cancelWaitingTimer();
         cPrompt.setMessage(message,card);
     }
 

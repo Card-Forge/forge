@@ -58,6 +58,8 @@
     &quot;enemyPool&quot;:[
 	&quot;Adept Black Wizard&quot;,
 	&quot;Apprentice Black Wizard&quot;,
+	&quot;Assassin&quot;,
+	&quot;Banshee&quot;,
 	&quot;Challenger 20&quot;,
 	&quot;Challenger 21&quot;,
 	&quot;Challenger 22&quot;,
@@ -74,36 +76,55 @@
 	&quot;Necromancer&quot;,
 	&quot;Rat Ninja&quot;,
 	&quot;Vampire&quot;,
-	&quot;Vampire Lord&quot;
-	&quot;Witch&quot;,
+	&quot;Vampire Lord&quot;,
+	&quot;Witch&quot;
 	],
     &quot;rounds&quot;:3,
     &quot;entryFee&quot;:100,
      &quot;rewards&quot;: [[
-		{
-			&quot;type&quot;: &quot;gold&quot;,
-			&quot;probability&quot;: 1,
-			&quot;count&quot;: 500 
-		}
-		],[{
-			&quot;type&quot;: &quot;item&quot;,
-			&quot;probability&quot;: 1,
-			&quot;count&quot;: 1,
-			&quot;itemNames&quot;: [&quot;Death Ring&quot;,&quot;Dark Armor&quot;,&quot;Dark Shield&quot;,&quot;Dark Boots&quot;]
-		}
-		],
-		[
-		{
-			&quot;type&quot;: &quot;card&quot;,
-			&quot;probability&quot;: 1, 
-      			&quot;count&quot;:2,
-			&quot;rarity&quot;: [
-				&quot;Rare&quot;,&quot;Mythic Rare&quot;
-			],
-      			&quot;colors&quot;: [&quot;black&quot;] 
-		}
-		]
-		] 
+        {
+            &quot;type&quot;: &quot;gold&quot;,
+            &quot;probability&quot;: 1,
+            &quot;count&quot;: 100
+        }
+    ],[
+        {
+            &quot;type&quot;: &quot;gold&quot;,
+            &quot;probability&quot;: 1,
+            &quot;count&quot;: 200
+        },
+        {
+            &quot;type&quot;: &quot;card&quot;,
+            &quot;probability&quot;: 1,
+            &quot;count&quot;: 1,
+            &quot;rarity&quot;: [
+                &quot;Rare&quot;
+            ],
+            &quot;colors&quot;: [&quot;black&quot;]
+        }
+    ],[
+        {
+            &quot;type&quot;: &quot;gold&quot;,
+            &quot;probability&quot;: 1,
+            &quot;count&quot;: 200
+        },
+        {
+            &quot;type&quot;: &quot;item&quot;,
+            &quot;probability&quot;: 1,
+            &quot;count&quot;: 1,
+            &quot;itemNames&quot;: [&quot;Death Ring&quot;,&quot;Dark Armor&quot;,&quot;Dark Shield&quot;,&quot;Dark Boots&quot;]
+        },
+        {
+            &quot;type&quot;: &quot;card&quot;,
+            &quot;probability&quot;: 1,
+            &quot;count&quot;: 2,
+            &quot;rarity&quot;: [
+                &quot;Mythic Rare&quot;
+            ],
+            &quot;colors&quot;: [&quot;black&quot;]
+        }
+    ]
+    ]
 }</property>
    </properties>
   </object>

@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="122">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Throne of the High City &quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon.tsx"/>
+ <tileset firstgid="16385" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="32769" source="../../../../common/maps/tileset/dungeon-nocollide.tsx"/>
+ <layer id="7" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAP3DgZGFZzkI5B+igB5Oqnlb0gcRimp7200jdq76i9o/YOD3uRzcBWRhGjhhx7CYmh8ycYDX97zxoR1keqvdgwqWrQAQDkMB3Q
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxbIcXAsAIPDjYhH+MzlxAetXfU3lF7R+0dtXfU3lF7qW8vAMkGR8c=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAPODkZGLiwYJg4Nw55kDglYDma/rNGmBgbWDnE7cVmHz67h7p/u7wYGLqBuMeLODY1/ZscTFj94yAIPRz8+ygIwX4YhKkWBBKhYTIc/IsLJGKJd3rYiw1Qai+sHIYBbGUvMWpIBdj8i+4XYtQMN3vRy0tK7XXlYmBwQ8PuXKSrQQcAKKFYjg==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYCAOZPRC6O487PIwcZg6aoBYHQSbOx9T/pgBqjiyekpAkCYq/xEjA0OnGwNDFxB3u0H4IHDCALt6ckED0OyzRhAMs5fTnYGBC4i53RH2IqunFIDMXDQBvxpkN4EASD26W8i1t8uLgYHXgzhMLXsX20HYIDOJASD11LB3iTXCvz1eCDfA3IFMg3CGDXXsfWKNaj6yHej2g/AKKtkLS1fY7MImTo34HSwgG+iXUHYGBj9gvsnrg9AgfjaBvEYqeBqEKfYCKJbbD7QXiPP7qWsfMghoRuDkYIjYWqB964B4fT+qGhD4agnBlIJEoF2pQJwWjDAbl70gTC17QWaB0igI47MXJM8PLK8F3Cm3ExdAtxcG+oF2TiDCXgBU62nJ
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="224.333" y="270" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="166.847" y="178.457">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Marchesa's Decree|CN2&quot;, &quot;Marchesa's Emissary|CNS&quot;, Deadly Designs|CN2&quot;]}"/>
+    <property name="enemy" value="Grenzo"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Grenzo's Key&quot;
+  }
+]
+</property>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="53" template="../../../../common/maps/obj/enemy.tx" x="222.874" y="114.19">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Selvala"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="0"/>
+   </properties>
+  </object>
+  <object id="55" template="../../../../common/maps/obj/enemy.tx" x="271.413" y="114.192">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Muzzio"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="0"/>
+   </properties>
+  </object>
+  <object id="57" template="../../../../common/maps/obj/enemy.tx" x="169.985" y="225.858">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Brago"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/enemy.tx" x="238.634" y="32.1797">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Marchesa's Decree|CN2&quot;, &quot;Marchesa's Emissary|CNS&quot;, Deadly Designs|CN2&quot;]}"/>
+    <property name="enemy" value="Queen Marchesa"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Marchesa's Key&quot;
+  }
+]
+</property>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="0"/>
+   </properties>
+  </object>
+  <object id="79" template="../../../../common/maps/obj/dialog.tx" x="212.25" y="197.25" width="74" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;This once opulent court chamber has fallen into disrepair. Blood and broken things stain the majesty this place once had, and make it clear that conspiracies are the true power in this place.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="82" template="../../../../common/maps/obj/dialog.tx" x="135.462" y="63.5098" width="226.959" height="10.0753" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A crowned woman with a tired expression sits on a broken throne. 
+
+'Come to kill me, have you? Well, go ahead and try. You'd be far from the first to fail at it.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue.)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="83" template="../../../../common/maps/obj/gate.tx" gid="1073745949" x="158.144" y="200.606" width="35.8332" height="22" rotation="0">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;This gate is locked.&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Leave&quot; },
+    {      
+        &quot;name&quot;:&quot;Unlock with Grenzo's Key&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Grenzo's Key&quot;}],    
+        &quot;text&quot;:&quot;The gate swings open.&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:92}, {&quot;removeItem&quot;:&quot;Grenzo's Key&quot;}, {&quot;deleteMapObject&quot;:-1}]} ]
+    }
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="85" template="../../../../common/maps/obj/gate.tx" gid="1073745949" x="300.667" y="200.583" width="35.8332" height="22" rotation="0">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;This gate is locked.&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Leave&quot; },
+    {      
+        &quot;name&quot;:&quot;Unlock with Marchesa's Key&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Marchesa's Key&quot;}],    
+        &quot;text&quot;:&quot;The gate swings open.&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:93}, {&quot;removeItem&quot;:&quot;Marchesa's Key&quot;}, {&quot;deleteMapObject&quot;:85}]} ]
+    }
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="87" template="../../../../common/maps/obj/booster.tx" x="286.333" y="225.667">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;CNS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;CNS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;CNS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="88" template="../../../../common/maps/obj/booster.tx" x="287.333" y="254.333">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;CN2&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;CN2&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;CN2&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="89" template="../../../../common/maps/obj/gold.tx" x="340" y="218.333"/>
+  <object id="90" template="../../../../common/maps/obj/gold.tx" x="339.667" y="237.333"/>
+  <object id="91" template="../../../../common/maps/obj/scroll.tx" x="169.333" y="257.667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Throne of the High City&quot;, &quot;editions&quot;: [ &quot;CN2&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/collision.tx" x="225.842" y="33.3099" width="44.8161" height="30.8803"/>
+  <object id="96" template="../../../../common/maps/obj/collision.tx" x="192.259" y="1.0144" width="17.1494" height="28.6985"/>
+  <object id="97" template="../../../../common/maps/obj/collision.tx" x="288.152" y="1.22652" width="17.1494" height="28.153"/>
+  <object id="98" template="../../../../common/maps/obj/collision.tx" x="171.759" y="82.5598" width="22.4827" height="15.547"/>
+  <object id="99" template="../../../../common/maps/obj/collision.tx" x="219.759" y="81.8932" width="22.4827" height="15.547"/>
+  <object id="100" template="../../../../common/maps/obj/collision.tx" x="268.425" y="81.5598" width="22.4827" height="15.547"/>
+  <object id="101" template="../../../../common/maps/obj/collision.tx" x="316.425" y="82.5598" width="22.4827" height="15.547"/>
+  <object id="102" template="../../../../common/maps/obj/collision.tx" x="143.426" y="122.06" width="18.816" height="19.2137"/>
+  <object id="103" template="../../../../common/maps/obj/collision.tx" x="220.092" y="112.393" width="22.4827" height="15.547"/>
+  <object id="104" template="../../../../common/maps/obj/collision.tx" x="268.758" y="112.06" width="22.4827" height="15.547"/>
+  <object id="105" template="../../../../common/maps/obj/collision.tx" x="316.758" y="113.06" width="22.4827" height="15.547"/>
+  <object id="106" template="../../../../common/maps/obj/collision.tx" x="172.426" y="145.726" width="22.4827" height="15.547"/>
+  <object id="107" template="../../../../common/maps/obj/collision.tx" x="220.426" y="145.06" width="22.4827" height="15.547"/>
+  <object id="108" template="../../../../common/maps/obj/collision.tx" x="269.092" y="144.726" width="22.4827" height="15.547"/>
+  <object id="109" template="../../../../common/maps/obj/collision.tx" x="317.092" y="145.726" width="22.4827" height="15.547"/>
+  <object id="110" template="../../../../common/maps/obj/collision.tx" x="170.425" y="111.227" width="22.4827" height="15.547"/>
+  <object id="111" template="../../../../common/maps/obj/collision.tx" x="334.259" y="116.726" width="18.1493" height="25.2137"/>
+  <object id="112" template="../../../../common/maps/obj/collision.tx" x="323.259" y="0.2265" width="12.9827" height="15.547"/>
+  <object id="113" template="../../../../common/maps/obj/collision.tx" x="337.509" y="32.7265" width="12.9827" height="15.547"/>
+  <object id="114" template="../../../../common/maps/obj/collision.tx" x="145.509" y="30.7265" width="12.9827" height="15.547"/>
+  <object id="115" template="../../../../common/maps/obj/collision.tx" x="162.009" y="-0.2735" width="12.9827" height="15.547"/>
+  <object id="116" template="../../../../common/maps/obj/collision.tx" x="273.509" y="174.976" width="12.9827" height="15.547"/>
+  <object id="117" template="../../../../common/maps/obj/collision.tx" x="210.634" y="175.726" width="12.9827" height="15.547"/>
+  <object id="118" template="../../../../common/maps/obj/collision.tx" x="320.842" y="243.893" width="28.316" height="20.2137"/>
+  <object id="119" template="../../../../common/maps/obj/enemy.tx" x="295" y="159.333">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'You. Its ironic that I'm the one asking for this, but I need some people dead. People here in this very room.'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;The job is done.&quot;,
+					&quot;text&quot;: &quot;'Death to tyrants.''&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                       {&quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Adriana, Captain of the Guard&quot;, &quot;count&quot;: 1}     
+                       {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 2500}                
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 5
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Who do you want dead? What's the pay?&quot;,
+					&quot;text&quot;: &quot;'Name's Adriana. Former guard captain of Paliano - until Marchesa took over. I was close to overthrowing her when we all got dragged here. And now I've been stuck under some frustrating pacifism enchantment, not able to do anything but watch like a caged bird as she plots to seize power in this world just like in our home. I need everyone else here dead. I've got a cache of gold with your name on it if you manage it.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;I don't have time for this.&quot;,
+					&quot;text&quot;: &quot;The woman scoffs, muttering about needing to do everything herself.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Adriana"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="0"/>
+   </properties>
+  </object>
+  <object id="120" template="../../../../common/maps/obj/scroll.tx" x="192" y="257.333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Marchesa's Decree&quot;, &quot;editions&quot;: [ &quot;CN2&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="121" template="../../../../common/maps/obj/scroll.tx" x="143.667" y="257.333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Palace Jailer&quot;, &quot;editions&quot;: [ &quot;CN2&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

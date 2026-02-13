@@ -5,7 +5,7 @@ PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInvestigate | TriggerDescription$ Woman Who Walked the Earth — When CARDNAME enters, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
 SVar:TrigInvestigate:DB$ Investigate
 T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Clue | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you sacrifice a Clue, CARDNAME and up to one other target creature can't be blocked this turn.
-SVar:TrigPump:DB$ Effect | RememberObjects$ Self,Targeted | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | StaticAbilities$ Unblockable
+SVar:TrigPump:DB$ Effect | RememberObjects$ Self & Targeted | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | StaticAbilities$ Unblockable
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Creature.IsRemembered | Description$ This creature can't be blocked this turn.
 K:Doctor's companion
 DeckHints:Ability$Investigate

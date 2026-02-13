@@ -10,3 +10,18 @@ ScryfallCode=MSC
 2 M Mister Fantastic @Gintas Galvanauskas
 3 M Human Torch @Vilhelmas Banys
 4 M The Thing @Darius Zablockis
+5 M Captain America, Team Leader @Mark Spears
+6 M Doctor Doom, King of Latveria @Nathaniel Himawan
+7 M T'Challa, the Black Panther @Eli Minaya
+0 R Abomination, Irradiated Brute @
+0 R Absorbing Man and Titania @
+0 R Black Widow, Intel Expert @
+0 R Captain America, Unbowed @
+0 R Hawkeye, Trick Shot @
+0 R Hulk, Always Angry @
+0 R Iron Man, Futurist Paragon @
+0 R Loki, God of Lies @
+0 R M.O.D.O.K., Evil Intellect @
+0 R Thanos, Death's Consort @
+0 R Thor, Guardian of Midgard @
+0 R Ultron, Machine Overlord @

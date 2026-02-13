@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="76">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Cult Guildmage&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="7" name="Collision" width="30" height="24">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5U1/hAFUBAACvAQtAAAE=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="24">
+  <data encoding="base64" compression="zlib">
+   eJybwsnAMGWQ47+CqHg42otux0DZO4pH8WDDA5H3ke0dKP+OBHsHOm6Ha31CyF4QoLe9tLQTGdDTXnx24wMDYTet45medtLaXmIBADS0t1w=
+  </data>
+ </layer>
+ <layer id="6" name="Ground" width="30" height="24">
+  <data encoding="base64" compression="zlib">
+   eJxbzMDAsHgUjyj8VxCC6W0fDP+jk90DYS9y2ILo2UIMDHOEhl+cYgvfgbBzoOwdzmE82MJ6uNs7kPGMbi8DifrRAbFqKbEThOOA+uJJCDN0e4lxLzb8h8R4wgeokT5wmUWpfTAzsKUPXGaS4k9S3EMJICdPkAIAj7vA+w==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="24">
+  <data encoding="base64" compression="zlib">
+   eJzVleFugzAMhPlJHqwF8aKwsbeiW3mMEY0TX12TpEWtNKSoVer67LuzOYeqOv+D81lX1bicr/q9uO1y+gVzfkN/7O0nvA6TWMKJd5fwd8Qz747wrjzfy5nW/MKI+B/Lp55pjYucx/vpAHbMPdS3+YUR8SNOfHrEnFbNGfcIvuWW2MSRp+ivGH8Nt7U84tMONbC3GbVMYdOic3Kwb3phD7cJm0aNwaQOVmPmbPG/od40Uxw51XdxNa81eDNKHvSwZ09n1SofnMI9v8zt+dPTPccHNSEu51P1kZ/RcGN193yy58Um0aN2gKexcqY8q7qFIy2E0TmxnAP9h3yTx5JZoWdSe531cSaJ3Tr1lOwGb+48XMazTsVYL6fO3nzsYZAnb47kh9y7Qfp4v9MPth7ltbNrn9R+5l4q1YXzat8buuN+9vhXzzlt7KwOGY0Zv5dbuyLnBTu/djfQ19LpWpC7dPbIwVjf63zknV9ai9Wyf7LHX90DRnk=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="24">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgxUsAWJWOtv5WJOB4YkmnS0Fgv8gO7Xoby+9wxcGlhChZgIHde1kxcGmNyDG70MdEOPHhTwMDIt4aO4UDGDPy8DgwEs98wYyLQ0kGMh0PFLDfBQMLzBfhzixwQoAHycK4A==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="204" y="382.667" width="80" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="53" template="../../../../common/maps/obj/enemy.tx" x="155.167" y="321.667">
+   <properties>
+    <property name="enemy" value="Massacre Girl"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="54" template="../../../../common/maps/obj/enemy.tx" x="138.167" y="121">
+   <properties>
+    <property name="enemy" value="Exava"/>
+   </properties>
+  </object>
+  <object id="55" template="../../../../common/maps/obj/enemy.tx" x="291.333" y="119.167">
+   <properties>
+    <property name="enemy" value="Juri"/>
+   </properties>
+  </object>
+  <object id="60" template="../../../../common/maps/obj/gold.tx" x="112.56" y="243.576"/>
+  <object id="61" template="../../../../common/maps/obj/gold.tx" x="222" y="104.94"/>
+  <object id="63" template="../../../../common/maps/obj/enemy.tx" x="213.333" y="170">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Rix Maadi, Dungeon Palace|DIS&quot;, &quot;Rakdos Guildmage|DIS&quot; ]
+}</property>
+    <property name="enemy" value="Rakdos"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="64" template="../../../../common/maps/obj/enemy.tx" x="210" y="271.5">
+   <properties>
+    <property name="enemy" value="Judith"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="65" template="../../../../common/maps/obj/enemy.tx" x="249.864" y="306.364">
+   <properties>
+    <property name="enemy" value="Tesak"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/treasure.tx" x="385" y="224">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;DIS&quot;, &quot;RTR&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;black&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DIS&quot;, &quot;RTR&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;black&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DIS&quot;, &quot;RTR&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;black&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/treasure.tx" x="139.5" y="269">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;DIS&quot;, &quot;RTR&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;black&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DIS&quot;, &quot;RTR&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;black&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DIS&quot;, &quot;RTR&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;black&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/scroll.tx" x="129.5" y="338.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Rakdos Carnarium&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/scroll.tx" x="270" y="306.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Rakdos Charm&quot;, &quot;editions&quot;: [ &quot;RNA&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/manashards.tx" x="108.455" y="360"/>
+  <object id="71" template="../../../../common/maps/obj/dialog.tx" x="200.5" y="335.75" width="80" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The cave ahead echoes with screams of pain and sighs of pleasure. Loud, thumping music can be heard, and all manner of scantily-clad people walk about in a party-like atmosphere. A sign marks this as the territory of Ravnica's Rakdos Cult.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/dialog.tx" x="334.799" y="135.705" width="16.0682" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;WARNING: Ball pit currently out of balls.
+Only masochists are advised to jump in.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/dialog.tx" x="177.5" y="217.75" width="69" height="15" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The smells of blood and smoke are overwhelming as you round the corner and come face to face with a huge demon, the namesake of the cult, the demon Rakdos himself. He looks down at you before flames blaze around him.
+
+'Entertain me.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="74" template="../../../../common/maps/obj/collision.tx" x="337.459" y="176.548" width="30.7495" height="30.5704"/>
+  <object id="75" template="../../../../common/maps/obj/scroll.tx" x="188" y="117.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Blood Crypt&quot;, &quot;editions&quot;: [ &quot;DIS&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

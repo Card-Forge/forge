@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="27" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="91">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;League Guildmage&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx"/>
+ <layer id="6" name="Collision" width="30" height="27">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUDFcQzcvAsIsHFUfxQsRhNDZ5SoEsD4R240TQ0jwQcRiNLAcC0jzUsxcZgMyF+ReXPDXsJcUcUtXjM4dUQMtwRo5fWtiLK73C7KV1en7ECKEHMj0TAsMtPdMjXY3U9EwKGE7pqpabgWEPktheILueG1UNNexFj7tdaP6RxSK/iwr2DjcAAI+DL9Q=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="27">
+  <data encoding="base64" compression="zlib">
+   eJzz42Rg8BvFo3gUD0tMLhi1d9TeUXtH7R21d9ReELinNrL8O9TtHW4YADTKw2k=
+  </data>
+ </layer>
+ <layer id="7" name="Floor Tiles" width="30" height="27" tintcolor="#fffcd9">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUDFfwhB2Bf3ERz6aWvaTYSS17SbUTxKYUkGPnaDiTDkbDeTScR8OZOv4dKuFMDXvJsZMa8UuOndTw73ADAGmB4gA=
+  </data>
+ </layer>
+ <layer id="2" name="Walls and Ground" width="30" height="27">
+  <data encoding="base64" compression="zlib">
+   eJytVsFOAjEQ7WFJKMSLv6HgATl7QFZPYLx7QNR4MIZv8Cv8A+JJQU9+hj9gADUmC8InOGN33GFoyy4wyQvbmXbedqavbD+v1EQrr41r8+MI5r/Auj7gWayXc+WYfBeAS8AV4KaWzON+lw/5pE/mpLWR8H8APgFfgpf7N+GLBNd+kOAtmB9vEjI33/ttTqle3mBZncnS9AMNc7vqjLEm9Owxv7x+OOcpxTzOy/1n9QQYG8DvEDBi/rGY5wJxSD/x8twtmHsOaMf7bYUwBrRDv75wvzOIN2KcWOb6cg/ANwSM4tgAfEPAKDR91pCvIFBkz644mi83P2OdXPJcDUyvu3GOzoH5vbtW6gF81bIBxtHHDeOVwJ0bwWuO7xSx2k0Y7/uxgYtXbxkQ799+RW5ed15zGUPrOnpM72Ez4pW5ed15zWXMx+uz//2K3Nx8/bXx9koGfHxYXuRd1l/Uw1SbO0BqDK1eUCoUOCokHL641FFa/dr2u72X1JHi6LPWWegorX5tvDyvy3h8p2g0kkW/6/Bm1a/8frDxfpfm41JP6+oXzxzmRR4JMu+5WlG/M724X8mL8fuKY78O/c5EThlrWHh5Xpel6a/vXBGvSyc+XlybRb88Rrx0FyNs+n3dtfNm0S+P4TfyqvcVrqX/Neoh73eTvbvt3khjlJ/znOpFXm4TwbuqEcePNt8peEfhXTB28P4CAwSOGA==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="27">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJyllTtOxEAMhl0REO+ClgY2SyTY3YoTgMQ1EBJssXsEhESxPMJjt4YDcAMQPRJwCQrEJWjAoxDFMfbEk1j6pWTG42888TgAAN9bdgGUn3PT3vlabr74TbnSPOda92zh8r1qPJ9vVc5VvlKekr/vrLX8NZ7GtdaRj6vlUZWvpe5CLZTr4zt7iwHeUeMWwKTl5/rOxfJNPvYKHbUB+qgOsrtxeU6LX4e72ANYQi2jHlaysbsE4D7JnkcDgDPUOepiYONKuVFfl8Mt8saoCeq0n40/IvPpjzs1BIhQ06iZYTnvqm+m3QkXY7X731861+O1zDeUK9WVi/HjqR1u3LfqHljreadjG7NwLf13n+QxIs8vsexj5XIf7R49bwKsE9ZBOxujNR/C1Xq+Y81irDnUPGqhJ8egNc/rqoqpcVOMdYW6Rt0o3Nzc/a7Dlb513is0k/pUCFd6z7lSzXCrU1dS36Dck119vcu3SV3x97xfOW66XUiy0LqS5nhd0Vwc95Xco0s825Scr7VPWuqK5uLssF3MbeAeErIPqU/W+R81Nev/18r9jAC+ovpczrb+Hyxc3/pfYs9l8g==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="224" y="409.5" width="32" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="57" template="../../../../common/maps/obj/enemy.tx" x="231.141" y="220.489">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Nivix, Aerie of the Firemind|GPT&quot;, &quot;Izzet Guildmage|GPT&quot; ] }"/>
+    <property name="enemy" value="Niv-Mizzet"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/enemy.tx" x="195.648" y="321.313">
+   <properties>
+    <property name="enemy" value="Melek"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="59" template="../../../../common/maps/obj/enemy.tx" x="256.459" y="277.313">
+   <properties>
+    <property name="enemy" value="Ral"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="60" template="../../../../common/maps/obj/enemy.tx" x="257.292" y="358.802">
+   <properties>
+    <property name="enemy" value="Mizzix"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="64" template="../../../../common/maps/obj/manashards.tx" x="189" y="192.667"/>
+  <object id="70" template="../../obj/treasure.tx" x="303" y="221.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;GPT&quot;, &quot;RTR&quot;, &quot;GRN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;blue&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;GPT&quot;, &quot;RTR&quot;, &quot;GRN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;blue&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;GPT&quot;, &quot;RTR&quot;, &quot;GRN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;blue&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/scroll.tx" x="293.667" y="365.334">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Izzet Charm&quot;, &quot;editions&quot;: [ &quot;RTR&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/scroll.tx" x="295.333" y="287">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Izzet Boilerworks&quot;, &quot;count&quot;: 1 } ] "/>
+   </properties>
+  </object>
+  <object id="74" template="../../../../common/maps/obj/dialog.tx" x="215.833" y="375.25" width="48.6667" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A series of labs opens up before you. Bubbling concoctions, blazing burners, and the whir of experimental devices fill the air. A sign marks this as the territory of Ravnica's Izzet League.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="75" template="../../../../common/maps/obj/manashards.tx" x="188.667" y="377"/>
+  <object id="76" template="../../../../common/maps/obj/manashards.tx" x="168.333" y="193.333"/>
+  <object id="77" template="../../../../common/maps/obj/manashards.tx" x="167.333" y="307.333"/>
+  <object id="78" template="../../obj/treasure.tx" x="175" y="224">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;GPT&quot;, &quot;RTR&quot;, &quot;GRN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;blue&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;GPT&quot;, &quot;RTR&quot;, &quot;GRN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;blue&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;GPT&quot;, &quot;RTR&quot;, &quot;GRN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;blue&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="79" template="../../../../common/maps/obj/collision.tx" x="146.075" y="263.798" width="57.4004" height="16.8634"/>
+  <object id="80" template="../../../../common/maps/obj/collision.tx" x="290.637" y="245.738" width="34.5047" height="18.25"/>
+  <object id="81" template="../../../../common/maps/obj/collision.tx" x="320.373" y="271.625" width="15.6297" height="15.125"/>
+  <object id="82" template="../../../../common/maps/obj/collision.tx" x="319.935" y="192.688" width="15.6297" height="15.125"/>
+  <object id="83" template="../../../../common/maps/obj/collision.tx" x="275.81" y="144.563" width="53.6297" height="31.5"/>
+  <object id="84" template="../../../../common/maps/obj/collision.tx" x="224.435" y="144.438" width="31.1297" height="31.375"/>
+  <object id="85" template="../../../../common/maps/obj/collision.tx" x="191.56" y="143.688" width="15.6297" height="15.125"/>
+  <object id="86" template="../../../../common/maps/obj/collision.tx" x="147.185" y="148.313" width="34.0047" height="20.25"/>
+  <object id="87" template="../../../../common/maps/obj/collision.tx" x="144.06" y="191.938" width="15.6297" height="15.125"/>
+  <object id="88" template="../../../../common/maps/obj/collision.tx" x="144.935" y="289.188" width="15.6297" height="61.75"/>
+  <object id="89" template="../../../../common/maps/obj/collision.tx" x="146.685" y="356.688" width="35.1297" height="19.75"/>
+  <object id="90" template="../../../../common/maps/obj/scroll.tx" x="278" y="194.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Steam Vents&quot;, &quot;editions&quot;: [ &quot;GPT&quot; ], &quot;count&quot;: 1 } ] "/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

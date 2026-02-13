@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="99">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Voldaren Estate&quot;, &quot;Voldaren Bloodcaster&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7C+8w/VWw37E0gvqaqqqqqqqqqqqu8DFRHS7A==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztl1EKwjAQRPdX2p6g9ToeQs9iPZda72ZEAjG4aWzaZkwnMFCY+egLDJvtapGuMB12unL/GxLvqRG51Z86Njielp3KuzfyTwvkaVnykpe8GEzkJe9cvA+jvhK5GJ2r9/eQ2bNyM72XTX1fve62BfFiMmO8Y2+Xu9EVxHMzU3ljuoF4Unn9PoS6kstzM6m8KB1dur8ar+212yd/X1nbC3U8dj/SeBFm7BLz1862YSO8oY7kZiIveclL3l/2o287CIKnZVP3o38TeclbkshL3pJEXvKWJPKStySRd7u8T2lO1+w=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="60" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt18sJgDAMgOE6gjsIXjx77hou5AaCB/fSAZzCkw8ERVCJ9oX+HxRCk4acClEKgMRgqE/5MCeRR1tcGeqJsLSpUt10+sN9nG25OT57d9VTmpPUvNHYaw2P9C6ufQ2xcvE/AwDgUhLd1wBfYGPPCX0/wr9pQW1hawgAAAAAALAYAWdgH0s=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="66" template="../../../../common/maps/obj/door_up.tx" x="35.2402" y="285.749">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/evilgrove/Castle_Voldaren_1.tmx"/>
+    <property name="teleportObjectId" value="66"/>
+   </properties>
+  </object>
+  <object id="79" template="../../../../common/maps/obj/enemy.tx" x="744.5" y="166.287">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;The great vampire staggers back, your final blow already causing his body to begin dissolving into dust.
+
+'Slain by one such as you... What an ignoble fate...'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ceremonial Knife|VOW&quot;, &quot;Groom's Finery|VOW&quot;, &quot;Markov Waltzer|VOW&quot;, &quot;Markov Patrician|ISD&quot;, &quot;Glass-Cast Heart|VOC&quot;, &quot;Arterial Alchemy|VOC&quot;, &quot;Blood Fountain|VOW&quot;, &quot;Wedding Invitation|VOW&quot;, &quot;welcoming vampire|VOW&quot;]}"/>
+    <property name="enemy" value="Edgar"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="83" template="../../../../common/maps/obj/enemy.tx" x="489.178" y="225.9">
+   <properties>
+    <property name="enemy" value="Sorin"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="84" template="../../../../common/maps/obj/enemy.tx" x="261.282" y="226.273">
+   <properties>
+    <property name="enemy" value="Runo"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="88" template="../../../../common/maps/obj/booster.tx" x="718.333" y="95">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;VOW&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;VOW&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;VOW&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="89" template="../../../../common/maps/obj/booster.tx" x="768.667" y="95.6667">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/booster.tx" x="719" y="66">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;SOI&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;SOI&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;SOI&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/booster.tx" x="769.667" y="67">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;DKA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DKA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DKA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/dialog.tx" x="744.583" y="196.5" width="16" height="16" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A heavily armored ancient vampire stands regally before you, disdain thick in his voice as he speaks. 
+
+'I can't say I'm surprised my pathetic so-called kin failed to stop an intruder with power such as yours. But thinking I will fall as easily as them will be your last mistake.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="93" template="../../../../common/maps/obj/dialog.tx" x="103.833" y="233.25" width="32" height="32" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The castle basement's air is stale and an unsettling silence hangs over it. Even the darkness seems to hesitate to retreat before the light down here. Entrances to numerous crypts line the halls, but the thick dust upon them indicate they are simply what they appear. Still, danger does lurk here - a fierce hunger can somehow be felt from deep within the shadows ahead.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/gold.tx" x="742.364" y="65.8182"/>
+  <object id="95" template="../../../../common/maps/obj/gold.tx" x="742.364" y="91.2727"/>
+  <object id="96" template="../../../../common/maps/obj/gold.tx" x="742.545" y="77.4545"/>
+  <object id="97" template="../../../../common/maps/obj/gold.tx" x="720" y="77.6364"/>
+  <object id="98" template="../../../../common/maps/obj/gold.tx" x="769.636" y="78.9091"/>
+ </objectgroup>
+</map>

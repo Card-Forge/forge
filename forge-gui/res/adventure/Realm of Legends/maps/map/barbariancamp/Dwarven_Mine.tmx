@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="128">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Dwarven Mine&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon.tsx"/>
+ <layer id="1" name="Background" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1jEKgDAMQNGuxXt5Jq/S2zrWRcHBhMYnvFHIb4Z29NZGgmPLkdGqV69evXr16tWrV69evXr1rqpCA6xu79Pb/7Jnjz6n7Bki9/sXzgaAr1W/Z65vDe+Oeu72W3XHT1/2bJGtFXuhghNB//2x
+  </data>
+ </layer>
+ <layer id="6" name="Background 2" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzFWUuOWzEM0ypAD5Yes5vJubJ5OUgRFEIZhtQnmWAMeDEvtiRSP9tzjYgrzBPNi/jGE/d/0d9u5l61fvqNZZ2FPdV6tfZi9Km1scAbpLvCF+Ib2z7Rqdb/Fnjv42gwVzY5rIiNOe/wnmOPFW0+hB0R//1b8avs3+DlPYi9kr3BmsPFJWN1/k8ZxxCvwur2ZX6fzboJ3hwqnvk3hRf1sZwOb4XVxbCTiTlQYWWuXEx2eNX6CnOuV/o7LpXMzseO2+Tpi+ZF2HyArPztNsDrdE/juvKx4m+ij3lSeINkufrV+anzc5X/yscYhxVWjteT+J6xq+Q4u7gmbHwbjWyFOc9EnS7lwzxTTbjuYm/bGxXXnd4L4J3Izn0H6UO+Or3VzNrAfczZwzHX6UYMHWZ1VszzVMRzLk58HGL9VE7qnsYQ8oOYVZ9ScaP0KVvZD6o2bTGnTIVXcRqEtaqdjLfiFjlzex0OtqPCnDLThpuRH/Fsg8OLOrmG3/9WOXbQXq5nGMOH2M/48B7I/cTxzXky5fs+z/F4p02sk3sN6uOeM8lx5+sOb8Sz/o7XKnarOy76FGu/mhvOriC3isegvQ6r45W5VHWnqm/J1Z9f/6biprJHcdi9n7jacR7sY/kqXxMLz2vzWxVTN9KXZ98Q33MwT4qbiluVJ87+V2dXJ9EWju0o+HJn38lb1Cfxoq8d3ojHmsHno6pfOf7UelWHP4HX9X7sB6rO4DrVr6Z4WQfaM8XAOju83IsjdO9WmPmbe6NgzDkUR8nfq3HKv93iEa+675+M7RXmql+9+g71al4iXymHZbMdXf/Evd1dKYSPc5/j9Z1aVJ0vmHO0P23s3jhcnrNs7s8VpzHEjDnT9UDGybK2d3PkL+I5p9GOSfzgvq2PGXNifSdu1HsS32Vcz+p8+25cf2cfQ7sD7Ju+V1bvOq/64dNz+8ah7gbV/xB+Clelu6ph1ffJGeyn/ZkTa0dVYybna/SpqqnVneinfL/FnPU8cXKvY9wbe/iseCM7PoEX7Vd1yr1ZqPi+LO3seP+O2J74OMfmzTrxbmxx9lT3kBjqqGoN5ieeOTbvd9t4dvngdOSo9LjY685ueebcvt+xXcqG6o6i7uk5uG5sa5M6u3FsdnFfcbbdy7hPjbwNVhcjG7xpd46/68lmVQ==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzlmc9u00AQxle0lWoRH0EcuCHxFvRGGkXijATtq/AoXHJoaTn2beCG4iLxAlWCAK/iT/kymdmdtV3lwEqrxvZ6dn7zZ3e8nVYhTA/QX04O0/voenMawm3bv57+H7znbT8JIfyo+jNLPWBD2PGQvNKfTdu/tL9fPQ1hPpJ/Z+09tHnC/0PtkmOMfdleX4RdtujjxQAfS4Zlx3vV/v5p8PK4QHOPwRvt/a6V+Svs2h3P4WPo15e3Lysz3xb43NLnuA7hvtr0yMWy4c/o46Hx7I1jHvdmH3uP3+L26BbZka8sczmQFz77luG1fBvjQfokx41czeVgo8j8275/UvfjlQypWJ4ZrDy+qXR2mePIVS0PtJxeiPn6sEKWh9XybSr2m2o/D8Es52a7POl896cdt5ps5kVMz0VcYD2P7+TqEe8axb6dtv29k1fa6ZLGW7xgjpwPk801WPFsWe3mMt+HTrk4zult6Zbbo61c0XIzrn93YZOfR/Wmrydb3k/1Vk6Mm/jsrrs+qrexJPdmqcfKybs2fMF5KesFtGsxh5VPUW/Oz+N6y8U2wzM5HvJ4XZB5mItl5KJcJ2FnvCvzA/Y+U2LBijFrX1p3sf02sx5perI+rG+uPpAxLWNiRqyQqd3jeL6vdvXIrauefVdjhuwcpycXmZfv4x1tbOk+Att49yJmZht5eT37VhzDPmefeOcZs3Mul9b3HHsaK3wJNo6HMXmx95b6iNevMb5zET9gw7VnLdSYNL1gQ4/uVn00JjvqQ8iQ8Z3jk/uHrDWl/vwdnPItr8/e+r40X/g7piTuStvrF/ocvF7FOkbGXWwldWIqptmmnli2eHnPZN9Evz7P8Eq5PEbW9R49rRxjZu+6KHmnhg6QPXnms2num573OE+O/TaYvGcHfeKiKfCLXJ9LctSq0yDLWle8eSHrg9xYT10odS7NUX7/Iej5Fe/1nUPuaWN0q54t0cmqO5ru3pA55J42pPMePJbMlE1L/HRzqu+9pTpa36Na3g3ll994Jbyps47U+ZZVq8R20f2d6qJNn3v+lyD9U8LLNlroqpn8Vs3obdp5Re5/Cakz+FzMpOrc2D7Qb8tPJe2zoWfKfiU2zjF7a0m57uOeVn+VNI1/aPP+vwLtu7jGOq+dh/SxXUk7Szyz4q2UV3vfczYxhDcXK9b3laWvpWOqbvO8r8m67PS77rqmO+6tgl2ra7Fk6fuRZHvqvpRdS2oW7ZxLq7lz5zUeu0rf95WVytGSzvv0eRfr2nluH9lD7PWYHTyS99B6PXafEe8h5v8HmSjSfA==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1EEKwjAQRuHQW9heQW0prnoT8QjeyJtZ7+BSXDazkKo02wn88z4ohGyax6RNCQCAstdU+wR+3lOc3ltf+wR+7rn1MtQ+hZ9doFbF2T4K36Ziq9m6r6qt5py75n6ds3LrN+tuhxitH12gVhOt1+506X+tKtqM6dVGrzZ6tdGrLVovcGr83vUc1/Uhr4/j754Hz95obJb7v8f2rs4zBgCktAByHx6o
+  </data>
+ </layer>
+ <layer id="8" name="Aboveclutter" width="60" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmT1OwzAUgF8ZqgJFnUDMTCUdyp8oFDYQ1wBuAeoBusAR4BKMMIHExA4nQAIk1paNZ6EnVMup7fo3iT/pKYqdpP78bDd1ARIJPxy1AY7boVvhj1N0PQvs67PPhxtq191g3DpqQwx9TpDnQQ3gsBa6Ne6piifD5RhWQXWuyRj1AZrL8utC5daWZwyUycUGOv0x7rtrh09U5hpj1eJYGSxNP5+VmMczObKjLV+XvK/YeU4RXG1SNd9EwoSTnHVmvAvwg9Hd/gtVVL/PfLHQVbturwew39P3FRFyX+Ou/h8qUJ5NiOk3tgzKc1HRza8OoxK8U19gbi8LnN+YCb3H4Zsq7V8VjfPW5JGI4f3jeT6/7hHrnnLq+bbz6zy/53GfATxks7WRJ7a5zVwpiFd0fZP4yjxM9+A/NgE+Mb4wvrf07zflZW3yXOYhqtfJ9To6ZhidAK6M1qL5M0Ks41cNgOuG388kQszlDNe0zpR1L4+dOXG5yIEvK9P/aSIHKiuTpwpV8UwkeH4BuxNNQQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="448" y="638.755" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="53" template="../../../../common/maps/obj/gold.tx" x="222.167" y="40.75"/>
+  <object id="54" template="../../../../common/maps/obj/gold.tx" x="225.917" y="339.583"/>
+  <object id="57" template="../../../../common/maps/obj/enemy.tx" gid="2147495067" x="239.423" y="134.96">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Koll"/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/enemy.tx" x="103.663" y="442.664">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Cayth"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="62" template="../../../../common/maps/obj/gold.tx" x="654.333" y="283.333">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="63" template="../../../../common/maps/obj/gold.tx" x="648" y="393.333"/>
+  <object id="64" template="../../../../common/maps/obj/enemy.tx" x="202.764" y="513.301">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Depala"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="65" template="../../../../common/maps/obj/enemy.tx" x="424.921" y="369.058">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Cadric"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/enemy.tx" gid="2147495067" x="499.105" y="172.408">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Hofri"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/enemy.tx" x="177.863" y="131.217">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Goldvein Pick|KHM&quot;, &quot;Fearless Liberator|KHM&quot;]}"/>
+    <property name="enemy" value="Magda"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/gold.tx" x="512.696" y="349.285"/>
+  <object id="71" template="../../../../common/maps/obj/enemy.tx" gid="2147495067" x="472.514" y="322.299">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Reveka"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/manashards.tx" x="546.767" y="90.4698">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/manashards.tx" x="168.863" y="103.322"/>
+  <object id="76" template="../../../../common/maps/obj/manashards.tx" x="678.06" y="260.505">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="78" template="../../../../common/maps/obj/gold.tx" x="240.083" y="338.417">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="82" template="../../../../common/maps/obj/enemy.tx" x="811.334" y="408">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Irini"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="84" template="../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="573.917" y="518" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;:&quot;WARNING: Mine unstable beyond this point. Proceed with caution.&quot;,
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;Continue&quot; }
+]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="102" template="../../../../common/maps/obj/enemy.tx" gid="2147495067" x="174.667" y="355.333">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Reyav"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="113" template="../../obj/treasure.tx" x="159.333" y="74.3333">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 6,
+  &quot;addMaxCount&quot;: 2
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 2,
+  &quot;rarity&quot;: [&quot;rare, mythic rare&quot;]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="114" template="../../obj/treasure.tx" x="670.333" y="281">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 6,
+  &quot;addMaxCount&quot;: 2
+}]</property>
+   </properties>
+  </object>
+  <object id="115" template="../../../../common/maps/obj/enemy.tx" x="686.667" y="212">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Cabal Trainee|JUD&quot;, &quot;Barbarian Bully|JUD&quot;]}"/>
+    <property name="enemy" value="Balthor"/>
+   </properties>
+  </object>
+  <object id="116" template="../../../../common/maps/obj/dialog.tx" x="435.167" y="586.75" width="84.6667" height="17.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A vast mine stretches out before you. It is nearly silent but for the distance echo of picks hitting stone. Dwarven runes inscribed on the walls indicate the likely residents of the place.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="117" template="../../../../common/maps/obj/gold.tx" x="247.75" y="352">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="118" template="../../../../common/maps/obj/gold.tx" x="257" y="372.5"/>
+  <object id="119" template="../../../../common/maps/obj/gold.tx" x="271.5" y="372.25">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="120" template="../../../../common/maps/obj/manashards.tx" x="565.5" y="81"/>
+  <object id="121" template="../../../../common/maps/obj/manashards.tx" x="147.25" y="113.5">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="122" template="../../../../common/maps/obj/gold.tx" x="239.152" y="62.214">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="124" template="../../../../common/maps/obj/scroll.tx" x="902.167" y="216">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Dwarven Mine&quot;, &quot;editions&quot;: [ &quot;ELD&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="126" template="../../obj/treasure.tx" x="54" y="202.667">
+   <properties>
+    <property name="reward">[
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 7,
+  &quot;cardName&quot;: &quot;Seven Dwarves&quot;,
+  &quot;editions&quot;: [ &quot;ELD&quot; ]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="127" template="../../../../common/maps/obj/enemy.tx" gid="11419" x="530" y="518">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'Come, smallfolk. Listen to my tale.'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;I have demolished all the dwarves.&quot;,
+					&quot;text&quot;: &quot;'Wonderful! Wonderful! Now I need to figure out how to actually run this place...'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Bartel Runeaxe&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 7500}                
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 10
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Lets hear your tale then.&quot;,
+					&quot;text&quot;: &quot;'I am Bartel Runeaxe, and this mine is rightfully... mine. But when the mine and myself were stripped from our home plane and brought here, it took me a while to find it. When I got here, dwarves were infesting it. I'd be happy to kill them but I simply don't fit down these tunnels. My magic detects ten intruders. Kill them all and I'll share the bounty of a literal gold mine with you for your help in restoring my rightful property.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;I don't have time for this.&quot;,
+					&quot;text&quot;: &quot;'So be it.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Bartel"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

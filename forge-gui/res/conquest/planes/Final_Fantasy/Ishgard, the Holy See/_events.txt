@@ -1,0 +1,9 @@
+Name:Adelbert Steiner|Deck:Adelbert Steiner.dck|Variant:Commander|Avatar:Adelbert Steiner|Desc:
+Name:Aerith Gainsborough|Deck:Aerith Gainsborough.dck|Variant:Commander|Avatar:Aerith Gainsborough|Desc:
+Name:Garnet, Princess of Alexandria|Deck:Garnet, Princess of Alexandria.dck|Variant:Commander|Avatar:Garnet, Princess of Alexandria|Desc:
+Name:Cloud, Midgar Mercenary|Deck:Cloud, Midgar Mercenary.dck|Variant:Commander|Avatar:Cloud, Midgar Mercenary|Desc:
+Name:White Mage|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:
+Name:Ashe, Princess of Dalmasca|Deck:Ashe, Princess of Dalmasca.dck|Variant:Commander|Avatar:Ashe, Princess of Dalmasca|Desc:
+Name:Auron, Venerated Guardian|Deck:Auron, Venerated Guardian.dck|Variant:Commander|Avatar:Auron, Venerated Guardian|Desc:
+Name:Minwu, White Mage|Deck:Minwu, White Mage.dck|Variant:Commander|Avatar:Minwu, White Mage|Desc:
+Name:Rikku, Resourceful Guardian|Deck:Rikku, Resourceful Guardian.dck|Variant:Commander|Avatar:Rikku, Resourceful Guardian|Desc:

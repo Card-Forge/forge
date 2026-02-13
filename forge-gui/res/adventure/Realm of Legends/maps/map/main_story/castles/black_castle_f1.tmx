@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="65">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Absolute Grace&quot;, &quot;Compost&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7C+8w/VWyFLIL2kqqqqvjuO1S8b
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxz5mNgcB7Fo3gUj2IKsSMQ30HDt6B4vQAEX+WD4C0CEIys1oFMe62A+JMgAwrQ5mbACrCJCwmQby8INPIzMDSRgJv5qWOvPFC/AglYUWDU3lF7B5+9/AKU2WtMZrkxai997d0LpPdhwao4xPdTyV5cQImA/Ki9xOHFvAwMC3DghbwQe+fjUbOIlzx78WF7Poi9tlQ2d7jbCwAE6AYc
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALaA21uBKaXPcj20dpufGbT0m5C4Uqv8Ka3vbgAPdIYPrtH7aTcbHTzkfMwLQG2smMg0tNApeGByjejYBSMgoEHAL3pCDs=
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjBSgzY3A1AY2fJTZKypAmf3nNUhTf4ZE9bjAaxLNeUEle0cBarrChUcB9cEUDQgeBUMPnCUx3s5RKZ5fkmjOq9H0NSRAMT9l+mfwUscdo4ByAAB6FQ5V
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="51" template="../../../../../common/maps/obj/entry_up.tx" x="209" y="480">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="59" template="../../../../../common/maps/obj/enemy.tx" x="209" y="271.5">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;Both your foes fall to the ground fatally wounded as you strike your final blow. They stare into each others eyes and clasp hands, saying no words as they both meet their deaths together.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Plains|C16|[337]&quot;, &quot;Island|C16|[340]&quot;, &quot;Mountain|C16|[346]&quot;, &quot;Forest|C16|[349]&quot;, &quot;Ink-Treader Nephilim|GPT&quot;, &quot;Guardians of Meletis|THS&quot;, &quot;daxos of meletis|THS&quot;]}"/>
+    <property name="enemy" value="Kynaios and Tiro"/>
+    <property name="pursueRange" type="int" value="0"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="60" template="../../../../../common/maps/obj/dialog.tx" x="132.401" y="428.571" width="167.197" height="20.858" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A pair of mighty kings stands in the great empty room before you.
+
+'So, another challenger seeks our key to the Prison of the Ur-Dragon. We have been cast as its jailers, and are obliged to stop you. Face the might that founded an empire!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="61" template="../../../../../common/maps/obj/treasure.tx" x="263" y="172">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;green&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="62" template="../../../../../common/maps/obj/treasure.tx" x="233" y="172">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;red&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="63" template="../../../../../common/maps/obj/treasure.tx" x="200.5" y="172">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;blue&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="64" template="../../../../../common/maps/obj/treasure.tx" x="170.5" y="172">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;white&quot; ]
+}]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

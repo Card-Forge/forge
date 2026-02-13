@@ -33,7 +33,6 @@ import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
 import forge.gui.CardDetailPanel;
-import forge.gui.GuiBase;
 import forge.gui.SwingPrefBinders;
 import forge.gui.interfaces.ILobbyView;
 import forge.gui.util.SOptionPane;
@@ -247,8 +246,6 @@ public class VLobby implements ILobbyView {
 
         final boolean allowNetworking = lobby.isAllowNetworking();
 
-        GuiBase.setNetworkplay(allowNetworking);
-
         ImmutableList<VariantCheckBox> vntBoxes = null;
         if (allowNetworking) {
             vntBoxes = vntBoxesNetwork;
@@ -304,7 +301,9 @@ public class VLobby implements ILobbyView {
                     if (i == 0) {
                         // TODO: This seems like the wrong place to do this:
                         slot.setIsDevMode(prefs.getPrefBoolean(FPref.DEV_MODE_ENABLED));
-                        changePlayerFocus(0);
+                    }
+                    if (lobby.mayEdit(i)) {
+                        changePlayerFocus(i);
                     }
                 } else {
                     panel.getDeckChooser().setIsAi(isSlotAI);

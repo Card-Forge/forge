@@ -8,6 +8,7 @@ SVar:Y:Count$Valid Creature.Fungus+YouCtrl,Creature.Saproling+YouCtrl
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, create X 1/1 black Fungus creature tokens with "This creature can't block," where X is the number of times you descended this turn. (You descend each time a permanent card is put into your graveyard from anywhere.)
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ b_1_1_fungus_noblock
 SVar:X:Count$YouDescendedThisTurn
+SVar:NoZeroToughnessAI:True
 DeckHas:Ability$Token & Type$Fungus
 DeckHints:Type$Fungus|Saproling & Ability$Sacrifice
 Oracle:Trample\nThe Mycotyrant's power and toughness are each equal to the number of creatures you control that are Fungi and/or Saprolings.\nAt the beginning of your end step, create X 1/1 black Fungus creature tokens with "This creature can't block," where X is the number of times you descended this turn. (You descend each time a permanent card is put into your graveyard from anywhere.)

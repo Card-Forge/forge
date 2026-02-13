@@ -2,7 +2,7 @@ Name:Call for Aid
 ManaCost:4 R
 Types:Sorcery
 A:SP$ GainControl | ValidTgts$ Opponent | AllValid$ Creature.TargetedPlayerCtrl | AddKWs$ Haste | Untap$ True | NewController$ You | LoseControl$ EOT | RememberControlled$ True | SubAbility$ DBEffect | SpellDescription$ Gain control of all creatures target opponent controls until end of turn. Untap those creatures. They gain haste until end of turn. You can't attack that player this turn. You can't sacrifice those creatures this turn.
-SVar:DBEffect:DB$ Effect | RememberObjects$ TargetedPlayer,RememberedCard | StaticAbilities$ CantSac,CantAttack | SubAbility$ DBCleanup
+SVar:DBEffect:DB$ Effect | RememberObjects$ TargetedPlayer & RememberedCard | StaticAbilities$ CantSac,CantAttack | SubAbility$ DBCleanup
 SVar:CantSac:Mode$ CantSacrifice | ValidCard$ Card.IsRemembered+YouCtrl | Description$ You can't sacrifice those creatures this turn.
 SVar:CantAttack:Mode$ CantAttack | ValidCard$ Creature.YouCtrl | Target$ Player.IsRemembered | Description$ You can't attack that player this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

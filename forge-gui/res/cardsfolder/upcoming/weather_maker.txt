@@ -1,7 +1,7 @@
 Name:Weather Maker
 ManaCost:3
 Types:Artifact
-T:Mode$ ChangesZone | ValidCard$ Land.YouCtrl | Destination$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Landfall — Whenever a land you control enters, put a charge counter on this artifact.
+T:Mode$ ChangesZone | ValidCard$ Land.YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Landfall — Whenever a land you control enters, put a charge counter on this artifact.
 SVar:TrigCounter:DB$ PutCounter | CounterType$ CHARGE | CounterNum$ 1
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
 A:AB$ Mana | Cost$ T SubCounter<2/CHARGE> | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}.

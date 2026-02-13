@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="87">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <layer id="1" name="Background" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztzjENADAIADDeBWOzgn8DM0FgR4/+rRNRAAAAAACMubl/8PP7VdfvAWT0x+U=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzlWFtuFDEQnC/msWHhHkGcCyINi+YggWtlQdpklgOxLblETW23H4FISLFk5THjdrm6umxP172udhq67t3UdY/p59PQPt7Gto6rxfX+0r+Mf/rXsS0Gxh8y4zAX+uOw7bo2jqvd5slxeqK4iLFefn87Xc+h70V9L5hz7xt/czDe4zvifMng+ZtucyG28XJzwfNryI/R3Oby8y/wzZKzXQGj8qf8l3otD8ilrV05yeVL8dXm1nCdiYcWTRi+D33XfX+T59CrjRJ/igvN5qjl0Th56Le16Glq73hmCR/nxjj4duHgY9+GE/hqtK4YOU/g6pw0Zh28Gba7NO7TsMVY0v0h4avVOmtwHn2uuDG2U/Jow+hxqRihKcNnz23tLR6zOLiRR/Q74ZvHK5fAqLo9kjb4HdbGmrBH+FBnzBW8Ht30w3uIx+Vu2tYTx3xw3lmIn7nAH/NR8lLVCuZm/i0WaoPXYh1+A415funll/lQn0NOUEPGAfD86K/1YLF+pjj76frsgZyspMsIH8Y/US605rSGvNyhgbOa2gV3ufpVD9K4qMV7qR3gOPbb3C3kffDJ1vqN1gXPqtnHoBnlD7UO3Kq3Gk1H80f4ULv8v3viUnWFOHxO1T1kFU5r8CEvreebKE40DzSjPvdc/jhuC77Iq1CTzGkLf4vDP+LmcN2SF34e8l6lsUv88Z45J6yov9oahIey92D/Ze+8dXCX/AXPEVPPftZy+bKfet/T2kZjja/D9swU8XdI+eGYembQfT7i09aKHPN49k/e3/R8GuGz/HBM+DCfCaCpw1g+W3lnDXTWoWL04kbnwEXWqfnn5xyn5PO4x0ffD3J3aP6GoB7A5wg9u/NdJ+ejeI+fP/cOF9UY76/RvSCao+R/Hn81nXVy7H3ts275+wr8SevKq1+M5btRzZ1RfcjTv3e+Y772wptXv7vpGnPt3VZ9Er57dtZqmp/H8veH3Lc1bbpnsPfz3SfyXmiHzwDgKPL3Fny1LcIH7WBOYOK/byhX3veNl8QXaSfaL18CWw7f/9JeK77fQV8Yvw==
+  </data>
+ </layer>
+ <layer id="6" name="Ground2" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzNmEtOwzAQhs26Ra3K4wJt00K6olyGPW05AK8dK6CsEAeAM1DEBaAtICouAUfgucQWsToZZuJH0scvjZSH43wZe8YTB3khQmmBtJq0eVA14gkjK0sbSBvOCV9fclQiRsX2LG23IMTenNh+Ycyox7RUFGJpTmy5OPbjEPGtSuvNyFYQH1SJuFdj5sdpTogusLNc/P5Jjn7OJIqBumfqvx/F04CJq2nw6Xe0NpL7LBM85/L8IrrWRs83G0JsNuLX6o58gnhnkvD3jKQ/XzxylQufGkPIuBOOjykf4O+BzFDr4Lgdxp914ctCkK9i0X4SfJQvKT5KeG678LXD/218RDE+MW2nMb6XMhiv6uZ2k+C783ttouD88OHbMeS/LJXGf6fMWob1uuDGBPN3Gj5dM6p651PGzhcTP5BPHWuzkQtfC72/b1nDQiaKKym3p40PWLfgcf6W3/MTuo+vLQN3D+Yq7UNV197lzXNx0nxUbj3O/83FkPifcplrWfBBwfnYZ3wI+fR4U+ow17NcPyAjnI+uMaukY8aXr2pghGON49eF04WPq0ve5dh8SDtqxhm1H6EvuTqA6zvN+OI6HQrGNRU3SjZrty3fg6EfjpWLG61HcLy1lswwtGDX9SNXZxKvYHMPpw6z/uq1IImPkul/Dq+DVPttpg/IoL/Tlq+8yDMFychGLo4vIPgOPfdzlNLuMR0UzHxp9nOy2mOixve66LaXcwuOb4r/+7h17K+H+sP+89VbPfncVxQfzjmzVFb+c5Her4Pr3oBop3LfvSefTS4ZuXcbq801Wzhl/+F9zS7BhG2a0jmD4giAz+D5Ly5a/oU=
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="40" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztzqENACAMRNEKJKIDEPYfE1HVCYDkveTn7EUAAAB0c1QAAD9YWbvz7g/gLQckLQB7
+  </data>
+ </layer>
+ <layer id="5" name="Overlay" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALigLgOA4OEzkC7YmDBaBhQDwz2sNzDPNAuIA00ajAwNGkMtCsIg8XAOF9CRLwP9vQxEsFNbQaGW9rY5R4x0tct5ACQG5ExMhio9HYbGJ53cITpKBgeADm9Dcb4xpUnCAF65hl6lS+4/HQdGGc3tHG7A1/ZQshsUoCwCX55Pc6hURaPglEwCoY2qONnYKgH4gb+gXYJJjiugZ8/CkbBKBi5AADWTyMr
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="56" template="../../../../common/maps/obj/shop.tx" x="208" y="162">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
+    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen,Hydra"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
+    <property name="signYOffset" type="float" value="-2"/>
+    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
+   </properties>
+  </object>
+  <object id="47" template="../../../../common/maps/obj/inn.tx" x="199" y="419"/>
+  <object id="53" template="../../../../common/maps/obj/spellsmith.tx" x="327" y="228"/>
+  <object id="55" template="../../../../common/maps/obj/shop.tx" x="479" y="453">
+   <properties>
+    <property name="commonShopList" value="Forest"/>
+    <property name="noRestock" type="bool" value="true"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/entry_up.tx" x="257" y="644" width="80" height="20">
+   <properties>
+    <property name="spawn" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="59" template="../../../../common/maps/obj/entry_left.tx" x="321" y="623" width="16" height="80.9948" rotation="0"/>
+  <object id="60" template="../../../../common/maps/obj/entry_right.tx" x="254" y="623" width="16" height="85"/>
+  <object id="62" template="../../../../common/maps/obj/shop.tx" x="361" y="370">
+   <properties>
+    <property name="commonShopList" value="GreenEquipment"/>
+    <property name="hasSign" type="bool" value="true"/>
+    <property name="noRestock" type="bool" value="true"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="63" template="../../../../common/maps/obj/shop.tx" x="297" y="326">
+   <properties>
+    <property name="commonShopList" value="GreenItems"/>
+    <property name="hasSign" type="bool" value="true"/>
+    <property name="noRestock" type="bool" value="true"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="64" template="../../../../common/maps/obj/shop.tx" x="466" y="417">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
+    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
+    <property name="signYOffset" type="float" value="-2"/>
+    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
+   </properties>
+  </object>
+  <object id="65" template="../../../../common/maps/obj/shop.tx" x="530" y="386">
+   <properties>
+    <property name="commonShopList" value="Legend4Green"/>
+    <property name="signYOffset" type="float" value="-2"/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/shop.tx" x="513" y="241">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
+    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen,Hydra"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
+    <property name="signYOffset" type="float" value="-2"/>
+    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/shop.tx" x="448" y="130">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
+    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen,Hydra"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
+    <property name="signYOffset" type="float" value="-2"/>
+    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/shop.tx" x="257" y="194">
+   <properties>
+    <property name="commonShopList" value="GreenBoosterPackShop"/>
+    <property name="signYOffset" type="float" value="-2"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/shop.tx" x="97" y="417">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
+    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen,Hydra"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
+    <property name="signYOffset" type="float" value="-2"/>
+    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/shop.tx" x="96" y="209">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Green,Creature6Green,GreenBoosterPackShop,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
+    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
+    <property name="signXOffset" type="float" value="-16"/>
+    <property name="signYOffset" type="float" value="-8"/>
+    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
+   </properties>
+  </object>
+  <object id="78" template="../../../../common/maps/obj/RotatingShop.tx" x="462" y="369">
+   <properties>
+    <property name="rotation" value="Green1,Green2,Green3,Green4,Green5,Green6"/>
+   </properties>
+  </object>
+  <object id="79" template="../../../../common/maps/obj/RotatingShop.tx" x="160" y="161">
+   <properties>
+    <property name="rotation" value="Green1,Green2,Green3,Green4,Green5,Green6"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="80" template="../../../../common/maps/obj/RotatingShop.tx" x="96.6667" y="307.333">
+   <properties>
+    <property name="rotation" value="Green1,Green2,Green3,Green4,Green5,Green6"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="81" template="../../../../common/maps/obj/shardtrader.tx" x="495" y="162" width="19" height="19">
+   <properties>
+    <property name="signXOffset" type="float" value="14"/>
+    <property name="signYOffset" type="float" value="-2"/>
+   </properties>
+  </object>
+  <object id="84" template="../../../../common/maps/obj/shop.tx" x="448" y="308">
+   <properties>
+    <property name="commonShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
+    <property name="signYOffset" type="float" value="-2"/>
+    <property name="uncommonShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen,Hydra"/>
+   </properties>
+  </object>
+  <object id="85" template="../../../../common/maps/obj/shop.tx" x="214.5" y="296">
+   <properties>
+    <property name="commonShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
+    <property name="signYOffset" type="float" value="-2"/>
+    <property name="uncommonShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen,Hydra"/>
+   </properties>
+  </object>
+  <object id="86" template="../../../../common/maps/obj/shop.tx" x="126.667" y="261.333">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
+    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen,Hydra"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
+    <property name="signYOffset" type="float" value="-2"/>
+    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

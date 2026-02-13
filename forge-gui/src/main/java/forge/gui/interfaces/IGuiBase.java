@@ -65,4 +65,7 @@ public interface IGuiBase {
     void preventSystemSleep(boolean preventSleep);
     float getScreenScale();
     UpnpServiceConfiguration getUpnpPlatformService();
+
+    /** Returns true if any currently active game is a network game. */
+    boolean hasNetGame();
 }

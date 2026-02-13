@@ -143,7 +143,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private KeywordCollection keywords = new KeywordCollection();
     // stores the keywords created by static abilities
     private final Table<Long, String, KeywordInterface> storedKeywords = TreeBasedTable.create();
-    private Table<Long, Long, KeywordsChange> changedKeywords = TreeBasedTable.create();
+    private Table<Long, Long, IKeywordsChange> changedKeywords = TreeBasedTable.create();
 
     private Map<GameEntity, List<Card>> attackedThisTurn = new HashMap<>();
     private List<Player> attackedPlayersLastTurn = new ArrayList<>();
@@ -1008,8 +1008,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         return result;
     }
 
-    public final KeywordsChange removeChangedKeywords(final Long timestamp, final long staticId) {
-        KeywordsChange change = changedKeywords.remove(timestamp, staticId);
+    public final IKeywordsChange removeChangedKeywords(final Long timestamp, final long staticId) {
+        IKeywordsChange change = changedKeywords.remove(timestamp, staticId);
         if (change != null) {
             if (keywordEffect != null) {
                 getKeywordCard().removeChangedCardTraits(timestamp, staticId);
@@ -2891,10 +2891,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         view.setHasLost(b);
     }
 
-    public void setAvatarLifeDifference(int val) {
-        view.setAvatarLifeDifference(val);
-    }
-
     public int getExtraTurnCount() {
         return view.getExtraTurnCount();
     }
@@ -4031,7 +4027,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public List<String> getUnlockedDoors() {
-        return StreamUtil.stream(getCardsIn(ZoneType.Battlefield))
+        return getCardsIn(ZoneType.Battlefield).stream()
                 .filter(Card::isRoom)
                 .map(Card::getUnlockedRoomNames)
                 .flatMap(Collection::stream)

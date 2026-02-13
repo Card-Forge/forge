@@ -8,5 +8,6 @@ SVar:ArtifactMana:DB$ Mana | Produced$ C | Amount$ Y | PersistentMana$ True | Re
 SVar:X:Count$Valid Artifact.YouCtrl$GreatestCardManaCost
 SVar:Y:Count$Valid Artifact.YouCtrl
 SVar:BuffedBy:Artifact
+SVar:NoZeroToughnessAI:True
 DeckNeeds:Type$Artifact
 Oracle:Karn, Legacy Reforged's power and toughness are each equal to the greatest mana value among artifacts you control.\nAt the beginning of your upkeep, add {C} for each artifact you control. This mana can't be spent to cast nonartifact spells. Until end of turn, you don't lose this mana as steps and phases end.

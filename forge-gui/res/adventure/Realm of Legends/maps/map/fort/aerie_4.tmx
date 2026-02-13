@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="106">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Murmuration&quot;, &quot;Soulcatcher&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/FarmFood.tsx"/>
+ <tileset firstgid="16001" source="../../../../common/maps/tileset/dungeon.tsx"/>
+ <layer id="9" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAOmPDhxrQEA2UvzG58fHrZSw/7cIUtjE0LN7lxYmJaAXqlmcFsL73yzEDZS4wYPQByngFhWqbrkQoGU74aigAA3LUM8Q==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxr4mZgaBrFo3gU0xW7cTIw7JRAYGQ5GKC3vQPl34HCC0QReKDdMopHMT0xAMwjGf4=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzbwcPAsIMAliECk2oGMeqjeRkYdvHgxlG8hM0i1l4ZJDt3A2l8YCcRdpNiLzF2Ems3MfaSaicxdhOyl1w7CdlNjL2yZNoJAyZM1Lf3MhMCo4PtEghMbXvNsNg3nO1FDmf0sL4C5UtjMZsYe/dSmK72kGEvst313KTZV8uN3U5SyytS7MZnJ6n1Aja7QXFaygxhlzATZyep9iLbXceNGxOykxx7semhRv0LAIHByk4=
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBi8wIKJgeEyHmzJRBs7rxAw9xKV7SbGTmrbTYqd1LKbHDupYbcZDdIJpfaiyyGnaxgwobO7YW4i115yw5mW9hIjR66914D6ZjCSZi96mUYuwGc3NjtB+W4aUP11KqQpYuymtp247AaFcykzhF3CTBs7ke2ezgjBZkhsGKaFnbQCAI/GKq8=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAOpEgicLIkKp+WgEkKgRmlUPm0Bv9V8fOpDfKAYZkPxAlAnAjESTQOWxjgAYYlLxD/A9r3H2QnlrBtEae+vcoSmHgwAhMm2pp/Gc18MwrtI1b/zgEKb1rYS4v0SQhcIxDO+Nw0jZGB4TqN09VIAaXMELqEmfZ2TWdEpdHFhwoAADvQFp0=
+  </data>
+ </layer>
+ <layer id="8" name="AboveClutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgw0ckhgYexfwYIq9FaO/O2gBjhlC8Eixl80IgpHBcTq4A5u97EbY1dIa0MO/2ACyf38B8e+BccagALTy+wlDCIaBOBrZgw44jCB4qAMAghcPXA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="87" template="../../../../common/maps/obj/door_down.tx" x="308.967" y="159.096" width="38.783" height="47.596">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/fort/aerie_3.tmx"/>
+    <property name="teleportObjectId" value="87"/>
+   </properties>
+  </object>
+  <object id="89" template="../../../../common/maps/obj/enemy.tx" x="186.598" y="216.593">
+   <properties>
+    <property name="enemy" value="Teshar"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/enemy.tx" x="146.082" y="142.832">
+   <properties>
+    <property name="enemy" value="Zeriam"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/enemy.tx" x="247.539" y="102.595">
+   <properties>
+    <property name="enemy" value="Vega"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="103" template="../../../../common/maps/obj/door_left.tx" x="212" y="160" width="35" height="39.5">
+   <properties>
+    <property name="direction" value="left"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/fort/aerie_0.tmx"/>
+    <property name="teleportObjectId" value="130"/>
+   </properties>
+  </object>
+  <object id="104" template="../../../../common/maps/obj/gold.tx" x="119.255" y="83.2803"/>
+  <object id="105" template="../../../../common/maps/obj/scroll.tx" x="300.742" y="204.092">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Animal Sanctuary&quot;, &quot;editions&quot;: [ &quot;M21&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

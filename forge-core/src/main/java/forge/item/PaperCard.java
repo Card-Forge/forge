@@ -591,7 +591,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
 
     @Override
     public List<ICardFace> getAllFaces() {
-        return StreamUtil.stream(this.rules.getAllFaces()).map(this::getVariantForFace).collect(Collectors.toList());
+        return this.rules.getAllFaces().stream().map(this::getVariantForFace).collect(Collectors.toList());
     }
 
     private ICardFace getVariantForFace(ICardFace face) {

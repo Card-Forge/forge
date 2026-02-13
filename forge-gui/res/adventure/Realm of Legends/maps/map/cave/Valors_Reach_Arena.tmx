@@ -1,0 +1,626 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="70" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="188">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Arena&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="22017" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="38401" source="../../../../common/maps/tileset/FarmFood.tsx"/>
+ <tileset firstgid="42497" source="../../../../common/maps/tileset/dungeon-nocollide.tsx"/>
+ <layer id="1" name="Background" width="70" height="80">
+  <data encoding="base64" compression="zlib">
+   eJzt3E1qAkEQBeCBRELIOmcy5AqzzMaTBDxEwAt4DU+TQ4QhSCbtdNs/1f2qu97ioYwDvvqoGdGFp6dpOgnmshsjkiZ0oQtd6EIXujAMwzBt8vHyF3QXdNYWvqA7ajSxZJPiYcEm16O2DdJdwkS6O3I3pTykO+e+X0mPGhZIl5IutS2kbWr2aW0h5YLsrdkG3VujC7qzRht0V7rgw+uILjVdrNjQRcbEgk+pS47PHHi+lZ5dUmx8828ZIHwkTaRsQuf27BJrE9oZ9LWEcplXj+7syHuKhl255zOSS8r147ueRjJJfX/fnqBtNLiETEa53+b20LInNUxKbbSklkvPRi1MerNpadKLDcJEo8tBgYlWGw0mmlzQDmibQwceyJ1Bz6zNBj0n0ufr8TbouZA2I1pI2Ixq4eb9bZrO+9/EmKH7tnS55t5eobsi9iXkYjEx+2IxVxP3/mI93Be60EXGhZ9H/3N8vg26kzYP6z4xJpZ8Uj1G9lm++5Z6aPPJ+T7v/jYibSLl81rwHyMxXWrOHWsT65RqvNi5fuh5c1y25kT30+bSaz5X8R13X/Pl+wE/j7RNzLHRXdxd4L6EjULnWHNhGMZufgDvfhJu
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="70" height="80">
+  <data encoding="base64" compression="zlib">
+   eJztm0FOwzAQRS2C1CLW7OEw5A6lqGt2wBVYdMkBOAsCrsAdOAJSKQiJWKqVwXUS25l6nPF86atNGqn2yx87ThSlRCKRSCQSiUQi0ZS0qJR6Om59VVG3iE6QxXfzfX3SeluVyUgzsVl0WTPizsZkxJcJdzaxPA7NZkFYryE1M+QfpLa7zlOqMQ0jI4fIjM95cjEaM2f2zTFYHpuZ34ixrWvO7GOTggVmZkK5+DBzZSoFC6zMYI51OTo2Mz5Z+ZzT9y9lZrhnJSYzpTAJzQzmWDsF+2amNC6+mdk0x1wXxkZqad/Lpq9fnlxKykzoXF1CZkKyAjOzYp6bMetHznww7sVwG3NiaqgENlj37bixwebCYf2EWUN991qfJ8YJ8953bhm5OaXPCqdrPMxxRbjw5oJZQ1oyN/ezWU14TYCdlS5GU2KTggkFm9g5OTUTo9zHYwomWjnXExUTo5wyswRzAyUTrRwys8yEhS2qzOTKwyh1ZnLnAZWCzZR4QB2innIaS8cIY53AhYUtuJZ6v1TqrlbqvvZbX1Ffd6TSbd1yMepag5bCRMvFBWrDtGaGNMSlVAkXt4SLW8LFLeHyX+b5JOSit0sVfF77eLJv855ASTLPa108SuSjeYQwcfHhwsh+TyaUR44Z0n16O4p/j8ywOJvh8IBe7/iMUSxb06dt1f2+XRcHaGwmNhv4/z4sYHaH6tP1m0+tY9UGll399G2rzRgeD3+j7iMGo9zOG6b7ssvR9az1ebP90XxeWPup20hhzWHI1G2k8MO89cuO06u1n7qNYrFYLKb3H0mRnls=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="70" height="80">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztm0lv00AUgIcDCqWUE9AiOAAnUBqWlm4SZ0Bw4YjEBZpEnKgAlUpcUVJEgXJhExIS3Cil7GrKBX4GSHBi+QUgwZH3sJ/yMp1xvI3HJCP1k+OpM37z+c3Yscdf1wjx1eFwOBwOh8PhyBEPah5hy7uFR9eEeHxNvexmLzvmhNg5p152o5ftsx6PoP2P59RLyh3bsdrwcuyoHsod27HmzQvlju1Yc+dF6kczffbjNgW1LWo/mjbghHveWhdiE7C5bseHnC+UE6o8kfvRFoi5HxhIOfZz6z0vt4E7rG7dsUh6jOTv4/7lbSgnwoy3dyHme8D9lLxQfOjkX77Acdo865W9PK0/pllAORFmvN0CMfcDA7Pm4kEfTyaFWACeSkv6HJd231+QWAT2LwlxABhaasbFeepvt63ukWYfkr3sLkMMp+1ThDjOg48LwMUlfVy4XZpeVP2DeynBcsgii8BL8PEKeI35wv43DAyWm15M5Agfa5Dnk97+XsCy3Jsfhs+0wuNsd7zTIK9eZHRe0ug3qjxKy8vYiEdWXlT9IEl/kq8n/od8GYXYnvlxNhLmS6f0I3Sy7Mc4CmPumDTuJhlfeI7I9eTNC++LspNloFFW530W+WJynAjrReVktAL/r5j1gb5flPPpRedkGWgY9IJjMP4G0XmJw42aEDeB+Vqyemw5IdCJfL2UpD0b4Lq8D9hYN+NktLr62JpyE9XLrUMB+QI+bgLzMb1EcWIS1fV1Ei+m+g53YjJHuBNbXtqdi4PyxPT5GSmdbf6ext+pUdqT1AuO+3npOwRd26EXyhfuRdf+NM/fUZyYvoco5yB6WfFjW4LlxGQ2XvKWJxwcw9DLO4hpwu9L75gbU17iOjE9rvCcRC8TFbUbum8gk5UT0+eeIP7lS0XvJq2xJO99R8VE1bybPJ6L03DzptpsIz6/eBPAa0VZkjyx2Z+C3IxJXuI+V1E5GZHuvdl2EMVNQ/JC5/WkTtr1mbzNW5Dd4H1D/hxw3H+eE4W8j7Fx3DSk54ArsF6sRKMTnMhu8L4hfw44DuuLEdE5yet4ooPmxqAbbM8wtOsgOBmB5QrmQDUanZAnCM2NoTkX6GXa94LrYZ6Z8/k7ac/hsZYv/twYmjfA84XK2rnh83cedogXgnuZjuiFz9/pWC8wPrxFL9XwXrqFhSP2Y8gjzovz4rw4L86L82IL/i4HeenG96Rk+Bx98tKN70nJ0Bz9bwUhvgM/Ct35npQO7sV2LHngVO9qL1TGub/LW14+YT/mLPhcFOJLsdXLR1j/VFy9LTpBP93g5je0/4/k5Ses/wL29qi/Q7nzvxHmWd6Uf9/1eMmDe1k728R2W0wR9r4z90L3NoPcxH2Oqosnan37Sh68rH9QiIHB1uNNZWdL6u2Cyq7WWr3gOn/fLmw9vCzoeMSpT+Xl5B7v8yXf6TBse3DQ6wvkhcq4FyrDzzN9q8uIQr3VS6He6kX1nbBlUwo/Ses7XMiOHT2el5092e43Dt8dSq6sywYcT977+fKhx1vPat9xCHp3Pw3oHYJ244sOHO/SiAP+jLcV2bpRXT6tacd16Xx0vRZcv64eW/B46FhzZmLG2yvlS68iX6YU+9Mhx2bCY1q5GlRP1Hwxgcp73OMcdT9J8iVtVPkelr9gPV4A
+  </data>
+ </layer>
+ <layer id="7" name="Above" width="70" height="80">
+  <data encoding="base64" compression="zlib">
+   eJztm8tu00AYhUdiARJIIK6lNL2l7RKVSOzoA9AnAKmWAEVJgFWyYk+rtqFSkVpAhV4SbluSLKEbEI/BkgfhmNTq2Brb48zVyVT6pHpcx+PjM2d+O9PjM4QcOxwOLeytE/IefAD74AAcgqN1830T4WiDkBZobwx2/E0cNw5ugQlQAJNgasDPE+2PLKY2CZkGM5vm7xFPf0T8Oaze9hHxp2xvi8B7j2wZP7bdX9vGs2N0acGDbYYPWe1Zs1kky1VkR5bPnG5ifDb52rNms0iW82RHVt158yjwRJuhS6vJbrcJVXNonFdGnagnLnqEXPLUnU8kM3TWKtFs3YYmrzPokrWvIvUGz7GytBMdR7bVVbL6k4dstYXCGjKdwnR/Eu9rTO0la7+NBH2+sBJPkAOp+z02afujfbqKtmvguhf+XZe2P8dO2VqJJ8iB1P0em7T90X7tou0NeOuFf0/LaFnvcGhdkv7u3Hif3TIb0f2vVsPni27/9zVHRsuqP3l1ScO/ZpHjz68lb/uorvlU6KKDrDXfsOrytxbedn7pU37q/EJTo/TwawidPrFZFxq/7tHpk7zoYur5aVBddl7KOf/tF+x2E2MnD34xMXZk6iLLN7b4hFcX2ufb9+z3ie7nI9W6yPKJieejOF3qzwa/juAdh6484X3/KpIvsrNF5XUG8L5/DTQx/R3O3SuDHafqvbepedqWeUe1NnPInvkTFjjy2XR9okubX9Di+31CfoDfCbrkwScytfF1ebBMyMPlZF3y4pMkbebr/Mc9WiLk8QlPluz0iWjNt3OZkM/Q5Av4ytBmFm03yoQUx/jQWZ8kIaPmm2vAL2ChEW5vQ5OP4FOdXxdZNYAN61h9P/iMlcPtM9BpFhQbGfwiSReb1rE62OytJm/biuoxd/Zd8rat8I65UVuvzYtt64ryDGvNiup1LEm+lpEZMsYNa+2b6nWlSb6WMU+zPj+r3qzvboZtPdy3564uitPFx3Q/ZCB7brVJF5FrS5tbFyuE3AGlinnNZV+bCB3o0QW9irr/98gji1X4BZSq8Zkq4qm80oEeXdCr9rf/FE8JfmhPme6vNr/U4AVQqsXrQnvKdH8HYR+ePwCHGXKwAz26oJegS9RTqpH9fD+B/CuASYEcZPqF8pSOd4A21I7RTA00odtpT5nurwpfscYZnan+OQJd8pC1snzFGmd0ptLnyHvW8voijrhM1Z21OsiSv9F5Oq19VIjO02ntDofD4XA4HA6HI9/8A78akeQ=
+  </data>
+ </layer>
+ <layer id="8" name="Above Above" width="70" height="80">
+  <data encoding="base64" compression="zlib">
+   eJztmc9OAjEQxnv0Bok3Y4w+gAmixIvPw5/wDuoVLr4CnE2Ufw/oVGyoTbftst12236/ZEIIS3bmS+ebYWEMAAAAAAAAAAAAAAAAgE8urmJnUJ/VgrH1wnwNr8tU2+jS/Lnt+y645OmT2yVjd0vzNV3QxSVPn6zoXusO6PLaY+yN4r13fp45ct0/vt704+YBACiD0LO5K/e2EXo2d+XeNmLO5lL3AgBi8PESO4P6DMaMPVAMx+3dI0VdNqTHlmKXmC5t7wiDCZ0XiuGk/nfV3J5H+miDtneEDemxpdidoYsut1C6+N4RVD8ZTOk9xXDqJ7dQuvhG9ZMN6bGl2P3p0sSHQ/aRb2x+0sSHU9FAh81PmvgwJ9UzI/uJrmea+HDKyH6i65kmPlwH2/4R8xmGrmdUH24L2/4R8xmGS8+09TvBtn/EfIbh0jMhfid0DZfdpel8SgVTX+jORinzydQXurOh9lqI5xIx0NX+NTuG7myovZar38i1Cz1EuPhwrn4j167q4rK75Oo3cu1ciz3Vd6io8Xt+CkGofTgW4ow8Un1PFTUKzWRdZF1z9GChy57qO1TMGqGZrItMjh6segtHrVNoxnVpa+dL4b8CtU7ZX4re+ZQ6ZV1cdr5cMdXpsvPlxOf8FKY6Zc3uZ6fIFa6HaYcRyJqJ63PWhuti2mE4VfM7V004v+dF2mF0VM3v3HURUYU6i0rxF5su6iwqQRcXStlT6pLzngIAAAAAAAAA4D8/v/pHuw==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="437.168" y="1279.81" width="39" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="54" template="../../../../common/maps/obj/enemy.tx" x="584.665" y="445.08">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Regna and Krav"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../common/maps/obj/gold.tx" x="917.75" y="240.667"/>
+  <object id="59" template="../../../../common/maps/obj/enemy.tx" x="513.893" y="602.415">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Khorvath and Sylvia"/>
+   </properties>
+  </object>
+  <object id="63" template="../../../../common/maps/obj/enemy.tx" x="719.666" y="591.333">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Gorm and Virtus"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="64" template="../../../../common/maps/obj/enemy.tx" x="389.333" y="489">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Pir and Toothy"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="65" template="../../../../common/maps/obj/enemy.tx" x="863.167" y="424.333">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Okaun and Zndrsplt"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/manashards.tx" x="911.333" y="262.182"/>
+  <object id="82" template="../../obj/treasure.tx" x="870.583" y="228.833">
+   <properties>
+    <property name="reward">[
+{
+      &quot;type&quot;: &quot;card&quot;,
+      &quot;count&quot;:1, 
+      &quot;cardName&quot;: &quot;Victory Chimes&quot;,
+      &quot;editions&quot;: [&quot;BBD&quot;]
+},
+{
+      &quot;type&quot;: &quot;card&quot;,
+      &quot;count&quot;:1, 
+      &quot;cardName&quot;: &quot;champion's helm&quot;,
+      &quot;editions&quot;: [&quot;CMM&quot;]
+},
+{
+      &quot;type&quot;: &quot;card&quot;,
+      &quot;count&quot;:1, 
+      &quot;cardName&quot;: &quot;last one standing&quot;,
+      &quot;editions&quot;: [&quot;BBD&quot;]
+},
+{
+      &quot;type&quot;: &quot;card&quot;,
+      &quot;count&quot;:1, 
+      &quot;cardName&quot;: &quot;Phyrexian Arena&quot;,
+      &quot;editions&quot;: [&quot;SCD&quot;]
+},
+{
+      &quot;type&quot;: &quot;card&quot;,
+      &quot;count&quot;:1, 
+      &quot;cardName&quot;: &quot;Arena of Glory&quot;,
+      &quot;editions&quot;: [&quot;MH3&quot;]
+},
+{
+      &quot;type&quot;: &quot;card&quot;,
+      &quot;count&quot;:1, 
+      &quot;cardName&quot;: &quot;Arena&quot;,
+      &quot;editions&quot;: [&quot;TSB&quot;]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="84" template="../../../../common/maps/obj/enemy.tx" x="870.167" y="265">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Rushblade Commander|BBD&quot;, &quot;Triangle of War|VIS&quot;]}"/>
+    <property name="enemy" value="Najeela"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="85" template="../../../../common/maps/obj/RotatingShop.tx" x="177.417" y="1153.75">
+   <properties>
+    <property name="rotation" value="White,Blue,Black,Green,Red,Colorless"/>
+    <property name="signYOffset" type="float" value="-2"/>
+   </properties>
+  </object>
+  <object id="86" template="../../../../common/maps/obj/RotatingShop.tx" x="96.6667" y="1155">
+   <properties>
+    <property name="rotation" value="White,Blue,Black,Green,Red,Colorless"/>
+    <property name="signYOffset" type="float" value="-2"/>
+   </properties>
+  </object>
+  <object id="87" template="../../../../common/maps/obj/shop.tx" x="256" y="1154.67">
+   <properties>
+    <property name="commonShopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="signYOffset" type="float" value="-2"/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="88" template="../../../../common/maps/obj/shop.tx" x="544" y="1157.33">
+   <properties>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
+    <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black,FlipShop,Saga"/>
+    <property name="signYOffset" type="float" value="-2"/>
+    <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature,Battle"/>
+   </properties>
+  </object>
+  <object id="89" template="../../../../common/maps/obj/shop.tx" x="624.667" y="1154.83">
+   <properties>
+    <property name="commonShopList" value="White,White,Enchantment4White,Creature2White,Instant4White"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,PhyrexianWhite"/>
+    <property name="rareShopList" value="Land4White,Azorius,Boros,Selesnya,Orzhov,Vehicle,Colorless"/>
+    <property name="signYOffset" type="float" value="-2"/>
+    <property name="uncommonShopList" value="Artifact,Knight4White,Bird4White,Soldier4White,Angel,Sliver2White,Spirit4White,Wand,Equip,Multicolor"/>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/shop.tx" x="703.833" y="1155.17">
+   <properties>
+    <property name="commonShopList" value="Blue,Blue,Enchantment4Blue,Creature2Blue,Instant4Blue"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,PhyrexianBlue"/>
+    <property name="rareShopList" value="Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle,Colorless"/>
+    <property name="signYOffset" type="float" value="-2"/>
+    <property name="uncommonShopList" value="Artifact,Merfolk,Wizard,Bird4Blue,Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Wand,Equip,Multicolor"/>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/shop.tx" x="864.5" y="1155.5">
+   <properties>
+    <property name="commonShopList" value="Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,PhyrexianBlack"/>
+    <property name="rareShopList" value="Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle,Colorless"/>
+    <property name="signYOffset" type="float" value="-2"/>
+    <property name="uncommonShopList" value="Artifact,Vampire,Zombie,Skeleton,Demon,Knight4Black,Rogue4Black,Sliver2Black,Wand,Equip,Multicolor"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/shop.tx" x="943" y="1154.5">
+   <properties>
+    <property name="commonShopList" value="Red,Red,Enchantment4Red,Creature2Red,Instant4Red,Goblin"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,PhyrexianRed"/>
+    <property name="rareShopList" value="Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle,Colorless"/>
+    <property name="signYOffset" type="float" value="-2"/>
+    <property name="uncommonShopList" value="Artifact,Wolf4Red,Devil,Dwarf,Dragon,Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red,Wand,Equip,Multicolor,Giant,SnowShop"/>
+   </properties>
+  </object>
+  <object id="93" template="../../../../common/maps/obj/shop.tx" x="1025" y="1154">
+   <properties>
+    <property name="commonShopList" value="Green,Green,Enchantment4Green,Creature2Green,Instant4Green"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,PhyrexianGreen"/>
+    <property name="rareShopList" value="Land4Green,Simic,Golgari,Gruul,Selesnya,Vehicle,Colorless"/>
+    <property name="signYOffset" type="float" value="-2"/>
+    <property name="uncommonShopList" value="Artifact,Elf,Wolf4Green,Druid,Squirrel,Sliver2Green,Wand,Equip,Multicolor"/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/dialog.tx" x="413.167" y="1197.58" width="88.3334" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A bustling set of shops lines the beachside boulevard before you. What's far more eye catching is the massive arena that dominates the island across the bridge ahead. This is unmistakably Valor's Reach, the legendary arena where battlebonds are formed and people fight for the simple goals of glory and entertainment.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/dialog.tx" x="415.167" y="866.917" width="88.3334" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The entrance to the arena is just ahead. The roar of the crowd is electrifying and the smell of delicious snacks mixes with blood and sweat on the wind.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="96" template="../../../../common/maps/obj/shop.tx" x="336.667" y="1153.33">
+   <properties>
+    <property name="commonShopList" value="Legend"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="signYOffset" type="float" value="-2"/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="97" template="../../../../common/maps/obj/shardtrader.tx" x="32.6667" y="1156"/>
+  <object id="98" template="../../../../common/maps/obj/inn.tx" x="484" y="1091.33" width="24" height="16"/>
+  <object id="99" template="../../../../common/maps/obj/shop.tx" x="400.5" y="1091">
+   <properties>
+    <property name="commonShopList" value="MedalShop"/>
+    <property name="noRestock" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="100" template="../../../../common/maps/obj/dialog.tx" x="386.833" y="1107.75" width="48.8334" height="46" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;As you approach the shop, a blue-haired shopkeep calls out to you.
+
+'You have the look of a competitor if I've ever seen one! My shop sells something special - medals! You can wear a medal in addition to your normal equipment and they'll make your battles harder - ideal for those seeking a challenge! But of course, warriors who undergo such trials shall be lavished with increased rewards for victory, not to mention the glory!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="101" template="../../../../common/maps/obj/booster.tx" x="849" y="228.583">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;BBD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;BBD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;BBD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="102" template="../../../../common/maps/obj/booster.tx" x="891.667" y="228.333">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;BBD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;BBD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;BBD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="103" template="../../../../common/maps/obj/gold.tx" x="916.917" y="221.667"/>
+  <object id="104" template="../../../../common/maps/obj/gold.tx" x="822.833" y="224.75"/>
+  <object id="105" template="../../../../common/maps/obj/gold.tx" x="822.417" y="242.667"/>
+  <object id="106" template="../../../../common/maps/obj/enemy.tx" x="591.334" y="526">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Grothama"/>
+   </properties>
+  </object>
+  <object id="107" template="../../../../common/maps/obj/manashards.tx" x="822" y="263"/>
+  <object id="108" template="../../../../common/maps/obj/dialog.tx" x="410.5" y="703.583" width="88.3334" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;As you step into the arena a spotlight shines onto you as a homonculus with a magically amplified voice announces your arrival.
+
+'WE HAVE A NEW CHALLENGERRRRR!!!!! My sources say this is the spectacular {var=player_name}! Can our new hopeful defeat all our current competitors and become the new champion?! WE'RE ABOUT TO FIND OUT!!!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="109" template="../../../../common/maps/obj/dialog.tx" x="480.707" y="628.659" width="83.3152" height="65.913" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;'Our challenger approaches the beautiful and deadly Sylvia and her fiery draconic companion Khorvath! Will {var=player_name}'s cool head prevail, or will the duo bring the inferno?!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="110" template="../../../../common/maps/obj/dialog.tx" x="353.687" y="507.089" width="96.3095" height="72.7055" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;'{var=player_name} may have quite a few years on this contestant, but don't underestimate him! His imagination can be deadly, and he's got quite the active imagination! Its PIR AND TOOOOOOOTHY!!!!!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="111" template="../../../../common/maps/obj/dialog.tx" x="545.333" y="458.583" width="93.1667" height="62.3333" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;'Now I don't know how {var=player_name}'s love life is going, but this next opponent's is killer! Their forbidden romance won over the sensitive folks, and their forbidden magic won over our bloodthirsty viewers - they're bringing hell and heaven forbid you get in their way, its REGNA AND KRAV!!!!!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="112" template="../../../../common/maps/obj/dialog.tx" x="829.184" y="448.938" width="82.1667" height="70.6666" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;'Well everyone, do you think luck is on {var=player_name}'s side? That's always the question when any challenger is up against the deadliest eyes in the ring - the fearsome flippers with two heads and no tails - ZNDRSPLT AND OKAUN!!!!!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="113" template="../../../../common/maps/obj/dialog.tx" x="682.027" y="625.355" width="94.6667" height="87.1667" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;'Uh oh, folks! Our challenger is up against the most decorated rookies of the arena! One's big and one's small, but their deadly venom brings down them all - its the two-fer with the lure, GORM AND VIRTUS!!!!!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="114" template="../../../../common/maps/obj/dialog.tx" x="558.039" y="554.832" width="79.7846" height="69.5656" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;'Now every other opponent our challenger {var=player_name} is up against today is a classic arena duo. But special for our audience today, we have a monster match!!! It's eaten over a dozen contestants and at least two whole villages. The wurm from the wastes who wants blood it can taste, its GROOOOOTHAMAAAAAA!!!!&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="115" template="../../../../common/maps/obj/dialog.tx" x="835.167" y="326.917" width="75.6667" height="21.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A woman with long red hair sits on a once-opulent sofa backstage, now ravaged by time and the elements. Despite her clear confidence and comfort, she is dressed in armor and he twin blades gleam with blood.
+
+'So, you're the one everyone thinks has what it takes to unseat me as champ? I really should be doing this properly in the arena, but something about you just rubs me the wrong way. I think I'll kill you now!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="116" template="../../../../common/maps/obj/gate.tx" x="862.685" y="384.478" width="17.75" height="17.625">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;The gate is locked. A sign reads 'WINNERS ONLY'.&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;Ask for the gate to be opened.&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 }, { &quot;deleteMapObject&quot;: 117 } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 6
+							}
+						}
+					],
+					&quot;text&quot;: &quot;'Of course, would-be champion!'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;You attempt to open the gate.&quot;,
+					&quot;text&quot;: &quot;A voice rings out. 'Only getting through here if you beat everyone out in the ring!'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="118" template="../../../../common/maps/obj/manashards.tx" x="836.75" y="274"/>
+  <object id="119" template="../../../../common/maps/obj/manashards.tx" x="899.75" y="274"/>
+  <object id="121" template="../../../../common/maps/obj/scroll.tx" x="1086.67" y="1182">
+   <properties>
+    <property name="reward">[
+  {
+      &quot;type&quot;: &quot;card&quot;,
+      &quot;count&quot;:1, 
+      &quot;cardName&quot;: &quot;Bountiful Promenade&quot;,
+      &quot;editions&quot;: [ &quot;BBD&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="122" template="../../../../common/maps/obj/scroll.tx" x="587" y="1092.14">
+   <properties>
+    <property name="reward">[
+  {
+      &quot;type&quot;: &quot;card&quot;,
+      &quot;count&quot;:1, 
+      &quot;cardName&quot;: &quot;Spire Garden&quot;,
+      &quot;editions&quot;: [ &quot;BBD&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="123" template="../../../../common/maps/obj/scroll.tx" x="18.4545" y="1109.55">
+   <properties>
+    <property name="reward">[
+  {
+      &quot;type&quot;: &quot;card&quot;,
+      &quot;count&quot;:1, 
+      &quot;cardName&quot;: &quot;Sea of Clouds&quot;,
+      &quot;editions&quot;: [ &quot;BBD&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="124" template="../../../../common/maps/obj/scroll.tx" x="933.5" y="390.5">
+   <properties>
+    <property name="reward">[
+  {
+      &quot;type&quot;: &quot;card&quot;,
+      &quot;count&quot;:1, 
+      &quot;cardName&quot;: &quot;Luxury Suite&quot;,
+      &quot;editions&quot;: [ &quot;BBD&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="125" template="../../../../common/maps/obj/scroll.tx" x="600.273" y="635.622">
+   <properties>
+    <property name="reward">[
+  {
+      &quot;type&quot;: &quot;card&quot;,
+      &quot;count&quot;:1, 
+      &quot;cardName&quot;: &quot;Morphic Pool&quot;,
+      &quot;editions&quot;: [ &quot;BBD&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="126" template="../../../../common/maps/obj/collision.tx" x="414.902" y="1186.67" width="17.8617" height="92"/>
+  <object id="127" template="../../../../common/maps/obj/collision.tx" x="478.736" y="1186.33" width="17.8617" height="92.6667"/>
+  <object id="128" template="../../../../common/maps/obj/collision.tx" x="478.736" y="1123.33" width="17.8617" height="29"/>
+  <object id="129" template="../../../../common/maps/obj/collision.tx" x="415.736" y="1122.5" width="17.8617" height="29"/>
+  <object id="130" template="../../../../common/maps/obj/collision.tx" x="414.403" y="711.167" width="17.8617" height="155.333"/>
+  <object id="131" template="../../../../common/maps/obj/collision.tx" x="480.069" y="692.833" width="207.862" height="106.333"/>
+  <object id="132" template="../../../../common/maps/obj/collision.tx" x="481.069" y="696.167" width="17.8617" height="172.333"/>
+  <object id="133" template="../../../../common/maps/obj/collision.tx" x="288.736" y="324.167" width="559.195" height="44.333"/>
+  <object id="134" template="../../../../common/maps/obj/collision.tx" x="894.736" y="324.834" width="113.195" height="38.9997"/>
+  <object id="135" template="../../../../common/maps/obj/collision.tx" x="961.402" y="361.167" width="45.8617" height="128.333"/>
+  <object id="136" template="../../../../common/maps/obj/collision.tx" x="895.796" y="273.591" width="36.7708" height="51.7875"/>
+  <object id="137" template="../../../../common/maps/obj/collision.tx" x="929.796" y="234.47" width="36.7708" height="51.7875"/>
+  <object id="138" template="../../../../common/maps/obj/collision.tx" x="928.342" y="183.379" width="36.7708" height="51.7875"/>
+  <object id="139" template="../../../../common/maps/obj/collision.tx" x="818.342" y="151.197" width="132.044" height="51.7875"/>
+  <object id="140" template="../../../../common/maps/obj/collision.tx" x="800.887" y="194.652" width="24.2258" height="90.1511"/>
+  <object id="141" template="../../../../common/maps/obj/collision.tx" x="822.614" y="278.561" width="24.2258" height="48.1511"/>
+  <object id="159" template="../../../../common/maps/obj/collision.tx" x="289.069" y="340.5" width="47.8617" height="294"/>
+  <object id="168" template="../../../../common/maps/obj/collision.tx" x="586.402" y="636.833" width="43.8617" height="38.333"/>
+  <object id="169" template="../../../../common/maps/obj/collision.tx" x="-15.5975" y="1106" width="17.8617" height="185.333"/>
+  <object id="170" template="../../../../common/maps/obj/collision.tx" x="1117.74" y="1099.33" width="17.8617" height="194"/>
+  <object id="171" template="../../../../common/maps/obj/collision.tx" x="-17.2643" y="1281.5" width="1154.53" height="26.333"/>
+  <object id="173" template="../../../../common/maps/obj/collision.tx" x="625.657" y="742.8" width="466.222" height="73.9997" rotation="316.824"/>
+  <object id="174" template="../../../../common/maps/obj/collision.tx" x="310.772" y="597.255" width="163.872" height="82.3801" rotation="42.0671" visible="1"/>
+  <object id="175" template="../../../../common/maps/obj/collision.tx" x="865.365" y="227.106" width="29.7708" height="21.5375"/>
+  <object id="176" template="../../../../common/maps/obj/collision.tx" x="473.069" y="736.833" width="8.3617" height="46.833"/>
+  <object id="177" template="../../../../common/maps/obj/collision.tx" x="433.069" y="736.583" width="8.3617" height="46.833"/>
+  <object id="178" template="../../../../common/maps/obj/collision.tx" x="367.069" y="575.167" width="111.195" height="94.6663"/>
+  <object id="179" template="../../../../common/maps/obj/collision.tx" x="862.554" y="449.258" width="16.8925" height="46.1511"/>
+  <object id="180" template="../../../../common/maps/obj/collision.tx" x="750.22" y="558.924" width="16.8925" height="35.4844"/>
+  <object id="181" template="../../../../common/maps/obj/collision.tx" x="575.554" y="398.424" width="30.6425" height="16.6511"/>
+  <object id="182" template="../../../../common/maps/obj/collision.tx" x="367.054" y="463.424" width="16.8925" height="31.9011"/>
+  <object id="183" template="../../../../common/maps/obj/gold.tx" x="841.25" y="249"/>
+  <object id="186" template="../../../../common/maps/obj/gold.tx" x="897.5" y="249.25"/>
+  <object id="187" template="../../../../common/maps/obj/enemy.tx" x="310.667" y="1102.33">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'Welcome, customer, to Gwafa Hazid's emporium of spells!'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;I'll buy some spells. (Spend 2000 gold)&quot;,
+					&quot;text&quot;: &quot;'See you next time, valued customer! There's always more in stock!'&quot;,
+					&quot;action&quot;: [ 
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;randomCard&quot;, &quot;count&quot;: 50 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: -2000}                
+                      ]
+                    } ],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;What are you selling?&quot;,
+					&quot;text&quot;: &quot;'Spells at a great discount! Why, for just twice the price of a 'spell pack' that other merchants sell, I give you more than three times as many spells! That's FIFTY spells! And far more importantly, the spells I sell can be ANYTHING! Why, you might get 50 rare spells! Of course, I can't guarantee that, but I CAN guarantee my mystery boxes haven't been searched or seeded, they're one hundred percent genuine random. Straight from falling off the back of a caravan to your pocket, my friend!'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;I'll think on it.&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;No spells for me today, thanks.&quot;,
+					&quot;text&quot;: &quot;'See you next time.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Gwafa Hazid"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

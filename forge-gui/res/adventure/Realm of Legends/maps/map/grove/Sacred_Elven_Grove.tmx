@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="85">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Leaf-Crowned Visionary&quot;, &quot;Serpent's Soul-Jar&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="2" name="Ground" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztVjkOwCAMY+WjHfn/2N1Kgk0JINHBQlyxHQKi1VIa4IEW5xh4+3Dci83OjWhhvLJxWW6rjy2jn82Rp9XSo3B5/YgPeTAHSl2pOYr0f+WMaoE925m8mf5WeDmN19Kh3AF1HeNd5Twldz/uxu1vx0qvO+999nvYi9lDRr0w/6DZeAGPREjy
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJy1VltSwzAMzId9jgJNaTkStLSFwI24DU3Sd66FNeyOFzcloVM0o8nLtqTVSkqWZdnYZdkk6E3Qu6CboOugx6C7RIdBR1DuGWFfhe8TqL37DLrw3+u4/ik8m5TYs4NNW2ffbM/Mf+sb9MXHd3a/xr4Kflbioz0/+hjLSr7n4it947pX+PWbHHC++rgSH6okFr7fYk36rXbdNk2WsEP8Dcs5sCEWFvMcz/SFGDfwgXg0Pe2aFJID+jBxMVdr2LZn4lwiXtqtcd132M2FJw+ydgkfiLWdM01i3SG3O3wv4av51YXzVHjVhg0xMI4MYIf1Uck9cVAe3vfAuvDd/CP3aG8jfFsl98czcVwipdQVz1W+zeA7c/Teo476yFZqugKHVni+Vmxtwlr7hL3axZz2rddL5SC9q5Zc/2e8JoWPHKol32m8Niv68PkvshVb9OHRx9kyQq+7Fq9MBklOyXHOPp13t1eMd+tiz2xa+rPOMsOAtsdJP+wbo+3PESt51bg4A61PFtLbWWtD9GDD/dlH+235H7g4kziXFtIHLV72BcbX4CzmlrbZv4j7VHqL7f+YnGLJWuU6zmTlrsbF3q3zUudJOqPMptotgMm0hZPpO+ZSZwT5zZzwX2l/Bt9LhLb4r7J28Z9FsZ4hlmVLLJfa5Ty2eA7Suwof7fWVHBy5caf/BCqceUfBtgH3WUP5H2qoFLz4f2N5GSRnMCb2DPKQvDVZyv24o58cpPYsBsvRu/95hskXtMflqA==
+  </data>
+ </layer>
+ <layer id="5" name="Rooftops" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgcQIWFgUGRhf72JrAyMMSyooqt5GJgWAXEL7kZGFZz0c8t7kD7PKD4BR3thtm7BmjfWiB+zk0fe32g9nrSyb6BsnclNC29IiFuYWmQkjSAnJ6Q0xUsbcMwjA+iSXEjPrCOC9NuYjGxdq/EEj7Y/EwKJiZN+EDdCAsz5HAjF3sRaS9yPoVhSsKaGHufcmMvFygJa0ryHsg95Ph5DRXKNpDdz6AYX/gjxxGtytOnaO6gZ9k9CkbBKBg4AACHQFvy
+  </data>
+ </layer>
+ <layer id="7" name="SpriteLayer" width="30" height="25">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF2MAjRggeCDuR7Z2oyMDQwEs7Oxcw085sfMCOBVNMlcZ26kJpdD9jC4N6YJhroOmjFKD7GVsYYAO0iqNITdx8kJ3Eug+X2eS4mxI7sZlxVZ2B4RoQnwFG5l8tBoZ/WhA2TBzmVlIBtvJhHR+C/RFo9icgfgG0S1KbgUFKG8KGiWMDR0mwF9luZHuJBeT4mRoAOU2AyjZSwVGoGcS6H6YOlCYozUf40iY+91AjTQ9GoM0+MPaeJMHeegrrTlidBCozQPae0cCuDlsdQUx+JgReQO19gcNeWgEdoJ2ZHAwM/WykYVwAm/OxtWtIiVtKALp7SLWXnLILGyDXvwAq+z5C
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="220" y="396.667" width="104.667" height="16"/>
+  <object id="48" template="../../../../common/maps/obj/enemy.tx" x="103.666" y="191.333">
+   <properties>
+    <property name="enemy" value="Rhys"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="49" template="../../../../common/maps/obj/enemy.tx" x="247.333" y="217.5">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;Nissa stumbles back from your final strike, badly bloodied and only standing due to using her staff as support. Suddenly, there is a flash of light and an explosion of smoke as a flame-haired woman wearing goggles appears from nowhere, grabbing Nissa for support.
+
+'Chandra... don't try to fight them... they're too strong. Let's just go while we still can...'
+
+Shooting you a look of rage, the fiery planeswalker decides to comply, and as quickly as she arrived, she has gone, taking the defeated Nissa with her.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Sword of the Animist|ORI&quot;, &quot;Nissa's Chosen|ZEN&quot;, &quot;Exploration|DMR&quot;, &quot;Zendikar's Roil|ORI&quot;, &quot;Oran-Rief, the Vastwood|ZEN&quot;, &quot;Jagged-Scar Archers|LRW&quot;, &quot;Bonds of Mortality|OGW&quot;, &quot;Joraga Treespeaker|ROE&quot;]}"/>
+    <property name="enemy" value="Nissa"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="173.5" y="137.833">
+   <properties>
+    <property name="enemy" value="Harald"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="51" template="../../../../common/maps/obj/enemy.tx" x="368.667" y="189.833">
+   <properties>
+    <property name="enemy" value="Eladamri"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="52" template="../../../../common/maps/obj/enemy.tx" x="412" y="349">
+   <properties>
+    <property name="enemy" value="Miara and Numa"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="53" template="../../../../common/maps/obj/enemy.tx" x="270.5" y="276.834">
+   <properties>
+    <property name="enemy" value="Marwyn"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../common/maps/obj/collision.tx" x="-0.916667" y="-16" width="481.833" height="16"/>
+  <object id="57" template="../../../../common/maps/obj/collision.tx" x="-0.9165" y="400" width="481.833" height="16"/>
+  <object id="58" template="../../../../common/maps/obj/collision.tx" x="-17.8333" y="-15.8482" width="17" height="435.03"/>
+  <object id="59" template="../../../../common/maps/obj/collision.tx" x="480.167" y="-18.1817" width="17" height="435.03"/>
+  <object id="60" template="../../../../common/maps/obj/manashards.tx" x="46.5" y="202.167"/>
+  <object id="63" template="../../obj/treasure.tx" x="394.333" y="251.667">
+   <properties>
+    <property name="reward">[
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;count&quot;: 5,
+		&quot;rarity&quot;: [&quot;Uncommon&quot;],
+		&quot;subTypes&quot;: [ &quot;Elf&quot; ]
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;count&quot;: 3,
+		&quot;rarity&quot;: [&quot;Rare&quot;, &quot;Mythic Rare&quot;],
+		&quot;subTypes&quot;: [ &quot;Elf&quot; ]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="64" template="../../../../common/maps/obj/gold.tx" x="164.167" y="70.1667"/>
+  <object id="65" template="../../../../common/maps/obj/gold.tx" x="45.3333" y="181.333"/>
+  <object id="76" template="../../../../common/maps/obj/dialog.tx" x="224.25" y="359.977" width="114" height="25.5455" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The trees in the grove ahead are ancient and beautifully maintained. Elves flit about gracefully through the branches, and you are certain you are only seeing them because they want you to.
+
+Your manasight stone glows brightly, sensing a truly mighty legend in this place.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="77" template="../../../../common/maps/obj/scroll.tx" x="459" y="348">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wirewood Lodge&quot;, &quot;editions&quot;: [ &quot;ons&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="78" template="../../../../common/maps/obj/manashards.tx" x="436.5" y="342.5"/>
+  <object id="79" template="../../../../common/maps/obj/dialog.tx" x="227" y="238.227" width="61" height="47.5455" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The woman ahead glows with intense green mana and the very land around her swirls at her command.
+
+'So you tread upon this sacred grove? Then I will ensure the grove treads on you in turn.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="81" template="../../obj/treasure.tx" x="196.5" y="68.5">
+   <properties>
+    <property name="reward">[
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;count&quot;: 5,
+		&quot;rarity&quot;: [&quot;Uncommon&quot;],
+		&quot;subTypes&quot;: [ &quot;Elf&quot; ]
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;count&quot;: 3,
+		&quot;rarity&quot;: [&quot;Rare&quot;, &quot;Mythic Rare&quot;],
+		&quot;subTypes&quot;: [ &quot;Elf&quot; ]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="82" template="../../../../common/maps/obj/gold.tx" x="50.5" y="218.5"/>
+  <object id="83" template="../../../../common/maps/obj/manashards.tx" x="436.5" y="361.5"/>
+  <object id="84" template="../../../../common/maps/obj/collision.tx" x="193.528" y="160.249" width="125.881" height="31.3672"/>
+ </objectgroup>
+</map>

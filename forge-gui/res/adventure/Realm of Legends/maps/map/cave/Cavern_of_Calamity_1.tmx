@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="83">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Where Ancients Tread&quot;, &quot;Primal Rage&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/FarmFood.tsx"/>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt18EKgCAMBmBvEUU33yh6lPBBOvcuvWF4CGLodLbNkg7/dZ+DOdSNxjim7H06nLUo0fZyXCkzZkt70NXy7q62WerOwzfcbeJz14cuFtuVJeRCGzsLl0vtX9Kt0e9lx/aVpIvt599t09WYK2hrzXONvfEmd0lE0j1sOC24cJYlXHhXUu9nWI/icv17fHJMTo9iU2qdhzaEwg==
+  </data>
+ </layer>
+ <layer id="6" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAfeMpImvo0TuKwEzf13OjCjd8uZLfRAgyUvbjsRhbHB0BxS2r8ErKbln5FtxeZTw8wkPbi4yODn6oMDL/Q8G9Vyu0lFLfT1RgYJuPA5NhLbHoiZK8rEwODGxC7M5HuDnSwnoOB4T3QPRs4CNv7GGjfEyB+SgV7XwPtfAPFhOxtZGZgaALiZmbK7UUG1IxfathLCGzkGBh731JYJpiqMzCYYcGjgDogFpgf4/DgP1TIr9jAb6jZ+PBItleUHT+mpb3+YtjxQNpLrN2E7EUH1LJ3JjN56YlSe6kNBspeagIAqLSblQ==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJylV1tOQjEQvV/m1j+jLgkxJqhhEfy7EZahgCYiuhVXgKCJiCzADzu5PbmHYfpATzKpt8Wemc6rrao47uqqendVNQoji8xB5PvDy7mXZ//94uX1oJFL18jMz12E36T4ZD/Za+LHNz/ehxHyUG+viSz830O3yymydg2v/E+Mk/kWEf3mYW1AMgwCm5n30rX2juuGByPbGOPTAGcJ5uGcukGHpSuzMcbLYw6wuYTv0a9/+7VpGAcReYr4jtFxjb25MxXOjfLTgEaWdQE3eFNxbXFafAPSJced441x5nhFrjK+XiZ4+xFOkdvDOG8JENN/4dXcpZwCnLWFT2fnfonkzhm5O47EQc+1tVXrIHMr0k2+UadKeM8C96je5e+H/b7ctg7PYY5j79q1uqaAOiyQHBZfa/5+yItp2J9t0fF+FfQoAfcGqZ3oM/A5x5bwbyg/e2773LFeAiuHLijWJLbgQ/YxOHQ8wSc5WLFs9eZehmsV9Cvh7Bj7w+d6XuxGrHLcwnb0i5K+gBzSnFafkHiBTy3/cozngB4swP0o1pv66pz1mefy1bJ5Um/fjyykaibH0s1JGa/lYwupmrmvrQLOGcbxaSsWt86pknhi6L7wc5T+Pc77P/5F/HJtzPFyPulaZeUR7qgSt7izIn7vqTYLr9UfLH6rP0l88RsDHNhf5wxqM+vAbxHoC+ieMKtbPrYHd1TeP/UO4PcI6yLc03q3XvIbZN/7dwro091EHufeXBq/jTI0uw==
+  </data>
+ </layer>
+ <layer id="7" name="Foreground" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYMAN3DhJw4TAU0b8akkxixDwBeLXUBrZbFx2kgOcuAmrISW8lnFRz15sdqODOl7S7CZkL6GwxgWWAu12AZp9noOB4QIQX+RAZZPiX1IByN5coL48IM7nRGXT2l5uoL95gJiXC5VNqr2++JVh2IsLEGOvK1rcvqaTvY/JzKMge7Gl7SVE5jVKAChdo+NRQBiQWn7M4iHfLi8ku7CVlxa8uPVSArxw+JEadd9gs3cmD3Z7qVXXEwLIdtDLTnT76W3ncAZ1NMqT5AJi68ChDohpn1MaN+jmk9vfmImjTjBHch85fRpy+z7k2kfIDGoDAKI+POM=
+  </data>
+ </layer>
+ <layer id="9" name="Clutter" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF6KDdCBNjk6OX3bjcQi5wZWJgcANidyZUNq3tfQy04wkQP2VCZdMCIPurkZmBoQmIm5lR2bQA2Py1ghOCkd1EbYDNXzB7aR3W6ABmL7qb7LnpYz86wGbvVzYGBic6u8dBmYFhKRdlZtAyDeEDyGmInm5ATkPEpGNQGNPSDaNgFIyCwQ2ERBkYhIFYBEojY5AYPYG/GARvoqO9MDtHir3IdtPb3uEGAMQVQG4=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="66" template="../../../../common/maps/obj/manashards.tx" x="12.1501" y="170.933"/>
+  <object id="67" template="../../../../common/maps/obj/manashards.tx" x="441.503" y="388.93"/>
+  <object id="70" template="../../../../common/maps/obj/entry_up.tx" x="175.319" y="476.868" width="124.62" height="10.7111">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/enemy.tx" x="242.981" y="124.032">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Beza"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/enemy.tx" x="407.329" y="185.344">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Eluge"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/enemy.tx" x="410.517" y="335.845">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Maha"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="74" template="../../../../common/maps/obj/enemy.tx" x="110.802" y="339.529">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Dragonhawk"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="75" template="../../../../common/maps/obj/enemy.tx" x="82.1583" y="170.599">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Lumra"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/manashards.tx" x="17.1112" y="375.637"/>
+  <object id="77" template="../../../../common/maps/obj/manashards.tx" x="442.923" y="126.273"/>
+  <object id="78" template="../../../../common/maps/obj/manashards.tx" x="241.738" y="96.7236"/>
+  <object id="79" template="../../../../common/maps/obj/dialog.tx" x="141.102" y="446.076" width="187.697" height="20.858" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A truly massive cavern stretches out before you, so huge that it would hardly feel like being inside at all save for the ceiling high, high above. Massive beasts nest ahead, their size bewildering. You loosely recognize them as Bloomburrow's calamity beasts, though they seem to have kept their relative size from their home plane, leaving them just as colossal to you as they would be to the animals of Valley.
+
+Your manasight stone glows, sensing the power of the legends here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="80" template="../../../../common/maps/obj/scroll.tx" x="216.54" y="262.935">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Repel Calamity&quot;, &quot;editions&quot;: [ &quot;BLB&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="81" template="../../../../common/maps/obj/door_down.tx" x="310.624" y="10.9492" width="132.771" height="9.28954" rotation="0.284412">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/cave/Cavern_of_Calamity_2.tmx"/>
+    <property name="teleportObjectId" value="90"/>
+   </properties>
+  </object>
+  <object id="82" template="../../../../common/maps/obj/enemy.tx" x="309.694" y="411.685">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;An otter crouches in the corner, wearing a robe and swirling with magic, clearly from bloomburrow. She whispers to you 'I could use some help.'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;The beasts are dead.&quot;,
+					&quot;text&quot;: &quot;'Incredible job! This area will be a lot safer, that's for sure. It'd be lovely if you took our the beasts in the next chamber as well, but enjoy your reward.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Alania, Divergent Storm&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;randomCard&quot;, &quot;cardTypes&quot;: [&quot;Instant&quot;, &quot;Sorcery&quot;], &quot;rarity&quot;: [&quot;Rare&quot;, &quot;Mythic Rare&quot;], &quot;count&quot;: 4 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 5000}                
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 5
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;What do you need help with?&quot;,
+					&quot;text&quot;: &quot;'This cavern has somehow trapped a whole mess of calamity beasts. Its magically binding them, but the bindings are slipping. I'm struggling to maintain them, so ideally you can slay them for me. There's another chamber ahead, but those bindings are holding strong. Kill the five here, and I'll grant you a reward for your heroism.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;I don't have time for this.&quot;,
+					&quot;text&quot;: &quot;She mutters to herself, frustrated as you leave.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Alania"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

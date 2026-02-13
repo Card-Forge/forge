@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="95">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Mishra's Foundry&quot;, &quot;Mishra's Juggernaut&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzFVVEOwiAM5R92AubF9CzTc23DuxmizWrTBxRmfEkTRguvLQ/m3P9wm5zbArbrVI4hH4rL8xou4RjP4W3yu2YZseJHvIs/4h4e5yLXjvKi2DyODbwIpbW0P+eSvDKvrVIP+ay8M5uPSg+089W0cgbvs9DT+PHf/bclI+/eUW/PPbKcb2L7yj7LnFr6LGug8RrwuzGq55Vx7iAXy/1srZfH9sCqZ02DyOgdWxRfMuq59E+QuqR6kHaRjYD3Ufb0lziT9wW1dFro
+  </data>
+ </layer>
+ <layer id="7" name="Floor" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxTZWdgUB1API8TN6a1vYTYw83e0XAevuE8VLAnHwQPtDtG8SgeyRgAlPhn2g==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzbwcPAsIMOWAYNg8QuM9EeY7PXDCiOD6ziZWBYjQev4YWoM2HCbpYJmfZ68DEweOLBXnyU2bsKix9IsRcXIMa/2MxCtvc5FNPTXpDYTE4Ifo7khhcUhjMp9qJjmPnTGbFjatmLLS2YUJCPCMUvzC5qpmdkwE/n9GzMjcAw8IwPNR2h4xdUsJcSQGo440qD2PAMRohZ00jQgys9k1KnwPwD8wO5dRK97B0o/6LbCwCXcsdU
+  </data>
+ </layer>
+ <layer id="8" name="Walls Supplementary" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBg4YMZEHXNMmLCbZUIl82kBjLkhmJ5Anh1hLz3t3g+0116agcFBmv723gXaeW8A7IUBcu0lJz0PZXvJAXsHKD2DwEDYSW8wksvn4Q4ACycNpQ==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBiZ4BeUbtdgYOjQQIiv0CROfwlU3V0gfU8TkyYEFgPtXKJBWB0IOEozMDhJo4r9BNrxSxOTxgdW8TIwrIbiNbyE7b0PtPOBNGF1hIAHHwODPdAcByD24qPcvKdAfz4jIoxB9t4F2nkPau9hIsMbHRRD7WLUYmBg0iLOXk8oBtl7H4u9F8h0CyF7y2QYGMplqBPOpNgrIsvAICpLnL3OwPhwwZKuNCQYGDSBWAuI34gRNucZ0K7nUPwCaq+vIG71D4F2PsJib5okKiYGoOdzdHs36BI2A2YXMen5ESOEJiafE2MvCBObnkfB8AMAbeI7KQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="270.665" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/enemy.tx" gid="11419" x="313.575" y="185.45">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Ashnod"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/enemy.tx" x="276.512" y="127.338">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Hajar"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/enemy.tx" x="209.836" y="126.625">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ankh of Mishra|5ED&quot;, &quot;Mishra's Workshop|ATQ&quot;, &quot;Mishra's Bauble|BRR&quot;, &quot;Mishra's Juggernaut|BRO&quot;]}"/>
+    <property name="enemy" value="Mishra"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/gold.tx" x="361.667" y="78.333"/>
+  <object id="73" template="../../../../common/maps/obj/booster.tx" x="191.5" y="110.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;BRO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;BRO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;BRO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="74" template="../../../../common/maps/obj/enemy.tx" gid="11419" x="311.5" y="85.5">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Farid"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/manashards.tx" x="354.5" y="179.167"/>
+  <object id="89" template="../../../../common/maps/obj/dialog.tx" x="189.25" y="227.25" width="54.5" height="21.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Sweltering, nearly unbearable heat from flowing channels of lava overwhelms you as you enter the factory. Massive, elaborate machinery groans with the echo of gears and the crackle of magic.
+
+Your manasight stone glows, sensing the power of the legends here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/booster.tx" x="191.5" y="142.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ATQ&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ATQ&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ATQ&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/scroll.tx" x="26" y="67">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Mishra's Foundry&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="93" template="../../../../common/maps/obj/dialog.tx" x="241.844" y="127.172" width="16.8333" height="12.439" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The man before you is vicious and wild-eyed, a glowing green stone radiating magic in his hand. 'Another fool come to stop my ambition, just like my accursed brother. You'll fall like the others.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/enemy.tx" gid="11419" x="25.5" y="156">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'I see a fire burning within you. Perhaps we are kindred spirits.'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;The great Mishra and his minions have fallen.&quot;,
+					&quot;text&quot;: &quot;'Though none remain to rebuild Kroog's glory, at least my people's spirits can rest easy now.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Raddic, Tal Zealot&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;subTypes&quot;: [&quot;Equipment&quot;], &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ], &quot;count&quot;: 7 }       
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 4
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;So, kindred spirit, what troubles you.&quot;,
+					&quot;text&quot;: &quot;'I am... or was, a sworn protector of the city of Kroog. Until the thrice-damned Mishra and his phyrexian war machines slaughtered my people. He and his handful of loyalists lurk in this very place I now shamefully hide within. I would fight them, but I have seen what they can do, I know my sword cannot match their magic. I have only the weapons of my fallen fellows to give, but they are all yours if you avenge my people.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;I don't have time for this.&quot;,
+					&quot;text&quot;: &quot;'Leave then. I'll claim vengeance on my own somehow.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Raddic"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

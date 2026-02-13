@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="34" height="37" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="142">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Relic Amulet&quot;, &quot;Prodigal Sorcerer&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <layer id="9" name="Sub Layer" width="34" height="37">
+  <data encoding="base64" compression="zlib">
+   eJztlG0KgzAMhv0jmyD76UkceAKP4Dl22p1jRxihC3QxqalN0Y088CJoPx7TaNM4zv+yjEcbBH7VA8Zbuz/bfWuewcO6HuCw1wPnQo72wDXco965aF1wbEk94negwfXjDJ/Q+3EdNDXRuGrcuGcSXF01Ho/Ld6S5Kd+t8805u9c9eMAV53Z9yFYNrr2NB+xNk4uFxzCuk+I21fHAGnB9AntKsfZAF+ogeXCk/ok59aDfDfpI+6ZcNB5cT8Z9WeIh7Skxd+twvVHbg/pwaHrCyqMGZ/FwHMcp4Q3e2ISr
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="34" height="37">
+  <data encoding="base64" compression="zlib">
+   eJztl0FOwzAQRb2poKjqDs4BIlR1boAoSGzCiYCyQyCuwGXY9wyo6iHIKIz4mY7dcZKGLmLpq1Hk5L+ZscfpauTcqidtvHMPmXMfV9vqi4H0mB8GB+m+5HjtgOMs64ZHsqQydMVBeXkv/afzSv/BoLE0rce1r36fxnWlslzM7BxaLmhIBlIB8/D6pdwrN347LsrJm3F9aAzM8e3r0th43trHY7PkAsVDMmhijkV5/ZzH49snBwtzkcKh+SPDJoGBOYosjSPE0BUHvq9tTZpyaP5N6oPjzsiAa1TzbMtB5+et3y1kCEn60rByae8uhDQ/K4dkGU90jq+TeIyhPGr3QxyhgT3yeFKxxHLFecG+SpJsFo5Qr8ZzLTZH6/GkVA6NC/cj72Hs4dIb7+GzVo5dsfFzmPtFYM804bDkF59DjnXk3EWW5e+3gMYh6x2qP849n/3JykHfPshi6e8hoX8qh6xPzOdSycPnqJLmn1IXzkeIwxKH9JXrE9dkE47To7Q+0EbIsczrDH1x8H8WZGH/fXKgryaNY9CgQYevH4/xxEg=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="34" height="37">
+  <data encoding="base64" compression="zlib">
+   eJztlj0KwjAYhj/Ev7RdvYeDiOno5g+C1xCvIVgHb+BlnNXRM4j0EDZIMIlJSNom7ZAH3qEh5Hv6kbQB8Md46rGYhuAhZztp2sANCwywFLLC/j1OKQCa8Xk34CE6kBwLt0wSFXXsFVKXcEb60HmuYWvKxn17mI679FCN+/bQJRBwxbPHpylGAz4Z+o/IXPNvod/9Kg63COBepJ9884h4lxzL/zWqmHDtAFy6vMcu5p/3sfqdX1gewgbb9UTs/7DoAWISJXw/Dumvhq4OnVfWQxWW3MCjiovKTbW+Sd9tXUwh90Ny16H3MxPymjxobba+zXmoy4Mgnse1xdp1elShLR6u9moZ2uQSCATs+QCdOV4+
+  </data>
+ </layer>
+ <layer id="8" name="Walls Supplementary" width="34" height="37">
+  <data encoding="base64" compression="zlib">
+   eJwTZWdgEMWB1wMxvQAuNwwWd/AD8ZoBdge93YDLHfSMD1zuGIiwQHfHQLkB2R0D6QaYOyh1wxkuBoazOPA5LuLMEKJCOGRxMzD0cWLigQDo9g8GdwxUeHDw0N9OQqCUl4GhjHegXTH8wTVWBKY34OQhDhMLThJZliGDHGCZtAFPuVaOJQ2C7MHnXi4y8hPIHaSALBLVk+KOw0wIDAJtRJZJb0gUJ+QOVSaI3cgYF6BleBALQPUsO43KUlYe1Lr6DI66m5ZuQHYLrP0AsguZjyw+0sA6EttHPpbUsVefhYHBAA0bslDHbFLAWaCd59Dw+QFwRzawLsuB4hVsA+cObG7KHYB6dhQMPdDBONAugIBjTIPLLbQCAMG4RoM=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="34" height="37">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzll7tuE0EUhk9sx846segiaipvQgEiiZS8AEh2zEU8AldzCQVgy1SJBKai4yIkqCmIwYnFAyA6BARR8AYBJxFQpwj8R7ujPTs7a2982RT80q+9zeXbM3NmdotZoqLBi/CwVAjpU/dpeHuIHG20XTpghqgswxyPqCxxxaITSz8My3milXzvLIUBxeEFGF72wdHug2FnPnrZRTCWunD2GgfJUck5x8fTRE/gp/Czae/5VTCU+4hXVI7yONEji6iJvtfgdbjlclwfH07/YRysT+j7M/wF3oiJg1XLeRw8Nm30vQVvwzsxcrBOwqdga8Ls7EQ8HLruIC533TjVxPn/qmtzRDfmDppisBwnRomep/x+ONIfhz5/P3ZZP5lhN+mtkax8guhDwsvTXjhYKrdYY11Yvo/6rxXDfqTnTJjKHdaW9+izgL2g6O4HMg4Vrc1js34PWpfBcCXvH0+dIS7tHQnek+PbTbLsPbzDa8s5V8e4JfuPMs8HrY1UkIXVy/hyDpfG/I6qm6hbx9HGunMUnnKPieT++6yjXiXtuJp2yq1mnGfnZ4hu5/w5WhTfJEtobyYV9Cw8Ilgu2kSXbI+hkfGe7SFX//KagfLHU05c32UcFp5zP9DfT82KoZrz4sHi90/Cm+T0r8djGQwrtvNukkGxJpPe9QP32aRb7v4Cvn3n/a4vBMdFaQ3vsQ63OuRKWB69Snvnam4xR1XMs1XUbcBvrOBaxxyq7TNYv8/C57LBelK2todxmyp+Mo6TIm7c1lvL+f9pijb1cWH9Qpnf8B+XQ/03qXrMK/MoLDZ8/zAYWoJD/g+a/oEUh6lNWbdpiAtLjw1f6wyyvS2NoWKIh7ov12JVV9U35VYnf0tRQJvBWwEO1tcO7bJk7Exz6ALmyJS79+fS0XhvGdaPQ2Lus2Qe1bT5b5p7UlWxZynmhoFdxkO+pzrncZJ5JPdFOWZy3MPmr6m8KV9kGzLvZR79A42S1hM=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="337.666" y="591.999" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="66" template="../../../../common/maps/obj/gold.tx" x="402.207" y="161.673"/>
+  <object id="68" template="../../../../common/maps/obj/enemy.tx" x="327.667" y="248">
+   <properties>
+    <property name="enemy" value="Lier"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/enemy.tx" x="96.5" y="478.583">
+   <properties>
+    <property name="enemy" value="Rasputin"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="75" template="../../../../common/maps/obj/gold.tx" x="110" y="461.667"/>
+  <object id="76" template="../../obj/treasure.tx" x="209.834" y="299.5">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 3,
+  &quot;colors&quot;: [ &quot;blue&quot; ],
+  &quot;subTypes&quot;: [ &quot;Instant&quot;, &quot;Sorcery&quot; ], 
+  &quot;rarity&quot; [ &quot;rare&quot;, &quot;mythic rare&quot;]
+}]</property>
+   </properties>
+  </object>
+  <object id="77" template="../../../../common/maps/obj/booster.tx" x="445.667" y="431.667">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="83" template="../../../../common/maps/obj/waypoint.tx" x="353.667" y="556.667"/>
+  <object id="86" template="../../../../common/maps/obj/waypoint.tx" x="352.167" y="407.333"/>
+  <object id="105" template="../../../../common/maps/obj/enemy.tx" x="240.833" y="333.333">
+   <properties>
+    <property name="enemy" value="Talrand"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="113" template="../../../../common/maps/obj/enemy.tx" x="417" y="429.667">
+   <properties>
+    <property name="enemy" value="Rielle"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="117" template="../../../../common/maps/obj/enemy.tx" x="325" y="331">
+   <properties>
+    <property name="enemy" value="Deekah"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="118" template="../../../../common/maps/obj/entry_up.tx" x="307.084" y="196.833" width="58.6667" height="25.3333">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/merfolkpool/Wizard_Palace_2.tmx"/>
+    <property name="teleportObjectId" value="38"/>
+   </properties>
+  </object>
+  <object id="121" template="../../../../common/maps/obj/collision.tx" x="-1.06333" y="592.667" width="547.127" height="16"/>
+  <object id="122" template="../../../../common/maps/obj/collision.tx" x="-2.5635" y="-16.6667" width="547.127" height="16"/>
+  <object id="123" template="../../../../common/maps/obj/collision.tx" x="544.333" y="-12.3053" width="16" height="606.277"/>
+  <object id="124" template="../../../../common/maps/obj/collision.tx" x="-16" y="1.8615" width="16" height="606.277"/>
+  <object id="127" template="../../../../common/maps/obj/manashards.tx" x="254.5" y="113.667"/>
+  <object id="128" template="../../../../common/maps/obj/manashards.tx" x="304.333" y="111">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="129" template="../../../../common/maps/obj/enemy.tx" x="351" y="486">
+   <properties>
+    <property name="enemy" value="Adeliz"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="83,86"/>
+   </properties>
+  </object>
+  <object id="130" template="../../../../common/maps/obj/gold.tx" x="81.5" y="462"/>
+  <object id="132" template="../../../../common/maps/obj/dialog.tx" x="302.75" y="568" width="111" height="10.25" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A wide coastline can be seen before you, with a cool coastal breeze blowing lazily in the palms. Wizards of all kinds walk about the area, flashes of magic going off all over. In the distance, a grand palace glowing with mana can be seen standing proud on a nearby island.
+
+Your manasight stone glows brightly, sensing a truly mighty legend in this place.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="133" template="../../../../common/maps/obj/dialog.tx" x="320.398" y="285.867" width="34.6499" height="17.4621" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The palace looms high ahead of you, mana swirling around it. A wizard blocks the way forward, and you're sure many more are waiting to stop you inside.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="135" template="../../../../common/maps/obj/scroll.tx" x="490" y="458.5">
+   <properties>
+    <property name="reward">[ { &quot;type&quot;: &quot;card&quot;, 
+&quot;cardName&quot;: &quot;Riptide Laboratory&quot;, 
+&quot;editions&quot;: [ &quot;ONS&quot; ],
+&quot;count&quot;: 1 } ]</property>
+   </properties>
+  </object>
+  <object id="136" template="../../../../common/maps/obj/scroll.tx" x="522.5" y="544">
+   <properties>
+    <property name="reward">[ { &quot;type&quot;: &quot;card&quot;, 
+&quot;cardName&quot;: &quot;Diviner's Wand&quot;, 
+&quot;editions&quot;: [ &quot;MOR&quot; ],
+&quot;count&quot;: 1 } ]</property>
+   </properties>
+  </object>
+  <object id="137" template="../../../../common/maps/obj/scroll.tx" x="18.5" y="519.5">
+   <properties>
+    <property name="reward">[ { &quot;type&quot;: &quot;card&quot;, 
+&quot;cardName&quot;: &quot;A-Base Camp &quot;, 
+&quot;editions&quot;: [ &quot;ZNR&quot; ],
+&quot;count&quot;: 1 } ]</property>
+   </properties>
+  </object>
+  <object id="138" template="../../../../common/maps/obj/scroll.tx" x="222.5" y="369">
+   <properties>
+    <property name="reward">[ { &quot;type&quot;: &quot;card&quot;, 
+&quot;cardName&quot;: &quot;Talrand's Invocation&quot;, 
+&quot;editions&quot;: [ &quot;M13&quot; ],
+&quot;count&quot;: 1 } ]</property>
+   </properties>
+  </object>
+  <object id="139" template="../../../../common/maps/obj/gold.tx" x="381.5" y="144.5">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="140" template="../../../../common/maps/obj/enemy.tx" x="112" y="345.667">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;text&quot;: &quot;Hail, {var=player_name}. I see your travels have taken you far. I have been wandering as well, and have acquired some rare spells I am not in need of along the way. Take a look, perhaps they will be of use. Traveling this place does have its costs though, so I cannot simply give you them, but my prices are fair.&quot;,
+		&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;(Continue)&quot; }
+		]
+	}
+]</property>
+    <property name="enemy" value="Mysterious Mage"/>
+   </properties>
+  </object>
+  <object id="141" template="../../../../common/maps/obj/shop.tx" x="81.5" y="359.5">
+   <properties>
+    <property name="commonShopList" value="WanderingMerchantBlue"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

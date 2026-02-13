@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="148">
+ <editorsettings>
+  <export target="waste_town.abandoned.tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Ghost town&quot;, &quot;Ghost quarter&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="13697" source="../../../../common/maps/tileset/rivers.tsx"/>
+ <tileset firstgid="30977" source="../../../../common/maps/tileset/rivers-nocolide.tsx"/>
+ <layer id="1" name="Background" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmUsOgjAURTt3pK7D/4e6BHfEx6hxCRrjKlyGiS7EgbuQFyBpCIUCr320YXCDA0zuyX23H/UHjPkd1pIzdvLofWDovqP30FbHOIvxlt5Hn0WiH6f3gCGXeg4sn7gj3/QJEtlGlvXnGSVP6P48ZTrHnx+WdQhyecfeV7nOTBzqELUHLGW9iRxaE/YhY0PLul/G48p6ffDcYIEzjQvnGmCA+bK9K9m+UieTiyCVd8R3q77XVK9tkgVW54v8y5iwBQywp2D0hJIjy2Uh2fNVvclmyMRciZLloeJRlcUEx7SkI00yoZgrkSW/BmMzmGKBPX7D1TjacOpkgPvXLNd3XRy6WK4BY7dAfzd0ZgE55O+QOnl0cdS996p6NckRFnSiiqGMq4pbVxZY53YTa6lMmL8NU3HUnaeucmDfA3uOngMUIP9OQsVRdLa1kQOEOVtUHGuO+7+iKY4/AhwTSA==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzVWUluU0EQ7Z9IQX/wCsXb7wBCLOAKIAMmJ0CIBYP0yT0IHAGxgYWDxCDfgF3EPYKEYrxmgWAFEl35XaLcdPXsxJTU+pO7ul7N3RYijLpKiCdyXG+E2KiXx2YdyCyQppL/UZNnnULJ/LnpeW6Q5zcrxoHr35Br7VVpfEAnB3UvM97j82lQTpucNaFNwL9T7XKWhH4AdjH5GMbw/4Jxyvh0cYrxukoqmNz5thTinGO8L808bXPfefCl44ocxw5f6VRNiM0DY4Y/9971LZY4X0Nyxc6XyqxDm/5cOHLHa0fqd668/au148A1c8Vrp/UgOeuPDUfunIN9CA5T/QHd/m7DeXM4UHc5+g/KT+8Hdbu8GgnxehTOn8NRMOvEkm4L7Af1fGDLlbbcyuWA3DiwJ0vpzV056d7Avq5pPVMe29kW4uI2v05R8735C2bO94F46ouDI1sdQJwYqzAOJYbHQyEuMHhSe3PE8ZXBQ98vyD2no07ZQd8HPZAYLkv5d88L8clil1gCHHXZDxc989AT9uy0nk3VvEOFA+xi8zGgedXr8A5z1e9vMnXe1J/tNH44MNfoPoI4fGwyK3u9lfI6av6OquwH3sMVbAD2kPFygmm36ufCmJBnuPeNoynj33tVHI7nGq+FQY626eWrLJgpXhMPXwJfC8GxXy/j+HbV/nsfPSPeSQKWo0AcrdIf4PDZl9zyjI/bKh988MgHJoK4QRyX5PXR0D0HfOvugNd1SWTxscdPxWtmwHDfPf2EAAfk3odDPwxAM2UPTsYJee8bv6l7qpg6t09yzMctIbY20+UbV+76gTUwF2GMcHvAmPg4VjheXvtXbnoWm/v8rdVyKOCaaLVwoWw2J+/pbzA3zVUtKbVaqNfulP7Xd4/cNss1AnGNiYy0flDcJgx0X3sQ4fs60fPUEP9sSX3TZcTvtP7r31dxjkvtG7LXnCkceu0PWTcXDtPe1pd3Kg6ul4rlhWfCiMOXdyqOnKT//xSin3XCQe3hwqDvtVNx/DDs3VNpGiHLOtkjhdYNR+x58brhoOcsIVh8cUBcpcbCH0gD3Iw=
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="50" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztWEtOwzAQHUQLLVK7YtUgNbBqVVggEHtW9AIsuAzKHQq06hHgAuWz6EVAiDMAZQESdlKrxrKT8S8Jap9k1UkdZ57ffBwDrLACDqMQoqJtKAKTCkDwT9tDZcHjvCrnd1Xzv4aHdbvnedv5/qBWjE8e7QMckxY009//3AF46SyuVTx84CbEjTtZ059bh8fpFkCrGa/VH7S56yFpsx7AVy/73XcBwGMze1waSC6LgeGxsZ40ysMFWLxNCYcn4j/j0H5ODI/LRvLrigcP4kPRd9t+niweAy5XUR4sDl1C1GNgkB9lPLqKHOhDDwad9ZHVAd04V4H4OYwAIqw9rnR9205+RR5pmr4SHpv19FYU8qwfPqHD4zawe5fP/U0aD1ZjVNizrGEugdFDjJkdS/tlMR5yc5ropuLB8oApVLa4qN0ylCXO24LGU03NdXi0DPxJtzab7lFc6cH7POtfH+DG0X2vGDO7HvXAgH5jDEP9/2xhyoPq/zP3gXHGecbFfL88a+DmzqpTsm8WEx4fuGEx8vi2p1DxEGO6U0+aCuxb6548d9YF6Hfx8SH2TVCWvMuD8petgQhS4yLWT+OBPYvBnh/Mx0ay+0PFfWzettUD4/9Ztkwc7NNc+hVm7bB7Zl1uvO3vVb/nlbF9ns5FPzU1ENc8y69EjcuSS3SxjDzyqpkmWEY9eJRNm2XXo2zIm8cv4t5zgw==
+  </data>
+ </layer>
+ <layer id="5" name="Overlay" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt10EKwjAQBdAPguAJdO+mTaJ3cKn3qAtv4C4ewgPpNfQwmhYhlFHTamma/gehU5iWSZsJBCAiCrNVwO45CgW7V+W9bfL83AAL8z3vkgHXrGWRAdw8XP2HZXm1RcN5xOSmgbvuu4p0TSfVSEloHw7BafP/d8b2fULrkfKOq25qaquL/0U0FrHtTb84R7Y3UZz8Nf+KpbUj5dXjvvl1u/hdD9TzpJjI8c8oOgdMLufF3h/SWWs9k3PH0h+f9oghSWEORERERA8ouyBH
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="364" y="624" width="56" height="16"/>
+  <object id="100" template="../../../../common/maps/obj/enemy.tx" x="384.333" y="516.667">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ghostfire Blade|KTK&quot;, &quot;Mastery of the Unseen|FRF&quot;, &quot;Jeskai Infiltrator|FRF&quot;, &quot;Scroll of Fate|C19&quot;]}"/>
+    <property name="enemy" value="Omarthis"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="116" template="../../../../common/maps/obj/collision.tx" x="330" y="640" width="126" height="29"/>
+  <object id="118" template="../../obj/treasure.tx" x="676" y="462.667">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 8,
+  &quot;cardName&quot;: &quot;Wastes&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="119" template="../../obj/treasure.tx" x="744.667" y="298.667">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 8,
+  &quot;cardName&quot;: &quot;Wastes&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="120" template="../../obj/treasure.tx" x="614.667" y="228">
+   <properties>
+    <property name="reward" value="[{ &quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 8, &quot;cardName&quot;: &quot;Wastes&quot; }]"/>
+   </properties>
+  </object>
+  <object id="121" template="../../obj/treasure.tx" x="54" y="135.333">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 8,
+  &quot;cardName&quot;: &quot;Wastes&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="122" template="../../obj/treasure.tx" x="701.848" y="127.273">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 8,
+  &quot;cardName&quot;: &quot;Wastes&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="123" template="../../../../common/maps/obj/inn.tx" x="312.667" y="436"/>
+  <object id="124" template="../../../../common/maps/obj/shop.tx" x="546.667" y="116">
+   <properties>
+    <property name="commonShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black,FlipShop,Saga"/>
+    <property name="uncommonShopList" value="Planeswalker,WUBRG,PhyrexianColorless,Eldrazi"/>
+   </properties>
+  </object>
+  <object id="125" template="../../../../common/maps/obj/shop.tx" x="162" y="193.333">
+   <properties>
+    <property name="commonShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black,FlipShop,Saga"/>
+    <property name="uncommonShopList" value="Planeswalker,WUBRG,PhyrexianColorless,Eldrazi"/>
+   </properties>
+  </object>
+  <object id="128" template="../../../../common/maps/obj/shop.tx" x="448.667" y="226">
+   <properties>
+    <property name="commonShopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="129" template="../../../../common/maps/obj/shop.tx" x="312" y="150">
+   <properties>
+    <property name="commonShopList" value="GhostItems"/>
+    <property name="noRestock" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="130" template="../../../../common/maps/obj/shop.tx" x="289.333" y="226.667">
+   <properties>
+    <property name="commonShopList" value="Legend"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="131" template="../../../../common/maps/obj/shop.tx" x="256" y="372">
+   <properties>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
+    <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black,FlipShop,Saga"/>
+    <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature,Battle"/>
+   </properties>
+  </object>
+  <object id="132" template="../../../../common/maps/obj/shop.tx" x="305.333" y="369.333">
+   <properties>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
+    <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black,FlipShop,Saga"/>
+    <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature,Battle"/>
+   </properties>
+  </object>
+  <object id="133" template="../../../../common/maps/obj/shop.tx" x="416" y="371.333">
+   <properties>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
+    <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black,FlipShop,Saga"/>
+    <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature,Battle"/>
+   </properties>
+  </object>
+  <object id="134" template="../../../../common/maps/obj/shop.tx" x="464" y="370.667">
+   <properties>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
+    <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black,FlipShop,Saga"/>
+    <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature,Battle"/>
+   </properties>
+  </object>
+  <object id="135" template="../../../../common/maps/obj/shop.tx" x="514" y="369.333">
+   <properties>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
+    <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black,FlipShop,Saga"/>
+    <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature,Battle"/>
+   </properties>
+  </object>
+  <object id="136" template="../../../../common/maps/obj/shop.tx" x="513.333" y="434">
+   <properties>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
+    <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black,FlipShop,Saga"/>
+    <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature,Battle"/>
+   </properties>
+  </object>
+  <object id="137" template="../../../../common/maps/obj/shop.tx" x="465.333" y="436">
+   <properties>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
+    <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black,FlipShop,Saga"/>
+    <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature,Battle"/>
+   </properties>
+  </object>
+  <object id="138" template="../../../../common/maps/obj/shop.tx" x="416.667" y="436.667">
+   <properties>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
+    <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black,FlipShop,Saga"/>
+    <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature,Battle"/>
+   </properties>
+  </object>
+  <object id="139" template="../../../../common/maps/obj/shop.tx" x="431.333" y="305.333">
+   <properties>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
+    <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black,FlipShop,Saga"/>
+    <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature,Battle"/>
+   </properties>
+  </object>
+  <object id="140" template="../../../../common/maps/obj/shop.tx" x="513.333" y="213.333">
+   <properties>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
+    <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black,FlipShop,Saga"/>
+    <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature,Battle"/>
+   </properties>
+  </object>
+  <object id="141" template="../../../../common/maps/obj/shardtrader.tx" x="254.667" y="438"/>
+  <object id="142" template="../../obj/treasure.tx" x="38.6667" y="349.333" visible="1">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 20,
+  &quot;cardName&quot;: &quot;Snow-Covered Wastes&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="143" template="../../../../common/maps/obj/dialog.tx" x="359.167" y="573.25" width="65.6667" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;An abandoned town that seems long abandoned looms ahead. Blocking the way in is a lone warrior, who seems to be part spirit and part flesh.
+
+'This town is the last haven of the ghosts who fell in this accursed world. Leave or join them permanently.'
+
+Your manasight stone glows, sensing the power of the legends here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="144" template="../../../../common/maps/obj/dialog.tx" x="345.167" y="501.583" width="96.3334" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The town isn't as empty as it first appeared, as spirits seem to be bustling about carrying on their day. Oddly, the town's shops still seem to be in business. Even the inn has a light on, so long as you don't mind it being haunted.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="145" template="../../../../common/maps/obj/dialog.tx" x="283" y="155.417" width="75.0001" height="21.8333" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A ghost stands outside the shop before you - not all that unusual for this town, but this one seems darker and more powerful.
+
+'Not often we get living folk coming through here. You should see what my shop has on offer. My stock isn't particularly wholesome or particularly cheap, but you won't be able to deny the usefulness of my items.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

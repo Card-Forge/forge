@@ -1,0 +1,9 @@
+Name:Aerith, Last Ancient|Deck:Aerith, Last Ancient.dck|Variant:Commander|Avatar:Aerith, Last Ancient|Desc:
+Name:Choco, Seeker of Paradise|Deck:Choco, Seeker of Paradise.dck|Variant:Commander|Avatar:Choco, Seeker of Paradise|Desc:
+Name:Maester Seymour|Deck:Maester Seymour.dck|Variant:Commander|Avatar:Maester Seymour|Desc:
+Name:Sin, Unending Cataclysm|Deck:Sin, Unending Cataclysm.dck|Variant:Commander|Avatar:Sin, Unending Cataclysm|Desc:
+Name:Green Mage|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:
+Name:Tifa, Martial Artist|Deck:Tifa, Martial Artist.dck|Variant:Commander|Avatar:Tifa, Martial Artist|Desc:
+Name:Wakka, Devoted Guardian|Deck:Wakka, Devoted Guardian.dck|Variant:Commander|Avatar:Wakka, Devoted Guardian|Desc:
+Name:Ignis Scientia|Deck:Ignis Scientia.dck|Variant:Commander|Avatar:Ignis Scientia|Desc:
+Name:Shelinda, Yevon Acolyte|Deck:Shelinda, Yevon Acolyte.dck|Variant:Commander|Avatar:Shelinda, Yevon Acolyte|Desc:

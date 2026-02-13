@@ -1,0 +1,11 @@
+Name:Putrid Hexhag
+ManaCost:1 B
+Types:Creature Goblin Warlock
+PT:0/5
+T:Mode$ CounterTypeAddedAll | ValidObject$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever one or more counters are put on this creature, target creature an opponent controls perpetually gains "When this creature dies, you lose 1 life."
+SVar:TrigAnimate:DB$ Animate | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Triggers$ DieTrig | Duration$ Perpetual
+SVar:DieTrig:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLoseLife| TriggerController$ TriggeredCardController | TriggerDescription$ When this creature dies, you lose 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
+Oracle:Whenever one or more counters are put on this creature, target creature an opponent controls perpetually gains "When this creature dies, you lose 1 life."

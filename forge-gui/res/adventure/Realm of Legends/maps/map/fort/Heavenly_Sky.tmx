@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="78">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Luminarch Ascension&quot;, &quot;Youthful Valkyrie|FDN|[303]&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <layer id="6" name="Collision" width="30" height="30" opacity="0.6">
+  <data encoding="base64" compression="zlib">
+   eJy9ljFOw0AQRbd3bNFRGNJwAVAILn0GaLkHFbG4BEmooaFGCAmJQ4RciHzZXxlPZrNe4+RLo1iJd9/O+M84zrVVZM4tU+duMnc0gSf1m+3GIc4zVXtele24KJy7nQ3L1rlqSf6QbOzzusnnrajPYNX4JT0cO5Q32BPB/nwcht1FZF+X3bnFQJ6kB7twx6Pt9VMyHFf3gY/5H3bReGwtuIXyH8+Rb5jnBtc6S4i5Frmtsvo7LXKt/WOYOseQWEdZ/3kazwQPsyok3rMS57x8CPempWnDfE7r9chlsfn8KOvfq2Q3pPowJTdXvbBo9qNv8N1YXMt7TyNni6zxRD1b8iy/anbMTJPe3cf19SLqS17MTGOejFzlJWut2WB+CVYXrsWkp7Qk+3u0jbtZ+z7MZctzminlY1rsLvpRdevD7MumNywmpJ9piO2rI4U87sX50KPZSTsgzB2fX7EeNWOe6N2zPefUTHJ9snLG+vdmJoIdmrsWk1ydL3PWXK73zWsw9Ny0mOT69tC+gifYX1Lst5h3Dv4vaT/6vEwvkit7PPZ9TvZchK9/8Dwr1Td9mX1EfpUcjykV6lmf/gDtnIV4
+  </data>
+ </layer>
+ <layer id="8" name="Ground" width="30" height="30" opacity="0.62">
+  <data encoding="base64" compression="zlib">
+   eJzt08EJgDAMheFctBN0Dy9uJh50ie4mOo8UCbyWVhCSeMnhP38kJDEQRYHmgej6kISZO90tSsHWzR5m4aJV21Lu8eJOa5mk27JbpoaLdm9WTtpFu2dquWz/4eb2rW0mRZNDC9N2eef1H1u4eGtsW7lsL+OTpet5nud5vW5Hg8Dk
+  </data>
+ </layer>
+ <layer id="9" name="Clutter Ground" width="30" height="30" opacity="0.66">
+  <data encoding="base64" compression="zlib">
+   eJzNV21OwkAQ3f6i/aFiUtoi+HEEbyb4UUGDokcCNaLGS4Bard7FmXQmrM1u2V3E+JKXEmj7dnZn3gxCCDEEXgo1spoQ78RP6ToDftQ0DxkANc+Be576941AiATYkFgnRoG77g3oPQDvNLr/FTns9csS++2K1Idz8v9etwuaa4F9jmUGeZlRDqvui0HzGLR7ljH34f43qosZ1cmsdGYY0yHdpzpLjvnLIua4VB8NWr/8nhA+d+C7A19dO6FBXe2nZmvplM4N67jpWK+oyVwE3tsjh1zNS7lQpTkAXtNnzKP1oNjXTYcYcW9MnhuKn16JuXbiqGmKAWnGoLkNnEKsr7XVe0ELtEJgE5h4brH2gFdifk4mwFhH3nyfuw6+F9Ha73HdQt1TuZ9y/e96BbeAz16RE7b9bUKaY9JX9bZY8gX0vjZpPhr0wayi9zzB87ea9+QUK9bIqV/QVBPRJa+08UNEn7wukXzRpt+ntFadT68K7NNndE6r1h4CL0RRJ6G0V8vMVybAnGlQff81Wr+kW+4ZixAtqZvTPIEebDObYLy6GbsKPCNh7aL/1i37eER9wwRTaV7C+FhPzkPsR5yrOqDvjw3izSRfQp/g+UmV9xPK1RF5OvYVviLR43cqfFdGSr0sMagxjgX7b7t0ZQ9t0bp0/90YocXZfQNfOXVl
+  </data>
+ </layer>
+ <layer id="1" name="SubClouds" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztl1EKwyAMQHOXXcCuwv7MYBe2nQecMqVORttolpbhg3yaZ4MhKUAb1gBMPmbTmCjiYr4yyvwKAQYfV+TxrpG7rfdNPuYNL0ddXMX5si7qQfdebm83hbIulugN50dc3PpOO99CcmsfLvPW1I7lPkLevf2z1oe1bPVPYIhvObwJiT7PvcHZOYZ/77tOp/OJZZorVOfT0HcdDmeYL5IzRuF356/vUHqlvjvtoyMue4QW3CGSf8+/wpl4AevSO68=
+  </data>
+ </layer>
+ <layer id="2" name="Clouds" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJytlttOwzAMhvMu3CEOg1ZsV0ulvSyCIfX0gMQUi7/Gbtwslqxpa+TPdux/DWFt/TmEIfl4Djdb04XQdvlzxJySv8TbmWRTYs4O7iEuTPa749rpt7lCH9Cw1jZ5I3LAPKpyf1nEHOPyfVC8gTuoMQPMHivdbal9vdWJ01+WT+9s359C+DzaZyeaMWdveHZm535u7YGXy0yeSS9bizNw/sCle7H0BnexLZgh3DXeZeK8Q9xXJWYpE2uUOz0buZAd4h9vKGDy/Vh6ws7PZ8hT1viR4lwd2jPFdY96YHMd6Pzc6us1zcHjKa99zMV749jWPPdQt5wz4j5kuNhjGUPukdSFXG4WF5ncU+zZJOrRdn2PtmhMcrkfW70s4WpMa++QPSjO2sjfrfykLkimpu043znXNCXH/Olbp+u1l/3vrgwt0vKzTHtPkLnIePK9StM8j2n3uzUjFndvzVv6qc1lKRefI0P22/o/sLhWnk/pt2dxliz3P2dpmocp62XznNf2Qc7j3neCrfO9Qztqm9zRXbt5qcNE7jfyzwAg
+  </data>
+ </layer>
+ <layer id="10" name="CloudsClutter" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztVkFuAjEM9AX1Fb3QQi+tBBvocZd+C/7TXncpav/FC4hFrHqNEzm7AXHoSJE2iZUhnrEJwCV+6v58XgG8VEpgYbw3/fmn5/y6Aa/E3Pn7uvHnyDzeCjKP94TSXrKc19blvWQ5r23+vLRPeOFQp/c5rN5EbudHlfDCku2V1AW59wneVdhL6bK4gocxz50f37WexzbsabDqEwPmmkYOcrxh/Q0x4P3JBxhXgpvO64IfNaDW5AOKT/nWgpivOnanBatPipe8uXURq0/K52rTr02Kl7xj+xV5GXmx3g6bsB5qk9ZlnY7575OcWg/g67P1MB4J4kx5m3OW4pUgr2h1Q7zXeEuRV5ZKvyfesX5yzWUPI69oWv9+ADxWeX7iOWvDN9c2t3daQXql+j+HpuHUz6f+nk9+PLvzPIbjA8B2ArCbnL8tnIiYhtZ35qvP39uAHMY0vOd35j+G4QQVY239
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="217.333" y="408.833" width="48" height="25.1667">
+   <properties>
+    <property name="direction" value="left"/>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="51" template="../../obj/treasure.tx" x="73" y="384">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;cardTypes&quot;: [&quot;Creature&quot;],
+    &quot;subTypes&quot;: [&quot;Angel&quot;],
+    &quot;rarity&quot;:[ &quot;rare&quot;, &quot;mythic rare&quot;],
+    &quot;count&quot;: 3,
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="52" template="../../../../common/maps/obj/gold.tx" x="68.8333" y="63.6667"/>
+  <object id="53" template="../../../../common/maps/obj/enemy.tx" x="231.263" y="156.93">
+   <properties>
+    <property name="enemy" value="Akroma and Keleth"/>
+   </properties>
+  </object>
+  <object id="54" template="../../../../common/maps/obj/enemy.tx" x="361.492" y="218.698">
+   <properties>
+    <property name="enemy" value="Radiant"/>
+   </properties>
+  </object>
+  <object id="55" template="../../../../common/maps/obj/enemy.tx" x="100.092" y="326.594">
+   <properties>
+    <property name="enemy" value="Rienne"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../common/maps/obj/gold.tx" x="415.833" y="144"/>
+  <object id="58" template="../../../../common/maps/obj/collision.tx" x="1.75" y="479" width="482" height="16"/>
+  <object id="59" template="../../../../common/maps/obj/collision.tx" x="-1" y="-16.5" width="482" height="16"/>
+  <object id="60" template="../../../../common/maps/obj/collision.tx" x="-16" y="-2.5415" width="16" height="502.083"/>
+  <object id="61" template="../../../../common/maps/obj/collision.tx" x="481.5" y="-11.0415" width="16" height="502.083"/>
+  <object id="62" template="../../../../common/maps/obj/enemy.tx" x="175.622" y="197.414">
+   <properties>
+    <property name="enemy" value="Linvala"/>
+   </properties>
+  </object>
+  <object id="63" template="../../../../common/maps/obj/enemy.tx" x="199.718" y="67.8627">
+   <properties>
+    <property name="enemy" value="Lyra"/>
+   </properties>
+  </object>
+  <object id="64" template="../../../../common/maps/obj/manashards.tx" x="436.428" y="145.482"/>
+  <object id="65" template="../../../../common/maps/obj/enemy.tx" x="96.6667" y="46.6667">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;Your final strike causes the angel to begin dissolving into shimmering light.
+
+'They say angels never truly die... I hope that's true...'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Segovian Angel|mh1&quot;, &quot;luxior, giada's gift|SNC&quot;, &quot;Bishop of wings|M20&quot;, &quot;Seraph sanctuary|AVR&quot;, &quot;answered prayers|MH1&quot;, &quot;angelic chorus|bbd&quot;, &quot;angelic renewal|uma&quot;]}"/>
+    <property name="enemy" value="Giada"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="66" template="../../../../common/maps/obj/dialog.tx" x="285.722" y="372.343" width="59.6667" height="40.1667" rotation="35.7911" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;You feel a momentary sense of panic as you notice you're high enough up in the sky that the mountains below seem tiny. However, the clouds beneath your feet seem solid, if spongey and wet. Angelic singing can be heard in the distance, though it feels more ominous than peaceful.
+
+Your manasight stone glows brightly, sensing a truly mighty legend in this place.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/dialog.tx" x="172.093" y="76.6607" width="43" height="26.8334" rotation="269.975" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The girl ahead has a grim expression as she addresses you. 
+
+So, you've made it past the others.
+
+I'm sure you think I'll be easy since I look young. But I think you'll find my power far greater than you imagine. I'll be sure to pray for you after your ambition leads to your death.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/treasure.tx" x="76.6667" y="49.6667">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;cardTypes&quot;: [&quot;Creature&quot;],
+    &quot;subTypes&quot;: [&quot;Angel&quot;],
+    &quot;rarity&quot;:[ &quot;rare&quot;, &quot;mythic rare&quot;],
+    &quot;count&quot;: 3,
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/manashards.tx" x="50" y="65.75"/>
+  <object id="70" template="../../obj/treasure.tx" x="58.3333" y="48.6667">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;cardTypes&quot;: [&quot;Creature&quot;],
+    &quot;subTypes&quot;: [&quot;Angel&quot;],
+    &quot;rarity&quot;:[ &quot;rare&quot;, &quot;mythic rare&quot;],
+    &quot;count&quot;: 3,
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/collision.tx" x="287.968" y="135.355" width="30.7315" height="37.0206"/>
+  <object id="72" template="../../../../common/maps/obj/collision.tx" x="401.975" y="309.407" width="28.7315" height="38.5206"/>
+  <object id="73" template="../../../../common/maps/obj/collision.tx" x="96.8118" y="246.43" width="30.7315" height="37.9297"/>
+  <object id="74" template="../../../../common/maps/obj/collision.tx" x="64.2912" y="326.494" width="30.7315" height="39.5661"/>
+  <object id="75" template="../../../../common/maps/obj/collision.tx" x="33.3009" y="352.884" width="30.7315" height="15.2328"/>
+  <object id="76" template="../../../../common/maps/obj/collision.tx" x="417.862" y="86.6488" width="28.7315" height="38.5206"/>
+  <object id="77" template="../../../../common/maps/obj/collision.tx" x="145.384" y="7.2397" width="28.7315" height="38.5206"/>
+ </objectgroup>
+</map>

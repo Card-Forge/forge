@@ -33542,6 +33542,7 @@
     "difficulty": 0.1,
     "speed": 30,
     "life": 60,
+    "gamesPerMatch": 3,
     "rewards": [
       {
         "type": "gold",
@@ -33645,6 +33646,7 @@
     "difficulty": 0.1,
     "speed": 30,
     "life": 60,
+    "gamesPerMatch": 3,
     "rewards": [
       {
         "type": "gold",

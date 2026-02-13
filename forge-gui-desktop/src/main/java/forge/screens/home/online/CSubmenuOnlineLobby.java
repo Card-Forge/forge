@@ -86,10 +86,16 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
         });
 
         final ChatMessage result = NetConnectUtil.join(url, VSubmenuOnlineLobby.SINGLETON_INSTANCE, FNetOverlay.SINGLETON_INSTANCE);
-        if(Objects.equals(result.getMessage(), ForgeConstants.CLOSE_CONN_COMMAND)) {
+        String message = result.getMessage();
+        if(Objects.equals(message, ForgeConstants.CLOSE_CONN_COMMAND)) {
             FOptionPane.showErrorDialog(Localizer.getInstance().getMessage("UnableConnectToServer", url));
             SOverlayUtils.hideOverlay();
-        } else if (Objects.equals(result.getMessage(), ForgeConstants.INVALID_HOST_COMMAND)) {
+        } else if (message != null && message.startsWith(ForgeConstants.CONN_ERROR_PREFIX)) {
+            // Show detailed connection error
+            String errorDetail = message.substring(ForgeConstants.CONN_ERROR_PREFIX.length());
+            FOptionPane.showErrorDialog(errorDetail, Localizer.getInstance().getMessage("lblConnectionError"));
+            SOverlayUtils.hideOverlay();
+        } else if (Objects.equals(message, ForgeConstants.INVALID_HOST_COMMAND)) {
             FOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblDetectedInvalidHostAddress", url));
             SOverlayUtils.hideOverlay();
         } else {

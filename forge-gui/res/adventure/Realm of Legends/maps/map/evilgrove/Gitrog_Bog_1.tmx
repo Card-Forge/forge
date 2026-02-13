@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="65" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="277">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Rampant Frogantua&quot;, &quot;Haunted Cloak&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/FarmFood.tsx"/>
+ <tileset firstgid="16001" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="26113" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="1" name="Background" width="65" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztmbFOwzAQhjMQIGKpkFoxsiABz0GL4B3YgEdAgoEBicdAAtFHQYWZGfEKbKyQqFi9Hpfz2XFsN46lX0Rpkvr/7rfrmCyrb1dFGkrZO8cgNQ4cg1RY9Az6sRA7g3xjWV1lsD/MsoNSh0M9A6pfuL87g+YMfGdvVnp/LfU2/N8XioHqI9cqDpK6hqo7/u7zUZZdlLocLZ//GtUzgF6VX+ibOqdrXLZ8scAN+6cY6JoNA5/+dQxw/3TeqOebMJA8LyQHeC30BscCda0tA/x9MTOgrqHy3KT5zIMNL67OruoQ2nNdfyV+uszAR756BuYMZvlcoX2EzkGsHKTvWW2Mhb1IeIRkEIt6BqvLQDKvcPsqW4PF+dgZPAj7R70/UvtLdeeaMpgUc/moPZYJg6Z7bhIGPjjYZsAXg/HRXCkzCJEF6IXzqWMgmde4pq6p/Me4DsSssNTc8qTJhoSB4mDCNgZJ1/BSBqb5ikWpM5COXxsGLrTW4v/OlB4jXye6ZnBWrpE/t5czcCe8NxSDSoUjDtelpuhZJr9jrhhUubNRQZx7BuLuvf773inx2SoxsFXl+/t4weFnfbUZwLrjmm4K7sf+bRmUx48aec/B5p+eN3hOSruTxbFJ/ZgMGHHwPRZ8MIhlPqiruZRB3b5EQwZkHlzUEHqwuRcz4PZm2mCQN+x7EwZ1OZD4DzEWquaSAbwHHlMZcJiDqOZEyK6rc6LtWEqFQV0eUmWQ6ljoGfzX/bj7DKjfzuq98eMkDQbc2kExgOoZhGHgar1rI8zgHfT9FshXDkw5vOR2tYe6OZ3/neXmGeAYcOwoPrjvVC7w2p3zL5GkxqEY2NTSZF7gsqiy4Go/0YRvW2MdesLC1+neD9V5/Lnr+aANBjr/UgYUj0q/MenbVA==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="65" height="60">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="65" height="60">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <layer id="7" name="ClutterBis" width="65" height="60">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <layer id="9" name="ClutterBisBis" width="65" height="60">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzVW91vFVUQP4LtpRYxveXe1qhBg3xJWz5bNSFAYtBgfGkTE4P4ICAYQUPUYDVGBORDjFH/AH1AjUF9MECIvhBjBAWFQiWNRXgBQUUNChI/XnQmZyd3Op2ze3b33Fv8JZP9OGd3z/zmN3PO3W5X1huzitkzVxnTC8bx4rV2+0HJeOFDz35XCq4uDD+3d5TlYTDmutvB7oj2j0fb/rBDqxmQg0VlY94YZ49xH1Ee5b6mC6wTbEBp89XKlQLU+A7goKFQifnzcK4V/N/DOPDxK6sGcAx3X+duv6tVt9BALaDvpIGPYzTA0SmOfxxvzE9g58cHHZ6Kd1rC3m/XKKsFCVf873TcZwv03wq2TbnuSeB3aslaG1g72Fo49y7zZdc4P0OE5gCBOfE22P2jh7f56Bz5uhV8mgQ2uTy0rQ/a9oMdiOwQ2FdgX4MdY3yRf5rPEiE5mNUQf4zY0VThgfPxWZ0xn9e5793YaMzYRsvBcuBlRWQrwVZFW9TCbGg/GhnXyLLpxjwc2fLpeT3NhvlF6/Ng0RoC+UCsqK/4f9qR/zvB//cjDqZEeYC+dzcb81yTtZ5m6/s0sNuERpADOo8ckCZ+X2fMRbDL6+zxJdj+sS68/+j7yWJln7YLi5U+qP8z4P/ZiAOKuwTPBfT/IthHRWuXIg6+APsS7GCpohPkgM5LHWy5Xt+PA631XFgfsxb85Br3dRNgrLdE+U9xJ5A+eC5cEBygoRYeYTmCPEyPdEDnq5ELpzz6ZJnztbUlcrCvaA3z4YLgwMXDMua3Lwfneu32bK//mLUaKPFAFNv1TEs+HCJIC11RPlBdQB72Mg5aFR76S35zRBJ8xir1j/O/XP/wPuQXrwXasQTmA9UF4qJF0QPVwbVsjs3DgQbfGBK2wti2FYef57XglDhGUI3kWqC6QFzIvMAayetjf8T90wn1LATk2o/HfRKMa3Jzcpw5kBNZI/H6J8rWukRecA4oH+YKfbrm4GqD1wCKM43F9z0B9ec66RP1oQT+vw79ykXre2d070LLcKsWZE04DLXySFQvd9f73YM48Y0X1ckDbH3YwfRP90mbuxxpr+UxXw1rgjVsXfCb8psKIWtnGkyIcgLrA60Ppf4JtcgDekaWZ33r0ScubzpLFRsJvFbvbx0OLXAc9OjjA42zPDmRFjwPuS4eHWO5kODj9eHApYmRfBfLn71emYdpTpR5gseHCkO18tiY6o2zFjVBxmFJo+WEz2k/wzh+AfuVjSfLO7Q0tXSk9IHP/Qs4+JsZ4mU4vx3slVIlLvIdGo/X/+VvDRST40ob+UDbKfheEGwaWxNr79CkNjCf0L5X1prveeZPqFxoaE7ug5x0Ked5TF3rZqrd2vvVDbC/EewHBxeInjn686qJeWw/6Zm8Xf4+QnBeXO9Xby5bewnutYndr3uOcYLrhzh2aSKrVvh7j3nOXhaSJ5wLtd8DrrHQ+6wNEQdaHkg+SD+bHDGiZyW9K0uDuU3GzIyMIGtFWyH7XIhj3sB8itMAYkKkHam7AdRFgBpxSmw1dAIXXYwP9F/zXcZerrEIqOtz421sCd/NHNqnJ4YX4gy3JxgPtVpHuvzn0PymnEbbXLIxlXmQpAeOHsZDrZG0Fub+8xpJOb1RqQNxMZd9pM+9AeaO0x0Va8v5e0fWS14jKad5XmM+54mjD3e+IA6C3S9DnZJcjITGOY40WQsBqQ1+3AJ6eEq0y9hyLrpT1oBdnt8QaMjCgbbO9kFLlBdJflG7S//3lYefa1TWxDfMMOZGsJtmuJ+1umjM0YA6yILF5aHbtKA1306FgwfB96VgDwkOtHn1cBV5cP0eSYNBsdVwT4a61N5U4QP1sEb5u0oeUL7Md7Rj3E8s9r+fpn8NcTxxtDfp+1lwfmx8+8mYtiQOxk4aehzn3wsN1vIAuaj1OxDkwFUHKO6SBw3ITRr/yc9vHO1cF0m/zeI486lxvfca82xkrmt8c8AXHTG6nyq+NRoU/ZEb4sc357IA487vv3lRFR+WAPQ3Tge7odjtcRQ8H/3GAfWAGkH/iYPQeiDIecuVH4RZTBfdC2ANs2Boe5z+XXzlQdJ4Q0Bqvk/JJfy2xSfuWbVRzbxDxPGofmuUYx7lOtA0kdfXEGuxJOA66vFA66hBZvJ8EnzqwsSYb0mvBKAGXBzEwacv6nqi8j0t52377BQPzYlqatOlBe4/76P97wXCxUfcGoK3UY3z+d4vT67THJx0Dxl/6fdAznGERtI8yceqzcEapP5D+5v3d5UPksaMcawrGLNU+UbaB6584KhlrUiCq5YgBz6+uJDn2hBYPNrmAOka9/e3GrPEQ+cI/D6iLsC3P/h6Dr/NnivOX4b771O+V8e651rfZVn6fppjvYzfR5wZY8w/sP1TyQetBmogDlw8pEHcu5E00LivNigUyIfkITR4nfsXv+8SWtbOcby6MPw4EBS/YybM/6r6zkFvgq9vFZLPhYT2e+g/EpAFkg==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="55" template="../../../../common/maps/obj/manashards.tx" x="166.82" y="667.731"/>
+  <object id="59" template="../../../../common/maps/obj/booster.tx" x="48.6667" y="51.6663">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;NEO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NEO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NEO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="74" template="../../../../common/maps/obj/enemy.tx" x="484.5" y="703.164" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Clement"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/collision.tx" x="-17.1423" y="-16.4193" width="16" height="978.944"/>
+  <object id="78" template="../../../../common/maps/obj/collision.tx" x="-1.764" y="-16.8014" width="1042.46" height="16"/>
+  <object id="79" template="../../../../common/maps/obj/collision.tx" x="-15.6117" y="960.5" width="1076.8" height="16"/>
+  <object id="86" template="../../../../common/maps/obj/booster.tx" x="22.135" y="868.221">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;DOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/booster.tx" x="929.997" y="634.043">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;BLB&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;BLB&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;BLB&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="101" template="../../../../common/maps/obj/enemy.tx" x="396.5" y="475.497" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Yargle and Multani"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="124" template="../../../../common/maps/obj/enemy.tx" x="760.833" y="188.331" width="16" height="17.6724">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Witches' Eye|THS&quot;, &quot;Agatha's Champion|WOE&quot;, &quot;Scalding Cauldron|ELD&quot;, &quot;Bleeding Woods|DSK&quot;]
+}</property>
+    <property name="enemy" value="Agatha"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Agatha's Key&quot;
+  }
+]
+</property>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="141" template="../../../../common/maps/obj/waypoint.tx" x="223.5" y="629.5"/>
+  <object id="142" template="../../../../common/maps/obj/waypoint.tx" x="222.5" y="769.5"/>
+  <object id="147" template="../../../../common/maps/obj/gold.tx" x="430.333" y="493.833"/>
+  <object id="148" template="../../../../common/maps/obj/enemy.tx" x="82" y="901.164" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Muldrotha"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="151" template="../../../../common/maps/obj/gold.tx" x="1013" y="814.5"/>
+  <object id="154" template="../../../../common/maps/obj/booster.tx" x="585" y="483">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;WOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;WOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;WOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="155" template="../../../../common/maps/obj/enemy.tx" x="585" y="524.664" width="16" height="17.6724">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Eriette's Tempting Apple|WOE&quot;, &quot;Restless Fortress|WOE&quot;, &quot;The Witch's Vanity|WOE&quot;, &quot;Neva, Stalked by Nightmares|WOE&quot;]
+}</property>
+    <property name="enemy" value="Eriette"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Eriette's Key&quot;
+  }
+]
+</property>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="156" template="../../../../common/maps/obj/collision.tx" x="539.769" y="414" width="71.462" height="45"/>
+  <object id="158" template="../../../../common/maps/obj/enemy.tx" gid="2147495067" x="877" y="650.831" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Glarb"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="159" template="../../../../common/maps/obj/door_up.tx" x="847.493" y="236.665" width="45.9814" height="16.6705" rotation="359.74">
+   <properties>
+    <property name="direction" value="right"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/evilgrove/Gitrog_Bog_2.tmx"/>
+   </properties>
+  </object>
+  <object id="160" template="../../../../common/maps/obj/enemy.tx" x="223.167" y="718.831" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Old Stickfingers"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="141, 142"/>
+   </properties>
+  </object>
+  <object id="162" template="../../../../common/maps/obj/enemy.tx" x="111.167" y="325.164" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Saryth"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="175" template="../../../../common/maps/obj/enemy.tx" gid="2147495067" x="935.333" y="844.497" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Flubs"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="179" template="../../../../common/maps/obj/collision.tx" x="1040.5" y="-18.472" width="16" height="978.944"/>
+  <object id="195" template="../../../../common/maps/obj/enemy.tx" x="738.5" y="766.664" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Helga"/>
+    <property name="fleeRange" value=""/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="197" template="../../../../common/maps/obj/enemy.tx" x="59" y="88.6638" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Tatsunari"/>
+   </properties>
+  </object>
+  <object id="200" template="../../../../common/maps/obj/gold.tx" x="607.5" y="610"/>
+  <object id="210" template="../../../../common/maps/obj/manashards.tx" x="64.3333" y="451.333"/>
+  <object id="217" template="../../../../common/maps/obj/enemy.tx" x="648.5" y="179.33" width="16" height="17.6724">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Frostbridge Guard|WOE&quot;, &quot;Solitary Sanctuary|WOE&quot;, &quot;Glacial Fortress|M10&quot;, &quot;Siren Song Lyre|BNG&quot;, &quot;Three Bowls of Porridge|WOE&quot;]
+}</property>
+    <property name="enemy" value="Hylda"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Hylda's Key&quot;
+  }
+]
+</property>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="225" template="../../../../common/maps/obj/gold.tx" x="429" y="457.167"/>
+  <object id="227" template="../../../../common/maps/obj/gold.tx" x="640.5" y="161.333"/>
+  <object id="241" template="../../../../common/maps/obj/entry_up.tx" x="531.333" y="960.056" width="48" height="26.555">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="243" template="../../../../common/maps/obj/dialog.tx" x="518.333" y="934.083" width="63" height="22.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Fetid rot fills your nose as a chorus of croaks and squelches can be heard through the foggy bog ahead. Crackles of black and green mana bubble up in the bayou ahead, making it clear the dangers here are no mere animals.
+
+Your manasight stone glows brightly, sensing a truly mighty legend in this place.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="244" template="../../../../common/maps/obj/booster.tx" x="578" y="798">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;BLB&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;BLB&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;BLB&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="245" template="../../../../common/maps/obj/dialog.tx" x="700.599" y="925.339" width="12.1818" height="11.2727" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The chorus of croaks grows louder, but interestingly, it also seems to gain coherence - it sounds distinctly like a language, though not one you understand, rather than the simplistic communication of animals. In the distance, you're pretty sure you spy several frog wearing clothes. How odd.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="246" template="../../../../common/maps/obj/booster.tx" x="40.8333" y="339.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;MID&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MID&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MID&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="251" template="../../../../common/maps/obj/scroll.tx" x="1017.5" y="896.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Forest&quot;, &quot;editions&quot;: [ &quot;BLB&quot; ], &quot;count&quot;: 12 } ] "/>
+   </properties>
+  </object>
+  <object id="252" template="../../../../common/maps/obj/manashards.tx" x="585" y="507"/>
+  <object id="253" template="../../../../common/maps/obj/booster.tx" x="874.5" y="139.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;WOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;WOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;WOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="254" template="../../../../common/maps/obj/gold.tx" x="656.667" y="162.167"/>
+  <object id="255" template="../../../../common/maps/obj/dialog.tx" x="754.319" y="560.148" width="16" height="16" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A strange orchard of unnatural trees sprawls ahead, though the apples growing from them seem incredibly delicious - perhaps supernaturally so. You hear a distant voice, as though a whisper from far away.
+
+'Come, dearie. That's right. Come into the orchard. Have an apple or two...'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="256" template="../../../../common/maps/obj/dialog.tx" x="623.164" y="548.842" width="18.8493" height="20.3333" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;You spy the source of the strange voice from earlier, a beautiful woman sitting atop a vine-covered stone throne. Something about her appearance seems distinctly unnatural. She shushes you as you attempt to speak.
+
+'Hush now. I need your beauty sleep.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="257" template="../../../../common/maps/obj/dialog.tx" x="791.5" y="242.667" width="32.5" height="14.3333" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The smell of cooking meat wafts through the cabin, somehow at once mouth-watering and repulsive. The witch stirring the cauldron addresses you with glee.
+
+'Why hello, dearie! You smell like just the ingredient I need to finish off this brew!&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="259" template="../../../../common/maps/obj/scroll.tx" x="1021.33" y="400">
+   <properties>
+    <property name="reward">[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Swamp&quot;, &quot;editions&quot;: [ &quot;WOE&quot; ], &quot;count&quot;: 6 },
+{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Plains&quot;, &quot;editions&quot;: [ &quot;WOE&quot; ], &quot;count&quot;: 6 } ]</property>
+   </properties>
+  </object>
+  <object id="260" template="../../../../common/maps/obj/scroll.tx" x="784.667" y="414">
+   <properties>
+    <property name="reward">[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Mountain&quot;, &quot;editions&quot;: [ &quot;WOE&quot; ], &quot;count&quot;: 6 },
+{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Forest&quot;, &quot;editions&quot;: [ &quot;WOE&quot; ], &quot;count&quot;: 6 } ]</property>
+   </properties>
+  </object>
+  <object id="261" template="../../../../common/maps/obj/scroll.tx" x="12" y="338.667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Forest&quot;, &quot;editions&quot;: [ &quot;MID&quot; ], &quot;count&quot;: 12 } ]"/>
+   </properties>
+  </object>
+  <object id="262" template="../../../../common/maps/obj/scroll.tx" x="910" y="601.333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Swamp&quot;, &quot;editions&quot;: [ &quot;BLB&quot; ], &quot;count&quot;: 12 } ]"/>
+   </properties>
+  </object>
+  <object id="263" template="../../../../common/maps/obj/scroll.tx" x="374" y="732.667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Island&quot;, &quot;editions&quot;: [ &quot;BLB&quot; ], &quot;count&quot;: 12 } ]"/>
+   </properties>
+  </object>
+  <object id="264" template="../../../../common/maps/obj/scroll.tx" x="448" y="26.6667">
+   <properties>
+    <property name="reward">[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Swamp|MID|[272]&quot;, &quot;count&quot;: 6 },
+{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Swamp|MID|[273]&quot;, &quot;count&quot;: 6 } ]</property>
+   </properties>
+  </object>
+  <object id="266" template="../../../../common/maps/obj/scroll.tx" x="647.5" y="145.833">
+   <properties>
+    <property name="reward">[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Island&quot;, &quot;editions&quot;: [ &quot;WOE&quot; ], &quot;count&quot;: 6 },
+{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Plains&quot;, &quot;editions&quot;: [ &quot;WOE&quot; ], &quot;count&quot;: 6 } ]</property>
+   </properties>
+  </object>
+  <object id="267" template="../../../../common/maps/obj/scroll.tx" x="1019.5" y="30">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Swamp&quot;, &quot;editions&quot;: [ &quot;VOW&quot; ], &quot;count&quot;: 12 } ]"/>
+   </properties>
+  </object>
+  <object id="268" template="../../../../common/maps/obj/scroll.tx" x="49" y="31.5">
+   <properties>
+    <property name="reward">[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Forest|NEO|[301]&quot;, &quot;count&quot;: 3 },
+{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Forest|NEO|[302]&quot;, &quot;count&quot;: 3 },
+{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Swamp|NEO|[297]&quot;, &quot;count&quot;: 3 },
+{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Swamp|NEO|[298]&quot;, &quot;count&quot;: 3 },
+{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Island|NEO|[295]&quot;, &quot;count&quot;: 3 },
+{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Island|NEO|[296]&quot;, &quot;count&quot;: 3 } ]</property>
+   </properties>
+  </object>
+  <object id="269" template="../../../../common/maps/obj/dialog.tx" x="632.25" y="195.958" width="48.5" height="12.8333" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A majestic woman clad in a shimmering white dress and wearing a crown of ice stands ahead of you, muttering to her reflection in a mirror of ice.
+
+'I don’t need anyone else.' you hear her say. Surprisingly, her reflection answers. 'You don't need anyone else. Now kill the intruder.' With a pang of sadness the witch responds to her reflection. 'Yes, I suppose I must.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="270" template="../../../../common/maps/obj/enemy.tx" x="47.3333" y="530.667">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;text&quot;: &quot;Hail, {var=player_name}. I see your travels have taken you far. I have been wandering as well, and have acquired some rare spells I am not in need of along the way. Take a look, perhaps they will be of use. Traveling this place does have its costs though, so I cannot simply give you them, but my prices are fair.&quot;,
+		&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;(Continue)&quot; }
+		]
+	}
+]</property>
+    <property name="enemy" value="Mysterious Mage"/>
+   </properties>
+  </object>
+  <object id="271" template="../../../../common/maps/obj/shop.tx" x="16.6667" y="566.667">
+   <properties>
+    <property name="commonShopList" value="WanderingMerchantBlack"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="272" template="../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="576" y="901.75" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;:&quot;EAST: FROGTOWN
+WEST: FRIGHTSTICK SWAMP
+NORTH: DOMAIN OF THE THREE WITCHES&quot;,
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;Continue&quot; }
+]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="273" template="../../../../common/maps/obj/collision.tx" x="969.092" y="584.393" width="31.816" height="20.7137"/>
+  <object id="274" template="../../../../common/maps/obj/collision.tx" x="624.774" y="111.666" width="14.4524" height="79.6228"/>
+  <object id="275" template="../../../../common/maps/obj/collision.tx" x="674.047" y="114.302" width="14.4524" height="77.8728"/>
+  <object id="276" template="../../../../common/maps/obj/collision.tx" x="640.228" y="112.666" width="31.9069" height="15.3955"/>
+ </objectgroup>
+</map>

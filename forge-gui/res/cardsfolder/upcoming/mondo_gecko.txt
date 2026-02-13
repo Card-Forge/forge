@@ -3,7 +3,9 @@ ManaCost:1 U U
 Types:Legendary Creature Lizard Mutant
 PT:2/3
 A:AB$ ChooseColor | Cost$ 1 Discard<1/Card> | Defined$ You | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, CARDNAME becomes the color of your choice and gains hexproof from that color.
-SVar:DBAnimate:DB$ Animate | Defined$ Self | Colors$ ChosenColor | Keywords$ Hexproof:Card.ChosenColor:chosenColor | OverwriteColors$ True
+SVar:DBAnimate:DB$ Animate | Defined$ Self | Colors$ ChosenColor | OverwriteColors$ True | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Hexproof:ChosenColor & Toxic:1 | DefinedKW$ ChosenColor | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenColor$ True
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, draw a card for each color among permanents you control.
 SVar:TrigDraw:DB$ Draw | NumCards$ X
 SVar:X:Count$Valid Permanent.YouCtrl$Colors
