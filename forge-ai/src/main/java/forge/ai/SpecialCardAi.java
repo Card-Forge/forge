@@ -46,13 +46,12 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
 import forge.util.*;
-import forge.util.maps.LinkedHashMapToAmount;
-import forge.util.maps.MapToAmount;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Special logic for individual cards
@@ -811,10 +810,7 @@ public class SpecialCardAi {
             List<String> highPriorityNamedCards = Lists.newArrayList("Accumulated Knowledge", "Take Inventory");
 
             // figure out how many of each card we have in deck
-            MapToAmount<String> cardAmount = new LinkedHashMapToAmount<>();
-            for (Card c : lib) {
-                cardAmount.add(c.getName());
-            }
+            Map<String, Long> cardAmount = lib.stream().collect(Collectors.groupingBy(Card::getName, Collectors.counting()));
 
             // Trix: see if we can complete the combo (if it looks like we might win shortly or if we need to get a Donate stat)
             boolean donateComboMightWin = false;
