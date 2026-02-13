@@ -12,7 +12,6 @@ import forge.gui.events.UiEventBlockerAssigned;
 import forge.gui.events.UiEventNextGameDecision;
 import forge.util.TextUtil;
 
-import java.util.Collection;
 import java.util.Objects;
 
 import com.google.common.collect.Multimap;
