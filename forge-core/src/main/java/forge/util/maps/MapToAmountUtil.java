@@ -3,6 +3,7 @@ package forge.util.maps;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -16,13 +17,13 @@ public final class MapToAmountUtil {
 
     /**
      * Get an element with the highest amount among elements in a
-     * {@link MapToAmount}.
+     * {@link Map}.
      * 
      * @param map
-     *            a {@link MapToAmount}.
+     *            a {@link Map}.
      * @return a key of the provided map.
      */
-    public static <T> Pair<T, Integer> max(final MapToAmount<T> map) {
+    public static <T> Pair<T, Integer> max(final Map<T, Integer> map) {
         if (map == null) {
             throw new NullPointerException();
         }
@@ -43,13 +44,13 @@ public final class MapToAmountUtil {
 
     /**
      * Get an element with the lowest amount among elements in a
-     * {@link MapToAmount}.
+     * {@link Map}.
      * 
      * @param map
-     *            a {@link MapToAmount}.
+     *            a {@link Map}.
      * @return a key of the provided map.
      */
-    public static <T> Pair<T, Integer> min(final MapToAmount<T> map) {
+    public static <T> Pair<T, Integer> min(final Map<T, Integer> map) {
         if (map == null) {
             throw new NullPointerException();
         }
@@ -77,4 +78,11 @@ public final class MapToAmountUtil {
         return entries;
     }
 
+    public static <T> Map<T, Integer> addAll(final Iterable<T> items) {
+        Map<T, Integer> map = new LinkedHashMap<>();
+        for (T i : items) {
+            map.merge(i, 1, Integer::sum);
+        }
+        return map;
+    }
 }

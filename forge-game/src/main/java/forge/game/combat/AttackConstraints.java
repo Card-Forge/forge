@@ -1,12 +1,7 @@
 package forge.game.combat;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.function.Predicate;
 
 import com.google.common.collect.*;
@@ -25,8 +20,6 @@ import forge.game.staticability.StaticAbilityMustAttack;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
-import forge.util.maps.LinkedHashMapToAmount;
-import forge.util.maps.MapToAmount;
 import forge.util.maps.MapToAmountUtil;
 
 public class AttackConstraints {
@@ -56,18 +49,18 @@ public class AttackConstraints {
                     "If a creature with a magnet counter on it attacks, all creatures with magnet counters on them attack if able.");
         }
 
-        final MapToAmount<Card> attacksIfOtherAttacks = new LinkedHashMapToAmount<>();
+        final Map<Card, Integer> attacksIfOtherAttacks = new LinkedHashMap<>();
         for (final Card possibleAttacker : possibleAttackers) {
-            attacksIfOtherAttacks.add(possibleAttacker, possibleAttacker.getAmountOfKeyword("If a creature you control attacks, CARDNAME also attacks if able."));
+            attacksIfOtherAttacks.merge(possibleAttacker, possibleAttacker.getAmountOfKeyword("If a creature you control attacks, CARDNAME also attacks if able."), Integer::sum);
         }
 
         for (final Card possibleAttacker : possibleAttackers) {
             restrictions.put(possibleAttacker, new AttackRestriction(possibleAttacker, possibleDefenders));
 
-            final MapToAmount<Card> causesToAttack = new LinkedHashMapToAmount<>();
+            final Map<Card, Integer> causesToAttack = new LinkedHashMap<>();
             for (final Entry<Card, Integer> entry : attacksIfOtherAttacks.entrySet()) {
                 if (entry.getKey() != possibleAttacker) {
-                    causesToAttack.add(entry.getKey(), entry.getValue());
+                    causesToAttack.merge(entry.getKey(), entry.getValue(), Integer::sum);
                 }
             }
 
@@ -75,14 +68,14 @@ public class AttackConstraints {
             final int nAllMustAttack = possibleAttacker.getAmountOfKeyword("If CARDNAME attacks, all creatures you control attack if able.");
             for (final Card c : possibleAttackers) {
                 if (c != possibleAttacker) {
-                    causesToAttack.add(c, nAllMustAttack);
+                    causesToAttack.merge(c, nAllMustAttack, Integer::sum);
                 }
             }
 
             if (possibleAttacker.getCounters(CounterEnumType.MAGNET) > 0) {
                 for (final Card c : magnetAttackers) {
                     if (c != possibleAttacker) {
-                        causesToAttack.add(c, nMagnetRequirements);
+                        causesToAttack.merge(c, nMagnetRequirements, Integer::sum);
                     }
                 }
             }
@@ -119,7 +112,7 @@ public class AttackConstraints {
             return Pair.of(Collections.emptyMap(), 0);
         }
 
-        final MapToAmount<Map<Card, GameEntity>> possible = new LinkedHashMapToAmount<>();
+        final Map<Map<Card, GameEntity>, Integer> possible = new LinkedHashMap<>();
         final List<Attack> reqs = getSortedFilteredRequirements();
         final CardCollection myPossibleAttackers = new CardCollection(possibleAttackers);
 
@@ -200,7 +193,7 @@ public class AttackConstraints {
         int localMaximum = maximum;
         final boolean isLimited = globalRestrictions.getMax() != -1;
         final Map<Card, GameEntity> myAttackers = Maps.newHashMap(attackers);
-        final MapToAmount<GameEntity> toDefender = new LinkedHashMapToAmount<>();
+        final Map<GameEntity, Integer> toDefender = new LinkedHashMap<>();
         int attackersNeeded = 0;
 
         outer: while (!reqs.isEmpty()) {
@@ -219,7 +212,7 @@ public class AttackConstraints {
                 }
             }
             final Integer defMax = globalRestrictions.getDefenderMax().get(req.defender);
-            if (defMax != null && toDefender.count(req.defender) >= defMax) {
+            if (defMax != null && toDefender.getOrDefault(req.defender, 0) >= defMax) {
                 // too many to this defender already
                 skip = true;
             } else if (null != CombatUtil.getAttackCost(req.attacker.getGame(), req.attacker, req.defender)) {
@@ -291,7 +284,7 @@ public class AttackConstraints {
 
             // finally: add the creature
             myAttackers.put(req.attacker, req.defender);
-            toDefender.add(req.defender);
+            toDefender.merge(req.defender, 1, Integer::sum);
             reqs.removeAll(findAll(reqs, req.attacker));
             reserved.remove(req.attacker);
             localMaximum--;
@@ -354,8 +347,7 @@ public class AttackConstraints {
         List<Set<GameEntity>> playerReqs = Lists.newArrayList(playerRequirements);
         CardCollection usedAttackers = new CardCollection();
         FCollection<GameEntity> excludedDefenders = new FCollection<>();
-        MapToAmount<GameEntity> sortedPlayerReqs = new LinkedHashMapToAmount<>();
-        sortedPlayerReqs.addAll(Iterables.concat(playerReqs));
+        Map<GameEntity, Integer> sortedPlayerReqs = MapToAmountUtil.addAll(Iterables.concat(playerReqs));
         while (!sortedPlayerReqs.isEmpty()) {
             Pair<GameEntity, Integer> playerReq = MapToAmountUtil.max(sortedPlayerReqs);
             // find best attack to also fulfill the additional requirements
@@ -366,7 +358,7 @@ public class AttackConstraints {
                 // recalculate remaining requirements
                 playerReqs.removeIf(s -> s.contains(playerReq.getLeft()));
                 sortedPlayerReqs.clear();
-                sortedPlayerReqs.addAll(Iterables.concat(playerReqs));
+                sortedPlayerReqs.putAll(MapToAmountUtil.addAll(Iterables.concat(playerReqs)));
             } else {
                 excludedDefenders.add(playerReq.getLeft());
             }

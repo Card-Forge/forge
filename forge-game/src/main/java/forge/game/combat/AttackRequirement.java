@@ -1,5 +1,6 @@
 package forge.game.combat;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +14,6 @@ import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.util.collect.FCollectionView;
-import forge.util.maps.LinkedHashMapToAmount;
 import forge.util.maps.MapToAmountUtil;
 
 public class AttackRequirement {
@@ -23,7 +23,7 @@ public class AttackRequirement {
     private final Card attacker;
 
     public AttackRequirement(final Card attacker, final Map<Card, Integer> causesToAttack, final FCollectionView<GameEntity> possibleDefenders) {
-        this.defenderSpecific = new LinkedHashMapToAmount<>();
+        this.defenderSpecific = new LinkedHashMap<>();
         this.attacker = attacker;
         this.causesToAttack = causesToAttack;
 
