@@ -69,7 +69,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
             } else {
                 String title = sa.hasParam("ListTitle") ? sa.getParam("ListTitle") : Localizer.getInstance().getMessage("lblChooseNumber");
                 if (anyNumber) {
-                    Integer value = p.getController().announceRequirements(sa, title);
+                    Integer value = p.getController().announceRequirements(sa, min, max, title);
                     chosen = value == null ? 0 : value;
                 } else if (sa.hasParam("RemoveChoices")) {
                     // currently we always remove remembered numbers, so the value is not really used yet

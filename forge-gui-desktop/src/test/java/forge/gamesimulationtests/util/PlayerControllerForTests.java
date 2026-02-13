@@ -135,7 +135,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public Integer announceRequirements(SpellAbility ability, String announce) {
+    public Integer announceRequirements(SpellAbility ability, int min, int max, String announce) {
         throw new IllegalStateException("Erring on the side of caution here...");
     }
 

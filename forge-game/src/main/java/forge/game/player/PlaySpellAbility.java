@@ -321,8 +321,9 @@ public class PlaySpellAbility {
         if (announce != null && needX) {
             for (final String aVar : announce.split(",")) {
                 final String varName = aVar.trim();
+                Range<Integer> range = AbilityUtils.getAnnouncementBounds(ability, varName);
 
-                final Integer value = controller.announceRequirements(ability, varName);
+                final Integer value = controller.announceRequirements(ability, range.getMinimum(), range.getMaximum(), varName);
                 if (value == null) {
                     return false;
                 }
@@ -343,7 +344,8 @@ public class PlaySpellAbility {
                 // check if X != 0 is even allowed or the X shard got removed
                 boolean replacedXshard = ability.isSpell() && ability.getHostCard().getManaCost().countX() > 0 && !cost.hasXInAnyCostPart();
                 if (("Count$xPaid".equals(sVar) && !replacedXshard) || sVar.isEmpty()) {
-                    final Integer value = controller.announceRequirements(ability, "X");
+                    Range<Integer> range = AbilityUtils.getAnnouncementBounds(ability, "X");
+                    final Integer value = controller.announceRequirements(ability, range.getMinimum(), range.getMaximum(), "X");
                     if (value == null) {
                         return false;
                     }

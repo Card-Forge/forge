@@ -37,6 +37,7 @@ import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
+import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -2974,6 +2975,37 @@ public class AbilityUtils {
                 result.addAll(GameActionUtil.getAlternativeCosts(sa, controller, true));
             }
         }
+    }
+
+    public static Range<Integer> getAnnouncementBounds(SpellAbility ability, String announce) {
+        final Card host = ability.getHostCard();
+        int max = Integer.MAX_VALUE;
+        int min = 0;
+        Cost cost = ability.getPayCosts();
+
+        if ("X".equals(announce)) {
+            final boolean abXMin = ability.hasParam("XMin");
+            if (abXMin) min = Integer.parseInt(ability.getParam("XMin"));
+            if (ability.hasParam("XMaxLimit")) {
+                max = Math.min(max, AbilityUtils.calculateAmount(host, ability.getParam("XMaxLimit"), ability));
+            }
+            if (cost != null && cost.hasManaCost() && !abXMin) {
+                min = cost.getCostMana().getXMin();
+            }
+        }
+
+        if (ability.hasParam("AnnounceMax")) {
+            max = Math.min(max, AbilityUtils.calculateAmount(host, ability.getParam("AnnounceMax"), ability));
+        }
+
+        if (ability.usesTargeting()) {
+            // if announce is used as min targets, check what the max possible number would be
+            if (announce.equals(ability.getTargetRestrictions().getMinTargets())) {
+                max = Math.min(max, CardUtil.getValidCardsToTarget(ability).size());
+            }
+        }
+
+        return Range.of(min, max);
     }
 
     public static final String applyAbilityTextChangeEffects(final String def, final CardTraitBase ability) {

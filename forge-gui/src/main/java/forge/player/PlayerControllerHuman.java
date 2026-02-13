@@ -372,47 +372,24 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public Integer announceRequirements(final SpellAbility ability, final String announce) {
+    public Integer announceRequirements(final SpellAbility ability, int min, int max, final String announce) {
         final Card host = ability.getHostCard();
-        int max = Integer.MAX_VALUE;
-        int xMin = 0;
-        final boolean abXMin = ability.hasParam("XMin");
         Cost cost = ability.getPayCosts();
 
-        if ("X".equals(announce)) {
-            if (abXMin) xMin = Integer.parseInt(ability.getParam("XMin"));
-            if (ability.hasParam("XMaxLimit")) {
-                max = Math.min(max, AbilityUtils.calculateAmount(host, ability.getParam("XMaxLimit"), ability));
+        if ("X".equals(announce) && cost != null) {
+            Integer costX = cost.getMaxForNonManaX(ability, player, false);
+            if (costX != null && !player.getController().isFullControl(FullControlFlag.AllowPaymentStartWithMissingResources)) {
+                max = Math.min(max, costX);
             }
-            if (cost != null) {
-                Integer costX = cost.getMaxForNonManaX(ability, player, false);
-                if (costX != null && !player.getController().isFullControl(FullControlFlag.AllowPaymentStartWithMissingResources)) {
-                    max = Math.min(max, costX);
-                }
-                if (cost.hasManaCost() && !abXMin) {
-                    xMin = cost.getCostMana().getXMin();
-                }
-            }
-        }
-        final int min = xMin;
-
-        if (ability.hasParam("AnnounceMax")) {
-            max = Math.min(max, AbilityUtils.calculateAmount(host, ability.getParam("AnnounceMax"), ability));
         }
 
-        if (ability.usesTargeting()) {
-            // if announce is used as min targets, check what the max possible number would be
-            if (announce.equals(ability.getTargetRestrictions().getMinTargets())) {
-                max = Math.min(max, CardUtil.getValidCardsToTarget(ability).size());
-            }
-        }
         if (min > max) {
             return null;
         }
 
         String announceTitle = "X".equals(announce) ? ability.getParamOrDefault("XAnnounceTitle", announce) :
                 ability.getParamOrDefault("AnnounceTitle", announce);
-        if (cost.isMandatory()) {
+        if (cost != null && cost.isMandatory()) {
             return chooseNumber(ability, localizer.getMessage("lblChooseAnnounceForCard", announceTitle,
                     host.getTranslatedName()), min, max);
         }
