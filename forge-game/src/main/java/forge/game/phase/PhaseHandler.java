@@ -1005,6 +1005,7 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     private final static boolean DEBUG_PHASES = false;
+
     public void setupFirstTurn(Player goesFirst, Runnable startGameHook) {
         if (phase != null) {
             throw new IllegalStateException("Turns already started, call this only once per game");
