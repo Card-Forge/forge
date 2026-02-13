@@ -33,9 +33,6 @@ public class GlobalAttackRestrictions {
         return !getViolations(attackers, true).isViolated();
     }
 
-    public GlobalAttackRestrictionViolations getViolations(final Map<Card, GameEntity> attackers) {
-        return getViolations(attackers, false);
-    }
     private GlobalAttackRestrictionViolations getViolations(final Map<Card, GameEntity> attackers, final boolean returnQuickly) {
         final int nTooMany = max < 0 ? 0 : attackers.size() - max;
         if (returnQuickly && nTooMany > 0) {
@@ -75,23 +72,14 @@ public class GlobalAttackRestrictions {
 
     final class GlobalAttackRestrictionViolations {
         private final boolean isViolated;
-        private final int globalTooMany;
-        private final MapToAmount<GameEntity> defenderTooMany;
 
         public GlobalAttackRestrictionViolations(final int globalTooMany, final MapToAmount<GameEntity> defenderTooMany) {
             this.isViolated = globalTooMany > 0 || !defenderTooMany.isEmpty();
-            this.globalTooMany = globalTooMany;
-            this.defenderTooMany = defenderTooMany;
         }
         public boolean isViolated() {
             return isViolated;
         }
-        public int getGlobalTooMany() {
-            return globalTooMany;
-        }
-        public MapToAmount<GameEntity> getDefenderTooMany() {
-            return defenderTooMany;
-        }
+
     }
 
     /**

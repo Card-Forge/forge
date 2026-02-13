@@ -5,10 +5,6 @@ import java.util.LinkedHashMap;
 public class LinkedHashMapToAmount<T> extends LinkedHashMap<T, Integer> implements MapToAmount<T> {
     private static final long serialVersionUID = 1438913784333297606L;
 
-    public static <T> LinkedHashMapToAmount<T> emptyMap() {
-        return new LinkedHashMapToAmount<>(0);
-    }
-
     /**
      * 
      */
@@ -18,23 +14,8 @@ public class LinkedHashMapToAmount<T> extends LinkedHashMap<T, Integer> implemen
 
     /**
      * @param arg0
-     * @param arg1
-     */
-    public LinkedHashMapToAmount(final int arg0, final float arg1) {
-        super(arg0, arg1);
-    }
-
-    /**
-     * @param arg0
      */
     public LinkedHashMapToAmount(final int arg0) {
-        super(arg0);
-    }
-
-    /**
-     * @param arg0
-     */
-    public LinkedHashMapToAmount(final MapToAmount<T> arg0) {
         super(arg0);
     }
 
@@ -63,31 +44,6 @@ public class LinkedHashMapToAmount<T> extends LinkedHashMap<T, Integer> implemen
     public void addAll(final Iterable<T> items) {
         for (T i : items) {
             add(i, 1);
-        }
-    }
-
-    @Override
-    public boolean substract(final T item) {
-        return substract(item, 1);
-    }
-
-    @Override
-    public boolean substract(final T item, final int amount) {
-        Integer cur = get(item);
-        if (cur == null) { return false; }
-        int newVal = cur - amount;
-        if (newVal > 0) {
-            put(item, newVal);
-        } else {
-            remove(item);
-        }
-        return true;
-    }
-
-    @Override
-    public void substractAll(final Iterable<T> items) {
-        for (T i : items) {
-            substract(i);
         }
     }
 
