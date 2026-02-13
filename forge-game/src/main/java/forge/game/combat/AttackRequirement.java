@@ -14,7 +14,6 @@ import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.util.collect.FCollectionView;
-import forge.util.maps.MapToAmountUtil;
 
 public class AttackRequirement {
 
@@ -117,7 +116,12 @@ public class AttackRequirement {
     }
 
     public List<Pair<GameEntity, Integer>> getSortedRequirements() {
-        return MapToAmountUtil.sort(defenderSpecific);
+        final List<Pair<GameEntity, Integer>> entries = Lists.newArrayListWithCapacity(defenderSpecific.size());
+        for (final Map.Entry<GameEntity, Integer> entry : defenderSpecific.entrySet()) {
+            entries.add(Pair.of(entry.getKey(), entry.getValue()));
+        }
+        entries.sort(Map.Entry.comparingByValue());
+        return entries;
     }
 
 }

@@ -20,7 +20,6 @@ import forge.game.staticability.StaticAbilityMustAttack;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
-import forge.util.maps.MapToAmountUtil;
 
 public class AttackConstraints {
 
@@ -180,7 +179,7 @@ public class AttackConstraints {
         }
  
         // take the case with the fewest violations
-        return MapToAmountUtil.min(possible);
+        return min(possible);
     }
 
     private FCollection<Map<Card, GameEntity>> collectLegalAttackers(final List<Attack> reqs, final int maximum) {
@@ -347,9 +346,9 @@ public class AttackConstraints {
         List<Set<GameEntity>> playerReqs = Lists.newArrayList(playerRequirements);
         CardCollection usedAttackers = new CardCollection();
         FCollection<GameEntity> excludedDefenders = new FCollection<>();
-        Map<GameEntity, Integer> sortedPlayerReqs = MapToAmountUtil.addAll(Iterables.concat(playerReqs));
+        Map<GameEntity, Integer> sortedPlayerReqs = mapToAmount(Iterables.concat(playerReqs));
         while (!sortedPlayerReqs.isEmpty()) {
-            Pair<GameEntity, Integer> playerReq = MapToAmountUtil.max(sortedPlayerReqs);
+            Pair<GameEntity, Integer> playerReq = max(sortedPlayerReqs);
             // find best attack to also fulfill the additional requirements
             Attack bestMatch = Iterables.getLast(IterableUtil.filter(result, att -> !usedAttackers.contains(att.attacker) && att.defender.equals(playerReq.getLeft())), null);
             if (bestMatch != null) {
@@ -358,7 +357,7 @@ public class AttackConstraints {
                 // recalculate remaining requirements
                 playerReqs.removeIf(s -> s.contains(playerReq.getLeft()));
                 sortedPlayerReqs.clear();
-                sortedPlayerReqs.putAll(MapToAmountUtil.addAll(Iterables.concat(playerReqs)));
+                sortedPlayerReqs.putAll(mapToAmount(Iterables.concat(playerReqs)));
             } else {
                 excludedDefenders.add(playerReq.getLeft());
             }
@@ -391,6 +390,52 @@ public class AttackConstraints {
     }
     private static Collection<Attack> findAll(final List<Attack> reqs, final Card attacker) {
         return Collections2.filter(reqs, input -> input.attacker.equals(attacker));
+    }
+
+    private static <T> Pair<T, Integer> max(final Map<T, Integer> map) {
+        if (map == null) {
+            throw new NullPointerException();
+        }
+        if (map.isEmpty()) {
+            throw new NoSuchElementException();
+        }
+
+        int max = Integer.MIN_VALUE;
+        T maxElement = null;
+        for (final Entry<T, Integer> entry : map.entrySet()) {
+            if (entry.getValue() > max) {
+                max = entry.getValue();
+                maxElement = entry.getKey();
+            }
+        }
+        return Pair.of(maxElement, max);
+    }
+
+    private static <T> Pair<T, Integer> min(final Map<T, Integer> map) {
+        if (map == null) {
+            throw new NullPointerException();
+        }
+        if (map.isEmpty()) {
+            throw new NoSuchElementException();
+        }
+
+        int min = Integer.MAX_VALUE;
+        T minElement = null;
+        for (final Entry<T, Integer> entry : map.entrySet()) {
+            if (entry.getValue() < min) {
+                min = entry.getValue();
+                minElement = entry.getKey();
+            }
+        }
+        return Pair.of(minElement, min);
+    }
+
+    private static <T> Map<T, Integer> mapToAmount(final Iterable<T> items) {
+        Map<T, Integer> map = new LinkedHashMap<>();
+        for (T i : items) {
+            map.merge(i, 1, Integer::sum);
+        }
+        return map;
     }
 
     /**
