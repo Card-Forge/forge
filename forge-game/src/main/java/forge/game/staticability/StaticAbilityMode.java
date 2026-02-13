@@ -104,7 +104,6 @@ public enum StaticAbilityMode {
     // Hidden Keywords Refactoring (Issue #3307)
     CantGainControl,
     BounceAtUntap,
-    LethalDamageByPower,
 
     // StaticAbilityCantAttach
     CantAttach,
@@ -201,6 +200,9 @@ public enum StaticAbilityMode {
     // StaticAbilityTurnPhaseReversed
     TurnReversed,
     PhaseReversed,
+
+    // StaticAbilityCountersRemain
+    CountersRemain,
     ;
 
     public static StaticAbilityMode smartValueOf(final String value) {

@@ -24,8 +24,6 @@ import forge.game.cost.CostPayment;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.FullControlFlag;
 import forge.game.staticability.StaticAbilityCantBeCast;
-import forge.game.staticability.StaticAbility;
-import forge.game.staticability.StaticAbilityMode;
 
 /**
  * <p>
