@@ -179,7 +179,7 @@ public class AttackConstraints {
         }
  
         // take the case with the fewest violations
-        return min(possible);
+        return findMin(possible);
     }
 
     private FCollection<Map<Card, GameEntity>> collectLegalAttackers(final List<Attack> reqs, final int maximum) {
@@ -348,7 +348,7 @@ public class AttackConstraints {
         FCollection<GameEntity> excludedDefenders = new FCollection<>();
         Map<GameEntity, Integer> sortedPlayerReqs = mapToAmount(Iterables.concat(playerReqs));
         while (!sortedPlayerReqs.isEmpty()) {
-            Pair<GameEntity, Integer> playerReq = max(sortedPlayerReqs);
+            Pair<GameEntity, Integer> playerReq = findMax(sortedPlayerReqs);
             // find best attack to also fulfill the additional requirements
             Attack bestMatch = Iterables.getLast(IterableUtil.filter(result, att -> !usedAttackers.contains(att.attacker) && att.defender.equals(playerReq.getLeft())), null);
             if (bestMatch != null) {
@@ -392,42 +392,18 @@ public class AttackConstraints {
         return Collections2.filter(reqs, input -> input.attacker.equals(attacker));
     }
 
-    private static <T> Pair<T, Integer> max(final Map<T, Integer> map) {
-        if (map == null) {
-            throw new NullPointerException();
-        }
-        if (map.isEmpty()) {
-            throw new NoSuchElementException();
-        }
-
-        int max = Integer.MIN_VALUE;
-        T maxElement = null;
-        for (final Entry<T, Integer> entry : map.entrySet()) {
-            if (entry.getValue() > max) {
-                max = entry.getValue();
-                maxElement = entry.getKey();
-            }
-        }
-        return Pair.of(maxElement, max);
+    private static <T> Pair<T, Integer> findMax(final Map<T, Integer> map) {
+        return map.entrySet().stream()
+                .max(Comparator.comparingInt(Entry::getValue))
+                .map(e -> Pair.of(e.getKey(), e.getValue()))
+                .orElseThrow(NoSuchElementException::new);
     }
 
-    private static <T> Pair<T, Integer> min(final Map<T, Integer> map) {
-        if (map == null) {
-            throw new NullPointerException();
-        }
-        if (map.isEmpty()) {
-            throw new NoSuchElementException();
-        }
-
-        int min = Integer.MAX_VALUE;
-        T minElement = null;
-        for (final Entry<T, Integer> entry : map.entrySet()) {
-            if (entry.getValue() < min) {
-                min = entry.getValue();
-                minElement = entry.getKey();
-            }
-        }
-        return Pair.of(minElement, min);
+    private static <T> Pair<T, Integer> findMin(final Map<T, Integer> map) {
+        return map.entrySet().stream()
+                .min(Comparator.comparingInt(Entry::getValue))
+                .map(e -> Pair.of(e.getKey(), e.getValue()))
+                .orElseThrow(NoSuchElementException::new);
     }
 
     private static <T> Map<T, Integer> mapToAmount(final Iterable<T> items) {
