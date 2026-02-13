@@ -29,6 +29,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardTraitChanges;
 import forge.game.card.ICardTraitChanges;
 import forge.game.card.perpetual.*;
 import forge.game.event.GameEventCardStatsChanged;
@@ -179,13 +180,9 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
         // give static abilities (should only be used by cards to give
         // itself a static ability)
-        boolean costChange = false;
         final List<StaticAbility> addedStaticAbilities = Lists.newArrayList();
         for (final String s : stAbs) {
             addedStaticAbilities.add(StaticAbility.create(AbilityUtils.getSVar(sa, s), c, sa.getCardState(), false));
-            if (s != null && (s.contains("ReduceCost") || s.contains("RaiseCost"))) {
-                costChange = true;
-            }
         }
 
         final GameCommand unanimate = new GameCommand() {
@@ -228,7 +225,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
                 addedStaticAbilities, removeAbilities, timestamp, 0);
             if (perpetual) {
                 c.addPerpetual(new PerpetualAbilities(timestamp, changes));
-                if (costChange) {
+                if (changes instanceof  CardTraitChanges && ((CardTraitChanges) changes).containsCostChange()) {
                     c.calculatePerpetualAdjustedManaCost();
                 }
             }

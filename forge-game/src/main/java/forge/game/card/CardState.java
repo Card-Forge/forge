@@ -227,7 +227,6 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         final List<StaticAbility> reduceAbilities = Lists.newArrayList();
         // Separate abilities to apply them in proper order
         if (getCard() == null || getCard().getGame() == null) {
-            setPerpetualAdjustedManaCost(manaCost);
             return;
         }
         ManaCost manaCost = getManaCost();
@@ -243,7 +242,6 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
                 }
             }
         }
-
         int totalGenericCostAdjustment = 0;
         for (final StaticAbility stAb : raiseAbilities) {
             try {
@@ -263,12 +261,13 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
                 // Some cost adjustment abilities put non-numeric values here, such as affinity
             }
         }
-
         if (totalGenericCostAdjustment != 0) {
             // This doesn't work on hybrid costs such as "Advice from the Fae"
             int genericCost = manaCost.getGenericCost();
             int genericCostAdjustment;
             int remainingGenericCostAdjustment;
+            // If the total amount reduced is more than the generic mana cost, keep track of the
+            // extra in case it could be applied to an X cost.
             if (genericCost + totalGenericCostAdjustment < 0) {
                 genericCostAdjustment = -genericCost;
                 remainingGenericCostAdjustment = totalGenericCostAdjustment + genericCost;
@@ -276,15 +275,21 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
                 genericCostAdjustment = totalGenericCostAdjustment;
                 remainingGenericCostAdjustment = 0;
             }
-            if (genericCostAdjustment != 0) {
-                String manaCostString = manaCost.getShortString();
+            // If there is a cost adjustment to apply, update the mana cost to reflect that
+            String manaCostString = manaCost.getShortString();
+            boolean costChange = false;
+            if (genericCostAdjustment != 0) { // Replace the original generic mana cost with the adjusted value
                 manaCostString = manaCostString.replace("" + genericCost, "" + (genericCost + genericCostAdjustment));
-                manaCost = new ManaCost(new ManaCostParser(manaCostString));
+                costChange = true;
             }
-            if (remainingGenericCostAdjustment != 0 && manaCost.getShortString().contains("X")) {
-                // Store extra cost adjustment for X cost spells as a negative generic value for display
-                String manaCostString = manaCost.getShortString();
-                manaCost = new ManaCost(new ManaCostParser(manaCostString + " " + remainingGenericCostAdjustment));
+            if (remainingGenericCostAdjustment != 0 && manaCostString.contains("X")) {
+                // If there is extra cost reduction beyond the numeric generic mana cost, save it to apply to X
+                // Store extra cost adjustment as a negative generic value for display
+                manaCostString = manaCostString + " " + remainingGenericCostAdjustment;
+                costChange = true;
+            }
+            if (costChange) {
+                manaCost = new ManaCost(new ManaCostParser(manaCostString));
             }
         }
         setPerpetualAdjustedManaCost(manaCost);

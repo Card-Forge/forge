@@ -95,7 +95,7 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
         while (parser.hasNext()) {
             final ManaCostShard shard = parser.next();
             if (shard != null && shard != ManaCostShard.GENERIC) {
-                if (shard.toString().equals("{X}")) {
+                if (shard == ManaCostShard.X) {
                     xMana = true;
                 }
                 shardsTemp.add(shard);

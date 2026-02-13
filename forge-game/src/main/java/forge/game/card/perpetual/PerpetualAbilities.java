@@ -1,7 +1,10 @@
 package forge.game.card.perpetual;
 
 import forge.game.card.Card;
+import forge.game.card.CardTraitChanges;
 import forge.game.card.ICardTraitChanges;
+import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityMode;
 
 public record PerpetualAbilities(long timestamp, ICardTraitChanges changes) implements PerpetualInterface {
 
@@ -13,6 +16,8 @@ public record PerpetualAbilities(long timestamp, ICardTraitChanges changes) impl
     @Override
     public void applyEffect(Card c) {
         c.addChangedCardTraits(changes.copy(c, false), timestamp, (long) 0, true);
+        if (changes instanceof  CardTraitChanges && ((CardTraitChanges) changes).containsCostChange()) {
+            c.calculatePerpetualAdjustedManaCost();
+        }
     }
-
 }
