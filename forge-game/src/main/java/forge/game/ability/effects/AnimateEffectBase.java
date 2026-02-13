@@ -168,8 +168,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         // Grant triggers
         final List<Trigger> addedTriggers = Lists.newArrayList();
         for (final String s : triggers) {
-            final Trigger parsedTrigger = TriggerHandler.parseTrigger(AbilityUtils.getSVar(sa, s), c, false, sa);
-            addedTriggers.add(parsedTrigger);
+            addedTriggers.add(TriggerHandler.parseTrigger(AbilityUtils.getSVar(sa, s), c, false, sa));
         }
 
         // give replacement effects
@@ -225,7 +224,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
                 addedStaticAbilities, removeAbilities, timestamp, 0);
             if (perpetual) {
                 c.addPerpetual(new PerpetualAbilities(timestamp, changes));
-                if (changes instanceof  CardTraitChanges && ((CardTraitChanges) changes).containsCostChange()) {
+                if (changes instanceof CardTraitChanges ctc && ctc.containsCostChange()) {
                     c.calculatePerpetualAdjustedManaCost();
                 }
             }
