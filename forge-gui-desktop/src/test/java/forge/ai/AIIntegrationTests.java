@@ -173,15 +173,10 @@ public class AIIntegrationTests extends AITest {
             addCardToZone("Island", opponent, ZoneType.Library);
         }
 
-        // Enable debug logging to trace phase transitions
-        game.getPhaseHandler().setDevModeLog(true);
-
         // Play through to AI's next main phase (after draw step completes)
         this.playUntilNextTurn(game);  // AI turn 0 -> Opponent turn
         this.playUntilNextTurn(game);  // Opponent turn -> AI turn
         this.playUntilPhase(game, PhaseType.MAIN1);  // Advance through DRAW to MAIN1
-
-        game.getPhaseHandler().setDevModeLog(false);
 
         // The AI should still be at 5 life (didn't pay any life)
         AssertJUnit.assertEquals("AI should not have paid life", 5, p.getLife());

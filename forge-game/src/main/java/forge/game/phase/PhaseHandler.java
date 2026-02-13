@@ -450,10 +450,6 @@ public class PhaseHandler implements java.io.Serializable {
             bRepeatCleanup = true;
             givePriorityToPlayer = true;
         }
-
-        if (devModeLog) {
-            System.out.println("DEBUG: turn=" + turn + " phase=" + phase + " player=" + playerTurn.getName() + " skipped=" + skipped);
-        }
     }
 
     private void onPhaseEnd() {
@@ -1009,12 +1005,6 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     private final static boolean DEBUG_PHASES = false;
-    private boolean devModeLog = false;
-
-    public void setDevModeLog(boolean enabled) {
-        this.devModeLog = enabled;
-    }
-
     public void setupFirstTurn(Player goesFirst, Runnable startGameHook) {
         if (phase != null) {
             throw new IllegalStateException("Turns already started, call this only once per game");
