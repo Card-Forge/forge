@@ -60,11 +60,12 @@ public class PowerExchangeEffect extends SpellAbilityEffect {
         final long timestamp = game.getNextTimestamp();
 
         if (perpetual) {
-            c1.addPerpetual(new PerpetualNewPT(timestamp, power2, null));
-            c2.addPerpetual(new PerpetualNewPT(timestamp, power1, null));
+            c1.addPerpetual(new PerpetualNewPT(power2, null), timestamp);
+            c2.addPerpetual(new PerpetualNewPT(power1, null), timestamp);
+        } else {
+            c1.addNewPT(power2, null, timestamp, 0);
+            c2.addNewPT(power1, null, timestamp, 0);
         }
-        c1.addNewPT(power2, null, timestamp, 0);
-        c2.addNewPT(power1, null, timestamp, 0);
 
         game.fireEvent(new GameEventCardStatsChanged(c1));
         game.fireEvent(new GameEventCardStatsChanged(c2));

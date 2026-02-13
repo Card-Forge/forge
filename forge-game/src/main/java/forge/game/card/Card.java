@@ -4631,6 +4631,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     private List<PerpetualInterface> perpetual = new ArrayList<>();
+    private Multimap<PerpetualInterface, StaticAbility> perpetualEffects = MultimapBuilder.hashKeys().arrayListValues().build();
     public final boolean hasPerpetual() {
         return !perpetual.isEmpty();
     }
@@ -4638,8 +4639,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return perpetual;
     }
 
-    public final void addPerpetual(PerpetualInterface p) {
+    public final void addPerpetual(PerpetualInterface p, long timestamp) {
         perpetual.add(p);
+        StaticAbility st = p.createEffect(this);
+        if (st != null) {
+            st.putParam("Timestamp", String.valueOf(timestamp));
+            this.perpetualEffects.put(p, st);
+        }
     }
 
     public final void removePerpetual(final long timestamp) {
@@ -4654,15 +4660,27 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final void setPerpetual(final Card oldCard) {
-        setPerpetual(oldCard, true);
+        setPerpetual(oldCard, false);
     }
 
-    public final void setPerpetual(final Card oldCard, boolean applyEffects) {
+    public final void setPerpetual(final Card oldCard, boolean lki) {
         perpetual = oldCard.getPerpetual();
-        if (applyEffects) {
+        if (!lki) {
             for (PerpetualInterface p : perpetual) {
                 p.applyEffect(this);
             }
+        }
+
+        long currentGameTimestamp = this.getGame().getTimestamp();
+        for (Map.Entry<PerpetualInterface, StaticAbility> e : oldCard.perpetualEffects.entries()) {
+            StaticAbility st = e.getValue().copy(this, lki);
+            long oldTimestamp = Long.valueOf(st.getParam("Timestamp"));
+            if (!lki && oldTimestamp > 0) {
+                // change zone sets the timestamp of negative infinite, but still relative
+                // use current game timestamp to shift these timestamps back
+                st.putParam("Timestamp", String.valueOf(Long.MIN_VALUE + oldTimestamp));
+            }
+            this.perpetualEffects.put(e.getKey(), st);
         }
     }
 
@@ -7117,6 +7135,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 result.add(e.getValue());
             }
         }
+        result.addAll(this.perpetualEffects.values());
         return result;
     }
 

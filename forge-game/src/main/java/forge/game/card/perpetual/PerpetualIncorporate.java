@@ -1,19 +1,13 @@
 package forge.game.card.perpetual;
 
-import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.game.card.Card;
+import forge.game.staticability.StaticAbility;
 
-public record PerpetualIncorporate(long timestamp, ManaCost incorporate) implements PerpetualInterface {
+public record PerpetualIncorporate(ManaCost incorporate) implements PerpetualInterface {
     @Override
-    public long getTimestamp() {
-        return timestamp;
-    }
-
-    @Override
-    public void applyEffect(Card c) {
-        ColorSet colors = ColorSet.fromMask(incorporate.getColorProfile());
-        c.addChangedManaCost(incorporate, true, timestamp, (long) 0);
-        c.addColorByText(colors, true, timestamp, null);
+    public StaticAbility createEffect(Card c) {
+        String s = "Mode$ Continuous | AffectedDefined$ Self | EffectZone$ All | Incorporate$ " + incorporate.getShortString();
+        return StaticAbility.create(s, c, c.getCurrentState(), true);
     }
 }

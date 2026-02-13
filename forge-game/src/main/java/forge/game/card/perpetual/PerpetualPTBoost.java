@@ -1,16 +1,18 @@
 package forge.game.card.perpetual;
 
 import forge.game.card.Card;
+import forge.game.staticability.StaticAbility;
 
-public record PerpetualPTBoost(long timestamp, Integer power, Integer toughness) implements PerpetualInterface {
-
+public record PerpetualPTBoost(Integer power, Integer toughness) implements PerpetualInterface {
     @Override
-    public long getTimestamp() {
-        return timestamp;
-    }
-
-    @Override
-    public void applyEffect(Card c) {
-        c.addPTBoost(power, toughness, timestamp, (long) 0);
+    public StaticAbility createEffect(Card c) {
+        StringBuilder sb = new StringBuilder("Mode$ Continuous | AffectedDefined$ Self | EffectZone$ All ");
+        if (power != null) {
+            sb.append("| AddPower$ ").append(power);
+        }
+        if (toughness != null) {
+            sb.append("| AddToughness$ ").append(toughness);
+        }
+        return StaticAbility.create(sb.toString(), c, c.getCurrentState(), true);
     }
 }

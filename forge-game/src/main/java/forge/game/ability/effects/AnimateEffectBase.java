@@ -91,29 +91,25 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         // Alchemy "incorporate" cost
         if (sa.hasParam("Incorporate")) {
             final ManaCost incMCost = new ManaCost(sa.getParam("Incorporate"));
-            PerpetualIncorporate p = new PerpetualIncorporate(timestamp, incMCost);
-            c.addPerpetual(p);
-            p.applyEffect(c);
+            c.addPerpetual(new PerpetualIncorporate(incMCost), timestamp);
         }
         if (sa.hasParam("ManaCost")) {
             final ManaCost manaCost = new ManaCost(sa.getParam("ManaCost"));
             if (perpetual) {
-                PerpetualManaCost p = new PerpetualManaCost(timestamp, manaCost);
-                c.addPerpetual(p);
-                p.applyEffect(c);
+                c.addPerpetual(new PerpetualManaCost(manaCost), timestamp);
             }
         }
         
         if (!addType.isEmpty() || !removeType.isEmpty() || addAllCreatureTypes || !remove.isEmpty()) {
             if (perpetual) {
-                c.addPerpetual(new PerpetualTypes(timestamp, addType, removeType, remove));
+                c.addPerpetual(new PerpetualTypes(timestamp, addType, removeType, remove), timestamp);
             }
             c.addChangedCardTypes(addType, removeType, addAllCreatureTypes, remove, timestamp, 0, true, false);
         }
 
         if (!keywords.isEmpty() || !removeKeywords.isEmpty() || removeAbilities != null) {
             if (perpetual) {
-                c.addPerpetual(new PerpetualKeywords(timestamp, keywords, removeKeywords, removeAbilities != null));
+                c.addPerpetual(new PerpetualKeywords(timestamp, keywords, removeKeywords, removeAbilities != null), timestamp);
             }
             c.addChangedCardKeywords(keywords, removeKeywords, removeAbilities != null, timestamp, null);
         }
@@ -121,9 +117,10 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         // do this after changing types in case it wasn't a creature before
         if (power != null || toughness != null) {
             if (perpetual) {
-                c.addPerpetual(new PerpetualNewPT(timestamp, power, toughness));
+                c.addPerpetual(new PerpetualNewPT(power, toughness), timestamp);
+            } else {
+                c.addNewPT(power, toughness, timestamp, 0);
             }
-            c.addNewPT(power, toughness, timestamp, 0);
         } else if (!wasCreature && c.isCreature()) {
             c.updatePTforView();
         }
@@ -139,9 +136,10 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         if (colors != null) {
             final boolean overwrite = sa.hasParam("OverwriteColors");
             if (perpetual) {
-                c.addPerpetual(new PerpetualColors(timestamp, colors, overwrite));
+                c.addPerpetual(new PerpetualColors(colors, overwrite), timestamp);
+            } else {
+                c.addColor(colors, !overwrite, timestamp, null);
             }
-            c.addColor(colors, !overwrite, timestamp, null);
         }
 
         if (sa.hasParam("LeaveBattlefield")) {
@@ -224,7 +222,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             ICardTraitChanges changes = c.addChangedCardTraits(addedAbilities, removedAbilities, addedTriggers, addedReplacements,
                 addedStaticAbilities, removeAbilities, timestamp, 0);
             if (perpetual) {
-                c.addPerpetual(new PerpetualAbilities(timestamp, changes));
+                c.addPerpetual(new PerpetualAbilities(timestamp, changes), timestamp);
             }
         }
 
