@@ -40,7 +40,6 @@ import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
-import forge.util.maps.MapToAmount;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Collections;
@@ -391,16 +390,13 @@ public class CombatUtil {
     }
 
     /**
-     * Create a {@link Map} mapping each possible attacker for the attacking
-     * {@link Player} this {@link Combat} (see
-     * {@link #getPossibleAttackers(Player)}) to a {@link MapToAmount}. This map
-     * then maps each {@link GameEntity}, for which an attack requirement
+     * Create a {@link AttackConstraints} mapping each {@link GameEntity}, for which an attack requirement
      * exists, to the number of requirements on attacking that entity. Absent
      * entries, including an empty map, indicate no requirements exist.
      *
      * @param combat
      *            a {@link Combat}.
-     * @return a {@link Map}.
+     * @return a {@link AttackConstraints}.
      */
     public static AttackConstraints getAllRequirements(final Combat combat) {
         return new AttackConstraints(combat);
