@@ -5,9 +5,10 @@ PT:5/5
 K:First Strike
 K:Protection:Card.MultiColor:multicolored
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSacrifice | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you discard a card. When you discard a card this way, destroy target nonland permanent an opponent controls with mana value less than or equal to the mana value of the discarded card.
-SVar:TrigSacrifice:DB$ Sacrifice | UnlessCost$ Discard<1/Card> | UnlessPayer$ You | OrString$ Sacrifice it. | SubAbility$ TrigImmediateTrig
-SVar:TrigImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Discarded | ConditionPresent$ Card | ConditionCompare$ GE1 | RememberObjects$ Discarded | Execute$ TrigDestroy | TriggerDescription$ When you discard a card this way, destroy target nonland permanent an opponent controls with mana value less than or equal to the mana value of the discarded card.
-SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent.nonLand+cmcLEX+OppCtrl | TgtPrompt$ Select target nonland permanent an opponent controls with mana value less or equal to the discarded card
-SVar:X:TriggerRemembered$CardManaCost
+SVar:TrigSacrifice:DB$ Sacrifice | UnlessCost$ Discard<1/Card> | UnlessPayer$ You | RememberDiscarded$ True | OrString$ Sacrifice it. | SubAbility$ TrigImmediateTrig
+SVar:TrigImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Discarded | ConditionPresent$ Card | ConditionCompare$ GE1 | Execute$ TrigDestroy | TriggerDescription$ When you discard a card this way, destroy target nonland permanent an opponent controls with mana value less than or equal to the mana value of the discarded card.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent.nonLand+cmcLEX+OppCtrl | SubAbility$ DBCleanup | TgtPrompt$ Select target nonland permanent an opponent controls with mana value less or equal to the discarded card
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$CardManaCost
 DeckHas:Ability$Discard|Sacrifice
 Oracle:First strike, protection from multicolored\nAt the beginning of your upkeep, sacrifice Argentum Masticore unless you discard a card. When you discard a card this way, destroy target nonland permanent an opponent controls with mana value less than or equal to the mana value of the discarded card.
