@@ -1,5 +1,6 @@
 package forge.game.combat;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -9,15 +10,12 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbilityAttackRestrict;
 import forge.util.collect.FCollectionView;
-import forge.util.maps.LinkedHashMapToAmount;
-import forge.util.maps.MapToAmount;
-import forge.util.maps.MapToAmountUtil;
 
 public class GlobalAttackRestrictions {
 
     private final int max;
-    private final MapToAmount<GameEntity> defenderMax;
-    private GlobalAttackRestrictions(final int max, final MapToAmount<GameEntity> defenderMax) {
+    private final Map<GameEntity, Integer> defenderMax;
+    private GlobalAttackRestrictions(final int max, final Map<GameEntity, Integer> defenderMax) {
         this.max = max;
         this.defenderMax = defenderMax;
     }
@@ -25,7 +23,7 @@ public class GlobalAttackRestrictions {
     public int getMax() {
         return max;
     }
-    public MapToAmount<GameEntity> getDefenderMax() {
+    public Map<GameEntity, Integer> getDefenderMax() {
         return defenderMax;
     }
 
@@ -36,10 +34,10 @@ public class GlobalAttackRestrictions {
     private GlobalAttackRestrictionViolations getViolations(final Map<Card, GameEntity> attackers, final boolean returnQuickly) {
         final int nTooMany = max < 0 ? 0 : attackers.size() - max;
         if (returnQuickly && nTooMany > 0) {
-            return new GlobalAttackRestrictionViolations(nTooMany, MapToAmountUtil.emptyMap());
+            return new GlobalAttackRestrictionViolations(nTooMany, Map.of());
         }
 
-        final MapToAmount<GameEntity> defenderTooMany = new LinkedHashMapToAmount<>(defenderMax.size());
+        final Map<GameEntity, Integer> defenderTooMany = new LinkedHashMap<>(defenderMax.size());
         outer: for (final GameEntity defender : attackers.values()) {
             final Integer max = defenderMax.get(defender);
             if (max == null) {
@@ -73,7 +71,7 @@ public class GlobalAttackRestrictions {
     final class GlobalAttackRestrictionViolations {
         private final boolean isViolated;
 
-        public GlobalAttackRestrictionViolations(final int globalTooMany, final MapToAmount<GameEntity> defenderTooMany) {
+        public GlobalAttackRestrictionViolations(final int globalTooMany, final Map<GameEntity, Integer> defenderTooMany) {
             this.isViolated = globalTooMany > 0 || !defenderTooMany.isEmpty();
         }
         public boolean isViolated() {
@@ -92,7 +90,7 @@ public class GlobalAttackRestrictions {
      * @return a {@link GlobalAttackRestrictions} object.
      */
     public static GlobalAttackRestrictions getGlobalRestrictions(final Player attackingPlayer, final FCollectionView<GameEntity> possibleDefenders) {
-        final MapToAmount<GameEntity> defenderMax = new LinkedHashMapToAmount<>(possibleDefenders.size());
+        final Map<GameEntity, Integer> defenderMax = new LinkedHashMap<>(possibleDefenders.size());
         final Game game = attackingPlayer.getGame();
 
         int max = StaticAbilityAttackRestrict.globalAttackRestrict(game);
@@ -100,12 +98,12 @@ public class GlobalAttackRestrictions {
         for (final GameEntity defender : possibleDefenders) {
             final int defMax = StaticAbilityAttackRestrict.attackRestrictNum(defender);
             if (defMax != -1) {
-                defenderMax.add(defender, defMax);
+                defenderMax.merge(defender, defMax, Integer::sum);
             }
         }
         if (defenderMax.size() == possibleDefenders.size()) {
             // maximum on each defender, global maximum is sum of these
-            max = Math.min(max, defenderMax.countAll());
+            max = Math.min(max, defenderMax.values().stream().mapToInt(Integer::intValue).sum());
         }
 
         return new GlobalAttackRestrictions(max, defenderMax);
