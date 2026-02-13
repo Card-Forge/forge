@@ -3,6 +3,8 @@ package forge.gamemodes.match;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.MultimapBuilder;
 import com.google.common.eventbus.Subscribe;
 import forge.LobbyPlayer;
 import forge.StaticData;
@@ -37,8 +39,6 @@ import forge.sound.SoundSystem;
 import forge.trackable.TrackableCollection;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
-import forge.util.maps.HashMapOfLists;
-import forge.util.maps.MapOfLists;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -189,7 +189,7 @@ public class HostedMatch {
         final GameView gameView = getGameView();
 
         humanCount = 0;
-        final MapOfLists<IGuiGame, PlayerView> playersPerGui = new HashMapOfLists<>(ArrayList::new);
+        final Multimap<IGuiGame, PlayerView> playersPerGui = MultimapBuilder.hashKeys().arrayListValues().build();
         for (int iPlayer = 0; iPlayer < players.size(); iPlayer++) {
             final RegisteredPlayer rp = match.getPlayers().get(iPlayer);
             final Player p = players.get(iPlayer);
@@ -223,7 +223,7 @@ public class HostedMatch {
                 gui.setOriginalGameController(p.getView(), humanController);
 
                 game.subscribeToEvents(new FControlGameEventHandler(humanController));
-                playersPerGui.add(gui, p.getView());
+                playersPerGui.put(gui, p.getView());
 
                 if (gameControllers != null ) {
                     LobbySlot lobbySlot = getLobbySlot(p.getLobbyPlayer());
@@ -235,7 +235,7 @@ public class HostedMatch {
             }
         }
 
-        for (final Entry<IGuiGame, Collection<PlayerView>> e : playersPerGui.entrySet()) {
+        for (final Entry<IGuiGame, Collection<PlayerView>> e : playersPerGui.asMap().entrySet()) {
             e.getKey().openView(new TrackableCollection<>(e.getValue()));
         }
 

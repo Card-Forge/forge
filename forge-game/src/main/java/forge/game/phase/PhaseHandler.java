@@ -21,6 +21,8 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.MultimapBuilder;
+
 import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.effects.AddTurnEffect;
@@ -42,8 +44,6 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
-import forge.util.maps.HashMapOfLists;
-import forge.util.maps.MapOfLists;
 
 import org.apache.commons.lang3.time.StopWatch;
 
@@ -728,11 +728,11 @@ public class PhaseHandler implements java.io.Serializable {
             // Player is done declaring blockers - redraw UI at this point
 
             // map: defender => (many) attacker => (many) blocker
-            Map<GameEntity, MapOfLists<Card, Card>> blockers = Maps.newHashMap();
+            Map<GameEntity, Multimap<Card, Card>> blockers = Maps.newHashMap();
             for (GameEntity ge : combat.getDefendersControlledBy(p)) {
-                MapOfLists<Card, Card> protectThisDefender = new HashMapOfLists<>(ArrayList::new);
+                Multimap<Card, Card> protectThisDefender = MultimapBuilder.hashKeys().arrayListValues().build();
                 for (Card att : combat.getAttackersOf(ge)) {
-                    protectThisDefender.addAll(att, combat.getBlockers(att));
+                    protectThisDefender.putAll(att, combat.getBlockers(att));
                 }
                 blockers.put(ge, protectThisDefender);
             }
