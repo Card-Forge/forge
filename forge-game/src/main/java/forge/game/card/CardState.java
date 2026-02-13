@@ -255,6 +255,13 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
 
         // This doesn't work on hybrid generic costs
         int newGeneric = manaCost.getGenericCost() - genericCostAdjustment;
+        // Apply negative cost adjustments to cards with an X cost only.
+        // While this could be done for regular cards as well (to potentially offset other cost-increasing effects)
+        // it would rarely matter and would require changing the "no_cost" flag in ManaCost from -1
+        // otherwise a -1 generic adjustment will get interpreted as "no_cost"
+        if (manaCost.getShardCount(ManaCostShard.X) == 0) {
+            newGeneric = Math.max(0, newGeneric);
+        }
 
         // Replace the original generic mana cost with the adjusted value
         perpetualAdjustedManaCost = new ManaCost(
