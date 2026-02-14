@@ -279,6 +279,6 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         }
         Card lki = CardCopyService.getLKICopy(c);
         cardsAddedThisTurn.put(zt, lki);
-        enteredFromThisTurn.put(lki, oldZone.getZoneType());
+        enteredFromThisTurn.put(lki, zt);
     }
 }
