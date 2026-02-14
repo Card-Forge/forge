@@ -110,6 +110,14 @@ public class InputBlock extends InputSyncronizedBase {
         if (triggerEvent != null && triggerEvent.getButton() == 3 && card.getController() == defender) {
             combat.removeFromCombat(card);
             card.getGame().getMatch().fireEvent(new UiEventBlockerAssigned(CardView.get(card), null));
+            if (otherCardsToSelect != null) {
+                for (Card c : otherCardsToSelect) {
+                    if (c.getController() == defender) {
+                        combat.removeFromCombat(c);
+                        c.getGame().getMatch().fireEvent(new UiEventBlockerAssigned(CardView.get(c), null));
+                    }
+                }
+            }
             isCorrectAction = true;
         } else {
             // is attacking?
@@ -123,6 +131,14 @@ public class InputBlock extends InputSyncronizedBase {
                         //if creature already blocking current attacker, remove blocker from combat
                         combat.removeBlockAssignment(currentAttacker, card);
                         card.getGame().getMatch().fireEvent(new UiEventBlockerAssigned(CardView.get(card), null));
+                        if (otherCardsToSelect != null) {
+                            for (Card c : otherCardsToSelect) {
+                                if (combat.isBlocking(c, currentAttacker)) {
+                                    combat.removeBlockAssignment(currentAttacker, c);
+                                    c.getGame().getMatch().fireEvent(new UiEventBlockerAssigned(CardView.get(c), null));
+                                }
+                            }
+                        }
                         isCorrectAction = true;
                     } else {
                         isCorrectAction = CombatUtil.canBlock(currentAttacker, card, combat);
@@ -131,6 +147,16 @@ public class InputBlock extends InputSyncronizedBase {
                             card.getGame().getMatch().fireEvent(new UiEventBlockerAssigned(
                                     CardView.get(card),
                                     CardView.get(currentAttacker)));
+                            if (otherCardsToSelect != null) {
+                                for (Card c : otherCardsToSelect) {
+                                    if (CombatUtil.canBlock(currentAttacker, c, combat)) {
+                                        combat.addBlocker(currentAttacker, c);
+                                        c.getGame().getMatch().fireEvent(new UiEventBlockerAssigned(
+                                                CardView.get(c),
+                                                CardView.get(currentAttacker)));
+                                    }
+                                }
+                            }
                         }
                     }
                 }

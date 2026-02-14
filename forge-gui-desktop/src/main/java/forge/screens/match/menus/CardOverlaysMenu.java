@@ -4,9 +4,11 @@ import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.SwingUtilities;
 
 import forge.localinstance.properties.ForgePreferences;
@@ -34,7 +36,34 @@ public final class CardOverlaysMenu {
         menu.add(getMenuItem_CardOverlay(Localizer.getInstance().getMessage("lblPowerOrToughness"), FPref.UI_OVERLAY_CARD_POWER));
         menu.add(getMenuItem_CardOverlay(Localizer.getInstance().getMessage("lblCardID"), FPref.UI_OVERLAY_CARD_ID));
         menu.add(getMenuItem_CardOverlay(Localizer.getInstance().getMessage("lblAbilityIcon"), FPref.UI_OVERLAY_ABILITY_ICONS));
+        menu.addSeparator();
+        menu.add(getSubmenu_GroupPermanents());
         return menu;
+    }
+
+    private JMenu getSubmenu_GroupPermanents() {
+        final Localizer localizer = Localizer.getInstance();
+        final JMenu submenu = new JMenu(localizer.getMessage("cbpGroupPermanents"));
+        final ButtonGroup group = new ButtonGroup();
+        final String current = prefs.getPref(FPref.UI_GROUP_PERMANENTS);
+
+        final String[] options = {"Off", "Tokens & Creatures", "All Permanents"};
+        for (String option : options) {
+            JRadioButtonMenuItem item = new JRadioButtonMenuItem(option);
+            item.setSelected(option.equals(current));
+            item.addActionListener(getGroupPermanentsAction(option));
+            group.add(item);
+            submenu.add(item);
+        }
+        return submenu;
+    }
+
+    private ActionListener getGroupPermanentsAction(final String value) {
+        return e -> {
+            prefs.setPref(FPref.UI_GROUP_PERMANENTS, value);
+            prefs.save();
+            SwingUtilities.invokeLater(matchUI::repaintCardOverlays);
+        };
     }
 
     private JMenuItem getMenuItem_CardOverlay(String menuCaption, FPref pref) {

@@ -97,6 +97,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_SR_OPTIMIZE ("false"),
         UI_OPEN_PACKS_INDIV ("false"),
         UI_STACK_CREATURES ("false"),
+        UI_GROUP_PERMANENTS ("Tokens & Creatures"),
         UI_TOKENS_IN_SEPARATE_ROW("false"),
         UI_UPLOAD_DRAFT ("false"),
         UI_SCALE_LARGER ("true"),

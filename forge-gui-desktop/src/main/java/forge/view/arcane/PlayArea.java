@@ -76,6 +76,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     private boolean makeTokenRow = true;
     private boolean stackCreatures = false;
+    private boolean groupTokensAndCreatures;
+    private boolean groupAll;
 
     public PlayArea(final CMatchUI matchUI, final FScrollPane scrollPane, final boolean mirror, final PlayerView player, final ZoneType zone) {
         super(matchUI, scrollPane);
@@ -85,6 +87,13 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         this.zone = zone;
         this.makeTokenRow = FModel.getPreferences().getPrefBoolean(FPref.UI_TOKENS_IN_SEPARATE_ROW);
         this.stackCreatures = FModel.getPreferences().getPrefBoolean(FPref.UI_STACK_CREATURES);
+        updateGroupScope();
+    }
+
+    private void updateGroupScope() {
+        String groupScope = FModel.getPreferences().getPref(FPref.UI_GROUP_PERMANENTS);
+        this.groupTokensAndCreatures = "Tokens & Creatures".equals(groupScope) || "All Permanents".equals(groupScope);
+        this.groupAll = "All Permanents".equals(groupScope);
     }
 
     private CardStackRow collectAllLands(List<CardPanel> remainingPanels) {
@@ -117,7 +126,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                     if (!panel.getAttachedPanels().isEmpty()
                             || !panel.getCard().hasSameCounters(firstPanel.getCard())
                             || firstPanel.getCard().hasCardAttachments()
-                            || (stack.size() == STACK_MAX_LANDS)) {
+                            || (groupAll && card.isTapped() != firstPanel.getCard().isTapped())
+                            || (groupAll && card.getDamage() != firstPanel.getCard().getDamage())
+                            || (!groupAll && stack.size() == STACK_MAX_LANDS)) {
                         // If this land has attachments or the stack is full,
                         // put it to the right.
                         insertIndex = i + 1;
@@ -175,7 +186,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                             || (card.isSick() != firstCard.isSick())
                             || !card.hasSamePT(firstCard)
                             || !(card.getText().equals(firstCard.getText()))
-                            || (stack.size() == STACK_MAX_TOKENS)) {
+                            || (groupTokensAndCreatures && card.isTapped() != firstCard.isTapped())
+                            || (groupTokensAndCreatures && card.getDamage() != firstCard.getDamage())
+                            || (!groupTokensAndCreatures && stack.size() == STACK_MAX_TOKENS)) {
                         // If this token has attachments or the stack is full,
                         // put it to the right.
                         insertIndex = i + 1;
@@ -200,7 +213,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     }
 
     private CardStackRow collectAllCreatures(List<CardPanel> remainingPanels) {
-        if(!this.stackCreatures)
+        if(!this.stackCreatures && !this.groupTokensAndCreatures)
             return collectUnstacked(remainingPanels, RowType.Creature);
         final CardStackRow allCreatures = new CardStackRow();
         outerLoop:
@@ -232,7 +245,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                             || !card.hasSameCounters(firstCard)
                             || (card.isSick() != firstCard.isSick())
                             || !card.hasSamePT(firstCard)
-                            || (stack.size() == STACK_MAX_CREATURES)) {
+                            || (groupTokensAndCreatures && card.isTapped() != firstCard.isTapped())
+                            || (groupTokensAndCreatures && card.getDamage() != firstCard.getDamage())
+                            || (groupTokensAndCreatures && !(card.getText().equals(firstCard.getText())))
+                            || (!groupTokensAndCreatures && stack.size() == STACK_MAX_CREATURES)) {
                         // If this creature has attachments or the stack is full,
                         // put it to the right.
                         insertIndex = i + 1;
@@ -335,11 +351,13 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 final CardStateView otherState = otherCard.getCurrentState();
                 final CardView thisCard = panel.getCard();
                 final CardStateView thisState = thisCard.getCurrentState();
-                if (otherState.getOracleName().equals(thisState.getOracleName()) && s.size() < STACK_MAX_OTHERS) {
+                if (otherState.getOracleName().equals(thisState.getOracleName()) && (groupAll || s.size() < STACK_MAX_OTHERS)) {
                     if (panel.getAttachedPanels().isEmpty()
                             && thisCard.hasSameCounters(otherCard)
                             && (thisCard.isSick() == otherCard.isSick())
-                            && (thisCard.isCloned() == otherCard.isCloned())) {
+                            && (thisCard.isCloned() == otherCard.isCloned())
+                            && (!groupAll || thisCard.isTapped() == otherCard.isTapped())
+                            && (!groupAll || thisCard.getDamage() == otherCard.getDamage())) {
                         s.add(panel);
                         continue outerLoop;
                     }
@@ -365,6 +383,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     @Override
     public final void doLayout() {
+        updateGroupScope();
         final Rectangle rect = this.getScrollPane().getVisibleRect();
 
         this.playAreaWidth = rect.width;
@@ -472,14 +491,39 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                         x -= r.getWidth();
                     }
                 }
+                boolean grouping = groupTokensAndCreatures || groupAll;
+                int maxVisible = 4;
+
+                // Reset groupCount on all panels in this stack
+                for (CardPanel p : stack) { p.setGroupCount(0); }
+
                 for (int panelIndex = 0, panelCount = stack.size(); panelIndex < panelCount; panelIndex++) {
                     final CardPanel panel = stack.get(panelIndex);
-                    final int stackPosition = panelCount - panelIndex - 1;
                     this.setComponentZOrder(panel, panelIndex);
-                    final int panelX = x + (stackPosition * this.stackSpacingX);
-                    final int panelY = y + (stackPosition * this.stackSpacingY);
-                    //System.out.println("... placinng " + panel.getCard() + " @ (" + panelX + ", " + panelY + ")");
+
+                    int visualPos;
+                    boolean hidden;
+                    if (grouping && panelCount > maxVisible) {
+                        if (panelIndex < maxVisible) {
+                            visualPos = maxVisible - 1 - panelIndex;
+                            hidden = false;
+                        } else {
+                            visualPos = 0;
+                            hidden = true;
+                        }
+                    } else {
+                        visualPos = panelCount - panelIndex - 1;
+                        hidden = false;
+                    }
+
+                    final int panelX = x + (visualPos * this.stackSpacingX);
+                    final int panelY = y + (visualPos * this.stackSpacingY);
                     panel.setCardBounds(panelX, panelY, this.getCardWidth(), this.cardHeight);
+                    panel.setDisplayEnabled(!hidden);
+                }
+                // Set group count on top card for badge rendering
+                if (grouping && stack.size() > 1) {
+                    stack.get(0).setGroupCount(stack.size());
                 }
                 rowBottom = Math.max(rowBottom, y + stack.getHeight());
                 x += stack.getWidth();
@@ -651,7 +695,11 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     @Override
     public final void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
-        selectCard(panel, new MouseTriggerEvent(evt), evt.isShiftDown()); //select entire stack if shift key down
+        boolean selectAll = evt.isShiftDown();
+        if (!selectAll && panel.getGroupCount() >= 5) {
+            selectAll = panel.isBadgeHit(evt.getX(), evt.getY());
+        }
+        selectCard(panel, new MouseTriggerEvent(evt), selectAll);
         if ((panel.getTappedAngle() != 0) && (panel.getTappedAngle() != CardPanel.TAPPED_ANGLE)) {
             return;
         }
@@ -928,12 +976,16 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
 
         private int getWidth() {
-            return PlayArea.this.cardWidth + ((this.size() - 1) * PlayArea.this.stackSpacingX)
+            int visualCount = (PlayArea.this.groupTokensAndCreatures || PlayArea.this.groupAll)
+                ? Math.min(this.size(), 4) : this.size();
+            return PlayArea.this.cardWidth + ((visualCount - 1) * PlayArea.this.stackSpacingX)
                     + PlayArea.this.cardSpacingX;
         }
 
         private int getHeight() {
-            return PlayArea.this.cardHeight + ((this.size() - 1) * PlayArea.this.stackSpacingY)
+            int visualCount = (PlayArea.this.groupTokensAndCreatures || PlayArea.this.groupAll)
+                ? Math.min(this.size(), 4) : this.size();
+            return PlayArea.this.cardHeight + ((visualCount - 1) * PlayArea.this.stackSpacingY)
                     + PlayArea.this.cardSpacingY;
         }
     }
