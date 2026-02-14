@@ -20,34 +20,24 @@ import java.util.*;
      protected String getStackDescription(SpellAbility sa) {
          final Card source = sa.getHostCard();
          final Player player = AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa).get(0);
-         final ZoneType zone = ZoneType.smartValueOf(sa.getParamOrDefault("Zone", "Hand"));
 
          final StringBuilder sb = new StringBuilder();
 
-         sb.append(player).append(" drafts a card from ").append(source.getDisplayName()).append("'s spellbook");
-         if (zone.equals(ZoneType.Hand)) {
-             sb.append(".");
-         } else if (zone.equals(ZoneType.Battlefield)) {
-             sb.append(" and puts it onto the battlefield.");
-         } else if (zone.equals(ZoneType.Exile)) {
-             sb.append(sa.hasParam("ExileFaceDown") ? " and exiles it face down." : ", then exiles it.");
-         }
+         sb.append(player).append(" drafts a card from ").append(source.getDisplayName()).append("'s spellbook.");
 
          return sb.toString();
      }
 
      @Override
      public void resolve(SpellAbility sa) {
-         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-         moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
-         moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
          final Card source = sa.getHostCard();
          final Player player = AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa).get(0);
          final Game game = player.getGame();
-         final ZoneType zone = ZoneType.smartValueOf(sa.getParamOrDefault("Zone", "Hand"));
-         List<String> spellbook = Arrays.asList(sa.getParamOrDefault("Spellbook", "").split(","));
-         final int numToDraft = AbilityUtils.calculateAmount(source,
-                 sa.getParamOrDefault("DraftNum", "1"), sa);
+         List<String> spellbook = Arrays.asList(sa.getParam("Spellbook").split(","));
+         final int numToDraft = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("DraftNum", "1"), sa);
+         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+         moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
+         moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
          CardCollection drafted = new CardCollection();
 
          for (int i = 0; i < numToDraft; i++) {
@@ -57,7 +47,6 @@ import java.util.*;
                  // Cardnames that include "," must use ";" instead in Spellbook$ (i.e. Tovolar; Dire Overlord)
                  name = name.replace(";", ",");
                  Card cardOption = Card.fromPaperCard(StaticData.instance().getCommonCards().getUniqueByName(name), player);
-                 cardOption.setTokenCard(sa.hasParam("TokenCard"));
                  draftOptions.add(cardOption);
              }
 
@@ -68,22 +57,7 @@ import java.util.*;
 
          final CardZoneTable triggerList = new CardZoneTable();
          for (final Card c : drafted) {
-             if (zone.equals(ZoneType.Exile) && !c.canExiledBy(sa, true)) {
-                 continue;
-             }
-
-             Card made = game.getAction().moveTo(zone, c, sa, moveParams);
-             if (zone.equals(ZoneType.Battlefield)) {
-                 if (sa.hasParam("Tapped")) {
-                     made.setTapped(true);
-                 }
-             }
-             if (zone.equals(ZoneType.Exile)) {
-                 handleExiledWith(made, sa);
-                 if (sa.hasParam("ExileFaceDown")) {
-                     made.turnFaceDown(true);
-                 }
-             }
+             Card made = game.getAction().moveToHand(c, sa, moveParams);
              if (c != null) {
                  triggerList.put(ZoneType.None, made.getZone().getZoneType(), made);
              }
@@ -92,8 +66,5 @@ import java.util.*;
              }
          }
          triggerList.triggerChangesZoneAll(game, sa);
-         if (zone.equals(ZoneType.Library)) {
-             player.shuffle(sa);
-         }
      }
  }

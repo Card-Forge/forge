@@ -10,8 +10,6 @@ import forge.toolbox.FAbsolutePositioner;
 import forge.toolbox.SaveOpenDialog;
 import forge.toolbox.SaveOpenDialog.Filetypes;
 import forge.util.ThreadUtil;
-import forge.util.maps.HashMapOfLists;
-import forge.util.maps.MapOfLists;
 import forge.view.FFrame;
 import forge.view.FView;
 
@@ -20,9 +18,12 @@ import javax.xml.stream.*;
 import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
+
+import com.google.common.collect.ListMultimap;
+import com.google.common.collect.MultimapBuilder;
+
 import java.awt.*;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -77,6 +78,7 @@ public final class SLayoutIO {
 
             FThreads.invokeInEdtLater(() -> {
                 SLayoutIO.loadLayout(loadFile);
+                Singletons.getControl().getCurrentScreen().getView().populate();
                 SLayoutIO.saveLayout(null);
                 SOverlayUtils.hideOverlay();
             });
@@ -89,6 +91,7 @@ public final class SLayoutIO {
 
         FThreads.invokeInEdtLater(() -> {
             SLayoutIO.loadLayout(null);
+            Singletons.getControl().getCurrentScreen().getView().populate();
             SOverlayUtils.hideOverlay();
         });
     }
@@ -385,7 +388,7 @@ public final class SLayoutIO {
         FileLocation file = screen.getLayoutFile();
         if (file != null) {
             // Read a model for new layout
-            MapOfLists<LayoutInfo, EDocID> model = null;
+            ListMultimap<LayoutInfo, EDocID> model = null;
             boolean usedCustomPrefsFile = false;
             FileInputStream fis = null;
 
@@ -460,10 +463,10 @@ public final class SLayoutIO {
             }
     
             // Apply new layout
-            for (Entry<LayoutInfo, Collection<EDocID>> kv : model.entrySet()) {
+            for (Entry<LayoutInfo, Collection<EDocID>> kv : model.asMap().entrySet()) {
                 LayoutInfo layoutInfo = kv.getKey();
                 DragCell cell = new DragCell();
-                cell.setRoughBounds(layoutInfo.getBounds());
+                cell.setRoughBounds(layoutInfo.bounds());
                 FView.SINGLETON_INSTANCE.addDragCell(cell); 
                 for(EDocID edoc : kv.getValue()) {
                     try {
@@ -476,8 +479,8 @@ public final class SLayoutIO {
                         System.err.println("Failed to get doc for " + edoc); 
                     }
                 }
-                if (layoutInfo.getSelectedId() != null) {
-                    cell.setSelected(layoutInfo.getSelectedId().getDoc());
+                if (layoutInfo.selectedId() != null) {
+                    cell.setSelected(layoutInfo.selectedId().getDoc());
                 }
             }
         }
@@ -486,26 +489,11 @@ public final class SLayoutIO {
         SResizingUtil.resizeWindow();
     }
 
-    private static class LayoutInfo
+    private static record LayoutInfo(RectangleOfDouble bounds, EDocID selectedId)
     {
-        private final RectangleOfDouble bounds;
-        private final EDocID selectedId;
-
-        public LayoutInfo(RectangleOfDouble bounds0, EDocID selectedId0) {
-            this.bounds = bounds0;
-            this.selectedId = selectedId0;
-        }
-        
-        public RectangleOfDouble getBounds() {
-            return this.bounds;
-        }
-        
-        public EDocID getSelectedId() {
-            return this.selectedId;
-        }
     }
 
-    private static MapOfLists<LayoutInfo, EDocID> readLayout(final XMLEventReader reader) throws XMLStreamException
+    private static ListMultimap<LayoutInfo, EDocID> readLayout(final XMLEventReader reader) throws XMLStreamException
     {
         XMLEvent event;
         StartElement element;
@@ -514,7 +502,7 @@ public final class SLayoutIO {
         EDocID selectedId = null;
         double x0 = 0, y0 = 0, w0 = 0, h0 = 0;
 
-        MapOfLists<LayoutInfo, EDocID> model = new HashMapOfLists<>(ArrayList::new);
+        ListMultimap<LayoutInfo, EDocID> model = MultimapBuilder.hashKeys().arrayListValues().build();
         
         LayoutInfo currentKey = null;
         while (null != reader && reader.hasNext()) {
@@ -539,7 +527,7 @@ public final class SLayoutIO {
                 }
                 else if (element.getName().getLocalPart().equals(Property.doc)) {
                     event = reader.nextEvent();
-                    model.add(currentKey, EDocID.valueOf(event.asCharacters().getData()));
+                    model.put(currentKey, EDocID.valueOf(event.asCharacters().getData()));
                 }
             }
         }

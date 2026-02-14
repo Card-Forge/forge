@@ -306,7 +306,7 @@ public class CardImageRenderer {
         float manaSymbolSize = isAdventure ? MANA_SYMBOL_SIZE * 0.75f : MANA_SYMBOL_SIZE;
         if (!noText && state != null) {
             //draw mana cost for card
-            ManaCost mainManaCost = state.getManaCost();
+            ManaCost mainManaCost = state.getOriginalManaCost();
             if (card.isSplitCard() && card.getAlternateState() != null && !card.isFaceDown() && card.getZone() != ZoneType.Stack && card.getZone() != ZoneType.Battlefield) {
                 //handle rendering both parts of split card
                 mainManaCost = card.getLeftSplitState().getManaCost();

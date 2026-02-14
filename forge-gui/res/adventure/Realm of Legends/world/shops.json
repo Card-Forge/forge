@@ -555,7 +555,7 @@
 "sprite":"EquipmentShop",   
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Purist's Pants"  },
-    { "type": "item","count":1, "itemName": "Tome of Dispelling"  },
+    { "type": "item","count":1, "itemName": "Tome of Cleansing"  },
     { "type": "item","count":1, "itemName": "Mask of Hypochondria"  },
     { "type": "item","count":1, "itemName": "Ring of Thune"  },
     { "type": "item","count":1, "itemName": "Outpost Outfit"  },
@@ -656,7 +656,7 @@
 "sprite":"EquipmentShop",   
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Assassin's Shoes"  },
-    { "type": "item","count":1, "itemName": "Tome of the Executioner"  },
+    { "type": "item","count":1, "itemName": "Tome of Doom"  },
     { "type": "item","count":1, "itemName": "Mask of Mortiphobia"  },
     { "type": "item","count":1, "itemName": "Ring of Xathrid"  },
     { "type": "item","count":1, "itemName": "Bog Dweller Leather"  },

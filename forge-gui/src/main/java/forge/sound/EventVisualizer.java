@@ -11,10 +11,10 @@ import forge.gui.events.UiEventAttackerDeclared;
 import forge.gui.events.UiEventBlockerAssigned;
 import forge.gui.events.UiEventNextGameDecision;
 import forge.util.TextUtil;
-import forge.util.maps.MapOfLists;
 
-import java.util.Collection;
 import java.util.Objects;
+
+import com.google.common.collect.Multimap;
 
 /**
  * This class is in charge of converting any forge.game.event.Event to a SoundEffectType.
@@ -100,13 +100,9 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
             return null; // already played sounds in interactive mode
         }
 
-        for (final MapOfLists<Card, Card> ab : event.blockers().values()) {
-            for(final Collection<Card> bb : ab.values()) {
-                if ( !bb.isEmpty() ) {
-                    // hasAnyBlocker = true;
-                    return SoundEffectType.Block;
-                }
-            }
+        if (event.blockers().values().stream().noneMatch(Multimap::isEmpty)) {
+            // hasAnyBlocker = true;
+            return SoundEffectType.Block;
         }
         return null;
     }

@@ -115,6 +115,7 @@ public enum TrackableProperty {
     Room(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
     HiddenId(TrackableTypes.IntegerType),
     ExertedThisTurn(TrackableTypes.BooleanType),
+    Detained(TrackableTypes.BooleanType),
 
     //Card State
     Name(TrackableTypes.StringType),
@@ -125,6 +126,7 @@ public enum TrackableProperty {
     ImageKey(TrackableTypes.StringType),
     Type(TrackableTypes.CardTypeViewType),
     ManaCost(TrackableTypes.ManaCostType),
+    OriginalManaCost(TrackableTypes.ManaCostType),
     SetCode(TrackableTypes.StringType),
     Rarity(TrackableTypes.EnumType(CardRarity.class)),
     FunctionalVariant(TrackableTypes.StringType),
