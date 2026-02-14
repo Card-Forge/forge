@@ -45,6 +45,8 @@ import forge.game.zone.ZoneType;
 import forge.util.*;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
@@ -503,8 +505,8 @@ public class AiAttackController {
 
         // respect global attack constraints
         GlobalAttackRestrictions restrict = combat.getAttackConstraints().getGlobalRestrictions();
-        int attackMax = restrict.getMax();
-        if (attackMax >= attackers.size()) {
+        Integer attackMax = restrict.getMax();
+        if (attackMax != null && attackMax >= attackers.size()) {
             return;
         }
 
@@ -557,11 +559,10 @@ public class AiAttackController {
 
                 if (bestBand != null) {
                     GameEntity defender = combat.getDefenderByAttacker(bestBand);
-                    if (attackMax == -1) {
-                        attackMax = restrict.getDefenderMax().getOrDefault(defender, -1);
-                    }
 
-                    if (attackMax == -1 || attackMax > combat.getAttackers().size()) {
+                    Integer bandingMax = ObjectUtils.firstNonNull(attackMax, restrict.getDefenderMax().get(defender));
+
+                    if (bandingMax == null || bandingMax > combat.getAttackers().size()) {
                         if (CombatUtil.canAttack(c, defender)) {
                             combat.addAttacker(c, defender, combat.getBandOfAttacker(bestBand));
                         }
@@ -836,12 +837,10 @@ public class AiAttackController {
         }
 
         GlobalAttackRestrictions restrict = combat.getAttackConstraints().getGlobalRestrictions();
-        int attackMax = restrict.getMax();
-        if (attackMax == -1) {
-            // check with the local limitations vs. the chosen defender
-            attackMax = restrict.getDefenderMax().getOrDefault(defender, -1);
-        }
-        if (attackMax == 0) {
+        // check with the local limitations vs. the chosen defender
+        // could still be null
+        Integer attackMax = ObjectUtils.firstNonNull(restrict.getMax(), restrict.getDefenderMax().get(defender));
+        if (attackMax != null && attackMax == 0) {
             // can't attack anymore
             return aiAggression;
         }
@@ -973,7 +972,7 @@ public class AiAttackController {
             List<Card> left = new ArrayList<>(attackersLeft);
             CardLists.sortByPowerDesc(left);
             for (Card attacker : left) {
-                if (attackMax != -1 && combat.getAttackers().size() >= attackMax)
+                if (attackMax != null && combat.getAttackers().size() >= attackMax)
                     return aiAggression;
 
                 // TODO if lifeInDanger use chance to hold back some (especially in multiplayer)
@@ -1026,7 +1025,7 @@ public class AiAttackController {
             }
         }
 
-        if (attackMax != -1) {
+        if (attackMax != null) {
             // should attack with only max if able.
             CardLists.sortByPowerDesc(this.attackers);
             aiAggression = 6;
@@ -1726,7 +1725,7 @@ public class AiAttackController {
         attackersLeft.removeAll(attUnsafe);
     }
 
-    private boolean doRevengeOfRavensAttackLogic(final GameEntity defender, final Queue<Card> attackersLeft, int numForcedAttackers, int maxAttack) {
+    private boolean doRevengeOfRavensAttackLogic(final GameEntity defender, final Queue<Card> attackersLeft, int numForcedAttackers, Integer maxAttack) {
         // TODO: detect Revenge of Ravens by the trigger instead of by name
         boolean revengeOfRavens = false;
         if (defender instanceof Player player) {
@@ -1742,7 +1741,7 @@ public class AiAttackController {
         }
 
         int life = ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife() ? ai.getLife() : Integer.MAX_VALUE;
-        maxAttack = maxAttack < 0 ? Integer.MAX_VALUE - 1 : maxAttack;
+        maxAttack = Objects.requireNonNullElse(maxAttack, Integer.MAX_VALUE - 1);
         if (Math.min(maxAttack, numForcedAttackers) >= life) {
             return false;
         }
