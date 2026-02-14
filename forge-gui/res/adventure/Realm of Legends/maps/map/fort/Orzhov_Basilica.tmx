@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="27" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="98">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Syndicate Guildmage&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx"/>
+ <layer id="6" name="Collision" width="30" height="27">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUDFcQzcvAsIsHFUfxQsRhNDZ5SoEsD4R240TQ0jwQcRiNLAcC0jzUsxcZgMyF+ReXPDXsJcUcUtXjM4dUQMtwRo5fWtiLK73C7B0J6ZkQGG7pmR7paqDTMyjNwGj09IwsR+30TAoYTumqlpuBYQ+S2F4gu54bVQ017EUvi3ah+UcWi/wuKtg73AAAt5gtZA==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="27">
+  <data encoding="base64" compression="zlib">
+   eJzz42Rg8BvFo3gUD0tMLhi1d9TeUXtH7R21d9ReELinNrL8O9TtHW4YADTKw2k=
+  </data>
+ </layer>
+ <layer id="7" name="Floor Tiles" width="30" height="27" tintcolor="#fffcd9">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUDFfwhB2Bf3ERz6aWvaTYSS17SbUTxKYUkGPnaDiTDkbDeTScR8OZOv4dKuFMDXvJsZMa8UuOndTw73ADAGmB4gA=
+  </data>
+ </layer>
+ <layer id="2" name="Walls and Ground" width="30" height="27">
+  <data encoding="base64" compression="zlib">
+   eJytVktOAkEQ7QVGBuJB8LNCtxgC6A4MiQdQ/CbGoIl38QaElYpuvIY38I8BlCNYL0NniqK7ZvhU8jJMva56PV1dTXfSxgwCo1q/NP7eo/FPFNchPIp4OVa+W99R2ZhjwgnhohSN436fD3rSJ3Pa2J7wfxA+CV9Cl/sX4YMu92+mIrykxt8XCZkbdkc1+qM1u1wy5iEdIq5G1hA7pNha4K8lDLl99QWHeOSKqy/G3CcYx3V99QX3G4Tzj6tbncZUE4zjutx/SjgjnI90D+h5SGiU9f6y61sdYc8xVsv9TegSfkbcKz3fCO/lsM4B5csIZNlvHw/TcvM91lyKfm+lwlq3Rjma2+HzNm9Mm3y5nDGruZCHjxv4fMqf2+5na5hTj63dgOleFYy5LkR5K6S5k4v4YCWE5WF8XZGbr7vGwVqOusEaRYorujmry9cVufm6a5ymq1nbEcP7F6bV16X7vD6eFzx8Ujeuvvaswhkg5wSrZKiOAruZZLzWRxrn+t795cnvhc+1zlofaZxLl+f1GefXsmGPIDfvk2nrm1R32v6V9weXbndD5+ftX+w55IWOhDVtX83av8Ng8nukru+clMZ7ZRjoXNWh68sr+bj6avtqHl3Eztq/VvemEP0vuPrXdV4hdtb+xR151vMKsbZfZQ1hNTZ31zmZxGx+rlMPdN3BAnS5Nu5nuKfgjMJZ0Pfo/gOQaWWE
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="27">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy9ljtOw0AQhv8qqZBSQEkZCSMhkUgI0iCl4BggcQbo6ahzDC7AOeACSYOgCSegCTtaLOzRvHZDGGnlfcz48+z+HhsAvk7iDej3W9PGPJabdf9tudI650afOcLlz6rxLF8vZ89XylPyt/Zay1/jadyojiyuloeXb0R3pVbKtfilXGtfImeyOO9fo2vbcO8ugfvUDk+Bl6M81zTAcZP7r2nu6eC3RbhSbl3fxUV/bf3DfZ8DH/Pc/0xzj3u58RjvzLR3YjQDngd6XNc24+xLMSXcv9ZVe19v/b+5kfp7O/YZkk/kbC3ucgKsJjZ3U8HVaj5pk7RyPQVupjaXjHy5nj2mxCVt0ju5TMxVgEu+XM8RrnTWvBZwo3qiWYQrjVvurnQl1Y0u9+FKj98/y9daXfExNdKIt89dI9+IrqQ1rqtonSSL1smSf4kaq/0e7Yqr1UiP+zZM38JhPZezo/sd4Vrx33hqPeY=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="224" y="409.5" width="32" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="52" template="../../../../common/maps/obj/gold.tx" x="161.496" y="193.356"/>
+  <object id="57" template="../../../../common/maps/obj/enemy.tx" x="231.974" y="215.989">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Orzhova, the Church of Deals |GPT&quot;, &quot;Orzhov Guildmage|GPT&quot; ] }"/>
+    <property name="enemy" value="Teysa"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/enemy.tx" x="195.648" y="321.313">
+   <properties>
+    <property name="enemy" value="Karlov"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="59" template="../../../../common/maps/obj/enemy.tx" x="256.459" y="277.313">
+   <properties>
+    <property name="enemy" value="Veko"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="60" template="../../../../common/maps/obj/enemy.tx" x="257.292" y="358.802">
+   <properties>
+    <property name="enemy" value="Tomik"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="66" template="../../../../common/maps/obj/gold.tx" x="177.167" y="192.833"/>
+  <object id="68" template="../../../../common/maps/obj/gold.tx" x="162" y="368.5"/>
+  <object id="69" template="../../../../common/maps/obj/gold.tx" x="179" y="368.5"/>
+  <object id="71" template="../../obj/treasure.tx" x="168" y="223.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;GPT&quot;, &quot;GTC&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;black&quot;, &quot;white&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;GPT&quot;, &quot;GTC&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;black&quot;, &quot;white&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;GPT&quot;, &quot;GTC&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;black&quot;, &quot;white&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/scroll.tx" x="302.667" y="353.667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Orzhov Charm&quot;, &quot;editions&quot;: [ &quot;GTC&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/scroll.tx" x="303.333" y="274">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Orzhov Basilica&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="74" template="../../../../common/maps/obj/dialog.tx" x="215.833" y="375.25" width="48.6667" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Before you, an opulent church stands, resplendent with obstentatious displays of wealth. A fountain flowing with blood in the back of the basilica makes the sinister undertones of the place obvious. A sign marks this as the territory of Ravnica's Orzhov Syndicate.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="75" template="../../obj/treasure.tx" x="304.5" y="223.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;GPT&quot;, &quot;GTC&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;black&quot;, &quot;white&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;GPT&quot;, &quot;GTC&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;black&quot;, &quot;white&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;GPT&quot;, &quot;GTC&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;black&quot;, &quot;white&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/collision.tx" x="159.436" y="236.293" width="33.3621" height="42.0559"/>
+  <object id="77" template="../../../../common/maps/obj/collision.tx" x="143.328" y="255.086" width="17.7908" height="133.086"/>
+  <object id="78" template="../../../../common/maps/obj/collision.tx" x="302.367" y="174.925" width="35.5099" height="16.5694"/>
+  <object id="79" template="../../../../common/maps/obj/collision.tx" x="304.292" y="239.249" width="15.5099" height="16.5694"/>
+  <object id="80" template="../../../../common/maps/obj/collision.tx" x="321.154" y="256.079" width="15.5099" height="32.2058"/>
+  <object id="81" template="../../../../common/maps/obj/collision.tx" x="321.154" y="338.261" width="15.5099" height="30.024"/>
+  <object id="82" template="../../../../common/maps/obj/collision.tx" x="304.245" y="318.443" width="15.5099" height="16.5694"/>
+  <object id="83" template="../../../../common/maps/obj/collision.tx" x="272.972" y="319.715" width="15.5099" height="16.5694"/>
+  <object id="84" template="../../../../common/maps/obj/collision.tx" x="272.972" y="238.079" width="15.5099" height="16.5694"/>
+  <object id="85" template="../../../../common/maps/obj/collision.tx" x="271.7" y="287.352" width="15.5099" height="16.5694"/>
+  <object id="86" template="../../../../common/maps/obj/collision.tx" x="271.881" y="367.897" width="15.5099" height="16.5694"/>
+  <object id="87" template="../../../../common/maps/obj/collision.tx" x="192.063" y="366.443" width="15.5099" height="16.5694"/>
+  <object id="88" template="../../../../common/maps/obj/collision.tx" x="161.336" y="366.443" width="29.8735" height="16.5694"/>
+  <object id="89" template="../../../../common/maps/obj/collision.tx" x="193.336" y="239.715" width="15.5099" height="16.5694"/>
+  <object id="90" template="../../../../common/maps/obj/collision.tx" x="192.791" y="206.806" width="15.5099" height="16.5694"/>
+  <object id="91" template="../../../../common/maps/obj/collision.tx" x="165.336" y="142.988" width="40.6008" height="32.3876"/>
+  <object id="92" template="../../../../common/maps/obj/collision.tx" x="146.972" y="142.988" width="18.9644" height="18.0239"/>
+  <object id="93" template="../../../../common/maps/obj/collision.tx" x="144.245" y="174.624" width="15.5099" height="16.5694"/>
+  <object id="94" template="../../../../common/maps/obj/collision.tx" x="288.245" y="142.988" width="46.7826" height="16.5694"/>
+  <object id="95" template="../../../../common/maps/obj/collision.tx" x="271.7" y="144.624" width="15.5099" height="31.6603"/>
+  <object id="96" template="../../../../common/maps/obj/collision.tx" x="272.245" y="207.352" width="15.5099" height="16.5694"/>
+  <object id="97" template="../../../../common/maps/obj/scroll.tx" x="232.333" y="199">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;godless shrine&quot;, &quot;editions&quot;: [ &quot;gpt&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

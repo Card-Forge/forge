@@ -143,7 +143,7 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public void refreshField() {
-        if(!GuiBase.isNetworkplay())
+        if(!GuiBase.isNetworkplay(this))
             return;
         refreshCardDetails(null);
     }
@@ -182,7 +182,7 @@ public class MatchController extends AbstractGuiGame {
             }
         }
         view = new MatchScreen(playerPanels);
-        if(GuiBase.isNetworkplay())
+        if(GuiBase.isNetworkplay(this))
             view.resetFields();
         clearSelectables();  //fix uncleared selection
 
@@ -211,11 +211,16 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public void showPromptMessage(final PlayerView player, final String message) {
+        cancelWaitingTimer();
+        view.getPrompt(player).setMessage(message);
+    }
+    public void showPromptMessageNoCancel(final PlayerView player, final String message) {
         view.getPrompt(player).setMessage(message);
     }
 
     @Override
     public void showCardPromptMessage(final PlayerView player, final String message, final CardView card) {
+        cancelWaitingTimer();
         view.getPrompt(player).setMessage(message, card);
     }
 
@@ -251,19 +256,19 @@ public class MatchController extends AbstractGuiGame {
                 final VPhaseIndicator.PhaseLabel phaseLabel = view.getPlayerPanel(lastPlayer).getPhaseIndicator().getLabel(ph);
                 if (phaseLabel != null)
                     phaseLabel.setActive(true);
-                if (GuiBase.isNetworkplay())
+                if (GuiBase.isNetworkplay(this))
                     getGameView().updateNeedsPhaseRedrawn(lastPlayer, PhaseType.CLEANUP);
             } else if (getGameView().getPlayerTurn() != null) {
                 //set phaselabel
                 final VPhaseIndicator.PhaseLabel phaseLabel = view.getPlayerPanel(getGameView().getPlayerTurn()).getPhaseIndicator().getLabel(ph);
                 if (phaseLabel != null)
                     phaseLabel.setActive(true);
-                if (GuiBase.isNetworkplay())
+                if (GuiBase.isNetworkplay(this))
                     getGameView().updateNeedsPhaseRedrawn(getGameView().getPlayerTurn(), ph);
             }
         }
 
-        if(GuiBase.isNetworkplay())
+        if(GuiBase.isNetworkplay(this))
             checkStack();
 
         if (ph != null && saveState && ph.isMain()) {

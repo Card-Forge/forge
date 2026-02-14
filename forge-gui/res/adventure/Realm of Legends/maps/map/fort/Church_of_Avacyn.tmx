@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="93">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Seraph Sanctuary&quot;, &quot;Avacynian Priest&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAOonkZGHbxoOIoXoQ4MhtdDSVAlgdTTJoHIY7MRldDC3uR/Usve4kBw8leesQvrrSKbO9wT8/EgOFk70CWGyMpPRMDaJWuCLmH2vbWcjMw7EGL071Adj03de1FjzcQRjdTFouaXUTaCwDGeC22
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzr42Rg6MOCNbjJx22chDE2O0ftHbV31N5Re0ftHbV31F7a2gsAxCrEbw==
+  </data>
+ </layer>
+ <layer id="2" name="Walls and Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy1lUGOgkAQRWvZjecw0cUcgsU4KzXxCl5gTjLXmLBCHe/hIdyYoOgR7ApU+FN2ERT8SafTdFGPgl8NEdHeES18M3Zh7cOcqDFSaysGdYOcWoX/z12G8esf47Jw7TAh+p5WsxXDyl07M8a+tHCLwBt/VHMbdx5h/kTihX2p92I5u0i4BdSgpfm47stlnV/I0fYOn4mxtHXx9/6ZEM3U+Eqej2GxxzauYon4G5S+unb1zV7feqWWHHq0hPzYP9JDVs4u0s+2UvlL5TvsoaG4XDPn/3PN2YR9JXvo+aF9hT1qib/JkL6yhH6W8+3dfaQlZyrmPKXd789q72BviKxz8gb+erWWLOJfzdfC/yFzj3Wd6zTOtZ5N96bFxvr5TN339JXmxth36Ut1pQ==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy9lD0SgjAQhXfGiiJyCnUsbKCAO3gZS8WeTriFXsI74DXwFG4GdliXRAIEv5kMSTbZ/LxHABqqoPleFXyhEoA1ljABI7a4zCOR8W0EsIu69g3zFVhKy7qmuMxBZO1ar6Afu+P4B5ujUjwPljDt+jaH33GZozKsw9d+rnCvMe41btq5Pg/mK7CUaX8uiHje9lEOnW+IbECPuZCeb9ZXs7rpTuZg0vKs3O7iH0gvnvZu8/g4m59taA2kF6dAObiWF+Ef6Sfp5zFIP4/B5AOfcN9SvTYPnczQW8lZ0ldcU74n/U/59BXhop1PX9neBtJzaS+54OudPrZf7l+u6QfF4j+G
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="281" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/treasure.tx" x="112.504" y="95.8562">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;AVR&quot;, &quot;SOI&quot;, &quot;MID&quot;, &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;cardTypes&quot;: [&quot;Creature&quot;],
+    &quot;subTypes&quot;: [&quot;Angel&quot;],
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="57" template="../../../../common/maps/obj/enemy.tx" x="207.184" y="80.9197">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Scroll of avacyn|AVR&quot;, &quot;Mask of avacyn|ISD&quot;, &quot;Avacyn, guardian angel&quot;, &quot;Ghost Quarter|ISD&quot;, &quot;helvault|DKA&quot;]}"/>
+    <property name="enemy" value="Avacyn"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/enemy.tx" x="178.981" y="151.313">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Gisela"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="59" template="../../../../common/maps/obj/enemy.tx" x="237.626" y="149.646">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Bruna"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="60" template="../../../../common/maps/obj/enemy.tx" x="206.292" y="177.302">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Sigarda"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="61" template="../../../../common/maps/obj/enemy.tx" x="240.648" y="232.302">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Liesa"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="15"/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/manashards.tx" x="288" y="226"/>
+  <object id="72" template="../../../../common/maps/obj/gold.tx" x="129.333" y="142.333"/>
+  <object id="74" template="../../obj/treasure.tx" x="303.5" y="95">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;AVR&quot;, &quot;SOI&quot;, &quot;MID&quot;, &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;cardTypes&quot;: [&quot;Creature&quot;],
+    &quot;subTypes&quot;: [&quot;Angel&quot;],
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/dialog.tx" x="184" y="250.917" width="65.6667" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The cathedral ahead is filled with angelic chanting, all praising the majestic angel at its back. Silver symbols adorn the church walls, depicing Avacyn's Collar, the symbol of her church.
+
+Your manasight stone glows, sensing the power of the legends here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="77" template="../../../../common/maps/obj/collision.tx" x="257.882" y="6.3102" width="44.2679" height="56.1083"/>
+  <object id="78" template="../../../../common/maps/obj/collision.tx" x="129.284" y="6.31019" width="44.2679" height="56.1083"/>
+  <object id="79" template="../../../../common/maps/obj/collision.tx" x="191.569" y="16.5121" width="17.4208" height="31.4089"/>
+  <object id="80" template="../../../../common/maps/obj/collision.tx" x="227.007" y="15.9752" width="17.4208" height="31.4089"/>
+  <object id="81" template="../../../../common/maps/obj/collision.tx" x="207.979" y="15.5658" width="17.4208" height="14.6589"/>
+  <object id="84" template="../../../../common/maps/obj/gold.tx" x="289.5" y="141.833"/>
+  <object id="91" template="../../../../common/maps/obj/enemy.tx" x="129" y="224.333">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'So, how about it then?'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;I have slain the angels. Don't try to pull anything.&quot;,
+					&quot;text&quot;: &quot;'Oh how I wish I could, but I can at least rest easy now that my revenge has once again been sated the barest amount. Enjoy your promised reward.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Elbrus, the Binding Blade&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;randomCard&quot;, &quot;colors&quot;: [ &quot;Black&quot;], &quot;rarity&quot;: [&quot;Rare&quot;, &quot;Mythic Rare&quot;], &quot;count&quot;: 4 },
+                        {&quot;type&quot;: &quot;shards&quot;, &quot;count&quot;: 100}                
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 5
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Tell me of this task.&quot;,
+					&quot;text&quot;: &quot;'I am Withengar. Once, long ago, I was the most feared demon on all Innistrad... until that damned Avacyn trapped me in a dagger. When I heard she and her angels were slain I was happy to get at least a modicum of revenge... but now they're back. Unfortunately, the same distortions in time and space that brought them from the past to here brought me with them. I've only barely loosened the bonds of my prison, hence my... diminished state. I can hide from them, but not fight them. So I offer you all the rewards my remaining power can muster to return Avacyn and her accursed followers here to their grave.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;I don't have time for this.&quot;,
+					&quot;text&quot;: &quot;You leave the tiny demon behind. It sulks, frustrated.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Withengar"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/dialog.tx" x="178.5" y="223.917" width="17.6667" height="13.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;An unusually tiny demon stands in a side corner behind a thin veil of illusion magic. Blood and a knife carved from bone lie on the ground near it, the only stains on an otherwise pristine church. 
+
+'You! Mortal! Approach, I have a task for you.' 
+
+The demon's small size undercuts his attempted bluster.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,0 +1,1501 @@
+items.png
+size: 480,1008
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none      
+Assassin'sShoes
+  xy: 0, 160
+  size: 16, 16
+GhostRune
+  xy: 368, 64
+  size: 16, 16
+Diamond
+  xy: 48, 768
+  size: 16, 16
+Ruby
+  xy: 16, 768
+  size: 16, 16
+Emerald
+  xy: 0, 768
+  size: 16, 16
+Ivory
+  xy: 0, 640
+  size: 16, 16
+Jade
+  xy: 16, 640
+  size: 16, 16
+BlueDiamond
+  xy: 112, 640
+  size: 16, 16
+BowlofAncientBlood
+  xy: 256, 960
+  size: 16, 16
+ArguelsBloodyHelm
+  xy: 112, 336
+  size: 16, 16
+WhiteCartouche
+  xy: 320, 176
+  size: 16, 16
+WardingStatueTorso
+  xy: 32, 576
+  size: 16, 16
+WardingStatueSkirt
+  xy: 16, 576
+  size: 16, 16
+WardingStatueArms
+  xy: 48, 576
+  size: 16, 16
+MaptotheHostages
+  xy: 224, 848
+  size: 16, 16
+TheLuckiestClover
+  xy: 112, 608
+  size: 16, 16
+CheeseofBees
+  xy: 80, 768
+  size: 16, 16
+OneThousandChickens
+  xy: 144, 624
+  size: 16, 16
+BlueCartouche
+  xy: 320, 192
+  size: 16, 16
+EverflowingWateringCan
+  xy: 192, 976
+  size: 16, 16
+BlackCartouche
+  xy: 320, 224
+  size: 16, 16
+TomeofTemporalRepair
+  xy: 112, 688
+  size: 16, 16
+RedCartouche
+  xy: 320, 240
+  size: 16, 16
+GreenCartouche
+  xy: 320, 208
+  size: 16, 16
+VictoryStandard
+  xy: 96, 592
+  size: 16, 16
+GenerousArmor
+  xy: 224, 112
+  size: 16, 16
+GenerousPants
+  xy: 16, 480
+  size: 16, 16
+GenerousNecklace
+  xy: 32, 848
+  size: 16, 16
+GenerousRing
+  xy: 128, 912
+  size: 16, 16
+GenerousIngot
+  xy: 224, 944
+  size: 16, 16
+PureSoul
+  xy: 176, 800
+  size: 16, 16
+SaintSoul
+  xy: 208, 800
+  size: 16, 16
+CaptiveSoul
+  xy: 224, 864
+  size: 16, 16
+NobleSoul
+  xy: 240, 864
+  size: 16, 16
+RoyalSoul
+  xy: 256, 864
+  size: 16, 16
+MedalOutnumbered
+  xy: 32, 608
+  size: 16, 16
+MedalOutgunned
+  xy: 128, 592
+  size: 16, 16
+MedalOutmaneuvered
+  xy: 0, 560
+  size: 16, 16
+MedalOutmatched
+  xy: 112, 592
+  size: 16, 16
+MedalOverpowered
+  xy: 64, 608
+  size: 16, 16
+MedalOverwhelmed
+  xy: 48, 592
+  size: 16, 16
+MedalVictory
+  xy: 144, 496
+  size: 16, 16
+GhostfireBlade
+  xy: 208, 720
+  size: 16, 16
+InfernalArmor
+  xy: 160, 64
+  size: 16, 16
+ThunderLasso
+  xy: 208, 400
+  size: 16, 16
+FleshwrightChaps
+  xy: 128, 432
+  size: 16, 16
+GisasFavoriteShovel
+  xy: 112, 720
+  size: 16, 16
+UtopiaAnklet
+  xy: 0, 960
+  size: 16, 16
+AmuletofAgony
+  xy: 96, 816
+  size: 16, 16
+KoboldBoots
+  xy: 0, 128
+  size: 16, 16
+CloudseederShoes
+  xy: 16, 176
+  size: 16, 16
+Courier'sBoots
+  xy: 80, 144
+  size: 16, 16
+JollyBoots
+  xy: 16, 96
+  size: 16, 16
+SymbioteBondband
+  xy: 16, 976
+  size: 16, 16
+MistformSliverband
+  xy: 16, 992
+  size: 16, 16
+MaestroLoafers
+  xy: 112, 128
+  size: 16, 16
+BrimstoneBoots
+  xy: 16, 128
+  size: 16, 16
+Peddler'sShoes
+  xy: 16, 144
+  size: 16, 16
+PocketThopter
+  xy: 160, 816
+  size: 16, 16
+BloodfireBoots
+  xy: 32, 160
+  size: 16, 16
+Witch'sShoes
+  xy: 32, 176
+  size: 16, 16
+PetalmanePants
+  xy: 32, 464
+  size: 16, 16
+EnduringSliverband
+  xy: 32, 896
+  size: 16, 16
+JadeAnklet
+  xy: 32, 912
+  size: 16, 16
+CoiledAnklet
+  xy: 32, 976
+  size: 16, 16
+Witch-MawAnklet
+  xy: 32, 992
+  size: 16, 16
+DeathsporeShoes
+  xy: 32, 112
+  size: 16, 16
+ObscuraShoes
+  xy: 32, 128
+  size: 16, 16
+SegovianSandals
+  xy: 16, 112
+  size: 16, 16
+SteelBoots
+  xy: 48, 160
+  size: 16, 16
+MambaBondband
+  xy: 48, 912
+  size: 16, 16
+CabarettiKicks
+  xy: 48, 128
+  size: 16, 16
+Sheldon'sShoes
+  xy: 48, 144
+  size: 16, 16
+EmpyrialGreaves
+  xy: 64, 176
+  size: 16, 16
+GixianGraft
+  xy: 64, 416
+  size: 16, 16
+ArtificialSliverband
+  xy: 64, 976
+  size: 16, 16
+Miser'sShoes
+  xy: 64, 112
+  size: 16, 16
+Caravaneer'sGreaves
+  xy: 64, 128
+  size: 16, 16
+JoragaBoots
+  xy: 80, 176
+  size: 16, 16
+HellkiteGreaves
+  xy: 80, 448
+  size: 16, 16
+Yore-TillerAnklet
+  xy: 80, 928
+  size: 16, 16
+SilvergillTailband
+  xy: 80, 944
+  size: 16, 16
+RiveteerGreaves
+  xy: 80, 96
+  size: 16, 16
+ValorousGreaves
+  xy: 80, 112
+  size: 16, 16
+DeathspitterSkirt
+  xy: 96, 416
+  size: 16, 16
+Lookout'sHarness
+  xy: 96, 432
+  size: 16, 16
+BearhideBreeches
+  xy: 96, 448
+  size: 16, 16
+Purist'sPants
+  xy: 96, 464
+  size: 16, 16
+TimebugBoots
+  xy: 96, 96
+  size: 16, 16
+GlimmerbellBondband
+  xy: 96, 976
+  size: 16, 16
+FirefrightenerShoes
+  xy: 96, 128
+  size: 16, 16
+Despoiler'sBoots
+  xy: 96, 144
+  size: 16, 16
+SovereignGreaves
+  xy: 112, 176
+  size: 16, 16
+BloodswornBite
+  xy: 112, 368
+  size: 16, 16
+VictualSliverband
+  xy: 112, 912
+  size: 16, 16
+Gingerboots
+  xy: 112, 96
+  size: 16, 16
+Dune-BroodAnklet
+  xy: 112, 976
+  size: 16, 16
+BrokersBoots
+  xy: 112, 112
+  size: 16, 16
+BeastbreakerBoots
+  xy: 112, 144
+  size: 16, 16
+GhoulcallerGreaves
+  xy: 128, 176
+  size: 16, 16
+PrincelyGreaves
+  xy: 128, 160
+  size: 16, 16
+PacksongPants
+  xy: 128, 480
+  size: 16, 16
+AcidicSliverband
+  xy: 128, 896
+  size: 16, 16
+AnkletoftheEnd
+  xy: 128, 928
+  size: 16, 16
+HeapSocks
+  xy: 128, 96
+  size: 16, 16
+SpectralSliverband
+  xy: 128, 960
+  size: 16, 16
+SabertoothBondband
+  xy: 128, 976
+  size: 16, 16
+BandarBoots
+  xy: 128, 112
+  size: 16, 16
+Trickster'sShoes
+  xy: 144, 160
+  size: 16, 16
+GodsireGreaves
+  xy: 144, 416
+  size: 16, 16
+DrapedDragonhide
+  xy: 128, 416
+  size: 16, 16
+Cryptologist'sFins
+  xy: 144, 480
+  size: 16, 16
+Glint-EyeAnklet
+  xy: 144, 912
+  size: 16, 16
+Ink-TreaderAnklet
+  xy: 144, 928
+  size: 16, 16
+Fblthp'sLostSocks
+  xy: 144, 96
+  size: 16, 16
+RaptorBondband
+  xy: 144, 960
+  size: 16, 16
+PlatedSliverband
+  xy: 144, 976
+  size: 16, 16
+Greenseeker'sShoes
+  xy: 144, 128
+  size: 16, 16
+AngelicGreaves
+  xy: 144, 144
+  size: 16, 16
+AbzanGauntlet
+  xy: 0, 240
+  size: 16, 16
+BasilicaSkullbomb
+  xy: 0, 528
+  size: 16, 16
+Fblthp'sLostBauble
+  xy: 0, 544
+  size: 16, 16
+TomeofFire
+  xy: 0, 656
+  size: 16, 16
+GoldenEgg
+  xy: 16, 544
+  size: 16, 16
+Urza'sBauble
+  xy: 16, 640
+  size: 16, 16
+MalignPrayerbook
+  xy: 16, 672
+  size: 16, 16
+TomeofTriumph
+  xy: 16, 688
+  size: 16, 16
+Mishra'sBauble
+  xy: 48, 816
+  size: 16, 16
+FurnaceSkullbomb
+  xy: 160, 848
+  size: 16, 16
+MaptotheWorldTree
+  xy: 176, 880
+  size: 16, 16
+ThaumatonTorpedo
+  xy: 208, 560
+  size: 16, 16
+ScrollofGriselbrand
+  xy: 272, 976
+  size: 16, 16
+KeystotheHouse
+  xy: 288, 992
+  size: 16, 16
+ScrollofAvacyn
+  xy: 304, 944
+  size: 16, 16
+NecrogenGauntlet
+  xy: 32, 256
+  size: 16, 16
+AetherGauntlet
+  xy: 32, 272
+  size: 16, 16
+Poisoner'sGlove
+  xy: 32, 288
+  size: 16, 16
+ChimericCoils
+  xy: 64, 816
+  size: 16, 16
+TriangleofWar
+  xy: 32, 880
+  size: 16, 16
+LotusPetal
+  xy: 320, 128
+  size: 16, 16
+BlackLotus
+  xy: 320, 128
+  size: 16, 16
+PyriteGauntlet
+  xy: 48, 208
+  size: 16, 16
+TemurGauntlet
+  xy: 48, 256
+  size: 16, 16
+ChromaticSphere
+  xy: 48, 640
+  size: 16, 16
+TomeoftheBuilder
+  xy: 48, 656
+  size: 16, 16
+AmnesiacPrayerbook
+  xy: 48, 672
+  size: 16, 16
+Kaleidostone
+  xy: 48, 768
+  size: 16, 16
+SunbeamGauntlet
+  xy: 64, 208
+  size: 16, 16
+TomeofDoom
+  xy: 64, 656
+  size: 16, 16
+SultaiGauntlet
+  xy: 80, 208
+  size: 16, 16
+MazeSkullbomb
+  xy: 80, 592
+  size: 16, 16
+PrayerbookofVigor
+  xy: 80, 704
+  size: 16, 16
+MarduGauntlet
+  xy: 96, 192
+  size: 16, 16
+JeskaiGauntlet
+  xy: 96, 208
+  size: 16, 16
+SurgicalSkullbomb
+  xy: 96, 320
+  size: 16, 16
+TriassicEgg
+  xy: 96, 544
+  size: 16, 16
+SinisterConcoction
+  xy: 96, 624
+  size: 16, 16
+TemptingApple
+  xy: 96, 640
+  size: 16, 16
+TomeofRemoval
+  xy: 96, 656
+  size: 16, 16
+NascentPrayerbook
+  xy: 96, 672
+  size: 16, 16
+LittleBlackBook
+  xy: 96, 688
+  size: 16, 16
+PrayerbookofReturn
+  xy: 96, 704
+  size: 16, 16
+SoulguideGauntlet
+  xy: 112, 272
+  size: 16, 16
+TomeofCleansing
+  xy: 112, 656
+  size: 16, 16
+PrayerbookofIre
+  xy: 112, 704
+  size: 16, 16
+LifesparkGauntlet
+  xy: 128, 224
+  size: 16, 16
+TomeofBinding
+  xy: 128, 656
+  size: 16, 16
+VolatilePrayerbook
+  xy: 128, 672
+  size: 16, 16
+VileSongbook
+  xy: 128, 688
+  size: 16, 16
+PrayerbookofFortunes
+  xy: 128, 704
+  size: 16, 16
+WeddingInvitation
+  xy: 128, 752
+  size: 16, 16
+DrossSkullbomb
+  xy: 144, 528
+  size: 16, 16
+MephiticDraught
+  xy: 144, 544
+  size: 16, 16
+TomeofMight
+  xy: 144, 656
+  size: 16, 16
+EphemeralPrayerbook
+  xy: 144, 672
+  size: 16, 16
+PrayerbookofFertility
+  xy: 144, 704
+  size: 16, 16
+Gourmand'sHat
+  xy: 0, 384
+  size: 16, 16
+OozeAmulet
+  xy: 0, 800
+  size: 16, 16
+MaskofCompulsion
+  xy: 16, 320
+  size: 16, 16
+BreachingStormcrown
+  xy: 16, 352
+  size: 16, 16
+MaskofNarcissism
+  xy: 16, 384
+  size: 16, 16
+AcornAmulet
+  xy: 16, 832
+  size: 16, 16
+AmuletofAeonsTorn
+  xy: 16, 880
+  size: 16, 16
+MaskofValgavoth
+  xy: 32, 368
+  size: 16, 16
+RoilingStormcrown
+  xy: 32, 384
+  size: 16, 16
+AmuletofAwakening
+  xy: 32, 816
+  size: 16, 16
+AmuletofTelepathy
+  xy: 32, 864
+  size: 16, 16
+PinnacleCirclet
+  xy: 48, 352
+  size: 16, 16
+Fblthp'sLostHat
+  xy: 64, 352
+  size: 16, 16
+Bonder'sHelm
+  xy: 64, 368
+  size: 16, 16
+AmuletofAnnihilation
+  xy: 64, 880
+  size: 16, 16
+Artist'sBeret
+  xy: 80, 336
+  size: 16, 16
+CorrodingStormcrown
+  xy: 80, 384
+  size: 16, 16
+Arguel'sAmulet
+  xy: 80, 832
+  size: 16, 16
+AmuletofFury
+  xy: 80, 864
+  size: 16, 16
+MaskofMortiphobia
+  xy: 96, 336
+  size: 16, 16
+MaskofPyromania
+  xy: 96, 352
+  size: 16, 16
+MaskofHypochondria
+  xy: 96, 384
+  size: 16, 16
+TeemingStormcrown
+  xy: 96, 400
+  size: 16, 16
+SkywiseTalisman
+  xy: 96, 784
+  size: 16, 16
+AmuletofMirth
+  xy: 96, 864
+  size: 16, 16
+WornCoin
+  xy: 112, 800
+  size: 16, 16
+AmuletofMischief
+  xy: 112, 864
+  size: 16, 16
+AmuletofScorn
+  xy: 112, 880
+  size: 16, 16
+FortuneTeller'sHat
+  xy: 128, 352
+  size: 16, 16
+CrownofWinter
+  xy: 128, 384
+  size: 16, 16
+Scavenger'sBandana
+  xy: 144, 304
+  size: 16, 16
+Caretaker'sCap
+  xy: 144, 336
+  size: 16, 16
+EncroachingStormcrown
+  xy: 144, 368
+  size: 16, 16
+AmuletofFavor
+  xy: 144, 816
+  size: 16, 16
+SilverskinGauntlet
+  xy: 128, 288
+  size: 16, 16
+BladedBracer
+  xy: 16, 288
+  size: 16, 16
+EchoShield
+  xy: 160, 160
+  size: 16, 16
+Sorcerer'sWand
+  xy: 160, 576
+  size: 16, 16
+CelestialSword
+  xy: 160, 672
+  size: 16, 16
+AegisoftheMeek
+  xy: 176, 656
+  size: 16, 16
+RunedStalactite
+  xy: 192, 416
+  size: 16, 16
+SwordoftheUr-Dragon
+  xy: 192, 672
+  size: 16, 16
+Tawnos'sWand
+  xy: 208, 576
+  size: 16, 16
+SpyKit
+  xy: 208, 832
+  size: 16, 16
+ShieldoftheRighteous
+  xy: 224, 192
+  size: 16, 16
+ShortSword
+  xy: 224, 640
+  size: 16, 16
+DarksteelAxe
+  xy: 240, 240
+  size: 16, 16
+SteelclawLance
+  xy: 240, 544
+  size: 16, 16
+StarforgedSword
+  xy: 240, 704
+  size: 16, 16
+KorHalberd
+  xy: 256, 288
+  size: 16, 16
+TrustyMachete
+  xy: 256, 336
+  size: 16, 16
+CeremonialKnife
+  xy: 256, 352
+  size: 16, 16
+BlightSickle
+  xy: 256, 368
+  size: 16, 16
+GoldveinPick
+  xy: 256, 432
+  size: 16, 16
+EnormousEnergyBlade
+  xy: 256, 704
+  size: 16, 16
+AngelicArmaments
+  xy: 272, 368
+  size: 16, 16
+Brawler'sCestus
+  xy: 288, 320
+  size: 16, 16
+ShieldofKaldra
+  xy: 288, 128
+  size: 16, 16
+JoustingLance
+  xy: 304, 528
+  size: 16, 16
+Fblthp'sLostFishingPole
+  xy: 304, 576
+  size: 16, 16
+RamosianGreatsword
+  xy: 304, 720
+  size: 16, 16
+RingofXathrid
+  xy: 48, 976
+  size: 16, 16
+HoversailGlove
+  xy: 64, 256
+  size: 16, 16
+PetrifiedHead
+  xy: 64, 576
+  size: 16, 16
+BespokeGauntlet
+  xy: 80, 288
+  size: 16, 16
+DragonBlood
+  xy: 80, 528
+  size: 16, 16
+RingofThune
+  xy: 80, 912
+  size: 16, 16
+RingofValkas
+  xy: 80, 992
+  size: 16, 16
+PirateHatinHand
+  xy: 96, 368
+  size: 16, 16
+Witches'Eye
+  xy: 96, 512
+  size: 16, 16
+DraconianCylix
+  xy: 96, 720
+  size: 16, 16
+AdventuringGear
+  xy: 112, 624
+  size: 16, 16
+RingofKalonia
+  xy: 112, 896
+  size: 16, 16
+RingofEvosIsle
+  xy: 112, 944
+  size: 16, 16
+SirenSongLyre
+  xy: 128, 640
+  size: 16, 16
+SpidersilkGlove
+  xy: 144, 256
+  size: 16, 16
+Wolfhunter'sQuiver
+  xy: 144, 560
+  size: 16, 16
+StriderReins
+  xy: 144, 576
+  size: 16, 16
+ManasightStone
+  xy: 16, 528
+  size: 16, 16
+StaffofSpeed
+  xy: 240, 576
+  size: 16, 16
+StaffofFlight
+  xy: 288, 592
+  size: 16, 16
+StaffofHealing
+  xy: 304, 560
+  size: 16, 16
+StaffofInvisibility
+  xy: 272, 576
+  size: 16, 16
+StaffofDestruction
+  xy: 288, 560
+  size: 16, 16
+BronzeBlessing
+  xy: 224, 832
+  size: 16, 16
+SilverBlessing
+  xy: 240, 832
+  size: 16, 16
+GoldBlessing
+  xy: 256, 832
+  size: 16, 16
+TruthButcher'sArmor
+  xy: 0, 304
+  size: 16, 16
+FlamingArmor
+  xy: 160, 16
+  size: 16, 16
+ArmorofRamunap
+  xy: 160, 80
+  size: 16, 16
+CrucibleArmor
+  xy: 160, 112
+  size: 16, 16
+RestrictedRobes
+  xy: 176, 16
+  size: 16, 16
+BlessedArmor
+  xy: 176, 64
+  size: 16, 16
+NomadArmor
+  xy: 192, 48
+  size: 16, 16
+ForbiddenRobes
+  xy: 192, 80
+  size: 16, 16
+CabalArmor
+  xy: 256, 96
+  size: 16, 16
+ArmorofIfnit
+  xy: 192, 96
+  size: 16, 16
+CrystallineArmor
+  xy: 208, 32
+  size: 16, 16
+CentaurArmor
+  xy: 208, 48
+  size: 16, 16
+Oracle'sRobes
+  xy: 208, 64
+  size: 16, 16
+NivixVest
+  xy: 208, 80
+  size: 16, 16
+Rancher'sGarb
+  xy: 208, 112
+  size: 16, 16
+SteelArmor
+  xy: 224, 0
+  size: 16, 16
+ArmorofIpnu
+  xy: 224, 64
+  size: 16, 16
+DivinelyBlessedArmor
+  xy: 224, 96
+  size: 16, 16
+HeavyArmor
+  xy: 240, 16
+  size: 16, 16
+UltraHeavyArmor
+  xy: 240, 80
+  size: 16, 16
+ArmoroftheFirst
+  xy: 240, 112
+  size: 16, 16
+BarbarianArmor
+  xy: 256, 16
+  size: 16, 16
+ScraplingShoes
+  xy: 96, 160
+  size: 16, 16
+BlazingArmor
+  xy: 256, 48
+  size: 16, 16
+Librarian'sRobes
+  xy: 256, 64
+  size: 16, 16
+SanctuaryArmor
+  xy: 256, 80
+  size: 16, 16
+GlacialArmor
+  xy: 256, 112
+  size: 16, 16
+NestWarden'sArmor
+  xy: 272, 48
+  size: 16, 16
+Fblthp'sLostShirt
+  xy: 272, 64
+  size: 16, 16
+ArmorofUrami
+  xy: 272, 112
+  size: 16, 16
+MithrilArmor
+  xy: 288, 16
+  size: 16, 16
+PhelddagrifPlate
+  xy: 288, 32
+  size: 16, 16
+Parun'sArmor
+  xy: 288, 96
+  size: 16, 16
+CephalidArmor
+  xy: 304, 64
+  size: 16, 16
+OpalCloak
+  xy: 336, 16
+  size: 16, 16
+CloakofPrahv
+  xy: 352, 32
+  size: 16, 16
+CloakofSvogthos
+  xy: 368, 16
+  size: 16, 16
+Vitu-GhaziCloak
+  xy: 384, 0
+  size: 16, 16
+PinecrestCloak
+  xy: 384, 16
+  size: 16, 16
+ReliquaryRobes
+  xy: 400, 0
+  size: 16, 16
+MantleofDusk
+  xy: 432, 16
+  size: 16, 16
+CloakofOrzhova
+  xy: 64, 16
+  size: 16, 16
+TranquilCloak
+  xy: 64, 32
+  size: 16, 16
+NovijenCloak
+  xy: 64, 80
+  size: 16, 16
+Explorer'sCloak
+  xy: 80, 0
+  size: 16, 16
+Witch'sCloak
+  xy: 80, 32
+  size: 16, 16
+CloudcrestCloak
+  xy: 80, 80
+  size: 16, 16
+GrandSage'sRobes
+  xy: 96, 0
+  size: 16, 16
+SeraphimWings
+  xy: 96, 32
+  size: 16, 16
+Lantern-LitCloak
+  xy: 96, 48
+  size: 16, 16
+SunhomeCloak
+  xy: 112, 16
+  size: 16, 16
+Student'sRobes
+  xy: 112, 32
+  size: 16, 16
+Commander'sRobes
+  xy: 112, 80
+  size: 16, 16
+Sage'sRobes
+  xy: 128, 0
+  size: 16, 16
+SkarggCloak
+  xy: 128, 16
+  size: 16, 16
+DiamondBelt
+  xy: 128, 336
+  size: 16, 16
+WaterveilCloak
+  xy: 128, 80
+  size: 16, 16
+RixMaadiCloak
+  xy: 144, 48
+  size: 16, 16
+Pilgrim'sCloak
+  xy: 96, 16
+  size: 16, 16
+items.png
+size: 480,1008
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none      
+c
+  xy: 368,80
+  size: 16, 16
+b
+  xy: 384,80
+  size: 16, 16
+r
+  xy: 368,96
+  size: 16, 16
+g
+  xy: 384,96
+  size: 16, 16
+u
+  xy: 368,112
+  size: 16, 16
+w
+  xy: 384,112
+  size: 16, 16    
+CardBack 
+  xy: 0, 0
+  size: 48, 64
+Gold 
+  xy: 48, 0
+  size: 16, 16    
+Shards
+  xy: 32, 768
+  size: 16, 16    
+Life 
+  xy: 48, 16
+  size: 16, 16            
+Mana 
+  xy: 48, 32
+  size: 16, 16        
+Deck 
+  xy: 48, 48
+  size: 16, 16  
+ExitToWorldMap 
+  xy: 48, 64
+  size: 16, 16
+MovementSpeed 
+  xy: 48, 80
+  size: 16, 16
+VS
+  xy: 208, 928
+  size: 16, 16
+AWARD
+  xy: 144, 496
+  size: 16, 16
+Item 
+  xy: 0, 64
+  size: 16, 16  
+Refresh 
+  xy: 0, 80
+  size: 16, 16  
+Status 
+  xy: 16, 64
+  size: 16, 16  
+Exit 
+  xy: 16, 80
+  size: 16, 16  
+Menu 
+  xy: 32, 64
+  size: 16, 16  
+OK 
+  xy: 32, 80
+  size: 16, 16  
+Agent
+  xy: 368, 64
+  size: 16, 16  
+Pull
+  xy: 384, 129
+  size: 16, 16  
+CursedTreasure
+  xy: 336, 64
+  size: 16, 16  
+PipersCharm
+  xy: 240, 976
+  size: 16, 16  
+HillGiantClub
+  xy: 192, 576
+  size: 16, 16  
+SleepWand
+  xy: 304, 544
+  size: 16, 16  
+FarmersTools
+  xy: 288, 976
+  size: 16, 16
+PhoenixCharm
+  xy: 320, 160
+  size: 16, 16  
+ChandrasTome
+  xy: 240, 816
+  size: 16, 16  
+DemonicContract
+  xy: 208, 832
+  size: 16, 16  
+SolRing
+  xy: 320, 144
+  size: 16, 16          
+BlackLotus
+  xy: 320, 128
+  size: 16, 16
+MoxEmerald
+  xy: 320, 0
+  size: 16, 16
+MoxJet
+  xy: 320, 16
+  size: 16, 16
+MoxRuby
+  xy: 320, 32
+  size: 16, 16
+LightBoots
+  xy: 144, 464
+  size: 16, 16
+MoxSapphire
+  xy: 320, 48
+  size: 16, 16
+MoxPearl
+  xy: 320, 64
+  size: 16, 16
+Hivestone
+  xy: 144, 720
+  size: 16, 16
+BattleStandard
+  xy: 96, 592
+  size: 16, 16 
+HiveLordArmor
+  xy: 112, 0
+  size: 16, 16 
+LifeAmulet
+  xy: 0, 864
+  size: 16, 16       
+RedKey
+  xy: 176, 992
+  size: 16, 16             
+BlueKey
+  xy: 192, 992
+  size: 16, 16   
+GreenKey
+  xy: 208, 992
+  size: 16, 16   
+BlackKey
+  xy: 240, 992
+  size: 16, 16       
+StrangeKey
+  xy: 224, 992
+  size: 16, 16   
+WhiteKey
+  xy: 272, 992
+  size: 16, 16
+GoldKey
+  xy: 304, 992
+  size: 16, 16 
+SteelArmor
+  xy: 176, 64
+  size: 16, 16     
+SteelShield
+  xy: 272, 208
+  size: 16, 16
+SteelSword
+  xy: 272, 752
+  size: 16, 16
+IronArmor
+  xy: 224, 0
+  size: 16, 16     
+IronShield
+  xy: 256, 144
+  size: 16, 16
+IronBoots
+  xy: 48, 160
+  size: 16, 16
+BronzeSword
+  xy: 256, 720
+  size: 16, 16
+SteelAxt
+  xy: 160, 272
+  size: 16, 16     
+LeatherBoots
+  xy: 0, 96
+  size: 16, 16       
+JungleShield
+  xy: 240, 128
+  size: 16, 16       
+Dagger
+  xy: 288, 352
+  size: 16, 16
+Goose              
+  xy: 144, 624
+  size: 16, 16
+SpellBook
+  xy: 144, 688
+  size: 16, 16       
+Nine-RingedBo
+  xy: 272, 608
+  size: 16, 16   
+MithrilShield
+  xy: 224, 176
+  size: 16, 16       
+MithrilBoots
+  xy: 96, 176
+  size: 16, 16      
+AladdinsRing
+  xy: 112, 992
+  size: 16, 16         
+CursedRing
+  xy: 80, 928
+  size: 16, 16
+FlameSword
+  xy: 288, 656
+  size: 16, 16
+DeathRing
+  xy: 32, 944
+  size: 16, 16
+MirrorShield
+  xy: 256, 208
+  size: 16, 16
+AladdinsLamp
+  xy: 128, 528
+  size: 16, 16
+WoodBow
+  xy: 176, 464
+  size: 16, 16
+CompositeBow
+  xy: 224, 480
+  size: 16, 16
+Sandals
+  xy: 16, 112
+  size: 16, 16
+GoldBoots
+  xy: 64, 176
+  size: 16, 16
+GoldArmor
+  xy: 288, 96
+  size: 16, 16
+GoldShield
+  xy: 272, 144
+  size: 16, 16
+DarkBoots
+  xy: 32, 176
+  size: 16, 16
+DarkArmor
+  xy: 272, 112
+  size: 16, 16
+DarkShield
+  xy: 288, 160
+  size: 16, 16
+MadStaff
+  xy: 304, 608
+  size: 16, 16
+Clue
+  xy: 144, 976
+  size: 16, 16
+Blood
+  xy: 80, 528
+  size: 16, 16
+Cheese
+  xy: 80, 768
+  size: 16, 16
+GoldStack
+  xy: 208, 816
+  size: 16, 16
+Treasure
+  xy: 48, 768
+  size: 16, 16
+Shard
+  xy: 16, 608
+  size: 16, 16
+DarkAmulet
+  xy: 80, 816
+  size: 16, 16
+PandorasBox
+  xy: 320, 80
+  size: 16, 16
+DisruptingScepter
+  xy: 208, 576
+  size: 16, 16
+EntrancingLyre
+  xy: 128, 640
+  size: 16, 16
+HeavyArbalest
+  xy: 288, 448
+  size: 16, 16
+RingofThreeWishes
+  xy: 320, 96
+  size: 16, 16
+TheBlackstaffofWaterdeep
+  xy: 320, 112
+  size: 16, 16
+UnerringSling
+  xy: 176, 448
+  size: 16, 16
+JeweledAmulet
+  xy: 80, 848
+  size: 16, 16
+TravelersAmulet
+  xy: 144, 864
+  size: 16, 16
+RelicAmulet
+  xy: 144, 800
+  size: 16, 16
+SorinAmulet
+  xy: 96, 800
+  size: 16, 16
+AmuletofKroog
+  xy: 128, 864
+  size: 16, 16
+AmuletofVigor
+  xy: 64, 848
+  size: 16, 16
+VeilstoneAmulet
+  xy: 48, 864
+  size: 16, 16
+JandorsRing
+  xy: 128, 976
+  size: 16, 16
+JinxedRing
+  xy: 48, 976
+  size: 16, 16
+ShellWand
+  xy: 224, 624
+  size: 16, 16
+RingofImmortals
+  xy: 48, 992
+  size: 16, 16
+PrismRing
+  xy: 16, 896
+  size: 16, 16
+RingofRenewal
+  xy: 16, 992
+  size: 16, 16
+KiteShield
+  xy: 272, 192
+  size: 16, 16      
+DungeonMap
+  xy: 176, 848
+  size: 16, 16
+FortuneCoin
+  xy: 336,64
+  size: 16, 16
+SpiritGuard
+  xy: 192,160
+  size: 16, 16
+MulticolorRune
+  xy: 352,64
+  size: 16, 16
+MirrorRune
+  xy: 160, 896
+  size: 16, 16
+ColorlessRune
+  xy: 336,80
+  size: 16, 16
+BlackRune
+  xy: 352,80
+  size: 16, 16
+RedRune
+  xy: 336,96
+  size: 16, 16
+GreenRune
+  xy: 352,96
+  size: 16, 16
+BlueRune
+  xy: 336,112
+  size: 16, 16
+WhiteRune
+  xy: 352,112
+  size: 16, 16
+BlackStaff
+  xy: 352,128
+  size: 16, 16
+RedStaff
+  xy: 336,144 
+  size: 16, 16
+GreenStaff
+  xy: 352,144
+  size: 16, 16
+BlueStaff
+  xy: 336,160
+  size: 16, 16
+WhiteStaff
+  xy: 352,160
+  size: 16, 16
+BlueStaff
+  xy: 336,160
+  size: 16, 16
+DeathMagusStaff
+  xy: 176,608
+  size: 16, 16
+SunMagusStaff
+  xy: 304,560
+  size: 16, 16
+WildMagusStaff
+  xy: 192,560
+  size: 16, 16
+FireMagusStaff
+  xy: 240,560
+  size: 16, 16
+MindMagusStaff
+  xy: 208,560
+  size: 16, 16
+GarrukAxe
+  xy: 304,272
+  size: 16, 16
+BlueRobes
+  xy: 272,64
+  size: 16, 16
+Armory
+  xy: 128,512
+  size: 16, 16
+PresenceoftheHydra
+  xy: 288,928
+  size: 16, 16
+HorseHoove
+  xy: 80,496
+  size: 16, 16
+PirateFlag
+  xy: 0,496
+  size: 16, 16
+Scythe
+  xy: 288,976
+  size: 16, 16
+ChickenEgg
+  xy: 304,800
+  size: 16, 16
+ChallengeCoin
+  xy: 32,512
+  size: 16, 16
+SilverChallengeCoin
+  xy: 400,80
+  size: 16, 16
+BronzeChallengeCoin
+  xy: 400,96
+  size: 16, 16
+MetallicBoots
+  xy: 80,144
+  size: 16, 16
+BrownHat
+  xy: 80,336
+  size: 16, 16
+FrogSkin
+  xy: 111,495
+  size: 18, 18
+BurningBook
+  xy: 239,815
+  size: 18, 18
+GreenLeaf
+  xy: 48, 496
+  size: 16, 16
+GreenLeaf2
+  xy: 112, 608
+  size: 16, 16
+Dot
+  xy: 464, 48
+  size: 16, 16
+GoldCoin
+  xy: 464, 63
+  size: 16, 16
+Sell
+  xy: 464, 79
+  size: 16, 16
+Magnifier
+  xy: 448, 63
+  size: 16, 16
+Bookmark
+  xy: 432, 63
+  size: 16, 16
+Unmark
+  xy: 416, 63
+  size: 16, 16
+SearchPost
+  xy: 384, 63
+  size: 16, 16
+Flip
+  xy: 400, 63
+  size: 16, 16
+LogBook
+  xy: 240, 912
+  size: 16, 16
+GPS
+  xy: 464, 0
+  size: 16, 16
+Star
+  xy: 464, 16
+  size: 16, 16
+TreasureChest
+  xy: 464, 32
+  size: 16, 16
+ToolBox
+  xy: 448, 79
+  size: 16, 16
+UnderworldCookbook
+  xy: 304, 960
+  size: 16, 16
+Conjurer's Mantle
+  xy: 144, 448
+  size: 16, 16
+ZedruuLantern
+  xy: 336, 128
+  size: 16, 16
+CartoucheOfSolidarity
+  xy:320,176
+  size:16,16
+CartoucheOfKnowledge
+  xy:320,192
+  size:16,16
+CartoucheOfStrength
+  xy:320,208
+  size:16,16
+CartoucheOfAmbition
+  xy:320,224
+  size:16,16
+CartoucheOfZeal
+  xy:320,240
+  size:16,16
+HallowedSigil
+  xy:320,256
+  size:16,16
+UnhallowedSigil
+  xy:320,272
+  size:16,16
+SirDonovansAmulet
+  xy:112,880
+  size:16,16
+LandscapeSketchbook
+  xy:80,672
+  size:16,16

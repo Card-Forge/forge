@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="140">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Castle Sengir&quot;, &quot;Sengir Vampire&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_2.tsx"/>
+ <tileset firstgid="36241" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="1" name="Background" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztz8ENQDAYgNH/6tRugFGxQ7fBarqBSkgTeYd3/74yRBQAAADgsSVFrA221L/1DWOOmBrMuX+rX7939vpxNDh/8gsAAADAdy53PcYI
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmV8OwiAMxvu6uJ1AvYyaHULPop5C7+K/F/VgYpQEm7G1rExo9iXfAwkgP7fSMuoCoDaelbpdF7/+93py4N1UAOfS73X12w+3pce5fWPwzo3bNEX9cFt6nNv3H7yn739+KZvb2nhDlSvvdgKwM95PmtvaeLXF7638PC+fr551c8dR4z42L/c98K1Fcn+IyUvJh037MzWHWl5q3Mfmfa/nfgB4GD8P/Gfhyp0n1fh9//7iCLA0Xh378brzpMx7N+t7GD978rrzDMFLjcWm+JJWTN6QvZDz+yHy8XblMTeXaeDtY8uLcwZFnPwfIjw/hRefHX28OYjC2/UuWN4dI5dbcfJ/iPD8krzWOcRvWw7pevdz5JXMv5S93nd+ic2byvloqPqZIw31c1Lno0zr5xBeaszj71fc/UGynszh+4ZkPTnE/QInj/YZN94vDMs73i/QlHK90Sap+wWONNwvpFJvUO8JbD/clh6XSv5NwSOvbo+8um05X/E0w2c=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="60" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt1z9OAkEUBvBnoIAECgoTGpDGijPYiI0XEIkVV7A2JCB4AoaEwmVKLkEDHMJrEKJQ8ghuWJON7KxvXGbz/ZIvM9kss++xsH+IAORNL8Nz7ubl8IisrYgWnKX6uX2lD+Pz97jWMseLVFPMfqOc39sRUYNzN7JTexxWzy/3ueAsA/1+aqIv/fv8HLn6/917KBE1A3ksJV0RAEC4+7zMOjdDmXXSxNX7b1yvHlGfM+BkJkRZzhvPu5yel0xNH/XoAbueiklX8L/auaQrkHN9cXqfWcF+HZAuuD4DuEPqfeFlLLMOANj1zu/23vA4muo49txfUURVdRz3Jty3Nuy9FZi78h2M1SFXnJo6vX8a+D1HtbFXSiym91KTXn3+73dr/lFxeHYAAPibHazIenA=
+  </data>
+ </layer>
+ <layer id="8" name="Clutter" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmUtOwzAURb2AdMwnwzbsgo3AEmAIFQPEiA2QT0UbBpaasAo6QSwJUIc8Kw1pEtsNtfPsUB/pyq4TOb5+/sklxOFQ5/FIX113tEinm/SW6qvbJOdxoY+kKiv7zU+qlElnf5qi9MvEGEeETEDjEFJQENbz7FkQmW2zCk2/S/CSgZbgLQPlYT3PnuUD9ivDT9plz2n/32XzhnptmZhPxy/43zQJRnz/yv28LV3YGF+eP1a2iirtC0Z8eXukDFE8m2vxPmDEV0c7m/WIxroN++9vfGd66mn227Z3W/Zf1dgyus5f3WvcEOhjbVfhyusuFZxfM2D4vfYK2TCusfymT/rarALWeHYMBx1nNAz6OE/azKH5fZ/153e1Wc/eDmRduxwV6cXIbDsc/fFgWWzLe8gM5l0Oeo3reQxM9MkkISQAnSX1fFduKL98LXhfVG4K3n24jE/KL2/Gbtfv/4LM17rDO7rYvmv4ooR8U/79gyzeJzDPT0F+LP9fAtOXiOlCrK7MwecClFp+tnI4HA5MfgD2btEJ
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="65" template="../../../../common/maps/obj/door_down.tx" x="816.832" y="303.333">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/evilgrove/Castle_Sengir_2.tmx"/>
+    <property name="teleportObjectId" value="67"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/entry_left.tx" x="3.66667" y="305"/>
+  <object id="80" template="../../../../common/maps/obj/manashards.tx" x="532" y="517.333"/>
+  <object id="93" template="../../../../common/maps/obj/enemy.tx" x="640.833" y="412">
+   <properties>
+    <property name="enemy" value="Rodolf"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="107" template="../../../../common/maps/obj/enemy.tx" x="416.333" y="99.6667">
+   <properties>
+    <property name="enemy" value="Garza Zol"/>
+    <property name="speedModifier" type="float" value="60"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="108" template="../../../../common/maps/obj/enemy.tx" x="415.667" y="512.333">
+   <properties>
+    <property name="enemy" value="Ascendant Evincar"/>
+    <property name="speedModifier" type="float" value="60"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="109" template="../../../../common/maps/obj/enemy.tx" x="229" y="307">
+   <properties>
+    <property name="enemy" value="Shauku"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="118" template="../../../../common/maps/obj/enemy.tx" x="608.5" y="306.333">
+   <properties>
+    <property name="enemy" value="Grandmother Sengir"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="119" template="../../../../common/maps/obj/dialog.tx" x="191.333" y="314.75" width="32" height="32" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The castle ahead is clearly ancient. The scents of blood and dust mingle to give a feeling of old death and thorough discomfort. Glowing vampiric eyes stare out at you from the darkness ahead, and you could have sworn you saw the flash of fangs.
+
+Your manasight stone glows, sensing the power of the legends here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="124" template="../../../../common/maps/obj/manashards.tx" x="258" y="514.667"/>
+  <object id="125" template="../../../../common/maps/obj/gold.tx" x="415.5" y="548"/>
+  <object id="127" template="../../obj/treasure.tx" x="580.5" y="96.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 6,
+    &quot;colors&quot;: [ &quot;black&quot; ],
+    &quot;subType&quot;: [ &quot;Vampire&quot;],
+    &quot;rarity&quot;: [ &quot;uncommon&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="128" template="../../obj/treasure.tx" x="816.5" y="516">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;black&quot; ],
+    &quot;subType&quot;: [ &quot;Vampire&quot;],
+    &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="131" template="../../../../common/maps/obj/scroll.tx" x="791.5" y="155">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Sengir Vampire&quot;, &quot;editions&quot;: [ &quot;LEA&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="132" template="../../../../common/maps/obj/dialog.tx" x="572.615" y="312.548" width="32" height="32" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A distinctly withered woman stands before you - seemingly not a vampire, though becoming one would probably only improve her appearance.
+
+'Come, dearie. Let granny show you what old magic can do.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="133" template="../../../../common/maps/obj/collision.tx" x="546.75" y="177.75" width="43.0363" height="43.4571"/>
+  <object id="134" template="../../../../common/maps/obj/collision.tx" x="546.482" y="368.771" width="43.0363" height="43.4571"/>
+  <object id="135" template="../../../../common/maps/obj/collision.tx" x="258.482" y="367.771" width="43.0363" height="43.4571"/>
+  <object id="136" template="../../../../common/maps/obj/collision.tx" x="258.232" y="178.021" width="43.0363" height="43.4571"/>
+  <object id="137" template="../../../../common/maps/obj/collision.tx" x="625.982" y="50.5215" width="43.0363" height="43.4571"/>
+  <object id="138" template="../../../../common/maps/obj/collision.tx" x="336.482" y="337.271" width="173.536" height="13.4571"/>
+  <object id="139" template="../../../../common/maps/obj/collision.tx" x="337.732" y="241.771" width="173.536" height="13.4571"/>
+ </objectgroup>
+</map>

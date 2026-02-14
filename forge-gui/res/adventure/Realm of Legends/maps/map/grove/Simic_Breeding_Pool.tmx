@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="85">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Combine Guildmage&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzr42Rg6BuE+BgrBNPLvgXsEAyzF8QmVS+5evBhbOFCjDpK7ISFAzH6qG0vKXgg7BxIe/HZPWovfeydP8LsJSasyY0PcssOSssbWpbr2OwnRS+9MABXCD7o
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy9VT1LA0EQ3dxZnCf5CzaipBCFWCalnUSM2sREa5ukMrZ2IoJioY1/xPwH8SPprSWJiKIQkxBwHrvD7e3tSvDrwSNkd2fe7NzMTjsQop4WohYKsUe/42KOzrfJdndKiKdgfDuAddj+eDK+XyXfZV+ICvGQ9ope0scRrT8auvvpuH8bcE+OPxNG69DbITaIV0rb5gcxZ7RcIdZtZQubWhg/Xzd8vNJdnokXyubDj+/36P+0YsXY4zixt5yKbEd+lKNOIL9H1Yjj3Jeaq3l3bhgPKanNsZctcZq6yAe+ZTdI1sOQzt06dO+ySe23QNKmCRRyUW5QB9BlAqgDPeaVpa/v68K1YXeTk3dmcA/odTd0xPxT9Cz10Nby/Fe6gH5ns77/S1fvI8TwG7rNrH19ZPjWewm6a45a/m6duXSBmTDSvf+id0u0fzkhxNYYeSlSHa+D1LsbxIFhw70M4EzJS/o9SMneb8zL/CwQFxWxhlhMNEmzRXzx5Duog/sYvYQ7n5LeGbHvS+1CPtLkuDe9+Butr+NcKxtfPyE/7xZdvOfQxjzR67uvcjqwvOsmuqoXUadsx7Ym4ItnF3Rd88qcHYyOenNmw+QMNMG+cZ5nHr7XJ+hUdkg=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzdlUFOwzAQRYf4BpB1L0C5QZewLgWq0kPVRQLu0lvASSBBlG6ZkfPVYRibJrDiS19RJrafPXY88YRozYYWFdEqEL3wcx2SH3pa+tyFNF5U76/HRA27ZY9rorM68W7Zc/YHe1fRj5pVyTbmtROteH1RrXOheLJOmfNjGMbNtROd1vt1irYcbztmiTcKyaXv50c+00pyfR/2a5xeJP+VNFfvr+Qa38D02EPmgj7e/iLXXvvSPEqcHFfv7yHn4rcqnfH/yj7kPx+q0jmwnCt+X7KnE6LLSX68PmwrYVyzbxQ7dnfnEzOfM9w+TG3w5t299ObkFuv2JDnajL/Hbcz+f426B21tgKKqIXoMYXp5wlwRl3bog7jUtffq67i4O3BviVCTlt0YOAtNJk82bvNqmSLcHbouYZydqjOoxx53q7jSHv3bzDy1PgFDJXWK
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="280.333" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="49" template="../../../../common/maps/obj/gold.tx" x="361.065" y="62.2689"/>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="126.075" y="149.792">
+   <properties>
+    <property name="enemy" value="Roalesk"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="60,59"/>
+   </properties>
+  </object>
+  <object id="53" template="../../../../common/maps/obj/enemy.tx" x="133.432" y="75.105">
+   <properties>
+    <property name="enemy" value="Vannifar"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="54" template="../../../../common/maps/obj/enemy.tx" x="295.238" y="150.857">
+   <properties>
+    <property name="enemy" value="The Pride of Hull Clade"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="58,57"/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../common/maps/obj/manashards.tx" x="134.677" y="47.683"/>
+  <object id="57" template="../../../../common/maps/obj/waypoint.tx" x="49.1023" y="150.224"/>
+  <object id="58" template="../../../../common/maps/obj/waypoint.tx" x="225.688" y="151.218"/>
+  <object id="59" template="../../../../common/maps/obj/waypoint.tx" x="370.047" y="144.525"/>
+  <object id="60" template="../../../../common/maps/obj/waypoint.tx" x="195.713" y="150.47"/>
+  <object id="61" template="../../../../common/maps/obj/enemy.tx" x="247.943" y="65.8219">
+   <properties>
+    <property name="enemy" value="Prime Speaker Zegana"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="62" template="../../../../common/maps/obj/enemy.tx" x="341.5" y="92.5">
+   <properties>
+    <property name="enemy" value="Momir Vig"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="63" template="../../../../common/maps/obj/gold.tx" x="380.5" y="185.5"/>
+  <object id="64" template="../../../../common/maps/obj/manashards.tx" x="72" y="226"/>
+  <object id="65" template="../../../../common/maps/obj/enemy.tx" x="355.5" y="176">
+   <properties>
+    <property name="enemy" value="Lonis"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="66" template="../../../../common/maps/obj/enemy.tx" x="95.5" y="203">
+   <properties>
+    <property name="enemy" value="Vorel"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/treasure.tx" x="276.5" y="35">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;DIS&quot;, &quot;GTC&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;blue&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DIS&quot;, &quot;GTC&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;blue&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DIS&quot;, &quot;GTC&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;blue&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/treasure.tx" x="213.5" y="35.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;DIS&quot;, &quot;GTC&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;blue&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DIS&quot;, &quot;GTC&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;blue&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DIS&quot;, &quot;GTC&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;blue&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/scroll.tx" x="342.5" y="61">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Simic Charm&quot;, &quot;editions&quot;: [ &quot;GTC&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/scroll.tx" x="106.5" y="60">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Simic Growth Chamber&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/dialog.tx" x="238.5" y="93.625" width="36" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The merfolk woman in front of you gives you a disdainful look as she readies her trident.
+
+'This area is off-limits. Just you being here has tainted the data for multiple highly sensitive experiments. Let's hope your corpse is useful enough to justify your trespass.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/dialog.tx" x="183.083" y="229.061" width="65.8333" height="22.5455" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The pool ahead smells of chemicals, strange plants growing thick below the surface. Oddly-shaped silhouettes swim about, like no other creatures you've ever seen before. Prominent signage informs you that this is the territory of Ravnica's Simic Combine.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/collision.tx" x="36.206" y="175.583" width="27.088" height="29.8333"/>
+  <object id="74" template="../../../../common/maps/obj/collision.tx" x="63.456" y="73.0833" width="15.588" height="20.3333"/>
+  <object id="75" template="../../../../common/maps/obj/collision.tx" x="81.956" y="94.0833" width="13.088" height="16.8333"/>
+  <object id="76" template="../../../../common/maps/obj/collision.tx" x="145.456" y="174.083" width="13.088" height="16.8333"/>
+  <object id="77" template="../../../../common/maps/obj/collision.tx" x="97.456" y="228.583" width="13.088" height="12.8333"/>
+  <object id="78" template="../../../../common/maps/obj/collision.tx" x="162.456" y="81.0833" width="13.088" height="13.3333"/>
+  <object id="79" template="../../../../common/maps/obj/collision.tx" x="306.456" y="225.083" width="13.088" height="13.8333"/>
+  <object id="80" template="../../../../common/maps/obj/collision.tx" x="336.456" y="195.083" width="30.088" height="24.8333"/>
+  <object id="81" template="../../../../common/maps/obj/collision.tx" x="368.956" y="87.0833" width="13.088" height="24.8333"/>
+  <object id="82" template="../../../../common/maps/obj/collision.tx" x="305.456" y="94.5833" width="13.088" height="16.8333"/>
+  <object id="83" template="../../../../common/maps/obj/collision.tx" x="304.956" y="161.583" width="13.088" height="11.3333"/>
+  <object id="84" template="../../../../common/maps/obj/scroll.tx" x="275.5" y="53.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Breeding Pool&quot;, &quot;editions&quot;: [ &quot;DIS&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

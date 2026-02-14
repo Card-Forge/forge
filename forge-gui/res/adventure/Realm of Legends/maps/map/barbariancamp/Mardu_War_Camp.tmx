@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="127">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Mardu Devotee&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="40" height="26">
+  <data encoding="base64" compression="zlib">
+   eJzN1lEKwjAMBuDCpmP38Cy9gQ89ieApPJkw8Ba7g0jBh9Il6Z80lAl5mHTma5K6pTWEZIz3fAxkDbWWu78nNHlba719VK64HnNTXnRvXERFrSifVA/Kr/Vxv4k693/k9fss+7jvkJrVPdHUsjVznI8zSj7rOUF86AxGB6vUt9bctc6L5Msfi4+aD03fpf729Nvq4/YXB/tqZ2sOPS3a+nHrymuqfiN86P0jfeX1Azx3iM97HrPN0+cZGpvGd7+M24Olf2fzbdM5fGfvL+rL587TiP4Pas6v5LO+A7+WEG5Xm6/Ol32WZzwSnLHlk56fz4D5vovdlwAflVtTq16f1FtNPz+TLkdpo3w/PdHxqw==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="40" height="26">
+  <data encoding="base64" compression="zlib">
+   eJz7x8nAcI5lYDAIILNBYD8HA8N/oJsYuBgY4jgheKDchuw+ZAxy0yGgO/8A6dcDFHZY3cyFYCdw4nb/QOBYaDzCwg09/vHho1jSwGAKd6LjhwrxgQyo7T5qhSkt3TgS3AcrA/8PYNmMN/wGuGwmBg929w0FPFjzx1Bx3ygexaN4FJOLV7JB6BxWCB5o96DjZayo+Cwd7f7HjoqRwwfdXQPhPvRwArkRl7sGg/sIYX2oWuQ2KQgAAAtcOz8=
+  </data>
+ </layer>
+ <layer id="7" name="Mountain Walls" width="40" height="26">
+  <data encoding="base64" compression="zlib">
+   eJzNljtOw0AQhtchrwZoSKykoUXAAWi5BhI3oEBU4SUKWjpQLsAFImKILwGpaCgpaRGUiIzsX55MZh92KBjpl2F3vPP530c2joyJPXqp6zqoZZL5GzM9CnUC6pQV6hALD/qf2oktYfV5/rkpdGGKvCq8NJ723U+RCY4kzwdPLyrUj7I2qRBOPl8Y3xbPLTcj2EiTqFCaM3IhL/Ewcj7Odre1WP9w183XY/VTjzhnN5APIdcbYsr82xM58Az1MY4U9xScZfgkK4+Tht1DzJcrOCP30jXHNr77FU8xS22K2/ZiP9+/fD3x/bJTt/PJOvuKh+TfsiHXO3FhLRKfZLTxaXNclc82R+DDPMfR/+TDeuwoHrr4JKPku15djlfydZmHYPTx8T7JV8v30E07ky3Sps4o+ejv0P2B913zXTUuLXx9xuPiSyO3j8sGxsPvDT8PeT3b+Yf8zVyTPO+t4nqz8aEOnonFl7/yp+Y407U1xNu7HrZQvqp71hc+76r4d1yz9+E7aO9+snvFNuO4CqhRhnGwlq1BmVfl+yj/YcZ6atycZT3srxd578o9KjT4fSHNOc9EzsAUezN0fPIQTPwp21xjvTYzjVqZjhrznNA48vNJf4lvYPR3eBsYIK2NYsTWpnZP9Z3FWt/Ysddwpg4b8/poZU/kDZW7hsaHs9Hlmc9TmTdV3vnJffqKF/vK8kmWMmw2PsS3hY/WzFjh+wUu2EOA
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="26">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy9lj1vE0EQhtfITihMMAoiH3/AJ8smSHwYAQXwI4CC0IYCJISETEIBSkMZkGgS6KjokIktpNBRk1AgQheJMqaBFHSId9gdbm69u7exDSO9mrvb9fm5d3fmbqqg1FSOZqGO0EzEb2LE4bvuGnNpGnqMuYnJ6x7OVuT9XBw2T4jP9mvDzP9UzN5rfURehsLnF8VmotQW9DHR589MnqnhGWr6+NiI1zqGj0Qsu1AP+ma4PozrfBpsZxx8bWhRaeXx3Fdavj0XYiOdLfaLwj4etX/D+j1fz55zreRJ7tN24D9j6/XP3IpSXSFa327FLardluBuZR/j7zgpr6by1ljycdQLaV6AhzehZeh7Wakf0F653+uWlaXnsWvouk7+Lyvtiy8eHNJ5BfkJ9BQ6aI1xLDRwXzzLtNkbsi5CPD4+6WFeNCaUOg7NTfjnEN9JsJ0yfL6aWtoHX9vMp9hAL3ln+skkes3RxM3RM2t8EeOXoMti3t2SzrTWdl/vDlEvxLgNti+Gbw7/ecLDx3Ed4/PQDWgPNfXrQJbvfRLXl2L4uOcS55Exd18kffZcZ02Opfw7gq8TYIvhC/32cD31hP0JxVuTqT7e7NO/Wcf4z7qW/YwcsqdJvofw51GSzqHYLKaSPZ2PB/HJp57V6+hc8j0H24skO057kKJWyPbPciPbD+W306DfRhyyzYX2Zmh/botvto6pZY7YPm6rae5xx3jSLKR6Ke4vg/2tmXHag3bNSVaOQfjo/cCMlOU7rpnDR8H9hYP7rGsNhvHvq8nyHVcxNX0ODOehC0k/305O/5T7exg+DvmO47ErYLgKXUu0D/dK6XuZ6/gV/LpV0vvMF4Pw0d5ZDGhJZfsJifyzr21Br8dHxxUj6g/0bUG+SFFQXq0qtVbVx7c9Pf1fsbGIj3yR2jW5A7ZuNb3+v9l8fD75/OP8G6EO28U=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="51" template="../../obj/treasure.tx" x="176.166" y="54.6663">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;KTK&quot;, &quot;TDM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;black&quot;, &quot;white&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;KTK&quot;, &quot;TDM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;black&quot;, &quot;white&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;KTK&quot;, &quot;TDM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;black&quot;, &quot;white&quot; ],
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="61" template="../../../../common/maps/obj/entry_right.tx" x="623.5" y="320" width="16" height="32">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/enemy.tx" x="471" y="285">
+   <properties>
+    <property name="enemy" value="Alesha"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/enemy.tx" x="239.985" y="319.5">
+   <properties>
+    <property name="enemy" value="Tersa"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/enemy.tx" x="175.5" y="111">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Mardu Monument|TDM&quot;, &quot;Mardu Banner|KTK&quot;]}"/>
+    <property name="enemy" value="Zurgo"/>
+   </properties>
+  </object>
+  <object id="98" template="../../../../common/maps/obj/manashards.tx" x="233" y="107.5"/>
+  <object id="108" template="../../../../common/maps/obj/gold.tx" x="97" y="109"/>
+  <object id="109" template="../../../../common/maps/obj/dialog.tx" x="534.822" y="302.987" width="16" height="16" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Signs ahead mark this camp the territory of the Mardu Clan of Tarkir. Wild war cries and crackling violet lightning echo and crackle ahead.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="110" template="../../../../common/maps/obj/scroll.tx" x="410.667" y="348.667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Nomad Outpost&quot;, &quot;editions&quot;: [ &quot;tdm&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="111" template="../../../../common/maps/obj/dialog.tx" x="140.417" y="143.417" width="94.5" height="26.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The mighty orc before you scoffs as he looks you over.
+
+'A shame. I was hoping for a challenge.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="112" template="../../../../common/maps/obj/shop.tx" x="416.667" y="184">
+   <properties>
+    <property name="commonShopList" value="WanderingMerchantRed"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="113" template="../../../../common/maps/obj/enemy.tx" x="444.367" y="222.617">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;text&quot;: &quot;Hail, {var=player_name}. I see your travels have taken you far. I have been wandering as well, and have acquired some rare spells I am not in need of along the way. Take a look, perhaps they will be of use. Traveling this place does have its costs though, so I cannot simply give you them, but my prices are fair.&quot;,
+		&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;(Continue)&quot; }
+		]
+	}
+]</property>
+    <property name="enemy" value="Mysterious Mage"/>
+   </properties>
+  </object>
+  <object id="114" template="../../../../common/maps/obj/enemy.tx" x="286" y="229.333">
+   <properties>
+    <property name="enemy" value="Neriv"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="116" template="../../obj/treasure.tx" x="223.5" y="349">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;editions&quot;: [ &quot;STX&quot; ],
+    &quot;count&quot;: 20,
+    &quot;cardName&quot;: &quot;Dragon's Approach&quot;
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="117" template="../../obj/treasure.tx" x="253.091" y="349">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;editions&quot;: [ &quot;STX&quot; ],
+    &quot;count&quot;: 20,
+    &quot;cardName&quot;: &quot;Dragon's Approach&quot;
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="118" template="../../../../common/maps/obj/collision.tx" x="191.934" y="177.902" width="33.5164" height="26.5"/>
+  <object id="119" template="../../../../common/maps/obj/collision.tx" x="352.658" y="318.939" width="47.8349" height="31.5115"/>
+  <object id="120" template="../../../../common/maps/obj/collision.tx" x="113.296" y="49.3574" width="46.8913" height="31.5833"/>
+  <object id="121" template="../../../../common/maps/obj/collision.tx" x="207.082" y="48.6415" width="34.0047" height="31.5833"/>
+  <object id="122" template="../../../../common/maps/obj/collision.tx" x="140.501" y="174.644" width="34.0047" height="31.5833"/>
+  <object id="123" template="../../../../common/maps/obj/collision.tx" x="335.948" y="175.36" width="46.1754" height="31.5833"/>
+  <object id="124" template="../../../../common/maps/obj/collision.tx" x="333.8" y="241.941" width="34.0047" height="31.5833"/>
+  <object id="125" template="../../../../common/maps/obj/collision.tx" x="275.498" y="303.458" width="41.5047" height="47.3333"/>
+  <object id="126" template="../../obj/treasure.tx" x="176.5" y="78.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;KTK&quot;, &quot;TDM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;black&quot;, &quot;white&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;KTK&quot;, &quot;TDM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;black&quot;, &quot;white&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;KTK&quot;, &quot;TDM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;black&quot;, &quot;white&quot; ],
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

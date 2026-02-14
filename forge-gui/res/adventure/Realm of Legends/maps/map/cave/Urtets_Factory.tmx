@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="92">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Darksteel Myr&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzFld0NwjAMhP2KSLNAlCkQDFOeGATmgFFAsAQTgYUspa7j2ClST4qq/Cjf1bm0AOvpOAA8QruNg75Wmsc+jkvKwe4xK76SsE+ujJfc69fXOwLchHeyKDn8lNx9/D130c/V1rW4hzjfh+9XOxON+6yMv5znSzptpnN3wSflTRLP4CicL63xZJDUqrPkm9faw23lyptbLl5v7GNrccs6/0vERlnrTFqa515ur0ee51od8R5dtrZG3HNlnji8b/GqffeJm4L9f7I0NylMuT13eW3uB/lXb+U=
+  </data>
+ </layer>
+ <layer id="7" name="Floor" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxTZWdgUB1API8TN6a1vYTYw83e0XAevuE8ikfxKB7FxGIAZfNnhA==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzbwcPAsIMOWAYNg8QuM9EeY7PXDChOLMCn1gSHnAkV7MUHhqO9AxXO+NReQkpHMIAvXZGSLsmNE1r6l5b2kgNonZ5paS85bhxs9k5nJB7L8kDMmkaCHhDGZi8pdQrMvzA/kFsn0cvegfIvur0AFC+Ruw==
+  </data>
+ </layer>
+ <layer id="8" name="Walls Supplementary" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBg4YMZEHbUmOORwiQ80EBJlYBAGYhFR+tq7AWjfRiDeRGd7/cQYGPyBOECMvvbSCuBKV6SkZ2raS2swWPPRKKAtoFb5jAuMpquBAwC/CAZW
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBg64KkmA8MzIG7XYGDo0EDwKQFHNAirYdRiYGAC4sVAtUs0EHwQKAHa/1CdgeGROnnuWaEJwbVAc+uwuOURI3a2JVDPX6Cd/9RR3UMsgLl1JtDOWTjshdkHorcD1ewgIqwIAZhbkc3HZi8MXwbaeYUK9uIDyP7E5S562YvNDaS66SIwXi9pYtLo5hHCjcBwbyIQ9rOB5s4hMs0Ta+9coJ3zCNi7HWjnDirbS27cS7FB8jCIJmR3K9BfbRoIOXQ1uEAxGeUcsrkLgXYu0kDkY5g4tfI1ITeg52N65Gtag7iBdgAFAADVYHKT
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="270.665" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="112.181" y="166.351">
+   <properties>
+    <property name="enemy" value="Bosh"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="86,87"/>
+   </properties>
+  </object>
+  <object id="66" template="../../../../common/maps/obj/gold.tx" x="25.3334" y="144"/>
+  <object id="67" template="../../../../common/maps/obj/enemy.tx" x="258.671" y="154.858">
+   <properties>
+    <property name="enemy" value="Graaz"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="78,79,85,92"/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/enemy.tx" x="360.086" y="110.375">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Genesis Chamber|DST&quot;, &quot;Myr matrix|DST&quot;, &quot;Myr Scrapling|MH2&quot;]}"/>
+    <property name="enemy" value="Urtet"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/gold.tx" x="392.167" y="85.8333"/>
+  <object id="74" template="../../../../common/maps/obj/booster.tx" x="57" y="206">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;MBS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MBS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MBS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/manashards.tx" x="359.333" y="220"/>
+  <object id="78" template="../../../../common/maps/obj/waypoint.tx" x="219.833" y="188.167"/>
+  <object id="79" template="../../../../common/maps/obj/waypoint.tx" x="223.333" y="104.5"/>
+  <object id="82" template="../../../../common/maps/obj/waypoint.tx" x="342.333" y="188"/>
+  <object id="85" template="../../../../common/maps/obj/waypoint.tx" x="309" y="123"/>
+  <object id="86" template="../../../../common/maps/obj/waypoint.tx" x="171" y="168.5"/>
+  <object id="87" template="../../../../common/maps/obj/waypoint.tx" x="68.5" y="165.5"/>
+  <object id="88" template="../../../../common/maps/obj/dialog.tx" x="193.084" y="226.75" width="46.167" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The factory ahead of you is full of myr running back and forth, working endlessly at all manner of tasks. Other more fearsome constructs also move about, the sound of metal scraping on metal breaking through even the constant din of the machinery.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="89" template="../../../../common/maps/obj/booster.tx" x="328.124" y="86.2655">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;DST&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DST&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DST&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/shop.tx" x="128.5" y="84.625" width="16" height="16">
+   <properties>
+    <property name="commonShopList" value="Assembly"/>
+    <property name="noRestock" type="bool" value="false"/>
+    <property name="signXOffset" type="float" value="30"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/dialog.tx" x="123.916" y="91.25" width="36.167" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The robotic voice of a myr rings out from the fortified storefront ahead. 
+
+'Insert gold and select your wares. Many fine myr and other constructs are available to purchase.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

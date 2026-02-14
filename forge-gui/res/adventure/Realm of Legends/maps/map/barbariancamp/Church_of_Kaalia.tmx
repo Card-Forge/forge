@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="95">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Strionic Resonator&quot;, &quot;Dolmen Gate&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBjcYBcPbkxrO/cwY2Ja2o1uLwjQw15ke2B2IfOHI4CF525omO6kQ7oaSDDq31H/Djcgw4OfPwpwAwD4Sipy
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJx7ws7A8GQUj+JRPIpH8SgexSMCAwBnNdQ6
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJz7K8jA8HeQ4mheBoZdPLhxFC9t7NwNNBsf2Ellu4mxk9p2k2Intewmx05q2C1Lpp0wIM0zau+ovdhxPTd5dtYC9e2hwN69PKTbTamd5NhNLTtJsZvadiLbXccNwTA31HIjxGhhJ660TkmaBWEACkFVJQ==
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBic4DEXA0MTN2H8lIv6diry4Fcnz0M9u4m1k5p2k2ontewmx050u8m1lxIwau+ovbj0kZsXYHmQHEBuPiQ331NiNzXsJNVuatqJbjcMN0PjrhGtPqKmneigEc3eZgrSPQArjCuE
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBj8IFWXgaEBiHWh9Ccd2tr3WJOB4QkQP1VHFQfxNYHiWpq0sfc/yFwt7Pa6AuXcaGQvOvgnSR97kMEEoB8nAvEkdcJqyQFtaHwFHgheA7RvLRCvU0eI4dNHLXACaN9JID5FI/+iA5jfFKH+k+fB7t+hCnDFLyH/0ip+6Q2Ge/xiAwWa+PmjADcAAOdfHB8=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="191.333" y="270.998" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="207.235" y="64.3086">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;The mighty priestess finally crumples under the weight of her injuries, a spiteful rage in her eyes as her body clings to its last embers of strength.
+
+'Someday I'll have my revenge on you... even if I have to claw my way out of hell... I have lots of friends there... it'll be... easy.' 
+
+With that, she finally collapses, dead.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Plains|JMP|[40]&quot;, &quot;Swamp|JMP|[54]&quot;, &quot;Mountain|JMP|[62]&quot;, &quot;Tariel, Reckoner of Souls|CMD&quot;, &quot;Scroll of griselbrand|AVR&quot;, &quot;Scroll of avacyn|AVR&quot;, &quot;Vial of Dragonfire|DTK&quot; ] }"/>
+    <property name="enemy" value="Kaalia"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/treasure.tx" x="207.833" y="49.8333">
+   <properties>
+    <property name="reward">{
+&quot;type&quot;: &quot;card&quot;,
+&quot;probability&quot;: 1,
+&quot;count&quot;: 3,
+&quot;subTypes&quot;: &quot;dragon&quot;,
+&quot;rarity&quot;: &quot;mythic rare&quot;
+}</property>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/enemy.tx" x="207.5" y="202.667">
+   <properties>
+    <property name="enemy" value="Skithiryx"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/enemy.tx" gid="2147495067" x="276.333" y="210.333">
+   <properties>
+    <property name="enemy" value="Sephara"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/enemy.tx" x="141.167" y="210.667">
+   <properties>
+    <property name="enemy" value="Taborax"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="74" template="../../../../common/maps/obj/enemy.tx" x="134.833" y="88.3333">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Tombstalker|TSR&quot;, &quot;Swamp|JMP|[54]&quot;, &quot;Unholy Annex|DSK&quot; ] }"/>
+    <property name="enemy" value="Vilis"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="75" template="../../../../common/maps/obj/enemy.tx" gid="2147495067" x="276.5" y="88.6667">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Great Hall of Starnheim|KHM&quot;, &quot;Starnheim Memento|J25&quot;, &quot;youthful valkyrie|kld&quot;, &quot;angelic armaments|avr&quot; ] }"/>
+    <property name="enemy" value="Firja"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="84" template="../../../../common/maps/obj/enemy.tx" x="207.5" y="163.834">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Dragon Whelp|LEA&quot;, &quot;Mountain|JMP|[62]&quot;, &quot;awaken the sky tyrant|C15&quot; ] }"/>
+    <property name="enemy" value="Drakuseth"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="85" template="../../../../common/maps/obj/manashards.tx" x="96.1667" y="131.333"/>
+  <object id="86" template="../../obj/treasure.tx" x="224.667" y="50.3333">
+   <properties>
+    <property name="reward">{
+&quot;type&quot;: &quot;card&quot;,
+&quot;probability&quot;: 1,
+&quot;count&quot;: 3,
+&quot;subTypes&quot;: &quot;angel&quot;,
+&quot;rarity&quot;: &quot;mythic rare&quot;
+}</property>
+   </properties>
+  </object>
+  <object id="87" template="../../obj/treasure.tx" x="191.667" y="49.6667">
+   <properties>
+    <property name="reward">{
+&quot;type&quot;: &quot;card&quot;,
+&quot;probability&quot;: 1,
+&quot;count&quot;: 3,
+&quot;subTypes&quot;: &quot;demon&quot;,
+&quot;rarity&quot;: &quot;mythic rare&quot;
+}</property>
+   </properties>
+  </object>
+  <object id="88" template="../../../../common/maps/obj/manashards.tx" x="320" y="161"/>
+  <object id="89" template="../../../../common/maps/obj/manashards.tx" x="96.3333" y="159.333"/>
+  <object id="91" template="../../../../common/maps/obj/manashards.tx" x="319.667" y="128.333"/>
+  <object id="93" template="../../../../common/maps/obj/dialog.tx" x="176" y="222" width="80" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;As you step inside, heat emanates from all around. A discordant overlap of angelic song and demonic chanting is punctuated by groundshaking draconic roars. A great deal of powerful creatures are crammed into the relatively small church ahead, making the feeling of being out of your depth unignorable.
+
+Your manasight stone glows brightly, sensing a truly mighty legend in this place.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/dialog.tx" x="161.058" y="110.777" width="111.273" height="62.5172" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;You approach a woman with two sets of wings, leaning against a pulpit. 
+
+'I command the heavens above, the hells below, and the mountains between! You may have defeated each of these mighty forces alone, but you will fall before all three at once!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="33" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="163">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Nut Collector&quot;, &quot;Squirrel mob&quot; ]}"/>
+  <property name="spriteLayer" type="bool" value="true"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/FarmFood.tsx"/>
+ <layer id="11" name="Collision" width="33" height="24">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAfCGSlo2V43EANd4jyI7ADH/luoTZ4xDgwbkAOA1xuEGfBjakFYGaRGg6Ugi5u3HLU9N8oGAXkAMNBUPYOBjeMAlRQwA7BgwHA3IILj4JRMAqGFgAAEQwL+g==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="33" height="24">
+  <data encoding="base64" compression="zlib">
+   eJyrZWFgqCUCH2AgHX9lIw4TYz+x7kBWg8/OCDxu2M9A2H5lHsrCAJfbYXbgspfUuCDFfnTzCYV9LiduvcS4hVQ3YFOL7gZ85rZxk+8GcsIelx5y3IBNnFr5khj3o9uFns8ocQO63G4Z4uOEUkxMGGDDMECpe0D6sLkB2Txc4QFzB7IeBhxyKYy0CQd87mJAE1vARJ4bkMWwyVOaFj6xQTCI/RnNDR+pGCb4sB4Hgv7KhnDTJzrZj4xB6U2XA5VPiVnk6qVWeqSGGygxg1JMzXxJKR7IcKCl/aSYO9BhMJQwAJWQS0I=
+  </data>
+ </layer>
+ <layer id="8" name="Tilelaag 3" width="33" height="24">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAOLGMlUiEZYD8U08MNy5gIu6GYBb8bQFiZh3K3YHMDMj1QYD8axgVyOUkz9ysb+W6ihhvQ7f+iiBsTA7axIjAMFGoyMKwVxW0nOiDVDTC7QPRdZoR4tjIDw0SgnizinE4VAHPDNrR8+YiRdLOapRkYWnBgQm4AYS8xCF+XnYGhnw2Bz7DT1g3IaQAWDukcCHn0sCAUP+SGAzo4hGSvChuCVkFKj7jcQqkb9qOxQ9ggGAT0OPCXKdjclEVAHhm0ceMWR5YLhrqJVLfgAsSW2djcp8sBCRcYJgcQsn8yATcgA1CZpUuiW3DZDzILhKeguYOQG5BBHgllPDZzYW6AYRjYAa3npYD0Ljx1Psh+Qm6ApS/0dEYIhLJiZ2NzAyFArhu+AO2VZoFgfADmBhD9nkrtQeSymhiA7AZcYfJNgXJMKRgMbvg6CNwAAOJvoiU=
+  </data>
+ </layer>
+ <layer id="7" name="water" width="33" height="24">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJytlUlPFEEUxx/O9GLAgwcRg+hAkAZkaD2YGD+CNyKcxOUGelYPfgAEozCoiZ5cE68eQPRoAh6IRsJBNO5LPLlEBhE10fh/Vr90VW8zJFbyy+vu6qr3f0tXT1lEU1Uw7hDdI6LHHtGCF7ezTvqc2O820XQdUTto09idI/qIuU/gM/hiZ2tYxF5lL25ZQ9qc2JtriAZq4jp43xN5otPY4zfmzzjJGnhuCfrOOyE/cd8FOwZ71KV/YzuZoxjYodrwGedjm6ZhAXnwsH4PbAdsp5tdj1PYaxiMgGVbxf+rqPSIP9bRb6vrY+ugPaIrqoH3fgL/T3Mq1j812RpkrVcXaihB9zc7Xv8fkbwJFxxVj5mAavpR1yBr7wO/JcwDa4jWn+PldyqN7ozcCyfzimc5VVeprV6Lc7DrcyYc7zDe623L1sD7jUX6cFejsrWdRHVgFL66HXMND+7HI67qySSKTvqcDvdWMSUXHvy3d4bxTqNXWmqUf46Pny0XkPMEVgrB9wpbzmCpEPZXNBcMjzuwe+uJBl0Vlz4e/mcNnItexFtyFKJBzoX5oLfmtR6bDTTNBPXR9axWA8M1kXyUIjnhXIjvRehpsBQda5XdZJlapFYD7uo0RGvS5YbfDOdC/PL5wfliWIPkqmyHWloprkl/rj/ja/HfEXzzt4PYR4M8n3VCn0yfHa+FDNEiiCbxtWib84L453OH3+E4fcQ/ifNgYwpT+VCD3idF19TUHrn3gtxGmYn45/jZf9ky1x9vDa97LDMPj1oUokW3PMQXx8Zn/XCtiV5niZ/9jzeHe8xHzlvRMKidT3yGiZY0eOj/CUHPCdesx0r2rV/zO3fzpi7Oyb4CeiaFPnDNJ7oOboBGsBk0+WZORgINuj89HzxubTB1XsS/6ZJXnYa38PcOvAf7QT844Mfz8tVK7sMGUB9c670yAf+TVWr4sNOMZw6xNvvJ52wU/f9yGWuugKu++fxBhf9TyVYaOMdzWp6r1aDzCmtegzfa2om8ygPbtHUrQR6YOe3bqUaDHnfaO9wfrIFtloYt2GMrKIDn4AV46af/97LiTtLA/4ZKGg5ij0PgMH8XO/BdgCbwF+a35bA=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="288.953" y="381.879">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/treasure.tx" x="447.956" y="56.4352">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;colors&quot;: [ &quot;green&quot; ],
+  &quot;rarity&quot;: [ &quot;mythic rare&quot;]
+}]</property>
+   </properties>
+  </object>
+  <object id="55" template="../../../../common/maps/obj/enemy.tx" x="430.769" y="128.183">
+   <properties>
+    <property name="enemy" value="Euru"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="131,132"/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../common/maps/obj/enemy.tx" x="400.33" y="337.846">
+   <properties>
+    <property name="enemy" value="Camellia"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="151,152"/>
+   </properties>
+  </object>
+  <object id="63" template="../../../../common/maps/obj/enemy.tx" x="357.729" y="58.382">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;After a fierce battle, the small but mighty squirrel finally falls. Despite their strength, you do feel a bit bad about picking on something so much smaller than you.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Swarmyard|SLD&quot;, &quot;Oakhollow Village|BLB&quot;,&quot;Mudflat Village|BLB&quot;, &quot;Sword of the Squeak|BLC&quot;, &quot;Squirrel Sovereign|MH2&quot;, &quot;Chittering Illuminator&quot;, &quot;Squirrel Sanctuary|MH2&quot;]}"/>
+    <property name="enemy" value="Chatterfang"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/enemy.tx" x="255.667" y="94.3333">
+   <properties>
+    <property name="enemy" value="Hazel"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="133,134"/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/enemy.tx" x="78.5" y="364.75">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Heap Doll|SHM&quot;, &quot;Scarecrone|EVE&quot;, &quot;Scythe of the Wretched|MRD&quot;, &quot;Raking Canopy|SHM&quot;, &quot;Springjack Pasture|EVE&quot;]}"/>
+    <property name="enemy" value="Reaper King"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="75" template="../../../../common/maps/obj/enemy.tx" x="244.5" y="224">
+   <properties>
+    <property name="enemy" value="Toski"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="120" template="../../../../common/maps/obj/booster.tx" x="13" y="348.833">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;SHM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;SHM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;SHM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="121" template="../../../../common/maps/obj/collision.tx" x="-16" y="-16" width="16" height="416"/>
+  <object id="122" template="../../../../common/maps/obj/collision.tx" x="528" y="-16" width="16" height="416"/>
+  <object id="123" template="../../../../common/maps/obj/collision.tx" x="0" y="-16" width="528" height="16"/>
+  <object id="124" template="../../../../common/maps/obj/collision.tx" x="-6" y="384" width="534" height="16"/>
+  <object id="128" template="../../../../common/maps/obj/booster.tx" x="416.5" y="63.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;MH2&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MH2&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MH2&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="130" template="../../../../common/maps/obj/booster.tx" x="13" y="379.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;EVE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;EVE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;EVE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="131" template="../../../../common/maps/obj/waypoint.tx" x="484.167" y="128.333"/>
+  <object id="132" template="../../../../common/maps/obj/waypoint.tx" x="327.667" y="129"/>
+  <object id="133" template="../../../../common/maps/obj/waypoint.tx" x="255.333" y="50.6667"/>
+  <object id="134" template="../../../../common/maps/obj/waypoint.tx" x="253.5" y="141"/>
+  <object id="135" template="../../../../common/maps/obj/dialog.tx" x="274" y="345.727" width="45.5" height="17.5455" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A farm spreads out before. The oddest thing about it is that at first it appears deserted, but upon closer inspection dozens and dozens of squirrels skitter about the trees, tending to the nuts growing off them.
+
+Your manasight stone glows brightly, sensing a truly mighty legend in this place.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="138" template="../../../../common/maps/obj/dialog.tx" x="297.5" y="49.1852" width="16" height="16" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The squirrel ahead seems much more determined than the others. An aura of glowing mana emanates from them, its size far outstripping that of the squirrel.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="139" template="../../../../common/maps/obj/dialog.tx" x="173.32" y="360.344" width="18.9042" height="16" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A colossal scarecrow looms ahead. A horrific voice growls forth.
+
+'It's harvest time.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="140" template="../../../../common/maps/obj/scroll.tx" x="143" y="257">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Liberated Livestock&quot;, &quot;editions&quot;: [ &quot;WOC&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="141" template="../../../../common/maps/obj/scroll.tx" x="244.5" y="302">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Chicken à la King&quot;, &quot;editions&quot;: [ &quot;UGL&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="142" template="../../../../common/maps/obj/scroll.tx" x="506.5" y="127.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Vigorous Farming&quot;, &quot;editions&quot;: [ &quot;YBLB&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="145" template="../../../../common/maps/obj/booster.tx" x="395.5" y="48">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;MH2&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MH2&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MH2&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="146" template="../../../../common/maps/obj/booster.tx" x="496.5" y="322">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;BLB&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;BLB&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;BLB&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="147" template="../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="271.5" y="86" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;:&quot;'And the ignorant shall fall to the squirrels.'
+-Chip 2:54&quot;,
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;Leave&quot; }
+]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="149" template="../../../../common/maps/obj/scroll.tx" x="468" y="360.25">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Treat Trolley&quot;, &quot;editions&quot;: [ &quot;OM1&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="150" template="../../../../common/maps/obj/scroll.tx" x="462.5" y="321">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Stocking the Pantry&quot;, &quot;editions&quot;: [ &quot;BLB&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="151" template="../../../../common/maps/obj/waypoint.tx" x="363" y="334.5"/>
+  <object id="152" template="../../../../common/maps/obj/waypoint.tx" x="479" y="337"/>
+  <object id="153" template="../../../../common/maps/obj/enemy.tx" x="206" y="149.5">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;text&quot;: &quot;Hail, {var=player_name}. I see your travels have taken you far. I have been wandering as well, and have acquired some rare spells I am not in need of along the way. Take a look, perhaps they will be of use. Traveling this place does have its costs though, so I cannot simply give you them, but my prices are fair.&quot;,
+		&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;(Continue)&quot; }
+		]
+	}
+]</property>
+    <property name="enemy" value="Mysterious Mage"/>
+   </properties>
+  </object>
+  <object id="154" template="../../../../common/maps/obj/shop.tx" x="175.5" y="151">
+   <properties>
+    <property name="commonShopList" value="WanderingMerchantGreen"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="155" template="../../../../common/maps/obj/collision.tx" x="434.405" y="357.314" width="34.9592" height="24.5833"/>
+  <object id="157" template="../../../../common/maps/obj/collision.tx" x="484.339" y="354.617" width="40.4137" height="24.5833"/>
+  <object id="158" template="../../../../common/maps/obj/collision.tx" x="487.611" y="278.799" width="36.2319" height="23.856"/>
+  <object id="159" template="../../../../common/maps/obj/collision.tx" x="433.975" y="275.163" width="40.4137" height="27.1288"/>
+  <object id="160" template="../../../../common/maps/obj/collision.tx" x="130.339" y="353.587" width="40.4137" height="27.25"/>
+  <object id="161" template="../../../../common/maps/obj/collision.tx" x="193.793" y="317.163" width="40.4137" height="30.5833"/>
+  <object id="162" template="../../../../common/maps/obj/booster.tx" x="488.333" y="207">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;MH2&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MH2&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MH2&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

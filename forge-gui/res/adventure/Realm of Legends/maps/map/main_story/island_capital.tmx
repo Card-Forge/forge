@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="83">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <layer id="1" name="Background" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzNmEtOAzEMhkdiHl1wBLYseQjKcTgBLOAGPQK0TXsUTsFlgNKyqRhrxsJjnMTJJNBKVsWUSb78fsTJqiqK97IopvXQPtpnq+owbN3abTk08w8cVCeqz6HwUQ5jeR7Ch+t9E+IjJk5sfM+tffXPt63tWpt79Ae7qX+vi9t1PVyDixc4dpb5kd2mG7BpeLS8ofmH7HPGhOM8NuPZOOfYXFq234uqW+953fF/JmaM0VLyJXDCOFIuoZ0cdxbDqWV0xZmx5HoqLX2MvhzYN53l4NMw+rTJzYdxNKZ+AN+p5f9i40+Koxi2TdnVH6hFKfNYmsO3/0rvnZF6kJrRtW9p+GjuampNjGZj4g6YltWQN0RDYHjq9yjMMfje9X6h/gQm2K/HaHBZh8UG6vPQDPngb1gn/n5V/+gQW29hvvvGz7dhMYX9D+XD3obHGq4phs+Q+ZaO9w3pMV5bjsnEHg+4z+N4If7heoB2PjYas8B513TvaefjOQhz+2LdEB/52Phc6L+LgB4SNFw7YhE+L0fDnjY2nxZVuL8ok1Qv4LNvhn19iG7SfNBHamsSMtEco2cA7AfGMEk6ahi3pb1mY27m6lU0ceI6B431o2SY+9M+P3zjS3yamhFrIb2jzbe5evcQPlfc5eRDf2Hu2fLDdW9B7xFSG+5faFIO+3I2NyPXifpLw/aXjLQOamodP8djnc7JifvDlfJcKd035NKSakb7U0kvnrf8nJxSy/4cNHPd3+F5w1QyH/2Nx2V/hpiBaXjxXIZnD1eccQ5j0UebSz7fh+Qk55Pele4AQ8bU+EA7Vqr775R80v3uN9T6Jpw=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzVWEtKA0EQHWHSSoLkcwPFha4mgnfwEiLuo6gg3sd8ZCSKVxD3iTdwIV7BjSu7ScrU1FT/pmcm+qAI0+nuel1dPzqK/hd2u1G01103Cz1Oe1F01luf/h2Nbe7qpaHF5roJVIzP/ey3EPLMIj8viaPoMDavrQMzyeEtdh+vGz786qQL9wo87uXYd3MhOn5VgVOj9Lckv6ZY/PbjrNBx6otlgvp6stT/IOW8YZcUceViyQdcjNG7Ut9zj/sbMDw5e/rEtxDZu8JcQN9FI7sG/O+e7HVywPMMsSXYCO6QcgFgLh8bC3HdOyR+ZktuOl4cdPwmUqYl8RuiPfD6kZRxQX4UOv/wgSl/0V4iifP5hfp/AJUcEiYmTID7whKam1OLPs73hvx0K79RGNVfQO/lW5vGYpU3IN4nhtyRaHwAYLJdEX4u64ZkXogPQG2FM7qmUddzUX5cr2jCANVOWw7Ae88cdSp/SJfxJ4Q9Fmnd08UBB7A17rVcdOL+R/ms8ldci0J6bWwbsEULcYL4VzqF4GMB1sG8MkH9DHTNmZ6wSTh8xfw++Myu+QjXBdxr4H0f0RjOf7g3xPZ5l/XvSOT3KZIzqF1obwycwd8wN3y3faRX12P71CvKUdcTz5EebDusE/gCTH12SL/A8U5Fvq5RsfVoZdU+DMgDuK5xvGx1rgxsOcyhttTlDBiCfr9ODFB/UKYfhUD10xP0/VfeNHQw8bvZtq83uSq8Cx63zXtcyv+vGLlur/iZ5rjiljmP4qZ7vwRMO7JmEHmW8tRZ8Zsux+g8NccG3/dln/yE77doWnmR3F4rev8uIz6qev+GGhz6bkHxA6nb40M=
+  </data>
+ </layer>
+ <layer id="8" name="Bridges" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1kkOgkAUhOG3cXYPW2fDbXC6FU4XxekAFkmTEMWYELVLUl/yNqz+hOY1ZiJSV53IrBv5rnhtgrYpcZ98xiowW7vZBL5rnl3QdHVzI+zbh2YHN8fQd40wi3F+F5gl4TnOpOg6Yc7qq6Ssj+meT7CftphdYU/pnv+9mHgHZFLCb6yBM9p055Sxb4C2IXFfUfKwA+os/7etqoV32v7ifsz/Hd/poaFf0jHCszHB/p6hYU7QISIi/+0OQfQkaQ==
+  </data>
+ </layer>
+ <layer id="6" name="Ground2" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AU0Aos1WJgWKZFvPgowA2mazIwzNAcaFdAALb42wx02xYgvq1DWO0oIB8MVHjOBMbtLDqlP3L8uBXotm1Y0t9gAKt1EFhYd6BdM3TAUKk/8jUYGAqguFBjoF2DCbqBbuqB4l4auY+SOFkOdNMKKB6M+XcUDBygZV5fDDR3CRazlwPFVgyi8gUfmA2s8+YA8WRW+ti3Ghgua0gIm+1At+0YJO1WcgElaXCw1VWjYHiDJ4Ow/TGQYDQ8Bh5QMw5G43MUjALqAAAJ1DRl
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="40" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztyrEJACAMRNFMIBlA3H8D17NMGist34MPV1wEAK/2qAAAAAD4a2btlfcfdAdUQAKq
+  </data>
+ </layer>
+ <layer id="5" name="Overlay" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2DogBMaqPxOLQaGLi1MddjE0fWOgsELsMXfI0YIJkbtQACY+7bzDbRLKAOUhOdA5jFS7CbHj6t0IHiwgsHuPlz5dyABLB3A3AZz32ApU5DBYAw/GMgH5r0CKC6kURlASZx0A93UA8W9o+2AUYAEaJnX24HmdmAxuxso1kMlOwdju5YSN/UDw2UCCWEzXZOBYYYm+fYRC9DLXz1O0vQvNmZgWGKMXY6SNDgY66pRQH9wV52B4Z467e0hN2//BLrtFx3cR28wGMvfkQaoGQej8YkJ6vgZGOqhuIF/oF0zCkYBdQAAed09MQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="41" template="../../../../common/maps/obj/shop.tx" x="232" y="146">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
+    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue,PhyrexianBlue,Sphinx"/>
+    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue,Gods,Mutants"/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
+   </properties>
+  </object>
+  <object id="57" template="../../../../common/maps/obj/shop.tx" x="408" y="146">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
+    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue,PhyrexianBlue,Sphinx"/>
+    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue,Gods,Mutants"/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
+   </properties>
+  </object>
+  <object id="43" template="../../../../common/maps/obj/shop.tx" x="152" y="435">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
+    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue,PhyrexianBlue,Sphinx"/>
+    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue,Mutants"/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
+   </properties>
+  </object>
+  <object id="47" template="../../../../common/maps/obj/inn.tx" x="215" y="405"/>
+  <object id="49" template="../../../../common/maps/obj/shop.tx" x="360" y="258">
+   <properties>
+    <property name="commonShopList" value="Legend4Blue"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="signYOffset" type="float" value="-4"/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/shop.tx" x="536" y="354">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
+    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue,PhyrexianBlue,Sphinx"/>
+    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue,Gods,Mutants"/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
+   </properties>
+  </object>
+  <object id="51" template="../../../../common/maps/obj/shop.tx" x="552" y="418">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
+    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue,PhyrexianBlue,Sphinx"/>
+    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue,Gods,Mutants"/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
+   </properties>
+  </object>
+  <object id="52" template="../../../../common/maps/obj/shop.tx" x="56" y="306">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
+    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue,PhyrexianBlue,Sphinx"/>
+    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue,Gods"/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
+   </properties>
+  </object>
+  <object id="53" template="../../../../common/maps/obj/spellsmith.tx" x="408" y="402"/>
+  <object id="55" template="../../../../common/maps/obj/shop.tx" x="462" y="515">
+   <properties>
+    <property name="commonShopList" value="Island"/>
+    <property name="noRestock" type="bool" value="true"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/entry_up.tx" x="270" y="645" width="101" height="20">
+   <properties>
+    <property name="spawn" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="62" template="../../../../common/maps/obj/shop.tx" x="360" y="370">
+   <properties>
+    <property name="commonShopList" value="BlueItems"/>
+    <property name="hasSign" type="bool" value="true"/>
+    <property name="noRestock" type="bool" value="true"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="63" template="../../../../common/maps/obj/shop.tx" x="263" y="371">
+   <properties>
+    <property name="commonShopList" value="BlueEquipment"/>
+    <property name="hasSign" type="bool" value="true"/>
+    <property name="noRestock" type="bool" value="true"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="66" template="../../../../common/maps/obj/shop.tx" x="264" y="258">
+   <properties>
+    <property name="commonShopList" value="BlueBoosterPackShop"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/shop.tx" x="472" y="178">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
+    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue,PhyrexianBlue,Sphinx"/>
+    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue,Gods,Mutants"/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/RotatingShop.tx" x="574" y="471">
+   <properties>
+    <property name="rotation" value="Blue1,Blue2,Blue3,Blue4,Blue5,Blue6"/>
+    <property name="signXOffset" type="float" value="-4"/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/RotatingShop.tx" x="50" y="472">
+   <properties>
+    <property name="rotation" value="Blue1,Blue2,Blue3,Blue4,Blue5,Blue6"/>
+    <property name="signXOffset" type="float" value="14"/>
+    <property name="signYOffset" type="float" value="14"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/RotatingShop.tx" x="105.333" y="216.667">
+   <properties>
+    <property name="rotation" value="Blue1,Blue2,Blue3,Blue4,Blue5,Blue6"/>
+    <property name="signXOffset" type="float" value="-16"/>
+    <property name="signYOffset" type="float" value="-4"/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/shardtrader.tx" x="400.909" y="208.727">
+   <properties>
+    <property name="signYOffset" type="float" value="-4"/>
+   </properties>
+  </object>
+  <object id="75" template="../../../../common/maps/obj/shop.tx" x="263.333" y="98.6667">
+   <properties>
+    <property name="commonShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue,Gods,Mutants"/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue,PhyrexianBlue,Sphinx"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/shop.tx" x="358.667" y="99.3333">
+   <properties>
+    <property name="commonShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue,Gods,Mutants"/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue,PhyrexianBlue,Sphinx"/>
+   </properties>
+  </object>
+  <object id="78" template="../../../../common/maps/obj/collision.tx" x="307.134" y="454.268" width="26.2327" height="25.0886"/>
+  <object id="80" template="../../../../common/maps/obj/dialog.tx" x="308.5" y="310.5" width="20.5" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;You stride into a massive council chamber, where a group of very serious looking wizards gather around a large orb. 'If you wield very powerful magic, we have need of your services. Otherwise, leave this place.&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;Jin-Gitaxias has been slain.&quot;,
+                    &quot;text&quot;: &quot;'Incredible! Your magic is extremely powerful indeed! We and the city thank you heartily for saving us from becoming more of his metallic minions.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+						{&quot;type&quot;: &quot;life&quot;, &quot;count&quot;: 1},
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Stroke of Genius&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 5000}          
+                      ]
+                    },
+					{&quot;removeItem&quot;:&quot;Blue Cartouche of Victory&quot;},
+					{&quot;addMapReputation&quot;: 4} ],
+					&quot;condition&quot;:[{&quot;item&quot;:&quot;Blue Cartouche of Victory&quot;}], 
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;My magic is quite powerful inded.&quot;,
+					&quot;text&quot;: &quot;'The threat to our capitol is none other than the Phyrexian Praetor Jin-Gitaxias himself. His glistening oil spreads across our land, and our wards that keep it from the capitol's water supply are already beginning to fray. If they fail, we are all doomed.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Definitely a fearsome foe&quot;,
+					&quot;text&quot;: &quot;'Certainly. If you manage to eliminate him, the city would be in your debt and give you its blessing and a bounty as well, of course. Look for him in a strange turquoise colored laboratory.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;I'll see what I can do.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;Maybe another time.&quot;,
+					&quot;text&quot;: &quot;The wizards go back to their pondering, and let you walk out.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="81" template="../../../../common/maps/obj/dialog.tx" x="312.5" y="147.5" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;As you approach this building, you feel disoriented as time itself distorts around you. 'Hail, traveler! There's some real trouble brewing here! It'll take a powerful mage to fix it, if that's you?'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;Teferi is defeated. Hopefully, just in time.&quot;,
+                    &quot;text&quot;: &quot;'Well done! Now we can begin to reverse the temporal damage he wrought, and maybe even succeed where he failed... though we may not attempt such spells again given the risks. In any case, your help was much appreciated.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+						{&quot;type&quot;: &quot;life&quot;, &quot;count&quot;: 1},
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Temporal Mastery&quot;, &quot;count&quot;: 1 },
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Temporal Manipulation&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 3000}          
+                      ]
+                    },
+					{&quot;removeItem&quot;:&quot;Tome of Temporal Repair&quot;},
+					{&quot;addMapReputation&quot;: 4} ],
+					&quot;condition&quot;:[{&quot;item&quot;:&quot;Tome of Temporal Repair&quot;}], 
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;My spells are quite powerful, you'll find&quot;,
+					&quot;text&quot;: &quot;'Well I certainly hope so, because this task would have you facing the legendary time mage Teferi himself. You see, he has been weaving a spell to try and reverse time and return us all to our home planes. The problem is, his spell is wreaking havoc all across the islands and doesn't seem to be working.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Sounds like I'd be in for quite the time.&quot;,
+					&quot;text&quot;: &quot;'Indeed. We've tried to get him to listen to reason, but he just hid away in his hideout. It looks like a blue and white building like you might find in town. Defeat him and retrieve his tome of temporal repair so we can fix the damage he's wrought and you'll get our blessing and a reward to boot.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;I'll see when I can make time for this task.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;Not sure I can handle that yet.&quot;,
+					&quot;text&quot;: &quot;'Some other time? Well time's been troubled here... yes, some other time.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="82" template="../../../../common/maps/obj/dialog.tx" x="312" y="212.5" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;A group of worried townsfolk pace about around this building. 'Please traveler! We need help urgently! Pirates have kidnapped our families!'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;Here's the map. This will lead you to your loved ones.&quot;,
+                    &quot;text&quot;: &quot;The families weep with job. 'Thank you! Oh, thank you! Our reward is hardly enough for your heroism but know you will always be a hero to us.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+						{&quot;type&quot;: &quot;life&quot;, &quot;count&quot;: 1},
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Rescue&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Dramatic Rescue&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Expedition Map&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Treasure Map&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 1000}          
+                      ]
+                    },
+					{&quot;removeItem&quot;:&quot;Map to the Hostages&quot;},
+					{&quot;addMapReputation&quot;: 2} ],
+					&quot;condition&quot;:[{&quot;item&quot;:&quot;Map to the Hostages&quot;}], 
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;How can I help?&quot;,
+					&quot;text&quot;: &quot;'A few days ago, some of our family members went out to the ocean to fish. They never returned - instead, we received an outrageous ransom demand from none other than the legendary pirate admiral Beckett Brass herself!'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;A scallywag if ever there was one.&quot;,
+					&quot;text&quot;: &quot;'We pooled our wealth but its not enough to meet her exoribitant demands. We'd happily give you the money we gathered and the town's blessing if you got us the map to where she's keeping her hostages, though we fear you may need to defeat her to get it. She's holed up in a place called High and Dry. We don't know where it is, but it looks like a set of normal docks, despite being home to a fearsome collection of pirates.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;I'll rescue your loved ones, don't you worry.&quot;} ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;Pirates aren't really my thing.&quot;,
+					&quot;text&quot;: &quot;The townsfolk give you scornful looks as you walk away.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

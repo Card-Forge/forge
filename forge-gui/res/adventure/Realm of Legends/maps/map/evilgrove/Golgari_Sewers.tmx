@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="45" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="16" nextobjectid="164">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Swarm Guildmage&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="22017" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="13" name="Background" width="45" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1jtuAkEMBuCliEK6VJQoV0AisKKi4iQ5Uypa7kHFUXKD9MhaWbLMeNYez4soln4J2NHON9YuM8NQr467cHotydujOWbt0azx9raGVHMru9cbc5/ebJafl7rm1J6Dk2Yxs87cXqs5NB5+k/pdwmtxc9vyfRgun9Nn7Hlus3QPbfHx4IXwZwVyfW3T52/2nEpm7HVsnSUSmzc0N/Vy99c4JTQGo/Foo6mV4An132K2OGnAo0nq/f+K2Xsv6VmA0O+x8s5reU6ftXLuQbnqdxO/nvO/vta6S+1Pc3P+V/912tbLepwyN+5jN6WmzWuGMTXMdL9AW2qwz9J1WnyfSt1bveZYcE+eO6eFqsU6VgGz9kziOd94vfTs4z1rlfTzM2Yrc6q3ldni47nt25mpHUpjBi81W96xEu+j1ms1S5VqxvmpDddAjTy0zofHaMzUbllDzKUxo5Hbtb229J+Wtp+eeb1mqajzGcxeY86izpQ1S3UHMbGErQ==
+  </data>
+ </layer>
+ <layer id="10" name="Ground" width="45" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztlU1OAzEMRrOhiGlBrFiPOAN0SldInIErII4B4gRsWFXsuAbtaVhzBLBSq27kxE6ahBHKkz6pP07mxfV0JqfGTALZHPNxa+7O5ORC6/p1ZONzpu9LeB7qzNW6n9V2fpz5ZyLkXHIeJGfaZ3cmNCkN54qeNDFnqAF15hypK+A7Ty3nUE99DtwaPE8NNL4Xi/24a2vOBCDdexDqyfGXztNzY7ptbuc2Puf3E5va9x46fxsbcMZIzkC3rc3J02DM8xC/DhxhLQT7yYG/yVTh3gvzRXm42g/nJ0WiU/Tadb4M7OtzzUms8/r39UZwHgOfC9kVqNHjEvxnZ/xv830eirb241q/p+Z6r8v0aPfQOsf0KzVal9x9juHN84yRatB5jNzf7BICz6WppbwM/mhroH/wvKSuXLgzcennNtL3feKcUGe6FxdEuqZ2n0PAOU1xTklO50ajURe499zk2LMWuZwb42a13KXRaJTlB3uqA14=
+  </data>
+ </layer>
+ <layer id="9" name="Walls" width="45" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmM1OwkAURmtMtCUh0Y1r4lI3mCggC3VTIaxMjI+Ar6Gv4N64MDGIsjRsdWV8CjeA8hbaLzM3c1v6RzodIOlJvnSE0jm9c9siljXLuaPScsRrLht32Bi0HZEgG2V/8gSuL7ZlDWzh1vO2U+lF47TOOM6rna8vOcNp5GUit2M5duX5TBKc75sirZBz0QmtIZx/vPzK9FmdXPbesy225Mz7AL7YmnCmPqY1pfoSHfne2FEZsTH6iZxNQX0c1p+A6owaI/1Ar3ZyrmsYbdbHUaCefA16tuqVqQFnvsbBPgB/nsdpyZ+1EK+BgXsDsV72J7jWj9LvvaEShmu4J3q2Wle6J8D9rKacn45U8DrxsaliCtwjpo7/2Yd81ZXzbsPvjDw4ouYnJXEcE33MncMCZ1yP5AxHuAJyRnYa6jN5cON53MoQn/XZ7Hnpyr7FmsM5qtZwpphivz6bbsL8vM78HOKoGDynOIJ118n1od7jmSDOOVirsCTtl0SaOShwpczzuUUmjfPVcfakPdawmm4/6o2o9/HcyBpy/q7Fh5z5czSul6K4a2YPzZO0HznrmG/ZyOPeucxcHojEQdfMW1XfvPxaDKNSU8nSX3BO24d8zrjouNaSXHTtl+Ua1PldLThXGo+ofUx+hywomJeL7UUbFBRkh/7P1wH93p3377G6fXUw3BLhY/pbFyZqq5NV9V0V73+ZSnFS
+  </data>
+ </layer>
+ <layer id="12" name="Clutter" width="45" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzlmL1u1EAUhYeKdZSkhDIrGigQWQriFQWkMUHb8gjwEEmVhOegRQuBEtEgQRoQD4FoNix+AOiZK/vI19fzb+/yd6Qje713xp+vZ67HVipND7Jmv8jav6Fnd9s+Gyn1jcUt9P7rUdU2xqmKZZa80CySN5VZtjUxg5WO23jn+ni5ZmbYxQxe4nuh/T1rtmV9PRd6+2pUOWSsDCFTDuV4oLF7kTV8YFtqvxw17RaZn90lyg3vL1Su8WBik9z438btErWT510E3BtT/lzniOVO0SXLdaDPszp/DwP7j+UO0bub7e1pbo5DnwdZVcNCmX3chSHPn/LGUvt73WPvp0rd36hMOT+/3K6zxGwaVz6BTV6rrOFglvqc25mf36m4P2hfz6vaReJzL2X+Fpa5K8cHF/1GvomZeMFMnGTOTf6Yt3OwrOtvyfZRk23XMGf12jaeOLdP+xtdTu7HOtdPavP6y7cw8ofni+nZQjFj3dexzsWJ9vm0Of+sjusjye/SmJ0btRnm14PYa9NuHylzxMWcoi+3usdontiYV6Wj3fbvw11znE1XNOvOmpn76l9lfnS7v99OlHoz8ceRQuJ+av/w9NNXYEY9txnMJNOzCpJt5PGrk/4G81BxPpueEz5TbfDFHAbE/I1OvS7fnAmZp6FzMDTO5/Fef4NlqDif/5c5KNcZfdYcKbrB1vu2NQ89m6SHkmmd5BOt733vyKvi/RrBi/cCMr73HFjWpVinDckaI7wflOwdysf8OyVZXcynm0o93VwPF7/n3CZWybxk8Ttbug5uddl5/3iXS/k2xvsD273tyjZOEzM33n0le5l1Y/FuHcs+t9x3n0kmZnCAhdgLA69s4/smwFVE8Eq5OHjOfcyhuZd1IEW28+I/MOObSCi3qRZhPMjzcJbQXEpO23lnEbnm1wv57lUMq6vNUtSfVTL/CZZjI/Y+2fwLaQCMgg==
+  </data>
+ </layer>
+ <layer id="15" name="ClutterBis" width="45" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmMsNgkAQhscjJtiAL7wB0R7sQEtYzlqOZwFP9mAZ2oeW4BKykWz2BSyPNfMlEx7/ZPKFLGwCAIIgCCJi4g1t8H/cHHymMudnBPCK+nUxReb8pr6fkTrvp+L7GQHISZ8mevwQYBa2n3OIAY5x+zkmRNQ3tuB8or7nnpzHzCoBWCfNcj6T9Tbtk+VXWimtOQFYkPLIzpdEnPMZo9pro49HlyNIV6RkaINuKPZSBLFJQL/Rm2JvIeJS5SzTzarbdwnLkrlmtHLF3qLK+ax67e1+peoTzZM561wRRAdbky7hmnP13XeNwjnwh7aoB3vOd4f+KdlYH4+tHRdTXF3TSDu+eqJh6g==
+  </data>
+ </layer>
+ <objectgroup id="11" name="Objects">
+  <object id="96" template="../../../../common/maps/obj/enemy.tx" x="119.418" y="354.89">
+   <properties>
+    <property name="enemy" value="Mazirek"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="98" template="../../../../common/maps/obj/enemy.tx" x="279.741" y="284.564">
+   <properties>
+    <property name="enemy" value="Savra"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="100" template="../../../../common/maps/obj/enemy.tx" x="161.005" y="191.221">
+   <properties>
+    <property name="displayNameOverride" value=""/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svogthos, the Restless Tomb|RAV&quot;, &quot;Golgari Guildmage|RAV&quot;]}"/>
+    <property name="enemy" value="Jarad"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="101" template="../../../../common/maps/obj/enemy.tx" x="439.94" y="286.243">
+   <properties>
+    <property name="enemy" value="Varolz"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="106" template="../../../../common/maps/obj/gold.tx" x="4.61251" y="358.867"/>
+  <object id="111" template="../../../../common/maps/obj/entry_up.tx" x="368.955" y="639.736" width="80" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="117" template="../../../../common/maps/obj/manashards.tx" x="37.2058" y="242.224"/>
+  <object id="118" template="../../../../common/maps/obj/manashards.tx" x="699.396" y="360.359"/>
+  <object id="136" template="../../../../common/maps/obj/enemy.tx" x="643.682" y="358.829">
+   <properties>
+    <property name="enemy" value="Izoni"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="140" template="../../../../common/maps/obj/collision.tx" x="-1.37336" y="288.856" width="277.276" height="46.7511"/>
+  <object id="141" template="../../../../common/maps/obj/collision.tx" x="298.944" y="368.342" width="137.889" height="46.7511"/>
+  <object id="142" template="../../../../common/maps/obj/collision.tx" x="300.576" y="288.367" width="137.889" height="46.7511"/>
+  <object id="143" template="../../../../common/maps/obj/collision.tx" x="-1.86317" y="367.689" width="277.276" height="46.7511"/>
+  <object id="144" template="../../../../common/maps/obj/collision.tx" x="460.201" y="288.04" width="258.669" height="46.7511"/>
+  <object id="145" template="../../../../common/maps/obj/collision.tx" x="459.875" y="369.322" width="258.669" height="46.7511"/>
+  <object id="146" template="../../../../common/maps/obj/collision.tx" x="720.367" y="176.986" width="40.6127" height="304.092"/>
+  <object id="147" template="../../../../common/maps/obj/collision.tx" x="-40.8715" y="202.352" width="40.6127" height="267.092"/>
+  <object id="148" template="../../../../common/maps/obj/collision.tx" x="424.61" y="186.615" width="54.684" height="43.6816"/>
+  <object id="149" template="../../../../common/maps/obj/collision.tx" x="589.077" y="146.797" width="87.4262" height="28.1816"/>
+  <object id="150" template="../../obj/treasure.tx" x="178.125" y="163.708">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;editions&quot;: [ &quot;RAV&quot;, &quot;RTR&quot;, &quot;GRN&quot; ],
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;black&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;editions&quot;: [ &quot;RAV&quot;, &quot;RTR&quot;, &quot;GRN&quot; ],
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;black&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [ &quot;RAV&quot;, &quot;RTR&quot;, &quot;GRN&quot; ],
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;black&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="151" template="../../obj/treasure.tx" x="143.5" y="164.458">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;editions&quot;: [ &quot;RAV&quot;, &quot;RTR&quot;, &quot;GRN&quot; ],
+    &quot;color&quot;: [ &quot;green&quot;, &quot;black&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;editions&quot;: [ &quot;RAV&quot;, &quot;RTR&quot;, &quot;GRN&quot; ],
+    &quot;color&quot;: [ &quot;green&quot;, &quot;black&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [ &quot;RAV&quot;, &quot;RTR&quot;, &quot;GRN&quot; ],
+    &quot;color&quot;: [ &quot;green&quot;, &quot;black&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="152" template="../../../../common/maps/obj/dialog.tx" x="371" y="575.25" width="80" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The stench of rot is overwhelming as you enter the sewer. A sign marks this as the territory of Ravnica's Golgari Swarm.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="153" template="../../../../common/maps/obj/scroll.tx" x="36.6667" y="356.667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Golgari Rot Farm&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="154" template="../../../../common/maps/obj/scroll.tx" x="669.333" y="359.333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Golgari Charm&quot;, &quot;editions&quot;: [ &quot;RTR&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="155" template="../../../../common/maps/obj/collision.tx" x="597.287" y="176.909" width="21.4262" height="116.682"/>
+  <object id="156" template="../../../../common/maps/obj/collision.tx" x="95.9913" y="208.493" width="35.3507" height="32.6816"/>
+  <object id="157" template="../../../../common/maps/obj/collision.tx" x="222.658" y="159.993" width="35.3507" height="32.6816"/>
+  <object id="158" template="../../../../common/maps/obj/collision.tx" x="382.325" y="208.326" width="35.3507" height="32.6816"/>
+  <object id="159" template="../../../../common/maps/obj/collision.tx" x="138.325" y="526.993" width="35.3507" height="32.6816"/>
+  <object id="160" template="../../../../common/maps/obj/collision.tx" x="109.658" y="512.326" width="35.3507" height="32.6816"/>
+  <object id="161" template="../../../../common/maps/obj/collision.tx" x="76.3246" y="497.659" width="35.3507" height="32.6816"/>
+  <object id="162" template="../../../../common/maps/obj/scroll.tx" x="159.167" y="152.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Overgrown Tomb&quot;, &quot;editions&quot;, [ &quot;RAV&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="163" template="../../../../common/maps/obj/gold.tx" x="441.058" y="268.623"/>
+ </objectgroup>
+</map>

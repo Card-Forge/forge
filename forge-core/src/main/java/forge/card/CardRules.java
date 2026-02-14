@@ -20,9 +20,7 @@ package forge.card;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import forge.card.mana.IParserManaCost;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostShard;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
@@ -731,8 +729,7 @@ public final class CardRules implements ICardCharacteristics {
 
                 case 'M':
                     if ("ManaCost".equals(key)) {
-                        face.setManaCost("no cost".equals(value) ? ManaCost.NO_COST
-                                : new ManaCost(new ManaCostParser(value)));
+                        face.setManaCost("no cost".equals(value) ? ManaCost.NO_COST : new ManaCost(value));
                     } else if ("MeldPair".equals(key)) {
                         this.meldWith = value;
                     }
@@ -815,62 +812,6 @@ public final class CardRules implements ICardCharacteristics {
                     }
                     break;
             }
-        }
-
-        /**
-         * The Class ParserCardnameTxtManaCost.
-         */
-        private static class ManaCostParser implements IParserManaCost {
-            private final StringTokenizer st;
-            private int genericCost;
-
-            public ManaCostParser(final String cost) {
-                st = new StringTokenizer(cost, " ");
-                this.genericCost = 0;
-            }
-
-            @Override
-            public final int getTotalGenericCost() {
-                if (this.hasNext()) {
-                    throw new RuntimeException("Generic cost should be obtained after iteration is complete");
-                }
-                return this.genericCost;
-            }
-
-            /*
-             * (non-Javadoc)
-             *
-             * @see java.util.Iterator#hasNext()
-             */
-            @Override
-            public final boolean hasNext() {
-                return st.hasMoreTokens();
-            }
-
-            /*
-             * (non-Javadoc)
-             *
-             * @see java.util.Iterator#next()
-             */
-            @Override
-            public final ManaCostShard next() {
-                final String unparsed = st.nextToken();
-                if (StringUtils.isNumeric(unparsed)) {
-                    this.genericCost += Integer.parseInt(unparsed);
-                    return null;
-                }
-
-                return ManaCostShard.parseNonGeneric(unparsed);
-            }
-
-            /*
-             * (non-Javadoc)
-             *
-             * @see java.util.Iterator#remove()
-             */
-            @Override
-            public void remove() {
-            } // unsupported
         }
     }
 

@@ -130,21 +130,6 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
-    public List<Object> getTriggerRemembered() {
-        return sa.getTriggerRemembered();
-    }
-
-    @Override
-    public void resetTriggerRemembered() {
-        sa.resetTriggerRemembered();
-    }
-
-    @Override
-    public void setTriggerRemembered(List<Object> list) {
-        sa.setTriggerRemembered(list);
-    }
-
-    @Override
     public boolean canPlay() {
         return sa.canPlay();
     }

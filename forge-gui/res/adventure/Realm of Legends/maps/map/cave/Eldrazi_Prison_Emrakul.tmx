@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="34" height="59" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="73">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Eldrazi Temple&quot;, &quot;Matter Reshaper&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../../../common/maps/tileset/dungeon/animatedtiles.tsx"/>
+ <layer id="8" name="Bridge" width="34" height="59">
+  <data encoding="base64" compression="zlib">
+   eJztmFtS40AMRW0eSZaBw//UsAV7AeEfNhMgxMvAXgAws0K6sRUu11K3HGp+ptJVt4gftE5LarWSojiN0ziN0ziN/22UdVGcBZ0HXQRdBi2ClvW/s3mmzL0N9x6CHoOegnb19Nmfu6J4+4FkjXE+WffEH024H3QedNF83V82w7PIUG1+pvVmsB/nszi24dlD0GPQE3DsgaFTJPOnxO9hDkz8oTxb1N8Z+nGefhTO3SfE76U4MD/i2CkMPaxP5me/s3r6LO+Z/oD8iIMZOsWmFpuUX9bw7u/7IWdT+aHFQos1+8djP8eBMft1b8/NcWJblfGOlwPzI3LgfOgX9EdH9rT/QU6U6Q/ID/GHtkcwDh3Z5OtemQP9oQ3MD/EH8uM1M8pz7T5eVw6OVH4gh1YPKmLB9TPHOsMh+VFCfnDseS7cz8yBcdJyxOsPzEWuG7x3tPzs6BnXFosDz3uNQ9snHT23GDR/RY6Fsl+Eo4T80HyC+Yb1nesu71Mvh/gicryGd/7eTWNdJaT5gOOB++c9wyE9yg2woB2OB9vDa1Z8Hs8MYdB6vUNcmoFlq7BwDbCkxQYZUj2n7JXt2H+JbihGXEs0ce1DBu5/U/s2sqA0Fo67JWTg/vfZOOdKEPfuzIK1MiVh+PQ59L+XQYtmymF9Z1iBIov03pHphfJAPr9Cj/4O9Qr7313Qs8Jh2W9Jq2ZQrDEvG90/EudyzHeJr4eD1852Re0o5pC/18Cxlf1nMOwVDl472xWxP/j8Ew5kmMPBaz/YNbhyHB6GVvMHr5t8I/clfll/HMmBNqy9izns4UjZt+rYCmznGDwc8t6+Sc/HA8/bHEPr4DjENDMnD7mf45B8yfpjzOvcfDyWDvYV5GzWH+N7czlkrVl/jHnHHGvi2B/J4WKov/IfOfB8Fw7sM2f5w8G+ou9aUtc1Dg9Dq/mj8dUN5rDyg/eeNS8P7E3ncFjnHHNovwNqfVC0VYJPmIev2R/MwXuPfwe0+qC43s/zoM73ZgsHh9Qw7DU9/cfBbvP9d0Xv+TLxRzOwHMPh6Q2t82Xij7Ge4pwai5anll3uDbXzReNomUNh0fIj15OichxYTzHmOQ60P/fcrzIcc+qpNy84Lvh9l/etaA6HPPfma+S4ug2+IF3fjvmBca3tOo/jA773/mk=
+  </data>
+ </layer>
+ <layer id="7" name="BackGround" width="34" height="59">
+  <data encoding="base64" compression="zlib">
+   eJzNmVFyozAMhmFLQg6yuwfBx2iPsT0ALVk4CO1jZ49Yi1jkt5DBSTCsZjS0ZbA+S7JsuUeTZaXVtro8f9jnk9XC6sHq0Wpe6X8vrZ5AO+Xd3Lf4+19icCyx358U+6QnO8aZxqwu8+rc+zer71abyn/vjesYyhvn3Qn7pJ3VA83HjTn8jca0zyerhXiPNlr2xw322S7aJ23IH+bq4869f7P6Lt5LO/xsA74LzRtVckuWpdxAjjLgO23eGPOlWEblBjw137Vy7uAbtl/P2ArlhmRo4Tlr30xzonYsuQnnYWxuFPDzMLfAdxpX7liWvtFiJjkajMuMbzXf12bZF6GYSaYCatfceCF7S74IfYccjeMoI/J0yd4hoHVgbkUFaq4c5H8UjMsj8u9ZZ28cA/viYK61o3Q2yV/IPo75kmX9nyz7iNRPq18vFxYaz6sdxvcFvce1G/IFM/x6vU0lC81N5gXOmX1yVHxxL0OI5exyFH1xhPyI9cNHhMawSF/w+SfGD5+vcfnZR7BMYmKm4zzCEMsiObC+jmM8yLDEQlKI2GgcP+G733cyhFh4PLnHpOYIjRc8B/0nHO3GHHJfxzq2Jcekfhg/Jltx8F4nz4dbc/BehxyylvUJObAWSQ5N+gQcxPD1rHPMnXX6B2ppzDjIseSXlIJrd08OXLtaPU0tQ/8lzkJlYO2uKdLnQ/9V+b3N2F8q55C1GORZL1d6G61+rCln5cxbKz1R6rzQehCtL9tjnWgcKfMTBe9rNA7psxT2pc71yyQx+849HLVUwVGIuiHPSGvIcG9kfEUO7rcxJvKMtIawXamjP1xdTZkbJFqtwHwY7z8Sc0gmec857i8bcpDwmhlZjN7vplgzKDVwoD8m8UrMkUNsvLsYYS+5P4DDu4vZmIMkFzHh+yC2N+knEnJM7segdi71V2tyaPdjvHaX+qu1pAjEhSXF/qIxNEpc0F6K/UVKo8Vkh3qKd8l7cXj/79iJQ/ufy14czKLdrX8DuZQYTw==
+  </data>
+ </layer>
+ <layer id="9" name="Tentacles" width="34" height="59">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztlkEOgjAQRT/Cxst4CDkGXgYCGM8C6BXtpgtiYs34007IfwmrNu2b8jsACCGEEOXpF2BY7OMsqhU4rfZxFn3YY/iyT2qcRbWFejf7uPiPXLlPwc69tS527q11sXOf6z6nsNbFzql1PXZOreux36d1PXZO1e9FLh4Td56V88ydd3SeHfDqSlsAl1voVS1Qt/KIHs21rEP0GJ146Dz2Hk3hjEaP0YmHl3srj73HFBzm8NwLuqh/fHp4OQ95yEMev3u46R9OvvvW/483BNFLyA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="240.561" y="404.87" width="64" height="64">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Eye of Ugin|WWK&quot;, &quot;Emrakul's Influence|EMN&quot;, &quot;Vestige of Emrakul|BFZ&quot;, &quot;Emrakul's Messenger|MH3&quot;, &quot;Mutated Cultist|M3C&quot;, &quot;Gisela, the Broken Blade&quot;, &quot;Ugin's Nexus|KTK&quot;]}"/>
+    <property name="enemy" value="Emrakul"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/door_up.tx" x="224.667" y="936.667" width="82.6666" height="16">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/cave/Eldrazi_Prison_0.tmx"/>
+    <property name="teleportObjectId" value="81"/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/treasure.tx" x="263" y="290.091">
+   <properties>
+    <property name="reward">[{
+        &quot;type&quot;: &quot;card&quot;,
+        &quot;count&quot;: 6,
+        &quot;rarity&quot;: [&quot;mythic rare&quot;]
+ }
+]
+</property>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/dialog.tx" x="207.334" y="596.583" width="109.333" height="16.8333" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The most feared of all the eldrazi titans, the legendary Emrakul herself floats before you. You are overwhelmed by raw disgust and primal fear as you feel that you are only barely managing to resist your own flesh and mind being warped by her eldritch will.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

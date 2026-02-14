@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="75">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzdlU0OwkAIhSdp1crBepT6c1HH6qHkJSXBhAxUZ7ro4ltNwwMe0Omc0vQjF+bm0FFK7yEec+ZvXw4H8nXBfUUt10C8CA/Ob6Dvenpqq6s1oYd+izf/eBfpr/g1Ll6LN6i5N7yPeufNlBdHz10NzVr5jRvmsRcw35l5MieywVtNTfgkO4UdbblHukZ9O7bQtW7ksXCvWuqWQE556ZHVu6j/XaE2D9HPyqs1/UAM6ya2+veWev4B3aLiuw==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJytlcsNwjAMhtMW9SGYgx4QnQAxD2UCxBDABIDEhTV6QKiCBbhygTGoRa0G13ENwlJUNw9/+e0oMcZtE9+YnfefNvXdnIL4N2EuZ8fEPQaxCvfwh8ZlwM8ZRY0/6DVM5J6ZNYtA1qzRWHZw0af6pdh0zNaGPuVCs1mUD5YnOu6h32aUAtfmcHvQ6p3FxqzDap/1F/1xxZzH3Xq5PEs1du0pT9pa79537JTEPwncSzX5mjb/lAt54PKMpj1btP9RMZ8OLo2tyTWNPyT9uGYVNvW16w11tvuzSGZinVw11t5RVHcZyfdVF0PLhfOeRe5/26Rc0zxrjGqW2GB4P3OMrntU4iIba74J+XUct6jZmjeM42pMk1NuH9D23pu7/eEthnfuBRyBgNg=
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzT5mFg0AFieoE2bgh9EmjnKR7scsSCFZyEMTWAsDYDg4g2dewl1Y+k2EmOfz8h+ctYh4HBRIc8u/WMyPMXPkCv+KXU3iwSzDbGEk7Exi2t/EuMO4gBT9URmBBYjJQPqOFfSvWgYyMs8URKPJNrN60BKfZS07/I4CuwzPmmTVgdPUEOEOci8Wnld3TAxcjAwM2IaSet7QcAeDRXVQ==
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNUksKwjAQneCqCv42eoNKUzxYVVAvZQX1BK51YdeCXsCuBV07Q1uctFojjuKDR5JJMm/mJQD/jyAdLx7A1UvWNgwdGf2WBmjrYv4BcogcCeju9X3e8QG6vrnPtRwFUEXWlBmX6jfDNqc1Q4bIuTLj0roErsV75HFJ3XUlobTPm3T0XuhK+pzlJO5cgMgtnqH/Rvu2PgfFFKW6J9SMkf1czWf2zykv8VOfuS7R9qyUz2OcT5BTyzscvAbCOz7X8U4D2VT2fXMc8C2O2oyV6Wc5Fqi3RK6URbFCeNYf1Rv1zFh+/Q1dQtwrXz+Czfv+AjdL11kh
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="240" y="272"/>
+  <object id="46" template="../../../../common/maps/obj/shop.tx" x="368" y="226">
+   <properties>
+    <property name="commonShopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop,GreenBoosterPackShop"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="47" template="../../../../common/maps/obj/inn.tx" x="137" y="162"/>
+  <object id="48" template="../../../../common/maps/obj/shop.tx" x="256.749" y="166.664">
+   <properties>
+    <property name="commonShopList" value="Forest"/>
+    <property name="noRestock" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/shardtrader.tx" x="98" y="98"/>
+  <object id="69" template="../../../../common/maps/obj/shop.tx" x="223.959" y="161.137">
+   <properties>
+    <property name="commonShopList" value="Legend4Green"/>
+    <property name="shopList" value=""/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/shop.tx" x="209.462" y="52.6745">
+   <properties>
+    <property name="commonShopList" value="Green,Green,Enchantment4Green,Creature2Green,Instant4Green"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,PhyrexianGreen"/>
+    <property name="rareShopList" value="Land4Green,Simic,Golgari,Gruul,Selesnya,Vehicle,Colorless"/>
+    <property name="uncommonShopList" value="Artifact,Elf,Wolf4Green,Druid,Squirrel,Sliver2Green,Wand,Equip,Multicolor"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/shop.tx" x="175.097" y="81.1325">
+   <properties>
+    <property name="commonShopList" value="Elf,Wolf,Druid,Squirrel,Sliver2Green,Wolf4Green"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green"/>
+    <property name="rareShopList" value="Simic,Golgari,Gruul,Selesnya,Creature6Green,Multicolor,Land4Green,PhyrexianGreen"/>
+    <property name="uncommonShopList" value="Creature2Green,Creature,Green"/>
+   </properties>
+  </object>
+  <object id="74" template="../../../../common/maps/obj/shop.tx" x="127.31" y="83.2803">
+   <properties>
+    <property name="commonShopList" value="Green,Green,Enchantment4Green,Creature2Green,Instant4Green"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green,Hydra"/>
+    <property name="rareShopList" value="RGU,UWG,UGB,RWG,RGB,GWB,Land4Green,Creature6Green"/>
+    <property name="uncommonShopList" value="Simic,Golgari,Gruul,Selesnya,Simic,Golgari,Gruul,Selesnya,Land"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -13,6 +13,7 @@ import forge.gamemodes.net.ReplyPool;
 import forge.gamemodes.net.event.LoginEvent;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.ILobbyListener;
+import forge.util.BuildInfo;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.LobbyPlayerHuman;
@@ -35,6 +36,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
     private Tracker tracker;
     private Match match;
     private Game game;
+    private GameView pendingGameView;
 
     /**
      * Creates a client-side game handler.
@@ -67,7 +69,17 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
     @Override
     protected void beforeCall(final ProtocolMethod protocolMethod, final Object[] args) {
         switch (protocolMethod) {
+            case setGameView:
+                // Capture the GameView synchronously on the IO thread.
+                // The actual gui.setGameView() runs on EDT (queued by channelRead),
+                // so gui.getGameView() may still be null when openView arrives next.
+                if (args.length > 0 && args[0] instanceof GameView) {
+                    this.pendingGameView = (GameView) args[0];
+                }
+                break;
             case openView:
+                gui.setNetGame();
+
                 // only need one **match**
                 if (this.match == null) {
                     this.match = createMatch();
@@ -141,6 +153,13 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
         // retrieve what we can from the existing (but incomplete) state
         final IGuiGame gui = client.getGui();
         GameView gameView = gui.getGameView();
+
+        // gui.getGameView() may be null because setGameView was queued to EDT
+        // but hasn't executed yet. Fall back to the GameView captured synchronously
+        // in beforeCall when the setGameView event arrived.
+        if (gameView == null) {
+            gameView = this.pendingGameView;
+        }
 
         final GameType gameType = getGameType();
         final GameRules gameRules = createGameRules(gameType, gameView);
@@ -288,7 +307,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
     @Override
     public void channelActive(final ChannelHandlerContext ctx) {
         // Don't use send() here, as this.channel is not yet set!
-        ctx.channel().writeAndFlush(new LoginEvent(FModel.getPreferences().getPref(FPref.PLAYER_NAME), Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",")[0]), Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_SLEEVES).split(",")[0])));
+        ctx.channel().writeAndFlush(new LoginEvent(FModel.getPreferences().getPref(FPref.PLAYER_NAME), Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",")[0]), Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_SLEEVES).split(",")[0]), BuildInfo.getVersionString()));
     }
 
 }

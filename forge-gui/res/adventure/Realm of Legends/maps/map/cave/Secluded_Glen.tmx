@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="119">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Wanderer's Twig&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/FarmFood.tsx"/>
+ <layer id="1" name="Background" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxL42RgSBvFgwrXskDwQLtjFI8sPJrmRgYeKvEswMXAkDcI3EHruBgq8UGqv7DRpOilNPwImYMsTyge0NXSM13A2MiYnvGIbi+6G7C5b7im61E8ikfxKB7Fo3gUDzwGAPU4Cs4=
+  </data>
+ </layer>
+ <layer id="2" name="Grass" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJyVWG1OFEEU7ETY7ZlR8AZGY2JiIj/2EsuaPYVCDCYg4RIQ/ECPIS5ewB/+NFETEL2CKxgUwQvYlenK1LzpnV07eZlm3emurqr3Xq/OtY/XuXNv8urvYeHcSVF9dj08P3rnPsWYD39/CE8fngshFkMc+XKd0/DezxCjMD8IMQ7zH0W5zoLs8dlX832zv8WGtbAGcX4P87d5HSMwrWVl4Hv7EsBkcRHTLMPuNQkb1h/EdRXjqbzL7y1LpLj6n8G97su7iofzkTk33sO+xLk/ARvPR52sX9qGj9+jp6gJ9zkpqvkgcXbFDpzLZq64idX6NzW++iosF3YPzi2/eg78G9aghpyPi6a21r/g6NjX8R36Kq9S3iFvPHNfuKDXVUfFPsuY5F9iQ0047zj3p1OurX7rJ7xjNUx5bNq4YvQkRj0fsV0EXM+6zj3t1j1mebO5oWuOEjnJGmc5sTmxmpWa0ldY40h4A7aXMQ4k/zlXbMStdWxSvgyFZ+sH+u1RwPY4xGbW1HO3W8f2q9PukXGCr3HRrLFbWdlDhpIrPCvPjnVwJsV3OIEzYnvRrbyveaJaqAbbvfRZ1rNyX60dx77Kc3JIXag/zmWxAdeSL7FhDdWQ/Wua33d69fNY7W3do09xBu0H4O6uT+NC7buW1zXkuqleRx6474nBNMrrmlovY030aWjbjz4gd9RScXGsRV20FhMnB9YDZ6wp271mnRlEPhZiXf3iK2+q7lrL9gw2xQVvYp014XxQNPsqsNh6nArygRxEXQVOYCzyej3WegVtX4Xvb2TVuRjMG96JVLNUr0/dSbReA9/zsNfvTllXL2P9txiVa+IDjst4tt347mXUPnUnskFt1evYs1/U8X3zJcazToUTGKm31oJz6RH04FkM5AmfwxaOlB/orPVB81P7PfwNnPd8HSP1s/WOuDQ/EFfzMlL4Uv0MmmhP0nsJ12BPAbfkEhih4UWnrpvW4I2syg+9uywafPb+Td9AX+iH91M12uJTjHsJDZeE290J/OIzPIeGs9SYdqfUu58O1Bb6UTWk/tan58IvzzScgo37Q+edyB3r7Xav/R5cRA/RT6y9/Fw9oBxrfszSz5RD7R9ak5gzeN6Yc+7m3PTfGdanto/wfs/R9tvF+lRrjvaWOwHXrRDv52Y7t/Xp34DxSdb8Huugvavrbw3NH+LVnnA7YnsX4sF8cx17b+VYz+q5zt5jsaV8mLrv815AHYn5YcC0EmLVYFP+1Q/EajlErmxm9XdT2Cxu7TWq46R7oQ6tpanfVVuGQ+Kz/zfQxml/Bh2nYdT7nOJTDoGPHqR+Fl+KU+Z6m46z4uR9SQc4JD7y9w8qKE0D
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="30" opacity="0.9">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy9WM1u00AQXiGnReLQIyhIGBoXh6b0Ao9AH6KYn0CKhHgZjnCF8gZwQRAgCWll4AhI8AJwBQQXODCDZ8hkO7P+IeKTRonHO95vZ+dn7dxVQxI5dzrS76Wg74KskZwS4yZiDNqfXymu36XOvU912xcg263iWs6B12cMDhmMv9HS7w1A/xTsnoE8AbnujcO1XQTd82jG6wvI11S37YNcI5FzXGoV9++A3d3UdKXJcQfksrKGPt3DZzOvqrY+Hi859xDsH9Xk1xTnVuZlIu4lJbYPjjSbMzHiJK/AT2IM8nPduV/r8/pvy/PXXfH/A/j1I8jIm2efftHtmbJXU/GfY5D5xZQjXWVdR3vOHespCzPwHZ77o8Hey/VwDDLPIeUHyksjPxE47a6xp4n45f+dCly0PY2p1sgcxpoyiuwasWHT/ouzID3i9Va5f+FQhYcAxsBjn/w0Jp0WE6a9d80xlxCvHsTnK6Gvi34NLgg/1n1wzCHvDeB263DBtWksLhI4vYyznHKbc9qKwQPPgf08GeiRVSDnsnyaL+v6kBsxH1aN3leGUM9lyNrF/EIx4d/D+rFHPZ/PDlpeI2LyM4/D3tyh69fghDcBR3Ds1UEifLcTOGPItcg6k7Vmdp+A22eFH/K6vVSfGz+fzx1lmLjwOclH7g76jHtrWe9eNKrmw5jioeudQ8swKR8SREx+Wduc198E320KjnyW4zNuWW7VRWKcE/qBffc5Ijiu2IZz/F/8hLYDOjfL/qLVTl+ncfwfiOndAPP/KtUnTadxNGN2gfy43iAP5ITnCk3HQI5Ya3xfplF57yrr8xa/7dbMX1inNJ0PLW+0cRzvTfou7mNG8cg19ISis1AWkxwnI2WNIV9inuB+XAGb3Ta8B7UL/T363Tru3P12lRWGOeI+TKLivRdRx5dDz06z0dYYK3XZ4jgVZxbNl6FvEkN6F0Ff+bVvqpv88fmqWJfP0c+bgYgZ35fMAeNc4zikPlUV8hxixeTI4In8poptRn2oo+wJf8+QccZ1S8YkAuOSv0FYPcb3Oe95TvwGRq7xtxbrub8B6U3KKQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="320.167" y="479.167" width="98.5" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="54" template="../../../../common/maps/obj/enemy.tx" x="98.8182" y="116">
+   <properties>
+    <property name="enemy" value="Nath"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../common/maps/obj/enemy.tx" x="57.1663" y="90">
+   <properties>
+    <property name="enemy" value="Gaddock Teeg"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="63" template="../../../../common/maps/obj/enemy.tx" x="208.828" y="162.108">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Helix Pinnacle|EVE&quot;, &quot;Primal Beyond|MOR&quot;, &quot;Hoofprints of the Stag|LRW&quot;]}"/>
+    <property name="enemy" value="Horde of Notions"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="84" template="../../../../common/maps/obj/enemy.tx" x="483.667" y="421">
+   <properties>
+    <property name="enemy" value="Brion"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/enemy.tx" x="166.5" y="397">
+   <properties>
+    <property name="enemy" value="Oona"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/booster.tx" x="174.667" y="112.667">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;LRW&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;LRW&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;LRW&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/collision.tx" x="-2.5975" y="480" width="644.195" height="16"/>
+  <object id="74" template="../../../../common/maps/obj/collision.tx" x="-4.0975" y="-16.5" width="644.195" height="16"/>
+  <object id="75" template="../../../../common/maps/obj/collision.tx" x="-17.5" y="-14.0495" width="16" height="514.099"/>
+  <object id="76" template="../../../../common/maps/obj/collision.tx" x="638.5" y="-18.5495" width="16" height="514.099"/>
+  <object id="78" template="../../../../common/maps/obj/manashards.tx" x="452.5" y="473.333"/>
+  <object id="79" template="../../../../common/maps/obj/manashards.tx" x="8.5" y="317.5"/>
+  <object id="81" template="../../../../common/maps/obj/enemy.tx" x="38.3333" y="278.833">
+   <properties>
+    <property name="enemy" value="Wort"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="10"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="83" template="../../../../common/maps/obj/enemy.tx" x="540" y="73.5">
+   <properties>
+    <property name="enemy" value="Doran"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="85" template="../../../../common/maps/obj/booster.tx" x="224" y="112">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;MOR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MOR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MOR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="86" template="../../../../common/maps/obj/manashards.tx" x="594" y="46.5"/>
+  <object id="87" template="../../../../common/maps/obj/manashards.tx" x="598.5" y="93"/>
+  <object id="88" template="../../../../common/maps/obj/manashards.tx" x="120" y="416.5"/>
+  <object id="89" template="../../../../common/maps/obj/manashards.tx" x="145.5" y="451"/>
+  <object id="90" template="../../../../common/maps/obj/scroll.tx" x="10" y="36">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Gilt-Leaf Palace&quot;, &quot;editions&quot;: [ &quot;LRW&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/scroll.tx" x="431.833" y="297.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wanderwine Hub&quot;, &quot;editions&quot;: [ &quot;LRW&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/scroll.tx" x="25.3333" y="474.667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Secluded Glen&quot;, &quot;editions&quot;: [ &quot;LRW&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="93" template="../../../../common/maps/obj/scroll.tx" x="473.333" y="472">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Ancient Amphitheater&quot;, &quot;editions&quot;: [ &quot;LRW&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/scroll.tx" x="7.5" y="284.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Auntie's Hovel&quot;, &quot;editions&quot;: [ &quot;LRW&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/scroll.tx" x="610" y="65">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Murmuring Bosk&quot;, &quot;editions&quot;: [ &quot;MOR&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="96" template="../../../../common/maps/obj/scroll.tx" x="199.5" y="134">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Primal Beyond&quot;, &quot;editions&quot;: [&quot;MOR&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="97" template="../../../../common/maps/obj/dialog.tx" x="271.667" y="426.75" width="32.667" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A beautiful glen spreads out before you. Birdsong and the smell of sweet flowers are a welcome change from the grim places you usually stumble across. A variety of odd creatures can be seen in the distance, but you resolve not to let them bring your mood down too much.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="98" template="../../../../common/maps/obj/enemy.tx" x="474.667" y="226.667">
+   <properties>
+    <property name="enemy" value="Sygg"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="99" template="../../../../common/maps/obj/manashards.tx" x="466" y="275"/>
+  <object id="100" template="../../../../common/maps/obj/collision.tx" x="150.208" y="143.034" width="22.25" height="32.9323"/>
+  <object id="101" template="../../../../common/maps/obj/collision.tx" x="245.875" y="143.534" width="22.25" height="32.9323"/>
+  <object id="102" template="../../../../common/maps/obj/collision.tx" x="197.875" y="80.8672" width="22.25" height="32.9323"/>
+  <object id="103" template="../../../../common/maps/obj/collision.tx" x="1.375" y="79.5339" width="31.25" height="32.9323"/>
+  <object id="104" template="../../../../common/maps/obj/collision.tx" x="79.875" y="29.0339" width="31.25" height="32.9323"/>
+  <object id="105" template="../../../../common/maps/obj/collision.tx" x="462.375" y="79.5339" width="32.75" height="32.9323"/>
+  <object id="106" template="../../../../common/maps/obj/collision.tx" x="495.625" y="96.5339" width="32.75" height="32.9323"/>
+  <object id="107" template="../../../../common/maps/obj/collision.tx" x="445.625" y="16.0339" width="32.75" height="32.9323"/>
+  <object id="108" template="../../../../common/maps/obj/collision.tx" x="479.125" y="-0.96615" width="32.75" height="32.9323"/>
+  <object id="109" template="../../../../common/maps/obj/collision.tx" x="48.2083" y="224.867" width="20.5833" height="32.9323"/>
+  <object id="110" template="../../../../common/maps/obj/collision.tx" x="59.7083" y="243.534" width="20.5833" height="11.9323"/>
+  <object id="112" template="../../../../common/maps/obj/collision.tx" x="3.70835" y="399.534" width="26.0833" height="15.4323"/>
+  <object id="113" template="../../../../common/maps/obj/collision.tx" x="83.4583" y="463.284" width="26.0833" height="15.4323"/>
+  <object id="114" template="../../../../common/maps/obj/collision.tx" x="80.4583" y="398.784" width="29.0833" height="15.9323"/>
+  <object id="115" template="../../../../common/maps/obj/collision.tx" x="48.9584" y="400.284" width="14.5833" height="15.4323"/>
+  <object id="116" template="../../../../common/maps/obj/collision.tx" x="1.20835" y="430.284" width="14.5833" height="15.4323"/>
+  <object id="117" template="../../../../common/maps/obj/collision.tx" x="-1.79165" y="464.284" width="14.5833" height="15.4323"/>
+  <object id="118" template="../../../../common/maps/obj/collision.tx" x="145.208" y="463.784" width="14.5833" height="15.4323"/>
+ </objectgroup>
+</map>

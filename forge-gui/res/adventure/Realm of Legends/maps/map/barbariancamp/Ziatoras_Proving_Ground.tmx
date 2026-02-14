@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="27" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="115">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Ziatora's Proving Ground&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../../../common/maps/tileset/FarmFood.tsx"/>
+ <layer id="6" name="Collision" width="50" height="27">
+  <data encoding="base64" compression="zlib">
+   eJztlkEKwyAQRd20EKTdBbLPUQo5RO/SnqUX6XV6jpCFFIL++c6YxhIfzCaOf/xq1Klzbqo4WHI0b1ccuaz7WvRy5mVLH1a90uu7F0f28TntM1ZE81EXR/4/amSLu7UUr57PreVd0fgivQ/YiGmlaoRvaCxaL7n+Yv2l+veLc0+vqxlrR/0Z3dQ8MPMorQcLymV9oPli61vfualcy76UtGM5o7fXQnvLql0ih62F1uRf0PpY9sES5wfWZuqXQPKB2qU9/QsfvXCmrM8RhrBGLO+Bz5Vgzl3tfc7qa2toz+hGQ8MMF8N0Fw==
+  </data>
+ </layer>
+ <layer id="7" name="Floor and Walls" width="50" height="27">
+  <data encoding="base64" compression="zlib">
+   eJztljEOwjAMRc2StIWRkRG4BOppkLgFCwPlBIw9DPRe0AwRoUqCSezQln7pK4v1nZfEVQH+S48M4Jqn9Syn5/D1o8yKzY7trWvM1ZeDzf4FR7cew9A3DvMuvmHu27sKfe8Tx8RBzRLCHatdQcuCcVnQc4SK61y7Wi14vZUAa8nfR/kuaWzLalrfkLUxffWZHbI46zNXWXXut6t2I3G2ZYVwnAVA1foiaDlqxBxRcpj7GDIH17vCiJtDz3KD4HDVmtovX+biUBJH98x84nDVpuRQ4npXVPNxmr+vqTnUHlPNxxA4MPfB+b0KsclRCRrbsnQ/TG1M3zH9J46B4wkhrLRF
+  </data>
+ </layer>
+ <layer id="8" name="Walls Supplementary" width="50" height="27">
+  <data encoding="base64" compression="zlib">
+   eJxjYBhZwIKJgeEynTEtgBkOc1XZKcf0BLj8AQPo7gHxp3FiYnz+gKmhJUD2xwEsbsbmNlzuxqUWmaaHP9DtokYaQfYHLf2Czx/UAAPlD2rbNZz8QY98PlzANRrVS6Ng+AJCdTUxwISJeLNIUUusWbQAXoXkyY2CwQuSRVAxrQBbLQTTAtDLDyBAKz/QGwwHf8DS1FD3y3DxByGwV2KgXUAdgM8ftPTjaLtkFFAbAAD4e0J9
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="50" height="27">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztVktKBDEQjb2YcZbzcfACwmzcieAFVAb8nEAFT+DsvUYr6iHUvVs/ICK48AoiHkHFKsbCsqZSSdqJDOKDRzfpSqVev4SUc5ON5UYcU3C9p/MSeAV8KNJI83x5l4o8OqYHOmvA+mAYszoTn4/m+fIuZNKBaEGdbWDHU2/Z0GNC87SYXDouZp07hTXOgOeeemTMTXtIPoYxGmRMLh1rTefWu85tADe7aTF8DGPQt1KsL2Ny7isE/l8fsLa5uv2d08qdU8cW/Kdt4E4zfW5Ih8yd83y8whpvwPcMOnjuXOdjsRju2aOWc8fAk5at1/rm21M8d87zcTAVR6yB3g+BpedbiI+Zz3kK0MeU/1qVfwnU5/jGY58I2SMRtPEq+ftKX0fg/REHjcc+EbJHImjjVfKjDq2v0/4LAe8kq7/1+RFCyI/dziixFnz2WX6fH5ovVn/r8yOEkB+aDiJHrB8Wavtf5EjxQ8KqX9OR4gfivufcHfC2F64xxQ9LB19zXH68QK5n4NOnDuwDrV6Qg/r2GPB6+Zrj8oNA9cu9xPGb+yrkh8+XGB9+sq9itCCK4nvdUleML1KHdtYtWD1krA5ZNyH1Xg3dH9gLrsyP1ohj+K3qfR7aN6n3au77o8q6/5gsfAASPp4/
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="392.003" y="429.414">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="65" template="../../../../common/maps/obj/gold.tx" x="724.709" y="361.261"/>
+  <object id="73" template="../../../../common/maps/obj/enemy.tx" x="623.501" y="272.167">
+   <properties>
+    <property name="enemy" value="Henzie"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="74" template="../../../../common/maps/obj/enemy.tx" x="390.167" y="114.5">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Riveteers Initiate|SNC&quot;, &quot;Riveteers Ascendancy|SNC&quot;]}"/>
+    <property name="enemy" value="Ziatora"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="80"/>
+   </properties>
+  </object>
+  <object id="82" template="../../../../common/maps/obj/manashards.tx" x="121" y="363.334"/>
+  <object id="98" template="../../../../common/maps/obj/scroll.tx" x="84.3333" y="313.834">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Savage Lands&quot;, &quot;editions&quot;: [ &quot;NCC&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="99" template="../../../../common/maps/obj/scroll.tx" x="237.379" y="112.076">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Ziatora's Proving Ground&quot;, &quot;editions&quot;: [ &quot;snc&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="100" template="../../obj/treasure.tx" x="362.833" y="48.1364">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;SNC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;black&quot;, &quot;red&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;SNC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;black&quot;, &quot;red&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;SNC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;black&quot;, &quot;red&quot; ],
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="103" template="../../../../common/maps/obj/gate.tx" x="386.227" y="224.091" width="26.9091" height="14.9091">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;A gate is blocking the path. It looks like it is opened from elsewhere.&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Continue&quot; } 
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="104" name="switch" type="dialog" gid="4426" x="63" y="228.667" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    &quot;text&quot;:&quot;A big switch is embedded into the wall.&quot;, 
+    &quot;options&quot;:[ 
+	{ 
+		&quot;text&quot;:&quot;You hear some loud sounds from the center.&quot;,
+		&quot;action&quot;:[{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
+		&quot;name&quot;:&quot;Flip the switch&quot; 
+			&quot;options&quot;:[{
+			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:2}}],
+			&quot;action&quot;:[{&quot;deleteMapObject&quot;:103}, {&quot;deleteMapObject&quot;:112}, {&quot;deleteMapObject&quot;:-1}],
+			&quot;name&quot;:&quot;Continue&quot; }]
+	},
+	{ &quot;name&quot;:&quot;Leave&quot; } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="105" name="switch" type="dialog" gid="4426" x="687.333" y="231.667" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    &quot;text&quot;:&quot;A big switch is embedded into the wall.&quot;, 
+    &quot;options&quot;:[ 
+	{ 
+		&quot;text&quot;:&quot;You hear some loud sounds from the center.&quot;,
+		&quot;action&quot;:[{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
+		&quot;name&quot;:&quot;Flip the switch&quot; 
+			&quot;options&quot;:[{
+			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:2}}],
+			&quot;action&quot;:[{&quot;deleteMapObject&quot;:103}, {&quot;deleteMapObject&quot;:112}, {&quot;deleteMapObject&quot;:-1}],
+			&quot;name&quot;:&quot;Continue&quot; }]
+	},
+	{ &quot;name&quot;:&quot;Leave&quot; } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="106" template="../../../../common/maps/obj/enemy.tx" x="623.667" y="347.667">
+   <properties>
+    <property name="enemy" value="Ognis"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="107" template="../../../../common/maps/obj/enemy.tx" x="163.667" y="285.667">
+   <properties>
+    <property name="enemy" value="The Beamtown Bullies"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="108" template="../../../../common/maps/obj/enemy.tx" x="161.333" y="350">
+   <properties>
+    <property name="enemy" value="Mr. Orfeo"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="109" template="../../../../common/maps/obj/dialog.tx" x="319.667" y="362.25" width="162.667" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;This building seems to be a huge warehouse stacked with crates and barrels. The sounds of fighting and cheering can be heard from the side rooms, emanating from crowds gathered around a series of makeshift boxing rings.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="110" template="../../../../common/maps/obj/dialog.tx" x="364" y="176.917" width="69.3337" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A dragon emerges from a pool of lava as if it was a hot tub. Her voice is surprisingly smooth as she addresses you.
+
+'So, had your fill of fighting the rabble and decided to take on the boss of the Riveteers all on your lonesome? Let's see if you've got what it takes to prove yourself.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="111" template="../../../../common/maps/obj/gold.tx" x="545.25" y="112.333"/>
+  <object id="113" template="../../../../common/maps/obj/scroll.tx" x="719" y="306">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Riveteers Charm&quot;, &quot;editions&quot;: [ &quot;snc&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="114" template="../../obj/treasure.tx" x="420" y="48">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;SNC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;black&quot;, &quot;red&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;SNC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;black&quot;, &quot;red&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;SNC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;black&quot;, &quot;red&quot; ],
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

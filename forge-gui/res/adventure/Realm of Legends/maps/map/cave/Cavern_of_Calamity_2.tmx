@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="108">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Where Ancients Tread&quot;, &quot;Primal Rage&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../../../common/maps/tileset/dungeon/animatedtiles.tsx"/>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzL4GFgyKAS7uMkjKlpFimY3vYRYy+t7MRlN63tQ7eXXvYh20tvO0ftHRxYlJ08PGrv4LIXV3lFS3vxlc+j9g5Pe4dzeh6J5cZwsJdSO2ltL762JL3LDErKDUrtxYZpFc7UsJsUewGdZYKl
+  </data>
+ </layer>
+ <layer id="6" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAfeMpIR8tGAV0BKG5H43cUDHWwnoOB4T0nBG8Asjdy0NYekB0g/AHI9kPC7zhpY/droLlvkPAWDlR7QTiAk/r2YnPHZg6EGzYB8Vs62IsMgoj0K7XjAeR3YvxK7/CgBZjJw8DQOAz8MQpGwSgYBbQGA1VWwuwFAOJdH3w=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJytl3tOAkEMxjcxMTsHA5QEMNzIC3ANeZiI4p9egxPwMhGQIzjN9st2h05nQJo0sw+cXzv9OrMWRdxeyqLYuaIY8yidnsHp/tv7g/eFv//0vryvvO8q//DPuvwbi0fz0VxTP679OOMR/lo235Fv/PXInTPJj67i0t/EmJK3icS3Ut6NmIucJbfv6nwnZcXBKHOM8f5jK16nDsewdXk53sKQcw7vzb//9e/mPMprGnH9HqmdtJar8k2tKTFP7rxW0Ohe1POYwQbX0rXFhEaR/0k8s9gpbopp+SChj63BHV7JzDFo+lbcXMNaa/bj9N6/xTqjdycRHfSEbsMYoGU8p3voOofbZva4POcPeb6Da8aw4GdSe0+ujtUy7MNk1MNU65A/5L6Y8/wyl1DvA44jx+TZQHsnzhnUXGrryD2K/uy55rrjfY5pPdQVWiNtoYayxmBo+9fBYOPs0bSsnc29BGvP8VlMshbrqR38DjUPuZQ3tCp1i9xzz4WuwpXnfXhOkF5QU62+UuOXcPF9FDuboGu594dazjHJnZbN7yPNrD0zpaUY1zoHYdaemZtryI3tzxY77Kmc74xruWRY70vq+3Wnc2N7s2ayn7TvjjBvYkqX3JnYm3eZMWj1hr5ClsbF/NibtRi0/1Fi/ijc4ob7lYxhrcQyKeuzKVznFJMc3+0aVzPE2TH6GHNbffns6rn+ACH3OfM=
+  </data>
+ </layer>
+ <layer id="7" name="Foreground" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYMAN3DhphwnZRwpYzYEfr+HAbS459pECSA0DYsAsHvLsRgd1vOS7AZt7fNHspTegpZ34wnwg/Ipsry9+ZTgBMekIXY0rWty+JtNuUsFjOuQXagF62zfcAKnlBznpGAa8kOzCVl5aUKmMxGcvMqB1WfJiAOxtxFEHUaueIBT/yHYMRN00UPUhOYDYsoucMo7cchFdH7XaLdQCyHUgrcv+PcwQTAhQ2x0wewmlZUrjRokJgnHZS2z7eSYO/5sjuQ9mFzaMK5wp6fM8A2JPTvx2gspKfPFLrt2eeMIL2V4AjqtGxw==
+  </data>
+ </layer>
+ <layer id="9" name="Clutter" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF6KDQnoGhCIh/GjMw/DKmn33FQFwCxJUmDAxVJvSzD8ant30wPjKgRpgTsg+bf2kd5oMZ0CudowNywxwWf6V0SLvIANk+etpLTbvJiWtq+HUk5y9yADXyJDlmUCOeKDVjqJVHyGAou30gwGh4DQwYDfdRgA0AAHAbRZM=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="71" template="../../../../common/maps/obj/enemy.tx" x="149.981" y="169.866">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Horned Helm|5DN&quot;, &quot;Sinister Monolith|BLB&quot;, &quot;Restless Cottage|WOE&quot;, &quot;Trail of Crumbs|ELD&quot;, &quot;Caustic caterpillar|ORI&quot;]}"/>
+    <property name="enemy" value="Ygra"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/enemy.tx" x="259.504" y="291.825">
+   <properties>
+    <property name="enemy" value="Wildsear"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="150"/>
+   </properties>
+  </object>
+  <object id="79" template="../../../../common/maps/obj/dialog.tx" x="274.269" y="438.576" width="174.197" height="20.858" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The next cavern is nearly as large as the first, though the ceiling hangs lower, covered in menacing stalactites. Massive stalagmites covered in blood jut from the floor, and the overwhelming stench of carrion fills the entire place. A massive flame-wreathed wolf sizes you up, and a colossal cougar lurks behind it, its distant, glowing eyes somehow still conveying a distinct sense of raw animal hunger.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="81" template="../../obj/treasure.tx" x="48.6667" y="134">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;rarity&quot;: [ &quot;Rare, Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="83" template="../../obj/treasure.tx" x="48.6667" y="158.667">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;rarity&quot;: [ &quot;Rare, Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="84" template="../../../../common/maps/obj/gold.tx" x="19.3333" y="131.333">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="85" template="../../../../common/maps/obj/gold.tx" x="16" y="162">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="86" template="../../../../common/maps/obj/gold.tx" x="99.3333" y="128.667">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="87" template="../../../../common/maps/obj/gold.tx" x="100" y="186">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="88" template="../../../../common/maps/obj/gold.tx" x="99" y="142">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="89" template="../../../../common/maps/obj/gold.tx" x="99.6667" y="158.333">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/entry_up.tx" x="327.5" y="479.5" width="130" height="8">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/cave/Cavern_of_Calamity_1.tmx"/>
+    <property name="teleportObjectId" value="81"/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/collision.tx" x="272.012" y="126.555" width="20.4408" height="28.2431"/>
+  <object id="95" template="../../../../common/maps/obj/collision.tx" x="320.369" y="191.618" width="20.4408" height="28.2431"/>
+  <object id="96" template="../../../../common/maps/obj/collision.tx" x="369.02" y="256.095" width="20.4408" height="28.2431"/>
+  <object id="97" template="../../../../common/maps/obj/collision.tx" x="417.671" y="301.814" width="20.4408" height="28.2431"/>
+  <object id="98" template="../../../../common/maps/obj/collision.tx" x="257.065" y="396.185" width="20.4408" height="28.2431"/>
+  <object id="99" template="../../../../common/maps/obj/collision.tx" x="193.174" y="351.051" width="20.4408" height="28.2431"/>
+  <object id="100" template="../../../../common/maps/obj/collision.tx" x="143.351" y="285.988" width="20.4408" height="28.2431"/>
+  <object id="101" template="../../../../common/maps/obj/collision.tx" x="97.6316" y="253.75" width="20.4408" height="28.2431"/>
+  <object id="102" template="../../../../common/maps/obj/collision.tx" x="226.585" y="77.9043" width="20.4408" height="28.2431"/>
+  <object id="103" template="../../../../common/maps/obj/collision.tx" x="177.348" y="29.8399" width="20.4408" height="28.2431"/>
+  <object id="104" template="../../../../common/maps/obj/collision.tx" x="79.4609" y="25.1506" width="94.296" height="88.0137"/>
+  <object id="105" template="../../../../common/maps/obj/collision.tx" x="46.6364" y="68.5259" width="30.4054" height="28.2431"/>
+  <object id="106" template="../../../../common/maps/obj/collision.tx" x="14.9841" y="161.724" width="84.3314" height="62.2399"/>
+  <object id="107" template="../../../../common/maps/obj/collision.tx" x="91.1839" y="186.929" width="20.4408" height="28.2431"/>
+ </objectgroup>
+</map>

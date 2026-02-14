@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="143">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Pinnacle Kill-ship&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../../../common/maps/tileset/FarmFood.tsx"/>
+ <tileset firstgid="32385" source="../../../../common/maps/tileset/buildingsbosses.tsx"/>
+ <layer id="6" name="Collision" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmV8OgyAMxvu6qCdwXmeHcLfY+7Zz6djdFjPJzCJF/ljA9pf0SSL9ACt8AAjCvtwrgIchnlXq7OLT1gCjIbp6//4V0r+OtyWP0SHPFmlLoXdLH1iOGGvjcGS9ru+i0Ns3ANfGvJb181ik1ksNN70DUhdfB9Qr7E9IvY1Zq6kQvTjLPW7MfxMFJeYck+Vcl7hWXeGmlxs+83sr+Fwu65kek+cx+QxH9HiG+dy55mnZvBVBEPzh5FfY9uK6BuUCt/9tTnrVBl8/lFR6L6dfaPQeA2sTSk56fdq4kpPec/0NrE0oKqPvN/Y9xj+T1pagRuRCP48lJy/L5d5WEIS0fADYmUFl
+  </data>
+ </layer>
+ <layer id="7" name="Floor and Walls" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmDEOwjAMRSMGCoIjdIQejYMwFE6BOAv0WAxQoYgg1cF2f6AhHr5gsZOX2El+67VzdWG6Vhj1uW4zntDjStQ8Yk5L57bVU9T/mDYKXj9uO3fuQOg4542bE28feybUMMfV8FL6V97S9rc03pLqmcOUgtfHlsR7qei7tUvEO3Tvxe7FIWl4ublj85HyUmugWbup5+lF1RFVZ1SMNI8k96f5pOpfv8Zje37oHtDkTn1eGa/x5sAbe1+F8mdGJ4hJmTs1bxvch2heTe7UvGHNoXk1uY3XeI23LF6JB/J+BOFrxuZG+iOUkL4GJeR3b66vQY8r3YPdYpwkvYc8A7TnlfEar/G+JPE2SI/1K16Jt0F6rG/whvPNuZ73q/dfTq/mzKvp1Zx5ufub+/ksfZ9L3vp+XghfYH5hepoa7x0oIMQR
+  </data>
+ </layer>
+ <layer id="8" name="Walls Supplementary" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmU0KgkAYhscW6TX6IRJaRlDQUbLA2rXrALXrCF2gRYcIKoK6R12kMZEGc6bRGfucnwfeleM38+goH4qQeQxq4jX6Nf5aecby1oIij68OqOjbdRG6/ojvZp+rom+H4kLStr5vVPS9YZdtnZ27Rr4iWN9voH13jniNIv2GzHktdPL0dTJ7QRm1i9zf4yZOXoLeJyphuu9+HccUEl9TvElH66sf1heWhxNHdxJPWspi5ZdXmwWUr26Y1j+bhkrf25ej7FqQHBjvN9YxHtK+/2I2hpk38iUjcx3hkH4smgfKmVyDTJ4Zvsk1gHYtgxDvl3kqC6Dnx2JRjUDSmKrScBFqCqbF8W+vKpzwWs+CuRTwheonJx7en4KZeuJrt+jDC2krbAU=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="60" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztlztvFDEUhW+qjZRAw7sKgWKHLZKCKpH4EdBnRRmKpKLOBtHT5AEBJKCl5yGRQOjSApFISqjgFyAhQBxrsNYYv++dZRH7SUfjnZ2Z6zP2vfYQjeDwoEf0EHrU87el4+TycayW5hujHy8Qfxva6fnbEnCeZ/vl8B7xD6DDnr/tinW5IrpS+X+H4uTi8uuaL6lzSD9P6Qj6fLT6/ZyLJVyzXPl/h2Lk4rrPnC8f2vi/nT6HzL5cQJ87CX4Ve1V/XPcCXu0YEpjz5Tu8/minzyGzD2a/UvoXG9dhw+UrxW9u/krX+1J8vmKec/OXU59j7zLnfp+vnDmdAqc+c3PGvD/kS9rziDS489mFb3xd6DU6la0VorvQPej+Sn7fpNcA33z1+dVrtCbm5wnOPYWeQc8L/GrsGl9a832+UnM25ucNzr2F3kH7BX63V2vZNb6k5odqUapfrp8Y2q9d40trPtfvv4hrHynll1uvmsT0KeV32OqVSRN+pfJbol5p7Dks7VkCqXql8O01Uvza+Wm/O27+lu6vfPui0F7D9Z/9nFh+cvO3dH9l74s0se8jk6+O58Tys+n1uQTfejRM+fu/szZDtA5tQJszg4mZuiYuzhFdm5ONfWyW6Dh0AjoJnYJOQ2dmZeOYpK6Jn+D1s4DfW+1+ew2+1qENaBO6Dd2Bthry26X4mrhwsT4uzmN85/kxHxt+96/7r7t6iR8rxlSL6Gyr2Rgxv6F3wEF5O2f520H7ZSt8DRfbr0tN8AoedqHXAS8p1+Ri+h0kaiy743+Opz3e9jVc/pZfF/Z8luTGRH3Ufm9ONBMnRFfomhSU39UO0VinPjbl94vRnv5Vfzg6Xzj+enyVV8UgxlfVH/1ttstolzA1idpgaHpS1puLhfH+t1mX0R4xQvMTjoawRQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="392.003" y="638.664">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="106.181" y="166.685">
+   <properties>
+    <property name="enemy" value="Alpharael"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/enemy.tx" x="172.678" y="299.838">
+   <properties>
+    <property name="enemy" value="Mm'menon"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/enemy.tx" x="678.586" y="171.209">
+   <properties>
+    <property name="enemy" value="Haliya"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/enemy.tx" x="392.5" y="437.5">
+   <properties>
+    <property name="enemy" value="Tannuk"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="75" template="../../../../common/maps/obj/enemy.tx" x="600.667" y="295.333">
+   <properties>
+    <property name="enemy" value="Kilo"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="77" template="../../../../common/maps/obj/gold.tx" x="133.333" y="493.834"/>
+  <object id="80" template="../../../../common/maps/obj/manashards.tx" x="598" y="514.833"/>
+  <object id="82" template="../../../../common/maps/obj/enemy.tx" x="174.167" y="483">
+   <properties>
+    <property name="enemy" value="Ragost"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="83" template="../../../../common/maps/obj/enemy.tx" x="507.333" y="522.667">
+   <properties>
+    <property name="enemy" value="Szarel"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="84" template="../../../../common/maps/obj/enemy.tx" x="391.804" y="154">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Thaumaton Torpedo|EOE&quot;, &quot;Survey Mechan|EOE&quot;]}"/>
+    <property name="enemy" value="Infinite Guideline Station"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="110" template="../../../../common/maps/obj/enemy.tx" x="391.333" y="220.667">
+   <properties>
+    <property name="enemy" value="Sami"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="115" template="../../../../common/maps/obj/manashards.tx" x="23" y="297.667"/>
+  <object id="116" template="../../../../common/maps/obj/gold.tx" x="153.333" y="493.667"/>
+  <object id="117" template="../../../../common/maps/obj/manashards.tx" x="739" y="272.667"/>
+  <object id="123" template="../../../../common/maps/obj/dialog.tx" x="388" y="605.917" width="22" height="15.8333" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Sirens, loud beeps, and other strange sounds echo through the high metallic walls of this odd structure. Soon, a mechanical voice rings out, seemingly from nowhere: 
+
+'New arrivals, please report to Delta quadrant for processing.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="124" template="../../../../common/maps/obj/dialog.tx" x="382.5" y="190.917" width="33.5" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;As you pass through the archway ahead, space itself distorts and you find yourself floating in a void that seems far larger than the room you saw before should be. A mechanical structure floats in the void ahead, its size barely comprehensible. This is a problem, as it has already begun shooting at you.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="125" template="../../../../common/maps/obj/booster.tx" x="277.667" y="44.8333">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;EOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;EOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;EOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="126" template="../../../../common/maps/obj/dialog.tx" x="302.833" y="521.583" width="16" height="16" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The smell of absolutely delicious cooking drifts towards you from the kitchenette ahead. As you peek in on the chef, you're baffled. Is that a shrimp frying rice?&quot;
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="127" template="../../../../common/maps/obj/booster.tx" x="512.667" y="46">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;EOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;EOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;EOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="130" template="../../obj/treasure.tx" x="392" y="116">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;editions&quot;: [ &quot;EOE&quot;, &quot;EOC&quot;, &quot;YEOE&quot; ],
+    &quot;subtypes&quot;: [ &quot;spacecraft&quot; ],
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="131" template="../../../../common/maps/obj/enemy.tx" x="711" y="455">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;text&quot;: &quot;Hail, {var=player_name}. I see your travels have taken you far. I have been wandering as well, and have acquired some rare spells I am not in need of along the way. Take a look, perhaps they will be of use. Traveling this place does have its costs though, so I cannot simply give you them, but my prices are fair.&quot;,
+		&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;(Continue)&quot; }
+		]
+	}
+]</property>
+    <property name="enemy" value="Mysterious Mage"/>
+   </properties>
+  </object>
+  <object id="132" template="../../../../common/maps/obj/shop.tx" x="740" y="461.5">
+   <properties>
+    <property name="commonShopList" value="WanderingMerchantColorless"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="133" template="../../../../common/maps/obj/collision.tx" x="115" y="498.2" width="91.5" height="12.6004"/>
+  <object id="134" template="../../../../common/maps/obj/collision.tx" x="191.75" y="481.7" width="16" height="27.6004"/>
+  <object id="135" template="../../../../common/maps/obj/collision.tx" x="111" y="467.2" width="16" height="42.6004"/>
+  <object id="136" template="../../../../common/maps/obj/collision.tx" x="184.75" y="429.7" width="33.5" height="32.6004"/>
+  <object id="137" template="../../../../common/maps/obj/collision.tx" x="112" y="420.95" width="61" height="42.6004"/>
+  <object id="138" template="../../../../common/maps/obj/collision.tx" x="240.583" y="350.366" width="33.5" height="32.6004"/>
+  <object id="139" template="../../../../common/maps/obj/collision.tx" x="529.25" y="351.7" width="33.5" height="32.6004"/>
+  <object id="140" template="../../../../common/maps/obj/collision.tx" x="525.917" y="193.7" width="33.5" height="32.6004"/>
+  <object id="141" template="../../../../common/maps/obj/collision.tx" x="237.917" y="209.033" width="51.5" height="32.6004"/>
+  <object id="142" template="../../../../common/maps/obj/collision.tx" x="383.25" y="60.3665" width="33.5" height="32.6004"/>
+ </objectgroup>
+</map>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="36" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="94">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Hidden Gibbons&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/animatedtiles.tsx"/>
+ <tileset firstgid="28289" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="38401" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="8" name="Collision" width="36" height="35">
+  <data encoding="base64" compression="zlib">
+   eJztltEJwCAMRJ2g03S6ztJhix+ClRaamDNXuAf+aXiSC1qKEEIIkcu+ZRvcqT7jYoHJpfJXn6cez/Y6ul5f03sWgfdu6KxYvVZl9y0TiLx89bHsXdE3636kk6c20mlm/sesMRHlw1Ineoa9bxTbv4XFo8Hkw9YnBpc+v+fB4ZLNBQvIFwE=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="36" height="35">
+  <data encoding="base64" compression="zlib">
+   eJztziEVACAQBbBDEodS1z8CggQ8BF9MzK9nVQM8GOv4/fC5P6W8Uh4AAAAJNi5vIBE=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="36" height="35">
+  <data encoding="base64" compression="zlib">
+   eJytl0FS4zAQRRUWU+X4GlkTIEyxoWZrMpVzwDlmmZNMAWFu5YDZs0dN/CffbbWkYP2qLgzB9tPvVrfi3DQ1tXO/68P149y55/nEBxbgefPR+XgnNtHCx5/zYZRQbN2tf/8//9nOx4uPV+KR98+W/ueFj6tyPI1at9am90iYhf2p5//yxPPMLn38LMfU0PssnrueGdfrWvEUZEJOhEnWvgh8vq8PuWqIbcRTmEnqA1yaSSS5ek/xXJatb+0V5xA+wSup49mNYrn2sRrzyFq6SI3GJN6wV1ZdaV++YhX2R/K8m9i74JW191I8Hz+OvqB3Te2psb03qhvKlQj1Jr7wfoh5nhI8WhseLdyx9u9nzj34+Hs2ZOEeyvXZ9TXaBWo1po2xpq3fW9XVIbar498tFmba9/v5pfeOGVNcqToSVRfD/9ezJSUw5nJtEjOFeaZI98FQTuF/CZ7tuRHqfnDtKbdg1LVQLcfPq66Hz+O5m6NqNWbSwuzE/Px/b+K+VD1HmQJeQeip6B05PCkWroWuPgZ+Fz8trrYOPzPGs0n4gnrYU32gNnQetr8i9ca1cjvsN5pnbZwPYgr1FKwbtcjecoin0gtDTJanKYX2MHha5Sdf88y3mL6jhvIMb3N6iJ5npZiaQJ5ze5qe0TzH9Cw7hUf321yeto6f1XKf80j1Ger/p8yg2IzNeY4+G/H8Rf/XPT8la8bq/HFolkGfNThyegeemXtm0feFeuaUMwKfV+6Ii/s/GHl9sVlS4syC74c6rHeaLMvT6wXCevn74W4+nE1Wjy7Nwkwt5St2VrP03X0UE/Jlff+IsZTkgHLO+qxPgeIwvQ==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="36" height="35">
+  <data encoding="base64" compression="zlib">
+   eJztlT9OwzAUh18NCmkCSyUm4ABsUBB/DoDagXOwVUgcgSOkMAELVIWiKlsPgsQVEFLnMrDhR2xwjO3UrqMIKZ/0W5I2+fz8nAdgR68JMAsAPhQ5p/e6cf73DyQL0iSWL5uDiwKfcQTwLji19gCSQ5Z987NHkZtPsgLwKblwuEtAMpf1tuB2bH72aWy+ryKma3gN/zrJoE9ykL+W7OhrhLWZOviITqp9Q15CtY/JCWsj954NPc2+YULWtyqfH6cjvz66fcMEBT4N2ldXklNnQR+T03cvU5dW2/x/7G/sm2fWOy4+/QldG831JO80k3x0tRE5awA8ksyj6+izkQJs0mylv9fkXhqiD353du1cXHxuqMctzZ3go9q3oaFG3GUqueC39Gk7y6KITjgfTpb0PqNI7YLnkvv4clplWVN8+5fZuetoXAbEj8e8cJ836pBGmUvI5u2ghFlbxD3Jz/iwIg8R7K8+S9UuNeVyOc6nanz4yPOuah/VvLPF55pU884WH2vyiY811ejx2X8++I/9V9fQTH2Ga8rgC6rqtLA=
+  </data>
+ </layer>
+ <layer id="7" name="Mountain" width="36" height="35">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJytWFtu01AQdRNyDb/9aNkEX+DSpiRI/PODKPDBHlgA3QBSgULVJG3jJAUWUNhD2QwSr0KlBJIyg+coJzd27ARGGl3bsa+Pz5yZOzcNFwTXwyAoy9gVb4kfiC+J3wiT30pyfFEZeyDn90pB8Ej8eTkIzmXckXFLxm/in8V35fyyjG/F1XTck2st8Z92H7xvrnP8lvljw6Tv1+NhJTnel+O6jGvheFS/Jd6QZ89svnObD+P3UoLlnWGBvZHzK+Iv5NkvHh6MOn/DJTjUe+ZHLnnvLGNM+EblRjnIMsZ0ZvefESbEJbZY9QxXxyXPn9JcF0+n5/9qvCBOr+U9j0vT92Vh0vs15sCj8VIMGptD4khj9qsyPdepd94g7jX+r8qz+fEx4XngAZYN00+LMKmmApc/957N+cN0rOZrZxYm6Ft5PiQt99wYD/NUBJPO+UD8vuH4mP/IX7tEeDTebdLMkcWsR3jiGbFjA0eDArz4ePZM25qXVcuvlvG0Tuct4uu4AEeNgtqBLUfJqLVsy/hVfVYp55UL1TjHLZ4jbotg0fzSWDXpW5oUM9Q/5BvqwIGHZ5QRx+X1xPl4wgXLQ6vvqOk7VidOriXPRcbR0NaEgdVoaIp11Ld79PcOY9z2cG2Mj319c05pXr4UPPterDVum7YmYLwZJtyhPvG6kpV/WmOz9M/rHnDMo7k7T4KgFib1CVrnuqD83fbWlcjuHxiPjI3XCZ8Pjb9+y8DiU6LjgffdNeMqIv7qds2fU59dpxzpePwppt0ULJpHVS8+dTvetG/Mqzu+VW0O5axmc4K/UUaOao43jfNZBt7L/ynP2yk5CuuaRvMMcVqinqwIvlFlMvYl6yPS8Iy8XEUf4a/dbJHF8DBFD2p9eyewNknzqPP7KT1Vn+rvcE5tqFU9Dd9dTcaa4YVWIk+Xa+G09tF7cQ/IfLIX1fGn1fm/CQYOUT+Oic+YOOWcyLNnVxfH03WT9b9j728QpjRtLGTbs38+NTxDqlWdlF4sKx/ZtGazLRWM8V0vtpHlB3qKAzfWEvrWonHqUz3H3iivVqVprUb91jHpukE9l5/3en6yEgTvxT+sJNea9Bz338OU+gQ+s7RWpfzjHqxIDwhD7LGHRQ1puWLzpO2d1Fpuco9RNM+rFnvkB/IhrebBZtVbGK/BtYw8Rx/o9zVt4ih2i+cn92rtAjpuunFMOP8i0qLytBnm77HzrFkg3m2XrY2I+ot/MeRr26Xv1WHok1ATFE8RHcyLA/kw1ZOT8Xrn98t9r5dALzJP/4Y+A+tU3eqYv+7CsAfifSEwcU2HfrA/wZqctV9Dj4z/nhiDz82I/gfjOMX0zthN7suAEfNn7dfUNJe69A3+2v0HBE2KSA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="384.984" y="559.188" width="77.0909" height="27">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="62" template="../../../../common/maps/obj/enemy.tx" x="193.197" y="93.5">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Wily Bandar|KLC&quot;, &quot;Treetop Village|J22&quot;]
+}</property>
+    <property name="enemy" value="Kogla"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="63" template="../../../../common/maps/obj/enemy.tx" x="135.976" y="408.433">
+   <properties>
+    <property name="enemy" value="Grunn"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="64" template="../../../../common/maps/obj/enemy.tx" x="298.166" y="236.209">
+   <properties>
+    <property name="enemy" value="Kibo"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="66" template="../../../../common/maps/obj/booster.tx" x="196.479" y="60.7985">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;editions&quot;: [ &quot;J22&quot; ],
+    &quot;colors&quot;: [ &quot;green&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;editions&quot;: [ &quot;J22&quot; ],
+    &quot;colors&quot;: [ &quot;green&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [ &quot;J22&quot; ],
+    &quot;colors&quot;: [ &quot;green&quot; ],
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="77" template="../../../../common/maps/obj/enemy.tx" x="469.273" y="312.909">
+   <properties>
+    <property name="enemy" value="Ragavan"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="78" template="../../../../common/maps/obj/manashards.tx" x="124.727" y="52.4545"/>
+  <object id="80" template="../../../../common/maps/obj/manashards.tx" x="-0.727273" y="288.364"/>
+  <object id="81" template="../../../../common/maps/obj/gold.tx" x="515.061" y="273.455"/>
+  <object id="83" template="../../../../common/maps/obj/gold.tx" x="523.364" y="240.182"/>
+  <object id="85" template="../../../../common/maps/obj/collision.tx" x="-1.72" y="560.182" width="580.258" height="16"/>
+  <object id="86" template="../../../../common/maps/obj/collision.tx" x="-3.76536" y="-15.7273" width="580.258" height="16"/>
+  <object id="87" template="../../../../common/maps/obj/collision.tx" x="-15.2727" y="-13.7677" width="16" height="590.717"/>
+  <object id="88" template="../../../../common/maps/obj/collision.tx" x="576.545" y="-10.3585" width="16" height="590.717"/>
+  <object id="89" template="../../../../common/maps/obj/dialog.tx" x="292.417" y="508.811" width="240.5" height="25.0455" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A vibrant forest sprawls before you, the treetops interlaced with rickety bridges and other primitive constructions. Hoots and howls indicate the presence of a great many apes and monkeys.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/dialog.tx" x="253.75" y="177.394" width="65.8333" height="22.5455" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A massive ape stands before you, looking down on you with fury. It takes a lot of willpower to supress the urge to flee.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/scroll.tx" x="17.6667" y="223">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Monkey Cage&quot;, &quot;editions&quot;: [ &quot;mmq&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/manashards.tx" x="37.3333" y="524.667"/>
+  <object id="93" template="../../../../common/maps/obj/booster.tx" x="156.667" y="88">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;editions&quot;: [ &quot;J22&quot; ],
+    &quot;colors&quot;: [ &quot;green&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;editions&quot;: [ &quot;J22&quot; ],
+    &quot;colors&quot;: [ &quot;green&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [ &quot;J22&quot; ],
+    &quot;colors&quot;: [ &quot;green&quot; ],
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="45" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="16" nextobjectid="166">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Gutter grime&quot;, &quot;Scavenging ooze&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="22017" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="13" name="Background" width="45" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzd1rFuAjEMBuDrUNFunRhB4g1Ooi1iYronQTwSEyvv0amP0ido92KdolomTuw4ueT6S5YKnC5frKRJ102Xw5u/Wg3nbdEcsrZolnhbm0OquZbd6g25h2ed5etxWnNqz8GJ6yEyz9xerdn3PHzH9buEV+OmtqeXrru+jn+7nuc2c++Qhj4PXii6VqA+FnX6fCbrlDO7XofmWaJC4/rGxl7qPu7G8j3jSuKRliRLxuPrv8asceICj6RS3/9fzNZ3cWsBCn8OxTquZp3ONTnPoFz56cO/5/xfP9W8S51PsTEhp+1fzSnr2/7eRPZ4a0kx51gbw3as2HOr3Vj4O9hv3325O0oJc60Cr+QelMuMQ8+p1LPV2UqUO5Nj9zRfasxj6TFL7ySW+43Vi+8+1rtWST+9Y9Yyp3prmTU+Wp/v9czYDpGYwYvNmj1WYj9KvVozl1SzGx/b3BywkRbOZX9fEjO2a+YQcknMzkjt0l5r+o8j7adlXKuZC3bOwWw15gx2psyZyy8+e4o4
+  </data>
+ </layer>
+ <layer id="10" name="Ground" width="45" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztlUFOAzEMRbOhiGlBrFgjzgBt6QqJM3AFxDHgCGxYoe64BvQ0rDkCWFOrbmTHzpCYEcqTvtQZJZkX15mZHIcwSWRzyCcec3uipxRW18+DPpIzva7h+Vtnbmx8z9v5YSb3RMq5Zj9ozrTOcU9YUhvOFT1pcvbgAXXmHKkrIO3HyzlVU8mBm4P78cDie7bcTzzXsycA7exBqCfHXzpPT0PotrmZ95Gc10d9vM8eOn+FPuCM0ZyBbju2JI+LEJ4W+fPAEeZCsJ4c+J9MDe7nSn9R7i/3w/lp0egMtY6dLxLrSq4lyXX++Pm9UZzHwPtSdwU8alyD/+yM7zbpfirWsW9X9jUtz3teDY91DatzTr2GxurCjcMzN6TOObwI3xhtDDpTxvKeuLveJQXsC521sZQS5wHqB99LuKa+cbg90d7Ae7i2tI7W+xaoc+7ZGlK7Eni/D0o6NxoNX+DsxSmxphelnBvj5nW1S6PRqMs3cgcLYA==
+  </data>
+ </layer>
+ <layer id="9" name="Walls" width="45" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmD9PwkAYh2tMtCUh0cVV46gLJArIoC4IYXLxI+DX0K/gbhxMDKKMhlUn46dwAZQPoLP2Te+Xe3v9C70eIeFJfunZHr2nd29bxLKCnDkyTcfb12DtNmsTLceLylrRnzwh1yfbsvq259Z1txPhhXZaZzrPs52vL5zJaehmLLYj0W6I6xknON/WvTRDrkUnWENy/nLzLdJj89Rgxx5tbwtnXgfkS1sTzqhjrCnmF7TFsZEjM2Rtqic4mwJ1HFafBOaZ5pjSU2q1nfO8htFidRwFzSdfg64ta2ViwJmvsVoHxJ/rcVLwZyXEq2/g2QBWi/6oa30v/F5rMmE0DNdE15brimcCuZ9WpPPDoQztB2/rMqagZ8TE8b/7KB9V6bxb8ztT7hxvzo8L3nlM1DF3Dgs50/0IZ3IkVwLOlK2a/EweXLke1yLgvRrMnpuOqFtac3KOmmtyRkyxXw2mkzA+n2d+DXHsGLymONR518nlgd7zmSDOWZ2rsCT1SyLNGAi5ItN8bp5J43xxlD1pzzUopeuH2og6Tu+NrIHzZyU+cObv0bhaiuKmnj0YJ6kfnPk+1MG0482TbfG+4uTx7NRJmHMWeM1GgXvmpTTbGL9ly/opB8+J8yZ5zRo4p+mnY0xd9yCh7lfHUPvN6hKHzu9q6lhpPKL6mPwOuWTJtJxvzttgyZLs4P98HeD37rx/j9Xtq4PBhhfext+6MDG3OllU30Xx/gfsxmtN
+  </data>
+ </layer>
+ <layer id="12" name="Clutter" width="45" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzdmL+O1DAQxkPF5gpKKDnRQMUtCMiKAq4Jh7blEQ7xDEcF9DwCLVo4KBElXAPiIRDNHss+APTnkfMps7PjjO3snxOf9CnZ7Nj+ZWI7dooiT4/K9rwuF39Db+4v+nhQFL9Z3NSdfxz4sinOVSqz5IXGiby5zLKsxgxWuh7inbjr8w0zw13M4CW+d85/yvY4b+7n1B0/DLxj+soqpOVQ9gfqu6dlywe2mfP7QVtuWtrsXaLc8Ppi1dUfNDbJjf9D3F2icrLdacSz0fLX1UYqd44uBO4DdR43+XscWX8qd4q+jvzxVaX/jzoPSj+HxTJb3LWS5+9Va6n9e8vXvjj2hzvelPOTi4vzLDFr/coS2OS9yjkczFI/qjDz27uem/J+vfJzF4mPvZzxWwfGruwfXPQb+SZm4gUzcZI5N/lbtZiDWTP/ztk55uTQPUzYfB3qT5zb0v7OMif3ocv108Z8/uVHGPnD+0V7t1DMrqvrhcvFS+eTUdv+uInrI8nfpV3WNuZmmN8PYq+NluvIGSNdzDn6eXP5Go2TEPO69Hxv8ffRnh4X0mXHenXDzH31vzI/udXfn4dF8Wlox5Fi4v45/zXq6SswYz4PGcwk7V0FyTLy+pVhf4M5J+7ZHe+U9rT3hGWaG6yYo4gYMvpuDsc2TPeVw7zJMajFWeNNszVuYhw7BmPjLG97DOa4b58k9Vlz5OgGW++H1jz0bpJelbR1kiVa31t75HXx/krgxb6AjO89B4F1KdZpq2RNEfYHc7aHspi3Kcl6Xpj5M+fWWCXzjMVbe03+nTDn2xivD2wPLnmHODVmbm3vi/plLPbWqeyTwHO3TNKYwcFZxgqvLGN9E+CqE3ilujh4zmuDOTb3ch7IUahd/AdmfBOJ5dbGtda/JEtsLiWnbPf1bW+rf1jjwnpWKaxdZWZi/lkn83mw7BupzynkMzK4kGg=
+  </data>
+ </layer>
+ <layer id="15" name="ClutterBis" width="45" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztl00KAjEMhetST+JaEAQ3XmdWutFTeArBY3kGf1DXtgyFUNok1kmskg8CYyfOvOm8aVLnDMMwjByj8bcV/B+HH5xT0yzHunNu0/XHqwmeu/V5u05ey2mJazn7nIuPq4+bj/2sj0j8fffnHj6egppTLZCoA+pLx0ohySe6cvMsrReSehBqkPZnDZgHNfwpheY7NwwOsX6EdSBXP1pcH7D60er6oFmrDBpY+6ge7p1+LyD1zUBvTxd4LvaNBKAX4XUl/Fnj/VyeZv9Xuj42nvMJ9X+uDo6noIZwHDRQz5HbF1BaqPPv7iNKe5Oa/pqjrTRe66U0/zjvI71HDWl9HtrrUWuqGYPyIrX2DAVXL8eLWvWZq7mlXmEIHdrP0crcGbq8ADja1Gc=
+  </data>
+ </layer>
+ <objectgroup id="11" name="Objects">
+  <object id="89" template="../../../../common/maps/obj/enemy.tx" x="485.107" y="272.737">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Terrian"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="123,131"/>
+   </properties>
+  </object>
+  <object id="98" template="../../../../common/maps/obj/enemy.tx" x="440.574" y="357.397">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Aeve"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="100" template="../../../../common/maps/obj/enemy.tx" x="198.005" y="207.888">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Ooze Garden|ALA&quot;, &quot;March of the World Ooze|DFT&quot;, &quot;Biowaste Blob|CMR&quot;, &quot;Murky Sewer|DSK&quot; ] }"/>
+    <property name="enemy" value="The Mimeoplasm"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="101" template="../../../../common/maps/obj/enemy.tx" x="283.44" y="358.077">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Experiment Kraj"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="106" template="../../../../common/maps/obj/gold.tx" x="28.6125" y="359.534"/>
+  <object id="107" template="../../../../common/maps/obj/gold.tx" x="148.282" y="613.857"/>
+  <object id="111" template="../../../../common/maps/obj/entry_up.tx" x="368.955" y="639.736" width="80" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="117" template="../../../../common/maps/obj/manashards.tx" x="29.2058" y="260.891"/>
+  <object id="123" template="../../../../common/maps/obj/waypoint.tx" x="363.739" y="268.328"/>
+  <object id="131" template="../../../../common/maps/obj/waypoint.tx" x="562.727" y="270.417"/>
+  <object id="135" template="../../../../common/maps/obj/enemy.tx" x="139.089" y="545.569">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Toxrill"/>
+    <property name="speedModifier" type="float" value="-20"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="136" template="../../../../common/maps/obj/enemy.tx" x="530.45" y="447.669">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Mitotic Ultimus"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="155,156"/>
+   </properties>
+  </object>
+  <object id="140" template="../../../../common/maps/obj/collision.tx" x="-1.37336" y="288.856" width="277.276" height="46.7511"/>
+  <object id="141" template="../../../../common/maps/obj/collision.tx" x="298.944" y="368.342" width="137.889" height="46.7511"/>
+  <object id="142" template="../../../../common/maps/obj/collision.tx" x="300.576" y="288.367" width="137.889" height="46.7511"/>
+  <object id="143" template="../../../../common/maps/obj/collision.tx" x="-1.86317" y="367.689" width="277.276" height="46.7511"/>
+  <object id="144" template="../../../../common/maps/obj/collision.tx" x="460.201" y="288.04" width="258.669" height="46.7511"/>
+  <object id="145" template="../../../../common/maps/obj/collision.tx" x="459.875" y="369.322" width="258.669" height="46.7511"/>
+  <object id="146" template="../../../../common/maps/obj/collision.tx" x="720.367" y="195.986" width="40.6127" height="267.092"/>
+  <object id="147" template="../../../../common/maps/obj/collision.tx" x="-40.8715" y="202.352" width="40.6127" height="267.092"/>
+  <object id="148" template="../../../../common/maps/obj/collision.tx" x="430.61" y="186.615" width="48.684" height="28.1816"/>
+  <object id="149" template="../../../../common/maps/obj/collision.tx" x="589.077" y="146.797" width="87.4262" height="28.1816"/>
+  <object id="150" template="../../../../common/maps/obj/collision.tx" x="504.325" y="269.243" width="48.684" height="28.1816"/>
+  <object id="151" template="../../../../common/maps/obj/collision.tx" x="518.325" y="328.576" width="20.684" height="47.5149"/>
+  <object id="152" template="../../../../common/maps/obj/collision.tx" x="598.991" y="166.243" width="20.684" height="136.848"/>
+  <object id="153" template="../../../../common/maps/obj/manashards.tx" x="556.667" y="216"/>
+  <object id="154" template="../../../../common/maps/obj/enemy.tx" x="52" y="359.333">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Slogurk"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="155" template="../../../../common/maps/obj/waypoint.tx" x="405.97" y="442.348"/>
+  <object id="156" template="../../../../common/maps/obj/waypoint.tx" x="635.462" y="450.332"/>
+  <object id="157" template="../../obj/treasure.tx" x="190" y="156">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="158" template="../../obj/treasure.tx" x="156.667" y="156">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="159" template="../../../../common/maps/obj/dialog.tx" x="334.18" y="576.25" width="154.307" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A stretch of sewer is visible through the darkness ahead. Where water once flowed, viscous slime fills the channels, giving off not the rotten smell of sewage but an oddly acrid chemical scent. Massive bones picked clean of all flesh give warning to the strength of the slimy things that call this place home.
+
+Your manasight stone glows, sensing the power of the legends here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="162" template="../../obj/treasure.tx" x="697" y="436.667">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 20,
+  &quot;cardName&quot;: &quot;Slime Against Humanity&quot;,
+  &quot;editions&quot;: [ &quot;MKM&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="163" template="../../obj/treasure.tx" x="6.33333" y="362">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 20,
+  &quot;cardName&quot;: &quot;Slime Against Humanity&quot;,
+  &quot;editions&quot;: [ &quot;MKM&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="164" template="../../../../common/maps/obj/gold.tx" x="693.333" y="454.667"/>
+  <object id="165" template="../../../../common/maps/obj/enemy.tx" x="349.333" y="542">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'Ey you. Gotta dirty job for ya. Can't pay in gold or crystals or what have ya but I got lotsa rare spells I can teach ya.'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;I've cleaned the sewer. Well... sort of.&quot;,
+					&quot;text&quot;: &quot;'Eh, I don't mind regular dirty one bit. Good job squashin. The next generation o' trolls thanks ya for yer service.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Bortuk Bonerattle&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;randomCard&quot;, &quot;subTypes&quot;: [&quot;Troll&quot;], &quot;rarity&quot;: [&quot;Rare&quot;, &quot;Mythic Rare&quot;], &quot;count&quot;: 6 },
+                        { &quot;type&quot;: &quot;randomCard&quot;, &quot;cardTypes&quot;: [&quot;Sorcery&quot;], &quot;colors&quot;: [&quot;green&quot;], &quot;rarity&quot;: [&quot;Rare&quot;, &quot;Mythic Rare&quot;], &quot;count&quot;: 8 }             
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 7
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;I don't mind dirty.&quot;,
+					&quot;text&quot;: &quot;'This place may not look like much, but I had big plans for this stretch o' sewer. Gonna resurrect the next generation of trolls down here, I was. But now there's huge slimes and slugs and such all over the damn place. I tried killin' em but they're too... spongey fer my magic. Ye might have better luck though. Kill em' all and I'll give ya that reward I mentioned.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;I don't have time for this.&quot;,
+					&quot;text&quot;: &quot;'Too prissy to get yer hands dirty. I see. Might as well leave this place, its too filthy for your delicateness.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Bortuk"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

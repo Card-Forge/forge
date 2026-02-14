@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="31" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="97">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Legion Guildmage&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" name="dungeon large" tilewidth="16" tileheight="16" tilecount="16384" columns="128">
+  <image source="../../../../common/maps/tileset/dungeon/dungeon_bis.png" width="2048" height="2048"/>
+ </tileset>
+ <tileset firstgid="28289" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="44673" source="../../../../common/maps/tileset/dungeon/animatedtiles.tsx"/>
+ <tileset firstgid="61057" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <layer id="9" name="Collision2" width="31" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2Dog4W8lOm35CMsjwtTCgaL3djMpKXdo2AUDGfgxokfk6t21O5RMApGwSgYBcMFAAAuYBa1
+  </data>
+ </layer>
+ <layer id="6" name="Collision" width="31" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFQwUsKCMekwoc+RgY7lABO/CRbrc9VM8CXky8kBciNx+LHDIGAVsK7AbRlmgYJkfIXJC64WA3uhw97MYlNxB2k2IGte2+CxW7PYz9TUm5cpdMuxcTKDdg5QsI4FO3iBe3HeQC5LigJF5G7R4Fo2AUjIJRMFQBAIj+Ugo=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="31" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFAw2ustEGD5TdpIDrzoTVVHBjx01QTC6gxG5KAT67cdlJDXvx2Y3PXlrajcs+7UoEHki7YZiSMKDUbkrCAF9aw2UXLeympT2E7KYW+PCVNPUyPBBMap4CycH0gjCpdiPrJSZfo4tRw25Y+dxEwH708ryJG9VuagJk+/w4qW8+sWDU7pFl9ygYBaMANwAAbbF6ew==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="31" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztlWEKwiAUgGWNwJ2klA4Q1RV2n5j/OkcU+xVUx4muk48l06Hs6RSJ9uBj4zHft7fnsKaE1DNZeS3TgXWvGkLWE2ES3vi7b3LNE2qIcB5y/T3QDesgrpRYw5VvtXxON0Ru9/sU5i5kfqHhcvOjSQy3q79i8C7KWdJ47gvymyv3OaIbO2/lbiO4N18329rdKs+EHS56t88+t/W3q8w9B+yrDrg/VN1zrppT3JiAGsN/TNX9Jbf6j8oRf037q06IGwMEZpa+805xLsd2j9XzIUXfqdw5+/5Xd85553LDuYg5G2dMPjaWni4=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="31" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztk0sOgjAQhrsyMdF78NohK+iNvACp3IfnCjiK93EaJFbaQWh5uOBPvgXpDB8DDCFH9s79sg5z3KbPbdI/lpIR4sSEVEzPMdVdPGTSt7tg6nOxzsTtJjKiW3Uu1hVhd5/nSWPuRMaPCLkBQaQ+7zF1u7FMDc4GaKPv3mHdGm6fwtxAQLvrYdZ01+BsgJZuP7d4NlZn6rYZQvjBYWo8TbcF+1mHOGXYzVaN1HDcaJ6bJ4WeEsgRxD3DajiZhtuC/8gDHARxz7Aajk2nu/uk0FMCOYK4Z1gNJ9Nw/wq2Z1tkyTn+IeerzF7uLaPrXOJ9mfTv6Vb1z7nPXt+6dx9ZNy/IccSm
+  </data>
+ </layer>
+ <layer id="8" name="ClutterBis" width="31" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztlE1OwzAQhUdsQlQViRvApmSB4BSUU6QLCCybNmHBmmxSIfpzCZCAIyBxknZBU87BuImL5YyD7YZISHzSkzPjybw4TgyQE3kAMerGgw1N5BhjjCeoqddsjvGM8Qvq1Ws2J9NqV8u0XnVfJwI4ispjnag8HlFPxFgnKo9OjM8Ql8c62cZj2geY9X+uG2PNRKNOpBXS1xRtaX4PY38I0EPNUYvhd6zjca+4pniQ5sdC7OMe9hTfSpXHfphrG+bou1B4s39M5TELc9ngD3C9g/Ioe1MeJvtt7V3DftvShIeK/zP175ypMm/H1TEFtd82NYwzB6CLOnf0eup669Qu0TNDrSq8dXtdpACXqCDNa8WYqpG9q+5X9eN8sH6oLKVjOSd7i3PMS6ffZk0jfC5UMKJjOVdatzC3XqdGv65jpwM39z507Xvc7dopK9b97tr34AQJwBXqOqFjzult/j+L75zFLM9k2o+RYW6F+kzomMPPYtGb53ZOzPuZwM9i0ZvnRO/fgJ/Fy2Kv1+sucqbeX7TzJSQ=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="226.297" y="479.198" width="45.2637" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="310.606" y="192.186">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Sunhome, Fortress of the Legion|RAV&quot;, &quot;Boros Guildmage|RVR&quot; ] }"/>
+    <property name="enemy" value="Aurelia"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="53" template="../../../../common/maps/obj/enemy.tx" x="180.559" y="204.149">
+   <properties>
+    <property name="enemy" value="Feather"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="54" template="../../../../common/maps/obj/enemy.tx" x="375.924" y="162.932">
+   <properties>
+    <property name="enemy" value="Tajic"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="73,74"/>
+   </properties>
+  </object>
+  <object id="55" template="../../../../common/maps/obj/enemy.tx" x="102.514" y="150.578">
+   <properties>
+    <property name="enemy" value="General Ferrous"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="71,72"/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/collision.tx" x="-33.3771" y="481.062" width="577.537" height="16"/>
+  <object id="59" template="../../../../common/maps/obj/collision.tx" x="-47.744" y="-16.7934" width="563.894" height="16"/>
+  <object id="65" template="../../../../common/maps/obj/manashards.tx" x="131.379" y="206.45"/>
+  <object id="71" template="../../../../common/maps/obj/waypoint.tx" x="103.132" y="93.2095"/>
+  <object id="72" template="../../../../common/maps/obj/waypoint.tx" x="102.677" y="232.828"/>
+  <object id="73" template="../../../../common/maps/obj/waypoint.tx" x="377.366" y="92.3"/>
+  <object id="74" template="../../../../common/maps/obj/waypoint.tx" x="375.547" y="232.373"/>
+  <object id="77" template="../../../../common/maps/obj/enemy.tx" x="239" y="274.5">
+   <properties>
+    <property name="enemy" value="Agrus Kos"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="78" template="../../../../common/maps/obj/dialog.tx" x="191.5" y="438.083" width="107" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Before you, a mighty fortress towers above the remnants of a city market district. Angels fly above and the gleaming armor of soldiers can be seen from the ramparts ahead. A sign marks this as the territory of Ravnica's Boros Legion.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="79" template="../../../../common/maps/obj/gold.tx" x="347.5" y="207.5"/>
+  <object id="80" template="../../obj/treasure.tx" x="132" y="162.5">
+   <properties>
+    <property name="reward">[
+  {
+   &quot;editions&quot;: [ &quot;RAV&quot;, &quot;GTC&quot;, &quot;GRN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;white&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+   &quot;editions&quot;: [ &quot;RAV&quot;, &quot;GTC&quot;, &quot;GRN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;white&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+   &quot;editions&quot;: [ &quot;RAV&quot;, &quot;GTC&quot;, &quot;GRN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;white&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="81" template="../../obj/treasure.tx" x="347" y="165">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;RAV&quot;, &quot;GTC&quot;, &quot;GRN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;white&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;RAV&quot;, &quot;GTC&quot;, &quot;GRN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;white&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;RAV&quot;, &quot;GTC&quot;, &quot;GRN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;white&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="82" template="../../../../common/maps/obj/manashards.tx" x="130.5" y="182.5"/>
+  <object id="83" template="../../../../common/maps/obj/scroll.tx" x="45.5" y="395.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Boros Garrison&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="84" template="../../../../common/maps/obj/scroll.tx" x="431" y="393.25">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Boros Charm&quot;, &quot;editions&quot;: [ &quot;GTC&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="85" template="../../../../common/maps/obj/collision.tx" x="494.903" y="-30" width="20.195" height="529"/>
+  <object id="86" template="../../../../common/maps/obj/collision.tx" x="-21.7642" y="-21.1666" width="20.195" height="519.666"/>
+  <object id="87" template="../../../../common/maps/obj/collision.tx" x="191.232" y="438.667" width="30.8703" height="40"/>
+  <object id="88" template="../../../../common/maps/obj/collision.tx" x="271.232" y="439" width="30.8703" height="40"/>
+  <object id="89" template="../../../../common/maps/obj/collision.tx" x="1.23152" y="246.667" width="94.2036" height="40"/>
+  <object id="90" template="../../../../common/maps/obj/collision.tx" x="400.232" y="247.333" width="94.2036" height="40"/>
+  <object id="92" template="../../../../common/maps/obj/collision.tx" x="304.065" y="127.5" width="33.9536" height="40"/>
+  <object id="93" template="../../../../common/maps/obj/collision.tx" x="255.273" y="131" width="18.2036" height="29.75"/>
+  <object id="94" template="../../../../common/maps/obj/collision.tx" x="190.898" y="131.125" width="18.2036" height="29.75"/>
+  <object id="95" template="../../../../common/maps/obj/gold.tx" x="346.5" y="188.75"/>
+  <object id="96" template="../../../../common/maps/obj/scroll.tx" x="281.5" y="167.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Sacred Foundry&quot;, &quot;editions&quot;: [ &quot;RAV&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

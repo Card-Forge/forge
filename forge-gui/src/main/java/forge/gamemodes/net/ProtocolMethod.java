@@ -79,6 +79,7 @@ public enum ProtocolMethod {
     isUiSetToSkipPhase  (Mode.SERVER, Boolean.TYPE, PlayerView.class, PhaseType.class),
     setRememberedActions(Mode.SERVER, Void.TYPE),
     nextRememberedAction(Mode.SERVER, Void.TYPE),
+    showWaitingTimer    (Mode.SERVER, Void.TYPE, PlayerView.class, String.class),
 
     // Client -> Server
     // Note: these should all return void, to avoid awkward situations in

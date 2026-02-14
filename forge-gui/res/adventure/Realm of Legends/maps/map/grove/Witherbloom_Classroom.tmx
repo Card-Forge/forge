@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="18" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="78">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Witherbloom Campus&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="6" name="Collision" width="30" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAP3DgZGKR5GBh2IWGQGAxH86LKyULlKQUwsx8xEoejeKljL8j9xNoJw6DwGbV3aNkLSisweg8zwg5k8eHqX2Q7aOlfT86R5V9S/HpBgzr27iXR3jdAe/dQwV5Q+O3iwQxXZD6yGIxPDXuxxScuPkxspNjrScVwRsfY4hcdEwIAAGuwMQ==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxbIcXAsAIPzuBmYPjFBaGfsBPPx2cmMZgcO0E0pfaSYyeIT6m95NhJLf+Oxu9o/I7GL+XxO5cFYiaIRrYDxkeXB9GU2ovNTGL41IhfUu2kln9JtZNW8UsMfzR+UTEALdmVdA==
+  </data>
+ </layer>
+ <layer id="2" name="Ground and Walls" width="30" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAPODkZGLiwYAUeCMYmx81JwFAiwHKgGY8YMTEMYJNbSUN7u8wYGE5KQGh62ctpCgxPIOY2pa+9nSD7gLjbFNX/9AhnfHjU3lF7R+0dHPbC6gWQebAyH6XsQpJHVkNt/65E42MLD1qE83C315WLgcENCbtzodqBLg9TQwgAADT1u8I=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="18">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYCAMLmgwMKiqILAnJwIji4PwGQ0iDCQSvAGadVgFgZHtRRYH4RdUsne6Eqo9MJyoil0chEF6KAUzkOz1t2FgCADiWmWIXJcZA0OgMQNDkDGqvTOoYC/MvyA7zgPtvIBkLwhcBNp5yRgiT23/iuiihq+sJQODHBDLWCLCG0YL61LPvyDwH2ruf7R4xSZOLf/GqWL6Cz19IYtTy78gMwfCv6D4xZVvhmP8gso+XGUEOgaVqdTy7wske+daoNozB40PKlOp4V8QgNUF6HUCDKdIorKpBWB1AXqdAMNMUqhsagBXKcJxioxPSVDHXhAgFM60spdQOGsA7dIEYi0JCJsYAAAIjHMZ
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="207.09" y="288.3" width="51" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="159.934" y="188.78">
+   <properties>
+    <property name="enemy" value="Gyome"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="52" template="../../../../common/maps/obj/gold.tx" x="270.167" y="270.5"/>
+  <object id="53" template="../../../../common/maps/obj/enemy.tx" x="223.16" y="41.762">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Witch's Clinic|C21&quot;, &quot;Witherbloom Apprentice|STX&quot;]}"/>
+    <property name="enemy" value="Beledros"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Witherbloom Key&quot;
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="57" template="../../../../common/maps/obj/booster.tx" x="294.308" y="269.487">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;STX&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;STX&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;STX&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/manashards.tx" x="317.975" y="272.958"/>
+  <object id="59" template="../../../../common/maps/obj/enemy.tx" x="254.878" y="125.935">
+   <properties>
+    <property name="enemy" value="Valentin"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="60" template="../../../../common/maps/obj/enemy.tx" x="191.392" y="125.555">
+   <properties>
+    <property name="enemy" value="Willowdusk"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="61" template="../../../../common/maps/obj/enemy.tx" x="288.444" y="192.133">
+   <properties>
+    <property name="enemy" value="Dina"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="65" template="../../../../common/maps/obj/scroll.tx" x="159" y="250.333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Necroblossom Snarl&quot;, &quot;editions&quot;: [ &quot;STX&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="66" template="../../../../common/maps/obj/dialog.tx" x="190.333" y="219.583" width="80" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The classrom ahead of you smells strongly of mushrooms and rot. At the class's front, a dragon pauses its lecture and gives you a derisive glare.
+
+'Witherbloom isn't accepting new students at the moment. Leave now, or we'll be forced to expel you violently.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/gate.tx" gid="1073745949" x="287.175" y="216.728" width="34.1665" height="20.1818" rotation="0">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;This gate is locked.&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Leave&quot; },
+    {      
+        &quot;name&quot;:&quot;Unlock with Witherbloom Key&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Witherbloom Key&quot;}],    
+        &quot;text&quot;:&quot;The gate swings open.&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1}, {&quot;deleteMapObject&quot;:68}, {&quot;removeItem&quot;:&quot;Witherbloom Key&quot;}]} ]
+    }
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/collision.tx" x="209.218" y="49.8234" width="45.4828" height="30.8303"/>
+  <object id="70" template="../../../../common/maps/obj/collision.tx" x="254.858" y="49.018" width="30.9853" height="29.7564"/>
+  <object id="71" template="../../../../common/maps/obj/collision.tx" x="159.551" y="2.84091" width="47.6305" height="20.6284"/>
+  <object id="72" template="../../../../common/maps/obj/collision.tx" x="177.27" y="48.481" width="30.9853" height="29.7564"/>
+  <object id="73" template="../../../../common/maps/obj/collision.tx" x="257.543" y="2.57243" width="61.0541" height="20.6284"/>
+  <object id="74" template="../../../../common/maps/obj/collision.tx" x="321.507" y="2.1218" width="13.3186" height="29.7564"/>
+  <object id="75" template="../../../../common/maps/obj/collision.tx" x="145.341" y="1.1218" width="13.3186" height="29.7564"/>
+  <object id="76" template="../../../../common/maps/obj/collision.tx" x="321.674" y="176.455" width="13.3186" height="29.7564"/>
+  <object id="77" template="../../../../common/maps/obj/collision.tx" x="144.674" y="177.455" width="13.3186" height="29.7564"/>
+ </objectgroup>
+</map>

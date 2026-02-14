@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="126">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Infernal vessel&quot;, &quot;Infernal idol&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/FarmFood.tsx"/>
+ <tileset firstgid="16001" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="17793" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="10" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJyr5GRgqBzFo3gE4UZ+BoYmInEzP/XslRdgYFAgEisKUNfeTBH62Auyhxp41N5Re0ftHTn2UuIGSuwayfaO4lE8ikcxMgYALv2+iw==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJy9l9tOwzAMhtNdtRUX3JfDJF4B7e2yTX0IynMB94ytD0Ks9Vc8EyfpmmEpmnpIPtux/2bGxO27NmbdGrNt/Hhy1z91YuICCzE5+7kQnzh8nT7AO7rnY/2Xv8QH69bZNXEucSgHxH9wvyfmxzX5R073ES6xThPvsfXvda33gd/PjfUo5lnGk6xSJnNM1rEYPlf5I9eQY8mFbdxa6/u8tV4zubxX9v/I5bXDuXcvPm9fq/N1bMA+IjmnGKnfDkIXJLfE4Ez031hf9t/uRly+l+h/MnvjeKkvuMZtm8s95vFuZvSD5OAXNRbSefgjtWYOVzNwoUk8Zs1KcrtJ63oRr/wOlebCoOPjxOoDGkncoTqP9yqf9Vb5eYMyz7K60jQSPuRaSq9QY+BqGlmai56lfbUZ3EHJn7yv5ZYspB+xPMdiys2Fdlabw51rGlOeM0J9VZopdRnvlTojh86GNKQ+WvasBNsq3JR/S9nXclM1R/tyiNSDlme5xtxax7cV/xukDyluiJl7bobeQ/PhZ6yWfwEC6ruA
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJy9VztOA0EMndBQzx6BGiVBgtwiW9MhStjQcBi4A31yCbKh4BJUnIG1wNq3Xn9mIcKSFSUz8pv3bM84KY1tkVO6yMqCsfe+SumtcL9nbS6Lw5iv3edD9TfM6Py0vvzxY2N6sUiLQ/7es6n+B5Os6db2hXmI8KZq1hyBJ8XYVL5m7yfT/Fi2glgv57aTXRbgLgpztJrAoQS3dXBLtZyqOdcvfl/CPaVxZC2j39gkd+wZtjYP69nCtfIa4Wp9qt1RU3Ia4WqYVu8+nsX+cR3vIWuUPpW9u12ntFuX8dUwyFj/ktpmu6o7zHqMG+US9/wGd9th7mr7rogw8buF690bzzMdF/32ZriH7GmWVMNZQt4b1pxB3CVXrZc8joR1V/V1jJjWex/VmJZTyQHfn30eYlrvIGkuXVvT+Gn6NVW/x3t7cbbR4mj54fnAwi6ZB6M32uLGM5EWW+OKbwRzmQsv4abdU95ZcYbimQYxpa6fpzq2pj//5p2V65554/yqaSf5Ye9wDNTW0gPPxPXu5VnmQNYFniMyxuZzyvkA8+/9v+H65ViRYb1TbFmjmH+rrjkG6+b1jjZXz/M4J1hvcg1jHHLvhPsFeYziYg==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzNls1KAzEQx4cFFaV6F4+uYNWTLgWfYE/bp/AxhHoqKPRFPNq+QVXwukev9T00Qzo0neZjkmaxfxg2mSTz251MdhdA6x7yqFV2sQdwqezTY6hvQbynYzn7I8AkrkQx+cjJjdH8n7jELh3M9464VFspTLPWBoWKU64bifurQvttuU55znm5biE/sR/2tRGzFfLo/JyeALzeACzOVmPYJx9ecQ6P3RrXR8FZHBSbPoyNGhtMs03jpMoSQ6JFH+CnvxnX7Nt8tC5Wo2U+fnHtlZvn4tK6LnRYAxzV+ePS/vJ9651re1bMl1q3XZLu71sDMFU2a1Y+W734/HyMx7S952+HAHfKqqHum3Xlkm2/zbriMa3Pq8amymbLOWZ98NiTRhu/J15XPGZI/Pz6uLnPL2oUeMe4mKF1PsV86311liqe87GjjdomtyjJP9f1wXaMVH1ZuL77xbEc/602rk+S72AX3FzaRa6kLlPXhZ43poZi5u5inkP6A6d8q5o=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="238.666" y="480.166">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="85" template="../../../../common/maps/obj/dialog.tx" x="212.583" y="335.25" width="54" height="22.5" visible="1">
+   <properties>
+    <property name="dialog">[
+    {
+       &quot;text&quot;: &quot;A quartet of demons stand in the corners of this opulent but largely empty room. The demons greet you with an eerie cheerfulness.
+
+'Welcome, {var=player_name}! We've been expecting you!' One of the demons says with a smile.
+
+'We have an offer for you. 20,000 gold. One hundred mana shards. Three dozen rare spells. And two unique pieces of magical equipment! A fortune fit for someone as powerful and magnificent as you, {var=player_name}!'&quot;,
+       &quot;options&quot;: [
+        {
+        &quot;name&quot;: &quot;I don't deal with demons. Not interested.&quot;,
+        &quot;text&quot;: &quot;'A shame, truly. Well, there are other ways to get your soul - more violent ones.'&quot;,
+        &quot;options&quot;: [
+          {&quot;name&quot;: &quot;(Continue)&quot;}],
+           &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}, {&quot;deleteMapObject&quot;:124}]
+        },
+        {
+          &quot;name&quot;: &quot;And what would this cost me?&quot;,
+          &quot;text&quot;: &quot;'Well, we would each need just the tiniest sliver of your soul. But in exchange, such riches! So many spells and pieces of magical equipment! Think of the power, {var=player_name}! Be honest with yourself, you've been carving a bloody path across this land, what's a few more nicks upon your scarred soul?'&quot;,
+          &quot;options&quot;: [
+            {&quot;name&quot;: &quot;Not worth a piece of my soul.&quot;,
+             &quot;text&quot;: &quot;'A shame, truly. Well, there are other ways to get your soul - more violent ones.'&quot;,
+             &quot;options&quot;: [
+                    {&quot;name&quot;: &quot;(Continue)&quot;}],
+                    &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}, {&quot;deleteMapObject&quot;:124}]},
+              {&quot;name&quot;: &quot;Sounds like we have a deal.&quot;,
+              &quot;text&quot;: &quot;'Excellent! You won't regret this, {var=player_name}! No refunds.' And with that, the demons all vanish, leaving their promised treasure behind. You shudder, feeling like your soul got several papercuts.&quot;,
+              &quot;options&quot;: [
+                {&quot;name&quot;: &quot;(Continue)&quot;,
+                &quot;action&quot;: [
+                    {&quot;grantRewards&quot;: [
+                  {&quot;type&quot;: &quot;life&quot;, &quot;count&quot;: -4},
+                  {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 20000},
+                  {&quot;type&quot;: &quot;shards&quot;, &quot;count&quot;: 100},
+                  {&quot;type&quot;: &quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Scroll of Griselbrand&quot;},
+                  {&quot;type&quot;: &quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Amulet of Agony&quot;},
+                  {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Griselbrand&quot;,&quot;sourceDeck&quot;: &quot;decks/rewards/Select_SLs.dck&quot;},
+                  {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Kothophed, Soul Hoarder&quot;,&quot;sourceDeck&quot;: &quot;decks/rewards/Select_SLs.dck&quot;},
+                  {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Demonlord Belzenlok&quot;,&quot;sourceDeck&quot;: &quot;decks/rewards/Select_SLs.dck&quot;},
+                  {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Razaketh, the Foulblooded&quot;,&quot;sourceDeck&quot;: &quot;decks/rewards/Select_SLs.dck&quot;},
+                  {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 12, &quot;subTypes&quot;: [&quot;Demon&quot;], &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ] },
+                  {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 20, &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ] }
+                  ]},
+                {&quot;deleteMapObject&quot;:103},
+                {&quot;deleteMapObject&quot;:86},
+                {&quot;deleteMapObject&quot;:87},
+                {&quot;deleteMapObject&quot;:90},
+                {&quot;deleteMapObject&quot;:91},
+                {&quot;deleteMapObject&quot;:-1}
+            ]
+                }]
+                }]
+                }]
+                }]</property>
+   </properties>
+  </object>
+  <object id="86" template="../../../../common/maps/obj/enemy.tx" x="150.5" y="185">
+   <properties>
+    <property name="enemy" value="Razaketh"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="87" template="../../../../common/maps/obj/enemy.tx" x="152" y="264.5">
+   <properties>
+    <property name="enemy" value="Kothophed"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="88" template="../../../../common/maps/obj/dialog.tx" x="208.75" y="431.75" width="91.5" height="22.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A fairly unassuming building lies before you, but as you look upon it, a shudder of raw discomfort runs down your spine. Its almost as if your very soul senses immense evil ahead.
+
+Your manasight stone glows, sensing the power of the legends here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/enemy.tx" x="311.75" y="185.25">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Scroll of griselbrand|AVR&quot;, &quot;Mask of Griselbrand|mid&quot;, &quot;Hound of griselbrand|AVR&quot;]}"/>
+    <property name="enemy" value="Griselbrand"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/enemy.tx" x="313.25" y="264.75">
+   <properties>
+    <property name="enemy" value="Razaketh"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/enemy.tx" x="231" y="125.833">
+   <properties>
+    <property name="enemy" value="Liliana"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="93" template="../../../../common/maps/obj/dialog.tx" x="223.807" y="154.258" width="34.535" height="12.2492" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A beautiful woman with a sad expression stands in the back room, reading a tome with disinterest. As you approach, her sadness turns to rage.
+
+'Unfortunately for you, I've got some anger I need to work out right now, and you seem like the best target for it.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="103" template="../../../../common/maps/obj/dialog.tx" x="226.917" y="226.917" width="19.1667" height="19.1667" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Dozens of names, each written in blood, are inscribed on the ledger. Foolish lost souls, all...&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="115" template="../../../../common/maps/obj/scroll.tx" x="250" y="205">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Demonic Pact&quot;, &quot;editions&quot;: [&quot;FDN&quot;], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="117" template="../../../../common/maps/obj/scroll.tx" x="207.333" y="205">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Liliana's Contract&quot;, &quot;sourceDeck&quot;: &quot;decks/rewards/Select_SLs.dck&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="121" template="../../../../common/maps/obj/scroll.tx" x="105.5" y="220">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Shadowborn Apostle&quot;, &quot;editions&quot;: [&quot;M14&quot;], &quot;count&quot;: 16 } ]"/>
+   </properties>
+  </object>
+  <object id="122" template="../../../../common/maps/obj/scroll.tx" x="354.5" y="220">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Shadowborn Apostle&quot;, &quot;editions&quot;: [&quot;M14&quot;], &quot;count&quot;: 16 } ]"/>
+   </properties>
+  </object>
+  <object id="124" template="../../../../common/maps/obj/dialog.tx" x="227.917" y="223.417" width="19.1667" height="19.1667" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Dozens of names, each written in blood, are inscribed on the ledger. Right there on the bottom, blood still wet, is yours, {var=player_name}. You hope it was worth it.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="125" template="../../../../common/maps/obj/collision.tx" x="228.774" y="196.378" width="16.1192" height="19.0318"/>
+ </objectgroup>
+</map>

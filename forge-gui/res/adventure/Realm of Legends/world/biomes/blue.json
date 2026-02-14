@@ -1,0 +1,149 @@
+{
+	"startPointX": 0.79,
+	"startPointY": 0.43,
+	"noiseWeight": 0.5,
+	"distWeight": 1.5,
+	"name": "blue",
+	"tilesetAtlas": "world/tilesets/terrain.atlas",
+	"tilesetName": "Blue",
+	"terrain": [
+		{
+			"spriteName": "Blue_1",
+			"max": 0.2,
+			"resolution": 10
+		},
+		{
+			"spriteName": "Blue_2",
+			"min": 0.8,
+			"max": 1,
+			"resolution": 10
+		}
+	],
+	"width": 0.7,
+	"height": 0.7,
+	"color": "10a2e0",
+	"spriteNames": [
+		"Shell"
+	],
+	"enemies": [
+		"Shorikai",
+		"Eloise",
+		"Morska",
+		"Loot",
+		"Sevinne",
+		"Nemesis"
+	],
+	"pointsOfInterest": [
+		"Blue Castle",
+		"Island Capital",
+		"Island Town Generic",
+		"Island Town Identity",
+		"Island Town",
+        "Island Town Tribal",
+		"Azorius Senate Hall",
+		"Blue Tower of Worship",
+		"Cave of Wonders",
+		"Frostbitten Cavern",
+		"High and Dry Docks",
+		"Izzet Lab",
+		"Jeskai War Camp",
+		"Lab of Jin-Gitaxias",
+		"Serpent Seaside",
+		"Teferi's Hideout",
+		"Sphinx of Riddles Blue"
+	],
+	"structures": [
+		{
+			"N": 2,
+			"x": 0.5,
+			"y": 0.5,
+			"structureAtlasPath": "world/structures/blue_structures.atlas",
+			"sourcePath": "world/structures/models/blue.png",
+			"maskPath": "world/structures/masks/circle.png",
+			"height": 0.1,
+			"width": 0.1,
+			"symmetry": 8,
+			"periodicOutput": false,
+			"mappingInfo": [
+				{
+					"name": "water",
+					"color": "00ffff",
+					"collision": true
+				},
+				{
+					"name": "tree",
+					"color": "00ff00",
+					"collision": true
+				},
+				{
+					"name": "tree2",
+					"color": "008000",
+					"collision": true
+				},
+				{
+					"name": "pineapple",
+					"color": "ffff00",
+					"collision": true
+				},
+				{
+					"name": "rock",
+					"color": "ff8000",
+					"collision": true
+				},
+				{
+					"name": "rock2",
+					"color": "804000",
+					"collision": true
+				},
+				{
+					"name": "rock3",
+					"color": "402000",
+					"collision": true
+				},
+				{
+					"name": "rock4",
+					"color": "201000",
+					"collision": true
+				}
+			]
+		},
+		{
+			"N": 2,
+			"x": 0.5,
+			"y": 0.5,
+			"structureAtlasPath": "world/structures/blue_structures.atlas",
+			"sourcePath": "world/structures/models/beach.png",
+			"maskPath": "world/structures/masks/ring.png",
+			"height": 0.5,
+			"width": 0.5,
+			"symmetry": 8,
+			"mappingInfo": [
+				{
+					"name": "water",
+					"color": "00ffff",
+					"collision": true
+				},
+				{
+					"name": "tree",
+					"color": "00ff00",
+					"collision": true
+				},
+				{
+					"name": "tree2",
+					"color": "008000",
+					"collision": true
+				},
+				{
+					"name": "dune",
+					"color": "ff8000",
+					"collision": true
+				},
+				{
+					"name": "dune2",
+					"color": "402000",
+					"collision": true
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="35" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="109">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Haunted Fengraf&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="22017" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="1" name="Background" width="35" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzF1tENgjAQBuDGRECeNFE3MHEvnaGmL2xi4iwqzqDLqEdCQ4Pc9VquSPK/aKWf12tBL5TSkBPEEJnn9PdD0W0qyCFT6jHvMnRppiUmrsW0nncWZ9FCqZx71oy6bEulXoXf4P5G2vKBmqlcrgZjLOfEjpg1wiLRO1IWLMXy/xZriLXcwHHMuvnvjmsN+2dT8tdirMWGqgu3JxqDjbQltC+5jv59uRbJMxZzhawR57/FjpOwpKoJZnkWvOfQFJZmPPa+kMrh692pLDs42/bIuZvCQDmuiKNvSdkjPoe1hOzP2B6pPQ7XgtUn1IbVhHMZYk5s7Yxn7hAH1qvUfuJ8xnFcctoSGm5NVrNfB2X5AkjFb50=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="35" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztlUEOgjAQRbsoJMgV3Oq2eB9vUDyAG8+j59AtcCU7kUkn05JUGSAx/clfAGHmMfMBpZbXuZat12ul9s4N8UlvwwJ9O/1hQtdlGo8kC+1Pj0EDYzGRec1h6XVokC2Uap3vZXw2wLErQ765c+lIH8qD1/iumpHj4XwpPBvcP5fFjs9fkxkY7XvyuQEDzAw5kHkQYAHFdjVlvpd/ZTFfcMRYaI4lsvsrC3JgjqWym8KBPXm2kU8iL8ADNdvCmyr2TnM+KUFNm1CPsqIlOSgP//ai7EI9U1m21tT/KWt9HVwOjytmEXWtwnNPx/HagCUrK1W3yvsNDGx9eA==
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="35" height="25">
+  <data encoding="base64" compression="zlib">
+   eJy9lrGOwjAMhjO0VAwsh3QPcVt5BDYehO1mpC433HDPcQOvAiPMvA36FUUYy3acpPBLVtu0ab44duIQog5L26C/jxBO62i49/SpUe6/sMRBrR90ewUDbOye/UI55tBE/Mh9O7J3GJOvEa6WNmydbk4uynHpouEZV2sdWtbE4qDxxhkoI4wqPXOm3Vc0TefeZkmmjSm118piwXpuP+PcMB9pTC/Hz6qNBQKH5pcSFo8oyyTsTXPGYQkLpLFITLWxou3BGkuSlasax57kiuTTUpZfFmsSj+QXzivNodYv0I2888QOvkHeSPw0RyUWypM7V+m/6f5yVfZjrtx5TXksltTOebxngKd28LJYZ89xEcJ3/zBJpXWMVgPNVQ/V9JFY3skB0Zz5H9pZWvzJ+7bUqyX9cvWC1CbFkHdMbx1njethy/XxaGLft+YctxJfJJaSub7aL6nvHWxUnm0=
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="35" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzFls9Kw0AQxkdJWpueRLwLUq9q30bxIlJpKb0WevHga3jxpj6C+Aektj1ZwZsnRR/CIgjukAyZTCe7myj6wQfb0Oz88s1uNgCp+rV8oxZX560prGat6bQaeyMEGNRiSwZNdP2gA/DWBng3bpnxYUev7eLgLBPGYssCjfPReLQC0Db19zsxF/62ySeXkySbJ0iZ0Lt1+zNibcoDx2hbHpLjWWEZh2k2jTDtWR7LZgCw5fB24NcbycL7xLkkC9WJKu6565Uskw8L9uXL3HevsMwYC9afBu45Sfhf9GMBFqrdhHmWQbJWH4J07r9mGbM1818s2C9imTCWrhmfe6wRyXJh7umFfiyjpO5dkkNTYSnLwznkXtqr57NwnnE436dZcq8vj8bhwyLfMZyFZ0PqssynQdZUk3NoKsMis7mKskySBRlQNo5LM8enwjL0YOHZ7Ig5sJ7cL66zUMsE1WTZ4B7SWHg2kgUl++PaMz4slMHQkg2x2M5L29mY1x9UI6mFLOtheg5IHslSRjYOFNXiHOThL7K4OLQzWnp5MWZpVcqzFOGgTOR3FGVDeV2bOT8KshThwPqyNzdR7NsovVaGA5W3ZySHtkb4+7XPuJDD9T1ehIVz8DWC2bwsAbwmJo6i9mWRHChiQY418+xdc63HMvkJQx6LxoGivXFsfGR8tmDOV+NvcS8I8g==
+  </data>
+ </layer>
+ <layer id="6" name="Clutter" width="35" height="25">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJytV7tuU0EQHYQdJAyFDTZK/iAQcMB2AsgECdHYUn4ABAUFIdhxHpACCvgECqCiQEiACD9CgR+J4yQgUfBokFKBBDUz2lnu8XrvzTXiSEe73ru7c3J29pF8mqgdg/uyRE+vED1hPoZyfzZ8zGmmi56W5wc/USumluccM3uV6CjzCJQvQrTUM0QLmf5YRah/2EPLhs7ho2hZnesf++um0eL2tRpOpQ3joqbj13lMh/mS537l4YUc0Qzze9pwRn9fzA32fZ01c18bJ7rOPKl6PsbU1FItl3juxijRIrNyPPhe5fqzE6b+aMLUpc1ymT1bYX67RXQ5Z/y4xzrujwdzyBp1td6jcNTUW9FyaIzo8JiJUQEidilok/IH6/jJnJs3Wv4HREs+YerthPG36viDwN8V9Ui0WA8FUnfXp8ScctqsVxKzrFqsD6LF5wv64fNMtKyPBr9tvUvDwWoRHcJd+ObGdDELWsJQDP/U55X0+8zzPDwW+G01oBeoze33gMd+dbTk2fOpIfY2AvUgZqHu5okAdbTU104i2KOCuPsa/UM9Ub5UPTpcLV3QUoAYkqu+u8AH1PNmJMghZD05qEP24UHuv8ZcSBpfdlTLBsy/Q9HnjKDs6PkCtMC2KB0CObtWnLvpXyB5N6l3bgv8EO9TKT4XmckD5gyxOuz3vI7DO0nyRfZ21H4K88renR2PljXW8TZlNEyCH7Ju4skSe7Ea4sfvG/H9KKgnNbh7UUtqxMT3aRCfijy25LxhPsUPP4A7HH8xY84GWYOWJ3eFmBuCae5/hvk+3f+GiVoXi3JIP/GlAXnXcuKLD9YLvH+29C3kvqWGvQMQ6Mu7icF8wfiCaV2TJc+bTuC7D6OAZ5H1uqdr7moR385qfOl7O2P6Dvuew3i+u8LOvcnlPJfnPPtI/v4mtxe0r+SHu2/i5IhFV+cqORQ/NpVhezoPGppwtv6de0hfJOa20sZta30buOPRsqV7RXKqEZIjFnHunbs8fllZhzq2NTVnXC01PcvCchXh+x/ExR9BPB1U
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="182" y="400.5" width="55" height="16"/>
+  <object id="55" template="../../../../common/maps/obj/enemy.tx" x="375.5" y="127.5">
+   <properties>
+    <property name="enemy" value="Mikaeus"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../common/maps/obj/enemy.tx" x="200.5" y="70.5">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Walking Corpse|ISD&quot;, &quot;Graf Harvest|EMN&quot;]}"/>
+    <property name="enemy" value="Wilhelt"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="61" template="../../../../common/maps/obj/enemy.tx" x="199" y="231">
+   <properties>
+    <property name="enemy" value="Grimgrin"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="62" template="../../../../common/maps/obj/collision.tx" x="-2.73" y="401.5" width="565.46" height="16"/>
+  <object id="63" template="../../../../common/maps/obj/collision.tx" x="-3.23" y="-17" width="565.46" height="16"/>
+  <object id="64" template="../../../../common/maps/obj/collision.tx" x="-15.5" y="-17.472" width="16" height="433.944"/>
+  <object id="65" template="../../../../common/maps/obj/collision.tx" x="561.5" y="-16.472" width="16" height="433.944"/>
+  <object id="66" template="../../../../common/maps/obj/enemy.tx" x="300" y="267">
+   <properties>
+    <property name="enemy" value="Millicent"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="76,96,75"/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/enemy.tx" x="287.75" y="142.25" visible="1">
+   <properties>
+    <property name="enemy" value="Jadar"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/manashards.tx" x="347.5" y="389.833"/>
+  <object id="70" template="../../../../common/maps/obj/manashards.tx" x="320.167" y="371.667"/>
+  <object id="71" template="../../../../common/maps/obj/enemy.tx" x="322.75" y="92.4167" visible="1">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Gisa's Favorite Shovel|SLX&quot;, &quot;Hobbling Zombie|MID&quot;]}"/>
+    <property name="enemy" value="Gisa"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/enemy.tx" x="97" y="113.5" visible="1">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Geralf's Messenger|DKA&quot;, &quot;Seagraf Skaab|SOI&quot;]}"/>
+    <property name="enemy" value="Geralf"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/enemy.tx" x="219.5" y="145.5" visible="1">
+   <properties>
+    <property name="enemy" value="Ludevic and Kraum"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="float" value="30"/>
+   </properties>
+  </object>
+  <object id="75" template="../../../../common/maps/obj/waypoint.tx" x="369.255" y="178.492"/>
+  <object id="76" template="../../../../common/maps/obj/waypoint.tx" x="221.5" y="300"/>
+  <object id="79" template="../../../../common/maps/obj/booster.tx" x="375.5" y="109">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;DKA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DKA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DKA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/enemy.tx" x="110" y="142.5" visible="1">
+   <properties>
+    <property name="enemy" value="Ozox"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="93" template="../../../../common/maps/obj/enemy.tx" x="369.667" y="346.5">
+   <properties>
+    <property name="enemy" value="Umbris"/>
+    <property name="hidden" type="bool" value="true"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/booster.tx" x="324.5" y="75">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;editions&quot;: [ &quot;SOI&quot; ],
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;editions&quot;: [ &quot;SOI&quot; ],
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;editions&quot;: [ &quot;SOI&quot; ],
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/booster.tx" x="79.5" y="113.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;editions&quot;: [ &quot;EMN&quot; ],
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;editions&quot;: [ &quot;EMN&quot; ],
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;editions&quot;: [ &quot;EMN&quot; ],
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="96" template="../../../../common/maps/obj/waypoint.tx" x="339.5" y="239"/>
+  <object id="100" template="../../../../common/maps/obj/booster.tx" x="198" y="47.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="101" template="../../../../common/maps/obj/booster.tx" x="219" y="46.6667">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="102" template="../../../../common/maps/obj/dialog.tx" x="134.75" y="342.75" width="135.5" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;An ominous graveyard is visible before you. Zombies shuffle about, with ghosts swirling just out of sight. The style of headstone indicates this is place originates from the haunted plane of Innistrad.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="103" template="../../../../common/maps/obj/dialog.tx" x="494.417" y="256.583" width="105.167" height="15.5" rotation="180" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;As you continue to walk along the riverside, a jolt of pure terror runs down your spine. Its certainly not from the crudely carved jack-o-lantern to your side, but it doesn't seem natural...&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="104" template="../../../../common/maps/obj/dialog.tx" x="269.159" y="109.25" width="77.5909" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A woman in a tattered black dress whistles as she digs up graves ahead of you.
+
+'Oh, hello! You look like you'll make a quality zombie! Do me a favor and die so you can be useful.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="105" template="../../../../common/maps/obj/dialog.tx" x="108.295" y="123.159" width="24.6818" height="35.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;An oddly elaborate makeshift lab has been setup in this corner of the graveyard. A man covered in bloody overalls turns away from his work.
+
+'You're interrupting important science! Skaabs, kill them for their impudence.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="106" template="../../../../common/maps/obj/dialog.tx" x="171.455" y="84" width="77.5909" height="11.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The building ahead reeks of gore. A zombie stands guard in front of the horrific place, a glimmer of cruel cunning in its eyes that the other zombies have lacked.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="107" template="../../../../common/maps/obj/scroll.tx" x="395.5" y="27.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Haunted Fengraf&quot;, &quot;editions&quot;: [ &quot;DKA&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="108" template="../../../../common/maps/obj/collision.tx" x="79.25" y="71.278" width="33.75" height="24.694"/>
+ </objectgroup>
+</map>

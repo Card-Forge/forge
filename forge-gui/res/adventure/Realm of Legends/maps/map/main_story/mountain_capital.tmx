@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="78">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <layer id="1" name="Background" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmFsOgjAQRRv/QJfgGvxTjAthH/jaqA9cgAuxE5jYEEpftjMIHzdNSJs5nWkb5taZEPWsv9FWqmDAoeN6ST2Z7QNiXXMhznkz6vhg3k7q0s57JOKDnN0V9fHhHnDOXuqUp+fTxa3ktwMBWzcvQzXDfSyW9lLXu6zrypYvJEaodGdPrTElH8j0tlDzmd4Maj7TvaTms7nzKTjWq0Yp+XQxx5i/mW/mi8EXekemnj/Ue8Obj3v+pspHyTYGPugdC8Z8pn98aj7oITn/Q9v6Gy7qxigtYkAvdmx7bvQ11HHoDLqo9ORTOdEXMHkcIcI44D1AXlz8B/QFYC2y/poP4/h4Srfs66lg3WP4K75nu4rE05eHGHWZCl+qOnHSByeXBuo=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzVmctu00AUhieJVNTQeNPEu0JY5UK5hssawRMU1tAta1gVJNKy4VICES0XsUPwBLDiLQoKbCGCFaFJAIUt5+AZ+Xg8Mx5fCOFIv8YeT8af/xM745Oaw9jdUlibIBHrFcZuVrx2Q9IN0AHXH1uH+ZoOC8VKnrF7BcbG0E64dkH3C76G5JjQbQXbrVLwHPtdjwHbKqjNuapukM0UIwXTg0J4zJgIx9ecIFdDc/000Mcl4PpStmPD6HB/vufDx7rSGMGGrc4zObbItvDR5N2xnJpR9kwe1ykEc27rmW08tByn4pcDv7N4H2yDHs2YHpc8L5GvBd6dmDGd5PnEvM4yH8b/xnca9HbKOhWDjx6bVpgY/jWfczAZX2+RMbeSrd4vhvnOFJPxVWC+X8vZeoVzYnw45Lcmvq0IvqxDzJnf6wkjjX8ienXITd3b/gqeDiRf+7ngOb81YK3S4OOhHfDt50te+2KesT1c/ZR8c2Quk15ajEE+bM8Bk3Pc/x1O659NYJ6iQvhHxyJnEr4rZfv7Es8rZBp3tezz4XMF4/K8mmGwEO1t1v6J+Fj0c67zD98Vdhey5aP3CMawBuv2mr+fa8LxZvizOgbV+ioNH97H/Vy437SfhO8IXONRfp0/4Nnwkz8fdP0yH+oVPINeL3v911vemEstb/8a319tmflU6z88ZvtMoTpbVPd/kvr7MfyLOhYnRN7ezAX717hHwrM1yTv0Ni6fTU5pP+WLcx+bGEzH0uRX5JP6uCp5d1HydJr5TRJ/i0+sEZtVX7p1XlZ8T2O8p+JvtHhfRf+2pX5bPSnZ8yURzqdax6WZb9b5dOuDWeG7w2uQO07y99Yeb99xvh2pP6lwPly/fC77dTxVTQlrSBcUNTtVyM8X1Wef2U31JzC/GxG1xpGmpmjDh5/dLDB2Pu+Jsh7W1Ne6ZBvz266oGVf4nFgz1p3Dhm9C6rViHtt8YH7XeS25LTHSevGQnMPkpYqP1sMnhJMydlk4xHdD1JL3uUEfR2QuUXeP8kDHN5Y4Tdcp5w25RC2+SurKqlo1rb/LdWQVX8fw34HsoWCjXqB+A+qRslo=
+  </data>
+ </layer>
+ <layer id="6" name="Ground2" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAqoC2bxUFfdKKAeoHWYH+GE0Ieg9HEofYyTOP3pmgwMGUB8XZf6bsMFYoH2xWkSp7YZqK4FiG/r0NZNMPCIkYGhEmhfFQE7xSTo4x5ygcggcp85L6bYlgFy31YJSNhsGyThgy1sQGC2OgPDHHX6ugUEcLkHHWwHum2HOuF8Sax5o2AUDCcw2tYa2mAmjvijpP6YQcM0MQ1HOYtLfKCAjACElhMYWHeMAtqA0fgdBaNgFKADAIv3G+E=
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="40" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztzgENAAAIA6Dbv6VJjKFukIAEAICLurYHAAAA8NcAtMoA5A==
+  </data>
+ </layer>
+ <layer id="5" name="Overlay" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1E0KgzAQBeDXZVYeQwPFjfdrewvdt5dol6X7/oKuRb1Ct50SRCtd2EIYhffBkElWL4QJQERERPSb51I7wTj7CDhEri8XrvqGZ1cL3Kzrz7JerJ9c2wTYJZ9nR9PledfJfM9MpO0eAo+w29cyJ42nWZmSXO5Y2PF9qz/Hqfyd2cT+zzZfbLST6Pr3fYeq2F9GorlYBcBaahNoJyEf+L5ENDcvC4Av1w==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="41" template="../../../../common/maps/obj/shop.tx" x="249" y="370">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Red,Creature6Red,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
+    <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red,PhyrexianRed"/>
+    <property name="rareShopList" value="Artifact4Red,Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle2Red,Wand4Red"/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value="Wolf4Red,Sliver4Red,Knight4Red,Soldier4Red,Dinosaur4Red,Ogre4Red,Multicolor8Red"/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../common/maps/obj/shop.tx" x="152" y="370">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Red,Creature6Red,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
+    <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red,PhyrexianRed"/>
+    <property name="rareShopList" value="Artifact4Red,Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle2Red,Wand4Red"/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value="Wolf4Red,Sliver4Red,Knight4Red,Soldier4Red,Dinosaur4Red,Ogre4Red,Multicolor8Red"/>
+   </properties>
+  </object>
+  <object id="57" template="../../../../common/maps/obj/shop.tx" x="200" y="418">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Red,Creature6Red,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
+    <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red,PhyrexianRed"/>
+    <property name="rareShopList" value="Artifact4Red,Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle2Red,Wand4Red"/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value="Wolf4Red,Sliver4Red,Knight4Red,Soldier4Red,Dinosaur4Red,Ogre4Red,Multicolor8Red"/>
+   </properties>
+  </object>
+  <object id="43" template="../../../../common/maps/obj/shop.tx" x="104" y="370">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Red,Creature6Red,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
+    <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red,PhyrexianRed"/>
+    <property name="rareShopList" value="Artifact4Red,Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle2Red,Wand4Red"/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value="Wolf4Red,Sliver4Red,Knight4Red,Soldier4Red,Dinosaur4Red,Ogre4Red,Multicolor8Red"/>
+   </properties>
+  </object>
+  <object id="47" template="../../../../common/maps/obj/inn.tx" x="376" y="370"/>
+  <object id="49" template="../../../../common/maps/obj/shop.tx" x="104" y="418">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Red,Creature6Red,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
+    <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red,PhyrexianRed"/>
+    <property name="rareShopList" value="Artifact4Red,Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle2Red,Wand4Red"/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value="Wolf4Red,Sliver4Red,Knight4Red,Soldier4Red,Dinosaur4Red,Ogre4Red,Multicolor8Red"/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/shop.tx" x="152" y="418">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Red,Creature6Red,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
+    <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red,PhyrexianRed"/>
+    <property name="rareShopList" value="Artifact4Red,Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle2Red,Wand4Red"/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value="Wolf4Red,Sliver4Red,Knight4Red,Soldier4Red,Dinosaur4Red,Ogre4Red,Multicolor8Red"/>
+   </properties>
+  </object>
+  <object id="53" template="../../../../common/maps/obj/spellsmith.tx" x="168" y="258"/>
+  <object id="55" template="../../../../common/maps/obj/shop.tx" x="366" y="433">
+   <properties>
+    <property name="commonShopList" value="Mountain"/>
+    <property name="noRestock" type="bool" value="true"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/entry_up.tx" x="273" y="642" width="80" height="20">
+   <properties>
+    <property name="spawn" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="59" template="../../../../common/maps/obj/entry_left.tx" x="337" y="627" width="16" height="89.9726" rotation="0"/>
+  <object id="60" template="../../../../common/maps/obj/entry_right.tx" x="266" y="623" width="16" height="88"/>
+  <object id="62" template="../../../../common/maps/obj/shop.tx" x="361" y="258">
+   <properties>
+    <property name="commonShopList" value="RedEquipment"/>
+    <property name="hasSign" type="bool" value="true"/>
+    <property name="noRestock" type="bool" value="true"/>
+    <property name="signYOffset" type="float" value="-4"/>
+   </properties>
+  </object>
+  <object id="63" template="../../../../common/maps/obj/shop.tx" x="409" y="259">
+   <properties>
+    <property name="commonShopList" value="RedItems"/>
+    <property name="hasSign" type="bool" value="true"/>
+    <property name="noRestock" type="bool" value="true"/>
+    <property name="signYOffset" type="float" value="-4"/>
+   </properties>
+  </object>
+  <object id="65" template="../../../../common/maps/obj/shop.tx" x="200" y="370">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Red,Creature6Red,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
+    <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red,PhyrexianRed"/>
+    <property name="rareShopList" value="Artifact4Red,Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle2Red,Wand4Red"/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value="Wolf4Red,Sliver4Red,Knight4Red,Soldier4Red,Dinosaur4Red,Ogre4Red,Multicolor8Red"/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/shardtrader.tx" x="337" y="403">
+   <properties>
+    <property name="signXOffset" type="float" value="14"/>
+    <property name="signYOffset" type="float" value="-2"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/shop.tx" x="400" y="337">
+   <properties>
+    <property name="commonShopList" value="Legend4Red"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="signYOffset" type="float" value="-2"/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/shop.tx" x="464" y="337">
+   <properties>
+    <property name="commonShopList" value="RedBoosterPackShop"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/RotatingShop.tx" x="521.25" y="320.099">
+   <properties>
+    <property name="rotation" value="Red1,Red2,Red3,Red4,Red5,Red6"/>
+    <property name="signXOffset" type="float" value="16"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/RotatingShop.tx" x="528.424" y="198.788">
+   <properties>
+    <property name="rotation" value="Red1,Red2,Red3,Red4,Red5,Red6"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/RotatingShop.tx" x="248.788" y="418.122">
+   <properties>
+    <property name="rotation" value="Red1,Red2,Red3,Red4,Red5,Red6"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/shop.tx" x="272.5" y="261.5">
+   <properties>
+    <property name="commonShopList" value="Artifact4Red,Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle2Red,Wand4Red"/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red,PhyrexianRed"/>
+   </properties>
+  </object>
+  <object id="74" template="../../../../common/maps/obj/shop.tx" x="208" y="261.5">
+   <properties>
+    <property name="commonShopList" value="Artifact4Red,Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle2Red,Wand4Red"/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red,PhyrexianRed"/>
+   </properties>
+  </object>
+  <object id="75" template="../../../../common/maps/obj/dialog.tx" x="327.5" y="342" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;You approach what seems to be a very out of place farmhouse among the lava and stone of the city. It is oddly lacking in animals. 'Hail, traveler! We have a bit of a crisis on our hands, if you could help us.'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;Your chickens are saved. The cows and pigs had already been made meals of, I'm afraid.&quot;,
+                    &quot;text&quot;: &quot;'Well, we'll take what we can get! Better than starving, that's for sure! Thank you, hero. Not everyone would take the time to help the littlefolk like you have.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+						{&quot;type&quot;: &quot;life&quot;, &quot;count&quot;: 1},
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Chicken Egg&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Smoldering Egg&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Rukh Egg&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Summoner's Egg&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Shadowblood Egg&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Mossfire Egg&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 1000}          
+                      ]
+                    },
+					{&quot;removeItem&quot;:&quot;One Thousand Chickens&quot;},
+					{&quot;addMapReputation&quot;: 2} ],
+					&quot;condition&quot;:[{&quot;item&quot;:&quot;One Thousand Chickens&quot;}], 
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;What's your crisis?&quot;,
+					&quot;text&quot;: &quot;'The other day when we brought the animals out of the walls to graze a big ol' nasty dragon by the name of Prossh the skyraider dived in and slaughtered our guards. Then a whole mess'a little kobolds swarmed in an kidnapped all our livestock!'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;So, what, I'm to rescue chickens?&quot;,
+					&quot;text&quot;: &quot;'Look, in case you haven't noticed, this region doesn't have much in the way of arable land. Without the livestock returned, a lot of us will starve. Rescue what animals you can and slay the dragon-thief and you'll have the city's favor and some coin for your trouble. Rumor has it the dragon's lair looks like a dark building pouring out lava.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;I can manage that.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;I have better things to do.&quot;,
+					&quot;text&quot;: &quot;'Always how it is, no time for us peasants. I'll have you know we feed you.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/dialog.tx" x="311.5" y="261.5" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;A rowdy gathering of dragoncallers gather around the town hall. 'You! Are you not only utterly fearless, but think you can stop a foe our entire council can't defeat?'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;Urabrask has been ended.&quot;,
+                    &quot;text&quot;: &quot;Some of the mages seem elated, while other ones are oddly upset. 'We had a bit of a betting pool on whether you'd succeed, but you should be certain that your victory means that we've all won the prize of safety, at least for now. Fine work.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+						{&quot;type&quot;: &quot;life&quot;, &quot;count&quot;: 1},
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Frontline Heroism&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 5000}          
+                      ]
+                    },
+					{&quot;removeItem&quot;:&quot;Red Cartouche of Victory&quot;},
+					{&quot;addMapReputation&quot;: 4} ],
+					&quot;condition&quot;:[{&quot;item&quot;:&quot;Red Cartouche of Victory&quot;}], 
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Nothing frightens me. What do you need slain?&quot;,
+					&quot;text&quot;: &quot;'The one threatening our city is the phyrexian praetor Urabrask himself. Some say he's the weakest of the five praetors, but his unmatchable speed and the devastating heat of the unnatural flames he wields makes us think otherwise.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;I think I can take him.&quot;,
+					&quot;text&quot;: &quot;'Well, someone needs to, so for our sakes you better be right. We'll fight him if it comes to it, but we've already lost some of our best mages holding him off as it is. Find him in a place that looks like a furnace straight from your nightmares. Kill him and you'll have the city's favor and a pile of gold to boot.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;I'll face him with all my might.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;Might be a little much for me right now.&quot;,
+					&quot;text&quot;: &quot;'No shame in knowing your limits.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="77" template="../../../../common/maps/obj/dialog.tx" x="486" y="246" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;A heavily armed warrior calls out from the garrison ahead. 'Hail traveler! If you are mighty indeed and the type who cares of honor, come here and hear our plea.' [NOTE: THIS IS THE ONLY CURENTLY NONCOMPLETABLE QUEST]&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;Here's your flag, and I suppose your honor along with it.&quot;,
+                    &quot;text&quot;: &quot;'You've done us all a fine favor this day! We may not have won it back ourselves, but knowing that our fallen comrades have been avenged is a great solace. We will sing of your heroism for a long time to come!'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+						{&quot;type&quot;: &quot;life&quot;, &quot;count&quot;: 1},
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Chronicle of Victory&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Surge to Victory&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Seize the Day&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 3000}          
+                      ]
+                    },
+					{&quot;removeItem&quot;:&quot;Victory Standard&quot;},
+					{&quot;addMapReputation&quot;: 4} ],
+					&quot;condition&quot;:[{&quot;item&quot;:&quot;Victory Standard&quot;}], 
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Mighty and honorable, sounds like me.&quot;,
+					&quot;text&quot;: &quot;'Excellent! The full tale is shameful but to cut things short, we suffered a great loss in battle against the Zendikari alliance not long ago. They felled many of our brave warriors, but worse still, they took our precious flag!'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Kind of feel like the flag isn't the important part here.&quot;,
+					&quot;text&quot;: &quot;'You sound like the city council. We've been forbidden from retrieving it, but its a matter of honor! Our morale is in shambles without it. If you could claim revenge on that damned General Tazri and retrieve it, we'd grant you our favor and a fine reward as well! The camp you seek looks like a hill of grey stone topped by the very flag they stole.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Time to capture the flag.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;Doesn't sound like that's for me.&quot;,
+					&quot;text&quot;: &quot;'Leave this place then. We will have to find another way to restore our honor.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

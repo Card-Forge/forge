@@ -89,3 +89,4 @@ ScryfallCode=PMEI
 2025-25 R Aang, Air Nomad @Jinho Bae
 2026-01 R Command Tower @Constantin Marin
 2026-02 R Crop Rotation @DiTerlizzi
+2026-03 R Zack Fair @Tetsuya Nomura

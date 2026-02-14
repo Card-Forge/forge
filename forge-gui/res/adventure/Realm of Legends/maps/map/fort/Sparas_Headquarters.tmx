@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="125">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Spara's Headquarters&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="22017" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="7" name="SubBackGround" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBj8QEsZlb+LZ2Dc0cQNwQNh70AAWvgX3cwARezyIHGYukPS1HEHshnobGx8mL3UDANcbkAWG872opsNE6OFvYQwNjeSAkDlEil6ke0dqLJkFFAOQPFmzD/QrqAMAACB1iKd
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxr4mZgaBqkWEsZgnfxoIqD+IekIZhcs0EAn50wjC4Ps5dcu7HZi24nIXsp8Tc+O4mxlxK7sdknC4zLAEVMLI0Ux5TGNzZ7sdkJw9Ty82C0FyQ/kvxLS3tB6ZJYO3HZTY28RE97ke0mxV5K7EO3m1h7qWUnDBNjL7XtRMcyPAhMiTkAifQQdw==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy9lFEOgjAMhveoAcKTiQY4hPE2ehbxzXPoLRD1FF7CY0iz/aE2Y3QEbfKntLB+dF3WpMY0f1AppFlzyIxpO1+k1kOI99l8XLwn5r3z16XlkIcQ3xTsmH7BhBXsWcZjbC2XmNJC3DG2hot5tq4un2koh7yPreFWbm7Zup9lJXrjPb/ybxUT+wWXBKPc4mw1tNfvzXxcsEP9/oK7zcf3mb6ZiwtDTW2/yFGdyyqO+/ScUc15Ji7iKf2Wjn1K/D36jJikx0DdmHtSsvleyzsjxIy9JyV7iHtMwsxYLmfXieXu8p5LuVrBnMKVa7jF/j/XB6pa9Es=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzNVDuqAkEQbCMVfyjo00zNVtBIj6DHMBADTyEIrh9WDY0Nvcy7xIu8g4ldjM3Ojh9k6AcWFDtTM93FdjdD9N34S5nvuZqk6Nq4FohKY0MXto572r6a97TRVqj3z5RovSQq1IkuDaKI10FA1GEep0bDVzScQwMQh3hf33QY++Z4PeT8I8dXNJyLL+K8fXlW6uPYd8C5+8zMyhCarKFHQexb5rjKkxn8BLl5PCfIh/WO67dnHu41tfdSg9+auYt4HzSjpO+Wc+dRd2YxNP9p7zdWfxGHeB+cHN8s594x98zDvZf2PhMmfU+evuir9PYVpc8uNfDO9xW1gBnBm9DqPZ5Bk/fCd5beYbsw/FTXxKRreu5qs+7/+mrjBni9dP4=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="69" template="../../../../common/maps/obj/enemy.tx" x="127.367" y="80.9333" width="16.6667" height="16">
+   <properties>
+    <property name="enemy" value="Lagrella"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/enemy.tx" x="207.984" y="116.131">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Brokers Initiate|SNC&quot;, &quot;Brokers Ascendancy|SNC&quot;]}"/>
+    <property name="enemy" value="Falco Spara"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/enemy.tx" x="286.784" y="80.4097">
+   <properties>
+    <property name="enemy" value="Bennie Bracks"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="105" template="../../../../common/maps/obj/entry_up.tx" x="178.53" y="262.394" width="59.3333" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="106" template="../../../../common/maps/obj/enemy.tx" x="295" y="185.667">
+   <properties>
+    <property name="enemy" value="Rigo"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="107" template="../../../../common/maps/obj/enemy.tx" x="119.667" y="185">
+   <properties>
+    <property name="enemy" value="Perrie"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="108" template="../../obj/treasure.tx" x="195.333" y="52">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;SNC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;blue&quot;, &quot;green&quot;, &quot;white&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;SNC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;blue&quot;, &quot;green&quot;, &quot;white&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;SNC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;blue&quot;, &quot;green&quot;, &quot;white&quot; ],
+    &quot;colorType&quot;: &quot;multicolor&quot;,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="109" template="../../../../common/maps/obj/scroll.tx" x="208.333" y="74">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Spara's Headquarters&quot;, &quot;editions&quot;: [ &quot;snc&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="110" template="../../../../common/maps/obj/scroll.tx" x="257.75" y="73.75">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;seaside citadel&quot;, &quot;editions&quot;: [ &quot;ncc&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="111" name="switch" type="dialog" gid="4426" x="159.334" y="37" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    &quot;text&quot;:&quot;A big switch is embedded into the wall.&quot;, 
+    &quot;options&quot;:[ 
+	{ 
+		&quot;text&quot;:&quot;You hear some loud sounds from the center.&quot;,
+		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
+		&quot;name&quot;:&quot;Flip the switch&quot; 
+			&quot;options&quot;:[{
+			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:2}}],
+			&quot;action&quot;:[{&quot;deleteMapObject&quot;:114}, {&quot;deleteMapObject&quot;:120}],
+			&quot;name&quot;:&quot;Continue&quot; }]
+	},
+	{ &quot;name&quot;:&quot;Leave&quot; } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="112" name="switch" type="dialog" gid="4426" x="253" y="36.6666" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    &quot;text&quot;:&quot;A big switch is embedded into the wall.&quot;, 
+    &quot;options&quot;:[ 
+	{ 
+		&quot;text&quot;:&quot;You hear some loud sounds from the center.&quot;,
+		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
+		&quot;name&quot;:&quot;Flip the switch&quot; 
+			&quot;options&quot;:[{
+			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:2}}],
+			&quot;action&quot;:[{&quot;deleteMapObject&quot;:114}, {&quot;deleteMapObject&quot;:120}],
+			&quot;name&quot;:&quot;Continue&quot; }]
+	},
+	{ &quot;name&quot;:&quot;Leave&quot; } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="113" template="../../../../common/maps/obj/manashards.tx" x="192" y="74.3333"/>
+  <object id="114" template="../../../../common/maps/obj/gate.tx" x="207.458" y="193" width="17" height="16.875">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;A gate is blocking the path. It looks like it is opened from elsewhere.&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Continue&quot; } 
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="115" template="../../../../common/maps/obj/dialog.tx" x="170.333" y="211.25" width="74" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A beautiful building opens up before you, decked out in white, blue, and green. Water fixtures, potted plants, and sculptures complete the look.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="116" template="../../../../common/maps/obj/dialog.tx" x="162" y="141.917" width="106" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A demonic aven looks up from a pile of papers. 
+
+'Trespassing in Brokers Headquarters. In New Capenna, that'd be worthy of capital punishment. We may be far from our proper territory but I see no reason not to carry out your sentence on the spot.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="117" template="../../../../common/maps/obj/gold.tx" x="125.667" y="143.333"/>
+  <object id="119" template="../../../../common/maps/obj/manashards.tx" x="224.667" y="75.3333"/>
+  <object id="121" template="../../../../common/maps/obj/dialog.tx" x="142" y="239.75" width="12.5" height="59.75" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Guarding the path ahead is what seems to be a typical Brokers pulverizer. But then he puts on his monocle... PERRIE the Pulverizer?!&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="122" template="../../obj/treasure.tx" x="226.667" y="53.6667">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;SNC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;blue&quot;, &quot;green&quot;, &quot;white&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;SNC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;blue&quot;, &quot;green&quot;, &quot;white&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;SNC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;blue&quot;, &quot;green&quot;, &quot;white&quot; ],
+    &quot;colorType&quot;: &quot;multicolor&quot;,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="123" template="../../../../common/maps/obj/gold.tx" x="286" y="141.333"/>
+  <object id="124" template="../../../../common/maps/obj/scroll.tx" x="165.667" y="73.3333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;brokers charm&quot;, &quot;editions&quot;: [ &quot;snc&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

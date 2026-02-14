@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="85">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Altar of the Pantheon&quot;, &quot;Urn of Godfire&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAOonkZGHbxoOIoXoQ4MhtdDSVAlgdTTJoHIY7MRldDC3uR/Usve4kBw8leesQvrrSKbO9wT8/EgOFk70CWG8TY+4eJfHspSc+U2EtJ/A4He2u5GRj2oIntBfLrualrL3q8gTB6WpXFomYXkfYCAEaEM1g=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzr42Rg6MOCNbjJx22chDE2O0ftHbV31N5Re0ftpa29f5hG7R3p9gIAGtbGmg==
+  </data>
+ </layer>
+ <layer id="2" name="Walls and Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy1VVsOgjAQ3D9bvIgXUb/UxHgur2H8wge38CB+IMgR7KZuGNeWgMVJmlK62WHbmYWIqDBEa9uOi1tbN2dqTNU6FoNoIKdGaT95N24c7Hfc0b27zfwzz7EYRm66OUPcVQfv3fHtJn7u4l0FOPeBeOGu3nuhnH0gvCXUoKH5cZ3Ky3j8kKPrDIfExHA24XOfZ0QLNZbZ8BgGa+xkPJeA76C2/t3Ttnup9UotOXi0hvzoH/FQLGcf6G/bqvy10h16aCxerpnzX03bm9BXsoeaH1tX6NEY+E7G1FUMqGfpb//2kYb01JT7Ze2gNwSxPtmAvlJ4tX41vwb+D1POWXszxo31c08tEnWleUPcLwaicWI=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJz7w8TA8AcLpgRgM49YDAPa2qhmntNgYBDWhdAwUKkLUQeiqWUvMsjQYWB4BbSvSxNCN+vQxr9tJIYvTD01/JsK9FuaJn770NVQw95GoHlNBOxFV0Pt+CUW0CI9YwOw9EwNe9NwpFVCAJTGKbEXlGfISc9NFNpLCRjK9hKTrtDVUWJvOpnpitL4TSMzXaWPpiusGADw8hQ/
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="281" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/enemy.tx" x="150.126" y="152.347">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Font of Vigor|JOU&quot;, &quot;Font of Fertility|JOU&quot;, &quot;Temple of Plenty&quot;, &quot;Dictate of Karametra|JOU&quot;, &quot;Bronze Sable|THS&quot;, &quot;Bronze Sable|THS&quot;]}"/>
+    <property name="enemy" value="Karametra"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="59" template="../../../../common/maps/obj/enemy.tx" x="265.148" y="152.884">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Deceit&quot;, &quot;Font of Return|JOU&quot;, &quot;Font of Fortunes|JOU&quot;, &quot;Black Oak of Odunos|BNG&quot;, &quot;Returned Phalanx|THS&quot;]}"/>
+    <property name="enemy" value="Phenax"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="60" template="../../../../common/maps/obj/enemy.tx" x="265.277" y="233.151">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Malice&quot;, &quot;Font of Ire|JOU&quot;, &quot;Font of Return|JOU&quot;, &quot;Slaughter-Priest of Mogis|THB&quot;, &quot;Soulreaper of Mogis|THB&quot;]}"/>
+    <property name="enemy" value="Mogis"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="61" template="../../../../common/maps/obj/enemy.tx" x="149.589" y="231.393">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Abandon&quot;, &quot;Reckless Reveler|BNG&quot;, &quot;Font of Fertility|JOU&quot;, &quot;Font of Ire|JOU&quot;, &quot;Eidolon of the Great Revel|JOU&quot;]}"/>
+    <property name="enemy" value="Xenagos"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/manashards.tx" x="107.973" y="135.78"/>
+  <object id="71" template="../../../../common/maps/obj/enemy.tx" x="209.462" y="90.7975">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Enlightenment&quot;, &quot;Ephara's Warden|THS&quot;, &quot;Font of Fortunes|JOU&quot;, &quot;Font of Vigor|JOU&quot;, &quot;Guardians of Meletis|THS&quot;]}"/>
+    <property name="enemy" value="Ephara"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/manashards.tx" x="107.443" y="178.856">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/manashards.tx" x="305.575" y="133.216"/>
+  <object id="74" template="../../../../common/maps/obj/manashards.tx" x="306.648" y="179.393">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="75" template="../../../../common/maps/obj/manashards.tx" x="307.185" y="210.536">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/manashards.tx" x="308.259" y="261.545"/>
+  <object id="77" template="../../../../common/maps/obj/manashards.tx" x="107.443" y="211.073">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="78" template="../../../../common/maps/obj/manashards.tx" x="107.98" y="257.787"/>
+  <object id="80" template="../../../../common/maps/obj/gold.tx" x="112.275" y="32.2707">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="82" template="../../../../common/maps/obj/gold.tx" x="305.575" y="30.1229">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="84" template="../../../../common/maps/obj/dialog.tx" x="175.314" y="243.539" width="80" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Whirling starscapes swirl outside the grand windows of this colossal cathedral. Towering entities stand before you, a sense of awe and unnatural reverance entering you as you gaze upon them. There's no mistaking what the legends in this place are: Gods.
+
+Your manasight stone glows, sensing the power of the legends here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

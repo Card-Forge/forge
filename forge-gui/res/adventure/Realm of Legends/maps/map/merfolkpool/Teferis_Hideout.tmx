@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="36" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="141">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Teferi's Drake&quot;, &quot;Zhalfirin Void&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <layer id="8" name="Background" width="36" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztzKEBAAAEADBF8LgT3aM4QVxYXVdEAwAAAADAmfx5FoyzJNo=
+  </data>
+ </layer>
+ <layer id="9" name="Abovebackground" width="36" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzNmG1u00AQhi0hsL0qtOEKTSlSS9o/rcQRKIIeoNfoFVBapLSoxwioH5eBI1AoUkrCAZhXnpHHm/U6djZxRlrZjjezj2dnZmc3ipYjoySKHqntmSj6myxpUI8M0ij6TRx/qH1Jy/tp5kV+wxUxnFH7RK3n0S/M6LNv8udLzzfUFXwndPdJ56bx698yWZ8H6tM12fPnNByPsOA7ofs89evHe91+0v9eG/8cz8Mi+qt40O9XkrGP6frGzM8jPmyz+PSjzz33O6uwZV2BD78ymf5tU80CkT7/ktz/Q/HskO4J6d3l62QGu1/w+BKPIe3TRHSs91eAB7He5ZzQ5/kKEVtN5Z7japNzT0j/qSsj9mPEwLbJY6AtHuSHHeX7s8bAouSqRT9xySrxyNqyCiIsnbhtkiLLt5Z5hGWdWZ63xDPiGtRmeb/k+trmGFosuJf1C3VzaC4Zf4/1i5+8VBxr1I7p3Q0/S60aikszaDsMLXt8pH7XccYnv9/FeX1oczVlQs4XBtsOYMAVHKhzOtZ7/I61VNfPVfV/lW1gk6MkHwNtzDUZ1kpwXKRFP8Z8jXmtknpSasqma6qdR94lOQfWQx3b2m7XcbGGRX9dT8p9nTXVlUdkDNljalbtP6H2Dj4WjNNz+LRtE7FdaJaO5QvaRzTHmmN+Fsmi48YV2+Kzi6ivBo4Y8dmjbG7snDkPD+L6lsb7qmLm1rJHFYfsp7uc/+bh+ZBkY79gDrQfT6vnRe/rH9R++rxhfahjaqjsIjw+jsdk+oxBt6YslwdFfz19lvOUiZwvyLmOzVKHR38b7LJ7WMwlE16jvxPPWweTPpNycczKY3PI/AwOpnOJ8Ng2cp0D1eUp45A47h1O57Ub5UcbcX2WMh6d6/Ta54vjkyc5i2aqw4L2H3MkJLI=
+  </data>
+ </layer>
+ <layer id="11" name="Walls" width="36" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztll9OwzAMxvNS2JKcBw7T8VxA3GdwpO7f0zgM2guxWquu1ZZQe0uk9ZMsrVs0//LZiWvM/aq2xuxC7G3/ee27727FATltiFdnzMo3HPh8CJ8fvU4evi/MjXuuSd6h0GIBVWSvO+YB+hDDMrSv/6pmfp/seN6xWPluD3M94r0Q48Nf8e7m+/IxM+dYvcDXNwFPpcgDvhSCWmnyaJ0rDR7N+0bSt8BxVL5vJL5I+pYK58xcb1L7AvkffBOaHKii/e/YO1irLjFcRzvNJj07LxFzrAxrNm3g+oIxafXIs+9y0XyU4yms+Q5x9s16zqT5zvDpusB8G8YBv32F2LZrLoS5crJ5OKWt6/MhB9WP7fNI549UnCe1gIf2UGoN9VBq5VSzsj13OfCU5A7g5y6FoE65sORUJ1BO3oByOlOghWdaOCeG3ktSiM/+XPp60SINlVc6Y78WV7fU
+  </data>
+ </layer>
+ <layer id="10" name="Clutter" width="36" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztWEtuGkEQ7VVgLLEDC04QrIkhh/ApcgwvsOX4CMZGyAeJSBROwTUssXKCfQB3iX7iuaie6Rk+8SIllUBMd9Wr36sRzjn33HRueOLcV6+jT85dkc4bznW9/vI6ydyW4C7rn6Zty9Jr+Wyt7/xtrm1Os81d+P9JKlhW/uz5yXscZX4tW6w9r78bG1yDYH/s8cwM/1/885fwCSwWDvbbUxjYFqvYnSlcgklylIfnrI99uzYxHOL33sfV9p+n4fuKYkEcqCf8vgZcvXBPcoS6sSz6cSwaB/yK7TbFKrbFjo5Dnj2EXszDGcTBz1iW/WIsjONc1Z3zL3asu+xzSXiKcqTnTmPh/kasnH/u1XbkLmIFHs6txmTNHdvjnsBdxsS9Og/+LCyIVZ53CJPml3G2icuae+DV8eQ0R3pu4SPWA3yWa6rzqHuF8XKOrXyh12XmcCbWA+CXl+a2L86jxc3TbLtX0C8TI7Yi7rf6UfviHtQzeHaxqdc81F04qxPw8/mxOtcl3kzBwni4FkPV85wfjWei8Og+mlXAIiIcZc0t49KzxP5wbhH4B73B/YF+1Nyr5ba15ihrblH7AWHSe0lU7o4CH3KvsyKuZQkeCPaazgGwWTUUQf9qrr7P3vd0bDek4EL8mn/LZolnCPu209juM3kHqiPWTi7iOPTT95b9+3VrrbsIMIEr0Us815rjuOb8e928aLG4GXxu8Uquej5lxqtIjJutvXko4dzGuMfahZDRnmoTk5x4jblH793/clj5dlb9Tqw3fiTugpj/u/Bddhy+18EHKduVqWdkx13ugIPt1DmDHAiGuz3gOJTsUqt9+n86gi9rBm7Cb7cH5s6PLFU4AP9rpMxgisAO7z6Np8gX8KS+05aJZUfj2YevzzXeeyF1OLtMdsFTVVLeU8rw3Bx5Xo+Zn38pb3lRVCU=
+  </data>
+ </layer>
+ <layer id="12" name="Interior" width="36" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt07EJwCAQQFHHMVV2EEFHSuesbiIiwc7EwlP0PxAELa74pxSkaNt+j67en3veHK/gx82APfR2OrLrWfI+/d0pKcZ9/znNju1Jyk2t1NVlywEAAAAArC8Buh0IsQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="211.333" y="638.46" width="56" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="65" template="../../../../common/maps/obj/enemy.tx" x="241.122" y="205.682">
+   <properties>
+    <property name="enemy" value="Mangara"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="66" template="../../../../common/maps/obj/enemy.tx" x="319.721" y="145.243">
+   <properties>
+    <property name="enemy" value="Niambi"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="84,113"/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/enemy.tx" x="407.529" y="62.7573">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Teferi's Isle|MIR&quot;, &quot;Teferi's Sentinel|DOM&quot;, &quot;Teferi's Care|INV&quot;, &quot;Teferi's Veil|WTH&quot;, &quot;Oath of Teferi|DOM&quot; ] }"/>
+    <property name="enemy" value="Teferi"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/manashards.tx" x="301.334" y="76.333"/>
+  <object id="80" template="../../../../common/maps/obj/waypoint.tx" x="51.9993" y="235"/>
+  <object id="84" template="../../../../common/maps/obj/waypoint.tx" x="376.501" y="178.5"/>
+  <object id="86" template="../../../../common/maps/obj/waypoint.tx" x="183.333" y="44.6667"/>
+  <object id="96" template="../../../../common/maps/obj/collision.tx" x="-10" y="-16" width="617" height="16"/>
+  <object id="97" template="../../../../common/maps/obj/enemy.tx" x="115.896" y="411.209" width="15.5419" height="16.9162">
+   <properties>
+    <property name="enemy" value="Jolrael"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="99" template="../../../../common/maps/obj/enemy.tx" x="80.229" y="513.876" width="15.5419" height="16.9162">
+   <properties>
+    <property name="enemy" value="Asmira"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="102" template="../../../../common/maps/obj/manashards.tx" x="127.333" y="449.667"/>
+  <object id="103" template="../../obj/treasure.tx" x="51.3333" y="540.667">
+   <properties>
+    <property name="reward">[
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Wonder&quot;,
+  &quot;editions&quot;: [ &quot;JUD&quot; ]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Aven Mindcensor&quot;,
+  &quot;editions&quot;: [ &quot;TSR&quot; ]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Dark Ritual&quot;,
+  &quot;editions&quot;: [ &quot;MMQ&quot; ]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Hammer Mage&quot;,
+  &quot;editions&quot;: [ &quot;MMQ&quot; ]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Enchantress's Presence&quot;,
+  &quot;editions&quot;: [ &quot;ONS&quot; ]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Hair-Strung Koto&quot;,
+  &quot;editions&quot;: [ &quot;CHK&quot; ]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="104" template="../../../../common/maps/obj/enemy.tx" x="101.334" y="130">
+   <properties>
+    <property name="enemy" value="Subira"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="80,86"/>
+   </properties>
+  </object>
+  <object id="105" template="../../../../common/maps/obj/enemy.tx" x="407.333" y="226.667">
+   <properties>
+    <property name="enemy" value="Sidar Jabari"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="113" template="../../../../common/maps/obj/waypoint.tx" x="266" y="108.667"/>
+  <object id="118" template="../../../../common/maps/obj/booster.tx" x="385" y="64.333">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;M21&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;M21&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;M21&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="119" template="../../../../common/maps/obj/collision.tx" x="577" y="-14.3335" width="16" height="684.667"/>
+  <object id="120" template="../../../../common/maps/obj/collision.tx" x="-16.5" y="640" width="617" height="16"/>
+  <object id="123" template="../../../../common/maps/obj/collision.tx" x="-17" y="-17.3335" width="16" height="684.667"/>
+  <object id="124" template="../../../../common/maps/obj/manashards.tx" x="46.6667" y="439.333"/>
+  <object id="125" template="../../../../common/maps/obj/manashards.tx" x="255.333" y="24.6667"/>
+  <object id="128" template="../../../../common/maps/obj/booster.tx" x="256" y="185">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;M21&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;M21&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;M21&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="129" template="../../../../common/maps/obj/dialog.tx" x="175.013" y="591.583" width="108.64" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;An arid land stretches before you, vast and beautiful. As you step across the bridge, time itself seems to stutter, an unpleasant feeling that reminds you of tales you've told of the legendary mage Teferi.
+
+Your manasight stone glows, sensing the power of the legends here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="130" template="../../../../common/maps/obj/dialog.tx" x="468.347" y="85.8838" width="59.8648" height="11.3237" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The time mage Teferi stands before you, his expression weary.
+
+'Bold of you to challenge a time mage in his own sanctum. Well, let's see what you can do.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="131" template="../../obj/treasure.tx" x="362.409" y="66.0456">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 2,
+  &quot;cardTypes&quot;: [&quot;Planeswalker&quot;],
+  &quot;subTypes&quot;: [&quot;Teferi&quot;]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Teferi's Protection&quot;,
+  &quot;editions&quot;: [ &quot;J18&quot; ]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Teferi's Ageless Insight&quot;,
+  &quot;editions&quot;: [ &quot;M21&quot; ]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="132" template="../../../../common/maps/obj/manashards.tx" x="547.5" y="-448.5"/>
+  <object id="133" template="../../../../common/maps/obj/collision.tx" x="96.1851" y="206.979" width="16.1297" height="31.375"/>
+  <object id="134" template="../../../../common/maps/obj/collision.tx" x="95.2685" y="63.6458" width="16.1297" height="31.375"/>
+  <object id="135" template="../../../../common/maps/obj/collision.tx" x="95.9351" y="416.313" width="16.1297" height="31.375"/>
+  <object id="136" template="../../../../common/maps/obj/collision.tx" x="95.9351" y="526.313" width="16.1297" height="31.375"/>
+  <object id="137" template="../../../../common/maps/obj/collision.tx" x="527.268" y="206.313" width="16.1297" height="31.375"/>
+  <object id="138" template="../../../../common/maps/obj/collision.tx" x="529.268" y="63.6458" width="16.1297" height="31.375"/>
+  <object id="139" template="../../../../common/maps/obj/collision.tx" x="383.935" y="64.3125" width="16.1297" height="31.375"/>
+  <object id="140" template="../../../../common/maps/obj/collision.tx" x="432.185" y="41.9375" width="16.1297" height="21.625"/>
+ </objectgroup>
+</map>

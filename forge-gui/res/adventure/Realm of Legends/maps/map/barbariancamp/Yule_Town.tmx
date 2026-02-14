@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="125">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Rites of Flourishing&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/FarmFood.tsx"/>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxj4mZgYMKCd4hShrEBQvLI4DSF9pPiLlxuHLWX+vbSyj589pKbnkt4IJhceynxx0DZS0k4D4S99LAT3V562YlsN73tHMWjeBSP4lE8ikfxyMEAUzmR5A==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AU4AMlPAhMDTNAeDY3phg+TImd3hIQzCsOsZcY9yHbCePvECXOXm6gPT5A+8KFIXiNOH43JnJhYmR5Qvbac0LodeIIO3HZi+5/fOGLzV6QuejAHehXfnEE9pQgbC8+gM+/Jjjk/nJhF8dlLzb1xMYvMpjLjT3+/mARA+F5WNxDjr24ALXCmRx7QeYRk19JsRdbPGErR2Di+PSTYi+ueCUUv/jimRoAV/xSMy5JsZfWYNTeoW/v/wHIJyAwHMNy1F7a2gsAf0dJOQ==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztVl1KAzEQjlgRu/qwFaGoJ2gO4EnEV3d7BV+15yj1oQXFG7juouhVxBPog/iimGEz7Gw2sfnZVQp+8JHJNs2XycwkOdpkNXxssAaGO81viLPtev9k92eGAvRs2QVCtVMevobrmLGb2Nx2hecBYy8Dc2uLg167LHruvuQiDhmv2xeC5yQ+YE94+XtBxqJ9rKkVFTQXUAf42a/sueCC6GIftWCsqy5FxvX+3gs+CK5FjK1HVR+1ZlFl3+25656KdSeSX8QGXoq555IqYGzaL20fXRNUn26lX0AddLqm2k5wb0di7pHdelTdsWd8KSCHxzJvp7z6NpHMZKvzo619dkWIrq6GclJLuMdT3vyvi+6riOmbEleYG2sG8gpzCTVpfB/FmCfP+C62ynZGzg+YOye6+C0lda5iVeKr5mai+FNo/KN77XtOUuSGPbRBiC691w7JvbZvcQ++/1F8Vx26s+EfTbTxdkX81ptVhe+bNRTL3uxd7cOyNzu2V3HJb17ynbY=
+  </data>
+ </layer>
+ <layer id="5" name="Rooftops" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy1lt1KG0EUxw+iVyKZGFNT7AvUiHcKaZQkGqHtffGqj6FR/Ije96L3pQraD2jzAIFCP5+ggrbV0moE9cbSCx/Ac5g57Mk4s5uw6x/+7G52dn7nzJmP5AYBcpbvouczAA9SAO/SAO/RjbR+lmpmtUnfxwD20K+x3ZsIv03fZEou+SHeP0I/HnQz2ZfI/IeexXbVCM85mDb3DO/P0ReGyzm/Srv5J9iuFeFTD/d/JuDuZYMce8YhlihWrkMYk7mcmy3K/d5Ad1yug298m70AI8JJievg4z7p67yv3Tzmkg9vI9dCIRUwF3AM7hhuY1hzqW0z6++L9QmZnyO4tmym5Mr1mbSeD7UzJfc2NZ+5aRf35SjA1mjy3NyAnue8duLmu+Opd8HML1p/MldWXO7HLudZUtwwjZi9ZhZzn7POGubuY00PYtQ1bG2fILOEnhZs4lYng2d5L/Wiv/u1xjWuKYAN9KZyc+kaxvVpO6TGDc+eb+ebtPg8t/9LMFc6CfEY03letmp7m1ypX8g8trhXfe3nIPvLBMBX9Df0jIiF7uW7TrSK82lZRbeLIxrfInoKXRU5Pruvr2XzjjyTcvfRjXhvIC7lt4b+6dgv/uDzX/Qh+sh693TM33/REy+t0RXVziH+gtJ5V0wM9NtvvLasmtPeFvZfqi5yKZmxZH5d1JFi/5DX7Si/H+h1pcejZr6X3LLpa0rM/aLovyDGcsnEXgqp1aLSzGUVfMtsOddqIh8aIxof+a2tmmBXRcwVc6XvaH+U9Zf3UhzPkvGGCuK15WrLcbcMk9rIs8F1TnBfPnequolBjiufDa5zIiku6xrAcMTA
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="128.5" y="478.659" width="48" height="16"/>
+  <object id="50" template="../../../../common/maps/obj/collision.tx" x="-25.9165" y="-16.5" width="538.5" height="16"/>
+  <object id="53" template="../../../../common/maps/obj/shop.tx" x="384.166" y="259.459" width="31.3333" height="20.4167">
+   <properties>
+    <property name="commonShopList" value="SnowShop"/>
+    <property name="noRestock" type="bool" value="false"/>
+    <property name="signXOffset" type="float" value="0"/>
+    <property name="signYOffset" type="float" value="-5"/>
+   </properties>
+  </object>
+  <object id="57" template="../../../../common/maps/obj/enemy.tx" x="256" y="53.5">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Krampus"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/enemy.tx" x="436.667" y="405.167">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Rudolph"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="60" template="../../../../common/maps/obj/enemy.tx" x="262.833" y="331.5">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Shalai and Hallar"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="61" template="../../../../common/maps/obj/enemy.tx" x="192.5" y="160">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Radha"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="62" template="../../../../common/maps/obj/enemy.tx" x="254" y="285.5">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Syr Ginger"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="78,82"/>
+   </properties>
+  </object>
+  <object id="63" template="../../../../common/maps/obj/enemy.tx" x="278.409" y="157.318">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Arcum's Sleigh|ICE&quot;, &quot;tinder wall|ICE&quot;, &quot;Jack-in-the-Mox|UGL&quot;, &quot;Jolly Gerbils|BLB&quot;, &quot;Rimefur Reindeer|WOE&quot;]}"/>
+    <property name="enemy" value="Santa"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/treasure.tx" x="367" y="113">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;superTypes&quot;: [ &quot;Snow&quot; ]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/gold.tx" x="128.5" y="269.833"/>
+  <object id="78" template="../../../../common/maps/obj/waypoint.tx" x="368" y="289"/>
+  <object id="82" template="../../../../common/maps/obj/waypoint.tx" x="188.5" y="288"/>
+  <object id="84" template="../../../../common/maps/obj/enemy.tx" x="368" y="156.5">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="displayNameOverride" value=""/>
+    <property name="enemy" value="Mrs. Klaus"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="86" template="../../obj/treasure.tx" x="279.89" y="143.591">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 8,
+  &quot;cardText&quot;: &quot;gift&quot; 
+}
+]</property>
+   </properties>
+  </object>
+  <object id="87" template="../../../../common/maps/obj/enemy.tx" x="129.333" y="286.167">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Gingerbrute|ELD&quot;, &quot;Gingerbread Cabin|ELD&quot;]}"/>
+    <property name="enemy" value="Brenard"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="88" template="../../../../common/maps/obj/collision.tx" x="-23.25" y="480" width="538.5" height="16"/>
+  <object id="89" template="../../../../common/maps/obj/collision.tx" x="-19.25" y="-16" width="19.8333" height="509.333"/>
+  <object id="90" template="../../../../common/maps/obj/collision.tx" x="480.083" y="-13.3332" width="19.8333" height="509.333"/>
+  <object id="93" template="../../../../common/maps/obj/manashards.tx" x="449.5" y="384.5">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/shop.tx" x="161" y="196.458" width="31.3333" height="19.0834">
+   <properties>
+    <property name="commonShopList" value="SnowShop"/>
+    <property name="noRestock" type="bool" value="false"/>
+    <property name="signXOffset" type="float" value="0"/>
+    <property name="signYOffset" type="float" value="-5"/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/dialog.tx" x="110" y="430.25" width="68.6667" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The area ahead is blanketed in snow. A town stands ahead, multicolored lights twinkling from its walls. A delicious scent drifts on the wind, and the distant sounds of music can be heard as well.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="96" template="../../../../common/maps/obj/dialog.tx" x="235.667" y="350.75" width="68.6667" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;As you draw closer to the town, cheery, festive music can be heard loudly from up ahead. The frigid air is fought back by a warmth that seems to emanate, perhaps magically, from inside. Delicious smells of baking cookies waft through the gates, enticing you to enter, though guardians stand in your way. 
+
+'Hail traveler, we apologize but we can't let you pass. Too many have taken advantage of our generosity and tried to ruin our winter wonderland. We must now treat all visitors as naughty and meet them with our full might.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="97" template="../../../../common/maps/obj/dialog.tx" x="384.874" y="403.71" width="16" height="16" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The nearby clearing is thick with chilling fog. The silhouette of a reindeer is visible ahead, a red light shimmering out from its nose.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="98" template="../../../../common/maps/obj/dialog.tx" x="141.593" y="63.3722" width="19.9986" height="14.3333" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Far off behind the town, a wicked-looking lair sits, a nasty creature in front of it, its sinister eyes flicking towards you.
+
+'You... you smell naughty... you must be... punished...'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="102" template="../../../../common/maps/obj/dialog.tx" x="248.417" y="173" width="79.1667" height="53.25" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;As you approach, you see a jolly man in red. 
+
+'HO HO HO! Looting and fighting through our festive little town! You've been quite naughty! Someone like you deserves to be punished!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="103" template="../../../../common/maps/obj/dialog.tx" x="161.183" y="288.122" width="16" height="16" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The smell of gingerbread is strong and delicious here, the home ahead seeming to be made entirely from it, somehow.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="104" template="../../obj/treasure.tx" x="191.25" y="112.25">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;superTypes&quot;: [ &quot;Snow&quot; ]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="107" template="../../../../common/maps/obj/scroll.tx" x="280.75" y="46">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Charcoal Diamond&quot;, &quot;editions&quot;: [ &quot;MIR&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="108" template="../../obj/treasure.tx" x="301" y="47">
+   <properties>
+    <property name="inactive" type="bool" value="true"/>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;superTypes&quot;: [ &quot;Snow&quot; ]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="109" template="../../obj/treasure.tx" x="354" y="225.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Plains&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Island&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Swamp&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Mountain&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Forest&quot;
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="110" template="../../obj/treasure.tx" x="24.5" y="42">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Plains&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Island&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Swamp&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Mountain&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Forest&quot;
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="111" template="../../obj/treasure.tx" x="385.5" y="350">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Plains&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Island&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Swamp&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Mountain&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Forest&quot;
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="112" template="../../obj/treasure.tx" x="433.909" y="376.318">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Plains&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Island&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Swamp&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Mountain&quot;
+  },
+  {
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 4,
+    &quot;cardName&quot;: &quot;Snow-Covered Forest&quot;
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="115" template="../../../../common/maps/obj/collision.tx" x="335.09" y="93.7494" width="31.8983" height="51.2443"/>
+  <object id="116" template="../../../../common/maps/obj/collision.tx" x="388.596" y="91.4688" width="31.8983" height="51.2443"/>
+  <object id="117" template="../../../../common/maps/obj/collision.tx" x="158.96" y="94.196" width="31.8983" height="51.2443"/>
+  <object id="118" template="../../../../common/maps/obj/collision.tx" x="208.233" y="91.8324" width="31.8983" height="51.2443"/>
+  <object id="119" template="../../../../common/maps/obj/collision.tx" x="115.384" y="287.461" width="58.8983" height="36.161"/>
+  <object id="120" template="../../../../common/maps/obj/collision.tx" x="113.218" y="239.544" width="13.8983" height="47.2443"/>
+  <object id="121" template="../../../../common/maps/obj/collision.tx" x="161.384" y="237.378" width="13.8983" height="35.911"/>
+  <object id="123" template="../../../../common/maps/obj/collision.tx" x="287.521" y="-0.122167" width="31.9892" height="29.6383"/>
+  <object id="124" template="../../../../common/maps/obj/enemy.tx" x="52" y="360.5">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'Come, child. Have you ever wanted to ruin Christmas forever?'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;Christmas is cancelled.&quot;,
+					&quot;text&quot;: &quot;'Fantastic! Now on to more worthy uses of my time.' With that, he vanishes in a cloud of foul-smelling smoke.&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Heartless Hidetsugu&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Hidetsugu, Devouring Chaos&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Hidetsugu Consumes All&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Hidetsugu's Second Rite&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;subTypes&quot;: [&quot;Sorcery&quot;], &quot;colors&quot;: [ &quot;red&quot;], &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ], &quot;count&quot;: 5 }       
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 8
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Always hated the holiday.&quot;,
+					&quot;text&quot;: &quot;'Excellent. I am Hidetsugu. I have been called many things over the years - heartless, the devouring chaos... but these frivilous snow-folk insist on calling me a Grinch and a Scrooge! I cannot abide such foolish titles. And while I'd love nothing more to burn them all alive inside their precious town, their ice magic is an infuriatingly effective counter to my fire. So I ask this: kill them all, and be rewarded.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;Absolutely not!&quot;,
+					&quot;text&quot;: &quot;'A shame, truly. Well, I have waited here in the cold long enough.' 
+
+With that, he vanishes in a cloud of smoke. Almost immediately after, another being appears in a puff of cinnamon, a tiny elf (or perhaps gnome?) wearing a suit of green velvet in a little red hat.
+
+'You've gotten rid of that Grinch for good! Have some presents for being such a nice person, {var=player_name}!'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardTypes&quot;: [&quot;Artifact&quot;], &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ], &quot;count&quot;: 4 }       
+                      ]
+                    } ],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;I don't have time for this.&quot;,
+					&quot;text&quot;: &quot;'Leave then, while you still can.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Hidetsugu"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

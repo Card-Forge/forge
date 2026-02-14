@@ -1,0 +1,12 @@
+Name:Adaptive Armorer
+ManaCost:2 W W
+Types:Creature Giant Warrior
+PT:4/3
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraft | TriggerDescription$ When this creature enters, draft a card from CARDNAME's spellbook and put it onto the battlefield. When an Equipment enters this way, attach it to target creature you control.
+SVar:TrigDraft:DB$ Draft | Spellbook$ Amorphous Axe,Citizen's Crowbar,Cloudsteel Kirin,Conqueror's Flail,Fireshrieker,Fishing Pole,Krovod Haunch,Leech Gauntlet,Lion Sash,Mace of the Valiant,Maul of the Skyclaves,Shield of the Realm,Sigiled Sword of Valeron,Thran Power Suit,Thunder Lasso | RememberDrafted$ True | SubAbility$ DBPut
+SVar:DBPut:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defined$ Remembered | SubAbility$ DBTrigger
+SVar:DBTrigger:DB$ ImmediateTrigger | Execute$ TrigAttach | Defined$ Remembered | ConditionDefined$ Remembered | RememberObjects$ Remembered | ConditionPresent$ Card.Equipment | TriggerDescription$ When an Equipment enters this way, attach it to target creature you control.
+SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | Object$ DelayTriggerRememberedLKI | TgtPrompt$ Select target creature you control | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Vigilance\nWhen this creature enters, draft a card from Adaptive Armorer's spellbook and put it onto the battlefield. When an Equipment enters this way, attach it to target creature you control.

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="28" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="111">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Jetmir's Garden&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="8" name="Collision" width="28" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxz42RgcBthGAYo0U+qXZTah0+/CR+mXSAAEscGsKnFJYfLPmwAJF7HzcBwnROCQWwQBomv4IBgmByMj8st6PaxCuB2MzUAMf4btW/o2IcvjVPTLnz5nR52UdNOcsoketgFi08QTSwm1y5C9mALB1LsAwBao0vN
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="28" height="17" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJxjYEAAN05MPBjALy78+AonBBMDWAUgmE0AoY8STMiuHBnq2ofNTncuhF20sA+bnfjsq+KCYGzm4JPDZycs3pDjD2Y/MiY2rRBj3x1OVAwC9LQPWS0h+/YrkG4feniSkh6uc47ahy1P0Mo+XIAW9hEC1LSPWNDEjR9jyxMwQIo95AB0+/ABAJu5+ik=
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="28" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYEAAN07cmBbgMRcDQxM3A4MiD3HqCOGnXMTbdRuPn5bjkVsJlZPnwW0nNn9Rat8qHdx2guzjRDODUvtgAJ8/ibXPFajXDYphAMZ3h4pdAeIsNDthAMS2BZpvh4TrgPoeyzEwPCERPwXiWl6E2dpIdiDbh80/jfIMDNeB4k3yqBgfaIbKr0Ey7xI7cfbJKzAwKBCJ9yug2qeCZha6fZXA8KtCwk4k5vFGeYR9P1gR4nIs2O1DB/jSCyH7sAF0+9DTKyX2HYSK3QL67TYLIn/DALY8Qqn/XJggNK4yEt1OUuy7wolp3yk8dmGzk1T77ssh7GvjJr7sRy8L8KmB4WY09TBxQnbBAKl1oAyR5oIAANoMa4w=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="28" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYEAAN07smNoAZu5jLgaGJm7iMDWBpiYDgxYQLwe6YboSJgYBTzEGBi8xTBpZPzGAVYCBwRWo1g1q309FTEzIPph+XAAUjpycELtAGAaWo8XdKyT2YQnsmBgAig+YXcj2uQLd4caF4Luh8SkBgRoQbAYMBxMotgf6b5EYqronchD8FIgfyyH4MPyAhPR8hRMV34Xa1yRPPKbEvhouiH12nIQxKCxA9t0m0j5s4QkCIPuIwXdJtI9SQC37fgsRh2ntv1dofGrZd1WEOIxuH58uZfbiA7C8Q6/0Aq4zkPIgLYEMD6Z9+OorAE9IecI=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="288" y="263.832" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="189.648" y="124.642">
+   <properties>
+    <property name="enemy" value="Jinnie Fay"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="99,98"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/enemy.tx" x="197.667" y="239.167">
+   <properties>
+    <property name="enemy" value="Rocco"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="86,80"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/enemy.tx" x="75.1868" y="137.073">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Cabaretti Initiate|SNC&quot;, &quot;Cabaretti Ascendancy|SNC&quot;]
+}</property>
+    <property name="enemy" value="Jetmir"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="80" template="../../../../common/maps/obj/waypoint.tx" x="266.574" y="238.216"/>
+  <object id="86" template="../../../../common/maps/obj/waypoint.tx" x="133.333" y="239.5"/>
+  <object id="91" template="../../../../common/maps/obj/enemy.tx" x="214.585" y="175.242">
+   <properties>
+    <property name="enemy" value="Kitt Kanto"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="waypoints" value="97,96"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/enemy.tx" x="182.248" y="207.04">
+   <properties>
+    <property name="enemy" value="Phabine"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="95,94"/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/waypoint.tx" x="132.273" y="207.409"/>
+  <object id="95" template="../../../../common/maps/obj/waypoint.tx" x="265.273" y="206.545"/>
+  <object id="96" template="../../../../common/maps/obj/waypoint.tx" x="264.364" y="175.455"/>
+  <object id="97" template="../../../../common/maps/obj/waypoint.tx" x="133.273" y="176.727"/>
+  <object id="98" template="../../../../common/maps/obj/waypoint.tx" x="144" y="126"/>
+  <object id="99" template="../../../../common/maps/obj/waypoint.tx" x="263.667" y="122"/>
+  <object id="101" template="../../../../common/maps/obj/scroll.tx" x="152" y="86">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Jungle Shrine&quot;, &quot;editions&quot;: [ &quot;LCC&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="102" template="../../../../common/maps/obj/scroll.tx" x="30.3182" y="137.333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Jetmir's Garden&quot;, &quot;editions&quot;: [ &quot;SNC&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="103" template="../../obj/treasure.tx" x="54.2576" y="143.697">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;SNC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;white&quot;, &quot;red&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;SNC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;white&quot;, &quot;red&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;SNC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;white&quot;, &quot;red&quot; ],
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="104" template="../../../../common/maps/obj/dialog.tx" x="279.583" y="239.227" width="65.8333" height="22.5455" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A beautiful, elaborately maintained garden unveils itself before you. Lively jazz music fills the space as various partygoers laugh and chat over glowing drinks of a substance you recognize as the magical drug halo.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="105" template="../../../../common/maps/obj/dialog.tx" x="112.235" y="161.412" width="16" height="16" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A large cat-demon stands before you, spreading his arms wide in greeting.
+
+'The Cabaretti welcome you! Lets get this party started!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="106" template="../../../../common/maps/obj/collision.tx" x="32.1643" y="146.042" width="76.588" height="14.8333"/>
+  <object id="107" template="../../../../common/maps/obj/collision.tx" x="32.1226" y="98.5833" width="78.4214" height="14.8333"/>
+  <object id="109" template="../../obj/treasure.tx" x="54.1818" y="128.182">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;SNC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;white&quot;, &quot;red&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;SNC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;white&quot;, &quot;red&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;SNC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;white&quot;, &quot;red&quot; ],
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="110" template="../../../../common/maps/obj/scroll.tx" x="93" y="203.333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Cabaretti Charm&quot;, &quot;editions&quot;: [ &quot;SNC&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

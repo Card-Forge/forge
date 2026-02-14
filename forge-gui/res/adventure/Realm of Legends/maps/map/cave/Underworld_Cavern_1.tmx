@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="91">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Underworld Dreams|THB|[121]&quot;, &quot;Underworld Sentinel&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <layer id="1" name="Background" width="30" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztwzENAAAMA6C+M1f/cipkkNBLqqqqqqqqqr446Chj1w==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="60">
+  <data encoding="base64" compression="zlib">
+   eJzdWVFuwjAMzRc02jF2lgGatF1zjO06OwHQ7RiLRS2MsdsR6hdpliK1H+3Le36xXXWVU1rduNZlUTxVPFuzdl1KH2Udy/XjQ0rPIEzCW6Zz7Mv9ZxeL25f13p3wiCsHgvNmyGtLzhxv5f4HlGMUpvSxjOhzxPouL2HDc6v1RelMPpZc+Tr6DJHO3/nay4gzxLx1IGo09YOXYSE5M672dSRn9rTkSn6mvEd7+mtxiYvIbZ/b+VljI3qCzDFSZ84xWmevRkdztmoVRXSNXju4kVp7GkdqPYUZxdnLaxQ28TxknyvVjDnrlzfDSbztUKcsLWr8PZVLXRf7PA9n76xwWL61nrnV32MesnqApU9Nr7B0G3uXtc9ab+l3je1f7/Oe+YPeRc9uhW//uk9UX9ScUfOH5a0Ws0CruafVnIfS2aob//mb2IoWc0/k99JYr4zkOjX3RPnZw22lceT87s0j0WfHwkXU5Lnmx5rcvmYs7mbAROP2+dR7JC6q3zJnDuRsIXFb9XnaA+K/Bi15hlH51bjIeVmep3s0/gXhfjeM
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="60">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBj8QMpmYOydhWbvAmsGhoXWNLYTaj47mvhsGtsLAjJA/8qi+VkOyJencfjPAZo/F82OeUD+fBrbi+5fevgVBND9Sw+/ggAfA2a6ohcYKHtHGuBgGLiwXjJA9o5EMJLyE8dAO4DOYCTFLQwsGwA7Fw+AnSMNoKdlauflQC0GhiAt4u2gVt7KBdqZp0VYHbVBHS/xapdSyU5OJDYbCfqWU2gvrEx4DcRLC4D8AgoNJBIgh/FBoJ2H6GQvqWAk1hMjCQxkW56UfE4NcCEfP59W4E0+IoyXQfm0BhMGqEHbRkLdQW3AjoM9HAF6W3YNne0faf0leoLRMQ7agoFKu1xQeriXTehgIPrdIDDSwnmoAgDZYSUq
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="67" template="../../../../common/maps/obj/door_down.tx" x="213.333" y="17.3333" width="39" height="16">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/cave/Underworld_Cavern_2.tmx"/>
+    <property name="teleportObjectId" value="66"/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/manashards.tx" x="88" y="552"/>
+  <object id="70" template="../../../../common/maps/obj/manashards.tx" x="56.833" y="495.167"/>
+  <object id="71" template="../../../../common/maps/obj/enemy.tx" x="119" y="488.833">
+   <properties>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Mindwrack Harpy|THB&quot;, &quot;Insatiable Harpy|THS&quot;, &quot;Ripples of Undeath|MH3&quot;, &quot;Siren Song Lyre|BNG&quot;, &quot;Field of Ruin|THB&quot;
+]}</property>
+    <property name="enemy" value="Aphemia"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="79" template="../../../../common/maps/obj/enemy.tx" x="285" y="564">
+   <properties>
+    <property name="enemy" value="Kunoros"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="80" template="../../../../common/maps/obj/entry_up.tx" x="202" y="959" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="81" template="../../../../common/maps/obj/enemy.tx" x="219" y="53">
+   <properties>
+    <property name="enemy" value="Arasta"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="82" template="../../../../common/maps/obj/dialog.tx" x="150.151" y="849.571" width="133.697" height="20.858" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A wide tunnel stretches out before you, steeply sloped down. Sound echoes distantly and you feel a profound sense of dread, a sense in your very soul that you should not be here.
+
+Your manasight stone glows brightly, sensing a truly mighty legend in this place.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="85" template="../../../../common/maps/obj/dialog.tx" x="195.632" y="509.406" width="129.539" height="23.9917" rotation="266.378" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A song echoes from the side cavern, sweet but sinister.
+
+'Come little traveler, don't you cry; everyone eventually has to die.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="87" template="../../../../common/maps/obj/gold.tx" x="61" y="510.5"/>
+  <object id="88" template="../../../../common/maps/obj/gold.tx" x="71.5" y="529"/>
+  <object id="89" template="../../../../common/maps/obj/scroll.tx" x="256.25" y="671">
+   <properties>
+    <property name="reward">[ { &quot;type&quot;: &quot;card&quot;, 
+&quot;cardName&quot;: &quot;Extinguish All Hope&quot;, 
+&quot;editions&quot;: [ &quot;CMM&quot; ],
+&quot;count&quot;: 1 } ]</property>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="240.5" y="677" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;:&quot;EXTINGUISH ALL HOPE,
+YE WHO ENTER HERE&quot;,
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;Continue&quot; }
+]
+}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

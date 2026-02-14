@@ -124,13 +124,13 @@ public abstract class InputBase implements java.io.Serializable, Input {
         controller.getGui().showPromptMessage(getOwner(), message);
     }
     protected final void showMessage(final String message, final SpellAbilityView sav) {
-        if (GuiBase.isNetworkplay()) //todo additional check to pass this
+        if (GuiBase.isNetworkplay(controller.getGui())) //todo additional check to pass this
             controller.getGui().showPromptMessage(getOwner(), message);
         else
             controller.getGui().showCardPromptMessage(getOwner(), message, sav.getHostCard());
     }
     protected final void showMessage(final String message, final CardView card) {
-        if (GuiBase.isNetworkplay()) //todo additional check to pass this
+        if (GuiBase.isNetworkplay(controller.getGui())) //todo additional check to pass this
             controller.getGui().showPromptMessage(getOwner(), message);
         else
             controller.getGui().showCardPromptMessage(getOwner(), message, card);

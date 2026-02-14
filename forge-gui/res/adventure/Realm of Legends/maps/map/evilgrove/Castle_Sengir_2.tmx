@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="110">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Castle Sengir&quot;, &quot;Sengir Vampire&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="1" name="Background" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7C+8w/VWw37E0gvqaqqqqqqqqqqqu8DFRHS7A==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztl1EKwjAQRPdX2p6g9ToeQs9iPZda72ZEAjG4aWzaZkwnMFCY+egLDJvtapGuMB12unL/GxLvqRG51Z86Njielp3KuzfyTwvkaVnykpe8GEzkJe9cvA+jvhK5GJ2r9/eQ2bNyM72XTX1fve62BfFiMmO8Y2+Xu9EVxHMzU3ljuoF4Unn9PoS6kstzM6m8KB1dur8ar+212yd/X1nbC3U8dj/SeBFm7BLz1862YSO8oY7kZiIveclL3l/2o287CIKnZVP3o38TeclbkshL3pJEXvKWJPKStySRd7u8T2lO1+w=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="60" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt2LENgzAQheFjhOwQKU2qJDIta2SwSCmYAtglDMAUqWIqoohgzgbbxf9JJ1k8c5Kbs0AESK8xIq2tzuiyFN4b9LiUIldbt1KXaZliWj/C23lr7FlaW93MmZYyuL1OIr2t4ef54Txl4/rfe0s9tZlmT4h6v9aYEWs+V1/rZ3g7b7Hmcy6YzwCQp63v32Ph3pMS9++6DG57fOfk/n2EuHL7f1Up9t49+jOf12UAAAAAAIw+DJhS6w==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="66" template="../../../../common/maps/obj/door_up.tx" x="35.2402" y="285.749">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/evilgrove/Castle_Sengir_1.tmx"/>
+    <property name="teleportObjectId" value="66"/>
+   </properties>
+  </object>
+  <object id="79" template="../../../../common/maps/obj/enemy.tx" x="744.5" y="168.62">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ebon Stronghold|5ED&quot;, &quot;Baron Sengir|HML&quot;, &quot;Bad Moon|LEA&quot;, &quot;Seal of Doom|NEM&quot;, &quot;Ceremonial Knife|VOW&quot;]}"/>
+    <property name="enemy" value="Sengir"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="83" template="../../../../common/maps/obj/enemy.tx" x="489.178" y="225.9">
+   <properties>
+    <property name="enemy" value="Kazarov"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="84" template="../../../../common/maps/obj/enemy.tx" x="261.282" y="226.273">
+   <properties>
+    <property name="enemy" value="Verrak"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="88" template="../../../../common/maps/obj/booster.tx" x="718.333" y="95">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;colors&quot;: [ &quot;black&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;colors&quot;: [ &quot;black&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;colors&quot;: [ &quot;black&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/dialog.tx" x="744.281" y="188.19" width="16" height="16" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The regal vampire before you sounds surprisingly bored as he addresses you.
+
+'I've been fending off mortals such as yourself before your grandfather was born. I sincerely doubt you'll manage to be anything but another in a very long line of disappointments.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="93" template="../../../../common/maps/obj/dialog.tx" x="82" y="233.583" width="32" height="32" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The crypts ahead seem empty at first, and while you sense nothing but corpses and dust from them, something down here is moving defiance of death, and it is hungry.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="99" template="../../../../common/maps/obj/scroll.tx" x="743" y="318">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Baron Sengir&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="100" template="../../../../common/maps/obj/booster.tx" x="767.636" y="94.3636">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;colors&quot;: [ &quot;black&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;colors&quot;: [ &quot;black&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;colors&quot;: [ &quot;black&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="101" template="../../obj/treasure.tx" x="743.5" y="93.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;black&quot; ],
+    &quot;subTypes&quot;: [ &quot;Vampire&quot; ],
+    &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="102" template="../../../../common/maps/obj/collision.tx" x="674.482" y="260.938" width="43.0363" height="43.4571"/>
+  <object id="103" template="../../../../common/maps/obj/collision.tx" x="676.482" y="352.938" width="43.0363" height="43.4571"/>
+  <object id="104" template="../../../../common/maps/obj/collision.tx" x="787.815" y="356.938" width="43.0363" height="43.4571"/>
+  <object id="105" template="../../../../common/maps/obj/collision.tx" x="786.482" y="259.605" width="43.0363" height="43.4571"/>
+  <object id="106" template="../../../../common/maps/obj/collision.tx" x="785.815" y="131.605" width="43.0363" height="43.4571"/>
+  <object id="107" template="../../../../common/maps/obj/collision.tx" x="786.482" y="36.2715" width="43.0363" height="43.4571"/>
+  <object id="108" template="../../../../common/maps/obj/collision.tx" x="676.482" y="34.2715" width="43.0363" height="43.4571"/>
+  <object id="109" template="../../../../common/maps/obj/collision.tx" x="675.149" y="130.271" width="43.0363" height="43.4571"/>
+ </objectgroup>
+</map>

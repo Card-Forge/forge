@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="31" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="96">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Phyrexian Arena&quot;, &quot;Order of Yawgmoth&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/phyrexia/DrossPitTiles.tsx"/>
+ <tileset firstgid="12004" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="6" name="Collision" width="31" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzFlcENhDAMBMMD8cLNIKA9moCr66ATaAAQD4LPe1pQEiztI0qkiXetZMidGwjFKIYbmz2KrRTsp/sh2V1xCO2HzOcJuwX5NHKeZe7Fsn3VG6MvnZvl1GdbV8L5omcMsa3+Jvnl7Pf5Aj/Y+dVsVJVc17XY56xi2b6v2l/N1jkgoTlg89b+Wjnckc+eM8xG/Sxy9ZLh3WWHfH8Zdqz652Uqdup/7E32CsBorN8=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="31" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzr1mNgaBkg3D0E7N7BA6FBAJkeCH8PpN0DFd9N3APnXmqE96jdI89uctL5QNs9UGXLqN30t5taGACvMGLt
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="31" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYGBg6NYbGAwCU4H0FBx4Mo3t7oHS2EDXCLF7rx4ED4Tdx/QgmB52g9LTdCS7zutBMDXsxpWGYekXHdzQg2Bq2I0cnsrcCNyFw25qxjeuNIzLbmrGNyG7m6C4D6qOmvHdjGQ+Mm5E8jeyG2HxvUmPcruJyWPIdsP8PRB2UzOdk2o3rnRBS7sJpQta2j0QGABOb0Yv
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="31" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFAw026Y3ajQvMB6ppx4IXUOhuYuzuB6ppA+KZSLgDiCdS0e6DOPw3C4s9IPfMQFN3iES3INt9CsiegANjsxtdzWkK7L6MFq74whdbPFxBU+PiRLzduAC28MUWD6QCYuxegSM8VtLBblqBgbR7FNAeAABoHT/K
+  </data>
+ </layer>
+ <layer id="8" name="Archway" width="31" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUUAO8zGFgeAXEr4H4TQ597c7MZWDIAuJsIM7JpZ+93k6o/GOO9LMbBIoMGBiKgbjEgL72gsAnoJ2fgfjLANg9CkbBQAMARDkPnw==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_left.tx" x="2.20687" y="180" width="11.6667" height="80"/>
+  <object id="48" template="../../obj/treasure.tx" x="405.739" y="148.141">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;count&quot;: 4,
+  &quot;subTypes&quot;: [ &quot;phyrexian&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="97.1517" y="239.325">
+   <properties>
+    <property name="enemy" value="Greven"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" value="0"/>
+   </properties>
+  </object>
+  <object id="54" template="../../../../common/maps/obj/enemy.tx" x="379.674" y="143.847">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Phyrexian Tower|USG&quot;, &quot;Vile Requiem|USG&quot;, &quot;Phyrexian Plaguelord|ULG&quot;, &quot;Order of Yawgmoth|USG&quot;, &quot;Bonehoard|MBS&quot;]}"/>
+    <property name="enemy" value="Yawgmoth"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" value="10"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="85" template="../../../../common/maps/obj/enemy.tx" x="325.75" y="142.25">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Gixian Recycler|YBRO&quot;, &quot;Painful Quandry|BRO&quot;]}"/>
+    <property name="enemy" value="Gix"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" value="10"/>
+   </properties>
+  </object>
+  <object id="86" template="../../../../common/maps/obj/enemy.tx" x="165" y="145.083">
+   <properties>
+    <property name="enemy" value="Tsabo Tavoc"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" value="0"/>
+   </properties>
+  </object>
+  <object id="89" template="../../../../common/maps/obj/enemy.tx" x="103.75" y="57.5">
+   <properties>
+    <property name="enemy" value="Ertai"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" value="10"/>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/dialog.tx" x="25.6667" y="158.583" width="13" height="47" rotation="0">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;You immediately begin to choke on noxious fumes before getting off a simple spell to stabilize your air supply. The horrific place ahead seems to be formed from living metal. Between the overwhelming smell of oil and sense of hatred in the air, this place could only have one origin - Phyrexia.
+
+Your manasight stone glows, sensing the power of the legends here.&quot;,
+   &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}],
+   &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/dialog.tx" x="346.5" y="148.917" width="27" height="26.8333" rotation="0">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Countless legends speak of the sheer horror that was Yawgmoth, the Father of Machines. The man standing in front of you seems only human, but there is a subtle darkness about him that belies his fairly innocent appearance. This must be him from long in the past, before his ascension to dark godhood.&quot;,
+   &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}],
+   &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/dialog.tx" x="291.667" y="154.917" width="26" height="37.3333" rotation="0">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A near-skeletal figure fused with machinery gazes at you with utter disdain.
+
+'You are far from fit to see the Father of Machines. You will be dismantled, so your pieces may serve Phyrexia.'&quot;,
+   &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}],
+   &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="93" template="../../obj/treasure.tx" x="426" y="147.5">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;count&quot;: 4,
+  &quot;cardText&quot;: &quot;destroy|sacrifice&quot; 
+}]</property>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/collision.tx" x="65.1968" y="63.5215" width="32.7296" height="157.59"/>
+  <object id="95" template="../../../../common/maps/obj/collision.tx" x="237.197" y="108.186" width="55.4781" height="55.4993"/>
+ </objectgroup>
+</map>

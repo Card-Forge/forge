@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="83">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Relic Amulet&quot;, &quot;Prodigal Sorcerer&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzT4GZg0BhC+BfXwLthOGIZnsFpLyi+kTG93IXLXnqE00D5F+Q3GB6ItLBdgv72wTC10gkujKye2mkEZiY+e0fxKEbGAMapgro=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy91G0OgyAMBmD+iydAdzA9y9y1/Jh3UyJNauPC2zIlaQKS8lCjHb1z4wPRiEBy+tq52Z8jDpp39f9c2o/mkpxfYwJsTb3cfF3Ys8dt1EXq1NSNuBYzZyNuy8z4fi13oLNornVbpTlUR5TWi7rBn+elrmXc5QZg3+Kue3wqm/ve875Gt0m27I3UJyaxlubVuZo+masbNbV9ErVzptblNv2X3KJnOdPiyhz61oPh/jw2X6zUNg==
+  </data>
+ </layer>
+ <layer id="8" name="Walls Supplementary" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBhaYBfPQLuAvgDkX2ka+jkHarYGN4SNjGH25tDI/hB2VHthAJd/G7ipYy8oTLGlI2k84tQAp/ixi+Myn5rxvlKUtuaTAqR5aJemZHGYjSvOaWEvvnCllr9BfqknIj/IDlAcD3d70cN+oPxLLgAASRoSRA==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFhEAtNwNDHRTXc9PP3p08DAwh7AwMUbwMDLI8tLEjB2ouyHwYG0avEEUVpwWQhfoRGYDs3ctDvfAGmYfOB+EGbuzqdgHt3k0FP6Pbe4ofgqV5MNXB1MLSGqX2YoszfPZSAyD7ATnekO0FxTWyvSC57RIQTIm9IDv3oPkP3b8gAAsXbHLkAJCdMjwIP+EL0xwq5qW9aObkaqLmIxAbJEbN+EUH+PxCS3vxgYGyd6gBAIbLKXU=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="270.665" width="48" height="16">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/merfolkpool/Wizard_Palace_1.tmx"/>
+    <property name="teleportObjectId" value="118"/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="133.045" y="158.394">
+   <properties>
+    <property name="enemy" value="Azami"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="66" template="../../../../common/maps/obj/gold.tx" x="159.162" y="171.968"/>
+  <object id="67" template="../../../../common/maps/obj/enemy.tx" x="189.062" y="55.9673">
+   <properties>
+    <property name="enemy" value="Jalira"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/enemy.tx" x="293.606" y="119.938">
+   <properties>
+    <property name="enemy" value="Vadrik"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/entry_up.tx" x="301.655" y="175.384" width="48" height="36.1131">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/merfolkpool/Wizard_Palace_3.tmx"/>
+    <property name="teleportObjectId" value="38"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/booster.tx" x="157.853" y="143.156">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;CHK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;CHK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;CHK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/enemy.tx" x="198.138" y="174.659">
+   <properties>
+    <property name="enemy" value="The Archimandrite"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="80" template="../../../../common/maps/obj/manashards.tx" x="227.357" y="82.4174"/>
+  <object id="81" template="../../../../common/maps/obj/dialog.tx" x="167.098" y="210.95" width="86.5" height="12.7121" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The interior of the palace is lined with bookshelves and lit by magic. Wizards wander the halls, most walking faster to avoid you, though a few more determined mages step forward to block your path instead.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="82" template="../../obj/treasure.tx" x="229.25" y="186.75">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 4,
+  &quot;subTypes&quot;: [ &quot;Instant&quot;, &quot;Sorcery&quot; ], 
+  &quot;rarity&quot; [ &quot;rare&quot;, &quot;mythic rare&quot;]
+}]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

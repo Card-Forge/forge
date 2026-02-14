@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="82">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Relic Amulet&quot;, &quot;Prodigal Sorcerer&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon.tsx"/>
+ <layer id="9" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AU0AosEEXFwx2M+nd4g5Hm3+EKANPVC1E=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyLZWFgiB3kOIMbE9PL7iZuBB7ocBjFtMe/uDDF7imQZxa2dIsr7ZKillx7QX5Dx6P2Ut/egYrfwWrvdgkEprW9yJie9iLLu3EiMDn24sLYALlmAQBamtQj
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzbwcPAsIMOWAYNY1MTzcvAsIuHfBzFS569skCMC2hwo2JsQJpM/+KyV0EAFeMC1LaXWDDU7J3Lgok5cLiFCyiewY2Kd9HBvzC1jxgRmB7hjE3tqL2j9g6m/EuKvRlYymhy7d0LxHXc2HE91J5aKF8WqhYGQOw9ZNqLSw+pcvjsBQASuLqi
+  </data>
+ </layer>
+ <layer id="8" name="Walls Supplementary" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFuEAjPwODBjcDQxOUbuanj70gu9AxrcFOHgaGXUB8VhqBQfzdPLS3WxrNXmqDXTyYuAEapqA4BsUvLG7lsKiVpiAMVoiiYphZ8gIMDApArCgA4T9ixFQLEqMWwGcvNkwuGCz+hYHh6t9DEqiYXvG7UhQV47IXGchSoQxRlkDFuOwF2ZXBTT170QHM3r1A+/YB8X6ovXXcCJoW9lIbAAB5C03k
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBjcoJabgaEOC67npr5dMUAcC2VL8zAwiLExMDTxMzB0aUJoEF+WB7t6SsAvIP6NZO9eAQaGfUh4vwCqvcjqqQWC2CF2IwOQnSBxegNZHsJqBtI8Wtr7iBGBV4hS302E7ARhagNcaQjd3lH/0scdwxUg+zeDBvUDMkCui7DJDXYAAIs1KFc=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="308.242" y="247.89" width="38.2392" height="39.9582">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/merfolkpool/Wizard_Palace_2.tmx"/>
+    <property name="teleportObjectId" value="69"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/enemy.tx" x="244.403" y="222.68">
+   <properties>
+    <property name="enemy" value="Kess"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/enemy.tx" x="158.128" y="175.811">
+   <properties>
+    <property name="enemy" value="Pol Jamaar"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/enemy.tx" x="207.248" y="99.6757">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Crumbling Necropolis|C16&quot;, &quot;Sorcerer's Wand|DOM&quot;, &quot;Panharmonicon|KLD&quot;, &quot;Sage of Fables|MOR&quot; ]}"/>
+    <property name="enemy" value="Inalla"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/booster.tx" x="96.1148" y="144.623">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;J25&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;J25&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;J25&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/booster.tx" x="96.204" y="176.106">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;J25&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;J25&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;J25&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="74" template="../../../../common/maps/obj/gold.tx" x="314.401" y="55.0013"/>
+  <object id="75" template="../../../../common/maps/obj/manashards.tx" x="120.96" y="55.0013"/>
+  <object id="76" template="../../../../common/maps/obj/entry_up.tx" x="204.35" y="53.835" width="25.4153" height="17.3026">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/merfolkpool/Wizard_Palace_4.tmx"/>
+   </properties>
+  </object>
+  <object id="77" template="../../../../common/maps/obj/enemy.tx" x="260.2" y="176.687">
+   <properties>
+    <property name="enemy" value="Mairsil"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="79" template="../../../../common/maps/obj/dialog.tx" x="173.917" y="146.727" width="84.25" height="12.7121" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;As you approach the portal in the back of the chamber, a robed woman steps forward to stop you.
+
+'So, you plan to challenge master Zur? You're not even fit to enter his inner sanctum. I, Inalla, archmage of rituals, shall put a stop to your invasion!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="80" template="../../../../common/maps/obj/booster.tx" x="331.333" y="143">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;DMR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DMR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DMR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="81" template="../../../../common/maps/obj/booster.tx" x="331.333" y="177.333">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;DMR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DMR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DMR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

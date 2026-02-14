@@ -73,6 +73,7 @@ public final class ForgeMenu {
             }
         }
         add(new LayoutMenu().getMenu());
+        add(new AudioMenu().getMenu());
         add(HelpMenu.getMenu());
         addSeparator();
         add(OnlineMenu.getMenu());

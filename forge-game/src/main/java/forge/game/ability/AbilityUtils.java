@@ -10,7 +10,6 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
 import forge.card.mana.ManaCostShard;
 import forge.game.*;
 import forge.game.ability.AbilityFactory.AbilityRecordType;
@@ -239,27 +238,17 @@ public class AbilityUtils {
                     cards.add((Card) o);
                 }
             }
-        } else if (defined.equals("DelayTriggerRememberedLKI") && sa instanceof SpellAbility) {
-            SpellAbility root = ((SpellAbility)sa).getRootAbility();
-            if (root != null) {
-                for (Object o : root.getTriggerRemembered()) {
-                    if (o instanceof Card) {
-                        cards.add((Card)o);
-                    }
+        } else if (defined.equals("DelayTriggerRememberedLKI")) {
+            for (Object o : sa.getTriggerRemembered()) {
+                if (o instanceof Card) {
+                    cards.add((Card)o);
                 }
-            } else {
-                System.err.println("Warning: couldn't find trigger SA in the chain of SpellAbility " + sa);
             }
-        } else if (defined.equals("DelayTriggerRemembered") && sa instanceof SpellAbility) {
-            SpellAbility root = ((SpellAbility)sa).getRootAbility();
-            if (root != null) {
-                for (Object o : root.getTriggerRemembered()) {
-                    if (o instanceof Card) {
-                        cards.addAll(addRememberedFromCardState(game, (Card)o));
-                    }
+        } else if (defined.equals("DelayTriggerRemembered")) {
+            for (Object o : sa.getTriggerRemembered()) {
+                if (o instanceof Card) {
+                    cards.addAll(addRememberedFromCardState(game, (Card)o));
                 }
-            } else {
-                System.err.println("Warning: couldn't find trigger SA in the chain of SpellAbility " + sa);
             }
         } else if (defined.equals("RememberedFirst")) {
             Object o = hostCard.getFirstRemembered();
@@ -698,8 +687,7 @@ public class AbilityUtils {
                     }
                 }
                 else if (calcX[0].startsWith("TriggerRemembered")) {
-                    final SpellAbility root = sa.getRootAbility();
-                    list = IterableUtil.filter(root.getTriggerRemembered(), Card.class);
+                    list = IterableUtil.filter(sa.getTriggerRemembered(), Card.class);
                 }
                 else if (calcX[0].startsWith("TriggerObjects")) {
                     final SpellAbility root = sa.getRootAbility();
@@ -1007,12 +995,7 @@ public class AbilityUtils {
                 addPlayer(Lists.newArrayList(originalHost), defined, players);
             }
         } else if (defined.startsWith("DelayTriggerRemembered") && sa instanceof SpellAbility) {
-            SpellAbility root = ((SpellAbility)sa).getRootAbility();
-            if (root != null) {
-                addPlayer(root.getTriggerRemembered(), defined, players);
-            } else {
-                System.err.println("Warning: couldn't find trigger SA in the chain of SpellAbility " + sa);
-            }
+            addPlayer(sa.getTriggerRemembered(), defined, players);
         } else if (defined.startsWith("Triggered") && sa instanceof SpellAbility) {
             String defParsed = defined.endsWith("AndYou") ? defined.substring(0, defined.indexOf("AndYou")) : defined;
             if (defined.endsWith("AndYou")) {
@@ -1449,7 +1432,7 @@ public class AbilityUtils {
         final Card source = sa.getHostCard();
         Cost cost;
         if (unlessCost.equals("ChosenNumber")) {
-            cost = new Cost(new ManaCost(new ManaCostParser(String.valueOf(source.getChosenNumber()))), true);
+            cost = new Cost(new ManaCost(String.valueOf(source.getChosenNumber())), true);
         }
         else if (unlessCost.startsWith("DefinedCost")) {
             CardCollection definedCards = getDefinedCards(source, unlessCost.split("_")[1], sa);
@@ -1724,9 +1707,8 @@ public class AbilityUtils {
                     return sum;
                 }
                 if (sq[0].startsWith("TriggerRememberAmount")) {
-                    SpellAbility root = sa.getRootAbility();
                     int count = 0;
-                    for (final Object o : root.getTriggerRemembered()) {
+                    for (final Object o : sa.getTriggerRemembered()) {
                         if (o instanceof Integer) {
                             count += (Integer) o;
                         }
@@ -2101,7 +2083,7 @@ public class AbilityUtils {
             return doXMath(c.getIntensity(true), expr, c, ctb);
         }
 
-        if (sq[0].contains("CardCounters")) {
+        if (sq[0].startsWith("CardCounters")) {
             // CardCounters.ALL to be used for Kinsbaile Borderguard and anything that cares about all counters
             int count = 0;
             if (sq[1].equals("ALL")) count = c.getNumAllCounters();
@@ -2220,7 +2202,7 @@ public class AbilityUtils {
         }
 
         // Count$CardManaCost
-        if (sq[0].contains("CardManaCost")) {
+        if (sq[0].startsWith("CardManaCost")) {
             int cmc = c.getCMC();
 
             if (sq[0].contains("LKI") && !c.isInZone(ZoneType.Stack) && c.getManaCost() != null) {

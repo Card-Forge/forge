@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="110">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <layer id="1" name="Background" width="40" height="40" opacity="0.9">
+  <data encoding="base64" compression="zlib">
+   eJztyKENADAIADA8iB2w/++c4AMcWUVN80QkAHziVpscAAAAAHs8WlCpDw==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzNmEtOw0AMhgfSIsImbS/BErGmiFNQLgDhfRagSOwKKPQ2vM5CaZc8xhCLP65nmlZNGUtWxOCZfP4946RJE2OihjF14cvWDxO305x9e+3bK1vqiZXr09yHxp8fJOP3p3k1x1wZr7nMQXIwg7bWCuRFlkEc3j8T81mTrFHMz+XampI/Upj7gi8VNWHdyGrKmi4/Sorr8twVyEkyYy0ll7ZOCjlJvllriuM4FpXIWZtTL8k3aR9X7cwnOVz1KLsvZ3Etd+bD8/S1aszO2ribeNx94zhPu6IvxcXcmVXj69nY2wX7Xaz3G40vC4CPGUPmYwuB717w7dra7kF9qe9w7100m6bfleW5Fv2Fe8l/8En9WEOtviHoxxpq9f2P/qLph+cD6xvi+UX9QuTDd8YQnh+h8U3af3WocQj9GQ3fG+iMhFZfafPg+1g35nN9Pvrhs475bnIPQT981jHfVe4h8FVR3yr5Qju/0rbs74G29Sj2X9sQV7O+rMRpc3Cc/95eK8/nM3mW2HqKBhtNYzab5dZzrTut8VlKxbeELN9DyHTaMua85We7tGuNkvEzquXgM6lFJn4bM9+zjTluFWNlLmzvduwtcXNh3EjMl2tKLfhbGr7zEB/FnYlYmQve98KOd0Af1gH14DjU0LUm/h+/L/Sm7BFkVNNu7qwh639i/bX5twdI58GEOrvqxHzT9AiXEd9L7sRH2g3z+mo6IluUv4NRTp2kWJdsBv00o/3xZLkem797hPmIi3QcKnvx5/5QT6rLICnGzks/2ndcWzLmQ3dpiCbPXln9fHuETJ4v1ILdtxe5F2nvFGX0m3TuNJMa+vqla3xe9XXxkWbdXEvZk8pYVXzfm6xcqw==
+  </data>
+ </layer>
+ <layer id="6" name="Ground2" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztV0tOwzAQNWLlpOkVCruSJUeoaBHdc4Ryj5YTcAdK0zuw4rvlAqBShR03YINH6ZCpZcf2BLVVlSc92bHczOs8j+0I0aBBg33BbSLEdEu8S9z6em0hBoqfG2Zf8aztpw/mjVIeEQ9SiEfFJ8VnxRfFV2kf7wXquz+szxCE6lse8AjYlD6MY9Niyxn235XfH2l1PJO+q4rf4LxJXHAQlfQdC+VXFJ6/SPIZK0qPefC/oD1uheurU79zFfM6dseakDm6PpvHdB63bkHfTPL1DVO7xrr5Q31182fDX32kJXW48jdWcftqzeekBnKNWFu2+hg6/K2z/kCfqT6OWut9fObUhw0+Z4avvyFx9Xk03k9SMJPFGLQ66XyTv7rPtM/Z/zBeJss92EWs2Q7xTt8Lqa/4zPHX5p8pd0Cbp/r4W9fchuq7kQV9gZ7qXp5H63vhd9fchuo7jQoC0D+A7W4yJz5S/7A+L0/84vrqQ025dgeg4/QZ8hRas1x9WVKuY9OeZRqPV2ca9/tllvjpWwR+N+RwV2yXZ+5iNcb5Bll66KO4SNfbKkB92PzV3+PzvlBtI8c7x3H1neU/tXFQlb9dAOfM3SRc/m4bvnfmbWHX119ndQ9p0GCf8AvMX0zS
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="40" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAqoB45rMTCc0EIVe6jJwPBIE1XsIpB/CYgbtSCYXuAx0K4nQHxbByH2F+iOf5qoYm+B/HdQMWLcBzMXBr4D9f7QxK1+FIyC4QqQ0z4x7FEwMEBbjzDGBugVv8zA8pRFCzsfXW4UDA3wHJgmXhCRLvClP1qBiZy40xi+tDgKEGApL2kYBpaQqA9dPy2AjACCLSeAW90oGAWjYBSMglEwCoYGAABJIEN1
+  </data>
+ </layer>
+ <layer id="5" name="Overlay" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztlksKwjAQhkdcueoxQmLpEVW8ii48hBvd6B10owh6DBNiYIxJbWPzQOaDH5o+P2ampQAEQRAE5joKi2EzcSelXy5Ca2c77wTAXrzvO8j1Ee07cYAzH86v7bylcN9vVQOs634OoX5dMvSs+RxVPVz5Vt/Ybsbvl/rFxvd9aIvdWzz7Xbb7+uHn+XxyzB72881XqX4uF1dvFbH7a3KX1z/451phHyuB7VgHk9Iv5N21/S5M9pyV56hoEtTxxnQUrnkz2OtUYD+MPXvTRic1sf4rczCrAOavLKrcNgRBEARB/DtPSaDXbQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="47" template="../../../../common/maps/obj/inn.tx" x="361" y="371"/>
+  <object id="53" template="../../../../common/maps/obj/spellsmith.tx" x="376" y="194"/>
+  <object id="55" template="../../../../common/maps/obj/shop.tx" x="416" y="402">
+   <properties>
+    <property name="commonShopList" value="Swamp"/>
+    <property name="noRestock" type="bool" value="true"/>
+    <property name="signYOffset" type="float" value="-2"/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/entry_up.tx" x="254.667" y="463.667" width="97" height="20">
+   <properties>
+    <property name="spawn" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="59" template="../../../../common/maps/obj/entry_left.tx" x="354" y="635" width="16" height="197.002" rotation="0"/>
+  <object id="60" template="../../../../common/maps/obj/entry_right.tx" x="242" y="642" width="16" height="198"/>
+  <object id="62" template="../../../../common/maps/obj/shop.tx" x="265.333" y="339">
+   <properties>
+    <property name="commonShopList" value="BlackItems"/>
+    <property name="hasSign" type="bool" value="true"/>
+    <property name="noRestock" type="bool" value="true"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="63" template="../../../../common/maps/obj/shop.tx" x="214.333" y="339">
+   <properties>
+    <property name="commonShopList" value="BlackEquipment"/>
+    <property name="hasSign" type="bool" value="true"/>
+    <property name="noRestock" type="bool" value="true"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="66" template="../../../../common/maps/obj/shop.tx" x="424" y="274">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon,Spiders"/>
+    <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
+    <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
+    <property name="signYOffset" type="float" value="-8"/>
+    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/shop.tx" x="424" y="322">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon,Spiders"/>
+    <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
+    <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
+    <property name="signXOffset" type="float" value="18"/>
+    <property name="signYOffset" type="float" value="-8"/>
+    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/shop.tx" x="472" y="274">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon,Spiders"/>
+    <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
+    <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
+    <property name="signYOffset" type="float" value="-8"/>
+    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/shop.tx" x="472" y="322">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon,Spiders"/>
+    <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
+    <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
+    <property name="signYOffset" type="float" value="-8"/>
+    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/shop.tx" x="520" y="274">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon,Spiders"/>
+    <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
+    <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
+    <property name="signYOffset" type="float" value="-8"/>
+    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/shop.tx" x="520" y="322">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon,Spiders"/>
+    <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
+    <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
+    <property name="signYOffset" type="float" value="-8"/>
+    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
+   </properties>
+  </object>
+  <object id="77" template="../../../../common/maps/obj/shop.tx" x="376" y="274">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon,Spiders"/>
+    <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
+    <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
+    <property name="signYOffset" type="float" value="-8"/>
+    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
+   </properties>
+  </object>
+  <object id="83" template="../../../../common/maps/obj/shop.tx" x="519" y="194">
+   <properties>
+    <property name="commonShopList" value="Legend4Black"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="signYOffset" type="float" value="-8"/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="84" template="../../../../common/maps/obj/shop.tx" x="456" y="194">
+   <properties>
+    <property name="commonShopList" value="BlackBoosterPackShop"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="signYOffset" type="float" value="-8"/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/RotatingShop.tx" type="RotatingShop" x="200" y="402">
+   <properties>
+    <property name="rotation" value="Black1,Black2,Black3,Black4,Black5,Black6"/>
+    <property name="signYOffset" type="float" value="-8"/>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/RotatingShop.tx" type="RotatingShop" x="263.5" y="402">
+   <properties>
+    <property name="rotation" value="Black1,Black2,Black3,Black4,Black5,Black6"/>
+    <property name="signYOffset" type="float" value="-8"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/RotatingShop.tx" type="RotatingShop" x="378.667" y="322">
+   <properties>
+    <property name="rotation" value="Black1,Black2,Black3,Black4,Black5,Black6"/>
+    <property name="signYOffset" type="float" value="-8"/>
+   </properties>
+  </object>
+  <object id="93" template="../../../../common/maps/obj/shardtrader.tx" x="152" y="339">
+   <properties>
+    <property name="signYOffset" type="float" value="-8"/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/shop.tx" x="151.5" y="403">
+   <properties>
+    <property name="commonShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
+    <property name="signYOffset" type="float" value="-8"/>
+    <property name="uncommonShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
+   </properties>
+  </object>
+  <object id="96" template="../../../../common/maps/obj/shop.tx" x="103.5" y="403.5">
+   <properties>
+    <property name="commonShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
+    <property name="signYOffset" type="float" value="-8"/>
+    <property name="uncommonShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
+   </properties>
+  </object>
+  <object id="97" template="../../../../common/maps/obj/collision.tx" x="353.5" y="127.7" width="190" height="17.1004"/>
+  <object id="98" template="../../../../common/maps/obj/collision.tx" x="99" y="285.95" width="219" height="17.1004"/>
+  <object id="99" template="../../../../common/maps/obj/collision.tx" x="97" y="254.45" width="219" height="17.1004"/>
+  <object id="100" template="../../../../common/maps/obj/collision.tx" x="100.5" y="223.45" width="219" height="17.1004"/>
+  <object id="103" template="../../../../common/maps/obj/collision.tx" x="100" y="128.45" width="219" height="17.1004"/>
+  <object id="104" template="../../../../common/maps/obj/collision.tx" x="449" y="350.95" width="13.5" height="32.6004"/>
+  <object id="105" template="../../../../common/maps/obj/collision.tx" x="481.75" y="350.7" width="13.5" height="32.6004"/>
+  <object id="106" template="../../../../common/maps/obj/collision.tx" x="513.75" y="351.2" width="13.5" height="32.6004"/>
+  <object id="107" template="../../../../common/maps/obj/dialog.tx" x="104.5" y="199.5" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;You are surprised to see what is clearly a vampiric crypt within the city walls. Even more strange, several vampiric attendants stand outside it. 'There is blood to be spilled, and blood to be recovered. Will you heed its call?'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;Sengir has been slain.&quot;,
+                    &quot;text&quot;: &quot;The vampiric attendants rush inside with the bowl. An intimidating vampire woman with a fearsome aura strides out soon after. 'I must thank you for reviving me. Slaying the Baron was no easy feat, I'm certain. Now I can continue my eternal vigil over this city, as I swore to do so very long ago.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+						{&quot;type&quot;: &quot;life&quot;, &quot;count&quot;: 1},
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Blood Money&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Bloodline Culling&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Sever the Bloodline&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wine of Blood and Iron&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Thief of Blood&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 3000}          
+                      ]
+                    },
+					{&quot;removeItem&quot;:&quot;Bowl of Ancient Blood&quot;},
+					{&quot;addMapReputation&quot;: 4} ],
+					&quot;condition&quot;:[{&quot;item&quot;:&quot;Bowl of Ancient Blood&quot;}], 
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Depends on what exactly you mean by that.&quot;,
+					&quot;text&quot;: &quot;'Not all vampires are solely devoted to cruelty. One such ancient protected our city until recently. But the bowl of ancient blood she supped upon so as not to need to slake her thirst upon our people has been stolen by a rival, the Dark Bargon Sengir.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Truly worthy of the title legend, that one.&quot;,
+					&quot;text&quot;: &quot;'Certainly. He dwells in his castle elsewhere within the swamps, which looks quite similar to this one. Slay him and retrieve the bowl and you shall have the favor of our patroness and a fitting reward as well.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Time to put an end to an elder vampire.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;You know, you're a bit creepy for my tastes.&quot;,
+					&quot;text&quot;: &quot;'If you find us creepy, we suggest you leave the swamps while you still can.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="108" template="../../../../common/maps/obj/dialog.tx" x="183" y="198.5" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;The intimidating building you've entered is staffed by a variety of menacing warlocks. 'You are, {var=player_name}, yes? We have heard whisperings of you. We are undecided if you are strong enough to undertake the task we need, but should you fail, perhaps you shall at least weaken our adversary.'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;Sheoldred is slain.&quot;,
+                    &quot;text&quot;: &quot;'Your power was great indeed. Perhaps we may have future use for you, but for now, you have the reward you were promised, and our gratitude, though it may pain some of us to give it.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+						{&quot;type&quot;: &quot;life&quot;, &quot;count&quot;: 1},
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Avenger of the Fallen&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 5000}          
+                      ]
+                    },
+					{&quot;removeItem&quot;:&quot;Black Cartouche of Victory&quot;},
+					{&quot;addMapReputation&quot;: 4} ],
+					&quot;condition&quot;:[{&quot;item&quot;:&quot;Black Cartouche of Victory&quot;}], 
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Let them whisper, I can face any foe.&quot;,
+					&quot;text&quot;: &quot;'Excellent. We will not dither - the one that must die is the phyrexian praetor Sheoldred herself. The Whispering One. The Apocalypse. These eipthets are well-earned, but die she must. If you can make that happen, you will receive great favor from our city and a large sum of gold.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Seems straightfoward enough, if difficult.&quot;,
+					&quot;text&quot;: &quot;'Indeed. One more thing. Sheoldred has hidden the location of her stronghold from our scrying methods. but it is easy to spot should you come across it in your travels - it is a feastering wound on the land in the shape of the phyrexian sigil.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Sheoldred shall fall by my hand.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;I have little interest in helping such disrespectful folks.&quot;,
+					&quot;text&quot;: &quot;'So be it. We shall save our reward for a more ambitious soul.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="109" template="../../../../common/maps/obj/dialog.tx" x="263" y="197" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;Several gravediggers gather around a pedestal which contains nothing but the broken feet of a statue. 'Ey you! You look like some kinda hero! Help us poor folks out whydontcha!'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;All three pieces of your magic statue, just like you wanted.&quot;,
+                    &quot;text&quot;: &quot;The gravediggers slot the pieces back together and with the careful application of some foul-smelling black goo, they're held back in place surprisingly well. 'Good as new! Thank ya mightily for yer service!'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+						{&quot;type&quot;: &quot;life&quot;, &quot;count&quot;: 1},
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Orbs of Warding&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Grafdigger's Cage&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Grave Expectations&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Graveshifter&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Graveyard Trespasser&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Guardian Idol&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 1500}          
+                      ]
+                    },
+					{&quot;removeItem&quot;:&quot;Warding Statue Torso&quot;},
+                    {&quot;removeItem&quot;:&quot;Warding Statue Skirt&quot;},
+                    {&quot;removeItem&quot;:&quot;Warding Statue Arms&quot;},
+					{&quot;addMapReputation&quot;: 2} ],
+					&quot;condition&quot;:[{&quot;item&quot;:&quot;Warding Statue Torso&quot;}, {&quot;item&quot;:&quot;Warding Statue Skirt&quot;}, {&quot;item&quot;:&quot;Warding Statue Arms&quot;}], 
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;I'm certainly SOME kind of hero, sure.&quot;,
+					&quot;text&quot;: &quot;'As you can see, our precious warding statue, that keeps all'a these here dead folk in our graveyard sleepin' all peaceful got shattered! Pieces got stolen too! Without it, there's gonna be a real crisis come the next new moon.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;So who took the pieces?&quot;,
+					&quot;text&quot;: &quot;'Buncha nasty folks from Innistrad. Pretty but crazy lady by the name'a Gisa, mean science type called Geralf, and some zombie-looking dude goes by Wilhelt. They're over in a big graveyard of their own somewhere. Pretty sure they each got a piece. Get us back all three and you'll have our sincere gratitude, and I'm pretty sure we can dig up some kinda monetary reward ta boot.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Your statue is as good as fixed.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;You've got the wrong adventurer, I'm afraid.&quot;,
+					&quot;text&quot;: &quot;'Anotha unkind soul. I knew I shoulda moved to the forest capitol.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

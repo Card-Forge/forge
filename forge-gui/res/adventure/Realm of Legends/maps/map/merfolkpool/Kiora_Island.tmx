@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="133">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Kiora's Follower&quot;, &quot;Bident of Thassa&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <layer id="13" name="Collision" width="60" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt0sEJgDAQRcE0IHgTtfeUYX0xeBEh190IM5Dz2w8pBcaONbZ33r3r9aL7XWRz/7S2hL2RzRn2dhn/aob2X9Ql+4J4NgMAAAAAAAAAAMCjAQWvBhg=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="60" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwzENAAAMA6BKmon6t1QZeyChl1RVVVVVVVVVVVVVVZ8PEOlbZA==
+  </data>
+ </layer>
+ <layer id="11" name="Below Water" width="60" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt2T0OgzAMhmHu1MLWLoSTN9yriqpOQGKR//h9JE+RLH+BAYtpAgDgPvP4FYCjz1x7grJcXk2Z10V3ZiuofYC7+WeOzSvtkbOf9Lm4zEZQ2zJG3hSkdya9vzv9JH2B0nZlewJ5x6YtLwBcWZ/xPczLfxaq3ljPzO4sVL0x7+uzmN0ux56XYp5cu2yPeWN22Rx7bYp52LEBAJqcfSu09J8n9Swt5bWV/mPU+tZp6e5L0Ja3pXcNQP++pXv4Ag==
+  </data>
+ </layer>
+ <layer id="12" name="Clutterbelowwater" width="60" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztmk1uxCAMhblRO//SnKHtJCzaU2dIsmivU1dqJBaYQPAAybxvO8T2AxHZL9O8qKeiF9ZrXv2/N//5zJ5f876hMwjZ385aM7d/NtpaezvS3h7Dn5UitN7uqtT9mpZrtHIZ0toX0AsAAAAAAEDNbGmWCqFj9LYRc5WLmLksZyyOIUMOHw1zDsOJ5rhTXCxuv1qa//SCGfD7rNTP2RFvR/F28fH+4Ob8lvJoR64Q7lSLseoZSOvo0Dt3xz8vSn1dltXgq2dCynv42FMsjy80wd1xabh6SngPPr9s63Dvkq0i7ckCAAAAYJ6Betxx4RywRlrqLfUK+sscc3OOHDXkzEnt+qb6Uj2iteHyiJZ4INoRp/Yzj8XWM1bqrfmQPg+uhkece+g8/Oby9ITqqWEmD9nbFN/XeY8F+oJa+6lH3WPJfirFk055Nje3A71TDqWryIchrf0T6ZWC+waRA4n/MMYS+k0klhJaQHl+ASQaVck=
+  </data>
+ </layer>
+ <layer id="2" name="Water" width="60" height="50" opacity="0.29">
+  <data encoding="base64" compression="zlib">
+   eJztwzENAAAMA6Canu9KqIw9kNBLqqqqqqqqqqqqqqqqzwfxoliJ
+  </data>
+ </layer>
+ <layer id="10" name="UpWater" width="60" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztmW0OgjAMhncjTYATACZ6bcVETyWLWQJLcevHytS+Sf/4o+3TlWKHc/+rvnFuQNjY7J0xXZ71PNv9kG+XHZjjM6HGvyJZ92KO85yUeTkxJfKU4B2PONM845iXGjvmpfQ1ZtZRDZoxqdhQPfrWuUezPl8M74lQIy2Der7v1sy/ZBDvtftd5q2ZtmQeMu0bavNphgfmIcPG7j3n4mf32eTXK6d+HH/exjYxq2eOW4ZNG7y+nrk1g+oHnQ/F39KvlLZ4c2sG1Q/ipfhb+i3Ny/GHef60ZbzGi/VnvHL5cmW8xov1Z7xy+ULC3FOeAV7O7k/Z57n3pti7rFp2fZ+HN2w/cO7ujFefeQ/eaeN37i6b2pcpvJj7Dezuzt1lU/syibdQLoGXs8um9mVSPxfKJfBKKsQI7wgKr3QupXnDXDZeXWnzUt+/krkYr3wM45WNgcmlNC/03yj1PaGUVHgLf0/ASKWfC39PwKimXtNQTb2moZp6zWQymUymmvQCR6+SXQ==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="60" height="50">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt2E0OgjAQhuE5kSIGj6ELFYHrGl3qQkXxNM7G+Aehgq1p8z7JJIQmhA+mLUHkUzmqOfnFuG/SWOSQiByTbuO+KTXPfCKy0KoGj/P34+dxn+20T/ce9OpJ+6rUOvfsr6m+t1n8m3uyaal9lWqtLPVXFonkWkVk5/r/0tTPF81ZaV0Dy9vUz5k+g1yr8GBud9W235juR6ZrYDU2v7c6fedc235juh+5WgNDnXMAAAAAALjS918EALxjXQEAAKFb6/fOdvham4C/gchL3pCQl7whIS95XbsBTflpVA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="375.987" y="798.657" width="85.7826" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../common/maps/obj/enemy.tx" x="809.165" y="147.862" width="16" height="16">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;Your final strike sends a spray of blood into the now-churning waters all around, dying them red for a moment before the tide washes it away.
+
+'To have stolen from gods, tamed sea serpents the size of castles... and to fall here...' 
+
+She stumbles back, and lands in the waters below with a splash. You consider going in to make sure the job is done, but you're confident her injuries were lethal.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Silvergill Douser|LRW&quot;, &quot;Kraken Hatchling&quot;, &quot;Bident of Thassa|BLC&quot;, &quot;Quest for Ula's Temple|WWK&quot;, &quot;Temple of the False God|C17&quot;, &quot;Lumbering Falls|BFZ&quot;, &quot;Hedron Matrix|ROE&quot;, &quot;Reef Worm|MH3&quot;, &quot;Ominous Seas|IKO&quot; ]}"/>
+    <property name="enemy" value="Kiora"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="57" template="../../../../common/maps/obj/enemy.tx" x="611.658" y="261.848">
+   <properties>
+    <property name="enemy" value="Tatyova"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="87,96"/>
+   </properties>
+  </object>
+  <object id="60" template="../../../../common/maps/obj/gold.tx" x="152.763" y="52"/>
+  <object id="65" template="../../../../common/maps/obj/enemy.tx" x="461.069" y="153.625">
+   <properties>
+    <property name="enemy" value="Tishana"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="86,98"/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/enemy.tx" x="461.71" y="418.224">
+   <properties>
+    <property name="enemy" value="Kenessos"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="88,96"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/enemy.tx" x="287.924" y="251.47">
+   <properties>
+    <property name="enemy" value="Emperor Mihail"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="88,118"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/enemy.tx" x="405.76" y="479.799">
+   <properties>
+    <property name="enemy" value="Hakbal"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="78" template="../../../../common/maps/obj/manashards.tx" x="58.6957" y="102.269"/>
+  <object id="79" template="../../../../common/maps/obj/manashards.tx" x="95.6734" y="407.165"/>
+  <object id="86" template="../../../../common/maps/obj/waypoint.tx" x="565.802" y="151.958"/>
+  <object id="87" template="../../../../common/maps/obj/waypoint.tx" x="610.562" y="145.168"/>
+  <object id="88" template="../../../../common/maps/obj/waypoint.tx" x="290.52" y="423.634"/>
+  <object id="95" template="../../../../common/maps/obj/manashards.tx" x="737.333" y="101.333"/>
+  <object id="96" template="../../../../common/maps/obj/waypoint.tx" x="612" y="414"/>
+  <object id="98" template="../../../../common/maps/obj/waypoint.tx" x="355.333" y="149.333"/>
+  <object id="101" template="../../../../common/maps/obj/enemy.tx" x="155.333" y="102.666">
+   <properties>
+    <property name="enemy" value="Svyelun"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="119,86"/>
+   </properties>
+  </object>
+  <object id="102" template="../../../../common/maps/obj/collision.tx" x="773.083" y="598.667" width="89.1667" height="88"/>
+  <object id="103" template="../../../../common/maps/obj/collision.tx" x="56.4168" y="454.667" width="317.833" height="345.814"/>
+  <object id="104" template="../../../../common/maps/obj/collision.tx" x="459.083" y="439" width="317.833" height="361.284"/>
+  <object id="105" template="../../../../common/maps/obj/collision.tx" x="299.75" y="86" width="409.833" height="16"/>
+  <object id="107" template="../../../../common/maps/obj/collision.tx" x="345.75" y="182.333" width="235.166" height="192.666"/>
+  <object id="108" template="../../../../common/maps/obj/collision.tx" x="27.7503" y="167" width="235.166" height="207.333"/>
+  <object id="109" template="../../../../common/maps/obj/collision.tx" x="663.084" y="185" width="265.833" height="192.666"/>
+  <object id="110" template="../../../../common/maps/obj/collision.tx" x="857.083" y="368.667" width="37.1663" height="236.667"/>
+  <object id="111" template="../../../../common/maps/obj/collision.tx" x="23.0835" y="369" width="64.4997" height="86"/>
+  <object id="112" template="../../../../common/maps/obj/collision.tx" x="921.417" y="96.3332" width="19.1663" height="89.3337"/>
+  <object id="114" template="../../../../common/maps/obj/collision.tx" x="795.083" y="79.3333" width="126.5" height="24"/>
+  <object id="115" template="../../../../common/maps/obj/collision.tx" x="49.0835" y="6" width="205.166" height="16"/>
+  <object id="116" template="../../../../common/maps/obj/collision.tx" x="-12.9165" y="0.333333" width="48.4997" height="164"/>
+  <object id="117" template="../../../../common/maps/obj/gold.tx" x="738.667" y="172.667"/>
+  <object id="118" template="../../../../common/maps/obj/waypoint.tx" x="286.667" y="148.667"/>
+  <object id="119" template="../../../../common/maps/obj/waypoint.tx" x="851.333" y="149.333"/>
+  <object id="123" template="../../../../common/maps/obj/dialog.tx" x="364" y="669.25" width="111" height="23.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A massive temple sprawls before you, just barely above the lapping waters of the vast ocean that surrounds it. Huge schools of fish swim by beneath the water's surface, while heavily armed merfolk patrol the halls ahead.
+
+Your manasight stone glows brightly, sensing a truly mighty legend in this place.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="124" template="../../../../common/maps/obj/dialog.tx" x="691.927" y="91.2521" width="101.5" height="16" rotation="90" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The merfolk woman before you wields a mighty bident as she looks your way.
+
+'So, landwalker, come to die? I may no longer be a planeswalker, but I still command an army of krakens and leviathans - more than enough to drown someone like you.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="125" template="../../../../common/maps/obj/scroll.tx" x="826" y="572.333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Kiora, Behemoth Beckoner&quot;, &quot;editions&quot;: [ &quot;war&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="126" template="../../../../common/maps/obj/scroll.tx" x="96.6667" y="435.333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Kiora's Follower&quot;, &quot;editions&quot;: [ &quot;bng&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="127" template="../../obj/treasure.tx" x="895.636" y="128.061">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;Green&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="129" template="../../obj/treasure.tx" x="895.818" y="173.818">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;blue&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="130" template="../../obj/treasure.tx" x="895.939" y="151.03">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;subTypes&quot;: [ &quot;Serpent&quot;, &quot;Kraken&quot;, &quot;Leviathan&quot;, &quot;Octopus&quot;, &quot;Merfolk&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="131" template="../../obj/treasure.tx" x="100" y="74.6667">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;Blue&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="132" template="../../../../common/maps/obj/gold.tx" x="795.333" y="570"/>
+ </objectgroup>
+</map>

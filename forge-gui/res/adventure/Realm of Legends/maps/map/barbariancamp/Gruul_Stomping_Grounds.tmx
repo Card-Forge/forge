@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="94">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Clan Guildmage&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="22017" source="../../../../common/maps/tileset/FarmFood.tsx"/>
+ <layer id="7" name="SubBackGround" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFlAAL7oF2wcgAo+E8CkYBfgDLI8h5BcSmdd4ZTHmTHv4dDgAAcnsCXA==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyL5GRgiMSDIwjI0wLv4mBg+DoA9pKDQWAnB2VmfCNTX/gA+Xkg7AWBoZImKMF7yExLF5kH3u2jeGDxQ38IzaCEEEtVhGBa2tsYgF8eBOgVBqTYRa3y5MoQzHsAuarHbg==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyVlFFKAzEQhuMuyibH8B5a6Q20ZUsRq9eolZ5AsVA8iyhCqfQSwgq++Kq2ogilYn6TcSch2a4DQ0MzO19mkvnniRBz6y/ae9J13wrp+jp7ZflDDuYoFWKWlcwTlnc/Mb99JUTTMh+0f22We0LvPW+53LHOeWndPwOYV6mJW0qX+5eT2ZPlPvJ6LfM40gPkGTM2MXl+1IwcnxV9RM0DZdYTG0+O724yNx59ofrBXgTqgb3rb1eMu6PXjYpzzBj7Vq8/dOz2Rjx+lMb3yNCLoTK9jbJtn++zyD7L9RapFUZ9gfWV+4Yb0t0/kmWtqxpvHNw6s0Dspsf2bV2tMJyXuJX984zYZ6pefMg4d8Dy4H1+V5zjVLnx/zG6XzD3vPu6s2+zil3XuiwH6plqv84MM3R20i2wpzXujdskEP+rD6qcs3M9R90krEt8JuuySUN83cD/uTRvD7MNzSI27zU0ZcnmI6Z/3HLpapZfK+o80OuLtNToPDGatBt42x2919LeZj2hOOqVr5V+rWB2PCY56QNmhNg8ljR1yHQEvWqzevAmqZdUK/oWY5IXbD5bXuwicZkFu6ee1XMwDm1/uPvMH5eVuVA=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYEAF/cyoeDoz+WIgTAr4wUqaekr0TwC67RUPZfZR4o7XOOyGiRtyIsSOSuBWDwL/mSAYG/iEQ5yQO4gBS7ixi/9gQtgLCwtK7EEHmoy45XqA8RoJtDuQibp2wsBZSQjNiJa2PzJB7A4hEN4gQEo6xedXmL0wu4OZEH6nNtjBhsp/B7TjPROq/eh+Jyd/MSGF62d2THlQuprMjGk3Pn+DwvsCC4KND2BL0x+g6RmUnrDZDQp3kN+xmZ1HQZkGykdhTIhwRbcbm9+f+iPs/a+IMCsJiT2HC8HGlkc+QM1CtrsPaM8ULH5Hj3N0/zIrIezbjpaG8AFku2H2o9sNAjB/g+wNQlLPqIRq3l9oeUpM3oPZ/QUYNp/R4hwGYOEGsvcDE3ZzyAEgu4OhGBtA9i+yvcEE9KEDAIw2Z3Q=
+  </data>
+ </layer>
+ <layer id="8" name="AboveClutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBg6YLcWA8MeLfrbex1o5w00e93YGBjcgdiDDVV8gQ5t3fIEaN9TIH7GRlgtNUE7OwPDC6CdLewIMSVGTHW09v9gAp/ZCasZBSMPhGiSJzeUAbZ8DxMLY4SUle10zi+wsvIFncvKJqA/m9lRy8rBBgAu5RRY
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="208" y="270.841" width="32" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="52" template="../../../../common/maps/obj/gold.tx" x="299.677" y="34.3829"/>
+  <object id="55" template="../../../../common/maps/obj/enemy.tx" x="389.398" y="102.04">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Skarrg, the Rage Pits|GPT&quot;, &quot;Gruul Guildmage|GPT&quot; ] }"/>
+    <property name="enemy" value="Borborygmos"/>
+    <property name="pursueRange" type="int" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="57" template="../../../../common/maps/obj/enemy.tx" x="221.655" y="153.562">
+   <properties>
+    <property name="enemy" value="Rurik Thar"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/enemy.tx" x="302.949" y="63.3143">
+   <properties>
+    <property name="enemy" value="Anzrag"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="59" template="../../../../common/maps/obj/enemy.tx" x="49.1149" y="80.3271">
+   <properties>
+    <property name="enemy" value="Yarus"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="60" template="../../../../common/maps/obj/gold.tx" x="23.3333" y="78.6667"/>
+  <object id="61" template="../../../../common/maps/obj/enemy.tx" x="421.373" y="218.147">
+   <properties>
+    <property name="enemy" value="Nikya"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="85" template="../../../../common/maps/obj/manashards.tx" x="420.371" y="236.816"/>
+  <object id="87" template="../../../../common/maps/obj/dialog.tx" x="193" y="208.25" width="80" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A chaotic war camp sprawls out before you, barbarians, berserkers, and shamans of all kinds training, making merry, and causing a ruckus all over. Your arrival is met with wild cheers - it seems the residents are excited to have a real fight on their hands! A sign marks this as the territory of Ravnica's Gruul Clans.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="88" template="../../obj/treasure.tx" x="426.5" y="90.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;GPT&quot;, &quot;GTC&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;green&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;GPT&quot;, &quot;GTC&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;green&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;GPT&quot;, &quot;GTC&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;green&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic Rare&quot; ]
+  }
+]</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="89" template="../../obj/treasure.tx" x="433.5" y="63">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;GPT&quot;, &quot;GTC&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;green&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;GPT&quot;, &quot;GTC&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;green&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;GPT&quot;, &quot;GTC&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;red&quot;, &quot;green&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic Rare&quot; ]
+  }
+]</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/scroll.tx" x="16.6667" y="99.6667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Gruul Turf&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/scroll.tx" x="400.333" y="247.333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Gruul Charm&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="240.5" y="70" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;:&quot;TODAY'S AGENDA:
+1. CRUSH THEM!
+2. WE EAT!&quot;,
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;Continue&quot; }
+]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="93" template="../../../../common/maps/obj/scroll.tx" x="396.855" y="82.7433">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Stomping Ground&quot;, &quot;editions&quot;: [ &quot;GPT&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

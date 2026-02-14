@@ -1,0 +1,60 @@
+
+structures.png
+size: 288,384
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+forest
+  xy: 0, 0
+  size: 48, 64
+lake
+  xy: 48, 0
+  size: 48, 64 
+forest2
+  xy: 96, 0
+  size: 48, 64
+swamp_forest
+  xy: 0, 64
+  size: 48, 64
+swamp_forest2
+  xy: 48, 64
+  size: 48, 64       
+structure
+  xy: 96, 64
+  size: 48, 64
+swamp_water
+  xy: 144, 64
+  size: 48, 64  
+deep_swamp
+  xy: 192, 64
+  size: 48, 64
+mountain
+  xy: 0, 128
+  size: 48, 64
+lava 
+  xy: 48, 128
+  size: 48, 64
+mountain_forest 
+  xy: 96, 128
+  size: 48, 64 
+plateau 
+  xy: 0, 192
+  size: 48, 64 
+plains_forest 
+  xy: 48, 192
+  size: 48, 64 
+water 
+  xy: 0, 256
+  size: 48, 64 
+island_forest 
+  xy: 48, 256
+  size: 48, 64  
+hole
+  xy: 0, 320
+  size: 48, 64 
+waste_mountain 
+  xy: 48, 320
+  size: 48, 64      
+waste_structure 
+  xy: 96, 320
+  size: 48, 64

@@ -363,6 +363,11 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
+    public boolean hasNetGame() {
+        return MatchController.instance.isNetGame();
+    }
+
+    @Override
     public float getScreenScale() {
         return 1f;
     }

@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="145">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Icy Manipulator|LEA&quot;, &quot;Jayemdae Tome|LEA&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="60">
+  <data encoding="base64" compression="zlib">
+   eJzt07EJwDAMRUFXgSzn7b1PijTGhdx9Q3LFtXpIoH631qEwrle6d7qb7Ke78/z0vlX7q/fe9U91//DXazvZndvpLgAAAABA5QG+x34j
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="60">
+  <data encoding="base64" compression="zlib">
+   eJy1WW1OWzEQfH+ABIljhSJu0J6l6mUSqRR6K9oHUg/Q/mxWyojJMLu2k4cl6ymJvbM73q/n3K6n6XZg3u1njM3gvpH5uJqmJ5o/93Pef/+wf75+IObvg20Yz/vPv2iGHi0ZI2ufDKaO7w2bofcf0tlhQzeHd3Uipu512HeEpzg8vhS6Y34yuv87PO9lbfjLj9Xbum83BbjZ72xgGRDt4gDYwWM8rw9rLwxu2Awfz+RgH/irzif2vArvMT4P2q1ct3yiOqMM99HYzefWi+k4z8bzIQbYbo7FEUzlPJ4vDb+Dj2u+qfyvd+qZ89mFTrA9xtWCuI578KhxGN8vmceVe5bLfLg4df63xGRc5Rfn3sp15+KqfI7LpWv3LH63WR/XmyV9jXnUerYRDpb2NdcjwM9H+IXuWd7XCdlcP8FlcB/xtS1wXa+B3ma03t6vj7lo1aIsF2fxiDO9OHAbMc1xDZ1a+sMPwBlqqNvHdjp7st5Qsd06jK83x/wxbsYh6+XOXnm+FEy3h3XMcpDWkUuR4XR0x8x2sQ9n9rK/rKY6ftW3/ibreV2Vc1u1Qtf29GJVHRjVj+VFT1Hp2Cuz5X/qLz29EftsFqPQL+MEmNvO88hyleutY10mL/R6oB4GdWw0RzI+9sa63vcb9GngT22o8oza3tPTht0vZPvWyMneHVs69PY40CHwq/dEHlwfcGZVfmnhc++qfTyPjdH7nD4DMl6NLqfyeerM/JmxUaeX0qXlz+zLMc7pI1l3Z2t29uszcTW2FU/rJMNX547eDjbxHVQVs2qLcpH17Fkv6e6D3FBben0d+u2mtzrP8YrP2fu/ywmQuaU1XJey2ufiFXcuqpvzGc4ZyBszyeP+oqf2zev3ueOUXNHTD1QTeo9ic2y4nroli32ouk/Lcs719P4+CPUXsZXlO5xlLz56uJXhObu/6enheG3VczmfzHAzee7+d1foGvJ35reeu0LeU+npsLP+e+7AhTzNdVofXJ6s7gKyfJcNrQ+8X/0Hv2UxyHmn6m+c3ry/9T7WqpPz+jhHKuen5q3evdkZjGLDjoyTbI9y/5H/a2Vc9fYy/wFgLpcl
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="60">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt2EsKgDAMhOGufB3Mi/rAY0oXgYKLupo/ynzgeoK2TWop76zz81Gicik7XYD91inOm8R51QVk9gx0AQL13BrpIhIg3wHVO9TnSstrzszMCBuYTfQ+epYlZo1FnEfcmwL9fZVi/5Dzq4p6TbV3Ec/oZn11n6jniSz/m6meF709wxml7L3R8w5hpn3HDej8DAI=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="77" template="../../../../common/maps/obj/gold.tx" x="132.333" y="42.25"/>
+  <object id="78" template="../../../../common/maps/obj/gold.tx" x="399.5" y="864.334"/>
+  <object id="79" template="../../../../common/maps/obj/gold.tx" x="426.667" y="294.666"/>
+  <object id="84" template="../../../../common/maps/obj/enemy.tx" x="402.333" y="575.999">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;nomad stadium|ody&quot;, &quot;true believer|ONS&quot;, &quot;divine sacrament|ody&quot;, &quot;seal of cleansing|nem&quot;, &quot;sword of the chosen|sth&quot;]}"/>
+    <property name="enemy" value="Jareth"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/enemy.tx" x="113.667" y="434">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Barbarian Ring|ODY&quot;, &quot;desert drake|POR&quot;, &quot;dragon roost|ONS&quot;, &quot;seal of fire|nem&quot;, &quot;dragon mask|VIS&quot;]}"/>
+    <property name="enemy" value="Rorix"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/enemy.tx" x="139.667" y="96.3333">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;With a warbling death cry, the strange creature shimmers and then explodes in a flash of light, leaving nothing behind to indicate it ever existed.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Plains|PGRU&quot;, &quot;Island|PGRU&quot;, &quot;Swamp|PGRU&quot;, &quot;Mountain|PGRU&quot;, &quot;Forest|PGRU&quot;, &quot;Urza's Filter|INV&quot;, &quot;Howling Mine|7ED&quot;, &quot;Diamond Kaleidoscope|VIS&quot;, &quot;Rewards of Diversity|INV&quot;]}"/>
+    <property name="enemy" value="Cromat"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="96" template="../../../../common/maps/obj/enemy.tx" x="388" y="128.667">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Tolaria|LEG&quot;, &quot;Plains|LEA&quot;, &quot;Urborg|LEG&quot;, &quot;Tawnos's Wand|ATQ&quot;, &quot;Wall of Vapor|LEG&quot;]}"/>
+    <property name="enemy" value="Chromium"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="97" template="../../../../common/maps/obj/enemy.tx" x="338.333" y="318.333">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Hammerheim|LEG&quot;, &quot;Urborg|LEG&quot;, &quot;Pendelhaven|LEG&quot;, &quot;Celestial Sword|ICE&quot;, &quot;Wall of Dust|LEG&quot;]}"/>
+    <property name="enemy" value="Vaevictis"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="98" template="../../../../common/maps/obj/enemy.tx" x="287" y="366.333">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Hammerheim|LEG&quot;, &quot;Plains|LEA&quot;, &quot;Pendelhaven|LEG&quot;, &quot;Dragon Blood|USG&quot;, &quot;Wall of Earth|LEG&quot;]}"/>
+    <property name="enemy" value="Palladia-Mors"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="99" template="../../../../common/maps/obj/enemy.tx" x="327.334" y="246">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Tolaria|LEG&quot;, &quot;Plains|LEA&quot;, &quot;Pendelhaven|LEG&quot;, &quot;Aegis of the Meek|ICE&quot;, &quot;Wall of Light|LEG&quot;]}"/>
+    <property name="enemy" value="Arcades"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="100" template="../../../../common/maps/obj/enemy.tx" x="39" y="855">
+   <properties>
+    <property name="enemy" value="Halfdane"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="101" template="../../../../common/maps/obj/enemy.tx" x="213.333" y="706.333">
+   <properties>
+    <property name="enemy" value="Adun"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="102" template="../../../../common/maps/obj/enemy.tx" x="408" y="686">
+   <properties>
+    <property name="enemy" value="Angus"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="103" template="../../../../common/maps/obj/enemy.tx" x="390.667" y="847.667">
+   <properties>
+    <property name="enemy" value="Tetsuo"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="104" template="../../../../common/maps/obj/enemy.tx" x="179.333" y="852.667">
+   <properties>
+    <property name="enemy" value="Hazezon"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="105" template="../../../../common/maps/obj/enemy.tx" x="176.334" y="576">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Cabal Pit|ODY&quot;, &quot;infernal medusa|LEG&quot;, &quot;no rest for the wicked|USG&quot;, &quot;bad moon|5ed&quot;, &quot;phyrexian splicer|tmp&quot;]}"/>
+    <property name="enemy" value="Visara"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="106" template="../../../../common/maps/obj/enemy.tx" x="413.666" y="410.334">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Cephalid Coliseum|ODY&quot;, &quot;jandor's saddlebags|7ed&quot;, &quot;ghosthelm courier|ONS&quot;, &quot;rhystic deluge|pcy&quot;, &quot;second chance|ULG&quot;]}"/>
+    <property name="enemy" value="Arcanis"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="107" template="../../../../common/maps/obj/enemy.tx" x="95.3337" y="499.333">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Centaur garden|ODY&quot;, &quot;storm front|TMP&quot;, &quot;floral spuzzem|LEG&quot;, &quot;seal of strength|nem&quot;, &quot;triangle of war|VIS&quot;]}"/>
+    <property name="enemy" value="Silvos"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="108" template="../../../../common/maps/obj/enemy.tx" x="243" y="210">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Tolaria|LEG&quot;, &quot;Hammerheim|LEG&quot;, &quot;Urborg|LEG&quot;, &quot;Draconian Cylix|FEM&quot;, &quot;Wall of Putrid Flesh|LEG&quot;]}"/>
+    <property name="enemy" value="Nicol Bolas"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="109" template="../../../../common/maps/obj/dialog.tx" x="187.485" y="906.238" width="163.697" height="20.858" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The very air feels different as you enter the cave, musty and stale. A smell like that of old paper and nostalgia fills your nose. Something tells you that the inhabitants of this wield some very old magic.
+
+Your manasight stone glows brightly, sensing a truly mighty legend in this place.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="110" template="../../../../common/maps/obj/dialog.tx" x="151.826" y="173.173" width="116.115" height="13.858" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Finally, you seem to have reached the end of the seemingly endless caverns. A strange creature lurks ahead, seemingly formed entirely of ancient magic. Taking that magic for yourself would almost certainly be quite helpful... but first you must figure out how to defeat a creature that has survived since the civilization of your birth was young.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="111" template="../../../../common/maps/obj/gold.tx" x="425.5" y="854.5"/>
+  <object id="112" template="../../../../common/maps/obj/treasure.tx" x="415.333" y="79.3337">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Chains of Mephistopheles&quot;,
+  &quot;editions&quot;: [ &quot;LEG&quot; ]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Hellfire&quot;,
+  &quot;editions&quot;: [ &quot;LEG&quot; ]
+}
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Winds of Change&quot;,
+  &quot;editions&quot;: [ &quot;LEG&quot; ]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Chain Lightning&quot;,
+  &quot;editions&quot;: [ &quot;LEG&quot; ]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Sword of the Ages&quot;,
+  &quot;editions&quot;: [ &quot;LEG&quot; ]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Su-Chi&quot;,
+  &quot;editions&quot;: [ &quot;ATQ&quot; ]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="113" template="../../../../common/maps/obj/gold.tx" x="157.333" y="46.6667"/>
+  <object id="115" template="../../../../common/maps/obj/manashards.tx" x="110" y="68"/>
+  <object id="116" template="../../../../common/maps/obj/manashards.tx" x="177.667" y="66"/>
+  <object id="119" template="../../../../common/maps/obj/dialog.tx" x="242.151" y="477.571" width="73.0303" height="20.858" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The cavern continues to slope harshly downward, bringing you ever deeper and deeper into the depths of the earth. The crisp, chill cave air gives way to heat and odd, unpleasant smells that you unfortunately recognize as that of dragons - and indeed, through the darkness ahead, you make out several towering shapes...&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="120" template="../../../../common/maps/obj/dialog.tx" x="248.152" y="611.571" width="120.364" height="20.858" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Ever deeper and deeper the tunnels go, so steep that walking normally is only still an option due to the magic you can conjure to steady yourself. Yet more ancient and mighty legends lurk in the shadows ahead...&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="121" template="../../../../common/maps/obj/gold.tx" x="452.667" y="408.667"/>
+  <object id="122" template="../../../../common/maps/obj/gold.tx" x="381.333" y="407.333"/>
+  <object id="123" template="../../../../common/maps/obj/manashards.tx" x="70.6667" y="383.333"/>
+  <object id="124" template="../../../../common/maps/obj/manashards.tx" x="180" y="410"/>
+  <object id="125" template="../../../../common/maps/obj/manashards.tx" x="420.333" y="881"/>
+  <object id="127" template="../../../../common/maps/obj/booster.tx" x="148" y="406">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;SCG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;SCG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;SCG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="128" template="../../../../common/maps/obj/booster.tx" x="97.3337" y="401.333">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;LGN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;LGN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;LGN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="129" template="../../../../common/maps/obj/booster.tx" x="119.333" y="375.333">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ONS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ONS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ONS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="130" template="../../../../common/maps/obj/booster.tx" x="64.5" y="918.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ODY&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ODY&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ODY&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="131" template="../../../../common/maps/obj/booster.tx" x="137.5" y="825.25">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;TOR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;TOR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;TOR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="132" template="../../../../common/maps/obj/booster.tx" x="413.25" y="716.75">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;JUD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;JUD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;JUD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="133" template="../../../../common/maps/obj/treasure.tx" x="371.167" y="81.8333">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Land Tax&quot; ,
+  &quot;editions&quot;: [ &quot;LEG&quot; ]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Spirit Link&quot;,
+  &quot;editions&quot;: [ &quot;LEG&quot; ]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Mana Drain&quot;,
+  &quot;editions&quot;: [ &quot;LEG&quot; ]
+},
+{
+  &quot;type&quot;: card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Boomerang&quot;,
+  &quot;editions&quot;: [ &quot;LEG&quot; ]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Concordant Crossroads&quot;,
+  &quot;editions&quot;: [ &quot;LEG&quot; ]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Storm Seeker&quot;,
+  &quot;editions&quot;: [ &quot;LEG&quot; ]
+}
+]</property>
+    <property name="spawn.Easy" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="134" template="../../../../common/maps/obj/gold.tx" x="55.5" y="889"/>
+  <object id="135" template="../../../../common/maps/obj/manashards.tx" x="32.5" y="884.5"/>
+  <object id="136" template="../../../../common/maps/obj/manashards.tx" x="76" y="434.5"/>
+  <object id="137" template="../../../../common/maps/obj/booster.tx" x="208" y="64.6667">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;INV&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;INV&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;INV&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="138" template="../../../../common/maps/obj/booster.tx" x="209.667" y="119.167">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;PLS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;PLS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;PLS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="139" template="../../../../common/maps/obj/booster.tx" x="193.667" y="89.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;APC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;APC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;APC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="140" template="../../../../common/maps/obj/booster.tx" x="84.3333" y="75.6667">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;INV&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;INV&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;INV&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="141" template="../../../../common/maps/obj/booster.tx" x="48.6667" y="98.6667">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;APC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;APC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;APC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="142" template="../../../../common/maps/obj/booster.tx" x="73.6667" y="121.667">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;PLS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;PLS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;PLS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="143" template="../../../../common/maps/obj/entry_up.tx" x="288.5" y="958.75" width="46" height="14.5">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="144" template="../../../../common/maps/obj/booster.tx" x="442" y="270">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ONS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ONS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ONS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
