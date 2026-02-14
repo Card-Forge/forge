@@ -26,6 +26,8 @@ import java.util.*;
 import com.google.common.collect.Lists;
 
 import forge.game.card.CardView;
+import forge.game.combat.CombatView;
+import forge.util.collect.FCollection;
 import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
@@ -63,6 +65,12 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     private static final int STACK_MAX_OTHERS = 4;
 
     private final boolean mirror;
+
+    // Card IDs that have been split from their groups via individual click.
+    // Survives doLayout() calls; cleared on game state changes via update().
+    private final Set<Integer> splitCardIds = new HashSet<>();
+    // Blocker card ID → attacker card ID; rebuilt each doLayout() from CombatView.
+    private Map<Integer, Integer> blockerAssignments = Collections.emptyMap();
 
     // Computed in layout.
     private List<CardStackRow> rows = new ArrayList<>();
@@ -123,6 +131,20 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                         insertIndex = i;
                         break;
                     }
+                    // Split cards can't group with non-split cards
+                    boolean cardIsSplit = splitCardIds.contains(card.getId());
+                    boolean stackIsSplit = splitCardIds.contains(firstPanel.getCard().getId());
+                    if (cardIsSplit != stackIsSplit) {
+                        insertIndex = i + 1;
+                        continue;
+                    }
+                    // Blockers assigned to different attackers can't group together
+                    int cardTarget = blockerAssignments.getOrDefault(card.getId(), 0);
+                    int stackTarget = blockerAssignments.getOrDefault(firstPanel.getCard().getId(), 0);
+                    if (cardTarget != stackTarget) {
+                        insertIndex = i + 1;
+                        continue;
+                    }
                     if (!panel.getAttachedPanels().isEmpty()
                             || !panel.getCard().hasSameCounters(firstPanel.getCard())
                             || firstPanel.getCard().hasCardAttachments()
@@ -181,6 +203,20 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                         break;
                     }
 
+                    // Split cards can't group with non-split cards
+                    boolean cardIsSplit = splitCardIds.contains(card.getId());
+                    boolean stackIsSplit = splitCardIds.contains(firstCard.getId());
+                    if (cardIsSplit != stackIsSplit) {
+                        insertIndex = i + 1;
+                        continue;
+                    }
+                    // Blockers assigned to different attackers can't group together
+                    int cardTarget = blockerAssignments.getOrDefault(card.getId(), 0);
+                    int stackTarget = blockerAssignments.getOrDefault(firstCard.getId(), 0);
+                    if (cardTarget != stackTarget) {
+                        insertIndex = i + 1;
+                        continue;
+                    }
                     if (!panel.getAttachedPanels().isEmpty()
                             || !card.hasSameCounters(firstPanel.getCard())
                             || (card.isSick() != firstCard.isSick())
@@ -239,6 +275,20 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                         // name and attachments.
                         insertIndex = i;
                         break;
+                    }
+                    // Split cards can't group with non-split cards
+                    boolean cardIsSplit = splitCardIds.contains(card.getId());
+                    boolean stackIsSplit = splitCardIds.contains(firstCard.getId());
+                    if (cardIsSplit != stackIsSplit) {
+                        insertIndex = i + 1;
+                        continue;
+                    }
+                    // Blockers assigned to different attackers can't group together
+                    int cardTarget = blockerAssignments.getOrDefault(card.getId(), 0);
+                    int stackTarget = blockerAssignments.getOrDefault(firstCard.getId(), 0);
+                    if (cardTarget != stackTarget) {
+                        insertIndex = i + 1;
+                        continue;
                     }
                     if (!panel.getAttachedPanels().isEmpty()
                             || card.isCloned()
@@ -352,6 +402,18 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 final CardView thisCard = panel.getCard();
                 final CardStateView thisState = thisCard.getCurrentState();
                 if (otherState.getOracleName().equals(thisState.getOracleName()) && (groupAll || s.size() < STACK_MAX_OTHERS)) {
+                    // Split cards can't group with non-split cards
+                    boolean cardIsSplit = splitCardIds.contains(thisCard.getId());
+                    boolean stackIsSplit = splitCardIds.contains(otherCard.getId());
+                    if (cardIsSplit != stackIsSplit) {
+                        continue;
+                    }
+                    // Blockers assigned to different attackers can't group together
+                    int cardTarget = blockerAssignments.getOrDefault(thisCard.getId(), 0);
+                    int stackTarget = blockerAssignments.getOrDefault(otherCard.getId(), 0);
+                    if (cardTarget != stackTarget) {
+                        continue;
+                    }
                     if (panel.getAttachedPanels().isEmpty()
                             && thisCard.hasSameCounters(otherCard)
                             && (thisCard.isSick() == otherCard.isSick())
@@ -381,9 +443,28 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         return placeholder;
     }
 
+    private Map<Integer, Integer> buildBlockerAssignments() {
+        try {
+            CombatView combat = getMatchUI().getGameView().getCombat();
+            if (combat == null) { return Collections.emptyMap(); }
+            Map<Integer, Integer> assignments = new HashMap<>();
+            for (CardView attacker : combat.getAttackers()) {
+                FCollection<CardView> blockers = combat.getPlannedBlockers(attacker);
+                if (blockers == null) { continue; }
+                for (CardView blocker : blockers) {
+                    assignments.put(blocker.getId(), attacker.getId());
+                }
+            }
+            return assignments;
+        } catch (Exception e) {
+            return Collections.emptyMap();
+        }
+    }
+
     @Override
     public final void doLayout() {
         updateGroupScope();
+        blockerAssignments = buildBlockerAssignments();
         final Rectangle rect = this.getScrollPane().getVisibleRect();
 
         this.playAreaWidth = rect.width;
@@ -699,7 +780,35 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         if (!selectAll && panel.getGroupCount() >= 5) {
             selectAll = panel.isBadgeHit(evt.getX(), evt.getY());
         }
+        // Split/un-split individual card from group
+        if (!selectAll && panel.getCard() != null) {
+            if (splitCardIds.contains(panel.getCard().getId())) {
+                // Re-clicking a split card un-splits it (re-merges into group)
+                splitCardIds.remove(panel.getCard().getId());
+                doLayout();
+            } else {
+                List<CardPanel> stack = panel.getStack();
+                if (stack != null && stack.size() >= 5) {
+                    // Split first, then check if the game accepts this card.
+                    // If accepted, doUpdateCard will remove from splitCardIds when
+                    // the card's state changes (e.g. tapping), allowing it to regroup.
+                    splitCardIds.add(panel.getCard().getId());
+                    if (getMatchUI().getGameController().selectCard(panel.getCard(), null, new MouseTriggerEvent(evt))) {
+                        doLayout();
+                        if ((panel.getTappedAngle() != 0) && (panel.getTappedAngle() != CardPanel.TAPPED_ANGLE)) {
+                            return;
+                        }
+                        super.mouseLeftClicked(panel, evt);
+                        return;
+                    }
+                    // Game rejected - undo the split
+                    splitCardIds.remove(panel.getCard().getId());
+                }
+            }
+        }
         selectCard(panel, new MouseTriggerEvent(evt), selectAll);
+        // Regroup after any state changes (e.g., tapped attackers join tapped pile)
+        doLayout();
         if ((panel.getTappedAngle() != 0) && (panel.getTappedAngle() != CardPanel.TAPPED_ANGLE)) {
             return;
         }
@@ -753,6 +862,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     public void update() {
         FThreads.assertExecutedByEdt(true);
+        splitCardIds.clear();
+        blockerAssignments = Collections.emptyMap();
         recalculateCardPanels(model, zone);
     }
 
@@ -838,6 +949,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         if (toPanel == null) { return false; }
 
         boolean needLayoutRefresh = false;
+        boolean tappedStateChanged = card.isTapped() != toPanel.isTapped();
+        if (tappedStateChanged) {
+            splitCardIds.remove(card.getId());
+        }
         if (card.isTapped()) {
             toPanel.setTapped(true);
             toPanel.setTappedAngle(forge.view.arcane.CardPanel.TAPPED_ANGLE);
@@ -887,8 +1002,12 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
         if (needLayoutRefresh && !fromRefresh) {
             doLayout(); //ensure layout refreshed here if not being called from a full refresh
+        } else if (tappedStateChanged && !fromRefresh) {
+            // Deferred layout for tapped state changes - allows split cards to
+            // regroup with other tapped attackers after async state updates
+            javax.swing.SwingUtilities.invokeLater(this::doLayout);
         }
-        return needLayoutRefresh;
+        return needLayoutRefresh || tappedStateChanged;
     }
 
     private enum RowType {

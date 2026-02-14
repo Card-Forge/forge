@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
+import javax.swing.SwingUtilities;
 
 import com.google.common.primitives.Ints;
 
@@ -16,6 +17,7 @@ import forge.menus.MenuUtil;
 import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.VAutoYields;
+import forge.screens.match.views.VField;
 import forge.screens.match.controllers.CDock.ArcState;
 import forge.toolbox.FSkin.SkinIcon;
 import forge.toolbox.FSkin.SkinnedCheckBoxMenuItem;
@@ -49,6 +51,7 @@ public final class GameMenu {
         menu.addSeparator();
         menu.add(getMenuItem_TargetingArcs());
         menu.add(new CardOverlaysMenu(matchUI).getMenu());
+        menu.add(getSubmenu_GroupPermanents());
         menu.add(getMenuItem_AutoYields());
         menu.addSeparator();
         menu.add(getMenuItem_ViewDeckList());
@@ -203,5 +206,34 @@ public final class GameMenu {
 
     private ActionListener getViewDeckListAction() {
         return e -> matchUI.viewDeckList();
+    }
+
+    private SkinnedMenu getSubmenu_GroupPermanents() {
+        final Localizer localizer = Localizer.getInstance();
+        final SkinnedMenu submenu = new SkinnedMenu(localizer.getMessage("cbpGroupPermanents"));
+        final ButtonGroup group = new ButtonGroup();
+        final String current = prefs.getPref(FPref.UI_GROUP_PERMANENTS);
+
+        final String[] options = {"Off", "Tokens & Creatures", "All Permanents"};
+        for (String option : options) {
+            SkinnedRadioButtonMenuItem item = new SkinnedRadioButtonMenuItem(option);
+            item.setSelected(option.equals(current));
+            item.addActionListener(getGroupPermanentsAction(option));
+            group.add(item);
+            submenu.add(item);
+        }
+        return submenu;
+    }
+
+    private ActionListener getGroupPermanentsAction(final String value) {
+        return e -> {
+            prefs.setPref(FPref.UI_GROUP_PERMANENTS, value);
+            prefs.save();
+            SwingUtilities.invokeLater(() -> {
+                for (final VField f : matchUI.getFieldViews()) {
+                    f.getTabletop().doLayout();
+                }
+            });
+        };
     }
 }
