@@ -2852,14 +2852,23 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 tokenDb.preloadTokens();
             }
             final List<PaperToken> allTokens = tokenDb.getAllTokens();
-            // Deduplicate by name — keep one PaperToken per unique name
+            // Deduplicate by name + P/T so different-statted tokens are both available
             final Map<String, PaperToken> uniqueTokens = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
             for (final PaperToken pt : allTokens) {
-                uniqueTokens.putIfAbsent(pt.getName(), pt);
+                ICardFace face = pt.getRules().getMainPart();
+                String key = pt.getName() + " (" + face.getIntPower() + "/" + face.getIntToughness() + ")";
+                uniqueTokens.putIfAbsent(key, pt);
             }
             final List<PaperToken> choices = new ArrayList<>(uniqueTokens.values());
 
-            final PaperToken chosen = getGui().oneOrNone(localizer.getMessage("lblNameTheCard"), choices);
+            // Display name with P/T in brackets
+            final FSerializableFunction<PaperToken, String> displayFn = pt -> {
+                ICardFace face = pt.getRules().getMainPart();
+                return pt.getName() + " (" + face.getIntPower() + "/" + face.getIntToughness() + ")";
+            };
+            final List<PaperToken> selection = getGui().getChoices(
+                    localizer.getMessage("lblNameTheCard"), 0, 1, choices, null, displayFn);
+            final PaperToken chosen = selection.isEmpty() ? null : selection.get(0);
             if (chosen == null) {
                 return;
             }
