@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -113,8 +114,7 @@ public class AttackConstraints {
      *         </ul>
      */
     public Pair<Map<Card, GameEntity>, Integer> getLegalAttackers() {
-        final int globalMax = globalRestrictions.getMax();
-        final int myMax = Math.min(globalMax == -1 ? Integer.MAX_VALUE : globalMax, possibleAttackers.size());
+        final int myMax = Math.min(Objects.requireNonNullElse(globalRestrictions.getMax(), Integer.MAX_VALUE), possibleAttackers.size());
         if (myMax == 0) {
             return Pair.of(Collections.emptyMap(), 0);
         }
@@ -198,7 +198,7 @@ public class AttackConstraints {
         final List<Map<Card, GameEntity>> result = Lists.newLinkedList();
 
         int localMaximum = maximum;
-        final boolean isLimited = globalRestrictions.getMax() != -1;
+        final boolean isLimited = globalRestrictions.getMax() != null;
         final Map<Card, GameEntity> myAttackers = Maps.newHashMap(attackers);
         final MapToAmount<GameEntity> toDefender = new LinkedHashMapToAmount<>();
         int attackersNeeded = 0;
