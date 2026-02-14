@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="80">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="83">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -8,7 +8,7 @@
  <tileset firstgid="11905" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzNmF1OwzAMxyvRj12ERz40xnE4ATzADXYE2JbtKJyCywBj42UiVmvhGidx2mRskjWtU5NfbP8dJ+uqKD7KopjVffu0z9bVadjG2l3ZN/MPHNRP1D+nwkc5jON5DB+u913IjyF54uJ7sfbdPd9Z21tbBPwPdlv/XRe3m7q/Bh8vcOwd8yO7y2/ApuHR8sbqD9kXjAnHeWrGs3HOsVpa2e9l1a73sm75vxIzDvGlFEvghHEkLaXg1DL68sw4tH4sxpAGDk1rOfg0jCHf5ObDPBpTP4DvPEGd8RmvcVq2bdnWH6hFKXUszRHaf6X3Lkg9SM3o27c0fFS7qWvN1sEVE1tgWlV93hgfAsNzt0ehxuB738WFxhOYYL8e44PrOi430D+PTZ8PfsM68f9p/euHofUW5ntownxbllPY/1A+7G14ruGahvAZMt/K874hPcab5ZhM3PmA+zyOFxMf7g/wXYiN5ixw3jfte9r5uAZh7lCuGxKjEBufC+N3FVHbwYcbTy7C5/Ws39MO1dOyio8XZZLqBXwOTb+vj/GbNB/0kdqahExUY/QMgP3AGCbJjxrGXemu2ajNXL2KJk9856CxcZQMtT/r9BEaX+LT1IyhFtM7umKbq3eP4fPlXU4+jBdqz6UP370FvUdIbbh/oUkaDmk2NyP3E42Xhu2YjLQOamodP8djnc7JifvDVHmulO4bcvmS+oz2p5K/uG75OTmlL7tz0Nx3f4fnDVPJfPQ/npfdGWIOpuHFcxmePXx5xjmMwz9aLYViH6NJzie9K90BxoypiYF2rFT33yn5pPvdH0OhJ4A=
+   eJzNmEtOAzEMhkdiHl1wBLYseQjKcTgBLOAGPQK0TXsUTsFlgNKyqRhrxsJjnMTJJNBKVsWUSb78fsTJqiqK97IopvXQPtpnq+owbN3abTk08w8cVCeqz6HwUQ5jeR7Ch+t9E+IjJk5sfM+tffXPt63tWpt79Ae7qX+vi9t1PVyDixc4dpb5kd2mG7BpeLS8ofmH7HPGhOM8NuPZOOfYXFq234uqW+953fF/JmaM0VLyJXDCOFIuoZ0cdxbDqWV0xZmx5HoqLX2MvhzYN53l4NMw+rTJzYdxNKZ+AN+p5f9i40+Koxi2TdnVH6hFKfNYmsO3/0rvnZF6kJrRtW9p+GjuampNjGZj4g6YltWQN0RDYHjq9yjMMfje9X6h/gQm2K/HaHBZh8UG6vPQDPngb1gn/n5V/+gQW29hvvvGz7dhMYX9D+XD3obHGq4phs+Q+ZaO9w3pMV5bjsnEHg+4z+N4If7heoB2PjYas8B513TvaefjOQhz+2LdEB/52Phc6L+LgB4SNFw7YhE+L0fDnjY2nxZVuL8ok1Qv4LNvhn19iG7SfNBHamsSMtEco2cA7AfGMEk6ahi3pb1mY27m6lU0ceI6B431o2SY+9M+P3zjS3yamhFrIb2jzbe5evcQPlfc5eRDf2Hu2fLDdW9B7xFSG+5faFIO+3I2NyPXifpLw/aXjLQOamodP8djnc7JifvDlfJcKd035NKSakb7U0kvnrf8nJxSy/4cNHPd3+F5w1QyH/2Nx2V/hpiBaXjxXIZnD1eccQ5j0UebSz7fh+Qk55Pele4AQ8bU+EA7Vqr775R80v3uN9T6Jpw=
   </data>
  </layer>
  <layer id="2" name="Ground" width="40" height="40">
@@ -23,7 +23,7 @@
  </layer>
  <layer id="6" name="Ground2" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AU0Aos1WJgWKZFvPgoGBoAW/xt54NgYtSOAvLBSAjP4ejHR4wQPAqIB0Ol/sjXYGAogOJCjYF2DSboBrqpB4p7aeQ+SuJkOdBNK6B45SAMv1EwcICWeX0x0NwlWMxeDhRbMYjKF2LAZFb62LMaGC5rSAibzZoMDFs0aeceegBK0uBgq6tGwfAGT0brTxQwGh4DD6gZB6PxOQpGAXUAAKo2Kp8=
+   eJxjYBgFo2AU0Aos1WJgWKZFvPgowA2mazIwzNAcaFdAALb42wx02xYgvq1DWO0oIB8MVHjOBMbtLDqlP3L8uBXotm1Y0t9gAKt1EFhYd6BdM3TAUKk/8jUYGAqguFBjoF2DCbqBbuqB4l4auY+SOFkOdNMKKB6M+XcUDBygZV5fDDR3CRazlwPFVgyi8gUfmA2s8+YA8WRW+ti3Ghgua0gIm+1At+0YJO1WcgElaXCw1VWjYHiDJ4Ow/TGQYDQ8Bh5QMw5G43MUjALqAAAJ1DRl
   </data>
  </layer>
  <layer id="3" name="Walls" width="40" height="40">
@@ -36,7 +36,7 @@
  </layer>
  <layer id="5" name="Overlay" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2DogBMaqPxOLQaGLi1MddjE0fWOgsELsMXfTXUGhlvqxKkdCPAV6LZvQLydb6BdQhmgJDwHMo+RYjc5fpwKjNtpWNLfYAEbgW7bNIjd94gRggcTgKUDmNtg7hssZQoyGIzhBwP5wLxXAMWFNCoDKImTbqCbeqC4d7QdMAqQAC3zejvQ3A4sZncDxXqoZOdgbNdS4qZ+YLhMICFspmsyMMzQJN8+YgF6+avHSZr+xcYMDEuMsctRkgYHY101CugP7gLbfvfo0P4jN2//BLrt1yBun5ILBmP5O9IANeNgND4xQR0/A0M9FDfwD7RrRsEooA4AAMrnPbE=
+   eJxjYBgFo2DogBMaqPxOLQaGLi1MddjE0fWOgsELsMXfI0YIJkbtQACY+7bzDbRLKAOUhOdA5jFS7CbHj6t0IHiwgsHuPlz5dyABLB3A3AZz32ApU5DBYAw/GMgH5r0CKC6kURlASZx0A93UA8W9o+2AUYAEaJnX24HmdmAxuxso1kMlOwdju5YSN/UDw2UCCWEzXZOBYYYm+fYRC9DLXz1O0vQvNmZgWGKMXY6SNDgY66pRQH9wV52B4Z467e0hN2//BLrtFx3cR28wGMvfkQaoGQej8YkJ6vgZGOqhuIF/oF0zCkYBdQAAed09MQ==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -189,8 +189,133 @@
     <property name="uncommonShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue,PhyrexianBlue,Sphinx"/>
    </properties>
   </object>
-  <object id="77" template="../../../../common/maps/obj/collision.tx" x="303.759" y="183.227" width="30.4827" height="26.2136"/>
   <object id="78" template="../../../../common/maps/obj/collision.tx" x="307.134" y="454.268" width="26.2327" height="25.0886"/>
-  <object id="79" template="../../../../common/maps/obj/collision.tx" x="307.134" y="112.518" width="26.8577" height="31.9636"/>
+  <object id="80" template="../../../../common/maps/obj/dialog.tx" x="308.5" y="310.5" width="20.5" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;You stride into a massive council chamber, where a group of very serious looking wizards gather around a large orb. 'If you wield very powerful magic, we have need of your services. Otherwise, leave this place.&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;Jin-Gitaxias has been slain.&quot;,
+                    &quot;text&quot;: &quot;'Incredible! Your magic is extremely powerful indeed! We and the city thank you heartily for saving us from becoming more of his metallic minions.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+						{&quot;type&quot;: &quot;life&quot;, &quot;count&quot;: 1},
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Stroke of Genius&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 5000}          
+                      ]
+                    },
+					{&quot;removeItem&quot;:&quot;Blue Cartouche of Victory&quot;},
+					{&quot;addMapReputation&quot;: 4} ],
+					&quot;condition&quot;:[{&quot;item&quot;:&quot;Blue Cartouche of Victory&quot;}], 
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;My magic is quite powerful inded.&quot;,
+					&quot;text&quot;: &quot;'The threat to our capitol is none other than the Phyrexian Praetor Jin-Gitaxias himself. His glistening oil spreads across our land, and our wards that keep it from the capitol's water supply are already beginning to fray. If they fail, we are all doomed.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Definitely a fearsome foe&quot;,
+					&quot;text&quot;: &quot;'Certainly. If you manage to eliminate him, the city would be in your debt and give you its blessing and a bounty as well, of course. Look for him in a strange turquoise colored laboratory.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;I'll see what I can do.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;Maybe another time.&quot;,
+					&quot;text&quot;: &quot;The wizards go back to their pondering, and let you walk out.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="81" template="../../../../common/maps/obj/dialog.tx" x="312.5" y="147.5" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;As you approach this building, you feel disoriented as time itself distorts around you. 'Hail, traveler! There's some real trouble brewing here! It'll take a powerful mage to fix it, if that's you?'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;Teferi is defeated. Hopefully, just in time.&quot;,
+                    &quot;text&quot;: &quot;'Well done! Now we can begin to reverse the temporal damage he wrought, and maybe even succeed where he failed... though we may not attempt such spells again given the risks. In any case, your help was much appreciated.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+						{&quot;type&quot;: &quot;life&quot;, &quot;count&quot;: 1},
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Temporal Mastery&quot;, &quot;count&quot;: 1 },
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Temporal Manipulation&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 3000}          
+                      ]
+                    },
+					{&quot;removeItem&quot;:&quot;Tome of Temporal Repair&quot;},
+					{&quot;addMapReputation&quot;: 4} ],
+					&quot;condition&quot;:[{&quot;item&quot;:&quot;Tome of Temporal Repair&quot;}], 
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;My spells are quite powerful, you'll find&quot;,
+					&quot;text&quot;: &quot;'Well I certainly hope so, because this task would have you facing the legendary time mage Teferi himself. You see, he has been weaving a spell to try and reverse time and return us all to our home planes. The problem is, his spell is wreaking havoc all across the islands and doesn't seem to be working.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Sounds like I'd be in for quite the time.&quot;,
+					&quot;text&quot;: &quot;'Indeed. We've tried to get him to listen to reason, but he just hid away in his hideout. It looks like a blue and white building like you might find in town. Defeat him and retrieve his tome of temporal repair so we can fix the damage he's wrought and you'll get our blessing and a reward to boot.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;I'll see when I can make time for this task.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;Not sure I can handle that yet.&quot;,
+					&quot;text&quot;: &quot;'Some other time? Well time's been troubled here... yes, some other time.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="82" template="../../../../common/maps/obj/dialog.tx" x="312" y="212.5" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;A group of worried townsfolk pace about around this building. 'Please traveler! We need help urgently! Pirates have kidnapped our families!'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;Here's the map. This will lead you to your loved ones.&quot;,
+                    &quot;text&quot;: &quot;The families weep with job. 'Thank you! Oh, thank you! Our reward is hardly enough for your heroism but know you will always be a hero to us.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+						{&quot;type&quot;: &quot;life&quot;, &quot;count&quot;: 1},
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Rescue&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Dramatic Rescue&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Expedition Map&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Treasure Map&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 1000}          
+                      ]
+                    },
+					{&quot;removeItem&quot;:&quot;Map to the Hostages&quot;},
+					{&quot;addMapReputation&quot;: 2} ],
+					&quot;condition&quot;:[{&quot;item&quot;:&quot;Map to the Hostages&quot;}], 
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;How can I help?&quot;,
+					&quot;text&quot;: &quot;'A few days ago, some of our family members went out to the ocean to fish. They never returned - instead, we received an outrageous ransom demand from none other than the legendary pirate admiral Beckett Brass herself!'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;A scallywag if ever there was one.&quot;,
+					&quot;text&quot;: &quot;'We pooled our wealth but its not enough to meet her exoribitant demands. We'd happily give you the money we gathered and the town's blessing if you got us the map to where she's keeping her hostages, though we fear you may need to defeat her to get it. She's holed up in a place called High and Dry. We don't know where it is, but it looks like a set of normal docks, despite being home to a fearsome collection of pirates.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;I'll rescue your loved ones, don't you worry.&quot;} ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;Pirates aren't really my thing.&quot;,
+					&quot;text&quot;: &quot;The townsfolk give you scornful looks as you walk away.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
  </objectgroup>
 </map>
