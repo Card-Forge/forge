@@ -1514,12 +1514,12 @@
     "equipmentSlot": "Right",
     "iconName": "VampireBite",
     "effect": {
-      "lifeModifier": -5,
+      "lifeModifier": -2,
       "startBattleWithCard": [
-        "Treacherous Vampire|JUD"
+        "Vampire Hounds|EXO"
       ]
     },
-    "description": "-5 life. A 4/4 flyer that costs grave cards to attack/block. At threshold, gets bigger at a cost."
+    "description": "-2 life. A 2/2 that can be pumped by discarding cards."
   },
   {
     "name": "Belt of Worry Beads",
