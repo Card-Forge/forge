@@ -781,14 +781,17 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             selectAll = panel.isBadgeHit(evt.getX(), evt.getY());
         }
         // Split/un-split individual card from group
+        boolean wasUnsplit = false;
         if (!selectAll && panel.getCard() != null) {
             if (splitCardIds.contains(panel.getCard().getId())) {
                 // Re-clicking a split card un-splits it (re-merges into group)
                 splitCardIds.remove(panel.getCard().getId());
                 doLayout();
+                wasUnsplit = true;
             } else {
                 List<CardPanel> stack = panel.getStack();
-                if (stack != null && stack.size() >= 5) {
+                boolean grouping = groupTokensAndCreatures || groupAll;
+                if (stack != null && stack.size() >= (grouping ? 2 : 5)) {
                     // Split first, then check if the game accepts this card.
                     // If accepted, doUpdateCard will remove from splitCardIds when
                     // the card's state changes (e.g. tapping), allowing it to regroup.
@@ -806,8 +809,13 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 }
             }
         }
-        selectCard(panel, new MouseTriggerEvent(evt), selectAll);
-        // Regroup after any state changes (e.g., tapped attackers join tapped pile)
+        boolean selected = selectCard(panel, new MouseTriggerEvent(evt), selectAll);
+        // If this individual card was accepted (e.g. declared as attacker), mark it
+        // as split so it can merge with other split cards from the same group.
+        // Skip if the card was just un-split (user is un-declaring, not declaring).
+        if (selected && !selectAll && !wasUnsplit && panel.getCard() != null) {
+            splitCardIds.add(panel.getCard().getId());
+        }
         doLayout();
         if ((panel.getTappedAngle() != 0) && (panel.getTappedAngle() != CardPanel.TAPPED_ANGLE)) {
             return;
