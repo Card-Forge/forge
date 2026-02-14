@@ -5,6 +5,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 
+import forge.StaticData;
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardRules;
@@ -85,7 +86,8 @@ public class TokenDb implements ITokenDatabase {
 
     // try all editions to find token
     protected PaperToken fallbackToken(String name) {
-        for (CardEdition edition : this.editions) {
+        CardDb.CardArtPreference artPreference = StaticData.instance().getCardArtPreference();
+        for (CardEdition edition : this.editions.getOrderedEditions(artPreference.latestFirst)) {
             String fullName = String.format("%s_%s", name, edition.getCode().toLowerCase());
             if (loadTokenFromSet(edition, name)) {
                 return Aggregates.random(allTokenByName.get(fullName));
