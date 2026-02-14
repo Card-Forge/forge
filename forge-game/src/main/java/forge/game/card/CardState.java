@@ -22,6 +22,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import forge.card.*;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
 import forge.game.CardTraitBase;
 import forge.game.ForgeScript;
 import forge.game.GameObject;
@@ -40,6 +41,7 @@ import forge.game.spellability.LandAbility;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellPermanent;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityMode;
 import forge.game.trigger.Trigger;
 import forge.util.CardTranslation;
 import forge.util.ITranslatable;
@@ -63,6 +65,8 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     private CardType type = new CardType(false);
     private CardTypeView changedType = null;
     private ManaCost manaCost = ManaCost.NO_COST;
+    // Track mana cost after adjustments from perpetual cost-changing effects for display
+    private ManaCost perpetualAdjustedManaCost = null;
     private ColorSet color = ColorSet.C;
     private String oracleText = "";
     private String functionalVariantName = null;
@@ -211,6 +215,64 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     public final void setManaCost(final ManaCost manaCost0) {
         manaCost = manaCost0;
         view.updateManaCost(this);
+    }
+
+    /**
+     * Calculate and save the value of the mana cost adjusted by any perpetual raise/lower cost
+     * effects for display.
+     */
+    public void calculatePerpetualAdjustedManaCost() {
+        // If the total amount reduced is more than the generic mana cost,
+        // keep track of the extra in case it could be applied to an X cost
+        if (getCard() == null || getCard().getGame() == null
+                || (manaCost.getGenericCost() == 0 && manaCost.getShardCount(ManaCostShard.X) == 0)) {
+            return;
+        }
+
+        int genericCostAdjustment = 0;
+        for (final StaticAbility stAb : getStaticAbilities()) {
+            // Only collect perpetual cost changes to this card (not cost changes that this card applies to other cards)
+            if ("Card.Self".equals(stAb.getParam("ValidCard"))) {
+                int reduceOrRaise = 0;
+                if (stAb.checkMode(StaticAbilityMode.ReduceCost)) {
+                    reduceOrRaise = 1;
+                } else if (stAb.checkMode(StaticAbilityMode.RaiseCost)) {
+                    reduceOrRaise = -1;
+                }
+                if (reduceOrRaise != 0) {
+                    try {
+                        genericCostAdjustment += Integer.parseInt(stAb.getParamOrDefault("Amount", "1")) * reduceOrRaise;
+                    } catch (NumberFormatException e) {
+                        // We only care about adjustments with a specific numeric value
+                    }
+                }
+            }
+        }
+
+        if (genericCostAdjustment == 0) {
+            return;
+        }
+
+        // This doesn't work on hybrid generic costs
+        int newGeneric = manaCost.getGenericCost() - genericCostAdjustment;
+        // Apply negative cost adjustments to cards with an X cost only.
+        // While this could be done for regular cards as well (to potentially offset other cost-increasing effects)
+        // it would rarely matter and would require changing the "no_cost" flag in ManaCost from -1
+        // otherwise a -1 generic adjustment will get interpreted as "no_cost"
+        if (manaCost.getShardCount(ManaCostShard.X) == 0) {
+            newGeneric = Math.max(0, newGeneric);
+        }
+
+        // Replace the original generic mana cost with the adjusted value
+        perpetualAdjustedManaCost = new ManaCost(
+                (newGeneric != 0 ? newGeneric + " " : "") +
+                        manaCost.getShortString().replace("" + manaCost.getGenericCost(), "")
+        );
+        view.updateManaCost(this);
+    }
+
+    public ManaCost getPerpetualAdjustedManaCost() {
+        return perpetualAdjustedManaCost == null ? getManaCost() : perpetualAdjustedManaCost;
     }
 
     public final ColorSet getColor() {

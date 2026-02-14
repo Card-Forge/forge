@@ -1,6 +1,6 @@
 package forge.toolbox;
 
-import java.awt.Graphics;
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -202,6 +202,19 @@ public class CardFaceSymbols {
                 xpos += offset;
             }
         }
+        // Show "negative" mana cost caused by perpetual cost reduction effects
+        // This is only relevant for cards with an "X" in the cost
+        if (genericManaCost < 0) {
+            final String sGenericAdjust = Integer.toString(Math.abs(genericManaCost));
+            drawSymbol(sGenericAdjust, g, xpos, y, size);
+            // Give it a yellow border so it doesn't look like the regular generic mana symbol
+            Stroke oldStroke = ((Graphics2D) g).getStroke();
+            ((Graphics2D) g).setStroke(new BasicStroke(2));
+            g.setColor(Color.YELLOW);
+            g.drawOval(xpos, y, size, size);
+            ((Graphics2D) g).setStroke(oldStroke);
+            xpos += offset;
+        }
     }
 
     public static void drawColorSet(Graphics g, ColorSet colorSet, int x, int y, int imageSize, boolean vertical) {
@@ -284,7 +297,7 @@ public class CardFaceSymbols {
 
     /**
      * <p>
-     * getWidth.
+     * Return width needed to draw mana symbols
      * </p>
      *
      * @param manaCost

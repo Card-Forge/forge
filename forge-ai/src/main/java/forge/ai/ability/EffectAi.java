@@ -390,7 +390,7 @@ public class EffectAi extends SpellAbilityAi {
             String duration = sa.getParam("Duration");
             String matchStr = "Card.IsRemembered";
 
-            for (String st : sa.getParam("StaticAbilities").split(",")) {
+            for (String st : sa.getParamOrDefault("StaticAbilities", "").split(",")) {
                 Map<String, String> params = FileSection.parseToMap(sa.getSVar(st), FileSection.DOLLAR_SIGN_KV_SEPARATOR);
                 Set<StaticAbilityMode> modes = StaticAbilityMode.setValueOf(params.get("Mode"));
 
