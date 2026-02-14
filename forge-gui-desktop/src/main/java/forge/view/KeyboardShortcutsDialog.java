@@ -30,7 +30,7 @@ import net.miginfocom.swing.MigLayout;
 public class KeyboardShortcutsDialog extends FDialog {
 
     public KeyboardShortcutsDialog() {
-        super(true, true, "10");
+        super(false, true, "10");
         final Localizer localizer = Localizer.getInstance();
         setTitle(localizer.getMessage("lblKeyboardShortcuts"));
         setSize(500, 600);
