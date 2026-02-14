@@ -364,6 +364,7 @@ public class ComputerUtilAbility {
                 if (source.isInPlay() && source.hasSVar("EndOfTurnLeavePlay")) {
                     p += 1;
                 }
+                // avoid cards AI is bad at
                 if (ComputerUtilCard.isCardRemAIDeck(sa.getOriginalHost() != null ? sa.getOriginalHost() : source)) {
                     p -= 10;
                 }
