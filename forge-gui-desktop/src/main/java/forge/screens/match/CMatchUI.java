@@ -195,12 +195,7 @@ public final class CMatchUI
         this.myDocs.put(EDocID.REPORT_COMBAT, cCombat.getView());
         this.myDocs.put(EDocID.REPORT_DEPENDENCIES, cDependencies.getView());
         this.myDocs.put(EDocID.REPORT_LOG, cLog.getView());
-        // Only create yield panel if experimental options are enabled
-        if (isPreferenceEnabled(FPref.YIELD_EXPERIMENTAL_OPTIONS)) {
-            this.myDocs.put(EDocID.REPORT_YIELD, getCYield().getView());
-        } else {
-            this.myDocs.put(EDocID.REPORT_YIELD, null);
-        }
+        this.myDocs.put(EDocID.REPORT_YIELD, getCYield().getView());
         this.myDocs.put(EDocID.DEV_MODE, getCDev().getView());
         this.myDocs.put(EDocID.BUTTON_DOCK, getCDock().getView());
     }
