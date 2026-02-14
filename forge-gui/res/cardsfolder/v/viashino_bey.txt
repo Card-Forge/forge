@@ -2,5 +2,5 @@ Name:Viashino Bey
 ManaCost:2 R R
 Types:Creature Lizard
 PT:4/3
-S:Mode$ AttackRequirement | ValidCard$ Creature.YouCtrl | ValidAttacker$ Card.Self | Description$ If this creature attacks, all creatures you control attack if able.
+S:Mode$ AttackRequirement | ValidCard$ Card.Self | ValidAttacker$ Creature.YouCtrl | Description$ If this creature attacks, all creatures you control attack if able.
 Oracle:If this creature attacks, all creatures you control attack if able.
