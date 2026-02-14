@@ -536,11 +536,14 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         if (groupCount < 5) {
             return false;
         }
-        // Badge region matches drawGroupCountBadge positioning
+        // Mouse coordinates are container-relative (from PlayArea), so use
+        // getCardX()/getCardY() which convert panel-internal offsets to
+        // container coordinates (getX() + cardXOffset).
+        int badgeX = getCardX() + 2;
+        int badgeY = getCardY() + 2;
+        // Use generous hit area to cover the font-metrics-based badge size
         int badgeWidth = Math.max(30, cardWidth / 3);
-        int badgeHeight = Math.max(18, cardHeight / 8);
-        int badgeX = cardXOffset + 2;
-        int badgeY = cardYOffset + 2;
+        int badgeHeight = Math.max(20, cardHeight / 6);
         return mouseX >= badgeX && mouseX <= badgeX + badgeWidth
             && mouseY >= badgeY && mouseY <= badgeY + badgeHeight;
     }
