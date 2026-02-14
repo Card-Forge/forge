@@ -163,7 +163,7 @@ Router-specific guides: [portforward.com/router.htm](https://portforward.com/rou
 
 Share the external IP shown on that page with the client. Remember the client needs to enter it as **`IP:36743`** (e.g., `203.0.113.45:36743`).
 
-Here's how a typical network topology might look, when playing with through Firewall and Port Forwarding:
+Here's how a typical network topology might look, when playing through Firewall and Port Forwarding:
 ![netplay](netplay.png)
 
 ## VPN / Software-Defined Networks
