@@ -920,11 +920,17 @@ public final class CardEdition implements Comparable<CardEdition> {
             return baseResult == null ? aliasToEdition.get(code) : baseResult;
         }
 
-        public Iterable<CardEdition> getOrderedEditions() {
+        public Iterable<CardEdition> getOrderedEditions(boolean latestFirst) {
             List<CardEdition> res = Lists.newArrayList(this);
             Collections.sort(res);
-            Collections.reverse(res);
+            if (latestFirst) {
+                Collections.reverse(res);
+            }
             return res;
+        }
+
+        public Iterable<CardEdition> getOrderedEditions() {
+            return getOrderedEditions(true);
         }
 
         public Iterable<CardEdition> getPrereleaseEditions() {
