@@ -25336,7 +25336,7 @@
     "name": "Toggo and Krark",
     "sprite": "sprites/enemy/humanoid/goblin/goblin_4.atlas",
     "deck": [
-      "decks/legends/toggo_and_krark.dck"
+      "decks/legends/krark_and_toggo.dck"
     ],
     "ai": "",
     "speed": 60,
