@@ -46,6 +46,7 @@ import forge.game.cost.*;
 import forge.game.keyword.Keyword;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseType;
+import forge.game.player.GameLossReason;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerCollection;
@@ -416,6 +417,15 @@ public class AiController {
         return spellAbility;
     }
 
+    private boolean wouldLoseWithShanid() {
+        if (ComputerUtilCard.isNonDisabledCardInPlay(player, "Shanid, Sleepers' Scourge")
+            && ((player.getLife() == 1 && player.canLoseLife() && !player.cantLoseForZeroOrLessLife())
+                || (player.getCardsIn(ZoneType.Library).size() == 0 && !player.cantLoseCheck(GameLossReason.Milled)))) {
+            return true;
+        }
+        return false;
+    }
+
     private CardCollection filterLandsToPlay(CardCollection landList) {
         final CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
         CardCollection nonLandList = CardLists.filter(hand, CardPredicates.NON_LANDS);
@@ -447,10 +457,11 @@ public class AiController {
         landList = CardLists.filter(landList, c -> {
             String name = c.getName();
             CardCollectionView battlefield = player.getCardsIn(ZoneType.Battlefield);
-            if (c.getType().isLegendary() && !name.equals("Flagstones of Trokair")) {
-                if (battlefield.anyMatch(CardPredicates.nameEquals(name))) {
+            if (c.getType().isLegendary()) {
+                if (!name.equals("Flagstones of Trokair") && battlefield.anyMatch(CardPredicates.nameEquals(name))) {
                     return false;
                 }
+                if (wouldLoseWithShanid()) return false;
             }
 
             final CardCollectionView hand1 = player.getCardsIn(ZoneType.Hand);
@@ -982,6 +993,9 @@ public class AiController {
             }
         }
         if (sa.isSpell()) {
+            if (card.getType().isLegendary() && wouldLoseWithShanid()) {
+                return AiPlayDecision.CurseEffects;
+            }
             return canPlaySpellOrLandBasic(card, sa);
         }
 
