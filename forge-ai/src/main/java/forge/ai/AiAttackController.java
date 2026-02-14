@@ -562,7 +562,8 @@ public class AiAttackController {
 
                     Integer bandingMax = ObjectUtils.firstNonNull(attackMax, restrict.getDefenderMax().get(defender));
 
-                    if (bandingMax == null || bandingMax > combat.getAttackers().size()) {
+                    if ((attackMax == null || attackMax > combat.getAttackers().size()) &&
+                            (bandingMax == null || bandingMax > combat.getAttackersOf(defender).size())) {
                         if (CombatUtil.canAttack(c, defender)) {
                             combat.addAttacker(c, defender, combat.getBandOfAttacker(bestBand));
                         }
