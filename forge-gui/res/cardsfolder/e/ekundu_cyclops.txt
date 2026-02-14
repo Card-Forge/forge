@@ -2,5 +2,5 @@ Name:Ekundu Cyclops
 ManaCost:3 R
 Types:Creature Cyclops
 PT:3/4
-K:If a creature you control attacks, CARDNAME also attacks if able.
-Oracle:If a creature you control attacks, Ekundu Cyclops also attacks if able.
+S:Mode$ AttackRequirement | ValidCard$ Card.Self | ValidAttacker$ Creature.YouCtrl | Description$ If a creature you control attacks, this creature also attacks if able.
+Oracle:If a creature you control attacks, this creature also attacks if able.
