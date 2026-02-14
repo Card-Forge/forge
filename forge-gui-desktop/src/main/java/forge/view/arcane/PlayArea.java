@@ -93,15 +93,14 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         this.mirror = mirror;
         this.model = player;
         this.zone = zone;
-        this.makeTokenRow = FModel.getPreferences().getPrefBoolean(FPref.UI_TOKENS_IN_SEPARATE_ROW);
-        this.stackCreatures = FModel.getPreferences().getPrefBoolean(FPref.UI_STACK_CREATURES);
         updateGroupScope();
     }
 
     private void updateGroupScope() {
         String groupScope = FModel.getPreferences().getPref(FPref.UI_GROUP_PERMANENTS);
-        this.groupTokensAndCreatures = "Tokens & Creatures".equals(groupScope) || "All Permanents".equals(groupScope);
-        this.groupAll = "All Permanents".equals(groupScope);
+        this.stackCreatures = "Stack Creatures".equals(groupScope);
+        this.groupTokensAndCreatures = "Group Creatures/Tokens".equals(groupScope) || "Group All Permanents".equals(groupScope);
+        this.groupAll = "Group All Permanents".equals(groupScope);
     }
 
     private CardStackRow collectAllLands(List<CardPanel> remainingPanels) {
@@ -463,6 +462,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     @Override
     public final void doLayout() {
+        this.makeTokenRow = FModel.getPreferences().getPrefBoolean(FPref.UI_TOKENS_IN_SEPARATE_ROW);
         updateGroupScope();
         blockerAssignments = buildBlockerAssignments();
         final Rectangle rect = this.getScrollPane().getVisibleRect();

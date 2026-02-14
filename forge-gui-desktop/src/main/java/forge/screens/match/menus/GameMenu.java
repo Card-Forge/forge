@@ -51,7 +51,8 @@ public final class GameMenu {
         menu.addSeparator();
         menu.add(getMenuItem_TargetingArcs());
         menu.add(new CardOverlaysMenu(matchUI).getMenu());
-        menu.add(getSubmenu_GroupPermanents());
+        menu.add(getSubmenu_StackGroupPermanents());
+        menu.add(getMenuItem_TokensSeparateRow());
         menu.add(getMenuItem_AutoYields());
         menu.addSeparator();
         menu.add(getMenuItem_ViewDeckList());
@@ -208,21 +209,46 @@ public final class GameMenu {
         return e -> matchUI.viewDeckList();
     }
 
-    private SkinnedMenu getSubmenu_GroupPermanents() {
+    private SkinnedMenu getSubmenu_StackGroupPermanents() {
         final Localizer localizer = Localizer.getInstance();
-        final SkinnedMenu submenu = new SkinnedMenu(localizer.getMessage("cbpGroupPermanents"));
+        final SkinnedMenu submenu = new SkinnedMenu(localizer.getMessage("cbpStackGroupPermanents"));
         final ButtonGroup group = new ButtonGroup();
         final String current = prefs.getPref(FPref.UI_GROUP_PERMANENTS);
 
-        final String[] options = {"Off", "Tokens & Creatures", "All Permanents"};
-        for (String option : options) {
-            SkinnedRadioButtonMenuItem item = new SkinnedRadioButtonMenuItem(option);
-            item.setSelected(option.equals(current));
-            item.addActionListener(getGroupPermanentsAction(option));
+        final String[] options = {"Default", "Stack Creatures", "Group Creatures/Tokens", "Group All Permanents"};
+        final String[] tooltips = {
+            "Creatures are never grouped or stacked. Identical lands and tokens are stacked (up to 5). Identical artifacts and enchantments are stacked (up to 4). Stacking fans cards out so each copy is partially visible.",
+            "Same as Default, but creatures are also stacked (up to 4).",
+            "Group identical creatures and tokens (5 or more) into a single compact pile with a count badge.",
+            "Group all identical permanents (5 or more) into a single compact pile with a count badge."
+        };
+        for (int i = 0; i < options.length; i++) {
+            SkinnedRadioButtonMenuItem item = new SkinnedRadioButtonMenuItem(options[i]);
+            item.setToolTipText(tooltips[i]);
+            item.setSelected(options[i].equals(current));
+            item.addActionListener(getGroupPermanentsAction(options[i]));
             group.add(item);
             submenu.add(item);
         }
         return submenu;
+    }
+
+    private SkinnedCheckBoxMenuItem getMenuItem_TokensSeparateRow() {
+        final Localizer localizer = Localizer.getInstance();
+        SkinnedCheckBoxMenuItem menuItem = new SkinnedCheckBoxMenuItem(localizer.getMessage("cbpTokensSeparateRow"));
+        menuItem.setToolTipText("Show tokens in their own row instead of mixed with creatures.");
+        menuItem.setState(prefs.getPrefBoolean(FPref.UI_TOKENS_IN_SEPARATE_ROW));
+        menuItem.addActionListener(e -> {
+            final boolean enabled = !prefs.getPrefBoolean(FPref.UI_TOKENS_IN_SEPARATE_ROW);
+            prefs.setPref(FPref.UI_TOKENS_IN_SEPARATE_ROW, enabled);
+            prefs.save();
+            SwingUtilities.invokeLater(() -> {
+                for (final VField f : matchUI.getFieldViews()) {
+                    f.getTabletop().doLayout();
+                }
+            });
+        });
+        return menuItem;
     }
 
     private ActionListener getGroupPermanentsAction(final String value) {
