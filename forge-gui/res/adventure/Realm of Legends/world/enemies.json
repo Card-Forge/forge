@@ -3934,6 +3934,11 @@
         "itemName": "Ceremonial Knife"
       },
       {
+        "type": "item",
+        "count": 1,
+        "itemName": "Bowl of Ancient Blood"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Sengir, the Dark Baron",
@@ -4961,6 +4966,11 @@
         "itemName": "Arguel's Amulet"
       },
       {
+        "type": "item",
+        "count": 1,
+        "itemName": "Arguel's Bloody Helm"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "High Marshal Arguel",
@@ -5030,6 +5040,11 @@
         "type": "item",
         "count": 1,
         "itemName": "Basilica Skullbomb"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "White Cartouche of Victory"
       },
       {
         "type": "card",
@@ -6118,7 +6133,7 @@
   },
   {
     "name": "Estrid",
-    "sprite": "sprites/enemy/humanoid/cleric/cleric.atlas",
+    "sprite": "sprites/enemy/humanoid/human/cleric.atlas",
     "deck": [
       "decks/legends/estrid.dck"
     ],
@@ -7875,6 +7890,11 @@
         "itemName": "Chimeric Coils"
       },
       {
+        "type": "item",
+        "count": 1,
+        "itemName": "The Luckiest Clover"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Gargos, Vicious Watcher"
@@ -8226,6 +8246,11 @@
         "type": "item",
         "count": 1,
         "itemName": "Surgical Skullbomb"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Blue Cartouche of Victory"
       },
       {
         "type": "card",
@@ -9594,6 +9619,11 @@
         "itemName": "Dross Skullbomb"
       },
       {
+        "type": "item",
+        "count": 1,
+        "itemName": "Black Cartouche of Victory"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Sheoldred, the Apocalypse"
@@ -10313,6 +10343,11 @@
         "itemName": "Amulet of Telepathy"
       },
       {
+        "type": "item",
+        "count": 1,
+        "itemName": "Tome of Temporal Repair"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Teferi, Temporal Archmage"
@@ -10807,6 +10842,11 @@
         "itemName": "Furnace Skullbomb"
       },
       {
+        "type": "item",
+        "count": 1,
+        "itemName": "Red Cartouche of Victory"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Urabrask"
@@ -10885,6 +10925,11 @@
         "type": "item",
         "count": 1,
         "itemName": "Maze Skullbomb"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Green Cartouche of Victory"
       },
       {
         "type": "card",
@@ -11341,6 +11386,11 @@
         "type": "item",
         "count": 1,
         "itemName": "Lookout's Harness"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Victory Standard"
       },
       {
         "type": "card",
@@ -11868,7 +11918,7 @@
     "name": "Queen Marchesa",
     "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz3.atlas",
     "deck": [
-      "decks/legends/queen_marchesa.dck"
+      "decks/legends/marchesa.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -13067,6 +13117,11 @@
         "itemName": "Ghoulcaller Greaves"
       },
       {
+        "type": "item",
+        "count": 1,
+        "itemName": "Warding Statue Arms"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Wilhelt, the Rotcleaver"
@@ -13258,6 +13313,11 @@
         "itemName": "Pirate Hat in Hand"
       },
       {
+        "type": "item",
+        "count": 1,
+        "itemName": "Map to the Hostages"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Admiral Brass, Unsinkable"
@@ -13443,6 +13503,11 @@
         "type": "item",
         "count": 1,
         "itemName": "Poisoner's Glove"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Cheese of Bees"
       },
       {
         "type": "card",
@@ -14005,6 +14070,11 @@
         "itemName": "Kobold Boots"
       },
       {
+        "type": "item",
+        "count": 1,
+        "itemName": "One Thousand Chickens"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Prossh, Skyraider of Kher"
@@ -14533,6 +14603,11 @@
         "type": "item",
         "count": 1,
         "itemName": "Trusty Machete"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Everflowing Watering Can"
       },
       {
         "type": "card",
@@ -25888,6 +25963,11 @@
         "itemName": "Gisa's Favorite Shovel"
       },
       {
+        "type": "item",
+        "count": 1,
+        "itemName": "Warding Statue Skirt"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Gisa, the Hellraiser"
@@ -25967,6 +26047,11 @@
         "type": "item",
         "count": 1,
         "itemName": "Fleshwright Chaps"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Warding Statue Torso"
       },
       {
         "type": "card",

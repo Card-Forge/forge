@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="118">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="125">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -35,7 +35,7 @@
  </layer>
  <layer id="9" name="Clutter" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJzlVtsNwjAMtMQ2nSIdAfbgOR878ZiA5iPqcdhJ7PCBxElVU1r7coeTWOR3sZ1EdtN6197xWHv28u2X6wB3BP5WxhznRYm7bj4113QyX4/uzKHxsGZNJ3NwrMVfOPPF+UvMI4k80/qd5ZGm2/IBeVl3iTnPIpf5/ZsoeB4lF+rG+Wn+RKDl65lfy/MWLL0tsOdeaP+vF5E4rtkIL3ruAdZQRPeI57hu8viWRO7Jn2PE84zjMv/T7IvPKJ5HED1LMtBzL3hteT2P+s21HfE8UuOoN1qjnhrXzlf0rNdv3ON7PNfOV4zr8Rvz57Hld62X4HyteWvvrPqu9RIWt+a3pwasHrClGf2OrBmrB+zpBb/Zc9T6RA2RPbzGz2ML0T18FCMe/xNeuci7/g==
+   eJzlVtsNwjAMtMQ2TJGKCWAPnvMxEhKPCag/rB7GTmLnB4mTqhra+HIXNzHR72K7Jtqtl7v1TMfW7yjffr4OcEfgfxLrcVHIuOvqW3NNp+br0c0cFo/WbOnUHHqsxy+cfOn8MuZZiF5lec/zyNLt+YC8WreMOU9El+mTPws9D8mFunF+DOH3dPdA++7l0fNred6Cp7cF7XkU1vpGgJ5HoGv2XogeJZYjW2dYQ8d57qfg/Ec8x++G44zuUc8ZojuKbJ0xRtZ6xHO91lF+9ln4I8B1ZmQ8z9Q4rnPmm0a9PX5b5yvuJ71+4x7fU+PW+Yq8PX5jfo5vG1tzrZfQ+VqeW8+Y16qxWi/hcVt+R2rA6wFbmtHvzHni9YA9vWD2/KrxM3r6wMx+VuPXsYfsHj6KEY//CW8XT8ha
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -105,7 +105,7 @@
     <property name="teleportObjectId" value="153"/>
    </properties>
   </object>
-  <object id="91" template="../../obj/treasure.tx" x="81.25" y="193.417">
+  <object id="91" template="../../obj/treasure.tx" x="82.5833" y="175.417">
    <properties>
     <property name="reward">[
   {
@@ -150,7 +150,7 @@
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Hivestone&quot;, &quot;editions&quot;: [ &quot;TSR&quot; ], &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
-  <object id="100" template="../../../../common/maps/obj/dialog.tx" x="237.313" y="390.301" width="53.4917" height="58.2022" rotation="268.171" visible="1">
+  <object id="100" template="../../../../common/maps/obj/dialog.tx" x="180.988" y="393.926" width="53.4917" height="58.2022" rotation="359.294" visible="1">
    <properties>
     <property name="dialog">[
 {
@@ -163,7 +163,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="101" template="../../../../common/maps/obj/collision.tx" x="402.138" y="319.985" width="32.75" height="32.9323"/>
+  <object id="101" template="../../../../common/maps/obj/collision.tx" x="413.229" y="320.349" width="32.75" height="32.9323"/>
   <object id="102" template="../../../../common/maps/obj/collision.tx" x="372.244" y="270.162" width="32.75" height="32.9323"/>
   <object id="103" template="../../../../common/maps/obj/collision.tx" x="337.075" y="222.098" width="32.75" height="32.9323"/>
   <object id="104" template="../../../../common/maps/obj/collision.tx" x="291.941" y="172.861" width="32.75" height="32.9323"/>
@@ -180,5 +180,12 @@
   <object id="115" template="../../../../common/maps/obj/collision.tx" x="92.0631" y="62.6644" width="67.333" height="32.9323"/>
   <object id="116" template="../../../../common/maps/obj/collision.tx" x="45.171" y="178.723" width="32.75" height="32.9323"/>
   <object id="117" template="../../../../common/maps/obj/collision.tx" x="14.1049" y="105.453" width="32.75" height="89.7891"/>
+  <object id="118" template="../../../../common/maps/obj/collision.tx" x="275.292" y="143.534" width="32.75" height="32.9323"/>
+  <object id="119" template="../../../../common/maps/obj/collision.tx" x="224.958" y="93.5339" width="32.75" height="32.9323"/>
+  <object id="120" template="../../../../common/maps/obj/collision.tx" x="132.625" y="235.867" width="32.75" height="32.9323"/>
+  <object id="121" template="../../../../common/maps/obj/collision.tx" x="323.125" y="190.034" width="32.75" height="32.9323"/>
+  <object id="122" template="../../../../common/maps/obj/collision.tx" x="369.625" y="237.534" width="32.75" height="32.9323"/>
+  <object id="123" template="../../../../common/maps/obj/collision.tx" x="403.125" y="287.034" width="32.75" height="32.9323"/>
+  <object id="124" template="../../../../common/maps/obj/collision.tx" x="79.2917" y="176.534" width="32.75" height="32.9323"/>
  </objectgroup>
 </map>

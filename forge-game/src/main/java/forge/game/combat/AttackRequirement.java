@@ -1,14 +1,17 @@
 package forge.game.combat;
 
 import java.util.LinkedHashMap;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityMustAttack;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
 
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -19,10 +22,10 @@ import forge.util.collect.FCollectionView;
 public class AttackRequirement {
 
     private final Map<GameEntity, Integer> defenderSpecific;
-    private final Map<Card, Integer> causesToAttack;
+    private final Multimap<Card, StaticAbility> causesToAttack;
     private final Card attacker;
 
-    public AttackRequirement(final Card attacker, final Map<Card, Integer> causesToAttack, final FCollectionView<GameEntity> possibleDefenders) {
+    public AttackRequirement(final Card attacker, final Multimap<Card, StaticAbility> causesToAttack, final FCollectionView<GameEntity> possibleDefenders) {
         this.defenderSpecific = new LinkedHashMap<>();
         this.attacker = attacker;
         this.causesToAttack = causesToAttack;
@@ -79,11 +82,10 @@ public class AttackRequirement {
     }
 
     public boolean hasRequirement() {
-        return defenderSpecific.values().stream().anyMatch(i -> i > 0 )
-                || causesToAttack.values().stream().anyMatch(i -> i > 0 );
+        return defenderSpecific.values().stream().anyMatch(i -> i > 0 ) || !causesToAttack.isEmpty();
     }
 
-    public final Map<Card, Integer> getCausesToAttack() {
+    public final Multimap<Card, StaticAbility> getCausesToAttack() {
         return causesToAttack;
     }
 
@@ -101,13 +103,13 @@ public class AttackRequirement {
 
             // check if a restriction will apply such that the requirement is no longer relevant
             if (attackers.size() != 1 || !constraints.get(attackers.entrySet().iterator().next().getKey()).getTypes().contains(AttackRestrictionType.ONLY_ALONE)) {
-                for (final Map.Entry<Card, Integer> mustAttack : causesToAttack.entrySet()) {
+                for (final Map.Entry<Card, Collection<StaticAbility>> mustAttack : causesToAttack.asMap().entrySet()) {
                     if (constraints.get(mustAttack.getKey()).getTypes().contains(AttackRestrictionType.ONLY_ALONE)) continue;
                     int max = Objects.requireNonNullElse(GlobalAttackRestrictions.getGlobalRestrictions(mustAttack.getKey().getController(), combat.getDefenders()).getMax(), Integer.MAX_VALUE);
 
                     // only count violations if the forced creature can actually attack and has no cost incurred for doing so
                     if (attackers.size() < max && !attackers.containsKey(mustAttack.getKey()) && CombatUtil.canAttack(mustAttack.getKey()) && CombatUtil.getAttackCost(defender.getGame(), mustAttack.getKey(), defender) == null) {
-                        violations += mustAttack.getValue();
+                        violations += mustAttack.getValue().size();
                     }
                 }
             }

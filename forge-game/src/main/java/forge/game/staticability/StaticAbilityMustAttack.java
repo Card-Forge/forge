@@ -13,6 +13,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.google.common.collect.Multimap;
+import com.google.common.collect.MultimapBuilder;
+
 public class StaticAbilityMustAttack {
 
     public static List<GameEntity> entitiesMustAttack(final Card attacker) {
@@ -64,5 +67,27 @@ public class StaticAbilityMustAttack {
             }
         }
         return defToAtt;
+    }
+
+    public static Multimap<Card, StaticAbility> getAttackRequirements(final Card card, Iterable<Card> other) {
+        Multimap<Card, StaticAbility> result = MultimapBuilder.hashKeys().arrayListValues().build();
+        for (final Card ca : card.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (!stAb.checkConditions(StaticAbilityMode.AttackRequirement)) {
+                    continue;
+                }
+
+                if (!stAb.matchesValidParam("ValidCard", card)) {
+                    continue;
+                }
+                for (final Card co : other) {
+                    if (stAb.matchesValidParam("ValidAttacker", co)) {
+                        result.put(co, stAb);
+                    }
+                }
+            }
+        }
+
+        return result;
     }
 }

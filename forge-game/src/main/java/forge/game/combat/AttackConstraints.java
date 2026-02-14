@@ -5,21 +5,17 @@ import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import com.google.common.collect.*;
 import forge.util.IterableUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
-import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CounterEnumType;
+import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityMustAttack;
-import forge.game.zone.ZoneType;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 
@@ -34,52 +30,17 @@ public class AttackConstraints {
     private final List<Set<GameEntity>> playerRequirements;
 
     public AttackConstraints(final Combat combat) {
-        final Game game = combat.getAttackingPlayer().getGame();
         possibleAttackers = combat.getAttackingPlayer().getCreaturesInPlay();
         possibleDefenders = combat.getDefenders();
         globalRestrictions = GlobalAttackRestrictions.getGlobalRestrictions(combat.getAttackingPlayer(), possibleDefenders);
         playerRequirements = StaticAbilityMustAttack.mustAttackSpecific(combat.getAttackingPlayer(), possibleDefenders);
 
-        // Number of "must attack" constraints on each creature with a magnet counter (equal to the number of permanents requiring that constraint).
-        int nMagnetRequirements = 0;
-        final CardCollectionView magnetAttackers = CardLists.filter(possibleAttackers, CardPredicates.hasCounter(CounterEnumType.MAGNET));
-        // Only require if a creature with a magnet counter on it attacks.
-        if (!magnetAttackers.isEmpty()) {
-            nMagnetRequirements = CardLists.getAmountOfKeyword(
-                    game.getCardsIn(ZoneType.Battlefield),
-                    "If a creature with a magnet counter on it attacks, all creatures with magnet counters on them attack if able.");
-        }
-
-        final Map<Card, Integer> attacksIfOtherAttacks = new LinkedHashMap<>();
-        for (final Card possibleAttacker : possibleAttackers) {
-            attacksIfOtherAttacks.merge(possibleAttacker, possibleAttacker.getAmountOfKeyword("If a creature you control attacks, CARDNAME also attacks if able."), Integer::sum);
-        }
-
+        // TODO extend for "SharedTurnModes"
         for (final Card possibleAttacker : possibleAttackers) {
             restrictions.put(possibleAttacker, new AttackRestriction(possibleAttacker, possibleDefenders));
 
-            final Map<Card, Integer> causesToAttack = new LinkedHashMap<>();
-            for (final Entry<Card, Integer> entry : attacksIfOtherAttacks.entrySet()) {
-                if (entry.getKey() != possibleAttacker) {
-                    causesToAttack.merge(entry.getKey(), entry.getValue(), Integer::sum);
-                }
-            }
-
-            // Number of "all must attack" requirements on this attacker
-            final int nAllMustAttack = possibleAttacker.getAmountOfKeyword("If CARDNAME attacks, all creatures you control attack if able.");
-            for (final Card c : possibleAttackers) {
-                if (c != possibleAttacker) {
-                    causesToAttack.merge(c, nAllMustAttack, Integer::sum);
-                }
-            }
-
-            if (possibleAttacker.getCounters(CounterEnumType.MAGNET) > 0) {
-                for (final Card c : magnetAttackers) {
-                    if (c != possibleAttacker) {
-                        causesToAttack.merge(c, nMagnetRequirements, Integer::sum);
-                    }
-                }
-            }
+            final Multimap<Card, StaticAbility> causesToAttack = StaticAbilityMustAttack.getAttackRequirements(possibleAttacker,
+                    possibleAttackers.stream().filter(p -> !p.equals(possibleAttacker)).collect(Collectors.toList()));
 
             final AttackRequirement r = new AttackRequirement(possibleAttacker, causesToAttack, possibleDefenders);
             requirements.put(possibleAttacker, r);
@@ -240,9 +201,9 @@ public class AttackConstraints {
 
             if (!requirement.getCausesToAttack().isEmpty()) {
                 final List<Attack> clonedReqs = deepClone(reqs);
-                for (final Entry<Card, Integer> causesToAttack : requirement.getCausesToAttack().entrySet()) {
+                for (final Entry<Card, Collection<StaticAbility>> causesToAttack : requirement.getCausesToAttack().asMap().entrySet()) {
                     for (final Attack a : findAll(reqs, causesToAttack.getKey())) {
-                        a.requirements += causesToAttack.getValue();
+                        a.requirements += causesToAttack.getValue().size();
                     }
                 }
                 // if maximum < no of possible attackers, try both with and without this creature

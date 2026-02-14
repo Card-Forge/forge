@@ -277,6 +277,8 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         if (zt == zoneType) {
             return;
         }
-        cardsAddedThisTurn.put(zt, CardCopyService.getLKICopy(c));
+        Card lki = CardCopyService.getLKICopy(c);
+        cardsAddedThisTurn.put(zt, lki);
+        enteredFromThisTurn.put(lki, zt);
     }
 }

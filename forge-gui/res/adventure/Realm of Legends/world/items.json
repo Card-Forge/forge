@@ -569,6 +569,108 @@
     "questItem": true
   },
   {
+    "name": "Bowl of Ancient Blood",
+    "description": "Able to revive an elder vampire. Return to the swamp capitol for a reward.",
+    "iconName": "BowlofAncientBlood",
+    "questItem": true
+  }, 
+  {
+    "name": "Arguel's Bloody Helm",
+    "description": "Proof of the high marshal's death. Return to the plains capitol for a reward.",
+    "iconName": "ArguelsBloodyHelm",
+    "questItem": true
+  }, 
+  {
+    "name": "White Cartouche of Victory",
+    "description": "Proof you defeated Elesh Norn. Return to the plains capitol for a reward.",
+    "iconName": "WhiteCartouche",
+    "questItem": true
+  }, 
+  {
+    "name": "Warding Statue Torso",
+    "description": "One third of what you need to return to the swamp capitol for a reward.",
+    "iconName": "WardingStatueTorso",
+    "questItem": true
+  }, 
+  {
+    "name": "Warding Statue Skirt",
+    "description": "One third of what you need to return to the swamp capitol for a reward.",
+    "iconName": "WardingStatueSkirt",
+    "questItem": true
+  }, 
+  {
+    "name": "Warding Statue Arms",
+    "description": "One third of what you need to return to the swamp capitol for a reward.",
+    "iconName": "WardingStatueArms",
+    "questItem": true
+  }, 
+  {
+    "name": "Map to the Hostages",
+    "description": "Shows how to rescue some prisoners. Return to the island capitol for a reward.",
+    "iconName": "MaptotheHostages",
+    "questItem": true
+  }, 
+  {
+    "name": "The Luckiest Clover",
+    "description": "Feels gross, but somehow intact. Return to the forest capitol for a reward.",
+    "iconName": "TheLuckiestClover",
+    "questItem": true
+  }, 
+  {
+    "name": "Cheese of Bees",
+    "description": "Smells delicious and attracts tons of bees. Return to the forest capitol for a reward.",
+    "iconName": "CheeseofBees",
+    "questItem": true
+  }, 
+  {
+    "name": "One Thousand Chickens",
+    "description": "Very loud and delicious. Return to the mountain capitol for a reward.",
+    "iconName": "OneThousandChickens",
+    "questItem": true
+  }, 
+  {
+    "name": "Blue Cartouche of Victory",
+    "description": "Proof you defeated Jin-Gitaxias. Return to the island capitol for a reward.",
+    "iconName": "BlueCartouche",
+    "questItem": true
+  }, 
+  {
+    "name": "Everflowing Watering Can",
+    "description": "Great for agriculture. Return to the plains capitol for a reward.",
+    "iconName": "EverflowingWateringCan",
+    "questItem": true
+  }, 
+  {
+    "name": "Black Cartouche of Victory",
+    "description": "Proof you defeated Sheoldred. Return to the swamp capitol for a reward.",
+    "iconName": "BlackCartouche",
+    "questItem": true
+  }, 
+  {
+    "name": "Tome of Temporal Repair",
+    "description": "Shows how to fix time distortions. Return to the island capitol for a reward.",
+    "iconName": "TomeofTemporalRepair",
+    "questItem": true
+  }, 
+  {
+    "name": "Red Cartouche of Victory",
+    "description": "Proof you defeated Urabrask. Return to the mountain capitol for a reward.",
+    "iconName": "RedCartouche",
+    "questItem": true
+  }, 
+  {
+    "name": "Green Cartouche of Victory",
+    "description": "Proof you defeated Vorinclex. Return to the forest capitol for a reward.",
+    "iconName": "GreenCartouche",
+    "questItem": true
+  }, 
+  {
+    "name": "Victory Standard",
+    "description": "The victory is yours now. Return to the mountain capitol for a reward.",
+    "iconName": "VictoryStandard",
+    "questItem": true
+  }, 
+  {
     "name": "Colorless rune",
     "usableOnWorldMap": true,
     "equipmentSlot": "Ability2",
@@ -3405,7 +3507,8 @@
     "equipmentSlot": "Body",
     "iconName": "NomadArmor",
     "effect": {
-        "changeStartCards": -1,
+      "lifeModifier": 2,       
+      "changeStartCards": -1,
         "startBattleWithCard": [
         "Nomad Stadium|ODY"
      ]
@@ -3428,6 +3531,7 @@
     "equipmentSlot": "Body",
     "iconName": "CabalArmor",
     "effect": {
+        "lifeModifier": 2,  
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Cabal Pit|ODY"
@@ -3465,6 +3569,7 @@
     "equipmentSlot": "Body",
     "iconName": "CentaurArmor",
     "effect": {
+        "lifeModifier": 2,  
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Centaur Garden|ODY"
@@ -3582,6 +3687,7 @@
     "equipmentSlot": "Body",
     "iconName": "BarbarianArmor",
     "effect": {
+        "lifeModifier": 2,  
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Barbarian Ring|ODY"
@@ -3716,6 +3822,7 @@
     "equipmentSlot": "Body",
     "iconName": "CephalidArmor",
     "effect": {
+        "lifeModifier": 2,  
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Cephalid Coliseum|ODY"
