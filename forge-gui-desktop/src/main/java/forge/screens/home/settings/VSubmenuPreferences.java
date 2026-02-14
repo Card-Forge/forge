@@ -573,7 +573,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
      * into characters and (dis)assembly of keycode stack.
      */
     @SuppressWarnings("serial")
-    public class KeyboardShortcutField extends SkinnedTextField {
+    public static class KeyboardShortcutField extends SkinnedTextField {
         private String codeString;
 
         /**
@@ -648,7 +648,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
                 }
             }
 
-            this.setText(StringUtils.join(displayText, ' '));
+            this.setText(StringUtils.join(displayText, '+'));
         }
     }
 

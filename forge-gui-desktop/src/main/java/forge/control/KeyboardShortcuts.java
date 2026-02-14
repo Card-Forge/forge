@@ -13,6 +13,7 @@ import javax.swing.ActionMap;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -27,6 +28,7 @@ import forge.screens.home.settings.VSubmenuPreferences.KeyboardShortcutField;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.special.CardZoomer;
 import forge.util.Localizer;
+import forge.view.KeyboardShortcutsDialog;
 
 /** 
  * Consolidates keyboard shortcut assembly into one location
@@ -36,8 +38,14 @@ import forge.util.Localizer;
  * and you're done.
  */
 public class KeyboardShortcuts {
+    private static List<Shortcut> cachedShortcuts;
+
     public static List<Shortcut> getKeyboardShortcuts() {
         return attachKeyboardShortcuts(null);
+    }
+
+    public static List<Shortcut> getCachedShortcuts() {
+        return cachedShortcuts != null ? cachedShortcuts : getKeyboardShortcuts();
     }
 
     /**
@@ -200,6 +208,17 @@ public class KeyboardShortcuts {
             }
         };
 
+        /** Show keyboard shortcuts dialog. */
+        final Action actShowHotkeys = new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
+                // Defer so the triggering key event is fully consumed before the dialog opens,
+                // preventing it from being captured by a KeyboardShortcutField.
+                SwingUtilities.invokeLater(() -> new KeyboardShortcutsDialog().setVisible(true));
+            }
+        };
+
         final Localizer localizer = Localizer.getInstance();
         //========== Instantiate shortcut objects and add to list.
         list.add(new Shortcut(FPref.SHORTCUT_SHOWSTACK, localizer.getMessage("lblSHORTCUT_SHOWSTACK"), actShowStack, am, im));
@@ -215,6 +234,8 @@ public class KeyboardShortcuts {
         list.add(new Shortcut(FPref.SHORTCUT_MACRO_RECORD, localizer.getMessage("lblSHORTCUT_MACRO_RECORD"), actMacroRecord, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_MACRO_NEXT_ACTION, localizer.getMessage("lblSHORTCUT_MACRO_NEXT_ACTION"), actMacroNextAction, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_CARD_ZOOM, localizer.getMessage("lblSHORTCUT_CARD_ZOOM"), actZoomCard, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_SHOWHOTKEYS, localizer.getMessage("lblSHORTCUT_SHOWHOTKEYS"), actShowHotkeys, am, im));
+        cachedShortcuts = list;
         return list;
     } // End initMatchShortcuts()
 
