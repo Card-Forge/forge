@@ -32,21 +32,17 @@ public class GlobalAttackRestrictions {
             return false;
         }
 
-        for (final GameEntity defender : attackers.values()) {
+        return attackers.values().stream().distinct().noneMatch(defender -> {
             final Integer max = defenderMax.get(defender);
             if (max == null) {
-                continue;
+                return false;
             }
             if (max == 0) {
                 // there's at least one creature attacking this defender
-                return false;
+                return true;
             }
-            if (attackers.values().stream().filter(attDef -> attDef == defender).count() > max) {
-                return false;
-            }
-        }
-
-        return true;
+            return attackers.values().stream().filter(attDef -> attDef == defender).count() > max;
+        });
     }
 
     /**
