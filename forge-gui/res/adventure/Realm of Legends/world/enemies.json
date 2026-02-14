@@ -61587,6 +61587,36 @@
     ]
   },
   {
+    "name": "Hidetsugu",
+    "sprite": "sprites/enemy/fiend/devil.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Kardur",
+    "sprite": "sprites/enemy/fiend/devil_2.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
     "name": "Mysterious Mage",
     "sprite": "sprites/enemy/humanoid/conjurer.atlas",
     "deck": [
