@@ -1153,7 +1153,6 @@ public class AttachAi extends SpellAbilityAi {
                 totPower += AbilityUtils.calculateAmount(attachSource, stAbility.getParam("AddPower"), stAbility);
 
                 grantingAbilities |= stAbility.hasParam("AddAbility");
-                grantingExtraBlock |= stAbility.hasParam("CanBlockAmount") || stAbility.hasParam("CanBlockAny");
 
                 String kws = stAbility.getParam("AddKeyword");
                 if (kws != null) {

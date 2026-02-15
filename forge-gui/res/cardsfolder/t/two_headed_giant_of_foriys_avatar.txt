@@ -3,5 +3,6 @@ ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+1/-4
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddKeyword$ Menace | Description$ Creatures you control have menace. (They can't be blocked except by two or more creatures.)
-S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | CanBlockAmount$ 1 | Description$ Each creature you control can block an additional creature each combat.
+
+S:Mode$ CanBlockAmount | EffectZone$ Command | ValidCard$ Creature.YouCtrl | Amount$ 1 | Description$ Each creature you control can block an additional creature each combat.
 Oracle:Hand +1, life -4\nCreatures you control have menace. (They can't be blocked except by two or more creatures.)\nEach creature you control can block an additional creature each combat.

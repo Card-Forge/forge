@@ -3,5 +3,6 @@ ManaCost:3 W
 Types:Creature Human Nomad
 PT:1/4
 A:AB$ Pump | Cost$ W | Defined$ Self | NumDef$ +1 | SpellDescription$ CARDNAME gets +0/+1 until end of turn.
-A:AB$ Pump | Cost$ 2 | Defined$ Self | CanBlockAmount$ 1 | SpellDescription$ CARDNAME can block an additional creature this turn.
+A:AB$ Effect | Cost$ 2 | Duration$ UntilHostLeavesPlayOrEOT | StaticAbilities$ DBBlock | AILogic$ Pump | StackDescription$ SpellDescription | SpellDescription$ CARDNAME can block an additional creature this turn.
+SVar:DBBlock:Mode$ CanBlockAmount | ValidCard$ Card.EffectSource | Amount$ 1 | Description$ EFFECTSOURCE can block an additional creature this turn.
 Oracle:{W}: Luminous Guardian gets +0/+1 until end of turn.\n{2}: Luminous Guardian can block an additional creature this turn.

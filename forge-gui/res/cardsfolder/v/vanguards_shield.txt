@@ -2,5 +2,6 @@ Name:Vanguard's Shield
 ManaCost:2
 Types:Artifact Equipment
 K:Equip:3
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | CanBlockAmount$ 1 | AddToughness$ 3 | Description$ Equipped creature gets +0/+3 and can block an additional creature each combat.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddToughness$ 3 | Description$ Equipped creature gets +0/+3 and can block an additional creature each combat.
+S:Mode$ CanBlockAmount | ValidCard$ Creature.EquippedBy | Amount$ 1 | Secondary$ True | Description$ Equipped creature can block an additional creature each combat.
 Oracle:Equipped creature gets +0/+3 and can block an additional creature each combat.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)

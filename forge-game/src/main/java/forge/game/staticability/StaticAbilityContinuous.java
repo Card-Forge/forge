@@ -875,13 +875,6 @@ public final class StaticAbilityContinuous {
                 if (params.containsKey("Goad")) {
                     affectedCard.addGoad(se.getTimestamp(), hostCard.getController());
                 }
-                if (params.containsKey("CanBlockAny")) {
-                    affectedCard.addCanBlockAny(se.getTimestamp());
-                }
-                if (params.containsKey("CanBlockAmount")) {
-                    int v = AbilityUtils.calculateAmount(hostCard, params.get("CanBlockAmount"), stAb, true);
-                    affectedCard.addCanBlockAdditional(v, se.getTimestamp());
-                }
             }
 
             if (controllerMayPlay && (mayPlayLimit == null || stAb.getMayPlayTurn() < mayPlayLimit)) {

@@ -188,8 +188,6 @@ public enum TrackableProperty {
     HasStorm(TrackableTypes.BooleanType),
     HasWard(TrackableTypes.BooleanType),
     HasWither(TrackableTypes.BooleanType),
-    BlockAdditional(TrackableTypes.IntegerType),
-    BlockAny(TrackableTypes.BooleanType),
     AbilityText(TrackableTypes.StringType),
     NonAbilityText(TrackableTypes.StringType),
     FoilIndex(TrackableTypes.IntegerType),

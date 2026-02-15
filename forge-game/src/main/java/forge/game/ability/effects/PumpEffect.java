@@ -76,14 +76,6 @@ public class PumpEffect extends SpellAbilityEffect {
             gameCard.updatePTforView();
         }
 
-        if (sa.hasParam("CanBlockAny")) {
-            gameCard.addCanBlockAny(timestamp);
-        }
-        if (sa.hasParam("CanBlockAmount")) {
-            int v = AbilityUtils.calculateAmount(host, sa.getParam("CanBlockAmount"), sa, true);
-            gameCard.addCanBlockAdditional(v, timestamp);
-        }
-
         if (sa.hasParam("LeaveBattlefield")) {
             addLeaveBattlefieldReplacement(gameCard, sa, sa.getParam("LeaveBattlefield"));
         }
@@ -102,17 +94,12 @@ public class PumpEffect extends SpellAbilityEffect {
                     host.removeGainControlTargets(gameCard);
 
                     gameCard.removePTBoost(timestamp, 0);
-                    boolean updateText = gameCard.removeCanBlockAny(timestamp);
-                    updateText |= gameCard.removeCanBlockAdditional(timestamp);
 
                     if (keywords.size() > 0) {
                         gameCard.removeHiddenExtrinsicKeywords(timestamp, 0);
                         gameCard.removeChangedCardKeywords(timestamp, 0);
                     }
                     gameCard.updatePTforView();
-                    if (updateText) {
-                        gameCard.updateAbilityTextForView();
-                    }
 
                     game.fireEvent(new GameEventCardStatsChanged(gameCard));
                 }
@@ -235,21 +222,6 @@ public class PumpEffect extends SpellAbilityEffect {
                 sb.append(keywords.size() > 2 && i+1 != keywords.size() ? ", " : "");
                 sb.append(keywords.size() == 2 && i == 0 ? " " : "");
                 sb.append(i+2 == keywords.size() ? "and " : "");
-            }
-
-            if (sa.hasParam("CanBlockAny")) {
-                if (gets || gains) {
-                    sb.append(" and ");
-                }
-                sb.append("can block any number of creatures");
-            } else if (sa.hasParam("CanBlockAmount")) {
-                if (gets || gains) {
-                    sb.append(" and ");
-                }
-                String n = sa.getParam("CanBlockAmount");
-                sb.append("can block an additional ");
-                sb.append("1".equals(n) ? "creature" : Lang.nounWithNumeral(n, "creature"));
-                sb.append(" each combat");
             }
 
             String duration = sa.getParam("Duration");

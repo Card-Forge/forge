@@ -3,5 +3,6 @@ ManaCost:3 U
 Types:Creature Chimera
 PT:1/5
 K:Flying
-A:AB$ Pump | Cost$ 1 W | Defined$ Self | CanBlockAmount$ 1 | SpellDescription$ CARDNAME can block an additional creature this turn.
+A:AB$ Effect | Cost$ 1 W | Duration$ UntilHostLeavesPlayOrEOT | StaticAbilities$ DBBlock | AILogic$ Pump | StackDescription$ SpellDescription | SpellDescription$ CARDNAME can block an additional creature this turn.
+SVar:DBBlock:Mode$ CanBlockAmount | ValidCard$ Card.EffectSource | Amount$ 1 | Description$ EFFECTSOURCE can block an additional creature this turn.
 Oracle:Flying\n{1}{W}: Coastline Chimera can block an additional creature this turn.
