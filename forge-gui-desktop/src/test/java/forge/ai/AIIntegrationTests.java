@@ -113,4 +113,74 @@ public class AIIntegrationTests extends AITest {
 
         AssertJUnit.assertTrue("Repopulate must still be in hand", hand.contains(repopulate));
     }
+
+    @Test
+    public void testSylvanLibraryCanBeCast() {
+        // Test that the AI will cast Sylvan Library when it has mana available
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+        addCard("Forest", p);
+        addCard("Forest", p);
+        addCardToZone("Sylvan Library", p, ZoneType.Hand);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+
+        // Fill decks with cards
+        for (int i = 0; i < 60; i++) {
+            addCardToZone("Island", opponent, ZoneType.Library);
+            addCardToZone("Forest", p, ZoneType.Library);
+        }
+
+        this.playUntilPhase(game, PhaseType.END_OF_TURN);
+
+        // Sylvan Library should be on the battlefield
+        AssertJUnit.assertEquals("Sylvan Library should be on the battlefield", 1, countCardsWithName(game, "Sylvan Library"));
+    }
+
+    @Test
+    public void testSylvanLibraryAtLowLifeActsLikeMirrisGuile() {
+        // Test that when at low life, the AI uses Sylvan Library to look at cards
+        // but puts them back instead of paying life (like Mirri's Guile)
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+        p.setLife(5, null); // Low life - can't afford to pay 4 life
+
+        addCard("Sylvan Library", p);
+        // Add lands so the AI has mana to cast things
+        addCard("Forest", p);
+        addCard("Forest", p);
+        addCard("Forest", p);
+        addCard("Forest", p);
+        addCard("Forest", p);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+
+        // Set up known library - first added goes on top (index 0)
+        // Library order after setup: Forest (top), Forest, Llanowar Elves (bottom of top 3)
+        // The AI draws 3 cards (1 normal + 2 from Sylvan Library cost)
+        // Then must choose 2 to return. Should keep Llanowar Elves (best) and return 2 Forests
+        addCardToZone("Forest", p, ZoneType.Library);         // Top (index 0)
+        addCardToZone("Forest", p, ZoneType.Library);         // Middle (index 1)
+        addCardToZone("Llanowar Elves", p, ZoneType.Library); // Bottom of top 3 (index 2) - best card
+
+        // Fill rest of deck
+        for (int i = 0; i < 57; i++) {
+            addCardToZone("Forest", p, ZoneType.Library);
+            addCardToZone("Island", opponent, ZoneType.Library);
+        }
+
+        // Play through to AI's next main phase (after draw step completes)
+        this.playUntilNextTurn(game);  // AI turn 0 -> Opponent turn
+        this.playUntilNextTurn(game);  // Opponent turn -> AI turn
+        this.playUntilPhase(game, PhaseType.MAIN1);  // Advance through DRAW to MAIN1
+
+        // The AI should still be at 5 life (didn't pay any life)
+        AssertJUnit.assertEquals("AI should not have paid life", 5, p.getLife());
+        // The AI should have 1 card in hand (kept the best, put 2 back)
+        AssertJUnit.assertEquals("AI should have 1 card in hand", 1, p.getZone(ZoneType.Hand).size());
+    }
 }

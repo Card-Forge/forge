@@ -6,5 +6,5 @@ SVar:TrigDraw:AB$ ChooseCard | ChoiceZone$ Hand | Choices$ Card.YouOwn+DrawnThis
 SVar:DBPayOrReturn:DB$ RepeatEach | RepeatCards$ Card.ChosenCard | Zone$ Hand | RepeatSubAbility$ DBReplace | SubAbility$ DBCleanup | ChooseOrder$ True
 SVar:DBReplace:DB$ ChangeZone | Origin$ Hand | Destination$ Library | ChangeType$ Card.ChosenCard | UnlessCost$ PayLife<4> | Mandatory$ True | UnlessPayer$ TriggeredPlayer | NoReveal$ True
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
-AI:RemoveDeck:All
+AI:RemoveDeck:Random
 Oracle:At the beginning of your draw step, you may draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library.
