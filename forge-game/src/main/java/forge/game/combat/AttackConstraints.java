@@ -323,8 +323,10 @@ public class AttackConstraints {
                 bestMatch.requirements += playerReq.getValue().size();
                 usedAttackers.add(bestMatch.attacker);
                 // recalculate remaining requirements
+                playerReqs.values().removeAll(playerReq.getValue());
+            } else {
+                playerReqs.removeAll(playerReq.getKey());
             }
-            playerReqs.removeAll(playerReq.getKey());
         }
         if (!usedAttackers.isEmpty()) {
             // order could have changed
