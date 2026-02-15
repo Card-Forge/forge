@@ -1,7 +1,7 @@
 Name:Sanguine Soothsayer
 ManaCost:1 B
 Types:Creature Bat Cleric
-PT:2/1
+PT:2/2
 K:Flying
 K:Lifelink
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, conjure a card named Sanguine Bond into the top fifteen cards of your library at random. It perpetually gains "You may pay {0} rather than pay this spell's mana cost" and "When this permanent enters, draw a card."
