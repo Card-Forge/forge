@@ -74,7 +74,7 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Swarmyard|SLD&quot;, &quot;Oakhollow Village|BLB&quot;,&quot;Mudflat Village|BLB&quot;, &quot;Sword of the Squeak|BLC&quot;, &quot;Squirrel Sovereign|MH2&quot;, &quot;Chittering Illuminator&quot;, &quot;Squirrel Sanctuary|MH2&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Oakhollow Village|BLB&quot;,&quot;Mudflat Village|BLB&quot;, &quot;Sword of the Squeak|BLC&quot;, &quot;Squirrel Sovereign|MH2&quot;, &quot;Chittering Illuminator&quot;, &quot;Squirrel Sanctuary|MH2&quot;]}"/>
     <property name="enemy" value="Chatterfang"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="10"/>
