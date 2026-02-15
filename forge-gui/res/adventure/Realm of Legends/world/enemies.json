@@ -17323,9 +17323,14 @@
         "cardName": "Urtet, Remnant of Memnarch"
       },
       {
+        "type": "card",
+        "count": 1,
+        "cardName": "Memnarch"
+      },
+      {
         "type": "deckCard",
         "count": 2,
-        "addMaxCount": 4,
+        "addMaxCount": 2,
         "rarity": [
           "Rare",
           "Mythic Rare"
