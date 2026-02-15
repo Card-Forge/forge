@@ -53,8 +53,6 @@ public enum StaticAbilityMode {
 
     // StaticAbilityCombatDamageToughness
     CombatDamageToughness,
-    // StaticAbilityLethalDamageByPower
-    LethalDamageByPower,
 
     // StaticAbilityColorlessDamageSource
     ColorlessDamageSource,
