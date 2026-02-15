@@ -44,7 +44,7 @@ public class AttackRequirement {
             if (e.equals(attacker)) {
                 nAttackAnything++;
             } else {
-                defenderSpecific.put(e, 1);
+                defenderSpecific.merge(e, 1, Integer::sum);
             }
         }
 
