@@ -2,6 +2,7 @@ package forge.game.combat;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import com.google.common.collect.*;
-import forge.util.IterableUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
 import forge.game.GameEntity;
@@ -34,7 +34,7 @@ public class AttackConstraints {
 
     private final Map<Card, AttackRestriction> restrictions = Maps.newHashMap();
     private final Map<Card, AttackRequirement> requirements = Maps.newHashMap();
-    private final List<Set<GameEntity>> playerRequirements;
+    private final Multimap<GameEntity, StaticAbility> playerRequirements;
 
     public AttackConstraints(final Combat combat) {
         possibleAttackers = combat.getAttackingPlayer().getCreaturesInPlay();
@@ -310,35 +310,30 @@ public class AttackConstraints {
             }
         }
 
-        Collections.sort(result);
+        Collections.sort(result, Comparator.reverseOrder());
 
-        List<Set<GameEntity>> playerReqs = Lists.newArrayList(playerRequirements);
+        Multimap<GameEntity, StaticAbility> playerReqs = MultimapBuilder.hashKeys().arrayListValues().build(playerRequirements);
         CardCollection usedAttackers = new CardCollection();
-        FCollection<GameEntity> excludedDefenders = new FCollection<>();
-        MapToAmount<GameEntity> sortedPlayerReqs = new LinkedHashMapToAmount<>();
-        sortedPlayerReqs.addAll(Iterables.concat(playerReqs));
-        while (!sortedPlayerReqs.isEmpty()) {
-            Pair<GameEntity, Integer> playerReq = MapToAmountUtil.max(sortedPlayerReqs);
+        while (!playerReqs.isEmpty()) {
+            Map.Entry<GameEntity, Collection<StaticAbility>> playerReq = playerReqs.asMap().entrySet().stream()
+                    .max(Comparator.comparing(e -> e.getValue().size())).orElse(null);
             // find best attack to also fulfill the additional requirements
-            Attack bestMatch = Iterables.getLast(IterableUtil.filter(result, att -> !usedAttackers.contains(att.attacker) && att.defender.equals(playerReq.getLeft())), null);
+            Attack bestMatch = result.stream().filter(att -> !usedAttackers.contains(att.attacker) && att.defender.equals(playerReq.getKey())).findFirst().orElse(null);
             if (bestMatch != null) {
-                bestMatch.requirements += playerReq.getRight();
+                bestMatch.requirements += playerReq.getValue().size();
                 usedAttackers.add(bestMatch.attacker);
                 // recalculate remaining requirements
-                playerReqs.removeIf(s -> s.contains(playerReq.getLeft()));
-                sortedPlayerReqs.clear();
-                sortedPlayerReqs.addAll(Iterables.concat(playerReqs));
+                playerReqs.values().removeAll(playerReq.getValue());
             } else {
-                excludedDefenders.add(playerReq.getLeft());
+                playerReqs.removeAll(playerReq.getKey());
             }
-            sortedPlayerReqs.keySet().removeAll(excludedDefenders);
         }
         if (!usedAttackers.isEmpty()) {
             // order could have changed
-            Collections.sort(result);
+            Collections.sort(result, Comparator.reverseOrder());
         }
 
-        return Lists.reverse(result);
+        return result;
     }
     private static List<Attack> deepClone(final List<Attack> original) {
         final List<Attack> newList = Lists.newLinkedList();
@@ -389,7 +384,8 @@ public class AttackConstraints {
             }
         }
 
-        for (Set<GameEntity> defSet : playerRequirements) {
+        Multimap<StaticAbility, GameEntity> inverted = MultimapBuilder.hashKeys().arrayListValues().build();
+        for (Collection<GameEntity> defSet : Multimaps.invertFrom(playerRequirements, inverted).asMap().values()) {
             if (Collections.disjoint(defSet, attackers.values())) {
                 violations++;
             }
