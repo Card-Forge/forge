@@ -3245,6 +3245,24 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     // Pseudo keywords, only print Reminder
                     sbBefore.append(inst.getReminderText());
                     sbBefore.append("\r\n");
+                } else if (keyword.startsWith("Cleave")) {
+                    final String[] k = keyword.split(":");
+                    final Cost mCost;
+                    if (k.length < 2 || "ManaCost".equals(k[1])) {
+                        mCost = new Cost(getManaCost(), false);
+                    } else {
+                        mCost = new Cost(k[1], false);
+                    }
+
+                    StringBuilder sbCost = new StringBuilder(k[0]);
+                    if (!mCost.isOnlyManaCost()) {
+                        sbCost.append("—");
+                    } else {
+                        sbCost.append(" ");
+                    }
+                    sbCost.append(mCost.toSimpleString());
+                    sbBefore.append(sbCost).append(" (").append(inst.getReminderText()).append(")");
+                    sbBefore.append("\r\n");
                 } else if (keyword.startsWith("Entwine") || keyword.startsWith("Madness")
                         || keyword.startsWith("Miracle") || keyword.startsWith("Recover")
                         || keyword.startsWith("Escape") || keyword.startsWith("Foretell:")

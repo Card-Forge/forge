@@ -36,6 +36,7 @@ public enum Keyword {
     CHANGELING("Changeling", SimpleKeyword.class, true, "This card is every creature type."),
     CHOOSE_A_BACKGROUND("Choose a Background", Partner.class, true, "You can have a Background as a second commander."),
     CIPHER("Cipher", SimpleKeyword.class, true, "Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost."),
+    CLEAVE("Cleave", KeywordWithCost.class, false, "You may cast this spell for its cleave cost. If you do, remove the words in square brackets."),
     COMPANION("Companion", Companion.class, true, "Reveal your companion from outside the game if your deck meets the companion restriction."),
     COMPLEATED("Compleated", Compleated.class, true, "This planeswalker enters with two fewer loyalty counters for each Phyrexian mana symbol life was paid for."),
     CONSPIRE("Conspire", SimpleKeyword.class, false, "As an additional cost to cast this spell, you may tap two untapped creatures you control that each share a color with it. If you do, copy it."),
