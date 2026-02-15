@@ -45,6 +45,7 @@ import java.util.Map;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
+import forge.ai.ComputerUtilMana;
 import forge.CachedCardImage;
 import forge.StaticData;
 import forge.card.CardEdition;
@@ -55,6 +56,7 @@ import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.card.CounterType;
 import forge.game.keyword.Keyword;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.gui.CardContainer;
 import forge.gui.FThreads;
@@ -299,6 +301,13 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             g2d.fillRoundRect(cardXOffset - n2, (cardYOffset - n2) + offset, cardWidth + (n2 * 2), cardHeight + (n2 * 2), cornerSize + n2, cornerSize + n2);
         }
 
+        // Yellow border for cards in hand that can be cast with available mana
+        if (isPreferenceEnabled(FPref.UI_SHOW_CASTABLE_BORDER) && canCastCard()) {
+            g2d.setColor(Color.YELLOW);
+            final int n = Math.max(1, Math.round(cardWidth * CardPanel.SELECTED_BORDER_SIZE));
+            g2d.fillRoundRect(cardXOffset - n, (cardYOffset - n) + offset, cardWidth + (n * 2), cardHeight + (n * 2), cornerSize + n , cornerSize + n);
+        }
+
         // Green outline for hover
         if (isSelected) {
             g2d.setColor(Color.green);
@@ -351,6 +360,71 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             g2d.fillRoundRect(cardXOffset+ins, cardYOffset+ins, cardWidth-ins*2, cardHeight-ins*2, cornerSize-ins, cornerSize-ins);
         }
     }
+
+    /*
+     * Checks if the card in this panel can be cast with available mana.
+     * Returns true if the card is in hand and has at least one spell ability that can be played.
+     * This method is used to highlight castable cards with a yellow border.
+     */
+    private boolean canCastCard() {
+        try {
+            // Only check cards in hand
+            if (card == null || !ZoneType.Hand.equals(card.getZone())) {
+                return false;
+            }
+
+            // Get the game view to access the actual Game object
+            final var gameView = matchUI.getGameView();
+            if (gameView == null) {
+                return false;
+            }
+
+            final var game = gameView.getGame();
+            if (game == null) {
+                return false;
+            }
+
+            // Find the actual Card object 
+            Card actualCard = game.findByView(card);
+            if (actualCard == null) {
+                return false;
+            }
+
+            // Get all spell abilities for this card
+            final var abilities = actualCard.getSpellAbilities();
+            if (abilities == null || abilities.isEmpty()) {
+                return false;
+            }
+
+            // Get the player who owns this card
+            final var player = actualCard.getOwner();
+            if (player == null) {
+                return false;
+            }
+
+            for (final SpellAbility sa : abilities) {
+                // First check if the spell can be played (timing, restrictions, etc.)
+                if (!sa.canPlay(true)) {
+                    continue;
+                }
+
+                // Set the activating player for the spell ability
+                sa.setActivatingPlayer(player);
+
+                // Check if the player can actually pay the mana cost from available sources
+                if (ComputerUtilMana.canPayManaCost(sa, player, 0, false)) {
+                    return true;
+                }
+            }
+            //If no costs can be met
+            return false;
+
+        } catch (Exception e) {
+            // If any exception occurs (NullPointerException, etc.), safely return false
+            return false;
+        }
+    }
+
 
     private void drawManaCost(final Graphics g, final ManaCost cost, final int deltaY) {
         final int width = CardFaceSymbols.getWidth(cost);
