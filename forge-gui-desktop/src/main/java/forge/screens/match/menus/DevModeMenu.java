@@ -34,6 +34,7 @@ public class DevModeMenu implements ActionListener, IDevListener {
         TUTOR_FOR_CARD("lblTutor"),
         ADD_CARD_TO_HAND("lblCardToHand"),
         ADD_CARD_TO_PLAY("lblCastSpellOrPlayLand"),
+        ADD_TOKEN_TO_PLAY("lblTokenToBattlefield"),
         EXILE_FROM_HAND("lblExileFromHand"),
         EXILE_FROM_PLAY("lblExileFromPlay"),
         SET_PLAYER_LIFE("lblSetLife"),
@@ -79,6 +80,7 @@ public class DevModeMenu implements ActionListener, IDevListener {
         menu.addSeparator();
         menu.add(getMenuItem(DevMenuItem.ADD_CARD_TO_HAND));
         menu.add(getMenuItem(DevMenuItem.ADD_CARD_TO_PLAY));
+        menu.add(getMenuItem(DevMenuItem.ADD_TOKEN_TO_PLAY));
         menu.add(getMenuItem(DevMenuItem.EXILE_FROM_HAND));
         menu.add(getMenuItem(DevMenuItem.EXILE_FROM_PLAY));
         menu.addSeparator();
@@ -124,6 +126,7 @@ public class DevModeMenu implements ActionListener, IDevListener {
         case TUTOR_FOR_CARD:       { controller.tutorForCard(); break; }
         case ADD_CARD_TO_HAND:     { controller.addCardToHand(); break; }
         case ADD_CARD_TO_PLAY:     { controller.addCardToBattlefield(); break; }
+        case ADD_TOKEN_TO_PLAY:    { controller.addTokenToBattlefield(); break; }
         case EXILE_FROM_PLAY:	   { controller.exileCardsFromPlay(); break; }
         case EXILE_FROM_HAND:	   { controller.exileCardsFromHand(); break; }
         case SET_PLAYER_LIFE:      { controller.setPlayerLife(); break; }

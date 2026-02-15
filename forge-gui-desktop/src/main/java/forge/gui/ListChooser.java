@@ -18,12 +18,15 @@
 
 package forge.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
 
@@ -31,10 +34,13 @@ import javax.swing.AbstractListModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -49,6 +55,7 @@ import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
+import forge.toolbox.FTextField;
 import forge.util.ITranslatable;
 import forge.util.Localizer;
 
@@ -78,8 +85,10 @@ import forge.util.Localizer;
  */
 public class ListChooser<T> {
     // Data and number of choices for the list
-    private final List<T> list;
+    private final List<T> allItems;
+    private List<T> displayedItems;
     private final int minChoices, maxChoices;
+    private final Function<T, String> display;
 
     // Flag: was the dialog already shown?
     private boolean called;
@@ -87,13 +96,17 @@ public class ListChooser<T> {
     // initialized before; listeners may be added to it
     private final FList<T> lstChoices;
     private final FOptionPane optionPane;
+    private final ChooserListModel listModel;
 
     public ListChooser(final String title, final int minChoices, final int maxChoices, final Collection<T> list, final Function<T, String> display) {
         FThreads.assertExecutedByEdt(true);
         this.minChoices = minChoices;
         this.maxChoices = maxChoices;
-        this.list = list.getClass().isInstance(List.class) ? (List<T>)list : Lists.newArrayList(list);
-        this.lstChoices = new FList<>(new ChooserListModel());
+        this.display = display;
+        this.allItems = list.getClass().isInstance(List.class) ? (List<T>)list : Lists.newArrayList(list);
+        this.displayedItems = new ArrayList<>(this.allItems);
+        this.listModel = new ChooserListModel();
+        this.lstChoices = new FList<>(this.listModel);
 
         final ImmutableList<String> options;
         if (minChoices == 0) {
@@ -115,12 +128,44 @@ public class ListChooser<T> {
         }
         listScroller.setMinimumSize(new Dimension(minWidth, listScroller.getMinimumSize().height));
 
-        this.optionPane = new FOptionPane(null, title, null, listScroller, options, minChoices < 0 ? 0 : -1);
-        this.optionPane.setButtonEnabled(0, minChoices <= 0);
+        // Add search field for large lists (same threshold as mobile)
+        if (allItems.size() > 25) {
+            final FTextField searchField = new FTextField.Builder()
+                    .ghostText(Localizer.getInstance().getMessage("lblSearch"))
+                    .showGhostTextWithFocus()
+                    .build();
+            searchField.getDocument().addDocumentListener(new DocumentListener() {
+                @Override public void insertUpdate(DocumentEvent e) { applyFilter(searchField); }
+                @Override public void removeUpdate(DocumentEvent e) { applyFilter(searchField); }
+                @Override public void changedUpdate(DocumentEvent e) { applyFilter(searchField); }
+            });
+            searchField.addKeyListener(new KeyAdapter() {
+                @Override public void keyPressed(final KeyEvent e) {
+                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                        ListChooser.this.commit();
+                    } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                        lstChoices.requestFocusInWindow();
+                    }
+                }
+            });
 
-        if (minChoices != -1) {
-            this.optionPane.setDefaultFocus(this.lstChoices);
+            final JPanel panel = new JPanel(new BorderLayout(0, 4));
+            panel.setOpaque(false);
+            panel.add(searchField, BorderLayout.NORTH);
+            panel.add(listScroller, BorderLayout.CENTER);
+
+            this.optionPane = new FOptionPane(null, title, null, panel, options, minChoices < 0 ? 0 : -1);
+            if (minChoices != -1) {
+                this.optionPane.setDefaultFocus(searchField);
+            }
+        } else {
+            this.optionPane = new FOptionPane(null, title, null, listScroller, options, minChoices < 0 ? 0 : -1);
+            if (minChoices != -1) {
+                this.optionPane.setDefaultFocus(this.lstChoices);
+            }
         }
+
+        this.optionPane.setButtonEnabled(0, minChoices <= 0);
 
         if (minChoices > 0) {
             this.optionPane.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -142,6 +187,45 @@ public class ListChooser<T> {
                     ListChooser.this.commit();
             }
         });
+    }
+
+    private void applyFilter(final FTextField searchField) {
+        final String text = searchField.getText().toLowerCase();
+        lstChoices.clearSelection();
+
+        if (text.isEmpty()) {
+            displayedItems = new ArrayList<>(allItems);
+        } else {
+            final List<T> startsWith = new ArrayList<>();
+            final List<T> contains = new ArrayList<>();
+            for (final T item : allItems) {
+                final String name = getDisplayText(item).toLowerCase();
+                if (name.startsWith(text)) {
+                    startsWith.add(item);
+                } else if (name.contains(text)) {
+                    contains.add(item);
+                }
+            }
+            startsWith.sort(Comparator.comparingInt(a -> getDisplayText(a).length()));
+            displayedItems = new ArrayList<>(startsWith.size() + contains.size());
+            displayedItems.addAll(startsWith);
+            displayedItems.addAll(contains);
+        }
+
+        listModel.fireDataChanged();
+        if (!displayedItems.isEmpty() && maxChoices > 0) {
+            lstChoices.setSelectedIndex(0);
+        }
+    }
+
+    private String getDisplayText(final T value) {
+        if (display != null) {
+            return display.apply(value);
+        }
+        if (value instanceof ITranslatable t) {
+            return t.getTranslatedName();
+        }
+        return value != null ? value.toString() : "";
     }
 
     /**
@@ -172,7 +256,7 @@ public class ListChooser<T> {
             SwingUtilities.invokeLater(() -> {
                 if (item != null) {
                     int[] indices = item.stream()
-                            .mapToInt(list::indexOf)
+                            .mapToInt(displayedItems::indexOf)
                             .filter(i -> i >= 0)
                             .toArray();
                     lstChoices.setSelectedIndices(indices);
@@ -275,12 +359,16 @@ public class ListChooser<T> {
 
         @Override
         public int getSize() {
-            return ListChooser.this.list.size();
+            return ListChooser.this.displayedItems.size();
         }
 
         @Override
         public T getElementAt(final int index) {
-            return ListChooser.this.list.get(index);
+            return ListChooser.this.displayedItems.get(index);
+        }
+
+        void fireDataChanged() {
+            fireContentsChanged(this, 0, Math.max(getSize() - 1, 0));
         }
     }
 
