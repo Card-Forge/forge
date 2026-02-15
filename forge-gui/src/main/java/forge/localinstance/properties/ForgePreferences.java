@@ -288,7 +288,15 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         SHORTCUT_MACRO_NEXT_ACTION ("16 50"),
         SHORTCUT_CARD_ZOOM("90"),
 
-        LAST_IMPORTED_CUBE_ID("");
+        LAST_IMPORTED_CUBE_ID(""),
+
+        // Network debug preferences (previously in separate network.preferences file)
+        NET_BANDWIDTH_LOGGING ("true"),
+        NET_DEBUG_LOGGER_ENABLED ("true"),
+        NET_CONSOLE_LOG_LEVEL ("INFO"),
+        NET_FILE_LOG_LEVEL ("DEBUG"),
+        NET_MAX_LOG_FILES ("10"),
+        NET_LOG_CLEANUP_ENABLED ("true");
 
         private final String strDefaultVal;
 

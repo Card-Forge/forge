@@ -1,5 +1,6 @@
 package forge.gamemodes.match.input;
 
+import forge.gamemodes.net.NetworkDebugLogger;
 import forge.gui.FThreads;
 import forge.gui.error.BugReporter;
 import forge.player.PlayerControllerHuman;
@@ -18,11 +19,13 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
     @Override
     public void awaitLatchRelease() {
         FThreads.assertExecutedByEdt(false);
+        NetworkDebugLogger.trace("[InputSyncronizedBase] awaitLatchRelease() starting on %s, thread = %s", this.getClass().getSimpleName(), Thread.currentThread().getName());
         try {
             cdlDone.await();
         } catch (final InterruptedException e) {
             BugReporter.reportException(e);
         }
+        NetworkDebugLogger.trace("[InputSyncronizedBase] awaitLatchRelease() UNBLOCKED on %s, thread = %s", this.getClass().getSimpleName(), Thread.currentThread().getName());
     }
 
     @Override
@@ -37,6 +40,7 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
 
     @Override
     public final void stop() {
+        NetworkDebugLogger.trace("[InputSyncronizedBase] stop() called on %s, latch count before = %d", this.getClass().getSimpleName(), cdlDone.getCount());
         onStop();
 
         // ensure input won't accept any user actions.
@@ -47,6 +51,7 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
             getController().getInputQueue().removeInput(InputSyncronizedBase.this);
         }
         cdlDone.countDown();
+        NetworkDebugLogger.trace("[InputSyncronizedBase] stop() done, latch count after = %d", cdlDone.getCount());
     }
 
     protected void onStop() { }

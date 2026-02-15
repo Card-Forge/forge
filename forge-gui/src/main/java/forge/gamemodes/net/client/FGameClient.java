@@ -5,6 +5,7 @@ import forge.game.player.PlayerView;
 import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.CompatibleObjectEncoder;
 import forge.gamemodes.net.ReplyPool;
+import forge.gamemodes.net.NetworkDebugLogger;
 import forge.gamemodes.net.event.IdentifiableNetEvent;
 import forge.gamemodes.net.event.LobbyUpdateEvent;
 import forge.gamemodes.net.event.MessageEvent;
@@ -26,14 +27,24 @@ public class FGameClient implements IToServer {
     private final IGuiGame clientGui;
     private final String hostname;
     private final Integer port;
+    private final String username;
     private final List<ILobbyListener> lobbyListeners = Lists.newArrayList();
     private final ReplyPool replies = new ReplyPool();
     private Channel channel;
 
     public FGameClient(String username, String roomKey, IGuiGame clientGui, String hostname, int port) {
+        this.username = username;
         this.clientGui = clientGui;
         this.hostname = hostname;
         this.port = port;
+    }
+
+    /**
+     * Get the username for this client.
+     * @return the username
+     */
+    public String getUsername() {
+        return username;
     }
 
     final IGuiGame getGui() {
@@ -54,7 +65,7 @@ public class FGameClient implements IToServer {
                 public void initChannel(final SocketChannel ch) throws Exception {
                     final ChannelPipeline pipeline = ch.pipeline();
                     pipeline.addLast(
-                            new CompatibleObjectEncoder(),
+                            new CompatibleObjectEncoder(null), // Client doesn't need byte tracking
                             new CompatibleObjectDecoder(9766*1024, ClassResolvers.cacheDisabled(null)),
                             new MessageHandler(),
                             new LobbyUpdateHandler(),
@@ -69,14 +80,14 @@ public class FGameClient implements IToServer {
                 try {
                     ch.sync();
                 } catch (final InterruptedException e) {
-                    System.out.println(e.getMessage());
+                    NetworkDebugLogger.log("[FGameClient] Channel closed: %s", e.getMessage());
                     e.printStackTrace();
                 } finally {
                     group.shutdownGracefully();
                 }
             }).start();
         } catch (final InterruptedException e) {
-            System.out.println(e.getMessage());
+            NetworkDebugLogger.log("[FGameClient] Connection interrupted: %s", e.getMessage());
             e.printStackTrace();
         }
     }
@@ -88,7 +99,7 @@ public class FGameClient implements IToServer {
 
     @Override
     public void send(final NetEvent event) {
-        System.out.println("Client sent " + event);
+        NetworkDebugLogger.log("[FGameClient] Client sent %s", event);
         channel.writeAndFlush(event);
     }
 
@@ -143,6 +154,8 @@ public class FGameClient implements IToServer {
 
         @Override
         public void channelInactive(final ChannelHandlerContext ctx) throws Exception {
+            NetworkDebugLogger.log("[ClientDisconnect] Channel became inactive, notifying %d listeners", lobbyListeners.size());
+            NetworkDebugLogger.log("[ClientDisconnect] Remote address was: %s", ctx.channel().remoteAddress());
             for (final ILobbyListener listener : lobbyListeners) {
                 listener.close();
             }

@@ -13,6 +13,12 @@ import java.io.Serializable;
 public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> {
     private static final byte[] LENGTH_PLACEHOLDER = new byte[4];
 
+    private final NetworkByteTracker byteTracker;
+
+    public CompatibleObjectEncoder(NetworkByteTracker byteTracker) {
+        this.byteTracker = byteTracker;
+    }
+
     @Override
     protected void encode(ChannelHandlerContext ctx, Serializable msg, ByteBuf out) throws Exception {
         int startIdx = out.writerIndex();
@@ -34,5 +40,12 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
 
         int endIdx = out.writerIndex();
         out.setInt(startIdx, endIdx - startIdx - 4);
+
+        // Track actual bytes sent (including compression and all overhead)
+        int bytesSent = endIdx - startIdx;
+        if (byteTracker != null) {
+            String messageType = msg.getClass().getSimpleName();
+            byteTracker.recordBytesSent(bytesSent, messageType);
+        }
     }
 }

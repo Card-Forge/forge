@@ -64,7 +64,7 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
         return value;
     }
 
-    protected final <T> void set(final TrackableProperty key, final T value) {
+    public final <T> void set(final TrackableProperty key, final T value) {
         if (tracker != null && tracker.isFrozen()) { //if trackable objects currently frozen, queue up delayed prop change
             boolean respectsFreeze = false;
             if (key.getFreezeMode() == TrackableProperty.FreezeMode.RespectsFreeze) {
@@ -130,4 +130,34 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
         }
         changedProps.clear();
     }
+
+    // Delta sync support methods
+    /**
+     * Check if this object has any changed properties that need to be synced.
+     * @return true if there are pending changes
+     */
+    public final boolean hasChanges() {
+        return !changedProps.isEmpty();
+    }
+
+    /**
+     * Get an unmodifiable view of the changed properties.
+     * Changes are not cleared until clearChanges() is called.
+     * @return set of properties that have changed
+     */
+    public final Set<TrackableProperty> getChangedProps() {
+        if (changedProps.isEmpty()) {
+            return EnumSet.noneOf(TrackableProperty.class);
+        }
+        return EnumSet.copyOf(changedProps);
+    }
+
+    /**
+     * Clear the change tracking flags after changes have been acknowledged.
+     * Should be called after delta has been sent and acknowledged by client.
+     */
+    public final void clearChanges() {
+        changedProps.clear();
+    }
+
 }

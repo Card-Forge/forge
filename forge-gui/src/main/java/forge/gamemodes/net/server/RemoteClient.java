@@ -1,5 +1,6 @@
 package forge.gamemodes.net.server;
 
+import forge.gamemodes.net.NetworkDebugLogger;
 import forge.gamemodes.net.ReplyPool;
 import forge.gamemodes.net.event.IdentifiableNetEvent;
 import forge.gamemodes.net.event.NetEvent;
@@ -40,7 +41,7 @@ public final class RemoteClient implements IToClient {
 
     @Override
     public void send(final NetEvent event) {
-        System.out.println("Sending event " + event + " to " + channel);
+        NetworkDebugLogger.log("[RemoteClient] Sending event %s to %s", event, channel);
         try {
             channel.writeAndFlush(event).sync();
         } catch (Exception e) {
@@ -73,5 +74,13 @@ public final class RemoteClient implements IToClient {
 
     ReplyPool getReplyPool() {
         return replies;
+    }
+
+    /**
+     * Cancel all pending replies for this client.
+     * This is used when converting a player to AI control to unblock the game thread.
+     */
+    public void cancelPendingReplies() {
+        replies.cancelAll();
     }
 }

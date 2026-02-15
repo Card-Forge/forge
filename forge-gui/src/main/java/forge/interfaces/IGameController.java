@@ -45,4 +45,19 @@ public interface IGameController {
     String getActivateDescription(CardView card);
 
     void reorderHand(CardView card, int index);
+
+    // Delta sync and reconnection methods (client -> server)
+
+    /**
+     * Acknowledge receipt of a delta or full state packet.
+     * @param sequenceNumber the sequence number being acknowledged
+     */
+    void ackSync(long sequenceNumber);
+
+    /**
+     * Request a full state resync from the server.
+     * Called automatically when checksum validation fails to recover from desynchronization.
+     */
+    void requestResync();
+
 }

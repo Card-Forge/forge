@@ -23,12 +23,12 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
     protected abstract IRemote getRemote(ChannelHandlerContext ctx);
 
     protected abstract T getToInvoke(ChannelHandlerContext ctx);
-    protected abstract void beforeCall(ProtocolMethod protocolMethod, Object[] args);
+    protected abstract void beforeCall(ChannelHandlerContext ctx, ProtocolMethod protocolMethod, Object[] args);
 
     @Override
     public final void channelRead(final ChannelHandlerContext ctx, final Object msg) {
         final String[] catchedError = {""};
-        System.out.println("Received: " + msg);
+        NetworkDebugLogger.log("[GameProtocolHandler] Received: %s", msg);
         if (msg instanceof ReplyEvent) {
             final ReplyEvent event = (ReplyEvent) msg;
             getReplyPool(ctx).complete(event.getIndex(), event.getReply());
@@ -50,7 +50,7 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
             final Object toInvoke = getToInvoke(ctx);
 
             // Pre-call actions
-            beforeCall(protocolMethod, args);
+            beforeCall(ctx, protocolMethod, args);
 
             final Class<?> returnType = protocolMethod.getReturnType();
             final Runnable toRun = () -> {
@@ -96,6 +96,17 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
 
     @Override
     public final void exceptionCaught(final ChannelHandlerContext ctx, final Throwable cause) {
+        NetworkDebugLogger.log("[ExceptionCaught] Connection exception: %s", cause.getClass().getName());
+        NetworkDebugLogger.log("[ExceptionCaught] Message: %s", cause.getMessage());
+        if (cause.getCause() != null) {
+            NetworkDebugLogger.log("[ExceptionCaught] Cause: %s - %s",
+                cause.getCause().getClass().getName(), cause.getCause().getMessage());
+        }
+        // Log stack trace elements
+        StackTraceElement[] stack = cause.getStackTrace();
+        for (int i = 0; i < Math.min(stack.length, 10); i++) {
+            NetworkDebugLogger.log("[ExceptionCaught]   at %s", stack[i].toString());
+        }
         cause.printStackTrace();
         ctx.close();
     }

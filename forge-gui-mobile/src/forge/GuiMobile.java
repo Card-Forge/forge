@@ -105,9 +105,15 @@ public class GuiMobile implements IGuiBase {
         }
     }
 
+    private volatile Thread glThread;
+
+    void captureGlThread() {
+        this.glThread = Thread.currentThread();
+    }
+
     @Override
     public boolean isGuiThread() {
-        return !ThreadUtil.isGameThread();
+        return Thread.currentThread() == glThread;
     }
 
     @Override

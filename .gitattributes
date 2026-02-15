@@ -1,1 +1,9 @@
 * text=auto
+
+# Prevent merging of branch-specific files
+# These files use "ours" merge strategy - local version is always kept during merges
+.gitattributes merge=ours
+testlogs/ merge=ours
+testlogs/** merge=ours
+.documentation/ merge=ours
+.documentation/** merge=ours

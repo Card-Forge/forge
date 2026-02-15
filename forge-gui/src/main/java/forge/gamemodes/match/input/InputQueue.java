@@ -18,6 +18,7 @@
 package forge.gamemodes.match.input;
 
 import forge.game.GameView;
+import forge.gamemodes.net.NetworkDebugLogger;
 import forge.player.PlayerControllerHuman;
 
 import java.util.Observable;
@@ -64,9 +65,15 @@ public class InputQueue extends Observable {
     }
 
     public final void clearInputs() {
+        NetworkDebugLogger.trace("[InputQueue] clearInputs() called, stack size = %d", inputStack.size());
+        int count = 0;
         while(!inputStack.isEmpty()) {
-            inputStack.pop().stop();
+            InputSynchronized inp = inputStack.pop();
+            NetworkDebugLogger.trace("[InputQueue] Stopping input #%d: %s", count, inp.getClass().getSimpleName());
+            inp.stop();
+            count++;
         }
+        NetworkDebugLogger.trace("[InputQueue] clearInputs() done, stopped %d inputs", count);
 
         updateObservers();
     }
