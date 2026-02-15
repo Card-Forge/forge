@@ -1,0 +1,6 @@
+Name:Donatello's Technique
+ManaCost:2 U
+Types:Sorcery
+K:Sneak:U
+A:SP$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards.
+Oracle:Sneak {U} (You may cast this spell for {U} if you also return an unblocked attacker you control to hand during the declare blockers step.)\nDraw two cards.
