@@ -133,6 +133,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_THEMED_COMBOBOX ("true"), // Now applies to all theme settings, not just Combo.
         UI_LOCK_TITLE_BAR ("false"),
         UI_HIDE_GAME_TABS ("false"), // Visibility of tabs in match screen.
+        UI_MULTIPLAYER_FIELD_LAYOUT ("OFF"),
+        UI_MULTIPLAYER_FIELD_PANELS ("SPLIT"),
         UI_CLOSE_ACTION ("NONE"),
         UI_MANA_LOST_PROMPT ("false"), // Prompt on losing mana when passing priority
         UI_STACK_EFFECT_NOTIFICATION_POLICY ("Never"),
