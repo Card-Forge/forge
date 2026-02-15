@@ -35,9 +35,12 @@ public class TokenDb implements ITokenDatabase {
     private final CardEdition.Collection editions;
     private final Map<String, CardRules> rulesByName;
 
-    public TokenDb(Map<String, CardRules> rules, CardEdition.Collection editions) {
+    private boolean smartTokenSelection;
+
+    public TokenDb(Map<String, CardRules> rules, CardEdition.Collection editions, boolean smartTokenSelection) {
         this.rulesByName = rules;
         this.editions = editions;
+        this.smartTokenSelection = smartTokenSelection;
     }
 
     public boolean containsRule(String rule) {
@@ -84,14 +87,48 @@ public class TokenDb implements ITokenDatabase {
     }
 
     // try all editions to find token
-    protected PaperToken fallbackToken(String name) {
-        for (CardEdition edition : this.editions) {
-            String fullName = String.format("%s_%s", name, edition.getCode().toLowerCase());
-            if (loadTokenFromSet(edition, name)) {
-                return Aggregates.random(allTokenByName.get(fullName));
+    protected PaperToken fallbackToken(String name, CardEdition realEdition) {
+        if (smartTokenSelection) {
+            return smartFallbackToken(name, realEdition);
+        } else {
+            for (CardEdition edition : this.editions) {
+                String fullName = String.format("%s_%s", name, edition.getCode().toLowerCase());
+                if (loadTokenFromSet(edition, name)) {
+                    return Aggregates.random(allTokenByName.get(fullName));
+                }
             }
         }
         return null;
+    }
+
+    // Find latest token before release of original card, or earliest after that
+    private PaperToken smartFallbackToken(String name, CardEdition realEdition) {
+        PaperToken coreExpansionReprintToken = smartFallbackToken(name, realEdition, true);
+        return coreExpansionReprintToken != null ? coreExpansionReprintToken : smartFallbackToken(name, realEdition, false);
+    }
+
+    private PaperToken smartFallbackToken(String name, CardEdition realEdition, boolean onlyCoreExpansionOrReprint) {
+        String latestFound = null;
+        boolean pastRealEdition = false;
+        final EnumSet<CardEdition.Type> coreExpansionOrReprint = EnumSet.of(CardEdition.Type.CORE, CardEdition.Type.EXPANSION);
+        coreExpansionOrReprint.addAll(CardEdition.Type.REPRINT_SET_TYPES);
+        for (CardEdition edition : this.editions.getOrderedEditions(false)) {
+            if (edition.equals(realEdition)) {
+                pastRealEdition = true;
+            }
+            if (onlyCoreExpansionOrReprint && !coreExpansionOrReprint.contains(edition.getType())) {
+                // Core, Expansion and Reprint sets are more likely to have available token images
+                continue;
+            }
+            String fullName = String.format("%s_%s", name, edition.getCode().toLowerCase());
+            if (loadTokenFromSet(edition, name)) {
+                latestFound = fullName;
+            }
+            if (pastRealEdition && latestFound != null) {
+                break;
+            }
+        }
+        return latestFound != null ? Aggregates.random(allTokenByName.get(latestFound)) : null;
     }
 
     @Override
@@ -119,7 +156,7 @@ public class TokenDb implements ITokenDatabase {
 
             return Iterables.get(collection, artIndex - 1);
         }
-        PaperToken fallback = this.fallbackToken(tokenName);
+        PaperToken fallback = this.fallbackToken(tokenName, realEdition);
         if (fallback != null) {
             return fallback;
         }

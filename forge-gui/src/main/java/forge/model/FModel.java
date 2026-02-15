@@ -85,7 +85,8 @@ public final class FModel {
             getPreferences().getPrefBoolean(FPref.UI_LOAD_UNKNOWN_CARDS),
             getPreferences().getPrefBoolean(FPref.UI_LOAD_NONLEGAL_CARDS),
             getPreferences().getPrefBoolean(FPref.ALLOW_CUSTOM_CARDS_IN_DECKS_CONFORMANCE),
-            getPreferences().getPrefBoolean(FPref.UI_SMART_CARD_ART)));
+            getPreferences().getPrefBoolean(FPref.UI_SMART_CARD_ART),
+                       getPreferences().getPrefBoolean(FPref.UI_ENABLE_SMART_TOKEN_ART)));
     private static final Supplier<QuestPreferences> questPreferences = Suppliers.memoize(QuestPreferences::new);
     private static final Supplier<ConquestPreferences> conquestPreferences = Suppliers.memoize(() -> {
        final ConquestPreferences cp = new ConquestPreferences();
