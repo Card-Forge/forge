@@ -181,7 +181,9 @@ public class HostedMatch {
             game.subscribeToEvents(qc); // this one listens to player's mulligans ATM
         }
 
-        game.subscribeToEvents(SoundSystem.instance);
+        // SoundSystem receives GameEvents via handleGameEvent() on each GUI,
+        // so it doesn't need a direct event bus subscription here.
+        // (It still subscribes to the Match bus for UiEvent sounds like blocker assignment.)
         game.subscribeToEvents(visitor);
 
         final FCollectionView<Player> players = game.getPlayers();
@@ -396,7 +398,6 @@ public class HostedMatch {
         @Override
         public Void visit(final GameEventSubgameStart event) {
             subGameCount++;
-            event.subgame().subscribeToEvents(SoundSystem.instance);
             event.subgame().subscribeToEvents(visitor);
 
             final GameView gameView = event.subgame().getView();

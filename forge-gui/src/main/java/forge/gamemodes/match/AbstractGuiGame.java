@@ -20,6 +20,7 @@ import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.player.PlayerZoneUpdate;
+import forge.sound.SoundSystem;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableTypes;
 import forge.util.FSerializableFunction;
@@ -928,6 +929,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public void handleGameEvent(GameEvent event) {
+        SoundSystem.instance.receiveEvent(event);
     }
 
     @Override
