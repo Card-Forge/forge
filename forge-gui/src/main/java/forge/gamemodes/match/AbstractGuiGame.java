@@ -4,6 +4,7 @@ import com.google.common.collect.*;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
+import forge.game.event.GameEvent;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.player.PlayerView;
@@ -922,6 +923,10 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public void handleLandPlayed(CardView land) {
+    }
+
+    @Override
+    public void handleGameEvent(GameEvent event) {
     }
 
     @Override

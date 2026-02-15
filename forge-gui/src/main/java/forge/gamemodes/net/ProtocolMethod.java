@@ -3,6 +3,7 @@ package forge.gamemodes.net;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.GameView;
+import forge.game.event.GameEvent;
 import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
@@ -80,6 +81,7 @@ public enum ProtocolMethod {
     setRememberedActions(Mode.SERVER, Void.TYPE),
     nextRememberedAction(Mode.SERVER, Void.TYPE),
     showWaitingTimer    (Mode.SERVER, Void.TYPE, PlayerView.class, String.class),
+    handleGameEvent     (Mode.SERVER, Void.TYPE, GameEvent.class),
 
     // Client -> Server
     // Note: these should all return void, to avoid awkward situations in

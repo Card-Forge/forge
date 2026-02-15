@@ -4,6 +4,7 @@ import forge.LobbyPlayer;
 import forge.ai.GameState;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
+import forge.game.event.GameEvent;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
@@ -343,6 +344,12 @@ public class NetGuiGame extends AbstractGuiGame {
     @Override
     public void showWaitingTimer(final PlayerView forPlayer, final String waitingForPlayerName) {
         send(ProtocolMethod.showWaitingTimer, forPlayer, waitingForPlayerName);
+    }
+
+    @Override
+    public void handleGameEvent(GameEvent event) {
+        updateGameView();
+        send(ProtocolMethod.handleGameEvent, event);
     }
 
     @Override
