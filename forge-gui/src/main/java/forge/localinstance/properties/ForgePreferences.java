@@ -99,6 +99,10 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_OPEN_PACKS_INDIV ("false"),
         UI_STACK_CREATURES ("false"),
         UI_TOKENS_IN_SEPARATE_ROW("false"),
+        UI_POPUP_KEYWORD_INFO("false"),
+        UI_POPUP_RELATED_CARDS("false"),
+        UI_POPUP_CARD_IMAGE("false"),
+        UI_POPUP_IMAGE_SIZE("280"),  // thumbnail height in pixels (100–500)
         UI_UPLOAD_DRAFT ("false"),
         UI_SCALE_LARGER ("true"),
         UI_RENDER_BLACK_BORDERS ("true"),

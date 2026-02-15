@@ -14,7 +14,7 @@ public abstract class CachedCardImage implements ImageFetcher.Callback {
     final int width;
     final int height;
 
-    static final SwingImageFetcher fetcher = new SwingImageFetcher();
+    public static final SwingImageFetcher fetcher = new SwingImageFetcher();
 
     public CachedCardImage(final CardView card, final Iterable<PlayerView> viewers, final int width, final int height) {
         this.card = card;

@@ -18,6 +18,7 @@
 package forge.view.arcane;
 
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -29,6 +30,9 @@ import javax.swing.SwingUtilities;
 
 import forge.game.card.CardView;
 import forge.gui.FThreads;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin.SkinnedPanel;
@@ -56,6 +60,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
     private CardPanel hoveredPanel;
     private CardPanel mouseDownPanel;
     private CardPanel mouseDragPanel;
+    private CardInfoPopup cardInfoPopup;
 
     private final List<CardPanelMouseListener> listeners = new ArrayList<>(2);
     private int mouseDragOffsetX, mouseDragOffsetY;
@@ -230,6 +235,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
                 final CardPanel hitPanel = getCardPanel(evt.getX(), evt.getY());
 
                 if (hoveredPanel == hitPanel) { // no big change
+                    updateCardInfoPopup(hitPanel);
                     return;
                 }
 
@@ -243,9 +249,8 @@ public abstract class CardPanelContainer extends SkinnedPanel {
                     hoveredPanel = hitPanel;
                     hoveredPanel.setSelected(true);
                     mouseOver(hitPanel, evt);
+                    updateCardInfoPopup(hitPanel);
                 }
-
-                // System.err.format("%d %d over %s%n", evt.getX(), evt.getY(), hitPanel == null ? null : hitPanel.getCard().getName());
             }
         };
         this.addMouseMotionListener(mml);
@@ -256,9 +261,37 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         if (this.hoveredPanel == null) {
             return;
         }
+        if (cardInfoPopup != null) {
+            cardInfoPopup.hidePopup();
+        }
         this.hoveredPanel.setSelected(false);
         this.mouseOut(this.hoveredPanel, evt);
         this.hoveredPanel = null;
+    }
+
+    private void updateCardInfoPopup(final CardPanel panel) {
+        if (panel == null) {
+            if (cardInfoPopup != null) {
+                cardInfoPopup.hidePopup();
+            }
+            return;
+        }
+        final ForgePreferences prefs = FModel.getPreferences();
+        final boolean showKeywords = prefs.getPrefBoolean(FPref.UI_POPUP_KEYWORD_INFO);
+        final boolean showRelated = prefs.getPrefBoolean(FPref.UI_POPUP_RELATED_CARDS);
+        final boolean showCardImage = prefs.getPrefBoolean(FPref.UI_POPUP_CARD_IMAGE);
+        if (showKeywords || showRelated || showCardImage) {
+            if (cardInfoPopup == null) {
+                cardInfoPopup = new CardInfoPopup(
+                        SwingUtilities.getWindowAncestor(this));
+            }
+            final Point screenLoc = panel.getCardLocationOnScreen();
+            cardInfoPopup.showForCard(panel.getCard(), screenLoc,
+                    new Dimension(panel.getCardWidth(), panel.getCardHeight()),
+                    showKeywords, showRelated, showCardImage);
+        } else if (cardInfoPopup != null) {
+            cardInfoPopup.hidePopup();
+        }
     }
 
     protected abstract CardPanel getCardPanel(int x, int y);
