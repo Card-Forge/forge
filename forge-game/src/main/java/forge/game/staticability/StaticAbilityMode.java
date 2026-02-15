@@ -46,6 +46,7 @@ public enum StaticAbilityMode {
     PlayerMustAttack,
     // StaticAbilityMustBlock
     MustBlock,
+    MustBeBlockedByAll,
 
     // StaticAbilityAssignCombatDamageAsUnblocked
     AssignCombatDamageAsUnblocked,
