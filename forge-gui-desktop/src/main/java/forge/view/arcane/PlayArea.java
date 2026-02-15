@@ -32,6 +32,7 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.FThreads;
+import forge.gui.util.SGuiChoose;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.match.CMatchUI;
@@ -825,6 +826,54 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     @Override
     public final void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
+        // Right-click on badge of a group of 5+ → prompt for how many to select
+        if (panel.getGroupCount() >= 5 && panel.isBadgeHit(evt.getX(), evt.getY())) {
+            List<CardPanel> stack = panel.getStack();
+            if (stack != null && stack.size() >= 5) {
+                // Check if the game accepts card selection right now (side-effect-free)
+                CardView primary = stack.get(0).getCard();
+                if (primary == null || getMatchUI().getGameController().getActivateDescription(primary) == null) {
+                    getMatchUI().flashIncorrectAction();
+                    return;
+                }
+                Integer count = SGuiChoose.getInteger("How many to select?", 1, stack.size());
+                if (count == null) {
+                    return; // cancelled
+                }
+                // Collect the first N card views from the stack
+                List<CardView> selected = new ArrayList<>();
+                selected.add(primary);
+                for (int i = 1; i < count && i < stack.size(); i++) {
+                    CardPanel p = stack.get(i);
+                    if (p.getCard() != null) {
+                        selected.add(p.getCard());
+                    }
+                }
+                // If cards are already attacking/blocking, just do a visual split
+                // without calling selectCard (which would toggle them off)
+                boolean alreadyInCombat = primary.isAttacking() || primary.isBlocking();
+                if (!alreadyInCombat) {
+                    // Use a synthetic left-click trigger (button=1) so InputAttack
+                    // treats this as a declaration, not an undeclare (button=3)
+                    List<CardView> others = selected.size() > 1 ? selected.subList(1, selected.size()) : null;
+                    MouseTriggerEvent leftClickTrigger = new MouseTriggerEvent(1, evt.getX(), evt.getY());
+                    getMatchUI().getGameController().selectCard(primary, others, leftClickTrigger);
+                }
+                // Clear all cards in this stack from splitCardIds, then mark
+                // only the selected subset as split. This ensures the selected
+                // cards separate from the remaining ones in the group.
+                for (CardPanel p : stack) {
+                    if (p.getCard() != null) {
+                        splitCardIds.remove(p.getCard().getId());
+                    }
+                }
+                for (CardView cv : selected) {
+                    splitCardIds.add(cv.getId());
+                }
+                doLayout();
+                return;
+            }
+        }
         selectCard(panel, new MouseTriggerEvent(evt), evt.isShiftDown()); //select entire stack if shift key down
         super.mouseRightClicked(panel, evt);
     }
