@@ -34,6 +34,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityBlockRestrict;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
+import forge.game.staticability.StaticAbilityMustBeBlockedByAll;
 import forge.game.staticability.StaticAbilityMustBlock;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -863,6 +864,10 @@ public class CombatUtil {
             }
         }
 
+        if (StaticAbilityMustBeBlockedByAll.mustBeBlockedByAll(attacker, blocker)) {
+            return false;
+        }
+
         return true;
     }
 
@@ -945,6 +950,10 @@ public class CombatUtil {
                     break;
                 }
             }
+        }
+
+        if (!mustBeBlockedBy && StaticAbilityMustBeBlockedByAll.mustBeBlockedByAll(attacker, blocker)) {
+            mustBeBlockedBy = true;
         }
 
         // if the attacker has no lure effect, but the blocker can block another
