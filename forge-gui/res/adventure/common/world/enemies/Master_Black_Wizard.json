@@ -1,0 +1,53 @@
+{
+"name": "Master Black Wizard",
+"sprite": "sprites/enemy/humanoid/human/wizard/black_wiz3.atlas",
+"deck": [
+	"decks/standard/blackwizard_hard_gravepact.dck",
+	"decks/standard/blackwizard_hard_knight.dck",
+	"decks/standard/blackwizard_hard_liliana.dck",
+	"decks/standard/blackwizard_hard_sacrifice.dck"
+],
+"ai": "",
+"randomizeDeck": true,
+"spawnRate": 0.5,
+"difficulty": 0.1,
+"speed": 25,
+"life": 20,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"colors": [
+			"Black"
+		],
+		"rarity": [
+			"Uncommon",
+			"Rare",
+			"Mythic Rare"
+		],
+		"colorType": "MonoColor"
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 150
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	}
+],
+"colors": "B",
+"questTags": [
+	"Wizard",
+	"Necromancer",
+	"IdentityBlack",
+	"BiomeColorless",
+	"BiomeBlack"
+]
+}

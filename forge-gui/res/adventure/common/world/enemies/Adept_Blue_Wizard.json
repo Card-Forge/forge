@@ -1,0 +1,60 @@
+{
+"name": "Adept Blue Wizard",
+"sprite": "sprites/enemy/humanoid/human/wizard/blue_wiz2.atlas",
+"deck": [
+	"decks/standard/bluewizard_medium_donate.dck",
+	"decks/standard/bluewizard_medium_dragons.dck",
+	"decks/standard/bluewizard_easy_artifact.dck",
+	"decks/standard/bluewizard_easy_control.dck",
+	"decks/standard/bluewizard_easy_thassa.dck",
+	"decks/standard/bluewizard_medium_midrange.dck",
+	"decks/standard/bluewizard_medium_mill.dck"
+],
+"ai": "",
+"randomizeDeck": true,
+"spawnRate": 0.75,
+"difficulty": 0.1,
+"speed": 24,
+"life": 15,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 6,
+		"rarity": [
+			"Common",
+			"Uncommon"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 20,
+		"addMaxCount": 70
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"colors": [
+			"Blue"
+		],
+		"rarity": [
+			"Common",
+			"Uncommon",
+			"Rare",
+			"Mythic Rare"
+		],
+		"colorType": "MonoColor"
+	}
+],
+"questTags": [
+	"Wizard",
+	"Human",
+	"IdentityBlue",
+	"BiomeBlue",
+	"BiomeColorless"
+]
+}

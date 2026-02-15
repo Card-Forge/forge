@@ -1,0 +1,55 @@
+{
+"name": "Master Blue Wizard",
+"sprite": "sprites/enemy/humanoid/human/wizard/mage_2.atlas",
+"deck": [
+	"decks/standard/bluewizard_hard_control.dck",
+	"decks/standard/bluewizard_hard_control2.dck",
+	"decks/standard/bluewizard_hard_artifact.dck",
+	"decks/standard/bluewizard_hard_bounce.dck"
+],
+"ai": "",
+"flying": true,
+"randomizeDeck": true,
+"spawnRate": 0.5,
+"difficulty": 0.1,
+"speed": 25,
+"life": 20,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"colors": [
+			"Blue"
+		],
+		"rarity": [
+			"Uncommon",
+			"Rare",
+			"Mythic Rare"
+		],
+		"colorType": "MonoColor"
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 150
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	}
+],
+"colors": "U",
+"questTags": [
+	"Human",
+	"Wizard",
+	"Illusionist",
+	"IdentityBlue",
+	"BiomeColorless",
+	"BiomeBlue"
+]
+}

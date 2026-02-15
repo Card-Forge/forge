@@ -1,0 +1,50 @@
+{
+"name": "Falcon",
+"sprite": "sprites/enemy/beast/falcon.atlas",
+"deck": [
+	"decks/standard/falcon_w.dck"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 0.5,
+"difficulty": 0.1,
+"speed": 25,
+"life": 11,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 8,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	}
+],
+"colors": "W",
+"questTags": [
+	"Bird",
+	"Wild",
+	"Flying",
+	"IdentityWhite"
+]
+}

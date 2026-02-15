@@ -1,0 +1,126 @@
+{
+"name": "The Cheff",
+"nameOverride": "Zedruu's Cook",
+"sprite": "sprites/enemy/humanoid/halfling/korred.atlas",
+"deck": [
+	"decks/miniboss/thecheff.dck"
+],
+"ai": "",
+"boss": true,
+"flying": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 15,
+"scale": 0.6,
+"life": 50,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 5
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Asmoranomardicadaistinaculdacar"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Academy Manufactor"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Gyome, Master Chef"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Oko, Thief of Crowns"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Rocco, Street Chef"
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.5,
+		"count": 1,
+		"addMaxCount": 2,
+		"rarity": [
+			"uncommon"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.25,
+		"count": 1,
+		"addMaxCount": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.1,
+		"count": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 100,
+		"addMaxCount": 900
+	},
+	{
+		"type": "item",
+		"probability": 1,
+		"count": 1,
+		"itemName": "The Underworld Cookbook"
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 30
+	}
+],
+"colors": "GBR",
+"questTags": [
+	"Humanoid",
+	"IdentityGreen",
+	"Leader",
+	"IdentityGolgari",
+	"Cook",
+	"Human",
+	"Boss"
+],
+"gamesPerMatch": 3
+}

@@ -1,0 +1,81 @@
+{
+"name": "Pirate 2",
+"nameOverride": "Buccaneer",
+"sprite": "sprites/enemy/humanoid/human/rogue/pirate2.atlas",
+"deck": [
+	"decks/standard/pirate2.dck"
+],
+"ai": "",
+"spawnRate": 0.8,
+"difficulty": 0.1,
+"speed": 24,
+"life": 16,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"Common"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.25,
+		"count": 1,
+		"rarity": [
+			"Rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 30,
+		"addMaxCount": 100
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 2,
+		"colors": [
+			"Red"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"colors": [
+			"Blue"
+		]
+	}
+],
+"colors": "BRU",
+"questTags": [
+	"Aggressive",
+	"Human",
+	"Warrior",
+	"Water",
+	"Bandit",
+	"Thief",
+	"IdentityBlack",
+	"IdentityBlue",
+	"IdentityRed",
+	"IdentityGrixis",
+	"Dungeon"
+]
+}

@@ -1,0 +1,67 @@
+{
+"name": "Demon of Tibalt",
+"sprite": "sprites/enemy/fiend/cacodaemon.atlas",
+"deck": [
+	"decks/standard/tibalt_demon.dck"
+],
+"ai": "",
+"flying": true,
+"randomizeDeck": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 31,
+"life": 30,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 5,
+		"rarity": [
+			"rare",
+			"Mythic Rare"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "shards",
+		"probability": 0.5,
+		"count": 1,
+		"addMaxCount": 2
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 2,
+		"addMaxCount": 4,
+		"colors": [
+			"Black",
+			"Red",
+			"Blue"
+		],
+		"rarity": [
+			"Rare",
+			"Mythic Rare"
+		],
+		"subTypes": [
+			"Demon"
+		],
+		"cardTypes": [
+			"Creature"
+		]
+	}
+],
+"colors": "B",
+"questTags": [
+	"Demon",
+	"Humanoid",
+	"Unholy",
+	"IdentityBlack",
+	"BiomeBlack"
+]
+}

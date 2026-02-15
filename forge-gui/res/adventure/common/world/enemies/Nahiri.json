@@ -1,0 +1,83 @@
+{
+"name": "Nahiri",
+"sprite": "sprites/enemy/humanoid/kor/nahiri.atlas",
+"deck": [
+	"decks/miniboss/nahiri.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 30,
+"life": 40,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Nahiri, Heir of the Ancients"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Embercleave"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Skullclamp"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Lightning Bolt"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Wheel of Fortune"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Sword of Fire and Ice"
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 1000,
+		"addMaxCount": 5000
+	},
+	{
+		"type": "item",
+		"probability": 1,
+		"count": 1,
+		"itemName": "Nahiri's Armory"
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	},
+	{
+		"type": "life",
+		"probability": 1,
+		"count": 1
+	}
+],
+"colors": "RW",
+"questTags": [
+	"Planeswalker",
+	"Kor",
+	"Stone",
+	"Boss",
+	"IdentityRed",
+	"IdentityWhite",
+	"IdentityBoros"
+]
+}

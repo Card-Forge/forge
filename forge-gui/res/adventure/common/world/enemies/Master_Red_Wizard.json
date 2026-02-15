@@ -1,0 +1,55 @@
+{
+"name": "Master Red Wizard",
+"sprite": "sprites/enemy/humanoid/human/wizard/red_wiz3.atlas",
+"deck": [
+	"decks/standard/redwizard_hard_burn.dck",
+	"decks/standard/redwizard_hard_dragons.dck",
+	"decks/standard/redwizard_hard_fight.dck",
+	"decks/standard/redwizard_hard_lavaaxe.dck"
+],
+"ai": "",
+"randomizeDeck": true,
+"spawnRate": 0.5,
+"difficulty": 0.1,
+"speed": 24,
+"life": 20,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"colors": [
+			"Red"
+		],
+		"rarity": [
+			"Uncommon",
+			"Rare",
+			"Mythic Rare"
+		],
+		"colorType": "MonoColor"
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 150
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	}
+],
+"colors": "R",
+"questTags": [
+	"Wizard",
+	"Human",
+	"Fire",
+	"Pyromancer",
+	"IdentityRed",
+	"BiomeRed",
+	"BiomeColorless"
+]
+}

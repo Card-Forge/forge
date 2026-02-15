@@ -1,0 +1,51 @@
+{
+"name": "Illusionist",
+"sprite": "sprites/enemy/humanoid/human/wizard/blue_wiz2.atlas",
+"deck": [
+	"decks/standard/illusion.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 15,
+"life": 12,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 6,
+		"rarity": [
+			"common",
+			"uncommon",
+			"Rare"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"colors": [
+			"Blue"
+		],
+		"rarity": [
+			"rare"
+		]
+	}
+],
+"colors": "U",
+"questTags": [
+	"Human",
+	"Wizard",
+	"Illusionist",
+	"Scientist",
+	"IdentityBlue",
+	"BiomeBlue"
+]
+}

@@ -1,0 +1,64 @@
+{
+"name": "Snow Wizard",
+"sprite": "sprites/enemy/humanoid/human/wizard/simic_wiz.atlas",
+"deck": [
+	"decks/standard/simicwizard_snow.dck"
+],
+"ai": "",
+"randomizeDeck": true,
+"spawnRate": 0.25,
+"difficulty": 1,
+"speed": 25,
+"life": 20,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 3,
+		"addMaxCount": 6
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 4,
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 3,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 10
+	}
+],
+"colors": "UG",
+"questTags": [
+	"Wizard",
+	"Dungeon",
+	"Snow",
+	"Wizard",
+	"Human",
+	"IdentityBlue",
+	"IdentityGreen",
+	"IdentitySimic"
+]
+}

@@ -1,0 +1,80 @@
+{
+"name": "Rakdos Wizard",
+"sprite": "sprites/enemy/humanoid/human/wizard/rakdos_wiz.atlas",
+"deck": [
+	"decks/standard/rakdos_vamps.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.2,
+"speed": 24,
+"life": 25,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 2,
+		"rarity": [
+			"uncommon"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.5,
+		"count": 1,
+		"addMaxCount": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "randomCard",
+		"probability": 0.3,
+		"count": 1,
+		"rarity": [
+			"rare",
+			"mythicrare"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 150,
+		"addMaxCount": 150
+	}
+],
+"colors": "BG",
+"questTags": [
+	"Wizard",
+	"Necromancer",
+	"Pyromancer",
+	"IdentityBlack",
+	"IdentityRed",
+	"IdentityRakdos"
+]
+}

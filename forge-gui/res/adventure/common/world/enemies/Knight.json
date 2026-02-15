@@ -1,0 +1,46 @@
+{
+"name": "Knight",
+"nameOverride": "Human Knight",
+"sprite": "sprites/enemy/humanoid/human/knight/paladin.atlas",
+"deck": [
+	"decks/standard/knight.json"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 30,
+"life": 14,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 2,
+		"colors": [
+			"White"
+		],
+		"rarity": [
+			"Mythic Rare"
+		]
+	}
+],
+"colors": "W",
+"questTags": [
+	"Human",
+	"Knight",
+	"Warrior",
+	"IdentityWhite",
+	"BiomeWhite"
+]
+}

@@ -1,0 +1,97 @@
+{
+"name": "Slobad",
+"sprite": "sprites/enemy/humanoid/goblin/slobad.atlas",
+"deck": [
+	"decks/miniboss/slobad.dck"
+],
+"ai": "",
+"boss": true,
+"spawnRate": 1,
+"difficulty": 0.8,
+"speed": 15,
+"scale": 0.75,
+"life": 40,
+"rewards": [
+	{
+		"type": "Card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 1000,
+		"addMaxCount": 5000
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Solemn Simulacrum"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Slobad, Goblin Tinkerer"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Slobad, Iron Goblin"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Gilded Lotus"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Goblin Engineer"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "March of the Machines"
+	},
+	{
+		"type": "item",
+		"probability": 1,
+		"count": 1,
+		"itemName": "Slobad's Iron Boots"
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 50
+	},
+	{
+		"type": "life",
+		"probability": 1,
+		"count": 1
+	}
+],
+"colors": "R",
+"questTags": [
+	"Goblin",
+	"Artificer",
+	"Wandering",
+	"Tribal",
+	"Boss",
+	"Loner",
+	"IdentityRed"
+],
+"gamesPerMatch": 3
+}

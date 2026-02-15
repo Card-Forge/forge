@@ -1,0 +1,68 @@
+{
+"name": "Curselord",
+"sprite": "sprites/enemy/humanoid/human/wizard/black_wiz2.atlas",
+"deck": [
+	"decks/standard/curselord.dck"
+],
+"ai": "",
+"spawnRate": 0.4,
+"difficulty": 0.1,
+"speed": 31,
+"life": 20,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 3,
+		"addMaxCount": 6,
+		"subTypes": [
+			"Curse"
+		],
+		"cardTypes": [
+			"Enchantment"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.5,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 3,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 10
+	}
+],
+"colors": "RBU",
+"questTags": [
+	"Human",
+	"Wizard",
+	"IdentityRed",
+	"IdentityBlue",
+	"IdentityBlack",
+	"IdentityGrixis",
+	"BiomeBlack",
+	"Evil",
+	"Curses"
+]
+}

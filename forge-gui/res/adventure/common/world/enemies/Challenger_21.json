@@ -1,0 +1,94 @@
+{
+"name": "Challenger 21",
+"nameOverride": "Challenger",
+"sprite": "sprites/enemy/aberration/challenger.atlas",
+"deck": [
+	"decks/standard/challenger_21_azorius_control.dck",
+	"decks/standard/challenger_21_dimir_rogue.dck",
+	"decks/standard/challenger_21_mono-green_stompy.dck",
+	"decks/standard/challenger_21_mono-red_aggro.dck"
+],
+"ai": "",
+"randomizeDeck": true,
+"spawnRate": 0.25,
+"difficulty": 0.25,
+"speed": 28,
+"life": 22,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.5,
+		"count": 1,
+		"addMaxCount": 2,
+		"rarity": [
+			"uncommon"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.25,
+		"count": 1,
+		"addMaxCount": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.1,
+		"count": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 210,
+		"addMaxCount": 90
+	},
+	{
+		"type": "item",
+		"probability": 1,
+		"count": 1,
+		"itemName": "Challenge Coin"
+	}
+],
+"colors": "UBRWG",
+"questTags": [
+	"Challenger",
+	"IdentityUnknown",
+	"BiomeGreen",
+	"BiomeRed",
+	"BiomeColorless",
+	"BiomeWhite",
+	"BiomeBlue",
+	"BiomeBlack"
+]
+}

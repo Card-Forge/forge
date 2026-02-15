@@ -1,0 +1,50 @@
+{
+"name": "Goblin Stalker",
+"sprite": "sprites/enemy/humanoid/goblin/goblin_4.atlas",
+"deck": [
+	"decks/standard/evilgoblin.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 29,
+"life": 15,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 2,
+		"colors": [
+			"Red"
+		],
+		"rarity": [
+			"Mythic Rare"
+		]
+	}
+],
+"colors": "BR",
+"questTags": [
+	"Goblin",
+	"Warrior",
+	"Humanoid",
+	"Territorial",
+	"Aggressive",
+	"Tribal",
+	"Small",
+	"IdentityRed",
+	"IdentityBlack",
+	"Minion"
+]
+}

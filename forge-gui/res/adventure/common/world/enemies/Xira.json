@@ -1,0 +1,102 @@
+{
+"name": "Xira",
+"sprite": "sprites/enemy/fey/xira.atlas",
+"deck": [
+	"decks/miniboss/xira.dck"
+],
+"ai": "",
+"boss": true,
+"spawnRate": 1,
+"difficulty": 0.8,
+"speed": 31,
+"life": 50,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 4,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 1000,
+		"addMaxCount": 5000
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"cardName": "Luminous Broodmoth"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Zask, Skittering Swarmlord"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Mazirek, Kraul Death Priest"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Scute Swarm"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Fatal Push"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Grist, the Hunger Tide"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Doom Blade"
+	},
+	{
+		"type": "item",
+		"probability": 1,
+		"count": 1,
+		"itemName": "Xira's Fancy Hat"
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 50
+	},
+	{
+		"type": "life",
+		"probability": 1,
+		"count": 1
+	}
+],
+"colors": "BGR",
+"questTags": [
+	"Insect",
+	"Boss",
+	"Flying",
+	"IdentityBlack",
+	"IdentityGreen",
+	"IdentityRed",
+	"IdentityJund"
+],
+"gamesPerMatch": 3
+}

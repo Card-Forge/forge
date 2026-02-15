@@ -1,0 +1,65 @@
+{
+"name": "Kobold Worker",
+"sprite": "sprites/enemy/humanoid/kobold/koboldworker.atlas",
+"deck": [
+	"decks/standard/koboldworker.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 31,
+"scale": 0.75,
+"life": 12,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 8,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	}
+],
+"colors": "RB",
+"questTags": [
+	"Kobold",
+	"Coward",
+	"Sneaky",
+	"Small",
+	"Humanoid",
+	"Thief",
+	"IdentityRed",
+	"IdentityBlack",
+	"IdentityRakdos",
+	"BiomeRed",
+	"Worker"
+]
+}

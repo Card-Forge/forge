@@ -1,0 +1,40 @@
+{
+"name": "Vampire",
+"sprite": "sprites/enemy/undead/vampire.atlas",
+"deck": [
+	"decks/standard/vampire.dck"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 31,
+"life": 17,
+"rewards": [
+	{
+		"type": "deckCard",
+		"count": 2,
+		"addMaxCount": 8,
+		"colors": [
+			"Black"
+		],
+		"rarity": [
+			"Uncommon",
+			"Rare"
+		]
+	}
+],
+"colors": "B",
+"questTags": [
+	"Vampire",
+	"Undead",
+	"Unholy",
+	"Flying",
+	"Humanoid",
+	"Predator",
+	"Nocturnal",
+	"IdentityBlack",
+	"BiomeBlack",
+	"Minion"
+]
+}

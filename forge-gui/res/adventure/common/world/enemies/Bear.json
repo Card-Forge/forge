@@ -1,0 +1,73 @@
+{
+"name": "Bear",
+"nameOverride": "Brown Bear",
+"sprite": "sprites/enemy/beast/bear.atlas",
+"deck": [
+	"decks/standard/bear.json"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 25,
+"life": 16,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 4,
+		"rarity": [
+			"uncommon"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.5,
+		"count": 1,
+		"addMaxCount": 2,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	}
+],
+"colors": "G",
+"questTags": [
+	"Territorial",
+	"Animal",
+	"Wild",
+	"Domesticated",
+	"IdentityGreen",
+	"BiomeGreen"
+]
+}

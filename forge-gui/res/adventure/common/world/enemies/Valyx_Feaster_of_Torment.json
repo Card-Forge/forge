@@ -1,0 +1,64 @@
+{
+"name": "Valyx Feaster of Torment",
+"sprite": "sprites/enemy/fiend/valyx.atlas",
+"deck": [
+	"decks/miniboss/valyx.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 31,
+"life": 80,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 2,
+		"rarity": [
+			"uncommon"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 1,
+		"rarity": [
+			"rare",
+			"mythicrare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	}
+],
+"colors": "B",
+"questTags": [
+	"Demon",
+	"Humanoid",
+	"Unholy",
+	"IdentityBlack"
+],
+"gamesPerMatch": 3
+}

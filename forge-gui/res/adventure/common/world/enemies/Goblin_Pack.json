@@ -1,0 +1,63 @@
+{
+"name": "Goblin Pack",
+"sprite": "sprites/enemy/humanoid/goblin/goblin_group.atlas",
+"deck": [
+	"decks/standard/goblin_bad.json"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 27,
+"life": 20,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 3,
+		"colors": [
+			"Red"
+		],
+		"rarity": [
+			"Rare"
+		]
+	}
+],
+"colors": "R",
+"nextEnemy": {
+	"name": "Goblin",
+	"deck": [
+		"decks/standard/goblin_bad.json"
+	],
+	"ai": "",
+	"life": 8,
+	"nextEnemy": {
+		"name": "Goblin",
+		"deck": [
+			"decks/standard/goblin_bad.json"
+		],
+		"ai": "",
+		"life": 8,
+		"teamNumber": 1
+	},
+	"teamNumber": 1
+},
+"teamNumber": 1,
+"questTags": [
+	"Goblin",
+	"Horde",
+	"Aggressive",
+	"IdentityRed"
+]
+}

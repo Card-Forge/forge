@@ -1,0 +1,50 @@
+{
+"name": "Merfolk",
+"nameOverride": "Merfolk Raider",
+"sprite": "sprites/enemy/elemental/waterelemental.atlas",
+"deck": [
+	"decks/standard/merfolk_bad.json"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 23,
+"life": 12,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 3,
+		"colors": [
+			"Blue"
+		],
+		"rarity": [
+			"Rare"
+		]
+	}
+],
+"colors": "U",
+"questTags": [
+	"Merfolk",
+	"Humanoid",
+	"Swimming",
+	"Tribal",
+	"Territorial",
+	"Water",
+	"IdentityBlue",
+	"BiomeBlue",
+	"Minion"
+]
+}

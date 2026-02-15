@@ -1,0 +1,48 @@
+{
+"name": "Chicken",
+"sprite": "sprites/enemy/beast/chicken.atlas",
+"deck": [
+	"decks/standard/chicken.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.8,
+"speed": 31,
+"scale": 0.75,
+"life": 12,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 3,
+		"cardName": "Zodiac Rooster"
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"cardName": "Chicken Egg"
+	},
+	{
+		"type": "item",
+		"probability": 0.3,
+		"count": 1,
+		"itemName": "Chicken Egg",
+		"itemNames": [
+			"Chicken Egg"
+		]
+	}
+],
+"colors": "WG",
+"questTags": [
+	"Farm",
+	"Animal",
+	"Bird",
+	"Prey",
+	"Domesticated",
+	"Small",
+	"IdentityWhite",
+	"IdentityGreen",
+	"IdentitySelesnya"
+]
+}

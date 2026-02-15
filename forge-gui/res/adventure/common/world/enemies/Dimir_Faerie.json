@@ -1,0 +1,77 @@
+{
+"name": "Dimir Faerie",
+"sprite": "sprites/enemy/fey/pixie_dimir.atlas",
+"deck": [
+	"decks/standard/dimir_faerie.dck"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 20,
+"life": 17,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.25,
+		"count": 1,
+		"addMaxCount": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "randomCard",
+		"probability": 0.5,
+		"count": 2,
+		"colors": [
+			"Black",
+			"Blue"
+		],
+		"rarity": [
+			"uncommon",
+			"rare",
+			"mythicrare"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	}
+],
+"colors": "BU",
+"questTags": [
+	"Mythical",
+	"Flying",
+	"Faerie",
+	"IdentityBlack",
+	"IdentityBlue",
+	"IdentityDimir"
+]
+}

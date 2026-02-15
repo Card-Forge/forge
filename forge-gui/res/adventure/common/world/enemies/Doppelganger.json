@@ -1,0 +1,49 @@
+{
+"name": "Doppelganger",
+"sprite": "sprites/enemy/undead/doppelganger.atlas",
+"deck": [
+	"decks/standard/mimic.dck"
+],
+"copyPlayerDeck": true,
+"ai": "",
+"spawnRate": 0.4,
+"difficulty": 0.1,
+"speed": 30,
+"life": 20,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"common",
+			"uncommon",
+			"rare"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.25,
+		"count": 1,
+		"rarity": [
+			"rare",
+			"mythicrare",
+			"special"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 100,
+		"addMaxCount": 150
+	}
+],
+"colors": "C",
+"questTags": [
+	"Aberration",
+	"Challenger",
+	"IdentityUnknown",
+	"BiomeColorless",
+	"BiomeBlue"
+]
+}

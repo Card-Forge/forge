@@ -1,0 +1,104 @@
+{
+"name": "Tibalt",
+"sprite": "sprites/enemy/fiend/tibalt.atlas",
+"deck": [
+	"decks/miniboss/tibalt.dck"
+],
+"ai": "",
+"boss": true,
+"spawnRate": 1,
+"difficulty": 0.8,
+"speed": 31,
+"scale": 0.5,
+"life": 40,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 1000,
+		"addMaxCount": 5000
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Valki, God of Lies"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Tibalt, Wicked Tormentor"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Mayhem Devil"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Fiendish Duo"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Hellrider"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Badlands"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Wheel of Fortune"
+	},
+	{
+		"type": "item",
+		"probability": 1,
+		"count": 1,
+		"itemName": "Tibalt's Bag of Tricks",
+		"itemNames": [
+			"Tibalt's Bag of Tricks"
+		]
+	},
+	{
+		"type": "life",
+		"probability": 1,
+		"count": 1
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 50
+	}
+],
+"colors": "R",
+"questTags": [
+	"Sneaky",
+	"Devil",
+	"Boss",
+	"Planeswalker",
+	"IdentityRed"
+],
+"gamesPerMatch": 3
+}

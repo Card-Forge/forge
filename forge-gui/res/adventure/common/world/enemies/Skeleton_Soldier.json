@@ -1,0 +1,39 @@
+{
+"name": "Skeleton Soldier",
+"sprite": "sprites/enemy/undead/skeleton_2.atlas",
+"deck": [
+	"decks/standard/skeleton_2.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 20,
+"life": 11,
+"rewards": [
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 7,
+		"addMaxCount": 32
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"subTypes": [
+			"Skeleton"
+		]
+	}
+],
+"colors": "B",
+"questTags": [
+	"Undead",
+	"Skeleton",
+	"Soldier",
+	"Regenerating",
+	"IdentityBlack",
+	"BiomeBlack",
+	"Minion"
+]
+}

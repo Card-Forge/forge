@@ -1,0 +1,104 @@
+{
+"name": "Esper Artificer",
+"nameOverride": "",
+"sprite": "sprites/enemy/humanoid/human/artificer/esper_artificer.atlas",
+"deck": [
+	"decks/standard/esper_artificer.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 25,
+"life": 25,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 5
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Raffine's Tower"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Tundra"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Underground Sea"
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.5,
+		"count": 1,
+		"addMaxCount": 2,
+		"rarity": [
+			"uncommon"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.25,
+		"count": 1,
+		"addMaxCount": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.1,
+		"count": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 300
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 20,
+		"addMaxCount": 20
+	}
+],
+"colors": "UB",
+"questTags": [
+	"Humanoid",
+	"Leader",
+	"Human",
+	"Boss",
+	"Evil",
+	"Warlock",
+	"Intelligent"
+]
+}

@@ -1,0 +1,76 @@
+{
+"name": "Aether Channeler",
+"sprite": "sprites/enemy/humanoid/human/cleric/monk_3.atlas",
+"deck": [
+	"decks/standard/aether_channeler.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 24,
+"life": 15,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 6,
+		"rarity": [
+			"common",
+			"uncommon",
+			"rare"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.25,
+		"count": 1,
+		"addMaxCount": 1,
+		"rarity": [
+			"rare",
+			"mythicrare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.1,
+		"count": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 10
+	}
+],
+"colors": "WU",
+"questTags": [
+	"Human",
+	"Wizard",
+	"BiomeWhite",
+	"BiomeBlue",
+	"IdentityWhite",
+	"IdentityBlue",
+	"IdentityAzorius",
+	"Mystic"
+]
+}

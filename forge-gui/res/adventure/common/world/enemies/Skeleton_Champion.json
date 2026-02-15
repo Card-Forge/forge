@@ -1,0 +1,54 @@
+{
+"name": "Skeleton Champion",
+"sprite": "sprites/enemy/undead/skeleton_2.atlas",
+"deck": [
+	"decks/standard/skeleton_champion.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.2,
+"speed": 20,
+"life": 25,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"rare",
+			"Mythic Rare",
+			"Uncommon"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 10
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 3,
+		"addMaxCount": 4,
+		"cardText": "Skeleton"
+	}
+],
+"colors": "B",
+"questTags": [
+	"Undead",
+	"Skeleton",
+	"Soldier",
+	"Regenerating",
+	"IdentityBlack",
+	"BiomeBlack"
+]
+}

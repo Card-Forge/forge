@@ -1,0 +1,115 @@
+{
+"name": "Conjurer",
+"nameOverride": "",
+"sprite": "sprites/enemy/humanoid/conjurer.atlas",
+"deck": [
+	"decks/miniboss/conjure.dck"
+],
+"ai": "",
+"boss": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 25,
+"scale": 0.8,
+"life": 35,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 5
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Tome of the Infinite"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Thayan Evokers"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Toralf's Disciple"
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.5,
+		"count": 1,
+		"addMaxCount": 2,
+		"rarity": [
+			"uncommon"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.25,
+		"count": 1,
+		"addMaxCount": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.1,
+		"count": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 900
+	},
+	{
+		"type": "item",
+		"probability": 1,
+		"count": 1,
+		"itemName": "Mantle of Ancient Lore",
+		"itemNames": [
+			"Mantle of Ancient Lore"
+		]
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 20,
+		"addMaxCount": 20
+	}
+],
+"colors": "UB",
+"questTags": [
+	"Humanoid",
+	"Leader",
+	"Human",
+	"Boss",
+	"Evil",
+	"Warlock",
+	"Intelligent"
+]
+}

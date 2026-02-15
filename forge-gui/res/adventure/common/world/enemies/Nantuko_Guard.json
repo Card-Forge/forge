@@ -1,0 +1,92 @@
+{
+"name": "Nantuko Guard",
+"sprite": "sprites/enemy/humanoid/nantuko/deadlymantis.atlas",
+"deck": [
+	"decks/standard/nantuko_morpher.dck"
+],
+"ai": "",
+"spawnRate": 0.5,
+"difficulty": 0.1,
+"speed": 15,
+"scale": 0.6,
+"life": 25,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 2,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.25,
+		"count": 1,
+		"addMaxCount": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"subTypes": [
+			"Eldrazi"
+		],
+		"cardTypes": [
+			"Creature"
+		]
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 10
+	}
+],
+"colors": "BGU",
+"questTags": [
+	"Insect",
+	"Humanoid",
+	"Wandering",
+	"Huge",
+	"IdentityBlack",
+	"IdentityGreen",
+	"IdentityBlue",
+	"IdentitySultai"
+]
+}

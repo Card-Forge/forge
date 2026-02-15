@@ -1,0 +1,64 @@
+{
+"name": "Turtle",
+"sprite": "sprites/enemy/beast/turtle.atlas",
+"deck": [
+	"decks/standard/turtle.json"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 5,
+"scale": 0.8,
+"life": 20,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 8,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	}
+],
+"colors": "U",
+"questTags": [
+	"Passive",
+	"Territorial",
+	"Nature",
+	"Animal",
+	"Wild",
+	"Swimming",
+	"Water",
+	"Prey",
+	"IdentityBlue",
+	"BiomeBlue"
+]
+}

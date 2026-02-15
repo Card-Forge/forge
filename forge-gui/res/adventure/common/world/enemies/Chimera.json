@@ -1,0 +1,50 @@
+{
+"name": "Chimera",
+"sprite": "sprites/enemy/aberration/chimera.atlas",
+"deck": [
+	"decks/standard/chimera.dck"
+],
+"ai": "",
+"spawnRate": 0.8,
+"difficulty": 0.1,
+"speed": 23,
+"life": 25,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 4,
+		"subTypes": [
+			"Chimera"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"addMaxCount": 3,
+		"colors": [
+			"Green"
+		],
+		"rarity": [
+			"Rare"
+		]
+	}
+],
+"colors": "GW",
+"questTags": [
+	"Chimera",
+	"Beast",
+	"Wild",
+	"Huge",
+	"Wandering",
+	"IdentityTimur"
+]
+}

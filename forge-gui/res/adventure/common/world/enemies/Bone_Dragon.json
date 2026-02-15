@@ -1,0 +1,87 @@
+{
+"name": "Bone Dragon",
+"nameOverride": "",
+"sprite": "sprites/enemy/dragon/bonedragon.atlas",
+"deck": [
+	"decks/standard/bonedragon.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.3,
+"speed": 20,
+"life": 25,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 5,
+		"colors": [
+			"Black"
+		],
+		"rarity": [
+			"common",
+			"uncommon",
+			"rare",
+			"Mythic Rare"
+		],
+		"subTypes": [
+			"Dragon"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.4,
+		"count": 1,
+		"rarity": [
+			"Rare",
+			"Mythic Rare"
+		],
+		"cardTypes": [
+			"Planeswalker"
+		],
+		"colorType": "Any",
+		"cardText": "Sarkhan"
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common",
+			"Rare"
+		],
+		"cardTypes": [
+			"Land"
+		],
+		"colorType": "Colorless",
+		"cardText": "\\{R\\}"
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 10
+	}
+],
+"colors": "R",
+"questTags": [
+	"Dragon",
+	"Flyer",
+	"Monster",
+	"Zombie",
+	"IdentityBlack",
+	"IdentityRakdos",
+	"Huge",
+	"Territorial",
+	"Undead",
+	"Skeleton"
+]
+}

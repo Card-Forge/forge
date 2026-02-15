@@ -1,0 +1,40 @@
+{
+"name": "Rakdos Devil",
+"sprite": "sprites/enemy/fiend/juggler.atlas",
+"deck": [
+	"decks/standard/rakdos_devil.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 24,
+"life": 11,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 8
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 5,
+		"addMaxCount": 95
+	}
+],
+"colors": "BR",
+"questTags": [
+	"Devil",
+	"Fire",
+	"Unholy",
+	"Sneaky",
+	"Humanoid",
+	"Thief",
+	"Subterranean",
+	"IdentityRed",
+	"IdentityBlack",
+	"IdentityRakdos",
+	"BiomeBlack"
+]
+}

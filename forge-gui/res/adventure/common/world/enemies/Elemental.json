@@ -1,0 +1,46 @@
+{
+"name": "Elemental",
+"nameOverride": "Air Elemental",
+"sprite": "sprites/enemy/elemental/crystalelemental.atlas",
+"deck": [
+	"decks/standard/elemental_air.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 31,
+"life": 16,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"rare",
+			"Common",
+			"Uncommon"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	}
+],
+"colors": "U",
+"questTags": [
+	"Elemental",
+	"Humanoid",
+	"IdentityBlue",
+	"BiomeBlue"
+]
+}

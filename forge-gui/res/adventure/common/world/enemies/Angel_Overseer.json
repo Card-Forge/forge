@@ -1,0 +1,55 @@
+{
+"name": "Angel Overseer",
+"sprite": "sprites/enemy/celestial/angel_2.atlas",
+"deck": [
+	"decks/standard/azoriusangel.dck"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 0.6,
+"difficulty": 0.1,
+"speed": 21,
+"scale": 1.2,
+"life": 18,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon",
+			"Rare"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	}
+],
+"colors": "uw",
+"questTags": [
+	"Angel",
+	"Celestial",
+	"Flying",
+	"IdentityAzorius",
+	"Holy",
+	"BiomeBlue",
+	"BiomeWhite",
+	null
+]
+}

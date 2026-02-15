@@ -1,0 +1,46 @@
+{
+"name": "Archer Elite",
+"nameOverride": "",
+"sprite": "sprites/enemy/humanoid/human/archer/bowmandefender.atlas",
+"deck": [
+	"decks/standard/archerelite.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 25,
+"life": 25,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon",
+			"rare"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 30,
+		"addMaxCount": 120
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 10
+	}
+],
+"colors": "GW",
+"questTags": [
+	"Human",
+	"Archer",
+	"Soldier",
+	"Leader",
+	"IdentitySelesnya"
+]
+}

@@ -1,0 +1,57 @@
+{
+"name": "Spirit",
+"sprite": "sprites/enemy/undead/ghost_3.atlas",
+"deck": [
+	"decks/standard/spirit.dck"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 31,
+"life": 20,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.5,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"uncommon",
+			"rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 100,
+		"addMaxCount": 200
+	}
+],
+"colors": "U",
+"questTags": [
+	"Undead",
+	"Spirit",
+	"Flying",
+	"Ghost",
+	"IdentityBlue",
+	"Dungeon"
+]
+}

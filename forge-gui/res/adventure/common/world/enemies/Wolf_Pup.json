@@ -1,0 +1,64 @@
+{
+"name": "Wolf Pup",
+"sprite": "sprites/enemy/beast/wolfcub.atlas",
+"deck": [
+	"decks/standard/wolf.json"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 35,
+"scale": 0.7,
+"life": 12,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 2,
+		"rarity": [
+			"common",
+			"uncommon",
+			"rare"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 2,
+		"rarity": [
+			"uncommon",
+			"common",
+			"Rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "randomCard",
+		"count": 2,
+		"addMaxCount": 1
+	}
+],
+"colors": "G",
+"questTags": [
+	"Nocturnal",
+	"Animal",
+	"Human",
+	"Beast",
+	"Wild",
+	"Loner",
+	"Aggressive",
+	"Territorial",
+	"IdentityGreen",
+	"BiomeGreen"
+]
+}

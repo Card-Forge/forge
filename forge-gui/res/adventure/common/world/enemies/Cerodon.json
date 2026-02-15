@@ -1,0 +1,80 @@
+{
+"name": "Cerodon",
+"sprite": "sprites/enemy/beast/cerodon.atlas",
+"deck": [
+	"decks/standard/cerodon.dck"
+],
+"ai": "",
+"spawnRate": 0.2,
+"difficulty": 0.1,
+"speed": 25,
+"life": 30,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 2,
+		"rarity": [
+			"uncommon"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.1,
+		"count": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 100,
+		"addMaxCount": 100
+	}
+],
+"colors": "U",
+"questTags": [
+	"Giant",
+	"Monster",
+	"IdentityRed",
+	"Beast"
+]
+}

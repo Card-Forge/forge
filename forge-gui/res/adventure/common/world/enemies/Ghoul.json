@@ -1,0 +1,36 @@
+{
+"name": "Ghoul",
+"sprite": "sprites/enemy/undead/ghoul.atlas",
+"deck": [
+	"decks/standard/ghoul.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 15,
+"life": 13,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 7
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	}
+],
+"colors": "BU",
+"questTags": [
+	"Undead",
+	"Humanoid",
+	"IdentityBlack",
+	"IdentityBlue",
+	"IdentityDimir",
+	"BiomeBlack",
+	"Minion"
+]
+}

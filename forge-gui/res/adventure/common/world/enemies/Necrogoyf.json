@@ -1,0 +1,59 @@
+{
+"name": "Necrogoyf",
+"sprite": "sprites/enemy/monstrosity/shardsoul_slayer.atlas",
+"deck": [
+	"decks/standard/necrogoyf.dck"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 24,
+"scale": 0.6,
+"life": 16,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"Rare",
+			"Uncommon",
+			"Mythic Rare"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 2,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10
+	}
+],
+"colors": "B",
+"questTags": [
+	"Humanoid",
+	"Aberration",
+	"Aggressive",
+	"Predator",
+	"Unholy",
+	"IdentityBlack"
+]
+}

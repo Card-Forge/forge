@@ -1,0 +1,90 @@
+{
+"name": "Garruk",
+"sprite": "sprites/enemy/humanoid/human/shaman/garruk.atlas",
+"deck": [
+	"decks/miniboss/garruk.dck"
+],
+"ai": "",
+"boss": true,
+"spawnRate": 1,
+"difficulty": 1,
+"speed": 30,
+"life": 25,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Garruk Wildspeaker"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Garruk, Apex Predator"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Exploration"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Primeval Titan"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "In Garruk's Wake"
+	},
+	{
+		"type": "card",
+		"probability": 0.3,
+		"count": 1,
+		"cardName": "Gaea's Cradle"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Thragtusk"
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 1000,
+		"addMaxCount": 9000
+	},
+	{
+		"type": "item",
+		"probability": 1,
+		"count": 1,
+		"itemName": "Garruk's Mighty Axe"
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 20,
+		"addMaxCount": 10
+	},
+	{
+		"type": "life",
+		"probability": 1,
+		"count": 1
+	}
+],
+"colors": "GB",
+"questTags": [
+	"Planeswalker",
+	"Garruk",
+	"Boss",
+	"IdentityGreen",
+	"IdentityBlack",
+	"IdentityGolgari"
+],
+"gamesPerMatch": 3
+}

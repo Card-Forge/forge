@@ -1,0 +1,85 @@
+{
+"name": "Jace",
+"sprite": "sprites/enemy/humanoid/human/wizard/jace.atlas",
+"deck": [
+	"decks/miniboss/jace.dck"
+],
+"ai": "",
+"boss": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 30,
+"life": 40,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Jace, the Mind Sculptor"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Jace, the Perfected Mind"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Jace's Defeat"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Treasure Cruise"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Castaway's Despair"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Counterspell"
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 1000,
+		"addMaxCount": 5000
+	},
+	{
+		"type": "item",
+		"probability": 1,
+		"count": 1,
+		"itemName": "Jace's Signature Hoodie"
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 30,
+		"addMaxCount": 30
+	},
+	{
+		"type": "life",
+		"probability": 1,
+		"count": 1
+	}
+],
+"colors": "UW",
+"questTags": [
+	"Boss",
+	"Jace",
+	"Planeswalker",
+	"Illusionist",
+	"IdentityBlue",
+	"IdentityWhite",
+	"IdentityAzorius"
+],
+"gamesPerMatch": 3
+}

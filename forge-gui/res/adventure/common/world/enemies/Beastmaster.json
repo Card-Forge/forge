@@ -1,0 +1,78 @@
+{
+"name": "Beastmaster",
+"nameOverride": "Human Beastmaster",
+"sprite": "sprites/enemy/humanoid/human/warrior/caribou_elite.atlas",
+"deck": [
+	"decks/standard/beastmaster.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 24,
+"life": 15,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 3,
+		"rarity": [
+			"uncommon"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery",
+			"Planeswalker",
+			"Land"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.5,
+		"count": 1,
+		"addMaxCount": 2,
+		"rarity": [
+			"rare",
+			"mythicrare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	}
+],
+"colors": "GW",
+"questTags": [
+	"Human",
+	"Loner",
+	"Nature",
+	"IdentityGreen",
+	"IdentityWhite",
+	"IdentitySelesnya",
+	"BiomeGreen",
+	"BiomeWhite"
+]
+}

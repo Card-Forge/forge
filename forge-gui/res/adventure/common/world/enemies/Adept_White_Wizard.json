@@ -1,0 +1,69 @@
+{
+"name": "Adept White Wizard",
+"sprite": "sprites/enemy/humanoid/human/wizard/white_wiz2.atlas",
+"deck": [
+	"decks/standard/whitewizard_medium_aggro.dck",
+	"decks/standard/whitewizard_medium_basri.dck",
+	"decks/standard/whitewizard_medium_control.dck",
+	"decks/standard/whitewizard_medium_knight.dck"
+],
+"ai": "",
+"randomizeDeck": true,
+"spawnRate": 0.75,
+"difficulty": 0.1,
+"speed": 24,
+"life": 15,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 6,
+		"rarity": [
+			"Common",
+			"Uncommon"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 20,
+		"addMaxCount": 70
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"colors": [
+			"White"
+		],
+		"rarity": [
+			"Common",
+			"Uncommon"
+		],
+		"colorType": "MonoColor"
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.5,
+		"count": 1,
+		"addMaxCount": 4,
+		"rarity": [
+			"Rare",
+			"Mythic Rare"
+		]
+	}
+],
+"colors": "W",
+"questTags": [
+	"Holy",
+	"Wizard",
+	"Human",
+	"Religious",
+	"Passive",
+	"IdentityWhite",
+	"BiomeColorless",
+	"BiomeWhite"
+]
+}

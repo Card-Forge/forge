@@ -1,0 +1,75 @@
+{
+"name": "Beholder",
+"sprite": "sprites/enemy/aberration/beholder.atlas",
+"deck": [
+	"decks/standard/beholder.dck"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 31,
+"life": 15,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"uncommon"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.7,
+		"count": 1,
+		"addMaxCount": 2,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.1,
+		"count": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	}
+],
+"colors": "BRU",
+"questTags": [
+	"Aberration",
+	"Floating",
+	"Flying",
+	"IdentityBlack",
+	"IdentityBlue",
+	"IdentityRed",
+	"IdentityGrixis",
+	"BiomeBlack"
+]
+}

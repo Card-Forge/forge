@@ -1,0 +1,80 @@
+{
+"name": "Bandit Leader",
+"sprite": "sprites/enemy/humanoid/human/bandit/banditleader.atlas",
+"deck": [
+	"decks/standard/banditleader_bolas.dck",
+	"decks/standard/banditleader_hellbent.dck",
+	"decks/standard/banditleader_rakdos.dck"
+],
+"ai": "",
+"randomizeDeck": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 24,
+"scale": 0.8,
+"life": 25,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 5,
+		"addMaxCount": 5,
+		"rarity": [
+			"uncommon",
+			"rare",
+			"mythic"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.5,
+		"count": 1,
+		"addMaxCount": 2,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.1,
+		"count": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 100,
+		"addMaxCount": 100
+	}
+],
+"colors": "BR",
+"questTags": [
+	"Wandering",
+	"Warrior",
+	"Bandit",
+	"IdentityBlack",
+	"IdentityRed",
+	"IdentityRakdos",
+	"Leader",
+	"Human"
+]
+}

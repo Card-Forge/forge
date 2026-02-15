@@ -1,0 +1,49 @@
+{
+"name": "Horseman",
+"nameOverride": "Human Horseman",
+"sprite": "sprites/enemy/humanoid/human/knight/cavalier_2.atlas",
+"deck": [
+	"decks/standard/horsemanship.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 30,
+"life": 14,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 2,
+		"colors": [
+			"White"
+		],
+		"rarity": [
+			"Mythic Rare"
+		]
+	}
+],
+"colors": "UW",
+"questTags": [
+	"Human",
+	"Soldier",
+	"Mounted",
+	"IdentityBlue",
+	"IdentityWhite",
+	"IdentityAzorius",
+	"BiomeWhite",
+	"Minion"
+]
+}

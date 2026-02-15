@@ -1,0 +1,58 @@
+{
+"name": "Pharaoh",
+"sprite": "sprites/enemy/undead/pharaoh.atlas",
+"deck": [
+	"decks/standard/pharaoh.dck"
+],
+"ai": "",
+"spawnRate": 0.5,
+"difficulty": 0.1,
+"speed": 15,
+"scale": 0.5,
+"life": 25,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 5,
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 100,
+		"addMaxCount": 150
+	}
+],
+"questTags": [
+	"Undead",
+	"Humanoid",
+	"Loner",
+	"Territorial",
+	"IdentityWhite",
+	"IdentityBlack",
+	"IdentityOrzhov",
+	"BiomeColorless",
+	"BiomeBlack"
+]
+}

@@ -1,0 +1,49 @@
+{
+"name": "Hippo",
+"nameOverride": "Giant Bull Hippo",
+"sprite": "sprites/enemy/beast/hippo.atlas",
+"deck": [
+	"decks/standard/hippo.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 23,
+"scale": 0.6,
+"life": 20,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 3,
+		"colors": [
+			"Green"
+		],
+		"rarity": [
+			"Rare"
+		]
+	}
+],
+"colors": "G",
+"questTags": [
+	"Beast",
+	"Wild",
+	"Huge",
+	"Forest",
+	"Water",
+	"Territorial",
+	"IdentityGreen"
+]
+}

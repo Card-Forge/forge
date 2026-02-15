@@ -1,0 +1,69 @@
+{
+"name": "Owl",
+"sprite": "sprites/enemy/beast/owl.atlas",
+"deck": [
+	"decks/standard/owl.dck"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 0.5,
+"difficulty": 0.1,
+"speed": 25,
+"scale": 0.75,
+"life": 13,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	}
+],
+"questTags": [
+	"Bird",
+	"Animal",
+	"Domesticated",
+	"Flying",
+	"Nature",
+	"Wild",
+	"Nocturnal",
+	"Small",
+	"Predator",
+	"IdentityBlack",
+	"IdentityBlue",
+	"IdentityDimir",
+	"BiomeGreen",
+	"BiomeWhite",
+	"BiomeBlue"
+]
+}

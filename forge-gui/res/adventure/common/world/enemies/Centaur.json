@@ -1,0 +1,35 @@
+{
+"name": "Centaur",
+"sprite": "sprites/enemy/fey/centaur.atlas",
+"deck": [
+	"decks/standard/centaur.json"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 30,
+"life": 16,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 5,
+		"addMaxCount": 5
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 15,
+		"addMaxCount": 85
+	}
+],
+"colors": "GW",
+"questTags": [
+	"Humanoid",
+	"Tribal",
+	"IdentityGreen",
+	"IdentityWhite",
+	"IdentitySelesnya",
+	"BiomeGreen"
+]
+}

@@ -1,0 +1,70 @@
+{
+"name": "Griselbrand",
+"sprite": "sprites/enemy/fiend/griselbrand.atlas",
+"deck": [
+	"decks/boss/griselbrand.dck"
+],
+"ai": "",
+"boss": true,
+"flying": true,
+"speed": 1,
+"scale": 1.5,
+"life": 60,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"cardName": "Griselbrand"
+	},
+	{
+		"type": "item",
+		"probability": 1,
+		"count": 1,
+		"itemName": "Black Key"
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 1000,
+		"addMaxCount": 250
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Demonic Tutor"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Toxic Deluge"
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 20
+	},
+	{
+		"type": "life",
+		"probability": 1,
+		"count": 1
+	}
+],
+"equipment": [
+	"Mox Jet"
+],
+"colors": "B",
+"questTags": [
+	"Demon",
+	"Huge",
+	"Flying",
+	"Unholy",
+	"Boss",
+	"IdentityBlack",
+	"Griselbrand"
+],
+"gamesPerMatch": 3
+}

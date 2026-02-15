@@ -1,0 +1,70 @@
+{
+"name": "Armored Knight",
+"sprite": "sprites/enemy/humanoid/knight.atlas",
+"deck": [
+	"decks/standard/armored_knight.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 15,
+"life": 25,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon",
+			"Rare",
+			"Mythic Rare"
+		],
+		"subTypes": [
+			"Equipment"
+		],
+		"cardTypes": [
+			"Artifact"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 3,
+		"colors": [
+			"White"
+		],
+		"rarity": [
+			"Rare"
+		],
+		"subTypes": [
+			"Knight"
+		],
+		"cardText": "Equipment"
+	},
+	{
+		"type": "item",
+		"probability": 0.1,
+		"count": 1,
+		"itemName": "Steel Armor"
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	}
+],
+"colors": "WR",
+"questTags": [
+	"Human",
+	"Soldier",
+	"Leader",
+	"IdentityWhite",
+	"IdentityRed",
+	"IdentityBoros",
+	"BiomeWhite"
+]
+}

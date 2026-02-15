@@ -1,0 +1,37 @@
+{
+"name": "Giant Spider",
+"sprite": "sprites/enemy/beast/spider_purple.atlas",
+"deck": [
+	"decks/standard/spider_token.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 23,
+"life": 15,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 3,
+		"addMaxCount": 7
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	}
+],
+"colors": "G",
+"questTags": [
+	"Spider",
+	"Territorial",
+	"Predator",
+	"Ambush",
+	"Wild",
+	"Subterranean",
+	"IdentityGreen",
+	"BiomeGreen"
+]
+}

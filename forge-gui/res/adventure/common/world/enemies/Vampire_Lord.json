@@ -1,0 +1,33 @@
+{
+"name": "Vampire Lord",
+"sprite": "sprites/enemy/undead/vampire_3.atlas",
+"deck": [
+	"decks/standard/vampire_blood_token_fly.dck"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 31,
+"life": 18,
+"rewards": [
+	{
+		"type": "randomCard",
+		"count": 2,
+		"addMaxCount": 8
+	}
+],
+"colors": "BR",
+"questTags": [
+	"Vampire",
+	"Unholy",
+	"Undead",
+	"Flying",
+	"Predator",
+	"Leader",
+	"Nocturnal",
+	"IdentityBlack",
+	"IdentityRed",
+	"BiomeRed"
+]
+}

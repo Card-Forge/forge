@@ -1,0 +1,74 @@
+{
+"name": "Goblin Artificer",
+"sprite": "sprites/enemy/humanoid/goblin/goblin_bomber.atlas",
+"deck": [
+	"decks/standard/goblin_artificer.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.3,
+"speed": 27,
+"scale": 0.75,
+"life": 15,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 2,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"rare"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"common",
+			"uncommon"
+		],
+		"cardTypes": [
+			"land"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 6,
+		"cardTypes": [
+			"Artifact"
+		]
+	}
+],
+"colors": "R",
+"questTags": [
+	"Goblin",
+	"Coward",
+	"Humanoid",
+	"Tribal",
+	"Territorial",
+	"Scientist",
+	"Small",
+	"Artificer",
+	"Scavenger",
+	"IdentityRed",
+	"Minion"
+]
+}

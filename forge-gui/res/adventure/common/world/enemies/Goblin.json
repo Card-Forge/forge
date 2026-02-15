@@ -1,0 +1,57 @@
+{
+"name": "Goblin",
+"nameOverride": "Goblin Worker",
+"sprite": "sprites/enemy/humanoid/goblin/goblin.atlas",
+"deck": [
+	"decks/standard/goblin_warrior_easy.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 27,
+"life": 13,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"count": 1,
+		"rarity": [
+			"common",
+			"uncommon"
+		],
+		"cardTypes": [
+			"land"
+		]
+	}
+],
+"colors": "R",
+"questTags": [
+	"Goblin",
+	"Coward",
+	"Humanoid",
+	"Territorial",
+	"Aggressive",
+	"Tribal",
+	"Small",
+	"Thief",
+	"Scavenger",
+	"IdentityRed",
+	"BiomeRed",
+	"Minion"
+]
+}

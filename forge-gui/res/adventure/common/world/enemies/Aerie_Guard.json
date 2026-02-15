@@ -1,0 +1,64 @@
+{
+"name": "Aerie Guard",
+"nameOverride": "",
+"sprite": "sprites/enemy/fiend/aerie_guard.atlas",
+"deck": [
+	"decks/standard/aerie_guard.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 21,
+"scale": 0.75,
+"life": 18,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"Uncommon",
+			"Rare",
+			"Common"
+		],
+		"cardTypes": [
+			"Artifact",
+			"Creature",
+			"Enchantment"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 100,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"count": 3,
+		"colors": [
+			"White"
+		],
+		"rarity": [
+			"Uncommon",
+			"Rare"
+		]
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 5,
+		"addMaxCount": 10
+	}
+],
+"colors": "WU",
+"questTags": [
+	"Humanoid",
+	"Octopus",
+	"Aerie",
+	"Guard",
+	"Wizard",
+	"IdentityAzorius"
+]
+}

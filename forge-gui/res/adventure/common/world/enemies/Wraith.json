@@ -1,0 +1,62 @@
+{
+"name": "Wraith",
+"sprite": "sprites/enemy/undead/wraith.atlas",
+"deck": [
+	"decks/standard/wraithswampwalk.dck"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 0.5,
+"difficulty": 0.1,
+"speed": 12,
+"life": 13,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 8,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	}
+],
+"colors": "B",
+"questTags": [
+	"Mystic",
+	"Unholy",
+	"Wizard",
+	"IdentityBlack",
+	"Ghost",
+	"Undead",
+	"BiomeBlack",
+	"Minion"
+]
+}

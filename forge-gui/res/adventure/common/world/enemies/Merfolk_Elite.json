@@ -1,0 +1,91 @@
+{
+"name": "Merfolk Elite",
+"nameOverride": "",
+"sprite": "sprites/enemy/humanoid/merfolk/naga.atlas",
+"deck": [
+	"decks/standard/merfolk_elite.dck"
+],
+"ai": "",
+"randomizeDeck": true,
+"spawnRate": 0.5,
+"difficulty": 0.1,
+"speed": 15,
+"scale": 0.75,
+"life": 25,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"colors": [
+			"White"
+		],
+		"rarity": [
+			"Rare",
+			"common",
+			"uncommon"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.25,
+		"count": 1,
+		"addMaxCount": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 10
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 5,
+		"subTypes": [
+			"Merfolk"
+		]
+	}
+],
+"colors": "UGW",
+"questTags": [
+	"Merfolk",
+	"Humanoid",
+	"Swimming",
+	"Territorial",
+	"Tribal",
+	"IdentityGreen",
+	"IdentityBlue",
+	"IdentityWhite",
+	"IdentityBant",
+	"Leader"
+]
+}

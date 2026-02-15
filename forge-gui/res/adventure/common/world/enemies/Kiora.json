@@ -1,0 +1,105 @@
+{
+"name": "Kiora",
+"sprite": "sprites/enemy/humanoid/merfolk/kiora.atlas",
+"deck": [
+	"decks/miniboss/kiora.dck"
+],
+"ai": "",
+"boss": true,
+"spawnRate": 1,
+"difficulty": 0.8,
+"speed": 31,
+"life": 40,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 1000,
+		"addMaxCount": 5000
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Bident of Thassa"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Kiora, the Tide's Fury"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Kiora, the Crashing Wave"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Kiora Bests the Sea God"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Kiora, Behemoth Beckoner"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Kiora, Master of the Depths"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 4,
+		"cardName": "Kiora's Follower"
+	},
+	{
+		"type": "item",
+		"probability": 1,
+		"count": 1,
+		"itemName": "Kiora's Bident"
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 20,
+		"addMaxCount": 30
+	},
+	{
+		"type": "life",
+		"probability": 1,
+		"count": 1
+	}
+],
+"colors": "UG",
+"questTags": [
+	"Planeswalker",
+	"Kiora",
+	"Boss",
+	"Merfolk",
+	"Wizard",
+	"Swimming",
+	"Water",
+	"IdentityGreen",
+	"IdentityBlue",
+	"IdentitySimic"
+],
+"gamesPerMatch": 3
+}

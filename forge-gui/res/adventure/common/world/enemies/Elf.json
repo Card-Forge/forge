@@ -1,0 +1,46 @@
+{
+"name": "Elf",
+"sprite": "sprites/enemy/humanoid/elf/druid.atlas",
+"deck": [
+	"decks/standard/elf_bad.json"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 24,
+"life": 12,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"colors": [
+			"Green"
+		],
+		"rarity": [
+			"Rare"
+		]
+	}
+],
+"colors": "G",
+"questTags": [
+	"Elf",
+	"Humanoid",
+	"Tribal",
+	"IdentityGreen",
+	"BiomeGreen",
+	"Minion"
+]
+}

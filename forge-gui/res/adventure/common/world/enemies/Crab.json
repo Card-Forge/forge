@@ -1,0 +1,77 @@
+{
+"name": "Crab",
+"sprite": "sprites/enemy/beast/crab.atlas",
+"deck": [
+	"decks/standard/crab.json",
+	"decks/standard/giant_crab.dck"
+],
+"ai": "",
+"randomizeDeck": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 20,
+"scale": 0.9,
+"life": 11,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 5,
+		"colors": [
+			"Blue"
+		],
+		"rarity": [
+			"common",
+			"uncommon",
+			"Rare"
+		],
+		"subTypes": [
+			"Crab"
+		],
+		"cardTypes": [
+			"Creature"
+		],
+		"colorType": "MonoColor"
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	}
+],
+"colors": "UB",
+"questTags": [
+	"Animal",
+	"Prey",
+	"Swimming",
+	"Wild",
+	"Water",
+	"Tiny",
+	"IdentityBlue",
+	"IdentityBlack",
+	"IdentityDimir",
+	"BiomeBlue"
+]
+}

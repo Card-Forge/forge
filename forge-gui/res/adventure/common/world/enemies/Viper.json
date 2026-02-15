@@ -1,0 +1,64 @@
+{
+"name": "Viper",
+"sprite": "sprites/enemy/beast/big_snake_2.atlas",
+"deck": [
+	"decks/standard/snake.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 25,
+"life": 15,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"Common",
+			"Uncommon"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 1,
+		"subTypes": [
+			"Snake"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.1,
+		"count": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	}
+],
+"colors": "BG",
+"questTags": [
+	"Animal",
+	"Snake",
+	"Wild",
+	"Territorial",
+	"Ambush",
+	"Predator",
+	"Small",
+	"IdentityBlack",
+	"IdentityGreen",
+	"IdentityGolgari",
+	"BiomeGreen"
+]
+}

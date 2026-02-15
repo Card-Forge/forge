@@ -1,0 +1,60 @@
+{
+"name": "Storm Titan",
+"sprite": "sprites/enemy/giant/stormtitan.atlas",
+"deck": [
+	"decks/standard/stormtitan.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 23,
+"life": 25,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 8,
+		"colors": [
+			"Blue"
+		],
+		"subTypes": [
+			"Giant"
+		],
+		"colorType": "MonoColor"
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 100,
+		"addMaxCount": 900
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 3,
+		"colors": [
+			"White"
+		],
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 10
+	}
+],
+"colors": "U",
+"questTags": [
+	"Humanoid",
+	"IdentityBlue",
+	"Giant",
+	"Huge",
+	"Aberration",
+	"Aggressive",
+	"Leader"
+]
+}

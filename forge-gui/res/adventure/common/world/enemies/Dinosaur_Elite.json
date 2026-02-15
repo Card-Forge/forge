@@ -1,0 +1,49 @@
+{
+"name": "Dinosaur Elite",
+"sprite": "sprites/enemy/beast/ancient.atlas",
+"deck": [
+	"decks/standard/dinosaurelite.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 15,
+"scale": 2,
+"life": 30,
+"rewards": [
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 100,
+		"addMaxCount": 150
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 5,
+		"addMaxCount": 4,
+		"colors": [
+			"White",
+			"Red",
+			"Green"
+		],
+		"rarity": [
+			"Mythic Rare"
+		]
+	}
+],
+"colors": "GRW",
+"questTags": [
+	"Animal",
+	"Territorial",
+	"Aggressive",
+	"Dinosaur",
+	"Nesting",
+	"Predator",
+	"Wild",
+	"IdentityGreen",
+	"IdentityRed",
+	"IdentityWhite",
+	"IdentityNaya"
+]
+}

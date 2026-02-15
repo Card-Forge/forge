@@ -1,0 +1,86 @@
+{
+"name": "Teferi",
+"sprite": "sprites/enemy/humanoid/human/wizard/teferi.atlas",
+"deck": [
+	"decks/miniboss/teferi_boss.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.8,
+"speed": 31,
+"life": 40,
+"rewards": [
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 500,
+		"addMaxCount": 1000
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"cardName": "Swords to Plowshares"
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"cardName": "Teferi's Protection"
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"cardName": "Brainstorm"
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"cardName": "Teferi, Hero of Dominaria"
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"cardName": "Borrowed Time"
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"cardName": "Teferi's Moat"
+	},
+	{
+		"type": "item",
+		"probability": 1,
+		"count": 1,
+		"itemName": "Teferi's Staff"
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 50
+	},
+	{
+		"type": "life",
+		"probability": 1,
+		"count": 1
+	}
+],
+"colors": "WU",
+"questTags": [
+	"Boss",
+	"Illusionist",
+	"Human",
+	"Wizard",
+	"Territorial",
+	"Planeswalker",
+	"IdentityBlue",
+	"IdentityWhite",
+	"IdentityAzorius"
+],
+"gamesPerMatch": 3
+}

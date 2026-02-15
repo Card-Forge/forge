@@ -1,0 +1,53 @@
+{
+"name": "Vulture",
+"sprite": "sprites/enemy/beast/vulture.atlas",
+"deck": [
+	"decks/standard/vulture.dck"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 25,
+"scale": 0.6,
+"life": 11,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 8,
+		"rarity": [
+			"common",
+			"uncommon",
+			"Rare"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	}
+],
+"colors": "B",
+"questTags": [
+	"Scavenger",
+	"Bird",
+	"Wild",
+	"Flying",
+	"IdentityBlack"
+]
+}

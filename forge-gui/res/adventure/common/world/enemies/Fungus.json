@@ -1,0 +1,86 @@
+{
+"name": "Fungus",
+"sprite": "sprites/enemy/plant/fungus.atlas",
+"deck": [
+	"decks/standard/fungus.json"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 15,
+"scale": 0.75,
+"life": 10,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon"
+		],
+		"cardText": "Saproling"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"colors": [
+			"Black",
+			"Green"
+		],
+		"rarity": [
+			"Rare"
+		],
+		"colorType": "Any"
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"colors": [
+			"Green",
+			"Black"
+		],
+		"rarity": [
+			"common",
+			"uncommon",
+			"Rare"
+		],
+		"subTypes": [
+			"Fungus"
+		],
+		"colorType": "Any"
+	}
+],
+"colors": "G",
+"questTags": [
+	"Fungus",
+	"Inhuman",
+	"Nature",
+	"Wild",
+	"Subterranean",
+	"IdentityGreen",
+	"BiomeBlack"
+]
+}

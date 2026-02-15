@@ -1,0 +1,55 @@
+{
+"name": "Scarab",
+"sprite": "sprites/enemy/beast/scarab.atlas",
+"deck": [
+	"decks/standard/scarab.dck"
+],
+"ai": "",
+"spawnRate": 0.8,
+"difficulty": 0.1,
+"speed": 15,
+"scale": 0.75,
+"life": 20,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 1
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"colors": [
+			"Black"
+		],
+		"rarity": [
+			"Rare"
+		],
+		"colorType": "MonoColor"
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	}
+],
+"colors": "B",
+"questTags": [
+	"Insect",
+	"Small",
+	"Flying",
+	"Beast",
+	"Nature",
+	"IdentityBlack",
+	"Scarab"
+]
+}

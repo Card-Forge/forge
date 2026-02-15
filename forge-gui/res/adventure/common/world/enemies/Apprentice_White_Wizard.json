@@ -1,0 +1,71 @@
+{
+"name": "Apprentice White Wizard",
+"sprite": "sprites/enemy/humanoid/human/cleric/priest.atlas",
+"deck": [
+	"decks/standard/whitewizard_easy_ajani.dck",
+	"decks/standard/whitewizard_easy_wanderer.dck",
+	"decks/standard/whitewizard_easy_angelhuman.dck"
+],
+"ai": "",
+"randomizeDeck": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 24,
+"life": 10,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 2,
+		"rarity": [
+			"common",
+			"uncommon",
+			"rare"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 40
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"addMaxCount": 1,
+		"colors": [
+			"White"
+		],
+		"rarity": [
+			"Common",
+			"Uncommon",
+			"Rare"
+		],
+		"colorType": "MonoColor"
+	}
+],
+"colors": "W",
+"questTags": [
+	"Holy",
+	"Wizard",
+	"Human",
+	"Religious",
+	"IdentityWhite",
+	"BiomeColorless",
+	"BiomeWhite"
+]
+}

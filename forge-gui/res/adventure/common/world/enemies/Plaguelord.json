@@ -1,0 +1,72 @@
+{
+"name": "Plaguelord",
+"sprite": "sprites/enemy/undead/zombiepoisoner.atlas",
+"deck": [
+	"decks/standard/zombiepoisoner.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 21,
+"life": 20,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon",
+			"Rare"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"addMaxCount": 2,
+		"cardText": "Infect"
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.1,
+		"count": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 15
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"addMaxCount": 2,
+		"cardText": "Poison"
+	}
+],
+"colors": "UB",
+"questTags": [
+	"Evil",
+	"Zombie",
+	"Necromancer",
+	"BiomeBlack",
+	"Inhuman",
+	"Wizard",
+	"IdentityDimir"
+]
+}

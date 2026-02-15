@@ -1,0 +1,64 @@
+{
+"name": "Fox",
+"sprite": "sprites/enemy/beast/fox.atlas",
+"deck": [
+	"decks/standard/fox.json",
+	"decks/standard/fox_greenwhite.dck"
+],
+"ai": "",
+"randomizeDeck": true,
+"spawnRate": 0.6,
+"difficulty": 0.1,
+"speed": 20,
+"scale": 0.7,
+"life": 10,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	}
+],
+"colors": "W",
+"questTags": [
+	"Animal",
+	"Wild",
+	"Prey",
+	"Thief",
+	"IdentityWhite",
+	"BiomeGreen",
+	"BiomeColorless",
+	"BiomeWhite"
+]
+}

@@ -1,0 +1,46 @@
+{
+"name": "Big Zombie",
+"sprite": "sprites/enemy/undead/zombie_2.atlas",
+"deck": [
+	"decks/standard/zombie_bad.json"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 15,
+"life": 13,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 3,
+		"colors": [
+			"Black"
+		],
+		"rarity": [
+			"Rare"
+		]
+	}
+],
+"colors": "B",
+"questTags": [
+	"Undead",
+	"Zombie",
+	"Humanoid",
+	"IdentityBlack",
+	"BiomeBlack",
+	"Minion"
+]
+}

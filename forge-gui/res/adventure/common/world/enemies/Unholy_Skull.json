@@ -1,0 +1,57 @@
+{
+"name": "Unholy Skull",
+"sprite": "sprites/enemy/undead/unholyskull.atlas",
+"deck": [
+	"decks/standard/unholyskull.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 21,
+"life": 20,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon",
+			"Rare"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 2,
+		"colors": [
+			"Black"
+		],
+		"cardText": "Discard Opponent"
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 15
+	}
+],
+"colors": "BU",
+"questTags": [
+	"Evil",
+	"Zombie",
+	"BiomeBlack",
+	"Inhuman",
+	"Wizard",
+	"IdentityDimir",
+	"Skull"
+]
+}

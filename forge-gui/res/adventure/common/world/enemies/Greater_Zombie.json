@@ -1,0 +1,69 @@
+{
+"name": "Greater Zombie",
+"sprite": "sprites/enemy/undead/zombie.atlas",
+"deck": [
+	"decks/standard/zombie_greater.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.2,
+"speed": 15,
+"life": 25,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 2,
+		"addMaxCount": 3,
+		"colors": [
+			"Black"
+		],
+		"rarity": [
+			"Rare"
+		],
+		"colorType": "MonoColor"
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 200
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	}
+],
+"colors": "B",
+"questTags": [
+	"Giant",
+	"Warrior",
+	"Territorial",
+	"Grave",
+	"Zombie",
+	"Undead",
+	"Zombie",
+	"Humanoid",
+	"IdentityBlack"
+]
+}

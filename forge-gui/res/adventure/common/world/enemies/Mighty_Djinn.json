@@ -1,0 +1,50 @@
+{
+"name": "Mighty Djinn",
+"sprite": "sprites/enemy/elemental/genie.atlas",
+"deck": [
+	"decks/standard/mighty_djinn.dck"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 5,
+"scale": 0.6,
+"life": 25,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 3,
+		"addMaxCount": 7,
+		"colors": [
+			"Blue"
+		],
+		"rarity": [
+			"Rare",
+			"Mythic Rare"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 50,
+		"addMaxCount": 95
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 10
+	}
+],
+"colors": "U",
+"questTags": [
+	"Flying",
+	"Humanoid",
+	"Elemental",
+	"Wind",
+	"IdentityBlue",
+	"Djinn"
+]
+}

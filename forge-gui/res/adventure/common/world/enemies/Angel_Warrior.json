@@ -1,0 +1,82 @@
+{
+"name": "Angel Warrior",
+"sprite": "sprites/enemy/celestial/angelwarrior.atlas",
+"deck": [
+	"decks/standard/angelwarrior.dck"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 20,
+"life": 20,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 5,
+		"colors": [
+			"White"
+		],
+		"rarity": [
+			"common",
+			"uncommon",
+			"Rare",
+			"Mythic Rare"
+		],
+		"subTypes": [
+			"Angel"
+		],
+		"colorType": "MonoColor"
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"addMaxCount": 2,
+		"colors": [
+			"White"
+		],
+		"rarity": [
+			"Rare",
+			"Common",
+			"Uncommon"
+		],
+		"colorType": "MonoColor",
+		"cardText": "gain life"
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common",
+			"Rare",
+			"Mythic Rare"
+		],
+		"cardTypes": [
+			"Land"
+		],
+		"colorType": "Colorless",
+		"cardText": "\\{W\\}"
+	}
+],
+"colors": "W",
+"questTags": [
+	"Angel",
+	"Floating",
+	"Holy",
+	"Humanoid",
+	"IdentityWhite",
+	"Mythical",
+	"Warrior"
+]
+}

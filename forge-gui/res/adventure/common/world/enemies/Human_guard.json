@@ -1,0 +1,54 @@
+{
+"name": "Human guard",
+"nameOverride": "Human Guard",
+"sprite": "sprites/enemy/humanoid/human/soldier/swordsman.atlas",
+"deck": [
+	"decks/standard/human_mid.json"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 24,
+"life": 12,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"Common",
+			"Uncommon",
+			"Rare",
+			"Mythic Rare"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 30
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 2,
+		"colors": [
+			"White"
+		],
+		"rarity": [
+			"Rare"
+		]
+	}
+],
+"colors": "BW",
+"questTags": [
+	"Human",
+	"Territorial",
+	"Warrior",
+	"IdentityWhite",
+	"IdentityBlack",
+	"IdentityOrzhov",
+	"BiomeWhite"
+]
+}

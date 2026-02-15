@@ -1,0 +1,51 @@
+{
+"name": "Hidden Bush",
+"sprite": "sprites/enemy/plant/hiddenbush.atlas",
+"deck": [
+	"decks/standard/plant.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 25,
+"scale": 0.75,
+"life": 20,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	}
+],
+"colors": "GU",
+"questTags": [
+	"Beast",
+	"Wild",
+	"IdentityGreen",
+	"Hidden",
+	"Sneaky",
+	"Plant"
+]
+}

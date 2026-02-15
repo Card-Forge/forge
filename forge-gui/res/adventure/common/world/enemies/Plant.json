@@ -1,0 +1,61 @@
+{
+"name": "Plant",
+"sprite": "sprites/enemy/plant/plant.atlas",
+"deck": [
+	"decks/standard/plant.json",
+	"decks/standard/plant.dck"
+],
+"ai": "",
+"randomizeDeck": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 15,
+"scale": 0.8,
+"life": 15,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	}
+],
+"questTags": [
+	"Nature",
+	"Territorial",
+	"Inhuman",
+	"Prey",
+	"IdentityGreen",
+	"BiomeGreen"
+]
+}

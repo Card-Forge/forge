@@ -1,0 +1,54 @@
+{
+"name": "Ancient Demon",
+"sprite": "sprites/enemy/fiend/demon_5.atlas",
+"deck": [
+	"decks/standard/demon5.dck"
+],
+"ai": "",
+"spawnRate": 0.6,
+"difficulty": 0.1,
+"speed": 21,
+"scale": 1.2,
+"life": 18,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon",
+			"Rare"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.1,
+		"count": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	}
+],
+"colors": "UB",
+"questTags": [
+	"IdentityDimir",
+	"Demon",
+	"BiomeColorless",
+	"BiomeBlack",
+	"Unholy",
+	"Aggressive",
+	"Aberration",
+	null
+]
+}

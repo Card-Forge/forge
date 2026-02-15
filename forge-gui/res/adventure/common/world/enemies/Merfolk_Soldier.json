@@ -1,0 +1,50 @@
+{
+"name": "Merfolk Soldier",
+"sprite": "sprites/enemy/humanoid/merfolk/mermaid.atlas",
+"deck": [
+	"decks/standard/merfolk_v_goblins.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 22,
+"life": 13,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 3,
+		"colors": [
+			"Blue"
+		],
+		"rarity": [
+			"Rare"
+		]
+	}
+],
+"colors": "U",
+"questTags": [
+	"Merfolk",
+	"Humanoid",
+	"Tribal",
+	"Water",
+	"Swimming",
+	"Soldier",
+	"Territorial",
+	"IdentityBlue",
+	"BiomeBlue",
+	"Minion"
+]
+}

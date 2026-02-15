@@ -1,0 +1,53 @@
+{
+"name": "Human Looter",
+"sprite": "sprites/enemy/humanoid/human/peasant/peasant2.atlas",
+"deck": [
+	"decks/standard/peasantrole.dck"
+],
+"ai": "",
+"spawnRate": 0.6,
+"difficulty": 0.1,
+"speed": 21,
+"life": 15,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon",
+			"Rare"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.1,
+		"count": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	}
+],
+"colors": "GW",
+"questTags": [
+	"Human",
+	"Peasant",
+	"BiomeWhite",
+	"BiomeColorless",
+	"Looter",
+	"Farm",
+	null,
+	null
+]
+}

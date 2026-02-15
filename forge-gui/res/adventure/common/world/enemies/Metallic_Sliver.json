@@ -1,0 +1,50 @@
+{
+"name": "Metallic Sliver",
+"sprite": "sprites/enemy/aberration/sliver_black.atlas",
+"deck": [
+	"decks/standard/sliver_metallicsliver.dck"
+],
+"ai": "",
+"spawnRate": 0.5,
+"speed": 24,
+"life": 30,
+"rewards": [
+	{
+		"type": "deckCard",
+		"count": 2,
+		"cardTypes": [
+			"Creature"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.05,
+		"count": 1,
+		"cardTypes": [
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "randomCard",
+		"count": 2
+	},
+	{
+		"type": "gold",
+		"count": 150
+	}
+],
+"colors": "BUR",
+"questTags": [
+	"Tribal",
+	"Inhuman",
+	"Territorial",
+	"Subterranean",
+	"Nesting",
+	"Swarm",
+	"Construct",
+	"IdentityColorless"
+]
+}

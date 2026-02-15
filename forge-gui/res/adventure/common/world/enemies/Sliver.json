@@ -1,0 +1,35 @@
+{
+"name": "Sliver",
+"sprite": "sprites/enemy/aberration/sliver.atlas",
+"deck": [
+	"decks/standard/sliver.json"
+],
+"ai": "",
+"spawnRate": 0.5,
+"difficulty": 0.1,
+"speed": 24,
+"life": 15,
+"rewards": [
+	{
+		"type": "deckCard",
+		"count": 5
+	},
+	{
+		"type": "gold",
+		"count": 150
+	}
+],
+"colors": "GRW",
+"questTags": [
+	"Tribal",
+	"Inhuman",
+	"Territorial",
+	"Subterranean",
+	"Nesting",
+	"Swarm",
+	"IdentityGreen",
+	"IdentityRed",
+	"IdentityWhite",
+	"BiomeColorless"
+]
+}

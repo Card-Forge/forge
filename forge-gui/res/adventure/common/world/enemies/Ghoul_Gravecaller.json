@@ -1,0 +1,58 @@
+{
+"name": "Ghoul Gravecaller",
+"sprite": "sprites/enemy/undead/ghoullarge.atlas",
+"deck": [
+	"decks/standard/ghoulgravecrawler.dck"
+],
+"ai": "",
+"spawnRate": 0.5,
+"difficulty": 0.1,
+"speed": 15,
+"scale": 0.75,
+"life": 20,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 7
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 3,
+		"colors": [
+			"Black"
+		],
+		"rarity": [
+			"Rare",
+			"Mythic Rare"
+		],
+		"colorType": "MonoColor"
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 15
+	}
+],
+"colors": "BU",
+"questTags": [
+	"Undead",
+	"Humanoid",
+	"IdentityBlack",
+	"IdentityBlue",
+	"IdentityDimir",
+	"BiomeBlack",
+	"Ghoul",
+	"Zombie"
+]
+}

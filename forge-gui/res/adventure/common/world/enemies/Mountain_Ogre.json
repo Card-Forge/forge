@@ -1,0 +1,57 @@
+{
+"name": "Mountain Ogre",
+"sprite": "sprites/enemy/monstrosity/ogre_large.atlas",
+"deck": [
+	"decks/standard/ogre_large.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 16,
+"scale": 0.6,
+"life": 19,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 4,
+		"addMaxCount": 6,
+		"rarity": [
+			"Common",
+			"Rare",
+			"Uncommon"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 15,
+		"addMaxCount": 85
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 5,
+		"addMaxCount": 10
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"addMaxCount": 2,
+		"cardTypes": [
+			"Ogre"
+		]
+	}
+],
+"colors": "BR",
+"questTags": [
+	"Humanoid",
+	"Giant",
+	"Loner",
+	"Mythical",
+	"IdentityRakdos",
+	"Large",
+	"Dungeon"
+]
+}

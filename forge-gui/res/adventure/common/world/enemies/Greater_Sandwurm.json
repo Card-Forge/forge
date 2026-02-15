@@ -1,0 +1,43 @@
+{
+"name": "Greater Sandwurm",
+"sprite": "sprites/enemy/monstrosity/sandwurm2.atlas",
+"deck": [
+	"decks/standard/sandwurm.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"life": 12,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 3,
+		"colors": [
+			"White"
+		],
+		"rarity": [
+			"Rare"
+		]
+	}
+],
+"colors": "G",
+"questTags": [
+	"Wurm",
+	"Nature",
+	"Subterranean",
+	"IdentityWhite"
+]
+}

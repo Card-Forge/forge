@@ -1,0 +1,86 @@
+{
+"name": "Zedruu",
+"sprite": "sprites/enemy/humanoid/minotaur/zedru.atlas",
+"deck": [
+	"decks/miniboss/zedruubis.dck"
+],
+"ai": "",
+"boss": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 30,
+"life": 40,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Zedruu the Greathearted"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Approach of the Second Sun"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Akroan Horse"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Nine Lives"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Castaway's Despair"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Role Reversal"
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 1000,
+		"addMaxCount": 5000
+	},
+	{
+		"type": "item",
+		"probability": 1,
+		"count": 1,
+		"itemName": "Zedruu's Lantern"
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	},
+	{
+		"type": "life",
+		"probability": 1,
+		"count": 1
+	}
+],
+"colors": "WUBR",
+"questTags": [
+	"Boss",
+	"Minotaur",
+	"IdentityJeskai",
+	"Monk",
+	"Humanoid",
+	"Illusionist",
+	"Leader",
+	"Large"
+],
+"gamesPerMatch": 3
+}

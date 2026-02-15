@@ -1,0 +1,58 @@
+{
+"name": "Holy Paladin",
+"sprite": "sprites/enemy/humanoid/human/knight/paladin_large.atlas",
+"deck": [
+	"decks/standard/holypaladin.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 24,
+"scale": 0.7,
+"life": 25,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 4,
+		"colors": [
+			"White"
+		],
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 200
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 30,
+		"addMaxCount": 20
+	}
+],
+"colors": "W",
+"questTags": [
+	"IdentityWhite",
+	"Paladin",
+	"Human",
+	"Holy",
+	"Leader"
+]
+}

@@ -1,0 +1,46 @@
+{
+"name": "Zombie Lord",
+"sprite": "sprites/enemy/undead/lich.atlas",
+"deck": [
+	"decks/standard/zombie_black_medium.dck"
+],
+"ai": "",
+"spawnRate": 0.7,
+"difficulty": 0.1,
+"speed": 21,
+"life": 18,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 100,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"count": 3,
+		"colors": [
+			"Black"
+		],
+		"rarity": [
+			"Uncommon",
+			"Rare"
+		]
+	}
+],
+"colors": "B",
+"questTags": [
+	"Undead",
+	"Zombie",
+	"Humanoid",
+	"Leader",
+	"IdentityBlack",
+	"BiomeBlack"
+]
+}

@@ -1,0 +1,69 @@
+{
+"name": "Golgari Elf",
+"sprite": "sprites/enemy/humanoid/elf/elf_golgari.atlas",
+"deck": [
+	"decks/standard/elf_golgari.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.2,
+"speed": 24,
+"life": 20,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 75,
+		"addMaxCount": 225
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"colors": [
+			"Green"
+		],
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"colors": [
+			"Black"
+		],
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"colors": [
+			"Green",
+			"Black"
+		],
+		"rarity": [
+			"Rare"
+		]
+	}
+],
+"colors": "BG",
+"questTags": [
+	"Elf",
+	"Humanoid",
+	"Tribal",
+	"IdentityBlack",
+	"IdentityGreen",
+	"IdentityGolgari",
+	"Leader"
+]
+}

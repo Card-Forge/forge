@@ -1,0 +1,57 @@
+{
+"name": "Leonin Weaponmaster",
+"nameOverride": "",
+"sprite": "sprites/enemy/humanoid/leonin/lion_2.atlas",
+"deck": [
+	"decks/standard/leoninswordsmith.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 27,
+"life": 15,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 3,
+		"subTypes": [
+			"Equipment"
+		],
+		"cardTypes": [
+			"Artifact"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 90
+	}
+],
+"colors": "GW",
+"questTags": [
+	"Cat",
+	"Humanoid",
+	"Soldier",
+	"IdentityGreen",
+	"IdentityWhite",
+	"IdentitySelesnya",
+	"BiomeWhite",
+	"Leonin",
+	"Armorer",
+	"Equipments",
+	"Minion"
+]
+}

@@ -1,0 +1,72 @@
+{
+"name": "Akroma",
+"sprite": "sprites/enemy/celestial/akroma.atlas",
+"deck": [
+	"decks/boss/akroma.dck"
+],
+"ai": "",
+"boss": true,
+"flying": true,
+"speed": 1,
+"scale": 1.5,
+"life": 60,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Swords to Plowshares"
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 1000,
+		"addMaxCount": 250
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 20
+	},
+	{
+		"type": "life",
+		"probability": 1,
+		"count": 1
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"cardName": "Karmic Guide"
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"cardName": "Akroma, Angel of Wrath"
+	},
+	{
+		"type": "item",
+		"probability": 1,
+		"count": 1,
+		"itemNames": [
+			"White Key"
+		]
+	}
+],
+"equipment": [
+	"Mox Pearl"
+],
+"colors": "W",
+"questTags": [
+	"Angel",
+	"Holy",
+	"Humanoid",
+	"Boss",
+	"Flying",
+	"IdentityWhite",
+	"Akroma"
+],
+"gamesPerMatch": 3
+}

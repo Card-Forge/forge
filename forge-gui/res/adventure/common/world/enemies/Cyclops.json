@@ -1,0 +1,42 @@
+{
+"name": "Cyclops",
+"nameOverride": "Youthful Cyclops",
+"sprite": "sprites/enemy/giant/cyclops.atlas",
+"deck": [
+	"decks/standard/cyclops.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 16,
+"life": 12,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 4,
+		"addMaxCount": 6,
+		"rarity": [
+			"Common",
+			"Rare",
+			"Uncommon"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 15,
+		"addMaxCount": 85
+	}
+],
+"colors": "R",
+"questTags": [
+	"Humanoid",
+	"Giant",
+	"Barbarian",
+	"Loner",
+	"Mythical",
+	"IdentityRed",
+	"BiomeRed"
+]
+}

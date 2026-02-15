@@ -1,0 +1,48 @@
+{
+"name": "Hellion",
+"sprite": "sprites/enemy/monstrosity/sandwurm.atlas",
+"deck": [
+	"decks/standard/hellion.dck"
+],
+"ai": "",
+"spawnRate": 0.2,
+"difficulty": 0.1,
+"speed": 13,
+"scale": 1.6,
+"life": 15,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 3,
+		"colors": [
+			"Red"
+		],
+		"rarity": [
+			"Rare"
+		]
+	}
+],
+"colors": "R",
+"questTags": [
+	"Hellion",
+	"Monster",
+	"Nature",
+	"Subterranean",
+	"IdentityRed",
+	"BiomeRed",
+	"BiomeWhite"
+]
+}

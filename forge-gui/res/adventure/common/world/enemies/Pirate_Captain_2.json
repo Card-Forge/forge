@@ -1,0 +1,81 @@
+{
+"name": "Pirate Captain 2",
+"nameOverride": "Pirate Captain",
+"sprite": "sprites/enemy/humanoid/human/rogue/pirate3.atlas",
+"deck": [
+	"decks/standard/pirate_captain_2.dck"
+],
+"ai": "",
+"spawnRate": 0.8,
+"difficulty": 0.1,
+"speed": 24,
+"life": 20,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"Common"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.25,
+		"count": 1,
+		"rarity": [
+			"Rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 30,
+		"addMaxCount": 100
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 2,
+		"colors": [
+			"Black"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"colors": [
+			"Black"
+		]
+	}
+],
+"colors": "B",
+"questTags": [
+	"Leader",
+	"Aggressive",
+	"Human",
+	"Warrior",
+	"Water",
+	"Bandit",
+	"Thief",
+	"IdentityBlack",
+	"Dungeon",
+	"Pirate",
+	"Captain"
+]
+}

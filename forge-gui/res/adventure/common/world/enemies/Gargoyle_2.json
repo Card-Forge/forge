@@ -1,0 +1,88 @@
+{
+"name": "Gargoyle 2",
+"nameOverride": "Granite Gargoyle",
+"sprite": "sprites/enemy/construct/gargoyle_2.atlas",
+"deck": [
+	"decks/standard/gargoyle.dck"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 0.5,
+"difficulty": 0.1,
+"speed": 25,
+"life": 16,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.5,
+		"count": 1,
+		"addMaxCount": 2,
+		"rarity": [
+			"uncommon"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 3,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.1,
+		"count": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	}
+],
+"colors": "W",
+"questTags": [
+	"Stone",
+	"Flying",
+	"Humanoid",
+	"Construct",
+	"Gargoyle",
+	"Passive",
+	"Territorial",
+	"Stone",
+	"IdentityWhite",
+	"BiomeColorless"
+]
+}

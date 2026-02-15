@@ -1,0 +1,33 @@
+{
+"name": "Guardian Angel",
+"sprite": "sprites/enemy/celestial/akroma.atlas",
+"deck": [
+	"decks/miniboss/angel_rainbow_encounter.dck"
+],
+"ai": "",
+"difficulty": 0.2,
+"speed": 20,
+"life": 50,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "randomCard",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 4,
+		"rarity": [
+			"rare",
+			"mythicrare"
+		]
+	}
+],
+"colors": "WUBRG",
+"questTags": [
+	"Special Encounter"
+]
+}

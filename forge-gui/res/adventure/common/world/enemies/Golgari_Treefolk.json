@@ -1,0 +1,85 @@
+{
+"name": "Golgari Treefolk",
+"sprite": "sprites/enemy/plant/treant_golgari.atlas",
+"deck": [
+	"decks/standard/treefolk_golgari.dck"
+],
+"spawnRate": 1,
+"difficulty": 0.2,
+"speed": 16,
+"life": 25,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.5,
+		"count": 1,
+		"addMaxCount": 2,
+		"rarity": [
+			"uncommon"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.25,
+		"count": 1,
+		"addMaxCount": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "randomCard",
+		"probability": 0.3,
+		"count": 1,
+		"colors": [
+			"black",
+			"green"
+		],
+		"rarity": [
+			"rare",
+			"mythicrare"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 150,
+		"addMaxCount": 150
+	}
+],
+"colors": "BG",
+"questTags": [
+	"Humanoid",
+	"Nature",
+	"Giant",
+	"Warrior",
+	"Territorial",
+	"IdentityBlack",
+	"IdentityGreen",
+	"IdentityGolgari"
+]
+}

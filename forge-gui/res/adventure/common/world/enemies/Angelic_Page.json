@@ -1,0 +1,66 @@
+{
+"name": "Angelic Page",
+"sprite": "sprites/enemy/celestial/angel_1.atlas",
+"deck": [
+	"decks/standard/angel.json"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 0.8,
+"difficulty": 0.1,
+"speed": 21,
+"life": 12,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon",
+			"Rare"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"addMaxCount": 2,
+		"colors": [
+			"White"
+		],
+		"subTypes": [
+			"Angel"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.1,
+		"count": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	}
+],
+"colors": "W",
+"questTags": [
+	"Angel",
+	"Celestial",
+	"Flying",
+	"BiomeColorless",
+	"Holy",
+	"IdentityWhite",
+	null,
+	null
+]
+}

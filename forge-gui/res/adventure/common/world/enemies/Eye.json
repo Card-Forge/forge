@@ -1,0 +1,70 @@
+{
+"name": "Eye",
+"sprite": "sprites/enemy/aberration/eye.atlas",
+"deck": [
+	"decks/standard/eye.dck"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 0.6,
+"difficulty": 0.1,
+"speed": 25,
+"scale": 0.85,
+"life": 25,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"uncommon",
+			"common"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 2,
+		"rarity": [
+			"Rare"
+		]
+	}
+],
+"colors": "B",
+"questTags": [
+	"Aberration",
+	"Floating",
+	"IdentityBlack",
+	"BiomeBlack",
+	"Horror",
+	"Evil"
+]
+}

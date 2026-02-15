@@ -1,0 +1,67 @@
+{
+"name": "Lorthos",
+"sprite": "sprites/enemy/monstrosity/lorthos.atlas",
+"deck": [
+	"decks/boss/lorthos.dck"
+],
+"ai": "",
+"boss": true,
+"speed": 1,
+"scale": 1.5,
+"life": 60,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Lorthos, the Tidemaker"
+	},
+	{
+		"type": "item",
+		"probability": 1,
+		"count": 1,
+		"itemName": "Blue Key"
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 1000,
+		"addMaxCount": 250
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 20
+	},
+	{
+		"type": "life",
+		"probability": 1,
+		"count": 1
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Windfall"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Force of Will"
+	}
+],
+"equipment": [
+	"Mox Sapphire"
+],
+"colors": "U",
+"questTags": [
+	"Boss",
+	"Water",
+	"Octopus",
+	"IdentityBlue",
+	"Lorthos"
+],
+"gamesPerMatch": 3
+}

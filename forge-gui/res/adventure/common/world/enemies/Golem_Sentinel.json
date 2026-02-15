@@ -1,0 +1,51 @@
+{
+"name": "Golem Sentinel",
+"sprite": "sprites/enemy/construct/golem_4.atlas",
+"deck": [
+	"decks/standard/golem_sentinel.dck",
+	"decks/standard/golem_sentinel_2.dck",
+	"decks/standard/golem_sentinel_3.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 20,
+"life": 20,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 2
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 100,
+		"addMaxCount": 200
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 3,
+		"rarity": [
+			"Uncommon"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"Rare"
+		]
+	}
+],
+"colors": "C",
+"questTags": [
+	"Golem",
+	"IdentityColorless",
+	"Construct",
+	"Dungeon"
+]
+}

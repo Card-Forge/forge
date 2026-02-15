@@ -1,0 +1,66 @@
+{
+"name": "Ladybug",
+"sprite": "sprites/enemy/beast/ladybug.atlas",
+"deck": [
+	"decks/standard/ladybug.dck"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 0.8,
+"difficulty": 0.1,
+"speed": 30,
+"scale": 0.5,
+"life": 14,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 3,
+		"rarity": [
+			"common",
+			"uncommon",
+			"rare"
+		],
+		"cardTypes": [
+			"Artifact",
+			"Creature",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	}
+],
+"colors": "G",
+"questTags": [
+	"Insect",
+	"Animal",
+	"Wild",
+	"Nesting",
+	"Swarming",
+	"Flying",
+	"Tiny",
+	"IdentityWhite",
+	"IdentityBlack",
+	"IdentityGreen",
+	"IdentityAbzan",
+	"BiomeGreen"
+]
+}

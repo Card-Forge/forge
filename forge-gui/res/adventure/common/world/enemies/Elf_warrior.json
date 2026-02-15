@@ -1,0 +1,46 @@
+{
+"name": "Elf warrior",
+"sprite": "sprites/enemy/humanoid/elf/hunter.atlas",
+"deck": [
+	"decks/standard/elf_mid.json"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 25,
+"life": 11,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 3,
+		"colors": [
+			"Green"
+		],
+		"rarity": [
+			"Rare"
+		]
+	}
+],
+"colors": "G",
+"questTags": [
+	"Elf",
+	"Humanoid",
+	"Tribal",
+	"IdentityGreen",
+	"BiomeGreen",
+	"Minion"
+]
+}

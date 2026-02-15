@@ -1,0 +1,71 @@
+{
+"name": "Shade",
+"sprite": "sprites/enemy/undead/shade.atlas",
+"deck": [
+	"decks/standard/shade.dck"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 0.3,
+"difficulty": 0.8,
+"speed": 18,
+"scale": 0.45,
+"life": 20,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"colors": [
+			"Black"
+		],
+		"rarity": [
+			"Rare",
+			"Uncommon",
+			"Common"
+		],
+		"subTypes": [
+			"Shade"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 2,
+		"addMaxCount": 4,
+		"colors": [
+			"Black"
+		],
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 200,
+		"addMaxCount": 100
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 5,
+		"addMaxCount": 10
+	}
+],
+"colors": "B",
+"questTags": [
+	"Shade",
+	"Monster",
+	"Horror",
+	"Unholy",
+	"Sneaky",
+	"Hidden",
+	"Shadow",
+	"Mystic",
+	"Magic",
+	"IdentityBlack",
+	"Humanoid"
+]
+}

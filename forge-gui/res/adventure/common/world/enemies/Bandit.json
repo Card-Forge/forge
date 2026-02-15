@@ -1,0 +1,75 @@
+{
+"name": "Bandit",
+"nameOverride": "Bandit Scavenger",
+"sprite": "sprites/enemy/humanoid/dwarf/dwarf_7.atlas",
+"deck": [
+	"decks/standard/bandit.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 24,
+"life": 13,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 2,
+		"rarity": [
+			"uncommon"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.5,
+		"count": 1,
+		"addMaxCount": 2,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.1,
+		"count": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	}
+],
+"colors": "BR",
+"questTags": [
+	"Dwarf",
+	"Wandering",
+	"Warrior",
+	"Bandit",
+	"IdentityBlack",
+	"IdentityRed",
+	"IdentityRakdos",
+	"BiomeColorless"
+]
+}

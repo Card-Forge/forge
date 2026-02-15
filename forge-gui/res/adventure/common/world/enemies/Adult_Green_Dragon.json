@@ -1,0 +1,86 @@
+{
+"name": "Adult Green Dragon",
+"nameOverride": "",
+"sprite": "sprites/enemy/dragon/adultgreendragon.atlas",
+"deck": [
+	"decks/standard/greendragon.dck"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 1,
+"difficulty": 0.3,
+"speed": 20,
+"scale": 1.6,
+"life": 25,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 5,
+		"colors": [
+			"Green"
+		],
+		"rarity": [
+			"common",
+			"uncommon",
+			"rare",
+			"Mythic Rare"
+		],
+		"subTypes": [
+			"Dragon"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.4,
+		"count": 1,
+		"colors": [
+			"Green"
+		],
+		"rarity": [
+			"Rare",
+			"Mythic Rare"
+		],
+		"cardTypes": [
+			"Planeswalker"
+		],
+		"colorType": "MonoColor"
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 5,
+		"rarity": [
+			"uncommon",
+			"common",
+			"Rare"
+		],
+		"cardTypes": [
+			"Land"
+		],
+		"colorType": "Colorless",
+		"cardText": "\\{R\\}"
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 5,
+		"addMaxCount": 5
+	}
+],
+"colors": "U",
+"questTags": [
+	"Dragon",
+	"Flyer",
+	"Monster",
+	"IdentityGreen"
+]
+}

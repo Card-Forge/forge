@@ -1,0 +1,72 @@
+{
+"name": "Construct",
+"nameOverride": "Rustic Construct",
+"sprite": "sprites/enemy/construct/golem_3.atlas",
+"deck": [
+	"decks/standard/artificer.dck",
+	"decks/standard/construct.json",
+	"decks/standard/rustic_construct.dck"
+],
+"ai": "",
+"randomizeDeck": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 21,
+"life": 14,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 2,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 2
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 3,
+		"rarity": [
+			"Rare"
+		],
+		"cardTypes": [
+			"Artifact"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	}
+],
+"colors": "RU",
+"questTags": [
+	"Construct",
+	"Mechanical",
+	"IdentityRed",
+	"IdentityBlue",
+	"IdentityIzzet",
+	"BiomeColorless"
+]
+}

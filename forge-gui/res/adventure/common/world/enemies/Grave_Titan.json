@@ -1,0 +1,65 @@
+{
+"name": "Grave Titan",
+"nameOverride": "",
+"sprite": "sprites/enemy/giant/gravetitan.atlas",
+"deck": [
+	"decks/standard/gravetitan.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 23,
+"scale": 1.3,
+"life": 20,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"colors": [
+			"Black"
+		],
+		"subTypes": [
+			"Giant"
+		],
+		"colorType": "MonoColor"
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 200
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 15
+	}
+],
+"colors": "B",
+"questTags": [
+	"Giant",
+	"Warrior",
+	"Territorial",
+	"Grave",
+	"Zombie",
+	"Undead",
+	"Zombie",
+	"Humanoid",
+	"IdentityBlack"
+]
+}

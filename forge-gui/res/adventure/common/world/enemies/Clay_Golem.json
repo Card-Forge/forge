@@ -1,0 +1,46 @@
+{
+"name": "Clay Golem",
+"sprite": "sprites/enemy/construct/golem_2.atlas",
+"deck": [
+	"decks/standard/golem_good.json"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 19,
+"life": 12,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 2,
+		"cardTypes": [
+			"Artifact",
+			"Creature"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"Rare"
+		],
+		"colorType": "Colorless"
+	}
+],
+"colors": "W",
+"questTags": [
+	"Golem",
+	"Construct",
+	"IdentityWhite",
+	"BiomeColorless"
+]
+}

@@ -1,0 +1,103 @@
+{
+"name": "Grolnok",
+"sprite": "sprites/enemy/aberration/gianttoad.atlas",
+"deck": [
+	"decks/miniboss/frogboss.dck"
+],
+"ai": "",
+"boss": true,
+"spawnRate": 1,
+"difficulty": 0.8,
+"speed": 15,
+"scale": 0.5,
+"life": 50,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 4,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 500,
+		"addMaxCount": 1000
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"cardName": "Grolnok, the Omnivore"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "The Gitrog Monster"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Thalia and The Gitrog Monster"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Damnation"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Gitrog, Horror of Zhava"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Froghemoth"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Yargle and Multani"
+	},
+	{
+		"type": "item",
+		"probability": 1,
+		"count": 1,
+		"itemName": "Grolnok's Skin"
+	},
+	{
+		"type": "life",
+		"probability": 1,
+		"count": 1
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 50
+	}
+],
+"colors": "BGU",
+"questTags": [
+	"Boss",
+	"Animal",
+	"IdentityBlack",
+	"IdentityBlue",
+	"IdentityGreen",
+	"Giant",
+	"IdentitySultai"
+],
+"gamesPerMatch": 3
+}

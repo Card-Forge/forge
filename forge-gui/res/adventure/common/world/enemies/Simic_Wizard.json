@@ -1,0 +1,65 @@
+{
+"name": "Simic Wizard",
+"sprite": "sprites/enemy/humanoid/viashino/lizardwizard.atlas",
+"deck": [
+	"decks/standard/simicwizard_intruderalarm.dck",
+	"decks/standard/simicwizard_evolve.dck"
+],
+"ai": "",
+"randomizeDeck": true,
+"spawnRate": 0.5,
+"difficulty": 0.1,
+"speed": 25,
+"scale": 0.6,
+"life": 20,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 3,
+		"addMaxCount": 6
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 4,
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 3,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 10
+	}
+],
+"colors": "UG",
+"questTags": [
+	"Wizard",
+	"BiomeBlue",
+	"BiomeGreen",
+	"Lizard",
+	"IdentityBlue",
+	"IdentityGreen",
+	"IdentitySimic"
+]
+}

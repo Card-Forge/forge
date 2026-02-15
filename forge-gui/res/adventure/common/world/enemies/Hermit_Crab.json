@@ -1,0 +1,58 @@
+{
+"name": "Hermit Crab",
+"sprite": "sprites/enemy/beast/hermitcrab.atlas",
+"deck": [
+	"decks/standard/hermitcrab.dck"
+],
+"ai": "",
+"spawnRate": 0.5,
+"difficulty": 0.1,
+"speed": 15,
+"scale": 0.8,
+"life": 20,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon",
+			"Rare"
+		],
+		"colorType": "Any"
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 50
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"colors": [
+			"White",
+			"Green"
+		],
+		"rarity": [
+			"uncommon",
+			"common",
+			"Mythic Rare",
+			"Rare"
+		]
+	}
+],
+"colors": "UG",
+"questTags": [
+	"Animal",
+	"Territorial",
+	"Wild",
+	"Small",
+	"IdentitySimic",
+	"BiomeBlue",
+	"Crab"
+]
+}

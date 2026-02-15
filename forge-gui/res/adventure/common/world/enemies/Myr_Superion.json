@@ -1,0 +1,54 @@
+{
+"name": "Myr Superion",
+"sprite": "sprites/enemy/construct/myr.atlas",
+"deck": [
+	"decks/miniboss/myr_superion.dck"
+],
+"ai": "",
+"boss": true,
+"spawnRate": 1,
+"difficulty": 0.5,
+"speed": 20,
+"scale": 2.5,
+"life": 25,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 100,
+		"addMaxCount": 200
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 3,
+		"rarity": [
+			"Uncommon"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 3,
+		"rarity": [
+			"Rare"
+		]
+	}
+],
+"colors": "C",
+"questTags": [
+	"Myr",
+	"IdentityColorless",
+	"Construct",
+	"Robot",
+	"Dungeon",
+	"Boss"
+],
+"gamesPerMatch": 3
+}

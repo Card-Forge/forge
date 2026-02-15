@@ -1,0 +1,86 @@
+{
+"name": "Falcon-headed Aven Warrior",
+"sprite": "sprites/enemy/humanoid/aven/falconheadedaven.atlas",
+"deck": [
+	"decks/standard/amonkhet_aven_w.dck"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 0.5,
+"difficulty": 0.1,
+"speed": 25,
+"life": 16,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.5,
+		"count": 1,
+		"addMaxCount": 2,
+		"rarity": [
+			"uncommon"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.25,
+		"count": 1,
+		"addMaxCount": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.1,
+		"count": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	}
+],
+"colors": "W",
+"questTags": [
+	"Humanoid",
+	"Initiate",
+	"Aggressive",
+	"Aven",
+	"Flying",
+	"Warrior",
+	"Tribal",
+	"IdentityWhite",
+	"BiomeWhite"
+]
+}

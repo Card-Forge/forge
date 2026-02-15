@@ -1,0 +1,51 @@
+{
+"name": "Merfolk warrior",
+"nameOverride": "Merfolk Warrior",
+"sprite": "sprites/enemy/elemental/airelemental.atlas",
+"deck": [
+	"decks/standard/merfolk_mid.json"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 24,
+"life": 13,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 2,
+		"colors": [
+			"Blue"
+		],
+		"rarity": [
+			"Rare"
+		]
+	}
+],
+"colors": "U",
+"questTags": [
+	"Merfolk",
+	"Humanoid",
+	"Water",
+	"Swimming",
+	"Territorial",
+	"Tribal",
+	"Warrior",
+	"IdentityBlue",
+	"BiomeBlue"
+]
+}

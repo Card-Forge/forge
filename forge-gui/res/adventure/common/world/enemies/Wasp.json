@@ -1,0 +1,61 @@
+{
+"name": "Wasp",
+"sprite": "sprites/enemy/beast/wasp.atlas",
+"deck": [
+	"decks/standard/wasp.dck"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 15,
+"scale": 0.75,
+"life": 14,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	}
+],
+"colors": "GRB",
+"questTags": [
+	"Tiny",
+	"Flying",
+	"Insect",
+	"Territorial",
+	"Aggressive",
+	"Swarm",
+	"IdentityGreen",
+	"IdentityRed",
+	"IdentityBlack",
+	"IdentityJund"
+]
+}

@@ -1,0 +1,98 @@
+{
+"name": "Slimefoot",
+"nameOverride": "Fungus of Slimefoot",
+"sprite": "sprites/enemy/plant/slimefoot.atlas",
+"deck": [
+	"decks/miniboss/slimefoot.dck"
+],
+"ai": "",
+"boss": true,
+"spawnRate": 1,
+"difficulty": 0.8,
+"speed": 31,
+"scale": 0.7,
+"life": 40,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 1000,
+		"addMaxCount": 5000
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Tendershoot Dryad"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Slimefoot, Thallid Transplant"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Ghave, Guru of Spores"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Corpsejack Menace"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Mycoloth"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Doubling Season"
+	},
+	{
+		"type": "item",
+		"probability": 1,
+		"count": 1,
+		"itemName": "Slimefoot's Slimy Staff"
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 50
+	},
+	{
+		"type": "life",
+		"probability": 1,
+		"count": 1
+	}
+],
+"colors": "BG",
+"questTags": [
+	"Fungus",
+	"Nature",
+	"Boss",
+	"Inhuman",
+	"IdentityBlack",
+	"IdentityGreen",
+	"IdentityGolgari"
+],
+"gamesPerMatch": 3
+}

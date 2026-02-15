@@ -1,0 +1,55 @@
+{
+"name": "Ibis",
+"sprite": "sprites/enemy/beast/ibis.atlas",
+"deck": [
+	"decks/standard/bird_gu.dck"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 0.3,
+"difficulty": 0.1,
+"speed": 25,
+"scale": 1.3,
+"life": 11,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 8,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	}
+],
+"colors": "GU",
+"questTags": [
+	"Bird",
+	"Wild",
+	"Flying",
+	"IdentityGreen",
+	"IdentityBlue",
+	"IdentitySimic",
+	"BiomeGreen",
+	"BiomeBlue"
+]
+}

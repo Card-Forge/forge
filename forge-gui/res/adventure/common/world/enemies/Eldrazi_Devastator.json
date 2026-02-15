@@ -1,0 +1,94 @@
+{
+"name": "Eldrazi Devastator",
+"sprite": "sprites/enemy/aberration/eldrazi/eldrazi_large.atlas",
+"deck": [
+	"decks/standard/eldrazilarge.dck"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 0.5,
+"difficulty": 0.1,
+"speed": 25,
+"life": 30,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 2,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.25,
+		"count": 1,
+		"addMaxCount": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"Mythic Rare",
+			"Uncommon"
+		],
+		"subTypes": [
+			"Eldrazi"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 2
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 25,
+		"addMaxCount": 50
+	}
+],
+"colors": "BGU",
+"questTags": [
+	"Aberration",
+	"Eldrazi",
+	"Wandering",
+	"Huge",
+	"IdentityBlack",
+	"IdentityGreen",
+	"IdentityBlue",
+	"IdentitySultai",
+	"BiomeColorless"
+]
+}

@@ -1,0 +1,56 @@
+{
+"name": "Sliver Queen",
+"sprite": "sprites/enemy/aberration/sliver_queen.atlas",
+"deck": [
+	"decks/boss/sliver_queen.dck"
+],
+"ai": "",
+"boss": true,
+"speed": 1,
+"life": 50,
+"rewards": [
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 2500,
+		"addMaxCount": 1000
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 5,
+		"addMaxCount": 10,
+		"subTypes": [
+			"Sliver"
+		],
+		"cardTypes": [
+			"Creature"
+		]
+	},
+	{
+		"type": "life",
+		"probability": 1,
+		"count": 1
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 50
+	}
+],
+"equipment": [
+	"Black Lotus"
+],
+"colors": "BGRUW",
+"questTags": [
+	"Sliver",
+	"Boss",
+	"Leader",
+	"Inhuman",
+	"Territorial",
+	"Nesting",
+	"IdentityAll"
+],
+"gamesPerMatch": 3
+}

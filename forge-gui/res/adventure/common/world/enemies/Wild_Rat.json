@@ -1,0 +1,67 @@
+{
+"name": "Wild Rat",
+"sprite": "sprites/enemy/beast/wildrat.atlas",
+"deck": [
+	"decks/standard/infectrat.dck",
+	"decks/standard/rat.json",
+	"decks/standard/ratswarm.dck"
+],
+"ai": "",
+"randomizeDeck": true,
+"spawnRate": 0.6,
+"difficulty": 0.1,
+"speed": 15,
+"scale": 0.8,
+"life": 13,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	}
+],
+"colors": "B",
+"questTags": [
+	"Subterranean",
+	"Animal",
+	"Wild",
+	"Sneaky",
+	"Small",
+	"Scavenger",
+	"Swarm",
+	"IdentityBlack",
+	"BiomeColorless",
+	"BiomeBlack"
+]
+}

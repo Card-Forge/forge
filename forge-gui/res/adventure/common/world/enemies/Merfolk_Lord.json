@@ -1,0 +1,61 @@
+{
+"name": "Merfolk Lord",
+"sprite": "sprites/enemy/humanoid/merfolk/merfolk_lord.atlas",
+"deck": [
+	"decks/standard/merfolk_lord2.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.25,
+"speed": 25,
+"life": 20,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 1
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 200,
+		"addMaxCount": 100
+	},
+	{
+		"type": "card",
+		"probability": 0.75,
+		"count": 2,
+		"colors": [
+			"Blue"
+		],
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 0.005,
+		"count": 1,
+		"colors": [
+			"Blue"
+		],
+		"rarity": [
+			"Mythic Rare"
+		]
+	}
+],
+"colors": "GU",
+"questTags": [
+	"Merfolk",
+	"Humanoid",
+	"Tribal",
+	"Territorial",
+	"Water",
+	"Swimming",
+	"Leader",
+	"IdentityGreen",
+	"IdentityBlue",
+	"IdentitySimic",
+	"BiomeBlue"
+]
+}

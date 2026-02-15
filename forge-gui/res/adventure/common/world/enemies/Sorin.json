@@ -1,0 +1,84 @@
+{
+"name": "Sorin",
+"sprite": "sprites/enemy/undead/sorin.atlas",
+"deck": [
+	"decks/miniboss/sorin.dck"
+],
+"ai": "",
+"boss": true,
+"spawnRate": 1,
+"difficulty": 1,
+"speed": 30,
+"life": 55,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Bazaar of Baghdad"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Mox Jet"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Sorin, Imperious Bloodlord"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Swords to Plowshares"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Anguished Unmaking"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Vampiric Tutor"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Diabolic Intent"
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 1000,
+		"addMaxCount": 9000
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 20,
+		"addMaxCount": 10
+	},
+	{
+		"type": "life",
+		"probability": 1,
+		"count": 1
+	}
+],
+"colors": "GB",
+"questTags": [
+	"Planeswalker",
+	"Sorin",
+	"Boss",
+	"IdentityWhite",
+	"IdentityBlack",
+	"IdentityOrzhov"
+],
+"gamesPerMatch": 3
+}

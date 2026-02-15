@@ -1,0 +1,51 @@
+{
+"name": "Merfolk Avatar",
+"sprite": "sprites/enemy/elemental/iceelemental.atlas",
+"deck": [
+	"decks/standard/merfolk_good.json"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 25,
+"life": 14,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 2,
+		"colors": [
+			"Blue"
+		],
+		"rarity": [
+			"Mythic Rare"
+		]
+	}
+],
+"colors": "GU",
+"questTags": [
+	"Elemental",
+	"Merfolk",
+	"Tribal",
+	"Water",
+	"Humanoid",
+	"IdentityGreen",
+	"IdentityBlue",
+	"IdentitySimic",
+	"BiomeBlue",
+	"Minion"
+]
+}

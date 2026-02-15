@@ -1,0 +1,105 @@
+{
+"name": "Liliana",
+"sprite": "sprites/enemy/humanoid/human/wizard/black_wiz3.atlas",
+"deck": [
+	"decks/miniboss/liliana_zombies.dck"
+],
+"ai": "",
+"boss": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 30,
+"life": 70,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"cardName": "Liliana of the Dark Realms"
+	},
+	{
+		"type": "Union",
+		"probability": 1,
+		"count": 4,
+		"cardUnion": [
+			{
+				"count": 1,
+				"subTypes": [
+					"Liliana"
+				]
+			},
+			{
+				"count": 1,
+				"colors": [
+					"black"
+				],
+				"superTypes": [
+					"Legend",
+					"Legendary"
+				],
+				"cardText": "Liliana"
+			},
+			{
+				"count": 1,
+				"cardName": "Oath of Liliana"
+			},
+			{
+				"count": 1,
+				"cardName": "Pyromancer's Goggles"
+			},
+			{
+				"count": 1,
+				"cardName": "Pyromancer's Gauntlet"
+			},
+			{
+				"count": 1,
+				"cardName": "Chandra's Regulator"
+			}
+		]
+	},
+	{
+		"count": 1,
+		"cardName": "Liliana's Defeat"
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.5,
+		"count": 4,
+		"addMaxCount": 2,
+		"rarity": [
+			"uncommon"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 1000,
+		"addMaxCount": 9000
+	},
+	{
+		"type": "item",
+		"probability": 1,
+		"count": 1,
+		"itemName": "Liliana's Stone"
+	}
+],
+"colors": "B",
+"questTags": [
+	"Human",
+	"Wizard",
+	"Necromancer",
+	"Planeswalker",
+	"Boss",
+	"Liliana",
+	"Death",
+	"IdentityBlack"
+],
+"gamesPerMatch": 3
+}

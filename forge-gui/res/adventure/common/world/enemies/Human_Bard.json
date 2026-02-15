@@ -1,0 +1,47 @@
+{
+"name": "Human Bard",
+"sprite": "sprites/enemy/humanoid/human/bard/humanbard.atlas",
+"deck": [
+	"decks/standard/humanbard.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 25,
+"life": 25,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 3,
+		"rarity": [
+			"common",
+			"uncommon",
+			"rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 50
+	}
+],
+"colors": "RW",
+"questTags": [
+	"Human",
+	"Soldier",
+	"IdentityWhite",
+	"IdentityRed",
+	"IdentityGruul",
+	"BiomeWhite"
+]
+}

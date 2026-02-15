@@ -1,0 +1,67 @@
+{
+"name": "Cave Spider",
+"sprite": "sprites/enemy/beast/spider_cave.atlas",
+"deck": [
+	"decks/standard/cave_spider.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 23,
+"scale": 0.8,
+"life": 18,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 2,
+		"rarity": [
+			"Common",
+			"Rare",
+			"Mythic Rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Enchantment",
+			"Sorcery",
+			"Instant"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	}
+],
+"colors": "RGB",
+"questTags": [
+	"Territorial",
+	"Animal",
+	"Ambush",
+	"Predator",
+	"Wild",
+	"Subterranean",
+	"IdentityRed",
+	"IdentityGreen",
+	"IdentityBlack",
+	"IdentityJund",
+	"Spider",
+	"Insect"
+]
+}

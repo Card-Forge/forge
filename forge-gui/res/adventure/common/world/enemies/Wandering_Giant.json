@@ -1,0 +1,67 @@
+{
+"name": "Wandering Giant",
+"sprite": "sprites/enemy/giant/wanderinggiant.atlas",
+"deck": [
+	"decks/standard/wanderinggiant.dck"
+],
+"ai": "",
+"spawnRate": 0.8,
+"difficulty": 0.1,
+"speed": 15,
+"life": 15,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 1,
+		"colors": [
+			"Red"
+		],
+		"subTypes": [
+			"Giant"
+		],
+		"colorType": "MonoColor"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 2,
+		"addMaxCount": 1,
+		"colors": [
+			"Red"
+		],
+		"rarity": [
+			"Rare"
+		],
+		"colorType": "MonoColor"
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 200
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	}
+],
+"colors": "RW",
+"questTags": [
+	"Fire",
+	"Giant",
+	"Warrior",
+	"Territorial",
+	"BiomeColorless",
+	"IdentityBoros"
+]
+}

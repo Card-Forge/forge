@@ -1,0 +1,47 @@
+{
+"name": "Earth Elemental",
+"sprite": "sprites/enemy/elemental/earthelemental.atlas",
+"deck": [
+	"decks/standard/earth_elemental.dck"
+],
+"ai": "",
+"spawnRate": 0.5,
+"difficulty": 0.1,
+"speed": 23,
+"scale": 0.9,
+"life": 16,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 3,
+		"colors": [
+			"Red"
+		],
+		"rarity": [
+			"Rare",
+			"Mythic Rare"
+		]
+	}
+],
+"colors": "U",
+"questTags": [
+	"Elemental",
+	"Humanoid",
+	"BiomeRed",
+	"IdentityBoros",
+	"Earth"
+]
+}

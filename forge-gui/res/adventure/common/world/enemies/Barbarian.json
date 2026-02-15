@@ -1,0 +1,59 @@
+{
+"name": "Barbarian",
+"nameOverride": "Human Barbarian",
+"sprite": "sprites/enemy/humanoid/human/barbarian/barbarian.atlas",
+"deck": [
+	"decks/standard/barbarian.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 21,
+"scale": 0.7,
+"life": 20,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 100,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.9,
+		"count": 3,
+		"addMaxCount": 4,
+		"colors": [
+			"Red"
+		],
+		"rarity": [
+			"Uncommon",
+			"Rare"
+		]
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 10
+	}
+],
+"colors": "R",
+"questTags": [
+	"Humanoid",
+	"Leader",
+	"Barbarian",
+	"Bandit",
+	"Aggressive",
+	"Fighter",
+	"Human",
+	"Warrior",
+	"IdentityRed"
+]
+}

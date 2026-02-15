@@ -1,0 +1,57 @@
+{
+"name": "Treefolk",
+"sprite": "sprites/enemy/plant/treant.atlas",
+"deck": [
+	"decks/standard/treefolk.json"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 16,
+"life": 17,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 6,
+		"rarity": [
+			"common",
+			"uncommon",
+			"Rare"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 0.25,
+		"count": 1,
+		"addMaxCount": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	}
+],
+"colors": "G",
+"questTags": [
+	"Humanoid",
+	"Territorial",
+	"Nature",
+	"Passive",
+	"Giant",
+	"IdentityGreen",
+	"BiomeGreen"
+]
+}

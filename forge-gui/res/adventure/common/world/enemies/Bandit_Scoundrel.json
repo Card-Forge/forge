@@ -1,0 +1,79 @@
+{
+"name": "Bandit Scoundrel",
+"sprite": "sprites/enemy/humanoid/human/bandit/bandit.atlas",
+"deck": [
+	"decks/standard/bandit_monor.dck",
+	"decks/standard/bandit_mutate.dck",
+	"decks/standard/bandit_zoo.dck"
+],
+"ai": "",
+"randomizeDeck": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 24,
+"scale": 0.7,
+"life": 13,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 2,
+		"rarity": [
+			"uncommon",
+			"rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.5,
+		"count": 1,
+		"addMaxCount": 2,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.1,
+		"count": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 90
+	}
+],
+"colors": "BR",
+"questTags": [
+	"Wandering",
+	"Warrior",
+	"Bandit",
+	"IdentityBlack",
+	"IdentityRed",
+	"IdentityRakdos",
+	"Human",
+	"Scavenger"
+]
+}

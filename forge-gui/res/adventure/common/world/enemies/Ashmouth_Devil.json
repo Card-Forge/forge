@@ -1,0 +1,36 @@
+{
+"name": "Ashmouth Devil",
+"nameOverride": "Forge Devil",
+"sprite": "sprites/enemy/fiend/devil.atlas",
+"deck": [
+	"decks/standard/ashmouth_devil.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 31,
+"life": 18,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 3,
+		"addMaxCount": 7
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 13,
+		"addMaxCount": 87
+	}
+],
+"colors": "BR",
+"questTags": [
+	"Humanoid",
+	"Devil",
+	"IdentityRed",
+	"IdentityBlack",
+	"IdentityRakdos",
+	"BiomeRed"
+]
+}

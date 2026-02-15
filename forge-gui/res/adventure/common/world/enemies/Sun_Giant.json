@@ -1,0 +1,68 @@
+{
+"name": "Sun Giant",
+"sprite": "sprites/enemy/giant/ascendedtitan.atlas",
+"deck": [
+	"decks/standard/sun titan.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 23,
+"scale": 1.5,
+"life": 20,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"colors": [
+			"White"
+		],
+		"subTypes": [
+			"Giant"
+		],
+		"colorType": "MonoColor"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 4,
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 200
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 30,
+		"addMaxCount": 20
+	}
+],
+"colors": "W",
+"questTags": [
+	"Sun",
+	"Giant",
+	"Warrior",
+	"Territorial",
+	"IdentityWhite"
+]
+}

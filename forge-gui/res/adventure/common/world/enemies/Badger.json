@@ -1,0 +1,70 @@
+{
+"name": "Badger",
+"sprite": "sprites/enemy/beast/badger.atlas",
+"deck": [
+	"decks/standard/badger.dck"
+],
+"ai": "",
+"spawnRate": 0.5,
+"difficulty": 0.1,
+"speed": 15,
+"scale": 0.8,
+"life": 20,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"colors": [
+			"Green"
+		],
+		"rarity": [
+			"common",
+			"uncommon",
+			"Rare"
+		],
+		"colorType": "MonoColor",
+		"cardText": "Landfall"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"Rare",
+			"Mythic Rare"
+		],
+		"cardTypes": [
+			"Planeswalker"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common",
+			"Mythic Rare",
+			"Rare"
+		],
+		"cardText": "Badger"
+	}
+],
+"colors": "G",
+"questTags": [
+	"Animal",
+	"Territorial",
+	"Wild",
+	"Small",
+	"IdentityGreen",
+	"BiomeGreen"
+]
+}

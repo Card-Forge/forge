@@ -1,0 +1,69 @@
+{
+"name": "Lathliss",
+"sprite": "sprites/enemy/dragon/lathiss.atlas",
+"deck": [
+	"decks/boss/lathliss.dck"
+],
+"ai": "",
+"boss": true,
+"flying": true,
+"speed": 1,
+"scale": 1.5,
+"life": 60,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Lightning Bolt"
+	},
+	{
+		"type": "item",
+		"probability": 1,
+		"count": 1,
+		"itemName": "Red Key"
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 1000,
+		"addMaxCount": 250
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"cardName": "Lathliss, Dragon Queen"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Torbran, Thane of Red Fell"
+	},
+	{
+		"type": "life",
+		"probability": 1,
+		"count": 1
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 20
+	}
+],
+"equipment": [
+	"Mox Ruby"
+],
+"colors": "R",
+"questTags": [
+	"IdentityRed",
+	"Flying",
+	"Dragon",
+	"Huge",
+	"Boss",
+	"Lathliss"
+],
+"gamesPerMatch": 3
+}

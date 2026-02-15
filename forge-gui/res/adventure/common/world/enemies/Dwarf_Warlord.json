@@ -1,0 +1,53 @@
+{
+"name": "Dwarf Warlord",
+"nameOverride": "",
+"sprite": "sprites/enemy/humanoid/dwarf/dwarflarge.atlas",
+"deck": [
+	"decks/standard/dwarf_whitecastle.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 21,
+"scale": 0.75,
+"life": 20,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 100,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"count": 3,
+		"colors": [
+			"White"
+		],
+		"rarity": [
+			"Uncommon",
+			"Rare"
+		]
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 10
+	}
+],
+"colors": "W",
+"questTags": [
+	"Dwarf",
+	"Humanoid",
+	"Warlord",
+	"Leader",
+	"Artificer"
+]
+}

@@ -1,0 +1,41 @@
+{
+"name": "Rogue",
+"sprite": "sprites/enemy/humanoid/human/rogue/rogue.atlas",
+"deck": [
+	"decks/standard/rogue.json"
+],
+"ai": "",
+"spawnRate": 0.8,
+"difficulty": 0.1,
+"speed": 25,
+"life": 11,
+"rewards": [
+	{
+		"type": "deckCard",
+		"count": 2,
+		"addMaxCount": 2,
+		"rarity": [
+			"Common",
+			"Uncommon",
+			"Rare"
+		]
+	},
+	{
+		"type": "gold",
+		"count": 50,
+		"addMaxCount": 50
+	}
+],
+"colors": "BU",
+"questTags": [
+	"Bandit",
+	"Human",
+	"Sneaky",
+	"Wandering",
+	"Thief",
+	"IdentityBlack",
+	"IdentityBlue",
+	"IdentityDimir",
+	"BiomeBlue"
+]
+}

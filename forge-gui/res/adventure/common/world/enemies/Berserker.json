@@ -1,0 +1,40 @@
+{
+"name": "Berserker",
+"nameOverride": "Dwarven Berserker",
+"sprite": "sprites/enemy/humanoid/dwarf/dwarf_5.atlas",
+"deck": [
+	"decks/standard/berserker.json"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 22,
+"life": 13,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 9
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 5,
+		"addMaxCount": 95
+	}
+],
+"colors": "BGR",
+"questTags": [
+	"Dwarf",
+	"Aggressive",
+	"Loner",
+	"Barbarian",
+	"Warrior",
+	"IdentityRed",
+	"IdentityBlack",
+	"IdentityGreen",
+	"IdentityJund",
+	"BiomeRed"
+]
+}

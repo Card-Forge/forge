@@ -1,0 +1,54 @@
+{
+"name": "Brain Mole",
+"sprite": "sprites/enemy/monstrosity/brainmole.atlas",
+"deck": [
+	"decks/standard/millwizard.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 27,
+"scale": 0.7,
+"life": 20,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 3,
+		"colors": [
+			"Blue"
+		],
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 10
+	}
+],
+"colors": "GR",
+"questTags": [
+	"Monster",
+	"IdentityBlue",
+	"Nocturnal",
+	"Magic",
+	"Wandering",
+	"Unholy",
+	"Evil"
+]
+}

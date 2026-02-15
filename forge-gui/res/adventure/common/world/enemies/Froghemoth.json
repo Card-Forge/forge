@@ -1,0 +1,59 @@
+{
+"name": "Froghemoth",
+"sprite": "sprites/enemy/aberration/froghemoth.atlas",
+"deck": [
+	"decks/standard/froghemoth.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.8,
+"speed": 18,
+"scale": 0.55,
+"life": 25,
+"rewards": [
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 200,
+		"addMaxCount": 100
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"rarity": [
+			"Rare",
+			"Mythic Rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 20,
+		"addMaxCount": 10
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 5,
+		"addMaxCount": 2,
+		"subTypes": [
+			"Frog"
+		]
+	}
+],
+"colors": "RG",
+"questTags": [
+	"Humanoid",
+	"Simian",
+	"Territorial",
+	"Animal",
+	"Wild",
+	"IdentityGreen",
+	"IdentityRed",
+	"IdentityGruul"
+]
+}

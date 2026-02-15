@@ -1,0 +1,73 @@
+{
+"name": "Apprentice Red Wizard",
+"sprite": "sprites/enemy/humanoid/human/wizard/enchanter.atlas",
+"deck": [
+	"decks/standard/redwizard_easy.json",
+	"decks/standard/redwizard_easy_1.dck",
+	"decks/standard/redwizard_easy_2.dck",
+	"decks/standard/redwizard_apprentice_1.dck",
+	"decks/standard/redwizard_easy_3.dck"
+],
+"ai": "",
+"randomizeDeck": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 24,
+"life": 10,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 2,
+		"rarity": [
+			"common",
+			"uncommon",
+			"rare"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 40
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"addMaxCount": 1,
+		"colors": [
+			"Red"
+		],
+		"rarity": [
+			"Common",
+			"Uncommon",
+			"Rare"
+		],
+		"colorType": "MonoColor"
+	}
+],
+"colors": "R",
+"questTags": [
+	"Wizard",
+	"Human",
+	"Fire",
+	"Pyromancer",
+	"IdentityRed",
+	"BiomeRed",
+	"BiomeColorless"
+]
+}

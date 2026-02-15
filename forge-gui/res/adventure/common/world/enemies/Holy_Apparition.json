@@ -1,0 +1,66 @@
+{
+"name": "Holy Apparition",
+"sprite": "sprites/enemy/celestial/seraphim.atlas",
+"deck": [
+	"decks/standard/seraphim.dck"
+],
+"ai": "",
+"spawnRate": 0.2,
+"difficulty": 0.1,
+"speed": 35,
+"scale": 0.8,
+"life": 25,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 1,
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 10
+	}
+],
+"colors": "W",
+"questTags": [
+	"IdentityWhite",
+	"Large",
+	"Holy",
+	"Celestial",
+	"Arcane",
+	"Magical"
+]
+}

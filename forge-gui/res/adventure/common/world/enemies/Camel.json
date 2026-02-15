@@ -1,0 +1,71 @@
+{
+"name": "Camel",
+"nameOverride": "",
+"sprite": "sprites/enemy/beast/camel.atlas",
+"deck": [
+	"decks/standard/camel.dck"
+],
+"ai": "",
+"randomizeDeck": true,
+"spawnRate": 0.5,
+"difficulty": 0.1,
+"speed": 15,
+"life": 14,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"colors": [
+			"White"
+		],
+		"rarity": [
+			"Rare",
+			"common",
+			"uncommon"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.25,
+		"count": 1,
+		"addMaxCount": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	}
+],
+"colors": "W",
+"questTags": [
+	"Animal",
+	"Desert",
+	"Domesticated",
+	"Beast",
+	"IdentityWhite",
+	"BiomeWhite"
+]
+}

@@ -1,0 +1,53 @@
+{
+"name": "Golem",
+"nameOverride": "Rusted Golem",
+"sprite": "sprites/enemy/construct/golem.atlas",
+"deck": [
+	"decks/standard/golem.json",
+	"decks/standard/rustic_golem.dck"
+],
+"ai": "",
+"randomizeDeck": true,
+"spawnRate": 0.1,
+"difficulty": 0.1,
+"speed": 20,
+"life": 13,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"editions": [
+			"M22",
+			"M21"
+		],
+		"colors": [
+			"red"
+		],
+		"rarity": [
+			"rare"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 3,
+		"addMaxCount": 3
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 90
+	}
+],
+"colors": "GW",
+"questTags": [
+	"Golem",
+	"Construct",
+	"IdentityGreen",
+	"IdentityWhite",
+	"IdentitySelesnya",
+	"BiomeColorless"
+]
+}

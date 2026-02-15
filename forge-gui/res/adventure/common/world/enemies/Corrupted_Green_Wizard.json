@@ -1,0 +1,53 @@
+{
+"name": "Corrupted Green Wizard",
+"sprite": "sprites/enemy/humanoid/human/wizard/corrupted_greenwiz.atlas",
+"deck": [
+	"decks/standard/greenmage_corrupted.dck"
+],
+"ai": "",
+"spawnRate": 0.2,
+"difficulty": 0.1,
+"speed": 25,
+"life": 15,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 1,
+		"colors": [
+			"Green"
+		],
+		"rarity": [
+			"Rare"
+		],
+		"colorType": "MonoColor"
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 10
+	}
+],
+"questTags": [
+	"BiomeColorless",
+	"Wizard",
+	"Human",
+	"IdentityGreen",
+	"Wizard",
+	"Corrupted"
+]
+}

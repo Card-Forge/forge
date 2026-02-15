@@ -1,0 +1,64 @@
+{
+"name": "Flying Witch",
+"sprite": "sprites/enemy/humanoid/human/warlock/flyingwitch.atlas",
+"deck": [
+	"decks/standard/witch.dck"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 12,
+"scale": 0.75,
+"life": 13,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 8,
+		"subTypes": [
+			"Witch"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"addMaxCount": 2,
+		"colors": [
+			"Black"
+		],
+		"rarity": [
+			"Rare"
+		],
+		"colorType": "MonoColor"
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	}
+],
+"colors": "B",
+"questTags": [
+	"Mystic",
+	"Unholy",
+	"Wizard",
+	"Human",
+	"IdentityBlack"
+]
+}

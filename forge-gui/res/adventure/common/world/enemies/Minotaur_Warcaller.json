@@ -1,0 +1,59 @@
+{
+"name": "Minotaur Warcaller",
+"sprite": "sprites/enemy/humanoid/minotaur/minotaurlarge.atlas",
+"deck": [
+	"decks/standard/minotaur_monored_castle.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 80,
+"scale": 0.5,
+"life": 20,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 4,
+		"colors": [
+			"Red"
+		],
+		"rarity": [
+			"Rare"
+		],
+		"colorType": "MonoColor"
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 10
+	}
+],
+"colors": "R",
+"questTags": [
+	"Territorial",
+	"Tribal",
+	"Minotaur",
+	"Warrior",
+	"Aggressive",
+	"Humanoid",
+	"IdentityBlack",
+	"IdentityRed",
+	"IdentityRakdos",
+	"BiomeRed"
+]
+}

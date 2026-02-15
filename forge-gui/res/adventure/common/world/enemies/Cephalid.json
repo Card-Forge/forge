@@ -1,0 +1,97 @@
+{
+"name": "Cephalid",
+"nameOverride": "Cephalid Mindslaver",
+"sprite": "sprites/enemy/aberration/mindflayer.atlas",
+"deck": [
+	"decks/standard/cephalid.dck"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 0.8,
+"difficulty": 0.1,
+"speed": 15,
+"scale": 0.4,
+"life": 25,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 5,
+		"colors": [
+			"Black",
+			"Blue",
+			"White"
+		],
+		"rarity": [
+			"Common",
+			"Uncommon",
+			"Rare"
+		],
+		"subTypes": [
+			"Cephalid"
+		],
+		"colorType": "Any"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 5,
+		"colors": [
+			"Black",
+			"Blue",
+			"White"
+		],
+		"rarity": [
+			"Common",
+			"Uncommon",
+			"Rare"
+		],
+		"colorType": "MultiColor"
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 15,
+		"addMaxCount": 15
+	}
+],
+"questTags": [
+	"Cephalid",
+	"Intelligent",
+	"Humanoid",
+	"IdentityEsper",
+	"Large",
+	"Mystic",
+	"Octopus",
+	"Sneaky",
+	"Wandering"
+]
+}

@@ -1,0 +1,73 @@
+{
+"name": "Apprentice Blue Wizard",
+"sprite": "sprites/enemy/humanoid/human/wizard/mage.atlas",
+"deck": [
+	"decks/standard/bluewizard_apprentice_1.dck",
+	"decks/standard/bluewizard_apprentice_2.dck",
+	"decks/standard/bluewizard_apprentice_3.dck",
+	"decks/standard/bluewizard_easy.json"
+],
+"ai": "",
+"flying": true,
+"randomizeDeck": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 25,
+"life": 10,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 2,
+		"rarity": [
+			"common",
+			"uncommon",
+			"rare"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 40
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"addMaxCount": 1,
+		"colors": [
+			"Blue"
+		],
+		"rarity": [
+			"Common",
+			"Uncommon",
+			"Rare"
+		],
+		"colorType": "MonoColor"
+	}
+],
+"colors": "U",
+"questTags": [
+	"Wizard",
+	"Illusionist",
+	"Flying",
+	"Human",
+	"IdentityBlue",
+	"BiomeColorless",
+	"BiomeBlue"
+]
+}

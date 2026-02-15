@@ -1,0 +1,53 @@
+{
+"name": "Bog Witch",
+"sprite": "sprites/enemy/humanoid/human/wizard/black_wiz3.atlas",
+"deck": [
+	"decks/standard/witch.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 24,
+"life": 16,
+"rewards": [
+	{
+		"type": "randomCard",
+		"probability": 0.5,
+		"count": 2,
+		"colors": [
+			"Black"
+		],
+		"rarity": [
+			"uncommon",
+			"rare",
+			"mythicrare"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	}
+],
+"colors": "B",
+"questTags": [
+	"Mystic",
+	"Unholy",
+	"Wizard",
+	"Human",
+	"IdentityBlack"
+]
+}

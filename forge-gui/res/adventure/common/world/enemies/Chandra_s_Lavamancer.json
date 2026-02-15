@@ -1,0 +1,105 @@
+{
+"name": "Chandra's Lavamancer",
+"sprite": "sprites/enemy/humanoid/human/wizard/red_wiz3.atlas",
+"deck": [
+	"decks/standard/chandra4.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 24,
+"life": 20,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 1,
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.5,
+		"count": 1,
+		"addMaxCount": 2,
+		"rarity": [
+			"uncommon"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.25,
+		"count": 1,
+		"addMaxCount": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.1,
+		"count": 2,
+		"rarity": [
+			"rare"
+		],
+		"colorType": "Colorless"
+	},
+	{
+		"type": "randomCard",
+		"probability": 0.3,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		],
+		"cardText": "\\Q{\\ER\\Q}\\E"
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	}
+],
+"colors": "R",
+"questTags": [
+	"Chandra",
+	"Pyromancer",
+	"Human",
+	"Wizard",
+	"Fire",
+	"IdentityRed"
+]
+}

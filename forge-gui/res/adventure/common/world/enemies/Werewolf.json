@@ -1,0 +1,41 @@
+{
+"name": "Werewolf",
+"sprite": "sprites/enemy/fiend/hellhound.atlas",
+"deck": [
+	"decks/standard/werewolf.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 26,
+"life": 16,
+"rewards": [
+	{
+		"type": "randomCard",
+		"count": 2,
+		"addMaxCount": 8
+	},
+	{
+		"type": "gold",
+		"probability": 0.6,
+		"count": 7,
+		"addMaxCount": 32
+	}
+],
+"colors": "GR",
+"questTags": [
+	"Nocturnal",
+	"Animal",
+	"Humanoid",
+	"Human",
+	"Beast",
+	"Wild",
+	"Loner",
+	"Aggressive",
+	"Territorial",
+	"IdentityGreen",
+	"IdentityRed",
+	"IdentityGruul",
+	"BiomeGreen"
+]
+}

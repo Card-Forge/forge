@@ -1,0 +1,55 @@
+{
+"name": "Devil",
+"sprite": "sprites/enemy/fiend/imp.atlas",
+"deck": [
+	"decks/standard/devil.json"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 24,
+"life": 11,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	}
+],
+"colors": "R",
+"questTags": [
+	"Devil",
+	"Humanoid",
+	"Small",
+	"Thief",
+	"IdentityRed",
+	"BiomeRed"
+]
+}

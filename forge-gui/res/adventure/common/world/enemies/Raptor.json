@@ -1,0 +1,58 @@
+{
+"name": "Raptor",
+"sprite": "sprites/enemy/beast/dinosaur/dinosaur_raptor.atlas",
+"deck": [
+	"decks/standard/dinosaur_rw_enrage.dck"
+],
+"ai": "",
+"spawnRate": 0.5,
+"difficulty": 0.1,
+"speed": 25,
+"scale": 0.9,
+"life": 20,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 5,
+		"colors": [
+			"White",
+			"Red"
+		],
+		"rarity": [
+			"Common",
+			"Rare",
+			"Uncommon"
+		],
+		"subTypes": [
+			"Dinosaur"
+		],
+		"cardTypes": [
+			"Creature"
+		]
+	}
+],
+"colors": "RW",
+"questTags": [
+	"Animal",
+	"Wild",
+	"Scavenger",
+	"BiomeRed",
+	"Lizard",
+	"Dinosaur",
+	"Beast"
+]
+}

@@ -1,0 +1,63 @@
+{
+"name": "Torturer",
+"sprite": "sprites/enemy/humanoid/human/bandit/bandittorturer.atlas",
+"deck": [
+	"decks/miniboss/torturer.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 20,
+"scale": 0.7,
+"life": 30,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 8
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 20,
+		"addMaxCount": 20
+	}
+],
+"colors": "B",
+"questTags": [
+	"Inhuman",
+	"Devil",
+	"Flying",
+	"Aggressive",
+	"IdentityBlack",
+	"Evil"
+],
+"gamesPerMatch": 3
+}

@@ -1,0 +1,54 @@
+{
+"name": "Corrupted Cleric",
+"sprite": "sprites/enemy/humanoid/human/cleric/corrupted_cleric.atlas",
+"deck": [
+	"decks/standard/corruptedcleric.dck"
+],
+"ai": "",
+"spawnRate": 0.2,
+"difficulty": 0.1,
+"speed": 25,
+"life": 15,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 4,
+		"colors": [
+			"Black"
+		],
+		"rarity": [
+			"Rare"
+		],
+		"colorType": "MonoColor"
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 10
+	}
+],
+"questTags": [
+	"BiomeColorless",
+	"Cleric",
+	"Human",
+	"IdentityOrzhov",
+	"Monk",
+	"Wizard",
+	"Corrupted"
+]
+}

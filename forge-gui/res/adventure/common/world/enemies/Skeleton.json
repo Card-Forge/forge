@@ -1,0 +1,38 @@
+{
+"name": "Skeleton",
+"sprite": "sprites/enemy/undead/skeleton.atlas",
+"deck": [
+	"decks/standard/skeleton.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 20,
+"life": 11,
+"rewards": [
+	{
+		"type": "gold",
+		"probability": 0.6,
+		"count": 7,
+		"addMaxCount": 32
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"colors": [
+			"Black"
+		]
+	}
+],
+"colors": "B",
+"questTags": [
+	"Undead",
+	"Skeleton",
+	"Regenerating",
+	"IdentityBlack",
+	"BiomeBlack",
+	"Minion"
+]
+}

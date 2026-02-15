@@ -1,0 +1,45 @@
+{
+"name": "Wurm",
+"sprite": "sprites/enemy/monstrosity/wurm.atlas",
+"deck": [
+	"decks/standard/wurm.json"
+],
+"ai": "reckless",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 15,
+"life": 19,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 2,
+		"colors": [
+			"White"
+		],
+		"rarity": [
+			"Rare"
+		]
+	}
+],
+"colors": "G",
+"questTags": [
+	"Wurm",
+	"Nature",
+	"Subterranean",
+	"IdentityGreen",
+	"BiomeGreen"
+]
+}

@@ -1,0 +1,86 @@
+{
+"name": "Dragon",
+"nameOverride": "Red Dragon",
+"sprite": "sprites/enemy/dragon/dragon.atlas",
+"deck": [
+	"decks/standard/dragon.dck"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 0.95,
+"difficulty": 0.1,
+"speed": 31,
+"life": 19,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 4,
+		"addMaxCount": 5,
+		"rarity": [
+			"common",
+			"uncommon",
+			"rare"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.5,
+		"count": 1,
+		"addMaxCount": 2,
+		"rarity": [
+			"uncommon"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.25,
+		"count": 1,
+		"addMaxCount": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.1,
+		"count": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	}
+],
+"colors": "R",
+"questTags": [
+	"Dragon",
+	"Flying",
+	"Territorial",
+	"Loner",
+	"Large",
+	"IdentityRed",
+	"BiomeRed"
+]
+}

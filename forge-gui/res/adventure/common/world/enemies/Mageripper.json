@@ -1,0 +1,53 @@
+{
+"name": "Mageripper",
+"sprite": "sprites/enemy/monstrosity/mageripper.atlas",
+"deck": [
+	"decks/standard/mageripper.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 25,
+"scale": 0.8,
+"life": 15,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 2,
+		"cardTypes": [
+			"Creature",
+			"Instant",
+			"Enchantment"
+		],
+		"colorType": "MonoColor"
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 1,
+		"rarity": [
+			"Rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	}
+],
+"colors": "GUR",
+"questTags": [
+	"Mythical",
+	"Insect",
+	"Monster",
+	"Identity Temur",
+	"Insect"
+]
+}

@@ -1,0 +1,59 @@
+{
+"name": "Mummy",
+"sprite": "sprites/enemy/undead/mummy.atlas",
+"deck": [
+	"decks/standard/mummy.dck"
+],
+"ai": "",
+"spawnRate": 0.5,
+"difficulty": 0.1,
+"speed": 15,
+"scale": 0.7,
+"life": 11,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	}
+],
+"questTags": [
+	"Undead",
+	"Humanoid",
+	"Loner",
+	"Territorial",
+	"IdentityWhite",
+	"IdentityBlack",
+	"IdentityOrzhov",
+	"BiomeColorless",
+	"BiomeBlack",
+	"Minion"
+]
+}

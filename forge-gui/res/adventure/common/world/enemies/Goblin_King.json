@@ -1,0 +1,60 @@
+{
+"name": "Goblin King",
+"sprite": "sprites/enemy/humanoid/goblin/goblinking.atlas",
+"deck": [
+	"decks/standard/goblinking.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 27,
+"scale": 0.5,
+"life": 20,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"count": 1,
+		"rarity": [
+			"common",
+			"uncommon"
+		],
+		"cardTypes": [
+			"land"
+		]
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 20
+	}
+],
+"colors": "R",
+"questTags": [
+	"Goblin",
+	"Coward",
+	"Humanoid",
+	"Territorial",
+	"Aggressive",
+	"Tribal",
+	"Leader",
+	"King",
+	"IdentityRed"
+]
+}

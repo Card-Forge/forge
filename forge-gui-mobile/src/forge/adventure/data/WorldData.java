@@ -38,7 +38,6 @@ public class WorldData implements Serializable {
     private static Array<EnemyData> allEnemies;
     private static Array<ShopData> shopList;
 
-
     public static Array<ShopData> getShopList() {
         if (shopList == null) {
             shopList = new Array<>();
@@ -57,9 +56,21 @@ public class WorldData implements Serializable {
         if (allEnemies == null) {
             Json json = new Json();
             FileHandle handle = Config.instance().getFile(Paths.ENEMIES);
-            if (handle.exists()) {
-                Array readList =  json.fromJson(Array.class, EnemyData.class, handle);
+            if (handle != null && handle.exists()) {
+                Array readList = json.fromJson(Array.class, EnemyData.class, handle);
                 allEnemies = readList;
+            } else {
+                String folderPath = Paths.ENEMIES.replace(".json", "/");
+                FileHandle folderHandle = Config.instance().getFile(folderPath);
+                if (folderHandle.exists() && folderHandle.isDirectory()) {
+                    allEnemies = new Array<>();
+                    for (FileHandle file : folderHandle.list()) {
+                        if (file.extension().equals("json")) {
+                            EnemyData enemy = json.fromJson(EnemyData.class, file);
+                            allEnemies.add(enemy);
+                        }
+                    }
+                }
             }
         }
         return allEnemies;

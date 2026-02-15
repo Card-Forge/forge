@@ -1,0 +1,35 @@
+{
+"name": "White Dwarf",
+"sprite": "sprites/enemy/humanoid/dwarf/dwarf_6.atlas",
+"deck": [
+	"decks/standard/white_dwarf.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 22,
+"life": 13,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 5,
+		"addMaxCount": 5
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 20,
+		"addMaxCount": 80
+	}
+],
+"colors": "W",
+"questTags": [
+	"Dwarf",
+	"Warrior",
+	"Humanoid",
+	"Subterranean",
+	"IdentityWhite",
+	"BiomeWhite"
+]
+}

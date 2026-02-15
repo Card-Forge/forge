@@ -1,0 +1,72 @@
+{
+"name": "Ancient Vampire",
+"sprite": "sprites/enemy/undead/vampire_4.atlas",
+"deck": [
+	"decks/standard/ancientvampire.dck"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 29,
+"scale": 0.85,
+"life": 25,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"rare",
+			"Uncommon"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 4,
+		"colors": [
+			"Black"
+		],
+		"rarity": [
+			"rare",
+			"Rare"
+		],
+		"subTypes": [
+			"Vampire"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10
+	}
+],
+"colors": "B",
+"questTags": [
+	"Vampire",
+	"Undead",
+	"Unholy",
+	"Evil",
+	"Wise",
+	"IdentityBlack"
+]
+}

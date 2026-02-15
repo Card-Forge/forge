@@ -1,0 +1,55 @@
+{
+"name": "Gladiator",
+"nameOverride": "",
+"sprite": "sprites/enemy/humanoid/human/warrior/gladiator.atlas",
+"deck": [
+	"decks/standard/gladiator.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 21,
+"life": 18,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 100,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.9,
+		"count": 3,
+		"addMaxCount": 4,
+		"colors": [
+			"Red",
+			"White"
+		],
+		"rarity": [
+			"Uncommon",
+			"Rare"
+		],
+		"colorType": "MultiColor"
+	}
+],
+"colors": "R",
+"questTags": [
+	"Humanoid",
+	"Barbarian",
+	"Aggressive",
+	"Fighter",
+	"Human",
+	"Warrior",
+	"IdentityRed",
+	"IdentityBoros",
+	"IdentityWhite",
+	"Gladiator"
+]
+}

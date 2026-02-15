@@ -1,0 +1,51 @@
+{
+"name": "Squirrel",
+"sprite": "sprites/enemy/beast/squirrel.atlas",
+"deck": [
+	"decks/standard/squirrel.dck"
+],
+"ai": "",
+"spawnRate": 0.5,
+"difficulty": 0.1,
+"speed": 23,
+"scale": 0.7,
+"life": 15,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 3,
+		"addMaxCount": 6,
+		"colors": [
+			"Green"
+		],
+		"rarity": [
+			"common",
+			"uncommon",
+			"Rare"
+		],
+		"colorType": "MonoColor",
+		"cardText": "Squirrel"
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	}
+],
+"colors": "BG",
+"questTags": [
+	"Animal",
+	"Sneaky",
+	"Tiny",
+	"Prey",
+	"Nature",
+	"Territorial",
+	"Nesting",
+	"IdentityGreen",
+	"IdentityBlack",
+	"IdentityGolgari",
+	"BiomeGreen"
+]
+}

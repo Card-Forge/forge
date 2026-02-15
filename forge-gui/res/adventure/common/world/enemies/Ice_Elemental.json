@@ -1,0 +1,40 @@
+{
+"name": "Ice Elemental",
+"sprite": "sprites/enemy/elemental/iceelemental2.atlas",
+"deck": [
+	"decks/standard/ice_elemental.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 16,
+"life": 19,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 4,
+		"addMaxCount": 6,
+		"rarity": [
+			"Common",
+			"Rare",
+			"Uncommon"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 15,
+		"addMaxCount": 85
+	}
+],
+"colors": "R",
+"questTags": [
+	"Magical",
+	"Elemental",
+	"Aberration",
+	"Loner",
+	"Mythical",
+	"IdentitySelesnya"
+]
+}

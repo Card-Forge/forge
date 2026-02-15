@@ -1,0 +1,71 @@
+{
+"name": "Apprentice Black Wizard",
+"sprite": "sprites/enemy/humanoid/human/wizard/black_wizard.atlas",
+"deck": [
+	"decks/standard/blackwizard_easy_bog.dck",
+	"decks/standard/blackwizard_easy_humans.dck",
+	"decks/standard/blackwizard_easy_pile.dck",
+	"decks/standard/blackwizard_easy_thrull.dck",
+	"decks/standard/blackwizard_easy.json"
+],
+"ai": "",
+"randomizeDeck": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 24,
+"life": 15,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 2,
+		"rarity": [
+			"common",
+			"uncommon",
+			"rare"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 40
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"addMaxCount": 1,
+		"colors": [
+			"Black"
+		],
+		"rarity": [
+			"Common",
+			"Uncommon",
+			"Rare"
+		],
+		"colorType": "MonoColor"
+	}
+],
+"colors": "B",
+"questTags": [
+	"Wizard",
+	"Necromancer",
+	"IdentityBlack",
+	"BiomeColorless",
+	"BiomeBlack"
+]
+}

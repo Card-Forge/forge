@@ -1,0 +1,78 @@
+{
+"name": "Disciple of Teferi",
+"sprite": "sprites/enemy/humanoid/human/cleric/monk.atlas",
+"deck": [
+	"decks/standard/disciple_of_teferi.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 23,
+"life": 12,
+"rewards": [
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 3,
+		"addMaxCount": 6,
+		"colors": [
+			"Blue",
+			"White"
+		],
+		"rarity": [
+			"uncommon",
+			"common",
+			"Rare",
+			"Mythic Rare"
+		],
+		"subTypes": [
+			"Monk",
+			"Wizard",
+			"Advisor"
+		],
+		"cardTypes": [
+			"Creature"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 2,
+		"colors": [
+			"Blue",
+			"White"
+		],
+		"rarity": [
+			"Rare"
+		],
+		"cardTypes": [
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 10
+	}
+],
+"colors": "WUR",
+"questTags": [
+	"Human",
+	"Wizard",
+	"Illusionist",
+	"Teferi",
+	"IdentityBlue",
+	"IdentityRed",
+	"IdentityWhite",
+	"Identity Jeskai"
+]
+}

@@ -1,0 +1,49 @@
+{
+"name": "Archer",
+"nameOverride": "Human Archer",
+"sprite": "sprites/enemy/humanoid/human/archer/archer_2.atlas",
+"deck": [
+	"decks/standard/human_archer.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 25,
+"life": 11,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 3,
+		"rarity": [
+			"common",
+			"uncommon",
+			"rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 50
+	}
+],
+"colors": "GW",
+"questTags": [
+	"Human",
+	"Soldier",
+	"IdentityWhite",
+	"IdentityGreen",
+	"IdentitySelesnya",
+	"BiomeWhite",
+	"Minion"
+]
+}

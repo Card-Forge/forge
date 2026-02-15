@@ -1,0 +1,67 @@
+{
+"name": "Bat",
+"sprite": "sprites/enemy/beast/bat.atlas",
+"deck": [
+	"decks/standard/bat.dck"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 0.5,
+"difficulty": 0.1,
+"speed": 25,
+"scale": 0.8,
+"life": 14,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon",
+			"Rare"
+		],
+		"cardTypes": [
+			"Creature"
+		],
+		"colorType": "MonoColor",
+		"cardText": "Bat"
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 3,
+		"colors": [
+			"Black"
+		],
+		"rarity": [
+			"uncommon",
+			"common",
+			"Rare"
+		],
+		"colorType": "MonoColor",
+		"cardText": "Bat"
+	}
+],
+"colors": "B",
+"questTags": [
+	"Animal",
+	"Wild",
+	"Nesting",
+	"Flying",
+	"Tiny",
+	"IdentityBlack",
+	"BiomeBlack",
+	"Aggressive",
+	"Bat",
+	"Nocturnal"
+]
+}

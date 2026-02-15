@@ -1,0 +1,38 @@
+{
+"name": "Tarkir Djinn",
+"sprite": "sprites/enemy/elemental/djinn_2.atlas",
+"deck": [
+	"decks/standard/djinn_tarkir.dck"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 31,
+"life": 18,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 3,
+		"addMaxCount": 7
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 50,
+		"addMaxCount": 95
+	}
+],
+"colors": "RU",
+"questTags": [
+	"Flying",
+	"Humanoid",
+	"Elemental",
+	"Wind",
+	"IdentityBlue",
+	"IdentityRed",
+	"IdentityIzzet",
+	"BiomeBlue"
+]
+}

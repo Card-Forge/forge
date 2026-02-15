@@ -1,0 +1,49 @@
+{
+"name": "Horror of Tibalt",
+"sprite": "sprites/enemy/fiend/akaname.atlas",
+"deck": [
+	"decks/standard/tibalt_horror.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 24,
+"scale": 0.8,
+"life": 17,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 5,
+		"rarity": [
+			"rare",
+			"Mythic Rare",
+			"Rare",
+			"Uncommon"
+		],
+		"cardTypes": [
+			"Creature",
+			"Instant",
+			"Artifact",
+			"Enchantment"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	}
+],
+"colors": "BU",
+"questTags": [
+	"Aberration",
+	"Inhuman",
+	"IdentityBlue",
+	"IdentityBlack",
+	"IdentityDimir",
+	"BiomeBlue",
+	"BiomeBlack"
+]
+}

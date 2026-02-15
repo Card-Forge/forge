@@ -1,0 +1,63 @@
+{
+"name": "Giant Cyclops",
+"sprite": "sprites/enemy/giant/cyclops_large.atlas",
+"deck": [
+	"decks/standard/luckyminotaur.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 16,
+"scale": 0.7,
+"life": 30,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 4,
+		"addMaxCount": 6,
+		"rarity": [
+			"Common",
+			"Rare",
+			"Uncommon"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 100,
+		"addMaxCount": 200
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 10
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 2,
+		"colors": [
+			"Blue",
+			"Red"
+		],
+		"rarity": [
+			"Rare",
+			"Mythic Rare"
+		],
+		"colorType": "MultiColor"
+	}
+],
+"colors": "UR",
+"questTags": [
+	"Humanoid",
+	"Giant",
+	"Barbarian",
+	"Loner",
+	"Mythical",
+	"IdentityRed",
+	"BiomeRed"
+]
+}

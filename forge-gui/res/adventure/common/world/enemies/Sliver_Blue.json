@@ -1,0 +1,55 @@
+{
+"name": "Sliver_Blue",
+"nameOverride": "Blue Sliver",
+"sprite": "sprites/enemy/aberration/sliver_blue.atlas",
+"deck": [
+	"decks/standard/sliver_blue.dck"
+],
+"ai": "",
+"spawnRate": 0.5,
+"difficulty": 0.2,
+"speed": 24,
+"life": 20,
+"rewards": [
+	{
+		"type": "deckCard",
+		"count": 2,
+		"cardTypes": [
+			"Creature"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.05,
+		"count": 1,
+		"cardTypes": [
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "randomCard",
+		"count": 2
+	},
+	{
+		"type": "gold",
+		"count": 150
+	}
+],
+"colors": "UWB",
+"questTags": [
+	"Tribal",
+	"Inhuman",
+	"Territorial",
+	"Subterranean",
+	"Nesting",
+	"Swarm",
+	"IdentityBlack",
+	"IdentityWhite",
+	"IdentityBlue",
+	"IdentityEsper",
+	"BiomeBlue"
+]
+}

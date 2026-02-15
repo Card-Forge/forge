@@ -1,0 +1,69 @@
+{
+"name": "Dog",
+"sprite": "sprites/enemy/beast/dog.atlas",
+"deck": [
+	"decks/standard/dog.json",
+	"decks/standard/dog.dck",
+	"decks/standard/dog_w_beginner.dck"
+],
+"ai": "",
+"randomizeDeck": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 20,
+"scale": 0.75,
+"life": 12,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon",
+			"Rare"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	}
+],
+"colors": "W",
+"questTags": [
+	"Predator",
+	"Prey",
+	"Animal",
+	"Domesticated",
+	"Wild",
+	"Scavenger",
+	"IdentityWhite",
+	"IdentityGreen",
+	"IdentitySelesnya",
+	"BiomeColorless",
+	"BiomeWhite"
+]
+}

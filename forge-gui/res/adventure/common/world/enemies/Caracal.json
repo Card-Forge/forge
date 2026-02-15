@@ -1,0 +1,62 @@
+{
+"name": "Caracal",
+"sprite": "sprites/enemy/beast/caracal.atlas",
+"deck": [
+	"decks/standard/caracal.dck"
+],
+"ai": "",
+"randomizeDeck": true,
+"spawnRate": 0.8,
+"difficulty": 0.1,
+"speed": 15,
+"scale": 0.8,
+"life": 16,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	}
+],
+"colors": "G",
+"questTags": [
+	"Cat",
+	"Animal",
+	"IdentityGreen",
+	"BiomeGreen",
+	"Large",
+	"Hunter",
+	"Beast"
+]
+}

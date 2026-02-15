@@ -1,0 +1,69 @@
+{
+"name": "Bull",
+"sprite": "sprites/enemy/beast/bull.atlas",
+"deck": [
+	"decks/standard/bull.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.8,
+"speed": 31,
+"scale": 0.65,
+"life": 13,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"colors": [
+			"Green"
+		],
+		"rarity": [
+			"common",
+			"uncommon",
+			"Mythic Rare",
+			"Rare"
+		],
+		"colorType": "MonoColor"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"colors": [
+			"Green"
+		],
+		"rarity": [
+			"Rare"
+		],
+		"colorType": "MonoColor"
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	}
+],
+"colors": "G",
+"questTags": [
+	"Farm",
+	"Animal",
+	"Domesticated",
+	"IdentityGreen",
+	"BiomeRed"
+]
+}

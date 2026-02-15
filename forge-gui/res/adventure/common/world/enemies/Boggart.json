@@ -1,0 +1,49 @@
+{
+"name": "Boggart",
+"sprite": "sprites/enemy/humanoid/goblin/goblin_2.atlas",
+"deck": [
+	"decks/standard/eyeblight.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 27,
+"life": 12,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 3,
+		"colors": [
+			"Red"
+		],
+		"rarity": [
+			"Rare"
+		]
+	}
+],
+"colors": "GR",
+"questTags": [
+	"Goblin",
+	"Humanoid",
+	"Coward",
+	"Tribal",
+	"IdentityRed",
+	"IdentityGreen",
+	"IdentityGruul",
+	"BiomeRed",
+	"Minion"
+]
+}

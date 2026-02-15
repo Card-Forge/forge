@@ -1,0 +1,64 @@
+{
+"name": "Nezumi Ninja",
+"sprite": "sprites/enemy/humanoid/nezumi/nezumi_ninja.atlas",
+"deck": [
+	"decks/standard/humanoidrat.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 15,
+"scale": 0.75,
+"life": 15,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"Rare"
+		],
+		"cardText": "Rat"
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 100
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	}
+],
+"questTags": [
+	"Humanoid",
+	"Ninja",
+	"Bandit",
+	"Rat",
+	"Sneaky",
+	"Thief",
+	"Subterranean",
+	"Scavenger",
+	"IdentityBlack",
+	"BiomeBlack"
+]
+}

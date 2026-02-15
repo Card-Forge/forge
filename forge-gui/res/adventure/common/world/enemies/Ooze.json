@@ -1,0 +1,70 @@
+{
+"name": "Ooze",
+"sprite": "sprites/enemy/ooze/ooze.atlas",
+"deck": [
+	"decks/standard/ooze.json",
+	"decks/standard/ooze_greenblackred.dck",
+	"decks/standard/ooze_monogreen.dck",
+	"decks/standard/ooze_greenblue.dck"
+],
+"ai": "",
+"randomizeDeck": true,
+"spawnRate": 0.3,
+"difficulty": 0.1,
+"speed": 15,
+"scale": 0.6,
+"life": 12,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"rarity": [
+			"Rare"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"rarity": [
+			"uncommon",
+			"common"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	}
+],
+"colors": "UG",
+"questTags": [
+	"Aberration",
+	"Ambush",
+	"Nature",
+	"Nesting",
+	"Predator",
+	"Ooze",
+	"Subterranean",
+	"IdentityBlue",
+	"IdentityGreen",
+	"IdentitySimic",
+	"BiomeGreen",
+	"BiomeColorless"
+]
+}

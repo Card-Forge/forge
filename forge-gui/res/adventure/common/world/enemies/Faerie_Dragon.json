@@ -1,0 +1,84 @@
+{
+"name": "Faerie Dragon",
+"sprite": "sprites/enemy/fey/faerie_dragon.atlas",
+"deck": [
+	"decks/standard/faeriedragon.dck"
+],
+"ai": "",
+"flying": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 20,
+"life": 17,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 2,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Creature",
+			"Artifact",
+			"Enchantment",
+			"Instant",
+			"Sorcery"
+		]
+	},
+	{
+		"type": "randomCard",
+		"probability": 1,
+		"count": 2,
+		"colors": [
+			"Black",
+			"Blue"
+		],
+		"rarity": [
+			"uncommon",
+			"rare",
+			"mythicrare"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 100,
+		"addMaxCount": 100
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 10
+	}
+],
+"colors": "BU",
+"questTags": [
+	"Mythical",
+	"Flying",
+	"Faerie",
+	"IdentityBlack",
+	"Dragon",
+	"IdentityBlue",
+	"IdentityDimir"
+]
+}

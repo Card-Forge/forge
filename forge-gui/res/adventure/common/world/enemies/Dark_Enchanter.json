@@ -1,0 +1,74 @@
+{
+"name": "Dark Enchanter",
+"sprite": "sprites/enemy/humanoid/viashino/dreamwalker.atlas",
+"deck": [
+	"decks/standard/darkenchanter.dck"
+],
+"ai": "",
+"boss": true,
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 25,
+"life": 35,
+"rewards": [
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"addMaxCount": 4,
+		"colors": [
+			"Black",
+			"Green"
+		],
+		"rarity": [
+			"rare",
+			"Uncommon"
+		],
+		"cardTypes": [
+			"Enchantment"
+		],
+		"colorType": "Any"
+	},
+	{
+		"type": "deckCard",
+		"probability": 0.1,
+		"count": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 1,
+		"count": 50,
+		"addMaxCount": 300
+	},
+	{
+		"type": "card",
+		"probability": 1,
+		"count": 1,
+		"cardName": "Enchantress's Presence"
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 10,
+		"addMaxCount": 10
+	}
+],
+"colors": "GB",
+"questTags": [
+	"Humanoid",
+	"IdentityGreen",
+	"IdentityBlack",
+	"BiomeBlack",
+	"Leader",
+	"Mystic",
+	"Enchanter",
+	"Unholy",
+	"Evil"
+]
+}

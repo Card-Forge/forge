@@ -1,0 +1,57 @@
+{
+"name": "Orc Warrior",
+"nameOverride": "",
+"sprite": "sprites/enemy/humanoid/orc/orc_warrior.atlas",
+"deck": [
+	"decks/standard/orc_warrior.dck"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 21,
+"scale": 0.7,
+"life": 18,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 100,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"count": 3,
+		"colors": [
+			"Red"
+		],
+		"rarity": [
+			"Uncommon",
+			"Rare"
+		]
+	},
+	{
+		"type": "shards",
+		"probability": 1,
+		"count": 5,
+		"addMaxCount": 10
+	}
+],
+"colors": "BR",
+"questTags": [
+	"IdentityGreen",
+	"Hunter",
+	"Orc",
+	"Humanoid",
+	"IdentityBlack",
+	"IdentityRed",
+	"IdentityRakdos",
+	"Huge",
+	"Archer"
+]
+}

@@ -1,0 +1,50 @@
+{
+"name": "Hidden Snake",
+"sprite": "sprites/enemy/beast/cobradungeon.atlas",
+"deck": [
+	"decks/standard/snake.json"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 25,
+"scale": 0.5,
+"life": 20,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"common",
+			"uncommon"
+		]
+	},
+	{
+		"type": "card",
+		"probability": 0.1,
+		"count": 1,
+		"rarity": [
+			"rare"
+		],
+		"cardTypes": [
+			"Land"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	}
+],
+"colors": "GU",
+"questTags": [
+	"Snake",
+	"Hidden",
+	"Sneaky",
+	"Ambush",
+	"IdentityGreen"
+]
+}

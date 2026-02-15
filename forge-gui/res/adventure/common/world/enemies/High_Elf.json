@@ -1,0 +1,49 @@
+{
+"name": "High Elf",
+"sprite": "sprites/enemy/humanoid/elf/druid_2.atlas",
+"deck": [
+	"decks/standard/elf_good.json"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 26,
+"life": 12,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4
+	},
+	{
+		"type": "gold",
+		"probability": 0.7,
+		"count": 10,
+		"addMaxCount": 90
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 3,
+		"colors": [
+			"Green"
+		],
+		"rarity": [
+			"Mythic Rare"
+		]
+	}
+],
+"colors": "BG",
+"questTags": [
+	"Elf",
+	"Nature",
+	"Wizard",
+	"Territorial",
+	"Mystic",
+	"IdentityGreen",
+	"IdentityBlack",
+	"BiomeGreen",
+	"Minion"
+]
+}

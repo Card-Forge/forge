@@ -1,0 +1,42 @@
+{
+"name": "Red Beast",
+"nameOverride": "Giant Red Basilisk",
+"sprite": "sprites/enemy/monstrosity/basilisk_2.atlas",
+"deck": [
+	"decks/standard/beast_red.json"
+],
+"ai": "",
+"spawnRate": 1,
+"difficulty": 0.1,
+"speed": 23,
+"life": 17,
+"rewards": [
+	{
+		"type": "deckCard",
+		"probability": 1,
+		"count": 2,
+		"addMaxCount": 4,
+		"rarity": [
+			"Common",
+			"Uncommon",
+			"Rare"
+		]
+	},
+	{
+		"type": "gold",
+		"probability": 0.3,
+		"count": 10,
+		"addMaxCount": 90
+	}
+],
+"colors": "R",
+"questTags": [
+	"Beast",
+	"Animal",
+	"Wild",
+	"Territorial",
+	"Nesting",
+	"IdentityRed",
+	"BiomeRed"
+]
+}
