@@ -1196,24 +1196,10 @@ public class Forge implements ApplicationListener {
                 shiftKeyDown = true;
             }
 
-            // Cursor keys emulate swipe gestures
-            // First we touch the screen and later swipe (fling) in the direction of the key pressed
-            if (keyCode == Keys.LEFT) {
-                touchDown(0, 0, 0, 0);
-                return fling(1000, 0);
-            }
-            if (keyCode == Keys.RIGHT) {
-                touchDown(0, 0, 0, 0);
-                return fling(-1000, 0);
-            }
-            if (keyCode == Keys.UP) {
-                touchDown(0, 0, 0, 0);
-                return fling(0, -1000);
-            }
-            if (keyCode == Keys.DOWN) {
-                touchDown(0, 0, 0, 0);
-                return fling(0, 1000);
-            }
+            if (keyCode == Keys.LEFT || keyCode == Keys.RIGHT || keyCode == Keys.UP || keyCode == Keys.DOWN)
+                if(emulateSwipe(keyCode))
+                    return true;
+
             if (keyCode == Keys.BACK) {
                 if ((destroyThis && !isMobileAdventureMode) || (splashScreen != null && splashScreen.isShowModeSelector()))
                     exitAnimation(false);
@@ -1235,6 +1221,19 @@ public class Forge implements ApplicationListener {
                 return container.keyDown(keyCode);
             }
             return keyInputAdapter.keyDown(keyCode);
+        }
+
+        private boolean emulateSwipe (int keyCode) {
+            // Cursor keys emulate swipe gestures
+            // First we touch the screen and later swipe (fling) in the direction of the key pressed
+            touchDown(0, 0, 0, 0);
+            return switch (keyCode) {
+                case Keys.LEFT -> fling(1000, 0);
+                case Keys.RIGHT -> fling(-1000, 0);
+                case Keys.UP -> fling(0, -1000);
+                case Keys.DOWN -> fling(0, 1000);
+                default -> false;
+            };
         }
 
         @Override

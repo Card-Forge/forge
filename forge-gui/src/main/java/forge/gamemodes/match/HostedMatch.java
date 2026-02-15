@@ -365,6 +365,10 @@ public class HostedMatch {
         return isMatchOver;
     }
 
+    public GameOutcome.AnteResult getAnteResult(RegisteredPlayer player) {
+        return match.getAnteResult(player);
+    }
+
     private final class MatchUiEventVisitor extends IGameEventVisitor.Base<Void> implements IUiEventVisitor<Void> {
         @Override
         public Void visit(final UiEventBlockerAssigned event) {
