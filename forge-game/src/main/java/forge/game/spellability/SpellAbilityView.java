@@ -34,9 +34,9 @@ public class SpellAbilityView extends TrackableObject implements IHasCardView {
         updateHostCard(sa);
         updateDescription(sa);
         updatePromptIfOnlyPossibleAbility(sa);
-        updateIsSpell(sa);
-        updateIsTrigger(sa);
-        updateActivatingPlayer(sa);
+        // Note: updateIsSpell, updateIsTrigger, updateActivatingPlayer are NOT called
+        // here because subclasses (e.g. WrappedAbility) may not be fully initialized yet
+        // during super() construction. These are updated lazily in SpellAbility.getView().
     }
 
     @Override

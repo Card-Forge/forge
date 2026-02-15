@@ -8,7 +8,7 @@ import forge.util.Lang;
 public record GameEventManaPool(PlayerView player, EventValueChangeType mode, byte manaColor) implements GameEvent {
 
     public GameEventManaPool(Player player, EventValueChangeType mode, Mana mana) {
-        this(PlayerView.get(player), mode, mana.getColor());
+        this(PlayerView.get(player), mode, mana != null ? mana.getColor() : (byte) 0);
     }
 
     @Override
