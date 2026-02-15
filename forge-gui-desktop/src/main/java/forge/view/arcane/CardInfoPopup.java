@@ -8,6 +8,8 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Window;
 import java.awt.Graphics2D;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -54,6 +56,9 @@ public class CardInfoPopup {
     private static final int SHOW_DELAY_MS = 100;
     private static final int PADDING = 8;
     private static final double MTG_ASPECT_RATIO = 0.716;
+
+    // Ensures only one popup is visible across all CardPanelContainer instances
+    private static CardInfoPopup activePopup;
 
     private final Window owner;
     private final JWindow window;
@@ -141,11 +146,28 @@ public class CardInfoPopup {
 
         showTimer = new Timer(SHOW_DELAY_MS, e -> {
             if (pendingLocation != null && isOwnerFocused()) {
+                if (activePopup != null && activePopup != this) {
+                    activePopup.hidePopup();
+                }
+                activePopup = this;
                 window.setLocation(pendingLocation);
                 window.setVisible(true);
             }
         });
         showTimer.setRepeats(false);
+
+        // Hide popup when owner window loses focus (e.g. ALT-TAB)
+        if (owner != null) {
+            owner.addWindowFocusListener(new WindowFocusListener() {
+                @Override
+                public void windowGainedFocus(final WindowEvent e) { }
+
+                @Override
+                public void windowLostFocus(final WindowEvent e) {
+                    hidePopup();
+                }
+            });
+        }
     }
 
     private static int getThumbnailHeight() {
@@ -262,7 +284,21 @@ public class CardInfoPopup {
         relatedCardsPanel.setVisible(hasRelated);
         relatedCardsPanel.removeAll();
         if (hasRelated) {
-            populateRelatedCards(relatedEntries, thumbnailHeight);
+            // Calculate max popup width based on available screen space next to card
+            final Rectangle screenBounds = GraphicsEnvironment.getLocalGraphicsEnvironment()
+                    .getDefaultScreenDevice().getDefaultConfiguration().getBounds();
+            final int rightSpace = screenBounds.x + screenBounds.width
+                    - cardScreenLocation.x - cardSize.width - GAP;
+            final int leftSpace = cardScreenLocation.x - screenBounds.x - GAP;
+            final int maxPopupWidth = Math.max(rightSpace, leftSpace);
+
+            final int cardImgWidth = cardImagePanel.isVisible()
+                    ? cardImagePanel.getPreferredSize().width : 0;
+            // Subtract card image, padding, border, and internal gap from available width
+            int maxContentWidth = maxPopupWidth - cardImgWidth
+                    - 2 * PADDING - 2 - GAP;
+            maxContentWidth = Math.max(maxContentWidth, POPUP_WIDTH);
+            populateRelatedCards(relatedEntries, thumbnailHeight, maxContentWidth);
         }
 
         // Update cache
@@ -286,6 +322,9 @@ public class CardInfoPopup {
     public void hidePopup() {
         showTimer.stop();
         window.setVisible(false);
+        if (activePopup == this) {
+            activePopup = null;
+        }
     }
 
     // --- Auto-download ---
@@ -381,9 +420,10 @@ public class CardInfoPopup {
                         final String imageKey = pt.getCardImageKey();
                         final BufferedImage img = ImageCache.getOriginalImage(
                                 imageKey, true, null);
-                        if (img != null && !ImageCache.isDefaultImage(img)) {
+                        if (img != null) {
                             entries.add(new RelatedCardEntry("Creates", pt.getName(), img));
-                        } else {
+                        }
+                        if (img == null || ImageCache.isDefaultImage(img)) {
                             fetchIfMissing(imageKey);
                         }
                     }
@@ -431,9 +471,10 @@ public class CardInfoPopup {
             return;
         }
         final BufferedImage img = FImageUtil.getImage(altState);
-        if (img != null && !ImageCache.isDefaultImage(img)) {
+        if (img != null) {
             entries.add(new RelatedCardEntry(label, altState.getName(), img));
-        } else {
+        }
+        if (img == null || ImageCache.isDefaultImage(img)) {
             fetchIfMissing(altState.getImageKey());
         }
     }
@@ -445,10 +486,12 @@ public class CardInfoPopup {
             return;
         }
         final BufferedImage img = FImageUtil.getImage(altState);
-        if (img != null && !ImageCache.isDefaultImage(img)) {
-            entries.add(new RelatedCardEntry("Flips Into", altState.getName(),
-                    rotateImage180(img)));
-        } else {
+        if (img != null) {
+            final BufferedImage displayImg = ImageCache.isDefaultImage(img)
+                    ? img : rotateImage180(img);
+            entries.add(new RelatedCardEntry("Flips Into", altState.getName(), displayImg));
+        }
+        if (img == null || ImageCache.isDefaultImage(img)) {
             fetchIfMissing(altState.getImageKey());
         }
     }
@@ -481,10 +524,12 @@ public class CardInfoPopup {
                         final String imageKey = pc.getCardImageKey();
                         final BufferedImage img = ImageCache.getOriginalImage(
                                 imageKey, true, null);
-                        if (img != null && !ImageCache.isDefaultImage(img)) {
+                        if (img != null) {
                             entries.add(new RelatedCardEntry("Specializes Into", faceName, img));
-                        } else {
-                            fetchIfMissing(imageKey);
+                        }
+                        if (img == null || ImageCache.isDefaultImage(img)) {
+                            // Use prefixed key for fetcher
+                            fetchIfMissing(pc.getImageKey(false));
                         }
                     }
                 }
@@ -509,10 +554,12 @@ public class CardInfoPopup {
                     final String imageKey = pc.getCardImageKey();
                     final BufferedImage img = ImageCache.getOriginalImage(
                             imageKey, true, null);
-                    if (img != null && !ImageCache.isDefaultImage(img)) {
+                    if (img != null) {
                         entries.add(new RelatedCardEntry("Spellbook", cardName, img));
-                    } else {
-                        fetchIfMissing(imageKey);
+                    }
+                    if (img == null || ImageCache.isDefaultImage(img)) {
+                        // Use prefixed key for fetcher (getCardImageKey returns path format)
+                        fetchIfMissing(pc.getImageKey(false));
                     }
                 }
             } catch (Exception e) {
@@ -568,7 +615,8 @@ public class CardInfoPopup {
     private static final int CARDS_PER_ROW = 5;
 
     private void populateRelatedCards(final List<RelatedCardEntry> entries,
-                                      final int thumbnailHeight) {
+                                      final int thumbnailHeight,
+                                      final int maxContentWidth) {
         // Group entries by label
         final LinkedHashMap<String, List<RelatedCardEntry>> grouped = new LinkedHashMap<>();
         for (final RelatedCardEntry entry : entries) {
@@ -591,8 +639,13 @@ public class CardInfoPopup {
             relatedCardsPanel.add(labelViewer);
 
             // Scale down thumbnails for large groups
-            final int effectiveHeight = cards.size() > CARDS_PER_ROW
+            int effectiveHeight = cards.size() > CARDS_PER_ROW
                     ? Math.max(80, thumbnailHeight / 2) : thumbnailHeight;
+
+            // Constrain thumbnail size so a full row fits within maxContentWidth
+            final int maxThumbWidth = maxContentWidth / CARDS_PER_ROW;
+            final int maxHeightForWidth = (int) (maxThumbWidth / MTG_ASPECT_RATIO);
+            effectiveHeight = Math.min(effectiveHeight, maxHeightForWidth);
 
             // Build rows of CARDS_PER_ROW manually (FlowLayout doesn't wrap with pack())
             final JPanel rowsContainer = new JPanel();
@@ -612,9 +665,15 @@ public class CardInfoPopup {
                 }
                 final FImagePanel imgPanel = new FImagePanel();
                 imgPanel.setImage(entry.image);
-                final double aspectRatio = (double) entry.image.getWidth() / entry.image.getHeight();
-                final int thumbWidth = (int) (effectiveHeight * aspectRatio);
-                final Dimension thumbSize = new Dimension(thumbWidth, effectiveHeight);
+                // Use consistent MTG aspect ratio to ensure row fits within max width
+                int thumbWidth = (int) (effectiveHeight * MTG_ASPECT_RATIO);
+                int thumbHeight = effectiveHeight;
+                // Safety cap: ensure no single thumbnail exceeds the per-column width
+                if (thumbWidth > maxThumbWidth) {
+                    thumbWidth = maxThumbWidth;
+                    thumbHeight = (int) (thumbWidth / MTG_ASPECT_RATIO);
+                }
+                final Dimension thumbSize = new Dimension(thumbWidth, thumbHeight);
                 imgPanel.setPreferredSize(thumbSize);
                 imgPanel.setMinimumSize(thumbSize);
                 imgPanel.setMaximumSize(thumbSize);
@@ -668,6 +727,11 @@ public class CardInfoPopup {
             // Already visible, just reposition immediately
             window.setLocation(pendingLocation);
         } else {
+            // Hide any other popup before showing this one
+            if (activePopup != null && activePopup != this) {
+                activePopup.hidePopup();
+            }
+            activePopup = this;
             // Start show delay
             showTimer.restart();
         }

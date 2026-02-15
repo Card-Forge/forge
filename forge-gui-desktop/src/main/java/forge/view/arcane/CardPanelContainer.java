@@ -276,6 +276,14 @@ public abstract class CardPanelContainer extends SkinnedPanel {
             }
             return;
         }
+        // Don't show popup if owner window is not focused
+        final java.awt.Window ownerWindow = SwingUtilities.getWindowAncestor(this);
+        if (ownerWindow == null || !ownerWindow.isActive()) {
+            if (cardInfoPopup != null) {
+                cardInfoPopup.hidePopup();
+            }
+            return;
+        }
         final ForgePreferences prefs = FModel.getPreferences();
         final boolean showKeywords = prefs.getPrefBoolean(FPref.UI_POPUP_KEYWORD_INFO);
         final boolean showRelated = prefs.getPrefBoolean(FPref.UI_POPUP_RELATED_CARDS);
