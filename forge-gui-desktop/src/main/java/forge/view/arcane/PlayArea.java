@@ -26,11 +26,15 @@ import java.util.*;
 import com.google.common.collect.Lists;
 
 import forge.game.card.CardView;
+import forge.game.combat.CombatView;
+import forge.util.collect.FCollection;
 import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.FThreads;
+import forge.gui.util.SGuiChoose;
 import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.util.Localizer;
 import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FScrollPane;
@@ -64,6 +68,12 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     private final boolean mirror;
 
+    // Card IDs that have been split from their groups via individual click.
+    // Survives doLayout() calls; cleared on game state changes via update().
+    private final Set<Integer> splitCardIds = new HashSet<>();
+    // Blocker card ID → attacker card ID; rebuilt each doLayout() from CombatView.
+    private Map<Integer, Integer> blockerAssignments = Collections.emptyMap();
+
     // Computed in layout.
     private List<CardStackRow> rows = new ArrayList<>();
     private int cardWidth, cardHeight;
@@ -76,6 +86,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     private boolean makeTokenRow = true;
     private boolean stackCreatures = false;
+    private boolean groupTokensAndCreatures;
+    private boolean groupAll;
 
     public PlayArea(final CMatchUI matchUI, final FScrollPane scrollPane, final boolean mirror, final PlayerView player, final ZoneType zone) {
         super(matchUI, scrollPane);
@@ -83,8 +95,14 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         this.mirror = mirror;
         this.model = player;
         this.zone = zone;
-        this.makeTokenRow = FModel.getPreferences().getPrefBoolean(FPref.UI_TOKENS_IN_SEPARATE_ROW);
-        this.stackCreatures = FModel.getPreferences().getPrefBoolean(FPref.UI_STACK_CREATURES);
+        updateGroupScope();
+    }
+
+    private void updateGroupScope() {
+        String groupScope = FModel.getPreferences().getPref(FPref.UI_GROUP_PERMANENTS);
+        this.stackCreatures = "Stack Creatures".equals(groupScope);
+        this.groupTokensAndCreatures = "Group Creatures/Tokens".equals(groupScope) || "Group All Permanents".equals(groupScope);
+        this.groupAll = "Group All Permanents".equals(groupScope);
     }
 
     private CardStackRow collectAllLands(List<CardPanel> remainingPanels) {
@@ -114,10 +132,26 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                         insertIndex = i;
                         break;
                     }
+                    // Split cards can't group with non-split cards
+                    boolean cardIsSplit = splitCardIds.contains(card.getId());
+                    boolean stackIsSplit = splitCardIds.contains(firstPanel.getCard().getId());
+                    if (cardIsSplit != stackIsSplit) {
+                        insertIndex = i + 1;
+                        continue;
+                    }
+                    // Blockers assigned to different attackers can't group together
+                    int cardTarget = blockerAssignments.getOrDefault(card.getId(), 0);
+                    int stackTarget = blockerAssignments.getOrDefault(firstPanel.getCard().getId(), 0);
+                    if (cardTarget != stackTarget) {
+                        insertIndex = i + 1;
+                        continue;
+                    }
                     if (!panel.getAttachedPanels().isEmpty()
                             || !panel.getCard().hasSameCounters(firstPanel.getCard())
                             || firstPanel.getCard().hasCardAttachments()
-                            || (stack.size() == STACK_MAX_LANDS)) {
+                            || (groupAll && card.isTapped() != firstPanel.getCard().isTapped())
+                            || (groupAll && card.getDamage() != firstPanel.getCard().getDamage())
+                            || (!groupAll && stack.size() == STACK_MAX_LANDS)) {
                         // If this land has attachments or the stack is full,
                         // put it to the right.
                         insertIndex = i + 1;
@@ -170,12 +204,28 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                         break;
                     }
 
+                    // Split cards can't group with non-split cards
+                    boolean cardIsSplit = splitCardIds.contains(card.getId());
+                    boolean stackIsSplit = splitCardIds.contains(firstCard.getId());
+                    if (cardIsSplit != stackIsSplit) {
+                        insertIndex = i + 1;
+                        continue;
+                    }
+                    // Blockers assigned to different attackers can't group together
+                    int cardTarget = blockerAssignments.getOrDefault(card.getId(), 0);
+                    int stackTarget = blockerAssignments.getOrDefault(firstCard.getId(), 0);
+                    if (cardTarget != stackTarget) {
+                        insertIndex = i + 1;
+                        continue;
+                    }
                     if (!panel.getAttachedPanels().isEmpty()
                             || !card.hasSameCounters(firstPanel.getCard())
                             || (card.isSick() != firstCard.isSick())
                             || !card.hasSamePT(firstCard)
                             || !(card.getText().equals(firstCard.getText()))
-                            || (stack.size() == STACK_MAX_TOKENS)) {
+                            || (groupTokensAndCreatures && card.isTapped() != firstCard.isTapped())
+                            || (groupTokensAndCreatures && card.getDamage() != firstCard.getDamage())
+                            || (!groupTokensAndCreatures && stack.size() == STACK_MAX_TOKENS)) {
                         // If this token has attachments or the stack is full,
                         // put it to the right.
                         insertIndex = i + 1;
@@ -200,7 +250,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     }
 
     private CardStackRow collectAllCreatures(List<CardPanel> remainingPanels) {
-        if(!this.stackCreatures)
+        if(!this.stackCreatures && !this.groupTokensAndCreatures)
             return collectUnstacked(remainingPanels, RowType.Creature);
         final CardStackRow allCreatures = new CardStackRow();
         outerLoop:
@@ -227,12 +277,29 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                         insertIndex = i;
                         break;
                     }
+                    // Split cards can't group with non-split cards
+                    boolean cardIsSplit = splitCardIds.contains(card.getId());
+                    boolean stackIsSplit = splitCardIds.contains(firstCard.getId());
+                    if (cardIsSplit != stackIsSplit) {
+                        insertIndex = i + 1;
+                        continue;
+                    }
+                    // Blockers assigned to different attackers can't group together
+                    int cardTarget = blockerAssignments.getOrDefault(card.getId(), 0);
+                    int stackTarget = blockerAssignments.getOrDefault(firstCard.getId(), 0);
+                    if (cardTarget != stackTarget) {
+                        insertIndex = i + 1;
+                        continue;
+                    }
                     if (!panel.getAttachedPanels().isEmpty()
                             || card.isCloned()
                             || !card.hasSameCounters(firstCard)
                             || (card.isSick() != firstCard.isSick())
                             || !card.hasSamePT(firstCard)
-                            || (stack.size() == STACK_MAX_CREATURES)) {
+                            || (groupTokensAndCreatures && card.isTapped() != firstCard.isTapped())
+                            || (groupTokensAndCreatures && card.getDamage() != firstCard.getDamage())
+                            || (groupTokensAndCreatures && !(card.getText().equals(firstCard.getText())))
+                            || (!groupTokensAndCreatures && stack.size() == STACK_MAX_CREATURES)) {
                         // If this creature has attachments or the stack is full,
                         // put it to the right.
                         insertIndex = i + 1;
@@ -335,11 +402,25 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 final CardStateView otherState = otherCard.getCurrentState();
                 final CardView thisCard = panel.getCard();
                 final CardStateView thisState = thisCard.getCurrentState();
-                if (otherState.getOracleName().equals(thisState.getOracleName()) && s.size() < STACK_MAX_OTHERS) {
+                if (otherState.getOracleName().equals(thisState.getOracleName()) && (groupAll || s.size() < STACK_MAX_OTHERS)) {
+                    // Split cards can't group with non-split cards
+                    boolean cardIsSplit = splitCardIds.contains(thisCard.getId());
+                    boolean stackIsSplit = splitCardIds.contains(otherCard.getId());
+                    if (cardIsSplit != stackIsSplit) {
+                        continue;
+                    }
+                    // Blockers assigned to different attackers can't group together
+                    int cardTarget = blockerAssignments.getOrDefault(thisCard.getId(), 0);
+                    int stackTarget = blockerAssignments.getOrDefault(otherCard.getId(), 0);
+                    if (cardTarget != stackTarget) {
+                        continue;
+                    }
                     if (panel.getAttachedPanels().isEmpty()
                             && thisCard.hasSameCounters(otherCard)
                             && (thisCard.isSick() == otherCard.isSick())
-                            && (thisCard.isCloned() == otherCard.isCloned())) {
+                            && (thisCard.isCloned() == otherCard.isCloned())
+                            && (!groupAll || thisCard.isTapped() == otherCard.isTapped())
+                            && (!groupAll || thisCard.getDamage() == otherCard.getDamage())) {
                         s.add(panel);
                         continue outerLoop;
                     }
@@ -363,8 +444,29 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         return placeholder;
     }
 
+    private Map<Integer, Integer> buildBlockerAssignments() {
+        try {
+            CombatView combat = getMatchUI().getGameView().getCombat();
+            if (combat == null) { return Collections.emptyMap(); }
+            Map<Integer, Integer> assignments = new HashMap<>();
+            for (CardView attacker : combat.getAttackers()) {
+                FCollection<CardView> blockers = combat.getPlannedBlockers(attacker);
+                if (blockers == null) { continue; }
+                for (CardView blocker : blockers) {
+                    assignments.put(blocker.getId(), attacker.getId());
+                }
+            }
+            return assignments;
+        } catch (Exception e) {
+            return Collections.emptyMap();
+        }
+    }
+
     @Override
     public final void doLayout() {
+        this.makeTokenRow = FModel.getPreferences().getPrefBoolean(FPref.UI_TOKENS_IN_SEPARATE_ROW);
+        updateGroupScope();
+        blockerAssignments = buildBlockerAssignments();
         final Rectangle rect = this.getScrollPane().getVisibleRect();
 
         this.playAreaWidth = rect.width;
@@ -472,14 +574,39 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                         x -= r.getWidth();
                     }
                 }
+                boolean grouping = groupTokensAndCreatures || groupAll;
+                int maxVisible = 4;
+
+                // Reset groupCount on all panels in this stack
+                for (CardPanel p : stack) { p.setGroupCount(0); }
+
                 for (int panelIndex = 0, panelCount = stack.size(); panelIndex < panelCount; panelIndex++) {
                     final CardPanel panel = stack.get(panelIndex);
-                    final int stackPosition = panelCount - panelIndex - 1;
                     this.setComponentZOrder(panel, panelIndex);
-                    final int panelX = x + (stackPosition * this.stackSpacingX);
-                    final int panelY = y + (stackPosition * this.stackSpacingY);
-                    //System.out.println("... placinng " + panel.getCard() + " @ (" + panelX + ", " + panelY + ")");
+
+                    int visualPos;
+                    boolean hidden;
+                    if (grouping && panelCount > maxVisible) {
+                        if (panelIndex < maxVisible) {
+                            visualPos = maxVisible - 1 - panelIndex;
+                            hidden = false;
+                        } else {
+                            visualPos = 0;
+                            hidden = true;
+                        }
+                    } else {
+                        visualPos = panelCount - panelIndex - 1;
+                        hidden = false;
+                    }
+
+                    final int panelX = x + (visualPos * this.stackSpacingX);
+                    final int panelY = y + (visualPos * this.stackSpacingY);
                     panel.setCardBounds(panelX, panelY, this.getCardWidth(), this.cardHeight);
+                    panel.setDisplayEnabled(!hidden);
+                }
+                // Set group count on top card for badge rendering
+                if (grouping && stack.size() > 1) {
+                    stack.get(0).setGroupCount(stack.size());
                 }
                 rowBottom = Math.max(rowBottom, y + stack.getHeight());
                 x += stack.getWidth();
@@ -651,7 +778,47 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     @Override
     public final void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
-        selectCard(panel, new MouseTriggerEvent(evt), evt.isShiftDown()); //select entire stack if shift key down
+        boolean selectAll = evt.isShiftDown();
+        if (!selectAll && panel.getGroupCount() >= 5) {
+            selectAll = panel.isBadgeHit(evt.getX(), evt.getY());
+        }
+        // Split/un-split individual card from group
+        boolean wasUnsplit = false;
+        if (!selectAll && panel.getCard() != null) {
+            if (splitCardIds.contains(panel.getCard().getId())) {
+                // Re-clicking a split card un-splits it (re-merges into group)
+                splitCardIds.remove(panel.getCard().getId());
+                doLayout();
+                wasUnsplit = true;
+            } else {
+                List<CardPanel> stack = panel.getStack();
+                boolean grouping = groupTokensAndCreatures || groupAll;
+                if (stack != null && stack.size() >= (grouping ? 2 : 5)) {
+                    // Split first, then check if the game accepts this card.
+                    // If accepted, doUpdateCard will remove from splitCardIds when
+                    // the card's state changes (e.g. tapping), allowing it to regroup.
+                    splitCardIds.add(panel.getCard().getId());
+                    if (getMatchUI().getGameController().selectCard(panel.getCard(), null, new MouseTriggerEvent(evt))) {
+                        doLayout();
+                        if ((panel.getTappedAngle() != 0) && (panel.getTappedAngle() != CardPanel.TAPPED_ANGLE)) {
+                            return;
+                        }
+                        super.mouseLeftClicked(panel, evt);
+                        return;
+                    }
+                    // Game rejected - undo the split
+                    splitCardIds.remove(panel.getCard().getId());
+                }
+            }
+        }
+        boolean selected = selectCard(panel, new MouseTriggerEvent(evt), selectAll);
+        // If this individual card was accepted (e.g. declared as attacker), mark it
+        // as split so it can merge with other split cards from the same group.
+        // Skip if the card was just un-split (user is un-declaring, not declaring).
+        if (selected && !selectAll && !wasUnsplit && panel.getCard() != null) {
+            splitCardIds.add(panel.getCard().getId());
+        }
+        doLayout();
         if ((panel.getTappedAngle() != 0) && (panel.getTappedAngle() != CardPanel.TAPPED_ANGLE)) {
             return;
         }
@@ -660,6 +827,71 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     @Override
     public final void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
+        // Right-click on badge of a group of 5+ → prompt for how many to select
+        if (panel.getGroupCount() >= 5 && panel.isBadgeHit(evt.getX(), evt.getY())) {
+            List<CardPanel> stack = panel.getStack();
+            if (stack != null && stack.size() >= 5) {
+                // Check if the game accepts card selection right now (side-effect-free)
+                CardView primary = stack.get(0).getCard();
+                String activateDesc = primary != null
+                        ? getMatchUI().getGameController().getActivateDescription(primary) : null;
+                if (activateDesc == null) {
+                    getMatchUI().flashIncorrectAction();
+                    return;
+                }
+                // Context-appropriate prompt based on card state
+                String prompt;
+                boolean alreadyInCombat = primary.isAttacking() || primary.isBlocking();
+                if (alreadyInCombat) {
+                    prompt = "How many to remove from combat?";
+                } else {
+                    Localizer loc = Localizer.getInstance();
+                    if (activateDesc.equals(loc.getMessage("lblAttackWithCard"))) {
+                        prompt = "How many to declare as attackers?";
+                    } else if (activateDesc.equals(loc.getMessage("lblBlockWithCard"))) {
+                        prompt = "How many to assign as blockers?";
+                    } else {
+                        prompt = "How many to select?";
+                    }
+                }
+                Integer count = SGuiChoose.getInteger(prompt, 1, stack.size());
+                if (count == null) {
+                    return; // cancelled
+                }
+                // Collect the first N card views from the stack
+                List<CardView> selected = new ArrayList<>();
+                selected.add(primary);
+                for (int i = 1; i < count && i < stack.size(); i++) {
+                    CardPanel p = stack.get(i);
+                    if (p.getCard() != null) {
+                        selected.add(p.getCard());
+                    }
+                }
+                List<CardView> others = selected.size() > 1 ? selected.subList(1, selected.size()) : null;
+                if (alreadyInCombat) {
+                    // Use button=3 (right-click) to undeclare the selected cards
+                    MouseTriggerEvent rightClickTrigger = new MouseTriggerEvent(3, evt.getX(), evt.getY());
+                    getMatchUI().getGameController().selectCard(primary, others, rightClickTrigger);
+                } else {
+                    // Use button=1 (left-click) to declare as attacker/blocker
+                    MouseTriggerEvent leftClickTrigger = new MouseTriggerEvent(1, evt.getX(), evt.getY());
+                    getMatchUI().getGameController().selectCard(primary, others, leftClickTrigger);
+                }
+                // Clear all cards in this stack from splitCardIds, then mark
+                // only the selected subset as split. This ensures the selected
+                // cards separate from the remaining ones in the group.
+                for (CardPanel p : stack) {
+                    if (p.getCard() != null) {
+                        splitCardIds.remove(p.getCard().getId());
+                    }
+                }
+                for (CardView cv : selected) {
+                    splitCardIds.add(cv.getId());
+                }
+                doLayout();
+                return;
+            }
+        }
         selectCard(panel, new MouseTriggerEvent(evt), evt.isShiftDown()); //select entire stack if shift key down
         super.mouseRightClicked(panel, evt);
     }
@@ -705,6 +937,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     public void update() {
         FThreads.assertExecutedByEdt(true);
+        splitCardIds.clear();
+        blockerAssignments = Collections.emptyMap();
         recalculateCardPanels(model, zone);
     }
 
@@ -790,6 +1024,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         if (toPanel == null) { return false; }
 
         boolean needLayoutRefresh = false;
+        boolean tappedStateChanged = card.isTapped() != toPanel.isTapped();
+        if (tappedStateChanged) {
+            splitCardIds.remove(card.getId());
+        }
         if (card.isTapped()) {
             toPanel.setTapped(true);
             toPanel.setTappedAngle(forge.view.arcane.CardPanel.TAPPED_ANGLE);
@@ -839,8 +1077,12 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
         if (needLayoutRefresh && !fromRefresh) {
             doLayout(); //ensure layout refreshed here if not being called from a full refresh
+        } else if (tappedStateChanged && !fromRefresh) {
+            // Deferred layout for tapped state changes - allows split cards to
+            // regroup with other tapped attackers after async state updates
+            javax.swing.SwingUtilities.invokeLater(this::doLayout);
         }
-        return needLayoutRefresh;
+        return needLayoutRefresh || tappedStateChanged;
     }
 
     private enum RowType {
@@ -928,12 +1170,16 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
 
         private int getWidth() {
-            return PlayArea.this.cardWidth + ((this.size() - 1) * PlayArea.this.stackSpacingX)
+            int visualCount = (PlayArea.this.groupTokensAndCreatures || PlayArea.this.groupAll)
+                ? Math.min(this.size(), 4) : this.size();
+            return PlayArea.this.cardWidth + ((visualCount - 1) * PlayArea.this.stackSpacingX)
                     + PlayArea.this.cardSpacingX;
         }
 
         private int getHeight() {
-            return PlayArea.this.cardHeight + ((this.size() - 1) * PlayArea.this.stackSpacingY)
+            int visualCount = (PlayArea.this.groupTokensAndCreatures || PlayArea.this.groupAll)
+                ? Math.min(this.size(), 4) : this.size();
+            return PlayArea.this.cardHeight + ((visualCount - 1) * PlayArea.this.stackSpacingY)
                     + PlayArea.this.cardSpacingY;
         }
     }

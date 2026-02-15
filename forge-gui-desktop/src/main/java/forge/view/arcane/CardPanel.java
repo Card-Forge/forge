@@ -115,6 +115,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private boolean isSelected;
     private boolean hasFlash;
     private CachedCardImage cachedImage;
+    private int groupCount;
 
     private static Font smallCounterFont;
     private static Font largeCounterFont;
@@ -248,6 +249,13 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     }
     public final void setDisplayEnabled(final boolean displayEnabled0) {
         displayEnabled = displayEnabled0;
+    }
+
+    public int getGroupCount() {
+        return groupCount;
+    }
+    public void setGroupCount(int count) {
+        this.groupCount = count;
     }
 
     public final void setAnimationPanel(final boolean isAnimationPanel0) {
@@ -385,6 +393,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         }
         displayIconOverlay(g, canShow);
+        if (groupCount >= 5) {
+            drawGroupCountBadge(g);
+        }
         if (canShow) {
             drawFoilEffect(g, card, cardXOffset, cardYOffset,
                     cardWidth, cardHeight, Math.round(cardWidth * BLACK_BORDER_SIZE));
@@ -494,6 +505,47 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             titleText.setBounds(imgPos.x + titleX, imgPos.y + titleY + 2, imgSize.width - 2 * titleX, titleH - titleY);
         }
         titleText.setVisible(isVisible);
+    }
+
+    private void drawGroupCountBadge(final Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        String text = "\u00D7" + groupCount;
+        Font badgeFont = new Font("Dialog", Font.BOLD, Math.max(10, cardWidth / 5));
+        FontMetrics fm = g2d.getFontMetrics(badgeFont);
+
+        int textWidth = fm.stringWidth(text);
+        int textHeight = fm.getAscent();
+        int padX = Math.max(4, cardWidth / 20);
+        int padY = Math.max(2, cardHeight / 30);
+        int badgeWidth = textWidth + padX * 2;
+        int badgeHeight = textHeight + padY * 2;
+        int badgeX = cardXOffset + 2;
+        int badgeY = cardYOffset + 2;
+
+        g2d.setColor(new Color(0, 0, 0, 180));
+        g2d.fillRoundRect(badgeX, badgeY, badgeWidth, badgeHeight, 6, 6);
+
+        g2d.setColor(Color.WHITE);
+        g2d.setFont(badgeFont);
+        g2d.drawString(text, badgeX + padX, badgeY + padY + textHeight);
+    }
+
+    public boolean isBadgeHit(int mouseX, int mouseY) {
+        if (groupCount < 5) {
+            return false;
+        }
+        // Mouse coordinates are container-relative (from PlayArea), so use
+        // getCardX()/getCardY() which convert panel-internal offsets to
+        // container coordinates (getX() + cardXOffset).
+        int badgeX = getCardX() + 2;
+        int badgeY = getCardY() + 2;
+        // Use generous hit area to cover the font-metrics-based badge size
+        int badgeWidth = Math.max(30, cardWidth / 3);
+        int badgeHeight = Math.max(20, cardHeight / 6);
+        return mouseX >= badgeX && mouseX <= badgeX + badgeWidth
+            && mouseY >= badgeY && mouseY <= badgeY + badgeHeight;
     }
 
     private void displayIconOverlay(final Graphics g, final boolean canShow) {
