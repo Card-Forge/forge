@@ -1,10 +1,6 @@
 package forge.game.combat;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
@@ -22,9 +18,6 @@ import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityMustAttack;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
-import forge.util.maps.LinkedHashMapToAmount;
-import forge.util.maps.MapToAmount;
-import forge.util.maps.MapToAmountUtil;
 
 public class AttackConstraints {
 
@@ -80,7 +73,7 @@ public class AttackConstraints {
             return Pair.of(Collections.emptyMap(), 0);
         }
 
-        final MapToAmount<Map<Card, GameEntity>> possible = new LinkedHashMapToAmount<>();
+        final Map<Map<Card, GameEntity>, Integer> possible = new LinkedHashMap<>();
         final List<Attack> reqs = getSortedFilteredRequirements();
         final CardCollection myPossibleAttackers = new CardCollection(possibleAttackers);
 
@@ -148,7 +141,7 @@ public class AttackConstraints {
         }
  
         // take the case with the fewest violations
-        return MapToAmountUtil.min(possible);
+        return findMin(possible);
     }
 
     private FCollection<Map<Card, GameEntity>> collectLegalAttackers(final List<Attack> reqs, final int maximum) {
@@ -161,7 +154,7 @@ public class AttackConstraints {
         int localMaximum = maximum;
         final boolean isLimited = globalRestrictions.getMax() != null;
         final Map<Card, GameEntity> myAttackers = Maps.newHashMap(attackers);
-        final MapToAmount<GameEntity> toDefender = new LinkedHashMapToAmount<>();
+        final Map<GameEntity, Integer> toDefender = new LinkedHashMap<>();
         int attackersNeeded = 0;
 
         outer: while (!reqs.isEmpty()) {
@@ -180,7 +173,7 @@ public class AttackConstraints {
                 }
             }
             final Integer defMax = globalRestrictions.getDefenderMax().get(req.defender);
-            if (defMax != null && toDefender.count(req.defender) >= defMax) {
+            if (defMax != null && toDefender.getOrDefault(req.defender, 0) >= defMax) {
                 // too many to this defender already
                 skip = true;
             } else if (null != CombatUtil.getAttackCost(req.attacker.getGame(), req.attacker, req.defender)) {
@@ -252,7 +245,7 @@ public class AttackConstraints {
 
             // finally: add the creature
             myAttackers.put(req.attacker, req.defender);
-            toDefender.add(req.defender);
+            toDefender.merge(req.defender, 1, Integer::sum);
             reqs.removeAll(findAll(reqs, req.attacker));
             reserved.remove(req.attacker);
             localMaximum--;
@@ -315,10 +308,9 @@ public class AttackConstraints {
         List<Set<GameEntity>> playerReqs = Lists.newArrayList(playerRequirements);
         CardCollection usedAttackers = new CardCollection();
         FCollection<GameEntity> excludedDefenders = new FCollection<>();
-        MapToAmount<GameEntity> sortedPlayerReqs = new LinkedHashMapToAmount<>();
-        sortedPlayerReqs.addAll(Iterables.concat(playerReqs));
+        Map<GameEntity, Integer> sortedPlayerReqs = mapToAmount(Iterables.concat(playerReqs));
         while (!sortedPlayerReqs.isEmpty()) {
-            Pair<GameEntity, Integer> playerReq = MapToAmountUtil.max(sortedPlayerReqs);
+            Pair<GameEntity, Integer> playerReq = findMax(sortedPlayerReqs);
             // find best attack to also fulfill the additional requirements
             Attack bestMatch = Iterables.getLast(IterableUtil.filter(result, att -> !usedAttackers.contains(att.attacker) && att.defender.equals(playerReq.getLeft())), null);
             if (bestMatch != null) {
@@ -327,7 +319,7 @@ public class AttackConstraints {
                 // recalculate remaining requirements
                 playerReqs.removeIf(s -> s.contains(playerReq.getLeft()));
                 sortedPlayerReqs.clear();
-                sortedPlayerReqs.addAll(Iterables.concat(playerReqs));
+                sortedPlayerReqs.putAll(mapToAmount(Iterables.concat(playerReqs)));
             } else {
                 excludedDefenders.add(playerReq.getLeft());
             }
@@ -360,6 +352,28 @@ public class AttackConstraints {
     }
     private static Collection<Attack> findAll(final List<Attack> reqs, final Card attacker) {
         return Collections2.filter(reqs, input -> input.attacker.equals(attacker));
+    }
+
+    private static <T> Pair<T, Integer> findMax(final Map<T, Integer> map) {
+        return map.entrySet().stream()
+                .max(Comparator.comparingInt(Entry::getValue))
+                .map(e -> Pair.of(e.getKey(), e.getValue()))
+                .orElseThrow(NoSuchElementException::new);
+    }
+
+    private static <T> Pair<T, Integer> findMin(final Map<T, Integer> map) {
+        return map.entrySet().stream()
+                .min(Comparator.comparingInt(Entry::getValue))
+                .map(e -> Pair.of(e.getKey(), e.getValue()))
+                .orElseThrow(NoSuchElementException::new);
+    }
+
+    private static <T> Map<T, Integer> mapToAmount(final Iterable<T> items) {
+        Map<T, Integer> map = new LinkedHashMap<>();
+        for (T i : items) {
+            map.merge(i, 1, Integer::sum);
+        }
+        return map;
     }
 
     /**
