@@ -39,6 +39,7 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.spellability.SpellAbilityView;
 import forge.game.spellability.TargetChoices;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -1049,7 +1050,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (stack.isEmpty()) { return; }
         stack.clear();
         game.updateStackForView();
-        game.fireEvent(new GameEventSpellRemovedFromStack(null));
+        game.fireEvent(new GameEventSpellRemovedFromStack((SpellAbilityView) null));
     }
 
     @Override

@@ -4,14 +4,11 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.eventbus.Subscribe;
-import forge.game.Game;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
 import forge.game.card.CardView;
 import forge.game.event.*;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiGame;
@@ -171,6 +168,14 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         }
         return processEvent();
     }
+    private Void processCardViews(final Collection<CardView> cards, final Set<CardView> list) {
+        if (cards.isEmpty()) { return null; }
+
+        synchronized (list) {
+            list.addAll(cards);
+        }
+        return processEvent();
+    }
     private Void processPlayer(final Player player, final Set<PlayerView> list) {
         synchronized (list) {
             list.add(player.getView());
@@ -182,11 +187,6 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             list.add(playerView);
         }
         return processEvent();
-    }
-    private Void updateZone(final Zone z) {
-        if (z == null) { return null; }
-
-        return updateZone(z.getPlayer(), z.getZoneType());
     }
     private Void updateZone(final Player p, final ZoneType z) {
         if (p == null || z == null) { return null; }
@@ -232,11 +232,11 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventAnteCardsSelected ev) {
         final List<CardView> options = Lists.newArrayList();
-        for (final Entry<Player, Card> kv : ev.cards().entries()) {
+        for (final Entry<PlayerView, CardView> kv : ev.cards().entries()) {
             //use fake card so real cards appear with proper formatting
             final CardView fakeCard = new CardView(-1, null, "  -- From " + Lang.getInstance().getPossesive(kv.getKey().getName()) + " deck --");
             options.add(fakeCard);
-            options.add(kv.getValue().getView());
+            options.add(kv.getValue());
         }
         humanController.getGui().reveal("These cards were chosen to ante", options);
         return null;
@@ -244,17 +244,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventPlayerControl ev) {
-        if (ev.player().getGame().isGameOver()) {
-            return null;
-        }
-
-        final PlayerControllerHuman newController;
-        if (ev.newController() instanceof PlayerControllerHuman) {
-            newController = (PlayerControllerHuman) ev.newController();
-        } else {
-            newController = null;
-        }
-        matchController.setGameController(PlayerView.get(ev.player()), newController);
+        final PlayerControllerHuman newController = ev.newControllerIsHuman() ? humanController : null;
+        matchController.setGameController(ev.player(), newController);
 
         needPlayerControlUpdate = true;
         return processEvent();
@@ -338,15 +329,13 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventCardAttachment event) {
-        final Game game = event.equipment().getGame();
-        final Zone zEq = game.getZoneOf(event.equipment());
-        if (event.oldEntity() instanceof Card oldCard) {
-            updateZone(game.getZoneOf(oldCard));
+        updateZone(event.equipment().getController(), event.equipment().getZone());
+        if (event.oldEntity() instanceof CardView oldCard) {
+            updateZone(oldCard.getController(), oldCard.getZone());
         }
-        if (event.newTarget() instanceof Card newCard) {
-            updateZone(game.getZoneOf(newCard));
+        if (event.newTarget() instanceof CardView newCard) {
+            updateZone(newCard.getController(), newCard.getZone());
         }
-        updateZone(zEq);
         return processEvent();
     }
 
@@ -377,17 +366,17 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventBlockersDeclared event) {
-        final Set<Card> cards = new HashSet<>();
+        final Set<CardView> cards = new HashSet<>();
 
-        for (final Multimap<Card, Card> kv : event.blockers().values()) {
+        for (final Multimap<CardView, CardView> kv : event.blockers().values()) {
             cards.addAll(kv.values());
         }
-        return processCards(cards, cardsUpdate);
+        return processCardViews(cards, cardsUpdate);
     }
 
     @Override
     public Void visit(final GameEventAttackersDeclared event) {
-        return processCards(event.attackersMap().values(), cardsUpdate);
+        return processCardViews(event.attackersMap().values(), cardsUpdate);
     }
 
     @Override
@@ -401,8 +390,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         needCombatUpdate = true;
 
         // This should remove sword/shield icons from combatants by the time game moves to M2
-        processCards(event.attackers(), cardsUpdate);
-        return processCards(event.blockers(), cardsUpdate);
+        processCardViews(event.attackers(), cardsUpdate);
+        return processCardViews(event.blockers(), cardsUpdate);
     }
 
     @Override
@@ -410,21 +399,22 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         if (!GuiBase.isNetworkplay(matchController))
             return null; //not needed if single player only...
 
-        final CardCollection cards = new CardCollection();
+        final List<CardView> cards = new ArrayList<>();
         cards.addAll(event.attackers());
         cards.addAll(event.blockers());
 
         refreshFieldUpdate = true;
 
-        processCards(cards, cardsRefreshDetails);
-        return processCards(cards, cardsUpdate);
+        processCardViews(cards, cardsRefreshDetails);
+        return processCardViews(cards, cardsUpdate);
     }
 
     @Override
     public Void visit(final GameEventCardChangeZone event) {
         if (GuiBase.getInterface().isLibgdxPort()) {
-            updateZone(event.from());
-            return updateZone(event.to());
+            final PlayerView owner = event.card() != null ? event.card().getOwner() : null;
+            updateZone(owner, event.from());
+            return updateZone(owner, event.to());
         } else {
             return processEvent();
         }
@@ -433,8 +423,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventCardStatsChanged event) {
         refreshFieldUpdate = true;
-        processCards(event.cards(), cardsRefreshDetails);
-        return processCards(event.cards(), cardsUpdate);
+        processCardViews(event.cards(), cardsRefreshDetails);
+        return processCardViews(event.cards(), cardsUpdate);
     }
 
     @Override
@@ -455,15 +445,11 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventPlayerStatsChanged event) {
-        final CardCollection cards = new CardCollection();
-        for (final Player p : event.players()) {
-            if (event.updateCards()) {
-                cards.addAll(p.getAllCards());
-            }
+        for (final PlayerView p : event.players()) {
             processPlayer(p, livesUpdate);
         }
 
-        return processCards(cards, cardsRefreshDetails);
+        return processCardViews(event.allCards(), cardsRefreshDetails);
     }
 
     public Void visit(final GameEventLandPlayed event) {
@@ -475,8 +461,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventCardRegenerated event) {
         refreshFieldUpdate = true;
-        processCards(event.cards(), cardsRefreshDetails);
-        return processCards(event.cards(), cardsUpdate);
+        processCardViews(event.cards(), cardsRefreshDetails);
+        return processCardViews(event.cards(), cardsUpdate);
     }
 
     @Override

@@ -497,7 +497,7 @@ public class PhaseHandler implements java.io.Serializable {
                 if (inCombat()) {
                     List<Card> attackers = combat.getAttackers();
                     List<Card> blockers = combat.getAllBlockers();
-                    eventEndCombat = new GameEventCombatEnded(attackers, blockers);
+                    eventEndCombat = GameEventCombatEnded.fromCards(attackers, blockers);
                 }
                 endCombat();
 

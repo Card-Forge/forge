@@ -2,7 +2,6 @@ package forge.gui.control;
 
 import com.google.common.eventbus.Subscribe;
 import forge.game.Game;
-import forge.game.card.CardView;
 import forge.game.event.*;
 import forge.gamemodes.match.input.InputPlaybackControl;
 import forge.gui.FThreads;
@@ -121,7 +120,7 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventSpellResolved event) {
-        FThreads.invokeInEdtNowOrLater(() -> humanController.getGui().setCard(CardView.get(event.spell().getHostCard())));
+        FThreads.invokeInEdtNowOrLater(() -> humanController.getGui().setCard(event.spell().getHostCard()));
         pauseForEvent(resolveDelay);
         return null;
     }
@@ -131,7 +130,7 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
      */
     @Override
     public Void visit(final GameEventSpellAbilityCast event) {
-        FThreads.invokeInEdtNowOrLater(() -> humanController.getGui().setCard(CardView.get(event.sa().getHostCard())));
+        FThreads.invokeInEdtNowOrLater(() -> humanController.getGui().setCard(event.sa().getHostCard()));
         pauseForEvent(castDelay);
         return null;
     }

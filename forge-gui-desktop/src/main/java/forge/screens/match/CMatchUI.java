@@ -49,10 +49,8 @@ import forge.control.KeyboardShortcuts;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deckchooser.FDeckViewer;
-import forge.game.GameEntity;
 import forge.game.GameEntityView;
 import forge.game.GameView;
-import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
@@ -65,11 +63,8 @@ import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
 import forge.game.player.PlayerController.FullControlFlag;
 import forge.game.player.PlayerView;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.spellability.StackItemView;
-import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.AbstractGuiGame;
 import forge.gui.FNetOverlay;
@@ -1274,7 +1269,7 @@ public final class CMatchUI
 
     @Override
     public void notifyStackAddition(GameEventSpellAbilityCast event) {
-        SpellAbility sa = event.sa();
+        SpellAbilityView sa = event.sa();
         String stackNotificationPolicy = FModel.getPreferences().getPref(FPref.UI_STACK_EFFECT_NOTIFICATION_POLICY);
         boolean isAi = sa.getActivatingPlayer().isAI();
         boolean isTrigger = sa.isTrigger();
@@ -1282,7 +1277,7 @@ public final class CMatchUI
         if (stackIndex == nextNotifiableStackIndex) {
             if (ForgeConstants.STACK_EFFECT_NOTIFICATION_ALWAYS.equals(stackNotificationPolicy) || (ForgeConstants.STACK_EFFECT_NOTIFICATION_AI_AND_TRIGGERED.equals(stackNotificationPolicy) && (isAi || isTrigger))) {
                 // We can go and show the modal
-                SpellAbilityStackInstance si = event.si();
+                StackItemView si = event.si();
 
                 MigLayout migLayout = new MigLayout("insets 15, left, gap 30, fill");
                 JPanel mainPanel = new JPanel(migLayout);
@@ -1300,32 +1295,14 @@ public final class CMatchUI
                 // Small images
                 int numSmallImages = 0;
 
-                // If current effect is a triggered/activated ability of an enchantment card, I want to show the enchanted card
+                // If current effect is a triggered/activated ability of an enchantment card, show the enchanted card
                 GameEntityView enchantedEntityView = null;
-                Card hostCard = sa.getHostCard();
-                if (hostCard.isEnchantment()) {
-                    GameEntity enchantedEntity = hostCard.getEntityAttachedTo();
-                    if (enchantedEntity != null) {
-                        enchantedEntityView = enchantedEntity.getView();
+                CardView hostCard = sa.getHostCard();
+                if (hostCard != null && hostCard.getCurrentState().isEnchantment()) {
+                    enchantedEntityView = hostCard.getEntityAttachedTo();
+                    if (enchantedEntityView != null) {
                         numSmallImages++;
-                    } else if ((sa.getRootAbility() != null)
-                            && (sa.getRootAbility().getPaidList("Sacrificed", true) != null)
-                            && !sa.getRootAbility().getPaidList("Sacrificed", true).isEmpty()) {
-                        // If the player activated its ability by sacrificing the enchantment, the enchantment has not anything attached anymore and the ex-enchanted card has to be searched in other ways.. for example, the green enchantment "Carapace"
-                        enchantedEntity = sa.getRootAbility().getPaidList("Sacrificed", true).get(0).getEnchantingCard();
-                        if (enchantedEntity != null) {
-                            enchantedEntityView = enchantedEntity.getView();
-                            numSmallImages++;
-                        }
                     }
-                }
-
-                // If current effect is a triggered ability, I want to show the triggering card if present
-                SpellAbility sourceSA = (SpellAbility) si.getTriggeringObject(AbilityKey.SourceSA);
-                CardView sourceCardView = null;
-                if (sourceSA != null) {
-                    sourceCardView = sourceSA.getHostCard().getView();
-                    numSmallImages++;
                 }
 
                 // I also want to show each type of targets (both cards and players)
@@ -1335,9 +1312,6 @@ public final class CMatchUI
                 // Now I know how many small images - on to render them
                 if (enchantedEntityView != null) {
                     addSmallImageToStackModalPanel(enchantedEntityView,mainPanel,numSmallImages);
-                }
-                if (sourceCardView != null) {
-                    addSmallImageToStackModalPanel(sourceCardView,mainPanel,numSmallImages);
                 }
                 for (GameEntityView gev : targets) {
                     addSmallImageToStackModalPanel(gev, mainPanel, numSmallImages);
@@ -1357,34 +1331,32 @@ public final class CMatchUI
         }
     }
 
-    private List<GameEntityView> getTargets(SpellAbilityStackInstance si, List<GameEntityView> result){
+    private List<GameEntityView> getTargets(StackItemView si, List<GameEntityView> result){
         if (si == null) {
             return result;
         }
-        FCollectionView<CardView> targetCards = CardView.getCollection(si.getTargetChoices().getTargetCards());
-        for (CardView currCardView: targetCards) {
-            result.add(currCardView);
+        FCollectionView<CardView> targetCards = si.getTargetCards();
+        if (targetCards != null) {
+            for (CardView currCardView : targetCards) {
+                result.add(currCardView);
+            }
         }
 
-        for (SpellAbility currSA : si.getTargetChoices().getTargetSpells()) {
-            CardView currCardView = currSA.getCardView();
-            result.add(currCardView);
-        }
-
-        FCollectionView<PlayerView> targetPlayers = PlayerView.getCollection(si.getTargetChoices().getTargetPlayers());
-        for (PlayerView currPlayerView : targetPlayers) {
-            result.add(currPlayerView);
+        FCollectionView<PlayerView> targetPlayers = si.getTargetPlayers();
+        if (targetPlayers != null) {
+            for (PlayerView currPlayerView : targetPlayers) {
+                result.add(currPlayerView);
+            }
         }
 
         return getTargets(si.getSubInstance(),result);
     }
 
-    private void addBigImageToStackModalPanel(JPanel mainPanel, SpellAbilityStackInstance si) {
-        StackItemView siv = si.getView();
-        int rotation = getRotation(si.getCardView());
+    private void addBigImageToStackModalPanel(JPanel mainPanel, StackItemView si) {
+        int rotation = getRotation(si.getSourceCard());
 
         FImagePanel imagePanel = new FImagePanel();
-        BufferedImage bufferedImage = FImageUtil.getImage(siv.getSourceCard().getCurrentState());
+        BufferedImage bufferedImage = FImageUtil.getImage(si.getSourceCard().getCurrentState());
         imagePanel.setImage(bufferedImage, rotation, AutoSizeImageMode.SOURCE);
         int imageWidth = 433;
         int imageHeight = 600;
@@ -1394,22 +1366,32 @@ public final class CMatchUI
         mainPanel.add(imagePanel, "cell 0 0, spany 3");
     }
 
-    private void addTextToStackModalPanel(JPanel mainPanel, SpellAbility sa, SpellAbilityStackInstance si) {
+    private void addTextToStackModalPanel(JPanel mainPanel, SpellAbilityView sa, StackItemView si) {
         String who = sa.getActivatingPlayer().getName();
         String action = sa.isSpell() ? " cast " : sa.isTrigger() ? " triggered " : " activated ";
-        String what = sa.getStackDescription().startsWith("Morph ") ? "Morph" : sa.getHostCard().toString();
+        String desc = sa.getDescription();
+        String what = (desc != null && desc.startsWith("Morph ")) ? "Morph" : sa.getHostCard().toString();
 
         StringBuilder sb = new StringBuilder();
         sb.append(who).append(action).append(what);
 
-        if (sa.getTargetRestrictions() != null) {
+        FCollectionView<CardView> targetCards = si.getTargetCards();
+        FCollectionView<PlayerView> targetPlayers = si.getTargetPlayers();
+        boolean hasTargets = (targetCards != null && !targetCards.isEmpty()) || (targetPlayers != null && !targetPlayers.isEmpty());
+        if (hasTargets) {
             sb.append(" targeting ");
-            TargetChoices targets = si.getTargetChoices();
-            sb.append(targets);
+            List<String> targetNames = new ArrayList<>();
+            if (targetCards != null) {
+                for (CardView cv : targetCards) { targetNames.add(cv.toString()); }
+            }
+            if (targetPlayers != null) {
+                for (PlayerView pv : targetPlayers) { targetNames.add(pv.toString()); }
+            }
+            sb.append(String.join(", ", targetNames));
         }
         sb.append(".");
         String message1 = sb.toString();
-        String message2 = si.getStackDescription();
+        String message2 = si.getText();
         String messageTotal = message1 + "\n\n" + message2;
 
         final FTextArea prompt1 = new FTextArea(messageTotal);
