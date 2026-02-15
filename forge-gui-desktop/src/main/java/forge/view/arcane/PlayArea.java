@@ -34,6 +34,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.FThreads;
 import forge.gui.util.SGuiChoose;
 import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.util.Localizer;
 import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FScrollPane;
@@ -832,11 +833,28 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             if (stack != null && stack.size() >= 5) {
                 // Check if the game accepts card selection right now (side-effect-free)
                 CardView primary = stack.get(0).getCard();
-                if (primary == null || getMatchUI().getGameController().getActivateDescription(primary) == null) {
+                String activateDesc = primary != null
+                        ? getMatchUI().getGameController().getActivateDescription(primary) : null;
+                if (activateDesc == null) {
                     getMatchUI().flashIncorrectAction();
                     return;
                 }
-                Integer count = SGuiChoose.getInteger("How many to select?", 1, stack.size());
+                // Context-appropriate prompt based on card state
+                String prompt;
+                boolean alreadyInCombat = primary.isAttacking() || primary.isBlocking();
+                if (alreadyInCombat) {
+                    prompt = "How many to remove from combat?";
+                } else {
+                    Localizer loc = Localizer.getInstance();
+                    if (activateDesc.equals(loc.getMessage("lblAttackWithCard"))) {
+                        prompt = "How many to declare as attackers?";
+                    } else if (activateDesc.equals(loc.getMessage("lblBlockWithCard"))) {
+                        prompt = "How many to assign as blockers?";
+                    } else {
+                        prompt = "How many to select?";
+                    }
+                }
+                Integer count = SGuiChoose.getInteger(prompt, 1, stack.size());
                 if (count == null) {
                     return; // cancelled
                 }
@@ -849,13 +867,13 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                         selected.add(p.getCard());
                     }
                 }
-                // If cards are already attacking/blocking, just do a visual split
-                // without calling selectCard (which would toggle them off)
-                boolean alreadyInCombat = primary.isAttacking() || primary.isBlocking();
-                if (!alreadyInCombat) {
-                    // Use a synthetic left-click trigger (button=1) so InputAttack
-                    // treats this as a declaration, not an undeclare (button=3)
-                    List<CardView> others = selected.size() > 1 ? selected.subList(1, selected.size()) : null;
+                List<CardView> others = selected.size() > 1 ? selected.subList(1, selected.size()) : null;
+                if (alreadyInCombat) {
+                    // Use button=3 (right-click) to undeclare the selected cards
+                    MouseTriggerEvent rightClickTrigger = new MouseTriggerEvent(3, evt.getX(), evt.getY());
+                    getMatchUI().getGameController().selectCard(primary, others, rightClickTrigger);
+                } else {
+                    // Use button=1 (left-click) to declare as attacker/blocker
                     MouseTriggerEvent leftClickTrigger = new MouseTriggerEvent(1, evt.getX(), evt.getY());
                     getMatchUI().getGameController().selectCard(primary, others, leftClickTrigger);
                 }
