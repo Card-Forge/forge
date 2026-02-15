@@ -5,7 +5,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 
-import forge.StaticData;
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardRules;
@@ -36,9 +35,12 @@ public class TokenDb implements ITokenDatabase {
     private final CardEdition.Collection editions;
     private final Map<String, CardRules> rulesByName;
 
-    public TokenDb(Map<String, CardRules> rules, CardEdition.Collection editions) {
+    private boolean smartTokenSelection;
+
+    public TokenDb(Map<String, CardRules> rules, CardEdition.Collection editions, boolean smartTokenSelection) {
         this.rulesByName = rules;
         this.editions = editions;
+        this.smartTokenSelection = smartTokenSelection;
     }
 
     public boolean containsRule(String rule) {
@@ -85,15 +87,37 @@ public class TokenDb implements ITokenDatabase {
     }
 
     // try all editions to find token
-    protected PaperToken fallbackToken(String name) {
-        CardDb.CardArtPreference artPreference = StaticData.instance().getCardArtPreference();
-        for (CardEdition edition : this.editions.getOrderedEditions(artPreference.latestFirst)) {
-            String fullName = String.format("%s_%s", name, edition.getCode().toLowerCase());
-            if (loadTokenFromSet(edition, name)) {
-                return Aggregates.random(allTokenByName.get(fullName));
+    protected PaperToken fallbackToken(String name, CardEdition realEdition) {
+        if (smartTokenSelection) {
+            return smartFallbackToken(name, realEdition);
+        } else {
+            for (CardEdition edition : this.editions) {
+                String fullName = String.format("%s_%s", name, edition.getCode().toLowerCase());
+                if (loadTokenFromSet(edition, name)) {
+                    return Aggregates.random(allTokenByName.get(fullName));
+                }
             }
         }
         return null;
+    }
+
+    // Find latest token before release of original card, or earliest after that
+    private PaperToken smartFallbackToken(String name, CardEdition realEdition) {
+        String latestFound = null;
+        boolean pastRealEdition = false;
+        for (CardEdition edition : this.editions.getOrderedEditions(false)) {
+            if (edition.equals(realEdition)) {
+                pastRealEdition = true;
+            }
+            String fullName = String.format("%s_%s", name, edition.getCode().toLowerCase());
+            if (loadTokenFromSet(edition, name)) {
+                latestFound = fullName;
+            }
+            if (pastRealEdition && latestFound != null) {
+                break;
+            }
+        }
+        return latestFound != null ? Aggregates.random(allTokenByName.get(latestFound)) : null;
     }
 
     @Override
@@ -121,7 +145,7 @@ public class TokenDb implements ITokenDatabase {
 
             return Iterables.get(collection, artIndex - 1);
         }
-        PaperToken fallback = this.fallbackToken(tokenName);
+        PaperToken fallback = this.fallbackToken(tokenName, realEdition);
         if (fallback != null) {
             return fallback;
         }
