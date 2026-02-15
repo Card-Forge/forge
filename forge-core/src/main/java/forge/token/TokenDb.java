@@ -103,11 +103,22 @@ public class TokenDb implements ITokenDatabase {
 
     // Find latest token before release of original card, or earliest after that
     private PaperToken smartFallbackToken(String name, CardEdition realEdition) {
+        PaperToken coreExpansionReprintToken = smartFallbackToken(name, realEdition, true);
+        return coreExpansionReprintToken != null ? coreExpansionReprintToken : smartFallbackToken(name, realEdition, false);
+    }
+
+    private PaperToken smartFallbackToken(String name, CardEdition realEdition, boolean onlyCoreExpansionOrReprint) {
         String latestFound = null;
         boolean pastRealEdition = false;
+        final EnumSet<CardEdition.Type> coreExpansionOrReprint = EnumSet.of(CardEdition.Type.CORE, CardEdition.Type.EXPANSION);
+        coreExpansionOrReprint.addAll(CardEdition.Type.REPRINT_SET_TYPES);
         for (CardEdition edition : this.editions.getOrderedEditions(false)) {
             if (edition.equals(realEdition)) {
                 pastRealEdition = true;
+            }
+            if (onlyCoreExpansionOrReprint && !coreExpansionOrReprint.contains(edition.getType())) {
+                // Core, Expansion and Reprint sets are more likely to have available token images
+                continue;
             }
             String fullName = String.format("%s_%s", name, edition.getCode().toLowerCase());
             if (loadTokenFromSet(edition, name)) {
