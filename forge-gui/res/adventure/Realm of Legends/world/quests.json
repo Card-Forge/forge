@@ -7348,7 +7348,7 @@
 				"options": [
 					{
 						"name": "(Continue)",
-						"text": "Towns will be valuable sources of cards and equipment to help your quest. Each of the five colored biomes also has a capitol with even more shops and equipment.",
+						"text": "Towns will be valuable sources of cards and equipment to help your quest. Each of the five colored biomes also has a capitol with even more shops and equipment, as well as some quests that offer permanent life increases as rewards.",
 						"options": [
 							{
 								"name": "(Continue)",
@@ -7412,7 +7412,7 @@
 			"objective": "Travel",
 			"prerequisiteIDs": [ 2 ],
 			"prologue": {
-				"text": "You are now free to roam as you wish. Unlike in Shandalar, the world this place once was, there are no quests, only your own wanderings.",
+				"text": "You are now free to roam as you wish. There will be few quests to guide you, so be warned - though you may go anywhere you wish, attempting dungeons your manasight stone warns you of without being well prepared may be quite difficult.",
 				"options": [
 					{
 						"name": "(Continue)"
