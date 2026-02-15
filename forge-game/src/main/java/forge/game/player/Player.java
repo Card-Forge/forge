@@ -1759,6 +1759,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public void updateManaForView() {
         view.updateMana(this);
+        if (getController().shouldTrackAvailableActions()) {
+            view.updateWillLoseManaAtEndOfPhase(this);
+        }
     }
 
     public final int getNumPowerSurgeLands() {

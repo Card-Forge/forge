@@ -91,7 +91,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      * library.
      */
     private boolean mayLookAtAllCards = false;
-    private boolean disableAutoYields = false;
 
     private IGuiGame gui;
 
@@ -135,13 +134,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return player == null ? null : player.getView();
     }
 
-    public boolean getDisableAutoYields() {
-        return disableAutoYields;
-    }
-    public void setDisableAutoYields(final boolean disableAutoYields0) {
-        disableAutoYields = disableAutoYields0;
-    }
-
     @Override
     public boolean mayLookAtAllCards() {
         return mayLookAtAllCards;
@@ -154,6 +146,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      */
     public void setMayLookAtAllCards(final boolean mayLookAtAllCards) {
         this.mayLookAtAllCards = mayLookAtAllCards;
+    }
+
+    @Override
+    public boolean shouldTrackAvailableActions() {
+        return FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS);
     }
 
     private final ArrayList<Card> tempShownCards = new ArrayList<>();
@@ -955,6 +952,21 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     protected void reveal(final CardCollectionView cards, final ZoneType zone, final PlayerView owner, String message, boolean addSuffix) {
+        // Skip reveal dialog during active yield if "Interrupt on Reveal" is disabled
+        forge.gamemodes.match.YieldMode yieldMode = getGui().getYieldMode(getLocalPlayerView());
+        if (yieldMode != null && yieldMode != forge.gamemodes.match.YieldMode.NONE) {
+            if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_INTERRUPT_ON_REVEAL)) {
+                // Still show the cards temporarily but skip the dialog that requires user input
+                if (!cards.isEmpty()) {
+                    tempShowCards(cards);
+                    TrackableCollection<CardView> collection = CardView.getCollection(cards);
+                    getGui().updateRevealedCards(collection);
+                    endTempShowCards();
+                }
+                return;
+            }
+        }
+
         if (StringUtils.isBlank(message)) {
             message = localizer.getMessage("lblLookCardInPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase());
         } else if (addSuffix) {
@@ -1750,6 +1762,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (sa != null && sa.isManaAbility()) {
             getGame().getGameLog().add(GameLogEntryType.LAND, message);
         } else {
+            // Skip notification dialog during active yield if "Interrupt on Reveal/Choices" is disabled
+            forge.gamemodes.match.YieldMode yieldMode = getGui().getYieldMode(getLocalPlayerView());
+            if (yieldMode != null && yieldMode != forge.gamemodes.match.YieldMode.NONE) {
+                if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_INTERRUPT_ON_REVEAL)) {
+                    // Log the message but don't show a dialog
+                    getGame().getGameLog().add(GameLogEntryType.INFORMATION, message);
+                    return;
+                }
+            }
+
             if (sa != null && sa.getHostCard() != null && GuiBase.getInterface().isLibgdxPort()) {
                 CardView cardView;
                 IPaperCard iPaperCard = sa.getHostCard().getPaperCard();
@@ -3288,6 +3310,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final PlayerZone hand = player.getZone(ZoneType.Hand);
         hand.reorder(getCard(card), index);
         player.updateZoneForView(hand);
+    }
+
+    @Override
+    public void notifyYieldModeChanged(final PlayerView playerView, final forge.gamemodes.match.YieldMode mode) {
+        // Update the server's GUI with the client's yield mode
+        // This syncs yield state from network client to server
+        // Uses FromRemote methods to avoid triggering another notification and to handle
+        // PlayerView tracker mismatch (network PlayerViews have different trackers than server's)
+        getGui().setYieldModeFromRemote(playerView, mode);
     }
 
     @Override

@@ -9,6 +9,7 @@ import forge.game.player.DelayedReveal;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.NextGameDecision;
+import forge.gamemodes.match.YieldMode;
 import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IGameController;
@@ -79,6 +80,8 @@ public enum ProtocolMethod {
     isUiSetToSkipPhase  (Mode.SERVER, Boolean.TYPE, PlayerView.class, PhaseType.class),
     setRememberedActions(Mode.SERVER, Void.TYPE),
     nextRememberedAction(Mode.SERVER, Void.TYPE),
+    // Server->Client yield state sync (when server clears yield due to end condition)
+    syncYieldMode       (Mode.SERVER, Void.TYPE, PlayerView.class, YieldMode.class),
     showWaitingTimer    (Mode.SERVER, Void.TYPE, PlayerView.class, String.class),
 
     // Client -> Server
@@ -98,7 +101,8 @@ public enum ProtocolMethod {
     getActivateDescription    (Mode.CLIENT, String.class, CardView.class),
     concede                   (Mode.CLIENT, Void.TYPE),
     alphaStrike               (Mode.CLIENT, Void.TYPE),
-    reorderHand               (Mode.CLIENT, Void.TYPE, CardView.class, Integer.TYPE);
+    reorderHand               (Mode.CLIENT, Void.TYPE, CardView.class, Integer.TYPE),
+    notifyYieldModeChanged    (Mode.CLIENT, Void.TYPE, PlayerView.class, YieldMode.class);
 
     private enum Mode {
         SERVER(IGuiGame.class),

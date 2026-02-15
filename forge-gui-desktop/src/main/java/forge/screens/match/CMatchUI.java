@@ -109,6 +109,7 @@ import forge.screens.match.controllers.CDock;
 import forge.screens.match.controllers.CLog;
 import forge.screens.match.controllers.CPrompt;
 import forge.screens.match.controllers.CStack;
+import forge.screens.match.controllers.CYield;
 import forge.screens.match.menus.CMatchUIMenus;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VHand;
@@ -174,6 +175,7 @@ public final class CMatchUI
     private final CLog cLog = new CLog(this);
     private final CPrompt cPrompt = new CPrompt(this);
     private final CStack cStack = new CStack(this);
+    private final CYield cYield = new CYield(this);
     private int nextNotifiableStackIndex = 0;
 
     public CMatchUI() {
@@ -193,6 +195,7 @@ public final class CMatchUI
         this.myDocs.put(EDocID.REPORT_COMBAT, cCombat.getView());
         this.myDocs.put(EDocID.REPORT_DEPENDENCIES, cDependencies.getView());
         this.myDocs.put(EDocID.REPORT_LOG, cLog.getView());
+        this.myDocs.put(EDocID.REPORT_YIELD, getCYield().getView());
         this.myDocs.put(EDocID.DEV_MODE, getCDev().getView());
         this.myDocs.put(EDocID.BUTTON_DOCK, getCDock().getView());
     }
@@ -262,6 +265,9 @@ public final class CMatchUI
     }
     public CStack getCStack() {
         return cStack;
+    }
+    public CYield getCYield() {
+        return cYield;
     }
     public TargetingOverlay getTargetingOverlay() {
         return targetingOverlay;
@@ -724,6 +730,9 @@ public final class CMatchUI
         btn1.setText(label1);
         btn2.setText(label2);
 
+        // Update yield buttons state when prompt changes (e.g., entering/exiting mulligan)
+        getCYield().updateYieldButtons();
+
         final FButton toFocus = enable1 && focus1 ? btn1 : (enable2 ? btn2 : null);
 
         //pfps This seems wrong so I've commented it out for now and put a replacement in the runnable
@@ -831,7 +840,10 @@ public final class CMatchUI
 
     @Override
     public void updateStack() {
-        FThreads.invokeInEdtNowOrLater(() -> getCStack().update());
+        FThreads.invokeInEdtNowOrLater(() -> {
+            getCStack().update();
+            getCYield().updateYieldButtons();  // Update yield button states
+        });
     }
 
     /**

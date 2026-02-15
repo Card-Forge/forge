@@ -246,6 +246,8 @@ public enum TrackableProperty {
     HasDelirium(TrackableTypes.BooleanType),
     AvatarLifeDifference(TrackableTypes.IntegerType, FreezeMode.IgnoresFreeze),
     HasLost(TrackableTypes.BooleanType),
+    HasAvailableActions(TrackableTypes.BooleanType),
+    WillLoseManaAtEndOfPhase(TrackableTypes.BooleanType),
 
     //SpellAbility
     HostCard(TrackableTypes.CardViewType),
@@ -276,6 +278,7 @@ public enum TrackableProperty {
     Ability(TrackableTypes.BooleanType),
     OptionalTrigger(TrackableTypes.BooleanType),
     OptionalCosts(TrackableTypes.StringType),
+    ApiType(TrackableTypes.StringType),
 
     //Combat
     AttackersWithDefenders(TrackableTypes.GenericMapType, FreezeMode.IgnoresFreeze),

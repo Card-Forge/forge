@@ -135,6 +135,22 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_HIDE_GAME_TABS ("false"), // Visibility of tabs in match screen.
         UI_CLOSE_ACTION ("NONE"),
         UI_MANA_LOST_PROMPT ("false"), // Prompt on losing mana when passing priority
+
+        // Experimental yield options (feature-gated)
+        YIELD_EXPERIMENTAL_OPTIONS("false"),
+        YIELD_SUGGEST_STACK_YIELD("true"),
+        YIELD_SUGGEST_NO_MANA("true"),
+        YIELD_SUGGEST_NO_ACTIONS("true"),
+        YIELD_INTERRUPT_ON_ATTACKERS("true"),
+        YIELD_INTERRUPT_ON_BLOCKERS("true"),
+        YIELD_INTERRUPT_ON_TARGETING("true"),
+        YIELD_INTERRUPT_ON_OPPONENT_SPELL("false"),
+        YIELD_INTERRUPT_ON_COMBAT("false"),
+        YIELD_INTERRUPT_ON_REVEAL("false"),   // When opponent reveals cards
+        YIELD_INTERRUPT_ON_MASS_REMOVAL("true"),  // When mass removal spell cast
+        YIELD_SUPPRESS_ON_OWN_TURN("true"),  // Suppress suggestions on player's own turn
+        YIELD_SUPPRESS_AFTER_END("true"),  // Suppress suggestions for one priority pass after yield ends
+
         UI_STACK_EFFECT_NOTIFICATION_POLICY ("Never"),
         UI_LAND_PLAYED_NOTIFICATION_POLICY ("Never"),
         UI_PAUSE_WHILE_MINIMIZED("false"),
@@ -287,6 +303,13 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         SHORTCUT_MACRO_RECORD ("16 82"),
         SHORTCUT_MACRO_NEXT_ACTION ("16 50"),
         SHORTCUT_CARD_ZOOM("90"),
+        SHORTCUT_YIELD_UNTIL_NEXT_PHASE("113"),         // F2 key
+        SHORTCUT_YIELD_UNTIL_BEFORE_COMBAT("114"),      // F3 key
+        SHORTCUT_YIELD_UNTIL_END_STEP("115"),           // F4 key
+        SHORTCUT_YIELD_UNTIL_END_OF_TURN("116"),        // F5 key
+        SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN("117"),     // F6 key
+        SHORTCUT_YIELD_UNTIL_STACK_CLEARS("118"),       // F7 key
+        SHORTCUT_YIELD_CANCEL("27"),                    // ESC key
 
         LAST_IMPORTED_CUBE_ID("");
 

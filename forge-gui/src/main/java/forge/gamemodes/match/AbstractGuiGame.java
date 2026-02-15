@@ -170,7 +170,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 gameControllers.put(player, originalGameControllers.get(player));
             } else {
                 gameControllers.remove(player);
-                autoPassUntilEndOfTurn.remove(player);
+                getYieldController().removeFromLegacyAutoPass(player);
                 final PlayerView currentPlayer = getCurrentPlayer();
                 if (player.equals(currentPlayer)) {
                     // set current player to a value known to be legal
@@ -427,7 +427,41 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     // Auto-yield and other input-related code
 
-    private final Set<PlayerView> autoPassUntilEndOfTurn = Sets.newHashSet();
+    // Yield controller manages all yield state and logic
+    private YieldController yieldController;
+
+    private YieldController getYieldController() {
+        if (yieldController == null) {
+            yieldController = new YieldController(new YieldController.YieldCallback() {
+                @Override
+                public void showPromptMessage(PlayerView player, String message) {
+                    AbstractGuiGame.this.showPromptMessage(player, message);
+                }
+                @Override
+                public void updateButtons(PlayerView player, boolean ok, boolean cancel, boolean focusOk) {
+                    AbstractGuiGame.this.updateButtons(player, ok, cancel, focusOk);
+                }
+                @Override
+                public void awaitNextInput() {
+                    AbstractGuiGame.this.awaitNextInput();
+                }
+                @Override
+                public void cancelAwaitNextInput() {
+                    AbstractGuiGame.this.cancelAwaitNextInput();
+                }
+                @Override
+                public GameView getGameView() {
+                    return AbstractGuiGame.this.getGameView();
+                }
+                @Override
+                public void syncYieldModeToClient(PlayerView player, YieldMode mode) {
+                    // Sync yield state to network client (for server->client updates)
+                    AbstractGuiGame.this.syncYieldMode(player, mode);
+                }
+            });
+        }
+        return yieldController;
+    }
 
     /**
      * Automatically pass priority until reaching the Cleanup phase of the
@@ -435,26 +469,18 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
      */
     @Override
     public final void autoPassUntilEndOfTurn(final PlayerView player) {
-        autoPassUntilEndOfTurn.add(player);
+        getYieldController().autoPassUntilEndOfTurn(player);
         updateAutoPassPrompt();
     }
 
     @Override
     public final void autoPassCancel(final PlayerView player) {
-        if (!autoPassUntilEndOfTurn.remove(player)) {
-            return;
-        }
-
-        //prevent prompt getting stuck on yielding message while actually waiting for next input opportunity
-        final PlayerView playerView = getCurrentPlayer();
-        showPromptMessage(playerView, "");
-        updateButtons(playerView, false, false, false);
-        awaitNextInput();
+        getYieldController().autoPassCancel(player);
     }
 
     @Override
     public final boolean mayAutoPass(final PlayerView player) {
-        return autoPassUntilEndOfTurn.contains(player);
+        return getYieldController().mayAutoPass(player);
     }
 
     private Timer awaitNextInputTimer;
@@ -583,13 +609,99 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public final void updateAutoPassPrompt() {
-        if (!autoPassUntilEndOfTurn.isEmpty()) {
-            //allow user to cancel auto-pass
-            cancelAwaitNextInput(); //don't overwrite prompt with awaiting opponent
-            showPromptMessage(getCurrentPlayer(), Localizer.getInstance().getMessage("lblYieldingUntilEndOfTurn"));
-            updateButtons(getCurrentPlayer(), false, true, false);
+        getYieldController().updateAutoPassPrompt(getCurrentPlayer());
+    }
+
+    // Extended yield mode methods (experimental feature)
+    @Override
+    public final void setYieldMode(PlayerView player, final YieldMode mode) {
+        getYieldController().setYieldMode(player, mode);
+        updateAutoPassPrompt();
+
+        // Notify remote server if this is a network client
+        IGameController controller = getGameController(player);
+        if (controller != null) {
+            controller.notifyYieldModeChanged(player, mode);
         }
     }
+
+    @Override
+    public final void setYieldModeFromRemote(PlayerView player, final YieldMode mode) {
+        // Update yield state without triggering notification (to avoid loops)
+        // Used when server receives yield state from network client
+        // Note: Don't call updateAutoPassPrompt() here - the client already showed
+        // the correct prompt when it set the yield mode locally
+
+        // The PlayerView from network has a different tracker than server's PlayerViews.
+        // We need to find the matching PlayerView from the GameView using ID comparison.
+        player = lookupPlayerViewById(player);
+        if (player == null) {
+            return; // Player not found in game
+        }
+        getYieldController().setYieldMode(player, mode);
+    }
+
+    @Override
+    public PlayerView lookupPlayerViewById(PlayerView networkPlayer) {
+        if (networkPlayer == null) {
+            return null;
+        }
+        GameView gv = getGameView();
+        if (gv == null) {
+            return networkPlayer; // Fall back to using the network instance
+        }
+        int playerId = networkPlayer.getId();
+        for (PlayerView pv : gv.getPlayers()) {
+            if (pv.getId() == playerId) {
+                return pv;
+            }
+        }
+        return networkPlayer; // Fall back if not found
+    }
+
+    @Override
+    public void syncYieldMode(PlayerView player, YieldMode mode) {
+        // Receive yield state sync from server (when server clears yield due to end condition)
+        // Look up the correct PlayerView instance by ID (network PlayerViews have different trackers)
+        player = lookupPlayerViewById(player);
+        if (player == null) {
+            return;
+        }
+        // Use silent methods to avoid triggering callback which would loop back here
+        getYieldController().setYieldModeSilent(player, mode);
+        // Note: Don't call updateAutoPassPrompt() - server already sent the correct prompt
+    }
+
+    @Override
+    public final void clearYieldMode(PlayerView player) {
+        getYieldController().clearYieldMode(player);
+    }
+
+    @Override
+    public final YieldMode getYieldMode(PlayerView player) {
+        return getYieldController().getYieldMode(player);
+    }
+
+    @Override
+    public final boolean didYieldJustEnd(PlayerView player) {
+        return getYieldController().didYieldJustEnd(player);
+    }
+
+    @Override
+    public final boolean shouldAutoYieldForPlayer(PlayerView player) {
+        return getYieldController().shouldAutoYieldForPlayer(player);
+    }
+
+    @Override
+    public void declineSuggestion(PlayerView player, String suggestionType) {
+        getYieldController().declineSuggestion(player, suggestionType);
+    }
+
+    @Override
+    public boolean isSuggestionDeclined(PlayerView player, String suggestionType) {
+        return getYieldController().isSuggestionDeclined(player, suggestionType);
+    }
+
     // End auto-yield/input code
 
     // Abilities to auto-yield to

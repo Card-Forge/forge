@@ -12,6 +12,7 @@ import forge.game.GameEntityView;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CounterType;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.trackable.TrackableCollection;
@@ -554,6 +555,98 @@ public class PlayerView extends GameEntityView {
             mana.put(b, p.getManaPool().getAmountOfColor(b));
         }
         set(TrackableProperty.Mana, mana);
+    }
+
+    public boolean hasAvailableActions() {
+        Boolean val = get(TrackableProperty.HasAvailableActions);
+        return val != null && val;
+    }
+
+    /**
+     * Check if this player has any available actions (playable spells/abilities).
+     * Used for smart yield suggestions in network play.
+     *
+     * Note: This uses a heuristic for mana checking since CostPartMana.canPay()
+     * always returns true. We estimate available mana from floating mana plus
+     * untapped mana sources and compare to spell CMCs.
+     */
+    public void updateHasAvailableActions(Player p) {
+        // Estimate available mana: floating mana + untapped mana-producing permanents
+        int availableMana = p.getManaPool().totalMana();
+        for (Card card : p.getCardsIn(ZoneType.Battlefield)) {
+            if (!card.isTapped() && !card.getManaAbilities().isEmpty()) {
+                // Count each untapped mana source as ~1 mana (simplified estimate)
+                availableMana++;
+            }
+        }
+
+        // Check hand for playable spells that we can afford
+        for (Card card : p.getCardsIn(ZoneType.Hand)) {
+            for (SpellAbility sa : card.getAllPossibleAbilities(p, true)) {
+                // Check if this is a spell we could potentially afford
+                if (sa.isSpell()) {
+                    int cmc = sa.getPayCosts().getTotalMana().getCMC();
+                    if (cmc <= availableMana) {
+                        set(TrackableProperty.HasAvailableActions, true);
+                        return;
+                    }
+                } else if (sa.isLandAbility()) {
+                    // Land abilities are already filtered by canPlay() for timing
+                    set(TrackableProperty.HasAvailableActions, true);
+                    return;
+                }
+            }
+        }
+
+        // Check battlefield for non-mana activated abilities we can afford
+        for (Card card : p.getCardsIn(ZoneType.Battlefield)) {
+            for (SpellAbility sa : card.getAllPossibleAbilities(p, true)) {
+                if (!sa.isManaAbility()) {
+                    // Check if we can afford the activation cost
+                    int activationCost = 0;
+                    if (sa.getPayCosts() != null && sa.getPayCosts().hasManaCost()) {
+                        activationCost = sa.getPayCosts().getTotalMana().getCMC();
+                    }
+                    if (activationCost <= availableMana) {
+                        set(TrackableProperty.HasAvailableActions, true);
+                        return;
+                    }
+                }
+            }
+        }
+
+        set(TrackableProperty.HasAvailableActions, false);
+    }
+
+    /**
+     * Check if player has any mana available (floating or from untapped lands).
+     * Used by yield suggestion system to determine if player can cast spells.
+     */
+    public boolean hasManaAvailable() {
+        // Check floating mana
+        for (byte manaType : ManaAtom.MANATYPES) {
+            if (getMana(manaType) > 0) return true;
+        }
+
+        // Check for untapped lands
+        FCollectionView<CardView> battlefield = getBattlefield();
+        if (battlefield != null) {
+            for (CardView cv : battlefield) {
+                if (!cv.isTapped() && cv.getCurrentState().isLand()) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public boolean willLoseManaAtEndOfPhase() {
+        Boolean val = get(TrackableProperty.WillLoseManaAtEndOfPhase);
+        return val != null && val;
+    }
+    void updateWillLoseManaAtEndOfPhase(Player p) {
+        set(TrackableProperty.WillLoseManaAtEndOfPhase, p.getManaPool().willManaBeLostAtEndOfPhase());
     }
 
     private List<String> getDetailsList() {

@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
 
@@ -48,7 +49,11 @@ public final class GameMenu {
         menu.addSeparator();
         menu.add(getMenuItem_TargetingArcs());
         menu.add(new CardOverlaysMenu(matchUI).getMenu());
-        menu.add(getMenuItem_AutoYields());
+        if (prefs.getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) {
+            menu.add(getYieldOptionsMenu());
+        } else {
+            menu.add(getMenuItem_AutoYields());
+        }
         menu.addSeparator();
         menu.add(getMenuItem_ViewDeckList());
         return menu;
@@ -184,5 +189,58 @@ public final class GameMenu {
 
     private ActionListener getViewDeckListAction() {
         return e -> matchUI.viewDeckList();
+    }
+
+    private JMenu getYieldOptionsMenu() {
+        final Localizer localizer = Localizer.getInstance();
+        final JMenu yieldMenu = new JMenu(localizer.getMessage("lblYieldOptions"));
+
+        // Auto-Yields (manage per-ability yields)
+        yieldMenu.add(getMenuItem_AutoYields());
+        yieldMenu.addSeparator();
+
+        // Sub-menu 1: Interrupt Settings
+        final JMenu interruptMenu = new JMenu(localizer.getMessage("lblInterruptSettings"));
+        interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnAttackers"), FPref.YIELD_INTERRUPT_ON_ATTACKERS));
+        interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnBlockers"), FPref.YIELD_INTERRUPT_ON_BLOCKERS));
+        interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnTargeting"), FPref.YIELD_INTERRUPT_ON_TARGETING));
+        interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnMassRemoval"), FPref.YIELD_INTERRUPT_ON_MASS_REMOVAL));
+        interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnOpponentSpell"), FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL));
+        interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnCombat"), FPref.YIELD_INTERRUPT_ON_COMBAT));
+        interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnReveal"), FPref.YIELD_INTERRUPT_ON_REVEAL));
+        yieldMenu.add(interruptMenu);
+
+        // Sub-menu 2: Automatic Suggestions
+        final JMenu suggestionsMenu = new JMenu(localizer.getMessage("lblAutomaticSuggestions"));
+        suggestionsMenu.add(createYieldCheckbox(localizer.getMessage("lblSuggestStackYield"), FPref.YIELD_SUGGEST_STACK_YIELD));
+        suggestionsMenu.add(createYieldCheckbox(localizer.getMessage("lblSuggestNoMana"), FPref.YIELD_SUGGEST_NO_MANA));
+        suggestionsMenu.add(createYieldCheckbox(localizer.getMessage("lblSuggestNoActions"), FPref.YIELD_SUGGEST_NO_ACTIONS));
+        suggestionsMenu.addSeparator();
+        suggestionsMenu.add(createYieldCheckbox(localizer.getMessage("lblSuppressOnOwnTurn"), FPref.YIELD_SUPPRESS_ON_OWN_TURN));
+        suggestionsMenu.add(createYieldCheckbox(localizer.getMessage("lblSuppressAfterYield"), FPref.YIELD_SUPPRESS_AFTER_END));
+        yieldMenu.add(suggestionsMenu);
+
+        return yieldMenu;
+    }
+
+    private JCheckBoxMenuItem createYieldCheckbox(String label, FPref pref) {
+        // Custom checkbox that doesn't close the menu when clicked
+        final JCheckBoxMenuItem item = new JCheckBoxMenuItem(label) {
+            @Override
+            protected void processMouseEvent(java.awt.event.MouseEvent e) {
+                if (e.getID() == java.awt.event.MouseEvent.MOUSE_RELEASED && contains(e.getPoint())) {
+                    doClick(0);
+                    setArmed(true);
+                } else {
+                    super.processMouseEvent(e);
+                }
+            }
+        };
+        item.setSelected(prefs.getPrefBoolean(pref));
+        item.addActionListener(e -> {
+            prefs.setPref(pref, item.isSelected());
+            prefs.save();
+        });
+        return item;
     }
 }

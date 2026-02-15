@@ -6,6 +6,7 @@ import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.NextGameDecision;
+import forge.gamemodes.match.YieldMode;
 import forge.util.ITriggerEvent;
 
 public interface IGameController {
@@ -45,4 +46,13 @@ public interface IGameController {
     String getActivateDescription(CardView card);
 
     void reorderHand(CardView card, int index);
+
+    /**
+     * Notify the server that the client's yield mode has changed.
+     * Used for network play to sync yield state from client to server.
+     * Default implementation does nothing (for local/host games).
+     */
+    default void notifyYieldModeChanged(PlayerView player, YieldMode mode) {
+        // Default: no-op for local games
+    }
 }
