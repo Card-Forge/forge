@@ -1,6 +1,7 @@
 package forge.game.combat;
 
 import java.util.Map;
+import java.util.Objects;
 
 import com.google.common.collect.Maps;
 
@@ -68,7 +69,7 @@ public class GlobalAttackRestrictions {
         }
         if (defenderMax.size() == possibleDefenders.size()) {
             // maximum on each defender, global maximum is sum of these
-            max = Math.min(max, defenderMax.values().stream().mapToInt(Integer::intValue).sum());
+            max = Math.min(Objects.requireNonNullElse(max, Integer.MAX_VALUE), defenderMax.values().stream().mapToInt(Integer::intValue).sum());
         }
 
         return new GlobalAttackRestrictions(max, defenderMax);
