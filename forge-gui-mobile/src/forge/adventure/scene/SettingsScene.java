@@ -265,6 +265,7 @@ public class SettingsScene extends UIScene {
         addCheckBox(Forge.getLocalizer().getMessage("lblCardID"), ForgePreferences.FPref.UI_OVERLAY_CARD_ID);
         addCheckBox(Forge.getLocalizer().getMessage("lblAbilityIcon"), ForgePreferences.FPref.UI_OVERLAY_ABILITY_ICONS);
         addCheckBox(Forge.getLocalizer().getMessage("cbImageFetcher"), ForgePreferences.FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER);
+        addCheckBox(Forge.getLocalizer().getMessage("cbSmartTokenArt"), ForgePreferences.FPref.UI_ENABLE_SMART_TOKEN_ART);
 
 
         if (!GuiBase.isAndroid()) {
