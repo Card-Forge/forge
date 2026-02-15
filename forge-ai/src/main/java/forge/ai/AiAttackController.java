@@ -39,6 +39,7 @@ import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import forge.game.staticability.StaticAbilityMode;
+import forge.game.staticability.StaticAbilityMustAttack;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -797,11 +798,8 @@ public class AiAttackController {
     final boolean LOG_AI_ATTACKS = false;
 
     /**
-     * <p>
-     * Getter for the field <code>attackers</code>.
-     * </p>
-     *
-     * @return a {@link forge.game.combat.Combat} object.
+     * Declare attackers.
+     * @return int aiAggression
      */
     public final int declareAttackers(final Combat combat) {
         // something prevents attacking, try another
@@ -814,6 +812,40 @@ public class AiAttackController {
 
         // TODO ideally requirements and attackMax are calculated first. so AI knows which attackers can't contribute
         final boolean bAssault = doAssault();
+        // Detect Season of the Witch trigger
+        boolean found = false;
+        for (Card c : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
+            if (c.getSVar("TrigDestroyAll").contains("ValidCards$ Creature.untapped")) {
+                found = true;
+            }
+        }
+        final boolean seasonOfTheWitch = found;
+
+        // Don't overkill too much / keep blockers for multiplayer or unexpected fog.
+        if (bAssault) {
+            int target_damage = this.defendingOpponent.getLife() + 20;
+            int n_attackers = this.attackers.size();
+            int n_defenders = this.defendingOpponent.getCreaturesInPlay().size();
+            int extra_attackers = 2; // In case of flash.
+            if (n_attackers - n_defenders > extra_attackers) {
+                int damage_guess = 0;
+                int last_needed_attacker = 0;
+                for (int i = n_defenders; i < this.attackers.size(); ++i) {
+                    if (damage_guess < target_damage) {
+                        last_needed_attacker = i;
+                    }
+                    damage_guess += this.attackers.get(i).getNetPower();
+                }
+                for (int i = this.attackers.size() - 1; i > last_needed_attacker + extra_attackers; --i) {
+                    Card attacker = this.attackers.get(i);
+                    if (attacker.isGoaded() || !StaticAbilityMustAttack.entitiesMustAttack(attacker).isEmpty() || seasonOfTheWitch) {
+                        // Keep if must attack.                            
+                    } else {
+                        this.attackers.remove(i);
+                    }
+                }
+            }
+        }
 
         // Determine who will be attacked
         GameEntity defender = chooseDefender(combat, bAssault);
@@ -869,8 +901,6 @@ public class AiAttackController {
 
         // TODO: detect Lightmine Field by presence of a card with a specific trigger
         final boolean lightmineField = ai.getGame().isCardInPlay("Lightmine Field");
-        // TODO: detect Season of the Witch by presence of a card with a specific trigger
-        final boolean seasonOfTheWitch = ai.getGame().isCardInPlay("Season of the Witch");
 
         final Queue<Card> attackersLeft = new ConcurrentLinkedQueue<>(this.attackers);
 
@@ -1289,7 +1319,7 @@ public class AiAttackController {
                     attackersAssigned.add(attacker);
 
                     // check if attackers are enough to finish the attacked planeswalker
-                    if (i < left.size() - 1 && defender instanceof Card card) {
+                    if (i < left.size() - 1) {
                         final int blockNum = this.blockers.size();
                         int attackNum = 0;
                         int damage = 0;
@@ -1302,8 +1332,12 @@ public class AiAttackController {
                                 attackNum++;
                             }
                         }
-                        // if enough damage: switch to next planeswalker
-                        if (damage >= ComputerUtilCombat.getDamageToKill(card, true)) {
+                        // if enough damage: switch to next planeswalker/battle
+                        if (defender instanceof Card card && damage >= ComputerUtilCombat.getDamageToKill(card, true)) {
+                            break;
+                        }
+                        // if enough damage: switch to next player
+                        if (defender instanceof Player && damage >= this.defendingOpponent.getLife()) {
                             break;
                         }
                     }
