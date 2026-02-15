@@ -14,9 +14,9 @@ import forge.game.card.CounterEnumType;
 import forge.game.event.*;
 import forge.game.event.GameEventCardDamaged.DamageType;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.TargetChoices;
-import forge.game.zone.ZoneType;
 import forge.util.*;
 
 public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
@@ -168,7 +168,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventTurnPhase ev) {
-        Player p = ev.playerTurn();
+        PlayerView p = ev.playerTurn();
         return new GameLogEntry(GameLogEntryType.PHASE, ev.phaseDesc() + Lang.getInstance().getPossessedObject(p.getName(), ev.phase().nameForUi));
     }
 
@@ -298,7 +298,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventMulligan ev) {
-        String message = localizer.getMessage("lblPlayerHasMulliganedDownToNCards").replace("%d", String.valueOf(ev.player().getZone(ZoneType.Hand).size())).replace("%s", ev.player().toString());
+        String message = localizer.getMessage("lblPlayerHasMulliganedDownToNCards").replace("%d", String.valueOf(ev.player().getHandSize())).replace("%s", ev.player().toString());
         return new GameLogEntry(GameLogEntryType.MULLIGAN, message);
     }
 

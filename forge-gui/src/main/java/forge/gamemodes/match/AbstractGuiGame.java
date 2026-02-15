@@ -2,7 +2,6 @@ package forge.gamemodes.match;
 
 import com.google.common.collect.*;
 import forge.game.GameView;
-import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.event.GameEventSpellAbilityCast;
@@ -922,7 +921,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
-    public void handleLandPlayed(Card land) {
+    public void handleLandPlayed(CardView land) {
     }
 
     @Override

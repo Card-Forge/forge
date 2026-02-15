@@ -75,7 +75,7 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventTurnPhase ev) {
         try {
-            final boolean isUiToStop = !humanController.getGui().isUiSetToSkipPhase(ev.playerTurn().getView(), ev.phase());
+            final boolean isUiToStop = !humanController.getGui().isUiSetToSkipPhase(ev.playerTurn(), ev.phase());
 
             switch (ev.phase()) {
             case COMBAT_END:

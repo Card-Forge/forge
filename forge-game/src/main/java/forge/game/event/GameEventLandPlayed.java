@@ -1,9 +1,14 @@
 package forge.game.event;
 
 import forge.game.card.Card;
+import forge.game.card.CardView;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 
-public record GameEventLandPlayed(Player player, Card land) implements GameEvent {
+public record GameEventLandPlayed(PlayerView player, CardView land) implements GameEvent {
+    public GameEventLandPlayed(Player player, Card land) {
+        this(PlayerView.get(player), CardView.get(land));
+    }
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
         return visitor.visit(this);

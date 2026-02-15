@@ -1,8 +1,13 @@
 package forge.game.event;
 
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 
-public record GameEventScry(Player player, int toTop, int toBottom) implements GameEvent {
+public record GameEventScry(PlayerView player, int toTop, int toBottom) implements GameEvent {
+
+    public GameEventScry(Player player, int toTop, int toBottom) {
+        this(PlayerView.get(player), toTop, toBottom);
+    }
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {

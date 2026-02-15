@@ -1,8 +1,13 @@
 package forge.game.event;
 
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 
-public record GameEventSurveil(Player player, int toLibrary, int toGraveyard) implements GameEvent {
+public record GameEventSurveil(PlayerView player, int toLibrary, int toGraveyard) implements GameEvent {
+
+    public GameEventSurveil(Player player, int toLibrary, int toGraveyard) {
+        this(PlayerView.get(player), toLibrary, toGraveyard);
+    }
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {

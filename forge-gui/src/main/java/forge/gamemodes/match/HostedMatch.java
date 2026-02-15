@@ -177,6 +177,7 @@ public class HostedMatch {
             if (game.getMatch().getOutcomes().isEmpty()) {
                 qc.getCards().resetNewList();
             }
+            qc.setActiveGame(game);
             game.subscribeToEvents(qc); // this one listens to player's mulligans ATM
         }
 

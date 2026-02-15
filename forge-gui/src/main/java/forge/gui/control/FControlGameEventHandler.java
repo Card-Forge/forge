@@ -15,8 +15,6 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiGame;
-import forge.localinstance.properties.ForgePreferences.FPref;
-import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
@@ -157,6 +155,12 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         }
         return processEvent();
     }
+    private Void processCard(final CardView cardView, final Set<CardView> list) {
+        synchronized (list) {
+            list.add(cardView);
+        }
+        return processEvent();
+    }
     private Void processCards(final Collection<Card> cards, final Set<CardView> list) {
         if (cards.isEmpty()) { return null; }
 
@@ -173,6 +177,12 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         }
         return processEvent();
     }
+    private Void processPlayer(final PlayerView playerView, final Set<PlayerView> list) {
+        synchronized (list) {
+            list.add(playerView);
+        }
+        return processEvent();
+    }
     private Void updateZone(final Zone z) {
         if (z == null) { return null; }
 
@@ -186,17 +196,22 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         }
         return processEvent();
     }
+    private Void updateZone(final PlayerView p, final ZoneType z) {
+        if (p == null || z == null) { return null; }
+
+        synchronized (zonesUpdate) {
+            zonesUpdate.add(new PlayerZoneUpdate(p, z));
+        }
+        return processEvent();
+    }
 
     @Override
     public Void visit(final GameEventTurnPhase ev) {
         needPhaseUpdate = true;
         needSaveState = !"dev".equals(ev.phaseDesc());
 
-        Player ap = ev.playerTurn();
-        boolean refreshField = !ap.getTokensInPlay().isEmpty() || (FModel.getPreferences().getPrefBoolean(FPref.UI_STACK_CREATURES) && !ap.getCreaturesInPlay().isEmpty());
-        if (refreshField) {
-            updateZone(ap, ZoneType.Battlefield);
-        }
+        PlayerView ap = ev.playerTurn();
+        updateZone(ap, ZoneType.Battlefield);
         return processEvent();
     }
 
@@ -209,7 +224,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventTurnBegan event) {
-        turnUpdate = event.turnOwner().getView();
+        turnUpdate = event.turnOwner();
         processPlayer(event.turnOwner(), livesUpdate);
         return processEvent();
     }
@@ -425,7 +440,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventCardForetold event) {
         showExileUpdate = true;
-        activatingPlayer = event.activatingPlayer().getView();
+        activatingPlayer = event.activatingPlayer();
         playersWithValidTargets.put(activatingPlayer, null);
         return processEvent();
     }
@@ -433,7 +448,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventCardPlotted event) {
         showExileUpdate = true;
-        activatingPlayer = event.activatingPlayer().getView();
+        activatingPlayer = event.activatingPlayer();
         playersWithValidTargets.put(activatingPlayer, null);
         return processEvent();
     }
@@ -467,7 +482,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventShuffle event) {
         if (GuiBase.getInterface().isLibgdxPort()) {
-            return updateZone(event.player().getZone(ZoneType.Library));
+            return updateZone(event.player(), ZoneType.Library);
         } else {
             return processEvent();
         }
@@ -481,7 +496,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(GameEventSprocketUpdate event) {
-        updateZone(event.contraption().getZone());
+        updateZone(event.contraption().getController(), event.contraption().getZone());
         return processEvent();
     }
 

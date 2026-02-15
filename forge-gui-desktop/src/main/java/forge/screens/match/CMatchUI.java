@@ -63,7 +63,6 @@ import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
-import forge.game.player.Player;
 import forge.game.player.PlayerController.FullControlFlag;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
@@ -1466,19 +1465,19 @@ public final class CMatchUI
     }
 
     @Override
-    public void handleLandPlayed(Card land) {
+    public void handleLandPlayed(CardView land) {
         Runnable createPopupThread = () -> createLandPopupPanel(land);
         GuiBase.getInterface().invokeInEdtAndWait(createPopupThread);
     }
 
-    private void createLandPopupPanel(Card land) {
+    private void createLandPopupPanel(CardView land) {
         String landPlayedNotificationPolicy = FModel.getPreferences().getPref(FPref.UI_LAND_PLAYED_NOTIFICATION_POLICY);
-        Player cardController = land.getController();
+        PlayerView cardController = land.getController();
         boolean isAi = cardController.isAI();
         if (ForgeConstants.LAND_PLAYED_NOTIFICATION_ALWAYS.equals(landPlayedNotificationPolicy)
                 || (ForgeConstants.LAND_PLAYED_NOTIFICATION_AI.equals(landPlayedNotificationPolicy) && (isAi))
-                || (ForgeConstants.LAND_PLAYED_NOTIFICATION_ALWAYS_FOR_NONBASIC_LANDS.equals(landPlayedNotificationPolicy) && !land.isBasicLand())
-                || (ForgeConstants.LAND_PLAYED_NOTIFICATION_AI_FOR_NONBASIC_LANDS.equals(landPlayedNotificationPolicy) && !land.isBasicLand()) && (isAi)) {
+                || (ForgeConstants.LAND_PLAYED_NOTIFICATION_ALWAYS_FOR_NONBASIC_LANDS.equals(landPlayedNotificationPolicy) && !land.getCurrentState().isBasicLand())
+                || (ForgeConstants.LAND_PLAYED_NOTIFICATION_AI_FOR_NONBASIC_LANDS.equals(landPlayedNotificationPolicy) && !land.getCurrentState().isBasicLand()) && (isAi)) {
             String title = "Forge";
             List<String> options = ImmutableList.of(Localizer.getInstance().getMessage("lblOK"));
 
@@ -1489,10 +1488,10 @@ public final class CMatchUI
             mainPanel.setMaximumSize(maxSize);
             mainPanel.setOpaque(false);
 
-            int rotation = getRotation(land.getView());
+            int rotation = getRotation(land);
 
             FImagePanel imagePanel = new FImagePanel();
-            BufferedImage bufferedImage = FImageUtil.getImage(land.getCurrentState().getView());
+            BufferedImage bufferedImage = FImageUtil.getImage(land.getCurrentState());
             imagePanel.setImage(bufferedImage, rotation, AutoSizeImageMode.SOURCE);
             int imageWidth = 433;
             int imageHeight = 600;
@@ -1501,7 +1500,7 @@ public final class CMatchUI
 
             mainPanel.add(imagePanel, "cell 0 0, spany 3");
 
-            String msg = cardController.toString() + " puts " + land.toString() + " into play into " + ZoneType.Battlefield.toString() + ".";
+            String msg = cardController.toString() + " puts " + land.getName() + " into play into " + ZoneType.Battlefield.toString() + ".";
 
             final FTextArea prompt1 = new FTextArea(msg);
             prompt1.setFont(FSkin.getFont(21));
