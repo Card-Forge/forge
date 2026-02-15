@@ -25,4 +25,5 @@ public class SettingData {
     public boolean useAllCardVariants;
     public boolean excludeAlchemyVariants;
     public boolean generateLDADecks;
+    public boolean bindEquipmentLoadoutsToDecks;
 }
