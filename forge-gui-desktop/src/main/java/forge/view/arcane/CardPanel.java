@@ -112,6 +112,11 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private boolean displayEnabled = true;
     private boolean isAnimationPanel;
     private int cardXOffset, cardYOffset, cardWidth, cardHeight;
+    int baseY = 0;
+    float flyingPhase = 0f;
+    static final float FLYING_AMPLITUDE = 3f;
+    static final float FLYING_SPEED = 0.12f;
+    static final float FLYING_PHASE_MAX = (float)(Math.PI * 2);
     private boolean isSelected;
     private boolean hasFlash;
     private CachedCardImage cachedImage;
@@ -972,7 +977,17 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         cardYOffset = -yOffset;
         width = -xOffset + rotCenterX + rotCenterToTopCorner;
         height = -yOffset + rotCenterY + rotCenterToBottomCorner;
-        setBounds(x + xOffset, y + yOffset, width, height);
+        
+        // Store baseY when not floating or when position changes significantly
+        boolean shouldFloat = shouldFloat();
+        if (!shouldFloat || Math.abs(y - baseY) > 5) {
+            baseY = y;
+        }
+       
+        // Calculate floating offset
+        int floatOffset = shouldFloat ? (int)Math.round(Math.sin(flyingPhase) * FLYING_AMPLITUDE) : 0;
+               
+        setBounds(x + xOffset, y + yOffset + floatOffset, width, height);
     }
 
     @Override
@@ -1162,6 +1177,22 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     private boolean showAbilityIcons() {
         return isShowingOverlays() && isPreferenceEnabled(FPref.UI_OVERLAY_ABILITY_ICONS);
+    }
+
+    boolean shouldFloat() {
+        if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ANIMATE_FLYING)) {
+             return false;
+        }
+        if (card == null || !card.getCurrentState().hasFlying()) {
+            return false;
+        }
+        if (isAnimationPanel || !displayEnabled) {
+            return false;
+        }
+        if (!ZoneType.Battlefield.equals(card.getZone())) {
+            return false;
+        }
+        return true;
     }
 
     public void repaintOverlays() {
