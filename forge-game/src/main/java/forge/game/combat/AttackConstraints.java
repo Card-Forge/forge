@@ -359,14 +359,6 @@ public class AttackConstraints {
         return Collections2.filter(reqs, input -> input.attacker.equals(attacker));
     }
 
-    private static <T> Map<T, Integer> mapToAmount(final Iterable<T> items) {
-        Map<T, Integer> map = new LinkedHashMap<>();
-        for (T i : items) {
-            map.merge(i, 1, Integer::sum);
-        }
-        return map;
-    }
-
     /**
      * @param attackers
      *            a {@link Map} of each attacking {@link Card} to the
