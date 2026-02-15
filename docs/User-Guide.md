@@ -106,6 +106,9 @@ If you are using the Mac OS X version of Forge then you will find the forge.prof
 /Contents/Resources/Java/
 and you will find the file.
 
+The userDir's location may be changed by setting the environment variable "FORGE_USER_DIR" to the desired path. Likewise, the cache dir can be changed using the
+"FORGE_CACHE_DIR" environment variable.
+
 ## Import Data
 If you have a directory full of deck files, you can use the Import Data dialog to copy or move them to the appropriate directory. The dialog gives you a full listing of all file copy/move operations, so you can see what will happen before you click 'Start Import'.
 
