@@ -2,7 +2,7 @@ Name:April O'Neil, Live on the Scene
 ManaCost:1 U
 Types:Legendary Creature Human Detective
 PT:1/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Mutant.YouCtrl,Ninja.YouCtrl,Turtle,YouCtrl | TriggerZones$ Battlefield | Execute$ TrigInvestigate | TriggerDescription$ Whenever a Mutant, Ninja, or Turtle you control enters, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Mutant.YouCtrl,Ninja.YouCtrl,Turtle.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigInvestigate | TriggerDescription$ Whenever a Mutant, Ninja, or Turtle you control enters, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")
 SVar:TrigInvestigate:DB$ Investigate
 K:Partner:Character select
 DeckHas:Ability$Investigate|Token
