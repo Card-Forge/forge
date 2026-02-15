@@ -197,6 +197,9 @@ public enum StaticAbilityMode {
     TurnReversed,
     PhaseReversed,
 
+    // StaticAbilityAttackRequirement
+    AttackRequirement,
+
     // StaticAbilityCountersRemain
     CountersRemain,
     ;

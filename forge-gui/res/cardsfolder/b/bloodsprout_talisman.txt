@@ -4,7 +4,7 @@ Types:Artifact
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ ChooseCard | Cost$ T PayLife<1> | Mandatory$ True | ChoiceZone$ Hand | Choices$ Card.nonLand+YouOwn | ChoiceDesc$ nonland | ChoiceTitle$ Choose a nonland card in your hand | SubAbility$ DBAnimate | SpellDescription$ Choose a nonland card in your hand.
-SVar:DBAnimate:DB$ Animate | Duration$ Perpetual | Defined$ ChosenCard | staticAbilities$ ReduceCost | StackDescription$ SpellDescription | SpellDescription$ It perpetually gains "This spell costs {1} less to cast."
-SVar:ReduceCost:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | SubAbility$ DBCleanup | Description$ This spell costs {1} less to cast.
+SVar:DBAnimate:DB$ Animate | Duration$ Perpetual | Defined$ ChosenCard | staticAbilities$ ReduceCost | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ It perpetually gains "This spell costs {1} less to cast."
+SVar:ReduceCost:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | Description$ This spell costs {1} less to cast.
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
-Oracle:Bloodsprout Talisman enters tapped.\n{T}, pay 1 life: Choose a nonland card in your hand. It perpetually gains "This spell costs {1} less to cast."
+Oracle:Bloodsprout Talisman enters tapped.\n{T}, Pay 1 life: Choose a nonland card in your hand. It perpetually gains "This spell costs {1} less to cast."

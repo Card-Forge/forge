@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="107">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="110">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -8,7 +8,7 @@
  <tileset firstgid="11905" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="40" height="40" opacity="0.9">
   <data encoding="base64" compression="zlib">
-   eJztw7ENAAAMAiB3l/5/rX80kNBLqqqqqqqq+ugA4iKowQ==
+   eJztyKENADAIADA8iB2w/++c4AMcWUVN80QkAHziVpscAAAAAHs8WlCpDw==
   </data>
  </layer>
  <layer id="2" name="Ground" width="40" height="40">
@@ -18,7 +18,7 @@
  </layer>
  <layer id="6" name="Ground2" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJztV0tOwzAQtcTKcZMrFHYlS45QURDdc4Ryj5YTcAdo0zuw4rvlAqDShh03YMNYiVXHsmN7XCVVlSc9ObGczNO8GTshpEOHDoeC+5iQh5Y4j+36hgkhF8DvhjkCnidu+vi6SYqjwBMl5Bn4AnwFvgHfqXl+6Knv8SicPvDVF5K/JvSF5Excf4Ler7Q+nk7fTc0zu8jfJoIe8+BP5J+/WYojx5QRQqHmIwtnrBhPes3W3xJi3jJ7rJm0RtVn8lheh61Brm9B8frGqVljaP6EvtD8maCrPxW2/PH6G0HN51IP5Ar5HNdn6o+xxd+Q+jP1x3Gvei3uMf1hgsv+5+qvT1x1nRzvLy6Y0WKOjyrl9Tp/VZ/la8z+J+Jl5T7lQtGzfck7Rqtey76Ke4y/Jv90ueM0earOfwz0o6++O1rQFcJT1cvLqLoX/g70o6++s6ggh+7sV7GUfJT9E/15feoW11XfRrNf6WpckOfJt2ex+rJ4W+O6PUs3z8ozDfv/sojd9K08/xty4DrZnrmrcg7zD7J20CfjKq2OdeD9YfJXfY/L+3y1TSzvnLL6b5ZdasOgLn/7AMyZ2yRs/rYN12/mtrDv9dcvv0M6dDgk/AMKb1NE
+   eJztV0tOwzAQNWLlpOkVCruSJUeoaBHdc4Ryj5YTcAdK0zuw4rvlAqBShR03YINH6ZCpZcf2BLVVlSc92bHczOs8j+0I0aBBg33BbSLEdEu8S9z6em0hBoqfG2Zf8aztpw/mjVIeEQ9SiEfFJ8VnxRfFV2kf7wXquz+szxCE6lse8AjYlD6MY9Niyxn235XfH2l1PJO+q4rf4LxJXHAQlfQdC+VXFJ6/SPIZK0qPefC/oD1uheurU79zFfM6dseakDm6PpvHdB63bkHfTPL1DVO7xrr5Q31182fDX32kJXW48jdWcftqzeekBnKNWFu2+hg6/K2z/kCfqT6OWut9fObUhw0+Z4avvyFx9Xk03k9SMJPFGLQ66XyTv7rPtM/Z/zBeJss92EWs2Q7xTt8Lqa/4zPHX5p8pd0Cbp/r4W9fchuq7kQV9gZ7qXp5H63vhd9fchuo7jQoC0D+A7W4yJz5S/7A+L0/84vrqQ025dgeg4/QZ8hRas1x9WVKuY9OeZRqPV2ca9/tllvjpWwR+N+RwV2yXZ+5iNcb5Bll66KO4SNfbKkB92PzV3+PzvlBtI8c7x3H1neU/tXFQlb9dAOfM3SRc/m4bvnfmbWHX119ndQ9p0GCf8AvMX0zS
   </data>
  </layer>
  <layer id="3" name="Walls" width="40" height="40">
@@ -26,7 +26,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt1EEKgCAQheGB2rQIOkC016C7doc6WUHdoJa1CSPSkigJ/g8GZlBB8KEIAAB4qtMivTbzpERmFe4+QCj77N/pEUZZXdeZr943Wv/TWJ/PxzX8w7BmYryRC1f+3lIn9oy5sgijTf1q03ieO55/Q56Zvsjs+wAAwD8sRI4x3Q==
+   eJxjYBgFo2AUjIJRMAqoB45rMTCc0EIVe6jJwPBIE1XsIpB/CYgbtSCYXuAx0K4nQHxbByH2F+iOf5qoYm+B/HdQMWLcBzMXBr4D9f7QxK1+FIyC4QqQ0z4x7FEwMEBbjzDGBugVv8zA8pRFCzsfXW4UDA3wHJgmXhCRLvClP1qBiZy40xi+tDgKEGApL2kYBpaQqA9dPy2AjACCLSeAW90oGAWjYBSMglEwCoYGAABJIEN1
   </data>
  </layer>
  <layer id="5" name="Overlay" width="40" height="40">
@@ -190,11 +190,143 @@
   <object id="98" template="../../../../common/maps/obj/collision.tx" x="99" y="285.95" width="219" height="17.1004"/>
   <object id="99" template="../../../../common/maps/obj/collision.tx" x="97" y="254.45" width="219" height="17.1004"/>
   <object id="100" template="../../../../common/maps/obj/collision.tx" x="100.5" y="223.45" width="219" height="17.1004"/>
-  <object id="101" template="../../../../common/maps/obj/collision.tx" x="97.5" y="192.45" width="219" height="17.1004"/>
-  <object id="102" template="../../../../common/maps/obj/collision.tx" x="98" y="161.45" width="219" height="17.1004"/>
   <object id="103" template="../../../../common/maps/obj/collision.tx" x="100" y="128.45" width="219" height="17.1004"/>
   <object id="104" template="../../../../common/maps/obj/collision.tx" x="449" y="350.95" width="13.5" height="32.6004"/>
   <object id="105" template="../../../../common/maps/obj/collision.tx" x="481.75" y="350.7" width="13.5" height="32.6004"/>
   <object id="106" template="../../../../common/maps/obj/collision.tx" x="513.75" y="351.2" width="13.5" height="32.6004"/>
+  <object id="107" template="../../../../common/maps/obj/dialog.tx" x="104.5" y="199.5" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;You are surprised to see what is clearly a vampiric crypt within the city walls. Even more strange, several vampiric attendants stand outside it. 'There is blood to be spilled, and blood to be recovered. Will you heed its call?'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;Sengir has been slain.&quot;,
+                    &quot;text&quot;: &quot;The vampiric attendants rush inside with the bowl. An intimidating vampire woman with a fearsome aura strides out soon after. 'I must thank you for reviving me. Slaying the Baron was no easy feat, I'm certain. Now I can continue my eternal vigil over this city, as I swore to do so very long ago.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+						{&quot;type&quot;: &quot;life&quot;, &quot;count&quot;: 1},
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Blood Money&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Bloodline Culling&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Sever the Bloodline&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wine of Blood and Iron&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Thief of Blood&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 3000}          
+                      ]
+                    },
+					{&quot;removeItem&quot;:&quot;Bowl of Ancient Blood&quot;},
+					{&quot;addMapReputation&quot;: 4} ],
+					&quot;condition&quot;:[{&quot;item&quot;:&quot;Bowl of Ancient Blood&quot;}], 
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Depends on what exactly you mean by that.&quot;,
+					&quot;text&quot;: &quot;'Not all vampires are solely devoted to cruelty. One such ancient protected our city until recently. But the bowl of ancient blood she supped upon so as not to need to slake her thirst upon our people has been stolen by a rival, the Dark Bargon Sengir.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Truly worthy of the title legend, that one.&quot;,
+					&quot;text&quot;: &quot;'Certainly. He dwells in his castle elsewhere within the swamps, which looks quite similar to this one. Slay him and retrieve the bowl and you shall have the favor of our patroness and a fitting reward as well.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Time to put an end to an elder vampire.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;You know, you're a bit creepy for my tastes.&quot;,
+					&quot;text&quot;: &quot;'If you find us creepy, we suggest you leave the swamps while you still can.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="108" template="../../../../common/maps/obj/dialog.tx" x="183" y="198.5" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;The intimidating building you've entered is staffed by a variety of menacing warlocks. 'You are, {var=player_name}, yes? We have heard whisperings of you. We are undecided if you are strong enough to undertake the task we need, but should you fail, perhaps you shall at least weaken our adversary.'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;Sheoldred is slain.&quot;,
+                    &quot;text&quot;: &quot;'Your power was great indeed. Perhaps we may have future use for you, but for now, you have the reward you were promised, and our gratitude, though it may pain some of us to give it.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+						{&quot;type&quot;: &quot;life&quot;, &quot;count&quot;: 1},
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Avenger of the Fallen&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 5000}          
+                      ]
+                    },
+					{&quot;removeItem&quot;:&quot;Black Cartouche of Victory&quot;},
+					{&quot;addMapReputation&quot;: 4} ],
+					&quot;condition&quot;:[{&quot;item&quot;:&quot;Black Cartouche of Victory&quot;}], 
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Let them whisper, I can face any foe.&quot;,
+					&quot;text&quot;: &quot;'Excellent. We will not dither - the one that must die is the phyrexian praetor Sheoldred herself. The Whispering One. The Apocalypse. These eipthets are well-earned, but die she must. If you can make that happen, you will receive great favor from our city and a large sum of gold.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Seems straightfoward enough, if difficult.&quot;,
+					&quot;text&quot;: &quot;'Indeed. One more thing. Sheoldred has hidden the location of her stronghold from our scrying methods. but it is easy to spot should you come across it in your travels - it is a feastering wound on the land in the shape of the phyrexian sigil.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Sheoldred shall fall by my hand.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;I have little interest in helping such disrespectful folks.&quot;,
+					&quot;text&quot;: &quot;'So be it. We shall save our reward for a more ambitious soul.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="109" template="../../../../common/maps/obj/dialog.tx" x="263" y="197" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;Several gravediggers gather around a pedestal which contains nothing but the broken feet of a statue. 'Ey you! You look like some kinda hero! Help us poor folks out whydontcha!'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;All three pieces of your magic statue, just like you wanted.&quot;,
+                    &quot;text&quot;: &quot;The gravediggers slot the pieces back together and with the careful application of some foul-smelling black goo, they're held back in place surprisingly well. 'Good as new! Thank ya mightily for yer service!'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+						{&quot;type&quot;: &quot;life&quot;, &quot;count&quot;: 1},
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Orbs of Warding&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Grafdigger's Cage&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Grave Expectations&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Graveshifter&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Graveyard Trespasser&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Guardian Idol&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 1500}          
+                      ]
+                    },
+					{&quot;removeItem&quot;:&quot;Warding Statue Torso&quot;},
+                    {&quot;removeItem&quot;:&quot;Warding Statue Skirt&quot;},
+                    {&quot;removeItem&quot;:&quot;Warding Statue Arms&quot;},
+					{&quot;addMapReputation&quot;: 2} ],
+					&quot;condition&quot;:[{&quot;item&quot;:&quot;Warding Statue Torso&quot;}, {&quot;item&quot;:&quot;Warding Statue Skirt&quot;}, {&quot;item&quot;:&quot;Warding Statue Arms&quot;}], 
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;I'm certainly SOME kind of hero, sure.&quot;,
+					&quot;text&quot;: &quot;'As you can see, our precious warding statue, that keeps all'a these here dead folk in our graveyard sleepin' all peaceful got shattered! Pieces got stolen too! Without it, there's gonna be a real crisis come the next new moon.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;So who took the pieces?&quot;,
+					&quot;text&quot;: &quot;'Buncha nasty folks from Innistrad. Pretty but crazy lady by the name'a Gisa, mean science type called Geralf, and some zombie-looking dude goes by Wilhelt. They're over in a big graveyard of their own somewhere. Pretty sure they each got a piece. Get us back all three and you'll have our sincere gratitude, and I'm pretty sure we can dig up some kinda monetary reward ta boot.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Your statue is as good as fixed.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;You've got the wrong adventurer, I'm afraid.&quot;,
+					&quot;text&quot;: &quot;'Anotha unkind soul. I knew I shoulda moved to the forest capitol.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
  </objectgroup>
 </map>

@@ -17,13 +17,7 @@
  */
 package forge.game.ability.effects;
 
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
-import java.util.function.Predicate;
-
 import com.google.common.collect.Lists;
-
 import forge.GameCommand;
 import forge.card.CardType;
 import forge.card.ColorSet;
@@ -35,6 +29,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardTraitChanges;
 import forge.game.card.ICardTraitChanges;
 import forge.game.card.perpetual.*;
 import forge.game.event.GameEventCardStatsChanged;
@@ -46,6 +41,11 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
+
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Set;
+import java.util.function.Predicate;
 
 public abstract class AnimateEffectBase extends SpellAbilityEffect {
     public static void doAnimate(final Card c, final SpellAbility sa, final Integer power, final Integer toughness,
@@ -168,8 +168,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         // Grant triggers
         final List<Trigger> addedTriggers = Lists.newArrayList();
         for (final String s : triggers) {
-            final Trigger parsedTrigger = TriggerHandler.parseTrigger(AbilityUtils.getSVar(sa, s), c, false, sa);
-            addedTriggers.add(parsedTrigger);
+            addedTriggers.add(TriggerHandler.parseTrigger(AbilityUtils.getSVar(sa, s), c, false, sa));
         }
 
         // give replacement effects
@@ -225,6 +224,9 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
                 addedStaticAbilities, removeAbilities, timestamp, 0);
             if (perpetual) {
                 c.addPerpetual(new PerpetualAbilities(timestamp, changes));
+                if (changes instanceof CardTraitChanges ctc && ctc.containsCostChange()) {
+                    c.calculatePerpetualAdjustedManaCost();
+                }
             }
         }
 
