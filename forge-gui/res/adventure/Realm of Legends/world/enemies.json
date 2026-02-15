@@ -382,9 +382,14 @@
         "cardName": "Kaalia, Zenith Seeker"
       },
       {
+        "type": "card",
+        "count": 1,
+        "cardName": "Tariel, Reckoner of Souls"
+      },
+      {
         "type": "deckCard",
         "count": 6,
-        "addMaxCount": 8, 
+        "addMaxCount": 7, 
         "rarity": [
           "Rare",
           "Mythic Rare"
