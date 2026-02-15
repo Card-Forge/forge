@@ -129,12 +129,6 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
-    public void updatePlayerControl() {
-        updateGameView();
-        send(ProtocolMethod.updatePlayerControl);
-    }
-
-    @Override
     public void enableOverlay() {
         send(ProtocolMethod.enableOverlay);
     }
@@ -166,12 +160,6 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
-    public void updateZones(final Iterable<PlayerZoneUpdate> zonesToUpdate) {
-        updateGameView();
-        send(ProtocolMethod.updateZones, zonesToUpdate);
-    }
-
-    @Override
     public Iterable<PlayerZoneUpdate> tempShowZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
         updateGameView();
         return sendAndWait(ProtocolMethod.tempShowZones, controller, zonesToUpdate);
@@ -181,24 +169,6 @@ public class NetGuiGame extends AbstractGuiGame {
     public void hideZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
         updateGameView();
         send(ProtocolMethod.hideZones, controller, zonesToUpdate);
-    }
-
-    @Override
-    public void updateCards(final Iterable<CardView> cards) {
-        updateGameView();
-        send(ProtocolMethod.updateCards, cards);
-    }
-
-    @Override
-    public void updateManaPool(final Iterable<PlayerView> manaPoolUpdate) {
-        updateGameView();
-        send(ProtocolMethod.updateManaPool, manaPoolUpdate);
-    }
-
-    @Override
-    public void updateLives(final Iterable<PlayerView> livesUpdate) {
-        updateGameView();
-        send(ProtocolMethod.updateLives, livesUpdate);
     }
 
     @Override

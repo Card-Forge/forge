@@ -19,6 +19,7 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
+import forge.player.PlayerZoneUpdate;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableTypes;
 import forge.util.FSerializableFunction;
@@ -927,6 +928,26 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public void handleGameEvent(GameEvent event) {
+    }
+
+    @Override
+    public void updatePlayerControl() {
+    }
+
+    @Override
+    public void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate) {
+    }
+
+    @Override
+    public void updateCards(Iterable<CardView> cards) {
+    }
+
+    @Override
+    public void updateManaPool(Iterable<PlayerView> manaPoolUpdate) {
+    }
+
+    @Override
+    public void updateLives(Iterable<PlayerView> livesUpdate) {
     }
 
     @Override
