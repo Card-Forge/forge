@@ -1,7 +1,7 @@
 Name:Sliver Weftwinder
 ManaCost:W U B R G
 Types:Legendary Creature Sliver
-PT:6/6
+PT:7/7
 K:Warp:3
 S:Mode$ Continuous | Affected$ Sliver.YouOwn | AffectedZone$ Hand | AddKeyword$ Warp:3 | Description$ Sliver cards in your hand have warp {3}.
 S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddTrigger$ WeftwinderTrig | Description$ Sliver creatures you control have "When this creature enters, conjure a random card from the Slivers spellbook into the top ten cards of your library at random, then draw a card."
