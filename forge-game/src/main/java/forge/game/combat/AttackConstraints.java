@@ -4,9 +4,11 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -145,7 +147,10 @@ public class AttackConstraints {
         }
  
         // take the case with the fewest violations
-        return findMin(possible);
+        return possible.entrySet().stream()
+                .min(Comparator.comparingInt(Entry::getValue))
+                .map(e -> Pair.of(e.getKey(), e.getValue()))
+                .orElseThrow(NoSuchElementException::new);
     }
 
     private FCollection<Map<Card, GameEntity>> collectLegalAttackers(final List<Attack> reqs, final int maximum) {
@@ -352,20 +357,6 @@ public class AttackConstraints {
     }
     private static Collection<Attack> findAll(final List<Attack> reqs, final Card attacker) {
         return Collections2.filter(reqs, input -> input.attacker.equals(attacker));
-    }
-
-    private static <T> Pair<T, Integer> findMax(final Map<T, Integer> map) {
-        return map.entrySet().stream()
-                .max(Comparator.comparingInt(Entry::getValue))
-                .map(e -> Pair.of(e.getKey(), e.getValue()))
-                .orElseThrow(NoSuchElementException::new);
-    }
-
-    private static <T> Pair<T, Integer> findMin(final Map<T, Integer> map) {
-        return map.entrySet().stream()
-                .min(Comparator.comparingInt(Entry::getValue))
-                .map(e -> Pair.of(e.getKey(), e.getValue()))
-                .orElseThrow(NoSuchElementException::new);
     }
 
     private static <T> Map<T, Integer> mapToAmount(final Iterable<T> items) {
