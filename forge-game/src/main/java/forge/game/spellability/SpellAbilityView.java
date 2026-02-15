@@ -6,6 +6,7 @@ import com.google.common.collect.Maps;
 
 import forge.game.card.CardView;
 import forge.game.card.IHasCardView;
+import forge.game.player.PlayerView;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
@@ -33,6 +34,9 @@ public class SpellAbilityView extends TrackableObject implements IHasCardView {
         updateHostCard(sa);
         updateDescription(sa);
         updatePromptIfOnlyPossibleAbility(sa);
+        updateIsSpell(sa);
+        updateIsTrigger(sa);
+        updateActivatingPlayer(sa);
     }
 
     @Override
@@ -66,6 +70,27 @@ public class SpellAbilityView extends TrackableObject implements IHasCardView {
     }
     void updatePromptIfOnlyPossibleAbility(SpellAbility sa) {
         set(TrackableProperty.PromptIfOnlyPossibleAbility, sa.promptIfOnlyPossibleAbility());
+    }
+
+    public boolean isSpell() {
+        return get(TrackableProperty.SA_IsSpell);
+    }
+    void updateIsSpell(SpellAbility sa) {
+        set(TrackableProperty.SA_IsSpell, sa.isSpell());
+    }
+
+    public boolean isTrigger() {
+        return get(TrackableProperty.SA_IsTrigger);
+    }
+    void updateIsTrigger(SpellAbility sa) {
+        set(TrackableProperty.SA_IsTrigger, sa.isTrigger());
+    }
+
+    public PlayerView getActivatingPlayer() {
+        return get(TrackableProperty.SA_ActivatingPlayer);
+    }
+    void updateActivatingPlayer(SpellAbility sa) {
+        set(TrackableProperty.SA_ActivatingPlayer, PlayerView.get(sa.getActivatingPlayer()));
     }
 
     @Override

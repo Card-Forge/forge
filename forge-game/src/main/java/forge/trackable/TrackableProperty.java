@@ -244,6 +244,9 @@ public enum TrackableProperty {
     Description(TrackableTypes.StringType),
     CanPlay(TrackableTypes.BooleanType),
     PromptIfOnlyPossibleAbility(TrackableTypes.BooleanType),
+    SA_IsSpell(TrackableTypes.BooleanType),
+    SA_IsTrigger(TrackableTypes.BooleanType),
+    SA_ActivatingPlayer(TrackableTypes.PlayerViewType),
 
     //ReplacementEffectView
     RE_HostCard(TrackableTypes.CardViewType),
