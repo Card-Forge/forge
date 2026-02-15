@@ -287,6 +287,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         SHORTCUT_MACRO_RECORD ("16 82"),
         SHORTCUT_MACRO_NEXT_ACTION ("16 50"),
         SHORTCUT_CARD_ZOOM("90"),
+        SHORTCUT_SHOWHOTKEYS("72"),
 
         LAST_IMPORTED_CUBE_ID("");
 
