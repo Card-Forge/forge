@@ -191,7 +191,7 @@
   <object id="161" template="../../../../common/maps/obj/collision.tx" x="76.3246" y="497.659" width="35.3507" height="32.6816"/>
   <object id="162" template="../../../../common/maps/obj/scroll.tx" x="159.167" y="152.5">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Overgrown Tomb&quot;, &quot;editions&quot;, [ &quot;RAV&quot; ], &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Overgrown Tomb&quot;, &quot;editions&quot;: [ &quot;RAV&quot; ], &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
   <object id="163" template="../../../../common/maps/obj/gold.tx" x="441.058" y="268.623"/>

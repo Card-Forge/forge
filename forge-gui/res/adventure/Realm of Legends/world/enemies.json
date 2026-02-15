@@ -3372,7 +3372,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Dragon Blood"
+        "itemName": "Ring of Dragon Blood"
       },
       {
         "type": "card",
@@ -4611,7 +4611,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Armor of Ifnit"
+        "itemName": "Armor of Ifnir"
       },
       {
         "type": "card",
@@ -13013,7 +13013,7 @@
     ],
     "ai": "",
     "speed": 60,
-    "scale": 1,
+    "scale": 2,
     "life": 30,
     "rewards": [
       {
@@ -17323,9 +17323,14 @@
         "cardName": "Urtet, Remnant of Memnarch"
       },
       {
+        "type": "card",
+        "count": 1,
+        "cardName": "Memnarch"
+      },
+      {
         "type": "deckCard",
         "count": 2,
-        "addMaxCount": 4,
+        "addMaxCount": 2,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -25336,7 +25341,7 @@
     "name": "Toggo and Krark",
     "sprite": "sprites/enemy/humanoid/goblin/goblin_4.atlas",
     "deck": [
-      "decks/legends/toggo_and_krark.dck"
+      "decks/legends/krark_and_toggo.dck"
     ],
     "ai": "",
     "speed": 60,
@@ -55841,7 +55846,7 @@
     "name": "Gaddock Teeg",
     "sprite": "sprites/enemy/humanoid/halfling/korred.atlas",
     "deck": [
-      "decks/legends/gaddock_teeg.dck"
+      "decks/legends/gaddock.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -61574,6 +61579,36 @@
   {
     "name": "Gwafa Hazid",
     "sprite": "sprites/enemy/humanoid/human/wizard/archivist.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Hidetsugu",
+    "sprite": "sprites/enemy/fiend/devil.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Kardur",
+    "sprite": "sprites/enemy/fiend/devil_2.atlas",
     "deck": [
       "decks/legends/mystery_list.dck"
     ],

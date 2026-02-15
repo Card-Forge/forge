@@ -64,7 +64,7 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Scroll of avacyn|AVR&quot;, &quot;Mask of avacyn|ISD&quot;, &quot;Avacyn, guardian angel&quot;, &quot;Ghost Quarter|ISD&quot;, &quot;helvault|DKA&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Scroll of avacyn|AVR&quot;, &quot;Mask of avacyn|ISD&quot;, &quot;Angel of Jubilation&quot;, &quot;Ghost Quarter|ISD&quot;, &quot;helvault|DKA&quot;]}"/>
     <property name="enemy" value="Avacyn"/>
     <property name="speedModifier" type="float" value="40"/>
     <property name="threatRange" type="int" value="40"/>
@@ -169,7 +169,7 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
   <object id="80" template="../../../../common/maps/obj/collision.tx" x="227.007" y="15.9752" width="17.4208" height="31.4089"/>
   <object id="81" template="../../../../common/maps/obj/collision.tx" x="207.979" y="15.5658" width="17.4208" height="14.6589"/>
   <object id="84" template="../../../../common/maps/obj/gold.tx" x="289.5" y="141.833"/>
-  <object id="91" template="../../../../common/maps/obj/enemy.tx" x="129" y="224.333">
+  <object id="91" template="../../../../common/maps/obj/enemy.tx" x="129" y="241.833">
    <properties>
     <property name="dialog">[
 	{
