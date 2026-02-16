@@ -15,6 +15,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import com.google.common.collect.*;
+import forge.util.IterableUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
 import forge.game.GameEntity;
@@ -95,7 +96,7 @@ public class AttackConstraints {
                     ) || (
                  types.contains(AttackRestrictionType.NEED_GREATER_POWER)  && myMax <= 1
                             )) {
-                reqs.removeAll(findAll(reqs, attacker));
+                reqs.removeIf(findAll(attacker));
                 attackersToRemove.add(attacker);
             }
         }
@@ -117,7 +118,7 @@ public class AttackConstraints {
         }
         myPossibleAttackers.removeAll(attackersToRemove);
         for (final Card toRemove : attackersToRemove) {
-            reqs.removeAll(findAll(reqs, toRemove));
+            reqs.removeIf(findAll(toRemove));
         }
 
         // First, successively try each creature that must attack alone.
@@ -134,7 +135,7 @@ public class AttackConstraints {
                     possible.put(attackMap, violations);
                 }
                 // remove them from the requirements, as they'll not be relevant to this calculation any more
-                reqs.removeAll(findAll(reqs, attacker));
+                reqs.removeIf(findAll(attacker));
             }
         }
 
@@ -211,14 +212,14 @@ public class AttackConstraints {
             if (!requirement.getCausesToAttack().isEmpty()) {
                 final List<Attack> clonedReqs = deepClone(reqs);
                 for (final Entry<Card, Collection<StaticAbility>> causesToAttack : requirement.getCausesToAttack().asMap().entrySet()) {
-                    for (final Attack a : findAll(reqs, causesToAttack.getKey())) {
+                    for (final Attack a : IterableUtil.filter(reqs, findAll(causesToAttack.getKey()))) {
                         a.requirements += causesToAttack.getValue().size();
                     }
                 }
                 // if maximum < no of possible attackers, try both with and without this creature
                 if (isLimited) {
                     // try without
-                    clonedReqs.removeAll(findAll(clonedReqs, req.attacker));
+                    clonedReqs.removeIf(findAll(req.attacker));
                     final CardCollection clonedReserved = new CardCollection(reserved);
                     result.addAll(collectLegalAttackers(myAttackers, clonedReqs, clonedReserved, localMaximum));
                     haveTriedWithout = true;
@@ -234,7 +235,7 @@ public class AttackConstraints {
                 final Attack match = findFirst(reqs, predicateRestriction);
                 if (match == null) {
                     // no match: remove this creature completely
-                    reqs.removeAll(findAll(reqs, req.attacker));
+                    reqs.removeIf(findAll(req.attacker));
                     continue outer;
                 }
                 // found one! add it to reserve and lower local maximum
@@ -245,7 +246,7 @@ public class AttackConstraints {
                 if (!haveTriedWithout && isLimited) {
                     // try without
                     final List<Attack> clonedReqs = deepClone(reqs);
-                    clonedReqs.removeAll(findAll(clonedReqs, req.attacker));
+                    clonedReqs.removeIf(findAll(req.attacker));
                     final CardCollection clonedReserved = new CardCollection(reserved);
                     result.addAll(collectLegalAttackers(myAttackers, clonedReqs, clonedReserved, localMaximum));
                     haveTriedWithout = true;
@@ -255,7 +256,7 @@ public class AttackConstraints {
             // finally: add the creature
             myAttackers.put(req.attacker, req.defender);
             toDefender.merge(req.defender, 1, Integer::sum);
-            reqs.removeAll(findAll(reqs, req.attacker));
+            reqs.removeIf(findAll(req.attacker));
             reserved.remove(req.attacker);
             localMaximum--;
 
@@ -355,8 +356,8 @@ public class AttackConstraints {
     private static Attack findFirst(final List<Attack> reqs, final Card attacker) {
         return findFirst(reqs, attacker::equals);
     }
-    private static Collection<Attack> findAll(final List<Attack> reqs, final Card attacker) {
-        return Collections2.filter(reqs, input -> input.attacker.equals(attacker));
+    private static Predicate<Attack> findAll(final Card attacker) {
+        return input -> input.attacker.equals(attacker);
     }
 
     /**
