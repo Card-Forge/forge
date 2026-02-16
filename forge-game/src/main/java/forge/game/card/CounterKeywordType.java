@@ -8,14 +8,21 @@ import com.google.common.collect.Maps;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 
-public record CounterKeywordType(String keyword, KeywordInterface inst) implements CounterType {
+public class CounterKeywordType implements CounterType {
+
+    public CounterKeywordType(String keyword, KeywordInterface inst) {
+        this.keyword = keyword;
+        this.inst = inst;
+    }
+
+    private String keyword;
+    private transient KeywordInterface inst;
 
     // Rule 122.1b
     static ImmutableList<String> keywordCounter = ImmutableList.of(
             "Flying", "First Strike", "Double Strike", "Deathtouch", "Decayed", "Exalted", "Haste", "Hexproof",
             "Indestructible", "Lifelink", "Menace", "Reach", "Shadow", "Trample", "Vigilance");
     private static Map<String, CounterKeywordType> sMap = Maps.newHashMap();
-
 
     public static CounterKeywordType get(String s) {
         if (!sMap.containsKey(s)) {
