@@ -2493,6 +2493,31 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return cheats != null;
     }
 
+    /** Short label: Name (Color P/T) for creatures, just Name for non-creatures. */
+    private static String tokenLabel(final PaperToken pt) {
+        final ICardFace face = pt.getRules().getMainPart();
+        if (face.getPower() == null) {
+            return pt.getName();
+        }
+        final StringBuilder sb = new StringBuilder(pt.getName()).append(" (");
+        final ColorSet color = face.getColor();
+        if (color != null && !color.isColorless()) {
+            sb.append(color.name()).append(' ');
+        }
+        sb.append(face.getPower()).append('/').append(face.getToughness()).append(')');
+        return sb.toString();
+    }
+
+    /** Full key including oracle text, used for deduplication. */
+    private static String tokenKey(final PaperToken pt) {
+        final String label = tokenLabel(pt);
+        final String oracle = pt.getRules().getMainPart().getOracleText();
+        if (oracle == null || oracle.isEmpty()) {
+            return label;
+        }
+        return label + "|" + oracle;
+    }
+
     public class DevModeCheats implements IDevModeCheats {
         private CardFaceView lastAdded;
         private ZoneType lastAddedZone;
@@ -2851,23 +2876,35 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             if (tokenDb.getAllTokens().isEmpty()) {
                 tokenDb.preloadTokens();
             }
-            final List<PaperToken> allTokens = tokenDb.getAllTokens();
-            // Deduplicate by name + P/T so different-statted tokens are both available
+            // Deduplicate tokens by full key (name + color + P/T + oracle text)
             final Map<String, PaperToken> uniqueTokens = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
-            for (final PaperToken pt : allTokens) {
-                ICardFace face = pt.getRules().getMainPart();
-                String key = pt.getName() + " (" + face.getIntPower() + "/" + face.getIntToughness() + ")";
-                uniqueTokens.putIfAbsent(key, pt);
+            for (final PaperToken pt : tokenDb.getAllTokens()) {
+                if (pt.getRules().getType().isDungeon()) {
+                    continue;
+                }
+                uniqueTokens.putIfAbsent(tokenKey(pt), pt);
             }
             final List<PaperToken> choices = new ArrayList<>(uniqueTokens.values());
 
-            // Display name with P/T in brackets
-            final FSerializableFunction<PaperToken, String> displayFn = pt -> {
-                ICardFace face = pt.getRules().getMainPart();
-                return pt.getName() + " (" + face.getIntPower() + "/" + face.getIntToughness() + ")";
+            // Find which short labels are ambiguous so we can append oracle text only for those
+            final Map<String, Integer> labelCounts = new HashMap<>();
+            for (final PaperToken pt : choices) {
+                labelCounts.merge(tokenLabel(pt), 1, Integer::sum);
+            }
+            final FSerializableFunction<PaperToken, String> displayFn = t -> {
+                final String label = tokenLabel(t);
+                if (labelCounts.getOrDefault(label, 1) <= 1) {
+                    return label;
+                }
+                // Ambiguous — append oracle text to disambiguate
+                final String oracle = t.getRules().getMainPart().getOracleText();
+                if (oracle == null || oracle.isEmpty()) {
+                    return label;
+                }
+                return label + " — " + oracle.replace("\\n", ", ");
             };
             final List<PaperToken> selection = getGui().getChoices(
-                    localizer.getMessage("lblNameTheCard"), 0, 1, choices, null, displayFn);
+                    localizer.getMessage("lblNameTheToken"), 0, 1, choices, null, displayFn);
             final PaperToken chosen = selection.isEmpty() ? null : selection.get(0);
             if (chosen == null) {
                 return;
