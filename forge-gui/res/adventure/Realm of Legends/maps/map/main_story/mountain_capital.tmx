@@ -8,17 +8,17 @@
  <tileset firstgid="11905" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJztmFsOgjAQRRv/QJfgGvxTjAthH/jaqA9cgAuxE5jYEEpftjMIHzdNSJs5nWkb5taZEPWsv9FWqmDAoeN6ST2Z7QNiXXMhznkz6vhg3k7q0s57JOKDnN0V9fHhHnDOXuqUp+fTxa3ktwMBWzcvQzXDfSyW9lLXu6zrypYvJEaodGdPrTElH8j0tlDzmd4Maj7TvaTms7nzKTjWq0Yp+XQxx5i/mW/mi8EXekemnj/Ue8Obj3v+pspHyTYGPugdC8Z8pn98aj7oITn/Q9v6Gy7qxigtYkAvdmx7bvQ11HHoDLqo9ORTOdEXMHkcIcI44D1AXlz8B/QFYC2y/poP4/h4Srfs66lg3WP4K75nu4rE05eHGHWZCl+qOnHSByeXBuo=
+   eJztmFsOgjAQRRv/QJfgGvxTjAthH/jaqA9cgAuxE5jYIH1R2inSj5smpM2c3pk2dOqMsTrpb7TlKiLgkHG9uJ6R7QNiXXPGznkzyvhg3o7r0s57BOIDz+6C+vhwDzhnz3XKw/PJ4lb824GAreuLKme4j8XSXOJ6m3VdmfK5xHCVrPbEHFPygXR3CzWf7s6g5tOdS2o+kzMfgmO9ahSSTxZziv4lvsTng8/1jMzdP9R78+urakz+qWvS1MOp++cr7lj1R+kdCN6ORcR8un98aj54Q8b8D23a37BRN0ZpEAPeYsf2zY19DXFU1aCNyoF8Iif2BXQ9DhdhHOg9gC82/QfsC8BaZB2bD+MM6Sndsm9PBfPuo78ytLYrTzx9PvjIy1z4QuUpJn0AP0EISQ==
   </data>
  </layer>
  <layer id="2" name="Ground" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer id="6" name="Ground2" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMAqoC2bxUFfdKKAeoHWYH+GE0Ieg9HEofYyTOP3pmgwMGUB8XZf6bsMFYoH2xWkSp7YZqK4FiG/r0NZNMPCIkYGhEmhfFQE7xSTo4x5ygcggcp85L6bYlgFy31YJSNhsGyThgy1sQGC2OgPDHHX6ugUEcLkHHWwHum2HOuF8Sax5o2AUDCcw2tYa2mAmjvijpP6YQcM0MQ1HOYtLfKCAjACElhMYWHeMAtqA0fgdBaNgFKADAIv3G+E=
+   eJxjYBgFo2AUjIJRMAqoC2bxUFfdKKAeoHWYH+GE0Ieg9HEofYyTOP3pmgwMGUB8XZf6bsMFYoH2xWkSp7YZqK4FiG/r0NZNMPCIkYGhEmhfFQE7xSTo4x5ygcggcp85L6bYlgFy31YJSNhsGyThgy1sQGC2OgPDHHX6ugUEcLkHHWwHum2HOuF8Sax5owACaowhdDwanWA8MO4ZSiDeGDsfRtfQMQyHalsrAUf6G2lgJo74o6T+mEHDNDENRzmLS3yggIwAhJYTGFh3jALagNH4HQWjYBSgAwCLIyJj
   </data>
  </layer>
  <layer id="3" name="Walls" width="40" height="40">
@@ -279,7 +279,7 @@
     <property name="dialog">[
 	{
 		&quot;name&quot;: &quot;&quot;,
-		&quot;text&quot;: &quot;A heavily armed warrior calls out from the garrison ahead. 'Hail traveler! If you are mighty indeed and the type who cares of honor, come here and hear our plea.' [NOTE: THIS IS THE ONLY CURENTLY NONCOMPLETABLE QUEST]&quot;,
+		&quot;text&quot;: &quot;A heavily armed warrior calls out from the garrison ahead. 'Hail traveler! If you are mighty indeed and the type who cares of honor, come here and hear our plea.'&quot;,
 		&quot;options&quot;:
 			[
 				{
