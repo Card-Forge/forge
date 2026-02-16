@@ -2494,12 +2494,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     /** Short label: Name (Color P/T) for creatures, just Name for non-creatures. */
-    private static String tokenLabel(final PaperToken pt) {
-        final ICardFace face = pt.getRules().getMainPart();
+    private static String tokenLabel(final CardRules rules) {
+        final ICardFace face = rules.getMainPart();
         if (face.getPower() == null) {
-            return pt.getName();
+            return rules.getName();
         }
-        final StringBuilder sb = new StringBuilder(pt.getName()).append(" (");
+        final StringBuilder sb = new StringBuilder(rules.getName()).append(" (");
         final ColorSet color = face.getColor();
         if (color != null && !color.isColorless()) {
             sb.append(color.name()).append(' ');
@@ -2509,9 +2509,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     /** Full key including oracle text, used for deduplication. */
-    private static String tokenKey(final PaperToken pt) {
-        final String label = tokenLabel(pt);
-        final String oracle = pt.getRules().getMainPart().getOracleText();
+    private static String tokenKey(final CardRules rules) {
+        final String label = tokenLabel(rules);
+        final String oracle = rules.getMainPart().getOracleText();
         if (oracle == null || oracle.isEmpty()) {
             return label;
         }
@@ -2873,53 +2873,55 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final Player p = getPlayer();
 
             final TokenDb tokenDb = FModel.getMagicDb().getAllTokens();
-            if (tokenDb.getAllTokens().isEmpty()) {
-                tokenDb.preloadTokens();
-            }
-            // Deduplicate tokens by full key (name + color + P/T + oracle text)
-            final Map<String, PaperToken> uniqueTokens = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
-            for (final PaperToken pt : tokenDb.getAllTokens()) {
-                if (pt.getRules().getType().isDungeon()) {
+            // Use rulesByName — the comprehensive, edition-agnostic token list
+            final Map<String, CardRules> uniqueTokens = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+            final Map<CardRules, String> scriptNames = new IdentityHashMap<>();
+            for (final Map.Entry<String, CardRules> entry : tokenDb.getRules().entrySet()) {
+                final CardRules rules = entry.getValue();
+                if (rules.getType().isDungeon()) {
                     continue;
                 }
-                uniqueTokens.putIfAbsent(tokenKey(pt), pt);
+                if (uniqueTokens.putIfAbsent(tokenKey(rules), rules) == null) {
+                    scriptNames.put(rules, entry.getKey());
+                }
             }
-            final List<PaperToken> choices = new ArrayList<>(uniqueTokens.values());
+            final List<CardRules> choices = new ArrayList<>(uniqueTokens.values());
 
             // Only generic tokens (name ends with " Token") can have ambiguous labels;
             // named tokens (e.g. "Marit Lage") are unique by definition
             final Map<String, Integer> labelCounts = new HashMap<>();
-            for (final PaperToken pt : choices) {
-                if (pt.getName().endsWith(" Token")) {
-                    labelCounts.merge(tokenLabel(pt), 1, Integer::sum);
+            for (final CardRules rules : choices) {
+                if (rules.getName().endsWith(" Token")) {
+                    labelCounts.merge(tokenLabel(rules), 1, Integer::sum);
                 }
             }
-            final FSerializableFunction<PaperToken, String> displayFn = t -> {
-                final String label = tokenLabel(t);
+            final FSerializableFunction<CardRules, String> displayFn = r -> {
+                final String label = tokenLabel(r);
                 if (labelCounts.getOrDefault(label, 1) <= 1) {
                     return label;
                 }
                 // Ambiguous — append oracle text to disambiguate
-                final String oracle = t.getRules().getMainPart().getOracleText();
+                final String oracle = r.getMainPart().getOracleText();
                 if (oracle == null || oracle.isEmpty()) {
                     return label;
                 }
                 return label + " — " + oracle.replace("\\n", ", ");
             };
-            final List<PaperToken> selection = getGui().getChoices(
+            final List<CardRules> selection = getGui().getChoices(
                     localizer.getMessage("lblNameTheToken"), 0, 1, choices, null, displayFn);
-            final PaperToken chosen = selection.isEmpty() ? null : selection.get(0);
+            final CardRules chosen = selection.isEmpty() ? null : selection.get(0);
             if (chosen == null) {
                 return;
             }
 
             final Integer q = getGui().getInteger(localizer.getMessage("lblHowMany"), 1, 99, 10);
             final int qty = q != null ? q : 1;
+            final PaperToken paperToken = tokenDb.getToken(scriptNames.get(chosen));
 
             getGame().getAction().invoke(() -> {
                 boolean summoningSickness = true;
                 for (int i = 0; i < qty; i++) {
-                    final Card token = CardFactory.getCard(chosen, p, getGame());
+                    final Card token = CardFactory.getCard(paperToken, p, getGame());
                     token.setGameTimestamp(getGame().getNextTimestamp());
                     if (i == 0 && token.isCreature() && !token.hasKeyword(Keyword.HASTE)) {
                         summoningSickness = getGui().confirm(token.getView(),
