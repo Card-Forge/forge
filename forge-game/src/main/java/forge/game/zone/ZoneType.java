@@ -96,6 +96,10 @@ public enum ZoneType implements ITranslatable {
     }
 
     @Override
+    public String getName() {
+        return name();
+    }
+    @Override
     public String getTranslatedName() {
         return Localizer.getInstance().getMessage(label);
     }
