@@ -273,6 +273,17 @@ public class CardInfoPopup {
         // Hide content panel if only card image is shown (no keywords, no related)
         contentPanel.setVisible(hasKeywords || hasRelated);
 
+        // Calculate max content width based on available space within owner window
+        final Rectangle ownerBounds = getOwnerBounds();
+        final int rightSpace = ownerBounds.x + ownerBounds.width
+                - cardScreenLocation.x - cardSize.width - GAP;
+        final int leftSpace = cardScreenLocation.x - ownerBounds.x - GAP;
+        final int maxPopupWidth = Math.max(rightSpace, leftSpace);
+        final int cardImgWidth = cardImagePanel.isVisible()
+                ? cardImagePanel.getPreferredSize().width : 0;
+        int maxContentWidth = maxPopupWidth - cardImgWidth - 2 * PADDING - 2 - GAP;
+        maxContentWidth = Math.max(maxContentWidth, POPUP_WIDTH);
+
         // Update UI
         keywordViewer.setVisible(hasKeywords);
         if (hasKeywords) {
@@ -284,20 +295,6 @@ public class CardInfoPopup {
         relatedCardsPanel.setVisible(hasRelated);
         relatedCardsPanel.removeAll();
         if (hasRelated) {
-            // Calculate max popup width based on available screen space next to card
-            final Rectangle screenBounds = GraphicsEnvironment.getLocalGraphicsEnvironment()
-                    .getDefaultScreenDevice().getDefaultConfiguration().getBounds();
-            final int rightSpace = screenBounds.x + screenBounds.width
-                    - cardScreenLocation.x - cardSize.width - GAP;
-            final int leftSpace = cardScreenLocation.x - screenBounds.x - GAP;
-            final int maxPopupWidth = Math.max(rightSpace, leftSpace);
-
-            final int cardImgWidth = cardImagePanel.isVisible()
-                    ? cardImagePanel.getPreferredSize().width : 0;
-            // Subtract card image, padding, border, and internal gap from available width
-            int maxContentWidth = maxPopupWidth - cardImgWidth
-                    - 2 * PADDING - 2 - GAP;
-            maxContentWidth = Math.max(maxContentWidth, POPUP_WIDTH);
             populateRelatedCards(relatedEntries, thumbnailHeight, maxContentWidth);
         }
 
@@ -313,8 +310,16 @@ public class CardInfoPopup {
         // Defer pack/show to run after FHtmlViewer's invokeLater text update completes
         final Point loc = cardScreenLocation;
         final Dimension size = cardSize;
+        final int finalMaxContent = maxContentWidth;
+        final int finalMaxPopup = Math.max(maxPopupWidth, POPUP_WIDTH);
         SwingUtilities.invokeLater(() -> {
+            if (keywordViewer.isVisible()) {
+                keywordViewer.setSize(finalMaxContent, Short.MAX_VALUE);
+            }
             window.pack();
+            if (window.getWidth() > finalMaxPopup) {
+                window.setSize(finalMaxPopup, window.getHeight());
+            }
             positionAndShow(loc, size);
         });
     }
@@ -699,26 +704,25 @@ public class CardInfoPopup {
         final int popupWidth = Math.max(window.getWidth(), POPUP_WIDTH);
         final int popupHeight = window.getHeight();
 
-        final Rectangle screenBounds = GraphicsEnvironment.getLocalGraphicsEnvironment()
-                .getDefaultScreenDevice().getDefaultConfiguration().getBounds();
+        final Rectangle ownerBounds = getOwnerBounds();
 
         // Try to position to the right of the card
         int x = cardScreenLocation.x + cardSize.width + GAP;
         int y = cardScreenLocation.y;
 
         // If it extends past the right edge, position to the left
-        if (x + popupWidth > screenBounds.x + screenBounds.width) {
+        if (x + popupWidth > ownerBounds.x + ownerBounds.width) {
             x = cardScreenLocation.x - popupWidth - GAP;
         }
 
-        // If it extends below the screen, shift up
-        if (y + popupHeight > screenBounds.y + screenBounds.height) {
-            y = screenBounds.y + screenBounds.height - popupHeight;
+        // If it extends below the owner window, shift up
+        if (y + popupHeight > ownerBounds.y + ownerBounds.height) {
+            y = ownerBounds.y + ownerBounds.height - popupHeight;
         }
 
-        // Ensure not above the screen
-        if (y < screenBounds.y) {
-            y = screenBounds.y;
+        // Ensure not above the owner window
+        if (y < ownerBounds.y) {
+            y = ownerBounds.y;
         }
 
         pendingLocation = new Point(x, y);
@@ -739,6 +743,14 @@ public class CardInfoPopup {
 
     private boolean isOwnerFocused() {
         return owner != null && owner.isActive();
+    }
+
+    private Rectangle getOwnerBounds() {
+        if (owner != null) {
+            return owner.getBounds();
+        }
+        return GraphicsEnvironment.getLocalGraphicsEnvironment()
+                .getDefaultScreenDevice().getDefaultConfiguration().getBounds();
     }
 
     private static String nullSafe(final String s) {
