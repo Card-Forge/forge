@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import forge.Forge;
 import forge.card.CardFaceSymbols;
+import forge.card.MagicColor;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
@@ -380,6 +381,12 @@ public class FSkin {
                 }
             }
             for (FSkinProp prop : FSkinProp.MANA_IMG.values()) {
+                FSkinImageImpl image = new FSkinImageImpl(prop);
+                image.load(preferredIcons);
+                FSkin.getImages().put(prop, image);
+            }
+            for (MagicColor.Color c : MagicColor.Color.values()) {
+                FSkinProp prop = FSkinProp.watermarkFromColor(c);
                 FSkinImageImpl image = new FSkinImageImpl(prop);
                 image.load(preferredIcons);
                 FSkin.getImages().put(prop, image);

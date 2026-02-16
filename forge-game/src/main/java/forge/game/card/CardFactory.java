@@ -408,8 +408,7 @@ public class CardFactory {
 
         c.setAttractionLights(face.getAttractionLights());
 
-        if (c.getId() > 0) // Set FactoryAbilities if not for view
-            CardFactoryUtil.addAbilityFactoryAbilities(c, face.getAbilities());
+        CardFactoryUtil.addAbilityFactoryAbilities(c, face.getAbilities());
     }
 
     public static void copySpellAbility(SpellAbility from, SpellAbility to, final Card host, final Player p, final boolean lki, final boolean keepTextChanges) {
