@@ -2886,10 +2886,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
             final List<PaperToken> choices = new ArrayList<>(uniqueTokens.values());
 
-            // Find which short labels are ambiguous so we can append oracle text only for those
+            // Only generic tokens (name ends with " Token") can have ambiguous labels;
+            // named tokens (e.g. "Marit Lage") are unique by definition
             final Map<String, Integer> labelCounts = new HashMap<>();
             for (final PaperToken pt : choices) {
-                labelCounts.merge(tokenLabel(pt), 1, Integer::sum);
+                if (pt.getName().endsWith(" Token")) {
+                    labelCounts.merge(tokenLabel(pt), 1, Integer::sum);
+                }
             }
             final FSerializableFunction<PaperToken, String> displayFn = t -> {
                 final String label = tokenLabel(t);
