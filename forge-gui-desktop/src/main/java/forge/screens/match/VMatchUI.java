@@ -166,13 +166,16 @@ public class VMatchUI implements IVTopLevelUI {
         }
 
 
+        final boolean sortFieldsEnabled = lstFields.size() > 2
+                && !"OFF".equals(FModel.getPreferences().getPref(FPref.UI_MULTIPLAYER_FIELD_LAYOUT));
+
         // Clean up any existing dynamic split cells before re-assigning.
-        if (lstFields.size() > 2) {
+        if (sortFieldsEnabled) {
             cleanupDynamicCells();
         }
 
         // Ensure all field views are added to the layout
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < (sortFieldsEnabled ? 2 : lstFields.size()); i++) {
             VField vField = lstFields.get(i);
             // Check if field is in a visible cell (not a stale reference from old layout)
             DragCell parentCell = vField.getParentCell();
@@ -180,14 +183,24 @@ public class VMatchUI implements IVTopLevelUI {
                 continue;
             }
 
-            // Base fields: use REPORT_LOG's cell as fallback
-            DragCell fallbackCell = EDocID.REPORT_LOG.getDoc().getParentCell();
-            if (fallbackCell != null) {
-                fallbackCell.addDoc(vField);
+            if (i < 2) {
+                // Base fields: use REPORT_LOG's cell as fallback
+                DragCell fallbackCell = EDocID.REPORT_LOG.getDoc().getParentCell();
+                if (fallbackCell != null) {
+                    fallbackCell.addDoc(vField);
+                }
+            } else {
+                // Extra players: add to corresponding base field's cell
+                DragCell baseFieldCell = lstFields.get(i % 2).getParentCell();
+                if (baseFieldCell != null) {
+                    baseFieldCell.addDoc(vField);
+                }
             }
         }
 
-        assignExtraFieldsToCells();
+        if (sortFieldsEnabled) {
+            assignExtraFieldsToCells();
+        }
 
         // Determine (an) existing hand panel
         DragCell cellWithHands = null;
