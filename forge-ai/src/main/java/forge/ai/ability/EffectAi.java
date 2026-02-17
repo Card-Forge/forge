@@ -394,7 +394,7 @@ public class EffectAi extends SpellAbilityAi {
             boolean cantAttack = false;
             boolean cantBlock = false;
             boolean cantActivate = false;
-
+            boolean hasMayPlayFromGrave = false;
             String duration = sa.getParam("Duration");
             String matchStr = "Card.IsRemembered";
 
@@ -414,89 +414,59 @@ public class EffectAi extends SpellAbilityAi {
                 if (modes.contains(StaticAbilityMode.CantBeActivated) && matchStr.equals(params.get("ValidCard"))) {
                     cantActivate = true;
                 }
-            }
-
-
-            boolean hasMayPlayFromGrave = false;
-            for (String st : sa.getParam("StaticAbilities").split(",")) {
-                Map<String, String> stParams = FileSection.parseToMap(sa.getSVar(st.trim()), FileSection.DOLLAR_SIGN_KV_SEPARATOR);
-                if ("True".equalsIgnoreCase(stParams.getOrDefault("MayPlay", "False"))
-                        && "Graveyard".equalsIgnoreCase(stParams.getOrDefault("AffectedZone", ""))) {
+                if ("True".equalsIgnoreCase(params.getOrDefault("MayPlay", "False"))
+                        && "Graveyard".equalsIgnoreCase(params.getOrDefault("AffectedZone", ""))) {
                     hasMayPlayFromGrave = true;
-                    break;
+
                 }
             }
+
             if (hasMayPlayFromGrave) {
-                String validTgts = sa.getParamOrDefault("ValidTgts", "Card");
-                CardCollection validInGrave = CardLists.getValidCards(
-                        new CardCollection(ai.getCardsIn(ZoneType.Graveyard)),
-                        validTgts, ai, sa.getHostCard(), sa);
-
-                // Timing context
-                boolean isAiMainPhase = phase.isPlayerTurn(ai)
-                        && (phase.is(PhaseType.MAIN1) || phase.is(PhaseType.MAIN2));
-                boolean isOppDeclareAttackers = !phase.isPlayerTurn(ai)
-                        && phase.is(PhaseType.COMBAT_DECLARE_ATTACKERS);
-                boolean isAfterOppCombat = !phase.isPlayerTurn(ai)
-                        && phase.getPhase().isAfter(PhaseType.COMBAT_END);
-
-                CardCollection castable = new CardCollection();
-                for (Card c : validInGrave) {
-                    SpellAbility castSa = c.getFirstSpellAbility();
-
-                    if (castSa == null || !ComputerUtilMana.canPayManaCost(castSa, ai, 0, false)) {
-                        continue;
-                    }
-
-                    boolean hasFlash = c.hasKeyword(Keyword.FLASH) || c.isInstant();
-                    if (isAiMainPhase) {
-                        castable.add(c); // sorcery-speed
-                    } else if (hasFlash && (isAfterOppCombat || isOppDeclareAttackers)) {
-                        castable.add(c); // flash only on opp's turn, and only after combat or during declare attackers
-                    }
-                }
-
-                if (castable.isEmpty()) {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-                }
-
-                // During declare attackers: only tap if a flash creature can profitably block an attacker
-                if (isOppDeclareAttackers) {
-                    CardCollection flashCreatures = CardLists.filter(castable, Card::isCreature);
-                    if (flashCreatures.isEmpty()) {
-                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-                    }
+                if (!phase.isPlayerTurn(ai) && phase.is(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                     Combat combat = game.getCombat();
-                    CardCollection attackersVsAi = combat != null ? combat.getAttackersOf(ai) : new CardCollection();
-                    boolean foundProfitableBlock = false;
-                    for (Card attacker : attackersVsAi) {
-                        for (Card blocker : flashCreatures) {
-                            boolean blockerSurvives = blocker.getNetToughness() > attacker.getNetPower();
-                            boolean attackerDies = ComputerUtilCombat.canDestroyAttacker(ai, attacker, blocker, combat, false);
-                            if (blockerSurvives || attackerDies) {
-                                foundProfitableBlock = true;
-                                break;
+                    if (combat != null) {
+                        CardCollection attackersVsAi = combat.getAttackersOf(ai);
+                        if (!attackersVsAi.isEmpty()) {
+                            CardCollection list = CardLists.getValidCards(ai.getGame().getCardsIn(ZoneType.Graveyard),
+                                    sa.getTargetRestrictions().getValidTgts(), ai, sa.getHostCard(), sa);
+                            CardCollection flashCreatures = CardLists.filter(list, c ->
+                                    c.isCreature() && (c.hasKeyword(Keyword.FLASH) || c.isInstant()));
+
+                            Card bestBlocker = null;
+                            for (Card attacker : attackersVsAi) {
+                                for (Card blocker : flashCreatures) {
+                                    SpellAbility castSa = blocker.getFirstSpellAbility();
+                                    if (castSa == null || !ComputerUtilMana.canPayManaCost(castSa, ai, 0, false)) {
+                                        continue;
+                                    }
+
+                                    boolean blockerDies = ComputerUtilCombat.canDestroyBlocker(ai, blocker, attacker, combat, false);
+                                    boolean attackerDies = ComputerUtilCombat.canDestroyAttacker(ai, attacker, blocker, combat, false);
+
+                                    if (attackerDies || !blockerDies) {
+                                        bestBlocker = blocker;
+                                        break;
+                                    }
+                                }
+                                if (bestBlocker != null) break;
                             }
+
+                            if (bestBlocker != null) {
+                                sa.resetTargets();
+                                sa.getTargets().add(bestBlocker);
+                                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                            }
+                            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                         }
-                        if (foundProfitableBlock) break;
                     }
-                    if (!foundProfitableBlock) {
-                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-                    }
-                    // Target the best flash creature for blocking
-                    Card target = ComputerUtilCard.getBestAI(flashCreatures);
-                    if (sa.usesTargeting()) {
-                        sa.resetTargets();
-                        sa.getTargets().add(target);
-                    }
-                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
 
-                // Normal case: pick best overall castable card
-                Card target = ComputerUtilCard.getBestAI(castable);
-                if (sa.usesTargeting()) {
-                    sa.resetTargets();
-                    sa.getTargets().add(target);
+                CardCollection list = CardLists.getValidCards(
+                        ai.getGame().getCardsIn(ZoneType.Graveyard),
+                        sa.getTargetRestrictions().getValidTgts(),
+                        ai, sa.getHostCard(), sa);
+                if (!ComputerUtil.targetPlayableSpellCard(ai, list, sa, false, false)) {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
