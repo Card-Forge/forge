@@ -3,6 +3,7 @@ package forge.game;
 import java.util.Collection;
 import java.util.Map.Entry;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.common.eventbus.Subscribe;
 

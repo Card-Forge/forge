@@ -185,13 +185,13 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
         CardView card = event.card();
         ZoneType zoneTo = event.zoneType();
         EventValueChangeType zoneEventMode = event.mode();
-        if (zoneEventMode != EventValueChangeType.Added || zoneTo != ZoneType.Battlefield || !card.isLand()) {
+        if (zoneEventMode != EventValueChangeType.Added || zoneTo != ZoneType.Battlefield || !card.getCurrentState().isLand()) {
             return null;
         }
         if (hasSpecificCardEffect(card)) {
             return SoundEffectType.ScriptedEffect;
         }
-        CardStateView state = card.getView().getCurrentState();
+        CardStateView state = card.getCurrentState();
         SoundEffectType resultSound = switch(state.origProduceMana()) {
             case W -> SoundEffectType.WhiteLand;
             case U -> SoundEffectType.BlueLand;
