@@ -2,6 +2,7 @@ package forge.sound;
 
 import forge.LobbyPlayer;
 import forge.game.card.Card;
+import forge.game.card.CardView.CardStateView;
 import forge.game.event.*;
 import forge.game.zone.ZoneType;
 import forge.gui.events.IUiEventVisitor;
