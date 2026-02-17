@@ -7,11 +7,10 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
-import forge.game.event.GameEventTurnBegan;
-import forge.game.event.GameEventTurnPhase;
 import forge.game.player.PlayerView;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
+import forge.gui.control.FControlGameEventHandler;
 import forge.gui.control.PlaybackSpeed;
 import forge.gui.interfaces.IGuiGame;
 import forge.gui.interfaces.IMayViewCards;
@@ -22,7 +21,6 @@ import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.player.PlayerZoneUpdate;
-import forge.sound.SoundSystem;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableTypes;
 import forge.util.FSerializableFunction;
@@ -930,21 +928,22 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
+    public void updateStack() { }
+
+    @Override
     public void updatePhase(boolean saveState) { }
 
     @Override
     public void updateTurn(PlayerView player) { }
 
+    private FControlGameEventHandler localEventHandler;
+
     @Override
     public void handleGameEvent(GameEvent event) {
-        SoundSystem.instance.receiveEvent(event);
-        if (event instanceof GameEventTurnPhase ev) {
-            GuiBase.getInterface().invokeInEdtLater(() ->
-                updatePhase(!"dev".equals(ev.phaseDesc())));
-        } else if (event instanceof GameEventTurnBegan ev) {
-            GuiBase.getInterface().invokeInEdtLater(() ->
-                updateTurn(ev.turnOwner()));
+        if (localEventHandler == null) {
+            localEventHandler = new FControlGameEventHandler(this);
         }
+        localEventHandler.receiveGameEvent(event);
     }
 
     @Override

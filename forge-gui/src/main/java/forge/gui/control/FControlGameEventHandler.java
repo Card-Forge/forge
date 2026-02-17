@@ -15,6 +15,7 @@ import forge.gui.interfaces.IGuiGame;
 import forge.player.PlayerControllerHuman;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
+import forge.sound.SoundSystem;
 import forge.util.Lang;
 
 import java.util.*;
@@ -39,6 +40,11 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public FControlGameEventHandler(final PlayerControllerHuman humanController0) {
         humanController = humanController0;
         matchController = humanController.getGui();
+    }
+
+    public FControlGameEventHandler(final IGuiGame gui) {
+        humanController = null;
+        matchController = gui;
     }
 
     private final Runnable processEvents = new Runnable() {
@@ -120,16 +126,20 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             }
             if (gameOver) {
                 gameOver = false;
-                humanController.getInputQueue().onGameOver(true); // this will unlock any game threads waiting for inputs to complete
+                if (humanController != null) {
+                    humanController.getInputQueue().onGameOver(true); // this will unlock any game threads waiting for inputs to complete
+                }
             }
             if (gameFinished) {
                 gameFinished = false;
-                final PlayerView localPlayer = humanController.getLocalPlayerView();
-                humanController.cancelAwaitNextInput(); //ensure "Waiting for opponent..." doesn't appear behind WinLo
-                matchController.showPromptMessage(localPlayer, ""); //clear prompt behind WinLose overlay
-                matchController.updateButtons(localPlayer, "", "", false, false, false);
+                if (humanController != null) {
+                    final PlayerView localPlayer = humanController.getLocalPlayerView();
+                    humanController.cancelAwaitNextInput(); //ensure "Waiting for opponent..." doesn't appear behind WinLo
+                    matchController.showPromptMessage(localPlayer, ""); //clear prompt behind WinLose overlay
+                    matchController.updateButtons(localPlayer, "", "", false, false, false);
+                    humanController.updateAchievements();
+                }
                 matchController.finishGame();
-                humanController.updateAchievements();
             }
         }
     };
@@ -137,7 +147,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Subscribe
     public void receiveGameEvent(final GameEvent ev) {
         ev.visit(this);
-        matchController.handleGameEvent(ev);
+        SoundSystem.instance.receiveEvent(ev);
     }
 
     private Void processEvent() {
@@ -227,6 +237,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventAnteCardsSelected ev) {
+        if (humanController == null) { return null; }
         final List<CardView> options = Lists.newArrayList();
         for (final Entry<PlayerView, CardView> kv : ev.cards().entries()) {
             //use fake card so real cards appear with proper formatting
@@ -240,8 +251,10 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventPlayerControl ev) {
-        final PlayerControllerHuman newController = ev.newControllerIsHuman() ? humanController : null;
-        matchController.setGameController(ev.player(), newController);
+        if (humanController != null) {
+            final PlayerControllerHuman newController = ev.newControllerIsHuman() ? humanController : null;
+            matchController.setGameController(ev.player(), newController);
+        }
 
         needPlayerControlUpdate = true;
         return processEvent();

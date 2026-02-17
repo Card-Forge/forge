@@ -142,12 +142,6 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
-    public void updateStack() {
-        updateGameView();
-        send(ProtocolMethod.updateStack);
-    }
-
-    @Override
     public Iterable<PlayerZoneUpdate> tempShowZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
         updateGameView();
         return sendAndWait(ProtocolMethod.tempShowZones, controller, zonesToUpdate);
@@ -170,11 +164,7 @@ public class NetGuiGame extends AbstractGuiGame {
         send(ProtocolMethod.setPanelSelection, hostCard);
     }
 
-    @Override
-    public void refreshField() {
-        updateGameView();
-        send(ProtocolMethod.refreshField);
-    }
+
 
     @Override
     public GameState getGamestate() {

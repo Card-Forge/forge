@@ -44,7 +44,6 @@ public enum ProtocolMethod {
     finishGame          (Mode.SERVER, Void.TYPE),
     showManaPool        (Mode.SERVER, Void.TYPE, PlayerView.class),
     hideManaPool        (Mode.SERVER, Void.TYPE, PlayerView.class),
-    updateStack         (Mode.SERVER, Void.TYPE),
     tempShowZones       (Mode.SERVER, Iterable/*PlayerZoneUpdate*/.class, PlayerView.class, Iterable/*PlayerZoneUpdate*/.class),
     hideZones           (Mode.SERVER, Void.TYPE, PlayerView.class, Iterable/*PlayerZoneUpdate*/.class),
     setPanelSelection   (Mode.SERVER, Void.TYPE, CardView.class),
@@ -66,7 +65,6 @@ public enum ProtocolMethod {
     setCard             (Mode.SERVER, Void.TYPE, CardView.class),
     setSelectables      (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class),
     clearSelectables    (Mode.SERVER, Void.TYPE),
-    refreshField        (Mode.SERVER, Void.TYPE),
     // TODO case "setPlayerAvatar":
     openZones           (Mode.SERVER, PlayerZoneUpdates.class, PlayerView.class, Collection/*ZoneType*/.class, Map/*PlayerView,Object*/.class, Boolean.TYPE),
     restoreOldZones     (Mode.SERVER, Void.TYPE, PlayerView.class, PlayerZoneUpdates.class),
