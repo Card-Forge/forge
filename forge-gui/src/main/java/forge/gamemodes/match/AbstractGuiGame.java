@@ -7,6 +7,8 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
+import forge.game.event.GameEventTurnBegan;
+import forge.game.event.GameEventTurnPhase;
 import forge.game.player.PlayerView;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -928,8 +930,21 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
+    public void updatePhase(boolean saveState) { }
+
+    @Override
+    public void updateTurn(PlayerView player) { }
+
+    @Override
     public void handleGameEvent(GameEvent event) {
         SoundSystem.instance.receiveEvent(event);
+        if (event instanceof GameEventTurnPhase ev) {
+            GuiBase.getInterface().invokeInEdtLater(() ->
+                updatePhase(!"dev".equals(ev.phaseDesc())));
+        } else if (event instanceof GameEventTurnBegan ev) {
+            GuiBase.getInterface().invokeInEdtLater(() ->
+                updateTurn(ev.turnOwner()));
+        }
     }
 
     @Override

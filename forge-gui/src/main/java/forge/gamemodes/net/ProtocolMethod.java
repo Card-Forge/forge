@@ -39,8 +39,6 @@ public enum ProtocolMethod {
     updateButtons       (Mode.SERVER, Void.TYPE, PlayerView.class, String.class, String.class, Boolean.TYPE, Boolean.TYPE, Boolean.TYPE),
     flashIncorrectAction(Mode.SERVER, Void.TYPE),
     alertUser           (Mode.SERVER, Void.TYPE),
-    updatePhase         (Mode.SERVER, Void.TYPE, Boolean.TYPE),
-    updateTurn          (Mode.SERVER, Void.TYPE, PlayerView.class),
     enableOverlay       (Mode.SERVER, Void.TYPE),
     disableOverlay      (Mode.SERVER, Void.TYPE),
     finishGame          (Mode.SERVER, Void.TYPE),

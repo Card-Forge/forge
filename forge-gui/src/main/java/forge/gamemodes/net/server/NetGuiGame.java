@@ -117,18 +117,6 @@ public class NetGuiGame extends AbstractGuiGame {
     public void alertUser() { send(ProtocolMethod.alertUser); }
 
     @Override
-    public void updatePhase(boolean saveState) {
-        updateGameView();
-        send(ProtocolMethod.updatePhase, saveState);
-    }
-
-    @Override
-    public void updateTurn(final PlayerView player) {
-        updateGameView();
-        send(ProtocolMethod.updateTurn, player);
-    }
-
-    @Override
     public void enableOverlay() {
         send(ProtocolMethod.enableOverlay);
     }

@@ -13,6 +13,7 @@ import forge.game.*;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventSubgameEnd;
 import forge.game.event.GameEventSubgameStart;
+import forge.game.event.GameEventTurnPhase;
 import forge.game.event.IGameEventVisitor;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
@@ -446,7 +447,8 @@ public class HostedMatch {
                         gui.openView(new TrackableCollection<>(p.getView()));
                         gui.setGameView(null);
                         gui.setGameView(gameView);
-                        gui.updatePhase(true);
+                        gui.handleGameEvent(new GameEventTurnPhase(
+                                gameView.getPlayerTurn(), gameView.getPhase(), ""));
                         gui.message(event.message());
                     }
                 }
