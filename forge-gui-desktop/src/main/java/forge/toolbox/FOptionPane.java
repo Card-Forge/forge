@@ -1,6 +1,7 @@
 package forge.toolbox;
 
 import java.awt.Component;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.FontMetrics;
 import java.awt.event.KeyAdapter;
@@ -10,6 +11,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
 import javax.swing.*;
+import javax.swing.event.HyperlinkEvent;
 import javax.swing.text.StyleConstants;
 
 import com.google.common.collect.ImmutableList;
@@ -198,8 +200,18 @@ public class FOptionPane extends FDialog {
             prompt = new FTextPane();
             prompt.setContentType("text/html");
             prompt.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES, Boolean.TRUE);
+            final java.awt.Color textColor = FSkin.getColor(FSkin.Colors.CLR_TEXT).getColor();
+            final String hex = String.format("#%02x%02x%02x", textColor.getRed(), textColor.getGreen(), textColor.getBlue());
+            ((javax.swing.text.html.HTMLEditorKit) prompt.getEditorKit()).getStyleSheet()
+                    .addRule("a { color: " + hex + "; }");
             prompt.setText(FSkin.encodeSymbols(message, false));
             prompt.setFont(FSkin.getFont(14));
+            prompt.addHyperlinkListener(e -> {
+                if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+                    try { Desktop.getDesktop().browse(e.getURL().toURI()); }
+                    catch (final Exception ex) { ex.printStackTrace(); }
+                }
+            });
             if(centeredLabel != null)
                 prompt.setTextAlignment(StyleConstants.ALIGN_CENTER);
             final Dimension parentSize = JOptionPane.getRootFrame().getSize();
