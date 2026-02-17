@@ -15,7 +15,6 @@ import forge.game.GameOutcome.AnteResult;
 import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.*;
 import forge.game.combat.Combat;
-import forge.game.event.GameEvent;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
