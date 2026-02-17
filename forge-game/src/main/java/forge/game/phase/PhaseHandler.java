@@ -732,7 +732,7 @@ public class PhaseHandler implements java.io.Serializable {
             for (GameEntity ge : combat.getDefendersControlledBy(p)) {
                 Multimap<Card, Card> protectThisDefender = MultimapBuilder.hashKeys().arrayListValues().build();
                 for (Card att : combat.getAttackersOf(ge)) {
-                    protectThisDefender.putAll(att, combat.getBlockers(att));
+                    protectThisDefender.putAll(att, combat.getBlockers(att).isEmpty() ? List.of(att) : combat.getBlockers(att));
                 }
                 blockers.put(ge, protectThisDefender);
             }

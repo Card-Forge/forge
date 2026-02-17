@@ -224,8 +224,6 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         // Loop through Defenders
         // Append Defending Player/Planeswalker
 
-        Collection<CardView> blockers = null;
-
         for (Entry<GameEntityView, Multimap<CardView, CardView>> kv : ev.blockers().entrySet()) {
             GameEntityView defender = kv.getKey();
             Multimap<CardView, CardView> attackers = kv.getValue();
@@ -247,8 +245,8 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
             for (final Entry<CardView, Collection<CardView>> att : attackers.asMap().entrySet()) {
                 if (!firstAttacker) sb.append("\n");
 
-                blockers = att.getValue();
-                if (blockers.isEmpty()) {
+                Collection<CardView> blockers = att.getValue();
+                if (blockers.isEmpty() || Iterables.get(blockers, 0) == att.getKey()) {
                     sb.append(localizer.getMessage("lblLogPlayerDidntBlockAttacker", controllerName, att.getKey()));
                 } else {
                     sb.append(localizer.getMessage("lblLogPlayerAssignedBlockerToBlockAttacker", controllerName, Lang.joinHomogenous(blockers), att.getKey()));
