@@ -75,7 +75,9 @@ public class EffectAi extends SpellAbilityAi {
                 if (sa.getPayCosts().getTotalMana().countX() > 0 && sa.getHostCard().getSVar("X").equals("Count$xPaid")) {
                     // Set PayX here to half the remaining mana to allow for Main 2 and other combat shenanigans.
                     final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai, sa.isTrigger()) / 2;
-                    if (xPay == 0) { return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi); }
+                    if (xPay == 0) {
+                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                    }
                     sa.setXManaCostPaid(xPay);
                 }
 
@@ -88,12 +90,16 @@ public class EffectAi extends SpellAbilityAi {
                 int potentialDmg = 0;
                 List<Card> currentAttackers = new ArrayList<>();
 
-                if (possibleBlockers.isEmpty()) { return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi); }
+                if (possibleBlockers.isEmpty()) {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
 
                 for (final Card creat : possibleAttackers) {
                     if (CombatUtil.canAttack(creat, opp) && possibleBlockers.size() > 1) {
                         potentialDmg += creat.getCurrentPower();
-                        if (potentialDmg >= oppLife) { return new AiAbilityDecision(100, AiPlayDecision.WillPlay); }
+                        if (potentialDmg >= oppLife) {
+                            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                        }
                     }
                     if (combat != null && combat.isAttacking(creat)) {
                         currentAttackers.add(creat);
@@ -145,7 +151,7 @@ public class EffectAi extends SpellAbilityAi {
                 }
                 randomReturn = true;
             } else if (logic.equals("WillCastCreature") && ai.isAI()) {
-                AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+                AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
                 SpellAbility saCreature = aic.predictSpellToCastInMain2(ApiType.PermanentNoncreature);
                 randomReturn = saCreature != null;
             } else if (logic.equals("Always")) {
@@ -161,9 +167,9 @@ public class EffectAi extends SpellAbilityAi {
                 }
                 randomReturn = true;
             } else if (logic.equals("Evasion")) {
-            	if (!phase.isPlayerTurn(ai)) {
-            		return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            	}
+                if (!phase.isPlayerTurn(ai)) {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
 
                 boolean shouldPlay = false;
 
@@ -194,7 +200,9 @@ public class EffectAi extends SpellAbilityAi {
                 }
                 boolean threatened = false;
                 for (final SpellAbilityStackInstance stackInst : game.getStack()) {
-                    if (!stackInst.isSpell()) { continue; }
+                    if (!stackInst.isSpell()) {
+                        continue;
+                    }
                     SpellAbility stackSpellAbility = stackInst.getSpellAbility();
                     if (stackSpellAbility.getApi() == ApiType.DealDamage) {
                         final SpellAbility saTargeting = stackSpellAbility.getSATargetingPlayer();
@@ -273,7 +281,7 @@ public class EffectAi extends SpellAbilityAi {
                 }
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if (logic.equals("Fight")) {
-                return FightAi.canFight(ai, sa, 0,0);
+                return FightAi.canFight(ai, sa, 0, 0);
             } else if (logic.equals("Pump")) {
                 sa.resetTargets();
                 List<Card> options = CardUtil.getValidCardsToTarget(sa);
@@ -406,6 +414,91 @@ public class EffectAi extends SpellAbilityAi {
                 if (modes.contains(StaticAbilityMode.CantBeActivated) && matchStr.equals(params.get("ValidCard"))) {
                     cantActivate = true;
                 }
+            }
+
+
+            boolean hasMayPlayFromGrave = false;
+            for (String st : sa.getParam("StaticAbilities").split(",")) {
+                Map<String, String> stParams = FileSection.parseToMap(sa.getSVar(st.trim()), FileSection.DOLLAR_SIGN_KV_SEPARATOR);
+                if ("True".equalsIgnoreCase(stParams.getOrDefault("MayPlay", "False"))
+                        && "Graveyard".equalsIgnoreCase(stParams.getOrDefault("AffectedZone", ""))) {
+                    hasMayPlayFromGrave = true;
+                    break;
+                }
+            }
+            if (hasMayPlayFromGrave) {
+                String validTgts = sa.getParamOrDefault("ValidTgts", "Card");
+                CardCollection validInGrave = CardLists.getValidCards(
+                        new CardCollection(ai.getCardsIn(ZoneType.Graveyard)),
+                        validTgts, ai, sa.getHostCard(), sa);
+
+                // Timing context
+                boolean isAiMainPhase = phase.isPlayerTurn(ai)
+                        && (phase.is(PhaseType.MAIN1) || phase.is(PhaseType.MAIN2));
+                boolean isOppDeclareAttackers = !phase.isPlayerTurn(ai)
+                        && phase.is(PhaseType.COMBAT_DECLARE_ATTACKERS);
+                boolean isAfterOppCombat = !phase.isPlayerTurn(ai)
+                        && phase.getPhase().isAfter(PhaseType.COMBAT_END);
+
+                CardCollection castable = new CardCollection();
+                for (Card c : validInGrave) {
+                    SpellAbility castSa = c.getFirstSpellAbility();
+
+                    if (castSa == null || !ComputerUtilMana.canPayManaCost(castSa, ai, 0, false)) {
+                        continue;
+                    }
+
+                    boolean hasFlash = c.hasKeyword(Keyword.FLASH) || c.isInstant();
+                    if (isAiMainPhase) {
+                        castable.add(c); // sorcery-speed
+                    } else if (hasFlash && (isAfterOppCombat || isOppDeclareAttackers)) {
+                        castable.add(c); // flash only on opp's turn, and only after combat or during declare attackers
+                    }
+                }
+
+                if (castable.isEmpty()) {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
+
+                // During declare attackers: only tap if a flash creature can profitably block an attacker
+                if (isOppDeclareAttackers) {
+                    CardCollection flashCreatures = CardLists.filter(castable, Card::isCreature);
+                    if (flashCreatures.isEmpty()) {
+                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                    }
+                    Combat combat = game.getCombat();
+                    CardCollection attackersVsAi = combat != null ? combat.getAttackersOf(ai) : new CardCollection();
+                    boolean foundProfitableBlock = false;
+                    for (Card attacker : attackersVsAi) {
+                        for (Card blocker : flashCreatures) {
+                            boolean blockerSurvives = blocker.getNetToughness() > attacker.getNetPower();
+                            boolean attackerDies = ComputerUtilCombat.canDestroyAttacker(ai, attacker, blocker, combat, false);
+                            if (blockerSurvives || attackerDies) {
+                                foundProfitableBlock = true;
+                                break;
+                            }
+                        }
+                        if (foundProfitableBlock) break;
+                    }
+                    if (!foundProfitableBlock) {
+                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                    }
+                    // Target the best flash creature for blocking
+                    Card target = ComputerUtilCard.getBestAI(flashCreatures);
+                    if (sa.usesTargeting()) {
+                        sa.resetTargets();
+                        sa.getTargets().add(target);
+                    }
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                }
+
+                // Normal case: pick best overall castable card
+                Card target = ComputerUtilCard.getBestAI(castable);
+                if (sa.usesTargeting()) {
+                    sa.resetTargets();
+                    sa.getTargets().add(target);
+                }
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
 
             // TODO add more cases later
