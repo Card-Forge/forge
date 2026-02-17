@@ -71,20 +71,20 @@
   <object id="110" template="../../obj/treasure.tx" x="112.5" y="112">
    <properties>
     <property name="reward">[{
-  &quot;type&quot;: &quot;Card&quot;,
+  &quot;type&quot;: &quot;card&quot;,
   &quot;count&quot;: 20,
   &quot;cardName&quot;: &quot;Tempest Hawk&quot;,
-  &quot;Editions&quot;: [ &quot;TDM&quot; ]
+  &quot;editions&quot;: [ &quot;TDM&quot; ]
 }]</property>
    </properties>
   </object>
   <object id="111" template="../../obj/treasure.tx" x="237" y="251">
    <properties>
     <property name="reward">[{
-  &quot;type&quot;: &quot;Card&quot;,
+  &quot;type&quot;: &quot;card&quot;,
   &quot;count&quot;: 20,
   &quot;cardName&quot;: &quot;Tempest Hawk&quot;,
-  &quot;Editions&quot;: [ &quot;TDM&quot; ]
+  &quot;editions&quot;: [ &quot;TDM&quot; ]
 }]</property>
    </properties>
   </object>

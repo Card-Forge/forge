@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="65" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="277">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="65" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="281">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -67,12 +67,6 @@
   }
 ]
 </property>
-   </properties>
-  </object>
-  <object id="74" template="../../../../common/maps/obj/enemy.tx" x="484.5" y="703.164" width="16" height="17.6724">
-   <properties>
-    <property name="enemy" value="Clement"/>
-    <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
   <object id="76" template="../../../../common/maps/obj/collision.tx" x="-17.1423" y="-16.4193" width="16" height="978.944"/>
@@ -206,12 +200,6 @@
    </properties>
   </object>
   <object id="156" template="../../../../common/maps/obj/collision.tx" x="539.769" y="414" width="71.462" height="45"/>
-  <object id="158" template="../../../../common/maps/obj/enemy.tx" gid="2147495067" x="877" y="650.831" width="16" height="17.6724">
-   <properties>
-    <property name="enemy" value="Glarb"/>
-    <property name="threatRange" type="int" value="0"/>
-   </properties>
-  </object>
   <object id="159" template="../../../../common/maps/obj/door_up.tx" x="847.493" y="236.665" width="45.9814" height="16.6705" rotation="359.74">
    <properties>
     <property name="direction" value="right"/>
@@ -233,24 +221,7 @@
     <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
-  <object id="175" template="../../../../common/maps/obj/enemy.tx" gid="2147495067" x="935.333" y="844.497" width="16" height="17.6724">
-   <properties>
-    <property name="enemy" value="Flubs"/>
-    <property name="speedModifier" type="float" value="10"/>
-    <property name="threatRange" type="int" value="40"/>
-    <property name="waypoints" value=""/>
-   </properties>
-  </object>
   <object id="179" template="../../../../common/maps/obj/collision.tx" x="1040.5" y="-18.472" width="16" height="978.944"/>
-  <object id="195" template="../../../../common/maps/obj/enemy.tx" x="738.5" y="766.664" width="16" height="17.6724">
-   <properties>
-    <property name="enemy" value="Helga"/>
-    <property name="fleeRange" value=""/>
-    <property name="speedModifier" type="float" value="10"/>
-    <property name="threatRange" type="int" value="40"/>
-    <property name="waypoints" value=""/>
-   </properties>
-  </object>
   <object id="197" template="../../../../common/maps/obj/enemy.tx" x="59" y="88.6638" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Tatsunari"/>
@@ -277,7 +248,7 @@
   </object>
   <object id="225" template="../../../../common/maps/obj/gold.tx" x="429" y="457.167"/>
   <object id="227" template="../../../../common/maps/obj/gold.tx" x="640.5" y="161.333"/>
-  <object id="241" template="../../../../common/maps/obj/entry_up.tx" x="531.333" y="960.056" width="48" height="26.555">
+  <object id="241" template="../../../../common/maps/obj/entry_up.tx" x="529.333" y="973.556" width="48" height="26.555">
    <properties>
     <property name="teleport" value=""/>
    </properties>
@@ -534,5 +505,29 @@ NORTH: DOMAIN OF THE THREE WITCHES&quot;,
   <object id="274" template="../../../../common/maps/obj/collision.tx" x="624.774" y="111.666" width="14.4524" height="79.6228"/>
   <object id="275" template="../../../../common/maps/obj/collision.tx" x="674.047" y="114.302" width="14.4524" height="77.8728"/>
   <object id="276" template="../../../../common/maps/obj/collision.tx" x="640.228" y="112.666" width="31.9069" height="15.3955"/>
+  <object id="277" template="../../../../common/maps/obj/enemy.tx" x="888" y="647.164" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Glarb"/>
+   </properties>
+  </object>
+  <object id="278" template="../../../../common/maps/obj/enemy.tx" x="730" y="747.164" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Helga"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="279" template="../../../../common/maps/obj/enemy.tx" x="482" y="703.164" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Clement"/>
+   </properties>
+  </object>
+  <object id="280" template="../../../../common/maps/obj/enemy.tx" x="914" y="856.164" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Flubs"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

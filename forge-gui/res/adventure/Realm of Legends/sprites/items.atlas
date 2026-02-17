@@ -27,6 +27,57 @@ Jade
 BlueDiamond
   xy: 112, 640
   size: 16, 16
+BowlofAncientBlood
+  xy: 256, 960
+  size: 16, 16
+ArguelsBloodyHelm
+  xy: 112, 336
+  size: 16, 16
+WhiteCartouche
+  xy: 320, 176
+  size: 16, 16
+WardingStatueTorso
+  xy: 32, 576
+  size: 16, 16
+WardingStatueSkirt
+  xy: 16, 576
+  size: 16, 16
+WardingStatueArms
+  xy: 48, 576
+  size: 16, 16
+MaptotheHostages
+  xy: 224, 848
+  size: 16, 16
+TheLuckiestClover
+  xy: 112, 608
+  size: 16, 16
+CheeseofBees
+  xy: 80, 768
+  size: 16, 16
+OneThousandChickens
+  xy: 144, 624
+  size: 16, 16
+BlueCartouche
+  xy: 320, 192
+  size: 16, 16
+EverflowingWateringCan
+  xy: 192, 976
+  size: 16, 16
+BlackCartouche
+  xy: 320, 224
+  size: 16, 16
+TomeofTemporalRepair
+  xy: 112, 688
+  size: 16, 16
+RedCartouche
+  xy: 320, 240
+  size: 16, 16
+GreenCartouche
+  xy: 320, 208
+  size: 16, 16
+VictoryStandard
+  xy: 96, 592
+  size: 16, 16
 GenerousArmor
   xy: 224, 112
   size: 16, 16
@@ -80,6 +131,39 @@ MedalVictory
   size: 16, 16
 GhostfireBlade
   xy: 208, 720
+  size: 16, 16
+CloakoftheWastes
+  xy: 368, 0
+  size: 16, 16
+OutpostOutfit
+  xy: 288, 80
+  size: 16, 16
+SeafloorShirt
+  xy: 384, 32
+  size: 16, 16
+BogDwellerLeather
+  xy: 304, 96
+  size: 16, 16
+HighlandCloak
+  xy: 64, 0
+  size: 16, 16
+TimberlandShawl
+  xy: 368, 48
+  size: 16, 16
+TokenofBounty
+  xy: 304, 816
+  size: 16, 16
+TokenofInvestigation
+  xy: 448, 64
+  size: 16, 16
+TokenofBlood
+  xy: 80, 528
+  size: 16, 16
+TokenofViolence
+  xy: 240, 944
+  size: 16, 16
+TokenofExploration
+  xy: 288, 896
   size: 16, 16
 InfernalArmor
   xy: 160, 64
@@ -675,8 +759,8 @@ PetrifiedHead
 BespokeGauntlet
   xy: 80, 288
   size: 16, 16
-DragonBlood
-  xy: 80, 528
+RingofDragonBlood
+  xy: 144,896
   size: 16, 16
 RingofThune
   xy: 80, 912
@@ -768,7 +852,7 @@ ForbiddenRobes
 CabalArmor
   xy: 256, 96
   size: 16, 16
-ArmorofIfnit
+ArmorofIfnir
   xy: 192, 96
   size: 16, 16
 CrystallineArmor

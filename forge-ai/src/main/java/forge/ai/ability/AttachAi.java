@@ -48,8 +48,7 @@ public class AttachAi extends SpellAbilityAi {
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
 
-        // TODO: improve this so that the AI can use a flash aura buff as a means of killing opposing creatures
-        // and gaining card advantage
+        // TODO: improve this so that the AI can use a flash aura buff as a means of killing opposing creatures and gaining card advantage
         if (source.hasKeyword("MayFlashSac") && !ai.canCastSorcery()) {
             return new AiAbilityDecision(0, AiPlayDecision.TimingRestrictions);
         }

@@ -89,7 +89,7 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Tarnation Vista|BIG&quot;, Diamond Valley|ARN&quot;, &quot;Hellspur Brute|OTJ&quot;, &quot;Hellspur Posse Boss|OTJ&quot;, &quot;Brimstone Roundup|OTJ&quot;, &quot;Boom Box|OTJ&quot;, &quot;Bandit's Haul|OTJ&quot;, &quot;Lavaspur Boots|OTJ&quot;, &quot;Key to the Vault|OTJ&quot;  ] }"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Diamond Valley|ARN&quot;, &quot;Hellspur Posse Boss|OTJ&quot;, &quot;Brimstone Roundup|OTJ&quot;, &quot;Boom Box|OTJ&quot;, &quot;Bandit's Haul|OTJ&quot;, &quot;Lavaspur Boots|OTJ&quot;, &quot;Key to the Vault|OTJ&quot;  ] }"/>
     <property name="enemy" value="Akul"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>

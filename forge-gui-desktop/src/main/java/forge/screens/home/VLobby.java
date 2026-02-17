@@ -301,7 +301,9 @@ public class VLobby implements ILobbyView {
                     if (i == 0) {
                         // TODO: This seems like the wrong place to do this:
                         slot.setIsDevMode(prefs.getPrefBoolean(FPref.DEV_MODE_ENABLED));
-                        changePlayerFocus(0);
+                    }
+                    if (lobby.mayEdit(i)) {
+                        changePlayerFocus(i);
                     }
                 } else {
                     panel.getDeckChooser().setIsAi(isSlotAI);
