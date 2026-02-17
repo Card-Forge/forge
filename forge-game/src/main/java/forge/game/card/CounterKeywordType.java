@@ -6,17 +6,8 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 
 import forge.game.keyword.Keyword;
-import forge.game.keyword.KeywordInterface;
 
-public class CounterKeywordType implements CounterType {
-
-    public CounterKeywordType(String keyword, KeywordInterface inst) {
-        this.keyword = keyword;
-        this.inst = inst;
-    }
-
-    private String keyword;
-    private transient KeywordInterface inst;
+public record CounterKeywordType(String keyword, String desc) implements CounterType {
 
     // Rule 122.1b
     static ImmutableList<String> keywordCounter = ImmutableList.of(
@@ -26,7 +17,7 @@ public class CounterKeywordType implements CounterType {
 
     public static CounterKeywordType get(String s) {
         if (!sMap.containsKey(s)) {
-            sMap.put(s, new CounterKeywordType(s, isKeywordCounter(s) ? Keyword.getInstance(s) : null));
+            sMap.put(s, new CounterKeywordType(s, isKeywordCounter(s) ? Keyword.getInstance(s).getTitle() : null));
         }
         return sMap.get(s);
     }
@@ -45,10 +36,7 @@ public class CounterKeywordType implements CounterType {
     }
 
     private String getKeywordDescription() {
-        if (inst != null) {
-            return inst.getTitle();
-        }
-        return keyword;
+        return desc != null ? desc : keyword;
     }
 
     public boolean is(CounterEnumType eType) {
