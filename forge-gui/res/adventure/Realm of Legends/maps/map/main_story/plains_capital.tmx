@@ -8,17 +8,17 @@
  <tileset firstgid="11905" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt1bsNgDAMBFAKJAoYgQFYimWYlUEQRcQvNsJc8KGkuCISkCfbIWNdVWMJJFPLkeIrvhx8c/MsHvWTDCw+ySutvX3BxOo7W9C+vjvGw6ft/9aH6C/aF6sZgy/suzekOL/Wfmr/uNgziPPx1sd4f0h9lOrqfb9p8+jdX63vDD62+ZPM0prBp3m9fXdeqy/2HTZfCmNuPrQRPX9oZ4r6oYPwWepirfFXPuu7f/Uhs/q+2CeWob2Gzbd3stWPvb/Ft2UBeJxJ1A==
+   eJztlrsNgDAMBSloUBiBAZiELbIMk1MhfiEfJ7FNeMV1kXw5RwLbd50FRViNDlrwWwY6f+6X0w390A/9ZPuFmMYrEn6++fD7vp/PqYZPrh838IMf/Gh+oe89/g/S/Fz9NPjF7LfWfVL83hxCc3M6p+43xmU/w9WP6sf1/iSh+t07le7Wup/0fkvCNcfFbJ5o8zt7auunfb/wO9gA+a7yjQ==
   </data>
  </layer>
  <layer id="6" name="Ground2" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJztmF9Kw0AQxsc/oElFcwBpfZTSiFgv4JtW0V5AaJ+8hvhuX3sIr5DTiF7AE9ihHTIOO9tN2Ww20g8+Ns2G7o9vNptkiz2AYuXn/XhMKiLk4+J837k/+1KTfA9XcfO56OewGb7RKrvHNRm65Pe5U7oKn6l+XwelXRR7fbd8AJPduPlM+hgC3LVofXlRMjbxvXX+mo9r63Phy/sAF3137tB8mu6VWsfCp2kdnxy3Ct9wAHA9sB+TTOc0PhuTqX9+3O71b8u3GV+o+fdf8wvJd5PGzec7P/m80L5F2lTf3hHA2cJpsmzJp9my7WZlH7bymJ8zacwymjq+E553Sr4mNVLqi3yXi7k/S+pn0N5RbEI+ZAvBR7oVnE8W7lB8kkn+1u5f4sPv9BiFfMiWp80xyCy5kA8t97U21euJn/8hIZdPPt8iPm5ab7T9Q7pG29PE9RzVzfzwSUa6nzU2/swxMfqUHJvzyVxpHpgYuevikznKcammNteZH1rmRuO+J3YmdAg+6SrZ1cH3CzcncyM=
+   eJztmNFtwjAQQE2L1CagwgAV8FkhQiuVBTpIv7tG1f/yywoMkWkQXaATNKf0lONw7Dg+g1ti6cknjLin88Uozq+Vyn957cfDNinJI/RDN+73lclBc/jQ+fnxfRu3X5P67XoVvn77m4pY9pc66Ti3nwmbZwx+sdfvL/i9XTX3+xgcQvOa1rifrjbZXKnl/NjPpf8k/Vw4tV+o/jPld/F7LObV4jgGMEa/58XhusvzYfPZ3Nn7zxaf4/wL1X+Xcv7V9R+N6f627T+f/e36r+Ql/X/9d2l+06FSs4I0KWfkflz+zmRcrcHMY/qZlN/DoPIzjabvC6408Xsqen+dxOsHbp2fnx+8p9v8QmHzA7cs1Xu0HVL1Bj8A7rWoX9vxPpL1Ay/qJzWk/Sh43tTdH+J36u406Xku4ccd8Xmuc6P/OTpH6fpxR/TjdcU+0DlSQvnxOvK8uKcmQtYP4HXDvJ+J2Qk4hR/HpXYh/H4Arph/fQ==
   </data>
  </layer>
  <layer id="2" name="Ground" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJztmLtOwzAYRi0VSAISzwBTqxZmYESIOwUkYORhKAPwBDxAKTuXsaIwMXHZWaDAwGWDB+Cz2oBxfIuTph5q6ahu2sQnX/+4ceo5QupttvvcoZ6L0m0nlRulMpQesx4hcxbMe9n4PWOcFwteDf0WSoQsgiWwDFZAGayCNbCu2J6mH/t7u5YfbXx+YW60L8tHl2tSv/FB8tuyyO8R43mBmOMg6sc29ro2rbs085uG+xf2+S6Z+WVdf9TPNj/6ns/HJN9O+rmeH+V67D/suCdFQk7BGTgHh8NROu23lydkHxzko343cLoFd+C+2J38qvA6AjWB3xuc3sEH+OxCftSnAa9LcAUeOL9+1P8A8IBfan0umjupX5WZ22T9NK6PiQIhk2CqEP1MlR87tq4fvtr4bcBrE2wVonmq6o/933iS9Gfa/WYCP9fml7T84tRfuC1Lv6zqz9Yvaf3xayLX6k/kx/7Xl9uw44bbVPdbnfRzOT/VmpBeX3HWiSOBvZ9sTa46Z/44adHz6/mZ+KnWiCJqht9rxvRrYJ8Lw2svTi6m6PxGA/O5QedHz7XitzA5Z/r9XV/ut+P/HS8J1IX6sXOtybF5t6TPJGX7h/cu/L2IqMmepYXPh2yfa7rop3JivUV+/Lg6v7Al+X1l7jo/XWZJ/Ezq1zQ/nWeWfrbtB5A8ueg=
+   eJztmD1OwzAYhj+pQBKQOANbowZmYEQIOAAwchjKAJyAA5Sy8zNGFCYmfnYWKDBQ2OAAvFYbME7iOE7kGBRLjxoprv3k82fLdtggCkdsjdlD2IhTtZPMjdGeKo8Vh2hVgzXHjN8T+nnW4OWP+fHjbZsfKzbGb26SvouJ+D2gP8dL5siL+/GFn9dVxG8J7h8B0Wdgr5/t8ftvflezv+H7PW4RnYBTcAYOpuPo+EW/Kn67TaI9sN+M+13D6QbcgruWPH6yeRuxPKrTz+HXgdch6Cb4vcJpAN7Ae4nxUx1f5tOD1wW4BPeC3zjWgQngADcYvk9aO03Oj3mfaAEs+vF3svjxfWc958k/kXV4bYBNPx5P1fx7THnWyT/b15cq/DqeeT9T+afrVzT/xDORbflX+5XrJzsTsvmV55w44+n7pZ3JZd8stlMWtV/tp+Knstfk6SrW65fkVzQuqpj06yE+bXfIucJ6w+rvuOl+2+5Pe0VgLsyPX2tV2hbdit5Jpv0/2ruIe5GkknaXFt0P6d5r2ugnc+K9k/zEfrP8olJkfNPcs/yyYlbETyV/VeOX5WnST7d8AQjBu3I=
   </data>
  </layer>
  <layer id="3" name="Walls" width="40" height="40">
@@ -26,12 +26,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztmEtOAkEQhjvBhIgBF670BiAYI2pQXGiMRlDRNccx0SsY8JHoynAGzoHsfMQTeAKrwnSm0vSjpuchJv7JH6a7Z6Y+arprHsOc+BPqF4W4mxHfF6f5GiUhdgLvgV9juOlxjiaJv1uy8+F4L4Ybhhg2qfF14/I/j8Enq0K0wG3wKfgMfA7ugC/Al5Z+H74RyaOJD/uvFuJb5VuuCLFSmd425dHGJ/PWseTHlVc1xhbwbIO/8uG2L58pJy/z/vmrL4Z2iZu/dpCTJPIXRb75izP/kuRz5Y+zrrl8rY3ofLKGYR6yrH/dMo8PhTEG1YmT5qvB2l2LsX4lFzUqCmua80/HljTfMDdx0nw6y1gmvk1yDtM2ql6d9HHmH8Y9KExfX2ocl7rN8PqicO1SPp3V8TT58N6l45P1FiV5JAO2s1oflI/yUKk8XD7u/JN9Lr5vqP9LtZAP25IPt9dr4Tj+yv17wbEDyxznyMX3DnHz0P5Qfg8L4bZuHP1ZSJ/PdM+n81FnV4w4fLRfd79HqfPRJ0ZcvkfL+x7ycd9BH4rp8JneCcfBeh0Zxk3HJM1H+8vwvFMB789N2m/B9cW2HEtDXL4jiH9sYLCNZcUndQ3PajeW5zXuPmnxPUHcZ0dszj5p8WUtTn3RfT9CqdeRtvua70+6PlRXM3f7jtrk+j6DUq8jbeuO55yTG5+Om+q0qybb+Fzn1B1PFaX2cmuz7zl9a/u/kpN8b6OeJc0i02/oBz/enys=
+   eJztmM1Kw0AQxxd6ECupB0/6Bq2NCFWp1ouIolWr5z6OoK8grR+gJ+kz9DmqNz9Onn0CZ2iGjJv9arJJK/iHP83uJJmfs8mYZFgSf0L9QIjbGfFdkORrVoTYjrwLfsngVopztFj+nYqZD+O9DG5qcpgk51fF6W9+BR+tCnEMboNPwKfgM3AHfA6+MMyn4RuxOur4cP5yIbtlvuWaECu15LaujiY+qlvHUB9bXeUcm8CzBQ4q8XZavjzq11iMbZNr/dpRTXzUbxJNo34++Wz1c7mvXfm+wsn5qIcFBfe/btWND4U5BvWxs/A14PiN+u88Idy7axnuX+LiRk3Cmuf1p2LzzTcsje2bT2XKZVtf3TaJ5lyuP8y7V06uLzfGSTcFri8K713Op7Icz5PveV7NF0R9BkU8xIDjou4Pzof9n/i4ZB4XPl/XH+f7hv6/FMZ8OCY+3F4P4zj+0v696NgBy4Hn9V2/d8g7B+MP6Xe/HG+r4ujPcpKP2wdfoDG/HlW25chSPz6v+n+PovWW40U+Xz0Y3veQz/Ud9D7Ih0/3Tvgare9IE9cd45uPz1fheadWjZ/R3qL1xTHF8pAr3wHkP9QwmGJF8ZGu4Fnt2vC85rpPXnyPkPfJkttln7z4ipZLf1F9P0LJ68jH/SD5/Uk1h+oqrt2+pTfZvs+g5HXkY9XxLud0zc/juj5t68kmPts5VcdzTdJ7XXtz2nOm7e3/8id6b+OeJc0i0zT0A9Oao5Y=
   </data>
  </layer>
  <layer id="5" name="Overlay" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJztl0tOAkEQhltZGRcGNngEheGx5QxexhOoccU98BjsXQk7YE1CQuIB3NodrNhT1vRjprurJ/Inf5h+DPVR3dPULDsiay1bwNcGxjpa3ZQdSxQfju3j0Gy2NT6Mfv167R/jcnzyg7z/+OO6fE3yVpW/kHwhBVzgKm2HQuyGbt8ZI3+U5vd/+8ZXbvfmrFT549KHha87EKI3aBZjf+FuxYNNaVEI8VY04zLx6c855ZTCbErAQOVPjVH568t83Rbma2quLx/kjxrjyJ8eT19D0zrb9l9oPsxl24fcgn3ooxj7byP/Byejclu//ipOVlKf0Afj74HOkLP+p/RaGWwbN81PoSd5pj1Lv2RYm6zvzG0uQU3+iXhU21SvP07N7dB8FAfup+bNiPo9hmyM+Hekyp+Nz3dOLHHGdhXw4bXMhZ3aZ67v3qnkw8B9nuO6NJcaVSmn9zgXHk7GOmzcfHo/NYdLVfFjs30DCJL2HQ==
+   eJztl81OAjEQx6ueDAcDF3gEgV3wyjP4MjyBGk+8BzwGd07ATT2bmJj4AF5tgxO742w/lrbTDfyTf9h+LPNj2i2z6yuRtdYt4GsDYxPtbqqOJYoPx/ZxaDbbGn+Uf37u+Me4nBx8L+///HVTvmPyVpe/kHwhBVzgOr2OhXgbu31njPxRWgz/902u3e7NWanyx6WtxtcvhBgU1fHuSIje6LgY7xfuVjzYlJaSc1XQYyH49OecckphNiVgoPKnxqj86etbd03N9eWD/FFjHPnT4+lraFpn2/4LzYe5bPuQW7APfRRj/73I/8FpWW3r19/FwUrqE/pgfBPoDDnrNKXXymDbuGl+Cj3IM+1R+inD2mR/a25zCWryL8Sj2qZ6fX5nbofmozhwPzVvRtTvMWRjxL8jVf5sfL5zYokztquAD69lLuzUPnN9904lHwbu8xzXpbnUqEo5vce58HAyNmHj5tP7qTlcqosfm+0HZg32pA==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -176,32 +176,13 @@
     <property name="uncommonShopList" value="Planeswalker4White,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,Legend4White,PhyrexianWhite"/>
    </properties>
   </object>
-  <object id="78" template="../../../../common/maps/obj/shop.tx" x="496.5" y="183">
+  <object id="78" template="../../../../common/maps/obj/shop.tx" x="369" y="212">
    <properties>
     <property name="commonShopList" value="Artifact4White,Land4White,Dimir,Rakdos,Orzhov,Golgari,Vehicle2White,Wand4White"/>
     <property name="signYOffset" type="float" value="-8"/>
     <property name="uncommonShopList" value="Planeswalker4White,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,Legend4White,PhyrexianWhite"/>
    </properties>
   </object>
-  <object id="81" template="../../../../common/maps/obj/collision.tx" x="65.0617" y="160.226" width="270.119" height="15.547"/>
-  <object id="82" template="../../../../common/maps/obj/collision.tx" x="65.2738" y="127.226" width="270.119" height="15.547"/>
-  <object id="83" template="../../../../common/maps/obj/collision.tx" x="63.2738" y="97.2265" width="270.119" height="15.547"/>
-  <object id="84" template="../../../../common/maps/obj/collision.tx" x="96.2738" y="63.5598" width="239.452" height="15.547"/>
-  <object id="89" template="../../../../common/maps/obj/collision.tx" x="193.274" y="368.726" width="142.452" height="15.547"/>
-  <object id="90" template="../../../../common/maps/obj/collision.tx" x="64.1073" y="369.226" width="81.1187" height="15.547"/>
-  <object id="91" template="../../../../common/maps/obj/collision.tx" x="321.941" y="446.226" width="13.4523" height="15.547"/>
-  <object id="92" template="../../../../common/maps/obj/collision.tx" x="321.941" y="414.226" width="13.4523" height="15.547"/>
-  <object id="93" template="../../../../common/maps/obj/collision.tx" x="386.274" y="415.893" width="13.4523" height="15.547"/>
-  <object id="94" template="../../../../common/maps/obj/collision.tx" x="385.274" y="445.56" width="13.4523" height="15.547"/>
-  <object id="95" template="../../../../common/maps/obj/collision.tx" x="353.941" y="431.893" width="13.4523" height="15.547"/>
-  <object id="96" template="../../../../common/maps/obj/collision.tx" x="276.941" y="448.226" width="22.619" height="32.2137"/>
-  <object id="97" template="../../../../common/maps/obj/collision.tx" x="96.7738" y="416.893" width="29.119" height="32.2137"/>
-  <object id="98" template="../../../../common/maps/obj/collision.tx" x="132.44" y="447.893" width="23.619" height="32.2137"/>
-  <object id="99" template="../../../../common/maps/obj/collision.tx" x="209.44" y="415.56" width="29.119" height="32.2137"/>
-  <object id="100" template="../../../../common/maps/obj/collision.tx" x="180.94" y="496.226" width="23.619" height="32.2137"/>
-  <object id="101" template="../../../../common/maps/obj/collision.tx" x="244.94" y="495.893" width="23.119" height="32.2137"/>
-  <object id="102" template="../../../../common/maps/obj/collision.tx" x="191.107" y="401.226" width="15.7857" height="31.547"/>
-  <object id="103" template="../../../../common/maps/obj/collision.tx" x="128.107" y="401.56" width="15.7857" height="31.547"/>
   <object id="104" template="../../../../common/maps/obj/dialog.tx" x="159.5" y="295.5" width="16" height="16" visible="1">
    <properties>
     <property name="dialog">[

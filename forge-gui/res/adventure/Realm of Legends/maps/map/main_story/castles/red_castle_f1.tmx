@@ -61,7 +61,7 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Swamp|C16|[344]&quot;, &quot;Forest|C16|[350]&quot;, &quot;Island|C16|[341]&quot;, &quot;Plains|C16|[338]&quot;, &quot;Witch-Maw Nephilim|GPT&quot;, &quot;Atraxa's Skitterfang|ONE&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Swamp|C16|[344]&quot;, &quot;Forest|C16|[350]&quot;, &quot;Island|C16|[341]&quot;, &quot;Plains|C16|[338]&quot;, &quot;Witch-Maw Nephilim|GPT&quot;, &quot;Tablet of Compleation|ONE&quot;]}"/>
     <property name="enemy" value="Atraxa"/>
     <property name="pursueRange" type="int" value="0"/>
     <property name="speedModifier" type="float" value="50"/>

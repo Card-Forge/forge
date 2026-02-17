@@ -46,7 +46,8 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Plains|C16|[337]&quot;, &quot;Island|C16|[340]&quot;, &quot;Mountain|C16|[346]&quot;, &quot;Forest|C16|[349]&quot;, &quot;Ink-Treader Nephilim|GPT&quot;, &quot;Guardians of Meletis|THS&quot;, &quot;daxos of meletis|THS&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Plains|C16|[337]&quot;, &quot;Island|C16|[340]&quot;, &quot;Mountain|C16|[346]&quot;, &quot;Forest|C16|[349]&quot;, &quot;Ink-Treader Nephilim|GPT&quot;, &quot;Guardians of Meletis|THS&quot;, &quot;daxos of meletis|THS&quot;
+]}</property>
     <property name="enemy" value="Kynaios and Tiro"/>
     <property name="pursueRange" type="int" value="0"/>
     <property name="speedModifier" type="float" value="50"/>
