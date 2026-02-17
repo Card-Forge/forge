@@ -1,18 +1,18 @@
 package forge.game.event;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+
+import com.google.common.collect.Multimap;
 
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.util.Lang;
 import forge.util.TextUtil;
-import forge.util.maps.MapOfLists;
 
-public record GameEventBlockersDeclared(Player defendingPlayer, Map<GameEntity, MapOfLists<Card, Card>> blockers) implements GameEvent {
+public record GameEventBlockersDeclared(Player defendingPlayer, Map<GameEntity, Multimap<Card, Card>> blockers) implements GameEvent {
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
@@ -25,10 +25,8 @@ public record GameEventBlockersDeclared(Player defendingPlayer, Map<GameEntity, 
     @Override
     public String toString() {
         List<Card> blockerCards = new ArrayList<>();
-        for (MapOfLists<Card, Card> vv : blockers.values()) {
-            for (Collection<Card> cc : vv.values()) {
-                blockerCards.addAll(cc);
-            }
+        for (Multimap<Card, Card> vv : blockers.values()) {
+            blockerCards.addAll(vv.values());
         }
         return TextUtil.concatWithSpace(defendingPlayer.getName(),"declared", String.valueOf(blockerCards.size()),"blockers:", Lang.joinHomogenous(blockerCards) );
     }

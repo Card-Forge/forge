@@ -35,7 +35,7 @@ public class DigEffect extends SpellAbilityEffect {
         } else {
             final int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
             final String toChange = sa.getParamOrDefault("ChangeNum", "1");
-            final int numToChange = toChange.equals("All") || toChange.equals("Any") ? numToDig : AbilityUtils.calculateAmount(host, sa.getParam("ChangeNum"), sa);
+            final int numToChange = toChange.equals("All") || toChange.equals("Any") ? numToDig : AbilityUtils.calculateAmount(host, toChange, sa);
 
             String verb = " looks at ";
             if (sa.hasParam("DestinationZone") && sa.getParam("DestinationZone").equals("Exile") &&
@@ -78,7 +78,7 @@ public class DigEffect extends SpellAbilityEffect {
                 sb.append(" They ").append(sa.hasParam("Optional") ? "may " : "").append(verb2);
                 if (sa.hasParam("ChangeValid")) {
                     String what = sa.hasParam("ChangeValidDesc") ? sa.getParam("ChangeValidDesc") :
-                        sa.getParam("ChangeValid");
+                        sa.getParam("ChangeValid").toLowerCase();
                     if (!StringUtils.containsIgnoreCase(what, "card")) {
                         what = what + " card";
                     }

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Multimap;
 import com.google.common.eventbus.Subscribe;
 
 import forge.LobbyPlayer;
@@ -17,7 +18,6 @@ import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
 import forge.util.*;
-import forge.util.maps.MapOfLists;
 
 public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     private final Localizer localizer = Localizer.getInstance();
@@ -260,11 +260,9 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         // Loop through Defenders
         // Append Defending Player/Planeswalker
 
-        Collection<Card> blockers = null;
-
-        for (Entry<GameEntity, MapOfLists<Card, Card>> kv : ev.blockers().entrySet()) {
+        for (Entry<GameEntity, Multimap<Card, Card>> kv : ev.blockers().entrySet()) {
             GameEntity defender = kv.getKey();
-            MapOfLists<Card, Card> attackers = kv.getValue();
+            Multimap<Card, Card> attackers = kv.getValue();
             if (attackers == null || attackers.isEmpty()) {
                 continue;
             }
@@ -280,11 +278,11 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
             }
 
             boolean firstAttacker = true;
-            for (final Entry<Card, Collection<Card>> att : attackers.entrySet()) {
+            for (final Entry<Card, Collection<Card>> att : attackers.asMap().entrySet()) {
                 if (!firstAttacker) sb.append("\n");
 
-                blockers = att.getValue();
-                if (blockers.isEmpty()) {
+                Collection<Card> blockers = att.getValue();
+                if (blockers.isEmpty() || Iterables.get(blockers, 0) == att.getKey()) {
                     sb.append(localizer.getMessage("lblLogPlayerDidntBlockAttacker", controllerName, att.getKey()));
                 } else {
                     sb.append(localizer.getMessage("lblLogPlayerAssignedBlockerToBlockAttacker", controllerName, Lang.joinHomogenous(blockers), att.getKey()));

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="101">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="102">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -28,12 +28,20 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzdWDtOw0AQdZAoEAgpFlAAB0iEhMQVSGjouRW3ICSiBglCTZU7UIRIKcIFKPHEGXkymdmd/YSCJ61sr2d33s5v1y6K/4nvg+3IxuIvdMTgnT3/7Db3g7Z7rLSmj477vQVUL87h4oIyeKVrADxWY0ftPD5wzRE7/7QsiuuqDVc8EeOjuPkA3AbWd4BzoQ853pYNx3Ekt1P2rPk21J7zitsX4xg6D3I5C1PtnIuub7rieFPWzyk+BryQ+4WwTm5bS/xCvvSZDXOD8wjJq15Z8wMbxtR5Kf5dOUFjAeWkmMV33McpkHyaMl6ylzUGtTzlewjXc7W33ofXE5vaJZ4DZH0x4at/kizM+Zag0yWj8eHyvv1YguQbDleex64L+6S9JBQ0j1x1edKx+3biOafQPl9+zFieaxzmlc6Hlq3NO5vjY88X/Fyh4XOnvt51m77Di025wX4jmwuWWhmiE2TRDwtW9301le6DCPSxywc+ftSWOezXW3Gy7tOgs9ta77vv6rIAXrMprPHIfcvrGPoj1L85ALbj+ZuqE2xMZTHujsOoLUFth/bW5kGdlnM5yKb4FKHZTqqBE6GmaUBZupaY+iflhpb/Un1GuOrzJdMRsk+jf3EMXWOO71X8Pog5OwBmhu8Aiafl3GGdywetvvCzR6o9aUzTGPLZ1lJfLP5xneVznLOQA11nzP8O3xlM0uODZY9zzadxtfxfskCq0wj+3UB1cc6WGH0NkEVoMWj5r6ZB8mOsHZ/adXPBst5UP/owEnhqvB6JbO66bsFQsSnwwgb/UXx23xbwHxNv/XKzbQu/867PMg==
+   eJzdWDtOA0EM3SBRIBBSVkABOUAiJCSuQEJDz624BfmIGiQINVXuQBEipQgXoGSdjRXHsWc8n1DwpNH+vOM3/o13i+J/4vtoN7Kx+AsdMXhn1z/76/N+0/2utKaPtvu5BVQvzuHigjJ4pGsADKp3R808PnDNETv/tCyKm2oMVzwR45O4+QDcBtZngJZwDznelWuO40hu5+xa822oPecVty/GMXQe5HIRpto5F13fdMXxtqyvU3wMeCHnC2Gd3LbUFg8d+RnkS4/ZMDe4T0LyqlvW/MCGMXVein9XTtBYQDkpZvEZ93EKJJ+mvC/ZyxqDWp7yPYTruT7YvIfHM5vaJZ4DZH0x4at/kizM+Zag0yWj8eHyvv1YguQbDleex64L70l7SShoHrnq8qRt9+3E06fQe778mLE81zjMK52PDduYt7ffj+0veF+h4XOvPt6TfeH4cluuf7iWzQVLrQzRCbLohwWr+76aSvdBBPrY5QMfP2rLHPbrrjhZ92nQ2Wls3uM9AJUF8JpNYY1H7ltex9Afof7NAbAdz99UnWBjKotxdxpGbQlqO7S3Ng/qtPTlIJviU4RmO6kGToSapgFl6Vpi6p+UG1r+S/UZ4arPV0xHyD6N/sV36BpzfK/i90FM7wCYGb4DJJ6WvsM6lw9afeG9R6o9aUzTGPLZ1lJfLP5x9fI5+izkQNcZ87/D14NJenyw7HGu+TSulv9LFkh1GsG/G6guztkSo68BsggtBi3/1TRIfoy141OzHi5Y1pvqRx9GAk+N14DI5q7rFgwVmwIvHPAfxWf3XQH/MfHRK7fHrvALZivP5w==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
   <object id="50" template="../../../../common/maps/obj/enemy.tx" x="256.285" y="337.285">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Invasion of the Giants|KHM&quot;, &quot;Giant's Amulet|KHM&quot;]}"/>
     <property name="enemy" value="Aegar"/>
     <property name="speedModifier" type="float" value="40"/>
@@ -58,6 +66,14 @@
   </object>
   <object id="59" template="../../../../common/maps/obj/enemy.tx" x="262.885" y="444.395">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Varragoth"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
@@ -74,6 +90,14 @@
   </object>
   <object id="68" template="../../../../common/maps/obj/enemy.tx" x="198.087" y="89.9317">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Fynn"/>
     <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="30"/>
@@ -82,6 +106,14 @@
   </object>
   <object id="70" template="../../../../common/maps/obj/enemy.tx" x="105.536" y="331.533">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Ranar"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="40"/>
@@ -90,6 +122,14 @@
   </object>
   <object id="71" template="../../../../common/maps/obj/enemy.tx" x="262.657" y="495.649">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Orvar"/>
     <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="30"/>
@@ -98,6 +138,14 @@
   </object>
   <object id="72" template="../../../../common/maps/obj/enemy.tx" x="501.568" y="446.145">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Lathril"/>
     <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="30"/>
@@ -338,6 +386,52 @@
   }
 ]
 </property>
+   </properties>
+  </object>
+  <object id="101" template="../../../../common/maps/obj/enemy.tx" x="346.5" y="159.5">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'Do you hear the Immerstrum calling? It calls for blood! For war!'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;The snow runs red today.&quot;,
+					&quot;text&quot;: &quot;'Follow the song of your bloodlust, and may it lead you to many more victories!'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Kardur, Doomscourge&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Kardur's Vicious Return&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;randomCard&quot;, &quot;editions&quot;: [&quot;KHM&quot;], &quot;rarity&quot;: [&quot;Rare&quot;, &quot;Mythic Rare&quot;], &quot;count&quot;: 8 }              
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 6
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Hell yeah!&quot;,
+					&quot;text&quot;: &quot;'Yes! The warstorm surges within your soul! It must be fed! Slay every last resident of this pathetic camp, pretenders to the legacy of Kaldheim all, and I shall teach you the true power of Kaldheim!'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;Can't say I hear it.&quot;,
+					&quot;text&quot;: &quot;'Begone, coward. My work is not fit for soft hands such as yours.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Kardur"/>
+    <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
  </objectgroup>

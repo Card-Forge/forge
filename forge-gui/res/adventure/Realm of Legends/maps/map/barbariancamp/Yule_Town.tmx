@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="124">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="125">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -29,7 +29,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJy1lt1qE0EUxw9ir0rJbGM1Up+gKb1TiKkkbVOo3kuvfIyaFj9S38B7UUGtQpsHCAh+PkELfovaCOqN4oUP4DnsHPafycxuwm7/8Gd3s7P7Ox8zO6lME1Ucn2avl4nOl4h2I6I9djeKr1G9mdii/XmiA/YOj3uc4SfRMBO54jU+v8i+NO1nqn8z8w97hce1MrzqYbrcH3z+k/3LcjXnR5Gff8jj+hn+HuD+LSfcg5kkx2MLlEsSq/YhjalcZKMk9zNT43G1D6H69o4TzYKLkvYhxL08Mfq7HlY5l2r6GFwLtVLC3OAanLTc7qmYK2N7gRqjnjPzRQbXlctELq7PonX7xCATuUep9fKwfdy7c0T35ornVqbiea5rJ2++DwL9rtn5JesPc1Xl5T4bc54VxU3TrP3WrHDuq85eo9w33NO3OfqatrYPmdlgXwC2cFvnkms8R92ZHH+taY/bhmibfcv4uXJM44Z0P6XH3cj/u5tv0dL93P0voVx0EdIay37edHp7lFzUB2Z+c7j/Jgb3QfXLs0Sv2K/ZyxCLnOO9UXSd59OWyR6XR1LfOnuR3SoN32/ae+Jlz/1xpd8G4Up+N9jvPd+LL3z9lf2R/cm5d2U+/P56IF5Zo9fMIEf4GybOe8nGIL995mPf6bl829L+S3Ugl4atpfI70EeJ/Wk1Hif5vWPfNHE92vZ55DbtuxZh7tfh/TWo5aaNvZHSq6smZm6Z5Fll41xrQz5SI6kPPuuqDewWxLxkj/KcfB+x/3iO0ng2rbdNEq8r31iNu2+ZMgb3Bt8+oe8KeVR1bAxYV90bfPtEUVzVf3nVxD0=
+   eJy1lt1KG0EUxw+iVyKZGFNT7AvUiHcKaZQkGqHtffGqj6FR/Ije96L3pQraD2jzAIFCP5+ggrbV0moE9cbSCx/Ac5g57Mk4s5uw6x/+7G52dn7nzJmP5AYBcpbvouczAA9SAO/SAO/RjbR+lmpmtUnfxwD20K+x3ZsIv03fZEou+SHeP0I/HnQz2ZfI/IeexXbVCM85mDb3DO/P0ReGyzm/Srv5J9iuFeFTD/d/JuDuZYMce8YhlihWrkMYk7mcmy3K/d5Ad1yug298m70AI8JJievg4z7p67yv3Tzmkg9vI9dCIRUwF3AM7hhuY1hzqW0z6++L9QmZnyO4tmym5Mr1mbSeD7UzJfc2NZ+5aRf35SjA1mjy3NyAnue8duLmu+Opd8HML1p/MldWXO7HLudZUtwwjZi9ZhZzn7POGubuY00PYtQ1bG2fILOEnhZs4lYng2d5L/Wiv/u1xjWuKYAN9KZyc+kaxvVpO6TGDc+eb+ebtPg8t/9LMFc6CfEY03letmp7m1ypX8g8trhXfe3nIPvLBMBX9Df0jIiF7uW7TrSK82lZRbeLIxrfInoKXRU5Pruvr2XzjjyTcvfRjXhvIC7lt4b+6dgv/uDzX/Qh+sh693TM33/REy+t0RXVziH+gtJ5V0wM9NtvvLasmtPeFvZfqi5yKZmxZH5d1JFi/5DX7Si/H+h1pcejZr6X3LLpa0rM/aLovyDGcsnEXgqp1aLSzGUVfMtsOddqIh8aIxof+a2tmmBXRcwVc6XvaH+U9Zf3UhzPkvGGCuK15WrLcbcMk9rIs8F1TnBfPnequolBjiufDa5zIiku6xrAcMTA
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -45,6 +45,14 @@
   </object>
   <object id="57" template="../../../../common/maps/obj/enemy.tx" x="256" y="53.5">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Krampus"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="40"/>
@@ -52,25 +60,57 @@
   </object>
   <object id="58" template="../../../../common/maps/obj/enemy.tx" x="436.667" y="405.167">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Rudolph"/>
     <property name="speedModifier" type="float" value="30"/>
-    <property name="threatRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
   <object id="60" template="../../../../common/maps/obj/enemy.tx" x="262.833" y="331.5">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Shalai and Hallar"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
   <object id="61" template="../../../../common/maps/obj/enemy.tx" x="192.5" y="160">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Radha"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
   <object id="62" template="../../../../common/maps/obj/enemy.tx" x="254" y="285.5">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Syr Ginger"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="30"/>
@@ -79,6 +119,14 @@
   </object>
   <object id="63" template="../../../../common/maps/obj/enemy.tx" x="278.409" y="157.318">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Arcum's Sleigh|ICE&quot;, &quot;tinder wall|ICE&quot;, &quot;Jack-in-the-Mox|UGL&quot;, &quot;Jolly Gerbils|BLB&quot;, &quot;Rimefur Reindeer|WOE&quot;]}"/>
     <property name="enemy" value="Santa"/>
     <property name="speedModifier" type="float" value="20"/>
@@ -101,6 +149,14 @@
   <object id="82" template="../../../../common/maps/obj/waypoint.tx" x="188.5" y="288"/>
   <object id="84" template="../../../../common/maps/obj/enemy.tx" x="368" y="156.5">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="displayNameOverride" value=""/>
     <property name="enemy" value="Mrs. Klaus"/>
     <property name="threatRange" type="int" value="0"/>
@@ -118,6 +174,14 @@
   </object>
   <object id="87" template="../../../../common/maps/obj/enemy.tx" x="129.333" y="286.167">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Gingerbrute|ELD&quot;, &quot;Gingerbread Cabin|ELD&quot;]}"/>
     <property name="enemy" value="Brenard"/>
     <property name="threatRange" type="int" value="0"/>
@@ -163,7 +227,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="97" template="../../../../common/maps/obj/dialog.tx" x="415.374" y="364.21" width="79.1667" height="11.5" rotation="139.041" visible="1">
+  <object id="97" template="../../../../common/maps/obj/dialog.tx" x="384.874" y="403.71" width="16" height="16" rotation="0" visible="1">
    <properties>
     <property name="dialog">[
 {
@@ -174,7 +238,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="98" template="../../../../common/maps/obj/dialog.tx" x="191.172" y="-0.722124" width="87.9986" height="14.3333" rotation="89.78" visible="1">
+  <object id="98" template="../../../../common/maps/obj/dialog.tx" x="141.593" y="63.3722" width="19.9986" height="14.3333" rotation="0" visible="1">
    <properties>
     <property name="dialog">[
 {
@@ -200,7 +264,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="103" template="../../../../common/maps/obj/dialog.tx" x="173.183" y="301.872" width="47.1366" height="13" rotation="270.612" visible="1">
+  <object id="103" template="../../../../common/maps/obj/dialog.tx" x="161.183" y="288.122" width="16" height="16" rotation="0" visible="1">
    <properties>
     <property name="dialog">[
 {
@@ -313,7 +377,7 @@
 </property>
    </properties>
   </object>
-  <object id="111" template="../../obj/treasure.tx" x="11.5" y="365">
+  <object id="111" template="../../obj/treasure.tx" x="385.5" y="350">
    <properties>
     <property name="reward">[
   {
@@ -391,9 +455,71 @@
   <object id="116" template="../../../../common/maps/obj/collision.tx" x="388.596" y="91.4688" width="31.8983" height="51.2443"/>
   <object id="117" template="../../../../common/maps/obj/collision.tx" x="158.96" y="94.196" width="31.8983" height="51.2443"/>
   <object id="118" template="../../../../common/maps/obj/collision.tx" x="208.233" y="91.8324" width="31.8983" height="51.2443"/>
-  <object id="119" template="../../../../common/maps/obj/collision.tx" x="115.384" y="284.711" width="58.8983" height="38.911"/>
+  <object id="119" template="../../../../common/maps/obj/collision.tx" x="115.384" y="287.461" width="58.8983" height="36.161"/>
   <object id="120" template="../../../../common/maps/obj/collision.tx" x="113.218" y="239.544" width="13.8983" height="47.2443"/>
   <object id="121" template="../../../../common/maps/obj/collision.tx" x="161.384" y="237.378" width="13.8983" height="35.911"/>
   <object id="123" template="../../../../common/maps/obj/collision.tx" x="287.521" y="-0.122167" width="31.9892" height="29.6383"/>
+  <object id="124" template="../../../../common/maps/obj/enemy.tx" x="52" y="360.5">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'Come, child. Have you ever wanted to ruin Christmas forever?'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;Christmas is cancelled.&quot;,
+					&quot;text&quot;: &quot;'Fantastic! Now on to more worthy uses of my time.' With that, he vanishes in a cloud of foul-smelling smoke.&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Heartless Hidetsugu&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Hidetsugu, Devouring Chaos&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Hidetsugu Consumes All&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Hidetsugu's Second Rite&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;subTypes&quot;: [&quot;Sorcery&quot;], &quot;colors&quot;: [ &quot;red&quot;], &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ], &quot;count&quot;: 5 }       
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 8
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Always hated the holiday.&quot;,
+					&quot;text&quot;: &quot;'Excellent. I am Hidetsugu. I have been called many things over the years - heartless, the devouring chaos... but these frivilous snow-folk insist on calling me a Grinch and a Scrooge! I cannot abide such foolish titles. And while I'd love nothing more to burn them all alive inside their precious town, their ice magic is an infuriatingly effective counter to my fire. So I ask this: kill them all, and be rewarded.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;Absolutely not!&quot;,
+					&quot;text&quot;: &quot;'A shame, truly. Well, I have waited here in the cold long enough.' 
+
+With that, he vanishes in a cloud of smoke. Almost immediately after, another being appears in a puff of cinnamon, a tiny elf (or perhaps gnome?) wearing a suit of green velvet in a little red hat.
+
+'You've gotten rid of that Grinch for good! Have some presents for being such a nice person, {var=player_name}!'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardTypes&quot;: [&quot;Artifact&quot;], &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ], &quot;count&quot;: 4 }       
+                      ]
+                    } ],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;I don't have time for this.&quot;,
+					&quot;text&quot;: &quot;'Leave then, while you still can.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Hidetsugu"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

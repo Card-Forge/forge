@@ -68,7 +68,7 @@ With a hacking cough that stains his robes with blood, he disappears in a flash,
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Urza's Factory|TSR&quot;, &quot;Urza's Workshop|BRC&quot;, &quot;Urza's Bauble|ICE&quot;, &quot;Liberator, Urza's Battlethopter|BRO&quot;, &quot;Urza's Tome|DOM&quot;, &quot;Urza's Avenger|5ED&quot;  ] }"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Urza's Workshop|BRC&quot;, &quot;Urza's Bauble|ICE&quot;, &quot;Liberator, Urza's Battlethopter|BRO&quot;, &quot;Urza's Tome|DOM&quot;, &quot;Urza's Avenger|5ED&quot;  ] }"/>
     <property name="enemy" value="Urza"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="10"/>

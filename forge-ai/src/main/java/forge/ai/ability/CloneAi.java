@@ -26,13 +26,6 @@ public class CloneAi extends SpellAbilityAi {
 
         boolean useAbility = true;
 
-//        if (card.getController().isComputer()) {
-//            final List<Card> creatures = AllZoneUtil.getCreaturesInPlay();
-//            if (!creatures.isEmpty()) {
-//                cardToCopy = CardFactoryUtil.getBestCreatureAI(creatures);
-//            }
-//        }
-
         // TODO - add some kind of check to answer
         // "Am I going to attack with this?"
         // TODO - add some kind of check for during human turn to answer
@@ -40,7 +33,10 @@ public class CloneAi extends SpellAbilityAi {
 
         PhaseHandler phase = game.getPhaseHandler();
 
-        if (!sa.usesTargeting()) {
+        if (sa.usesTargeting()) {
+            sa.resetTargets();
+            useAbility &= cloneTgtAI(sa, false);
+        } else {
             final List<Card> defined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
 
             boolean bFlag = false;
@@ -66,9 +62,6 @@ public class CloneAi extends SpellAbilityAi {
             if (!bFlag) { // All of the defined stuff is cloned, not very useful
                 return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
             }
-        } else {
-            sa.resetTargets();
-            useAbility &= cloneTgtAI(sa, false);
         }
 
         return useAbility ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
@@ -137,15 +130,8 @@ public class CloneAi extends SpellAbilityAi {
         if (mandatory && targets.isEmpty()) {
             return false;
         }
-        if ("CloneAttacker".equals(sa.getParam("AILogic"))) {
-            sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(targets));
-            return true;
-        } else if ("CloneBestCreature".equals(sa.getParam("AILogic"))) {
-            sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(targets));
-            return true;
-        }
 
-        if (mandatory) {
+        if (mandatory || "CloneBestCreature".equals(sa.getParam("AILogic"))) {
             sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(targets));
             return true;
         }
