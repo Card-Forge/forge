@@ -198,26 +198,26 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
             case G -> SoundEffectType.GreenLand;
 
             case WU -> SoundEffectType.WhiteBlueLand;
-            case WG -> SoundEffectType.WhiteGreenLand;
-            case WR -> SoundEffectType.WhiteRedLand;
-            case BW -> SoundEffectType.BlackWhiteLand;
+            case GW -> SoundEffectType.WhiteGreenLand;
+            case RW -> SoundEffectType.WhiteRedLand;
+            case WB -> SoundEffectType.BlackWhiteLand;
             case BR -> SoundEffectType.BlackRedLand;
             case UB -> SoundEffectType.BlueBlackLand;
             case GU -> SoundEffectType.GreenBlueLand;
-            case GB -> SoundEffectType.GreenBlackLand;
-            case GR -> SoundEffectType.GreenRedLand;
-            case RU -> SoundEffectType.RedBlueLand;
+            case BG -> SoundEffectType.GreenBlackLand;
+            case RG -> SoundEffectType.GreenRedLand;
+            case UR -> SoundEffectType.RedBlueLand;
 
             case WUB -> SoundEffectType.WhiteBlueBlackLand;
-            case WGU -> SoundEffectType.WhiteGreenBlueLand;
-            case WRB -> SoundEffectType.WhiteRedBlackLand;
-            case BWG -> SoundEffectType.BlackWhiteGreenLand;
+            case GWU -> SoundEffectType.WhiteGreenBlueLand;
+            case RWB -> SoundEffectType.WhiteRedBlackLand;
+            case WBG -> SoundEffectType.BlackWhiteGreenLand;
             case BRG -> SoundEffectType.BlackRedGreenLand;
             case UBR -> SoundEffectType.BlueBlackRedLand;
             case GUR -> SoundEffectType.GreenBlueRedLand;
-            case GBU -> SoundEffectType.GreenBlackBlueLand;
-            case GRW -> SoundEffectType.GreenRedWhiteLand;
-            case RUW -> SoundEffectType.RedBlueWhiteLand;
+            case BGU -> SoundEffectType.GreenBlackBlueLand;
+            case RGW -> SoundEffectType.GreenRedWhiteLand;
+            case URW -> SoundEffectType.RedBlueWhiteLand;
 
             default -> null;
         };
