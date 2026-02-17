@@ -2,9 +2,8 @@ package forge.sound;
 
 import forge.LobbyPlayer;
 import forge.game.card.Card;
+import forge.game.card.CardView.CardStateView;
 import forge.game.event.*;
-import forge.game.spellability.AbilityManaPart;
-import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.gui.events.IUiEventVisitor;
 import forge.gui.events.UiEventAttackerDeclared;
@@ -184,114 +183,47 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
         Card card = event.card();
         ZoneType zoneTo = event.zoneType();
         EventValueChangeType zoneEventMode = event.mode();
-        SoundEffectType resultSound = null;
-        if(zoneEventMode == EventValueChangeType.Added && zoneTo == ZoneType.Battlefield) {
-            if(card.isLand()) {
-                resultSound = getLandSound(card);
-            }
+        if (zoneEventMode != EventValueChangeType.Added || zoneTo != ZoneType.Battlefield || !card.isLand()) {
+            return null;
         }
-        return resultSound;
-    }
-
-    private SoundEffectType getLandSound(Card land) {
-        SoundEffectType resultSound = null;
-
-        // if there's a specific effect for this particular card, play it and
-        // we're done.
-        if (hasSpecificCardEffect(land)) {
-            resultSound = SoundEffectType.ScriptedEffect;
-        } else {
-            // I want to get all real colors this land can produce - no interest in colorless or devoid
-            StringBuilder fullManaColors = new StringBuilder();
-            for (final SpellAbility sa : land.getManaAbilities()) {
-                for (AbilityManaPart mp : sa.getAllManaParts()) {
-                    String currManaColor = mp.getOrigProduced();
-                    if(!"C".equals(currManaColor)) {
-                        fullManaColors.append(currManaColor);
-                    }
-                }
-
-            }
-            // No interest if "colors together" or "alternative colors" - only interested in colors themselves
-            fullManaColors = new StringBuilder(TextUtil.fastReplace(fullManaColors.toString()," ", ""));
-
-            int fullManaColorsLength = fullManaColors.length();
-
-            if(fullManaColorsLength >= 3) {
-                // three color land
-                fullManaColors = new StringBuilder(fullManaColors.substring(0, 3));
-                if (fullManaColors.toString().contains("W") && fullManaColors.toString().contains("U") && fullManaColors.toString().contains("B") && SoundSystem.instance.hasResource(SoundEffectType.WhiteBlueBlackLand)) {
-                    resultSound = SoundEffectType.WhiteBlueBlackLand;
-                } else if (fullManaColors.toString().contains("W") && fullManaColors.toString().contains("G") && fullManaColors.toString().contains("U") && SoundSystem.instance.hasResource(SoundEffectType.WhiteGreenBlueLand)) {
-                    resultSound = SoundEffectType.WhiteGreenBlueLand;
-                } else if (fullManaColors.toString().contains("W") && fullManaColors.toString().contains("R") && fullManaColors.toString().contains("B") && SoundSystem.instance.hasResource(SoundEffectType.WhiteRedBlackLand)) {
-                    resultSound = SoundEffectType.WhiteRedBlackLand;
-                } else if (fullManaColors.toString().contains("B") && fullManaColors.toString().contains("W") && fullManaColors.toString().contains("G") && SoundSystem.instance.hasResource(SoundEffectType.BlackWhiteGreenLand)) {
-                    resultSound = SoundEffectType.BlackWhiteGreenLand;
-                } else if (fullManaColors.toString().contains("B") && fullManaColors.toString().contains("R") && fullManaColors.toString().contains("G") && SoundSystem.instance.hasResource(SoundEffectType.BlackRedGreenLand)) {
-                    resultSound = SoundEffectType.BlackRedGreenLand;
-                } else if (fullManaColors.toString().contains("U") && fullManaColors.toString().contains("B") && fullManaColors.toString().contains("R") && SoundSystem.instance.hasResource(SoundEffectType.BlueBlackRedLand)) {
-                    resultSound = SoundEffectType.BlueBlackRedLand;
-                } else if (fullManaColors.toString().contains("G") && fullManaColors.toString().contains("U") && fullManaColors.toString().contains("R") && SoundSystem.instance.hasResource(SoundEffectType.GreenBlueRedLand)) {
-                    resultSound = SoundEffectType.GreenBlueRedLand;
-                } else if (fullManaColors.toString().contains("G") && fullManaColors.toString().contains("B") && fullManaColors.toString().contains("U") && SoundSystem.instance.hasResource(SoundEffectType.GreenBlackBlueLand)) {
-                    resultSound = SoundEffectType.GreenBlackBlueLand;
-                } else if (fullManaColors.toString().contains("G") && fullManaColors.toString().contains("R") && fullManaColors.toString().contains("W")  && SoundSystem.instance.hasResource(SoundEffectType.GreenRedWhiteLand)) {
-                    resultSound = SoundEffectType.GreenRedWhiteLand;
-                } else if (fullManaColors.toString().contains("R") && fullManaColors.toString().contains("U") && fullManaColors.toString().contains("W")  && SoundSystem.instance.hasResource(SoundEffectType.RedBlueWhiteLand)) {
-                    resultSound = SoundEffectType.RedBlueWhiteLand;
-                }
-            }
-
-            if(resultSound == null && fullManaColorsLength >= 2) {
-                // three color land without sounds installed, or two color land
-                // lets try
-                fullManaColors = new StringBuilder(fullManaColors.substring(0, 2));
-                if (fullManaColors.toString().contains("W") && (fullManaColors.toString().contains("U")) && SoundSystem.instance.hasResource(SoundEffectType.WhiteBlueLand)) {
-                    resultSound = SoundEffectType.WhiteBlueLand;
-                } else if (fullManaColors.toString().contains("W") && (fullManaColors.toString().contains("G")) && SoundSystem.instance.hasResource(SoundEffectType.WhiteGreenLand)) {
-                    resultSound = SoundEffectType.WhiteGreenLand;
-                } else if (fullManaColors.toString().contains("W") && (fullManaColors.toString().contains("R")) && SoundSystem.instance.hasResource(SoundEffectType.WhiteRedLand)) {
-                    resultSound = SoundEffectType.WhiteRedLand;
-                } else if (fullManaColors.toString().contains("B") && (fullManaColors.toString().contains("W")) && SoundSystem.instance.hasResource(SoundEffectType.BlackWhiteLand)) {
-                    resultSound = SoundEffectType.BlackWhiteLand;
-                } else if (fullManaColors.toString().contains("B") && (fullManaColors.toString().contains("R")) && SoundSystem.instance.hasResource(SoundEffectType.BlackRedLand)) {
-                    resultSound = SoundEffectType.BlackRedLand;
-                } else if (fullManaColors.toString().contains("U") && (fullManaColors.toString().contains("B")) && SoundSystem.instance.hasResource(SoundEffectType.BlueBlackLand)) {
-                    resultSound = SoundEffectType.BlueBlackLand;
-                } else if (fullManaColors.toString().contains("G") && (fullManaColors.toString().contains("U")) && SoundSystem.instance.hasResource(SoundEffectType.GreenBlueLand)) {
-                    resultSound = SoundEffectType.GreenBlueLand;
-                } else if (fullManaColors.toString().contains("G") && (fullManaColors.toString().contains("B")) && SoundSystem.instance.hasResource(SoundEffectType.GreenBlackLand)) {
-                    resultSound = SoundEffectType.GreenBlackLand;
-                } else if (fullManaColors.toString().contains("G") && (fullManaColors.toString().contains("R")) && SoundSystem.instance.hasResource(SoundEffectType.GreenRedLand)) {
-                    resultSound = SoundEffectType.GreenRedLand;
-                } else if (fullManaColors.toString().contains("R") && (fullManaColors.toString().contains("U")) && SoundSystem.instance.hasResource(SoundEffectType.RedBlueLand)) {
-                    resultSound = SoundEffectType.RedBlueLand;
-                }
-            }
-
-            if(resultSound == null) {
-                // multicolor land without sounds installed, or single mana land, or colorless/devoid land
-                // in case of multicolor, lets take only the 1st color of the list, it sure has sound
-                if(fullManaColorsLength >= 2) {
-                    fullManaColors = new StringBuilder(fullManaColors.substring(0, 1));
-                }
-                if (fullManaColors.toString().contains("B")) {
-                    resultSound = SoundEffectType.BlackLand;
-                } else if (fullManaColors.toString().contains("U")) {
-                    resultSound = SoundEffectType.BlueLand;
-                } else if (fullManaColors.toString().contains("G")) {
-                    resultSound = SoundEffectType.GreenLand;
-                } else if (fullManaColors.toString().contains("R")) {
-                    resultSound = SoundEffectType.RedLand;
-                } else if (fullManaColors.toString().contains("W")) {
-                    resultSound = SoundEffectType.WhiteLand;
-                } else {
-                    resultSound = SoundEffectType.OtherLand;
-                }
-            }
+        if (hasSpecificCardEffect(card)) {
+            return SoundEffectType.ScriptedEffect;
         }
+        CardStateView state = card.getView().getCurrentState();
+        SoundEffectType resultSound = switch(state.origProduceMana()) {
+            case W -> SoundEffectType.WhiteLand;
+            case U -> SoundEffectType.BlueLand;
+            case B -> SoundEffectType.BlackLand;
+            case R -> SoundEffectType.RedLand;
+            case G -> SoundEffectType.GreenLand;
 
+            case WU -> SoundEffectType.WhiteBlueLand;
+            case GW -> SoundEffectType.WhiteGreenLand;
+            case RW -> SoundEffectType.WhiteRedLand;
+            case WB -> SoundEffectType.BlackWhiteLand;
+            case BR -> SoundEffectType.BlackRedLand;
+            case UB -> SoundEffectType.BlueBlackLand;
+            case GU -> SoundEffectType.GreenBlueLand;
+            case BG -> SoundEffectType.GreenBlackLand;
+            case RG -> SoundEffectType.GreenRedLand;
+            case UR -> SoundEffectType.RedBlueLand;
+
+            case WUB -> SoundEffectType.WhiteBlueBlackLand;
+            case GWU -> SoundEffectType.WhiteGreenBlueLand;
+            case RWB -> SoundEffectType.WhiteRedBlackLand;
+            case WBG -> SoundEffectType.BlackWhiteGreenLand;
+            case BRG -> SoundEffectType.BlackRedGreenLand;
+            case UBR -> SoundEffectType.BlueBlackRedLand;
+            case GUR -> SoundEffectType.GreenBlueRedLand;
+            case BGU -> SoundEffectType.GreenBlackBlueLand;
+            case RGW -> SoundEffectType.GreenRedWhiteLand;
+            case URW -> SoundEffectType.RedBlueWhiteLand;
+
+            default -> null;
+        };
+        if (resultSound == null || state.origProduceAnyMana() || !SoundSystem.instance.hasResource(resultSound)) {
+            resultSound = SoundEffectType.OtherLand;
+        }
         return resultSound;
     }
 
