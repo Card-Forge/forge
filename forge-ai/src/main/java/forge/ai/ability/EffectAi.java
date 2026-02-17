@@ -382,7 +382,7 @@ public class EffectAi extends SpellAbilityAi {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             }
-        } else if (sa.hasParam("RememberObjects")) { //generic
+        } else if (sa.hasParam("RememberObjects") && sa.hasParam("StaticAbilities")) { //generic
             boolean cantAttack = false;
             boolean cantBlock = false;
             boolean cantActivate = false;

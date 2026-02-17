@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.Iterables;
@@ -8,6 +9,7 @@ import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -46,7 +48,8 @@ public class AirbendEffect extends SpellAbilityEffect {
         final Game game = hostCard.getGame();
         final Player pl = sa.getActivatingPlayer();
 
-        final CardZoneTable triggerList = CardZoneTable.getSimultaneousInstance(sa);
+        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+        CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(moveParams, sa);
 
         for (Card c : getCardsfromTargets(sa)) {
             final Card gameCard = game.getCardState(c, null);
@@ -57,9 +60,6 @@ public class AirbendEffect extends SpellAbilityEffect {
                 continue;
             }
             handleExiledWith(gameCard, sa);
-
-            Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-            AbilityKey.addCardZoneTableParams(moveParams, triggerList);
 
             SpellAbilityStackInstance si = null;
             if (gameCard.isInZone(ZoneType.Stack)) {
@@ -77,9 +77,16 @@ public class AirbendEffect extends SpellAbilityEffect {
                 game.getStack().remove(si);
             }
 
+            CardCollection exiled = zoneMovements.filterCards(null, List.of(ZoneType.Exile), null, null, null);
+            exiled.removeIf(Card::isToken);
+
+            if (exiled.isEmpty()) {
+                continue;
+            }
+
             // Effect to cast for 2 from exile
-            Card eff = createEffect(sa, movedCard.getOwner(), "Airbend" + movedCard, hostCard.getImageKey());
-            eff.addRemembered(movedCard);
+            Card eff = createEffect(sa, movedCard.getOwner(), "Airbend " + movedCard, hostCard.getImageKey());
+            eff.addRemembered(exiled);
 
             StringBuilder sbPlay = new StringBuilder();
             sbPlay.append("Mode$ Continuous | MayPlay$ True | MayPlayAltManaCost$ 2 | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand");
@@ -92,11 +99,11 @@ public class AirbendEffect extends SpellAbilityEffect {
             game.getAction().moveToCommand(eff, sa);
         }
 
-        triggerList.triggerChangesZoneAll(game, sa);
-        handleExiledWith(triggerList.allCards(), sa);
+        zoneMovements.triggerChangesZoneAll(game, sa);
+        handleExiledWith(zoneMovements.allCards(), sa);
 
         // CR 701.65b
-        if (!triggerList.isEmpty()) {
+        if (!zoneMovements.isEmpty()) {
             pl.triggerElementalBend(TriggerType.Airbend);
         }
     }

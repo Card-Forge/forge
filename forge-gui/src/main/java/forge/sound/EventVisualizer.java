@@ -3,6 +3,7 @@ package forge.sound;
 import forge.LobbyPlayer;
 import forge.game.card.Card;
 import forge.game.card.CardView;
+import forge.game.card.CardView.CardStateView;
 import forge.game.event.*;
 import forge.game.zone.ZoneType;
 import forge.gui.events.IUiEventVisitor;
@@ -184,101 +185,47 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
         CardView card = event.card();
         ZoneType zoneTo = event.zoneType();
         EventValueChangeType zoneEventMode = event.mode();
-        SoundEffectType resultSound = null;
-        if(zoneEventMode == EventValueChangeType.Added && zoneTo == ZoneType.Battlefield) {
-            if(card != null && card.getCurrentState().isLand()) {
-                resultSound = getLandSound(card);
-            }
+        if (zoneEventMode != EventValueChangeType.Added || zoneTo != ZoneType.Battlefield || !card.isLand()) {
+            return null;
         }
-        return resultSound;
-    }
-
-    private SoundEffectType getLandSound(CardView land) {
-        SoundEffectType resultSound = null;
-
-        // if there's a specific effect for this particular card, play it and
-        // we're done.
-        if (hasSpecificCardEffect(land)) {
-            resultSound = SoundEffectType.ScriptedEffect;
-        } else {
-            // Determine mana colors this land can produce using view-level info
-            forge.card.ColorSet mana = land.getCurrentState().origProduceMana();
-            boolean hasW = mana != null && mana.hasWhite();
-            boolean hasU = mana != null && mana.hasBlue();
-            boolean hasB = mana != null && mana.hasBlack();
-            boolean hasR = mana != null && mana.hasRed();
-            boolean hasG = mana != null && mana.hasGreen();
-
-            int colorCount = (hasW ? 1 : 0) + (hasU ? 1 : 0) + (hasB ? 1 : 0) + (hasR ? 1 : 0) + (hasG ? 1 : 0);
-
-            if(colorCount >= 3) {
-                // three color land
-                if (hasW && hasU && hasB && SoundSystem.instance.hasResource(SoundEffectType.WhiteBlueBlackLand)) {
-                    resultSound = SoundEffectType.WhiteBlueBlackLand;
-                } else if (hasW && hasG && hasU && SoundSystem.instance.hasResource(SoundEffectType.WhiteGreenBlueLand)) {
-                    resultSound = SoundEffectType.WhiteGreenBlueLand;
-                } else if (hasW && hasR && hasB && SoundSystem.instance.hasResource(SoundEffectType.WhiteRedBlackLand)) {
-                    resultSound = SoundEffectType.WhiteRedBlackLand;
-                } else if (hasB && hasW && hasG && SoundSystem.instance.hasResource(SoundEffectType.BlackWhiteGreenLand)) {
-                    resultSound = SoundEffectType.BlackWhiteGreenLand;
-                } else if (hasB && hasR && hasG && SoundSystem.instance.hasResource(SoundEffectType.BlackRedGreenLand)) {
-                    resultSound = SoundEffectType.BlackRedGreenLand;
-                } else if (hasU && hasB && hasR && SoundSystem.instance.hasResource(SoundEffectType.BlueBlackRedLand)) {
-                    resultSound = SoundEffectType.BlueBlackRedLand;
-                } else if (hasG && hasU && hasR && SoundSystem.instance.hasResource(SoundEffectType.GreenBlueRedLand)) {
-                    resultSound = SoundEffectType.GreenBlueRedLand;
-                } else if (hasG && hasB && hasU && SoundSystem.instance.hasResource(SoundEffectType.GreenBlackBlueLand)) {
-                    resultSound = SoundEffectType.GreenBlackBlueLand;
-                } else if (hasG && hasR && hasW && SoundSystem.instance.hasResource(SoundEffectType.GreenRedWhiteLand)) {
-                    resultSound = SoundEffectType.GreenRedWhiteLand;
-                } else if (hasR && hasU && hasW && SoundSystem.instance.hasResource(SoundEffectType.RedBlueWhiteLand)) {
-                    resultSound = SoundEffectType.RedBlueWhiteLand;
-                }
-            }
-
-            if(resultSound == null && colorCount >= 2) {
-                // three color land without sounds installed, or two color land
-                if (hasW && hasU && SoundSystem.instance.hasResource(SoundEffectType.WhiteBlueLand)) {
-                    resultSound = SoundEffectType.WhiteBlueLand;
-                } else if (hasW && hasG && SoundSystem.instance.hasResource(SoundEffectType.WhiteGreenLand)) {
-                    resultSound = SoundEffectType.WhiteGreenLand;
-                } else if (hasW && hasR && SoundSystem.instance.hasResource(SoundEffectType.WhiteRedLand)) {
-                    resultSound = SoundEffectType.WhiteRedLand;
-                } else if (hasB && hasW && SoundSystem.instance.hasResource(SoundEffectType.BlackWhiteLand)) {
-                    resultSound = SoundEffectType.BlackWhiteLand;
-                } else if (hasB && hasR && SoundSystem.instance.hasResource(SoundEffectType.BlackRedLand)) {
-                    resultSound = SoundEffectType.BlackRedLand;
-                } else if (hasU && hasB && SoundSystem.instance.hasResource(SoundEffectType.BlueBlackLand)) {
-                    resultSound = SoundEffectType.BlueBlackLand;
-                } else if (hasG && hasU && SoundSystem.instance.hasResource(SoundEffectType.GreenBlueLand)) {
-                    resultSound = SoundEffectType.GreenBlueLand;
-                } else if (hasG && hasB && SoundSystem.instance.hasResource(SoundEffectType.GreenBlackLand)) {
-                    resultSound = SoundEffectType.GreenBlackLand;
-                } else if (hasG && hasR && SoundSystem.instance.hasResource(SoundEffectType.GreenRedLand)) {
-                    resultSound = SoundEffectType.GreenRedLand;
-                } else if (hasR && hasU && SoundSystem.instance.hasResource(SoundEffectType.RedBlueLand)) {
-                    resultSound = SoundEffectType.RedBlueLand;
-                }
-            }
-
-            if(resultSound == null) {
-                // multicolor land without sounds installed, or single mana land, or colorless/devoid land
-                if (hasB) {
-                    resultSound = SoundEffectType.BlackLand;
-                } else if (hasU) {
-                    resultSound = SoundEffectType.BlueLand;
-                } else if (hasG) {
-                    resultSound = SoundEffectType.GreenLand;
-                } else if (hasR) {
-                    resultSound = SoundEffectType.RedLand;
-                } else if (hasW) {
-                    resultSound = SoundEffectType.WhiteLand;
-                } else {
-                    resultSound = SoundEffectType.OtherLand;
-                }
-            }
+        if (hasSpecificCardEffect(card)) {
+            return SoundEffectType.ScriptedEffect;
         }
+        CardStateView state = card.getView().getCurrentState();
+        SoundEffectType resultSound = switch(state.origProduceMana()) {
+            case W -> SoundEffectType.WhiteLand;
+            case U -> SoundEffectType.BlueLand;
+            case B -> SoundEffectType.BlackLand;
+            case R -> SoundEffectType.RedLand;
+            case G -> SoundEffectType.GreenLand;
 
+            case WU -> SoundEffectType.WhiteBlueLand;
+            case GW -> SoundEffectType.WhiteGreenLand;
+            case RW -> SoundEffectType.WhiteRedLand;
+            case WB -> SoundEffectType.BlackWhiteLand;
+            case BR -> SoundEffectType.BlackRedLand;
+            case UB -> SoundEffectType.BlueBlackLand;
+            case GU -> SoundEffectType.GreenBlueLand;
+            case BG -> SoundEffectType.GreenBlackLand;
+            case RG -> SoundEffectType.GreenRedLand;
+            case UR -> SoundEffectType.RedBlueLand;
+
+            case WUB -> SoundEffectType.WhiteBlueBlackLand;
+            case GWU -> SoundEffectType.WhiteGreenBlueLand;
+            case RWB -> SoundEffectType.WhiteRedBlackLand;
+            case WBG -> SoundEffectType.BlackWhiteGreenLand;
+            case BRG -> SoundEffectType.BlackRedGreenLand;
+            case UBR -> SoundEffectType.BlueBlackRedLand;
+            case GUR -> SoundEffectType.GreenBlueRedLand;
+            case BGU -> SoundEffectType.GreenBlackBlueLand;
+            case RGW -> SoundEffectType.GreenRedWhiteLand;
+            case URW -> SoundEffectType.RedBlueWhiteLand;
+
+            default -> null;
+        };
+        if (resultSound == null || state.origProduceAnyMana() || !SoundSystem.instance.hasResource(resultSound)) {
+            resultSound = SoundEffectType.OtherLand;
+        }
         return resultSound;
     }
 
