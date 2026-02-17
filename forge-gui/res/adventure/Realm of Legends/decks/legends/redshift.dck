@@ -1,86 +1,86 @@
 [metadata]
 Name=Redshift, Rocketeer Chief
 [Commander]
-1 Redshift, Rocketeer Chief|dft
+1 Redshift, Rocketeer Chief|DFT
 [Main]
-1 Etali, Primal Conqueror|mom
-1 krenko, tin street kingpin|war
-1 Colossus Hammer|m20
-1 Agatha of the Vile Cauldron|woe
+1 Etali, Primal Conqueror|MOM
+1 Krenko, Tin Street Kingpin|WAR
+1 Colossus Hammer|M20
+1 Agatha of the Vile Cauldron|WOE
 1 Chomping Mastasaur|YDFT
 1 Wildheart Invoker|FDN
-1 Flamewave Invoker|bbd
-1 Chandra, Spark Hunter|dft
-1 Chaos Warp|cmd
-1 Loot, Exuberant Explorer|fdn
-1 Tyvar, the Pummeler|dsk
-1 nettlecyst|mkc
-1 Adaptive Omnitool|drc
-1 Aetheric Amplifier|drc
-1 Aggravated Assault|ons
-1 Amonkhet Raceway|dft
-1 Arcane Signet|drc
-1 Avishkar Raceway|dft
-1 Beast Within|dsc
-1 Beastrider Vanguard|dft
-1 Blackblade Reforged|dmc
-1 Blasphemous Act|drc
-1 Boom Scholar|dft
-1 Boommobile|dft
-1 Cinder Glade|blc
-1 Clamorous Ironclad|dft
-1 Command Tower|drc
-1 Crackdown Construct|aer
-1 Daretti, Rocketeer Engineer|dft
-1 Draconautics Engineer|dft
-1 Elvish Mystic|cmm
-1 Elvish Refueler|dft
-1 Enduring Vitality|dsk
-1 Faithless Looting|inr
-10 Forest|dft
-1 thornspire verge|dsk
-1 Full Throttle|dft
-1 Fyndhorn Elves|cmr
-1 Game Trail|blc
-1 Goblin Anarchomancer|mh2
-1 Goblin Engineer|plst
-1 Goblin Matron|dmr
-1 Goblin Surveyor|dft
-1 Greasewrench Goblin|dft
-1 Guidelight Matrix|dft
-1 Heroic Intervention|cmm
-1 Krenko, Mob Boss|fdn
-1 Lightning Greaves|drc
-1 Lumbering Worldwagon|dft
-1 Luxurious Locomotive|otj
-1 Mech Hangar|neo
-10 Mountain|dft
-1 Muraganda Raceway|dft
-1 Oviya, Automech Artisan|dft
-1 Peer Past the Veil|dsk
-1 Point the Way|dft
-1 Push the Limit|dft
-1 Racers' Scoreboard|dft
-1 Reliquary Tower|dsc
-1 Return of the Wildspeaker|otc
-1 Rocketeer Boostbuggy|dft
-1 Rockfall Vale|inr
-1 Rocky Roads|dft
-1 Rogue's Passage|otc
-1 Rootbound Crag|drc
-1 Rulik Mons, Warren Chief|dmu
-1 Skycrash|dft
-1 Sol Ring|drc
-1 Spire Mechcycle|dft
-1 Squee, the Immortal|dom
-1 Starting Column|dft
-1 Stomping Ground|rvr
-1 The Aetherspark|dft
-1 Thunderous Velocipede|dft
-1 temple of the false god|scg
-1 Toski, Bearer of Secrets|blc
-1 Umbral Mantle|shm
-1 Unlicensed Hearse|snc
-1 Veloheart Bike|dft
-1 Weatherlight|nec
-1 Wild Roads|dft
+1 Flamewave Invoker|BBD
+1 Chandra, Spark Hunter|DFT
+1 Chaos Warp|CMD
+1 Loot, Exuberant Explorer|FDN
+1 Tyvar, the Pummeler|DSK
+1 Nettlecyst|MKC
+1 Adaptive Omnitool|DRC
+1 Aetheric Amplifier|DRC
+1 Aggravated Assault|ONS
+1 Amonkhet Raceway|DFT
+1 Arcane Signet|DRC
+1 Avishkar Raceway|DFT
+1 Beast Within|DSC
+1 Beastrider Vanguard|DFT
+1 Blackblade Reforged|DMC
+1 Blasphemous Act|DRC
+1 Boom Scholar|DFT
+1 Boommobile|DFT
+1 Cinder Glade|BLC
+1 Clamorous Ironclad|DFT
+1 Command Tower|DRC
+1 Crackdown Construct|AER
+1 Daretti, Rocketeer Engineer|DFT
+1 Draconautics Engineer|DFT
+1 Elvish Mystic|CMM
+1 Elvish Refueler|DFT
+1 Enduring Vitality|DSK
+1 Faithless Looting|INR
+10 Forest|DFT
+1 Thornspire Verge|DSK
+1 Full Throttle|DFT
+1 Fyndhorn Elves|CMR
+1 Game Trail|BLC
+1 Goblin Anarchomancer|MH2
+1 Goblin Engineer|PLST
+1 Goblin Matron|DMR
+1 Goblin Surveyor|DFT
+1 Greasewrench Goblin|DFT
+1 Guidelight Matrix|DFT
+1 Heroic Intervention|CMM
+1 Krenko, Mob Boss|FDN
+1 Lightning Greaves|DRC
+1 Lumbering Worldwagon|DFT
+1 Luxurious Locomotive|OTJ
+1 Mech Hangar|NEO
+10 Mountain|DFT
+1 Muraganda Raceway|DFT
+1 Oviya, Automech Artisan|DFT
+1 Peer Past the Veil|DSK
+1 Point the Way|DFT
+1 Push the Limit|DFT
+1 Racers' Scoreboard|DFT
+1 Reliquary Tower|DSC
+1 Return of the Wildspeaker|OTC
+1 Rocketeer Boostbuggy|DFT
+1 Rockfall Vale|INR
+1 Rocky Roads|DFT
+1 Rogue's Passage|OTC
+1 Rootbound Crag|DRC
+1 Rulik Mons, Warren Chief|DMU
+1 Skycrash|DFT
+1 Sol Ring|DRC
+1 Spire Mechcycle|DFT
+1 Squee, the Immortal|DOM
+1 Starting Column|DFT
+1 Stomping Ground|RVR
+1 The Aetherspark|DFT
+1 Thunderous Velocipede|DFT
+1 Temple of the False God|SCG
+1 Toski, Bearer of Secrets|BLC
+1 Umbral Mantle|SHM
+1 Unlicensed Hearse|SNC
+1 Veloheart Bike|DFT
+1 Weatherlight|NEC
+1 Wild Roads|DFT
