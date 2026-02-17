@@ -3721,47 +3721,8 @@ public class AbilityUtils {
             }
         }
 
-        if (sq[0].contains("InOppYard")) {
-            for (final Player p : opps) {
-                someCards.addAll(p.getCardsIn(ZoneType.Graveyard));
-            }
-        }
-
-        if (sq[0].contains("InOppHand")) {
-            for (final Player p : opps) {
-                someCards.addAll(p.getCardsIn(ZoneType.Hand));
-            }
-        }
-
-        if (sq[0].contains("InChosenHand")) {
-            if (c.hasChosenPlayer()) {
-                someCards.addAll(c.getChosenPlayer().getCardsIn(ZoneType.Hand));
-            }
-        }
-
-        if (sq[0].contains("InRememberedHand")) {
-            if (c.getRemembered() != null) {
-                for (final Object o : c.getRemembered()) {
-                    if (o instanceof Player) {
-                        Player remPlayer = (Player) o;
-                        someCards.addAll(remPlayer.getCardsIn(ZoneType.Hand));
-                    }
-                }
-            }
-        }
-
-        if (sq[0].contains("InChosenYard")) {
-            if (c.hasChosenPlayer()) {
-                someCards.addAll(c.getChosenPlayer().getCardsIn(ZoneType.Graveyard));
-            }
-        }
-
         if (sq[0].contains("OnBattlefield")) {
             someCards.addAll(game.getCardsIn(ZoneType.Battlefield));
-        }
-
-        if (sq[0].contains("InAllYards")) {
-            someCards.addAll(game.getCardsIn(ZoneType.Graveyard));
         }
 
         if (sq[0].contains("SpellsOnStack")) {
@@ -3770,20 +3731,6 @@ public class AbilityUtils {
 
         if (sq[0].contains("InAllHands")) {
             someCards.addAll(game.getCardsIn(ZoneType.Hand));
-        }
-
-        //  Count$InTargetedHand (targeted player's cards in hand)
-        if (sq[0].contains("InTargetedHand")) {
-            for (Player tgtP : getDefinedPlayers(c, "TargetedPlayer", ctb)) {
-                someCards.addAll(tgtP.getCardsIn(ZoneType.Hand));
-            }
-        }
-
-        //  Count$InTargetedLibrary (targeted player's cards in library)
-        if (sq[0].contains("InTargetedLibrary")) {
-            for (Player tgtP : getDefinedPlayers(c, "TargetedPlayer", ctb)) {
-                someCards.addAll(tgtP.getCardsIn(ZoneType.Library));
-            }
         }
 
         // filter lists based on the specified quality
