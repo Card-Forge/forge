@@ -94,10 +94,6 @@ public abstract class PlayerController {
     public Player getPlayer() { return player; }
     public LobbyPlayer getLobbyPlayer() { return lobbyPlayer; }
 
-    public void fireUiEvent(GameEvent ev) {
-        getMatch().fireEvent(ev);
-    }
-
     public void tempShowCards(final Iterable<Card> cards) { } // show cards in UI until ended
     public void endTempShowCards() { }
 
