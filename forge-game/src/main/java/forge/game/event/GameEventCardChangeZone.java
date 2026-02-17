@@ -2,7 +2,6 @@ package forge.game.event;
 
 import forge.game.card.Card;
 import forge.game.card.CardView;
-import forge.game.player.PlayerView;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneView;
 import forge.util.TextUtil;
@@ -11,8 +10,8 @@ public record GameEventCardChangeZone(CardView card, ZoneView from, ZoneView to)
 
     public GameEventCardChangeZone(Card card, Zone zoneFrom, Zone zoneTo) {
         this(CardView.get(card),
-             zoneFrom == null ? null : new ZoneView(PlayerView.get(zoneFrom.getPlayer()), zoneFrom.getZoneType()),
-             zoneTo == null ? null : new ZoneView(PlayerView.get(zoneTo.getPlayer()), zoneTo.getZoneType()));
+             zoneFrom == null ? null : zoneFrom.getView(),
+             zoneTo == null ? null : zoneTo.getView());
     }
 
     @Override
