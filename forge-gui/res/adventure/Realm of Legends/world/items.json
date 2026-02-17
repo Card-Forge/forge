@@ -3921,6 +3921,144 @@
     }
   },
   {
+    "name": "Cloak of the Wastes",
+    "description": "Gives a colorless land, but -1 hand size",
+    "equipmentSlot": "Body",
+    "iconName": "CloakoftheWastes",
+    "cost": 3000,
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Wastes|OGW"
+      ]
+    }
+  },
+  {
+    "name": "Outpost Outfit",
+    "description": "Taps for W or sac for any color. -1 hand size.",
+    "equipmentSlot": "Body",
+    "iconName": "OutpostOutfit",
+    "cost": 7500,
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Abandoned Outpost"
+      ]
+    }
+  },
+  {
+    "name": "Seafloor Shirt",
+    "description": "Taps for U or sac for any color. -1 hand size.",
+    "equipmentSlot": "Body",
+    "iconName": "SeafloorShirt",
+    "cost": 7500,
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Seafloor Debris"
+      ]
+    }
+  },
+  {
+    "name": "Bog Dweller Leather",
+    "description": "Taps for B or sac for any color. -1 hand size.",
+    "equipmentSlot": "Body",
+    "iconName": "BogDwellerLeather",
+    "cost": 7500,
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Bog Wreckage"
+      ]
+    }
+  },
+  {
+    "name": "Highland Cloak",
+    "description": "Taps for R or sac for any color. -1 hand size.",
+    "equipmentSlot": "Body",
+    "iconName": "HighlandCloak",
+    "cost": 7500,
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Ravaged Highlands"
+      ]
+    }
+  },
+  {
+    "name": "Timberland Shawl",
+    "description": "Taps for G or sac for any color. -1 hand size.",
+    "equipmentSlot": "Body",
+    "iconName": "TimberlandShawl",
+    "cost": 7500,
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Timberland Ruins"
+      ]
+    }
+  },
+  {
+    "name": "Token of Bounty",
+    "description": "Grants a token in a special slot with 2, T, sac: Gain 3 life.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofBounty",
+    "cost": 30000,
+    "effect": {
+      "startBattleWithCard": [
+        "c_a_food_sac"
+      ]
+    }
+  },
+  {
+    "name": "Token of Investigation",
+    "description": "Grants a token in a special slot with 2, sac: Draw a card.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofInvestigation",
+    "cost": 70000,
+    "effect": {
+      "startBattleWithCard": [
+        "c_a_clue_draw"
+      ]
+    }
+  },
+  {
+    "name": "Token of Blood",
+    "description": "Grants a token in a special slot with 1, T, sac: Discard, then draw.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofBlood",
+    "cost": 50000,
+    "effect": {
+      "startBattleWithCard": [
+        "c_a_blood_draw"
+      ]
+    }
+  },
+  {
+    "name": "Token of Violence",
+    "description": "Grants a token in a special slot with equip 1: 1, T, sac: ping for 2",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofViolence",
+    "cost": 50000,
+    "effect": {
+      "startBattleWithCard": [
+        "rock"
+      ]
+    }
+  },
+  {
+    "name": "Token of Exploration",
+    "description": "Grants a token in a special slot with 1, T, sac: Explore.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofExploration",
+    "cost": 50000,
+    "effect": {
+      "startBattleWithCard": [
+        "c_a_map_sac_explore"
+      ]
+    }
+  },
+  {
     "name": "Phelddagrif Plate",
     "description": "Opponent gets a 2/2 hippo; you get a card and some life",
     "equipmentSlot": "Body",

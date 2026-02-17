@@ -1,8 +1,8 @@
 Name:Polterheist
 ManaCost:1 B R
 Types:Creature Spirit
-PT:3/1
-K:Ward:PayLife<2>
+PT:3/3
+K:Ward:PayLife<3>
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigHeist | TriggerDescription$ Whenever CARDNAME attacks, heist target opponent's library.
 SVar:TrigHeist:DB$ Heist | ValidTgts$ Opponent
-Oracle:Ward—Pay 2 life.\nWhenever Polterheist attacks, heist target opponent's library.
+Oracle:Ward—Pay 3 life.\nWhenever Polterheist attacks, heist target opponent's library.

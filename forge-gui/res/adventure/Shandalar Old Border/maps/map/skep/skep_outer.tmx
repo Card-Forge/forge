@@ -759,13 +759,6 @@
               "op": "&gt;=",
               "val": 8
             }
-          },
-          {
-            "getMapFlag": {
-              "key": "commandersDefeated",
-              "op": "&lt;",
-              "val": 3
-            }
           }
         ]
       }

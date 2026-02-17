@@ -1643,29 +1643,8 @@ public class CardView extends GameEntityView {
         public boolean origProduceAnyMana() {
             return get(TrackableProperty.OrigProduceAnyMana);
         }
-        public boolean origProduceManaR() {
-            return get(TrackableProperty.OrigProduceManaR);
-        }
-        public boolean origProduceManaG() {
-            return get(TrackableProperty.OrigProduceManaG);
-        }
-        public boolean origProduceManaB() {
-            return get(TrackableProperty.OrigProduceManaB);
-        }
-        public boolean origProduceManaU() {
-            return get(TrackableProperty.OrigProduceManaU);
-        }
-        public boolean origProduceManaW() {
-            return get(TrackableProperty.OrigProduceManaW);
-        }
-        public boolean origProduceManaC() {
-            return get(TrackableProperty.OrigProduceManaC);
-        }
-        public int origCanProduceColoredMana() {
-            return get(TrackableProperty.CountOrigProduceColoredMana);
-        }
-        public int countBasicLandTypes() {
-            return get(TrackableProperty.CountBasicLandTypes);
+        public ColorSet origProduceMana() {
+            return get(TrackableProperty.OrigProduceMana);
         }
 
         public String getAbilityText() {
@@ -1719,20 +1698,15 @@ public class CardView extends GameEntityView {
         }
         void updateManaColorBG(CardState state) {
             boolean anyMana = false;
-            boolean rMana = false;
-            boolean gMana = false;
-            boolean bMana = false;
-            boolean uMana = false;
-            boolean wMana = false;
             boolean cMana = false;
-            int count = 0;
-            int basicLandTypes = 0;
+            byte colors = 0;
             for (SpellAbility sa : state.getManaAbilities()) {
                 if (sa == null)
                     continue;
                 for (AbilityManaPart mp : sa.getAllManaParts()) {
                     if (mp.isAnyMana()) {
                         anyMana = true;
+                        continue;
                     }
 
                     String[] colorsProduced = mp.mana(sa).split(" ");
@@ -1741,62 +1715,28 @@ public class CardView extends GameEntityView {
                     for (final String s : colorsProduced) {
                         switch (s.toUpperCase()) {
                             case "R":
-                                if (!rMana) {
-                                    count += 1;
-                                    rMana = true;
-                                }
+                                colors |= MagicColor.RED;
                                 break;
                             case "G":
-                                if (!gMana) {
-                                    count += 1;
-                                    gMana = true;
-                                }
+                                colors |= MagicColor.GREEN;
                                 break;
                             case "B":
-                                if (!bMana) {
-                                    count += 1;
-                                    bMana = true;
-                                }
+                                colors |= MagicColor.BLACK;
                                 break;
                             case "U":
-                                if (!uMana) {
-                                    count += 1;
-                                    uMana = true;
-                                }
+                                colors |= MagicColor.BLUE;
                                 break;
                             case "W":
-                                if (!wMana) {
-                                    count += 1;
-                                    wMana = true;
-                                }
+                                colors |= MagicColor.WHITE;
                                 break;
                             case "C":
-                                if (!cMana) {
-                                    cMana = true;
-                                }
+                                cMana = true;
                                 break;
                         }
                     }
                 }
             }
-            if (isForest())
-                basicLandTypes += 1;
-            if (isMountain())
-                basicLandTypes += 1;
-            if (isSwamp())
-                basicLandTypes += 1;
-            if (isPlains())
-                basicLandTypes += 1;
-            if (isIsland())
-                basicLandTypes += 1;
-            set(TrackableProperty.CountBasicLandTypes, basicLandTypes);
-            set(TrackableProperty.OrigProduceManaR, rMana);
-            set(TrackableProperty.OrigProduceManaG, gMana);
-            set(TrackableProperty.OrigProduceManaB, bMana);
-            set(TrackableProperty.OrigProduceManaU, uMana);
-            set(TrackableProperty.OrigProduceManaW, wMana);
-            set(TrackableProperty.OrigProduceManaC, cMana);
-            set(TrackableProperty.CountOrigProduceColoredMana, count);
+            set(TrackableProperty.OrigProduceMana, colors > 0 ? ColorSet.fromMask(colors) : cMana ? ColorSet.C : null);
             set(TrackableProperty.OrigProduceAnyMana, anyMana);
         }
 
@@ -1821,21 +1761,6 @@ public class CardView extends GameEntityView {
 
         public boolean isBattle() {
             return getType().isBattle();
-        }
-        public boolean isMountain() {
-            return getType().hasSubtype("Mountain");
-        }
-        public boolean isPlains() {
-            return getType().hasSubtype("Plains");
-        }
-        public boolean isSwamp() {
-            return getType().hasSubtype("Swamp");
-        }
-        public boolean isForest() {
-            return getType().hasSubtype("Forest");
-        }
-        public boolean isIsland() {
-            return getType().hasSubtype("Island");
         }
         public boolean isVehicle() {
             return getType().hasSubtype("Vehicle");
