@@ -15,6 +15,7 @@ import forge.game.GameOutcome.AnteResult;
 import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.*;
 import forge.game.combat.Combat;
+import forge.game.event.GameEvent;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
@@ -92,6 +93,10 @@ public abstract class PlayerController {
     public Match getMatch() { return gameView.getMatch(); }
     public Player getPlayer() { return player; }
     public LobbyPlayer getLobbyPlayer() { return lobbyPlayer; }
+
+    public void fireUiEvent(GameEvent ev) {
+        getMatch().fireEvent(ev);
+    }
 
     public void tempShowCards(final Iterable<Card> cards) { } // show cards in UI until ended
     public void endTempShowCards() { }

@@ -185,7 +185,6 @@ public class HostedMatch {
         // SoundSystem receives GameEvents via handleGameEvent() on each GUI,
         // so it doesn't need a direct event bus subscription here.
         // (It still subscribes to the Match bus for UiEvent sounds like blocker assignment.)
-        game.subscribeToEvents(visitor);
 
         final FCollectionView<Player> players = game.getPlayers();
         final String[] avatarIndices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
@@ -399,7 +398,6 @@ public class HostedMatch {
         @Override
         public Void visit(final GameEventSubgameStart event) {
             subGameCount++;
-            event.subgame().subscribeToEvents(visitor);
 
             final GameView gameView = event.subgame().getView();
 
@@ -475,13 +473,6 @@ public class HostedMatch {
         public void receiveGameEvent(final GameEvent evt) {
             try {
                 evt.visit(this);
-
-                // Forward all events to remote clients for client-side processing
-                if (guis != null) {
-                    for (IGuiGame gui : guis.values()) {
-                        gui.handleGameEvent(evt);
-                    }
-                }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 e.printStackTrace();

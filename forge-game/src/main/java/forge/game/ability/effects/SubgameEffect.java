@@ -152,7 +152,8 @@ public class SubgameEffect extends SpellAbilityEffect {
 
         String startMessage = Localizer.getInstance().getMessage("lblSubgameStart",
                 hostCard.getTranslatedName());
-        maingame.fireEvent(new GameEventSubgameStart(subgame, startMessage));
+        maingame.getPlayers().getFirst().getController().fireUiEvent(
+                new GameEventSubgameStart(subgame, startMessage));
 
         prepareAllZonesSubgame(maingame, subgame);
         subgame.getAction().startGame(null, null);
@@ -191,7 +192,8 @@ public class SubgameEffect extends SpellAbilityEffect {
 
         String endMessage = outcome.isDraw() ? Localizer.getInstance().getMessage("lblSubgameEndDraw") :
                 Localizer.getInstance().getMessage("lblSubgameEnd", sbWinners.toString(), sbLosers.toString());
-        maingame.fireEvent(new GameEventSubgameEnd(maingame, endMessage));
+        maingame.getPlayers().getFirst().getController().fireUiEvent(
+                new GameEventSubgameEnd(maingame, endMessage));
 
         // Setup maingame library
         final FCollectionView<Player> subgamePlayers = subgame.getRegisteredPlayers();

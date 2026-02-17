@@ -137,6 +137,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Subscribe
     public void receiveGameEvent(final GameEvent ev) {
         ev.visit(this);
+        matchController.handleGameEvent(ev);
     }
 
     private Void processEvent() {
