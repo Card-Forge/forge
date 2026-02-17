@@ -5,8 +5,8 @@ PT:5/5
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Attacked$ Player | Execute$ TrigCopy | TriggerDescription$ Whenever NICKNAME attacks a player, for each other opponent, create a token that's a copy of Shredder tapped and attacking that player, except it isn't legendary. Sacrifice those tokens at end of combat.
 SVar:TrigCopy:DB$ RepeatEach | RepeatPlayers$ OppNonTriggeredDefender | RepeatSubAbility$ DBCopy | ChangeZoneTable$ True | SubAbility$ DelTrig
 SVar:DBCopy:DB$ CopyPermanent | Defined$ TriggeredAttackerLKICopy | TokenAttacking$ Remembered | TokenTapped$ True | ImprintTokens$ True | NonLegendary$ True
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | Execute$ TrigExile | RememberObjects$ ImprintedLKI | TriggerDescription$ At the beginning of the next end step, exile those tokens. | SubAbility$ DBCleanup
-SVar:TrigExile:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Exile
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | Execute$ TrigSac | RememberObjects$ ImprintedLKI | TriggerDescription$ Sacrifice those tokens at end of combat. | SubAbility$ DBCleanup
+SVar:TrigSac:DB$ SacrificeAll | ValidCards$ DelayTriggerRememberedLKI
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigLoseLifeOpp | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, that player loses half their life, rounded up.
 SVar:TrigLoseLifeOpp:DB$ LoseLife | Defined$ TriggeredTarget | LifeAmount$ X
