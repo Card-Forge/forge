@@ -39,8 +39,8 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
     public SoundEffectType visit(final GameEventCardAttachment event) { return SoundEffectType.Equip; }
     @Override
     public SoundEffectType visit(final GameEventCardChangeZone event) {
-        final ZoneType from = event.from();
-        final ZoneType to = event.to();
+        final ZoneType from = event.from() != null ? event.from().zoneType() : null;
+        final ZoneType to = event.to() != null ? event.to().zoneType() : null;
         if( from == ZoneType.Library && to == ZoneType.Hand) {
             return SoundEffectType.Draw;
         }
@@ -202,12 +202,12 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
             resultSound = SoundEffectType.ScriptedEffect;
         } else {
             // Determine mana colors this land can produce using view-level info
-            CardView.CardStateView state = land.getCurrentState();
-            boolean hasW = state.origProduceManaW();
-            boolean hasU = state.origProduceManaU();
-            boolean hasB = state.origProduceManaB();
-            boolean hasR = state.origProduceManaR();
-            boolean hasG = state.origProduceManaG();
+            forge.card.ColorSet mana = land.getCurrentState().origProduceMana();
+            boolean hasW = mana != null && mana.hasWhite();
+            boolean hasU = mana != null && mana.hasBlue();
+            boolean hasB = mana != null && mana.hasBlack();
+            boolean hasR = mana != null && mana.hasRed();
+            boolean hasG = mana != null && mana.hasGreen();
 
             int colorCount = (hasW ? 1 : 0) + (hasU ? 1 : 0) + (hasB ? 1 : 0) + (hasR ? 1 : 0) + (hasG ? 1 : 0);
 

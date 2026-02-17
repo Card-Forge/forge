@@ -189,12 +189,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         return processEvent();
     }
     private Void updateZone(final Player p, final ZoneType z) {
-        if (p == null || z == null) { return null; }
-
-        synchronized (zonesUpdate) {
-            zonesUpdate.add(new PlayerZoneUpdate(PlayerView.get(p), z));
-        }
-        return processEvent();
+        return updateZone(PlayerView.get(p), z);
     }
     private Void updateZone(final PlayerView p, final ZoneType z) {
         if (p == null || z == null) { return null; }
@@ -412,9 +407,13 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventCardChangeZone event) {
         if (GuiBase.getInterface().isLibgdxPort()) {
-            final PlayerView owner = event.card() != null ? event.card().getOwner() : null;
-            updateZone(owner, event.from());
-            return updateZone(owner, event.to());
+            if (event.from() != null) {
+                updateZone(event.from().player(), event.from().zoneType());
+            }
+            if (event.to() != null) {
+                updateZone(event.to().player(), event.to().zoneType());
+            }
+            return processEvent();
         } else {
             return processEvent();
         }

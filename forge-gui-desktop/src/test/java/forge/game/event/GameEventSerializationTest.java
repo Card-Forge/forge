@@ -5,6 +5,8 @@ import com.google.common.collect.Multimap;
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
+import forge.game.zone.ZoneType;
+import forge.game.zone.ZoneView;
 import org.testng.annotations.Test;
 
 import java.io.*;
@@ -17,10 +19,6 @@ import static org.testng.Assert.*;
  * This validates the core assumption of the event refactor: events use
  * view-typed fields (CardView, PlayerView, etc.) that are Serializable,
  * so they can be sent over the network via the existing Netty pipeline.
- *
- * Note: Events using ZoneType (e.g. GameEventCardChangeZone) cannot be
- * tested here because ZoneType's static initializer requires the Localizer,
- * which is not available in unit tests without full GUI bootstrapping.
  */
 public class GameEventSerializationTest {
 
@@ -178,5 +176,52 @@ public class GameEventSerializationTest {
         GameEventMulligan deserialized = roundTrip(event);
 
         assertEquals(deserialized.player().getId(), 6);
+    }
+
+    // --- ZoneView event: zone ownership preserved across serialization ---
+
+    @Test
+    public void testGameEventCardChangeZone() throws Exception {
+        CardView card = makeCard(40, "Swords to Plowshares");
+        PlayerView controller = makePlayer(7);
+        PlayerView owner = makePlayer(8);
+        ZoneView from = new ZoneView(controller, ZoneType.Battlefield);
+        ZoneView to = new ZoneView(owner, ZoneType.Graveyard);
+
+        GameEventCardChangeZone event = new GameEventCardChangeZone(card, from, to);
+        GameEventCardChangeZone deserialized = roundTrip(event);
+
+        assertEquals(deserialized.card().getId(), 40);
+        assertEquals(deserialized.card().getName(), "Swords to Plowshares");
+        assertEquals(deserialized.from().player().getId(), 7);
+        assertEquals(deserialized.from().zoneType(), ZoneType.Battlefield);
+        assertEquals(deserialized.to().player().getId(), 8);
+        assertEquals(deserialized.to().zoneType(), ZoneType.Graveyard);
+    }
+
+    @Test
+    public void testGameEventCardChangeZoneNullZones() throws Exception {
+        CardView card = makeCard(41, "Opt");
+
+        GameEventCardChangeZone event = new GameEventCardChangeZone(card, null, null);
+        GameEventCardChangeZone deserialized = roundTrip(event);
+
+        assertEquals(deserialized.card().getId(), 41);
+        assertNull(deserialized.from());
+        assertNull(deserialized.to());
+    }
+
+    @Test
+    public void testGameEventZone() throws Exception {
+        PlayerView player = makePlayer(9);
+        CardView card = makeCard(42, "Lightning Bolt");
+
+        GameEventZone event = new GameEventZone(ZoneType.Hand, player, EventValueChangeType.Added, card, null);
+        GameEventZone deserialized = roundTrip(event);
+
+        assertEquals(deserialized.zoneType(), ZoneType.Hand);
+        assertEquals(deserialized.player().getId(), 9);
+        assertEquals(deserialized.mode(), EventValueChangeType.Added);
+        assertEquals(deserialized.card().getId(), 42);
     }
 }
