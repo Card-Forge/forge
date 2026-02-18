@@ -7030,8 +7030,8 @@
 						"checkCharacterFlag": "newGamePlus"
 					}
 				],
-				"name": "Been here, done that. Show me to the enemies. (New Game+)",
-				"text": "Okay, skipping all that hard work somebody put into dialog, the portal opens and you can leave.",
+				"name": "Time is my plaything, this is just another loop. (New Game+)",
+				"text": "Venture forth and fight again; you need no guidance veteran.",
 				"options": [
 					{
 						"action": [

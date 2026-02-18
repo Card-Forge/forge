@@ -55,7 +55,7 @@
   </object>
   <object id="57" template="../../../../common/maps/obj/enemy.tx" x="221.655" y="153.562">
    <properties>
-    <property name="enemy" value="Rurik Thar"/>
+    <property name="enemy" value="Ruric Thar"/>
     <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value=""/>

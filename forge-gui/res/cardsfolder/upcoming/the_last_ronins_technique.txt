@@ -1,0 +1,9 @@
+Name:The Last Ronin's Technique
+ManaCost:3 W
+Types:Instant
+K:Sneak:1 W
+A:SP$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE1 | TrueSubAbility$ AttackingTokens | FalseSubAbility$ NormalTokens | SpellDescription$ Create three 1/1 white Ninja Turtle Spirit creature tokens. If this spell's sneak cost was paid, they enter tapped and attacking.
+SVar:NormalTokens:DB$ Token | TokenAmount$ 3 | TokenScript$ w_1_1_ninja_turtle_spirit | TokenOwner$ You
+SVar:AttackingTokens:DB$ Token | TokenAmount$ 3 | TokenScript$ w_1_1_ninja_turtle_spirit | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True
+SVar:X:Count$ValidStack Card.Self+sneaked
+Oracle:Sneak {1}{W} (You may cast this spell for {1}{W} if you also return an unblocked attacker you control to hand during the declare blockers step.)\nCreate three 1/1 white Ninja Turtle Spirit creature tokens. If this spell's sneak cost was paid, they enter tapped and attacking.

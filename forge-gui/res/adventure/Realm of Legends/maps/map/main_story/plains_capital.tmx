@@ -273,7 +273,7 @@
 					&quot;name&quot;: &quot;I am. What do you need?&quot;,
 					&quot;text&quot;: &quot;'We were betrayed! We had a meeting with the leader of the leonin, Kemba, not long back, and after she left we found her catfolk allies had stolen our everflowing watering can!'&quot;,
 					&quot;options&quot;: [ { &quot;name&quot;: &quot;This seems like a lot of ruckus for a watering can.&quot;,
-					&quot;text&quot;: &quot;'It's enchanted, and a key part of our local agriculture! In case you haven't noticed, despite being known as plains, the surrounding lands are more desert these days. Water is scarce, so an endless supply is key to feeding the population here. Their layer is surrounded by lions, should be hard to miss once you stumble upon it. Retrieve the can and you'll have the town's favor and some gold as well.'&quot;,
+					&quot;text&quot;: &quot;'It's enchanted, and a key part of our local agriculture! In case you haven't noticed, despite being known as plains, the surrounding lands are more desert these days. Water is scarce, so an endless supply is key to feeding the population here. Their lair is surrounded by lions, should be hard to miss once you stumble upon it. Retrieve the can and you'll have the city's favor and some gold as well.'&quot;,
 					&quot;options&quot;: [ { &quot;name&quot;: &quot;Can do.&quot; } ]
 					 }]
 				},

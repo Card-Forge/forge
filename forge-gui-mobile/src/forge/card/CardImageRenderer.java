@@ -31,6 +31,7 @@ import forge.gui.card.CardDetailUtil;
 import forge.gui.card.CardDetailUtil.DetailColors;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.screens.match.MatchController;
@@ -551,63 +552,34 @@ public class CardImageRenderer {
     private static void setTextBox(Graphics g, CardView card, CardStateView state, Color[] colors, float x, float y, float w, float h, boolean onTop, boolean useCardBGTexture, boolean noText, float adventureHeaderHeight, float adventureTypeHeight, boolean drawAdventure, boolean altstate, boolean isFaceDown) {
         boolean fakeDuals = false;
         //update land bg colors
+        FSkinProp imageProp = null;
+        ColorSet origColors = null;
         if (state != null && state.isLand()) {
-            DetailColors modColors = DetailColors.WHITE;
-            if (state.isBasicLand()) {
-                if (state.isForest())
-                    modColors = DetailColors.GREEN;
-                else if (state.isIsland())
-                    modColors = DetailColors.BLUE;
-                else if (state.isMountain())
-                    modColors = DetailColors.RED;
-                else if (state.isSwamp())
-                    modColors = DetailColors.BLACK;
-                else if (state.isPlains())
-                    modColors = DetailColors.LAND;
+            origColors = state.origProduceMana();
+            DetailColors modColors = DetailColors.LAND;
+            CardTypeView type = state.getType();
+            long landTypeCount = state.getType().getLandTypes().stream().filter(CardType::isABasicLandType).count();
+            if (state.isBasicLand() && landTypeCount == 1) {
+                for (MagicColor.Color c : MagicColor.Color.values()) {
+                    String str = c.getBasicLandType();
+                    if (str != null && type.hasSubtype(str)) {
+                        modColors = CardDetailUtil.getColor(c);
+                        imageProp = FSkinProp.watermarkFromColor(c);
+                    }
+                }
             }
-            if (state.origCanProduceColoredMana() == 2) {
+            if (origColors != null && origColors.countColors() == 2) {
                 //dual colors
                 Color[] colorPairs = new Color[2];
-                //init Color
-                colorPairs[0] = fromDetailColor(DetailColors.WHITE);
-                colorPairs[1] = fromDetailColor(DetailColors.WHITE);
                 //override
                 if (state.origProduceAnyMana()) {
                     colorPairs[0] = fromDetailColor(DetailColors.MULTICOLOR);
                     colorPairs[1] = fromDetailColor(DetailColors.MULTICOLOR);
                 } else {
                     fakeDuals = true;
-                    if (state.origProduceManaW() && state.origProduceManaU()) {
-                        colorPairs[0] = fromDetailColor(DetailColors.LAND);
-                        colorPairs[1] = fromDetailColor(DetailColors.BLUE);
-                    } else if (state.origProduceManaW() && state.origProduceManaB()) {
-                        colorPairs[0] = fromDetailColor(DetailColors.LAND);
-                        colorPairs[1] = fromDetailColor(DetailColors.BLACK);
-                    } else if (state.origProduceManaW() && state.origProduceManaR()) {
-                        colorPairs[0] = fromDetailColor(DetailColors.LAND);
-                        colorPairs[1] = fromDetailColor(DetailColors.RED);
-                    } else if (state.origProduceManaW() && state.origProduceManaG()) {
-                        colorPairs[0] = fromDetailColor(DetailColors.LAND);
-                        colorPairs[1] = fromDetailColor(DetailColors.GREEN);
-                    } else if (state.origProduceManaU() && state.origProduceManaB()) {
-                        colorPairs[0] = fromDetailColor(DetailColors.BLUE);
-                        colorPairs[1] = fromDetailColor(DetailColors.BLACK);
-                    } else if (state.origProduceManaU() && state.origProduceManaR()) {
-                        colorPairs[0] = fromDetailColor(DetailColors.BLUE);
-                        colorPairs[1] = fromDetailColor(DetailColors.RED);
-                    } else if (state.origProduceManaU() && state.origProduceManaG()) {
-                        colorPairs[0] = fromDetailColor(DetailColors.BLUE);
-                        colorPairs[1] = fromDetailColor(DetailColors.GREEN);
-                    } else if (state.origProduceManaB() && state.origProduceManaR()) {
-                        colorPairs[0] = fromDetailColor(DetailColors.BLACK);
-                        colorPairs[1] = fromDetailColor(DetailColors.RED);
-                    } else if (state.origProduceManaB() && state.origProduceManaG()) {
-                        colorPairs[0] = fromDetailColor(DetailColors.BLACK);
-                        colorPairs[1] = fromDetailColor(DetailColors.GREEN);
-                    } else if (state.origProduceManaR() && state.origProduceManaG()) {
-                        colorPairs[0] = fromDetailColor(DetailColors.RED);
-                        colorPairs[1] = fromDetailColor(DetailColors.GREEN);
-                    }
+                    List<DetailColors> detailColors = CardDetailUtil.getBorderColors(origColors);
+                    colorPairs[0] = fromDetailColor(detailColors.get(0));
+                    colorPairs[1] = fromDetailColor(detailColors.get(1));
                 }
                 colorPairs = FSkinColor.tintColors(Color.WHITE, colorPairs, 0.3f);
                 float oldAlpha = g.getfloatAlphaComposite();
@@ -616,7 +588,7 @@ public class CardImageRenderer {
                 else {
                     g.setAlphaComposite(0.95f);
                     fillColorBackground(g, colorPairs, x, y, w, h);
-                    if (fakeDuals && state.countBasicLandTypes() == 2) {
+                    if (fakeDuals && landTypeCount == 2) {
                         g.setAlphaComposite(0.1f);
                         drawAlphaLines(g, x, y, w, h);
                     }
@@ -624,19 +596,10 @@ public class CardImageRenderer {
                 }
             } else {
                 //override bg color
-                if (state.origCanProduceColoredMana() > 2 || state.origProduceAnyMana()) {
+                if (state.origProduceAnyMana() || (origColors != null && origColors.countColors() > 2)) {
                     modColors = DetailColors.MULTICOLOR;
-                } else if (state.origCanProduceColoredMana() == 1) {
-                    if (state.origProduceManaW())
-                        modColors = DetailColors.LAND;
-                    else if (state.origProduceManaB())
-                        modColors = DetailColors.BLACK;
-                    else if (state.origProduceManaG())
-                        modColors = DetailColors.GREEN;
-                    else if (state.origProduceManaR())
-                        modColors = DetailColors.RED;
-                    else if (state.origProduceManaU())
-                        modColors = DetailColors.BLUE;
+                } else if (origColors != null && origColors.countColors() == 1) {
+                    modColors = CardDetailUtil.getColor(origColors.stream().findFirst().orElse(null));
                 }
                 Color bgColor = fromDetailColor(modColors);
                 bgColor = FSkinColor.tintColor(Color.WHITE, bgColor, CardRenderer.NAME_BOX_TINT);
@@ -670,24 +633,12 @@ public class CardImageRenderer {
 
         if (state != null && state.isBasicLand()) {
             //draw watermark
-            FSkinImage image = null;
-            if (state.origCanProduceColoredMana() == 1 && !state.origProduceManaC()) {
-                if (state.isPlains())
-                    image = FSkinImage.WATERMARK_W;
-                else if (state.isIsland())
-                    image = FSkinImage.WATERMARK_U;
-                else if (state.isSwamp())
-                    image = FSkinImage.WATERMARK_B;
-                else if (state.isMountain())
-                    image = FSkinImage.WATERMARK_R;
-                else if (state.isForest())
-                    image = FSkinImage.WATERMARK_G;
-            } else if (state.origProduceManaC()) {
-                image = FSkinImage.WATERMARK_C;
+            if (imageProp == null && origColors == ColorSet.C) {
+                imageProp = FSkinProp.IMG_WATERMARK_C;
             }
-            if (image != null) {
+            if (imageProp != null) {
                 float iconSize = h * 0.75f;
-                g.drawImage(image, x + (w - iconSize) / 2, y + (h - iconSize) / 2, iconSize, iconSize);
+                g.drawImage(FSkin.getImages().get(imageProp), x + (w - iconSize) / 2, y + (h - iconSize) / 2, iconSize, iconSize);
             }
         } else {
             boolean needTranslation = true;

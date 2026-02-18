@@ -99,22 +99,9 @@ public class CardDetailUtil {
             }
             else { //for 3 colors or fewer, return all colors in shard order
                 for (MagicColor.Color shard : cardColors.getOrderedColors()) {
-                    switch (shard.getColorMask()) {
-                    case MagicColor.WHITE:
-                        borderColors.add(DetailColors.WHITE);
-                        break;
-                    case MagicColor.BLUE:
-                        borderColors.add(DetailColors.BLUE);
-                        break;
-                    case MagicColor.BLACK:
-                        borderColors.add(DetailColors.BLACK);
-                        break;
-                    case MagicColor.RED:
-                        borderColors.add(DetailColors.RED);
-                        break;
-                    case MagicColor.GREEN:
-                        borderColors.add(DetailColors.GREEN);
-                        break;
+                    DetailColors colors = getColor(shard);
+                    if (colors != null) {
+                        borderColors.add(colors);
                     }
                 }
             }
@@ -124,6 +111,16 @@ public class CardDetailUtil {
             borderColors.add(DetailColors.UNKNOWN);
         }
         return borderColors;
+    }
+    public static DetailColors getColor(MagicColor.Color shard) {
+        return switch (shard) {
+            case WHITE -> DetailColors.WHITE;
+            case BLUE -> DetailColors.BLUE;
+            case BLACK -> DetailColors.BLACK;
+            case RED -> DetailColors.RED;
+            case GREEN -> DetailColors.GREEN;
+            default -> null;
+        };
     }
 
     public static String getCurrentColors(final CardStateView c) {

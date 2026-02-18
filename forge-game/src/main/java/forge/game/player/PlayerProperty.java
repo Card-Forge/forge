@@ -434,10 +434,6 @@ public class PlayerProperty {
                     return false;
                 }
             }
-        } else if (property.startsWith("LessThanHalfStartingLifeTotal")) {
-            if (player.getLife() >= (int) Math.ceil(player.getStartingLife() / 2.0)) {
-                return false;
-            }
         } else if (property.startsWith("Triggered") || property.equals("OriginalHostRemembered")) {
             if (!AbilityUtils.getDefinedPlayers(source, property, spellAbility).contains(player)) {
                 return false;

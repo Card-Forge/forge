@@ -549,7 +549,8 @@
     }]
 },
 {                                      
-"name":"WhiteEquipment",                  
+"name":"WhiteEquipment",        
+"description":"Plains Perfection",            
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"EquipmentShop",   
   "rewards": [ 
@@ -557,30 +558,34 @@
     { "type": "item","count":1, "itemName": "Tome of Cleansing"  },
     { "type": "item","count":1, "itemName": "Mask of Hypochondria"  },
     { "type": "item","count":1, "itemName": "Ring of Thune"  },
-    { "type": "item","count":1, "itemName": "Divinely Blessed Armor"  },
-    { "type": "life","count":1    }
+    { "type": "item","count":1, "itemName": "Outpost Outfit"  },
+	{ "type": "item","count":1, "itemName": "Token of Bounty"  }
     
     ]
 
 },
 {                                      
-"name":"WhiteItems",                  
+"name":"WhiteItems", 
+"description":"Plains Essentials",                   
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"ItemShop",   
   "rewards": [ 
-        { "type": "item","count":1, "itemName": "White rune"  },
+    { "type": "item","count":1, "itemName": "White rune"  },
+	{ "type": "life","count":1    },
 	{ "type": "item","count":1, "itemName": "Peddler's Shoes"  },
 	{ "type": "item","count":1, "itemName": "Sunbeam Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Mirth"  },
 	{ "type": "item","count":1, "itemName": "Jousting Lance"  },
-	{ "type": "item","count":1, "itemName": "Blessed Armor"  }
+	{ "type": "item","count":1, "itemName": "Blessed Armor"  },
+	{ "type": "item","count":1, "itemName": "Divinely Blessed Armor"  }
 
     
     ]
 
 },
 {                                      
-"name":"RedEquipment",                  
+"name":"RedEquipment",   
+"description":"The Mountain's Most Mighty",                
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"EquipmentShop",   
   "rewards": [ 
@@ -588,28 +593,32 @@
     { "type": "item","count":1, "itemName": "Tome of Fire"  },
     { "type": "item","count":1, "itemName": "Mask of Pyromania"  },
     { "type": "item","count":1, "itemName": "Ring of Valkas"  },
-    { "type": "item","count":1, "itemName": "Blazing Armor"  },
-    { "type": "life","count":1    }
+    { "type": "item","count":1, "itemName": "Highland Cloak"  },
+	{ "type": "item","count":1, "itemName": "Token of Violence"  }
     
     ]
 
 },
 {                                      
-"name":"RedItems",                  
+"name":"RedItems",  
+"description":"Mountain Essentials",                   
 "spriteAtlas":"maps/tileset/buildings.atlas",    
 "sprite":"ItemShop",   
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Red rune"  },
+	{ "type": "life","count":1    },
     { "type": "item","count":1, "itemName": "Firefrightener Shoes"  },
 	{ "type": "item","count":1, "itemName": "Pyrite Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Fury"  },
 	{ "type": "item","count":1, "itemName": "Darksteel Axe"  },
-	{ "type": "item","count":1, "itemName": "Flaming Armor"  }
+	{ "type": "item","count":1, "itemName": "Flaming Armor"  },
+	{ "type": "item","count":1, "itemName": "Blazing Armor"  }
     ]
 
 },
 {                                      
-"name":"BlueEquipment",                  
+"name":"BlueEquipment",        
+"description":"The Island's Most Interesting",          
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"EquipmentShop",   
   "rewards": [ 
@@ -617,28 +626,32 @@
     { "type": "item","count":1, "itemName": "Tome of Removal"  },
     { "type": "item","count":1, "itemName": "Mask of Compulsion"  },
     { "type": "item","count":1, "itemName": "Ring of Evos Isle"  },
-    { "type": "item","count":1, "itemName": "Grand Sage's Robes"  },
-    { "type": "life","count":1    }
+    { "type": "item","count":1, "itemName": "Seafloor Shirt"  },
+	{ "type": "item","count":1, "itemName": "Token of Investigation"  }
     
     ]
 
 },
 {                                      
-"name":"BlueItems",                  
+"name":"BlueItems",   
+"description":"Island Essentials",                
 "spriteAtlas":"maps/tileset/buildings.atlas",    
 "sprite":"ItemShop",   
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Blue rune"  },
+	{ "type": "life","count":1    },
     { "type": "item","count":1, "itemName": "Trickster's Shoes"  },
 	{ "type": "item","count":1, "itemName": "Aether Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Mischief"  },
 	{ "type": "item","count":1, "itemName": "Hoversail Glove"  },
-	{ "type": "item","count":1, "itemName": "Sage's Robes"  }
+	{ "type": "item","count":1, "itemName": "Sage's Robes"  },
+	{ "type": "item","count":1, "itemName": "Grand Sage's Robes"  }
     ]
 
 },
 {                                      
-"name":"BlackEquipment",                  
+"name":"BlackEquipment",
+"description":"The Swamp's Most Special",                   
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"EquipmentShop",   
   "rewards": [ 
@@ -646,28 +659,32 @@
     { "type": "item","count":1, "itemName": "Tome of Doom"  },
     { "type": "item","count":1, "itemName": "Mask of Mortiphobia"  },
     { "type": "item","count":1, "itemName": "Ring of Xathrid"  },
-    { "type": "item","count":1, "itemName": "Restricted Robes"  },
-    { "type": "life","count":1    }
+    { "type": "item","count":1, "itemName": "Bog Dweller Leather"  },
+	{ "type": "item","count":1, "itemName": "Token of Blood"  }
     
     ]
 
 },
 {                                      
-"name":"BlackItems",                  
+"name":"BlackItems",     
+"description":"Swamp Essentials",              
 "spriteAtlas":"maps/tileset/buildings.atlas",    
 "sprite":"ItemShop",   
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Black rune"  },
+	{ "type": "life","count":1    },
     { "type": "item","count":1, "itemName": "Witch's Shoes"  },
 	{ "type": "item","count":1, "itemName": "Necrogen Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Scorn"  },
 	{ "type": "item","count":1, "itemName": "Blight Sickle"  },
-	{ "type": "item","count":1, "itemName": "Forbidden Robes"  }
+	{ "type": "item","count":1, "itemName": "Forbidden Robes"  },
+	{ "type": "item","count":1, "itemName": "Restricted Robes"  }
     ]
 
 },
 {                                      
-"name":"GreenEquipment",                  
+"name":"GreenEquipment",      
+"description":"The Forest's Finest",                
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"EquipmentShop",   
   "rewards": [ 
@@ -675,28 +692,33 @@
     { "type": "item","count":1, "itemName": "Tome of Might"  },
     { "type": "item","count":1, "itemName": "Mask of Narcissism"  },
     { "type": "item","count":1, "itemName": "Ring of Kalonia"  },
-    { "type": "item","count":1, "itemName": "Ultra Heavy Armor"  },
-    { "type": "life","count":1   }
+    { "type": "item","count":1, "itemName": "Timberland Shawl"  },
+	{ "type": "item","count":1, "itemName": "Token of Exploration"  }
     
     ]
 
 },
 {                                      
-"name":"GreenItems",                  
+"name":"GreenItems", 
+"description":"Forest Essentials",                   
 "spriteAtlas":"maps/tileset/buildings.atlas",    
 "sprite":"ItemShop",   
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Green rune"  },
+    { "type": "life","count":1   },
     { "type": "item","count":1, "itemName": "Greenseeker's Shoes"  },
 	{ "type": "item","count":1, "itemName": "Lifespark Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Favor"  },
 	{ "type": "item","count":1, "itemName": "Brawler's Cestus"  },
-	{ "type": "item","count":1, "itemName": "Heavy Armor"  }
+	{ "type": "item","count":1, "itemName": "Heavy Armor"  },
+	{ "type": "item","count":1, "itemName": "Ultra Heavy Armor"  }
     
     ]
 
-},{
-"name":"Equipment",                  
+},
+{
+"name":"Equipment",  
+"description":"Essential Items",                  
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"EquipmentShop",   
   "rewards": [ 
@@ -706,7 +728,7 @@
     { "type": "item","count":1, "itemName": "Chromatic Sphere"  },
     { "type": "item","count":1, "itemName": "Echo Shield"  },
     { "type": "item","count":1, "itemName": "Spidersilk Glove"  },
-    { "type": "item","count":1, "itemName": "Steel Armor"  },
+    { "type": "item","count":1, "itemName": "Cloak of the Wastes"  },
     { "type": "item","count":1, "itemName": "Mithril Armor"  }
     
     ]
