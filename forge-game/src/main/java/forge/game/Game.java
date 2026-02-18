@@ -489,9 +489,6 @@ public class Game {
     public final GameLog getGameLog() {
         return gameLog;
     }
-    public final void updateGameLogForView() {
-        view.updateGameLog(gameLog);
-    }
 
     public final Zone getStackZone() {
         return stackZone;
