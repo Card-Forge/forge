@@ -126,9 +126,8 @@ public class NetworkGameEventListener {
      */
     @Subscribe
     public void handleGameOutcome(GameEventGameOutcome event) {
-        if (event.result() != null && event.result().getWinningPlayer() != null) {
-            String winner = event.result().getWinningPlayer().getPlayer().getName();
-            NetworkDebugLogger.log("%s Game outcome: winner = %s", LOG_PREFIX, winner);
+        if (event.winningPlayerName() != null) {
+            NetworkDebugLogger.log("%s Game outcome: winner = %s", LOG_PREFIX, event.winningPlayerName());
         } else {
             NetworkDebugLogger.log("%s Game outcome: draw or no winner", LOG_PREFIX);
         }

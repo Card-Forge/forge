@@ -137,8 +137,8 @@ public class GameEventListener {
      */
     @Subscribe
     public void handleGameOutcome(GameEventGameOutcome event) {
-        if (event.result() != null && event.result().getWinningPlayer() != null) {
-            winner = event.result().getWinningPlayer().getPlayer().getName();
+        if (event.winningPlayerName() != null) {
+            winner = event.winningPlayerName();
             if (verboseLogging) {
                 NetworkDebugLogger.log("%s Game outcome: winner = %s", LOG_PREFIX, winner);
             }
