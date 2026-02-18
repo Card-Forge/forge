@@ -2,14 +2,15 @@ package forge.gamemodes.match;
 
 import com.google.common.collect.*;
 import forge.game.GameView;
-import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
+import forge.game.event.GameEvent;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.player.PlayerView;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
+import forge.gui.control.FControlGameEventHandler;
 import forge.gui.control.PlaybackSpeed;
 import forge.gui.interfaces.IGuiGame;
 import forge.gui.interfaces.IMayViewCards;
@@ -19,6 +20,7 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
+import forge.player.PlayerZoneUpdate;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableTypes;
 import forge.util.FSerializableFunction;
@@ -34,7 +36,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private final Map<PlayerView, IGameController> gameControllers = Maps.newHashMap();
     private final Map<PlayerView, IGameController> originalGameControllers = Maps.newHashMap();
     private boolean gamePause = false;
-    private boolean gameSpeed = false;
     private PlaybackSpeed playbackSpeed = PlaybackSpeed.NORMAL;
     private String daytime = null;
     private boolean ignoreConcedeChain = false;
@@ -329,14 +330,13 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return gamePause;
     }
 
-    public boolean isGameFast() {
-        return gameSpeed;
-    }
-
-    public void setgamePause(boolean pause) {
+    public void setGamePause(boolean pause) {
         gamePause = pause;
     }
 
+    public PlaybackSpeed getGameSpeed() {
+        return playbackSpeed;
+    }
     public void setGameSpeed(PlaybackSpeed speed) {
         playbackSpeed = speed;
     }
@@ -913,6 +913,16 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return showConfirmDialog(message, title, yesButtonText, noButtonText, true);
     }
 
+    private FControlGameEventHandler localEventHandler;
+
+    @Override
+    public void handleGameEvent(GameEvent event) {
+        if (localEventHandler == null) {
+            localEventHandler = new FControlGameEventHandler(this);
+        }
+        localEventHandler.receiveGameEvent(event);
+    }
+
     @Override
     public void notifyStackAddition(GameEventSpellAbilityCast event) {
     }
@@ -922,7 +932,36 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
-    public void handleLandPlayed(Card land) {
+    public void handleLandPlayed(CardView land) {
+    }
+
+    @Override
+    public void updateStack() { }
+
+    @Override
+    public void updatePhase(boolean saveState) { }
+
+    @Override
+    public void updateTurn(PlayerView player) { }
+
+    @Override
+    public void updatePlayerControl() {
+    }
+
+    @Override
+    public void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate) {
+    }
+
+    @Override
+    public void updateCards(Iterable<CardView> cards) {
+    }
+
+    @Override
+    public void updateManaPool(Iterable<PlayerView> manaPoolUpdate) {
+    }
+
+    @Override
+    public void updateLives(Iterable<PlayerView> livesUpdate) {
     }
 
     @Override

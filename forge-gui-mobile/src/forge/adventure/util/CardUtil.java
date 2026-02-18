@@ -773,10 +773,17 @@ public class CardUtil {
         List<PaperCard> validCards;
         // Faster to ask the CardDB for a card name than it is to search the pool.
         if (Config.instance().getSettingData().useAllCardVariants) {
-            Predicate<PaperCard> not_restricted = card -> (!Arrays.asList(Config.instance().getConfigData().restrictedEditions).contains(card.getEdition()));
-            Predicate<PaperCard> combined_predicate = not_restricted;
+            ConfigData configData = Config.instance().getConfigData();
+            Predicate<PaperCard> editionFilter;
+            if (configData.allowedEditions != null && configData.allowedEditions.length > 0) {
+                Set<String> allowed = new HashSet<>(Arrays.asList(configData.allowedEditions));
+                editionFilter = card -> allowed.contains(card.getEdition());
+            } else {
+                editionFilter = card -> (!Arrays.asList(configData.restrictedEditions).contains(card.getEdition()));
+            }
+            Predicate<PaperCard> combined_predicate = editionFilter;
             if (Config.instance().getSettingData().excludeAlchemyVariants) {
-                combined_predicate = not_restricted.and(PaperCardPredicates.IS_REBALANCED.negate());
+                combined_predicate = editionFilter.and(PaperCardPredicates.IS_REBALANCED.negate());
             }
             validCards = FModel.getMagicDb().getCommonCards().getAllCards(cardName, combined_predicate);
         } else {
@@ -790,6 +797,16 @@ public class CardUtil {
     }
 
     public static PaperCard getCardByNameAndEdition(String cardName, String edition) {
+        ConfigData configData = Config.instance().getConfigData();
+        if (configData.allowedEditions != null && configData.allowedEditions.length > 0) {
+            if (!Arrays.asList(configData.allowedEditions).contains(edition)) {
+                return getCardByName(cardName);
+            }
+        } else if (configData.restrictedEditions != null && configData.restrictedEditions.length > 0) {
+            if (Arrays.asList(configData.restrictedEditions).contains(edition)) {
+                return getCardByName(cardName);
+            }
+        }
         List<PaperCard> cardPool = Config.instance().getSettingData().useAllCardVariants
                 ? FModel.getMagicDb().getCommonCards().getAllCards(cardName)
                 : FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt(cardName);

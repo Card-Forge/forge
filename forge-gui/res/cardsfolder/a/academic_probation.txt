@@ -6,5 +6,5 @@ SVar:DBNameCard:DB$ NameCard | Defined$ You | ValidCards$ Card.nonLand | ValidDe
 SVar:DBEffect:DB$ Effect | StaticAbilities$ CantCast | Duration$ UntilYourNextTurn
 SVar:CantCast:Mode$ CantBeCast | ValidCard$ Card.nonLand+NamedCard | Caster$ Opponent | Description$ Your opponents can't cast spells with the chosen name.
 SVar:DBPump:DB$ Effect | ValidTgts$ Permanent.nonLand | TgtPrompt$ Choose target nonland permanent | RememberObjects$ Targeted | StaticAbilities$ DBCantStatic | ForgetOnMoved$ Battlefield | IsCurse$ True | Duration$ UntilYourNextTurn | SpellDescription$ Choose target nonland permanent. Until your next turn, it can't attack or block, and its activated abilities can't be activated.
-SVar:DBCantStatic:Mode$ CantAttack,CantBlock,CantBeActivated | ValidCard$ Card.IsRemembered | Description$ Remembered can't attack or block, and its activated abilities can't be activated..
+SVar:DBCantStatic:Mode$ CantAttack,CantBlock,CantBeActivated | ValidCard$ Card.IsRemembered | Description$ Remembered permanent can't attack or block, and its activated abilities can't be activated.
 Oracle:Choose one —\n• Choose a nonland card name. Opponents can't cast spells with the chosen name until your next turn.\n• Choose target nonland permanent. Until your next turn, it can't attack or block, and its activated abilities can't be activated.

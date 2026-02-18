@@ -34,6 +34,7 @@ import forge.game.cost.CostEnlist;
 import forge.game.cost.CostExert;
 import forge.game.event.*;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 
@@ -175,7 +176,7 @@ public class PhaseHandler implements java.io.Serializable {
                 turn++;
                 extraPhases.clear();
                 game.updateTurnForView();
-                game.fireEvent(new GameEventTurnBegan(playerTurn, turn));
+                game.fireEvent(new GameEventTurnBegan(PlayerView.get(playerTurn), turn));
 
                 // Tokens starting game in play should suffer from Sum. Sickness
                 for (final Card c : playerTurn.getCardsIn(ZoneType.Battlefield, false)) {
@@ -497,7 +498,7 @@ public class PhaseHandler implements java.io.Serializable {
                 if (inCombat()) {
                     List<Card> attackers = combat.getAttackers();
                     List<Card> blockers = combat.getAllBlockers();
-                    eventEndCombat = new GameEventCombatEnded(attackers, blockers);
+                    eventEndCombat = GameEventCombatEnded.fromCards(attackers, blockers);
                 }
                 endCombat();
 
@@ -1045,7 +1046,7 @@ public class PhaseHandler implements java.io.Serializable {
                 sw.start();
             }
 
-            game.fireEvent(new GameEventPlayerPriority(playerTurn, phase, getPriorityPlayer()));
+            game.fireEvent(new GameEventPlayerPriority(PlayerView.get(playerTurn), phase, PlayerView.get(getPriorityPlayer())));
             List<SpellAbility> chosenSa = null;
 
             int loopCount = 0;
@@ -1155,7 +1156,7 @@ public class PhaseHandler implements java.io.Serializable {
         if (game.getAge() == GameStage.RestartedByKarn) {
             setPhase(null);
             game.updatePhaseForView();
-            game.fireEvent(new GameEventGameRestarted(playerTurn));
+            game.fireEvent(new GameEventGameRestarted(PlayerView.get(playerTurn)));
             return;
         }
 
