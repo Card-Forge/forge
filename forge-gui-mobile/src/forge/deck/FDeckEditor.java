@@ -98,7 +98,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         public DeckSection[] getExtraSections() {
             if(getGameType() != null)
-                return getGameType().getSupplimentalDeckSections().toArray(new DeckSection[0]);
+                return getGameType().getSupplementalDeckSections().toArray(new DeckSection[0]);
             return new DeckSection[]{DeckSection.Attractions, DeckSection.Contraptions};
         }
 
@@ -311,7 +311,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         @Override
         public DeckSection[] getExtraSections() {
-            return gameType.getSupplimentalDeckSections().toArray(new DeckSection[0]);
+            return gameType.getSupplementalDeckSections().toArray(new DeckSection[0]);
         }
 
         @Override

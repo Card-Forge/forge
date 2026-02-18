@@ -17,31 +17,31 @@ import forge.util.Localizer;
 
 public enum GameType {
 
-    Sealed              (DeckFormat.Limited, true, true, true, "lblSealed", ""),
-    Draft               (DeckFormat.Limited, true, true, true, "lblDraft", ""),
-    Winston             (DeckFormat.Limited, true, true, true, "lblWinston", ""),
-    Gauntlet            (DeckFormat.Constructed, false, true, true, "lblGauntlet", ""),
-    Tournament          (DeckFormat.Constructed, false, true, true, "lblTournament", ""),
-    CommanderGauntlet   (DeckFormat.Commander, false, false, false, "lblCommanderGauntlet", "lblCommanderDesc"),
-    Quest               (DeckFormat.QuestDeck, true, true, false, "lblQuest", ""),
-    QuestCommander      (DeckFormat.Commander, true, true, false, "lblQuestCommander", ""),
-    QuestDraft          (DeckFormat.Limited, true, true, true, "lblQuestDraft", ""),
-    PlanarConquest      (DeckFormat.PlanarConquest, true, false, false, "lblPlanarConquest", ""),
-    Adventure           (DeckFormat.Adventure, true, false, false, "lblAdventure", ""),
-    AdventureEvent      (DeckFormat.Limited, true, true, true, "lblAdventure", ""),
-    Puzzle              (DeckFormat.Puzzle, false, false, false, "lblPuzzle", "lblPuzzleDesc"),
-    Constructed         (DeckFormat.Constructed, false, true, true, "lblConstructed", ""),
-    DeckManager         (DeckFormat.Constructed, false, true, true, "lblDeckManager", ""),
-    Vanguard            (DeckFormat.Vanguard, true, true, true, "lblVanguard", "lblVanguardDesc"),
-    Commander           (DeckFormat.Commander, false, false, false, "lblCommander", "lblCommanderDesc"),
-    Oathbreaker         (DeckFormat.Oathbreaker, false, false, false, "lblOathbreaker", "lblOathbreakerDesc"),
-    TinyLeaders         (DeckFormat.TinyLeaders, false, false, false, "lblTinyLeaders", "lblTinyLeadersDesc"),
-    Brawl               (DeckFormat.Brawl, false, false, false, "lblBrawl", "lblBrawlDesc"),
-    Planeswalker        (DeckFormat.PlanarConquest, false, false, true, "lblPlaneswalker", "lblPlaneswalkerDesc"),
-    Planechase          (DeckFormat.Planechase, false, false, true, "lblPlanechase", "lblPlanechaseDesc"),
-    Archenemy           (DeckFormat.Archenemy, false, false, true, "lblArchenemy", "lblArchenemyDesc"),
-    ArchenemyRumble     (DeckFormat.Archenemy, false, false, true, "lblArchenemyRumble", "lblArchenemyRumbleDesc"),
-    MomirBasic          (DeckFormat.Constructed, false, false, false, "lblMomirBasic", "lblMomirBasicDesc", player -> {
+    Sealed              (DeckFormat.Limited, true, true, false, false, true, "lblSealed", ""),
+    Draft               (DeckFormat.Limited, true, true, false, false, true, "lblDraft", ""),
+    Winston             (DeckFormat.Limited, true, true, false, false, true, "lblWinston", ""),
+    Gauntlet            (DeckFormat.Constructed, false, true, false, false, true, "lblGauntlet", ""),
+    Tournament          (DeckFormat.Constructed, false, true, false, false, true, "lblTournament", ""),
+    CommanderGauntlet   (DeckFormat.Commander, false, false, false, true, false, "lblCommanderGauntlet", "lblCommanderDesc"),
+    Quest               (DeckFormat.QuestDeck, true, true, false, false, false, "lblQuest", ""),
+    QuestCommander      (DeckFormat.Commander, true, true, false, true, false, "lblQuestCommander", ""),
+    QuestDraft          (DeckFormat.Limited, true, true, false, false, true, "lblQuestDraft", ""),
+    PlanarConquest      (DeckFormat.PlanarConquest, true, false, false, false, false, "lblPlanarConquest", ""),
+    Adventure           (DeckFormat.Adventure, true, false, false, false, false, "lblAdventure", ""),
+    AdventureEvent      (DeckFormat.Limited, true, true, false, false, true, "lblAdventure", ""),
+    Puzzle              (DeckFormat.Puzzle, false, false, false, false, false, "lblPuzzle", "lblPuzzleDesc"),
+    Constructed         (DeckFormat.Constructed, false, true, false, false, true, "lblConstructed", ""),
+    DeckManager         (DeckFormat.Constructed, false, true, false, false, true, "lblDeckManager", ""),
+    Vanguard            (DeckFormat.Vanguard, true, true, false, false, true, "lblVanguard", "lblVanguardDesc"),
+    Commander           (DeckFormat.Commander, false, false, false, true, false, "lblCommander", "lblCommanderDesc"),
+    Oathbreaker         (DeckFormat.Oathbreaker, false, false, false, true, false, "lblOathbreaker", "lblOathbreakerDesc"),
+    TinyLeaders         (DeckFormat.TinyLeaders, false, false, false, true, false, "lblTinyLeaders", "lblTinyLeadersDesc"),
+    Brawl               (DeckFormat.Brawl, false, false, false, true, false, "lblBrawl", "lblBrawlDesc"),
+    Planeswalker        (DeckFormat.PlanarConquest, false, false, false, false, true, "lblPlaneswalker", "lblPlaneswalkerDesc"),
+    Planechase          (DeckFormat.Planechase, false, false, false, false, true, "lblPlanechase", "lblPlanechaseDesc"),
+    Archenemy           (DeckFormat.Archenemy, false, false, false, false, true, "lblArchenemy", "lblArchenemyDesc"),
+    ArchenemyRumble     (DeckFormat.Archenemy, false, false, false, false, true, "lblArchenemyRumble", "lblArchenemyRumbleDesc"),
+    MomirBasic          (DeckFormat.Constructed, false, false, true, false, false, "lblMomirBasic", "lblMomirBasicDesc", player -> {
         Deck deck = new Deck();
         CardPool mainDeck = deck.getMain();
         String setcode = Aggregates.random(StaticData.instance().getBlockLands());
@@ -54,7 +54,7 @@ public enum GameType {
                 .getCard("Momir Vig, Simic Visionary Avatar"), 1);
         return deck;
     }),
-    MoJhoSto      (DeckFormat.Constructed, false, false, false, "lblMoJhoSto", "lblMoJhoStoDesc", player -> {
+    MoJhoSto      (DeckFormat.Constructed, false, false, true, false, false, "lblMoJhoSto", "lblMoJhoStoDesc", player -> {
         Deck deck = new Deck();
         CardPool mainDeck = deck.getMain();
         String setcode = Aggregates.random(StaticData.instance().getBlockLands());
@@ -75,14 +75,14 @@ public enum GameType {
     private static final EnumSet<GameType> DRAFT_FORMATS = EnumSet.of(Draft, QuestDraft, AdventureEvent);
 
     private final DeckFormat deckFormat;
-    private final boolean isCardPoolLimited, canSideboard, addWonCardsMidGame;
+    private final boolean isCardPoolLimited, canSideboard, addWonCardsMidGame, standalone, hasCommander;
     private final String name, englishName, description;
     private final Function<RegisteredPlayer, Deck> deckAutoGenerator;
 
-    GameType(DeckFormat deckFormat0, boolean isCardPoolLimited0, boolean canSideboard0, boolean addWonCardsMidgame0, String name0, String description0) {
-        this(deckFormat0, isCardPoolLimited0, canSideboard0, addWonCardsMidgame0, name0, description0, null);
+    GameType(DeckFormat deckFormat0, boolean isCardPoolLimited0, boolean canSideboard0, boolean standalone, boolean hasCommander, boolean addWonCardsMidgame0, String name0, String description0) {
+        this(deckFormat0, isCardPoolLimited0, canSideboard0, standalone, hasCommander, addWonCardsMidgame0, name0, description0, null);
     }
-    GameType(DeckFormat deckFormat0, boolean isCardPoolLimited0, boolean canSideboard0, boolean addWonCardsMidgame0, String name0, String description0, Function<RegisteredPlayer, Deck> deckAutoGenerator0) {
+    GameType(DeckFormat deckFormat0, boolean isCardPoolLimited0, boolean canSideboard0, boolean standalone, boolean hasCommander, boolean addWonCardsMidgame0, String name0, String description0, Function<RegisteredPlayer, Deck> deckAutoGenerator0) {
         final Localizer localizer = forge.util.Localizer.getInstance();
         deckFormat = deckFormat0;
         isCardPoolLimited = isCardPoolLimited0;
@@ -95,6 +95,8 @@ public enum GameType {
         }
         description = description0;
         deckAutoGenerator = deckAutoGenerator0;
+        this.standalone = standalone;
+        this.hasCommander = hasCommander;
     }
 
     /**
@@ -155,7 +157,7 @@ public enum GameType {
     /**
      * @return the set of variant card sections that decks for this game type can include.
      */
-    public EnumSet<DeckSection> getSupplimentalDeckSections() {
+    public EnumSet<DeckSection> getSupplementalDeckSections() {
         if(!deckFormat.getPrimaryDeckSections().contains(DeckSection.Main))
             return EnumSet.noneOf(DeckSection.class); //Already an extra deck, like a dedicated Scheme or Planar deck.
         if(deckFormat == DeckFormat.Limited)
@@ -179,5 +181,13 @@ public enum GameType {
             }
         }
         return result;
+    }
+
+    public boolean isStandalone() {
+        return standalone;
+    }
+
+    public boolean isCommander() {
+        return hasCommander;
     }
 }

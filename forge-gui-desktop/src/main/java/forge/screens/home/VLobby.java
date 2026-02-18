@@ -80,11 +80,14 @@ public class VLobby implements ILobbyView {
     private final JPanel gamesInMatchFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
     private final JPanel constructedFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2")); // Main content frame
 
+    // Specialty frame and variables
+    private final FPanel specialtyPanel = new FPanel(new MigLayout("insets 10, gapx 10"));
+    private final ImmutableList<VariantCheckBox> specialtyBoxesLocal;
+    private final ImmutableList<VariantCheckBox> specialtyBoxesNetwork;
+
     // Variants frame and variables
     private final FPanel variantsPanel = new FPanel(new MigLayout("insets 10, gapx 10"));
     private final VariantCheckBox vntVanguard = new VariantCheckBox(GameType.Vanguard);
-    private final VariantCheckBox vntMomirBasic = new VariantCheckBox(GameType.MomirBasic);
-    private final VariantCheckBox vntMoJhoSto = new VariantCheckBox(GameType.MoJhoSto);
     private final VariantCheckBox vntCommander = new VariantCheckBox(GameType.Commander);
     private final VariantCheckBox vntOathbreaker = new VariantCheckBox(GameType.Oathbreaker);
     private final VariantCheckBox vntTinyLeaders = new VariantCheckBox(GameType.TinyLeaders);
@@ -92,10 +95,8 @@ public class VLobby implements ILobbyView {
     private final VariantCheckBox vntPlanechase = new VariantCheckBox(GameType.Planechase);
     private final VariantCheckBox vntArchenemy = new VariantCheckBox(GameType.Archenemy);
     private final VariantCheckBox vntArchenemyRumble = new VariantCheckBox(GameType.ArchenemyRumble);
-    private final ImmutableList<VariantCheckBox> vntBoxesLocal  =
-            ImmutableList.of(vntVanguard, vntMomirBasic, vntMoJhoSto, vntCommander, vntOathbreaker, vntBrawl, vntTinyLeaders, vntPlanechase, vntArchenemy, vntArchenemyRumble);
-    private final ImmutableList<VariantCheckBox> vntBoxesNetwork =
-            ImmutableList.of(vntVanguard, vntMomirBasic, vntMoJhoSto, vntCommander, vntOathbreaker, vntBrawl, vntTinyLeaders /*, vntPlanechase, vntArchenemy, vntArchenemyRumble */);
+    private ImmutableList<VariantCheckBox> vntBoxesLocal;
+    private ImmutableList<VariantCheckBox> vntBoxesNetwork;
 
     // Player frame elements
     private final JPanel playersFrame = new JPanel(new MigLayout("insets 0, gap 0 5, wrap, hidemode 3"));
@@ -131,24 +132,37 @@ public class VLobby implements ILobbyView {
     // CTR
     public VLobby(final GameLobby lobby) {
         this.lobby = lobby;
-
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-
         ////////////////////////////////////////////////////////
-        //////////////////// Variants Panel ////////////////////
-        ImmutableList<VariantCheckBox> vntBoxes = null;
-        if (lobby.isAllowNetworking()) {
-            vntBoxes = vntBoxesNetwork;
-        } else {
-            vntBoxes = vntBoxesLocal;
+        //////////////////// Specialty Panel ////////////////////
+        List<VariantCheckBox> specialtyList = new ArrayList<>();
+        List<VariantCheckBox> variantList = new ArrayList<>();
+        // Create all VariantCheckBoxes and sort into specialty/variant
+        for (GameType gt : GameType.values()) {
+            if (gt.isStandalone()) {
+                specialtyList.add(new VariantCheckBox(gt));
+            } else if (gt == GameType.Vanguard || gt == GameType.Commander || gt == GameType.Oathbreaker || gt == GameType.TinyLeaders || gt == GameType.Brawl || gt == GameType.Planechase || gt == GameType.Archenemy || gt == GameType.ArchenemyRumble) {
+                variantList.add(new VariantCheckBox(gt));
+            }
         }
-
+        specialtyBoxesLocal = ImmutableList.copyOf(specialtyList);
+        specialtyBoxesNetwork = ImmutableList.copyOf(specialtyList); // Adjust if networked specialties differ
+        vntBoxesLocal = ImmutableList.copyOf(variantList);
+        vntBoxesNetwork = ImmutableList.copyOf(variantList); // Adjust if networked variants differ
+        specialtyPanel.setOpaque(false);
+        specialtyPanel.add(newLabel(localizer.getMessage("lblSpecialty")));
+        for (final VariantCheckBox vcb : specialtyBoxesLocal) {
+            specialtyPanel.add(vcb);
+        }
         variantsPanel.setOpaque(false);
         variantsPanel.add(newLabel(localizer.getMessage("lblVariants")));
-        for (final VariantCheckBox vcb : vntBoxes) {
+        for (final VariantCheckBox vcb : vntBoxesLocal) {
             variantsPanel.add(vcb);
         }
-
+        constructedFrame.add(new FScrollPane(specialtyPanel, false, true,
+                ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED),
+                "w 100%, h 45px!, gapbottom 0px, spanx 2, wrap");
         constructedFrame.add(new FScrollPane(variantsPanel, false, true,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED),
@@ -246,15 +260,21 @@ public class VLobby implements ILobbyView {
 
         final boolean allowNetworking = lobby.isAllowNetworking();
 
-        ImmutableList<VariantCheckBox> vntBoxes = null;
-        if (allowNetworking) {
-            vntBoxes = vntBoxesNetwork;
-        } else {
-            vntBoxes = vntBoxesLocal;
+        ImmutableList<VariantCheckBox> vntBoxes = allowNetworking ? vntBoxesNetwork : vntBoxesLocal;
+        ImmutableList<VariantCheckBox> specialtyBoxes = allowNetworking ? specialtyBoxesNetwork : specialtyBoxesLocal;
+        boolean specialtySelected = false;
+        for (final VariantCheckBox vcb : specialtyBoxes) {
+            if (vcb.isSelected()) specialtySelected = true;
+        }
+        boolean variantSelected = false;
+        for (final VariantCheckBox vcb : vntBoxes) {
+            if (vcb.isSelected()) variantSelected = true;
+        }
+        for (final VariantCheckBox vcb : specialtyBoxes) {
+            vcb.setEnabled(lobby.hasControl() && !variantSelected);
         }
         for (final VariantCheckBox vcb : vntBoxes) {
-            vcb.setSelected(hasVariant(vcb.variant));
-            vcb.setEnabled(lobby.hasControl());
+            vcb.setEnabled(lobby.hasControl() && !specialtySelected);
         }
 
         for (int i = 0; i < MAX_PLAYERS; i++) {
@@ -336,7 +356,14 @@ public class VLobby implements ILobbyView {
     }
 
     void setReady(final int index, final boolean ready) {
-        if (ready && decks[index] == null && !vntMomirBasic.isSelected() && !vntMoJhoSto.isSelected()) {
+        boolean specialtySelected = false;
+        for (VariantCheckBox vcb : specialtyBoxesLocal) {
+            if (vcb.isSelected()) {
+                specialtySelected = true;
+                break;
+            }
+        }
+        if (ready && decks[index] == null && !specialtySelected) {
             SOptionPane.showErrorDialog("Select a deck before readying!");
             update(false);
             return;
@@ -772,6 +799,16 @@ public class VLobby implements ILobbyView {
                     lobby.applyVariant(variantType);
                 } else {
                     lobby.removeVariant(variantType);
+                }
+                // Enforce exclusivity: deselect all in the other group
+                if (variantType.isStandalone()) {
+                    for (VariantCheckBox vcb : vntBoxesLocal) {
+                        vcb.setSelected(false);
+                    }
+                } else {
+                    for (VariantCheckBox vcb : specialtyBoxesLocal) {
+                        vcb.setSelected(false);
+                    }
                 }
                 VLobby.this.update(false);
             });
