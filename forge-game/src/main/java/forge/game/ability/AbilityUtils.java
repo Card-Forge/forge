@@ -3330,9 +3330,17 @@ public class AbilityUtils {
             int totPlayer = 0;
             String[] parts = l[0].split(" ", 2);
             boolean def = parts[0].equals("Condition");
-            String comparator = !def ? parts[0].substring(9, 11) : "GE";
-            int y = !def ? calculateAmount(source, parts[0].substring(11), ctb) : 1;
+            String comparator = def ? "GE" : parts[0].substring(9, 11);
+            String calc = def ? "1" : parts[0].substring(11);
+            Integer y = null;
+            if (!ctb.getSVar(calc).contains("RelativePlayerUID")) {
+                y = calculateAmount(source, calc, ctb);
+            }
             for (Player p : players) {
+                if (y == null) {
+                    calc = ctb.getSVar(calc).replaceAll("RelativePlayerUID", String.valueOf(p.getId()));
+                    y = calculateAmount(source, calc, ctb);
+                }
                 int x = playerXProperty(p, parts[1], source, ctb);
                 if (Expressions.compare(x, comparator, y)) {
                     totPlayer++;

@@ -310,11 +310,6 @@ public class EffectAi extends SpellAbilityAi {
                     return ai.getCreaturesInPlay().size() >= i ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else if (logic.equals("ReplaySpell")) {
-                CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Graveyard), sa.getTargetRestrictions().getValidTgts(), ai, sa.getHostCard(), sa);
-                if (!ComputerUtil.targetPlayableSpellCard(ai, list, sa, false, false)) {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-                }
             } else if (logic.equals("PeaceTalks")) {
                 Player nextPlayer = game.getNextPlayerAfter(ai);
 
@@ -417,55 +412,48 @@ public class EffectAi extends SpellAbilityAi {
                 if ("True".equalsIgnoreCase(params.getOrDefault("MayPlay", "False"))
                         && "Graveyard".equalsIgnoreCase(params.getOrDefault("AffectedZone", ""))) {
                     hasMayPlayFromGrave = true;
-
+                    break;
                 }
             }
 
             if (hasMayPlayFromGrave) {
+                List<Card> targetables = CardUtil.getValidCardsToTarget(sa);
+
                 if (!phase.isPlayerTurn(ai) && phase.is(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                     Combat combat = game.getCombat();
-                    if (combat != null) {
-                        CardCollection attackersVsAi = combat.getAttackersOf(ai);
-                        if (!attackersVsAi.isEmpty()) {
-                            CardCollection list = CardLists.getValidCards(ai.getGame().getCardsIn(ZoneType.Graveyard),
-                                    sa.getTargetRestrictions().getValidTgts(), ai, sa.getHostCard(), sa);
-                            CardCollection flashCreatures = CardLists.filter(list, c ->
-                                    c.isCreature() && (c.hasKeyword(Keyword.FLASH) || c.isInstant()));
+                    CardCollection attackersVsAi = combat.getAttackersOf(ai);
+                    if (!attackersVsAi.isEmpty()) {
+                        CardCollection flashCreatures = CardLists.filter(targetables, c -> c.isCreature() && c.hasKeyword(Keyword.FLASH));
 
-                            Card bestBlocker = null;
-                            for (Card attacker : attackersVsAi) {
-                                for (Card blocker : flashCreatures) {
-                                    SpellAbility castSa = blocker.getFirstSpellAbility();
-                                    if (castSa == null || !ComputerUtilMana.canPayManaCost(castSa, ai, 0, false)) {
-                                        continue;
-                                    }
-
-                                    boolean blockerDies = ComputerUtilCombat.canDestroyBlocker(ai, blocker, attacker, combat, false);
-                                    boolean attackerDies = ComputerUtilCombat.canDestroyAttacker(ai, attacker, blocker, combat, false);
-
-                                    if (attackerDies || !blockerDies) {
-                                        bestBlocker = blocker;
-                                        break;
-                                    }
+                        Card bestBlocker = null;
+                        for (Card attacker : attackersVsAi) {
+                            for (Card blocker : flashCreatures) {
+                                SpellAbility castSa = blocker.getFirstSpellAbility();
+                                if (castSa == null || !ComputerUtilMana.canPayManaCost(castSa, ai, sa.getPayCosts().getTotalMana().getCMC(), false)) {
+                                    continue;
                                 }
-                                if (bestBlocker != null) break;
-                            }
 
-                            if (bestBlocker != null) {
-                                sa.resetTargets();
-                                sa.getTargets().add(bestBlocker);
-                                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                                boolean blockerDies = ComputerUtilCombat.canDestroyBlocker(ai, blocker, attacker, combat, false);
+                                boolean attackerDies = ComputerUtilCombat.canDestroyAttacker(ai, attacker, blocker, combat, false);
+
+                                if (attackerDies || !blockerDies) {
+                                    bestBlocker = blocker;
+                                    break;
+                                }
                             }
-                            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                            if (bestBlocker != null) break;
                         }
+
+                        if (bestBlocker != null) {
+                            sa.resetTargets();
+                            sa.getTargets().add(bestBlocker);
+                            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                        }
+                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                     }
                 }
 
-                CardCollection list = CardLists.getValidCards(
-                        ai.getGame().getCardsIn(ZoneType.Graveyard),
-                        sa.getTargetRestrictions().getValidTgts(),
-                        ai, sa.getHostCard(), sa);
-                if (!ComputerUtil.targetPlayableSpellCard(ai, list, sa, false, false)) {
+                if (!ComputerUtil.targetPlayableSpellCard(ai, targetables, sa, false, false)) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
