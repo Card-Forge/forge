@@ -1,0 +1,7 @@
+Name:Raphael, Tough Turtle
+ManaCost:1 R
+Types:Legendary Creature Mutant Ninja Turtle
+PT:1/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+Other | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDamage | TriggerDescription$ Alliance — Whenever another creature you control enters, NICKNAME deals 1 damage to target opponent.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Opponent | NumDmg$ 1
+Oracle:Alliance — Whenever another creature you control enters, Raphael deals 1 damage to target opponent.
