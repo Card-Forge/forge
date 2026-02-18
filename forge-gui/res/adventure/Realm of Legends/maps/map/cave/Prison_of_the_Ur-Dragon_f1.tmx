@@ -52,7 +52,7 @@
 
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Haven of the Spirit Dragon|DTK&quot;, &quot;Maelstrom of the Spirit Dragon|TDM&quot;, &quot;Opal Palace|C13&quot;, &quot;Call the Spirit Dragons|TDM&quot;, &quot;Dragon Tempest|DTK&quot;, &quot;Dragon's Hoard|M19&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Maelstrom of the Spirit Dragon|TDM&quot;, &quot;Opal Palace|C13&quot;, &quot;Call the Spirit Dragons|TDM&quot;, &quot;Dragon Tempest|DTK&quot;]}"/>
     <property name="enemy" value="The Ur-Dragon"/>
     <property name="speedModifier" type="float" value="60"/>
     <property name="threatRange" type="int" value="80"/>

@@ -5,8 +5,8 @@ import forge.ai.GameState;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.GameView;
-import forge.game.card.Card;
 import forge.game.card.CardView;
+import forge.game.event.GameEvent;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.phase.PhaseType;
@@ -82,7 +82,9 @@ public interface IGuiGame {
 
     void notifyStackRemoval(final GameEventSpellRemovedFromStack event);
 
-    void handleLandPlayed(Card land);
+    void handleLandPlayed(CardView land);
+
+    void handleGameEvent(GameEvent event);
 
     Iterable<PlayerZoneUpdate> tempShowZones(PlayerView controller, Iterable<PlayerZoneUpdate> zonesToUpdate);
 
@@ -241,8 +243,9 @@ public interface IGuiGame {
 
     boolean isGamePaused();
 
-    void setgamePause(boolean pause);
+    void setGamePause(boolean pause);
 
+    PlaybackSpeed getGameSpeed();
     void setGameSpeed(PlaybackSpeed gameSpeed);
 
     String getDayTime();

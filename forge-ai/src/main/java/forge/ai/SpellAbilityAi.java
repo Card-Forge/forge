@@ -3,6 +3,7 @@ package forge.ai;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -36,6 +37,19 @@ import forge.util.collect.FCollectionView;
  * The three main methods are canPlayAI(), chkAIDrawback and doTriggerAINoCost.
  */
 public abstract class SpellAbilityAi {
+
+    public Predicate<Card> CREATURE_OR_TAP_ABILITY = c -> {
+        if (c.isCreature()) {
+            return true;
+        }
+
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (sa.isAbility() && sa.getPayCosts().hasTapCost()) {
+                return true;
+            }
+        }
+        return false;
+    };
 
     public final AiAbilityDecision canPlayWithSubs(final Player aiPlayer, final SpellAbility sa) {
         AiAbilityDecision decision = canPlay(aiPlayer, sa);

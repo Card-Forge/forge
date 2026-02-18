@@ -5,6 +5,7 @@ import forge.ai.GameState;
 import forge.deck.CardPool;
 import forge.game.Game;
 import forge.game.GameEntityView;
+import forge.game.event.GameEvent;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.phase.PhaseHandler;
@@ -362,24 +363,6 @@ public class NetGuiGame extends NetworkGuiGame {
     public void alertUser() { send(ProtocolMethod.alertUser); }
 
     @Override
-    public void updatePhase(boolean saveState) {
-        updateGameView();
-        send(ProtocolMethod.updatePhase, saveState);
-    }
-
-    @Override
-    public void updateTurn(final PlayerView player) {
-        updateGameView();
-        send(ProtocolMethod.updateTurn, player);
-    }
-
-    @Override
-    public void updatePlayerControl() {
-        updateGameView();
-        send(ProtocolMethod.updatePlayerControl);
-    }
-
-    @Override
     public void enableOverlay() {
         send(ProtocolMethod.enableOverlay);
     }
@@ -405,18 +388,6 @@ public class NetGuiGame extends NetworkGuiGame {
     }
 
     @Override
-    public void updateStack() {
-        updateGameView();
-        send(ProtocolMethod.updateStack);
-    }
-
-    @Override
-    public void updateZones(final Iterable<PlayerZoneUpdate> zonesToUpdate) {
-        updateGameView();
-        send(ProtocolMethod.updateZones, zonesToUpdate);
-    }
-
-    @Override
     public Iterable<PlayerZoneUpdate> tempShowZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
         updateGameView();
         return sendAndWait(ProtocolMethod.tempShowZones, controller, zonesToUpdate);
@@ -426,24 +397,6 @@ public class NetGuiGame extends NetworkGuiGame {
     public void hideZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
         updateGameView();
         send(ProtocolMethod.hideZones, controller, zonesToUpdate);
-    }
-
-    @Override
-    public void updateCards(final Iterable<CardView> cards) {
-        updateGameView();
-        send(ProtocolMethod.updateCards, cards);
-    }
-
-    @Override
-    public void updateManaPool(final Iterable<PlayerView> manaPoolUpdate) {
-        updateGameView();
-        send(ProtocolMethod.updateManaPool, manaPoolUpdate);
-    }
-
-    @Override
-    public void updateLives(final Iterable<PlayerView> livesUpdate) {
-        updateGameView();
-        send(ProtocolMethod.updateLives, livesUpdate);
     }
 
     @Override
@@ -457,11 +410,7 @@ public class NetGuiGame extends NetworkGuiGame {
         send(ProtocolMethod.setPanelSelection, hostCard);
     }
 
-    @Override
-    public void refreshField() {
-        updateGameView();
-        send(ProtocolMethod.refreshField);
-    }
+
 
     @Override
     public GameState getGamestate() {
@@ -597,6 +546,12 @@ public class NetGuiGame extends NetworkGuiGame {
     @Override
     public void showWaitingTimer(final PlayerView forPlayer, final String waitingForPlayerName) {
         send(ProtocolMethod.showWaitingTimer, forPlayer, waitingForPlayerName);
+    }
+
+    @Override
+    public void handleGameEvent(GameEvent event) {
+        updateGameView();
+        send(ProtocolMethod.handleGameEvent, event);
     }
 
     @Override

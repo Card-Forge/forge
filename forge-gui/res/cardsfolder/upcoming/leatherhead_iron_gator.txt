@@ -1,0 +1,11 @@
+Name:Leatherhead, Iron Gator
+ManaCost:5 G G
+Types:Legendary Creature Crocodile Mutant Rogue
+PT:5/5
+K:Trample
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounterAll | TriggerDescription$ Whenever NICKNAME attacks, put two +1/+1 counters on each creature you control.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 2
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters
+Oracle:Trample, haste\nWhenever Leatherhead attacks, put two +1/+1 counters on each creature you control.

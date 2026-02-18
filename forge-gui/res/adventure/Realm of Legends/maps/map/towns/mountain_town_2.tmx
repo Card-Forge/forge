@@ -54,7 +54,8 @@
   </object>
   <object id="56" template="../../../../common/maps/obj/shop.tx" x="128.92" y="179.393">
    <properties>
-    <property name="shopList" value="Legend4Red"/>
+    <property name="commonShopList" value="Legend4Red"/>
+    <property name="shopList" value=""/>
    </properties>
   </object>
   <object id="59" template="../../../../common/maps/obj/shop.tx" x="111.5" y="116">
