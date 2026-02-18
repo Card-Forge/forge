@@ -11267,14 +11267,7 @@
 		"name": "Dungeon Master",
 		"description": "There are powerful creatures lurking in the hidden lairs of Shandalar. Prove your worth by clearing them all.",
 		"offerDialog": {},
-		"prologue": {
-			"text": "Tales of powerful creatures dwelling in hidden lairs across Shandalar have reached your ears. Fungal horrors, mad artificers, vampire lords, and worse await those brave enough to seek them out. Perhaps clearing these threats would be a worthy challenge.",
-			"options": [
-				{
-					"name": "(Begin the hunt)"
-				}
-			]
-		},
+		"prologue": {},
 		"epilogue": {},
 		"failureDialog": {},
 		"declinedDialog": {},
