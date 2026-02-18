@@ -218,9 +218,9 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         needPhaseUpdate = true;
         needSaveState = !"dev".equals(ev.phaseDesc());
 
-        boolean refreshField = ev.hasTokens()
+        boolean refreshField = ev.playerTurn().getCards(ZoneType.Battlefield).anyMatch(CardView::isToken)
                 || (FModel.getPreferences().getPrefBoolean(FPref.UI_STACK_CREATURES)
-                        && ev.hasCreatures());
+                        && ev.playerTurn().getCards(ZoneType.Battlefield).anyMatch(c -> c.getCurrentState().isCreature()));
         if (refreshField) {
             updateZone(ev.playerTurn(), ZoneType.Battlefield);
         }

@@ -6,17 +6,10 @@ import forge.game.player.PlayerView;
 import forge.util.Lang;
 import forge.util.TextUtil;
 
-public record GameEventTurnPhase(PlayerView playerTurn, PhaseType phase, String phaseDesc,
-                                 boolean hasTokens, boolean hasCreatures) implements GameEvent {
-
-    public GameEventTurnPhase(PlayerView playerTurn, PhaseType phase, String phaseDesc) {
-        this(playerTurn, phase, phaseDesc, false, false);
-    }
+public record GameEventTurnPhase(PlayerView playerTurn, PhaseType phase, String phaseDesc) implements GameEvent {
 
     public GameEventTurnPhase(Player playerTurn, PhaseType phase, String phaseDesc) {
-        this(PlayerView.get(playerTurn), phase, phaseDesc,
-                !playerTurn.getTokensInPlay().isEmpty(),
-                !playerTurn.getCreaturesInPlay().isEmpty());
+        this(PlayerView.get(playerTurn), phase, phaseDesc);
     }
 
     @Override
