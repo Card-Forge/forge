@@ -78,7 +78,7 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ramosian Greatsword|MOM&quot;, &quot;Dragonstorm Globe|TDM&quot;, &quot;Obsidian Obelisk|DMC&quot;, &quot;The Mana Rig|DMC&quot;, &quot;Henge Guardian|DDG&quot;, &quot;Dragon Engine|DMR&quot;, &quot;Fallaji Wayfarer|DMC&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ramosian Greatsword|MOM&quot;, &quot;Dragonstorm Globe|TDM&quot;, &quot;The Mana Rig|DMC&quot;, &quot;Henge Guardian|DDG&quot;, &quot;Dragon Engine|DMR&quot;, &quot;Fallaji Wayfarer|DMC&quot;]}"/>
     <property name="enemy" value="Ramos"/>
     <property name="speedModifier" type="float" value="40"/>
     <property name="threatRange" type="int" value="20"/>

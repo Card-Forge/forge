@@ -18,7 +18,6 @@ import forge.screens.match.CMatchUI;
 import forge.screens.match.VAutoYields;
 import forge.screens.match.controllers.CDock.ArcState;
 import forge.toolbox.FSkin.SkinIcon;
-import forge.toolbox.FSkin.SkinnedCheckBoxMenuItem;
 import forge.toolbox.FSkin.SkinnedMenu;
 import forge.toolbox.FSkin.SkinnedMenuItem;
 import forge.toolbox.FSkin.SkinnedRadioButtonMenuItem;
@@ -52,25 +51,7 @@ public final class GameMenu {
         menu.add(getMenuItem_AutoYields());
         menu.addSeparator();
         menu.add(getMenuItem_ViewDeckList());
-        menu.addSeparator();
-        menu.add(getMenuItem_GameSoundEffects());
         return menu;
-    }
-
-    private static SkinnedCheckBoxMenuItem getMenuItem_GameSoundEffects() {
-        final Localizer localizer = Localizer.getInstance();
-        SkinnedCheckBoxMenuItem menuItem = new SkinnedCheckBoxMenuItem(localizer.getMessage("lblSoundEffects"));
-        menuItem.setState(prefs.getPrefBoolean(FPref.UI_ENABLE_SOUNDS));
-        menuItem.addActionListener(getSoundEffectsAction());
-        return menuItem;
-    }
-    private static ActionListener getSoundEffectsAction() {
-        return e -> toggleGameSoundEffects();
-    }
-    private static void toggleGameSoundEffects() {
-        final boolean isSoundEffectsEnabled = !prefs.getPrefBoolean(FPref.UI_ENABLE_SOUNDS);
-        prefs.setPref(FPref.UI_ENABLE_SOUNDS, isSoundEffectsEnabled);
-        prefs.save();
     }
 
     private SkinnedMenuItem getMenuItem_Undo() {

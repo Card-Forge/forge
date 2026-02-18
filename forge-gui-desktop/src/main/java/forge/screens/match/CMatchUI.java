@@ -1039,6 +1039,12 @@ public final class CMatchUI
         if (players.size() == 2 && myPlayers != null && myPlayers.size() == 1 && myPlayers.get(0).equals(players.get(1))) {
             players = new FCollection<>(new PlayerView[]{players.get(1), players.get(0)});
         }
+        // Multiplayer: sort by turn order with local player first
+        final String layout = FModel.getPreferences().getPref(FPref.UI_MULTIPLAYER_FIELD_LAYOUT);
+        if (players.size() > 2 && myPlayers != null && myPlayers.size() >= 1
+                && !"OFF".equals(layout)) {
+            players = new FCollection<>(sortPlayersForMultiplayer(players, myPlayers.get(0), "ROWS".equals(layout)));
+        }
         initMatch(players, myPlayers);
         clearSelectables(); //fix uncleared selection
 
@@ -1054,6 +1060,56 @@ public final class CMatchUI
             FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_MATCH), true);
         else
             FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage((Image)null);
+    }
+
+    /**
+     * Reorders players so the local player is at index 0 and opponents follow
+     * in turn order. The {@code rowsMode} flag controls cell assignment:
+     * <ul>
+     *   <li><b>Grid</b> ({@code false}): counterclockwise flow — even indices
+     *       in the bottom cell, odd in the top cell.</li>
+     *   <li><b>Rows</b> ({@code true}): local player alone in the bottom cell
+     *       (index 0), all opponents in the top cell (odd indices) as tabs in
+     *       turn order.</li>
+     * </ul>
+     */
+    static List<PlayerView> sortPlayersForMultiplayer(
+            final FCollectionView<PlayerView> players, final PlayerView localPlayer,
+            final boolean rowsMode) {
+        final List<PlayerView> turnOrder = new ArrayList<>();
+        for (final PlayerView p : players) {
+            turnOrder.add(p);
+        }
+        final int localIndex = turnOrder.indexOf(localPlayer);
+        if (localIndex > 0) {
+            Collections.rotate(turnOrder, -localIndex);
+        }
+        // Rows mode: local player at index 0, opponents at indices 1..n-1.
+        // VMatchUI.populate() puts index 0 in the bottom cell and all others
+        // in the top cell when rows mode is active, so simple turn order works.
+        if (rowsMode) {
+            return turnOrder;
+        }
+        final int n = turnOrder.size();
+        if (n <= 3) {
+            return turnOrder;
+        }
+        // Grid mode: assign players to panel indices for counterclockwise visual flow:
+        // idx 0 (bottom-left): local player
+        // idx 1,3,5,... (top row, left to right): next players in turn order
+        // idx ...,4,2 (bottom row, right to left): remaining players
+        final PlayerView[] result = new PlayerView[n];
+        result[0] = turnOrder.get(0);
+        int turnPos = 1;
+        final int topCount = n / 2;
+        for (int i = 0; i < topCount; i++) {
+            result[1 + 2 * i] = turnOrder.get(turnPos++);
+        }
+        final int bottomExtra = (n - 1) / 2;
+        for (int i = bottomExtra - 1; i >= 0; i--) {
+            result[2 + 2 * i] = turnOrder.get(turnPos++);
+        }
+        return Arrays.asList(result);
     }
 
     @Override

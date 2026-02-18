@@ -5,7 +5,7 @@ Name=The Master of Keys
 [Main]
 1 Ancient Cellarspawn|DSC|1
 1 Archetype of Imagination|DSC|1
-1 Arvinox, the Mind Flail|DSC|1
+1 Overlord of the Balemurk|DSK
 1 Athreos, Shroud-Veiled|DSC|1
 1 Auramancer|DSC|1
 1 Burnished Hart|DSC|1
@@ -43,15 +43,15 @@ Name=The Master of Keys
 1 Redress Fate|DSC|1
 1 Terminus|DSC|1
 1 Time Wipe|DSC|1
-1 Bottomless Pool // Locker Room|DSK|1
+1 Bottomless Pool|DSK|1
 1 Cast Out|DSC|1
-1 Cramped Vents // Access Maze|DSC|1
+1 Cramped Vents|DSC|1
 1 Extravagant Replication|DSC|1
 1 Life Insurance|DSC|1
 1 Mirrormade|DSC|1
 1 Monologue Tax|DSC|1
 1 One with the Multiverse|DSC|1
-1 Secret Arcade // Dusty Parlor|DSC|1
+1 Secret Arcade|DSC|1
 1 Shark Typhoon|DSC|1
 1 Sigil of the Empty Throne|DSC|1
 1 Sphere of Safety|DSC|1
@@ -88,12 +88,6 @@ Name=The Master of Keys
 1 Thriving Isle|DSC|1
 1 Thriving Moor|DSC|1
 1 Underground River|DSC|1
-2 Island|DSK|1
-1 Island|DSK|2
-1 Island|DSK|3
-2 Plains|DSK|1
-2 Plains|DSK|2
-1 Plains|DSK|3
-2 Swamp|DSK|1
-2 Swamp|DSK|2
-1 Swamp|DSK|3
+4 Island|DSK
+5 Plains|DSK
+5 Swamp|DSK

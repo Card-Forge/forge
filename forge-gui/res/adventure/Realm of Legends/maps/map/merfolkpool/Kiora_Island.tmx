@@ -67,7 +67,7 @@ She stumbles back, and lands in the waters below with a splash. You consider goi
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Silvergill Douser|LRW&quot;, &quot;Kraken Hatchling&quot;, &quot;Bident of Thassa|BLC&quot;, &quot;Quest for Ula's Temple|WWK&quot;, &quot;Temple of the False God|C17&quot;, &quot;Lumbering Falls|BFZ&quot;, &quot;Hedron Matrix|ROE&quot;, &quot;Reef Worm|MH3&quot;, &quot;Ominous Seas|IKO&quot; ]}"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Silvergill Douser|LRW&quot;, &quot;Quest for Ula's Temple|WWK&quot;, &quot;Temple of the False God|C17&quot;, &quot;Lumbering Falls|BFZ&quot;, &quot;Hedron Matrix|ROE&quot;, &quot;Reef Worm|MH3&quot;, &quot;Ominous Seas|IKO&quot; ]}"/>
     <property name="enemy" value="Kiora"/>
     <property name="speedModifier" type="float" value="50"/>
     <property name="threatRange" type="int" value="50"/>

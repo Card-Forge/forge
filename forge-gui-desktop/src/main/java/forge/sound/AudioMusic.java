@@ -3,6 +3,8 @@ package forge.sound;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.JavaSoundAudioDevice;
 import javazoom.jl.player.advanced.AdvancedPlayer;
 import javazoom.jl.player.advanced.PlaybackEvent;
 import javazoom.jl.player.advanced.PlaybackListener;
@@ -18,6 +20,7 @@ public class AudioMusic implements IAudioMusic {
     private boolean valid;
     private Runnable onComplete;
     private volatile boolean isPlaying = false;
+    private VolumeAudioDevice volumeDevice;
 
     public AudioMusic(String filename0) {
         filename = filename0;
@@ -39,7 +42,8 @@ public class AudioMusic implements IAudioMusic {
                 fileStream.skip(pos);
             }
             bufferedStream = new BufferedInputStream(fileStream);
-            musicPlayer = new AdvancedPlayer(bufferedStream);
+            volumeDevice = new VolumeAudioDevice();
+            musicPlayer = new AdvancedPlayer(bufferedStream, volumeDevice);
             musicPlayer.setPlayBackListener(new PlaybackListener() {
                 @Override
                 public void playbackFinished(PlaybackEvent evt) {
@@ -91,6 +95,7 @@ public class AudioMusic implements IAudioMusic {
         fileStream = null;
         bufferedStream = null;
         musicPlayer = null;
+        volumeDevice = null;
     }
 
     @Override
@@ -120,11 +125,37 @@ public class AudioMusic implements IAudioMusic {
 
     @Override
     public void setVolume(float value) {
-        //todo
+        if (volumeDevice != null) {
+            volumeDevice.setVolume(value);
+        }
     }
 
     @Override
     public boolean isPlaying() {
         return this.isPlaying;
+    }
+
+    /**
+     * Audio device that scales PCM samples to apply volume control.
+     * Extends JavaSoundAudioDevice so all standard audio output is preserved;
+     * only the sample data is scaled before being written to the sound line.
+     */
+    static class VolumeAudioDevice extends JavaSoundAudioDevice {
+        private volatile float volume = 1.0f;
+
+        void setVolume(float v) {
+            this.volume = v;
+        }
+
+        @Override
+        protected void writeImpl(short[] samples, int offs, int len) throws JavaLayerException {
+            if (volume != 1.0f) {
+                for (int i = offs; i < offs + len; i++) {
+                    samples[i] = (short) Math.max(Short.MIN_VALUE,
+                            Math.min(Short.MAX_VALUE, (int) (samples[i] * volume)));
+                }
+            }
+            super.writeImpl(samples, offs, len);
+        }
     }
 }

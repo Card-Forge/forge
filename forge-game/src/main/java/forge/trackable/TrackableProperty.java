@@ -126,6 +126,7 @@ public enum TrackableProperty {
     ImageKey(TrackableTypes.StringType),
     Type(TrackableTypes.CardTypeViewType),
     ManaCost(TrackableTypes.ManaCostType),
+    OriginalManaCost(TrackableTypes.ManaCostType),
     SetCode(TrackableTypes.StringType),
     Rarity(TrackableTypes.EnumType(CardRarity.class)),
     FunctionalVariant(TrackableTypes.StringType),
@@ -143,16 +144,8 @@ public enum TrackableProperty {
     ChangedTypes(TrackableTypes.StringMapType),
 
     //check produce mana for BG
-    OrigProduceManaR(TrackableTypes.BooleanType),
-    OrigProduceManaG(TrackableTypes.BooleanType),
-    OrigProduceManaB(TrackableTypes.BooleanType),
-    OrigProduceManaU(TrackableTypes.BooleanType),
-    OrigProduceManaW(TrackableTypes.BooleanType),
-    OrigProduceManaC(TrackableTypes.BooleanType),
+    OrigProduceMana(TrackableTypes.ColorSetType),
     OrigProduceAnyMana(TrackableTypes.BooleanType),
-    CountOrigProduceColoredMana(TrackableTypes.IntegerType),
-    //number of basic landtypes
-    CountBasicLandTypes(TrackableTypes.IntegerType),
 
     KeywordKey(TrackableTypes.StringType),
     HasAnnihilator(TrackableTypes.BooleanType),

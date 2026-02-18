@@ -76,7 +76,7 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
 
             if (remember != null) {
                 immediateTrig.addRemembered(
-                        sa.hasParam("RememberEach") ? remember.get(i) : remember
+                        sa.hasParam("RememberEach") ? List.of(remember.get(i)) : remember
                 );
             }
 
