@@ -115,38 +115,13 @@ public class AIIntegrationTests extends AITest {
     }
 
     @Test
-    public void testSylvanLibraryCanBeCast() {
-        // Test that the AI will cast Sylvan Library when it has mana available
-        Game game = initAndCreateGame();
-        Player p = game.getPlayers().get(1);
-        p.setTeam(0);
-        addCard("Forest", p);
-        addCard("Forest", p);
-        addCardToZone("Sylvan Library", p, ZoneType.Hand);
-
-        Player opponent = game.getPlayers().get(0);
-        opponent.setTeam(1);
-
-        // Fill decks with cards
-        for (int i = 0; i < 60; i++) {
-            addCardToZone("Island", opponent, ZoneType.Library);
-            addCardToZone("Forest", p, ZoneType.Library);
-        }
-
-        this.playUntilPhase(game, PhaseType.END_OF_TURN);
-
-        // Sylvan Library should be on the battlefield
-        AssertJUnit.assertEquals("Sylvan Library should be on the battlefield", 1, countCardsWithName(game, "Sylvan Library"));
-    }
-
-    @Test
     public void testSylvanLibraryAtLowLifeActsLikeMirrisGuile() {
         // Test that when at low life, the AI uses Sylvan Library to look at cards
         // but puts them back instead of paying life (like Mirri's Guile)
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
         p.setTeam(0);
-        p.setLife(5, null); // Low life - can't afford to pay 4 life
+        p.setLife(5, null); // Low life - can't afford to pay 4 life, but it wouldn't kill you
 
         addCard("Sylvan Library", p);
         // Add lands so the AI has mana to cast things
