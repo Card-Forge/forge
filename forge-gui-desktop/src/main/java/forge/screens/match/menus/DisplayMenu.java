@@ -20,6 +20,7 @@ import forge.menus.MenuUtil;
 import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CDock.ArcState;
+import forge.screens.match.views.VField;
 import forge.util.Localizer;
 
 /**
@@ -111,13 +112,29 @@ public final class DisplayMenu {
         battlefieldLabel.setEnabled(false);
         menu.add(battlefieldLabel);
 
-        MenuUtil.addPrefCheckBox(menu, localizer.getMessage("cbStackCreatures"), FPref.UI_STACK_CREATURES)
+        addBattlefieldPrefCheckBox(menu, localizer.getMessage("cbStackCreatures"), FPref.UI_STACK_CREATURES)
                 .setToolTipText(localizer.getMessage("nlStackCreatures"));
-        MenuUtil.addPrefCheckBox(menu, localizer.getMessage("cbTokensInSeparateRow"), FPref.UI_TOKENS_IN_SEPARATE_ROW)
+        addBattlefieldPrefCheckBox(menu, localizer.getMessage("cbTokensInSeparateRow"), FPref.UI_TOKENS_IN_SEPARATE_ROW)
                 .setToolTipText(localizer.getMessage("nlTokensInSeparateRow"));
         menu.add(getCounterDisplayTypeSubmenu(localizer));
 
         return menu;
+    }
+
+    private JCheckBoxMenuItem addBattlefieldPrefCheckBox(final JMenu menu, final String label, final FPref pref) {
+        final JCheckBoxMenuItem item = MenuUtil.createStayOpenCheckBox(label);
+        item.setState(prefs.getPrefBoolean(pref));
+        item.addActionListener(e -> {
+            prefs.setPref(pref, !prefs.getPrefBoolean(pref));
+            prefs.save();
+            SwingUtilities.invokeLater(() -> {
+                for (final VField f : matchUI.getFieldViews()) {
+                    f.getTabletop().doLayout();
+                }
+            });
+        });
+        menu.add(item);
+        return item;
     }
 
     private void addOverlayItem(final JMenu menu, final List<JCheckBoxMenuItem> overlayItems,

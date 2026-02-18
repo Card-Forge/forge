@@ -365,6 +365,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     @Override
     public final void doLayout() {
+        this.makeTokenRow = FModel.getPreferences().getPrefBoolean(FPref.UI_TOKENS_IN_SEPARATE_ROW);
+        this.stackCreatures = FModel.getPreferences().getPrefBoolean(FPref.UI_STACK_CREATURES);
+
         final Rectangle rect = this.getScrollPane().getVisibleRect();
 
         this.playAreaWidth = rect.width;
