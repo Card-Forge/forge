@@ -12,6 +12,8 @@ import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiGame;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
@@ -216,8 +218,12 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         needPhaseUpdate = true;
         needSaveState = !"dev".equals(ev.phaseDesc());
 
-        PlayerView ap = ev.playerTurn();
-        updateZone(ap, ZoneType.Battlefield);
+        boolean refreshField = ev.hasTokens()
+                || (FModel.getPreferences().getPrefBoolean(FPref.UI_STACK_CREATURES)
+                        && ev.hasCreatures());
+        if (refreshField) {
+            updateZone(ev.playerTurn(), ZoneType.Battlefield);
+        }
         return processEvent();
     }
 

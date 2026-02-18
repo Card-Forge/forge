@@ -87,10 +87,10 @@ public class SpellAbilityView extends TrackableObject implements IHasCardView {
     }
 
     public PlayerView getActivatingPlayer() {
-        return get(TrackableProperty.SA_ActivatingPlayer);
+        return get(TrackableProperty.ActivatingPlayer);
     }
     void updateActivatingPlayer(SpellAbility sa) {
-        set(TrackableProperty.SA_ActivatingPlayer, PlayerView.get(sa.getActivatingPlayer()));
+        set(TrackableProperty.ActivatingPlayer, PlayerView.get(sa.getActivatingPlayer()));
     }
 
     @Override
