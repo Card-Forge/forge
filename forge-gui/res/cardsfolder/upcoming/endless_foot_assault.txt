@@ -1,4 +1,4 @@
-Name:Endless Foot Assaulr
+Name:Endless Foot Assault
 ManaCost:2 W
 Types:Enchantment
 K:Squad:1 W
