@@ -631,6 +631,11 @@ public final class CMatchUI
     }
 
     @Override
+    public List<JMenu> getTrailingMenus() {
+        return menus.getTrailingMenus();
+    }
+
+    @Override
     public void register() {
         initHandViews();
         registerDocs();
@@ -664,6 +669,10 @@ public final class CMatchUI
 
     @Override
     public void update() {
+    }
+
+    public void repopulatePrompt() {
+        getCPrompt().getView().populate();
     }
 
     public void repaintCardOverlays() {
