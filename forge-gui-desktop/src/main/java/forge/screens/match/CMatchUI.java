@@ -1327,8 +1327,8 @@ public final class CMatchUI
     public void notifyStackAddition(GameEventSpellAbilityCast event) {
         SpellAbilityView sa = event.sa();
         String stackNotificationPolicy = FModel.getPreferences().getPref(FPref.UI_STACK_EFFECT_NOTIFICATION_POLICY);
-        boolean isAi = sa.getActivatingPlayer().isAI();
-        boolean isTrigger = sa.isTrigger();
+        boolean isAi = event.si().getActivatingPlayer().isAI();
+        boolean isTrigger = event.si().isTrigger();
         int stackIndex = event.stackIndex();
         if (stackIndex == nextNotifiableStackIndex) {
             if (ForgeConstants.STACK_EFFECT_NOTIFICATION_ALWAYS.equals(stackNotificationPolicy) || (ForgeConstants.STACK_EFFECT_NOTIFICATION_AI_AND_TRIGGERED.equals(stackNotificationPolicy) && (isAi || isTrigger))) {
@@ -1423,8 +1423,8 @@ public final class CMatchUI
     }
 
     private void addTextToStackModalPanel(JPanel mainPanel, SpellAbilityView sa, StackItemView si) {
-        String who = sa.getActivatingPlayer().getName();
-        String action = sa.isSpell() ? " cast " : sa.isTrigger() ? " triggered " : " activated ";
+        String who = si.getActivatingPlayer().getName();
+        String action = sa.isSpell() ? " cast " : si.isTrigger() ? " triggered " : " activated ";
         String desc = sa.getDescription();
         String what = (desc != null && desc.startsWith("Morph ")) ? "Morph" : sa.getHostCard().toString();
 

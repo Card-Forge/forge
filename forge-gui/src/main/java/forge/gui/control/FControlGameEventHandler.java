@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.eventbus.Subscribe;
-import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.event.*;
 import forge.game.player.Player;
@@ -159,39 +158,17 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         return null;
     }
 
-    private Void processCard(final Card card, final Set<CardView> list) {
-        synchronized (list) {
-            list.add(card.getView());
-        }
-        return processEvent();
-    }
     private Void processCard(final CardView cardView, final Set<CardView> list) {
         synchronized (list) {
             list.add(cardView);
         }
         return processEvent();
     }
-    private Void processCards(final Collection<Card> cards, final Set<CardView> list) {
-        if (cards.isEmpty()) { return null; }
-
-        synchronized (list) {
-            for (final Card c : cards) {
-                list.add(c.getView());
-            }
-        }
-        return processEvent();
-    }
-    private Void processCardViews(final Collection<CardView> cards, final Set<CardView> list) {
+    private Void processCards(final Collection<CardView> cards, final Set<CardView> list) {
         if (cards.isEmpty()) { return null; }
 
         synchronized (list) {
             list.addAll(cards);
-        }
-        return processEvent();
-    }
-    private Void processPlayer(final Player player, final Set<PlayerView> list) {
-        synchronized (list) {
-            list.add(player.getView());
         }
         return processEvent();
     }
@@ -218,11 +195,12 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         needPhaseUpdate = true;
         needSaveState = !"dev".equals(ev.phaseDesc());
 
-        boolean refreshField = ev.playerTurn().getCards(ZoneType.Battlefield) != null &&
-                (ev.playerTurn().getCards(ZoneType.Battlefield).anyMatch(CardView::isToken)
-                || (FModel.getPreferences().getPrefBoolean(FPref.UI_STACK_CREATURES) && ev.playerTurn().getCards(ZoneType.Battlefield).anyMatch(c -> c.getCurrentState().isCreature())));
+        PlayerView ap = ev.playerTurn();
+        boolean refreshField = ap.getCards(ZoneType.Battlefield) != null &&
+                (ap.getCards(ZoneType.Battlefield).anyMatch(CardView::isToken)
+                || (FModel.getPreferences().getPrefBoolean(FPref.UI_STACK_CREATURES) && ap.getCards(ZoneType.Battlefield).anyMatch(c -> c.getCurrentState().isCreature())));
         if (refreshField) {
-            updateZone(ev.playerTurn(), ZoneType.Battlefield);
+            updateZone(ap, ZoneType.Battlefield);
         }
         return processEvent();
     }
@@ -386,12 +364,12 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         for (final Multimap<CardView, CardView> kv : event.blockers().values()) {
             cards.addAll(kv.values());
         }
-        return processCardViews(cards, cardsUpdate);
+        return processCards(cards, cardsUpdate);
     }
 
     @Override
     public Void visit(final GameEventAttackersDeclared event) {
-        return processCardViews(event.attackersMap().values(), cardsUpdate);
+        return processCards(event.attackersMap().values(), cardsUpdate);
     }
 
     @Override
@@ -405,8 +383,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         needCombatUpdate = true;
 
         // This should remove sword/shield icons from combatants by the time game moves to M2
-        processCardViews(event.attackers(), cardsUpdate);
-        return processCardViews(event.blockers(), cardsUpdate);
+        processCards(event.attackers(), cardsUpdate);
+        return processCards(event.blockers(), cardsUpdate);
     }
 
     @Override
@@ -420,8 +398,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
         refreshFieldUpdate = true;
 
-        processCardViews(cards, cardsRefreshDetails);
-        return processCardViews(cards, cardsUpdate);
+        processCards(cards, cardsRefreshDetails);
+        return processCards(cards, cardsUpdate);
     }
 
     @Override
@@ -433,17 +411,15 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             if (event.to() != null) {
                 updateZone(event.to().player(), event.to().zoneType());
             }
-            return processEvent();
-        } else {
-            return processEvent();
         }
+        return processEvent();
     }
 
     @Override
     public Void visit(final GameEventCardStatsChanged event) {
         refreshFieldUpdate = true;
-        processCardViews(event.cards(), cardsRefreshDetails);
-        return processCardViews(event.cards(), cardsUpdate);
+        processCards(event.cards(), cardsRefreshDetails);
+        return processCards(event.cards(), cardsUpdate);
     }
 
     @Override
@@ -468,7 +444,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             processPlayer(p, livesUpdate);
         }
 
-        return processCardViews(event.allCards(), cardsRefreshDetails);
+        return processCards(event.allCards(), cardsRefreshDetails);
     }
 
     public Void visit(final GameEventLandPlayed event) {
@@ -480,8 +456,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventCardRegenerated event) {
         refreshFieldUpdate = true;
-        processCardViews(event.cards(), cardsRefreshDetails);
-        return processCardViews(event.cards(), cardsUpdate);
+        processCards(event.cards(), cardsRefreshDetails);
+        return processCards(event.cards(), cardsUpdate);
     }
 
     @Override

@@ -34,6 +34,6 @@ public record GameEventSpellAbilityCast(SpellAbilityView sa, StackItemView si, i
      */
     @Override
     public String toString() {
-        return "" + sa.getActivatingPlayer() + (sa.isSpell() ? " cast " : sa.isTrigger() ? " triggered " : " activated ") + sa;
+        return "" + si.getActivatingPlayer() + (sa.isSpell() ? " cast " : si.isTrigger() ? " triggered " : " activated ") + sa;
     }
 }

@@ -241,8 +241,9 @@ public interface IGuiGame {
 
     boolean isGamePaused();
 
-    void setgamePause(boolean pause);
+    void setGamePause(boolean pause);
 
+    PlaybackSpeed getGameSpeed();
     void setGameSpeed(PlaybackSpeed gameSpeed);
 
     String getDayTime();

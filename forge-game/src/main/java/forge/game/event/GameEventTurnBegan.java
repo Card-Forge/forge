@@ -1,14 +1,9 @@
 package forge.game.event;
 
-import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.util.TextUtil;
 
 public record GameEventTurnBegan(PlayerView turnOwner, int turnNumber) implements GameEvent {
-
-    public GameEventTurnBegan(Player turnOwner, int turnNumber) {
-        this(PlayerView.get(turnOwner), turnNumber);
-    }
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {

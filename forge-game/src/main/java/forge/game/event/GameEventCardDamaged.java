@@ -1,13 +1,8 @@
 package forge.game.event;
 
-import forge.game.card.Card;
 import forge.game.card.CardView;
 
 public record GameEventCardDamaged(CardView card, CardView source, int amount, DamageType type) implements GameEvent {
-
-    public GameEventCardDamaged(Card card, Card source, int amount, DamageType type) {
-        this(CardView.get(card), CardView.get(source), amount, type);
-    }
 
     public enum DamageType {
         Normal, 

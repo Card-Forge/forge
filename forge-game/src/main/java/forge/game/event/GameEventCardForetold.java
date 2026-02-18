@@ -1,13 +1,8 @@
 package forge.game.event;
 
-import forge.game.player.Player;
 import forge.game.player.PlayerView;
 
 public record GameEventCardForetold(PlayerView activatingPlayer) implements GameEvent {
-
-    public GameEventCardForetold(Player activatingPlayer) {
-        this(PlayerView.get(activatingPlayer));
-    }
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {

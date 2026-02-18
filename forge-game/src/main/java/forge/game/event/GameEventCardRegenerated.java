@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 public record GameEventCardRegenerated(Collection<CardView> cards) implements GameEvent {
+
     public GameEventCardRegenerated(Card affected) {
         this(Collections.singletonList(CardView.get(affected)));
     }

@@ -36,7 +36,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private final Map<PlayerView, IGameController> gameControllers = Maps.newHashMap();
     private final Map<PlayerView, IGameController> originalGameControllers = Maps.newHashMap();
     private boolean gamePause = false;
-    private boolean gameSpeed = false;
     private PlaybackSpeed playbackSpeed = PlaybackSpeed.NORMAL;
     private String daytime = null;
     private boolean ignoreConcedeChain = false;
@@ -331,14 +330,13 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return gamePause;
     }
 
-    public boolean isGameFast() {
-        return gameSpeed;
-    }
-
-    public void setgamePause(boolean pause) {
+    public void setGamePause(boolean pause) {
         gamePause = pause;
     }
 
+    public PlaybackSpeed getGameSpeed() {
+        return playbackSpeed;
+    }
     public void setGameSpeed(PlaybackSpeed speed) {
         playbackSpeed = speed;
     }
@@ -915,6 +913,16 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return showConfirmDialog(message, title, yesButtonText, noButtonText, true);
     }
 
+    private FControlGameEventHandler localEventHandler;
+
+    @Override
+    public void handleGameEvent(GameEvent event) {
+        if (localEventHandler == null) {
+            localEventHandler = new FControlGameEventHandler(this);
+        }
+        localEventHandler.receiveGameEvent(event);
+    }
+
     @Override
     public void notifyStackAddition(GameEventSpellAbilityCast event) {
     }
@@ -935,16 +943,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public void updateTurn(PlayerView player) { }
-
-    private FControlGameEventHandler localEventHandler;
-
-    @Override
-    public void handleGameEvent(GameEvent event) {
-        if (localEventHandler == null) {
-            localEventHandler = new FControlGameEventHandler(this);
-        }
-        localEventHandler.receiveGameEvent(event);
-    }
 
     @Override
     public void updatePlayerControl() {

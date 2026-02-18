@@ -71,9 +71,9 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventSpellAbilityCast event) {
-        String player = event.sa().getActivatingPlayer().getName();
+        String player = event.si().getActivatingPlayer().getName();
         String action = event.sa().isSpell() ? localizer.getMessage("lblCast")
-                : event.sa().isTrigger() ? localizer.getMessage("lblTriggered")
+                : event.si().isTrigger() ? localizer.getMessage("lblTriggered")
                         : localizer.getMessage("lblActivated");
         String siText = event.si() != null ? event.si().getText() : "";
         String object = siText != null && siText.startsWith("Morph ")

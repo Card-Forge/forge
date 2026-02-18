@@ -2367,8 +2367,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         view.updateDescription(this);
         view.updatePromptIfOnlyPossibleAbility(this);
         view.updateIsSpell(this);
-        view.updateIsTrigger(this);
-        view.updateActivatingPlayer(this);
         return view;
     }
 
