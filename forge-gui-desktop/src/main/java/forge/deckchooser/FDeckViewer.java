@@ -40,6 +40,7 @@ public class FDeckViewer extends FDialog {
     private final CardDetailPanel cardDetail = new CardDetailPanel();
     private final CardPicturePanel cardPicture = new CardPicturePanel();
     private final FButton btnCopyToClipboard = new FButton(Localizer.getInstance().getMessage("btnCopyToClipboard"));
+    private final FButton btnChangeSection = new FButton(Localizer.getInstance().getMessage("lblChangeSection"));
     private final FButton btnClose = new FButton(Localizer.getInstance().getMessage("lblClose"));
 
     public static void show(final Deck deck) {
@@ -88,6 +89,13 @@ public class FDeckViewer extends FDialog {
 
         this.btnCopyToClipboard.setFocusable(false);
         this.btnCopyToClipboard.addActionListener(arg0 -> FDeckViewer.this.copyToClipboard());
+        this.btnChangeSection.setFocusable(false);
+        if (this.sections.size() > 1) {
+            this.btnChangeSection.addActionListener(arg0 -> FDeckViewer.this.changeSection());
+        }
+        else {
+            this.btnChangeSection.setEnabled(false);
+        }
         this.btnClose.setFocusable(false);
         this.btnClose.addActionListener(arg0 -> FDeckViewer.this.setVisible(false));
 
@@ -115,7 +123,8 @@ public class FDeckViewer extends FDialog {
 
         JPanel buttonPanel = new JPanel(new MigLayout("insets 0, gap 0"));
         buttonPanel.setOpaque(false);
-        buttonPanel.add(this.btnCopyToClipboard, "w 200px!, h 26px!");
+        buttonPanel.add(this.btnCopyToClipboard, "w 200px!, h 26px!, gapright 5px");
+        buttonPanel.add(this.btnChangeSection, "w 200px!, h 26px!");
 
         this.add(new ItemManagerContainer(this.cardManager), "push, grow, gapright 10px, gapbottom 10px");
         this.add(cardPanel, "wrap");
@@ -139,6 +148,15 @@ public class FDeckViewer extends FDialog {
             this.cardManager.getCbxSection().setVisible(true);
         }
         this.setDefaultFocus(this.cardManager.getCurrentView().getComponent());
+    }
+
+    private void changeSection() {
+        int index = sections.indexOf(currentSection);
+        index = (index + 1) % sections.size();
+        currentSection = sections.get(index);
+        this.cardManager.getCbxSection().setSelectedItem(currentSection);
+        this.cardManager.setPool(this.deck.get(currentSection));
+        updateCaption();
     }
 
     private void updateCaption() {
