@@ -779,7 +779,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     @Override
     public final void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
         boolean selectAll = evt.isShiftDown();
-        if (!selectAll && panel.getGroupCount() >= 5) {
+        if (!selectAll && panel.getGroupCount() >= 4) {
             selectAll = panel.isBadgeHit(evt.getX(), evt.getY());
         }
         // Split/un-split individual card from group
@@ -827,10 +827,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     @Override
     public final void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
-        // Right-click on badge of a group of 5+ → prompt for how many to select
-        if (panel.getGroupCount() >= 5 && panel.isBadgeHit(evt.getX(), evt.getY())) {
+        // Right-click on badge of a group of 4+ → prompt for how many to select
+        if (panel.getGroupCount() >= 4 && panel.isBadgeHit(evt.getX(), evt.getY())) {
             List<CardPanel> stack = panel.getStack();
-            if (stack != null && stack.size() >= 5) {
+            if (stack != null && stack.size() >= 4) {
                 // Check if the game accepts card selection right now (side-effect-free)
                 CardView primary = stack.get(0).getCard();
                 String activateDesc = primary != null
