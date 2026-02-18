@@ -23,15 +23,10 @@ import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.localinstance.properties.ForgePreferences;
-import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.trackable.TrackableTypes;
 import forge.util.Localizer;
 
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -145,8 +140,7 @@ public class YieldController {
         // Check legacy auto-pass first
         if (autoPassUntilEndOfTurn.contains(player)) {
             callback.cancelAwaitNextInput();
-            String cancelKey = getCancelShortcutDisplayText();
-            callback.showPromptMessage(player, Localizer.getInstance().getMessage("lblYieldingUntilEndOfTurn", cancelKey));
+            callback.showPromptMessage(player, Localizer.getInstance().getMessage("lblYieldingUntilEndOfTurn"));
             callback.updateButtons(player, false, true, false);
             return;
         }
@@ -157,14 +151,13 @@ public class YieldController {
             YieldMode mode = state.mode;
             callback.cancelAwaitNextInput();
             Localizer loc = Localizer.getInstance();
-            String cancelKey = getCancelShortcutDisplayText();
             String message = switch (mode) {
-                case UNTIL_NEXT_PHASE -> loc.getMessage("lblYieldingUntilNextPhase", cancelKey);
-                case UNTIL_STACK_CLEARS -> loc.getMessage("lblYieldingUntilStackClears", cancelKey);
-                case UNTIL_END_OF_TURN -> loc.getMessage("lblYieldingUntilEndOfTurn", cancelKey);
-                case UNTIL_YOUR_NEXT_TURN -> loc.getMessage("lblYieldingUntilYourNextTurn", cancelKey);
-                case UNTIL_BEFORE_COMBAT -> loc.getMessage("lblYieldingUntilBeforeCombat", cancelKey);
-                case UNTIL_END_STEP -> loc.getMessage("lblYieldingUntilEndStep", cancelKey);
+                case UNTIL_NEXT_PHASE -> loc.getMessage("lblYieldingUntilNextPhase");
+                case UNTIL_STACK_CLEARS -> loc.getMessage("lblYieldingUntilStackClears");
+                case UNTIL_END_OF_TURN -> loc.getMessage("lblYieldingUntilEndOfTurn");
+                case UNTIL_YOUR_NEXT_TURN -> loc.getMessage("lblYieldingUntilYourNextTurn");
+                case UNTIL_BEFORE_COMBAT -> loc.getMessage("lblYieldingUntilBeforeCombat");
+                case UNTIL_END_STEP -> loc.getMessage("lblYieldingUntilEndStep");
                 default -> "";
             };
             callback.showPromptMessage(player, message);
@@ -733,34 +726,4 @@ public class YieldController {
         autoPassUntilEndOfTurn.remove(player);
     }
 
-    /**
-     * Convert a keyboard shortcut preference string to display text.
-     * @param codeString Space-separated key codes (e.g., "17 67" for Ctrl+C)
-     * @return Human-readable shortcut text (e.g., "Ctrl+C")
-     */
-    public static String formatShortcutDisplayText(String codeString) {
-        if (codeString == null || codeString.isEmpty()) {
-            return "";
-        }
-        List<String> codes = new ArrayList<>(Arrays.asList(codeString.trim().split(" ")));
-        List<String> displayText = new ArrayList<>();
-        for (String s : codes) {
-            if (!s.isEmpty()) {
-                try {
-                    displayText.add(KeyEvent.getKeyText(Integer.parseInt(s)));
-                } catch (NumberFormatException e) {
-                    displayText.add(s);
-                }
-            }
-        }
-        return String.join("+", displayText);
-    }
-
-    /**
-     * Get the display text for the yield cancel keyboard shortcut.
-     * @return Human-readable shortcut text, e.g., "Escape" or "Ctrl+Escape"
-     */
-    public String getCancelShortcutDisplayText() {
-        return formatShortcutDisplayText(FModel.getPreferences().getPref(FPref.SHORTCUT_YIELD_CANCEL));
-    }
 }

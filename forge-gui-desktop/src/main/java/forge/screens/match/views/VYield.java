@@ -19,12 +19,10 @@ package forge.screens.match.views;
 
 import javax.swing.JPanel;
 
-import forge.gamemodes.match.YieldController;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
-import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.match.controllers.CYield;
@@ -75,32 +73,13 @@ public class VYield implements IVDoc<CYield> {
         btnEndTurn.setUseHighlightMode(true);
         btnYourTurn.setUseHighlightMode(true);
 
-        // Set tooltips on yield buttons with dynamic hotkey text
-        updateTooltips();
-    }
-
-    /**
-     * Update button tooltips with current keyboard shortcut bindings.
-     * Call this after keyboard shortcuts are changed.
-     */
-    public void updateTooltips() {
-        ForgePreferences prefs = FModel.getPreferences();
-        btnNextPhase.setToolTipText(localizer.getMessage("lblYieldBtnNextPhaseTooltip",
-            getShortcutDisplayText(prefs.getPref(FPref.SHORTCUT_YIELD_UNTIL_NEXT_PHASE))));
-        btnClearStack.setToolTipText(localizer.getMessage("lblYieldBtnClearStackTooltip",
-            getShortcutDisplayText(prefs.getPref(FPref.SHORTCUT_YIELD_UNTIL_STACK_CLEARS))));
-        btnCombat.setToolTipText(localizer.getMessage("lblYieldBtnCombatTooltip",
-            getShortcutDisplayText(prefs.getPref(FPref.SHORTCUT_YIELD_UNTIL_BEFORE_COMBAT))));
-        btnEndStep.setToolTipText(localizer.getMessage("lblYieldBtnEndStepTooltip",
-            getShortcutDisplayText(prefs.getPref(FPref.SHORTCUT_YIELD_UNTIL_END_STEP))));
-        btnEndTurn.setToolTipText(localizer.getMessage("lblYieldBtnEndTurnTooltip",
-            getShortcutDisplayText(prefs.getPref(FPref.SHORTCUT_YIELD_UNTIL_END_OF_TURN))));
-        btnYourTurn.setToolTipText(localizer.getMessage("lblYieldBtnYourTurnTooltip",
-            getShortcutDisplayText(prefs.getPref(FPref.SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN))));
-    }
-
-    private String getShortcutDisplayText(String codeString) {
-        return YieldController.formatShortcutDisplayText(codeString);
+        // Set tooltips on yield buttons
+        btnNextPhase.setToolTipText(localizer.getMessage("lblYieldBtnNextPhaseTooltip"));
+        btnClearStack.setToolTipText(localizer.getMessage("lblYieldBtnClearStackTooltip"));
+        btnCombat.setToolTipText(localizer.getMessage("lblYieldBtnCombatTooltip"));
+        btnEndStep.setToolTipText(localizer.getMessage("lblYieldBtnEndStepTooltip"));
+        btnEndTurn.setToolTipText(localizer.getMessage("lblYieldBtnEndTurnTooltip"));
+        btnYourTurn.setToolTipText(localizer.getMessage("lblYieldBtnYourTurnTooltip"));
     }
 
     @Override
