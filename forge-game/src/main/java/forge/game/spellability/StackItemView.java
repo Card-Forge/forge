@@ -106,6 +106,10 @@ public class StackItemView extends TrackableObject implements IHasCardView {
         set(TrackableProperty.ApiType, sa != null && sa.getApi() != null ? sa.getApi().name() : null);
     }
 
+    public boolean isTrigger() {
+        return getSourceTrigger() > 0;
+    }
+
     public int getSourceTrigger() {
         return get(TrackableProperty.SourceTrigger);
     }

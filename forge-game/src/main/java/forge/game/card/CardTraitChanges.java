@@ -4,6 +4,7 @@ import forge.game.CardTraitBase;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityMode;
 import forge.game.trigger.Trigger;
 
 import java.util.Collection;
@@ -53,6 +54,18 @@ public record CardTraitChanges(
      */
     public Collection<StaticAbility> getStaticAbilities() {
         return Objects.requireNonNullElse(staticAbilities, List.of());
+    }
+
+    /**
+     * Return if any of the static abilities changes the card's mana cost
+     */
+    public boolean containsCostChange() {
+        for (StaticAbility stAb : getStaticAbilities()) {
+            if (stAb.checkMode(StaticAbilityMode.ReduceCost) || stAb.checkMode(StaticAbilityMode.RaiseCost)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public CardTraitChanges copy(Card host, boolean lki) {

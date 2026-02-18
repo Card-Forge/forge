@@ -3,6 +3,8 @@ package forge.gamemodes.match;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.MultimapBuilder;
 import com.google.common.eventbus.Subscribe;
 import forge.LobbyPlayer;
 import forge.StaticData;
@@ -11,6 +13,7 @@ import forge.game.*;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventSubgameEnd;
 import forge.game.event.GameEventSubgameStart;
+import forge.game.event.GameEventTurnPhase;
 import forge.game.event.IGameEventVisitor;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
@@ -37,8 +40,6 @@ import forge.sound.SoundSystem;
 import forge.trackable.TrackableCollection;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
-import forge.util.maps.HashMapOfLists;
-import forge.util.maps.MapOfLists;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -177,11 +178,13 @@ public class HostedMatch {
             if (game.getMatch().getOutcomes().isEmpty()) {
                 qc.getCards().resetNewList();
             }
+            qc.setActiveGame(game);
             game.subscribeToEvents(qc); // this one listens to player's mulligans ATM
         }
 
-        game.subscribeToEvents(SoundSystem.instance);
-        game.subscribeToEvents(visitor);
+        // SoundSystem receives GameEvents via handleGameEvent() on each GUI,
+        // so it doesn't need a direct event bus subscription here.
+        // (It still subscribes to the Match bus for UiEvent sounds like blocker assignment.)
 
         final FCollectionView<Player> players = game.getPlayers();
         final String[] avatarIndices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
@@ -189,7 +192,7 @@ public class HostedMatch {
         final GameView gameView = getGameView();
 
         humanCount = 0;
-        final MapOfLists<IGuiGame, PlayerView> playersPerGui = new HashMapOfLists<>(ArrayList::new);
+        final Multimap<IGuiGame, PlayerView> playersPerGui = MultimapBuilder.hashKeys().arrayListValues().build();
         for (int iPlayer = 0; iPlayer < players.size(); iPlayer++) {
             final RegisteredPlayer rp = match.getPlayers().get(iPlayer);
             final Player p = players.get(iPlayer);
@@ -222,8 +225,12 @@ public class HostedMatch {
                 gui.setGameView(gameView);
                 gui.setOriginalGameController(p.getView(), humanController);
 
-                game.subscribeToEvents(new FControlGameEventHandler(humanController));
-                playersPerGui.add(gui, p.getView());
+                if (gui instanceof forge.gamemodes.net.server.NetGuiGame) {
+                    game.subscribeToEvents(new forge.gui.control.GameEventForwarder(gui));
+                } else {
+                    game.subscribeToEvents(new FControlGameEventHandler(humanController));
+                }
+                playersPerGui.put(gui, p.getView());
 
                 if (gameControllers != null ) {
                     LobbySlot lobbySlot = getLobbySlot(p.getLobbyPlayer());
@@ -235,7 +242,7 @@ public class HostedMatch {
             }
         }
 
-        for (final Entry<IGuiGame, Collection<PlayerView>> e : playersPerGui.entrySet()) {
+        for (final Entry<IGuiGame, Collection<PlayerView>> e : playersPerGui.asMap().entrySet()) {
             e.getKey().openView(new TrackableCollection<>(e.getValue()));
         }
 
@@ -395,8 +402,6 @@ public class HostedMatch {
         @Override
         public Void visit(final GameEventSubgameStart event) {
             subGameCount++;
-            event.subgame().subscribeToEvents(SoundSystem.instance);
-            event.subgame().subscribeToEvents(visitor);
 
             final GameView gameView = event.subgame().getView();
 
@@ -444,7 +449,8 @@ public class HostedMatch {
                         gui.openView(new TrackableCollection<>(p.getView()));
                         gui.setGameView(null);
                         gui.setGameView(gameView);
-                        gui.updatePhase(true);
+                        gui.handleGameEvent(new GameEventTurnPhase(
+                                gameView.getPlayerTurn(), gameView.getPhase(), ""));
                         gui.message(event.message());
                     }
                 }

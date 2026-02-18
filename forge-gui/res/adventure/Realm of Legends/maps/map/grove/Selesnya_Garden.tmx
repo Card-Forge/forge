@@ -40,6 +40,8 @@
   <object id="50" template="../../../../common/maps/obj/enemy.tx" x="150.434" y="102.827">
    <properties>
     <property name="enemy" value="Emmara"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
   <object id="76" template="../../../../common/maps/obj/enemy.tx" x="72.1846" y="126.775">
@@ -54,14 +56,15 @@
   <object id="91" template="../../../../common/maps/obj/enemy.tx" x="358.377" y="168.629">
    <properties>
     <property name="enemy" value="Chorus of the Conclave"/>
-    <property name="speedModifier" type="float" value="10"/>
+    <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
   <object id="92" template="../../../../common/maps/obj/enemy.tx" x="263.052" y="103.678">
    <properties>
     <property name="enemy" value="Tolsimir"/>
-    <property name="threatRange" type="int" value="0"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
   <object id="104" template="../../../../common/maps/obj/dialog.tx" x="279.583" y="239.227" width="65.8333" height="22.5455" visible="1">
@@ -150,7 +153,7 @@
     <property name="spawn.Normal" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="112" template="../../../../common/maps/obj/manashards.tx" x="382.5" y="121"/>
+  <object id="112" template="../../../../common/maps/obj/manashards.tx" x="284.5" y="84.6667"/>
   <object id="113" template="../../../../common/maps/obj/manashards.tx" x="382" y="144"/>
   <object id="114" template="../../../../common/maps/obj/dialog.tx" x="111.897" y="130.102" width="16" height="16" rotation="0" visible="1">
    <properties>
