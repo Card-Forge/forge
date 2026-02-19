@@ -282,25 +282,24 @@ public enum CardZoomer {
             final String keywordKey = thisCard.getKeywordKey();
             final String oracleText = thisCard.getOracleText();
             final String cardName = thisCard.getName();
-            if ((keywordKey != null && !keywordKey.isEmpty())
-                    || (oracleText != null && !oracleText.isEmpty())) {
-                final List<KeywordData> keywords = new ArrayList<>();
-                final Set<String> addedNames = new LinkedHashSet<>();
-                if (keywordKey != null && !keywordKey.isEmpty()) {
-                    keywords.addAll(CardInfoPopup.buildKeywords(keywordKey, addedNames));
-                }
-                if (oracleText != null && !oracleText.isEmpty()) {
-                    CardInfoPopup.addKeywordActions(keywords, oracleText, addedNames,
-                            cardName != null ? cardName : "");
-                }
-                if (!keywords.isEmpty()) {
-                    final JPanel kwPanel = new JPanel();
-                    kwPanel.setLayout(new BoxLayout(kwPanel, BoxLayout.Y_AXIS));
-                    kwPanel.setOpaque(false);
-                    CardInfoPopup.populateKeywords(kwPanel, keywords, maxWidth);
-                    content.add(kwPanel);
-                    hasContent = true;
-                }
+            final List<KeywordData> keywords = new ArrayList<>();
+            final Set<String> addedNames = new LinkedHashSet<>();
+            if (keywordKey != null && !keywordKey.isEmpty()) {
+                keywords.addAll(CardInfoPopup.buildKeywords(keywordKey, addedNames));
+            }
+            // Catch granted abilities that the keywordKey parsing may have missed
+            CardInfoPopup.addMissingKeywordsFromFlags(keywords, thisCard, addedNames);
+            if (oracleText != null && !oracleText.isEmpty()) {
+                CardInfoPopup.addKeywordActions(keywords, oracleText, addedNames,
+                        cardName != null ? cardName : "");
+            }
+            if (!keywords.isEmpty()) {
+                final JPanel kwPanel = new JPanel();
+                kwPanel.setLayout(new BoxLayout(kwPanel, BoxLayout.Y_AXIS));
+                kwPanel.setOpaque(false);
+                CardInfoPopup.populateKeywords(kwPanel, keywords, maxWidth);
+                content.add(kwPanel);
+                hasContent = true;
             }
         }
 

@@ -49,7 +49,7 @@ public final class CardInfoPopupMenu {
         menu.add(createSectionHeader(localizer.getMessage("lblCardZoomView")));
         menu.add(getCheckboxItem(localizer.getMessage("lblRelatedCards"),
                 FPref.UI_ZOOM_RELATED_CARDS));
-        menu.add(getCheckboxItem(localizer.getMessage("lblKeywordsExplained"),
+        menu.add(getCheckboxItem(localizer.getMessage("lblKeywordExplanations"),
                 FPref.UI_ZOOM_KEYWORD_INFO));
 
         menu.add(new JSeparator());

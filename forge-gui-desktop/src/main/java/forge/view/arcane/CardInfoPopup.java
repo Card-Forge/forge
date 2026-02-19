@@ -257,6 +257,8 @@ public class CardInfoPopup {
             if (!keywordKey.isEmpty()) {
                 keywordList.addAll(buildKeywords(keywordKey, addedNames));
             }
+            // Catch granted abilities that the keywordKey parsing may have missed
+            addMissingKeywordsFromFlags(keywordList, state, addedNames);
             // Scan oracle text for keyword actions (goad, scry, etc.)
             final String oracleText = nullSafe(state.getOracleText());
             if (!oracleText.isEmpty()) {
@@ -492,6 +494,54 @@ public class CardInfoPopup {
             final String desc = FSkin.encodeSymbols(reminder, false);
             result.add(new KeywordData(action.displayName, desc));
         }
+    }
+
+    /**
+     * Cross-check CardStateView boolean keyword flags against already-parsed
+     * keywords. Adds any keywords whose flag is true but were missed by
+     * keywordKey string parsing. Uses the same data source as the card overlay
+     * icons, ensuring granted abilities are always shown.
+     */
+    public static void addMissingKeywordsFromFlags(final List<KeywordData> result,
+                                                    final CardStateView state,
+                                                    final Set<String> addedNames) {
+        if (state == null) {
+            return;
+        }
+        addFlagKeyword(result, addedNames, state.hasFlying(), Keyword.FLYING);
+        addFlagKeyword(result, addedNames, state.hasFirstStrike(), Keyword.FIRST_STRIKE);
+        addFlagKeyword(result, addedNames, state.hasDoubleStrike(), Keyword.DOUBLE_STRIKE);
+        addFlagKeyword(result, addedNames, state.hasDeathtouch(), Keyword.DEATHTOUCH);
+        addFlagKeyword(result, addedNames, state.hasDefender(), Keyword.DEFENDER);
+        addFlagKeyword(result, addedNames, state.hasFear(), Keyword.FEAR);
+        addFlagKeyword(result, addedNames, state.hasHaste(), Keyword.HASTE);
+        addFlagKeyword(result, addedNames, state.hasHexproof(), Keyword.HEXPROOF);
+        addFlagKeyword(result, addedNames, state.hasIndestructible(), Keyword.INDESTRUCTIBLE);
+        addFlagKeyword(result, addedNames, state.hasIntimidate(), Keyword.INTIMIDATE);
+        addFlagKeyword(result, addedNames, state.hasLifelink(), Keyword.LIFELINK);
+        addFlagKeyword(result, addedNames, state.hasMenace(), Keyword.MENACE);
+        addFlagKeyword(result, addedNames, state.hasReach(), Keyword.REACH);
+        addFlagKeyword(result, addedNames, state.hasShadow(), Keyword.SHADOW);
+        addFlagKeyword(result, addedNames, state.hasShroud(), Keyword.SHROUD);
+        addFlagKeyword(result, addedNames, state.hasTrample(), Keyword.TRAMPLE);
+        addFlagKeyword(result, addedNames, state.hasVigilance(), Keyword.VIGILANCE);
+        addFlagKeyword(result, addedNames, state.hasInfect(), Keyword.INFECT);
+        addFlagKeyword(result, addedNames, state.hasWither(), Keyword.WITHER);
+        addFlagKeyword(result, addedNames, state.hasHorsemanship(), Keyword.HORSEMANSHIP);
+    }
+
+    private static void addFlagKeyword(final List<KeywordData> result,
+                                        final Set<String> addedNames,
+                                        final boolean hasFlag, final Keyword kw) {
+        if (!hasFlag) {
+            return;
+        }
+        if (addedNames.contains(kw.toString().toLowerCase())) {
+            return;
+        }
+        addedNames.add(kw.toString().toLowerCase());
+        final String reminder = FSkin.encodeSymbols(kw.getReminderText(), false);
+        result.add(new KeywordData(kw.toString(), reminder));
     }
 
     /** Replace standalone MTG color names with mana symbols for display. */
