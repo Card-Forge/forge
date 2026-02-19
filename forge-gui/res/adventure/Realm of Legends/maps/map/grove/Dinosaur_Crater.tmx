@@ -54,7 +54,7 @@
 		  &quot;name&quot;: &quot;(Continue)&quot;, }]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|RIX&quot;, &quot;Mountain|RIX&quot;, &quot;Plains|RIX&quot;, &quot;Strider Harness|RIX&quot;, &quot;raging regisaur|RIX&quot;, &quot;siegehorn ceratops|RIX&quot;, &quot;relentless raptor|RIX&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Strider Harness|RIX&quot;, &quot;Jungle Shrine|LCC&quot;, &quot;Arch of Orazca|RIX&quot;, &quot;raging regisaur|RIX&quot;, &quot;siegehorn ceratops|RIX&quot;, &quot;relentless raptor|RIX&quot;]}"/>
     <property name="enemy" value="Zacama"/>
     <property name="speedModifier" type="float" value="5"/>
     <property name="threatRange" type="int" value="50"/>

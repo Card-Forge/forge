@@ -18,7 +18,6 @@
     "Magus of the Moon",
     "Harbinger of the Seas",
     "Ruination",
-    "Iona Shield of Emeria",
     "Limited Resources",
     "Constant Mists",
     "Karakas",
@@ -42,7 +41,7 @@
     "Constant Mists",
     "Land Equilibrium",
     "Storage Matrix",
-    "Lutri the Spellchaser",
+    "Lutri, the Spellchaser",
     "Gleemox",
     "Drake Stone",
     "Wrenn and One",
@@ -119,7 +118,7 @@
     "Vampiric Tutor",
     "Wishclaw Talisman",
     "The One Ring",
-    "Emrakul the Aeons Torn",
+    "Emrakul, the Aeons Torn",
     "Ad Nauseum",
     "Bazaar of Baghdad",
     "Library of Alexandria",
@@ -225,7 +224,11 @@
       "startItems": [
         "Challenge Coin",
         "Challenge Coin",
-        "Challenge Coin"      
+        "Challenge Coin",
+        "Steel Boots",
+        "Lotus Petal",
+        "Echo Shield",
+        "Steel Armor"    
       ]
     }
     ,{
@@ -250,7 +253,9 @@
       },
    "startItems": [
         "Challenge Coin",
-        "Challenge Coin"
+        "Challenge Coin",
+        "Steel Boots",
+        "Lotus Petal"
       ]
     },{
       "name": "Hard",

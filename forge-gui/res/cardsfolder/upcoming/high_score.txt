@@ -1,0 +1,10 @@
+Name:High Score
+ManaCost:2 G
+Types:Enchantment
+R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Creature.YouCtrl+inZoneBattlefield | ValidCounterType$ P1P1 | ReplaceWith$ AddOneMoreCounters | Description$ If one or more +1/+1 counters would be put on a creature you control, that many plus one +1/+1 counters are put on it instead.
+SVar:AddOneMoreCounters:DB$ ReplaceCounter | ValidCounterType$ P1P1 | ChooseCounter$ True | Amount$ X
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, draw a card if you control a creature with the greatest power among creatures on the battlefield.
+SVar:TrigDraw:DB$ Draw | ConditionPresent$ Creature.greatestPower+YouCtrl | ConditionCompare$ GE1
+SVar:X:ReplaceCount$CounterNum/Plus.1
+DeckNeeds:Ability$Counters
+Oracle:If one or more +1/+1 counters would be put on a creature you control, that many plus one +1/+1 counters are put on it instead.\nAt the beginning of your end step, draw a card if you control a creature with the greatest power among creatures on the battlefield.

@@ -56,14 +56,6 @@ public enum FSkinImage implements FSkinImageInterface {
     SET_MYTHIC     (FSkinProp.IMG_SETLOGO_MYTHIC),
     SET_SPECIAL    (FSkinProp.IMG_SETLOGO_SPECIAL),
 
-    //Watermarks
-    WATERMARK_G    (FSkinProp.IMG_WATERMARK_G),
-    WATERMARK_R    (FSkinProp.IMG_WATERMARK_R),
-    WATERMARK_B    (FSkinProp.IMG_WATERMARK_B),
-    WATERMARK_U    (FSkinProp.IMG_WATERMARK_U),
-    WATERMARK_W    (FSkinProp.IMG_WATERMARK_W),
-    WATERMARK_C    (FSkinProp.IMG_WATERMARK_C),
-
     //draft ranks
     DRAFTRANK_D (FSkinProp.IMG_DRAFTRANK_D),
     DRAFTRANK_C (FSkinProp.IMG_DRAFTRANK_C),

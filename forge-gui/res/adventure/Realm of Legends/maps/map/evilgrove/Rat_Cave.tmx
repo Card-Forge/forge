@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="45" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="103">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="45" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="104">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -22,7 +22,7 @@
  </layer>
  <layer id="1" name="Background" width="45" height="25">
   <data encoding="base64" compression="zlib">
-   eJztVktOxTAMLCsS2HAVxIITvILeAblCoeUc7xas+h6w4gw0qkYZXDdxQpetZKm/2OOxM87psWlOu+22W7X1rmnOfrbBzYb7d7dtnIFiScO3XMzg5zL9t3aNBh9WLhDnRcSTz7mYn9P3Vzfbm4vr7q/i/dHXYQ0Yf66jH9xLjNo7a8xnxVc3xf8uxMx+OHfGp+GuwRw4Z66Bty/s76cMnhzuEp5a/5ejg1/2++jz+GXuKcxsHLekDy9irdYvFt8Wrhm71S/rz6DoR1gbOPtSeMvVz4r542Zpo19qImtwTuewRv6X2iOyx+QV8tV42PrqXNTEEG+N41bZAxJrWNv6qLNr2BHTkpvUJ6kfOe3gPci+RqoxzzzZf5ybzB/f2Nb6ltda9jU4TPnmPLj/MAdDLbAvwLlWX1mvA9UR72rn+drM0up/FDxZZgwwcs6Mu0RDU1oC/7I/Rr/U3ZIYmC3Qw9CjNVyjhrd3en9oeotaWOciMHPOHdWx9OwksaPfc7qgxeHzxDmRM/JFLrWYcz3DWqNxLLXkQTmH8Z4t3RdW3uXZDFqTwitzY43CDOB9WHNGtfRLal4FY+1J5ab53xKv1XrSgP9y9gt1eRRc
+   eJztVkFSwzAMDCdsuPCVDgde0MD0gXwhJeEd/QWntMCpbyCesJNFUWzZ5JjMaCZtbGm1klc+PVXVabPNNiu21lXV2Y/WudHw/u7WjdNRLGn4looZ/FyGdUtPb/Bh5QJxXkU8+TsV83P4fnSjvblp3+5mej/4MqwB4/V28oN3iVH7zxrzRfHVDPG/MzGzH86d8Wm4SzAHzplr4G0z+/s5gSeFO4en2v/laO/n/d77NH6ZewwzG8fN6cOL2Kv1i8W3hWvGbvXL+tMp+hH2Bs6+FN5S9bNi/ribW+/nmsganNI57JHrYmdE9ph8Qr4aD2s/jZs0McRb4rhWzoDEGvbWftLZJeyIaclN6pPUj5R28BlkXz3VmGee7D/OTeaPb2xLfct7LecaHMZ8cx7cf5iDoRY4F+Bcq6+s157qiP9K5/nSzNLqfxA8WWYMMHLOjDtHQ2NaAv+yP3o/192cGJgt0MPQoyVco4b3D3p/aHqLWljnIjBzzg3VMffuJLGj31O6oMXh+8Q5kjPyRS6lmFM9w1qjcSy15PF3vdQTnNncc2HlXd7NEDeGl3PTeqcW+lFyR7X0S2xeBWPtaQzr2f+aeK3Wkgb8l7MfKYIX7w==
   </data>
  </layer>
  <layer id="3" name="Clutter" width="45" height="25">
@@ -42,16 +42,32 @@
   <object id="54" template="../../../../common/maps/obj/gold.tx" x="493.991" y="88.765"/>
   <object id="59" template="../../../../common/maps/obj/enemy.tx" x="181.41" y="157.167">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Nashi"/>
-    <property name="speedModifier" type="float" value="15"/>
+    <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
   <object id="60" template="../../../../common/maps/obj/enemy.tx" x="323.963" y="329.526" visible="1">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Karumonix"/>
     <property name="hidden" type="bool" value="false"/>
-    <property name="speedModifier" type="float" value="15"/>
+    <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
@@ -82,21 +98,45 @@
   </object>
   <object id="69" template="../../../../common/maps/obj/enemy.tx" x="289.944" y="164.038">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Gnat Miser|SOK&quot;, &quot;Swarm of Rats|9ED&quot; ] }"/>
     <property name="enemy" value="Marrow-Gnawer"/>
-    <property name="speedModifier" type="float" value="15"/>
-    <property name="threatRange" type="int" value="20"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
   <object id="70" template="../../../../common/maps/obj/enemy.tx" x="415.765" y="236.565">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Ashcoat"/>
-    <property name="speedModifier" type="float" value="10"/>
+    <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="10"/>
    </properties>
   </object>
   <object id="75" template="../../../../common/maps/obj/enemy.tx" x="613.913" y="214.693">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Vren"/>
     <property name="speedModifier" type="float" value="0"/>
     <property name="threatRange" type="int" value="0"/>
@@ -104,22 +144,38 @@
   </object>
   <object id="76" template="../../../../common/maps/obj/enemy.tx" x="534.385" y="158.5">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Greasefang"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="50"/>
     <property name="waypoints" value="95,96"/>
    </properties>
   </object>
-  <object id="77" template="../../../../common/maps/obj/enemy.tx" x="649.063" y="303.937">
+  <object id="77" template="../../../../common/maps/obj/enemy.tx" x="137.063" y="226.437">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Wick"/>
     <property name="speedModifier" type="float" value="0"/>
-    <property name="threatRange" type="int" value="0"/>
+    <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
   <object id="83" template="../../../../common/maps/obj/manashards.tx" x="667.332" y="179.605"/>
-  <object id="84" template="../../../../common/maps/obj/manashards.tx" x="643.711" y="257.741"/>
-  <object id="88" template="../../obj/treasure.tx" x="666" y="361">
+  <object id="84" template="../../../../common/maps/obj/manashards.tx" x="269.211" y="359.241"/>
+  <object id="88" template="../../obj/treasure.tx" x="667.5" y="361">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;card&quot;,
@@ -216,7 +272,7 @@
 }]</property>
    </properties>
   </object>
-  <object id="102" template="../../../../common/maps/obj/dialog.tx" x="550.334" y="361.917" width="16" height="32" rotation="0" visible="1">
+  <object id="102" template="../../../../common/maps/obj/dialog.tx" x="550.334" y="346.25" width="16" height="16.3333" rotation="0" visible="1">
    <properties>
     <property name="dialog">[
 {
@@ -225,6 +281,53 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }
 ]</property>
+   </properties>
+  </object>
+  <object id="103" template="../../../../common/maps/obj/enemy.tx" x="641.5" y="279.5">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;A ninja reveals herself from the shadows ahead. 'You've come here to kill, no? Let us talk.'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;The job is done.&quot;,
+                    &quot;text&quot;: &quot;'Excellent job.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Ink-Eyes, Servant of Oni&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;randomCard&quot;, &quot;colors&quot;: [ &quot;Black&quot;], &quot;rarity&quot;: [&quot;Rare&quot;, &quot;Mythic Rare&quot;], &quot;count&quot;: 3 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 1500}              
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 7
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Well, talk then.&quot;,
+					&quot;text&quot;: &quot;'My blade thirsts for vengeance - I have been betrayed by my former kin who hide here. But the blood oath I once swore to them still holds due to their deceptive magic, so I cannot fulfill my revenge alone. Slay the seven and I shall reward you.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;I don't trust you.&quot;,
+					&quot;text&quot;: &quot;She fades back into the shadows, though you can still see her eyes.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Ink-Eyes"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
  </objectgroup>

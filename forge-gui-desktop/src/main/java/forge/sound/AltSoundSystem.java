@@ -10,9 +10,13 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.DataLine;
+import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.Mixer;
 import javax.sound.sampled.SourceDataLine;
 import javax.sound.sampled.UnsupportedAudioFileException;
+
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 
 /**
  *
@@ -111,6 +115,15 @@ public class AltSoundSystem extends Thread {
             audioLine.open(format);
         } catch (Exception e) {
             return;
+        }
+
+        if (audioLine.isControlSupported(FloatControl.Type.MASTER_GAIN)) {
+            float vol = FModel.getPreferences().getPrefInt(FPref.UI_VOL_SOUNDS) / 100f;
+            FloatControl gain = (FloatControl) audioLine.getControl(FloatControl.Type.MASTER_GAIN);
+            float dB = (float) (20.0 * Math.log10(Math.max(vol, 0.0001)));
+            dB = Math.max(dB, gain.getMinimum());
+            dB = Math.min(dB, gain.getMaximum());
+            gain.setValue(dB);
         }
 
         audioLine.start();

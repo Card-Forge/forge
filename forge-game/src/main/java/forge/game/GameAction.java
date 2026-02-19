@@ -2631,7 +2631,7 @@ public class GameAction {
             int numToBottom = decision.getRight() == null ? 0 : decision.getRight().size();
 
             // publicize the decision
-            game.fireEvent(new GameEventScry(p, numToTop, numToBottom));
+            game.fireEvent(new GameEventScry(PlayerView.get(p), numToTop, numToBottom));
         }
         // do the moves after all the decisions (maybe not necessary, but let's
         // do it the official way)
