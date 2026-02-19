@@ -2,10 +2,12 @@ package forge.screens.match.menus;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
@@ -30,16 +32,36 @@ public final class CardInfoPopupMenu {
 
     public JMenu getMenu() {
         final Localizer localizer = Localizer.getInstance();
-        final JMenu menu = new JMenu(localizer.getMessage("lblCardInfoPopup"));
+        final JMenu menu = new JMenu(localizer.getMessage("lblCardInfoPopups"));
+
+        // --- Hover Tooltip section ---
+        menu.add(createSectionHeader(localizer.getMessage("lblHoverTooltip")));
         menu.add(getCheckboxItem(localizer.getMessage("lblCardImage"),
                 FPref.UI_POPUP_CARD_IMAGE));
         menu.add(getCheckboxItem(localizer.getMessage("lblRelatedCards"),
                 FPref.UI_POPUP_RELATED_CARDS));
         menu.add(getCheckboxItem(localizer.getMessage("lblKeywordExplanations"),
                 FPref.UI_POPUP_KEYWORD_INFO));
+
+        menu.add(new JSeparator());
+
+        // --- Card Zoom View section ---
+        menu.add(createSectionHeader(localizer.getMessage("lblCardZoomView")));
+        menu.add(getCheckboxItem(localizer.getMessage("lblRelatedCards"),
+                FPref.UI_ZOOM_RELATED_CARDS));
+        menu.add(getCheckboxItem(localizer.getMessage("lblKeywordsExplained"),
+                FPref.UI_ZOOM_KEYWORD_INFO));
+
         menu.add(new JSeparator());
         menu.add(buildImageSizePanel(localizer));
         return menu;
+    }
+
+    private static JMenuItem createSectionHeader(final String text) {
+        final JMenuItem header = new JMenuItem(text);
+        header.setEnabled(false);
+        header.setFont(header.getFont().deriveFont(Font.BOLD));
+        return header;
     }
 
     private static JCheckBoxMenuItem getCheckboxItem(final String label, final FPref pref) {

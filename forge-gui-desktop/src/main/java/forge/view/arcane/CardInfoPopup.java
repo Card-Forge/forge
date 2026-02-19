@@ -311,7 +311,8 @@ public class CardInfoPopup {
         relatedCardsPanel.setVisible(hasRelated);
         relatedCardsPanel.removeAll();
         if (hasRelated) {
-            populateRelatedCards(relatedEntries, thumbnailHeight, maxContentWidth);
+            populateRelatedCards(relatedCardsPanel, relatedEntries,
+                    thumbnailHeight, maxContentWidth);
         }
 
         // Update cache
@@ -369,9 +370,9 @@ public class CardInfoPopup {
 
     // --- Keyword building ---
 
-    private static class KeywordData {
-        final String name;
-        final String reminderHtml; // already encoded with FSkin.encodeSymbols
+    public static class KeywordData {
+        public final String name;
+        public final String reminderHtml; // already encoded with FSkin.encodeSymbols
 
         KeywordData(final String name, final String reminderHtml) {
             this.name = name;
@@ -379,7 +380,7 @@ public class CardInfoPopup {
         }
     }
 
-    private static List<KeywordData> buildKeywords(final String keywordKey,
+    public static List<KeywordData> buildKeywords(final String keywordKey,
                                                       final Set<String> addedNames) {
         final String[] tokens = keywordKey.split(",");
         final Set<Keyword> seen = new LinkedHashSet<>();
@@ -422,7 +423,7 @@ public class CardInfoPopup {
      * Scan oracle text for keyword actions that aren't already shown as keyword
      * abilities, and append them to the keyword list.
      */
-    private static void addKeywordActions(final List<KeywordData> result,
+    public static void addKeywordActions(final List<KeywordData> result,
                                            final String oracleText,
                                            final Set<String> existingNames,
                                            final String cardName) {
@@ -531,7 +532,7 @@ public class CardInfoPopup {
     }
 
     /** Creates a JLabel that uses grayscale AA (LCD AA breaks on transparent windows). */
-    private static javax.swing.JLabel createAALabel(final String text) {
+    public static javax.swing.JLabel createAALabel(final String text) {
         return new javax.swing.JLabel(text) {
             @Override
             protected void paintComponent(final java.awt.Graphics g) {
@@ -543,7 +544,7 @@ public class CardInfoPopup {
         };
     }
 
-    private static JPanel createPillPanel() {
+    public static JPanel createPillPanel() {
         final JPanel pill = new JPanel() {
             @Override
             protected void paintComponent(final java.awt.Graphics g) {
@@ -567,7 +568,7 @@ public class CardInfoPopup {
         return pill;
     }
 
-    private static void populateKeywords(final JPanel panel,
+    public static void populateKeywords(final JPanel panel,
                                           final List<KeywordData> keywords,
                                           final int maxWidth) {
         final FSkin.SkinFont boldFont = FSkin.getBoldFont(12);
@@ -622,8 +623,13 @@ public class CardInfoPopup {
 
     // --- Related cards building ---
 
-    private List<RelatedCardEntry> buildRelatedCards(final String cardName,
-                                                     final CardView cardView) {
+    /**
+     * Build related card entries (static, no auto-download side effects).
+     * Callers that need auto-download should iterate entries and call
+     * fetchIfMissing for those with null/default images.
+     */
+    public static List<RelatedCardEntry> buildRelatedCardsStatic(final String cardName,
+                                                                  final CardView cardView) {
         final List<RelatedCardEntry> entries = new ArrayList<>();
 
         try {
@@ -647,10 +653,8 @@ public class CardInfoPopup {
                         final BufferedImage img = ImageCache.getOriginalImage(
                                 imageKey, true, tokenView);
                         if (img != null) {
-                            entries.add(new RelatedCardEntry("Creates", pt.getName(), img));
-                        }
-                        if (img == null || ImageCache.isDefaultImage(img)) {
-                            fetchIfMissing(imageKey);
+                            entries.add(new RelatedCardEntry("Creates", pt.getName(),
+                                    img, imageKey));
                         }
                     }
                 }
@@ -694,23 +698,33 @@ public class CardInfoPopup {
         return entries;
     }
 
-    private void addOtherFaceEntry(final List<RelatedCardEntry> entries,
-                                    final CardView cardView, final String label) {
+    private List<RelatedCardEntry> buildRelatedCards(final String cardName,
+                                                     final CardView cardView) {
+        final List<RelatedCardEntry> entries = buildRelatedCardsStatic(cardName, cardView);
+        // Trigger auto-download for entries with null/default images
+        for (final RelatedCardEntry entry : entries) {
+            if (entry.image == null || ImageCache.isDefaultImage(entry.image)) {
+                fetchIfMissing(entry.imageKey);
+            }
+        }
+        return entries;
+    }
+
+    private static void addOtherFaceEntry(final List<RelatedCardEntry> entries,
+                                           final CardView cardView, final String label) {
         final CardStateView altState = cardView.getAlternateState();
         if (altState == null) {
             return;
         }
         final BufferedImage img = FImageUtil.getImage(altState);
         if (img != null) {
-            entries.add(new RelatedCardEntry(label, altState.getName(), img));
-        }
-        if (img == null || ImageCache.isDefaultImage(img)) {
-            fetchIfMissing(altState.getImageKey());
+            entries.add(new RelatedCardEntry(label, altState.getName(),
+                    img, altState.getImageKey()));
         }
     }
 
-    private void addFlipFaceEntry(final List<RelatedCardEntry> entries,
-                                    final CardView cardView) {
+    private static void addFlipFaceEntry(final List<RelatedCardEntry> entries,
+                                          final CardView cardView) {
         final CardStateView altState = cardView.getAlternateState();
         if (altState == null) {
             return;
@@ -719,10 +733,8 @@ public class CardInfoPopup {
         if (img != null) {
             final BufferedImage displayImg = ImageCache.isDefaultImage(img)
                     ? img : rotateImage180(img);
-            entries.add(new RelatedCardEntry("Flips Into", altState.getName(), displayImg));
-        }
-        if (img == null || ImageCache.isDefaultImage(img)) {
-            fetchIfMissing(altState.getImageKey());
+            entries.add(new RelatedCardEntry("Flips Into", altState.getName(),
+                    displayImg, altState.getImageKey()));
         }
     }
 
@@ -737,9 +749,9 @@ public class CardInfoPopup {
         return rotated;
     }
 
-    private void addSpecializeFaces(final List<RelatedCardEntry> entries,
-                                     final CardRules rules, final String cardName,
-                                     final StaticData data) {
+    private static void addSpecializeFaces(final List<RelatedCardEntry> entries,
+                                            final CardRules rules, final String cardName,
+                                            final StaticData data) {
         final Map<?, ICardFace> specParts = rules.getSpecializeParts();
         if (specParts == null || specParts.isEmpty()) {
             return;
@@ -755,10 +767,8 @@ public class CardInfoPopup {
                         final BufferedImage img = ImageCache.getOriginalImage(
                                 imageKey, true, null);
                         if (img != null) {
-                            entries.add(new RelatedCardEntry("Specializes Into", faceName, img));
-                        }
-                        if (img == null || ImageCache.isDefaultImage(img)) {
-                            fetchIfMissing(imageKey);
+                            entries.add(new RelatedCardEntry("Specializes Into",
+                                    faceName, img, imageKey));
                         }
                     }
                 }
@@ -768,8 +778,8 @@ public class CardInfoPopup {
         }
     }
 
-    private void addSpellbookEntries(final List<RelatedCardEntry> entries,
-                                      final CardRules rules, final StaticData data) {
+    private static void addSpellbookEntries(final List<RelatedCardEntry> entries,
+                                             final CardRules rules, final StaticData data) {
         final Set<String> spellbookNames = extractSpellbookNames(rules.getMainPart());
         if (spellbookNames.isEmpty()) {
             return;
@@ -784,10 +794,8 @@ public class CardInfoPopup {
                     final BufferedImage img = ImageCache.getOriginalImage(
                             imageKey, true, null);
                     if (img != null) {
-                        entries.add(new RelatedCardEntry("Spellbook", cardName, img));
-                    }
-                    if (img == null || ImageCache.isDefaultImage(img)) {
-                        fetchIfMissing(imageKey);
+                        entries.add(new RelatedCardEntry("Spellbook", cardName,
+                                img, imageKey));
                     }
                 }
             } catch (Exception e) {
@@ -796,9 +804,9 @@ public class CardInfoPopup {
         }
     }
 
-    private void addNamedCardEntry(final List<RelatedCardEntry> entries,
-                                    final String name, final String label,
-                                    final StaticData data) {
+    private static void addNamedCardEntry(final List<RelatedCardEntry> entries,
+                                           final String name, final String label,
+                                           final StaticData data) {
         if (name == null || name.isEmpty()) {
             return;
         }
@@ -808,10 +816,7 @@ public class CardInfoPopup {
                 final String imageKey = pc.getImageKey(false);
                 final BufferedImage img = ImageCache.getOriginalImage(imageKey, true, null);
                 if (img != null) {
-                    entries.add(new RelatedCardEntry(label, name, img));
-                }
-                if (img == null || ImageCache.isDefaultImage(img)) {
-                    fetchIfMissing(imageKey);
+                    entries.add(new RelatedCardEntry(label, name, img, imageKey));
                 }
             }
         } catch (Exception e) {
@@ -866,9 +871,10 @@ public class CardInfoPopup {
     private static final int FULL_SIZE_MAX = 2;
     private static final int HALF_SIZE_PER_ROW = 4;
 
-    private void populateRelatedCards(final List<RelatedCardEntry> entries,
-                                      final int thumbnailHeight,
-                                      final int maxContentWidth) {
+    public static void populateRelatedCards(final JPanel targetPanel,
+                                              final List<RelatedCardEntry> entries,
+                                              final int thumbnailHeight,
+                                              final int maxContentWidth) {
         // Group entries by label
         final LinkedHashMap<String, List<RelatedCardEntry>> grouped = new LinkedHashMap<>();
         for (final RelatedCardEntry entry : entries) {
@@ -882,7 +888,7 @@ public class CardInfoPopup {
             final List<RelatedCardEntry> cards = group.getValue();
 
             if (!firstGroup) {
-                relatedCardsPanel.add(javax.swing.Box.createRigidArea(
+                targetPanel.add(javax.swing.Box.createRigidArea(
                         new Dimension(0, 4)));
             }
             firstGroup = false;
@@ -959,7 +965,7 @@ public class CardInfoPopup {
             }
 
             pill.setMaximumSize(new Dimension(maxContentWidth, Integer.MAX_VALUE));
-            relatedCardsPanel.add(pill);
+            targetPanel.add(pill);
         }
     }
 
@@ -1027,15 +1033,18 @@ public class CardInfoPopup {
         return s == null ? "" : s;
     }
 
-    private static class RelatedCardEntry {
-        final String label;
-        final String name;
-        final BufferedImage image;
+    public static class RelatedCardEntry {
+        public final String label;
+        public final String name;
+        public final BufferedImage image;
+        public final String imageKey;
 
-        RelatedCardEntry(final String label, final String name, final BufferedImage image) {
+        RelatedCardEntry(final String label, final String name,
+                         final BufferedImage image, final String imageKey) {
             this.label = label;
             this.name = name;
             this.image = image;
+            this.imageKey = imageKey;
         }
     }
 }

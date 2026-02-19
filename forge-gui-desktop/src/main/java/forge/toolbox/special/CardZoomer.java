@@ -18,28 +18,42 @@
 
 package forge.toolbox.special;
 
+import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.Timer;
 
 import forge.StaticData;
 import forge.game.card.Card;
+import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.keyword.Keyword;
 import forge.gui.SOverlayUtils;
 import forge.item.PaperCard;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
+import forge.model.FModel;
 import forge.toolbox.FOverlay;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;
 import forge.toolbox.imaging.FImagePanel;
 import forge.toolbox.imaging.FImagePanel.AutoSizeImageMode;
 import forge.toolbox.imaging.FImageUtil;
+import forge.view.arcane.CardInfoPopup;
+import forge.view.arcane.CardInfoPopup.KeywordData;
+import forge.view.arcane.CardInfoPopup.RelatedCardEntry;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -219,10 +233,107 @@ public enum CardZoomer {
         final BufferedImage xlhqImage = FImageUtil.getImageXlhq(thisCard);
         imagePanel.setImage(xlhqImage == null ? FImageUtil.getImage(thisCard) : xlhqImage, getInitialRotation(), AutoSizeImageMode.SOURCE);
 
+        final boolean showKeywords = FModel.getPreferences().getPrefBoolean(FPref.UI_ZOOM_KEYWORD_INFO);
+        final boolean showRelated = FModel.getPreferences().getPrefBoolean(FPref.UI_ZOOM_RELATED_CARDS);
+
         pnlMain.removeAll();
-        pnlMain.add(imagePanel, "w 80%!, h 80%!");
+        if ((showKeywords || showRelated) && thisCard != null) {
+            final JPanel infoPanel = buildInfoPanel(showKeywords, showRelated);
+            if (infoPanel != null) {
+                // Switch to horizontal layout (no wrap) for side-by-side display
+                pnlMain.setLayout(new MigLayout("insets 0, ax center, ay center"));
+                pnlMain.add(imagePanel, "w 45%!, h 80%!");
+                final JScrollPane scroll = new JScrollPane(infoPanel);
+                scroll.setOpaque(false);
+                scroll.getViewport().setOpaque(false);
+                scroll.setBorder(null);
+                scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+                pnlMain.add(scroll, "w 40%!, h 80%!");
+            } else {
+                pnlMain.add(imagePanel, "w 80%!, h 80%!");
+            }
+        } else {
+            pnlMain.add(imagePanel, "w 80%!, h 80%!");
+        }
         pnlMain.validate();
         setFlipIndicator();
+    }
+
+    private JPanel buildInfoPanel(final boolean showKeywords, final boolean showRelated) {
+        final JPanel content = new JPanel();
+        content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
+        content.setOpaque(false);
+        content.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+
+        // Derive dimensions from the 40% scroll pane column.
+        // Account for scrollbar (~17px), content padding (16px), and border slack.
+        final int screenWidth = overlay.getWidth() > 0
+                ? overlay.getWidth()
+                : java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
+        final int maxWidth = Math.max(200, (int) (screenWidth * 0.40) - 60);
+        // Cap thumbnail height so 2 cards fit side-by-side in the column
+        final int rawSize = FModel.getPreferences().getPrefInt(FPref.UI_POPUP_IMAGE_SIZE);
+        final int popupThumbHeight = Math.max(100, Math.min(500, rawSize));
+        final int maxThumbForColumn = (int) ((maxWidth / 2.0) / 0.716);
+        final int thumbnailHeight = Math.min(popupThumbHeight, maxThumbForColumn);
+        boolean hasContent = false;
+
+        if (showKeywords) {
+            final String keywordKey = thisCard.getKeywordKey();
+            final String oracleText = thisCard.getOracleText();
+            final String cardName = thisCard.getName();
+            if ((keywordKey != null && !keywordKey.isEmpty())
+                    || (oracleText != null && !oracleText.isEmpty())) {
+                final List<KeywordData> keywords = new ArrayList<>();
+                final Set<String> addedNames = new LinkedHashSet<>();
+                if (keywordKey != null && !keywordKey.isEmpty()) {
+                    keywords.addAll(CardInfoPopup.buildKeywords(keywordKey, addedNames));
+                }
+                if (oracleText != null && !oracleText.isEmpty()) {
+                    CardInfoPopup.addKeywordActions(keywords, oracleText, addedNames,
+                            cardName != null ? cardName : "");
+                }
+                if (!keywords.isEmpty()) {
+                    final JPanel kwPanel = new JPanel();
+                    kwPanel.setLayout(new BoxLayout(kwPanel, BoxLayout.Y_AXIS));
+                    kwPanel.setOpaque(false);
+                    CardInfoPopup.populateKeywords(kwPanel, keywords, maxWidth);
+                    content.add(kwPanel);
+                    hasContent = true;
+                }
+            }
+        }
+
+        if (showRelated) {
+            final String cardName = thisCard.getName();
+            final CardView cardView = thisCard.getCard();
+            if (cardName != null && !cardName.isEmpty() && cardView != null) {
+                final List<RelatedCardEntry> entries =
+                        CardInfoPopup.buildRelatedCardsStatic(cardName, cardView);
+                if (!entries.isEmpty()) {
+                    if (hasContent) {
+                        content.add(javax.swing.Box.createRigidArea(new Dimension(0, 8)));
+                    }
+                    final JPanel relPanel = new JPanel();
+                    relPanel.setLayout(new BoxLayout(relPanel, BoxLayout.Y_AXIS));
+                    relPanel.setOpaque(false);
+                    CardInfoPopup.populateRelatedCards(relPanel, entries,
+                            thumbnailHeight, maxWidth);
+                    content.add(relPanel);
+                    hasContent = true;
+                }
+            }
+        }
+
+        if (!hasContent) {
+            return null;
+        }
+
+        // Wrap in BorderLayout.NORTH so content top-aligns instead of stretching
+        final JPanel wrapper = new JPanel(new java.awt.BorderLayout());
+        wrapper.setOpaque(false);
+        wrapper.add(content, java.awt.BorderLayout.NORTH);
+        return wrapper;
     }
 
     private int getInitialRotation() {
