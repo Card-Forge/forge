@@ -83,12 +83,18 @@ public abstract class CardPanelContainer extends SkinnedPanel {
 
     private void mouseWheelZoom(final CardView card) {
         if (canZoom(card)) {
+            if (cardInfoPopup != null) {
+                cardInfoPopup.hidePopup();
+            }
             CardZoomer.SINGLETON_INSTANCE.setCard(card.getCurrentState(), false);
             CardZoomer.SINGLETON_INSTANCE.doMouseWheelZoom();
         }
     }
     private void mouseButtonZoom(final CardView card) {
         if (canZoom(card)) {
+            if (cardInfoPopup != null) {
+                cardInfoPopup.hidePopup();
+            }
             CardZoomer.SINGLETON_INSTANCE.setCard(card.getCurrentState(), false);
             CardZoomer.SINGLETON_INSTANCE.doMouseButtonZoom();
         }
@@ -270,7 +276,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
     }
 
     private void updateCardInfoPopup(final CardPanel panel) {
-        if (panel == null) {
+        if (panel == null || CardZoomer.SINGLETON_INSTANCE.isZoomerOpen()) {
             if (cardInfoPopup != null) {
                 cardInfoPopup.hidePopup();
             }

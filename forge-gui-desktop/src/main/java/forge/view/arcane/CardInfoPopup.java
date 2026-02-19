@@ -34,6 +34,7 @@ import forge.card.CardSplitType;
 import forge.card.ICardFace;
 import forge.item.PaperCard;
 import forge.item.PaperToken;
+import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.keyword.Keyword;
@@ -577,9 +578,10 @@ public class CardInfoPopup {
                 for (final String tokenName : tokenNames) {
                     final PaperToken pt = data.getAllTokens().getToken(tokenName);
                     if (pt != null) {
+                        final CardView tokenView = Card.getCardForUi(pt).getView();
                         final String imageKey = pt.getCardImageKey();
                         final BufferedImage img = ImageCache.getOriginalImage(
-                                imageKey, true, null);
+                                imageKey, true, tokenView);
                         if (img != null) {
                             entries.add(new RelatedCardEntry("Creates", pt.getName(), img));
                         }
@@ -685,15 +687,14 @@ public class CardInfoPopup {
                 if (faceRules != null) {
                     final forge.item.PaperCard pc = data.getCommonCards().getCard(faceName);
                     if (pc != null) {
-                        final String imageKey = pc.getCardImageKey();
+                        final String imageKey = pc.getImageKey(false);
                         final BufferedImage img = ImageCache.getOriginalImage(
                                 imageKey, true, null);
                         if (img != null) {
                             entries.add(new RelatedCardEntry("Specializes Into", faceName, img));
                         }
                         if (img == null || ImageCache.isDefaultImage(img)) {
-                            // Use prefixed key for fetcher
-                            fetchIfMissing(pc.getImageKey(false));
+                            fetchIfMissing(imageKey);
                         }
                     }
                 }
@@ -715,15 +716,14 @@ public class CardInfoPopup {
             try {
                 final PaperCard pc = data.getCommonCards().getCard(cardName);
                 if (pc != null) {
-                    final String imageKey = pc.getCardImageKey();
+                    final String imageKey = pc.getImageKey(false);
                     final BufferedImage img = ImageCache.getOriginalImage(
                             imageKey, true, null);
                     if (img != null) {
                         entries.add(new RelatedCardEntry("Spellbook", cardName, img));
                     }
                     if (img == null || ImageCache.isDefaultImage(img)) {
-                        // Use prefixed key for fetcher (getCardImageKey returns path format)
-                        fetchIfMissing(pc.getImageKey(false));
+                        fetchIfMissing(imageKey);
                     }
                 }
             } catch (Exception e) {
@@ -741,13 +741,13 @@ public class CardInfoPopup {
         try {
             final PaperCard pc = data.getCommonCards().getCard(name);
             if (pc != null) {
-                final String imageKey = pc.getCardImageKey();
+                final String imageKey = pc.getImageKey(false);
                 final BufferedImage img = ImageCache.getOriginalImage(imageKey, true, null);
                 if (img != null) {
                     entries.add(new RelatedCardEntry(label, name, img));
                 }
                 if (img == null || ImageCache.isDefaultImage(img)) {
-                    fetchIfMissing(pc.getImageKey(false));
+                    fetchIfMissing(imageKey);
                 }
             }
         } catch (Exception e) {
