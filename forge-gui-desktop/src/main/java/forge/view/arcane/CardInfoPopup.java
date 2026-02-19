@@ -39,9 +39,8 @@ import forge.item.PaperToken;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
-import forge.game.keyword.Keyword;
-import forge.game.keyword.KeywordAction;
-import forge.game.keyword.KeywordInterface;
+import forge.gui.card.KeywordInfoUtil;
+import forge.gui.card.KeywordInfoUtil.KeywordData;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.toolbox.FSkin;
@@ -251,18 +250,18 @@ public class CardInfoPopup {
             keywordList = new ArrayList<>();
             final Set<String> addedNames = new LinkedHashSet<>();
             if (!keywordKey.isEmpty()) {
-                keywordList.addAll(buildKeywords(keywordKey, addedNames));
+                keywordList.addAll(KeywordInfoUtil.buildKeywords(keywordKey, addedNames));
             }
             // Catch granted abilities that the keywordKey parsing may have missed
-            addMissingKeywordsFromFlags(keywordList, state, addedNames);
+            KeywordInfoUtil.addMissingKeywordsFromFlags(keywordList, state, addedNames);
             // Scan oracle text for keyword actions (goad, scry, etc.)
             final String oracleText = nullSafe(state.getOracleText());
             if (!oracleText.isEmpty()) {
-                addKeywordActions(keywordList, oracleText, addedNames,
+                KeywordInfoUtil.addKeywordActions(keywordList, oracleText, addedNames,
                         nullSafe(state.getName()));
             }
             // Sort by card text order
-            sortByOracleText(keywordList, oracleText);
+            KeywordInfoUtil.sortByOracleText(keywordList, oracleText);
             hasKeywords = !keywordList.isEmpty();
         }
 
@@ -395,216 +394,7 @@ public class CardInfoPopup {
         });
     }
 
-    // --- Keyword building ---
-
-    public static class KeywordData {
-        public final String name;
-        public final String reminderHtml; // already encoded with FSkin.encodeSymbols
-
-        KeywordData(final String name, final String reminderHtml) {
-            this.name = name;
-            this.reminderHtml = reminderHtml;
-        }
-    }
-
-    public static List<KeywordData> buildKeywords(final String keywordKey,
-                                                      final Set<String> addedNames) {
-        final String[] tokens = keywordKey.split(",");
-        final Set<Keyword> seen = new LinkedHashSet<>();
-        final List<KeywordData> result = new ArrayList<>();
-
-        for (final String token : tokens) {
-            if (token.isEmpty()) {
-                continue;
-            }
-            try {
-                final KeywordInterface inst = Keyword.getInstance(token);
-                final Keyword kw = inst.getKeyword();
-                if (kw == Keyword.UNDEFINED || kw == Keyword.ENCHANT) {
-                    continue;
-                }
-                if (!seen.add(kw)) {
-                    continue; // deduplicate
-                }
-                String reminderText;
-                try {
-                    reminderText = inst.getReminderText();
-                } catch (Exception ex) {
-                    reminderText = "";
-                }
-                if (!reminderText.isEmpty()) {
-                    reminderText = FSkin.encodeSymbols(reminderText, false);
-                }
-                final String name = FSkin.encodeSymbols(
-                        colorNamesToSymbols(inst.getTitle()), false);
-                result.add(new KeywordData(name, reminderText));
-                addedNames.add(kw.toString().toLowerCase());
-            } catch (Exception e) {
-                // Skip malformed keyword tokens
-            }
-        }
-        return result;
-    }
-
-    /**
-     * Scan oracle text for keyword actions that aren't already shown as keyword
-     * abilities, and append them to the keyword list.
-     */
-    public static void addKeywordActions(final List<KeywordData> result,
-                                           final String oracleText,
-                                           final Set<String> existingNames,
-                                           final String cardName) {
-        if (oracleText == null || oracleText.isEmpty()) {
-            return;
-        }
-        // Strip card name to avoid false positives (e.g., "Boseiju, Who Endures")
-        String lowerText = oracleText.toLowerCase();
-        if (!cardName.isEmpty()) {
-            lowerText = lowerText.replace(cardName.toLowerCase(), "");
-        }
-        // Collect matches with their position in the oracle text, then sort by position
-        // so keyword actions appear top-to-bottom in card text order
-        final List<int[]> pendingIndices = new ArrayList<>(); // [oraclePos, enumOrdinal]
-        for (final KeywordAction action : KeywordAction.values()) {
-            if (action.basic) {
-                continue;
-            }
-            final String name = action.getDisplayName();
-            if (existingNames.contains(name.toLowerCase())) {
-                continue;
-            }
-            // Match whole word (case-insensitive): "goad", "goads", "goaded"
-            final String lowerName = name.toLowerCase();
-            if (lowerText.contains(lowerName)) {
-                // Verify it's a word boundary (not part of a larger word)
-                int idx = lowerText.indexOf(lowerName);
-                while (idx >= 0) {
-                    final boolean startOk = idx == 0
-                            || !Character.isLetter(lowerText.charAt(idx - 1));
-                    if (startOk) {
-                        pendingIndices.add(new int[]{idx, action.ordinal()});
-                        existingNames.add(lowerName);
-                        break;
-                    }
-                    idx = lowerText.indexOf(lowerName, idx + 1);
-                }
-            }
-        }
-        pendingIndices.sort((a, b) -> Integer.compare(a[0], b[0]));
-        final KeywordAction[] allActions = KeywordAction.values();
-        for (final int[] pair : pendingIndices) {
-            final KeywordAction action = allActions[pair[1]];
-            final String lowerName = action.getDisplayName().toLowerCase();
-            String reminder = action.getReminderText();
-            if (reminder.contains("N")) {
-                int pos = pair[0] + lowerName.length();
-                // Skip inflected suffix letters (s, ed, ing, etc.)
-                while (pos < lowerText.length()
-                        && Character.isLetter(lowerText.charAt(pos))) {
-                    pos++;
-                }
-                // Skip whitespace to reach the number
-                if (pos < lowerText.length()
-                        && lowerText.charAt(pos) == ' ') {
-                    pos++;
-                    final String resolved = parseNumber(lowerText, pos);
-                    if (resolved != null) {
-                        reminder = reminder.replace("N", resolved);
-                        if ("1".equals(resolved)) {
-                            reminder = reminder.replace("counters", "counter");
-                        }
-                    }
-                }
-            }
-            final String desc = FSkin.encodeSymbols(reminder, false);
-            result.add(new KeywordData(action.getDisplayName(), desc));
-        }
-    }
-
-    /**
-     * Cross-check CardStateView boolean keyword flags against already-parsed
-     * keywords. Adds any keywords whose flag is true but were missed by
-     * keywordKey string parsing. Uses the same data source as the card overlay
-     * icons, ensuring granted abilities are always shown.
-     */
-    public static void addMissingKeywordsFromFlags(final List<KeywordData> result,
-                                                    final CardStateView state,
-                                                    final Set<String> addedNames) {
-        if (state == null) {
-            return;
-        }
-        addFlagKeyword(result, addedNames, state.hasFlying(), Keyword.FLYING);
-        addFlagKeyword(result, addedNames, state.hasFirstStrike(), Keyword.FIRST_STRIKE);
-        addFlagKeyword(result, addedNames, state.hasDoubleStrike(), Keyword.DOUBLE_STRIKE);
-        addFlagKeyword(result, addedNames, state.hasDeathtouch(), Keyword.DEATHTOUCH);
-        addFlagKeyword(result, addedNames, state.hasDefender(), Keyword.DEFENDER);
-        addFlagKeyword(result, addedNames, state.hasFear(), Keyword.FEAR);
-        addFlagKeyword(result, addedNames, state.hasHaste(), Keyword.HASTE);
-        addFlagKeyword(result, addedNames, state.hasHexproof(), Keyword.HEXPROOF);
-        addFlagKeyword(result, addedNames, state.hasIndestructible(), Keyword.INDESTRUCTIBLE);
-        addFlagKeyword(result, addedNames, state.hasIntimidate(), Keyword.INTIMIDATE);
-        addFlagKeyword(result, addedNames, state.hasLifelink(), Keyword.LIFELINK);
-        addFlagKeyword(result, addedNames, state.hasMenace(), Keyword.MENACE);
-        addFlagKeyword(result, addedNames, state.hasReach(), Keyword.REACH);
-        addFlagKeyword(result, addedNames, state.hasShadow(), Keyword.SHADOW);
-        addFlagKeyword(result, addedNames, state.hasShroud(), Keyword.SHROUD);
-        addFlagKeyword(result, addedNames, state.hasTrample(), Keyword.TRAMPLE);
-        addFlagKeyword(result, addedNames, state.hasVigilance(), Keyword.VIGILANCE);
-        addFlagKeyword(result, addedNames, state.hasInfect(), Keyword.INFECT);
-        addFlagKeyword(result, addedNames, state.hasWither(), Keyword.WITHER);
-        addFlagKeyword(result, addedNames, state.hasHorsemanship(), Keyword.HORSEMANSHIP);
-    }
-
-    private static void addFlagKeyword(final List<KeywordData> result,
-                                        final Set<String> addedNames,
-                                        final boolean hasFlag, final Keyword kw) {
-        if (!hasFlag) {
-            return;
-        }
-        if (addedNames.contains(kw.toString().toLowerCase())) {
-            return;
-        }
-        addedNames.add(kw.toString().toLowerCase());
-        final String reminder = FSkin.encodeSymbols(kw.getReminderText(), false);
-        result.add(new KeywordData(kw.toString(), reminder));
-    }
-
-    /** Replace standalone MTG color names with mana symbols for display. */
-    private static String colorNamesToSymbols(final String text) {
-        return text
-                .replace("white", "{W}").replace("White", "{W}")
-                .replace("blue", "{U}").replace("Blue", "{U}")
-                .replace("black", "{B}").replace("Black", "{B}")
-                .replace("red", "{R}").replace("Red", "{R}")
-                .replace("green", "{G}").replace("Green", "{G}");
-    }
-
-    /** Parse a digit or number word at the given position. Returns the digit string or null. */
-    private static String parseNumber(final String text, final int pos) {
-        // Try digits first: "3", "10"
-        int numEnd = pos;
-        while (numEnd < text.length() && Character.isDigit(text.charAt(numEnd))) {
-            numEnd++;
-        }
-        if (numEnd > pos) {
-            return text.substring(pos, numEnd);
-        }
-        // Try number words: "one" through "twenty"
-        final String[] words = {
-            "one", "two", "three", "four", "five", "six", "seven", "eight",
-            "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
-            "sixteen", "seventeen", "eighteen", "nineteen", "twenty"
-        };
-        for (int i = 0; i < words.length; i++) {
-            if (text.startsWith(words[i], pos)) {
-                final int end = pos + words[i].length();
-                if (end >= text.length() || !Character.isLetter(text.charAt(end))) {
-                    return String.valueOf(i + 1);
-                }
-            }
-        }
-        return null;
-    }
+    // --- Keyword display ---
 
     /** Creates a JLabel that uses grayscale AA (LCD AA breaks on transparent windows). */
     public static javax.swing.JLabel createAALabel(final String text) {
@@ -658,8 +448,9 @@ public class CardInfoPopup {
 
             final JPanel pill = createPillPanel();
 
-            // Keyword name label
-            final javax.swing.JLabel nameLabel = createAALabel(kw.name);
+            // Keyword name label (encode mana symbols for Swing HTML)
+            final javax.swing.JLabel nameLabel = createAALabel(
+                    FSkin.encodeSymbols(kw.name, false));
             nameLabel.setFont(boldFont.getBaseFont());
             nameLabel.setForeground(TEXT_PRIMARY);
             nameLabel.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
@@ -667,10 +458,10 @@ public class CardInfoPopup {
                     nameLabel.getPreferredSize().height));
             pill.add(nameLabel);
 
-            // Reminder text
-            if (!kw.reminderHtml.isEmpty()) {
+            // Reminder text (encode mana symbols for Swing HTML)
+            if (!kw.reminderText.isEmpty()) {
                 final javax.swing.JLabel reminderLabel = createAALabel(
-                        kw.reminderHtml);
+                        FSkin.encodeSymbols(kw.reminderText, false));
                 reminderLabel.setFont(reminderFont.getBaseFont());
                 reminderLabel.setForeground(TEXT_SECONDARY);
                 reminderLabel.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
@@ -1123,42 +914,6 @@ public class CardInfoPopup {
         }
         return GraphicsEnvironment.getLocalGraphicsEnvironment()
                 .getDefaultScreenDevice().getDefaultConfiguration().getBounds();
-    }
-
-    /**
-     * Sort keywords by their position in the oracle text so they appear
-     * in card-text order rather than alphabetical order.
-     */
-    public static void sortByOracleText(final List<KeywordData> keywords,
-                                         final String oracleText) {
-        if (oracleText == null || oracleText.isEmpty() || keywords.size() <= 1) {
-            return;
-        }
-        final String lowerText = oracleText.toLowerCase();
-        keywords.sort((a, b) -> {
-            final int posA = findKeywordPosition(lowerText, a.name);
-            final int posB = findKeywordPosition(lowerText, b.name);
-            return Integer.compare(posA, posB);
-        });
-    }
-
-    private static int findKeywordPosition(final String lowerOracleText,
-                                            final String keywordName) {
-        // Strip HTML tags (mana symbol images) to get plain text for matching
-        final String plain = keywordName.replaceAll("<[^>]+>", "").trim().toLowerCase();
-        int pos = lowerOracleText.indexOf(plain);
-        if (pos >= 0) {
-            return pos;
-        }
-        // Try first word only (e.g. "bestow" from "Bestow {2}{W}{U}{B}{R}{G}")
-        final int space = plain.indexOf(' ');
-        if (space > 0) {
-            pos = lowerOracleText.indexOf(plain.substring(0, space));
-            if (pos >= 0) {
-                return pos;
-            }
-        }
-        return Integer.MAX_VALUE;
     }
 
     private static String nullSafe(final String s) {

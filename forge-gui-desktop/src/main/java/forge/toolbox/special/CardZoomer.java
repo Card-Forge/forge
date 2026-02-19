@@ -42,6 +42,8 @@ import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.keyword.Keyword;
 import forge.gui.SOverlayUtils;
+import forge.gui.card.KeywordInfoUtil;
+import forge.gui.card.KeywordInfoUtil.KeywordData;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
@@ -54,7 +56,6 @@ import forge.toolbox.imaging.FImagePanel;
 import forge.toolbox.imaging.FImagePanel.AutoSizeImageMode;
 import forge.toolbox.imaging.FImageUtil;
 import forge.view.arcane.CardInfoPopup;
-import forge.view.arcane.CardInfoPopup.KeywordData;
 import forge.view.arcane.CardInfoPopup.RelatedCardEntry;
 import net.miginfocom.swing.MigLayout;
 
@@ -339,14 +340,14 @@ public enum CardZoomer {
             final List<KeywordData> keywords = new ArrayList<>();
             final Set<String> addedNames = new LinkedHashSet<>();
             if (keywordKey != null && !keywordKey.isEmpty()) {
-                keywords.addAll(CardInfoPopup.buildKeywords(keywordKey, addedNames));
+                keywords.addAll(KeywordInfoUtil.buildKeywords(keywordKey, addedNames));
             }
-            CardInfoPopup.addMissingKeywordsFromFlags(keywords, thisCard, addedNames);
+            KeywordInfoUtil.addMissingKeywordsFromFlags(keywords, thisCard, addedNames);
             if (oracleText != null && !oracleText.isEmpty()) {
-                CardInfoPopup.addKeywordActions(keywords, oracleText, addedNames,
+                KeywordInfoUtil.addKeywordActions(keywords, oracleText, addedNames,
                         cardName != null ? cardName : "");
             }
-            CardInfoPopup.sortByOracleText(keywords, oracleText);
+            KeywordInfoUtil.sortByOracleText(keywords, oracleText);
             if (!keywords.isEmpty()) {
                 kwPanel = new JPanel();
                 kwPanel.setLayout(new BoxLayout(kwPanel, BoxLayout.Y_AXIS));
