@@ -678,16 +678,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     private void finishResolving(final SpellAbility sa, final boolean fizzle) {
-        // SpellAbility is removed from the stack here
-        // temporarily removed removing SA after resolution
-        final SpellAbilityStackInstance si = getInstanceMatchingSpellAbilityID(sa);
-
         // remove SA and card from the stack
-        removeCardFromStack(sa, si, fizzle);
-
-        if (si != null) {
-            remove(si);
-        }
+        removeCardFromStack(sa, fizzle);
 
         // After SA resolves we have to do a handful of things
         setResolving(false);
@@ -699,19 +691,25 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         curResolvingCard = null;
     }
 
-    private void removeCardFromStack(final SpellAbility sa, final SpellAbilityStackInstance si, final boolean fizzle) {
+    private void removeCardFromStack(final SpellAbility sa, final boolean fizzle) {
+        // SpellAbility is removed from the stack here
+        // temporarily removed removing SA after resolution
+        final SpellAbilityStackInstance si = getInstanceMatchingSpellAbilityID(sa);
         Card source = sa.getHostCard();
 
         // need to update active trigger
         game.getTriggerHandler().resetActiveTriggers();
 
         if (sa.isAbility()) {
+            if (si != null) {
+                remove(si);
+            }
             // do nothing
             return;
         }
 
         if (source.isCopiedSpell() && source.isInZone(ZoneType.Stack)) {
-            game.getAction().ceaseToExist(source, true);
+            game.getAction().ceaseToExist(source, true); // remove() is called in here
             return;
         }
 
@@ -722,6 +720,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             params.put(AbilityKey.StackSa, sa);
             params.put(AbilityKey.Fizzle, fizzle);
             game.getAction().moveToGraveyard(source, null, params);
+        }
+
+        if (si != null) {
+            remove(si);
         }
     }
 
