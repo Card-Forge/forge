@@ -13,7 +13,6 @@ import javax.swing.SwingConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.screens.match.CMatchUI;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;
 import forge.toolbox.FSkin.SkinnedSlider;
@@ -26,7 +25,7 @@ import forge.util.Localizer;
 public final class CardInfoPopupMenu {
     private static final ForgePreferences prefs = FModel.getPreferences();
 
-    public CardInfoPopupMenu(final CMatchUI matchUI) {
+    public CardInfoPopupMenu() {
     }
 
     public JMenu getMenu() {

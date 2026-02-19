@@ -254,10 +254,7 @@ public class CardInfoPopup {
             keywordList = new ArrayList<>();
             final Set<String> addedNames = new LinkedHashSet<>();
             if (!keywordKey.isEmpty()) {
-                keywordList.addAll(buildKeywords(keywordKey));
-                for (final KeywordData kd : keywordList) {
-                    addedNames.add(kd.name.toLowerCase());
-                }
+                keywordList.addAll(buildKeywords(keywordKey, addedNames));
             }
             // Scan oracle text for keyword actions (goad, scry, etc.)
             try {
@@ -386,7 +383,8 @@ public class CardInfoPopup {
         }
     }
 
-    private static List<KeywordData> buildKeywords(final String keywordKey) {
+    private static List<KeywordData> buildKeywords(final String keywordKey,
+                                                      final Set<String> addedNames) {
         final String[] tokens = keywordKey.split(",");
         final LinkedHashMap<Keyword, String> keywordMap = new LinkedHashMap<>();
 
@@ -416,7 +414,6 @@ public class CardInfoPopup {
         }
 
         final List<KeywordData> result = new ArrayList<>();
-        final Set<String> addedNames = new LinkedHashSet<>();
         for (final Map.Entry<Keyword, String> entry : keywordMap.entrySet()) {
             String reminder = entry.getValue();
             if (!reminder.isEmpty()) {
