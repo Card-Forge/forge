@@ -3098,7 +3098,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         return true;
     }
 
-    public Card assignCompanion(Game game, PlayerController player) {
+    public void assignCompanion(Game game, PlayerController player) {
         List<Card> legalCompanions = Lists.newArrayList();
 
         boolean uniqueNames = true;
@@ -3114,7 +3114,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 }
             }
 
-            cardTypes.retainAll((Collection<?>) c.getPaperCard().getRules().getType().getCoreTypes());
+            cardTypes.retainAll(c.getPaperCard().getRules().getType().getCoreTypes());
         }
 
         int deckSize = getCardsIn(ZoneType.Library).size();
@@ -3124,11 +3124,10 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         for (final Card c : getCardsIn(ZoneType.Sideboard)) {
             for (KeywordInterface inst : c.getKeywords(Keyword.COMPANION)) {
-                if (!(inst instanceof Companion)) {
+                if (!(inst instanceof Companion kwInstance)) {
                     continue;
                 }
 
-                Companion kwInstance = (Companion) inst;
                 if (kwInstance.hasSpecialRestriction()) {
                     String specialRules = kwInstance.getSpecialRules();
                     if (specialRules.equals("UniqueNames")) {
@@ -3150,7 +3149,6 @@ public class Player extends GameEntity implements Comparable<Player> {
                             legalCompanions.add(c);
                         }
                     }
-
                 } else {
                     String restriction = kwInstance.getDeckRestriction();
                     if (deckMatchesDeckRestriction(c, restriction)) {
@@ -3161,13 +3159,18 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         if (legalCompanions.isEmpty()) {
-            return null;
+            return;
         }
 
         CardCollectionView view = CardCollection.getView(legalCompanions);
 
         SpellAbility fakeSa = new SpellAbility.EmptySa(ApiType.CompanionChoose, legalCompanions.get(0), this);
-        return player.chooseSingleEntityForEffect(view, fakeSa, Localizer.getInstance().getMessage("lblChooseACompanion"), true, null);
+        Card companion = player.chooseSingleEntityForEffect(view, fakeSa, Localizer.getInstance().getMessage("lblChooseACompanion"), true, null);
+
+        PlayerZone commandZone = getZone(ZoneType.Command);
+        companion = game.getAction().moveTo(ZoneType.Command, companion, null, AbilityKey.newMap());
+        commandZone.add(Player.createCompanionEffect(companion));
+        updateZoneForView(commandZone);
     }
 
     public boolean deckMatchesDeckRestriction(Card source, String restriction) {
@@ -3179,7 +3182,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         return true;
      }
 
-    public static DetachedCardEffect createCompanionEffect(Game game, Card companion) {
+    public static DetachedCardEffect createCompanionEffect(Card companion) {
         final String name = Lang.getInstance().getPossesive(companion.getDisplayName()) + " Companion Effect";
         DetachedCardEffect eff = new DetachedCardEffect(companion, name);
 

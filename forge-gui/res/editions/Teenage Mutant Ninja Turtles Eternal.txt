@@ -11,9 +11,129 @@ Type=Expansion
 4 M Raphael, the Muscle @Ryan Pancoast
 5 M Michelangelo, the Heart @Néstor Ossandón Leal
 6 M Heroes in a Half Shell @Victor Maury
+7 R Continue? @Irina Nordsol
+8 R Endless Foot Assault @Ryan Valle
+9 M April O'Neil, Live on the Scene @Jakob Eirich
+10 R Baxter, Fly in the Ointment @Michele Giorgi
+11 R Here Comes a New Hero! @Leonardo Santanna
+12 R Irma, Part-Time Mutant @Mirko Failoni
+13 R Krang, the All-Powerful @Yuhong Ding
+14 R Ray Fillet, Wave Warrior @Brian Valeza
+15 R Bebop, Skull & Crossbones @Benjamin Ee
+16 R Dimension X Pizzasaur @Xavier Ribeiro
+17 R Foot Chopper @Adrián Rodríguez Pérez
+18 R Game Over @Kim Sokol
+19 R Rat King, Pale Piper @Andrey Kuzinskiy
+20 R Shredder, Shadow Master @Miklós Ligeti
+21 R Swift Demise @Anna Pavleeva
+22 R Casey Jones, Back Alley Brute @Kieran Yanner
+23 R Electric Seaweed @Randy Gallegos
+24 R Fast Forward @Narendra Bintara Adi
+25 R Shellshock @Brandon L. Hunt
+26 R Special Move @Victor Maury
+27 R Tempestra, Dame of Games @Hokyoung Kim
+28 R Tokka & Rahzar, Unsupervised @Narendra Bintara Adi
+29 R High Score @Fahmi Fauzi
+30 R Leatherhead, Iron Gator @Andrey Kuzinskiy
+31 R Level Up @Narendra Bintara Adi
+32 R Ninja Pizza @Brian Yuen
+33 R Rocksteady, Mutant Marauder @Kieran Yanner
+34 R Super Combo @Caroline Gariba
+35 R Double Jump // Flying Kick @Kevin Sidharta
+36 R Arcade Cabinet @Randy Gallegos
+37 R Big Mother Mouser @Miklós Ligeti
+38 R Coin of Mastery @Madeline Boni
+39 R Exploding Barrel @Eliz Roxs
+40 R Mole Module @Adrián Rodríguez Pérez
+41 R Roadkill Rodney @Xavier Ribeiro
+42 R Big Apple, 3 a.m. @Daniel Romanovsky
+43 R Hidden Hideout @Erikas Perl
+44 R Together Forever @Adam Volker
+45 R Vanquish the Horde @Lordigan
+46 R Wave Goodbye @Hristo D. Chukov
+47 R Blasphemous Act @Erikas Perl
+48 U Acidic Slime @Michele Giorgi ${"flavorName": "Marauding Mutagen"}
+49 R Biogenic Ooze @James Bousema
+50 C Cultivate @Irina Nordsol
+51 U Harmonize @Zoltan Boros
+52 R Steelbane Hydra @Mirko Failoni ${"flavorName": "Slash Clone"}
+53 R Vigor @Robin Olausson ${"flavorName": "Heralds of the Shredder"}
+54 R Voracious Hydra @Aaron J. Riley ${"flavorName": "Aggro Amalgam"}
+55 R Assassin's Trophy @Svetlin Velinov
+56 R Corpsejack Menace @Benjamin Ee ${"flavorName": "Humongous Fungus"}
+57 U Arcane Signet @Jo Cordisco
+58 R Chromatic Lantern @Leanna Crossan
+59 U Sol Ring @Daniel Romanovsky
+60 C Ash Barrens @Lucas Staniec
+61 R Cinder Glade @Matteo Bassini
+62 R City of Brass @Robin Olausson
+63 C Command Tower @Jocelin Carmes
+64 R Dragonskull Summit @Svetlin Velinov
+65 C Evolving Wilds @Daniel Romanovsky
+66 R Exotic Orchard @Shahab Alizadeh
+67 R Fabled Passage @Ignatius Budi
+68 R Grand Coliseum @Julian Kok Joon Wen
+69 R Hinterland Harbor @Lucas Staniec
+70 C Path of Ancestry @Shahab Alizadeh
+71 R Rain-Slicked Copse @Jeremy Paillotin
+72 R Rootbound Crag @Brian Yuen
+73 R Smoldering Marsh @Daniel Romanovsky
+74 R Sodden Verdure @Maël Ollivier-Henry
+75 R Spire Garden @Salvatorre Zee Yazzie
+76 R Sunken Hollow @Samuele Bandini
+77 C Thriving Grove @Salvatorre Zee Yazzie
+78 C Thriving Isle @Samuele Bandini
+79 C Thriving Moor @Jeremy Paillotin
+80 R Undergrowth Stadium @Gabriel Tanko
+81 R Vernal Fen @Hristo D. Chukov
+82 C Vibrant Cityscape @Matteo Bassini
+83 M Leonardo, the Balance @Kirokaze
+84 M April O'Neil, Live on the Scene @Kirokaze
+85 M Donatello, the Brains @Kirokaze
+86 R Krang, the All-Powerful @Kirokaze
+87 R Bebop, Skull & Crossbones @Kirokaze
+88 R Shredder, Shadow Master @Kirokaze
+89 M Splinter, the Mentor @Kirokaze
+90 R Casey Jones, Back Alley Brute @Kirokaze
+91 M Raphael, the Muscle @Kirokaze
+92 M Michelangelo, the Heart @Kirokaze
+93 R Ninja Pizza @Kirokaze
+94 R Rocksteady, Mutant Marauder @Kirokaze
+95 R Super Combo @Kirokaze
+96 M Heroes in a Half Shell @Kirokaze
+97 R Big Mother Mouser @Kirokaze
+98 U Definitely Not a Turtle @Levinky & Leonardo Vincent
+100 C Hamato Ninpō @Lie Setiawan
 101 M Leonardo, Worldly Warrior @Nathaniel Himawan
+102 U Leo's Guidance @Eilene Cherie
+103 R Splinter & Leo, Father & Son @Eilene Cherie
+104 R Splinter, Aging Champion @Thomas Chamberlain-Keen
+105 C Triceraton Regenta @Leanna Crossan
+106 U Wooden Cane @Zoltan Boros
+107 R April O'Neil, Human Element @Fahmi Fauzi
+108 C Containment Protocol @Brian Valeza
 109 M Donatello, Rad Scientist @Thomas Chamberlain-Keen
+110 U Donatello's Science Lesson @Anthony Devine
 111 R Donnie & April, Adorkable Duo @Le Vuong
+113 C Utrom Monitor @Levinky
+114 R Casey & Raph, Hotheads @Leonardo Santanna
+115 R Casey Jones, Asphalt Hooligan @Jason Kiantoro
+117 C Monster Mashup @Nathaniel Himawan
 118 M Raphael, Tag Team Tough @Randy Vargas
+119 U Raph's Bravado @Xavier Ribeiro
+120 U Storm of Steel @Thomas Chamberlain-Keen
+121 C Ticked Off @Eliz Roxs
+122 C Foe-liage @Villarrte
 124 M Michelangelo, On the Scene @Lie Setiawan
+125 R Mikey & Mona, Mutant Sitters @Randy Vargas
+126 R Mona Lisa, Ever Adaptable @April Prime
+127 C Prehistoric Turtlesaurus @Nathaniel Himawan
+128 U Study the Classics @Leonardo Santanna
+129 U Turtle Tracks @Marina Ortega Lorente
+130 U Manhole Cover @Anthony Devine
 131 M Dark Ritual @Filipe Pagliuso
+132 M Waste Not @Raluca Marinescu
+133 M Food Chain @J.P. Targete
+134 M Supreme Verdict @Raluca Marinescu
+135 M Commander's Plate @Filipe Pagliuso
+136 M Sword of Hearth and Home @Raluca Marinescu

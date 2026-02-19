@@ -1,0 +1,11 @@
+Name:Wingnut, Bat on the Belfry
+ManaCost:1 R
+Types:Legendary Creature Bat Mutant
+PT:1/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Alliance — Whenever another creature you control enters, NICKNAME gains your choice of flying, menace, or haste until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | KWChoice$ Flying,Menace,Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ Whenever CARDNAME attacks, each other attacking creature gets +1/+0 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.attacking+Other | NumAtt$ +1
+SVar:BuffedBy:Creature
+SVar:HasAttackEffect:TRUE
+Oracle:Alliance — Whenever another creature you control enters, Wingnut gains your choice of flying, menace, or haste until end of turn.\nWhenever Wingnut attacks, each other attacking creature gets +1/+0 until end of turn.

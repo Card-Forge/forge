@@ -1,7 +1,7 @@
 Name:Spicy Oatmeal Pizza
 ManaCost:2 R
 Types:Artifact Food
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When this artifact enters, it deals 4 damage to any target and 3 damage to you
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When this artifact enters, it deals 4 damage to any target and 3 damage to you.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 4 | DamageMap$ True | SubAbility$ DBDealDamage
 SVar:DBDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ 3 | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve
