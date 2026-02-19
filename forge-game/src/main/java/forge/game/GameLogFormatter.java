@@ -280,6 +280,11 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, ev.toString());
     }
 
+    @Override
+    public GameLogEntry visit(GameEventAddLog ev) {
+        return new GameLogEntry(ev.type(), ev.message());
+    }
+
     @Subscribe
     public void recieve(GameEvent ev) {
         GameLogEntry le = ev.visit(this);

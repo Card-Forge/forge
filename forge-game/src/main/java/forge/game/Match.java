@@ -11,6 +11,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.event.Event;
+import forge.game.event.GameEventAddLog;
 import forge.game.event.GameEventAnteCardsSelected;
 import forge.game.event.GameEventGameFinished;
 import forge.game.player.Player;
@@ -83,7 +84,7 @@ public class Match {
             for (Entry<Player, Card> kv : list.entries()) {
                 Player p = kv.getKey();
                 game.getAction().moveTo(ZoneType.Ante, kv.getValue(), null, AbilityKey.newMap());
-                game.getGameLog().add(GameLogEntryType.ANTE, p + " anted " + kv.getValue());
+                game.fireEvent(new GameEventAddLog(GameLogEntryType.ANTE, p + " anted " + kv.getValue()));
             }
             game.fireEvent(GameEventAnteCardsSelected.fromCards(list));
         }

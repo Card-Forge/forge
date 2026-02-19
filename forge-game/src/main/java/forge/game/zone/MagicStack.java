@@ -291,7 +291,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             runParams.put(AbilityKey.SpellAbility, sp);
             game.getTriggerHandler().runTrigger(TriggerType.AbilityResolves, runParams, false);
 
-            game.getGameLog().add(GameLogEntryType.MANA, source + " - " + sp);
+            game.fireEvent(new GameEventAddLog(GameLogEntryType.MANA, source + " - " + sp));
             sp.resetOnceResolved();
 
             // parts are paid sequentially, so collect directly or some trigger might get lost
@@ -320,7 +320,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (!sp.isCopied() && !hasLegalTargeting(sp)) {
             String str = source + " - [Couldn't add to stack, failed to target] - " + sp.getDescription();
             System.err.println(str + sp.getAllTargetChoices());
-            game.getGameLog().add(GameLogEntryType.STACK_ADD, str);
+            game.fireEvent(new GameEventAddLog(GameLogEntryType.STACK_ADD, str));
             return;
         }
 

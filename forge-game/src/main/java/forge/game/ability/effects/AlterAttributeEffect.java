@@ -8,6 +8,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.event.GameEventAddLog;
 import forge.game.event.GameEventCardPlotted;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -91,10 +92,10 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
                             }
                             p.addCommander(gameCard);
                             //Seems important enough to mention in the game log.
-                            gameCard.getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, String.format("%s is now %s's commander.", gameCard.getPaperCard().getDisplayName(), p));
+                            gameCard.getGame().fireEvent(new GameEventAddLog(GameLogEntryType.STACK_RESOLVE, String.format("%s is now %s's commander.", gameCard.getPaperCard().getDisplayName(), p)));
                         } else {
                             p.removeCommander(gameCard);
-                            gameCard.getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, String.format("%s is no longer %s's commander.", gameCard.getPaperCard().getDisplayName(), p));
+                            gameCard.getGame().fireEvent(new GameEventAddLog(GameLogEntryType.STACK_RESOLVE, String.format("%s is no longer %s's commander.", gameCard.getPaperCard().getDisplayName(), p)));
                         }
                         altered = true;
                         break;

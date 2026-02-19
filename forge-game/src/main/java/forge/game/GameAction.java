@@ -2688,8 +2688,8 @@ public class GameAction {
                     final boolean addSuffix = !toZoneStr.isEmpty();
                     reveal(milledPlayer, destination, p, false, message, addSuffix);
                 }
-                game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, p + " milled " +
-                        Lang.joinHomogenous(milledPlayer) + toZoneStr + ".");
+                game.fireEvent(new GameEventAddLog(GameLogEntryType.ZONE_CHANGE, p + " milled " +
+                        Lang.joinHomogenous(milledPlayer) + toZoneStr + "."));
             }
         }
 
