@@ -872,9 +872,10 @@ public class Game {
                 // unattach all "Enchant Player"
                 c.removeAttachedTo(p);
                 if (c.getOwner().equals(p)) {
-                    if (c.getEffectSource() != null && !c.isEmblem()) {
-                        // move effect to another player so they continue to work
+                    // check that it wasn't cleaned up already
+                    if (c.getEffectSource() != null && !c.isEmblem() && p.getZone(ZoneType.Command).contains(c)) {
                         c.getZone().remove(c);
+                        // move effect to another player so they continue to work
                         getNextPlayerAfter(p).getZone(ZoneType.Command).add(c);
                     } else {
                         for (Card cc : cards) {

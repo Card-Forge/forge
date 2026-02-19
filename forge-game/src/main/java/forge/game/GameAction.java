@@ -2769,15 +2769,9 @@ public class GameAction {
         if (cause != null) {
             // Remember objects as needed
             final Card sourceLKI = game.getChangeZoneLKIInfo(cause.getHostCard());
-            final boolean rememberCard = cause.hasParam("RememberDamaged") || cause.hasParam("RememberDamagedCreature");
-            final boolean rememberPlayer = cause.hasParam("RememberDamaged") || cause.hasParam("RememberDamagedPlayer");
-            if (rememberCard || rememberPlayer) {
+            if (cause.hasParam("RememberDamaged")) {
                 for (GameEntity e : damageMap.row(sourceLKI).keySet()) {
-                    if (e instanceof Card && rememberCard) {
-                        cause.getHostCard().addRemembered(e);
-                    } else if (e instanceof Player && rememberPlayer) {
-                        cause.getHostCard().addRemembered(e);
-                    }
+                    cause.getHostCard().addRemembered(e);
                 }
             }
             if (cause.hasParam("RememberAmount")) {

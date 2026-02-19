@@ -316,16 +316,7 @@ public class Match {
             if (myDeck.getLeft().has(DeckSection.Sideboard)) {
                 preparePlayerZone(player, ZoneType.Sideboard, myDeck.getLeft().get(DeckSection.Sideboard), psc.useRandomFoil());
 
-                // Assign Companion
-                Card companion = player.assignCompanion(game, person);
-                // Create an effect that lets you cast your companion from your sideboard
-                if (companion != null) {
-                    PlayerZone commandZone = player.getZone(ZoneType.Command);
-                    companion = game.getAction().moveTo(ZoneType.Command, companion, null, AbilityKey.newMap());
-                    commandZone.add(Player.createCompanionEffect(game, companion));
-
-                    player.updateZoneForView(commandZone);
-                }
+                player.assignCompanion(game, person);
             }
 
             player.initVariantsZones(psc);
