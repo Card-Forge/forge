@@ -76,7 +76,7 @@ public interface IGuiGame {
 
     void updateStack();
 
-    void notifyStackAddition(final GameEventSpellAbilityCast event);
+    Runnable notifyStackAddition(final GameEventSpellAbilityCast event);
 
     void notifyStackRemoval(final GameEventSpellRemovedFromStack event);
 
