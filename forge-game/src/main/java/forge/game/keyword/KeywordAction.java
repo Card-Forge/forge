@@ -1,5 +1,7 @@
 package forge.game.keyword;
 
+import forge.util.Localizer;
+
 /**
  * Keyword actions — verbs that appear in rules text but aren't keyword abilities.
  * Descriptions are based on the MTG comprehensive rules (section 701).
@@ -114,21 +116,48 @@ public enum KeywordAction {
     WATERBEND("Waterbend", "Pay a mana cost, but for each mana symbol you may tap an untapped artifact or creature you control instead of paying that mana.", false),
     BLIGHT("Blight", "Put N -1/-1 counters on a creature you control.", false);
 
-    /** Display name as it appears in rules text. */
-    public final String displayName;
-    /** Reminder text describing what the action does. */
-    public final String reminderText;
+    /** Display name as it appears in rules text (English). */
+    private final String displayName;
+    /** Reminder text describing what the action does (English). */
+    private final String reminderText;
     /** True for fundamental game actions (destroy, exile, sacrifice, etc.) that don't need tooltip explanations. */
     public final boolean basic;
+    /** Translation key prefix derived from enum name, e.g. "lblKwActionActivate". */
+    private final String translationKey;
 
     KeywordAction(String displayName, String reminderText, boolean basic) {
         this.displayName = displayName;
         this.reminderText = reminderText;
         this.basic = basic;
+        this.translationKey = "lblKwAction" + toCamelCase(name());
+    }
+
+    private static String toCamelCase(String enumName) {
+        StringBuilder sb = new StringBuilder();
+        boolean capitalize = true;
+        for (char c : enumName.toCharArray()) {
+            if (c == '_') {
+                capitalize = true;
+            } else {
+                sb.append(capitalize ? c : Character.toLowerCase(c));
+                capitalize = false;
+            }
+        }
+        return sb.toString();
+    }
+
+    /** Returns the localized display name, falling back to English. */
+    public String getDisplayName() {
+        return Localizer.getInstance().getMessageorUseDefault(translationKey, displayName);
+    }
+
+    /** Returns the localized reminder text, falling back to English. */
+    public String getReminderText() {
+        return Localizer.getInstance().getMessageorUseDefault(translationKey + "Reminder", reminderText);
     }
 
     @Override
     public String toString() {
-        return displayName;
+        return getDisplayName();
     }
 }

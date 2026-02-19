@@ -469,7 +469,7 @@ public class CardInfoPopup {
             if (action.basic) {
                 continue;
             }
-            final String name = action.displayName;
+            final String name = action.getDisplayName();
             if (existingNames.contains(name.toLowerCase())) {
                 continue;
             }
@@ -494,8 +494,8 @@ public class CardInfoPopup {
         final KeywordAction[] allActions = KeywordAction.values();
         for (final int[] pair : pendingIndices) {
             final KeywordAction action = allActions[pair[1]];
-            final String lowerName = action.displayName.toLowerCase();
-            String reminder = action.reminderText;
+            final String lowerName = action.getDisplayName().toLowerCase();
+            String reminder = action.getReminderText();
             if (reminder.contains("N")) {
                 int pos = pair[0] + lowerName.length();
                 // Skip inflected suffix letters (s, ed, ing, etc.)
@@ -517,7 +517,7 @@ public class CardInfoPopup {
                 }
             }
             final String desc = FSkin.encodeSymbols(reminder, false);
-            result.add(new KeywordData(action.displayName, desc));
+            result.add(new KeywordData(action.getDisplayName(), desc));
         }
     }
 
