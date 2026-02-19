@@ -198,6 +198,11 @@ public abstract class ImageFetcher {
             if (useArtCrop) {
                 filename = TextUtil.fastReplace(filename, ".full", ".artcrop");
             }
+            if (ImageKeys.missingCards.contains(filename)) {
+                // This shouldn't be constantly getting hit, but it seems like it is?
+                return;
+            }
+
             boolean updateLink = false;
             if ("back".equals(face)) { // Seems getimage relative path don't process variants for back faces.
                 try {
@@ -235,8 +240,12 @@ public abstract class ImageFetcher {
                 }
             }
             final String cardCollectorNumber = paperCard.getCollectorNumber();
-            if (!cardCollectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)) {
+            if (!cardCollectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER) && !cardCollectorNumber.equals("0")) {
                 this.getScryfallDownloadURL(paperCard, face, useArtCrop, hasSetLookup, filename, downloadUrls);
+            } else {
+                System.out.println("Card " + paperCard.getName() + " does not have a collector number, skipping scryfall download.");
+                ImageKeys.missingCards.add(filename);
+                return;
             }
         } else if (ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD).equals(imageKey)) {
             // Extra logic for hidden card to not clog the other logic

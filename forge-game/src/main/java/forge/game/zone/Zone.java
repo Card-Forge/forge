@@ -32,6 +32,7 @@ import forge.game.card.*;
 import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventZone;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.util.MyRandom;
 
 /**
@@ -73,6 +74,10 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
 
     public Player getPlayer() { // generic zones like stack have no player associated
         return null;
+    }
+
+    public ZoneView getView() {
+        return new ZoneView(PlayerView.get(getPlayer()), zoneType);
     }
 
     public final void reorder(final Card c, final int index) {

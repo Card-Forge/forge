@@ -1,0 +1,9 @@
+Name:Splinter & Leo, Father & Son
+ManaCost:2 W
+Types:Legendary Creature Mutant Ninja Rat Turtle
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When NICKNAME enters, ABILITY
+SVar:TrigCharm:DB$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBToken,DBPutCounterAll | AdditionalDescription$ or both. Each mode must target a different player.
+SVar:DBToken:DB$ Token | ValidTgts$ Player | TokenOwner$ ThisTargetedPlayer | TokenScript$ r_2_2_mutant | SpellDescription$ Target player creates a 2/2 red Mutant creature token.
+SVar:DBPutCounterAll:DB$ PutCounterAll | ValidTgts$ Player | TargetUnique$ True | ValidCards$ Creature.Other | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each other creature target player controls.
+Oracle:When Splinter & Leo enter, choose one or both. Each mode must target a different player.\n• Target player creates a 2/2 red Mutant creature token.\n• Put a +1/+1 counter on each other creature target player controls.

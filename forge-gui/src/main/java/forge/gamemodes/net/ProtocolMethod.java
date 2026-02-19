@@ -3,6 +3,7 @@ package forge.gamemodes.net;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.GameView;
+import forge.game.event.GameEvent;
 import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
@@ -38,21 +39,13 @@ public enum ProtocolMethod {
     updateButtons       (Mode.SERVER, Void.TYPE, PlayerView.class, String.class, String.class, Boolean.TYPE, Boolean.TYPE, Boolean.TYPE),
     flashIncorrectAction(Mode.SERVER, Void.TYPE),
     alertUser           (Mode.SERVER, Void.TYPE),
-    updatePhase         (Mode.SERVER, Void.TYPE, Boolean.TYPE),
-    updateTurn          (Mode.SERVER, Void.TYPE, PlayerView.class),
-    updatePlayerControl (Mode.SERVER, Void.TYPE),
     enableOverlay       (Mode.SERVER, Void.TYPE),
     disableOverlay      (Mode.SERVER, Void.TYPE),
     finishGame          (Mode.SERVER, Void.TYPE),
     showManaPool        (Mode.SERVER, Void.TYPE, PlayerView.class),
     hideManaPool        (Mode.SERVER, Void.TYPE, PlayerView.class),
-    updateStack         (Mode.SERVER, Void.TYPE),
-    updateZones         (Mode.SERVER, Void.TYPE, Iterable/*PlayerZoneUpdate*/.class),
     tempShowZones       (Mode.SERVER, Iterable/*PlayerZoneUpdate*/.class, PlayerView.class, Iterable/*PlayerZoneUpdate*/.class),
     hideZones           (Mode.SERVER, Void.TYPE, PlayerView.class, Iterable/*PlayerZoneUpdate*/.class),
-    updateCards         (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class),
-    updateManaPool      (Mode.SERVER, Void.TYPE, Iterable/*PlayerView*/.class),
-    updateLives         (Mode.SERVER, Void.TYPE, Iterable/*PlayerView*/.class),
     setPanelSelection   (Mode.SERVER, Void.TYPE, CardView.class),
     getAbilityToPlay    (Mode.SERVER, SpellAbilityView.class, CardView.class, List/*SpellAbilityView*/.class, ITriggerEvent.class),
     assignCombatDamage  (Mode.SERVER, Map.class, CardView.class, List/*CardView*/.class, Integer.TYPE, GameEntityView.class, Boolean.TYPE, Boolean.TYPE),
@@ -72,7 +65,6 @@ public enum ProtocolMethod {
     setCard             (Mode.SERVER, Void.TYPE, CardView.class),
     setSelectables      (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class),
     clearSelectables    (Mode.SERVER, Void.TYPE),
-    refreshField        (Mode.SERVER, Void.TYPE),
     // TODO case "setPlayerAvatar":
     openZones           (Mode.SERVER, PlayerZoneUpdates.class, PlayerView.class, Collection/*ZoneType*/.class, Map/*PlayerView,Object*/.class, Boolean.TYPE),
     restoreOldZones     (Mode.SERVER, Void.TYPE, PlayerView.class, PlayerZoneUpdates.class),
@@ -80,6 +72,7 @@ public enum ProtocolMethod {
     setRememberedActions(Mode.SERVER, Void.TYPE),
     nextRememberedAction(Mode.SERVER, Void.TYPE),
     showWaitingTimer    (Mode.SERVER, Void.TYPE, PlayerView.class, String.class),
+    handleGameEvent     (Mode.SERVER, Void.TYPE, GameEvent.class),
 
     // Client -> Server
     // Note: these should all return void, to avoid awkward situations in

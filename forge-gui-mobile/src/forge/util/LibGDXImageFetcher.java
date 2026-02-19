@@ -11,6 +11,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
+import java.util.concurrent.TimeUnit;
 
 public class LibGDXImageFetcher extends ImageFetcher {
     @Override
@@ -104,6 +105,11 @@ public class LibGDXImageFetcher extends ImageFetcher {
                             String extension = urlToDownload.substring(typeIndex);
                             urlToDownload = setlessFilename + extension;
                             try {
+                                try {
+                                    TimeUnit.MILLISECONDS.sleep(100);
+                                } catch (InterruptedException ex) {
+                                    throw new RuntimeException(ex);
+                                }
                                 success = doFetch(urlToDownload);
                                 if (success) {
                                     break;
@@ -112,6 +118,11 @@ public class LibGDXImageFetcher extends ImageFetcher {
                                 System.out.println("Failed to download setless token [" + destPath + "]: " + e.getMessage());
                             }
                         }
+                    }
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(100);
+                    } catch (InterruptedException ex) {
+                        throw new RuntimeException(ex);
                     }
                 }
             }

@@ -33,6 +33,7 @@ import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameLogEntryType;
 import forge.game.IHasSVars;
+import forge.game.event.GameEventAddLog;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -225,7 +226,7 @@ public class ReplacementHandler {
         // Log there
         String message = chosenRE.getDescription();
         if (!StringUtils.isEmpty(message)) {
-            game.getGameLog().add(GameLogEntryType.EFFECT_REPLACED, message);
+            game.fireEvent(new GameEventAddLog(GameLogEntryType.EFFECT_REPLACED, message));
         }
 
         // if its updated, try to call event again
@@ -528,7 +529,7 @@ public class ReplacementHandler {
         if (res != ReplacementResult.NotReplaced) {
             String message = re.getDescription();
             if (!StringUtils.isEmpty(message)) {
-                game.getGameLog().add(GameLogEntryType.EFFECT_REPLACED, message);
+                game.fireEvent(new GameEventAddLog(GameLogEntryType.EFFECT_REPLACED, message));
             }
         }
     }

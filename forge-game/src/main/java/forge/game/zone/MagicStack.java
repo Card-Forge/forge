@@ -39,6 +39,7 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.spellability.SpellAbilityView;
 import forge.game.spellability.TargetChoices;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -290,7 +291,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             runParams.put(AbilityKey.SpellAbility, sp);
             game.getTriggerHandler().runTrigger(TriggerType.AbilityResolves, runParams, false);
 
-            game.getGameLog().add(GameLogEntryType.MANA, source + " - " + sp);
+            game.fireEvent(new GameEventAddLog(GameLogEntryType.MANA, source + " - " + sp));
             sp.resetOnceResolved();
 
             // parts are paid sequentially, so collect directly or some trigger might get lost
@@ -319,7 +320,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (!sp.isCopied() && !hasLegalTargeting(sp)) {
             String str = source + " - [Couldn't add to stack, failed to target] - " + sp.getDescription();
             System.err.println(str + sp.getAllTargetChoices());
-            game.getGameLog().add(GameLogEntryType.STACK_ADD, str);
+            game.fireEvent(new GameEventAddLog(GameLogEntryType.STACK_ADD, str));
             return;
         }
 
@@ -799,8 +800,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         stack.remove(si);
         frozenStack.remove(si);
         game.updateStackForView();
-        SpellAbility sa = si.getSpellAbility();
-        game.fireEvent(new GameEventSpellRemovedFromStack(sa));
+        game.fireEvent(new GameEventSpellRemovedFromStack(SpellAbilityView.get(si.getSpellAbility())));
     }
 
     public final void remove(final Card c) {

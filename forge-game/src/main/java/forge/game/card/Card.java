@@ -5685,7 +5685,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             ge.updateAttachedCards();
         }
 
-        getGame().fireEvent(new GameEventCardPhased(this, isPhasedOut()));
+        getGame().fireEvent(new GameEventCardPhased(CardView.get(this), isPhasedOut()));
     }
 
     private boolean switchPhaseState(final boolean fromUntapStep) {
@@ -6294,7 +6294,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             }
 
             // Play the Damage sound
-            game.fireEvent(new GameEventCardDamaged(this, source, damageIn, damageType));
+            game.fireEvent(new GameEventCardDamaged(CardView.get(this), CardView.get(source), damageIn, damageType));
         }
 
         return damageIn;
