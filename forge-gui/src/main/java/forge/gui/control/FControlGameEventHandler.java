@@ -6,7 +6,6 @@ import com.google.common.collect.Multimap;
 import com.google.common.eventbus.Subscribe;
 import forge.game.card.CardView;
 import forge.game.event.*;
-import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiBase;
