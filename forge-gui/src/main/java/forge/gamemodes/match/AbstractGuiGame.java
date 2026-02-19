@@ -432,33 +432,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     private YieldController getYieldController() {
         if (yieldController == null) {
-            yieldController = new YieldController(new YieldController.YieldCallback() {
-                @Override
-                public void showPromptMessage(PlayerView player, String message) {
-                    AbstractGuiGame.this.showPromptMessage(player, message);
-                }
-                @Override
-                public void updateButtons(PlayerView player, boolean ok, boolean cancel, boolean focusOk) {
-                    AbstractGuiGame.this.updateButtons(player, ok, cancel, focusOk);
-                }
-                @Override
-                public void awaitNextInput() {
-                    AbstractGuiGame.this.awaitNextInput();
-                }
-                @Override
-                public void cancelAwaitNextInput() {
-                    AbstractGuiGame.this.cancelAwaitNextInput();
-                }
-                @Override
-                public GameView getGameView() {
-                    return AbstractGuiGame.this.getGameView();
-                }
-                @Override
-                public void syncYieldModeToClient(PlayerView player, YieldMode mode) {
-                    // Sync yield state to network client (for server->client updates)
-                    AbstractGuiGame.this.syncYieldMode(player, mode);
-                }
-            });
+            yieldController = new YieldController(this);
         }
         return yieldController;
     }
@@ -683,23 +657,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
-    public final boolean didYieldJustEnd(PlayerView player) {
-        return getYieldController().didYieldJustEnd(player);
-    }
-
-    @Override
     public final boolean shouldAutoYieldForPlayer(PlayerView player) {
         return getYieldController().shouldAutoYieldForPlayer(player);
-    }
-
-    @Override
-    public void declineSuggestion(PlayerView player, String suggestionType) {
-        getYieldController().declineSuggestion(player, suggestionType);
-    }
-
-    @Override
-    public boolean isSuggestionDeclined(PlayerView player, String suggestionType) {
-        return getYieldController().isSuggestionDeclined(player, suggestionType);
     }
 
     // End auto-yield/input code

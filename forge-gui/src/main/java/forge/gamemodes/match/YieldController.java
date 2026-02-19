@@ -22,6 +22,7 @@ import com.google.common.collect.Sets;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
+import forge.gui.interfaces.IGuiGame;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.trackable.TrackableTypes;
@@ -39,23 +40,7 @@ import java.util.Set;
  */
 public class YieldController {
 
-    /**
-     * Callback interface for GUI updates and game state access.
-     */
-    public interface YieldCallback {
-        void showPromptMessage(PlayerView player, String message);
-        void updateButtons(PlayerView player, boolean ok, boolean cancel, boolean focusOk);
-        void awaitNextInput();
-        void cancelAwaitNextInput();
-        GameView getGameView();
-        /**
-         * Sync yield mode to network client.
-         * Called when yield mode is cleared due to end condition.
-         */
-        void syncYieldModeToClient(PlayerView player, YieldMode mode);
-    }
-
-    private final YieldCallback callback;
+    private final IGuiGame gui;
 
     // Legacy auto-pass tracking
     private final Set<PlayerView> autoPassUntilEndOfTurn = Sets.newHashSet();
@@ -79,19 +64,12 @@ public class YieldController {
     // Extended yield mode tracking (experimental feature)
     private final Map<PlayerView, YieldState> yieldStates = Maps.newHashMap();
 
-    // Smart suggestion decline tracking (reset each turn)
-    private final Map<PlayerView, Set<String>> declinedSuggestionsThisTurn = Maps.newHashMap();
-    private final Map<PlayerView, Integer> declinedSuggestionsTurn = Maps.newHashMap();
-
-    // Track when yield just ended this priority (to suppress suggestions)
-    private final Set<PlayerView> yieldJustEnded = Sets.newHashSet();
-
     /**
-     * Create a new YieldController with the given callback for GUI updates.
-     * @param callback the callback interface for GUI operations
+     * Create a new YieldController with the given GUI game for updates and state access.
+     * @param gui the GUI game interface
      */
-    public YieldController(YieldCallback callback) {
-        this.callback = callback;
+    public YieldController(IGuiGame gui) {
+        this.gui = gui;
     }
 
     /**
@@ -113,9 +91,9 @@ public class YieldController {
         }
 
         // Prevent prompt getting stuck on yielding message while actually waiting for next input opportunity
-        callback.showPromptMessage(player, "");
-        callback.updateButtons(player, false, false, false);
-        callback.awaitNextInput();
+        gui.showPromptMessage(player, "");
+        gui.updateButtons(player, false, false, false);
+        gui.awaitNextInput();
     }
 
     /**
@@ -139,9 +117,9 @@ public class YieldController {
 
         // Check legacy auto-pass first
         if (autoPassUntilEndOfTurn.contains(player)) {
-            callback.cancelAwaitNextInput();
-            callback.showPromptMessage(player, Localizer.getInstance().getMessage("lblYieldingUntilEndOfTurn"));
-            callback.updateButtons(player, false, true, false);
+            gui.cancelAwaitNextInput();
+            gui.showPromptMessage(player, Localizer.getInstance().getMessage("lblYieldingUntilEndOfTurn"));
+            gui.updateButtons(player, false, true, false);
             return;
         }
 
@@ -149,7 +127,7 @@ public class YieldController {
         YieldState state = yieldStates.get(player);
         if (state != null && state.mode != null && state.mode != YieldMode.NONE) {
             YieldMode mode = state.mode;
-            callback.cancelAwaitNextInput();
+            gui.cancelAwaitNextInput();
             Localizer loc = Localizer.getInstance();
             String message = switch (mode) {
                 case UNTIL_NEXT_PHASE -> loc.getMessage("lblYieldingUntilNextPhase");
@@ -160,8 +138,8 @@ public class YieldController {
                 case UNTIL_END_STEP -> loc.getMessage("lblYieldingUntilEndStep");
                 default -> "";
             };
-            callback.showPromptMessage(player, message);
-            callback.updateButtons(player, false, true, false);
+            gui.showPromptMessage(player, message);
+            gui.updateButtons(player, false, true, false);
         }
     }
 
@@ -190,7 +168,7 @@ public class YieldController {
         YieldState state = new YieldState(mode);
         yieldStates.put(player, state);
 
-        GameView gameView = callback.getGameView();
+        GameView gameView = gui.getGameView();
 
         // Use network-safe GameView properties instead of gameView.getGame()
         // This ensures proper operation for non-host players in multiplayer
@@ -233,12 +211,12 @@ public class YieldController {
         player = TrackableTypes.PlayerViewType.lookup(player); // ensure we use the correct player instance
         clearYieldModeInternal(player);
 
-        callback.showPromptMessage(player, "");
-        callback.updateButtons(player, false, false, false);
-        callback.awaitNextInput();
+        gui.showPromptMessage(player, "");
+        gui.updateButtons(player, false, false, false);
+        gui.awaitNextInput();
 
         // Notify client to update its local yield state (for network play)
-        callback.syncYieldModeToClient(player, YieldMode.NONE);
+        gui.syncYieldMode(player, YieldMode.NONE);
     }
 
     /**
@@ -280,16 +258,6 @@ public class YieldController {
     }
 
     /**
-     * Check if the player's yield just ended this priority pass (due to end condition or interrupt).
-     * Used to suppress smart suggestions immediately after a yield ends.
-     * This method clears the flag after checking.
-     */
-    public boolean didYieldJustEnd(PlayerView player) {
-        player = TrackableTypes.PlayerViewType.lookup(player);
-        return yieldJustEnded.remove(player);
-    }
-
-    /**
      * Check if auto-yield should be active for a player based on current game state.
      * Uses network-safe GameView properties to work correctly for non-host players in multiplayer.
      */
@@ -312,11 +280,10 @@ public class YieldController {
         // Check interrupt conditions
         if (shouldInterruptYield(player)) {
             clearYieldMode(player);
-            yieldJustEnded.add(player); // Track that yield just ended
             return false;
         }
 
-        GameView gameView = callback.getGameView();
+        GameView gameView = gui.getGameView();
         if (gameView == null) {
             return false;
         }
@@ -339,14 +306,12 @@ public class YieldController {
                     // startPhase, we likely missed our stop point due to timing
                     if (currentPhase == forge.game.phase.PhaseType.MAIN2) {
                         clearYieldMode(player);
-                        yieldJustEnded.add(player);
                         yield false;
                     }
                     yield true;
                 }
                 if (currentPhase != state.startPhase) {
                     clearYieldMode(player);
-                    yieldJustEnded.add(player);
                     yield false;
                 }
                 yield true;
@@ -356,7 +321,6 @@ public class YieldController {
                 boolean stackEmpty = gameView.getStack() == null || gameView.getStack().isEmpty();
                 if (stackEmpty) {
                     clearYieldMode(player);
-                    yieldJustEnded.add(player);
                     yield false;
                 }
                 yield true;
@@ -370,7 +334,6 @@ public class YieldController {
                 }
                 if (currentTurn > state.startTurn) {
                     clearYieldMode(player);
-                    yieldJustEnded.add(player);
                     yield false;
                 }
                 yield true;
@@ -390,7 +353,6 @@ public class YieldController {
                     // If we started during opponent's turn, stop when we reach our turn
                     if (!Boolean.TRUE.equals(state.startedDuringOurTurn)) {
                         clearYieldMode(player);
-                        yieldJustEnded.add(player);
                         yield false;
                     }
                 } else {
@@ -417,7 +379,6 @@ public class YieldController {
 
                     if (differentTurn || sameTurnButStartedBeforeCombat) {
                         clearYieldMode(player);
-                        yieldJustEnded.add(player);
                         yield false;
                     }
                 }
@@ -438,7 +399,6 @@ public class YieldController {
 
                     if (differentTurn || sameTurnButStartedBeforeEndStep) {
                         clearYieldMode(player);
-                        yieldJustEnded.add(player);
                         yield false;
                     }
                 }
@@ -453,7 +413,7 @@ public class YieldController {
      * Uses network-safe GameView properties to work correctly for non-host players in multiplayer.
      */
     private boolean shouldInterruptYield(final PlayerView player) {
-        GameView gameView = callback.getGameView();
+        GameView gameView = gui.getGameView();
         if (gameView == null) {
             return false;
         }
@@ -677,47 +637,6 @@ public class YieldController {
             (phase == forge.game.phase.PhaseType.END_OF_TURN || phase == forge.game.phase.PhaseType.CLEANUP);
     }
 
-
-    /**
-     * Mark a suggestion as declined for the current turn.
-     * Uses network-safe GameView.getTurn() instead of Game.getPhaseHandler().getTurn().
-     */
-    public void declineSuggestion(PlayerView player, String suggestionType) {
-        player = TrackableTypes.PlayerViewType.lookup(player); // ensure we use the correct player instance
-        GameView gameView = callback.getGameView();
-        if (gameView == null) return;
-
-        int currentTurn = gameView.getTurn();
-        Integer storedTurn = declinedSuggestionsTurn.get(player);
-
-        // Reset if turn changed
-        if (storedTurn == null || storedTurn != currentTurn) {
-            declinedSuggestionsThisTurn.put(player, Sets.newHashSet());
-            declinedSuggestionsTurn.put(player, currentTurn);
-        }
-
-        declinedSuggestionsThisTurn.get(player).add(suggestionType);
-    }
-
-    /**
-     * Check if a suggestion has been declined for the current turn.
-     * Uses network-safe GameView.getTurn() instead of Game.getPhaseHandler().getTurn().
-     */
-    public boolean isSuggestionDeclined(PlayerView player, String suggestionType) {
-        player = TrackableTypes.PlayerViewType.lookup(player); // ensure we use the correct player instance
-        GameView gameView = callback.getGameView();
-        if (gameView == null) return false;
-
-        int currentTurn = gameView.getTurn();
-        Integer storedTurn = declinedSuggestionsTurn.get(player);
-
-        if (storedTurn == null || storedTurn != currentTurn) {
-            return false; // Turn changed, reset
-        }
-
-        Set<String> declined = declinedSuggestionsThisTurn.get(player);
-        return declined != null && declined.contains(suggestionType);
-    }
 
     /**
      * Remove a player from legacy auto-pass (for AbstractGuiGame internal use).

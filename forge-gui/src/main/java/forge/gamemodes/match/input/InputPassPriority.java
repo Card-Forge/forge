@@ -71,7 +71,7 @@ public class InputPassPriority extends InputSyncronizedBase {
         // Only show suggestions if not already yielding
         // Check if yield just ended and suppression is enabled
         boolean suppressDueToYieldEnd = FModel.getPreferences().getPrefBoolean(FPref.YIELD_SUPPRESS_AFTER_END)
-            && getController().getGui().didYieldJustEnd(getOwner());
+            && getController().didYieldJustEnd();
 
         if (isExperimentalYieldEnabled() && !isAlreadyYielding() && !suppressDueToYieldEnd) {
             ForgePreferences prefs = FModel.getPreferences();
@@ -80,7 +80,7 @@ public class InputPassPriority extends InputSyncronizedBase {
             // Suggestion 1: Stack items but can't respond
             if (prefs.getPrefBoolean(FPref.YIELD_SUGGEST_STACK_YIELD)
                 && shouldShowStackYieldPrompt()
-                && !getController().getGui().isSuggestionDeclined(getOwner(), "STACK_YIELD")) {
+                && !getController().isSuggestionDeclined("STACK_YIELD")) {
                 pendingSuggestion = YieldMode.UNTIL_STACK_CLEARS;
                 pendingSuggestionType = "STACK_YIELD";
                 pendingSuggestionMessage = loc.getMessage("lblCannotRespondToStackYieldPrompt");
@@ -90,7 +90,7 @@ public class InputPassPriority extends InputSyncronizedBase {
             // Suggestion 2: Has cards but no mana
             if (prefs.getPrefBoolean(FPref.YIELD_SUGGEST_NO_MANA)
                 && shouldShowNoManaPrompt()
-                && !getController().getGui().isSuggestionDeclined(getOwner(), "NO_MANA")) {
+                && !getController().isSuggestionDeclined("NO_MANA")) {
                 pendingSuggestion = getDefaultYieldMode();
                 pendingSuggestionType = "NO_MANA";
                 pendingSuggestionMessage = loc.getMessage("lblNoManaAvailableYieldPrompt");
@@ -100,7 +100,7 @@ public class InputPassPriority extends InputSyncronizedBase {
             // Suggestion 3: No available actions (empty hand, no abilities)
             if (prefs.getPrefBoolean(FPref.YIELD_SUGGEST_NO_ACTIONS)
                 && shouldShowNoActionsPrompt()
-                && !getController().getGui().isSuggestionDeclined(getOwner(), "NO_ACTIONS")) {
+                && !getController().isSuggestionDeclined("NO_ACTIONS")) {
                 pendingSuggestion = getDefaultYieldMode();
                 pendingSuggestionType = "NO_ACTIONS";
                 pendingSuggestionMessage = loc.getMessage("lblNoActionsAvailableYieldPrompt");
@@ -195,7 +195,7 @@ public class InputPassPriority extends InputSyncronizedBase {
         if (pendingSuggestion != null) {
             // Track that this suggestion was declined for this turn
             if (pendingSuggestionType != null) {
-                getController().getGui().declineSuggestion(getOwner(), pendingSuggestionType);
+                getController().declineSuggestion(pendingSuggestionType);
             }
             pendingSuggestion = null;
             pendingSuggestionType = null;
@@ -342,18 +342,23 @@ public class InputPassPriority extends InputSyncronizedBase {
             : YieldMode.UNTIL_END_OF_TURN;
     }
 
+    private boolean checkHasAvailableActions() {
+        Player player = getController().getPlayer();
+        if (player == null) return false;
+        player.getView().updateHasAvailableActions(player);
+        return player.getView().hasAvailableActions();
+    }
+
     private boolean shouldShowStackYieldPrompt() {
         GameView gv = getGameView();
-        PlayerView pv = getPlayerView();
-        if (gv == null || pv == null) return false;
+        if (gv == null) return false;
 
         FCollectionView<StackItemView> stack = gv.getStack();
         if (stack == null || stack.isEmpty()) {
             return false;
         }
 
-        // Use TrackableProperty - player has no available actions
-        return !pv.hasAvailableActions();
+        return !checkHasAvailableActions();
     }
 
     /**
@@ -408,6 +413,6 @@ public class InputPassPriority extends InputSyncronizedBase {
             return false;
         }
 
-        return !pv.hasAvailableActions();
+        return !checkHasAvailableActions();
     }
 }

@@ -3260,8 +3260,38 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
     }
 
+    // Yield-just-ended detection via mayAutoPass transition (true→false)
+    private boolean wasAutoPassingLastPriority;
+    private boolean yieldJustEndedFlag;
+
+    // Suggestion decline tracking (reset each turn)
+    private final Map<String, Integer> declinedSuggestionTurn = Maps.newHashMap();
+
     public boolean mayAutoPass() {
-        return getGui().mayAutoPass(getLocalPlayerView());
+        boolean result = getGui().mayAutoPass(getLocalPlayerView());
+        // Detect yield ending: was auto-passing last priority, not any more
+        yieldJustEndedFlag = wasAutoPassingLastPriority && !result;
+        wasAutoPassingLastPriority = result;
+        return result;
+    }
+
+    public boolean didYieldJustEnd() {
+        boolean flag = yieldJustEndedFlag;
+        yieldJustEndedFlag = false;
+        return flag;
+    }
+
+    public void declineSuggestion(String suggestionType) {
+        GameView gv = getGui().getGameView();
+        if (gv == null) return;
+        declinedSuggestionTurn.put(suggestionType, gv.getTurn());
+    }
+
+    public boolean isSuggestionDeclined(String suggestionType) {
+        GameView gv = getGui().getGameView();
+        if (gv == null) return false;
+        Integer turnDeclined = declinedSuggestionTurn.get(suggestionType);
+        return turnDeclined != null && turnDeclined == gv.getTurn();
     }
 
     public void autoPassUntilEndOfTurn() {
