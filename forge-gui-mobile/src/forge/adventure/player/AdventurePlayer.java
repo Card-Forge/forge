@@ -1101,7 +1101,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         Array<ItemData> items = new Array<>();
         for (Long id : equippedItems.values()) {
             ItemData item = getEquippedItem(id);
-            if (item == null)
+            if (item == null | Config.instance().getSettingData().disableCrackedItems)
                 continue;
             if (isHardorInsaneDifficulty()) {
                 items.add(item);
@@ -1118,7 +1118,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public boolean hasEquippedItem() {
         for (Long id : equippedItems.values()) {
             ItemData item = getEquippedItem(id);
-            if (item == null)
+            if (item == null | Config.instance().getSettingData().disableCrackedItems)
                 continue;
             if (isHardorInsaneDifficulty()) {
                 return true;

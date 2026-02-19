@@ -789,6 +789,8 @@
 	],
 	"ai": "",
 	"boss": true,
+	"bossInsult": "Enlightenment comes most swiftly at life's end.",
+	"bossIntro": "I feed my hatred to the righteous and they join my crusade",
 	"flying": true,
 	"speed": 1,
 	"scale": 1.5,
