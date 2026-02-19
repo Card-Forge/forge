@@ -201,7 +201,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                 }
                 if (numCardsInHand > 0) {
                     CardCollectionView hand = p.getCardsIn(ZoneType.Hand);
-                    toBeDiscarded = p.getController().chooseCardsToDiscardUnlessType(Math.min(numCards, numCardsInHand), hand, sa.getParam("UnlessType"), sa);
+                    toBeDiscarded = p.getController().chooseCardsToDiscardUnlessType(numCards, hand, sa.getParam("UnlessType").split(","), sa);
                     toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game,toBeDiscarded, ZoneType.Graveyard, sa);
                 }
             }

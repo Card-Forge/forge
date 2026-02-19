@@ -304,7 +304,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public CardCollectionView chooseCardsToDiscardUnlessType(int min, CardCollectionView hand, String param, SpellAbility sa) {
+    public CardCollectionView chooseCardsToDiscardUnlessType(int min, CardCollectionView hand, String[] unlessTypes, SpellAbility sa) {
         throw new IllegalStateException("Erring on the side of caution here...");
     }
 

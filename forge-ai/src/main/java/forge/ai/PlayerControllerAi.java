@@ -697,8 +697,8 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CardCollectionView chooseCardsToDiscardUnlessType(int num, CardCollectionView hand, String uType, SpellAbility sa) {
-        Iterable<Card> cardsOfType = IterableUtil.filter(hand, CardPredicates.restriction(uType.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa));
+    public CardCollectionView chooseCardsToDiscardUnlessType(int num, CardCollectionView hand, String[] uTypes, SpellAbility sa) {
+        Iterable<Card> cardsOfType = IterableUtil.filter(hand, CardPredicates.restriction(uTypes, sa.getActivatingPlayer(), sa.getHostCard(), sa));
         if (!Iterables.isEmpty(cardsOfType)) {
             Card toDiscard = Aggregates.itemWithMin(cardsOfType, Card::getCMC);
             return new CardCollection(toDiscard);

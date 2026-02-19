@@ -205,7 +205,7 @@ public abstract class PlayerController {
 
     /** p = target player, validCards - possible discards, min cards to discard */
     public abstract CardCollectionView chooseCardsToDiscardFrom(Player playerDiscard, SpellAbility sa, CardCollection validCards, int min, int max);
-    public abstract CardCollectionView chooseCardsToDiscardUnlessType(int min, CardCollectionView hand, String param, SpellAbility sa);
+    public abstract CardCollectionView chooseCardsToDiscardUnlessType(int min, CardCollectionView hand, String[] unlessTypes, SpellAbility sa);
     public abstract CardCollection chooseCardsToDiscardToMaximumHandSize(int numDiscard);
 
     public abstract CardCollectionView chooseCardsToDelve(int genericAmount, CardCollection grave);
