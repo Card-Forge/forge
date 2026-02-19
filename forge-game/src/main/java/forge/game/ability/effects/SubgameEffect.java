@@ -17,7 +17,6 @@ import forge.game.event.GameEventSubgameEnd;
 import forge.game.event.GameEventSubgameStart;
 import forge.game.event.GameEventZone;
 import forge.game.player.Player;
-import forge.game.player.PlayerController;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
