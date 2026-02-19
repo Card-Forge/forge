@@ -67,7 +67,6 @@ public class CardInfoPopup {
     private final FImagePanel cardImagePanel;
     private final FHtmlViewer keywordViewer;
     private final JPanel relatedCardsPanel;
-    private final JPanel separatorPanel;
     private final Timer showTimer;
 
     // Cache
@@ -104,28 +103,25 @@ public class CardInfoPopup {
         cardImagePanel.setBackground(bgColor);
         cardImagePanel.setVisible(false);
 
-        // Content panel (CENTER side — keywords + related cards)
-        contentPanel = new JPanel();
-        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+        // Content panel (CENTER side — related cards on left, keywords on right)
+        contentPanel = new JPanel(new BorderLayout(GAP, 0));
         contentPanel.setBackground(bgColor);
 
         keywordViewer = new FHtmlViewer();
         keywordViewer.setBackground(bgColor);
         keywordViewer.setOpaque(true);
 
-        separatorPanel = new JPanel();
-        separatorPanel.setBackground(borderColor);
-        separatorPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 1));
-        separatorPanel.setPreferredSize(new Dimension(0, 1));
-
         relatedCardsPanel = new JPanel();
         relatedCardsPanel.setLayout(new BoxLayout(relatedCardsPanel, BoxLayout.Y_AXIS));
         relatedCardsPanel.setBackground(bgColor);
         relatedCardsPanel.setOpaque(true);
 
-        contentPanel.add(keywordViewer);
-        contentPanel.add(separatorPanel);
-        contentPanel.add(relatedCardsPanel);
+        // Related cards top-aligned on left, keywords fill remaining space on right
+        final JPanel relatedWrapper = new JPanel(new BorderLayout());
+        relatedWrapper.setBackground(bgColor);
+        relatedWrapper.add(relatedCardsPanel, BorderLayout.NORTH);
+        contentPanel.add(relatedWrapper, BorderLayout.WEST);
+        contentPanel.add(keywordViewer, BorderLayout.CENTER);
 
         // Wrap contentPanel so it top-aligns instead of stretching to card image height
         final JPanel contentWrapper = new JPanel(new BorderLayout());
@@ -290,8 +286,6 @@ public class CardInfoPopup {
             keywordViewer.setText(keywordHtml);
         }
 
-        separatorPanel.setVisible(hasKeywords && hasRelated);
-
         relatedCardsPanel.setVisible(hasRelated);
         relatedCardsPanel.removeAll();
         if (hasRelated) {
@@ -312,9 +306,13 @@ public class CardInfoPopup {
         final Dimension size = cardSize;
         final int finalMaxContent = maxContentWidth;
         final int finalMaxPopup = Math.max(maxPopupWidth, POPUP_WIDTH);
+        final int kwMaxWidth = Math.max((int) (thumbnailHeight * MTG_ASPECT_RATIO), POPUP_WIDTH);
         SwingUtilities.invokeLater(() -> {
+            // Cap keyword width to the selected card image width
             if (keywordViewer.isVisible()) {
-                keywordViewer.setSize(finalMaxContent, Short.MAX_VALUE);
+                keywordViewer.setSize(kwMaxWidth, Short.MAX_VALUE);
+                final Dimension pref = keywordViewer.getPreferredSize();
+                keywordViewer.setPreferredSize(new Dimension(kwMaxWidth, pref.height));
             }
             window.pack();
             if (window.getWidth() > finalMaxPopup) {
@@ -446,7 +444,8 @@ public class CardInfoPopup {
                         addOtherFaceEntry(entries, cardView, "Other Face");
                         break;
                     case Meld:
-                        addOtherFaceEntry(entries, cardView, "Melds Into");
+                        addNamedCardEntry(entries, rules.getMeldWith(), "Meld", data);
+                        addOtherFaceEntry(entries, cardView, "Meld");
                         break;
                     case Flip:
                         addFlipFaceEntry(entries, cardView);
@@ -459,6 +458,9 @@ public class CardInfoPopup {
                         break;
                 }
             }
+
+            // Partner with
+            addNamedCardEntry(entries, rules.getPartnerWith(), "Partner", data);
 
             // Spellbook entries
             addSpellbookEntries(entries, rules, data);
@@ -573,6 +575,29 @@ public class CardInfoPopup {
         }
     }
 
+    private void addNamedCardEntry(final List<RelatedCardEntry> entries,
+                                    final String name, final String label,
+                                    final StaticData data) {
+        if (name == null || name.isEmpty()) {
+            return;
+        }
+        try {
+            final PaperCard pc = data.getCommonCards().getCard(name);
+            if (pc != null) {
+                final String imageKey = pc.getCardImageKey();
+                final BufferedImage img = ImageCache.getOriginalImage(imageKey, true, null);
+                if (img != null) {
+                    entries.add(new RelatedCardEntry(label, name, img));
+                }
+                if (img == null || ImageCache.isDefaultImage(img)) {
+                    fetchIfMissing(pc.getImageKey(false));
+                }
+            }
+        } catch (Exception e) {
+            // Skip cards that can't be resolved
+        }
+    }
+
     private static Set<String> extractSpellbookNames(final ICardFace face) {
         final Set<String> names = new LinkedHashSet<>();
         // Search abilities
@@ -617,7 +642,8 @@ public class CardInfoPopup {
         }
     }
 
-    private static final int CARDS_PER_ROW = 5;
+    private static final int FULL_SIZE_MAX = 2;
+    private static final int HALF_SIZE_PER_ROW = 4;
 
     private void populateRelatedCards(final List<RelatedCardEntry> entries,
                                       final int thumbnailHeight,
@@ -638,21 +664,24 @@ public class CardInfoPopup {
             labelViewer.setBackground(bgColor);
             labelViewer.setOpaque(true);
             labelViewer.setText("<b>" + group.getKey()
-                    + (cards.size() > CARDS_PER_ROW ? " (" + cards.size() + ")" : "")
+                    + (cards.size() > HALF_SIZE_PER_ROW ? " (" + cards.size() + ")" : "")
                     + "</b>");
             labelViewer.setMaximumSize(new Dimension(Integer.MAX_VALUE, 24));
             relatedCardsPanel.add(labelViewer);
 
-            // Scale down thumbnails for large groups
-            int effectiveHeight = cards.size() > CARDS_PER_ROW
-                    ? Math.max(80, thumbnailHeight / 2) : thumbnailHeight;
+            // Up to 2 cards at full size; 3+ scale to half size, max 4 per row
+            final boolean fullSize = cards.size() <= FULL_SIZE_MAX;
+            final int perRow = fullSize
+                    ? Math.min(cards.size(), FULL_SIZE_MAX) : HALF_SIZE_PER_ROW;
+            int effectiveHeight = fullSize
+                    ? thumbnailHeight : Math.max(80, thumbnailHeight / 2);
 
-            // Constrain thumbnail size so a full row fits within maxContentWidth
-            final int maxThumbWidth = maxContentWidth / CARDS_PER_ROW;
+            // Constrain thumbnail size so cards fit within maxContentWidth
+            final int maxThumbWidth = maxContentWidth / perRow;
             final int maxHeightForWidth = (int) (maxThumbWidth / MTG_ASPECT_RATIO);
             effectiveHeight = Math.min(effectiveHeight, maxHeightForWidth);
 
-            // Build rows of CARDS_PER_ROW manually (FlowLayout doesn't wrap with pack())
+            // Build rows manually (FlowLayout doesn't wrap with pack())
             final JPanel rowsContainer = new JPanel();
             rowsContainer.setLayout(new BoxLayout(rowsContainer, BoxLayout.Y_AXIS));
             rowsContainer.setBackground(bgColor);
@@ -670,10 +699,8 @@ public class CardInfoPopup {
                 }
                 final FImagePanel imgPanel = new FImagePanel();
                 imgPanel.setImage(entry.image);
-                // Use consistent MTG aspect ratio to ensure row fits within max width
                 int thumbWidth = (int) (effectiveHeight * MTG_ASPECT_RATIO);
                 int thumbHeight = effectiveHeight;
-                // Safety cap: ensure no single thumbnail exceeds the per-column width
                 if (thumbWidth > maxThumbWidth) {
                     thumbWidth = maxThumbWidth;
                     thumbHeight = (int) (thumbWidth / MTG_ASPECT_RATIO);
@@ -684,7 +711,7 @@ public class CardInfoPopup {
                 imgPanel.setMaximumSize(thumbSize);
                 currentRow.add(imgPanel);
                 colIndex++;
-                if (colIndex >= CARDS_PER_ROW) {
+                if (colIndex >= perRow) {
                     colIndex = 0;
                 }
             }

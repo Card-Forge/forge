@@ -2,6 +2,7 @@ package forge.screens.match.menus;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
@@ -43,7 +44,17 @@ public final class CardInfoPopupMenu {
     }
 
     private static JCheckBoxMenuItem getCheckboxItem(final String label, final FPref pref) {
-        final JCheckBoxMenuItem item = new JCheckBoxMenuItem(label);
+        final JCheckBoxMenuItem item = new JCheckBoxMenuItem(label) {
+            @Override
+            protected void processMouseEvent(final MouseEvent e) {
+                if (e.getID() == MouseEvent.MOUSE_RELEASED && contains(e.getPoint())) {
+                    doClick(0);
+                    setArmed(true);
+                } else {
+                    super.processMouseEvent(e);
+                }
+            }
+        };
         item.setState(prefs.getPrefBoolean(pref));
         item.addActionListener(e -> {
             final boolean newState = !prefs.getPrefBoolean(pref);
