@@ -200,6 +200,10 @@ public class ImageCache {
         return getOriginalImageInternal(imageKey, useDefaultIfNotFound, null);
     }
 
+    public static Pair<BufferedImage, Boolean> getCardOriginalImageInfo(String imageKey, boolean useDefaultIfNotFound, CardView cardView) {
+        return getOriginalImageInternal(imageKey, useDefaultIfNotFound, cardView);
+    }
+
     // return the pair of image and a flag to indicate if it is a placeholder image.
     private static Pair<BufferedImage, Boolean> getOriginalImageInternal(String imageKey, boolean useDefaultIfNotFound,
                                                                          CardView cardView) {

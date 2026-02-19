@@ -26,6 +26,8 @@ import javax.swing.JWindow;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import forge.CachedCardImage;
 import forge.ImageCache;
 import forge.StaticData;
@@ -111,8 +113,8 @@ public class CardInfoPopup {
         cardImagePanel.setOpaque(false);
         cardImagePanel.setVisible(false);
 
-        // Content panel (CENTER side — related cards on left, keywords on right)
-        contentPanel = new JPanel(new BorderLayout(GAP, 0));
+        // Content panel (CENTER side — keywords on top, related cards below)
+        contentPanel = new JPanel(new BorderLayout(0, GAP));
         contentPanel.setOpaque(false);
 
         keywordsPanel = new JPanel();
@@ -123,15 +125,9 @@ public class CardInfoPopup {
         relatedCardsPanel.setLayout(new BoxLayout(relatedCardsPanel, BoxLayout.Y_AXIS));
         relatedCardsPanel.setOpaque(false);
 
-        // Related cards top-aligned on left, keywords fill remaining space on right
-        final JPanel relatedWrapper = new JPanel(new BorderLayout());
-        relatedWrapper.setOpaque(false);
-        relatedWrapper.add(relatedCardsPanel, BorderLayout.NORTH);
-        contentPanel.add(relatedWrapper, BorderLayout.WEST);
-        final JPanel keywordsWrapper = new JPanel(new BorderLayout());
-        keywordsWrapper.setOpaque(false);
-        keywordsWrapper.add(keywordsPanel, BorderLayout.NORTH);
-        contentPanel.add(keywordsWrapper, BorderLayout.CENTER);
+        // Keywords fixed at top, related cards fill remaining space below
+        contentPanel.add(keywordsPanel, BorderLayout.NORTH);
+        contentPanel.add(relatedCardsPanel, BorderLayout.CENTER);
 
         // Wrap contentPanel so it top-aligns instead of stretching to card image height
         final JPanel contentWrapper = new JPanel(new BorderLayout());
@@ -265,6 +261,8 @@ public class CardInfoPopup {
                 addKeywordActions(keywordList, oracleText, addedNames,
                         nullSafe(state.getName()));
             }
+            // Sort by card text order
+            sortByOracleText(keywordList, oracleText);
             hasKeywords = !keywordList.isEmpty();
         }
 
@@ -302,19 +300,47 @@ public class CardInfoPopup {
         int maxContentWidth = maxPopupWidth - cardImgWidth - 2 * PADDING - 2 - GAP;
         maxContentWidth = Math.max(maxContentWidth, POPUP_WIDTH);
 
-        // Update UI
+        // Compute natural width for related cards based on thumbnail count
+        int relatedWidth = 0;
+        int effectiveThumbHeight = thumbnailHeight;
+        if (hasRelated) {
+            final int totalCards = relatedEntries.size();
+            final boolean fullSize = totalCards <= FULL_SIZE_MAX;
+            final int perRow = fullSize
+                    ? Math.min(totalCards, FULL_SIZE_MAX) : HALF_SIZE_PER_ROW;
+            effectiveThumbHeight = fullSize
+                    ? thumbnailHeight : Math.max(80, thumbnailHeight / 2);
+            final int thumbWidth = (int) (effectiveThumbHeight * MTG_ASPECT_RATIO);
+            relatedWidth = perRow * thumbWidth + 2 * PILL_PAD + 2;
+        }
+        // Content width: use natural related-cards width, capped by available space
+        final int contentWidth = Math.max(POPUP_WIDTH,
+                Math.min(relatedWidth, maxContentWidth));
+
+        // Update keywords
         keywordsPanel.setVisible(hasKeywords);
         keywordsPanel.removeAll();
-        final int kwMaxWidth = Math.max((int) (thumbnailHeight * MTG_ASPECT_RATIO), POPUP_WIDTH);
         if (hasKeywords) {
-            populateKeywords(keywordsPanel, keywordList, kwMaxWidth);
+            populateKeywords(keywordsPanel, keywordList, contentWidth);
         }
 
+        // Calculate available height for related cards: fit within owner bounds
         relatedCardsPanel.setVisible(hasRelated);
         relatedCardsPanel.removeAll();
         if (hasRelated) {
+            // Measure keyword panel height so we can reserve space for it
+            int kwHeight = 0;
+            if (hasKeywords) {
+                keywordsPanel.setPreferredSize(null);
+                kwHeight = keywordsPanel.getPreferredSize().height + GAP;
+            }
+            final int maxPopupHeight = ownerBounds.height - 2 * PADDING;
+            final int availableHeight = maxPopupHeight - kwHeight;
+            // Shrink thumbnail height to fit available space if needed
+            effectiveThumbHeight = Math.min(effectiveThumbHeight,
+                    Math.max(80, availableHeight - 40));
             populateRelatedCards(relatedCardsPanel, relatedEntries,
-                    thumbnailHeight, maxContentWidth);
+                    effectiveThumbHeight, contentWidth);
         }
 
         // Update cache
@@ -330,16 +356,15 @@ public class CardInfoPopup {
         final Point loc = cardScreenLocation;
         final Dimension size = cardSize;
         final int finalMaxPopup = Math.max(maxPopupWidth, POPUP_WIDTH);
+        final int maxHeight = ownerBounds.height;
         SwingUtilities.invokeLater(() -> {
-            if (keywordsPanel.isVisible()) {
-                // Clear stale explicit size so BoxLayout recomputes from current children
-                keywordsPanel.setPreferredSize(null);
-                keywordsPanel.setPreferredSize(new Dimension(kwMaxWidth,
-                        keywordsPanel.getPreferredSize().height));
-            }
+            keywordsPanel.setPreferredSize(null);
             window.pack();
             if (window.getWidth() > finalMaxPopup) {
                 window.setSize(finalMaxPopup, window.getHeight());
+            }
+            if (window.getHeight() > maxHeight) {
+                window.setSize(window.getWidth(), maxHeight);
             }
             positionAndShow(loc, size);
         });
@@ -700,11 +725,13 @@ public class CardInfoPopup {
                     if (pt != null) {
                         final CardView tokenView = Card.getCardForUi(pt).getView();
                         final String imageKey = pt.getCardImageKey();
-                        final BufferedImage img = ImageCache.getOriginalImage(
-                                imageKey, true, tokenView);
+                        final Pair<BufferedImage, Boolean> info =
+                                ImageCache.getCardOriginalImageInfo(
+                                        imageKey, true, tokenView);
+                        final BufferedImage img = info.getLeft();
                         if (img != null) {
                             entries.add(new RelatedCardEntry("Creates", pt.getName(),
-                                    img, imageKey));
+                                    img, imageKey, info.getRight()));
                         }
                     }
                 }
@@ -753,7 +780,7 @@ public class CardInfoPopup {
         final List<RelatedCardEntry> entries = buildRelatedCardsStatic(cardName, cardView);
         // Trigger auto-download for entries with null/default images
         for (final RelatedCardEntry entry : entries) {
-            if (entry.image == null || ImageCache.isDefaultImage(entry.image)) {
+            if (entry.image == null || entry.placeholder) {
                 fetchIfMissing(entry.imageKey);
             }
         }
@@ -766,10 +793,12 @@ public class CardInfoPopup {
         if (altState == null) {
             return;
         }
-        final BufferedImage img = FImageUtil.getImage(altState);
+        final Pair<BufferedImage, Boolean> info = ImageCache.getCardOriginalImageInfo(
+                altState.getImageKey(), true, altState.getCard());
+        final BufferedImage img = info.getLeft();
         if (img != null) {
             entries.add(new RelatedCardEntry(label, altState.getName(),
-                    img, altState.getImageKey()));
+                    img, altState.getImageKey(), info.getRight()));
         }
     }
 
@@ -779,12 +808,14 @@ public class CardInfoPopup {
         if (altState == null) {
             return;
         }
-        final BufferedImage img = FImageUtil.getImage(altState);
+        final Pair<BufferedImage, Boolean> info = ImageCache.getCardOriginalImageInfo(
+                altState.getImageKey(), true, altState.getCard());
+        final BufferedImage img = info.getLeft();
         if (img != null) {
-            final BufferedImage displayImg = ImageCache.isDefaultImage(img)
+            final BufferedImage displayImg = info.getRight()
                     ? img : rotateImage180(img);
             entries.add(new RelatedCardEntry("Flips Into", altState.getName(),
-                    displayImg, altState.getImageKey()));
+                    displayImg, altState.getImageKey(), info.getRight()));
         }
     }
 
@@ -814,11 +845,12 @@ public class CardInfoPopup {
                     final forge.item.PaperCard pc = data.getCommonCards().getCard(faceName);
                     if (pc != null) {
                         final String imageKey = pc.getImageKey(false);
-                        final BufferedImage img = ImageCache.getOriginalImage(
-                                imageKey, true, null);
+                        final Pair<BufferedImage, Boolean> info =
+                                ImageCache.getCardOriginalImageInfo(imageKey, true);
+                        final BufferedImage img = info.getLeft();
                         if (img != null) {
                             entries.add(new RelatedCardEntry("Specializes Into",
-                                    faceName, img, imageKey));
+                                    faceName, img, imageKey, info.getRight()));
                         }
                     }
                 }
@@ -841,11 +873,12 @@ public class CardInfoPopup {
                 final PaperCard pc = data.getCommonCards().getCard(cardName);
                 if (pc != null) {
                     final String imageKey = pc.getImageKey(false);
-                    final BufferedImage img = ImageCache.getOriginalImage(
-                            imageKey, true, null);
+                    final Pair<BufferedImage, Boolean> info =
+                            ImageCache.getCardOriginalImageInfo(imageKey, true);
+                    final BufferedImage img = info.getLeft();
                     if (img != null) {
                         entries.add(new RelatedCardEntry("Spellbook", cardName,
-                                img, imageKey));
+                                img, imageKey, info.getRight()));
                     }
                 }
             } catch (Exception e) {
@@ -864,9 +897,12 @@ public class CardInfoPopup {
             final PaperCard pc = data.getCommonCards().getCard(name);
             if (pc != null) {
                 final String imageKey = pc.getImageKey(false);
-                final BufferedImage img = ImageCache.getOriginalImage(imageKey, true, null);
+                final Pair<BufferedImage, Boolean> info =
+                        ImageCache.getCardOriginalImageInfo(imageKey, true);
+                final BufferedImage img = info.getLeft();
                 if (img != null) {
-                    entries.add(new RelatedCardEntry(label, name, img, imageKey));
+                    entries.add(new RelatedCardEntry(label, name, img, imageKey,
+                            info.getRight()));
                 }
             }
         } catch (Exception e) {
@@ -925,6 +961,15 @@ public class CardInfoPopup {
                                               final List<RelatedCardEntry> entries,
                                               final int thumbnailHeight,
                                               final int maxContentWidth) {
+        populateRelatedCards(targetPanel, entries, thumbnailHeight,
+                maxContentWidth, HALF_SIZE_PER_ROW);
+    }
+
+    public static void populateRelatedCards(final JPanel targetPanel,
+                                              final List<RelatedCardEntry> entries,
+                                              final int thumbnailHeight,
+                                              final int maxContentWidth,
+                                              final int halfSizePerRow) {
         // Group entries by label
         final LinkedHashMap<String, List<RelatedCardEntry>> grouped = new LinkedHashMap<>();
         for (final RelatedCardEntry entry : entries) {
@@ -948,7 +993,7 @@ public class CardInfoPopup {
 
             // Section label
             final String labelText = group.getKey()
-                    + (cards.size() > HALF_SIZE_PER_ROW
+                    + (cards.size() > halfSizePerRow
                             ? " (" + cards.size() + ")" : "");
             final javax.swing.JLabel sectionLabel = createAALabel(labelText);
             sectionLabel.setFont(boldFont.getBaseFont());
@@ -959,10 +1004,10 @@ public class CardInfoPopup {
             pill.add(sectionLabel);
             pill.add(javax.swing.Box.createRigidArea(new Dimension(0, 4)));
 
-            // Up to 2 cards at full size; 3+ scale to half size, max 4 per row
+            // Up to 2 cards at full size; 3+ scale to half size
             final boolean fullSize = cards.size() <= FULL_SIZE_MAX;
             final int perRow = fullSize
-                    ? Math.min(cards.size(), FULL_SIZE_MAX) : HALF_SIZE_PER_ROW;
+                    ? Math.min(cards.size(), FULL_SIZE_MAX) : halfSizePerRow;
             final int pillInnerWidth = maxContentWidth - 2 * PILL_PAD - 2;
             int effectiveHeight = fullSize
                     ? thumbnailHeight : Math.max(80, thumbnailHeight / 2);
@@ -1014,7 +1059,8 @@ public class CardInfoPopup {
                 currentRow.add(javax.swing.Box.createHorizontalGlue());
             }
 
-            pill.setMaximumSize(new Dimension(maxContentWidth, Integer.MAX_VALUE));
+            final int actualPillWidth = perRow * thumbWidth + 2 * PILL_PAD + 2;
+            pill.setMaximumSize(new Dimension(actualPillWidth, Integer.MAX_VALUE));
             targetPanel.add(pill);
         }
     }
@@ -1079,6 +1125,42 @@ public class CardInfoPopup {
                 .getDefaultScreenDevice().getDefaultConfiguration().getBounds();
     }
 
+    /**
+     * Sort keywords by their position in the oracle text so they appear
+     * in card-text order rather than alphabetical order.
+     */
+    public static void sortByOracleText(final List<KeywordData> keywords,
+                                         final String oracleText) {
+        if (oracleText == null || oracleText.isEmpty() || keywords.size() <= 1) {
+            return;
+        }
+        final String lowerText = oracleText.toLowerCase();
+        keywords.sort((a, b) -> {
+            final int posA = findKeywordPosition(lowerText, a.name);
+            final int posB = findKeywordPosition(lowerText, b.name);
+            return Integer.compare(posA, posB);
+        });
+    }
+
+    private static int findKeywordPosition(final String lowerOracleText,
+                                            final String keywordName) {
+        // Strip HTML tags (mana symbol images) to get plain text for matching
+        final String plain = keywordName.replaceAll("<[^>]+>", "").trim().toLowerCase();
+        int pos = lowerOracleText.indexOf(plain);
+        if (pos >= 0) {
+            return pos;
+        }
+        // Try first word only (e.g. "bestow" from "Bestow {2}{W}{U}{B}{R}{G}")
+        final int space = plain.indexOf(' ');
+        if (space > 0) {
+            pos = lowerOracleText.indexOf(plain.substring(0, space));
+            if (pos >= 0) {
+                return pos;
+            }
+        }
+        return Integer.MAX_VALUE;
+    }
+
     private static String nullSafe(final String s) {
         return s == null ? "" : s;
     }
@@ -1088,13 +1170,21 @@ public class CardInfoPopup {
         public final String name;
         public final BufferedImage image;
         public final String imageKey;
+        public final boolean placeholder;
 
         RelatedCardEntry(final String label, final String name,
                          final BufferedImage image, final String imageKey) {
+            this(label, name, image, imageKey, false);
+        }
+
+        RelatedCardEntry(final String label, final String name,
+                         final BufferedImage image, final String imageKey,
+                         final boolean placeholder) {
             this.label = label;
             this.name = name;
             this.image = image;
             this.imageKey = imageKey;
+            this.placeholder = placeholder;
         }
     }
 }

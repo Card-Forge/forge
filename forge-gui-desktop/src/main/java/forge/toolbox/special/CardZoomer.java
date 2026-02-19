@@ -18,21 +18,22 @@
 
 package forge.toolbox.special;
 
-import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.Timer;
 
 import forge.StaticData;
@@ -46,6 +47,7 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.toolbox.FOverlay;
+import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;
 import forge.toolbox.imaging.FImagePanel;
@@ -238,17 +240,11 @@ public enum CardZoomer {
 
         pnlMain.removeAll();
         if ((showKeywords || showRelated) && thisCard != null) {
-            final JPanel infoPanel = buildInfoPanel(showKeywords, showRelated);
-            if (infoPanel != null) {
-                // Switch to horizontal layout (no wrap) for side-by-side display
+            final JPanel sidePanel = buildSidePanel(showKeywords, showRelated);
+            if (sidePanel != null) {
                 pnlMain.setLayout(new MigLayout("insets 0, ax center, ay center"));
                 pnlMain.add(imagePanel, "w 45%!, h 80%!");
-                final JScrollPane scroll = new JScrollPane(infoPanel);
-                scroll.setOpaque(false);
-                scroll.getViewport().setOpaque(false);
-                scroll.setBorder(null);
-                scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-                pnlMain.add(scroll, "w 40%!, h 80%!");
+                pnlMain.add(sidePanel, sidePanel.getClientProperty("widthConstraint") + ", h 80%!");
             } else {
                 pnlMain.add(imagePanel, "w 80%!, h 80%!");
             }
@@ -259,25 +255,83 @@ public enum CardZoomer {
         setFlipIndicator();
     }
 
-    private JPanel buildInfoPanel(final boolean showKeywords, final boolean showRelated) {
-        final JPanel content = new JPanel();
-        content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
-        content.setOpaque(false);
-        content.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+    /**
+     * Build the side panel for the zoom view. Keywords go in a fixed header,
+     * related cards go in a scrollable area below.
+     */
+    private JPanel buildSidePanel(final boolean showKeywords, final boolean showRelated) {
+        // Check for related card entries first to determine column width
+        List<RelatedCardEntry> relatedEntries = List.of();
+        if (showRelated) {
+            final String cardName = thisCard.getName();
+            final CardView cardView = thisCard.getCard();
+            if (cardName != null && !cardName.isEmpty() && cardView != null) {
+                relatedEntries = CardInfoPopup.buildRelatedCardsStatic(cardName, cardView);
+            }
+        }
+        final boolean hasRelated = !relatedEntries.isEmpty();
 
-        // Derive dimensions from the 40% scroll pane column.
-        // Account for scrollbar (~17px), content padding (16px), and border slack.
         final int screenWidth = overlay.getWidth() > 0
                 ? overlay.getWidth()
                 : java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
-        final int maxWidth = Math.max(200, (int) (screenWidth * 0.40) - 60);
-        // Cap thumbnail height so 2 cards fit side-by-side in the column
-        final int rawSize = FModel.getPreferences().getPrefInt(FPref.UI_POPUP_IMAGE_SIZE);
-        final int popupThumbHeight = Math.max(100, Math.min(500, rawSize));
-        final int maxThumbForColumn = (int) ((maxWidth / 2.0) / 0.716);
-        final int thumbnailHeight = Math.min(popupThumbHeight, maxThumbForColumn);
-        boolean hasContent = false;
+        // Padding: scrollbar (~12px) + left content padding (8px) + slack (2px)
+        final int sidePadding = 22;
 
+        // Compute column width based on actual content
+        int columnPx;
+        int maxWidth;
+        int thumbnailHeight = 0;
+
+        if (hasRelated) {
+            final int maxColumnPx = Math.max(200, (int) (screenWidth * 0.40));
+            final int rawSize = FModel.getPreferences().getPrefInt(FPref.UI_POPUP_IMAGE_SIZE);
+            final int popupThumbHeight = Math.max(100, Math.min(500, rawSize));
+
+            if (relatedEntries.size() <= 2) {
+                // Small collections: compact column sized to content
+                final int maxContentWidth = maxColumnPx - sidePadding;
+                final int maxThumbForColumn = (int) ((maxContentWidth / 2.0) / 0.716);
+                thumbnailHeight = Math.min(popupThumbHeight, maxThumbForColumn);
+
+                int naturalContentWidth = 0;
+                final Map<String, List<RelatedCardEntry>> grouped = new LinkedHashMap<>();
+                for (final RelatedCardEntry entry : relatedEntries) {
+                    grouped.computeIfAbsent(entry.label, k -> new ArrayList<>()).add(entry);
+                }
+                for (final List<RelatedCardEntry> cards : grouped.values()) {
+                    final boolean fullSize = cards.size() <= 2;
+                    final int perRow = fullSize ? Math.min(cards.size(), 2) : 3;
+                    final int effHeight = fullSize
+                            ? thumbnailHeight : Math.max(80, thumbnailHeight / 2);
+                    final int thumbWidth = (int) (effHeight * 0.716);
+                    final int groupWidth = perRow * thumbWidth + 18;
+                    naturalContentWidth = Math.max(naturalContentWidth, groupWidth);
+                }
+                columnPx = Math.max(200,
+                        Math.min(naturalContentWidth + sidePadding, maxColumnPx));
+            } else {
+                // Large collections: thumbnails fill available space up to preference
+                final int maxContentWidth = maxColumnPx - sidePadding;
+                final int pillInnerWidth = maxContentWidth - 18; // 2*PILL_PAD + border
+                final int maxThumbWidth = pillInnerWidth / 3;    // 3 per row
+                // Thumbnail width: preference height or column fit, whichever is smaller
+                final int prefThumbWidth = (int) (popupThumbHeight * 0.716);
+                final int thumbWidth = Math.min(prefThumbWidth, maxThumbWidth);
+                final int actualPillWidth = 3 * thumbWidth + 18;
+                // Size column to actual content so scrollbar stays adjacent
+                columnPx = Math.max(200, actualPillWidth + sidePadding);
+                // Double so populateRelatedCards' /2 halving yields full preference
+                // then maxHeightForWidth caps to fit column width
+                thumbnailHeight = popupThumbHeight * 2;
+            }
+            maxWidth = columnPx - sidePadding;
+        } else {
+            columnPx = Math.max(200, (int) (screenWidth * 0.25));
+            maxWidth = columnPx - sidePadding;
+        }
+
+        // Build keyword panel
+        JPanel kwPanel = null;
         if (showKeywords) {
             final String keywordKey = thisCard.getKeywordKey();
             final String oracleText = thisCard.getOracleText();
@@ -287,52 +341,63 @@ public enum CardZoomer {
             if (keywordKey != null && !keywordKey.isEmpty()) {
                 keywords.addAll(CardInfoPopup.buildKeywords(keywordKey, addedNames));
             }
-            // Catch granted abilities that the keywordKey parsing may have missed
             CardInfoPopup.addMissingKeywordsFromFlags(keywords, thisCard, addedNames);
             if (oracleText != null && !oracleText.isEmpty()) {
                 CardInfoPopup.addKeywordActions(keywords, oracleText, addedNames,
                         cardName != null ? cardName : "");
             }
+            CardInfoPopup.sortByOracleText(keywords, oracleText);
             if (!keywords.isEmpty()) {
-                final JPanel kwPanel = new JPanel();
+                kwPanel = new JPanel();
                 kwPanel.setLayout(new BoxLayout(kwPanel, BoxLayout.Y_AXIS));
                 kwPanel.setOpaque(false);
+                kwPanel.setBorder(BorderFactory.createEmptyBorder(8, 8, 0, 0));
                 CardInfoPopup.populateKeywords(kwPanel, keywords, maxWidth);
-                content.add(kwPanel);
-                hasContent = true;
             }
         }
 
-        if (showRelated) {
-            final String cardName = thisCard.getName();
-            final CardView cardView = thisCard.getCard();
-            if (cardName != null && !cardName.isEmpty() && cardView != null) {
-                final List<RelatedCardEntry> entries =
-                        CardInfoPopup.buildRelatedCardsStatic(cardName, cardView);
-                if (!entries.isEmpty()) {
-                    if (hasContent) {
-                        content.add(javax.swing.Box.createRigidArea(new Dimension(0, 8)));
-                    }
-                    final JPanel relPanel = new JPanel();
-                    relPanel.setLayout(new BoxLayout(relPanel, BoxLayout.Y_AXIS));
-                    relPanel.setOpaque(false);
-                    CardInfoPopup.populateRelatedCards(relPanel, entries,
-                            thumbnailHeight, maxWidth);
-                    content.add(relPanel);
-                    hasContent = true;
-                }
-            }
-        }
-
-        if (!hasContent) {
+        if (kwPanel == null && relatedEntries.isEmpty()) {
             return null;
         }
 
-        // Wrap in BorderLayout.NORTH so content top-aligns instead of stretching
-        final JPanel wrapper = new JPanel(new java.awt.BorderLayout());
-        wrapper.setOpaque(false);
-        wrapper.add(content, java.awt.BorderLayout.NORTH);
-        return wrapper;
+        // Assemble: keywords fixed at top, related cards in scroll pane below
+        final JPanel side = new JPanel(new java.awt.BorderLayout(0, 8));
+        side.setOpaque(false);
+        side.putClientProperty("widthConstraint", "w " + columnPx + "!");
+
+        if (kwPanel != null) {
+            side.add(kwPanel, java.awt.BorderLayout.NORTH);
+        }
+
+        if (!relatedEntries.isEmpty()) {
+            final JPanel relPanel = new JPanel();
+            relPanel.setLayout(new BoxLayout(relPanel, BoxLayout.Y_AXIS));
+            relPanel.setOpaque(false);
+            CardInfoPopup.populateRelatedCards(relPanel, relatedEntries,
+                    thumbnailHeight, maxWidth, 3);
+            // Wrap so content top-aligns in the scroll viewport
+            final JPanel relWrapper = new JPanel(new java.awt.BorderLayout());
+            relWrapper.setOpaque(false);
+            relWrapper.setBorder(BorderFactory.createEmptyBorder(0, 8, 8, 0));
+            relWrapper.add(relPanel, java.awt.BorderLayout.NORTH);
+            final FScrollPane scroll = new FScrollPane(relWrapper, false,
+                    ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+                    ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+            side.add(scroll, java.awt.BorderLayout.CENTER);
+        } else if (kwPanel != null) {
+            // Keywords only, no related — wrap keywords in a scroll pane too
+            // in case there are many keywords
+            side.remove(kwPanel);
+            final JPanel kwWrapper = new JPanel(new java.awt.BorderLayout());
+            kwWrapper.setOpaque(false);
+            kwWrapper.add(kwPanel, java.awt.BorderLayout.NORTH);
+            final FScrollPane scroll = new FScrollPane(kwWrapper, false,
+                    ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+                    ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+            side.add(scroll, java.awt.BorderLayout.CENTER);
+        }
+
+        return side;
     }
 
     private int getInitialRotation() {
