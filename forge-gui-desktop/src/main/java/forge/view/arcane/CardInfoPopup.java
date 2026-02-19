@@ -37,6 +37,7 @@ import forge.item.PaperToken;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.keyword.Keyword;
+import forge.game.keyword.KeywordAction;
 import forge.game.keyword.KeywordInterface;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
@@ -126,7 +127,10 @@ public class CardInfoPopup {
         relatedWrapper.setOpaque(false);
         relatedWrapper.add(relatedCardsPanel, BorderLayout.NORTH);
         contentPanel.add(relatedWrapper, BorderLayout.WEST);
-        contentPanel.add(keywordsPanel, BorderLayout.CENTER);
+        final JPanel keywordsWrapper = new JPanel(new BorderLayout());
+        keywordsWrapper.setOpaque(false);
+        keywordsWrapper.add(keywordsPanel, BorderLayout.NORTH);
+        contentPanel.add(keywordsWrapper, BorderLayout.CENTER);
 
         // Wrap contentPanel so it top-aligns instead of stretching to card image height
         final JPanel contentWrapper = new JPanel(new BorderLayout());
@@ -246,8 +250,28 @@ public class CardInfoPopup {
 
         // --- Keyword section ---
         List<KeywordData> keywordList = List.of();
-        if (showKeywords && !keywordKey.isEmpty()) {
-            keywordList = buildKeywords(keywordKey);
+        if (showKeywords) {
+            keywordList = new ArrayList<>();
+            final Set<String> addedNames = new LinkedHashSet<>();
+            if (!keywordKey.isEmpty()) {
+                keywordList.addAll(buildKeywords(keywordKey));
+                for (final KeywordData kd : keywordList) {
+                    addedNames.add(kd.name.toLowerCase());
+                }
+            }
+            // Scan oracle text for keyword actions (goad, scry, etc.)
+            try {
+                final StaticData data = StaticData.instance();
+                if (data != null) {
+                    final String name = nullSafe(state.getName());
+                    final CardRules rules = data.getCommonCards().getRules(name);
+                    if (rules != null) {
+                        addKeywordActions(keywordList, rules.getOracleText(), addedNames);
+                    }
+                }
+            } catch (Exception e) {
+                // Guard against lookup failures
+            }
             hasKeywords = !keywordList.isEmpty();
         }
 
@@ -392,14 +416,56 @@ public class CardInfoPopup {
         }
 
         final List<KeywordData> result = new ArrayList<>();
+        final Set<String> addedNames = new LinkedHashSet<>();
         for (final Map.Entry<Keyword, String> entry : keywordMap.entrySet()) {
             String reminder = entry.getValue();
             if (!reminder.isEmpty()) {
                 reminder = FSkin.encodeSymbols(reminder, false);
             }
-            result.add(new KeywordData(entry.getKey().toString(), reminder));
+            final String name = entry.getKey().toString();
+            result.add(new KeywordData(name, reminder));
+            addedNames.add(name.toLowerCase());
         }
         return result;
+    }
+
+    /**
+     * Scan oracle text for keyword actions that aren't already shown as keyword
+     * abilities, and append them to the keyword list.
+     */
+    private static void addKeywordActions(final List<KeywordData> result,
+                                           final String oracleText,
+                                           final Set<String> existingNames) {
+        if (oracleText == null || oracleText.isEmpty()) {
+            return;
+        }
+        final String lowerText = oracleText.toLowerCase();
+        for (final KeywordAction action : KeywordAction.values()) {
+            if (action.basic) {
+                continue;
+            }
+            final String name = action.displayName;
+            if (existingNames.contains(name.toLowerCase())) {
+                continue;
+            }
+            // Match whole word (case-insensitive): "goad", "goads", "goaded"
+            final String lowerName = name.toLowerCase();
+            if (lowerText.contains(lowerName)) {
+                // Verify it's a word boundary (not part of a larger word)
+                int idx = lowerText.indexOf(lowerName);
+                while (idx >= 0) {
+                    final boolean startOk = idx == 0
+                            || !Character.isLetter(lowerText.charAt(idx - 1));
+                    if (startOk) {
+                        final String desc = FSkin.encodeSymbols(action.reminderText, false);
+                        result.add(new KeywordData(name, desc));
+                        existingNames.add(lowerName);
+                        break;
+                    }
+                    idx = lowerText.indexOf(lowerName, idx + 1);
+                }
+            }
+        }
     }
 
     /** Creates a JLabel that uses grayscale AA (LCD AA breaks on transparent windows). */
@@ -443,7 +509,7 @@ public class CardInfoPopup {
                                           final List<KeywordData> keywords,
                                           final int maxWidth) {
         final FSkin.SkinFont boldFont = FSkin.getBoldFont(12);
-        final FSkin.SkinFont reminderFont = FSkin.getFont(11);
+        final FSkin.SkinFont reminderFont = FSkin.getFont(12);
         final int textWidth = maxWidth - 2 * PILL_PAD - 2; // account for pill border+pad
 
         for (int i = 0; i < keywords.size(); i++) {
@@ -792,23 +858,31 @@ public class CardInfoPopup {
             // Build rows manually (FlowLayout doesn't wrap with pack())
             JPanel currentRow = null;
             int colIndex = 0;
-            for (final RelatedCardEntry entry : cards) {
+            int thumbWidth = (int) (effectiveHeight * MTG_ASPECT_RATIO);
+            int thumbHeight = effectiveHeight;
+            if (thumbWidth > maxThumbWidth) {
+                thumbWidth = maxThumbWidth;
+                thumbHeight = (int) (thumbWidth / MTG_ASPECT_RATIO);
+            }
+            final Dimension thumbSize = new Dimension(thumbWidth, thumbHeight);
+
+            for (int ci = 0; ci < cards.size(); ci++) {
                 if (colIndex == 0) {
                     currentRow = new JPanel();
                     currentRow.setLayout(new BoxLayout(currentRow, BoxLayout.X_AXIS));
                     currentRow.setOpaque(false);
                     currentRow.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
+
+                    // Center-justify incomplete last row
+                    final int remaining = cards.size() - ci;
+                    if (remaining < perRow) {
+                        currentRow.add(javax.swing.Box.createHorizontalGlue());
+                    }
+
                     pill.add(currentRow);
                 }
                 final FImagePanel imgPanel = new FImagePanel();
-                imgPanel.setImage(entry.image);
-                int thumbWidth = (int) (effectiveHeight * MTG_ASPECT_RATIO);
-                int thumbHeight = effectiveHeight;
-                if (thumbWidth > maxThumbWidth) {
-                    thumbWidth = maxThumbWidth;
-                    thumbHeight = (int) (thumbWidth / MTG_ASPECT_RATIO);
-                }
-                final Dimension thumbSize = new Dimension(thumbWidth, thumbHeight);
+                imgPanel.setImage(cards.get(ci).image);
                 imgPanel.setPreferredSize(thumbSize);
                 imgPanel.setMinimumSize(thumbSize);
                 imgPanel.setMaximumSize(thumbSize);
@@ -817,6 +891,10 @@ public class CardInfoPopup {
                 if (colIndex >= perRow) {
                     colIndex = 0;
                 }
+            }
+            // Close trailing glue for centered last row
+            if (colIndex > 0 && colIndex < perRow) {
+                currentRow.add(javax.swing.Box.createHorizontalGlue());
             }
 
             pill.setMaximumSize(new Dimension(maxContentWidth, Integer.MAX_VALUE));
