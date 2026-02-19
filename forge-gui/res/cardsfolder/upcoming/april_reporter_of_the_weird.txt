@@ -6,4 +6,5 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ Tri
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
 SVar:X:TriggerCount$DamageAmount
+DeckHas:Ability$Discard
 Oracle:Whenever April deals combat damage to a player, draw that many cards, then discard a card.
