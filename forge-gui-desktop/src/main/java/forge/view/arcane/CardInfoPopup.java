@@ -258,17 +258,10 @@ public class CardInfoPopup {
                 keywordList.addAll(buildKeywords(keywordKey, addedNames));
             }
             // Scan oracle text for keyword actions (goad, scry, etc.)
-            try {
-                final StaticData data = StaticData.instance();
-                if (data != null) {
-                    final String name = nullSafe(state.getName());
-                    final CardRules rules = data.getCommonCards().getRules(name);
-                    if (rules != null) {
-                        addKeywordActions(keywordList, rules.getOracleText(), addedNames);
-                    }
-                }
-            } catch (Exception e) {
-                // Guard against lookup failures
+            final String oracleText = nullSafe(state.getOracleText());
+            if (!oracleText.isEmpty()) {
+                addKeywordActions(keywordList, oracleText, addedNames,
+                        nullSafe(state.getName()));
             }
             hasKeywords = !keywordList.isEmpty();
         }
@@ -336,6 +329,8 @@ public class CardInfoPopup {
         final int finalMaxPopup = Math.max(maxPopupWidth, POPUP_WIDTH);
         SwingUtilities.invokeLater(() -> {
             if (keywordsPanel.isVisible()) {
+                // Clear stale explicit size so BoxLayout recomputes from current children
+                keywordsPanel.setPreferredSize(null);
                 keywordsPanel.setPreferredSize(new Dimension(kwMaxWidth,
                         keywordsPanel.getPreferredSize().height));
             }
@@ -387,7 +382,8 @@ public class CardInfoPopup {
     private static List<KeywordData> buildKeywords(final String keywordKey,
                                                       final Set<String> addedNames) {
         final String[] tokens = keywordKey.split(",");
-        final LinkedHashMap<Keyword, String> keywordMap = new LinkedHashMap<>();
+        final Set<Keyword> seen = new LinkedHashSet<>();
+        final List<KeywordData> result = new ArrayList<>();
 
         for (final String token : tokens) {
             if (token.isEmpty()) {
@@ -396,10 +392,10 @@ public class CardInfoPopup {
             try {
                 final KeywordInterface inst = Keyword.getInstance(token);
                 final Keyword kw = inst.getKeyword();
-                if (kw == Keyword.UNDEFINED) {
+                if (kw == Keyword.UNDEFINED || kw == Keyword.ENCHANT) {
                     continue;
                 }
-                if (keywordMap.containsKey(kw)) {
+                if (!seen.add(kw)) {
                     continue; // deduplicate
                 }
                 String reminderText;
@@ -408,21 +404,16 @@ public class CardInfoPopup {
                 } catch (Exception ex) {
                     reminderText = "";
                 }
-                keywordMap.put(kw, reminderText);
+                if (!reminderText.isEmpty()) {
+                    reminderText = FSkin.encodeSymbols(reminderText, false);
+                }
+                final String name = FSkin.encodeSymbols(
+                        colorNamesToSymbols(inst.getTitle()), false);
+                result.add(new KeywordData(name, reminderText));
+                addedNames.add(kw.toString().toLowerCase());
             } catch (Exception e) {
                 // Skip malformed keyword tokens
             }
-        }
-
-        final List<KeywordData> result = new ArrayList<>();
-        for (final Map.Entry<Keyword, String> entry : keywordMap.entrySet()) {
-            String reminder = entry.getValue();
-            if (!reminder.isEmpty()) {
-                reminder = FSkin.encodeSymbols(reminder, false);
-            }
-            final String name = entry.getKey().toString();
-            result.add(new KeywordData(name, reminder));
-            addedNames.add(name.toLowerCase());
         }
         return result;
     }
@@ -433,11 +424,19 @@ public class CardInfoPopup {
      */
     private static void addKeywordActions(final List<KeywordData> result,
                                            final String oracleText,
-                                           final Set<String> existingNames) {
+                                           final Set<String> existingNames,
+                                           final String cardName) {
         if (oracleText == null || oracleText.isEmpty()) {
             return;
         }
-        final String lowerText = oracleText.toLowerCase();
+        // Strip card name to avoid false positives (e.g., "Boseiju, Who Endures")
+        String lowerText = oracleText.toLowerCase();
+        if (!cardName.isEmpty()) {
+            lowerText = lowerText.replace(cardName.toLowerCase(), "");
+        }
+        // Collect matches with their position in the oracle text, then sort by position
+        // so keyword actions appear top-to-bottom in card text order
+        final List<int[]> pendingIndices = new ArrayList<>(); // [oraclePos, enumOrdinal]
         for (final KeywordAction action : KeywordAction.values()) {
             if (action.basic) {
                 continue;
@@ -455,8 +454,7 @@ public class CardInfoPopup {
                     final boolean startOk = idx == 0
                             || !Character.isLetter(lowerText.charAt(idx - 1));
                     if (startOk) {
-                        final String desc = FSkin.encodeSymbols(action.reminderText, false);
-                        result.add(new KeywordData(name, desc));
+                        pendingIndices.add(new int[]{idx, action.ordinal()});
                         existingNames.add(lowerName);
                         break;
                     }
@@ -464,6 +462,72 @@ public class CardInfoPopup {
                 }
             }
         }
+        pendingIndices.sort((a, b) -> Integer.compare(a[0], b[0]));
+        final KeywordAction[] allActions = KeywordAction.values();
+        for (final int[] pair : pendingIndices) {
+            final KeywordAction action = allActions[pair[1]];
+            final String lowerName = action.displayName.toLowerCase();
+            String reminder = action.reminderText;
+            if (reminder.contains("N")) {
+                int pos = pair[0] + lowerName.length();
+                // Skip inflected suffix letters (s, ed, ing, etc.)
+                while (pos < lowerText.length()
+                        && Character.isLetter(lowerText.charAt(pos))) {
+                    pos++;
+                }
+                // Skip whitespace to reach the number
+                if (pos < lowerText.length()
+                        && lowerText.charAt(pos) == ' ') {
+                    pos++;
+                    final String resolved = parseNumber(lowerText, pos);
+                    if (resolved != null) {
+                        reminder = reminder.replace("N", resolved);
+                        if ("1".equals(resolved)) {
+                            reminder = reminder.replace("counters", "counter");
+                        }
+                    }
+                }
+            }
+            final String desc = FSkin.encodeSymbols(reminder, false);
+            result.add(new KeywordData(action.displayName, desc));
+        }
+    }
+
+    /** Replace standalone MTG color names with mana symbols for display. */
+    private static String colorNamesToSymbols(final String text) {
+        return text
+                .replace("white", "{W}").replace("White", "{W}")
+                .replace("blue", "{U}").replace("Blue", "{U}")
+                .replace("black", "{B}").replace("Black", "{B}")
+                .replace("red", "{R}").replace("Red", "{R}")
+                .replace("green", "{G}").replace("Green", "{G}");
+    }
+
+    /** Parse a digit or number word at the given position. Returns the digit string or null. */
+    private static String parseNumber(final String text, final int pos) {
+        // Try digits first: "3", "10"
+        int numEnd = pos;
+        while (numEnd < text.length() && Character.isDigit(text.charAt(numEnd))) {
+            numEnd++;
+        }
+        if (numEnd > pos) {
+            return text.substring(pos, numEnd);
+        }
+        // Try number words: "one" through "twenty"
+        final String[] words = {
+            "one", "two", "three", "four", "five", "six", "seven", "eight",
+            "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
+            "sixteen", "seventeen", "eighteen", "nineteen", "twenty"
+        };
+        for (int i = 0; i < words.length; i++) {
+            if (text.startsWith(words[i], pos)) {
+                final int end = pos + words[i].length();
+                if (end >= text.length() || !Character.isLetter(text.charAt(end))) {
+                    return String.valueOf(i + 1);
+                }
+            }
+        }
+        return null;
     }
 
     /** Creates a JLabel that uses grayscale AA (LCD AA breaks on transparent windows). */

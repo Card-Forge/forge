@@ -10,6 +10,7 @@ public class Protection extends KeywordInstance<Protection> {
 
     @Override
     protected void parse(String details) {
+        fromWhat = details.startsWith("from ") ? details.substring(5) : details;
     }
 
     @Override
