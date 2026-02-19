@@ -40,9 +40,7 @@ import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.toolbox.FHtmlViewer;
 import forge.toolbox.FSkin;
-import forge.toolbox.FSkin.Colors;
 import forge.toolbox.imaging.FImagePanel;
 import forge.toolbox.imaging.FImageUtil;
 
@@ -52,10 +50,20 @@ import forge.toolbox.imaging.FImageUtil;
  */
 public class CardInfoPopup {
     private static final int POPUP_WIDTH = 260;
-    private static final int GAP = 8;
+    private static final int GAP = 4;
     private static final int SHOW_DELAY_MS = 100;
     private static final int PADDING = 8;
     private static final double MTG_ASPECT_RATIO = 0.716;
+
+    // Dark overlay colors (Arena-style)
+    private static final Color BG_COLOR = new Color(30, 30, 30);
+    private static final Color BORDER_COLOR = new Color(80, 80, 80);
+    private static final Color PILL_BG = new Color(45, 45, 45);
+    private static final Color PILL_BORDER = new Color(70, 70, 70);
+    private static final Color TEXT_PRIMARY = Color.WHITE;
+    private static final Color TEXT_SECONDARY = new Color(210, 210, 210);
+    private static final int PILL_CORNER = 12;
+    private static final int PILL_PAD = 8;
 
     // Ensures only one popup is visible across all CardPanelContainer instances
     private static CardInfoPopup activePopup;
@@ -65,14 +73,14 @@ public class CardInfoPopup {
     private final JPanel mainPanel;
     private final JPanel contentPanel;
     private final FImagePanel cardImagePanel;
-    private final FHtmlViewer keywordViewer;
+    private final JPanel keywordsPanel;
     private final JPanel relatedCardsPanel;
     private final Timer showTimer;
 
     // Cache
     private String cachedKeywordKey = "";
     private String cachedCardName = "";
-    private String cachedKeywordHtml = "";
+    private boolean cachedHasKeywords = false;
     private boolean cachedHasRelated = false;
     private int cachedImageSize = -1;
     private boolean cachedShowCardImage = false;
@@ -94,50 +102,47 @@ public class CardInfoPopup {
         window = new JWindow(owner);
         window.setFocusableWindowState(false);
         window.setAlwaysOnTop(true);
-
-        final Color bgColor = FSkin.getColor(Colors.CLR_THEME2).getColor();
-        final Color borderColor = FSkin.getColor(Colors.CLR_BORDERS).getColor();
+        window.setBackground(new Color(0, 0, 0, 0)); // fully transparent window
 
         // Card image panel (WEST side)
         cardImagePanel = new FImagePanel();
-        cardImagePanel.setBackground(bgColor);
+        cardImagePanel.setOpaque(false);
         cardImagePanel.setVisible(false);
 
         // Content panel (CENTER side — related cards on left, keywords on right)
         contentPanel = new JPanel(new BorderLayout(GAP, 0));
-        contentPanel.setBackground(bgColor);
+        contentPanel.setOpaque(false);
 
-        keywordViewer = new FHtmlViewer();
-        keywordViewer.setBackground(bgColor);
-        keywordViewer.setOpaque(true);
+        keywordsPanel = new JPanel();
+        keywordsPanel.setLayout(new BoxLayout(keywordsPanel, BoxLayout.Y_AXIS));
+        keywordsPanel.setOpaque(false);
 
         relatedCardsPanel = new JPanel();
         relatedCardsPanel.setLayout(new BoxLayout(relatedCardsPanel, BoxLayout.Y_AXIS));
-        relatedCardsPanel.setBackground(bgColor);
-        relatedCardsPanel.setOpaque(true);
+        relatedCardsPanel.setOpaque(false);
 
         // Related cards top-aligned on left, keywords fill remaining space on right
         final JPanel relatedWrapper = new JPanel(new BorderLayout());
-        relatedWrapper.setBackground(bgColor);
+        relatedWrapper.setOpaque(false);
         relatedWrapper.add(relatedCardsPanel, BorderLayout.NORTH);
         contentPanel.add(relatedWrapper, BorderLayout.WEST);
-        contentPanel.add(keywordViewer, BorderLayout.CENTER);
+        contentPanel.add(keywordsPanel, BorderLayout.CENTER);
 
         // Wrap contentPanel so it top-aligns instead of stretching to card image height
         final JPanel contentWrapper = new JPanel(new BorderLayout());
-        contentWrapper.setBackground(bgColor);
+        contentWrapper.setOpaque(false);
         contentWrapper.add(contentPanel, BorderLayout.NORTH);
 
-        // Main panel wraps card image + content with shared border
+        // Main panel wraps card image + content with spacing (transparent background)
         mainPanel = new JPanel(new BorderLayout(GAP, 0));
-        mainPanel.setBackground(bgColor);
-        mainPanel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(borderColor, 1),
-                BorderFactory.createEmptyBorder(PADDING, PADDING, PADDING, PADDING)));
+        mainPanel.setOpaque(false);
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(
+                PADDING, PADDING, PADDING, PADDING));
         mainPanel.add(cardImagePanel, BorderLayout.WEST);
         mainPanel.add(contentWrapper, BorderLayout.CENTER);
 
         window.getContentPane().setLayout(new BorderLayout());
+        ((JPanel) window.getContentPane()).setOpaque(false);
         window.getContentPane().add(mainPanel, BorderLayout.CENTER);
 
         showTimer = new Timer(SHOW_DELAY_MS, e -> {
@@ -207,7 +212,7 @@ public class CardInfoPopup {
                 && thumbnailHeight == cachedImageSize
                 && showCardImage == cachedShowCardImage
                 && cardImageKey.equals(cachedCardImageKey)) {
-            if (cachedKeywordHtml.isEmpty() && !cachedHasRelated && !showCardImage) {
+            if (!cachedHasKeywords && !cachedHasRelated && !showCardImage) {
                 hidePopup();
                 return;
             }
@@ -240,10 +245,10 @@ public class CardInfoPopup {
         }
 
         // --- Keyword section ---
-        String keywordHtml = "";
+        List<KeywordData> keywordList = List.of();
         if (showKeywords && !keywordKey.isEmpty()) {
-            keywordHtml = buildKeywordHtml(keywordKey);
-            hasKeywords = !keywordHtml.isEmpty();
+            keywordList = buildKeywords(keywordKey);
+            hasKeywords = !keywordList.isEmpty();
         }
 
         // --- Related cards section ---
@@ -257,7 +262,7 @@ public class CardInfoPopup {
         if (!hasKeywords && !hasRelated && !cardImagePanel.isVisible()) {
             cachedKeywordKey = keywordKey;
             cachedCardName = cardName;
-            cachedKeywordHtml = "";
+            cachedHasKeywords = false;
             cachedHasRelated = false;
             cachedImageSize = thumbnailHeight;
             cachedShowCardImage = showCardImage;
@@ -281,9 +286,11 @@ public class CardInfoPopup {
         maxContentWidth = Math.max(maxContentWidth, POPUP_WIDTH);
 
         // Update UI
-        keywordViewer.setVisible(hasKeywords);
+        keywordsPanel.setVisible(hasKeywords);
+        keywordsPanel.removeAll();
+        final int kwMaxWidth = Math.max((int) (thumbnailHeight * MTG_ASPECT_RATIO), POPUP_WIDTH);
         if (hasKeywords) {
-            keywordViewer.setText(keywordHtml);
+            populateKeywords(keywordsPanel, keywordList, kwMaxWidth);
         }
 
         relatedCardsPanel.setVisible(hasRelated);
@@ -295,24 +302,20 @@ public class CardInfoPopup {
         // Update cache
         cachedKeywordKey = keywordKey;
         cachedCardName = cardName;
-        cachedKeywordHtml = keywordHtml;
+        cachedHasKeywords = hasKeywords;
         cachedHasRelated = hasRelated;
         cachedImageSize = thumbnailHeight;
         cachedShowCardImage = showCardImage;
         cachedCardImageKey = cardImageKey;
 
-        // Defer pack/show to run after FHtmlViewer's invokeLater text update completes
+        // Defer pack/show to let layout complete
         final Point loc = cardScreenLocation;
         final Dimension size = cardSize;
-        final int finalMaxContent = maxContentWidth;
         final int finalMaxPopup = Math.max(maxPopupWidth, POPUP_WIDTH);
-        final int kwMaxWidth = Math.max((int) (thumbnailHeight * MTG_ASPECT_RATIO), POPUP_WIDTH);
         SwingUtilities.invokeLater(() -> {
-            // Cap keyword width to the selected card image width
-            if (keywordViewer.isVisible()) {
-                keywordViewer.setSize(kwMaxWidth, Short.MAX_VALUE);
-                final Dimension pref = keywordViewer.getPreferredSize();
-                keywordViewer.setPreferredSize(new Dimension(kwMaxWidth, pref.height));
+            if (keywordsPanel.isVisible()) {
+                keywordsPanel.setPreferredSize(new Dimension(kwMaxWidth,
+                        keywordsPanel.getPreferredSize().height));
             }
             window.pack();
             if (window.getWidth() > finalMaxPopup) {
@@ -349,7 +352,17 @@ public class CardInfoPopup {
 
     // --- Keyword building ---
 
-    private static String buildKeywordHtml(final String keywordKey) {
+    private static class KeywordData {
+        final String name;
+        final String reminderHtml; // already encoded with FSkin.encodeSymbols
+
+        KeywordData(final String name, final String reminderHtml) {
+            this.name = name;
+            this.reminderHtml = reminderHtml;
+        }
+    }
+
+    private static List<KeywordData> buildKeywords(final String keywordKey) {
         final String[] tokens = keywordKey.split(",");
         final LinkedHashMap<Keyword, String> keywordMap = new LinkedHashMap<>();
 
@@ -378,24 +391,105 @@ public class CardInfoPopup {
             }
         }
 
-        if (keywordMap.isEmpty()) {
-            return "";
-        }
-
-        final StringBuilder sb = new StringBuilder();
-        boolean first = true;
+        final List<KeywordData> result = new ArrayList<>();
         for (final Map.Entry<Keyword, String> entry : keywordMap.entrySet()) {
-            if (!first) {
-                sb.append("<br><br>");
+            String reminder = entry.getValue();
+            if (!reminder.isEmpty()) {
+                reminder = FSkin.encodeSymbols(reminder, false);
             }
-            first = false;
-            sb.append("<b>").append(entry.getKey()).append("</b>");
-            if (!entry.getValue().isEmpty()) {
-                sb.append("<br><i>").append(entry.getValue()).append("</i>");
-            }
+            result.add(new KeywordData(entry.getKey().toString(), reminder));
         }
+        return result;
+    }
 
-        return FSkin.encodeSymbols(sb.toString(), false);
+    /** Creates a JLabel that uses grayscale AA (LCD AA breaks on transparent windows). */
+    private static javax.swing.JLabel createAALabel(final String text) {
+        return new javax.swing.JLabel(text) {
+            @Override
+            protected void paintComponent(final java.awt.Graphics g) {
+                ((Graphics2D) g).setRenderingHint(
+                        java.awt.RenderingHints.KEY_TEXT_ANTIALIASING,
+                        java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+                super.paintComponent(g);
+            }
+        };
+    }
+
+    private static JPanel createPillPanel() {
+        final JPanel pill = new JPanel() {
+            @Override
+            protected void paintComponent(final java.awt.Graphics g) {
+                final Graphics2D g2 = (Graphics2D) g.create();
+                g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING,
+                        java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+                g2.setColor(PILL_BG);
+                g2.fillRoundRect(0, 0, getWidth(), getHeight(),
+                        PILL_CORNER, PILL_CORNER);
+                g2.setColor(PILL_BORDER);
+                g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1,
+                        PILL_CORNER, PILL_CORNER);
+                g2.dispose();
+            }
+        };
+        pill.setLayout(new BoxLayout(pill, BoxLayout.Y_AXIS));
+        pill.setBorder(BorderFactory.createEmptyBorder(
+                PILL_PAD, PILL_PAD, PILL_PAD, PILL_PAD));
+        pill.setOpaque(false);
+        pill.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
+        return pill;
+    }
+
+    private static void populateKeywords(final JPanel panel,
+                                          final List<KeywordData> keywords,
+                                          final int maxWidth) {
+        final FSkin.SkinFont boldFont = FSkin.getBoldFont(12);
+        final FSkin.SkinFont reminderFont = FSkin.getFont(11);
+        final int textWidth = maxWidth - 2 * PILL_PAD - 2; // account for pill border+pad
+
+        for (int i = 0; i < keywords.size(); i++) {
+            if (i > 0) {
+                panel.add(javax.swing.Box.createRigidArea(new Dimension(0, 4)));
+            }
+            final KeywordData kw = keywords.get(i);
+
+            final JPanel pill = createPillPanel();
+
+            // Keyword name label
+            final javax.swing.JLabel nameLabel = createAALabel(kw.name);
+            nameLabel.setFont(boldFont.getBaseFont());
+            nameLabel.setForeground(TEXT_PRIMARY);
+            nameLabel.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
+            nameLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE,
+                    nameLabel.getPreferredSize().height));
+            pill.add(nameLabel);
+
+            // Reminder text
+            if (!kw.reminderHtml.isEmpty()) {
+                final javax.swing.JLabel reminderLabel = createAALabel(
+                        kw.reminderHtml);
+                reminderLabel.setFont(reminderFont.getBaseFont());
+                reminderLabel.setForeground(TEXT_SECONDARY);
+                reminderLabel.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
+                // Use the HTML View to compute wrapped height at constrained width
+                final javax.swing.text.View view = (javax.swing.text.View)
+                        reminderLabel.getClientProperty(
+                                javax.swing.plaf.basic.BasicHTML.propertyKey);
+                int prefHeight;
+                if (view != null) {
+                    view.setSize(textWidth, 0);
+                    prefHeight = (int) Math.ceil(
+                            view.getPreferredSpan(javax.swing.text.View.Y_AXIS));
+                } else {
+                    prefHeight = reminderLabel.getPreferredSize().height;
+                }
+                reminderLabel.setPreferredSize(new Dimension(textWidth, prefHeight));
+                reminderLabel.setMaximumSize(new Dimension(textWidth, prefHeight));
+                pill.add(reminderLabel);
+            }
+
+            pill.setMaximumSize(new Dimension(maxWidth, Integer.MAX_VALUE));
+            panel.add(pill);
+        }
     }
 
     // --- Related cards building ---
@@ -654,48 +748,57 @@ public class CardInfoPopup {
             grouped.computeIfAbsent(entry.label, k -> new ArrayList<>()).add(entry);
         }
 
-        final Color bgColor = FSkin.getColor(Colors.CLR_THEME2).getColor();
+        final FSkin.SkinFont boldFont = FSkin.getBoldFont(12);
+        boolean firstGroup = true;
 
         for (final Map.Entry<String, List<RelatedCardEntry>> group : grouped.entrySet()) {
             final List<RelatedCardEntry> cards = group.getValue();
 
+            if (!firstGroup) {
+                relatedCardsPanel.add(javax.swing.Box.createRigidArea(
+                        new Dimension(0, 4)));
+            }
+            firstGroup = false;
+
+            // Wrap each section group in a pill
+            final JPanel pill = createPillPanel();
+
             // Section label
-            final FHtmlViewer labelViewer = new FHtmlViewer();
-            labelViewer.setBackground(bgColor);
-            labelViewer.setOpaque(true);
-            labelViewer.setText("<b>" + group.getKey()
-                    + (cards.size() > HALF_SIZE_PER_ROW ? " (" + cards.size() + ")" : "")
-                    + "</b>");
-            labelViewer.setMaximumSize(new Dimension(Integer.MAX_VALUE, 24));
-            relatedCardsPanel.add(labelViewer);
+            final String labelText = group.getKey()
+                    + (cards.size() > HALF_SIZE_PER_ROW
+                            ? " (" + cards.size() + ")" : "");
+            final javax.swing.JLabel sectionLabel = createAALabel(labelText);
+            sectionLabel.setFont(boldFont.getBaseFont());
+            sectionLabel.setForeground(TEXT_PRIMARY);
+            sectionLabel.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
+            sectionLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE,
+                    sectionLabel.getPreferredSize().height));
+            pill.add(sectionLabel);
+            pill.add(javax.swing.Box.createRigidArea(new Dimension(0, 4)));
 
             // Up to 2 cards at full size; 3+ scale to half size, max 4 per row
             final boolean fullSize = cards.size() <= FULL_SIZE_MAX;
             final int perRow = fullSize
                     ? Math.min(cards.size(), FULL_SIZE_MAX) : HALF_SIZE_PER_ROW;
+            final int pillInnerWidth = maxContentWidth - 2 * PILL_PAD - 2;
             int effectiveHeight = fullSize
                     ? thumbnailHeight : Math.max(80, thumbnailHeight / 2);
 
-            // Constrain thumbnail size so cards fit within maxContentWidth
-            final int maxThumbWidth = maxContentWidth / perRow;
+            // Constrain thumbnail size so cards fit within pill inner width
+            final int maxThumbWidth = pillInnerWidth / perRow;
             final int maxHeightForWidth = (int) (maxThumbWidth / MTG_ASPECT_RATIO);
             effectiveHeight = Math.min(effectiveHeight, maxHeightForWidth);
 
             // Build rows manually (FlowLayout doesn't wrap with pack())
-            final JPanel rowsContainer = new JPanel();
-            rowsContainer.setLayout(new BoxLayout(rowsContainer, BoxLayout.Y_AXIS));
-            rowsContainer.setBackground(bgColor);
-            rowsContainer.setOpaque(true);
-
             JPanel currentRow = null;
             int colIndex = 0;
             for (final RelatedCardEntry entry : cards) {
                 if (colIndex == 0) {
                     currentRow = new JPanel();
                     currentRow.setLayout(new BoxLayout(currentRow, BoxLayout.X_AXIS));
-                    currentRow.setBackground(bgColor);
-                    currentRow.setOpaque(true);
-                    rowsContainer.add(currentRow);
+                    currentRow.setOpaque(false);
+                    currentRow.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
+                    pill.add(currentRow);
                 }
                 final FImagePanel imgPanel = new FImagePanel();
                 imgPanel.setImage(entry.image);
@@ -716,7 +819,8 @@ public class CardInfoPopup {
                 }
             }
 
-            relatedCardsPanel.add(rowsContainer);
+            pill.setMaximumSize(new Dimension(maxContentWidth, Integer.MAX_VALUE));
+            relatedCardsPanel.add(pill);
         }
     }
 
