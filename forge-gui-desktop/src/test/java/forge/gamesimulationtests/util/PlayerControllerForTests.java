@@ -603,8 +603,13 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
+    protected List<SpellAbility> orderSimultaneousSa(List<SpellAbility> activePlayerSAs) {
+        return activePlayerSAs;
+    }
+
+    @Override
     public void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs) {
-        for (final SpellAbility sa : activePlayerSAs) {
+        for (final SpellAbility sa : orderSimultaneousSa(activePlayerSAs)) {
             prepareSingleSa(sa.getHostCard(),sa,true);
             ComputerUtil.playStack(sa, player, getGame());
         }
