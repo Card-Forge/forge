@@ -1,0 +1,8 @@
+Name:Bespoke Bō
+ManaCost:2 U
+Types:Artifact Equipment
+K:Equip:3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When this Equipment enters, return up to one other target nonland permanent to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Permanent.nonLand+Other | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Select up to one other target nonland permanent
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 1 | AddKeyword$ Vigilance | Description$ Equipped creature gets +2/+1 and has vigilance.
+Oracle:When this Equipment enters, return up to one other target nonland permanent to its owner's hand.\nEquipped creature gets +2/+1 and has vigilance.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)
