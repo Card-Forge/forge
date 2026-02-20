@@ -1,0 +1,8 @@
+Name:Foot Mystic
+ManaCost:3 B
+Types:Creature Human Ninja Warlock
+PT:2/4
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | Revolt$ True | TriggerDescription$ Disappear — When this creature enters, if a permanent left the battlefield under your control this turn, create a 1/1 black Ninja creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ b_1_1_ninja | TokenOwner$ You
+Oracle:Lifelink\nDisappear — When this creature enters, if a permanent left the battlefield under your control this turn, create a 1/1 black Ninja creature token.

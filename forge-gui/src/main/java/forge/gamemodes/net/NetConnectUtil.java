@@ -89,7 +89,6 @@ public class NetConnectUtil {
                     if (server.handleCommand(message.getMessage())) {
                         return;
                     }
-                    chatInterface.addMessage(new ChatMessage(message.getSource(), message.getMessage()));
                     server.broadcast(event);
                 }
             }

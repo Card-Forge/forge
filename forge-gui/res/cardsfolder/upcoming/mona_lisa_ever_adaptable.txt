@@ -1,0 +1,7 @@
+Name:Mona Lisa, Ever Adaptable
+ManaCost:3 G
+Types:Legendary Creature Lizard Mutant
+PT:4/4
+T:Mode$ SpellCast | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a player casts a creature spell, you create a Mutagen token. (It's an artifact with "{1}, {T}, Sacrifice this token: Put a +1/+1 counter on target creature. Activate only as a sorcery.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_mutagen_sac | TokenOwner$ You
+Oracle:Whenever a player casts a creature spell, you create a Mutagen token. (It's an artifact with "{1}, {T}, Sacrifice this token: Put a +1/+1 counter on target creature. Activate only as a sorcery.")
