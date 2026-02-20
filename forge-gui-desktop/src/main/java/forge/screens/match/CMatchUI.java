@@ -24,6 +24,9 @@ import java.awt.image.BufferedImage;
 import java.util.*;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.RunnableFuture;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -169,6 +172,7 @@ public final class CMatchUI
     private int nextNotifiableStackIndex = 0;
     private final Lock stackIndexNotifyUpdate = new ReentrantLock();
     private final Condition updatedNotifiableStackIndex = stackIndexNotifyUpdate.newCondition();
+    private final List<RunnableFuture<Void>> stackNotificationWorkerList = new ArrayList<RunnableFuture<Void>>();
 
     public CMatchUI() {
         this.view = new VMatchUI(this);
@@ -818,6 +822,19 @@ public final class CMatchUI
     @Override
     public void finishGame() {
         FloatingZone.closeAll(); //ensure floating card areas cleared and closed after the game
+
+        // Clean up all workers on the stack
+        for (RunnableFuture<Void> worker : stackNotificationWorkerList)
+            worker.cancel(true);
+
+        // Reset nextNotifiableStackIndex
+        stackIndexNotifyUpdate.lock(); // Acquire lock
+        nextNotifiableStackIndex = 0;
+        updatedNotifiableStackIndex.signalAll(); // signal all workers waiting on condition
+        stackIndexNotifyUpdate.unlock(); // Release lock
+
+        stackNotificationWorkerList.clear();
+
         final GameView gameView = getGameView();
         if (hasLocalPlayers() || gameView.isMatchOver()) {
             new ViewWinLose(gameView, this).show();
@@ -1350,7 +1367,7 @@ public final class CMatchUI
             // nextNotifiableStackIndex gets locked here
             stackIndexNotifyUpdate.lock();
             try {
-                while (stackIndex != nextNotifiableStackIndex) { // Not yet time to show the modal
+                while (stackIndex != nextNotifiableStackIndex && !isCancelled()) { // Not yet time to show the modal
                     // release lock and await on nextNotifiableStackIndex to be modified, then recheck
                     updatedNotifiableStackIndex.await();
                 }
@@ -1415,12 +1432,17 @@ public final class CMatchUI
             // TODO: signalAll() may be unnecessary since we only increment in this worker.
             updatedNotifiableStackIndex.signalAll(); // Notify threads waiting on updatedNotifiableStackIndex
             stackIndexNotifyUpdate.unlock(); // Release lock
+
+            // Remove this worker from the list of active workers
+            GuiBase.getInterface().invokeInEdtLater(() -> stackNotificationWorkerList.remove(this));
         }
     }
 
     @Override
     public Runnable notifyStackAddition(GameEventSpellAbilityCast event) {
-        return new StackAdditionNotification(event);
+        StackAdditionNotification worker = new StackAdditionNotification(event);
+        stackNotificationWorkerList.add(worker);
+        return worker;
     }
 
     private List<GameEntityView> getTargets(StackItemView si, List<GameEntityView> result){
@@ -1533,17 +1555,33 @@ public final class CMatchUI
     }
 
     @Override
-    public void notifyStackRemoval(GameEventSpellRemovedFromStack event) {
-        // Acquire lock stackIndexNotifyUpdate (this is a critical section)
-        stackIndexNotifyUpdate.lock();
+    public Runnable notifyStackRemoval(GameEventSpellRemovedFromStack event) {
+        FutureTask<Void> worker = new FutureTask<Void>(new Callable<Void>() {
+            @Override
+            public Void call() throws Exception {
+                // Acquire lock stackIndexNotifyUpdate (this is a critical section)
+                stackIndexNotifyUpdate.lock();
 
-        nextNotifiableStackIndex--;
+                try {
+                    nextNotifiableStackIndex--;
 
-        // Notify threads waiting on updatedNotifiableStackIndex that the counter has been updated
-        updatedNotifiableStackIndex.signalAll();
+                    // Notify threads waiting on updatedNotifiableStackIndex that the counter has been updated
+                    updatedNotifiableStackIndex.signalAll();
+                    return null;
+                } finally {
+                    // Release the lock
+                    stackIndexNotifyUpdate.unlock();
+                }
+            }
+        }) {
+            @Override
+            protected void done() {
+                GuiBase.getInterface().invokeInEdtLater(() -> stackNotificationWorkerList.remove(this));
+            }
+        };
 
-        // Release the lock
-        stackIndexNotifyUpdate.unlock();
+        stackNotificationWorkerList.add(worker);
+        return worker;
     }
 
     @Override

@@ -940,7 +940,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
-    public void notifyStackRemoval(GameEventSpellRemovedFromStack event) {
+    public Runnable notifyStackRemoval(GameEventSpellRemovedFromStack event) {
+        return () -> {};
     }
 
     @Override

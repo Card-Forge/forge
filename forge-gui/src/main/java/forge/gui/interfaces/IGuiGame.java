@@ -78,7 +78,7 @@ public interface IGuiGame {
 
     Runnable notifyStackAddition(final GameEventSpellAbilityCast event);
 
-    void notifyStackRemoval(final GameEventSpellRemovedFromStack event);
+    Runnable notifyStackRemoval(final GameEventSpellRemovedFromStack event);
 
     void handleLandPlayed(CardView land);
 

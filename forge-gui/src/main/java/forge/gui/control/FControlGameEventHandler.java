@@ -280,7 +280,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         } else {
             processEvent();
 
-            final Runnable notifyStackAddition = () -> matchController.notifyStackRemoval(event);
+            final Runnable notifyStackAddition = matchController.notifyStackRemoval(event);
             GuiBase.getInterface().invokeInEdtLater(notifyStackAddition);
         }
         return null;
