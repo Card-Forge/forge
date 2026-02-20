@@ -3,5 +3,5 @@ ManaCost:1 W
 Types:Creature Wall
 PT:0/5
 K:Defender
-S:Mode$ Continuous | Affected$ Card.Self | CanBlockAny$ True | Description$ CARDNAME can block any number of creatures.
+S:Mode$ CanBlockAmount | ValidCard$ Card.Self | Amount$ Any | Description$ CARDNAME can block any number of creatures.
 Oracle:Defender (This creature can't attack.)\nWall of Glare can block any number of creatures.

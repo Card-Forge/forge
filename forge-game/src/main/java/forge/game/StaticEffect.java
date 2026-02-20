@@ -321,13 +321,6 @@ public class StaticEffect {
                 if (hasParam("Goad")) {
                     affectedCard.removeGoad(getTimestamp());
                 }
-
-                if (hasParam("CanBlockAny")) {
-                    affectedCard.removeCanBlockAny(getTimestamp());
-                }
-                if (hasParam("CanBlockAmount")) {
-                    affectedCard.removeCanBlockAdditional(getTimestamp());
-                }
                 addCard(affectedPerLayer, StaticAbilityLayer.RULES, affectedCard);
             }
         }

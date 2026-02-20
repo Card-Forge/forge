@@ -2,7 +2,7 @@ Name:Brave the Sands
 ManaCost:1 W
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Vigilance | Description$ Creatures you control have vigilance.
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | CanBlockAmount$ 1 | Description$ Each creature you control can block an additional creature each combat.
+S:Mode$ CanBlockAmount | ValidCard$ Creature.Self | Amount$ 1 | Description$ Each creature you control can block an additional creature each combat.
 SVar:NonStackingEffect:True
 SVar:PlayMain1:TRUE
 Oracle:Creatures you control have vigilance.\nEach creature you control can block an additional creature each combat.

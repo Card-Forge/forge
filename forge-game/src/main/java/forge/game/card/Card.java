@@ -174,9 +174,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     private final Map<CounterType, StaticAbility> counterTypeKeywordStatic = Maps.newHashMap();
 
-    private final Map<Long, Integer> canBlockAdditional = Maps.newTreeMap();
-    private final Set<Long> canBlockAny = Sets.newHashSet();
-
     // changes that say "replace each instance of one [color,type] by another - timestamp is the key of maps
     private final CardChangedWords changedTextColors = new CardChangedWords();
     private final CardChangedWords changedTextTypes = new CardChangedWords();
@@ -7994,41 +7991,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         numberTurnActivations.clear();
     }
 
-    public void addCanBlockAdditional(int n, long timestamp) {
-        if (n <= 0) {
-            return;
-        }
-        canBlockAdditional.put(timestamp, n);
-        getView().updateBlockAdditional(this);
-    }
-    public boolean removeCanBlockAdditional(long timestamp) {
-        boolean result = canBlockAdditional.remove(timestamp) != null;
-        if (result) {
-            getView().updateBlockAdditional(this);
-        }
-        return result;
-    }
     public int canBlockAdditional() {
-        int result = 0;
-        for (Integer v : canBlockAdditional.values()) {
-            result += v;
-        }
-        return result;
+        return StaticAbilityCanBlockAmount.canBlockAmount(this);
     }
 
-    public void addCanBlockAny(long timestamp) {
-        canBlockAny.add(timestamp);
-        getView().updateBlockAdditional(this);
-    }
-    public boolean removeCanBlockAny(long timestamp) {
-        boolean result = canBlockAny.remove(timestamp);
-        if (result) {
-            getView().updateBlockAdditional(this);
-        }
-        return result;
-    }
     public boolean canBlockAny() {
-        return !canBlockAny.isEmpty();
+        return StaticAbilityCanBlockAmount.canBlockAny(this);
     }
 
     public boolean removeChangedState() {

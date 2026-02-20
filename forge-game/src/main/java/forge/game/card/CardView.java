@@ -924,21 +924,6 @@ public class CardView extends GameEntityView {
             sb.append("\r\n");
         }
 
-        if (getCanBlockAny()) {
-            sb.append("\r\n\r\n");
-            sb.append("CARDNAME can block any number of creatures.".replaceAll("CARDNAME", getName()));
-            sb.append("\r\n");
-        } else {
-            int i = getBlockAdditional();
-            if (i > 0) {
-                sb.append("\r\n\r\n");
-                sb.append("CARDNAME can block an additional ".replaceAll("CARDNAME", getName()));
-                sb.append(i == 1 ? "creature" : Lang.nounWithNumeral(i, "creature"));
-                sb.append(" each combat.");
-                sb.append("\r\n");
-            }
-        }
-
         Set<String> cantHaveKeyword = this.getCantHaveKeyword();
         if (cantHaveKeyword != null && !cantHaveKeyword.isEmpty()) {
             sb.append("\r\n\r\n");
@@ -1173,19 +1158,6 @@ public class CardView extends GameEntityView {
     }
     void updateHiddenId(final int hiddenId) {
         set(TrackableProperty.HiddenId, hiddenId);
-    }
-
-    int getBlockAdditional() {
-        return get(TrackableProperty.BlockAdditional);
-    }
-
-    boolean getCanBlockAny() {
-        return get(TrackableProperty.BlockAny);
-    }
-
-    void updateBlockAdditional(Card c) {
-        set(TrackableProperty.BlockAdditional, c.canBlockAdditional());
-        set(TrackableProperty.BlockAny, c.canBlockAny());
     }
 
     public boolean isRingBearer() {
