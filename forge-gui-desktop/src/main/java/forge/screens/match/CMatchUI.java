@@ -1327,82 +1327,100 @@ public final class CMatchUI
         return reply == 0;
     }
 
+    private class StackAdditionNotification extends SwingWorker<Void, Void> {
+        private final GameEventSpellAbilityCast event;
+        private final int stackIndex;
+        private final SpellAbilityView sa;
+        private final String stackNotificationPolicy;
+        private final boolean isAi;
+        private final boolean isTrigger;
+
+        StackAdditionNotification(GameEventSpellAbilityCast event) {
+            this.event = event;
+            this.stackIndex = event.stackIndex();
+
+            this.sa = event.sa();
+            this.stackNotificationPolicy = FModel.getPreferences().getPref(FPref.UI_STACK_EFFECT_NOTIFICATION_POLICY);
+            this.isAi = event.si().getActivatingPlayer().isAI();
+            this.isTrigger = event.si().isTrigger();
+        }
+
+        @Override
+        protected Void doInBackground() throws Exception {
+            // nextNotifiableStackIndex gets locked here
+            stackIndexNotifyUpdate.lock();
+            try {
+                while (stackIndex != nextNotifiableStackIndex) { // Not yet time to show the modal
+                    // release lock and await on nextNotifiableStackIndex to be modified, then recheck
+                    updatedNotifiableStackIndex.await();
+                }
+                return null;
+            } finally {
+                stackIndexNotifyUpdate.unlock(); // release lock on nextNotifiableStackIndex
+            }
+        }
+
+        @Override
+        protected void done() {
+            // Now we can show the modal
+            if (ForgeConstants.STACK_EFFECT_NOTIFICATION_ALWAYS.equals(stackNotificationPolicy) || (ForgeConstants.STACK_EFFECT_NOTIFICATION_AI_AND_TRIGGERED.equals(stackNotificationPolicy) && (isAi || isTrigger))) {
+                // We can go and show the modal
+                StackItemView si = event.si();
+
+                MigLayout migLayout = new MigLayout("insets 15, left, gap 30, fill");
+                JPanel mainPanel = new JPanel(migLayout);
+                final Dimension parentSize = JOptionPane.getRootFrame().getSize();
+                Dimension maxSize = new Dimension(1400, parentSize.height - 100);
+                mainPanel.setMaximumSize(maxSize);
+                mainPanel.setOpaque(false);
+
+                // Big Image
+                addBigImageToStackModalPanel(mainPanel, si);
+
+                // Text
+                addTextToStackModalPanel(mainPanel,sa,si);
+
+                // Small images
+                int numSmallImages = 0;
+
+                // If current effect is a triggered/activated ability of an enchantment card, show the enchanted card
+                GameEntityView enchantedEntityView = null;
+                CardView hostCard = sa.getHostCard();
+                if (hostCard != null && hostCard.getCurrentState().isEnchantment()) {
+                    enchantedEntityView = hostCard.getEntityAttachedTo();
+                    if (enchantedEntityView != null) {
+                        numSmallImages++;
+                    }
+                }
+
+                // I also want to show each type of targets (both cards and players)
+                List<GameEntityView> targets = getTargets(si,new ArrayList<GameEntityView>());
+                numSmallImages = numSmallImages + targets.size();
+
+                // Now I know how many small images - on to render them
+                if (enchantedEntityView != null) {
+                    addSmallImageToStackModalPanel(enchantedEntityView,mainPanel,numSmallImages);
+                }
+                for (GameEntityView gev : targets) {
+                    addSmallImageToStackModalPanel(gev, mainPanel, numSmallImages);
+                }
+
+                FOptionPane.showOptionDialog(null, "Forge", null, mainPanel, ImmutableList.of(Localizer.getInstance().getMessage("lblOK")));
+                // here the user closed the modal - time to update the next notifiable stack index
+
+            }
+            // In any case, I have to increase the counter
+            stackIndexNotifyUpdate.lock(); // Acquire lock
+            nextNotifiableStackIndex++;
+            // TODO: signalAll() may be unnecessary since we only increment in this worker.
+            updatedNotifiableStackIndex.signalAll(); // Notify threads waiting on updatedNotifiableStackIndex
+            stackIndexNotifyUpdate.unlock(); // Release lock
+        }
+    }
+
     @Override
     public Runnable notifyStackAddition(GameEventSpellAbilityCast event) {
-        return new SwingWorker<Void, Void>() {
-            @Override
-            protected Void doInBackground() throws Exception {
-                // Gets executed in a background thread.
-                SpellAbilityView sa = event.sa();
-                String stackNotificationPolicy = FModel.getPreferences().getPref(FPref.UI_STACK_EFFECT_NOTIFICATION_POLICY);
-                boolean isAi = event.si().getActivatingPlayer().isAI();
-                boolean isTrigger = event.si().isTrigger();
-                int stackIndex = event.stackIndex();
-
-                // nextNotifiableStackIndex gets locked here
-                stackIndexNotifyUpdate.lock();
-                try {
-                    while (stackIndex != nextNotifiableStackIndex) { // Not yet time to show the modal
-                        // release lock and await on nextNotifiableStackIndex to be modified, then recheck
-                        updatedNotifiableStackIndex.await();
-                    }
-                    // Now we can show the modal
-                    if (ForgeConstants.STACK_EFFECT_NOTIFICATION_ALWAYS.equals(stackNotificationPolicy) || (ForgeConstants.STACK_EFFECT_NOTIFICATION_AI_AND_TRIGGERED.equals(stackNotificationPolicy) && (isAi || isTrigger))) {
-                        // We can go and show the modal
-                        StackItemView si = event.si();
-
-                        MigLayout migLayout = new MigLayout("insets 15, left, gap 30, fill");
-                        JPanel mainPanel = new JPanel(migLayout);
-                        final Dimension parentSize = JOptionPane.getRootFrame().getSize();
-                        Dimension maxSize = new Dimension(1400, parentSize.height - 100);
-                        mainPanel.setMaximumSize(maxSize);
-                        mainPanel.setOpaque(false);
-
-                        // Big Image
-                        addBigImageToStackModalPanel(mainPanel, si);
-
-                        // Text
-                        addTextToStackModalPanel(mainPanel,sa,si);
-
-                        // Small images
-                        int numSmallImages = 0;
-
-                        // If current effect is a triggered/activated ability of an enchantment card, show the enchanted card
-                        GameEntityView enchantedEntityView = null;
-                        CardView hostCard = sa.getHostCard();
-                        if (hostCard != null && hostCard.getCurrentState().isEnchantment()) {
-                            enchantedEntityView = hostCard.getEntityAttachedTo();
-                            if (enchantedEntityView != null) {
-                                numSmallImages++;
-                            }
-                        }
-
-                        // I also want to show each type of targets (both cards and players)
-                        List<GameEntityView> targets = getTargets(si,new ArrayList<GameEntityView>());
-                        numSmallImages = numSmallImages + targets.size();
-
-                        // Now I know how many small images - on to render them
-                        if (enchantedEntityView != null) {
-                            addSmallImageToStackModalPanel(enchantedEntityView,mainPanel,numSmallImages);
-                        }
-                        for (GameEntityView gev : targets) {
-                            addSmallImageToStackModalPanel(gev, mainPanel, numSmallImages);
-                        }
-
-                        FOptionPane.showOptionDialog(null, "Forge", null, mainPanel, ImmutableList.of(Localizer.getInstance().getMessage("lblOK")));
-                        // here the user closed the modal - time to update the next notifiable stack index
-
-                    }
-                    // In any case, I have to increase the counter
-                    nextNotifiableStackIndex++;
-                    // TODO: signalAll() may be unnecessary since we only increment in this worker.
-                    updatedNotifiableStackIndex.signalAll(); // Notify threads waiting on updatedNotifiableStackIndex
-                    return null;
-                } finally {
-                    stackIndexNotifyUpdate.unlock(); // release lock on nextNotifiableStackIndex
-                }
-            }
-        };
+        return new StackAdditionNotification(event);
     }
 
     private List<GameEntityView> getTargets(StackItemView si, List<GameEntityView> result){
