@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import forge.GameCommand;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
