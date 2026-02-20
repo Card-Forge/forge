@@ -47,7 +47,7 @@ public class GoadEffect extends SpellAbilityEffect {
             }
 
             // check if the object is still in game or if it was moved
-            Card gameCard = game.getCardState(tgtC, null);
+            final Card gameCard = game.getCardState(tgtC, null);
             // gameCard is LKI in that case, the card is not in game anymore
             // or the timestamp did change
             // this should check Self too
@@ -60,16 +60,7 @@ public class GoadEffect extends SpellAbilityEffect {
 
             // currently, only Life of the Party uses Duration$ – Duration$ Permanent
             if (!duration.equals("Permanent")) {
-                final GameCommand until = new GameCommand() {
-                    private static final long serialVersionUID = -1731759226844770852L;
-
-                    @Override
-                    public void run() {
-                        gameCard.removeGoad(timestamp);
-                    }
-                };
-
-                addUntilCommand(sa, until, duration, player);
+                addUntilCommand(sa, () -> gameCard.removeGoad(timestamp), duration, player);
             }
 
             if (remember && gameCard.isGoaded()) {
