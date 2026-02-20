@@ -1685,11 +1685,32 @@ public class AiController {
             return null;
         });
 
-        Thread t = new Thread(future);
+        // Check if any candidate spell has a TargetingPlayer that is a human player.
+        // If so, the AI evaluation will prompt the human for target selection, which can
+        // take arbitrarily long. Use an effectively infinite timeout to avoid cutting off
+        // human input. Otherwise use the normal AI timeout.
+        boolean hasHumanTargetingPlayer = false;
+        for (final SpellAbility sa : all) {
+            SpellAbility cur = sa;
+            while (cur != null) {
+                if (cur.hasParam("TargetingPlayer")) {
+                    Player tp = AbilityUtils.getDefinedPlayers(
+                            cur.getHostCard(), cur.getParam("TargetingPlayer"), cur).get(0);
+                    if (!tp.isAI()) {
+                        hasHumanTargetingPlayer = true;
+                        break;
+                    }
+                }
+                cur = cur.getSubAbility();
+            }
+            if (hasHumanTargetingPlayer) break;
+        }
+        long timeout = hasHumanTargetingPlayer ? Integer.MAX_VALUE : game.getAITimeout();
+
+        Thread t = new Thread(future, "Game AI Eval");
         t.start();
         try {
-            // instead of computing all available concurrently just add a simple timeout depending on the user prefs
-            return future.get(game.getAITimeout(), TimeUnit.SECONDS);
+            return future.get(timeout, TimeUnit.SECONDS);
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
             try {
                 e.printStackTrace();
