@@ -7,4 +7,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
 A:AB$ Mana | Cost$ T | Produced$ Combo U R | SpellDescription$ Add {U} or {R}.
 DeckHas:Ability$LifeGain
-Oracle:This land enters tapped.\nWhen this land enters, you gain I life.\n{T}: Add {U} oг {R}
+Oracle:This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {U} oг {R}
