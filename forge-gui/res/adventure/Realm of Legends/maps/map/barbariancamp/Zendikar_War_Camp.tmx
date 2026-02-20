@@ -76,7 +76,6 @@
     <property name="enemy" value="Jori En"/>
     <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="40"/>
-    <property name="waypoints" value="0"/>
    </properties>
   </object>
   <object id="70" template="../../../../common/maps/obj/enemy.tx" x="105.536" y="331.533">
