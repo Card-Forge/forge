@@ -60,8 +60,8 @@ public enum KeywordAction {
 
     // 701.31 – 701.33: Supplemental format actions
     PLANESWALK(false),
-    SET_IN_MOTION(false),
-    ABANDON(false),
+    SET_IN_MOTION(true),
+    ABANDON(true),
 
     // 701.34 – 701.36: Counter & token actions
     PROLIFERATE(false),
