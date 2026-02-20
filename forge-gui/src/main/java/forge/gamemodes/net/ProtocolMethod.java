@@ -176,7 +176,6 @@ public enum ProtocolMethod {
             return;
         }
         if (value == null) {
-            System.err.printf("IllegalStateException: Protocol method %s: null returned by client, expected %s  (ProtocolMethod.java)%n", name(), getReturnType().getName());
             return;
         }
         if (!ReflectionUtil.isInstance(value, returnType)) {
