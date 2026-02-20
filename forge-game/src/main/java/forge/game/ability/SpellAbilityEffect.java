@@ -901,7 +901,7 @@ public abstract class SpellAbilityEffect {
     protected static void addUntilCommand(final SpellAbility sa, GameCommand until, Player controller) {
         addUntilCommand(sa, until, sa.getParam("Duration"), controller);
     }
-    protected static void addUntilCommand(final SpellAbility sa, GameCommand until, String duration, Player controller) {
+    protected static void addUntilCommand(final SpellAbility sa, final GameCommand until, String duration, Player controller) {
         Card host = sa.getHostCard();
         final Game game = host.getGame();
         // in case host was LKI or still resolving
@@ -943,14 +943,7 @@ public abstract class SpellAbilityEffect {
                 game.getEndOfTurn().addUntilEnd(targeted, until);
             }
         } else if ("ThisTurnAndNextTurn".equals(duration)) {
-            game.getEndOfTurn().addUntil(new GameCommand() {
-                private static final long serialVersionUID = -5054153666503075717L;
-
-                @Override
-                public void run() {
-                    game.getEndOfTurn().addUntil(until);
-                }
-            });
+            game.getEndOfTurn().addUntil(() -> game.getEndOfTurn().addUntil(until));
         } else if ("UntilStateBasedActionChecked".equals(duration)) {
             game.addSBACheckedCommand(until);
         } else if (duration != null && duration.startsWith("UntilAPlayerCastSpell")) {
