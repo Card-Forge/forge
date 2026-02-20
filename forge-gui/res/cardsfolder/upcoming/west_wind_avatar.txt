@@ -5,7 +5,7 @@ PT:7/7
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ Whenever this creature enters or attacks, you may sacrifice a token or a land. If you do, you gain 3 life.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigGainLife | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature enters or attacks, you may sacrifice a token or a land. If you do, you gain 3 life.
-SVar:TrigGainLife:AB$ GainLife | Cost$ Sac<1/Permanent.token,Land/token or a land> | Defined$ You | LifeAmount$ 3
+SVar:TrigGainLife:AB$ GainLife | Cost$ Sac<1/Permanent.token;Land/token or a land> | Defined$ You | LifeAmount$ 3
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | Revolt$ True | TriggerDescription$ Disappear — At the beginning of your end step, if a permanent left the battlefield under your control this turn, draw a card.
 SVar:TrigDraw:DB$ Draw
 SVar:HasAttackEffect:TRUE

@@ -868,7 +868,12 @@ public class PlayerControllerAi extends PlayerController {
                     cur.setTargetingPlayer(targetingPlayer);
                     // TODO AI won't really understand it should make a bad choice
                     targetingPlayer.getController().chooseTargetsFor(cur);
-                    // TODO there's a chance a target gets selected here that makes the cost unaffordable
+                    // there's a chance a target gets selected that makes the cost unaffordable
+                    if (!ComputerUtilCost.canPayCost(sa, sa.getActivatingPlayer(), false)) {
+                        sa.resetTargets();
+                        sa.setSkip(true);
+                        return;
+                    }
                 }
                 cur = cur.getSubAbility();
             }
