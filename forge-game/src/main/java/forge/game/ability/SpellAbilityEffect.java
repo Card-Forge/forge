@@ -953,8 +953,6 @@ public abstract class SpellAbilityEffect {
             });
         } else if ("UntilStateBasedActionChecked".equals(duration)) {
             game.addSBACheckedCommand(until);
-        } else if (duration != null && duration.startsWith("UntilAPlayerCastSpell")) {
-            game.getStack().addCastCommand(duration.split(" ")[1], until);
         } else if ("UntilHostLeavesPlay".equals(duration)) {
             host.addLeavesPlayCommand(until);
         } else if ("UntilHostLeavesPlayOrEOT".equals(duration)) {
