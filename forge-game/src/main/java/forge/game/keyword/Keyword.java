@@ -288,9 +288,13 @@ public enum Keyword {
         return inst;
     }
 
+    public String getDisplayName() {
+        return Localizer.getInstance().getMessage(translationKey);
+    }
+
     @Override
     public String toString() {
-        return displayName;
+        return getDisplayName();
     }
 
     public static List<Keyword> getAllKeywords() {
