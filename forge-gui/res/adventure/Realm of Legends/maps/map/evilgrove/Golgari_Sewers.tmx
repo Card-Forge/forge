@@ -59,7 +59,7 @@
   <object id="100" template="../../../../common/maps/obj/enemy.tx" x="161.005" y="191.221">
    <properties>
     <property name="displayNameOverride" value=""/>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svogthos, the Restless Tomb|RAV&quot;, &quot;Golgari Guildmage|RAV&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svogthos, the Restless Tomb|RAV&quot;, &quot;Golgari Germination&quot;]}"/>
     <property name="enemy" value="Jarad"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="40"/>

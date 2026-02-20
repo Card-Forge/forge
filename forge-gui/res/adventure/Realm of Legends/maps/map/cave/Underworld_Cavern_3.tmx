@@ -47,7 +47,7 @@
   </object>
   <object id="81" template="../../../../common/maps/obj/enemy.tx" x="98.333" y="485.167">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Mystery|CP1&quot;, &quot;The Binding of the Titans|THB&quot;, &quot;Fleetfeather Cockatrice|JOU&quot;, &quot;Giant's Amulet|KHM&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Mystery|CP1&quot;, &quot;Fleetfeather Cockatrice|JOU&quot;, &quot;Giant's Amulet|KHM&quot;]}"/>
     <property name="enemy" value="Uro"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="10"/>
@@ -75,7 +75,7 @@
   </object>
   <object id="85" template="../../../../common/maps/obj/enemy.tx" x="408.833" y="443.5">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Triumph|THS&quot;, &quot;The Birth of Meletis|THB&quot;, &quot;Phoenix of Ash|THB&quot;, &quot;Opal Titan|USG&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Triumph|THS&quot;, &quot;Phoenix of Ash|THB&quot;, &quot;Opal Titan|USG&quot;]}"/>
     <property name="enemy" value="Phlage"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="10"/>

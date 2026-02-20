@@ -54,7 +54,7 @@
 		  &quot;name&quot;: &quot;(Continue)&quot;, }]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Strider Harness|RIX&quot;, &quot;Jungle Shrine|LCC&quot;, &quot;Arch of Orazca|RIX&quot;, &quot;raging regisaur|RIX&quot;, &quot;siegehorn ceratops|RIX&quot;, &quot;relentless raptor|RIX&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Strider Harness|RIX&quot;, &quot;Jungle Shrine|LCC&quot;, &quot;The Skullspore Nexus|LCI&quot;, &quot;Poetic Ingenuity|LCI&quot;]}"/>
     <property name="enemy" value="Zacama"/>
     <property name="speedModifier" type="float" value="5"/>
     <property name="threatRange" type="int" value="50"/>
@@ -111,7 +111,7 @@
   </object>
   <object id="90" template="../../../../common/maps/obj/enemy.tx" x="573.334" y="390.667">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Hidden nursery|LCI&quot;, &quot;dinosaur egg|lcc&quot;, &quot;Triassic Egg|LEG&quot;, &quot;strider harness|RIX&quot;, &quot;maskwood nexus|KLD&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;dinosaur egg|lcc&quot;, &quot;Triassic Egg|LEG&quot;, &quot;strider harness|RIX&quot;, &quot;maskwood nexus|KLD&quot;]}"/>
     <property name="enemy" value="Atla Palani"/>
     <property name="speedModifier" type="float" value="4"/>
     <property name="threatRange" type="int" value="50"/>
@@ -121,7 +121,7 @@
   <object id="91" template="../../../../common/maps/obj/enemy.tx" x="430.667" y="118.666">
    <properties>
     <property name="displayNameOverride" value=""/>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Frilled Deathspitter|RIX&quot;, &quot;Strider Harness|RIX&quot;, &quot;restless ridgeline|LCI|2&quot;, &quot;hidden courtyard|LCI&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Frilled Deathspitter|RIX&quot;, &quot;Strider Harness|RIX&quot;, &quot;restless ridgeline|LCI|2&quot;]}"/>
     <property name="enemy" value="Gishath"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>

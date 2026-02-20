@@ -1163,13 +1163,13 @@
     }
   },
     {
-    "name": "Pocket Thopter",
-    "description": "0/2 Flying thopter artifact",
+    "name": "Sky Skiff Turnkey",
+    "description": "2/3 flying vehicle with crew 1",
     "equipmentSlot": "Boots",
-    "iconName": "PocketThopter",
+    "iconName": "SkySkiffTurnkey",
     "effect": {
         "startBattleWithCard": [
-        "Ornithopter|KLD"
+        "Sky Skiff"
      ]
     }
   },
@@ -1236,7 +1236,7 @@
     "iconName": "CoiledAnklet",
     "effect": {
         "startBattleWithCard": [
-        "Koma's Coil|TKHM"
+        "komas_coil"
      ]
     }
   },
@@ -1277,13 +1277,13 @@
     }
   },
     {
-    "name": "Segovian Sandals",
-    "description": "1/1 angel with flying and vigilance",
-    "equipmentSlot": "Boots",
-    "iconName": "SegovianSandals",
+    "name": "Angelic Ring",
+    "description": "Sacrifice to revive a creature that just died.",
+    "equipmentSlot": "Left",
+    "iconName": "AngelicRing",
     "effect": {
         "startBattleWithCard": [
-        "Segovian Angel|MH1"
+        "Angelic Renewal"
      ]
     }
   },
@@ -1368,13 +1368,13 @@
     }
   },
     {
-    "name": "Miser's Shoes",
-    "description": "1/1 rat that drops opps max hand size by 1",
+    "name": "Sinuous Shoes",
+    "description": "2/2 rat that becomes a 5/5 menace for 3BB",
     "equipmentSlot": "Boots",
-    "iconName": "Miser'sShoes",
+    "iconName": "SinuousShoes",
     "effect": {
         "startBattleWithCard": [
-        "Gnat Miser|SOK"
+        "Sinuous Vermin"
      ]
     }
   },
@@ -1483,12 +1483,12 @@
   },
     {
     "name": "Bearhide Breeches",
-    "description": "2/2 bear",
+    "description": "2/2 bear, 3GG and exile from grave to make two 2/2s",
     "equipmentSlot": "Boots",
     "iconName": "BearhideBreeches",
     "effect": {
         "startBattleWithCard": [
-        "Grizzly Bears|10E"
+        "Mother Bear"
      ]
     }
   },
@@ -1499,7 +1499,7 @@
     "iconName": "VindicatorGreaves",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -4,
+        "lifeModifier": -6,
         "startBattleWithCard": [
         "Kabira Vindicator|ROE"
      ]
@@ -1629,18 +1629,18 @@
     "cost": 5000,
     "effect": {
         "startBattleWithCard": [
-        "Bala Ged Beastbreaker|ROE"
+        "Beastbreaker of Bala Ged"
      ]
     }
   },
     {
     "name": "Ghoulcaller Greaves",
-    "description": "2/2 zombie",
+    "description": "3/3 zombie, deals 1 to you a turn",
     "equipmentSlot": "Boots",
     "iconName": "GhoulcallerGreaves",
     "effect": {
         "startBattleWithCard": [
-        "Walking Corpse|ISD"
+        "Graf Reaver"
      ]
     }
   },
@@ -1690,13 +1690,13 @@
     }
   },
     {
-    "name": "Heap Socks",
-    "description": "1/1 artifact scarecrow, sac to exile a card from a graveyard",
+    "name": "Scarecrow Socks",
+    "description": "2/1 reach, filters mana once a turn",
     "equipmentSlot": "Boots",
-    "iconName": "HeapSocks",
+    "iconName": "ScarecrowSocks",
     "effect": {
         "startBattleWithCard": [
-        "Heap Doll|SHM"
+        "Scarecrow Guide"
      ]
     }
   },
@@ -2428,15 +2428,13 @@
     }
   },
     {
-    "name": "Vile Songbook",
-    "description": "Builds up verses, pay 1B to kill that many nonblack creatures",
-    "equipmentSlot": "Left",
-    "iconName": "VileSongbook",
+    "name": "Amulet of Compleation",
+    "description": "Surveil 1 when a Phyrexian you control dies",
+    "equipmentSlot": "Neck",
+    "iconName": "AmuletofCompleation",
     "effect": {
-        "changeStartCards": -1,
-        "lifeModifier": -13,
         "startBattleWithCard": [
-        "Vile Requiem|USG"
+        "Gift of Compleation"
      ]
     }
   },
@@ -2915,6 +2913,18 @@
     "effect": {
         "startBattleWithCard": [
         "Planeswalker's Favor|PLS"
+     ]
+    }
+  },
+  {
+    "name": "Ominous Amulet",
+    "description": "Every 8 card draws, make an 8/8 kraken",
+    "equipmentSlot": "Neck",
+    "iconName": "OminousAmulet",
+    "effect": {
+        "lifeModifier": -8,
+        "startBattleWithCard": [
+        "Ominous Seas"
      ]
     }
   },
@@ -3401,13 +3411,13 @@
     }
   },
     {
-    "name": "Wolfhunter's Quiver",
-    "description": "Equip 5, equipped can ping 1 or ping 3 to werewolves",
+    "name": "Full Moon Necklace",
+    "description": "Werewolves get +1/+0 and trample, sac to regen them all",
     "equipmentSlot": "Right",
-    "iconName": "Wolfhunter'sQuiver",
+    "iconName": "FullMoonNecklace",
     "effect": {
         "startBattleWithCard": [
-        "Wolfhunter's Quiver|DKA"
+        "Full Moon's Rise"
      ]
     }
   },
@@ -4065,7 +4075,7 @@
     "iconName": "PhelddagrifPlate",
     "effect": {
       "changeStartCards": 1,
-        "lifeModifier": 6,
+        "lifeModifier": 8,
         "opponent": {
           "startBattleWithCard": [
             "Pygmy Hippo|VIS"
@@ -4620,26 +4630,47 @@
     }
   },
   {
-    "name": "Fleshwright Chaps",
-    "description": "7/7 flier, -1/-1 per card in hand, 3U and discard 3 to revive.",
-    "equipmentSlot": "Boots",
-    "iconName": "FleshwrightChaps",
+    "name": "Mad Hat",
+    "description": "Randomly swap permanents each upkeep.",
+    "equipmentSlot": "Neck",
+    "iconName": "MadHat",
     "effect": {
-      "lifeModifier": -7,
       "startBattleWithCard": [
-      "Geralf's Masterpiece|SOI"
+      "Power Struggle"
    ]
     }
   },
   {
-    "name": "Gisa's Favorite Shovel",
-    "description": "Equip 4, +2/+0 and menace, on atk: opp sacs, you get a 2/2",
-    "equipmentSlot": "Right",
-    "iconName": "GisasFavoriteShovel",
+    "name": "Faerie Anklet",
+    "description": "1/3 flier. Pay 1GG for a random effect.",
+    "equipmentSlot": "Boots",
+    "iconName": "FaerieAnklet",
     "effect": {
-      "lifeModifier": -8,
       "startBattleWithCard": [
-      "Gisa's Favorite Shovel|SLX"
+      "Faerie Dragon"
+   ]
+    }
+  },
+  {
+    "name": "Fleshwright Chaps",
+    "description": "3/1 flying zombie, 1U and discard 2 to reanimate tapper",
+    "equipmentSlot": "Boots",
+    "iconName": "FleshwrightChaps",
+    "effect": {
+      "lifeModifier": -4,
+      "startBattleWithCard": [
+      "Stitchwing Skaab"
+   ]
+    }
+  },
+  {
+    "name": "Thirsting Axe",
+    "description": "Equip 2, +4/+0 but die at EOT if it hasn't hit a creature",
+    "equipmentSlot": "Right",
+    "iconName": "ThirstingAxe",
+    "effect": {
+      "startBattleWithCard": [
+      "Thirsting Axe"
    ]
     }
   },

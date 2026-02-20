@@ -233,7 +233,7 @@
     }
     ,{
       "name": "Normal",
-      "startingLife": 25,
+      "startingLife": 20,
       "startingShards": 20,
       "startingMoney": 2000,
       "startingDifficulty": true,
@@ -255,11 +255,11 @@
         "Challenge Coin",
         "Challenge Coin",
         "Steel Boots",
-        "Lotus Petal"
+        "Lotus Petal" 
       ]
     },{
       "name": "Hard",
-      "startingLife": 20,
+      "startingLife": 15,
       "startingShards": 10,
       "startingMoney": 500,
       "enemyLifeFactor": 1.5,
@@ -281,7 +281,7 @@
       ]
     },{
       "name": "Insane",
-      "startingLife": 15,
+      "startingLife": 10,
       "startingShards": 10,
       "startingMoney": 0,
       "enemyLifeFactor": 2.0,

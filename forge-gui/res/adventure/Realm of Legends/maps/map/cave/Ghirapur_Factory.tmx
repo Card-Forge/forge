@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Chief of the Foundry&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Chief of the Foundry&quot;, &quot;Ghirapur Orrery&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -182,7 +182,7 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ornithopter|KLD&quot;, &quot;Planar Bridge|MPS&quot;, &quot;Ornithopter of Paradise|CMM&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Sky Skiff&quot;, &quot;Planar Bridge|MPS&quot;, &quot;Ornithopter of Paradise|CMM&quot;]}"/>
     <property name="enemy" value="Rashmi"/>
     <property name="threatRange" type="int" value="0"/>
     <property name="waypoints" value=""/>

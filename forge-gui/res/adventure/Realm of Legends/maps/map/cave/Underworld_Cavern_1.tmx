@@ -39,7 +39,7 @@
   <object id="70" template="../../../../common/maps/obj/manashards.tx" x="56.833" y="495.167"/>
   <object id="71" template="../../../../common/maps/obj/enemy.tx" x="119" y="488.833">
    <properties>
-    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Mindwrack Harpy|THB&quot;, &quot;Insatiable Harpy|THS&quot;, &quot;Ripples of Undeath|MH3&quot;, &quot;Siren Song Lyre|BNG&quot;, &quot;Field of Ruin|THB&quot;
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Mindwrack Harpy|THB&quot;, &quot;Ripples of Undeath|MH3&quot;, &quot;Siren Song Lyre|BNG&quot;, &quot;Field of Ruin|THB&quot;
 ]}</property>
     <property name="enemy" value="Aphemia"/>
     <property name="speedModifier" type="float" value="50"/>
