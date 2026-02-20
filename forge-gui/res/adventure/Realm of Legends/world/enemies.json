@@ -43,8 +43,8 @@
       },
       {
         "type": "gold",
-        "count": 10000,
-        "addMaxCount": 20000
+        "count": 30000,
+        "addMaxCount": 30000
       },
       {
         "type": "shards",
@@ -5177,7 +5177,6 @@
       }
     ],
     "colors": "WUG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -5243,7 +5242,6 @@
       }
     ],
     "colors": "WUR",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -5309,7 +5307,6 @@
       }
     ],
     "colors": "WRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -5394,7 +5391,6 @@
       }
     ],
     "colors": "WURG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -5465,7 +5461,6 @@
       }
     ],
     "colors": "URG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -5531,7 +5526,6 @@
       }
     ],
     "colors": "BRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -5596,7 +5590,6 @@
       }
     ],
     "colors": "WRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -5661,7 +5654,6 @@
       }
     ],
     "colors": "WBG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -5726,7 +5718,6 @@
       }
     ],
     "colors": "WBR",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -5798,7 +5789,6 @@
       }
     ],
     "colors": "WBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -5873,7 +5863,6 @@
       }
     ],
     "colors": "WUBR",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -5893,6 +5882,11 @@
         "cardName": "Dihada, Binder of Wills"
       },
       {
+        "type": "card",
+        "count": 1,
+        "cardName": "Geyadrone Dihada"
+      },
+      {
         "type": "deckCard",
         "count": 4,
         "addMaxCount": 4, 
@@ -5904,7 +5898,7 @@
       {
         "type": "randomCard",
         "count": 3,
-        "addMaxCount": 6, 
+        "addMaxCount": 4, 
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -5938,7 +5932,6 @@
       }
     ],
     "colors": "WBR",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -6003,7 +5996,6 @@
       }
     ],
     "colors": "UBR",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -6068,7 +6060,6 @@
       }
     ],
     "colors": "WUR",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -6133,7 +6124,6 @@
       }
     ],
     "colors": "WUB",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -6198,7 +6188,6 @@
       }
     ],
     "colors": "WUG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -6264,7 +6253,6 @@
       }
     ],
     "colors": "WBG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -6329,7 +6317,6 @@
       }
     ],
     "colors": "WUB",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -6402,7 +6389,6 @@
       }
     ],
     "colors": "WUBG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -6472,7 +6458,6 @@
       }
     ],
     "colors": "UBG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -6537,7 +6522,6 @@
       }
     ],
     "colors": "URG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -6602,7 +6586,6 @@
       }
     ],
     "colors": "UBG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -6668,7 +6651,6 @@
       }
     ],
     "colors": "UBR",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -6738,7 +6720,6 @@
       }
     ],
     "colors": "BRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -6808,7 +6789,6 @@
       }
     ],
     "colors": "UBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {

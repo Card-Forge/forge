@@ -1,0 +1,6 @@
+Name:Swift Demise
+ManaCost:2 B
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ 1 | SubAbility$ DBDestroyAll | SpellDescription$ CARDNAME deals 1 damage to target creature. Then destroy each creature you don't control that was dealt damage this turn.
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.YouDontCtrl+wasDealtDamageThisTurn
+Oracle:Swift Demise deals 1 damage to target creature. Then destroy each creature you don't control that was dealt damage this turn.

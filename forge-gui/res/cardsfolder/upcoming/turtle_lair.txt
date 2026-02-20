@@ -1,0 +1,9 @@
+Name:Turtle Lair
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Spell.Ninja,Spell.Turtle | SpellDescription$ Add one mana of any color. Spend this mana only to cast a Ninja or Turtle spell.
+A:AB$ Effect | Cost$ 3 T | ValidTgts$ Ninja,Turtle | TgtPrompt$ Select target Ninja or Turtle | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Target Ninja or Turtle can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+DeckHints:Type$Ninja|Turtle
+Oracle:{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a Ninja or Turtle spell.\n{3}, {T}: Target Ninja or Turtle can't be blocked this turn.

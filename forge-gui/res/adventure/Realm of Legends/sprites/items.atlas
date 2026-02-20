@@ -3,8 +3,8 @@ size: 480,1008
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none      
-Assassin'sShoes
-  xy: 0, 160
+CutthroatSkirt
+  xy: 80, 464
   size: 16, 16
 GhostRune
   xy: 368, 64
@@ -297,8 +297,8 @@ Lookout'sHarness
 BearhideBreeches
   xy: 96, 448
   size: 16, 16
-Purist'sPants
-  xy: 96, 464
+VindicatorGreaves
+  xy: 112, 480
   size: 16, 16
 TimebugBoots
   xy: 96, 96
