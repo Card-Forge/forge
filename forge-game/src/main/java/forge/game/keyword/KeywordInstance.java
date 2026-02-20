@@ -45,7 +45,7 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
     }
     @Override
     public String getReminderText() {
-        String result = formatReminderText(keyword.reminderText);
+        String result = formatReminderText(keyword.getReminderText());
         Matcher m = Pattern.compile("\\{(\\w+):(.+?)\\}").matcher(result);
 
         StringBuffer sb = new StringBuffer();
