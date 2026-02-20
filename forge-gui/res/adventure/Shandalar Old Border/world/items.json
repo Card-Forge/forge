@@ -2918,5 +2918,101 @@
     "effect": {
       "moveSpeed": 1.35
     }
+  },
+  {
+    "name": "Thallid Lord's Trophy",
+    "description": "A fungal trophy proving your victory over the Thallid Lord.",
+    "iconName": "BossTrophy",
+    "questItem": true
+  },
+  {
+    "name": "Squee's Trophy",
+    "description": "A goblin-crafted trophy proving your victory over Squee, Goblin Nabob.",
+    "iconName": "BossTrophy",
+    "questItem": true
+  },
+  {
+    "name": "Xira's Trophy",
+    "description": "An insectoid trophy proving your victory over Xira.",
+    "iconName": "BossTrophy",
+    "questItem": true
+  },
+  {
+    "name": "Baron Sengir's Trophy",
+    "description": "A vampiric trophy proving your victory over Baron Sengir.",
+    "iconName": "BossTrophy",
+    "questItem": true
+  },
+  {
+    "name": "Hydra's Trophy",
+    "description": "A monstrous trophy proving your victory over The Hydra of Shandalaar.",
+    "iconName": "BossTrophy",
+    "questItem": true
+  },
+  {
+    "name": "Teferi's Trophy",
+    "description": "A temporal trophy proving your victory over Teferi.",
+    "iconName": "BossTrophy",
+    "questItem": true
+  },
+  {
+    "name": "Empress Galina's Trophy",
+    "description": "A merfolk trophy proving your victory over Empress Galina.",
+    "iconName": "BossTrophy",
+    "questItem": true
+  },
+  {
+    "name": "Arcanis's Trophy",
+    "description": "A mystical trophy proving your victory over Arcanis the Omnipotent.",
+    "iconName": "BossTrophy",
+    "questItem": true
+  },
+  {
+    "name": "Specter King's Trophy",
+    "description": "A shadowy trophy proving your victory over the Specter King.",
+    "iconName": "BossTrophy",
+    "questItem": true
+  },
+  {
+    "name": "Portal Master's Trophy",
+    "description": "An enigmatic trophy proving your victory over the Portal Master.",
+    "iconName": "BossTrophy",
+    "questItem": true
+  },
+  {
+    "name": "Sainted One's Trophy",
+    "description": "A radiant trophy proving your victory over The Sainted One.",
+    "iconName": "BossTrophy",
+    "questItem": true
+  },
+  {
+    "name": "Astral Visionary's Trophy",
+    "description": "A celestial trophy proving your victory over The Astral Visionary.",
+    "iconName": "BossTrophy",
+    "questItem": true
+  },
+  {
+    "name": "Lichlord's Trophy",
+    "description": "A necrotic trophy proving your victory over The Lichlord of Azar.",
+    "iconName": "BossTrophy",
+    "questItem": true
+  },
+  {
+    "name": "Dragon Lord's Trophy",
+    "description": "A scorched trophy proving your victory over The Dragon Lord.",
+    "iconName": "BossTrophy",
+    "questItem": true
+  },
+  {
+    "name": "Great Druid's Trophy",
+    "description": "A verdant trophy proving your victory over The Great Druid.",
+    "iconName": "BossTrophy",
+    "questItem": true
+  },
+  {
+    "name": "Time Walker's Trophy",
+    "description": "A timeless trophy proving your victory over the Time Walker.",
+    "iconName": "BossTrophy",
+    "questItem": true
   }
 ]

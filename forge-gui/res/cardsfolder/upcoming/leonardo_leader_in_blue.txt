@@ -1,0 +1,9 @@
+Name:Leonardo, Leader in Blue
+ManaCost:W
+Types:Legendary Creature Mutant Ninja Turtle
+PT:2/2
+K:Sneak:3 W W
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+sneaked | Execute$ TrigPumpAll | TriggerDescription$ When Leonardo enters, if his sneak cost was paid, creatures you control get +2/+0 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2
+A:AB$ Pump | Cost$ 1 W | Defined$ Self | KW$ First Strike | SpellDescription$ NICKNAME gains first strike until end of turn.
+Oracle:Sneak {3}{W}{W} (You may cast this spell for {3}{W}{W} if you also return an unblocked attacked you control to hand during the declare blockers step. He enters tapped and attacking.)\nWhen Leonardo enters, if his sneak cost was paid, creatures you control get +2/+0 until end of turn.\n{1}{W}: Leonardo gains first strike until end of turn.

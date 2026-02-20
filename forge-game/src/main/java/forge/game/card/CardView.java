@@ -1780,6 +1780,12 @@ public class CardView extends GameEntityView {
         public boolean isContraption() {
             return getType().isContraption();
         }
+        public boolean isInstant() {
+            return getType().isInstant();
+        }
+        public boolean isSorcery() {
+            return getType().isSorcery();
+        }
 
         @Override
         public String getTranslationKey() {

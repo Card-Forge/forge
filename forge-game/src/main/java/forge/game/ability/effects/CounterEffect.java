@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import forge.game.Game;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityKey;
+import forge.game.event.GameEventAddLog;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
@@ -299,7 +300,7 @@ public class CounterEffect extends SpellAbilityEffect {
         game.getTriggerHandler().runTrigger(TriggerType.Countered, runParams, false);
 
         if (!tgtSA.isAbility()) {
-            game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, "Send countered spell to " + destination);
+            game.fireEvent(new GameEventAddLog(GameLogEntryType.ZONE_CHANGE, "Send countered spell to " + destination));
         }
 
         return true;

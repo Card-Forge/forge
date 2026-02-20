@@ -18,6 +18,7 @@
 package forge.game.cost;
 
 import forge.game.GameLogEntryType;
+import forge.game.event.GameEventAddLog;
 import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -148,7 +149,7 @@ public class CostReveal extends CostPartWithList {
         }
         sb.append(targetCard).append(" to pay a cost for ");
         sb.append(ability);
-        targetCard.getGame().getGameLog().add(GameLogEntryType.INFORMATION, sb.toString());
+        targetCard.getGame().fireEvent(new GameEventAddLog(GameLogEntryType.INFORMATION, sb.toString()));
         return targetCard;
     }
 

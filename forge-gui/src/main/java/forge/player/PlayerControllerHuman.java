@@ -24,6 +24,7 @@ import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
+import forge.game.event.GameEventAddLog;
 import forge.game.event.GameEventPlayerStatsChanged;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
@@ -1748,7 +1749,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public void notifyOfValue(final SpellAbility sa, final GameObject realtedTarget, final String value) {
         final String message = MessageUtil.formatNotificationMessage(sa, player, realtedTarget, value);
         if (sa != null && sa.isManaAbility()) {
-            getGame().getGameLog().add(GameLogEntryType.LAND, message);
+            getGame().fireEvent(new GameEventAddLog(GameLogEntryType.LAND, message));
         } else {
             if (sa != null && sa.getHostCard() != null && GuiBase.getInterface().isLibgdxPort()) {
                 CardView cardView;
