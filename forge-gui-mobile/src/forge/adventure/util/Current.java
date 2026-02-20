@@ -31,7 +31,7 @@ public class Current {
         String key = hasDied ? "lblYouDied" : "lblYouLostTheLastGame";
         String message = Forge.getLocalizer().getMessage(key, player().getName());
         ItemData itemData = player().getRandomEquippedItem();
-        if (itemData != null) {
+        if (itemData != null  || Config.instance().getSettingData().disableCrackedItems) {
             itemData.isCracked = true;
             player().equip(itemData); //un-equip
             InventoryScene.instance().clearItemDescription();
