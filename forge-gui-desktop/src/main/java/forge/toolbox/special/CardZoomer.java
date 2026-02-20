@@ -361,42 +361,38 @@ public enum CardZoomer {
             return null;
         }
 
-        // Assemble: keywords fixed at top, related cards in scroll pane below
-        final JPanel side = new JPanel(new java.awt.BorderLayout(0, 8));
+        // Assemble: keywords and related cards in a single scrollable panel
+        final JPanel side = new JPanel(new java.awt.BorderLayout());
         side.setOpaque(false);
         side.putClientProperty("widthConstraint", "w " + columnPx + "!");
 
+        // Build a single content panel with keywords on top and related cards below
+        final JPanel content = new JPanel();
+        content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
+        content.setOpaque(false);
+
         if (kwPanel != null) {
-            side.add(kwPanel, java.awt.BorderLayout.NORTH);
+            content.add(kwPanel);
         }
 
         if (!relatedEntries.isEmpty()) {
             final JPanel relPanel = new JPanel();
             relPanel.setLayout(new BoxLayout(relPanel, BoxLayout.Y_AXIS));
             relPanel.setOpaque(false);
+            relPanel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 0));
             CardInfoPopup.populateRelatedCards(relPanel, relatedEntries,
                     thumbnailHeight, maxWidth, 3);
-            // Wrap so content top-aligns in the scroll viewport
-            final JPanel relWrapper = new JPanel(new java.awt.BorderLayout());
-            relWrapper.setOpaque(false);
-            relWrapper.setBorder(BorderFactory.createEmptyBorder(0, 8, 8, 0));
-            relWrapper.add(relPanel, java.awt.BorderLayout.NORTH);
-            final FScrollPane scroll = new FScrollPane(relWrapper, false,
-                    ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-                    ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-            side.add(scroll, java.awt.BorderLayout.CENTER);
-        } else if (kwPanel != null) {
-            // Keywords only, no related — wrap keywords in a scroll pane too
-            // in case there are many keywords
-            side.remove(kwPanel);
-            final JPanel kwWrapper = new JPanel(new java.awt.BorderLayout());
-            kwWrapper.setOpaque(false);
-            kwWrapper.add(kwPanel, java.awt.BorderLayout.NORTH);
-            final FScrollPane scroll = new FScrollPane(kwWrapper, false,
-                    ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-                    ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-            side.add(scroll, java.awt.BorderLayout.CENTER);
+            content.add(relPanel);
         }
+
+        // Wrap entire content in a scroll pane so everything scrolls together
+        final JPanel wrapper = new JPanel(new java.awt.BorderLayout());
+        wrapper.setOpaque(false);
+        wrapper.add(content, java.awt.BorderLayout.NORTH);
+        final FScrollPane scroll = new FScrollPane(wrapper, false,
+                ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        side.add(scroll, java.awt.BorderLayout.CENTER);
 
         return side;
     }

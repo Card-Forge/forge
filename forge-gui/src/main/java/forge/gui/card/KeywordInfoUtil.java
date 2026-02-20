@@ -100,9 +100,14 @@ public final class KeywordInfoUtil {
             }
             // Match whole word (case-insensitive): "goad", "goads", "goaded"
             final String lowerName = name.toLowerCase();
-            if (lowerText.contains(lowerName)) {
+            // Try base form first, then -ies conjugation for -y verbs (scry → scries)
+            String matchTerm = lowerName;
+            if (!lowerText.contains(matchTerm) && lowerName.endsWith("y")) {
+                matchTerm = lowerName.substring(0, lowerName.length() - 1) + "ies";
+            }
+            if (lowerText.contains(matchTerm)) {
                 // Verify it's a word boundary (not part of a larger word)
-                int idx = lowerText.indexOf(lowerName);
+                int idx = lowerText.indexOf(matchTerm);
                 while (idx >= 0) {
                     final boolean startOk = idx == 0
                             || !Character.isLetter(lowerText.charAt(idx - 1));
@@ -111,7 +116,7 @@ public final class KeywordInfoUtil {
                         existingNames.add(lowerName);
                         break;
                     }
-                    idx = lowerText.indexOf(lowerName, idx + 1);
+                    idx = lowerText.indexOf(matchTerm, idx + 1);
                 }
             }
         }
