@@ -24,6 +24,8 @@ import forge.util.Localizer;
 import forge.util.URLValidator;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.List;
+
 import static forge.util.URLValidator.parseURL;
 
 public class NetConnectUtil {
@@ -106,6 +108,7 @@ public class NetConnectUtil {
     }
 
     public static void copyHostedServerUrl() {
+        final Localizer localizer = Localizer.getInstance();
         String internalAddress = FServerManager.getLocalAddress();
         String externalAddress = FServerManager.getExternalAddress();
         String internalUrl = internalAddress + ":" + FModel.getNetPreferences().getPrefInt(ForgeNetPreferences.FNetPref.NET_PORT);
@@ -114,16 +117,42 @@ public class NetConnectUtil {
             externalUrl = externalAddress + ":" + FModel.getNetPreferences().getPrefInt(ForgeNetPreferences.FNetPref.NET_PORT);
             GuiBase.getInterface().copyToClipboard(externalUrl);
         } else {
-            GuiBase.getInterface().copyToClipboard(internalAddress);
+            GuiBase.getInterface().copyToClipboard(internalUrl);
         }
 
-        String message = "";
+        String message;
+        String title = localizer.getMessage("lblServerURL");
+        List<String> options;
+        int closeIndex;
+        int localCopyIndex;
+
         if (externalUrl != null) {
-            message = Localizer.getInstance().getMessage("lblShareURLToMakePlayerJoinServer", externalUrl, internalUrl);
+            message = localizer.getMessage("lblShareURLToMakePlayerJoinServer", externalUrl, internalUrl);
+            options = List.of(
+                    localizer.getMessage("lblCopyExternalURL"),
+                    localizer.getMessage("lblCopyLocalURL"),
+                    localizer.getMessage("lblClose"));
+            closeIndex = 2;
+            localCopyIndex = 1;
         } else {
-            message = Localizer.getInstance().getMessage("lblForgeUnableDetermineYourExternalIP", message + internalUrl);
+            message = localizer.getMessage("lblForgeUnableDetermineYourExternalIP", internalUrl);
+            options = List.of(
+                    localizer.getMessage("lblCopyLocalURL"),
+                    localizer.getMessage("lblClose"));
+            closeIndex = 1;
+            localCopyIndex = 0;
         }
-        SOptionPane.showMessageDialog(message, Localizer.getInstance().getMessage("lblServerURL"), SOptionPane.INFORMATION_ICON);
+
+        while (true) {
+            int result = SOptionPane.showOptionDialog(message, title, SOptionPane.INFORMATION_ICON, options, closeIndex);
+            if (externalUrl != null && result == 0) {
+                GuiBase.getInterface().copyToClipboard(externalUrl);
+            } else if (result == localCopyIndex) {
+                GuiBase.getInterface().copyToClipboard(internalUrl);
+            } else {
+                break;
+            }
+        }
     }
 
     public static ChatMessage join(final String url, final IOnlineLobby onlineLobby, final IOnlineChatInterface chatInterface) {
