@@ -863,11 +863,8 @@ public class PlayerControllerAi extends PlayerController {
             SpellAbility cur = sa;
             while (cur != null) {
                 if (cur.usesTargeting() && cur.hasParam("TargetingPlayer")) {
-                    Player targetingPlayer = AbilityUtils.getDefinedPlayers(cur.getHostCard(), cur.getParam("TargetingPlayer"), cur).get(0);
                     cur.clearTargets();
-                    cur.setTargetingPlayer(targetingPlayer);
-                    // TODO AI won't really understand it should make a bad choice
-                    targetingPlayer.getController().chooseTargetsFor(cur);
+                    cur.getTargetingPlayer().getController().chooseTargetsFor(cur);
                     // there's a chance a target gets selected that makes the cost unaffordable
                     if (!ComputerUtilCost.canPayCost(sa, sa.getActivatingPlayer(), false)) {
                         sa.resetTargets();

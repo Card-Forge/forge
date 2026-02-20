@@ -71,7 +71,6 @@ public class ControlGainAi extends SpellAbilityAi {
                 if (tgtCards.isEmpty()) {
                     return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
                 }
-
             }
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         } else {
@@ -79,7 +78,8 @@ public class ControlGainAi extends SpellAbilityAi {
             if (sa.hasParam("TargetingPlayer")) {
                 Player targetingPlayer = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("TargetingPlayer"), sa).get(0);
                 sa.setTargetingPlayer(targetingPlayer);
-                // TODO should continue checking with the worst
+                // TODO these blocks should continue checking with the worst
+                // and if targetingPlayer is AI set the target directly (instead of using the Runnable)
                 if (CardLists.getTargetableCards(ai.getGame().getCardsIn(sa.getTargetRestrictions().getZone()), sa).isEmpty()) {
                     return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
