@@ -1,5 +1,5 @@
 Name:Foot Ninjas
-ManaCost:4 WB WB}
+ManaCost:4 WB WB
 Types:Creature Human Ninja
 PT:5/5
 K:Sneak:3 WB
