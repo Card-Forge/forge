@@ -79,10 +79,11 @@ public class ControlGainAi extends SpellAbilityAi {
             if (sa.hasParam("TargetingPlayer")) {
                 Player targetingPlayer = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("TargetingPlayer"), sa).get(0);
                 sa.setTargetingPlayer(targetingPlayer);
-                if (targetingPlayer.getController().chooseTargetsFor(sa)) {
-                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                // TODO should continue checking with the worst
+                if (CardLists.getTargetableCards(ai.getGame().getCardsIn(sa.getTargetRestrictions().getZone()), sa).isEmpty()) {
+                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
-                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
 
             if (tgt.canOnlyTgtOpponent()) {

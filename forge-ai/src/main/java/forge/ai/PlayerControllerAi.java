@@ -848,9 +848,31 @@ public class PlayerControllerAi extends PlayerController {
                 sa.resolve();
             }
         } else {
-            ComputerUtil.handlePlayingSpellAbility(player, sa, getGame());
+            ComputerUtil.handlePlayingSpellAbility(player, sa, getDeferredTargetingPlayerRunnable(sa));
         }
         return true;
+    }
+
+    /**
+     * If any ability in the SA chain has a TargetingPlayer,
+     * defers the human choice from canPlayAI (worker thread with possibly low timeout)
+     * to handlePlayingSpellAbility (game thread, no timeout).
+     */
+    private Runnable getDeferredTargetingPlayerRunnable(SpellAbility sa) {
+        return () -> {
+            SpellAbility cur = sa;
+            while (cur != null) {
+                if (cur.usesTargeting() && cur.hasParam("TargetingPlayer")) {
+                    Player targetingPlayer = AbilityUtils.getDefinedPlayers(cur.getHostCard(), cur.getParam("TargetingPlayer"), cur).get(0);
+                    cur.clearTargets();
+                    cur.setTargetingPlayer(targetingPlayer);
+                    // TODO AI won't really understand it should make a bad choice
+                    targetingPlayer.getController().chooseTargetsFor(cur);
+                    // TODO there's a chance a target gets selected here that makes the cost unaffordable
+                }
+                cur = cur.getSubAbility();
+            }
+        };
     }
 
     @Override
@@ -859,13 +881,13 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CardCollection chooseCardsToRevealFromHand(int min, int max, CardCollectionView valid) {
+    public CardCollectionView chooseCardsToRevealFromHand(int min, int max, CardCollectionView valid) {
         int numCardsToReveal = Math.min(max, valid.size());
-        return numCardsToReveal == 0 ? new CardCollection() : (CardCollection)valid.subList(0, numCardsToReveal);
+        return numCardsToReveal == 0 ? CardCollection.EMPTY : (CardCollection)valid.subList(0, numCardsToReveal);
     }
 
     @Override
-    public Player chooseStartingPlayer(boolean isFirstgame) {
+    public Player chooseStartingPlayer(boolean isFirstGame) {
         return this.player; // AI is brave :)
     }
 
@@ -1289,9 +1311,8 @@ public class PlayerControllerAi extends PlayerController {
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(host, sa.getParam("TargetingPlayer"), sa).get(0);
             sa.setTargetingPlayer(targetingPlayer);
             return targetingPlayer.getController().chooseTargetsFor(sa);
-        } else {
-            return brains.doTrigger(sa, isMandatory);
         }
+        return brains.doTrigger(sa, isMandatory);
     }
 
     @Override

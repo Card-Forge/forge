@@ -938,20 +938,18 @@ public class AiController {
             Cost payCosts = sa.getPayCosts();
             if (payCosts != null) {
                 ManaCost mana = payCosts.getTotalMana();
-                if (mana != null) {
-                    if (mana.countX() > 0) {
-                        // Set PayX here to maximum value.
-                        final int xPay = ComputerUtilCost.getMaxXValue(sa, player, sa.isTrigger());
-                        if (xPay <= 0) {
-                            return AiPlayDecision.CantAffordX;
-                        }
-                        sa.setXManaCostPaid(xPay);
-                    } else if (mana.isZero()) {
-                        // if mana is zero, but card mana cost does have X, then something is wrong
-                        ManaCost cardCost = card.getManaCost();
-                        if (cardCost != null && cardCost.countX() > 0) {
-                            return AiPlayDecision.CantPlayAi;
-                        }
+                if (mana.countX() > 0) {
+                    // Set PayX here to maximum value.
+                    final int xPay = ComputerUtilCost.getMaxXValue(sa, player, sa.isTrigger());
+                    if (xPay <= 0) {
+                        return AiPlayDecision.CantAffordX;
+                    }
+                    sa.setXManaCostPaid(xPay);
+                } else if (mana.isZero()) {
+                    // if mana is zero, but card mana cost does have X, then something is wrong
+                    ManaCost cardCost = card.getManaCost();
+                    if (cardCost != null && cardCost.countX() > 0) {
+                        return AiPlayDecision.CantPlayAi;
                     }
                 }
             }
@@ -1685,32 +1683,10 @@ public class AiController {
             return null;
         });
 
-        // Check if any candidate spell has a TargetingPlayer that is a human player.
-        // If so, the AI evaluation will prompt the human for target selection, which can
-        // take arbitrarily long. Use an effectively infinite timeout to avoid cutting off
-        // human input. Otherwise use the normal AI timeout.
-        boolean hasHumanTargetingPlayer = false;
-        for (final SpellAbility sa : all) {
-            SpellAbility cur = sa;
-            while (cur != null) {
-                if (cur.hasParam("TargetingPlayer")) {
-                    Player tp = AbilityUtils.getDefinedPlayers(
-                            cur.getHostCard(), cur.getParam("TargetingPlayer"), cur).get(0);
-                    if (!tp.isAI()) {
-                        hasHumanTargetingPlayer = true;
-                        break;
-                    }
-                }
-                cur = cur.getSubAbility();
-            }
-            if (hasHumanTargetingPlayer) break;
-        }
-        long timeout = hasHumanTargetingPlayer ? Integer.MAX_VALUE : game.getAITimeout();
-
         Thread t = new Thread(future, "Game AI Eval");
         t.start();
         try {
-            return future.get(timeout, TimeUnit.SECONDS);
+            return future.get(game.getAITimeout(), TimeUnit.SECONDS);
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
             try {
                 e.printStackTrace();
