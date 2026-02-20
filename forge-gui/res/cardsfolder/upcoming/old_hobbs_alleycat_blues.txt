@@ -1,0 +1,10 @@
+Name:Old Hobbs, Alleycat Blues
+ManaCost:4 R
+Types:Legendary Creature Cat Mutant Rebel
+PT:4/4
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, create a 2/2 red Mutant creature token. It gains haste until end of turn. Destroy it at the beginning of the next end step.
+SVar:TrigToken:DB$ Token | TokenScript$ r_2_2_mutant | PumpKeywords$ Haste | PumpDuration$ EOT | AtEOT$ Destroy
+A:AB$ Pump | Cost$ 1 W | ValidTgts$ Creature.token+attacking | ValidTgtsDesc$ attacking creature token | KW$ Indestructible | SpellDescription$ Target attacking creature token gains indestructible until end of turn.
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Token
+Oracle:At the beginning of combat on your turn, create a 2/2 red Mutant creature token. It gains haste until end of turn. Destroy it at the beginning of the next end step.\n{1}{W}: Target attacking creature token gains indestructible until end of turn.

@@ -226,7 +226,7 @@ public class DigEffect extends SpellAbilityEffect {
                     if (changeValid.contains("ChosenType")) {
                         changeValid = changeValid.replace("ChosenType", host.getChosenType());
                     }
-                    valid = CardLists.getValidCards(top, changeValid, cont, host, sa);
+                    valid = CardLists.getValidCards(valid, changeValid, cont, host, sa);
                 } else if (!totalCMC && p == chooser && destZone1ChangeNum > 1) {
                     // If all the cards are valid choices, no need for a separate reveal dialog to the chooser
                     delayedReveal = null;

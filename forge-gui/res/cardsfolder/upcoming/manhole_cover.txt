@@ -1,0 +1,9 @@
+Name:Manhole Cover
+ManaCost:2
+Types:Artifact
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When this artifact enters, target creature gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | KW$ Indestructible
+A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME/this artifact> | ValidTgts$ Player | NumCards$ 1 | SpellDescription$ Target player draws a card.
+DeckHas:Ability$Sacrifice
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen this artifact enters, target creature gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)\n{2}, Sacrifice this artifact: Target player draws a card.

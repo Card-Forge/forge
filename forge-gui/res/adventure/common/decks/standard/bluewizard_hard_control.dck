@@ -1,6 +1,6 @@
 [metadata]
 Name=Kojak 3
-[main]
+[Main]
 21 Island|M10
 1 Mox Sapphire
 1 Sapphire Medallion
@@ -25,4 +25,4 @@ Name=Kojak 3
 1 Spire Golem
 1 Dungeon Geists
 1 Master of Waves
-[sideboard]
+[Sideboard]
