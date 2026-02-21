@@ -2,6 +2,6 @@ Name:Sauroform Hybrid
 ManaCost:1 G
 Types:Creature Human Lizard Warrior
 PT:2/2
-A:AB$ PutCounter | Cost$ 4 G G | Adapt$ True | CounterNum$ 4
+A:AB$ PutCounter | Cost$ 4 G G | Adapt$ 4
 DeckHas:Ability$Counters
 Oracle:{4}{G}{G}: Adapt 4. (If this creature has no +1/+1 counters on it, put four +1/+1 counters on it.)
