@@ -175,6 +175,7 @@ public enum ProtocolMethod {
             // If void is expected, any return value is fine
             return;
         }
+        // TODO only fine on disconnect
         if (value == null) {
             return;
         }

@@ -39,7 +39,6 @@ public enum AbilityKey {
     ClassLevel("ClassLevel"),
     CostStack("CostStack"),
     CounterAmount("CounterAmount"),
-    CounteredSA("CounteredSA"),
     CounterNum("CounterNum"),
     CounterMap("CounterMap"),
     CounterTable("CounterTable"),
