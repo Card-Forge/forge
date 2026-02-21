@@ -703,7 +703,7 @@ public abstract class SpellAbilityEffect {
                 eff.copyChangedTextFrom(host);
             }
 
-            game.getEndOfTurn().addUntil(exileEffectCommand(game, eff));
+            game.getEndOfTurn().addUntil(() -> game.getAction().exileEffect(eff));
 
             game.getAction().moveToCommand(eff, sa);
         }
@@ -1064,16 +1064,5 @@ public abstract class SpellAbilityEffect {
                 getDefinedPlayersOrTargeted(cause, "DefinedExiler").get(0) : cause.getActivatingPlayer();
         movedCard.setExiledBy(exiler);
         movedCard.setExiledSA(cause);
-    }
-
-    public static GameCommand exileEffectCommand(final Game game, final Card effect) {
-        return new GameCommand() {
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            public void run() {
-                game.getAction().exileEffect(effect);
-            }
-        };
     }
 }
