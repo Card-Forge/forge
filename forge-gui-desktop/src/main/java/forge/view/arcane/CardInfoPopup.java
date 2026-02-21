@@ -1,17 +1,26 @@
 package forge.view.arcane;
 
+import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.Window;
 import java.awt.Graphics2D;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
+import java.awt.font.TextAttribute;
+import java.awt.font.TextLayout;
+import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
+import java.text.AttributedString;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -36,18 +45,25 @@ import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.card.CardStateName;
 import forge.card.ICardFace;
-import forge.item.PaperCard;
-import forge.item.PaperToken;
+import forge.card.mana.ManaCost;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
+import forge.game.card.CounterType;
+import forge.game.zone.ZoneType;
 import forge.gui.card.KeywordInfoUtil;
 import forge.gui.card.KeywordInfoUtil.KeywordData;
+import forge.item.PaperCard;
+import forge.item.PaperToken;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
+import forge.toolbox.CardFaceSymbols;
 import forge.toolbox.FSkin;
 import forge.toolbox.imaging.FImagePanel;
 import forge.toolbox.imaging.FImageUtil;
+import forge.util.CardTranslation;
 
 /**
  * A floating popup that displays keyword explanations and related card images
@@ -89,6 +105,8 @@ public class CardInfoPopup {
     private boolean cachedHasRelated = false;
     private int cachedImageSize = -1;
     private boolean cachedShowCardImage = false;
+    private boolean cachedShowOverlays = false;
+    private String cachedOverlayState = "";
     private String cachedCardImageKey = "";
 
     // Pending show state
@@ -175,7 +193,7 @@ public class CardInfoPopup {
 
     private static int getThumbnailHeight() {
         final int value = FModel.getPreferences().getPrefInt(FPref.UI_POPUP_IMAGE_SIZE);
-        return Math.max(100, Math.min(500, value));
+        return Math.max(250, Math.min(500, value));
     }
 
     /**
@@ -208,11 +226,20 @@ public class CardInfoPopup {
         final String keywordKey = showKeywords ? nullSafe(state.getKeywordKey()) : "";
         final String cardName = showRelatedCards ? nullSafe(state.getName()) : "";
         final String cardImageKey = showCardImage ? nullSafe(state.getImageKey()) : "";
+        final boolean showOverlays = showCardImage
+                && FModel.getPreferences().getPrefBoolean(FPref.UI_POPUP_CARD_OVERLAYS);
+        // Build a lightweight state key from dynamic overlay properties so the
+        // cache is only invalidated when actual overlay content changes, not on
+        // every mouse move event.
+        final String overlayState = showOverlays
+                ? buildOverlayStateKey(cardView, state) : "";
 
         // Check cache — skip rebuilding if same content and settings
         if (keywordKey.equals(cachedKeywordKey) && cardName.equals(cachedCardName)
                 && thumbnailHeight == cachedImageSize
                 && showCardImage == cachedShowCardImage
+                && showOverlays == cachedShowOverlays
+                && overlayState.equals(cachedOverlayState)
                 && cardImageKey.equals(cachedCardImageKey)) {
             if (!cachedHasKeywords && !cachedHasRelated && !showCardImage) {
                 hidePopup();
@@ -230,6 +257,9 @@ public class CardInfoPopup {
         if (showCardImage) {
             BufferedImage cardImg = FImageUtil.getImage(state);
             if (cardImg != null && !ImageCache.isDefaultImage(cardImg)) {
+                if (showOverlays) {
+                    cardImg = paintOverlaysOnImage(cardImg, cardView);
+                }
                 cardImagePanel.setImage(cardImg);
                 final int imgWidth = (int) (thumbnailHeight * MTG_ASPECT_RATIO);
                 final Dimension imgSize = new Dimension(imgWidth, thumbnailHeight);
@@ -284,6 +314,8 @@ public class CardInfoPopup {
             cachedHasRelated = false;
             cachedImageSize = thumbnailHeight;
             cachedShowCardImage = showCardImage;
+            cachedShowOverlays = showOverlays;
+            cachedOverlayState = overlayState;
             cachedCardImageKey = cardImageKey;
             hidePopup();
             return;
@@ -358,6 +390,8 @@ public class CardInfoPopup {
         cachedHasRelated = hasRelated;
         cachedImageSize = thumbnailHeight;
         cachedShowCardImage = showCardImage;
+        cachedShowOverlays = showOverlays;
+        cachedOverlayState = overlayState;
         cachedCardImageKey = cardImageKey;
 
         // Defer pack/show to let layout complete
@@ -944,6 +978,561 @@ public class CardInfoPopup {
             pill.setMaximumSize(new Dimension(actualPillWidth, Integer.MAX_VALUE));
             targetPanel.add(pill);
         }
+    }
+
+    // --- Card overlay state key ---
+
+    /** Build a lightweight key capturing dynamic overlay state so the cache
+     *  can detect when a rebuild is actually needed. */
+    private static String buildOverlayStateKey(final CardView cv,
+                                                final CardStateView state) {
+        final StringBuilder sb = new StringBuilder(64);
+        sb.append(state.getPower()).append('/').append(state.getToughness());
+        sb.append(',').append(state.getLoyalty());
+        sb.append(',').append(cv.getDamage());
+        sb.append(',').append(cv.isAttacking() ? 'A' : cv.isBlocking() ? 'B' : '-');
+        sb.append(',').append(cv.isSick() ? 'S' : '-');
+        sb.append(',').append(cv.isPhasedOut() ? 'P' : '-');
+        final Map<CounterType, Integer> counters = cv.getCounters();
+        if (counters != null && !counters.isEmpty()) {
+            sb.append(',');
+            for (final Map.Entry<CounterType, Integer> e : counters.entrySet()) {
+                sb.append(e.getKey().getName()).append('=').append(e.getValue()).append(';');
+            }
+        }
+        return sb.toString();
+    }
+
+    // --- Card overlay painting ---
+
+    /**
+     * Composite the same overlays that CardPanel draws (P/T, name, ability
+     * icons, counters, combat status) directly onto a copy of the card image.
+     */
+    static BufferedImage paintOverlaysOnImage(final BufferedImage src,
+                                               final CardView cardView) {
+        final ForgePreferences prefs = FModel.getPreferences();
+        if (!prefs.getPrefBoolean(FPref.UI_SHOW_CARD_OVERLAYS)) {
+            return src;
+        }
+        final CardStateView state = cardView.getCurrentState();
+        if (state == null) {
+            return src;
+        }
+
+        final int w = src.getWidth();
+        final int h = src.getHeight();
+        final BufferedImage copy = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        final Graphics2D g = copy.createGraphics();
+        g.drawImage(src, 0, 0, null);
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+                RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+
+        // Scale factor: slightly larger than CardPanel's h/340 since
+        // tooltip thumbnails are viewed at a larger effective size
+        final float scale = h / 270f;
+        final Font baseFont = new Font("Dialog", Font.BOLD,
+                Math.max(9, Math.round(13 * scale)));
+        final Color outlineColor = Color.BLACK;
+
+        // --- Card name ---
+        if (prefs.getPrefBoolean(FPref.UI_OVERLAY_CARD_NAME)) {
+            final String name = CardTranslation.getTranslatedName(
+                    state.getName());
+            if (name != null && !name.isEmpty()) {
+                final int titleX = Math.round(w * (24f / 480));
+                final int titleY = Math.round(h * (42f / 640));
+                drawOutlinedText(g, name, baseFont, Color.WHITE,
+                        outlineColor, titleX, titleY);
+            }
+        }
+
+        // --- P/T, loyalty, vehicle ---
+        if (prefs.getPrefBoolean(FPref.UI_OVERLAY_CARD_POWER)) {
+            String pt = "";
+            if (state.isCreature() && state.isPlaneswalker()) {
+                pt = state.getPower() + "/" + state.getToughness()
+                        + " (" + state.getLoyalty() + ")";
+            } else if (state.isCreature()) {
+                pt = state.getPower() + "/" + state.getToughness();
+            } else if (state.isVehicle()) {
+                pt = "[" + state.getPower() + "/" + state.getToughness() + "]";
+            } else if (state.isPlaneswalker()) {
+                pt = state.getLoyalty();
+            }
+            if (!pt.isEmpty()) {
+                final Font ptFont = baseFont.deriveFont(
+                        baseFont.getSize2D() * 1.1f);
+                final FontMetrics fm = g.getFontMetrics(ptFont);
+                final int ptX = Math.round(w * (430f / 480))
+                        - fm.stringWidth(pt) / 2;
+                final int ptY = Math.round(h * (650f / 680));
+                drawOutlinedText(g, pt, ptFont, Color.WHITE,
+                        outlineColor, ptX, ptY);
+
+                // Damage marker above P/T
+                final int damage = cardView.getDamage();
+                if (damage > 0) {
+                    final String dmgStr = "\u00BB " + damage + " \u00AB";
+                    final int dmgX = Math.round(w * (430f / 480))
+                            - fm.stringWidth(dmgStr) / 2;
+                    final int dmgY = ptY - Math.round(16 * scale);
+                    drawOutlinedText(g, dmgStr, ptFont, Color.RED,
+                            outlineColor, dmgX, dmgY);
+                }
+            }
+        }
+
+        // --- Card ID ---
+        if (prefs.getPrefBoolean(FPref.UI_OVERLAY_CARD_ID)) {
+            final String id = state.getDisplayId();
+            if (id != null && !id.isEmpty()) {
+                final Font idFont = baseFont.deriveFont(Font.PLAIN,
+                        baseFont.getSize2D() * 0.85f);
+                final int idX = Math.round(w * (24f / 480));
+                final int idY = Math.round(h * (650f / 680));
+                drawOutlinedText(g, id, idFont, new Color(200, 200, 200),
+                        outlineColor, idX, idY);
+            }
+        }
+
+        // --- Mana cost ---
+        if (prefs.getPrefBoolean(FPref.UI_OVERLAY_CARD_MANA_COST)) {
+            final boolean perpetual = prefs.getPrefBoolean(
+                    FPref.UI_OVERLAY_CARD_PERPETUAL_MANA_COST);
+            final ManaCost cost = perpetual
+                    ? state.getManaCost() : state.getOriginalManaCost();
+            if (cost != null && !cost.isNoCost()) {
+                final int symSize = Math.max(10, Math.round(16 * scale));
+                final int manaWidth = cost.getGlyphCount() * (symSize + 1);
+                final int manaX = (w / 2) - (manaWidth / 2);
+                final int manaY = h / 2 - symSize / 2;
+                CardFaceSymbols.draw(g, cost, manaX, manaY, symSize);
+            }
+        }
+
+        // --- Ability icons (battlefield only) ---
+        if (prefs.getPrefBoolean(FPref.UI_OVERLAY_ABILITY_ICONS)
+                && ZoneType.Battlefield.equals(cardView.getZone())) {
+            final int abiScale = w / 7;
+            final int abiX = w / 2 + w / 3;
+            final int abiSpace = w / 7;
+            int abiY = w < 200 ? 25 : 50;
+            abiY = Math.round(abiY * scale);
+
+            abiY = drawAbilityIcons(g, state, cardView,
+                    abiX, abiY, abiScale, abiSpace);
+        }
+
+        // --- Combat status icons ---
+        if (ZoneType.Battlefield.equals(cardView.getZone())) {
+            final int symSize = Math.max(16, Math.round(32 * scale));
+            final int combatX = w / 4 - symSize / 2;
+            final int stateX = w / 2 - symSize / 2;
+            final int ySymbols = h - h / 8 - symSize / 2;
+
+            if (cardView.isAttacking()) {
+                CardFaceSymbols.drawAbilitySymbol("attack", g,
+                        combatX, ySymbols, symSize, symSize);
+            } else if (cardView.isBlocking()) {
+                CardFaceSymbols.drawAbilitySymbol("defend", g,
+                        combatX, ySymbols, symSize, symSize);
+            }
+            if (cardView.isSick()) {
+                CardFaceSymbols.drawAbilitySymbol("summonsick", g,
+                        stateX, ySymbols, symSize, symSize);
+            }
+            if (cardView.isPhasedOut()) {
+                CardFaceSymbols.drawAbilitySymbol("phasing", g,
+                        stateX, ySymbols, symSize, symSize);
+            }
+        }
+
+        // --- Counters ---
+        final Map<CounterType, Integer> counters = cardView.getCounters();
+        if (counters != null && !counters.isEmpty()) {
+            drawCounterOverlay(g, counters, w, h, scale);
+        }
+
+        g.dispose();
+        return copy;
+    }
+
+    /** Draw ability icons on the right side of the card, returning updated Y. */
+    private static int drawAbilityIcons(final Graphics2D g,
+                                         final CardStateView state,
+                                         final CardView cardView,
+                                         final int abiX, int abiY,
+                                         final int abiScale,
+                                         final int abiSpace) {
+        if (cardView.isCommander()) {
+            CardFaceSymbols.drawAbilitySymbol("commander", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        }
+        if (cardView.isRingBearer()) {
+            CardFaceSymbols.drawAbilitySymbol("ringbearer", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        }
+        if (state.hasFlying()) {
+            CardFaceSymbols.drawAbilitySymbol("flying", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        }
+        if (state.hasHaste()) {
+            CardFaceSymbols.drawAbilitySymbol("haste", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        }
+        if (state.hasDoubleStrike()) {
+            CardFaceSymbols.drawAbilitySymbol("doublestrike", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        } else if (state.hasFirstStrike()) {
+            CardFaceSymbols.drawAbilitySymbol("firststrike", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        }
+        if (state.hasAnnihilator()) {
+            CardFaceSymbols.drawAbilitySymbol("annihilator", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        }
+        if (state.hasExalted()) {
+            CardFaceSymbols.drawAbilitySymbol("exalted", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        }
+        if (state.hasDeathtouch()) {
+            CardFaceSymbols.drawAbilitySymbol("deathtouch", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        }
+        if (state.hasToxic()) {
+            CardFaceSymbols.drawAbilitySymbol("toxic", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        }
+        if (state.hasIndestructible()) {
+            CardFaceSymbols.drawAbilitySymbol("indestructible", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        }
+        if (state.hasMenace()) {
+            CardFaceSymbols.drawAbilitySymbol("menace", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        }
+        if (state.hasFear()) {
+            CardFaceSymbols.drawAbilitySymbol("fear", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        }
+        if (state.hasIntimidate()) {
+            CardFaceSymbols.drawAbilitySymbol("intimidate", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        }
+        if (state.hasShadow()) {
+            CardFaceSymbols.drawAbilitySymbol("shadow", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        }
+        if (state.hasHorsemanship()) {
+            CardFaceSymbols.drawAbilitySymbol("horsemanship", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        }
+        if (state.hasHexproof()) {
+            if (!state.getHexproofKey().isEmpty()) {
+                final String[] splitK = state.getHexproofKey().split(":");
+                final List<String> listHK = Arrays.asList(splitK);
+                if (listHK.contains("generic")) {
+                    CardFaceSymbols.drawAbilitySymbol("hexproof", g,
+                            abiX, abiY, abiScale, abiScale);
+                    abiY += abiSpace;
+                }
+                if (listHK.contains("R")) {
+                    CardFaceSymbols.drawAbilitySymbol("hexproofR", g,
+                            abiX, abiY, abiScale, abiScale);
+                    abiY += abiSpace;
+                }
+                if (listHK.contains("B")) {
+                    CardFaceSymbols.drawAbilitySymbol("hexproofB", g,
+                            abiX, abiY, abiScale, abiScale);
+                    abiY += abiSpace;
+                }
+                if (listHK.contains("U")) {
+                    CardFaceSymbols.drawAbilitySymbol("hexproofU", g,
+                            abiX, abiY, abiScale, abiScale);
+                    abiY += abiSpace;
+                }
+                if (listHK.contains("G")) {
+                    CardFaceSymbols.drawAbilitySymbol("hexproofG", g,
+                            abiX, abiY, abiScale, abiScale);
+                    abiY += abiSpace;
+                }
+                if (listHK.contains("W")) {
+                    CardFaceSymbols.drawAbilitySymbol("hexproofW", g,
+                            abiX, abiY, abiScale, abiScale);
+                    abiY += abiSpace;
+                }
+                if (listHK.contains("monocolored")) {
+                    CardFaceSymbols.drawAbilitySymbol("hexproofC", g,
+                            abiX, abiY, abiScale, abiScale);
+                    abiY += abiSpace;
+                }
+            } else {
+                CardFaceSymbols.drawAbilitySymbol("hexproof", g,
+                        abiX, abiY, abiScale, abiScale);
+                abiY += abiSpace;
+            }
+        } else if (state.hasShroud()) {
+            CardFaceSymbols.drawAbilitySymbol("shroud", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        }
+        if (state.hasVigilance()) {
+            CardFaceSymbols.drawAbilitySymbol("vigilance", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        }
+        if (state.hasTrample()) {
+            CardFaceSymbols.drawAbilitySymbol("trample", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        }
+        if (state.hasReach()) {
+            CardFaceSymbols.drawAbilitySymbol("reach", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        }
+        if (state.hasLifelink()) {
+            CardFaceSymbols.drawAbilitySymbol("lifelink", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        }
+        if (state.hasWard()) {
+            CardFaceSymbols.drawAbilitySymbol("ward", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        }
+        if (state.hasWither()) {
+            CardFaceSymbols.drawAbilitySymbol("wither", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        }
+        if (state.hasDefender()) {
+            CardFaceSymbols.drawAbilitySymbol("defender", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        }
+        // Protection icons
+        if (!state.getProtectionKey().isEmpty()) {
+            abiY = drawProtectionIcons(g, state.getProtectionKey(),
+                    abiX, abiY, abiScale, abiSpace);
+        }
+        return abiY;
+    }
+
+    /** Draw protection icons matching CardPanel logic. */
+    private static int drawProtectionIcons(final Graphics2D g,
+                                            final String protKey,
+                                            final int abiX, int abiY,
+                                            final int abiScale,
+                                            final int abiSpace) {
+        if (protKey.contains("everything") || protKey.contains("allcolors")) {
+            CardFaceSymbols.drawAbilitySymbol("protectAll", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        } else if (protKey.contains("coloredspells")) {
+            CardFaceSymbols.drawAbilitySymbol("protectColoredSpells", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        } else if (protKey.equals("R")) {
+            CardFaceSymbols.drawAbilitySymbol("protectR", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        } else if (protKey.equals("G")) {
+            CardFaceSymbols.drawAbilitySymbol("protectG", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        } else if (protKey.equals("B")) {
+            CardFaceSymbols.drawAbilitySymbol("protectB", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        } else if (protKey.equals("U")) {
+            CardFaceSymbols.drawAbilitySymbol("protectU", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        } else if (protKey.equals("W")) {
+            CardFaceSymbols.drawAbilitySymbol("protectW", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        } else if (isProtKeyPair(protKey, "R", "G")) {
+            CardFaceSymbols.drawAbilitySymbol("protectRG", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        } else if (isProtKeyPair(protKey, "R", "B")) {
+            CardFaceSymbols.drawAbilitySymbol("protectRB", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        } else if (isProtKeyPair(protKey, "R", "U")) {
+            CardFaceSymbols.drawAbilitySymbol("protectRU", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        } else if (isProtKeyPair(protKey, "R", "W")) {
+            CardFaceSymbols.drawAbilitySymbol("protectRW", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        } else if (isProtKeyPair(protKey, "G", "B")) {
+            CardFaceSymbols.drawAbilitySymbol("protectGB", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        } else if (isProtKeyPair(protKey, "G", "U")) {
+            CardFaceSymbols.drawAbilitySymbol("protectGU", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        } else if (isProtKeyPair(protKey, "G", "W")) {
+            CardFaceSymbols.drawAbilitySymbol("protectGW", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        } else if (isProtKeyPair(protKey, "B", "U")) {
+            CardFaceSymbols.drawAbilitySymbol("protectBU", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        } else if (isProtKeyPair(protKey, "B", "W")) {
+            CardFaceSymbols.drawAbilitySymbol("protectBW", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        } else if (isProtKeyPair(protKey, "U", "W")) {
+            CardFaceSymbols.drawAbilitySymbol("protectUW", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        } else if (protKey.contains("generic") || protKey.length() > 2) {
+            CardFaceSymbols.drawAbilitySymbol("protectGeneric", g,
+                    abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+        }
+        return abiY;
+    }
+
+    private static boolean isProtKeyPair(final String key,
+                                          final String a, final String b) {
+        return key.equals(a + b) || key.equals(b + a);
+    }
+
+    /** Draw counter tabs or images onto the card overlay. */
+    private static void drawCounterOverlay(final Graphics2D g,
+                                            final Map<CounterType, Integer> counters,
+                                            final int w, final int h,
+                                            final float scale) {
+        final ForgeConstants.CounterDisplayType displayType =
+                ForgeConstants.CounterDisplayType.from(
+                        FModel.getPreferences().getPref(
+                                FPref.UI_CARD_COUNTER_DISPLAY_TYPE));
+        final boolean atTop = ForgeConstants.CounterDisplayLocation.from(
+                FModel.getPreferences().getPref(
+                        FPref.UI_CARD_COUNTER_DISPLAY_LOCATION))
+                == ForgeConstants.CounterDisplayLocation.TOP;
+
+        // Counter image mode (simple icon)
+        if (displayType == ForgeConstants.CounterDisplayType.IMAGE
+                || displayType == ForgeConstants.CounterDisplayType.HYBRID) {
+            int total = 0;
+            for (final int c : counters.values()) {
+                total += c;
+            }
+            if (total > 0) {
+                final int symSize = Math.max(24, Math.round(32 * scale));
+                final int yCounters = h - h / 3 - symSize;
+                final String symName;
+                if (total == 1) symName = "counters1";
+                else if (total == 2) symName = "counters2";
+                else if (total == 3) symName = "counters3";
+                else symName = "countersMulti";
+                CardFaceSymbols.drawAbilitySymbol(symName, g,
+                        -Math.round(15 * scale), yCounters, symSize, symSize);
+            }
+        }
+
+        // Counter text tabs
+        if (displayType == ForgeConstants.CounterDisplayType.TEXT
+                || displayType == ForgeConstants.CounterDisplayType.OLD_WHEN_SMALL
+                || displayType == ForgeConstants.CounterDisplayType.HYBRID) {
+            final Font smallFont = new Font("Dialog", Font.BOLD,
+                    Math.max(8, Math.round(9 * scale)));
+            final Font largeFont = new Font("Dialog", Font.BOLD,
+                    Math.max(9, Math.round(12 * scale)));
+            final int titleY = Math.round(h * (54f / 640)) - 15;
+            final int spaceFromTop = titleY + Math.round(60 * scale);
+            final int boxHeight = Math.round(24 * scale);
+            final int boxBaseWidth = Math.round(58 * scale);
+            final int boxSpacing = 2;
+            int idx = 0;
+            for (final Map.Entry<CounterType, Integer> entry : counters.entrySet()) {
+                final CounterType ct = entry.getKey();
+                final int count = entry.getValue();
+                final FontMetrics lgFm = g.getFontMetrics(largeFont);
+                final int boxW = boxBaseWidth
+                        + lgFm.stringWidth(String.valueOf(count));
+                final int yOff = atTop
+                        ? spaceFromTop - boxHeight + idx * (boxHeight + boxSpacing)
+                        : h - spaceFromTop / 2 - boxHeight + idx * (boxHeight + boxSpacing);
+
+                g.setColor(new Color(0, 0, 0, 200));
+                g.fill(new RoundRectangle2D.Float(0, yOff, boxW, boxHeight, 9, 9));
+                g.fillRect(0, yOff, 9, boxHeight);
+
+                g.setColor(new Color(ct.getRed(), ct.getGreen(), ct.getBlue(), 180));
+                g.setFont(smallFont);
+                g.drawString(ct.getCounterOnCardDisplayName(), 8, yOff + boxHeight / 2 + g.getFontMetrics().getAscent() / 2 - 1);
+                g.setFont(largeFont);
+                g.drawString(String.valueOf(count),
+                        Math.round(52 * scale),
+                        yOff + boxHeight / 2 + lgFm.getAscent() / 2 - 1);
+                idx++;
+            }
+        }
+    }
+
+    /** Draw text with a 1px outline, matching OutlinedLabel's pattern. */
+    private static void drawOutlinedText(final Graphics2D g, final String text,
+                                          final Font font, final Color fg,
+                                          final Color outline,
+                                          final int x, final int y) {
+        if (text == null || text.isEmpty()) {
+            return;
+        }
+        final AttributedString as = new AttributedString(text);
+        as.addAttribute(TextAttribute.FONT, font);
+        final TextLayout layout = new TextLayout(
+                as.getIterator(), g.getFontRenderContext());
+
+        // Drop shadow: draw twice for a thicker effect
+        g.setColor(Color.BLACK);
+        g.setComposite(AlphaComposite.getInstance(
+                AlphaComposite.SRC_OVER, 0.6f));
+        layout.draw(g, x + 2, y + 2);
+        layout.draw(g, x + 3, y + 3);
+
+        // Outline: draw 4x at 1px offsets with partial alpha
+        g.setColor(outline);
+        g.setComposite(AlphaComposite.getInstance(
+                AlphaComposite.SRC_OVER, 0.8f));
+        layout.draw(g, x + 1, y - 1);
+        layout.draw(g, x + 1, y + 1);
+        layout.draw(g, x - 1, y - 1);
+        layout.draw(g, x - 1, y + 1);
+
+        // Foreground: full alpha
+        g.setColor(fg);
+        g.setComposite(AlphaComposite.getInstance(
+                AlphaComposite.SRC_OVER, 1.0f));
+        layout.draw(g, x, y);
     }
 
     // --- Positioning ---

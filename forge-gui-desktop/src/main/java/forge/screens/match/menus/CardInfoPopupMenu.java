@@ -38,6 +38,8 @@ public final class CardInfoPopupMenu {
         menu.add(createSectionHeader(localizer.getMessage("lblHoverTooltip")));
         menu.add(getCheckboxItem(localizer.getMessage("lblCardImage"),
                 FPref.UI_POPUP_CARD_IMAGE));
+        menu.add(getCheckboxItem(localizer.getMessage("lblIncludeCardOverlays"),
+                FPref.UI_POPUP_CARD_OVERLAYS));
         menu.add(getCheckboxItem(localizer.getMessage("lblRelatedCards"),
                 FPref.UI_POPUP_RELATED_CARDS));
         menu.add(getCheckboxItem(localizer.getMessage("lblKeywordExplanations"),
@@ -89,7 +91,7 @@ public final class CardInfoPopupMenu {
         final Color bg = FSkin.getColor(FSkin.Colors.CLR_THEME2).getColor();
         final Color fg = FSkin.getColor(FSkin.Colors.CLR_TEXT).getColor();
         final int rawValue = prefs.getPrefInt(FPref.UI_POPUP_IMAGE_SIZE);
-        final int currentValue = Math.max(100, Math.min(500, rawValue));
+        final int currentValue = Math.max(250, Math.min(500, rawValue));
 
         final JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(bg);
@@ -101,9 +103,9 @@ public final class CardInfoPopupMenu {
         label.setOpaque(true);
         label.setBackground(bg);
 
-        final SkinnedSlider slider = new SkinnedSlider(SwingConstants.HORIZONTAL, 100, 500, currentValue);
-        slider.setMajorTickSpacing(100);
-        slider.setMinorTickSpacing(20);
+        final SkinnedSlider slider = new SkinnedSlider(SwingConstants.HORIZONTAL, 250, 500, currentValue);
+        slider.setMajorTickSpacing(50);
+        slider.setMinorTickSpacing(25);
         slider.setPaintTicks(true);
         slider.setPaintLabels(true);
         slider.setBackground(bg);
