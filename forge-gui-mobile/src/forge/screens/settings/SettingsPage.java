@@ -594,8 +594,8 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             Forge.getLocalizer().getMessage("lblShowCardManaCostOverlays"),
             Forge.getLocalizer().getMessage("nlShowCardManaCostOverlays")), 5);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_CARD_PERPETUAL_MANA_COST,
-            Forge.getLocalizer().getMessage("lblShowCardPerpetualManaCostOverlays"),
-            Forge.getLocalizer().getMessage("nlShowCardPerpetualManaCostOverlays")), 5);
+            Forge.getLocalizer().getMessage("lblShowPerpetualCardManaCostOverlays"),
+            Forge.getLocalizer().getMessage("nlShowPerpetualCardManaCostOverlays")), 5);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_CARD_POWER,
             Forge.getLocalizer().getMessage("lblShowCardPTOverlays"),
             Forge.getLocalizer().getMessage("nlShowCardPTOverlays")), 5);

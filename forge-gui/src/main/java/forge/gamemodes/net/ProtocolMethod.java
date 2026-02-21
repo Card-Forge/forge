@@ -175,6 +175,10 @@ public enum ProtocolMethod {
             // If void is expected, any return value is fine
             return;
         }
+        // TODO only fine on disconnect
+        if (value == null) {
+            return;
+        }
         if (!ReflectionUtil.isInstance(value, returnType)) {
             //throw new IllegalStateException(String.format("Protocol method %s: illegal return object type %s returned by client, expected %s", name(), value.getClass().getName(), getReturnType().getName()));
             System.err.printf("IllegalStateException: Protocol method %s: illegal return object type %s returned by client, expected %s  (ProtocolMethod.java)%n", name(), value.getClass().getName(), getReturnType().getName());

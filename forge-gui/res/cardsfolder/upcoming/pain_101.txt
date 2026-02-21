@@ -1,0 +1,7 @@
+Name:Pain 101
+ManaCost:1 B
+Types:Instant
+A:SP$ Animate | Keywords$ Deathtouch | Triggers$ DiesTrigger | ValidTgts$ Creature | StackDescription$ REP target creature_{c:Targeted} | SpellDescription$ Until end of turn, target creature gains deathtouch and "When this creature dies, return it to the battlefield tapped under its owner's control."
+SVar:DiesTrigger:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this creature dies, return it to the battlefield tapped under its owner's control.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | Defined$ TriggeredNewCardLKICopy
+Oracle:Until end of turn, target creature gains deathtouch and "When this creature dies, return it to the battlefield tapped under its owner's control."

@@ -7,6 +7,7 @@ Type=Expansion
 [cards]
 1 C Action News Crew @Gabriel Tanko
 2 R Agent Bishop, Man in Black @Adrián Rodríguez Pérez
+3 C April O'Neil, Kunoichi Trainee @Jo Cordisco
 4 U Dimensional Exile @Lordigan
 5 C East Wind Avatar @Andrea Tentori Montalto
 6 U Featherbrained Filcher @Jakob Eirich
@@ -14,6 +15,7 @@ Type=Expansion
 8 C Hamato Guardian Stance @Jason Rainville
 9 C High-Flying Ace @Daniel Romanovsky
 10 C Jennika, Bad Apple Big Sister @InHyuk Lee
+11 U Koya, Death from Above @Irina Nordsol
 12 U The Last Ronin's Technique @Adam Volker
 13 R Leader's Talent @Manuel Castañón
 14 C Leonardo, Big Brother @InHyuk Lee
@@ -30,8 +32,10 @@ Type=Expansion
 25 M Triceraton Commander @Nathaniel Himawan
 26 R Turncoat Kunoichi @Manuel Castañón
 27 R Turtles Forever @Devin Elle Kurtz
+28 C Uneasy Alliance @Rose Benjamin
 29 R April O'Neil, Hacktivist @Xabi Gaztelua
 30 U April, Reporter of the Weird @Pauline Voss
+31 U Bespoke Bō @Nathaniel Himawan
 32 C Buzz Bots @Néstor Ossandón Leal
 33 C Crustacean Commando @Narendra Bintara Adi
 34 R Does Machines @Aeron Ng
@@ -39,31 +43,53 @@ Type=Expansion
 36 M Donatello, Mutant Mechanic @Zoltan Boros
 37 C Donatello, Turtle Techie @Ryan Valle
 38 U Donatello, Way with Machines @Svetlin Velinov
+39 U Donatello's Technique @Andreas Zafiratos
+40 U Fugitive Droid @Narendra Bintara Adi
 41 R Kitsune, Dragon's Daughter @Robin Har
 42 R Kitsune's Technique @Rose Benjamin
 43 R Krang, Master Mind @Narendra Bintara Adi
+44 U Metalhead @Daniel Romanovsky
 45 C Mind Transfer Protocol @Chris Seaman
 46 M Mondo Gecko @Maël Ollivier-Henry
 47 C Negate @Ryan Valle
+48 U Ooze Spill @Svetlin Velinov
 49 U Ray Fillet, Man Ray @Mirko Failoni
 50 R Renet, Temporal Apprentice @Yuhong Ding
+51 C Retro-Mutation @Leonardo Santanna
+52 C Return to the Sewers @Miklós Ligeti
 53 C Sewer-veillance Cam @Nicholas Gregory
 54 C Stockman, Mad Fly-entist @Xavier Ribeiro
 55 M Turtles in Time @Inkognit
 56 C Utrom Scientists @Miklós Ligeti
+57 C Anchovy & Banana Pizza @Daniel Romanovsky
 58 R Armaggon, Future Shark @Mathias Kollros
+59 C Bebop, Warthog Warrior @April Prime
 60 M The Cloning of Shredder @Chris Seaman
+61 U Death in the Family @Justyna Dura
+62 U Dream Beavers @Alix Branwyn
+63 C Foot Mystic @Irina Nordsol
+64 C Insectoid Exterminator @Brian Valeza
+65 U Lord Dregg, Insect Invader @Brian Valeza
 66 R Madame Null, Power Broker @Irina Nordsol
 67 R Ninja Teen @Justyna Dura
+68 C Oroku Saki, Shredder Rising @Randy Gallegos
+69 C Pain 101 @Thomas Chamberlain-Keen
+70 U Paramecia Coloniex @Brian Valeza
 71 R Rat King, Verminister @Miklós Ligeti
 72 R Savanti Romero, Time's Exile @Michele Giorgi
 73 R Shark Shredder, Killer Clone @Nicholas Gregory
 74 U Shredder, Unrelenting @Ryan Pancoast
+75 U Shredder's Armor @Maël Ollivier-Henry
 76 C Shredder's Revenge @Svetlin Velinov
 77 U Shredder's Technique @Dominik Mayer
 78 R South Wind Avatar @InHyuk Lee
+79 U Splinter, Hamato Yoshi @April Prime
 80 R Splinter's Technique @Jo Cordisco
+81 C Squirrelanoids @Eilene Cherie
+82 C Stomped by the Foot @Kim Sokol
 83 M Super Shredder @Néstor Ossandón Leal
+84 C Tunnel Rats @Daniel Romanovsky
+85 C Bot Bashing Time @Xavier Ribeiro
 86 M Broadcast Takeover @Hokyoung Kim
 87 U Casey Jones, Jury-Rig Justiciar @Lordigan
 88 R Casey Jones, Vigilante @Xavier Ribeiro
@@ -77,12 +103,15 @@ Type=Expansion
 96 C Mouser Foundry @Jakob Eirich
 97 C Mutant Town Musicians @Levinky
 98 C Null Group Biological Assets @Miklós Ligeti
+99 U Old Hob, Alleycat Blues @Rose Benjamin
+100 C Purple Dragon Punks @Rose Benjamin
 101 U Raphael, Most Attitude @Thomas Chamberlain-Keen
 102 M Raphael, Ninja Destroyer @Fajareka Setiawan
 103 R Raphael, the Nightwatcher @Greg Staples
 104 C Raphael, Tough Turtle @Nathaniel Himawan
 105 R Raphael's Technique @Andreas Zafiratos
 106 R Ravenous Robots @Kevin Sidharta
+107 C Rock Soldiers @Miklós Ligeti
 108 R Slash, Reptile Rampager @Andrew Mar
 109 U Spicy Oatmeal Pizza @Nicholas Gregory
 110 U Wingnut, Bat on the Belfry @Zoltan Boros
@@ -101,15 +130,22 @@ Type=Expansion
 123 U Mona Lisa, Science Geek @Oriana Menendez
 124 R Mutagen Man, Living Ooze @Ignatius Budi
 125 C Mutant Chain Reaction @Dominik Mayer
+126 U New Generation's Technique @Dominik Mayer
 127 U Novel Nunchaku @Marina Ortega Lorente
 128 R Party Dude @Gabriel Rubio
 129 C Primordial Pachyderm @Andrey Kuzinskiy
 130 C Ragamuffin Raptor @Inkognit
+131 C Rocksteady, Crash Courser @Filipe Pagliuso
+132 U Saved by the Shell @Leonardo Santanna
 133 C Tenderize @Jo Cordisco
 134 R Transdimensional Bovine @Lius Lasahido
 135 R Turtle Power! @Hokyoung Kim
+136 U Venus, Torn Between Worlds @April Prime
+137 U West Wind Avatar @Oriana Menendez
 138 C Zoo Escapees @Mirko Failoni
+139 U Baxter Stockman @Randy Gallegos
 140 R Bebop & Rocksteady @Néstor Ossandón Leal
+141 U Brilliance Unleashed @Hokyoung Kim
 142 M Dark Leo & Shredder @Thomas Chamberlain-Keen
 143 R Don & Leo, Problem Solvers @Néstor Ossandón Leal
 144 R Don & Raph, Hard Science @Anthony Devine
@@ -117,7 +153,10 @@ Type=Expansion
 146 C Foot Elite @Zoltan Boros
 147 C Foot Ninjas @Miklós Ligeti
 148 U Genghis Frog @Zoltan Boros
+149 U Go Ninja Go @Patrick Gañas
+150 C Ice Cream Kitty @Maël Ollivier-Henry
 151 U Karai, Future of the Foot @Lius Lasahido
+152 U Karai's Technique @Mathias Kollros
 153 R Krang & Shredder @Néstor Ossandón Leal
 154 M The Last Ronin @Hokyoung Kim
 155 U Lessons from Life @Kevin Sidharta
@@ -125,23 +164,36 @@ Type=Expansion
 157 R Mikey & Don, Party Planners @Gabriel Rubio
 158 R Mikey & Leo, Chaos & Order @Jason Rainville
 159 C Mouser Mark III @Gabriel Tanko
+160 U The Neutrinos @Brandon L. Hunt
+161 C Nobody @Yuhong Ding
 162 M North Wind Avatar @Andrey Kuzinskiy
+163 U Pizza Face, Gastromancer @Villarrte
+164 C Punk Frogs @Michele Giorgi
+165 C Putrid Pals @Kevin Sidharta
 166 R Raph & Leo, Sibling Rivals @Fajareka Setiawan
 167 R Raph & Mikey, Troublemakers @Aaron J. Riley
 168 C Slithering Cryptid @Nicholas Gregory
 169 R Splinter, Radical Rat @Manuel Castañón
+170 U Tainted Treats @Jakob Eirich
 171 R Tokka & Rahzar, Terrible Twos @Yuhong Ding
 172 R Chrome Dome @Mathias Kollros
 173 U Everything Pizza @James Bousema
 174 U Henchbots @Lordigan
 175 M Krang, Utrom Warlord @Lordigan
+176 C Omni-Cheese Pizza @Gabriel Tanko
 177 R The Ooze @Gabriel Tanko
 178 U Skateboard @Hokyoung Kim
 179 M Technodrome @Greg Staples
+180 U Turtle Blimp @Jakob Eirich
 181 R Turtle Van @Jakob Eirich
 182 R Weather Maker @Florent Lebrun
+183 C Dimension X @Maël Ollivier-Henry
 184 C Escape Tunnel @Aenami
+185 C Foot Headquarters @Hokyoung Kim
+186 C Illegitimate Business @Miklós Ligeti
+187 C Mutant Town @Josu Solano
 188 R Northampton Farm @Marina Ortega Lorente
+189 C TCRI Building @Aenami
 190 U Turtle Lair @Marina Ortega Lorente
 191 L Plains @BEMOCS
 192 L Island @BEMOCS
@@ -180,6 +232,7 @@ Type=Expansion
 225 R Sally Pride, Lioness Leader @Gregg Schigiel
 226 M Triceraton Commander @Florey
 227 R April O'Neil, Hacktivist @Felipe Sobreiro
+228 U Donatello's Technique @Florey
 229 R Kitsune's Technique @William Tempest
 230 R Krang, Master Mind @Florey
 231 M Mondo Gecko @Florey
@@ -191,9 +244,11 @@ Type=Expansion
 237 R Raphael's Technique @Daniel Elson
 238 R Groundchuck & Dirtbag @Michael Walsh
 239 R Michelangelo's Technique @Florey
+240 U New Generation's Technique @William Tempest
 241 R Bebop & Rocksteady @Michael Walsh
 242 R Don & Leo, Problem Solvers @Florey
 243 R Don & Raph, Hard Science @Caleb Meurer
+244 U Karai's Technique @Caleb Meurer
 245 R Krang & Shredder @Daniel Elson
 246 R Mikey & Don, Party Planners @Caleb Meurer
 247 R Mikey & Leo, Chaos & Order @Florey

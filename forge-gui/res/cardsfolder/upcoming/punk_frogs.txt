@@ -1,0 +1,6 @@
+Name:Punk Frogs
+ManaCost:3 GU GU
+Types:Creature Frog Mutant Rebel
+PT:4/5
+K:Ward:3
+Oracle:Ward {3} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {3}.)

@@ -3,7 +3,7 @@ ManaCost:U
 Types:Creature Salamander Drake
 PT:1/1
 K:Flying
-K:Adapt:4:7 U:X:instant and sorcery card in your graveyard
+A:AB$ PutCounter | Cost$ 7 U | Adapt$ 4 | ReduceCost$ X | SpellDescription$ Adapt 4. This ability costs {1} less to activate for each instant and sorcery card in your graveyard. (If this creature has no +1/+1 counters on it, put four +1/+1 counters on it.)
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
 DeckHas:Ability$Counters
 Oracle:Flying\n{7}{U}: Adapt 4. This ability costs {1} less to activate for each instant and sorcery card in your graveyard. (If this creature has no +1/+1 counters on it, put four +1/+1 counters on it.)

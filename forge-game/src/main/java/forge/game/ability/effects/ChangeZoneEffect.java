@@ -38,6 +38,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
     @Override
     public void buildSpellAbility(SpellAbility sa) {
+        super.buildSpellAbility(sa);
         AbilityFactory.adjustChangeZoneTarget(sa.getMapParams(), sa);
     }
 
@@ -684,7 +685,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                     // If it would leave the battlefield, exile it instead of putting it anywhere else.
                     addLeaveBattlefieldReplacement(eff, "Exile");
-                    movedCard.addLeavesPlayCommand(exileEffectCommand(game, eff));
+                    movedCard.addLeavesPlayCommand(() -> game.getAction().exileEffect(eff));
 
                     game.getAction().moveToCommand(eff, sa);
 
