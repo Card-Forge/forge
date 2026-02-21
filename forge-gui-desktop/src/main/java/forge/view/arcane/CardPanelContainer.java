@@ -299,10 +299,19 @@ public abstract class CardPanelContainer extends SkinnedPanel {
                 cardInfoPopup = new CardInfoPopup(
                         SwingUtilities.getWindowAncestor(this));
             }
-            final Point screenLoc = panel.getCardLocationOnScreen();
+            // When tapped, use component bounds (which encompass the rotated visual)
+            // instead of logical card bounds to prevent popup overlapping the card
+            final Point screenLoc;
+            final Dimension cardSize;
+            if (panel.isTapped()) {
+                screenLoc = panel.getLocationOnScreen();
+                cardSize = panel.getSize();
+            } else {
+                screenLoc = panel.getCardLocationOnScreen();
+                cardSize = new Dimension(panel.getCardWidth(), panel.getCardHeight());
+            }
             cardInfoPopup.showForCard(panel.getCard(), screenLoc,
-                    new Dimension(panel.getCardWidth(), panel.getCardHeight()),
-                    showKeywords, showRelated, showCardImage);
+                    cardSize, showKeywords, showRelated, showCardImage);
         } else if (cardInfoPopup != null) {
             cardInfoPopup.hidePopup();
         }
