@@ -26,6 +26,7 @@ import forge.game.zone.ZoneType;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
+import forge.ai.ComputerUtil;
 
 import java.util.List;
 
@@ -81,18 +82,14 @@ public class InputLondonMulligan extends InputSyncronizedBase {
 
     @Override
     protected final void onCancel() {
-        int cardsLeft = toReturn - selected.size();
-        int count = 0;
-        for(Card c : player.getZone(ZoneType.Hand).getCards()) {
+        // Use the AI to determine the best cards to return to the library
+        CardCollectionView toMulligan = ComputerUtil.chooseBestCardsToReturn(player, toReturn);
+
+        for (Card c : toMulligan) {
             if (selected.contains(c)) { continue; }
 
             selected.add(c);
-            setCardHighlight(c, selected.contains(c));
-            count++;
-
-            if (cardsLeft == count) {
-                break;
-            }
+            setCardHighlight(c, true);
         }
 
         onOk();
