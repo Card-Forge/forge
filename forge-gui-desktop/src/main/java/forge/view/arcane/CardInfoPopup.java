@@ -264,6 +264,8 @@ public class CardInfoPopup {
             }
             // Sort by card text order
             KeywordInfoUtil.sortByOracleText(keywordList, oracleText);
+            // Append dynamic count annotations (e.g. devotion, domain)
+            KeywordInfoUtil.annotateKeywordCounts(keywordList, cardView);
             hasKeywords = !keywordList.isEmpty();
         }
 

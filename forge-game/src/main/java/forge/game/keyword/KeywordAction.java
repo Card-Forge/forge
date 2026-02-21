@@ -121,7 +121,11 @@ public enum KeywordAction {
     BLIGHT(false),
 
     // Game concepts (not 701.x actions, but useful to explain)
-    DEVOTION(false);
+    DEVOTION(false),
+    DOMAIN(false),
+    METALCRAFT(false),
+    THRESHOLD(false),
+    DELIRIUM(false);
 
     /** True for fundamental game actions (destroy, exile, sacrifice, etc.) that don't need tooltip explanations. */
     public final boolean basic;

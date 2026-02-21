@@ -1,14 +1,22 @@
 package forge.gui.card;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import forge.card.CardType;
+import forge.card.CardTypeView;
+import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
+import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordAction;
 import forge.game.keyword.KeywordInterface;
+import forge.game.player.PlayerView;
+import forge.util.Localizer;
 
 /**
  * Platform-neutral utility for building keyword info (names + reminder text)
@@ -216,6 +224,207 @@ public final class KeywordInfoUtil {
             final int posB = findKeywordPosition(lowerText, b.name);
             return Integer.compare(posA, posB);
         });
+    }
+
+    /**
+     * Post-process keyword entries to append dynamic count annotations where
+     * applicable (e.g. Affinity, Devotion, Domain, Metalcraft, Threshold,
+     * Delirium). Counts are computed client-side from view objects.
+     * Modifies both the keyword name (short count) and reminder text (detail).
+     */
+    public static void annotateKeywordCounts(final List<KeywordData> keywords,
+                                              final CardView cardView) {
+        if (keywords.isEmpty() || cardView == null) {
+            return;
+        }
+        final PlayerView controller = cardView.getController();
+        if (controller == null) {
+            return;
+        }
+        final Localizer localizer = Localizer.getInstance();
+        for (int i = 0; i < keywords.size(); i++) {
+            final KeywordData kw = keywords.get(i);
+            final String lowerName = kw.name.toLowerCase()
+                    .replaceAll("\\{[^}]+}", "").trim();
+            KeywordData annotated = null;
+
+            if (lowerName.startsWith("affinity for ")) {
+                annotated = annotateAffinity(kw, lowerName, controller, localizer);
+            } else if (lowerName.equals("devotion")) {
+                annotated = annotateDevotion(kw, cardView, controller, localizer);
+            } else if (lowerName.equals("domain")) {
+                annotated = annotateDomain(kw, controller, localizer);
+            } else if (lowerName.equals("metalcraft")) {
+                annotated = annotateMetalcraft(kw, controller, localizer);
+            } else if (lowerName.equals("threshold")) {
+                annotated = annotateThreshold(kw, controller, localizer);
+            } else if (lowerName.equals("delirium")) {
+                annotated = annotateDelirium(kw, controller, localizer);
+            }
+
+            if (annotated != null) {
+                keywords.set(i, annotated);
+            }
+        }
+    }
+
+    private static KeywordData annotateAffinity(final KeywordData kw,
+                                                 final String lowerName,
+                                                 final PlayerView controller,
+                                                 final Localizer localizer) {
+        // Type name from keyword is plural (e.g. "artifacts"); singularize for
+        // hasStringType which checks against CoreType enum values ("Artifact")
+        String type = lowerName.substring("affinity for ".length()).trim();
+        if (type.endsWith("s")) {
+            type = type.substring(0, type.length() - 1);
+        }
+        int count = 0;
+        for (final CardView c : controller.getBattlefield()) {
+            final CardStateView st = c.getCurrentState();
+            if (st != null && st.getType() != null
+                    && st.getType().hasStringType(type)) {
+                count++;
+            }
+        }
+        final String plural = count == 1 ? type : type + "s";
+        final String reminder = localizer.getMessage("lblAffinityCount",
+                count, plural);
+        return new KeywordData(kw.name + " (" + count + ")",
+                appendAnnotation(kw.reminderText, reminder));
+    }
+
+    private static KeywordData annotateDevotion(final KeywordData kw,
+                                                 final CardView cardView,
+                                                 final PlayerView controller,
+                                                 final Localizer localizer) {
+        final CardStateView state = cardView.getCurrentState();
+        if (state == null) {
+            return null;
+        }
+        final String oracle = state.getOracleText();
+        if (oracle == null) {
+            return null;
+        }
+        final String lowerOracle = oracle.toLowerCase();
+        final String[] colorNames = {"white", "blue", "black", "red", "green"};
+        final String[] colorSymbols = {"{W}", "{U}", "{B}", "{R}", "{G}"};
+        final ManaCostShard[] colorShards = {
+            ManaCostShard.WHITE, ManaCostShard.BLUE, ManaCostShard.BLACK,
+            ManaCostShard.RED, ManaCostShard.GREEN
+        };
+        ManaCostShard targetShard = null;
+        String targetSymbol = null;
+        String targetColorName = null;
+        for (int c = 0; c < colorNames.length; c++) {
+            if (lowerOracle.contains("devotion to " + colorNames[c])) {
+                targetShard = colorShards[c];
+                targetSymbol = colorSymbols[c];
+                targetColorName = colorNames[c];
+                break;
+            }
+        }
+        if (targetShard == null) {
+            return null;
+        }
+        int devotion = 0;
+        for (final CardView c : controller.getBattlefield()) {
+            final CardStateView st = c.getCurrentState();
+            if (st == null) {
+                continue;
+            }
+            final ManaCost cost = st.getManaCost();
+            if (cost == null) {
+                continue;
+            }
+            devotion += cost.getShardCount(targetShard);
+        }
+        final String newName = localizer.getMessage("lblDevotionCountTitle",
+                targetColorName, devotion);
+        final String reminder = localizer.getMessage("lblDevotionCount",
+                targetSymbol, devotion);
+        return new KeywordData(newName,
+                appendAnnotation(kw.reminderText, reminder));
+    }
+
+    private static KeywordData annotateDomain(final KeywordData kw,
+                                               final PlayerView controller,
+                                               final Localizer localizer) {
+        final String[] basicLandTypes = {
+            "Plains", "Island", "Swamp", "Mountain", "Forest"
+        };
+        final Set<String> found = new HashSet<>();
+        for (final CardView c : controller.getBattlefield()) {
+            final CardStateView st = c.getCurrentState();
+            if (st == null || st.getType() == null) {
+                continue;
+            }
+            final CardTypeView type = st.getType();
+            if (!type.isLand()) {
+                continue;
+            }
+            for (final String blt : basicLandTypes) {
+                if (type.hasSubtype(blt)) {
+                    found.add(blt);
+                }
+            }
+        }
+        final int count = found.size();
+        final String reminder = localizer.getMessage("lblDomainCount",
+                count, count == 1 ? "" : "s");
+        return new KeywordData(kw.name + " (" + count + ")",
+                appendAnnotation(kw.reminderText, reminder));
+    }
+
+    private static KeywordData annotateMetalcraft(final KeywordData kw,
+                                                   final PlayerView controller,
+                                                   final Localizer localizer) {
+        int count = 0;
+        for (final CardView c : controller.getBattlefield()) {
+            final CardStateView st = c.getCurrentState();
+            if (st != null && st.getType() != null && st.getType().isArtifact()) {
+                count++;
+            }
+        }
+        final String reminder = localizer.getMessage("lblMetalcraftCount",
+                count, count == 1 ? "" : "s");
+        return new KeywordData(kw.name + " (" + count + ")",
+                appendAnnotation(kw.reminderText, reminder));
+    }
+
+    private static KeywordData annotateThreshold(final KeywordData kw,
+                                                  final PlayerView controller,
+                                                  final Localizer localizer) {
+        final int count = controller.getGraveyard().size();
+        final String reminder = localizer.getMessage("lblThresholdCount",
+                count, count == 1 ? "" : "s");
+        return new KeywordData(kw.name + " (" + count + ")",
+                appendAnnotation(kw.reminderText, reminder));
+    }
+
+    private static KeywordData annotateDelirium(final KeywordData kw,
+                                                 final PlayerView controller,
+                                                 final Localizer localizer) {
+        final Set<CardType.CoreType> types = new HashSet<>();
+        for (final CardView c : controller.getGraveyard()) {
+            final CardStateView st = c.getCurrentState();
+            if (st == null || st.getType() == null) {
+                continue;
+            }
+            for (final CardType.CoreType ct : st.getType().getCoreTypes()) {
+                types.add(ct);
+            }
+        }
+        final int count = types.size();
+        final String reminder = localizer.getMessage("lblDeliriumCount",
+                count, count == 1 ? "" : "s");
+        return new KeywordData(kw.name + " (" + count + ")",
+                appendAnnotation(kw.reminderText, reminder));
+    }
+
+    private static String appendAnnotation(final String reminderText,
+                                              final String annotation) {
+        return reminderText.isEmpty() ? annotation
+                : reminderText + " " + annotation;
     }
 
     // --- Private helpers ---
