@@ -49,7 +49,30 @@ public abstract class SpellAbilityEffect {
         return sa.getDescription();
     }
 
-    public void buildSpellAbility(final SpellAbility sa) {}
+    public void buildSpellAbility(final SpellAbility sa) {
+        if (sa.hasParam("Forecast")) {
+            sa.putParam("ActivationZone", "Hand");
+            sa.putParam("ActivationLimit", "1");
+            sa.putParam("ActivationPhases", "Upkeep");
+            sa.putParam("PlayerTurn", "True");
+            sa.putParam("PrecostDesc", "Forecast — ");
+        }
+        if (sa.isBoast()) {
+            sa.putParam("PresentDefined", "Self");
+            sa.putParam("IsPresent", "Card.attackedThisTurn");
+            sa.putParam("PrecostDesc", "Boast — ");
+        }
+        if (sa.isExhaust()) {
+            sa.putParam("PrecostDesc", "Exhaust — ");
+        }
+        if (sa.isPowerUp()) {
+            sa.putParam("PrecostDesc", "Power-Up — ");
+        }
+
+        if (sa.hasParam("Named")) {
+            sa.setName(sa.getParam("Named"));
+        }
+    }
 
     /**
      * Returns this effect description with needed prelude and epilogue.
