@@ -118,7 +118,10 @@ public enum KeywordAction {
     AIRBEND(false),
     EARTHBEND(false),
     WATERBEND(false),
-    BLIGHT(false);
+    BLIGHT(false),
+
+    // Game concepts (not 701.x actions, but useful to explain)
+    DEVOTION(false);
 
     /** True for fundamental game actions (destroy, exile, sacrifice, etc.) that don't need tooltip explanations. */
     public final boolean basic;

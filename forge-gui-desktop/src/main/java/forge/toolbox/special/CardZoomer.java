@@ -394,7 +394,53 @@ public enum CardZoomer {
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         side.add(scroll, java.awt.BorderLayout.CENTER);
 
+        // Click anywhere on the side panel dismisses the zoomer
+        final MouseAdapter dismissClick = new MouseAdapter() {
+            @Override public void mouseReleased(final MouseEvent e) {
+                closeZoomer();
+            }
+        };
+        addMouseListenerRecursive(side, dismissClick);
+
+        // Replace scroll pane's default wheel behavior:
+        // scroll-down dismisses unless scrollbar can still scroll further
+        for (final java.awt.event.MouseWheelListener l : scroll.getMouseWheelListeners()) {
+            scroll.removeMouseWheelListener(l);
+        }
+        scroll.addMouseWheelListener(e -> {
+            if (isButtonMode || !isMouseWheelEnabled) {
+                e.consume();
+                return;
+            }
+            isMouseWheelEnabled = false;
+            if (e.getWheelRotation() > 0) {
+                final javax.swing.JScrollBar vbar = scroll.getVerticalScrollBar();
+                if (vbar.isVisible()
+                        && vbar.getValue() + vbar.getVisibleAmount() < vbar.getMaximum()) {
+                    vbar.setValue(vbar.getValue()
+                            + e.getUnitsToScroll() * vbar.getUnitIncrement(1));
+                    startMouseWheelCoolDownTimer(250);
+                } else {
+                    closeZoomer();
+                }
+            } else {
+                toggleCardImage();
+                startMouseWheelCoolDownTimer(250);
+            }
+            e.consume();
+        });
+
         return side;
+    }
+
+    private static void addMouseListenerRecursive(final java.awt.Component comp,
+                                                   final MouseAdapter listener) {
+        comp.addMouseListener(listener);
+        if (comp instanceof java.awt.Container) {
+            for (final java.awt.Component child : ((java.awt.Container) comp).getComponents()) {
+                addMouseListenerRecursive(child, listener);
+            }
+        }
     }
 
     private int getInitialRotation() {

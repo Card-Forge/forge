@@ -19,9 +19,17 @@ public class KeywordWithType extends KeywordInstance<KeywordWithType> implements
 
     @Override
     public String getTitle() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(this.getKeyword()).append(" ").append(descType);
-        return sb.toString();
+        switch (getKeyword()) {
+            case LANDWALK:
+                // "Swampwalk", "Islandwalk", etc. instead of "Landwalk Swamp"
+                return Character.toUpperCase(descType.charAt(0))
+                        + descType.substring(1) + "walk";
+            case AFFINITY:
+                // "Affinity for artifacts" instead of "Affinity artifact"
+                return "Affinity for " + descType;
+            default:
+                return this.getKeyword() + " " + descType;
+        }
     }
 
     @Override

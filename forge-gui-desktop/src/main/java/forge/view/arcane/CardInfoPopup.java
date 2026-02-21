@@ -31,8 +31,10 @@ import org.apache.commons.lang3.tuple.Pair;
 import forge.CachedCardImage;
 import forge.ImageCache;
 import forge.StaticData;
+import forge.ImageKeys;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
+import forge.card.CardStateName;
 import forge.card.ICardFace;
 import forge.item.PaperCard;
 import forge.item.PaperToken;
@@ -624,30 +626,45 @@ public class CardInfoPopup {
     private static void addSpecializeFaces(final List<RelatedCardEntry> entries,
                                             final CardRules rules, final String cardName,
                                             final StaticData data) {
-        final Map<?, ICardFace> specParts = rules.getSpecializeParts();
+        final Map<CardStateName, ICardFace> specParts = rules.getSpecializeParts();
         if (specParts == null || specParts.isEmpty()) {
             return;
         }
-        for (final ICardFace face : specParts.values()) {
+        // Specialize faces are alternate states of the base card, not separate cards.
+        // Use the base card's image key with color-specific postfixes.
+        final PaperCard baseCard = data.getCommonCards().getCard(cardName);
+        if (baseCard == null) {
+            return;
+        }
+        final String baseKey = baseCard.getImageKey(false);
+        for (final Map.Entry<CardStateName, ICardFace> entry : specParts.entrySet()) {
             try {
-                final String faceName = face.getName();
-                final CardRules faceRules = data.getCommonCards().getRules(faceName);
-                if (faceRules != null) {
-                    final forge.item.PaperCard pc = data.getCommonCards().getCard(faceName);
-                    if (pc != null) {
-                        final String imageKey = pc.getImageKey(false);
-                        final Pair<BufferedImage, Boolean> info =
-                                ImageCache.getCardOriginalImageInfo(imageKey, true);
-                        final BufferedImage img = info.getLeft();
-                        if (img != null) {
-                            entries.add(new RelatedCardEntry("Specializes Into",
-                                    faceName, img, imageKey, info.getRight()));
-                        }
-                    }
+                final String postfix = specializePostfix(entry.getKey());
+                if (postfix == null) {
+                    continue;
+                }
+                final String imageKey = baseKey + postfix;
+                final Pair<BufferedImage, Boolean> info =
+                        ImageCache.getCardOriginalImageInfo(imageKey, true);
+                final BufferedImage img = info.getLeft();
+                if (img != null) {
+                    entries.add(new RelatedCardEntry("Specializes Into",
+                            entry.getValue().getName(), img, imageKey, info.getRight()));
                 }
             } catch (Exception e) {
                 // Skip faces that can't be resolved
             }
+        }
+    }
+
+    private static String specializePostfix(final CardStateName state) {
+        switch (state) {
+            case SpecializeW: return ImageKeys.SPECFACE_W;
+            case SpecializeU: return ImageKeys.SPECFACE_U;
+            case SpecializeB: return ImageKeys.SPECFACE_B;
+            case SpecializeR: return ImageKeys.SPECFACE_R;
+            case SpecializeG: return ImageKeys.SPECFACE_G;
+            default: return null;
         }
     }
 

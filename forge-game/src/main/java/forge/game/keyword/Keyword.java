@@ -17,7 +17,7 @@ public enum Keyword {
     AMPLIFY("Amplify", Amplify.class, false, "As this creature enters, put {%d:+1/+1 counter} on it for each %s card you reveal in your hand."),
     ANNIHILATOR("Annihilator", KeywordWithAmount.class, false, "Whenever this creature attacks, defending player sacrifices {%d:permanent}."),
     ASCEND("Ascend", SimpleKeyword.class, true, "If you control ten or more permanents, you get the city's blessing for the rest of the game."),
-    ASSIST("Assist", SimpleKeyword.class, true, "Another player can pay up to %s of this spell's cost."),
+    ASSIST("Assist", SimpleKeyword.class, true, "Another player can help pay the generic mana cost of this spell."),
     AURA_SWAP("Aura swap", KeywordWithCost.class, false, "%s: You may exchange this Aura with an Aura card in your hand."),
     AWAKEN("Awaken", KeywordWithCostAndAmount.class, false, "If you cast this spell for %s, also put {%d:+1/+1 counter} on target land you control and it becomes a 0/0 Elemental creature with haste. It's still a land."),
     BACKUP("Backup", KeywordWithAmount.class, false, "When this creature enters, put {%1$d:+1/+1 counter} on target creature. If that's another creature, it gains the following ability until end of turn."),

@@ -106,12 +106,18 @@ public final class KeywordInfoUtil {
                 matchTerm = lowerName.substring(0, lowerName.length() - 1) + "ies";
             }
             if (lowerText.contains(matchTerm)) {
-                // Verify it's a word boundary (not part of a larger word)
+                // Verify word boundaries: start must not be preceded by a letter,
+                // and end must be followed by a verb suffix (s/d/ed/es/ing) or
+                // non-letter — prevents "planeswalk" matching "planeswalker"
                 int idx = lowerText.indexOf(matchTerm);
                 while (idx >= 0) {
                     final boolean startOk = idx == 0
                             || !Character.isLetter(lowerText.charAt(idx - 1));
-                    if (startOk) {
+                    final int endIdx = idx + matchTerm.length();
+                    final boolean endOk = endIdx >= lowerText.length()
+                            || !Character.isLetter(lowerText.charAt(endIdx))
+                            || isVerbSuffix(lowerText, endIdx);
+                    if (startOk && endOk) {
                         pendingIndices.add(new int[]{idx, action.ordinal()});
                         existingNames.add(lowerName);
                         break;
@@ -125,6 +131,7 @@ public final class KeywordInfoUtil {
         for (final int[] pair : pendingIndices) {
             final KeywordAction action = allActions[pair[1]];
             final String lowerName = action.getDisplayName().toLowerCase();
+            String displayName = action.getDisplayName();
             String reminder = action.getReminderText();
             if (reminder.contains("N")) {
                 int pos = pair[0] + lowerName.length();
@@ -137,16 +144,26 @@ public final class KeywordInfoUtil {
                 if (pos < lowerText.length()
                         && lowerText.charAt(pos) == ' ') {
                     pos++;
+                    final boolean isDigit = Character.isDigit(lowerText.charAt(pos));
                     final String resolved = parseNumber(lowerText, pos);
                     if (resolved != null) {
                         reminder = reminder.replace("N", resolved);
+                        // Only add number to heading when the card text uses a digit
+                        // (e.g. "scry 2") — spelled-out numbers ("mill three") stay generic
+                        if (isDigit) {
+                            displayName = displayName + " " + resolved;
+                        }
                         if ("1".equals(resolved)) {
                             reminder = reminder.replace("counters", "counter");
                         }
+                    } else {
+                        // Can't resolve number (e.g. "mill half their library")
+                        // — drop reminder text rather than showing literal "N"
+                        reminder = "";
                     }
                 }
             }
-            result.add(new KeywordData(action.getDisplayName(), reminder));
+            result.add(new KeywordData(displayName, reminder));
         }
     }
 
@@ -269,5 +286,23 @@ public final class KeywordInfoUtil {
             }
         }
         return null;
+    }
+
+    /**
+     * Check if the text at {@code pos} starts with a common English verb suffix
+     * (s, d, ed, es, ing) followed by a non-letter. This allows matching
+     * "goads"/"goaded"/"goading" but rejects "planeswalker" (suffix "er").
+     */
+    private static boolean isVerbSuffix(final String text, final int pos) {
+        final String[] suffixes = {"ing", "ed", "es", "s", "d"};
+        for (final String suffix : suffixes) {
+            if (text.startsWith(suffix, pos)) {
+                final int end = pos + suffix.length();
+                if (end >= text.length() || !Character.isLetter(text.charAt(end))) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
