@@ -46,6 +46,7 @@ public class SacrificeAllAi extends SpellAbilityAi {
         }
         Card worstToGain = ComputerUtilCard.getWorstAI(CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.ARTIFACTS));
         if (worstToGain != null && worstToGain.getCMC() > worstToSacrifice.getCMC() + sa.getHostCard().getCMC()) {
+            sa.resetTargets();
             sa.getTargets().add(worstToSacrifice);
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
