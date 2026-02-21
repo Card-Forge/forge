@@ -821,7 +821,6 @@ public class CardInfoPopup {
 
     private static final int FULL_SIZE_MAX = 3;
     private static final int HOVER_MAX_CARDS = 2;
-    private static final int HALF_SIZE_PER_ROW = 4;
 
     public static void populateRelatedCards(final JPanel targetPanel,
                                               final List<RelatedCardEntry> entries,
@@ -1605,11 +1604,6 @@ public class CardInfoPopup {
         public final BufferedImage image;
         public final String imageKey;
         public final boolean placeholder;
-
-        RelatedCardEntry(final String label, final String name,
-                         final BufferedImage image, final String imageKey) {
-            this(label, name, image, imageKey, false);
-        }
 
         RelatedCardEntry(final String label, final String name,
                          final BufferedImage image, final String imageKey,
