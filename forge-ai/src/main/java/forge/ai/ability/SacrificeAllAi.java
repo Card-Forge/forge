@@ -1,14 +1,10 @@
 package forge.ai.ability;
 
 import forge.ai.*;
-import forge.game.card.Card;
-import forge.game.card.CardCollectionView;
+import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-
-import java.util.OptionalInt;
-import java.util.function.Function;
 
 public class SacrificeAllAi extends SpellAbilityAi {
 
@@ -44,15 +40,14 @@ public class SacrificeAllAi extends SpellAbilityAi {
     }
 
     private AiAbilityDecision considerShapeAnew(Player ai, SpellAbility sa) {
-        Function<CardCollectionView, OptionalInt> minArtifactCmc = cards ->
-            cards.stream().filter(Card::isArtifact).mapToInt(Card::getCMC).min();
-
-        int minToSacrifice = minArtifactCmc.apply(ai.getCardsIn(ZoneType.Battlefield)).orElse(100);
-        int minToGain = minArtifactCmc.apply(ai.getCardsIn(ZoneType.Library)).orElse(0);
-        if (minToGain > minToSacrifice + sa.getHostCard().getCMC()) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        Card worstToSacrifice = ComputerUtilCard.getCheapestPermanentAI(CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.ARTIFACTS), sa, true);
+        if (worstToSacrifice != null) {
+            Card worstToGain = ComputerUtilCard.getWorstAI(CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.ARTIFACTS));
+            if (worstToGain != null && worstToGain.getCMC() > worstToSacrifice.getCMC() + sa.getHostCard().getCMC()) {
+                sa.getTargets().add(worstToSacrifice);
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
         }
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 }
