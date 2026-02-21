@@ -3209,32 +3209,6 @@ public class CardFactoryUtil {
             final SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
-        } else if (keyword.startsWith("Monstrosity")) {
-            final String[] k = keyword.split(":");
-            final String magnitude = k[1];
-            final String manacost = k[2];
-
-            final String reduceCost = k.length > 3 ? k[3] : null;
-
-            String desc = "Monstrosity " + magnitude;
-
-            String effect = "AB$ PutCounter | Cost$ " + manacost + " | ConditionPresent$ "
-                    + "Card.Self+!IsMonstrous | Monstrosity$ True | CounterNum$ " + magnitude
-                    + " | CounterType$ P1P1 | StackDescription$ SpellDescription";
-            if (reduceCost != null) {
-                effect += "| ReduceCost$ " + reduceCost;
-                desc += ". This ability costs {1} less to activate for each " + k[4] + ".";
-            }
-
-            if (card.hasSVar("MonstrosityAILogic")) {
-                effect += "| AILogic$ " + card.getSVar("MonstrosityAILogic");
-            }
-
-            effect += "| SpellDescription$ " + desc + " (" + inst.getReminderText() + ")";
-
-            final SpellAbility sa = AbilityFactory.getAbility(effect, card);
-            sa.setIntrinsic(intrinsic);
-            inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Morph")) {
             final String[] k = keyword.split(":");
 

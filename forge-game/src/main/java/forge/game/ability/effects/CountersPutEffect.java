@@ -494,9 +494,11 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         }
                     }
 
-                    // Adapt need extra logic
                     if (sa.hasParam("Adapt") &&
                             !(gameCard.getCounters(CounterEnumType.P1P1) == 0 || StaticAbilityAdapt.anyWithAdapt(sa, gameCard))) {
+                        continue;
+                    }
+                    if (sa.hasParam("Monstrosity") && gameCard.isMonstrous()) {
                         continue;
                     }
 
@@ -554,7 +556,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         gameCard.setMonstrous(true);
                         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(gameCard);
                         // CR 701.37c
-                        runParams.put(AbilityKey.MonstrosityAmount, counterAmount);
+                        runParams.put(AbilityKey.Amount, counterAmount);
                         game.getTriggerHandler().runTrigger(TriggerType.BecomeMonstrous, runParams, false);
                     }
                     if (sa.hasParam("Adapt")) {
@@ -745,9 +747,20 @@ public class CountersPutEffect extends SpellAbilityEffect {
         if (sa.hasParam("Adapt")) {
             sa.putParam("CounterType", "P1P1");
             sa.putParam("CounterNum", sa.getParam("Adapt"));
-            sa.putParam("StackDescription", "SpellDescription");
+            if (!sa.hasParam("StackDescription")) {
+                sa.putParam("StackDescription", "SpellDescription");
+            }
             if (!sa.hasParam("SpellDescription")) {
                 sa.putParam("SpellDescription", "Adapt " + sa.getParam("Adapt"));
+            }
+        } else if (sa.hasParam("Monstrosity")) {
+            sa.putParam("CounterType", "P1P1");
+            sa.putParam("CounterNum", sa.getParam("Monstrosity"));
+            if (!sa.hasParam("StackDescription")) {
+                sa.putParam("StackDescription", "SpellDescription");
+            }
+            if (!sa.hasParam("SpellDescription")) {
+                sa.putParam("SpellDescription", "Monstrosity " + sa.getParam("Monstrosity"));
             }
         }
     }

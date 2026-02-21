@@ -92,7 +92,6 @@ public enum AbilityKey {
     Mana("Mana"),
     MergedCards("MergedCards"),
     Mode("Mode"),
-    MonstrosityAmount("MonstrosityAmount"),
     NaturalResult("NaturalResult"),
     NewCard("NewCard"),
     NewCounterAmount("NewCounterAmount"),
