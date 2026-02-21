@@ -2162,15 +2162,15 @@ public class ComputerUtil {
         return bestRemoval != null ? bestRemoval : CardCollection.EMPTY;
     }
 
-    public static int scoreHand(CardCollectionView handList, Player ai, int cardsToReturn) {
+    public static int scoreHand(CardCollectionView handList, Player player, int cardsToReturn) {
         // TODO Improve hand scoring in relation to cards to return.
         // If final hand size is 5, score a hand based on what that 5 would be.
         // Or if this is really really fast, determine what the 5 would be based on scoring
         // All of the possibilities
 
         int mulliganThreshold = 4; // Sensible default for humans
-        if (ai.getController() instanceof PlayerControllerAi) {
-            AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
+        if (player.getController() instanceof PlayerControllerAi) {
+            AiController aic = ((PlayerControllerAi) player.getController()).getAi();
             mulliganThreshold = aic.getIntProperty(AiProps.MULLIGAN_THRESHOLD);
         }
 
@@ -2182,7 +2182,7 @@ public class ComputerUtil {
             return finalHandSize;
         }
 
-        CardCollectionView library = ai.getCardsIn(ZoneType.Library);
+        CardCollectionView library = player.getCardsIn(ZoneType.Library);
         int landsInDeck = CardLists.count(library, CardPredicates.LANDS);
 
         // no land deck, can't do anything better
