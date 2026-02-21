@@ -41,12 +41,13 @@ public class SacrificeAllAi extends SpellAbilityAi {
 
     private AiAbilityDecision considerShapeAnew(Player ai, SpellAbility sa) {
         Card worstToSacrifice = ComputerUtilCard.getCheapestPermanentAI(CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.ARTIFACTS), sa, true);
-        if (worstToSacrifice != null) {
-            Card worstToGain = ComputerUtilCard.getWorstAI(CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.ARTIFACTS));
-            if (worstToGain != null && worstToGain.getCMC() > worstToSacrifice.getCMC() + sa.getHostCard().getCMC()) {
-                sa.getTargets().add(worstToSacrifice);
-                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            }
+        if (worstToSacrifice == null) {
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+        }
+        Card worstToGain = ComputerUtilCard.getWorstAI(CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.ARTIFACTS));
+        if (worstToGain != null && worstToGain.getCMC() > worstToSacrifice.getCMC() + sa.getHostCard().getCMC()) {
+            sa.getTargets().add(worstToSacrifice);
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
