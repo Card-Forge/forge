@@ -119,20 +119,24 @@ public class GameLauncher {
         ApplicationListener start = Forge.getApp(hw, new Lwjgl3Clipboard(), new Main.DesktopAdapter(switchOrientationFile),
             assetsDir, false, isPortrait, totalRAM, false, 0);
 
-        // If no manual window size is supplied, use the configured one (and adjust for portrait mode if needed)
+        // Final window size adjustment
         if (!manualWindowSize) {
+            // If no manual window size is supplied, get it from settings
             windowWidth = Config.instance().getSettingData().width;
             windowHeight = Config.instance().getSettingData().height;
-            if (isPortrait && (windowHeight < windowWidth)) {
-                // swap width/height
-                int tmp = windowHeight;
-                windowHeight = windowWidth;
-                windowWidth = tmp;
-            } else if (!isPortrait && (windowWidth < windowHeight)) {
-                // swap width/height
-                int tmp = windowHeight;
-                windowHeight = windowWidth;
-                windowWidth = tmp;
+            if (portraitArg || landscapeArg) {
+                // If the user asked for a specific orientation, double check the settings match.
+                if (isPortrait && (windowHeight < windowWidth)) {
+                    // swap width/height
+                    int tmp = windowHeight;
+                    windowHeight = windowWidth;
+                    windowWidth = tmp;
+                } else if (!isPortrait && (windowWidth < windowHeight)) {
+                    // swap width/height
+                    int tmp = windowHeight;
+                    windowHeight = windowWidth;
+                    windowWidth = tmp;
+                }
             }
         }
 
