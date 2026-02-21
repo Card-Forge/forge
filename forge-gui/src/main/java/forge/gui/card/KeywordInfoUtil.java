@@ -15,6 +15,7 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordAction;
 import forge.game.keyword.KeywordInterface;
+import forge.game.keyword.KeywordWithTypeInterface;
 import forge.game.player.PlayerView;
 import forge.util.Localizer;
 
@@ -31,10 +32,18 @@ public final class KeywordInfoUtil {
     public static class KeywordData {
         public final String name;
         public final String reminderText;
+        /** Valid type expression for type-parameterised keywords (e.g. Affinity). */
+        public final String typeParam;
 
         public KeywordData(final String name, final String reminderText) {
+            this(name, reminderText, null);
+        }
+
+        public KeywordData(final String name, final String reminderText,
+                           final String typeParam) {
             this.name = name;
             this.reminderText = reminderText;
+            this.typeParam = typeParam;
         }
     }
 
@@ -70,7 +79,13 @@ public final class KeywordInfoUtil {
                     reminderText = "";
                 }
                 final String name = colorNamesToSymbols(inst.getTitle());
-                result.add(new KeywordData(name, reminderText));
+                String typeParam = null;
+                if (kw == Keyword.AFFINITY
+                        && inst instanceof KeywordWithTypeInterface) {
+                    typeParam = ((KeywordWithTypeInterface) inst)
+                            .getValidType();
+                }
+                result.add(new KeywordData(name, reminderText, typeParam));
                 addedNames.add(kw.toString().toLowerCase());
             } catch (Exception e) {
                 // Skip malformed keyword tokens
@@ -272,25 +287,97 @@ public final class KeywordInfoUtil {
                                                  final String lowerName,
                                                  final PlayerView controller,
                                                  final Localizer localizer) {
-        // Type name from keyword is plural (e.g. "artifacts"); singularize for
-        // hasStringType which checks against CoreType enum values ("Artifact")
-        String type = lowerName.substring("affinity for ".length()).trim();
-        if (type.endsWith("s")) {
-            type = type.substring(0, type.length() - 1);
+        // Use typeParam (valid type expression from keyword parser) for
+        // accurate matching — properly cased for hasStringType.
+        String matchType = kw.typeParam;
+        if (matchType == null) {
+            // Fallback: extract from display name (works for core types only)
+            matchType = lowerName.substring("affinity for ".length()).trim();
+            if (matchType.endsWith("s")) {
+                matchType = matchType.substring(0, matchType.length() - 1);
+            }
         }
         int count = 0;
         for (final CardView c : controller.getBattlefield()) {
-            final CardStateView st = c.getCurrentState();
-            if (st != null && st.getType() != null
-                    && st.getType().hasStringType(type)) {
+            if (cardMatchesAffinityType(c, matchType)) {
                 count++;
             }
         }
-        final String plural = count == 1 ? type : type + "s";
+        // Build display text from typeParam (properly cased singular),
+        // falling back to parsing the title
+        final String singular;
+        if (kw.typeParam != null) {
+            singular = kw.typeParam.toLowerCase();
+        } else {
+            final String typeText = lowerName.substring(
+                    "affinity for ".length()).trim();
+            singular = typeText.endsWith("s")
+                    ? typeText.substring(0, typeText.length() - 1) : typeText;
+        }
+        // Types already ending in "s" (e.g. "plains") are their own plural
+        final String displayType = count == 1 ? singular
+                : (singular.endsWith("s") ? singular : singular + "s");
         final String reminder = localizer.getMessage("lblAffinityCount",
-                count, plural);
+                count, displayType);
         return new KeywordData(kw.name + " (" + count + ")",
-                appendAnnotation(kw.reminderText, reminder));
+                appendAnnotation(kw.reminderText, reminder), kw.typeParam);
+    }
+
+    /** Check whether a card matches an Affinity type expression. */
+    private static boolean cardMatchesAffinityType(final CardView card,
+                                                    final String typeExpr) {
+        final CardStateView st = card.getCurrentState();
+        if (st == null || st.getType() == null) {
+            return false;
+        }
+        if (!typeExpr.contains(".")) {
+            return st.getType().hasStringType(typeExpr);
+        }
+        // Compound expression: all dot-separated parts must match
+        for (final String part : typeExpr.split("\\.")) {
+            if (!matchTypePart(card, st, part)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /** Match a single component of a dot-separated type expression. */
+    private static boolean matchTypePart(final CardView card,
+                                          final CardStateView st,
+                                          final String part) {
+        // "Permanent" — any card on the battlefield qualifies
+        if ("Permanent".equalsIgnoreCase(part)) {
+            return true;
+        }
+        // "token" — check CardView flag
+        if ("token".equalsIgnoreCase(part)) {
+            return card.isToken();
+        }
+        // "Historic" — artifact, legendary, or Saga
+        if ("Historic".equalsIgnoreCase(part)) {
+            return st.getType().isArtifact()
+                    || st.getType().hasSupertype(
+                            CardType.Supertype.Legendary)
+                    || st.getType().hasSubtype("Saga");
+        }
+        // "Outlaw" — Assassin, Mercenary, Pirate, Rogue, or Warlock
+        if ("Outlaw".equalsIgnoreCase(part)) {
+            final CardTypeView t = st.getType();
+            return t.hasCreatureType("Assassin")
+                    || t.hasCreatureType("Mercenary")
+                    || t.hasCreatureType("Pirate")
+                    || t.hasCreatureType("Rogue")
+                    || t.hasCreatureType("Warlock");
+        }
+        // "withAffinity" — check keyword key for "Affinity"
+        if ("withAffinity".equalsIgnoreCase(part)) {
+            final String keys = st.getKeywordKey();
+            return keys != null
+                    && keys.toLowerCase().contains("affinity");
+        }
+        // Standard type/subtype/supertype
+        return st.getType().hasStringType(part);
     }
 
     private static KeywordData annotateDevotion(final KeywordData kw,

@@ -42,14 +42,19 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 import forge.screens.match.controllers.CDock.ArcState;
 import forge.screens.match.controllers.CStack;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FScrollPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedTextArea;
+import forge.toolbox.special.CardZoomer;
 import forge.util.Localizer;
 import forge.util.collect.FCollectionView;
+import forge.view.arcane.CardInfoPopup;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -69,6 +74,7 @@ public class VStack implements IVDoc<CStack> {
 
     // Other fields
     private final AbilityMenu abilityMenu = new AbilityMenu();
+    private CardInfoPopup cardInfoPopup;
 
     private StackInstanceTextArea hoveredItem;
 
@@ -126,6 +132,7 @@ public class VStack implements IVDoc<CStack> {
         if (parentCell == null || !parentCell.getSelected().equals(this)) { return; }
 
         hoveredItem = null;
+        hideStackPopup();
         scroller.removeAll();
 
         boolean isFirst = true;
@@ -204,7 +211,7 @@ public class VStack implements IVDoc<CStack> {
                         hoveredItem = StackInstanceTextArea.this;
                     }
                     controller.getMatchUI().setCard(item.getSourceCard());
-
+                    showStackPopup(StackInstanceTextArea.this);
                 }
 
                 @Override
@@ -214,8 +221,9 @@ public class VStack implements IVDoc<CStack> {
                             hoveredItem = null;
                         }
                     }
+                    hideStackPopup();
                 }
-                
+
                 @Override
                 public void mouseClicked(final MouseEvent e) {
                     if (controller.getMatchUI().getCDock().getArcState() == ArcState.ON) {
@@ -274,6 +282,44 @@ public class VStack implements IVDoc<CStack> {
             if (img != null) {
                 g2d.drawImage(img, null, PADDING, PADDING);
             }
+        }
+    }
+
+    // --- Hover tooltip ---
+
+    private void showStackPopup(final StackInstanceTextArea tar) {
+        if (CardZoomer.SINGLETON_INSTANCE.isZoomerOpen()) {
+            hideStackPopup();
+            return;
+        }
+        final java.awt.Window owner = SwingUtilities.getWindowAncestor(scroller);
+        if (owner == null || !owner.isActive()) {
+            hideStackPopup();
+            return;
+        }
+        final ForgePreferences prefs = FModel.getPreferences();
+        final boolean showKw = prefs.getPrefBoolean(FPref.UI_POPUP_KEYWORD_INFO);
+        final boolean showRel = prefs.getPrefBoolean(FPref.UI_POPUP_RELATED_CARDS);
+        final boolean showImg = prefs.getPrefBoolean(FPref.UI_POPUP_CARD_IMAGE);
+        if (showKw || showRel || showImg) {
+            if (cardInfoPopup == null) {
+                cardInfoPopup = new CardInfoPopup(owner);
+            }
+            final Point screenLoc = tar.getLocationOnScreen();
+            if (screenLoc == null) {
+                return;
+            }
+            cardInfoPopup.showForCard(tar.getItem().getSourceCard(),
+                    screenLoc, tar.getSize(),
+                    showKw, showRel, showImg);
+        } else {
+            hideStackPopup();
+        }
+    }
+
+    private void hideStackPopup() {
+        if (cardInfoPopup != null) {
+            cardInfoPopup.hidePopup();
         }
     }
 
