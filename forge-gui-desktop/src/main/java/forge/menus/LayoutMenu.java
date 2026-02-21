@@ -14,6 +14,7 @@ import javax.swing.KeyStroke;
 
 import forge.Singletons;
 import forge.control.FControl;
+import forge.control.KeyboardShortcuts;
 import forge.gui.GuiChoose;
 import forge.gui.MouseUtil;
 import forge.gui.framework.FScreen;
@@ -134,7 +135,8 @@ public final class LayoutMenu {
     private static JMenuItem getMenuItem_ShowTabs() {
         final Localizer localizer = Localizer.getInstance();
         final JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(localizer.getMessage("lblPanelTabs"));
-        menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_T));
+        final KeyStroke ks = KeyboardShortcuts.getKeyStrokeForPref(FPref.SHORTCUT_PANELTABS);
+        if (ks != null) { menuItem.setAccelerator(ks); }
         menuItem.setState(!prefs.getPrefBoolean(FPref.UI_HIDE_GAME_TABS));
         menuItem.addActionListener(getShowTabsAction(menuItem));
         return menuItem;

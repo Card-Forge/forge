@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
-import java.awt.event.InputEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -78,17 +76,8 @@ public class KeyboardShortcutsDialog extends FDialog {
                 .fontSize(14).fontStyle(Font.BOLD).build();
         content.add(headerFixed, "span 2, gaptop 10, gapbottom 5, wrap");
 
-        final int menuMask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx();
-        final String modPrefix = InputEvent.getModifiersExText(menuMask) + "+";
-
         addFixedRow(content, "Forge Wiki", KeyEvent.getKeyText(KeyEvent.VK_F1));
         addFixedRow(content, "Full Screen", KeyEvent.getKeyText(KeyEvent.VK_F11));
-        addFixedRow(content, "Undo", modPrefix + KeyEvent.getKeyText(KeyEvent.VK_Z));
-        addFixedRow(content, "Concede", modPrefix + KeyEvent.getKeyText(KeyEvent.VK_Q));
-        addFixedRow(content, "Alpha Strike", modPrefix + KeyEvent.getKeyText(KeyEvent.VK_A));
-        addFixedRow(content, "End Turn", modPrefix + KeyEvent.getKeyText(KeyEvent.VK_E));
-        addFixedRow(content, "Toggle Panel Tabs", modPrefix + KeyEvent.getKeyText(KeyEvent.VK_T));
-        addFixedRow(content, "Toggle Card Overlays", modPrefix + KeyEvent.getKeyText(KeyEvent.VK_O));
 
         final FScrollPane scrollPane = new FScrollPane(content, false,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
