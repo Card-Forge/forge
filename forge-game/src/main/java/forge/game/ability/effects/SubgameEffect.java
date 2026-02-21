@@ -11,10 +11,12 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
+import forge.game.event.EventValueChangeType;
+import forge.game.event.GameEventDayTimeChanged;
 import forge.game.event.GameEventSubgameEnd;
 import forge.game.event.GameEventSubgameStart;
+import forge.game.event.GameEventZone;
 import forge.game.player.Player;
-import forge.game.player.PlayerController;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
@@ -103,17 +105,7 @@ public class SubgameEffect extends SpellAbilityEffect {
                     c.updateStateForView();
                 }
 
-                // Assign Companion
-                PlayerController person = player.getController();
-                Card companion = player.assignCompanion(subgame, person);
-                // Create an effect that lets you cast your companion from your sideboard
-                if (companion != null) {
-                    PlayerZone commandZone = player.getZone(ZoneType.Command);
-                    companion = subgame.getAction().moveTo(ZoneType.Command, companion, null, AbilityKey.newMap());
-                    commandZone.add(Player.createCompanionEffect(subgame, companion));
-
-                    player.updateZoneForView(commandZone);
-                }
+                player.assignCompanion(subgame, player.getController());
             }
 
             // Schemes
@@ -191,6 +183,17 @@ public class SubgameEffect extends SpellAbilityEffect {
         String endMessage = outcome.isDraw() ? Localizer.getInstance().getMessage("lblSubgameEndDraw") :
                 Localizer.getInstance().getMessage("lblSubgameEnd", sbWinners.toString(), sbLosers.toString());
         maingame.getMatch().fireEvent(new GameEventSubgameEnd(maingame, endMessage));
+        if (maingame.getDayTime() != null) {
+            maingame.fireEvent(new GameEventDayTimeChanged(maingame.getDayTime()));
+        }
+        // only mobile seems to need this
+        for (Player p : maingame.getPlayers()) {
+            maingame.fireEvent(new GameEventZone(ZoneType.Battlefield, p, EventValueChangeType.ComplexUpdate, null));
+            maingame.fireEvent(new GameEventZone(ZoneType.Hand, p, EventValueChangeType.ComplexUpdate, null));
+            maingame.fireEvent(new GameEventZone(ZoneType.Graveyard, p, EventValueChangeType.ComplexUpdate, null));
+            maingame.fireEvent(new GameEventZone(ZoneType.Exile, p, EventValueChangeType.ComplexUpdate, null));
+            maingame.fireEvent(new GameEventZone(ZoneType.Command, p, EventValueChangeType.ComplexUpdate, null));
+        }
 
         // Setup maingame library
         final FCollectionView<Player> subgamePlayers = subgame.getRegisteredPlayers();

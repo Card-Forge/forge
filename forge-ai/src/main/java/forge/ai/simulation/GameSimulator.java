@@ -211,7 +211,7 @@ public class GameSimulator {
             final SpellAbility playingSa = sa;
             // Is this right?
             simGame.copyLastState();
-            boolean success = ComputerUtil.handlePlayingSpellAbility(aiPlayer, sa, simGame, () -> {
+            boolean success = ComputerUtil.handlePlayingSpellAbility(aiPlayer, sa, () -> {
                 if (interceptor != null) {
                     interceptor.announceX(playingSa);
                     interceptor.chooseTargets(playingSa, GameSimulator.this);

@@ -1020,14 +1020,15 @@
     }
   },
   {
-    "name": "Assassin's Shoes",
-    "description": "1/1 vampire assassin, level up to tap to debuff",
+    "name": "Cutthroat Skirt",
+    "description": "3/2 vampire, level up for deathtouch",
     "equipmentSlot": "Boots",
-    "iconName": "Assassin'sShoes",
+    "iconName": "CutthroatSkirt",
     "cost": 5000,
     "effect": {
+        "lifeModifier": -6,
         "startBattleWithCard": [
-        "Guul Draz Assassin|ROE"
+        "NirkanaCutthroat|ROE"
      ]
     }
   },
@@ -1492,14 +1493,15 @@
     }
   },
     {
-    "name": "Purist's Pants",
-    "description": "0/3 Cleric, level up to reduce all incoming damage",
+    "name": "Vindicator Greaves",
+    "description": "2/4 knight, 2W twice for 3/6 +1/+1 all, 3 more levels for 4/8 +2/+2 all",
     "equipmentSlot": "Boots",
-    "iconName": "Purist'sPants",
+    "iconName": "VindicatorGreaves",
     "cost": 5000,
     "effect": {
+        "lifeModifier": -4,
         "startBattleWithCard": [
-        "Hedron-Field Purists|ROE"
+        "Kabira Vindicator|ROE"
      ]
     }
   },
@@ -1621,7 +1623,7 @@
   },
     {
     "name": "Beastbreaker Boots",
-    "description": "2/2 human, level up to get bigger",
+    "description": "2/2 human, level up to get stronger",
     "equipmentSlot": "Boots",
     "iconName": "BeastbreakerBoots",
     "cost": 5000,
@@ -1768,7 +1770,7 @@
   },
     {
     "name": "Cryptologist's Fins",
-    "description": "0/1 merfolk wizard. Pay 1U to make it a looter, again twice for archivist",
+    "description": "0/1 merfolk wizard. Level up to gain draw power.",
     "equipmentSlot": "Boots",
     "iconName": "Cryptologist'sFins",
     "cost": 5000,
@@ -2806,6 +2808,7 @@
     "iconName": "AmuletofMirth",
     "cost": 1000,
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Planeswalker's Mirth|PLS"
      ]
@@ -3427,7 +3430,7 @@
       "iconName": "TruthButcher'sArmor",
       "effect": {
         "changeStartCards": 4,
-        "lifeModifier": -16
+        "lifeModifier": -12
     }
   },
     {
@@ -3437,7 +3440,7 @@
       "iconName": "FlamingArmor",
       "cost": 1000,
       "effect": {
-        "lifeModifier": -3,
+        "lifeModifier": -2,
         "opponent": {
           "lifeModifier": -5
         }
@@ -3475,7 +3478,7 @@
       "cost": 6000,
       "effect": {
         "changeStartCards": 2,
-        "lifeModifier": -10
+        "lifeModifier": -7
     }
   },
     {
@@ -3485,7 +3488,7 @@
       "iconName": "BlessedArmor",
       "cost": 1000,
       "effect": {
-        "lifeModifier": 8,
+        "lifeModifier": 9,
         "opponent": {
           "lifeModifier": 4
         }
@@ -3512,7 +3515,7 @@
       "cost": 1000,
       "effect": {
         "changeStartCards": 2,
-        "lifeModifier": -13
+        "lifeModifier": -10
     }
   },
     {
@@ -3631,9 +3634,9 @@
       "iconName": "DivinelyBlessedArmor",
       "cost": 6000,
       "effect": {
-        "lifeModifier": 10,
+        "lifeModifier": 12,
         "opponent": {
-          "lifeModifier": 5
+          "lifeModifier": 6
         }
       }
     },
@@ -3645,7 +3648,7 @@
       "cost": 1000,
       "effect": {
         "changeStartCards": -1,
-        "lifeModifier": 12
+        "lifeModifier": 13
     }
   },
     {
@@ -3656,7 +3659,7 @@
       "cost": 6000,
       "effect": {
         "changeStartCards": -1,
-        "lifeModifier": 15
+        "lifeModifier": 16
     }
   },
     {
@@ -3691,9 +3694,9 @@
       "iconName": "BlazingArmor",
       "cost": 6000,
       "effect": {
-        "lifeModifier": -4,
+        "lifeModifier": -5,
         "opponent": {
-          "lifeModifier": -7
+          "lifeModifier": -8
         }
       }
     },
@@ -3776,7 +3779,145 @@
     "iconName": "MithrilArmor",
     "cost": 2000,
     "effect": {
-        "lifeModifier": 5
+        "lifeModifier": 6
+    }
+  },
+  {
+    "name": "Cloak of the Wastes",
+    "description": "Gives a colorless land, but -1 hand size",
+    "equipmentSlot": "Body",
+    "iconName": "CloakoftheWastes",
+    "cost": 3000,
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Wastes|OGW"
+      ]
+    }
+  },
+  {
+    "name": "Outpost Outfit",
+    "description": "Taps for W or sac for any color. -1 hand size.",
+    "equipmentSlot": "Body",
+    "iconName": "OutpostOutfit",
+    "cost": 7500,
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Abandoned Outpost"
+      ]
+    }
+  },
+  {
+    "name": "Seafloor Shirt",
+    "description": "Taps for U or sac for any color. -1 hand size.",
+    "equipmentSlot": "Body",
+    "iconName": "SeafloorShirt",
+    "cost": 7500,
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Seafloor Debris"
+      ]
+    }
+  },
+  {
+    "name": "Bog Dweller Leather",
+    "description": "Taps for B or sac for any color. -1 hand size.",
+    "equipmentSlot": "Body",
+    "iconName": "BogDwellerLeather",
+    "cost": 7500,
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Bog Wreckage"
+      ]
+    }
+  },
+  {
+    "name": "Highland Cloak",
+    "description": "Taps for R or sac for any color. -1 hand size.",
+    "equipmentSlot": "Body",
+    "iconName": "HighlandCloak",
+    "cost": 7500,
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Ravaged Highlands"
+      ]
+    }
+  },
+  {
+    "name": "Timberland Shawl",
+    "description": "Taps for G or sac for any color. -1 hand size.",
+    "equipmentSlot": "Body",
+    "iconName": "TimberlandShawl",
+    "cost": 7500,
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Timberland Ruins"
+      ]
+    }
+  },
+  {
+    "name": "Token of Bounty",
+    "description": "Grants a token in a special slot with 2, T, sac: Gain 3 life.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofBounty",
+    "cost": 30000,
+    "effect": {
+      "startBattleWithCard": [
+        "c_a_food_sac"
+      ]
+    }
+  },
+  {
+    "name": "Token of Investigation",
+    "description": "Grants a token in a special slot with 2, sac: Draw a card.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofInvestigation",
+    "cost": 70000,
+    "effect": {
+      "startBattleWithCard": [
+        "c_a_clue_draw"
+      ]
+    }
+  },
+  {
+    "name": "Token of Blood",
+    "description": "Grants a token in a special slot with 1, T, sac: Discard, then draw.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofBlood",
+    "cost": 50000,
+    "effect": {
+      "startBattleWithCard": [
+        "c_a_blood_draw"
+      ]
+    }
+  },
+  {
+    "name": "Token of Violence",
+    "description": "Grants a token in a special slot with equip 1: 1, T, sac: ping for 2",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofViolence",
+    "cost": 50000,
+    "effect": {
+      "startBattleWithCard": [
+        "rock"
+      ]
+    }
+  },
+  {
+    "name": "Token of Exploration",
+    "description": "Grants a token in a special slot with 1, T, sac: Explore.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofExploration",
+    "cost": 50000,
+    "effect": {
+      "startBattleWithCard": [
+        "c_a_map_sac_explore"
+      ]
     }
   },
   {
@@ -3924,7 +4065,7 @@
     "iconName": "PhelddagrifPlate",
     "effect": {
       "changeStartCards": 1,
-        "lifeModifier": 4,
+        "lifeModifier": 6,
         "opponent": {
           "startBattleWithCard": [
             "Pygmy Hippo|VIS"
@@ -4118,13 +4259,12 @@
   },
     {
       "name": "Grand Sage's Robes",
-      "description": "An extra card at the cost of life.",
+      "description": "Grants an extra card with no life penalty.",
       "equipmentSlot": "Body",
       "iconName": "GrandSage'sRobes",
       "cost": 6000,
       "effect": {
-        "changeStartCards": 1,
-        "lifeModifier": -3
+        "changeStartCards": 1
     }
   },
     {
@@ -4194,7 +4334,7 @@
       "iconName": "Sage'sRobes",
       "effect": {
         "changeStartCards": 1,
-        "lifeModifier": -5
+        "lifeModifier": -3
     }
   },
     {
@@ -4258,11 +4398,11 @@
   },
   {
     "name": "Infernal Armor",
-    "description": "Two extra cards, but you are stalked by a 5/5 flying demon.",
+    "description": "Three extra cards, but you are stalked by a 5/5 flying demon.",
     "equipmentSlot": "Body",
     "iconName": "InfernalArmor",
     "effect": {
-      "changeStartCards": 2,
+      "changeStartCards": 3,
         "opponent": {
           "startBattleWithCard": [
             "Tombstalker|TSR"

@@ -111,14 +111,28 @@ public class DuelScene extends ForgeScene {
             }
 
             // Mostly for ante handling, but also blacker lotus
-            GameOutcome.AnteResult anteResult = hostedMatch.getGame().getOutcome().getAnteResult(humanPlayer);
+            GameOutcome.AnteResult anteResult = hostedMatch.getAnteResult(humanPlayer);
             if (anteResult != null) {
-                for (PaperCard card : anteResult.wonCards) {
-                    Current.player().addCard(card);
+                if (eventData != null) {
+                    //In an event. Apply the ante result to the current event deck.
+                    eventData.registeredDeck.getOrCreate(DeckSection.Sideboard).add(anteResult.wonCards);
+                    if(eventData.draftedDeck != null)
+                        eventData.draftedDeck.getOrCreate(DeckSection.Sideboard).add(anteResult.wonCards);
+                    for(PaperCard card : anteResult.lostCards) {
+                        eventData.registeredDeck.removeAnteCard(card);
+                        if(eventData.draftedDeck != null)
+                            eventData.draftedDeck.removeAnteCard(card);
+                    }
+                    //Could also add the cards to the opponent's pool, but their games aren't simulated and they never edit their decks.
                 }
-                for (PaperCard card : anteResult.lostCards) {
-                    // We could clean this up by trying to combine all the lostCards into a mapping, but good enough for now
-                    Current.player().removeLostCardFromPools(card);
+                else {
+                    for (PaperCard card : anteResult.wonCards) {
+                        Current.player().addCard(card);
+                    }
+                    for (PaperCard card : anteResult.lostCards) {
+                        // We could clean this up by trying to combine all the lostCards into a mapping, but good enough for now
+                        Current.player().removeLostCardFromPools(card);
+                    }
                 }
             }
         } catch (Exception e) {

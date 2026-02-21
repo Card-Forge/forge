@@ -33,11 +33,13 @@ public class GameView extends TrackableObject {
 
     private final transient Game game; //TODO: Remove this when possible before network support added
     private final transient Match match; //TODO: Remove this when possible before network support added
+    private final transient GameLog gameLog;
 
     public GameView(final Game game) {
         super(game.getId(), game.getTracker());
         match = game.getMatch();
         this.game = game;
+        this.gameLog = game.getGameLog();
         set(TrackableProperty.Title, game.getMatch().getTitle());
         set(TrackableProperty.WinningTeam, -1);
 
@@ -47,7 +49,6 @@ public class GameView extends TrackableObject {
         set(TrackableProperty.PoisonCountersToLose, rules.getPoisonCountersToLose());
         set(TrackableProperty.NumGamesInMatch, rules.getGamesPerMatch());
 
-        set(TrackableProperty.GameLog, game.getGameLog());
         set(TrackableProperty.NumPlayedGamesInMatch, game.getMatch().getOutcomes().size());
     }
 
@@ -196,11 +197,7 @@ public class GameView extends TrackableObject {
     }
 
     public GameLog getGameLog() {
-        return get(TrackableProperty.GameLog);
-    }
-
-    void updateGameLog(GameLog gameLog) {
-        flagAsChanged(TrackableProperty.GameLog); //don't need to set the property since it won't change
+        return gameLog;
     }
 
     public TrackableCollection<CardView> getRevealedCollection() {

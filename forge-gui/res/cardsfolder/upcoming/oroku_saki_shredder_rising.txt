@@ -1,0 +1,9 @@
+Name:Oroku Saki, Shredder Rising
+ManaCost:2 B
+Types:Legendary Creature Human Ninja
+PT:3/1
+K:Sneak:1 B
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, you draw a card and lose 1 life.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
+Oracle:Sneak {1}{B} (You may cast this spell for {1}{B} if you also return an unblocked attacked you control to hand during the declare blockers step. He enters tapped and attacking.)\nWhenever Oroku Saki deals combat damage to a player, you draw a card and lose 1 life.

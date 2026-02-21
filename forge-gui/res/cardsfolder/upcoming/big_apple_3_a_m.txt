@@ -1,0 +1,12 @@
+Name:Big Apple 3 a.m.
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+K:ETBReplacement:Other:ChooseColor
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInComputerDeck | SpellDescription$ As this land enters, choose a color.
+A:AB$ Mana | Cost$ T | Produced$ Chosen | SpellDescription$ Add one mana of the chosen color.
+A:AB$ Token | Cost$ 5 T | TokenAmount$ X | TokenScript$ b_1_1_rat | SpellDescription$ Create a 1/1 black Rat creature token for each opponent you have.
+SVar:X:PlayerCountOpponents$Amount
+DeckHas:Ability$Token
+Oracle:This land enters tapped. As it enters, choose a color.\n{T}: Add one mana of the chosen color.\n{5}, {T}: Create a 1/1 black Rat creature token for each opponent you have.

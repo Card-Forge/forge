@@ -1,6 +1,6 @@
 [metadata]
 Name=Diablo 3
-[main]
+[Main]
 4 Badlands
 4 Bloodstained Mire
 3 Blackcleave Cliffs
@@ -26,4 +26,4 @@ Name=Diablo 3
 1 Dark Suspicions
 2 Grafted Skullcap
 2 Bottled Cloister
-[sideboard]
+[Sideboard]

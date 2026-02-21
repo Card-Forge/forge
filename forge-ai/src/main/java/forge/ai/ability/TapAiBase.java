@@ -266,9 +266,8 @@ public abstract class TapAiBase extends SpellAbilityAi {
             // might be from ETBreplacement
             if (pDefined.isEmpty() || !pDefined.get(0).isInPlay() || (pDefined.get(0).isUntapped() && pDefined.get(0).getController() != ai)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         } else {
             sa.resetTargets();
             if (tapPrefTargeting(ai, source, sa, mandatory)) {
@@ -277,9 +276,8 @@ public abstract class TapAiBase extends SpellAbilityAi {
                 // not enough preferred targets, but mandatory so keep going:
                 if (tapUnpreferredTargeting(ai, sa, mandatory)) {
                     return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
-                } else {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
 
@@ -289,18 +287,15 @@ public abstract class TapAiBase extends SpellAbilityAi {
     @Override
     public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
-        final boolean oppTargetsChoice = sa.hasParam("TargetingPlayer");
 
-        if (oppTargetsChoice && sa.getActivatingPlayer().equals(ai) && !sa.isTrigger()) {
+        if (sa.hasParam("TargetingPlayer") && sa.getActivatingPlayer().equals(ai) && !sa.isTrigger()) {
             // canPlayAI (sa activated by ai)
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
             sa.setTargetingPlayer(targetingPlayer);
-            sa.getTargets().clear();
-            if (targetingPlayer.getController().chooseTargetsFor(sa)) {
-                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
+            if (CardLists.getTargetableCards(ai.getGame().getCardsIn(sa.getTargetRestrictions().getZone()), sa).isEmpty()) {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         boolean randomReturn = true;
