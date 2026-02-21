@@ -26,7 +26,7 @@ public class KeywordWithType extends KeywordInstance<KeywordWithType> implements
                         + descType.substring(1) + "walk";
             case AFFINITY:
                 // "Affinity for artifacts" instead of "Affinity artifact"
-                return "Affinity for " + descType;
+                return "Affinity for " + Lang.getPlural(descType);
             default:
                 return this.getKeyword() + " " + descType;
         }

@@ -288,43 +288,23 @@ public enum CardZoomer {
             final int rawSize = FModel.getPreferences().getPrefInt(FPref.UI_POPUP_IMAGE_SIZE);
             final int popupThumbHeight = Math.max(100, Math.min(500, rawSize));
 
-            if (relatedEntries.size() <= 2) {
-                // Small collections: compact column sized to content
-                final int maxContentWidth = maxColumnPx - sidePadding;
-                final int maxThumbForColumn = (int) ((maxContentWidth / 2.0) / 0.716);
-                thumbnailHeight = Math.min(popupThumbHeight, maxThumbForColumn);
+            // Use user's preferred size; populateRelatedCards constrains
+            // to fit the column width when needed
+            thumbnailHeight = popupThumbHeight;
 
-                int naturalContentWidth = 0;
-                final Map<String, List<RelatedCardEntry>> grouped = new LinkedHashMap<>();
-                for (final RelatedCardEntry entry : relatedEntries) {
-                    grouped.computeIfAbsent(entry.label, k -> new ArrayList<>()).add(entry);
-                }
-                for (final List<RelatedCardEntry> cards : grouped.values()) {
-                    final boolean fullSize = cards.size() <= 2;
-                    final int perRow = fullSize ? Math.min(cards.size(), 2) : 3;
-                    final int effHeight = fullSize
-                            ? thumbnailHeight : Math.max(80, thumbnailHeight / 2);
-                    final int thumbWidth = (int) (effHeight * 0.716);
-                    final int groupWidth = perRow * thumbWidth + 18;
-                    naturalContentWidth = Math.max(naturalContentWidth, groupWidth);
-                }
-                columnPx = Math.max(200,
-                        Math.min(naturalContentWidth + sidePadding, maxColumnPx));
-            } else {
-                // Large collections: thumbnails fill available space up to preference
-                final int maxContentWidth = maxColumnPx - sidePadding;
-                final int pillInnerWidth = maxContentWidth - 18; // 2*PILL_PAD + border
-                final int maxThumbWidth = pillInnerWidth / 3;    // 3 per row
-                // Thumbnail width: preference height or column fit, whichever is smaller
-                final int prefThumbWidth = (int) (popupThumbHeight * 0.716);
-                final int thumbWidth = Math.min(prefThumbWidth, maxThumbWidth);
-                final int actualPillWidth = 3 * thumbWidth + 18;
-                // Size column to actual content so scrollbar stays adjacent
-                columnPx = Math.max(200, actualPillWidth + sidePadding);
-                // Double so populateRelatedCards' /2 halving yields full preference
-                // then maxHeightForWidth caps to fit column width
-                thumbnailHeight = popupThumbHeight * 2;
+            int naturalContentWidth = 0;
+            final Map<String, List<RelatedCardEntry>> grouped = new LinkedHashMap<>();
+            for (final RelatedCardEntry entry : relatedEntries) {
+                grouped.computeIfAbsent(entry.label, k -> new ArrayList<>()).add(entry);
             }
+            for (final List<RelatedCardEntry> cards : grouped.values()) {
+                final int perRow = Math.min(cards.size(), 2);
+                final int thumbWidth = (int) (thumbnailHeight * 0.716);
+                final int groupWidth = perRow * thumbWidth + 18;
+                naturalContentWidth = Math.max(naturalContentWidth, groupWidth);
+            }
+            columnPx = Math.max(200,
+                    Math.min(naturalContentWidth + sidePadding, maxColumnPx));
             maxWidth = columnPx - sidePadding;
         } else {
             columnPx = Math.max(200, (int) (screenWidth * 0.25));
@@ -381,7 +361,7 @@ public enum CardZoomer {
             relPanel.setOpaque(false);
             relPanel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 0));
             CardInfoPopup.populateRelatedCards(relPanel, relatedEntries,
-                    thumbnailHeight, maxWidth, 3);
+                    thumbnailHeight, maxWidth, 2, true, null);
             content.add(relPanel);
         }
 
@@ -395,12 +375,16 @@ public enum CardZoomer {
         side.add(scroll, java.awt.BorderLayout.CENTER);
 
         // Click anywhere on the side panel dismisses the zoomer
+        // Use mouseClicked (not mouseReleased) so scroll wheel release doesn't dismiss
         final MouseAdapter dismissClick = new MouseAdapter() {
-            @Override public void mouseReleased(final MouseEvent e) {
+            @Override public void mouseClicked(final MouseEvent e) {
                 closeZoomer();
             }
         };
         addMouseListenerRecursive(side, dismissClick);
+
+        // Increase scroll speed for comfortable browsing
+        scroll.getVerticalScrollBar().setUnitIncrement(48);
 
         // Replace scroll pane's default wheel behavior:
         // scroll-down dismisses unless scrollbar can still scroll further
@@ -424,8 +408,15 @@ public enum CardZoomer {
                     closeZoomer();
                 }
             } else {
-                toggleCardImage();
-                startMouseWheelCoolDownTimer(250);
+                final javax.swing.JScrollBar vbar = scroll.getVerticalScrollBar();
+                if (vbar.isVisible() && vbar.getValue() > 0) {
+                    vbar.setValue(vbar.getValue()
+                            + e.getUnitsToScroll() * vbar.getUnitIncrement(1));
+                    startMouseWheelCoolDownTimer(250);
+                } else {
+                    toggleCardImage();
+                    startMouseWheelCoolDownTimer(250);
+                }
             }
             e.consume();
         });

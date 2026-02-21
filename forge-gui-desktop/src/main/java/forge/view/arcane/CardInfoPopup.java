@@ -31,7 +31,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import forge.CachedCardImage;
 import forge.ImageCache;
 import forge.StaticData;
-import forge.ImageKeys;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.card.CardStateName;
@@ -302,16 +301,12 @@ public class CardInfoPopup {
         maxContentWidth = Math.max(maxContentWidth, POPUP_WIDTH);
 
         // Compute natural width for related cards based on thumbnail count
+        // Hover tooltip shows up to HOVER_MAX_CARDS at full size
         int relatedWidth = 0;
         int effectiveThumbHeight = thumbnailHeight;
         if (hasRelated) {
-            final int totalCards = relatedEntries.size();
-            final boolean fullSize = totalCards <= FULL_SIZE_MAX;
-            final int perRow = fullSize
-                    ? Math.min(totalCards, FULL_SIZE_MAX) : HALF_SIZE_PER_ROW;
-            effectiveThumbHeight = fullSize
-                    ? thumbnailHeight : Math.max(80, thumbnailHeight / 2);
-            final int thumbWidth = (int) (effectiveThumbHeight * MTG_ASPECT_RATIO);
+            final int perRow = Math.min(relatedEntries.size(), HOVER_MAX_CARDS);
+            final int thumbWidth = (int) (thumbnailHeight * MTG_ASPECT_RATIO);
             relatedWidth = perRow * thumbWidth + 2 * PILL_PAD + 2;
         }
         // Content width: use natural related-cards width, capped by available space
@@ -337,9 +332,18 @@ public class CardInfoPopup {
             }
             final int maxPopupHeight = ownerBounds.height - 2 * PADDING;
             final int availableHeight = maxPopupHeight - kwHeight;
-            // Shrink thumbnail height to fit available space if needed
+            // Count thumbnail rows and overhead to scale height properly
+            final Set<String> groups = new LinkedHashSet<>();
+            for (final RelatedCardEntry e : relatedEntries) {
+                groups.add(e.label);
+            }
+            final int numGroups = Math.max(1, groups.size());
+            // Each group: ~28px overhead (label + spacing), plus inter-group gaps
+            final int overhead = numGroups * 28 + (numGroups - 1) * 4 + 20;
+            final int thumbRows = numGroups; // 1 row per group with HOVER_MAX_CARDS cap
+            final int availableForThumbs = availableHeight - overhead;
             effectiveThumbHeight = Math.min(effectiveThumbHeight,
-                    Math.max(80, availableHeight - 40));
+                    Math.max(80, availableForThumbs / thumbRows));
             populateRelatedCards(relatedCardsPanel, relatedEntries,
                     effectiveThumbHeight, contentWidth);
         }
@@ -510,28 +514,41 @@ public class CardInfoPopup {
                 return entries;
             }
 
-            // Tokens
-            final List<String> tokenNames = rules.getTokens();
-            if (tokenNames != null && !tokenNames.isEmpty()) {
-                for (final String tokenName : tokenNames) {
-                    final PaperToken pt = data.getAllTokens().getToken(tokenName);
-                    if (pt != null) {
-                        final CardView tokenView = Card.getCardForUi(pt).getView();
-                        final String imageKey = pt.getCardImageKey();
-                        final Pair<BufferedImage, Boolean> info =
-                                ImageCache.getCardOriginalImageInfo(
-                                        imageKey, true, tokenView);
-                        final BufferedImage img = info.getLeft();
-                        if (img != null) {
-                            entries.add(new RelatedCardEntry("Creates", pt.getName(),
-                                    img, imageKey, info.getRight()));
+            final CardSplitType splitType = rules.getSplitType();
+
+            // Tokens — for multi-face cards, only show if the current face
+            // creates them (the token list is shared across all faces)
+            boolean showTokens = true;
+            if (splitType != null && splitType != CardSplitType.None) {
+                final CardStateView curState = cardView.getCurrentState();
+                final String oracle = curState != null
+                        ? curState.getOracleText() : null;
+                showTokens = oracle != null
+                        && oracle.toLowerCase().contains("token");
+            }
+            if (showTokens) {
+                final List<String> tokenNames = rules.getTokens();
+                if (tokenNames != null && !tokenNames.isEmpty()) {
+                    for (final String tokenName : tokenNames) {
+                        final PaperToken pt = data.getAllTokens().getToken(
+                                tokenName);
+                        if (pt != null) {
+                            final CardView tokenView =
+                                    Card.getCardForUi(pt).getView();
+                            final String imageKey = pt.getCardImageKey();
+                            final Pair<BufferedImage, Boolean> info =
+                                    ImageCache.getCardOriginalImageInfo(
+                                            imageKey, true, tokenView);
+                            final BufferedImage img = info.getLeft();
+                            if (img != null) {
+                                entries.add(new RelatedCardEntry("Creates",
+                                        pt.getName(), img, imageKey,
+                                        info.getRight()));
+                            }
                         }
                     }
                 }
             }
-
-            // Other faces based on split type
-            final CardSplitType splitType = rules.getSplitType();
             if (splitType != null) {
                 switch (splitType) {
                     case Transform:
@@ -630,26 +647,25 @@ public class CardInfoPopup {
         if (specParts == null || specParts.isEmpty()) {
             return;
         }
-        // Specialize faces are alternate states of the base card, not separate cards.
-        // Use the base card's image key with color-specific postfixes.
         final PaperCard baseCard = data.getCommonCards().getCard(cardName);
         if (baseCard == null) {
             return;
         }
-        final String baseKey = baseCard.getImageKey(false);
+        final CardView baseView = Card.getCardForUi(baseCard).getView();
         for (final Map.Entry<CardStateName, ICardFace> entry : specParts.entrySet()) {
             try {
-                final String postfix = specializePostfix(entry.getKey());
-                if (postfix == null) {
+                final String imageKey = specImageKey(baseCard, entry.getKey());
+                if (imageKey == null) {
                     continue;
                 }
-                final String imageKey = baseKey + postfix;
                 final Pair<BufferedImage, Boolean> info =
-                        ImageCache.getCardOriginalImageInfo(imageKey, true);
+                        ImageCache.getCardOriginalImageInfo(
+                                imageKey, true, baseView);
                 final BufferedImage img = info.getLeft();
                 if (img != null) {
                     entries.add(new RelatedCardEntry("Specializes Into",
-                            entry.getValue().getName(), img, imageKey, info.getRight()));
+                            entry.getValue().getName(), img, imageKey,
+                            info.getRight()));
                 }
             } catch (Exception e) {
                 // Skip faces that can't be resolved
@@ -657,13 +673,14 @@ public class CardInfoPopup {
         }
     }
 
-    private static String specializePostfix(final CardStateName state) {
+    private static String specImageKey(final PaperCard card,
+                                        final CardStateName state) {
         switch (state) {
-            case SpecializeW: return ImageKeys.SPECFACE_W;
-            case SpecializeU: return ImageKeys.SPECFACE_U;
-            case SpecializeB: return ImageKeys.SPECFACE_B;
-            case SpecializeR: return ImageKeys.SPECFACE_R;
-            case SpecializeG: return ImageKeys.SPECFACE_G;
+            case SpecializeW: return card.getCardWSpecImageKey();
+            case SpecializeU: return card.getCardUSpecImageKey();
+            case SpecializeB: return card.getCardBSpecImageKey();
+            case SpecializeR: return card.getCardRSpecImageKey();
+            case SpecializeG: return card.getCardGSpecImageKey();
             default: return null;
         }
     }
@@ -762,22 +779,52 @@ public class CardInfoPopup {
         }
     }
 
-    private static final int FULL_SIZE_MAX = 2;
+    private static final int FULL_SIZE_MAX = 3;
+    private static final int HOVER_MAX_CARDS = 2;
     private static final int HALF_SIZE_PER_ROW = 4;
 
     public static void populateRelatedCards(final JPanel targetPanel,
                                               final List<RelatedCardEntry> entries,
                                               final int thumbnailHeight,
                                               final int maxContentWidth) {
-        populateRelatedCards(targetPanel, entries, thumbnailHeight,
-                maxContentWidth, HALF_SIZE_PER_ROW);
+        // Hover tooltip: cap per group to HOVER_MAX_CARDS,
+        // with per-group overflow labels inside their pills
+        final LinkedHashMap<String, List<RelatedCardEntry>> grouped = new LinkedHashMap<>();
+        for (final RelatedCardEntry entry : entries) {
+            grouped.computeIfAbsent(entry.label, k -> new ArrayList<>()).add(entry);
+        }
+        final List<RelatedCardEntry> visible = new ArrayList<>();
+        final Map<String, Integer> overflowByGroup = new LinkedHashMap<>();
+        for (final Map.Entry<String, List<RelatedCardEntry>> group : grouped.entrySet()) {
+            final List<RelatedCardEntry> cards = group.getValue();
+            if (cards.size() > HOVER_MAX_CARDS) {
+                visible.addAll(cards.subList(0, HOVER_MAX_CARDS));
+                overflowByGroup.put(group.getKey(), cards.size() - HOVER_MAX_CARDS);
+            } else {
+                visible.addAll(cards);
+            }
+        }
+        populateRelatedCards(targetPanel, visible, thumbnailHeight,
+                maxContentWidth, HOVER_MAX_CARDS, false,
+                overflowByGroup.isEmpty() ? null : overflowByGroup);
     }
 
     public static void populateRelatedCards(final JPanel targetPanel,
                                               final List<RelatedCardEntry> entries,
                                               final int thumbnailHeight,
                                               final int maxContentWidth,
-                                              final int halfSizePerRow) {
+                                              final int maxPerRow) {
+        populateRelatedCards(targetPanel, entries, thumbnailHeight,
+                maxContentWidth, maxPerRow, false, null);
+    }
+
+    public static void populateRelatedCards(final JPanel targetPanel,
+                                              final List<RelatedCardEntry> entries,
+                                              final int thumbnailHeight,
+                                              final int maxContentWidth,
+                                              final int maxPerRow,
+                                              final boolean alwaysFullSize,
+                                              final Map<String, Integer> overflowCounts) {
         // Group entries by label
         final LinkedHashMap<String, List<RelatedCardEntry>> grouped = new LinkedHashMap<>();
         for (final RelatedCardEntry entry : entries) {
@@ -799,10 +846,14 @@ public class CardInfoPopup {
             // Wrap each section group in a pill
             final JPanel pill = createPillPanel();
 
-            // Section label
+            // Section label — include total count when truncated or overflowing
+            final int overflowForLabel = overflowCounts != null
+                    && overflowCounts.containsKey(group.getKey())
+                    ? overflowCounts.get(group.getKey()) : 0;
+            final int totalInGroup = cards.size() + overflowForLabel;
             final String labelText = group.getKey()
-                    + (cards.size() > halfSizePerRow
-                            ? " (" + cards.size() + ")" : "");
+                    + (totalInGroup > maxPerRow
+                            ? " (" + totalInGroup + ")" : "");
             final javax.swing.JLabel sectionLabel = createAALabel(labelText);
             sectionLabel.setFont(boldFont.getBaseFont());
             sectionLabel.setForeground(TEXT_PRIMARY);
@@ -812,10 +863,12 @@ public class CardInfoPopup {
             pill.add(sectionLabel);
             pill.add(javax.swing.Box.createRigidArea(new Dimension(0, 4)));
 
-            // Up to 2 cards at full size; 3+ scale to half size
-            final boolean fullSize = cards.size() <= FULL_SIZE_MAX;
+            // Full size when group is small or forced by caller (zoom view)
+            final boolean fullSize = alwaysFullSize
+                    || cards.size() <= FULL_SIZE_MAX;
             final int perRow = fullSize
-                    ? Math.min(cards.size(), FULL_SIZE_MAX) : halfSizePerRow;
+                    ? Math.min(cards.size(), Math.min(FULL_SIZE_MAX, maxPerRow))
+                    : maxPerRow;
             final int pillInnerWidth = maxContentWidth - 2 * PILL_PAD - 2;
             int effectiveHeight = fullSize
                     ? thumbnailHeight : Math.max(80, thumbnailHeight / 2);
@@ -865,6 +918,20 @@ public class CardInfoPopup {
             // Close trailing glue for centered last row
             if (colIndex > 0 && colIndex < perRow) {
                 currentRow.add(javax.swing.Box.createHorizontalGlue());
+            }
+
+            // Add overflow label inside pill if applicable
+            if (overflowCounts != null
+                    && overflowCounts.containsKey(group.getKey())) {
+                final int overflow = overflowCounts.get(group.getKey());
+                final javax.swing.JLabel overflowLabel = createAALabel(
+                        "+" + overflow + " more (zoom for full list).");
+                overflowLabel.setForeground(TEXT_SECONDARY);
+                overflowLabel.setFont(FSkin.getFont(11).getBaseFont());
+                overflowLabel.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
+                overflowLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(
+                        4, 0, 0, 0));
+                pill.add(overflowLabel);
             }
 
             final int actualPillWidth = perRow * thumbWidth + 2 * PILL_PAD + 2;

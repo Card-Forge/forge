@@ -158,8 +158,9 @@ public final class KeywordInfoUtil {
                         }
                     } else {
                         // Can't resolve number (e.g. "mill half their library")
-                        // — drop reminder text rather than showing literal "N"
-                        reminder = "";
+                        // — omit the N so text still reads naturally
+                        reminder = reminder.replace("N ", "")
+                                .replace(" N", "");
                     }
                 }
             }
@@ -253,12 +254,13 @@ public final class KeywordInfoUtil {
 
     /** Replace standalone MTG color names with mana symbols for display. */
     private static String colorNamesToSymbols(final String text) {
+        // Use word boundaries so "red" inside "multicolored" isn't matched
         return text
-                .replace("white", "{W}").replace("White", "{W}")
-                .replace("blue", "{U}").replace("Blue", "{U}")
-                .replace("black", "{B}").replace("Black", "{B}")
-                .replace("red", "{R}").replace("Red", "{R}")
-                .replace("green", "{G}").replace("Green", "{G}");
+                .replaceAll("\\b[Ww]hite\\b", "{W}")
+                .replaceAll("\\b[Bb]lue\\b", "{U}")
+                .replaceAll("\\b[Bb]lack\\b", "{B}")
+                .replaceAll("\\b[Rr]ed\\b", "{R}")
+                .replaceAll("\\b[Gg]reen\\b", "{G}");
     }
 
     /** Parse a digit or number word at the given position. Returns the digit string or null. */
