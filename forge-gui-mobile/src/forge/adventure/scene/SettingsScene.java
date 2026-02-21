@@ -253,6 +253,13 @@ public class SettingsScene extends UIScene {
                 Config.instance().saveSettings();
             }
         });
+        addSettingField(Forge.getLocalizer().getMessage("lblBindEquipmentLoadoutsToDecks"), Config.instance().getSettingData().bindEquipmentLoadoutsToDecks, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Config.instance().getSettingData().bindEquipmentLoadoutsToDecks = ((CheckBox) actor).isChecked();
+                Config.instance().saveSettings();
+            }
+        });
         addCheckBox(Forge.getLocalizer().getMessage("cbAnte"), ForgePreferences.FPref.UI_ANTE);
         addCheckBox(Forge.getLocalizer().getMessage("cbAnteMatchRarity"), ForgePreferences.FPref.UI_ANTE_MATCH_RARITY);
         addCheckBox(Forge.getLocalizer().getMessage("lblPromptAutoSell"), ForgePreferences.FPref.PROMPT_FOR_AUTOSELL);
