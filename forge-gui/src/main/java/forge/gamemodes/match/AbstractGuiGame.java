@@ -1,6 +1,7 @@
 package forge.gamemodes.match;
 
 import com.google.common.collect.*;
+import forge.game.GameLog;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
@@ -921,6 +922,16 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             localEventHandler = new FControlGameEventHandler(this);
         }
         localEventHandler.receiveGameEvent(event);
+
+        // Feed forwarded events to the local GameLog so remote clients
+        // build their own game log (host populates via EventBus instead)
+        GameView gv = getGameView();
+        if (gv != null) {
+            GameLog gameLog = gv.getGameLog();
+            if (gameLog != null) {
+                gameLog.getEventVisitor().recieve(event);
+            }
+        }
     }
 
     @Override

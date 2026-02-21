@@ -11327,6 +11327,12 @@
         "type": "landSketchbookShop",
         "probability": 0.1,
         "count": 1
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Baron Sengir's Trophy"
       }
     ],
     "colors": "GB",
@@ -15319,6 +15325,12 @@
         "type": "landSketchbookShop",
         "probability": 0.1,
         "count": 1
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Hydra's Trophy"
       }
     ],
     "colors": "G",
@@ -15746,6 +15758,12 @@
         "type": "landSketchbookShop",
         "probability": 0.1,
         "count": 1
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Arcanis's Trophy"
       }
     ],
     "colors": "UW",
@@ -16087,6 +16105,12 @@
         "type": "landSketchbookShop",
         "probability": 0.1,
         "count": 1
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Empress Galina's Trophy"
       }
     ],
     "colors": "UG",
@@ -23644,6 +23668,12 @@
         "type": "landSketchbookShop",
         "probability": 0.1,
         "count": 1
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Thallid Lord's Trophy"
       }
     ],
     "colors": "BG",
@@ -24233,6 +24263,12 @@
         "type": "landSketchbookShop",
         "probability": 0.1,
         "count": 1
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Squee's Trophy"
       }
     ],
     "colors": "R",
@@ -25783,6 +25819,12 @@
         "probability": 1,
         "count": 1,
         "cardName": "Island|PGRU"
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Teferi's Trophy"
       }
     ],
     "colors": "WU",
@@ -25996,6 +26038,12 @@
         "type": "landSketchbookShop",
         "probability": 0.1,
         "count": 1
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Specter King's Trophy"
       }
     ],
     "colors": "R",
@@ -28137,6 +28185,12 @@
         "type": "landSketchbookShop",
         "probability": 0.1,
         "count": 1
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Xira's Trophy"
       }
     ],
     "colors": "BGR",
@@ -28343,6 +28397,12 @@
         "probability": 1,
         "count": 1,
         "cardName": "Island|UGL"
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Portal Master's Trophy"
       }
     ],
     "colors": "WUBR",
@@ -30521,7 +30581,7 @@
     "colors": "G"
   },
   {
-    "name": "Jakub \u0160lemr '99",
+    "name": "Jakub Šlemr '99",
     "sprite": "sprites/enemy/humanoid/human/warlock/witch.atlas",
     "deck": [
       "decks/standard/wc99_jakub_slemr.dck"
@@ -30653,7 +30713,7 @@
     "colors": "U"
   },
   {
-    "name": "Janosch K\u00fchn '00",
+    "name": "Janosch Kühn '00",
     "sprite": "sprites/enemy/humanoid/elf/shaman.atlas",
     "deck": [
       "decks/standard/wc00_janosch_kuhn.dck"
@@ -32801,7 +32861,7 @@
     ]
   },
   {
-    "name": "M\u00e1rton Stromgald",
+    "name": "Márton Stromgald",
     "sprite": "sprites/enemy/humanoid/human/knight/cavalier_2.atlas",
     "deck": [
       "decks/miniboss/marton_stromgald.dck"
@@ -32815,7 +32875,7 @@
     "rewards": [
       {
         "type": "card",
-        "cardName": "M\u00e1rton Stromgald|ICE"
+        "cardName": "Márton Stromgald|ICE"
       },
       {
         "type": "card",
@@ -34771,6 +34831,12 @@
         "probability": 1,
         "count": 1,
         "itemName": "Windwalker's Blessing"
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Sainted One's Trophy"
       }
     ],
     "colors": "W",
@@ -34915,6 +34981,12 @@
         "probability": 1,
         "count": 1,
         "itemName": "Windwalker's Blessing"
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Astral Visionary's Trophy"
       }
     ],
     "colors": "U",
@@ -35059,6 +35131,12 @@
         "probability": 1,
         "count": 1,
         "itemName": "Windwalker's Blessing"
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Lichlord's Trophy"
       }
     ],
     "colors": "B",
@@ -35209,6 +35287,12 @@
         "probability": 1,
         "count": 1,
         "itemName": "Windwalker's Blessing"
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Dragon Lord's Trophy"
       }
     ],
     "colors": "R",
@@ -35359,6 +35443,12 @@
         "probability": 1,
         "count": 1,
         "itemName": "Windwalker's Blessing"
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Great Druid's Trophy"
       }
     ],
     "colors": "G",
@@ -36213,7 +36303,7 @@
       "Necromancer",
       "IdentityBlack"
     ],
-    "nameOverride": "Lim-D\u00fbl, the Necromancer"
+    "nameOverride": "Lim-Dûl, the Necromancer"
   },
   {
     "name": "Chandler",
@@ -37283,6 +37373,12 @@
         "probability": 1,
         "count": 200,
         "addMaxCount": 100
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Time Walker's Trophy"
       }
     ],
     "colors": "U",

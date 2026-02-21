@@ -8,7 +8,7 @@ Name=Vampire Onslaught
 Description=Blood is in the air! Soon your graveyard will yield foul fruit as your vampire horde feeds on itself in a frenzy to gain greater power. Turn your opponent's dead warriors against them using Mimic Vat to ensure a grisly victory.
 Set=M12
 Image=vampire_onslaught.jpg
-[main]
+[Main]
 2 Blade of the Bloodchief|ZEN
 1 Mimic Vat|SOM
 23 Swamp|M12
@@ -24,7 +24,7 @@ Image=vampire_onslaught.jpg
 4 Viscera Seer
 4 Dismember|NPH
 1 Verdant Catacombs|ZEN
-[sideboard]
+[Sideboard]
 4 Distress|M12
 2 Go for the Throat|MBS
 4 Skinrender|SOM

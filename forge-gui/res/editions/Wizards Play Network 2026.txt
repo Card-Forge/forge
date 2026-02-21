@@ -8,3 +8,8 @@ ScryfallCode=PW26
 [cards]
 1 R Nowhere to Run @Jodie Muir
 2 R Farhaven Elf @Brandon Kitkouski
+3 R Gilded Lotus @Merlin G.G
+4 M The Eternal Wanderer @Fuzichoco
+5 R Lightning Bolt @Fahmi Fauzi
+6 R Courier of Comestibles
+7 R Spicy Oatmeal Pizza

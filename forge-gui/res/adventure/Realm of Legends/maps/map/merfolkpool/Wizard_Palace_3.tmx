@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="82">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="84">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Relic Amulet&quot;, &quot;Academy Loremaster&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Tome of the Infinite&quot;, &quot;Wizard Class&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -115,8 +115,8 @@
 </property>
    </properties>
   </object>
-  <object id="74" template="../../../../common/maps/obj/gold.tx" x="314.401" y="55.0013"/>
-  <object id="75" template="../../../../common/maps/obj/manashards.tx" x="120.96" y="55.0013"/>
+  <object id="74" template="../../../../common/maps/obj/gold.tx" x="320.734" y="85.3346"/>
+  <object id="75" template="../../../../common/maps/obj/manashards.tx" x="279.96" y="50.668"/>
   <object id="76" template="../../../../common/maps/obj/entry_up.tx" x="204.35" y="53.835" width="25.4153" height="17.3026">
    <properties>
     <property name="direction" value="down"/>
@@ -190,6 +190,15 @@
   }
 ]
 </property>
+   </properties>
+  </object>
+  <object id="82" template="../../../../common/maps/obj/manashards.tx" x="90.3333" y="62"/>
+  <object id="83" template="../../../../common/maps/obj/scroll.tx" x="112" y="88.6667">
+   <properties>
+    <property name="reward">[ { &quot;type&quot;: &quot;card&quot;, 
+&quot;cardName&quot;: &quot;Tome of the Infinite&quot;, 
+&quot;editions&quot;: [ &quot;J21&quot; ],
+&quot;count&quot;: 1 } ]</property>
    </properties>
   </object>
  </objectgroup>

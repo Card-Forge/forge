@@ -2,10 +2,8 @@ Name:World War Hulk
 ManaCost:3 G G
 Types:Enchantment Saga
 K:Chapter:3:DBEffect,DBPutCounter,DBPump
-SVar:DBEffect:DB$ Effect | StaticAbilities$ FreeCast | Triggers$ TrigCastSpell | SpellDescription$ The next red or green creature spell you cast this turn can be cast without paying its mana cost.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ FreeCast | ForgetOnCast$ Creature.Red+YouCtrl,Creature.Green+YouCtrl | SpellDescription$ The next red or green creature spell you cast this turn can be cast without paying its mana cost.
 SVar:FreeCast:Mode$ Continuous | Affected$ Creature.Red,Creature.Green | ValidSA$ Spell | MayPlay$ True | MayPlayWithoutManaCost$ True | MayPlayDontGrantZonePermissions$ True | AffectedZone$ Hand,Graveyard,Library,Exile,Command | Description$ The next red or green creature spell you cast this turn can be cast without paying its mana cost.
-SVar:TrigCastSpell:Mode$ SpellCast | ValidCard$ Creature.Red,Creature.Green | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ RemoveEffect | Static$ True
-SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile
 SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 3 | SpellDescription$ Put three +1/+1 counters on target creature you control.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ Double | NumDef$ Double | KW$ Trample | AILogic$ Pump | SpellDescription$ Choose target creature you control. Until end of turn, double its power and toughness and it gains trample.
 Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — The next red or green creature spell you cast this turn can be cast without paying its mana cost.\nII — Put three +1/+1 counters on target creature you control.\nIII — Choose target creature you control. Until end of turn, double its power and toughness and it gains trample.

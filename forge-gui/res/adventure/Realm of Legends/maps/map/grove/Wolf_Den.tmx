@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Young wolf&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Young Wolf&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -86,7 +86,7 @@
   <object id="85" template="../../../../common/maps/obj/collision.tx" x="591.229" y="-16.3625" width="16" height="477.07"/>
   <object id="87" template="../../../../common/maps/obj/enemy.tx" x="350" y="122.5">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Full Moon's Rise|ISD&quot;, &quot;Wolfhunter's Quiver|DKA&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Full Moon's Rise|ISD&quot;, &quot;Hermit of the Natterknolls&quot;]
 }</property>
     <property name="enemy" value="Tovolar"/>
     <property name="threatRange" type="int" value="0"/>

@@ -164,8 +164,6 @@ public class NetGuiGame extends AbstractGuiGame {
         send(ProtocolMethod.setPanelSelection, hostCard);
     }
 
-
-
     @Override
     public GameState getGamestate() {
         return null;

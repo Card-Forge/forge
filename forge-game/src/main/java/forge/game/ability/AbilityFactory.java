@@ -221,29 +221,6 @@ public final class AbilityFactory {
             spellAbility.setCardState(state);
         }
 
-        if (mapParams.containsKey("Forecast")) {
-            spellAbility.putParam("ActivationZone", "Hand");
-            spellAbility.putParam("ActivationLimit", "1");
-            spellAbility.putParam("ActivationPhases", "Upkeep");
-            spellAbility.putParam("PlayerTurn", "True");
-            spellAbility.putParam("PrecostDesc", "Forecast — ");
-        }
-        if (spellAbility.isBoast()) {
-            spellAbility.putParam("PresentDefined", "Self");
-            spellAbility.putParam("IsPresent", "Card.attackedThisTurn");
-            spellAbility.putParam("PrecostDesc", "Boast — ");
-        }
-        if (spellAbility.isExhaust()) {
-            spellAbility.putParam("PrecostDesc", "Exhaust — ");
-        }
-        if (spellAbility.isPowerUp()) {
-            spellAbility.putParam("PrecostDesc", "Power-Up — ");
-        }
-
-        if (mapParams.containsKey("Named")) {
-            spellAbility.setName(mapParams.get("Named"));
-        }
-
         // *********************************************
         // set universal properties of the SpellAbility
 
@@ -296,7 +273,7 @@ public final class AbilityFactory {
         if (spellAbility instanceof SpellApiBased && hostCard.isPermanent()) {
             String desc = mapParams.getOrDefault("SpellDescription", spellAbility.getHostCard().getName());
             spellAbility.setDescription(desc);
-        } else if (mapParams.containsKey("SpellDescription")) {
+        } else if (spellAbility.hasParam("SpellDescription")) {
             spellAbility.rebuiltDescription();
         } else if (api == ApiType.Charm) {
             spellAbility.setDescription(CharmEffect.makeFormatedDescription(spellAbility));

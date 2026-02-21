@@ -298,7 +298,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
         if (mandatory) {
             if (type.equals("P1P1")) {
                 // Try to target creatures with Adapt or similar
-                CardCollection adaptCreats = CardLists.filter(list, CardPredicates.hasKeyword(Keyword.ADAPT));
+                CardCollection adaptCreats = CardLists.filter(list, c -> c.getNonManaAbilities().anyMatch(ab -> ab.hasParam("Adapt")));
                 if (!adaptCreats.isEmpty()) {
                     sa.getTargets().add(ComputerUtilCard.getWorstAI(adaptCreats));
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);

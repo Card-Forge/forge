@@ -6,7 +6,6 @@ import com.google.common.collect.Multimap;
 import com.google.common.eventbus.Subscribe;
 import forge.game.card.CardView;
 import forge.game.event.*;
-import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiBase;
@@ -178,9 +177,6 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         }
         return processEvent();
     }
-    private Void updateZone(final Player p, final ZoneType z) {
-        return updateZone(PlayerView.get(p), z);
-    }
     private Void updateZone(final PlayerView p, final ZoneType z) {
         if (p == null || z == null) { return null; }
 
@@ -286,26 +282,6 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
             final Runnable notifyStackAddition = () -> matchController.notifyStackRemoval(event);
             GuiBase.getInterface().invokeInEdtLater(notifyStackAddition);
-        }
-        return null;
-    }
-
-    @Override
-    public Void visit(final GameEventSubgameEnd event) {
-        if (event.maingame() != null) {
-            for (Player p : event.maingame().getPlayers()) {
-                updateZone(p, ZoneType.Battlefield);
-                updateZone(p, ZoneType.Hand);
-                updateZone(p, ZoneType.Graveyard);
-                updateZone(p, ZoneType.Exile);
-                updateZone(p, ZoneType.Command);
-            }
-            //update matchscreen view to reflect maingame/previous daytime
-            if (event.maingame().isDay())
-                matchController.updateDayTime("Day");
-            else if (event.maingame().isNight())
-                matchController.updateDayTime("Night");
-            return processEvent();
         }
         return null;
     }

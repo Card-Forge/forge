@@ -40,7 +40,7 @@
   </object>
   <object id="71" template="../../../../common/maps/obj/enemy.tx" x="142.666" y="176.667">
    <properties>
-    <property name="enemy" value="Kilvori"/>
+    <property name="enemy" value="Kolvori"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>

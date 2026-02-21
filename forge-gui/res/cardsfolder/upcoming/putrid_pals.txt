@@ -1,0 +1,7 @@
+Name:Putrid Pals
+ManaCost:2 BG BG
+Types:Creature Human Ooze Mutant
+PT:3/3
+K:Deathtouch
+K:etbCounter:P1P1:2:Revolt$ True:Disappear — This creature enters with two +1/+1 counters on it if a permanent left the battlefield under your control this turn.
+Oracle:Deathtouch\nDisappear — This creature enters with two +1/+1 counters on it if a permanent left the battlefield under your control this turn.

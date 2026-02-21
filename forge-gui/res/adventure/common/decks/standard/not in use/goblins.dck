@@ -1,7 +1,7 @@
 [metadata]
 Name=Goblins
 Title=Goblins
-[main]
+[Main]
 2 Gauntlet of Might|LEA
 2 Giant Strength|4ED
 4 Goblin Balloon Brigade|4ED
@@ -17,4 +17,4 @@ Title=Goblins
 21 Mountain|4ED
 3 Orcish Oriflamme|LEB
 1 Shatter|4ED
-[sideboard]
+[Sideboard]
