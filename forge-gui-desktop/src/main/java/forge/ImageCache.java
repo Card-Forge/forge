@@ -40,9 +40,11 @@ import com.google.common.cache.CacheLoader.InvalidCacheLoadException;
 import com.google.common.cache.LoadingCache;
 import com.mortennobel.imagescaling.ResampleOp;
 
+import forge.card.CardStateName;
 import forge.card.CardSplitType;
 import forge.game.card.Card;
 import forge.game.card.CardView;
+import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -340,7 +342,6 @@ public class ImageCache {
                 float screenScale = GuiBase.getInterface().getScreenScale();
                 int width = Math.round(488 * screenScale), height = Math.round(680 * screenScale);
                 BufferedImage art = original;
-                CardView card = ipc != null ? Card.getCardForUi(ipc).getView() : cardView;
                 String legalString = null;
                 original = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
                 if (art != null) {
@@ -349,7 +350,21 @@ public class ImageCache {
                     int year = cal.get(Calendar.YEAR);
                     legalString = "Illus. " + ipc.getArtist() + "   ©" + year + " WOTC";
                 }
-                FCardImageRenderer.drawCardImage(original.createGraphics(), card, altState, width, height, art, legalString);
+                // For specialize faces, render the specific CardStateView directly
+                // rather than relying on CardView's current/alternate state lookup
+                CardStateView specState = null;
+                if (ipc != null && !specColor.isEmpty()) {
+                    CardStateName specStateName = specColorToStateName(specColor);
+                    if (specStateName != null) {
+                        specState = CardView.getState(Card.getCardForUi(ipc), specStateName);
+                    }
+                }
+                if (specState != null) {
+                    FCardImageRenderer.drawCardStateImage(original.createGraphics(), specState, width, height, art, legalString);
+                } else {
+                    CardView card = ipc != null ? Card.getCardForUi(ipc).getView() : cardView;
+                    FCardImageRenderer.drawCardImage(original.createGraphics(), card, altState, width, height, art, legalString);
+                }
                 // Skip store cache since the rendering speed seems to be fast enough
                 // Also the scaleImage below will already cache re-sized image for CardPanel anyway
                 // if (art != null || !fetcherEnabled)
@@ -369,6 +384,17 @@ public class ImageCache {
     private static boolean isWhiteBorderSet(String setCode) {
         return setCode.equals("U") || setCode.equals("R") || setCode.equals("4E") || setCode.equals("5E") ||
             setCode.equals("6E") || setCode.equals("7E") || setCode.equals("8E") || setCode.equals("9E");
+    }
+
+    private static CardStateName specColorToStateName(String specColor) {
+        switch (specColor) {
+            case "white": return CardStateName.SpecializeW;
+            case "blue": return CardStateName.SpecializeU;
+            case "black": return CardStateName.SpecializeB;
+            case "red": return CardStateName.SpecializeR;
+            case "green": return CardStateName.SpecializeG;
+            default: return null;
+        }
     }
 
     public static boolean isSupportedImageSize(final int width, final int height) {

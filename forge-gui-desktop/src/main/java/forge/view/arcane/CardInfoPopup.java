@@ -30,6 +30,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import forge.CachedCardImage;
 import forge.ImageCache;
+import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
@@ -651,16 +652,19 @@ public class CardInfoPopup {
         if (baseCard == null) {
             return;
         }
-        final CardView baseView = Card.getCardForUi(baseCard).getView();
+        // Use c:-prefixed keys with $wspec/$uspec/etc. postfixes (same format as
+        // CardFactory) so ImageCache can resolve specialize faces for both file
+        // lookup and Forge renderer fallback
+        final String baseKey = baseCard.getImageKey(false);
         for (final Map.Entry<CardStateName, ICardFace> entry : specParts.entrySet()) {
             try {
-                final String imageKey = specImageKey(baseCard, entry.getKey());
+                final String imageKey = specImageKey(baseKey, entry.getKey());
                 if (imageKey == null) {
                     continue;
                 }
                 final Pair<BufferedImage, Boolean> info =
                         ImageCache.getCardOriginalImageInfo(
-                                imageKey, true, baseView);
+                                imageKey, true);
                 final BufferedImage img = info.getLeft();
                 if (img != null) {
                     entries.add(new RelatedCardEntry("Specializes Into",
@@ -673,14 +677,14 @@ public class CardInfoPopup {
         }
     }
 
-    private static String specImageKey(final PaperCard card,
+    private static String specImageKey(final String baseKey,
                                         final CardStateName state) {
         switch (state) {
-            case SpecializeW: return card.getCardWSpecImageKey();
-            case SpecializeU: return card.getCardUSpecImageKey();
-            case SpecializeB: return card.getCardBSpecImageKey();
-            case SpecializeR: return card.getCardRSpecImageKey();
-            case SpecializeG: return card.getCardGSpecImageKey();
+            case SpecializeW: return baseKey + ImageKeys.SPECFACE_W;
+            case SpecializeU: return baseKey + ImageKeys.SPECFACE_U;
+            case SpecializeB: return baseKey + ImageKeys.SPECFACE_B;
+            case SpecializeR: return baseKey + ImageKeys.SPECFACE_R;
+            case SpecializeG: return baseKey + ImageKeys.SPECFACE_G;
             default: return null;
         }
     }
@@ -927,7 +931,7 @@ public class CardInfoPopup {
                 final javax.swing.JLabel overflowLabel = createAALabel(
                         "+" + overflow + " more (zoom for full list).");
                 overflowLabel.setForeground(TEXT_SECONDARY);
-                overflowLabel.setFont(FSkin.getFont(11).getBaseFont());
+                overflowLabel.setFont(FSkin.getBoldFont(11).getBaseFont());
                 overflowLabel.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
                 overflowLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(
                         4, 0, 0, 0));
