@@ -52,7 +52,7 @@ public class SacrificeAllAi extends SpellAbilityAi {
         if (minToGain > minToSacrifice + sa.getHostCard().getCMC()) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         } else {
-            return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
     }
 }
