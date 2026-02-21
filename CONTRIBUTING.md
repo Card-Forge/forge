@@ -58,6 +58,16 @@ Visit [this page](https://github.com/Card-Forge/forge/wiki/Card-scripting-API) f
 
 Card scripting resources are found in the forge-gui/res/ path.
 
+## Code Review Guidelines & Architecture
+
+Before submitting a PR, review [docs/Development/Guidelines.md](docs/Development/Guidelines.md) — coding standards distilled from PR reviewer feedback. Following these guidelines helps avoid the most common causes of PR rejection.
+
+For GUI hierarchy, layer responsibilities, and network infrastructure, see [docs/Development/Architecture.md](docs/Development/Architecture.md). This is essential reading before modifying GUI or network code.
+
+## Using AI Coding Agents
+
+See [AGENTS.md](AGENTS.md) for AI-assisted development configuration. It contains project context, build commands, and cross-references to the guidelines and architecture docs. It is designed to work with any AI coding tool (Claude Code, Cursor, Windsurf, Copilot, Codex, etc.).
+
 ## General Notes
 
 Art files need to be copyright-free and they should be in the public domain.
