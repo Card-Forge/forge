@@ -149,8 +149,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                     if (!panel.getAttachedPanels().isEmpty()
                             || !panel.getCard().hasSameCounters(firstPanel.getCard())
                             || firstPanel.getCard().hasCardAttachments()
-                            || (groupAll && card.isTapped() != firstPanel.getCard().isTapped())
-                            || (groupAll && card.getDamage() != firstPanel.getCard().getDamage())
+                            || card.isTapped() != firstPanel.getCard().isTapped()
+                            || card.getDamage() != firstPanel.getCard().getDamage()
                             || (!groupAll && stack.size() == STACK_MAX_LANDS)) {
                         // If this land has attachments or the stack is full,
                         // put it to the right.
