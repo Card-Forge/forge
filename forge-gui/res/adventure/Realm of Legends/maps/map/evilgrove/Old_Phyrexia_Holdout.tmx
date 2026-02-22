@@ -78,7 +78,7 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Phyrexian Tower|USG&quot;, &quot;No Mercy&quot;, &quot;Bonehoard|MBS&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Phyrexian Tower|USG&quot;, &quot;Gift of Compleation&quot;, &quot;No Mercy&quot;, &quot;Bonehoard|MBS&quot;]}"/>
     <property name="enemy" value="Yawgmoth"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" value="10"/>
