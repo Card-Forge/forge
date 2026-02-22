@@ -211,6 +211,9 @@ public class CountersPutEffect extends SpellAbilityEffect {
 
             CardCollection choices = CardLists.getValidCards(game.getCardsIn(choiceZone), sa.getParam("Choices"),
                     activator, card, sa);
+            if (counterType != null && !sa.hasParam("SkipReceiveCounters")) {
+                choices = CardLists.filter(choices, CardPredicates.canReceiveCounters(counterType));
+            }
 
             // TODO might use better message
             String title = Localizer.getInstance().getMessage("lblChooseaCard") + " ";
@@ -748,6 +751,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             sa.putParam("CounterNum", n);
             sa.putParam("Choices", "Creature.leastToughnessControlledByYou");
             sa.putParam("ChoiceTitle", Localizer.getInstance().getMessage("lblChooseACreatureWithLeastToughness"));
+            sa.putParam("SkipReceiveCounters", "True");
             if (!sa.hasParam("SpellDescription")) {
                 StringBuilder sb = new StringBuilder("Bolster");
                 sb.append(" ").append(n);
