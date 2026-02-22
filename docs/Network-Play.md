@@ -2,7 +2,7 @@
 - [Status & Support](#status--support)
 - [Requirements](#requirements)
 - [Quick Start](#quick-start)
-- [Reconnect Support](#reconnect-support)
+- [Disconnect/Reconnect Support](#disconnectreconnect-support)
 - [Network Configuration](#network-configuration)
   - [Local Network Setup](#local-network-setup)
   - [Remote Network Setup](#remote-network-setup)
@@ -60,12 +60,18 @@ There is no built-in matchmaking. Network play is designed for playing against p
 
 ---
 
-# Reconnect Support
+# Disconnect/Reconnect Support
 
 > [!IMPORTANT]
 > **The host's device is the server.** If the host disconnects or closes Forge, the game ends immediately for all players — there is no host migration or disconnect support for server crashes. Choose the most stable device/connection as the host.
 
 If a client player disconnects during an active game, the server enters **reconnection mode** instead of immediately ending the match.
+
+## Disconnect Detection
+
+Forge uses a **heartbeat** mechanism to detect silent disconnects (client crashes, network loss, or force-closes). Each client sends a lightweight heartbeat to the server every **15 seconds** of inactivity. If the server receives no data from a client — no heartbeats, game events, or chat messages — for **45 seconds**, it closes the connection and announces the timeout in chat.
+
+This means disconnects are typically detected within about 45 seconds, even when the client cannot send a clean shutdown signal.
 
 ## What happens on Disconnect
 
@@ -106,8 +112,9 @@ The host can type these commands in the lobby chat during the reconnection windo
 | **Linux** | Allow port 36743 through your firewall (e.g., `ufw allow 36743/tcp`). |
 
 ### 2. Validate the Port is Open
+The simplest test is to connect with Forge from another device on the same network. If the client connects to the lobby, the port is open and you can skip ahead.
 
-Test from a **different device** on the same network to confirm the host is accepting connections on port 36743.
+If the connection fails, use these tools to confirm whether the port is reachable:
 
 - **Android:** Use [PortDroid](https://play.google.com/store/apps/details?id=com.stealthcopter.portdroid) — scan the host's internal IP for port 36743.
 - **Windows (PowerShell):** Open PowerShell and run:
@@ -206,6 +213,7 @@ Any player on a shared private network can see other devices on that network. On
 ## "Disconnected From Lobby"
 A common cause for this is that the client and server resource (res) folder content differs. This can be verified by checking the game log and looking for an IOException referring to a "Card ... not found".
 
+## Version Compatibility
 Forge automatically warns in the lobby chat when a client's version differs from the host's but **does not block the connection**. While network play between different versions of Forge can be possible, mismatched versions may cause desync or crashes mid-game. If possible always use the same version on all devices to avoid network compatibility issues.
 
 ## Lag / High Bandwidth
