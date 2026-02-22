@@ -1,7 +1,7 @@
 Name:Leonardo, Leader in Blue
 ManaCost:W
 Types:Legendary Creature Mutant Ninja Turtle
-PT:2/2
+PT:2/1
 K:Sneak:3 W W
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+sneaked | Execute$ TrigPumpAll | TriggerDescription$ When Leonardo enters, if his sneak cost was paid, creatures you control get +2/+0 until end of turn.
 SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2
