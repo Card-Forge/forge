@@ -22,6 +22,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbilityAdapt;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
@@ -761,6 +762,28 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
             if (!sa.hasParam("SpellDescription")) {
                 sa.putParam("SpellDescription", "Monstrosity " + sa.getParam("Monstrosity"));
+            }
+        } else if (sa.hasParam("Support")) {
+            sa.putParam("TargetMin", "0");
+            sa.putParam("TargetMax", sa.getParam("Support"));
+            sa.putParam("CounterType", "P1P1");
+            sa.putParam("CounterNum", "1");
+            // 701.41a
+            String desc;
+            if (!sa.getHostCard().isPermanent()) {
+                sa.putParam("ValidTgts", "Creature");
+                desc = "target creatures";
+            } else {
+                sa.putParam("ValidTgts", "Creature.Other");
+                sa.putParam("ValidTgtsDesc", "other creature");
+                desc = "other target creatures";
+            }
+            sa.setTargetRestrictions(new TargetRestrictions(sa.getMapParams()));
+            if (!sa.hasParam("SpellDescription")) {
+                StringBuilder sb = new StringBuilder("Support");
+                sb.append(" ").append(sa.getParam("Support"));
+                sb.append(" (Put a +1/+1 counter on each of up to ").append(sa.getParam("Support")).append(" ").append(desc).append(".)");
+                sa.putParam("SpellDescription", sb.toString());
             }
         }
     }
