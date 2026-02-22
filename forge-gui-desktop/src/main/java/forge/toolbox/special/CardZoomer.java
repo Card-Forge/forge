@@ -36,6 +36,7 @@ import javax.swing.JPanel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.Timer;
 
+import forge.CachedCardImage;
 import forge.StaticData;
 import forge.game.card.Card;
 import forge.game.card.CardView;
@@ -240,7 +241,9 @@ public enum CardZoomer {
         final boolean showRelated = FModel.getPreferences().getPrefBoolean(FPref.UI_ZOOM_RELATED_CARDS);
 
         pnlMain.removeAll();
-        if ((showKeywords || showRelated) && thisCard != null) {
+        final boolean isFaceDown = thisCard != null && thisCard.getCard() != null
+                && thisCard.getCard().isFaceDown();
+        if ((showKeywords || showRelated) && thisCard != null && !isFaceDown) {
             final JPanel sidePanel = buildSidePanel(showKeywords, showRelated);
             if (sidePanel != null) {
                 pnlMain.setLayout(new MigLayout("insets 0, ax center, ay center"));
@@ -268,6 +271,12 @@ public enum CardZoomer {
             final CardView cardView = thisCard.getCard();
             if (cardName != null && !cardName.isEmpty() && cardView != null) {
                 relatedEntries = CardInfoPopup.buildRelatedCardsStatic(cardName, cardView);
+                for (final RelatedCardEntry entry : relatedEntries) {
+                    if ((entry.image == null || entry.placeholder)
+                            && entry.imageKey != null && !entry.imageKey.isEmpty()) {
+                        CachedCardImage.fetcher.fetchImage(entry.imageKey, () -> { });
+                    }
+                }
             }
         }
         final boolean hasRelated = !relatedEntries.isEmpty();

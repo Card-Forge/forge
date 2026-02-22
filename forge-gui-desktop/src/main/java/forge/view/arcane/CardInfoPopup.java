@@ -203,7 +203,7 @@ public class CardInfoPopup {
     public void showForCard(final CardView cardView, final Point cardScreenLocation,
                             final Dimension cardSize, final boolean showKeywords,
                             final boolean showRelatedCards, final boolean showCardImage) {
-        if (cardView == null) {
+        if (cardView == null || cardView.isFaceDown()) {
             hidePopup();
             return;
         }
@@ -418,6 +418,12 @@ public class CardInfoPopup {
         if (activePopup == this) {
             activePopup = null;
         }
+    }
+
+    /** Release the popup window and its resources. */
+    public void dispose() {
+        hidePopup();
+        window.dispose();
     }
 
     // --- Auto-download ---

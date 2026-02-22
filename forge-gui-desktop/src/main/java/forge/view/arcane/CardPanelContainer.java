@@ -393,6 +393,10 @@ public abstract class CardPanelContainer extends SkinnedPanel {
     }
     public final void clear(final boolean repaint) {
         FThreads.assertExecutedByEdt(true);
+        if (cardInfoPopup != null) {
+            cardInfoPopup.dispose();
+            cardInfoPopup = null;
+        }
         for (final CardPanel p : getCardPanels()) {
             p.dispose();
         }

@@ -122,6 +122,7 @@ public class VStack implements IVDoc<CStack> {
         final GameView model = controller.getMatchUI().getGameView();
 
         if (model == null) {
+            disposePopup();
             return;
         }
 
@@ -320,6 +321,13 @@ public class VStack implements IVDoc<CStack> {
     private void hideStackPopup() {
         if (cardInfoPopup != null) {
             cardInfoPopup.hidePopup();
+        }
+    }
+
+    private void disposePopup() {
+        if (cardInfoPopup != null) {
+            cardInfoPopup.dispose();
+            cardInfoPopup = null;
         }
     }
 
