@@ -608,6 +608,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
                     FModel.getPreferences().setPref(prefKey, getCodeString());
                     FModel.getPreferences().save();
                     shortcut0.attach();
+                    FControl.instance.getForgeMenu().refresh();
                     KeyboardShortcutField.this.setBackground(Color.white);
                 }
             });
