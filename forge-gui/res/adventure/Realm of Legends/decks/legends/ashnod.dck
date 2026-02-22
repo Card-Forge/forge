@@ -1,81 +1,81 @@
 [metadata]
 Name=Ashnod the Uncaring
 [Commander]
-1 Ashnod the Uncaring|brc
+1 Ashnod the Uncaring|BRC
 [Main]
-1 counterspell|ice
-1 arcane denial|all
-1 Marionette Apprentice|mh3
-1 Ayara, Widow of the Realm|mom
-1 Blightstep Pathway|khm
-1 Blood Artist|avr
-1 Bojuka Bog|c14
-1 Breya's Apprentice|mh2
-1 Burnished Hart|cmr
-1 Cauldron of Souls|c16
-1 Command Tower|clb
-1 Commander's Sphere|dsc
-1 Crumbling Necropolis|mm3
-1 Detective's Satchel|mkm
-1 Dimir Aqueduct|ima
-1 Eloise, Nephalia Sleuth|mic
-1 Emry, Lurker of the Loch|mul
-1 Executioner's Capsule|c16
-1 Farid, Enterprising Salvager|brc
-1 Forensic Gadgeteer|mkm
-1 Garna, Bloodfist of Keld|dmu
-1 Ghoulcaller Gisa|c14
-1 Gleaming Geardrake|mkm
-1 Goblin Engineer|mh1
-1 Hidetsugu, Devouring Chaos|neo
-1 Ichor Wellspring|brr
-7 Island|brc
-1 Izzet Boilerworks|c21
-1 Jalira, Master Polymorphist|m15
-1 Junkyard Genius|bro
-1 Juri, Master of the Revue|cmr
-1 Kels, Fight Fixer|jmp
-1 Kurkesh, Onakke Ancient|m15
-1 Legion Extruder|big
-1 Liquimetal Torque|mh2
-1 Maestros Theater|snc
-1 Mahadi, Emporium Master|clb
-1 Marionette Master|brc
-1 Mayhem Devil|war
-1 Mimic Vat|som
-1 Mind Stone|c18
-1 Mishra, Eminent One|brc
-1 Mishra, Tamer of Mak Fawa|bro
-1 Mishra's Bauble|brr
-1 Mistvault Bridge|mh2
-1 Mnemonic Sphere|neo
-9 Mountain|brc
-1 Mycosynth Wellspring|nph
-1 Nightmare Shepherd|thb
-1 Obsessive Stitcher|m21
-1 Phyrexian Metamorph|nph
-1 Pitiless Plunderer|rix
-1 Priest of Forgotten Gods|rna
-1 Rakdos Carnarium|ima
-1 fervor|m13
-1 Ruthless Deathfang|dtk
-1 Saheeli, Sublime Artificer|war
-1 Sai, Master Thopterist|m19
-1 Scrap Mastery|c14
-1 Scrap Welder|neo
-1 Servo Schematic|aer
-1 Silverbluff Bridge|mh2
-1 Smelting Vat|brc
-1 Sol Ring|moc
-1 Stronghold Assassin|sth
-10 Swamp|brc
-1 Swiftfoot Boots|brr
-1 Tamiyo's Journal|soi
-1 Terramorphic Expanse|cmr
-1 Trading Post|c14
-1 Unstable Obelisk|c14
-1 Urza's Bauble|ice
-1 Wayfarer's Bauble|moc
-1 Weaponcraft Enthusiast|kld
-1 Woe Strider|thb
-1 Zulaport Cutthroat|clb
+1 Counterspell|ICE
+1 Arcane Denial|ALL
+1 Marionette Apprentice|MH3
+1 Ayara, Widow of the Realm|MOM
+1 Blightstep Pathway|KHM
+1 Blood Artist|AVR
+1 Bojuka Bog|C14
+1 Breya's Apprentice|MH2
+1 Burnished Hart|CMR
+1 Cauldron of Souls|C16
+1 Command Tower|CLB
+1 Commander's Sphere|DSC
+1 Crumbling Necropolis|MM3
+1 Detective's Satchel|MKM
+1 Dimir Aqueduct|IMA
+1 Eloise, Nephalia Sleuth|MIC
+1 Emry, Lurker of the Loch|MUL
+1 Executioner's Capsule|C16
+1 Farid, Enterprising Salvager|BRC
+1 Forensic Gadgeteer|MKM
+1 Garna, Bloodfist of Keld|DMU
+1 Ghoulcaller Gisa|C14
+1 Gleaming Geardrake|MKM
+1 Goblin Engineer|MH1
+1 Hidetsugu, Devouring Chaos|NEO
+1 Ichor Wellspring|BRR
+7 Island|BRC
+1 Izzet Boilerworks|C21
+1 Jalira, Master Polymorphist|M15
+1 Junkyard Genius|BRO
+1 Juri, Master of the Revue|CMR
+1 Kels, Fight Fixer|JMP
+1 Kurkesh, Onakke Ancient|M15
+1 Legion Extruder|BIG
+1 Liquimetal Torque|MH2
+1 Maestros Theater|SNC
+1 Mahadi, Emporium Master|CLB
+1 Marionette Master|BRC
+1 Mayhem Devil|WAR
+1 Mimic Vat|SOM
+1 Mind Stone|C18
+1 Mishra, Eminent One|BRC
+1 Mishra, Tamer of Mak Fawa|BRO
+1 Mishra's Bauble|BRR
+1 Mistvault Bridge|MH2
+1 Mnemonic Sphere|NEO
+9 Mountain|BRC
+1 Mycosynth Wellspring|NPH
+1 Nightmare Shepherd|THB
+1 Obsessive Stitcher|M21
+1 Phyrexian Metamorph|NPH
+1 Pitiless Plunderer|RIX
+1 Priest of Forgotten Gods|RNA
+1 Rakdos Carnarium|IMA
+1 Fervor|M13
+1 Ruthless Deathfang|DTK
+1 Saheeli, Sublime Artificer|WAR
+1 Sai, Master Thopterist|M19
+1 Scrap Mastery|C14
+1 Scrap Welder|NEO
+1 Servo Schematic|AER
+1 Silverbluff Bridge|MH2
+1 Smelting Vat|BRC
+1 Sol Ring|MOC
+1 Stronghold Assassin|STH
+10 Swamp|BRC
+1 Swiftfoot Boots|BRR
+1 Tamiyo's Journal|SOI
+1 Terramorphic Expanse|CMR
+1 Trading Post|C14
+1 Unstable Obelisk|C14
+1 Urza's Bauble|ICE
+1 Wayfarer's Bauble|MOC
+1 Weaponcraft Enthusiast|KLD
+1 Woe Strider|THB
+1 Zulaport Cutthroat|CLB
