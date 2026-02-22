@@ -574,10 +574,10 @@ public final class CMatchUI
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
                 if (p.getCards(ZoneType.Battlefield) != null) {
-                    updateCards(p.getCards(ZoneType.Battlefield));
+                    updateCards(p.getCards(ZoneType.Battlefield).threadSafeIterable());
                 }
                 if (p.getCards(ZoneType.Hand) != null) {
-                    updateCards(p.getCards(ZoneType.Hand));
+                    updateCards(p.getCards(ZoneType.Hand).threadSafeIterable());
                 }
             }
             FloatingZone.refreshAll();
@@ -591,10 +591,10 @@ public final class CMatchUI
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
                 if (p.getCards(ZoneType.Battlefield) != null) {
-                    updateCards(p.getCards(ZoneType.Battlefield));
+                    updateCards(p.getCards(ZoneType.Battlefield).threadSafeIterable());
                 }
                 if (p.getCards(ZoneType.Hand) != null) {
-                    updateCards(p.getCards(ZoneType.Hand));
+                    updateCards(p.getCards(ZoneType.Hand).threadSafeIterable());
                 }
             }
             FloatingZone.refreshAll();
@@ -607,7 +607,7 @@ public final class CMatchUI
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
                 if (p.getCards(ZoneType.Battlefield) != null) {
-                    updateCards(p.getCards(ZoneType.Battlefield));
+                    updateCards(p.getCards(ZoneType.Battlefield).threadSafeIterable());
                 }
             }
             FloatingZone.refreshAll();
