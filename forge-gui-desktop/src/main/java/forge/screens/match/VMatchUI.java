@@ -11,6 +11,8 @@ import forge.Singletons;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
+import forge.gui.framework.ICDoc;
+import forge.gui.framework.IVDoc;
 import forge.gui.framework.IVTopLevelUI;
 import forge.gui.framework.RectangleOfDouble;
 import forge.gui.framework.SRearrangingUtil;
@@ -157,6 +159,10 @@ public class VMatchUI implements IVTopLevelUI {
             // Dev mode enabled? May already by added, or put in message cell by default.
             getControl().getCPrompt().getView().getParentCell().addDoc(vDev);
         }
+
+        // Hide card panels based on preferences.
+        removeHiddenCardPanel(FPref.UI_MATCH_CARD_PICTURE_VISIBLE, EDocID.CARD_PICTURE);
+        removeHiddenCardPanel(FPref.UI_MATCH_CARD_DETAIL_VISIBLE, EDocID.CARD_DETAIL);
 
         //focus first enabled Prompt button if returning to match screen
         if (getBtnOK().isEnabled()) {
@@ -356,6 +362,66 @@ public class VMatchUI implements IVTopLevelUI {
         assignExtraFieldsToCells();
         SResizingUtil.resizeWindow();
         SRearrangingUtil.updateBorders();
+    }
+
+    private void removeHiddenCardPanel(FPref pref, EDocID docId) {
+        if (FModel.getPreferences().getPrefBoolean(pref)) {
+            return;
+        }
+        IVDoc<? extends ICDoc> doc = docId.getDoc();
+        if (doc != null && doc.getParentCell() != null) {
+            DragCell parent = doc.getParentCell();
+            parent.removeDoc(doc);
+            doc.setParentCell(null);
+            if (!parent.getDocs().isEmpty()) {
+                parent.setSelected(parent.getDocs().get(0));
+            }
+        }
+    }
+
+    public void relayoutCardPanels() {
+        final ForgePreferences prefs = FModel.getPreferences();
+
+        relayoutCardPanel(prefs, FPref.UI_MATCH_CARD_PICTURE_VISIBLE,
+                EDocID.CARD_PICTURE, EDocID.CARD_DETAIL);
+        relayoutCardPanel(prefs, FPref.UI_MATCH_CARD_DETAIL_VISIBLE,
+                EDocID.CARD_DETAIL, EDocID.CARD_PICTURE);
+
+        SResizingUtil.resizeWindow();
+        SRearrangingUtil.updateBorders();
+    }
+
+    private void relayoutCardPanel(ForgePreferences prefs, FPref pref,
+            EDocID docId, EDocID siblingId) {
+        IVDoc<? extends ICDoc> doc = docId.getDoc();
+        if (doc == null) { return; }
+        boolean visible = prefs.getPrefBoolean(pref);
+
+        if (!visible && doc.getParentCell() != null) {
+            // Hide: remove from cell, fill gap if empty
+            DragCell parent = doc.getParentCell();
+            parent.removeDoc(doc);
+            doc.setParentCell(null);
+            if (parent.getDocs().isEmpty()) {
+                SRearrangingUtil.fillGap(parent);
+                FView.SINGLETON_INSTANCE.removeDragCell(parent);
+            } else {
+                parent.setSelected(parent.getDocs().get(0));
+            }
+        } else if (visible && doc.getParentCell() == null) {
+            // Show: add as tab to sibling's cell, or fallback to log cell
+            DragCell target = null;
+            IVDoc<? extends ICDoc> sibling = siblingId.getDoc();
+            if (sibling != null && sibling.getParentCell() != null) {
+                target = sibling.getParentCell();
+            }
+            if (target == null) {
+                target = EDocID.REPORT_LOG.getDoc().getParentCell();
+            }
+            if (target != null) {
+                target.addDoc(doc);
+            }
+        }
     }
 
     public CMatchUI getControl() {

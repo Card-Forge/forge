@@ -137,6 +137,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_CURRENT_AI_PROFILE ("Default"),
         UI_CLONE_MODE_SOURCE ("false"),
         UI_MATCH_IMAGE_VISIBLE ("true"),
+        UI_MATCH_CARD_PICTURE_VISIBLE ("true"),
+        UI_MATCH_CARD_DETAIL_VISIBLE ("true"),
         UI_THEMED_COMBOBOX ("true"), // Now applies to all theme settings, not just Combo.
         UI_LOCK_TITLE_BAR ("false"),
         UI_HIDE_GAME_TABS ("false"), // Visibility of tabs in match screen.
