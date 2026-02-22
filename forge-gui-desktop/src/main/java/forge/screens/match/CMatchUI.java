@@ -124,6 +124,7 @@ import forge.util.Localizer;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import forge.view.FView;
+import forge.view.arcane.CardInfoPopup;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.FloatingZone;
 import net.miginfocom.layout.LinkHandler;
@@ -814,6 +815,7 @@ public final class CMatchUI
     @Override
     public void finishGame() {
         FloatingZone.closeAll(); //ensure floating card areas cleared and closed after the game
+        CardInfoPopup.hideActive();
         final GameView gameView = getGameView();
         if (hasLocalPlayers() || gameView.isMatchOver()) {
             new ViewWinLose(gameView, this).show();

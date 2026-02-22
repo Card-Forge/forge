@@ -420,6 +420,13 @@ public class CardInfoPopup {
         }
     }
 
+    /** Hide whichever popup is currently showing (if any). */
+    public static void hideActive() {
+        if (activePopup != null) {
+            activePopup.hidePopup();
+        }
+    }
+
     /** Release the popup window and its resources. */
     public void dispose() {
         hidePopup();
@@ -1048,7 +1055,7 @@ public class CardInfoPopup {
                     state.getName());
             if (name != null && !name.isEmpty()) {
                 final int titleX = Math.round(w * (24f / 480));
-                final int titleY = Math.round(h * (42f / 640));
+                final int titleY = Math.round(h * (52f / 640));
                 drawOutlinedText(g, name, baseFont, Color.WHITE,
                         outlineColor, titleX, titleY);
             }
@@ -1071,7 +1078,7 @@ public class CardInfoPopup {
                 final Font ptFont = baseFont.deriveFont(
                         baseFont.getSize2D() * 1.1f);
                 final FontMetrics fm = g.getFontMetrics(ptFont);
-                final int ptX = Math.round(w * (430f / 480))
+                final int ptX = Math.round(w * (410f / 480))
                         - fm.stringWidth(pt) / 2;
                 final int ptY = Math.round(h * (650f / 680));
                 drawOutlinedText(g, pt, ptFont, Color.WHITE,
@@ -1081,7 +1088,7 @@ public class CardInfoPopup {
                 final int damage = cardView.getDamage();
                 if (damage > 0) {
                     final String dmgStr = "\u00BB " + damage + " \u00AB";
-                    final int dmgX = Math.round(w * (430f / 480))
+                    final int dmgX = Math.round(w * (410f / 480))
                             - fm.stringWidth(dmgStr) / 2;
                     final int dmgY = ptY - Math.round(16 * scale);
                     drawOutlinedText(g, dmgStr, ptFont, Color.RED,
