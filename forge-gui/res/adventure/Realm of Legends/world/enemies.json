@@ -6122,7 +6122,7 @@
   },
   {
     "name": "Estrid",
-    "sprite": "sprites/enemy/humanoid/human/cleric.atlas",
+    "sprite": "sprites/enemy/humanoid/human/cleric/cleric.atlas",
     "deck": [
       "decks/legends/estrid.dck"
     ],
