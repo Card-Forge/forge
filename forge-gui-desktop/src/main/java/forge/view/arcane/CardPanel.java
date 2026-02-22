@@ -393,7 +393,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         }
         displayIconOverlay(g, canShow);
-        if (groupCount >= 4) {
+        if (groupCount >= 2) {
             drawGroupCountBadge(g);
         }
         if (canShow) {
@@ -533,7 +533,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     }
 
     public boolean isBadgeHit(int mouseX, int mouseY) {
-        if (groupCount < 4) {
+        if (groupCount < 2) {
             return false;
         }
         // Mouse coordinates are container-relative (from PlayArea), so use
