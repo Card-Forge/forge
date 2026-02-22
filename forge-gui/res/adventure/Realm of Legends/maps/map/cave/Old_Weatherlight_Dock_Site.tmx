@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="118">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="119">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -47,6 +47,14 @@
   <object id="52" template="../../../../common/maps/obj/gold.tx" x="252.333" y="96.333"/>
   <object id="54" template="../../../../common/maps/obj/enemy.tx" x="176.334" y="135.916">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Hanna"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="30"/>
@@ -54,6 +62,14 @@
   </object>
   <object id="55" template="../../../../common/maps/obj/enemy.tx" x="175.833" y="214.834">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Gerrard"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="40"/>
@@ -66,7 +82,15 @@
   <object id="76" template="../../../../common/maps/obj/manashards.tx" x="190" y="101.333"/>
   <object id="79" template="../../../../common/maps/obj/enemy.tx" x="315" y="137">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Relic of Legends&quot;, &quot;Short Sword|DOM&quot;]
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;SIsay's Ring|VIS&quot;, &quot;Short Sword|DOM&quot;]
 }</property>
     <property name="enemy" value="Sisay"/>
     <property name="speedModifier" type="float" value="30"/>
@@ -75,12 +99,28 @@
   </object>
   <object id="80" template="../../../../common/maps/obj/enemy.tx" x="199.333" y="334.667">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Tahngarth"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
   <object id="81" template="../../../../common/maps/obj/enemy.tx" x="250" y="155">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Squee"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="30"/>
@@ -89,6 +129,14 @@
   <object id="82" template="../../../../common/maps/obj/gold.tx" x="317" y="96.5"/>
   <object id="83" template="../../../../common/maps/obj/enemy.tx" x="249.5" y="124">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Mirri"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="30"/>
@@ -124,7 +172,7 @@
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Gerrard's Hourglass Pendant&quot;, &quot;editions&quot;: [ &quot;DMC&quot; ], &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
-  <object id="87" template="../../../../common/maps/obj/scroll.tx" x="112" y="415.333">
+  <object id="87" template="../../../../common/maps/obj/scroll.tx" x="325.333" y="348.666">
    <properties>
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Coastal Tower&quot;, &quot;editions&quot;: [ &quot;INV&quot; ], &quot;count&quot;: 1 } ]"/>
    </properties>
@@ -182,7 +230,7 @@
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Skyship Weatherlight&quot;, &quot;editions&quot;: [ &quot;PLS&quot; ], &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
-  <object id="100" template="../../../../common/maps/obj/enemy.tx" x="335.833" y="382.958">
+  <object id="100" template="../../../../common/maps/obj/enemy.tx" x="417.833" y="379.625">
    <properties>
     <property name="dialog">[
 	{
@@ -220,5 +268,49 @@
   <object id="115" template="../../../../common/maps/obj/collision.tx" x="139.553" y="65.6665" width="230.227" height="7.33367"/>
   <object id="116" template="../../../../common/maps/obj/collision.tx" x="305.852" y="416.594" width="15.0455" height="62.894"/>
   <object id="117" template="../../../../common/maps/obj/collision.tx" x="256.955" y="384.25" width="15.5909" height="16"/>
+  <object id="118" template="../../../../common/maps/obj/enemy.tx" x="113.333" y="420">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'Hey! Wanna make some money for something you were probably gonna do anyway?'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;The weatherlight sails no more.&quot;,
+					&quot;text&quot;: &quot;'Yes! Vengeance is mine at long last! Enjoy your spoils.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Vhati il-Dal&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 1800}                
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 6
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Sure do.&quot;,
+					&quot;text&quot;: &quot;'The bastards on the ship ahead are old enemies of mine. Led to me gettin' killed actually, but here I am back alive. Some sorta time distortion, I don't understand it. But I do understand I'm gettin' my revenge this time. Take em' all out and I'll give ya this chest of gold I got.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;You don't know what I am or am not going to do.&quot;,
+					&quot;text&quot;: &quot;'Pft. You got violence written all over you. But suit yourself.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Vhati il-Dal"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

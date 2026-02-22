@@ -61584,6 +61584,51 @@
     ]
   },
   {
+    "name": "Whisper",
+    "sprite": "sprites/enemy/humanoid/human/warlock/witch.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Vhati il-Dal",
+    "sprite": "sprites/enemy/humanoid/human/bandit/banditleader.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Xantcha",
+    "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz3.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
     "name": "Mysterious Mage",
     "sprite": "sprites/enemy/humanoid/conjurer.atlas",
     "deck": [
