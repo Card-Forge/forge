@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Darksteel Myr&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Darksteel Myr&quot;, &quot;Genesis Chamber&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -61,7 +61,7 @@
   </object>
   <object id="69" template="../../../../common/maps/obj/enemy.tx" x="360.086" y="110.375">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Genesis Chamber|DST&quot;, &quot;Myr matrix|DST&quot;, &quot;Myr Scrapling|MH2&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Myr Matrix|DST&quot;, &quot;Myr Scrapling|MH2&quot;]}"/>
     <property name="enemy" value="Urtet"/>
     <property name="threatRange" type="int" value="0"/>
     <property name="waypoints" value=""/>

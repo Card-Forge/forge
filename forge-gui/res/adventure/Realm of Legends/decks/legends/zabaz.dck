@@ -1,85 +1,85 @@
 [metadata]
 Name=Zabaz, the Glimmerwasp
 [Commander]
-1 Zabaz, the Glimmerwasp|mh2|243
+1 Zabaz, the Glimmerwasp|MH2|243
 [Main]
-1 Ancient Den|eoc|148
-1 Arcane Signet|m3c|283
-1 Arcbound Bruiser|dst|94
-1 Arcbound Crusher|dst|95
-1 Arcbound Fiend|dst|96
-1 Arcbound Hybrid|dst|97
-1 Arcbound Javelineer|mh2|2
-1 Arcbound Lancer|dst|98
-1 Arcbound Mouser|mh2|3
-1 Arcbound Overseer|plst|DST-99
-1 Arcbound Prototype|mh2|4
-1 Arcbound Ravager|mma|198
-1 Arcbound Reclaimer|dst|101
-1 Arcbound Shikari|mh2|184
-1 Arcbound Slasher|mh2|111
-1 Arcbound Slith|plst|DST-102
-1 Arcbound Stinger|mma|199
-1 Arcbound Tracker|mh2|112
-1 Arcbound Whelp|mh2|113
-1 Arcbound Worker|mma|201
-1 Boros Garrison|clu|231
-1 talisman of conviction|TDC
-1 Brilliant Restoration|neo|7
-1 Cathars' Crusade|jmp|95
-1 Clifftop Retreat|eoc|155
-1 Command Tower|eoc|59
-1 Contagion Clasp|onc|129
-1 Contagion Engine|som
-1 Crystalline Crawler|eoc|133
-1 Darksteel Citadel|c21|285
-1 Darksteel Monolith|cmm|743
-1 Epochrasite|cm2|187
-1 Etched Oracle|eoc|136
-1 Everflowing Chalice|eoc|137
-1 Feldon of the Third Path|moc|277
-1 Ferropede|5dn|122
-1 Foundry Inspector|cmm|385
-1 Furycalm Snarl|lcc|333
-1 Goblin Engineer|mh1
-1 Goblin Welder|cm2|101
-1 Great Furnace|eoc|161
-1 Hangarback Walker|eoc|139
-1 Hourglass of the Lost|m3c|92
-1 Inspiring Vantage|otj|269
-1 Karn's Bastion|eoc|163
-1 Lithoform Engine|znr|245
-1 Losheel, Clockwork Scholar|cmm|38
-1 Lux Artillery|eoc|140
-1 Marketback Walker|dft|235
-1 Metallurgeon|arc|2
-1 Mindless Automaton|eoc|142
-1 Monoskelion|mh2|229
-11 Mountain|eoe|274
-1 Mystic Forge|m3c|302
-1 Open the Vaults|2xm|24
-1 Palladium Myr|cmm|967
-1 Pentavus|c14
-10 Plains|eoe|268
-1 Platoon Dispenser|bro|36
-1 Power Depot|mh2|251
-1 Raucous Carnival|dsk|266
-1 Resourceful Defense|eoc|67
-1 Ruins of Oran-Rief|m3c|370
-1 Rustvale Bridge|eoc|175
-1 Scrap Trawler|moc|373
-1 Scrapyard Recombiner|mh1|227
-1 Solemn Simulacrum|fdn|257
-1 Steel Overseer|eoc|144
-1 Stonecoil Serpent|cmm|976
-1 Sunbillow Verge|dft|264
-1 Sundown Pass|inr|286
-1 Tempered Steel|2xm|34
-1 The Eternity Elevator|eoe|241
-1 The Ozolith|iko|237
-1 Thran Dynamo|blc|290
-1 Together Forever|moc|212
-1 Trash for Treasure|2xm|148
-1 Unbounded Potential|cmm|67
-1 Walking Ballista|j22|806
-1 Wanderer's Strike|cmm|69
+1 Ancient Den|EOC|148
+1 Arcane Signet|M3C|283
+1 Arcbound Bruiser|DST|94
+1 Arcbound Crusher|DST|95
+1 Arcbound Fiend|DST|96
+1 Arcbound Hybrid|DST|97
+1 Arcbound Javelineer|MH2|2
+1 Arcbound Lancer|DST|98
+1 Arcbound Mouser|MH2|3
+1 Arcbound Overseer|DST|99
+1 Arcbound Prototype|MH2|4
+1 Arcbound Ravager|MMA|198
+1 Arcbound Reclaimer|DST|101
+1 Arcbound Shikari|MH2|184
+1 Arcbound Slasher|MH2|111
+1 Arcbound Slith|DST|102
+1 Arcbound Stinger|MMA|199
+1 Arcbound Tracker|MH2|112
+1 Arcbound Whelp|MH2|113
+1 Arcbound Worker|MMA|201
+1 Boros Garrison|CLU|231
+1 Talisman of Conviction|TDC
+1 Brilliant Restoration|NEO|7
+1 Cathars' Crusade|JMP|95
+1 Clifftop Retreat|EOC|155
+1 Command Tower|EOC|59
+1 Contagion Clasp|ONC|129
+1 Contagion Engine|SOM
+1 Crystalline Crawler|EOC|133
+1 Darksteel Citadel|C21|285
+1 Darksteel Monolith|CMM|743
+1 Epochrasite|CM2|187
+1 Etched Oracle|EOC|136
+1 Everflowing Chalice|EOC|137
+1 Feldon of the Third Path|MOC|277
+1 Ferropede|5DN|122
+1 Foundry Inspector|CMM|385
+1 Furycalm Snarl|LCC|333
+1 Goblin Engineer|MH1
+1 Goblin Welder|CM2|101
+1 Great Furnace|EOC|161
+1 Hangarback Walker|EOC|139
+1 Hourglass of the Lost|M3C|92
+1 Inspiring Vantage|OTJ|269
+1 Karn's Bastion|EOC|163
+1 Lithoform Engine|ZNR|245
+1 Losheel, Clockwork Scholar|CMM|38
+1 Lux Artillery|EOC|140
+1 Marketback Walker|DFT|235
+1 Metallurgeon|ARC|2
+1 Mindless Automaton|EOC|142
+1 Monoskelion|MH2|229
+11 Mountain|EOE|274
+1 Mystic Forge|M3C|302
+1 Open the Vaults|2XM|24
+1 Palladium Myr|CMM|967
+1 Pentavus|C14
+10 Plains|EOE|268
+1 Platoon Dispenser|BRO|36
+1 Power Depot|MH2|251
+1 Raucous Carnival|DSK|266
+1 Resourceful Defense|EOC|67
+1 Ruins of Oran-Rief|M3C|370
+1 Rustvale Bridge|EOC|175
+1 Scrap Trawler|MOC|373
+1 Scrapyard Recombiner|MH1|227
+1 Solemn Simulacrum|FDN|257
+1 Steel Overseer|EOC|144
+1 Stonecoil Serpent|CMM|976
+1 Sunbillow Verge|DFT|264
+1 Sundown Pass|INR|286
+1 Tempered Steel|2XM|34
+1 The Eternity Elevator|EOE|241
+1 The Ozolith|IKO|237
+1 Thran Dynamo|BLC|290
+1 Together Forever|MOC|212
+1 Trash for Treasure|2XM|148
+1 Unbounded Potential|CMM|67
+1 Walking Ballista|J22|806
+1 Wanderer's Strike|CMM|69

@@ -39,28 +39,28 @@
   </object>
   <object id="58" template="../../../../common/maps/obj/enemy.tx" x="150.126" y="152.347">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Font of Vigor|JOU&quot;, &quot;Font of Fertility|JOU&quot;, &quot;Temple of Plenty&quot;, &quot;Dictate of Karametra|JOU&quot;, &quot;Bronze Sable|THS&quot;, &quot;Bronze Sable|THS&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Font of Vigor|JOU&quot;, &quot;Font of Fertility|JOU&quot;, &quot;Alseid of Life's Bounty&quot;, &quot;Dictate of Karametra|JOU&quot;, &quot;Dryad of the Ilysian Grove&quot;]}"/>
     <property name="enemy" value="Karametra"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
   <object id="59" template="../../../../common/maps/obj/enemy.tx" x="265.148" y="152.884">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Deceit&quot;, &quot;Font of Return|JOU&quot;, &quot;Font of Fortunes|JOU&quot;, &quot;Black Oak of Odunos|BNG&quot;, &quot;Returned Phalanx|THS&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Font of Return|JOU&quot;, &quot;Font of Fortunes|JOU&quot;, &quot;Black Oak of Odunos|BNG&quot;, &quot;Returned Phalanx|THS&quot;]}"/>
     <property name="enemy" value="Phenax"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
   <object id="60" template="../../../../common/maps/obj/enemy.tx" x="265.277" y="233.151">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Malice&quot;, &quot;Font of Ire|JOU&quot;, &quot;Font of Return|JOU&quot;, &quot;Slaughter-Priest of Mogis|THB&quot;, &quot;Soulreaper of Mogis|THB&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Font of Ire|JOU&quot;, &quot;Font of Return|JOU&quot;, &quot;Slaughter-Priest of Mogis|THB&quot;, &quot;Soulreaper of Mogis|THB&quot;]}"/>
     <property name="enemy" value="Mogis"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
   <object id="61" template="../../../../common/maps/obj/enemy.tx" x="149.589" y="231.393">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Abandon&quot;, &quot;Reckless Reveler|BNG&quot;, &quot;Font of Fertility|JOU&quot;, &quot;Font of Ire|JOU&quot;, &quot;Eidolon of the Great Revel|JOU&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Reckless Reveler|BNG&quot;, &quot;Font of Fertility|JOU&quot;, &quot;Font of Ire|JOU&quot;, &quot;Eidolon of the Great Revel|JOU&quot;]}"/>
     <property name="enemy" value="Xenagos"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
@@ -68,7 +68,7 @@
   <object id="67" template="../../../../common/maps/obj/manashards.tx" x="107.973" y="135.78"/>
   <object id="71" template="../../../../common/maps/obj/enemy.tx" x="209.462" y="90.7975">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Enlightenment&quot;, &quot;Ephara's Warden|THS&quot;, &quot;Font of Fortunes|JOU&quot;, &quot;Font of Vigor|JOU&quot;, &quot;Guardians of Meletis|THS&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ephara's Warden|THS&quot;, &quot;Font of Fortunes|JOU&quot;, &quot;Font of Vigor|JOU&quot;, &quot;The Birth of Meletis&quot;]}"/>
     <property name="enemy" value="Ephara"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>

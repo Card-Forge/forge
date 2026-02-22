@@ -35,6 +35,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineEvent;
 import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import com.google.common.io.Files;
@@ -79,7 +80,7 @@ public class AudioClip implements IAudioClip {
             // not become completely merged
             waitSoundSystemDelay();
         }
-        getIdleClip().start();
+        getIdleClip().start(value);
     }
 
     @Override
@@ -159,11 +160,12 @@ public class AudioClip implements IAudioClip {
             return null == clip;
         }
 
-        void start() {
+        void start(float volume) {
             if (null == clip) {
                 return;
             }
             synchronized (this) {
+                applyVolume(volume);
                 clip.setMicrosecondPosition(0);
                 this.started = false;
                 clip.start();
@@ -221,6 +223,16 @@ public class AudioClip implements IAudioClip {
                 return null;
             }
             throw new MissingResourceException("Sound clip failed to load", this.getClass().getName(), filename);
+        }
+
+        private void applyVolume(float volume) {
+            if (clip.isControlSupported(FloatControl.Type.MASTER_GAIN)) {
+                FloatControl gain = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+                float dB = (float) (20.0 * Math.log10(Math.max(volume, 0.0001)));
+                dB = Math.max(dB, gain.getMinimum());
+                dB = Math.min(dB, gain.getMaximum());
+                gain.setValue(dB);
+            }
         }
 
         private void clipStateChanged(LineEvent lineEvent) {

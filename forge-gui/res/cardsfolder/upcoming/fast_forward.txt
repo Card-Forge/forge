@@ -1,0 +1,7 @@
+Name:Fast Forward
+ManaCost:2 R R
+Types:Sorcery
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each opponent you attacked this turn.
+A:SP$ Goad | Defined$ Valid Creature.OppCtrl | SpellDescription$ Goad all creatures your opponents control. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)
+SVar:X:PlayerCountPropertyYou$OpponentsAttackedThisTurn
+Oracle:This spell costs {1} less to cast for each opponent you attacked this turn.\nGoad all creatures your opponents control. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)

@@ -1,103 +1,96 @@
 [metadata]
 Name=Kaust, Eyes of the Glade
 [Commander]
-1 Kaust, Eyes of the Glade|MKC|1
+1 Kaust, Eyes of the Glade|MKC
 [Main]
-1 Ainok Survivalist|MKC|1
-1 Akroma, Angel of Fury|MKC|1
-1 Ashcloud Phoenix|MKC|1
-1 Beast Whisperer|MKC|1
-1 Boltbender|MKC|1
-1 Broodhatch Nantuko|MKC|1
-1 Deathmist Raptor|MKC|1
-1 Den Protector|MKC|1
-1 Duskana, the Rage Mother|MKC|1
-1 Exalted Angel|MKC|1
-1 Experiment Twelve|MKC|1
-1 Hidden Dragonslayer|MKC|1
-1 Hooded Hydra|MKC|1
-1 Imperial Hellkite|MKC|1
-1 Krosan Cloudscraper|MKC|1
-1 Krosan Colossus|MKC|1
-1 Master of Pearls|MKC|1
-1 Mirror Entity|MKC|1
-1 Nantuko Vigilante|MKC|1
-1 Neheb, the Eternal|MKC|1
-1 Nervous Gardener|MKM|1
-1 Ohran Frostfang|MKC|1
-1 Printlifter Ooze|MKC|1
-1 Root Elemental|MKC|1
-1 Sakura-Tribe Elder|MKC|1
-1 Salt Road Ambushers|MKC|1
-1 Saryth, the Viper's Fang|MKC|1
-1 Scourge of the Throne|MKC|1
-1 Seedborn Muse|MKC|1
-1 Sidar Kondo of Jamuraa|MKC|1
-1 Temur War Shaman|MKC|1
-1 Tesak, Judith's Hellhound|MKC|1
-1 Thelonite Hermit|MKC|1
-1 Toski, Bearer of Secrets|MKC|1
-1 Welcoming Vampire|MKC|1
-1 Whisperwood Elemental|MKC|1
-1 Yedora, Grave Gardener|MKC|1
-1 Austere Command|MKC|1
-1 Decimate|MKC|1
-1 Dusk|MKC|1
-1 Fell the Mighty|MKC|1
-1 Jeska's Will|MKC|1
-1 Nature's Lore|MKC|1
-1 Three Visits|MKC|1
-1 Chaos Warp|MKC|1
-1 Path to Exile|MKC|1
-1 Return of the Wildspeaker|MKC|1
-1 Showstopping Surprise|MKC|1
-1 Unexplained Absence|MKC|1
-1 Mastery of the Unseen|MKC|1
-1 Obscuring Aether|MKC|1
-1 Trail of Mystery|MKC|1
-1 True Identity|MKC|1
-1 Ugin's Mastery|MKC|1
-1 Veiled Ascension|MKC|1
-1 Wild Growth|MKC|1
-1 Arcane Signet|MKC|1
-1 Lifecrafter's Bestiary|MKC|1
-1 Panoptic Projektor|MKC|1
-1 Ransom Note|MKC|1
-1 Scroll of Fate|MKC|1
-1 Sol Ring|MKC|1
-1 Boros Garrison|MKC|1
-1 Branch of Vitu-Ghazi|MKM|1
-1 Canopy Vista|MKC|1
-1 Cinder Glade|MKC|1
-1 Command Tower|MKC|1
-1 Exotic Orchard|MKC|1
-1 Fortified Village|MKC|1
-1 Furycalm Snarl|MKC|1
-1 Game Trail|MKC|1
-1 Gruul Turf|MKC|1
-1 Jungle Shrine|MKC|1
-1 Kessig Wolf Run|MKC|1
-1 Krosan Verge|MKC|1
+1 Ainok Survivalist|MKC
+1 Akroma, Angel of Fury|MKC
+1 Ashcloud Phoenix|MKC
+1 Beast Whisperer|MKC
+1 Boltbender|MKC
+1 Broodhatch Nantuko|MKC
+1 Deathmist Raptor|MKC
+1 Den Protector|MKC
+1 Duskana, the Rage Mother|MKC
+1 Exalted Angel|MKC
+1 Experiment Twelve|MKC
+1 Hidden Dragonslayer|MKC
+1 Hooded Hydra|MKC
+1 Imperial Hellkite|MKC
+1 Krosan Cloudscraper|MKC
+1 Krosan Colossus|MKC
+1 Master of Pearls|MKC
+1 Mirror Entity|MKC
+1 Nantuko Vigilante|MKC
+1 Neheb, the Eternal|MKC
+1 Nervous Gardener|MKM
+1 Ohran Frostfang|MKC
+1 Printlifter Ooze|MKC
+1 Root Elemental|MKC
+1 Sakura-Tribe Elder|MKC
+1 Salt Road Ambushers|MKC
+1 Saryth, the Viper's Fang|MKC
+1 Scourge of the Throne|MKC
+1 Seedborn Muse|MKC
+1 Sidar Kondo of Jamuraa|MKC
+1 Temur War Shaman|MKC
+1 Tesak, Judith's Hellhound|MKC
+1 Thelonite Hermit|MKC
+1 Toski, Bearer of Secrets|MKC
+1 Welcoming Vampire|MKC
+1 Whisperwood Elemental|MKC
+1 Yedora, Grave Gardener|MKC
+1 Austere Command|MKC
+1 Decimate|MKC
+1 Dusk|MKC
+1 Fell the Mighty|MKC
+1 Jeska's Will|MKC
+1 Nature's Lore|MKC
+1 Three Visits|MKC
+1 Chaos Warp|MKC
+1 Path to Exile|MKC
+1 Return of the Wildspeaker|MKC
+1 Showstopping Surprise|MKC
+1 Unexplained Absence|MKC
+1 Mastery of the Unseen|MKC
+1 Obscuring Aether|MKC
+1 Trail of Mystery|MKC
+1 True Identity|MKC
+1 Ugin's Mastery|MKC
+1 Veiled Ascension|MKC
+1 Wild Growth|MKC
+1 Arcane Signet|MKC
+1 Lifecrafter's Bestiary|MKC
+1 Panoptic Projektor|MKC
+1 Ransom Note|MKC
+1 Scroll of Fate|MKC
+1 Sol Ring|MKC
+1 Boros Garrison|MKC
+1 Branch of Vitu-Ghazi|MKM
+1 Canopy Vista|MKC
+1 Cinder Glade|MKC
+1 Command Tower|MKC
+1 Exotic Orchard|MKC
+1 Fortified Village|MKC
+1 Furycalm Snarl|MKC
+1 Game Trail|MKC
+1 Gruul Turf|MKC
+1 Jungle Shrine|MKC
+1 Kessig Wolf Run|MKC
+1 Krosan Verge|MKC
 1 Stomping Ground|GTC
-1 Mosswort Bridge|MKC|1
-1 Sacred Peaks|MKC|1
-1 Scattered Groves|MKC|1
-1 Selesnya Sanctuary|MKC|1
-1 Sheltered Thicket|MKC|1
-1 Shrine of the Forsaken Gods|MKC|1
+1 Mosswort Bridge|MKC
+1 Sacred Peaks|MKC
+1 Scattered Groves|MKC
+1 Selesnya Sanctuary|MKC
+1 Sheltered Thicket|MKC
+1 Shrine of the Forsaken Gods|MKC
 1 Temple Garden|RTR
-1 Temple of Abandon|MKC|1
-1 Temple of Plenty|MKC|1
-1 Temple of the False God|MKC|1
-1 Temple of Triumph|MKC|1
-1 Zoetic Cavern|MKC|1
-2 Forest|MKM|1
-1 Forest|MKM|2
-1 Forest|MKM|3
-2 Plains|MKM|1
-1 Plains|MKM|2
-1 Plains|MKM|3
-1 Mountain|MKM|1
-1 Mountain|MKM|2
-1 Mountain|MKM|3
-[Sideboard]
+1 Temple of Abandon|MKC
+1 Temple of Plenty|MKC
+1 Temple of the False God|MKC
+1 Temple of Triumph|MKC
+1 Zoetic Cavern|MKC
+4 Forest|MKM
+4 Plains|MKM
+3 Mountain|MKM

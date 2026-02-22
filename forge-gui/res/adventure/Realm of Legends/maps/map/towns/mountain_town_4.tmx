@@ -54,7 +54,7 @@
   </object>
   <object id="55" template="../../../../common/maps/obj/shop.tx" x="112.275" y="115.497">
    <properties>
-    <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,     Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red,Giant"/>
+    <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,     Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red,Giant,Elemental"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
     <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red,PhyrexianRed"/>
     <property name="uncommonShopList" value="Creature2Red,Creature,Red"/>
@@ -62,7 +62,7 @@
   </object>
   <object id="56" template="../../../../common/maps/obj/shop.tx" x="127.31" y="179.93">
    <properties>
-    <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,     Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red,Giant"/>
+    <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,     Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red,Giant,Elemental"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
     <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red,PhyrexianRed"/>
     <property name="uncommonShopList" value="Creature2Red,Creature,Red"/>
@@ -70,7 +70,7 @@
   </object>
   <object id="57" template="../../../../common/maps/obj/shop.tx" x="367.86" y="163.285">
    <properties>
-    <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,     Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red,Giant"/>
+    <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,     Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red,Giant,Elemental"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
     <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red,PhyrexianRed"/>
     <property name="uncommonShopList" value="Creature2Red,Creature,Red"/>
@@ -78,7 +78,7 @@
   </object>
   <object id="58" template="../../../../common/maps/obj/shop.tx" x="288.089" y="98.3147">
    <properties>
-    <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,     Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red,Giant"/>
+    <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,     Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red,Giant,Elemental"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
     <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red,PhyrexianRed"/>
     <property name="uncommonShopList" value="Creature2Red,Creature,Red"/>

@@ -18,7 +18,6 @@
     "Magus of the Moon",
     "Harbinger of the Seas",
     "Ruination",
-    "Iona Shield of Emeria",
     "Limited Resources",
     "Constant Mists",
     "Karakas",
@@ -42,24 +41,20 @@
     "Constant Mists",
     "Land Equilibrium",
     "Storage Matrix",
-    "Lutri the Spellchaser",
+    "Lutri, the Spellchaser",
     "Gleemox",
     "Drake Stone",
     "Wrenn and One",
     "Under-Construction Skyscraper",
-    "Temur Elevator",
     "Slumbering Waterways",
-    "Omenpath to Naya",
     "The Heron Moon",
-    "Gobland",
     "Fetching Garden",
     "Mox Poison",
     "Wisedrafter's Will",
+    "Paliano, the High City",
     "New Master of Arms",
     "Halving Season",
     "Questing Cosplayer",
-    "Teferi Druid of Argoth",
-    "Anax and Cymede & Kynaios and Tiro",
     "Call from the Grave",
     "Mise",
     "Black Lotus",
@@ -119,7 +114,7 @@
     "Vampiric Tutor",
     "Wishclaw Talisman",
     "The One Ring",
-    "Emrakul the Aeons Torn",
+    "Emrakul, the Aeons Torn",
     "Ad Nauseum",
     "Bazaar of Baghdad",
     "Library of Alexandria",
@@ -225,12 +220,16 @@
       "startItems": [
         "Challenge Coin",
         "Challenge Coin",
-        "Challenge Coin"      
+        "Challenge Coin",
+        "Steel Boots",
+        "Lotus Petal",
+        "Echo Shield",
+        "Steel Armor"    
       ]
     }
     ,{
       "name": "Normal",
-      "startingLife": 25,
+      "startingLife": 20,
       "startingShards": 20,
       "startingMoney": 2000,
       "startingDifficulty": true,
@@ -250,11 +249,13 @@
       },
    "startItems": [
         "Challenge Coin",
-        "Challenge Coin"
+        "Challenge Coin",
+        "Steel Boots",
+        "Lotus Petal" 
       ]
     },{
       "name": "Hard",
-      "startingLife": 20,
+      "startingLife": 15,
       "startingShards": 10,
       "startingMoney": 500,
       "enemyLifeFactor": 1.5,
@@ -276,7 +277,7 @@
       ]
     },{
       "name": "Insane",
-      "startingLife": 15,
+      "startingLife": 10,
       "startingShards": 10,
       "startingMoney": 0,
       "enemyLifeFactor": 2.0,

@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Kher Keep&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Kobolds of Kher Keep|LEG&quot;, &quot;Crimson Kobolds|LEG&quot;, &quot;Crookshank Kobolds|LEG&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -90,7 +90,7 @@
   </object>
   <object id="56" template="../../../../common/maps/obj/enemy.tx" x="55.0776" y="126.697">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Kobold Taskmaster&quot;, &quot;Kobolds of Kher Keep|LEG&quot;, &quot;Crimson Kobolds|LEG&quot;, &quot;Crookshank Kobolds|LEG&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Kobold Taskmaster&quot;, &quot;Kher Keep&quot;]}"/>
     <property name="enemy" value="Prossh"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>

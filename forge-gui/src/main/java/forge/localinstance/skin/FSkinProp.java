@@ -768,6 +768,17 @@ public enum FSkinProp {
         };
     }
 
+    public static FSkinProp watermarkFromColor(MagicColor.Color color) {
+        return switch (color) {
+            case WHITE -> IMG_WATERMARK_W;
+            case BLUE -> IMG_WATERMARK_U;
+            case BLACK -> IMG_WATERMARK_B;
+            case RED -> IMG_WATERMARK_R;
+            case GREEN -> IMG_WATERMARK_G;
+            case COLORLESS -> IMG_WATERMARK_C;
+        };
+    }
+
     public enum PropType {
         BACKGROUND(null),
         COLOR(null),

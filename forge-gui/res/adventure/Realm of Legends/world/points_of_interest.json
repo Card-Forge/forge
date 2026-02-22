@@ -1032,6 +1032,18 @@
 			"Story"]
 	},
 	{
+		"name": "Arzakon's Fortress",
+		"displayName": "Arzakon's Fortress",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building51",
+		"map": "../Realm of Legends/maps/map/cave/Arzakons_Fortress.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
 		"name": "Bonder's Enclave",
 		"displayName": "Bonder's Enclave",
 		"type": "dungeon",
@@ -1626,7 +1638,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "PlainsCapital",
-		"map": "../Realm of Legends/maps/map/main_story/Plains_capital.tmx",
+		"map": "../Realm of Legends/maps/map/main_story/plains_capital.tmx",
 		"questTags": [
 			"Capital",
 			"BiomeWhite",
@@ -1640,7 +1652,7 @@
 		"count": 5,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "PlainsTown",
-		"map": "../Realm of Legends/maps/map/towns/Plains_town_1.tmx",
+		"map": "../Realm of Legends/maps/map/towns/plains_town_1.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Town",
@@ -1656,7 +1668,7 @@
 		"count": 5,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "PlainsTown",
-		"map": "../Realm of Legends/maps/map/towns/Plains_town_2.tmx",
+		"map": "../Realm of Legends/maps/map/towns/plains_town_2.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Town",
@@ -1672,7 +1684,7 @@
 		"count": 5,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "PlainsTown",
-		"map": "../Realm of Legends/maps/map/towns/Plains_town_3.tmx",
+		"map": "../Realm of Legends/maps/map/towns/plains_town_3.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Town",
@@ -1688,7 +1700,7 @@
 		"count": 5,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "PlainsTown",
-		"map": "../Realm of Legends/maps/map/towns/Plains_town_4.tmx",
+		"map": "../Realm of Legends/maps/map/towns/plains_town_4.tmx",
 		"radiusFactor": 0.8
 	},
 	{

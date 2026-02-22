@@ -20,6 +20,7 @@ import forge.Singletons;
 import forge.gamemodes.net.ChatMessage;
 import forge.gamemodes.net.IOnlineChatInterface;
 import forge.gamemodes.net.IRemote;
+import forge.gamemodes.net.client.FGameClient;
 import forge.gamemodes.net.event.MessageEvent;
 import forge.gui.framework.SDisplayUtil;
 import forge.localinstance.properties.ForgePreferences;
@@ -101,6 +102,12 @@ public enum FNetOverlay implements IOnlineChatInterface {
         }
 
         if (remote != null) {
+            if ("/simulatedisconnect".equalsIgnoreCase(message.trim()) && remote instanceof FGameClient) {
+                System.out.println("[FNetOverlay] /simulatedisconnect intercepted, remote=" + remote.getClass().getSimpleName());
+                addMessage(ChatMessage.createSystemMessage("Simulating disconnect: all network writes suspended."));
+                ((FGameClient) remote).simulateDisconnect();
+                return;
+            }
             remote.send(new MessageEvent(prefs.getPref(FPref.PLAYER_NAME), message));
         }
     };

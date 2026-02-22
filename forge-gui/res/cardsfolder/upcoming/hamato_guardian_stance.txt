@@ -1,0 +1,6 @@
+Name:Hamato Guardian Stance
+ManaCost:W
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +1 | NumDef$ +3 | KW$ Flying | SubAbility$ DBScry | SpellDescription$ Target creature gets +1/+3 and gains flying until end of turn. Scry 1. (Look at the top card of your library. You may put that card on the bottom.)
+SVar:DBScry:DB$ Scry | ScryNum$ 1
+Oracle:Target creature gets +1/+3 and gains flying until end of turn. Scry 1. (Look at the top card of your library. You may put that card on the bottom.)

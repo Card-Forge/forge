@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="104">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="107">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -8,17 +8,17 @@
  <tileset firstgid="11905" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt1cENgCAMBVAOJh5YxKVYxlkdxHggEm0xNoV+Qg//QKLy8oualhCSRyV7xIj73DeD71j/xaI/zoDi47zc2tqXTai+p8V948+X6gzBl/ctDUjvb+0bR12D4EP8f3Bz5Hq1/r/VzqP1fGtzR/ChnT/OzK0RfDWvte/LK/VRz0HztTDO5tM2ap8/bWeL/rSj4ZP0Iu24l09676g+zVy+HvtQ2eI7aL7SidYf+nzdd+cEqvZU4A==
+   eJztlrsNgDAMBSloUBiBAZiELbIMk1MhfiEfJ7FNeMV1kXw5RwLbd50FRViNDlrwWwY6f+6X0w390A/9ZPuFmMYrEn6++fD7vp/PqYZPrh838IMf/Gh+oe89/g/S/Fz9NPjF7LfWfVL83hxCc3M6p+43xmU/w9WP6sf1/iSh+t07le7Wup/0fkvCNcfFbJ5o8zt7auunfb/wO9gA+a7yjQ==
   </data>
  </layer>
  <layer id="6" name="Ground2" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJztmG1Kw0AQhscP0ETBHEBqf0ppRKwX8J/WYnsBQX95jV6gXsQr5DSiF/AEdmiHDMPOupX9Ks0LL5svsg/vbDbJNgcAzdrPh/mY1GTIx8X5vmt/9qWUfJObvPlc9HOchm+8zu7pjwxd8vvca70Jn6l+X0etXZR7fTs+gJf9vPlM+hgBPGzR/PKmZBybrx4AXA3cuXPJ71GpdS58mkLyjYYAt0P7Nsl0bNfz6/i68Zcyv5h8d2XefL7zk+8L7V9km+p7cQrQX7osVi35vFq1vao9h63c5sdMmrGMXh2/CS9PWr6UGiv1Rb7r5dh/L8IzaN8oNiEfssXgI90LzqmFOxafZJL72vNLfPifnqOQD9nqMh2DzJIL+dByXeu/mp/5uQ8JuXzy+RbxcdN8o60f0jXamibO56he5YdPMtLzrLHxd46J0adk35xP5krjwMTIHYpP5ij7pZraHDI/tMyN+l0UdiZ0DD7pTbILwfcLX/KFOg==
+   eJztmNFtwjAQQE2L1CagwgAV8FkhQiuVBTpIv7tG1f/yywoMkWkQXaATNKf0lONw7Dg+g1ti6cknjLin88Uozq+Vyn957cfDNinJI/RDN+73lclBc/jQ+fnxfRu3X5P67XoVvn77m4pY9pc66Ti3nwmbZwx+sdfvL/i9XTX3+xgcQvOa1rifrjbZXKnl/NjPpf8k/Vw4tV+o/jPld/F7LObV4jgGMEa/58XhusvzYfPZ3Nn7zxaf4/wL1X+Xcv7V9R+N6f627T+f/e36r+Ql/X/9d2l+06FSs4I0KWfkflz+zmRcrcHMY/qZlN/DoPIzjabvC6408Xsqen+dxOsHbp2fnx+8p9v8QmHzA7cs1Xu0HVL1Bj8A7rWoX9vxPpL1Ay/qJzWk/Sh43tTdH+J36u406Xku4ccd8Xmuc6P/OTpH6fpxR/TjdcU+0DlSQvnxOvK8uKcmQtYP4HXDvJ+J2Qk4hR/HpXYh/H4Arph/fQ==
   </data>
  </layer>
  <layer id="2" name="Ground" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJztmElOwzAUhi0VSAKXgF3VijWwRIh5lIAlh6EcBcGeYVnBCRiOAAUWDDs4AL9FDe6rp9ip8aKWftWN47wvf56d2O0aY+2uDkbSUbvWr/9mMrFxtSaq02LG2JKHlrM4fE+I8+yhF0e+lSZjq9AatA5tQJvQFrQN7RiOV8knP+/U/OOF+id843WdPzZfQ/mmx9lvieHfA+JlhVqnRT+fXORx7Zp3Vfo3D/ZP9PlquvHFzj/O5+sf/0/9cfF3kHyp+8d11mDsHLqALhu9cWmbys9B890g7i10B90TPlNbLP9eEfcNeoc+CANto7kXw79RxBiDMihv9vLRNt3cyfmOpblNV69ifMzUGZuF5ur9bab8k2Pb6uLXh28XXHvQvoLPlH/ye+NRU1/o1jsBfKnNL1Xxlck/cSwmX6z88+ULzT+6Jkot/1R88ny72ZUcVxwzfW8Nki9l/0xrQj6+yqwTJwt/Pt2a3HTP9DpVacg35HPhM60RVTpxPK9Tku8afa4cx14ZX1xl45sq3OcGGx+/11b+I5d75ucf5Xq+w/zveiHiLJxPnmtdrk3ZQvckdf3Ftwv9FlEV3V6a2B/y3ddMkc/EJHOr+GhcG58oIc9Xx27js3kWwueSv67+2Thj8vmWb1lVtJQ=
+   eJztmD1OwzAYhj+pQBKQOANbowZmYEQIOAAwchjKAJyAA5Sy8zNGFCYmfnYWKDBQ2OAAvFYbME7iOE7kGBRLjxoprv3k82fLdtggCkdsjdlD2IhTtZPMjdGeKo8Vh2hVgzXHjN8T+nnW4OWP+fHjbZsfKzbGb26SvouJ+D2gP8dL5siL+/GFn9dVxG8J7h8B0Wdgr5/t8ftvflezv+H7PW4RnYBTcAYOpuPo+EW/Kn67TaI9sN+M+13D6QbcgruWPH6yeRuxPKrTz+HXgdch6Cb4vcJpAN7Ae4nxUx1f5tOD1wW4BPeC3zjWgQngADcYvk9aO03Oj3mfaAEs+vF3svjxfWc958k/kXV4bYBNPx5P1fx7THnWyT/b15cq/DqeeT9T+afrVzT/xDORbflX+5XrJzsTsvmV55w44+n7pZ3JZd8stlMWtV/tp+Knstfk6SrW65fkVzQuqpj06yE+bXfIucJ6w+rvuOl+2+5Pe0VgLsyPX2tV2hbdit5Jpv0/2ruIe5GkknaXFt0P6d5r2ugnc+K9k/zEfrP8olJkfNPcs/yyYlbETyV/VeOX5WnST7d8AQjBu3I=
   </data>
  </layer>
  <layer id="3" name="Walls" width="40" height="40">
@@ -26,12 +26,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztmElOAkEUhivRhIAB13oDBl2IGhQXGqMRVHTNcUz0DuKQ6Mp4Bs6B7hziCTiB76W7QlnU8LqGFhP/5A/VVXS9j1cDXT2cY39CgzJjNzPi2/I0X6vC2FbqHfCLh9sOfbSF+NsVMx+2X3u4pYlhkhxf1c5/8yv4qM5YB9wFH4NPwKfgHvgMfG6od+EbCXnU8WH9xYK/Zb6lGmPLtemyLo8mPp63niE/trzKMTaAZxP8VZiUXfl0OXkquuevuTixTdT8ddOchMhfFrnmz2f+heSz5Y+yrql8nbXsfHwPwzzkuf/1qzQ+FMZ4biQOzbcCa3fVY/1yLtGoLKwx55+KLTTfcC5xaD6VeSwd37rQh66MajaSOsr8042vihuFazev8UXh2tXlS+eYfPjfJfOJRu2V6HMwJh/nkYV8LuuDOv94HYVvXJ+08bLIN66rP/m+GTt/78BSKCb+SMv7ijr++Vn6ORdj86mM+TM9E9hi+PCJ9ar/exTy+cbw5bs3nPeQj3oGvSvH4dOdCfG8hHwjTbvuntB8Yn0Vnndq4N355PotHV+85m0xROU7gPiHGgZTW158XJfwrHZleF6jficW3wPEfbTEpnwnFl/eouwvqvdHKHkcxeuB4v2Tqg7VV8zdgWVvsr2fQcnjKF6r7qf0SY0vtuv2aduebOKz9am6X1SWvZe6N7v26bq3/yuc+LlN9CxpFpl+Q9+nbKM0
+   eJztmM1Kw0AQxxd6ECupB0/6Bq2NCFWp1ouIolWr5z6OoK8grR+gJ+kz9DmqNz9Onn0CZ2iGjJv9arJJK/iHP83uJJmfs8mYZFgSf0L9QIjbGfFdkORrVoTYjrwLfsngVopztFj+nYqZD+O9DG5qcpgk51fF6W9+BR+tCnEMboNPwKfgM3AHfA6+MMyn4RuxOur4cP5yIbtlvuWaECu15LaujiY+qlvHUB9bXeUcm8CzBQ4q8XZavjzq11iMbZNr/dpRTXzUbxJNo34++Wz1c7mvXfm+wsn5qIcFBfe/btWND4U5BvWxs/A14PiN+u88Idy7axnuX+LiRk3Cmuf1p2LzzTcsje2bT2XKZVtf3TaJ5lyuP8y7V06uLzfGSTcFri8K713Op7Icz5PveV7NF0R9BkU8xIDjou4Pzof9n/i4ZB4XPl/XH+f7hv6/FMZ8OCY+3F4P4zj+0v696NgBy4Hn9V2/d8g7B+MP6Xe/HG+r4ujPcpKP2wdfoDG/HlW25chSPz6v+n+PovWW40U+Xz0Y3veQz/Ud9D7Ih0/3Tvgare9IE9cd45uPz1fheadWjZ/R3qL1xTHF8pAr3wHkP9QwmGJF8ZGu4Fnt2vC85rpPXnyPkPfJkttln7z4ipZLf1F9P0LJ68jH/SD5/Uk1h+oqrt2+pTfZvs+g5HXkY9XxLud0zc/juj5t68kmPts5VcdzTdJ7XXtz2nOm7e3/8id6b+OeJc0i0zT0A9Oao5Y=
   </data>
  </layer>
  <layer id="5" name="Overlay" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJztl0tuwjAQQA2sUBeobOgRaJJGbDkDl+EELWLFPdpjsGcF3bVdV6qExCWwBVbNMPEnsT2O4EkjYsfBj7GxJuseS5p1C/za4FiH3eAyQoH5wbldwrebaY3/Xv5j+eA+R7c8xYw/vz9HXb8meavKn08/n0gvGVV854z95HbfGSJ/GKvn676yb/dsysTKHxVbg99jxtgwazbHb8c+hA8MjPeCsY+imZfOT/2fYxET6CaQDlj+xD0sfyOer6dCf42NdfWT+cPuUeRPnU9dQ906m/afbz/oZdqH1Mh96EKo/feV49ewD34KNp7OkDu3iVoryzDd142PwSs/0954LBKsTT7H+jYVsiY/AB/R1tXr84m+7dsP84D92LgpUr+HwOQIf0es/Jn8XMeEgnJuW6QfXMtU3LF9ZvvuHQsXB+rzHNalqdSogpTe42x8KB3ruFH7qf3YGCqq5g/tdgSrC/E1
+   eJztl81OAjEQx6ueDAcDF3gEgV3wyjP4MjyBGk+8BzwGd07ATT2bmJj4AF5tgxO742w/lrbTDfyTf9h+LPNj2i2z6yuRtdYt4GsDYxPtbqqOJYoPx/ZxaDbbGn+Uf37u+Me4nBx8L+///HVTvmPyVpe/kHwhBVzgOr2OhXgbu31njPxRWgz/902u3e7NWanyx6WtxtcvhBgU1fHuSIje6LgY7xfuVjzYlJaSc1XQYyH49OecckphNiVgoPKnxqj86etbd03N9eWD/FFjHPnT4+lraFpn2/4LzYe5bPuQW7APfRRj/73I/8FpWW3r19/FwUrqE/pgfBPoDDnrNKXXymDbuGl+Cj3IM+1R+inD2mR/a25zCWryL8Sj2qZ6fX5nbofmozhwPzVvRtTvMWRjxL8jVf5sfL5zYokztquAD69lLuzUPnN9904lHwbu8xzXpbnUqEo5vce58HAyNmHj5tP7qTlcqosfm+0HZg32pA==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -128,7 +128,7 @@
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
-  <object id="67" template="../../../../common/maps/obj/shop.tx" x="208" y="338">
+  <object id="67" template="../../../../common/maps/obj/shop.tx" x="177" y="339">
    <properties>
     <property name="commonShopList" value="WhiteBoosterPackShop"/>
     <property name="mythicShopList" value=""/>
@@ -149,7 +149,7 @@
     <property name="signYOffset" type="float" value="-2"/>
    </properties>
   </object>
-  <object id="71" template="../../../../common/maps/obj/RotatingShop.tx" x="82.3333" y="339.667">
+  <object id="71" template="../../../../common/maps/obj/RotatingShop.tx" x="64.8333" y="341.167">
    <properties>
     <property name="rotation" value="White1,White2,White3,White4,White5,White6"/>
     <property name="signYOffset" type="float" value="-2"/>
@@ -160,7 +160,7 @@
     <property name="signYOffset" type="float" value="-2"/>
    </properties>
   </object>
-  <object id="73" template="../../../../common/maps/obj/shop.tx" x="271" y="338">
+  <object id="73" template="../../../../common/maps/obj/shop.tx" x="304.5" y="341">
    <properties>
     <property name="commonShopList" value="Legend4White"/>
     <property name="mythicShopList" value=""/>
@@ -169,44 +169,150 @@
     <property name="uncommonShopList" value=""/>
    </properties>
   </object>
-  <object id="77" template="../../../../common/maps/obj/shop.tx" x="240.833" y="338">
+  <object id="77" template="../../../../common/maps/obj/shop.tx" x="256.333" y="339">
    <properties>
     <property name="commonShopList" value="Artifact4White,Land4White,Dimir,Rakdos,Orzhov,Golgari,Vehicle2White,Wand4White"/>
     <property name="signYOffset" type="float" value="-2"/>
     <property name="uncommonShopList" value="Planeswalker4White,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,Legend4White,PhyrexianWhite"/>
    </properties>
   </object>
-  <object id="78" template="../../../../common/maps/obj/shop.tx" x="496.5" y="183">
+  <object id="78" template="../../../../common/maps/obj/shop.tx" x="369" y="212">
    <properties>
     <property name="commonShopList" value="Artifact4White,Land4White,Dimir,Rakdos,Orzhov,Golgari,Vehicle2White,Wand4White"/>
     <property name="signYOffset" type="float" value="-8"/>
     <property name="uncommonShopList" value="Planeswalker4White,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,Legend4White,PhyrexianWhite"/>
    </properties>
   </object>
-  <object id="79" template="../../../../common/maps/obj/collision.tx" x="80.7586" y="190.893" width="61.816" height="64.2137"/>
-  <object id="80" template="../../../../common/maps/obj/collision.tx" x="195.759" y="198.56" width="60.4827" height="58.8803"/>
-  <object id="81" template="../../../../common/maps/obj/collision.tx" x="65.0617" y="160.226" width="270.119" height="15.547"/>
-  <object id="82" template="../../../../common/maps/obj/collision.tx" x="65.2738" y="127.226" width="270.119" height="15.547"/>
-  <object id="83" template="../../../../common/maps/obj/collision.tx" x="63.2738" y="97.2265" width="270.119" height="15.547"/>
-  <object id="84" template="../../../../common/maps/obj/collision.tx" x="96.2738" y="63.5598" width="239.452" height="15.547"/>
-  <object id="85" template="../../../../common/maps/obj/collision.tx" x="256.94" y="191.56" width="77.4523" height="15.547"/>
-  <object id="86" template="../../../../common/maps/obj/collision.tx" x="257.274" y="224.893" width="77.4523" height="15.547"/>
-  <object id="87" template="../../../../common/maps/obj/collision.tx" x="257.607" y="256.56" width="77.4523" height="15.547"/>
-  <object id="88" template="../../../../common/maps/obj/collision.tx" x="145.259" y="254.06" width="47.4827" height="33.3803"/>
-  <object id="89" template="../../../../common/maps/obj/collision.tx" x="193.274" y="368.726" width="142.452" height="15.547"/>
-  <object id="90" template="../../../../common/maps/obj/collision.tx" x="64.1073" y="369.226" width="81.1187" height="15.547"/>
-  <object id="91" template="../../../../common/maps/obj/collision.tx" x="321.941" y="446.226" width="13.4523" height="15.547"/>
-  <object id="92" template="../../../../common/maps/obj/collision.tx" x="321.941" y="414.226" width="13.4523" height="15.547"/>
-  <object id="93" template="../../../../common/maps/obj/collision.tx" x="386.274" y="415.893" width="13.4523" height="15.547"/>
-  <object id="94" template="../../../../common/maps/obj/collision.tx" x="385.274" y="445.56" width="13.4523" height="15.547"/>
-  <object id="95" template="../../../../common/maps/obj/collision.tx" x="353.941" y="431.893" width="13.4523" height="15.547"/>
-  <object id="96" template="../../../../common/maps/obj/collision.tx" x="272.941" y="448.226" width="29.119" height="32.2137"/>
-  <object id="97" template="../../../../common/maps/obj/collision.tx" x="96.7738" y="416.893" width="29.119" height="32.2137"/>
-  <object id="98" template="../../../../common/maps/obj/collision.tx" x="125.44" y="442.893" width="29.119" height="32.2137"/>
-  <object id="99" template="../../../../common/maps/obj/collision.tx" x="209.44" y="415.56" width="29.119" height="32.2137"/>
-  <object id="100" template="../../../../common/maps/obj/collision.tx" x="177.44" y="496.226" width="29.119" height="32.2137"/>
-  <object id="101" template="../../../../common/maps/obj/collision.tx" x="242.44" y="495.893" width="29.119" height="32.2137"/>
-  <object id="102" template="../../../../common/maps/obj/collision.tx" x="191.107" y="401.226" width="15.7857" height="31.547"/>
-  <object id="103" template="../../../../common/maps/obj/collision.tx" x="128.107" y="401.56" width="15.7857" height="31.547"/>
+  <object id="104" template="../../../../common/maps/obj/dialog.tx" x="159.5" y="295.5" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;The mood in the town hall is distinctly somber and fearful. Someone with the look of a white mage addresses you. 'These are truly dark times, traveler. We hate to ask for your help as the task may be impossible, but we are desperate.'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;Elesh Norn has been slain.&quot;,
+                    &quot;text&quot;: &quot;A mage steps forward, and when he nods to confirm the veracity of your statement the room breaks out into wild cheers. 'Three cheers for the hero! May the sun ever shine upon you!'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+						{&quot;type&quot;: &quot;life&quot;, &quot;count&quot;: 1},
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Intrepid Hero&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 5000}          
+                      ]
+                    },
+					{&quot;removeItem&quot;:&quot;White Cartouche of Victory&quot;},
+					{&quot;addMapReputation&quot;: 4} ],
+					&quot;condition&quot;:[{&quot;item&quot;:&quot;White Cartouche of Victory&quot;}], 
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Nothing's impossible for me.&quot;,
+					&quot;text&quot;: &quot;'We aplaud your bravery, but the threat that now faces our great city is none other than the Mother of Machines herself, Elesh Norn. Things may not be utterly hopeless, but they are close.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;I can take her on&quot;,
+					&quot;text&quot;: &quot;'Well, we could certainly use a hero. I shudder to think how many soldiers have already died opposing the initial attacks of her porcelain legions. Seek her in a fortress of porcelain and flesh. If you somehow fell her, we will be forever in your debt, and you will have both our favor and much gold.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;time to do some heroics.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;Impossible sounds a bit too difficult.&quot;,
+					&quot;text&quot;: &quot;'Indeed. May Serra save us all.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="105" template="../../../../common/maps/obj/dialog.tx" x="96" y="262.5" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;A great many peasants gather around the building ahead, airing their grievances against a beleaguered magister. 'Are you an adventurer? I could really use some help!'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;One watering can, as promised.&quot;,
+                    &quot;text&quot;: &quot;The peasants cheer. 'Our crops are saved! We all thank you for your valor!'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+						{&quot;type&quot;: &quot;life&quot;, &quot;count&quot;: 1},
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Ambitious Farmhand&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Stoic Farmer&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Irrigated Farmland&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Overgrown Farmland &quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 1000}          
+                      ]
+                    },
+					{&quot;removeItem&quot;:&quot;Everflowing Watering Can&quot;},
+					{&quot;addMapReputation&quot;: 2} ],
+					&quot;condition&quot;:[{&quot;item&quot;:&quot;Everflowing Watering Can&quot;}], 
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;I am. What do you need?&quot;,
+					&quot;text&quot;: &quot;'We were betrayed! We had a meeting with the leader of the leonin, Kemba, not long back, and after she left we found her catfolk allies had stolen our everflowing watering can!'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;This seems like a lot of ruckus for a watering can.&quot;,
+					&quot;text&quot;: &quot;'It's enchanted, and a key part of our local agriculture! In case you haven't noticed, despite being known as plains, the surrounding lands are more desert these days. Water is scarce, so an endless supply is key to feeding the population here. Their lair is surrounded by lions, should be hard to miss once you stumble upon it. Retrieve the can and you'll have the city's favor and some gold as well.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Can do.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;Some other time.&quot;,
+					&quot;text&quot;: &quot;The magister's complaints are drowned out by angry jeers from the gathered crowd.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="106" template="../../../../common/maps/obj/dialog.tx" x="216.5" y="263" width="21.5" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;A group of knights looks anxious as they prepare themselves for battle. 'Hail, traveler. You have a bravery about you we have need of. But be warned, the quest we need done will be no easy feat.'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;The Dusk Legion's leadership has been crippled.&quot;,
+                    &quot;text&quot;: &quot;'Impressive skills indeed! The world needs more heroes such as you. May your further efforts be met with as much success as your grand deeds this day.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+						{&quot;type&quot;: &quot;life&quot;, &quot;count&quot;: 1},
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Slayer's Bounty&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Bounty Agent&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Victory's Envoy&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Shared Triumph&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Undead Slayer&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Vampire Slayer&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 3000}          
+                      ]
+                    },
+					{&quot;removeItem&quot;:&quot;Arguel's Bloody Helm&quot;},
+					{&quot;addMapReputation&quot;: 4} ],
+					&quot;condition&quot;:[{&quot;item&quot;:&quot;Arguel's Bloody Helm&quot;}], 
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Tell me of this quest.&quot;,
+					&quot;text&quot;: &quot;'There are many dangerous folk about the plains these days. Even once-noble heroes and angels from the heavens have been driven mad by the curse of violence upon this land. But our trouble today comes from a more traditional source of strife - vampires.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Unusual to see vampires in these parts.&quot;,
+					&quot;text&quot;: &quot;'Indeed. These vampires call themselves the Dusk Legion and originally hail from the world of Ixalan. They see themselves as noble, though they're anything but. They've been teorrizing our people, and have evaded our hunts so far. If you can eliminate their leader, the High Marshal Arguel, in his fortress, idenifiable by massive swords hung over the front gate, you will have our favor and a reward befitting your valor.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Their nights are numbered.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;I'm not ready for a quest right now.&quot;,
+					&quot;text&quot;: &quot;'Few are. May your skill and bravery continue to grow.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
  </objectgroup>
 </map>

@@ -22,6 +22,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbilityAdapt;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
@@ -185,17 +186,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
 
         List<GameEntity> tgtObjects = Lists.newArrayList();
         int divrem = 0;
-        if (sa.hasParam("Bolster")) {
-            CardCollection creatsYouCtrl = activator.getCreaturesInPlay();
-            CardCollection leastToughness = new CardCollection(
-                    Aggregates.listWithMin(creatsYouCtrl, Card::getNetToughness));
-
-            Map<String, Object> params = Maps.newHashMap();
-            params.put("CounterType", counterType);
-
-            activator.getController().chooseCardsForEffect(leastToughness, sa,
-                        Localizer.getInstance().getMessage("lblChooseACreatureWithLeastToughness"), 1, 1, false, params).forEach(tgtObjects::add);
-        } else if (sa.hasParam("Choices") && (counterType != null || putOnEachOther || putOnDefined)) {
+        if (sa.hasParam("Choices") && (counterType != null || putOnEachOther || putOnDefined)) {
             ZoneType choiceZone = ZoneType.Battlefield;
             if (sa.hasParam("ChoiceZone")) {
                 choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
@@ -220,7 +211,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
 
             CardCollection choices = CardLists.getValidCards(game.getCardsIn(choiceZone), sa.getParam("Choices"),
                     activator, card, sa);
-            if (counterType != null) {
+            if (counterType != null && !sa.hasParam("SkipReceiveCounters")) {
                 choices = CardLists.filter(choices, CardPredicates.canReceiveCounters(counterType));
             }
 
@@ -494,9 +485,11 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         }
                     }
 
-                    // Adapt need extra logic
                     if (sa.hasParam("Adapt") &&
                             !(gameCard.getCounters(CounterEnumType.P1P1) == 0 || StaticAbilityAdapt.anyWithAdapt(sa, gameCard))) {
+                        continue;
+                    }
+                    if (sa.hasParam("Monstrosity") && gameCard.isMonstrous()) {
                         continue;
                     }
 
@@ -554,7 +547,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         gameCard.setMonstrous(true);
                         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(gameCard);
                         // CR 701.37c
-                        runParams.put(AbilityKey.MonstrosityAmount, counterAmount);
+                        runParams.put(AbilityKey.Amount, counterAmount);
                         game.getTriggerHandler().runTrigger(TriggerType.BecomeMonstrous, runParams, false);
                     }
                     if (sa.hasParam("Adapt")) {
@@ -737,5 +730,74 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
         }
         return randomLog.toString();
+    }
+
+    @Override
+    public void buildSpellAbility(SpellAbility sa) {
+        super.buildSpellAbility(sa);
+        if (sa.hasParam("Adapt")) {
+            String n = sa.getParam("Adapt");
+            sa.putParam("CounterType", "P1P1");
+            sa.putParam("CounterNum", n);
+            if (!sa.hasParam("StackDescription")) {
+                sa.putParam("StackDescription", "SpellDescription");
+            }
+            if (!sa.hasParam("SpellDescription")) {
+                sa.putParam("SpellDescription", "Adapt " + n);
+            }
+        } else if (sa.hasParam("Bolster")) {
+            String n = sa.getParam("Bolster");
+            sa.putParam("CounterType", "P1P1");
+            sa.putParam("CounterNum", n);
+            sa.putParam("Choices", "Creature.leastToughnessControlledByYou");
+            sa.putParam("ChoiceTitle", Localizer.getInstance().getMessage("lblChooseACreatureWithLeastToughness"));
+            sa.putParam("SkipReceiveCounters", "True");
+            if (!sa.hasParam("SpellDescription")) {
+                StringBuilder sb = new StringBuilder("Bolster");
+                sb.append(" ").append(n);
+                String desc = Lang.nounWithNumeralExceptOne(n, "+1/+1 counter");
+                sb.append(" (Choose a creature with the least toughness among creatures you control and put ").append(desc).append(" on it.)");
+                sa.putParam("SpellDescription", sb.toString());
+            }
+        } else if (sa.hasParam("Monstrosity")) {
+            String n = sa.getParam("Monstrosity");
+            sa.putParam("CounterType", "P1P1");
+            sa.putParam("CounterNum", n);
+            if (!sa.hasParam("StackDescription")) {
+                sa.putParam("StackDescription", "SpellDescription");
+            }
+            if (!sa.hasParam("SpellDescription")) {
+                sa.putParam("SpellDescription", "Monstrosity " + n);
+                StringBuilder sb = new StringBuilder("Monstrosity");
+                sb.append(" ").append(n);
+                String desc = Lang.nounWithNumeralExceptOne(n, "+1/+1 counter");
+                sb.append(" (If this creature isn’t monstrous, put ").append(desc).append(" on it and it becomes monstrous.)");
+                sa.putParam("SpellDescription", sb.toString());
+            }
+        } else if (sa.hasParam("Support")) {
+            String n = sa.getParam("Support");
+            sa.putParam("TargetMin", "0");
+            sa.putParam("TargetMax", n);
+            sa.putParam("CounterType", "P1P1");
+            sa.putParam("CounterNum", "1");
+            // 701.41a
+            String desc;
+            if (!sa.getHostCard().isPermanent()) {
+                sa.putParam("ValidTgts", "Creature");
+                desc = "target creature";
+            } else {
+                sa.putParam("ValidTgts", "Creature.Other");
+                sa.putParam("ValidTgtsDesc", "other creature");
+                desc = "other target creature";
+            }
+            sa.setTargetRestrictions(new TargetRestrictions(sa.getMapParams()));
+            if (!sa.hasParam("SpellDescription")) {
+                StringBuilder sb = new StringBuilder("Support");
+                sb.append(" ").append(n);
+                desc = Lang.nounWithNumeralExceptOne(n, desc);
+                sb.append(" (Put a +1/+1 counter on each of up to ").append(desc).append(".)");
+                sa.putParam("SpellDescription", sb.toString());
+            }
+        }
     }
 }

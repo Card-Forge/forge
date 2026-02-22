@@ -1,7 +1,7 @@
 Name:Tempest Trapper
-ManaCost:3 U
+ManaCost:2 U
 Types:Creature Otter Wizard
-PT:2/5
+PT:2/4
 A:AB$ Mana | Cost$ T | Produced$ Combo Any | Amount$ 2 | RestrictValid$ Spell.Instant,Spell.Sorcery | SpellDescription$ Add two mana in any combination of colors. Spend this mana only to cast instant or sorcery spells.
 T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | ActivatorThisTurnCast$ EQ3 | TriggerDescription$ Whenever you cast your third spell each turn, exile a random card from your library. Until end of turn, you may play that card without paying its mana cost.
 SVar:TrigExile:DB$ ChangeZone | DefinedPlayer$ You | ChangeType$ Card | ChangeNum$ 1 | Origin$ Library | Destination$ Exile | AtRandom$ True | Hidden$ True | NoLooking$ True | NoShuffle$ True | Mandatory$ True | RememberChanged$ True | SubAbility$ DBEffect

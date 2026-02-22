@@ -1,75 +1,75 @@
 [metadata]
 Name=Forge - Byrke, Long Ear Of The Law
 [Commander]
-1 Byrke, Long Ear of the Law|blb|380
+1 Byrke, Long Ear of the Law|BLB|380
 [Main]
-1 Pollen-Shield Hare|woe|293
-1 Valley Questcaller|blb|36
-1 Branching Evolution|mh3|285
-1 Conclave Sledge-Captain|moc|36
-1 Forgotten Ancient|blc|217
-1 Hardened Scales|wot|55
-1 Hungering Hydra|c20|177
-1 Innkeeper's Talent|blb|180
-1 Kalonian Hydra|blc|226
-1 Managorger Hydra|blc|230
-1 Nyxborn Hydra|mh3|164
-1 Ozolith, the Shattered Spire|mom|198
-1 Pawpatch Recruit|blb|187
-1 Pridemalkin|j25|700
-1 Spike Breeder|sth|116
-1 The Ozolith|iko|237
-1 Warden of the Grove|tdm|166
-1 Wildwood Scourge|fdn|236
-1 Spike Tiller|tsp|218
-1 Zodiac Rabbit|ptk|162
-1 Inspiring Call|dtk|191
-1 Master of Ceremonies|ncc|18
-1 Mouth|akh|214
-1 Stocking the Pantry|blb|194
-1 Tempt with Bunnies|blc|13
-1 Champion of Lambholt|moc|293
-1 Burrowguard Mentor|blb|206
-1 Regal Bunnicorn|woe|25
-1 Arctic Treeline|khm|249
-1 Canopy Vista|tdc|343
-18 Forest|blb|[377]
-1 Lush Portico|mkm|263
-13 Plains|blb|[369]
-1 Scattered Groves|otc|315
-1 Strength of the Harvest|mh3|258
-1 Temple Garden|rvr|290
-1 Temple of Plenty|tdc|405
-1 Windswept Heath|mh3|235
-1 Hinterland Sanctifier|j25|5
-1 Spike Feeder|sth
-1 Heroic Intervention|aer|109
-1 arcane signet|BLC
-1 Unbreakable Formation|rvr|32
-1 Vigor|jud
-1 Wrap in Vigor|cns|183
-1 Avacyn's Pilgrim|scd|171
-1 Claim Jumper|otj|8
-1 Defiler of Vigor|dmu|160
-1 Goldvein Hydra|otj|167
-1 Gyre Sage|gtc|123
-1 Hamza, Guardian of Arashin|cmm|339
-1 Incubation Druid|rna|131
-1 Jiang Yanggu, Wildcrafter|j25|677
-1 Rampant Growth|m12|190
-1 Rishkar, Peema Renegade|j25|708
-1 Sol Ring|eoc|57
-1 Tempt with Discovery|blc|124
-1 Dewdrop Cure|blb|10
-1 Chains of Custody|j25|180
-1 Damning Verdict|ncc|15
-1 Seal Away|dom|31
-1 Soul Tithe|rtr|23
-1 Swords to Plowshares|eoc|45
-1 Werefox Bodyguard|woe|39
+1 Pollen-Shield Hare|WOE|293
+1 Valley Questcaller|BLB|36
+1 Branching Evolution|MH3|285
+1 Conclave Sledge-Captain|MOC|36
+1 Forgotten Ancient|BLC|217
+1 Hardened Scales|WOT|55
+1 Hungering Hydra|C20|177
+1 Innkeeper's Talent|BLB|180
+1 Kalonian Hydra|BLC|226
+1 Managorger Hydra|BLC|230
+1 Nyxborn Hydra|MH3|164
+1 Ozolith, the Shattered Spire|MOM|198
+1 Pawpatch Recruit|BLB|187
+1 Pridemalkin|J25|700
+1 Spike Breeder|STH|116
+1 The Ozolith|IKO|237
+1 Warden of the Grove|TDM|166
+1 Wildwood Scourge|FDN|236
+1 Spike Tiller|TSP|218
+1 Zodiac Rabbit|PTK|162
+1 Inspiring Call|DTK|191
+1 Master of Ceremonies|NCC|18
+1 Mouth|AKH|214
+1 Stocking the Pantry|BLB|194
+1 Tempt with Bunnies|BLC|13
+1 Champion of Lambholt|MOC|293
+1 Burrowguard Mentor|BLB|206
+1 Regal Bunnicorn|WOE|25
+1 Arctic Treeline|KHM|249
+1 Canopy Vista|TDC|343
+18 Forest|BLB|[377]
+1 Lush Portico|MKM|263
+13 Plains|BLB|[369]
+1 Scattered Groves|OTC|315
+1 Strength of the Harvest|MH3|258
+1 Temple Garden|RVR|290
+1 Temple of Plenty|TDC|405
+1 Windswept Heath|MH3|235
+1 Hinterland Sanctifier|J25|5
+1 Spike Feeder|STH
+1 Heroic Intervention|AER|109
+1 Arcane Signet|BLC
+1 Unbreakable Formation|RVR|32
+1 Vigor|JUD
+1 Wrap in Vigor|CNS|183
+1 Avacyn's Pilgrim|SCD|171
+1 Claim Jumper|OTJ|8
+1 Defiler of Vigor|DMU|160
+1 Goldvein Hydra|OTJ|167
+1 Gyre Sage|GTC|123
+1 Hamza, Guardian of Arashin|CMM|339
+1 Incubation Druid|RNA|131
+1 Jiang Yanggu, Wildcrafter|J25|677
+1 Rampant Growth|M12|190
+1 Rishkar, Peema Renegade|J25|708
+1 Sol Ring|EOC|57
+1 Tempt with Discovery|BLC|124
+1 Dewdrop Cure|BLB|10
+1 Chains of Custody|J25|180
+1 Damning Verdict|NCC|15
+1 Seal Away|DOM|31
+1 Soul Tithe|RTR|23
+1 Swords to Plowshares|EOC|45
+1 Werefox Bodyguard|WOE|39
 1 Loxodon Gatekeeper|RAV|25
-1 Hop to It|blb|16
-1 Jacked Rabbit|blc|9
-1 Primal Vigor|plst|C13-162
-1 Season of the Burrow|blb|29
-1 Warren Warleader|blb|38
+1 Hop to It|BLB|16
+1 Jacked Rabbit|BLC|9
+1 Primal Vigor|C13|162
+1 Season of the Burrow|BLB|29
+1 Warren Warleader|BLB|38
