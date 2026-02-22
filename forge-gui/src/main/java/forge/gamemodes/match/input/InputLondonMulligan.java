@@ -82,10 +82,23 @@ public class InputLondonMulligan extends InputSyncronizedBase {
 
     @Override
     protected final void onCancel() {
-        // Use the AI to determine the best cards to return to the library
-        CardCollectionView toMulligan = ComputerUtil.chooseBestCardsToReturn(player, toReturn);
+        // Despite its name, onCancel is triggered by the "Auto" button.
+        // This button will select additional cards to reach the toReturn value for this mulligan, respecting cards
+        // already selected by the player.
+        CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
+        CardCollection unselectedCards = new CardCollection();
+        for (Card c : hand) {
+            if (!selected.contains(c)) {
+                unselectedCards.add(c);
+            }
+        }
 
-        for (Card c : toMulligan) {
+        // Pick the remaining cards using AI.
+        int remainingToReturn = toReturn - selected.size();
+        CardCollectionView aiSelected = ComputerUtil.chooseBestCardsToReturn(player, unselectedCards, remainingToReturn);
+
+        // Highlight and add the AI's picks to the current selection
+        for (Card c : aiSelected ) {
             if (selected.contains(c)) { continue; }
 
             selected.add(c);

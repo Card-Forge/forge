@@ -2125,8 +2125,11 @@ public class ComputerUtil {
         return true;
     }
 
-    public static CardCollectionView chooseBestCardsToReturn(Player mulliganingPlayer, int cardsToReturn) {
-        CardCollectionView hand = mulliganingPlayer.getCardsIn(ZoneType.Hand);
+    public static CardCollectionView chooseBestCardsToReturn(Player mulliganingPlayer, CardCollectionView hand, int cardsToReturn) {
+        if (cardsToReturn > hand.size()) {
+            throw new IllegalArgumentException("chooseBestCardsToReturn: requested " + cardsToReturn +
+                    " cards to return, but hand only contains " + hand.size() + " cards for player " + mulliganingPlayer);
+        }
 
         // Nothing to return, keep the full hand
         if (cardsToReturn == 0) {
