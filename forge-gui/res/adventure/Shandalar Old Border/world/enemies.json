@@ -5248,7 +5248,7 @@
   },
   {
     "name": "Copper Host Brutalizer",
-    "sprite": "sprites/enemy/aberration/copperhostbrutalizer.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/copperhostbrutalizer.atlas",
     "deck": [
       "decks/miniboss/copperhostbrutalizer.dck"
     ],
@@ -5333,7 +5333,7 @@
   },
   {
     "name": "Copper Host Infector",
-    "sprite": "sprites/enemy/aberration/copperhostinfector.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/copperhostinfector.atlas",
     "deck": [
       "decks/standard/copperhostinfector.dck"
     ],
@@ -7809,7 +7809,7 @@
   },
   {
     "name": "Dross Gladiator",
-    "sprite": "sprites/enemy/aberration/drossgladiator.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/drossgladiator.atlas",
     "deck": [
       "decks/standard/drossgladiator.dck"
     ],
@@ -7888,7 +7888,7 @@
   },
   {
     "name": "Dross Grimnarch",
-    "sprite": "sprites/enemy/aberration/drossgrimnarch.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/drossgrimnarch.atlas",
     "deck": [
       "decks/miniboss/drossgrimnarch.dck"
     ],
@@ -10603,7 +10603,7 @@
   },
   {
     "name": "Furnace Goblin",
-    "sprite": "sprites/enemy/aberration/furnacegoblin.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/furnacegoblin.atlas",
     "deck": [
       "decks/standard/furnacegoblin.dck"
     ],
@@ -10682,7 +10682,7 @@
   },
   {
     "name": "Furnace Tormentor",
-    "sprite": "sprites/enemy/aberration/furnacetormentor.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/furnacetormentor.atlas",
     "deck": [
       "decks/miniboss/furnacetormentor.dck"
     ],
@@ -11858,7 +11858,7 @@
   },
   {
     "name": "Gitaxian Scientist",
-    "sprite": "sprites/enemy/aberration/gitaxianscientist.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/gitaxianscientist.atlas",
     "deck": [
       "decks/miniboss/gitaxianscientist.dck"
     ],
@@ -11947,7 +11947,7 @@
   },
   {
     "name": "Gitaxian Underling",
-    "sprite": "sprites/enemy/aberration/gitaxianunderling.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/gitaxianunderling.atlas",
     "deck": [
       "decks/standard/gitaxianunderling.dck"
     ],
@@ -21622,7 +21622,7 @@
   },
   {
     "name": "Orthodoxy Angel",
-    "sprite": "sprites/enemy/aberration/phyrexianangel.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/phyrexianangel.atlas",
     "deck": [
       "decks/miniboss/shandalar97_phyrexian_angel.dck"
     ],
@@ -21708,7 +21708,7 @@
   },
   {
     "name": "Orthodoxy Duelist",
-    "sprite": "sprites/enemy/aberration/phyrexianduelist.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/phyrexianduelist.atlas",
     "deck": [
       "decks/standard/phyrexianduelist.dck"
     ],
@@ -32608,7 +32608,7 @@
   },
   {
     "name": "Tsabo Tavoc",
-    "sprite": "sprites/enemy/aberration/drossgrimnarch.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/drossgrimnarch.atlas",
     "deck": [
       "decks/miniboss/tsabo_tavoc.dck"
     ],
@@ -32758,7 +32758,7 @@
   },
   {
     "name": "Gix",
-    "sprite": "sprites/enemy/aberration/phyrexianduelist.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/phyrexianduelist.atlas",
     "deck": [
       "decks/miniboss/gix.dck"
     ],
