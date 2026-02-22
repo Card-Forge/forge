@@ -17,6 +17,7 @@
  */
 package forge.game.phase;
 
+import java.util.Collection;
 import java.util.List;
 
 import com.google.common.collect.Lists;
@@ -77,8 +78,7 @@ public class Phase implements java.io.Serializable {
      * </p>
      */
     public void executeAt() {
-        this.at.forEach(GameCommand::run);
-        this.at.clear();
+        excute(this.at);
     }
 
     /**
@@ -90,7 +90,7 @@ public class Phase implements java.io.Serializable {
      *            a {@link forge.GameCommand} object.
      */
     public final void addUntil(final GameCommand c) {
-        this.until.add(0, c);
+        this.until.add(c);
     }
 
     /**
@@ -99,8 +99,7 @@ public class Phase implements java.io.Serializable {
      * </p>
      */
     public final void executeUntil() {
-        this.until.forEach(GameCommand::run);
-        this.until.clear();
+        excute(this.until);
     }
 
     /**
@@ -121,8 +120,7 @@ public class Phase implements java.io.Serializable {
      *            the player the execute until for
      */
     public final void executeUntil(final Player p) {
-        untilMap.get(p).forEach(GameCommand::run);
-        untilMap.removeAll(p);
+        excute(untilMap.get(p));
     }
 
     public final void registerUntilEnd(Player p, final GameCommand c) {
@@ -139,7 +137,11 @@ public class Phase implements java.io.Serializable {
     }
 
     public final void executeUntilEndOfPhase(final Player p) {
-        untilEndMap.get(p).forEach(GameCommand::run);
-        untilEndMap.removeAll(p);
+        excute(untilEndMap.get(p));
+    }
+    protected void excute(Collection<GameCommand> list) {
+        List<GameCommand> events = Lists.newArrayList(list);
+        events.forEach(GameCommand::run);
+        list.removeAll(events);
     }
 }
