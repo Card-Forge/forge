@@ -34809,16 +34809,9 @@
         "count": 1
       },
       {
-        "type": "card",
+        "type": "deckCard",
         "probability": 1,
-        "count": 1,
-        "cardName": "Rainbow Knights|PAST"
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "cardName": "Prismatic Dragon|PAST"
+        "count": 2
       },
       {
         "type": "card",
@@ -34965,10 +34958,9 @@
         "count": 1
       },
       {
-        "type": "card",
+        "type": "deckCard",
         "probability": 1,
-        "count": 1,
-        "cardName": "Whimsy|PAST"
+        "count": 1
       },
       {
         "type": "card",
@@ -35115,10 +35107,9 @@
         "count": 1
       },
       {
-        "type": "card",
+        "type": "deckCard",
         "probability": 1,
-        "count": 1,
-        "cardName": "Necropolis of Azar|PAST"
+        "count": 1
       },
       {
         "type": "card",
@@ -35265,10 +35256,9 @@
         "count": 1
       },
       {
-        "type": "card",
+        "type": "deckCard",
         "probability": 1,
-        "count": 1,
-        "cardName": "Orcish Catapult|PAST"
+        "count": 1
       },
       {
         "type": "card",
@@ -35421,16 +35411,9 @@
         "count": 1
       },
       {
-        "type": "card",
+        "type": "deckCard",
         "probability": 1,
-        "count": 1,
-        "cardName": "Faerie Dragon|PAST"
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "cardName": "Aswan Jaguar|PAST"
+        "count": 2
       },
       {
         "type": "card",
@@ -35476,16 +35459,10 @@
     "life": 24,
     "rewards": [
       {
-        "type": "card",
+        "type": "deckCard",
         "probability": 1,
-        "count": 1,
-        "cardName": "Rainbow Knights|PAST"
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "cardName": "Aswan Jaguar|PAST"
+        "count": 2,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
@@ -35528,16 +35505,10 @@
     "life": 24,
     "rewards": [
       {
-        "type": "card",
+        "type": "deckCard",
         "probability": 1,
-        "count": 1,
-        "cardName": "Whimsy|PAST"
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "cardName": "Call from the Grave|PAST"
+        "count": 2,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
@@ -35586,16 +35557,10 @@
     "life": 24,
     "rewards": [
       {
-        "type": "card",
+        "type": "deckCard",
         "probability": 1,
-        "count": 1,
-        "cardName": "Power Struggle|PAST"
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "cardName": "Goblin Polka Band|PAST"
+        "count": 2,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
@@ -35644,16 +35609,10 @@
     "life": 24,
     "rewards": [
       {
-        "type": "card",
+        "type": "deckCard",
         "probability": 1,
-        "count": 1,
-        "cardName": "Necropolis of Azar|PAST"
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "cardName": "Faerie Dragon|PAST"
+        "count": 2,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
@@ -35702,16 +35661,10 @@
     "life": 24,
     "rewards": [
       {
-        "type": "card",
+        "type": "deckCard",
         "probability": 1,
-        "count": 1,
-        "cardName": "Prismatic Dragon|PAST"
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "cardName": "Orcish Catapult|PAST"
+        "count": 2,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
@@ -35795,10 +35748,9 @@
         "cardName": "City of Brass|ARN"
       },
       {
-        "type": "card",
+        "type": "deckCard",
         "probability": 1,
-        "count": 1,
-        "cardName": "Gem Bazaar|PAST"
+        "count": 1
       },
       {
         "type": "card",
@@ -37571,10 +37523,9 @@
         "cardName": "Rakavolver|APC"
       },
       {
-        "type": "card",
+        "type": "deckCard",
         "probability": 1,
-        "count": 1,
-        "cardName": "Gem Bazaar|PAST"
+        "count": 1
       },
       {
         "type": "card",
