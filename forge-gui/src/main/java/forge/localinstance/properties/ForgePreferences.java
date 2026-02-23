@@ -416,7 +416,6 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         }
         setPref(FPref.DEV_LOG_CUSTOM_TYPES, sj.toString());
         save();
-        migrateShortcutDefaults();
     }
 
     /**
