@@ -82,7 +82,7 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ankh of Mishra|5ED&quot;, &quot;Mishra's Factory|ATQ&quot;, &quot;Mishra's Bauble|BRR&quot;, &quot;Assembly-Worker&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ankh of Mishra|5ED&quot;, &quot;Mishra's Factory&quot;, &quot;Mishra's Bauble|BRR&quot;, &quot;Assembly-Worker&quot;]}"/>
     <property name="enemy" value="Mishra"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
@@ -173,7 +173,7 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Mishra's Foundry&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
-  <object id="93" template="../../../../common/maps/obj/dialog.tx" x="241.844" y="127.172" width="16.8333" height="12.439" rotation="0" visible="1">
+  <object id="93" template="../../../../common/maps/obj/dialog.tx" x="240.844" y="129.172" width="16.8333" height="18.939" rotation="0" visible="1">
    <properties>
     <property name="dialog">[
 {
