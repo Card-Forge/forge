@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Mutavault&quot;, &quot;Pygmy Hippo&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Questing Phelddagrif&quot;, &quot;Maskwood Nexus&quot;, &quot;Eladamri's Vineyard|SLD|[1692]&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -81,7 +81,7 @@
   </object>
   <object id="54" template="../../../../common/maps/obj/enemy.tx" x="272.296" y="136.571">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Abundant Countryside|ECC&quot;, &quot;Runed Stalactite|LRW&quot;, &quot;Birthing boughs|MH1&quot;, &quot;Three Tree Mascot|FDN&quot;, &quot;wayfarer's bauble|5DN&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Abundant Countryside|ECC&quot;, &quot;Runed Stalactite|LRW&quot;, &quot;Taurean Mauler&quot;]}"/>
     <property name="enemy" value="Morophon"/>
     <property name="speedModifier" type="float" value="15"/>
     <property name="threatRange" type="int" value="50"/>
@@ -90,7 +90,7 @@
   </object>
   <object id="61" template="../../../../common/maps/obj/enemy.tx" x="249.188" y="53.5002">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Keen Duelist|SLD|[828]&quot;, &quot;Eladamri's Vineyard|SLD|[1692]&quot;, &quot;Command Tower|SLD|[1697]&quot;, &quot;Sol Ring|SLD|[1696]&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Keen Duelist|SLD|[828]&quot;, &quot;Command Tower|SLD|[1697]&quot;, &quot;Greater Good|SLD|[1693]&quot;]}"/>
     <property name="enemy" value="Sheldon"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="10"/>
@@ -103,7 +103,7 @@
   <object id="76" template="../../../../common/maps/obj/collision.tx" x="0" y="272" width="480" height="16"/>
   <object id="77" template="../../../../common/maps/obj/enemy.tx" x="176" y="134.5">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Questing Phelddagrif|PLS&quot;, &quot;Bull Hippo|POR&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forced Fruition&quot;, &quot;Pygmy Hippo&quot;]}"/>
     <property name="enemy" value="Phelddagrif"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="70"/>

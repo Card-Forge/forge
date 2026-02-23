@@ -1,81 +1,81 @@
 [metadata]
 Name=Hofri Ghostforge
 [Commander]
-1 Hofri Ghostforge|stx
+1 Hofri Ghostforge|STX
 [Main]
-1 swiftfoot boots|fdn
-1 accursed duneyard|drc
-1 blood age general|stx
-1 dwarven miner|mir
-1 sram, senior edificer|nec
-1 axgard cavalry|fdn
-1 soulstealer axe|ymid
-1 darksteel axe|2xm
-1 bearded axe|khm
-1 boros signet|tdc
-1 Arcane Signet|eoc
-1 Battlefield Forge|eoc
-1 Bloodforged Battle-Axe|2x2
-1 Bomb Squad|ody
-1 Brass's Tunnel-Grinder|lci
-1 Cadric, Soul Kindler|dmc
-1 Castle Embereth|tdc
-1 Chain Reaction|eoc
-1 Cleansing Nova|cmm
-1 Command Tower|eoc
-1 Conqueror's Flail|2x2
-1 Darksteel Citadel|mb2
-1 Darksteel Plate|2x2
-1 Depala, Pilot Exemplar|kld
-1 Diamond Pick-Axe|lci
-1 Digsite Engineer|brc
-1 Duergar Cave-Guard|eve
-1 Duergar Hedge-Mage|moc
-1 Dwarven Bloodboiler|jud
-1 aerial responder|c20
-1 Dwarven Driller|jud
-1 Dwarven Grunt|ody
-1 Dwarven Lieutenant|fem
-1 Dwarven Mine|eld
-1 Dwarven Pony|hml
-1 Dwarven Recruiter|ody
-1 Dwarven Ruins|fem
-1 Dwarven Thaumaturgist|wth
-1 Embercleave|eld
-1 Evolving Wilds|eoc
-1 Godsend|j25
-1 Hammer of Nazahn|cmm
-1 Icon of Ancestry|lcc
-1 Inspiring Vantage|otj
-1 Koll, the Forgemaster|khm
-1 Leyline Axe|fdn
-1 Loxodon Warhammer|onc
-1 Magda, Brazen Outlaw|khm
-1 Magda, the Hoardmaster|otj
-1 Masterwork of Ingenuity|c14
-1 Maul of the Skyclaves|j25
-11 Mountain|stx
-1 Nahiri, Forged in Fury|mat
-1 Nahiri, Storm of Stone|war
-1 Needleverge Pathway|znr
-1 Opal Palace|cmm
-1 Path of Ancestry|tdc
-8 Plains|stx
-1 Reyav, Master Smith|cmr
-1 Rustvale Bridge|eoc
-1 Sacred Foundry|eoe
-1 Sacred Peaks|mkc
-7 Seven Dwarves|eld
-1 Shadowspear|thb
-1 Sigarda's Aid|cmr
-1 Slayers' Stronghold|mkc
-1 Sol Ring|eoc
-1 Spectator Seating|cmm
-1 Spidersilk Net|dtk
-1 Sword of the Animist|ori
-1 Temple of Triumph|eoc
-1 Terramorphic Expanse|eoc
-1 Throne of the High City|mkc
-1 Torbran, Thane of Red Fell|eld
-1 Warchanter Skald|khm
-1 Warleader's Call|mkm
+1 Swiftfoot Boots|FDN
+1 Accursed Duneyard|DRC
+1 Blood Age General|STX
+1 Dwarven Miner|MIR
+1 Sram, Senior Edificer|NEC
+1 Axgard Cavalry|FDN
+1 Soulstealer Axe|YMID
+1 Darksteel Axe|2XM
+1 Bearded Axe|KHM
+1 Boros Signet|TDC
+1 Arcane Signet|EOC
+1 Battlefield Forge|EOC
+1 Bloodforged Battle-Axe|2X2
+1 Bomb Squad|ODY
+1 Brass's Tunnel-Grinder|LCI
+1 Cadric, Soul Kindler|DMC
+1 Castle Embereth|TDC
+1 Chain Reaction|EOC
+1 Cleansing Nova|CMM
+1 Command Tower|EOC
+1 Conqueror's Flail|2X2
+1 Darksteel Citadel|MB2
+1 Darksteel Plate|2X2
+1 Depala, Pilot Exemplar|KLD
+1 Diamond Pick-Axe|LCI
+1 Digsite Engineer|BRC
+1 Duergar Cave-Guard|EVE
+1 Duergar Hedge-Mage|MOC
+1 Dwarven Bloodboiler|JUD
+1 Aerial Responder|C20
+1 Dwarven Driller|JUD
+1 Dwarven Grunt|ODY
+1 Dwarven Lieutenant|FEM
+1 Dwarven Mine|ELD
+1 Dwarven Pony|HML
+1 Dwarven Recruiter|ODY
+1 Dwarven Ruins|FEM
+1 Dwarven Thaumaturgist|WTH
+1 Embercleave|ELD
+1 Evolving Wilds|EOC
+1 Godsend|J25
+1 Hammer of Nazahn|CMM
+1 Icon of Ancestry|LCC
+1 Inspiring Vantage|OTJ
+1 Koll, the Forgemaster|KHM
+1 Leyline Axe|FDN
+1 Loxodon Warhammer|ONC
+1 Magda, Brazen Outlaw|KHM
+1 Magda, the Hoardmaster|OTJ
+1 Masterwork of Ingenuity|C14
+1 Maul of the Skyclaves|J25
+11 Mountain|STX
+1 Nahiri, Forged in Fury|MAT
+1 Nahiri, Storm of Stone|WAR
+1 Needleverge Pathway|ZNR
+1 Opal Palace|CMM
+1 Path of Ancestry|TDC
+8 Plains|STX
+1 Reyav, Master Smith|CMR
+1 Rustvale Bridge|EOC
+1 Sacred Foundry|EOE
+1 Sacred Peaks|MKC
+7 Seven Dwarves|ELD
+1 Shadowspear|THB
+1 Sigarda's Aid|CMR
+1 Slayers' Stronghold|MKC
+1 Sol Ring|EOC
+1 Spectator Seating|CMM
+1 Spidersilk Net|DTK
+1 Sword of the Animist|ORI
+1 Temple of Triumph|EOC
+1 Terramorphic Expanse|EOC
+1 Throne of the High City|MKC
+1 Torbran, Thane of Red Fell|ELD
+1 Warchanter Skald|KHM
+1 Warleader's Call|MKM

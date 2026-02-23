@@ -46,7 +46,7 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Plains|ALA|[233]&quot;, &quot;Swamp|ALA|[238]&quot;, &quot;Mountain|C16|[348]&quot;, &quot;Island|ALA|[236]&quot;, &quot;Yore-Tiller Nephilim|GPT&quot;, &quot;Breya's Apprentice|MH2&quot;]}"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Command Tower&quot;, &quot;Exotic Orchard&quot;, &quot;Yore-Tiller Nephilim&quot;, &quot;Breya's Apprentice&quot;, &quot;Emporium Thopterist&quot; ] }"/>
     <property name="enemy" value="Breya"/>
     <property name="pursueRange" type="int" value="0"/>
     <property name="speedModifier" type="float" value="50"/>

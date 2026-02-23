@@ -66,7 +66,7 @@
   <object id="76" template="../../../../common/maps/obj/manashards.tx" x="190" y="101.333"/>
   <object id="79" template="../../../../common/maps/obj/enemy.tx" x="315" y="137">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;SIsay's Ring|VIS&quot;, &quot;Short Sword|DOM&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Relic of Legends&quot;, &quot;Short Sword|DOM&quot;]
 }</property>
     <property name="enemy" value="Sisay"/>
     <property name="speedModifier" type="float" value="30"/>

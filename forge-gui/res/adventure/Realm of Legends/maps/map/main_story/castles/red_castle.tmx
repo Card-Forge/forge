@@ -91,7 +91,8 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Opulent Palace&quot;, &quot;Blood Pet|TMP&quot;, &quot;Puppet Strings|TMP&quot;, &quot;Volrath's Shapeshifter|STH&quot;, &quot;Flourishing Defenses|ECC&quot;
+]}</property>
     <property name="enemy" value="Volrath"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
@@ -106,7 +107,8 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Arcane Sanctum&quot;, &quot;Syndicate Heavy&quot;, &quot;Diviner Spirit&quot;
+]}</property>
     <property name="enemy" value="Oloro"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
@@ -121,7 +123,8 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Seaside Citadel&quot;, &quot;Herald of the Pantheon&quot;, &quot;Soul Snare&quot;, &quot;Shoal Kraken&quot;
+]}</property>
     <property name="enemy" value="Estrid"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
@@ -136,7 +139,8 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Haunted Mire&quot;, &quot;Idyllic Beachfront&quot;, &quot;Cursed Wombat&quot;, &quot;Metropolis Angel&quot;
+]}</property>
     <property name="enemy" value="Reyhan and Ishai"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
@@ -151,7 +155,8 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Sandsteppe Citadel&quot;, &quot;Slaughter Singer&quot;, &quot;Sculpted Perfection&quot;, &quot;Phyrexian Awakening&quot;, &quot;Gift of Compleation&quot;
+]}</property>
     <property name="enemy" value="Ixhel"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>

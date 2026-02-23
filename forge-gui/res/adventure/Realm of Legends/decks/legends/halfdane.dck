@@ -1,75 +1,75 @@
 [metadata]
 Name=Halfdane
 [Commander]
-1 Halfdane|leg
+1 Halfdane|LEG
 [Main]
-1 Academy Rector|uds
-1 Akroma's Vengeance|ons
-1 fellwar stone|drk
-1 Arcanis the Omnipotent|ons
-1 Archivist|ulg
-1 Aura Extraction|ons
-1 Bottomless Pit|sth
-1 Braingeyser|leb
-1 Careful Study|ody
-1 brainstorm|ice
-1 Caves of Koilos|apc
-1 Chilling Apparition|pcy
-1 Choking Tethers|ons
-1 Clone|ons
-1 Cloud of Faeries|ulg
-1 Dark Ritual|ice
-1 Decree of Pain|scg
-1 Entropic Specter|exo
-1 Eternal Dragon|scg
-1 Expunge|usg
-1 Flooded Strand|ons
-1 adarkar wastes|ice
-1 underground river|ice
-1 Hypnotic Specter|leb
-11 Island|mir
-1 Karmic Guide|ulg
-1 Kirtar's Wrath|ody
-1 Mage's Guile|ons
-1 Megrim|sth
-1 Mind Over Matter|exo
-1 Mind Stone|wth
-1 Miscalculation|ulg
-1 Mulldrifter|tsr
-1 Phyrexian Altar|inv
-9 Plains|mir
-1 Polluted Delta|ons
-1 Rebuild|ulg
-1 Shrieking Drake|vis
-1 Sol Ring|3ed
-1 Spirit Cairn|jud
-1 Spirit of the Night|mir
-12 Swamp|mir
-1 hymn to tourach|fem
-1 Talas Researcher|po2
-1 Thran Dynamo|uds
-1 Time Warp|tmp
-1 Tortured Existence|sth
-1 Trade Routes|mmq
-1 Urza's Blueprints|ulg
-1 Windfall|usg
-1 underground river|ice
-1 adarkar wastes|ice
-1 vesuvan doppelganger|3ed
-1 dance of many|drk
-1 morphling|usg
-1 bribery|mmq
-1 counterspell|ice
-1 mind twist|3ed
-1 Phyrexian arena|apc
-1 merieke ri berit|ice
-1 control magic|3ed
-1 swords to plowshares|ice
-1 wrath of god|por
-1 animate dead|3ed
-1 stroke of genius|usg
-1 dance of the dead|ice
-1 dromar's charm|pls
-1 abyssal specter|ice
-1 exalted angel|ons
-1 reins of power|sth
+1 Academy Rector|UDS
+1 Akroma's Vengeance|ONS
+1 Fellwar Stone|DRK
+1 Arcanis the Omnipotent|ONS
+1 Archivist|ULG
+1 Aura Extraction|ONS
+1 Bottomless Pit|STH
+1 Braingeyser|LEB
+1 Careful Study|ODY
+1 Brainstorm|ICE
+1 Caves of Koilos|APC
+1 Chilling Apparition|PCY
+1 Choking Tethers|ONS
+1 Clone|ONS
+1 Cloud of Faeries|ULG
+1 Dark Ritual|ICE
+1 Decree of Pain|SCG
+1 Entropic Specter|EXO
+1 Eternal Dragon|SCG
+1 Expunge|USG
+1 Flooded Strand|ONS
+1 Adarkar Wastes|ICE
+1 Underground River|ICE
+1 Hypnotic Specter|LEB
+11 Island|MIR
+1 Karmic Guide|ULG
+1 Kirtar's Wrath|ODY
+1 Mage's Guile|ONS
+1 Megrim|STH
+1 Mind Over Matter|EXO
+1 Mind Stone|WTH
+1 Miscalculation|ULG
+1 Mulldrifter|TSR
+1 Phyrexian Altar|INV
+9 Plains|MIR
+1 Polluted Delta|ONS
+1 Rebuild|ULG
+1 Shrieking Drake|VIS
+1 Sol Ring|3ED
+1 Spirit Cairn|JUD
+1 Spirit of the Night|MIR
+12 Swamp|MIR
+1 Hymn to Tourach|FEM
+1 Talas Researcher|PO2
+1 Thran Dynamo|UDS
+1 Time Warp|TMP
+1 Tortured Existence|STH
+1 Trade Routes|MMQ
+1 Urza's Blueprints|ULG
+1 Windfall|USG
+1 Underground River|ICE
+1 Adarkar Wastes|ICE
+1 Vesuvan Doppelganger|3ED
+1 Dance of Many|DRK
+1 Morphling|USG
+1 Bribery|MMQ
+1 Counterspell|ICE
+1 Mind Twist|3ED
+1 Phyrexian Arena|APC
+1 Merieke Ri Berit|ICE
+1 Control Magic|3ED
+1 Swords to Plowshares|ICE
+1 Wrath of God|POR
+1 Animate Dead|3ED
+1 Stroke of Genius|USG
+1 Dance of the Dead|ICE
+1 Dromar's Charm|PLS
+1 Abyssal Specter|ICE
+1 Exalted Angel|ONS
+1 Reins of Power|STH

@@ -116,7 +116,7 @@ public class ThemedChaosDraft implements Comparable<ThemedChaosDraft> {
                 for (Pair<String, Integer> slot : slots) {
                     boosterSize += slot.getRight();
                 }
-                return boosterSize == 15;
+                return boosterSize >= 14;
             }
         }
         return false;

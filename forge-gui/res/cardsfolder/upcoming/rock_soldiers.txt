@@ -1,0 +1,7 @@
+Name:Rock Soldiers
+ManaCost:3 R
+Types:Artifact Creature Elemental Soldier
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When this creature enters, destroy up to one target noncreature artifact.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.nonCreature | TargetMin$ 0 | TargetMax$ 1 | ValidTgtsDesc$ noncreature artifact
+Oracle:When this creature enters, destroy up to one target noncreature artifact.

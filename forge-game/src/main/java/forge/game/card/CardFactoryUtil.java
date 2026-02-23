@@ -30,6 +30,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.cost.*;
+import forge.game.event.GameEventAddLog;
 import forge.game.event.GameEventCardForetold;
 import forge.game.event.GameEventCardPlotted;
 import forge.game.keyword.*;
@@ -2662,27 +2663,7 @@ public class CardFactoryUtil {
     public static void addSpellAbility(final KeywordInterface inst, final CardState card, final boolean intrinsic) {
         String keyword = inst.getOriginal();
         Card host = card.getCard();
-        if (keyword.startsWith("Adapt")) {
-            final String[] k = keyword.split(":");
-            final String magnitude = k[1];
-            final String manacost = k[2];
-            final String reduceCost = k.length > 3 ? k[3] : null;
-
-            String desc = "Adapt " + magnitude;
-
-            String effect = "AB$ PutCounter | Cost$ " + manacost + " | Adapt$ True | CounterNum$ " + magnitude
-                    + " | CounterType$ P1P1 | StackDescription$ SpellDescription";
-
-            if (reduceCost != null) {
-                effect += "| ReduceCost$ " + reduceCost;
-                desc += ". This ability costs {1} less to activate for each " + k[4] + ".";
-            }
-            effect += "| SpellDescription$ " + desc + " (" + inst.getReminderText() + ")";
-
-            final SpellAbility sa = AbilityFactory.getAbility(effect, card);
-            sa.setIntrinsic(intrinsic);
-            inst.addSpellAbility(sa);
-        } else if (keyword.equals("Aftermath") && card.getStateName().equals(CardStateName.RightSplit)) {
+        if (keyword.equals("Aftermath") && card.getStateName().equals(CardStateName.RightSplit)) {
             // Aftermath does modify existing SA, and does not add new one
 
             // only target RightSplit of it
@@ -3228,32 +3209,6 @@ public class CardFactoryUtil {
             final SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
-        } else if (keyword.startsWith("Monstrosity")) {
-            final String[] k = keyword.split(":");
-            final String magnitude = k[1];
-            final String manacost = k[2];
-
-            final String reduceCost = k.length > 3 ? k[3] : null;
-
-            String desc = "Monstrosity " + magnitude;
-
-            String effect = "AB$ PutCounter | Cost$ " + manacost + " | ConditionPresent$ "
-                    + "Card.Self+!IsMonstrous | Monstrosity$ True | CounterNum$ " + magnitude
-                    + " | CounterType$ P1P1 | StackDescription$ SpellDescription";
-            if (reduceCost != null) {
-                effect += "| ReduceCost$ " + reduceCost;
-                desc += ". This ability costs {1} less to activate for each " + k[4] + ".";
-            }
-
-            if (card.hasSVar("MonstrosityAILogic")) {
-                effect += "| AILogic$ " + card.getSVar("MonstrosityAILogic");
-            }
-
-            effect += "| SpellDescription$ " + desc + " (" + inst.getReminderText() + ")";
-
-            final SpellAbility sa = AbilityFactory.getAbility(effect, card);
-            sa.setIntrinsic(intrinsic);
-            inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Morph")) {
             final String[] k = keyword.split(":");
 
@@ -3702,7 +3657,7 @@ public class CardFactoryUtil {
                     table.replaceCounterEffect(game, this, false); // this is a special Action, not an Effect
 
                     String sb = TextUtil.concatWithSpace(getActivatingPlayer().toString(),"has suspended", c.getDisplayName(), "with", String.valueOf(counters),"time counters on it.");
-                    game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                    game.fireEvent(new GameEventAddLog(GameLogEntryType.STACK_RESOLVE, sb));
                     //reveal suspended card
                     game.getAction().reveal(new CardCollection(c), c.getOwner(), true, c.getDisplayName() + " is suspended with " + counters + " time counters in ");
                 }

@@ -1,0 +1,8 @@
+Name:Krang, the All-Powerful
+ManaCost:4 U
+Types:Legendary Artifact Creature Utrom Robot
+PT:3/3
+S:Mode$ Panharmonicon | ValidMode$ Drawn | ValidCard$ Permanent.YouCtrl | Description$ If a player drawing a card causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+T:Mode$ Drawn | ValidPlayer$ Player | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a player draws their second card each turn, put a +1/+1 counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+Oracle:If a player drawing a card causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.\nWhenever a player draws their second card each turn, put a +1/+1 counter on Krang.

@@ -410,8 +410,6 @@ public class NetGuiGame extends NetworkGuiGame {
         send(ProtocolMethod.setPanelSelection, hostCard);
     }
 
-
-
     @Override
     public GameState getGamestate() {
         return null;
@@ -552,6 +550,14 @@ public class NetGuiGame extends NetworkGuiGame {
     public void handleGameEvent(GameEvent event) {
         updateGameView();
         send(ProtocolMethod.handleGameEvent, event);
+    }
+
+    @Override
+    public void handleGameEvents(List<GameEvent> events) {
+        updateGameView();
+        for (GameEvent event : events) {
+            send(ProtocolMethod.handleGameEvent, event);
+        }
     }
 
     @Override

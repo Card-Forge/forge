@@ -85,6 +85,11 @@ public interface IGuiGame {
     void handleLandPlayed(CardView land);
 
     void handleGameEvent(GameEvent event);
+    default void handleGameEvents(List<GameEvent> events) {
+        for (GameEvent event : events) {
+            handleGameEvent(event);
+        }
+    }
 
     Iterable<PlayerZoneUpdate> tempShowZones(PlayerView controller, Iterable<PlayerZoneUpdate> zonesToUpdate);
 

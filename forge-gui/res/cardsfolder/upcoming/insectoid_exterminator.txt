@@ -1,0 +1,8 @@
+Name:Insectoid Exterminator
+ManaCost:2 B
+Types:Creature Insect Mutant
+PT:2/2
+K:Flying
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigScry | Revolt$ True | TriggerDescription$ Disappear — At the beginning of your end step, if a permanent left the battlefield under your control this turn, scry 1. (Look at the top card of your library. You may put that card on the bottom.)
+SVar:TrigScry:DB$ Scry | ScryNum$ 1
+Oracle:Flying\nDisappear — At the beginning of your end step, if a permanent left the battlefield under your control this turn, scry 1. (Look at the top card of your library. You may put that card on the bottom.)

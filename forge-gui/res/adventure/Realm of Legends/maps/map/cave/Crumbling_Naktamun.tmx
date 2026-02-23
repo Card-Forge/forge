@@ -90,7 +90,7 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ipnu Rivulet|HOU&quot;, &quot;ifnir deadlands|HOU&quot;, &quot;dagger of the worthy|HOU&quot;, &quot;accursed horde|HOU&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ipnu Rivulet|HOU&quot;, &quot;ifnir deadlands|HOU&quot;, &quot;accursed horde|HOU&quot;]}"/>
     <property name="enemy" value="The Scarab God"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="60"/>
@@ -106,7 +106,7 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ipnu Rivulet|HOU&quot;, &quot;ramunap ruins|HOU&quot;, &quot;crook of condemnation|HOU&quot;, &quot;bloodwater entity|HOU&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ipnu Rivulet|HOU&quot;, &quot;ramunap ruins|HOU&quot;, &quot;bloodwater entity|HOU&quot;]}"/>
     <property name="enemy" value="The Locust God"/>
     <property name="hidden" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="20"/>
@@ -140,7 +140,7 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;ramunap ruins|HOU&quot;, &quot;ifnir deadlands|HOU&quot;, &quot;everlasting torment|C16&quot;, &quot;Moaning Wall|HOU&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;ramunap ruins|HOU&quot;, &quot;ifnir deadlands|HOU&quot;, &quot;Moaning Wall|HOU&quot;]}"/>
     <property name="enemy" value="The Scorpion God"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="40"/>

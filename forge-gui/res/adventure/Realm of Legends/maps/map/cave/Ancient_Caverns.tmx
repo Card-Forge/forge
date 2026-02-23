@@ -55,7 +55,7 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Plains|PGRU&quot;, &quot;Island|PGRU&quot;, &quot;Swamp|PGRU&quot;, &quot;Mountain|PGRU&quot;, &quot;Forest|PGRU&quot;, &quot;Urza's Filter|INV&quot;, &quot;Howling Mine|7ED&quot;, &quot;Diamond Kaleidoscope|VIS&quot;, &quot;Rewards of Diversity|INV&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Crystal Quarry|ODY&quot;, &quot;City of Brass|ARN&quot;, &quot;Reflecting Pool|TMP&quot;, &quot;Urza's Filter|INV&quot;, &quot;Howling Mine|7ED&quot;, &quot;Diamond Kaleidoscope|VIS&quot;, &quot;Rewards of Diversity|INV&quot;]}"/>
     <property name="enemy" value="Cromat"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="50"/>
