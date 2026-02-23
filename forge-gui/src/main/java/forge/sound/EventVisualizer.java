@@ -100,7 +100,9 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
             return null; // already played sounds in interactive mode
         }
 
-        if (event.blockers().values().stream().noneMatch(Multimap::isEmpty)) {
+        if (event.blockers().values().stream().anyMatch(
+                e -> e.entries().stream().anyMatch(block -> !block.getKey().equals(block.getValue()))
+        )) {
             // hasAnyBlocker = true;
             return SoundEffectType.Block;
         }
