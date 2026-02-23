@@ -1381,15 +1381,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public int chooseSprocket(Card assignee, boolean forceDifferent) {
+    public int chooseSprocket(Card assignee, List<Integer> sprockets) {
         String cardName = assignee.getTranslatedName() + " (" + assignee.getId() + ")";
         String prompt = Localizer.getInstance().getMessage("lblAssignSprocket", cardName);
-        List<Integer> options = Lists.newArrayList(1, 2, 3);
-        if(forceDifferent)
-            options.remove(Integer.valueOf(assignee.getSprocket()));
         int crankedNextTurn = (player.getCrankCounter() % 3) + 1;
         getGui().setCard(assignee.getView());
-        List<Integer> choices = getGui().getChoices(prompt, 1, 1, options, null, (sprocket) -> {
+        List<Integer> choices = getGui().getChoices(prompt, 1, 1, sprockets, null, (sprocket) -> {
             //Add some info about each sprocket.
             StringBuilder label = new StringBuilder();
             label.append(sprocket);

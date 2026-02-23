@@ -732,11 +732,13 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public int chooseSprocket(Card assignee, boolean forceDifferent) {
+    public int chooseSprocket(Card assignee, List<Integer> sprockets) {
         int nextSprocket = (player.getCrankCounter() % 3) + 1;
-        if(forceDifferent && nextSprocket == assignee.getSprocket())
+        if(sprockets.contains(nextSprocket))
+            return nextSprocket;
+        else if(sprockets.contains((nextSprocket % 3) + 1))
             return (nextSprocket % 3) + 1;
-        return nextSprocket;
+        return sprockets.stream().findAny().orElse(0);
     }
 
     @Override

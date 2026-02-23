@@ -231,9 +231,9 @@ public abstract class PlayerController {
 
     public abstract List<Card> chooseContraptionsToCrank(List<Card> contraptions);
 
-    public abstract int chooseSprocket(Card assignee, boolean forceDifferent);
+    public abstract int chooseSprocket(Card assignee, List<Integer> sprockets);
     public final int chooseSprocket(Card assignee) {
-        return chooseSprocket(assignee, false);
+        return chooseSprocket(assignee, List.of(1, 2, 3));
     }
 
     public abstract PlanarDice choosePDRollToIgnore(List<PlanarDice> rolls);

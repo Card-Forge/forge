@@ -511,8 +511,8 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public int chooseSprocket(Card assignee, boolean forceDifferent) {
-        return forceDifferent && assignee.getSprocket() == 1 ? 2 : 1;
+    public int chooseSprocket(Card assignee, List<Integer> sprockets) {
+        return sprockets.get(0);
     }
 
     @Override
