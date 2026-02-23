@@ -46,7 +46,6 @@ public final class GameMenu {
         menu.add(getMenuItem_AutoYields());
         menu.add(getAutoYieldModeSubmenu(localizer));
         menu.addSeparator();
-        MenuUtil.addPrefCheckBox(menu, localizer.getMessage("cbRemindOnPriority"), FPref.UI_REMIND_ON_PRIORITY);
         MenuUtil.addPrefCheckBox(menu, localizer.getMessage("cbEscapeEndsTurn"), FPref.UI_ALLOW_ESC_TO_END_TURN);
         MenuUtil.addPrefCheckBox(menu, localizer.getMessage("lblWarnBeforeEmptyingManaPool"), FPref.UI_MANA_LOST_PROMPT);
         return menu;

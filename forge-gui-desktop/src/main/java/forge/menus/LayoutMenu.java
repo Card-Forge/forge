@@ -19,6 +19,7 @@ import forge.gui.MouseUtil;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.IVTopLevelUI;
 import forge.gui.framework.SLayoutIO;
+import forge.game.GameLogEntryType;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
@@ -64,17 +65,9 @@ public final class LayoutMenu {
             if (currentScreen.isMatchScreen()) {
                 menu.add(getMenuItem_ShowBackgroundImage());
 
-                // Prompt Pane section
                 menu.addSeparator();
-                final JMenuItem promptLabel = new JMenuItem(localizer.getMessage("lblPromptPane"));
-                promptLabel.setEnabled(false);
-                menu.add(promptLabel);
-
-                MenuUtil.addPrefCheckBox(menu, localizer.getMessage("cbCompactPrompt"), FPref.UI_COMPACT_PROMPT)
-                        .addActionListener(e -> repopulatePrompt());
-                MenuUtil.addPrefCheckBox(menu, localizer.getMessage("lblShowSpellDescription"), FPref.UI_DETAILED_SPELLDESC_IN_PROMPT);
-                MenuUtil.addPrefCheckBox(menu, localizer.getMessage("cbHideReminderText"), FPref.UI_HIDE_REMINDER_TEXT);
-                MenuUtil.addPrefCheckBox(menu, localizer.getMessage("lblShowStormCount"), FPref.UI_SHOW_STORM_COUNT_IN_PROMPT);
+                menu.add(getMenu_PromptPane());
+                menu.add(getMenu_LogPane());
 
                 // Multiplayer field ordering
                 menu.addSeparator();
@@ -234,12 +227,54 @@ public final class LayoutMenu {
         }
     }
 
+    private static JMenu getMenu_PromptPane() {
+        final Localizer localizer = Localizer.getInstance();
+        final JMenu menu = new JMenu(localizer.getMessage("lblPromptPanel"));
+        MenuUtil.addPrefCheckBox(menu, localizer.getMessage("cbCompactPrompt"), FPref.UI_COMPACT_PROMPT)
+                .addActionListener(e -> repopulatePrompt());
+        MenuUtil.addPrefCheckBox(menu, localizer.getMessage("lblShowSpellDescription"), FPref.UI_DETAILED_SPELLDESC_IN_PROMPT);
+        MenuUtil.addPrefCheckBox(menu, localizer.getMessage("cbHideReminderText"), FPref.UI_HIDE_REMINDER_TEXT);
+        MenuUtil.addPrefCheckBox(menu, localizer.getMessage("lblShowStormCount"), FPref.UI_SHOW_STORM_COUNT_IN_PROMPT);
+        MenuUtil.addPrefCheckBox(menu, localizer.getMessage("cbRemindOnPriority"), FPref.UI_REMIND_ON_PRIORITY);
+        return menu;
+    }
+
+    private static JMenu getMenu_LogPane() {
+        final Localizer localizer = Localizer.getInstance();
+        final JMenu menu = new JMenu(localizer.getMessage("lblLogPanel"));
+        final ButtonGroup group = new ButtonGroup();
+        final String current = prefs.getPref(FPref.DEV_LOG_ENTRY_TYPE);
+
+        for (final GameLogEntryType type : GameLogEntryType.values()) {
+            final JRadioButtonMenuItem item = MenuUtil.createStayOpenRadioButton(type.getCaption());
+            item.setSelected(type.name().equals(current));
+            item.addActionListener(e -> {
+                prefs.setPref(FPref.DEV_LOG_ENTRY_TYPE, type.name());
+                prefs.save();
+                refreshLog();
+            });
+            group.add(item);
+            menu.add(item);
+        }
+        return menu;
+    }
+
     private static void repopulatePrompt() {
         final FScreen screen = Singletons.getControl().getCurrentScreen();
         if (screen != null && screen.isMatchScreen()) {
             final IVTopLevelUI view = screen.getView();
             if (view instanceof VMatchUI) {
                 ((VMatchUI) view).getControl().repopulatePrompt();
+            }
+        }
+    }
+
+    private static void refreshLog() {
+        final FScreen screen = Singletons.getControl().getCurrentScreen();
+        if (screen != null && screen.isMatchScreen()) {
+            final IVTopLevelUI view = screen.getView();
+            if (view instanceof VMatchUI) {
+                ((VMatchUI) view).getControl().refreshLog();
             }
         }
     }

@@ -134,6 +134,21 @@ public class VLog implements IVDoc<CLog> {
         }
     }
 
+    /**
+     * Re-renders all log entries using the current verbosity preference.
+     * Called when the user changes the log verbosity mid-match.
+     */
+    public void refreshDisplay() {
+        final GameView model = controller.getMatchUI().getGameView();
+        if (model == null) {
+            return;
+        }
+        displayedLogEntries.clear();
+        gameLog.reset();
+        displayNewGameLogEntries(model);
+        refreshLayout();
+    }
+
     private boolean isGameLogConsoleVisible() {
         return parentCell != null && parentCell.getSelected().equals(this);
     }
