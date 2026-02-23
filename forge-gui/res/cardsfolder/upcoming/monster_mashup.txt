@@ -1,0 +1,7 @@
+Name:Monster Mashup
+ManaCost:3 R
+Types:Creature Werewolf Fish Zombie Vampire
+PT:4/3
+K:Reach
+K:Menace
+Oracle:Reach (This creature can block creatures with flying.)\nMenace (This creature can't be blocked except by two or more creatures.)

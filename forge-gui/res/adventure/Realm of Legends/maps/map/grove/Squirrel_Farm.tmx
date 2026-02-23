@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Nut Collector&quot;, &quot;Squirrel mob&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Nut Collector&quot;, &quot;Squirrel Sanctuary&quot; ]}"/>
   <property name="spriteLayer" type="bool" value="true"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
@@ -74,7 +74,7 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Oakhollow Village|BLB&quot;,&quot;Mudflat Village|BLB&quot;, &quot;Sword of the Squeak|BLC&quot;, &quot;Squirrel Sovereign|MH2&quot;, &quot;Chittering Illuminator&quot;, &quot;Squirrel Sanctuary|MH2&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Oakhollow Village|BLB&quot;,&quot;Mudflat Village|BLB&quot;, &quot;Sword of the Squeak|BLC&quot;, &quot;Squirrel Sovereign|MH2&quot;, &quot;Chittering Illuminator&quot;]}"/>
     <property name="enemy" value="Chatterfang"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="10"/>
@@ -90,7 +90,7 @@
   </object>
   <object id="69" template="../../../../common/maps/obj/enemy.tx" x="78.5" y="364.75">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Heap Doll|SHM&quot;, &quot;Scarecrone|EVE&quot;, &quot;Scythe of the Wretched|MRD&quot;, &quot;Raking Canopy|SHM&quot;, &quot;Springjack Pasture|EVE&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Scarecrow Guide&quot;, &quot;Scythe of the Wretched|MRD&quot;, &quot;Raking Canopy|SHM&quot;, &quot;Springjack Pasture|EVE&quot;]}"/>
     <property name="enemy" value="Reaper King"/>
     <property name="speedModifier" type="float" value="40"/>
     <property name="threatRange" type="int" value="60"/>

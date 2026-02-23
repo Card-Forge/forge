@@ -2,6 +2,6 @@ Name:Temperamental Oozewagg
 ManaCost:3 G
 Types:Creature Ooze Brushwagg
 PT:4/4
-K:Adapt:2:2 G
+A:AB$ PutCounter | Cost$ 2 G | Adapt$ 2
 S:Mode$ Continuous | Affected$ Creature.modified+YouCtrl | AddKeyword$ Trample | Description$ Modified creatures you control have trample. (Equipment, Auras you control, and counters are modifications.)
 Oracle:{2}{G}: Adapt 2. (If this creature has no +1/+1 counters on it, put two +1/+1 counters on it.)\nModified creatures you control have trample. (Equipment, Auras you control, and counters are modifications.)

@@ -1,0 +1,8 @@
+Name:Leonardo, Big Brother
+ManaCost:2 W
+Types:Legendary Creature Mutant Ninja Turtle
+PT:1/3
+K:Sneak:W
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ NICKNAME gets +1/+0 for each other creature you control.
+SVar:X:Count$Valid Creature.Other+YouCtrl
+Oracle:Sneak {W} (You may cast this spell for {W} if you also return an unblocked attacked you control to hand during the declare blockers step. He enters tapped and attacking.)\nLeonardo gets +1/+0 for each other creature you control.

@@ -41,7 +41,7 @@
  <objectgroup id="4" name="Objects">
   <object id="71" template="../../../../common/maps/obj/enemy.tx" x="149.981" y="169.866">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Horned Helm|5DN&quot;, &quot;Sinister Monolith|BLB&quot;, &quot;Restless Cottage|WOE&quot;, &quot;Trail of Crumbs|ELD&quot;, &quot;Caustic caterpillar|ORI&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Sinister Monolith|BLB&quot;, &quot;Restless Cottage|WOE&quot;, &quot;Trail of Crumbs|ELD&quot;, &quot;Caustic caterpillar|ORI&quot;]}"/>
     <property name="enemy" value="Ygra"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="100"/>

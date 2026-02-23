@@ -33,6 +33,7 @@ import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.event.Event;
 import forge.game.event.GameEventDayTimeChanged;
+import forge.game.event.GameEventAddLog;
 import forge.game.event.GameEventGameOutcome;
 import forge.game.phase.Phase;
 import forge.game.phase.PhaseHandler;
@@ -489,9 +490,6 @@ public class Game {
     public final GameLog getGameLog() {
         return gameLog;
     }
-    public final void updateGameLogForView() {
-        view.updateGameLog(gameLog);
-    }
 
     public final Zone getStackZone() {
         return stackZone;
@@ -872,9 +870,10 @@ public class Game {
                 // unattach all "Enchant Player"
                 c.removeAttachedTo(p);
                 if (c.getOwner().equals(p)) {
-                    if (c.getEffectSource() != null && !c.isEmblem()) {
-                        // move effect to another player so they continue to work
+                    // check that it wasn't cleaned up already
+                    if (c.getEffectSource() != null && !c.isEmblem() && p.getZone(ZoneType.Command).contains(c)) {
                         c.getZone().remove(c);
+                        // move effect to another player so they continue to work
                         getNextPlayerAfter(p).getZone(ZoneType.Command).add(c);
                     } else {
                         for (Card cc : cards) {
@@ -1094,7 +1093,7 @@ public class Game {
         Predicate<Card> goodForAnte = CardPredicates.BASIC_LANDS.negate();
         Card ante = Aggregates.random(IterableUtil.filter(lib, goodForAnte));
         if (ante == null) {
-            getGameLog().add(GameLogEntryType.ANTE, "Only basic lands found. Will ante one of them");
+            fireEvent(new GameEventAddLog(GameLogEntryType.ANTE, "Only basic lands found. Will ante one of them"));
             ante = Aggregates.random(lib);
         }
         anteed.put(player, ante);

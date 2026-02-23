@@ -76,7 +76,6 @@
     <property name="enemy" value="Jori En"/>
     <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="40"/>
-    <property name="waypoints" value="0"/>
    </properties>
   </object>
   <object id="70" template="../../../../common/maps/obj/enemy.tx" x="105.536" y="331.533">
@@ -184,39 +183,6 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
   </object>
   <object id="96" template="../../../../common/maps/obj/collision.tx" x="32.52" y="161.5" width="28.96" height="31"/>
   <object id="97" template="../../../../common/maps/obj/collision.tx" x="62.27" y="175.5" width="32.21" height="62.25"/>
-  <object id="98" template="../../../../common/maps/obj/dialog.tx" x="477.439" y="117.823" width="61.3882" height="18.8333" rotation="0" visible="1">
-   <properties>
-    <property name="dialog">[
-    {
-    &quot;text&quot;: &quot;A towering ogre stands ahead, blocking the way out of the narrow valley. 
-
-'Ho there, small one! There's a 500 gold piece toll to pass this way!'&quot;,
-    &quot;options&quot;: [
-      {
-        &quot;name&quot;: &quot;I'll be paying the iron price, actually.&quot;,
-        &quot;text&quot;: &quot;'Brave! Let's see if that bravery lasts, small one!'&quot;,
-        &quot;options&quot;: [
-          {
-            &quot;name&quot;: &quot;(Continue)&quot;,
-            &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]
-          },
-          {
-            &quot;name&quot;: &quot;That seems reasonable.&quot;,
-            &quot;text&quot;: &quot;'I'm glad you see reason! Enjoy our little slice of Zendikar.'&quot;,
-            &quot;options&quot;: [{&quot;name&quot;: &quot;Continue&quot;}],
-            &quot;action&quot;: [
-                {
-                  &quot;grantRewards&quot;: [
-                    {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: -500},
-                    {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Kazuul, Tyrant of the Cliffs&quot;},
-                    {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Kazuul's Toll Collector&quot;}                
-                  ],
-            &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]
-          }
-            ]
-        }]}]}]</property>
-   </properties>
-  </object>
   <object id="99" template="../../../../common/maps/obj/collision.tx" x="194.895" y="15.375" width="44.71" height="62.25"/>
   <object id="100" template="../../../../common/maps/obj/dialog.tx" x="232.25" y="455.083" width="72.5" height="12.8333" visible="1">
    <properties>

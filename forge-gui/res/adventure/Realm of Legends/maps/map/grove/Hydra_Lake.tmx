@@ -90,7 +90,7 @@
   </object>
   <object id="123" template="../../../../common/maps/obj/enemy.tx" x="264.333" y="260">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Oran-Rief, the Vastwood&quot;, &quot;Chimeric Coils|5DN&quot;, &quot;Colossal Dreadmask|MH3&quot;, &quot;Managorger Hydra|ORI&quot; ]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Oran-Rief, the Vastwood&quot;, &quot;Chimeric Coils&quot;, &quot;Thunderous Snapper&quot; ]
 }</property>
     <property name="enemy" value="Gargos"/>
     <property name="speedModifier" type="float" value="50"/>

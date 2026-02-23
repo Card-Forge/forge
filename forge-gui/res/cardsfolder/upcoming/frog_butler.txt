@@ -1,0 +1,8 @@
+Name:Frog Butler
+ManaCost:1 G
+Types:Creature Frog Spirit
+PT:1/1
+K:Deathtouch
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Pump | Cost$ 2 | KW$ Reach | Defined$ Self | SpellDescription$ This creature gains reach until end of turn.
+Oracle:Deathtouch\n{T}: Add one mana of any color.\n{2}: This creature gains reach until end of turn.

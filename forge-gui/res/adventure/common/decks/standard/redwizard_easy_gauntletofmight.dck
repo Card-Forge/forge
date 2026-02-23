@@ -5,7 +5,7 @@ Difficulty=medium
 Description=Mono R Gauntlet of Might deck with pumpable creatures
 Icon=Firestorm.jpg
 Deck Type=constructed
-[main]
+[Main]
 2 Blood Moon
 4 Bloodmark Mentor
 4 Dragon Hatchling
@@ -18,4 +18,4 @@ Deck Type=constructed
 4 Rage Reflection
 2 Volcanic Strength
 2 Whispersilk Cloak
-[sideboard]
+[Sideboard]

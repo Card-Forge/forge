@@ -1,0 +1,12 @@
+Name:Special Move
+ManaCost:2 R
+Types:Instant
+A:SP$ Charm | Choices$ DBJumpKick,DBDashAttack,DBFootToss | CharmNum$ 2
+SVar:DBJumpKick:DB$ Destroy | ValidTgts$ Artifact | SpellDescription$ Jump Kick — Destroy target artifact.
+SVar:DBDashAttack:DB$ PutCounter | ValidTgts$ Creature.attacking+YouCtrl,Creature.blocking+YouCtrl | TgtPrompt$ Select target attacking or blocking creature you control | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Dash Attack — Put two +1/+1 counters on target attacking or blocking creature you control.
+SVar:DBFootToss:DB$ Pump | ValidTgts$ Creature.YouCtrl | RememberObjects$ ThisTargetedCard | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ DBDamage | SpellDescription$ Foot Toss — Target creature you control deals damage equal to its power to any other target. Then sacrifice it.
+SVar:DBDamage:DB$ DealDamage | AILogic$ PowerDmg | ValidTgts$ Any.NotDefinedParentTarget | DamageSource$ ParentTarget | NumDmg$ X | SubAbility$ DBSac
+SVar:DBSac:DB$ SacrificeAll | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:ParentTargeted$CardPower
+Oracle:Choose two —\n• Jump Kick — Destroy target artifact.\n• Dash Attack — Put two +1/+1 counters on target attacking or blocking creature you control.\n• Foot Toss — Target creature you control deals damage equal to its power to any other target. Then sacrifice it.

@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Goblin Warchief&quot;, &quot;Boggart Shenanigans&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Rundvelt Hordemaster&quot;, &quot;Boggart Shenanigans&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -126,7 +126,7 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Torch Courier|GRN&quot;, &quot;Goblin Burrows|ONS&quot;, &quot;krenko's enforcer|m15&quot;, &quot;Krenko's Buzzcrusher|M15&quot;, &quot;Goblin Influx Array|YDMU&quot;, &quot;Goblin Warrens|FEM&quot; ] }"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Torch Courier|GRN&quot;, &quot;Goblin Burrows|ONS&quot;, &quot;Krenko's Buzzcrusher|M15&quot;, &quot;Goblin Influx Array|YDMU&quot;, &quot;Goblin Warrens|FEM&quot; ] }"/>
     <property name="enemy" value="Krenko"/>
     <property name="threatRange" type="int" value="0"/>
     <property name="waypoints" value=""/>

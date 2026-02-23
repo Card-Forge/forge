@@ -48,7 +48,7 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Plains|C16|[337]&quot;, &quot;Swamp|C16|[343]&quot;, &quot;Mountain|C16|[346]&quot;, &quot;Forest|C16|[349]&quot;, &quot;Dune-Brood Nephilim|GPT&quot;, &quot;Gloryscale Viashino|ARB&quot;]}"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Command Tower&quot;, &quot;Exotic Orchard&quot;, &quot;Dune-Brood Nephilim&quot;, &quot;Conqueror's Flail&quot; ] }"/>
     <property name="enemy" value="Saskia"/>
     <property name="pursueRange" type="int" value="0"/>
     <property name="speedModifier" type="float" value="50"/>

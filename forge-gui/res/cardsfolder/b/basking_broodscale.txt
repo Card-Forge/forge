@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Creature Eldrazi Lizard
 PT:2/2
 K:Devoid
-K:Adapt:1:1 G
+A:AB$ PutCounter | Cost$ 1 G | Adapt$ 1
 T:Mode$ CounterAddedOnce | ValidCard$ Card.Self | TriggerZones$ Battlefield | OptionalDecider$ You | CounterType$ P1P1 | Execute$ TrigToken | TriggerDescription$ Whenever one or more +1/+1 counters are put on CARDNAME, you may create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this creature: Add {C}."
 SVar:TrigToken:DB$ Token | TokenScript$ c_0_1_eldrazi_spawn_sac | TokenOwner$ You
 DeckHas:Ability$Counters|Token & Type$Spawn

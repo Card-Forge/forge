@@ -31,7 +31,7 @@
  <objectgroup id="4" name="Objects">
   <object id="50" template="../../../../common/maps/obj/enemy.tx" x="240.561" y="404.87" width="64" height="64">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;From Beyond|BFZ&quot;, &quot;Shrine of the Forsaken Gods|BFZ&quot;, &quot;Forsaken Monument|ZNR&quot;, &quot;Monstrous Vortex|MH3&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;From Beyond&quot;, &quot;Awakening Zone&quot;, &quot;Writhing Chrysalis&quot;]}"/>
     <property name="enemy" value="Ulalek"/>
     <property name="speedModifier" type="float" value="50"/>
     <property name="threatRange" type="int" value="100"/>

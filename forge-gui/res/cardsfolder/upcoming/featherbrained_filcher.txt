@@ -1,0 +1,9 @@
+Name:Featherbrained Filcher
+ManaCost:W
+Types:Creature Bird Mutant
+PT:0/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature leaves the battlefield, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_food_sac | TokenOwner$ You
+DeckHas:Ability$Token|Sacrifice
+Oracle:Flying\nWhen this creature leaves the battlefield, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")

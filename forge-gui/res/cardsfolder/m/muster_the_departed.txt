@@ -4,7 +4,7 @@ Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 1/1 white Spirit creature token with flying.
 SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ Morbid | Execute$ DBCopy | TriggerDescription$ Morbid — At the beginning of your end step, if a creature died this turn, populate. (Create a token that's a copy of a creature token you control.)
-SVar:DBCopy:DB$ CopyPermanent | Choices$ Creature.token+YouCtrl | Populate$ True
+SVar:DBCopy:DB$ CopyPermanent | Populate$ True
 SVar:Morbid:Count$Morbid.1.0
 DeckHas:Ability$Token & Type$Spirit
 Oracle:When Muster the Departed enters, create a 1/1 white Spirit creature token with flying.\nMorbid — At the beginning of your end step, if a creature died this turn, populate. (Create a token that's a copy of a creature token you control.)

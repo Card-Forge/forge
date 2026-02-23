@@ -9,7 +9,7 @@ SVar:DBBranch:DB$ Branch | BranchConditionSVar$ FlameTimer | TrueSubAbility$ DBR
 SVar:DBRemoveCtrs:DB$ RemoveCounter | Defined$ Self | CounterType$ FLAME | CounterNum$ All | SubAbility$ DBConjure
 SVar:DBConjure:DB$ MakeCard | Conjure$ True | Name$ Flamebraider | Zone$ Battlefield | RememberMade$ True | SubAbility$ DBPump
 SVar:DBPump:DB$ Animate | Defined$ Remembered | Keywords$ Haste | Triggers$ PhaseTrig | Duration$ Permanent | SubAbility$ DBCleanup
-SVar:PhaseTrig:Mode$ Phase| Phase$ End of Turn | Execute$ TrigSacrifice | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the end step, sacrifice this creature.
+SVar:PhaseTrig:Mode$ Phase | Phase$ End of Turn | Execute$ TrigSacrifice | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the end step, sacrifice this creature.
 SVar:TrigSacrifice:DB$ Sacrifice
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearNamedCard$ True
 SVar:FlameTimer:Count$Valid Card.Self+counters_GE3_FLAME

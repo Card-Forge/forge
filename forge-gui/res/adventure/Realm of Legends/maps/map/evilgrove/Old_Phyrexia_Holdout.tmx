@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Phyrexian Arena&quot;, &quot;Order of Yawgmoth&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Phyrexian Arena&quot;, &quot;Body Snatcher&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -62,7 +62,7 @@
   </object>
   <object id="54" template="../../../../common/maps/obj/enemy.tx" x="379.674" y="143.847">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Phyrexian Tower|USG&quot;, &quot;Vile Requiem|USG&quot;, &quot;Phyrexian Plaguelord|ULG&quot;, &quot;Order of Yawgmoth|USG&quot;, &quot;Bonehoard|MBS&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Phyrexian Tower|USG&quot;, &quot;No Mercy|ULG&quot;, &quot;Bonehoard|MBS&quot;]}"/>
     <property name="enemy" value="Yawgmoth"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" value="10"/>
