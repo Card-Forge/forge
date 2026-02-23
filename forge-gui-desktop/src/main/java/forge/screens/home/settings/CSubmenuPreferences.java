@@ -17,6 +17,7 @@ import forge.localinstance.properties.ForgeNetPreferences;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.properties.PreferencesStore;
+import forge.menus.LayoutMenu;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.screens.deckeditor.CDeckEditorUI;
@@ -339,6 +340,14 @@ public enum CSubmenuPreferences implements ICDoc {
         final FComboBox<GameLogVerbosity> comboBox = createComboBox(GameLogVerbosity.values(), userSetting);
         final GameLogVerbosity selectedItem = GameLogVerbosity.fromString(this.prefs.getPref(userSetting));
         panel.setComboBox(comboBox, selectedItem);
+
+        view.getBtnCustomLogSettings().setCommand(
+                (UiCommand) LayoutMenu::showCustomLogCategoriesDialog);
+        view.getBtnCustomLogSettings().setEnabled(selectedItem == GameLogVerbosity.CUSTOM);
+        comboBox.addItemListener(e -> {
+            view.getBtnCustomLogSettings().setEnabled(
+                    comboBox.getSelectedItem() == GameLogVerbosity.CUSTOM);
+        });
     }
 
     private void initializeCloseActionComboBox() {

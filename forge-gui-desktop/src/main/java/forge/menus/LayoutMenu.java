@@ -11,6 +11,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
 
@@ -29,8 +30,13 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.match.VMatchUI;
+import forge.toolbox.FButton;
+import forge.toolbox.FCheckBox;
+import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedMenuItem;
+import forge.view.FDialog;
+import net.miginfocom.swing.MigLayout;
 import forge.util.Localizer;
 import forge.view.FFrame;
 import forge.view.FView;
@@ -273,9 +279,10 @@ public final class LayoutMenu {
                 .addActionListener(e -> refreshLog());
         menu.addSeparator();
 
-        // Custom Categories submenu (declared early so radio button listeners can reference it)
-        final JMenu customMenu = new JMenu(localizer.getMessage("lblCustomCategories"));
-        customMenu.setEnabled(currentVerbosity == GameLogVerbosity.CUSTOM);
+        // Custom Categories menu item (declared early so radio button listeners can reference it)
+        final JMenuItem customItem = new JMenuItem(localizer.getMessage("lblCustomCategories") + "...");
+        customItem.addActionListener(e -> showCustomLogCategoriesDialog());
+        customItem.setEnabled(currentVerbosity == GameLogVerbosity.CUSTOM);
 
         // Preset radio buttons (Low, Medium, High)
         final String[] tooltipKeys = {"lblLogVerbosityLow", "lblLogVerbosityMedium", "lblLogVerbosityHigh"};
@@ -288,7 +295,7 @@ public final class LayoutMenu {
             item.addActionListener(e -> {
                 prefs.setPref(FPref.DEV_LOG_ENTRY_TYPE, verbosity.name());
                 prefs.save();
-                customMenu.setEnabled(false);
+                customItem.setEnabled(false);
                 refreshLog();
             });
             group.add(item);
@@ -303,31 +310,15 @@ public final class LayoutMenu {
         customRadio.addActionListener(e -> {
             prefs.setPref(FPref.DEV_LOG_ENTRY_TYPE, GameLogVerbosity.CUSTOM.name());
             prefs.save();
-            customMenu.setEnabled(true);
+            customItem.setEnabled(true);
             refreshLog();
         });
         group.add(customRadio);
         menu.add(customRadio);
 
-        // Separator + Custom Categories submenu
+        // Separator + Custom Categories dialog item
         menu.addSeparator();
-        final Set<GameLogEntryType> customTypes = prefs.getCustomLogTypes();
-        for (final GameLogEntryType type : GameLogEntryType.values()) {
-            final JCheckBoxMenuItem cb = MenuUtil.createStayOpenCheckBox(type.getCaption());
-            cb.setState(customTypes.contains(type));
-            cb.addActionListener(e -> {
-                final Set<GameLogEntryType> current = prefs.getCustomLogTypes();
-                if (cb.getState()) {
-                    current.add(type);
-                } else {
-                    current.remove(type);
-                }
-                prefs.setCustomLogTypes(current);
-                refreshLog();
-            });
-            customMenu.add(cb);
-        }
-        menu.add(customMenu);
+        menu.add(customItem);
 
         return menu;
     }
@@ -340,6 +331,42 @@ public final class LayoutMenu {
                 ((VMatchUI) view).getControl().refreshLog();
             }
         }
+    }
+
+    public static void showCustomLogCategoriesDialog() {
+        final Localizer localizer = Localizer.getInstance();
+        final FDialog dlg = new FDialog();
+        dlg.setTitle(localizer.getMessage("lblCustomLogSettings"));
+
+        final JPanel checkPanel = new JPanel(new MigLayout("insets 10, gap 5 3, wrap 2, fillx"));
+        checkPanel.setOpaque(false);
+
+        final Set<GameLogEntryType> customTypes = prefs.getCustomLogTypes();
+        for (final GameLogEntryType type : GameLogEntryType.values()) {
+            final FCheckBox cb = new FCheckBox(type.getCaption());
+            cb.setSelected(customTypes.contains(type));
+            cb.addActionListener(e -> {
+                final Set<GameLogEntryType> current = prefs.getCustomLogTypes();
+                if (cb.isSelected()) {
+                    current.add(type);
+                } else {
+                    current.remove(type);
+                }
+                prefs.setCustomLogTypes(current);
+                refreshLog();
+            });
+            checkPanel.add(cb, "sg check");
+        }
+
+        final FScrollPane scroller = new FScrollPane(checkPanel, false);
+        final FButton btnOk = new FButton("OK");
+        btnOk.addActionListener(e -> dlg.dispose());
+
+        dlg.add(scroller, "w 400!, h 300!, wrap");
+        dlg.add(btnOk, "w 80!, h 26!, ax center");
+        dlg.pack();
+        dlg.setLocationRelativeTo(null);
+        dlg.setVisible(true);
     }
 
     private static JMenuItem getMenuItem_ShowTabs() {
