@@ -14,8 +14,6 @@ import forge.util.TextUtil;
 
 import java.util.Objects;
 
-import com.google.common.collect.Multimap;
-
 /**
  * This class is in charge of converting any forge.game.event.Event to a SoundEffectType.
  *
