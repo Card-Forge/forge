@@ -5,10 +5,8 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
-import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.event.HyperlinkEvent;
 
 import forge.deckchooser.FDeckChooser;
 import forge.gamemodes.match.GameLobby;
@@ -93,31 +91,23 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
                     .text(localizer.getMessage("lblOnlineWarning"))
                     .fontSize(16).fontAlign(SwingConstants.CENTER).build();
 
-            // Guide text with inline hyperlink (matches FLabel font and color)
-            final Font skinFont = FSkin.getRelativeFont(16).getBaseFont();
-            final Color textColor = lblWarning.getForeground();
-            final String hexColor = String.format("#%02x%02x%02x",
-                    textColor.getRed(), textColor.getGreen(), textColor.getBlue());
-            final JEditorPane guidePane = new JEditorPane("text/html", "");
-            guidePane.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES, Boolean.TRUE);
-            guidePane.setFont(skinFont);
-            guidePane.setEditable(false);
-            guidePane.setOpaque(false);
-            guidePane.setText("<html><div style='text-align:center;color:" + hexColor + ";'>"
-                    + localizer.getMessage("lblOnlineGuideText")
-                    + " <a href='" + guideUrl + "' style='color:" + hexColor + ";font-weight:bold;'>"
-                    + localizer.getMessage("lblNetworkPlayGuide") + "</a>."
-                    + "</div></html>");
-            guidePane.addHyperlinkListener(e -> {
-                if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
-                    try {
-                        java.awt.Desktop.getDesktop().browse(e.getURL().toURI());
-                    } catch (final Exception ex) {
-                        java.awt.Toolkit.getDefaultToolkit().getSystemClipboard()
-                                .setContents(new java.awt.datatransfer.StringSelection(guideUrl), null);
-                    }
-                }
-            });
+            // Guide text with clickable link
+            final FLabel lblGuideText = new FLabel.Builder()
+                    .text(localizer.getMessage("lblOnlineGuideText"))
+                    .fontSize(16).fontAlign(SwingConstants.CENTER).build();
+
+            final FLabel lblGuideLink = new FLabel.Builder()
+                    .text("<html><u>" + localizer.getMessage("lblNetworkPlayGuide") + "</u></html>")
+                    .fontSize(16).fontStyle(Font.BOLD).fontAlign(SwingConstants.CENTER)
+                    .hoverable().cmdClick(() -> {
+                        try {
+                            java.awt.Desktop.getDesktop().browse(java.net.URI.create(guideUrl));
+                        } catch (final Exception ex) {
+                            java.awt.Toolkit.getDefaultToolkit().getSystemClipboard()
+                                    .setContents(new java.awt.datatransfer.StringSelection(guideUrl), null);
+                        }
+                    }).build();
+            lblGuideLink.setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.HAND_CURSOR));
 
             // Buttons
             final FButton btnHost = new FButton(localizer.getMessage("lblHostGame"));
@@ -135,7 +125,8 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
 
             infoBox.add(lblTitle, "ax center, gap 0 0 0 15");
             infoBox.add(lblWarning, "ax center, gap 0 0 0 15");
-            infoBox.add(guidePane, "ax center, growx, gap 0 0 0 25");
+            infoBox.add(lblGuideText, "ax center, gap 0 0 0 0");
+            infoBox.add(lblGuideLink, "ax center, gap 0 0 0 25");
             infoBox.add(buttonPanel, "ax center");
 
             container.setLayout(new BorderLayout());

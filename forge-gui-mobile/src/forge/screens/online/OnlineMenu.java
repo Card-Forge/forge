@@ -16,8 +16,7 @@ import forge.toolbox.FOptionPane;
 
 public class OnlineMenu extends FPopupMenu {
     public enum OnlineScreen {
-        Host("lblHostGame", FSkinImage.FAVICON, OnlineLobbyScreen.class),
-        Join("lblJoinGame", FSkinImage.FAVICON, OnlineLobbyScreen.class),
+        Lobby("lblPlayOnline", FSkinImage.FAVICON, OnlineLobbyScreen.class),
         Chat("lblChat", FSkinImage.QUEST_NOTES, OnlineChatScreen.class),
         Disconnect("lblDisconnect", FSkinImage.DELETE, null);
 
@@ -70,9 +69,6 @@ public class OnlineMenu extends FPopupMenu {
         }
 
         public void open() {
-            if (this == Host || this == Join) {
-                OnlineLobbyScreen.setHostMode(this == Host);
-            }
             initializeScreen();
             Forge.openScreen(screen);
         }
@@ -102,7 +98,7 @@ public class OnlineMenu extends FPopupMenu {
         }
         catch (Exception ex) {
             ex.printStackTrace();
-            preferredScreen = OnlineScreen.Host;
+            preferredScreen = OnlineScreen.Lobby;
             prefs.setPref(FPref.PLAY_ONLINE_SCREEN, preferredScreen.name());
             prefs.save();
         }
