@@ -213,8 +213,8 @@ public class VLog implements IVDoc<CLog> {
 
     private void addNewLogEntriesToJPanel(final List<GameLogEntry> newLogEntries) {
         for (final GameLogEntry logEntry : newLogEntries) {
-            gameLog.setTextFont(getJTextAreaFont(logEntry.type));
-            gameLog.addLogEntry(logEntry.message, logEntry.sourceCard, controller.getMatchUI().getLocalPlayers());
+            gameLog.setTextFont(getJTextAreaFont(logEntry.type()));
+            gameLog.addLogEntry(logEntry.message(), logEntry.sourceCard(), controller.getMatchUI().getLocalPlayers());
             this.displayedLogEntries.add(logEntry);
         }
     }

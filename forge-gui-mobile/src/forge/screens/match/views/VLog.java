@@ -104,7 +104,7 @@ public class VLog extends FDropDown {
         else {
             boolean isAltRow = false;
             for (int i = logEntrys.size() - 1; i >= 0; i--) { //show latest entry on bottom
-                logEntryDisplay = add(new LogEntryDisplay(logEntrys.get(i).message, isAltRow));
+                logEntryDisplay = add(new LogEntryDisplay(logEntrys.get(i).message(), isAltRow));
                 height = logEntryDisplay.getMinHeight(width);
                 logEntryDisplay.setBounds(0, y, width, height);
                 isAltRow = !isAltRow;

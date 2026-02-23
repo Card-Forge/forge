@@ -69,7 +69,7 @@ public class GameLog extends Observable implements Serializable {
     
         for (int i = log.size() - 1; i >= 0; i--) {
             GameLogEntry le = log.get(i);
-            if (logLevel == null || le.type.compareTo(logLevel) <= 0) {
+            if (logLevel == null || le.type().compareTo(logLevel) <= 0) {
                 result.add(le);
             }
         }
@@ -84,7 +84,7 @@ public class GameLog extends Observable implements Serializable {
         final List<GameLogEntry> result = new ArrayList<>();
         for (int i = log.size() - 1; i >= 0; i--) {
             GameLogEntry le = log.get(i);
-            if (types.contains(le.type)) {
+            if (types.contains(le.type())) {
                 result.add(le);
             }
         }
@@ -96,7 +96,7 @@ public class GameLog extends Observable implements Serializable {
     
         for (int i = log.size() - 1; i >= 0; i--) {
             GameLogEntry le = log.get(i);
-            if (logLevel == null || le.type.compareTo(logLevel) == 0) {
+            if (logLevel == null || le.type().compareTo(logLevel) == 0) {
                 result.add(le);
             }
         }
