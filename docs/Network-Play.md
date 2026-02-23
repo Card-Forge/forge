@@ -97,10 +97,10 @@ The host can type these commands in the lobby chat during the reconnection windo
 
 # Network Configuration
 
-> [!IMPORTANT]
-> Complete the **Local Network Setup** first, even if your goal is remote play. Remote setup builds on a working local configuration.
-
 ## Local Network Setup
+
+> [!TIP]
+> Follow these instructions to play with people **on the same network** - e.g. all players are connected to your Wifi network.
 
 ### 1. Configure the Host Firewall
 
@@ -112,25 +112,49 @@ The host can type these commands in the lobby chat during the reconnection windo
 | **Linux** | Allow port 36743 through your firewall (e.g., `ufw allow 36743/tcp`). |
 
 ### 2. Validate the Port is Open
-The simplest test is to connect with Forge from another device on the same network. If the client connects to the lobby, the port is open and you can skip ahead.
+The simplest test is to connect with Forge from another device on the same network. If the client connects to the lobby, the port is open and you can skip ahead. If the connection fails, use the tools below to confirm whether the port is reachable.
 
-If the connection fails, use these tools to confirm whether the port is reachable:
+For these tests you will need your **local IP address** and the **port number** used by Forge. 
 
-- **Android:** Use [PortDroid](https://play.google.com/store/apps/details?id=com.stealthcopter.portdroid) — scan the host's internal IP for port 36743.
+You can get your **local IP address**:
+- In the Forge app from the Server URL dialog that appears immediately after hosting a server.
+- In **Windows PowerShell** by using the `ipconfig` command and copying the `IPv4 Address` result.
+- In **macOS / Linux terminal** by using the `ifconfig` command and copying the `inet` result.
+
+The **default port number** used by Forge is `36743`. You should refer to this unless you have changed the default port in your Forge preferences.
+
+Now validate that the port is open by using one of the following tests:
 - **Windows (PowerShell):** Open PowerShell and run:
   ```powershell
-  Test-NetConnection -ComputerName <HOST_IP> -Port 36743
+  Test-NetConnection [INSERT HOST IP ADDRESS] -Port [INSERT PORT NUMBER]
+  ```
+  For example: 
+  ```powershell
+  Test-NetConnection 192.168.20.2 -Port 36743
   ```
   Success: `TcpTestSucceeded : True`. Failure: `TcpTestSucceeded : False`.
-- **macOS / Linux:** Use netcat:
+
+- **macOS / Linux:** Open Terminal and use netcat:
   ```bash
-  nc -vz <HOST_IP> 36743
+  nc -vz [INSERT HOST IP ADDRESS] [INSERT PORT NUMBER]
+  ```
+  For example:
+  ```bash
+  nc -vz 192.168.20.2 36743
   ```
   Success: "Connection to ... succeeded". Failure: "Connection refused" or timeout.
+
+- **Android:** Use [PortDroid](https://play.google.com/store/apps/details?id=com.stealthcopter.portdroid) — scan the host's internal IP for port 36743.
 
 Once validated, provide the host's internal IP and port to the client (e.g., `192.168.1.50:36743`).
 
 ## Remote Network Setup
+
+> [!TIP]
+> Follow these instructions to play with people **on different networks** - e.g. players you meet on the Forge Discord.
+
+> [!IMPORTANT]
+> Complete the **[Local Network Setup](#local-network-setup)** first. Remote setup builds on a working local configuration.
 
 ### UPnP (Automatic Port Forwarding)
 
