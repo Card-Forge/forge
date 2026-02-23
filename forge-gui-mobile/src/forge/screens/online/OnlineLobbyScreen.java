@@ -26,6 +26,12 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
         super(null, OnlineMenu.getMenu(), new OfflineLobby());
     }
 
+    private static boolean hostMode = true;
+
+    public static void setHostMode(boolean host) {
+        hostMode = host;
+    }
+
     private static GameLobby gameLobby;
 
     public static GameLobby getGameLobby() {
@@ -89,53 +95,58 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
         }
         if (getGameLobby() == null) {
             setGameLobby(getLobby());
-            //prompt to connect to server when offline lobby activated
+            if (hostMode) {
+                activateHost();
+            } else {
+                activateJoin();
+            }
+        }
+    }
+
+    private void activateHost() {
+        NetConnectUtil.ensurePlayerName();
+        final String caption = Forge.getLocalizer().getMessage("lblStartingServer");
+        LoadingOverlay.show(caption, true, () -> {
+            final ChatMessage[] result = new ChatMessage[1];
+            final IOnlineChatInterface chatInterface = (IOnlineChatInterface) OnlineScreen.Chat.getScreen();
             FThreads.invokeInBackgroundThread(() -> {
-                //Not in gui thread
-                final String url = NetConnectUtil.getServerUrl();
-                FThreads.invokeInEdtLater(() -> {
-                    //In GUI thread
-                    if (url == null) {
-                        closeConn(""); //go back to previous screen if user cancels connection
+                result[0] = NetConnectUtil.host(OnlineLobbyScreen.this, chatInterface);
+                chatInterface.addMessage(result[0]);
+                NetConnectUtil.copyHostedServerUrl();
+            });
+            OnlineScreen.Host.update();
+        });
+    }
+
+    private void activateJoin() {
+        FThreads.invokeInBackgroundThread(() -> {
+            final String url = NetConnectUtil.getJoinServerUrl();
+            FThreads.invokeInEdtLater(() -> {
+                if (url == null) {
+                    closeConn("");
+                    return;
+                }
+                final String caption = Forge.getLocalizer().getMessage("lblConnectingToServer");
+                LoadingOverlay.show(caption, true, () -> {
+                    final ChatMessage[] result = new ChatMessage[1];
+                    final IOnlineChatInterface chatInterface = (IOnlineChatInterface) OnlineScreen.Chat.getScreen();
+                    result[0] = NetConnectUtil.join(url, OnlineLobbyScreen.this, chatInterface);
+                    String message = result[0].getMessage();
+                    if (ForgeConstants.CLOSE_CONN_COMMAND.equals(message)) {
+                        closeConn(Forge.getLocalizer().getMessage("UnableConnectToServer", url));
+                        return;
+                    } else if (message != null && message.startsWith(ForgeConstants.CONN_ERROR_PREFIX)) {
+                        String errorDetail = message.substring(ForgeConstants.CONN_ERROR_PREFIX.length());
+                        closeConn(errorDetail);
+                        return;
+                    } else if (ForgeConstants.INVALID_HOST_COMMAND.equals(message)) {
+                        closeConn(Forge.getLocalizer().getMessage("lblDetectedInvalidHostAddress", url));
                         return;
                     }
-                    final boolean joinServer = url.length() > 0;
-                    final String caption = joinServer ?  Forge.getLocalizer().getMessage("lblConnectingToServer") : Forge.getLocalizer().getMessage("lblStartingServer");
-                    LoadingOverlay.show(caption, true, () -> {
-                        //in GUI thread due to above LoadingOverlay.show call executing ThreadUtil.invokeInGameThread(() -> FThreads.invokeInEdtLater(() -> { runnable.run(); ...
-                        final ChatMessage[] result = new ChatMessage[1];
-                        final IOnlineChatInterface chatInterface = (IOnlineChatInterface)OnlineScreen.Chat.getScreen();
-                        if (joinServer) {
-                            result[0] = NetConnectUtil.join(url, OnlineLobbyScreen.this, chatInterface);
-                            String message = result[0].getMessage();
-                            if (ForgeConstants.CLOSE_CONN_COMMAND.equals(message)) { //this message is returned via netconnectutil on exception
-                                closeConn(Forge.getLocalizer().getMessage("UnableConnectToServer", url));
-                                return;
-                            } else if (message != null && message.startsWith(ForgeConstants.CONN_ERROR_PREFIX)) {
-                                // Show detailed connection error
-                                String errorDetail = message.substring(ForgeConstants.CONN_ERROR_PREFIX.length());
-                                closeConn(errorDetail);
-                                return;
-                            } else if (ForgeConstants.INVALID_HOST_COMMAND.equals(message)) {
-                                closeConn(Forge.getLocalizer().getMessage("lblDetectedInvalidHostAddress", url));
-                                return;
-                            }
-                            chatInterface.addMessage(result[0]);
-                        }
-                        else {
-                            FThreads.invokeInBackgroundThread(
-                                    () -> {
-                                        result[0] = NetConnectUtil.host(OnlineLobbyScreen.this, chatInterface);
-                                        chatInterface.addMessage(result[0]);
-                                        NetConnectUtil.copyHostedServerUrl();
-                                    }
-                            );
-                        }
-                        //update menu buttons
-                        OnlineScreen.Lobby.update();
-                    });
+                    chatInterface.addMessage(result[0]);
+                    OnlineScreen.Host.update();
                 });
             });
-        }
+        });
     }
 }
