@@ -2147,6 +2147,7 @@ public class ComputerUtil {
 
         CardCollectionView bestRemoval = null;
         int bestScore = Integer.MIN_VALUE;
+        int bestRemovalCmc = Integer.MIN_VALUE;
 
         for (CardCollectionView removal : candidateRemovals) {
             // Compute what the hand would look like after returning these cards
@@ -2155,10 +2156,15 @@ public class ComputerUtil {
 
             // Score the kept hand: pass 0 for cardsToReturn since keptHand is already the final hand
             int score = scoreHand(keptHand, mulliganingPlayer, 0);
+            int removalCmc = removal.stream()
+                    .mapToInt(c -> c.getManaCost().getCMC())
+                    .sum();
 
-            if (score > bestScore) {
+            if (score > bestScore ||
+                    (score == bestScore && removalCmc > bestRemovalCmc)) { // On equally good choices, mulligan more expensive.
                 bestScore = score;
                 bestRemoval = removal;
+                bestRemovalCmc = removalCmc;
             }
         }
 
@@ -2208,7 +2214,9 @@ public class ComputerUtil {
             score += 10;
         }
 
-        final CardCollectionView castables = CardLists.filter(handList, c -> c.getManaCost().getCMC() <= 0 || c.getManaCost().getCMC() <= landSize);
+        // Don't count lands as castables.
+        final CardCollectionView castables = CardLists.filter(handList, c ->
+                !c.isLand() && (c.getManaCost().getCMC() <= 0 || c.getManaCost().getCMC() <= landSize));
 
         score += castables.size() * 2;
 
