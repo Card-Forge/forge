@@ -63,7 +63,7 @@
   <object id="61" template="../../../../common/maps/obj/gold.tx" x="222" y="104.94"/>
   <object id="63" template="../../../../common/maps/obj/enemy.tx" x="213.333" y="170">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Rix Maadi, Dungeon Palace|DIS&quot;, &quot;Rakdos Guildmage|DIS&quot; ]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Rix Maadi, Dungeon Palace|DIS&quot;, &quot;Theater of Horrors&quot; ]
 }</property>
     <property name="enemy" value="Rakdos"/>
     <property name="speedModifier" type="float" value="30"/>

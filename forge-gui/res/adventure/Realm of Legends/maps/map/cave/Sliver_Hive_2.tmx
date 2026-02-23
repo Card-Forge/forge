@@ -48,7 +48,7 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Stoneforge Masterwork|OGW&quot;, &quot;Descendants' Path|LCC&quot;, &quot;First Sliver's Chosen|MH1&quot;, &quot;Gemhide Sliver|CMM&quot;, &quot;Birthing Boughs|MH1&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Descendants' Path|LCC&quot;, &quot;First Sliver's Chosen|MH1&quot;, &quot;Gemhide Sliver|CMM&quot;, &quot;Birthing Boughs|MH1&quot;]}"/>
     <property name="enemy" value="The First Sliver"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="100"/>
@@ -56,7 +56,7 @@
   </object>
   <object id="73" template="../../../../common/maps/obj/enemy.tx" x="244.004" y="253.825">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Wayfarer's Bauble|C14&quot;, &quot;Stoneforge Masterwork|OGW&quot;, &quot;Descendants' Path|LCC&quot;, &quot;Victual Sliver|STH&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Descendants' Path|LCC&quot;, &quot;Victual Sliver|STH&quot;]}"/>
     <property name="enemy" value="Sliver Queen"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="150"/>

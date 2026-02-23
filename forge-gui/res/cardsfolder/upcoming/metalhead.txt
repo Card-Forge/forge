@@ -1,0 +1,9 @@
+Name:Metalhead
+ManaCost:4 U
+Types:Legendary Artifact Creature Robot Turtle
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters, return up to one other target artifact or creature to its owner's hand.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Artifact.Other,Creature.Other | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one other target artifact or creature | Origin$ Battlefield | Destination$ Hand
+A:AB$ PutCounter | Cost$ R Sac<1/Artifact.Other/another artifact> | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on CARDNAME. He gains menace and haste until end of turn.
+SVar:DBPump:DB$ Pump | KW$ Menace & Haste | Defined$ Self
+Oracle:When Metalhead enters, return up to one other target artifact or creature to its owner's hand.\n{R}, Sacrifice another artifact: Put a +1/+1 counter on Metalhead. He gains menace and haste until end of turn.

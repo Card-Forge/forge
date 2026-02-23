@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="118">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="119">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -46,6 +46,14 @@
   <object id="52" template="../../../../common/maps/obj/gold.tx" x="252.333" y="96.333"/>
   <object id="54" template="../../../../common/maps/obj/enemy.tx" x="176.334" y="135.916">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Raff"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="30"/>
@@ -53,6 +61,14 @@
   </object>
   <object id="55" template="../../../../common/maps/obj/enemy.tx" x="175.833" y="214.834">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Arvad"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="40"/>
@@ -65,6 +81,14 @@
   <object id="76" template="../../../../common/maps/obj/manashards.tx" x="190" y="101.333"/>
   <object id="79" template="../../../../common/maps/obj/enemy.tx" x="312" y="133.5">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Jhoira's Familiar&quot;, &quot;Jhoira's Timebug|TSP&quot;]
 }</property>
     <property name="enemy" value="Jhoira"/>
@@ -74,12 +98,28 @@
   </object>
   <object id="80" template="../../../../common/maps/obj/enemy.tx" x="199.333" y="334.667">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Shanna"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
   <object id="81" template="../../../../common/maps/obj/enemy.tx" x="250" y="155">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Slimefoot"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="30"/>
@@ -88,6 +128,14 @@
   <object id="82" template="../../../../common/maps/obj/gold.tx" x="317" y="96.5"/>
   <object id="83" template="../../../../common/maps/obj/enemy.tx" x="249.5" y="124">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Tiana"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="30"/>
@@ -182,7 +230,7 @@
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Weatherlight&quot;, &quot;editions&quot;: [ &quot;DOM&quot; ], &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
-  <object id="100" template="../../../../common/maps/obj/enemy.tx" x="334.088" y="385.574">
+  <object id="100" template="../../../../common/maps/obj/enemy.tx" x="417.588" y="383.574">
    <properties>
     <property name="dialog">[
 	{
@@ -219,5 +267,49 @@
   <object id="114" template="../../../../common/maps/obj/collision.tx" x="137.886" y="58.1667" width="8.22732" height="137"/>
   <object id="115" template="../../../../common/maps/obj/collision.tx" x="145.311" y="172" width="32.0455" height="22"/>
   <object id="116" template="../../../../common/maps/obj/collision.tx" x="306.144" y="417.553" width="15.0455" height="60.5606"/>
+  <object id="118" template="../../../../common/maps/obj/enemy.tx" x="323" y="350">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'Come, child. The darkness calls to you and I am its mouthpiece.'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;The ship has been sunk.&quot;,
+					&quot;text&quot;: &quot;'The forces of darkness commend your efforts.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Whisper, Blood Liturgist&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;shards&quot;, &quot;count&quot;: 60}                
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 6
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;What does the darkness have to say?&quot;,
+					&quot;text&quot;: &quot;'The residents of the skyship ahead have greatly offended the dark powers I serve. They have asked me to find a worthy vessel for their revenge, and I believe this to be you. Kill them all and power shall be yours.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;I don't answer calls from the darkness.&quot;,
+					&quot;text&quot;: &quot;'You may not listen, but the darkness still speaks.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Whisper"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

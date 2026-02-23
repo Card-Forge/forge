@@ -31,7 +31,7 @@
  <objectgroup id="4" name="Objects">
   <object id="50" template="../../../../common/maps/obj/enemy.tx" x="240.561" y="404.87" width="64" height="64">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Spawning Bed|BFZ&quot;, &quot;Idol of Oblivion|C19&quot;, &quot;Path of Annihilation|MH3&quot;, &quot;Glaring Fleshraker|MH3&quot;, &quot;Idol of False Gods|MH3&quot;, &quot;Awakening Zone|ROE&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Idol of Oblivion|C19&quot;, &quot;Path of Annihilation|MH3&quot;, &quot;Glaring Fleshraker|MH3&quot;, &quot;Idol of False Gods|MH3&quot;]}"/>
     <property name="enemy" value="Azlask"/>
     <property name="speedModifier" type="float" value="50"/>
     <property name="threatRange" type="int" value="100"/>

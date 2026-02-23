@@ -50,7 +50,7 @@
   </object>
   <object id="50" template="../../../../common/maps/obj/enemy.tx" x="208.402" y="144.809">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Valgavoth's Faithful|DSK&quot;, &quot;Bear Trap|DSK&quot;, &quot;Keys to the House|DSK&quot;, &quot;Solitary study|YDSK&quot;, &quot;funeral room|DSK&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Valgavoth's Faithful|DSK&quot;, &quot;Bear Trap|DSK&quot;, &quot;Keys to the House|DSK&quot;, &quot;Solitary study|YDSK&quot;]}"/>
     <property name="enemy" value="Victor"/>
     <property name="reward">[
   {

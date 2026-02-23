@@ -1,107 +1,107 @@
 [metadata]
 Name=Veko
 [Commander]
-1 Veko, Death's Doorkeeper|ymkm
+1 Veko, Death's Doorkeeper|YMKM
 [Main]
-1 Arcane Signet|moc
-1 Bastion of Remembrance|cmm
-1 Bishop of Rebirth|xln
-1 Case of the Uneaten Feast|mkm
-1 Charcoal Diamond|7ed
-1 Children of Korlis|tsr
-1 Chromatic Lantern|onc
-1 Cleric of Life's Bond|znr
-1 Command Tower|moc
-1 Commander's Sphere|moc
-1 Corrupted Conviction|otj
-1 ashen rider|2x2
-1 blazing archon|rvr
-1 sanguine soothsayer|yblb
-1 Priest of Possibility|ydmu
-1 inquisitor captain|ymid
-1 sigardian evangel|ymid
-1 faithful disciple|ymid
-1 ethereal escort|ymid
-1 darkstar banisher|yblb
-1 Cerise, slayer of fear|ywoe
-1 saint elenda|yotj
-1 Arek, False Goldwarden|ymid
-1 angel of unity|ymid
-1 Jet Medallion|mh3
-1 Valgavoth's faithful|dsk
-1 Demon's Disciple|cmm
-1 Despark|moc
-1 Edgewalker|scg
-1 Elas il-Kor, Sadistic Pilgrim|dmu
-1 Everflowing Chalice|wwk
-1 Evolving Wilds|moc
-1 Exotic Orchard|moc
-1 Fell the Profane|mh3
-1 Fellwar Stone|moc
-1 Firja, Judge of Valor|khm|[322]
-1 Gilded Lotus|dom
-1 Giver of Runes|mh1
-1 Graveshifter|moc
-1 Hedron Archive|moc
-1 Heirloom Blade|lcc
-1 Koma's Faithful|khm
-1 Life Insurance|otc
-1 Liliana, Death's Majesty|mic
-1 Liliana, Untouched by Death|m19
-1 Liquimetal Torque|brc
-1 Living Death|tdc
-1 Lunarch Veteran|mid
-1 Malakir Rebirth|znr
-1 Mangara, the Diplomat|cmm
-1 Marauding Blight-Priest|j22
-1 Marble Diamond|7ed
-1 Master of Dark Rites|lcc
-1 Mind Stone|moc
-1 Mortify|moc
-1 Mother of Runes|cmd
-1 Myriad Landscape|moc
-1 Ondu Inversion|znr
-1 Orah, Skyclave Hierophant|znr
-1 Orzhov Basilica|dmc
-1 Orzhov Guildgate|rna
-1 Patriarch's Bidding|mh2
-1 Pawn of Ulamog|c17
-1 Pile On|mkc
-14 Plains|one
-1 Raise the Draugr|khm
-1 Ravos, Soultender|c16
-1 Redemption Choir|lcc
-1 Remorseful Cleric|scd
-1 Ripples of Undeath|mh3
-1 Rotlung Reanimator|ons
-1 Scoured Barrens|mom
-1 Selfless Spirit|j22
-1 Sevinne's Reclamation|mh3
-1 Shadow-Rite Priest|dmu
-1 Skullclamp|moc
-1 Sol Ring|scd
-1 Soul Enervation|mkm
-1 Soul Warden|exo
-1 Soul's Attendant|roe
-1 Speaker of the Heavens|m21
-1 Suture Priest|moc
-14 Swamp|one
-1 Swiftfoot Boots|otc
-1 Syr Konrad, the Grim|m3c
-1 Talisman of Hierarchy|moc
-1 Temple of Silence|moc
-1 Terramorphic Expanse|moc
-1 Thought Vessel|scd
-1 Thran Dynamo|brc
-1 Tocasia's Welcome|bro
-1 angel of despair|gpt
-1 valgavoth, terror eater|dsk
-1 Vat of Rebirth|one
-1 Vault of the Archangel|otc
-1 Village Rites|lcc
-1 Vito, Thorn of the Dusk Rose|j22
-1 Voice of the Blessed|vow
-1 Weathered Wayfarer|2x2
-1 Whisper, Blood Liturgist|cmm
-1 Worn Powerstone|scd
-1 Wrath of God|cmm
+1 Arcane Signet|MOC
+1 Bastion of Remembrance|CMM
+1 Bishop of Rebirth|XLN
+1 Case of the Uneaten Feast|MKM
+1 Charcoal Diamond|7ED
+1 Children of Korlis|TSR
+1 Chromatic Lantern|ONC
+1 Cleric of Life's Bond|ZNR
+1 Command Tower|MOC
+1 Commander's Sphere|MOC
+1 Corrupted Conviction|OTJ
+1 Ashen Rider|2X2
+1 Blazing Archon|RVR
+1 Sanguine Soothsayer|YBLB
+1 Priest of Possibility|YDMU
+1 Inquisitor Captain|YMID
+1 Sigardian Evangel|YMID
+1 Faithful Disciple|YMID
+1 Ethereal Escort|YMID
+1 Darkstar Banisher|YBLB
+1 Cerise, Slayer of Fear|YWOE
+1 Saint Elenda|YOTJ
+1 Arek, False Goldwarden|YMID
+1 Angel of Unity|YMID
+1 Jet Medallion|MH3
+1 Valgavoth's Faithful|DSK
+1 Demon's Disciple|CMM
+1 Despark|MOC
+1 Edgewalker|SCG
+1 Elas il-Kor, Sadistic Pilgrim|DMU
+1 Everflowing Chalice|WWK
+1 Evolving Wilds|MOC
+1 Exotic Orchard|MOC
+1 Fell the Profane|MH3
+1 Fellwar Stone|MOC
+1 Firja, Judge of Valor|KHM|[322]
+1 Gilded Lotus|DOM
+1 Giver of Runes|MH1
+1 Graveshifter|MOC
+1 Hedron Archive|MOC
+1 Heirloom Blade|LCC
+1 Koma's Faithful|KHM
+1 Life Insurance|OTC
+1 Liliana, Death's Majesty|MIC
+1 Liliana, Untouched by Death|M19
+1 Liquimetal Torque|BRC
+1 Living Death|TDC
+1 Lunarch Veteran|MID
+1 Malakir Rebirth|ZNR
+1 Mangara, the Diplomat|CMM
+1 Marauding Blight-Priest|J22
+1 Marble Diamond|7ED
+1 Master of Dark Rites|LCC
+1 Mind Stone|MOC
+1 Mortify|MOC
+1 Mother of Runes|CMD
+1 Myriad Landscape|MOC
+1 Ondu Inversion|ZNR
+1 Orah, Skyclave Hierophant|ZNR
+1 Orzhov Basilica|DMC
+1 Orzhov Guildgate|RNA
+1 Patriarch's Bidding|MH2
+1 Pawn of Ulamog|C17
+1 Pile On|MKC
+14 Plains|ONE
+1 Raise the Draugr|KHM
+1 Ravos, Soultender|C16
+1 Redemption Choir|LCC
+1 Remorseful Cleric|SCD
+1 Ripples of Undeath|MH3
+1 Rotlung Reanimator|ONS
+1 Scoured Barrens|MOM
+1 Selfless Spirit|J22
+1 Sevinne's Reclamation|MH3
+1 Shadow-Rite Priest|DMU
+1 Skullclamp|MOC
+1 Sol Ring|SCD
+1 Soul Enervation|MKM
+1 Soul Warden|EXO
+1 Soul's Attendant|ROE
+1 Speaker of the Heavens|M21
+1 Suture Priest|MOC
+14 Swamp|ONE
+1 Swiftfoot Boots|OTC
+1 Syr Konrad, the Grim|M3C
+1 Talisman of Hierarchy|MOC
+1 Temple of Silence|MOC
+1 Terramorphic Expanse|MOC
+1 Thought Vessel|SCD
+1 Thran Dynamo|BRC
+1 Tocasia's Welcome|BRO
+1 Angel of Despair|GPT
+1 Valgavoth, Terror Eater|DSK
+1 Vat of Rebirth|ONE
+1 Vault of the Archangel|OTC
+1 Village Rites|LCC
+1 Vito, Thorn of the Dusk Rose|J22
+1 Voice of the Blessed|VOW
+1 Weathered Wayfarer|2X2
+1 Whisper, Blood Liturgist|CMM
+1 Worn Powerstone|SCD
+1 Wrath of God|CMM

@@ -1,4 +1,5 @@
 Name:Stomped by the Foot
+ManaCost:1 B
 Types:Instant
 K:Kicker:Sac<1/Creature;Artifact/artifact or creature>
 A:SP$ Pump | ValidTgts$ Creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | StackDescription$ REP Target creature_{c:Targeted} | SpellDescription$ Target creature gets -2/-2 until end of turn. If this spell was kicked, that creature gets -5/-5 until end of turn instead.

@@ -139,20 +139,29 @@ public class DuelScene extends ForgeScene {
             e.printStackTrace();
         }
         String enemyName = enemy.getName();
+        String insult = enemy.getBossInsult();
         boolean showMessages = enemy.getData().boss || (enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck());
         Current.player().clearBlessing();
         if ((chaosBattle || showMessages) && !winner) {
             final FBufferedImage fb = getFBEnemyAvatar();
             callbackExit = true;
             boolean finalWinner = winner;
-            bossDialogue = createFOption(Forge.getLocalizer().getMessage("AdvBossInsult" + Aggregates.randomInt(1, 44)),
-                    enemyName, fb, () -> {
-                        afterGameEnd(enemyName, finalWinner);
+            if (insult != null){
+            bossDialogue = createFOption((insult), enemyName, fb, () -> {afterGameEnd(enemyName, finalWinner);
                         exitDuelScene();
                         fb.dispose();
                     });
+            }
+            else {
+            	bossDialogue = createFOption(Forge.getLocalizer().getMessage("AdvBossInsult" + Aggregates.randomInt(1, 44)), enemyName, fb, () ->
+            	{afterGameEnd(enemyName, finalWinner);
+                            exitDuelScene();
+                            fb.dispose();
+            	});
+            }
             FThreads.invokeInEdtNowOrLater(() -> bossDialogue.show());
-        } else {
+        }
+            else {
             afterGameEnd(enemyName, winner);
         }
     }
@@ -411,14 +420,19 @@ public class DuelScene extends ForgeScene {
         LoadingOverlay matchOverlay;
         if (chaosBattle || showMessages || isDeckMissing) {
             final FBufferedImage fb = getFBEnemyAvatar();
-            bossDialogue = createFOption(isDeckMissing ? isDeckMissingMsg : Forge.getLocalizer().getMessage("AdvBossIntro" + Aggregates.randomInt(1, 35)),
-                    enemy.getName(), fb, fb::dispose);
+            String Intro = enemy.getBossIntro();
+            if (Intro != null){
+                bossDialogue = createFOption((Intro), enemy.getName(), fb, fb::dispose);
+                }
+                else {
+                bossDialogue = createFOption(isDeckMissing ? isDeckMissingMsg : Forge.getLocalizer().getMessage("AdvBossIntro" + Aggregates.randomInt(1, 35)),
+                enemy.getName(), fb, fb::dispose);
+                }
             matchOverlay = new LoadingOverlay(() -> FThreads.delayInEDT(300, () -> FThreads.invokeInEdtNowOrLater(() ->
-                    bossDialogue.show())), false, true);
+            bossDialogue.show())), false, true);
         } else {
             matchOverlay = new LoadingOverlay(null);
         }
-
         for (final Player p : hostedMatch.getGame().getPlayers()) {
             if (p.getController() instanceof PlayerControllerHuman) {
                 final PlayerControllerHuman humanController = (PlayerControllerHuman) p.getController();

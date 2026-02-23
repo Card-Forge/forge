@@ -91,7 +91,7 @@
     ]
    }
 ]</property>
-    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Crumbling Necropolis&quot;, &quot;Kederekt Parasite&quot;, &quot;Harmonic Prodigy&quot;, &quot;Faerie Mastermind&quot;, &quot;Anvil of Bogardan&quot;
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Crumbling Necropolis&quot;, &quot;Kederekt Parasite&quot;, &quot;Crawlspace&quot;, &quot;Anvil of Bogardan&quot;
 ]}</property>
     <property name="enemy" value="Nekusar"/>
     <property name="threatRange" type="int" value="0"/>

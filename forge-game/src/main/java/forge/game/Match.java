@@ -441,6 +441,9 @@ public class Match {
         GameOutcome.AnteResult out = new GameOutcome.AnteResult();
         for (GameOutcome outcome : gameOutcomes.values()) {
             GameOutcome.AnteResult gameAnte = outcome.getAnteResult(player);
+            if (gameAnte == null) {
+                continue;
+            }
             out.addWon(gameAnte.wonCards);
             out.addLost(gameAnte.lostCards);
         }

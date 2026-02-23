@@ -5,10 +5,7 @@ import forge.game.player.PlayerView;
 import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.CompatibleObjectEncoder;
 import forge.gamemodes.net.ReplyPool;
-import forge.gamemodes.net.event.IdentifiableNetEvent;
-import forge.gamemodes.net.event.LobbyUpdateEvent;
-import forge.gamemodes.net.event.MessageEvent;
-import forge.gamemodes.net.event.NetEvent;
+import forge.gamemodes.net.event.*;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.ILobbyListener;
 import io.netty.bootstrap.Bootstrap;
@@ -17,17 +14,22 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
-
+import io.netty.handler.timeout.IdleState;
+import io.netty.handler.timeout.IdleStateEvent;
+import io.netty.handler.timeout.IdleStateHandler;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 public class FGameClient implements IToServer {
+    static final int HEARTBEAT_INTERVAL_SECONDS = Integer.getInteger("forge.net.heartbeatInterval", 15);
     private final IGuiGame clientGui;
     private final String hostname;
     private final Integer port;
     private final List<ILobbyListener> lobbyListeners = Lists.newArrayList();
     private final ReplyPool replies = new ReplyPool();
+    private volatile boolean disconnectSimulated;
     private Channel channel;
 
     public FGameClient(String username, String roomKey, IGuiGame clientGui, String hostname, int port) {
@@ -56,6 +58,7 @@ public class FGameClient implements IToServer {
                     pipeline.addLast(
                             new CompatibleObjectEncoder(),
                             new CompatibleObjectDecoder(9766*1024, ClassResolvers.cacheDisabled(null)),
+                            new IdleStateHandler(0, HEARTBEAT_INTERVAL_SECONDS, 0, TimeUnit.SECONDS),
                             new MessageHandler(),
                             new LobbyUpdateHandler(),
                             new GameClientHandler(FGameClient.this));
@@ -88,8 +91,36 @@ public class FGameClient implements IToServer {
 
     @Override
     public void send(final NetEvent event) {
+        if (disconnectSimulated) {
+            return;
+        }
         System.out.println("Client sent " + event);
         channel.writeAndFlush(event);
+    }
+
+    /**
+     * Simulate a crashed client: stop all network writes and heartbeats
+     * while keeping the TCP connection open. The server's idle timeout
+     * will detect the silence and close the connection.
+     */
+    public void simulateDisconnect() {
+        System.out.println("[simulateDisconnect] Suspending all network writes.");
+        disconnectSimulated = true;
+        // Remove the IdleStateHandler to stop heartbeats, and add an outbound
+        // handler that drops ALL writes (including game replies that bypass
+        // send()). The TCP connection stays open but completely silent.
+        // Both pipeline modifications run on the event loop thread for atomicity.
+        channel.eventLoop().execute(() -> {
+            channel.pipeline().remove(IdleStateHandler.class);
+            channel.pipeline().addFirst("writeBlocker", new ChannelOutboundHandlerAdapter() {
+                @Override
+                public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) {
+                    System.out.println("[writeBlocker] Dropped: " + msg.getClass().getSimpleName());
+                    promise.setSuccess();
+                }
+            });
+            System.out.println("[simulateDisconnect] Pipeline modified: IdleStateHandler removed, writeBlocker added.");
+        });
     }
 
     @Override
@@ -139,6 +170,14 @@ public class FGameClient implements IToServer {
                 }
             }
             super.channelRead(ctx, msg);
+        }
+
+        @Override
+        public void userEventTriggered(final ChannelHandlerContext ctx, final Object evt) throws Exception {
+            if (evt instanceof IdleStateEvent && ((IdleStateEvent) evt).state() == IdleState.WRITER_IDLE) {
+                ctx.writeAndFlush(new HeartbeatEvent());
+            }
+            super.userEventTriggered(ctx, evt);
         }
 
         @Override

@@ -124,6 +124,40 @@
     "spawnRate": 0
   },
   {
+    "name": "Arzakon",
+    "sprite": "sprites/enemy/fiend/scourgemaster.atlas",
+    "deck": [
+      "decks/legends/arzakon.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 4,
+    "life": 200,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Mad Hat"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Faerie Anklet"
+      },
+      {
+        "type": "gold",
+        "count": 20000
+      },
+      {
+        "type": "shards",
+        "count": 200
+      }
+    ],
+    "colors": "WUBRG",
+    "gamesPerMatch": 1,
+    "spawnRate": 0
+  },
+  {
     "name": "Derevi",
     "sprite": "sprites/enemy/humanoid/aven/falconheadedaven.atlas",
     "deck": [
@@ -209,10 +243,6 @@
     "scale": 3,
     "life": 50,
     "rewards": [
-      {
-        "type": "life",
-        "count": 1
-      },
       {
         "type": "item",
         "count": 1,
@@ -1041,10 +1071,6 @@
     "life": 50,
     "rewards": [
       {
-        "type": "life",
-        "count": 1
-      },
-      {
         "type": "item",
         "count": 1,
         "itemName": "Ink-Treader Anklet"
@@ -1120,10 +1146,6 @@
     "life": 50,
     "rewards": [
       {
-        "type": "life",
-        "count": 1
-      },
-      {
         "type": "item",
         "count": 1,
         "itemName": "Dune-Brood Anklet"
@@ -1197,10 +1219,6 @@
     "scale": 1,
     "life": 50,
     "rewards": [
-      {
-        "type": "life",
-        "count": 1
-      },
       {
         "type": "item",
         "count": 1,
@@ -1276,10 +1294,6 @@
     "scale": 1,
     "life": 50,
     "rewards": [
-      {
-        "type": "life",
-        "count": 1
-      },
       {
         "type": "item",
         "count": 1,
@@ -1359,10 +1373,6 @@
     "scale": 1,
     "life": 50,
     "rewards": [
-      {
-        "type": "life",
-        "count": 1
-      },
       {
         "type": "item",
         "count": 1,
@@ -1601,7 +1611,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Segovian Shoes"
+        "itemName": "Angelic Ring"
       },
       {
         "type": "card",
@@ -1670,10 +1680,6 @@
     "scale": 3,
     "life": 50,
     "rewards": [
-      {
-        "type": "life",
-        "count": 1
-      },
       {
         "type": "item",
         "count": 1,
@@ -1829,7 +1835,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Silvergill Tailband"
+        "itemName": "Ominous Amulet"
       },
       {
         "type": "card",
@@ -2393,10 +2399,6 @@
     "life": 50,
     "rewards": [
       {
-        "type": "life",
-        "count": 1
-      },
-      {
         "type": "item",
         "count": 1,
         "itemName": "Kaleidostone"
@@ -2471,10 +2473,6 @@
     "scale": 4,
     "life": 50,
     "rewards": [
-      {
-        "type": "life",
-        "count": 1
-      },
       {
         "type": "item",
         "count": 1,
@@ -2699,10 +2697,6 @@
     "scale": 3,
     "life": 50,
     "rewards": [
-      {
-        "type": "life",
-        "count": 1
-      },
       {
         "type": "item",
         "count": 1,
@@ -6128,7 +6122,7 @@
   },
   {
     "name": "Estrid",
-    "sprite": "sprites/enemy/humanoid/human/cleric.atlas",
+    "sprite": "sprites/enemy/humanoid/human/cleric/cleric.atlas",
     "deck": [
       "decks/legends/estrid.dck"
     ],
@@ -8645,7 +8639,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Vile Songbook"
+        "itemName": "Amulet of Compleation"
       },
       {
         "type": "card",
@@ -10250,7 +10244,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Heap Socks"
+        "itemName": "Scarecrow Socks"
       },
       {
         "type": "card",
@@ -11134,7 +11128,7 @@
     "name": "Santa",
     "sprite": "sprites/enemy/humanoid/human/wizard/red_wiz2.atlas",
     "deck": [
-      "decks/legends/santa.dck"
+      "decks/legends/jorn.dck"
     ],
     "ai": "",
     "flying": true,
@@ -12823,7 +12817,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Pocket Thopter"
+        "itemName": "Sky Skiff Turnkey"
       },
       {
         "type": "card",
@@ -15946,7 +15940,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Miser's Shoes"
+        "itemName": "Sinuous Shoes"
       },
       {
         "type": "card",
@@ -18028,7 +18022,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Wolfhunter's Quiver"
+        "itemName": "Full Moon Necklace"
       },
       {
         "type": "card",
@@ -25950,7 +25944,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Gisa's Favorite Shovel"
+        "itemName": "Thirsting Axe"
       },
       {
         "type": "item",
@@ -28317,8 +28311,13 @@
     "ai": "",
     "speed": 60,
     "scale": 1,
-    "life": 30,
+    "life": 40,
     "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Silvergill Tailband"
+      },
       {
         "type": "card",
         "count": 1,
@@ -28326,52 +28325,51 @@
       },
       {
         "type": "deckCard",
-        "count": 2,
-        "addMaxCount": 4,
+        "count": 4,
+        "addMaxCount": 4, 
         "rarity": [
           "Rare",
           "Mythic Rare"
         ]
       },
       {
-        "type": "deckCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "common",
-	        "uncommon"
-        ]
-      },
-      {
         "type": "randomCard",
-        "count": 2,
-        "addMaxCount": 4,
+        "count": 3,
+        "addMaxCount": 6, 
         "rarity": [
           "Rare",
           "Mythic Rare"
-	]
-      },
-      {
-        "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "common",
-	        "uncommon"
 	]
       },
       {
         "type": "gold",
-        "count": 100,
-        "addMaxCount": 1000
+        "count": 500,
+        "addMaxCount": 2000
       },
       {
         "type": "shards",
-        "count": 5,
-        "addMaxCount": 15
+        "count": 10,
+        "addMaxCount": 30
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.3,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.3,
+        "count": 1
       }
     ],
     "colors": "U",
+    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -34163,72 +34161,6 @@
     "spawnRate": 0
   },
   {
-    "name": "Xantcha",
-    "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz3.atlas",
-    "deck": [
-      "decks/legends/xantcha.dck"
-    ],
-    "ai": "",
-    "speed": 60,
-    "scale": 1,
-    "life": 30,
-    "rewards": [
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Xantcha, Sleeper Agent"
-      },
-      {
-        "type": "deckCard",
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "common",
-	        "uncommon"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-	]
-      },
-      {
-        "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "common",
-	        "uncommon"
-	]
-      },
-      {
-        "type": "gold",
-        "count": 100,
-        "addMaxCount": 1000
-      },
-      {
-        "type": "shards",
-        "count": 5,
-        "addMaxCount": 15
-      }
-    ],
-    "colors": "BR",
-    "spawnRate": 0
-  },
-  {
     "name": "Glissa",
     "sprite": "sprites/enemy/aberration/copperhostinfector.atlas",
     "deck": [
@@ -35925,7 +35857,7 @@
     ],
     "ai": "",
     "speed": 60,
-    "scale": 3,
+    "scale": 2,
     "life": 30,
     "rewards": [
       {
@@ -61609,6 +61541,81 @@
   {
     "name": "Ink-Eyes",
     "sprite": "sprites/enemy/humanoid/nezumi/nezumi_ninja.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Jacob Hauken",
+    "sprite": "sprites/enemy/humanoid/human/soldier/cathar.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Ruby",
+    "sprite": "sprites/enemy/humanoid/elf/deftsorceress.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Whisper",
+    "sprite": "sprites/enemy/humanoid/human/warlock/witch.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Vhati il-Dal",
+    "sprite": "sprites/enemy/humanoid/human/bandit/banditleader.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Xantcha",
+    "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz3.atlas",
     "deck": [
       "decks/legends/mystery_list.dck"
     ],

@@ -45,7 +45,7 @@
   </object>
   <object id="75" template="../../../../common/maps/obj/enemy.tx" x="193" y="728">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Nykthos, Shrine to Nyx|THS&quot;, &quot;Archetype of Finality|BNG&quot;, &quot;Keepsake Gorgon|THS&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Field of Ruin&quot;, &quot;Case of the Gorgon's Kiss&quot;, &quot;Keepsake Gorgon|THS&quot;]}"/>
     <property name="enemy" value="Hythonia"/>
     <property name="speedModifier" type="float" value="40"/>
     <property name="threatRange" type="int" value="50"/>

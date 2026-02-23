@@ -82,7 +82,7 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ankh of Mishra|5ED&quot;, &quot;Mishra's Workshop|ATQ&quot;, &quot;Mishra's Bauble|BRR&quot;, &quot;Mishra's Juggernaut|BRO&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ankh of Mishra|5ED&quot;, &quot;Mishra's Factory|ATQ&quot;, &quot;Mishra's Bauble|BRR&quot;, &quot;Assembly-Worker&quot;]}"/>
     <property name="enemy" value="Mishra"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
