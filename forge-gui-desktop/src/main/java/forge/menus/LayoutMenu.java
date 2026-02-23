@@ -264,7 +264,7 @@ public final class LayoutMenu {
         final Localizer localizer = Localizer.getInstance();
         final JMenu menu = new JMenu(localizer.getMessage("lblLogPanel"));
         final ButtonGroup group = new ButtonGroup();
-        final String current = prefs.getPref(FPref.DEV_LOG_ENTRY_TYPE);
+        final GameLogVerbosity currentVerbosity = GameLogVerbosity.fromString(prefs.getPref(FPref.DEV_LOG_ENTRY_TYPE));
 
         final String[] tooltipKeys = {"lblLogVerbosityLow", "lblLogVerbosityMedium", "lblLogVerbosityHigh"};
         final GameLogVerbosity[] verbosities = GameLogVerbosity.values();
@@ -272,7 +272,7 @@ public final class LayoutMenu {
             final GameLogVerbosity verbosity = verbosities[i];
             final JRadioButtonMenuItem item = MenuUtil.createStayOpenRadioButton(verbosity.toString());
             item.setToolTipText(localizer.getMessage(tooltipKeys[i]));
-            item.setSelected(verbosity.name().equals(current));
+            item.setSelected(verbosity == currentVerbosity);
             item.addActionListener(e -> {
                 prefs.setPref(FPref.DEV_LOG_ENTRY_TYPE, verbosity.name());
                 prefs.save();
