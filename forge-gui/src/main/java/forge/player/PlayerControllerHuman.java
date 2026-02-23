@@ -1249,6 +1249,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      */
     @Override
     public Mana chooseManaFromPool(final List<Mana> manaChoices) {
+        if (!isFullControl(FullControlFlag.ChooseManaPoolShard))
+            return manaChoices.get(0);
         final List<String> options = Lists.newArrayList();
         for (int i = 0; i < manaChoices.size(); i++) {
             final Mana m = manaChoices.get(i);

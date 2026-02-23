@@ -65,7 +65,7 @@ public abstract class PlayerController {
     public enum FullControlFlag {
         ChooseCostOrder,
         ChooseCostReductionOrderAndVariableAmount,
-        //ChooseManaPoolShard, // select shard with special properties
+        ChooseManaPoolShard, // select shard with special properties //TODO: UI option to enable this one
         NoPaymentFromManaAbility,
         NoFreeCombatCostHandling,
         AllowPaymentStartWithMissingResources,
