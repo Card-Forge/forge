@@ -101,6 +101,7 @@ public abstract class PlayerController {
     public abstract SpellAbility getAbilityToPlay(Card hostCard, List<SpellAbility> abilities, ITriggerEvent triggerEvent);
 
     public abstract void playSpellAbilityNoStack(SpellAbility effectSA, boolean mayChoseNewTargets);
+    public abstract List<SpellAbility> orderSimultaneousSa(List<SpellAbility> activePlayerSAs);
     public abstract void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs);
     public abstract boolean playTrigger(Card host, WrappedAbility wrapperAbility, boolean isMandatory);
     public abstract boolean playSaFromPlayEffect(SpellAbility tgtSA);

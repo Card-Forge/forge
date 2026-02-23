@@ -1976,78 +1976,85 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     private final Map<String, List<Integer>> orderedSALookup = Maps.newHashMap();
 
     @Override
-    public void orderAndPlaySimultaneousSa(final List<SpellAbility> activePlayerSAs) {
-        List<SpellAbility> orderedSAs = activePlayerSAs;
-        if (activePlayerSAs.size() > 1) {
-            final String firstStr = activePlayerSAs.get(0).toString();
-            boolean needPrompt = !activePlayerSAs.get(0).isTrigger();
+    public List<SpellAbility> orderSimultaneousSa(List<SpellAbility> activePlayerSAs) {
+        if (activePlayerSAs.size() < 2)
+            return activePlayerSAs;
+        final String firstStr = activePlayerSAs.get(0).toString();
+        boolean needPrompt = !activePlayerSAs.get(0).isTrigger();
 
-            // for the purpose of pre-ordering, no need for extra granularity
-            int idxAdditionalInfo = firstStr.indexOf(" [");
-            StringBuilder saLookupKey = new StringBuilder(idxAdditionalInfo > 0 ? firstStr.substring(0, idxAdditionalInfo - 1) : firstStr);
+        // for the purpose of pre-ordering, no need for extra granularity
+        int idxAdditionalInfo = firstStr.indexOf(" [");
+        StringBuilder saLookupKey = new StringBuilder(idxAdditionalInfo > 0 ? firstStr.substring(0, idxAdditionalInfo - 1) : firstStr);
 
-            char delim = (char) 5;
-            for (int i = 1; i < activePlayerSAs.size(); i++) {
-                SpellAbility currentSa = activePlayerSAs.get(i);
-                String saStr = currentSa.toString();
+        char delim = (char) 5;
+        for (int i = 1; i < activePlayerSAs.size(); i++) {
+            SpellAbility currentSa = activePlayerSAs.get(i);
+            String saStr = currentSa.toString();
 
-                // if current SA isn't a trigger and it uses Targeting, try to show prompt
-                if (currentSa.isTrigger()) {
-                    needPrompt |= currentSa.getTrigger().hasParam("OrderDuplicates");
-                } else if (currentSa.usesTargeting()) {
-                    needPrompt = true;
-                }
-                if (!needPrompt && !saStr.equals(firstStr)) {
-                    // prompt by default unless all abilities are the same
-                    needPrompt = true;
-                }
-
-                saLookupKey.append(delim).append(saStr);
-                idxAdditionalInfo = saLookupKey.indexOf(" [");
-                if (idxAdditionalInfo > 0) {
-                    saLookupKey = new StringBuilder(saLookupKey.substring(0, idxAdditionalInfo - 1));
-                }
+            // if current SA isn't a trigger and it uses Targeting, try to show prompt
+            if (currentSa.isTrigger()) {
+                needPrompt |= currentSa.getTrigger().hasParam("OrderDuplicates");
+            } else if (currentSa.usesTargeting()) {
+                needPrompt = true;
             }
-            if (needPrompt) {
-                List<Integer> savedOrder = orderedSALookup.get(saLookupKey.toString());
-                List<SpellAbilityView> orderedSAVs = Lists.newArrayList();
+            if (!needPrompt && !saStr.equals(firstStr)) {
+                // prompt by default unless all abilities are the same
+                needPrompt = true;
+            }
 
-                // create a mapping between a spell's view and the spell itself
-                Map<SpellAbilityView, SpellAbility> spellViewCache = SpellAbilityView.getMap(orderedSAs);
-
-                if (savedOrder != null) {
-                    orderedSAVs = Lists.newArrayList();
-                    for (Integer index : savedOrder) {
-                        orderedSAVs.add(activePlayerSAs.get(index).getView());
-                    }
-                } else {
-                    for (SpellAbility spellAbility : orderedSAs) {
-                        orderedSAVs.add(spellAbility.getView());
-                    }
-                }
-                if (savedOrder != null) {
-                    boolean preselect = FModel.getPreferences()
-                            .getPrefBoolean(FPref.UI_PRESELECT_PREVIOUS_ABILITY_ORDER);
-                    orderedSAVs = getGui().order(localizer.getMessage("lblReorderSimultaneousAbilities"), localizer.getMessage("lblResolveFirst"), 0, 0,
-                            preselect ? Lists.newArrayList() : orderedSAVs,
-                            preselect ? orderedSAVs : Lists.newArrayList(), null, false);
-                } else {
-                    orderedSAVs = getGui().order(localizer.getMessage("lblSelectOrderForSimultaneousAbilities"), localizer.getMessage("lblResolveFirst"), orderedSAVs,
-                            null);
-                }
-                orderedSAs = Lists.newArrayList();
-                for (SpellAbilityView spellAbilityView : orderedSAVs) {
-                    orderedSAs.add(spellViewCache.get(spellAbilityView));
-                }
-                // save order to avoid needing to prompt a second time to order
-                // the same abilities
-                savedOrder = Lists.newArrayListWithCapacity(activePlayerSAs.size());
-                for (SpellAbility sa : orderedSAs) {
-                    savedOrder.add(activePlayerSAs.indexOf(sa));
-                }
-                orderedSALookup.put(saLookupKey.toString(), savedOrder);
+            saLookupKey.append(delim).append(saStr);
+            idxAdditionalInfo = saLookupKey.indexOf(" [");
+            if (idxAdditionalInfo > 0) {
+                saLookupKey = new StringBuilder(saLookupKey.substring(0, idxAdditionalInfo - 1));
             }
         }
+        if (needPrompt) {
+            List<Integer> savedOrder = orderedSALookup.get(saLookupKey.toString());
+            List<SpellAbilityView> orderedSAVs = Lists.newArrayList();
+
+            // create a mapping between a spell's view and the spell itself
+            Map<SpellAbilityView, SpellAbility> spellViewCache = SpellAbilityView.getMap(activePlayerSAs);
+
+            if (savedOrder != null) {
+                orderedSAVs = Lists.newArrayList();
+                for (Integer index : savedOrder) {
+                    orderedSAVs.add(activePlayerSAs.get(index).getView());
+                }
+            } else {
+                for (SpellAbility spellAbility : activePlayerSAs) {
+                    orderedSAVs.add(spellAbility.getView());
+                }
+            }
+            if (savedOrder != null) {
+                boolean preselect = FModel.getPreferences()
+                        .getPrefBoolean(FPref.UI_PRESELECT_PREVIOUS_ABILITY_ORDER);
+                orderedSAVs = getGui().order(localizer.getMessage("lblReorderSimultaneousAbilities"), localizer.getMessage("lblResolveFirst"), 0, 0,
+                        preselect ? Lists.newArrayList() : orderedSAVs,
+                        preselect ? orderedSAVs : Lists.newArrayList(), null, false);
+            } else {
+                orderedSAVs = getGui().order(localizer.getMessage("lblSelectOrderForSimultaneousAbilities"), localizer.getMessage("lblResolveFirst"), orderedSAVs,
+                        null);
+            }
+            List<SpellAbility> orderedSAs = Lists.newArrayList();
+            for (SpellAbilityView spellAbilityView : orderedSAVs) {
+                orderedSAs.add(spellViewCache.get(spellAbilityView));
+            }
+            // save order to avoid needing to prompt a second time to order
+            // the same abilities
+            savedOrder = Lists.newArrayListWithCapacity(activePlayerSAs.size());
+            for (SpellAbility sa : orderedSAs) {
+                savedOrder.add(activePlayerSAs.indexOf(sa));
+            }
+            orderedSALookup.put(saLookupKey.toString(), savedOrder);
+            return orderedSAs;
+        }
+        else
+            return activePlayerSAs;
+    }
+
+    @Override
+    public void orderAndPlaySimultaneousSa(final List<SpellAbility> activePlayerSAs) {
+        List<SpellAbility> orderedSAs = orderSimultaneousSa(activePlayerSAs);
         for (int i = orderedSAs.size() - 1; i >= 0; i--) {
             final SpellAbility next = orderedSAs.get(i);
             if (next.isTrigger() && !next.isCopied()) {

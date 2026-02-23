@@ -18,11 +18,7 @@ import forge.game.ability.effects.CharmEffect;
 import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.*;
 import forge.game.combat.Combat;
-import forge.game.cost.Cost;
-import forge.game.cost.CostEnlist;
-import forge.game.cost.CostPart;
-import forge.game.cost.CostPartMana;
-import forge.game.cost.CostPayment;
+import forge.game.cost.*;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
@@ -1250,8 +1246,13 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public List<SpellAbility> orderSimultaneousSa(List<SpellAbility> activePlayerSAs) {
+        return getAi().orderPlaySa(activePlayerSAs);
+    }
+
+    @Override
     public void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs) {
-        for (final SpellAbility sa : getAi().orderPlaySa(activePlayerSAs)) {
+        for (final SpellAbility sa : orderSimultaneousSa(activePlayerSAs)) {
             if (sa.isTrigger() && !sa.isCopied()) {
                 if (prepareSingleSa(sa.getHostCard(), sa, true)) {
                     ComputerUtil.playStack(sa, player, getGame());

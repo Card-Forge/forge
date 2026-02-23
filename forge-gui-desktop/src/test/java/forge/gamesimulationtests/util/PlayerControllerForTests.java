@@ -5,10 +5,7 @@ import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import forge.LobbyPlayer;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilMana;
-import forge.ai.SpellAbilityAi;
-import forge.ai.SpellApiToAi;
+import forge.ai.*;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.DrawAi;
 import forge.ai.ability.GameLossAi;
@@ -603,7 +600,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    protected List<SpellAbility> orderSimultaneousSa(List<SpellAbility> activePlayerSAs) {
+    public List<SpellAbility> orderSimultaneousSa(List<SpellAbility> activePlayerSAs) {
         return activePlayerSAs;
     }
 
