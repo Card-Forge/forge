@@ -101,7 +101,7 @@ Type=Expansion
 94 C Manhole Missile @Fajareka Setiawan
 95 C Mouser Attack! @Erikas Perl
 96 C Mouser Foundry @Jakob Eirich
-97 C Mutant Town Musicians @Levinky
+97 C Mutant Town Musicians @Leonardo Vincent (Levinky)
 98 C Null Group Biological Assets @Miklós Ligeti
 99 U Old Hob, Alleycat Blues @Rose Benjamin
 100 C Purple Dragon Punks @Rose Benjamin
@@ -187,13 +187,13 @@ Type=Expansion
 180 U Turtle Blimp @Jakob Eirich
 181 R Turtle Van @Jakob Eirich
 182 R Weather Maker @Florent Lebrun
-183 C Dimension X @Maël Ollivier-Henry
-184 C Escape Tunnel @Aenami
-185 C Foot Headquarters @Hokyoung Kim
-186 C Illegitimate Business @Miklós Ligeti
-187 C Mutant Town @Josu Solano
+183 L Dimension X @Maël Ollivier-Henry
+184 L Escape Tunnel @Aenami
+185 L Foot Headquarters @Hokyoung Kim
+186 L Illegitimate Business @Miklós Ligeti
+187 L Mutant Town @Josu Solano
 188 R Northampton Farm @Marina Ortega Lorente
-189 C TCRI Building @Aenami
+189 L TCRI Building @Aenami
 190 U Turtle Lair @Marina Ortega Lorente
 191 L Plains @BEMOCS
 192 L Island @BEMOCS
@@ -325,3 +325,17 @@ Type=Expansion
 318 L Mountain @Sylvain Sarrailh
 319 L Forest @Sylvain Sarrailh
 320 R Shark Shredder, Killer Clone @Adam Volker
+
+[tokens]
+2 w_2_2_dinosaur_soldier @Filipe Pagliuso
+3 w_1_1_ninja_turtle_spirit @Svetlin Velinov
+4 b_1_1_insect_warrior_flying @Nicholas Gregory
+5 b_1_1_ninja @Svetlin Velinov
+6 b_1_1_rat @Miklós Ligeti
+7 r_2_2_mutant @Lordigan
+8 c_a_food_sac @Nicholas Gregory
+9 c_a_mutagen_sac @Madeline Boni
+10 c_1_1_a_robot @Dominik Mayer
+
+[other]
+1 copy @Jo Cordisco

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="180">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="184">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -29,7 +29,7 @@
  </layer>
  <layer id="3" name="Clutter" width="50" height="35">
   <data encoding="base64" compression="zlib">
-   eJzVmH1u2zAMxf3ftssUaBygWT58v95it2ij2D1bxdVsX15IUU7sNXsAkcQSIv5EkZLcNPer/arc/tQ2zWa0e9Lp4fx3ieMlt23W98mB6rKfvcPBDEtwDA9xH1V6zDHI1j+eP1eGveGfxXBcL+9rSdvs0251vn6QweLAnFCG4zesK8yBlP090frZA0MNx+8JDN04HtswGj+v1Tb7sCN/l+SQ/961l3YYjZ/XKuW+p2y9w9H/JxwszA2L4W+OT+DgPP4XHBGD6NYcX4IjUU6VapSI6+01dWoJDqtfiePavMC1JRyn9tKG0fj50hwSiyn5jRwXfqzs77WaOx6yTg+BH3vyWWIln7JmXyvtSGN4HG6dWpc5ZC+KWJhDGbgGRoYsFgcy4L7PsfA4IhblkDhoDKYyWOdSPqdb8s6FXKuUo8SiHBIHa26mWO06VKthYA5l4fNSPyPHLVbaM5hDz25oWEO+iyPa99KCHDL2azuPKYPevaz7F7NcwyGqnT/0xfPJ6zeM/bx7b6rkeJH5WdscyqI65DG7cVw9HyTwBfVGLF4/ZPD2zFTB8cmCVnk/Lvkm0rpYy+BxKAufl7xztOopaK/ZJ1DbYE/m++LU//cUcfQV43TgO+9jHe0BpfsiM+FvbuN7VsQRqaP5xz1Z1xGu8RID+13iYN3CwQwi3JN1/pHDW+ceg867x6HtWovnEu4BOv9ezUG/8Tv+tjjazZeptBbPpWRwRDUnWvvM5r3LjFhqch3nOgFHVC9ZwmBxoKx3mapb4mL5mxyGPz+a5rmwD6k0BlZeWO8ykb2U81unbeqcC8ev1ccnCuPAec7xsd5lojgmVv7zXXDquul+fhlqcGqs9V7depfJccOYXNwB6axw1maMF9V8bX8H/z7B6A==
+   eJzVmH1S4zAMxfMfy2WYoe0MbD9yP27BLUrdhLNhLRG8vkqW0ybQfTOatrGn1s+yZDtNc7vaLsrtT8umeR7slnR8OP1d4tjntufVbXKg2uxn53Awwxwc/UPcR5UecwyydY+nz5Vha/hnMRxW8/ta0jr7tFmcrh9ksDgwJ5Th8AvrCnMgZX+PtH62wFDD8XcEQzuMx9YPxs9rtc4+bMjfOTnkvzfLc9sNxs9rlXLfY7bO4ej+Ew4W5obF8C/HR3BwHv8ER8QgujbH5+BIlFOlGiXientJnZqDw+pX4rg0L3BtCcdxeW79YPx8bg6JxZj8Ro4zPxb291pNHQ9Zp7vAjy35LLGST1mzb5V2oDE8DrdOrcocshdFLMyhDFwDI0MWiwMZcN/nWHgcEYtySBw0BmMZrHMpn9MteedCrlXKUWJRDomDNTdjrHYdqtUwMIey8Hmpm5DjGivtGcyhZzc0rCG/xRHte2lGDhn7bTmNKYPevaz7F7NcwiGqnT/0xfPJ69cP/bx7b6rk2Mv8rGwOZVHt8pjtMK6eDxL4gnonFq8fMnh7Zqrg+GJBq7wfl3wTaV2sZfA4lIXPS945WvUUtNfsE6h1sCfzfXHs/3uKOLqKcVrwnfexlvaA0n2RmfA3t/E9K+KI1NL8456s6wjXeImB/fY4rHdO13Awg3Ioi84/cnjr3GPQecd2fOek7VqLpxLuATr/Xs2JGDwO652T1uKplAyOqOZEa5/ZrHdOooilJtfxPxNwRPWSJQwWB8rjEF0TF8vf5DC83jXNS2EfUmkMrLpscSB7KefXTtvYOReO+8XnJwrjwHnO8SnFQ8QxsfKf74Jj103759tQvVNjrffq1rtMjhvG5OwOSGeFkzZjvGiv1vYPqKnEhQ==
   </data>
  </layer>
  <layer id="7" name="Clutter" width="50" height="35">
@@ -44,6 +44,14 @@
   <object id="68" template="../../../../common/maps/obj/gold.tx" x="116.167" y="223.167"/>
   <object id="69" template="../../../../common/maps/obj/enemy.tx" x="108.104" y="197.482">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Mephitic Draught|LCI&quot;, &quot;Hopeless Nightmare|WOE&quot;]}"/>
     <property name="enemy" value="Korvold"/>
     <property name="speedModifier" type="float" value="20"/>
@@ -53,6 +61,14 @@
   </object>
   <object id="73" template="../../../../common/maps/obj/enemy.tx" x="342.602" y="269.3">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Faerie Conclave|WOC&quot;, &quot;Cloudseeder|TSR&quot;]}"/>
     <property name="enemy" value="Talion"/>
     <property name="threatRange" type="int" value="0"/>
@@ -64,6 +80,14 @@
   <object id="111" template="../../../../common/maps/obj/collision.tx" x="-16" y="-14.729" width="16" height="589.458"/>
   <object id="112" template="../../../../common/maps/obj/enemy.tx" x="540" y="312.5">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Tegwyll"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="50"/>
@@ -72,6 +96,14 @@
   </object>
   <object id="113" template="../../../../common/maps/obj/enemy.tx" x="248.5" y="108">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Grumgully"/>
     <property name="speedModifier" type="float" value="0"/>
     <property name="threatRange" type="int" value="0"/>
@@ -87,32 +119,56 @@
   <object id="122" template="../../../../common/maps/obj/collision.tx" x="430.5" y="1.771" width="96.5" height="12.958"/>
   <object id="123" template="../../../../common/maps/obj/collision.tx" x="162" y="113.271" width="76" height="92.458"/>
   <object id="124" template="../../../../common/maps/obj/collision.tx" x="144" y="0.271" width="49" height="30.458"/>
-  <object id="131" template="../../../../common/maps/obj/collision.tx" x="190.25" y="478.938" width="50.5" height="80.1247"/>
+  <object id="131" template="../../../../common/maps/obj/collision.tx" x="190.25" y="432.438" width="50.5" height="126.625"/>
   <object id="132" template="../../../../common/maps/obj/collision.tx" x="434.75" y="379.771" width="140.5" height="177.958"/>
   <object id="133" template="../../../../common/maps/obj/collision.tx" x="494.25" y="46.271" width="51" height="80.458"/>
   <object id="134" template="../../../../common/maps/obj/collision.tx" x="434.25" y="336.271" width="144" height="41.458"/>
   <object id="135" template="../../../../common/maps/obj/collision.tx" x="481.5" y="175.271" width="112" height="80.458"/>
   <object id="136" template="../../../../common/maps/obj/waypoint.tx" x="652" y="315"/>
   <object id="137" template="../../../../common/maps/obj/waypoint.tx" x="769.5" y="34"/>
-  <object id="138" template="../../../../common/maps/obj/waypoint.tx" x="225.5" y="312.5"/>
+  <object id="138" template="../../../../common/maps/obj/waypoint.tx" x="426.833" y="307.833"/>
   <object id="139" template="../../../../common/maps/obj/waypoint.tx" x="710.667" y="288"/>
   <object id="140" template="../../../../common/maps/obj/enemy.tx" x="728.667" y="170">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Rankle"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="50"/>
     <property name="waypoints" value="137,139"/>
    </properties>
   </object>
-  <object id="141" template="../../../../common/maps/obj/enemy.tx" x="471" y="91">
+  <object id="141" template="../../../../common/maps/obj/enemy.tx" x="470.5" y="142">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Beluna"/>
     <property name="speedModifier" type="float" value="20"/>
-    <property name="threatRange" type="int" value="50"/>
+    <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
-  <object id="142" template="../../../../common/maps/obj/enemy.tx" x="288.667" y="380">
+  <object id="142" template="../../../../common/maps/obj/enemy.tx" x="290" y="337.333">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Alela"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="50"/>
@@ -121,21 +177,37 @@
   </object>
   <object id="143" template="../../../../common/maps/obj/enemy.tx" x="736.334" y="480.167">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Emry"/>
     <property name="speedModifier" type="float" value="20"/>
-    <property name="threatRange" type="int" value="40"/>
+    <property name="threatRange" type="int" value="10"/>
    </properties>
   </object>
   <object id="144" template="../../../../common/maps/obj/enemy.tx" x="83.3333" y="493.333">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Golden Egg|ELD&quot;, &quot;Gilded Goose|ELD&quot;]}"/>
     <property name="enemy" value="The Goose Mother"/>
     <property name="speedModifier" type="float" value="40"/>
     <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
-  <object id="146" template="../../../../common/maps/obj/waypoint.tx" x="419.333" y="268.667"/>
-  <object id="147" template="../../../../common/maps/obj/waypoint.tx" x="212.667" y="438.667"/>
+  <object id="146" template="../../../../common/maps/obj/waypoint.tx" x="379.333" y="312"/>
+  <object id="147" template="../../../../common/maps/obj/waypoint.tx" x="204.667" y="358"/>
   <object id="148" template="../../../../common/maps/obj/gold.tx" x="95.5" y="224"/>
   <object id="149" template="../../../../common/maps/obj/gold.tx" x="80" y="223"/>
   <object id="150" template="../../../../common/maps/obj/gold.tx" x="115" y="241.5">
@@ -164,7 +236,7 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="154" template="../../../../common/maps/obj/dialog.tx" x="304.756" y="284.311" width="90.6983" height="35.8333" visible="1">
+  <object id="154" template="../../../../common/maps/obj/dialog.tx" x="303.756" y="287.402" width="90.6983" height="35.8333" visible="1">
    <properties>
     <property name="dialog">[
 {
@@ -196,21 +268,19 @@
           {
             &quot;name&quot;: &quot;Sure, why not.&quot;,
             &quot;text&quot;: &quot;'Yes, yes. Very tasty. Delicious. Nutritious. Definitely no side effects. Goodbye!'&quot;,
-            &quot;options&quot;: [{&quot;name&quot;: &quot;(You feel your mana drain a bit)&quot;}],
+            &quot;options&quot;: [{&quot;name&quot;: &quot;(You feel a bit queezy)&quot;}],
             &quot;action&quot;: [
                 {
                   &quot;grantRewards&quot;: [
-                    {&quot;type&quot;: &quot;shards&quot;, &quot;count&quot;: -20},
-                    {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;editions&quot;: [ &quot;ELD&quot;], &quot;cardName&quot;: &quot;Grumgully, the Generous&quot;},
                     {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Sensation Gorger&quot;}                
                   ],
-            &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}, {&quot;deleteMapObject&quot;:113}]
+            &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]
           }
             ]
         }]}]}]</property>
    </properties>
   </object>
-  <object id="156" template="../../../../common/maps/obj/dialog.tx" x="423.592" y="7.32001" width="126.723" height="21.3333" rotation="91.4613" visible="1">
+  <object id="156" template="../../../../common/maps/obj/dialog.tx" x="430.592" y="105.82" width="63.223" height="21.3333" rotation="0" visible="1">
    <properties>
     <property name="dialog">[
 {
@@ -223,7 +293,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="157" template="../../../../common/maps/obj/dialog.tx" x="170.488" y="121.544" width="113.698" height="18" rotation="207.792" visible="1">
+  <object id="157" template="../../../../common/maps/obj/dialog.tx" x="94.6547" y="113.044" width="66.198" height="18" rotation="0" visible="1">
    <properties>
     <property name="dialog">[
 {
@@ -236,7 +306,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="158" template="../../../../common/maps/obj/dialog.tx" x="220.918" y="497.679" width="176.032" height="18.6667" rotation="237.288" visible="1">
+  <object id="158" template="../../../../common/maps/obj/dialog.tx" x="157.418" y="430.179" width="35.032" height="29.1667" rotation="0" visible="1">
    <properties>
     <property name="dialog">[
 {
@@ -249,7 +319,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="159" template="../../../../common/maps/obj/dialog.tx" x="799.457" y="378.486" width="223.699" height="27.5" rotation="180.481" visible="1">
+  <object id="159" template="../../../../common/maps/obj/dialog.tx" x="738.957" y="459.986" width="39.699" height="23.5" rotation="0" visible="1">
    <properties>
     <property name="dialog">[
 {
@@ -260,7 +330,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="160" template="../../../../common/maps/obj/scroll.tx" x="38.5" y="532.5">
+  <object id="160" template="../../../../common/maps/obj/scroll.tx" x="45.25" y="535.25">
    <properties>
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Gilded Goose&quot;, &quot;editions&quot;: [ &quot;ELD&quot; ], &quot;count&quot;: 1 } ]"/>
    </properties>
@@ -400,5 +470,60 @@
   <object id="177" template="../../../../common/maps/obj/collision.tx" x="674.432" y="34.4074" width="11.1364" height="22.1853"/>
   <object id="178" template="../../../../common/maps/obj/collision.tx" x="786.932" y="144.907" width="11.1364" height="22.1853"/>
   <object id="179" template="../../../../common/maps/obj/collision.tx" x="754.932" y="274.907" width="11.1364" height="22.1853"/>
+  <object id="180" template="../../../../common/maps/obj/collision.tx" x="466" y="17.271" width="30.5" height="29.458"/>
+  <object id="181" template="../../../../common/maps/obj/collision.tx" x="385.75" y="54.271" width="30.5" height="20.958"/>
+  <object id="182" template="../../../../common/maps/obj/scroll.tx" x="29.25" y="518.75">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;A Golden Opportunity&quot;, &quot;editions&quot;: [ &quot;YWOE&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="183" template="../../../../common/maps/obj/enemy.tx" x="246" y="446.5">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'Hey! I could use some help here!'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;This part of the wild now stands quiet.&quot;,
+					&quot;text&quot;: &quot;'And may my brother's soul be able to rest as well.''&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Ruby, Daring Tracker&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;randomCard&quot;, &quot;colors&quot;: [ &quot;Blue&quot;], &quot;rarity&quot;: [&quot;Rare&quot;], &quot;count&quot;: 5 },
+{ &quot;type&quot;: &quot;randomCard&quot;, &quot;colors&quot;: [ &quot;Green&quot;], &quot;rarity&quot;: [&quot;Rare&quot;], &quot;count&quot;: 5 },
+{ &quot;type&quot;: &quot;randomCard&quot;, &quot;colors&quot;: [ &quot;Red&quot;], &quot;rarity&quot;: [&quot;Rare&quot;], &quot;count&quot;: 5 }              
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 9
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;What's wrong, girl?&quot;,
+					&quot;text&quot;: &quot;'Name's Ruby. My brother got dragged off by the fae here and served as a feast! They all deserve to die for their gruesome crimes. I'm just not strong enough to kill them all on my own. If you can manage taking out all nine fiends that lurk here, I'll give you a stock of spells I found when I went on a wild goose chase looking for my brother before coming here.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;Don't trust you. You could be a fae in disguise.&quot;,
+					&quot;text&quot;: &quot;'I'm not, but that IS what a fae would say. Can't fault you for being cautious.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Ruby"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
