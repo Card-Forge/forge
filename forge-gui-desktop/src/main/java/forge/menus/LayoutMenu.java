@@ -20,6 +20,7 @@ import forge.gui.MouseUtil;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.IVTopLevelUI;
 import forge.gui.framework.SLayoutIO;
+import forge.game.GameLogVerbosity;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
@@ -69,6 +70,11 @@ public final class LayoutMenu {
         menu.add(getMenuItem_ShowTabs());
         if (currentScreen != null && currentScreen.isMatchScreen()) {
             menu.add(getMenuItem_ShowBackgroundImage());
+
+            menu.addSeparator();
+            menu.add(getMenu_LogPane());
+
+            menu.addSeparator();
             final JMenu layoutMenu = getMenu_MultiplayerFieldLayout();
             final JMenu panelsMenu = getMenu_MultiplayerFieldPanels();
             menu.add(getMenuItem_SortMultiplayerFields(layoutMenu, panelsMenu));
@@ -250,6 +256,45 @@ public final class LayoutMenu {
             final IVTopLevelUI view = screen.getView();
             if (view instanceof VMatchUI) {
                 ((VMatchUI) view).relayoutMultiplayerFields();
+            }
+        }
+    }
+
+    private static JMenu getMenu_LogPane() {
+        final Localizer localizer = Localizer.getInstance();
+        final JMenu menu = new JMenu(localizer.getMessage("lblLogPanel"));
+        final ButtonGroup group = new ButtonGroup();
+        final String current = prefs.getPref(FPref.DEV_LOG_ENTRY_TYPE);
+
+        final String[] tooltipKeys = {"lblLogVerbosityLow", "lblLogVerbosityMedium", "lblLogVerbosityHigh"};
+        final GameLogVerbosity[] verbosities = GameLogVerbosity.values();
+        for (int i = 0; i < verbosities.length; i++) {
+            final GameLogVerbosity verbosity = verbosities[i];
+            final JRadioButtonMenuItem item = MenuUtil.createStayOpenRadioButton(verbosity.toString());
+            item.setToolTipText(localizer.getMessage(tooltipKeys[i]));
+            item.setSelected(verbosity.name().equals(current));
+            item.addActionListener(e -> {
+                prefs.setPref(FPref.DEV_LOG_ENTRY_TYPE, verbosity.name());
+                prefs.save();
+                refreshLog();
+            });
+            group.add(item);
+            menu.add(item);
+        }
+
+        menu.addSeparator();
+        MenuUtil.addPrefCheckBox(menu, localizer.getMessage("lblLogShowCardImages"), FPref.UI_LOG_SHOW_CARD_IMAGES)
+                .addActionListener(e -> refreshLog());
+
+        return menu;
+    }
+
+    private static void refreshLog() {
+        final FScreen screen = Singletons.getControl().getCurrentScreen();
+        if (screen != null && screen.isMatchScreen()) {
+            final IVTopLevelUI view = screen.getView();
+            if (view instanceof VMatchUI) {
+                ((VMatchUI) view).getControl().refreshLog();
             }
         }
     }

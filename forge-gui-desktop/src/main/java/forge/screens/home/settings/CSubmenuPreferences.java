@@ -6,7 +6,7 @@ import forge.StaticData;
 import forge.ai.AiProfileUtil;
 import forge.control.FControl.CloseAction;
 import forge.download.AutoUpdater;
-import forge.game.GameLogEntryType;
+import forge.game.GameLogVerbosity;
 import forge.gamemodes.net.server.FServerManager;
 import forge.gui.GuiBase;
 import forge.gui.UiCommand;
@@ -335,9 +335,9 @@ public enum CSubmenuPreferences implements ICDoc {
 
     private void initializeGameLogVerbosityComboBox() {
         final FPref userSetting = FPref.DEV_LOG_ENTRY_TYPE;
-        final FComboBoxPanel<GameLogEntryType> panel = this.view.getGameLogVerbosityComboBoxPanel();
-        final FComboBox<GameLogEntryType> comboBox = createComboBox(GameLogEntryType.values(), userSetting);
-        final GameLogEntryType selectedItem = GameLogEntryType.valueOf(this.prefs.getPref(userSetting));
+        final FComboBoxPanel<GameLogVerbosity> panel = this.view.getGameLogVerbosityComboBoxPanel();
+        final FComboBox<GameLogVerbosity> comboBox = createComboBox(GameLogVerbosity.values(), userSetting);
+        final GameLogVerbosity selectedItem = GameLogVerbosity.fromString(this.prefs.getPref(userSetting));
         panel.setComboBox(comboBox, selectedItem);
     }
 

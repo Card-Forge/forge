@@ -4,7 +4,7 @@ import forge.control.FControl;
 import forge.control.FControl.CloseAction;
 import forge.control.KeyboardShortcuts;
 import forge.control.KeyboardShortcuts.Shortcut;
-import forge.game.GameLogEntryType;
+import forge.game.GameLogVerbosity;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -135,7 +135,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private Timer searchTimer;
 
     // ComboBox items are added in CSubmenuPreferences since this is just the View.
-    private final FComboBoxPanel<GameLogEntryType> cbpGameLogEntryType = new FComboBoxPanel<>(localizer.getMessage("cbpGameLogEntryType")+":");
+    private final FComboBoxPanel<GameLogVerbosity> cbpGameLogEntryType = new FComboBoxPanel<>(localizer.getMessage("cbpGameLogEntryType")+":");
     private final FComboBoxPanel<CloseAction> cbpCloseAction = new FComboBoxPanel<>(localizer.getMessage("cbpCloseAction")+":");
     private final FComboBoxPanel<String> cbpDefaultFontSize = new FComboBoxPanel<>(localizer.getMessage("cbpDefaultFontSize")+":");
     private final FComboBoxPanel<String> cbpCardArtFormat = new FComboBoxPanel<>(localizer.getMessage("cbpCardArtFormat")+":");
@@ -846,7 +846,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         return cbpLandPlayed;
     }
 
-    public FComboBoxPanel<GameLogEntryType> getGameLogVerbosityComboBoxPanel() {
+    public FComboBoxPanel<GameLogVerbosity> getGameLogVerbosityComboBoxPanel() {
         return cbpGameLogEntryType;
     }
 

@@ -9,7 +9,7 @@ import forge.StaticData;
 import forge.adventure.util.Config;
 import forge.ai.AiProfileUtil;
 import forge.assets.*;
-import forge.game.GameLogEntryType;
+import forge.game.GameLogVerbosity;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgeNetPreferences;
@@ -350,7 +350,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new CustomSelectSetting(FPref.DEV_LOG_ENTRY_TYPE,
             Forge.getLocalizer().getMessage("cbpGameLogEntryType"),
             Forge.getLocalizer().getMessage("nlGameLogEntryType"),
-            GameLogEntryType.class), 3);
+            GameLogVerbosity.class), 3);
         lstSettings.addItem(new BooleanSetting(FPref.LOAD_CARD_SCRIPTS_LAZILY,
             Forge.getLocalizer().getMessage("cbLoadCardsLazily"),
             Forge.getLocalizer().getMessage("nlLoadCardsLazily")), 3);

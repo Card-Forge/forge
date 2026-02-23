@@ -13,7 +13,7 @@ import forge.assets.FSkinFont;
 import forge.assets.TextRenderer;
 import forge.game.GameLog;
 import forge.game.GameLogEntry;
-import forge.game.GameLogEntryType;
+import forge.game.GameLogVerbosity;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.menu.FDropDown;
 import forge.menu.FMenuTab;
@@ -77,8 +77,8 @@ public class VLog extends FDropDown {
     protected ScrollBounds updateAndGetPaneSize(float maxWidth, float maxVisibleHeight) {
         clear();
 
-        GameLogEntryType logVerbosityFilter = GameLogEntryType.valueOf(FModel.getPreferences().getPref(FPref.DEV_LOG_ENTRY_TYPE));
-        List<GameLogEntry> logEntrys = logSupplier.get().getLogEntries(logVerbosityFilter);
+        GameLogVerbosity verbosity = GameLogVerbosity.fromString(FModel.getPreferences().getPref(FPref.DEV_LOG_ENTRY_TYPE));
+        List<GameLogEntry> logEntrys = logSupplier.get().getLogEntriesForVerbosity(verbosity);
 
         LogEntryDisplay logEntryDisplay;
         float width = maxWidth - getDropDownOwner().screenPos.x; //stretch from tab to edge of screen

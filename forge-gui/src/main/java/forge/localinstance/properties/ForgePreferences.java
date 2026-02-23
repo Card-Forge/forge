@@ -19,6 +19,7 @@ package forge.localinstance.properties;
 
 import forge.MulliganDefs;
 import forge.game.GameLogEntryType;
+import forge.game.GameLogVerbosity;
 
 public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
 
@@ -217,7 +218,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
 
         DEV_MODE_ENABLED ("false"),
         DEV_WORKSHOP_SYNTAX ("false"),
-        DEV_LOG_ENTRY_TYPE (GameLogEntryType.DAMAGE.toString()),
+        DEV_LOG_ENTRY_TYPE (GameLogVerbosity.MEDIUM.name()),
+        UI_LOG_SHOW_CARD_IMAGES ("true"),
 
         LOAD_CARD_SCRIPTS_LAZILY ("false"),
         LOAD_ARCHIVED_FORMATS ("false"),
@@ -338,6 +340,37 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
     /** Instantiates a ForgePreferences object. */
     public ForgePreferences() {
         super(ForgeConstants.MAIN_PREFS_FILE, FPref.class);
+        migrateLogVerbosity();
+    }
+
+    /** Migrate old GameLogEntryType values to GameLogVerbosity presets. */
+    private void migrateLogVerbosity() {
+        final String stored = getPref(FPref.DEV_LOG_ENTRY_TYPE);
+        try {
+            GameLogVerbosity.valueOf(stored); // strict check for enum name
+            return; // already a valid verbosity preset
+        } catch (IllegalArgumentException ignored) {}
+        // Also accept caption format ("High" etc.) from combobox storage
+        for (GameLogVerbosity v : GameLogVerbosity.values()) {
+            if (v.toString().equals(stored)) {
+                setPref(FPref.DEV_LOG_ENTRY_TYPE, v.name());
+                save();
+                return;
+            }
+        }
+        // Old value is a GameLogEntryType name — map to a preset
+        try {
+            int ordinal = GameLogEntryType.valueOf(stored).ordinal();
+            String mapped = ordinal <= 8 ? GameLogVerbosity.LOW.name()
+                          : ordinal <= 14 ? GameLogVerbosity.MEDIUM.name()
+                          : GameLogVerbosity.HIGH.name();
+            setPref(FPref.DEV_LOG_ENTRY_TYPE, mapped);
+            save();
+        } catch (IllegalArgumentException ignored) {
+            // Unrecognized value — reset to default
+            setPref(FPref.DEV_LOG_ENTRY_TYPE, FPref.DEV_LOG_ENTRY_TYPE.getDefault());
+            save();
+        }
     }
 
     @Override
