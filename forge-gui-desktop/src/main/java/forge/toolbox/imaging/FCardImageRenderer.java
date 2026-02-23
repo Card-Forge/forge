@@ -25,6 +25,10 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.card.CardRarity;
 import forge.card.CardStateName;
+import forge.card.CardType;
+import forge.card.CardTypeView;
+import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
@@ -767,19 +771,19 @@ public class FCardImageRenderer {
     private static void drawTextBox(Graphics2D g, CardStateView state, String text, Color[] colors,
             int x, int y, int w, int h, int textBoxFlags) {
         int yAdjust = (textBoxFlags >> 16);
+        FSkinProp imageProp = null;
         if (state.isLand()) {
-            DetailColors modColors = DetailColors.WHITE;
-            if (state.isBasicLand()) {
-                if (state.isForest())
-                    modColors = DetailColors.GREEN;
-                else if (state.isIsland())
-                    modColors = DetailColors.BLUE;
-                else if (state.isMountain())
-                    modColors = DetailColors.RED;
-                else if (state.isSwamp())
-                    modColors = DetailColors.BLACK;
-                else if (state.isPlains())
-                    modColors = DetailColors.LAND;
+            DetailColors modColors = DetailColors.LAND;
+            CardTypeView type = state.getType();
+            long landTypeCount = state.getType().getLandTypes().stream().filter(CardType::isABasicLandType).count();
+            if (state.isBasicLand() && landTypeCount == 1) {
+                for (MagicColor.Color c : MagicColor.Color.values()) {
+                    String str = c.getBasicLandType();
+                    if (str != null && type.hasSubtype(str)) {
+                        modColors = CardDetailUtil.getColor(c);
+                        imageProp = FSkinProp.watermarkFromColor(c);
+                    }
+                }
             }
             Color bgColor = fromDetailColor(modColors);
             bgColor = tintColor(Color.WHITE, bgColor, NAME_BOX_TINT);
@@ -795,30 +799,13 @@ public class FCardImageRenderer {
         g.drawRect(x, y, w, h);
 
         if (state.isBasicLand()) {
+            ColorSet origColors = state.origProduceMana();
             //draw icons for basic lands
-            String imageKey;
-            switch (state.getOracleName().replaceFirst("^Snow-Covered ", "")) {
-            case "Plains":
-                imageKey = "W";
-                break;
-            case "Island":
-                imageKey = "U";
-                break;
-            case "Swamp":
-                imageKey = "B";
-                break;
-            case "Mountain":
-                imageKey = "R";
-                break;
-            case "Forest":
-                imageKey = "G";
-                break;
-            default:
-                imageKey = "C";
-                break;
+            if (imageProp == null && origColors == ColorSet.C) {
+                imageProp = FSkinProp.IMG_WATERMARK_C;
             }
             int iconSize = Math.round(h * 0.75f);
-            CardFaceSymbols.drawWatermark(imageKey, g, x + (w - iconSize) / 2, y + (h - iconSize) / 2, iconSize);
+            CardFaceSymbols.drawWatermark(imageProp, g, x + (w - iconSize) / 2, y + (h - iconSize) / 2, iconSize);
         } else {
             if (StringUtils.isEmpty(text))
                 return;

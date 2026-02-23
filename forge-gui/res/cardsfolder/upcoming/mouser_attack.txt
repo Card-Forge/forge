@@ -1,0 +1,8 @@
+Name:Mouser Attack!
+ManaCost:1 R
+Types:Sorcery
+A:SP$ Charm | Choices$ DBToken,DBPump
+SVar:DBToken:DB$ Token | TokenScript$ c_1_1_a_robot | TokenOwner$ You | SpellDescription$ Create a 1/1 colorless Robot artifact creature token.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ +3 | KW$ First Strike | SpellDescription$ Target creature gets +3/+0 and gains first strike until end of turn.
+DeckHas:Ability$Token
+Oracle:Choose one —\n• Create a 1/1 colorless Robot artifact creature token.\n• Target creature gets +3/+0 and gains first strike until end of turn.

@@ -1,92 +1,92 @@
 [metadata]
 Name=Hazezon Tamar
 [Commander]
-1 Hazezon Tamar|leg
+1 Hazezon Tamar|LEG
 [Main]
-1 An-Havva Township|hml
-1 Anger|jud
-1 Artifact Mutation|inv
-1 Aura Mutation|inv
-1 Aura Shards|inv
-1 wooded foothills|ons
-1 Blasphemous Act|brc
-1 windswept heath|ons
-1 Coat of Arms|exo
-1 Crop Rotation|ulg
-1 Defense of the Heart|ulg
-1 Druid's Call|ody
-1 Eladamri's Call|pls
-1 Elfhame Palace|inv
-1 Exploration|usg
-1 Fires of Yavimaya|inv
-1 Flicker|uds
-5 Forest|sum
-1 Forgotten Cave|ons
-1 Grasslands|mir
-1 Hammer Mage|mmq
-1 Harrow|tmp
-1 High Market|mmq
-1 Hull Breach|pls
-1 Hurricane|ice
-1 Jungle Patrol|mir
-1 shivan oasis|inv
-1 Keldon Necropolis|inv
-1 Krosan Verge|jud
-1 Márton Stromgald|ice
-1 Meteor Crater|pls
-1 Mirari's Wake|jud
-1 Mobilization|ons
-1 Mossfire Valley|ody
-5 Mountain|3ed
-1 Mountain Valley|mir
-1 Nantuko Monastery|jud
-1 Naturalize|ons
-1 Nature's Lore|ice
-1 Night Soil|fem
-1 Oblation|ons
-1 Overrun|tmp
-1 Pendelhaven|tsb
-5 Plains|sum
-1 Pulsemage Advocate|jud
-1 Rampant Growth|mir
-1 Reclamation Sage|tsr
-1 Regrowth|cei
-1 Retribution of the Meek|vis
-1 Rith, the Awakener|inv
-1 Rith's Grove|pls
-1 Scroll Rack|tmp
-1 Secluded Steppe|ons
-1 Seedborn Muse|lgn
-1 Shivan Gorge|usg
-1 Skyshroud Claim|nem
-1 Skyshroud Ranger|tmp
-1 Snake Basket|vis
-1 Sol Ring|sum
-1 Starstorm|ons
-1 Sungrass Prairie|ody
-1 fervor|wth
-1 Swords to Plowshares|4ed
-1 Sylvan Library|4ed
-1 Terminal Moraine|pls
-1 Terrain Generator|nem
-1 Tranquil Thicket|ons
-1 Untamed Wilds|po2
-1 Vandalblast|tsr
-1 Winds of Rath|tmp
-1 Wood Elves|exo
-1 Wrath of God|por
-1 Yavimaya Granger|ulg
-1 glorious anthem|usg
-1 stampede|ice
-1 kamahl, fist of krosa|ons
-1 insurrection|ons
-1 siege-gang commander|ons
-1 rout|inv
-1 collective unconscious|mmq
-1 goblin bombardment|tmp
-1 explosive vegetation|ons
-1 wall of blossoms|sth
-1 karplusan forest|ice
-1 brushland|ice
-1 battlefield forge|apc
-1 spidersilk armor|mmq
+1 An-Havva Township|HML
+1 Anger|JUD
+1 Artifact Mutation|INV
+1 Aura Mutation|INV
+1 Aura Shards|INV
+1 Wooded Foothills|ONS
+1 Blasphemous Act|BRC
+1 Windswept Heath|ONS
+1 Coat of Arms|EXO
+1 Crop Rotation|ULG
+1 Defense of the Heart|ULG
+1 Druid's Call|ODY
+1 Eladamri's Call|PLS
+1 Elfhame Palace|INV
+1 Exploration|USG
+1 Fires of Yavimaya|INV
+1 Flicker|UDS
+5 Forest|SUM
+1 Forgotten Cave|ONS
+1 Grasslands|MIR
+1 Hammer Mage|MMQ
+1 Harrow|TMP
+1 High Market|MMQ
+1 Hull Breach|PLS
+1 Hurricane|ICE
+1 Jungle Patrol|MIR
+1 Shivan Oasis|INV
+1 Keldon Necropolis|INV
+1 Krosan Verge|JUD
+1 Márton Stromgald|ICE
+1 Meteor Crater|PLS
+1 Mirari's Wake|JUD
+1 Mobilization|ONS
+1 Mossfire Valley|ODY
+5 Mountain|3ED
+1 Mountain Valley|MIR
+1 Nantuko Monastery|JUD
+1 Naturalize|ONS
+1 Nature's Lore|ICE
+1 Night Soil|FEM
+1 Oblation|ONS
+1 Overrun|TMP
+1 Pendelhaven|TSB
+5 Plains|SUM
+1 Pulsemage Advocate|JUD
+1 Rampant Growth|MIR
+1 Reclamation Sage|TSR
+1 Regrowth|CEI
+1 Retribution of the Meek|VIS
+1 Rith, the Awakener|INV
+1 Rith's Grove|PLS
+1 Scroll Rack|TMP
+1 Secluded Steppe|ONS
+1 Seedborn Muse|LGN
+1 Shivan Gorge|USG
+1 Skyshroud Claim|NEM
+1 Skyshroud Ranger|TMP
+1 Snake Basket|VIS
+1 Sol Ring|SUM
+1 Starstorm|ONS
+1 Sungrass Prairie|ODY
+1 Fervor|WTH
+1 Swords to Plowshares|4ED
+1 Sylvan Library|4ED
+1 Terminal Moraine|PLS
+1 Terrain Generator|NEM
+1 Tranquil Thicket|ONS
+1 Untamed Wilds|PO2
+1 Vandalblast|TSR
+1 Winds of Rath|TMP
+1 Wood Elves|EXO
+1 Wrath of God|POR
+1 Yavimaya Granger|ULG
+1 Glorious Anthem|USG
+1 Stampede|ICE
+1 Kamahl, Fist of Krosa|ONS
+1 Insurrection|ONS
+1 Siege-Gang Commander|ONS
+1 Rout|INV
+1 Collective Unconscious|MMQ
+1 Goblin Bombardment|TMP
+1 Explosive Vegetation|ONS
+1 Wall of Blossoms|STH
+1 Karplusan Forest|ICE
+1 Brushland|ICE
+1 Battlefield Forge|APC
+1 Spidersilk Armor|MMQ

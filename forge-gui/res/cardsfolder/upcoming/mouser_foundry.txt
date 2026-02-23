@@ -1,0 +1,9 @@
+Name:Mouser Foundry
+ManaCost:1 R
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this artifact enters or leaves the battlefield, create a 1/1 colorless Robot artifact creature token.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ When this artifact enters or leaves the battlefield, create a 1/1 colorless Robot artifact creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_a_robot | TokenOwner$ You
+A:AB$ DealDamage | Cost$ 4 R Sac<1/CARDNAME/this artifact> | ValidTgts$ Creature | NumDmg$ 3 | SpellDescription$ It deals 3 damage to target creature.
+DeckHas:Ability$Sacrifice|Token
+Oracle:When this artifact enters or leaves the battlefield, create a 1/1 colorless Robot artifact creature token.\n{4}{R}, Sacrifice this artifact: It deals 3 damage to target creature.

@@ -1,0 +1,10 @@
+Name:East Wind Avatar
+ManaCost:2 W
+Types:Creature Bird Spirit Avatar
+PT:2/4
+K:Flying
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Alliance — Whenever another creature you control enters, this creature gets +1/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1
+SVar:BuffedBy:Creature
+Oracle:Flying, vigilance\nAlliance — Whenever another creature you control enters, this creature gets +1/+0 until end of turn.

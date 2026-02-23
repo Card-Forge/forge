@@ -133,6 +133,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_THEMED_COMBOBOX ("true"), // Now applies to all theme settings, not just Combo.
         UI_LOCK_TITLE_BAR ("false"),
         UI_HIDE_GAME_TABS ("false"), // Visibility of tabs in match screen.
+        UI_MULTIPLAYER_FIELD_LAYOUT ("OFF"),
+        UI_MULTIPLAYER_FIELD_PANELS ("SPLIT"),
         UI_CLOSE_ACTION ("NONE"),
         UI_MANA_LOST_PROMPT ("false"), // Prompt on losing mana when passing priority
         UI_STACK_EFFECT_NOTIFICATION_POLICY ("Never"),
@@ -278,15 +280,19 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         SHORTCUT_SHOWCOMBAT ("67"),
         SHORTCUT_SHOWCONSOLE ("76"),
         SHORTCUT_SHOWDEV ("68"),
-        SHORTCUT_CONCEDE ("17"),
-        SHORTCUT_ENDTURN ("69"),
-        SHORTCUT_ALPHASTRIKE ("65"),
+        SHORTCUT_UNDO ("17 90"),
+        SHORTCUT_CONCEDE ("17 81"),
+        SHORTCUT_ENDTURN ("17 69"),
+        SHORTCUT_ALPHASTRIKE ("17 65"),
         SHORTCUT_SHOWTARGETING ("84"),
         SHORTCUT_AUTOYIELD_ALWAYS_YES ("89"),
         SHORTCUT_AUTOYIELD_ALWAYS_NO ("78"),
         SHORTCUT_MACRO_RECORD ("16 82"),
         SHORTCUT_MACRO_NEXT_ACTION ("16 50"),
         SHORTCUT_CARD_ZOOM("90"),
+        SHORTCUT_SHOWHOTKEYS("72"),
+        SHORTCUT_PANELTABS("17 84"),
+        SHORTCUT_CARDOVERLAYS("17 79"),
 
         LAST_IMPORTED_CUBE_ID("");
 
@@ -336,6 +342,25 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
     /** Instantiates a ForgePreferences object. */
     public ForgePreferences() {
         super(ForgeConstants.MAIN_PREFS_FILE, FPref.class);
+        migrateShortcutDefaults();
+    }
+
+    /**
+     * Migrates shortcut preferences from old defaults to new Ctrl+key defaults.
+     * Previously, Concede/EndTurn/AlphaStrike had configurable shortcuts that
+     * differed from their hardcoded menu accelerators. Now the menu accelerators
+     * are driven by the configurable preferences, so the defaults must match.
+     */
+    private void migrateShortcutDefaults() {
+        migrateIfOldDefault(FPref.SHORTCUT_CONCEDE, "17", "17 81");
+        migrateIfOldDefault(FPref.SHORTCUT_ENDTURN, "69", "17 69");
+        migrateIfOldDefault(FPref.SHORTCUT_ALPHASTRIKE, "65", "17 65");
+    }
+
+    private void migrateIfOldDefault(final FPref pref, final String oldDefault, final String newDefault) {
+        if (oldDefault.equals(getPref(pref))) {
+            setPref(pref, newDefault);
+        }
     }
 
     @Override

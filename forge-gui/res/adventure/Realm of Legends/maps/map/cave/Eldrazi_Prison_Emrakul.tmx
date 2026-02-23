@@ -31,7 +31,7 @@
  <objectgroup id="4" name="Objects">
   <object id="50" template="../../../../common/maps/obj/enemy.tx" x="240.561" y="404.87" width="64" height="64">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Eye of Ugin|WWK&quot;, &quot;Emrakul's Influence|EMN&quot;, &quot;Vestige of Emrakul|BFZ&quot;, &quot;Emrakul's Messenger|MH3&quot;, &quot;Mutated Cultist|M3C&quot;, &quot;Gisela, the Broken Blade&quot;, &quot;Ugin's Nexus|KTK&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Eye of Ugin|WWK&quot;, &quot;Emrakul's Influence|EMN&quot;, &quot;Emrakul's Messenger|MH3&quot;]}"/>
     <property name="enemy" value="Emrakul"/>
     <property name="speedModifier" type="float" value="50"/>
     <property name="threatRange" type="int" value="100"/>

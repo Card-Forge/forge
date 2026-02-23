@@ -57,7 +57,7 @@
     ]
    }
 ]</property>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Koma's Coil|TKHM&quot;, &quot;Koma's Coil|TKHM&quot;,  &quot;Koma's Coil|TKHM&quot; ]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;komas_coil&quot;, &quot;komas_coil&quot;,  &quot;komas_coil&quot; ]
 }</property>
     <property name="enemy" value="Koma"/>
     <property name="hidden" type="bool" value="true"/>

@@ -1,93 +1,93 @@
 [metadata]
-Name=
+Name=The Mimeoplasm
 [Commander]
-1 The Mimeoplasm|cmd
+1 The Mimeoplasm|CMD
 [Main]
-1 Animate Dead|ema
-1 Apex Altisaur|c19
-1 Assassin's Trophy|ecc
-1 Bala Ged Recovery|znr
-1 Barkchannel Pathway|khm
-1 Beast Within|nph
-1 Boseiju, Who Endures|neo
-1 Breeding Pool|sld
-1 Broken Bond|dom
-1 Champion of Wits|hou
-1 Clearwater Pathway|znr
-1 Colossal Grave-Reaver|tdc
-1 Consuming Aberration|gtc
-1 Court of Cunning|cmr
-1 Cultivate|m21
-1 Darkbore Pathway|khm
-1 Deathcap Glade|vow
-1 Disciple of Freyalise|mh3
-1 Doom Whisperer|grn
-1 Dreamborn Muse|lgn
-1 Dreamroot Cascade|vow
-1 Drown in the Loch|sld
+1 Animate Dead|EMA
+1 Apex Altisaur|C19
+1 Assassin's Trophy|ECC
+1 Bala Ged Recovery|ZNR
+1 Barkchannel Pathway|KHM
+1 Beast Within|NPH
+1 Boseiju, Who Endures|NEO
+1 Breeding Pool|SLD
+1 Broken Bond|DOM
+1 Champion of Wits|HOU
+1 Clearwater Pathway|ZNR
+1 Colossal Grave-Reaver|TDC
+1 Consuming Aberration|GTC
+1 Court of Cunning|CMR
+1 Cultivate|M21
+1 Darkbore Pathway|KHM
+1 Deathcap Glade|VOW
+1 Disciple of Freyalise|MH3
+1 Doom Whisperer|GRN
+1 Dreamborn Muse|LGN
+1 Dreamroot Cascade|VOW
+1 Drown in the Loch|SLD
 1 Mimeoplasm, Revered One
-1 torrent elemental|frf
-1 Fact or Fiction|dd2
-1 Fanatic of Rhonas|mh3
-1 Farseek|tdc
-1 Fauna Shaman|m11
-1 Fell the Profane|mh3
-1 Finale of Eternity|war
-5 Forest|fdn
-1 Glarb, Calamity's Augur|blb
-1 Glasspool Mimic|znr
-1 Glimpse the Unthinkable|rav
-1 Hedge Maze|mkm
-1 Hermit Druid|inr
-1 Hostile Negotiations|bro
-1 Imperious Mindbreaker|voc
-4 Island|fdn
-1 Joint Exploration|dmu
-1 Kodama's Reach|chk
-1 Llanowar Wastes|apc
-1 Malakir Rebirth|znr
-1 Mesmeric Orb|mrd
-1 Mindwrack Harpy|thb
-1 Mirko Vosk, Mind Drinker|dgm
-1 Misty Rainforest|zne
-1 Muldrotha, the Gravetide|2x2
-1 Mystic Remora|ice
-1 Nature's Lore|por
-1 Nemesis of Reason|arb
-1 Otherworldly Gaze|mid
-1 Overgrown Tomb|rtr
-1 Phenax, God of Deception|bng
-1 Planar Genesis|mh3
-1 Polluted Delta|mh3
-1 Pollywog Prodigy|blc
-1 Rampant Frogantua|m3c
-1 Rampant Growth|2x2
-1 Reality Shift|frf
-1 Reanimate|uma
-1 Ripples of Undeath|mh3
-1 Rise of the Dark Realms|fdn
-1 Riverchurn Monument|dft
-1 Ruin Crab|znr
-1 Scythecat Cub|j25
-1 Shadow Kin|mic
-1 Shoreline Looter|blb
-1 Singularity Rupture|eoe
-1 Sire of Stagnation|bfz
-1 Six|mh3
-1 Sol Ring|scd
-5 Swamp|fdn
-1 Teval, the Balanced Scale|tdc
-1 The Gitrog Monster|inr
-1 The Gitrog, Ravenous Ride|otj
-1 The Mindskinner|dsk
-1 The Scarab God|hou
-1 Three Visits|cmr
-1 Undercity Sewers|mkm
-1 Underground Mortuary|mkm
-1 Undergrowth Stadium|cmr
-1 Uro, Titan of Nature's Wrath|thb
-1 Voidslime|rvr
-1 Wastewood Verge|dft
-1 Watery Grave|sld
-1 Willowrush Verge|dft
-1 Zagoth Triome|iko
+1 Torrent Elemental|FRF
+1 Fact or Fiction|DD2
+1 Fanatic of Rhonas|MH3
+1 Farseek|TDC
+1 Fauna Shaman|M11
+1 Fell the Profane|MH3
+1 Finale of Eternity|WAR
+5 Forest|FDN
+1 Glarb, Calamity's Augur|BLB
+1 Glasspool Mimic|ZNR
+1 Glimpse the Unthinkable|RAV
+1 Hedge Maze|MKM
+1 Hermit Druid|INR
+1 Hostile Negotiations|BRO
+1 Imperious Mindbreaker|VOC
+4 Island|FDN
+1 Joint Exploration|DMU
+1 Kodama's Reach|CHK
+1 Llanowar Wastes|APC
+1 Malakir Rebirth|ZNR
+1 Mesmeric Orb|MRD
+1 Mindwrack Harpy|THB
+1 Mirko Vosk, Mind Drinker|DGM
+1 Misty Rainforest|ZNE
+1 Muldrotha, the Gravetide|2X2
+1 Mystic Remora|ICE
+1 Nature's Lore|POR
+1 Nemesis of Reason|ARB
+1 Otherworldly Gaze|MID
+1 Overgrown Tomb|RTR
+1 Phenax, God of Deception|BNG
+1 Planar Genesis|MH3
+1 Polluted Delta|MH3
+1 Pollywog Prodigy|BLC
+1 Rampant Frogantua|M3C
+1 Rampant Growth|2X2
+1 Reality Shift|FRF
+1 Reanimate|UMA
+1 Ripples of Undeath|MH3
+1 Rise of the Dark Realms|FDN
+1 Riverchurn Monument|DFT
+1 Ruin Crab|ZNR
+1 Scythecat Cub|J25
+1 Shadow Kin|MIC
+1 Shoreline Looter|BLB
+1 Singularity Rupture|EOE
+1 Sire of Stagnation|BFZ
+1 Six|MH3
+1 Sol Ring|SCD
+5 Swamp|FDN
+1 Teval, the Balanced Scale|TDC
+1 The Gitrog Monster|INR
+1 The Gitrog, Ravenous Ride|OTJ
+1 The Mindskinner|DSK
+1 The Scarab God|HOU
+1 Three Visits|CMR
+1 Undercity Sewers|MKM
+1 Underground Mortuary|MKM
+1 Undergrowth Stadium|CMR
+1 Uro, Titan of Nature's Wrath|THB
+1 Voidslime|RVR
+1 Wastewood Verge|DFT
+1 Watery Grave|SLD
+1 Willowrush Verge|DFT
+1 Zagoth Triome|IKO

@@ -72,7 +72,7 @@
   </object>
   <object id="110" template="../../../../common/maps/obj/enemy.tx" x="416" y="304">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Olivia's Bloodsworn|SOI&quot;, &quot;bride's gown|VOW&quot;, &quot;wedding invitation|VOW&quot;, &quot;wedding security|VOW&quot;, &quot;Call the bloodline|SOI&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Olivia's Bloodsworn|SOI&quot;, &quot;bride's gown|VOW&quot;, &quot;wedding invitation|VOW&quot;, &quot;Call the bloodline|SOI&quot;]}"/>
     <property name="enemy" value="Olivia"/>
     <property name="speedModifier" type="float" value="60"/>
     <property name="threatRange" type="int" value="60"/>

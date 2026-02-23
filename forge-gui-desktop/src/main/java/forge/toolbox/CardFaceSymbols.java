@@ -27,7 +27,6 @@ public class CardFaceSymbols {
     /** Constant <code>manaImages</code>. */
     private static final Map<String, SkinImage> MANA_IMAGES = new HashMap<>();
     private static final Map<String, SkinImage> DECK_COLORSET = new HashMap<>();
-    private static final Map<String, SkinImage> WATERMARKS = new HashMap<>();
 
     private static final int manaImageSize = 13;
 
@@ -37,13 +36,6 @@ public class CardFaceSymbols {
      * </p>
      */
     public static void loadImages() {
-        WATERMARKS.put("C", FSkin.getImage(FSkinProp.IMG_WATERMARK_C));
-        WATERMARKS.put("R", FSkin.getImage(FSkinProp.IMG_WATERMARK_R));
-        WATERMARKS.put("G", FSkin.getImage(FSkinProp.IMG_WATERMARK_G));
-        WATERMARKS.put("B", FSkin.getImage(FSkinProp.IMG_WATERMARK_B));
-        WATERMARKS.put("U", FSkin.getImage(FSkinProp.IMG_WATERMARK_U));
-        WATERMARKS.put("W", FSkin.getImage(FSkinProp.IMG_WATERMARK_W));
-
         DECK_COLORSET.put("C", FSkin.getImage(FSkinProp.IMG_MANA_COLORLESS));
         DECK_COLORSET.put("R", FSkin.getImage(FSkinProp.IMG_MANA_R));
         DECK_COLORSET.put("G", FSkin.getImage(FSkinProp.IMG_MANA_G));
@@ -283,12 +275,15 @@ public class CardFaceSymbols {
         FSkin.drawImage(g, MANA_IMAGES.get(imageName).resize(imageSize, imageSize),
             x, y, x + size, y + size, 0, 0, imageSize, imageSize);
     }
-    public static void drawWatermark(final String imageName, final Graphics g, final int x, final int y, final int size) {
+    public static void drawWatermark(final FSkinProp skinProp, final Graphics g, final int x, final int y, final int size) {
+        if (skinProp == null) {
+            return;
+        }
         // Obtain screen DPI scale
         float screenScale = GuiBase.getInterface().getScreenScale();
         int imageSize = Math.round(size * screenScale);
 
-        FSkin.drawImage(g, WATERMARKS.get(imageName).resize(imageSize, imageSize),
+        FSkin.drawImage(g, FSkin.getImage(skinProp).resize(imageSize, imageSize),
             x, y, x + size, y + size, 0, 0, imageSize, imageSize);
     }
     public static void drawAbilitySymbol(final String imageName, final Graphics g, final int x, final int y, final int w, final int h) {

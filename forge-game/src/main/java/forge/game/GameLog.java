@@ -22,8 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-import forge.game.event.IGameEventVisitor;
-
 /**
  * <p>
  * GameLog class.
@@ -89,7 +87,7 @@ public class GameLog extends Observable implements Serializable {
         return result;
     }
 
-    public IGameEventVisitor<?> getEventVisitor() {
+    public GameLogFormatter getEventVisitor() {
         return formatter;
     }
 }

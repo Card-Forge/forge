@@ -6,331 +6,321 @@
   },
   {
     "name": "Landscape Sketchbook - Mirage",
-    "description": "A leather bound notebook containing sketches of tropical locations",
+    "description": "Gives access to Mirage land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook",
     "questItem": true
   },
   {
     "name": "Landscape Sketchbook - Urza's Saga",
-    "description": "A leather bound notebook containing many different angles of the same terrain features",
+    "description": "Gives access to Urza's Saga land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook",
     "questItem": true
   },
   {
     "name": "Landscape Sketchbook - Coldsnap",
-    "description": "A leather bound notebook containing sketches of frost covered vistas",
+    "description": "Gives access to Coldsnap land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook",
     "questItem": true
   },
   {
     "name": "Landscape Sketchbook - Zendikar",
-    "description": "A leather bound notebook filled with sketches of floating landmasses and ancient ruins",
+    "description": "Gives access to Zendikar land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Innistrad",
-    "description": "A leather bound notebook containing eerie sketches of foggy, gothic landscapes",
+    "description": "Gives access to Innistrad land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Ravnica Allegiance",
-    "description": "A leather bound notebook filled with intricate sketches of a vast cityscape",
+    "description": "Gives access to Ravnica Allegiance land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Theros",
-    "description": "A leather bound notebook containing sketches of ancient monuments and starry skies",
+    "description": "Gives access to Theros land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Kamigawa Neon Dynasty",
-    "description": "A leather bound notebook containing sketches of spiritual shrines and cherry blossoms",
+    "description": "Gives access to Neon Dynasty land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Dominaria",
-    "description": "A leather bound notebook containing diverse sketches of the multiverse's nexus",
+    "description": "Gives access to Dominaria land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Lorwyn",
-    "description": "A leather bound notebook filled with whimsical sketches of idyllic meadows",
+    "description": "Gives access to Lorwyn land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Shards of Alara",
-    "description": "A leather bound notebook containing vibrant sketches of five distinct terrains",
+    "description": "Gives access to Shards of Alara land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Amonkhet",
-    "description": "A leather bound notebook filled with sketches of desert landscapes and grand monuments",
+    "description": "Gives access to Amonkhet land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Ixalan",
-    "description": "A leather bound notebook containing sketches of lush jungles and ancient temples",
+    "description": "Gives access to Ixalan land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Unglued",
-    "description": "A leather bound notebook containing sketches of lush jungles and ancient temples",
+    "description": "Gives access to Unglued land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Unhinged",
-    "description": "A leather bound notebook containing sketches of lush jungles and ancient temples",
+    "description": "Gives access to Unhinged land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Unstable",
-    "description": "A leather bound notebook containing sketches of lush jungles and ancient temples",
+    "description": "Gives access to Unstable land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Unfinity",
-    "description": "A leather bound notebook containing sketches of lush jungles and ancient temples",
+    "description": "Gives access to Unfinity land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Aetherdrift",
-    "description": "A leather bound notebook containing sketches of futuristic landscapes blending magic and technology",
+    "description": "Gives access to Aetherdrift land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Edge of Eternities",
-    "description": "A leather bound notebook containing sketches of futuristic landscapes blending magic and technology",
+    "description": "Gives access to Edge of Eternities land arts in the add basic lands menu of the deckbuilder's upper right corner.y",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Strixhaven: School of Mages",
-    "description": "A leather bound notebook filled with sketches of a magical university and its diverse campus grounds",
+    "description": "Gives access to Strixhaven land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Streets of New Capenna",
-    "description": "A leather bound notebook containing art deco sketches of towering skyscrapers and elegant plazas",
+    "description": "Gives access to New Capenna land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Kaldheim",
-    "description": "A leather bound notebook filled with sketches of snow-covered realms and Viking-inspired landscapes",
+    "description": "Gives access to Kaldheim land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Ikoria: Lair of Behemoths",
-    "description": "A leather bound notebook containing sketches of bizarre wilderness and enormous creatures",
+    "description": "Gives access to Ikoria land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
-    "name": "Landscape Sketchbook - Thrones of Eldraine",
-    "description": "A leather bound notebook filled with fairy tale sketches of enchanted castles and mystical groves",
+    "name": "Landscape Sketchbook - Throne of Eldraine",
+    "description": "Gives access to Eldraine land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Shadows Over Innistrad",
-    "description": "A leather bound notebook containing sketches of twisted landscapes under the influence of eldritch horrors",
+    "description": "Gives access to Shadows Over Innistrad land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Battle for Zendikar",
-    "description": "A leather bound notebook filled with sketches of a world being consumed by alien entities",
+    "description": "Gives access to Battle for Zendikar land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Khans of Tarkir",
-    "description": "A leather bound notebook containing sketches of a wartorn land with five distinct clans",
+    "description": "Gives access to Khans of Tarkir land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Hour of Devastation",
-    "description": "A leather bound notebook filled with sketches of monuments crumbling under draconic influence",
+    "description": "Gives access to Hour of Devastation land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Kaladesh",
-    "description": "A leather bound notebook containing intricate sketches of brass and copper cityscapes",
+    "description": "Gives access to Kaladesh land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Mercadian Masques",
-    "description": "A leather bound notebook filled with sketches of an isolated city-state and surrounding countryside",
+    "description": "Gives access to Mercadian Masques land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - New Phyrexia",
-    "description": "A leather bound notebook filled with disturbing sketches of a metal-infused wasteland",
+    "description": "Gives access to New Phyrexia land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Mirrodin Besieged",
-    "description": "A leather bound notebook containing sketches of a metal world at war",
+    "description": "Gives access to Mirrodin Besieged land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Scars of Mirrodin",
-    "description": "A leather bound notebook filled with sketches of a metal paradise being slowly corrupted",
+    "description": "Gives access to Scars of Mirrodin land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Magic Origins",
-    "description": "A leather bound notebook containing sketches of the home planes of five iconic planeswalkers",
+    "description": "Gives access to Magic Origins land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Magic 2021",
-    "description": "A leather bound notebook filled with sketches of diverse landscapes from across the multiverse",
+    "description": "Gives access to M21 land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Modern Horizons",
-    "description": "A leather bound notebook containing sketches of various planes throughout Magic's history",
+    "description": "Gives access to Modern Horizons land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Tempest",
-    "description": "A leather bound notebook filled with sketches of storm-ravaged islands and floating strongholds",
+    "description": "Gives access to Tempest land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Onslaught",
-    "description": "A leather bound notebook containing detailed sketches of tribal territories and battlegrounds",
+    "description": "Gives access to Onslaught land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Odyssey",
-    "description": "A leather bound notebook filled with sketches of a plane in recovery after apocalyptic events",
+    "description": "Gives access to Odyssey land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Rise of the Eldrazi",
-    "description": "A leather bound notebook containing sketches of hedrons and otherworldly monstrosities",
+    "description": "Gives access to Rise of the Eldrazi land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Dragons of Tarkir",
-    "description": "A leather bound notebook filled with sketches of a plane dominated by mighty dragons",
+    "description": "Gives access to Dragons of Tarkir land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Duskmourn: House of Horror",
-    "description": "A leather bound notebook filled with sketches of twilit forests and mysterious ruins",
+    "description": "Gives access to Duskmorn land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Outlaws of Thunder Junction",
-    "description": "A leather bound notebook containing sketches of wild western frontiers and dusty canyons",
+    "description": "Gives access to Thunder Junction land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Bloomburrow",
-    "description": "A leather bound notebook filled with sketches of charming villages and lush countryside",
+    "description": "Gives access to Bloomburrow land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - The Brothers War",
-    "description": "A leather bound notebook containing sketches of devastating battlefields covered with mechanical debris",
+    "description": "Gives access to Brothers War land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Seventh Edition",
-    "description": "A leather bound notebook containing sketches of classic landscapes",
+    "description": "Gives access to 7th Ed land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook",
     "questItem": true
   },
   {
     "name": "Landscape Sketchbook - Limited Edition Alpha",
-    "description": "A leather bound notebook containing the original basic land artwork from Magic's first set",
+    "description": "Gives access to Alpha land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Limited Edition Beta",
-    "description": "A leather bound notebook containing classic basic land artwork from Magic's second printing",
+    "description": "Gives access to Beta land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Revised Edition",
-    "description": "A leather bound notebook containing Third Edition basic lands with white borders",
+    "description": "Gives access to Revised land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Fourth Edition",
-    "description": "A leather bound notebook containing Fourth Edition basic lands",
+    "description": "Gives access to 4th Ed land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Fifth Edition",
-    "description": "A leather bound notebook containing Fifth Edition basic lands",
+    "description": "Gives access to 5th Ed land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Sixth Edition",
-    "description": "A leather bound notebook containing Sixth Edition basic lands",
+    "description": "Gives access to 6th Ed land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Ice Age",
-    "description": "A leather bound notebook containing sketches of frost covered vistas and snow-covered lands",
+    "description": "Gives access to Ice Age non-snow land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Tempest",
-    "description": "A leather bound notebook containing sketches of stormy, volcanic landscapes",
-    "iconName": "LandscapeSketchbook"
-  },
-  {
-    "name": "Landscape Sketchbook - Urza's Saga",
-    "description": "A leather bound notebook containing many different angles of the same terrain features",
-    "iconName": "LandscapeSketchbook"
-  },
-  {
-    "name": "Landscape Sketchbook - Mercadian Masques",
-    "description": "A leather bound notebook containing sketches of bustling marketplaces and grand architecture",
-    "iconName": "LandscapeSketchbook"
-  },
-  {
-    "name": "Landscape Sketchbook - Odyssey",
-    "description": "A leather bound notebook containing sketches of ancient ruins and mystical landscapes",
-    "iconName": "LandscapeSketchbook"
-  },
-  {
-    "name": "Landscape Sketchbook - Onslaught",
-    "description": "A leather bound notebook containing sketches of war-torn battlefields",
+    "description": "Gives access to Tempest land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Portal",
-    "description": "A leather bound notebook containing sketches designed for new planeswalkers",
+    "description": "Gives access to Portal land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Portal Second Age",
-    "description": "A leather bound notebook containing sketches from the second portal",
+    "description": "Gives access to Portal Second Age land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Portal Three Kingdoms",
-    "description": "A leather bound notebook containing sketches of ancient Eastern landscapes",
+    "description": "Gives access to Three Kingdoms land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Starter 1999",
-    "description": "A leather bound notebook containing sketches from the 1999 starter collection",
+    "description": "Gives access to Starter 99 land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Starter 2000",
-    "description": "A leather bound notebook containing sketches from the millennial starter collection",
+    "description": "Gives access to Starter 2000 land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Battle Royale",
-    "description": "A leather bound notebook containing sketches from legendary battles",
+    "description": "Gives access to Battle Royale Box Set land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Beatdown Box Set",
-    "description": "A leather bound notebook containing sketches of intense combat arenas",
+    "description": "Gives access to Beatdown Box Set land arts in the add basic lands menu of the deckbuilder's upper right corner.",
+    "iconName": "LandscapeSketchbook"
+  },
+  {
+    "name": "Landscape Sketchbook - Lorwyn Eclipsed",
+    "description": "Gives access to Lorwyn Eclipsed land arts in the add basic lands menu of the deckbuilder's upper right corner.",
+    "iconName": "LandscapeSketchbook"
+  },
+  {
+    "name": "Landscape Sketchbook - Tarkir: Dragonstorm",
+    "description": "Gives access to Tarkir Dragonstorm land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
@@ -1004,7 +994,7 @@
     "description": "A stolen soul that gives you 1 life. Uses a special slot.",
     "equipmentSlot": "Heart",
     "iconName": "CaptiveSoul",
-    "cost": 10000,
+    "cost": 20000,
     "effect": {
         "lifeModifier": 1
     }
@@ -1014,7 +1004,7 @@
     "description": "A stolen soul that gives you 2 life. Uses a special slot.",
     "equipmentSlot": "Heart",
     "iconName": "NobleSoul",
-    "cost": 50000,
+    "cost": 40000,
     "effect": {
         "lifeModifier": 2
     }
@@ -1024,20 +1014,21 @@
     "description": "A stolen soul that gives you 3 life. Uses a special slot.",
     "equipmentSlot": "Heart",
     "iconName": "RoyalSoul",
-    "cost": 100000,
+    "cost": 80000,
     "effect": {
         "lifeModifier": 3
     }
   },
   {
-    "name": "Assassin's Shoes",
-    "description": "1/1 vampire assassin, level up to tap to debuff",
+    "name": "Cutthroat Skirt",
+    "description": "3/2 vampire, level up for deathtouch",
     "equipmentSlot": "Boots",
-    "iconName": "Assassin'sShoes",
+    "iconName": "CutthroatSkirt",
     "cost": 5000,
     "effect": {
+        "lifeModifier": -6,
         "startBattleWithCard": [
-        "Guul Draz Assassin|ROE"
+        "NirkanaCutthroat|ROE"
      ]
     }
   },
@@ -1172,13 +1163,13 @@
     }
   },
     {
-    "name": "Pocket Thopter",
-    "description": "0/2 Flying thopter artifact",
+    "name": "Sky Skiff Turnkey",
+    "description": "2/3 flying vehicle with crew 1",
     "equipmentSlot": "Boots",
-    "iconName": "PocketThopter",
+    "iconName": "SkySkiffTurnkey",
     "effect": {
         "startBattleWithCard": [
-        "Ornithopter|KLD"
+        "Sky Skiff"
      ]
     }
   },
@@ -1245,7 +1236,7 @@
     "iconName": "CoiledAnklet",
     "effect": {
         "startBattleWithCard": [
-        "Koma's Coil|TKHM"
+        "komas_coil"
      ]
     }
   },
@@ -1286,13 +1277,13 @@
     }
   },
     {
-    "name": "Segovian Sandals",
-    "description": "1/1 angel with flying and vigilance",
-    "equipmentSlot": "Boots",
-    "iconName": "SegovianSandals",
+    "name": "Angelic Ring",
+    "description": "Sacrifice to revive a creature that just died.",
+    "equipmentSlot": "Left",
+    "iconName": "AngelicRing",
     "effect": {
         "startBattleWithCard": [
-        "Segovian Angel|MH1"
+        "Angelic Renewal"
      ]
     }
   },
@@ -1377,13 +1368,13 @@
     }
   },
     {
-    "name": "Miser's Shoes",
-    "description": "1/1 rat that drops opps max hand size by 1",
+    "name": "Sinuous Shoes",
+    "description": "2/2 rat that becomes a 5/5 menace for 3BB",
     "equipmentSlot": "Boots",
-    "iconName": "Miser'sShoes",
+    "iconName": "SinuousShoes",
     "effect": {
         "startBattleWithCard": [
-        "Gnat Miser|SOK"
+        "Sinuous Vermin"
      ]
     }
   },
@@ -1492,24 +1483,25 @@
   },
     {
     "name": "Bearhide Breeches",
-    "description": "2/2 bear",
+    "description": "2/2 bear, 3GG and exile from grave to make two 2/2s",
     "equipmentSlot": "Boots",
     "iconName": "BearhideBreeches",
     "effect": {
         "startBattleWithCard": [
-        "Grizzly Bears|10E"
+        "Mother Bear"
      ]
     }
   },
     {
-    "name": "Purist's Pants",
-    "description": "0/3 Cleric, level up to reduce all incoming damage",
+    "name": "Vindicator Greaves",
+    "description": "2/4 knight, 2W twice for 3/6 +1/+1 all, 3 more levels for 4/8 +2/+2 all",
     "equipmentSlot": "Boots",
-    "iconName": "Purist'sPants",
+    "iconName": "VindicatorGreaves",
     "cost": 5000,
     "effect": {
+        "lifeModifier": -6,
         "startBattleWithCard": [
-        "Hedron-Field Purists|ROE"
+        "Kabira Vindicator|ROE"
      ]
     }
   },
@@ -1631,24 +1623,24 @@
   },
     {
     "name": "Beastbreaker Boots",
-    "description": "2/2 human, level up to get bigger",
+    "description": "2/2 human, level up to get stronger",
     "equipmentSlot": "Boots",
     "iconName": "BeastbreakerBoots",
     "cost": 5000,
     "effect": {
         "startBattleWithCard": [
-        "Bala Ged Beastbreaker|ROE"
+        "Beastbreaker of Bala Ged"
      ]
     }
   },
     {
     "name": "Ghoulcaller Greaves",
-    "description": "2/2 zombie",
+    "description": "3/3 zombie, deals 1 to you a turn",
     "equipmentSlot": "Boots",
     "iconName": "GhoulcallerGreaves",
     "effect": {
         "startBattleWithCard": [
-        "Walking Corpse|ISD"
+        "Graf Reaver"
      ]
     }
   },
@@ -1698,13 +1690,13 @@
     }
   },
     {
-    "name": "Heap Socks",
-    "description": "1/1 artifact scarecrow, sac to exile a card from a graveyard",
+    "name": "Scarecrow Socks",
+    "description": "2/1 reach, filters mana once a turn",
     "equipmentSlot": "Boots",
-    "iconName": "HeapSocks",
+    "iconName": "ScarecrowSocks",
     "effect": {
         "startBattleWithCard": [
-        "Heap Doll|SHM"
+        "Scarecrow Guide"
      ]
     }
   },
@@ -1778,7 +1770,7 @@
   },
     {
     "name": "Cryptologist's Fins",
-    "description": "0/1 merfolk wizard. Pay 1U to make it a looter, again twice for archivist",
+    "description": "0/1 merfolk wizard. Level up to gain draw power.",
     "equipmentSlot": "Boots",
     "iconName": "Cryptologist'sFins",
     "cost": 5000,
@@ -2436,15 +2428,13 @@
     }
   },
     {
-    "name": "Vile Songbook",
-    "description": "Builds up verses, pay 1B to kill that many nonblack creatures",
-    "equipmentSlot": "Left",
-    "iconName": "VileSongbook",
+    "name": "Amulet of Compleation",
+    "description": "Surveil 1 when a Phyrexian you control dies",
+    "equipmentSlot": "Neck",
+    "iconName": "AmuletofCompleation",
     "effect": {
-        "changeStartCards": -1,
-        "lifeModifier": -13,
         "startBattleWithCard": [
-        "Vile Requiem|USG"
+        "Gift of Compleation"
      ]
     }
   },
@@ -2816,6 +2806,7 @@
     "iconName": "AmuletofMirth",
     "cost": 1000,
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Planeswalker's Mirth|PLS"
      ]
@@ -2922,6 +2913,18 @@
     "effect": {
         "startBattleWithCard": [
         "Planeswalker's Favor|PLS"
+     ]
+    }
+  },
+  {
+    "name": "Ominous Amulet",
+    "description": "Every 8 card draws, make an 8/8 kraken",
+    "equipmentSlot": "Neck",
+    "iconName": "OminousAmulet",
+    "effect": {
+        "lifeModifier": -8,
+        "startBattleWithCard": [
+        "Ominous Seas"
      ]
     }
   },
@@ -3278,10 +3281,10 @@
     }
   },
     {
-    "name": "Dragon Blood",
+    "name": "Ring of Dragon Blood",
     "description": "Pay 3 and tap for a +1/+1 counter",
     "equipmentSlot": "Right",
-    "iconName": "DragonBlood",
+    "iconName": "RingofDragonBlood",
     "effect": {
         "startBattleWithCard": [
         "Dragon Blood|USG"
@@ -3408,13 +3411,13 @@
     }
   },
     {
-    "name": "Wolfhunter's Quiver",
-    "description": "Equip 5, equipped can ping 1 or ping 3 to werewolves",
+    "name": "Full Moon Necklace",
+    "description": "Werewolves get +1/+0 and trample, sac to regen them all",
     "equipmentSlot": "Right",
-    "iconName": "Wolfhunter'sQuiver",
+    "iconName": "FullMoonNecklace",
     "effect": {
         "startBattleWithCard": [
-        "Wolfhunter's Quiver|DKA"
+        "Full Moon's Rise"
      ]
     }
   },
@@ -3437,7 +3440,7 @@
       "iconName": "TruthButcher'sArmor",
       "effect": {
         "changeStartCards": 4,
-        "lifeModifier": -16
+        "lifeModifier": -12
     }
   },
     {
@@ -3447,7 +3450,7 @@
       "iconName": "FlamingArmor",
       "cost": 1000,
       "effect": {
-        "lifeModifier": -3,
+        "lifeModifier": -2,
         "opponent": {
           "lifeModifier": -5
         }
@@ -3485,7 +3488,7 @@
       "cost": 6000,
       "effect": {
         "changeStartCards": 2,
-        "lifeModifier": -10
+        "lifeModifier": -7
     }
   },
     {
@@ -3495,7 +3498,7 @@
       "iconName": "BlessedArmor",
       "cost": 1000,
       "effect": {
-        "lifeModifier": 8,
+        "lifeModifier": 9,
         "opponent": {
           "lifeModifier": 4
         }
@@ -3507,7 +3510,7 @@
     "equipmentSlot": "Body",
     "iconName": "NomadArmor",
     "effect": {
-      "lifeModifier": 2,       
+      "lifeModifier": 3,       
       "changeStartCards": -1,
         "startBattleWithCard": [
         "Nomad Stadium|ODY"
@@ -3522,7 +3525,7 @@
       "cost": 1000,
       "effect": {
         "changeStartCards": 2,
-        "lifeModifier": -13
+        "lifeModifier": -10
     }
   },
     {
@@ -3531,7 +3534,7 @@
     "equipmentSlot": "Body",
     "iconName": "CabalArmor",
     "effect": {
-        "lifeModifier": 2,  
+        "lifeModifier": 3,  
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Cabal Pit|ODY"
@@ -3539,10 +3542,10 @@
     }
   },
     {
-    "name": "Armor of Ifnit",
+    "name": "Armor of Ifnir",
     "description": "Taps for C or B for 1 life; 2BB, T, sac a desert for 2 -1/-1 counters at sorcery speed",
     "equipmentSlot": "Body",
-    "iconName": "ArmorofIfnit",
+    "iconName": "ArmorofIfnir",
     "effect": {
         "changeStartCards": -1,
         "startBattleWithCard": [
@@ -3557,7 +3560,7 @@
       "iconName": "CrystallineArmor",
       "effect": {
         "changeStartCards": -1,
-        "lifeModifier": 3,
+        "lifeModifier": 5,
         "startBattleWithCard": [
           "Crystal Quarry|ODY"
         ]
@@ -3569,7 +3572,7 @@
     "equipmentSlot": "Body",
     "iconName": "CentaurArmor",
     "effect": {
-        "lifeModifier": 2,  
+        "lifeModifier": 3,  
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Centaur Garden|ODY"
@@ -3641,9 +3644,9 @@
       "iconName": "DivinelyBlessedArmor",
       "cost": 6000,
       "effect": {
-        "lifeModifier": 10,
+        "lifeModifier": 12,
         "opponent": {
-          "lifeModifier": 5
+          "lifeModifier": 6
         }
       }
     },
@@ -3655,7 +3658,7 @@
       "cost": 1000,
       "effect": {
         "changeStartCards": -1,
-        "lifeModifier": 12
+        "lifeModifier": 13
     }
   },
     {
@@ -3666,7 +3669,7 @@
       "cost": 6000,
       "effect": {
         "changeStartCards": -1,
-        "lifeModifier": 15
+        "lifeModifier": 16
     }
   },
     {
@@ -3687,7 +3690,7 @@
     "equipmentSlot": "Body",
     "iconName": "BarbarianArmor",
     "effect": {
-        "lifeModifier": 2,  
+        "lifeModifier": 3,  
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Barbarian Ring|ODY"
@@ -3701,9 +3704,9 @@
       "iconName": "BlazingArmor",
       "cost": 6000,
       "effect": {
-        "lifeModifier": -4,
+        "lifeModifier": -5,
         "opponent": {
-          "lifeModifier": -7
+          "lifeModifier": -8
         }
       }
     },
@@ -3781,21 +3784,298 @@
   },
     {
     "name": "Mithril Armor",
-    "description": "Better life boost",
+    "description": "Solid life boost",
     "equipmentSlot": "Body",
     "iconName": "MithrilArmor",
-    "cost": 6000,
+    "cost": 2000,
     "effect": {
-        "lifeModifier": 5
+        "lifeModifier": 6
+    }
+  },
+  {
+    "name": "Cloak of the Wastes",
+    "description": "Gives a colorless land, but -1 hand size",
+    "equipmentSlot": "Body",
+    "iconName": "CloakoftheWastes",
+    "cost": 3000,
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Wastes|OGW"
+      ]
+    }
+  },
+  {
+    "name": "Outpost Outfit",
+    "description": "Taps for W or sac for any color. -1 hand size.",
+    "equipmentSlot": "Body",
+    "iconName": "OutpostOutfit",
+    "cost": 7500,
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Abandoned Outpost"
+      ]
+    }
+  },
+  {
+    "name": "Seafloor Shirt",
+    "description": "Taps for U or sac for any color. -1 hand size.",
+    "equipmentSlot": "Body",
+    "iconName": "SeafloorShirt",
+    "cost": 7500,
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Seafloor Debris"
+      ]
+    }
+  },
+  {
+    "name": "Bog Dweller Leather",
+    "description": "Taps for B or sac for any color. -1 hand size.",
+    "equipmentSlot": "Body",
+    "iconName": "BogDwellerLeather",
+    "cost": 7500,
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Bog Wreckage"
+      ]
+    }
+  },
+  {
+    "name": "Highland Cloak",
+    "description": "Taps for R or sac for any color. -1 hand size.",
+    "equipmentSlot": "Body",
+    "iconName": "HighlandCloak",
+    "cost": 7500,
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Ravaged Highlands"
+      ]
+    }
+  },
+  {
+    "name": "Timberland Shawl",
+    "description": "Taps for G or sac for any color. -1 hand size.",
+    "equipmentSlot": "Body",
+    "iconName": "TimberlandShawl",
+    "cost": 7500,
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Timberland Ruins"
+      ]
+    }
+  },
+  {
+    "name": "Token of Bounty",
+    "description": "Grants a token in a special slot with 2, T, sac: Gain 3 life.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofBounty",
+    "cost": 30000,
+    "effect": {
+      "startBattleWithCard": [
+        "c_a_food_sac"
+      ]
+    }
+  },
+  {
+    "name": "Token of Investigation",
+    "description": "Grants a token in a special slot with 2, sac: Draw a card.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofInvestigation",
+    "cost": 70000,
+    "effect": {
+      "startBattleWithCard": [
+        "c_a_clue_draw"
+      ]
+    }
+  },
+  {
+    "name": "Token of Blood",
+    "description": "Grants a token in a special slot with 1, T, sac: Discard, then draw.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofBlood",
+    "cost": 50000,
+    "effect": {
+      "startBattleWithCard": [
+        "c_a_blood_draw"
+      ]
+    }
+  },
+  {
+    "name": "Token of Violence",
+    "description": "Grants a token in a special slot with equip 1: 1, T, sac: ping for 2",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofViolence",
+    "cost": 50000,
+    "effect": {
+      "startBattleWithCard": [
+        "rock"
+      ]
+    }
+  },
+  {
+    "name": "Token of Exploration",
+    "description": "Grants a token in a special slot with 1, T, sac: Explore.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofExploration",
+    "cost": 50000,
+    "effect": {
+      "startBattleWithCard": [
+        "c_a_map_sac_explore"
+      ]
+    }
+  },
+  {
+    "name": "Cloak of the Wastes",
+    "description": "Gives a colorless land, but -1 hand size",
+    "equipmentSlot": "Body",
+    "iconName": "CloakoftheWastes",
+    "cost": 3000,
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Wastes|OGW"
+      ]
+    }
+  },
+  {
+    "name": "Outpost Outfit",
+    "description": "Taps for W or sac for any color. -1 hand size.",
+    "equipmentSlot": "Body",
+    "iconName": "OutpostOutfit",
+    "cost": 7500,
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Abandoned Outpost"
+      ]
+    }
+  },
+  {
+    "name": "Seafloor Shirt",
+    "description": "Taps for U or sac for any color. -1 hand size.",
+    "equipmentSlot": "Body",
+    "iconName": "SeafloorShirt",
+    "cost": 7500,
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Seafloor Debris"
+      ]
+    }
+  },
+  {
+    "name": "Bog Dweller Leather",
+    "description": "Taps for B or sac for any color. -1 hand size.",
+    "equipmentSlot": "Body",
+    "iconName": "BogDwellerLeather",
+    "cost": 7500,
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Bog Wreckage"
+      ]
+    }
+  },
+  {
+    "name": "Highland Cloak",
+    "description": "Taps for R or sac for any color. -1 hand size.",
+    "equipmentSlot": "Body",
+    "iconName": "HighlandCloak",
+    "cost": 7500,
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Ravaged Highlands"
+      ]
+    }
+  },
+  {
+    "name": "Timberland Shawl",
+    "description": "Taps for G or sac for any color. -1 hand size.",
+    "equipmentSlot": "Body",
+    "iconName": "TimberlandShawl",
+    "cost": 7500,
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Timberland Ruins"
+      ]
+    }
+  },
+  {
+    "name": "Token of Bounty",
+    "description": "Grants a token in a special slot with 2, T, sac: Gain 3 life.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofBounty",
+    "cost": 30000,
+    "effect": {
+      "startBattleWithCard": [
+        "c_a_food_sac"
+      ]
+    }
+  },
+  {
+    "name": "Token of Investigation",
+    "description": "Grants a token in a special slot with 2, sac: Draw a card.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofInvestigation",
+    "cost": 70000,
+    "effect": {
+      "startBattleWithCard": [
+        "c_a_clue_draw"
+      ]
+    }
+  },
+  {
+    "name": "Token of Blood",
+    "description": "Grants a token in a special slot with 1, T, sac: Discard, then draw.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofBlood",
+    "cost": 50000,
+    "effect": {
+      "startBattleWithCard": [
+        "c_a_blood_draw"
+      ]
+    }
+  },
+  {
+    "name": "Token of Violence",
+    "description": "Grants a token in a special slot with equip 1: 1, T, sac: ping for 2",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofViolence",
+    "cost": 50000,
+    "effect": {
+      "startBattleWithCard": [
+        "rock"
+      ]
+    }
+  },
+  {
+    "name": "Token of Exploration",
+    "description": "Grants a token in a special slot with 1, T, sac: Explore.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofExploration",
+    "cost": 50000,
+    "effect": {
+      "startBattleWithCard": [
+        "c_a_map_sac_explore"
+      ]
     }
   },
   {
     "name": "Phelddagrif Plate",
-    "description": "Opponent gets a 2/2 that can drain mana on hit in exchange for damage",
+    "description": "Opponent gets a 2/2 hippo; you get a card and some life",
     "equipmentSlot": "Body",
     "iconName": "PhelddagrifPlate",
     "effect": {
-        "lifeModifier": 12,
+      "changeStartCards": 1,
+        "lifeModifier": 8,
         "opponent": {
           "startBattleWithCard": [
             "Pygmy Hippo|VIS"
@@ -3822,7 +4102,7 @@
     "equipmentSlot": "Body",
     "iconName": "CephalidArmor",
     "effect": {
-        "lifeModifier": 2,  
+        "lifeModifier": 3,  
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Cephalid Coliseum|ODY"
@@ -3989,13 +4269,12 @@
   },
     {
       "name": "Grand Sage's Robes",
-      "description": "An extra card at the cost of life.",
+      "description": "Grants an extra card with no life penalty.",
       "equipmentSlot": "Body",
       "iconName": "GrandSage'sRobes",
       "cost": 6000,
       "effect": {
-        "changeStartCards": 1,
-        "lifeModifier": -3
+        "changeStartCards": 1
     }
   },
     {
@@ -4065,7 +4344,7 @@
       "iconName": "Sage'sRobes",
       "effect": {
         "changeStartCards": 1,
-        "lifeModifier": -5
+        "lifeModifier": -3
     }
   },
     {
@@ -4129,11 +4408,11 @@
   },
   {
     "name": "Infernal Armor",
-    "description": "Two extra cards, but you are stalked by a 5/5 flying demon.",
+    "description": "Three extra cards, but you are stalked by a 5/5 flying demon.",
     "equipmentSlot": "Body",
     "iconName": "InfernalArmor",
     "effect": {
-      "changeStartCards": 2,
+      "changeStartCards": 3,
         "opponent": {
           "startBattleWithCard": [
             "Tombstalker|TSR"
@@ -4351,26 +4630,47 @@
     }
   },
   {
-    "name": "Fleshwright Chaps",
-    "description": "7/7 flier, -1/-1 per card in hand, 3U and discard 3 to revive.",
-    "equipmentSlot": "Boots",
-    "iconName": "FleshwrightChaps",
+    "name": "Mad Hat",
+    "description": "Randomly swap permanents each upkeep.",
+    "equipmentSlot": "Neck",
+    "iconName": "MadHat",
     "effect": {
-      "lifeModifier": -7,
       "startBattleWithCard": [
-      "Geralf's Masterpiece|SOI"
+      "Power Struggle"
    ]
     }
   },
   {
-    "name": "Gisa's Favorite Shovel",
-    "description": "Equip 4, +2/+0 and menace, on atk: opp sacs, you get a 2/2",
-    "equipmentSlot": "Right",
-    "iconName": "GisasFavoriteShovel",
+    "name": "Faerie Anklet",
+    "description": "1/3 flier. Pay 1GG for a random effect.",
+    "equipmentSlot": "Boots",
+    "iconName": "FaerieAnklet",
     "effect": {
-      "lifeModifier": -8,
       "startBattleWithCard": [
-      "Gisa's Favorite Shovel|SLX"
+      "Faerie Dragon"
+   ]
+    }
+  },
+  {
+    "name": "Fleshwright Chaps",
+    "description": "3/1 flying zombie, 1U and discard 2 to reanimate tapper",
+    "equipmentSlot": "Boots",
+    "iconName": "FleshwrightChaps",
+    "effect": {
+      "lifeModifier": -4,
+      "startBattleWithCard": [
+      "Stitchwing Skaab"
+   ]
+    }
+  },
+  {
+    "name": "Thirsting Axe",
+    "description": "Equip 2, +4/+0 but die at EOT if it hasn't hit a creature",
+    "equipmentSlot": "Right",
+    "iconName": "ThirstingAxe",
+    "effect": {
+      "startBattleWithCard": [
+      "Thirsting Axe"
    ]
     }
   },

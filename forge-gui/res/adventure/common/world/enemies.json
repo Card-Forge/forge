@@ -789,6 +789,8 @@
 	],
 	"ai": "",
 	"boss": true,
+	"bossInsult": "Enlightenment comes most swiftly at life's end.",
+	"bossIntro": "I feed my hatred to the righteous and they join my crusade",
 	"flying": true,
 	"speed": 1,
 	"scale": 1.5,
@@ -9592,6 +9594,101 @@
 	]
 },
 {
+	"name": "Eldrazi Floater",
+	"sprite": "sprites/enemy/aberration/eldrazi/eldrazi_2.atlas",
+	"deck": [
+		"decks/standard/eldrazilarge.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 0.5,
+	"difficulty": 0.1,
+	"scale":0.7,
+	"speed": 30,
+	"life": 40,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"Mythic Rare",
+				"Uncommon"
+			],
+			"subTypes": [
+				"Eldrazi"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 2
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 25,
+			"addMaxCount": 50
+		}
+	],
+	"colors": "BGU",
+	"questTags": [
+		"Aberration",
+		"Eldrazi",
+		"Wandering",
+		"Huge",
+		"IdentityBlack",
+		"IdentityGreen",
+		"IdentityBlue",
+		"IdentitySultai",
+		"BiomeColorless"
+	]
+},
+{
 	"name": "Elephant",
 	"sprite": "sprites/enemy/beast/elephant.atlas",
 	"deck": [
@@ -9601,7 +9698,7 @@
 	"spawnRate": 0.8,
 	"difficulty": 0.1,
 	"speed": 23,
-	"scale": 0.9,
+	"scale": 1.5,
 	"life": 20,
 	"rewards": [
 		{
@@ -21302,7 +21399,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
-	"life": 50,
+	"life": 35,
 	"rewards": [
 		{
 			"type": "item",
@@ -28695,7 +28792,8 @@
 	"spawnRate": 1,
 	"difficulty": 0.8,
 	"speed": 31,
-	"life": 50,
+    "scale": 1.5,
+	"life": 35,
 	"rewards": [
 		{
 			"type": "deckCard",

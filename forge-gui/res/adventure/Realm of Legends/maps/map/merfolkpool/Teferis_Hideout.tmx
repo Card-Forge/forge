@@ -60,7 +60,7 @@
   </object>
   <object id="67" template="../../../../common/maps/obj/enemy.tx" x="407.529" y="62.7573">
    <properties>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Teferi's Isle|MIR&quot;, &quot;Teferi's Sentinel|DOM&quot;, &quot;Teferi's Care|INV&quot;, &quot;Teferi's Veil|WTH&quot;, &quot;Oath of Teferi|DOM&quot; ] }"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Teferi's Isle|MIR&quot;, &quot;Teferi's Sentinel|DOM&quot;, &quot;Oath of Teferi|DOM&quot; ] }"/>
     <property name="enemy" value="Teferi"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="30"/>
@@ -81,6 +81,7 @@
   <object id="99" template="../../../../common/maps/obj/enemy.tx" x="80.229" y="513.876" width="15.5419" height="16.9162">
    <properties>
     <property name="enemy" value="Asmira"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Forest|FDN|[280]&quot;, &quot;Plains|FDN|[272]&quot;, &quot;Angelic Wall|PO2|[10]&quot;, &quot;Briar Patch&quot; ] }"/>
     <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>

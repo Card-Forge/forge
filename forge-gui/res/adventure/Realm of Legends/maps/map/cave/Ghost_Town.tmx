@@ -4,7 +4,7 @@
   <export target="waste_town.abandoned.tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Ghost town&quot;, &quot;Ghost quarter&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Ghost Town&quot;, &quot;Ghostly Prison&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -38,7 +38,7 @@
   <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="364" y="624" width="56" height="16"/>
   <object id="100" template="../../../../common/maps/obj/enemy.tx" x="384.333" y="516.667">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ghostfire Blade|KTK&quot;, &quot;Mastery of the Unseen|FRF&quot;, &quot;Jeskai Infiltrator|FRF&quot;, &quot;Scroll of Fate|C19&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ghostfire Blade|KTK&quot;, &quot;Mastery of the Unseen|FRF&quot;, &quot;Secret Plans&quot;, &quot;Scroll of Fate|C19&quot;]}"/>
     <property name="enemy" value="Omarthis"/>
     <property name="speedModifier" type="float" value="40"/>
     <property name="threatRange" type="int" value="30"/>

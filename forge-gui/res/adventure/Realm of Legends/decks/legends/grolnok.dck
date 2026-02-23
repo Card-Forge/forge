@@ -1,84 +1,84 @@
 [metadata]
 Name=Grolnok, the Omnivore
 [Commander]
-1 Grolnok, the Omnivore|vow
+1 Grolnok, the Omnivore|VOW
 [Main]
-1 aetherize|fdn
-1 exploration|dmr
-1 Adaptive Automaton|2xm
-1 Aetherspouts|m15
-1 Alchemist's Refuge|avr
-1 Amphibian Downpour|mh3
-1 Arcane Signet|nec
-1 Azusa, Lost but Seeking|cmm
-1 Bloodline Pretender|khm
-1 Clement, the Worrywort|blb
-1 Clifftop Lookout|blb
-1 Command Tower|dmc
-1 Contingency Plan|emn
-1 Croaking Counterpart|mid
-1 Crocanura|gtc
-1 Curse of Unbinding|mic
-1 Dour Port-Mage|blb
-1 Eaten by Piranhas|lci
-1 Eternal Witness|2x2
-1 Ezuri's Predation|c21
-10 Forest|vow
-1 Fortune Teller's Talent|blc
-1 Frog Tongue|tmp
-1 Frogify|eld
-1 Galloping Lizrog|rna
-1 Hedge Maze|mkm
-1 Hidden Grotto|blb
-1 Hinterland Harbor|blc
-1 Hydroelectric Specimen|mh3
-12 Island|vow
-1 Jace, Wielder of Mysteries|war
-1 Jade Avenger|mh2
-1 Kishla Village|tdm
-1 Laboratory Maniac|isd
-1 Lilypad Village|blb
-1 Lilysplash Mentor|blb
-1 Long River Lurker|blb
-1 Mistbreath Elder|blb
-1 Moritte of the Frost|khm
-1 Mosswort Bridge|clb
-1 Oakhollow Village|blb
-1 Octomancer|blc
-1 Otherworldly Gaze|mid
-1 Path of Ancestry|voc
-1 Plaxcaster Frogling|mm2
-1 Poison Dart Frog|lci
-1 Pollywog Prodigy|blc
-1 Polymorphist's Jest|m15
-1 Pond Prophet|blb
-1 Rampant Frogantua|m3c
-1 Rapid Hybridization|blc
-1 Reflections of Littjara|khm
-1 Rites of Flourishing|blc
-1 Rogue's Passage|c21
-1 Sakashima of a Thousand Faces|cmr
-1 Simic Signet|cmr
-1 Skyskipper Duo|blb
-1 Sol Ring|blc
-1 Spark Double|rvr
-1 Splash Lasher|blb
-1 Spore Frog|mh1
-1 Sugar Coat|blb
-1 Sunshower Druid|blb
-1 Swiftfoot Boots|m12
-1 Talisman of Curiosity|mh1
-1 Tamiyo, Collector of Tales|war
-1 Temple of the False God|c20
-1 Three Tree City|blb
-1 Treeguard Duo|blb
-1 Trollbred Guardian|rna
-1 Turn to Frog|m12
-1 Twenty-Toed Toad|blc
-1 Utopia Sprawl|wot
-1 Valley Mightcaller|blb
-1 Vineglimmer Snarl|stx
-1 Visions of Dominance|mic
-1 Wild Growth|4ed
-1 Willow Geist|mid
-1 Yavimaya Coast|c19
+1 Aetherize|FDN
+1 Exploration|DMR
+1 Adaptive Automaton|2XM
+1 Aetherspouts|M15
+1 Alchemist's Refuge|AVR
+1 Amphibian Downpour|MH3
+1 Arcane Signet|NEC
+1 Azusa, Lost but Seeking|CMM
+1 Bloodline Pretender|KHM
+1 Clement, the Worrywort|BLB
+1 Clifftop Lookout|BLB
+1 Command Tower|DMC
+1 Contingency Plan|EMN
+1 Croaking Counterpart|MID
+1 Crocanura|GTC
+1 Curse of Unbinding|MIC
+1 Dour Port-Mage|BLB
+1 Eaten by Piranhas|LCI
+1 Eternal Witness|2X2
+1 Ezuri's Predation|C21
+10 Forest|VOW
+1 Fortune Teller's Talent|BLC
+1 Frog Tongue|TMP
+1 Frogify|ELD
+1 Galloping Lizrog|RNA
+1 Hedge Maze|MKM
+1 Hidden Grotto|BLB
+1 Hinterland Harbor|BLC
+1 Hydroelectric Specimen|MH3
+12 Island|VOW
+1 Jace, Wielder of Mysteries|WAR
+1 Jade Avenger|MH2
+1 Kishla Village|TDM
+1 Laboratory Maniac|ISD
+1 Lilypad Village|BLB
+1 Lilysplash Mentor|BLB
+1 Long River Lurker|BLB
+1 Mistbreath Elder|BLB
+1 Moritte of the Frost|KHM
+1 Mosswort Bridge|CLB
+1 Oakhollow Village|BLB
+1 Octomancer|BLC
+1 Otherworldly Gaze|MID
+1 Path of Ancestry|VOC
+1 Plaxcaster Frogling|MM2
+1 Poison Dart Frog|LCI
+1 Pollywog Prodigy|BLC
+1 Polymorphist's Jest|M15
+1 Pond Prophet|BLB
+1 Rampant Frogantua|M3C
+1 Rapid Hybridization|BLC
+1 Reflections of Littjara|KHM
+1 Rites of Flourishing|BLC
+1 Rogue's Passage|C21
+1 Sakashima of a Thousand Faces|CMR
+1 Simic Signet|CMR
+1 Skyskipper Duo|BLB
+1 Sol Ring|BLC
+1 Spark Double|RVR
+1 Splash Lasher|BLB
+1 Spore Frog|MH1
+1 Sugar Coat|BLB
+1 Sunshower Druid|BLB
+1 Swiftfoot Boots|M12
+1 Talisman of Curiosity|MH1
+1 Tamiyo, Collector of Tales|WAR
+1 Temple of the False God|C20
+1 Three Tree City|BLB
+1 Treeguard Duo|BLB
+1 Trollbred Guardian|RNA
+1 Turn to Frog|M12
+1 Twenty-Toed Toad|BLC
+1 Utopia Sprawl|WOT
+1 Valley Mightcaller|BLB
+1 Vineglimmer Snarl|STX
+1 Visions of Dominance|MIC
+1 Wild Growth|4ED
+1 Willow Geist|MID
+1 Yavimaya Coast|C19

@@ -31,7 +31,7 @@
  <objectgroup id="4" name="Objects">
   <object id="50" template="../../../../common/maps/obj/enemy.tx" x="240.561" y="404.87" width="64" height="64">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Herald of Kozilek|BFZ&quot;, &quot;Kozilek's Channeler|BFZ&quot;, &quot;Kozilek's Unsealing|MH3&quot;, &quot;Bismuth Mindrender|M3C&quot;, &quot;Maw of Kozilek|OGW&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Herald of Kozilek|BFZ&quot;, &quot;Kozilek's Unsealing|MH3&quot;, &quot;Bismuth Mindrender|M3C&quot;]}"/>
     <property name="enemy" value="Kozilek"/>
     <property name="speedModifier" type="float" value="50"/>
     <property name="threatRange" type="int" value="100"/>
