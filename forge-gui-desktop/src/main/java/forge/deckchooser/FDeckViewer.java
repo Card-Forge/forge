@@ -85,7 +85,7 @@ public class FDeckViewer extends FDialog {
             this.sections.add(entry.getKey());
         }
         this.currentSection = DeckSection.Main;
-        updateCaption();
+        this.cardManager.setCaption(deck.getName() + " - ");
 
         this.btnCopyToClipboard.setFocusable(false);
         this.btnCopyToClipboard.addActionListener(arg0 -> FDeckViewer.this.copyToClipboard());
@@ -142,7 +142,6 @@ public class FDeckViewer extends FDialog {
                 if (selected != null && selected != currentSection) {
                     currentSection = selected;
                     cardManager.setPool(deck.get(currentSection));
-                    updateCaption();
                 }
             });
             this.cardManager.getCbxSection().setVisible(true);
@@ -156,11 +155,6 @@ public class FDeckViewer extends FDialog {
         currentSection = sections.get(index);
         this.cardManager.getCbxSection().setSelectedItem(currentSection);
         this.cardManager.setPool(this.deck.get(currentSection));
-        updateCaption();
-    }
-
-    private void updateCaption() {
-        this.cardManager.setCaption(deck.getName() + " - " + currentSection.name());
     }
 
     private void copyToClipboard() {
