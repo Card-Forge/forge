@@ -16,7 +16,9 @@ public enum GameLogVerbosity {
                    GameLogEntryType.DISCARD, GameLogEntryType.COMBAT,
                    GameLogEntryType.STACK_ADD, GameLogEntryType.STACK_RESOLVE)),
     HIGH("High",
-        EnumSet.allOf(GameLogEntryType.class));
+        EnumSet.allOf(GameLogEntryType.class)),
+    CUSTOM("Custom",
+        EnumSet.noneOf(GameLogEntryType.class));
 
     private final String caption;
     private final Set<GameLogEntryType> includedTypes;

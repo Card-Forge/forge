@@ -77,11 +77,14 @@ public class GameLog extends Observable implements Serializable {
     }
 
     public List<GameLogEntry> getLogEntriesForVerbosity(final GameLogVerbosity verbosity) {
-        final Set<GameLogEntryType> includedTypes = verbosity.getIncludedTypes();
+        return getLogEntriesForTypes(verbosity.getIncludedTypes());
+    }
+
+    public List<GameLogEntry> getLogEntriesForTypes(final Set<GameLogEntryType> types) {
         final List<GameLogEntry> result = new ArrayList<>();
         for (int i = log.size() - 1; i >= 0; i--) {
             GameLogEntry le = log.get(i);
-            if (includedTypes.contains(le.type)) {
+            if (types.contains(le.type)) {
                 result.add(le);
             }
         }

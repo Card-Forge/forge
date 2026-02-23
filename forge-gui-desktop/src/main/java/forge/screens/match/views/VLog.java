@@ -197,7 +197,13 @@ public class VLog implements IVDoc<CLog> {
         final String verbosityPref = FModel.getPreferences().getPref(FPref.DEV_LOG_ENTRY_TYPE);
         final GameLogVerbosity verbosity = GameLogVerbosity.fromString(verbosityPref);
         if (model != null && model.getGameLog() != null) {
-            final List<GameLogEntry> logEntries = model.getGameLog().getLogEntriesForVerbosity(verbosity);
+            final List<GameLogEntry> logEntries;
+            if (verbosity == GameLogVerbosity.CUSTOM) {
+                logEntries = model.getGameLog().getLogEntriesForTypes(
+                        FModel.getPreferences().getCustomLogTypes());
+            } else {
+                logEntries = model.getGameLog().getLogEntriesForVerbosity(verbosity);
+            }
             // Set subtraction - remove all log entries from new list which are already displayed.
             logEntries.removeAll(this.displayedLogEntries);
             return logEntries;

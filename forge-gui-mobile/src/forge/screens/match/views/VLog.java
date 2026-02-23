@@ -78,7 +78,13 @@ public class VLog extends FDropDown {
         clear();
 
         GameLogVerbosity verbosity = GameLogVerbosity.fromString(FModel.getPreferences().getPref(FPref.DEV_LOG_ENTRY_TYPE));
-        List<GameLogEntry> logEntrys = logSupplier.get().getLogEntriesForVerbosity(verbosity);
+        List<GameLogEntry> logEntrys;
+        if (verbosity == GameLogVerbosity.CUSTOM) {
+            logEntrys = logSupplier.get().getLogEntriesForTypes(
+                    FModel.getPreferences().getCustomLogTypes());
+        } else {
+            logEntrys = logSupplier.get().getLogEntriesForVerbosity(verbosity);
+        }
 
         LogEntryDisplay logEntryDisplay;
         float width = maxWidth - getDropDownOwner().screenPos.x; //stretch from tab to edge of screen

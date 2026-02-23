@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.Set;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
@@ -20,6 +21,7 @@ import forge.gui.MouseUtil;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.IVTopLevelUI;
 import forge.gui.framework.SLayoutIO;
+import forge.game.GameLogEntryType;
 import forge.game.GameLogVerbosity;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -266,25 +268,65 @@ public final class LayoutMenu {
         final ButtonGroup group = new ButtonGroup();
         final GameLogVerbosity currentVerbosity = GameLogVerbosity.fromString(prefs.getPref(FPref.DEV_LOG_ENTRY_TYPE));
 
+        MenuUtil.addPrefCheckBox(menu, localizer.getMessage("lblLogShowCardImages"), FPref.UI_LOG_SHOW_CARD_IMAGES)
+                .addActionListener(e -> refreshLog());
+        menu.addSeparator();
+
+        // Custom Categories submenu (declared early so radio button listeners can reference it)
+        final JMenu customMenu = new JMenu(localizer.getMessage("lblCustomCategories"));
+        customMenu.setEnabled(currentVerbosity == GameLogVerbosity.CUSTOM);
+
+        // Preset radio buttons (Low, Medium, High)
         final String[] tooltipKeys = {"lblLogVerbosityLow", "lblLogVerbosityMedium", "lblLogVerbosityHigh"};
-        final GameLogVerbosity[] verbosities = GameLogVerbosity.values();
-        for (int i = 0; i < verbosities.length; i++) {
-            final GameLogVerbosity verbosity = verbosities[i];
+        final GameLogVerbosity[] presets = {GameLogVerbosity.LOW, GameLogVerbosity.MEDIUM, GameLogVerbosity.HIGH};
+        for (int i = 0; i < presets.length; i++) {
+            final GameLogVerbosity verbosity = presets[i];
             final JRadioButtonMenuItem item = MenuUtil.createStayOpenRadioButton(verbosity.toString());
             item.setToolTipText(localizer.getMessage(tooltipKeys[i]));
             item.setSelected(verbosity == currentVerbosity);
             item.addActionListener(e -> {
                 prefs.setPref(FPref.DEV_LOG_ENTRY_TYPE, verbosity.name());
                 prefs.save();
+                customMenu.setEnabled(false);
                 refreshLog();
             });
             group.add(item);
             menu.add(item);
         }
 
+        // Custom radio button
+        final JRadioButtonMenuItem customRadio = MenuUtil.createStayOpenRadioButton(
+                GameLogVerbosity.CUSTOM.toString());
+        customRadio.setToolTipText(localizer.getMessage("lblLogVerbosityCustom"));
+        customRadio.setSelected(currentVerbosity == GameLogVerbosity.CUSTOM);
+        customRadio.addActionListener(e -> {
+            prefs.setPref(FPref.DEV_LOG_ENTRY_TYPE, GameLogVerbosity.CUSTOM.name());
+            prefs.save();
+            customMenu.setEnabled(true);
+            refreshLog();
+        });
+        group.add(customRadio);
+        menu.add(customRadio);
+
+        // Separator + Custom Categories submenu
         menu.addSeparator();
-        MenuUtil.addPrefCheckBox(menu, localizer.getMessage("lblLogShowCardImages"), FPref.UI_LOG_SHOW_CARD_IMAGES)
-                .addActionListener(e -> refreshLog());
+        final Set<GameLogEntryType> customTypes = prefs.getCustomLogTypes();
+        for (final GameLogEntryType type : GameLogEntryType.values()) {
+            final JCheckBoxMenuItem cb = MenuUtil.createStayOpenCheckBox(type.getCaption());
+            cb.setState(customTypes.contains(type));
+            cb.addActionListener(e -> {
+                final Set<GameLogEntryType> current = prefs.getCustomLogTypes();
+                if (cb.getState()) {
+                    current.add(type);
+                } else {
+                    current.remove(type);
+                }
+                prefs.setCustomLogTypes(current);
+                refreshLog();
+            });
+            customMenu.add(cb);
+        }
+        menu.add(customMenu);
 
         return menu;
     }
