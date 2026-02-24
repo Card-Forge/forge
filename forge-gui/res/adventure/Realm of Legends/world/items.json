@@ -4521,12 +4521,12 @@
   },
   {
     "name": "Medal of the Outnumbered",
-    "description": "Opponent starts with two creatures, improves win rewards.",
+    "description": "Opponent starts with two creatures, greatly improves win rewards.",
     "equipmentSlot": "Medal",
     "iconName": "MedalOutnumbered",
-    "cost": 1000,
+    "cost": 2000,
     "effect": {
-        "cardRewardBonus": 1,
+        "cardRewardBonus": 2,
         "opponent": {
           "startBattleWithCard": [
             "Aurora Champion|BBD",
@@ -4553,16 +4553,15 @@
   },
   {
     "name": "Medal of the Outmaneuvered",
-    "description": "Opponent starts with two lands, greatly improves win rewards.",
+    "description": "Opponent starts with an extra land, improves win rewards.",
     "equipmentSlot": "Medal",
     "iconName": "MedalOutmaneuvered",
-    "cost": 2000,
+    "cost": 1000,
     "effect": {
-        "cardRewardBonus": 2,
+        "cardRewardBonus": 1,
         "opponent": {
           "startBattleWithCard": [
-            "Command Tower|CMD",
-            "Rogue's Passage|FDN"
+            "Command Tower|CMD"
           ]
         }
     }
@@ -4578,7 +4577,7 @@
         "opponent": {
           "startBattleWithCard": [
             "Phyrexian Arena|FDN",
-            "Smothering Tithe|CMM"
+            "Exploration|DMR"
           ]
         }
     }
