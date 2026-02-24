@@ -78,7 +78,7 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ramosian Greatsword|MOM&quot;, &quot;Dragonstorm Globe|TDM&quot;, &quot;The Mana Rig|DMC&quot;, &quot;Henge Guardian|DDG&quot;, &quot;Dragon Engine|DMR&quot;, &quot;Fallaji Wayfarer|DMC&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ramosian Greatsword|MOM&quot;, &quot;The Mana Rig|DMC&quot;, &quot;Henge Guardian|DDG&quot;, &quot;Dragon Engine|DMR&quot;, &quot;Fallaji Wayfarer|DMC&quot;]}"/>
     <property name="enemy" value="Ramos"/>
     <property name="speedModifier" type="float" value="40"/>
     <property name="threatRange" type="int" value="20"/>
@@ -118,7 +118,7 @@
   <object id="140" template="../../../../common/maps/obj/collision.tx" x="308.333" y="158.617" width="26" height="34.5236"/>
   <object id="141" template="../../../../common/maps/obj/enemy.tx" x="360.667" y="264.667">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dragonstorm Globe|TDM&quot;, &quot;Corroding Dragonstorm|TDM&quot;, &quot;Skull of Ramos|MMQ&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Corroding Dragonstorm|TDM&quot;, &quot;Skull of Ramos|MMQ&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
     <property name="enemy" value="Teneb"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="30"/>
@@ -126,7 +126,7 @@
   </object>
   <object id="142" template="../../../../common/maps/obj/enemy.tx" x="281" y="268.5">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dragonstorm Globe|TDM&quot;, &quot;Breaching Dragonstorm|TDM&quot;, &quot;Heart of Ramos|MMQ&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Breaching Dragonstorm|TDM&quot;, &quot;Heart of Ramos|MMQ&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
     <property name="enemy" value="Numot"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="30"/>
@@ -134,7 +134,7 @@
   </object>
   <object id="143" template="../../../../common/maps/obj/enemy.tx" x="382.5" y="191.5">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dragonstorm Globe|TDM&quot;, &quot;Encroaching Dragonstorm|TDM&quot;, &quot;Horn of Ramos|MMQ&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Encroaching Dragonstorm|TDM&quot;, &quot;Horn of Ramos|MMQ&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
     <property name="enemy" value="Vorosh"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="40"/>
@@ -142,7 +142,7 @@
   </object>
   <object id="144" template="../../../../common/maps/obj/enemy.tx" x="243.5" y="190.5">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dragonstorm Globe|TDM&quot;, &quot;Roiling Dragonstorm|TDM&quot;, &quot;Eye of Ramos|MMQ&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Roiling Dragonstorm|TDM&quot;, &quot;Eye of Ramos|MMQ&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
     <property name="enemy" value="Intet"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="40"/>
@@ -150,7 +150,7 @@
   </object>
   <object id="145" template="../../../../common/maps/obj/enemy.tx" x="312.5" y="213">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dragonstorm Globe|TDM&quot;, &quot;Teeming Dragonstorm|TDM&quot;, &quot;Tooth of Ramos|MMQ&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Teeming Dragonstorm|TDM&quot;, &quot;Tooth of Ramos|MMQ&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
     <property name="enemy" value="Oros"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="40"/>

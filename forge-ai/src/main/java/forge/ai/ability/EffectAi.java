@@ -416,7 +416,7 @@ public class EffectAi extends SpellAbilityAi {
                 }
             }
 
-            if (hasMayPlayFromGrave) {
+            if (hasMayPlayFromGrave && sa.usesTargeting()) {
                 List<Card> targetables = CardUtil.getValidCardsToTarget(sa);
 
                 if (!phase.isPlayerTurn(ai) && phase.is(PhaseType.COMBAT_DECLARE_ATTACKERS)) {

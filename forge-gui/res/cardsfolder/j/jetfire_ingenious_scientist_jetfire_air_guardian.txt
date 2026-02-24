@@ -22,6 +22,6 @@ PT:3/4
 K:Living metal
 K:Flying
 A:AB$ SetState | Cost$ U U U | Mode$ Transform | SubAbility$ DBAdapt | StackDescription$ Convert NICKNAME, | SpellDescription$ Convert NICKNAME, then adapt 3. (If it has no +1/+1 counters on it, put three +1/+1 counters on it.)
-SVar:DBAdapt:DB$ PutCounter | Adapt$ True | CounterNum$ 3 | CounterType$ P1P1 | StackDescription$ then adapt 3.
+SVar:DBAdapt:DB$ PutCounter | Adapt$ 3 | StackDescription$ then adapt 3.
 DeckHas:Ability$Counters
 Oracle:Living metal (During your turn, this Vehicle is also a creature.)\nFlying\n{U}{U}{U}: Convert Jetfire, then adapt 3. (If it has no +1/+1 counters on it, put three +1/+1 counters on it.)

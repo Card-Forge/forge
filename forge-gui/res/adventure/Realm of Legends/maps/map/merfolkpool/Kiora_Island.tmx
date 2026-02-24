@@ -67,7 +67,8 @@ She stumbles back, and lands in the waters below with a splash. You consider goi
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Silvergill Douser|LRW&quot;, &quot;Quest for Ula's Temple|WWK&quot;, &quot;Temple of the False God|C17&quot;, &quot;Lumbering Falls|BFZ&quot;, &quot;Hedron Matrix|ROE&quot;, &quot;Reef Worm|MH3&quot;, &quot;Ominous Seas|IKO&quot; ]}"/>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Quest for Ula's Temple|WWK&quot;, &quot;Temple of the False God|C17&quot;, &quot;Reservoir Kraken&quot;, &quot;Reef Worm|MH3&quot;, &quot;Ominous Seas|IKO&quot;
+ ]}</property>
     <property name="enemy" value="Kiora"/>
     <property name="speedModifier" type="float" value="50"/>
     <property name="threatRange" type="int" value="50"/>
@@ -123,9 +124,11 @@ She stumbles back, and lands in the waters below with a splash. You consider goi
   <object id="98" template="../../../../common/maps/obj/waypoint.tx" x="355.333" y="149.333"/>
   <object id="101" template="../../../../common/maps/obj/enemy.tx" x="155.333" y="102.666">
    <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Silvergill Douser&quot;, &quot;Svyelunite Priest&quot;, &quot;Svyelunite Temple&quot;, &quot;Merrow Commerce&quot;
+ ]}</property>
     <property name="enemy" value="Svyelun"/>
-    <property name="threatRange" type="int" value="30"/>
-    <property name="waypoints" value="119,86"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
   <object id="102" template="../../../../common/maps/obj/collision.tx" x="773.083" y="598.667" width="89.1667" height="88"/>
@@ -143,7 +146,6 @@ She stumbles back, and lands in the waters below with a splash. You consider goi
   <object id="116" template="../../../../common/maps/obj/collision.tx" x="-12.9165" y="0.333333" width="48.4997" height="164"/>
   <object id="117" template="../../../../common/maps/obj/gold.tx" x="738.667" y="172.667"/>
   <object id="118" template="../../../../common/maps/obj/waypoint.tx" x="286.667" y="148.667"/>
-  <object id="119" template="../../../../common/maps/obj/waypoint.tx" x="851.333" y="149.333"/>
   <object id="123" template="../../../../common/maps/obj/dialog.tx" x="364" y="669.25" width="111" height="23.5" visible="1">
    <properties>
     <property name="dialog">[

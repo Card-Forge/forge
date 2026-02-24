@@ -31,9 +31,14 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import io.netty.handler.timeout.IdleState;
+import io.netty.handler.timeout.IdleStateEvent;
+import io.netty.handler.timeout.IdleStateHandler;
 
 import org.jupnp.UpnpService;
 import org.jupnp.UpnpServiceImpl;
+import org.jupnp.model.meta.Device;
+import org.jupnp.registry.Registry;
 import org.jupnp.support.igd.PortMappingListener;
 import org.jupnp.support.model.PortMapping;
 
@@ -43,9 +48,11 @@ import java.io.InputStreamReader;
 import java.net.*;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 
 public final class FServerManager {
+    static final int HEARTBEAT_TIMEOUT_SECONDS = Integer.getInteger("forge.net.heartbeatTimeout", 45);
     private static final int RECONNECT_TIMEOUT_SECONDS = 300;
 
     private static FServerManager instance = null;
@@ -113,6 +120,7 @@ public final class FServerManager {
                             p.addLast(
                                     new CompatibleObjectEncoder(),
                                     new CompatibleObjectDecoder(9766 * 1024, ClassResolvers.cacheDisabled(null)),
+                                    new IdleStateHandler(HEARTBEAT_TIMEOUT_SECONDS, 0, 0, TimeUnit.SECONDS),
                                     new MessageHandler(),
                                     new RegisterClientHandler(),
                                     new LobbyInputHandler(),
@@ -189,6 +197,7 @@ public final class FServerManager {
             Runtime.getRuntime().removeShutdownHook(shutdownHook);
         }
         isHosting = false;
+        UPnPMapped = false;
         // create new EventLoopGroups for potential restart
         bossGroup = new NioEventLoopGroup(1);
         workerGroup = new NioEventLoopGroup();
@@ -196,6 +205,10 @@ public final class FServerManager {
 
     public boolean isHosting() {
         return isHosting;
+    }
+
+    public boolean isUPnPMapped() {
+        return UPnPMapped;
     }
 
     public void broadcast(final NetEvent event) {
@@ -371,14 +384,70 @@ public final class FServerManager {
             upnpService = new UpnpServiceImpl(GuiBase.getInterface().getUpnpPlatformService());
             upnpService.startup();
 
-            // Add a PortMappingListener
-            upnpService.getRegistry().addListener(new PortMappingListener(portMapping));
+            final ForgePortMappingListener listener = new ForgePortMappingListener(portMapping);
+            upnpService.getRegistry().addListener(listener);
             // Trigger device discovery
             upnpService.getControlPoint().search();
+
+            // If no IGD responds within 5 seconds, report failure
+            new Timer("upnp-timeout", true).schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    if (!listener.isCompleted()) {
+                        listener.setCompleted();
+                        onUPnPResult(false);
+                    }
+                }
+            }, 5000);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    private void onUPnPResult(boolean success) {
+        String msg = success
+            ? localizer.getMessage("lblUPnPSuccess", String.valueOf(port))
+            : localizer.getMessage("lblUPnPFailed", String.valueOf(port));
+        System.out.println(msg);
+        if (lobbyListener != null) {
+            broadcast(new MessageEvent(msg));
+        }
+    }
+
+    /**
+     * Extends jupnp's PortMappingListener to report mapping success or failure.
+     * The superclass runs port mapping actions synchronously inside deviceAdded(),
+     * so by the time super.deviceAdded() returns, the result is known.
+     */
+    private class ForgePortMappingListener extends PortMappingListener {
+        private volatile boolean completed = false;
+
+        ForgePortMappingListener(PortMapping portMapping) {
+            super(portMapping);
+        }
+
+        @Override
+        public synchronized void deviceAdded(Registry registry, Device device) {
+            super.deviceAdded(registry, device);
+            if (!completed && !activePortMappings.isEmpty()) {
+                completed = true;
+                UPnPMapped = true;
+                onUPnPResult(true);
+            }
+        }
+
+        @Override
+        protected void handleFailureMessage(String message) {
+            super.handleFailureMessage(message);
+            if (!completed) {
+                completed = true;
+                onUPnPResult(false);
+            }
+        }
+
+        boolean isCompleted() { return completed; }
+        void setCompleted() { completed = true; }
     }
 
     // --- Reconnection helper methods ---
@@ -545,6 +614,9 @@ public final class FServerManager {
     private class MessageHandler extends ChannelInboundHandlerAdapter {
         @Override
         public final void channelRead(final ChannelHandlerContext ctx, final Object msg) throws Exception {
+            if (msg instanceof HeartbeatEvent) {
+                return; // Consumed — arrival resets IdleStateHandler read timer
+            }
             if (msg instanceof MessageEvent) {
                 final String text = ((MessageEvent) msg).getMessage();
                 if (text != null && text.startsWith("/")) {
@@ -669,6 +741,21 @@ public final class FServerManager {
     }
 
     private class DeregisterClientHandler extends ChannelInboundHandlerAdapter {
+        @Override
+        public void userEventTriggered(final ChannelHandlerContext ctx, final Object evt) throws Exception {
+            if (evt instanceof IdleStateEvent && ((IdleStateEvent) evt).state() == IdleState.READER_IDLE) {
+                final RemoteClient client = clients.get(ctx.channel());
+                final String name = client != null ? client.getUsername() : ctx.channel().remoteAddress().toString();
+                final String msg = name + " timed out after " + HEARTBEAT_TIMEOUT_SECONDS
+                    + " seconds without a network response. Closing connection.";
+                System.out.println(msg);
+                broadcast(new MessageEvent(msg));
+                ctx.close();
+                return;
+            }
+            super.userEventTriggered(ctx, evt);
+        }
+
         @Override
         public void channelInactive(final ChannelHandlerContext ctx) throws Exception {
             final RemoteClient client = clients.remove(ctx.channel());

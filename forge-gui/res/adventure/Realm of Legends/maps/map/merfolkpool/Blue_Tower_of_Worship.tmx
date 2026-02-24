@@ -60,7 +60,7 @@
   </object>
   <object id="86" template="../../../../common/maps/obj/enemy.tx" x="197.666" y="87.6667">
    <properties>
-    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Thassa's Ire|JOU&quot;, &quot;Thassa's Devourer|JOU&quot;, &quot;Kenessos, Priest of Thassa|J22&quot;, &quot;traveler's amulet|ths&quot;, &quot;font of fortunes|JOU&quot;
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Thassa's Ire|JOU&quot;, &quot;Thassa's Devourer|JOU&quot;, &quot;Traveler's Amulet|ths&quot;, &quot;Font of Fortunes|JOU&quot;
 ]}</property>
     <property name="enemy" value="Thassa"/>
     <property name="speedModifier" type="float" value="10"/>

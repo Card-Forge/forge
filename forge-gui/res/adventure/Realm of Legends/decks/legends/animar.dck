@@ -1,101 +1,101 @@
 [metadata]
-Name=Animar, Soul of Elements
+Name=Animar
 [Commander]
-1 Animar, Soul of Elements|2X2|[470]
+1 Animar, Soul of Elements|cmd
 [Main]
-1 Arbor Elf|A25|[160]
-1 Arid Mesa|ZEN|[211]
-1 Bane of Progress|C15|[175]
-1 Beast Whisperer|KHC|[54]
-1 Birds of Paradise|RAV|[153]
-1 Rumbleweed|OTC
-1 Bloodstained Mire|ONS|[313]
-1 Bloom Tender|EVE|[66]
-1 Breeding Pool|DIS|[172]
-1 Cankerbloom|ONE|[294]
-1 Cascade Bluffs|NCC|[390]
-1 Cave of Temptation|MH1|[237]
-1 Chord of Calling|RAV|[156]
-1 Cloudkin Seer|M20|[54]
-1 Command Tower|C15|[281]
-1 Court of Garenbrig|WOC|[33]
-1 Dream Stalker|DDM|[7]
-1 Eldritch Evolution|INR|[195]
-1 Elvish Mystic|C14|[191]
-1 Elvish Visionary|M13|[169]
-1 Endurance|MH2|[157]
-1 Fanatic of Rhonas|MH3|[458]
-1 Fauna Shaman|UMA|[164]
-1 Fertilid|DDR|[9]
-1 Fierce Empath|ARC|[55]
-1 Fierce Guardianship|CMM|[489]
-1 Flamekin Harbinger|HOP|[53]
-1 Flare of Denial|MH3|[400]
-1 Flooded Grove|2XM|[318]
-1 Flooded Strand|ONS|[316]
-2 Forest|M21|[313]
-1 Forgotten Ancient|ARC|[57]
-1 Frontier Bivouac|C17|[251]
-1 Fury|MH2|[126]
-1 Fyndhorn Elves|MED|[118]
-1 Gilded Goose|ELD|[369]
-1 Glasspool Mimic|ZNR|[60]
-1 Hardened Scales|J21|[582]
-1 Heroic Intervention|M21|[375]
-1 Hydroid Krasis|2X2|[506]
-1 Imperial Recruiter|ME2|[130]
-1 Ingot Chewer|LRW|[180]
-2 Island|M21|[310]
-1 Kalonian Hydra|CM2|[140]
-1 Karplusan Forest|DKM|[39]
-1 Ketria Triome|IKO|[250]
-1 Llanowar Elves|BTD|[58]
-1 Maelstrom Wanderer|CM1|[11]
-1 Man-o'-War|VIS|[37]
-1 Mana Confluence|EXP|[42]
-1 Misty Rainforest|ZEN|[220]
-2 Mountain|M21|[312]
-1 Mulldrifter|MM2|[51]
-1 Neoform|WAR|[206]
-1 Nulldrifter|MH3|[13]
-1 Peregrine Drake|BBD|[128]
-1 Phantasmal Image|MM3|[46]
-1 Phyrexian Metamorph|NPH|[42]
-1 Polluted Delta|ONS|[321]
-1 Pyrogoyf|M3C|[111]
-1 Reflecting Pool|SHM|[278]
-1 Risen Reef|M20|[217]
-1 Scalding Tarn|ZEN|[223]
-1 Scythecat Cub|J25|[24]
-1 Shivan Reef|C20|[310]
-1 Shrieking Drake|VIS|[43]
-1 Sire of Seven Deaths++|FDN|[362]
-1 Skullclamp|CMA|[230]
-1 Slip Out the Back|SNC|[62]
-1 Snakeskin Veil|J21|[639]
-1 Sol Ring|CC1|[7]
-1 Sower of Temptation|BBD|[131]
-1 Steam Vents|GPT|[164]
-1 Stomping Ground|GPT|[165]
-1 Stump Stomp|MH3|[259]
-1 Sulfur Falls|ISD|[248]
-1 Guardian Project|RNA
-1 Taiga|2ED|[283]
-1 Tamiyo's Safekeeping|NEO|[211]
-1 Tangled Florahedron|ZNR|[211]
-1 The Ozolith|IKO|[362]
-1 Tishana, Voice of Thunder|LCC|[291]
-1 Titania, Protector of Argoth|C14|[50]
-1 Tropical Island|2ED|[284]
-1 Ulamog, the Infinite Gyre|ROE
-1 Unified Will|ROE|[92]
-1 Utopia Sprawl|WOC|[135]
-1 Verdant Catacombs|ZEN|[229]
-1 Vizier of the Menagerie|AKH|[192]
-1 Volcanic Island|2ED|[287]
-1 Wasteland|TMP|[330]
-1 Willowrush Verge|DFT|[270]
-1 Windswept Heath|ONS|[328]
-1 Wood Elves|EXO|[130]
-1 Wooded Foothills|KTK
-1 Yavimaya Coast|C20|[322]
+1 Alchemist's Refuge|avr
+1 Wandering Archaic|stx
+1 Archetype of Imagination|dsc
+1 Ruric Thar, the Unbowed|dgm
+1 Zendikar Resurgent|c17
+1 Guardian Project|rna
+1 Surrak and Goreclaw|mom
+1 Phyrexian Metamorph|nph
+1 Artisan of Kozilek|m3c
+1 Ashaya, Soul of the Wild|znr
+1 Beast Whisperer|tsr
+1 Beast Within|nph
+1 Benevolent Hydra|j22
+1 Birds of Paradise|blc
+1 Blasphemous Act|tdc
+1 Bloom Tender|2x2
+1 Branching Evolution|mh3
+1 Breeding Pool|eoe
+1 Canopy Gargantuan|tdc
+1 Chandra's Ignition|ori
+1 Chaos Warp|2x2
+1 City of Brass|2x2
+1 Command Tower|cmm
+1 Commercial District|mkm
+1 Consecrated Sphinx|mbs
+1 Counterspell|ice
+1 Craterhoof Behemoth|inr
+1 Deflecting Swat|cmm
+1 Dreamroot Cascade|inr
+1 Elvish Mystic|cmm
+1 Etali, Primal Conqueror|mom
+1 Eternal Witness|2x2
+1 Exotic Orchard|fic
+1 Fabled Passage|blb
+1 Fanatic of Rhonas|mh3
+1 Fierce Empath|cmm
+1 Fierce Guardianship|c20
+3 Forest|inr
+1 Forgotten Ancient|blc
+1 Garruk's Uprising|m3c
+1 Gwenna, Eyes of Gaea|bro
+1 Hardened Scales|2x2
+1 Hedge Maze|mkm
+1 Heroic Intervention|m21
+1 High Fae Trickster|fdn
+1 Hinterland Harbor|dmr
+1 Hullbreaker Horror|inr
+1 Hydroid Krasis|2x2
+2 Island|inr
+1 Kami of Whispered Hopes|mom
+1 Karplusan Forest|tdc
+1 Ketria Triome|iko
+1 Lightning Greaves|m3c
+1 Llanowar Elves|fdn
+1 Maelstrom Wanderer|cmr
+1 Mistrise Village|tdm
+1 Misty Rainforest|zen
+1 Mountain|inr
+1 Nature's Lore|dmr
+1 Ornithopter of Paradise|mh2
+1 Outcaster Trailblazer|otj
+1 Overwhelming Stampede|c14
+1 Ozolith, the Shattered Spire|mom
+1 Peregrine Drake|dmr
+1 Primordial Sage|jmp
+1 Rattleclaw Mystic|ktk
+1 Reclamation Sage|2xm
+1 Reflecting Pool|cns
+1 Rhythm of the Wild|rna
+1 Rockfall Vale|tdc
+1 Taiga|vma
+1 Tropical Island|vma
+1 Volcanic Island|vma
+1 Rogue's Passage|pw24
+1 Rootbound Crag|tdc
+1 Scalding Tarn|zen
+1 Sol Ring|cmd
+1 Soul of the Harvest|cma
+1 Spellskite|2xm
+1 Steam Vents|ecl
+1 Stomping Ground|gtc
+1 Surrak Dragonclaw|ktk
+1 Swiftfoot Boots|scd
+1 Temur Ascendancy|tdc
+1 The Great Henge|eld
+1 The Ozolith|iko
+1 Thornspire Verge|dsk
+1 Thundermane Dragon|tdc
+1 Tyrant Guard|40k
+1 Vaultborn Tyrant|big
+1 Vizier of the Menagerie|fdn
+1 Vorinclex, Voice of Hunger|mul
+1 Willowrush Verge|dft
+1 Wood Elves|ncc
+1 Wooded Foothills|mh3
+1 Yavimaya Coast|blc

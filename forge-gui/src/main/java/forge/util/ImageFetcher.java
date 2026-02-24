@@ -19,6 +19,7 @@ public abstract class ImageFetcher {
     // https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
     private static final HashMap<String, String> langCodeMap = new HashMap<>();
     protected static final boolean disableHostedDownload = true;
+    protected static Date scryfallCooldownTime = null;
     private static final HashSet<String> fetching = new HashSet<>();
 
     static {
@@ -197,10 +198,6 @@ public abstract class ImageFetcher {
             }
             if (useArtCrop) {
                 filename = TextUtil.fastReplace(filename, ".full", ".artcrop");
-            }
-            if (ImageKeys.missingCards.contains(filename)) {
-                // This shouldn't be constantly getting hit, but it seems like it is?
-                return;
             }
 
             boolean updateLink = false;

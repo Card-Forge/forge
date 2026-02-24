@@ -1541,7 +1541,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "colorless_castle",
-		"map": "../common/maps/map/emrakul/emrakul_legacy.tmx",
+		"map": "../common/maps/map/emrakul/emrakul.tmx",
 		"radiusFactor": 0.4,
 		"questTags": [
 			"Castle",
@@ -2099,7 +2099,7 @@
 	{
 		"name": "Garruk Forest",
 		"displayName": "Garruk's Forest",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "Garruk",
@@ -2232,7 +2232,7 @@
 	{
 		"name": "Grolnoks Bog",
 		"displayName": "Grolnok's Bog",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "Grolnok",
@@ -2359,7 +2359,7 @@
 	{
 		"name": "Grove7",
 		"displayName": "The Lake of the Hydra",
-		"type": "cave",
+		"type": "sidebosshard",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Grove",
@@ -2511,7 +2511,7 @@
 	{
 		"name": "Jacehold",
 		"displayName": "Jace's Holdout",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Jace",
@@ -2541,7 +2541,7 @@
 	{
 		"name": "Kiora Island",
 		"displayName": "Kiora's Island",
-		"type": "dungeon",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "Kiora",
@@ -3679,7 +3679,7 @@
 	{
 		"name": "Slimefoots Lair",
 		"displayName": "Slimefoot's Lair",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "Slimefoot",
@@ -3695,7 +3695,7 @@
 	{
 		"name": "Slime Cave",
 		"displayName": "Slime Hive",
-		"type": "dungeon",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "SlimeCave",
@@ -3710,7 +3710,7 @@
 	{
 		"name": "Scarecrow Farm",
 		"displayName": "Scarecrow Farm",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "farm",
@@ -3725,7 +3725,7 @@
 	{
 		"name": "Slobads Factory",
 		"displayName": "Slobad's Factory",
-		"type": "dungeon",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Slobad",
@@ -3741,7 +3741,7 @@
 	{
 		"name": "Skep",
 		"displayName": "Skep",
-		"type": "cave",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "Skep",
@@ -3888,7 +3888,7 @@
 	{
 		"name": "Teferi Hideout",
 		"displayName": "Teferi's Hideout",
-		"type": "dungeon",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Jace",
@@ -3960,7 +3960,7 @@
 	{
 		"name": "Tibalts Fortress",
 		"displayName": "Tibalt's Fortress",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "Tibalt",
@@ -3975,7 +3975,7 @@
 	{
 		"name": "UnhallowedAbbey",
 		"displayName": "Unhallowed Abbey",
-		"type": "dungeon",
+		"type": "sidebosshard",
 		"count": 1,
 		"spriteAtlas": "maps/tileset/buildings.atlas",
 		"sprite": "Monastery",
@@ -4039,8 +4039,8 @@
 	{
 		"name": "VampireCastle3",
 		"displayName": "Vampire Dungeon",
-		"type": "dungeon",
-		"count": 2,
+		"type": "sidebosshard",
+		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "VampireCastle",
 		"map": "../common/maps/map/vampirecastle/vampirecastle_4.tmx",
@@ -4143,7 +4143,7 @@
 	{
 		"name": "Xiras Hive",
 		"displayName": "Xira's Hive",
-		"type": "dungeon",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "Xira",
@@ -4172,7 +4172,7 @@
 	{
 		"name": "Zedruu City",
 		"displayName": "Zedruu City",
-		"type": "cave",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "Zedruu",

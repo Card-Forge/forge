@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Haunted Fengraf&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Grave Peril&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -48,7 +48,7 @@
   </object>
   <object id="56" template="../../../../common/maps/obj/enemy.tx" x="200.5" y="70.5">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Walking Corpse|ISD&quot;, &quot;Graf Harvest|EMN&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Graf Reaver&quot;, &quot;Graf Harvest|EMN&quot;]}"/>
     <property name="enemy" value="Wilhelt"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
@@ -82,7 +82,7 @@
   <object id="70" template="../../../../common/maps/obj/manashards.tx" x="320.167" y="371.667"/>
   <object id="71" template="../../../../common/maps/obj/enemy.tx" x="322.75" y="92.4167" visible="1">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Gisa's Favorite Shovel|SLX&quot;, &quot;Hobbling Zombie|MID&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Haunted Fengraf&quot;, &quot;Hobbling Zombie|MID&quot;]}"/>
     <property name="enemy" value="Gisa"/>
     <property name="speedModifier" type="float" value="0"/>
     <property name="threatRange" type="float" value="0"/>
@@ -90,7 +90,7 @@
   </object>
   <object id="72" template="../../../../common/maps/obj/enemy.tx" x="97" y="113.5" visible="1">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Geralf's Messenger|DKA&quot;, &quot;Seagraf Skaab|SOI&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Stitchwing Skaab&quot;, &quot;Haunted Fengraf&quot;]}"/>
     <property name="enemy" value="Geralf"/>
     <property name="speedModifier" type="float" value="0"/>
     <property name="threatRange" type="float" value="0"/>

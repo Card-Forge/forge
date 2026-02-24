@@ -437,6 +437,19 @@ public class Match {
         }
     }
 
+    public GameOutcome.AnteResult getAnteResult(RegisteredPlayer player) {
+        GameOutcome.AnteResult out = new GameOutcome.AnteResult();
+        for (GameOutcome outcome : gameOutcomes.values()) {
+            GameOutcome.AnteResult gameAnte = outcome.getAnteResult(player);
+            if (gameAnte == null) {
+                continue;
+            }
+            out.addWon(gameAnte.wonCards);
+            out.addLost(gameAnte.lostCards);
+        }
+        return out;
+    }
+
     /**
      * Fire only the events after they became real for gamestate and won't get replaced.<br>
      * The events are sent to UI, log and sound system. Network listeners are under development.

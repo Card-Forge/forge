@@ -1,0 +1,9 @@
+Name:Brilliance Unleashed
+ManaCost:4 U R
+Types:Sorcery
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBDamage,DBReturn1
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target creature.
+SVar:DBReturn1:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Artifact.YouOwn | ValidTgtsDesc$ artifact card in your graveyard | ConditionDefined$ Targeted | ConditionPresent$ Artifact.Creature | SubAbility$ DBReturn2 | SpellDescription$ Choose target artifact card in your graveyard. Return it to the battlefield if it's an artifact creature card. Otherwise, return it to the battlefield and it's a 3/3 Robot artifact creature with flying.
+SVar:DBReturn2:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ Targeted | StaticEffect$ Animate
+SVar:Animate:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Artifact,Creature,Robot | SetPower$ 3 | SetToughness$ 3 | AddKeyword$ Flying
+Oracle:Choose one or both —\n• Brilliance Unleashed deals 5 damage to target creature.\n• Choose target artifact card in your graveyard. Return it to the battlefield if it's an artifact creature card. Otherwise, return it to the battlefield and it's a 3/3 Robot artifact creature with flying.

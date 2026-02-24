@@ -3675,6 +3675,16 @@ public class AbilityUtils {
             return doXMath(creatTypes.size(), CardFactoryUtil.extractOperators(def), source, ctb);
         }
 
+        //Per request for custom cards.
+        if (def.startsWith("LandType")) {
+            final Set<String> landTypes = Sets.newHashSet();
+            for (Card card : paidList) {
+                landTypes.addAll(card.getType().getLandTypes());
+            }
+
+            return doXMath(landTypes.size(), CardFactoryUtil.extractOperators(def), source, ctb);
+        }
+
         Function<IntStream, Integer> func;
         String finalDef;
         if (def.startsWith("Least")) {

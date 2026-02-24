@@ -5,7 +5,7 @@ Difficulty=medium
 Description=Mono Green Ramp deck with Elves synergy, Gigantosaurus, and Impervious Greatwurm.
 Deck Type=constructed
 Icon=Amalia Sheran Sharm.jpg
-[main]
+[Main]
 2 Aggressive Mammoth|M19
 1 Arboretum Elemental|GRN
 4 Beast Whisperer|GRN
@@ -26,4 +26,4 @@ Icon=Amalia Sheran Sharm.jpg
 3 Steel Leaf Champion|DOM
 2 Vivien of the Arkbow|M19
 2 Vivien Reid|M19
-[sideboard]
+[Sideboard]

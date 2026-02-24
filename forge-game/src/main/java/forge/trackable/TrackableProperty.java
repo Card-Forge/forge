@@ -186,7 +186,7 @@ public enum TrackableProperty {
     NonAbilityText(TrackableTypes.StringType),
     FoilIndex(TrackableTypes.IntegerType),
 
-    CantHaveKeyword(TrackableTypes.StringListType),
+    CantHaveKeyword(TrackableTypes.StringSetType),
 
     //Player
     IsAI(TrackableTypes.BooleanType),
@@ -294,7 +294,6 @@ public enum TrackableProperty {
     StormCount(TrackableTypes.IntegerType),
     GameOver(TrackableTypes.BooleanType),
     PoisonCountersToLose(TrackableTypes.IntegerType),
-    NeedsPhaseRedrawn(TrackableTypes.BooleanType),
     PlayerTurn(TrackableTypes.PlayerViewType, FreezeMode.IgnoresFreeze),
     Phase(TrackableTypes.EnumType(PhaseType.class), FreezeMode.IgnoresFreeze),
     Dependencies(TrackableTypes.StringType);

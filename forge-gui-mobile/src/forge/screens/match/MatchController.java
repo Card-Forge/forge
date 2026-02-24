@@ -256,15 +256,11 @@ public class MatchController extends AbstractGuiGame {
                 final VPhaseIndicator.PhaseLabel phaseLabel = view.getPlayerPanel(lastPlayer).getPhaseIndicator().getLabel(ph);
                 if (phaseLabel != null)
                     phaseLabel.setActive(true);
-                if (GuiBase.isNetworkplay(this))
-                    getGameView().updateNeedsPhaseRedrawn(lastPlayer, PhaseType.CLEANUP);
             } else if (getGameView().getPlayerTurn() != null) {
                 //set phaselabel
                 final VPhaseIndicator.PhaseLabel phaseLabel = view.getPlayerPanel(getGameView().getPlayerTurn()).getPhaseIndicator().getLabel(ph);
                 if (phaseLabel != null)
                     phaseLabel.setActive(true);
-                if (GuiBase.isNetworkplay(this))
-                    getGameView().updateNeedsPhaseRedrawn(getGameView().getPlayerTurn(), ph);
             }
         }
 
@@ -522,10 +518,10 @@ public class MatchController extends AbstractGuiGame {
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
                 if ( p.getCards(ZoneType.Battlefield) != null ) {
-                    updateCards(p.getCards(ZoneType.Battlefield));
+                    updateCards(isNetGame() ? p.getCards(ZoneType.Battlefield).threadSafeIterable() : p.getCards(ZoneType.Battlefield));
                 }
                 if ( p.getCards(ZoneType.Hand) != null ) {
-                    updateCards(p.getCards(ZoneType.Hand));
+                    updateCards(isNetGame() ? p.getCards(ZoneType.Hand).threadSafeIterable() : p.getCards(ZoneType.Hand));
                 }
             }
         });
@@ -538,10 +534,10 @@ public class MatchController extends AbstractGuiGame {
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
                 if ( p.getCards(ZoneType.Battlefield) != null ) {
-                    updateCards(p.getCards(ZoneType.Battlefield));
+                    updateCards(isNetGame() ? p.getCards(ZoneType.Battlefield).threadSafeIterable() : p.getCards(ZoneType.Battlefield));
                 }
                 if ( p.getCards(ZoneType.Hand) != null ) {
-                    updateCards(p.getCards(ZoneType.Hand));
+                    updateCards(isNetGame() ? p.getCards(ZoneType.Hand).threadSafeIterable() : p.getCards(ZoneType.Hand));
                 }
             }
         });

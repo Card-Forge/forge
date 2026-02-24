@@ -1,0 +1,10 @@
+Name:Uneasy Alliance
+ManaCost:1 W
+Types:Enchantment Aura
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
+S:Mode$ CantAttack,CantBlock | ValidCard$ Creature.EnchantedBy | Description$ Enchanted creature can't attack or block.
+A:AB$ ChangeZone | Cost$ 5 Sac<1/CARDNAME> | Defined$ Enchanted | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBToken | SorcerySpeed$ True | SpellDescription$ Exile enchanted creature. You create a 1/1 black Ninja creature token. Activate only as a sorcery.
+SVar:DBToken:DB$ Token | TokenScript$ b_1_1_ninja
+SVar:NonStackingAttachEffect:True
+Oracle:Enchant creature\nEnchanted creature can't attack or block.\n{5}, Sacrifice this Aura: Exile enchanted creature. You create a 1/1 black Ninja creature token. Activate only as a sorcery.
