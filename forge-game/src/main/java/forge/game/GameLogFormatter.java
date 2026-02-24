@@ -12,6 +12,7 @@ import forge.game.card.CounterEnumType;
 import forge.game.event.*;
 import forge.game.event.GameEventCardDamaged.DamageType;
 import forge.game.player.PlayerView;
+import forge.game.zone.ZoneType;
 import forge.util.*;
 
 public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
@@ -66,7 +67,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     @Override
     public GameLogEntry visit(GameEventSpellResolved ev) {
         String messageForLog = ev.hasFizzled() ? localizer.getMessage("lblLogCardAbilityFizzles", ev.spell().getHostCard().getName()) : ev.stackDescription();
-        return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, messageForLog);
+        return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, messageForLog, ev.spell().getHostCard());
     }
 
     @Override
@@ -88,7 +89,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
             messageForLog = localizer.getMessage("lblLogPlayerActionObject", player, action, object);
         }
 
-        return new GameLogEntry(GameLogEntryType.STACK_ADD, messageForLog);
+        return new GameLogEntry(GameLogEntryType.STACK_ADD, messageForLog, event.sa().getHostCard());
     }
 
     @Override
@@ -150,7 +151,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
             additionalLog = localizer.getMessage("lblRemovingNLoyaltyCounter", String.valueOf(event.amount()));
         }
         String message = localizer.getMessage("lblSourceDealsNDamageToDest", event.source().toString(), String.valueOf(event.amount()), additionalLog.isEmpty() ? "" : " (" + additionalLog + ")", event.card().toString());
-        return new GameLogEntry(GameLogEntryType.DAMAGE, message);
+        return new GameLogEntry(GameLogEntryType.DAMAGE, message, event.source());
     }
 
     /* (non-Javadoc)
@@ -159,7 +160,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     @Override
     public GameLogEntry visit(GameEventLandPlayed ev) {
         String message = localizer.getMessage("lblLogPlayerPlayedLand", ev.player().toString(), ev.land().toString());
-        return new GameLogEntry(GameLogEntryType.LAND, message);
+        return new GameLogEntry(GameLogEntryType.LAND, message, ev.land());
     }
 
     @Override
@@ -174,7 +175,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         String damageType = ev.combat() ? localizer.getMessage("lblCombat") : localizer.getMessage("lblNonCombat");
         String message = localizer.getMessage("lblLogSourceDealsNDamageOfTypeToDest", ev.source().toString(),
                             String.valueOf(ev.amount()), damageType, ev.target().toString(), extra);
-        return new GameLogEntry(GameLogEntryType.DAMAGE, message);
+        return new GameLogEntry(GameLogEntryType.DAMAGE, message, ev.source());
     }
 
     @Override
@@ -272,7 +273,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventCardPlotted ev) {
-        return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, ev.toString());
+        return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, ev.toString(), ev.card());
     }
 
     @Override
@@ -281,8 +282,25 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     }
 
     @Override
+    public GameLogEntry visit(GameEventCardChangeZone ev) {
+        if (ev.from() == null || ev.to() == null) {
+            return null;
+        }
+        // Only log Battlefield → Graveyard/Exile to avoid duplicating entries
+        // already covered by other events (land played, spell cast, discard, etc.)
+        final ZoneType from = ev.from().zoneType();
+        final ZoneType to = ev.to().zoneType();
+        if (from != ZoneType.Battlefield || (to != ZoneType.Graveyard && to != ZoneType.Exile)) {
+            return null;
+        }
+        final String cardName = ev.card() != null ? ev.card().toString() : "a card";
+        final String message = localizer.getMessage("lblLogZoneChange", cardName, to.toString(), from.toString());
+        return new GameLogEntry(GameLogEntryType.ZONE_CHANGE, message, ev.card());
+    }
+
+    @Override
     public GameLogEntry visit(GameEventAddLog ev) {
-        return new GameLogEntry(ev.type(), ev.message());
+        return new GameLogEntry(ev.type(), ev.message(), ev.sourceCard());
     }
 
     @Subscribe

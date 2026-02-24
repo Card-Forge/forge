@@ -16,7 +16,7 @@ public enum GameLogEntryType {
     COMBAT("Combat"),
     INFORMATION("Information"),
     STACK_RESOLVE("Resolve Stack"),
-    STACK_ADD("Add to Stack"),
+    STACK_ADD("Add To Stack"),
     EFFECT_REPLACED("Replacement Effect"),
     MANA("Mana"),
     PHASE("Phase");
