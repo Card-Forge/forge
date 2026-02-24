@@ -779,11 +779,10 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CardCollectionView tuckCardsViaMulligan(final Player mulliganingPlayer, int cardsToReturn) {
+    public CardCollectionView tuckCardsViaMulligan(CardCollectionView hand, int cardsToReturn) {
         // TODO This is better than it was before, but still suboptimal (but fast).
         // Maybe score a bunch of hands based on projected hand size and return the "duds"
-        CardCollection hand = new CardCollection(player.getCardsIn(ZoneType.Hand));
-        int numLandsDesired = (mulliganingPlayer.getStartingHandSize() - cardsToReturn) / 2;
+        int numLandsDesired = (player.getStartingHandSize() - cardsToReturn) / 2;
 
         CardCollection toReturn = new CardCollection();
         for (int i = 0; i < cardsToReturn; i++) {

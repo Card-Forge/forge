@@ -326,9 +326,8 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public CardCollectionView tuckCardsViaMulligan(final Player mulliganingPlayer, int cardsToReturn) {
-        CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
-        return hand;
+    public CardCollectionView tuckCardsViaMulligan(CardCollectionView hand, int cardsToReturn) {
+        return new CardCollection(Iterables.limit(hand, cardsToReturn));
     }
 
     @Override
