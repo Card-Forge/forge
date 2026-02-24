@@ -524,7 +524,7 @@ Replace=0.08 fromSheet("TMT rooftop lands")+
 1 Raphael, Ninja Destroyer|TMT|[303]
 1 Michelangelo, Improviser|TMT|[304]
 
-[surge rooftap lands]
+[surge rooftop lands]
 1 Plains|TMT|[305]
 1 Island|TMT|[306]
 1 Swamp|TMT|[307]
