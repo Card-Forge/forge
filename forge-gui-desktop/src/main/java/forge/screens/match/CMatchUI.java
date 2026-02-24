@@ -814,7 +814,9 @@ public final class CMatchUI
     @Override
     public void finishGame() {
         FloatingZone.closeAll(); //ensure floating card areas cleared and closed after the game
-        writeMatchPreferences();
+        if (isNetGame()) {
+            writeMatchPreferences();
+        }
         final GameView gameView = getGameView();
         if (hasLocalPlayers() || gameView.isMatchOver()) {
             new ViewWinLose(gameView, this).show();
