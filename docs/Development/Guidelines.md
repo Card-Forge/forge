@@ -29,9 +29,8 @@ For architecture reference (GUI hierarchy, layer responsibilities, network infra
 
 ## Code Style
 
-- **Check hotkey conflicts:** When assigning keyboard shortcuts, search for `VK_F[key]` and `getKeyStroke` in the codebase to ensure no conflicts with hardcoded menu accelerators (e.g., F1=Help, F11=Fullscreen).
-- **Wrap parseInt/parseLong in try-catch:** System property parsing should handle `NumberFormatException` gracefully with fallback to defaults.
 - **Add @Override annotations:** When implementing interface methods, always add `@Override` annotation.
+- **Wrap parseInt/parseLong in try-catch:** System property parsing should handle `NumberFormatException` gracefully with fallback to defaults.
 - **Meaningful toString():** Classes used in logging/debugging should override `toString()` rather than inheriting from Object.
 - **Intuitive naming:** Names of files, classes, and methods should communicate purpose without needing to read the implementation. Prefer `hasNetGame()` over `checkNet()`, `cancelAwaitNextInput()` over `resetTimer()`, `NetGuiGame` over `NetGG`. Names should describe *what* they answer or do, not *how* — a reader skimming a call site or class hierarchy should understand the intent immediately.
 - **`this` in anonymous classes/lambdas:** Inside anonymous inner classes (e.g., `TimerTask`, `Runnable`) and lambdas nested within them, `this` refers to the anonymous class, not the enclosing class. Use `EnclosingClass.this` (e.g., `AbstractGuiGame.this`) when passing the outer instance.
@@ -40,6 +39,7 @@ For architecture reference (GUI hierarchy, layer responsibilities, network infra
 - **View-type overloads should delegate, not duplicate:** When both an engine-type overload (e.g., `updateZone(Player, ZoneType)`) and a view-type overload (e.g., `updateZone(PlayerView, ZoneType)`) exist, the engine-type one must delegate to the view-type one — not duplicate its logic. The view-type overload is the canonical implementation; the engine-type one is a convenience wrapper that converts and forwards.
 - **Localize user-facing strings:** Use `Localizer.getInstance().getMessage()` for all user-facing text. Add new keys to `forge-gui/res/languages/en-US.properties`. Never hardcode English strings in Java code that will be displayed to the user.
 - **Null-guard changed contracts:** When tightening a condition, trace downstream callers that assumed non-null.
+- **Check hotkey conflicts:** When assigning keyboard shortcuts, search for `VK_F[key]` and `getKeyStroke` in the codebase to ensure no conflicts with hardcoded menu accelerators (e.g., F1=Help, F11=Fullscreen), and check default shortcut preferences in `ForgePreferences` for collisions.
 
 ## Architecture
 
@@ -50,12 +50,7 @@ For architecture reference (GUI hierarchy, layer responsibilities, network infra
 - **Fix bugs at the closest layer:** Errors and bug fixes should be solved in the closest layer that is effective. For example, a network serialization issue should be fixed in the network layer, not by adding guards in the game engine. A card rules bug belongs in forge-game, not worked around in forge-gui. Fixing at the source keeps the codebase clean and avoids defensive code proliferating through unrelated layers.
 - **Check platform counterparts:** When fixing a bug in `CMatchUI` (desktop), check `MatchController` (mobile) for the same issue, and vice versa.
 - **Platform-neutral code for platform-neutral features:** If a feature is intended to work across platforms (desktop and mobile), implement the *state and logic* in shared code (e.g., `AbstractGuiGame`, `forge-gui`) rather than in platform-specific classes. Display that uses platform-specific APIs (Swing components, libgdx widgets) belongs in platform subclasses (`CMatchUI`, `MatchController`). However, simple text messages and lightweight UI logic that is identical across platforms may live in `AbstractGuiGame` to avoid duplication — prefer one implementation in the base class over two identical copies in subclasses. **Code smell:** If you find yourself writing the same algorithm with the same state fields in both `CMatchUI` and `MatchController`, that's a strong signal it belongs in `AbstractGuiGame` instead.
-- **Check for mobile GUI:** Desktop-only features must check `GuiBase.getInterface().isLibgdxPort()` and return early/disable for mobile. Users switching between desktop and mobile share preferences.
-- **Isolate network code:** Network-specific functionality should be in dedicated classes (`NetGuiGame`, `NetGameController`) rather than added to core classes like `AbstractGuiGame`. Keep core game classes free of network dependencies so they remain usable in non-network contexts.
-- **Use `GuiBase.isNetworkplay(game)` for network detection:** There is only one signature — `isNetworkplay(IGuiGame game)`. When a game reference is available, pass it; the method delegates to `game.isNetGame()` for a per-instance answer. When no game is available, pass `null`; the method falls back to `IGuiBase.hasNetGame()` which iterates registered game instances. **Important:** `isNetGame()` must return `true` for *all* game instances in a network match — both the server-side proxy (`NetGuiGame`) and the host's local GUI (`CMatchUI`/`MatchController`). The host's local GUI gets its flag set via `FServerManager.getGui()` calling `setNetGame()`. If adding a new code path gated on `isNetGame()`, test it from the host's perspective, not just the remote client's.
-
-## Domain-Specific (MTG Rules)
-
+- **Check for mobile GUI:** Desktop-only features in platform-neutral code (e.g., `PlayerControllerHuman`, event handlers) should check `GuiBase.getInterface().isLibgdxPort()` and return early for mobile. However, in `AbstractGuiGame` and its subclasses, prefer subclass overrides over runtime platform checks — see [Architecture Red Flags](Architecture.md#red-flags--signs-youre-in-the-wrong-layer).
 - **Zone transitions involve two players, not one:** When a card changes zones, the "from" zone and "to" zone may belong to different players (e.g., a stolen creature dying moves from the controller's battlefield to the owner's graveyard). Don't assume the card's owner or current controller is the correct player for both zones — use each zone's actual player reference.
 - **Reuse `TrackableProperty` constants across view types:** Each `TrackableObject` instance has its own property map, so different view classes (e.g., `SpellAbilityView` and `StackItemView`) can share the same `TrackableProperty` enum constant when the semantics and type match. Don't create prefixed duplicates (e.g., `SA_Foo`) when an unprefixed constant (`Foo`) already exists with the same `TrackableType`. The enum name is just a key — it doesn't imply ownership by a particular view class.
 
@@ -63,6 +58,7 @@ For architecture reference (GUI hierarchy, layer responsibilities, network infra
 
 ### Design
 
+- **Isolate network code:** Network-specific functionality should be in dedicated classes (`NetGuiGame`, `NetGameController`) rather than added to core classes like `AbstractGuiGame`. Keep core game classes free of network dependencies so they remain usable in non-network contexts.
 - **Account for client-server asymmetry:** A network match has three execution contexts, not two: (1) the **host's local GUI** (`CMatchUI`) — sees full game state but displays locally; (2) the **server-side proxy** (`NetGuiGame`) — serializes `IGuiGame` calls over the wire to the remote client; (3) the **remote client** (`CMatchUI` receiving protocol calls) — has only a proxy view of game state. When branching on network status, verify the behavior is correct in all three contexts. The host's local GUI is the most commonly forgotten — it participates in the match alongside `NetGuiGame` but is a separate `IGuiGame` instance.
 - **Design from the client's perspective first** — the client is the constrained side. Ask: "What does the client need to know, and how will it receive that information?" If a feature requires data the client doesn't have, the server must explicitly provide it (via protocol messages or lobby initialization). Don't assume that because something is reachable on the server, it's also reachable on the client.
 - **Use stable identifiers for player lookup:** Slot indices or GUI type, not `Player.getName()` (names get deduplicated).
@@ -74,16 +70,12 @@ For architecture reference (GUI hierarchy, layer responsibilities, network infra
 - **Preserve message ordering:** Follow the same message order as `HostedMatch.startGame()`. Out-of-order messages cause silent failures.
 - **Serialization compatibility:** Changes to objects serialized over the network (anything in `TrackableProperty`, lobby messages) must maintain backwards compatibility or include version-aware migration logic.
 - **Thread safety:** Network callbacks execute on Netty threads, not the game thread. Access to shared state (e.g., `gameControllers`, `gameView`, tracker collections) from network callbacks must be synchronized or delegated to the game thread via `FThreads.invokeInEdtAndWait()` or equivalent.
-
-### Verification
-
+- **Use `GuiBase.isNetworkplay(game)` for network detection:** There is only one signature — `isNetworkplay(IGuiGame game)`. When a game reference is available, pass it; the method delegates to `game.isNetGame()` for a per-instance answer. When no game is available, pass `null`; the method falls back to `IGuiBase.hasNetGame()` which iterates registered game instances. **Important:** `isNetGame()` must return `true` for *all* game instances in a network match — both the server-side proxy (`NetGuiGame`) and the host's local GUI (`CMatchUI`/`MatchController`). The host's local GUI gets its flag set via `FServerManager.getGui()` calling `setNetGame()`. If adding a new code path gated on `isNetGame()`, test it from the host's perspective, not just the remote client's.
 - **Test serialization of new objects:** When adding or modifying objects that may be transmitted over the network (game state, card data, player info), verify they are serializable. Netty will throw `NotSerializableException` at runtime for non-serializable objects — these are easy to miss in local testing but break network play immediately. Run at least one network game after changing data model classes.
 
 ## Testing
 
 - **Only write tests that catch real problems:** No wiring tests. Tests should catch integration issues, regressions, or non-obvious edge cases.
 - **Headless CI compatibility:** Test classes must not depend on GUI components (`FOptionPane`, `JOptionPane`, etc.) that fail in headless CI environments. Use headless alternatives or skip GUI-dependent tests in CI.
-- **Multi-process test isolation:** Tests spawning subprocesses must handle classpath/JAR discovery robustly across different environments (local dev vs CI).
-- **Gate slow tests:** Stress and integration tests (batch tests, multiplayer tests) should be gated so they are skipped during CI's default `mvn clean test`. Only run them explicitly for local validation.
+- **Gate slow tests:** Stress and integration tests should be gated so they are skipped during CI's default `mvn clean test`. Only run them explicitly for local validation.
 - **Always-run tests:** Unit tests (deck loader, game result, configuration parsing) must NOT be gated — they should always pass in CI without extra flags.
-- **Manual network testing shares preferences:** When testing network play locally, both host and client instances read the same preferences file, so they have identical player names. The game engine then deduplicates these names (e.g. "2nd Player"), which breaks any code matching `Player.getName()` against the original login username. Use slot index or GUI type, not names — see [Use stable identifiers for player lookup](#design).

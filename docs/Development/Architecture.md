@@ -21,6 +21,8 @@ For code review guidelines (general principles, code style, network patterns, te
 
 ## GUI Architecture
 
+This section covers the **in-match GUI** — the classes responsible for displaying and controlling an active game. It does not cover the full application UI (menus, lobby screens, deck editors, etc.).
+
 ### Inheritance Hierarchy
 
 ```
@@ -65,10 +67,12 @@ Swing component management, and screen coordination belong. Implements `ICDoc`
 `CCombat`, `CDependencies`, `CDetailPicture`, `CDev`, `CDock`, `CLog`, `CPrompt`,
 `CStack`).
 
-##### `MatchController` — Mobile Match Screen (forge-gui-mobile)
-The libgdx-based mobile implementation. Extends `AbstractGuiGame`. Uses the singleton pattern
-(`MatchController.instance`). Mobile-specific display and interaction logic belongs
-here.
+##### `MatchController` — LibGDX Match Screen (forge-gui-mobile)
+The libgdx-based implementation. Extends `AbstractGuiGame`. Uses the singleton pattern
+(`MatchController.instance`). Despite the module name, this is not just a mobile port — it
+is a fully featured LibGDX implementation that also runs on desktop (via `forge-gui-mobile-dev`)
+and aims for feature parity with the Swing UI. It is also the exclusive home of Adventure Mode
+and Planar Conquest. LibGDX-specific display and interaction logic belongs here.
 
 ##### `V*` Views (forge-gui-desktop: `forge.screens.match.views`)
 Pure Swing UI components (`VField`, `VHand`, `VPrompt`, `VStack`, etc.). Each panel

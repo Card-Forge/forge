@@ -66,7 +66,9 @@ For GUI hierarchy, layer responsibilities, and network infrastructure, see [docs
 
 ## Using AI Coding Agents
 
-See [AGENTS.md](AGENTS.md) for AI-assisted development configuration. It contains project context, build commands, and cross-references to the guidelines and architecture docs. It is designed to work with any AI coding tool (Claude Code, Cursor, Windsurf, Copilot, Codex, etc.).
+See [AGENTS.md](AGENTS.md) for AI-assisted development configuration. It contains project context, build commands, and cross-references to the guidelines and architecture docs. It is designed to work with any AI coding tool (Claude Code, Cursor, Windsurf, Copilot, Codex, etc.). 
+
+Substantial contributions made with the assistance of AI must be disclosed. Include the AI tool as a co-author on commits and/or expressly note AI involvement in the PR description.
 
 ## General Notes
 
