@@ -3315,11 +3315,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public boolean confirmMulliganScry(Player p) {
-        return InputConfirm.confirm(this, (SpellAbility) null, localizer.getMessage("lblDoYouWanttoScry"));
-    }
-
-    @Override
     public int chooseNumberForKeywordCost(SpellAbility sa, Cost cost, KeywordInterface keyword, String prompt, int max) {
         if (max <= 0) {
             return 0;

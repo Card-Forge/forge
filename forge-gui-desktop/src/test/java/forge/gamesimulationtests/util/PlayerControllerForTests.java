@@ -787,12 +787,6 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public boolean confirmMulliganScry(Player p) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
     public int chooseNumberForKeywordCost(SpellAbility sa, Cost cost, KeywordInterface keyword, String prompt, int max) {
         // TODO Auto-generated method stub
         return 0;

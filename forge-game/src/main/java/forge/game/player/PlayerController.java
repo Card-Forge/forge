@@ -248,7 +248,6 @@ public abstract class PlayerController {
 
     public abstract boolean mulliganKeepHand(Player player, int cardsToReturn);
     public abstract CardCollectionView tuckCardsViaMulligan(CardCollectionView hand, int cardsToReturn);
-    public abstract boolean confirmMulliganScry(final Player p);
 
     public abstract List<SpellAbility> chooseSpellAbilityToPlay();
     public abstract boolean playChosenSpellAbility(SpellAbility sa);

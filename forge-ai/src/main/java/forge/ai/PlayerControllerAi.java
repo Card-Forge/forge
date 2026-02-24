@@ -1574,12 +1574,6 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public boolean confirmMulliganScry(Player p) {
-        // Always true?
-        return true;
-    }
-
-    @Override
     public int chooseNumberForKeywordCost(SpellAbility sa, Cost cost, KeywordInterface keyword, String prompt, int max) {
         // TODO: improve the logic depending on the keyword and the playability of the cost-modified SA (enough targets present etc.)
         if (keyword.getKeyword() == Keyword.CASUALTY
