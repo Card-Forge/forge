@@ -5,6 +5,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -27,8 +28,11 @@ import forge.CachedCardImage;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.gui.MouseUtil;
+import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
+import forge.toolbox.special.CardZoomer;
+import forge.view.arcane.CardInfoPopup;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinFont;
@@ -47,6 +51,7 @@ public class GameLogPanel extends JPanel {
     private JLayer<FScrollPane> layer;
     private boolean isScrollBarVisible = false;
     private Consumer<CardView> onCardHover;
+    private CardInfoPopup cardInfoPopup;
 
     public GameLogPanel() {
         setMyLayout();
@@ -60,6 +65,10 @@ public class GameLogPanel extends JPanel {
     }
 
     public void reset() {
+        if (cardInfoPopup != null) {
+            cardInfoPopup.dispose();
+            cardInfoPopup = null;
+        }
         scrollablePanel.removeAll();
         scrollablePanel.validate();
     }
@@ -189,6 +198,48 @@ public class GameLogPanel extends JPanel {
         return tar;
     }
 
+    private void showCardInfoPopupForEntry(final LogEntryTextArea entry) {
+        if (CardZoomer.SINGLETON_INSTANCE.isZoomerOpen()) {
+            return;
+        }
+        final Object cardProp = entry.getClientProperty(CARD_VIEW_KEY);
+        if (!(cardProp instanceof CardView) || ((CardView) cardProp).isFaceDown()) {
+            return;
+        }
+        final java.awt.Window ownerWindow = SwingUtilities.getWindowAncestor(this);
+        if (ownerWindow == null || !ownerWindow.isActive()) {
+            return;
+        }
+        final ForgePreferences prefs = FModel.getPreferences();
+        final boolean showKeywords = prefs.getPrefBoolean(FPref.UI_POPUP_KEYWORD_INFO);
+        final boolean showRelated = prefs.getPrefBoolean(FPref.UI_POPUP_RELATED_CARDS);
+        final boolean showCardImage = prefs.getPrefBoolean(FPref.UI_POPUP_CARD_IMAGE);
+        if (!showKeywords && !showRelated && !showCardImage) {
+            return;
+        }
+        if (cardInfoPopup == null) {
+            cardInfoPopup = new CardInfoPopup(ownerWindow);
+        }
+        try {
+            final Point entryLoc = entry.getLocationOnScreen();
+            final Point imageLoc = new Point(
+                    entryLoc.x + LogEntryTextArea.PADDING,
+                    entryLoc.y + LogEntryTextArea.PADDING);
+            final Dimension imageSize = new Dimension(
+                    LogEntryTextArea.CARD_WIDTH, LogEntryTextArea.CARD_HEIGHT);
+            cardInfoPopup.showForCard((CardView) cardProp, imageLoc, imageSize,
+                    showKeywords, showRelated, showCardImage);
+        } catch (final java.awt.IllegalComponentStateException ignored) {
+            // Component not yet showing on screen
+        }
+    }
+
+    private void hideCardInfoPopup() {
+        if (cardInfoPopup != null) {
+            cardInfoPopup.hidePopup();
+        }
+    }
+
     /** A log entry with an inline miniature card image, following VStack's StackInstanceTextArea pattern. */
     private final class LogEntryTextArea extends SkinnedTextArea {
         private static final int PADDING = 3;
@@ -298,10 +349,15 @@ public class GameLogPanel extends JPanel {
                             onCardHover.accept((CardView) cardProp);
                         }
                     }
+                    // Show hover tooltip for log entries with inline card images
+                    if (e.getSource() instanceof LogEntryTextArea) {
+                        showCardInfoPopupForEntry((LogEntryTextArea) e.getSource());
+                    }
                 }
                 break;
             case MouseEvent.MOUSE_EXITED:
                 MouseUtil.resetCursor();
+                hideCardInfoPopup();
                 break;
             case MouseEvent.MOUSE_RELEASED:
                 if (e.getButton() == 1 && isHoveringOverLogEntry) {
