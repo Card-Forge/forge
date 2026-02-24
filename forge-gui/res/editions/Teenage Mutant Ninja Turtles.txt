@@ -3,6 +3,75 @@ Code=TMT
 Date=2026-03-06
 Name=Teenage Mutant Ninja Turtles
 Type=Expansion
+DoublePick=WhenPodSizeIs4
+RecommendedPodSize=4
+BoosterSlots=Common,Common-SourceMaterial,Uncommon,Turtle,RareMythic,Land,Wildcard,WildcardFoil
+Booster=6 Common, 1 Common-SourceMaterial, 2 Uncommon, 1 Turtle, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 Land
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=30
+
+[Common]
+Base=Common:fromSheet("TMT cards")
+
+[Common-SourceMaterial]
+Base=Common:fromSheet("TMT cards")
+Replace=.0416F fromSheet("PZA cards")
+Replace=.0416F Common:fromSheet("TMT scene cards")
+
+[Uncommon]
+Base=Uncommon:fromSheet("TMT cards")
+Replace=.039F Uncommon:fromSheet("TMT scene cards")
+Replace=.078F Uncommon:fromSheet("TMT sewer cards")
+
+[Turtle]
+Base=Common:fromSheet("TMT legendary turtles")
+Replace=.131 Uncommon:fromSheet("TMT legendary turtles")
+Replace=.069 Rare:fromSheet("TMT legendary turtles")
+Replace=.034 Mythic:fromSheet("TMT legendary turtles")
+Replace=.046 Common:fromSheet("TMT legendary scene turtles")
+Replace=.065 Uncommon:fromSheet("TMT legendary scene turtles")
+Replace=.01 Rare:fromSheet("TMT legendary scene turtles")
+Replace=.0004 Mythic:fromSheet("TMT legendary silhouette turtles")
+
+[RareMythic]
+Base=Rare:fromSheet("TMT cards")
+Replace=.092F Mythic:fromSheet("TMT cards")
+Replace=.01F Rare:fromSheet("TMT scene cards")
+Replace=.0416F Uncommon:fromSheet("TMT sewer cards")
+Replace=.0004 Mythic:fromSheet("TMT silhouette cards")
+
+[Wildcard]
+Base=Uncommon:fromSheet("TMT cards")
+Replace=0.249F Common:fromSheet("TMT cards")
+Replace=0.076F Rare:fromSheet("TMT cards")
+Replace=0.0029F Mythic:fromSheet("TMT cards")
+Replace=0.008F Common:fromSheet("TMT scene cards")
+Replace=0.013F Uncommon:fromSheet("TMT scene cards")
+Replace=0.008F Rare:fromSheet("TMT scene cards")
+Replace=0.001F Mythic:fromSheet("TMT scene cards")
+Replace=0.026F Uncommon:fromSheet("TMT sewer cards")
+Replace=0.008F Rare:fromSheet("TMT sewer cards")
+Replace=0.001F Mythic:fromSheet("TMT sewer cards")
+Replace=.0004 Mythic:fromSheet("TMT silhouette cards")
+
+[WildcardFoil]
+Base=Common:fromSheet("TMT cards")
+Replace=0.277F Uncommon:fromSheet("TMT cards")
+Replace=0.067F Rare:fromSheet("TMT cards")
+Replace=0.008F Mythic:fromSheet("TMT cards")
+Replace=0.001F Common:fromSheet("TMT scene cards")
+Replace=0.001F Uncommon:fromSheet("TMT scene cards")
+Replace=0.001F Rare:fromSheet("TMT scene cards")
+Replace=0.005F Uncommon:fromSheet("TMT sewer cards")
+Replace=0.001F Rare:fromSheet("TMT sewer cards")
+Replace=0.001F Mythic:fromSheet("TMT sewer cards")
+Replace=0.0004F Mythic:fromSheet("TMT silhouette cards")
+
+[Land]
+Base=BasicLand:fromSheet("TMT cards")
+Replace=0.12 BasicLand:fromSheet("TMT cards")+
+Replace=0.32 fromSheet("TMT rooftop lands")
+Replace=0.08 fromSheet("TMT rooftop lands")+
 
 [cards]
 1 C Action News Crew @Gabriel Tanko
@@ -195,6 +264,8 @@ Type=Expansion
 188 R Northampton Farm @Marina Ortega Lorente
 189 L TCRI Building @Aenami
 190 U Turtle Lair @Marina Ortega Lorente
+
+[printsheets]
 191 L Plains @BEMOCS
 192 L Island @BEMOCS
 193 L Swamp @BEMOCS
@@ -262,6 +333,27 @@ Type=Expansion
 255 L Swamp @Gaboleps
 256 L Mountain @Gaboleps
 257 L Forest @Gaboleps
+301 M Leonardo, Sewer Samurai @Kevin Eastman
+302 M Donatello, Mutant Mechanic @Kevin Eastman
+303 M Raphael, Ninja Destroyer @Kevin Eastman
+304 M Michelangelo, Improviser @Kevin Eastman
+305 L Plains @BEMOCS
+306 L Island @BEMOCS
+307 L Swamp @BEMOCS
+308 L Mountain @BEMOCS
+309 L Forest @BEMOCS
+310 L Plains @Gaboleps
+311 L Island @Gaboleps
+312 L Swamp @Gaboleps
+313 L Mountain @Gaboleps
+314 L Forest @Gaboleps
+315 L Plains @Sylvain Sarrailh
+316 L Island @Sylvain Sarrailh
+317 L Swamp @Sylvain Sarrailh
+318 L Mountain @Sylvain Sarrailh
+319 L Forest @Sylvain Sarrailh
+
+[extended art]
 258 R Agent Bishop, Man in Black @Adrián Rodríguez Pérez
 259 R Prehistoric Pet @Jakob Eirich
 260 R Turncoat Kunoichi @Manuel Castañón
@@ -285,6 +377,8 @@ Type=Expansion
 278 R Turtle Van @Jakob Eirich
 279 R Weather Maker @Florent Lebrun
 280 R Northampton Farm @Marina Ortega Lorente
+
+[showcase]
 281 M Leonardo, Cutting Edge @A4Mitsuori
 282 M April O'Neil, Hacktivist @Ryo Kamei
 283 M Donatello, Gadget Master @Kotakan
@@ -305,25 +399,8 @@ Type=Expansion
 298 M Michelangelo, Weirdness to 11 @O-G Osahune
 299 M Dark Leo & Shredder @Yukke Morita
 300 M Krang, Utrom Warlord @Taka-F
-301 M Leonardo, Sewer Samurai @Kevin Eastman
-302 M Donatello, Mutant Mechanic @Kevin Eastman
-303 M Raphael, Ninja Destroyer @Kevin Eastman
-304 M Michelangelo, Improviser @Kevin Eastman
-305 L Plains @BEMOCS
-306 L Island @BEMOCS
-307 L Swamp @BEMOCS
-308 L Mountain @BEMOCS
-309 L Forest @BEMOCS
-310 L Plains @Gaboleps
-311 L Island @Gaboleps
-312 L Swamp @Gaboleps
-313 L Mountain @Gaboleps
-314 L Forest @Gaboleps
-315 L Plains @Sylvain Sarrailh
-316 L Island @Sylvain Sarrailh
-317 L Swamp @Sylvain Sarrailh
-318 L Mountain @Sylvain Sarrailh
-319 L Forest @Sylvain Sarrailh
+
+[promos]
 320 R Shark Shredder, Killer Clone @Adam Volker
 
 [tokens]
@@ -339,3 +416,167 @@ Type=Expansion
 
 [other]
 1 copy @Jo Cordisco
+
+[rooftop lands]
+1 Plains|TMT|[191]
+1 Island|TMT|[192]
+1 Swamp|TMT|[193]
+1 Mountain|TMT|[194]
+1 Forest|TMT|[195]
+
+[scene cards]
+1 Leonardo, Leader in Blue|TMT|[196]
+1 Donatello, Way with Machines|TMT|[197]
+1 Michelangelo, Mutant BFF|TMT|[198]
+1 Raphael, Most Attitude|TMT|[199]
+1 Mikey & Leo, Chaos & Order|TMT|[200]
+1 Krang & Shredder|TMT|[201]
+1 Renet, Temporal Apprentice|TMT|[202]
+1 Jennika, Bad Apple Big Sister|TMT|[203]
+1 Bebop & Rocksteady|TMT|[204]
+1 Don & Raph, Hard Science|TMT|[205]
+1 April, Reporter of the Weird|TMT|[206]
+1 Casey Jones, Jury-Rig Justiciar|TMT|[207]
+1 Slash, Reptile Rampager|TMT|[208]
+1 Foot Ninjas|TMT|[209]
+1 Shredder, Unrelenting|TMT|[210]
+1 Leonardo, Cutting Edge|TMT|[211]
+1 Donatello, Gadget Master|TMT|[212]
+1 Raphael, the Nightwatcher|TMT|[213]
+1 Michelangelo, Weirdness to 11|TMT|[214]
+
+[silhouette cards]
+1 Leonardo, Sewer|TMT|[215]
+1 Donatello, Mutant Mechanic|TMT|[216]
+1 Super Shredder|TMT|[217]
+1 Raphael, Ninja Destroyer|TMT|[218]
+1 Michelangelo, Improviser|TMT|[219]
+1 Dark Leo & Shredder|TMT|[220]
+1 Krang, Utrom Warlord|TMT|[221]
+1 Technodrome|TMT|[222]
+
+[sewer cards]
+1 The Last Ronin's Technique|TMT|[223]
+1 Leonardo's Technique|TMT|[224]
+1 Sally Pride, Lioness Leader|TMT|[225]
+1 Triceraton Commander|TMT|[226]
+1 April O'Neil, Hacktivist|TMT|[227]
+1 Donatello's Technique|TMT|[228]
+1 Kitsune's Technique|TMT|[229]
+1 Krang, Master Mind|TMT|[230]
+1 Mondo Gecko|TMT|[231]
+1 Shredder's Technique|TMT|[232]
+1 Splinter's Technique|TMT|[233]
+1 Broadcast Takeover|TMT|[234]
+1 Casey Jones, Vigilante|TMT|[235]
+1 Jennika's Technique|TMT|[236]
+1 Raphael's Technique|TMT|[237]
+1 Groundchuck & Dirtbag|TMT|[238]
+1 Michelangelo's Technique|TMT|[239]
+1 New Generation's Technique|TMT|[240]
+1 Bebop & Rocksteady|TMT|[241]
+1 Don & Leo, Problem Solvers|TMT|[242]
+1 Don & Raph, Hard Science|TMT|[243]
+1 Karai's Technique|TMT|[244]
+1 Krang & Shredder|TMT|[245]
+1 Mikey & Don, Party Planners|TMT|[246]
+1 Mikey & Leo, Chaos & Order|TMT|[247]
+1 North Wind Avatar|TMT|[248]
+1 Raph & Leo, Sibling Rivals|TMT|[249]
+1 Raph & Mikey, Troublemakers|TMT|[250]
+1 Splinter, Radical Rat|TMT|[251]
+1 Tokka & Rahzar, Terrible Twos|TMT|[252]
+
+[pizza lands]
+1 Plains|TMT|[253]
+1 Island|TMT|[254]
+1 Swamp|TMT|[255]
+1 Mountain|TMT|[256]
+1 Forest|TMT|[257]
+
+[showcase cards]
+1 Leonardo, Cutting Edge|TMT|[281]
+1 April O'Neil, Hacktivist|TMT|[282]
+1 Donatello, Gadget Master|TMT|[283]
+1 Turtles in Time|TMT|[284]
+1 Super Shredder|TMT|[285]
+1 Casey Jones, Vigilante|TMT|[286]
+1 Raphael, the Nightwatcher|TMT|[287]
+1 Michelangelo, Weirdness to 11|TMT|[288]
+1 Dark Leo & Shredder|TMT|[289]
+1 Krang, Utrom Warlord|TMT|[290]
+
+[showcase fracture cards]
+1 Leonardo, Cutting Edge|TMT|[291]
+1 April O'Neil, Hacktivist|TMT|[292]
+1 Donatello, Gadget Master|TMT|[293]
+1 Turtles in Time|TMT|[294]
+1 Super Shredder|TMT|[295]
+1 Casey Jones, Vigilante|TMT|[296]
+1 Raphael, the Nightwatcher|TMT|[297]
+1 Michelangelo, Weirdness to 11|TMT|[298]
+1 Dark Leo & Shredder|TMT|[299]
+1 Krang, Utrom Warlord|TMT|[300]
+
+[headliner cards]
+1 Leonardo, Sewer Samurai|TMT|[301]
+1 Donatello, Mutant Mechanic|TMT|[302]
+1 Raphael, Ninja Destroyer|TMT|[303]
+1 Michelangelo, Improviser|TMT|[304]
+
+[surge rooftap lands]
+1 Plains|TMT|[305]
+1 Island|TMT|[306]
+1 Swamp|TMT|[307]
+1 Mountain|TMT|[308]
+1 Forest|TMT|[309]
+
+[surge pizza lands]
+1 Plains|TMT|[310]
+1 Island|TMT|[311]
+1 Swamp|TMT|[312]
+1 Mountain|TMT|[313]
+1 Forest|TMT|[314]
+
+[default lands]
+1 Plains|TMT|[315]
+1 Island|TMT|[316]
+1 Swamp|TMT|[317]
+1 Mountain|TMT|[318]
+1 Forest|TMT|[319]
+
+[legendary turtles]
+1 Jennika, Bad Apple Big Sister|TMT|[10]
+1 Leonardo, Big Brother|TMT|[14]
+1 Leonardo, Cutting Edge|TMT|[15]
+1 Leonardo, Leader in Blue|TMT|[16]
+1 Leonardo, Sewer Samurai|TMT|[17]
+1 Donatello, Gadget Master|TMT|[35]
+1 Donatello, Mutant Mechanic|TMT|[36]
+1 Donatello, Turtle Techie|TMT|[37]
+1 Donatello, Way with Machines|TMT|[38]
+1 Raphael, Most Attitude|TMT|[101]
+1 Raphael, Ninja Destroyer|TMT|[102]
+1 Raphael, the Nightwatcher|TMT|[103]
+1 Raphael, Tough Turtle|TMT|[104]
+1 Michelangelo, Game Master|TMT|[118]
+1 Michelangelo, Improviser|TMT|[119]
+1 Michelangelo, Mutant BFF|TMT|[120]
+1 Michelangelo, Weirdness to 11|TMT|[121]
+
+[legendary scene turtles]
+1 Leonardo, Leader in Blue|TMT|[196]
+1 Donatello, Way with Machines|TMT|[197]
+1 Michelangelo, Mutant BFF|TMT|[198]
+1 Raphael, Most Attitude|TMT|[199]
+1 Jennika, Bad Apple Big Sister|TMT|[203]
+1 Leonardo, Cutting Edge|TMT|[211]
+1 Donatello, Gadget Master|TMT|[212]
+1 Raphael, the Nightwatcher|TMT|[213]
+1 Michelangelo, Weirdness to 11|TMT|[214]
+
+[legendary silhouette turtles]
+1 Leondaro, Sewer Samurai|TMT|[215]
+1 Donatello, Mutant Mechanic|TMT|[216]
+1 Raphael, Ninja Destroyer|TMT|[218]
+1 Michelangelo, Improviser|TMT|[219]
