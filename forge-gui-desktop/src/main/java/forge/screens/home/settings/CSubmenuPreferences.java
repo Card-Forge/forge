@@ -203,6 +203,9 @@ public enum CSubmenuPreferences implements ICDoc {
 
         view.getBtnTokenPreviewer().setCommand((UiCommand) CSubmenuPreferences.this::openTokenPreviewer);
 
+        view.getBtnCardOverlaySettings().setCommand((UiCommand) () ->
+                forge.screens.match.menus.CardOverlaySettingsDialog.show(null));
+
         view.getBtnContentDirectoryUI().setCommand((UiCommand) CSubmenuPreferences.this::openContentDirectory);
         view.getCbCheckSnapshot().addItemListener(e -> {
             Singletons.getView().getNavigationBar().setUpdaterVisibility();

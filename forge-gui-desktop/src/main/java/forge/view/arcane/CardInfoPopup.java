@@ -1012,6 +1012,15 @@ public class CardInfoPopup {
                 sb.append(e.getKey().getName()).append('=').append(e.getValue()).append(';');
             }
         }
+        // Append hover overlay pref state
+        final ForgePreferences prefs = FModel.getPreferences();
+        sb.append(',');
+        sb.append(prefs.getPrefBoolean(FPref.UI_HOVER_OVERLAY_CARD_NAME) ? '1' : '0');
+        sb.append(prefs.getPrefBoolean(FPref.UI_HOVER_OVERLAY_CARD_POWER) ? '1' : '0');
+        sb.append(prefs.getPrefBoolean(FPref.UI_HOVER_OVERLAY_CARD_MANA_COST) ? '1' : '0');
+        sb.append(prefs.getPrefBoolean(FPref.UI_HOVER_OVERLAY_CARD_PERPETUAL_MANA_COST) ? '1' : '0');
+        sb.append(prefs.getPrefBoolean(FPref.UI_HOVER_OVERLAY_CARD_ID) ? '1' : '0');
+        sb.append(prefs.getPrefBoolean(FPref.UI_HOVER_OVERLAY_ABILITY_ICONS) ? '1' : '0');
         return sb.toString();
     }
 
@@ -1024,9 +1033,6 @@ public class CardInfoPopup {
     static BufferedImage paintOverlaysOnImage(final BufferedImage src,
                                                final CardView cardView) {
         final ForgePreferences prefs = FModel.getPreferences();
-        if (!prefs.getPrefBoolean(FPref.UI_SHOW_CARD_OVERLAYS)) {
-            return src;
-        }
         final CardStateView state = cardView.getCurrentState();
         if (state == null) {
             return src;
@@ -1050,7 +1056,7 @@ public class CardInfoPopup {
         final Color outlineColor = Color.BLACK;
 
         // --- Card name ---
-        if (prefs.getPrefBoolean(FPref.UI_OVERLAY_CARD_NAME)) {
+        if (prefs.getPrefBoolean(FPref.UI_HOVER_OVERLAY_CARD_NAME)) {
             final String name = CardTranslation.getTranslatedName(
                     state.getName());
             if (name != null && !name.isEmpty()) {
@@ -1062,7 +1068,7 @@ public class CardInfoPopup {
         }
 
         // --- P/T, loyalty, vehicle ---
-        if (prefs.getPrefBoolean(FPref.UI_OVERLAY_CARD_POWER)) {
+        if (prefs.getPrefBoolean(FPref.UI_HOVER_OVERLAY_CARD_POWER)) {
             String pt = "";
             if (state.isCreature() && state.isPlaneswalker()) {
                 pt = state.getPower() + "/" + state.getToughness()
@@ -1098,7 +1104,7 @@ public class CardInfoPopup {
         }
 
         // --- Card ID ---
-        if (prefs.getPrefBoolean(FPref.UI_OVERLAY_CARD_ID)) {
+        if (prefs.getPrefBoolean(FPref.UI_HOVER_OVERLAY_CARD_ID)) {
             final String id = state.getDisplayId();
             if (id != null && !id.isEmpty()) {
                 final Font idFont = baseFont.deriveFont(Font.PLAIN,
@@ -1111,9 +1117,9 @@ public class CardInfoPopup {
         }
 
         // --- Mana cost ---
-        if (prefs.getPrefBoolean(FPref.UI_OVERLAY_CARD_MANA_COST)) {
+        if (prefs.getPrefBoolean(FPref.UI_HOVER_OVERLAY_CARD_MANA_COST)) {
             final boolean perpetual = prefs.getPrefBoolean(
-                    FPref.UI_OVERLAY_CARD_PERPETUAL_MANA_COST);
+                    FPref.UI_HOVER_OVERLAY_CARD_PERPETUAL_MANA_COST);
             final ManaCost cost = perpetual
                     ? state.getManaCost() : state.getOriginalManaCost();
             if (cost != null && !cost.isNoCost()) {
@@ -1126,7 +1132,7 @@ public class CardInfoPopup {
         }
 
         // --- Ability icons (battlefield only) ---
-        if (prefs.getPrefBoolean(FPref.UI_OVERLAY_ABILITY_ICONS)
+        if (prefs.getPrefBoolean(FPref.UI_HOVER_OVERLAY_ABILITY_ICONS)
                 && ZoneType.Battlefield.equals(cardView.getZone())) {
             final int abiScale = w / 7;
             final int abiX = w / 2 + w / 3;

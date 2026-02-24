@@ -2,7 +2,6 @@ package forge.gui.card;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -56,7 +55,8 @@ public final class KeywordInfoUtil {
     public static List<KeywordData> buildKeywords(final String keywordKey,
                                                    final Set<String> addedNames) {
         final String[] tokens = keywordKey.split(",");
-        final Set<Keyword> seen = new LinkedHashSet<>();
+        final java.util.Map<Keyword, Integer> seenIdx = new java.util.LinkedHashMap<>();
+        final java.util.Map<Integer, String> rawTitles = new java.util.HashMap<>();
         final List<KeywordData> result = new ArrayList<>();
 
         for (final String token : tokens) {
@@ -69,8 +69,36 @@ public final class KeywordInfoUtil {
                 if (kw == Keyword.UNDEFINED || kw == Keyword.ENCHANT) {
                     continue;
                 }
-                if (!seen.add(kw)) {
-                    continue; // deduplicate
+                if (seenIdx.containsKey(kw)) {
+                    // Merge parameterised duplicates (e.g. multiple Protections)
+                    final String title = inst.getTitle();
+                    final String prefix = kw.toString() + " ";
+                    if (title.startsWith(prefix)) {
+                        final int idx = seenIdx.get(kw);
+                        final String rawTitle = rawTitles.get(idx);
+                        final String extra = title.substring(
+                                kw.toString().length() + 1); // "from Dragon"
+                        final String combined = rawTitle + " and " + extra;
+                        rawTitles.put(idx, combined);
+                        // Merge reminder text: append new "by X" subject
+                        String mergedReminder = result.get(idx).reminderText;
+                        try {
+                            final String newReminder = inst.getReminderText();
+                            final int byIdx = newReminder.lastIndexOf(" by ");
+                            final int existByIdx = mergedReminder.lastIndexOf(".");
+                            if (byIdx >= 0 && existByIdx >= 0) {
+                                final String newSubject = newReminder.substring(
+                                        byIdx + 4).replaceAll("\\.$", "");
+                                mergedReminder = mergedReminder.substring(
+                                        0, existByIdx) + " or " + newSubject + ".";
+                            }
+                        } catch (Exception ex) { /* keep existing */ }
+                        result.set(idx, new KeywordData(
+                                colorNamesToSymbols(combined),
+                                mergedReminder,
+                                result.get(idx).typeParam));
+                    }
+                    continue;
                 }
                 String reminderText;
                 try {
@@ -78,14 +106,17 @@ public final class KeywordInfoUtil {
                 } catch (Exception ex) {
                     reminderText = "";
                 }
-                final String name = colorNamesToSymbols(inst.getTitle());
+                final String title = inst.getTitle();
+                seenIdx.put(kw, result.size());
+                rawTitles.put(result.size(), title);
                 String typeParam = null;
                 if (kw == Keyword.AFFINITY
                         && inst instanceof KeywordWithTypeInterface) {
                     typeParam = ((KeywordWithTypeInterface) inst)
                             .getValidType();
                 }
-                result.add(new KeywordData(name, reminderText, typeParam));
+                result.add(new KeywordData(
+                        colorNamesToSymbols(title), reminderText, typeParam));
                 addedNames.add(kw.toString().toLowerCase());
             } catch (Exception e) {
                 // Skip malformed keyword tokens
@@ -167,15 +198,10 @@ public final class KeywordInfoUtil {
                 if (pos < lowerText.length()
                         && lowerText.charAt(pos) == ' ') {
                     pos++;
-                    final boolean isDigit = Character.isDigit(lowerText.charAt(pos));
                     final String resolved = parseNumber(lowerText, pos);
                     if (resolved != null) {
                         reminder = reminder.replace("N", resolved);
-                        // Only add number to heading when the card text uses a digit
-                        // (e.g. "scry 2") — spelled-out numbers ("mill three") stay generic
-                        if (isDigit) {
-                            displayName = displayName + " " + resolved;
-                        }
+                        displayName = displayName + " " + resolved;
                         if ("1".equals(resolved)) {
                             reminder = reminder.replace("counters", "counter");
                         }

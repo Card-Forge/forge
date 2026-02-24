@@ -109,6 +109,12 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_POPUP_CARD_IMAGE("false"),
         UI_POPUP_IMAGE_SIZE("280"),  // thumbnail height in pixels (100–500)
         UI_POPUP_CARD_OVERLAYS("false"),
+        UI_HOVER_OVERLAY_CARD_NAME("true"),
+        UI_HOVER_OVERLAY_CARD_POWER("true"),
+        UI_HOVER_OVERLAY_CARD_MANA_COST("true"),
+        UI_HOVER_OVERLAY_CARD_PERPETUAL_MANA_COST("true"),
+        UI_HOVER_OVERLAY_CARD_ID("true"),
+        UI_HOVER_OVERLAY_ABILITY_ICONS("true"),
         UI_ZOOM_KEYWORD_INFO("false"),
         UI_ZOOM_RELATED_CARDS("false"),
         UI_UPLOAD_DRAFT ("false"),

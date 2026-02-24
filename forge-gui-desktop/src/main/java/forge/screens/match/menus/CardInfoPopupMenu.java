@@ -38,12 +38,20 @@ public final class CardInfoPopupMenu {
         menu.add(createSectionHeader(localizer.getMessage("lblHoverTooltip")));
         menu.add(getCheckboxItem(localizer.getMessage("lblCardImage"),
                 FPref.UI_POPUP_CARD_IMAGE));
-        menu.add(getCheckboxItem(localizer.getMessage("lblIncludeCardOverlays"),
-                FPref.UI_POPUP_CARD_OVERLAYS));
         menu.add(getCheckboxItem(localizer.getMessage("lblRelatedCards"),
                 FPref.UI_POPUP_RELATED_CARDS));
         menu.add(getCheckboxItem(localizer.getMessage("lblKeywordExplanations"),
                 FPref.UI_POPUP_KEYWORD_INFO));
+
+        menu.add(new JSeparator());
+
+        // --- Hover Tooltip Overlays section ---
+        menu.add(createSectionHeader(localizer.getMessage("lblHoverTooltipOverlays")));
+        menu.add(getCheckboxItem(localizer.getMessage("lblIncludeCardOverlays"),
+                FPref.UI_POPUP_CARD_OVERLAYS));
+        final JMenuItem overlaySettings = new JMenuItem(localizer.getMessage("lblCardOverlaySettings"));
+        overlaySettings.addActionListener(e -> CardOverlaySettingsDialog.show(null));
+        menu.add(overlaySettings);
 
         menu.add(new JSeparator());
 
