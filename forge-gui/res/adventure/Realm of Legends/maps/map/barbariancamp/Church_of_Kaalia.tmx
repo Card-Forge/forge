@@ -55,7 +55,7 @@ With that, she finally collapses, dead.&quot;,
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Tariel, Reckoner of Souls|CMD&quot;, &quot;Nomad Outpost|TDM&quot;, &quot;Lightning Greaves|C19&quot;, &quot;Scroll of griselbrand|AVR&quot;, &quot;Scroll of avacyn|AVR&quot;, &quot;Vial of Dragonfire|DTK&quot; ] }"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Tariel, Reckoner of Souls|CMD&quot;, &quot;Nomad Outpost|TDM&quot;, &quot;Swiftfoot Boots&quot;, &quot;Scroll of griselbrand|AVR&quot;, &quot;Scroll of avacyn|AVR&quot;, &quot;Vial of Dragonfire|DTK&quot; ] }"/>
     <property name="enemy" value="Kaalia"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>

@@ -1,83 +1,83 @@
 [metadata]
 Name=Tatsunari, Toad Rider
 [Commander]
-1 Tatsunari, Toad Rider|neo
+1 Tatsunari, Toad Rider|NEO
 [Main]
-1 Arcane Denial|voc
-1 Azusa's Many Journeys|neo
-1 Birds of Paradise|rvr
-1 Bojuka Bog|onc
-1 Changeling Outcast|mh1
-1 Clifftop Lookout|blb
-1 Coiling Stalker|neo
-1 Command Tower|onc
-1 Cunning Evasion|mh1
-1 seal of strength|nem
-1 Dokuchi Silencer|neo
-1 Dour Port-Mage|blb
-1 Drowned Catacomb|xln
-1 Druids' Repository|avr
-1 Enduring Curiosity|dsk
-1 Exotic Orchard|onc
-1 Fallen Shinobi|ncc
-1 Fang of Shigeki|neo
-1 overgrowth|sth
-1 Fertile Ground|usg
-1 Fetid Pools|akh
+1 Arcane Denial|VOC
+1 Azusa's Many Journeys|NEO
+1 Birds of Paradise|RVR
+1 Bojuka Bog|ONC
+1 Changeling Outcast|MH1
+1 Clifftop Lookout|BLB
+1 Coiling Stalker|NEO
+1 Command Tower|ONC
+1 Cunning Evasion|MH1
+1 Seal of Strength|NEM
+1 Dokuchi Silencer|NEO
+1 Dour Port-Mage|BLB
+1 Drowned Catacomb|XLN
+1 Druids' Repository|AVR
+1 Enduring Curiosity|DSK
+1 Exotic Orchard|ONC
+1 Fallen Shinobi|NCC
+1 Fang of Shigeki|NEO
+1 Overgrowth|STH
+1 Fertile Ground|USG
+1 Fetid Pools|AKH
 6 Forest|NEO|4
-1 Gossip's Talent|blb
-1 Higure, the Still Wind|pca
-1 Hypnotic Siren|jou
-1 Ingenious Infiltrator|mh1
+1 Gossip's Talent|BLB
+1 Higure, the Still Wind|PCA
+1 Hypnotic Siren|JOU
+1 Ingenious Infiltrator|MH1
 9 Island|NEO|4
-1 Kaito, Bane of Nightmares|dsk
-1 Kaito, Cunning Infiltrator|fdn
-1 Kaito, Dancing Shadow|one
-1 Kappa Tech-Wrecker|neo
-1 Lilypad Village|blb
-1 Long River Lurker|blb
-1 Mist-Syndicate Naga|mh1
-1 Mistblade Shinobi|pca
-1 Moon-Circuit Hacker|neo
-1 Moonblade Shinobi|mh1
-1 Nashi, Moon Sage's Scion|neo
-1 Nature's Lore|dmr
-1 Nezumi Prowler|neo
-1 Ninja of the Deep Hours|bok
-1 Orochi Soul-Reaver|otc
-1 Overgrown Tomb|grn
-1 Painful Truths|onc
-1 Poison Dart Frog|lci
-1 Pollywog Prodigy|blc
-1 Pond Prophet|blb
-1 seal of doom|nem
-1 awaken the honored dead|tdm
-1 font of fertility|jou
-1 Prosperous Thief|neo
-1 Rancor|2x2
-1 seal of removal|nem
-1 seal of primordium|pls
-1 Sakashima's Student|pc2
-1 Satoru, the Infiltrator|otj
-1 Shimmering Wings|10e
-1 Silver-Fur Master|neo
-1 Smoke Shroud|mh1
-1 Sol Ring|nec
-1 Spore Frog|mh1
-1 Spring-Leaf Avenger|neo
-1 Sunken Hollow|scd
+1 Kaito, Bane of Nightmares|DSK
+1 Kaito, Cunning Infiltrator|FDN
+1 Kaito, Dancing Shadow|ONE
+1 Kappa Tech-Wrecker|NEO
+1 Lilypad Village|BLB
+1 Long River Lurker|BLB
+1 Mist-Syndicate Naga|MH1
+1 Mistblade Shinobi|PCA
+1 Moon-Circuit Hacker|NEO
+1 Moonblade Shinobi|MH1
+1 Nashi, Moon Sage's Scion|NEO
+1 Nature's Lore|DMR
+1 Nezumi Prowler|NEO
+1 Ninja of the Deep Hours|BOK
+1 Orochi Soul-Reaver|OTC
+1 Overgrown Tomb|GRN
+1 Painful Truths|ONC
+1 Poison Dart Frog|LCI
+1 Pollywog Prodigy|BLC
+1 Pond Prophet|BLB
+1 Seal of Doom|NEM
+1 Awaken the Honored Dead|TDM
+1 Font of Fertility|JOU
+1 Prosperous Thief|NEO
+1 Rancor|2X2
+1 Seal of Removal|NEM
+1 Seal of Primordium|PLC
+1 Sakashima's Student|PC2
+1 Satoru, the Infiltrator|OTJ
+1 Shimmering Wings|10E
+1 Silver-Fur Master|NEO
+1 Smoke Shroud|MH1
+1 Sol Ring|NEC
+1 Spore Frog|MH1
+1 Spring-Leaf Avenger|NEO
+1 Sunken Hollow|SCD
 9 Swamp|NEO|4
-1 arcane signet|nec
-1 pernicious deed|apc
-1 Temple of Mystery|tdc
-1 Thousand-Faced Shadow|neo
-1 Three Tree City|blb
-1 Throatseeker|mh1
-1 animate dead|4ed
-1 Utopia Sprawl|rvr
-1 Waterlogged Grove|mh1
-1 Wear Down|blb
-1 Wild Growth|dmr
-1 Woodland Cemetery|dmr
-1 Yavimaya Coast|dmu
-1 Yuriko, the Tiger's Shadow|c18
+1 Arcane Signet|NEC
+1 Pernicious Deed|APC
+1 Temple of Mystery|TDC
+1 Thousand-Faced Shadow|NEO
+1 Three Tree City|BLB
+1 Throatseeker|MH1
+1 Animate Dead|4ED
+1 Utopia Sprawl|RVR
+1 Waterlogged Grove|MH1
+1 Wear Down|BLB
+1 Wild Growth|DMR
+1 Woodland Cemetery|DMR
+1 Yavimaya Coast|DMU
+1 Yuriko, the Tiger's Shadow|C18

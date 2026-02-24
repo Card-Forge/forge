@@ -44,7 +44,7 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ceremonial Knife|VOW&quot;, &quot;Groom's Finery|VOW&quot;, &quot;Markov Waltzer|VOW&quot;, &quot;Markov Patrician|ISD&quot;, &quot;Glass-Cast Heart|VOC&quot;, &quot;Blood Fountain|VOW&quot;, &quot;Wedding Invitation|VOW&quot;, &quot;welcoming vampire|VOW&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ceremonial Knife|VOW&quot;, &quot;Groom's Finery|VOW&quot;, &quot;Markov Waltzer|VOW&quot;, &quot;Markov Patrician|ISD&quot;, &quot;Glass-Cast Heart|VOC&quot;, &quot;Blood Fountain|VOW&quot;, &quot;Wedding Invitation|VOW&quot;]}"/>
     <property name="enemy" value="Edgar"/>
     <property name="speedModifier" type="float" value="0"/>
     <property name="threatRange" type="int" value="0"/>

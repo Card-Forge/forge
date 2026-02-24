@@ -62,7 +62,7 @@
   <object id="100" template="../../../../common/maps/obj/enemy.tx" x="376.255" y="44.3877">
    <properties>
     <property name="displayNameOverride" value=""/>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Duskmantle, House of Shadow|RAV&quot;, &quot;Dimir Guildmage|RAV&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Duskmantle, House of Shadow|RAV&quot;, &quot;Dimir Doppelganger&quot;]}"/>
     <property name="enemy" value="Lazav"/>
     <property name="hidden" type="bool" value="true"/>
     <property name="speedModifier" type="float" value="0"/>

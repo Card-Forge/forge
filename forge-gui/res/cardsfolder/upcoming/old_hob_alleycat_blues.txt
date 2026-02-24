@@ -1,4 +1,4 @@
-Name:Old Hobbs, Alleycat Blues
+Name:Old Hob, Alleycat Blues
 ManaCost:4 R
 Types:Legendary Creature Cat Mutant Rebel
 PT:4/4

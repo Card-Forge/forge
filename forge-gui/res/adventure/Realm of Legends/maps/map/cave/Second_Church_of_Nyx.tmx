@@ -39,28 +39,28 @@
   </object>
   <object id="58" template="../../../../common/maps/obj/enemy.tx" x="150.126" y="152.347">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Malady&quot;, &quot;Font of Fertility|JOU&quot;, &quot;Font of Return|JOU&quot;, &quot;Pharika's Chosen|JOU&quot;, &quot;Pharika's Spawn|THB&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Font of Fertility|JOU&quot;, &quot;Font of Return|JOU&quot;, &quot;Pharika's Chosen|JOU&quot;, &quot;Pharika's Spawn|THB&quot;]}"/>
     <property name="enemy" value="Pharika"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
   <object id="59" template="../../../../common/maps/obj/enemy.tx" x="265.148" y="152.884">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Mystery&quot;, &quot;Font of Fertility|JOU&quot;, &quot;Font of Fortunes|JOU&quot;, &quot;Dictate of Kruphix|JOU&quot;, &quot;Courser of Kruphix|BNG&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Font of Fertility|JOU&quot;, &quot;Font of Fortunes|JOU&quot;, &quot;Dictate of Kruphix|JOU&quot;, &quot;Prophet of Kruphix&quot;]}"/>
     <property name="enemy" value="Kruphix"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
   <object id="60" template="../../../../common/maps/obj/enemy.tx" x="265.277" y="233.151">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Silence&quot;, &quot;Font of Return|JOU&quot;, &quot;Font of Vigor|JOU&quot;, &quot;Scholar of Atheros|THS&quot;, &quot;Grim Guardian|JOU&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Font of Return|JOU&quot;, &quot;Font of Vigor|JOU&quot;, &quot;Scholar of Atheros|THS&quot;, &quot;Grim Guardian|JOU&quot;]}"/>
     <property name="enemy" value="Athreos"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
   <object id="61" template="../../../../common/maps/obj/enemy.tx" x="149.589" y="231.393">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Epiphany&quot;, &quot;Font of Ire|JOU&quot;, &quot;Font of Fortunes|JOU&quot;, &quot;Stormcaller of Keranos|BNG&quot;, &quot;Storm God's Oracle|MH2&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Font of Ire|JOU&quot;, &quot;Font of Fortunes|JOU&quot;, &quot;Stormcaller of Keranos|BNG&quot;, &quot;Storm God's Oracle|MH2&quot;]}"/>
     <property name="enemy" value="Keranos"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
@@ -68,7 +68,7 @@
   <object id="67" template="../../../../common/maps/obj/manashards.tx" x="107.973" y="135.78"/>
   <object id="71" template="../../../../common/maps/obj/enemy.tx" x="209.462" y="90.7975">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Triumph&quot;, &quot;Favored of Iroas&quot;, &quot;Armory of Iroas|JOU&quot;, &quot;Font of Ire|JOU&quot;, &quot;Font of Vigor|JOU&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Favored of Iroas&quot;, &quot;Priest of Iroas&quot;, &quot;Armory of Iroas|JOU&quot;, &quot;Font of Ire|JOU&quot;, &quot;Font of Vigor|JOU&quot;]}"/>
     <property name="enemy" value="Iroas"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>

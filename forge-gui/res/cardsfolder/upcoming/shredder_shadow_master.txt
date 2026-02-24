@@ -6,7 +6,7 @@ T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Attacked$ P
 SVar:TrigCopy:DB$ RepeatEach | RepeatPlayers$ OppNonTriggeredDefender | RepeatSubAbility$ DBCopy | ChangeZoneTable$ True | SubAbility$ DelTrig
 SVar:DBCopy:DB$ CopyPermanent | Defined$ TriggeredAttackerLKICopy | TokenAttacking$ Remembered | TokenTapped$ True | ImprintTokens$ True | NonLegendary$ True
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | Execute$ TrigSac | RememberObjects$ ImprintedLKI | TriggerDescription$ Sacrifice those tokens at end of combat. | SubAbility$ DBCleanup
-SVar:TrigSac:DB$ SacrificeAll | ValidCards$ DelayTriggerRememberedLKI
+SVar:TrigSac:DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigLoseLifeOpp | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, that player loses half their life, rounded up.
 SVar:TrigLoseLifeOpp:DB$ LoseLife | Defined$ TriggeredTarget | LifeAmount$ X

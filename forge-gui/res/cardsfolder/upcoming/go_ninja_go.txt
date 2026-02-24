@@ -1,5 +1,5 @@
 Name:Go Ninja Go
-ManaCost:4 U R
+ManaCost:R W
 Types:Sorcery
 A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBExile,DBDamage
 SVar:DBExile:DB$ ChangeZone | ValidTgts$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Exile | ValidTgtDesc$ creature you control | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile target creature you control, then return it to the battlefield under its owner's control.

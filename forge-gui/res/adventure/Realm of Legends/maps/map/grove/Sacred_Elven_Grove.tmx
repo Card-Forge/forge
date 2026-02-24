@@ -53,7 +53,7 @@ Shooting you a look of rage, the fiery planeswalker decides to comply, and as qu
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Sword of the Animist|ORI&quot;, &quot;Nissa's Chosen|ZEN&quot;, &quot;Zendikar's Roil|ORI&quot;, &quot;Oran-Rief, the Vastwood|ZEN&quot;, &quot;Jagged-Scar Archers|LRW&quot;, &quot;Bonds of Mortality|OGW&quot;, &quot;Joraga Treespeaker|ROE&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Sword of the Animist|ORI&quot;, &quot;Zendikar's Roil|ORI&quot;, &quot;Oran-Rief, the Vastwood|ZEN&quot;, &quot;Bonds of Mortality|OGW&quot;, &quot;Joraga Treespeaker|ROE&quot;]}"/>
     <property name="enemy" value="Nissa"/>
     <property name="speedModifier" type="float" value="0"/>
     <property name="threatRange" type="int" value="0"/>

@@ -2,7 +2,7 @@ Name:Cursed Wombat
 ManaCost:B G
 Types:Creature Nightmare Wombat
 PT:2/3
-K:Adapt:2:2 B G
+A:AB$ PutCounter | Cost$ 2 B G | Adapt$ 2
 S:Mode$ Continuous | Affected$ Permanent.YouCtrl | AddTrigger$ CountersAdded | Description$ Permanents you control have "Whenever one or more +1/+1 counters are put on this permanent, put an additional +1/+1 counter on it. This ability triggers only once each turn."
 SVar:CountersAdded:Mode$ CounterAddedOnce | CounterType$ P1P1 | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter | ActivationLimit$ 1 | TriggerDescription$ Whenever one or more +1/+1 counters are put on this permanent, put an additional +1/+1 counter on it. This ability triggers only once each turn.
 SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1

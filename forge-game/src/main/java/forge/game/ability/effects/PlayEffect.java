@@ -514,7 +514,7 @@ public class PlayEffect extends SpellAbilityEffect {
             eff.copyChangedTextFrom(hostCard);
         }
 
-        game.getEndOfTurn().addUntil(exileEffectCommand(game, eff));
+        game.getEndOfTurn().addUntil(() -> game.getAction().exileEffect(eff));
 
         tgtSA.addRollbackEffect(eff);
 

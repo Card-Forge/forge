@@ -638,7 +638,7 @@
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Atogatog|ODY&quot;
+        &quot;cardName&quot;: &quot;Atogatog&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
@@ -744,181 +744,181 @@
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Haunted Mire|DMU&quot;
+        &quot;cardName&quot;: &quot;Haunted Mire&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Foul Orchard|M19&quot;
+        &quot;cardName&quot;: &quot;Foul Orchard&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Jungle Hollow|M20&quot;
+        &quot;cardName&quot;: &quot;Jungle Hollow&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Geothermal Bog|DMU&quot;
+        &quot;cardName&quot;: &quot;Geothermal Bog&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Bloodfell Caves|M20&quot;
+        &quot;cardName&quot;: &quot;Bloodfell Caves&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Cinder Barrens|M19&quot;
+        &quot;cardName&quot;: &quot;Cinder Barrens&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Thornwood Falls|M20&quot;
+        &quot;cardName&quot;: &quot;Thornwood Falls&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Tangled Islet|DMU&quot;
+        &quot;cardName&quot;: &quot;Tangled Islet&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Woodland Stream|M19&quot;
+        &quot;cardName&quot;: &quot;Woodland Stream&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Timber Gorge|M19&quot;
+        &quot;cardName&quot;: &quot;Timber Gorge&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Wooded Ridgeline|DMU&quot;
+        &quot;cardName&quot;: &quot;Wooded Ridgeline&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Rugged Highlands|M20&quot;
+        &quot;cardName&quot;: &quot;Rugged Highlands&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Sacred Peaks|DMU&quot;
+        &quot;cardName&quot;: &quot;Sacred Peaks&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Stone Quarry|M19&quot;
+        &quot;cardName&quot;: &quot;Stone Quarry&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Wind-Scarred Crag|M20&quot;
+        &quot;cardName&quot;: &quot;Wind-Scarred Crag&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Contaminated Aquifer|DMU&quot;
+        &quot;cardName&quot;: &quot;Contaminated Aquifer&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Dismal Backwater|M20&quot;
+        &quot;cardName&quot;: &quot;Dismal Backwater&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Submerged Boneyard|M19&quot;
+        &quot;cardName&quot;: &quot;Submerged Boneyard&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Highland Lake|M19&quot;
+        &quot;cardName&quot;: &quot;Highland Lake&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Swiftwater Cliffs|M20&quot;
+        &quot;cardName&quot;: &quot;Swiftwater Cliffs&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Molten Tributary|DMU&quot;
+        &quot;cardName&quot;: &quot;Molten Tributary&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Idyllic Beachfront|DMU&quot;
+        &quot;cardName&quot;: &quot;Idyllic Beachfront&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Meandering River|M19&quot;
+        &quot;cardName&quot;: &quot;Meandering River&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Tranquil Cove|M20&quot;
+        &quot;cardName&quot;: &quot;Tranquil Cove&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Forsaken Sanctuary|M19&quot;
+        &quot;cardName&quot;: &quot;Forsaken Sanctuary&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Scoured Barrens|M20&quot;
+        &quot;cardName&quot;: &quot;Scoured Barrens&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Sunlit Marsh|DMU&quot;
+        &quot;cardName&quot;: &quot;Sunlit Marsh&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Radiant Grove|DMU&quot;
+        &quot;cardName&quot;: &quot;Radiant Grove&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Blossoming Sands|M20&quot;
+        &quot;cardName&quot;: &quot;Blossoming Sands&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Tranquil Expanse|M19&quot;
+        &quot;cardName&quot;: &quot;Tranquil Expanse&quot;
  }
 ]
 </property>
@@ -1020,121 +1020,121 @@
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Temple of Malady|FDN&quot;
+        &quot;cardName&quot;: &quot;Temple of Malady&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Temple of Epiphany|FDN&quot;
+        &quot;cardName&quot;: &quot;Temple of Epiphany&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Temple of Silence|FDN&quot;
+        &quot;cardName&quot;: &quot;Temple of Silence&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Temple of Triumph|FDN&quot;
+        &quot;cardName&quot;: &quot;Temple of Triumph&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Temple of Mystery|FDN&quot;
+        &quot;cardName&quot;: &quot;Temple of Mystery&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Temple of Plenty|FDN&quot;
+        &quot;cardName&quot;: &quot;Temple of Plenty&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Temple of Malice|FDN&quot;
+        &quot;cardName&quot;: &quot;Temple of Malice&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Temple of Deceit|FDN&quot;
+        &quot;cardName&quot;: &quot;Temple of Deceit&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Temple of Abandon|FDN&quot;
+        &quot;cardName&quot;: &quot;Temple of Abandon&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Temple of Enlightenment|FDN&quot;
+        &quot;cardName&quot;: &quot;Temple of Enlightenment&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Dragonskull Summit|M10&quot;
+        &quot;cardName&quot;: &quot;Dragonskull Summit&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Drowned Catacomb|M10&quot;
+        &quot;cardName&quot;: &quot;Drowned Catacomb&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Glacial Fortress|M10&quot;
+        &quot;cardName&quot;: &quot;Glacial Fortress&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Rootbound Crag|M10&quot;
+        &quot;cardName&quot;: &quot;Rootbound Crag&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Sunpetal Grove|M10&quot;
+        &quot;cardName&quot;: &quot;Sunpetal Grove&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Clifftop Retreat|ISD&quot;
+        &quot;cardName&quot;: &quot;Clifftop Retreat&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Hinterland Harbor|ISD&quot;
+        &quot;cardName&quot;: &quot;Hinterland Harbor&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Isolated Chapel|ISD&quot;
+        &quot;cardName&quot;: &quot;Isolated Chapel&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Sulfur Falls|ISD&quot;
+        &quot;cardName&quot;: &quot;Sulfur Falls&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Woodland Cemetery|ISD&quot;
+        &quot;cardName&quot;: &quot;Woodland Cemetery&quot;
  }
 ]
 </property>
@@ -1148,241 +1148,241 @@
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Putrefy|C19&quot;
+        &quot;cardName&quot;: &quot;Putrefy&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Golgari Charm|UMA&quot;
+        &quot;cardName&quot;: &quot;Golgari Charm&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Grisly Salvage|C18&quot;
+        &quot;cardName&quot;: &quot;Grisly Salvage&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Deathreap Ritual|C18&quot;
+        &quot;cardName&quot;: &quot;Deathreap Ritual&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Grave Upheaval|C16&quot;
+        &quot;cardName&quot;: &quot;Grave Upheaval&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Mayhem Devil|WAR&quot;
+        &quot;cardName&quot;: &quot;Mayhem Devil&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Blightning|ALA&quot;
+        &quot;cardName&quot;: &quot;Blightning&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Rakdos Charm|C17&quot;
+        &quot;cardName&quot;: &quot;Rakdos Charm&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Plasm Capture|OTC&quot;
+        &quot;cardName&quot;: &quot;Plasm Capture&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Biomass Mutation|C21&quot;
+        &quot;cardName&quot;: &quot;Biomass Mutation&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Simic Charm|CMR&quot;
+        &quot;cardName&quot;: &quot;Simic Charm&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Decisive Denial|STX&quot;
+        &quot;cardName&quot;: &quot;Decisive Denial&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Rhythm of the Wild|RNA&quot;
+        &quot;cardName&quot;: &quot;Rhythm of the Wild&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Treacherous Terrain|C16&quot;
+        &quot;cardName&quot;: &quot;Treacherous Terrain&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Hull Breach|C13&quot;
+        &quot;cardName&quot;: &quot;Hull Breach&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Gruul Charm|GTC&quot;
+        &quot;cardName&quot;: &quot;Gruul Charm&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Boros Charm|FDN&quot;
+        &quot;cardName&quot;: &quot;Boros Charm&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Rip Apart|STX&quot;
+        &quot;cardName&quot;: &quot;Rip Apart&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Assemble the Legion|NCC&quot;
+        &quot;cardName&quot;: &quot;Assemble the Legion&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Reconstruct History|STX&quot;
+        &quot;cardName&quot;: &quot;Reconstruct History&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Ancient Excavation|C16&quot;
+        &quot;cardName&quot;: &quot;Ancient Excavation&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Extract from Darkness|2X2&quot;
+        &quot;cardName&quot;: &quot;Extract from Darkness&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Memory Plunder|C17&quot;
+        &quot;cardName&quot;: &quot;Memory Plunder&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Drown in the Loch|ELD&quot;
+        &quot;cardName&quot;: &quot;Drown in the Loch&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Expressive Iteration|STX&quot;
+        &quot;cardName&quot;: &quot;Expressive Iteration&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Izzet Charm|RVR&quot;
+        &quot;cardName&quot;: &quot;Izzet Charm&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Galvanic Iteration|INR&quot;
+        &quot;cardName&quot;: &quot;Galvanic Iteration&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Electrolyze|IMA&quot;
+        &quot;cardName&quot;: &quot;Electrolyze&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Migratory Route|C16&quot;
+        &quot;cardName&quot;: &quot;Migratory Route&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Dovin's Veto|WAR&quot;
+        &quot;cardName&quot;: &quot;Dovin's Veto&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Azorius Charm|IMA&quot;
+        &quot;cardName&quot;: &quot;Azorius Charm&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Sphinx's Revelation|RVR&quot;
+        &quot;cardName&quot;: &quot;Sphinx's Revelation&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Mortify|FDN&quot;
+        &quot;cardName&quot;: &quot;Mortify&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Despark|C20&quot;
+        &quot;cardName&quot;: &quot;Despark&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Etchings of the Chosen|MH1&quot;
+        &quot;cardName&quot;: &quot;Etchings of the Chosen&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Debtors' Knell|C21&quot;
+        &quot;cardName&quot;: &quot;Debtors' Knell&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Sylvan Reclamation|C16&quot;
+        &quot;cardName&quot;: &quot;Sylvan Reclamation&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Armadillo Cloak|EMA&quot;
+        &quot;cardName&quot;: &quot;Armadillo Cloak&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Camaraderie|NCC&quot;
+        &quot;cardName&quot;: &quot;Camaraderie&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Collective Blessing|RTR&quot;
+        &quot;cardName&quot;: &quot;Collective Blessing&quot;
  }
 ]
 </property>

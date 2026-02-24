@@ -99,7 +99,7 @@
   </object>
   <object id="95" template="../../../../common/maps/obj/enemy.tx" x="237.586" y="144.178">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Enormous Energy Blade|NEO&quot;, &quot;Weaver of Harmony|NEO&quot;, &quot;Experimental Synthesizer|NEO&quot;, &quot;Era of Enlightenment|NEO&quot;, &quot;Moonsnare Prototype|NEO&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Enormous Energy Blade|NEO&quot;, &quot;Weaver of Harmony|NEO&quot;, &quot;Era of Enlightenment|NEO&quot;]}"/>
     <property name="enemy" value="Go-Shintai"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>

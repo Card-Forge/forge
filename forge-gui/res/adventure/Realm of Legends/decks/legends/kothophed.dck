@@ -1,71 +1,71 @@
 [metadata]
 Name=Kothophed
 [Commander]
-1 Kothophed, Soul Hoarder|sld|[162]
+1 Kothophed, Soul Hoarder|SLD|[162]
 [Main]
-1 Accursed Marauder|mh3
-1 Arcane Signet|dsc
-1 Bloodchief Ascension|cmm
-1 Bloodgift Demon|j25
-1 Bloodletter of Aclazotz|lci
-1 Boggart Trawler|mh3
-1 Bojuka Bog|dsc
-1 Bontu's Monument|dmc
-1 Bubbling Muck|uds
-1 Caged Sun|nph
-1 Conqueror's Flail|2x2
-1 Consume the Meek|ddp
-1 Crypt Ghast|gtc
-1 snuff out|gvl
-1 Damnation|2x2
-1 Dark Ritual|a25
-1 Deathgreeter|plst
-1 Defiant Bloodlord|c21
-1 Demon's Disciple|cmm
-1 Dread Presence|j22
-1 Enduring Tenacity|dsk
-1 Epicure of Blood|j25
-1 Exsanguinate|cmm
-1 Feign Death|afr
-1 Force of Despair|mh1
-1 Gifted Aetherborn|plst
-1 Gixian Puppeteer|bro
-1 Gray Merchant of Asphodel|dsc
-1 Harvester of Souls|j25
-1 Infernal Sovereign|moc
-1 Jet Medallion|mh3
-1 K'rrik, Son of Yawgmoth|mh3
-1 Kaya's Ghostform|plst
-1 Killing Wave|avr
-1 Lightning Greaves|dsc
-1 Magus of the Coffers|c14
-1 do or die|inv
-1 Marauding Blight-Priest|j22
-1 Massacre Wurm|dsc
-1 Mutilate|tor
-1 Myriad Landscape|dsc
-1 Night's Whisper|j25
-1 Nighthawk Scavenger|otc
-1 Not Dead After All|woe
-1 Phyrexian Arena|cc2
-1 Plaguecrafter|blc
-1 Pontiff of Blight|clb
-1 Prism Ring|ori
-1 Read the Bones|j25
-1 Reliquary Tower|dsc
-1 Sangromancer|mbs
-1 Sheoldred, the Apocalypse|dmu
-1 Sheoldred's Edict|one
-1 Sign in Blood|sta
-1 Sol Ring|cc2
-1 Starscape Cleric|blb
-1 Stinging Study|c21
-34 Swamp|dft
-1 Tithing Blade|lci
-1 Torment of Hailfire|hou
-1 Toxic Deluge|cc2
-1 Trespasser's Curse|ak
-1 Vampire Nighthawk|j25
-1 Venser's Journal|c21
-1 Whip of Erebos|dsc
-1 Withering Torment|dsk
+1 Accursed Marauder|MH3
+1 Arcane Signet|DSC
+1 Bloodchief Ascension|CMM
+1 Bloodgift Demon|J25
+1 Bloodletter of Aclazotz|LCI
+1 Boggart Trawler|MH3
+1 Bojuka Bog|DSC
+1 Bontu's Monument|DMC
+1 Bubbling Muck|UDS
+1 Caged Sun|NPH
+1 Conqueror's Flail|2X2
+1 Consume the Meek|DDP
+1 Crypt Ghast|GTC
+1 Snuff Out|GVL
+1 Damnation|2X2
+1 Dark Ritual|A25
+1 Deathgreeter|PLST
+1 Defiant Bloodlord|C21
+1 Demon's Disciple|CMM
+1 Dread Presence|J22
+1 Enduring Tenacity|DSK
+1 Epicure of Blood|J25
+1 Exsanguinate|CMM
+1 Feign Death|AFR
+1 Force of Despair|MH1
+1 Gifted Aetherborn|PLST
+1 Gixian Puppeteer|BRO
+1 Gray Merchant of Asphodel|DSC
+1 Harvester of Souls|J25
+1 Infernal Sovereign|MOC
+1 Jet Medallion|MH3
+1 K'rrik, Son of Yawgmoth|MH3
+1 Kaya's Ghostform|PLST
+1 Killing Wave|AVR
+1 Lightning Greaves|DSC
+1 Magus of the Coffers|C14
+1 Do or Die|INV
+1 Marauding Blight-Priest|J22
+1 Massacre Wurm|DSC
+1 Mutilate|TOR
+1 Myriad Landscape|DSC
+1 Night's Whisper|J25
+1 Nighthawk Scavenger|OTC
+1 Not Dead After All|WOE
+1 Phyrexian Arena|CC2
+1 Plaguecrafter|BLC
+1 Pontiff of Blight|CLB
+1 Prism Ring|ORI
+1 Read the Bones|J25
+1 Reliquary Tower|DSC
+1 Sangromancer|MBS
+1 Sheoldred, the Apocalypse|DMU
+1 Sheoldred's Edict|ONE
+1 Sign in Blood|STA
+1 Sol Ring|CC2
+1 Starscape Cleric|BLB
+1 Stinging Study|C21
+34 Swamp|DFT
+1 Tithing Blade|LCI
+1 Torment of Hailfire|HOU
+1 Toxic Deluge|CC2
+1 Trespasser's Curse|AKH
+1 Vampire Nighthawk|J25
+1 Venser's Journal|C21
+1 Whip of Erebos|DSC
+1 Withering Torment|DSK
