@@ -1321,7 +1321,21 @@ public class ComputerUtilCard {
         }
 
         if (c.getNetToughness() + toughness <= 0) {
-            return false;
+            // Use Flowstone Blade etc. as removal
+            return c.getController().isOpponentOf(ai);
+        }
+
+        // If the ability is repeatable, check if multiple activations can kill the creature
+        if (toughness < 0 && sa.isAbility() && c.getController().isOpponentOf(ai)) {
+            int timesNeeded = (int)Math.ceil((double)c.getNetToughness() / (double) -toughness);
+            Cost cost = sa.getPayCosts();
+            Cost totalCost = cost.copy();
+            for (int time = timesNeeded; time > 1; --time) totalCost.add(cost);
+            // Always true so gets stuck on creatures larger than mana pool
+            // boolean canPay = totalCost.canPay(sa, ai, false);
+            // This is the one that calls the private canPayManaCost() with test=true
+            boolean canPay = ComputerUtilMana.canPayManaCost(totalCost, sa, ai, 0, false);
+            return canPay;
         }
 
         if (sa.getHostCard().equals(c) && ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts())) {
