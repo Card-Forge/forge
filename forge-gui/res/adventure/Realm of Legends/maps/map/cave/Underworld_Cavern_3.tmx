@@ -47,7 +47,7 @@
   </object>
   <object id="81" template="../../../../common/maps/obj/enemy.tx" x="98.333" y="485.167">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Mystery|CP1&quot;, &quot;Fleetfeather Cockatrice|JOU&quot;, &quot;The First Iroan Games&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Mystery|CP1&quot;, &quot;Torpor Orb&quot;, &quot;The First Iroan Games&quot;]}"/>
     <property name="enemy" value="Uro"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="10"/>
@@ -55,7 +55,7 @@
   </object>
   <object id="82" template="../../../../common/maps/obj/enemy.tx" x="378.833" y="167.834">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Malice|BNG&quot;, &quot;The Triumph of Anax|THB&quot;, &quot;Underworld Cerberus|THS&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Malice|BNG&quot;, &quot;The Triumph of Anax|THB&quot;, &quot;Torpor Orb&quot;]}"/>
     <property name="enemy" value="Kroxa"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
@@ -75,7 +75,7 @@
   </object>
   <object id="85" template="../../../../common/maps/obj/enemy.tx" x="408.833" y="443.5">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Triumph|THS&quot;, &quot;Phoenix of Ash|THB&quot;, &quot;Opal Titan|USG&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Triumph|THS&quot;, &quot;Torpor Orb&quot;, &quot;Opal Titan|USG&quot;]}"/>
     <property name="enemy" value="Phlage"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="10"/>
