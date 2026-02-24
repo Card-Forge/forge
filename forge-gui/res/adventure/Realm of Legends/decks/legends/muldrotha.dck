@@ -1,89 +1,89 @@
 [metadata]
 Name=Muldrotha, the Gravetide
 [Commander]
-1 Muldrotha, the Gravetide|dom
+1 Muldrotha, the Gravetide|DOM
 [Main]
-1 Arcane Signet|eld
-1 Ash Barrens|brc
-1 Baleful Strix|otc
-1 Braids, Arisen Nightmare|dmu
-1 Cankerbloom|one
-1 Cemetery Tampering|snc
-1 Cityscape Leveler|bro
-1 Cloud Key|brr
-1 seal of doom|nem
-1 Command Tower|brc
-1 Commander's Sphere|cmm
-1 Consuming Aberration|fdn
-1 Creeping Tar Pit|uma
-1 Cruel Somnophage|woe
-1 Defense Grid|brr
-1 Defense of the Heart|wot
-1 Doc Aurlock, Grizzled Genius|otj
-1 Drowned Catacomb|otc
-1 Elemental Bond|scd
-1 Elvish Mystic|cmm
-1 Exotic Orchard|brc
-1 Fabled Passage|m21
-1 Fellwar Stone|brc
-1 Fiend Artisan|iko
-1 Foreboding Landscape|mh3
-6 forest|dom
-1 Garruk's Uprising|fdn
-1 Ghalta, Stampede Tyrant|lci
-1 Glen Elendra Archmage|woc
-1 Growing Rites of Itlimoc|lci
-1 Hedge Maze|mkm
-1 High Fae Trickster|fdn
-1 Hullbreaker Horror|inr
-1 Insidious Roots|mkm
-6 island|dom
-1 Koma, World-Eater|fdn
-1 Lightning Greaves|cmm
-1 Llanowar Elves|fdn
-1 Loot, Exuberant Explorer|fdn
-1 Lotleth Giant|cmm
-1 Lumra, Bellow of the Woods|blb
-1 Maraleaf Pixie|eld
-1 Mishra's Bauble|brr
-1 Nadier's Nightblade|mh3
-1 Nyxborn Behemoth|cmm
-1 Omenpath Journey|big
-1 Omniscience|wot
-1 Opulent Palace|tdm
-1 Pattern of Rebirth|uma
-1 Phyrexian Arena|fdn
-1 Phyrexian Infiltrator|inv
-1 Pollywog Prodigy|blc
-1 Prismatic Omen|wot
-1 Restless Cottage|woe
-1 Restless Reef|lci
-1 Seedborn Muse|tdc
-1 Sidisi, Brood Tyrant|cmm
-1 Sol Ring|brc
-1 Solemn Simulacrum|dsc
-1 Spelunking|lci
-1 Stillness in Motion|tdm
-1 Stonehoof Chieftain|cmm
-6 Swamp|dom
-1 Swiftfoot Boots|brr
-1 Taigam, Sidisi's Hand|cmm
-1 Takenuma, Abandoned Mire|neo
-1 Temple of Deceit|otc
-1 Temple of Malady|m3c
-1 Temple of Mystery|otc
-1 Terastodon|p30a
-1 The Eternity Elevator|eoe
-1 The Gitrog Monster|eoc
-1 The Mycotyrant|lci
-1 Thran Dynamo|cmm
-1 Tocasia's Dig Site|bro
-1 Toxrill, the Corrosive|vow
-1 Undercity Sewers|mkm
-1 Underground Mortuary|mkm
-1 Vaultborn Tyrant|big
-1 Verdant Catacombs|mh2
-1 Vindictive Lich|cmm
-1 Wight of the Reliquary|mh3
-1 Zagoth Triome|iko
-1 Zopandrel, Hunger Dominus|one
+1 Arcane Signet|ELD
+1 Ash Barrens|BRC
+1 Baleful Strix|OTC
+1 Braids, Arisen Nightmare|DMU
+1 Cankerbloom|ONE
+1 Cemetery Tampering|SNC
+1 Cityscape Leveler|BRO
+1 Cloud Key|BRR
+1 Seal of Doom|NEM
+1 Command Tower|BRC
+1 Commander's Sphere|CMM
+1 Consuming Aberration|FDN
+1 Creeping Tar Pit|UMA
+1 Cruel Somnophage|WOE
+1 Defense Grid|BRR
+1 Defense of the Heart|WOT
+1 Doc Aurlock, Grizzled Genius|OTJ
+1 Drowned Catacomb|OTC
+1 Elemental Bond|SCD
+1 Elvish Mystic|CMM
+1 Exotic Orchard|BRC
+1 Fabled Passage|M21
+1 Fellwar Stone|BRC
+1 Fiend Artisan|IKO
+1 Foreboding Landscape|MH3
+6 Forest|DOM
+1 Garruk's Uprising|FDN
+1 Ghalta, Stampede Tyrant|LCI
+1 Glen Elendra Archmage|WOC
+1 Growing Rites of Itlimoc|LCI
+1 Hedge Maze|MKM
+1 High Fae Trickster|FDN
+1 Hullbreaker Horror|INR
+1 Insidious Roots|MKM
+6 Island|DOM
+1 Koma, World-Eater|FDN
+1 Lightning Greaves|CMM
+1 Llanowar Elves|FDN
+1 Loot, Exuberant Explorer|FDN
+1 Lotleth Giant|CMM
+1 Lumra, Bellow of the Woods|BLB
+1 Maraleaf Pixie|ELD
+1 Mishra's Bauble|BRR
+1 Nadier's Nightblade|MH3
+1 Nyxborn Behemoth|CMM
+1 Omenpath Journey|BIG
+1 Omniscience|WOT
+1 Opulent Palace|TDM
+1 Pattern of Rebirth|UMA
+1 Phyrexian Arena|FDN
+1 Phyrexian Infiltrator|INV
+1 Pollywog Prodigy|BLC
+1 Prismatic Omen|WOT
+1 Restless Cottage|WOE
+1 Restless Reef|LCI
+1 Seedborn Muse|TDC
+1 Sidisi, Brood Tyrant|CMM
+1 Sol Ring|BRC
+1 Solemn Simulacrum|DSC
+1 Spelunking|LCI
+1 Stillness in Motion|TDM
+1 Stonehoof Chieftain|CMM
+6 Swamp|DOM
+1 Swiftfoot Boots|BRR
+1 Taigam, Sidisi's Hand|CMM
+1 Takenuma, Abandoned Mire|NEO
+1 Temple of Deceit|OTC
+1 Temple of Malady|M3C
+1 Temple of Mystery|OTC
+1 Terastodon|P30A
+1 The Eternity Elevator|EOE
+1 The Gitrog Monster|EOC
+1 The Mycotyrant|LCI
+1 Thran Dynamo|CMM
+1 Tocasia's Dig Site|BRO
+1 Toxrill, the Corrosive|VOW
+1 Undercity Sewers|MKM
+1 Underground Mortuary|MKM
+1 Vaultborn Tyrant|BIG
+1 Verdant Catacombs|MH2
+1 Vindictive Lich|CMM
+1 Wight of the Reliquary|MH3
+1 Zagoth Triome|IKO
+1 Zopandrel, Hunger Dominus|ONE

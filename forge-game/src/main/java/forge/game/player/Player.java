@@ -1435,7 +1435,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         //sb.append(" with Madness");
         sb.append(".");
         // Play the Discard sound
-        game.fireEvent(new GameEventAddLog(GameLogEntryType.DISCARD, sb.toString()));
+        game.fireEvent(new GameEventAddLog(GameLogEntryType.DISCARD, sb.toString(), c));
 
         newCard.setDiscarded(true);
 

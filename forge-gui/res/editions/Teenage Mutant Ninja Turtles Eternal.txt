@@ -102,7 +102,7 @@ Type=Expansion
 95 R Super Combo @Kirokaze
 96 M Heroes in a Half Shell @Kirokaze
 97 R Big Mother Mouser @Kirokaze
-98 U Definitely Not a Turtle @Levinky & Leonardo Vincent
+98 U Definitely Not a Turtle @Leonardo Vincent (Levinky)
 100 C Hamato Ninpō @Lie Setiawan
 101 M Leonardo, Worldly Warrior @Nathaniel Himawan
 102 U Leo's Guidance @Eilene Cherie
@@ -115,7 +115,7 @@ Type=Expansion
 109 M Donatello, Rad Scientist @Thomas Chamberlain-Keen
 110 U Donatello's Science Lesson @Anthony Devine
 111 R Donnie & April, Adorkable Duo @Le Vuong
-113 C Utrom Monitor @Levinky
+113 C Utrom Monitor @Leonardo Vincent (Levinky)
 114 R Casey & Raph, Hotheads @Leonardo Santanna
 115 R Casey Jones, Asphalt Hooligan @Jason Kiantoro
 117 C Monster Mashup @Nathaniel Himawan
@@ -137,3 +137,8 @@ Type=Expansion
 134 M Supreme Verdict @Raluca Marinescu
 135 M Commander's Plate @Filipe Pagliuso
 136 M Sword of Hearth and Home @Raluca Marinescu
+
+[tokens]
+1 g_2_2_ooze @Villarrte
+2 c_a_clue_draw @Brandon L. Hunt
+3 c_a_treasure_sac @Kim Sokol

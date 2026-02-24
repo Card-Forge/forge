@@ -1,87 +1,87 @@
 [metadata]
 Name=Satya, Aetherflux Genius
 [Commander]
-1 Satya, Aetherflux Genius|m3c
+1 Satya, Aetherflux Genius|M3C
 [Main]
-1 Adarkar Wastes|eoc
-1 Aether Chaser|aer
-1 Aether Hub|drc
-1 Aether Meltdown|kld
-1 Aether Theorist|kld
-1 Aethershield Artificer|j22
-1 Aetherstorm Roc|m3c
-1 Aetherworks Marvel|drc
-1 Akroma's Will|m3c
-1 Amped Raptor|mh3
-1 Ancient Stone Idol|mkc
-1 Arcane Signet|eoc
-1 Arcbound Crusher|hop
-1 Archway of Innovation|mh3
-1 Artificer's Epiphany|j22
-1 Battlefield Forge|eoc
-1 Blaster Hulk|m3c
-1 Chief of the Foundry|j25
-1 Command Tower|eoc
-1 Consulate Surveillance|kld
-1 Conversion Apparatus|m3c
-1 Darksteel Juggernaut|brc
-1 Decoction Module|drc
-1 Dispatch|eoc
-1 Efficient Construction|cmm
-1 Electrostatic Pummeler|kld
-1 Era of Innovation|drc
-1 Fabrication Module|kld
-1 Galvanic Discharge|mh3
-1 Glassdust Hulk|2xm
-1 Gonti's Aether Heart|m3c
-1 Guide of Souls|mh3
-1 Harnessed Lightning|kld
-1 Illustrious Wanderglyph|lcc
-1 Inspiring Vantage|otj
-1 Inventor's Apprentice|kld
-1 Inventors' Fair|kld
-6 Island|mh3
-1 Izzet Generatorium|mh3
-1 Jolted Awake|mh3
-1 Merchant's Dockhand|aer
-1 Meteor Golem|fdn
-7 Mountain|mh3
-1 Mystic Monastery|eoc
-1 Panharmonicon|drc
-1 swords to plowshares|drc
-1 path to exile|Cmm
-7 Plains|mh3
+1 Adarkar Wastes|EOC
+1 Aether Chaser|AER
+1 Aether Hub|DRC
+1 Aether Meltdown|KLD
+1 Aether Theorist|KLD
+1 Aethershield Artificer|J22
+1 Aetherstorm Roc|M3C
+1 Aetherworks Marvel|DRC
+1 Akroma's Will|M3C
+1 Amped Raptor|MH3
+1 Ancient Stone Idol|MKC
+1 Arcane Signet|EOC
+1 Arcbound Crusher|HOP
+1 Archway of Innovation|MH3
+1 Artificer's Epiphany|J22
+1 Battlefield Forge|EOC
+1 Blaster Hulk|M3C
+1 Chief of the Foundry|J25
+1 Command Tower|EOC
+1 Consulate Surveillance|KLD
+1 Conversion Apparatus|M3C
+1 Darksteel Juggernaut|BRC
+1 Decoction Module|DRC
+1 Dispatch|EOC
+1 Efficient Construction|CMM
+1 Electrostatic Pummeler|KLD
+1 Era of Innovation|DRC
+1 Fabrication Module|KLD
+1 Galvanic Discharge|MH3
+1 Glassdust Hulk|2XM
+1 Gonti's Aether Heart|M3C
+1 Guide of Souls|MH3
+1 Harnessed Lightning|KLD
+1 Illustrious Wanderglyph|LCC
+1 Inspiring Vantage|OTJ
+1 Inventor's Apprentice|KLD
+1 Inventors' Fair|KLD
+6 Island|MH3
+1 Izzet Generatorium|MH3
+1 Jolted Awake|MH3
+1 Merchant's Dockhand|AER
+1 Meteor Golem|FDN
+7 Mountain|MH3
+1 Mystic Monastery|EOC
+1 Panharmonicon|DRC
+1 Swords to Plowshares|DRC
+1 Path to Exile|CMM
+7 Plains|MH3
 1 Tundra|VMA
 1 Volcanic Island|VMA
 1 Plateau|VMA
 1 Arid Mesa|ZEN
 1 Flooded Strand|ZEN
 1 Scalding Tarn|ZEN
-1 Reckless Fireweaver|drc
-1 Research Thief|nec
-1 Reverse Engineer|cmm
-1 Roil Cartographer|mh3
-1 Saheeli Rai|kld
-1 Salvation Colossus|m3c
-1 Seachrome Coast|blc
-1 Shivan Reef|eoc
-1 Show and Tell|mb2
-1 Simulacrum Synthesizer|big
-1 Solar Transformer|drc
-1 Spirebluff Canal|otj
-1 Stone Idol Generator|m3c
-1 Talisman of Conviction|cmm
-1 Talisman of Creativity|tdc
-1 Talisman of Progress|cmm
-1 Temporal Machinations|dom
-1 Temporal Manipulation|mb2
-1 Thopter Assembly|moc
-1 Threefold Thunderhulk|eoc
-1 Tune the Narrative|mh3
-1 Unwinding Clock|nph
-1 Uthros, Titanic Godcore|eoe
-1 Walking Ballista|aer
-1 Welder Automaton|aer
-1 Whirler Virtuoso|drc
-1 Whirlermaker|j25
-1 Wrath of the Skies|mh3
+1 Reckless Fireweaver|DRC
+1 Research Thief|NEC
+1 Reverse Engineer|CMM
+1 Roil Cartographer|MH3
+1 Saheeli Rai|KLD
+1 Salvation Colossus|M3C
+1 Seachrome Coast|BLC
+1 Shivan Reef|EOC
+1 Show and Tell|MB2
+1 Simulacrum Synthesizer|BIG
+1 Solar Transformer|DRC
+1 Spirebluff Canal|OTJ
+1 Stone Idol Generator|M3C
+1 Talisman of Conviction|CMM
+1 Talisman of Creativity|TDC
+1 Talisman of Progress|CMM
+1 Temporal Machinations|DOM
+1 Temporal Manipulation|MB2
+1 Thopter Assembly|MOC
+1 Threefold Thunderhulk|EOC
+1 Tune the Narrative|MH3
+1 Unwinding Clock|NPH
+1 Uthros, Titanic Godcore|EOE
+1 Walking Ballista|AER
+1 Welder Automaton|AER
+1 Whirler Virtuoso|DRC
+1 Whirlermaker|J25
+1 Wrath of the Skies|MH3

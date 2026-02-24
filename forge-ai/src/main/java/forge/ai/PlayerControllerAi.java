@@ -818,8 +818,7 @@ public class PlayerControllerAi extends PlayerController {
                 continue;
             }
 
-            // If we don't want to scry anything to the bottom, remove the worst card that we have in order to satisfy
-            // the requirement
+            // If we don't want to scry anything to the bottom, remove the worst card that we have in order to satisfy the requirement
             toReturn.add(ComputerUtilCard.getWorstAI(hand));
         }
 
@@ -859,22 +858,29 @@ public class PlayerControllerAi extends PlayerController {
      * to handlePlayingSpellAbility (game thread, no timeout).
      */
     private Runnable getDeferredTargetingPlayerRunnable(SpellAbility sa) {
-        return () -> {
-            SpellAbility cur = sa;
-            while (cur != null) {
-                if (cur.usesTargeting() && cur.hasParam("TargetingPlayer")) {
-                    cur.clearTargets();
-                    cur.getTargetingPlayer().getController().chooseTargetsFor(cur);
-                    // there's a chance a target gets selected that makes the cost unaffordable
-                    if (!ComputerUtilCost.canPayCost(sa, sa.getActivatingPlayer(), false)) {
-                        sa.resetTargets();
-                        sa.setSkip(true);
-                        return;
+        SpellAbility root = sa;
+        while (sa != null) {
+            if (sa.getTargetingPlayer() != null) {
+                return () -> {
+                    SpellAbility cur = root;
+                    while (cur != null) {
+                        if (cur.getTargetingPlayer() != null) {
+                            cur.clearTargets();
+                            cur.getTargetingPlayer().getController().chooseTargetsFor(cur);
+                            // there's a chance a target gets selected that makes the cost unaffordable
+                            if (!ComputerUtilCost.canPayCost(root, root.getActivatingPlayer(), false)) {
+                                cur.resetTargets();
+                                root.setSkip(true);
+                                return;
+                            }
+                        }
+                        cur = cur.getSubAbility();
                     }
-                }
-                cur = cur.getSubAbility();
+                };
             }
-        };
+            sa = sa.getSubAbility();
+        }
+        return null;
     }
 
     @Override

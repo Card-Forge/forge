@@ -299,6 +299,14 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
+    public void handleGameEvents(List<GameEvent> events) {
+        updateGameView();
+        for (GameEvent event : events) {
+            send(ProtocolMethod.handleGameEvent, event);
+        }
+    }
+
+    @Override
     public boolean isNetGame() { return true; }
 
     @Override

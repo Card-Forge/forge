@@ -1,89 +1,89 @@
 [metadata]
 Name=The Gitrog Monster
 [Commander]
-1 The Gitrog Monster|inr
+1 The Gitrog Monster|INR
 [Main]
-1 sol ring|dsc
-1 animate dead|mkc
-1 reanimate|dsc
-1 Aftermath Analyst|mkm
-1 Agadeem's Awakening|znr
-1 gitrog, horror of zhava|ymid
-1 Ash Barrens|cmm
-1 Bala Ged Recovery|znr
-1 titania, protector of argoth|c14
-1 the gitrog, ravenous ride|otj
-1 titania, nature's force|dsc
-1 Bane of Progress|c13
-1 Barrowgoyf|m3c
-1 Blossoming Tortoise|woe
-1 Bojuka Bog|mic
-1 Boseiju, Who Endures|neo
-1 Bramble Familiar|woe
-1 Breach the Multiverse|mom
-1 Clifftop Lookout|blb
-1 Colossal Grave-Reaver|tdc
-1 Command Tower|cmr
-1 Culling Ritual|stx
-1 Dakmor Salvage|m3c
-1 Deathcap Glade|inr
-1 Demolition Field|bro
-1 Eternal Witness|cmm
-1 Evolving Wilds|vow
-1 Fabled Passage|m21
-1 Fanatic of Rhonas|mh3
-1 Fell the Profane|mh3
-9 Forest|mid
-1 Geier Reach Sanitarium|emn
-1 Ghost Quarter|cma
-1 Golgari Rot Farm|cmm
-1 Grist, the Hunger Tide|mh2
-1 Harrow|cma
-1 ancient greenwarden|znr
-1 craterhoof behemoth|avr
-1 Hedge Shredder|dsk
-1 Honest Rutstein|otj
-1 Icetill Explorer|eoe
-1 Incarnation Technique|c21
-1 avenger of zendikar|cmr
-1 Jarad, Golgari Lich Lord|tdc
-1 Lazotep Quarry|m3c
-1 Lethal Scheme|tdc
-1 Life from the Loam|rvr
-1 Living Death|tdc
-1 Llanowar Wastes|bro
-1 Lotus Cobra|znr
-1 Lumra, Bellow of the Woods|blb
-1 Massacre Wurm|m21
-1 Myriad Landscape|cmm
-1 Nurturing Peatland|mh1
-1 Ob Nixilis, the Fallen|ima
-1 Old Rutstein|vow
-1 Overgrown Tomb|grn
-1 Overwhelming Remorse|bro
-1 Perpetual Timepiece|kld
-1 Polukranos, Unchained|thb
-1 Prismatic Vista|mh1
-1 Ripples of Undeath|mh3
-1 Sakura-Tribe Elder|chk
-1 Satyr Wayfinder|m3c
-1 Mythweaver Poq|ylci
-1 Shifting Woodland|mh3
-1 Shigeki, Jukai Visionary|neo
-1 Silverback Elder|dmu
-1 Six|mh3
-1 Skull Prophet|iko
-1 Skyfisher Spider|bro
-1 Springbloom Druid|mh1
-1 Springheart Nantuko|mh3
-1 Stitcher's Supplier|m19
-8 Swamp|mid
-1 Sylvan Safekeeper|mh3
-1 Syr Konrad, the Grim|mkc
-1 Takenuma, Abandoned Mire|neo
-1 Tireless Provisioner|mh2
-1 Underground Mortuary|mkm
-1 Verdant Catacombs|mh2
-1 Victimize|mh3
-1 Wight of the Reliquary|mh3
-1 Will of the Sultai|tdc
+1 Sol Ring|DSC
+1 Animate Dead|MKC
+1 Reanimate|DSC
+1 Aftermath Analyst|MKM
+1 Agadeem's Awakening|ZNR
+1 Gitrog, Horror of Zhava|YMID
+1 Ash Barrens|CMM
+1 Bala Ged Recovery|ZNR
+1 Titania, Protector of Argoth|C14
+1 The Gitrog, Ravenous Ride|OTJ
+1 Titania, Nature's Force|DSC
+1 Bane of Progress|C13
+1 Barrowgoyf|M3C
+1 Blossoming Tortoise|WOE
+1 Bojuka Bog|MIC
+1 Boseiju, Who Endures|NEO
+1 Bramble Familiar|WOE
+1 Breach the Multiverse|MOM
+1 Clifftop Lookout|BLB
+1 Colossal Grave-Reaver|TDC
+1 Command Tower|CMR
+1 Culling Ritual|STX
+1 Dakmor Salvage|M3C
+1 Deathcap Glade|INR
+1 Demolition Field|BRO
+1 Eternal Witness|CMM
+1 Evolving Wilds|VOW
+1 Fabled Passage|M21
+1 Fanatic of Rhonas|MH3
+1 Fell the Profane|MH3
+9 Forest|MID
+1 Geier Reach Sanitarium|EMN
+1 Ghost Quarter|CMA
+1 Golgari Rot Farm|CMM
+1 Grist, the Hunger Tide|MH2
+1 Harrow|CMA
+1 Ancient Greenwarden|ZNR
+1 Craterhoof Behemoth|AVR
+1 Hedge Shredder|DSK
+1 Honest Rutstein|OTJ
+1 Icetill Explorer|EOE
+1 Incarnation Technique|C21
+1 Avenger of Zendikar|CMR
+1 Jarad, Golgari Lich Lord|TDC
+1 Lazotep Quarry|M3C
+1 Lethal Scheme|TDC
+1 Life from the Loam|RVR
+1 Living Death|TDC
+1 Llanowar Wastes|BRO
+1 Lotus Cobra|ZNR
+1 Lumra, Bellow of the Woods|BLB
+1 Massacre Wurm|M21
+1 Myriad Landscape|CMM
+1 Nurturing Peatland|MH1
+1 Ob Nixilis, the Fallen|IMA
+1 Old Rutstein|VOW
+1 Overgrown Tomb|GRN
+1 Overwhelming Remorse|BRO
+1 Perpetual Timepiece|KLD
+1 Polukranos, Unchained|THB
+1 Prismatic Vista|MH1
+1 Ripples of Undeath|MH3
+1 Sakura-Tribe Elder|CHK
+1 Satyr Wayfinder|M3C
+1 Mythweaver Poq|YLCI
+1 Shifting Woodland|MH3
+1 Shigeki, Jukai Visionary|NEO
+1 Silverback Elder|DMU
+1 Six|MH3
+1 Skull Prophet|IKO
+1 Skyfisher Spider|BRO
+1 Springbloom Druid|MH1
+1 Springheart Nantuko|MH3
+1 Stitcher's Supplier|M19
+8 Swamp|MID
+1 Sylvan Safekeeper|MH3
+1 Syr Konrad, the Grim|MKC
+1 Takenuma, Abandoned Mire|NEO
+1 Tireless Provisioner|MH2
+1 Underground Mortuary|MKM
+1 Verdant Catacombs|MH2
+1 Victimize|MH3
+1 Wight of the Reliquary|MH3
+1 Will of the Sultai|TDC

@@ -6122,7 +6122,7 @@
   },
   {
     "name": "Estrid",
-    "sprite": "sprites/enemy/humanoid/human/cleric.atlas",
+    "sprite": "sprites/enemy/humanoid/human/cleric/cleric.atlas",
     "deck": [
       "decks/legends/estrid.dck"
     ],
@@ -61541,6 +61541,81 @@
   {
     "name": "Ink-Eyes",
     "sprite": "sprites/enemy/humanoid/nezumi/nezumi_ninja.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Jacob Hauken",
+    "sprite": "sprites/enemy/humanoid/human/soldier/cathar.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Ruby",
+    "sprite": "sprites/enemy/humanoid/elf/deftsorceress.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Whisper",
+    "sprite": "sprites/enemy/humanoid/human/warlock/witch.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Vhati il-Dal",
+    "sprite": "sprites/enemy/humanoid/human/bandit/banditleader.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Xantcha",
+    "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz3.atlas",
     "deck": [
       "decks/legends/mystery_list.dck"
     ],

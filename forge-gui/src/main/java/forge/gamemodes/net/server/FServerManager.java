@@ -31,6 +31,9 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import io.netty.handler.timeout.IdleState;
+import io.netty.handler.timeout.IdleStateEvent;
+import io.netty.handler.timeout.IdleStateHandler;
 
 import org.jupnp.UpnpService;
 import org.jupnp.UpnpServiceImpl;
@@ -43,9 +46,11 @@ import java.io.InputStreamReader;
 import java.net.*;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 
 public final class FServerManager {
+    static final int HEARTBEAT_TIMEOUT_SECONDS = Integer.getInteger("forge.net.heartbeatTimeout", 45);
     private static final int RECONNECT_TIMEOUT_SECONDS = 300;
 
     private static FServerManager instance = null;
@@ -113,6 +118,7 @@ public final class FServerManager {
                             p.addLast(
                                     new CompatibleObjectEncoder(),
                                     new CompatibleObjectDecoder(9766 * 1024, ClassResolvers.cacheDisabled(null)),
+                                    new IdleStateHandler(HEARTBEAT_TIMEOUT_SECONDS, 0, 0, TimeUnit.SECONDS),
                                     new MessageHandler(),
                                     new RegisterClientHandler(),
                                     new LobbyInputHandler(),
@@ -545,6 +551,9 @@ public final class FServerManager {
     private class MessageHandler extends ChannelInboundHandlerAdapter {
         @Override
         public final void channelRead(final ChannelHandlerContext ctx, final Object msg) throws Exception {
+            if (msg instanceof HeartbeatEvent) {
+                return; // Consumed — arrival resets IdleStateHandler read timer
+            }
             if (msg instanceof MessageEvent) {
                 final String text = ((MessageEvent) msg).getMessage();
                 if (text != null && text.startsWith("/")) {
@@ -669,6 +678,21 @@ public final class FServerManager {
     }
 
     private class DeregisterClientHandler extends ChannelInboundHandlerAdapter {
+        @Override
+        public void userEventTriggered(final ChannelHandlerContext ctx, final Object evt) throws Exception {
+            if (evt instanceof IdleStateEvent && ((IdleStateEvent) evt).state() == IdleState.READER_IDLE) {
+                final RemoteClient client = clients.get(ctx.channel());
+                final String name = client != null ? client.getUsername() : ctx.channel().remoteAddress().toString();
+                final String msg = name + " timed out after " + HEARTBEAT_TIMEOUT_SECONDS
+                    + " seconds without a network response. Closing connection.";
+                System.out.println(msg);
+                broadcast(new MessageEvent(msg));
+                ctx.close();
+                return;
+            }
+            super.userEventTriggered(ctx, evt);
+        }
+
         @Override
         public void channelInactive(final ChannelHandlerContext ctx) throws Exception {
             final RemoteClient client = clients.remove(ctx.channel());
