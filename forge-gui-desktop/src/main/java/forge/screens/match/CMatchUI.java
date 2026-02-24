@@ -49,10 +49,8 @@ import forge.control.KeyboardShortcuts;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deckchooser.FDeckViewer;
-import forge.game.GameEntity;
 import forge.game.GameEntityView;
 import forge.game.GameView;
-import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
@@ -63,14 +61,10 @@ import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
-import forge.game.player.Player;
 import forge.game.player.PlayerController.FullControlFlag;
 import forge.game.player.PlayerView;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.spellability.StackItemView;
-import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.AbstractGuiGame;
 import forge.gui.FNetOverlay;
@@ -580,10 +574,10 @@ public final class CMatchUI
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
                 if (p.getCards(ZoneType.Battlefield) != null) {
-                    updateCards(p.getCards(ZoneType.Battlefield));
+                    updateCards(isNetGame() ? p.getCards(ZoneType.Battlefield).threadSafeIterable() : p.getCards(ZoneType.Battlefield));
                 }
                 if (p.getCards(ZoneType.Hand) != null) {
-                    updateCards(p.getCards(ZoneType.Hand));
+                    updateCards(isNetGame() ? p.getCards(ZoneType.Hand).threadSafeIterable() : p.getCards(ZoneType.Hand));
                 }
             }
             FloatingZone.refreshAll();
@@ -597,10 +591,10 @@ public final class CMatchUI
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
                 if (p.getCards(ZoneType.Battlefield) != null) {
-                    updateCards(p.getCards(ZoneType.Battlefield));
+                    updateCards(isNetGame() ? p.getCards(ZoneType.Battlefield).threadSafeIterable() : p.getCards(ZoneType.Battlefield));
                 }
                 if (p.getCards(ZoneType.Hand) != null) {
-                    updateCards(p.getCards(ZoneType.Hand));
+                    updateCards(isNetGame() ? p.getCards(ZoneType.Hand).threadSafeIterable() : p.getCards(ZoneType.Hand));
                 }
             }
             FloatingZone.refreshAll();
@@ -613,7 +607,7 @@ public final class CMatchUI
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
                 if (p.getCards(ZoneType.Battlefield) != null) {
-                    updateCards(p.getCards(ZoneType.Battlefield));
+                    updateCards(isNetGame() ? p.getCards(ZoneType.Battlefield).threadSafeIterable() : p.getCards(ZoneType.Battlefield));
                 }
             }
             FloatingZone.refreshAll();
@@ -664,6 +658,10 @@ public final class CMatchUI
 
     @Override
     public void update() {
+    }
+
+    public void refreshLog() {
+        cLog.getView().refreshDisplay();
     }
 
     public void repaintCardOverlays() {
@@ -1039,6 +1037,12 @@ public final class CMatchUI
         if (players.size() == 2 && myPlayers != null && myPlayers.size() == 1 && myPlayers.get(0).equals(players.get(1))) {
             players = new FCollection<>(new PlayerView[]{players.get(1), players.get(0)});
         }
+        // Multiplayer: sort by turn order with local player first
+        final String layout = FModel.getPreferences().getPref(FPref.UI_MULTIPLAYER_FIELD_LAYOUT);
+        if (players.size() > 2 && myPlayers != null && myPlayers.size() >= 1
+                && !"OFF".equals(layout)) {
+            players = new FCollection<>(sortPlayersForMultiplayer(players, myPlayers.get(0), "ROWS".equals(layout)));
+        }
         initMatch(players, myPlayers);
         clearSelectables(); //fix uncleared selection
 
@@ -1054,6 +1058,56 @@ public final class CMatchUI
             FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_MATCH), true);
         else
             FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage((Image)null);
+    }
+
+    /**
+     * Reorders players so the local player is at index 0 and opponents follow
+     * in turn order. The {@code rowsMode} flag controls cell assignment:
+     * <ul>
+     *   <li><b>Grid</b> ({@code false}): counterclockwise flow — even indices
+     *       in the bottom cell, odd in the top cell.</li>
+     *   <li><b>Rows</b> ({@code true}): local player alone in the bottom cell
+     *       (index 0), all opponents in the top cell (odd indices) as tabs in
+     *       turn order.</li>
+     * </ul>
+     */
+    static List<PlayerView> sortPlayersForMultiplayer(
+            final FCollectionView<PlayerView> players, final PlayerView localPlayer,
+            final boolean rowsMode) {
+        final List<PlayerView> turnOrder = new ArrayList<>();
+        for (final PlayerView p : players) {
+            turnOrder.add(p);
+        }
+        final int localIndex = turnOrder.indexOf(localPlayer);
+        if (localIndex > 0) {
+            Collections.rotate(turnOrder, -localIndex);
+        }
+        // Rows mode: local player at index 0, opponents at indices 1..n-1.
+        // VMatchUI.populate() puts index 0 in the bottom cell and all others
+        // in the top cell when rows mode is active, so simple turn order works.
+        if (rowsMode) {
+            return turnOrder;
+        }
+        final int n = turnOrder.size();
+        if (n <= 3) {
+            return turnOrder;
+        }
+        // Grid mode: assign players to panel indices for counterclockwise visual flow:
+        // idx 0 (bottom-left): local player
+        // idx 1,3,5,... (top row, left to right): next players in turn order
+        // idx ...,4,2 (bottom row, right to left): remaining players
+        final PlayerView[] result = new PlayerView[n];
+        result[0] = turnOrder.get(0);
+        int turnPos = 1;
+        final int topCount = n / 2;
+        for (int i = 0; i < topCount; i++) {
+            result[1 + 2 * i] = turnOrder.get(turnPos++);
+        }
+        final int bottomExtra = (n - 1) / 2;
+        for (int i = bottomExtra - 1; i >= 0; i--) {
+            result[2 + 2 * i] = turnOrder.get(turnPos++);
+        }
+        return Arrays.asList(result);
     }
 
     @Override
@@ -1275,15 +1329,15 @@ public final class CMatchUI
 
     @Override
     public void notifyStackAddition(GameEventSpellAbilityCast event) {
-        SpellAbility sa = event.sa();
+        SpellAbilityView sa = event.sa();
         String stackNotificationPolicy = FModel.getPreferences().getPref(FPref.UI_STACK_EFFECT_NOTIFICATION_POLICY);
-        boolean isAi = sa.getActivatingPlayer().isAI();
-        boolean isTrigger = sa.isTrigger();
+        boolean isAi = event.si().getActivatingPlayer().isAI();
+        boolean isTrigger = event.si().isTrigger();
         int stackIndex = event.stackIndex();
         if (stackIndex == nextNotifiableStackIndex) {
             if (ForgeConstants.STACK_EFFECT_NOTIFICATION_ALWAYS.equals(stackNotificationPolicy) || (ForgeConstants.STACK_EFFECT_NOTIFICATION_AI_AND_TRIGGERED.equals(stackNotificationPolicy) && (isAi || isTrigger))) {
                 // We can go and show the modal
-                SpellAbilityStackInstance si = event.si();
+                StackItemView si = event.si();
 
                 MigLayout migLayout = new MigLayout("insets 15, left, gap 30, fill");
                 JPanel mainPanel = new JPanel(migLayout);
@@ -1301,32 +1355,14 @@ public final class CMatchUI
                 // Small images
                 int numSmallImages = 0;
 
-                // If current effect is a triggered/activated ability of an enchantment card, I want to show the enchanted card
+                // If current effect is a triggered/activated ability of an enchantment card, show the enchanted card
                 GameEntityView enchantedEntityView = null;
-                Card hostCard = sa.getHostCard();
-                if (hostCard.isEnchantment()) {
-                    GameEntity enchantedEntity = hostCard.getEntityAttachedTo();
-                    if (enchantedEntity != null) {
-                        enchantedEntityView = enchantedEntity.getView();
+                CardView hostCard = sa.getHostCard();
+                if (hostCard != null && hostCard.getCurrentState().isEnchantment()) {
+                    enchantedEntityView = hostCard.getEntityAttachedTo();
+                    if (enchantedEntityView != null) {
                         numSmallImages++;
-                    } else if ((sa.getRootAbility() != null)
-                            && (sa.getRootAbility().getPaidList("Sacrificed", true) != null)
-                            && !sa.getRootAbility().getPaidList("Sacrificed", true).isEmpty()) {
-                        // If the player activated its ability by sacrificing the enchantment, the enchantment has not anything attached anymore and the ex-enchanted card has to be searched in other ways.. for example, the green enchantment "Carapace"
-                        enchantedEntity = sa.getRootAbility().getPaidList("Sacrificed", true).get(0).getEnchantingCard();
-                        if (enchantedEntity != null) {
-                            enchantedEntityView = enchantedEntity.getView();
-                            numSmallImages++;
-                        }
                     }
-                }
-
-                // If current effect is a triggered ability, I want to show the triggering card if present
-                SpellAbility sourceSA = (SpellAbility) si.getTriggeringObject(AbilityKey.SourceSA);
-                CardView sourceCardView = null;
-                if (sourceSA != null) {
-                    sourceCardView = sourceSA.getHostCard().getView();
-                    numSmallImages++;
                 }
 
                 // I also want to show each type of targets (both cards and players)
@@ -1336,9 +1372,6 @@ public final class CMatchUI
                 // Now I know how many small images - on to render them
                 if (enchantedEntityView != null) {
                     addSmallImageToStackModalPanel(enchantedEntityView,mainPanel,numSmallImages);
-                }
-                if (sourceCardView != null) {
-                    addSmallImageToStackModalPanel(sourceCardView,mainPanel,numSmallImages);
                 }
                 for (GameEntityView gev : targets) {
                     addSmallImageToStackModalPanel(gev, mainPanel, numSmallImages);
@@ -1358,34 +1391,32 @@ public final class CMatchUI
         }
     }
 
-    private List<GameEntityView> getTargets(SpellAbilityStackInstance si, List<GameEntityView> result){
+    private List<GameEntityView> getTargets(StackItemView si, List<GameEntityView> result){
         if (si == null) {
             return result;
         }
-        FCollectionView<CardView> targetCards = CardView.getCollection(si.getTargetChoices().getTargetCards());
-        for (CardView currCardView: targetCards) {
-            result.add(currCardView);
+        FCollectionView<CardView> targetCards = si.getTargetCards();
+        if (targetCards != null) {
+            for (CardView currCardView : targetCards) {
+                result.add(currCardView);
+            }
         }
 
-        for (SpellAbility currSA : si.getTargetChoices().getTargetSpells()) {
-            CardView currCardView = currSA.getCardView();
-            result.add(currCardView);
-        }
-
-        FCollectionView<PlayerView> targetPlayers = PlayerView.getCollection(si.getTargetChoices().getTargetPlayers());
-        for (PlayerView currPlayerView : targetPlayers) {
-            result.add(currPlayerView);
+        FCollectionView<PlayerView> targetPlayers = si.getTargetPlayers();
+        if (targetPlayers != null) {
+            for (PlayerView currPlayerView : targetPlayers) {
+                result.add(currPlayerView);
+            }
         }
 
         return getTargets(si.getSubInstance(),result);
     }
 
-    private void addBigImageToStackModalPanel(JPanel mainPanel, SpellAbilityStackInstance si) {
-        StackItemView siv = si.getView();
-        int rotation = getRotation(si.getCardView());
+    private void addBigImageToStackModalPanel(JPanel mainPanel, StackItemView si) {
+        int rotation = getRotation(si.getSourceCard());
 
         FImagePanel imagePanel = new FImagePanel();
-        BufferedImage bufferedImage = FImageUtil.getImage(siv.getSourceCard().getCurrentState());
+        BufferedImage bufferedImage = FImageUtil.getImage(si.getSourceCard().getCurrentState());
         imagePanel.setImage(bufferedImage, rotation, AutoSizeImageMode.SOURCE);
         int imageWidth = 433;
         int imageHeight = 600;
@@ -1395,22 +1426,32 @@ public final class CMatchUI
         mainPanel.add(imagePanel, "cell 0 0, spany 3");
     }
 
-    private void addTextToStackModalPanel(JPanel mainPanel, SpellAbility sa, SpellAbilityStackInstance si) {
-        String who = sa.getActivatingPlayer().getName();
-        String action = sa.isSpell() ? " cast " : sa.isTrigger() ? " triggered " : " activated ";
-        String what = sa.getStackDescription().startsWith("Morph ") ? "Morph" : sa.getHostCard().toString();
+    private void addTextToStackModalPanel(JPanel mainPanel, SpellAbilityView sa, StackItemView si) {
+        String who = si.getActivatingPlayer().getName();
+        String action = sa.isSpell() ? " cast " : si.isTrigger() ? " triggered " : " activated ";
+        String desc = sa.getDescription();
+        String what = (desc != null && desc.startsWith("Morph ")) ? "Morph" : sa.getHostCard().toString();
 
         StringBuilder sb = new StringBuilder();
         sb.append(who).append(action).append(what);
 
-        if (sa.getTargetRestrictions() != null) {
+        FCollectionView<CardView> targetCards = si.getTargetCards();
+        FCollectionView<PlayerView> targetPlayers = si.getTargetPlayers();
+        boolean hasTargets = (targetCards != null && !targetCards.isEmpty()) || (targetPlayers != null && !targetPlayers.isEmpty());
+        if (hasTargets) {
             sb.append(" targeting ");
-            TargetChoices targets = si.getTargetChoices();
-            sb.append(targets);
+            List<String> targetNames = new ArrayList<>();
+            if (targetCards != null) {
+                for (CardView cv : targetCards) { targetNames.add(cv.toString()); }
+            }
+            if (targetPlayers != null) {
+                for (PlayerView pv : targetPlayers) { targetNames.add(pv.toString()); }
+            }
+            sb.append(String.join(", ", targetNames));
         }
         sb.append(".");
         String message1 = sb.toString();
-        String message2 = si.getStackDescription();
+        String message2 = si.getText();
         String messageTotal = message1 + "\n\n" + message2;
 
         final FTextArea prompt1 = new FTextArea(messageTotal);
@@ -1466,19 +1507,19 @@ public final class CMatchUI
     }
 
     @Override
-    public void handleLandPlayed(Card land) {
+    public void handleLandPlayed(CardView land) {
         Runnable createPopupThread = () -> createLandPopupPanel(land);
         GuiBase.getInterface().invokeInEdtAndWait(createPopupThread);
     }
 
-    private void createLandPopupPanel(Card land) {
+    private void createLandPopupPanel(CardView land) {
         String landPlayedNotificationPolicy = FModel.getPreferences().getPref(FPref.UI_LAND_PLAYED_NOTIFICATION_POLICY);
-        Player cardController = land.getController();
+        PlayerView cardController = land.getController();
         boolean isAi = cardController.isAI();
         if (ForgeConstants.LAND_PLAYED_NOTIFICATION_ALWAYS.equals(landPlayedNotificationPolicy)
                 || (ForgeConstants.LAND_PLAYED_NOTIFICATION_AI.equals(landPlayedNotificationPolicy) && (isAi))
-                || (ForgeConstants.LAND_PLAYED_NOTIFICATION_ALWAYS_FOR_NONBASIC_LANDS.equals(landPlayedNotificationPolicy) && !land.isBasicLand())
-                || (ForgeConstants.LAND_PLAYED_NOTIFICATION_AI_FOR_NONBASIC_LANDS.equals(landPlayedNotificationPolicy) && !land.isBasicLand()) && (isAi)) {
+                || (ForgeConstants.LAND_PLAYED_NOTIFICATION_ALWAYS_FOR_NONBASIC_LANDS.equals(landPlayedNotificationPolicy) && !land.getCurrentState().isBasicLand())
+                || (ForgeConstants.LAND_PLAYED_NOTIFICATION_AI_FOR_NONBASIC_LANDS.equals(landPlayedNotificationPolicy) && !land.getCurrentState().isBasicLand()) && (isAi)) {
             String title = "Forge";
             List<String> options = ImmutableList.of(Localizer.getInstance().getMessage("lblOK"));
 
@@ -1489,10 +1530,10 @@ public final class CMatchUI
             mainPanel.setMaximumSize(maxSize);
             mainPanel.setOpaque(false);
 
-            int rotation = getRotation(land.getView());
+            int rotation = getRotation(land);
 
             FImagePanel imagePanel = new FImagePanel();
-            BufferedImage bufferedImage = FImageUtil.getImage(land.getCurrentState().getView());
+            BufferedImage bufferedImage = FImageUtil.getImage(land.getCurrentState());
             imagePanel.setImage(bufferedImage, rotation, AutoSizeImageMode.SOURCE);
             int imageWidth = 433;
             int imageHeight = 600;
@@ -1501,7 +1542,7 @@ public final class CMatchUI
 
             mainPanel.add(imagePanel, "cell 0 0, spany 3");
 
-            String msg = cardController.toString() + " puts " + land.toString() + " into play into " + ZoneType.Battlefield.toString() + ".";
+            String msg = cardController.toString() + " puts " + land.getName() + " into play into " + ZoneType.Battlefield.toString() + ".";
 
             final FTextArea prompt1 = new FTextArea(msg);
             prompt1.setFont(FSkin.getFont(21));

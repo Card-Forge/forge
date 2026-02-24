@@ -1,0 +1,12 @@
+Name:Lita, Little Orphan Amphibian
+ManaCost:1 W
+Types:Legendary Creature Mutant Ninja Turtle
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ Alliance — Whenever another creature you control enters, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBPutCounter,DBToken,DBScry | ChoiceRestriction$ ThisTurn
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on NICKNAME.
+SVar:DBToken:DB$ Token | TokenScript$ c_a_food_sac | SpellDescription$ Create a Food token. (It's an artifact with "{2}, {T}: Sacrifice this token: You gain 3 life.")
+SVar:DBScry:DB$ Scry | ScryNum$ 1 | SpellDescription$ Scry 1.
+SVar:BuffedBy:Creature
+DeckHas:Ability$Counters|Token|LifeGain|Sacrifice & Type$Food|Artifact
+Oracle:Alliance — Whenever another creature you control enters, choose one that hasn't been chosen this turn —\n• Put a +1/+1 counter on Lita.\n• Create a Food token. (It's an artifact with "{2}, {T}: Sacrifice this token: You gain 3 life.")\n• Scry 1.

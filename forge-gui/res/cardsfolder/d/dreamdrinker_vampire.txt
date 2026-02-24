@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Creature Vampire
 PT:2/1
 K:Lifelink
-K:Adapt:1:1 B
+A:AB$ PutCounter | Cost$ 1 B | Adapt$ 1
 T:Mode$ CounterAddedOnce | ValidCard$ Card.Self | TriggerZones$ Battlefield | CounterType$ P1P1 | Execute$ TrigPump | TriggerDescription$ Whenever one or more +1/+1 counters are put on CARDNAME, it gains menace until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Menace
 DeckHas:Ability$Counters|LifeGain

@@ -1,0 +1,9 @@
+Name:Null Group Biological Assets
+ManaCost:2 R
+Types:Creature Mutant Mercenary
+PT:3/1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ During your turn, this creature has first strike.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME attacks, you may discard a card. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ Discard<1/Card>
+SVar:HasAttackEffect:TRUE
+Oracle:During your turn, this creature has first strike.\nWhenever this creature attacks, you may discard a card. If you do, draw a card.

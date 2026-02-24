@@ -4,7 +4,7 @@ Types:Artifact Creature Golem
 PT:10/10
 K:Defender
 K:Indestructible
-K:Monstrosity:10:10
+A:AB$ PutCounter | Cost$ 10 | Monstrosity$ 10
 S:Mode$ Continuous | Affected$ Card.Self+IsMonstrous | AddKeyword$ Trample | Description$ As long as CARDNAME is monstrous, it has trample and can attack as though it didn't have defender.
 S:Mode$ CanAttackDefender | ValidCard$ Card.Self+IsMonstrous | Secondary$ True
 DeckHas:Ability$Counters

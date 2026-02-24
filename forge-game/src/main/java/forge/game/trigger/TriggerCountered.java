@@ -60,7 +60,7 @@ public class TriggerCountered extends Trigger {
         if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
             return false;
         }
-        if (!matchesValidParam("ValidSA", runParams.get(AbilityKey.CounteredSA))) {
+        if (!matchesValidParam("ValidSA", runParams.get(AbilityKey.SpellAbility))) {
             return false;
         }
         return true;
@@ -73,7 +73,7 @@ public class TriggerCountered extends Trigger {
             runParams,
             AbilityKey.Card,
             AbilityKey.Cause,
-            AbilityKey.CounteredSA
+            AbilityKey.SpellAbility
         );
     }
 

@@ -1,7 +1,7 @@
 Name:Ethrimik, Imagined Fiend
-ManaCost:2 W W
+ManaCost:1 W W
 Types:Legendary Creature Illusion Beast
-PT:5/5
+PT:4/4
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Origin$ Any | Execute$ TrigManifest | TriggerDescription$ When NICKNAME enters, manifest dread.
 SVar:TrigManifest:DB$ ManifestDread
 S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other creatures you control get +1/+1.

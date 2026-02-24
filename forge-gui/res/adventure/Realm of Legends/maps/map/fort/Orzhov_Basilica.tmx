@@ -47,7 +47,7 @@
   <object id="52" template="../../../../common/maps/obj/gold.tx" x="161.496" y="193.356"/>
   <object id="57" template="../../../../common/maps/obj/enemy.tx" x="231.974" y="215.989">
    <properties>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Orzhova, the Church of Deals |GPT&quot;, &quot;Orzhov Guildmage|GPT&quot; ] }"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Orzhova, the Church of Deals |GPT&quot;, &quot;Blind Obedience&quot; ] }"/>
     <property name="enemy" value="Teysa"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="10"/>

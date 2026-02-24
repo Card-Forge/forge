@@ -31,7 +31,7 @@
  <objectgroup id="4" name="Objects">
   <object id="50" template="../../../../common/maps/obj/enemy.tx" x="240.561" y="404.87" width="64" height="64">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Echoes of Eternity|MH3&quot;, &quot;It That Heralds the End|MH3&quot;, &quot;Eldrazi Mimic|OGW&quot;, &quot;Sanctum of Ugin|BFZ&quot;, Hedron Matrix|ROE&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;It That Heralds the End|MH3&quot;, &quot;Eldrazi Mimic|OGW&quot;, &quot;Sanctum of Ugin|BFZ&quot;, Hedron Matrix|ROE&quot;]}"/>
     <property name="enemy" value="Zhulodok"/>
     <property name="speedModifier" type="float" value="50"/>
     <property name="threatRange" type="int" value="100"/>

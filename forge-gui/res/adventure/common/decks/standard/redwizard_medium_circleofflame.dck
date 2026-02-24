@@ -1,6 +1,6 @@
 [metadata]
 Name=Carnage 2
-[main]
+[Main]
 23 Mountain
 4 Grand Melee
 1 Bedlam
@@ -26,4 +26,4 @@ Name=Carnage 2
 1 Thran War Machine
 1 Ulamog's Crusher
 1 Utvara Scalper
-[sideboard]
+[Sideboard]

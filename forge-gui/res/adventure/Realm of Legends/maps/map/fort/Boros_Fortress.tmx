@@ -55,7 +55,7 @@
   </object>
   <object id="50" template="../../../../common/maps/obj/enemy.tx" x="310.606" y="192.186">
    <properties>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Sunhome, Fortress of the Legion|RAV&quot;, &quot;Boros Guildmage|RVR&quot; ] }"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Sunhome, Fortress of the Legion|RAV&quot;, &quot;Aegis of the Legion&quot; ] }"/>
     <property name="enemy" value="Aurelia"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="50"/>

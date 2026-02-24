@@ -3330,9 +3330,17 @@ public class AbilityUtils {
             int totPlayer = 0;
             String[] parts = l[0].split(" ", 2);
             boolean def = parts[0].equals("Condition");
-            String comparator = !def ? parts[0].substring(9, 11) : "GE";
-            int y = !def ? calculateAmount(source, parts[0].substring(11), ctb) : 1;
+            String comparator = def ? "GE" : parts[0].substring(9, 11);
+            String calc = def ? "1" : parts[0].substring(11);
+            Integer y = null;
+            if (!ctb.getSVar(calc).contains("RelativePlayerUID")) {
+                y = calculateAmount(source, calc, ctb);
+            }
             for (Player p : players) {
+                if (y == null) {
+                    calc = ctb.getSVar(calc).replaceAll("RelativePlayerUID", String.valueOf(p.getId()));
+                    y = calculateAmount(source, calc, ctb);
+                }
                 int x = playerXProperty(p, parts[1], source, ctb);
                 if (Expressions.compare(x, comparator, y)) {
                     totPlayer++;
@@ -3667,6 +3675,16 @@ public class AbilityUtils {
             return doXMath(creatTypes.size(), CardFactoryUtil.extractOperators(def), source, ctb);
         }
 
+        //Per request for custom cards.
+        if (def.startsWith("LandType")) {
+            final Set<String> landTypes = Sets.newHashSet();
+            for (Card card : paidList) {
+                landTypes.addAll(card.getType().getLandTypes());
+            }
+
+            return doXMath(landTypes.size(), CardFactoryUtil.extractOperators(def), source, ctb);
+        }
+
         Function<IntStream, Integer> func;
         String finalDef;
         if (def.startsWith("Least")) {
@@ -3721,47 +3739,8 @@ public class AbilityUtils {
             }
         }
 
-        if (sq[0].contains("InOppYard")) {
-            for (final Player p : opps) {
-                someCards.addAll(p.getCardsIn(ZoneType.Graveyard));
-            }
-        }
-
-        if (sq[0].contains("InOppHand")) {
-            for (final Player p : opps) {
-                someCards.addAll(p.getCardsIn(ZoneType.Hand));
-            }
-        }
-
-        if (sq[0].contains("InChosenHand")) {
-            if (c.hasChosenPlayer()) {
-                someCards.addAll(c.getChosenPlayer().getCardsIn(ZoneType.Hand));
-            }
-        }
-
-        if (sq[0].contains("InRememberedHand")) {
-            if (c.getRemembered() != null) {
-                for (final Object o : c.getRemembered()) {
-                    if (o instanceof Player) {
-                        Player remPlayer = (Player) o;
-                        someCards.addAll(remPlayer.getCardsIn(ZoneType.Hand));
-                    }
-                }
-            }
-        }
-
-        if (sq[0].contains("InChosenYard")) {
-            if (c.hasChosenPlayer()) {
-                someCards.addAll(c.getChosenPlayer().getCardsIn(ZoneType.Graveyard));
-            }
-        }
-
         if (sq[0].contains("OnBattlefield")) {
             someCards.addAll(game.getCardsIn(ZoneType.Battlefield));
-        }
-
-        if (sq[0].contains("InAllYards")) {
-            someCards.addAll(game.getCardsIn(ZoneType.Graveyard));
         }
 
         if (sq[0].contains("SpellsOnStack")) {
@@ -3770,20 +3749,6 @@ public class AbilityUtils {
 
         if (sq[0].contains("InAllHands")) {
             someCards.addAll(game.getCardsIn(ZoneType.Hand));
-        }
-
-        //  Count$InTargetedHand (targeted player's cards in hand)
-        if (sq[0].contains("InTargetedHand")) {
-            for (Player tgtP : getDefinedPlayers(c, "TargetedPlayer", ctb)) {
-                someCards.addAll(tgtP.getCardsIn(ZoneType.Hand));
-            }
-        }
-
-        //  Count$InTargetedLibrary (targeted player's cards in library)
-        if (sq[0].contains("InTargetedLibrary")) {
-            for (Player tgtP : getDefinedPlayers(c, "TargetedPlayer", ctb)) {
-                someCards.addAll(tgtP.getCardsIn(ZoneType.Library));
-            }
         }
 
         // filter lists based on the specified quality
