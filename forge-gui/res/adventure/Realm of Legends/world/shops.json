@@ -570,8 +570,6 @@
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"ItemShop",   
   "rewards": [ 
-    { "type": "item","count":1, "itemName": "White rune"  },
-	{ "type": "life","count":1    },
 	{ "type": "item","count":1, "itemName": "Peddler's Shoes"  },
 	{ "type": "item","count":1, "itemName": "Sunbeam Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Mirth"  },
@@ -605,8 +603,6 @@
 "spriteAtlas":"maps/tileset/buildings.atlas",    
 "sprite":"ItemShop",   
   "rewards": [ 
-    { "type": "item","count":1, "itemName": "Red rune"  },
-	{ "type": "life","count":1    },
     { "type": "item","count":1, "itemName": "Firefrightener Shoes"  },
 	{ "type": "item","count":1, "itemName": "Pyrite Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Fury"  },
@@ -638,8 +634,6 @@
 "spriteAtlas":"maps/tileset/buildings.atlas",    
 "sprite":"ItemShop",   
   "rewards": [ 
-    { "type": "item","count":1, "itemName": "Blue rune"  },
-	{ "type": "life","count":1    },
     { "type": "item","count":1, "itemName": "Trickster's Shoes"  },
 	{ "type": "item","count":1, "itemName": "Aether Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Mischief"  },
@@ -671,8 +665,6 @@
 "spriteAtlas":"maps/tileset/buildings.atlas",    
 "sprite":"ItemShop",   
   "rewards": [ 
-    { "type": "item","count":1, "itemName": "Black rune"  },
-	{ "type": "life","count":1    },
     { "type": "item","count":1, "itemName": "Witch's Shoes"  },
 	{ "type": "item","count":1, "itemName": "Necrogen Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Scorn"  },
@@ -704,8 +696,6 @@
 "spriteAtlas":"maps/tileset/buildings.atlas",    
 "sprite":"ItemShop",   
   "rewards": [ 
-    { "type": "item","count":1, "itemName": "Green rune"  },
-    { "type": "life","count":1   },
     { "type": "item","count":1, "itemName": "Greenseeker's Shoes"  },
 	{ "type": "item","count":1, "itemName": "Lifespark Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Favor"  },
