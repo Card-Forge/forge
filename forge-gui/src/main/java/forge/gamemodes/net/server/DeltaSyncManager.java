@@ -141,6 +141,21 @@ public class DeltaSyncManager {
         if (gameView.getStack() != null) {
             for (StackItemView stackItem : gameView.getStack()) {
                 collectObjectDelta(stackItem, objectDeltas, newObjects, currentObjectIds);
+                // Discover the stack item's source card. Spell copies (Fork, Storm, etc.)
+                // create virtual source cards via copySpellHost that aren't in any zone.
+                // Without this, the StackItemView's SourceCard ID is serialized but the
+                // CardView itself is never sent, causing null references on the client.
+                CardView sourceCard = stackItem.getSourceCard();
+                if (sourceCard != null) {
+                    collectCardDelta(sourceCard, objectDeltas, newObjects, currentObjectIds, 0);
+                }
+                // Discover target cards (usually already in zones, but ensures completeness
+                // for edge cases where targets are in transitional states)
+                if (stackItem.getTargetCards() != null) {
+                    for (CardView target : stackItem.getTargetCards()) {
+                        collectCardDelta(target, objectDeltas, newObjects, currentObjectIds, 0);
+                    }
+                }
             }
         }
 
@@ -629,6 +644,16 @@ public class DeltaSyncManager {
                 int key = makeDeltaKey(DeltaPacket.TYPE_STACK_ITEM_VIEW, stackItem.getId());
                 sentObjectIds.add(key);
                 recordPropertyChecksums(key, stackItem);
+                // Also mark source card and target cards (see collectDeltas)
+                CardView sourceCard = stackItem.getSourceCard();
+                if (sourceCard != null) {
+                    markCardAsSent(sourceCard);
+                }
+                if (stackItem.getTargetCards() != null) {
+                    for (CardView target : stackItem.getTargetCards()) {
+                        markCardAsSent(target);
+                    }
+                }
             }
         }
 
@@ -751,6 +776,16 @@ public class DeltaSyncManager {
         if (gameView.getStack() != null) {
             for (StackItemView stackItem : gameView.getStack()) {
                 stackItem.clearChanges();
+                // Also clear source card and target cards (see collectDeltas)
+                CardView sourceCard = stackItem.getSourceCard();
+                if (sourceCard != null) {
+                    clearCardChanges(sourceCard);
+                }
+                if (stackItem.getTargetCards() != null) {
+                    for (CardView target : stackItem.getTargetCards()) {
+                        clearCardChanges(target);
+                    }
+                }
             }
         }
 
