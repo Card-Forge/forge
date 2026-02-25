@@ -20,9 +20,9 @@ Name=Akul
 1 Come Back Wrong|dsk
 1 Command Tower|cmr
 1 Corrupted Conviction|otj
-1 Darksteel Colossus|pw24
-1 Deadly Dispute|afr
-1 Desperate Measures|tdm
+1 Darksteel Colossus|mrd
+1 Dark Prophecy|m14
+1 Mutinous Massacre|eoe
 1 Disciple of Perdition|j22
 1 Dragon Fodder|ori
 1 Dread Return|ddq
@@ -48,11 +48,11 @@ Name=Akul
 1 Liliana's Standard Bearer|moc
 1 Lord Skitter, Sewer King|woe
 1 Marionette Apprentice|mh3
-1 Mass Mutiny|otc
+1 Mob Rule|frf
 1 Midnight Reaper|grn
 1 Mogg War Marshal|mma
 1 Morbid Opportunist|mid
-11 Mountain|otj
+10 Mountain|otj
 1 Nether Shadow|lea
 1 Nezumi Linkbreaker|otj
 1 Overseer of the Damned|c14
@@ -69,7 +69,9 @@ Name=Akul
 1 Sokenzan, Crucible of Defiance|neo
 1 Song of Totentanz|woe
 1 Stormfist Crusader|eld
-12 Swamp|otj
+11 Swamp|otj
+1 Vivid Marsh|c17
+1 Vivid Crag|c17
 1 Tainted Peak|tor
 1 Temple of Malice|fdn
 1 Terminate|cmd
