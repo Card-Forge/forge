@@ -409,7 +409,6 @@ public final class FServerManager {
         String msg = success
             ? localizer.getMessage("lblUPnPSuccess", String.valueOf(port))
             : localizer.getMessage("lblUPnPFailed", String.valueOf(port));
-        System.out.println(msg);
         if (lobbyListener != null) {
             broadcast(new MessageEvent(msg));
         }

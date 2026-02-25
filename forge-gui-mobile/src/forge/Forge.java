@@ -1100,11 +1100,6 @@ public class Forge implements ApplicationListener {
         return null;
     }
 
-    //log message to Forge.log file
-    public static void log(Object message) {
-        System.out.println(message);
-    }
-
     public static void startKeyInput(KeyInputAdapter adapter) {
         if (keyInputAdapter == adapter) {
             return;

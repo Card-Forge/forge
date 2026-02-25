@@ -17,7 +17,8 @@
  */
 package forge.gui.download;
 
-import com.esotericsoftware.minlog.Log;
+import org.tinylog.Logger;
+
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.UiCommand;
@@ -329,7 +330,7 @@ public abstract class GuiDownloadService implements Runnable {
                 System.out.printf((formatStr) + "%n", fileDest.getName(), url, fnfe.getMessage());
             }
             catch (final Exception ex) {
-                Log.error("LQ Pictures", "Error downloading pictures", ex);
+                Logger.error("LQ Pictures", "Error downloading pictures", ex);
             }
             finally {
                 if (fos != null) {
