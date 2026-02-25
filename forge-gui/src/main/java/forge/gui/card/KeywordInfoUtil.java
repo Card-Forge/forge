@@ -11,12 +11,16 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
+import forge.game.keyword.Equip;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordAction;
 import forge.game.keyword.KeywordInterface;
+import forge.game.keyword.KeywordWithCostInterface;
 import forge.game.keyword.KeywordWithTypeInterface;
 import forge.game.player.PlayerView;
+import forge.game.zone.ZoneType;
 import forge.util.Localizer;
+import forge.util.collect.FCollectionView;
 
 /**
  * Platform-neutral utility for building keyword info (names + reminder text)
@@ -69,7 +73,7 @@ public final class KeywordInfoUtil {
                 if (kw == Keyword.UNDEFINED || kw == Keyword.ENCHANT) {
                     continue;
                 }
-                if (seenIdx.containsKey(kw)) {
+                if (seenIdx.containsKey(kw) && kw != Keyword.EQUIP) {
                     // Merge parameterised duplicates (e.g. multiple Protections)
                     final String title = inst.getTitle();
                     final String prefix = kw.toString() + " ";
@@ -106,7 +110,28 @@ public final class KeywordInfoUtil {
                 } catch (Exception ex) {
                     reminderText = "";
                 }
-                final String title = inst.getTitle();
+                // For Craft, the full title includes exile costs that are
+                // very long — show just "Craft {mana}" instead
+                final String title;
+                if (kw == Keyword.CRAFT
+                        && inst instanceof KeywordWithCostInterface) {
+                    final String mana = ((KeywordWithCostInterface) inst)
+                            .getCost().getTotalMana().toString();
+                    title = "Craft " + mana;
+                } else if (kw == Keyword.EQUIP
+                        && inst instanceof Equip) {
+                    // Include type qualifier for non-default equip variants
+                    // (e.g. "Equip commander {3}" vs plain "Equip {5}")
+                    final String equipType = ((Equip) inst).getValidDescription();
+                    if (!"creature".equals(equipType)) {
+                        title = "Equip " + equipType + " " + inst.getTitle()
+                                .substring(kw.toString().length()).trim();
+                    } else {
+                        title = inst.getTitle();
+                    }
+                } else {
+                    title = inst.getTitle();
+                }
                 seenIdx.put(kw, result.size());
                 rawTitles.put(result.size(), title);
                 String typeParam = null;
@@ -194,16 +219,41 @@ public final class KeywordInfoUtil {
                         && Character.isLetter(lowerText.charAt(pos))) {
                     pos++;
                 }
-                // Skip whitespace to reach the number
+                // Skip whitespace to reach the number (or a type word before it)
                 if (pos < lowerText.length()
                         && lowerText.charAt(pos) == ' ') {
                     pos++;
-                    final String resolved = parseNumber(lowerText, pos);
+                    String resolved = parseNumber(lowerText, pos);
+                    // If no number found, a type word may precede it
+                    // (e.g. "amass zombies 2") — capture the word and skip past it
+                    String typeWord = null;
+                    if (resolved == null) {
+                        final int wordStart = pos;
+                        while (pos < lowerText.length()
+                                && Character.isLetter(lowerText.charAt(pos))) {
+                            pos++;
+                        }
+                        if (pos > wordStart && pos < lowerText.length()
+                                && lowerText.charAt(pos) == ' ') {
+                            typeWord = lowerText.substring(wordStart, pos);
+                            pos++;
+                            resolved = parseNumber(lowerText, pos);
+                        }
+                    }
                     if (resolved != null) {
                         reminder = reminder.replace("N", resolved);
-                        displayName = displayName + " " + resolved;
+                        if (typeWord != null) {
+                            // Capitalize type word for display
+                            final String capType = Character.toUpperCase(
+                                    typeWord.charAt(0)) + typeWord.substring(1);
+                            displayName = displayName + " " + capType
+                                    + " " + resolved;
+                        } else {
+                            displayName = displayName + " " + resolved;
+                        }
                         if ("1".equals(resolved)) {
-                            reminder = reminder.replace("counters", "counter");
+                            reminder = reminder.replace("counters", "counter")
+                                    .replace("cards", "card");
                         }
                     } else {
                         // Can't resolve number (e.g. "mill half their library")
@@ -301,6 +351,8 @@ public final class KeywordInfoUtil {
                 annotated = annotateThreshold(kw, controller, localizer);
             } else if (lowerName.equals("delirium")) {
                 annotated = annotateDelirium(kw, controller, localizer);
+            } else if (lowerName.equals("the ring tempts you")) {
+                annotated = annotateRingLevel(kw, controller);
             }
 
             if (annotated != null) {
@@ -534,6 +586,24 @@ public final class KeywordInfoUtil {
                 appendAnnotation(kw.reminderText, reminder));
     }
 
+    private static KeywordData annotateRingLevel(final KeywordData kw,
+                                                  final PlayerView controller) {
+        final FCollectionView<CardView> commandZone =
+                controller.getCards(ZoneType.Command);
+        if (commandZone == null) {
+            return null;
+        }
+        for (final CardView c : commandZone) {
+            final int level = c.getRingLevel();
+            if (level > 0) {
+                final String annotation = "(Currently at level " + level + ")";
+                return new KeywordData(kw.name + " (" + level + ")",
+                        appendAnnotation(kw.reminderText, annotation));
+            }
+        }
+        return null;
+    }
+
     private static String appendAnnotation(final String reminderText,
                                               final String annotation) {
         return reminderText.isEmpty() ? annotation
@@ -594,6 +664,10 @@ public final class KeywordInfoUtil {
         }
         if (numEnd > pos) {
             return text.substring(pos, numEnd);
+        }
+        // Try "a"/"an" as 1 (e.g. "mill a card", "create an artifact")
+        if (text.startsWith("a ", pos) || text.startsWith("an ", pos)) {
+            return "1";
         }
         // Try number words: "one" through "twenty"
         final String[] words = {

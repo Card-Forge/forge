@@ -108,6 +108,7 @@ public class CardInfoPopup {
     private boolean cachedShowOverlays = false;
     private String cachedOverlayState = "";
     private String cachedCardImageKey = "";
+    private boolean cachedDisableImages = false;
 
     // Pending show state
     private Point pendingLocation;
@@ -228,6 +229,8 @@ public class CardInfoPopup {
         final String cardImageKey = showCardImage ? nullSafe(state.getImageKey()) : "";
         final boolean showOverlays = showCardImage
                 && FModel.getPreferences().getPrefBoolean(FPref.UI_POPUP_CARD_OVERLAYS);
+        final boolean disableImages = FModel.getPreferences().getPrefBoolean(
+                FPref.UI_DISABLE_CARD_IMAGES);
         // Build a lightweight state key from dynamic overlay properties so the
         // cache is only invalidated when actual overlay content changes, not on
         // every mouse move event.
@@ -240,7 +243,8 @@ public class CardInfoPopup {
                 && showCardImage == cachedShowCardImage
                 && showOverlays == cachedShowOverlays
                 && overlayState.equals(cachedOverlayState)
-                && cardImageKey.equals(cachedCardImageKey)) {
+                && cardImageKey.equals(cachedCardImageKey)
+                && disableImages == cachedDisableImages) {
             if (!cachedHasKeywords && !cachedHasRelated && !showCardImage) {
                 hidePopup();
                 return;
@@ -317,6 +321,7 @@ public class CardInfoPopup {
             cachedShowOverlays = showOverlays;
             cachedOverlayState = overlayState;
             cachedCardImageKey = cardImageKey;
+            cachedDisableImages = disableImages;
             hidePopup();
             return;
         }
@@ -393,6 +398,7 @@ public class CardInfoPopup {
         cachedShowOverlays = showOverlays;
         cachedOverlayState = overlayState;
         cachedCardImageKey = cardImageKey;
+        cachedDisableImages = disableImages;
 
         // Defer pack/show to let layout complete
         final Point loc = cardScreenLocation;
@@ -628,6 +634,17 @@ public class CardInfoPopup {
 
             // Spellbook entries
             addSpellbookEntries(entries, rules, data);
+
+            // ChooseFromList entries (e.g. Garth One-Eye)
+            addChooseFromListEntries(entries, rules, data);
+
+            // The Ring emblem for cards with "the Ring tempts you"
+            final CardStateView curState = cardView.getCurrentState();
+            final String oracle = curState != null ? curState.getOracleText() : null;
+            if (oracle != null && oracle.toLowerCase().contains("the ring tempts you")) {
+                addRingEmblemEntry(entries, data);
+            }
+
         } catch (Exception e) {
             // Guard against any lookup failures
         }
@@ -829,6 +846,102 @@ public class CardInfoPopup {
                     names.add(trimmed);
                 }
             }
+        }
+    }
+
+    private static void addChooseFromListEntries(final List<RelatedCardEntry> entries,
+                                                     final CardRules rules,
+                                                     final StaticData data) {
+        final Set<String> names = extractChooseFromListNames(rules.getMainPart());
+        if (names.isEmpty()) {
+            return;
+        }
+        for (final String cardName : names) {
+            try {
+                final PaperCard pc = data.getCommonCards().getCard(cardName);
+                if (pc != null) {
+                    final String imageKey = pc.getImageKey(false);
+                    final Pair<BufferedImage, Boolean> info =
+                            ImageCache.getCardOriginalImageInfo(imageKey, true);
+                    final BufferedImage img = info.getLeft();
+                    if (img != null) {
+                        entries.add(new RelatedCardEntry("Related", cardName,
+                                img, imageKey, info.getRight()));
+                    }
+                }
+            } catch (Exception e) {
+                // Skip cards that can't be resolved
+            }
+        }
+    }
+
+    private static Set<String> extractChooseFromListNames(final ICardFace face) {
+        final Set<String> names = new LinkedHashSet<>();
+        if (face.getAbilities() != null) {
+            for (final String ability : face.getAbilities()) {
+                extractChooseFromListLine(ability, names);
+            }
+        }
+        if (face.getTriggers() != null) {
+            for (final String trigger : face.getTriggers()) {
+                extractChooseFromListLine(trigger, names);
+            }
+        }
+        if (face.getVariables() != null) {
+            for (final Entry<String, String> svar : face.getVariables()) {
+                extractChooseFromListLine(svar.getValue(), names);
+            }
+        }
+        return names;
+    }
+
+    private static void extractChooseFromListLine(final String line,
+                                                    final Set<String> names) {
+        if (line == null || !line.contains("ChooseFromList$")) {
+            return;
+        }
+        final int start = line.indexOf("ChooseFromList$")
+                + "ChooseFromList$".length();
+        int end = line.indexOf(" | ", start);
+        if (end < 0) {
+            end = line.length();
+        }
+        final String value = line.substring(start, end).trim();
+        if (!value.isEmpty()) {
+            for (final String name : value.split(",")) {
+                final String trimmed = name.trim();
+                if (!trimmed.isEmpty()) {
+                    names.add(trimmed);
+                }
+            }
+        }
+    }
+
+    private static final String RING_ORACLE_TEXT =
+            "1: Your Ring-bearer is legendary and can't be blocked by creatures "
+            + "with greater power.\n"
+            + "2: Whenever your Ring-bearer attacks, draw a card, then discard a card.\n"
+            + "3: Whenever your Ring-bearer becomes blocked by a creature, that "
+            + "creature's controller sacrifices it at end of combat.\n"
+            + "4: Whenever your Ring-bearer deals combat damage to a player, each "
+            + "opponent loses 3 life.";
+
+    private static void addRingEmblemEntry(final List<RelatedCardEntry> entries,
+                                              final StaticData data) {
+        final String ringKey = data.getOtherImageKey(
+                ImageKeys.THE_RING_IMAGE, null);
+        // Build a lightweight CardView with oracle text so the renderer
+        // can paint a proper fallback. Pure view-layer, no Game needed.
+        final Card ringCard = new Card(-1, null, null);
+        ringCard.setName("The Ring");
+        ringCard.setOracleText(RING_ORACLE_TEXT);
+        final CardView ringView = ringCard.getView();
+        final Pair<BufferedImage, Boolean> info =
+                ImageCache.getCardOriginalImageInfo(ringKey, true, ringView);
+        final BufferedImage img = info.getLeft();
+        if (img != null) {
+            entries.add(new RelatedCardEntry("Emblem",
+                    "The Ring", img, ringKey, info.getRight()));
         }
     }
 

@@ -221,13 +221,10 @@ public class GameLogPanel extends JPanel {
             cardInfoPopup = new CardInfoPopup(ownerWindow);
         }
         try {
+            // Use the full entry bounds (not just the inline image) so the popup
+            // appears outside the log entry footprint and doesn't cause flickering.
             final Point entryLoc = entry.getLocationOnScreen();
-            final Point imageLoc = new Point(
-                    entryLoc.x + LogEntryTextArea.PADDING,
-                    entryLoc.y + LogEntryTextArea.PADDING);
-            final Dimension imageSize = new Dimension(
-                    LogEntryTextArea.CARD_WIDTH, LogEntryTextArea.CARD_HEIGHT);
-            cardInfoPopup.showForCard((CardView) cardProp, imageLoc, imageSize,
+            cardInfoPopup.showForCard((CardView) cardProp, entryLoc, entry.getSize(),
                     showKeywords, showRelated, showCardImage);
         } catch (final java.awt.IllegalComponentStateException ignored) {
             // Component not yet showing on screen
