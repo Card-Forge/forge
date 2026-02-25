@@ -2097,6 +2097,7 @@
     "iconName": "LotusPetal",
     "cost": 5000,
     "effect": {
+        "lifeModifier": -2,
         "startBattleWithCard": [
         "Lotus Petal|TMP"
      ]
@@ -2108,6 +2109,7 @@
     "equipmentSlot": "Left",
     "iconName": "BlackLotus",
     "effect": {
+        "lifeModifier": -3,
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Black Lotus|LEA"
@@ -2179,7 +2181,7 @@
     "equipmentSlot": "Left",
     "iconName": "Kaleidostone",
     "effect": {
-        "lifeModifier": 2,
+        "lifeModifier": 5,
         "startBattleWithCard": [
         "Kaleidostone|CON"
      ]
@@ -3776,7 +3778,7 @@
     "equipmentSlot": "Body",
     "iconName": "ArmorofUrami",
     "effect": {
-        "lifeModifier": -5,
+        "lifeModifier": -6,
         "startBattleWithCard": [
         "Tomb of Urami|SOK"
      ]
@@ -3806,67 +3808,72 @@
     }
   },
   {
-    "name": "Meadow Outfit",
-    "description": "Taps for W. -1 hand size.",
+    "name": "Plains Outfit",
+    "description": "Gives a plains. -2 life, -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "OutpostOutfit",
     "cost": 7500,
     "effect": {
+      "lifeModifier": -2,
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Drifting Meadow|DMR"
+        "Plains|LEA"
       ]
     }
   },
   {
-    "name": "Isle Shirt",
-    "description": "Taps for U. -1 hand size.",
+    "name": "Island Shirt",
+    "description": "Gives an island. -2 life, -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "SeafloorShirt",
     "cost": 7500,
     "effect": {
+      "lifeModifier": -2,
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Remote Isle|DMR"
+        "Island|LEA"
       ]
     }
   },
   {
-    "name": "Mire Leather",
-    "description": "Taps for B. -1 hand size.",
+    "name": "Swamp Leather",
+    "description": "Gives a swamp. -2 life, -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "BogDwellerLeather",
     "cost": 7500,
     "effect": {
+      "lifeModifier": -2,
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Polluted Mire|DMR"
+        "Swamp|LEA"
       ]
     }
   },
   {
-    "name": "Smoldering Cloak",
-    "description": "Taps for R. -1 hand size.",
+    "name": "Mountain Cloak",
+    "description": "Gives a mountain. -2 life, -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "HighlandCloak",
     "cost": 7500,
     "effect": {
+      "lifeModifier": -2,
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Smoldering Crater|DMR"
+        "Mountain|LEA"
       ]
     }
   },
   {
-    "name": "Slippery Shawl",
-    "description": "Taps for G. -1 hand size.",
+    "name": "Forest Shawl",
+    "description": "Gives a forest. -2 life, -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "TimberlandShawl",
     "cost": 7500,
     "effect": {
+      "lifeModifier": -2,
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Slippery Karst|DMR"
+        "Forest|LEA|[295]"
       ]
     }
   },
@@ -3988,7 +3995,8 @@
     "equipmentSlot": "Body",
     "iconName": "CloakofPrahv",
     "effect": {
-        "changeStartCards": -1,
+      "lifeModifier": 2,
+      "changeStartCards": -1,
         "startBattleWithCard": [
         "Prahv, Spires of Order|DIS"
      ]
@@ -4000,6 +4008,7 @@
     "equipmentSlot": "Body",
     "iconName": "CloakofSvogthos",
     "effect": {
+        "lifeModifier": 2,
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Svogthos, the Restless Tomb|RAV"
@@ -4012,6 +4021,7 @@
     "equipmentSlot": "Body",
     "iconName": "Vitu-GhaziCloak",
     "effect": {
+        "lifeModifier": 2,
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Vitu-Ghazi, the City-Tree|RAV"
@@ -4037,7 +4047,7 @@
     "equipmentSlot": "Body",
     "iconName": "ReliquaryRobes",
     "effect": {
-        "changeStartCards": -1,
+        "lifeModifier": -7,
         "startBattleWithCard": [
         "Reliquary Tower|C14"
      ]
@@ -4049,6 +4059,7 @@
     "equipmentSlot": "Body",
     "iconName": "MantleofDusk",
     "effect": {
+        "lifeModifier": 2,
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Duskmantle, House of Shadow|RAV"
@@ -4061,6 +4072,7 @@
     "equipmentSlot": "Body",
     "iconName": "CloakofOrzhova",
     "effect": {
+        "lifeModifier": 2,
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Orzhova, Church of Deals|GPT"
@@ -4086,6 +4098,7 @@
     "equipmentSlot": "Body",
     "iconName": "NovijenCloak",
     "effect": {
+        "lifeModifier": 2,
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Novijen, Heart of Progress|DIS"
@@ -4251,6 +4264,7 @@
     "equipmentSlot": "Body",
     "iconName": "RixMaadiCloak",
     "effect": {
+        "lifeModifier": 2,
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Rix Maadi, Dungeon Palace|DIS"
@@ -4552,6 +4566,7 @@
     "equipmentSlot": "Body",
     "iconName": "Pilgrim'sCloak",
     "effect": {
+        "lifeModifier": -5,
         "startBattleWithCard": [
         "Evolving Wilds|FDN"
      ]
