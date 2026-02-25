@@ -1,8 +1,6 @@
 package forge.screens.match.menus;
 
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
-import javax.swing.SwingConstants;
 
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -81,10 +79,6 @@ public class CardOverlaySettingsDialog extends FDialog {
         hoverHeader.setForeground(textColor);
         hoverHeader.setFont(FSkin.getBoldFont(12));
         content.add(hoverHeader, "center, wrap");
-
-        // Vertical separator spans all rows
-        final JSeparator sep = new JSeparator(SwingConstants.VERTICAL);
-        sep.setForeground(sepColor);
 
         // Rows
         for (int i = 0; i < LABEL_KEYS.length; i++) {

@@ -1017,15 +1017,6 @@ public class CardInfoPopup {
                                               final List<RelatedCardEntry> entries,
                                               final int thumbnailHeight,
                                               final int maxContentWidth,
-                                              final int maxPerRow) {
-        populateRelatedCards(targetPanel, entries, thumbnailHeight,
-                maxContentWidth, maxPerRow, false, null);
-    }
-
-    public static void populateRelatedCards(final JPanel targetPanel,
-                                              final List<RelatedCardEntry> entries,
-                                              final int thumbnailHeight,
-                                              final int maxContentWidth,
                                               final int maxPerRow,
                                               final boolean alwaysFullSize,
                                               final Map<String, Integer> overflowCounts) {
