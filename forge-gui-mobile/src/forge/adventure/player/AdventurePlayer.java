@@ -39,7 +39,7 @@ import java.util.function.Predicate;
 public class AdventurePlayer implements Serializable, SaveFileContent {
     public static final int MIN_DECK_COUNT = 10;
     // this is a purely arbitrary limit, could be higher or lower; just meant as some sort of reasonable limit for the user
-    public static final int MAX_DECK_COUNT = 20;
+    private int MAX_DECK_COUNT = 20;
     // Player profile data.
     private String name;
     private int heroRace;
@@ -103,6 +103,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public int getDeckCount() { return decks.size(); }
 
+    public int getMAX_DECK_COUNT() { return MAX_DECK_COUNT; }
+
     private void clearDecks() {
         decks.clear();
         for (int i = 0; i < MIN_DECK_COUNT; i++)
@@ -123,6 +125,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         maxLife = 20;
         life = 20;
         shards = 0;
+        MAX_DECK_COUNT = 20;
         clearDecks();
         inventoryItems.clear();
         boostersOwned.clear();
@@ -157,6 +160,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         this.adventureMode = adventureMode;
         announceFantasy = fantasyMode = isFantasy; //Set Chaos mode first.
         announceCustom = usingCustomDeck = isUsingCustomDeck;
+
+        this.MAX_DECK_COUNT = Config.instance().getConfigData().maxNumberOfDecks; // Get the MAX_DECK_COUNT from the config file
+        // Sanity Check make sure the number is not insane and make sure it is at least 20
+        this.MAX_DECK_COUNT = Math.max(Math.min(this.MAX_DECK_COUNT, 99), 20);
 
         clearDecks(); // Reset the empty decks to now already have the commander in the command zone.
         deck = startingDeck;
@@ -562,6 +569,15 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             }
         }
 
+        // Load Max Deck Count or grab it from Config file if missing from save
+        if (data.containsKey("maxDeckCount"))
+            this.MAX_DECK_COUNT = data.readInt("maxDeckCount");
+        else
+            this.MAX_DECK_COUNT = Config.instance().getConfigData().maxNumberOfDecks;
+        // Sanity Check make sure the number is not insane and make sure it is at least 20
+        this.MAX_DECK_COUNT = Math.max(Math.min(this.MAX_DECK_COUNT, 99), 20);
+
+
         // Load decks
         // Check if this save has dynamic deck count, use set-count load if not
         boolean hasDynamicDeckCount = data.containsKey("deckCount");
@@ -740,6 +756,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         data.store("lifeLoss", this.difficultyData.lifeLoss);
         data.store("spawnRank", this.difficultyData.spawnRank);
         data.store("rewardMaxFactor", this.difficultyData.rewardMaxFactor);
+        data.store("maxDeckCount", this.MAX_DECK_COUNT);
 
         data.store("name", name);
         data.store("heroRace", heroRace);
