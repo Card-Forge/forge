@@ -3,7 +3,7 @@ package forge.game.staticability;
 import java.util.Collection;
 import java.util.List;
 
-import org.testng.collections.Lists;
+import com.google.common.collect.Lists;
 
 import forge.game.Game;
 import forge.game.GameEntity;
