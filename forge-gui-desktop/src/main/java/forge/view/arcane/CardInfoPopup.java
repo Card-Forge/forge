@@ -76,7 +76,7 @@ public class CardInfoPopup {
     private static final int PADDING = 8;
     private static final double MTG_ASPECT_RATIO = 0.716;
 
-    // Dark overlay colors (Arena-style)
+    // Dark overlay colors
     private static final Color BG_COLOR = new Color(30, 30, 30);
     private static final Color BORDER_COLOR = new Color(80, 80, 80);
     private static final Color PILL_BG = new Color(45, 45, 45);
