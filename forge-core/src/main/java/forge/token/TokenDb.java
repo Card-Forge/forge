@@ -5,12 +5,14 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 
+import forge.StaticData;
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.item.IPaperCard;
 import forge.item.PaperToken;
 import forge.util.Aggregates;
+import org.apache.commons.lang3.function.Predicates;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -103,32 +105,35 @@ public class TokenDb implements ITokenDatabase {
 
     // Find latest token before release of original card, or earliest after that
     private PaperToken smartFallbackToken(String name, CardEdition realEdition) {
-        PaperToken coreExpansionReprintToken = smartFallbackToken(name, realEdition, true);
-        return coreExpansionReprintToken != null ? coreExpansionReprintToken : smartFallbackToken(name, realEdition, false);
+
+        final EnumSet<CardEdition.Type> specialEditions = EnumSet.of(CardEdition.Type.FUNNY, CardEdition.Type.ONLINE, CardEdition.Type.OTHER);
+        specialEditions.remove(realEdition.getType());
+        CardDb.CardArtPreference artPreference = StaticData.instance().getCardArtPreference();
+
+        PaperToken paperToken = smartFallbackToken(name, realEdition, Predicate.<CardEdition>not(
+                edition -> specialEditions.contains(edition.getType())).and(artPreference::accept));
+        return paperToken != null ? paperToken : smartFallbackToken(name, realEdition, Predicates.falsePredicate());
     }
 
-    private PaperToken smartFallbackToken(String name, CardEdition realEdition, boolean onlyCoreExpansionOrReprint) {
-        String latestFound = null;
-        boolean pastRealEdition = false;
-        final EnumSet<CardEdition.Type> coreExpansionOrReprint = EnumSet.of(CardEdition.Type.CORE, CardEdition.Type.EXPANSION);
-        coreExpansionOrReprint.addAll(CardEdition.Type.REPRINT_SET_TYPES);
+    private PaperToken smartFallbackToken(String name, CardEdition realEdition, Predicate<CardEdition> eligible) {
+        String lastMatchedKey = null;
+        boolean reachedRealEdition = false;
         for (CardEdition edition : this.editions.getOrderedEditions(false)) {
             if (edition.equals(realEdition)) {
-                pastRealEdition = true;
+                reachedRealEdition = true;
             }
-            if (onlyCoreExpansionOrReprint && !coreExpansionOrReprint.contains(edition.getType())) {
-                // Core, Expansion and Reprint sets are more likely to have available token images
+            if (!eligible.test(edition)) {
                 continue;
             }
             String fullName = String.format("%s_%s", name, edition.getCode().toLowerCase());
             if (loadTokenFromSet(edition, name)) {
-                latestFound = fullName;
+                lastMatchedKey = fullName;
             }
-            if (pastRealEdition && latestFound != null) {
+            if (reachedRealEdition && lastMatchedKey != null) {
                 break;
             }
         }
-        return latestFound != null ? Aggregates.random(allTokenByName.get(latestFound)) : null;
+        return lastMatchedKey != null ? Aggregates.random(allTokenByName.get(lastMatchedKey)) : null;
     }
 
     @Override
