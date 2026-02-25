@@ -321,6 +321,12 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         }
     }
 
+    public void hideCardInfoPopup() {
+        if (cardInfoPopup != null) {
+            cardInfoPopup.hidePopup();
+        }
+    }
+
     protected abstract CardPanel getCardPanel(int x, int y);
 
     public CardPanel addCard(final CardView card) {

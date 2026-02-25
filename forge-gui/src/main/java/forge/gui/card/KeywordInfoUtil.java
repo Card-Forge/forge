@@ -3,12 +3,18 @@ package forge.gui.card;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
+import forge.StaticData;
+import forge.card.CardRules;
 import forge.card.CardType;
 import forge.card.CardTypeView;
+import forge.card.ICardFace;
+import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
+import forge.card.mana.ManaAtom;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.keyword.Equip;
@@ -463,35 +469,75 @@ public final class KeywordInfoUtil {
                                                  final CardView cardView,
                                                  final PlayerView controller,
                                                  final Localizer localizer) {
-        final CardStateView state = cardView.getCurrentState();
-        if (state == null) {
-            return null;
+        // Look up devotion colors from the card's SVars (handles both single
+        // and dual devotion correctly, including hybrid mana counting)
+        String color1 = null;
+        String color2 = null;
+        try {
+            final StaticData data = StaticData.instance();
+            if (data != null) {
+                final CardRules rules = data.getCommonCards()
+                        .getRules(cardView.getOracleName());
+                if (rules != null) {
+                    final ICardFace face = rules.getMainPart();
+                    if (face != null && face.getVariables() != null) {
+                        for (final Map.Entry<String, String> svar
+                                : face.getVariables()) {
+                            final String val = svar.getValue();
+                            if (val.startsWith("Count$DevotionDual.")) {
+                                final String[] parts = val.split("\\.");
+                                if (parts.length >= 3) {
+                                    color1 = parts[1];
+                                    color2 = parts[2];
+                                }
+                                break;
+                            } else if (val.startsWith("Count$Devotion.")) {
+                                final String[] parts = val.split("\\.");
+                                if (parts.length >= 2) {
+                                    color1 = parts[1];
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            // Fall through to oracle text fallback
         }
-        final String oracle = state.getOracleText();
-        if (oracle == null) {
-            return null;
-        }
-        final String lowerOracle = oracle.toLowerCase();
-        final String[] colorNames = {"white", "blue", "black", "red", "green"};
-        final String[] colorSymbols = {"{W}", "{U}", "{B}", "{R}", "{G}"};
-        final ManaCostShard[] colorShards = {
-            ManaCostShard.WHITE, ManaCostShard.BLUE, ManaCostShard.BLACK,
-            ManaCostShard.RED, ManaCostShard.GREEN
-        };
-        ManaCostShard targetShard = null;
-        String targetSymbol = null;
-        String targetColorName = null;
-        for (int c = 0; c < colorNames.length; c++) {
-            if (lowerOracle.contains("devotion to " + colorNames[c])) {
-                targetShard = colorShards[c];
-                targetSymbol = colorSymbols[c];
-                targetColorName = colorNames[c];
-                break;
+
+        // Fallback: parse oracle text for single-color devotion
+        if (color1 == null) {
+            final CardStateView state = cardView.getCurrentState();
+            if (state == null) {
+                return null;
+            }
+            final String oracle = state.getOracleText();
+            if (oracle == null) {
+                return null;
+            }
+            final String lowerOracle = oracle.toLowerCase();
+            final String[] colorNames = {
+                "white", "blue", "black", "red", "green"
+            };
+            for (final String name : colorNames) {
+                if (lowerOracle.contains("devotion to " + name)) {
+                    color1 = name;
+                    break;
+                }
             }
         }
-        if (targetShard == null) {
+        if (color1 == null) {
             return null;
         }
+
+        // Build combined color code (handles both single and dual)
+        byte colorCode = ManaAtom.fromName(color1);
+        if (color2 != null) {
+            colorCode |= ManaAtom.fromName(color2);
+        }
+
+        // Count devotion using isColor — correctly counts hybrid mana once
         int devotion = 0;
         for (final CardView c : controller.getBattlefield()) {
             final CardStateView st = c.getCurrentState();
@@ -502,12 +548,30 @@ public final class KeywordInfoUtil {
             if (cost == null) {
                 continue;
             }
-            devotion += cost.getShardCount(targetShard);
+            for (final ManaCostShard shard : cost) {
+                if (shard.isColor(colorCode)) {
+                    devotion++;
+                }
+            }
+        }
+
+        // Format display strings — use mana symbols in both header and reminder
+        final String symbol1 = MagicColor.toSymbol(color1);
+        if (color2 != null) {
+            final String symbol2 = MagicColor.toSymbol(color2);
+            final String newName = localizer.getMessage(
+                    "lblDevotionDualCountTitle",
+                    symbol1, symbol2, devotion);
+            final String reminder = localizer.getMessage(
+                    "lblDevotionDualCount",
+                    symbol1, symbol2, devotion);
+            return new KeywordData(newName,
+                    appendAnnotation(kw.reminderText, reminder));
         }
         final String newName = localizer.getMessage("lblDevotionCountTitle",
-                targetColorName, devotion);
+                symbol1, devotion);
         final String reminder = localizer.getMessage("lblDevotionCount",
-                targetSymbol, devotion);
+                symbol1, devotion);
         return new KeywordData(newName,
                 appendAnnotation(kw.reminderText, reminder));
     }

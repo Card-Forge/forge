@@ -485,6 +485,13 @@ public enum CardZoomer {
         lastClosedTime = System.currentTimeMillis();
     }
 
+    /** Rebuild the zoom view content (e.g. after toggling tooltip preferences). */
+    public void refreshIfOpen() {
+        if (isOpen) {
+            setImage();
+        }
+    }
+
     /**
      * If the zoomer is ativated using the mouse wheel then ignore
      * wheel for a short period of time after opening. This will
