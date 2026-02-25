@@ -226,7 +226,9 @@ public class HostedMatch {
                 gui.setOriginalGameController(p.getView(), humanController);
 
                 if (gui instanceof forge.gamemodes.net.server.NetGuiGame) {
-                    game.subscribeToEvents(new forge.gui.control.GameEventForwarder(gui));
+                    forge.gui.control.GameEventForwarder forwarder = new forge.gui.control.GameEventForwarder(gui);
+                    ((forge.gamemodes.net.server.NetGuiGame) gui).setForwarder(forwarder);
+                    game.subscribeToEvents(forwarder);
                 } else {
                     game.subscribeToEvents(new FControlGameEventHandler(humanController));
                 }
