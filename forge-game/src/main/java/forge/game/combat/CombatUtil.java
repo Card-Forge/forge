@@ -32,7 +32,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
-import forge.game.staticability.StaticAbilityBlockRestrict;
+import forge.game.staticability.StaticAbilityAttackBlockRestrict;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.staticability.StaticAbilityMustBlock;
 import forge.game.trigger.TriggerType;
@@ -433,7 +433,7 @@ public class CombatUtil {
         CardCollection allOtherBlockers = combat.getAllBlockers();
         allOtherBlockers.remove(blocker);
         final int blockersFromOnePlayer = CardLists.count(allOtherBlockers, CardPredicates.isController(blocker.getController()));
-        if (blockersFromOnePlayer >= StaticAbilityBlockRestrict.blockRestrictNum(blocker.getController())) {
+        if (blockersFromOnePlayer >= StaticAbilityAttackBlockRestrict.blockRestrictNum(blocker.getController())) {
             return false;
         }
 
