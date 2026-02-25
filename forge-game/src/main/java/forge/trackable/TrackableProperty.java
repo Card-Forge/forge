@@ -186,7 +186,7 @@ public enum TrackableProperty {
     NonAbilityText(TrackableTypes.StringType),
     FoilIndex(TrackableTypes.IntegerType),
 
-    CantHaveKeyword(TrackableTypes.StringListType),
+    CantHaveKeyword(TrackableTypes.StringSetType),
 
     //Player
     IsAI(TrackableTypes.BooleanType),

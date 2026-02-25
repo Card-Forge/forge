@@ -37,6 +37,8 @@ import io.netty.handler.timeout.IdleStateHandler;
 
 import org.jupnp.UpnpService;
 import org.jupnp.UpnpServiceImpl;
+import org.jupnp.model.meta.Device;
+import org.jupnp.registry.Registry;
 import org.jupnp.support.igd.PortMappingListener;
 import org.jupnp.support.model.PortMapping;
 
@@ -195,6 +197,7 @@ public final class FServerManager {
             Runtime.getRuntime().removeShutdownHook(shutdownHook);
         }
         isHosting = false;
+        UPnPMapped = false;
         // create new EventLoopGroups for potential restart
         bossGroup = new NioEventLoopGroup(1);
         workerGroup = new NioEventLoopGroup();
@@ -202,6 +205,10 @@ public final class FServerManager {
 
     public boolean isHosting() {
         return isHosting;
+    }
+
+    public boolean isUPnPMapped() {
+        return UPnPMapped;
     }
 
     public void broadcast(final NetEvent event) {
@@ -377,14 +384,70 @@ public final class FServerManager {
             upnpService = new UpnpServiceImpl(GuiBase.getInterface().getUpnpPlatformService());
             upnpService.startup();
 
-            // Add a PortMappingListener
-            upnpService.getRegistry().addListener(new PortMappingListener(portMapping));
+            final ForgePortMappingListener listener = new ForgePortMappingListener(portMapping);
+            upnpService.getRegistry().addListener(listener);
             // Trigger device discovery
             upnpService.getControlPoint().search();
+
+            // If no IGD responds within 5 seconds, report failure
+            new Timer("upnp-timeout", true).schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    if (!listener.isCompleted()) {
+                        listener.setCompleted();
+                        onUPnPResult(false);
+                    }
+                }
+            }, 5000);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    private void onUPnPResult(boolean success) {
+        String msg = success
+            ? localizer.getMessage("lblUPnPSuccess", String.valueOf(port))
+            : localizer.getMessage("lblUPnPFailed", String.valueOf(port));
+        System.out.println(msg);
+        if (lobbyListener != null) {
+            broadcast(new MessageEvent(msg));
+        }
+    }
+
+    /**
+     * Extends jupnp's PortMappingListener to report mapping success or failure.
+     * The superclass runs port mapping actions synchronously inside deviceAdded(),
+     * so by the time super.deviceAdded() returns, the result is known.
+     */
+    private class ForgePortMappingListener extends PortMappingListener {
+        private volatile boolean completed = false;
+
+        ForgePortMappingListener(PortMapping portMapping) {
+            super(portMapping);
+        }
+
+        @Override
+        public synchronized void deviceAdded(Registry registry, Device device) {
+            super.deviceAdded(registry, device);
+            if (!completed && !activePortMappings.isEmpty()) {
+                completed = true;
+                UPnPMapped = true;
+                onUPnPResult(true);
+            }
+        }
+
+        @Override
+        protected void handleFailureMessage(String message) {
+            super.handleFailureMessage(message);
+            if (!completed) {
+                completed = true;
+                onUPnPResult(false);
+            }
+        }
+
+        boolean isCompleted() { return completed; }
+        void setCompleted() { completed = true; }
     }
 
     // --- Reconnection helper methods ---

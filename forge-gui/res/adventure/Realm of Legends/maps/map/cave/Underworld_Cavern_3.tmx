@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Underworld Dreams|THB|[121]&quot;, &quot;Underworld Sentinel&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Underworld Dreams|THB|[121]&quot;, &quot;Shadowspear&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -40,14 +40,14 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Soulguide Lantern|THB&quot;, &quot;Temple of Abandon|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
     <property name="enemy" value="Klothys"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
   <object id="81" template="../../../../common/maps/obj/enemy.tx" x="98.333" y="485.167">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Mystery|CP1&quot;, &quot;Fleetfeather Cockatrice|JOU&quot;, &quot;Giant's Amulet|KHM&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Mystery|CP1&quot;, &quot;Torpor Orb&quot;, &quot;The First Iroan Games&quot;]}"/>
     <property name="enemy" value="Uro"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="10"/>
@@ -55,7 +55,7 @@
   </object>
   <object id="82" template="../../../../common/maps/obj/enemy.tx" x="378.833" y="167.834">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Malice|BNG&quot;, &quot;The Triumph of Anax|THB&quot;, &quot;Underworld Cerberus|THS&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Malice|BNG&quot;, &quot;The Triumph of Anax|THB&quot;, &quot;Torpor Orb&quot;]}"/>
     <property name="enemy" value="Kroxa"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
@@ -75,7 +75,7 @@
   </object>
   <object id="85" template="../../../../common/maps/obj/enemy.tx" x="408.833" y="443.5">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Triumph|THS&quot;, &quot;Phoenix of Ash|THB&quot;, &quot;Opal Titan|USG&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Triumph|THS&quot;, &quot;Torpor Orb&quot;, &quot;Opal Titan|USG&quot;]}"/>
     <property name="enemy" value="Phlage"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="10"/>
