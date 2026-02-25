@@ -3806,7 +3806,7 @@
     }
   },
   {
-    "name": "Plains Outfit",
+    "name": "Meadow Outfit",
     "description": "Taps for W. -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "OutpostOutfit",
@@ -3814,12 +3814,12 @@
     "effect": {
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Plains|LEA"
+        "Drifting Meadow|DMR"
       ]
     }
   },
   {
-    "name": "Island Shirt",
+    "name": "Isle Shirt",
     "description": "Taps for U. -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "SeafloorShirt",
@@ -3827,12 +3827,12 @@
     "effect": {
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Island|LEA"
+        "Remote Isle|DMR"
       ]
     }
   },
   {
-    "name": "Swamp Leather",
+    "name": "Mire Leather",
     "description": "Taps for B. -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "BogDwellerLeather",
@@ -3840,12 +3840,12 @@
     "effect": {
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Swamp|LEA"
+        "Polluted Mire|DMR"
       ]
     }
   },
   {
-    "name": "Mountain Cloak",
+    "name": "Smoldering Cloak",
     "description": "Taps for R. -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "HighlandCloak",
@@ -3853,12 +3853,12 @@
     "effect": {
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Mountain|LEA"
+        "Smoldering Crater|DMR"
       ]
     }
   },
   {
-    "name": "Forest Shawl",
+    "name": "Slippery Shawl",
     "description": "Taps for G. -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "TimberlandShawl",
@@ -3866,7 +3866,7 @@
     "effect": {
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Forest|LEA|[295]"
+        "Slippery Karst|DMR"
       ]
     }
   },
