@@ -106,18 +106,21 @@ public class TokenDb implements ITokenDatabase {
     // Find latest token before release of original card, or earliest after that
     private PaperToken smartFallbackToken(String name, CardEdition realEdition) {
 
+        // Try to optimistically adhere to CardArtPreference and filter out special editions other than realEdition's own type first
         final EnumSet<CardEdition.Type> specialEditions = EnumSet.of(CardEdition.Type.FUNNY, CardEdition.Type.ONLINE, CardEdition.Type.OTHER);
         specialEditions.remove(realEdition.getType());
         CardDb.CardArtPreference artPreference = StaticData.instance().getCardArtPreference();
 
         PaperToken paperToken = smartFallbackToken(name, realEdition, Predicate.<CardEdition>not(
                 edition -> specialEditions.contains(edition.getType())).and(artPreference::accept));
-        return paperToken != null ? paperToken : smartFallbackToken(name, realEdition, Predicates.falsePredicate());
+
+        // Further fall back if a token still isn't found, try all editions without filtering
+        return paperToken != null ? paperToken : smartFallbackToken(name, realEdition, Predicates.truePredicate());
     }
 
     private PaperToken smartFallbackToken(String name, CardEdition realEdition, Predicate<CardEdition> eligible) {
         String lastMatchedKey = null;
-        boolean reachedRealEdition = false;
+        boolean reachedRealEdition = false; // This is to find the closest edition to realEdition, rather than terminate at the first (earliest) result
         for (CardEdition edition : this.editions.getOrderedEditions(false)) {
             if (edition.equals(realEdition)) {
                 reachedRealEdition = true;
