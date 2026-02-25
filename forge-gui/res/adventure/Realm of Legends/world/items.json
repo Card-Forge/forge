@@ -3806,205 +3806,67 @@
     }
   },
   {
-    "name": "Outpost Outfit",
-    "description": "Taps for W or sac for any color. -1 hand size.",
+    "name": "Plains Outfit",
+    "description": "Taps for W. -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "OutpostOutfit",
     "cost": 7500,
     "effect": {
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Abandoned Outpost"
+        "Plains|LEA"
       ]
     }
   },
   {
-    "name": "Seafloor Shirt",
-    "description": "Taps for U or sac for any color. -1 hand size.",
+    "name": "Island Shirt",
+    "description": "Taps for U. -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "SeafloorShirt",
     "cost": 7500,
     "effect": {
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Seafloor Debris"
+        "Island|LEA"
       ]
     }
   },
   {
-    "name": "Bog Dweller Leather",
-    "description": "Taps for B or sac for any color. -1 hand size.",
+    "name": "Swamp Leather",
+    "description": "Taps for B. -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "BogDwellerLeather",
     "cost": 7500,
     "effect": {
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Bog Wreckage"
+        "Swamp|LEA"
       ]
     }
   },
   {
-    "name": "Highland Cloak",
-    "description": "Taps for R or sac for any color. -1 hand size.",
+    "name": "Mountain Cloak",
+    "description": "Taps for R. -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "HighlandCloak",
     "cost": 7500,
     "effect": {
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Ravaged Highlands"
+        "Mountain|LEA"
       ]
     }
   },
   {
-    "name": "Timberland Shawl",
-    "description": "Taps for G or sac for any color. -1 hand size.",
+    "name": "Forest Shawl",
+    "description": "Taps for G. -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "TimberlandShawl",
     "cost": 7500,
     "effect": {
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Timberland Ruins"
-      ]
-    }
-  },
-  {
-    "name": "Token of Bounty",
-    "description": "Grants a token in a special slot with 2, T, sac: Gain 3 life.",
-    "equipmentSlot": "Token",
-    "iconName": "TokenofBounty",
-    "cost": 30000,
-    "effect": {
-      "startBattleWithCard": [
-        "c_a_food_sac"
-      ]
-    }
-  },
-  {
-    "name": "Token of Investigation",
-    "description": "Grants a token in a special slot with 2, sac: Draw a card.",
-    "equipmentSlot": "Token",
-    "iconName": "TokenofInvestigation",
-    "cost": 70000,
-    "effect": {
-      "startBattleWithCard": [
-        "c_a_clue_draw"
-      ]
-    }
-  },
-  {
-    "name": "Token of Blood",
-    "description": "Grants a token in a special slot with 1, T, sac: Discard, then draw.",
-    "equipmentSlot": "Token",
-    "iconName": "TokenofBlood",
-    "cost": 50000,
-    "effect": {
-      "startBattleWithCard": [
-        "c_a_blood_draw"
-      ]
-    }
-  },
-  {
-    "name": "Token of Violence",
-    "description": "Grants a token in a special slot with equip 1: 1, T, sac: ping for 2",
-    "equipmentSlot": "Token",
-    "iconName": "TokenofViolence",
-    "cost": 50000,
-    "effect": {
-      "startBattleWithCard": [
-        "rock"
-      ]
-    }
-  },
-  {
-    "name": "Token of Exploration",
-    "description": "Grants a token in a special slot with 1, T, sac: Explore.",
-    "equipmentSlot": "Token",
-    "iconName": "TokenofExploration",
-    "cost": 50000,
-    "effect": {
-      "startBattleWithCard": [
-        "c_a_map_sac_explore"
-      ]
-    }
-  },
-  {
-    "name": "Cloak of the Wastes",
-    "description": "Gives a colorless land, but -1 hand size",
-    "equipmentSlot": "Body",
-    "iconName": "CloakoftheWastes",
-    "cost": 3000,
-    "effect": {
-      "changeStartCards": -1,
-      "startBattleWithCard": [
-        "Wastes|OGW"
-      ]
-    }
-  },
-  {
-    "name": "Outpost Outfit",
-    "description": "Taps for W or sac for any color. -1 hand size.",
-    "equipmentSlot": "Body",
-    "iconName": "OutpostOutfit",
-    "cost": 7500,
-    "effect": {
-      "changeStartCards": -1,
-      "startBattleWithCard": [
-        "Abandoned Outpost"
-      ]
-    }
-  },
-  {
-    "name": "Seafloor Shirt",
-    "description": "Taps for U or sac for any color. -1 hand size.",
-    "equipmentSlot": "Body",
-    "iconName": "SeafloorShirt",
-    "cost": 7500,
-    "effect": {
-      "changeStartCards": -1,
-      "startBattleWithCard": [
-        "Seafloor Debris"
-      ]
-    }
-  },
-  {
-    "name": "Bog Dweller Leather",
-    "description": "Taps for B or sac for any color. -1 hand size.",
-    "equipmentSlot": "Body",
-    "iconName": "BogDwellerLeather",
-    "cost": 7500,
-    "effect": {
-      "changeStartCards": -1,
-      "startBattleWithCard": [
-        "Bog Wreckage"
-      ]
-    }
-  },
-  {
-    "name": "Highland Cloak",
-    "description": "Taps for R or sac for any color. -1 hand size.",
-    "equipmentSlot": "Body",
-    "iconName": "HighlandCloak",
-    "cost": 7500,
-    "effect": {
-      "changeStartCards": -1,
-      "startBattleWithCard": [
-        "Ravaged Highlands"
-      ]
-    }
-  },
-  {
-    "name": "Timberland Shawl",
-    "description": "Taps for G or sac for any color. -1 hand size.",
-    "equipmentSlot": "Body",
-    "iconName": "TimberlandShawl",
-    "cost": 7500,
-    "effect": {
-      "changeStartCards": -1,
-      "startBattleWithCard": [
-        "Timberland Ruins"
+        "Forest|LEA|[295]"
       ]
     }
   },
@@ -4163,7 +4025,7 @@
       "iconName": "PinecrestCloak",
       "effect": {
         "changeStartCards": -1,
-        "lifeModifier": 2,
+        "lifeModifier": 4,
         "startBattleWithCard": [
           "Pinecrest Ridge|CHK"
         ]
@@ -4212,7 +4074,7 @@
       "iconName": "TranquilCloak",
       "effect": {
         "changeStartCards": -1,
-        "lifeModifier": 2,
+        "lifeModifier": 4,
         "startBattleWithCard": [
           "Tranquil Garden|CHK"
         ]
@@ -4261,7 +4123,7 @@
       "iconName": "CloudcrestCloak",
       "effect": {
         "changeStartCards": -1,
-        "lifeModifier": 2,
+        "lifeModifier": 4,
         "startBattleWithCard": [
           "Cloudcrest Lake|CHK"
         ]
@@ -4296,7 +4158,7 @@
       "iconName": "Lantern-LitCloak",
       "effect": {
         "changeStartCards": -1,
-        "lifeModifier": 2,
+        "lifeModifier": 4,
         "startBattleWithCard": [
           "Lantern-Lit Graveyard|CHK"
         ]
@@ -4377,7 +4239,7 @@
       "iconName": "WaterveilCloak",
       "effect": {
         "changeStartCards": -1,
-        "lifeModifier": 2,
+        "lifeModifier": 4,
         "startBattleWithCard": [
           "Waterveil Cavern|CHK"
         ]
@@ -4658,7 +4520,7 @@
     "effect": {
       "lifeModifier": -4,
       "startBattleWithCard": [
-      "Stitchwing Skaab"
+      "Stitchwing Skaab|SOI"
    ]
     }
   },
@@ -4669,7 +4531,7 @@
     "iconName": "ThirstingAxe",
     "effect": {
       "startBattleWithCard": [
-      "Thirsting Axe"
+      "Thirsting Axe|EMN"
    ]
     }
   },
