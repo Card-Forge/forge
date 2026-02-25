@@ -605,6 +605,9 @@ public class CardInfoPopup {
                     }
                 }
             }
+            // Amass tokens — not declared via TokenScript$, detect from oracle text
+            addAmassTokenEntry(entries, cardView, data);
+
             if (splitType != null) {
                 switch (splitType) {
                     case Transform:
@@ -942,6 +945,42 @@ public class CardInfoPopup {
         if (img != null) {
             entries.add(new RelatedCardEntry("Emblem",
                     "The Ring", img, ringKey, info.getRight()));
+        }
+    }
+
+    private static final java.util.regex.Pattern AMASS_PATTERN =
+            java.util.regex.Pattern.compile("amass (\\w+)", java.util.regex.Pattern.CASE_INSENSITIVE);
+
+    private static void addAmassTokenEntry(final List<RelatedCardEntry> entries,
+                                            final CardView cardView,
+                                            final StaticData data) {
+        final CardStateView curState = cardView.getCurrentState();
+        final String oracle = curState != null ? curState.getOracleText() : null;
+        if (oracle == null) {
+            return;
+        }
+        final java.util.regex.Matcher m = AMASS_PATTERN.matcher(oracle);
+        if (!m.find()) {
+            return;
+        }
+        // e.g. "Zombies" → "zombie", "Orcs" → "orc"
+        String type = m.group(1).toLowerCase();
+        if (type.endsWith("s")) {
+            type = type.substring(0, type.length() - 1);
+        }
+        final String tokenName = "b_0_0_" + type + "_army";
+        final PaperToken pt = data.getAllTokens().getToken(tokenName);
+        if (pt == null) {
+            return;
+        }
+        final CardView tokenView = Card.getCardForUi(pt).getView();
+        final String imageKey = pt.getCardImageKey();
+        final Pair<BufferedImage, Boolean> info =
+                ImageCache.getCardOriginalImageInfo(imageKey, true, tokenView);
+        final BufferedImage img = info.getLeft();
+        if (img != null) {
+            entries.add(new RelatedCardEntry("Creates",
+                    pt.getName(), img, imageKey, info.getRight()));
         }
     }
 
