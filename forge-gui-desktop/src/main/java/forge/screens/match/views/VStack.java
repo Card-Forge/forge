@@ -299,6 +299,10 @@ public class VStack implements IVDoc<CStack> {
             return;
         }
         final ForgePreferences prefs = FModel.getPreferences();
+        if (!prefs.getPrefBoolean(FPref.UI_SHOW_HOVER_TOOLTIPS)) {
+            if (cardInfoPopup != null) { cardInfoPopup.hidePopup(); }
+            return;
+        }
         final boolean showKw = prefs.getPrefBoolean(FPref.UI_POPUP_KEYWORD_INFO);
         final boolean showRel = prefs.getPrefBoolean(FPref.UI_POPUP_RELATED_CARDS);
         final boolean showImg = prefs.getPrefBoolean(FPref.UI_POPUP_CARD_IMAGE);

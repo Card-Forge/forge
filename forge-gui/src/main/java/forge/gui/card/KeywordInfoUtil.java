@@ -329,7 +329,8 @@ public final class KeywordInfoUtil {
             return;
         }
         final PlayerView controller = cardView.getController();
-        if (controller == null) {
+        if (controller == null || controller.getBattlefield() == null
+                || controller.getGraveyard() == null) {
             return;
         }
         final Localizer localizer = Localizer.getInstance();

@@ -211,6 +211,9 @@ public class GameLogPanel extends JPanel {
             return;
         }
         final ForgePreferences prefs = FModel.getPreferences();
+        if (!prefs.getPrefBoolean(FPref.UI_SHOW_HOVER_TOOLTIPS)) {
+            return;
+        }
         final boolean showKeywords = prefs.getPrefBoolean(FPref.UI_POPUP_KEYWORD_INFO);
         final boolean showRelated = prefs.getPrefBoolean(FPref.UI_POPUP_RELATED_CARDS);
         final boolean showCardImage = prefs.getPrefBoolean(FPref.UI_POPUP_CARD_IMAGE);

@@ -112,8 +112,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbOpenPacksIndiv = new OptionsCheckBox(localizer.getMessage("cbOpenPacksIndiv"));
     private final JCheckBox cbTokensInSeparateRow = new OptionsCheckBox(localizer.getMessage("cbTokensInSeparateRow"));
     private final JCheckBox cbStackCreatures = new OptionsCheckBox(localizer.getMessage("cbStackCreatures"));
-    private final JCheckBox cbPopupKeywordInfo = new OptionsCheckBox(localizer.getMessage("cbPopupKeywordInfo"));
-    private final JCheckBox cbPopupRelatedCards = new OptionsCheckBox(localizer.getMessage("cbPopupRelatedCards"));
+    private final JCheckBox cbHoverTooltipsEnabled = new OptionsCheckBox(localizer.getMessage("cbHoverTooltipsEnabled"));
+    private final JCheckBox cbZoomTooltipsEnabled = new OptionsCheckBox(localizer.getMessage("cbZoomTooltipsEnabled"));
     private final JCheckBox cbFilterLandsByColorId = new OptionsCheckBox(localizer.getMessage("cbFilterLandsByColorId"));
     private final JCheckBox cbShowStormCount = new OptionsCheckBox(localizer.getMessage("cbShowStormCount"));
     private final JCheckBox cbRemindOnPriority = new OptionsCheckBox(localizer.getMessage("cbRemindOnPriority"));
@@ -444,11 +444,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbStackCreatures, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlStackCreatures")), descriptionConstraints);
 
-        pnlPrefs.add(cbPopupKeywordInfo, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlPopupKeywordInfo")), descriptionConstraints);
+        pnlPrefs.add(cbHoverTooltipsEnabled, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlHoverTooltipsEnabled")), descriptionConstraints);
 
-        pnlPrefs.add(cbPopupRelatedCards, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlPopupRelatedCards")), descriptionConstraints);
+        pnlPrefs.add(cbZoomTooltipsEnabled, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlZoomTooltipsEnabled")), descriptionConstraints);
 
         pnlPrefs.add(cbTimedTargOverlay, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlTimedTargOverlay")), descriptionConstraints);
@@ -1007,12 +1007,12 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         return cbStackCreatures;
     }
 
-    public final JCheckBox getCbPopupKeywordInfo() {
-        return cbPopupKeywordInfo;
+    public final JCheckBox getCbHoverTooltipsEnabled() {
+        return cbHoverTooltipsEnabled;
     }
 
-    public final JCheckBox getCbPopupRelatedCards() {
-        return cbPopupRelatedCards;
+    public final JCheckBox getCbZoomTooltipsEnabled() {
+        return cbZoomTooltipsEnabled;
     }
 
     public final JCheckBox getCbManaLostPrompt() {

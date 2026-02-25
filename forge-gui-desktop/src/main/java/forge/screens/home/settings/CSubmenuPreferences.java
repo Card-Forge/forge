@@ -156,8 +156,8 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbOpenPacksIndiv(), FPref.UI_OPEN_PACKS_INDIV));
         lstControls.add(Pair.of(view.getCbTokensInSeparateRow(), FPref.UI_TOKENS_IN_SEPARATE_ROW));
         lstControls.add(Pair.of(view.getCbStackCreatures(), FPref.UI_STACK_CREATURES));
-        lstControls.add(Pair.of(view.getCbPopupKeywordInfo(), FPref.UI_POPUP_KEYWORD_INFO));
-        lstControls.add(Pair.of(view.getCbPopupRelatedCards(), FPref.UI_POPUP_RELATED_CARDS));
+        lstControls.add(Pair.of(view.getCbHoverTooltipsEnabled(), FPref.UI_SHOW_HOVER_TOOLTIPS));
+        lstControls.add(Pair.of(view.getCbZoomTooltipsEnabled(), FPref.UI_SHOW_ZOOM_TOOLTIPS));
         lstControls.add(Pair.of(view.getCbManaLostPrompt(), FPref.UI_MANA_LOST_PROMPT));
         lstControls.add(Pair.of(view.getCbEscapeEndsTurn(), FPref.UI_ALLOW_ESC_TO_END_TURN));
         lstControls.add(Pair.of(view.getCbDetailedPaymentDesc(), FPref.UI_DETAILED_SPELLDESC_IN_PROMPT));
@@ -188,6 +188,7 @@ public enum CSubmenuPreferences implements ICDoc {
             boolean isEnabled = e.getStateChange() == ItemEvent.SELECTED;
             FModel.getMagicDb().setEnableSmartCardArtSelection(isEnabled);
         });
+
 
         view.getBtnReset().setCommand((UiCommand) CSubmenuPreferences.this::resetForgeSettingsToDefault);
 
@@ -258,6 +259,7 @@ public enum CSubmenuPreferences implements ICDoc {
         for(final Pair<JCheckBox, FPref> kv: lstControls) {
             kv.getKey().setSelected(prefs.getPrefBoolean(kv.getValue()));
         }
+
         view.reloadShortcuts();
 
         SwingUtilities.invokeLater(() -> view.getCbRemoveSmall().requestFocusInWindow());

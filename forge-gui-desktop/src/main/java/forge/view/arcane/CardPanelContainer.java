@@ -291,6 +291,10 @@ public abstract class CardPanelContainer extends SkinnedPanel {
             return;
         }
         final ForgePreferences prefs = FModel.getPreferences();
+        if (!prefs.getPrefBoolean(FPref.UI_SHOW_HOVER_TOOLTIPS)) {
+            if (cardInfoPopup != null) { cardInfoPopup.hidePopup(); }
+            return;
+        }
         final boolean showKeywords = prefs.getPrefBoolean(FPref.UI_POPUP_KEYWORD_INFO);
         final boolean showRelated = prefs.getPrefBoolean(FPref.UI_POPUP_RELATED_CARDS);
         final boolean showCardImage = prefs.getPrefBoolean(FPref.UI_POPUP_CARD_IMAGE);

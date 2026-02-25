@@ -2,7 +2,6 @@ package forge.screens.match.menus;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JCheckBoxMenuItem;
@@ -10,8 +9,10 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 
+import forge.control.KeyboardShortcuts;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
@@ -32,21 +33,17 @@ public final class CardInfoPopupMenu {
 
     public JMenu getMenu() {
         final Localizer localizer = Localizer.getInstance();
-        final JMenu menu = new JMenu(localizer.getMessage("lblCardInfoPopups"));
+        final JMenu menu = new JMenu(localizer.getMessage("lblCardInfoTooltips"));
 
         // --- Hover Tooltip section ---
-        menu.add(createSectionHeader(localizer.getMessage("lblHoverTooltip")));
+        menu.add(getShowToggle(localizer.getMessage("lblHoverTooltip"),
+                FPref.UI_SHOW_HOVER_TOOLTIPS, FPref.SHORTCUT_HOVERTOOLTIPS));
         menu.add(getCheckboxItem(localizer.getMessage("lblCardImage"),
                 FPref.UI_POPUP_CARD_IMAGE));
         menu.add(getCheckboxItem(localizer.getMessage("lblRelatedCards"),
                 FPref.UI_POPUP_RELATED_CARDS));
         menu.add(getCheckboxItem(localizer.getMessage("lblKeywordExplanations"),
                 FPref.UI_POPUP_KEYWORD_INFO));
-
-        menu.add(new JSeparator());
-
-        // --- Hover Tooltip Overlays section ---
-        menu.add(createSectionHeader(localizer.getMessage("lblHoverTooltipOverlays")));
         menu.add(getCheckboxItem(localizer.getMessage("lblIncludeCardOverlays"),
                 FPref.UI_POPUP_CARD_OVERLAYS));
         final JMenuItem overlaySettings = new JMenuItem(localizer.getMessage("lblCardOverlaySettings"));
@@ -56,7 +53,8 @@ public final class CardInfoPopupMenu {
         menu.add(new JSeparator());
 
         // --- Card Zoom View section ---
-        menu.add(createSectionHeader(localizer.getMessage("lblCardZoomView")));
+        menu.add(getShowToggle(localizer.getMessage("lblCardZoomView"),
+                FPref.UI_SHOW_ZOOM_TOOLTIPS, FPref.SHORTCUT_ZOOMTOOLTIPS));
         menu.add(getCheckboxItem(localizer.getMessage("lblRelatedCards"),
                 FPref.UI_ZOOM_RELATED_CARDS));
         menu.add(getCheckboxItem(localizer.getMessage("lblKeywordExplanations"),
@@ -67,11 +65,17 @@ public final class CardInfoPopupMenu {
         return menu;
     }
 
-    private static JMenuItem createSectionHeader(final String text) {
-        final JMenuItem header = new JMenuItem(text);
-        header.setEnabled(false);
-        header.setFont(header.getFont().deriveFont(Font.BOLD));
-        return header;
+    private static JCheckBoxMenuItem getShowToggle(final String label,
+                                                       final FPref pref, final FPref shortcutPref) {
+        final JCheckBoxMenuItem item = new JCheckBoxMenuItem(label);
+        final KeyStroke ks = KeyboardShortcuts.getKeyStrokeForPref(shortcutPref);
+        if (ks != null) { item.setAccelerator(ks); }
+        item.setState(prefs.getPrefBoolean(pref));
+        item.addActionListener(e -> {
+            prefs.setPref(pref, !prefs.getPrefBoolean(pref));
+            prefs.save();
+        });
+        return item;
     }
 
     private static JCheckBoxMenuItem getCheckboxItem(final String label, final FPref pref) {

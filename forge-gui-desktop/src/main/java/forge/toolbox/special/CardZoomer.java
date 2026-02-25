@@ -237,8 +237,11 @@ public enum CardZoomer {
         final BufferedImage xlhqImage = FImageUtil.getImageXlhq(thisCard);
         imagePanel.setImage(xlhqImage == null ? FImageUtil.getImage(thisCard) : xlhqImage, getInitialRotation(), AutoSizeImageMode.SOURCE);
 
-        final boolean showKeywords = FModel.getPreferences().getPrefBoolean(FPref.UI_ZOOM_KEYWORD_INFO);
-        final boolean showRelated = FModel.getPreferences().getPrefBoolean(FPref.UI_ZOOM_RELATED_CARDS);
+        final boolean zoomEnabled = FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_ZOOM_TOOLTIPS);
+        final boolean showKeywords = zoomEnabled
+                && FModel.getPreferences().getPrefBoolean(FPref.UI_ZOOM_KEYWORD_INFO);
+        final boolean showRelated = zoomEnabled
+                && FModel.getPreferences().getPrefBoolean(FPref.UI_ZOOM_RELATED_CARDS);
 
         pnlMain.removeAll();
         final boolean isFaceDown = thisCard != null && thisCard.getCard() != null

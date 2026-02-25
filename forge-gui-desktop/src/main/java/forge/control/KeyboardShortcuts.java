@@ -246,6 +246,30 @@ public class KeyboardShortcuts {
             }
         };
 
+        /** Toggle hover tooltips. */
+        final Action actHoverTooltips = new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
+                final ForgePreferences prefs = FModel.getPreferences();
+                prefs.setPref(FPref.UI_SHOW_HOVER_TOOLTIPS,
+                        !prefs.getPrefBoolean(FPref.UI_SHOW_HOVER_TOOLTIPS));
+                prefs.save();
+            }
+        };
+
+        /** Toggle zoom view tooltips. */
+        final Action actZoomTooltips = new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
+                final ForgePreferences prefs = FModel.getPreferences();
+                prefs.setPref(FPref.UI_SHOW_ZOOM_TOOLTIPS,
+                        !prefs.getPrefBoolean(FPref.UI_SHOW_ZOOM_TOOLTIPS));
+                prefs.save();
+            }
+        };
+
         /** Show keyboard shortcuts dialog. */
         final Action actShowHotkeys = new AbstractAction() {
             @Override
@@ -276,6 +300,8 @@ public class KeyboardShortcuts {
         list.add(new Shortcut(FPref.SHORTCUT_SHOWHOTKEYS, localizer.getMessage("lblSHORTCUT_SHOWHOTKEYS"), actShowHotkeys, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_PANELTABS, localizer.getMessage("lblSHORTCUT_PANELTABS"), actPanelTabs, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_CARDOVERLAYS, localizer.getMessage("lblSHORTCUT_CARDOVERLAYS"), actCardOverlays, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_HOVERTOOLTIPS, localizer.getMessage("lblSHORTCUT_HOVERTOOLTIPS"), actHoverTooltips, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_ZOOMTOOLTIPS, localizer.getMessage("lblSHORTCUT_ZOOMTOOLTIPS"), actZoomTooltips, am, im));
         cachedShortcuts = list;
         return list;
     } // End initMatchShortcuts()
