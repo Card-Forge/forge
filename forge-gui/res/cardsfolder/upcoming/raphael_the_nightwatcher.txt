@@ -4,4 +4,4 @@ Types:Legendary Creature Mutant Ninja Turtle
 PT:2/3
 K:Sneak:1 R R
 S:Mode$ Continuous | Affected$ Creature.attacking+YouCtrl | AddKeyword$ Double Strike | Description$ Attacking creatures you control have double strike.
-Oracle:Sneak {1}{R}{R} (You may cast this spell for {1}{R}{R} if you also return an unblocked attacked you control to hand during the declare blockers step. He enters tapped and attacking.)\nAttacking creatures you control have double strike.
+Oracle:Sneak {1}{R}{R} (You may cast this spell for {1}{R}{R} if you also return an unblocked attacker you control to hand during the declare blockers step. He enters tapped and attacking.)\nAttacking creatures you control have double strike.
