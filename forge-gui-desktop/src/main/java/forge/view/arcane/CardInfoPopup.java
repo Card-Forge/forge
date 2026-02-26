@@ -378,9 +378,14 @@ public class CardInfoPopup {
                 groups.add(e.label);
             }
             final int numGroups = Math.max(1, groups.size());
-            // Each group: ~28px overhead (label + spacing), plus inter-group gaps
-            final int overhead = numGroups * 28 + (numGroups - 1) * 4 + 20;
-            final int thumbRows = numGroups; // 1 row per group with HOVER_MAX_CARDS cap
+            // When all groups are singletons that fit in one row, treat as 1 row
+            final boolean willCompact = numGroups > 1
+                    && relatedEntries.size() <= HOVER_MAX_CARDS
+                    && relatedEntries.size() == numGroups;
+            final int displayRows = willCompact ? 1 : numGroups;
+            // Each row: ~28px overhead (label + spacing), plus inter-row gaps
+            final int overhead = displayRows * 28 + (displayRows - 1) * 4 + 20;
+            final int thumbRows = displayRows;
             final int availableForThumbs = availableHeight - overhead;
             effectiveThumbHeight = Math.min(effectiveThumbHeight,
                     Math.max(80, availableForThumbs / thumbRows));
@@ -1029,12 +1034,30 @@ public class CardInfoPopup {
         final FSkin.SkinFont boldFont = FSkin.getBoldFont(12);
         boolean firstGroup = true;
 
+        // When every group has 1 card and total fits in a row, lay pills out horizontally
+        final boolean allSingletons = grouped.values().stream()
+                .allMatch(c -> c.size() == 1);
+        final boolean compactRow = allSingletons
+                && entries.size() <= maxPerRow && grouped.size() > 1;
+        JPanel rowPanel = null;
+        if (compactRow) {
+            rowPanel = new JPanel();
+            rowPanel.setLayout(new BoxLayout(rowPanel, BoxLayout.X_AXIS));
+            rowPanel.setOpaque(false);
+            rowPanel.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
+            targetPanel.add(rowPanel);
+        }
+
         for (final Map.Entry<String, List<RelatedCardEntry>> group : grouped.entrySet()) {
             final List<RelatedCardEntry> cards = group.getValue();
 
-            if (!firstGroup) {
+            if (!firstGroup && !compactRow) {
                 targetPanel.add(javax.swing.Box.createRigidArea(
                         new Dimension(0, 4)));
+            }
+            if (!firstGroup && compactRow) {
+                rowPanel.add(javax.swing.Box.createRigidArea(
+                        new Dimension(4, 0)));
             }
             firstGroup = false;
 
@@ -1064,7 +1087,10 @@ public class CardInfoPopup {
             final int perRow = fullSize
                     ? Math.min(cards.size(), Math.min(FULL_SIZE_MAX, maxPerRow))
                     : maxPerRow;
-            final int pillInnerWidth = maxContentWidth - 2 * PILL_PAD - 2;
+            final int pillMaxWidth = compactRow
+                    ? (maxContentWidth - (grouped.size() - 1) * 4) / grouped.size()
+                    : maxContentWidth;
+            final int pillInnerWidth = pillMaxWidth - 2 * PILL_PAD - 2;
             int effectiveHeight = fullSize
                     ? thumbnailHeight : Math.max(80, thumbnailHeight / 2);
 
@@ -1131,7 +1157,11 @@ public class CardInfoPopup {
 
             final int actualPillWidth = perRow * thumbWidth + 2 * PILL_PAD + 2;
             pill.setMaximumSize(new Dimension(actualPillWidth, Integer.MAX_VALUE));
-            targetPanel.add(pill);
+            if (compactRow) {
+                rowPanel.add(pill);
+            } else {
+                targetPanel.add(pill);
+            }
         }
     }
 

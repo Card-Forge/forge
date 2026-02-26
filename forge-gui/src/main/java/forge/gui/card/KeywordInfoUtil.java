@@ -79,7 +79,8 @@ public final class KeywordInfoUtil {
                 if (kw == Keyword.UNDEFINED || kw == Keyword.ENCHANT) {
                     continue;
                 }
-                if (seenIdx.containsKey(kw) && kw != Keyword.EQUIP) {
+                if (seenIdx.containsKey(kw) && kw != Keyword.EQUIP
+                        && kw != Keyword.TRAMPLE) {
                     // Merge parameterised duplicates (e.g. multiple Protections)
                     final String title = inst.getTitle();
                     final String prefix = kw.toString() + " ";
@@ -733,6 +734,13 @@ public final class KeywordInfoUtil {
         // Try "a"/"an" as 1 (e.g. "mill a card", "create an artifact")
         if (text.startsWith("a ", pos) || text.startsWith("an ", pos)) {
             return "1";
+        }
+        // Try variable "X" (e.g. "monstrosity x", "collect evidence x")
+        if (text.startsWith("x", pos)) {
+            final int end = pos + 1;
+            if (end >= text.length() || !Character.isLetter(text.charAt(end))) {
+                return "X";
+            }
         }
         // Try number words: "one" through "twenty"
         final String[] words = {
