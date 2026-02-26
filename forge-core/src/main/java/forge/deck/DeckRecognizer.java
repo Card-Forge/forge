@@ -490,8 +490,6 @@ public class DeckRecognizer {
             "avatar", "commander", "companion", "schemes",
             "conspiracy", "planes", "deck", "dungeon",
             "attractions", "contraptions"};
-    private static final CharSequence[] IGNORABLE_SECTION_NAMES = {
-            "maybeboard", "maybe", "considering", "tokens"};
 
     private static CharSequence[] allCardTypes(){
         List<String> cardTypesList = new ArrayList<>();
@@ -524,7 +522,6 @@ public class DeckRecognizer {
     public List<Token> parseCardList(String[] cardList) {
         List<Token> tokens = new ArrayList<>();
         DeckSection referenceDeckSectionInParsing = null;  // default
-        boolean inIgnoredSection = false;
 
         for (String line : cardList) {
             Token token = this.recognizeLine(line, referenceDeckSectionInParsing);
@@ -532,23 +529,6 @@ public class DeckRecognizer {
                 continue;
 
             TokenType tokenType = token.getType();
-
-            // A valid deck section header resets the ignored-section flag
-            if (tokenType == TokenType.DECK_SECTION_NAME) {
-                inIgnoredSection = false;
-            }
-
-            // Detect ignorable section headers (Maybeboard, Tokens, etc.)
-            if (!inIgnoredSection && tokenType == TokenType.UNKNOWN_TEXT
-                    && isIgnorableSection(line.trim())) {
-                inIgnoredSection = true;
-            }
-
-            // While in an ignored section, suppress all tokens as comments
-            if (inIgnoredSection) {
-                tokens.add(new Token(TokenType.COMMENT, 0, line.trim()));
-                continue;
-            }
 
             if (!token.isTokenForDeck() && (tokenType != TokenType.DECK_SECTION_NAME) ||
                     (tokenType == TokenType.LIMITED_CARD && !this.includeBannedAndRestricted)) {
@@ -936,12 +916,6 @@ public class DeckRecognizer {
         return StringUtils.equalsAnyIgnoreCase(nonCardToken, DECK_SECTION_NAMES);
     }
 
-    public static boolean isIgnorableSection(final String lineAsIs) {
-        String nonCardToken = nonCardTokenMatch(lineAsIs);
-        if (nonCardToken == null)
-            return false;
-        return StringUtils.equalsAnyIgnoreCase(nonCardToken, IGNORABLE_SECTION_NAMES);
-    }
 
     private static String nonCardTokenMatch(final String lineAsIs){
         if (lineAsIs == null)
