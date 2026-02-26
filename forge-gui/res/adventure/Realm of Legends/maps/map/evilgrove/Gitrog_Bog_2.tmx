@@ -100,7 +100,7 @@
 	]</property>
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Crawling Infestation&quot;, &quot;Sinister Concoction|SOI&quot;, &quot;Foul Orchard|SOI&quot;, &quot;Drownyard Temple|SOI&quot;, &quot;Crawling Sensation|SOI&quot;]
 }</property>
-    <property name="enemy" value="Gitrog"/>
+    <property name="enemy" value="The Gitrog Monster"/>
     <property name="reward">[
   {
     &quot;type&quot;: &quot;item&quot;,

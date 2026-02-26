@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Underworld Dreams|THB|[121]&quot;, &quot;Underworld Sentinel&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Underworld Dreams|THB|[121]&quot;, &quot;Shadowspear&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -19,7 +19,7 @@
  </layer>
  <layer id="2" name="Walls" width="30" height="60">
   <data encoding="base64" compression="zlib">
-   eJzlmF9OwzAMxiseUCPBgTjA/qgPnINj7DKIUbgFR2EEjkGt8Ekmc9J0tc0DkaxuD92vn2N/dbYNXbddEPspaG0W3rc2wB0cmWPfdR8/3Pfp+tr7Mmk9Td+/nJlvdz55jlM89/5cih3T61lXOZfq6qW3ra18f7107wtMcEcj3cgx9c5nVmOUb8qFhe4YEg/9Kum39pHaXluxS0zqZwqrOo9sb2mvj336zrlWdU7sI/Nm7D2vNev+KuXCo85qbM/ZgPupJ5dr1uAu8UKwNfaYPGr3mHqzpT+R7zVs+AVxD1fpWvOH3F8uzTe0gtsSfF3KjQUu3k9SaPVTFH67Nk/yd9Z/8RCu2cuv85r2mANzrVjaZ4yReQl9PoXz+cCCyc9qXvNuPs9LuZ3rOa19tMptC5czr29TaHJjOJ+taHGfsOBKs63HmVyqKw9vyrl/8f+DJRN+RN4kncWt/JfPTR71BA8u+aAmE6waT+pXzZqpLS2tLUycQ7U8X2LeF+oH/rfGA3F/7f2CNWT3eHEtZsMlerWitYa1fWluZsnZJyV+DPJ/JF7aW/a4pH1NfUP3Uu2boDfT0DPAl3AtPcsQdHp6Lh/5c2CvrbgIyWu4ZmtuZJo9ZjquC71P3Ieb3yHd+w33EkoP
+   eJzlmE1Ow0AMhSMWKCPBgThAf5QF5+AYvQyiBG7BUSgDxyBWeJJxPZOksc2Ckaw0i+jL89ivnmxT02wXxH4IWpuFz60NcLtAZt82zccP9324vraxTFpPw/1XMPPtLibPeYjnNp5LsWN6I+tKcqmuXlrf2pL7G6V7X2CC2zvpRo6pdz5FjVG+KRceunMaeehXTb+3j9T22otdYlI/U3jVeWZ7S3t9bMd7zvWqc2IfmTdj73mtefdXKRcRdVZjR84G3E8juVyzBXeJF4JtscfkUbvHsTfn9CfyvYYNvyDu4Wq81vxB+sul+YZWcGVQ/8rg61JuLnBrsx3/71hTX1nRVJsnOfe/eAjXHOXXsqYj5kCpFcv6jNEzL6Hfp3Q+H3gw+Vktat6V87yW26mes9pHr9zO4XLm9e0YltyczmcrWtwnPLjabBtxJtfqKsKbJPcvvj94MuFH5E3aWdzLf/ncFFFP8OCSD1oywarxtH61rJnastI6h4lzqJXna8z7Qv3A/9Z4IJ6v/b9gdeKZKK7HbLhEr1XMrWFrX5qaWST7ZMTPSf9GEqV9zh6XtK+pb+heqn2T7GYaegf4Eq6ld+mSTU9P5UO+B/bai4vQvIZr9uZmpjlipuO60PvEfbj5Hdqz31G3SLE=
   </data>
  </layer>
  <layer id="3" name="Clutter" width="30" height="60">
@@ -72,7 +72,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="86" template="../../../../common/maps/obj/dialog.tx" x="239.818" y="265.571" width="149.697" height="20.858" visible="1">
+  <object id="86" template="../../../../common/maps/obj/dialog.tx" x="309.818" y="275.571" width="69.197" height="9.358" visible="1">
    <properties>
     <property name="dialog">[
 {
@@ -91,7 +91,7 @@
    </properties>
   </object>
   <object id="88" template="../../../../common/maps/obj/gold.tx" x="213.333" y="242.667"/>
-  <object id="89" template="../../../../common/maps/obj/dialog.tx" x="317.882" y="401.343" width="37.19" height="25.7642" rotation="270.712" visible="1">
+  <object id="89" template="../../../../common/maps/obj/dialog.tx" x="309.382" y="381.343" width="24.19" height="13.7642" rotation="0" visible="1">
    <properties>
     <property name="dialog">[
 {

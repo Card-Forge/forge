@@ -35,12 +35,17 @@
 		"Anowon",
 		"Chainer",
 		"Coram",
-		"Ratadrabik",
 		"Braids",
 		"Endrek",
-		"Grismold",
-		"The Raven Man",
 		"Gorex",
+		"Grismold",
+		"Nefarox",
+		"Ratadrabik",
+		"Skullbriar",
+		"Syrix",
+		"The Raven Man",
+		"Vish Kal",
+		"Yuriko",
 		"Nemesis"
 	],
 	"pointsOfInterest": [
@@ -60,11 +65,12 @@
 		"Haunted Fengraf",
 		"Hidden Dimir Base",
 		"Infernal Scriptorium",
+		"Old Phyrexia Holdout",
 		"Rat Cave",
 		"Sheoldred's Stronghold",
 		"Sphinx of Riddles Black",
-		"Sultai War Camp"
-
+		"Sultai War Camp",
+		"Xander's Lounge"
 	],
 	"structures": [
 		{
