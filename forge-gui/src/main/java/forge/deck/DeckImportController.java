@@ -245,9 +245,11 @@ public class DeckImportController {
         if (!inputContainsCommanderSection(input) && looksLikeCommanderDeck()) {
             if (!this.allowedSections.contains(DeckSection.Commander))
                 this.allowedSections.add(DeckSection.Commander);
-            commanderAutoDetected = true;
-            // Use blank-line separator to identify commander(s)
-            identifyCommanderFromBlankLineSeparator(input);
+            // Use blank-line separator to identify commander(s).
+            // Only flag as auto-detected if a valid commander was actually found,
+            // to avoid false positives on other 100-singleton formats (Canadian Highlander, etc.)
+            if (identifyCommanderFromBlankLineSeparator(input))
+                commanderAutoDetected = true;
         }
 
         if (this.currentGameFormatAllowsCommander()) {
@@ -413,7 +415,7 @@ public class DeckImportController {
      * cards appearing after the last blank line in the input. Only assigns if the trailing card(s)
      * are valid commander candidates (legendary creatures, eligible planeswalkers, etc.).
      */
-    private void identifyCommanderFromBlankLineSeparator(String input) {
+    private boolean identifyCommanderFromBlankLineSeparator(String input) {
         String[] lines = input.split("\n");
         // Find cards after the last blank line
         List<String> trailingCardNames = new ArrayList<>();
@@ -426,7 +428,7 @@ public class DeckImportController {
             trailingCardNames.add(0, lines[i].trim());
         }
         if (!foundBlank || trailingCardNames.isEmpty() || trailingCardNames.size() > 2)
-            return;
+            return false;
 
         // Undo any premature Commander auto-assignments from the recognizer.
         // (The recognizer auto-assigns the first legendary creature to Commander
@@ -466,7 +468,9 @@ public class DeckImportController {
             tokens.add(insertAt, Token.DeckSection(DeckSection.Commander.name(), this.allowedSections));
             for (int i = 0; i < commanderTokens.size(); i++)
                 tokens.add(insertAt + 1 + i, commanderTokens.get(i));
+            return true;
         }
+        return false;
     }
 
     public List<Token> optimiseCardArtInTokens(){
