@@ -3,19 +3,22 @@ package forge.gamemodes.net;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.slf4j.MDC;
+import org.tinylog.Level;
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
+import org.tinylog.ThreadContext;
 
 import java.io.File;
 import java.time.format.DateTimeFormatter;
 
 /**
  * Debug logger for network/delta sync operations.
- * Delegates to SLF4J/Logback for file management, formatting, and concurrency.
+ * Delegates to tinylog with NETWORK tag for file management, formatting, and concurrency.
  *
- * Log output is routed to both console (INFO+) and per-instance log files (DEBUG+)
- * via the {@code forge.gamemodes.net} logger defined in logback.xml.
+ * Log output is routed to both console (INFO+) and per-instance log files (TRACE+)
+ * via the NETWORK-tagged writers defined in tinylog.properties.
+ * The {@link NetworkLogWriter} routes file output to per-instance files based on
+ * the {@code logfileKey} thread context value.
  *
  * Supports configurable verbosity levels for console vs file output:
  * - TRACE: Per-object/per-property detail (serialization, collection stats, tracker verification)
@@ -28,17 +31,15 @@ import java.time.format.DateTimeFormatter;
  */
 public final class NetworkDebugLogger {
 
-    // Set log directory as system property BEFORE logback initializes (triggered by getLogger below).
-    // This allows logback.xml to reference ${forge.networklogs.dir} for the file path.
-    static {
-        System.setProperty("forge.networklogs.dir", ForgeConstants.NETWORK_LOGS_DIR);
-    }
-
-    private static final Logger logger = LoggerFactory.getLogger("forge.gamemodes.net");
+    private static final TaggedLogger logger = Logger.tag("NETWORK");
 
     private static final String LOG_PREFIX = "network-debug";
 
-    // Test mode flag - when true, log filenames include "-test" suffix via MDC
+    // Configurable file log level — controls gating in facade methods.
+    // The tinylog writer accepts TRACE+; we gate internally for performance.
+    private static volatile Level fileLevel = Level.DEBUG;
+
+    // Test mode flag - when true, log filenames include "-test" suffix via ThreadContext
     private static volatile boolean testMode = false;
 
     // Batch ID for correlating logs from the same test run
@@ -48,7 +49,7 @@ public final class NetworkDebugLogger {
     private static volatile boolean enabled = true;
 
     // Global instance suffix for single-JVM test mode — used as fallback when
-    // a server thread has no MDC values set. This allows server threads to log
+    // a server thread has no ThreadContext values set. This allows server threads to log
     // to the same per-game file as the test harness thread that called setInstanceSuffix().
     private static volatile String globalInstanceSuffix = null;
 
@@ -73,20 +74,18 @@ public final class NetworkDebugLogger {
             }
             enabled = FModel.getPreferences().getPrefBoolean(FPref.NET_DEBUG_LOGGER_ENABLED);
 
-            // Apply log level programmatically via reflection so we don't need
-            // a compile-time dependency on logback-classic (avoids pulling it
-            // into Android builds where it's unused).
-            String fileLevel = FModel.getPreferences().getPref(FPref.NET_FILE_LOG_LEVEL).toUpperCase();
-            Object factory = LoggerFactory.getILoggerFactory();
-            java.lang.reflect.Method getLogger = factory.getClass().getMethod("getLogger", String.class);
-            Object netLogger = getLogger.invoke(factory, "forge.gamemodes.net");
-            Class<?> levelClass = Class.forName("ch.qos.logback.classic.Level");
-            java.lang.reflect.Method toLevel = levelClass.getMethod("toLevel", String.class, (Class<?>) levelClass);
-            Object defaultLevel = levelClass.getField("TRACE").get(null);
-            Object level = toLevel.invoke(null, fileLevel, defaultLevel);
-            netLogger.getClass().getMethod("setLevel", levelClass).invoke(netLogger, level);
+            String pref = FModel.getPreferences().getPref(FPref.NET_FILE_LOG_LEVEL);
+            String levelStr = pref != null ? pref.toUpperCase() : "TRACE";
+            switch (levelStr) {
+                case "TRACE": fileLevel = Level.TRACE; break;
+                case "DEBUG": fileLevel = Level.DEBUG; break;
+                case "INFO":  fileLevel = Level.INFO;  break;
+                case "WARN":  fileLevel = Level.WARN;  break;
+                case "ERROR": fileLevel = Level.ERROR; break;
+                default:      fileLevel = Level.TRACE; break;
+            }
         } catch (Exception e) {
-            // Logback not available (e.g. Android) or preferences not initialized — use defaults
+            // Preferences not initialized — use defaults
         }
     }
 
@@ -97,7 +96,7 @@ public final class NetworkDebugLogger {
      */
     public static void log(String message) {
         if (!enabled) return;
-        ensureMDC();
+        ensureThreadContext();
         logger.info(message);
     }
 
@@ -106,7 +105,7 @@ public final class NetworkDebugLogger {
      */
     public static void log(String format, Object... args) {
         if (!enabled) return;
-        ensureMDC();
+        ensureThreadContext();
         logger.info(String.format(format, args));
     }
 
@@ -114,8 +113,8 @@ public final class NetworkDebugLogger {
      * Log a DEBUG level message. Detailed tracing information.
      */
     public static void debug(String message) {
-        if (!enabled || !logger.isDebugEnabled()) return;
-        ensureMDC();
+        if (!enabled || fileLevel.ordinal() > Level.DEBUG.ordinal()) return;
+        ensureThreadContext();
         logger.debug(message);
     }
 
@@ -123,8 +122,8 @@ public final class NetworkDebugLogger {
      * Log a formatted DEBUG level message.
      */
     public static void debug(String format, Object... args) {
-        if (!enabled || !logger.isDebugEnabled()) return;
-        ensureMDC();
+        if (!enabled || fileLevel.ordinal() > Level.DEBUG.ordinal()) return;
+        ensureThreadContext();
         logger.debug(String.format(format, args));
     }
 
@@ -132,8 +131,8 @@ public final class NetworkDebugLogger {
      * Log a TRACE level message. Per-object/per-property detail.
      */
     public static void trace(String message) {
-        if (!enabled || !logger.isTraceEnabled()) return;
-        ensureMDC();
+        if (!enabled || fileLevel.ordinal() > Level.TRACE.ordinal()) return;
+        ensureThreadContext();
         logger.trace(message);
     }
 
@@ -141,8 +140,8 @@ public final class NetworkDebugLogger {
      * Log a formatted TRACE level message.
      */
     public static void trace(String format, Object... args) {
-        if (!enabled || !logger.isTraceEnabled()) return;
-        ensureMDC();
+        if (!enabled || fileLevel.ordinal() > Level.TRACE.ordinal()) return;
+        ensureThreadContext();
         logger.trace(String.format(format, args));
     }
 
@@ -151,7 +150,7 @@ public final class NetworkDebugLogger {
      */
     public static void warn(String message) {
         if (!enabled) return;
-        ensureMDC();
+        ensureThreadContext();
         logger.warn(message);
     }
 
@@ -160,7 +159,7 @@ public final class NetworkDebugLogger {
      */
     public static void warn(String format, Object... args) {
         if (!enabled) return;
-        ensureMDC();
+        ensureThreadContext();
         logger.warn(String.format(format, args));
     }
 
@@ -169,7 +168,7 @@ public final class NetworkDebugLogger {
      * Error messages are logged even when logging is disabled.
      */
     public static void error(String message) {
-        ensureMDC();
+        ensureThreadContext();
         logger.error(message);
     }
 
@@ -177,7 +176,7 @@ public final class NetworkDebugLogger {
      * Log a formatted ERROR level message.
      */
     public static void error(String format, Object... args) {
-        ensureMDC();
+        ensureThreadContext();
         logger.error(String.format(format, args));
     }
 
@@ -185,19 +184,19 @@ public final class NetworkDebugLogger {
      * Log an ERROR with exception.
      */
     public static void error(String message, Throwable t) {
-        ensureMDC();
-        logger.error(message, t);
+        ensureThreadContext();
+        logger.error(t, message);
     }
 
-    // --- Domain-specific utilities (no SLF4J equivalent) ---
+    // --- Domain-specific utilities ---
 
     /**
      * Log a hex dump of bytes at DEBUG level. Useful for debugging serialization issues.
      */
     public static void hexDump(String label, byte[] bytes, int errorPosition) {
-        if (!enabled || !logger.isDebugEnabled()) return;
+        if (!enabled || fileLevel.ordinal() > Level.DEBUG.ordinal()) return;
         if (bytes == null || bytes.length == 0) return;
-        ensureMDC();
+        ensureThreadContext();
 
         StringBuilder sb = new StringBuilder();
         sb.append(label).append("\n");
@@ -244,7 +243,7 @@ public final class NetworkDebugLogger {
             sb.append("\n");
         }
 
-        logger.debug("HEXDUMP: {}\n{}", label, sb);
+        logger.debug("HEXDUMP: " + label + "\n" + sb);
     }
 
     /**
@@ -312,9 +311,9 @@ public final class NetworkDebugLogger {
      */
     public static void setInstanceSuffix(String suffix) {
         if (suffix != null) {
-            MDC.put("instanceSuffix", suffix);
+            ThreadContext.put("instanceSuffix", suffix);
             // In test mode, also set global suffix so server threads within
-            // the same JVM inherit it via ensureMDC()
+            // the same JVM inherit it via ensureThreadContext()
             if (testMode) {
                 globalInstanceSuffix = suffix;
             }
@@ -326,8 +325,8 @@ public final class NetworkDebugLogger {
             }
             cleanupOldLogs();
         } else {
-            MDC.remove("instanceSuffix");
-            MDC.remove("logfileKey");
+            ThreadContext.remove("instanceSuffix");
+            ThreadContext.remove("logfileKey");
         }
     }
 
@@ -337,7 +336,7 @@ public final class NetworkDebugLogger {
      * @return The instance suffix, or null if not set
      */
     public static String getInstanceSuffix() {
-        String suffix = MDC.get("instanceSuffix");
+        String suffix = ThreadContext.get("instanceSuffix");
         if (suffix == null && testMode) {
             suffix = globalInstanceSuffix;
         }
@@ -348,12 +347,12 @@ public final class NetworkDebugLogger {
      * Close the log context for the current thread.
      */
     public static void closeThreadLogger() {
-        String suffix = MDC.get("instanceSuffix");
+        String suffix = ThreadContext.get("instanceSuffix");
         if (suffix != null && suffix.equals(globalInstanceSuffix)) {
             globalInstanceSuffix = null;
         }
         systemInfoLogged.remove();
-        MDC.clear();
+        ThreadContext.clear();
     }
 
     /**
@@ -365,7 +364,7 @@ public final class NetworkDebugLogger {
         File logDir = new File(logDirPath);
         if (!logDir.exists()) return null;
 
-        // Must match the SiftingAppender file pattern in logback.xml
+        // Must match the NetworkLogWriter file naming pattern
         String logfileKey = computeLogfileKey();
         String filename = LOG_PREFIX + "-" + logfileKey + ".log";
 
@@ -376,11 +375,11 @@ public final class NetworkDebugLogger {
     /**
      * Compute the composite logfile key from batch ID, instance suffix, and test mode.
      * Uses global fallback for instance suffix in test mode.
-     * Must match the SiftingAppender discriminator key in logback.xml.
+     * Must match the key read by {@link NetworkLogWriter}.
      */
     private static String computeLogfileKey() {
         String batchPart = batchId != null ? batchId : "nobatch";
-        String suffix = MDC.get("instanceSuffix");
+        String suffix = ThreadContext.get("instanceSuffix");
         if (suffix == null && testMode) {
             suffix = globalInstanceSuffix;
         }
@@ -390,10 +389,10 @@ public final class NetworkDebugLogger {
     }
 
     /**
-     * Update the logfileKey MDC value used by the SiftingAppender discriminator.
+     * Update the logfileKey thread context value used by the NetworkLogWriter.
      */
     private static void updateLogfileKey() {
-        MDC.put("logfileKey", computeLogfileKey());
+        ThreadContext.put("logfileKey", computeLogfileKey());
     }
 
     /**
@@ -452,7 +451,7 @@ public final class NetworkDebugLogger {
             }
 
             if (deleted > 0) {
-                logger.debug("Log cleanup: deleted {} old log files", deleted);
+                logger.debug("Log cleanup: deleted " + deleted + " old log files");
             }
         } catch (Exception e) {
             // Non-critical — don't let cleanup failures affect logging
@@ -460,14 +459,14 @@ public final class NetworkDebugLogger {
     }
 
     /**
-     * Ensure MDC is populated on the current thread. In test mode, server threads
+     * Ensure ThreadContext is populated on the current thread. In test mode, server threads
      * that never called setInstanceSuffix() inherit the global suffix so their
      * log output goes to the correct per-game log file.
      */
-    private static void ensureMDC() {
-        if (testMode && MDC.get("logfileKey") == null && globalInstanceSuffix != null) {
-            MDC.put("instanceSuffix", globalInstanceSuffix);
-            MDC.put("logfileKey", computeLogfileKey());
+    private static void ensureThreadContext() {
+        if (testMode && ThreadContext.get("logfileKey") == null && globalInstanceSuffix != null) {
+            ThreadContext.put("instanceSuffix", globalInstanceSuffix);
+            ThreadContext.put("logfileKey", computeLogfileKey());
         }
     }
 
@@ -484,7 +483,7 @@ public final class NetworkDebugLogger {
             sb.append("Batch ID: ").append(batchId).append("\n");
         }
         sb.append("PID: ").append(pid).append("\n");
-        String suffix = MDC.get("instanceSuffix");
+        String suffix = ThreadContext.get("instanceSuffix");
         if (suffix != null) {
             sb.append("Instance: ").append(suffix).append("\n");
         }
