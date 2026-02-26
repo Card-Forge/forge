@@ -330,7 +330,7 @@ public abstract class GuiDownloadService implements Runnable {
                 System.out.printf((formatStr) + "%n", fileDest.getName(), url, fnfe.getMessage());
             }
             catch (final Exception ex) {
-                Logger.error("LQ Pictures", "Error downloading pictures", ex);
+                Logger.error(ex, "Error downloading pictures");
             }
             finally {
                 if (fos != null) {
