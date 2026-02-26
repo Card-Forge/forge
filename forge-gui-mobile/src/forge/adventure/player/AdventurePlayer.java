@@ -39,7 +39,7 @@ import java.util.function.Predicate;
 public class AdventurePlayer implements Serializable, SaveFileContent {
     public static final int MIN_DECK_COUNT = 10;
     // this is a purely arbitrary limit, could be higher or lower; just meant as some sort of reasonable limit for the user
-    private int MAX_DECK_COUNT = 20;
+    private int maxDeckCount = 20;
     // Player profile data.
     private String name;
     private int heroRace;
@@ -103,7 +103,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public int getDeckCount() { return decks.size(); }
 
-    public int getMAX_DECK_COUNT() { return MAX_DECK_COUNT; }
+    public int getMaxDeckCount() { return maxDeckCount; }
 
     private void clearDecks() {
         decks.clear();
@@ -125,7 +125,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         maxLife = 20;
         life = 20;
         shards = 0;
-        MAX_DECK_COUNT = 20;
+        maxDeckCount = 20;
         clearDecks();
         inventoryItems.clear();
         boostersOwned.clear();
@@ -161,9 +161,9 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         announceFantasy = fantasyMode = isFantasy; //Set Chaos mode first.
         announceCustom = usingCustomDeck = isUsingCustomDeck;
 
-        this.MAX_DECK_COUNT = Config.instance().getConfigData().maxNumberOfDecks; // Get the MAX_DECK_COUNT from the config file
+        this.maxDeckCount = Config.instance().getConfigData().maxNumberOfDecks; // Get the MAX_DECK_COUNT from the config file
         // Sanity Check make sure the number is not insane and make sure it is at least 20
-        this.MAX_DECK_COUNT = Math.max(Math.min(this.MAX_DECK_COUNT, 99), 20);
+        this.maxDeckCount = Math.max(Math.min(this.maxDeckCount, 99), 20);
 
         clearDecks(); // Reset the empty decks to now already have the commander in the command zone.
         deck = startingDeck;
@@ -571,11 +571,11 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
         // Load Max Deck Count or grab it from Config file if missing from save
         if (data.containsKey("maxDeckCount"))
-            this.MAX_DECK_COUNT = data.readInt("maxDeckCount");
+            this.maxDeckCount = data.readInt("maxDeckCount");
         else
-            this.MAX_DECK_COUNT = Config.instance().getConfigData().maxNumberOfDecks;
+            this.maxDeckCount = Config.instance().getConfigData().maxNumberOfDecks;
         // Sanity Check make sure the number is not insane and make sure it is at least 20
-        this.MAX_DECK_COUNT = Math.max(Math.min(this.MAX_DECK_COUNT, 99), 20);
+        this.maxDeckCount = Math.max(Math.min(this.maxDeckCount, 99), 20);
 
 
         // Load decks
@@ -584,7 +584,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         if (hasDynamicDeckCount) {
             int dynamicDeckCount = data.readInt("deckCount");
             // In case the save had previously saved more decks than the current version allows (in case of the max being lowered)
-            dynamicDeckCount = Math.min(MAX_DECK_COUNT, dynamicDeckCount);
+            dynamicDeckCount = Math.min(maxDeckCount, dynamicDeckCount);
             for (int i = 0; i < dynamicDeckCount; i++){
                 // The first x elements are pre-created
                 if (i < MIN_DECK_COUNT) {
@@ -756,7 +756,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         data.store("lifeLoss", this.difficultyData.lifeLoss);
         data.store("spawnRank", this.difficultyData.spawnRank);
         data.store("rewardMaxFactor", this.difficultyData.rewardMaxFactor);
-        data.store("maxDeckCount", this.MAX_DECK_COUNT);
+        data.store("maxDeckCount", this.maxDeckCount);
 
         data.store("name", name);
         data.store("heroRace", heroRace);
@@ -1490,7 +1490,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
      * @return int - index of new copy slot, or -1 if no slot was available
      */
     public int copyDeck() {
-        for (int i = 0; i < MAX_DECK_COUNT; i++) {
+        for (int i = 0; i < maxDeckCount; i++) {
             if (i >= getDeckCount()) addDeck();
             if (isEmptyDeck(i)) {
                 decks.set(i, (Deck) deck.copyTo(deck.getName() + " (" + Forge.getLocalizer().getMessage("lblCopy") + ")"));

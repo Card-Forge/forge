@@ -87,7 +87,7 @@ public class DeckSelectScene extends UIScene {
     }
 
     private void addDeck(){
-        if (Current.player().getDeckCount() >= Current.player().getMAX_DECK_COUNT()){
+        if (Current.player().getDeckCount() >= Current.player().getMaxDeckCount()){
             showDialog(createGenericDialog(Forge.getLocalizer().getMessage("lblAddDeck"), Forge.getLocalizer().getMessage("lblMaxDeckCountReached"),
                     Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null));
             return;
