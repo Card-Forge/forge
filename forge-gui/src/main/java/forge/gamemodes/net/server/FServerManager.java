@@ -211,6 +211,14 @@ public final class FServerManager {
         return UPnPMapped;
     }
 
+    public int getTotalSendErrors() {
+        int total = 0;
+        for (final RemoteClient client : clients.values()) {
+            total += client.getSendErrorCount();
+        }
+        return total;
+    }
+
     public void broadcast(final NetEvent event) {
         if (event instanceof MessageEvent msgEvent) {
             lobbyListener.message(msgEvent.getSource(), msgEvent.getMessage());

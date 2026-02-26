@@ -223,8 +223,15 @@ public class TestTrueNetworkTraffic {
             Assert.assertTrue(clientGui.getSetGameViewCount() > 0,
                 "Client should have received setGameView updates (count: " + clientGui.getSetGameViewCount() + ")");
 
+            // 14. Pipeline error assertions
+            int sendErrors = server.getTotalSendErrors();
+            Assert.assertEquals(sendErrors, 0,
+                "Server encountered " + sendErrors + " send error(s) during the game. " +
+                "Check test output for stack traces.");
+
             System.out.println("[TestTrueNetworkTraffic] Test PASSED: game completed in " + turnCount +
-                " turns, client received " + clientGui.getSetGameViewCount() + " setGameView updates");
+                " turns, client received " + clientGui.getSetGameViewCount() + " setGameView updates" +
+                ", 0 send errors");
 
         } finally {
             // Cleanup
