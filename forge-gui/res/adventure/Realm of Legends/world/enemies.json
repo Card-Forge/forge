@@ -47025,12 +47025,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Azusa, Lost but Seeking"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Heavy Armor", "Greenseeker's Shoes", "Lifespark Gauntlet", "Amulet of Favor", "Brawler's Cestus"]
       },
       {
         "type": "deckCard",
@@ -47221,12 +47227,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Gallia of the Endless Dance"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Heavy Armor", "Greenseeker's Shoes", "Lifespark Gauntlet", "Amulet of Favor", "Brawler's Cestus"]
       },
       {
         "type": "deckCard",
@@ -47569,7 +47581,7 @@
     "ai": "",
     "scale": 2,
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
@@ -47580,6 +47592,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Nemata, Grove Guardian"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Heavy Armor", "Greenseeker's Shoes", "Lifespark Gauntlet", "Amulet of Favor", "Brawler's Cestus"]
       },
       {
         "type": "deckCard",
@@ -48233,12 +48251,18 @@
     "ai": "",
     "scale": 1,
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Jace, Vryn's Prodigy"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Sage's Robes", "Trickster's Shoes", "Aether Gauntlet", "Amulet of Mischief", "Hoversail Glove"]
       },
       {
         "type": "deckCard",
@@ -48631,12 +48655,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Shorikai, Genesis Engine"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Sage's Robes", "Trickster's Shoes", "Aether Gauntlet", "Amulet of Mischief", "Hoversail Glove"]
       },
       {
         "type": "deckCard",
@@ -48697,12 +48727,18 @@
     "ai": "",
     "flying": true,
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Tamiyo, Inquisitive Student"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Sage's Robes", "Trickster's Shoes", "Aether Gauntlet", "Amulet of Mischief", "Hoversail Glove"]
       },
       {
         "type": "deckCard",
@@ -48892,12 +48928,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Chandra, Fire of Kaladesh"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Flaming Armor", "Firefrightener Shoes", "Pyrite Gauntlet", "Amulet of Fury", "Darksteel Axe"]
       },
       {
         "type": "deckCard",
@@ -49552,12 +49594,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Rivaz of the Claw"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Flaming Armor", "Firefrightener Shoes", "Pyrite Gauntlet", "Amulet of Fury", "Darksteel Axe"]
       },
       {
         "type": "deckCard",
@@ -49617,7 +49665,7 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
@@ -49628,6 +49676,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Sarkhan, Dragon Ascendant"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Flaming Armor", "Firefrightener Shoes", "Pyrite Gauntlet", "Amulet of Fury", "Darksteel Axe"]
       },
       {
         "type": "deckCard",
@@ -50220,12 +50274,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Kyler, Sigardian Emissary"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Blessed Armor", "Peddler's Shoes", "Sunbeam Gauntlet", "Amulet of Mirth", "Jousting Lance"]
       },
       {
         "type": "deckCard",
@@ -50286,12 +50346,18 @@
     "ai": "",
     "scale": 1,
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Kytheon, Hero of Akros"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Blessed Armor", "Peddler's Shoes", "Sunbeam Gauntlet", "Amulet of Mirth", "Jousting Lance"]
       },
       {
         "type": "deckCard",
@@ -50621,12 +50687,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Wyleth, Soul of Steel"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Blessed Armor", "Peddler's Shoes", "Sunbeam Gauntlet", "Amulet of Mirth", "Jousting Lance"]
       },
       {
         "type": "deckCard",
@@ -50821,12 +50893,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Ratadrabik of Urborg"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Forbidden Robes", "Witch's Shoes", "Necrogen Gauntlet", "Amulet of Scorn", "Blight Sickle"]
       },
       {
         "type": "deckCard",
@@ -50886,7 +50964,7 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
@@ -50902,6 +50980,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Braids, Conjurer Adept"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Forbidden Robes", "Witch's Shoes", "Necrogen Gauntlet", "Amulet of Scorn", "Blight Sickle"]
       },
       {
         "type": "deckCard",
@@ -51619,12 +51703,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Yuriko, the Tiger's Shadow"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Forbidden Robes", "Witch's Shoes", "Necrogen Gauntlet", "Amulet of Scorn", "Blight Sickle"]
       },
       {
         "type": "deckCard",
@@ -52177,12 +52267,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Jenson Carthalion, Druid Exile"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Steel Boots", "Caravaneer's Greaves", "Echo Shield", "Spidersilk Gloves", "Mithril Armor"]
       },
       {
         "type": "deckCard",
@@ -52646,12 +52742,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Codie, Vociferous Codex"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Steel Boots", "Caravaneer's Greaves", "Echo Shield", "Spidersilk Gloves", "Mithril Armor"]
       },
       {
         "type": "deckCard",
@@ -53108,12 +53210,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Karona, False God"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Steel Boots", "Caravaneer's Greaves", "Echo Shield", "Spidersilk Gloves", "Mithril Armor"]
       },
       {
         "type": "deckCard",
@@ -53573,12 +53681,18 @@
     "scale": 2,
     "flying": true,
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Kyodai, Soul of Kamigawa"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Steel Boots", "Caravaneer's Greaves", "Echo Shield", "Spidersilk Gloves", "Mithril Armor"]
       },
       {
         "type": "deckCard",
@@ -54035,12 +54149,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Atogatog"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Steel Boots", "Caravaneer's Greaves", "Echo Shield", "Spidersilk Gloves", "Mithril Armor"]
       },
       {
         "type": "deckCard",
