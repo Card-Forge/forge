@@ -38,6 +38,7 @@ import org.testng.annotations.Test;
  * - Unhandled exceptions in Netty pipeline (beforeCall, channelRead)
  * - EDT/Netty deadlocks (game hangs -> 60s timeout fails)
  * - Silent client disconnection (server finishes but client assertions fail)
+ * - Send errors in the Netty pipeline (caught by RemoteClient)
  */
 public class TestTrueNetworkTraffic {
 

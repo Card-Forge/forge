@@ -216,6 +216,9 @@ public final class FServerManager {
         for (final RemoteClient client : clients.values()) {
             total += client.getSendErrorCount();
         }
+        for (final RemoteClient client : disconnectedClients.values()) {
+            total += client.getSendErrorCount();
+        }
         return total;
     }
 
