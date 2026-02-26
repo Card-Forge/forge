@@ -204,7 +204,7 @@ public class DeckImportController {
         cardsInTokens.clear();
         commanderAutoDetected = false;
 
-        // 5a: Auto-detect Commander format from explicit section headers in input
+        // Auto-detect Commander format from explicit section headers in input
         if (!this.allowedSections.contains(DeckSection.Commander)
                 && inputContainsCommanderSection(input)) {
             this.allowedSections.add(DeckSection.Commander);
@@ -238,7 +238,7 @@ public class DeckImportController {
         if (parsedTokens != null)
             tokens.addAll(parsedTokens);
 
-        // 5b: Heuristic Commander detection for headerless formats (e.g. Moxfield MTGO/Plain Text)
+        // Heuristic Commander detection for headerless formats (e.g. Moxfield MTGO/Plain Text)
         // Run when no explicit Commander header exists in the input and the deck looks like Commander.
         // Note: the recognizer may auto-assign the first legendary creature to Commander section
         // (DeckRecognizer line 806), so we check for headers rather than section emptiness.
