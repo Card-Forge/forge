@@ -529,7 +529,6 @@ public class DeckRecognizer {
                 continue;
 
             TokenType tokenType = token.getType();
-
             if (!token.isTokenForDeck() && (tokenType != TokenType.DECK_SECTION_NAME) ||
                     (tokenType == TokenType.LIMITED_CARD && !this.includeBannedAndRestricted)) {
                 // Just bluntly add the token to the list and proceed.
@@ -915,7 +914,6 @@ public class DeckRecognizer {
             return false;
         return StringUtils.equalsAnyIgnoreCase(nonCardToken, DECK_SECTION_NAMES);
     }
-
 
     private static String nonCardTokenMatch(final String lineAsIs){
         if (lineAsIs == null)
