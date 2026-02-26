@@ -4,6 +4,7 @@ import forge.util.HWInfo;
 import forge.gui.interfaces.IGuiBase;
 import forge.gui.interfaces.IGuiGame;
 import forge.localinstance.properties.ForgePreferences;
+import org.tinylog.Logger;
 
 public class GuiBase {
     private static IGuiBase guiInterface;
@@ -42,17 +43,33 @@ public class GuiBase {
         downloadsDir = dir;
     }
     public static String getHWInfo() {
+        Runtime runtime = Runtime.getRuntime();
+        StringBuilder sb = new StringBuilder();
+        sb.append("##########################################\n");
+        sb.append("APP: Forge v.").append(getInterface().getCurrentVersion());
         if (hwInfo != null) {
-            return "##########################################\n" +
-                    "APP: Forge v." + getInterface().getCurrentVersion() +
-                    "\nDEV: " + hwInfo.device().getName() + (hwInfo.getChipset() ?
-                    "\nSOC: " + hwInfo.device().getChipset() :
-                    "\nCPU: " + hwInfo.device().getCpuDescription()) +
-                    "\nRAM: " + deviceRAM + " MB" +
-                    "\nOS: " + hwInfo.os().getRawDescription() +
-                    "\n##########################################";
+            sb.append("\nDEV: ").append(hwInfo.device().getName());
+            sb.append(hwInfo.getChipset()
+                    ? "\nSOC: " + hwInfo.device().getChipset()
+                    : "\nCPU: " + hwInfo.device().getCpuDescription());
+            sb.append("\nRAM: ").append(deviceRAM).append(" MB");
+            sb.append("\nOS: ").append(hwInfo.os().getRawDescription());
+        } else {
+            sb.append("\nJava: ").append(System.getProperty("java.version"))
+                    .append(" (").append(System.getProperty("java.vendor")).append(")");
+            sb.append("\nOS: ").append(System.getProperty("os.name"))
+                    .append(" ").append(System.getProperty("os.version"))
+                    .append(" ").append(System.getProperty("os.arch"));
+            sb.append("\nRAM: ").append(runtime.maxMemory() / 1024 / 1024)
+                    .append(" MB max, ").append(runtime.availableProcessors()).append(" CPUs");
         }
-        return "";
+        sb.append("\n##########################################");
+        return sb.toString();
+    }
+    public static void logHWInfo() {
+        for (String line : getHWInfo().split("\n")) {
+            Logger.info(line);
+        }
     }
     public static String getDownloadsDir() {
         return downloadsDir;
