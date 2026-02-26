@@ -4560,6 +4560,110 @@
    ]
     }
   },
+  {
+    "name": "Gisa's Favorite Shovel",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Right",
+    "iconName": "GhostRune",
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Segovian Sandals",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Boots",
+    "iconName": "GhostRune",
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Pocket Thopter",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Boots",
+    "iconName": "GhostRune",
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Miser's Shoes",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Boots",
+    "iconName": "GhostRune",
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Outpost Outfit",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Body",
+    "iconName": "GhostRune",
+    "cost": 7500,
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Seafloor Shirt",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Body",
+    "iconName": "GhostRune",
+    "cost": 7500,
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Bog Dweller Leather",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Body",
+    "iconName": "GhostRune",
+    "cost": 7500,
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Highland Cloak",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Body",
+    "iconName": "GhostRune",
+    "cost": 7500,
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Timberland Shawl",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Body",
+    "iconName": "GhostRune",
+    "cost": 7500,
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
     {
     "name": "Pilgrim's Cloak",
     "description": "Sac for a tapped basic",
