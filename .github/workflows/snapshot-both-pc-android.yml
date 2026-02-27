@@ -23,6 +23,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
+      - name: Fetch history for changelog
+        run: |
+          TAG_SHA=$(gh api repos/${{ github.repository }}/tags \
+            --jq '[.[] | select(.name | startswith("forge-"))][0].commit.sha')
+          if [ -n "$TAG_SHA" ]; then
+            TAG_DATE=$(gh api "repos/${{ github.repository }}/commits/$TAG_SHA" \
+              --jq '.commit.committer.date')
+            git fetch --shallow-since="$TAG_DATE"
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
