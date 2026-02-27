@@ -324,6 +324,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN("117"),     // F6 key
         SHORTCUT_YIELD_UNTIL_STACK_CLEARS("118"),       // F7 key
         SHORTCUT_YIELD_CANCEL("27"),                    // ESC key
+        SHORTCUT_YIELD_OPTIONS("17 89"),                // Ctrl+Y
 
         LAST_IMPORTED_CUBE_ID("");
 

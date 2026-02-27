@@ -670,6 +670,10 @@ public final class CMatchUI
         cLog.getView().refreshDisplay();
     }
 
+    public void refreshYieldPanel() {
+        view.populate();
+    }
+
     public void repaintCardOverlays() {
         final List<CardPanel> panels = getVisibleCardPanels();
         for (final CardPanel panel : panels) {

@@ -51,11 +51,7 @@ public final class GameMenu {
         menu.addSeparator();
         menu.add(getMenuItem_TargetingArcs());
         menu.add(new CardOverlaysMenu(matchUI).getMenu());
-        if (prefs.getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) {
-            menu.add(getYieldOptionsMenu());
-        } else {
-            menu.add(getMenuItem_AutoYields());
-        }
+        menu.add(getYieldOptionsMenu());
         menu.addSeparator();
         menu.add(getMenuItem_ViewDeckList());
         return menu;
@@ -204,13 +200,15 @@ public final class GameMenu {
     private JMenu getYieldOptionsMenu() {
         final Localizer localizer = Localizer.getInstance();
         final JMenu yieldMenu = new JMenu(localizer.getMessage("lblYieldOptions"));
+        final boolean yieldEnabled = prefs.getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS);
 
-        // Auto-Yields (manage per-ability yields)
+        // Auto-Yields (manage per-ability yields) - always available, independent of advanced options
         yieldMenu.add(getMenuItem_AutoYields());
         yieldMenu.addSeparator();
 
-        // Sub-menu 1: Interrupt Settings
+        // Interrupt Settings sub-menu
         final JMenu interruptMenu = new JMenu(localizer.getMessage("lblInterruptSettings"));
+        interruptMenu.setEnabled(yieldEnabled);
         interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnAttackers"), FPref.YIELD_INTERRUPT_ON_ATTACKERS));
         interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnBlockers"), FPref.YIELD_INTERRUPT_ON_BLOCKERS));
         interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnTargeting"), FPref.YIELD_INTERRUPT_ON_TARGETING));
@@ -219,16 +217,33 @@ public final class GameMenu {
         interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnTriggers"), FPref.YIELD_INTERRUPT_ON_TRIGGERS));
         interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnCombat"), FPref.YIELD_INTERRUPT_ON_COMBAT));
         interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnReveal"), FPref.YIELD_INTERRUPT_ON_REVEAL));
-        yieldMenu.add(interruptMenu);
 
-        // Sub-menu 2: Automatic Suggestions
+        // Automatic Suggestions sub-menu
         final JMenu suggestionsMenu = new JMenu(localizer.getMessage("lblAutomaticSuggestions"));
+        suggestionsMenu.setEnabled(yieldEnabled);
         suggestionsMenu.add(createYieldCheckbox(localizer.getMessage("lblSuggestStackYield"), FPref.YIELD_SUGGEST_STACK_YIELD));
         suggestionsMenu.add(createYieldCheckbox(localizer.getMessage("lblSuggestNoMana"), FPref.YIELD_SUGGEST_NO_MANA));
         suggestionsMenu.add(createYieldCheckbox(localizer.getMessage("lblSuggestNoActions"), FPref.YIELD_SUGGEST_NO_ACTIONS));
         suggestionsMenu.addSeparator();
         suggestionsMenu.add(createYieldCheckbox(localizer.getMessage("lblSuppressOnOwnTurn"), FPref.YIELD_SUPPRESS_ON_OWN_TURN));
         suggestionsMenu.add(createYieldCheckbox(localizer.getMessage("lblSuppressAfterYield"), FPref.YIELD_SUPPRESS_AFTER_END));
+
+        // Enable Advanced Yield Options toggle with Ctrl+Y accelerator
+        final JCheckBoxMenuItem enableItem = new JCheckBoxMenuItem(localizer.getMessage("lblEnableAdvancedYieldOptions"));
+        final KeyStroke ks = KeyboardShortcuts.getKeyStrokeForPref(FPref.SHORTCUT_YIELD_OPTIONS);
+        if (ks != null) { enableItem.setAccelerator(ks); }
+        enableItem.setState(yieldEnabled);
+        enableItem.addActionListener(e -> {
+            final boolean newState = !prefs.getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS);
+            prefs.setPref(FPref.YIELD_EXPERIMENTAL_OPTIONS, newState);
+            prefs.save();
+            interruptMenu.setEnabled(newState);
+            suggestionsMenu.setEnabled(newState);
+            matchUI.refreshYieldPanel();
+        });
+        yieldMenu.add(enableItem);
+
+        yieldMenu.add(interruptMenu);
         yieldMenu.add(suggestionsMenu);
 
         return yieldMenu;
