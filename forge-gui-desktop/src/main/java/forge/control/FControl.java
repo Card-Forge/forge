@@ -60,6 +60,7 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.menus.ForgeMenu;
 import forge.model.FModel;
+import forge.sound.SoundSystem;
 import forge.player.GamePlayerUtil;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.toolbox.FOptionPane;
@@ -231,6 +232,7 @@ public enum FControl implements KeyEventDispatcher {
         if (!canExitForge(false)) {
             return false;
         }
+        SoundSystem.instance.dispose();
         Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         System.exit(0);
         return true;

@@ -18,7 +18,7 @@ public class StaticAbilityDisableTriggers {
     public static boolean disabled(final Game game, final Trigger regtrig, final Map<AbilityKey, Object> runParams)  {
         CardCollectionView cardList = null;
         // if LTB look back
-        if ((regtrig.getMode() == TriggerType.ChangesZone || regtrig.getMode() == TriggerType.ChangesZoneAll) && "Battlefield".equals(regtrig.getParam("Origin"))) {
+        if (regtrig.looksBackInTime()) {
             if (runParams.containsKey(AbilityKey.LastStateBattlefield)) {
                 cardList = (CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield);
             }

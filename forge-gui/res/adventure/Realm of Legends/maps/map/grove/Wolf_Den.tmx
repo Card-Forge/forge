@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="37" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="107">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="37" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="108">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Young wolf&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Howling Moon&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -16,12 +16,12 @@
  </layer>
  <layer id="2" name="Grass" width="37" height="28">
   <data encoding="base64" compression="zlib">
-   eJzFl29uwjAMxftxS6VdqwP1HPvIKXaZdrB7cBDG4BSLpT7x6iWpE0KJZCHa/PnFfo7TwTXNpW2aq7d3b7/evvyztdrJr/ft19u0t2dgEdv7dz/+99zG53hE69s5k3AcnsSC1qn4pDgGVxbHYdLDaByP+C3pRuaVuG4zfYdx0MPGOJ65eC7ZG+w66Ss3nh3x5OYMuPi/aAraOhTw8Lz3cD2i9cpX4OI4rHneSNPxC5noFDn08Tq3ZzJ1gRywMOk9WMzK1JPWtJ9K1i1l4lrB+c9nmY5hDSbkMPJP1wrdV95JX5yFtX2k10N9tfQ9r8DEa6X6xHQseTm6/2dICQdqQs6eQ3kVOue2Bp/HNJ6Tv7sIE9cW2JLPc2MBHy75/96zyMoEDtyVLspGYq3Nw37nBp+H4sE1vzZHbQv5CvkjPkVeai0cX9ZjGd38W4bveCVz6rlD+wtpkrXA97tUvD8zNIB78d7N798xHmv+lfZhHtTf2D5zmbTWLHFg31tjr1m4zui1wII9p+K6m+zNWKNSfsGe9Hco3sXuHaWm2x821XPR
+   eJzFl1FuwjAMhvu4pdLe97bbdKCeY4+cYpdpB7vHDrIxOMVi0V+4/5LUSUuJZCFomny2f8ehc1V1qqvq7O3V26+3D//bWuPb7/fp99vU19/AIrb3z37857GOr3GL0dZjJuE43IkFo6H8pDg6V5bHbtBDb3wf+ZvSjawred1mxg7vQQ8b4/uaS68lvsHOg75y89kontyaAZf+LpqCtg4FPHrdOVy3GC3FClw6D2ueNzI4fyETnaKG3h7Hdk+mJlADFib2wWJWplZpjeNUsm8pk+4Vuv71WcY5XIIJNYz6417Bc+WZzMVZuHSMeD/0V8vc4wpMeq/UnJiOpS579/8MKeFAT8jxOVRXoXNua4h5TOM59buLMOneApuKeW4uEMOp+M89i6xM4MBd6UTWK9aleXTc9UDMQ/nQPX9pjqUtFCvUj8QUdcla+HqYt+/L88UsLL0b/5fRd7wS/3ht+BdiCmmK73epfL9naAD34r279rkUj7X+SudoHvTfmJ+5TKy1PqIzNsTemntm0X2G9wILfE7ldTfYk7FHpeICn/h/KJ7F7h2lxuMPT9pyfQ==
   </data>
  </layer>
  <layer id="3" name="Clutter" width="37" height="28">
   <data encoding="base64" compression="zlib">
-   eJyNV09PU0EQf4V0H20p+iUa4gUP2oItLfGkfgmP3FBC4kmjd0SQA1BpS8vR+A28mHDgavzzCUzUi38IXqjQhzPZ+WXnLdviJJN93bdv9zczv5mdJtkoGjdRlNAY0din8S/puYxjJj2yzsVRNEuaMfa5QnqL9JT3iOw87wXpq++xJiQZWdOm8RXpDukeaZn2rpE2SLfp95axZ1ZkriJ4+oKNsbBNdZn/MGH3vCHzLLx3j7Qj83+V3Yz9IHLrWgrLjmDrK/+c0bhvnA2+rxZii2We9De9+0P6MGftash7lractSs2NuT9rpwJ0f4Z0Bk3Y2sD42ip72Zl36rnK+A4Jl2l52nyz3psMfmyI/7hMwaezXsmvY4xtcWvsKNn0utY2Lfv6cyreYuDMbCukb4U3ST9SGuK+YuYuuKfbePsrXg2Yx34A46yHfzNfHxx36WcxcM4ftI4Q+f/MFZ/kV6j31N5yyfI2ymrXeNiAC5My5oS6ZeMfS5LvBPhGuNhWxYUHuYQeLpCmDYEz7r45PHtKPo8Yeefkx7Ru2UVO5xbl3zpefwZJl0Vt321PqM4DmwbEqMHOeuTK3kbzxex9dWmx6dHRfdclXxGrBLhFPJmXJ3dVn6FDcCDOJaF0/DHqtJj4fma4E3U/k+KlotPFTZ9LteGpknH51Dw78p7+Amc1PxD7MBpcIr9g9/XpTb5OaKF+YUzeqIDz09jqhYDazlO84plycME/mAOPpoLfOuLjkNNuAZ/8B6oyyEpqT243oI3GhfXpRmpTVVV17XcLVzE01M1fU64wfX6TN09JbXHQeTqPUtVvuEcC+E6Mu6u4j11LBjPt4J9j/xuyX1VE4UduFtYDtX5KwE+Qgp5hwv1CbWp7tV5jt9izipLXd7VvNgmWVfPu17u/48cCK5PhGFS4eO4LeccBq3DBHHZkXziOIzKD/hZ141EfjOvcJ7Gx3eKxnIY2BfvUKcRyz25+/lZ+wnrwAncT/uCoSr5gR6E50pR2DfQ14TzTd7Vx3N19zalNnVUL4D6gx4EuVmRejVQuHEGeoPZOIwB/gXmO8TtewXLk6ZxPVTTU/RKOAv4cA+fKz81PK5Cpz3/oOdiG1ADOcYaU0fOqcWuj9qWeWDiGHAfWvWwoJeYH+ILn7uJYIH98DV//5XwfC+k4w4ODZTtC3J/ocdjf6MnqCm/RFEYgz+v+9qWCft1UfWe6Kt1/4RaiFqAnm7UHQXOgaM693BftkyaZ5B3k1ZZTrJOQ7mHWtBW9cGXROUJ4t8UW7An40NPDtF3gsbUz16eexxf9MCQZ0WHB9/h/wZijPrWucS/GhOrjnMo98Cpchz2EeLfUPEHd0+yrkcLfTsK05ZgCOUeS9ezMVR7We4XLQ6MrKhF6BWH/ZdE3HhkO9nfTRPOvRP5v+kL7nfUdPDw1OMn4oj7XfeJEPy3Bi/5mb8flXshTLjfa3G6n0DMWPFfZ1jfBQEvsF73A9gLz/r8f0+ZpFU=
+   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
   </data>
  </layer>
  <layer id="7" name="Roads" width="37" height="28">
@@ -40,6 +40,14 @@
   </object>
   <object id="62" template="../../../../common/maps/obj/enemy.tx" x="39.052" y="240.531">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Sarulf"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="40"/>
@@ -80,13 +88,21 @@
   <object id="73" template="../../../../common/maps/obj/waypoint.tx" x="357.418" y="162.665"/>
   <object id="74" template="../../../../common/maps/obj/waypoint.tx" x="255.191" y="267.979"/>
   <object id="80" template="../../../../common/maps/obj/waypoint.tx" x="424.789" y="153.629"/>
-  <object id="82" template="../../../../common/maps/obj/collision.tx" x="6.81709" y="447.892" width="594.418" height="16"/>
+  <object id="82" template="../../../../common/maps/obj/collision.tx" x="-5.68291" y="447.892" width="606.918" height="16"/>
   <object id="83" template="../../../../common/maps/obj/collision.tx" x="-1.77538" y="-17.1576" width="594.418" height="16"/>
   <object id="84" template="../../../../common/maps/obj/collision.tx" x="-15.9632" y="-14.571" width="16" height="477.07"/>
   <object id="85" template="../../../../common/maps/obj/collision.tx" x="591.229" y="-16.3625" width="16" height="477.07"/>
   <object id="87" template="../../../../common/maps/obj/enemy.tx" x="350" y="122.5">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Full Moon's Rise|ISD&quot;, &quot;Wolfhunter's Quiver|DKA&quot;]
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Full Moon's Rise|ISD&quot;, &quot;Hermit of the Natterknolls&quot;]
 }</property>
     <property name="enemy" value="Tovolar"/>
     <property name="threatRange" type="int" value="0"/>
@@ -94,6 +110,14 @@
   </object>
   <object id="88" template="../../../../common/maps/obj/enemy.tx" x="386.5" y="144">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Rahilda"/>
     <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="50"/>
@@ -102,6 +126,14 @@
   </object>
   <object id="91" template="../../../../common/maps/obj/enemy.tx" x="385" y="218">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Ulrich"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="40"/>
@@ -110,7 +142,15 @@
   </object>
   <object id="92" template="../../../../common/maps/obj/enemy.tx" x="157.167" y="325.167">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Packsong Pup|VOW&quot;, &quot;Howling Moon|VOW&quot;]
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Packsong Pup|VOW&quot;, &quot;Highspire Artisan&quot;]
 }</property>
     <property name="enemy" value="Voja"/>
     <property name="speedModifier" type="float" value="20"/>
@@ -164,7 +204,7 @@
 </property>
    </properties>
   </object>
-  <object id="100" template="../../../../common/maps/obj/dialog.tx" x="352.25" y="310.477" width="61.833" height="14.8788" visible="1">
+  <object id="100" template="../../../../common/maps/obj/dialog.tx" x="295.75" y="408.477" width="79.333" height="9.8788" visible="1">
    <properties>
     <property name="dialog">[
 {
@@ -198,6 +238,53 @@
   <object id="106" template="../../../../common/maps/obj/scroll.tx" x="151.333" y="74">
    <properties>
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Howlpack Resurgence&quot;, &quot;editions&quot;: [ &quot;SOI&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="107" template="../../../../common/maps/obj/enemy.tx" x="280.5" y="388.5">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'Pst! You there, {var=player_name}! Come here, quickly!'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;The wolves have howled their last&quot;,
+					&quot;text&quot;: &quot;'Justice is served! Now let us enjoy the rewards of a job well done!'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Jacob Hauken, Inspector&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 1000 }           
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 5
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Who are you and how do you know my name?&quot;,
+					&quot;text&quot;: &quot;'Why, I'm Jacob Hauken, Innistrad's best investigator! Knowing things is my business. I've tracked down the culprits for a series of brutal murders to this very den! The problem is the culprits are a pack of wolves and werewolves, and I'm not equipped to bring them to justice. So, if you take care of that part, I'll happily split the reward with you!'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;Not interested, weirdo.&quot;,
+					&quot;text&quot;: &quot;'Hmph. Some people.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Jacob Hauken"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
    </properties>
   </object>
  </objectgroup>

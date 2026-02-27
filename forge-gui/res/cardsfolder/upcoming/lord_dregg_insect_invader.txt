@@ -1,0 +1,10 @@
+Name:Lord Dregg, Insect Invader
+ManaCost:3 B
+Types:Legendary Creature Insect Warrior
+PT:3/2
+K:Flying
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | Revolt$ True | TriggerDescription$ Disappear — At the beginning of your end step, if a permanent left the battlefield under your control this turn, create a 1/1 black Insect Warrior creature token with flying.
+SVar:TrigToken:DB$ Token | TokenScript$ b_1_1_insect_warrior_flying | TokenOwner$ You
+A:AB$ Draw | Cost$ 3 G Sac<1/Permanent.token/token> | SpellDescription$ Draw a card.
+DeckHas:Ability$Token|Sacrifice
+Oracle:Flying\nDisappear — At the beginning of your end step, if a permanent left the battlefield under your control this turn, create a 1/1 black Insect Warrior creature token with flying.\n{3}{G}, Sacrifice a token: Draw a card.

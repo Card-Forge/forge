@@ -231,7 +231,7 @@
   <object id="210" template="../../../../common/maps/obj/manashards.tx" x="64.3333" y="451.333"/>
   <object id="217" template="../../../../common/maps/obj/enemy.tx" x="648.5" y="179.33" width="16" height="17.6724">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Frostbridge Guard|WOE&quot;, &quot;Solitary Sanctuary|WOE&quot;, &quot;Glacial Fortress|M10&quot;, &quot;Siren Song Lyre|BNG&quot;, &quot;Three Bowls of Porridge|WOE&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Frostbridge Guard|WOE&quot;, &quot;Solitary Sanctuary|WOE&quot;, &quot;Glacial Fortress|M10&quot;, &quot;Three Bowls of Porridge|WOE&quot;]
 }</property>
     <property name="enemy" value="Hylda"/>
     <property name="reward">[

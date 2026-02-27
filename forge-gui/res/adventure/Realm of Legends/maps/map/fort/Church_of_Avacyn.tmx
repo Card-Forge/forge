@@ -64,7 +64,7 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Scroll of avacyn|AVR&quot;, &quot;Mask of avacyn|ISD&quot;, &quot;Angel of Jubilation&quot;, &quot;Ghost Quarter|ISD&quot;, &quot;helvault|DKA&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Scroll of Avacyn|AVR&quot;, &quot;Mask of Avacyn|ISD&quot;, &quot;Angel of Jubilation&quot;, &quot;Helvault|DKA&quot;]}"/>
     <property name="enemy" value="Avacyn"/>
     <property name="speedModifier" type="float" value="40"/>
     <property name="threatRange" type="int" value="40"/>

@@ -48,7 +48,8 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Jungle Shrine&quot;, &quot;Waystone's Guidance|YTDM&quot;, &quot;Roar of Resistance&quot;, &quot;Bioengineered Future&quot;, &quot;Team Pennant&quot;
+]}</property>
     <property name="enemy" value="Gahiji"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
@@ -106,7 +107,8 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Altar of the Goyf|MH2&quot;, &quot;Urborg Lhurgoyf|DMU&quot;, &quot;Savage Lands|CMM&quot;, &quot;Trailblazer's Boots|ZEN&quot;, &quot;Seal of Primordium|MM3&quot;
+]}</property>
     <property name="enemy" value="Disa"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
@@ -121,7 +123,8 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Ancestral Katana|NEO&quot;, &quot;Nomad Outpost|CMM&quot;, &quot;Experimental Synthesizer|NEO&quot;, &quot;Peerless Samurai|NEO&quot;, &quot;Waystone's Guidance|YTDM&quot;
+]}</property>
     <property name="enemy" value="Isshin"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
@@ -136,7 +139,8 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Sandsteppe Citadel&quot;, &quot;Priest of Fell Rites&quot;, &quot;Hunting Grounds&quot;, &quot;Insidious Roots&quot;
+]}</property>
     <property name="enemy" value="Karador"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
@@ -151,7 +155,8 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Sunlit Marsh&quot;, &quot;Wooded Ridgeline&quot;, &quot;Cindervines&quot;, &quot;Hidden Stockpile&quot;
+]}</property>
     <property name="enemy" value="Tymna and Tana"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>

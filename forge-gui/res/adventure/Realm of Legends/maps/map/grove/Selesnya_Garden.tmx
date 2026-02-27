@@ -46,7 +46,7 @@
   </object>
   <object id="76" template="../../../../common/maps/obj/enemy.tx" x="72.1846" y="126.775">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Vitu-Ghazi, the City-Tree|RAV&quot;, &quot;Selesnya Guildmage|RAV&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Vitu-Ghazi, the City-Tree|RAV&quot;, &quot;Crown of Convergence&quot;]
 }</property>
     <property name="enemy" value="Trostani"/>
     <property name="speedModifier" type="float" value="40"/>

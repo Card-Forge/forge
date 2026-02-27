@@ -17,8 +17,13 @@
  */
 package forge.localinstance.properties;
 
+import java.util.EnumSet;
+import java.util.Set;
+import java.util.StringJoiner;
+
 import forge.MulliganDefs;
 import forge.game.GameLogEntryType;
+import forge.game.GameLogVerbosity;
 
 public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
 
@@ -234,7 +239,9 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
 
         DEV_MODE_ENABLED ("false"),
         DEV_WORKSHOP_SYNTAX ("false"),
-        DEV_LOG_ENTRY_TYPE (GameLogEntryType.DAMAGE.toString()),
+        DEV_LOG_ENTRY_TYPE (GameLogVerbosity.MEDIUM.name()),
+        DEV_LOG_CUSTOM_TYPES (defaultCustomLogTypes()),
+        UI_LOG_SHOW_CARD_IMAGES ("true"),
 
         LOAD_CARD_SCRIPTS_LAZILY ("false"),
         LOAD_ARCHIVED_FORMATS ("false"),
@@ -297,15 +304,19 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         SHORTCUT_SHOWCOMBAT ("67"),
         SHORTCUT_SHOWCONSOLE ("76"),
         SHORTCUT_SHOWDEV ("68"),
-        SHORTCUT_CONCEDE ("17"),
-        SHORTCUT_ENDTURN ("69"),
-        SHORTCUT_ALPHASTRIKE ("65"),
+        SHORTCUT_UNDO ("17 90"),
+        SHORTCUT_CONCEDE ("17 81"),
+        SHORTCUT_ENDTURN ("17 69"),
+        SHORTCUT_ALPHASTRIKE ("17 65"),
         SHORTCUT_SHOWTARGETING ("84"),
         SHORTCUT_AUTOYIELD_ALWAYS_YES ("89"),
         SHORTCUT_AUTOYIELD_ALWAYS_NO ("78"),
         SHORTCUT_MACRO_RECORD ("16 82"),
         SHORTCUT_MACRO_NEXT_ACTION ("16 50"),
         SHORTCUT_CARD_ZOOM("90"),
+        SHORTCUT_SHOWHOTKEYS("72"),
+        SHORTCUT_PANELTABS("17 84"),
+        SHORTCUT_CARDOVERLAYS("17 79"),
         SHORTCUT_YIELD_UNTIL_NEXT_PHASE("113"),         // F2 key
         SHORTCUT_YIELD_UNTIL_BEFORE_COMBAT("114"),      // F3 key
         SHORTCUT_YIELD_UNTIL_END_STEP("115"),           // F4 key
@@ -325,6 +336,14 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         @Override
         public String getDefault() {
             return strDefaultVal;
+        }
+
+        private static String defaultCustomLogTypes() {
+            StringJoiner sj = new StringJoiner(",");
+            for (GameLogEntryType t : GameLogEntryType.values()) {
+                sj.add(t.name());
+            }
+            return sj.toString();
         }
 
         public static FPref[] CONSTRUCTED_DECK_STATES = {
@@ -357,11 +376,102 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
                 BRAWL_P5_DECK_STATE, BRAWL_P6_DECK_STATE,
                 BRAWL_P7_DECK_STATE, BRAWL_P8_DECK_STATE };
 
+        /** Phase stop prefs in PhaseType order (UPKEEP through CLEANUP, skipping UNTAP). */
+        public static FPref[] PHASES_AI = {
+                PHASE_AI_UPKEEP, PHASE_AI_DRAW, PHASE_AI_MAIN1,
+                PHASE_AI_BEGINCOMBAT, PHASE_AI_DECLAREATTACKERS,
+                PHASE_AI_DECLAREBLOCKERS, PHASE_AI_FIRSTSTRIKE,
+                PHASE_AI_COMBATDAMAGE, PHASE_AI_ENDCOMBAT,
+                PHASE_AI_MAIN2, PHASE_AI_EOT, PHASE_AI_CLEANUP };
+        public static FPref[] PHASES_HUMAN = {
+                PHASE_HUMAN_UPKEEP, PHASE_HUMAN_DRAW, PHASE_HUMAN_MAIN1,
+                PHASE_HUMAN_BEGINCOMBAT, PHASE_HUMAN_DECLAREATTACKERS,
+                PHASE_HUMAN_DECLAREBLOCKERS, PHASE_HUMAN_FIRSTSTRIKE,
+                PHASE_HUMAN_COMBATDAMAGE, PHASE_HUMAN_ENDCOMBAT,
+                PHASE_HUMAN_MAIN2, PHASE_HUMAN_EOT, PHASE_HUMAN_CLEANUP };
+
     }
 
     /** Instantiates a ForgePreferences object. */
     public ForgePreferences() {
         super(ForgeConstants.MAIN_PREFS_FILE, FPref.class);
+        migrateShortcutDefaults();
+        migrateLogVerbosity();
+    }
+
+    /** Migrate old GameLogEntryType values to GameLogVerbosity presets. */
+    private void migrateLogVerbosity() {
+        final String stored = getPref(FPref.DEV_LOG_ENTRY_TYPE);
+        try {
+            GameLogVerbosity.valueOf(stored); // strict check for enum name
+            return; // already a valid verbosity preset
+        } catch (IllegalArgumentException ignored) {}
+        // Also accept caption format ("High" etc.) from combobox storage
+        for (GameLogVerbosity v : GameLogVerbosity.values()) {
+            if (v.toString().equals(stored)) {
+                setPref(FPref.DEV_LOG_ENTRY_TYPE, v.name());
+                save();
+                return;
+            }
+        }
+        // Old value is a GameLogEntryType name — map to a preset
+        try {
+            int ordinal = GameLogEntryType.valueOf(stored).ordinal();
+            String mapped = ordinal <= 8 ? GameLogVerbosity.LOW.name()
+                          : ordinal <= 14 ? GameLogVerbosity.MEDIUM.name()
+                          : GameLogVerbosity.HIGH.name();
+            setPref(FPref.DEV_LOG_ENTRY_TYPE, mapped);
+            save();
+        } catch (IllegalArgumentException ignored) {
+            // Unrecognized value — reset to default
+            setPref(FPref.DEV_LOG_ENTRY_TYPE, FPref.DEV_LOG_ENTRY_TYPE.getDefault());
+            save();
+        }
+    }
+
+    /** Parse the custom log types preference into a Set. */
+    public Set<GameLogEntryType> getCustomLogTypes() {
+        final String stored = getPref(FPref.DEV_LOG_CUSTOM_TYPES);
+        if (stored == null || stored.isEmpty()) {
+            return EnumSet.allOf(GameLogEntryType.class);
+        }
+        final EnumSet<GameLogEntryType> types = EnumSet.noneOf(GameLogEntryType.class);
+        for (String name : stored.split(",")) {
+            try {
+                types.add(GameLogEntryType.valueOf(name.trim()));
+            } catch (IllegalArgumentException ignored) {}
+        }
+        return types;
+    }
+
+    /** Serialize and save the custom log types preference. */
+    public void setCustomLogTypes(final Set<GameLogEntryType> types) {
+        final StringJoiner sj = new StringJoiner(",");
+        for (GameLogEntryType t : GameLogEntryType.values()) {
+            if (types.contains(t)) {
+                sj.add(t.name());
+            }
+        }
+        setPref(FPref.DEV_LOG_CUSTOM_TYPES, sj.toString());
+        save();
+    }
+
+    /**
+     * Migrates shortcut preferences from old defaults to new Ctrl+key defaults.
+     * Previously, Concede/EndTurn/AlphaStrike had configurable shortcuts that
+     * differed from their hardcoded menu accelerators. Now the menu accelerators
+     * are driven by the configurable preferences, so the defaults must match.
+     */
+    private void migrateShortcutDefaults() {
+        migrateIfOldDefault(FPref.SHORTCUT_CONCEDE, "17", "17 81");
+        migrateIfOldDefault(FPref.SHORTCUT_ENDTURN, "69", "17 69");
+        migrateIfOldDefault(FPref.SHORTCUT_ALPHASTRIKE, "65", "17 65");
+    }
+
+    private void migrateIfOldDefault(final FPref pref, final String oldDefault, final String newDefault) {
+        if (oldDefault.equals(getPref(pref))) {
+            setPref(pref, newDefault);
+        }
     }
 
     @Override

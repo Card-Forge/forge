@@ -86,9 +86,11 @@
   <object id="59" template="../../../../common/maps/obj/collision.tx" x="-1" y="-16.5" width="482" height="16"/>
   <object id="60" template="../../../../common/maps/obj/collision.tx" x="-16" y="-2.5415" width="16" height="502.083"/>
   <object id="61" template="../../../../common/maps/obj/collision.tx" x="481.5" y="-11.0415" width="16" height="502.083"/>
-  <object id="62" template="../../../../common/maps/obj/enemy.tx" x="175.622" y="197.414">
+  <object id="62" template="../../../../common/maps/obj/enemy.tx" x="175.122" y="198.664">
    <properties>
     <property name="enemy" value="Linvala"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="10"/>
    </properties>
   </object>
   <object id="63" template="../../../../common/maps/obj/enemy.tx" x="199.718" y="67.8627">
@@ -108,12 +110,12 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Segovian Angel|mh1&quot;, &quot;luxior, giada's gift|SNC&quot;, &quot;Bishop of wings|M20&quot;, &quot;Seraph sanctuary|AVR&quot;, &quot;answered prayers|MH1&quot;, &quot;angelic chorus|bbd&quot;, &quot;angelic renewal|uma&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;luxior, giada's gift|SNC&quot;, &quot;Bishop of wings|M20&quot;, &quot;Seraph sanctuary|AVR&quot;, &quot;answered prayers|MH1&quot;, &quot;angelic chorus|bbd&quot;, &quot;angelic renewal|uma&quot;]}"/>
     <property name="enemy" value="Giada"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
-  <object id="66" template="../../../../common/maps/obj/dialog.tx" x="285.722" y="372.343" width="59.6667" height="40.1667" rotation="35.7911" visible="1">
+  <object id="66" template="../../../../common/maps/obj/dialog.tx" x="315.722" y="389.676" width="33" height="29.5" rotation="0" visible="1">
    <properties>
     <property name="dialog">[
 {
@@ -126,7 +128,7 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
 ]</property>
    </properties>
   </object>
-  <object id="67" template="../../../../common/maps/obj/dialog.tx" x="172.093" y="76.6607" width="43" height="26.8334" rotation="269.975" visible="1">
+  <object id="67" template="../../../../common/maps/obj/dialog.tx" x="157.421" y="64.6543" width="19.6603" height="19.4942" rotation="0" visible="1">
    <properties>
     <property name="dialog">[
 {

@@ -17,12 +17,11 @@
  */
 package forge.game.zone;
 
-import com.esotericsoftware.minlog.Log;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import forge.GameCommand;
+
 import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -78,7 +77,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     private final List<SpellAbility> thisTurnActivated = Lists.newArrayList();
 
     private Card curResolvingCard = null;
-    private final Map<String, List<GameCommand>> commandList = Maps.newHashMap();
 
     private final Game game;
 
@@ -291,7 +289,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             runParams.put(AbilityKey.SpellAbility, sp);
             game.getTriggerHandler().runTrigger(TriggerType.AbilityResolves, runParams, false);
 
-            game.getGameLog().add(GameLogEntryType.MANA, source + " - " + sp);
+            game.fireEvent(new GameEventAddLog(GameLogEntryType.MANA, source + " - " + sp));
             sp.resetOnceResolved();
 
             // parts are paid sequentially, so collect directly or some trigger might get lost
@@ -320,7 +318,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (!sp.isCopied() && !hasLegalTargeting(sp)) {
             String str = source + " - [Couldn't add to stack, failed to target] - " + sp.getDescription();
             System.err.println(str + sp.getAllTargetChoices());
-            game.getGameLog().add(GameLogEntryType.STACK_ADD, str);
+            game.fireEvent(new GameEventAddLog(GameLogEntryType.STACK_ADD, str));
             return;
         }
 
@@ -419,7 +417,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                     activator.incCommanderCast(source);
                 }
                 game.getTriggerHandler().runTrigger(TriggerType.SpellCast, runParams, true);
-                executeCastCommand(si.getSpellAbility().getHostCard());
             }
 
             // Run AbilityCast triggers
@@ -644,9 +641,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 first.setActivatingPlayer(sa.getActivatingPlayer());
                 game.fireEvent(new GameEventCardStatsChanged(source));
                 AbilityUtils.resolve(first);
-            } else {
-                // TODO: Spell fizzles, what's the best way to alert player?
-                Log.debug(source.getName() + " ability fizzles.");
             }
         } else if (sa.getApi() != null) {
             AbilityUtils.handleRemembering(sa);
@@ -990,29 +984,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
     public List<SpellAbility> getAbilityActivatedThisTurn() {
         return thisTurnActivated;
-    }
-
-    public final void addCastCommand(final String valid, final GameCommand c) {
-        if (commandList.containsKey(valid)) {
-            commandList.get(valid).add(0, c);
-        } else {
-            commandList.put(valid, Lists.newArrayList(c));
-        }
-    }
-
-    private void executeCastCommand(final Card cast) {
-        for (Entry<String, List<GameCommand>> ev : commandList.entrySet()) {
-            if (cast.getType().hasStringType(ev.getKey())) {
-                execute(ev.getValue());
-            }
-        }
-    }
-
-    private static void execute(final List<GameCommand> c) {
-        final int length = c.size();
-        for (int i = 0; i < length; i++) {
-            c.remove(0).run();
-        }
     }
 
     public final boolean hasSourceOnStack(final Card source, final Predicate<SpellAbility> pred) {

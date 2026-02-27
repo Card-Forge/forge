@@ -52,7 +52,7 @@ public class AudioMusic implements IAudioMusic {
                     }
                 }
             });
-            new Thread(() -> {
+            Thread musicThread = new Thread(() -> {
                 try {
                     isPlaying = true;
                     musicPlayer.play();
@@ -62,7 +62,9 @@ public class AudioMusic implements IAudioMusic {
                     valid = false;
                     isPlaying = false;
                 }
-            }, "Audio Music").start();
+            }, "Audio Music");
+            musicThread.setDaemon(true);
+            musicThread.start();
         }
         catch (Exception e) {
             e.printStackTrace();

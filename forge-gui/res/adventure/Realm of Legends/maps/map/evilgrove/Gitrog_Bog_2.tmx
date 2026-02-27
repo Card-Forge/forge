@@ -98,9 +98,9 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Thalia and The Gitrog Monster|MOM&quot;, &quot;Sinister Concoction|SOI&quot;, &quot;Foul orchard|SOI&quot;, &quot;drownyard temple|SOI&quot;, &quot;Crawling sensation|SOI&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Crawling Infestation&quot;, &quot;Sinister Concoction|SOI&quot;, &quot;Foul Orchard|SOI&quot;, &quot;Drownyard Temple|SOI&quot;, &quot;Crawling Sensation|SOI&quot;]
 }</property>
-    <property name="enemy" value="Gitrog"/>
+    <property name="enemy" value="The Gitrog Monster"/>
     <property name="reward">[
   {
     &quot;type&quot;: &quot;item&quot;,
