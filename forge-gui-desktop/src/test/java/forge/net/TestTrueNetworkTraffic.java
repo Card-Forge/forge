@@ -36,7 +36,6 @@ import org.testng.annotations.Test;
 public class TestTrueNetworkTraffic {
 
     private static boolean initialized = false;
-    private static boolean originalLegality;
 
     @BeforeClass
     public static void setUp() {
@@ -48,6 +47,7 @@ public class TestTrueNetworkTraffic {
                 FModel.initialize(null, preferences -> {
                     preferences.setPref(FPref.LOAD_CARD_SCRIPTS_LAZILY, false);
                     preferences.setPref(FPref.UI_LANGUAGE, "en-US");
+                    preferences.setPref(FPref.ENFORCE_DECK_LEGALITY, false);
                     FModel.getNetPreferences().setPref(ForgeNetPreferences.FNetPref.UPnP, "NEVER");
                     return null;
                 });
@@ -60,10 +60,6 @@ public class TestTrueNetworkTraffic {
     @Test(timeOut = 60000, description = "True network traffic test with remote client")
     public void testTrueNetworkTraffic() throws Exception {
         System.out.println("[TestTrueNetworkTraffic] Starting true network traffic test...");
-
-        // Temporarily disable deck legality for 10-card decks
-        originalLegality = FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY);
-        FModel.getPreferences().setPref(FPref.ENFORCE_DECK_LEGALITY, false);
 
         FServerManager server = FServerManager.getInstance();
         FGameClient client = null;
@@ -208,7 +204,6 @@ public class TestTrueNetworkTraffic {
             if (server.isHosting()) {
                 server.stopServer();
             }
-            FModel.getPreferences().setPref(FPref.ENFORCE_DECK_LEGALITY, originalLegality);
         }
     }
 
