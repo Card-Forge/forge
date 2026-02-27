@@ -224,20 +224,26 @@
 try {
     def isOnTag = "git describe --exact-match --tags HEAD".execute().waitFor() == 0
     def tagList = "git tag --sort=-version:refname".execute().text.split("\n")
+        .collect { it.trim() }
         .findAll { it.startsWith("forge-") }
 
-    def tag = "HEAD"
+    def tag = ""
     if (isOnTag && tagList.size() > 1) {
         tag = tagList[1]
     } else if (!isOnTag && tagList.size() > 0) {
         tag = tagList[0]
     }
 
-    project.properties['changelog.from.tag'] = tag
-    println "Using changelog from tag: ${tag}"
+    if (tag.isEmpty()) {
+        println "WARNING: No forge- tags found. CHANGES.txt will be empty."
+        project.properties['changelog.from.tag'] = 'HEAD'
+    } else {
+        project.properties['changelog.from.tag'] = tag
+        println "Using changelog from tag: ${tag}"
+    }
 } catch (Exception e) {
-    project.properties['changelog.from.tag'] = "HEAD"
-    println "Using changelog from tag: HEAD (fallback)"
+    println "WARNING: Could not determine changelog tag: ${e.message}"
+    project.properties['changelog.from.tag'] = 'HEAD'
 }
 ]]>
                             </source>
@@ -259,25 +265,11 @@ try {
                         </goals>
                         <configuration>
                             <!-- Generate changelog from the appropriate tag -->
-                            <fromRef>refs/tags/${changelog.from.tag}</fromRef>
+                            <fromRef>${changelog.from.tag}</fromRef>
                             <file>${project.build.directory}/CHANGES.txt</file>
                             <templateContent>
 <![CDATA[
 {{#tags}}
-## {{name}}
- {{#issues}}
-  {{#hasIssue}}
-   {{#hasLink}}
-### {{name}} [{{issue}}]({{link}}) {{title}} {{#hasIssueType}} *{{issueType}}* {{/hasIssueType}} {{#hasLabels}} {{#labels}} *{{.}}* {{/labels}} {{/hasLabels}}
-   {{/hasLink}}
-   {{^hasLink}}
-### {{name}} {{issue}} {{title}} {{#hasIssueType}} *{{issueType}}* {{/hasIssueType}} {{#hasLabels}} {{#labels}} *{{.}}* {{/labels}} {{/hasLabels}}
-   {{/hasLink}}
-  {{/hasIssue}}
-  {{^hasIssue}}
-### {{name}}
-  {{/hasIssue}}
-
   {{#commits}}
 **{{{messageTitle}}}**
 
@@ -288,8 +280,6 @@ try {
 [{{hash}}](https://github.com/{{ownerName}}/{{repoName}}/commit/{{hash}}) {{authorName}} *{{commitTime}}*
 
   {{/commits}}
-
- {{/issues}}
 {{/tags}}
 ]]>
                             </templateContent>
