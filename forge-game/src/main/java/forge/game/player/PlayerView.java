@@ -7,6 +7,7 @@ import com.google.common.collect.Maps;
 import forge.LobbyPlayer;
 import forge.card.CardType;
 import forge.card.MagicColor;
+import forge.card.mana.ManaCostShard;
 import forge.card.mana.ManaAtom;
 import forge.game.GameEntityView;
 import forge.game.card.Card;
@@ -566,29 +567,28 @@ public class PlayerView extends GameEntityView {
      * Check if this player has any available actions (playable spells/abilities).
      * Used for smart yield suggestions in network play.
      *
-     * Note: This uses a heuristic for mana checking since CostPartMana.canPay()
-     * always returns true. We estimate available mana from floating mana plus
-     * untapped mana sources and compare to spell CMCs.
+     * @param p the player to check
+     * @param availableMana pre-computed mana estimate (e.g. from ComputerUtilMana.getAvailableManaEstimate)
      */
-    public void updateHasAvailableActions(Player p) {
-        // Build mana profile: total available mana and producible colors
-        int availableMana = p.getManaPool().totalMana();
+    public void updateHasAvailableActions(Player p, int availableMana) {
+        // Build color profile from floating mana and untapped mana-producing permanents
         byte availableColors = 0;
-        // Add colors from floating mana
         for (byte color : ManaAtom.MANATYPES) {
             if (p.getManaPool().getAmountOfColor(color) > 0) {
                 availableColors |= color;
             }
         }
-        // Add colors from untapped mana-producing permanents
         for (Card card : p.getCardsIn(ZoneType.Battlefield)) {
+            if (availableColors == ManaAtom.ALL_MANA_TYPES) {
+                break; // already have all colors
+            }
             if (!card.isTapped() && !card.getManaAbilities().isEmpty()) {
-                availableMana++;
                 for (SpellAbility ma : card.getManaAbilities()) {
                     if (ma.getManaPart() != null) {
                         String produced = ma.getManaPart().getOrigProduced();
                         if (produced.contains("Any")) {
                             availableColors = ManaAtom.ALL_MANA_TYPES;
+                            break;
                         } else {
                             for (byte color : ManaAtom.MANATYPES) {
                                 if (ma.getManaPart().canProduce(MagicColor.toShortString(color), ma)) {
@@ -629,12 +629,26 @@ public class PlayerView extends GameEntityView {
             }
         }
 
+        // Check graveyard, exile, command zone for playable abilities
+        for (ZoneType zone : new ZoneType[]{ZoneType.Graveyard, ZoneType.Exile, ZoneType.Command}) {
+            for (Card card : p.getCardsIn(zone)) {
+                for (SpellAbility sa : card.getAllPossibleAbilities(p, true)) {
+                    if (!sa.isManaAbility()) {
+                        if (canAffordSpell(sa, availableMana, availableColors) && hasValidTargets(sa)) {
+                            set(TrackableProperty.HasAvailableActions, true);
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+
         set(TrackableProperty.HasAvailableActions, false);
     }
 
     /**
      * Check if a spell/ability can be afforded given available mana count and colors.
-     * Conservative: returns true if uncertain (e.g. hybrid mana, X costs).
+     * Handles hybrid (need any one color) and phyrexian (always payable via life) shards.
      */
     private boolean canAffordSpell(SpellAbility sa, int availableMana, byte availableColors) {
         if (sa.getPayCosts() == null || !sa.getPayCosts().hasManaCost()) {
@@ -645,9 +659,28 @@ public class PlayerView extends GameEntityView {
         if (cmc > availableMana) {
             return false;
         }
-        // Check that all colored requirements can be satisfied
-        byte colorProfile = manaCost.getColorProfile();
-        return (colorProfile & ~availableColors) == 0;
+        // Check colored requirements shard by shard
+        for (ManaCostShard shard : manaCost) {
+            if (shard.isPhyrexian()) {
+                continue; // always payable via life
+            }
+            byte colorMask = shard.getColorMask();
+            if (colorMask == 0) {
+                continue; // generic/colorless
+            }
+            if (shard.isMultiColor()) {
+                // hybrid: need ANY one of the colors
+                if ((colorMask & availableColors) == 0) {
+                    return false;
+                }
+            } else {
+                // mono: need that specific color
+                if ((colorMask & availableColors) != colorMask) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     /**
@@ -657,11 +690,11 @@ public class PlayerView extends GameEntityView {
         if (!sa.usesTargeting()) {
             return true;
         }
-        return !sa.getTargetRestrictions().getAllCandidates(sa, true).isEmpty();
+        return sa.getTargetRestrictions().hasCandidates(sa);
     }
 
     /**
-     * Check if player has any mana available (floating or from untapped lands).
+     * Check if player has any mana available (floating or from untapped mana sources).
      * Used by yield suggestion system to determine if player can cast spells.
      */
     public boolean hasManaAvailable() {
@@ -670,11 +703,11 @@ public class PlayerView extends GameEntityView {
             if (getMana(manaType) > 0) return true;
         }
 
-        // Check for untapped lands
+        // Check for untapped mana sources (lands, rocks, dorks)
         FCollectionView<CardView> battlefield = getBattlefield();
         if (battlefield != null) {
             for (CardView cv : battlefield) {
-                if (!cv.isTapped() && cv.getCurrentState().isLand()) {
+                if (!cv.isTapped() && cv.getCurrentState().origProduceMana() != null) {
                     return true;
                 }
             }

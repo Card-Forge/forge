@@ -3,6 +3,7 @@ package forge.player;
 import com.google.common.collect.*;
 import forge.LobbyPlayer;
 import forge.StaticData;
+import forge.ai.ComputerUtilMana;
 import forge.ai.GameState;
 import forge.ai.PlayerControllerAi;
 import forge.card.*;
@@ -1550,7 +1551,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final MagicStack stack = getGame().getStack();
 
         if (FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) {
-            getPlayer().getView().updateHasAvailableActions(getPlayer());
+            int manaEstimate = ComputerUtilMana.getAvailableManaEstimate(getPlayer());
+            getPlayer().getView().updateHasAvailableActions(getPlayer(), manaEstimate);
         }
 
         if (mayAutoPass()) {

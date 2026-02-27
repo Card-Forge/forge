@@ -17,6 +17,7 @@
  */
 package forge.gamemodes.match.input;
 
+import forge.ai.ComputerUtilMana;
 import forge.game.Game;
 import forge.game.GameView;
 import forge.game.card.Card;
@@ -345,7 +346,8 @@ public class InputPassPriority extends InputSyncronizedBase {
     private boolean checkHasAvailableActions() {
         Player player = getController().getPlayer();
         if (player == null) return false;
-        player.getView().updateHasAvailableActions(player);
+        int manaEstimate = ComputerUtilMana.getAvailableManaEstimate(player);
+        player.getView().updateHasAvailableActions(player, manaEstimate);
         return player.getView().hasAvailableActions();
     }
 

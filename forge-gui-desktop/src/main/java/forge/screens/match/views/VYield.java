@@ -108,10 +108,10 @@ public class VYield implements IVDoc<CYield> {
         container.add(btnYourTurn, buttonConstraints);
         container.add(btnClearStack, buttonConstraints);
 
-        // Row 3: Auto-pass centred at 2/3 width
+        // Row 3: Auto-pass centred at 2/3 width, with gap above to separate
         String autoPassConstraints = largerButtons
-            ? "span 3, w 66%, h 40px:40px:60px, align center"
-            : "span 3, w 66%, hmin 24px, align center";
+            ? "span 3, gaptop 3px, w 66%, h 40px:40px:60px, align center"
+            : "span 3, gaptop 3px, w 66%, hmin 24px, align center";
         container.add(btnAutoPass, autoPassConstraints);
     }
 
