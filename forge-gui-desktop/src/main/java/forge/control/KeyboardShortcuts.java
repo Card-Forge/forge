@@ -362,6 +362,25 @@ public class KeyboardShortcuts {
             }
         };
 
+        /** Toggle auto-pass when no actions. */
+        final Action actAutoPassNoActions = new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
+                if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
+                final ForgePreferences prefs = FModel.getPreferences();
+                final boolean newState = !prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS);
+                prefs.setPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS, newState);
+                prefs.save();
+                if (matchUI != null) {
+                    matchUI.refreshYieldPanel();
+                    if (newState && matchUI.getGameController() != null) {
+                        matchUI.getGameController().selectButtonOk();
+                    }
+                }
+            }
+        };
+
         /** Show keyboard shortcuts dialog. */
         final Action actShowHotkeys = new AbstractAction() {
             @Override
@@ -383,6 +402,7 @@ public class KeyboardShortcuts {
         list.add(new Shortcut(FPref.SHORTCUT_CONCEDE, localizer.getMessage("lblSHORTCUT_CONCEDE"), actConcede, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_ENDTURN, localizer.getMessage("lblSHORTCUT_ENDTURN"), actEndTurn, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_YIELD_OPTIONS, localizer.getMessage("lblSHORTCUT_YIELD_OPTIONS"), actYieldOptions, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_YIELD_AUTO_PASS, localizer.getMessage("lblSHORTCUT_YIELD_AUTO_PASS"), actAutoPassNoActions, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_YIELD_UNTIL_NEXT_PHASE, localizer.getMessage("lblSHORTCUT_YIELD_UNTIL_NEXT_PHASE"), actYieldUntilNextPhase, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_YIELD_UNTIL_BEFORE_COMBAT, localizer.getMessage("lblSHORTCUT_YIELD_UNTIL_BEFORE_COMBAT"), actYieldUntilBeforeCombat, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_YIELD_UNTIL_END_STEP, localizer.getMessage("lblSHORTCUT_YIELD_UNTIL_END_STEP"), actYieldUntilEndStep, am, im));

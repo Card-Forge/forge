@@ -105,8 +105,31 @@ public class YieldController {
         if (autoPassUntilEndOfTurn.contains(player)) {
             return true;
         }
+        // Check persistent auto-pass when no actions available
+        if (shouldAutoPassNoActions(player)) {
+            return true;
+        }
         // Check experimental yield system
         return shouldAutoYieldForPlayer(player);
+    }
+
+    /**
+     * Check if auto-pass should fire because the player has no available actions.
+     * This is a persistent preference toggle, not a one-shot yield mode.
+     */
+    private boolean shouldAutoPassNoActions(PlayerView player) {
+        if (!isYieldExperimentalEnabled()) {
+            return false;
+        }
+        if (!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.YIELD_AUTO_PASS_NO_ACTIONS)) {
+            return false;
+        }
+        // Interrupt conditions still break through (attackers, blockers, targeting, etc.)
+        if (shouldInterruptYield(player)) {
+            return false;
+        }
+        // Auto-pass if no playable actions
+        return !player.hasAvailableActions();
     }
 
     /**

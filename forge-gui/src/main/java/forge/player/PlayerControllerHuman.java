@@ -1549,6 +1549,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public List<SpellAbility> chooseSpellAbilityToPlay() {
         final MagicStack stack = getGame().getStack();
 
+        if (FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) {
+            getPlayer().getView().updateHasAvailableActions(getPlayer());
+        }
+
         if (mayAutoPass()) {
             // avoid prompting for input if current phase is set to be
             // auto-passed instead posing a short delay if needed to

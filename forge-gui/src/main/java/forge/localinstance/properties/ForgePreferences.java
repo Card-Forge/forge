@@ -158,6 +158,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         YIELD_INTERRUPT_ON_MASS_REMOVAL("true"),  // When mass removal spell cast
         YIELD_SUPPRESS_ON_OWN_TURN("true"),  // Suppress suggestions on player's own turn
         YIELD_SUPPRESS_AFTER_END("true"),  // Suppress suggestions for one priority pass after yield ends
+        YIELD_AUTO_PASS_NO_ACTIONS("false"),  // Auto-pass priority when no playable actions
 
         UI_STACK_EFFECT_NOTIFICATION_POLICY ("Never"),
         UI_LAND_PLAYED_NOTIFICATION_POLICY ("Never"),
@@ -325,6 +326,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         SHORTCUT_YIELD_UNTIL_STACK_CLEARS("118"),       // F7 key
         SHORTCUT_YIELD_CANCEL("27"),                    // ESC key
         SHORTCUT_YIELD_OPTIONS("17 89"),                // Ctrl+Y
+        SHORTCUT_YIELD_AUTO_PASS("119"),               // F8 key
 
         LAST_IMPORTED_CUBE_ID("");
 

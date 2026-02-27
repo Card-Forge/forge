@@ -571,22 +571,41 @@ public class PlayerView extends GameEntityView {
      * untapped mana sources and compare to spell CMCs.
      */
     public void updateHasAvailableActions(Player p) {
-        // Estimate available mana: floating mana + untapped mana-producing permanents
+        // Build mana profile: total available mana and producible colors
         int availableMana = p.getManaPool().totalMana();
+        byte availableColors = 0;
+        // Add colors from floating mana
+        for (byte color : ManaAtom.MANATYPES) {
+            if (p.getManaPool().getAmountOfColor(color) > 0) {
+                availableColors |= color;
+            }
+        }
+        // Add colors from untapped mana-producing permanents
         for (Card card : p.getCardsIn(ZoneType.Battlefield)) {
             if (!card.isTapped() && !card.getManaAbilities().isEmpty()) {
-                // Count each untapped mana source as ~1 mana (simplified estimate)
                 availableMana++;
+                for (SpellAbility ma : card.getManaAbilities()) {
+                    if (ma.getManaPart() != null) {
+                        String produced = ma.getManaPart().getOrigProduced();
+                        if (produced.contains("Any")) {
+                            availableColors = ManaAtom.ALL_MANA_TYPES;
+                        } else {
+                            for (byte color : ManaAtom.MANATYPES) {
+                                if (ma.getManaPart().canProduce(MagicColor.toShortString(color), ma)) {
+                                    availableColors |= color;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
 
         // Check hand for playable spells that we can afford
         for (Card card : p.getCardsIn(ZoneType.Hand)) {
             for (SpellAbility sa : card.getAllPossibleAbilities(p, true)) {
-                // Check if this is a spell we could potentially afford
                 if (sa.isSpell()) {
-                    int cmc = sa.getPayCosts().getTotalMana().getCMC();
-                    if (cmc <= availableMana) {
+                    if (canAffordSpell(sa, availableMana, availableColors) && hasValidTargets(sa)) {
                         set(TrackableProperty.HasAvailableActions, true);
                         return;
                     }
@@ -602,12 +621,7 @@ public class PlayerView extends GameEntityView {
         for (Card card : p.getCardsIn(ZoneType.Battlefield)) {
             for (SpellAbility sa : card.getAllPossibleAbilities(p, true)) {
                 if (!sa.isManaAbility()) {
-                    // Check if we can afford the activation cost
-                    int activationCost = 0;
-                    if (sa.getPayCosts() != null && sa.getPayCosts().hasManaCost()) {
-                        activationCost = sa.getPayCosts().getTotalMana().getCMC();
-                    }
-                    if (activationCost <= availableMana) {
+                    if (canAffordSpell(sa, availableMana, availableColors) && hasValidTargets(sa)) {
                         set(TrackableProperty.HasAvailableActions, true);
                         return;
                     }
@@ -616,6 +630,34 @@ public class PlayerView extends GameEntityView {
         }
 
         set(TrackableProperty.HasAvailableActions, false);
+    }
+
+    /**
+     * Check if a spell/ability can be afforded given available mana count and colors.
+     * Conservative: returns true if uncertain (e.g. hybrid mana, X costs).
+     */
+    private boolean canAffordSpell(SpellAbility sa, int availableMana, byte availableColors) {
+        if (sa.getPayCosts() == null || !sa.getPayCosts().hasManaCost()) {
+            return true; // free ability
+        }
+        forge.card.mana.ManaCost manaCost = sa.getPayCosts().getTotalMana();
+        int cmc = manaCost.getCMC();
+        if (cmc > availableMana) {
+            return false;
+        }
+        // Check that all colored requirements can be satisfied
+        byte colorProfile = manaCost.getColorProfile();
+        return (colorProfile & ~availableColors) == 0;
+    }
+
+    /**
+     * Check if a spell/ability has at least one valid target (or doesn't need targets).
+     */
+    private boolean hasValidTargets(SpellAbility sa) {
+        if (!sa.usesTargeting()) {
+            return true;
+        }
+        return !sa.getTargetRestrictions().getAllCandidates(sa, true).isEmpty();
     }
 
     /**

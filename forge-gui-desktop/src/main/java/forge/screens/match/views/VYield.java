@@ -50,6 +50,7 @@ public class VYield implements IVDoc<CYield> {
     private final FButton btnEndStep = new FButton(localizer.getMessage("lblYieldBtnEndStep"));
     private final FButton btnEndTurn = new FButton(localizer.getMessage("lblYieldBtnEndTurn"));
     private final FButton btnYourTurn = new FButton(localizer.getMessage("lblYieldBtnYourTurn"));
+    private final FButton btnAutoPass = new FButton(localizer.getMessage("lblYieldBtnAutoPass"));
 
     private final CYield controller;
 
@@ -64,6 +65,7 @@ public class VYield implements IVDoc<CYield> {
         btnEndStep.setFont(smallFont);
         btnEndTurn.setFont(smallFont);
         btnYourTurn.setFont(smallFont);
+        btnAutoPass.setFont(smallFont);
 
         // Enable highlight mode: blue by default, red when active yield
         btnNextPhase.setUseHighlightMode(true);
@@ -72,6 +74,7 @@ public class VYield implements IVDoc<CYield> {
         btnEndStep.setUseHighlightMode(true);
         btnEndTurn.setUseHighlightMode(true);
         btnYourTurn.setUseHighlightMode(true);
+        btnAutoPass.setUseHighlightMode(true);
 
         // Set tooltips on yield buttons
         btnNextPhase.setToolTipText(localizer.getMessage("lblYieldBtnNextPhaseTooltip"));
@@ -80,6 +83,7 @@ public class VYield implements IVDoc<CYield> {
         btnEndStep.setToolTipText(localizer.getMessage("lblYieldBtnEndStepTooltip"));
         btnEndTurn.setToolTipText(localizer.getMessage("lblYieldBtnEndTurnTooltip"));
         btnYourTurn.setToolTipText(localizer.getMessage("lblYieldBtnYourTurnTooltip"));
+        btnAutoPass.setToolTipText(localizer.getMessage("lblYieldBtnAutoPassTooltip"));
     }
 
     @Override
@@ -103,6 +107,12 @@ public class VYield implements IVDoc<CYield> {
         container.add(btnEndTurn, buttonConstraints);
         container.add(btnYourTurn, buttonConstraints);
         container.add(btnClearStack, buttonConstraints);
+
+        // Row 3: Auto-pass centred at 2/3 width
+        String autoPassConstraints = largerButtons
+            ? "span 3, w 66%, h 40px:40px:60px, align center"
+            : "span 3, w 66%, hmin 24px, align center";
+        container.add(btnAutoPass, autoPassConstraints);
     }
 
     @Override
@@ -137,4 +147,5 @@ public class VYield implements IVDoc<CYield> {
     public FButton getBtnEndStep() { return btnEndStep; }
     public FButton getBtnEndTurn() { return btnEndTurn; }
     public FButton getBtnYourTurn() { return btnYourTurn; }
+    public FButton getBtnAutoPass() { return btnAutoPass; }
 }

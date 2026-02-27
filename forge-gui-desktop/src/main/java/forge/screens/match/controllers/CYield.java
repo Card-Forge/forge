@@ -48,6 +48,7 @@ public class CYield implements ICDoc {
     private final ActionListener actEndStep = evt -> yieldUntilEndStep();
     private final ActionListener actEndTurn = evt -> yieldUntilEndTurn();
     private final ActionListener actYourTurn = evt -> yieldUntilYourTurn();
+    private final ActionListener actAutoPass = evt -> toggleAutoPass();
 
     public CYield(final CMatchUI matchUI) {
         this.matchUI = matchUI;
@@ -75,6 +76,7 @@ public class CYield implements ICDoc {
         initButton(view.getBtnEndStep(), actEndStep);
         initButton(view.getBtnEndTurn(), actEndTurn);
         initButton(view.getBtnYourTurn(), actYourTurn);
+        initButton(view.getBtnAutoPass(), actAutoPass);
 
         // Set initial button state
         updateYieldButtons();
@@ -115,6 +117,18 @@ public class CYield implements ICDoc {
     private void yieldUntilEndTurn() { toggleYieldMode(YieldMode.UNTIL_END_OF_TURN); }
     private void yieldUntilYourTurn() { toggleYieldMode(YieldMode.UNTIL_YOUR_NEXT_TURN); }
 
+    private void toggleAutoPass() {
+        ForgePreferences prefs = FModel.getPreferences();
+        boolean newState = !prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS);
+        prefs.setPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS, newState);
+        prefs.save();
+        updateYieldButtons();
+        // If toggled on, pass priority immediately so it takes effect now
+        if (newState && matchUI != null && matchUI.getGameController() != null) {
+            matchUI.getGameController().selectButtonOk();
+        }
+    }
+
     /**
      * Update yield buttons enabled state based on game state.
      * Buttons are disabled during mulligan, sideboarding, and game over.
@@ -142,6 +156,9 @@ public class CYield implements ICDoc {
             && !matchUI.getGameView().getStack().isEmpty();
         view.getBtnClearStack().setEnabled(canYield && stackHasItems);
 
+        // Auto-pass is a persistent toggle, enable whenever yield panel is available
+        view.getBtnAutoPass().setEnabled(canYield);
+
         // Highlight active yield button
         updateActiveYieldHighlight();
     }
@@ -166,6 +183,10 @@ public class CYield implements ICDoc {
         view.getBtnEndStep().setHighlighted(currentMode == YieldMode.UNTIL_END_STEP);
         view.getBtnEndTurn().setHighlighted(currentMode == YieldMode.UNTIL_END_OF_TURN);
         view.getBtnYourTurn().setHighlighted(currentMode == YieldMode.UNTIL_YOUR_NEXT_TURN);
+
+        // Auto-pass highlight is based on preference state, not yield mode
+        view.getBtnAutoPass().setHighlighted(
+            FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS));
     }
 
     /**
