@@ -20,6 +20,8 @@ import org.apache.commons.lang3.StringUtils;
 import forge.Singletons;
 import forge.game.spellability.StackItemView;
 import forge.gamemodes.match.YieldMode;
+import forge.gamemodes.net.event.MessageEvent;
+import forge.gamemodes.net.server.FServerManager;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
 import forge.localinstance.properties.ForgePreferences;
@@ -358,6 +360,12 @@ public class KeyboardShortcuts {
                 prefs.save();
                 if (matchUI != null) {
                     matchUI.refreshYieldPanel();
+                }
+                final FServerManager server = FServerManager.getInstance();
+                if (server != null && server.isHosting()) {
+                    server.broadcast(new MessageEvent(Localizer.getInstance().getMessage(
+                        newState ? "lblYieldHostEnabled" : "lblYieldHostToggleDisabled")));
+                    server.broadcastHostYieldEnabled(newState);
                 }
             }
         };

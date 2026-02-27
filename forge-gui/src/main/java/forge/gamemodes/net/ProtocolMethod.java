@@ -74,6 +74,7 @@ public enum ProtocolMethod {
     nextRememberedAction(Mode.SERVER, Void.TYPE),
     // Server->Client yield state sync (when server clears yield due to end condition)
     syncYieldMode       (Mode.SERVER, Void.TYPE, PlayerView.class, YieldMode.class),
+    setHostYieldEnabled (Mode.SERVER, Void.TYPE, Boolean.TYPE),
     showWaitingTimer    (Mode.SERVER, Void.TYPE, PlayerView.class, String.class),
     handleGameEvent     (Mode.SERVER, Void.TYPE, GameEvent.class),
 

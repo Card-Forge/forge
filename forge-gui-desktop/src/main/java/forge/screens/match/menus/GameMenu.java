@@ -12,6 +12,8 @@ import javax.swing.KeyStroke;
 import com.google.common.primitives.Ints;
 
 import forge.control.KeyboardShortcuts;
+import forge.gamemodes.net.event.MessageEvent;
+import forge.gamemodes.net.server.FServerManager;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
@@ -240,6 +242,12 @@ public final class GameMenu {
             interruptMenu.setEnabled(newState);
             suggestionsMenu.setEnabled(newState);
             matchUI.refreshYieldPanel();
+            final FServerManager server = FServerManager.getInstance();
+            if (server != null && server.isHosting()) {
+                server.broadcast(new MessageEvent(localizer.getMessage(
+                    newState ? "lblYieldHostEnabled" : "lblYieldHostToggleDisabled")));
+                server.broadcastHostYieldEnabled(newState);
+            }
         });
         yieldMenu.add(enableItem);
 

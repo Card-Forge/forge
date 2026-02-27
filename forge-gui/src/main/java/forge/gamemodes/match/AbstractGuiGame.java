@@ -635,6 +635,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
+    public void setHostYieldEnabled(boolean enabled) {
+        // No-op default for local games. CMatchUI overrides to store and refresh UI.
+    }
+
+    @Override
     public void syncYieldMode(PlayerView player, YieldMode mode) {
         // Receive yield state sync from server (when server clears yield due to end condition)
         // Look up the correct PlayerView instance by ID (network PlayerViews have different trackers)

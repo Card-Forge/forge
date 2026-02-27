@@ -137,8 +137,9 @@ public class CYield implements ICDoc {
     public void updateYieldButtons() {
         ForgePreferences prefs = FModel.getPreferences();
 
-        // Check if experimental yield options are enabled
-        boolean yieldEnabled = prefs.getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS);
+        // Check if experimental yield options are enabled (locally and on host for network games)
+        boolean yieldEnabled = prefs.getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)
+            && matchUI.isHostYieldEnabled();
 
         // Check if we can yield (not in mulligan, sideboard, or game over)
         boolean canYield = yieldEnabled && canYieldNow();

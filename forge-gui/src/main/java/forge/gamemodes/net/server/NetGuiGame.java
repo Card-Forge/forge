@@ -294,6 +294,11 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
+    public void setHostYieldEnabled(final boolean enabled) {
+        send(ProtocolMethod.setHostYieldEnabled, enabled);
+    }
+
+    @Override
     public void showWaitingTimer(final PlayerView forPlayer, final String waitingForPlayerName) {
         send(ProtocolMethod.showWaitingTimer, forPlayer, waitingForPlayerName);
     }

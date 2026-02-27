@@ -285,6 +285,12 @@ public interface IGuiGame {
      */
     void syncYieldMode(PlayerView player, YieldMode mode);
 
+    /**
+     * Sync whether the host has advanced yield options enabled.
+     * Used in network play to disable client yield buttons when host lacks the setting.
+     */
+    void setHostYieldEnabled(boolean enabled);
+
     void clearYieldMode(PlayerView player);
 
     boolean shouldAutoYieldForPlayer(PlayerView player);

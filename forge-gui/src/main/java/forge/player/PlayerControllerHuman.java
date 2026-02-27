@@ -50,6 +50,8 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.match.input.*;
+import forge.gamemodes.net.event.MessageEvent;
+import forge.gamemodes.net.server.FServerManager;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.control.FControlGamePlayback;
@@ -3461,7 +3463,32 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // This syncs yield state from network client to server
         // Uses FromRemote methods to avoid triggering another notification and to handle
         // PlayerView tracker mismatch (network PlayerViews have different trackers than server's)
+
+        // If clearing yield, always pass through
+        if (mode != null && mode != forge.gamemodes.match.YieldMode.NONE && !isYieldExperimentalEnabled()) {
+            // Host doesn't have experimental yield enabled — warn the client
+            final FServerManager server = FServerManager.getInstance();
+            if (server != null && server.isHosting()) {
+                server.broadcast(new MessageEvent(
+                    localizer.getMessage("lblYieldHostDisabled", playerView.getName())));
+            }
+
+            // Tell client to disable yield buttons
+            getGui().setHostYieldEnabled(false);
+
+            // UNTIL_END_OF_TURN works via legacy auto-pass, so allow it through
+            if (mode != forge.gamemodes.match.YieldMode.UNTIL_END_OF_TURN) {
+                // Reject experimental-only modes — clear the client's stuck yield state
+                getGui().syncYieldMode(playerView, forge.gamemodes.match.YieldMode.NONE);
+                return;
+            }
+        }
+
         getGui().setYieldModeFromRemote(playerView, mode);
+    }
+
+    private boolean isYieldExperimentalEnabled() {
+        return FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS);
     }
 
     @Override

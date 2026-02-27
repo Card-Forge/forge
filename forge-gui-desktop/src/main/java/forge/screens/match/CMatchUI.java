@@ -674,6 +674,20 @@ public final class CMatchUI
         view.populate();
     }
 
+    // Whether the host has advanced yield options enabled (network play).
+    // Defaults to true so local games are unaffected.
+    private volatile boolean hostYieldEnabled = true;
+
+    public boolean isHostYieldEnabled() {
+        return hostYieldEnabled;
+    }
+
+    @Override
+    public void setHostYieldEnabled(boolean enabled) {
+        this.hostYieldEnabled = enabled;
+        FThreads.invokeInEdtNowOrLater(() -> getCYield().updateYieldButtons());
+    }
+
     public void repaintCardOverlays() {
         final List<CardPanel> panels = getVisibleCardPanels();
         for (final CardPanel panel : panels) {
