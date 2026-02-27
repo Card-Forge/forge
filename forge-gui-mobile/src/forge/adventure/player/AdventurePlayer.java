@@ -569,13 +569,11 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             }
         }
 
-        // Load Max Deck Count or grab it from Config file if missing from save
+        // Load Max Deck Count and grab it from Config file, use the larger one
         if (data.containsKey("maxDeckCount"))
             this.maxDeckCount = data.readInt("maxDeckCount");
-        else
-            this.maxDeckCount = Config.instance().getConfigData().maxNumberOfDecks;
-        // Sanity Check make sure the number is not insane and make sure it is at least 20
-        this.maxDeckCount = Math.max(Math.min(this.maxDeckCount, 99), 20);
+        // Sanity Check Grab the larger of the save or config setting, then make sure the number is not insane and make sure it is at least 20
+        this.maxDeckCount = Math.max(Math.min(Math.max(this.maxDeckCount, Config.instance().getConfigData().maxNumberOfDecks), 99), 20);
 
 
         // Load decks
