@@ -483,6 +483,17 @@ public class YieldController {
             }
         }
 
+        if (prefs.getPrefBoolean(ForgePreferences.FPref.YIELD_INTERRUPT_ON_TRIGGERS)) {
+            forge.util.collect.FCollectionView<forge.game.spellability.StackItemView> stack = gameView.getStack();
+            if (stack != null) {
+                for (forge.game.spellability.StackItemView si : stack) {
+                    if (si.isTrigger()) {
+                        return true;
+                    }
+                }
+            }
+        }
+
         return false;
     }
 

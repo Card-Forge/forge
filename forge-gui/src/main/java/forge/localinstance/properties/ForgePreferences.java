@@ -147,6 +147,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         YIELD_INTERRUPT_ON_BLOCKERS("true"),
         YIELD_INTERRUPT_ON_TARGETING("true"),
         YIELD_INTERRUPT_ON_OPPONENT_SPELL("false"),
+        YIELD_INTERRUPT_ON_TRIGGERS("false"),  // When triggered abilities on stack
         YIELD_INTERRUPT_ON_COMBAT("false"),
         YIELD_INTERRUPT_ON_REVEAL("false"),   // When opponent reveals cards
         YIELD_INTERRUPT_ON_MASS_REMOVAL("true"),  // When mass removal spell cast
