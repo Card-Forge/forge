@@ -5,7 +5,7 @@ Difficulty=medium
 Description=UB Zombie deck with Call to the Kindred
 Icon=The Zombie.jpg
 Deck Type=constructed
-[main]
+[Main]
 10 Island
 10 Swamp
 3 Tainted Isle
@@ -25,7 +25,7 @@ Deck Type=constructed
 4 Geralf's Mindcrusher
 1 Grixis Slavedriver
 4 Havengul Runebinder
-1 Lim-Dul the Necromancer
+1 Lim-Dûl the Necromancer
 3 Lord of the Undead
 1 Mikaeus, the Unhallowed
 2 Relentless Skaabs
@@ -34,4 +34,4 @@ Deck Type=constructed
 1 Skaab Ruinator
 4 Unbreathing Horde
 2 Zombie Master
-[sideboard]
+[Sideboard]

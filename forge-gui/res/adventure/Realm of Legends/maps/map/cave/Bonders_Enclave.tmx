@@ -84,7 +84,7 @@
   </object>
   <object id="65" template="../../../../common/maps/obj/enemy.tx" x="423.499" y="134.099">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Maned Serval|IKO&quot;, &quot;Weaponize the monsters|IKO&quot;, &quot;sanctuary lockdown|IKO&quot;, &quot;bonders' enclave|IKO&quot;, &quot;ferocity of the wilds|ELD&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Maned Serval|IKO&quot;, &quot;Weaponize the monsters|IKO&quot;, &quot;sanctuary lockdown|IKO&quot;, &quot;ferocity of the wilds|ELD&quot;]}"/>
     <property name="enemy" value="Winota"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="0"/>
@@ -96,7 +96,7 @@
   <object id="72" template="../../../../common/maps/obj/waypoint.tx" x="311.792" y="133.372"/>
   <object id="75" template="../../../../common/maps/obj/enemy.tx" x="215" y="68.6667">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Bonder's Ornament|C20&quot;, &quot;Humble Naturalist|IKO&quot;, &quot;Aegis Turtle|IKO&quot;, &quot;Almighty Brushwagg|IKO&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Bonder's Ornament|C20&quot;, &quot;Aegis Turtle|IKO&quot;, &quot;Almighty Brushwagg|IKO&quot;]}"/>
     <property name="enemy" value="Kinnan"/>
     <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="30"/>

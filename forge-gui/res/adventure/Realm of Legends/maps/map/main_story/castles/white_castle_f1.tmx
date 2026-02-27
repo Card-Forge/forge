@@ -59,7 +59,7 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Swamp|C16|[344]&quot;, &quot;Forest|C16|[350]&quot;, &quot;Island|C16|[341]&quot;, &quot;Mountain|C16|[347]&quot;, &quot;Glint-Eye Nephilim|GPT&quot;, &quot;Audacious Knuckleblade|YTDM&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Command Tower&quot;, &quot;Exotic Orchard&quot;, &quot;Flamekin Herald&quot;, &quot;Leyline Axe&quot;, &quot;Glint-Eye Nephilim|GPT&quot;]}"/>
     <property name="enemy" value="Yidris"/>
     <property name="pursueRange" type="int" value="0"/>
     <property name="speedModifier" type="float" value="50"/>

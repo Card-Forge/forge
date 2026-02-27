@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="45" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="16" nextobjectid="188">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="45" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="16" nextobjectid="191">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -62,7 +62,7 @@
   <object id="100" template="../../../../common/maps/obj/enemy.tx" x="376.255" y="44.3877">
    <properties>
     <property name="displayNameOverride" value=""/>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Duskmantle, House of Shadow|RAV&quot;, &quot;Dimir Guildmage|RAV&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Duskmantle, House of Shadow|RAV&quot;, &quot;Dimir Doppelganger&quot;]}"/>
     <property name="enemy" value="Lazav"/>
     <property name="hidden" type="bool" value="true"/>
     <property name="speedModifier" type="float" value="0"/>
@@ -253,5 +253,8 @@
   </object>
   <object id="186" template="../../../../common/maps/obj/manashards.tx" x="440.667" y="154"/>
   <object id="187" template="../../../../common/maps/obj/manashards.tx" x="279.333" y="150"/>
+  <object id="188" template="../../../../common/maps/obj/collision.tx" x="-37.3648" y="-13.3755" width="810.73" height="13.7511"/>
+  <object id="189" template="../../../../common/maps/obj/collision.tx" x="719.635" y="-41.8755" width="14.73" height="515.751"/>
+  <object id="190" template="../../../../common/maps/obj/collision.tx" x="-17.365" y="-29.8755" width="14.73" height="515.751"/>
  </objectgroup>
 </map>

@@ -61,8 +61,7 @@ public class DestroyAi extends SpellAbilityAi {
         return super.checkAiLogic(ai, sa, aiLogic);
     }
 
-    protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph,
-            final String logic) {
+    protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph, final String logic) {
         if ("AtOpponentsCombatOrAfter".equals(logic)) {
             if (ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 return false;
@@ -142,11 +141,10 @@ public class DestroyAi extends SpellAbilityAi {
             if (sa.hasParam("TargetingPlayer")) {
                 Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
                 sa.setTargetingPlayer(targetingPlayer);
-                if (targetingPlayer.getController().chooseTargetsFor(sa)) {
-                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                } else {
+                if (CardLists.getTargetableCards(ai.getGame().getCardsIn(sa.getTargetRestrictions().getZone()), sa).isEmpty()) {
                     return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
 
             // AI doesn't destroy own cards if it isn't defined in AI logic

@@ -91,7 +91,8 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Extravagant Replication&quot;, &quot;Double Vision&quot;, &quot;Mirror Gallery&quot;
+]}</property>
     <property name="enemy" value="Riku"/>
     <property name="pursueRange" type="int" value="0"/>
     <property name="threatRange" type="int" value="0"/>
@@ -107,7 +108,7 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Urza Assembles the Titans&quot;, &quot;Planeswalker's Mirth&quot;, &quot;Pramikon, Sky Rampart&quot;]}"/>
     <property name="enemy" value="Commodore Guff"/>
     <property name="pursueRange" type="int" value="0"/>
     <property name="threatRange" type="int" value="0"/>
@@ -123,8 +124,9 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
-    <property name="enemy" value="Chulane"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Boon of the Spirit Realm&quot;, &quot;Destiny Spinner&quot;, &quot;Seaside Citadel&quot;, &quot;Helm of the Gods&quot;
+]}</property>
+    <property name="enemy" value="Amareth"/>
     <property name="pursueRange" type="int" value="0"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
@@ -139,7 +141,8 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Voice of Resurgence&quot;, &quot;Twinflame Travelers&quot;, &quot;Celestial Colonnade&quot;, &quot;Raging Ravine&quot;
+]}</property>
     <property name="enemy" value="Omnath"/>
     <property name="pursueRange" type="int" value="10"/>
     <property name="threatRange" type="int" value="0"/>
@@ -155,7 +158,8 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Hardened Scales&quot;, &quot;Jungle Shrine&quot;, &quot;Creeping Trailblazer&quot;, &quot;Gorgon Flail&quot;, &quot;Afiya Grove&quot;
+]}</property>
     <property name="enemy" value="Marath"/>
     <property name="pursueRange" type="int" value="0"/>
     <property name="threatRange" type="int" value="0"/>

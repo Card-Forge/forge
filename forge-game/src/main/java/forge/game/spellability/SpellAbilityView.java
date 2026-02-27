@@ -33,6 +33,9 @@ public class SpellAbilityView extends TrackableObject implements IHasCardView {
         updateHostCard(sa);
         updateDescription(sa);
         updatePromptIfOnlyPossibleAbility(sa);
+        // Note: updateIsSpell NOT called
+        // here because subclasses (e.g. WrappedAbility) may not be fully initialized yet
+        // during super() construction. These are updated lazily in SpellAbility.getView().
     }
 
     @Override
@@ -66,6 +69,13 @@ public class SpellAbilityView extends TrackableObject implements IHasCardView {
     }
     void updatePromptIfOnlyPossibleAbility(SpellAbility sa) {
         set(TrackableProperty.PromptIfOnlyPossibleAbility, sa.promptIfOnlyPossibleAbility());
+    }
+
+    public boolean isSpell() {
+        return get(TrackableProperty.SA_IsSpell);
+    }
+    void updateIsSpell(SpellAbility sa) {
+        set(TrackableProperty.SA_IsSpell, sa.isSpell());
     }
 
     @Override

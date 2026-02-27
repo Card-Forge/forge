@@ -49,7 +49,7 @@
   </object>
   <object id="63" template="../../../../common/maps/obj/enemy.tx" x="208.828" y="162.108">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Helix Pinnacle|EVE&quot;, &quot;Primal Beyond|MOR&quot;, &quot;Hoofprints of the Stag|LRW&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Helix Pinnacle|EVE&quot;, &quot;Hoofprints of the Stag|LRW&quot;]}"/>
     <property name="enemy" value="Horde of Notions"/>
     <property name="speedModifier" type="float" value="50"/>
     <property name="threatRange" type="int" value="60"/>

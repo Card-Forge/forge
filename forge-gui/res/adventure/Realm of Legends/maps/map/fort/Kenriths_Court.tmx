@@ -111,7 +111,7 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Venerable Knight|ELD&quot;, &quot;Court of Ardenvale|WOC&quot;, &quot;Court of Vantress|WOC&quot;, &quot;Court of Locthwain|WOC&quot;, &quot;Court of Embereth|WOC&quot;, &quot;Court of Garenbrig|WOC&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Court of Ardenvale|WOC&quot;, &quot;Court of Vantress|WOC&quot;, &quot;Court of Locthwain|WOC&quot;, &quot;Court of Embereth|WOC&quot;, &quot;Court of Garenbrig|WOC&quot;]}"/>
     <property name="enemy" value="Kenrith"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="40"/>

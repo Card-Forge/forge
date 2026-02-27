@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="31" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="96">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="31" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="97">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Phyrexian Arena&quot;, &quot;Order of Yawgmoth&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Phyrexian Arena&quot;, &quot;Body Snatcher&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -53,16 +53,32 @@
 }]</property>
    </properties>
   </object>
-  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="97.1517" y="239.325">
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="105.485" y="203.658">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Greven"/>
-    <property name="speedModifier" type="float" value="0"/>
-    <property name="threatRange" value="0"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" value="10"/>
    </properties>
   </object>
   <object id="54" template="../../../../common/maps/obj/enemy.tx" x="379.674" y="143.847">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Phyrexian Tower|USG&quot;, &quot;Vile Requiem|USG&quot;, &quot;Phyrexian Plaguelord|ULG&quot;, &quot;Order of Yawgmoth|USG&quot;, &quot;Bonehoard|MBS&quot;]}"/>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Phyrexian Tower|USG&quot;, &quot;Gift of Compleation&quot;, &quot;No Mercy&quot;, &quot;Bonehoard|MBS&quot;]}"/>
     <property name="enemy" value="Yawgmoth"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" value="10"/>
@@ -71,6 +87,14 @@
   </object>
   <object id="85" template="../../../../common/maps/obj/enemy.tx" x="325.75" y="142.25">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Gixian Recycler|YBRO&quot;, &quot;Painful Quandry|BRO&quot;]}"/>
     <property name="enemy" value="Gix"/>
     <property name="speedModifier" type="float" value="20"/>
@@ -79,15 +103,31 @@
   </object>
   <object id="86" template="../../../../common/maps/obj/enemy.tx" x="165" y="145.083">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Tsabo Tavoc"/>
-    <property name="speedModifier" type="float" value="0"/>
-    <property name="threatRange" value="0"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" value="10"/>
    </properties>
   </object>
-  <object id="89" template="../../../../common/maps/obj/enemy.tx" x="103.75" y="57.5">
+  <object id="89" template="../../../../common/maps/obj/enemy.tx" x="107.417" y="85.5">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Ertai"/>
-    <property name="speedModifier" type="float" value="0"/>
+    <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" value="10"/>
    </properties>
   </object>
@@ -140,5 +180,52 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
   </object>
   <object id="94" template="../../../../common/maps/obj/collision.tx" x="65.1968" y="63.5215" width="32.7296" height="157.59"/>
   <object id="95" template="../../../../common/maps/obj/collision.tx" x="237.197" y="108.186" width="55.4781" height="55.4993"/>
+  <object id="96" template="../../../../common/maps/obj/enemy.tx" x="33.6667" y="55">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'Hey now. I'm not one of them. I'm a defector.'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;The threat has been stopped.&quot;,
+					&quot;text&quot;: &quot;'The world will thank you for your efforts. I know I'm happy to not have their monsters deciding what we are for us.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                       {&quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Xantcha, Sleeper Agent&quot;, &quot;count&quot;: 1},
+		     {&quot;type&quot;: &quot;shards&quot;, &quot;count&quot;: 50},      
+                       {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 2500}                
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 5
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Let's say I believe you.&quot;,
+					&quot;text&quot;: &quot;'This place has a time-displaced pocket of old phyrexians from the Yawgmoth era - even a young Yawgmoth himself. They absolutely need to die before they spread. I can't do it alone, but I can reward you if you manage it.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;Sounds awfully suspicious to me.&quot;,
+					&quot;text&quot;: &quot;I guess I should have expected that.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Xantcha"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" value="0"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

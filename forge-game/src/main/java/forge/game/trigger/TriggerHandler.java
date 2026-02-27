@@ -19,8 +19,6 @@ package forge.game.trigger;
 
 import java.util.*;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.*;
 
 import forge.game.CardTraitBase;
@@ -194,7 +192,7 @@ public class TriggerHandler {
         activeTriggers.clear();
         game.forEachCardInGame(c -> {
             for (final Trigger t : c.getTriggers()) {
-                if (c.isInPlay() && lastStateBattlefield != null && !lastStateBattlefield.contains(c) && looksBackInTime(t)) {
+                if (c.isInPlay() && lastStateBattlefield != null && !lastStateBattlefield.contains(c) && t.looksBackInTime()) {
                     continue;
                 }
                 if (isTriggerActive(t)) {
@@ -229,19 +227,10 @@ public class TriggerHandler {
 
     public final void registerActiveLTBTrigger(final Card c) {
         for (final Trigger t : c.getTriggers()) {
-            if (looksBackInTime(t)) {
+            if (t.looksBackInTime()) {
                 registerOneTrigger(t);
             }
         }
-    }
-
-    private boolean looksBackInTime(Trigger t) {
-        return TriggerType.Exploited.equals(t.getMode()) ||
-                TriggerType.Destroyed.equals(t.getMode()) ||
-                TriggerType.Sacrificed.equals(t.getMode()) || TriggerType.SacrificedOnce.equals(t.getMode()) ||
-                ((TriggerType.ChangesZone.equals(t.getMode()) || TriggerType.ChangesZoneAll.equals(t.getMode()))
-                        && (StringUtils.contains(t.getParam("Origin"), "Battlefield") ||
-                        StringUtils.containsAny(t.getParam("Destination"), "Library", "Hand")));
     }
 
     public final boolean registerOneTrigger(final Trigger t) {

@@ -11,6 +11,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.event.Event;
+import forge.game.event.GameEventAddLog;
 import forge.game.event.GameEventAnteCardsSelected;
 import forge.game.event.GameEventGameFinished;
 import forge.game.player.Player;
@@ -83,9 +84,9 @@ public class Match {
             for (Entry<Player, Card> kv : list.entries()) {
                 Player p = kv.getKey();
                 game.getAction().moveTo(ZoneType.Ante, kv.getValue(), null, AbilityKey.newMap());
-                game.getGameLog().add(GameLogEntryType.ANTE, p + " anted " + kv.getValue());
+                game.fireEvent(new GameEventAddLog(GameLogEntryType.ANTE, p + " anted " + kv.getValue()));
             }
-            game.fireEvent(new GameEventAnteCardsSelected(list));
+            game.fireEvent(GameEventAnteCardsSelected.fromCards(list));
         }
 
         game.getAction().startGame(this.lastOutcome, startGameHook);
@@ -316,16 +317,7 @@ public class Match {
             if (myDeck.getLeft().has(DeckSection.Sideboard)) {
                 preparePlayerZone(player, ZoneType.Sideboard, myDeck.getLeft().get(DeckSection.Sideboard), psc.useRandomFoil());
 
-                // Assign Companion
-                Card companion = player.assignCompanion(game, person);
-                // Create an effect that lets you cast your companion from your sideboard
-                if (companion != null) {
-                    PlayerZone commandZone = player.getZone(ZoneType.Command);
-                    companion = game.getAction().moveTo(ZoneType.Command, companion, null, AbilityKey.newMap());
-                    commandZone.add(Player.createCompanionEffect(game, companion));
-
-                    player.updateZoneForView(commandZone);
-                }
+                player.assignCompanion(game, person);
             }
 
             player.initVariantsZones(psc);
@@ -443,6 +435,19 @@ public class Match {
             }
             // Other game types (like Quest) need to do something in their own calls to actually update data
         }
+    }
+
+    public GameOutcome.AnteResult getAnteResult(RegisteredPlayer player) {
+        GameOutcome.AnteResult out = new GameOutcome.AnteResult();
+        for (GameOutcome outcome : gameOutcomes.values()) {
+            GameOutcome.AnteResult gameAnte = outcome.getAnteResult(player);
+            if (gameAnte == null) {
+                continue;
+            }
+            out.addWon(gameAnte.wonCards);
+            out.addLost(gameAnte.lostCards);
+        }
+        return out;
     }
 
     /**
