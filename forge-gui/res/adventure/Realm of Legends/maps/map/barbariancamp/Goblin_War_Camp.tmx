@@ -126,7 +126,7 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Torch Courier|GRN&quot;, &quot;Goblin Burrows|ONS&quot;, &quot;Krenko's Buzzcrusher|M15&quot;, &quot;Goblin Influx Array|YDMU&quot;, &quot;Goblin Warrens|FEM&quot; ] }"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Torch Courier|GRN&quot;, &quot;Goblin Burrows|ONS&quot;, &quot;Goblinslide|KTK&quot;, &quot;Goblin Influx Array|YDMU&quot; ] }"/>
     <property name="enemy" value="Krenko"/>
     <property name="threatRange" type="int" value="0"/>
     <property name="waypoints" value=""/>
