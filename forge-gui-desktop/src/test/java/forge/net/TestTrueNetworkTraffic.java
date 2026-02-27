@@ -1,10 +1,7 @@
 package forge.net;
 
-import forge.ai.LobbyPlayerAi;
-import forge.ai.PlayerControllerAi;
 import forge.deck.Deck;
 import forge.game.Game;
-import forge.game.player.Player;
 import forge.gamemodes.match.GameLobby.GameLobbyData;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.match.LobbySlot;
@@ -12,19 +9,15 @@ import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.client.ClientGameLobby;
 import forge.gamemodes.net.client.FGameClient;
 import forge.gamemodes.net.server.FServerManager;
-import forge.gamemodes.net.server.NetGuiGame;
 import forge.gamemodes.net.server.ServerGameLobby;
 import forge.gui.GuiBase;
-import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.ILobbyListener;
 import forge.interfaces.IUpdateable;
 import forge.localinstance.properties.ForgeNetPreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.player.PlayerControllerHuman;
 
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -44,7 +37,6 @@ public class TestTrueNetworkTraffic {
 
     private static boolean initialized = false;
     private static boolean originalLegality;
-    private static String originalUPnP;
 
     @BeforeClass
     public static void setUp() {
@@ -56,22 +48,12 @@ public class TestTrueNetworkTraffic {
                 FModel.initialize(null, preferences -> {
                     preferences.setPref(FPref.LOAD_CARD_SCRIPTS_LAZILY, false);
                     preferences.setPref(FPref.UI_LANGUAGE, "en-US");
+                    FModel.getNetPreferences().setPref(ForgeNetPreferences.FNetPref.UPnP, "NEVER");
                     return null;
                 });
             }
 
-            // Set UPnP to NEVER to avoid dialog on server start
-            originalUPnP = FModel.getNetPreferences().getPref(ForgeNetPreferences.FNetPref.UPnP);
-            FModel.getNetPreferences().setPref(ForgeNetPreferences.FNetPref.UPnP, "NEVER");
-
             initialized = true;
-        }
-    }
-
-    @AfterClass
-    public static void tearDown() {
-        if (originalUPnP != null) {
-            FModel.getNetPreferences().setPref(ForgeNetPreferences.FNetPref.UPnP, originalUPnP);
         }
     }
 
@@ -183,24 +165,8 @@ public class TestTrueNetworkTraffic {
             Assert.assertNotNull(game, "Game should exist after startGame");
 
             // 10. Convert remote player to AI on server side
-            // Find the player whose GUI is NetGuiGame (the remote slot)
-            for (Player p : game.getPlayers()) {
-                IGuiGame gui = hostedMatch.getGuiForPlayer(p);
-                if (gui instanceof NetGuiGame) {
-                    System.out.println("[TestTrueNetworkTraffic] Converting remote player '" + p.getName() + "' to AI");
-
-                    // Clear InputQueue BEFORE swapping controller to unblock game thread
-                    PlayerControllerHuman pch = findHumanController(lobby);
-                    if (pch != null) {
-                        pch.getInputQueue().clearInputs();
-                    }
-
-                    LobbyPlayerAi aiLobbyPlayer = new LobbyPlayerAi(p.getName(), null);
-                    PlayerControllerAi aiCtrl = new PlayerControllerAi(game, p, aiLobbyPlayer);
-                    p.dangerouslySetController(aiCtrl);
-                    break;
-                }
-            }
+            System.out.println("[TestTrueNetworkTraffic] Converting remote player (slot 1) to AI");
+            server.convertToAI(1, slot1.getName());
 
             // 11. Poll for game completion
             long startTime = System.currentTimeMillis();
@@ -246,16 +212,4 @@ public class TestTrueNetworkTraffic {
         }
     }
 
-    /**
-     * Find the PlayerControllerHuman for the remote slot.
-     */
-    private PlayerControllerHuman findHumanController(ServerGameLobby lobby) {
-        for (int i = 0; i < lobby.getNumberOfSlots(); i++) {
-            var controller = lobby.getController(i);
-            if (controller instanceof PlayerControllerHuman) {
-                return (PlayerControllerHuman) controller;
-            }
-        }
-        return null;
-    }
 }
