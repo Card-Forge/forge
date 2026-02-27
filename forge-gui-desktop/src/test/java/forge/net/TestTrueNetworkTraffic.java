@@ -43,15 +43,13 @@ public class TestTrueNetworkTraffic {
             if (!(GuiBase.getInterface() instanceof HeadlessGuiDesktop)) {
                 GuiBase.setInterface(new HeadlessGuiDesktop());
             }
-            if (FModel.getPreferences() == null) {
-                FModel.initialize(null, preferences -> {
-                    preferences.setPref(FPref.LOAD_CARD_SCRIPTS_LAZILY, false);
-                    preferences.setPref(FPref.UI_LANGUAGE, "en-US");
-                    preferences.setPref(FPref.ENFORCE_DECK_LEGALITY, false);
-                    FModel.getNetPreferences().setPref(ForgeNetPreferences.FNetPref.UPnP, "NEVER");
-                    return null;
-                });
-            }
+            FModel.initialize(null, preferences -> {
+                preferences.setPref(FPref.LOAD_CARD_SCRIPTS_LAZILY, false);
+                preferences.setPref(FPref.UI_LANGUAGE, "en-US");
+                preferences.setPref(FPref.ENFORCE_DECK_LEGALITY, false);
+                FModel.getNetPreferences().setPref(ForgeNetPreferences.FNetPref.UPnP, "NEVER");
+                return null;
+            });
 
             initialized = true;
         }
