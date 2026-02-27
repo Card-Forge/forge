@@ -1116,13 +1116,13 @@
     }
   },
     {
-    "name": "Mistform Sliverband",
-    "description": "1/1 sliver; slivers can pay 1 to change types until EOT",
+    "name": "Imposter's Sliverband",
+    "description": "A 3/3 artifact sliver with no abilities",
     "equipmentSlot": "Boots",
     "iconName": "MistformSliverband",
     "effect": {
         "startBattleWithCard": [
-        "Mistform Sliver|LGN"
+        "Venser's Sliver|TSP"
      ]
     }
   },
