@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import com.esotericsoftware.minlog.Log;
+import org.tinylog.Logger;
 
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -239,7 +239,7 @@ public class CardFaceSymbols {
             final String symbol = tok.nextToken();
             final SkinImage image = MANA_IMAGES.get(symbol);
             if (image == null) {
-                Log.info("Symbol not recognized \"" + symbol + "\" in string: " + s);
+                Logger.info("Symbol not recognized \"" + symbol + "\" in string: " + s);
                 continue;
             }
             FSkin.drawImage(g, image, x, y, w, h);
