@@ -187,7 +187,6 @@ public class Main extends AndroidApplication {
         ActivityManager actManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
         ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
         actManager.getMemoryInfo(memInfo);
-        int totalMemory = Math.round(memInfo.totalMem / 1024f / 1024f);
 
         boolean permissiongranted = checkPermission();
         Gadapter = new AndroidAdapter(getContext());
@@ -228,7 +227,7 @@ public class Main extends AndroidApplication {
         os.setBuild(Build.DISPLAY);
         os.setRawDescription(getAndroidOSName());
 
-        initForge(Gadapter, new HWInfo(device, os, getChipset), permissiongranted, totalMemory, isTabletDevice(getContext()));
+        initForge(Gadapter, new HWInfo(device, os, getChipset), permissiongranted, isTabletDevice(getContext()));
     }
 
     private void crossfade(View contentView, View previousView) {
@@ -348,7 +347,8 @@ public class Main extends AndroidApplication {
         crossfade(TL, previousView);
     }
 
-    private void loadGame(final HWInfo hwInfo, final String title, final String steps, boolean isLandscape, AndroidAdapter adapter, boolean permissiongranted, int totalRAM, boolean isTabletDevice, AndroidApplicationConfiguration config, boolean exception, String msg) {
+    private void loadGame(final HWInfo hwInfo, final String title, final String steps, boolean isLandscape, AndroidAdapter adapter, boolean permissiongranted, boolean isTabletDevice, AndroidApplicationConfiguration config, boolean exception, String msg) {
+        int totalRAM = hwInfo.getTotalRam();
         try {
             final Handler handler = new Handler();
             forgeLogo = findViewById(resId("id", "logo_id"));
@@ -488,7 +488,9 @@ public class Main extends AndroidApplication {
         }
     }
 
-    private void initForge(AndroidAdapter adapter, HWInfo hwInfo, boolean permissiongranted, int totalRAM, boolean isTabletDevice) {
+    private void initForge(AndroidAdapter adapter, HWInfo hwInfo, boolean permissiongranted, boolean isTabletDevice) {
+        int totalRAM = hwInfo.getTotalRam();
+
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
         config.useAccelerometer = false;
         config.useCompass = false;
@@ -500,14 +502,14 @@ public class Main extends AndroidApplication {
         if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
             String message = getDeviceName() + "\n" + "Android " + Build.VERSION.RELEASE + "\n" + "RAM " + totalRAM + "MB" + "\n" + "LibGDX " + Version.VERSION + "\n" + "Can't access external storage";
             Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
-            loadGame(hwInfo, "", "", false, adapter, permissiongranted, totalRAM, isTabletDevice, config, true, message);
+            loadGame(hwInfo, "", "", false, adapter, permissiongranted, isTabletDevice, config, true, message);
             return;
         }
         ASSETS_DIR = Build.VERSION.SDK_INT > Build.VERSION_CODES.Q ? getContext().getObbDir() + "/Forge/" : Environment.getExternalStorageDirectory() + "/Forge/";
         if (!FileUtil.ensureDirectoryExists(ASSETS_DIR)) {
             String message = getDeviceName() + "\n" + "Android " + Build.VERSION.RELEASE + "\n" + "RAM " + totalRAM + "MB" + "\n" + "LibGDX " + Version.VERSION + "\n" + "Can't access external storage\nPath: " + ASSETS_DIR;
             Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
-            loadGame(hwInfo, "", "", false, adapter, permissiongranted, totalRAM, isTabletDevice, config, true, message);
+            loadGame(hwInfo, "", "", false, adapter, permissiongranted, isTabletDevice, config, true, message);
             return;
         }
         //ensure .nomedia file exists in Forge directory so its images
@@ -519,7 +521,7 @@ public class Main extends AndroidApplication {
             } catch (Exception e) {
                 String message = getDeviceName() + "\n" + "Android " + Build.VERSION.RELEASE + "\n" + "RAM " + totalRAM + "MB" + "\n" + "LibGDX " + Version.VERSION + "\n" + "Can't read/write to storage";
                 Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
-                loadGame(hwInfo, "", "", false, adapter, permissiongranted, totalRAM, isTabletDevice, config, true, message);
+                loadGame(hwInfo, "", "", false, adapter, permissiongranted, isTabletDevice, config, true, message);
                 return;
             }
         }
@@ -536,7 +538,7 @@ public class Main extends AndroidApplication {
         if (landscapeMode && Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) { //Android 11 onwards
             Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
         }
-        loadGame(hwInfo, info, lowV + lowM, landscapeMode, adapter, permissiongranted, totalRAM, isTabletDevice, config, false, "");
+        loadGame(hwInfo, info, lowV + lowM, landscapeMode, adapter, permissiongranted, isTabletDevice, config, false, "");
     }
 
     @Override
