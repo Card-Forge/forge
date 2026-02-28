@@ -1,4 +1,4 @@
-package forge.gamesimulationtests;
+package forge.net;
 
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.server.DeltaSyncManager;
