@@ -1912,18 +1912,9 @@
         "cardName": "Garth One-Eye"
       },
       {
-        "type": "deckCard",
-        "count": 6,
-        "addMaxCount": 8, 
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-        ]
-      },
-      {
         "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 2, 
+        "count": 7,
+        "addMaxCount": 10,
         "rarity": [
           "Rare",
           "Mythic Rare"
