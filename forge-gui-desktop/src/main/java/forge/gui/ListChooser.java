@@ -58,6 +58,7 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FTextField;
 import forge.util.ITranslatable;
 import forge.util.Localizer;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * A simple class that shows a list of choices in a dialog. Two properties
@@ -190,7 +191,7 @@ public class ListChooser<T> {
     }
 
     private void applyFilter(final FTextField searchField) {
-        final String text = searchField.getText().toLowerCase();
+        final String text = StringUtils.stripAccents(searchField.getText().toLowerCase());
         lstChoices.clearSelection();
 
         if (text.isEmpty()) {
@@ -199,7 +200,7 @@ public class ListChooser<T> {
             final List<T> startsWith = new ArrayList<>();
             final List<T> contains = new ArrayList<>();
             for (final T item : allItems) {
-                final String name = getDisplayText(item).toLowerCase();
+                final String name = StringUtils.stripAccents(getDisplayText(item).toLowerCase());
                 if (name.startsWith(text)) {
                     startsWith.add(item);
                 } else if (name.contains(text)) {

@@ -40,6 +40,7 @@ import forge.itemmanager.filters.ListLabelFilter;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.util.*;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * A simple class that shows a list of choices in a dialog. Two properties
@@ -159,9 +160,9 @@ public class ListChooser<T> extends FContainer {
 
         List<Predicate<? super T>> predicates = new ArrayList<>();
 
-        final String pattern = txtSearch.getText().toLowerCase();
+        final String pattern = StringUtils.stripAccents(txtSearch.getText().toLowerCase());
         if (!pattern.isEmpty()) {
-            predicates.add(input -> lstChoices.getChoiceText(input).toLowerCase().contains(pattern));
+            predicates.add(input -> StringUtils.stripAccents(lstChoices.getChoiceText(input).toLowerCase()).contains(pattern));
         }
         if (advancedSearchFilter != null && !advancedSearchFilter.isEmpty()) {
             predicates.add((Predicate<? super T>)advancedSearchFilter.getPredicate());
