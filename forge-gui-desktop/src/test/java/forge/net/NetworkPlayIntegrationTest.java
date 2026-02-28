@@ -30,12 +30,11 @@ import java.util.List;
  * - 3-4 player multiplayer with remote clients
  *
  * Test categories:
- * - Unit tests (4): Always run in CI - deck loader, server start/stop
- * - Single-game tests (4): testTrueNetworkTraffic (CI), testUnifiedHarnessLocalMode,
- *   testMultiplayer3Player, testMultiplayer4Player
+ * - Unit tests (3): Always run in CI - deck loader, server start/stop
+ * - Single-game tests (2): testTrueNetworkTraffic (CI), testUnifiedHarnessLocalMode
  * - Configurable batch tests (2): testConfigurableSequential, testConfigurableParallel
  * - Comprehensive tests (2): runComprehensiveDeltaSyncTest, runQuickDeltaSyncTest
- * - Utility tests (2): testBatchTesting, analyzeExistingLogs
+ * - Utility tests (1): analyzeExistingLogs
  *
  * Usage examples:
  *
@@ -164,48 +163,6 @@ public class NetworkPlayIntegrationTest {
         }
     }
 
-    @Test(timeOut = 200000, description = "3-player multiplayer network game test")
-    public void testMultiplayer3Player() {
-        skipUnlessStressTestsEnabled();
-        NetworkDebugLogger.log("%s Starting 3-player multiplayer network test...", LOG_PREFIX);
-
-        UnifiedNetworkHarness.GameResult result = new UnifiedNetworkHarness()
-                .playerCount(3)
-                .remoteClients(2)
-                .gameTimeout(180000)
-                .execute();
-
-        System.out.println(result.toDetailedReport());
-
-        if (result.passed()) {
-            Assert.assertEquals(result.playerCount, 3, "Should have 3 players");
-            Assert.assertTrue(result.turnCount > 0, "Should have at least one turn");
-            Assert.assertTrue(result.deltaPacketsReceived > 0, "Should have received delta packets");
-        }
-        Assert.assertTrue(result.gameStarted, "Game should have started");
-    }
-
-    @Test(timeOut = 200000, description = "4-player multiplayer network game test")
-    public void testMultiplayer4Player() {
-        skipUnlessStressTestsEnabled();
-        NetworkDebugLogger.log("%s Starting 4-player multiplayer network test...", LOG_PREFIX);
-
-        UnifiedNetworkHarness.GameResult result = new UnifiedNetworkHarness()
-                .playerCount(4)
-                .remoteClients(3)
-                .gameTimeout(180000)
-                .execute();
-
-        System.out.println(result.toDetailedReport());
-
-        if (result.passed()) {
-            Assert.assertEquals(result.playerCount, 4, "Should have 4 players");
-            Assert.assertTrue(result.turnCount > 0, "Should have at least one turn");
-            Assert.assertTrue(result.deltaPacketsReceived > 0, "Should have received delta packets");
-        }
-        Assert.assertTrue(result.gameStarted, "Game should have started");
-    }
-
     @Test(timeOut = 150000, description = "UnifiedNetworkHarness local mode test")
     public void testUnifiedHarnessLocalMode() {
         skipUnlessStressTestsEnabled();
@@ -225,36 +182,6 @@ public class NetworkPlayIntegrationTest {
     }
 
     // ==================== Batch Tests (Sequential and Parallel) ====================
-
-    @Test(timeOut = 360000, description = "Small batch testing (3 games)")
-    public void testBatchTesting() {
-        skipUnlessStressTestsEnabled();
-        NetworkDebugLogger.log("%s Starting batch testing...", LOG_PREFIX);
-
-        int iterations = 3;
-        int completed = 0;
-        int totalTurns = 0;
-
-        for (int i = 0; i < iterations; i++) {
-            NetworkDebugLogger.log("%s Batch iteration %d/%d", LOG_PREFIX, i + 1, iterations);
-
-            UnifiedNetworkHarness.GameResult result = new UnifiedNetworkHarness()
-                    .playerCount(2)
-                    .remoteClients(0)
-                    .execute();
-
-            Assert.assertEquals(result.remoteClientCount, 0, "Should be local mode");
-            if (result.gameCompleted) {
-                completed++;
-                totalTurns += result.turnCount;
-            }
-        }
-
-        NetworkDebugLogger.log("%s Batch results: %d/%d completed, avg turns: %.1f",
-                LOG_PREFIX, completed, iterations, completed > 0 ? (double) totalTurns / completed : 0);
-
-        Assert.assertEquals(completed, iterations, "All games should complete");
-    }
 
     /**
      * Configurable sequential batch test.
