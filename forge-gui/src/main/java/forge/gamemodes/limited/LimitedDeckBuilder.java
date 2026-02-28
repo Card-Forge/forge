@@ -54,6 +54,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
     protected final List<String> setsWithBasicLands = new ArrayList<>();
     protected List<PaperCard> rankedColorList;
     protected final List<PaperCard> draftedConspiracies;
+    protected final boolean forHuman;
 
     // Views for aiPlayable
     private Iterable<PaperCard> onColorCreatures;
@@ -69,18 +70,26 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
      *            Cards to build the deck from.
      * @param pClrs
      *            Chosen colors.
+     * @param forHuman
+     *            True if building for a human player, false for AI.
      */
-    public LimitedDeckBuilder(final List<PaperCard> dList, final DeckColors pClrs) {
+    public LimitedDeckBuilder(final List<PaperCard> dList, final DeckColors pClrs, final boolean forHuman) {
         super(FModel.getMagicDb().getCommonCards(), DeckFormat.Limited);
         this.availableList = dList;
         this.deckColors = pClrs;
         this.colors = pClrs.getChosenColors();
+        this.forHuman = forHuman;
 
-        // remove Unplayables
-        this.aiPlayables = availableList.stream()
+        if (forHuman) {
+            // For humans, all cards are playables
+            this.aiPlayables = new ArrayList<>(availableList);
+        } else {
+            // remove Unplayables for AI
+            this.aiPlayables = availableList.stream()
                 .filter(PaperCardPredicates.fromRules(CardRulesPredicates.IS_KEPT_IN_AI_LIMITED_DECKS))
                 .collect(Collectors.toList());
-        this.availableList.removeAll(aiPlayables);
+            this.availableList.removeAll(aiPlayables);
+        }
 
         // keep Conspiracies in a separate list
         this.draftedConspiracies = aiPlayables.stream()
@@ -92,13 +101,17 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
     }
 
     /**
-     * Constructor.
-     *
-     * @param list
-     *            Cards to build the deck from.
+     * Constructor for backward compatibility (AI by default).
+     */
+    public LimitedDeckBuilder(final List<PaperCard> dList, final DeckColors pClrs) {
+        this(dList, pClrs, false);
+    }
+
+    /**
+     * Constructor for backward compatibility (AI by default).
      */
     public LimitedDeckBuilder(final List<PaperCard> list) {
-        this(list, new DeckColors());
+        this(list, new DeckColors(), false);
     }
 
     @Override

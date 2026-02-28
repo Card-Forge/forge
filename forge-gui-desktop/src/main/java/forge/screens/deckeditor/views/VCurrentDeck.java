@@ -79,6 +79,12 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
             .tooltip(localizer.getMessage("ttImportDeck"))
             .opaque(true).hoverable(true).build();
 
+    private final FLabel btnAutoBuildLimited = new FLabel.Builder()
+            .fontSize(14)
+            .text(localizer.getMessage("lblAutoBuildLimited"))
+            .tooltip("Auto-build a limited deck for a human player")
+            .opaque(true).hoverable(true).build();
+
     private final FTextField txfTitle = new FTextField.Builder().ghostText("[" + localizer.getMessage("lblNewDeck") +"]").build();
 
     private final JPanel pnlHeader = new JPanel();
@@ -104,6 +110,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
         pnlHeader.add(btnSaveAs, "w 26px!, h 26px!");
         pnlHeader.add(btnPrintProxies, "w 26px!, h 26px!");
         pnlHeader.add(btnImport, "w 61px!, h 26px!");
+        pnlHeader.add(btnAutoBuildLimited, "w 120px!, h 26px!"); // Add new button near import
     }
 
     //========== Overridden from IVDoc
@@ -197,7 +204,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
         return btnNew;
     }
 
-    /** @return {@link forge.gui.toolbar.FTextField} */
+    /** @return {@link forge.toolbox.FTextField} */
     public FTextField getTxfTitle() {
         return txfTitle;
     }
@@ -213,5 +220,10 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
      */
     public FLabel getBtnImport() {
         return btnImport;
+    }
+
+    /** @return {@link javax.swing.JLabel} */
+    public FLabel getBtnAutoBuildLimited() {
+        return btnAutoBuildLimited;
     }
 }
