@@ -2984,6 +2984,7 @@
     "equipmentSlot": "Right",
     "iconName": "CelestialSword",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Celestial Sword|ICE"
      ]
@@ -2995,6 +2996,7 @@
     "equipmentSlot": "Right",
     "iconName": "AegisoftheMeek",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Aegis of the Meek|ICE"
      ]
@@ -3123,6 +3125,7 @@
     "equipmentSlot": "Right",
     "iconName": "CeremonialKnife",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Ceremonial Knife|VOW"
      ]
@@ -3218,6 +3221,7 @@
     "equipmentSlot": "Right",
     "iconName": "Fblthp'sLostFishingPole",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Fishing Pole|FDN"
      ]
@@ -3266,6 +3270,7 @@
     "equipmentSlot": "Right",
     "iconName": "PetrifiedHead",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Gorgon's Head|BNG"
      ]
@@ -3289,6 +3294,7 @@
     "equipmentSlot": "Right",
     "iconName": "RingofDragonBlood",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Dragon Blood|USG"
      ]
@@ -3337,6 +3343,7 @@
     "equipmentSlot": "Right",
     "iconName": "Witches'Eye",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Witches' Eye|THS"
      ]
@@ -3348,6 +3355,7 @@
     "equipmentSlot": "Right",
     "iconName": "DraconianCylix",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Draconian Cylix|FEM"
      ]
@@ -3396,6 +3404,7 @@
     "equipmentSlot": "Right",
     "iconName": "SirenSongLyre",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Siren Song Lyre|BNG"
      ]
