@@ -55,7 +55,7 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
 
         lblGuideText = new FLabel.Builder()
                 .text(Forge.getLocalizer().getMessage("lblOnlineGuideText"))
-                .font(FSkinFont.get(12)).align(Align.center).build();
+                .font(FSkinFont.get(14)).align(Align.center).build();
         add(lblGuideText);
 
         lblGuideLink = new FLabel.Builder()
@@ -164,7 +164,7 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
             labelHeight = lblWarning.getAutoSizeBounds().height + padding;
             lblWarning.setBounds(padding, y, width - 2 * padding, labelHeight);
             lblWarning.setVisible(true);
-            y += labelHeight + padding * 2;
+            y += labelHeight + padding;
 
             // Guide text
             labelHeight = lblGuideText.getAutoSizeBounds().height + padding;
@@ -178,12 +178,15 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
             lblGuideLink.setVisible(true);
             y += labelHeight + padding * 4;
 
-            // Buttons side by side
-            float buttonWidth = (width - 3 * padding) / 2;
+            // Buttons side by side, centered with margin
+            float buttonGap = padding * 2;
+            float buttonWidth = width * 0.35f;
+            float totalButtonWidth = buttonWidth * 2 + buttonGap;
+            float buttonX = (width - totalButtonWidth) / 2;
             float buttonHeight = Utils.AVG_FINGER_HEIGHT;
-            btnHost.setBounds(padding, y, buttonWidth, buttonHeight);
+            btnHost.setBounds(buttonX, y, buttonWidth, buttonHeight);
             btnHost.setVisible(true);
-            btnJoin.setBounds(padding * 2 + buttonWidth, y, buttonWidth, buttonHeight);
+            btnJoin.setBounds(buttonX + buttonWidth + buttonGap, y, buttonWidth, buttonHeight);
             btnJoin.setVisible(true);
         } else {
             // Hide landing page components, show lobby controls
