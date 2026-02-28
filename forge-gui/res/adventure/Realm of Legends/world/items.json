@@ -2936,6 +2936,7 @@
     "equipmentSlot": "Right",
     "iconName": "SilverskinGauntlet",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Silverskin Armor|MBS"
      ]
@@ -2947,6 +2948,7 @@
     "equipmentSlot": "Right",
     "iconName": "BladedBracer",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Bladed Bracers|AVR"
      ]
@@ -2959,6 +2961,7 @@
     "iconName": "EchoShield",
     "cost": 500,
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Echo Circlet|SOM"
      ]
@@ -3003,6 +3006,7 @@
     "equipmentSlot": "Right",
     "iconName": "RunedStalactite",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Runed Stalactite|LRW"
      ]
@@ -3036,6 +3040,7 @@
     "equipmentSlot": "Right",
     "iconName": "SpyKit",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Spy Kit|CN2"
      ]
@@ -3047,6 +3052,7 @@
     "equipmentSlot": "Right",
     "iconName": "ShieldoftheRighteous",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Shield of the Righteous|ARB"
      ]
@@ -3058,21 +3064,9 @@
     "equipmentSlot": "Right",
     "iconName": "ShortSword",
     "effect": {
-        "lifeModifier": 1,
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Short Sword|DOM"
-     ]
-    }
-  },
-    {
-    "name": "Darksteel Axe",
-    "description": "Equip 2, +2/+0, is indestructible",
-    "equipmentSlot": "Right",
-    "iconName": "DarksteelAxe",
-    "cost": 1000,
-    "effect": {
-        "startBattleWithCard": [
-        "Darksteel Axe|SOM"
      ]
     }
   },
@@ -3082,6 +3076,7 @@
     "equipmentSlot": "Right",
     "iconName": "SteelclawLance",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Steelclaw Lance|ELD"
      ]
@@ -3093,6 +3088,7 @@
     "equipmentSlot": "Right",
     "iconName": "StarforgedSword",
     "effect": {
+      "lifeModifier": 3,
         "startBattleWithCard": [
         "Starforged Sword|BLB"
      ]
@@ -3115,6 +3111,7 @@
     "equipmentSlot": "Right",
     "iconName": "TrustyMachete",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Trusty Machete|ZEN"
      ]
@@ -3172,6 +3169,7 @@
     "equipmentSlot": "Right",
     "iconName": "AngelicArmaments",
     "effect": {
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Angelic Armaments|AVR"
      ]
@@ -3184,6 +3182,7 @@
     "iconName": "Brawler'sCestus",
     "cost": 1000,
     "effect": {
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Brawler's Plate|ORI"
      ]
@@ -3207,6 +3206,7 @@
     "iconName": "JoustingLance",
     "cost": 1000,
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Jousting Lance|DOM"
      ]
@@ -3242,7 +3242,7 @@
     "iconName": "RingofXathrid",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -2,
+        "lifeModifier": -5,
         "startBattleWithCard": [
         "Ring of Xathrid|M13"
      ]
@@ -3277,6 +3277,7 @@
     "equipmentSlot": "Right",
     "iconName": "BespokeGauntlet",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Bespoke Battlegarb|WOE"
      ]
@@ -3300,7 +3301,7 @@
     "iconName": "RingofThune",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -2,
+        "lifeModifier": -5,
         "startBattleWithCard": [
         "Ring of Thune|M13"
      ]
@@ -3313,7 +3314,7 @@
     "iconName": "RingofValkas",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -2,
+        "lifeModifier": -5,
         "startBattleWithCard": [
         "Ring of Valkas|M13"
      ]
@@ -3370,7 +3371,7 @@
     "iconName": "RingofKalonia",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -2,
+        "lifeModifier": -5,
         "startBattleWithCard": [
         "Ring of Kalonia|M13"
      ]
@@ -3383,7 +3384,7 @@
     "iconName": "RingofEvosIsle",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -2,
+        "lifeModifier": -5,
         "startBattleWithCard": [
         "Ring of Evos Isle|M13"
      ]
@@ -3407,6 +3408,7 @@
     "iconName": "SpidersilkGlove",
     "cost": 500,
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Spidersilk Net|DTK"
      ]
@@ -4561,6 +4563,78 @@
     }
   },
   {
+    "name": "Chitinous Club",
+    "description": "Equip 3, +2/+2 and menace",
+    "equipmentSlot": "Right",
+    "iconName": "ChitinousClub",
+    "cost": 1000,
+    "effect": {
+      "startBattleWithCard": [
+        "Chitinous Cloak|OGW"
+      ]
+    }
+  },
+  {
+    "name": "Dire Flail",
+    "description": "Equip 1, +2/+0, Craft with artifact for 3RR to upgrade.",
+    "equipmentSlot": "Right",
+    "iconName": "DireFlail",
+    "cost": 5000,
+    "effect": {
+      "startBattleWithCard": [
+        "Dire Flail|LCI"
+      ]
+    }
+  },
+  {
+    "name": "Poet's Quill",
+    "description": "Equip 1B, +1/+1 and lifelink.",
+    "equipmentSlot": "Right",
+    "iconName": "PoetsQuill",
+    "cost": 5000,
+    "effect": {
+      "startBattleWithCard": [
+        "Poet's Quill|STX"
+      ]
+    }
+  },
+  {
+    "name": "Giant's Bracer",
+    "description": "Equip 2, +0/+1 and hexproof while untapped.",
+    "equipmentSlot": "Right",
+    "iconName": "GiantsBracer",
+    "cost": 5000,
+    "effect": {
+      "startBattleWithCard": [
+        "Giant's Amulet|KHM"
+      ]
+    }
+  },
+  {
+    "name": "Skyclave Maul",
+    "description": "Equip 2WW, +2/+2 flying and first strike",
+    "equipmentSlot": "Right",
+    "iconName": "SkyclaveMaul",
+    "cost": 5000,
+    "effect": {
+      "startBattleWithCard": [
+        "Maul of the Skyclaves|ZNR"
+      ]
+    }
+  },
+  {
+    "name": "Spiked Ripsaw",
+    "description": "Equip 3, +3/+3 and trample if you sac a forest.",
+    "equipmentSlot": "Right",
+    "iconName": "SpikedRipsaw",
+    "cost": 5000,
+    "effect": {
+      "startBattleWithCard": [
+        "Spiked Ripsaw|VOW"
+      ]
+    }
+  },
+  {
     "name": "Gisa's Favorite Shovel",
     "description": "This item has been removed. Please discard it.",
     "equipmentSlot": "Right",
@@ -4576,6 +4650,18 @@
     "description": "This item has been removed. Please discard it.",
     "equipmentSlot": "Boots",
     "iconName": "GhostRune",
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Darksteel Axe",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Right",
+    "iconName": "DarksteelAxe",
+    "cost": 1000,
     "effect": {
       "startBattleWithCard": [
         "Darksteel Relic"
