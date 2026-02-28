@@ -90,11 +90,11 @@ public class ComprehensiveGameRunner {
                     gameIndex, playerCount, port);
 
             // Use UnifiedNetworkHarness for all player counts
-            GameRunResult result = runGame(port, playerCount);
+            UnifiedNetworkHarness.GameResult result = runGame(port, playerCount);
 
             // Log result
             NetworkDebugLogger.log("[ComprehensiveGameRunner] Game %d result: success=%s, turns=%d, winner=%s",
-                    gameIndex, result.success, result.turns, result.winner);
+                    gameIndex, result.success, result.turnCount, result.winner);
 
             // Output result to stdout for parent process to parse
             System.out.println("RESULT:" + formatResult(gameIndex, playerCount, result));
@@ -115,59 +115,29 @@ public class ComprehensiveGameRunner {
      * Run a game using UnifiedNetworkHarness.
      * All non-host players are remote network clients to test delta sync.
      */
-    private static GameRunResult runGame(int port, int playerCount) {
-        UnifiedNetworkHarness.GameResult gameResult = new UnifiedNetworkHarness()
+    private static UnifiedNetworkHarness.GameResult runGame(int port, int playerCount) {
+        return new UnifiedNetworkHarness()
                 .playerCount(playerCount)
                 .remoteClients(playerCount - 1)  // All but host are remote
                 .port(port)
                 .gameTimeout(300000)  // 5 minute timeout
                 .execute();
-
-        return new GameRunResult(
-                gameResult.success,
-                gameResult.turnCount,
-                gameResult.deltaPacketsReceived,
-                gameResult.totalDeltaBytes,
-                gameResult.winner,
-                gameResult.deckNames
-        );
     }
 
     /**
      * Format result for parent process parsing.
      * Format: gameIndex|success|playerCount|deltas|turns|bytes|winner|deck1,deck2,...
      */
-    private static String formatResult(int gameIndex, int playerCount, GameRunResult result) {
+    private static String formatResult(int gameIndex, int playerCount, UnifiedNetworkHarness.GameResult result) {
         String decksStr = result.deckNames.isEmpty() ? "" : String.join(",", result.deckNames);
         return String.format("%d|%s|%d|%d|%d|%d|%s|%s",
                 gameIndex,
                 result.success,
                 playerCount,
-                result.deltaPackets,
-                result.turns,
-                result.bytes,
+                result.deltaPacketsReceived,
+                result.turnCount,
+                result.totalDeltaBytes,
                 result.winner != null ? result.winner : "null",
                 decksStr);
-    }
-
-    /**
-     * Internal result holder for game runs.
-     */
-    private static class GameRunResult {
-        final boolean success;
-        final int turns;
-        final long deltaPackets;
-        final long bytes;
-        final String winner;
-        final java.util.List<String> deckNames;
-
-        GameRunResult(boolean success, int turns, long deltaPackets, long bytes, String winner, java.util.List<String> deckNames) {
-            this.success = success;
-            this.turns = turns;
-            this.deltaPackets = deltaPackets;
-            this.bytes = bytes;
-            this.winner = winner;
-            this.deckNames = deckNames != null ? deckNames : java.util.Collections.emptyList();
-        }
     }
 }

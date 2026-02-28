@@ -253,7 +253,6 @@ public class UnifiedNetworkHarness {
             }
 
             startRunnable.run();
-            registerEventListener();
 
             // 5. Wait for completion
             waitForLocalGameCompletion(result);
@@ -544,14 +543,6 @@ public class UnifiedNetworkHarness {
                 return null;
             }
         });
-    }
-
-    private void registerEventListener() {
-        HostedMatch hostedMatch = HeadlessGuiDesktop.getLastMatch();
-        if (hostedMatch != null && hostedMatch.getGame() != null) {
-            GameEventListener listener = new GameEventListener().setVerboseLogging(false);
-            hostedMatch.getGame().subscribeToEvents(listener);
-        }
     }
 
     private void logLobbyState() {

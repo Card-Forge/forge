@@ -147,17 +147,7 @@ public class ComprehensiveTestExecutor {
             if (gameResult.errorMessage != null && !gameResult.success) {
                 result.addError(i, gameResult.errorMessage);
             } else {
-                // Convert to ExecutionResult format using constructor
-                MultiProcessGameExecutor.GameResult execResult = new MultiProcessGameExecutor.GameResult(
-                        gameResult.success,
-                        gameResult.playerCount,
-                        gameResult.deltaPacketsReceived,
-                        gameResult.turnCount,
-                        gameResult.totalDeltaBytes,
-                        gameResult.winner,
-                        gameResult.deckNames
-                );
-                result.addResult(i, execResult);
+                result.addResult(i, gameResult);
             }
 
             String status = gameResult.success ? "SUCCESS" : "FAILED";

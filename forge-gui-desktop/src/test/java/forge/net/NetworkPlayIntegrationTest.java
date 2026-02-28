@@ -35,7 +35,7 @@ import java.util.List;
  *   testMultiplayer3Player, testMultiplayer4Player
  * - Configurable batch tests (2): testConfigurableSequential, testConfigurableParallel
  * - Comprehensive tests (2): runComprehensiveDeltaSyncTest, runQuickDeltaSyncTest
- * - Utility tests (3): testBatchTesting, analyzeExistingLogs, testWithSystemProperties
+ * - Utility tests (2): testBatchTesting, analyzeExistingLogs
  *
  * Usage examples:
  *
@@ -426,43 +426,6 @@ public class NetworkPlayIntegrationTest {
             System.out.println("Report saved to: " + NetworkDebugLogger.sanitizePath(reportPath.toString()));
         } catch (IOException e) {
             System.err.println("Failed to save report: " + e.getMessage());
-        }
-    }
-
-    // ==================== Configurable System Property Tests ====================
-
-    /**
-     * Configurable test using system properties for deck selection and test mode.
-     *
-     * Usage:
-     *   -Dprecon1="Quest Precon - Red" -Dprecon2="Quest Precon - Blue"
-     *   -DtestMode=NETWORK_LOCAL (or NETWORK_REMOTE)
-     *   -Diterations=5
-     */
-    @Test(timeOut = 600000, description = "Configurable test via system properties")
-    public void testWithSystemProperties() {
-        skipUnlessStressTestsEnabled();
-        NetworkDebugLogger.log("%s Starting configurable test with system properties...", LOG_PREFIX);
-
-        TestConfiguration config = new TestConfiguration();
-        config.printConfiguration();
-
-        int iterations = config.getIterations();
-        int remoteClients = config.isUseRemoteClient() ? 1 : 0;
-
-        for (int i = 0; i < iterations; i++) {
-            if (iterations > 1) {
-                NetworkDebugLogger.log("%s === Iteration %d/%d ===", LOG_PREFIX, i + 1, iterations);
-            }
-
-            UnifiedNetworkHarness.GameResult result = new UnifiedNetworkHarness()
-                    .playerCount(2)
-                    .remoteClients(remoteClients)
-                    .decks(config.getDeck1(), config.getDeck2())
-                    .execute();
-
-            Assert.assertNotNull(result, "Result should not be null");
-            Assert.assertEquals(result.remoteClientCount, remoteClients, "Remote client count should match mode");
         }
     }
 

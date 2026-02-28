@@ -6,7 +6,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -278,7 +277,7 @@ public class MultiProcessGameExecutor {
             ExecutionResult batchResult = batchExecutor.runGamesWithPlayerCounts(batchPlayerCounts, batchNumber, batchId);
 
             // Merge batch results into aggregated result
-            for (Map.Entry<Integer, GameResult> entry : batchResult.getResults().entrySet()) {
+            for (Map.Entry<Integer, UnifiedNetworkHarness.GameResult> entry : batchResult.getResults().entrySet()) {
                 int originalIndex = batchStart + entry.getKey();
                 aggregatedResult.addResult(originalIndex, entry.getValue());
             }
@@ -339,25 +338,25 @@ public class MultiProcessGameExecutor {
             String[] parts = resultLine.split("\\|");
             if (parts.length >= 7) {
                 int gameIndex = Integer.parseInt(parts[0]);
-                boolean success = Boolean.parseBoolean(parts[1]);
-                int playerCount = Integer.parseInt(parts[2]);
-                long deltas = Long.parseLong(parts[3]);
-                int turns = Integer.parseInt(parts[4]);
-                long bytes = Long.parseLong(parts[5]);
-                String winner = "null".equals(parts[6]) ? null : parts[6];
+
+                UnifiedNetworkHarness.GameResult gameResult = new UnifiedNetworkHarness.GameResult();
+                gameResult.success = Boolean.parseBoolean(parts[1]);
+                gameResult.playerCount = Integer.parseInt(parts[2]);
+                gameResult.deltaPacketsReceived = Long.parseLong(parts[3]);
+                gameResult.turnCount = Integer.parseInt(parts[4]);
+                gameResult.totalDeltaBytes = Long.parseLong(parts[5]);
+                gameResult.winner = "null".equals(parts[6]) ? null : parts[6];
 
                 // Parse deck names if present (part 7)
-                List<String> deckNames = new ArrayList<>();
                 if (parts.length >= 8 && !parts[7].isEmpty()) {
                     String[] decks = parts[7].split(",");
                     for (String deck : decks) {
                         if (!deck.trim().isEmpty()) {
-                            deckNames.add(deck.trim());
+                            gameResult.deckNames.add(deck.trim());
                         }
                     }
                 }
 
-                GameResult gameResult = new GameResult(success, playerCount, deltas, turns, bytes, winner, deckNames);
                 result.addResult(gameIndex, gameResult);
             }
         } catch (Exception e) {
@@ -380,34 +379,11 @@ public class MultiProcessGameExecutor {
     }
 
     /**
-     * Result from a single game.
-     */
-    public static class GameResult {
-        public final boolean success;
-        public final int playerCount;
-        public final long deltaPackets;
-        public final int turns;
-        public final long bytes;
-        public final String winner;
-        public final List<String> deckNames;
-
-        public GameResult(boolean success, int playerCount, long deltaPackets, int turns, long bytes, String winner, List<String> deckNames) {
-            this.success = success;
-            this.playerCount = playerCount;
-            this.deltaPackets = deltaPackets;
-            this.turns = turns;
-            this.bytes = bytes;
-            this.winner = winner;
-            this.deckNames = deckNames != null ? new ArrayList<>(deckNames) : Collections.emptyList();
-        }
-    }
-
-    /**
      * Aggregated results from parallel execution.
      */
     public static class ExecutionResult {
         private final int totalGames;
-        private final Map<Integer, GameResult> results = new ConcurrentHashMap<>();
+        private final Map<Integer, UnifiedNetworkHarness.GameResult> results = new ConcurrentHashMap<>();
         private final Map<Integer, String> errors = new ConcurrentHashMap<>();
         private final Map<Integer, Boolean> timeouts = new ConcurrentHashMap<>();
 
@@ -415,7 +391,7 @@ public class MultiProcessGameExecutor {
             this.totalGames = totalGames;
         }
 
-        public void addResult(int idx, GameResult r) {
+        public void addResult(int idx, UnifiedNetworkHarness.GameResult r) {
             results.put(idx, r);
         }
 
@@ -448,11 +424,11 @@ public class MultiProcessGameExecutor {
         }
 
         public long getTotalDeltaPackets() {
-            return results.values().stream().mapToLong(r -> r.deltaPackets).sum();
+            return results.values().stream().mapToLong(r -> r.deltaPacketsReceived).sum();
         }
 
         public long getTotalBytes() {
-            return results.values().stream().mapToLong(r -> r.bytes).sum();
+            return results.values().stream().mapToLong(r -> r.totalDeltaBytes).sum();
         }
 
         /**
@@ -461,7 +437,7 @@ public class MultiProcessGameExecutor {
         public int getTotalTurns() {
             return results.values().stream()
                     .filter(r -> r.success)
-                    .mapToInt(r -> r.turns)
+                    .mapToInt(r -> r.turnCount)
                     .sum();
         }
 
@@ -493,7 +469,7 @@ public class MultiProcessGameExecutor {
                     .sum();
         }
 
-        public Map<Integer, GameResult> getResults() {
+        public Map<Integer, UnifiedNetworkHarness.GameResult> getResults() {
             return results;
         }
 
@@ -542,7 +518,7 @@ public class MultiProcessGameExecutor {
         public long getTotalBytesByPlayers(int playerCount) {
             return results.values().stream()
                     .filter(r -> r.playerCount == playerCount)
-                    .mapToLong(r -> r.bytes)
+                    .mapToLong(r -> r.totalDeltaBytes)
                     .sum();
         }
 
@@ -552,24 +528,9 @@ public class MultiProcessGameExecutor {
         public double getAverageTurnsByPlayers(int playerCount) {
             return results.values().stream()
                     .filter(r -> r.playerCount == playerCount && r.success)
-                    .mapToInt(r -> r.turns)
+                    .mapToInt(r -> r.turnCount)
                     .average()
                     .orElse(0.0);
-        }
-
-        /**
-         * Format bytes in human-readable form (B, KB, MB, GB).
-         */
-        private String formatBytes(long bytes) {
-            if (bytes < 1024) {
-                return bytes + " B";
-            } else if (bytes < 1024 * 1024) {
-                return String.format("%.1f KB", bytes / 1024.0);
-            } else if (bytes < 1024L * 1024L * 1024L) {
-                return String.format("%.2f MB", bytes / (1024.0 * 1024.0));
-            } else {
-                return String.format("%.2f GB", bytes / (1024.0 * 1024.0 * 1024.0));
-            }
         }
 
         public String toSummary() {
@@ -598,7 +559,7 @@ public class MultiProcessGameExecutor {
             sb.append(String.format("  Total Turns:     %d\n", getTotalTurns()));
             sb.append(String.format("  Unique Decks:    %d (from %d total usages)\n", getUniqueDecksCount(), getTotalDeckUsages()));
             sb.append(String.format("  Delta Packets:   %d\n", getTotalDeltaPackets()));
-            sb.append(String.format("  Total Bytes:     %d (%s)\n", getTotalBytes(), formatBytes(getTotalBytes())));
+            sb.append(String.format("  Total Bytes:     %d (%s)\n", getTotalBytes(), TestUtils.formatBytes(getTotalBytes())));
             double bytesPerPacket = getTotalDeltaPackets() > 0 ? (double) getTotalBytes() / getTotalDeltaPackets() : 0;
             sb.append(String.format("  Bytes/Packet:    %.1f\n", bytesPerPacket));
             sb.append("\n");
@@ -615,7 +576,7 @@ public class MultiProcessGameExecutor {
                     double avgTurns = getAverageTurnsByPlayers(p);
                     int totalTurnsForP = results.values().stream()
                             .filter(r -> r.playerCount == playerCount && r.success)
-                            .mapToInt(r -> r.turns)
+                            .mapToInt(r -> r.turnCount)
                             .sum();
                     sb.append(String.format("  %d-player: %d games, %d success (%.0f%%), %d total turns (avg %.1f)\n",
                             p, count, successCount, successRate, totalTurnsForP, avgTurns));
@@ -633,10 +594,10 @@ public class MultiProcessGameExecutor {
                 } else if (errors.containsKey(i)) {
                     sb.append("ERROR - ").append(errors.get(i)).append("\n");
                 } else if (results.containsKey(i)) {
-                    GameResult r = results.get(i);
+                    UnifiedNetworkHarness.GameResult r = results.get(i);
                     sb.append(r.success ? "SUCCESS" : "FAILED");
                     sb.append(String.format(" - %dp, deltas=%d, turns=%d, winner=%s\n",
-                            r.playerCount, r.deltaPackets, r.turns, r.winner));
+                            r.playerCount, r.deltaPacketsReceived, r.turnCount, r.winner));
                 } else {
                     sb.append("NO RESULT\n");
                 }
