@@ -6224,7 +6224,7 @@
 },
 {
 	"name": "Copper Host Brutalizer",
-	"sprite": "sprites/enemy/aberration/copperhostbrutalizer.atlas",
+	"sprite": "sprites/enemy/aberration/phyrexian/copperhostbrutalizer.atlas",
 	"deck": [
 		"decks/standard/copperhostbrutalizer.dck"
 	],
@@ -6302,8 +6302,91 @@
 	]
 },
 {
+	"name": "Elesh Norn",
+	"sprite": "sprites/enemy/aberration/phyrexian/eleshnorn.atlas",
+	"deck": [
+		"decks/standard/copperhostbrutalizer.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.1,
+	"boss": true,
+	"scale": 0.5,
+	"bossIntro": "All worlds will know perfection.",
+	"bossInsult": "Our glorious infection has taken hold.",
+	"difficulty": 0.5,
+	"speed": 25,
+	"life": 80,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.75,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"rare",
+				"mythicrare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "W",
+	"questTags": [
+		"Phyrexian",
+		"Copper Host",
+		"Humanoid"
+	]
+},
+{
 	"name": "Copper Host Infector",
-	"sprite": "sprites/enemy/aberration/copperhostinfector.atlas",
+	"sprite": "sprites/enemy/aberration/phyrexian/copperhostinfector.atlas",
 	"deck": [
 		"decks/standard/copperhostinfector.json"
 	],
@@ -8622,7 +8705,7 @@
 },
 {
 	"name": "Dross Gladiator",
-	"sprite": "sprites/enemy/aberration/drossgladiator.atlas",
+	"sprite": "sprites/enemy/aberration/phyrexian/drossgladiator.atlas",
 	"deck": [
 		"decks/standard/drossgladiator.json"
 	],
@@ -8702,7 +8785,7 @@
 },
 {
 	"name": "Dross Grimnarch",
-	"sprite": "sprites/enemy/aberration/drossgrimnarch.atlas",
+	"sprite": "sprites/enemy/aberration/phyrexian/drossgrimnarch.atlas",
 	"deck": [
 		"decks/standard/drossgrimnarch.dck"
 	],
@@ -11749,7 +11832,7 @@
 },
 {
 	"name": "Furnace Goblin",
-	"sprite": "sprites/enemy/aberration/furnacegoblin.atlas",
+	"sprite": "sprites/enemy/aberration/phyrexian/furnacegoblin.atlas",
 	"deck": [
 		"decks/standard/furnacegoblin.json"
 	],
@@ -11829,7 +11912,7 @@
 },
 {
 	"name": "Furnace Tormentor",
-	"sprite": "sprites/enemy/aberration/furnacetormentor.atlas",
+	"sprite": "sprites/enemy/aberration/phyrexian/furnacetormentor.atlas",
 	"deck": [
 		"decks/standard/furnacetormentor.dck"
 	],
@@ -12928,7 +13011,7 @@
 },
 {
 	"name": "Gitaxian Scientist",
-	"sprite": "sprites/enemy/aberration/gitaxianscientist.atlas",
+	"sprite": "sprites/enemy/aberration/phyrexian/gitaxianscientist.atlas",
 	"deck": [
 		"decks/standard/gitaxianscientist.dck"
 	],
@@ -13011,7 +13094,7 @@
 },
 {
 	"name": "Gitaxian Underling",
-	"sprite": "sprites/enemy/aberration/gitaxianunderling.atlas",
+	"sprite": "sprites/enemy/aberration/phyrexian/gitaxianunderling.atlas",
 	"deck": [
 		"decks/standard/gitaxianunderling.json"
 	],
@@ -22870,7 +22953,7 @@
 },
 {
 	"name": "Orthodoxy Angel",
-	"sprite": "sprites/enemy/aberration/phyrexianangel.atlas",
+	"sprite": "sprites/enemy/aberration/phyrexian/phyrexianangel.atlas",
 	"deck": [
 		"decks/standard/phyrexianangel.dck"
 	],
@@ -22951,7 +23034,7 @@
 },
 {
 	"name": "Orthodoxy Duelist",
-	"sprite": "sprites/enemy/aberration/phyrexianduelist.atlas",
+	"sprite": "sprites/enemy/aberration/phyrexian/phyrexianduelist.atlas",
 	"deck": [
 		"decks/standard/phyrexianduelist.json"
 	],

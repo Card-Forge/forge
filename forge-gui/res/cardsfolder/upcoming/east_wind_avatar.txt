@@ -1,5 +1,5 @@
 Name:East Wind Avatar
-ManaCost:2 W
+ManaCost:3 W
 Types:Creature Bird Spirit Avatar
 PT:2/4
 K:Flying

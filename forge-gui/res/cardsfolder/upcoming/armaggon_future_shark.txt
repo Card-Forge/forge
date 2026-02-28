@@ -1,6 +1,6 @@
 Name:Armaggon, Future Shark
 ManaCost:6 B B
-Types:Creature Shark Horror Mutant
+Types:Legendary Creature Shark Horror Mutant
 PT:9/6
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When NICKNAME enters, destroy up to three target creatures.

@@ -1,7 +1,7 @@
 Name:Lita, Little Orphan Amphibian
 ManaCost:1 W
 Types:Legendary Creature Mutant Ninja Turtle
-PT:1/1
+PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ Alliance — Whenever another creature you control enters, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBPutCounter,DBToken,DBScry | ChoiceRestriction$ ThisTurn
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on NICKNAME.

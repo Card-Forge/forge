@@ -136,7 +136,7 @@
 </property>
    </properties>
   </object>
-  <object id="90" template="../../../../common/maps/obj/shop.tx" x="128.5" y="84.625" width="16" height="16">
+  <object id="90" template="../../../../common/maps/obj/shop.tx" x="128.773" y="89.375" width="30.5" height="15.5">
    <properties>
     <property name="commonShopList" value="Assembly"/>
     <property name="noRestock" type="bool" value="false"/>
@@ -144,7 +144,7 @@
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
-  <object id="91" template="../../../../common/maps/obj/dialog.tx" x="123.916" y="91.25" width="36.167" height="16" visible="1">
+  <object id="91" template="../../../../common/maps/obj/dialog.tx" x="126.325" y="98.9545" width="36.167" height="16" visible="1">
    <properties>
     <property name="dialog">[
 {

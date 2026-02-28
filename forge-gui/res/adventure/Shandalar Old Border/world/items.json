@@ -261,7 +261,7 @@
     "name": "Haunted Robes",
     "description": "+1 Life. Pay B to put a creature from your graveyard on top of your library.",
     "equipmentSlot": "Body",
-    "iconName": "DarkBoots",
+    "iconName": "HauntedRobes",
     "cost": 1500,
     "effect": {
       "lifeModifier": 1,
@@ -322,7 +322,7 @@
     "name": "Belbe's Boots",
     "description": "Pay X to give target creature +0/+X until end of turn.",
     "equipmentSlot": "Boots",
-    "iconName": "BelbesArmor",
+    "iconName": "BelbesBoots",
     "cost": 3000,
     "effect": {
       "startBattleWithCard": [
@@ -334,7 +334,7 @@
     "name": "Guard's Shield",
     "description": "+2 Life. Start with a 2/2 white Soldier token.",
     "equipmentSlot": "Left",
-    "iconName": "GuardsArmor",
+    "iconName": "GuardsShield",
     "effect": {
       "lifeModifier": 2,
       "startBattleWithCard": [
@@ -468,7 +468,7 @@
     "name": "Bladed Boots",
     "description": "Pay 3 to give target creature +2/+0 until you switch holders.",
     "equipmentSlot": "Boots",
-    "iconName": "ZelyonSword",
+    "iconName": "BladedBoots",
     "cost": 3000,
     "effect": {
       "startBattleWithCard": [
@@ -504,7 +504,7 @@
     "name": "Flowstone Boots",
     "description": "Pay 3 and tap to give target creature +1/-1 while this stays tapped.",
     "equipmentSlot": "Boots",
-    "iconName": "DarkArmor",
+    "iconName": "FlowstoneBoots",
     "cost": 3000,
     "effect": {
       "startBattleWithCard": [
@@ -718,7 +718,7 @@
     "name": "Shield of the Hivelord",
     "description": "Grants you command of a sliver giving +0/+1.",
     "equipmentSlot": "Left",
-    "iconName": "HiveLordArmor",
+    "iconName": "ShieldOfTheHivelord",
     "effect": {
       "startBattleWithCard": [
         "Plated Sliver|LGN"
@@ -765,7 +765,7 @@
     "name": "Draconian Necklace",
     "description": "Pay 2 and discard at random to regenerate a creature.",
     "equipmentSlot": "Neck",
-    "iconName": "DraconianCylix",
+    "iconName": "DraconianNecklace",
     "cost": 3000,
     "effect": {
       "startBattleWithCard": [
@@ -788,7 +788,7 @@
   {
     "name": "Sage's Robes",
     "description": "No maximum hand size. Draw an extra starting card.",
-    "iconName": "SpellBook",
+    "iconName": "SagesRobes",
     "equipmentSlot": "Body",
     "cost": 7000,
     "effect": {
@@ -849,7 +849,7 @@
     "name": "Slung Medicine Bag",
     "description": "Pay 1 and discard a card to regenerate target creature.",
     "equipmentSlot": "Neck",
-    "iconName": "MedicineBag",
+    "iconName": "SlungMedicineBag",
     "cost": 1000,
     "effect": {
       "startBattleWithCard": [
@@ -908,7 +908,7 @@
     "name": "Drudge Spellbook",
     "description": "-2 life. Pay B and exile 2 of your dead guys to make a drudge skeletons token.",
     "equipmentSlot": "Left",
-    "iconName": "DarkBoots",
+    "iconName": "DrudgeSpellbook",
     "cost": 2000,
     "effect": {
       "lifeModifier": -2,
@@ -946,7 +946,7 @@
     "name": "Disruptor's Robes",
     "description": "Pay 3 and tap to force target player to discard a card.",
     "equipmentSlot": "Body",
-    "iconName": "DisruptingScepter",
+    "iconName": "DisruptorsRobes",
     "effect": {
       "startBattleWithCard": [
         "Disrupting Scepter|LEA"
@@ -969,7 +969,7 @@
     "name": "Immortal Anklet",
     "description": "Pay 3 and tap to counter a spell targeting a permanent you control.",
     "equipmentSlot": "Boots",
-    "iconName": "RingofImmortals",
+    "iconName": "ImmortalAnklet",
     "effect": {
       "startBattleWithCard": [
         "Ring of Immortals|LEG"
@@ -1229,7 +1229,7 @@
     "name": "Crown of the Chosen",
     "description": "Tap to give target legendary creature +2/+2 until end of turn.",
     "equipmentSlot": "Neck",
-    "iconName": "SwordOfTheChosen",
+    "iconName": "CrownOfTheChosen",
     "cost": 4000,
     "effect": {
       "startBattleWithCard": [
@@ -1241,7 +1241,7 @@
     "name": "Sentry's Shield",
     "description": "A sturdy 1/1 that can pay 1 and let opponent draw to regenerate.",
     "equipmentSlot": "Left",
-    "iconName": "SentrysPlate",
+    "iconName": "SentrysShield",
     "cost": 2000,
     "effect": {
       "startBattleWithCard": [
@@ -1278,7 +1278,7 @@
     "name": "Braidwood Leathers",
     "description": "Pay 2 and sac to get a basic land from library to hand.",
     "equipmentSlot": "Body",
-    "iconName": "BraidwoodSextant",
+    "iconName": "BraidwoodLeathers",
     "cost": 3000,
     "effect": {
       "startBattleWithCard": [
@@ -1290,7 +1290,7 @@
     "name": "Noble's Silks",
     "description": "Pay 2 and sac to trade any number of cards in hand for new ones.",
     "equipmentSlot": "Body",
-    "iconName": "GoldStack",
+    "iconName": "NoblesSilks",
     "cost": 6000,
     "effect": {
       "startBattleWithCard": [
@@ -1364,7 +1364,7 @@
     "name": "Pyromaniac's Mask",
     "description": "Pay 1R and random discard or sac to ping for 1 damage.",
     "equipmentSlot": "Neck",
-    "iconName": "PyromaniacsCloak",
+    "iconName": "PyromaniacsMask",
     "cost": 3000,
     "effect": {
       "startBattleWithCard": [
@@ -1399,7 +1399,7 @@
   {
     "name": "Warren Tender's Baton",
     "equipmentSlot": "Left",
-    "iconName": "WarrenTendersCloak",
+    "iconName": "WarrenTendersBaton",
     "effect": {
       "lifeModifier": 3,
       "startBattleWithCard": [
@@ -1411,7 +1411,7 @@
   {
     "name": "Consumptive Vial",
     "equipmentSlot": "Right",
-    "iconName": "GooeyShoes",
+    "iconName": "ConsumptiveVial",
     "effect": {
       "lifeModifier": -2,
       "startBattleWithCard": [
@@ -1434,7 +1434,7 @@
   {
     "name": "Purgatory Priest's Robes",
     "equipmentSlot": "Body",
-    "iconName": "AnkhOfPurgatory",
+    "iconName": "PurgatoryPriestsRobes",
     "effect": {
       "startBattleWithCard": [
         "Purgatory|MIR"
@@ -1445,7 +1445,7 @@
   {
     "name": "Blessed Halo",
     "equipmentSlot": "Neck",
-    "iconName": "SerrasShield",
+    "iconName": "BlessedHalo",
     "effect": {
       "startBattleWithCard": [
         "Serra's Blessing|WTH"
@@ -1512,7 +1512,7 @@
   {
     "name": "Vampire's Dagger",
     "equipmentSlot": "Right",
-    "iconName": "VampireBite",
+    "iconName": "VampiresDagger",
     "effect": {
       "lifeModifier": -2,
       "startBattleWithCard": [
@@ -1524,7 +1524,7 @@
   {
     "name": "Belt of Worry Beads",
     "equipmentSlot": "Body",
-    "iconName": "WorryBeads",
+    "iconName": "BeltOfWorryBeads",
     "effect": {
       "startBattleWithCard": [
         "Worry Beads|MMQ"
@@ -1535,7 +1535,7 @@
   {
     "name": "Lance of Lurking Evil",
     "equipmentSlot": "Right",
-    "iconName": "SymbolOfThePit",
+    "iconName": "LanceOfLurkingEvil",
     "effect": {
       "startBattleWithCard": [
         "Lurking Evil|USG"
@@ -1582,7 +1582,7 @@
   {
     "name": "Armor of Madness",
     "equipmentSlot": "Body",
-    "iconName": "CrownOfMadness",
+    "iconName": "ArmorOfMadness",
     "effect": {
       "lifeModifier": -4,
       "startBattleWithCard": [
@@ -1594,7 +1594,7 @@
   {
     "name": "Joven's Boots",
     "equipmentSlot": "Boots",
-    "iconName": "JovensTools",
+    "iconName": "JovensBoots",
     "effect": {
       "startBattleWithCard": [
         "Joven's Tools|HML"
@@ -1606,7 +1606,7 @@
   {
     "name": "Yellow Scarves Spear",
     "equipmentSlot": "Right",
-    "iconName": "HorseHoove",
+    "iconName": "YellowScarvesSpear",
     "effect": {
       "lifeModifier": -2,
       "startBattleWithCard": [
@@ -1641,7 +1641,7 @@
   {
     "name": "Overwhelming Armor",
     "equipmentSlot": "Body",
-    "iconName": "OverwhelmingAxe",
+    "iconName": "OverwhelmingArmor",
     "effect": {
       "lifeModifier": -3,
       "startBattleWithCard": [
@@ -1710,7 +1710,7 @@
   {
     "name": "Jandor's Horseshoes",
     "equipmentSlot": "Boots",
-    "iconName": "JandorsSaddlebags",
+    "iconName": "JandorsHorseshoes",
     "effect": {
       "startBattleWithCard": [
         "Jandor's Saddlebags|ARN"
@@ -1743,7 +1743,7 @@
   {
     "name": "Dragon Blood Necklace",
     "equipmentSlot": "Neck",
-    "iconName": "DragonBlood",
+    "iconName": "DragonBloodNecklace",
     "effect": {
       "startBattleWithCard": [
         "Dragon Blood|USG"
@@ -1834,7 +1834,7 @@
   {
     "name": "Phyrexian Implant",
     "equipmentSlot": "Body",
-    "iconName": "PhyrexianGrimoire",
+    "iconName": "PhyrexianImplant",
     "effect": {
       "lifeModifier": -3,
       "startBattleWithCard": [
@@ -1906,7 +1906,7 @@
   {
     "name": "Yawgmoth's Armor",
     "equipmentSlot": "Body",
-    "iconName": "EyeOfHorror",
+    "iconName": "YawgmothsArmor",
     "effect": {
       "startBattleWithCard": [
         "Eye of Yawgmoth|NMS"
@@ -1918,7 +1918,7 @@
   {
     "name": "Ashnod's Greaves",
     "equipmentSlot": "Boots",
-    "iconName": "AshnodsBattleGear",
+    "iconName": "AshnodsGreaves",
     "effect": {
       "lifeModifier": 4,
       "startBattleWithCard": [
@@ -1941,7 +1941,7 @@
   {
     "name": "Winter Cap",
     "equipmentSlot": "Neck",
-    "iconName": "WinterBoots",
+    "iconName": "WinterCap",
     "effect": {
       "startBattleWithCard": [
         "Winter's Night|ALL"
@@ -2022,7 +2022,7 @@
   {
     "name": "Triassic Amulet",
     "equipmentSlot": "Neck",
-    "iconName": "TriassicEgg",
+    "iconName": "TriassicAmulet",
     "effect": {
       "lifeModifier": -3,
       "startBattleWithCard": [
@@ -2056,7 +2056,7 @@
   {
     "name": "Rhystic Amulet",
     "equipmentSlot": "Neck",
-    "iconName": "CaveDiversBoots",
+    "iconName": "RhysticAmulet",
     "effect": {
       "lifeModifier": -3,
       "startBattleWithCard": [
@@ -2137,7 +2137,7 @@
   {
     "name": "Attendant's Prayerbook",
     "equipmentSlot": "Left",
-    "iconName": "AttendantsRobes",
+    "iconName": "AttendantsPrayerbook",
     "effect": {
       "startBattleWithCard": [
         "Silent Attendant|INV"
@@ -2148,7 +2148,7 @@
   {
     "name": "Power Armor Greaves",
     "equipmentSlot": "Boots",
-    "iconName": "PowerArmor",
+    "iconName": "PowerArmorGreaves",
     "effect": {
       "startBattleWithCard": [
         "Power Armor|INV"
@@ -2159,7 +2159,7 @@
   {
     "name": "Staff of Azar",
     "equipmentSlot": "Left",
-    "iconName": "AmuletOfAzar",
+    "iconName": "StaffOfAzar",
     "effect": {
       "startBattleWithCard": [
         "Necropolis of Azar|AST"
@@ -2170,7 +2170,7 @@
   {
     "name": "Groundbreaker Mace",
     "equipmentSlot": "Right",
-    "iconName": "GroundbreakerBoots",
+    "iconName": "GroundbreakerMace",
     "effect": {
       "startBattleWithCard": [
         "Mishra's Groundbreaker|ALL"
@@ -2205,7 +2205,7 @@
   {
     "name": "Sulfuric Amulet",
     "equipmentSlot": "Neck",
-    "iconName": "SulfuricStaff",
+    "iconName": "SulfuricAmulet",
     "effect": {
       "startBattleWithCard": [
         "Sulfuric Vapors|USG"
@@ -2217,10 +2217,10 @@
     "name": "Djinn's Silks",
     "description": "Pay 5 and skip a draw to grant one wish for a sideboard card.",
     "equipmentSlot": "Body",
-    "iconName": "RingofThreeWishes",
+    "iconName": "DjinnsSilks",
     "effect": {
       "startBattleWithCard": [
-        "Ring of Ma'r\u00fbf|ARN"
+        "Ring of Ma'rûf|ARN"
       ]
     }
   },
@@ -2285,7 +2285,7 @@
   {
     "name": "Explorer's Hat",
     "equipmentSlot": "Neck",
-    "iconName": "ExplorersBoots",
+    "iconName": "ExplorersHat",
     "effect": {
       "lifeModifier": -5,
       "startBattleWithCard": [
@@ -2412,7 +2412,7 @@
   {
     "name": "Ivy Seer's Tome",
     "equipmentSlot": "Right",
-    "iconName": "IvySeersAmulet",
+    "iconName": "IvySeersTome",
     "effect": {
       "startBattleWithCard": [
         "Ivy Seer|UDS"
@@ -2469,7 +2469,7 @@
   {
     "name": "Paladin's Shield",
     "equipmentSlot": "Left",
-    "iconName": "PaladinsGreaves",
+    "iconName": "PaladinsShield",
     "effect": {
       "startBattleWithCard": [
         "Serra Paladin|HML"
@@ -2538,7 +2538,7 @@
   {
     "name": "Barrin's Robes",
     "equipmentSlot": "Body",
-    "iconName": "BarrinsCodex",
+    "iconName": "BarrinsRobes",
     "effect": {
       "startBattleWithCard": [
         "Barrin's Codex|USG"
@@ -2583,7 +2583,7 @@
   {
     "name": "Copper Angel's Axe",
     "equipmentSlot": "Right",
-    "iconName": "CopperAngelsAmulet",
+    "iconName": "CopperAngelsAxe",
     "effect": {
       "lifeModifier": -2,
       "startBattleWithCard": [
@@ -2645,7 +2645,7 @@
   {
     "name": "Clockwork Lance",
     "description": "A 0/3 that can be wound up to a 4/3 with mana.",
-    "iconName": "ClockworkRidersBoots",
+    "iconName": "ClockworkLance",
     "equipmentSlot": "Right",
     "cost": 20000,
     "effect": {
@@ -2657,7 +2657,7 @@
   {
     "name": "Onulet Shield",
     "description": "A 2/2 that gives 2 life on death.",
-    "iconName": "OnuletArmor",
+    "iconName": "OnuletShield",
     "equipmentSlot": "Left",
     "cost": 12000,
     "effect": {
@@ -2669,7 +2669,7 @@
   {
     "name": "Ring of Unmaking",
     "description": "Pay 5 to exile a creature, artifact, or land once.",
-    "iconName": "AmuletOfUnmaking",
+    "iconName": "RingOfUnmaking",
     "equipmentSlot": "Right",
     "cost": 10000,
     "effect": {
@@ -2736,7 +2736,7 @@
     "name": "Santa's Hat",
     "description": "Start with Jack-in-the-Mox in play. -1 starting hand.",
     "equipmentSlot": "Neck",
-    "iconName": "ChristmasGift",
+    "iconName": "SantasHat",
     "effect": {
       "changeStartCards": -1,
       "startBattleWithCard": [
@@ -2748,7 +2748,7 @@
     "name": "Krampus's Horns",
     "description": "Start with Charcoal Diamond in play. -1 starting hand, -2 life.",
     "equipmentSlot": "Neck",
-    "iconName": "LumpOfCoal",
+    "iconName": "KrampussHorns",
     "effect": {
       "changeStartCards": -1,
       "lifeModifier": -2,
@@ -2821,7 +2821,7 @@
     "name": "Jalum Robes",
     "description": "Pay 2 and tap to draw a card, then discard a card.",
     "equipmentSlot": "Body",
-    "iconName": "JalumTome",
+    "iconName": "JalumRobes",
     "cost": 10000,
     "effect": {
       "startBattleWithCard": [
@@ -2833,7 +2833,7 @@
     "name": "Jayemdae Robes",
     "description": "Pay 4 and tap to draw a card.",
     "equipmentSlot": "Body",
-    "iconName": "JayemdaeTome",
+    "iconName": "JayemdaeRobes",
     "cost": 10000,
     "effect": {
       "startBattleWithCard": [
@@ -2845,7 +2845,7 @@
     "name": "Fool's Outfit",
     "description": "Pay 4 and tap to draw a card. Skip your next draw step.",
     "equipmentSlot": "Body",
-    "iconName": "FoolsTome",
+    "iconName": "FoolsOutfit",
     "cost": 12000,
     "effect": {
       "startBattleWithCard": [
@@ -2879,7 +2879,7 @@
     "name": "Kry Greaves",
     "description": "Pay 2 to boost your creature's toughness.",
     "equipmentSlot": "Boots",
-    "iconName": "KryShield",
+    "iconName": "KryGreaves",
     "effect": {
       "startBattleWithCard": [
         "Kry Shield|LEG"

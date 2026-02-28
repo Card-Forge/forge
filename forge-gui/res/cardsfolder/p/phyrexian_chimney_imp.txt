@@ -1,5 +1,5 @@
 Name:Phyrexian Chimney Imp
-ManaCost:4 PB
+ManaCost:4 BP
 Types:Creature Phyrexian Imp
 PT:2/3
 K:Flying

@@ -90,7 +90,7 @@
     ]
    }
 ]</property>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;SIsay's Ring|VIS&quot;, &quot;Short Sword|DOM&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Sisay's Ring|VIS&quot;, &quot;Short Sword|DOM&quot;]
 }</property>
     <property name="enemy" value="Sisay"/>
     <property name="speedModifier" type="float" value="30"/>
