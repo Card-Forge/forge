@@ -219,8 +219,8 @@ public final class GameMenu {
         final String[] tooltips = {
             "Creatures are never grouped or stacked. Identical lands and tokens are stacked (up to 5). Identical artifacts and enchantments are stacked (up to 4). Stacking fans cards out so each copy is partially visible.",
             "Same as Default, but creatures are also stacked (up to 4).",
-            "Group identical creatures and tokens (5 or more) into a single compact pile with a count badge.",
-            "Group all identical permanents (5 or more) into a single compact pile with a count badge."
+            "Group identical creatures and tokens into a single compact pile with a count badge.",
+            "Group all identical permanents into a single compact pile with a count badge."
         };
         for (int i = 0; i < options.length; i++) {
             SkinnedRadioButtonMenuItem item = new SkinnedRadioButtonMenuItem(options[i]);

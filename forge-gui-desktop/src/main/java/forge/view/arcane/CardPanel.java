@@ -116,7 +116,10 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private boolean hasFlash;
     private CachedCardImage cachedImage;
     private int groupCount;
+    private Font badgeFont;
+    private int badgeFontCardWidth; // cardWidth when badgeFont was last computed
 
+    private static final Color BADGE_BG_COLOR = new Color(0, 0, 0, 180);
     private static Font smallCounterFont;
     private static Font largeCounterFont;
 
@@ -511,8 +514,12 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
+        if (badgeFont == null || badgeFontCardWidth != cardWidth) {
+            badgeFont = new Font("Dialog", Font.BOLD, Math.max(10, cardWidth / 5));
+            badgeFontCardWidth = cardWidth;
+        }
+
         String text = "\u00D7" + groupCount;
-        Font badgeFont = new Font("Dialog", Font.BOLD, Math.max(10, cardWidth / 5));
         FontMetrics fm = g2d.getFontMetrics(badgeFont);
 
         int textWidth = fm.stringWidth(text);
@@ -523,9 +530,10 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         int badgeHeight = textHeight + padY * 2;
         int badgeX = cardXOffset + 2;
         int badgeY = cardYOffset + 2;
+        int cornerRadius = Math.max(4, cardWidth / 16);
 
-        g2d.setColor(new Color(0, 0, 0, 180));
-        g2d.fillRoundRect(badgeX, badgeY, badgeWidth, badgeHeight, 6, 6);
+        g2d.setColor(BADGE_BG_COLOR);
+        g2d.fillRoundRect(badgeX, badgeY, badgeWidth, badgeHeight, cornerRadius, cornerRadius);
 
         g2d.setColor(Color.WHITE);
         g2d.setFont(badgeFont);
@@ -536,16 +544,28 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         if (groupCount < 2) {
             return false;
         }
-        // Mouse coordinates are container-relative (from PlayArea), so use
-        // getCardX()/getCardY() which convert panel-internal offsets to
-        // container coordinates (getX() + cardXOffset).
-        int badgeX = getCardX() + 2;
-        int badgeY = getCardY() + 2;
-        // Use generous hit area to cover the font-metrics-based badge size
+        // Badge is drawn at (cardXOffset+2, cardYOffset+2) in the card's local
+        // coordinate space. Mouse coordinates are container-relative. When the
+        // card is tapped, the graphics are rotated but mouse events are not, so
+        // we must inverse-rotate the mouse point into the card's local frame.
+        int localX = mouseX - getX();
+        int localY = mouseY - getY();
+        if (tappedAngle > 0) {
+            float pivotX = cardXOffset + cardWidth / 2f;
+            float pivotY = cardYOffset + cardHeight - cardWidth / 2f;
+            double cos = Math.cos(-tappedAngle);
+            double sin = Math.sin(-tappedAngle);
+            float dx = localX - pivotX;
+            float dy = localY - pivotY;
+            localX = (int) Math.round(cos * dx - sin * dy + pivotX);
+            localY = (int) Math.round(sin * dx + cos * dy + pivotY);
+        }
+        int badgeX = cardXOffset + 2;
+        int badgeY = cardYOffset + 2;
         int badgeWidth = Math.max(30, cardWidth / 3);
         int badgeHeight = Math.max(20, cardHeight / 6);
-        return mouseX >= badgeX && mouseX <= badgeX + badgeWidth
-            && mouseY >= badgeY && mouseY <= badgeY + badgeHeight;
+        return localX >= badgeX && localX <= badgeX + badgeWidth
+            && localY >= badgeY && localY <= badgeY + badgeHeight;
     }
 
     private void displayIconOverlay(final Graphics g, final boolean canShow) {
