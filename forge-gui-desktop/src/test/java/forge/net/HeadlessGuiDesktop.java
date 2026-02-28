@@ -191,32 +191,7 @@ public class HeadlessGuiDesktop extends GuiDesktop {
         // No-op - no audio in headless mode
     }
 
-    // ========== EDT methods - execute immediately in headless mode ==========
-
-    /**
-     * Execute runnable immediately in headless mode.
-     * In normal GUI mode, this uses SwingUtilities.invokeLater which requires an EDT.
-     * Since headless testing has no EDT, we execute immediately to prevent deadlocks.
-     */
-    @Override
-    public void invokeInEdtLater(final Runnable proc) {
-        // Execute immediately - no EDT in headless mode
-        proc.run();
-    }
-
-    /**
-     * Execute runnable immediately in headless mode.
-     */
-    @Override
-    public void invokeInEdtNow(final Runnable proc) {
-        proc.run();
-    }
-
-    /**
-     * Execute runnable immediately and wait (same as invokeInEdtNow in headless mode).
-     */
-    @Override
-    public void invokeInEdtAndWait(final Runnable proc) {
-        proc.run();
-    }
+    // EDT methods intentionally NOT overridden — inherits real SwingUtilities
+    // threading from GuiDesktop. This preserves two-thread (Netty + EDT) concurrency
+    // semantics so tests can catch race conditions.
 }

@@ -23,6 +23,7 @@ import forge.gamemodes.net.FullStatePacket;
 import forge.gamemodes.net.GameProtocolSender;
 import forge.gamemodes.net.NetworkDebugLogger;
 import forge.gamemodes.net.ProtocolMethod;
+import forge.gui.control.GameEventForwarder;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
@@ -48,6 +49,8 @@ public class NetGuiGame extends NetworkGuiGame {
     private boolean initialSyncSent = false;
     private boolean fallbackLogged = false;  // Prevent duplicate fallback log messages
     private volatile boolean paused;
+    private GameEventForwarder forwarder;
+    private boolean flushing;
 
     public NetGuiGame(final RemoteClient client) {
         this.sender = new GameProtocolSender(client);
@@ -97,13 +100,30 @@ public class NetGuiGame extends NetworkGuiGame {
         deltaSyncManager.processAcknowledgment(clientIndex, sequenceNumber);
     }
 
+    public void setForwarder(GameEventForwarder forwarder) {
+        this.forwarder = forwarder;
+    }
+
+    private void flushPendingEvents() {
+        if (forwarder != null && !flushing) {
+            flushing = true;
+            try {
+                forwarder.flush();
+            } finally {
+                flushing = false;
+            }
+        }
+    }
+
     private void send(final ProtocolMethod method, final Object... args) {
         if (paused) { return; }
+        flushPendingEvents();
         sender.send(method, args);
     }
 
     private <T> T sendAndWait(final ProtocolMethod method, final Object... args) {
         if (paused) { return null; }
+        flushPendingEvents();
         return sender.sendAndWait(method, args);
     }
 

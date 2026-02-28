@@ -40,6 +40,13 @@ import forge.util.ITriggerEvent;
  */
 public class HeadlessNetworkGuiGame extends NetworkGuiGame {
 
+    // Tracking fields for test assertions (used by TestTrueNetworkTraffic)
+    private final java.util.concurrent.atomic.AtomicInteger setGameViewCount = new java.util.concurrent.atomic.AtomicInteger(0);
+    private volatile boolean openViewCalled = false;
+
+    public int getSetGameViewCount() { return setGameViewCount.get(); }
+    public boolean isOpenViewCalled() { return openViewCalled; }
+
     // ========================================
     // Abstract methods from parent classes
     // ========================================
@@ -73,7 +80,13 @@ public class HeadlessNetworkGuiGame extends NetworkGuiGame {
 
     @Override
     public void openView(TrackableCollection<PlayerView> myPlayers) {
-        // No-op - no GUI to open
+        openViewCalled = true;
+    }
+
+    @Override
+    public void setGameView(forge.game.GameView gameView) {
+        super.setGameView(gameView);
+        setGameViewCount.incrementAndGet();
     }
 
     @Override
