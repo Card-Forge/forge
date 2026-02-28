@@ -1,4 +1,4 @@
-Name:Slithering
+Name:Slithering Cryptid
 ManaCost:2 GU
 Types:Creature Fish Mutant
 PT:2/3

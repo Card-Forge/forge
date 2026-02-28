@@ -53,7 +53,7 @@
   </object>
   <object id="71" template="../../../../common/maps/obj/enemy.tx" x="363.848" y="73.9779">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Wayfarer's Bauble|C14&quot;, &quot;Stoneforge Masterwork|OGW&quot;, &quot;Descendants' Path|LCC&quot;, &quot;Acidic Sliver|STH&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Descendants' Path|LCC&quot;, &quot;Acidic Sliver|STH&quot;]}"/>
     <property name="enemy" value="Sliver Overlord"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="60"/>
@@ -61,7 +61,7 @@
   </object>
   <object id="72" template="../../../../common/maps/obj/enemy.tx" x="395.996" y="196.677">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Wayfarer's Bauble|C14&quot;, &quot;Stoneforge Masterwork|OGW&quot;, &quot;Descendants' Path|LCC&quot;, &quot;Enduring Sliver|MH1&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Descendants' Path|LCC&quot;, &quot;Enduring Sliver|MH1&quot;]}"/>
     <property name="enemy" value="Sliver Legion"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="100"/>
@@ -69,7 +69,7 @@
   </object>
   <object id="73" template="../../../../common/maps/obj/enemy.tx" x="391.174" y="368.67">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Wayfarer's Bauble|C14&quot;, &quot;Stoneforge Masterwork|OGW&quot;, &quot;Descendants' Path|LCC&quot;, &quot;Sliversmith|FUT&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Stoneforge Masterwork|OGW&quot;, &quot;Descendants' Path|LCC&quot;, &quot;Sliversmith|FUT&quot;]}"/>
     <property name="enemy" value="Sliver Weftwinder"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="100"/>
@@ -77,7 +77,7 @@
   </object>
   <object id="74" template="../../../../common/maps/obj/enemy.tx" x="85.7657" y="165.6">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Wayfarer's Bauble|C14&quot;, &quot;Stoneforge Masterwork|OGW&quot;, &quot;Descendants' Path|LCC&quot;, &quot;Plated Sliver|LGN&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;,  &quot;Descendants' Path|LCC&quot;, &quot;Plated Sliver|LGN&quot;]}"/>
     <property name="enemy" value="Sliver Hivelord"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="100"/>
@@ -85,7 +85,7 @@
   </object>
   <object id="75" template="../../../../common/maps/obj/enemy.tx" x="222.396" y="90.0519">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Wayfarer's Bauble|C14&quot;, &quot;Stoneforge Masterwork|OGW&quot;, &quot;Descendants' Path|LCC&quot;, &quot;Spectral Sliver|LGN&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Descendants' Path|LCC&quot;, &quot;Spectral Sliver|LGN&quot;]}"/>
     <property name="enemy" value="Sliver Gravemother"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="100"/>

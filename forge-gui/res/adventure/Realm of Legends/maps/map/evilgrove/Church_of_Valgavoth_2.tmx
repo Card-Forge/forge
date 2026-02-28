@@ -155,7 +155,7 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Murky Sewer|DSK&quot;, &quot;Neglected Manor|DSK&quot;, &quot;Razortrap Gorge|DSK&quot;, &quot;Strangled Cemetery|DSK&quot;, &quot;Valgavoth, Harrower of Souls|DSC&quot;, &quot;nowhere to run|DSK&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Murky Sewer|DSK&quot;, &quot;Razortrap Gorge|DSK&quot;, &quot;Unholy Annex|DSK&quot;, &quot;Cramped Vents|DSC&quot;, &quot;Funeral Room|DSK&quot;, &quot;nowhere to run|DSK&quot;]}"/>
     <property name="enemy" value="Valgavoth"/>
    </properties>
   </object>

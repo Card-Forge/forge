@@ -1,8 +1,8 @@
 [metadata]
 Name=Eloise, Nephalia Sleuth
-[commander]
+[Commander]
 1 Eloise, Nephalia Sleuth|MIC
-[main]
+[Main]
 1 Wilhelt, the Rotcleaver|MIC
 1 Aetherspouts|MIC
 1 Arcane Signet|MIC
@@ -20,7 +20,7 @@ Name=Eloise, Nephalia Sleuth
 1 Curse of the Restless Dead|MIC
 1 Curse of Unbinding|MIC
 1 Dark Salvation|MIC
-1 watery grave|gtc
+1 Watery Grave|GTC
 1 Death Baron|MIC
 1 Dimir Aqueduct|MIC
 1 Diregraf Captain|MIC

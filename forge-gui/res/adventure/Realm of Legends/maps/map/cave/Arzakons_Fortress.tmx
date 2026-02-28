@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="89">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Sol Ring&quot;, &quot;Black Lotus&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_2.tsx"/>
+ <layer id="1" name="Background" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt10EKwjAQQNEssildeVtPIvQQc0cpUgxDmtomkzrhLx64KNpPOjouUwgLAAAAYOg5h/CafrNee/f91jb8Q8sjfkj8vr7SkLZs71di1dGiQbeUeqw7ahs2ukF/jqcOfSbeO/T8WXeIYYdu8d4hA3SkLV7nQz9bnjtGea56zLkYn0eP7930vFvvJbndxKIjtzO02BNzM9FrPmpbdMNdv4O64+z/qKOG3h0S9++rtMOeubZ1BwAAAABgDG/+mcqs
+  </data>
+ </layer>
+ <layer id="7" name="Ground" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJy1WmtuE0EMniQrld3kDm3VY4S2+VP1FMBZeF2hUosUcRPgLIFTIARrJZ9iHNvjmZ180ipSMg9/fo3Hm2Wf0odlSr+GZKIbxzwpz7zXx2/H7++c9SQeB1uGzbBf73Y4jvtprN2P465X/l7r4Sg7rbk21vr7ar/v1uCoYXnQJT1cDnCAvvi4nO49dBnZOAfPJg/K90uhS77O7XA6FlwskA5KfMLiYNlkd/ANjQuXYev4LeFypdsEcy0dWPvNDnt1bO68/1+ONdMN12WtX1iySB1qHCi2SJfYm8cf0AnZOeg3cKZ4vFrtPwl8XQtk7/vh+Cn9lvZbMHkWCg/kCXpob8Q8H3cf0K1lY9ioRc601njP5OdxCH2TfjaKfnLgPklokTMRM1bsWeu39MkocjnTin8PrXxSYtMg/slXvZw4U/RR65MS3L5RSP8EPLtgHz6v1ie1dVv7p7Y3/AGPxqX2PDiHf1L+0ewk93wqsH0ULfyT5Edt4dUDD4Ezqwat/dPjENlPw5t5Su/m+XFT/LOEA4DzN8rlZpbSt/H5PovxyeVMDVEeUkdUH0VsTXhepPRp/Pyc9nzeZuzj2QX1lYzhSI07NR8BnM+fjF2snEk5plNyJuyQqxEitZwFGR+/53u7WDbx8uXusL/MuyU1DuxSAuLwY5T5enb8juzyMj5fFqfjvZyJMySXM6HvnTNG2oXktPwdHD4mXeZSkB6vhL+h3pbjInc14oI7EOkW8cu5tOagwavHoG8ZZ969XfOTmwyH6JliIdcHIPTie877zqgvJXBmSFnhh2QrLWfV3g0jkD2E3F2GAH/j8c19jfKvZauau2EUyN0lkOd4ztdKEdGnBsoDJfUC4gZ2eTZyrYfafloONedhrfyl/TQ5H7Bk5Xm3NWrvhhx8ntcDJ0RrxFLU3A05ztXb3l2Mcy/K55XeDQmlvW2rR6GhhkfN3TDS25axvS7oH9bao+aucHIuQMY+rncLtTyAaD+Nj+G92ly+iOppKo9oP43Hu+RgnfklNp/KgxDppwGl/YboeSh5tH6no9VLr4f290PNHt47HYD30zxE+mnR+6EEf6dj+VWu317aT4ONvZ519E6uvdOJxAc/j2r7abn3xNH7oZXnJI9cz7y2n9aJvb8qc3P3Q4JVF3EekZ551/v5nuDly67AjvJ+yCHXBo+Snvm5+2kcWr7T6iJuj9Y1ck0/zVpH1gzS5lPOwZJ+GvBYaR8t73JM4VHSTyMQB+/dMnJixBdl7HAepWe59T8gyMXzZav/PkkuiH9pj8hZznGp/K7108793yfNr2re/3No/bR/T/F/ig==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1Y0JwjAQBeCkHcUVxG20w4grWK3DqCuoE7iHYI54NJ6SRkR5hffBkVBouUd+6hwRERER0e+dq7JCJv1dCno8AWcpzaAQs6QZ5mFchGqqOG8yvSJlSfuQvo/euWWY72rntnUcc1CyzJJ1SDN8YgqS45sMKCSH7J8u2UND58JCWQ9x9XHUtbmNOIfUZKT7y+awd5Q+zxXielglOd69929D/ZT0ibAebehxM9BnLsfax28g0CxyVx18+Z2LlEG1jzO+CvO9f81j/ymIGZRm6cx/0d5jyBlU659Lz7l9TkRERERERES9O8IlXmU=
+  </data>
+ </layer>
+ <layer id="8" name="Ornamental Walls" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1tEJgCAURmFrJmn/IZqgSULiggSmpeGvnO81HzzcSp0DAAAA/ret+TW+YE1PJQ1GteVNg1Fr+dJgVFpCw165F5UWXJhHe8fSewdt1HQovVehY4aZPHXk+hTmYWfg6POoOcuNwjyCGe4lZoZ7orm3+OjbST1TFe831aHekDLyfwwAAAAAoO0Eo8ARfQ==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="50" height="50">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzdWkFywjAMDLd+BW7tV+GFwBd6bsd0mDFGkrWyZDndC0wS2yt5JVmBbaNx+WBuMPg6YM974UzwvCDPduzU+IGad89o/Sf5wMv2s3Wcs+857XD4DNI9N297HbEfjWkO7Zqoz6xAfD2LkweQPdxLrqnrgUV3UXGVjXr/ar9k1c9sFB9k2K6tN1Hxlh3HGvspjlre/zV+Obuuh9fP9nomNHu2Ak8K1nOhBMlWrlZpdT+Sy27Hbbsf/7739qO+X4/jOEk1+HlWEp8B8tVP4XJ6v96ziRvn2c9FYIXYya4nLbzidqSOWPYFWc+7D0L5Zmi9xkzdZ/VzFhs9+zlEj706UEDZoxk32s+14PqgAq4OSCh2WcbNAlLPZyLifBWN1WpdwYqcNLD2c728ROWI51qR/X677qrvVUb0sletFUj5Jvs8Q/VB2e8xtHpGfWf1Ncdnz5pcER7+HNVzj4OFo7aOZOSCrN+1EHxnE0iAVw2P0HMPrY494y8bNT+pn5MwS88r9TmonqH3CdjUDyB8IvLyiM49+XA8suJQWndEz9T/e0b7OYTPynntF2fpYb8=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="73" template="../../../../common/maps/obj/gold.tx" x="350.25" y="232.833"/>
+  <object id="75" template="../../../../common/maps/obj/enemy.tx" x="390.751" y="331.084">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;With a howl, the massive fiend falls for the final time. What the ancients could only seal, you have finally put down for good.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Faerie Dragon&quot;, &quot;Goblin Polka Band&quot;, &quot;Prismatic Dragon&quot;, &quot;Necropolis of Azar&quot;, &quot;Power Struggle&quot;, &quot;Pandora's Box&quot;]}"/>
+    <property name="enemy" value="Arzakon"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="80"/>
+   </properties>
+  </object>
+  <object id="78" template="../../obj/treasure.tx" x="392.333" y="237">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Aswan Jaguar&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Faerie Dragon&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Goblin Polka Band&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Necropolis of Azar&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Orcish Catapult&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Power Struggle&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Prismatic Dragon&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Rainbow Knights&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Whimsy&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Pandora's Box&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Gem Bazaar&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;X&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="79" template="../../../../common/maps/obj/gold.tx" x="437.166" y="234.5"/>
+  <object id="80" template="../../../../common/maps/obj/manashards.tx" x="330.5" y="234"/>
+  <object id="82" template="../../../../common/maps/obj/manashards.tx" x="456" y="236"/>
+  <object id="83" template="../../../../common/maps/obj/entry_up.tx" x="386.75" y="523.5" width="29" height="30">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="84" template="../../../../common/maps/obj/dialog.tx" x="382.167" y="464.583" width="33.6667" height="8.83333" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The barren fortress ahead has been entirely hollowed out, containing only a single resident, the towering demonic entity that stands before you. It seems it can barely move, bound by the remnant wards that still hold despite the fortress's ruined state. You recall ancient tales of a being known as Arzakon, the Doom of Shandalar, that was sealed away milennia ago - it would seem this is that very same being.
+
+You sense there is nothing essential to your quest in this place, but if you wish to test your might against a truly mighty and ancient evil, there is nothing stopping you.
+
+Your manasight stone blazes with power, near-blindingly bright.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="85" template="../../../../common/maps/obj/manashards.tx" x="312.333" y="252.333"/>
+  <object id="86" template="../../../../common/maps/obj/manashards.tx" x="474.333" y="252.667"/>
+  <object id="87" template="../../../../common/maps/obj/gold.tx" x="369.333" y="233"/>
+  <object id="88" template="../../../../common/maps/obj/gold.tx" x="417" y="234.333"/>
+ </objectgroup>
+</map>

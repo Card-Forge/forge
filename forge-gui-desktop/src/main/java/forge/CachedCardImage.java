@@ -6,7 +6,7 @@ import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.util.ImageFetcher;
 import forge.util.SwingImageFetcher;
-
+import org.tinylog.Logger;
 
 public abstract class CachedCardImage implements ImageFetcher.Callback {
     final CardView card;
@@ -25,7 +25,7 @@ public abstract class CachedCardImage implements ImageFetcher.Callback {
             BufferedImage image = ImageCache.getImageNoDefault(card, viewers, width, height);
             if (image == null) {
                 String key = card.getCurrentState().getImageKey(viewers);
-                System.err.println("Fetch due to missing key: " + key + " for " + card);
+                Logger.debug("Fetch due to missing key: " + key + " for " + card);
                 fetcher.fetchImage(key, this);
             }
         }

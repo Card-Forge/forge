@@ -8,4 +8,4 @@ T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ Tri
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 DeckHas:Ability$Counters
 DeckHints:Ability$LifeGain
-Oracle:Sneak {W} (You may cast this spell for {W} if you also return an unblocked attacked you control to hand during the declare blockers step. He enters tapped and attacking.)\nLifelink\nWhenever you gain life, put a +1/+1 counter on Leonardo.
+Oracle:Sneak {W} (You may cast this spell for {W} if you also return an unblocked attacker you control to hand during the declare blockers step. He enters tapped and attacking.)\nLifelink\nWhenever you gain life, put a +1/+1 counter on Leonardo.

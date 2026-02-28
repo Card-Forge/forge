@@ -4,7 +4,7 @@ Types:Legendary Creature Mutant Ninja Human Turtle
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When NICKNAME enter, ABILITY
 SVar:TrigCharm:DB$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBExile,DBToken | AdditionalDescription$ . Each mode must target a different player.
-SVar:DBExile:DB$ Dig | ValidTgts$ Player | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | RememberTargets$ True | SubAbility$ DBEffect | SpellDescription$ Target player exiles the top card of their library. Until that player's next end step, they may play that card without paying its mana cost.
+SVar:DBExile:DB$ Dig | ValidTgts$ Player | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Target player exiles the top card of their library. Until that player's next end step, they may play that card without paying its mana cost.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ CRPlay | Duration$ Permanent | ExileOnMoved$ Exile | RememberObjects$ Remembered & RememberedOwner | Triggers$ RemoveTrigger | SubAbility$ DBCleanup
 SVar:CRPlay:Mode$ Continuous | Affected$ Card.IsRemembered | MayPlay$ True | MayPlayWithoutManaCost$ True | MayPlayPlayer$ CardOwner | AffectedZone$ Exile | Description$ Until that player's next end step, they may play that card without paying its mana cost.
 SVar:RemoveTrigger:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player.IsRemembered | Static$ True | Execute$ TrigExile

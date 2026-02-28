@@ -16,6 +16,7 @@ import forge.game.zone.ZoneType;
 import forge.gamemodes.match.AbstractGuiGame;
 import forge.gamemodes.net.GameProtocolSender;
 import forge.gamemodes.net.ProtocolMethod;
+import forge.gui.control.GameEventForwarder;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
 import forge.player.PlayerZoneUpdate;
@@ -33,6 +34,8 @@ public class NetGuiGame extends AbstractGuiGame {
     private final GameProtocolSender sender;
     private final int slotIndex;
     private volatile boolean paused;
+    private GameEventForwarder forwarder;
+    private boolean flushing;
 
     public NetGuiGame(final IToClient client, final int slotIndex) {
         this.sender = new GameProtocolSender(client);
@@ -55,13 +58,30 @@ public class NetGuiGame extends AbstractGuiGame {
         return paused;
     }
 
+    public void setForwarder(GameEventForwarder forwarder) {
+        this.forwarder = forwarder;
+    }
+
+    private void flushPendingEvents() {
+        if (forwarder != null && !flushing) {
+            flushing = true;
+            try {
+                forwarder.flush();
+            } finally {
+                flushing = false;
+            }
+        }
+    }
+
     private void send(final ProtocolMethod method, final Object... args) {
         if (paused) { return; }
+        flushPendingEvents();
         sender.send(method, args);
     }
 
     private <T> T sendAndWait(final ProtocolMethod method, final Object... args) {
         if (paused) { return null; }
+        flushPendingEvents();
         return sender.sendAndWait(method, args);
     }
 
@@ -163,8 +183,6 @@ public class NetGuiGame extends AbstractGuiGame {
         updateGameView();
         send(ProtocolMethod.setPanelSelection, hostCard);
     }
-
-
 
     @Override
     public GameState getGamestate() {
@@ -298,6 +316,14 @@ public class NetGuiGame extends AbstractGuiGame {
     public void handleGameEvent(GameEvent event) {
         updateGameView();
         send(ProtocolMethod.handleGameEvent, event);
+    }
+
+    @Override
+    public void handleGameEvents(List<GameEvent> events) {
+        updateGameView();
+        for (GameEvent event : events) {
+            send(ProtocolMethod.handleGameEvent, event);
+        }
     }
 
     @Override

@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Relic Amulet&quot;, &quot;Academy Loremaster&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Tome of the Infinite&quot;, &quot;Wizard Class&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>

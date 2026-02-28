@@ -17,7 +17,7 @@
  </layer>
  <layer id="6" name="Collision" width="40" height="35">
   <data encoding="base64" compression="zlib">
-   eJzd1kFuwjAQBVBvWcTqsmfoDVgEipB6FM5Fy5FYsOEw1YiO+B08mXEc16ZfGkECSV6ceJIQfNnFEK4T9R6dO1owh9X9+1Yc/239e3nszCfT0kefvfq45vg28VZarN//g48/T0MIx5/C8Lqv4XH7GmHTOt6K19F5vr48ni+PQck45PqoWvvOm2kfj+Nl7/dZPZr2leOTRnShE/ugFTLS/SjnC9m8PrZpPlm43+Ogl3SW+jSXFqsHYw/K7dfsSY0dnZfV32r60IM+NLbySY/mw/77qfTaOT6tT1C4h3l82Ce0sczxUeictblYw0fh/iFrl9hmjNM+69rO8eVE+vB4Hpt2b/Tmw2ftM/hOxrOh1Oe1adcX78WSe7KWL2VMjan2rorvrDmWHJ80fqzSxeM6Kv+p6cPw8egdkKsHH86dHsdPzu3c/NX1XcJnLbfyeZdb+Lzp2UaxfKXzYIk8s6+HpGzf4I9ydw==
+   eJzd1jsOwjAMBuCsDI0YOQM36FAeQuIonIvHkRhYOAyywMK4ce00DQn8kgXlUb66jalztmy9c/eB2njjjibMYfZ+vma/v2w/t7vKfDwlffBYqw9rjG/lnyVFe/8ffPh4aZw7vooGXzs3/e/nCJpa/yx8DY5zMe8fL/YgpQ+xPqjSvutq2Id9vO3sPm1Gw75ifNxIXdRJ56AWMML1yNcL2Kw+tEk+XnS/x0Yu7kz1SS4p2gymMyh2XqMn1Ds4Lm2+5fRRD/VRYykf90g+On9Pwqwd45PmBARnmMVH54TUyxgfBI5ZWos5fBCcH7y2ge90ftinndsxvphwH/09i026Nmrz0f/aX/BdlP+GVJ/VJp1fei2mXJO5fPtZ3xfqqXSvSu9ZYyxWX6iPYA4V9rUTPpPTx3sKBfeAWDX46NqpsX98bcfmW+d3Cp+2Xcpn3S7hs6ZmG0Tzpa6DKfLLvhoSsj0AKwdyxg==
   </data>
  </layer>
  <layer id="1" name="Background" width="40" height="35">
@@ -119,7 +119,7 @@
   </object>
   <object id="75" template="../../../../common/maps/obj/enemy.tx" x="224.849" y="78.7118">
    <properties>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Vicious Conquistador|XLN&quot;, &quot;Martyr of Dusk|RIX&quot;, &quot;Plains|LCI|2&quot;, &quot;Swamp|LCI|2&quot; ] }"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Charismatic Conqueror&quot;, &quot;Legion's Landing&quot;, &quot;Canonized in Blood&quot;, &quot;Tarrian's Soulcleaver&quot; ] }"/>
     <property name="enemy" value="Arguel"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="40"/>

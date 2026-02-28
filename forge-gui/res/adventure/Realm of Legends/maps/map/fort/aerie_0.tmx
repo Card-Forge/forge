@@ -90,7 +90,7 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Aerie Mystics|C13&quot;, &quot;Animal Sanctuary|M21&quot;, &quot;Valley Floodcaller|BLB&quot;, &quot;Soulcatchers' Aerie|JUD&quot;, &quot;Mask of Memory|CMR&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Aerie Mystics|C13&quot;, &quot;Animal Sanctuary|M21&quot;, &quot;Pit Trap|ICE&quot;, &quot;Soulcatchers' Aerie|JUD&quot;, &quot;Leonin Bladetrap&quot;]}"/>
     <property name="enemy" value="Derevi"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>

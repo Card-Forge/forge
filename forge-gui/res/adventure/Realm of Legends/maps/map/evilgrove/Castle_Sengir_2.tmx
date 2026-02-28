@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Castle Sengir&quot;, &quot;Sengir Vampire&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Castle Sengir&quot;, &quot;Greater Werewolf&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -36,7 +36,7 @@
   </object>
   <object id="79" template="../../../../common/maps/obj/enemy.tx" x="744.5" y="168.62">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ebon Stronghold|5ED&quot;, &quot;Baron Sengir|HML&quot;, &quot;Bad Moon|LEA&quot;, &quot;Seal of Doom|NEM&quot;, &quot;Ceremonial Knife|VOW&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Baron Sengir|HML&quot;, &quot;Cemetery Gate&quot;, &quot;Seal of Doom|NEM&quot;]}"/>
     <property name="enemy" value="Sengir"/>
     <property name="speedModifier" type="float" value="0"/>
     <property name="threatRange" type="int" value="0"/>

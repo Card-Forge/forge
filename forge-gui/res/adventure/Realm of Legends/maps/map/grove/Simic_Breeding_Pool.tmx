@@ -64,6 +64,7 @@
   <object id="60" template="../../../../common/maps/obj/waypoint.tx" x="195.713" y="150.47"/>
   <object id="61" template="../../../../common/maps/obj/enemy.tx" x="247.943" y="65.8219">
    <properties>
+       <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Novijen, Heart of Progress&quot;, &quot;Simic Ascendancy&quot;]}"/>
     <property name="enemy" value="Prime Speaker Zegana"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="10"/>
