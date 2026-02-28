@@ -53,18 +53,18 @@
       "sellFactor": 0.6,
       "shardSellRatio": 0.95,
       "starterDecks": {
-        "W": "decks/starter/USG - White.dck",
-        "U": "decks/starter/UDS - BlueWhite.dck",
-        "B": "decks/starter/STH - Black.dck",
-        "R": "decks/starter/UDS - BlueRed.dck",
-        "G": "decks/starter/UDS - GreenBlack.dck"
+        "W": "decks/starter/precon/USG - Sleeper.dck",
+        "U": "decks/starter/precon/UDS - Enchanter.dck",
+        "B": "decks/starter/precon/STH - Migraine.dck",
+        "R": "decks/starter/precon/UDS - Battle Surge.dck",
+        "G": "decks/starter/precon/UDS - Fiendish Nature.dck"
       },
       "constructedStarterDecks": {
-        "W": "decks/starter/ULG - BlueWhite.dck",
-        "U": "decks/starter/EXO - Blue.dck",
-        "B": "decks/starter/EXO - RedBlack.dck",
-        "R": "decks/starter/EXO - RedWhite.dck",
-        "G": "decks/starter/TMP - GreenWhite.dck"
+        "W": "decks/starter/precon/ULG - Radiant's Revenge.dck",
+        "U": "decks/starter/precon/EXO - Dominator.dck",
+        "B": "decks/starter/precon/EXO - Groundbreaker.dck",
+        "R": "decks/starter/precon/EXO - White Heat.dck",
+        "G": "decks/starter/precon/TMP - The Swarm.dck"
       },
       "pileDecks": {
         "W": "decks/starter/pile_white_e.json",
@@ -98,18 +98,18 @@
       "sellFactor": 0.5,
       "shardSellRatio": 0.8,
       "starterDecks": {
-        "W": "decks/starter/TMP - BlueWhite.dck",
-        "U": "decks/starter/TMP - BlueBlack.dck",
-        "B": "decks/starter/UDS - Black.dck",
-        "R": "decks/starter/ULG - RedBlack.dck",
-        "G": "decks/starter/ULG - BlueGreen.dck"
+        "W": "decks/starter/precon/TMP - Deep Freeze.dck",
+        "U": "decks/starter/precon/TMP - The Slivers.dck",
+        "B": "decks/starter/precon/UDS - Assassin.dck",
+        "R": "decks/starter/precon/ULG - Phyrexian Assault.dck",
+        "G": "decks/starter/precon/ULG - Time Drain.dck"
       },
       "constructedStarterDecks": {
-        "W": "decks/starter/STH - WhiteBlack.dck",
-        "U": "decks/starter/EXO - BlueBlack.dck",
-        "B": "decks/starter/USG - BlackWhite.dck",
-        "R": "decks/starter/TMP - RedWhite.dck",
-        "G": "decks/starter/ULG - GreenWhite.dck"
+        "W": "decks/starter/precon/STH - Call of the Kor.dck",
+        "U": "decks/starter/precon/EXO - Widowmaker.dck",
+        "B": "decks/starter/precon/USG - The Plague.dck",
+        "R": "decks/starter/precon/TMP - The Flames of Rath.dck",
+        "G": "decks/starter/precon/ULG - Crusher.dck"
       },
       "pileDecks": {
         "W": "decks/starter/pile_white_n.json",
@@ -141,18 +141,18 @@
       "sellFactor": 0.25,
       "shardSellRatio": 0.6,
       "starterDecks": {
-        "W": "decks/starter/VIS - White.dck",
-        "U": "decks/starter/MIR - BlueRed.dck",
-        "B": "decks/starter/MIR - Black.dck",
-        "R": "decks/starter/VIS - Red.dck",
-        "G": "decks/starter/MIR - GreenWhite - Jungle_Jam.dck"
+        "W": "decks/starter/precon/VIS - Legion of Glory.dck",
+        "U": "decks/starter/precon/MIR - Burning Sky.dck",
+        "B": "decks/starter/precon/MIR - Night Terrors.dck",
+        "R": "decks/starter/precon/VIS - Wild-Eyed Frenzy.dck",
+        "G": "decks/starter/precon/MIR - Jungle Jam.dck"
       },
       "constructedStarterDecks": {
-        "W": "decks/starter/WTH - BlueWhite.dck",
-        "U": "decks/starter/VIS - BlueBlack.dck",
-        "B": "decks/starter/WTH - Black.dck",
-        "R": "decks/starter/WTH - Red.dck",
-        "G": "decks/starter/VIS - GreenRed.dck"
+        "W": "decks/starter/precon/WTH - Air Forces.dck",
+        "U": "decks/starter/precon/VIS - Unnatural Forces.dck",
+        "B": "decks/starter/precon/WTH - Dead and Alive.dck",
+        "R": "decks/starter/precon/WTH - Fiery Fury.dck",
+        "G": "decks/starter/precon/VIS - Savage Stompdown.dck"
       },
       "pileDecks": {
         "W": "decks/starter/pile_white_h.json",
@@ -184,18 +184,18 @@
       "sellFactor": 0.05,
       "shardSellRatio": 0.3,
       "starterDecks": {
-        "W": "decks/starter/Starter 1999 - White.dck",
-        "U": "decks/starter/7ED - Blue.dck",
-        "B": "decks/starter/7ED - Black.dck",
-        "R": "decks/starter/7ED - Red.dck",
-        "G": "decks/starter/7ED - Green.dck"
+        "W": "decks/starter/precon/S99 - Blinding Fury.dck",
+        "U": "decks/starter/precon/7ED - Bomber.dck",
+        "B": "decks/starter/precon/7ED - Decay.dck",
+        "R": "decks/starter/precon/7ED - Infestation.dck",
+        "G": "decks/starter/precon/7ED - Way Wild.dck"
       },
       "constructedStarterDecks": {
-        "W": "decks/starter/7ED - White.dck",
-        "U": "decks/starter/Starter 1999 - Blue.dck",
-        "B": "decks/starter/Starter 1999 - Black.dck",
-        "R": "decks/starter/Starter 1999 - Red.dck",
-        "G": "decks/starter/Starter 1999 - Green.dck"
+        "W": "decks/starter/precon/7ED - Armada.dck",
+        "U": "decks/starter/precon/S99 - Time Curse.dck",
+        "B": "decks/starter/precon/S99 - Deadly Instinct.dck",
+        "R": "decks/starter/precon/S99 - Goblin Assault.dck",
+        "G": "decks/starter/precon/S99 - Impaler.dck"
       },
       "pileDecks": {
         "W": "decks/starter/pile_white_h.json",
