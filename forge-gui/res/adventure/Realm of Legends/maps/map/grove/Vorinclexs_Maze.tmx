@@ -98,7 +98,7 @@
   </object>
   <object id="73" template="../../../../common/maps/obj/enemy.tx" x="215.667" y="99">
    <properties>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Shrine of Boundless Growth|NPH&quot;, &quot;Maze Skullbomb|ONE&quot;, &quot;Death-Hood Cobra|NPH&quot;, &quot;Rotted Hystrix|NPH&quot; ] }"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Shrine of Boundless Growth|NPH&quot;, &quot;Maze Skullbomb|ONE&quot;, &quot;Death-Hood Cobra|NPH&quot; ] }"/>
     <property name="enemy" value="Vorinclex"/>
     <property name="threatRange" value="0"/>
     <property name="waypoints" value=""/>

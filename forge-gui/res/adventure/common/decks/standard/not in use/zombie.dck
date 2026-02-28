@@ -14,7 +14,7 @@ Difficulty=hard
 Description=The village of Haven is getting attacked by the Zombie horde! Protect the village.
 Icon=Zombie Attack.jpg
 Deck Type=constructed
-[main]
+[Main]
 1 Cadaverous Knight
 1 Bog Raiders
 1 Gluttonous Zombie
@@ -39,4 +39,4 @@ Deck Type=constructed
 4 Mass of Ghouls
 1 Warpath Ghoul
 1 Viscera Dragger
-[sideboard]
+[Sideboard]

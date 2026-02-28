@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Gutter grime&quot;, &quot;Scavenging ooze&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Gutter Grime&quot;, &quot;Biowaste Blob&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -82,7 +82,7 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Ooze Garden|ALA&quot;, &quot;March of the World Ooze|DFT&quot;, &quot;Biowaste Blob|CMR&quot;, &quot;Murky Sewer|DSK&quot; ] }"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Ooze Garden|ALA&quot;, &quot;Predator Ooze&quot;, &quot;Murky Sewer|DSK&quot; ] }"/>
     <property name="enemy" value="The Mimeoplasm"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="50"/>

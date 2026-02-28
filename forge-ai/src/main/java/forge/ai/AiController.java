@@ -17,7 +17,6 @@
  */
 package forge.ai;
 
-import com.esotericsoftware.minlog.Log;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -64,15 +63,17 @@ import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.*;
+
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
+
+import org.tinylog.Logger;
 
 import java.util.*;
 import java.util.concurrent.FutureTask;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -938,20 +939,18 @@ public class AiController {
             Cost payCosts = sa.getPayCosts();
             if (payCosts != null) {
                 ManaCost mana = payCosts.getTotalMana();
-                if (mana != null) {
-                    if (mana.countX() > 0) {
-                        // Set PayX here to maximum value.
-                        final int xPay = ComputerUtilCost.getMaxXValue(sa, player, sa.isTrigger());
-                        if (xPay <= 0) {
-                            return AiPlayDecision.CantAffordX;
-                        }
-                        sa.setXManaCostPaid(xPay);
-                    } else if (mana.isZero()) {
-                        // if mana is zero, but card mana cost does have X, then something is wrong
-                        ManaCost cardCost = card.getManaCost();
-                        if (cardCost != null && cardCost.countX() > 0) {
-                            return AiPlayDecision.CantPlayAi;
-                        }
+                if (mana.countX() > 0) {
+                    // Set PayX here to maximum value.
+                    final int xPay = ComputerUtilCost.getMaxXValue(sa, player, sa.isTrigger());
+                    if (xPay <= 0) {
+                        return AiPlayDecision.CantAffordX;
+                    }
+                    sa.setXManaCostPaid(xPay);
+                } else if (mana.isZero()) {
+                    // if mana is zero, but card mana cost does have X, then something is wrong
+                    ManaCost cardCost = card.getManaCost();
+                    if (cardCost != null && cardCost.countX() > 0) {
+                        return AiPlayDecision.CantPlayAi;
                     }
                 }
             }
@@ -1340,7 +1339,7 @@ public class AiController {
 
         for (final Card element : combat.getAttackers()) {
             // tapping of attackers happens after Propaganda is paid for
-            Log.debug("Computer just assigned " + element.getName() + " as an attacker.");
+            Logger.debug("Computer just assigned " + element.getName() + " as an attacker.");
         }
     }
 
@@ -1380,7 +1379,7 @@ public class AiController {
         CardCollection landsWannaPlay = ComputerUtilAbility.getAvailableLandsToPlay(game, player);
         if (landsWannaPlay != null) {
             landsWannaPlay = filterLandsToPlay(landsWannaPlay);
-            Log.debug("Computer " + game.getPhaseHandler().getPhase().nameForUi);
+            Logger.debug("Computer " + game.getPhaseHandler().getPhase().nameForUi);
             if (landsWannaPlay != null && !landsWannaPlay.isEmpty()) {
                 // TODO search for other land it might want to play?
                 Card land = chooseBestLandToPlay(landsWannaPlay);
@@ -1685,10 +1684,9 @@ public class AiController {
             return null;
         });
 
-        Thread t = new Thread(future);
+        Thread t = new Thread(future, "Game AI Eval");
         t.start();
         try {
-            // instead of computing all available concurrently just add a simple timeout depending on the user prefs
             return future.get(game.getAITimeout(), TimeUnit.SECONDS);
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
             try {

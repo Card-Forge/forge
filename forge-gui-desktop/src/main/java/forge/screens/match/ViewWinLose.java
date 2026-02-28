@@ -254,13 +254,13 @@ public class ViewWinLose implements IWinLoseView<FButton> {
 
     private void showGameOutcomeSummary() {
         for (final GameLogEntry o : game.getGameLog().getLogEntriesExact(GameLogEntryType.GAME_OUTCOME)) {
-            pnlOutcomes.add(new FLabel.Builder().text(o.message).fontSize(14).build(), "h 20!");
+            pnlOutcomes.add(new FLabel.Builder().text(o.message()).fontSize(14).build(), "h 20!");
         }
     }
 
     private void showPlayerScores() {
         for (final GameLogEntry o : game.getGameLog().getLogEntriesExact(GameLogEntryType.MATCH_RESULTS)) {
-            lblStats.setText(removePlayerTypeFromLogMessage(o.message));
+            lblStats.setText(removePlayerTypeFromLogMessage(o.message()));
         }
     }
 

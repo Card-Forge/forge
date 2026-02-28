@@ -43,14 +43,20 @@
    &quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;exploreShand1&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;: 4}}, {&quot;checkQuestFlag&quot;: &quot;foundLibraryOfVarsilResearch&quot;, &quot;not&quot;: true}],
    &quot;text&quot;: &quot;With this monstrous machine out of action, defeating its (relatively) smaller companions could be left to lesser adventurers, but you still haven't found the documents Sir Donovan wanted. They must be somewhere downstairs.&quot;,
    &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, 
+      &quot;name&quot;: &quot;(Continue)&quot;,
       &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;defeatedLibraryOfVarsilBoss&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}]
    }]
 },{
    &quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;exploreShand1&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;: 4}}, {&quot;checkQuestFlag&quot;: &quot;foundLibraryOfVarsilResearch&quot;}],
    &quot;text&quot;: &quot;With this monstrous machine out of action, defeating its (relatively) smaller companions could be left to lesser adventurers. You've already found the documents Sir Donovan wanted and can report back to him now or go back down and explore further first.&quot;,
    &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, 
+      &quot;name&quot;: &quot;(Continue)&quot;,
+      &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;defeatedLibraryOfVarsilBoss&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}]
+   }]
+},{
+   &quot;text&quot;: &quot;The massive construct shudders and collapses, its gears grinding to a halt.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;,
       &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;defeatedLibraryOfVarsilBoss&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}]
    }]
 }]</property>
@@ -68,14 +74,20 @@
    &quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;exploreShand1&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;: 4}}, {&quot;checkQuestFlag&quot;: &quot;foundLibraryOfVarsilResearch&quot;, &quot;not&quot;: true}],
    &quot;text&quot;: &quot;With this monstrous machine out of action, defeating its (relatively) smaller companions could be left to lesser adventurers, but you still haven't found the documents Sir Donovan wanted. They must be somewhere downstairs.&quot;,
    &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, 
+      &quot;name&quot;: &quot;(Continue)&quot;,
       &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;defeatedLibraryOfVarsilBoss&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}]
    }]
 },{
    &quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;exploreShand1&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;: 4}}, {&quot;checkQuestFlag&quot;: &quot;foundLibraryOfVarsilResearch&quot;}],
    &quot;text&quot;: &quot;With this monstrous machine out of action, defeating its (relatively) smaller companions could be left to lesser adventurers. You've already found the documents Sir Donovan wanted and can report back to him now or go back down and explore further first.&quot;,
    &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, 
+      &quot;name&quot;: &quot;(Continue)&quot;,
+      &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;defeatedLibraryOfVarsilBoss&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}]
+   }]
+},{
+   &quot;text&quot;: &quot;The massive construct shudders and collapses, its gears grinding to a halt.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;,
       &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;defeatedLibraryOfVarsilBoss&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}]
    }]
 }]</property>
@@ -94,14 +106,20 @@
    &quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;exploreShand1&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;: 4}}, {&quot;checkQuestFlag&quot;: &quot;foundLibraryOfVarsilResearch&quot;, &quot;not&quot;: true}],
    &quot;text&quot;: &quot;With this monstrous machine out of action, defeating its (relatively) smaller companions could be left to lesser adventurers, but you still haven't found the documents Sir Donovan wanted. They must be somewhere downstairs.&quot;,
    &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, 
+      &quot;name&quot;: &quot;(Continue)&quot;,
       &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;defeatedLibraryOfVarsilBoss&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}]
    }]
 },{
    &quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;exploreShand1&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;: 4}}, {&quot;checkQuestFlag&quot;: &quot;foundLibraryOfVarsilResearch&quot;}],
    &quot;text&quot;: &quot;With this monstrous machine out of action, defeating its (relatively) smaller companions could be left to lesser adventurers. You've already found the documents Sir Donovan wanted and can report back to him now or go back down and explore further first.&quot;,
    &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, 
+      &quot;name&quot;: &quot;(Continue)&quot;,
+      &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;defeatedLibraryOfVarsilBoss&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}]
+   }]
+},{
+   &quot;text&quot;: &quot;The massive construct shudders and collapses, its gears grinding to a halt.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;,
       &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;defeatedLibraryOfVarsilBoss&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}]
    }]
 }]</property>

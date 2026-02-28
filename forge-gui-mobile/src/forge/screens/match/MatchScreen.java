@@ -387,16 +387,6 @@ public class MatchScreen extends FScreen {
             activeEffect.draw(g, 10, 10, 100, 100);
         }
 
-        if (game.getNeedsPhaseRedrawn()) {
-            resetAllPhaseButtons();
-            if (game.getPlayerTurn() != null && game.getPhase() != null) {
-                final PhaseLabel phaseLabel = getPlayerPanel(game.getPlayerTurn()).getPhaseIndicator().getLabel(game.getPhase());
-                if (phaseLabel != null) {
-                    phaseLabel.setActive(true);
-                    game.clearNeedsPhaseRedrawn();
-                }
-            }
-        }
         drawArcs(g);
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ENABLE_MAGNIFIER) && Forge.magnify && Forge.magnifyToggle) {
             if (Forge.isLandscapeMode() && (!GuiBase.isAndroid() || Forge.hasGamepad()) && !CardZoom.isOpen() && potentialListener != null) {

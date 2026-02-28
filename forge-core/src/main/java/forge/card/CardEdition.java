@@ -146,7 +146,8 @@ public final class CardEdition implements Comparable<CardEdition> {
         REBALANCED("rebalanced"),
         ETERNAL("eternal"),
         CONJURED("conjured"),
-        SCHEME("scheme");
+        SCHEME("scheme"),
+        PRINTSHEETS("printsheets");
 
         private final String name;
 

@@ -84,7 +84,7 @@ public class InputBlock extends InputSyncronizedBase {
         }
 
         if (combat != null)
-            getController().getGame().fireEvent(new GameEventCombatUpdate(combat.getAttackers(), combat.getAllBlockers()));
+            getController().getGame().fireEvent(GameEventCombatUpdate.fromCards(combat.getAttackers(), combat.getAllBlockers()));
 
         getController().getGui().showCombat();
     }

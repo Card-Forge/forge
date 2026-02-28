@@ -2,7 +2,7 @@ Name:Eyes in the Skies
 ManaCost:3 W
 Types:Instant
 A:SP$ Token | TokenOwner$ You | TokenScript$ w_1_1_bird_flying | SubAbility$ DBCopy | SpellDescription$ Create a 1/1 white Bird creature token with flying, then populate. (Create a token that's a copy of a creature token you control.)
-SVar:DBCopy:DB$ CopyPermanent | Choices$ Creature.token+YouCtrl | Populate$ True
+SVar:DBCopy:DB$ CopyPermanent | Populate$ True
 DeckHas:Ability$Token
 DeckHints:Ability$Token
 Oracle:Create a 1/1 white Bird creature token with flying, then populate. (Create a token that's a copy of a creature token you control.)

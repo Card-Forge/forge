@@ -5,7 +5,7 @@ Difficulty=medium
 Description=Mono G Snake deck
 Icon=Nagini.jpg
 Deck Type=constructed
-[main]
+[Main]
 2 Tangle Asp|5DN
 2 River Boa|ZEN
 2 Mire Boa|PLC
@@ -31,4 +31,4 @@ Deck Type=constructed
 1 Ambush Viper
 1 Hooded Hydra
 1 Lotus Cobra
-[sideboard]
+[Sideboard]

@@ -476,6 +476,7 @@ Replace=.078F RareMythic:fromSheet("DSK cards")
 
 [rebalanced]
 A-143 R A-Leyline of Resonance @Sergey Glushakov
+A-187 R A-Kona, Rescue Beastie @Brian Valeza
 
 [special guests]
 1 Collected Company|SPG

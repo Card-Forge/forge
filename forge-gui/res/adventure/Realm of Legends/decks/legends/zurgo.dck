@@ -1,93 +1,93 @@
 [metadata]
 Name=Zurgo Stormrender
 [Commander]
-1 Zurgo Stormrender|tdc
+1 Zurgo Stormrender|TDC
 [Main]
-1 zurgo helmsmasher|ktk
-1 zurgo, thunder's decree|tdm
-1 Adeline, Resplendent Cathar|tdc
-1 Ainok Strike Leader|tdc
-1 Anointed Procession|akh
-1 Arcane Signet|tdc
-1 Bastion of Remembrance|tdc
-1 Battle Screech|cmm
-1 Battlefield Forge|tdc
-1 Bleachbone Verge|dft
-1 Bojuka Bog|tdc
-1 Boros Charm|otc
-1 Canyon Slough|tdc
-1 Carrion Feeder|mh1
-1 Castle Ardenvale|tdc
-1 Castle Embereth|tdc
-1 Caves of Koilos|tdc
-1 Clifftop Retreat|tdc
-1 Command Tower|tdc
-1 Corpse Knight|drc
-1 Divine Visitation|tdc
-1 Dragonskull Summit|tdc
-1 Elesh Norn, Grand Cenobite|nph
-1 Elspeth, Sun's Champion|mkc
-1 Exotic Orchard|tdc
-1 Fellwar Stone|tdc
-1 Gix, Yawgmoth Praetor|tdc
-1 Goblin Bombardment|mh2
-1 Goldnight Commander|tdc
-1 Grand Crescendo|tdc
-1 Hardened Tactician|tdm
-1 Hero of Bladehold|tdc
-1 Hour of Reckoning|tdc
-1 Idol of Oblivion|tdc
-1 Impact Tremors|moc
-1 Infantry Shield|tdc
-1 Isolated Chapel|tdc
-1 Jadar, Ghoulcaller of Nephalia|mid
-1 Lightning Greaves|tdc
-1 Lingering Souls|tdc
-1 Loyal Apprentice|tdc
-1 Mayhem Devil|dsc
-1 Mentor of the Meek|inr
-1 Mirror Entity|otc
-1 Morbid Opportunist|tdc
-5 Mountain|tdm
-1 Nomad Outpost|tdm
-1 Ogre Battledriver|tdc
-1 Ophiomancer|tdc
-1 Outpost Siege|blc
-1 Path of Ancestry|tdc
-1 Path to Exile|mb2
-5 Plains|tdm
-1 Queen Marchesa|otc
-1 Release the Dogs|tdc
-1 Secure the Wastes|dtk
-1 Selfless Spirit|tdc
-1 Shadow Summoning|tdc
-1 Shattered Landscape|tdc
-1 Shattered Sanctum|tdc
-1 Skullclamp|tdc
-1 Smoldering Marsh|tdc
-1 Sol Ring|tdc
-1 Solemn Simulacrum|tdc
-1 Stroke of Midnight|tdc
-1 Sun Titan|tdc
-1 Sunbillow Verge|dft
-4 Swamp|tdm
-1 Swords to Plowshares|tdc
-1 Talisman of Conviction|tdc
-1 Talisman of Hierarchy|tdc
-1 Temple of Silence|tdc
-1 Temple of Triumph|tdc
-1 Tempt with Vengeance|tdc
-1 Terramorphic Expanse|tdc
-1 Thalisse, Reverent Medium|tdc
-1 Tocasia's Welcome|tdc
-1 Twilight Drover|tdc
-1 Vandalblast|otc
-1 Vault of the Archangel|tdc
-1 Viscera Seer|tdc
-1 Wayfarer's Bauble|tdc
-1 Welcoming Vampire|tdc
-1 Will of the Mardu|tdc
-1 Windbrisk Heights|tdc
-1 Woe Strider|tdc
-1 Yawgmoth, Thran Physician|dmr
-1 Zulaport Cutthroat|blc
+1 Zurgo Helmsmasher|KTK
+1 Zurgo, Thunder's Decree|TDM
+1 Adeline, Resplendent Cathar|TDC
+1 Ainok Strike Leader|TDC
+1 Anointed Procession|AKH
+1 Arcane Signet|TDC
+1 Bastion of Remembrance|TDC
+1 Battle Screech|CMM
+1 Battlefield Forge|TDC
+1 Bleachbone Verge|DFT
+1 Bojuka Bog|TDC
+1 Boros Charm|OTC
+1 Canyon Slough|TDC
+1 Carrion Feeder|MH1
+1 Castle Ardenvale|TDC
+1 Castle Embereth|TDC
+1 Caves of Koilos|TDC
+1 Clifftop Retreat|TDC
+1 Command Tower|TDC
+1 Corpse Knight|DRC
+1 Divine Visitation|TDC
+1 Dragonskull Summit|TDC
+1 Elesh Norn, Grand Cenobite|NPH
+1 Elspeth, Sun's Champion|MKC
+1 Exotic Orchard|TDC
+1 Fellwar Stone|TDC
+1 Gix, Yawgmoth Praetor|TDC
+1 Goblin Bombardment|MH2
+1 Goldnight Commander|TDC
+1 Grand Crescendo|TDC
+1 Hardened Tactician|TDM
+1 Hero of Bladehold|TDC
+1 Hour of Reckoning|TDC
+1 Idol of Oblivion|TDC
+1 Impact Tremors|MOC
+1 Infantry Shield|TDC
+1 Isolated Chapel|TDC
+1 Jadar, Ghoulcaller of Nephalia|MID
+1 Lightning Greaves|TDC
+1 Lingering Souls|TDC
+1 Loyal Apprentice|TDC
+1 Mayhem Devil|DSC
+1 Mentor of the Meek|INR
+1 Mirror Entity|OTC
+1 Morbid Opportunist|TDC
+5 Mountain|TDM
+1 Nomad Outpost|TDM
+1 Ogre Battledriver|TDC
+1 Ophiomancer|TDC
+1 Outpost Siege|BLC
+1 Path of Ancestry|TDC
+1 Path to Exile|MB2
+5 Plains|TDM
+1 Queen Marchesa|OTC
+1 Release the Dogs|TDC
+1 Secure the Wastes|DTK
+1 Selfless Spirit|TDC
+1 Shadow Summoning|TDC
+1 Shattered Landscape|TDC
+1 Shattered Sanctum|TDC
+1 Skullclamp|TDC
+1 Smoldering Marsh|TDC
+1 Sol Ring|TDC
+1 Solemn Simulacrum|TDC
+1 Stroke of Midnight|TDC
+1 Sun Titan|TDC
+1 Sunbillow Verge|DFT
+4 Swamp|TDM
+1 Swords to Plowshares|TDC
+1 Talisman of Conviction|TDC
+1 Talisman of Hierarchy|TDC
+1 Temple of Silence|TDC
+1 Temple of Triumph|TDC
+1 Tempt with Vengeance|TDC
+1 Terramorphic Expanse|TDC
+1 Thalisse, Reverent Medium|TDC
+1 Tocasia's Welcome|TDC
+1 Twilight Drover|TDC
+1 Vandalblast|OTC
+1 Vault of the Archangel|TDC
+1 Viscera Seer|TDC
+1 Wayfarer's Bauble|TDC
+1 Welcoming Vampire|TDC
+1 Will of the Mardu|TDC
+1 Windbrisk Heights|TDC
+1 Woe Strider|TDC
+1 Yawgmoth, Thran Physician|DMR
+1 Zulaport Cutthroat|BLC
