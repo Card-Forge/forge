@@ -2,16 +2,18 @@ package forge.gui.control;
 
 import com.google.common.eventbus.Subscribe;
 import forge.game.event.GameEvent;
-import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiGame;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameEventForwarder {
+    private static final long FLUSH_INTERVAL_NS = 50_000_000L; // 50ms
+    private static final int FLUSH_SIZE_THRESHOLD = 50;
+
     private final IGuiGame gui;
     private final List<GameEvent> pendingEvents = new ArrayList<>();
-    private volatile boolean flushQueued = false;
+    private long lastFlushTime = System.nanoTime();
 
     public GameEventForwarder(IGuiGame gui) { this.gui = gui; }
 
@@ -20,21 +22,27 @@ public class GameEventForwarder {
         synchronized (pendingEvents) {
             pendingEvents.add(ev);
         }
-        if (!flushQueued) {
-            flushQueued = true;
-            GuiBase.getInterface().invokeInEdtLater(this::flush);
+        long now = System.nanoTime();
+        boolean timeThreshold = (now - lastFlushTime) >= FLUSH_INTERVAL_NS;
+        boolean sizeThreshold;
+        synchronized (pendingEvents) {
+            sizeThreshold = pendingEvents.size() >= FLUSH_SIZE_THRESHOLD;
+        }
+        if (timeThreshold || sizeThreshold) {
+            flush();
         }
     }
 
-    private void flush() {
-        flushQueued = false;
+    public void flush() {
         List<GameEvent> batch;
         synchronized (pendingEvents) {
+            if (pendingEvents.isEmpty()) {
+                return;
+            }
             batch = new ArrayList<>(pendingEvents);
             pendingEvents.clear();
         }
-        if (!batch.isEmpty()) {
-            gui.handleGameEvents(batch);
-        }
+        lastFlushTime = System.nanoTime();
+        gui.handleGameEvents(batch);
     }
 }
