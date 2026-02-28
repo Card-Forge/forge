@@ -6360,19 +6360,19 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             return;
         switch (stateName) {
             case SpecializeB:
-                setImageKey(ipc.getCardBSpecImageKey());
+                setImageKey(ipc.getImageKey(false) + ImageKeys.SPECFACE_B);
                 break;
             case SpecializeR:
-                setImageKey(ipc.getCardRSpecImageKey());
+                setImageKey(ipc.getImageKey(false) + ImageKeys.SPECFACE_R);
                 break;
             case SpecializeG:
-                setImageKey(ipc.getCardGSpecImageKey());
+                setImageKey(ipc.getImageKey(false) + ImageKeys.SPECFACE_G);
                 break;
             case SpecializeU:
-                setImageKey(ipc.getCardUSpecImageKey());
+                setImageKey(ipc.getImageKey(false) + ImageKeys.SPECFACE_U);
                 break;
             case SpecializeW:
-                setImageKey(ipc.getCardWSpecImageKey());
+                setImageKey(ipc.getImageKey(false) + ImageKeys.SPECFACE_W);
                 break;
             default:
                 break;

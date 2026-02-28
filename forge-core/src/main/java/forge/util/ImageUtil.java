@@ -260,6 +260,13 @@ public class ImageUtil {
             faceParam = (face.equals("back") && cp.getRules().getSplitType() != CardSplitType.Flip
                     ? "&face=back"
                     : "&face=front");
+        } else if (cp.getRules().getSplitType() == CardSplitType.Specialize) {
+            // Specialize faces have their own Scryfall entries with collector
+            // number = base number + color letter (e.g. "2w", "2u", "2b", "2r", "2g")
+            String colorSuffix = specFaceToCollectorSuffix(face);
+            if (colorSuffix != null) {
+                cardCollectorNumber += colorSuffix;
+            }
         }
 
         if (cardCollectorNumber.endsWith("☇")) {
@@ -282,6 +289,17 @@ public class ImageUtil {
         }
         return String.format("%s/%s/%s?format=image&version=%s%s", setCode, encodeUtf8(collectorNumber),
                 langCode, versionParam, faceParam);
+    }
+
+    private static String specFaceToCollectorSuffix(String face) {
+        switch (face) {
+            case "white": return "w";
+            case "blue":  return "u";
+            case "black": return "b";
+            case "red":   return "r";
+            case "green": return "g";
+            default:      return null;
+        }
     }
 
     private static String encodeUtf8(String s) {
