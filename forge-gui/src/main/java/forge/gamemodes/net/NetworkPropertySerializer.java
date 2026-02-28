@@ -515,7 +515,7 @@ public final class NetworkPropertySerializer {
     private static boolean isEnumType(TrackableProperty prop) {
         // Check if the property's default value is an enum
         Object defaultValue = prop.getDefaultValue();
-        if (defaultValue != null && defaultValue instanceof Enum) {
+        if (defaultValue instanceof Enum) {
             return true;
         }
         // Known enum properties
@@ -544,8 +544,8 @@ public final class NetworkPropertySerializer {
         try {
             // Get the enum class from the old value or property default
             Class<? extends Enum> enumClass = null;
-            if (oldValue != null && oldValue instanceof Enum) {
-                enumClass = ((Enum<?>) oldValue).getClass();
+            if (oldValue instanceof Enum<?> oldEnum) {
+                enumClass = oldEnum.getClass();
             }
             if (enumClass == null) {
                 // Try to get from property

@@ -44,8 +44,8 @@ final class GameServerHandler extends GameProtocolHandler<IGameController> {
             if (client != null) {
                 long sequenceNumber = (Long) args[0];
                 IGuiGame gui = server.getGui(client.getIndex());
-                if (gui instanceof NetGuiGame) {
-                    ((NetGuiGame) gui).processAcknowledgment(sequenceNumber, client.getIndex());
+                if (gui instanceof NetGuiGame netGui) {
+                    netGui.processAcknowledgment(sequenceNumber, client.getIndex());
                 }
             }
         } else if (protocolMethod == ProtocolMethod.requestResync) {
@@ -54,8 +54,7 @@ final class GameServerHandler extends GameProtocolHandler<IGameController> {
             if (client != null) {
                 NetworkDebugLogger.debug("[DeltaSync] Resync requested by client %d", client.getIndex());
                 IGuiGame gui = server.getGui(client.getIndex());
-                if (gui instanceof NetGuiGame) {
-                    NetGuiGame netGui = (NetGuiGame) gui;
+                if (gui instanceof NetGuiGame netGui) {
                     NetworkDebugLogger.debug("[DeltaSync] Sending full state to client %d", client.getIndex());
                     netGui.sendFullState();
                 } else {

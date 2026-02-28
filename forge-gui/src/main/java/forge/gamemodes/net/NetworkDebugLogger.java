@@ -1,5 +1,6 @@
 package forge.gamemodes.net;
 
+import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
@@ -75,14 +76,10 @@ public final class NetworkDebugLogger {
             enabled = FModel.getPreferences().getPrefBoolean(FPref.NET_DEBUG_LOGGER_ENABLED);
 
             String pref = FModel.getPreferences().getPref(FPref.NET_FILE_LOG_LEVEL);
-            String levelStr = pref != null ? pref.toUpperCase() : "TRACE";
-            switch (levelStr) {
-                case "TRACE": fileLevel = Level.TRACE; break;
-                case "DEBUG": fileLevel = Level.DEBUG; break;
-                case "INFO":  fileLevel = Level.INFO;  break;
-                case "WARN":  fileLevel = Level.WARN;  break;
-                case "ERROR": fileLevel = Level.ERROR; break;
-                default:      fileLevel = Level.TRACE; break;
+            try {
+                fileLevel = Level.valueOf(pref != null ? pref.toUpperCase() : "TRACE");
+            } catch (IllegalArgumentException e) {
+                fileLevel = Level.TRACE;
             }
         } catch (Exception e) {
             // Preferences not initialized — use defaults
@@ -474,7 +471,6 @@ public final class NetworkDebugLogger {
      * Log system information header as a DEBUG message.
      */
     private static void logSystemInfo() {
-        Runtime runtime = Runtime.getRuntime();
         long pid = ProcessHandle.current().pid();
         StringBuilder sb = new StringBuilder();
         sb.append("=".repeat(80)).append("\n");
@@ -487,13 +483,7 @@ public final class NetworkDebugLogger {
         if (suffix != null) {
             sb.append("Instance: ").append(suffix).append("\n");
         }
-        sb.append("\nSystem Information:\n");
-        sb.append("  Java Version: ").append(System.getProperty("java.version")).append("\n");
-        sb.append("  Java Vendor: ").append(System.getProperty("java.vendor")).append("\n");
-        sb.append("  Max Memory: ").append(runtime.maxMemory() / 1024 / 1024).append(" MB\n");
-        sb.append("  Available Processors: ").append(runtime.availableProcessors()).append("\n");
-        sb.append("  OS: ").append(System.getProperty("os.name")).append(" ").append(System.getProperty("os.version")).append("\n");
-        sb.append("  OS Arch: ").append(System.getProperty("os.arch")).append("\n");
+        sb.append("\n").append(GuiBase.getHWInfo()).append("\n");
         sb.append("=".repeat(80));
         logger.debug(sb.toString());
     }

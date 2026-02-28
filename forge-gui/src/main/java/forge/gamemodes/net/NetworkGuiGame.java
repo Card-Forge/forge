@@ -182,22 +182,22 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
             if (value == null) continue;
 
             // Handle single TrackableObject
-            if (value instanceof TrackableObject) {
-                setTrackerRecursively((TrackableObject) value, tracker, visited);
+            if (value instanceof TrackableObject trackable) {
+                setTrackerRecursively(trackable, tracker, visited);
             }
             // Handle collections of TrackableObjects
-            else if (value instanceof Iterable) {
-                for (Object item : (Iterable<?>) value) {
-                    if (item instanceof TrackableObject) {
-                        setTrackerRecursively((TrackableObject) item, tracker, visited);
+            else if (value instanceof Iterable<?> iterable) {
+                for (Object item : iterable) {
+                    if (item instanceof TrackableObject trackable) {
+                        setTrackerRecursively(trackable, tracker, visited);
                     }
                 }
             }
             // Handle maps that might contain TrackableObjects
-            else if (value instanceof Map) {
-                for (Object mapValue : ((Map<?, ?>) value).values()) {
-                    if (mapValue instanceof TrackableObject) {
-                        setTrackerRecursively((TrackableObject) mapValue, tracker, visited);
+            else if (value instanceof Map<?, ?> map) {
+                for (Object mapValue : map.values()) {
+                    if (mapValue instanceof TrackableObject trackable) {
+                        setTrackerRecursively(trackable, tracker, visited);
                     }
                 }
             }
@@ -591,15 +591,15 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
             try {
                 Object value = NetworkPropertySerializer.deserialize(ntd, prop, oldValue);
                 // Log what's being set for PlayerView
-                if (obj instanceof PlayerView) {
+                if (obj instanceof PlayerView playerView) {
                     String valueDesc = value == null ? "null" :
-                        (value instanceof TrackableCollection ? "Collection[" + ((TrackableCollection<?>)value).size() + "]" : value.getClass().getSimpleName());
+                        (value instanceof TrackableCollection<?> tc ? "Collection[" + tc.size() + "]" : value.getClass().getSimpleName());
                     NetworkDebugLogger.trace("[DeltaSync] PlayerView %d: setting %s = %s", obj.getId(), prop, valueDesc);
 
                     // Track zone changes for UI refresh
                     ZoneType changedZone = getZoneTypeForProperty(prop);
                     if (changedZone != null) {
-                        trackZoneChange((PlayerView) obj, changedZone);
+                        trackZoneChange(playerView, changedZone);
                     }
                 }
                 // Use reflection to call the protected set method
@@ -651,9 +651,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
     private void setPropertyValue(TrackableObject obj, TrackableProperty prop, Object value) {
         try {
             // Handle CardStateViewData specially - apply to existing CardStateView
-            if (value instanceof CardStateViewData && obj instanceof CardView) {
-                CardView cardView = (CardView) obj;
-                CardStateViewData csvData = (CardStateViewData) value;
+            if (value instanceof CardStateViewData csvData && obj instanceof CardView cardView) {
                 CardStateView csv = null;
 
                 // Get the appropriate CardStateView based on the property

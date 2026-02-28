@@ -348,10 +348,10 @@ public class DeltaSyncManager {
             return 0;
         }
         // For collections, hash all elements
-        if (value instanceof Iterable) {
+        if (value instanceof Iterable<?> iterable) {
             int hash = 17;
             int count = 0;
-            for (Object item : (Iterable<?>) value) {
+            for (Object item : iterable) {
                 hash = 31 * hash + (item != null ? item.hashCode() : 0);
                 count++;
             }
