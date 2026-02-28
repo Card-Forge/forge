@@ -38,7 +38,7 @@ public class TestTrueNetworkTraffic {
     private static boolean initialized = false;
 
     @BeforeClass
-    public static void setUp() {
+    public void setUp() {
         if (!initialized) {
             if (!(GuiBase.getInterface() instanceof HeadlessGuiDesktop)) {
                 GuiBase.setInterface(new HeadlessGuiDesktop());

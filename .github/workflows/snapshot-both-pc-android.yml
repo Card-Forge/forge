@@ -25,12 +25,15 @@ jobs:
       - uses: actions/checkout@v6
       - name: Fetch history for changelog
         run: |
-          TAG_SHA=$(gh api repos/${{ github.repository }}/tags \
-            --jq '[.[] | select(.name | startswith("forge-"))][0].commit.sha')
-          if [ -n "$TAG_SHA" ]; then
+          TAG=$(gh api repos/${{ github.repository }}/tags \
+            --jq '[.[] | select(.name | startswith("forge-"))][0]')
+          TAG_SHA=$(echo "$TAG" | jq -r '.commit.sha')
+          TAG_NAME=$(echo "$TAG" | jq -r '.name')
+          if [ -n "$TAG_SHA" ] && [ "$TAG_SHA" != "null" ]; then
             TAG_DATE=$(gh api "repos/${{ github.repository }}/commits/$TAG_SHA" \
               --jq '.commit.committer.date')
-            git fetch --shallow-since="$TAG_DATE"
+            git fetch --shallow-since="$TAG_DATE" origin master
+            git fetch origin tag "$TAG_NAME"
           fi
         env:
           GH_TOKEN: ${{ github.token }}
