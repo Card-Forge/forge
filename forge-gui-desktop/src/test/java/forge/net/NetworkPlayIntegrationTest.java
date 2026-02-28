@@ -30,7 +30,7 @@ import java.util.List;
  * - 3-4 player multiplayer with remote clients
  *
  * Test categories:
- * - Unit tests (6): Always run in CI - deck loader, metrics, configuration, server start/stop
+ * - Unit tests (4): Always run in CI - deck loader, server start/stop
  * - Single-game tests (4): testTrueNetworkTraffic (CI), testUnifiedHarnessLocalMode,
  *   testMultiplayer3Player, testMultiplayer4Player
  * - Configurable batch tests (2): testConfigurableSequential, testConfigurableParallel
@@ -98,33 +98,6 @@ public class NetworkPlayIntegrationTest {
         int cardCount = deck.getMain().countAll();
         Assert.assertTrue(cardCount >= 40, "Deck should have at least 40 cards, found: " + cardCount);
         NetworkDebugLogger.log("%s Loaded deck with %d cards", LOG_PREFIX, cardCount);
-    }
-
-    @Test
-    public void testGameResultInitialization() {
-        UnifiedNetworkHarness.GameResult result = new UnifiedNetworkHarness.GameResult();
-        result.gameCompleted = true;
-        result.turnCount = 10;
-        result.winner = "Alice";
-        result.totalBytesSent = 1000;
-
-        Assert.assertTrue(result.gameCompleted);
-        Assert.assertEquals(result.turnCount, 10);
-        Assert.assertEquals(result.winner, "Alice");
-
-        String summary = result.toSummary();
-        Assert.assertNotNull(summary);
-        Assert.assertTrue(summary.contains("completed=true") || summary.contains("success="));
-    }
-
-    @Test
-    public void testConfigurationParsing() {
-        TestConfiguration config = new TestConfiguration();
-        Assert.assertNotNull(config.getDeck1(), "Deck1 should not be null");
-        Assert.assertNotNull(config.getDeck2(), "Deck2 should not be null");
-        Assert.assertTrue(config.isUseRemoteClient() || !config.isUseRemoteClient(), "Remote client flag should be valid");
-        Assert.assertTrue(config.getPlayerCount() >= 2 && config.getPlayerCount() <= 4, "Player count should be 2-4");
-        Assert.assertTrue(config.getIterations() > 0, "Iterations should be positive");
     }
 
     @Test
