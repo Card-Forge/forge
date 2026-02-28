@@ -528,9 +528,12 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
                 else
                     deck.setName(currentDeckName);
             }
-            // If the imported deck has a Commander section but the current editor doesn't support it,
-            // switch to a Commander editor before loading
-            if (deck.has(DeckSection.Commander) && !host.isSectionImportable(DeckSection.Commander)) {
+            // If the user's format dropdown indicates Commander and the current editor
+            // doesn't support it, switch to a Commander editor before loading.
+            // The format dropdown is auto-set by commander detection (and the options panel
+            // expanded to make it visible), so the user can override before accepting.
+            if (deck.has(DeckSection.Commander) && !host.isSectionImportable(DeckSection.Commander)
+                    && isCommanderFormatSelected()) {
                 CDetailPicture cDetailPicture = CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture();
                 CEditorConstructed commanderEditor = new CEditorConstructed(cDetailPicture, GameType.Commander);
                 CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(commanderEditor);
@@ -707,6 +710,13 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
         // Expand the options panel so the user can see the selection
         optionsPanel.setVisible(true);
         closedOptsPanel.setVisible(false);
+    }
+
+    private boolean isCommanderFormatSelected() {
+        if (!formatSelectionCheck.isSelected())
+            return false;
+        GameFormat selected = formatDropdown.getSelectedItem();
+        return selected != null && "Commander".equalsIgnoreCase(selected.getName());
     }
 
     private void displayTokens(final List<DeckRecognizer.Token> tokens) {
