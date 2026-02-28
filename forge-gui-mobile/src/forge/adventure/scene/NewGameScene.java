@@ -55,6 +55,8 @@ public class NewGameScene extends MenuScene {
     private final ImageButton modeHelp;
     private DialogData modeSummary;
     private final Random rand = new Random();
+    private String originalEditionLabelText;
+    private Array<String> originalEditionNames;
 
     private final Array<AdventureModes> modes = new Array<>();
 
@@ -109,15 +111,23 @@ public class NewGameScene extends MenuScene {
 
         starterEdition = ui.findActor("starterEdition");
         starterEditionLabel = ui.findActor("starterEditionL");
+        originalEditionLabelText = starterEditionLabel.storedText;
         String[] starterEditions = Config.instance().starterEditions();
         String[] starterEditionNames = Config.instance().starterEditionNames();
         editionIds = new CardEdition[starterEditions.length];
         for (int i = 0; i < editionIds.length; i++)
             editionIds[i] = FModel.getMagicDb().getEditions().get(starterEditions[i]);
-        Array<String> editionNames = new Array<>(editionIds.length);
+        originalEditionNames = new Array<>(editionIds.length);
         for (String editionName : starterEditionNames)
-            editionNames.add(UIActor.localize(editionName));
-        starterEdition.setTextList(editionNames);
+            originalEditionNames.add(UIActor.localize(editionName));
+        starterEdition.setTextList(originalEditionNames);
+
+        // Precon mode: deck names in colorId, set filter in starterEdition
+        if (Config.instance().hasPreconDecks()) {
+            modes.add(AdventureModes.Precon);
+            AdventureModes.Precon.setSelectionName("[BLACK]" + Forge.getLocalizer().getMessage("lblDeck") + ":");
+            AdventureModes.Precon.setModes(Config.instance().filterPreconDecks(0));
+        }
 
         modes.add(AdventureModes.Chaos);
         AdventureModes.Chaos.setSelectionName("[BLACK]" + Forge.getLocalizer().getMessage("lblDeck") + ":");
@@ -149,8 +159,9 @@ public class NewGameScene extends MenuScene {
         mode.setCurrentIndex(constructedIndex != -1 ? constructedIndex : 0);
 
         AdventureModes initialMode = modes.get(mode.getCurrentIndex());
-        starterEdition.setVisible(initialMode == AdventureModes.Standard);
-        starterEditionLabel.setVisible(initialMode == AdventureModes.Standard);
+        boolean showEdition = initialMode == AdventureModes.Standard;
+        starterEdition.setVisible(showEdition);
+        starterEditionLabel.setVisible(showEdition);
 
         gender.setTextList(new String[]{Forge.getLocalizer().getMessage("lblMale") + "[%120][CYAN] \u2642",
                 Forge.getLocalizer().getMessage("lblFemale") + "[%120][MAGENTA] \u2640"});
@@ -169,8 +180,25 @@ public class NewGameScene extends MenuScene {
                 AdventureModes smode = modes.get(mode.getCurrentIndex());
                 colorLabel.setText(smode.getSelectionName());
                 colorId.setTextList(smode.getModes());
-                starterEdition.setVisible(smode == AdventureModes.Standard);
-                starterEditionLabel.setVisible(smode == AdventureModes.Standard);
+                boolean showEdition = (smode == AdventureModes.Standard || smode == AdventureModes.Precon);
+                starterEdition.setVisible(showEdition);
+                starterEditionLabel.setVisible(showEdition);
+                if (smode == AdventureModes.Precon) {
+                    starterEdition.setTextList(Config.instance().getPreconSetNames());
+                    starterEditionLabel.setText("[BLACK]" + Forge.getLocalizer().getMessageorUseDefault("lblEdition", "Edition") + ":");
+                } else if (smode == AdventureModes.Standard) {
+                    starterEditionLabel.setText(originalEditionLabelText);
+                    starterEdition.setTextList(originalEditionNames);
+                }
+            }
+        });
+        starterEdition.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                AdventureModes smode = modes.get(mode.getCurrentIndex());
+                if (smode == AdventureModes.Precon) {
+                    colorId.setTextList(Config.instance().filterPreconDecks(starterEdition.getCurrentIndex()));
+                }
             }
         });
         race = ui.findActor("race");
@@ -260,6 +288,27 @@ public class NewGameScene extends MenuScene {
         selectedName.setText(NameGenerator.getRandomName(val, "Any", ""));
     }
 
+    private ColorSet getStartingColor() {
+        AdventureModes currentMode = modes.get(mode.getCurrentIndex());
+        if (currentMode == AdventureModes.Precon || currentMode == AdventureModes.Chaos) {
+            return ColorSet.fromNames("W".toCharArray());
+        }
+        if (currentMode == AdventureModes.Custom) {
+            return colorIds[0];
+        }
+        int idx = colorId.getCurrentIndex();
+        return colorIds[idx < colorIds.length ? idx : 0];
+    }
+
+    private CardEdition getStartingEdition() {
+        AdventureModes currentMode = modes.get(mode.getCurrentIndex());
+        if (currentMode == AdventureModes.Standard && editionIds.length > 0) {
+            int idx = starterEdition.getCurrentIndex();
+            return editionIds[idx < editionIds.length ? idx : 0];
+        }
+        return editionIds.length > 0 ? editionIds[0] : null;
+    }
+
     boolean started = false;
 
     public boolean start() {
@@ -276,10 +325,10 @@ public class NewGameScene extends MenuScene {
                     gender.getCurrentIndex() == 0,
                     race.getCurrentIndex(),
                     avatarIndex,
-                    colorIds[custom.isEmpty() || !AdventureModes.Custom.equals(modes.get(mode.getCurrentIndex())) ? colorId.getCurrentIndex() : 0],
+                    getStartingColor(),
                     Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
                     modes.get(mode.getCurrentIndex()), colorId.getCurrentIndex(),
-                    editionIds[starterEdition.getCurrentIndex()], 0);//maybe replace with enum
+                    getStartingEdition(), 0);
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
             SoundSystem.instance.changeBackgroundTrack();
             WorldStage.getInstance().enterSpawnPOI();
@@ -324,10 +373,10 @@ public class NewGameScene extends MenuScene {
                     gender.getCurrentIndex() == 0,
                     race.getCurrentIndex(),
                     avatarIndex,
-                    colorIds[colorId.getCurrentIndex()],
+                    getStartingColor(),
                     Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
                     modes.get(mode.getCurrentIndex()), colorId.getCurrentIndex(),
-                    editionIds[starterEdition.getCurrentIndex()], 0);
+                    getStartingEdition(), 0);
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
             Forge.switchScene(GameScene.instance());
         }

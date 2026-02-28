@@ -28,8 +28,7 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Main resource class to access files from the selected adventure
@@ -48,6 +47,13 @@ public class Config {
     private ObjectMap<String, ObjectMap<String, Sprite>> atlasSprites = new ObjectMap<>();
     private ObjectMap<PointOfInterestData, Array<Sprite>> poiSprites = new ObjectMap<>();
     private ObjectMap<String, ObjectMap<String, Array<Sprite>>> animatedSprites = new ObjectMap<>();
+
+    // Precon starter deck data (lazily initialized)
+    private Array<String> preconSetNames;           // set names for starterEdition filter
+    private Array<Array<String>> preconDeckNames;   // per-set deck display names
+    private Array<Array<String>> preconDeckPaths;   // per-set deck file paths
+    private Array<String> preconCurrentPaths;       // paths matching current colorId content
+    private boolean preconScanned = false;
 
     static public Config instance() {
         if (currentConfig == null)
@@ -271,7 +277,13 @@ public class Config {
                     if (ColorSet.fromNames(entry.key.toCharArray()).getColor() == color.getColor()) {
                         return CardUtil.getDeck(entry.value, false, false, "", false, false);
                     }
-                };
+                }
+                return null;
+            case Precon:
+                String preconPath = getPreconDeckPath(index);
+                if (preconPath != null) {
+                    return CardUtil.getDeck(preconPath, false, false, "", false, false);
+                }
         }
         return null;
     }
@@ -356,6 +368,100 @@ public class Config {
         FileHandle handle = new FileHandle(ForgeProfileProperties.getUserDir() + "/adventure/settings.json");
         handle.writeString(json.prettyPrint(json.toJson(settingsData, SettingData.class)), false);
 
+    }
+
+    // --- Precon starter deck support ---
+
+    private static final String PRECON_DECK_FOLDER = "decks/starter/precon/";
+
+    private void ensurePreconScanned() {
+        if (preconScanned) return;
+        preconScanned = true;
+        scanPreconFolder();
+    }
+
+    private void scanPreconFolder() {
+        String dirPath = prefix + PRECON_DECK_FOLDER;
+        File dir = new File(dirPath);
+        if (!dir.exists() || !dir.isDirectory()) return;
+
+        File[] dckFiles = dir.listFiles((d, name) -> name.toLowerCase().endsWith(".dck"));
+        if (dckFiles == null || dckFiles.length == 0) return;
+
+        TreeMap<String, List<String[]>> setMap = new TreeMap<>();
+        for (File file : dckFiles) {
+            String filename = file.getName();
+            String nameNoExt = filename.substring(0, filename.length() - 4);
+            int dash = nameNoExt.indexOf(" - ");
+            String setDisplayName = "";
+            String deckName;
+            if (dash >= 0) {
+                CardEdition edition = FModel.getMagicDb().getEditions().get(nameNoExt.substring(0, dash));
+                if (edition != null) setDisplayName = edition.getName();
+                deckName = nameNoExt.substring(dash + 3);
+            } else {
+                deckName = nameNoExt;
+            }
+            setMap.computeIfAbsent(setDisplayName, k -> new ArrayList<>())
+                  .add(new String[]{deckName, PRECON_DECK_FOLDER + filename});
+        }
+        for (List<String[]> decks : setMap.values()) decks.sort(Comparator.comparing(a -> a[0]));
+
+        // Index 0 = All Editions, index 1+ = individual editions
+        preconSetNames = new Array<>();
+        preconDeckNames = new Array<>();
+        preconDeckPaths = new Array<>();
+
+        preconSetNames.add("All Editions");
+        Array<String> allNames = new Array<>();
+        Array<String> allPaths = new Array<>();
+        for (List<String[]> decks : setMap.values()) {
+            for (String[] deck : decks) { allNames.add(deck[0]); allPaths.add(deck[1]); }
+        }
+        preconDeckNames.add(allNames);
+        preconDeckPaths.add(allPaths);
+
+        for (Map.Entry<String, List<String[]>> entry : setMap.entrySet()) {
+            if (entry.getKey().isEmpty()) continue; // ungrouped decks only in All Editions
+            preconSetNames.add(entry.getKey());
+            Array<String> names = new Array<>();
+            Array<String> paths = new Array<>();
+            for (String[] deck : entry.getValue()) { names.add(deck[0]); paths.add(deck[1]); }
+            preconDeckNames.add(names);
+            preconDeckPaths.add(paths);
+        }
+        preconCurrentPaths = allPaths;
+    }
+
+
+
+    public boolean hasPreconDecks() {
+        ensurePreconScanned();
+        return preconSetNames != null && preconSetNames.size > 0;
+    }
+
+    public Array<String> getPreconSetNames() {
+        ensurePreconScanned();
+        return preconSetNames;
+    }
+
+    /** Filters deck list by set index. Returns deck names with "Random" prepended for colorId. */
+    public Array<String> filterPreconDecks(int setIndex) {
+        ensurePreconScanned();
+        if (setIndex < 0 || setIndex >= preconDeckPaths.size) setIndex = 0;
+        preconCurrentPaths = preconDeckPaths.get(setIndex);
+        Array<String> result = new Array<>();
+        result.add(Forge.getLocalizer().getMessage("lblRandomDeck"));
+        result.addAll(preconDeckNames.get(setIndex));
+        return result;
+    }
+
+    /** Resolves deck path from colorId index. Index 0 = random from current filter. */
+    public String getPreconDeckPath(int deckIndex) {
+        if (preconCurrentPaths == null || preconCurrentPaths.size == 0) return null;
+        if (deckIndex <= 0) return preconCurrentPaths.get(new Random().nextInt(preconCurrentPaths.size));
+        int idx = deckIndex - 1;
+        return idx < preconCurrentPaths.size ? preconCurrentPaths.get(idx) : null;
     }
 
     public void loadResources() {
