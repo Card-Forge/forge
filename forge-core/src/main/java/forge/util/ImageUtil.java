@@ -6,6 +6,7 @@ import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
+import forge.card.MagicColor;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import java.util.regex.Pattern;
@@ -292,14 +293,9 @@ public class ImageUtil {
     }
 
     private static String specFaceToCollectorSuffix(String face) {
-        switch (face) {
-            case "white": return "w";
-            case "blue":  return "u";
-            case "black": return "b";
-            case "red":   return "r";
-            case "green": return "g";
-            default:      return null;
-        }
+        byte color = MagicColor.fromName(face);
+        if (color == 0) return null;
+        return MagicColor.toShortString(color).toLowerCase();
     }
 
     private static String encodeUtf8(String s) {
