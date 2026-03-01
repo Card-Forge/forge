@@ -162,6 +162,9 @@ public class Main extends AndroidApplication {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Register tinylog provider explicitly — the android-maven-plugin strips
+        // META-INF/services/ from dependency JARs, so ServiceLoader discovery fails.
+        org.tinylog.configuration.Configuration.set("provider", "org.tinylog.core.TinylogLoggingProvider");
         try {
             PackageInfo pInfo = getContext().getPackageManager().getPackageInfo(getContext().getPackageName(), 0);
             versionString = pInfo.versionName;
