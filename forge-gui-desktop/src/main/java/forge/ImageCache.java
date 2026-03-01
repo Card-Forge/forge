@@ -32,7 +32,6 @@ import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 
-import forge.item.IPaperCard;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -47,7 +46,7 @@ import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
-import forge.item.PaperCard;
+import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
