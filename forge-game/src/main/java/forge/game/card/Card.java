@@ -6355,29 +6355,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if(uiCard != null)
             uiCard.currentState.setImageKey(iFN);
     }
-    public final void setImageKey(final IPaperCard ipc, final CardStateName stateName) {
-        if (ipc == null)
-            return;
-        switch (stateName) {
-            case SpecializeB:
-                setImageKey(ipc.getImageKey(false) + ImageKeys.SPECFACE_B);
-                break;
-            case SpecializeR:
-                setImageKey(ipc.getImageKey(false) + ImageKeys.SPECFACE_R);
-                break;
-            case SpecializeG:
-                setImageKey(ipc.getImageKey(false) + ImageKeys.SPECFACE_G);
-                break;
-            case SpecializeU:
-                setImageKey(ipc.getImageKey(false) + ImageKeys.SPECFACE_U);
-                break;
-            case SpecializeW:
-                setImageKey(ipc.getImageKey(false) + ImageKeys.SPECFACE_W);
-                break;
-            default:
-                break;
-        }
-    }
 
     public String getImageKey(CardStateName state) {
         if (!getRenderForUI()) {
@@ -6700,7 +6677,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
     public final void setSpecialized(final boolean bool) {
         specialized = bool;
-        setImageKey(getPaperCard(), getCurrentStateName());
     }
     public final boolean canSpecialize() {
         return getRules() != null && getRules().getSplitType() == CardSplitType.Specialize;
