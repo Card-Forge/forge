@@ -219,27 +219,13 @@ public class ImageCache {
                 } else if (imageKey.endsWith(ImageKeys.SPECFACE_G)) {
                     specColor = "green";
                 }
-                String cardfilename = paperCard.getCardImageKey();
+                String cardfilename;
                 if (backFace) {
                     cardfilename = paperCard.getCardAltImageKey();
                 } else if (!specColor.isEmpty()) {
-                    switch (specColor) {
-                        case "white":
-                            cardfilename = paperCard.getCardWSpecImageKey();
-                            break;
-                        case "blue":
-                            cardfilename = paperCard.getCardUSpecImageKey();
-                            break;
-                        case "black":
-                            cardfilename = paperCard.getCardBSpecImageKey();
-                            break;
-                        case "red":
-                            cardfilename = paperCard.getCardRSpecImageKey();
-                            break;
-                        case "green":
-                            cardfilename = paperCard.getCardGSpecImageKey();
-                            break;
-                    }
+                    cardfilename = ImageUtil.getImageKey(paperCard, specColor, true);
+                } else {
+                    cardfilename = paperCard.getCardImageKey();
                 }
                 return ImageKeys.getCachedCardsFile(cardfilename) != null;
             }
@@ -295,23 +281,7 @@ public class ImageCache {
                 if (altState) {
                     imageKey = card.getCardAltImageKey();
                 } else if (!specColor.isEmpty()) {
-                    switch (specColor) {
-                        case "white":
-                            imageKey = card.getCardWSpecImageKey();
-                            break;
-                        case "blue":
-                            imageKey = card.getCardUSpecImageKey();
-                            break;
-                        case "black":
-                            imageKey = card.getCardBSpecImageKey();
-                            break;
-                        case "red":
-                            imageKey = card.getCardRSpecImageKey();
-                            break;
-                        case "green":
-                            imageKey = card.getCardGSpecImageKey();
-                            break;
-                    }
+                    imageKey = ImageUtil.getImageKey(card, specColor, true);
                 } else {
                     imageKey = card.getCardImageKey();
                 }

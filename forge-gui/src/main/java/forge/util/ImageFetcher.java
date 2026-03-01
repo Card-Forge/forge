@@ -172,29 +172,13 @@ public abstract class ImageFetcher {
             } else if (imageKey.endsWith(ImageKeys.SPECFACE_G)) {
                 face = "green";
             }
-            String filename = "";
-            switch (face) {
-                case "back":
-                    filename = paperCard.getCardAltImageKey();
-                    break;
-                case "white":
-                    filename = paperCard.getCardWSpecImageKey();
-                    break;
-                case "blue":
-                    filename = paperCard.getCardUSpecImageKey();
-                    break;
-                case "black":
-                    filename = paperCard.getCardBSpecImageKey();
-                    break;
-                case "red":
-                    filename = paperCard.getCardRSpecImageKey();
-                    break;
-                case "green":
-                    filename = paperCard.getCardGSpecImageKey();
-                    break;
-                default:
-                    filename = paperCard.getCardImageKey();
-                    break;
+            String filename;
+            if (face.equals("back")) {
+                filename = paperCard.getCardAltImageKey();
+            } else if (!face.isEmpty()) {
+                filename = ImageUtil.getImageKey(paperCard, face, true);
+            } else {
+                filename = paperCard.getCardImageKey();
             }
             if (useArtCrop) {
                 filename = TextUtil.fastReplace(filename, ".full", ".artcrop");

@@ -46,7 +46,7 @@ import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
-import forge.item.IPaperCard;
+import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
@@ -207,7 +207,7 @@ public class ImageCache {
             return Pair.of(null, false);
         }
 
-        IPaperCard ipc = null;
+        PaperCard ipc = null;
         boolean altState = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
         String specColor = "";
         if (imageKey.endsWith(ImageKeys.SPECFACE_W)) {
@@ -231,23 +231,7 @@ public class ImageCache {
                 if (altState) {
                     imageKey = ipc.getCardAltImageKey();
                 } else if (!specColor.isEmpty()) {
-                    switch (specColor) {
-                        case "white":
-                            imageKey = ipc.getCardWSpecImageKey();
-                            break;
-                        case "blue":
-                            imageKey = ipc.getCardUSpecImageKey();
-                            break;
-                        case "black":
-                            imageKey = ipc.getCardBSpecImageKey();
-                            break;
-                        case "red":
-                            imageKey = ipc.getCardRSpecImageKey();
-                            break;
-                        case "green":
-                            imageKey = ipc.getCardGSpecImageKey();
-                            break;
-                    }
+                    imageKey = ImageUtil.getImageKey(ipc, specColor, true);
                 } else {
                     imageKey = ipc.getCardImageKey();
                 }
