@@ -207,7 +207,40 @@ public class ImageCache {
                 return paperCard.hasImage();
             } else {
                 final boolean backFace = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
-                final String cardfilename = backFace ? paperCard.getCardAltImageKey() : paperCard.getCardImageKey();
+                String specColor = "";
+                if (imageKey.endsWith(ImageKeys.SPECFACE_W)) {
+                    specColor = "white";
+                } else if (imageKey.endsWith(ImageKeys.SPECFACE_U)) {
+                    specColor = "blue";
+                } else if (imageKey.endsWith(ImageKeys.SPECFACE_B)) {
+                    specColor = "black";
+                } else if (imageKey.endsWith(ImageKeys.SPECFACE_R)) {
+                    specColor = "red";
+                } else if (imageKey.endsWith(ImageKeys.SPECFACE_G)) {
+                    specColor = "green";
+                }
+                String cardfilename = paperCard.getCardImageKey();
+                if (backFace) {
+                    cardfilename = paperCard.getCardAltImageKey();
+                } else if (!specColor.isEmpty()) {
+                    switch (specColor) {
+                        case "white":
+                            cardfilename = paperCard.getCardWSpecImageKey();
+                            break;
+                        case "blue":
+                            cardfilename = paperCard.getCardUSpecImageKey();
+                            break;
+                        case "black":
+                            cardfilename = paperCard.getCardBSpecImageKey();
+                            break;
+                        case "red":
+                            cardfilename = paperCard.getCardRSpecImageKey();
+                            break;
+                        case "green":
+                            cardfilename = paperCard.getCardGSpecImageKey();
+                            break;
+                    }
+                }
                 return ImageKeys.getCachedCardsFile(cardfilename) != null;
             }
         } else if (prefix.equals(ImageKeys.TOKEN_PREFIX)) {
@@ -240,13 +273,49 @@ public class ImageCache {
         }
 
         boolean altState = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
-        if (altState) {
-            imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
+        String specColor = "";
+        if (imageKey.endsWith(ImageKeys.SPECFACE_W)) {
+            specColor = "white";
+        } else if (imageKey.endsWith(ImageKeys.SPECFACE_U)) {
+            specColor = "blue";
+        } else if (imageKey.endsWith(ImageKeys.SPECFACE_B)) {
+            specColor = "black";
+        } else if (imageKey.endsWith(ImageKeys.SPECFACE_R)) {
+            specColor = "red";
+        } else if (imageKey.endsWith(ImageKeys.SPECFACE_G)) {
+            specColor = "green";
         }
+        if (altState)
+            imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
+        if (!specColor.isEmpty())
+            imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.SPECFACE_W.length());
         if (imageKey.startsWith(ImageKeys.CARD_PREFIX)) {
             PaperCard card = ImageUtil.getPaperCardFromImageKey(imageKey);
-            if (card != null)
-                imageKey = altState ? card.getCardAltImageKey() : card.getCardImageKey();
+            if (card != null) {
+                if (altState) {
+                    imageKey = card.getCardAltImageKey();
+                } else if (!specColor.isEmpty()) {
+                    switch (specColor) {
+                        case "white":
+                            imageKey = card.getCardWSpecImageKey();
+                            break;
+                        case "blue":
+                            imageKey = card.getCardUSpecImageKey();
+                            break;
+                        case "black":
+                            imageKey = card.getCardBSpecImageKey();
+                            break;
+                        case "red":
+                            imageKey = card.getCardRSpecImageKey();
+                            break;
+                        case "green":
+                            imageKey = card.getCardGSpecImageKey();
+                            break;
+                    }
+                } else {
+                    imageKey = card.getCardImageKey();
+                }
+            }
         } else if (imageKey.startsWith(ImageKeys.TOKEN_PREFIX)) {
             PaperToken token = ImageUtil.getPaperTokenFromImageKey(imageKey);
             if (token != null)
