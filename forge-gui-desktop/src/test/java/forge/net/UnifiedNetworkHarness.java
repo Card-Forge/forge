@@ -1,12 +1,9 @@
 package forge.net;
 
-import forge.ai.LobbyPlayerAi;
-import forge.ai.PlayerControllerAi;
 import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameOutcome;
 import forge.game.Match;
-import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.match.GameLobby.GameLobbyData;
 import forge.gamemodes.match.HostedMatch;
@@ -18,7 +15,6 @@ import forge.gamemodes.net.client.ClientGameLobby;
 import forge.gamemodes.net.server.FServerManager;
 import forge.gamemodes.net.server.ServerGameLobby;
 import forge.interfaces.ILobbyListener;
-import forge.player.PlayerControllerHuman;
 
 import forge.net.analysis.GameLogMetrics;
 import forge.net.analysis.NetworkLogAnalyzer;
@@ -406,7 +402,7 @@ public class UnifiedNetworkHarness {
             // Swap remote players to AI if enabled
             HostedMatch hostedMatch = HeadlessGuiDesktop.getLastMatch();
             if (useAiForRemotePlayers && hostedMatch != null && hostedMatch.getGame() != null) {
-                swapRemotePlayersToAi(hostedMatch.getGame());
+                swapRemotePlayersToAi();
             }
 
             // 7. Wait for game completion
@@ -664,25 +660,15 @@ public class UnifiedNetworkHarness {
                 LOG_PREFIX, result.deltaPacketsReceived, result.fullStateSyncsReceived, result.totalDeltaBytes);
     }
 
-    private void swapRemotePlayersToAi(Game game) {
-        NetworkDebugLogger.log("%s Swapping remote player controllers to AI...", LOG_PREFIX);
+    private void swapRemotePlayersToAi() {
+        NetworkDebugLogger.log("%s Converting remote players to AI via FServerManager.convertToAI...", LOG_PREFIX);
 
-        for (Player player : game.getPlayers()) {
-            // The instanceof check naturally skips the AI host (which has PlayerControllerAi).
-            // Do NOT skip by player ID — HostedMatch sorts LobbyPlayerHuman before LobbyPlayerAi,
-            // so the first remote player may have ID 0 instead of the host.
-            if (player.getController() instanceof PlayerControllerHuman) {
-                String originalControllerType = player.getController().getClass().getSimpleName();
-                LobbyPlayerAi aiLobbyPlayer = new LobbyPlayerAi(player.getName(), null);
-                PlayerControllerAi aiController = new PlayerControllerAi(game, player, aiLobbyPlayer);
-                player.dangerouslySetController(aiController);
-
-                NetworkDebugLogger.log("%s   Player %d (%s): swapped %s -> PlayerControllerAi",
-                        LOG_PREFIX, player.getId(), player.getName(), originalControllerType);
-            } else {
-                NetworkDebugLogger.log("%s   Player %d (%s): kept %s (not PlayerControllerHuman)",
-                        LOG_PREFIX, player.getId(), player.getName(), player.getController().getClass().getSimpleName());
-            }
+        for (int i = 1; i <= remoteClientCount; i++) {
+            LobbySlot slot = lobby.getSlot(i);
+            String playerName = slot.getName();
+            server.convertToAI(i, playerName);
+            NetworkDebugLogger.log("%s   Slot %d (%s): converted to AI via server.convertToAI",
+                    LOG_PREFIX, i, playerName);
         }
     }
 

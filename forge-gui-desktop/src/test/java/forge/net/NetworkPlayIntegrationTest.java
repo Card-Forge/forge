@@ -2,8 +2,6 @@ package forge.net;
 
 import forge.gamemodes.net.NetworkDebugLogger;
 import forge.localinstance.properties.ForgeConstants;
-import forge.localinstance.properties.ForgePreferences.FPref;
-import forge.model.FModel;
 import forge.deck.Deck;
 import forge.net.analysis.AnalysisResult;
 import forge.net.analysis.GameLogMetrics;
@@ -123,44 +121,35 @@ public class NetworkPlayIntegrationTest {
      * Key test for delta sync validation - uses actual TCP network client.
      * Uses 10-card basic land decks for fast CI execution.
      * Games end in ~3 turns as players deck out (no spells to cast).
-     * Deck legality is temporarily disabled for this test only.
+     * Deck legality is disabled via TestUtils.ensureFModelInitialized().
      */
     @Test(timeOut = 60000, description = "True network traffic test with remote client")
     public void testTrueNetworkTraffic() {
         NetworkDebugLogger.log("%s Starting true network traffic test...", LOG_PREFIX);
         NetworkDebugLogger.log("%s Using minimal 10-card basic land decks for fast CI execution", LOG_PREFIX);
 
-        // Temporarily disable deck legality for this test only
-        boolean originalLegality = FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY);
-        FModel.getPreferences().setPref(FPref.ENFORCE_DECK_LEGALITY, false);
+        // Use 10-card basic land decks for fast game completion
+        // With 7-card starting hand + 3 draws, game ends when first player decks out
+        Deck deck1 = TestDeckLoader.createMinimalDeck("Mountain", 10);
+        Deck deck2 = TestDeckLoader.createMinimalDeck("Forest", 10);
 
-        try {
-            // Use 10-card basic land decks for fast game completion
-            // With 7-card starting hand + 3 draws, game ends when first player decks out
-            Deck deck1 = TestDeckLoader.createMinimalDeck("Mountain", 10);
-            Deck deck2 = TestDeckLoader.createMinimalDeck("Forest", 10);
+        UnifiedNetworkHarness.GameResult result = new UnifiedNetworkHarness()
+                .playerCount(2)
+                .remoteClients(1)
+                .decks(deck1, deck2)
+                .gameTimeout(60000)  // Reduced timeout - game should finish very quickly
+                .execute();
 
-            UnifiedNetworkHarness.GameResult result = new UnifiedNetworkHarness()
-                    .playerCount(2)
-                    .remoteClients(1)
-                    .decks(deck1, deck2)
-                    .gameTimeout(60000)  // Reduced timeout - game should finish very quickly
-                    .execute();
-
-            // Log bandwidth comparison (skip full analysis for minimal deck games)
-            String bandwidthSummary = result.getBandwidthSummary();
-            if (bandwidthSummary != null) {
-                NetworkDebugLogger.log("%s %s", LOG_PREFIX, bandwidthSummary);
-            }
-
-            if (result.success) {
-                Assert.assertTrue(result.deltaPacketsReceived > 0, "Should have received delta sync packets");
-            }
-            Assert.assertTrue(result.gameStarted, "Game should have started: " + result.toSummary());
-        } finally {
-            // Restore original deck legality setting
-            FModel.getPreferences().setPref(FPref.ENFORCE_DECK_LEGALITY, originalLegality);
+        // Log bandwidth comparison (skip full analysis for minimal deck games)
+        String bandwidthSummary = result.getBandwidthSummary();
+        if (bandwidthSummary != null) {
+            NetworkDebugLogger.log("%s %s", LOG_PREFIX, bandwidthSummary);
         }
+
+        if (result.success) {
+            Assert.assertTrue(result.deltaPacketsReceived > 0, "Should have received delta sync packets");
+        }
+        Assert.assertTrue(result.gameStarted, "Game should have started: " + result.toSummary());
     }
 
     @Test(timeOut = 150000, description = "UnifiedNetworkHarness local mode test")
