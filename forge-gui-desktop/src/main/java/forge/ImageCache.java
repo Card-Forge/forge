@@ -32,6 +32,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 
+import forge.item.IPaperCard;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -201,13 +202,12 @@ public class ImageCache {
     }
 
     // return the pair of image and a flag to indicate if it is a placeholder image.
-    private static Pair<BufferedImage, Boolean> getOriginalImageInternal(String imageKey, boolean useDefaultIfNotFound,
-                                                                         CardView cardView) {
+    private static Pair<BufferedImage, Boolean> getOriginalImageInternal(String imageKey, boolean useDefaultIfNotFound, CardView cardView) {
         if (null == imageKey) {
             return Pair.of(null, false);
         }
 
-        PaperCard ipc = null;
+        IPaperCard ipc = null;
         boolean altState = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
         String specColor = "";
         if (imageKey.endsWith(ImageKeys.SPECFACE_W)) {
