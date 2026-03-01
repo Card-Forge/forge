@@ -3,69 +3,75 @@ Code=TMT
 Date=2026-03-06
 Name=Teenage Mutant Ninja Turtles
 Type=Expansion
+ScryfallCode=TMT
 DoublePick=WhenPodSizeIs4
 RecommendedPodSize=4
-BoosterSlots=Common,Common-SourceMaterial,Uncommon,Turtle,RareMythic,Land,Wildcard,WildcardFoil
-Booster=6 Common, 1 Common-SourceMaterial, 2 Uncommon, 1 Turtle, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 Land
+#https://mtgscribe.com/2026/02/17/teenage-mutant-ninja-turtles-play-booster-fact-sheet/
+BoosterSlots=Common,Common-SourceMaterial,Common-Scene,Uncommon,LegendaryTurtle,RareMythic,Land,Wildcard,WildcardFoil
+Booster=5 Common, 1 Common-SourceMaterial, 1 Common-Scene, 2 Uncommon, 1 LegendaryTurtle, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 Land
 Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=30
 
 [Common]
-Base=Common:fromSheet("TMT cards")
+Base=Common:fromSheet("TMT cards"):!fromSheet("TMT legendary turtles")
+#The legendary turtles that show up in the LegendaryTurtle slot do not show up in the regular common slot
 
 [Common-SourceMaterial]
-Base=Common:fromSheet("TMT cards")
-Replace=.0416F fromSheet("PZA cards")
-Replace=.0416F Common:fromSheet("TMT scene cards")
+Base=Common:fromSheet("TMT cards"):!fromSheet("TMT legendary turtles")
+Replace=0.03571F fromSheet("PZA cards")
+
+[Common-Scene]
+Base=Common:fromSheet("TMT cards"):!fromSheet("TMT legendary turtles")
+Replace=0.042F Common:fromSheet("TMT scene cards"):!fromSheet("TMT legendary scene turtles")
 
 [Uncommon]
-Base=Uncommon:fromSheet("TMT cards")
-Replace=.039F Uncommon:fromSheet("TMT scene cards")
-Replace=.078F Uncommon:fromSheet("TMT sewer cards")
+Base=Uncommon:fromSheet("TMT cards"):!fromSheet("TMT legendary turtles")
+Replace=0.039F Uncommon:fromSheet("TMT scene cards"):!fromSheet("TMT legendary scene turtles")
+Replace=0.078F Uncommon:fromSheet("TMT sewer cards")
 
-[Turtle]
+[LegendaryTurtle]
 Base=Common:fromSheet("TMT legendary turtles")
-Replace=.131 Uncommon:fromSheet("TMT legendary turtles")
-Replace=.069 Rare:fromSheet("TMT legendary turtles")
-Replace=.034 Mythic:fromSheet("TMT legendary turtles")
-Replace=.046 Common:fromSheet("TMT legendary scene turtles")
-Replace=.065 Uncommon:fromSheet("TMT legendary scene turtles")
-Replace=.01 Rare:fromSheet("TMT legendary scene turtles")
-Replace=.0004 Mythic:fromSheet("TMT legendary silhouette turtles")
+Replace=0.131F Uncommon:fromSheet("TMT legendary turtles")
+Replace=0.069F Rare:fromSheet("TMT legendary turtles")
+Replace=0.034F Mythic:fromSheet("TMT legendary turtles")
+Replace=0.046F Common:fromSheet("TMT legendary scene turtles")
+Replace=0.065F Uncommon:fromSheet("TMT legendary scene turtles")
+Replace=0.010F Rare:fromSheet("TMT legendary scene turtles")
+Replace=0.005F Mythic:fromSheet("TMT legendary silhouette turtles")
 
 [RareMythic]
-Base=Rare:fromSheet("TMT cards")
-Replace=.092F Mythic:fromSheet("TMT cards")
-Replace=.01F Rare:fromSheet("TMT scene cards")
-Replace=.0416F Uncommon:fromSheet("TMT sewer cards")
-Replace=.0004 Mythic:fromSheet("TMT silhouette cards")
+Base=Rare:fromSheet("TMT cards"):!fromSheet("TMT legendary turtles")
+Replace=0.092F Mythic:fromSheet("TMT cards"):!fromSheet("TMT legendary turtles")
+Replace=0.0098F Rare:fromSheet("TMT scene cards"):!fromSheet("TMT legendary scene turtles")
+Replace=0.0041F Mythic:fromSheet("TMT silhouette cards"):!fromSheet("TMT legendary silhouette turtles")
+Replace=0.041F Rare:fromSheet("TMT sewer cards")
+Replace=0.0041F Mythic:fromSheet("TMT sewer cards")
 
 [Wildcard]
-Base=Uncommon:fromSheet("TMT cards")
-Replace=0.249F Common:fromSheet("TMT cards")
-Replace=0.076F Rare:fromSheet("TMT cards")
-Replace=0.0029F Mythic:fromSheet("TMT cards")
-Replace=0.008F Common:fromSheet("TMT scene cards")
-Replace=0.013F Uncommon:fromSheet("TMT scene cards")
-Replace=0.008F Rare:fromSheet("TMT scene cards")
-Replace=0.001F Mythic:fromSheet("TMT scene cards")
+Base=Uncommon:fromSheet("TMT cards"):!fromSheet("TMT legendary turtles")
+Replace=0.249F Common:fromSheet("TMT cards"):!fromSheet("TMT legendary turtles")
+Replace=0.076F Rare:fromSheet("TMT cards"):!fromSheet("TMT legendary turtles")
+Replace=0.00853F Mythic:fromSheet("TMT cards"):!fromSheet("TMT legendary turtles")
+Replace=0.000572F Common:fromSheet("TMT scene cards"):!fromSheet("TMT legendary scene turtles")
+Replace=0.013F Uncommon:fromSheet("TMT scene cards"):!fromSheet("TMT legendary scene turtles")
+Replace=0.001180F Rare:fromSheet("TMT scene cards"):!fromSheet("TMT legendary scene turtles")
+Replace=0.000393F Mythic:fromSheet("TMT silhouette cards"):!fromSheet("TMT legendary silhouette turtles")
 Replace=0.026F Uncommon:fromSheet("TMT sewer cards")
-Replace=0.008F Rare:fromSheet("TMT sewer cards")
-Replace=0.001F Mythic:fromSheet("TMT sewer cards")
-Replace=.0004 Mythic:fromSheet("TMT silhouette cards")
+Replace=0.00393F Rare:fromSheet("TMT sewer cards")
+Replace=0.000393F Mythic:fromSheet("TMT sewer cards")
 
 [WildcardFoil]
 Base=Common:fromSheet("TMT cards")
 Replace=0.277F Uncommon:fromSheet("TMT cards")
 Replace=0.067F Rare:fromSheet("TMT cards")
-Replace=0.008F Mythic:fromSheet("TMT cards")
-Replace=0.001F Common:fromSheet("TMT scene cards")
-Replace=0.001F Uncommon:fromSheet("TMT scene cards")
-Replace=0.001F Rare:fromSheet("TMT scene cards")
-Replace=0.005F Uncommon:fromSheet("TMT sewer cards")
-Replace=0.001F Rare:fromSheet("TMT sewer cards")
-Replace=0.001F Mythic:fromSheet("TMT sewer cards")
-Replace=0.0004F Mythic:fromSheet("TMT silhouette cards")
+Replace=0.00948F Mythic:fromSheet("TMT cards")
+Replace=0.004849F Common:fromSheet("TMT scene cards")
+Replace=0.008486F Uncommon:fromSheet("TMT scene cards")
+Replace=0.003031F Rare:fromSheet("TMT scene cards")
+Replace=0.001212F Mythic:fromSheet("TMT silhouette cards")
+Replace=0.007274F Uncommon:fromSheet("TMT sewer cards")
+Replace=0.006061F Rare:fromSheet("TMT sewer cards")
+Replace=0.000606F Mythic:fromSheet("TMT sewer cards")
 
 [Land]
 Base=BasicLand:fromSheet("TMT cards")
@@ -400,7 +406,7 @@ Replace=0.08 fromSheet("TMT rooftop lands")+
 299 M Dark Leo & Shredder @Yukke Morita
 300 M Krang, Utrom Warlord @Taka-F
 
-[promos]
+[promo]
 320 R Shark Shredder, Killer Clone @Adam Volker
 
 [tokens]
@@ -446,7 +452,7 @@ Replace=0.08 fromSheet("TMT rooftop lands")+
 1 Michelangelo, Weirdness to 11|TMT|[214]
 
 [silhouette cards]
-1 Leonardo, Sewer|TMT|[215]
+1 Leonardo, Sewer Samurai|TMT|[215]
 1 Donatello, Mutant Mechanic|TMT|[216]
 1 Super Shredder|TMT|[217]
 1 Raphael, Ninja Destroyer|TMT|[218]
@@ -524,7 +530,7 @@ Replace=0.08 fromSheet("TMT rooftop lands")+
 1 Raphael, Ninja Destroyer|TMT|[303]
 1 Michelangelo, Improviser|TMT|[304]
 
-[surge rooftap lands]
+[surge rooftop lands]
 1 Plains|TMT|[305]
 1 Island|TMT|[306]
 1 Swamp|TMT|[307]
@@ -576,7 +582,7 @@ Replace=0.08 fromSheet("TMT rooftop lands")+
 1 Michelangelo, Weirdness to 11|TMT|[214]
 
 [legendary silhouette turtles]
-1 Leondaro, Sewer Samurai|TMT|[215]
+1 Leonardo, Sewer Samurai|TMT|[215]
 1 Donatello, Mutant Mechanic|TMT|[216]
 1 Raphael, Ninja Destroyer|TMT|[218]
 1 Michelangelo, Improviser|TMT|[219]

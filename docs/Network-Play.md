@@ -169,9 +169,15 @@ Forge has built-in **UPnP** support that can automatically configure your router
 | **Not Now** | Skip UPnP this time. You will be prompted again next time. |
 | **Never** | Never attempt UPnP. Saved as a preference. You will need to configure port forwarding manually. |
 
-**If UPnP succeeds**, no manual router configuration is needed — skip to [Validate External Access](#2-validate-external-access) below.
+**If UPnP succeeds**, Forge will display a confirmation in the lobby chat:
+> UPnP: Port 36743 forwarded successfully. Remote players should be able to connect using your external IP.
 
-**If UPnP fails**, Forge will notify you that the port could not be opened automatically. You will need to configure port forwarding manually using the steps below. Common reasons for failure: UPnP is disabled on the router, the router doesn't support UPnP, or a firewall is blocking UPnP discovery.
+No manual router configuration is needed — skip to [Validate External Access](#2-validate-external-access) below.
+
+**If UPnP fails**, Forge will display a notification in the lobby chat after a few seconds:
+> UPnP: Automatic port forwarding failed for port 36743. You may need to set up manual port forwarding for remote play.
+
+You will need to configure port forwarding manually using the steps below. Common reasons for failure: UPnP is disabled on the router, the router doesn't support UPnP, or a firewall is blocking UPnP discovery.
 
 ### 1. Manual Port Forwarding on the Router
 

@@ -352,12 +352,25 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
                 BRAWL_P5_DECK_STATE, BRAWL_P6_DECK_STATE,
                 BRAWL_P7_DECK_STATE, BRAWL_P8_DECK_STATE };
 
+        /** Phase stop prefs in PhaseType order (UPKEEP through CLEANUP, skipping UNTAP). */
+        public static FPref[] PHASES_AI = {
+                PHASE_AI_UPKEEP, PHASE_AI_DRAW, PHASE_AI_MAIN1,
+                PHASE_AI_BEGINCOMBAT, PHASE_AI_DECLAREATTACKERS,
+                PHASE_AI_DECLAREBLOCKERS, PHASE_AI_FIRSTSTRIKE,
+                PHASE_AI_COMBATDAMAGE, PHASE_AI_ENDCOMBAT,
+                PHASE_AI_MAIN2, PHASE_AI_EOT, PHASE_AI_CLEANUP };
+        public static FPref[] PHASES_HUMAN = {
+                PHASE_HUMAN_UPKEEP, PHASE_HUMAN_DRAW, PHASE_HUMAN_MAIN1,
+                PHASE_HUMAN_BEGINCOMBAT, PHASE_HUMAN_DECLAREATTACKERS,
+                PHASE_HUMAN_DECLAREBLOCKERS, PHASE_HUMAN_FIRSTSTRIKE,
+                PHASE_HUMAN_COMBATDAMAGE, PHASE_HUMAN_ENDCOMBAT,
+                PHASE_HUMAN_MAIN2, PHASE_HUMAN_EOT, PHASE_HUMAN_CLEANUP };
+
     }
 
     /** Instantiates a ForgePreferences object. */
     public ForgePreferences() {
         super(ForgeConstants.MAIN_PREFS_FILE, FPref.class);
-        migrateShortcutDefaults();
         migrateLogVerbosity();
     }
 
@@ -416,24 +429,6 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         }
         setPref(FPref.DEV_LOG_CUSTOM_TYPES, sj.toString());
         save();
-    }
-
-    /**
-     * Migrates shortcut preferences from old defaults to new Ctrl+key defaults.
-     * Previously, Concede/EndTurn/AlphaStrike had configurable shortcuts that
-     * differed from their hardcoded menu accelerators. Now the menu accelerators
-     * are driven by the configurable preferences, so the defaults must match.
-     */
-    private void migrateShortcutDefaults() {
-        migrateIfOldDefault(FPref.SHORTCUT_CONCEDE, "17", "17 81");
-        migrateIfOldDefault(FPref.SHORTCUT_ENDTURN, "69", "17 69");
-        migrateIfOldDefault(FPref.SHORTCUT_ALPHASTRIKE, "65", "17 65");
-    }
-
-    private void migrateIfOldDefault(final FPref pref, final String oldDefault, final String newDefault) {
-        if (oldDefault.equals(getPref(pref))) {
-            setPref(pref, newDefault);
-        }
     }
 
     @Override

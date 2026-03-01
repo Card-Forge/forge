@@ -249,37 +249,6 @@
 ]</property>
    </properties>
   </object>
-  <object id="155" template="../../../../common/maps/obj/dialog.tx" x="234.484" y="145.083" width="42.6983" height="33" visible="1">
-   <properties>
-    <property name="dialog">[
-    {
-    &quot;text&quot;: &quot;A strange blue-skinned goblin stands at the top of the stairs, holding out some glowing mushrooms.
-
-'You! Eat these!'&quot;,
-    &quot;options&quot;: [
-      {
-        &quot;name&quot;: &quot;Uh... no thanks&quot;,
-        &quot;text&quot;: &quot;His expression turns sour. 'Rude! Ungrateful! Die!'&quot;,
-        &quot;options&quot;: [
-          {
-            &quot;name&quot;: &quot;(Continue)&quot;,
-            &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]
-          },
-          {
-            &quot;name&quot;: &quot;Sure, why not.&quot;,
-            &quot;text&quot;: &quot;'Yes, yes. Very tasty. Delicious. Nutritious. Definitely no side effects. Goodbye!'&quot;,
-            &quot;options&quot;: [{&quot;name&quot;: &quot;(You feel a bit queezy)&quot;}],
-            &quot;action&quot;: [
-                {
-                  &quot;grantRewards&quot;: [
-                    {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Sensation Gorger&quot;}                
-                  ],
-            &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]
-          }
-            ]
-        }]}]}]</property>
-   </properties>
-  </object>
   <object id="156" template="../../../../common/maps/obj/dialog.tx" x="430.592" y="105.82" width="63.223" height="21.3333" rotation="0" visible="1">
    <properties>
     <property name="dialog">[

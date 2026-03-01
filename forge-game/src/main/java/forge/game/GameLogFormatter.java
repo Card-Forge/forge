@@ -179,6 +179,15 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     }
 
     @Override
+    public GameLogEntry visit(GameEventPlayerLivesChanged ev) {
+        String message = localizer.getMessage("lblLogPlayerLifeChange",
+            ev.player().toString(),
+            String.valueOf(ev.oldLives()),
+            String.valueOf(ev.newLives()));
+        return new GameLogEntry(GameLogEntryType.LIFE, message);
+    }
+
+    @Override
     public GameLogEntry visit(GameEventPlayerPoisoned ev) {
         String message = localizer.getMessage("lblLogPlayerReceivesNPosionCounterFrom",
                             ev.receiver().toString(), String.valueOf(ev.amount()), ev.source().toString());

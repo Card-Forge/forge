@@ -1066,3 +1066,171 @@ AcidicBootDagger
 BossTrophy
   xy: 16, 64
   size: 16, 16
+KryGreaves
+  xy: 112, 128
+  size: 16, 16
+ImmortalAnklet
+  xy: 128, 976
+  size: 16, 16
+BladedBoots
+  xy: 16, 144
+  size: 16, 16
+JovensBoots
+  xy: 128, 144
+  size: 16, 16
+FlowstoneBoots
+  xy: 16, 128
+  size: 16, 16
+JandorsHorseshoes
+  xy: 80, 496
+  size: 16, 16
+AshnodsGreaves
+  xy: 32, 160
+  size: 16, 16
+PowerArmorGreaves
+  xy: 128, 160
+  size: 16, 16
+BelbesBoots
+  xy: 112, 176
+  size: 16, 16
+PaladinsShield
+  xy: 272, 128
+  size: 16, 16
+DrudgeSpellbook
+  xy: 128, 688
+  size: 16, 16
+OnuletShield
+  xy: 208, 208
+  size: 16, 16
+StaffOfAzar
+  xy: 272, 592
+  size: 16, 16
+SentrysShield
+  xy: 288, 128
+  size: 16, 16
+ShieldOfTheHivelord
+  xy: 160, 208
+  size: 16, 16
+AttendantsPrayerbook
+  xy: 96, 656
+  size: 16, 16
+GuardsShield
+  xy: 256, 160
+  size: 16, 16
+WarrenTendersBaton
+  xy: 176, 592
+  size: 16, 16
+RhysticAmulet
+  xy: 80, 784
+  size: 16, 16
+ExplorersHat
+  xy: 144, 336
+  size: 16, 16
+WinterCap
+  xy: 112, 336
+  size: 16, 16
+DraconianNecklace
+  xy: 144, 832
+  size: 16, 16
+DragonBloodNecklace
+  xy: 144, 848
+  size: 16, 16
+BlessedHalo
+  xy: 80, 352
+  size: 16, 16
+SantasHat
+  xy: 64, 304
+  size: 16, 16
+KrampussHorns
+  xy: 32, 368
+  size: 16, 16
+TriassicAmulet
+  xy: 16, 848
+  size: 16, 16
+SlungMedicineBag
+  xy: 112, 624
+  size: 16, 16
+SulfuricAmulet
+  xy: 80, 800
+  size: 16, 16
+PyromaniacsMask
+  xy: 96, 352
+  size: 16, 16
+CrownOfTheChosen
+  xy: 128, 368
+  size: 16, 16
+YellowScarvesSpear
+  xy: 208, 544
+  size: 16, 16
+ConsumptiveVial
+  xy: 96, 624
+  size: 16, 16
+GroundbreakerMace
+  xy: 272, 432
+  size: 16, 16
+RingOfUnmaking
+  xy: 64, 832
+  size: 16, 16
+LanceOfLurkingEvil
+  xy: 160, 544
+  size: 16, 16
+IvySeersTome
+  xy: 96, 672
+  size: 16, 16
+VampiresDagger
+  xy: 256, 352
+  size: 16, 16
+CopperAngelsAxe
+  xy: 224, 288
+  size: 16, 16
+ClockworkLance
+  xy: 304, 528
+  size: 16, 16
+JalumRobes
+  xy: 128, 16
+  size: 16, 16
+JayemdaeRobes
+  xy: 80, 0
+  size: 16, 16
+FoolsOutfit
+  xy: 368, 48
+  size: 16, 16
+DisruptorsRobes
+  xy: 384, 16
+  size: 16, 16
+PhyrexianImplant
+  xy: 256, 48
+  size: 16, 16
+DjinnsSilks
+  xy: 336, 0
+  size: 16, 16
+BarrinsRobes
+  xy: 432, 16
+  size: 16, 16
+HauntedRobes
+  xy: 176, 16
+  size: 16, 16
+ArmorOfMadness
+  xy: 160, 96
+  size: 16, 16
+BeltOfWorryBeads
+  xy: 112, 848
+  size: 16, 16
+PurgatoryPriestsRobes
+  xy: 96, 16
+  size: 16, 16
+YawgmothsArmor
+  xy: 240, 96
+  size: 16, 16
+NoblesSilks
+  xy: 192, 64
+  size: 16, 16
+SagesRobes
+  xy: 400, 0
+  size: 16, 16
+OverwhelmingArmor
+  xy: 240, 80
+  size: 16, 16
+BraidwoodLeathers
+  xy: 176, 112
+  size: 16, 16
