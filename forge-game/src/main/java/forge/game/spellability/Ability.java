@@ -17,8 +17,6 @@
  */
 package forge.game.spellability;
 
-import com.esotericsoftware.minlog.Log;
-
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.card.Card;
@@ -49,24 +47,6 @@ public abstract class Ability extends SpellAbility {
     }
     protected Ability(final Card sourceCard, final Cost cost, SpellAbilityView view0) {
         super(sourceCard, cost, view0);
-    }
-
-    /**
-     * <p>
-     * Constructor for Ability.
-     * </p>
-     * 
-     * @param sourceCard
-     *            a {@link forge.game.card.Card} object.
-     * @param manaCost
-     *            a {@link java.lang.String} object.
-     * @param stackDescription
-     *            a {@link java.lang.String} object.
-     */
-    public Ability(final Card sourceCard, final ManaCost manaCost, final String stackDescription) {
-        this(sourceCard, manaCost);
-        this.setStackDescription(stackDescription);
-        Log.debug("an ability is being played from" + sourceCard.getName());
     }
 
     /** {@inheritDoc} */

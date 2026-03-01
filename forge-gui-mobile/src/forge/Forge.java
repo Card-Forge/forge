@@ -150,7 +150,7 @@ public class Forge implements ApplicationListener {
                     scope.getContexts().setOperatingSystem(hwInfo.os());
                 });
             }
-            GuiBase.setDeviceInfo(hwInfo, AndroidAPI, totalRAM, deviceAdapter.getDownloadsDir());
+            GuiBase.setDeviceInfo(hwInfo, AndroidAPI, deviceAdapter.getDownloadsDir());
         }
         return app;
     }
@@ -170,8 +170,8 @@ public class Forge implements ApplicationListener {
     public void create() {
         //install our error handler
         ExceptionHandler.registerErrorHandling();
-        //init hwInfo to log
-        System.out.println(GuiBase.getHWInfo());
+        //log version and system info
+        GuiBase.logHWInfo();
         // closeSplashScreen() is called early on non-Windows OS so it will not crash, LWJGL3 bug on AWT Splash.
         if (OperatingSystem.isWindows())
             getDeviceAdapter().closeSplashScreen();
@@ -1098,11 +1098,6 @@ public class Forge implements ApplicationListener {
             return currentScene;
         }
         return null;
-    }
-
-    //log message to Forge.log file
-    public static void log(Object message) {
-        System.out.println(message);
     }
 
     public static void startKeyInput(KeyInputAdapter adapter) {

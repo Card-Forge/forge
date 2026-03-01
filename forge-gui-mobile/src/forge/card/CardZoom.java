@@ -103,27 +103,22 @@ public class CardZoom extends FOverlay {
                 if (pc != null) {
                     Card cardW = Card.fromPaperCard(pc, null);
                     cardW.setState(CardStateName.SpecializeW, true);
-                    cardW.setImageKey(pc, CardStateName.SpecializeW);
                     list.add(cardW.getView());
 
                     Card cardU = Card.fromPaperCard(pc, null);
                     cardU.setState(CardStateName.SpecializeU, true);
-                    cardU.setImageKey(pc, CardStateName.SpecializeU);
                     list.add(cardU.getView());
 
                     Card cardB = Card.fromPaperCard(pc, null);
                     cardB.setState(CardStateName.SpecializeB, true);
-                    cardB.setImageKey(pc, CardStateName.SpecializeB);
                     list.add(cardB.getView());
 
                     Card cardR = Card.fromPaperCard(pc, null);
                     cardR.setState(CardStateName.SpecializeR, true);
-                    cardR.setImageKey(pc, CardStateName.SpecializeR);
                     list.add(cardR.getView());
 
                     Card cardG = Card.fromPaperCard(pc, null);
                     cardG.setState(CardStateName.SpecializeG, true);
-                    cardG.setImageKey(pc, CardStateName.SpecializeG);
                     list.add(cardG.getView());
                 }
                 if (!list.isEmpty())
@@ -185,40 +180,37 @@ public class CardZoom extends FOverlay {
                     mutateIconBounds = new Rectangle();
         }
         showAltState = false;
-        if (currentCard != null && currentCard.canSpecialize() && currentCard.getCurrentState().getState() == CardStateName.Original)
-            specialize.setVisible(true);
-        else
-            specialize.setVisible(false);
+        specialize.setVisible(
+                currentCard != null && currentCard.canSpecialize() && currentCard.getCurrentState().getState() == CardStateName.Original
+        );
     }
 
     private static CardView getCardView(Object item) {
         if (item instanceof Entry) {
             item = ((Entry<?, ?>) item).getKey();
         }
-        if (item instanceof CardView) {
-            return (CardView) item;
+        if (item instanceof CardView cw) {
+            return cw;
         }
-        if (item instanceof DeckProxy) {
-            if (item instanceof CardThemedDeckGenerator) {
-                return CardView.getCardForUi(((CardThemedDeckGenerator) item).getPaperCard());
-            } else if (item instanceof CommanderDeckGenerator) {
-                return CardView.getCardForUi(((CommanderDeckGenerator) item).getPaperCard());
-            } else if (item instanceof ArchetypeDeckGenerator) {
-                return CardView.getCardForUi(((ArchetypeDeckGenerator) item).getPaperCard());
+        if (item instanceof DeckProxy deck) {
+            if (item instanceof CardThemedDeckGenerator gen) {
+                return CardView.getCardForUi(gen.getPaperCard());
+            } else if (item instanceof CommanderDeckGenerator gen) {
+                return CardView.getCardForUi(gen.getPaperCard());
+            } else if (item instanceof ArchetypeDeckGenerator gen) {
+                return CardView.getCardForUi(gen.getPaperCard());
             } else {
-                DeckProxy deck = ((DeckProxy) item);
                 return new CardView(-1, null, deck.getName(), null, deck.getImageKey(false));
             }
 
         }
-        if (item instanceof IPaperCard) {
-            return CardView.getCardForUi((IPaperCard) item);
+        if (item instanceof IPaperCard ipc) {
+            return CardView.getCardForUi(ipc);
         }
-        if (item instanceof ConquestCommander) {
-            return CardView.getCardForUi(((ConquestCommander) item).getCard());
+        if (item instanceof ConquestCommander cc) {
+            return CardView.getCardForUi(cc.getCard());
         }
-        if (item instanceof InventoryItem) {
-            InventoryItem ii = (InventoryItem)item;
+        if (item instanceof InventoryItem ii) {
             return new CardView(-1, null, ii.getDisplayName(), null, ii.getImageKey(false));
         }
         return new CardView(-1, null, item.toString());
@@ -336,7 +328,6 @@ public class CardZoom extends FOverlay {
         float cardWidth, cardHeight, y;
 
         if (oneCardView && !Forge.isLandscapeMode()) {
-
             cardWidth = w;
             cardHeight = FCardPanel.ASPECT_RATIO * cardWidth;
 
@@ -349,7 +340,6 @@ public class CardZoom extends FOverlay {
                 }
             }
         } else {
-
             cardWidth = w * 0.5f;
             cardHeight = FCardPanel.ASPECT_RATIO * cardWidth;
 

@@ -753,14 +753,9 @@ public class CardInfoPopup {
 
     private static String specImageKey(final String baseKey,
                                         final CardStateName state) {
-        switch (state) {
-            case SpecializeW: return baseKey + ImageKeys.SPECFACE_W;
-            case SpecializeU: return baseKey + ImageKeys.SPECFACE_U;
-            case SpecializeB: return baseKey + ImageKeys.SPECFACE_B;
-            case SpecializeR: return baseKey + ImageKeys.SPECFACE_R;
-            case SpecializeG: return baseKey + ImageKeys.SPECFACE_G;
-            default: return null;
-        }
+        final String name = state.name();
+        if (!name.startsWith("Specialize") || name.length() != 11) return null;
+        return baseKey + "$" + Character.toLowerCase(name.charAt(10)) + "spec";
     }
 
     private static void addSpellbookEntries(final List<RelatedCardEntry> entries,

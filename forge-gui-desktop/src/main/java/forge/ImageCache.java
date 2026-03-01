@@ -42,6 +42,7 @@ import com.mortennobel.imagescaling.ResampleOp;
 
 import forge.card.CardStateName;
 import forge.card.CardSplitType;
+import forge.card.MagicColor;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
@@ -207,8 +208,7 @@ public class ImageCache {
     }
 
     // return the pair of image and a flag to indicate if it is a placeholder image.
-    private static Pair<BufferedImage, Boolean> getOriginalImageInternal(String imageKey, boolean useDefaultIfNotFound,
-                                                                         CardView cardView) {
+    private static Pair<BufferedImage, Boolean> getOriginalImageInternal(String imageKey, boolean useDefaultIfNotFound, CardView cardView) {
         if (null == imageKey) {
             return Pair.of(null, false);
         }
@@ -237,23 +237,7 @@ public class ImageCache {
                 if (altState) {
                     imageKey = ipc.getCardAltImageKey();
                 } else if (!specColor.isEmpty()) {
-                    switch (specColor) {
-                        case "white":
-                            imageKey = ipc.getCardWSpecImageKey();
-                            break;
-                        case "blue":
-                            imageKey = ipc.getCardUSpecImageKey();
-                            break;
-                        case "black":
-                            imageKey = ipc.getCardBSpecImageKey();
-                            break;
-                        case "red":
-                            imageKey = ipc.getCardRSpecImageKey();
-                            break;
-                        case "green":
-                            imageKey = ipc.getCardGSpecImageKey();
-                            break;
-                    }
+                    imageKey = ImageUtil.getImageKey(ipc, specColor, true);
                 } else {
                     imageKey = ipc.getCardImageKey();
                 }
@@ -387,14 +371,9 @@ public class ImageCache {
     }
 
     private static CardStateName specColorToStateName(String specColor) {
-        switch (specColor) {
-            case "white": return CardStateName.SpecializeW;
-            case "blue": return CardStateName.SpecializeU;
-            case "black": return CardStateName.SpecializeB;
-            case "red": return CardStateName.SpecializeR;
-            case "green": return CardStateName.SpecializeG;
-            default: return null;
-        }
+        MagicColor.Color color = MagicColor.Color.fromName(specColor);
+        if (color == MagicColor.Color.COLORLESS) return null;
+        return CardStateName.smartValueOf("Specialize" + color.getShortName());
     }
 
     public static boolean isSupportedImageSize(final int width, final int height) {

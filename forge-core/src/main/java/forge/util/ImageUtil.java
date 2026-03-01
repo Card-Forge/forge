@@ -6,6 +6,7 @@ import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
+import forge.card.MagicColor;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import java.util.regex.Pattern;
@@ -97,7 +98,7 @@ public class ImageUtil {
         return key;
     }
 
-    public static String getImageRelativePath(PaperCard cp, String face, boolean includeSet, boolean isDownloadUrl) {
+    public static String getImageRelativePath(IPaperCard cp, String face, boolean includeSet, boolean isDownloadUrl) {
         final String nameToUse = cp == null ? null : getNameToUse(cp, face);
         if (nameToUse == null) {
             return null;
@@ -153,7 +154,7 @@ public class ImageUtil {
         }
     }
 
-    public static String getNameToUse(PaperCard cp, String face) {
+    public static String getNameToUse(IPaperCard cp, String face) {
         final CardRules card = cp.getRules();
         if (face.equals("back")) {
             if (cp.hasBackFace())
@@ -197,14 +198,13 @@ public class ImageUtil {
         return cp.getName();
     }
 
-    public static String getImageKey(PaperCard cp, String face, boolean includeSet) {
+    public static String getImageKey(IPaperCard cp, String face, boolean includeSet) {
         return getImageRelativePath(cp, face, includeSet, false);
     }
 
     public static String getDownloadUrl(PaperCard cp, String face) {
         return getImageRelativePath(cp, face, true, true);
     }
-
 
     public static String getScryfallDownloadUrl(PaperCard cp, String face, String setCode, String langCode, boolean useArtCrop){
         final Pattern funnyCardCollectorNumberPattern = Pattern.compile("^F\\d+");
@@ -292,14 +292,9 @@ public class ImageUtil {
     }
 
     private static String specFaceToCollectorSuffix(String face) {
-        switch (face) {
-            case "white": return "w";
-            case "blue":  return "u";
-            case "black": return "b";
-            case "red":   return "r";
-            case "green": return "g";
-            default:      return null;
-        }
+        MagicColor.Color color = MagicColor.Color.fromName(face);
+        if (color == MagicColor.Color.COLORLESS) return null;
+        return color.getShortName().toLowerCase();
     }
 
     private static String encodeUtf8(String s) {
