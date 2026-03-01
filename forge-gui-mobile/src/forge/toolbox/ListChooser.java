@@ -160,9 +160,9 @@ public class ListChooser<T> extends FContainer {
 
         List<Predicate<? super T>> predicates = new ArrayList<>();
 
-        final String pattern = StringUtils.stripAccents(txtSearch.getText().toLowerCase());
+        final String pattern = normalize(txtSearch.getText());
         if (!pattern.isEmpty()) {
-            predicates.add(input -> StringUtils.stripAccents(lstChoices.getChoiceText(input).toLowerCase()).contains(pattern));
+            predicates.add(input -> normalize(lstChoices.getChoiceText(input)).contains(pattern));
         }
         if (advancedSearchFilter != null && !advancedSearchFilter.isEmpty()) {
             predicates.add((Predicate<? super T>)advancedSearchFilter.getPredicate());
@@ -179,6 +179,10 @@ public class ListChooser<T> extends FContainer {
             lstChoices.addSelectedIndex(0);
         }
         lstChoices.setScrollTop(0);
+    }
+
+    private static String normalize(final String s) {
+        return StringUtils.stripAccents(s.toLowerCase()).replaceAll("[^a-z0-9 ]", "");
     }
 
     private void updateHeight() {

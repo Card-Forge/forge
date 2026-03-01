@@ -191,7 +191,7 @@ public class ListChooser<T> {
     }
 
     private void applyFilter(final FTextField searchField) {
-        final String text = StringUtils.stripAccents(searchField.getText().toLowerCase());
+        final String text = normalize(searchField.getText());
         lstChoices.clearSelection();
 
         if (text.isEmpty()) {
@@ -200,7 +200,7 @@ public class ListChooser<T> {
             final List<T> startsWith = new ArrayList<>();
             final List<T> contains = new ArrayList<>();
             for (final T item : allItems) {
-                final String name = StringUtils.stripAccents(getDisplayText(item).toLowerCase());
+                final String name = normalize(getDisplayText(item));
                 if (name.startsWith(text)) {
                     startsWith.add(item);
                 } else if (name.contains(text)) {
@@ -217,6 +217,10 @@ public class ListChooser<T> {
         if (!displayedItems.isEmpty() && maxChoices > 0) {
             lstChoices.setSelectedIndex(0);
         }
+    }
+
+    private static String normalize(final String s) {
+        return StringUtils.stripAccents(s.toLowerCase()).replaceAll("[^a-z0-9 ]", "");
     }
 
     private String getDisplayText(final T value) {
