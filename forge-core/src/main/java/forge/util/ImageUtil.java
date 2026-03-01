@@ -293,9 +293,9 @@ public class ImageUtil {
     }
 
     private static String specFaceToCollectorSuffix(String face) {
-        byte color = MagicColor.fromName(face);
-        if (color == 0) return null;
-        return MagicColor.toShortString(color).toLowerCase();
+        MagicColor.Color color = MagicColor.Color.fromName(face);
+        if (color == MagicColor.Color.COLORLESS) return null;
+        return color.getShortName().toLowerCase();
     }
 
     private static String encodeUtf8(String s) {
