@@ -521,8 +521,20 @@ public class CardInfoPopup {
             nameLabel.setFont(boldFont.getBaseFont());
             nameLabel.setForeground(TEXT_PRIMARY);
             nameLabel.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
-            nameLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE,
-                    nameLabel.getPreferredSize().height));
+            // Use the HTML View to compute wrapped height at constrained width
+            final javax.swing.text.View nameView = (javax.swing.text.View)
+                    nameLabel.getClientProperty(
+                            javax.swing.plaf.basic.BasicHTML.propertyKey);
+            int nameHeight;
+            if (nameView != null) {
+                nameView.setSize(textWidth, 0);
+                nameHeight = (int) Math.ceil(
+                        nameView.getPreferredSpan(javax.swing.text.View.Y_AXIS));
+            } else {
+                nameHeight = nameLabel.getPreferredSize().height;
+            }
+            nameLabel.setPreferredSize(new Dimension(textWidth, nameHeight));
+            nameLabel.setMaximumSize(new Dimension(textWidth, nameHeight));
             pill.add(nameLabel);
 
             // Reminder text (encode mana symbols for Swing HTML)

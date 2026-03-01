@@ -21,7 +21,6 @@ import forge.game.keyword.Equip;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordAction;
 import forge.game.keyword.KeywordInterface;
-import forge.game.keyword.KeywordWithCostInterface;
 import forge.game.keyword.KeywordWithTypeInterface;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
@@ -117,15 +116,8 @@ public final class KeywordInfoUtil {
                 } catch (Exception ex) {
                     reminderText = "";
                 }
-                // For Craft, the full title includes exile costs that are
-                // very long — show just "Craft {mana}" instead
                 final String title;
-                if (kw == Keyword.CRAFT
-                        && inst instanceof KeywordWithCostInterface) {
-                    final String mana = ((KeywordWithCostInterface) inst)
-                            .getCost().getTotalMana().toString();
-                    title = "Craft " + mana;
-                } else if (kw == Keyword.EQUIP
+                if (kw == Keyword.EQUIP
                         && inst instanceof Equip) {
                     // Include type qualifier for non-default equip variants
                     // (e.g. "Equip commander {3}" vs plain "Equip {5}")
@@ -182,6 +174,10 @@ public final class KeywordInfoUtil {
             }
             final String name = action.getDisplayName();
             if (existingNames.contains(name.toLowerCase())) {
+                continue;
+            }
+            // Transform is redundant when Craft is present (craft explains the transformation)
+            if (action == KeywordAction.TRANSFORM && existingNames.contains("craft")) {
                 continue;
             }
             // Match whole word (case-insensitive): "goad", "goads", "goaded"
