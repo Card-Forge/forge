@@ -317,15 +317,15 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         SHORTCUT_SHOWHOTKEYS("72"),
         SHORTCUT_PANELTABS("17 84"),
         SHORTCUT_CARDOVERLAYS("17 79"),
-        SHORTCUT_YIELD_UNTIL_NEXT_PHASE("113"),         // F2 key
-        SHORTCUT_YIELD_UNTIL_BEFORE_COMBAT("114"),      // F3 key
-        SHORTCUT_YIELD_UNTIL_END_STEP("115"),           // F4 key
-        SHORTCUT_YIELD_UNTIL_END_OF_TURN("116"),        // F5 key
-        SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN("117"),     // F6 key
-        SHORTCUT_YIELD_UNTIL_STACK_CLEARS("118"),       // F7 key
-        SHORTCUT_YIELD_CANCEL("27"),                    // ESC key
         SHORTCUT_YIELD_OPTIONS("17 89"),                // Ctrl+Y
+        SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN("113"),     // F2 key
+        SHORTCUT_YIELD_UNTIL_END_OF_TURN("114"),        // F3 key
+        SHORTCUT_YIELD_UNTIL_NEXT_PHASE("115"),         // F4 key
+        SHORTCUT_YIELD_UNTIL_BEFORE_COMBAT("116"),      // F5 key
+        SHORTCUT_YIELD_UNTIL_END_STEP("117"),           // F6 key
+        SHORTCUT_YIELD_UNTIL_STACK_CLEARS("118"),       // F7 key
         SHORTCUT_YIELD_AUTO_PASS("119"),               // F8 key
+        SHORTCUT_YIELD_CANCEL("27"),                    // ESC key
 
         LAST_IMPORTED_CUBE_ID("");
 

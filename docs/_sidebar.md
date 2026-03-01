@@ -6,7 +6,7 @@
   - [AI](ai.md)
   - [Network Play](network-play.md)
   - [Advanced search](Advanced-Search.md)
-  - [Expanded Yield Options](Expanded-Yield-Options.md)
+  - [Advanced Yield Options](Expanded-Yield-Options.md)
 
 - Adventure Mode
 
