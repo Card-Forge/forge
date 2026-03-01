@@ -24,7 +24,8 @@
       {
         "type": "card",
         "count": 1,
-        "cardName": "Mana Crypt"
+        "cardName": "Mana Crypt",
+        "editions": [ "PHPR" ]
       },
       {
         "type": "card",
@@ -33,11 +34,16 @@
         "editions": [ "DMU" ]
       },
       {
-        "type": "deckCard",
+        "type": "card",
+        "count": 1,
+        "cardName": "Jodah, Archmage Eternal",
+        "editions": [ "DMU" ]
+      },
+      {
+        "type": "randomCard",
         "count": 6,
-        "addMaxCount": 10, 
+        "addMaxCount": 10,
         "rarity": [
-          "Rare",
           "Mythic Rare"
         ]
       },
@@ -620,7 +626,7 @@
     "ai": "",
     "speed": 45,
     "scale": 1,
-    "life": 50,
+    "life": 70,
     "rewards": [
       {
         "type": "item",
@@ -649,9 +655,9 @@
         "editions": [ "EMN" ]
       },
       {
-        "type": "deckCard",
-        "count": 6,
-        "addMaxCount": 8, 
+        "type": "randomCard",
+        "count": 12,
+        "addMaxCount": 12,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -659,23 +665,23 @@
       },
       {
         "type": "gold",
-        "count": 2000,
-        "addMaxCount": 6000
+        "count": 4000,
+        "addMaxCount": 12000
       },
       {
         "type": "shards",
-        "count": 20,
-        "addMaxCount": 80
+        "count": 40,
+        "addMaxCount": 160
       },
       {
         "type": "card",
-        "count": 1,
+        "count": 2,
         "addMaxCount": 2, 
         "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
       },
       {
         "type": "card",
-        "count": 1,
+        "count": 2,
         "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
       },
       {
@@ -758,7 +764,6 @@
       }
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -832,7 +837,6 @@
       }
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -844,7 +848,7 @@
     "ai": "",
     "speed": 45,
     "scale": 6,
-    "life": 50,
+    "life": 70,
     "rewards": [
       {
         "type": "item",
@@ -872,9 +876,9 @@
         "cardName": "Ulamog, the Ceaseless Hunger"
       },
       {
-        "type": "deckCard",
-        "count": 6,
-        "addMaxCount": 7, 
+        "type": "randomCard",
+        "count": 12,
+        "addMaxCount": 12,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -882,23 +886,23 @@
       },
       {
         "type": "gold",
-        "count": 2000,
-        "addMaxCount": 6000
+        "count": 4000,
+        "addMaxCount": 12000
       },
       {
         "type": "shards",
-        "count": 20,
-        "addMaxCount": 80
+        "count": 40,
+        "addMaxCount": 160
       },
       {
         "type": "card",
-        "count": 1,
-        "addMaxCount": 2, 
+        "count": 2,
+        "addMaxCount": 2,
         "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
       },
       {
         "type": "card",
-        "count": 1,
+        "count": 2,
         "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
       },
       {
@@ -981,7 +985,6 @@
       }
     ],
     "colors": "C",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -993,7 +996,7 @@
     "ai": "",
     "speed": 45,
     "scale": 6,
-    "life": 50,
+    "life": 70,
     "rewards": [
       {
         "type": "item",
@@ -1021,9 +1024,9 @@
         "cardName": "Kozilek, the Broken Reality"
       },
       {
-        "type": "deckCard",
-        "count": 6,
-        "addMaxCount": 8, 
+        "type": "randomCard",
+        "count": 12,
+        "addMaxCount": 12,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -1031,23 +1034,23 @@
       },
       {
         "type": "gold",
-        "count": 2000,
-        "addMaxCount": 6000
+        "count": 4000,
+        "addMaxCount": 12000
       },
       {
         "type": "shards",
-        "count": 20,
-        "addMaxCount": 80
+        "count": 40,
+        "addMaxCount": 160
       },
       {
         "type": "card",
-        "count": 1,
-        "addMaxCount": 2, 
+        "count": 2,
+        "addMaxCount": 2,
         "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
       },
       {
         "type": "card",
-        "count": 1,
+        "count": 2,
         "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
       },
       {
@@ -1912,18 +1915,9 @@
         "cardName": "Garth One-Eye"
       },
       {
-        "type": "deckCard",
-        "count": 6,
-        "addMaxCount": 8, 
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-        ]
-      },
-      {
         "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 2, 
+        "count": 7,
+        "addMaxCount": 10,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -1956,7 +1950,6 @@
       }
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -2026,7 +2019,6 @@
       }
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -2039,7 +2031,7 @@
     "flying": true,
     "speed": 45,
     "scale": 3,
-    "life": 50,
+    "life": 70,
     "rewards": [
       {
         "type": "item",
@@ -2068,8 +2060,8 @@
       },
       {
         "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 2, 
+        "count": 8,
+        "addMaxCount": 10,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -2077,23 +2069,23 @@
       },
       {
         "type": "gold",
-        "count": 2000,
-        "addMaxCount": 6000
+        "count": 4000,
+        "addMaxCount": 12000
       },
       {
         "type": "shards",
-        "count": 20,
-        "addMaxCount": 80
+        "count": 40,
+        "addMaxCount": 160
       },
       {
         "type": "card",
-        "count": 1,
+        "count": 2,
         "addMaxCount": 2, 
         "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
       },
       {
         "type": "card",
-        "count": 1,
+        "count": 2,
         "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
       },
       {
@@ -2171,7 +2163,6 @@
       }
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -2242,7 +2233,6 @@
       }
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -2311,7 +2301,6 @@
       }
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -9804,7 +9793,6 @@
       }
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -9875,7 +9863,6 @@
       }
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -9946,7 +9933,6 @@
       }
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -9963,7 +9949,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Mistform Sliverband"
+        "itemName": "Imposter's Sliverband"
       },
       {
         "type": "card",
@@ -10016,7 +10002,6 @@
       }
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -10086,7 +10071,6 @@
       }
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -10156,7 +10140,6 @@
       }
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -10227,7 +10210,6 @@
       }
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -47025,12 +47007,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Azusa, Lost but Seeking"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Heavy Armor", "Greenseeker's Shoes", "Lifespark Gauntlet", "Amulet of Favor", "Brawler's Cestus"]
       },
       {
         "type": "deckCard",
@@ -47221,12 +47209,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Gallia of the Endless Dance"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Heavy Armor", "Greenseeker's Shoes", "Lifespark Gauntlet", "Amulet of Favor", "Brawler's Cestus"]
       },
       {
         "type": "deckCard",
@@ -47569,7 +47563,7 @@
     "ai": "",
     "scale": 2,
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
@@ -47580,6 +47574,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Nemata, Grove Guardian"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Heavy Armor", "Greenseeker's Shoes", "Lifespark Gauntlet", "Amulet of Favor", "Brawler's Cestus"]
       },
       {
         "type": "deckCard",
@@ -48233,12 +48233,18 @@
     "ai": "",
     "scale": 1,
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Jace, Vryn's Prodigy"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Sage's Robes", "Trickster's Shoes", "Aether Gauntlet", "Amulet of Mischief", "Hoversail Glove"]
       },
       {
         "type": "deckCard",
@@ -48631,12 +48637,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Shorikai, Genesis Engine"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Sage's Robes", "Trickster's Shoes", "Aether Gauntlet", "Amulet of Mischief", "Hoversail Glove"]
       },
       {
         "type": "deckCard",
@@ -48697,12 +48709,18 @@
     "ai": "",
     "flying": true,
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Tamiyo, Inquisitive Student"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Sage's Robes", "Trickster's Shoes", "Aether Gauntlet", "Amulet of Mischief", "Hoversail Glove"]
       },
       {
         "type": "deckCard",
@@ -48892,12 +48910,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Chandra, Fire of Kaladesh"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Flaming Armor", "Firefrightener Shoes", "Pyrite Gauntlet", "Amulet of Fury", "Chitinous Club"]
       },
       {
         "type": "deckCard",
@@ -49552,12 +49576,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Rivaz of the Claw"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Flaming Armor", "Firefrightener Shoes", "Pyrite Gauntlet", "Amulet of Fury", "Chitinous Club"]
       },
       {
         "type": "deckCard",
@@ -49617,7 +49647,7 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
@@ -49628,6 +49658,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Sarkhan, Dragon Ascendant"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Flaming Armor", "Firefrightener Shoes", "Pyrite Gauntlet", "Amulet of Fury", "Chitinous Club"]
       },
       {
         "type": "deckCard",
@@ -50220,12 +50256,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Kyler, Sigardian Emissary"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Blessed Armor", "Peddler's Shoes", "Sunbeam Gauntlet", "Amulet of Mirth", "Jousting Lance"]
       },
       {
         "type": "deckCard",
@@ -50286,12 +50328,18 @@
     "ai": "",
     "scale": 1,
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Kytheon, Hero of Akros"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Blessed Armor", "Peddler's Shoes", "Sunbeam Gauntlet", "Amulet of Mirth", "Jousting Lance"]
       },
       {
         "type": "deckCard",
@@ -50621,12 +50669,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Wyleth, Soul of Steel"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Blessed Armor", "Peddler's Shoes", "Sunbeam Gauntlet", "Amulet of Mirth", "Jousting Lance"]
       },
       {
         "type": "deckCard",
@@ -50821,12 +50875,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Ratadrabik of Urborg"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Forbidden Robes", "Witch's Shoes", "Necrogen Gauntlet", "Amulet of Scorn", "Blight Sickle"]
       },
       {
         "type": "deckCard",
@@ -50886,7 +50946,7 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
@@ -50902,6 +50962,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Braids, Conjurer Adept"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Forbidden Robes", "Witch's Shoes", "Necrogen Gauntlet", "Amulet of Scorn", "Blight Sickle"]
       },
       {
         "type": "deckCard",
@@ -51619,12 +51685,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Yuriko, the Tiger's Shadow"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Forbidden Robes", "Witch's Shoes", "Necrogen Gauntlet", "Amulet of Scorn", "Blight Sickle"]
       },
       {
         "type": "deckCard",
@@ -52177,12 +52249,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Jenson Carthalion, Druid Exile"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Steel Boots", "Caravaneer's Greaves", "Echo Shield", "Spidersilk Gloves", "Mithril Armor"]
       },
       {
         "type": "deckCard",
@@ -52646,12 +52724,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Codie, Vociferous Codex"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Steel Boots", "Caravaneer's Greaves", "Echo Shield", "Spidersilk Gloves", "Mithril Armor"]
       },
       {
         "type": "deckCard",
@@ -53108,12 +53192,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Karona, False God"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Steel Boots", "Caravaneer's Greaves", "Echo Shield", "Spidersilk Gloves", "Mithril Armor"]
       },
       {
         "type": "deckCard",
@@ -53573,12 +53663,18 @@
     "scale": 2,
     "flying": true,
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Kyodai, Soul of Kamigawa"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Steel Boots", "Caravaneer's Greaves", "Echo Shield", "Spidersilk Gloves", "Mithril Armor"]
       },
       {
         "type": "deckCard",
@@ -54035,12 +54131,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Atogatog"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Steel Boots", "Caravaneer's Greaves", "Echo Shield", "Spidersilk Gloves", "Mithril Armor"]
       },
       {
         "type": "deckCard",
@@ -61616,6 +61718,21 @@
   {
     "name": "Xantcha",
     "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz3.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Vadmir",
+    "sprite": "sprites/enemy/humanoid/human/artificer/archaeologist.atlas",
     "deck": [
       "decks/legends/mystery_list.dck"
     ],
