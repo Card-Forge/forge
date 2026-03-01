@@ -24,7 +24,8 @@
       {
         "type": "card",
         "count": 1,
-        "cardName": "Mana Crypt"
+        "cardName": "Mana Crypt",
+        "editions": [ "PHPR" ]
       },
       {
         "type": "card",
@@ -33,11 +34,16 @@
         "editions": [ "DMU" ]
       },
       {
-        "type": "deckCard",
+        "type": "card",
+        "count": 1,
+        "cardName": "Jodah, Archmage Eternal",
+        "editions": [ "DMU" ]
+      },
+      {
+        "type": "randomCard",
         "count": 6,
-        "addMaxCount": 10, 
+        "addMaxCount": 10,
         "rarity": [
-          "Rare",
           "Mythic Rare"
         ]
       },
@@ -620,7 +626,7 @@
     "ai": "",
     "speed": 45,
     "scale": 1,
-    "life": 50,
+    "life": 70,
     "rewards": [
       {
         "type": "item",
@@ -649,9 +655,9 @@
         "editions": [ "EMN" ]
       },
       {
-        "type": "deckCard",
-        "count": 6,
-        "addMaxCount": 8, 
+        "type": "randomCard",
+        "count": 12,
+        "addMaxCount": 12,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -659,23 +665,23 @@
       },
       {
         "type": "gold",
-        "count": 2000,
-        "addMaxCount": 6000
+        "count": 4000,
+        "addMaxCount": 12000
       },
       {
         "type": "shards",
-        "count": 20,
-        "addMaxCount": 80
+        "count": 40,
+        "addMaxCount": 160
       },
       {
         "type": "card",
-        "count": 1,
+        "count": 2,
         "addMaxCount": 2, 
         "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
       },
       {
         "type": "card",
-        "count": 1,
+        "count": 2,
         "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
       },
       {
@@ -844,7 +850,7 @@
     "ai": "",
     "speed": 45,
     "scale": 6,
-    "life": 50,
+    "life": 70,
     "rewards": [
       {
         "type": "item",
@@ -872,9 +878,9 @@
         "cardName": "Ulamog, the Ceaseless Hunger"
       },
       {
-        "type": "deckCard",
-        "count": 6,
-        "addMaxCount": 7, 
+        "type": "randomCard",
+        "count": 12,
+        "addMaxCount": 12,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -882,23 +888,23 @@
       },
       {
         "type": "gold",
-        "count": 2000,
-        "addMaxCount": 6000
+        "count": 4000,
+        "addMaxCount": 12000
       },
       {
         "type": "shards",
-        "count": 20,
-        "addMaxCount": 80
+        "count": 40,
+        "addMaxCount": 160
       },
       {
         "type": "card",
-        "count": 1,
-        "addMaxCount": 2, 
+        "count": 2,
+        "addMaxCount": 2,
         "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
       },
       {
         "type": "card",
-        "count": 1,
+        "count": 2,
         "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
       },
       {
@@ -993,7 +999,7 @@
     "ai": "",
     "speed": 45,
     "scale": 6,
-    "life": 50,
+    "life": 70,
     "rewards": [
       {
         "type": "item",
@@ -1021,9 +1027,9 @@
         "cardName": "Kozilek, the Broken Reality"
       },
       {
-        "type": "deckCard",
-        "count": 6,
-        "addMaxCount": 8, 
+        "type": "randomCard",
+        "count": 12,
+        "addMaxCount": 12,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -1031,23 +1037,23 @@
       },
       {
         "type": "gold",
-        "count": 2000,
-        "addMaxCount": 6000
+        "count": 4000,
+        "addMaxCount": 12000
       },
       {
         "type": "shards",
-        "count": 20,
-        "addMaxCount": 80
+        "count": 40,
+        "addMaxCount": 160
       },
       {
         "type": "card",
-        "count": 1,
-        "addMaxCount": 2, 
+        "count": 2,
+        "addMaxCount": 2,
         "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
       },
       {
         "type": "card",
-        "count": 1,
+        "count": 2,
         "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
       },
       {
@@ -2030,7 +2036,7 @@
     "flying": true,
     "speed": 45,
     "scale": 3,
-    "life": 50,
+    "life": 70,
     "rewards": [
       {
         "type": "item",
@@ -2059,8 +2065,8 @@
       },
       {
         "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 2, 
+        "count": 8,
+        "addMaxCount": 10,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -2068,23 +2074,23 @@
       },
       {
         "type": "gold",
-        "count": 2000,
-        "addMaxCount": 6000
+        "count": 4000,
+        "addMaxCount": 12000
       },
       {
         "type": "shards",
-        "count": 20,
-        "addMaxCount": 80
+        "count": 40,
+        "addMaxCount": 160
       },
       {
         "type": "card",
-        "count": 1,
+        "count": 2,
         "addMaxCount": 2, 
         "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
       },
       {
         "type": "card",
-        "count": 1,
+        "count": 2,
         "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
       },
       {
