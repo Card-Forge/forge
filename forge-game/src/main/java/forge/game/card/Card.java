@@ -17,7 +17,6 @@
  */
 package forge.game.card;
 
-import com.esotericsoftware.minlog.Log;
 import com.google.common.collect.*;
 import forge.GameCommand;
 import forge.ImageKeys;
@@ -58,12 +57,15 @@ import forge.trackable.Tracker;
 import forge.util.*;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
+import org.tinylog.Logger;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -6137,7 +6139,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (assignedDamage0 <= 0) {
             return;
         }
-        Log.debug(this + " - was assigned " + assignedDamage0 + " damage, by " + sourceCard);
+        Logger.debug(this + " - was assigned " + assignedDamage0 + " damage, by " + sourceCard);
         if (!assignedDamageMap.containsKey(sourceCard)) {
             assignedDamageMap.put(sourceCard, assignedDamage0);
         } else {
@@ -6352,29 +6354,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         Card uiCard = getCardForUi();
         if(uiCard != null)
             uiCard.currentState.setImageKey(iFN);
-    }
-    public final void setImageKey(final IPaperCard ipc, final CardStateName stateName) {
-        if (ipc == null)
-            return;
-        switch (stateName) {
-            case SpecializeB:
-                setImageKey(ipc.getCardBSpecImageKey());
-                break;
-            case SpecializeR:
-                setImageKey(ipc.getCardRSpecImageKey());
-                break;
-            case SpecializeG:
-                setImageKey(ipc.getCardGSpecImageKey());
-                break;
-            case SpecializeU:
-                setImageKey(ipc.getCardUSpecImageKey());
-                break;
-            case SpecializeW:
-                setImageKey(ipc.getCardWSpecImageKey());
-                break;
-            default:
-                break;
-        }
     }
 
     public String getImageKey(CardStateName state) {
@@ -6698,7 +6677,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
     public final void setSpecialized(final boolean bool) {
         specialized = bool;
-        setImageKey(getPaperCard(), getCurrentStateName());
     }
     public final boolean canSpecialize() {
         return getRules() != null && getRules().getSplitType() == CardSplitType.Specialize;

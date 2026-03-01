@@ -695,7 +695,7 @@
   },
   {
     "name": "Azlask",
-    "sprite": "sprites/enemy/aberration/gitaxianscientist.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/gitaxianscientist.atlas",
     "deck": [
       "decks/legends/azlask.dck"
     ],
@@ -841,7 +841,7 @@
   },
   {
     "name": "Ulamog",
-    "sprite": "sprites/enemy/aberration/drossgrimnarch.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/drossgrimnarch.atlas",
     "deck": [
       "decks/legends/ulamog.dck"
     ],
@@ -989,7 +989,7 @@
   },
   {
     "name": "Kozilek",
-    "sprite": "sprites/enemy/aberration/phyrexianangel.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/phyrexianangel.atlas",
     "deck": [
       "decks/legends/kozilek.dck"
     ],
@@ -1287,7 +1287,7 @@
   },
   {
     "name": "Atraxa",
-    "sprite": "sprites/enemy/aberration/phyrexianangel.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/phyrexianangel.atlas",
     "deck": [
       "decks/legends/atraxa.dck"
     ],
@@ -5015,7 +5015,7 @@
   },
   {
     "name": "Elesh Norn",
-    "sprite": "sprites/enemy/aberration/phyrexianangel.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/phyrexianangel.atlas",
     "deck": [
       "decks/legends/elesh_norn.dck"
     ],
@@ -6175,7 +6175,7 @@
   },
   {
     "name": "Ixhel",
-    "sprite": "sprites/enemy/aberration/phyrexianangel.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/phyrexianangel.atlas",
     "deck": [
       "decks/legends/ixhel.dck"
     ],
@@ -6376,7 +6376,7 @@
   },
   {
     "name": "Volrath",
-    "sprite": "sprites/enemy/aberration/gitaxianunderling.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/gitaxianunderling.atlas",
     "deck": [
       "decks/legends/volrath.dck"
     ],
@@ -8201,7 +8201,7 @@
   },
   {
     "name": "Jin-Gitaxias",
-    "sprite": "sprites/enemy/aberration/gitaxianscientist.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/gitaxianscientist.atlas",
     "deck": [
       "decks/legends/jin-gitaxias.dck"
     ],
@@ -8546,7 +8546,7 @@
   },
   {
     "name": "Gix",
-    "sprite": "sprites/enemy/aberration/drossgladiator.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/drossgladiator.atlas",
     "deck": [
       "decks/legends/gix.dck"
     ],
@@ -9572,7 +9572,7 @@
   },
   {
     "name": "Sheoldred",
-    "sprite": "sprites/enemy/aberration/drossgrimnarch.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/drossgrimnarch.atlas",
     "deck": [
       "decks/legends/sheoldred.dck"
     ],
@@ -10873,7 +10873,7 @@
   },
   {
     "name": "Vorinclex",
-    "sprite": "sprites/enemy/aberration/phyrexianangel.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/phyrexianangel.atlas",
     "deck": [
       "decks/legends/vorinclex.dck"
     ],
@@ -24370,7 +24370,7 @@
   },
   {
     "name": "Mondrak",
-    "sprite": "sprites/enemy/aberration/phyrexianduelist.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/phyrexianduelist.atlas",
     "deck": [
       "decks/legends/mondrak.dck"
     ],
@@ -28702,7 +28702,7 @@
   },
   {
     "name": "Unctus",
-    "sprite": "sprites/enemy/aberration/gitaxianunderling.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/gitaxianunderling.atlas",
     "deck": [
       "decks/legends/unctus.dck"
     ],
@@ -29311,7 +29311,7 @@
   },
   {
     "name": "Ertai",
-    "sprite": "sprites/enemy/aberration/gitaxianscientist.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/gitaxianscientist.atlas",
     "deck": [
       "decks/legends/ertai.dck"
     ],
@@ -29458,7 +29458,7 @@
   },
   {
     "name": "Tsabo Tavoc",
-    "sprite": "sprites/enemy/aberration/drossgrimnarch.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/drossgrimnarch.atlas",
     "deck": [
       "decks/legends/tsabo_tavoc.dck"
     ],
@@ -30891,7 +30891,7 @@
   },
   {
     "name": "Drivnod",
-    "sprite": "sprites/enemy/aberration/drossgrimnarch.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/drossgrimnarch.atlas",
     "deck": [
       "decks/legends/drivnod.dck"
     ],
@@ -30957,7 +30957,7 @@
   },
   {
     "name": "Vraan",
-    "sprite": "sprites/enemy/aberration/drossgladiator.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/drossgladiator.atlas",
     "deck": [
       "decks/legends/vraan.dck"
     ],
@@ -33599,7 +33599,7 @@
   },
   {
     "name": "Ovika",
-    "sprite": "sprites/enemy/aberration/furnacegoblin.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/furnacegoblin.atlas",
     "deck": [
       "decks/legends/ovika.dck"
     ],
@@ -33737,7 +33737,7 @@
   },
   {
     "name": "Solphim",
-    "sprite": "sprites/enemy/aberration/drossgrimnarch.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/drossgrimnarch.atlas",
     "deck": [
       "decks/legends/solphim.dck"
     ],
@@ -34144,7 +34144,7 @@
   },
   {
     "name": "Glissa",
-    "sprite": "sprites/enemy/aberration/copperhostinfector.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/copperhostinfector.atlas",
     "deck": [
       "decks/legends/glissa.dck"
     ],
@@ -34225,7 +34225,7 @@
   },
   {
     "name": "Rothga",
-    "sprite": "sprites/enemy/aberration/copperhostbrutalizer.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/copperhostbrutalizer.atlas",
     "deck": [
       "decks/legends/rothga.dck"
     ],
@@ -34291,7 +34291,7 @@
   },
   {
     "name": "Vexyr",
-    "sprite": "sprites/enemy/aberration/phyrexianduelist.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/phyrexianduelist.atlas",
     "deck": [
       "decks/legends/vexyr.dck"
     ],
@@ -34362,7 +34362,7 @@
   },
   {
     "name": "Zopandrel",
-    "sprite": "sprites/enemy/aberration/copperhostbrutalizer.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/copperhostbrutalizer.atlas",
     "deck": [
       "decks/legends/zopandrel.dck"
     ],
@@ -37786,7 +37786,7 @@
   },
   {
     "name": "Migloz",
-    "sprite": "sprites/enemy/aberration/copperhostbrutalizer.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/copperhostbrutalizer.atlas",
     "deck": [
       "decks/legends/migloz.dck"
     ],
@@ -41099,7 +41099,7 @@
   },
   {
     "name": "Aatchik",
-    "sprite": "sprites/enemy/aberration/copperhostinfector.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/copperhostinfector.atlas",
     "deck": [
       "decks/legends/aatchik.dck"
     ],
@@ -41367,7 +41367,7 @@
   },
   {
     "name": "Vishgraz",
-    "sprite": "sprites/enemy/aberration/copperhostbrutalizer.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/copperhostbrutalizer.atlas",
     "deck": [
       "decks/legends/vishgraz.dck"
     ],
