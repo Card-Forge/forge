@@ -29,6 +29,7 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.match.CMatchUI;
+import forge.screens.match.VYieldSettings;
 import forge.screens.match.views.VYield;
 
 /**
@@ -77,6 +78,7 @@ public class CYield implements ICDoc {
         initButton(view.getBtnEndTurn(), actEndTurn);
         initButton(view.getBtnYourTurn(), actYourTurn);
         initButton(view.getBtnAutoPass(), actAutoPass);
+        initButton(view.getBtnSettings(), evt -> new VYieldSettings().showDialog());
 
         // Set initial button state
         updateYieldButtons();
@@ -150,12 +152,7 @@ public class CYield implements ICDoc {
         view.getBtnEndStep().setEnabled(canYield);
         view.getBtnEndTurn().setEnabled(canYield);
         view.getBtnYourTurn().setEnabled(canYield);
-
-        // Clear Stack also requires items on stack
-        boolean stackHasItems = matchUI.getGameView() != null
-            && matchUI.getGameView().getStack() != null
-            && !matchUI.getGameView().getStack().isEmpty();
-        view.getBtnClearStack().setEnabled(canYield && stackHasItems);
+        view.getBtnClearStack().setEnabled(canYield);
 
         // Auto-pass is a persistent toggle, enable whenever yield panel is available
         view.getBtnAutoPass().setEnabled(canYield);

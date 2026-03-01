@@ -3379,8 +3379,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     private boolean wasAutoPassingLastPriority;
     private boolean yieldJustEndedFlag;
 
-    // Suggestion decline tracking (reset each turn)
+    // Suggestion decline tracking (reset each turn or on stack transition)
     private final Map<String, Integer> declinedSuggestionTurn = Maps.newHashMap();
+    private boolean lastSeenStackNonEmpty;
 
     public boolean mayAutoPass() {
         boolean result = getGui().mayAutoPass(getLocalPlayerView());
@@ -3396,6 +3397,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return flag;
     }
 
+    public void onPriorityReceived(boolean stackNonEmpty) {
+        // On stack non-empty → empty transition, clear STACK_YIELD decline if scope is "stack"
+        if (lastSeenStackNonEmpty && !stackNonEmpty) {
+            String scope = FModel.getPreferences().getPref(FPref.YIELD_DECLINE_SCOPE_STACK_YIELD);
+            if ("stack".equals(scope)) {
+                declinedSuggestionTurn.remove("STACK_YIELD");
+            }
+        }
+        lastSeenStackNonEmpty = stackNonEmpty;
+    }
+
     public void declineSuggestion(String suggestionType) {
         GameView gv = getGui().getGameView();
         if (gv == null) return;
@@ -3403,6 +3415,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     public boolean isSuggestionDeclined(String suggestionType) {
+        // Look up the per-type scope pref
+        FPref scopePref = "STACK_YIELD".equals(suggestionType)
+            ? FPref.YIELD_DECLINE_SCOPE_STACK_YIELD
+            : FPref.YIELD_DECLINE_SCOPE_NO_ACTIONS;
+        String scope = FModel.getPreferences().getPref(scopePref);
+        if ("never".equals(scope)) {
+            return true; // Suggestion disabled entirely
+        }
+        if ("always".equals(scope)) {
+            return false; // "Always" means never suppress
+        }
+        // "stack" and "turn" both use turn-number tracking (stack also clears on transition)
         GameView gv = getGui().getGameView();
         if (gv == null) return false;
         Integer turnDeclined = declinedSuggestionTurn.get(suggestionType);

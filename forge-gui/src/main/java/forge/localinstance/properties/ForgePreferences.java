@@ -145,9 +145,6 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
 
         // Experimental yield options (feature-gated)
         YIELD_EXPERIMENTAL_OPTIONS("false"),
-        YIELD_SUGGEST_STACK_YIELD("true"),
-        YIELD_SUGGEST_NO_MANA("true"),
-        YIELD_SUGGEST_NO_ACTIONS("true"),
         YIELD_INTERRUPT_ON_ATTACKERS("true"),
         YIELD_INTERRUPT_ON_BLOCKERS("true"),
         YIELD_INTERRUPT_ON_TARGETING("true"),
@@ -158,6 +155,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         YIELD_INTERRUPT_ON_MASS_REMOVAL("true"),  // When mass removal spell cast
         YIELD_SUPPRESS_ON_OWN_TURN("true"),  // Suppress suggestions on player's own turn
         YIELD_SUPPRESS_AFTER_END("true"),  // Suppress suggestions for one priority pass after yield ends
+        YIELD_DECLINE_SCOPE_STACK_YIELD("stack"),  // Decline scope: "never", "always", "stack", "turn"
+        YIELD_DECLINE_SCOPE_NO_ACTIONS("turn"),  // Decline scope: "never", "always", "turn"
         YIELD_AUTO_PASS_NO_ACTIONS("false"),  // Auto-pass priority when no playable actions
 
         UI_STACK_EFFECT_NOTIFICATION_POLICY ("Never"),

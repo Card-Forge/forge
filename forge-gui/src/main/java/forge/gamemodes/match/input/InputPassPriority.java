@@ -21,7 +21,6 @@ import forge.ai.ComputerUtilMana;
 import forge.game.Game;
 import forge.game.GameView;
 import forge.game.card.Card;
-import forge.game.card.CardView;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.player.actions.PassPriorityAction;
@@ -58,7 +57,7 @@ public class InputPassPriority extends InputSyncronizedBase {
 
     // Pending yield suggestion state for prompt integration
     private YieldMode pendingSuggestion = null;
-    private String pendingSuggestionType = null; // "STACK_YIELD", "NO_MANA", "NO_ACTIONS"
+    private String pendingSuggestionType = null; // "STACK_YIELD", "NO_ACTIONS"
     private String pendingSuggestionMessage = null;
 
     public InputPassPriority(final PlayerControllerHuman controller) {
@@ -78,9 +77,14 @@ public class InputPassPriority extends InputSyncronizedBase {
             ForgePreferences prefs = FModel.getPreferences();
             Localizer loc = Localizer.getInstance();
 
+            // Track stack transitions for per-stack decline scope
+            GameView gvForStack = getGameView();
+            boolean stackNonEmpty = gvForStack != null && gvForStack.getStack() != null
+                && !gvForStack.getStack().isEmpty();
+            getController().onPriorityReceived(stackNonEmpty);
+
             // Suggestion 1: Stack items but can't respond
-            if (prefs.getPrefBoolean(FPref.YIELD_SUGGEST_STACK_YIELD)
-                && shouldShowStackYieldPrompt()
+            if (shouldShowStackYieldPrompt()
                 && !getController().isSuggestionDeclined("STACK_YIELD")) {
                 pendingSuggestion = YieldMode.UNTIL_STACK_CLEARS;
                 pendingSuggestionType = "STACK_YIELD";
@@ -88,19 +92,8 @@ public class InputPassPriority extends InputSyncronizedBase {
                 showYieldSuggestionPrompt();
                 return;
             }
-            // Suggestion 2: Has cards but no mana
-            if (prefs.getPrefBoolean(FPref.YIELD_SUGGEST_NO_MANA)
-                && shouldShowNoManaPrompt()
-                && !getController().isSuggestionDeclined("NO_MANA")) {
-                pendingSuggestion = getDefaultYieldMode();
-                pendingSuggestionType = "NO_MANA";
-                pendingSuggestionMessage = loc.getMessage("lblNoManaAvailableYieldPrompt");
-                showYieldSuggestionPrompt();
-                return;
-            }
-            // Suggestion 3: No available actions (empty hand, no abilities)
-            if (prefs.getPrefBoolean(FPref.YIELD_SUGGEST_NO_ACTIONS)
-                && shouldShowNoActionsPrompt()
+            // Suggestion 2: No available actions (empty hand, no abilities)
+            if (shouldShowNoActionsPrompt()
                 && !getController().isSuggestionDeclined("NO_ACTIONS")) {
                 pendingSuggestion = getDefaultYieldMode();
                 pendingSuggestionType = "NO_ACTIONS";
@@ -125,7 +118,17 @@ public class InputPassPriority extends InputSyncronizedBase {
         }
 
         Localizer loc = Localizer.getInstance();
-        String fullMessage = pendingSuggestionMessage + "\n" + loc.getMessage("lblYieldSuggestionDeclineHint");
+        String fullMessage = pendingSuggestionMessage;
+        // Append decline hint based on per-type scope setting
+        FPref scopePref = "STACK_YIELD".equals(pendingSuggestionType)
+            ? FPref.YIELD_DECLINE_SCOPE_STACK_YIELD
+            : FPref.YIELD_DECLINE_SCOPE_NO_ACTIONS;
+        String scope = FModel.getPreferences().getPref(scopePref);
+        if ("stack".equals(scope)) {
+            fullMessage += "\n" + loc.getMessage("lblYieldSuggestionDeclineHintStack");
+        } else if ("turn".equals(scope)) {
+            fullMessage += "\n" + loc.getMessage("lblYieldSuggestionDeclineHint");
+        }
         showMessage(fullMessage);
         chosenSa = null;
         getController().getGui().updateButtons(getOwner(),
@@ -387,23 +390,6 @@ public class InputPassPriority extends InputSyncronizedBase {
             }
         }
         return true;
-    }
-
-    private boolean shouldShowNoManaPrompt() {
-        GameView gv = getGameView();
-        PlayerView pv = getPlayerView();
-        if (gv == null || pv == null) return false;
-
-        if (!isValidSuggestionContext(gv, pv)) {
-            return false;
-        }
-
-        FCollectionView<CardView> hand = pv.getHand();
-        if (hand == null || hand.isEmpty()) {
-            return false;
-        }
-
-        return !pv.hasManaAvailable();
     }
 
     private boolean shouldShowNoActionsPrompt() {

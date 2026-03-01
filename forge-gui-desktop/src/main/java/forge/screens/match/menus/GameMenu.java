@@ -21,6 +21,7 @@ import forge.menus.MenuUtil;
 import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.VAutoYields;
+import forge.screens.match.VYieldSettings;
 import forge.screens.match.controllers.CDock.ArcState;
 import forge.toolbox.FSkin.SkinIcon;
 import forge.toolbox.FSkin.SkinnedMenu;
@@ -208,39 +209,22 @@ public final class GameMenu {
         yieldMenu.add(getMenuItem_AutoYields());
         yieldMenu.addSeparator();
 
-        // Interrupt Settings sub-menu
-        final JMenu interruptMenu = new JMenu(localizer.getMessage("lblInterruptSettings"));
-        interruptMenu.setEnabled(yieldEnabled);
-        interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnAttackers"), FPref.YIELD_INTERRUPT_ON_ATTACKERS));
-        interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnBlockers"), FPref.YIELD_INTERRUPT_ON_BLOCKERS));
-        interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnTargeting"), FPref.YIELD_INTERRUPT_ON_TARGETING));
-        interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnMassRemoval"), FPref.YIELD_INTERRUPT_ON_MASS_REMOVAL));
-        interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnOpponentSpell"), FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL));
-        interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnTriggers"), FPref.YIELD_INTERRUPT_ON_TRIGGERS));
-        interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnCombat"), FPref.YIELD_INTERRUPT_ON_COMBAT));
-        interruptMenu.add(createYieldCheckbox(localizer.getMessage("lblInterruptOnReveal"), FPref.YIELD_INTERRUPT_ON_REVEAL));
-
-        // Automatic Suggestions sub-menu
-        final JMenu suggestionsMenu = new JMenu(localizer.getMessage("lblAutomaticSuggestions"));
-        suggestionsMenu.setEnabled(yieldEnabled);
-        suggestionsMenu.add(createYieldCheckbox(localizer.getMessage("lblSuggestStackYield"), FPref.YIELD_SUGGEST_STACK_YIELD));
-        suggestionsMenu.add(createYieldCheckbox(localizer.getMessage("lblSuggestNoMana"), FPref.YIELD_SUGGEST_NO_MANA));
-        suggestionsMenu.add(createYieldCheckbox(localizer.getMessage("lblSuggestNoActions"), FPref.YIELD_SUGGEST_NO_ACTIONS));
-        suggestionsMenu.addSeparator();
-        suggestionsMenu.add(createYieldCheckbox(localizer.getMessage("lblSuppressOnOwnTurn"), FPref.YIELD_SUPPRESS_ON_OWN_TURN));
-        suggestionsMenu.add(createYieldCheckbox(localizer.getMessage("lblSuppressAfterYield"), FPref.YIELD_SUPPRESS_AFTER_END));
-
         // Enable Advanced Yield Options toggle with Ctrl+Y accelerator
         final JCheckBoxMenuItem enableItem = new JCheckBoxMenuItem(localizer.getMessage("lblEnableAdvancedYieldOptions"));
         final KeyStroke ks = KeyboardShortcuts.getKeyStrokeForPref(FPref.SHORTCUT_YIELD_OPTIONS);
         if (ks != null) { enableItem.setAccelerator(ks); }
         enableItem.setState(yieldEnabled);
+
+        // Yield Settings dialog launcher (below the enable toggle)
+        final SkinnedMenuItem settingsItem = new SkinnedMenuItem(localizer.getMessage("lblYieldSettings"));
+        settingsItem.setEnabled(yieldEnabled);
+        settingsItem.addActionListener(e -> new VYieldSettings().showDialog());
+
         enableItem.addActionListener(e -> {
             final boolean newState = !prefs.getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS);
             prefs.setPref(FPref.YIELD_EXPERIMENTAL_OPTIONS, newState);
             prefs.save();
-            interruptMenu.setEnabled(newState);
-            suggestionsMenu.setEnabled(newState);
+            settingsItem.setEnabled(newState);
             matchUI.refreshYieldPanel();
             final FServerManager server = FServerManager.getInstance();
             if (server != null && server.isHosting()) {
@@ -250,31 +234,9 @@ public final class GameMenu {
             }
         });
         yieldMenu.add(enableItem);
-
-        yieldMenu.add(interruptMenu);
-        yieldMenu.add(suggestionsMenu);
+        yieldMenu.add(settingsItem);
 
         return yieldMenu;
     }
 
-    private JCheckBoxMenuItem createYieldCheckbox(String label, FPref pref) {
-        // Custom checkbox that doesn't close the menu when clicked
-        final JCheckBoxMenuItem item = new JCheckBoxMenuItem(label) {
-            @Override
-            protected void processMouseEvent(java.awt.event.MouseEvent e) {
-                if (e.getID() == java.awt.event.MouseEvent.MOUSE_RELEASED && contains(e.getPoint())) {
-                    doClick(0);
-                    setArmed(true);
-                } else {
-                    super.processMouseEvent(e);
-                }
-            }
-        };
-        item.setSelected(prefs.getPrefBoolean(pref));
-        item.addActionListener(e -> {
-            prefs.setPref(pref, item.isSelected());
-            prefs.save();
-        });
-        return item;
-    }
 }
