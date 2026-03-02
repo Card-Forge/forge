@@ -139,7 +139,7 @@
   <object id="97" template="../../../../common/maps/obj/manashards.tx" x="69.3333" y="108.917"/>
   <object id="98" template="../../../../common/maps/obj/enemy.tx" x="192" y="368">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Wayfarer's Bauble|C14&quot;, &quot;Stoneforge Masterwork|OGW&quot;, &quot;Descendants' Path|LCC&quot;, &quot;Mistform Sliver|LGN&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Descendants' Path|LCC&quot;, &quot;Venser's Sliver|TSP&quot;]}"/>
     <property name="enemy" value="Rukarumel"/>
     <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="20"/>

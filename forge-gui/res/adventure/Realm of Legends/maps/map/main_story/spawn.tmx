@@ -90,7 +90,7 @@
                                                                                                                 &quot;options&quot;: [
                                                                                                                     {
                                                                                                                         &quot;name&quot;: &quot;(Continue)&quot;,
-                                                                                                                        &quot;text&quot;: &quot;Be sure to open the chest behind me. It contains a rune to return here, staves of speed, flight, and healing to ease your travels, and a manasight stone to detect enemy magic. You will also have some challenge coins on you to enter free contests of strength at inns in towns known as drafts.&quot;,                      &quot;options&quot;: [
+                                                                                                                        &quot;text&quot;: &quot;Be sure to open the chest behind me. It contains a rune to return here, one to travel to each of the five capitols, staves of speed, flight, and healing to ease your travels, and a manasight stone to detect enemy magic. You will also have some challenge coins on you to enter free contests of strength at inns in towns known as drafts.&quot;,                      &quot;options&quot;: [
                                                                                                                             {          
                                                                                                                             &quot;name&quot;: &quot;(Continue)&quot;,
                                                                                                                             &quot;text&quot;: &quot;Now go. And may your library always contain the spells you need. &quot;,
@@ -1402,6 +1402,36 @@
         &quot;type&quot;: &quot;item&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
+        &quot;itemName&quot;: &quot;White Rune&quot;
+ },
+{
+        &quot;type&quot;: &quot;item&quot;,
+        &quot;probability&quot;: 1,
+        &quot;count&quot;: 1,
+        &quot;itemName&quot;: &quot;Blue Rune&quot;
+ },
+{
+        &quot;type&quot;: &quot;item&quot;,
+        &quot;probability&quot;: 1,
+        &quot;count&quot;: 1,
+        &quot;itemName&quot;: &quot;Black Rune&quot;
+ },
+{
+        &quot;type&quot;: &quot;item&quot;,
+        &quot;probability&quot;: 1,
+        &quot;count&quot;: 1,
+        &quot;itemName&quot;: &quot;Red Rune&quot;
+ },
+{
+        &quot;type&quot;: &quot;item&quot;,
+        &quot;probability&quot;: 1,
+        &quot;count&quot;: 1,
+        &quot;itemName&quot;: &quot;Green Rune&quot;
+ },
+{
+        &quot;type&quot;: &quot;item&quot;,
+        &quot;probability&quot;: 1,
+        &quot;count&quot;: 1,
         &quot;itemName&quot;: &quot;Staff of Speed&quot;
  },
 {
@@ -1442,7 +1472,7 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;:&quot;Did you know? Each of the capitol cities in the five colored biomes sells a cheap life boost and a cheap teleport rune to help get across the map faster. Capitols also have a smith where you can craft cards according to specific criteria, as well as quests that grant additional permanent life bonuses and other rewards. Perhaps make visiting the capitols a first priority.&quot;,
+    &quot;text&quot;:&quot;Did you know? Each of the capitol cities in the five colored biomes has shops with unique player items. Capitols also have a smith where you can craft cards according to specific criteria, as well as quests that grant additional permanent life bonuses and other rewards. Perhaps make visiting the capitols a first priority.&quot;,
     &quot;options&quot;:[
       { &quot;name&quot;:&quot;Continue&quot; }
 ]
@@ -1513,36 +1543,6 @@ A rare few items are also slotless or use a custom slot. They won't show up on y
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
         &quot;itemName&quot;: &quot;Silver Blessing of Speed&quot;
- },
-{
-        &quot;type&quot;: &quot;item&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;itemName&quot;: &quot;White Rune&quot;
- },
-{
-        &quot;type&quot;: &quot;item&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;itemName&quot;: &quot;Blue Rune&quot;
- },
-{
-        &quot;type&quot;: &quot;item&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;itemName&quot;: &quot;Black Rune&quot;
- },
-{
-        &quot;type&quot;: &quot;item&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;itemName&quot;: &quot;Red Rune&quot;
- },
-{
-        &quot;type&quot;: &quot;item&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;itemName&quot;: &quot;Green Rune&quot;
  }
 ]
 </property>
@@ -1552,7 +1552,7 @@ A rare few items are also slotless or use a custom slot. They won't show up on y
    <properties>
     <property name="dialog">[
 {
-   &quot;text&quot;: &quot;Thanks for being a playtester! Since the game is currently only around half-finished, the map is going to be very empty. Take a speed boost and all the capitol runes as a courtesy.&quot;,
+   &quot;text&quot;: &quot;Thanks for being a playtester! Since the game is currently only around half-finished, the map is going to be very empty. Take a speed boost as a courtesy.&quot;,
    &quot;options&quot;: [{
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }

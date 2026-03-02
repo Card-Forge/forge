@@ -53,15 +53,15 @@
   </object>
   <object id="75" template="../../../../common/maps/obj/enemy.tx" x="141.833" y="111">
    <properties>
-    <property name="enemy" value="Purphoros"/>
+    <property name="enemy" value="Ojer Axonil"/>
     <property name="threatRange" type="int" value="50"/>
     <property name="waypoints" value=""/>
    </properties>
   </object>
   <object id="86" template="../../../../common/maps/obj/enemy.tx" x="197.666" y="87.6667">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Font of Ire|JOU&quot;, &quot;Volatile Wanderglyph|LCI&quot;, &quot;Roiling Vortex|ZNR&quot;, &quot;Sunfire Torch|LCI&quot;]}"/>
-    <property name="enemy" value="Ojer Axonil"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Font of Ire|JOU&quot;, &quot;Roiling Vortex|ZNR&quot;, &quot;War Effort|TDM&quot;]}"/>
+    <property name="enemy" value="Purphoros"/>
     <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
