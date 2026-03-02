@@ -173,6 +173,17 @@ public final class LayoutMenu {
         });
         menu.add(zoneCardsItem);
 
+        // Order Hand by CMC and Color
+        final JCheckBoxMenuItem orderHandItem = createStayOpenCheckBox(localizer.getMessage("lblOrderHandByCMC"));
+        orderHandItem.setState(prefs.getPrefBoolean(FPref.UI_ORDER_HAND));
+        orderHandItem.addActionListener(e -> {
+            prefs.setPref(FPref.UI_ORDER_HAND, orderHandItem.getState());
+            prefs.save();
+            refreshHandCards();
+            refreshHandLayout();
+        });
+        menu.add(orderHandItem);
+
         // Prevent Card Overlap
         final JCheckBoxMenuItem noOverlapItem = createStayOpenCheckBox(localizer.getMessage("lblPreventCardOverlap"));
         noOverlapItem.setState(prefs.getPrefBoolean(FPref.UI_HAND_NO_OVERLAP));

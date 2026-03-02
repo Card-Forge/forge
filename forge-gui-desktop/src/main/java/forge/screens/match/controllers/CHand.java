@@ -21,6 +21,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.JLayeredPane;
@@ -136,7 +137,19 @@ public class CHand implements ICDoc {
                 }
             }
 
-            ordering.addAll(cards);
+            // Sort hand by CMC/color at the UI layer. This duplicates the game-layer sort in
+            // PlayerZone.onChanged(), but is necessary because network clients only have CardViews
+            // (no access to the game model), and because toggling the preference mid-game needs
+            // to take effect immediately without waiting for a zone change event.
+            if (FModel.getPreferences().getPrefBoolean(FPref.UI_ORDER_HAND)) {
+                final List<CardView> sorted = new ArrayList<>(cards);
+                sorted.sort(Comparator.comparingInt((CardView cv) -> cv.getCurrentState().getManaCost().getCMC())
+                        .thenComparing(cv -> cv.getCurrentState().getColors().getOrderWeight())
+                        .thenComparing(cv -> cv.getCurrentState().getName()));
+                ordering.addAll(sorted);
+            } else {
+                ordering.addAll(cards);
+            }
 
             if (FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_PLAYABLE_ZONE_CARDS)) {
                 final FCollectionView<CardView> flashbackCards = player.getFlashback();

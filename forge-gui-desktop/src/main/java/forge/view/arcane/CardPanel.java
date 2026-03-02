@@ -96,12 +96,12 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private static final float ROT_CENTER_TO_TOP_CORNER = 1.0295630140987000315797369464196f;
     private static final float ROT_CENTER_TO_BOTTOM_CORNER = 0.7071067811865475244008443621048f;
     private static final Map<ZoneType, Color> ZONE_COLORS = Map.of(
-        ZoneType.Graveyard, new Color(30, 30, 100),
-        ZoneType.Exile, new Color(180, 180, 200),
+        ZoneType.Graveyard, new Color(80, 20, 100),
+        ZoneType.Exile, new Color(180, 185, 200),
         ZoneType.Command, new Color(170, 135, 20),
-        ZoneType.Library, new Color(30, 80, 50),
+        ZoneType.Library, new Color(170, 155, 70),
         ZoneType.Sideboard, new Color(60, 60, 80),
-        ZoneType.Flashback, new Color(30, 30, 100)
+        ZoneType.Flashback, new Color(80, 20, 100)
     );
     private static final Color DEFAULT_ZONE_COLOR = new Color(60, 60, 80);
 
