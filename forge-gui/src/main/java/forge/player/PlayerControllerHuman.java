@@ -1963,7 +1963,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public boolean payCostDuringRoll(final Cost cost, final SpellAbility sa, final FCollectionView<Player> allPayers) {
+    public boolean payCostDuringRoll(final Cost cost, final SpellAbility sa) {
         // if it's paid by the AI already the human can pay, but it won't change anything
         return HumanPlay.payCostDuringAbilityResolve(this, player, sa.getHostCard(), cost, sa, null);
     }

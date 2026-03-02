@@ -593,7 +593,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public boolean payCostDuringRoll(final Cost cost, final SpellAbility sa, final FCollectionView<Player> allPayers) {
+    public boolean payCostDuringRoll(final Cost cost, final SpellAbility sa) {
         // TODO Auto-generated method stub
         return false;
     }

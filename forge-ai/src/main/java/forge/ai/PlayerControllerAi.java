@@ -1239,7 +1239,7 @@ public class PlayerControllerAi extends PlayerController {
         return false;
     }
 
-    public boolean payCostDuringRoll(final Cost cost, final SpellAbility sa, final FCollectionView<Player> allPayers) {
+    public boolean payCostDuringRoll(final Cost cost, final SpellAbility sa) {
         // TODO logic for AI to pay rerolls and modification costs
         return false;
     }

@@ -307,7 +307,7 @@ public abstract class PlayerController {
     public abstract List<CostPart> orderCosts(List<CostPart> costs);
 
     public abstract boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, FCollectionView<Player> allPayers);
-    public abstract boolean payCostDuringRoll(Cost cost, SpellAbility sa, FCollectionView<Player> allPayers);
+    public abstract boolean payCostDuringRoll(Cost cost, SpellAbility sa);
 
     public abstract boolean payCombatCost(Card card, Cost cost, SpellAbility sa, String prompt);
 
