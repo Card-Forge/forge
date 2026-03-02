@@ -55,4 +55,13 @@ public interface IGameController {
     default void notifyYieldModeChanged(PlayerView player, YieldMode mode) {
         // Default: no-op for local games
     }
+
+    /** Notify server that auto-yield was toggled for an ability key. */
+    default void notifyAutoYieldChanged(String key, boolean autoYield) { }
+
+    /**
+     * Notify server that a trigger accept/decline preference changed.
+     * @param choice 1 = always accept, -1 = always decline, 0 = ask
+     */
+    default void notifyTriggerChoiceChanged(int triggerId, int choice) { }
 }

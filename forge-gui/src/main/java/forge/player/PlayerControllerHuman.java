@@ -3516,6 +3516,22 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public void notifyAutoYieldChanged(String key, boolean autoYield) {
+        getGui().setShouldAutoYield(key, autoYield);
+    }
+
+    @Override
+    public void notifyTriggerChoiceChanged(int triggerId, int choice) {
+        if (choice > 0) {
+            getGui().setShouldAlwaysAcceptTrigger(triggerId);
+        } else if (choice < 0) {
+            getGui().setShouldAlwaysDeclineTrigger(triggerId);
+        } else {
+            getGui().setShouldAlwaysAskTrigger(triggerId);
+        }
+    }
+
+    @Override
     public String chooseCardName(SpellAbility sa, List<ICardFace> faces, String message) {
         ICardFace face = chooseSingleCardFace(sa, faces, message);
         return face == null ? "" : face.getName();

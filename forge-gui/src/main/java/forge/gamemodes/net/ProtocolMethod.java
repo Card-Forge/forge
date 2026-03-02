@@ -96,7 +96,9 @@ public enum ProtocolMethod {
     concede                   (Mode.CLIENT, Void.TYPE),
     alphaStrike               (Mode.CLIENT, Void.TYPE),
     reorderHand               (Mode.CLIENT, Void.TYPE, CardView.class, Integer.TYPE),
-    notifyYieldModeChanged    (Mode.CLIENT, Void.TYPE, PlayerView.class, YieldMode.class);
+    notifyYieldModeChanged    (Mode.CLIENT, Void.TYPE, PlayerView.class, YieldMode.class),
+    notifyAutoYieldChanged    (Mode.CLIENT, Void.TYPE, String.class, Boolean.TYPE),
+    notifyTriggerChoiceChanged(Mode.CLIENT, Void.TYPE, Integer.TYPE, Integer.TYPE);
 
     private enum Mode {
         SERVER(IGuiGame.class),

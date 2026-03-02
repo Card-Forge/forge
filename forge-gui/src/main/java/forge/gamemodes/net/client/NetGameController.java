@@ -161,4 +161,14 @@ public class NetGameController implements IGameController {
     public void notifyYieldModeChanged(PlayerView player, YieldMode mode) {
         send(ProtocolMethod.notifyYieldModeChanged, player, mode);
     }
+
+    @Override
+    public void notifyAutoYieldChanged(String key, boolean autoYield) {
+        send(ProtocolMethod.notifyAutoYieldChanged, key, autoYield);
+    }
+
+    @Override
+    public void notifyTriggerChoiceChanged(int triggerId, int choice) {
+        send(ProtocolMethod.notifyTriggerChoiceChanged, triggerId, choice);
+    }
 }
