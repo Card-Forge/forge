@@ -32,8 +32,12 @@ import com.google.common.collect.Lists;
 import forge.Singletons;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
+import forge.game.zone.ZoneType;
 import forge.gui.FThreads;
 import forge.gui.framework.ICDoc;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
+import forge.util.collect.FCollectionView;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VHand;
@@ -61,6 +65,10 @@ public class CHand implements ICDoc {
         v0.getHandArea().addCardPanelMouseListener(new CardPanelMouseAdapter() {
             @Override
             public void mouseDragEnd(final CardPanel dragPanel, final MouseEvent evt) {
+                //only reorder actual hand cards, not zone cards
+                if (dragPanel.getCard().getZone() != ZoneType.Hand) {
+                    return;
+                }
                 //update index of dragged card in hand zone to match new index within hand area
                 final int index = CHand.this.view.getHandArea().getCardPanels().indexOf(dragPanel);
                 synchronized (ordering) {
@@ -114,22 +122,55 @@ public class CHand implements ICDoc {
 
         synchronized (ordering) {
             ordering.clear();
+
+            // Append playable cards from other zones (flashback, escape, foretell, commander, etc.)
+            // Command zone cards go first, before hand cards
+            if (FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_PLAYABLE_ZONE_CARDS)) {
+                final FCollectionView<CardView> flashbackCards = player.getFlashback();
+                if (flashbackCards != null) {
+                    for (final CardView cv : flashbackCards) {
+                        if (cv.getZone() == ZoneType.Command) {
+                            ordering.add(cv);
+                        }
+                    }
+                }
+            }
+
             ordering.addAll(cards);
+
+            if (FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_PLAYABLE_ZONE_CARDS)) {
+                final FCollectionView<CardView> flashbackCards = player.getFlashback();
+                if (flashbackCards != null) {
+                    for (final CardView cv : flashbackCards) {
+                        if (cv.getZone() != null && cv.getZone() != ZoneType.Hand
+                                && cv.getZone() != ZoneType.Command) {
+                            ordering.add(cv);
+                        }
+                    }
+                }
+            }
         }
 
         final List<CardPanel> placeholders = new ArrayList<>();
         final List<CardPanel> cardPanels = new ArrayList<>();
 
         for (final CardView card : ordering) {
+            final ZoneType zone = card.getZone();
+            final boolean isZoneCard = zone != null && zone != ZoneType.Hand;
             CardPanel cardPanel = p.getCardPanel(card.getId());
-            if (cardPanel == null) { //create placeholders for new cards
+            if (cardPanel == null) {
                 cardPanel = new CardPanel(matchUI, card);
-                cardPanel.setDisplayEnabled(false);
-                placeholders.add(cardPanel);
+                if (isZoneCard) {
+                    cardPanel.setDisplayEnabled(true); // no animation for zone cards
+                } else {
+                    cardPanel.setDisplayEnabled(false);
+                    placeholders.add(cardPanel);
+                }
             }
             else {
                 cardPanel.setCard(card); //ensure card view is updated
             }
+            cardPanel.setZoneBanner(isZoneCard ? zone.getTranslatedName().toUpperCase() : null, isZoneCard ? zone : null);
             cardPanels.add(cardPanel);
         }
 

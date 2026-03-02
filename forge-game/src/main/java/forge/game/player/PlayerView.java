@@ -514,8 +514,10 @@ public class PlayerView extends GameEntityView {
         if (ZoneType.Graveyard == zone.getZoneType())
             set(TrackableProperty.HasDelirium, getZoneTypes(TrackableProperty.Graveyard) >= 4);
 
-        //update flashback zone when graveyard, library, or exile zones updated
+        //update flashback zone when relevant zones change (includes Battlefield
+        //since permanents entering/leaving can grant play-from-zone abilities)
         switch (zone.getZoneType()) {
+        case Battlefield:
         case Command:
         case Graveyard:
         case Library:

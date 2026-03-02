@@ -88,6 +88,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_OVERLAY_CARD_PERPETUAL_MANA_COST ("true"),
         UI_OVERLAY_CARD_ID ("true"),
         UI_OVERLAY_ABILITY_ICONS("true"),
+        UI_SHOW_PLAYABLE_ZONE_CARDS("false"),
         UI_OVERLAY_DRAFT_RANKING("true"),
         UI_ENABLE_ONLINE_IMAGE_FETCHER ("true"),
         UI_PREFERRED_ART("LATEST_ART_ALL_EDITIONS"),
@@ -183,6 +184,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_FOR_TOUCHSCREN("false"),
         UI_SWITCH_STATES_DECKVIEW("Switch back on hover"),
         UI_ORDER_HAND("false"),
+        UI_HAND_MAX_CARDS_PER_ROW("0"),
+        UI_HAND_NO_OVERLAP("false"),
         UI_ENABLE_AI_PICKER("false"),
 
         UI_VIBRATE_ON_LIFE_LOSS("true"),

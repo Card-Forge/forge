@@ -1628,7 +1628,18 @@ public class GameAction {
             }
         } // for q=0;q<9
 
+        // Update flashback views after static abilities have been recalculated,
+        // so play-from-zone abilities (e.g. Bolas's Citadel) are reflected
+        for (final Player p : game.getPlayers()) {
+            p.updateFlashbackForView();
+        }
+
         game.getTracker().unfreeze();
+
+        // Fire flashback zone events so UI refreshes hand with updated playable cards
+        for (final Player p : game.getPlayers()) {
+            game.fireEvent(new GameEventZone(ZoneType.Flashback, p, EventValueChangeType.Added, null));
+        }
 
         if (runEvents && !affectedCards.isEmpty()) {
             game.fireEvent(new GameEventCardStatsChanged(affectedCards));

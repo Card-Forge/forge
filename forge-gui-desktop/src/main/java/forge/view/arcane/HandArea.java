@@ -19,6 +19,9 @@ package forge.view.arcane;
 
 import java.awt.event.MouseEvent;
 
+import forge.game.zone.ZoneType;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.MouseTriggerEvent;
@@ -48,6 +51,18 @@ public class HandArea extends CardArea {
 
         this.setDragEnabled(true);
         this.setVertical(true);
+        try {
+            final int maxCards = Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_HAND_MAX_CARDS_PER_ROW));
+            this.setMaxCardsPerRow(maxCards);
+        } catch (final NumberFormatException ignored) {
+            // default 0 = no limit
+        }
+        this.setNoOverlap(FModel.getPreferences().getPrefBoolean(FPref.UI_HAND_NO_OVERLAP));
+    }
+
+    @Override
+    protected boolean cardPanelDraggable(final CardPanel panel) {
+        return panel.getCard() != null && panel.getCard().getZone() == ZoneType.Hand;
     }
 
     /** {@inheritDoc} */

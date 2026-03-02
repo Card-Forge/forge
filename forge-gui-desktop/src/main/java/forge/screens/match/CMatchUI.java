@@ -450,6 +450,19 @@ public final class CMatchUI
                 }
             }
 
+            // When showing playable zone cards in hand, refresh hand when relevant zones change
+            if (!updateHand && FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_PLAYABLE_ZONE_CARDS)) {
+                for (final ZoneType zone : update.getZones()) {
+                    if (zone == ZoneType.Graveyard || zone == ZoneType.Exile ||
+                            zone == ZoneType.Library || zone == ZoneType.Command ||
+                            zone == ZoneType.Sideboard || zone == ZoneType.Flashback ||
+                            zone == ZoneType.Battlefield) {
+                        updateHand = true;
+                        break;
+                    }
+                }
+            }
+
             if (updateAnte) {
                 cAntes.update();
             }
@@ -791,6 +804,12 @@ public final class CMatchUI
         SDisplayUtil.showTab(nextField);
         cPrompt.updateText();
         repaintCardOverlays();
+        // Refresh hand to update playable zone cards (e.g., foretell becomes castable on next turn)
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_PLAYABLE_ZONE_CARDS)) {
+            for (final VHand h : getHandViews()) {
+                h.getLayoutControl().updateHand();
+            }
+        }
     }
 
     @Override

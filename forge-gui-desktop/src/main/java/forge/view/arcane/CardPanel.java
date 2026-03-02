@@ -95,6 +95,15 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     public static final float BLACK_BORDER_SIZE = 0.03f;
     private static final float ROT_CENTER_TO_TOP_CORNER = 1.0295630140987000315797369464196f;
     private static final float ROT_CENTER_TO_BOTTOM_CORNER = 0.7071067811865475244008443621048f;
+    private static final Map<ZoneType, Color> ZONE_COLORS = Map.of(
+        ZoneType.Graveyard, new Color(30, 30, 100),
+        ZoneType.Exile, new Color(180, 180, 200),
+        ZoneType.Command, new Color(170, 135, 20),
+        ZoneType.Library, new Color(30, 80, 50),
+        ZoneType.Sideboard, new Color(60, 60, 80),
+        ZoneType.Flashback, new Color(30, 30, 100)
+    );
+    private static final Color DEFAULT_ZONE_COLOR = new Color(60, 60, 80);
 
     private final CMatchUI matchUI;
     private CardView card;
@@ -114,6 +123,8 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private int cardXOffset, cardYOffset, cardWidth, cardHeight;
     private boolean isSelected;
     private boolean hasFlash;
+    private String zoneBannerText;
+    private Color zoneBannerColor;
     private CachedCardImage cachedImage;
 
     private static Font smallCounterFont;
@@ -308,6 +319,10 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             g2d.setColor(Color.cyan);
             final int n = Math.max(1, Math.round(cardWidth * CardPanel.SELECTED_BORDER_SIZE));
             g2d.fillRoundRect(cardXOffset - n, (cardYOffset - n) + offset, cardWidth + (n * 2), cardHeight + (n * 2), cornerSize + n , cornerSize + n);
+        } else if (zoneBannerColor != null) {
+            g2d.setColor(zoneBannerColor);
+            final int n = Math.max(1, Math.round(cardWidth * CardPanel.SELECTED_BORDER_SIZE));
+            g2d.fillRoundRect(cardXOffset - n, (cardYOffset - n) + offset, cardWidth + (n * 2), cardHeight + (n * 2), cornerSize + n, cornerSize + n);
         }
 
         // Black fill - (will become an outline for white bordered cards)
@@ -385,6 +400,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         }
         displayIconOverlay(g, canShow);
+        if (zoneBannerText != null) {
+            drawZoneBanner(g);
+        }
         if (canShow) {
             drawFoilEffect(g, card, cardXOffset, cardYOffset,
                     cardWidth, cardHeight, Math.round(cardWidth * BLACK_BORDER_SIZE));
@@ -797,6 +815,32 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         }
     }
 
+    private void drawZoneBanner(final Graphics g) {
+        final Graphics2D g2d = (Graphics2D) g;
+        final Object oldAA = g2d.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        final Font bannerFont = smallCounterFont != null ? smallCounterFont : g.getFont();
+        g2d.setFont(bannerFont);
+        final FontMetrics fm = g2d.getFontMetrics();
+        final int textWidth = fm.stringWidth(zoneBannerText);
+        final int padding = 6;
+        final int bannerWidth = textWidth + padding * 2;
+        final int bannerHeight = fm.getHeight() + 2;
+        final int bannerX = cardXOffset + (cardWidth - bannerWidth) / 2;
+        final int bannerY = Math.max(0, cardYOffset - bannerHeight - 1);
+
+        g2d.setColor(zoneBannerColor != null ? zoneBannerColor : DEFAULT_ZONE_COLOR);
+        g2d.fillRoundRect(bannerX, bannerY, bannerWidth, bannerHeight, 6, 6);
+
+        g2d.setColor(Color.WHITE);
+        final int textX = bannerX + padding;
+        final int textY = bannerY + (bannerHeight - fm.getHeight()) / 2 + fm.getAscent();
+        g2d.drawString(zoneBannerText, textX, textY);
+
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, oldAA != null ? oldAA : RenderingHints.VALUE_ANTIALIAS_DEFAULT);
+    }
+
     private void drawCounterTabs(final Graphics g) {
         final Dimension imgSize = calculateImageSize();
         final int titleY = Math.round(imgSize.height * (54f / 640)) - 15;
@@ -959,6 +1003,8 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         return getCard().toString();
     }
 
+    private static final int ZONE_BANNER_HEIGHT = 16;
+
     public final void setCardBounds(final int x, final int y, int width, int height) {
         cardWidth = width;
         cardHeight = height;
@@ -970,8 +1016,13 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         final int yOffset = rotCenterY - rotCenterToTopCorner;
         cardXOffset = -xOffset;
         cardYOffset = -yOffset;
+
+        // Add extra space above zone-bannered cards so the banner is not clipped
+        final int bannerSpace = zoneBannerText != null ? ZONE_BANNER_HEIGHT : 0;
+        cardYOffset += bannerSpace;
+
         width = -xOffset + rotCenterX + rotCenterToTopCorner;
-        height = -yOffset + rotCenterY + rotCenterToBottomCorner;
+        height = -yOffset + rotCenterY + rotCenterToBottomCorner + bannerSpace;
         setBounds(x + xOffset, y + yOffset, width, height);
     }
 
@@ -1000,6 +1051,15 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     public final int getCardHeight() {
         return cardHeight;
+    }
+
+    public String getZoneBannerText() {
+        return zoneBannerText;
+    }
+
+    public void setZoneBanner(final String text, final ZoneType zone) {
+        this.zoneBannerText = text;
+        this.zoneBannerColor = zone != null ? ZONE_COLORS.getOrDefault(zone, DEFAULT_ZONE_COLOR) : null;
     }
 
     public final Point getCardLocation() {
