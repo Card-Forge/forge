@@ -180,6 +180,10 @@ public final class KeywordInfoUtil {
             if (action == KeywordAction.TRANSFORM && existingNames.contains("craft")) {
                 continue;
             }
+            // Manifest is redundant when Manifest Dread is present
+            if (action == KeywordAction.MANIFEST && lowerText.contains("manifest dread")) {
+                continue;
+            }
             // Match whole word (case-insensitive): "goad", "goads", "goaded"
             final String lowerName = name.toLowerCase();
             // Try base form first, then -ies conjugation for -y verbs (scry → scries)
@@ -193,13 +197,28 @@ public final class KeywordInfoUtil {
                 // non-letter — prevents "planeswalk" matching "planeswalker"
                 int idx = lowerText.indexOf(matchTerm);
                 while (idx >= 0) {
+                    final char prevChar = idx > 0 ? lowerText.charAt(idx - 1) : ' ';
                     final boolean startOk = idx == 0
-                            || !Character.isLetter(lowerText.charAt(idx - 1));
+                            || (!Character.isLetter(prevChar) && prevChar != '-');
                     final int endIdx = idx + matchTerm.length();
                     final boolean endOk = endIdx >= lowerText.length()
                             || !Character.isLetter(lowerText.charAt(endIdx))
                             || isVerbSuffix(lowerText, endIdx);
                     if (startOk && endOk) {
+                        // Actions with "N" in reminder require a number after
+                        // the keyword — reject generic uses (e.g. "life-support")
+                        if (action.getReminderText().contains("N")) {
+                            int numPos = endIdx;
+                            while (numPos < lowerText.length()
+                                    && !Character.isLetterOrDigit(
+                                            lowerText.charAt(numPos))) {
+                                numPos++;
+                            }
+                            if (parseNumber(lowerText, numPos) == null) {
+                                idx = lowerText.indexOf(matchTerm, idx + 1);
+                                continue;
+                            }
+                        }
                         pendingIndices.add(new int[]{idx, action.ordinal()});
                         existingNames.add(lowerName);
                         break;
