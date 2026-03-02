@@ -129,7 +129,7 @@ public class VManaPool extends VDisplayArea {
             int oldMana, newMana = player.getMana(colorCode);
             do {
                 oldMana = newMana;
-                MatchController.instance.getGameController().useMana(colorCode);
+                controller.useMana(colorCode);
                 newMana = player.getMana(colorCode);
             }
             while (oldMana != newMana);
