@@ -20,7 +20,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
-import forge.util.Localizer;
 import forge.util.TextUtil;
 
 public class ProtectAllEffect extends SpellAbilityEffect {
@@ -53,7 +52,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
         final List<String> gains = new ArrayList<>();
         if (isChoice) {
             Player choser = sa.getActivatingPlayer();
-            final String choice = choser.getController().chooseProtectionType(Localizer.getInstance().getMessage("lblChooseAProtection"), sa, choices);
+            final String choice = choser.getController().chooseProtectionType(sa, choices);
             if( null == choice)
                 return;
             gains.add(choice);

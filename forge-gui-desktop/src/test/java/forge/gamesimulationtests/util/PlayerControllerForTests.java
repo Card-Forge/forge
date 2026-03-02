@@ -582,7 +582,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public String chooseProtectionType(String string, SpellAbility sa, List<String> choices) {
+    public String chooseProtectionType(SpellAbility sa, List<String> choices) {
         return choices.get(0);
     }
 

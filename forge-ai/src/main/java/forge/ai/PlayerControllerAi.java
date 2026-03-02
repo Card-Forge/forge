@@ -1146,7 +1146,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public String chooseProtectionType(String string, SpellAbility sa, List<String> choices) {
+    public String chooseProtectionType(SpellAbility sa, List<String> choices) {
         String choice = choices.get(0);
         SpellAbility hostsa = null;     //for Protect sub-ability
         if (getGame().stack.size() > 1) {
