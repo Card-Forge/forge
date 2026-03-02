@@ -5015,13 +5015,13 @@
   },
   {
     "name": "Elesh Norn",
-    "sprite": "sprites/enemy/aberration/phyrexian/phyrexianangel.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/eleshnorn.atlas",
     "deck": [
       "decks/legends/elesh_norn.dck"
     ],
     "ai": "",
     "speed": 45,
-    "scale": 1,
+    "scale": 0.4,
     "life": 40,
     "rewards": [
       {
