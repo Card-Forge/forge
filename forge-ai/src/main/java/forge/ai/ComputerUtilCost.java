@@ -660,15 +660,13 @@ public class ComputerUtilCost {
 
             if (sa.hasParam("AIMaxTgtCost")) {
                 String value = sa.getParam("AIMaxTgtCost");
-                if ("MaxCMC".equals(value) && sa.hasParam("ChangeType") && sa.hasParam("Origin")) {
-                    String filter = sa.getParam("ChangeType");
-                    if (filter.contains("cmcLEX")) {
-                        filter = filter.replace("X", "" + val);
-                    }
-                    Collection<Card> originCards = ai.getCardsIn(ZoneType.valueOf(sa.getParam("Origin")));
-                    Collection<Card> filteredCards = CardLists.getValidCards(originCards, filter, ai, source, sa);
-                    val = ObjectUtils.min(val, filteredCards.stream().mapToInt(Card::getCMC).max().orElse(val));
+                String svar = source.getSVar(value);
+                if (svar.contains("YouOwn")) {
+                    // limit the CMC to available mana
+                    svar = svar.replace("YouOwn", "YouOwn+cmcLE" + val);
                 }
+                int calculated = AbilityUtils.calculateAmount(source, svar, sa);
+                val = ObjectUtils.min(val, calculated);
             }
         }
 
