@@ -288,7 +288,7 @@ public abstract class PlayerController {
 
     public abstract boolean confirmPayment(CostPart costPart, String string, SpellAbility sa);
     public abstract ReplacementEffect chooseSingleReplacementEffect(List<ReplacementEffect> possibleReplacers);
-    public abstract StaticAbility chooseSingleStaticAbility(String prompt, List<StaticAbility> possibleReplacers);
+    public abstract StaticAbility chooseSingleStaticAbility(List<StaticAbility> possibleReplacers);
     public abstract String chooseProtectionType(String string, SpellAbility sa, List<String> choices);
 
     public abstract void revealAnte(String message, Multimap<Player, PaperCard> removedAnteCards);

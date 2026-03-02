@@ -39,6 +39,7 @@ import forge.game.replacement.ReplacementEffectView;
 import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityMode;
 import forge.game.staticability.StaticAbilityView;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -1929,24 +1930,19 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public StaticAbility chooseSingleStaticAbility(final String prompt, final List<StaticAbility> possibleStatics) {
+    public StaticAbility chooseSingleStaticAbility(final List<StaticAbility> possibleStatics) {
         final StaticAbility first = possibleStatics.get(0);
-        if (possibleStatics.size() == 1 || !isFullControl(FullControlFlag.ChooseCostOrder)) {
+        boolean isCostReduction = first.getMode().contains(StaticAbilityMode.ReduceCost);
+        final Set<String> sts = possibleStatics.stream().map(StaticAbility::toString).collect(Collectors.toSet());
+        // return first option without prompting if all options are the same, or if they don't care about ordering costs
+        if (sts.size() == 1 || (isCostReduction && !isFullControl(FullControlFlag.ChooseCostOrder))) {
             return first;
         }
-        final List<String> sts = possibleStatics.stream().map(StaticAbility::toString).collect(Collectors.toList());
-        final String firstStr = sts.get(0);
-        for (int i = 1; i < sts.size(); i++) {
-            // prompt user if there are multiple different options
-            if (!sts.get(i).equals(firstStr)) {
-                if (!GuiBase.isNetworkplay(getGui())) //non network game don't need serialization
-                    return getGui().one(prompt, possibleStatics);
-                StaticAbilityView stv = getGui().one(prompt, possibleStatics.stream().map(StaticAbility::getView).collect(Collectors.toList()));
-                return possibleStatics.stream().filter(st -> st.getId() == stv.getId()).findAny().orElse(first);
-            }
-        }
-        // return first option without prompting if all options are the same
-        return first;
+        String prompt = Localizer.getInstance().getMessage(isCostReduction ? "lblChooseCostReduction" : "lblChooseAbilityToPlay");
+        if (!GuiBase.isNetworkplay(getGui())) //non network game don't need serialization
+            return getGui().one(prompt, possibleStatics);
+        StaticAbilityView stv = getGui().one(prompt, possibleStatics.stream().map(StaticAbility::getView).collect(Collectors.toList()));
+        return possibleStatics.stream().filter(st -> st.getId() == stv.getId()).findAny().orElse(first);
     }
 
     @Override

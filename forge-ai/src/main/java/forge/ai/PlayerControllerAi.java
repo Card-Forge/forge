@@ -1140,7 +1140,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public StaticAbility chooseSingleStaticAbility(String prompt, List<StaticAbility> possibleStatics) {
+    public StaticAbility chooseSingleStaticAbility(List<StaticAbility> possibleStatics) {
         // only matters in corner cases
         return Iterables.getFirst(possibleStatics, null);
     }

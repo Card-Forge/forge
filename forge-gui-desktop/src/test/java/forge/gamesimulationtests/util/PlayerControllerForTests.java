@@ -576,7 +576,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public StaticAbility chooseSingleStaticAbility(String prompt, List<StaticAbility> possibleStatics) {
+    public StaticAbility chooseSingleStaticAbility(List<StaticAbility> possibleStatics) {
         // TODO Auto-generated method stub
         return Iterables.getFirst(possibleStatics, null);
     }
