@@ -1,5 +1,5 @@
 Name:Aloy, Savior of Meridian
-ManaCost:3 G U 
+ManaCost:3 G U
 Types:Legendary Creature Human Warrior
 PT:3/5
 K:Vigilance

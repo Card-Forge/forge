@@ -36,6 +36,11 @@ public abstract class GameEntityView extends TrackableObject {
         super(id0, tracker);
     }
 
+    @Override
+    public String toString() {
+        return getName();
+    }
+
     public String getName() {
         return get(TrackableProperty.Name);
     }

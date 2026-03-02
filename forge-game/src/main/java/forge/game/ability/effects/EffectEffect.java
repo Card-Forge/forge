@@ -81,10 +81,9 @@ public class EffectEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("RememberObjects")) {
-            rememberList = new FCollection<>();
-            for (final String rem : sa.getParam("RememberObjects").split(",")) {
-                rememberList.addAll(AbilityUtils.getDefinedEntities(hostCard, rem, sa));
-            }
+            rememberList = new FCollection<>(
+                    AbilityUtils.getDefinedEntities(hostCard, sa.getParam("RememberObjects").split(" & "), sa)
+            );
 
             if (sa.hasParam("ForgetCounter")) {
                 CounterType cType = CounterType.getType(sa.getParam("ForgetCounter"));
@@ -257,7 +256,6 @@ public class EffectEffect extends SpellAbilityEffect {
                 addExileCounterTrigger(eff, sa.getParam("ExileOnCounter"));
             }
 
-            // Set Imprinted
             if (effectImprinted != null) {
                 eff.addImprintedCards(AbilityUtils.getDefinedCards(hostCard, effectImprinted, sa));
             }
@@ -312,7 +310,7 @@ public class EffectEffect extends SpellAbilityEffect {
             }
 
             if (duration == null || !duration.equals("Permanent")) {
-                addUntilCommand(sa, exileEffectCommand(game, eff), controller);
+                addUntilCommand(sa, () -> game.getAction().exileEffect(eff), controller);
             }
 
             if (sa.hasParam("ImprintOnHost")) {

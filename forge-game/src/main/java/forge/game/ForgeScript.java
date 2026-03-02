@@ -113,8 +113,6 @@ public class ForgeScript {
             return !type.hasStringType(source.getChosenType());
         } else if (property.equals("ChosenType2")) {
             return type.hasStringType(source.getChosenType2());
-        } else if (property.equals("IsNotChosenType2")) {
-            return !type.hasStringType(source.getChosenType2());
         } else if (property.equals("NotedType")) {
             boolean found = false;
             for (String s : source.getNotedTypes()) {
@@ -243,6 +241,8 @@ public class ForgeScript {
             return sa.isMutate();
         } else if (property.equals("Ninjutsu")) {
             return sa.isNinjutsu();
+        } else if (property.equals("Sneak")) {
+            return sa.isSneak();
         } else if (property.equals("Foretelling")) {
             return sa.isForetelling();
         } else if (property.equals("Foretold")) {

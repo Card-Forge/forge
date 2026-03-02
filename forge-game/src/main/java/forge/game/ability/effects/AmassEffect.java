@@ -98,14 +98,14 @@ public class AmassEffect extends TokenEffectBase {
         table.replaceCounterEffect(game, sa, true);
         // 01.44a If it isn’t a [subtype], it becomes a [subtype] in addition to its other types.
         if (!tgt.getType().hasCreatureType(type)) {
-            Card eff = createEffect(sa, activator, "Amass Effect", source.getImageKey());
+            final Card eff = createEffect(sa, activator, "Amass Effect", source.getImageKey());
             eff.setRenderForUI(false);
             eff.addRemembered(tgt);
 
             String s = "Mode$ Continuous | Affected$ Card.IsRemembered | EffectZone$ Command | AddType$ " + type;
             eff.addStaticAbility(s);
 
-            tgt.addLeavesPlayCommand(exileEffectCommand(game, eff));
+            tgt.addLeavesPlayCommand(() -> game.getAction().exileEffect(eff));
             game.getAction().moveToCommand(eff, sa);
         }
     }

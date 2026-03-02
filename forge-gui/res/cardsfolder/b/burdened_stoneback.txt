@@ -1,0 +1,7 @@
+Name:Burdened Stoneback
+ManaCost:1 W
+Types:Creature Giant Warrior
+PT:4/4
+K:etbCounter:M1M1:2
+A:AB$ Pump | Cost$ 1 W RemoveAnyCounter<1/Any/Card.Self/this creature> | ValidTgts$ Creature | KW$ Indestructible | SorcerySpeed$ True | SpellDescription$ Target creature gains indestructible until end of turn. Activate only as a sorcery. (Damage and effects that say "destroy" don't destroy it. If its toughness is 0 or less, it still dies.)
+Oracle:This creature enters with two -1/-1 counters on it.\n{1}{W}, Remove a counter from this creature: Target creature gains indestructible until end of turn. Activate only as a sorcery. (Damage and effects that say "destroy" don't destroy it. If its toughness is 0 or less, it still dies.)

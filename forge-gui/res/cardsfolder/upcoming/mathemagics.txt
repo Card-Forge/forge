@@ -1,0 +1,7 @@
+Name:Mathemagics
+ManaCost:X X U U
+Types:Sorcery
+A:SP$ Draw | ValidTgts$ Player | NumCards$ Y | SpellDescription$ Target player draws 2ˣ cards. (2⁰ = 1, 2¹ = 2, 2² = 4, 2³ = 8, 2⁴ = 16, 2⁵ = 32, and so on.)
+SVar:X:Count$xPaid
+SVar:Y:Number$2/Pow.X
+Oracle:Target player draws 2ˣ cards. (2⁰ = 1, 2¹ = 2, 2² = 4, 2³ = 8, 2⁴ = 16, 2⁵ = 32, and so on.)

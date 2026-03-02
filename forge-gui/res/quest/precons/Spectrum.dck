@@ -1,0 +1,46 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Spectrum
+Description=Spectrum harnesses all five colors of magic. Domain cards grow stronger with each basic land type you control.
+Deck Type=constructed
+Set=INV
+Image=spectrum.jpg
+[main]
+1 Plains|INV|1
+1 Plains|INV|2
+1 Island|INV|1
+1 Island|INV|2
+1 Swamp|INV|1
+1 Swamp|INV|2
+1 Mountain|INV|1
+1 Mountain|INV|2
+5 Forest|INV|1
+5 Forest|INV|2
+4 Forest|INV|3
+1 Halam Djinn|INV
+2 Kavu Climber|INV
+1 Nomadic Elf|INV
+2 Quirion Trailblazer|INV
+1 Sabertooth Nishoba|INV
+1 Serpentine Kavu|INV
+3 Thornscape Apprentice|INV
+2 Voracious Cobra|INV
+1 Wayfaring Giant|INV
+2 Yavimaya Barbarian|INV
+2 Zanam Djinn|INV
+3 Fertile Ground|INV
+1 Fires of Yavimaya|INV
+2 Assault // Battery|INV
+2 Exclude|INV
+3 Harrow|INV
+1 Spite // Malice|INV
+2 Wax // Wane|INV
+1 Global Ruin|INV
+1 Ordered Migration|INV
+2 Probe|INV
+2 Tribal Flames|INV
+[sideboard]

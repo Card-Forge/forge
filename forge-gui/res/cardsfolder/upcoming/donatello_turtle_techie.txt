@@ -1,0 +1,8 @@
+Name:Donatello, Turtle Techie
+ManaCost:3 U
+Types:Legendary Creature Mutant Ninja Turtle
+PT:3/4
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | IsPresent$ Artifact.YouCtrl | Execute$ TrigDraw | TriggerDescription$ When NICKNAME enters, if you control an artifact, draw a card.
+SVar:TrigDraw:DB$ Draw
+DeckHints:Type$Artifact
+Oracle:When Donatello enters, if you control an artifact, draw a card.

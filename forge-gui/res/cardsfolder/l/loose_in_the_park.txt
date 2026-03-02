@@ -5,8 +5,10 @@ K:Enchant:Land
 SVar:AttachAILogic:Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ FreeCard | TriggerDescription$ When CARDNAME enters, draw a card, then draft a card from CARDNAME's spellbook and exile it.
 SVar:FreeCard:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ TrigDraft
-SVar:TrigDraft:DB$ Draft | TriggerZones$ Battlefield | Spellbook$ Bristling Boar,Enraged Ceratok,Exuberant Wolfbear,Gaea's Protector,Master Symmetrist,Ornery Dilophosaur,Overgrown Armasaur,Predatory Wurm,Prized Unicorn,Sabertooth Mauler,Spike-Tailed Ceratops,Spore Crawler,Thrashing Brontodon,Wardscale Crocodile,World Shaper | Zone$ Exile | RememberDrafted$ True
-A:AB$ Clone | Cost$ 3 | Defined$ Remembered | CloneTarget$ Enchanted | PumpKeywords$ Haste | AddTypes$ Land | Duration$ UntilEndOfTurn | SpellDescription$ Enchanted land becomes a copy of the exiled card until end of turn and gains haste. It's still a land.
+SVar:TrigDraft:DB$ Draft | TriggerZones$ Battlefield | Spellbook$ Bristling Boar,Enraged Ceratok,Exuberant Wolfbear,Gaea's Protector,Master Symmetrist,Ornery Dilophosaur,Overgrown Armasaur,Predatory Wurm,Prized Unicorn,Sabertooth Mauler,Spike-Tailed Ceratops,Spore Crawler,Thrashing Brontodon,Wardscale Crocodile,World Shaper | RememberDrafted$ True | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Clone | Cost$ 3 | Defined$ ExiledWith | CloneTarget$ Enchanted | PumpKeywords$ Haste | AddTypes$ Land | Duration$ UntilEndOfTurn | SpellDescription$ Enchanted land becomes a copy of the exiled card until end of turn and gains haste. It's still a land.
 SVar:NonStackingAttachEffect:True
 DeckHas:Type$Boar|Rhino|Wolf|Bear|Elemental|Warrior|Rhino|Druid|Dinosaur|Wurm|Unicorn|Cat|Fungus|Crocodile|Merfolk|Shaman|Saproling & Ability$Mill|Graveyard|Sacrifice|Counters|Token
 DeckHints:Type$Human|Garruk

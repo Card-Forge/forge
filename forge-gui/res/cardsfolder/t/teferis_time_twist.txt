@@ -4,7 +4,7 @@ Types:Instant
 A:SP$ ChangeZone | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | AILogic$ DelayedBlink | SubAbility$ DBEffect | SpellDescription$ Exile target permanent you control.
 SVar:DBEffect:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigConditionEffect | RememberObjects$ RememberedLKI | SubAbility$ DBCleanup | SpellDescription$ Return that card to the battlefield under its owner's control at the beginning of the next end step. If it enters as a creature, it enters with an additional +1/+1 counter on it.
 SVar:DBReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ DelayTriggerRememberedLKI
-SVar:TrigConditionEffect:DB$ Effect | RememberObjects$ DelayTriggerRememberedLKI,Self | ReplacementEffects$ EntersAsCreature | ExileOnMoved$ Exile,Stack | SubAbility$ DBReturn
+SVar:TrigConditionEffect:DB$ Effect | RememberObjects$ DelayTriggerRememberedLKI & Self | ReplacementEffects$ EntersAsCreature | ExileOnMoved$ Exile,Stack | SubAbility$ DBReturn
 SVar:EntersAsCreature:Event$ Moved | ValidCard$ Creature.IsRemembered | Destination$ Battlefield | ReplaceWith$ PutP1P1 | Secondary$ True | ReplacementResult$ Updated | Description$ If it enters as a creature, it enters with an additional +1/+1 counter on it.
 SVar:PutP1P1:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | ETB$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

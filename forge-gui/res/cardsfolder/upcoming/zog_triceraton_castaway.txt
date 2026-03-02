@@ -1,0 +1,11 @@
+Name:Zog, Triceraton Castaway
+ManaCost:4 R
+Types:Legendary Creature Dinosaur Soldier
+PT:5/4
+K:Reach
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCanNotBlock | TriggerDescription$ When NICKNAME enters, target creature can't block this turn.
+SVar:TrigCanNotBlock:DB$ Pump | ValidTgts$ Creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SpellDescription$ Target creature can't block this turn.
+K:TypeCycling:Mountain:2
+SVar:PlayMain1:TRUE
+Oracle:Reach, trample\nWhen Zog enters, target creature can't block this turn.\nMountaincycling {2} ({2}, Discard this card: Search your library for a Mountain card, reveal it, put it into your hand, then shuffle.)

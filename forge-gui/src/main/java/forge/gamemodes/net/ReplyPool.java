@@ -39,6 +39,20 @@ public class ReplyPool {
         }
     }
 
+    /**
+     * Cancel all pending replies by completing them with null.
+     * This is used when a player is converted to AI to unblock any waiting game threads.
+     */
+    public void cancelAll() {
+        synchronized (pool) {
+            for (CompletableFuture future : pool.values()) {
+                // Complete with null to unblock waiting threads
+                future.set(null);
+            }
+            pool.clear();
+        }
+    }
+
     private static final class CompletableFuture extends FutureTask<Object> {
         public CompletableFuture() {
             super(() -> null);

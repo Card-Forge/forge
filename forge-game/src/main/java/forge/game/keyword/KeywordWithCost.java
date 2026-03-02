@@ -21,7 +21,7 @@ public class KeywordWithCost extends KeywordInstance<KeywordWithCost> implements
         StringBuilder sb = new StringBuilder();
         sb.append(getTitleWithoutCost());
         Cost cost = getCost();
-        if (!getCost().isOnlyManaCost()) {
+        if (!cost.isOnlyManaCost()) {
             sb.append("—");
         } else {
             sb.append(" ");

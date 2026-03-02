@@ -1,0 +1,13 @@
+Name:Sally Pride, Lioness Leader
+ManaCost:3 W W
+Types:Legendary Creature Cat Mutant Rebel
+PT:2/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBToken | TriggerDescription$ When NICKNAME enters, create X 2/2 red Mutant creature tokens, where X is the number of nontoken creatures you control.
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ r_2_2_mutant | TokenOwner$ You
+SVar:X:Count$Valid Creature.YouCtrl+!token
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounterAll | TriggerDescription$ Whenever NICKNAME attacks, put a +1/+1 counter on each creature you control.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+SVar:PlayMain1:TRUE
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters|Token
+Oracle:When Sally Pride enters, create X 2/2 red Mutant creature tokens, where X is the number of nontoken creatures you control.\nWhenever Sally Pride attacks, put a +1/+1 counter on each creature you control.

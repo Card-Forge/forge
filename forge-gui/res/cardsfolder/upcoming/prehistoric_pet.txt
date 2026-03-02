@@ -1,0 +1,8 @@
+Name:Prehistoric Pet
+ManaCost:W
+Types:Creature Dinosaur Ninja
+PT:1/2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerGTX | Description$ This creature can't be blocked by creatures with greater power.
+A:AB$ ChangeZone | Cost$ 1 W T | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | Origin$ Battlefield | Destination$ Hand | PlayerTurn$ True | SpellDescription$ Return another target creature you control to its owner's hand. Activate only during your turn.
+SVar:X:Count$CardPower
+Oracle:This creature can't be blocked by creatures with greater power.\n{1}{W}, {T}: Return another target creature you control to its owner's hand. Activate only during your turn.

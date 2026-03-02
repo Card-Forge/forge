@@ -23,6 +23,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.GameCommand;
 import forge.card.*;
+import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.StaticEffect;
 import forge.game.ability.AbilityUtils;
@@ -30,7 +31,6 @@ import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
@@ -44,6 +44,7 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.stream.Collectors;
 
@@ -124,8 +125,7 @@ public final class StaticAbilityContinuous {
         ColorSet addColors = null;
         String[] addTriggers = null;
         String[] addStatics = null;
-        boolean removeAllAbilities = false;
-        boolean removeNonMana = false;
+        Predicate<CardTraitBase> removeAbilities = null;
         boolean addAllCreatureTypes = false;
         Set<RemoveType> remove = EnumSet.noneOf(RemoveType.class);
 
@@ -325,10 +325,9 @@ public final class StaticAbilityContinuous {
 
         if (layer == StaticAbilityLayer.ABILITIES) {
             if (params.containsKey("RemoveAllAbilities")) {
-                removeAllAbilities = true;
-                if (params.containsKey("ExceptManaAbilities")) {
-                    removeNonMana = true;
-                }
+                removeAbilities = e -> true;
+            } else if (params.containsKey("RemoveNonManaAbilities")) {
+                removeAbilities = Predicate.not(CardTraitBase::isManaAbility);
             }
 
             if (params.containsKey("AddAbility")) {
@@ -624,22 +623,21 @@ public final class StaticAbilityContinuous {
                         // color
                         affectedCard.addColorByText(state.getColor(), false, se.getTimestamp(), stAb);
                         // type
-                        affectedCard.addChangedCardTypesByText(new CardType(state.getType()), se.getTimestamp(), stAb.getId());
+                        affectedCard.addChangedCardTypesByText(state.getType(), se.getTimestamp(), stAb.getId());
                         // abilities
                         affectedCard.addChangedCardTraitsByText(spellAbilities, trigger, replacementEffects, staticAbilities, se.getTimestamp(), stAb.getId());
                         affectedCard.addChangedCardKeywordsByText(keywords, se.getTimestamp(), stAb.getId(), false);
-
                         // power and toughness
                         affectedCard.addNewPTByText(state.getBasePower(), state.getBaseToughness(), se.getTimestamp(), stAb.getId());
                     }
                 }
                 if (stAb.hasParam("Incorporate")) {
-                    final ManaCost manaCost = new ManaCost(new ManaCostParser(stAb.getParam("Incorporate")));
+                    final ManaCost manaCost = new ManaCost(stAb.getParam("Incorporate"));
                     affectedCard.addChangedManaCost(manaCost, true, se.getTimestamp(), stAb.getId());
                     affectedCard.addColorByText(ColorSet.fromMask(manaCost.getColorProfile()), true, se.getTimestamp(), stAb);
                 }
                 if (stAb.hasParam("ManaCost")) {
-                    final ManaCost manaCost = new ManaCost(new ManaCostParser(stAb.getParam("ManaCost")));
+                    final ManaCost manaCost = new ManaCost(stAb.getParam("ManaCost"));
                     affectedCard.addChangedManaCost(manaCost, false, se.getTimestamp(), stAb.getId());
                 }
 
@@ -705,7 +703,7 @@ public final class StaticAbilityContinuous {
             }
 
             // add keywords
-            if ((addKeywords != null && !addKeywords.isEmpty()) || removeKeywords != null || removeAllAbilities) {
+            if ((addKeywords != null && !addKeywords.isEmpty()) || removeKeywords != null || removeAbilities != null) {
                 List<String> newKeywords = null;
                 if (addKeywords != null) {
                     newKeywords = Lists.newArrayList(addKeywords);
@@ -743,7 +741,7 @@ public final class StaticAbilityContinuous {
                 }
 
                 affectedCard.addChangedCardKeywords(newKeywords, removeKeywords,
-                        removeAllAbilities, se.getTimestamp(), stAb, false);
+                        removeAbilities != null, se.getTimestamp(), stAb, false);
                 affectedCard.updateKeywordsCache();
             }
 
@@ -851,10 +849,9 @@ public final class StaticAbilityContinuous {
                 }
 
                 if (!addedAbilities.isEmpty() || !addedTrigger.isEmpty() || addReplacements != null || addStatics != null
-                    || removeAllAbilities) {
+                    || removeAbilities != null) {
                     affectedCard.addChangedCardTraits(
-                        addedAbilities, null, addedTrigger, addedReplacementEffects, addedStaticAbility, removeAllAbilities, removeNonMana,
-                        se.getTimestamp(), stAb.getId(), false
+                        addedAbilities, null, addedTrigger, addedReplacementEffects, addedStaticAbility, removeAbilities, se.getTimestamp(), stAb.getId(), false
                     );
                 }
 
@@ -969,7 +966,7 @@ public final class StaticAbilityContinuous {
         addIgnore.setIntrinsic(false);
         addIgnore.setApi(ApiType.InternalIgnoreEffect);
         addIgnore.setDescription(cost + " Ignore the effect until end of turn.");
-        sourceCard.addChangedCardTraits(ImmutableList.of(addIgnore), null, null, null, null, false, false, sourceCard.getLayerTimestamp(), stAb.getId());
+        sourceCard.addChangedCardTraits(ImmutableList.of(addIgnore), null, null, null, null, null, sourceCard.getLayerTimestamp(), stAb.getId());
 
         final GameCommand removeIgnore = new GameCommand() {
             private static final long serialVersionUID = -5415775215053216360L;

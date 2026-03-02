@@ -65,6 +65,7 @@ public class TapOrUntapEffect extends SpellAbilityEffect {
             if (toggle) {
                 tap = !gameCard.isTapped();
             } else {
+                // all cards using this are optional, so don't need to worry about impossible choice
                 tap = pc.chooseBinary(sa, Localizer.getInstance().getMessage("lblTapOrUntapTarget", gameCard.getTranslatedName()), PlayerController.BinaryChoiceType.TapOrUntap,
                         !gameCard.getController().equals(tapper));
             }

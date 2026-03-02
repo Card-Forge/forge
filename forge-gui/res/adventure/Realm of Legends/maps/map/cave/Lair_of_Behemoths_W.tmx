@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="76">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Titans' Nest&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJybycnAMHMUj+JRPIpH8SgexSMCAwCsCkLM
+  </data>
+ </layer>
+ <layer id="7" name="Background 2" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjY2BgYBvFJGGGQeAGWvplsPqPFHeR44fB4m9K3YFLP6nmDpbwGAxhisusoRBG9HAjre0YCuE8lOITAED6C48=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNVNEKgzAM7KP9MRl+aud3aT9jyAw75NJcHIwdFLQ2ubO5ZK6lzH+y2lTKE9Y6ffbtOTp7h4cB91GHd1bhf1Qeb9jre3k6GLrwv9uAtw/OmZ5+fsN39a4Z9zK4GyV3E+uOmj3dBy/TwzivQA9lfW449F/93QJvIjK8nv9ULrzLTI0wnuVCLKLXWP+zGln8RnKhNxUPRD2c6Q/M883sUL3r1TjivsvrzUo1HmsT9bDX8wzqvMzMuJGG7Lz81XoBq5mv4g==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzNVUESgjAMjAIKH/Af9MobPDs+R0HgIcyod5/gO7w4/sKDxiZD7MAQKQf3koSm2ZCkLcD/IDYAZdrqYTq8Z2H8eR+JlSuy70n7HfU5cUTGfqszgCfawnevyCPo+R+Mc4ytRJzfeuLkAeSDa8i/JrtU8NbG7pNoaL8L9pNrM+LYveXhx3pjPznmZsC3Kx8fYD0rminUa89Z4T5coO2NTyxNjIfwifrdVGhIbsFyuzlILp41aY8FxuX9GNONxTyfHmW6mHg/8FwuTXtGZY80ObvnQguuJddxbH3GztGVpGYmcnHvYK68Zwy3tke5+Z4nxEnoheIsds3K0BkOxDr39kY2xioUbwre5ZXHXcH/xlzhBG/U1HgBRY9D0A==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="60" template="../../../../common/maps/obj/door_left.tx" x="462.668" y="135.761">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/cave/Lair_of_Behemoths_2.tmx"/>
+    <property name="teleportObjectId" value="63"/>
+   </properties>
+  </object>
+  <object id="64" template="../../../../common/maps/obj/enemy.tx" x="338.499" y="207.714">
+   <properties>
+    <property name="enemy" value="Obosh"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="65" template="../../../../common/maps/obj/dialog.tx" x="428.068" y="134.966" width="22.2409" height="23.0252" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The caverns ahead seem almost stuffed full of terrible beasts, the stone barely able to contain such fearsome creatures. What forces must have threatened them, that they all came here to hide so deep underground?&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="69" template="../../obj/treasure.tx" x="314.508" y="64.0269">
+   <properties>
+    <property name="reward">[
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 5,
+  &quot;rarity&quot;: [&quot;Uncommon&quot;]
+},
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;rarity&quot;: [&quot;Rare&quot;, &quot;Mythic Rare&quot;]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/enemy.tx" x="97.3527" y="67.252">
+   <properties>
+    <property name="enemy" value="Gyruda"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/enemy.tx" x="96.8152" y="219.906">
+   <properties>
+    <property name="enemy" value="Yorion"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/enemy.tx" x="263.982" y="54.8891">
+   <properties>
+    <property name="enemy" value="Kaheera"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="73" template="../../obj/treasure.tx" x="283.333" y="225.819">
+   <properties>
+    <property name="reward">[
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 5,
+  &quot;rarity&quot;: [&quot;Uncommon&quot;]
+},
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;rarity&quot;: [&quot;Rare&quot;, &quot;Mythic Rare&quot;]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="74" template="../../obj/treasure.tx" x="43.0638" y="215.068">
+   <properties>
+    <property name="reward">[
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 5,
+  &quot;rarity&quot;: [&quot;Uncommon&quot;]
+},
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;rarity&quot;: [&quot;Rare&quot;, &quot;Mythic Rare&quot;]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="75" template="../../obj/treasure.tx" x="35.5386" y="67.7895">
+   <properties>
+    <property name="reward">[
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 5,
+  &quot;rarity&quot;: [&quot;Uncommon&quot;]
+},
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;rarity&quot;: [&quot;Rare&quot;, &quot;Mythic Rare&quot;]
+}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

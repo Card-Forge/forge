@@ -2,5 +2,5 @@ Name:Thousand Moons Infantry
 ManaCost:2 W
 Types:Creature Human Soldier
 PT:2/4
-K:CARDNAME untaps during each other player's untap step.
+S:Mode$ UntapOtherPlayer | ValidCard$ Card.Self | Description$ Untap CARDNAME during each other player's untap step.
 Oracle:Untap Thousand Moons Infantry during each other player's untap step.

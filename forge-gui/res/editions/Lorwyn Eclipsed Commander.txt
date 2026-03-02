@@ -197,3 +197,4 @@ ScryfallCode=ECC
 
 [other]
 1 copy @Michele Giorgi
+12 monarch @Volkan Baǵa

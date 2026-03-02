@@ -1,7 +1,7 @@
 Name:Horizon Boughs
 ManaCost:no cost
 Types:Plane Pyrulea
-S:Mode$ Continuous | EffectZone$ Command | Affected$ Permanent | AddHiddenKeyword$ CARDNAME untaps during each other player's untap step. | Description$ All permanents untap during each player's untap step.
+S:Mode$ UntapOtherPlayer | ValidCard$ Permanent | EffectZone$ Command | Description$ All permanents untap during each player's untap step.
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ DBFetch | TriggerDescription$ Whenever chaos ensues, you may search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle.
 SVar:DBFetch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeTypeDesc$ basic land | ChangeNum$ 3 | ShuffleNonMandatory$ True
 SVar:AIRollPlanarDieParams:Mode$ Always | LowPriority$ True | MaxRollsPerTurn$ 9

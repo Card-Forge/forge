@@ -3,5 +3,5 @@ ManaCost:5
 Types:Legendary Artifact
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
-A:AB$ Mana | Cost$ T | Produced$ W U B R G | SpellDescription$ Add {W}{U}{B}{R}{G}
+A:AB$ Mana | Cost$ T | Produced$ W U B R G | SpellDescription$ Add {W}{U}{B}{R}{G}.
 Oracle:Timeless Lotus enters tapped.\n{T}: Add {W}{U}{B}{R}{G}.

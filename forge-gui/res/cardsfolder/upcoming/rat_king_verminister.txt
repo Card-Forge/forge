@@ -1,0 +1,11 @@
+Name:Rat King, Verminister
+ManaCost:1 B
+Types:Legendary Creature Rat Avatar
+PT:1/1
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Revolt$ True | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Disappear — At the beginning of your end step, if a permanent left the battlefield under your control this turn, create a 1/1 black Rat creature token and put a +1/+1 counter on NICKNAME.
+SVar:TrigToken:DB$ Token | TokenScript$ b_1_1_rat | TokenOwner$ You | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ Pump | Cost$ T Sac<3/Rat> | ValidTgts$ Creature.YouOwn | TgtZone$ Graveyard | SubAbility$ DBReturn | SpellDescription$ Return target creature card and all other cards with the same name as that card from your graveyard to the battlefield tapped.
+SVar:DBReturn:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | Defined$ You | ChangeType$ TargetedCard.Self,Card.NotDefinedTargeted+sharesNameWith Targeted
+DeckHas:Ability$Counters
+Oracle:Disappear — At the beginning of your end step, if a permanent left the battlefield under your control this turn, create a 1/1 black Rat creature token and put a +1/+1 counter on Rat King.\n{T}, Sacrifice three Rats: Return target creature card and all other cards with the same name as that card from your graveyard to the battlefield tapped.

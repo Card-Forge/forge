@@ -56,16 +56,51 @@ public class GameLauncher {
         } catch (Exception e) {
              e.printStackTrace();
         }
-        ApplicationListener start = Forge.getApp(hw, new Lwjgl3Clipboard(), new Main.DesktopAdapter(switchOrientationFile),
-            assetsDir, false, false, totalRAM, false, 0);
 
-        int windowWidth = Config.instance().getSettingData().width;
-        int windowHeight = Config.instance().getSettingData().height;
+        // Retrieve command line parameters
+        int windowHeight = 0;
+        int windowWidth = 0;
+        boolean isPortrait = false;
+        boolean manualWindowSize = false;
         for(String arg : args) {
-            if(arg.startsWith("width="))
+            if(arg.startsWith("width=")) {
                 windowWidth = Integer.parseInt(arg.substring(6));
-            if(arg.startsWith("height="))
+                manualWindowSize = true;
+            }
+            if(arg.startsWith("height=")) {
                 windowHeight = Integer.parseInt(arg.substring(7));
+                manualWindowSize = true;
+            }
+            if(arg.equalsIgnoreCase("portrait")) {
+                isPortrait = true;
+            }
+        }
+
+        // Check if the manually supplied window size indicates portrait mode
+        if ((windowHeight > 0) && (windowWidth > 0)) {
+            if (windowHeight > windowWidth) {
+                isPortrait = true;
+            }
+        }
+
+        ApplicationListener start = Forge.getApp(hw, new Lwjgl3Clipboard(), new Main.DesktopAdapter(switchOrientationFile),
+            assetsDir, false, isPortrait, totalRAM, false, 0);
+
+        // If no manual window size is supplied, use the configured one (and adjust for portrait mode if needed)
+        if (!manualWindowSize) {
+            windowWidth = Config.instance().getSettingData().width;
+            windowHeight = Config.instance().getSettingData().height;
+            if (isPortrait && (windowHeight < windowWidth)) {
+                // swap width/height
+                int tmp = windowHeight;
+                windowHeight = windowWidth;
+                windowWidth = tmp;
+            } else if (!isPortrait && (windowWidth < windowHeight)) {
+                // swap width/height
+                int tmp = windowHeight;
+                windowHeight = windowWidth;
+                windowWidth = tmp;
+            }
         }
 
         if (Config.instance().getSettingData().fullScreen) {

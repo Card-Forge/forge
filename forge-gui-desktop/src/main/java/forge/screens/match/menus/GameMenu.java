@@ -6,9 +6,11 @@ import java.awt.event.KeyEvent;
 import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
+import javax.swing.KeyStroke;
 
 import com.google.common.primitives.Ints;
 
+import forge.control.KeyboardShortcuts;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
@@ -18,7 +20,6 @@ import forge.screens.match.CMatchUI;
 import forge.screens.match.VAutoYields;
 import forge.screens.match.controllers.CDock.ArcState;
 import forge.toolbox.FSkin.SkinIcon;
-import forge.toolbox.FSkin.SkinnedCheckBoxMenuItem;
 import forge.toolbox.FSkin.SkinnedMenu;
 import forge.toolbox.FSkin.SkinnedMenuItem;
 import forge.toolbox.FSkin.SkinnedRadioButtonMenuItem;
@@ -52,31 +53,13 @@ public final class GameMenu {
         menu.add(getMenuItem_AutoYields());
         menu.addSeparator();
         menu.add(getMenuItem_ViewDeckList());
-        menu.addSeparator();
-        menu.add(getMenuItem_GameSoundEffects());
         return menu;
-    }
-
-    private static SkinnedCheckBoxMenuItem getMenuItem_GameSoundEffects() {
-        final Localizer localizer = Localizer.getInstance();
-        SkinnedCheckBoxMenuItem menuItem = new SkinnedCheckBoxMenuItem(localizer.getMessage("lblSoundEffects"));
-        menuItem.setState(prefs.getPrefBoolean(FPref.UI_ENABLE_SOUNDS));
-        menuItem.addActionListener(getSoundEffectsAction());
-        return menuItem;
-    }
-    private static ActionListener getSoundEffectsAction() {
-        return e -> toggleGameSoundEffects();
-    }
-    private static void toggleGameSoundEffects() {
-        final boolean isSoundEffectsEnabled = !prefs.getPrefBoolean(FPref.UI_ENABLE_SOUNDS);
-        prefs.setPref(FPref.UI_ENABLE_SOUNDS, isSoundEffectsEnabled);
-        prefs.save();
     }
 
     private SkinnedMenuItem getMenuItem_Undo() {
         final Localizer localizer = Localizer.getInstance();
         final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblUndo"));
-        menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_Z));
+        setAcceleratorFromPref(menuItem, FPref.SHORTCUT_UNDO);
         menuItem.addActionListener(getUndoAction());
         return menuItem;
     }
@@ -88,7 +71,7 @@ public final class GameMenu {
     private SkinnedMenuItem getMenuItem_Concede() {
         SkinnedMenuItem menuItem = new SkinnedMenuItem(matchUI.getConcedeCaption());
         menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_CONCEDE) : null));
-        menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_Q));
+        setAcceleratorFromPref(menuItem, FPref.SHORTCUT_CONCEDE);
         menuItem.addActionListener(getConcedeAction());
         return menuItem;
     }
@@ -101,7 +84,7 @@ public final class GameMenu {
         final Localizer localizer = Localizer.getInstance();
         final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblAlphaStrike"));
         menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_ALPHASTRIKE) : null));
-        menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_A));
+        setAcceleratorFromPref(menuItem, FPref.SHORTCUT_ALPHASTRIKE);
         menuItem.addActionListener(getAlphaStrikeAction());
         return menuItem;
     }
@@ -114,13 +97,21 @@ public final class GameMenu {
         final Localizer localizer = Localizer.getInstance();
         final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblEndTurn"));
         menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_ENDTURN) : null));
-        menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_E));
+        setAcceleratorFromPref(menuItem, FPref.SHORTCUT_ENDTURN);
         menuItem.addActionListener(getEndTurnAction());
         return menuItem;
     }
 
     private ActionListener getEndTurnAction() {
         return e -> matchUI.getGameController().passPriorityUntilEndOfTurn();
+    }
+
+    /** Sets a menu item's accelerator display from a shortcut preference. */
+    private static void setAcceleratorFromPref(final SkinnedMenuItem menuItem, final FPref pref) {
+        final KeyStroke ks = KeyboardShortcuts.getKeyStrokeForPref(pref);
+        if (ks != null) {
+            menuItem.setAccelerator(ks);
+        }
     }
 
     private SkinnedMenu getMenuItem_TargetingArcs() {

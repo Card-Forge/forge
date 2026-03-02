@@ -842,8 +842,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             if (ability.hasParam("UnlessCost") && !confirmAction(cost, Localizer.getInstance().getMessage("lblPutNTypeCounterOnTarget", String.valueOf(c), cost.getCounter().getName(), ability.getHostCard().getDisplayName()))) {
                 return null;
             }
-            cost.setLastPaidAmount(c);
-            return PaymentDecision.number(c);
+            return PaymentDecision.card(source);
         }
 
         // Cards to use this branch: Scarscale Ritual, Wandering Mage - each adds only one counter
@@ -1207,7 +1206,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         return PaymentDecision.counters(counterTable);
     }
 
-    private GameEntityCounterTable generateCounterTable (final Card c, final CounterType cType, int cntToRemove, final SpellAbility sa) {
+    private GameEntityCounterTable generateCounterTable(final Card c, final CounterType cType, int cntToRemove, final SpellAbility sa) {
         final GameEntityCounterTable counterTable = new GameEntityCounterTable();
         if (cType != null) {
             counterTable.put(null, c, cType, cntToRemove);
@@ -1425,7 +1424,8 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     public PaymentDecision visit(final CostUntapType cost) {
         CardCollection typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"),
                 player, source, ability);
-        typeList = CardLists.filter(typeList, CardPredicates.TAPPED, c -> c.getCounters(CounterEnumType.STUN) == 0 || c.canRemoveCounters(CounterEnumType.STUN));
+        typeList = CardLists.filter(typeList, c -> c.canUntap(null, false) &&
+                (c.getCounters(CounterEnumType.STUN) == 0 || c.canRemoveCounters(CounterEnumType.STUN)));
         int c = cost.getAbilityAmount(ability);
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, typeList, ability);
         inp.setCancelAllowed(true);

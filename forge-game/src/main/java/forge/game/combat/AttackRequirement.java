@@ -1,30 +1,32 @@
 package forge.game.combat;
 
+import java.util.LinkedHashMap;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
+import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityMustAttack;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
 
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.util.collect.FCollectionView;
-import forge.util.maps.LinkedHashMapToAmount;
-import forge.util.maps.MapToAmount;
-import forge.util.maps.MapToAmountUtil;
 
 public class AttackRequirement {
 
-    private final MapToAmount<GameEntity> defenderSpecific;
-    private final MapToAmount<Card> causesToAttack;
+    private final Map<GameEntity, Integer> defenderSpecific;
+    private final Multimap<Card, StaticAbility> causesToAttack;
     private final Card attacker;
 
-    public AttackRequirement(final Card attacker, final MapToAmount<Card> causesToAttack, final FCollectionView<GameEntity> possibleDefenders) {
-        this.defenderSpecific = new LinkedHashMapToAmount<>();
+    public AttackRequirement(final Card attacker, final Multimap<Card, StaticAbility> causesToAttack, final FCollectionView<GameEntity> possibleDefenders) {
+        this.defenderSpecific = new LinkedHashMap<>();
         this.attacker = attacker;
         this.causesToAttack = causesToAttack;
 
@@ -42,13 +44,13 @@ public class AttackRequirement {
             if (e.equals(attacker)) {
                 nAttackAnything++;
             } else {
-                defenderSpecific.add(e);
+                defenderSpecific.merge(e, 1, Integer::sum);
             }
         }
 
         for (final GameEntity defender : possibleDefenders) {
             // use put here because we want to always put it, even if the value is 0
-            defenderSpecific.put(defender, defenderSpecific.count(defender) + nAttackAnything);
+            defenderSpecific.put(defender, defenderSpecific.getOrDefault(defender, 0) + nAttackAnything);
         }
 
         // Remove GameEntities that are no longer on an opposing battlefield or are
@@ -80,10 +82,10 @@ public class AttackRequirement {
     }
 
     public boolean hasRequirement() {
-        return defenderSpecific.countAll() > 0 || causesToAttack.countAll() > 0;
+        return defenderSpecific.values().stream().anyMatch(i -> i > 0 ) || !causesToAttack.isEmpty();
     }
 
-    public final MapToAmount<Card> getCausesToAttack() {
+    public final Multimap<Card, StaticAbility> getCausesToAttack() {
         return causesToAttack;
     }
 
@@ -93,21 +95,21 @@ public class AttackRequirement {
         }
 
         final boolean isAttacking = defender != null;
-        int violations = defenderSpecific.countAll() - (isAttacking ? defenderSpecific.count(defender) : 0);
+        int violations = defenderSpecific.values().stream().mapToInt(Integer::intValue).sum()
+                - (isAttacking ? defenderSpecific.getOrDefault(defender, 0) : 0);
         if (isAttacking) {
             final Combat combat = defender.getGame().getCombat();
             final Map<Card, AttackRestriction> constraints = combat.getAttackConstraints().getRestrictions();
 
             // check if a restriction will apply such that the requirement is no longer relevant
             if (attackers.size() != 1 || !constraints.get(attackers.entrySet().iterator().next().getKey()).getTypes().contains(AttackRestrictionType.ONLY_ALONE)) {
-                for (final Map.Entry<Card, Integer> mustAttack : causesToAttack.entrySet()) {
+                for (final Map.Entry<Card, Collection<StaticAbility>> mustAttack : causesToAttack.asMap().entrySet()) {
                     if (constraints.get(mustAttack.getKey()).getTypes().contains(AttackRestrictionType.ONLY_ALONE)) continue;
-                    int max = GlobalAttackRestrictions.getGlobalRestrictions(mustAttack.getKey().getController(), combat.getDefenders()).getMax();
-                    if (max == -1) max = Integer.MAX_VALUE;
+                    int max = Objects.requireNonNullElse(GlobalAttackRestrictions.getGlobalRestrictions(mustAttack.getKey().getController(), combat.getDefenders()).getMax(), Integer.MAX_VALUE);
 
                     // only count violations if the forced creature can actually attack and has no cost incurred for doing so
                     if (attackers.size() < max && !attackers.containsKey(mustAttack.getKey()) && CombatUtil.canAttack(mustAttack.getKey()) && CombatUtil.getAttackCost(defender.getGame(), mustAttack.getKey(), defender) == null) {
-                        violations += mustAttack.getValue();
+                        violations += mustAttack.getValue().size();
                     }
                 }
             }
@@ -116,7 +118,12 @@ public class AttackRequirement {
     }
 
     public List<Pair<GameEntity, Integer>> getSortedRequirements() {
-        return MapToAmountUtil.sort(defenderSpecific);
+        final List<Pair<GameEntity, Integer>> entries = Lists.newArrayListWithCapacity(defenderSpecific.size());
+        for (final Map.Entry<GameEntity, Integer> entry : defenderSpecific.entrySet()) {
+            entries.add(Pair.of(entry.getKey(), entry.getValue()));
+        }
+        entries.sort(Map.Entry.comparingByValue());
+        return entries;
     }
 
 }

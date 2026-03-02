@@ -227,7 +227,6 @@ public class Config {
     }
 
     public String[] starterEditions() {
-
         return configData.starterEditions;
     }
 

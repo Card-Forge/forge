@@ -1,7 +1,6 @@
 Name:Shadow of the Enemy
 ManaCost:3 B B B
 Types:Sorcery
-Oracle:
 A:SP$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | ChangeType$ Creature | RememberChanged$ True | SubAbility$ DBMayPlay | SpellDescription$ Exile all creature cards from target player's graveyard. You may cast spells from among those cards for as long as they remain exiled, and mana of any type can be spent to cast them.
 SVar:DBMayPlay:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ MayPlay | SubAbility$ DBCleanup | Duration$ Permanent | ForgetOnMoved$ Exile
 SVar:MayPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreType$ True | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | Description$ You may cast spells from among those cards for as long as they remain exiled, and mana of any type can be spent to cast them.

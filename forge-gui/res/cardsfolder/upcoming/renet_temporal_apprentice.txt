@@ -1,0 +1,8 @@
+Name:Renet, Temporal Apprentice
+ManaCost:3 U U
+Types:Legendary Creature Human Wizard
+PT:4/3
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZoneAll | TriggerDescription$ When NICKNAME enters, return each other nonland permanent that entered this turn to its owner's hand.
+SVar:TrigChangeZoneAll:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Hand | ChangeType$ Permanent.Other+nonLand+ThisTurnEntered
+Oracle:Flash\nWhen Renet enters, return each other nonland permanent that entered this turn to its owner's hand.

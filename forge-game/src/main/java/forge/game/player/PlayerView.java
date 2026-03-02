@@ -1,6 +1,5 @@
 package forge.game.player;
 
-import com.google.common.base.MoreObjects;
 import com.google.common.collect.ImmutableMultiset;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -96,7 +95,7 @@ public class PlayerView extends GameEntityView {
     }
 
     public FCollectionView<PlayerView> getOpponents() {
-        return MoreObjects.firstNonNull(this.<FCollectionView<PlayerView>>get(TrackableProperty.Opponents), new FCollection<>());
+        return Objects.requireNonNullElse(this.<FCollectionView<PlayerView>>get(TrackableProperty.Opponents), new FCollection<>());
     }
     void updateOpponents(Player p) {
         set(TrackableProperty.Opponents, PlayerView.getCollection(p.getOpponents()));

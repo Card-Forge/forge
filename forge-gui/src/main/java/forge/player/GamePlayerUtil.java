@@ -13,6 +13,7 @@ import forge.util.GuiDisplayUtil;
 import forge.util.Localizer;
 import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
+import org.tinylog.Logger;
 
 import java.util.Set;
 
@@ -71,7 +72,7 @@ public final class GamePlayerUtil {
 
         // TODO: implement specific AI profiles for quest mode.
         String profile = "";
-        if (profileOverride.isEmpty()) {
+        if (profileOverride == null || profileOverride.isEmpty()) {
             String lastProfileChosen = FModel.getPreferences().getPref(FPref.UI_CURRENT_AI_PROFILE);
             if (!AiProfileUtil.getProfilesDisplayList().contains(lastProfileChosen)) {
                 System.out.println("[AI Preferences] Unknown profile " + lastProfileChosen + " was requested, resetting to default.");
@@ -88,8 +89,9 @@ public final class GamePlayerUtil {
             profile = profileOverride;
         }
 
-        assert (!profile.isEmpty());
-        
+        assert (!profile.isEmpty()); // TODO test instead of assert
+
+        Logger.debug("[AI Preferences] " + name + " using profile " + profile);
         player.setAiProfile(profile);
         player.setAvatarIndex(avatarIndex);
         player.setSleeveIndex(sleeveIndex);

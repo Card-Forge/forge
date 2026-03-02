@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Painflow
+Description=Painflow deploys threshold creatures. Fill your graveyard to unlock their full power.
+Deck Type=constructed
+Set=JUD
+Image=painflow.jpg
+[main]
+7 Forest|ODY|1
+7 Forest|ODY|2
+6 Forest|ODY|3
+1 Anurid Barkripper|JUD
+2 Anurid Swarmsnapper|JUD
+2 Battlefield Scrounger|JUD
+2 Brawn|JUD
+3 Diligent Farmhand|ODY
+4 Giant Warthog|JUD
+1 Krosan Archer|ODY
+2 Krosan Wayfarer|JUD
+2 Nantuko Elder|ODY
+2 Nantuko Tracer|JUD
+2 Rabid Elephant|ODY
+1 Thriss, Nantuko Primus|JUD
+2 Tunneler Wurm|JUD
+3 Werebear|ODY
+2 Moment's Peace|ODY
+2 Sudden Strength|JUD
+1 Crush of Wurms|JUD
+2 Deep Reconnaissance|ODY
+1 Grizzly Fate|JUD
+2 Roar of the Wurm|ODY
+1 Seton's Desire|ODY
+[sideboard]

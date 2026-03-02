@@ -1,15 +1,17 @@
 package forge.gamemodes.match;
 
 import com.google.common.collect.*;
+import forge.game.GameLog;
 import forge.game.GameView;
-import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
+import forge.game.event.GameEvent;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.player.PlayerView;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
+import forge.gui.control.FControlGameEventHandler;
 import forge.gui.control.PlaybackSpeed;
 import forge.gui.interfaces.IGuiGame;
 import forge.gui.interfaces.IMayViewCards;
@@ -19,6 +21,7 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
+import forge.player.PlayerZoneUpdate;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableTypes;
 import forge.util.FSerializableFunction;
@@ -34,10 +37,22 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private final Map<PlayerView, IGameController> gameControllers = Maps.newHashMap();
     private final Map<PlayerView, IGameController> originalGameControllers = Maps.newHashMap();
     private boolean gamePause = false;
-    private boolean gameSpeed = false;
     private PlaybackSpeed playbackSpeed = PlaybackSpeed.NORMAL;
     private String daytime = null;
     private boolean ignoreConcedeChain = false;
+    private boolean networkGame = false;
+
+    private java.util.Timer waitingTimer;
+    private long waitingStartTime;
+
+    @Override
+    public boolean isNetGame() {
+        return networkGame;
+    }
+    @Override
+    public void setNetGame() {
+        networkGame = true;
+    }
 
     public final boolean hasLocalPlayers() {
         return !gameControllers.isEmpty();
@@ -316,14 +331,13 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return gamePause;
     }
 
-    public boolean isGameFast() {
-        return gameSpeed;
-    }
-
-    public void setgamePause(boolean pause) {
+    public void setGamePause(boolean pause) {
         gamePause = pause;
     }
 
+    public PlaybackSpeed getGameSpeed() {
+        return playbackSpeed;
+    }
     public void setGameSpeed(PlaybackSpeed speed) {
         playbackSpeed = speed;
     }
@@ -459,6 +473,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                     synchronized (awaitNextInputTimer) {
                         if (awaitNextInputTask != null) {
                             updatePromptForAwait(getCurrentPlayer());
+                            if (GuiBase.isNetworkplay(AbstractGuiGame.this)) {
+                                showWaitingTimer(getCurrentPlayer(), findWaitingForPlayerName(getCurrentPlayer()));
+                            }
                             awaitNextInputTask = null;
                         }
                     }
@@ -467,6 +484,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         };
         awaitNextInputTimer.schedule(awaitNextInputTask, 250);
     }
+
     private void checkAwaitNextInputTimer() {
         if (awaitNextInputTimer == null) {
             String name = "?";
@@ -479,6 +497,72 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     protected final void updatePromptForAwait(final PlayerView playerView) {
         showPromptMessage(playerView, Localizer.getInstance().getMessage("lblWaitingForOpponent"));
         updateButtons(playerView, false, false, false);
+    }
+
+    @Override
+    public void showWaitingTimer(final PlayerView forPlayer, final String waitingForPlayerName) {
+        cancelWaitingTimer();
+        if (waitingForPlayerName == null) {
+            return;
+        }
+        this.waitingStartTime = System.currentTimeMillis();
+        waitingTimer = new java.util.Timer("waitingTimer");
+        waitingTimer.schedule(new java.util.TimerTask() {
+            @Override
+            public void run() {
+                FThreads.invokeInEdtLater(() -> updateWaitingDisplay(forPlayer, waitingForPlayerName));
+            }
+        }, 1000, 1000);
+    }
+
+    private void updateWaitingDisplay(final PlayerView forPlayer, final String waitingForPlayerName) {
+        long elapsedSec = (System.currentTimeMillis() - waitingStartTime) / 1000;
+        if (elapsedSec < 2) {
+            return;
+        }
+        String timeStr;
+        if (elapsedSec < 60) {
+            timeStr = elapsedSec + "s";
+        } else {
+            timeStr = String.format("%d:%02d", elapsedSec / 60, elapsedSec % 60);
+        }
+        showPromptMessageNoCancel(forPlayer, Localizer.getInstance().getMessage("lblWaitingForPlayer", waitingForPlayerName) + " (" + timeStr + ")");
+    }
+
+    protected void cancelWaitingTimer() {
+        if (waitingTimer != null) {
+            waitingTimer.cancel();
+            waitingTimer = null;
+        }
+    }
+
+    public void showPromptMessageNoCancel(final PlayerView playerView, final String message) {}
+
+    private String findWaitingForPlayerName(final PlayerView forPlayer) {
+        if (gameView.getPlayers() != null) {
+            for (PlayerView pv : gameView.getPlayers()) {
+                if (pv.getHasPriority() && (forPlayer == null || pv.getId() != forPlayer.getId())) {
+                    return pv.getName();
+                }
+            }
+        }
+        // Fallback to turn player during mulligan/setup
+        PlayerView turnPlayer = gameView.getPlayerTurn();
+        if (turnPlayer != null && (forPlayer == null || turnPlayer.getId() != forPlayer.getId())) {
+            return turnPlayer.getName();
+        }
+        // Fallback to any non-local player
+        if (gameView.getPlayers() != null) {
+            for (PlayerView pv : gameView.getPlayers()) {
+                if (forPlayer != null && pv.getId() == forPlayer.getId()) {
+                    continue;
+                }
+                if (!isLocalPlayer(pv)) {
+                    return pv.getName();
+                }
+            }
+        }
+        return null;
     }
 
     @Override
@@ -495,6 +579,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 awaitNextInputTask = null;
             }
         }
+        cancelWaitingTimer();
     }
 
     @Override
@@ -829,6 +914,26 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return showConfirmDialog(message, title, yesButtonText, noButtonText, true);
     }
 
+    private FControlGameEventHandler localEventHandler;
+
+    @Override
+    public void handleGameEvent(GameEvent event) {
+        if (localEventHandler == null) {
+            localEventHandler = new FControlGameEventHandler(this);
+        }
+        localEventHandler.receiveGameEvent(event);
+
+        // Feed forwarded events to the local GameLog so remote clients
+        // build their own game log (host populates via EventBus instead)
+        GameView gv = getGameView();
+        if (gv != null) {
+            GameLog gameLog = gv.getGameLog();
+            if (gameLog != null) {
+                gameLog.getEventVisitor().recieve(event);
+            }
+        }
+    }
+
     @Override
     public void notifyStackAddition(GameEventSpellAbilityCast event) {
     }
@@ -838,7 +943,36 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
-    public void handleLandPlayed(Card land) {
+    public void handleLandPlayed(CardView land) {
+    }
+
+    @Override
+    public void updateStack() { }
+
+    @Override
+    public void updatePhase(boolean saveState) { }
+
+    @Override
+    public void updateTurn(PlayerView player) { }
+
+    @Override
+    public void updatePlayerControl() {
+    }
+
+    @Override
+    public void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate) {
+    }
+
+    @Override
+    public void updateCards(Iterable<CardView> cards) {
+    }
+
+    @Override
+    public void updateManaPool(Iterable<PlayerView> manaPoolUpdate) {
+    }
+
+    @Override
+    public void updateLives(Iterable<PlayerView> livesUpdate) {
     }
 
     @Override

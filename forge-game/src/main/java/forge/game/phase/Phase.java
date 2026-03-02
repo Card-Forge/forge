@@ -17,11 +17,12 @@
  */
 package forge.game.phase;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collection;
 import java.util.List;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.MultimapBuilder;
 
 import forge.GameCommand;
 import forge.game.player.Player;
@@ -45,11 +46,11 @@ public class Phase implements java.io.Serializable {
         this.type = type;
     }
 
-    protected final List<GameCommand> at = new ArrayList<>();
-    private final List<GameCommand> until = new ArrayList<>();
-    private final HashMap<Player, ArrayList<GameCommand>> untilMap = new HashMap<>();
-    private final HashMap<Player, ArrayList<GameCommand>> untilEndMap = new HashMap<>();
-    private final HashMap<Player, ArrayList<GameCommand>> registerMap = new HashMap<>();
+    protected final List<GameCommand> at = Lists.newArrayList();
+    private final List<GameCommand> until = Lists.newArrayList();
+    private final Multimap<Player, GameCommand> untilMap = MultimapBuilder.hashKeys().arrayListValues().build();;
+    private final Multimap<Player, GameCommand> untilEndMap = MultimapBuilder.hashKeys().arrayListValues().build();
+    private final Multimap<Player, GameCommand> registerMap = MultimapBuilder.hashKeys().arrayListValues().build();
 
     public void clearCommands() {
         at.clear();
@@ -68,7 +69,7 @@ public class Phase implements java.io.Serializable {
      *            a {@link forge.GameCommand} object.
      */
     public final void addAt(final GameCommand c) {
-        this.at.add(0, c);
+        this.at.add(c);
     }
 
     /**
@@ -77,7 +78,7 @@ public class Phase implements java.io.Serializable {
      * </p>
      */
     public void executeAt() {
-        this.execute(this.at);
+        excute(this.at);
     }
 
     /**
@@ -89,7 +90,7 @@ public class Phase implements java.io.Serializable {
      *            a {@link forge.GameCommand} object.
      */
     public final void addUntil(final GameCommand c) {
-        this.until.add(0, c);
+        this.until.add(c);
     }
 
     /**
@@ -98,7 +99,7 @@ public class Phase implements java.io.Serializable {
      * </p>
      */
     public final void executeUntil() {
-        this.execute(this.until);
+        excute(this.until);
     }
 
     /**
@@ -107,11 +108,7 @@ public class Phase implements java.io.Serializable {
      * Use cleanup phase to terminate an effect with "until <Player's> next turn"
      */
     public final void addUntil(Player p, final GameCommand c) {
-        if (this.untilMap.containsKey(p)) {
-            this.untilMap.get(p).add(0, c);
-        } else {
-            this.untilMap.put(p, Lists.newArrayList(c));
-        }
+        this.untilMap.put(p, c);
     }
 
     /**
@@ -123,53 +120,28 @@ public class Phase implements java.io.Serializable {
      *            the player the execute until for
      */
     public final void executeUntil(final Player p) {
-        if (this.untilMap.containsKey(p)) {
-            this.execute(this.untilMap.get(p));
-        }
+        excute(untilMap.get(p));
     }
 
     public final void registerUntilEnd(Player p, final GameCommand c) {
-        if (this.registerMap.containsKey(p)) {
-            this.registerMap.get(p).add(0, c);
-        } else {
-            this.registerMap.put(p, Lists.newArrayList(c));
-        }
+        this.registerMap.put(p, c);
     }
 
     public final void addUntilEnd(Player p, final GameCommand c) {
-        if (this.untilEndMap.containsKey(p)) {
-            this.untilEndMap.get(p).add(0, c);
-        } else {
-            this.untilEndMap.put(p, Lists.newArrayList(c));
-        }
+        this.untilEndMap.put(p, c);
     }
 
     public final void registerUntilEndCommand(final Player p) {
-        if (this.registerMap.containsKey(p)) {
-            this.untilEndMap.put(p, registerMap.get(p));
-            registerMap.remove(p);
-        }      
+        untilEndMap.putAll(p, registerMap.get(p));
+        registerMap.removeAll(p);
     }
 
     public final void executeUntilEndOfPhase(final Player p) {
-        if (this.untilEndMap.containsKey(p)) {
-            this.execute(this.untilEndMap.get(p));
-        }
+        excute(untilEndMap.get(p));
     }
-
-    /**
-     * <p>
-     * execute.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.CommandList} object.
-     */
-    protected void execute(final List<GameCommand> c) {
-        final int length = c.size();
-
-        for (int i = 0; i < length; i++) {
-            c.remove(0).run();
-        }
+    protected void excute(Collection<GameCommand> list) {
+        List<GameCommand> events = Lists.newArrayList(list);
+        events.forEach(GameCommand::run);
+        list.removeAll(events);
     }
 }

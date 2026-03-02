@@ -499,8 +499,10 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private void displayIconOverlay(final Graphics g, final boolean canShow) {
         if (canShow && showCardManaCostOverlay() && cardWidth < 200) {
             final boolean showSplitMana = card.isSplitCard() && card.getZone() != ZoneType.Battlefield;
+            boolean showPerpetualManaCost = showPerpetualManaCost();
             if (!showSplitMana) {
-                drawManaCost(g, card.getCurrentState().getManaCost(), 0);
+                ManaCost manaCost = showPerpetualManaCost ? card.getCurrentState().getManaCost() : card.getCurrentState().getOriginalManaCost();
+                drawManaCost(g, manaCost, 0);
             } else {
                 if (!card.isFaceDown()) { // no need to draw mana symbols on face down split cards (e.g. manifested)
                     PaperCard pc = null;
@@ -508,9 +510,10 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                         pc = StaticData.instance().getCommonCards().getCard(card.getOracleName());
                     }
                     int ofs = pc != null && Card.getCardForUi(pc).hasKeyword(Keyword.AFTERMATH) ? -12 : 12;
-
-                    drawManaCost(g, card.getLeftSplitState().getManaCost(), ofs);
-                    drawManaCost(g, card.getAlternateState().getManaCost(), -ofs);
+                    ManaCost leftManaCost = showPerpetualManaCost ? card.getLeftSplitState().getManaCost() : card.getLeftSplitState().getOriginalManaCost();
+                    ManaCost rightManaCost = showPerpetualManaCost ? card.getRightSplitState().getManaCost() : card.getRightSplitState().getOriginalManaCost();
+                    drawManaCost(g, leftManaCost, ofs);
+                    drawManaCost(g, rightManaCost, -ofs);
                 }
             }
         }
@@ -1147,6 +1150,10 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     private boolean showCardManaCostOverlay() {
         return isShowingOverlays() && isPreferenceEnabled(FPref.UI_OVERLAY_CARD_MANA_COST);
+    }
+
+    private boolean showPerpetualManaCost() {
+        return isPreferenceEnabled(FPref.UI_OVERLAY_CARD_PERPETUAL_MANA_COST);
     }
 
     private boolean showCardIdOverlay() {

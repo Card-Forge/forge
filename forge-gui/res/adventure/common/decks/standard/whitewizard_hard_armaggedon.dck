@@ -1,6 +1,6 @@
 [metadata]
 Name=Surtr 3
-[main]
+[Main]
 5 Plains
 4 Flagstones of Trokair
 4 Darksteel Citadel
@@ -32,4 +32,4 @@ Name=Surtr 3
 1 Brimaz, King of Oreskos
 1 Fiend Hunter
 1 Elspeth, Knight-Errant
-[sideboard]
+[Sideboard]

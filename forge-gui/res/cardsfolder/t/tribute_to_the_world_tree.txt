@@ -1,7 +1,6 @@
 Name:Tribute to the World Tree
 ManaCost:G G G
 Types:Enchantment
-DeckHas:Ability$Counters
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigBranch | TriggerDescription$ Whenever a creature you control enters, draw a card if its power is 3 or greater. Otherwise, put two +1/+1 counters on it.
 SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE3 | TrueSubAbility$ DBDraw | FalseSubAbility$ DBPutCounter
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="75">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Titans' Nest&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJybycnAMHMUj+JRPIpH8SgexSMCAwCsCkLM
+  </data>
+ </layer>
+ <layer id="7" name="Background 2" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjY2BgYBvFJGGGQeAGWvplsPqPFHeR44fB4m9K3YFLP6nmDpbwGAxhisusoRBG9HAjre0YCuE8lOITAED6C48=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNVEEOwjAM67F5GBPaRweDX00rewZULMIEpw0niGRt6uY6TdwMktLwp5hzStcc//cCiPIYt8Yi/T3m/V8bEX2P29NG3vR4v8kTGC3to3zyMcYOr3I2WC9BbcZHLtPVs1pNdpZv+apta105q/ianq71T41Dh78Ab5V2/TVn7bfmxsLTtb2K9N3DKb9g98D7pLXF3CvOuV3jCGwPy75v6zxFfM3ovGG+0lwidbTzpvYevdC7QyPJhc0MptMKb+4wv3q8OaAT9R/z65Tfn5qT3ln0GHK8dc8L1q8beId9Y9zo+i9wByt+ygw=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF6OApJ4RmJUFtJJT/mJN8e0B0hzV+PUxGCH0wANK3koOBQZUE+78jsUF6SQHI4QJyD0w/yG4WQ9LMImQ3yK9LSDMSQz8IYItLbHazGEFoathJCMDsICadgQBy2DYZocohm4HL7U1GqH52I6CeWIAejmxIbkNPD6T6mVS7QYBQHmoxwi7OChTnwCGHDtDjuMWQ+HzUBrSjnUh7SHELKxF5j1DYkGonDLCh+ecxFj2HGTDjvY4Xvz3YwhQmRii8QfL3iDQTHwDFFywdtxFRPrAD1XRgiWNQ+gLpb6Vi3JMLAHYdLQ8=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="60" template="../../../../common/maps/obj/door_right.tx" x="0.350854" y="145.147">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/cave/Lair_of_Behemoths_2.tmx"/>
+    <property name="teleportObjectId" value="62"/>
+   </properties>
+  </object>
+  <object id="63" template="../../../../common/maps/obj/manashards.tx" x="267.34" y="154.74"/>
+  <object id="64" template="../../../../common/maps/obj/dialog.tx" x="33.313" y="150.506" width="25.3791" height="24.6515" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Something about the creatures huddled down the tunnels ahead makes you think that in other circumstances they could have made great companions. But now, they are clearly half-starved and desperate, the sharp gaze of cornered hunters turning upon you.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="65" template="../../../../common/maps/obj/enemy.tx" x="347.297" y="54.8891">
+   <properties>
+    <property name="enemy" value="Lurrus"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="69,71,70,71"/>
+   </properties>
+  </object>
+  <object id="66" template="../../../../common/maps/obj/enemy.tx" x="201.63" y="137.129">
+   <properties>
+    <property name="enemy" value="Zirda"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="69,71,70,71"/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/enemy.tx" x="148.417" y="230.119">
+   <properties>
+    <property name="enemy" value="Umori"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="69,71,70,71"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/enemy.tx" x="367.722" y="225.281">
+   <properties>
+    <property name="enemy" value="Keruga"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="69,71,70,71"/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/manashards.tx" x="145.729" y="178.517"/>
+  <object id="73" template="../../../../common/maps/obj/booster.tx" x="420.936" y="226.356">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="74" template="../../../../common/maps/obj/booster.tx" x="426.311" y="114.016">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -2,16 +2,16 @@ package forge.screens.match.menus;
 
 import java.awt.Component;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
+import forge.control.KeyboardShortcuts;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
-import forge.menus.MenuUtil;
 import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.util.Localizer;
@@ -31,6 +31,7 @@ public final class CardOverlaysMenu {
         menu.addSeparator();
         menu.add(getMenuItem_CardOverlay(Localizer.getInstance().getMessage("lblCardName"), FPref.UI_OVERLAY_CARD_NAME));
         menu.add(getMenuItem_CardOverlay(Localizer.getInstance().getMessage("lblManaCost"), FPref.UI_OVERLAY_CARD_MANA_COST));
+        menu.add(getMenuItem_CardOverlay(Localizer.getInstance().getMessage("lblPerpetualManaCost"), FPref.UI_OVERLAY_CARD_PERPETUAL_MANA_COST));
         menu.add(getMenuItem_CardOverlay(Localizer.getInstance().getMessage("lblPowerOrToughness"), FPref.UI_OVERLAY_CARD_POWER));
         menu.add(getMenuItem_CardOverlay(Localizer.getInstance().getMessage("lblCardID"), FPref.UI_OVERLAY_CARD_ID));
         menu.add(getMenuItem_CardOverlay(Localizer.getInstance().getMessage("lblAbilityIcon"), FPref.UI_OVERLAY_ABILITY_ICONS));
@@ -47,7 +48,8 @@ public final class CardOverlaysMenu {
 
     private JMenuItem getMenuItem_ShowOverlays() {
         JCheckBoxMenuItem menu = new JCheckBoxMenuItem(Localizer.getInstance().getMessage("lblShow"));
-        menu.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_O));
+        final KeyStroke ks = KeyboardShortcuts.getKeyStrokeForPref(FPref.SHORTCUT_CARDOVERLAYS);
+        if (ks != null) { menu.setAccelerator(ks); }
         menu.setState(prefs.getPrefBoolean(FPref.UI_SHOW_CARD_OVERLAYS));
         menu.addActionListener(getShowOverlaysAction());
         return menu;

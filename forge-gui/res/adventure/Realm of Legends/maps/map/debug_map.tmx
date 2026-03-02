@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="111">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{
+  &quot;startBattleWithCard&quot;: [ &quot;Recycle&quot; ],
+  &quot;opponent&quot;: {
+    &quot;startBattleWithCard&quot;: [ &quot;Recycle&quot; ],
+  }
+}</property>
+ </properties>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../tileset/buildings-nocollide.tsx"/>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYGBgkBCiL4aBUXtH7R21d3ja+0AUFdPC3mmcEDwS7IXZaciFaTe5WAMN47MXm5+Hq71TBtC/Axm/IH4aJwIjm6UggImR5cs4ERjEn8CO3150TE17QRhXPqKVvdgwOeUzIXuJwaP2kmY/OfpG7R21dzjaCwBbaKfR
+  </data>
+ </layer>
+ <layer id="6" name="BGBlend" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwWABFzgo0/+AAv1t3JTZPQoIAx4uyvTLUKh/FIyCUTAK0AEAlJ4Cjg==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztljtLA0EQgAcMeeHdRRFNjCB26cUH0Sr/QCU/Q4Om8pFCxfwD0SBaWaaOldpaGgQRLfSnOMPu4rrOXm6Ti1UGPvaRvf1uluxw+RxAfgRLEekwzA7ZW6B28i8zI2+sNAKAA+QwEL59OT4Khus18x52nv/pLcrWvDM0dye9FNy9GuRuFWRrBjfHhctZrPgAy76793YMYKMEsFkSfRcvOV+QrnQXtDNTYY5VVBIA2+jcKYm+8k4gbUnO4l3y+fPaSvH9qNFJCjxHb1wR5n3K4H8V320R+1MR/z+2qOAegbaHzdvyAC6Qc+TSE97ntKCbFs8eY106YTgNxO+fuO5LQt46zu8iNWQvpKa1pJP6er61jGjnLWewIOcbmd/50j6Usy1Xjri89R656vdyEO873qOPxI83CmaMZwVeNpq3iOvmJP14Vb0yo5dXD1Wv1tG/5vAOcXnL6FwN8UaJe1z3gDTlvTkLxPjReL6aEl7K9Q15DcnZJVTeXJ62sOUcp7fK1PGws9ZR31I6YV5zLX1zlX13L8d0kvfSPLf+BmvfleTa699LNA0vjQfZzwXd2+8e3zU/nhQ=
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBg4oCAAweh8ZDFyzECmiVFDin2EzMBnJjY1pNpNrF8Gyr+Ewp3S+EW3Axt/FFAXkJpudgDV7RRA0NgAsjw+dfQGA5m2yMkfo2AUUBu08TAwtPKQrs+MCnar8FLBEBIByK8dZPjXlPpOGQWjYBSMggEDAHPWFBI=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="47" template="../obj/gold.tx" x="48" y="352"/>
+  <object id="50" template="../obj/enemy.tx" x="128" y="192" width="64" height="64">
+   <properties>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: -25,
+ &quot;opponent&quot;:{
+  &quot;startBattleWithCard&quot;: [ &quot;c_0_1_eldrazi_spawn_sac&quot;, &quot;c_0_1_eldrazi_spawn_sac&quot;, &quot;c_0_1_eldrazi_spawn_sac&quot;, &quot;c_0_1_eldrazi_spawn_sac&quot; ]
+ }
+}</property>
+    <property name="enemy" value="Emrakul"/>
+    <property name="name" value="Emrakul, the promised rest"/>
+   </properties>
+  </object>
+  <object id="51" template="../obj/entry_up.tx" x="208" y="480" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="52" template="../obj/gate.tx" x="224" y="384">
+   <properties>
+    <property name="dialog">[{
+  &quot;text&quot;:&quot;I am a big gate. Greetings.&quot;,
+  &quot;options&quot;:[ { &quot;name&quot;:&quot;Okay...&quot; } ],
+  &quot;action&quot;: [ { &quot;setMapFlag&quot;: {&quot;key&quot;: &quot;gate&quot;, &quot;val&quot;: 1} } ]
+}]</property>
+   </properties>
+  </object>
+  <object id="54" template="../obj/treasure.tx" x="336" y="176">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;life&quot;,
+    &quot;count&quot;: 3
+  }
+]
+</property>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="sprite" value="sprites/3life.atlas"/>
+   </properties>
+  </object>
+  <object id="69" template="../obj/treasure.tx" x="64" y="336"/>
+  <object id="74" template="../obj/treasure.tx" x="240" y="64"/>
+  <object id="70" template="../obj/booster.tx" x="48" y="336"/>
+  <object id="72" template="../obj/booster.tx" x="208" y="64"/>
+  <object id="71" template="../obj/gold.tx" x="64" y="352"/>
+  <object id="79" template="../obj/gate.tx" x="144" y="208" width="32" height="16" visible="1">
+   <properties>
+    <property name="dialog">[{
+ &quot;text&quot;:&quot;Don't mind me, just chilling.&quot;,
+ &quot;options&quot;:[ { &quot;name&quot;:&quot;Sure.&quot; } ]
+}]</property>
+   </properties>
+  </object>
+  <object id="80" template="../obj/enemy.tx" x="112" y="304">
+   <properties>
+    <property name="defeatDialog">[
+  {
+    &quot;text&quot;:&quot;Impressive...&quot;,
+    &quot;loctext&quot;:&quot;&quot;,
+    &quot;options&quot;:[ { &quot;name&quot;:&quot;Hey why are you still standing...?&quot; } ]
+  }
+]</property>
+    <property name="dialog">[
+  {
+    &quot;text&quot;:&quot;I am an elf. I do elf things like hugging trees and being pretty.&quot;,
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;OK&quot; },
+      {
+        &quot;name&quot;:&quot;Fight me, elf!&quot;,
+        &quot;text&quot;: &quot;Gladly.&quot;,
+        &quot;options&quot;: [
+          { &quot;name&quot;: &quot;Hey aren't you a bit swole for an elf...?&quot;, &quot;action&quot;: [ { &quot;battleWithActorID&quot;: -1 } ] }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;I want to be eco-friendly too.&quot;,
+        &quot;text&quot;: &quot;Listen to the forest, friend.\nYour color identity is now green!&quot;,
+        &quot;condition&quot;: [ { &quot;colorIdentity&quot;: &quot;G&quot;, &quot;not&quot;: true } ],
+        &quot;options&quot;: [ { &quot;name&quot;: &quot;Awesome.&quot;, &quot;action&quot;: [ { &quot;setColorIdentity&quot;: &quot;G&quot; } ]} ]
+      },
+      {
+        &quot;name&quot;:&quot;I wanna fight Emrakul over there!&quot;,
+        &quot;text&quot;: &quot;Really? Oh well... your funeral.\nHEY EMMY! THIS CHUMP WANTS TO DANCE!&quot;,
+        &quot;condition&quot;: [ { &quot;actorID&quot;: 50 } ],
+        &quot;options&quot;: [ { &quot;name&quot;: &quot;WAIT IT WAS A JOKE!!!&quot;, &quot;action&quot;: [ { &quot;battleWithActorID&quot;: 50 } ]} ]
+      },
+      {
+        &quot;name&quot;:&quot;Where did Emrakul go?&quot;,
+        &quot;text&quot;: &quot;She left. Crying. You monster.&quot;,
+        &quot;condition&quot;: [ { &quot;actorID&quot;: 50, &quot;not&quot;: true } ],
+        &quot;options&quot;: [ { &quot;name&quot;: &quot;Sorry...&quot; } ]
+      },
+      {
+        &quot;name&quot;:&quot;That's cool my green dude.&quot;,
+        &quot;text&quot;: &quot;You get it! Take this item.&quot;,
+        &quot;condition&quot;: [ { &quot;item&quot;: &quot;Treasure&quot;, &quot;not&quot;: true }, { &quot;colorIdentity&quot;: &quot;G&quot; } ],
+        &quot;action&quot;: [ { &quot;addItem&quot;: &quot;Treasure&quot; } ],
+        &quot;options&quot;: [ { &quot;name&quot;: &quot;Thanks bro.&quot; } ]
+      },
+      {
+        &quot;name&quot;:&quot;Thanks for the blessing.&quot;,
+        &quot;text&quot;: &quot;You are welcome.&quot;,
+        &quot;condition&quot;: [ { &quot;hasBlessing&quot;: &quot;Debug Elf&quot; } ],
+        &quot;options&quot;: [ { &quot;name&quot;: &quot;Thumbs up emoji&quot; } ]
+      },
+      {
+        &quot;name&quot;:&quot;Got any fancy elven blessing?&quot;,
+        &quot;text&quot;: &quot;If you give me a Treasure, I will give you the blessing of the Debug Elf.\nWhich is a Llanowar Elves and 2 extra life in your next battle. Sounds good?&quot;,
+        &quot;condition&quot;: [ { &quot;item&quot;: &quot;Treasure&quot; }, { &quot;hasBlessing&quot;:  &quot;Debug Elf&quot;, &quot;not&quot;: true } ],
+        &quot;options&quot;: [
+          { &quot;name&quot;: &quot;But I love my Treasure! I humbly refuse.&quot;},
+          {
+            &quot;name&quot;: &quot;I'll take it&quot;,
+            &quot;action&quot;: [
+              { &quot;removeItem&quot;: &quot;Treasure&quot;, &quot;giveBlessing&quot;: { &quot;name&quot;: &quot;Debug Elf&quot; ,&quot;goldModifier&quot;:0.2, &quot;lifeModifier&quot;: 2, &quot;startBattleWithCard&quot;: [ &quot;Llanowar Elves&quot; ] } }
+            ]
+          }
+        ]
+      },
+      {
+        &quot;name&quot;:&quot;Can you open that hidden wall?&quot;,
+        &quot;text&quot;: &quot;Since you asked nicely, I shall.&quot;,
+        &quot;condition&quot;: [ { &quot;actorID&quot;: 83 } ],
+        &quot;options&quot;: [ { &quot;name&quot;: &quot;Thanks bro.&quot;, &quot;action&quot;: [ { &quot;deleteMapObject&quot;: 83 } ]} ]
+      },
+      {
+        &quot;name&quot;: &quot;Got a quest?&quot;,
+        &quot;text&quot;: &quot;Ah, perhaps you can help me. Can you ask the Debug Demon about his favorite color?&quot;,
+        &quot;condition&quot;: [ { &quot;checkQuestFlag&quot;:  &quot;128&quot;, &quot;not&quot;: true} ],
+        &quot;options&quot;: [
+          { &quot;name&quot;: &quot;That's weird, but sure.&quot;, &quot;action&quot;: [ { &quot;setQuestFlag&quot;:  {&quot;key&quot;:&quot;128&quot;, &quot;val&quot;: 1} } ] },
+          { &quot;name&quot;: &quot;That guy scares me, I'd rather not.&quot; }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;About that quest...&quot;,
+        &quot;text&quot;: &quot;Please let me know what the Debug Demon's answer is.&quot;,
+        &quot;condition&quot;: [ { &quot;getQuestFlag&quot;:  { &quot;key&quot;: &quot;128&quot;, &quot;op&quot;:&quot;&lt;&quot;, &quot;val&quot;: 3 } } ],
+        &quot;options&quot;: [
+          { &quot;name&quot;: &quot;Sure&quot; }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Got it, bro.&quot;,
+        &quot;text&quot;: &quot;Ah. I see. Thank you friend, have this gold for your inconvenience.&quot;,
+        &quot;condition&quot;: [ { &quot;getQuestFlag&quot;:  { &quot;key&quot;: &quot;128&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;: 3 } } ],
+        &quot;options&quot;: [
+          { &quot;name&quot;: &quot;Thanks&quot;, &quot;action&quot;: [ { &quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;128&quot;, &quot;val&quot;: 4}, &quot;addGold&quot;: 250 } ] }
+        ]
+      }
+    ]
+  }
+]</property>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 190,
+ &quot;startBattleWithCard&quot;: [ &quot;Llanowar Elves&quot;, &quot;Llanowar Elves&quot;, &quot;Forest&quot;, &quot;Forest&quot; ]
+}</property>
+    <property name="enemy" value="Elf warrior"/>
+    <property name="name" value="Debug Elf"/>
+   </properties>
+  </object>
+  <object id="81" template="../obj/enemy.tx" x="64" y="224">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;You...you hurt Grog!\nYou...you filthy swine! I will stop at nothing until I see you defeated!\nGods...anyone! Grant me strength! Grant me REVENGE!!!!&quot;,
+    &quot;condition&quot;: [
+      {
+        &quot;actorID&quot;: 82,
+        &quot;not&quot;: true
+      }
+    ],
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Uh oh.&quot;,
+        &quot;action&quot;: [
+          {
+            &quot;setEffect&quot;: {
+              &quot;lifeModifier&quot;: 99,
+              &quot;startBattleWithCard&quot;: [
+                &quot;Avacyn, Angel of Hope&quot;,
+                &quot;Urabrask the Hidden&quot;,
+                &quot;Elesh Norn, Grand Cenobite&quot;,
+                &quot;Emrakul, the Aeons Torn&quot;
+              ]
+            }, &quot;battleWithActorID&quot;: -1
+          }
+        ]
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Goblin"/>
+   </properties>
+  </object>
+  <object id="82" template="../obj/enemy.tx" gid="2147495067" x="48" y="224">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;:&quot;...&quot;,
+    &quot;condition&quot;:[ { &quot;getQuestFlag&quot;:  { &quot;key&quot;: &quot;128&quot;, &quot;op&quot;:&quot;&lt;&quot;, &quot;val&quot;: 3 } } ],
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;???&quot; }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Goblin"/>
+   </properties>
+  </object>
+  <object id="83" template="../obj/gate.tx" type="dummy" gid="3651" x="80" y="336" width="16" height="16"/>
+  <object id="84" template="../obj/enemy.tx" x="336" y="304">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;:&quot;I have some things to offer for that life you have...&quot;,
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;You are suspicious and have two shadows, I'm out.&quot; },
+      {
+        &quot;name&quot;:&quot;I'll vanquish you, demon!&quot;,
+        &quot;text&quot;: &quot;Oh look we got a tough guy over here!&quot;,
+        &quot;options&quot;: [ { &quot;name&quot;: &quot;Have at thee!&quot;, &quot;action&quot;: [ { &quot;battleWithActorID&quot;: -1 } ]} ]
+      },
+      {
+        &quot;name&quot;: &quot;I dig your edge.&quot;,
+        &quot;text&quot;: &quot;You can be dark and edgy like me. Maybe for some of your life force...&quot;,
+        &quot;condition&quot;: [ { &quot;colorIdentity&quot;: &quot;B&quot;, &quot;not&quot;: true }, { &quot;hasLife&quot;:  2 } ],
+        &quot;options&quot;: [
+          { &quot;name&quot;: &quot;Not my life force, I'll die without it!&quot; },
+          { &quot;name&quot;: &quot;I'm doing nothing better with it.&quot;, &quot;action&quot;: [ { &quot;setColorIdentity&quot;: &quot;B&quot;, &quot;addLife&quot;: -2 } ] }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;I dig your edge.&quot;,
+        &quot;text&quot;: &quot;You don't have enough life force...come back with more to offer.\nEat healthy, read a book, get that soul juicy.&quot;,
+        &quot;condition&quot;: [ { &quot;colorIdentity&quot;: &quot;B&quot;, &quot;not&quot;: true }, { &quot;hasLife&quot;:  2, &quot;not&quot;: true } ],
+        &quot;options&quot;: [ { &quot;name&quot;: &quot;Aw man...&quot; } ]
+      },
+      {
+        &quot;name&quot;: &quot;Any cool demon deals?&quot;,
+        &quot;text&quot;: &quot;I can offer you this Treasure for the fair price of 200 gold.&quot;,
+        &quot;condition&quot;: [ { &quot;colorIdentity&quot;: &quot;B&quot; }, { &quot;hasGold&quot;:  200 } ],
+        &quot;options&quot;: [
+          { &quot;name&quot;: &quot;This gem has a lot of edge, just like me. Deal!&quot; , &quot;action&quot;: [ { &quot;addGold&quot;: -200, &quot;addItem&quot;: &quot;Treasure&quot; } ] },
+          { &quot;name&quot;: &quot;I'll think about it.&quot; }
+        ]
+      },
+      {
+        &quot;name&quot;:&quot;Got any fancy demon blessing?&quot;,
+        &quot;text&quot;: &quot;Give me that Treasure of yours...\n(+1 health, Manasight, move speed 120%, Lord of the Pit starts in play)&quot;,
+        &quot;condition&quot;: [ {&quot;colorIdentity&quot;: &quot;B&quot;}, { &quot;item&quot;: &quot;Treasure&quot; }, { &quot;hasBlessing&quot;:  &quot;Debug Demon&quot;, &quot;not&quot;: true } ],
+        &quot;options&quot;: [
+          { &quot;name&quot;: &quot;That's shady.&quot;},
+          {
+            &quot;name&quot;: &quot;What can possibly go wrong?&quot;,
+            &quot;action&quot;: [
+              { &quot;removeItem&quot;: &quot;Treasure&quot;, &quot;giveBlessing&quot;: { &quot;name&quot;: &quot;Debug Demon&quot; , &quot;lifeModifier&quot;: 1, &quot;colorView&quot;: true, &quot;moveSpeed&quot;: 2, &quot;startBattleWithCard&quot;: [ &quot;Lord of the Pit&quot; ] } }
+            ]
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Hey what's your favorite color?&quot;,
+        &quot;text&quot;: &quot;Pink. It's the color of my favorite blood milkshakes.\nVery dark and evil.&quot;,
+        &quot;condition&quot;: [ {&quot;getQuestFlag&quot;:  { &quot;key&quot;:&quot;128&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;:1 } } ],
+        &quot;options&quot;: [
+          { &quot;name&quot;:  &quot;Thank you Satan.&quot;, &quot;action&quot;:  [ { &quot;setQuestFlag&quot;:  { &quot;key&quot;:&quot;128&quot;, &quot;val&quot;:3 } } ] }
+        ]
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Demon"/>
+    <property name="name" value="Debug Demon"/>
+   </properties>
+  </object>
+  <object id="85" template="../obj/scroll.tx" x="224" y="96">
+   <properties>
+    <property name="reward">[
+ { &quot;cardName&quot;: &quot;Black Lotus&quot;, &quot;type&quot;:&quot;card&quot;, &quot;count&quot;:1 }
+]</property>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="86" template="../obj/treasure.tx" x="336" y="368" visible="0">
+   <properties>
+    <property name="reward">[{
+ &quot;type&quot;: &quot;randomCard&quot;,
+ &quot;colors&quot;: [ &quot;colorID&quot; ],
+ &quot;count&quot;: 8
+}]
+</property>
+   </properties>
+  </object>
+  <object id="87" template="../obj/enemy.tx" x="48" y="384">
+   <properties>
+    <property name="enemy" value="Geist"/>
+    <property name="pursueRange" type="int" value="80"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="88" template="../obj/enemy.tx" x="48" y="400">
+   <properties>
+    <property name="enemy" value="Geist"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="89" template="../obj/enemy.tx" x="48" y="416">
+   <properties>
+    <property name="enemy" value="Geist"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="93" template="../obj/enemy.tx" x="304" y="400">
+   <properties>
+    <property name="enemy" value="Geist"/>
+    <property name="reward" value=""/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="90" template="../obj/treasure.tx" x="32" y="400">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="92" template="../obj/treasure.tx" x="32" y="416">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="91" template="../obj/treasure.tx" x="32" y="384"/>
+  <object id="94" template="../obj/enemy.tx" x="400" y="240">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;:&quot;*glub*\n(According to your Fish to English dictionary, he's greeting you)&quot;,
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;Glub.&quot; },
+      {
+        &quot;name&quot;: &quot;I like your fishiness. I would like to be blue and smell funny too.&quot;,
+        &quot;text&quot;: &quot;*glub*\n(Your color identify is now blue)&quot;,
+        &quot;condition&quot;: [ { &quot;colorIdentity&quot;: &quot;U&quot;, &quot;not&quot;: true } ],
+        &quot;options&quot;: [ { &quot;name&quot;: &quot;It's working. Man, I can go eat some krill right now.&quot;, &quot;action&quot;: [ { &quot;setColorIdentity&quot;: &quot;U&quot; } ]} ]
+      },{
+        &quot;name&quot;: &quot;I talked to the gate. Somehow I think you will find this relevant.&quot;,
+        &quot;text&quot;: &quot;*glub, glub*\n (Fascinating.)&quot;,
+        &quot;condition&quot;: [ {&quot;checkMapFlag&quot;: &quot;gate&quot; } ],
+        &quot;options&quot;: [
+          { &quot;name&quot;: &quot;I know, right?&quot; }
+        ]
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Merfolk Soldier"/>
+   </properties>
+  </object>
+  <object id="95" template="../obj/enemy.tx" x="288" y="224">
+   <properties>
+    <property name="enemy" value="Doppelganger"/>
+   </properties>
+  </object>
+  <object id="96" template="../obj/enemy.tx" x="304" y="224">
+   <properties>
+    <property name="enemy" value="Doppelganger"/>
+   </properties>
+  </object>
+  <object id="97" template="../obj/inn.tx" type="spellsmith" gid="10499" x="224" y="368" width="16" height="16"/>
+  <object id="98" template="../obj/portal.tx" type="portal" x="176" y="272">
+   <properties>
+    <property name="portalState" value="active"/>
+    <property name="sprite" value="sprites/portal.atlas"/>
+    <property name="teleport" value="../common/maps/map/debug_map.tmx"/>
+    <property name="teleportObjectId" value="99"/>
+   </properties>
+  </object>
+  <object id="99" template="../obj/portal.tx" type="portal" x="272" y="272">
+   <properties>
+    <property name="portalState" value="active"/>
+    <property name="sprite" value="sprites/portal.atlas"/>
+    <property name="teleport" value="../common/maps/map/debug_map.tmx"/>
+    <property name="teleportObjectId" value="98"/>
+   </properties>
+  </object>
+  <object id="101" template="../obj/enemy.tx" x="128" y="400">
+   <properties>
+    <property name="enemy" value="Plague Rat Swarm"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

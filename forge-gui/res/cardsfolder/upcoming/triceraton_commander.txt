@@ -1,0 +1,13 @@
+Name:Triceraton Commander
+ManaCost:X X W W
+Types:Creature Dinosaur Soldier
+PT:2/2
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ Whenever this creature attacks, Dinosaurs you control other than this creature get +1/+1 and gain flying until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Dinosaur.StrictlyOther+YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create X 2/2 white Dinosaur Soldier creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ w_2_2_dinosaur_soldier | TokenOwner$ You
+SVar:X:Count$xPaid
+SVar:HasAttackEffect:TRUE
+DeckHints:Type$Dinosaur
+Oracle:Flying\nWhenever this creature attacks, Dinosaurs you control other than this creature get +1/+1 and gain flying until end of turn.\nWhen this creature enters, create X 2/2 white Dinosaur Soldier creature tokens.
