@@ -61746,6 +61746,156 @@
     ]
   },
   {
+    "name": "General Jarkeld",
+    "sprite": "sprites/enemy/humanoid/human/soldier/pikeman.atlas",
+    "deck": [
+      "decks/legends/general_jarkeld.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 1,
+    "life": 50,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Mox Pearl",
+        "editions": [ "LEA" ]
+      },
+      {
+        "type": "shards",
+        "count": 100
+      },
+      {
+        "type": "landSketchbookShop",
+        "count": 1
+      }
+    ],
+    "colors": "W",
+    "gamesPerMatch": 3,
+    "spawnRate": 0
+  },
+  {
+    "name": "Hakim",
+    "sprite": "sprites/enemy/humanoid/human/wizard/mage_2.atlas",
+    "deck": [
+      "decks/legends/hakim.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 1,
+    "life": 50,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Mox Sapphire",
+        "editions": [ "LEA" ]
+      },
+      {
+        "type": "shards",
+        "count": 100
+      },
+      {
+        "type": "landSketchbookShop",
+        "count": 1
+      }
+    ],
+    "colors": "U",
+    "gamesPerMatch": 3,
+    "spawnRate": 0
+  },
+  {
+    "name": "Ihsan's Shade",
+    "sprite": "sprites/enemy/undead/deathknightidle.atlas",
+    "deck": [
+      "decks/legends/ihsans_shade.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 1,
+    "life": 50,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Mox Jet",
+        "editions": [ "LEA" ]
+      },
+      {
+        "type": "shards",
+        "count": 100
+      },
+      {
+        "type": "landSketchbookShop",
+        "count": 1
+      }
+    ],
+    "colors": "B",
+    "gamesPerMatch": 3,
+    "spawnRate": 0
+  },
+  {
+    "name": "Márton Stromgald",
+    "sprite": "sprites/enemy/humanoid/human/knight/cavalier.atlas",
+    "deck": [
+      "decks/legends/márton_stromgald.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 1,
+    "life": 50,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Mox Ruby",
+        "editions": [ "LEA" ]
+      },
+      {
+        "type": "shards",
+        "count": 100
+      },
+      {
+        "type": "landSketchbookShop",
+        "count": 1
+      }
+    ],
+    "colors": "R",
+    "gamesPerMatch": 3,
+    "spawnRate": 0
+  },
+  {
+    "name": "Autumn Willow",
+    "sprite": "sprites/enemy/humanoid/elf/druid.atlas",
+    "deck": [
+      "decks/legends/autumn_willow.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 1,
+    "life": 50,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Mox Emerald",
+        "editions": [ "LEA" ]
+      },
+      {
+        "type": "shards",
+        "count": 100
+      },
+      {
+        "type": "landSketchbookShop",
+        "count": 1
+      }
+    ],
+    "colors": "G",
+    "gamesPerMatch": 3,
+    "spawnRate": 0
+  },
+  {
     "name": "Mysterious Mage",
     "sprite": "sprites/enemy/humanoid/conjurer.atlas",
     "deck": [
