@@ -346,7 +346,15 @@ public enum CardZoomer {
                 kwPanel.setLayout(new BoxLayout(kwPanel, BoxLayout.Y_AXIS));
                 kwPanel.setOpaque(false);
                 kwPanel.setBorder(BorderFactory.createEmptyBorder(8, 8, 0, 0));
-                CardInfoPopup.populateKeywords(kwPanel, keywords, maxWidth);
+                // Cap keyword width to 1-card pill width when related cards shown
+                final int kwWidth;
+                if (hasRelated) {
+                    final int thumbW = (int) (thumbnailHeight * 0.716);
+                    kwWidth = Math.min(thumbW + 18, maxWidth);
+                } else {
+                    kwWidth = maxWidth;
+                }
+                CardInfoPopup.populateKeywords(kwPanel, keywords, kwWidth);
             }
         }
 

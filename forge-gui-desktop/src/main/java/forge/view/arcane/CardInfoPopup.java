@@ -341,23 +341,47 @@ public class CardInfoPopup {
         maxContentWidth = Math.max(maxContentWidth, POPUP_WIDTH);
 
         // Compute natural width for related cards based on thumbnail count
-        // Hover tooltip shows up to HOVER_MAX_CARDS at full size
         int relatedWidth = 0;
         int effectiveThumbHeight = thumbnailHeight;
+        int numGroups = 0;
         if (hasRelated) {
-            final int perRow = Math.min(relatedEntries.size(), HOVER_MAX_CARDS);
             final int thumbWidth = (int) (thumbnailHeight * MTG_ASPECT_RATIO);
-            relatedWidth = perRow * thumbWidth + 2 * PILL_PAD + 2;
+            final int onePillWidth = thumbWidth + 2 * PILL_PAD + 2;
+            final Set<String> groups = new LinkedHashSet<>();
+            for (final RelatedCardEntry e : relatedEntries) {
+                groups.add(e.label);
+            }
+            numGroups = groups.size();
+            if (numGroups > 1) {
+                // Multi-group: 2 pills side-by-side per row
+                final int pillsInRow = Math.min(numGroups, 2);
+                relatedWidth = pillsInRow * onePillWidth
+                        + (pillsInRow - 1) * GAP;
+            } else {
+                // Single group: up to HOVER_MAX_CARDS thumbnails
+                final int perRow = Math.min(relatedEntries.size(),
+                        HOVER_MAX_CARDS);
+                relatedWidth = perRow * thumbWidth + 2 * PILL_PAD + 2;
+            }
         }
         // Content width: use natural related-cards width, capped by available space
         final int contentWidth = Math.max(POPUP_WIDTH,
                 Math.min(relatedWidth, maxContentWidth));
+        // Keywords wrap at 1-pill width when related cards are present
+        final int keywordWidth;
+        if (hasRelated) {
+            final int thumbWidth = (int) (thumbnailHeight * MTG_ASPECT_RATIO);
+            final int onePillWidth = thumbWidth + 2 * PILL_PAD + 2;
+            keywordWidth = Math.min(onePillWidth, contentWidth);
+        } else {
+            keywordWidth = contentWidth;
+        }
 
         // Update keywords
         keywordsPanel.setVisible(hasKeywords);
         keywordsPanel.removeAll();
         if (hasKeywords) {
-            populateKeywords(keywordsPanel, keywordList, contentWidth);
+            populateKeywords(keywordsPanel, keywordList, keywordWidth);
         }
 
         // Calculate available height for related cards: fit within owner bounds
@@ -372,23 +396,14 @@ public class CardInfoPopup {
             }
             final int maxPopupHeight = ownerBounds.height - 2 * PADDING;
             final int availableHeight = maxPopupHeight - kwHeight;
-            // Count thumbnail rows and overhead to scale height properly
-            final Set<String> groups = new LinkedHashSet<>();
-            for (final RelatedCardEntry e : relatedEntries) {
-                groups.add(e.label);
-            }
-            final int numGroups = Math.max(1, groups.size());
-            // When all groups are singletons that fit in one row, treat as 1 row
-            final boolean willCompact = numGroups > 1
-                    && relatedEntries.size() <= HOVER_MAX_CARDS
-                    && relatedEntries.size() == numGroups;
-            final int displayRows = willCompact ? 1 : numGroups;
+            // Multi-group: pairs of pills per row; single group: 1 row
+            final int displayRows = numGroups > 1
+                    ? (int) Math.ceil(numGroups / 2.0) : 1;
             // Each row: ~28px overhead (label + spacing), plus inter-row gaps
             final int overhead = displayRows * 28 + (displayRows - 1) * 4 + 20;
-            final int thumbRows = displayRows;
             final int availableForThumbs = availableHeight - overhead;
             effectiveThumbHeight = Math.min(effectiveThumbHeight,
-                    Math.max(80, availableForThumbs / thumbRows));
+                    Math.max(80, availableForThumbs / displayRows));
             populateRelatedCards(relatedCardsPanel, relatedEntries,
                     effectiveThumbHeight, contentWidth);
         }
@@ -1003,26 +1018,43 @@ public class CardInfoPopup {
                                               final List<RelatedCardEntry> entries,
                                               final int thumbnailHeight,
                                               final int maxContentWidth) {
-        // Hover tooltip: cap per group to HOVER_MAX_CARDS,
-        // with per-group overflow labels inside their pills
+        // Hover tooltip: cap per group, with per-group overflow labels
         final LinkedHashMap<String, List<RelatedCardEntry>> grouped = new LinkedHashMap<>();
         for (final RelatedCardEntry entry : entries) {
             grouped.computeIfAbsent(entry.label, k -> new ArrayList<>()).add(entry);
         }
         final List<RelatedCardEntry> visible = new ArrayList<>();
         final Map<String, Integer> overflowByGroup = new LinkedHashMap<>();
-        for (final Map.Entry<String, List<RelatedCardEntry>> group : grouped.entrySet()) {
-            final List<RelatedCardEntry> cards = group.getValue();
-            if (cards.size() > HOVER_MAX_CARDS) {
-                visible.addAll(cards.subList(0, HOVER_MAX_CARDS));
-                overflowByGroup.put(group.getKey(), cards.size() - HOVER_MAX_CARDS);
-            } else {
-                visible.addAll(cards);
+        if (grouped.size() > 1) {
+            // Multi-group: show 1 card per group, overflow the rest
+            for (final Map.Entry<String, List<RelatedCardEntry>> group
+                    : grouped.entrySet()) {
+                final List<RelatedCardEntry> cards = group.getValue();
+                visible.add(cards.get(0));
+                if (cards.size() > 1) {
+                    overflowByGroup.put(group.getKey(), cards.size() - 1);
+                }
             }
+            populateRelatedCards(targetPanel, visible, thumbnailHeight,
+                    maxContentWidth, 1, false,
+                    overflowByGroup.isEmpty() ? null : overflowByGroup);
+        } else {
+            // Single group: up to HOVER_MAX_CARDS per group
+            for (final Map.Entry<String, List<RelatedCardEntry>> group
+                    : grouped.entrySet()) {
+                final List<RelatedCardEntry> cards = group.getValue();
+                if (cards.size() > HOVER_MAX_CARDS) {
+                    visible.addAll(cards.subList(0, HOVER_MAX_CARDS));
+                    overflowByGroup.put(group.getKey(),
+                            cards.size() - HOVER_MAX_CARDS);
+                } else {
+                    visible.addAll(cards);
+                }
+            }
+            populateRelatedCards(targetPanel, visible, thumbnailHeight,
+                    maxContentWidth, HOVER_MAX_CARDS, false,
+                    overflowByGroup.isEmpty() ? null : overflowByGroup);
         }
-        populateRelatedCards(targetPanel, visible, thumbnailHeight,
-                maxContentWidth, HOVER_MAX_CARDS, false,
-                overflowByGroup.isEmpty() ? null : overflowByGroup);
     }
 
     public static void populateRelatedCards(final JPanel targetPanel,
@@ -1041,30 +1073,42 @@ public class CardInfoPopup {
         final FSkin.SkinFont boldFont = FSkin.getBoldFont(12);
         boolean firstGroup = true;
 
-        // When every group has 1 card and total fits in a row, lay pills out horizontally
-        final boolean allSingletons = grouped.values().stream()
-                .allMatch(c -> c.size() == 1);
-        final boolean compactRow = allSingletons
-                && entries.size() <= maxPerRow && grouped.size() > 1;
+        // Multi-group hover: lay pills side-by-side, 2 per row
+        final boolean compactRow = grouped.size() > 1 && !alwaysFullSize;
+        final int pillsPerRow = compactRow ? Math.min(grouped.size(), 2) : 1;
+        final int pillMaxWidth = compactRow
+                ? (maxContentWidth - (pillsPerRow - 1) * GAP) / pillsPerRow
+                : maxContentWidth;
+
         JPanel rowPanel = null;
-        if (compactRow) {
-            rowPanel = new JPanel();
-            rowPanel.setLayout(new BoxLayout(rowPanel, BoxLayout.X_AXIS));
-            rowPanel.setOpaque(false);
-            rowPanel.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
-            targetPanel.add(rowPanel);
-        }
+        int pillsInCurrentRow = 0;
 
         for (final Map.Entry<String, List<RelatedCardEntry>> group : grouped.entrySet()) {
             final List<RelatedCardEntry> cards = group.getValue();
 
-            if (!firstGroup && !compactRow) {
+            if (compactRow) {
+                // Start a new row every pillsPerRow pills
+                if (pillsInCurrentRow == 0) {
+                    if (!firstGroup) {
+                        targetPanel.add(javax.swing.Box.createRigidArea(
+                                new Dimension(0, 4)));
+                    }
+                    rowPanel = new JPanel();
+                    rowPanel.setLayout(new BoxLayout(rowPanel, BoxLayout.X_AXIS));
+                    rowPanel.setOpaque(false);
+                    rowPanel.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
+                    targetPanel.add(rowPanel);
+                } else {
+                    rowPanel.add(javax.swing.Box.createRigidArea(
+                            new Dimension(GAP, 0)));
+                }
+                pillsInCurrentRow++;
+                if (pillsInCurrentRow >= pillsPerRow) {
+                    pillsInCurrentRow = 0;
+                }
+            } else if (!firstGroup) {
                 targetPanel.add(javax.swing.Box.createRigidArea(
                         new Dimension(0, 4)));
-            }
-            if (!firstGroup && compactRow) {
-                rowPanel.add(javax.swing.Box.createRigidArea(
-                        new Dimension(4, 0)));
             }
             firstGroup = false;
 
@@ -1094,9 +1138,6 @@ public class CardInfoPopup {
             final int perRow = fullSize
                     ? Math.min(cards.size(), Math.min(FULL_SIZE_MAX, maxPerRow))
                     : maxPerRow;
-            final int pillMaxWidth = compactRow
-                    ? (maxContentWidth - (grouped.size() - 1) * 4) / grouped.size()
-                    : maxContentWidth;
             final int pillInnerWidth = pillMaxWidth - 2 * PILL_PAD - 2;
             int effectiveHeight = fullSize
                     ? thumbnailHeight : Math.max(80, thumbnailHeight / 2);
@@ -1157,6 +1198,8 @@ public class CardInfoPopup {
                 overflowLabel.setForeground(TEXT_SECONDARY);
                 overflowLabel.setFont(FSkin.getBoldFont(11).getBaseFont());
                 overflowLabel.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
+                overflowLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE,
+                        overflowLabel.getPreferredSize().height));
                 overflowLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(
                         4, 0, 0, 0));
                 pill.add(overflowLabel);
