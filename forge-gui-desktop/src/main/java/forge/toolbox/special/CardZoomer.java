@@ -341,6 +341,7 @@ public enum CardZoomer {
             }
             KeywordInfoUtil.sortByOracleText(keywords, oracleText);
             KeywordInfoUtil.annotateKeywordCounts(keywords, thisCard.getCard());
+            KeywordInfoUtil.addGraveyardCounts(keywords, thisCard.getCard());
             if (!keywords.isEmpty()) {
                 kwPanel = new JPanel();
                 kwPanel.setLayout(new BoxLayout(kwPanel, BoxLayout.Y_AXIS));

@@ -351,8 +351,7 @@ public final class KeywordInfoUtil {
             return;
         }
         final PlayerView controller = cardView.getController();
-        if (controller == null || controller.getBattlefield() == null
-                || controller.getGraveyard() == null) {
+        if (controller == null) {
             return;
         }
         final Localizer localizer = Localizer.getInstance();
@@ -399,9 +398,13 @@ public final class KeywordInfoUtil {
             }
         }
         int count = 0;
-        for (final CardView c : controller.getBattlefield()) {
-            if (cardMatchesAffinityType(c, matchType)) {
-                count++;
+        final FCollectionView<CardView> afBattlefield =
+                controller.getBattlefield();
+        if (afBattlefield != null) {
+            for (final CardView c : afBattlefield) {
+                if (cardMatchesAffinityType(c, matchType)) {
+                    count++;
+                }
             }
         }
         // Build display text from typeParam (properly cased singular),
@@ -555,18 +558,22 @@ public final class KeywordInfoUtil {
 
         // Count devotion using isColor — correctly counts hybrid mana once
         int devotion = 0;
-        for (final CardView c : controller.getBattlefield()) {
-            final CardStateView st = c.getCurrentState();
-            if (st == null) {
-                continue;
-            }
-            final ManaCost cost = st.getManaCost();
-            if (cost == null) {
-                continue;
-            }
-            for (final ManaCostShard shard : cost) {
-                if (shard.isColor(colorCode)) {
-                    devotion++;
+        final FCollectionView<CardView> devBattlefield =
+                controller.getBattlefield();
+        if (devBattlefield != null) {
+            for (final CardView c : devBattlefield) {
+                final CardStateView st = c.getCurrentState();
+                if (st == null) {
+                    continue;
+                }
+                final ManaCost cost = st.getManaCost();
+                if (cost == null) {
+                    continue;
+                }
+                for (final ManaCostShard shard : cost) {
+                    if (shard.isColor(colorCode)) {
+                        devotion++;
+                    }
                 }
             }
         }
@@ -599,18 +606,22 @@ public final class KeywordInfoUtil {
             "Plains", "Island", "Swamp", "Mountain", "Forest"
         };
         final Set<String> found = new HashSet<>();
-        for (final CardView c : controller.getBattlefield()) {
-            final CardStateView st = c.getCurrentState();
-            if (st == null || st.getType() == null) {
-                continue;
-            }
-            final CardTypeView type = st.getType();
-            if (!type.isLand()) {
-                continue;
-            }
-            for (final String blt : basicLandTypes) {
-                if (type.hasSubtype(blt)) {
-                    found.add(blt);
+        final FCollectionView<CardView> domBattlefield =
+                controller.getBattlefield();
+        if (domBattlefield != null) {
+            for (final CardView c : domBattlefield) {
+                final CardStateView st = c.getCurrentState();
+                if (st == null || st.getType() == null) {
+                    continue;
+                }
+                final CardTypeView type = st.getType();
+                if (!type.isLand()) {
+                    continue;
+                }
+                for (final String blt : basicLandTypes) {
+                    if (type.hasSubtype(blt)) {
+                        found.add(blt);
+                    }
                 }
             }
         }
@@ -625,25 +636,32 @@ public final class KeywordInfoUtil {
                                                    final PlayerView controller,
                                                    final Localizer localizer) {
         int count = 0;
-        for (final CardView c : controller.getBattlefield()) {
-            final CardStateView st = c.getCurrentState();
-            if (st != null && st.getType() != null && st.getType().isArtifact()) {
-                count++;
+        final FCollectionView<CardView> mcBattlefield =
+                controller.getBattlefield();
+        if (mcBattlefield != null) {
+            for (final CardView c : mcBattlefield) {
+                final CardStateView st = c.getCurrentState();
+                if (st != null && st.getType() != null
+                        && st.getType().isArtifact()) {
+                    count++;
+                }
             }
         }
         final String reminder = localizer.getMessage("lblMetalcraftCount",
                 count, count == 1 ? "" : "s");
-        return new KeywordData(kw.name + " (" + count + ")",
+        return new KeywordData(kw.name + " (" + count + "/3)",
                 appendAnnotation(kw.reminderText, reminder));
     }
 
     private static KeywordData annotateThreshold(final KeywordData kw,
                                                   final PlayerView controller,
                                                   final Localizer localizer) {
-        final int count = controller.getGraveyard().size();
+        final FCollectionView<CardView> thGraveyard =
+                controller.getGraveyard();
+        final int count = thGraveyard != null ? thGraveyard.size() : 0;
         final String reminder = localizer.getMessage("lblThresholdCount",
                 count, count == 1 ? "" : "s");
-        return new KeywordData(kw.name + " (" + count + ")",
+        return new KeywordData(kw.name + " (" + count + "/7)",
                 appendAnnotation(kw.reminderText, reminder));
     }
 
@@ -651,19 +669,33 @@ public final class KeywordInfoUtil {
                                                  final PlayerView controller,
                                                  final Localizer localizer) {
         final Set<CardType.CoreType> types = new HashSet<>();
-        for (final CardView c : controller.getGraveyard()) {
-            final CardStateView st = c.getCurrentState();
-            if (st == null || st.getType() == null) {
-                continue;
-            }
-            for (final CardType.CoreType ct : st.getType().getCoreTypes()) {
-                types.add(ct);
+        final FCollectionView<CardView> delGraveyard =
+                controller.getGraveyard();
+        if (delGraveyard != null) {
+            for (final CardView c : delGraveyard) {
+                final CardStateView st = c.getCurrentState();
+                if (st == null || st.getType() == null) {
+                    continue;
+                }
+                for (final CardType.CoreType ct
+                        : st.getType().getCoreTypes()) {
+                    types.add(ct);
+                }
             }
         }
         final int count = types.size();
+        final List<String> typeNames = new ArrayList<>();
+        for (final CardType.CoreType ct : CardType.CoreType.values()) {
+            if (types.contains(ct)) {
+                typeNames.add(ct.name().substring(0, 1)
+                        + ct.name().substring(1).toLowerCase());
+            }
+        }
+        final String typeList = count == 0 ? ""
+                : ": " + String.join(", ", typeNames);
         final String reminder = localizer.getMessage("lblDeliriumCount",
-                count, count == 1 ? "" : "s");
-        return new KeywordData(kw.name + " (" + count + ")",
+                count, count == 1 ? "" : "s", typeList);
+        return new KeywordData(kw.name + " (" + count + "/4)",
                 appendAnnotation(kw.reminderText, reminder));
     }
 
@@ -683,6 +715,256 @@ public final class KeywordInfoUtil {
             }
         }
         return null;
+    }
+
+    /**
+     * Detect graveyard-count cards (Tarmogoyf-family card types, Lhurgoyf-family
+     * creature counts) and append dynamic count entries to the keyword list.
+     * Uses SVar API for card-type detection and oracle text for creature counts.
+     */
+    public static void addGraveyardCounts(final List<KeywordData> keywords,
+                                           final CardView cardView) {
+        if (cardView == null || cardView.isFaceDown()) {
+            return;
+        }
+        final PlayerView controller = cardView.getController();
+        if (controller == null) {
+            return;
+        }
+        final CardStateView state = cardView.getCurrentState();
+        if (state == null) {
+            return;
+        }
+
+        // Look up card rules for SVar scanning
+        ICardFace face = null;
+        String oracleText = null;
+        try {
+            final StaticData data = StaticData.instance();
+            if (data != null) {
+                final CardRules rules = data.getCommonCards()
+                        .getRules(cardView.getOracleName());
+                if (rules != null) {
+                    face = rules.getMainPart();
+                    if (face != null) {
+                        oracleText = face.getOracleText();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            // Fallback to state oracle text
+        }
+        if (oracleText == null) {
+            oracleText = state.getOracleText();
+        }
+
+        final Localizer localizer = Localizer.getInstance();
+
+        // --- Card-type detection (Tarmogoyf family) via SVar API ---
+        if (face != null) {
+            final String scope = detectCardTypeScope(face);
+            if (scope != null) {
+                // Skip if Delirium already covers your-graveyard card types
+                if (!"your".equals(scope) || !hasKeywordNamed(keywords, "delirium")) {
+                    addCardTypeCount(keywords, scope, controller, localizer);
+                }
+            }
+        }
+
+        // --- Creature-count detection (Lhurgoyf family) via oracle text ---
+        if (oracleText != null) {
+            final String lowerOracle = oracleText.toLowerCase();
+            if (lowerOracle.contains("number of creature cards in")) {
+                final String scope = lowerOracle.contains("number of creature cards in all graveyards")
+                        ? "all"
+                        : lowerOracle.contains("number of creature cards in your graveyard")
+                                ? "your" : "all";
+                addCreatureCount(keywords, scope, controller, localizer);
+            }
+        }
+    }
+
+    /**
+     * Scan an ICardFace's SVars, static abilities, triggers, and abilities
+     * for strings containing both "ValidGraveyard" and "CardTypes".
+     * @return "your", "opponents", "all", or null if not found
+     */
+    private static String detectCardTypeScope(final ICardFace face) {
+        // Check SVars
+        if (face.getVariables() != null) {
+            for (final Map.Entry<String, String> entry : face.getVariables()) {
+                final String scope = checkCardTypeString(entry.getValue());
+                if (scope != null) {
+                    return scope;
+                }
+            }
+        }
+        // Check static abilities
+        if (face.getStaticAbilities() != null) {
+            for (final String sa : face.getStaticAbilities()) {
+                final String scope = checkCardTypeString(sa);
+                if (scope != null) {
+                    return scope;
+                }
+            }
+        }
+        // Check triggers
+        if (face.getTriggers() != null) {
+            for (final String trig : face.getTriggers()) {
+                final String scope = checkCardTypeString(trig);
+                if (scope != null) {
+                    return scope;
+                }
+            }
+        }
+        // Check abilities
+        if (face.getAbilities() != null) {
+            for (final String ab : face.getAbilities()) {
+                final String scope = checkCardTypeString(ab);
+                if (scope != null) {
+                    return scope;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Check if a string contains both "ValidGraveyard" and "CardTypes",
+     * and determine scope from ".YouOwn" / ".OppOwn" markers.
+     */
+    private static String checkCardTypeString(final String text) {
+        if (text == null || !text.contains("ValidGraveyard")
+                || !text.contains("CardTypes")) {
+            return null;
+        }
+        if (text.contains(".YouOwn")) {
+            return "your";
+        }
+        if (text.contains(".OppOwn")) {
+            return "opponents";
+        }
+        return "all";
+    }
+
+    private static boolean hasKeywordNamed(final List<KeywordData> keywords,
+                                            final String name) {
+        for (final KeywordData kw : keywords) {
+            if (kw.name.toLowerCase().replaceAll("\\{[^}]+}", "").trim()
+                    .startsWith(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static void addCardTypeCount(final List<KeywordData> keywords,
+                                          final String scope,
+                                          final PlayerView controller,
+                                          final Localizer localizer) {
+        final Set<CardType.CoreType> types = new HashSet<>();
+        if ("your".equals(scope)) {
+            collectCardTypes(controller.getGraveyard(), types);
+        } else if ("opponents".equals(scope)) {
+            for (final PlayerView opp : controller.getOpponents()) {
+                collectCardTypes(opp.getGraveyard(), types);
+            }
+        } else {
+            // "all" — controller + opponents
+            collectCardTypes(controller.getGraveyard(), types);
+            for (final PlayerView opp : controller.getOpponents()) {
+                collectCardTypes(opp.getGraveyard(), types);
+            }
+        }
+
+        final int count = types.size();
+        final List<String> typeNames = new ArrayList<>();
+        for (final CardType.CoreType ct : CardType.CoreType.values()) {
+            if (types.contains(ct)) {
+                typeNames.add(ct.name().substring(0, 1)
+                        + ct.name().substring(1).toLowerCase());
+            }
+        }
+        final String typeList = count == 0 ? ""
+                : ": " + String.join(", ", typeNames);
+
+        final String header;
+        final String labelKey;
+        if ("your".equals(scope)) {
+            header = "Card types in your graveyard";
+            labelKey = "lblCardTypesYourGraveyard";
+        } else if ("opponents".equals(scope)) {
+            header = "Card types in opponents' graveyards";
+            labelKey = "lblCardTypesOpponentsGraveyards";
+        } else {
+            header = "Card types in graveyards";
+            labelKey = "lblCardTypesAllGraveyards";
+        }
+
+        final String reminder = localizer.getMessage(labelKey,
+                count, count == 1 ? "" : "s", typeList);
+        keywords.add(new KeywordData(header + " (" + count + ")", reminder));
+    }
+
+    private static void addCreatureCount(final List<KeywordData> keywords,
+                                          final String scope,
+                                          final PlayerView controller,
+                                          final Localizer localizer) {
+        int count = 0;
+        if ("your".equals(scope)) {
+            count = countCreatureCards(controller.getGraveyard());
+        } else {
+            // "all" — controller + opponents
+            count = countCreatureCards(controller.getGraveyard());
+            for (final PlayerView opp : controller.getOpponents()) {
+                count += countCreatureCards(opp.getGraveyard());
+            }
+        }
+
+        final String header;
+        final String labelKey;
+        if ("your".equals(scope)) {
+            header = "Creatures in your graveyard";
+            labelKey = "lblCreaturesYourGraveyard";
+        } else {
+            header = "Creatures in graveyards";
+            labelKey = "lblCreaturesAllGraveyards";
+        }
+
+        final String reminder = localizer.getMessage(labelKey,
+                count, count == 1 ? "" : "s");
+        keywords.add(new KeywordData(header + " (" + count + ")", reminder));
+    }
+
+    private static void collectCardTypes(final FCollectionView<CardView> zone,
+                                          final Set<CardType.CoreType> types) {
+        if (zone == null) {
+            return;
+        }
+        for (final CardView c : zone) {
+            final CardStateView st = c.getCurrentState();
+            if (st == null || st.getType() == null) {
+                continue;
+            }
+            for (final CardType.CoreType ct : st.getType().getCoreTypes()) {
+                types.add(ct);
+            }
+        }
+    }
+
+    private static int countCreatureCards(final FCollectionView<CardView> zone) {
+        if (zone == null) {
+            return 0;
+        }
+        int count = 0;
+        for (final CardView c : zone) {
+            final CardStateView st = c.getCurrentState();
+            if (st != null && st.getType() != null
+                    && st.getType().isCreature()) {
+                count++;
+            }
+        }
+        return count;
     }
 
     private static String appendAnnotation(final String reminderText,

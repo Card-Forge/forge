@@ -300,6 +300,7 @@ public class CardInfoPopup {
             KeywordInfoUtil.sortByOracleText(keywordList, oracleText);
             // Append dynamic count annotations (e.g. devotion, domain)
             KeywordInfoUtil.annotateKeywordCounts(keywordList, cardView);
+            KeywordInfoUtil.addGraveyardCounts(keywordList, cardView);
             hasKeywords = !keywordList.isEmpty();
         }
 
