@@ -19,7 +19,6 @@ package forge.view.arcane;
 
 import java.awt.event.MouseEvent;
 
-import forge.game.zone.ZoneType;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.match.CMatchUI;
@@ -62,7 +61,7 @@ public class HandArea extends CardArea {
 
     @Override
     protected boolean cardPanelDraggable(final CardPanel panel) {
-        return panel.getCard() != null && panel.getCard().getZone() == ZoneType.Hand;
+        return panel.getCard() != null;
     }
 
     /** {@inheritDoc} */

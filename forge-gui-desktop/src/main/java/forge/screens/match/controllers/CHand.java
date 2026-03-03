@@ -66,16 +66,20 @@ public class CHand implements ICDoc {
         v0.getHandArea().addCardPanelMouseListener(new CardPanelMouseAdapter() {
             @Override
             public void mouseDragEnd(final CardPanel dragPanel, final MouseEvent evt) {
-                //only reorder actual hand cards, not zone cards
-                if (dragPanel.getCard().getZone() != ZoneType.Hand) {
-                    return;
-                }
-                //update index of dragged card in hand zone to match new index within hand area
                 final int index = CHand.this.view.getHandArea().getCardPanels().indexOf(dragPanel);
                 synchronized (ordering) {
                     ordering.remove(dragPanel.getCard());
                     ordering.add(index, dragPanel.getCard());
-                    matchUI.getGameController(p0).reorderHand(dragPanel.getCard(), index);
+                    if (dragPanel.getCard().getZone() == ZoneType.Hand) {
+                        // compute index among hand cards only (zone cards are interleaved
+                        // visually but Zone.reorder() indexes within the hand zone)
+                        int handIndex = 0;
+                        for (final CardView cv : ordering) {
+                            if (cv == dragPanel.getCard()) break;
+                            if (cv.getZone() == ZoneType.Hand) handIndex++;
+                        }
+                        matchUI.getGameController(p0).reorderHand(dragPanel.getCard(), handIndex);
+                    }
                 }
             }
         });
@@ -124,40 +128,61 @@ public class CHand implements ICDoc {
         synchronized (ordering) {
             ordering.clear();
 
-            // Append playable cards from other zones (flashback, escape, foretell, commander, etc.)
-            // Command zone cards go first, before hand cards
-            if (FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_PLAYABLE_ZONE_CARDS)) {
+            final boolean showZoneCards = FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_PLAYABLE_ZONE_CARDS);
+            final boolean orderByCmc = FModel.getPreferences().getPrefBoolean(FPref.UI_ORDER_HAND);
+
+            if (orderByCmc && showZoneCards) {
+                // Collect hand + zone cards, sort by zone group then CMC/color/name
+                final List<CardView> allCards = new ArrayList<>(cards);
                 final FCollectionView<CardView> flashbackCards = player.getFlashback();
                 if (flashbackCards != null) {
                     for (final CardView cv : flashbackCards) {
-                        if (cv.getZone() == ZoneType.Command) {
-                            ordering.add(cv);
+                        if (cv.getZone() != null && cv.getZone() != ZoneType.Hand) {
+                            allCards.add(cv);
                         }
                     }
                 }
-            }
-
-            // Sort hand by CMC/color at the UI layer. This duplicates the game-layer sort in
-            // PlayerZone.onChanged(), but is necessary because network clients only have CardViews
-            // (no access to the game model), and because toggling the preference mid-game needs
-            // to take effect immediately without waiting for a zone change event.
-            if (FModel.getPreferences().getPrefBoolean(FPref.UI_ORDER_HAND)) {
-                final List<CardView> sorted = new ArrayList<>(cards);
-                sorted.sort(Comparator.comparingInt((CardView cv) -> cv.getCurrentState().getManaCost().getCMC())
+                allCards.sort(Comparator.comparingInt((CardView cv) -> zoneOrder(cv.getZone()))
+                        .thenComparingInt(cv -> cv.getCurrentState().getManaCost().getCMC())
                         .thenComparing(cv -> cv.getCurrentState().getColors().getOrderWeight())
                         .thenComparing(cv -> cv.getCurrentState().getName()));
-                ordering.addAll(sorted);
+                ordering.addAll(allCards);
             } else {
-                ordering.addAll(cards);
-            }
+                // Command zone cards first
+                if (showZoneCards) {
+                    final FCollectionView<CardView> flashbackCards = player.getFlashback();
+                    if (flashbackCards != null) {
+                        for (final CardView cv : flashbackCards) {
+                            if (cv.getZone() == ZoneType.Command) {
+                                ordering.add(cv);
+                            }
+                        }
+                    }
+                }
 
-            if (FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_PLAYABLE_ZONE_CARDS)) {
-                final FCollectionView<CardView> flashbackCards = player.getFlashback();
-                if (flashbackCards != null) {
-                    for (final CardView cv : flashbackCards) {
-                        if (cv.getZone() != null && cv.getZone() != ZoneType.Hand
-                                && cv.getZone() != ZoneType.Command) {
-                            ordering.add(cv);
+                // Sort hand by CMC/color at the UI layer. This duplicates the game-layer sort in
+                // PlayerZone.onChanged(), but is necessary because network clients only have CardViews
+                // (no access to the game model), and because toggling the preference mid-game needs
+                // to take effect immediately without waiting for a zone change event.
+                if (orderByCmc) {
+                    final List<CardView> sorted = new ArrayList<>(cards);
+                    sorted.sort(Comparator.comparingInt((CardView cv) -> cv.getCurrentState().getManaCost().getCMC())
+                            .thenComparing(cv -> cv.getCurrentState().getColors().getOrderWeight())
+                            .thenComparing(cv -> cv.getCurrentState().getName()));
+                    ordering.addAll(sorted);
+                } else {
+                    ordering.addAll(cards);
+                }
+
+                // Other zone cards after hand
+                if (showZoneCards) {
+                    final FCollectionView<CardView> flashbackCards = player.getFlashback();
+                    if (flashbackCards != null) {
+                        for (final CardView cv : flashbackCards) {
+                            if (cv.getZone() != null && cv.getZone() != ZoneType.Hand
+                                    && cv.getZone() != ZoneType.Command) {
+                                ordering.add(cv);
+                            }
                         }
                     }
                 }
@@ -218,6 +243,20 @@ public class CHand implements ICDoc {
             else {
                 Animation.moveCard(placeholder);
             }
+        }
+    }
+
+    /** Sort order for zone-grouped CMC sorting: Command first, then Hand, then others. */
+    private static int zoneOrder(final ZoneType zone) {
+        if (zone == null) return 99;
+        switch (zone) {
+            case Command:   return 0;
+            case Hand:      return 1;
+            case Graveyard: return 2;
+            case Exile:     return 3;
+            case Library:   return 4;
+            case Sideboard: return 5;
+            default:        return 6;
         }
     }
 
