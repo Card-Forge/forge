@@ -410,6 +410,20 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     }
 
     /**
+     * Replace the element at the specified position, updating both the
+     * internal list and set. Unlike {@link #set}, this keeps set membership
+     * in sync with the list.
+     */
+    public T replace(final int index, final T element) {
+        final T old = list.set(index, element);
+        if (old != element) {
+            set.remove(old);
+            set.add(element);
+        }
+        return old;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override

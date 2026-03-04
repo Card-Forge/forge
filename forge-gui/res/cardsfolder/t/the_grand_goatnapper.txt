@@ -1,0 +1,8 @@
+Name:The Grand Goatnapper
+ManaCost:2 B R
+Types:Legendary Creature Goblin Rogue
+PT:3/4
+S:Mode$ Continuous | Affected$ Card.wasCastByYou | AffectedZone$ Stack | AddKeyword$ Affinity:Goat | Description$ Spells you cast have affinity for Goats.
+A:AB$ Animate | Cost$ T | ValidTgts$ Creature.nonGoat | TgtPrompt$ Select target non-Goat creature | Types$ Goat | Duration$ Perpetual | SorcerySpeed$ True | SubAbility$ DBConjure | SpellDescription$ Target non-Goat creature perpetually becomes a Goat in addition to its other types. Then conjure a card named Goatnap into your hand. Activate only as a sorcery.
+SVar:DBConjure:DB$ MakeCard | Conjure$ True | Name$ Goatnap | Zone$ Hand
+Oracle:Spells you cast have affinity for Goats.\n{T}: Target non-Goat creature perpetually becomes a Goat in addition to its other types. Then conjure a card named Goatnap into your hand. Activate only as a sorcery.

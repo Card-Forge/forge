@@ -1,0 +1,7 @@
+Name:Ice Cream Kitty
+ManaCost:1 BG
+Types:Artifact Creature Food Cat Mutant
+PT:1/3
+A:AB$ Draw | Cost$ 2 Sac<1/Creature.Other;Permanent.token+Other/another creature or token> | SorcerySpeed$ True | SpellDescription$ Draw a card. Activate only as a sorcery.
+A:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME/this creature> | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+Oracle:{2}, Sacrifice another creature or token: Draw a card. Activate only as a sorcery.\n{2}, {T}, Sacrifice this creature: You gain 3 life.

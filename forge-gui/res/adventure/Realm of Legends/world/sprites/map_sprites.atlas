@@ -1,0 +1,386 @@
+map_sprites.png
+size: 128,320
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+DarkWood
+  xy: 0, 0
+  size: 16, 16
+DarkWood
+  xy: 16, 0
+  size: 16, 16
+DarkWood
+  xy: 32, 0
+  size: 16, 16
+DarkWood
+  xy: 48, 0
+  size: 16, 16
+Reed
+  xy: 64, 0
+  size: 16, 16
+Reed
+  xy: 80, 0
+  size: 16, 16
+DarkWood
+  xy: 96, 0
+  size: 16, 16
+DarkWood
+  xy: 112, 0
+  size: 16, 16
+DarkWood
+  xy: 0, 16
+  size: 16, 16
+DarkWood
+  xy: 16, 16
+  size: 16, 16
+DarkWood
+  xy: 32, 16
+  size: 16, 16
+DarkWood
+  xy: 48, 16
+  size: 16, 16
+Reed
+  xy: 64, 16
+  size: 16, 16
+Reed
+  xy: 80, 16
+  size: 16, 16
+Waterlily
+  xy: 96, 16
+  size: 16, 16
+Waterlily
+  xy: 112, 16
+  size: 16, 16
+DarkGras
+  xy: 0, 32
+  size: 16, 16
+DarkGras
+  xy: 16, 32
+  size: 16, 16
+Stone
+  xy: 32, 32
+  size: 16, 16
+Stone
+  xy: 48, 32
+  size: 16, 16
+Gravel
+  xy: 64, 32
+  size: 16, 16
+Gravel
+  xy: 80, 32
+  size: 16, 16
+Shroom
+  xy: 96, 32
+  size: 16, 16
+Shroom2
+  xy: 112, 32
+  size: 16, 16
+DarkGras
+  xy: 0, 48
+  size: 16, 16
+DarkGras
+  xy: 16, 48
+  size: 16, 16
+Shroom
+  xy: 96, 48
+  size: 16, 16
+Shroom2
+  xy: 112, 48
+  size: 16, 16
+Stone
+  xy: 32, 48
+  size: 16, 16
+Stone
+  xy: 48, 48
+  size: 16, 16
+Gravel
+  xy: 64, 48
+  size: 16, 16
+Gravel
+  xy: 80, 48
+  size: 16, 16
+Flower
+  xy: 0, 64
+  size: 16, 16
+Flower
+  xy: 16, 64
+  size: 16, 16
+Stone
+  xy: 32, 64
+  size: 16, 16
+Stone
+  xy: 48, 64
+  size: 16, 16
+Moss
+  xy: 64, 64
+  size: 16, 16
+Moss
+  xy: 80, 64
+  size: 16, 16
+Wood
+  xy: 96, 64
+  size: 16, 16
+Wood
+  xy: 112, 64
+  size: 16, 16
+Flower
+  xy: 0, 80
+  size: 16, 16
+Flower
+  xy: 16, 80
+  size: 16, 16
+Stone
+  xy: 32, 80
+  size: 16, 16
+Stone
+  xy: 48, 80
+  size: 16, 16
+Moss
+  xy: 64, 80
+  size: 16, 16
+Moss
+  xy: 80, 80
+  size: 16, 16
+Wood
+  xy: 96, 80
+  size: 16, 16
+Wood
+  xy: 112, 80
+  size: 16, 16
+WasteTree
+  xy: 0, 96
+  size: 16, 16
+WasteTree
+  xy: 16, 96
+  size: 16, 16
+WasteTree
+  xy: 32, 96
+  size: 16, 16
+WasteRock
+  xy: 48, 96
+  size: 16, 16
+WasteRock
+  xy: 64, 96
+  size: 16, 16
+Placeholder
+  xy: 80, 96
+  size: 16,16
+SwampTree2
+  xy: 96, 96
+  size: 16, 16
+SwampTree2
+  xy: 112, 96
+  size: 16, 16
+SwampTree
+  xy: 0, 112
+  size: 16, 16
+SwampTree
+  xy: 16, 112
+  size: 16, 16
+SwampTree
+  xy: 32, 112
+  size: 16, 16
+Skull
+  xy: 48, 112
+  size: 16, 16
+SwampRock
+  xy: 64, 112
+  size: 16, 16
+SwampRock
+  xy: 80, 112
+  size: 16, 16
+SwampTree2
+  xy: 96, 112
+  size: 16, 16
+SwampTree2
+  xy: 112, 112
+  size: 16, 16
+PlainsTree
+  xy: 0, 128
+  size: 16, 16
+PlainsTree
+  xy: 16, 128
+  size: 16, 16
+Cactus
+  xy: 32, 128
+  size: 16, 16
+Cactus
+  xy: 48, 128
+  size: 16, 16
+Cactus
+  xy: 64, 128
+  size: 16, 16
+PlainsRock
+  xy: 80, 128
+  size: 16, 16
+PlainsRock
+  xy: 96, 128
+  size: 16, 16
+Skull
+  xy: 112, 128
+  size: 16, 16
+IslandTree
+  xy: 0, 144
+  size: 16, 16
+IslandTree
+  xy: 16, 144
+  size: 16, 16
+Coral
+  xy: 32, 144
+  size: 16, 16
+Shell
+  xy: 48, 144
+  size: 16, 16
+Shell
+  xy: 64, 144
+  size: 16, 16
+Placeholder
+  xy: 80, 144
+  size: 16, 16
+Placeholder
+  xy: 96, 144
+  size: 16, 16
+Skull
+  xy: 112, 144
+  size: 16, 16
+WoodTree
+  xy: 0, 160
+  size: 16, 16
+WoodTree
+  xy: 16, 160
+  size: 16, 16
+WoodTree
+  xy: 32, 160
+  size: 16, 16
+WoodTree
+  xy: 48, 160
+  size: 16, 16
+WoodTree2
+  xy: 64, 160
+  size: 16, 16
+WoodTree2
+  xy: 80, 160
+  size: 16, 16
+Bush
+  xy: 96, 160
+  size: 16, 16
+Stump
+  xy: 112, 160
+  size: 16, 16
+MountainTree
+  xy: 0, 176
+  size: 16, 16
+MountainTree
+  xy: 16, 176
+  size: 16, 16
+MountainTree2
+  xy: 32, 176
+  size: 16, 16
+MountainTree2
+  xy: 48, 176
+  size: 16, 16
+MountainRock
+  xy: 64, 176
+  size: 16, 16
+MountainRock
+  xy: 80, 176
+  size: 16, 16
+MountainTree2
+  xy: 96, 176
+  size: 16, 16
+MountainTree2
+  xy: 112, 176
+  size: 16, 16
+WoodTree
+  xy: 0, 192
+  size: 16, 16
+AutumnTree
+  xy: 16, 192
+  size: 16, 16
+WinterTree
+  xy: 32, 192
+  size: 16, 16
+AutumnTree
+  xy: 48, 192
+  size: 16, 16
+Coral
+  xy: 64, 192
+  size: 16, 16
+SnowMountain
+  xy: 80, 192
+  size: 16, 16
+Coral
+  xy: 96, 192
+  size: 16, 16
+AutumnTree
+  xy: 112, 192
+  size: 16, 16
+Placeholder
+  xy: 0, 208
+  size: 16, 16
+AutumnTree
+  xy: 16, 208
+  size: 16, 16
+SwampTree
+  xy: 32, 208
+  size: 16, 16
+Coral
+  xy: 48, 208
+  size: 16, 16
+WoodTree
+  xy: 64, 208
+  size: 16, 16
+IslandRock
+  xy: 80, 208
+  size: 16, 16
+WoodRock
+  xy: 96, 208
+  size: 16, 16
+Placeholder
+  xy: 112, 208
+  size: 16, 16
+LargeWoodRock
+  xy: 0, 224
+  size: 32, 32
+LargeIslandRock
+  xy: 32, 224
+  size: 32, 32
+LargeWasteRock
+  xy: 64, 224
+  size: 32, 32
+LargeMountainRock
+  xy: 96, 224
+  size: 32, 32
+LargePlainsRock
+  xy: 96, 256
+  size: 32, 32
+Placeholder
+  xy: 0, 256
+  size: 16, 16
+WasteRock
+  xy: 16, 256
+  size: 16, 16
+LargeSwampRock
+  xy: 32, 256
+  size: 32, 32
+PlainsRock
+  xy: 64, 256
+  size: 16, 16
+PlainsRock
+  xy: 80, 256
+  size: 16, 16
+LargePlainsRock
+  xy: 96, 256
+  size: 32, 32
+WoodRock
+  xy: 0, 272
+  size: 16, 16
+SwampRock
+  xy: 16, 272
+  size: 16, 16
+WinterTree:
+  xy: 64, 272
+  size: 16, 16
+WinterTree:
+  xy: 80, 272
+  size: 16, 16

@@ -46,14 +46,12 @@
         "condition": [
           { "hasGold": 10000 }
         ],
-        "text": "The crystals shimmer and absorb your gold. In exchange, ancient spells materialize before you - cards from the Beta era of magic!",
+        "text": "The crystals shimmer and absorb your gold. In exchange, a sealed pack from the dawn of magic materializes before you!",
         "action": [
           {
             "addGold": -10000,
             "grantRewards": [
-              { "type": "randomCard", "sourceDeck": "decks/custom_lists/LEB_List.dck", "rarity": ["R"], "count": 1 },
-              { "type": "randomCard", "sourceDeck": "decks/custom_lists/LEB_List.dck", "rarity": ["U"], "count": 3 },
-              { "type": "randomCard", "sourceDeck": "decks/custom_lists/LEB_List.dck", "rarity": ["C"], "count": 11 }
+              { "type": "cardPackShop", "count": 1, "editions": ["LEB"] }
             ]
           }
         ]
@@ -70,14 +68,12 @@
         "condition": [
           { "hasShards": 400 }
         ],
-        "text": "The crystals shimmer and absorb your mana shards. In exchange, ancient spells materialize before you - cards from the Beta era of magic!",
+        "text": "The crystals shimmer and absorb your mana shards. In exchange, a sealed pack from the dawn of magic materializes before you!",
         "action": [
           {
             "addShards": -400,
             "grantRewards": [
-              { "type": "randomCard", "sourceDeck": "decks/custom_lists/LEB_List.dck", "rarity": ["R"], "count": 1 },
-              { "type": "randomCard", "sourceDeck": "decks/custom_lists/LEB_List.dck", "rarity": ["U"], "count": 3 },
-              { "type": "randomCard", "sourceDeck": "decks/custom_lists/LEB_List.dck", "rarity": ["C"], "count": 11 }
+              { "type": "cardPackShop", "count": 1, "editions": ["LEB"] }
             ]
           }
         ]

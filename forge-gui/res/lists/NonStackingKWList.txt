@@ -1,6 +1,5 @@
 All creatures able to block CARDNAME do so.
 Banding
-CARDNAME's activated abilities can't be activated.
 CARDNAME must be blocked if able.
 Changeling
 Convoke

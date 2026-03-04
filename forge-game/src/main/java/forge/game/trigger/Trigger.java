@@ -40,6 +40,8 @@ import forge.util.ITranslatable;
 import forge.util.Lang;
 import forge.util.TextUtil;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.*;
 
 /**
@@ -664,5 +666,14 @@ public abstract class Trigger extends TriggerReplacementBase {
             return false;
         }
         return ensureAbility().isManaAbility();
+    }
+
+    public boolean looksBackInTime() {
+        return TriggerType.Exploited.equals(getMode()) ||
+                TriggerType.Destroyed.equals(getMode()) ||
+                TriggerType.Sacrificed.equals(getMode()) || TriggerType.SacrificedOnce.equals(getMode()) ||
+                ((TriggerType.ChangesZone.equals(getMode()) || TriggerType.ChangesZoneAll.equals(getMode()))
+                        && (StringUtils.contains(getParam("Origin"), "Battlefield") ||
+                        StringUtils.containsAny(getParam("Destination"), "Library", "Hand")));
     }
 }

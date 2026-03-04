@@ -111,7 +111,7 @@ public class CountersProliferateAiTest extends AITest {
         addCards("Wastes", 4, ai);
 
         // Opponent has 9 poison counters - proliferating would win the game
-        opponent.setPoisonCounters(9, null);
+        opponent.setCounters(CounterEnumType.POISON, 9);
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, ai);
         game.getAction().checkStateEffects(true);

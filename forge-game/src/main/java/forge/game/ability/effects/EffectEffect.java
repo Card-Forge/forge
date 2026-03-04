@@ -310,7 +310,7 @@ public class EffectEffect extends SpellAbilityEffect {
             }
 
             if (duration == null || !duration.equals("Permanent")) {
-                addUntilCommand(sa, exileEffectCommand(game, eff), controller);
+                addUntilCommand(sa, () -> game.getAction().exileEffect(eff), controller);
             }
 
             if (sa.hasParam("ImprintOnHost")) {

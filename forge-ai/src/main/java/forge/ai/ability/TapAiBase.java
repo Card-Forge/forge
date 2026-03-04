@@ -103,34 +103,12 @@ public abstract class TapAiBase extends SpellAbilityAi {
         CardCollection tapList = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
         tapList = ComputerUtil.filterAITgts(sa, ai, tapList, false);
         tapList = CardLists.filter(tapList, CardPredicates.CAN_TAP);
-        tapList = CardLists.filter(tapList, c -> {
-            if (c.isCreature()) {
-                return true;
-            }
-
-            for (final SpellAbility sa1 : c.getSpellAbilities()) {
-                if (sa1.isAbility() && sa1.getPayCosts().hasTapCost()) {
-                    return true;
-                }
-            }
-            return false;
-        });
+        tapList = CardLists.filter(tapList, CREATURE_OR_TAP_ABILITY);
 
         //use broader approach when the cost is a positive thing
         if (tapList.isEmpty() && ComputerUtil.activateForCost(sa, ai)) { 
             tapList = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
-            tapList = CardLists.filter(tapList, c -> {
-                if (c.isCreature()) {
-                    return true;
-                }
-
-                for (final SpellAbility sa12 : c.getSpellAbilities()) {
-                    if (sa12.isAbility() && sa12.getPayCosts().hasTapCost()) {
-                        return true;
-                    }
-                }
-                return false;
-            });
+            tapList = CardLists.filter(tapList, CREATURE_OR_TAP_ABILITY);
         }
 
         //try to exclude things that will already be tapped due to something on stack or because something is
@@ -288,9 +266,8 @@ public abstract class TapAiBase extends SpellAbilityAi {
             // might be from ETBreplacement
             if (pDefined.isEmpty() || !pDefined.get(0).isInPlay() || (pDefined.get(0).isUntapped() && pDefined.get(0).getController() != ai)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         } else {
             sa.resetTargets();
             if (tapPrefTargeting(ai, source, sa, mandatory)) {
@@ -299,9 +276,8 @@ public abstract class TapAiBase extends SpellAbilityAi {
                 // not enough preferred targets, but mandatory so keep going:
                 if (tapUnpreferredTargeting(ai, sa, mandatory)) {
                     return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
-                } else {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
 
@@ -311,18 +287,15 @@ public abstract class TapAiBase extends SpellAbilityAi {
     @Override
     public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
-        final boolean oppTargetsChoice = sa.hasParam("TargetingPlayer");
 
-        if (oppTargetsChoice && sa.getActivatingPlayer().equals(ai) && !sa.isTrigger()) {
+        if (sa.hasParam("TargetingPlayer") && sa.getActivatingPlayer().equals(ai) && !sa.isTrigger()) {
             // canPlayAI (sa activated by ai)
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
             sa.setTargetingPlayer(targetingPlayer);
-            sa.getTargets().clear();
-            if (targetingPlayer.getController().chooseTargetsFor(sa)) {
-                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
+            if (CardLists.getTargetableCards(ai.getGame().getCardsIn(sa.getTargetRestrictions().getZone()), sa).isEmpty()) {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         boolean randomReturn = true;

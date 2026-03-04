@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="79">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Titans' Nest&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJybycnAMHMUj+JRPIpH8SgexSMCAwCsCkLM
+  </data>
+ </layer>
+ <layer id="7" name="Background 2" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjY2BgYKMyZqWBmYMJMwwCN9DSL4PVf6S4ixw/DBZ/U+oOXPpJNXewhMdgCFNcZg2FMKKHG2ltx1AI56EUnwA5VguO
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy9lF0OhCAMhHmEg61ruKjZn1tt1uUYSnSS2rSApuwkfbDWfhRGhuDcYBj3NbJuBr2e3rkXibc/5vIzasedG4XvaV0L67v3gj7hmMvPWAvypVyJyVk18bVouViY8Syzpt/a7+Fl7pUZWwTOHDZ++gMT0jw1dmRCkqd6cSe/7a3G7sHNzETOFqK+monfrMTvDfiH+9mSTWflnk2hzV84I76mnEcONYik9JTuDG3mKLzDPNI/qc1C96DG5rXSnV+LlrXVaq9wLcKSuwDK+o2z
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzVVEGOwjAMzKIE+A6+sp8rLbSf2D3loRuLWJoOdkGclpEsQ2J7PE6TlP4vZknp2Gzp3rBvv2/NJolzFUXW/hW+GWKX891uVqdZ7XtZ7ntb0P2IewfrBbxxRjY94bU4DxdH20HWno374nxc93hR5yB+rldL5zz2nirkW8yVtESzGODsOPYq/rxsrdB/5PZyc+caZT0Ts5oeNXr1ozXu0TAFZ1cgTvutVGMM8nDmHq/VzKQz0oS5XNdiho1e8A5i3iiP9fm7NZS0Bs85B/d07/CijuiMmI95Ld/esAvxsF57/2aaU8Rjvdfu7S1Vj1r1fv40/7tRZ3nhrinwbLl/huo9f6X03Ww6xXHHJ3XegfLlDU7EHPBH9+NT8AfNQ4Hk
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="194" y="273.333"/>
+  <object id="53" template="../../../../common/maps/obj/enemy.tx" x="427.855" y="165.166">
+   <properties>
+    <property name="enemy" value="Tayam"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../common/maps/obj/enemy.tx" x="214.218" y="98.0873">
+   <properties>
+    <property name="displayNameOverride" value=""/>
+    <property name="enemy" value="Xyris"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="65,66,67,66"/>
+   </properties>
+  </object>
+  <object id="59" template="../../../../common/maps/obj/door_down.tx" x="336.5" y="16.5">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/cave/Lair_of_Behemoths_2.tmx"/>
+    <property name="teleportObjectId" value="60"/>
+   </properties>
+  </object>
+  <object id="63" template="../../../../common/maps/obj/enemy.tx" x="85.3247" y="159.788">
+   <properties>
+    <property name="enemy" value="Akim"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="69,70"/>
+   </properties>
+  </object>
+  <object id="64" template="../../../../common/maps/obj/enemy.tx" x="278.824" y="175.638">
+   <properties>
+    <property name="enemy" value="Kalamax"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="71,72"/>
+   </properties>
+  </object>
+  <object id="65" template="../../../../common/maps/obj/waypoint.tx" x="104.426" y="85.0118"/>
+  <object id="66" template="../../../../common/maps/obj/waypoint.tx" x="306" y="112.5"/>
+  <object id="67" template="../../../../common/maps/obj/waypoint.tx" x="239" y="58.5"/>
+  <object id="68" template="../../../../common/maps/obj/manashards.tx" x="423.5" y="191"/>
+  <object id="69" template="../../../../common/maps/obj/waypoint.tx" x="41.9888" y="112.941"/>
+  <object id="70" template="../../../../common/maps/obj/waypoint.tx" x="115.628" y="210.231"/>
+  <object id="71" template="../../../../common/maps/obj/waypoint.tx" x="348.909" y="146.804"/>
+  <object id="72" template="../../../../common/maps/obj/waypoint.tx" x="223.669" y="193.568"/>
+  <object id="73" template="../../../../common/maps/obj/manashards.tx" x="436.524" y="73.1646"/>
+  <object id="74" template="../../../../common/maps/obj/dialog.tx" x="175.297" y="229.831" width="50.167" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A cavern sprawls out ahead, the darkness lit by the colorful glow of jutting crystals all around. The air is thick with mixed animal scents, and several strange beasts wander about, their eyes turning towards you as you enter.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="77" template="../../../../common/maps/obj/manashards.tx" x="39.3012" y="153.254"/>
+  <object id="78" template="../../../../common/maps/obj/manashards.tx" x="172.605" y="52.2016"/>
+ </objectgroup>
+</map>

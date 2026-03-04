@@ -1,0 +1,7 @@
+Name:Here Comes a New Hero!
+ManaCost:X 2 U
+Types:Sorcery
+A:SP$ Draw | NumCards$ X | ValidTgts$ Player | SubAbility$ DBCopy | SpellDescription$ Target player draws X cards. Create a token that's a copy of up to one target creature with mana value X or less.
+SVar:DBCopy:DB$ CopyPermanent | ValidTgts$ Creature.cmcLEX | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one creature with mana value X or less
+SVar:X:Count$xPaid
+Oracle:Target player draws X cards. Create a token that's a copy of up to one target creature with mana value X or less.

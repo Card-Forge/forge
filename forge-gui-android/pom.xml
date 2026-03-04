@@ -88,6 +88,12 @@
                 <filtering>true</filtering>
                 <targetPath>assets</targetPath>
             </resource>
+            <!-- tinylog + SLF4J service descriptors: the android-maven-plugin strips
+                 META-INF/ from dependency JARs during unpack, so we ship our own copies
+                 so tinylog's ServiceLoader can discover its providers at runtime. -->
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
         </resources>
         <!-- append generated snapshot-version property -->
         <finalName>forge-android-${snapshot-version}</finalName>

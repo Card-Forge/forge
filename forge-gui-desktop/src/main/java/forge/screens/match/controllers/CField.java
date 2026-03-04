@@ -26,10 +26,8 @@ import javax.swing.SwingUtilities;
 
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
-import forge.gamemodes.match.input.Input;
-import forge.gamemodes.match.input.InputPayMana;
 import forge.gui.framework.ICDoc;
-import forge.player.PlayerControllerHuman;
+import forge.interfaces.IGameController;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.ZoneAction;
 import forge.screens.match.views.VField;
@@ -65,16 +63,14 @@ public class CField implements ICDoc {
         this.view = v0;
 
         final Function<Byte, Boolean> manaAction = colorCode -> {
-            if (matchUI.getGameController() instanceof PlayerControllerHuman) {
-                final PlayerControllerHuman controller = (PlayerControllerHuman) matchUI.getGameController();
-                final Input ipm = controller.getInputQueue().getInput();
-                if (ipm instanceof InputPayMana && ipm.getOwner().equals(player)) {
-                    final int oldMana = player.getMana(colorCode);
-                    controller.useMana(colorCode);
-                    return oldMana != player.getMana(colorCode);
-                }
+            IGameController controller = matchUI.getGameController(player);
+            // not a local human
+            if (controller == null) {
+                return Boolean.FALSE;
             }
-            return Boolean.FALSE;
+            final int oldMana = player.getMana(colorCode);
+            controller.useMana(colorCode);
+            return oldMana != player.getMana(colorCode);
         };
 
         Function<ZoneType, Runnable> zoneActionFactory = (zone) -> new ZoneAction(matchUI, player, zone);

@@ -21,7 +21,7 @@ See [StaticAbility.generateLayer()](https://github.com/Card-Forge/forge/blob/mas
 # Statics for the concluding "game rules layer" ([CR 613.11](https://yawgatog.com/resources/magic-rules/#R61311))
 All available effects are defined here: [StaticAbilityMode](https://github.com/Card-Forge/forge/blob/master/forge-game/src/main/java/forge/game/staticability/StaticAbilityMode.java).
 
-*Note:* some rules-modifying parts are still coded via `Continuous` mode for now, e.g. `SetMaxHandSize$ {Integer}`.
+*Note:* some rules-modifying parts are instead still coded via `Continuous` mode, e.g. `SetMaxHandSize$ {Integer}`.
 
 The more frequent or complicated ones are presented below:
 

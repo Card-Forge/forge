@@ -24,6 +24,7 @@ import javax.swing.border.EmptyBorder;
 import com.google.common.collect.Lists;
 
 import forge.Singletons;
+import forge.gamemodes.match.AbstractGuiGame;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ILocalRepaint;
 import forge.localinstance.properties.ForgePreferences;
@@ -183,6 +184,11 @@ public class FNavigationBar extends FTitleBarBase {
             }
             repaint(); //needed or tab visual sticks around
         }
+    }
+
+    public boolean hasNetGame() {
+        return tabs.stream().filter(t -> t.getScreen().getController() instanceof AbstractGuiGame game
+                && game.isNetGame()).findAny().map(b -> true).orElse(false);
     }
 
     @Override
@@ -473,6 +479,10 @@ public class FNavigationBar extends FTitleBarBase {
             FSkin.setGraphicsColor(g, buttonBorderColor);
             g.drawRoundRect(0, 0, width, height, radius, radius);
             super.paintComponent(g);
+        }
+
+        public FScreen getScreen() {
+            return screen;
         }
 
         private void updateTitle() {

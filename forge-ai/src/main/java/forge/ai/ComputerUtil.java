@@ -74,11 +74,10 @@ import java.util.function.Supplier;
  * @version $Id$
  */
 public class ComputerUtil {
-    public static boolean handlePlayingSpellAbility(final Player ai, SpellAbility sa, final Game game) {
-        return handlePlayingSpellAbility(ai, sa, game, null);
-    }
-    public static boolean handlePlayingSpellAbility(final Player ai, SpellAbility sa, final Game game, Runnable chooseTargets) {
+
+    public static boolean handlePlayingSpellAbility(final Player ai, SpellAbility sa, Runnable chooseTargets) {
         final Card source = sa.getHostCard();
+        final Game game = source.getGame();
         final Card host = sa.getHostCard();
         final Zone hz = host.isCopiedSpell() ? null : host.getZone();
         source.setSplitStateToPlayAbility(sa);
@@ -2441,7 +2440,7 @@ public class ComputerUtil {
                 }
                 else if (logic.equals("ChosenLandwalk")) {
                     for (Card c : AiAttackController.choosePreferredDefenderPlayer(ai).getLandsInPlay()) {
-                        for (String t : c.getType()) {
+                        for (String t : c.getType().getLandTypes()) {
                             if (CardType.isABasicLandType(t)) {
                                 chosen = t;
                                 break;
@@ -2683,7 +2682,7 @@ public class ComputerUtil {
         return safeCards;
     }
 
-    public static Card getKilledByTargeting(final SpellAbility sa, CardCollectionView validCards) {
+    public static Card getKilledByTargeting(final SpellAbility sa, Iterable<Card> validCards) {
         CardCollection killables = CardLists.filter(validCards, c -> c.getController() != sa.getActivatingPlayer() && c.getSVar("Targeting").equals("Dies"));
         return ComputerUtilCard.getBestCreatureAI(killables);
     }

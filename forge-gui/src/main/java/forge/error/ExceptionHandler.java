@@ -18,7 +18,6 @@
 
 package forge.error;
 
-import com.esotericsoftware.minlog.Log;
 import forge.FTrace;
 import forge.gui.error.BugReporter;
 import forge.localinstance.properties.ForgeConstants;
@@ -81,7 +80,8 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
         oldSystemErr = System.err;
         System.setErr(new PrintStream(new MultiplexOutputStream(System.err, logFileStream), true));
 
-        Log.debug("Error handling registered!");
+        // no logger here, if it ever fails we'll know at least we passed through here
+        System.out.println("Error handling registered!");
         FTrace.initialize();
     }
 

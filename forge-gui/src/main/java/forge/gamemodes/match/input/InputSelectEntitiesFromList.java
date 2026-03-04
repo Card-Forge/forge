@@ -176,7 +176,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
         super.showMessage();
         // Use mass select mode for proliferate. If you wanted to add it to a different effect
         // the effect must allow you to select any number of targets between "none" and "all valid targets"
-        if (sa != null && ApiType.Proliferate == sa.getApi()) {
+        if (sa != null && ApiType.Proliferate == sa.getApi() && min == 0) {
             massSelectMode = MassSelectMode.NONE;
             updateMassSelectButton();
         }
@@ -210,6 +210,9 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
             this.getSelected().clear();
             if (massSelectMode == MassSelectMode.MINE) { // Select all valid targets owned by player
                 for (T v : validChoices) {
+                    if (selected.size() == max) {
+                        break;
+                    }
                     if (v instanceof Card c) {
                         if (c.getController().equals(getController().getPlayer())) {
                             selected.add(v);
@@ -219,6 +222,9 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
                 }
             } else if (massSelectMode == MassSelectMode.ALL) { // Select all valid targets
                 for (T c : validChoices) {
+                    if (selected.size() == max) {
+                        break;
+                    }
                     selected.add(c);
                     onSelectStateChanged(c, true);
                 }

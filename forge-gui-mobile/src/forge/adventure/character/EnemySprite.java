@@ -64,6 +64,7 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
     public MapDialog defeatDialog; //Dialog to show on defeat. Overrides standard death (can be removed as an action)
     public EffectData effect; //Battle effect for this enemy. Similar to a player's blessing.
     public String nameOverride = ""; //Override name of this enemy in battles.
+    public String bossInsult = ""; //Override the generated insult text when you are defeated.
     public RewardData[] rewards; //Additional rewards for this enemy.
     public DialogData.ConditionData spawnCondition; //Condition to spawn.
     public LinkedList<MovementBehavior> movementBehaviors = new LinkedList<>();
@@ -441,7 +442,12 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
             return data.getName();
         return nameOverride;
     }
-
+    public String getBossInsult(){
+        return data.bossInsult;
+    }
+    public String getBossIntro(){
+        return data.bossIntro;
+    }
     public Array<Reward> getRewards() {
         Array<Reward> rewards = new Array<>();
         //Collect custom rewards for chaos battles

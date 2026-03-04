@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="109">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Senate guildmage&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon.tsx"/>
+ <tileset firstgid="16385" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="32769" source="../../../../common/maps/tileset/dungeon-nocollide.tsx"/>
+ <layer id="7" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAP3DgZGFZzkI5B+igB5Oqnlb0gcRimp7200jdq76i9o/YOD3uRzcBWRhGjhhx7cYm96yOshp72BhrRz16QXYT0kWovNkyqGnQAAFmAIMc=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxbIcXAsAIPDjYhH+MzlxAejPZyuo0s/47aO2rvqL2j9pJq77u+UXsHe/wCAKi4Sm4=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAPODkZGLiwYJg4Nw55kDglYDma/mATTIwNrBzi9mKzbzj7t8uLgaEbiHu8iGNT27/EglH/kmfvSPMvve2FlcMwgK3sJUYNqQCbf9H9QoyaUXvxA1cuBgY3NOzORboadAAAoI9Ghg==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYCAOnG2nrjpiwHxm/PLHDBgYjhsQr55YYMuCyhdhY2DodGNg4ATibjcIHwROGGBXTy6Y6IbKn6sDtNOdgYELiLndIXx86smy05eBoRktzmD+Q+Y/YkTwQepB+igBgn4MDIeB5nR5MTDwehCHQepB+igByP4FmUkMoIV/e7wQboC5A5mmtX/RwxZZjJr+xWUXNnFq+HewAFBeDWVnYPAzYmDI64PQID56HqYVWAu08x0Qr++jnR0BzagYm73IcjCa2m7AZy+y/dSw6w6wrL/Lgt9edDW0AG+h9r4nM34B3M1agQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="224" y="281" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="166.597" y="184.707">
+   <properties>
+    <property name="enemy" value="Isperia"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="53" template="../../../../common/maps/obj/enemy.tx" x="222.874" y="114.19">
+   <properties>
+    <property name="enemy" value="Lavinia"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="0"/>
+   </properties>
+  </object>
+  <object id="55" template="../../../../common/maps/obj/enemy.tx" x="271.413" y="114.192">
+   <properties>
+    <property name="enemy" value="Bruvac"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="0"/>
+   </properties>
+  </object>
+  <object id="57" template="../../../../common/maps/obj/enemy.tx" x="315.985" y="184.858">
+   <properties>
+    <property name="enemy" value="Azor"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/enemy.tx" x="238.634" y="32.1797">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Prahv, Spires of Order|DIS&quot;, &quot;Azorius Guildmage|RVR&quot;]}"/>
+    <property name="enemy" value="Grand Arbiter"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="0"/>
+   </properties>
+  </object>
+  <object id="73" template="../../obj/treasure.tx" x="169" y="229">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;DIS&quot;, &quot;RTR&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;blue&quot;, &quot;white&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DIS&quot;, &quot;RTR&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;blue&quot;, &quot;white&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DIS&quot;, &quot;RTR&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;blue&quot;, &quot;white&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="74" template="../../obj/treasure.tx" x="312.5" y="229">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;DIS&quot;, &quot;RTR&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;blue&quot;, &quot;white&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DIS&quot;, &quot;RTR&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;blue&quot;, &quot;white&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DIS&quot;, &quot;RTR&quot;, &quot;RNA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;blue&quot;, &quot;white&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="75" template="../../../../common/maps/obj/scroll.tx" x="282.833" y="229">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Azorius Charm&quot;, &quot;editions&quot;: [ &quot;RTR&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="78" template="../../../../common/maps/obj/scroll.tx" x="195.667" y="229">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Azorius Chancery&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="79" template="../../../../common/maps/obj/dialog.tx" x="212.25" y="197.25" width="74" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The regal, spotlessly clean hall ahead of you is almost unnaturally tidy and perfect. Prominent signage informs you that this is the territory of Ravnica's Azorius Senate.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="80" template="../../../../common/maps/obj/scroll.tx" x="340" y="229">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Persistent Petitioners&quot;, &quot;editions&quot;: [ &quot;RNA&quot; ], &quot;count&quot;: 16 } ]"/>
+   </properties>
+  </object>
+  <object id="81" template="../../../../common/maps/obj/scroll.tx" x="137.833" y="229">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Persistent Petitioners&quot;, &quot;editions&quot;: [ &quot;RNA&quot; ], &quot;count&quot;: 16 } ]"/>
+   </properties>
+  </object>
+  <object id="82" template="../../../../common/maps/obj/dialog.tx" x="130" y="63.25" width="238" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The large man in flowing robes sitting behind the judge's podium scoffs as you approach.
+
+'Entering a restricted area during an active senate hearing. A clear violation of Code 873-C, Paragraph 8, Clause 9-B, sub-clause 3A. Please step forward to receive your punishment or your sentence will be increased pursuant to section 498-C...'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(You wisely decide to stop listening)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="83" template="../../../../common/maps/obj/collision.tx" x="224.398" y="32.836" width="46.7036" height="30.75"/>
+  <object id="84" template="../../../../common/maps/obj/collision.tx" x="130.148" y="64.625" width="29.7036" height="95.75"/>
+  <object id="85" template="../../../../common/maps/obj/collision.tx" x="339.148" y="65.125" width="29.7036" height="95.75"/>
+  <object id="86" template="../../../../common/maps/obj/collision.tx" x="171.375" y="83.2159" width="23.8854" height="12.9318"/>
+  <object id="87" template="../../../../common/maps/obj/collision.tx" x="171.512" y="115.534" width="23.8854" height="12.9318"/>
+  <object id="88" template="../../../../common/maps/obj/collision.tx" x="171.148" y="147.352" width="23.8854" height="12.9318"/>
+  <object id="89" template="../../../../common/maps/obj/collision.tx" x="219.375" y="82.9206" width="23.8854" height="12.9318"/>
+  <object id="90" template="../../../../common/maps/obj/collision.tx" x="219.512" y="115.239" width="23.8854" height="12.9318"/>
+  <object id="91" template="../../../../common/maps/obj/collision.tx" x="219.148" y="147.057" width="23.8854" height="12.9318"/>
+  <object id="92" template="../../../../common/maps/obj/collision.tx" x="267.193" y="83.2842" width="23.8854" height="12.9318"/>
+  <object id="93" template="../../../../common/maps/obj/collision.tx" x="267.33" y="115.602" width="23.8854" height="12.9318"/>
+  <object id="94" template="../../../../common/maps/obj/collision.tx" x="266.966" y="147.42" width="23.8854" height="12.9318"/>
+  <object id="95" template="../../../../common/maps/obj/collision.tx" x="315.375" y="82.9206" width="23.8854" height="12.9318"/>
+  <object id="96" template="../../../../common/maps/obj/collision.tx" x="315.512" y="115.239" width="23.8854" height="12.9318"/>
+  <object id="97" template="../../../../common/maps/obj/collision.tx" x="315.148" y="147.057" width="23.8854" height="12.9318"/>
+  <object id="98" template="../../../../common/maps/obj/collision.tx" x="305.724" y="240.201" width="27.8854" height="14.9318"/>
+  <object id="99" template="../../../../common/maps/obj/collision.tx" x="162.057" y="238.867" width="27.8854" height="14.9318"/>
+  <object id="100" template="../../../../common/maps/obj/collision.tx" x="144.148" y="17.4583" width="15.0369" height="28.4167"/>
+  <object id="101" template="../../../../common/maps/obj/collision.tx" x="336.148" y="18.4583" width="15.0369" height="28.4167"/>
+  <object id="102" template="../../../../common/maps/obj/collision.tx" x="323.815" y="0.79165" width="8.37023" height="13.75"/>
+  <object id="103" template="../../../../common/maps/obj/collision.tx" x="164.148" y="0.458333" width="8.37023" height="13.75"/>
+  <object id="104" template="../../../../common/maps/obj/scroll.tx" x="246.864" y="85.4545">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Hallowed Fountain&quot;, &quot;editions&quot;: [ &quot;DIS&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="105" template="../../../../common/maps/obj/collision.tx" x="274.815" y="30.4583" width="10.0369" height="16.0834"/>
+  <object id="106" template="../../../../common/maps/obj/collision.tx" x="211.982" y="30.9583" width="10.0369" height="16.0834"/>
+  <object id="107" template="../../../../common/maps/obj/collision.tx" x="274.891" y="64.0492" width="10.0369" height="16.0834"/>
+  <object id="108" template="../../../../common/maps/obj/collision.tx" x="210.891" y="63.9583" width="10.0369" height="16.0834"/>
+ </objectgroup>
+</map>

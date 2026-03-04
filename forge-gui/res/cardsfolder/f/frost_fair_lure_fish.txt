@@ -2,13 +2,12 @@ Name:Frost Fair Lure Fish
 ManaCost:5 U R
 Types:Creature Fish
 PT:7/7
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create two 1/1 blue Fish creature tokens and two tapped Treasure tokens.
-SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ u_1_1_fish | TokenOwner$ You | ChangeZoneTable$ True | SubAbility$ DBToken
-SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | TokenTapped$ True | TokenOwner$ You | SubAbility$ DBResolve
-SVar:DBResolve:DB$ ChangeZoneResolve
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create two 1/1 blue Fish creature tokens and create two tapped Treasure tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ u_1_1_fish | TokenOwner$ You | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | TokenTapped$ True | TokenOwner$ You
 S:Mode$ Continuous | Affected$ Fish.YouCtrl | AddKeyword$ Haste | Description$ Fish you control have haste and can't be blocked by Humans.
 S:Mode$ CantBlockBy | ValidAttacker$ Fish.YouCtrl | ValidBlocker$ Creature.Human | Secondary$ True | Description$ Fish you control have haste and can't be blocked by Humans.
 SVar:PlayMain1:TRUE
 DeckHints:Type$Fish
 K:Foretell:3 U R
-Oracle:When Frost Fair Lure Fish enters, create two 1/1 blue Fish creature tokens and two tapped Treasure tokens.\nFish you control have haste and can't be blocked by Humans.\nForetell {3}{U}{R}
+Oracle:When Frost Fair Lure Fish enters, create two 1/1 blue Fish creature tokens and create two tapped Treasure tokens.\nFish you control have haste and can't be blocked by Humans.\nForetell {3}{U}{R}

@@ -300,6 +300,7 @@ public class SoundSystem {
     public void resume() {
         shouldPlayMusic = true;
         updatePlayPause();
+        refreshVolume();
     }
 
     private void updatePlayPause() {

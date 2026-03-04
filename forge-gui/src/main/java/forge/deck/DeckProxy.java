@@ -656,7 +656,6 @@ public class DeckProxy implements InventoryItem {
         return decks;
     }
 
-    //todo custom starter decks in adventure
     public static List<DeckProxy> getAllCustomStarterDecks() {
         final List<DeckProxy> decks = new ArrayList<>();
         final IStorage<Deck> easy = FModel.getDecks().getCustomStarterDecks();

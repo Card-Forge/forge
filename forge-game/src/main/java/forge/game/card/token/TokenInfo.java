@@ -10,7 +10,6 @@ import forge.card.ColorSet;
 import forge.card.GamePieceType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -118,7 +117,7 @@ public class TokenInfo {
         c.setName(name);
         c.setImageKey(ImageKeys.getTokenKey(imageName));
 
-        c.setColor(color == null ? ColorSet.fromManaCost(new ManaCost(new ManaCostParser(manaCost))) : color);
+        c.setColor(color == null ? ColorSet.fromManaCost(new ManaCost(manaCost)) : color);
         c.setGamePieceType(GamePieceType.TOKEN);
 
         for (final String t : types) {
