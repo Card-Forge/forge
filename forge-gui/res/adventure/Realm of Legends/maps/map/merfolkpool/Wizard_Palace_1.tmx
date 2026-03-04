@@ -183,8 +183,7 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
   <object id="137" template="../../../../common/maps/obj/scroll.tx" x="18.5" y="519.5">
    <properties>
     <property name="reward">[ { &quot;type&quot;: &quot;card&quot;, 
-&quot;cardName&quot;: &quot;A-Base Camp &quot;, 
-&quot;editions&quot;: [ &quot;ZNR&quot; ],
+&quot;cardName&quot;: &quot;Umara Wizard&quot;,
 &quot;count&quot;: 1 } ]</property>
    </properties>
   </object>
