@@ -6,6 +6,7 @@ import forge.gamemodes.net.event.NetEvent;
 import io.netty.channel.Channel;
 
 import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public final class RemoteClient implements IToClient {
 
@@ -16,6 +17,7 @@ public final class RemoteClient implements IToClient {
     private String username;
     private int index = UNASSIGNED_SLOT;  // Initialize to -1 to indicate not yet assigned
     private volatile ReplyPool replies = new ReplyPool();
+    private final AtomicInteger sendErrors = new AtomicInteger(0);
 
     public RemoteClient(final Channel channel) {
         this.channel = channel;
@@ -44,6 +46,7 @@ public final class RemoteClient implements IToClient {
         try {
             channel.writeAndFlush(event).sync();
         } catch (Exception e) {
+            sendErrors.incrementAndGet();
             e.printStackTrace();
         }
     }
@@ -69,6 +72,10 @@ public final class RemoteClient implements IToClient {
     }
     public void setIndex(final int index) {
         this.index = index;
+    }
+
+    public int getSendErrorCount() {
+        return sendErrors.get();
     }
 
     ReplyPool getReplyPool() {

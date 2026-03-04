@@ -2431,9 +2431,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void useMana(final byte mana) {
-        final Input input = inputQueue.getInput();
-        if (input instanceof InputPayMana) {
-            ((InputPayMana) input).useManaFromPool(mana);
+        if (inputQueue.getInput() instanceof InputPayMana ipm) {
+            ipm.useManaFromPool(mana);
         }
     }
 

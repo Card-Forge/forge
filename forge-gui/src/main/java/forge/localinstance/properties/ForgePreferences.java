@@ -371,7 +371,6 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
     /** Instantiates a ForgePreferences object. */
     public ForgePreferences() {
         super(ForgeConstants.MAIN_PREFS_FILE, FPref.class);
-        migrateShortcutDefaults();
         migrateLogVerbosity();
     }
 
@@ -430,24 +429,6 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         }
         setPref(FPref.DEV_LOG_CUSTOM_TYPES, sj.toString());
         save();
-    }
-
-    /**
-     * Migrates shortcut preferences from old defaults to new Ctrl+key defaults.
-     * Previously, Concede/EndTurn/AlphaStrike had configurable shortcuts that
-     * differed from their hardcoded menu accelerators. Now the menu accelerators
-     * are driven by the configurable preferences, so the defaults must match.
-     */
-    private void migrateShortcutDefaults() {
-        migrateIfOldDefault(FPref.SHORTCUT_CONCEDE, "17", "17 81");
-        migrateIfOldDefault(FPref.SHORTCUT_ENDTURN, "69", "17 69");
-        migrateIfOldDefault(FPref.SHORTCUT_ALPHASTRIKE, "65", "17 65");
-    }
-
-    private void migrateIfOldDefault(final FPref pref, final String oldDefault, final String newDefault) {
-        if (oldDefault.equals(getPref(pref))) {
-            setPref(pref, newDefault);
-        }
     }
 
     @Override

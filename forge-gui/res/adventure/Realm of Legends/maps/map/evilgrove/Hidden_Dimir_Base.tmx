@@ -12,7 +12,7 @@
  <tileset firstgid="22017" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
  <layer id="13" name="Background" width="45" height="28">
   <data encoding="base64" compression="zlib">
-   eJzt1kEKwkAMBdCeokvxCoLW4sqVJ/FYbr2KN3IvoQS+02aaSdqMih/+QjrQN0Nr2jTTOXfvvR/G5Vz7oVNr1qgmreDhRFm55NE02vVrZulZoOLvXLz39Ty3n5I5c/r/IDUyz13+utas2U/Evi/7Zc3aWP3kpf4TEz7viG76oXPrtt3QSJvXTGsizDgL2GYtn7N0HZPOIOts9Zpz5Zmczh3NDK2xj3bCrJ37nu8brxe/fWp8n1m8Nc1Wby1ziS/t41jPjHaKxkxeNJe8Y2u8j1pvqVmK1cz3RxvvAY1pMbfTuBoz2kv2kHNpzGxM7dqzLjl/jPY8Pff1mqWg8xvMXuOSQadlz1Jeba0e5A==
+   eJzt1kEKwjAQBdCeokvxCoLW4sqVJ/FYbr2KN3IvQxgY0yT9k2knKn74C2mgL6F12nXpnIf33g/Tcq5jaGrNGkXSZzwcLyuXPEi9Xb9mzj0LVPm7FOt9Lc/tp2TOHP8/5OqZ5658HTUj+/HY92W/rBlNrZ+81H98wuft0c0YOrduO4R62qxmWuNhlrOAbbXlc85dl4lnUO1stZpL5Zkczx1khrbYR58wo3Pf8n1j9cpvnxbfZzXeluZabyuzxhf3cWxnlnYKYiavNGvesTXeR9SrNedSa+b7SxvvQRrjytxO0yJmadfsoeRCzGyM7ehZa85fBj1Py32t5lyk8xvMVuOS0ZyzJi+xmB++
   </data>
  </layer>
  <layer id="10" name="Ground" width="45" height="28">
@@ -78,7 +78,7 @@
    </properties>
   </object>
   <object id="106" template="../../../../common/maps/obj/gold.tx" x="4.61251" y="166.867"/>
-  <object id="111" template="../../../../common/maps/obj/entry_up.tx" x="368.955" y="447.736" width="80" height="16">
+  <object id="111" template="../../../../common/maps/obj/entry_up.tx" x="367.864" y="446.281" width="80" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>

@@ -229,7 +229,7 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
   </object>
   <object id="141" template="../../../../common/maps/obj/scroll.tx" x="244.5" y="302">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Chicken à la King&quot;, &quot;editions&quot;: [ &quot;UGL&quot; ], &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Chicken Egg&quot;, &quot;editions&quot;: [ &quot;UGL&quot; ], &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
   <object id="142" template="../../../../common/maps/obj/scroll.tx" x="506.5" y="127.5">
