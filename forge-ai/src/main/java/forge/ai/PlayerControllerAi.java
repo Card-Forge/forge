@@ -1214,16 +1214,23 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CostDecisionMakerBase getCostDecisionMaker(Player player, SpellAbility ability, boolean effect, String prompt) {
-        return new AiCostDecision(player, ability, effect);
-    }
-
-    @Override
     public boolean payCombatCost(Card c, Cost cost, SpellAbility sa, String prompt) {
         if (ComputerUtil.playNoStack(c.getController(), sa, getGame(), true)) {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public CardCollectionView chooseCardsForCost(CardCollectionView optionList, SpellAbility sa, CostPartWithList cpl, int amount, String actionName) {
+        assert(false);
+        //Untested placeholder. The AI does not currently pay like this.
+        return cpl.accept(new AiCostDecision(player, sa, true)).cards;
+    }
+
+    @Override
+    public CostDecisionMakerBase getCostDecisionMaker(Player player, SpellAbility ability, boolean effect, String prompt) {
+        return new AiCostDecision(player, ability, effect);
     }
 
     @Override

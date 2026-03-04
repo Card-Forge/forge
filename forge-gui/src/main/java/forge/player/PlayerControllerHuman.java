@@ -21,10 +21,7 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
-import forge.game.cost.Cost;
-import forge.game.cost.CostDecisionMakerBase;
-import forge.game.cost.CostPart;
-import forge.game.cost.CostPartMana;
+import forge.game.cost.*;
 import forge.game.event.GameEventPlayerStatsChanged;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
@@ -2287,6 +2284,21 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public boolean payManaCost(final ManaCost toPay, final CostPartMana costPartMana, final SpellAbility sa,
                                final String prompt, ManaConversionMatrix matrix, final boolean effect) {
         return HumanPlay.payManaCost(this, toPay, costPartMana, sa, player, prompt, matrix, effect);
+    }
+
+    @Override
+    public CardCollectionView chooseCardsForCost(CardCollectionView optionList, SpellAbility sa, CostPartWithList cpl, int amount, String actionName) {
+        InputSelectCardsFromList inp = new InputSelectCardsFromList(this, amount, amount, optionList, sa);
+        String cardDesc = cpl.getDescriptiveType().equalsIgnoreCase("Card") ? "" : cpl.getDescriptiveType();
+        inp.setMessage(Localizer.getInstance().getMessage("lblSelectNSpecifyTypeCardsToAction", cardDesc, actionName));
+        inp.setCancelAllowed(true);
+
+        inp.showAndWait();
+
+        if(inp.hasCancelled() || inp.getSelected().size() != amount)
+            return null;
+
+        return new CardCollection(inp.getSelected());
     }
 
     @Override

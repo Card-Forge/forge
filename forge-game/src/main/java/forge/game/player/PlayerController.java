@@ -15,10 +15,7 @@ import forge.game.GameOutcome.AnteResult;
 import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.*;
 import forge.game.combat.Combat;
-import forge.game.cost.Cost;
-import forge.game.cost.CostDecisionMakerBase;
-import forge.game.cost.CostPart;
-import forge.game.cost.CostPartMana;
+import forge.game.cost.*;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
@@ -315,6 +312,8 @@ public abstract class PlayerController {
         return payManaCost(costPartMana.getManaCostFor(sa), costPartMana, sa, prompt, matrix, effect);
     }
     public abstract boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt, ManaConversionMatrix matrix, boolean effect);
+    public abstract CardCollectionView chooseCardsForCost(CardCollectionView optionList, SpellAbility sa, CostPartWithList cpl, int amount, String actionName);
+
     public CostDecisionMakerBase getCostDecisionMaker(Player player, SpellAbility ability, boolean effect) {
         return this.getCostDecisionMaker(player, ability, effect, null);
     }

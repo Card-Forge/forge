@@ -21,7 +21,6 @@ import forge.game.staticability.StaticAbilityManaConvert;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.input.InputPayMana;
 import forge.gamemodes.match.input.InputPayManaOfCostPayment;
-import forge.gamemodes.match.input.InputSelectCardsFromList;
 import forge.gui.FThreads;
 import forge.gui.util.SGuiChoose;
 import forge.util.Aggregates;
@@ -397,18 +396,11 @@ public class HumanPlay {
         if (list.size() < amount)
             return false; // unable to pay (not enough cards)
 
-        InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, amount, amount, list, sourceAbility);
-        String cardDesc = cpl.getDescriptiveType().equalsIgnoreCase("Card") ? "" : cpl.getDescriptiveType();
-        inp.setMessage(Localizer.getInstance().getMessage("lblSelectNSpecifyTypeCardsToAction", cardDesc, actionName));
-        inp.setCancelAllowed(true);
-
-        inp.showAndWait();
-        if (inp.hasCancelled() || inp.getSelected().size() != amount) {
+        CardCollectionView chosen = controller.chooseCardsForCost(list, sourceAbility, cpl, amount, actionName);
+        if(chosen == null)
             return false;
-        }
 
-        cpl.payAsDecided(p, PaymentDecision.card(inp.getSelected()), sourceAbility, effect);
-
+        cpl.payAsDecided(p, PaymentDecision.card(chosen), sourceAbility, effect);
         return true;
     }
 
