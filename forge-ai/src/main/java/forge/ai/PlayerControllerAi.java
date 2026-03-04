@@ -1214,7 +1214,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CostDecisionMakerBase getCostDecisionMaker(Player player, SpellAbility ability, boolean effect) {
+    public CostDecisionMakerBase getCostDecisionMaker(Player player, SpellAbility ability, boolean effect, String prompt) {
         return new AiCostDecision(player, ability, effect);
     }
 

@@ -29,17 +29,14 @@ import java.util.*;
 
 public class HumanCostDecision extends CostDecisionMakerBase {
     private final PlayerControllerHuman controller;
-    private String orString = null;
+    private final String orString;
     private boolean mandatory;
 
-    public HumanCostDecision(final PlayerControllerHuman controller, final Player p, final SpellAbility sa, final boolean effect) {
-        this(controller, p, sa, effect, sa.getHostCard(), null);
-    }
-    public HumanCostDecision(final PlayerControllerHuman controller, final Player p, final SpellAbility sa, final boolean effect, final Card source, final String orString) {
-        super(p, effect, sa, source);
+    public HumanCostDecision(final PlayerControllerHuman controller, final Player p, final SpellAbility sa, final boolean effect, String prompt) {
+        super(p, effect, sa, sa.getHostCard());
         this.controller = controller;
         mandatory = sa.getPayCosts().isMandatory();
-        this.orString = orString;
+        this.orString = HumanPlay.getOrStringFromCost(ability, prompt);
     }
 
     @Override

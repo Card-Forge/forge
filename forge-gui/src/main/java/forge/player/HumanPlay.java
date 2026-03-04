@@ -14,6 +14,7 @@ import forge.game.mana.ManaCostBeingPaid;
 import forge.game.mana.ManaRefundService;
 import forge.game.player.PlaySpellAbility;
 import forge.game.player.Player;
+import forge.game.player.PlayerController;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityManaConvert;
@@ -79,11 +80,11 @@ public class HumanPlay {
      * payCostDuringAbilityResolve.
      * </p>
      *
-     * @param cost
-     *            a {@link forge.game.cost.Cost} object.
+     * @param cost          a {@link Cost} object.
      * @param sourceAbility TODO
      */
-    public static boolean payCostDuringAbilityResolve(final PlayerControllerHuman controller, final Player p, final Card source, final Cost cost, SpellAbility sourceAbility, String prompt) {
+    public static boolean payCostDuringAbilityResolve(final PlayerController controller, final Player p, final Cost cost, SpellAbility sourceAbility, String prompt) {
+        final Card source = sourceAbility.getHostCard();
         // Only human player pays this way
         Card current = null; // Used in spells with RepeatEach effect to distinguish cards, Cut the Tethers
         if (sourceAbility.hasParam("ShowCurrentCard")) {
@@ -97,19 +98,7 @@ public class HumanPlay {
         if (!parts.isEmpty()) {
             costPart = parts.get(0);
         }
-        String orString;
-        if (sourceAbility.hasParam("OrString")) {
-            orString = sourceAbility.getParam("OrString");
-        } else {
-            orString = prompt == null ? sourceAbility.getStackDescription().trim() : "";
-        }
-        if (!orString.isEmpty()) {
-            if (sourceAbility.hasParam("UnlessSwitched")) {
-                orString = TextUtil.concatWithSpace(" (" + Localizer.getInstance().getMessage("lblIfYouDo") + ":", orString + ")");
-            } else {
-                orString = TextUtil.concatWithSpace(" (" + Localizer.getInstance().getMessage("lblOr") + ":", orString, ")");
-            }
-        }
+        String orString = getOrStringFromCost(sourceAbility, prompt);
 
         if (parts.isEmpty() || (costPart.getAmount().equals("0") && parts.size() < 2)) {
             return p.getController().confirmPayment(costPart, Localizer.getInstance().getMessage("lblDoYouWantPay") + " {0}?" + orString, sourceAbility);
@@ -121,7 +110,7 @@ public class HumanPlay {
             }
         }
 
-        final HumanCostDecision hcd = new HumanCostDecision(controller, p, sourceAbility, true, source, orString);
+        final CostDecisionMakerBase hcd = controller.getCostDecisionMaker(p, sourceAbility, true, prompt);
         boolean mandatory = cost.isMandatory();
 
         //the following costs do not need inputs
@@ -176,7 +165,7 @@ public class HumanPlay {
                     ZoneType zone = costExile.getFrom().get(0);
                     prompt = ZoneType.Graveyard.equals(zone) ? "lblDoYouWantExileAllCardYouGraveyard" :
                         "lblDoYouWantExileAllCardHand";
-                    if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage(prompt), 
+                    if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage(prompt),
                         sourceAbility)) return false;
                     costExile.payAsDecided(p, PaymentDecision.card(p.getCardsIn(zone)), sourceAbility, hcd.isEffect());
                 } else {
@@ -387,8 +376,26 @@ public class HumanPlay {
         return paid;
     }
 
-    private static boolean payCostPart(final PlayerControllerHuman controller, Player p, SpellAbility sourceAbility, boolean effect, CostPartWithList cpl, int amount, CardCollectionView list, String actionName) {
-        if (list.size() < amount) { return false; } // unable to pay (not enough cards)
+    public static String getOrStringFromCost(SpellAbility sourceAbility, String prompt) {
+        String orString;
+        if (sourceAbility.hasParam("OrString")) {
+            orString = sourceAbility.getParam("OrString");
+        } else {
+            orString = prompt == null ? sourceAbility.getStackDescription().trim() : "";
+        }
+        if (!orString.isEmpty()) {
+            if (sourceAbility.hasParam("UnlessSwitched")) {
+                return TextUtil.concatWithSpace(" (" + Localizer.getInstance().getMessage("lblIfYouDo") + ":", orString + ")");
+            } else {
+                return TextUtil.concatWithSpace(" (" + Localizer.getInstance().getMessage("lblOr") + ":", orString, ")");
+            }
+        }
+        return orString;
+    }
+
+    private static boolean payCostPart(final PlayerController controller, Player p, SpellAbility sourceAbility, boolean effect, CostPartWithList cpl, int amount, CardCollectionView list, String actionName) {
+        if (list.size() < amount)
+            return false; // unable to pay (not enough cards)
 
         InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, amount, amount, list, sourceAbility);
         String cardDesc = cpl.getDescriptiveType().equalsIgnoreCase("Card") ? "" : cpl.getDescriptiveType();

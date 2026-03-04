@@ -1611,7 +1611,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (cost.isOnlyManaCost() && cost.getTotalMana().isZero() && isFullControl(FullControlFlag.NoFreeCombatCostHandling)) {
             return true;
         }
-        return HumanPlay.payCostDuringAbilityResolve(this, player, c, cost, sa, prompt);
+        return HumanPlay.payCostDuringAbilityResolve(this, player, cost, sa, prompt);
     }
 
     @Override
@@ -1959,13 +1959,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         } else if (sa.isKeyword(Keyword.CUMULATIVE_UPKEEP)) {
             prompt = "Cumulative upkeep for " + sa.getHostCard();
         }
-        return HumanPlay.payCostDuringAbilityResolve(this, player, sa.getHostCard(), cost, sa, prompt);
+        return HumanPlay.payCostDuringAbilityResolve(this, player, cost, sa, prompt);
     }
 
     @Override
     public boolean payCostDuringRoll(final Cost cost, final SpellAbility sa) {
         // if it's paid by the AI already the human can pay, but it won't change anything
-        return HumanPlay.payCostDuringAbilityResolve(this, player, sa.getHostCard(), cost, sa, null);
+        return HumanPlay.payCostDuringAbilityResolve(this, player, cost, sa, null);
     }
 
     // stores saved order for different sets of SpellAbilities
@@ -2290,8 +2290,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public CostDecisionMakerBase getCostDecisionMaker(Player player, SpellAbility ability, boolean effect) {
-        return new HumanCostDecision(this, player, ability, effect);
+    public CostDecisionMakerBase getCostDecisionMaker(Player player, SpellAbility ability, boolean effect, String prompt) {
+        return new HumanCostDecision(this, player, ability, effect, prompt);
     }
 
     @Override
