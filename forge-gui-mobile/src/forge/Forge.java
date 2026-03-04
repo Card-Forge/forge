@@ -130,7 +130,7 @@ public class Forge implements ApplicationListener {
     private static Localizer localizer;
     private static boolean desktopAutoOrientation = true;
 
-    public static ApplicationListener getApp(HWInfo hwInfo, Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean propertyConfig, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI) {
+    public static ApplicationListener getApp(HWInfo hwInfo, Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean propertyConfig, boolean androidOrientation, boolean isTablet, int AndroidAPI) {
         if (app == null) {
             app = new Forge();
             if (GuiBase.getInterface() == null) {
@@ -141,11 +141,11 @@ public class Forge implements ApplicationListener {
                 GuiBase.setInterface(new GuiMobile(assetDir0));
                 GuiBase.enablePropertyConfig(propertyConfig);
                 isPortraitMode = androidOrientation;
-                totalDeviceRAM = totalRAM;
                 isTabletDevice = isTablet;
                 androidVersion = AndroidAPI;
             }
             if (hwInfo != null) {
+                totalDeviceRAM = hwInfo.getTotalRam();
                 Sentry.configureScope(ScopeType.GLOBAL, scope -> {
                     scope.getContexts().setDevice(hwInfo.device());
                     scope.getContexts().setOperatingSystem(hwInfo.os());
@@ -188,14 +188,6 @@ public class Forge implements ApplicationListener {
         frameRate = new FrameRate();
         animationBatch = new SpriteBatch();
         inputProcessor = new MainInputProcessor();
-        //screenWidth and screenHeight should be set initially and only change upon restarting the app
-        screenWidth = Gdx.app.getGraphics().getWidth();
-        screenHeight = Gdx.app.getGraphics().getHeight();
-
-        // Desktop default: auto-detect from initial window/backbuffer aspect ratio
-        if (!GuiBase.isAndroid() && desktopAutoOrientation) {
-            isPortraitMode = screenHeight > screenWidth;
-        }
 
         Gdx.input.setInputProcessor(inputProcessor);
         /*
@@ -208,12 +200,20 @@ public class Forge implements ApplicationListener {
         destroyThis = true; //Prevent back()
         if (Files.exists(Paths.get(ForgeConstants.DEFAULT_SKINS_DIR+ForgeConstants.ADV_TEXTURE_BG_FILE)))
             selector = getForgePreferences().getPref(FPref.UI_SELECTOR_MODE);
-        boolean landscapeMode = !isPortraitMode;
+
+        //screenWidth and screenHeight should be set initially and only change upon restarting the app
+        screenWidth = Gdx.app.getGraphics().getWidth();
+        screenHeight = Gdx.app.getGraphics().getHeight();
+        // Desktop default: auto-detect from initial window/backbuffer aspect ratio
+        if (!GuiBase.isAndroid() && desktopAutoOrientation) {
+            isPortraitMode = screenHeight > screenWidth;
+        }
         //update landscape mode preference if it doesn't match what the app loaded as
-        if (getForgePreferences().getPrefBoolean(FPref.UI_LANDSCAPE_MODE) != landscapeMode) {
-            getForgePreferences().setPref(FPref.UI_LANDSCAPE_MODE, landscapeMode);
+        if (getForgePreferences().getPrefBoolean(FPref.UI_LANDSCAPE_MODE) != isLandscapeMode()) {
+            getForgePreferences().setPref(FPref.UI_LANDSCAPE_MODE, isLandscapeMode());
             getForgePreferences().save();
         }
+
         String skinName;
         if (FileUtil.doesFileExist(ForgeConstants.MAIN_PREFS_FILE)) {
             skinName = getForgePreferences().getPref(FPref.UI_SKIN);

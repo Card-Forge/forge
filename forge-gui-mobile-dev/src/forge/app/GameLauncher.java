@@ -34,7 +34,6 @@ public class GameLauncher {
         Configuration.STACK_SIZE.set(1024);
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
         HWInfo hw = null;
-        int totalRAM = 0;
         try {
             SystemInfo si = new SystemInfo();
             // Device Info
@@ -52,7 +51,6 @@ public class GameLauncher {
             os.setVersion(si.getOperatingSystem().getVersionInfo().getVersion());
             os.setBuild(si.getOperatingSystem().getVersionInfo().getBuildNumber());
             os.setRawDescription(si.getOperatingSystem() + " x" + si.getOperatingSystem().getBitness());
-            totalRAM = Math.round(si.getHardware().getMemory().getTotal() / 1024f / 1024f);
             hw = new HWInfo(device, os, false);
         } catch (Exception e) {
              e.printStackTrace();
@@ -70,11 +68,7 @@ public class GameLauncher {
             else if(arg.equalsIgnoreCase("landscape")) landscapeArg = true;
         }
 
-        boolean hasAnyDimArg = (widthArg != null || heightArg != null);
-        boolean hasBothDims = (widthArg != null && heightArg != null);
-
-        boolean manualWindowSize = hasAnyDimArg;
-        
+        boolean hasBothDims = widthArg != null && heightArg != null;
         // Only disable desktop auto-orientation when the user *really* overrides it
         boolean overrideOrientation = portraitArg || landscapeArg || hasBothDims;
         Forge.setDesktopAutoOrientation(!overrideOrientation);
@@ -83,13 +77,16 @@ public class GameLauncher {
         boolean isPortrait = false;
         if (portraitArg) isPortrait = true;
         else if (landscapeArg) isPortrait = false;
-        else if (hasBothDims) isPortrait = (heightArg > widthArg);
+        else if (hasBothDims) isPortrait = heightArg > widthArg;
+
+        ApplicationListener start = Forge.getApp(hw, new Lwjgl3Clipboard(), new Main.DesktopAdapter(switchOrientationFile),
+            assetsDir, false, isPortrait, false, 0);
 
         // Initialize window size
-        int windowWidth = 0, windowHeight = 0;
+        int windowWidth, windowHeight;
 
-        if (manualWindowSize) {
-            float aspect = getPrimaryScreenAspect(); // width/height
+        if (widthArg != null || heightArg != null) {
+            float aspect = getPrimaryScreenAspect();
 
             // If explicit portrait/landscape requested, coerce aspect direction
             if (portraitArg && aspect > 1f) aspect = 1f / aspect;
@@ -105,39 +102,13 @@ public class GameLauncher {
                 windowWidth = widthArg;
                 windowHeight = heightArg;
             }
-
-            // If user explicitly overrode orientation (portrait/landscape or both dims), normalize by swapping
-            if (overrideOrientation) {
-                if (isPortrait && windowHeight < windowWidth) {
-                    int tmp = windowHeight; windowHeight = windowWidth; windowWidth = tmp;
-                } else if (!isPortrait && windowWidth < windowHeight) {
-                    int tmp = windowHeight; windowHeight = windowWidth; windowWidth = tmp;
-                }
-            }
-        }
-
-        ApplicationListener start = Forge.getApp(hw, new Lwjgl3Clipboard(), new Main.DesktopAdapter(switchOrientationFile),
-            assetsDir, false, isPortrait, totalRAM, false, 0);
-
-        // Final window size adjustment
-        if (!manualWindowSize) {
-            // If no manual window size is supplied, get it from settings
+        } else {
             windowWidth = Config.instance().getSettingData().width;
             windowHeight = Config.instance().getSettingData().height;
-            if (portraitArg || landscapeArg) {
-                // If the user asked for a specific orientation, double check the settings match.
-                if (isPortrait && (windowHeight < windowWidth)) {
-                    // swap width/height
-                    int tmp = windowHeight;
-                    windowHeight = windowWidth;
-                    windowWidth = tmp;
-                } else if (!isPortrait && (windowWidth < windowHeight)) {
-                    // swap width/height
-                    int tmp = windowHeight;
-                    windowHeight = windowWidth;
-                    windowWidth = tmp;
-                }
-            }
+        }
+        // If user explicitly overrode orientation, normalize by swapping
+        if (overrideOrientation && isPortrait == windowHeight < windowWidth) {
+            int tmp = windowHeight; windowHeight = windowWidth; windowWidth = tmp;
         }
 
         if (Config.instance().getSettingData().fullScreen) {
