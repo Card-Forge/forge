@@ -20,7 +20,7 @@ Types:Legendary Creature Phyrexian Elder Dinosaur
 PT:11/11
 K:Trample
 K:Indestructible
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPoison | SpellDescription$ Whenever CARDNAME deals combat damage to a player, they get that many poison counters. (A player with ten or more poison counters loses the game.)
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPoison | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, they get that many poison counters. (A player with ten or more poison counters loses the game.)
 SVar:TrigPoison:DB$ Poison | Defined$ TriggeredTarget | Num$ X
 SVar:X:TriggerCount$DamageAmount
 Oracle:Trample, indestructible\nWhenever Etali, Primal Sickness deals combat damage to a player, they get that many poison counters. (A player with ten or more poison counters loses the game.)
