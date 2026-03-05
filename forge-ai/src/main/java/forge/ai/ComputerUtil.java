@@ -634,6 +634,9 @@ public class ComputerUtil {
                 if (exileTgt.isInPlay() && exileTgt.getCMC() >= 3) toRemove.add(exileTgt);
             }
             typeList.removeAll(toRemove);
+
+            // TODO sort flashback and the like to end
+
             if (typeList.size() < amount) return null;
 
             // FIXME: This is suboptimal, maybe implement a single comparator that'll take care of all of this?
@@ -645,12 +648,8 @@ public class ComputerUtil {
                 else return 0;
             }); // something that's not on the battlefield should come first
         }
-        final CardCollection exileList = new CardCollection();
 
-        for (int i = 0; i < amount; i++) {
-            exileList.add(typeList.get(i));
-        }
-        return exileList;
+        return typeList.subList(0, amount);
     }
 
     public static CardCollection choosePutToLibraryFrom(final Player ai, final ZoneType zone, final String type, final Card activate,
