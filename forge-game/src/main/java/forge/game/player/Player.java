@@ -2565,14 +2565,11 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public void addController(long timestamp, Player pl, PlayerController pc, boolean event) {
-        final LobbyPlayer oldLobbyPlayer = getLobbyPlayer();
-        final PlayerController oldController = getController();
-
         controlledBy.put(timestamp, Pair.of(pl, pc));
         getView().updateMindSlaveMaster(this);
 
         if (event) {
-            game.fireEvent(new GameEventPlayerControl(this, oldLobbyPlayer, oldController, getLobbyPlayer(), getController()));
+            game.fireEvent(new GameEventPlayerControl(getView(), getLobbyPlayer().getName(), getController().isAI()));
         }
     }
 
@@ -2580,20 +2577,17 @@ public class Player extends GameEntity implements Comparable<Player> {
         removeController(timestamp, true);
     }
     public void removeController(long timestamp, boolean event) {
-        final LobbyPlayer oldLobbyPlayer = getLobbyPlayer();
-        final PlayerController oldController = getController();
-
         controlledBy.remove(timestamp);
         getView().updateMindSlaveMaster(this);
 
         if (event) {
-            game.fireEvent(new GameEventPlayerControl(this, oldLobbyPlayer, oldController, getLobbyPlayer(), getController()));
+            game.fireEvent(new GameEventPlayerControl(getView(), getLobbyPlayer().getName(), getController().isAI()));
         }
     }
 
     public void clearController() {
         controlledBy.clear();
-        game.fireEvent(new GameEventPlayerControl(this, null, null, getLobbyPlayer(), getController()));
+        game.fireEvent(new GameEventPlayerControl(getView(), getLobbyPlayer().getName(), getController().isAI()));
     }
 
     /** Clear mind-control state without firing events (used during game-over cleanup). */
