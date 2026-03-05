@@ -1,0 +1,23 @@
+Name:Liliana's Other Contract
+ManaCost:4 B
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, you draw three cards and you lose 3 life.
+SVar:TrigDraw:DB$ Draw | NumCards$ 3 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 3
+R:Event$ GameLoss | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ DBTransform | Description$ If you would lose the game, instead exile CARDNAME, then return it to the battlefield transformed under your control.
+SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | GainControl$ True | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AlternateMode:DoubleFaced
+Oracle:When Liliana's Other Contract enters the battlefield, you draw three cards and you lose 3 life.\nIf you would lose the game, instead exile Liliana's Other Contract, then return it to the battlefield transformed under your control.
+
+ALTERNATE
+
+Name:Liliana's Undead Minion
+ManaCost:no cost
+Types:Legendary Planeswalker You
+Loyalty:5
+R:Event$ GameLoss | ActiveZones$ Battlefield | ValidPlayer$ You | Layer$ CantHappen | Description$ You can't lose the game and your opponents can't win the game.
+A:AB$ LoseLife | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Defined$ Player.Opponent | LifeAmount$ 1  | SpellDescription$ Each opponent loses 1 life.
+A:AB$ Destroy | Cost$ SubCounter<4/LOYALTY> | ValidTgts$ Creature | Planeswalker$ True | SpellDescription$ Destroy target creature.
+Oracle:You can't lose the game.\n[+1]: Each opponent loses 1 life.\n[-4]: Destroy target creature.
