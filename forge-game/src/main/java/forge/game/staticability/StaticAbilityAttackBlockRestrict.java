@@ -105,6 +105,8 @@ public class StaticAbilityAttackBlockRestrict {
     static public boolean validRestrictCommon(StaticAbility stAb, Card card, Collection<Card> others) {
         long size;
         if (stAb.hasParam("ValidOthers")) {
+            size = others.stream().filter(CardPredicates.restriction(stAb.getParam("ValidOthers").split(","), stAb.getHostCard().getController(), stAb.getHostCard(), stAb)).count();
+        } else if (stAb.hasParam("ValidOthersRelative")) {
             size = others.stream().filter(CardPredicates.restriction(stAb.getParam("ValidOthers").split(","), card.getController(), card, stAb)).count();
         } else {
             size = others.size();
