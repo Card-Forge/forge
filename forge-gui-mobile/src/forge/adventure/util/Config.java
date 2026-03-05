@@ -56,7 +56,6 @@ public class Config {
     }
 
     private Config() {
-
         String path = resPath();
         FilenameFilter planesFilter = (file, s) -> (!s.contains(".") && !s.equals(commonDirectoryName));
 
