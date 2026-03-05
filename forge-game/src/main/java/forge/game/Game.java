@@ -552,7 +552,7 @@ public class Game {
 
     public synchronized void setGameOver(GameEndReason reason) {
         for (Player p : allPlayers) {
-            p.clearController();
+            p.clearControllerQuietly();
         }
         age = GameStage.GameOver;
 

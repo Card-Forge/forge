@@ -2596,6 +2596,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.fireEvent(new GameEventPlayerControl(this, null, null, getLobbyPlayer(), getController()));
     }
 
+    /** Clear mind-control state without firing events (used during game-over cleanup). */
+    public void clearControllerQuietly() {
+        controlledBy.clear();
+    }
+
     public Map.Entry<Long, Player> getControlledWhileSearching() {
         if (controlledWhileSearching.isEmpty()) {
             return null;
