@@ -2587,12 +2587,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public void clearController() {
         controlledBy.clear();
-        game.fireEvent(new GameEventPlayerControl(getView(), getLobbyPlayer().getName(), !getController().isAI()));
-    }
-
-    /** Clear mind-control state without firing events (used during game-over cleanup). */
-    public void clearControllerQuietly() {
-        controlledBy.clear();
+        game.fireEvent(new GameEventPlayerControl(getView(), null, !getController().isAI()));
     }
 
     public Map.Entry<Long, Player> getControlledWhileSearching() {
