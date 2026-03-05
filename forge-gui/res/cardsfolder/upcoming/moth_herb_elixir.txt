@@ -1,0 +1,9 @@
+Name:Moth Herb Elixir
+ManaCost:2
+Types:Artifact
+A:AB$ PutCounter | Cost$ T | CounterType$ ACQUIREDTASTE | SpellDescription$ Put an acquired taste counter on this artifact.
+A:AB$ Draw | Cost$ T Sac<1/CARDNAME/this artifact> | NumCards$ 2 | SpellDescription$ You draw two cards and lose 4 life. Then you gain 1 life for each acquired taste counter on this artifact. | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 4 | Defined$ You | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ X
+SVar:X:Count$CardCounters.ACQUIREDTASTE
+Oracle:{T}: Put an acquired taste counter on this artifact.\n{T}, Sacrifice this artifact: You draw two cards and lose 4 life. Then you gain 1 life for each acquired taste counter on this artifact.
