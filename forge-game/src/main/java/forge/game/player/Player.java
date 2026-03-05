@@ -2569,7 +2569,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         getView().updateMindSlaveMaster(this);
 
         if (event) {
-            game.fireEvent(new GameEventPlayerControl(getView(), getLobbyPlayer().getName(), getController().isAI()));
+            game.fireEvent(new GameEventPlayerControl(getView(), getLobbyPlayer().getName(), !getController().isAI()));
         }
     }
 
@@ -2581,13 +2581,13 @@ public class Player extends GameEntity implements Comparable<Player> {
         getView().updateMindSlaveMaster(this);
 
         if (event) {
-            game.fireEvent(new GameEventPlayerControl(getView(), getLobbyPlayer().getName(), getController().isAI()));
+            game.fireEvent(new GameEventPlayerControl(getView(), getLobbyPlayer().getName(), !getController().isAI()));
         }
     }
 
     public void clearController() {
         controlledBy.clear();
-        game.fireEvent(new GameEventPlayerControl(getView(), getLobbyPlayer().getName(), getController().isAI()));
+        game.fireEvent(new GameEventPlayerControl(getView(), getLobbyPlayer().getName(), !getController().isAI()));
     }
 
     /** Clear mind-control state without firing events (used during game-over cleanup). */
