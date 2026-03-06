@@ -540,8 +540,8 @@ public final class FServerManager {
 
         for (final Player p : game.getPlayers()) {
             final IGuiGame gui = hostedMatch.getGuiForPlayer(p);
-            if (gui instanceof NetGuiGame && ((NetGuiGame) gui).getSlotIndex() == slotIndex) {
-                ((NetGuiGame) gui).pause();
+            if (gui instanceof NetGuiGame ngg && ngg.getSlotIndex() == slotIndex) {
+                ngg.pause();
                 return;
             }
         }
@@ -558,8 +558,7 @@ public final class FServerManager {
         // so name matching is unreliable
         for (final Player p : game.getPlayers()) {
             final IGuiGame gui = hostedMatch.getGuiForPlayer(p);
-            if (gui instanceof NetGuiGame && ((NetGuiGame) gui).getSlotIndex() == slotIndex) {
-                final NetGuiGame netGui = (NetGuiGame) gui;
+            if (gui instanceof NetGuiGame netGui && netGui.getSlotIndex() == slotIndex) {
                 netGui.resume();
 
                 // Send current GameView before openView (matches HostedMatch.startGame() ordering)
