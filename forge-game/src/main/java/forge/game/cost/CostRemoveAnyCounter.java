@@ -80,13 +80,10 @@ public class CostRemoveAnyCounter extends CostPart {
         if (this.counter != null) {
             return validCards.stream().mapToInt(c -> c.canRemoveCounters(this.counter) ? c.getCounters(this.counter) : 0).sum();
         }
-        return validCards.stream().mapMultiToInt((c, s) -> {
-            for (Map.Entry<CounterType, Integer> entry : c.getCounters().entrySet()) {
-                if (c.canRemoveCounters(entry.getKey())) {
-                    s.accept(entry.getValue());
-                }
-            }
-        }).sum();
+        // use flatMap instead of mapMulti for Android 13 and below
+        //https://developer.android.com/reference/java/util/stream/Stream#mapMulti
+        return validCards.stream().flatMap(c -> c.getCounters().entrySet().stream().filter(e -> c.canRemoveCounters(e.getKey())))
+                .collect(Collectors.summingInt(e -> e.getValue()));
     }
 
     /*
