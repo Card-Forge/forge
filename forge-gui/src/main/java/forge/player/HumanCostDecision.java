@@ -1002,7 +1002,12 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         int c = cost.getAbilityAmount(ability);
         final String type = cost.getType();
 
-        CardCollectionView list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"), player, source, ability);
+        CardCollectionView list;
+        if (cost.payCostFromSource()) {
+            list = new CardCollection(ability.getHostCard());
+        } else {
+            list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"), player, source, ability);
+        }
         list = CardLists.filter(list, CardPredicates.hasCounters());
 
         final InputSelectCardToRemoveCounter inp = new InputSelectCardToRemoveCounter(controller, c, cost, cost.counter, list, ability);
@@ -1023,11 +1028,11 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         private final GameEntityCounterTable counterTable = new GameEntityCounterTable();
 
-        public InputSelectCardToRemoveCounter(final PlayerControllerHuman controller, final int cntCounters, final CostPart costPart, final CounterType cType, final CardCollectionView validCards, final SpellAbility sa) {
+        public InputSelectCardToRemoveCounter(final PlayerControllerHuman controller, final int cntCounters, final CostRemoveAnyCounter costPart, final CounterType cType, final CardCollectionView validCards, final SpellAbility sa) {
             super(controller, cntCounters, cntCounters, sa);
             this.validChoices = validCards;
             counterType = cType;
-            String fromWhat = costPart.getDescriptiveType();
+            String fromWhat = costPart.getDescriptiveType(false);
             if (fromWhat.equals("CARDNAME") || fromWhat.equals("NICKNAME")) {
                 fromWhat = sa.getHostCard().getTranslatedName();
             }
