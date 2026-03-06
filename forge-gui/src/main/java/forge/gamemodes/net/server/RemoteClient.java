@@ -1,6 +1,5 @@
 package forge.gamemodes.net.server;
 
-import forge.gamemodes.net.NetworkDebugLogger;
 import forge.gamemodes.net.ReplyPool;
 import forge.gamemodes.net.event.IdentifiableNetEvent;
 import forge.gamemodes.net.event.NetEvent;

@@ -36,7 +36,7 @@ public class DeltaSyncUnitTest {
 
         Map<TrackableProperty, Object> props2 = new HashMap<>();
         props2.put(TrackableProperty.Life, 20);
-        props2.put(TrackableProperty.PoisonCounters, 5);
+        props2.put(TrackableProperty.Toughness, 5);
         props2.put(TrackableProperty.MaxHandSize, 7);
         deltas.put(2, props2);
 
@@ -73,7 +73,7 @@ public class DeltaSyncUnitTest {
 
         Map<TrackableProperty, Object> newProps2 = new HashMap<>();
         newProps2.put(TrackableProperty.Life, 20);
-        newProps2.put(TrackableProperty.PoisonCounters, 0);
+        newProps2.put(TrackableProperty.Toughness, 0);
         newProps2.put(TrackableProperty.MaxHandSize, 7);
         newProps2.put(TrackableProperty.IsAI, false);
         newObjects.put(101, new DeltaPacket.NewObjectData(101, 1, newProps2));
