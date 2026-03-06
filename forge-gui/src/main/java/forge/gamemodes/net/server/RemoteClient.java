@@ -47,7 +47,7 @@ public final class RemoteClient implements IToClient {
             channel.writeAndFlush(event).sync();
         } catch (Exception e) {
             sendErrors.incrementAndGet();
-            Logger.error(e, "Network send error for {}", username);
+            Logger.error(e, "Network send error for {} (event: {})", username, event);
         }
     }
 
