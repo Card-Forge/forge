@@ -233,14 +233,8 @@ public class HeadlessNetworkClient implements AutoCloseable {
     void onDeltaPacketReceived(DeltaPacket packet) {
         deltaPacketsReceived.incrementAndGet();
 
-        // Estimate packet size (deltas + new objects)
-        int estimatedBytes = 0;
-        if (packet.getObjectDeltas() != null) {
-            for (byte[] delta : packet.getObjectDeltas().values()) {
-                estimatedBytes += delta.length;
-            }
-        }
-        totalDeltaBytes.addAndGet(estimatedBytes);
+        // Use the packet's own size estimation
+        totalDeltaBytes.addAndGet(packet.getApproximateSize());
 
         NetworkDebugLogger.log("%s Delta packet #%d: deltas=%d, new=%d, removed=%d, estimatedBytes=%d",
                 LOG_PREFIX,
@@ -248,7 +242,7 @@ public class HeadlessNetworkClient implements AutoCloseable {
                 packet.getObjectDeltas() != null ? packet.getObjectDeltas().size() : 0,
                 packet.getNewObjects() != null ? packet.getNewObjects().size() : 0,
                 packet.getRemovedObjectIds() != null ? packet.getRemovedObjectIds().size() : 0,
-                estimatedBytes);
+                packet.getApproximateSize());
     }
 
     // Called by DeltaLoggingGuiGame when full state sync received

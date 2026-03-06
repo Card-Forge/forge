@@ -41,7 +41,7 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
             if (method == null) {
                 //throw new IllegalStateException(String.format("Method %s not found", protocolMethod.name()));
                 catchedError[0] += String.format("IllegalStateException: Method %s not found (GameProtocolHandler.java Line 43)\n", protocolMethod.name());
-                System.err.printf("Method %s not found%n", protocolMethod.name());
+                NetworkDebugLogger.error("Method %s not found", protocolMethod.name());
             }
 
             final Object[] args = event.getObjects();
@@ -58,11 +58,11 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
                     try {
                         method.invoke(toInvoke, args);
                     } catch (final IllegalAccessException | IllegalArgumentException e) {
-                        System.err.printf("Unknown protocol method %s with %d args%n", methodName, args == null ? 0 : args.length);
+                        NetworkDebugLogger.error("Unknown protocol method %s with %d args", methodName, args == null ? 0 : args.length);
                     } catch (final InvocationTargetException e) {
                         //throw new RuntimeException(e.getTargetException());
                         catchedError[0] += (String.format("RuntimeException: %s (GameProtocolHandler.java Line 65)\n", e.getTargetException().toString()));
-                        System.err.println(e.getTargetException().toString());
+                        NetworkDebugLogger.error("InvocationTargetException: %s", e.getTargetException().toString());
                     }
                 } else {
                     Serializable reply = null;
@@ -72,15 +72,15 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
                             protocolMethod.checkReturnValue(theReply);
                             reply = (Serializable) theReply;
                         } else if (theReply != null) {
-                            System.err.printf("Non-serializable return type %s for method %s, returning null%n", returnType.getName(), methodName);
+                            NetworkDebugLogger.warn("Non-serializable return type %s for method %s, returning null", returnType.getName(), methodName);
                         }
                     } catch (final IllegalAccessException | IllegalArgumentException e) {
-                        System.err.printf("Unknown protocol method %s with %d args, replying with null%n", methodName, args == null ? 0 : args.length);
+                        NetworkDebugLogger.error("Unknown protocol method %s with %d args, replying with null", methodName, args == null ? 0 : args.length);
                     } catch (final NullPointerException | InvocationTargetException e) {
                         //throw new RuntimeException(e.getTargetException());
                         catchedError[0] += e.toString();
                         SOptionPane.showMessageDialog(catchedError[0], "Error", FSkinProp.ICO_WARNING);
-                        System.err.println(e.toString());
+                        NetworkDebugLogger.error("Protocol handler exception: %s", e.toString());
                     }
                     getRemote(ctx).send(new ReplyEvent(event.getId(), reply));
                 }
@@ -107,7 +107,6 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
         for (int i = 0; i < Math.min(stack.length, 10); i++) {
             NetworkDebugLogger.log("[ExceptionCaught]   at %s", stack[i].toString());
         }
-        cause.printStackTrace();
         ctx.close();
     }
 

@@ -123,7 +123,7 @@ public final class FServerManager {
         } else {
             startUPnP = UPnPOption.equalsIgnoreCase("ALWAYS");
         }
-        System.out.println("Starting Multiplayer Server");
+        NetworkDebugLogger.log("Starting Multiplayer Server");
         try {
             final ServerBootstrap b = new ServerBootstrap()
                     .group(bossGroup, workerGroup)
@@ -152,8 +152,7 @@ public final class FServerManager {
                 try {
                     ch.sync();
                 } catch (final InterruptedException e) {
-                    System.out.println(e.getMessage());
-                    e.printStackTrace();
+                    NetworkDebugLogger.error("Server channel error", e);
                 } finally {
                     stopServer();
                 }
@@ -164,8 +163,7 @@ public final class FServerManager {
             Runtime.getRuntime().addShutdownHook(shutdownHook);
             isHosting = true;
         } catch (final InterruptedException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+            NetworkDebugLogger.error("Server start interrupted", e);
         }
     }
 
@@ -391,8 +389,7 @@ public final class FServerManager {
         try {
             return getRoutableAddress(true, false);
         } catch (final Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+            NetworkDebugLogger.error("Failed to get local address", e);
             return "localhost";
         }
     }
@@ -405,15 +402,13 @@ public final class FServerManager {
                     whatismyip.openStream()));
             return in.readLine();
         } catch (IOException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+            NetworkDebugLogger.error("Failed to get external address", e);
         } finally {
             if (in != null) {
                 try {
                     in.close();
                 } catch (IOException e) {
-                    System.out.println(e.getMessage());
-                    e.printStackTrace();
+                    NetworkDebugLogger.error("Failed to close address reader", e);
                 }
             }
         }
@@ -449,8 +444,7 @@ public final class FServerManager {
                 }
             }, 5000);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+            NetworkDebugLogger.error("UPnP mapping error", e);
         }
     }
 
@@ -697,7 +691,7 @@ public final class FServerManager {
         public void channelActive(final ChannelHandlerContext ctx) throws Exception {
             final RemoteClient client = new RemoteClient(ctx.channel());
             clients.put(ctx.channel(), client);
-            System.out.println("Client connected to server at " + ctx.channel().remoteAddress());
+            NetworkDebugLogger.log("Client connected to server at %s", ctx.channel().remoteAddress());
             super.channelActive(ctx);
         }
 
@@ -805,7 +799,7 @@ public final class FServerManager {
                 final String name = client != null ? client.getUsername() : ctx.channel().remoteAddress().toString();
                 final String msg = name + " timed out after " + HEARTBEAT_TIMEOUT_SECONDS
                     + " seconds without a network response. Closing connection.";
-                System.out.println(msg);
+                NetworkDebugLogger.log(msg);
                 broadcast(new MessageEvent(msg));
                 ctx.close();
                 return;

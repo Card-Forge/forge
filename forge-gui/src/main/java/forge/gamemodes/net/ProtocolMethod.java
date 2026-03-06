@@ -140,7 +140,7 @@ public enum ProtocolMethod {
             }
             return candidate;
         } catch (final NoSuchMethodException | SecurityException e) {
-            System.err.printf("Warning: class contains no accessible method named %s%n", name());
+            NetworkDebugLogger.warn("Class contains no accessible method named %s", name());
             return getMethodNoArgs();
         }
     }
@@ -149,7 +149,7 @@ public enum ProtocolMethod {
         try {
             return mode.toInvoke.getMethod(name(), (Class<?>[]) null);
         } catch (final NoSuchMethodException | SecurityException e) {
-            System.err.printf("Warning: class contains no accessible arg-less method named %s%n", name());
+            NetworkDebugLogger.warn("Class contains no accessible arg-less method named %s", name());
             return null;
         }
     }
@@ -170,12 +170,11 @@ public enum ProtocolMethod {
                 final Class<?> type = this.args[iArg];
                 if (!ReflectionUtil.isInstance(arg, type)) {
                     //throw new InternalError(String.format("Protocol method %s: illegal argument (%d) of type %s, %s expected", name(), iArg, arg.getClass().getName(), type.getName()));
-                    System.err.printf("InternalError: Protocol method %s: illegal argument (%d) of type %s, %s expected (ProtocolMethod.java)%n", name(), iArg, arg.getClass().getName(), type.getName());
+                    NetworkDebugLogger.error("Protocol method %s: illegal argument (%d) of type %s, %s expected", name(), iArg, arg.getClass().getName(), type.getName());
                 }
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+            NetworkDebugLogger.error("Protocol checkArgs exception", e);
         }
     }
 
@@ -190,7 +189,7 @@ public enum ProtocolMethod {
         }
         if (!ReflectionUtil.isInstance(value, returnType)) {
             //throw new IllegalStateException(String.format("Protocol method %s: illegal return object type %s returned by client, expected %s", name(), value.getClass().getName(), getReturnType().getName()));
-            System.err.printf("IllegalStateException: Protocol method %s: illegal return object type %s returned by client, expected %s  (ProtocolMethod.java)%n", name(), value.getClass().getName(), getReturnType().getName());
+            NetworkDebugLogger.error("Protocol method %s: illegal return type %s, expected %s", name(), value.getClass().getName(), getReturnType().getName());
         }
     }
 }

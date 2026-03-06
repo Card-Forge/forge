@@ -163,12 +163,6 @@ public class NetGuiGame extends NetworkGuiGame {
 
             send(ProtocolMethod.applyDelta, delta);
 
-            // NOTE: We DO NOT call clearAllChanges() here anymore.
-            // Per-client change tracking (via lastSentPropertyChecksums in DeltaSyncManager)
-            // handles tracking what has been sent to THIS client independently.
-            // This fixes a bug where multiple remote clients sharing the same GameView
-            // would cause subsequent clients to miss changes after the first client cleared them.
-
             // Track bandwidth savings with three measurements
             if (logBandwidth) {
                 int deltaSize = delta.getApproximateSize();
@@ -237,11 +231,8 @@ public class NetGuiGame extends NetworkGuiGame {
         send(ProtocolMethod.fullStateSync, packet);
         initialSyncSent = true;
 
-        // Mark all objects as sent so delta sync knows they don't need full serialization
+        // Register consumer on all objects — per-consumer dirty tracking starts here
         deltaSyncManager.markObjectsAsSent(gameView);
-
-        // Clear all change flags since we've sent everything
-        deltaSyncManager.clearAllChanges(gameView);
     }
 
     @Override

@@ -115,7 +115,7 @@ public class FGameClient implements IToServer {
      * will detect the silence and close the connection.
      */
     public void simulateDisconnect() {
-        System.out.println("[simulateDisconnect] Suspending all network writes.");
+        NetworkDebugLogger.debug("[simulateDisconnect] Suspending all network writes.");
         disconnectSimulated = true;
         // Remove the IdleStateHandler to stop heartbeats, and add an outbound
         // handler that drops ALL writes (including game replies that bypass
@@ -126,11 +126,11 @@ public class FGameClient implements IToServer {
             channel.pipeline().addFirst("writeBlocker", new ChannelOutboundHandlerAdapter() {
                 @Override
                 public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) {
-                    System.out.println("[writeBlocker] Dropped: " + msg.getClass().getSimpleName());
+                    NetworkDebugLogger.debug("[writeBlocker] Dropped: %s", msg.getClass().getSimpleName());
                     promise.setSuccess();
                 }
             });
-            System.out.println("[simulateDisconnect] Pipeline modified: IdleStateHandler removed, writeBlocker added.");
+            NetworkDebugLogger.debug("[simulateDisconnect] Pipeline modified: IdleStateHandler removed, writeBlocker added.");
         });
     }
 

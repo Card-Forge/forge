@@ -2,6 +2,7 @@ package forge.net;
 
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.server.DeltaSyncManager;
+import forge.trackable.TrackableProperty;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -27,22 +28,30 @@ public class DeltaSyncUnitTest {
 
     @Test
     public void testDeltaSizeCalculationAccuracy() {
-        Map<Integer, byte[]> deltas = new HashMap<>();
-        deltas.put(1, new byte[100]);
-        deltas.put(2, new byte[200]);
-        deltas.put(3, new byte[50]);
+        Map<Integer, Map<TrackableProperty, Object>> deltas = new HashMap<>();
+        Map<TrackableProperty, Object> props1 = new HashMap<>();
+        props1.put(TrackableProperty.Name, "Test");
+        props1.put(TrackableProperty.Power, 3);
+        deltas.put(1, props1);
+
+        Map<TrackableProperty, Object> props2 = new HashMap<>();
+        props2.put(TrackableProperty.Life, 20);
+        props2.put(TrackableProperty.PoisonCounters, 5);
+        props2.put(TrackableProperty.MaxHandSize, 7);
+        deltas.put(2, props2);
 
         Set<Integer> removed = new HashSet<>();
         removed.add(10);
         removed.add(20);
 
-        DeltaPacket packet = new DeltaPacket(1L, deltas, removed);
+        DeltaPacket packet = new DeltaPacket(1L, deltas, new HashMap<>(), removed, 0, false);
 
         // Header: 8 (seq) + 4 (checksum) = 12 bytes
-        // Deltas: (4+100) + (4+200) + (4+50) = 362 bytes
+        // Delta key=1: 4 + 2*50 = 104 bytes
+        // Delta key=2: 4 + 3*50 = 154 bytes
         // Removed: 2 * 4 = 8 bytes
-        // Total: 382 bytes
-        int expectedSize = 12 + (4 + 100) + (4 + 200) + (4 + 50) + (2 * 4);
+        // Total: 278 bytes
+        int expectedSize = 12 + (4 + 2 * 50) + (4 + 3 * 50) + (2 * 4);
 
         Assert.assertEquals(packet.getApproximateSize(), expectedSize,
             "Delta size calculation should match expected value");
@@ -50,16 +59,28 @@ public class DeltaSyncUnitTest {
 
     @Test
     public void testDeltaSizeWithNewObjects() {
-        Map<Integer, byte[]> deltas = new HashMap<>();
-        deltas.put(1, new byte[50]);
+        Map<Integer, Map<TrackableProperty, Object>> deltas = new HashMap<>();
+        Map<TrackableProperty, Object> deltaProps = new HashMap<>();
+        deltaProps.put(TrackableProperty.Name, "Test");
+        deltas.put(1, deltaProps);
 
         Map<Integer, DeltaPacket.NewObjectData> newObjects = new HashMap<>();
-        newObjects.put(100, new DeltaPacket.NewObjectData(100, 0, new byte[150]));
-        newObjects.put(101, new DeltaPacket.NewObjectData(101, 1, new byte[200]));
+        Map<TrackableProperty, Object> newProps1 = new HashMap<>();
+        newProps1.put(TrackableProperty.Name, "Card1");
+        newProps1.put(TrackableProperty.Power, 2);
+        newProps1.put(TrackableProperty.Toughness, 3);
+        newObjects.put(100, new DeltaPacket.NewObjectData(100, 0, newProps1));
+
+        Map<TrackableProperty, Object> newProps2 = new HashMap<>();
+        newProps2.put(TrackableProperty.Life, 20);
+        newProps2.put(TrackableProperty.PoisonCounters, 0);
+        newProps2.put(TrackableProperty.MaxHandSize, 7);
+        newProps2.put(TrackableProperty.IsAI, false);
+        newObjects.put(101, new DeltaPacket.NewObjectData(101, 1, newProps2));
 
         DeltaPacket packet = new DeltaPacket(1L, deltas, newObjects, new HashSet<>(), 0, false);
 
-        // Header: 12, Delta: (4+50)=54, New 100: (4+4+150)=158, New 101: (4+4+200)=208
+        // Header: 12, Delta: (4+1*50)=54, New 100: (4+4+3*50)=158, New 101: (4+4+4*50)=208
         int expectedSize = 12 + 54 + 158 + 208;
 
         Assert.assertEquals(packet.getApproximateSize(), expectedSize,
@@ -68,7 +89,7 @@ public class DeltaSyncUnitTest {
 
     @Test
     public void testEmptyDeltaPacketSize() {
-        DeltaPacket packet = new DeltaPacket(1L, new HashMap<>(), new HashSet<>());
+        DeltaPacket packet = new DeltaPacket(1L, new HashMap<>(), new HashMap<>(), new HashSet<>(), 0, false);
         int size = packet.getApproximateSize();
 
         // Empty packet should just have header: 8 + 4 = 12 bytes
