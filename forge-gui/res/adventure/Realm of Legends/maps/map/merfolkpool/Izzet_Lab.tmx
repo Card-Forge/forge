@@ -12,7 +12,7 @@
  <tileset firstgid="28289" source="../../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx"/>
  <layer id="6" name="Collision" width="30" height="27">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUDFcQzcvAsIsHFUfxQsRhNDZ5SoEsD4R240TQ0jwQcRiNLAcC0jzUsxcZgMyF+ReXPDXsJcUcUtXjM4dUQMtwRo5fWtiLK73C7KV1en7ECKEHMj0TAsMtPdMjXY3U9EwKGE7pqpabgWEPktheILueG1UNNexFj7tdaP6RxSK/iwr2DjcAAI+DL9Q=
+   eJxjYBgFo2AUDFcQzcvAsIsHFUfxQsRhNDZ5SoEsD4R240TQ0jwQcRiNLAcC0jzUsxcZgMyF+ReXPDXsJcUcUtXjM4dUQMtwRo5fWtiLK73C7KV1en7ECKEHMj3jE6emvdjMweceWvl3DzME0zJdDZS9MDuwYXqkZ2LFQWA4patabmAYI+XfvUBcz42qhhr2osfdLh7UcgOb/C4q2DvcAADoKDU6
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="27">
