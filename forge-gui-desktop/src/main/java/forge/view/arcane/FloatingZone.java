@@ -17,37 +17,71 @@
  */
 package forge.view.arcane;
 
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.BorderFactory;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
+import javax.swing.border.Border;
 
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.FThreads;
+import forge.gui.framework.DragCell;
+import forge.gui.framework.EDocID;
+import forge.gui.framework.SLayoutConstants;
+import forge.gui.framework.SLayoutIO;
+import forge.gui.framework.SRearrangingUtil;
+import forge.gui.framework.SResizingUtil;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.screens.match.CMatchUI;
+import forge.screens.match.views.VZone;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.special.PlayerDetailsPanel;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
+import forge.view.FView;
 
 public class FloatingZone extends FloatingCardArea {
     private static final long serialVersionUID = 1927906492186378596L;
 
     private static final Map<Integer, FloatingZone> floatingAreas = new HashMap<>();
+    private static final Map<Integer, VZone> dockedZones = new HashMap<>();
 
     private static int getKey(final PlayerView player, final ZoneType zone) {
         return 40 * player.getId() + zone.hashCode();
     }
 
+    // ========== Floating zone API ==========
+
     public static void showOrHide(final CMatchUI matchUI, final PlayerView player, final ZoneType zone) {
+        // If zone is docked, toggle the docked tab instead
+        final int key = getKey(player, zone);
+        final VZone docked = dockedZones.get(key);
+        if (docked != null) {
+            final DragCell cell = docked.getParentCell();
+            if (cell != null) {
+                if (cell.getSelected() == docked) {
+                    // Currently selected — remove the docked tab
+                    removeDocked(docked);
+                } else {
+                    // Not selected — switch to it
+                    cell.setSelected(docked);
+                }
+            }
+            return;
+        }
+
         final FloatingZone cardArea = _init(matchUI, player, zone);
         cardArea.showOrHideWindow();
     }
@@ -89,15 +123,31 @@ public class FloatingZone extends FloatingCardArea {
     }
 
     public static CardPanel getCardPanel(final CMatchUI matchUI, final CardView card) {
+        // Check docked zones first
+        final int key = getKey(card.getController(), card.getZone());
+        final VZone docked = dockedZones.get(key);
+        if (docked != null) {
+            final CardPanel panel = docked.getCardPanel(card);
+            if (panel != null) {
+                return panel;
+            }
+        }
         final FloatingZone window = _init(matchUI, card.getController(), card.getZone());
         return window.getCardPanel(card.getId());
     }
 
     public static void refresh(final PlayerView player, final ZoneType zone) {
+        // Refresh floating window
         FloatingZone cardArea = floatingAreas.get(getKey(player, zone));
         if (cardArea != null) {
             cardArea.setPlayer(player); //ensure player is updated if needed
             cardArea.refresh();
+        }
+
+        // Refresh docked zone tab
+        final VZone docked = dockedZones.get(getKey(player, zone));
+        if (docked != null) {
+            docked.refresh();
         }
 
         //refresh flashback zone when graveyard, library, or exile zones updated
@@ -117,13 +167,294 @@ public class FloatingZone extends FloatingCardArea {
             cardArea.window.setVisible(false);
         }
         floatingAreas.clear();
+
+        // Remove docked zone tabs and deregister
+        for (final VZone vZone : dockedZones.values()) {
+            final DragCell cell = vZone.getParentCell();
+            if (cell != null) {
+                cell.removeDoc(vZone);
+                if (cell.getDocs().isEmpty()) {
+                    SRearrangingUtil.fillGap(cell);
+                    FView.SINGLETON_INSTANCE.removeDragCell(cell);
+                }
+            }
+            final EDocID docID = vZone.getDocumentID();
+            if (docID != null) {
+                docID.setDoc(null);
+            }
+        }
+        dockedZones.clear();
     }
 
     public static void refreshAll() {
         for (final FloatingZone cardArea : floatingAreas.values()) {
             cardArea.refresh();
         }
+        for (final VZone vZone : dockedZones.values()) {
+            vZone.refresh();
+        }
     }
+
+    /** Returns the docked VZone for a player/zone, or null. */
+    public static VZone getDockedZone(final PlayerView player, final ZoneType zone) {
+        return dockedZones.get(getKey(player, zone));
+    }
+
+    // ========== Dock/undock transitions ==========
+
+    /** Dock this floating zone into an existing cell as a new tab. */
+    private void dockIntoCell(final DragCell targetCell) {
+        final VZone vZone = createDockedZone();
+        if (vZone == null) return;
+
+        targetCell.addDoc(vZone);
+        targetCell.setSelected(vZone);
+        vZone.refresh();
+
+        SLayoutIO.saveLayout(null);
+    }
+
+    /** Dock this floating zone by splitting the target cell at the given edge. */
+    private void dockWithSplit(final DragCell targetCell, final DockDropZone edge) {
+        final VZone vZone = createDockedZone();
+        if (vZone == null) return;
+
+        final int tx = targetCell.getX();
+        final int ty = targetCell.getY();
+        final int tw = targetCell.getW();
+        final int th = targetCell.getH();
+        final DragCell cellNew = new DragCell();
+
+        switch (edge) {
+            case LEFT:
+                cellNew.setBounds(tx, ty, tw / 2, th);
+                targetCell.setBounds(tx + cellNew.getW(), ty, tw - cellNew.getW(), th);
+                break;
+            case RIGHT:
+                targetCell.setBounds(tx, ty, tw / 2, th);
+                cellNew.setBounds(targetCell.getX() + targetCell.getW(), ty, tw - targetCell.getW(), th);
+                break;
+            case TOP:
+                cellNew.setBounds(tx, ty, tw, th - (th / 2));
+                targetCell.setBounds(tx, ty + cellNew.getH(), tw, th - cellNew.getH());
+                break;
+            case BOTTOM:
+                targetCell.setBounds(tx, ty, tw, th / 2);
+                cellNew.setBounds(tx, targetCell.getY() + targetCell.getH(), tw, th - targetCell.getH());
+                break;
+            default:
+                return;
+        }
+
+        FView.SINGLETON_INSTANCE.addDragCell(cellNew);
+        cellNew.addDoc(vZone);
+        cellNew.setSelected(vZone);
+        vZone.refresh();
+
+        cellNew.updateRoughBounds();
+        targetCell.updateRoughBounds();
+        cellNew.validate();
+        cellNew.refresh();
+        targetCell.refresh();
+        SRearrangingUtil.updateBorders();
+
+        SLayoutIO.saveLayout(null);
+    }
+
+    /** Create a VZone from this floating zone's state and close the floating window. */
+    private VZone createDockedZone() {
+        final EDocID docID = EDocID.fromZoneType(zone);
+        if (docID == null) return null;
+
+        final VZone vZone = new VZone(getMatchUI(), player, zone);
+        docID.setDoc(vZone);
+
+        final int key = getKey(player, zone);
+        dockedZones.put(key, vZone);
+
+        // Close the floating window
+        hideWindow();
+        floatingAreas.remove(key);
+
+        return vZone;
+    }
+
+    /** Undock a VZone tab and reopen it as a floating window. */
+    public static void undockZone(final VZone vZone) {
+        final DragCell cell = vZone.getParentCell();
+        if (cell != null) {
+            cell.removeDoc(vZone);
+            if (cell.getDocs().isEmpty()) {
+                SRearrangingUtil.fillGap(cell);
+                FView.SINGLETON_INSTANCE.removeDragCell(cell);
+            }
+        }
+
+        final EDocID docID = vZone.getDocumentID();
+        if (docID != null) {
+            docID.setDoc(null);
+        }
+
+        final int key = getKey(vZone.getPlayer(), vZone.getZone());
+        dockedZones.remove(key);
+
+        SLayoutIO.saveLayout(null);
+
+        // Reopen as floating window
+        show(vZone.getMatchUI(), vZone.getPlayer(), vZone.getZone());
+    }
+
+    /** Remove a docked zone tab without reopening as floating. */
+    private static void removeDocked(final VZone vZone) {
+        final DragCell cell = vZone.getParentCell();
+        if (cell != null) {
+            cell.removeDoc(vZone);
+            if (cell.getDocs().isEmpty()) {
+                SRearrangingUtil.fillGap(cell);
+                FView.SINGLETON_INSTANCE.removeDragCell(cell);
+            }
+        }
+
+        final EDocID docID = vZone.getDocumentID();
+        if (docID != null) {
+            docID.setDoc(null);
+        }
+
+        dockedZones.remove(getKey(vZone.getPlayer(), vZone.getZone()));
+
+        SLayoutIO.saveLayout(null);
+    }
+
+    /** Register VZone instances for layout persistence. Called during match init. */
+    public static void registerZoneDocs(final CMatchUI matchUI, final Iterable<PlayerView> localPlayers) {
+        for (final PlayerView player : localPlayers) {
+            for (final ZoneType zone : CMatchUI.FLOATING_ZONE_TYPES) {
+                final EDocID docID = EDocID.fromZoneType(zone);
+                if (docID != null) {
+                    final VZone vZone = new VZone(matchUI, player, zone);
+                    docID.setDoc(vZone);
+                    dockedZones.put(getKey(player, zone), vZone);
+                }
+            }
+            break; // Only the first local player's zones
+        }
+    }
+
+    /** Deregister all zone docs. Called on game end before closeAll. */
+    public static void deregisterZoneDocs() {
+        for (final VZone vZone : dockedZones.values()) {
+            final EDocID docID = vZone.getDocumentID();
+            if (docID != null) {
+                docID.setDoc(null);
+            }
+        }
+        // Don't clear dockedZones here — closeAll() handles that
+    }
+
+    // ========== Drag-to-dock detection ==========
+
+    private enum DockDropZone { NONE, BODY, LEFT, RIGHT, TOP, BOTTOM }
+
+    private DragCell dockTargetCell;
+    private DockDropZone dockDropZone = DockDropZone.NONE;
+    private Border dockOriginalBorder;
+
+    private void setupDockDetection() {
+        getWindow().getTitleBar().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(final MouseEvent e) {
+                if (!SwingUtilities.isLeftMouseButton(e)) return;
+                if (dockTargetCell != null && dockDropZone != DockDropZone.NONE) {
+                    clearDockHighlight();
+                    if (dockDropZone == DockDropZone.BODY) {
+                        dockIntoCell(dockTargetCell);
+                    } else {
+                        dockWithSplit(dockTargetCell, dockDropZone);
+                    }
+                    dockTargetCell = null;
+                    dockDropZone = DockDropZone.NONE;
+                }
+            }
+        });
+
+        getWindow().getTitleBar().addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(final MouseEvent e) {
+                if (!SwingUtilities.isLeftMouseButton(e)) return;
+                detectDockTarget(e);
+            }
+        });
+    }
+
+    private void detectDockTarget(final MouseEvent e) {
+        final int ex = (int) e.getLocationOnScreen().getX();
+        final int ey = (int) e.getLocationOnScreen().getY();
+        final int nestingMargin = 30;
+
+        DragCell newTarget = null;
+        DockDropZone newDropZone = DockDropZone.NONE;
+
+        for (final DragCell cell : FView.SINGLETON_INSTANCE.getDragCells()) {
+            final int cx = cell.getAbsX();
+            final int cy = cell.getAbsY();
+            final int cw = cell.getW();
+            final int ch = cell.getH();
+
+            if (ex < cx || ey < cy || ex > cx + cw || ey > cy + ch) {
+                continue;
+            }
+
+            newTarget = cell;
+
+            // Determine drop zone within the cell
+            if (ex < (cx + nestingMargin)
+                    && ey > cy + SLayoutConstants.HEAD_H
+                    && (cw / 2) > SResizingUtil.W_MIN) {
+                newDropZone = DockDropZone.LEFT;
+            } else if (ex > (cx + cw - nestingMargin)
+                    && ey > cy + SLayoutConstants.HEAD_H
+                    && (cw / 2) > SResizingUtil.W_MIN) {
+                newDropZone = DockDropZone.RIGHT;
+            } else if (ey < (cy + nestingMargin + SLayoutConstants.HEAD_H)
+                    && ey > cy + SLayoutConstants.HEAD_H
+                    && (ch / 2) > SResizingUtil.H_MIN) {
+                newDropZone = DockDropZone.TOP;
+            } else if (ey > (cy + ch - nestingMargin)
+                    && (ch / 2) > SResizingUtil.H_MIN) {
+                newDropZone = DockDropZone.BOTTOM;
+            } else {
+                newDropZone = DockDropZone.BODY;
+            }
+            break;
+        }
+
+        // Update highlight if target changed
+        if (newTarget != dockTargetCell || newDropZone != dockDropZone) {
+            clearDockHighlight();
+            dockTargetCell = newTarget;
+            dockDropZone = newDropZone;
+            if (dockTargetCell != null && dockDropZone != DockDropZone.NONE) {
+                applyDockHighlight();
+            }
+        }
+    }
+
+    private static final Border DOCK_HIGHLIGHT_BORDER = BorderFactory.createLineBorder(new Color(70, 130, 230), 2);
+
+    private void applyDockHighlight() {
+        if (dockTargetCell == null) return;
+        dockOriginalBorder = dockTargetCell.getBody().getBorder();
+        dockTargetCell.getBody().setBorder(DOCK_HIGHLIGHT_BORDER);
+    }
+
+    private void clearDockHighlight() {
+        if (dockTargetCell != null && dockOriginalBorder != null) {
+            dockTargetCell.getBody().setBorder(dockOriginalBorder);
+        }
+        dockOriginalBorder = null;
+    }
+
+    // ========== Instance fields and methods ==========
 
     private final ZoneType zone;
     private PlayerView player;
@@ -184,6 +515,7 @@ public class FloatingZone extends FloatingCardArea {
                     toggleSorted();
                 }
             });
+            setupDockDetection();
         }
     }
 

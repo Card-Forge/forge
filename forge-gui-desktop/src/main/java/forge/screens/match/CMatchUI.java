@@ -815,6 +815,7 @@ public final class CMatchUI
     @Override
     public void updatePlayerControl() {
         initHandViews();
+        FloatingZone.registerZoneDocs(this, getLocalPlayers());
         SLayoutIO.loadLayout(null);
         view.populate();
         final PlayerZoneUpdates zones = new PlayerZoneUpdates();
