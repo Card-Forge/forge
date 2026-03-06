@@ -64,7 +64,7 @@
   &quot;count&quot;: 3,
   &quot;colors&quot;: [ &quot;blue&quot; ],
   &quot;subTypes&quot;: [ &quot;Instant&quot;, &quot;Sorcery&quot; ], 
-  &quot;rarity&quot; [ &quot;rare&quot;, &quot;mythic rare&quot;]
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;]
 }]</property>
    </properties>
   </object>

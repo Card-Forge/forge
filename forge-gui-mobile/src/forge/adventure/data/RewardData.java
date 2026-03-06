@@ -293,8 +293,13 @@ public class RewardData implements Serializable {
                                 o -> o.name().equals(restrictedCard)));
                         }
 
-                        endDate = endDate == 0 ? 9999 : endDate;
-                        allEditions.removeIf(q -> q.getDate().getYear()+1900 < startDate || q.getDate().getYear()+1900 > endDate);
+                        if (this.editions != null && this.editions.length > 0) {
+                            Set<String> allowed = new HashSet<>(Arrays.asList(this.editions));
+                            allEditions.removeIf(q -> !allowed.contains(q.getCode()));
+                        } else {
+                            endDate = endDate == 0 ? 9999 : endDate;
+                            allEditions.removeIf(q -> q.getDate().getYear()+1900 < startDate || q.getDate().getYear()+1900 > endDate);
+                        }
                         for (int i = 0; i < count + addedCount; i++) {
                             ret.add(new Reward(AdventureEventController.instance().generateBooster(
                                 allEditions.get(rewardRandom.nextInt(allEditions.size())).getCode())));

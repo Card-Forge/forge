@@ -59,7 +59,6 @@ public class NewGameScene extends MenuScene {
     private final Array<AdventureModes> modes = new Array<>();
 
     private NewGameScene() {
-
         super(Forge.isLandscapeMode() ? "ui/new_game.json" : "ui/new_game_portrait.json");
         gender = ui.findActor("gender");
         selectedName = ui.findActor("nameField");

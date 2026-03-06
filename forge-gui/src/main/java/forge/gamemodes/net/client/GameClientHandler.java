@@ -93,7 +93,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
             default:
                 break;
         }
-        if (!(this.tracker == null)) {
+        if (this.tracker != null) {
             updateTrackers(args);
             replicateProps(args);
         }
@@ -113,7 +113,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
                     trackableObject.setTracker(this.tracker);
                     // walk the props
                     EnumMap props = trackableObject.getProps();
-                    if (!(props == null)) {
+                    if (props != null) {
                         for (Object propObj : props.values()) {
                             updateTrackers(new Object[]{propObj});
                         }
