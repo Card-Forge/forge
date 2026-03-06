@@ -3,10 +3,10 @@ ManaCost:2 U
 Types:Sorcery
 A:SP$ Draw | NumCards$ 2 | SubAbility$ DBExile | SpellDescription$ Draw two cards.
 SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | Hidden$ True | ChangeType$ Instant,Sorcery | SelectPrompt$ Select an instant or sorcery card from your hand | RememberChanged$ True | SubAbility$ DBBranch | StackDescription$ REP you_{p:You} & your_their | SpellDescription$ Then you may exile an instant or sorcery card from your hand.
-SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | TrueSubAbility$ ExileHand
-SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ You | ChangeType$ Remembered.sameName | ChangeNum$ NumInHand | Chooser$ You | Imprint$ True | SubAbility$ ExileLib | StackDescription$ SpellDescription | SpellDescription$ If you do, search your hand
-SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ You | ChangeType$ Remembered.sameName | ChangeNum$ NumInLib | Chooser$ You | Shuffle$ True | StackDescription$ SpellDescription | SubAbility$ DBSeek | SpellDescription$ and library for any number of cards with the same name, exile them, then shuffle.
-SVar:DBSeek:DB$ Seek | Num$ X | Type$ Card.Instant,Card.Sorcery | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ Seek an instant or sorcery card for each card exiled from your hand this way.
+SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | TrueSubAbility$ ExileHand | StackDescription$ REP you do_they do & search your_{p:You} searches their & , exile_, exiles & shuffle_shuffles & Seek_{p:You} seeks & your hand_their hand | SpellDescription$ If you do, search your hand and library for any number of cards with the same name, exile them, then shuffle. Seek an instant or sorcery card for each card exiled from your hand this way.
+SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ You | ChangeType$ Remembered.sameName | ChangeNum$ NumInHand | Chooser$ You | Imprint$ True | SubAbility$ ExileLib
+SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ You | ChangeType$ Remembered.sameName | ChangeNum$ NumInLib | Chooser$ You | Shuffle$ True | SubAbility$ DBSeek
+SVar:DBSeek:DB$ Seek | Num$ X | Type$ Card.Instant,Card.Sorcery | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:NumInLib:Count$ValidLibrary Card.YouOwn+sharesNameWith Remembered
 SVar:NumInHand:Count$ValidHand Card.YouOwn+sharesNameWith Remembered
