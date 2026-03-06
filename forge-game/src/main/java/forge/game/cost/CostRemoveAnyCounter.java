@@ -82,10 +82,9 @@ public class CostRemoveAnyCounter extends CostPart {
         }
         return validCards.stream().mapMultiToInt((c, s) -> {
             for (Map.Entry<CounterType, Integer> entry : c.getCounters().entrySet()) {
-                if (!c.canRemoveCounters(entry.getKey())) {
-                    continue;
+                if (c.canRemoveCounters(entry.getKey())) {
+                    s.accept(entry.getValue());
                 }
-                s.accept(entry.getValue());
             }
         }).sum();
     }
