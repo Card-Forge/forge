@@ -29,6 +29,7 @@ import forge.util.ITriggerEvent;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class NetGuiGame extends AbstractGuiGame {
 
@@ -321,7 +322,8 @@ public class NetGuiGame extends AbstractGuiGame {
     @Override
     public void handleGameEvents(List<GameEvent> events) {
         if (paused) { return; }
-        Logger.info("Sending batch of {} game events", events.size());
+        Logger.info("Sending batch of {}: [{}]", () -> events.size(),
+                () -> events.stream().map(e -> e.getClass().getSimpleName()).collect(Collectors.joining(", ")));
         sender.write(ProtocolMethod.setGameView, getGameView());
         sender.send(ProtocolMethod.handleGameEvents, events);
     }

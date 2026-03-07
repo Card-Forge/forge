@@ -3,8 +3,12 @@
  */
 package forge.gui.framework;
 
+import java.util.EnumMap;
+import java.util.Map;
+
 import com.google.common.collect.ObjectArrays;
 
+import forge.game.zone.ZoneType;
 import forge.screens.deckeditor.views.*;
 import forge.screens.home.gauntlet.*;
 import forge.screens.home.online.VSubmenuOnlineLobby;
@@ -112,7 +116,21 @@ public enum EDocID {
     HAND_4 (),
     HAND_5 (),
     HAND_6 (),
-    HAND_7 ();
+    HAND_7 (),
+
+    // Dockable zones, use setDoc to register.
+    ZONE_LIBRARY (),
+    ZONE_GRAVEYARD (),
+    ZONE_EXILE (),
+    ZONE_FLASHBACK (),
+    ZONE_COMMAND (),
+    ZONE_ANTE (),
+    ZONE_SIDEBOARD (),
+    ZONE_PLANAR_DECK (),
+    ZONE_SCHEME_DECK (),
+    ZONE_ATTRACTION_DECK (),
+    ZONE_CONTRAPTION_DECK (),
+    ZONE_JUNKYARD ();
 
     public final static EDocID[] Fields = new EDocID[] {FIELD_0, FIELD_1, FIELD_2, FIELD_3, FIELD_4, FIELD_5, FIELD_6, FIELD_7};
     public final static EDocID[] Hands = new EDocID[] {HAND_0, HAND_1, HAND_2, HAND_3, HAND_4, HAND_5, HAND_6, HAND_7};
@@ -143,5 +161,26 @@ public enum EDocID {
     public IVDoc<? extends ICDoc> getDoc() {
         //if (vDoc == null) { throw new NullPointerException("No document found for " + this.name() + "."); }
         return vDoc;
+    }
+
+    private static final Map<ZoneType, EDocID> ZONE_DOC_IDS = new EnumMap<>(ZoneType.class);
+    static {
+        ZONE_DOC_IDS.put(ZoneType.Library, ZONE_LIBRARY);
+        ZONE_DOC_IDS.put(ZoneType.Graveyard, ZONE_GRAVEYARD);
+        ZONE_DOC_IDS.put(ZoneType.Exile, ZONE_EXILE);
+        ZONE_DOC_IDS.put(ZoneType.Flashback, ZONE_FLASHBACK);
+        ZONE_DOC_IDS.put(ZoneType.Command, ZONE_COMMAND);
+        ZONE_DOC_IDS.put(ZoneType.Ante, ZONE_ANTE);
+        ZONE_DOC_IDS.put(ZoneType.Sideboard, ZONE_SIDEBOARD);
+        ZONE_DOC_IDS.put(ZoneType.PlanarDeck, ZONE_PLANAR_DECK);
+        ZONE_DOC_IDS.put(ZoneType.SchemeDeck, ZONE_SCHEME_DECK);
+        ZONE_DOC_IDS.put(ZoneType.AttractionDeck, ZONE_ATTRACTION_DECK);
+        ZONE_DOC_IDS.put(ZoneType.ContraptionDeck, ZONE_CONTRAPTION_DECK);
+        ZONE_DOC_IDS.put(ZoneType.Junkyard, ZONE_JUNKYARD);
+    }
+
+    /** Returns the EDocID for a dockable zone type, or null if the zone type has no EDocID. */
+    public static EDocID fromZoneType(final ZoneType zone) {
+        return ZONE_DOC_IDS.get(zone);
     }
 }

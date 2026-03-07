@@ -6,6 +6,7 @@ import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.CompatibleObjectEncoder;
 import forge.gamemodes.net.ReplyPool;
 import forge.gamemodes.net.event.*;
+import org.tinylog.Logger;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.ILobbyListener;
 import io.netty.bootstrap.Bootstrap;
@@ -72,15 +73,13 @@ public class FGameClient implements IToServer {
                 try {
                     ch.sync();
                 } catch (final InterruptedException e) {
-                    System.out.println(e.getMessage());
-                    e.printStackTrace();
+                    Logger.error(e, "Client channel interrupted");
                 } finally {
                     group.shutdownGracefully();
                 }
             }).start();
         } catch (final InterruptedException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+            Logger.error(e, "Client connect interrupted");
         }
     }
 
@@ -94,7 +93,7 @@ public class FGameClient implements IToServer {
         if (disconnectSimulated) {
             return;
         }
-        System.out.println("Client sent " + event);
+        Logger.info("Client sent {}", event);
         channel.writeAndFlush(event);
     }
 
@@ -104,7 +103,7 @@ public class FGameClient implements IToServer {
      * will detect the silence and close the connection.
      */
     public void simulateDisconnect() {
-        System.out.println("[simulateDisconnect] Suspending all network writes.");
+        Logger.info("[simulateDisconnect] Suspending all network writes.");
         disconnectSimulated = true;
         // Remove the IdleStateHandler to stop heartbeats, and add an outbound
         // handler that drops ALL writes (including game replies that bypass
@@ -115,11 +114,11 @@ public class FGameClient implements IToServer {
             channel.pipeline().addFirst("writeBlocker", new ChannelOutboundHandlerAdapter() {
                 @Override
                 public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) {
-                    System.out.println("[writeBlocker] Dropped: " + msg.getClass().getSimpleName());
+                    Logger.info("[writeBlocker] Dropped: {}", msg.getClass().getSimpleName());
                     promise.setSuccess();
                 }
             });
-            System.out.println("[simulateDisconnect] Pipeline modified: IdleStateHandler removed, writeBlocker added.");
+            Logger.info("[simulateDisconnect] Pipeline modified: IdleStateHandler removed, writeBlocker added.");
         });
     }
 

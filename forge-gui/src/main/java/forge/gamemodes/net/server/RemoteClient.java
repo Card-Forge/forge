@@ -44,7 +44,12 @@ public final class RemoteClient implements IToClient {
     @Override
     public void send(final NetEvent event) {
         try {
+            long startMs = System.currentTimeMillis();
             channel.writeAndFlush(event).sync();
+            long elapsed = System.currentTimeMillis() - startMs;
+            if (elapsed > 50) {
+                Logger.info("send() blocked {} ms for {} (event: {})", elapsed, username, event);
+            }
         } catch (Exception e) {
             sendErrors.incrementAndGet();
             Logger.error(e, "Network send error for {} (event: {})", username, event);
