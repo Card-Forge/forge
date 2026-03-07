@@ -691,6 +691,7 @@ public final class FServerManager {
             final RemoteClient client = new RemoteClient(ctx.channel());
             clients.put(ctx.channel(), client);
             NetworkDebugLogger.log("Client connected to server at %s", ctx.channel().remoteAddress());
+            updateLobbyState();
             super.channelActive(ctx);
         }
 
@@ -798,7 +799,7 @@ public final class FServerManager {
                 final String name = client != null ? client.getUsername() : ctx.channel().remoteAddress().toString();
                 final String msg = name + " timed out after " + HEARTBEAT_TIMEOUT_SECONDS
                     + " seconds without a network response. Closing connection.";
-                NetworkDebugLogger.log(msg);
+                NetworkDebugLogger.warn(msg);
                 broadcast(new MessageEvent(msg));
                 ctx.close();
                 return;

@@ -25,10 +25,13 @@ public class CompatibleObjectDecoder extends LengthFieldBasedFrameDecoder {
 
     @Override
     protected Object decode(ChannelHandlerContext ctx, ByteBuf in) throws Exception {
+        int frameStart = in.readerIndex();
         ByteBuf frame = (ByteBuf)super.decode(ctx, in);
         if (frame == null) {
             return null;
         }
+        int frameSize = frame.readableBytes();
+        long startMs = System.currentTimeMillis();
         ObjectInputStream ois = GuiBase.hasPropertyConfig() ?
                 new ObjectInputStream(new LZ4BlockInputStream(new ByteBufInputStream(frame, true))):
                     new CObjectInputStream(new LZ4BlockInputStream(new ByteBufInputStream(frame, true)),this.classResolver);
@@ -40,6 +43,12 @@ public class CompatibleObjectDecoder extends LengthFieldBasedFrameDecoder {
             NetworkDebugLogger.error("Version Mismatch: %s", e.getMessage());
         } finally {
             ois.close();
+        }
+
+        long elapsed = System.currentTimeMillis() - startMs;
+        if (elapsed > 50 || frameSize > 20_000) {
+            NetworkDebugLogger.log("Decoded %s in %d ms (%d bytes compressed)",
+                    var5 != null ? var5.getClass().getSimpleName() : "null", elapsed, frameSize);
         }
 
         return var5;

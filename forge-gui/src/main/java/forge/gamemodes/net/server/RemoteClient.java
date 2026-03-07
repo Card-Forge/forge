@@ -2,9 +2,9 @@ package forge.gamemodes.net.server;
 
 import forge.gamemodes.net.ReplyPool;
 import forge.gamemodes.net.event.IdentifiableNetEvent;
+import forge.gamemodes.net.NetworkDebugLogger;
 import forge.gamemodes.net.event.NetEvent;
 import io.netty.channel.Channel;
-import org.tinylog.Logger;
 
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -44,10 +44,15 @@ public final class RemoteClient implements IToClient {
     @Override
     public void send(final NetEvent event) {
         try {
+            long startMs = System.currentTimeMillis();
             channel.writeAndFlush(event).sync();
+            long elapsed = System.currentTimeMillis() - startMs;
+            if (elapsed > 50) {
+                NetworkDebugLogger.log("send() blocked %d ms for %s (event: %s)", elapsed, username, event);
+            }
         } catch (Exception e) {
             sendErrors.incrementAndGet();
-            Logger.error(e, "Network send error for {} (event: {})", username, event);
+            NetworkDebugLogger.error("Network send error for " + username + " (event: " + event + ")", e);
         }
     }
 

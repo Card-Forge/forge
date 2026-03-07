@@ -151,6 +151,7 @@ public class AiController {
             AiAttackController aiAtk = new AiAttackController(player);
             predictedCombat = new Combat(player);
             aiAtk.declareAttackers(predictedCombat);
+            // ignoring attack costs for performance
         }
         return predictedCombat;
     }
@@ -1321,7 +1322,6 @@ public class AiController {
         AiAttackController aiAtk = new AiAttackController(attacker);
         lastAttackAggression = aiAtk.declareAttackers(combat);
 
-        // Check if we can reinforce with Banding creatures
         aiAtk.reinforceWithBanding(combat);
 
         // Per CR 508.1d, the decision to pay attack costs (e.g. Propaganda)
@@ -1348,7 +1348,7 @@ public class AiController {
     }
 
     private void removeUnpayableAttackers(Combat combat) {
-        for (Card attacker : new ArrayList<>(combat.getAttackers())) {
+        for (Card attacker : combat.getAttackers().threadSafeIterable()) {
             Cost attackCost = CombatUtil.getAttackCost(game, attacker, combat.getDefenderByAttacker(attacker));
             if (attackCost == null) {
                 continue;

@@ -49,11 +49,19 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
 
             final Object toInvoke = getToInvoke(ctx);
 
-            // Pre-call actions
+            // Pre-call actions (runs on IO thread — blocks all subsequent messages)
+            final long beforeCallStart = System.currentTimeMillis();
             beforeCall(ctx, protocolMethod, args);
+            final long beforeCallMs = System.currentTimeMillis() - beforeCallStart;
+            if (beforeCallMs > 50) {
+                NetworkDebugLogger.log("beforeCall(%s) took %d ms on IO thread", methodName, beforeCallMs);
+            }
 
             final Class<?> returnType = protocolMethod.getReturnType();
+            final long receiveTimeMs = System.currentTimeMillis();
             final Runnable toRun = () -> {
+                final long startMs = System.currentTimeMillis();
+                final long queueDelayMs = startMs - receiveTimeMs;
                 if (returnType.equals(Void.TYPE)) {
                     try {
                         method.invoke(toInvoke, args);
@@ -80,9 +88,13 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
                         //throw new RuntimeException(e.getTargetException());
                         catchedError[0] += e.toString();
                         SOptionPane.showMessageDialog(catchedError[0], "Error", FSkinProp.ICO_WARNING);
-                        NetworkDebugLogger.error("Protocol handler exception: %s", e.toString());
+                        NetworkDebugLogger.error("Exception in protocol method %s: %s", methodName, e.toString());
                     }
                     getRemote(ctx).send(new ReplyEvent(event.getId(), reply));
+                }
+                final long elapsed = System.currentTimeMillis() - startMs;
+                if (queueDelayMs > 50 || elapsed > 50) {
+                    NetworkDebugLogger.log("Protocol %s processed in %d ms (queued %d ms)", methodName, elapsed, queueDelayMs);
                 }
             };
 

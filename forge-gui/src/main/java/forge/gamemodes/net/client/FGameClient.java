@@ -83,15 +83,13 @@ public class FGameClient implements IToServer {
                 try {
                     ch.sync();
                 } catch (final InterruptedException e) {
-                    NetworkDebugLogger.log("[FGameClient] Channel closed: %s", e.getMessage());
-                    e.printStackTrace();
+                    NetworkDebugLogger.error("Client channel interrupted", e);
                 } finally {
                     group.shutdownGracefully();
                 }
             }).start();
         } catch (final InterruptedException e) {
-            NetworkDebugLogger.log("[FGameClient] Connection interrupted: %s", e.getMessage());
-            e.printStackTrace();
+            NetworkDebugLogger.error("Client connect interrupted", e);
         }
     }
 

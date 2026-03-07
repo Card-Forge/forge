@@ -131,14 +131,13 @@ public class NetConnectUtil {
         int port;
 
         URLValidator.HostPort hostPort = parseURL(url);
-        if(hostPort == null) {
+        if (hostPort == null) {
             return new ChatMessage(null, ForgeConstants.INVALID_HOST_COMMAND);
         }
 
         hostname = hostPort.host();
         port = hostPort.port();
-        if(port == -1) port = ForgeConstants.DEFAULT_SERVER_CONNECTION_PORT;
-
+        if (port == -1) port = Integer.valueOf(ForgeNetPreferences.FNetPref.NET_PORT.getDefault());
 
         final FGameClient client = new FGameClient(FModel.getPreferences().getPref(FPref.PLAYER_NAME), "0", gui, hostname, port);
         onlineLobby.setClient(client);

@@ -860,11 +860,11 @@ public class PlayerControllerAi extends PlayerController {
     private Runnable getDeferredTargetingPlayerRunnable(SpellAbility sa) {
         SpellAbility root = sa;
         while (sa != null) {
-            if (sa.getTargetingPlayer() != null) {
+            if (sa.hasParam("TargetingPlayer") && sa.getTargetingPlayer() != null) {
                 return () -> {
                     SpellAbility cur = root;
                     while (cur != null) {
-                        if (cur.getTargetingPlayer() != null) {
+                        if (cur.hasParam("TargetingPlayer") && cur.getTargetingPlayer() != null) {
                             cur.clearTargets();
                             cur.getTargetingPlayer().getController().chooseTargetsFor(cur);
                             // there's a chance a target gets selected that makes the cost unaffordable

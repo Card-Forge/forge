@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.tinylog.Logger;
 import com.google.common.collect.Maps;
 
 import forge.card.CardType;
@@ -114,7 +115,7 @@ public class TrackableTypes {
                             }
                         }
                     } catch (IndexOutOfBoundsException e) {
-                        System.err.println("got an IndexOutOfBoundsException, trying to continue ...");
+                        Logger.warn("IndexOutOfBoundsException in TrackableTypes, trying to continue");
                     }
                 }
             }
