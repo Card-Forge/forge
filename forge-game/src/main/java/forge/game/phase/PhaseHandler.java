@@ -597,7 +597,6 @@ public class PhaseHandler implements java.io.Serializable {
                         }
                     }
                 }
-
             } while (!success);
 
             CardCollection tapped = new CardCollection();
