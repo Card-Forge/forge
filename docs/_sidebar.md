@@ -47,6 +47,7 @@
   - [Snapshots & Releases](Development/Snapshots-and-Releases.md)
   - [Android Builds](Development/Android-Builds.md)
   - [Dev Mode](Development/DevMode.md)
+  - [Architecture](Development/Architecture.md)
   - [Ownership](Development/ownership.md)
   - [Docker Container](docker-setup.md)
 
