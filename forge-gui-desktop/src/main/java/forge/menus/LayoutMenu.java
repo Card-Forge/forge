@@ -185,12 +185,7 @@ public final class LayoutMenu {
         menu.add(noOverlapItem);
 
         // Limit Cards Per Row — checkbox + slider
-        int currentMax;
-        try {
-            currentMax = Integer.parseInt(prefs.getPref(FPref.UI_HAND_MAX_CARDS_PER_ROW));
-        } catch (final NumberFormatException ex) {
-            currentMax = 0;
-        }
+        int currentMax = prefs.getPrefInt(FPref.UI_HAND_MAX_CARDS_PER_ROW);
         final boolean limitEnabled = currentMax > 0;
 
         final java.awt.Color bg = javax.swing.UIManager.getColor("PopupMenu.background");
@@ -255,15 +250,10 @@ public final class LayoutMenu {
         final FScreen screen = Singletons.getControl().getCurrentScreen();
         if (screen != null && screen.isMatchScreen()) {
             final IVTopLevelUI view = screen.getView();
-            if (view instanceof VMatchUI) {
-                int maxCards;
-                try {
-                    maxCards = Integer.parseInt(prefs.getPref(FPref.UI_HAND_MAX_CARDS_PER_ROW));
-                } catch (final NumberFormatException ex) {
-                    maxCards = 0;
-                }
+            if (view instanceof VMatchUI vmu) {
+                int maxCards = prefs.getPrefInt(FPref.UI_HAND_MAX_CARDS_PER_ROW);
                 final boolean noOverlap = prefs.getPrefBoolean(FPref.UI_HAND_NO_OVERLAP);
-                for (final VHand h : ((VMatchUI) view).getControl().getHandViews()) {
+                for (final VHand h : vmu.getControl().getHandViews()) {
                     h.getHandArea().setMaxCardsPerRow(maxCards);
                     h.getHandArea().setNoOverlap(noOverlap);
                     h.getHandArea().doLayout();
