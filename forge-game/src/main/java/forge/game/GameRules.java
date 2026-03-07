@@ -16,6 +16,8 @@ public class GameRules {
     private boolean sideboardForAI = false;
     private final Set<GameType> appliedVariants = EnumSet.noneOf(GameType.class);
     private int simTimeout = 120;
+    // If true, use a shared life total per team (players on the same team share life)
+    private boolean useSharedTeamLife = false;
 
     // it's a preference, not rule... but I could hardly find a better place for it
     private boolean useGrayText;
@@ -132,5 +134,13 @@ public class GameRules {
 
     public void setSimTimeout(final int duration) {
         this.simTimeout = duration;
+    }
+
+    public boolean useSharedTeamLife() {
+        return useSharedTeamLife;
+    }
+
+    public void setUseSharedTeamLife(final boolean useSharedTeamLife) {
+        this.useSharedTeamLife = useSharedTeamLife;
     }
 }
