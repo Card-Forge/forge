@@ -322,10 +322,8 @@ public class NetGuiGame extends AbstractGuiGame {
     @Override
     public void handleGameEvents(List<GameEvent> events) {
         if (paused) { return; }
-        String eventTypes = events.stream()
-                .map(e -> e.getClass().getSimpleName())
-                .collect(Collectors.joining(", "));
-        Logger.info("Sending batch of {}: [{}]", events.size(), eventTypes);
+        Logger.info("Sending batch of {}: [{}]", () -> events.size(),
+                () -> events.stream().map(e -> e.getClass().getSimpleName()).collect(Collectors.joining(", ")));
         sender.write(ProtocolMethod.setGameView, getGameView());
         sender.send(ProtocolMethod.handleGameEvents, events);
     }
