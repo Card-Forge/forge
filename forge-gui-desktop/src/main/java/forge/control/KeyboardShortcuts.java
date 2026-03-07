@@ -26,6 +26,8 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.home.settings.VSubmenuPreferences.KeyboardShortcutField;
 import forge.screens.match.CMatchUI;
+import forge.screens.match.views.VField;
+import forge.screens.match.views.VHand;
 import forge.toolbox.special.CardZoomer;
 import forge.util.Localizer;
 import forge.view.KeyboardShortcutsDialog;
@@ -246,6 +248,34 @@ public class KeyboardShortcuts {
             }
         };
 
+        /** Toggle hover tooltips. */
+        final Action actHoverTooltips = new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
+                final ForgePreferences prefs = FModel.getPreferences();
+                final boolean newValue = !prefs.getPrefBoolean(FPref.UI_SHOW_HOVER_TOOLTIPS);
+                prefs.setPref(FPref.UI_SHOW_HOVER_TOOLTIPS, newValue);
+                prefs.save();
+                if (!newValue && matchUI != null) {
+                    hideAllCardInfoPopups(matchUI);
+                }
+            }
+        };
+
+        /** Toggle zoom view tooltips. */
+        final Action actZoomTooltips = new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
+                final ForgePreferences prefs = FModel.getPreferences();
+                prefs.setPref(FPref.UI_SHOW_ZOOM_TOOLTIPS,
+                        !prefs.getPrefBoolean(FPref.UI_SHOW_ZOOM_TOOLTIPS));
+                prefs.save();
+                CardZoomer.SINGLETON_INSTANCE.refreshIfOpen();
+            }
+        };
+
         /** Show keyboard shortcuts dialog. */
         final Action actShowHotkeys = new AbstractAction() {
             @Override
@@ -276,6 +306,8 @@ public class KeyboardShortcuts {
         list.add(new Shortcut(FPref.SHORTCUT_SHOWHOTKEYS, localizer.getMessage("lblSHORTCUT_SHOWHOTKEYS"), actShowHotkeys, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_PANELTABS, localizer.getMessage("lblSHORTCUT_PANELTABS"), actPanelTabs, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_CARDOVERLAYS, localizer.getMessage("lblSHORTCUT_CARDOVERLAYS"), actCardOverlays, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_HOVERTOOLTIPS, localizer.getMessage("lblSHORTCUT_HOVERTOOLTIPS"), actHoverTooltips, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_ZOOMTOOLTIPS, localizer.getMessage("lblSHORTCUT_ZOOMTOOLTIPS"), actZoomTooltips, am, im));
         cachedShortcuts = list;
         return list;
     } // End initMatchShortcuts()
@@ -432,5 +464,21 @@ public class KeyboardShortcuts {
         }
 
         ksf.setCodeString(StringUtils.join(existingCodes, ' '));
+    }
+
+    /** Hide card info tooltips on all battlefield and hand panels. */
+    private static void hideAllCardInfoPopups(final CMatchUI matchUI) {
+        final List<VField> fields = matchUI.getFieldViews();
+        if (fields != null) {
+            for (final VField f : fields) {
+                f.getTabletop().hideCardInfoPopup();
+            }
+        }
+        final List<VHand> hands = matchUI.getHandViews();
+        if (hands != null) {
+            for (final VHand h : hands) {
+                h.getHandArea().hideCardInfoPopup();
+            }
+        }
     }
 }

@@ -23,23 +23,41 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.Timer;
 
+import forge.CachedCardImage;
 import forge.StaticData;
 import forge.game.card.Card;
+import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.keyword.Keyword;
 import forge.gui.SOverlayUtils;
+import forge.gui.card.KeywordInfoUtil;
+import forge.gui.card.KeywordInfoUtil.KeywordData;
 import forge.item.PaperCard;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
+import forge.model.FModel;
 import forge.toolbox.FOverlay;
+import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;
 import forge.toolbox.imaging.FImagePanel;
 import forge.toolbox.imaging.FImagePanel.AutoSizeImageMode;
 import forge.toolbox.imaging.FImageUtil;
+import forge.view.arcane.CardInfoPopup;
+import forge.view.arcane.CardInfoPopup.RelatedCardEntry;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -219,10 +237,223 @@ public enum CardZoomer {
         final BufferedImage xlhqImage = FImageUtil.getImageXlhq(thisCard);
         imagePanel.setImage(xlhqImage == null ? FImageUtil.getImage(thisCard) : xlhqImage, getInitialRotation(), AutoSizeImageMode.SOURCE);
 
+        final boolean zoomEnabled = FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_ZOOM_TOOLTIPS);
+        final boolean showKeywords = zoomEnabled
+                && FModel.getPreferences().getPrefBoolean(FPref.UI_ZOOM_KEYWORD_INFO);
+        final boolean showRelated = zoomEnabled
+                && FModel.getPreferences().getPrefBoolean(FPref.UI_ZOOM_RELATED_CARDS);
+
         pnlMain.removeAll();
-        pnlMain.add(imagePanel, "w 80%!, h 80%!");
+        final boolean isFaceDown = thisCard != null && thisCard.getCard() != null
+                && thisCard.getCard().isFaceDown();
+        if ((showKeywords || showRelated) && thisCard != null && !isFaceDown) {
+            final JPanel sidePanel = buildSidePanel(showKeywords, showRelated);
+            if (sidePanel != null) {
+                pnlMain.setLayout(new MigLayout("insets 0, ax center, ay center"));
+                pnlMain.add(imagePanel, "w 45%!, h 80%!");
+                pnlMain.add(sidePanel, sidePanel.getClientProperty("widthConstraint") + ", h 80%!");
+            } else {
+                pnlMain.add(imagePanel, "w 80%!, h 80%!");
+            }
+        } else {
+            pnlMain.add(imagePanel, "w 80%!, h 80%!");
+        }
         pnlMain.validate();
         setFlipIndicator();
+    }
+
+    /**
+     * Build the side panel for the zoom view. Keywords go in a fixed header,
+     * related cards go in a scrollable area below.
+     */
+    private JPanel buildSidePanel(final boolean showKeywords, final boolean showRelated) {
+        // Check for related card entries first to determine column width
+        List<RelatedCardEntry> relatedEntries = List.of();
+        if (showRelated) {
+            final String cardName = thisCard.getName();
+            final CardView cardView = thisCard.getCard();
+            if (cardName != null && !cardName.isEmpty() && cardView != null) {
+                relatedEntries = CardInfoPopup.buildRelatedCardsStatic(cardName, cardView);
+                for (final RelatedCardEntry entry : relatedEntries) {
+                    if ((entry.image == null || entry.placeholder)
+                            && entry.imageKey != null && !entry.imageKey.isEmpty()) {
+                        CachedCardImage.fetcher.fetchImage(entry.imageKey, () -> { });
+                    }
+                }
+            }
+        }
+        final boolean hasRelated = !relatedEntries.isEmpty();
+
+        final int screenWidth = overlay.getWidth() > 0
+                ? overlay.getWidth()
+                : java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
+        // Padding: scrollbar (~12px) + left content padding (8px) + slack (2px)
+        final int sidePadding = 22;
+
+        // Compute column width based on actual content
+        int columnPx;
+        int maxWidth;
+        int thumbnailHeight = 0;
+
+        if (hasRelated) {
+            final int maxColumnPx = Math.max(200, (int) (screenWidth * 0.40));
+            final int rawSize = FModel.getPreferences().getPrefInt(FPref.UI_POPUP_IMAGE_SIZE);
+            final int popupThumbHeight = Math.max(100, Math.min(500, rawSize));
+
+            // Use user's preferred size; populateRelatedCards constrains
+            // to fit the column width when needed
+            thumbnailHeight = popupThumbHeight;
+
+            int naturalContentWidth = 0;
+            final Map<String, List<RelatedCardEntry>> grouped = new LinkedHashMap<>();
+            for (final RelatedCardEntry entry : relatedEntries) {
+                grouped.computeIfAbsent(entry.label, k -> new ArrayList<>()).add(entry);
+            }
+            for (final List<RelatedCardEntry> cards : grouped.values()) {
+                final int perRow = Math.min(cards.size(), 2);
+                final int thumbWidth = (int) (thumbnailHeight * 0.716);
+                final int groupWidth = perRow * thumbWidth + 18;
+                naturalContentWidth = Math.max(naturalContentWidth, groupWidth);
+            }
+            columnPx = Math.max(200,
+                    Math.min(naturalContentWidth + sidePadding, maxColumnPx));
+            maxWidth = columnPx - sidePadding;
+        } else {
+            columnPx = Math.max(200, (int) (screenWidth * 0.25));
+            maxWidth = columnPx - sidePadding;
+        }
+
+        // Build keyword panel
+        JPanel kwPanel = null;
+        if (showKeywords) {
+            final String keywordKey = thisCard.getKeywordKey();
+            final String oracleText = thisCard.getOracleText();
+            final String cardName = thisCard.getName();
+            final List<KeywordData> keywords = new ArrayList<>();
+            final Set<String> addedNames = new LinkedHashSet<>();
+            if (keywordKey != null && !keywordKey.isEmpty()) {
+                keywords.addAll(KeywordInfoUtil.buildKeywords(keywordKey, addedNames));
+            }
+            KeywordInfoUtil.addMissingKeywordsFromFlags(keywords, thisCard, addedNames);
+            if (oracleText != null && !oracleText.isEmpty()) {
+                KeywordInfoUtil.addKeywordActions(keywords, oracleText, addedNames,
+                        cardName != null ? cardName : "");
+            }
+            KeywordInfoUtil.sortByOracleText(keywords, oracleText);
+            KeywordInfoUtil.annotateKeywordCounts(keywords, thisCard.getCard());
+            KeywordInfoUtil.addGraveyardCounts(keywords, thisCard.getCard());
+            if (!keywords.isEmpty()) {
+                kwPanel = new JPanel();
+                kwPanel.setLayout(new BoxLayout(kwPanel, BoxLayout.Y_AXIS));
+                kwPanel.setOpaque(false);
+                kwPanel.setBorder(BorderFactory.createEmptyBorder(8, 8, 0, 0));
+                // Cap keyword width to 1-card pill width when related cards shown
+                final int kwWidth;
+                if (hasRelated) {
+                    final int thumbW = (int) (thumbnailHeight * 0.716);
+                    kwWidth = Math.min(thumbW + 18, maxWidth);
+                } else {
+                    kwWidth = maxWidth;
+                }
+                CardInfoPopup.populateKeywords(kwPanel, keywords, kwWidth);
+            }
+        }
+
+        if (kwPanel == null && relatedEntries.isEmpty()) {
+            return null;
+        }
+
+        // Assemble: keywords and related cards in a single scrollable panel
+        final JPanel side = new JPanel(new java.awt.BorderLayout());
+        side.setOpaque(false);
+        side.putClientProperty("widthConstraint", "w " + columnPx + "!");
+
+        // Build a single content panel with keywords on top and related cards below
+        final JPanel content = new JPanel();
+        content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
+        content.setOpaque(false);
+
+        if (kwPanel != null) {
+            content.add(kwPanel);
+        }
+
+        if (!relatedEntries.isEmpty()) {
+            final JPanel relPanel = new JPanel();
+            relPanel.setLayout(new BoxLayout(relPanel, BoxLayout.Y_AXIS));
+            relPanel.setOpaque(false);
+            relPanel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 0));
+            CardInfoPopup.populateRelatedCards(relPanel, relatedEntries,
+                    thumbnailHeight, maxWidth, 2, true, null);
+            content.add(relPanel);
+        }
+
+        // Wrap entire content in a scroll pane so everything scrolls together
+        final JPanel wrapper = new JPanel(new java.awt.BorderLayout());
+        wrapper.setOpaque(false);
+        wrapper.add(content, java.awt.BorderLayout.NORTH);
+        final FScrollPane scroll = new FScrollPane(wrapper, false,
+                ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        side.add(scroll, java.awt.BorderLayout.CENTER);
+
+        // Click anywhere on the side panel dismisses the zoomer
+        // Use mouseClicked (not mouseReleased) so scroll wheel release doesn't dismiss
+        final MouseAdapter dismissClick = new MouseAdapter() {
+            @Override public void mouseClicked(final MouseEvent e) {
+                closeZoomer();
+            }
+        };
+        addMouseListenerRecursive(side, dismissClick);
+
+        // Increase scroll speed for comfortable browsing
+        scroll.getVerticalScrollBar().setUnitIncrement(48);
+
+        // Replace scroll pane's default wheel behavior:
+        // scroll-down dismisses unless scrollbar can still scroll further
+        for (final java.awt.event.MouseWheelListener l : scroll.getMouseWheelListeners()) {
+            scroll.removeMouseWheelListener(l);
+        }
+        scroll.addMouseWheelListener(e -> {
+            if (isButtonMode || !isMouseWheelEnabled) {
+                e.consume();
+                return;
+            }
+            isMouseWheelEnabled = false;
+            if (e.getWheelRotation() > 0) {
+                final javax.swing.JScrollBar vbar = scroll.getVerticalScrollBar();
+                if (vbar.isVisible()
+                        && vbar.getValue() + vbar.getVisibleAmount() < vbar.getMaximum()) {
+                    vbar.setValue(vbar.getValue()
+                            + e.getUnitsToScroll() * vbar.getUnitIncrement(1));
+                    startMouseWheelCoolDownTimer(250);
+                } else {
+                    closeZoomer();
+                }
+            } else {
+                final javax.swing.JScrollBar vbar = scroll.getVerticalScrollBar();
+                if (vbar.isVisible() && vbar.getValue() > 0) {
+                    vbar.setValue(vbar.getValue()
+                            + e.getUnitsToScroll() * vbar.getUnitIncrement(1));
+                    startMouseWheelCoolDownTimer(250);
+                } else {
+                    toggleCardImage();
+                    startMouseWheelCoolDownTimer(250);
+                }
+            }
+            e.consume();
+        });
+
+        return side;
+    }
+
+    private static void addMouseListenerRecursive(final java.awt.Component comp,
+                                                   final MouseAdapter listener) {
+        comp.addMouseListener(listener);
+        if (comp instanceof java.awt.Container) {
+            for (final java.awt.Component child : ((java.awt.Container) comp).getComponents()) {
+                addMouseListenerRecursive(child, listener);
+            }
+        }
     }
 
     private int getInitialRotation() {
@@ -261,6 +492,13 @@ public enum CardZoomer {
         isOpen = false;
         SOverlayUtils.hideOverlay();
         lastClosedTime = System.currentTimeMillis();
+    }
+
+    /** Rebuild the zoom view content (e.g. after toggling tooltip preferences). */
+    public void refreshIfOpen() {
+        if (isOpen) {
+            setImage();
+        }
     }
 
     /**
