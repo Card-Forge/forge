@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.tinylog.Logger;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -119,7 +120,7 @@ public class TrackableTypes {
                             }
                         }
                     } catch (IndexOutOfBoundsException e) {
-                        System.err.println("got an IndexOutOfBoundsException, trying to continue ...");
+                        Logger.warn("IndexOutOfBoundsException in TrackableTypes, trying to continue");
                     }
                 }
             }

@@ -8,6 +8,7 @@ import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.net.GameProtocolHandler;
 import forge.gamemodes.net.IRemote;
+import org.tinylog.Logger;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.gamemodes.net.ReplyPool;
 import forge.gamemodes.net.event.LoginEvent;
@@ -301,7 +302,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
     private void replicatePlayerView(final PlayerView newPlayerView) {
         PlayerView existingPlayerView = tracker.getObj(TrackableTypes.PlayerViewType, newPlayerView.getId());
         existingPlayerView.copyChangedProps(newPlayerView);
-        System.err.println("replicated PlayerView properties - " + existingPlayerView.toString());
+        Logger.info("Replicated PlayerView properties - {}", existingPlayerView);
     }
 
     @Override
