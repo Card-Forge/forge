@@ -3228,6 +3228,7 @@ public class CardFactoryUtil {
             sa.setCardState(host.getAlternateState());
             sa.setAlternativeCost(AlternativeCost.MTMtE);
 
+            sa.putParam("Secondary", "True");
             sa.putParam("PrecostDesc", n[0] + " ");
             sa.putParam("CostDesc", convertCost.toString());
             sa.putParam("AfterDescription", "(Converted)");
