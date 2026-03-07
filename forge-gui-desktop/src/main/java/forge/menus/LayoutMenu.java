@@ -163,16 +163,6 @@ public final class LayoutMenu {
         final Localizer localizer = Localizer.getInstance();
         final JMenu menu = new JMenu(localizer.getMessage("lblHandPanel"));
 
-        // Show Playable Cards from All Zones
-        final JCheckBoxMenuItem zoneCardsItem = createStayOpenCheckBox(localizer.getMessage("lblShowPlayableZoneCards"));
-        zoneCardsItem.setState(prefs.getPrefBoolean(FPref.UI_SHOW_PLAYABLE_ZONE_CARDS));
-        zoneCardsItem.addActionListener(e -> {
-            prefs.setPref(FPref.UI_SHOW_PLAYABLE_ZONE_CARDS, zoneCardsItem.getState());
-            prefs.save();
-            refreshHandCards();
-        });
-        menu.add(zoneCardsItem);
-
         // Order Hand by CMC and Color
         final JCheckBoxMenuItem orderHandItem = createStayOpenCheckBox(localizer.getMessage("lblOrderHandByCMC"));
         orderHandItem.setState(prefs.getPrefBoolean(FPref.UI_ORDER_HAND));

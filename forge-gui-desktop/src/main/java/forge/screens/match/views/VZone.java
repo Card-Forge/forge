@@ -53,7 +53,7 @@ public class VZone implements IVDoc<CZone> {
         this.cardArea = new ZoneCardArea(matchUI, scroller);
         this.cardArea.setVertical(true);
         this.cardArea.setOpaque(false);
-        this.tab = new DragTab(zone.getTranslatedName());
+        this.tab = new DragTab(capitalizedName());
 
         scroller.setViewportView(cardArea);
 
@@ -66,9 +66,9 @@ public class VZone implements IVDoc<CZone> {
                 if (SwingUtilities.isRightMouseButton(e)) {
                     final JPopupMenu menu = new JPopupMenu();
 
-                    final JMenuItem floatItem = new JMenuItem("Float");
-                    floatItem.addActionListener(ev -> FloatingZone.undockZone(VZone.this));
-                    menu.add(floatItem);
+                    final JMenuItem undockItem = new JMenuItem("Undock");
+                    undockItem.addActionListener(ev -> FloatingZone.undockZone(VZone.this));
+                    menu.add(undockItem);
 
                     final JMenuItem sortItem = new JMenuItem(sortedByName ? "Unsort" : "Sort by Name");
                     sortItem.addActionListener(ev -> toggleSorted());
@@ -91,6 +91,8 @@ public class VZone implements IVDoc<CZone> {
             }
             if (sortedByName) {
                 cardList.sort(Comparator.comparing(CardView::getName));
+            } else if (zone == ZoneType.Flashback) {
+                cardList.sort(FloatingZone.ZONE_ORDER_COMPARATOR);
             }
             for (final CardView card : cardList) {
                 CardPanel cardPanel = cardArea.getCardPanel(card.getId());
@@ -100,6 +102,12 @@ public class VZone implements IVDoc<CZone> {
                 } else {
                     cardPanel.setCard(card);
                 }
+                if (zone == ZoneType.Flashback) {
+                    final ZoneType cardZone = card.getZone();
+                    if (cardZone != null) {
+                        cardPanel.setZoneBanner(cardZone.getTranslatedName().toUpperCase(), cardZone);
+                    }
+                }
                 cardPanels.add(cardPanel);
             }
         }
@@ -108,8 +116,14 @@ public class VZone implements IVDoc<CZone> {
     }
 
     private void updateTabLabel(final int count) {
-        tab.setText(zone.getTranslatedName() + " (" + count + ")");
+        tab.setText(capitalizedName() + " (" + count + ")");
         tab.setToolTipText(tab.getText());
+    }
+
+    private String capitalizedName() {
+        final String name = zone.getTranslatedName();
+        if (name.isEmpty()) return name;
+        return Character.toUpperCase(name.charAt(0)) + name.substring(1);
     }
 
     private void toggleSorted() {

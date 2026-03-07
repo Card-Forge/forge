@@ -450,19 +450,6 @@ public final class CMatchUI
                 }
             }
 
-            // When showing playable zone cards in hand, refresh hand when relevant zones change
-            if (!updateHand && FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_PLAYABLE_ZONE_CARDS)) {
-                for (final ZoneType zone : update.getZones()) {
-                    if (zone == ZoneType.Graveyard || zone == ZoneType.Exile ||
-                            zone == ZoneType.Library || zone == ZoneType.Command ||
-                            zone == ZoneType.Sideboard || zone == ZoneType.Flashback ||
-                            zone == ZoneType.Battlefield) {
-                        updateHand = true;
-                        break;
-                    }
-                }
-            }
-
             if (updateAnte) {
                 cAntes.update();
             }
@@ -656,6 +643,7 @@ public final class CMatchUI
     @Override
     public void initialize() {
         Singletons.getControl().getForgeMenu().setProvider(this);
+        FloatingZone.closeAll();
         updatePlayerControl();
         KeyboardShortcuts.attachKeyboardShortcuts(this);
         for (final IVDoc<? extends ICDoc> view : myDocs.values()) {
@@ -666,7 +654,6 @@ public final class CMatchUI
             layoutControl.initialize();
             layoutControl.update();
         }
-        FloatingZone.closeAll();
     }
 
     @Override
@@ -804,12 +791,6 @@ public final class CMatchUI
         SDisplayUtil.showTab(nextField);
         cPrompt.updateText();
         repaintCardOverlays();
-        // Refresh hand to update playable zone cards (e.g., foretell becomes castable on next turn)
-        if (FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_PLAYABLE_ZONE_CARDS)) {
-            for (final VHand h : getHandViews()) {
-                h.getLayoutControl().updateHand();
-            }
-        }
     }
 
     @Override
@@ -817,6 +798,7 @@ public final class CMatchUI
         initHandViews();
         FloatingZone.registerZoneDocs(this, getLocalPlayers());
         SLayoutIO.loadLayout(null);
+        FloatingZone.pruneUnparentedDocks();
         view.populate();
         final PlayerZoneUpdates zones = new PlayerZoneUpdates();
         for (final PlayerView p : sortedPlayers) {

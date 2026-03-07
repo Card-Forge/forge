@@ -21,8 +21,10 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
@@ -37,10 +39,11 @@ import forge.game.zone.ZoneType;
 import forge.gui.FThreads;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
+import forge.gui.framework.ICDoc;
+import forge.gui.framework.IVDoc;
 import forge.gui.framework.SLayoutConstants;
 import forge.gui.framework.SLayoutIO;
 import forge.gui.framework.SRearrangingUtil;
-import forge.gui.framework.SResizingUtil;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VZone;
@@ -65,18 +68,35 @@ public class FloatingZone extends FloatingCardArea {
     // ========== Floating zone API ==========
 
     public static void showOrHide(final CMatchUI matchUI, final PlayerView player, final ZoneType zone) {
-        // If zone is docked, toggle the docked tab instead
         final int key = getKey(player, zone);
         final VZone docked = dockedZones.get(key);
         if (docked != null) {
             final DragCell cell = docked.getParentCell();
             if (cell != null) {
-                if (cell.getSelected() == docked) {
-                    // Currently selected — remove the docked tab
-                    removeDocked(docked);
-                } else {
-                    // Not selected — switch to it
-                    cell.setSelected(docked);
+                // Docked and visible — remove tab but keep dockedZones entry
+                cell.removeDoc(docked);
+                if (cell.getDocs().isEmpty()) {
+                    SRearrangingUtil.fillGap(cell);
+                    FView.SINGLETON_INSTANCE.removeDragCell(cell);
+                }
+                docked.setParentCell(null);
+            } else {
+                // Was hidden (no parent cell) — re-add as tab on the hand panel's cell
+                DragCell target = null;
+                final IVDoc<? extends ICDoc> handDoc = EDocID.HAND_0.getDoc();
+                if (handDoc != null) {
+                    target = handDoc.getParentCell();
+                }
+                if (target == null) {
+                    final List<DragCell> cells = FView.SINGLETON_INSTANCE.getDragCells();
+                    if (!cells.isEmpty()) {
+                        target = cells.get(0);
+                    }
+                }
+                if (target != null) {
+                    target.addDoc(docked);
+                    target.setSelected(docked);
+                    docked.refresh();
                 }
             }
             return;
@@ -214,53 +234,6 @@ public class FloatingZone extends FloatingCardArea {
         SLayoutIO.saveLayout(null);
     }
 
-    /** Dock this floating zone by splitting the target cell at the given edge. */
-    private void dockWithSplit(final DragCell targetCell, final DockDropZone edge) {
-        final VZone vZone = createDockedZone();
-        if (vZone == null) return;
-
-        final int tx = targetCell.getX();
-        final int ty = targetCell.getY();
-        final int tw = targetCell.getW();
-        final int th = targetCell.getH();
-        final DragCell cellNew = new DragCell();
-
-        switch (edge) {
-            case LEFT:
-                cellNew.setBounds(tx, ty, tw / 2, th);
-                targetCell.setBounds(tx + cellNew.getW(), ty, tw - cellNew.getW(), th);
-                break;
-            case RIGHT:
-                targetCell.setBounds(tx, ty, tw / 2, th);
-                cellNew.setBounds(targetCell.getX() + targetCell.getW(), ty, tw - targetCell.getW(), th);
-                break;
-            case TOP:
-                cellNew.setBounds(tx, ty, tw, th - (th / 2));
-                targetCell.setBounds(tx, ty + cellNew.getH(), tw, th - cellNew.getH());
-                break;
-            case BOTTOM:
-                targetCell.setBounds(tx, ty, tw, th / 2);
-                cellNew.setBounds(tx, targetCell.getY() + targetCell.getH(), tw, th - targetCell.getH());
-                break;
-            default:
-                return;
-        }
-
-        FView.SINGLETON_INSTANCE.addDragCell(cellNew);
-        cellNew.addDoc(vZone);
-        cellNew.setSelected(vZone);
-        vZone.refresh();
-
-        cellNew.updateRoughBounds();
-        targetCell.updateRoughBounds();
-        cellNew.validate();
-        cellNew.refresh();
-        targetCell.refresh();
-        SRearrangingUtil.updateBorders();
-
-        SLayoutIO.saveLayout(null);
-    }
-
     /** Create a VZone from this floating zone's state and close the floating window. */
     private VZone createDockedZone() {
         final EDocID docID = EDocID.fromZoneType(zone);
@@ -351,12 +324,15 @@ public class FloatingZone extends FloatingCardArea {
         // Don't clear dockedZones here — closeAll() handles that
     }
 
+    /** Remove dockedZones entries that weren't placed into cells by loadLayout. */
+    public static void pruneUnparentedDocks() {
+        dockedZones.values().removeIf(vZone -> vZone.getParentCell() == null);
+    }
+
     // ========== Drag-to-dock detection ==========
 
-    private enum DockDropZone { NONE, BODY, LEFT, RIGHT, TOP, BOTTOM }
-
     private DragCell dockTargetCell;
-    private DockDropZone dockDropZone = DockDropZone.NONE;
+    private DragCell highlightedCell;
     private Border dockOriginalBorder;
 
     private void setupDockDetection() {
@@ -364,15 +340,10 @@ public class FloatingZone extends FloatingCardArea {
             @Override
             public void mouseReleased(final MouseEvent e) {
                 if (!SwingUtilities.isLeftMouseButton(e)) return;
-                if (dockTargetCell != null && dockDropZone != DockDropZone.NONE) {
+                if (dockTargetCell != null) {
                     clearDockHighlight();
-                    if (dockDropZone == DockDropZone.BODY) {
-                        dockIntoCell(dockTargetCell);
-                    } else {
-                        dockWithSplit(dockTargetCell, dockDropZone);
-                    }
+                    dockIntoCell(dockTargetCell);
                     dockTargetCell = null;
-                    dockDropZone = DockDropZone.NONE;
                 }
             }
         });
@@ -389,51 +360,23 @@ public class FloatingZone extends FloatingCardArea {
     private void detectDockTarget(final MouseEvent e) {
         final int ex = (int) e.getLocationOnScreen().getX();
         final int ey = (int) e.getLocationOnScreen().getY();
-        final int nestingMargin = 30;
 
         DragCell newTarget = null;
-        DockDropZone newDropZone = DockDropZone.NONE;
-
         for (final DragCell cell : FView.SINGLETON_INSTANCE.getDragCells()) {
             final int cx = cell.getAbsX();
             final int cy = cell.getAbsY();
             final int cw = cell.getW();
-            final int ch = cell.getH();
 
-            if (ex < cx || ey < cy || ex > cx + cw || ey > cy + ch) {
-                continue;
+            if (ex >= cx && ey >= cy && ex <= cx + cw && ey <= cy + SLayoutConstants.HEAD_H * 3 / 2) {
+                newTarget = cell;
+                break;
             }
-
-            newTarget = cell;
-
-            // Determine drop zone within the cell
-            if (ex < (cx + nestingMargin)
-                    && ey > cy + SLayoutConstants.HEAD_H
-                    && (cw / 2) > SResizingUtil.W_MIN) {
-                newDropZone = DockDropZone.LEFT;
-            } else if (ex > (cx + cw - nestingMargin)
-                    && ey > cy + SLayoutConstants.HEAD_H
-                    && (cw / 2) > SResizingUtil.W_MIN) {
-                newDropZone = DockDropZone.RIGHT;
-            } else if (ey < (cy + nestingMargin + SLayoutConstants.HEAD_H)
-                    && ey > cy + SLayoutConstants.HEAD_H
-                    && (ch / 2) > SResizingUtil.H_MIN) {
-                newDropZone = DockDropZone.TOP;
-            } else if (ey > (cy + ch - nestingMargin)
-                    && (ch / 2) > SResizingUtil.H_MIN) {
-                newDropZone = DockDropZone.BOTTOM;
-            } else {
-                newDropZone = DockDropZone.BODY;
-            }
-            break;
         }
 
-        // Update highlight if target changed
-        if (newTarget != dockTargetCell || newDropZone != dockDropZone) {
+        if (newTarget != dockTargetCell) {
             clearDockHighlight();
             dockTargetCell = newTarget;
-            dockDropZone = newDropZone;
-            if (dockTargetCell != null && dockDropZone != DockDropZone.NONE) {
+            if (dockTargetCell != null) {
                 applyDockHighlight();
             }
         }
@@ -443,18 +386,39 @@ public class FloatingZone extends FloatingCardArea {
 
     private void applyDockHighlight() {
         if (dockTargetCell == null) return;
+        highlightedCell = dockTargetCell;
         dockOriginalBorder = dockTargetCell.getBody().getBorder();
         dockTargetCell.getBody().setBorder(DOCK_HIGHLIGHT_BORDER);
     }
 
     private void clearDockHighlight() {
-        if (dockTargetCell != null && dockOriginalBorder != null) {
-            dockTargetCell.getBody().setBorder(dockOriginalBorder);
+        if (highlightedCell != null) {
+            highlightedCell.getBody().setBorder(dockOriginalBorder);
+            highlightedCell = null;
         }
         dockOriginalBorder = null;
     }
 
     // ========== Instance fields and methods ==========
+
+    /** Sort order for zone-grouped display: Command first, then by zone origin, then CMC/color/name. */
+    private static int zoneOrder(final ZoneType zone) {
+        if (zone == null) return 99;
+        switch (zone) {
+            case Command:   return 0;
+            case Graveyard: return 1;
+            case Exile:     return 2;
+            case Library:   return 3;
+            case Sideboard: return 4;
+            default:        return 5;
+        }
+    }
+
+    public static final Comparator<CardView> ZONE_ORDER_COMPARATOR =
+            Comparator.comparingInt((CardView cv) -> zoneOrder(cv.getZone()))
+                    .thenComparingInt(cv -> cv.getCurrentState().getManaCost().getCMC())
+                    .thenComparing(cv -> cv.getCurrentState().getColors().getOrderWeight())
+                    .thenComparing(cv -> cv.getCurrentState().getName());
 
     private final ZoneType zone;
     private PlayerView player;
@@ -478,6 +442,8 @@ public class FloatingZone extends FloatingCardArea {
             cardList = new FCollection<>(zoneCards);
             if (sortedByName) {
                 cardList.sort(comp);
+            } else if (zone == ZoneType.Flashback) {
+                cardList.sort(ZONE_ORDER_COMPARATOR);
             }
             return cardList;
         } else {
@@ -495,6 +461,32 @@ public class FloatingZone extends FloatingCardArea {
         zone = zone0;
         setPlayer(player0);
         setVertical(true);
+    }
+
+    @Override
+    protected void doRefresh() {
+        List<CardPanel> cardPanels = new ArrayList<>();
+        Iterable<CardView> cards = getCards();
+        if (cards != null) {
+            for (final CardView card : cards) {
+                CardPanel cardPanel = getCardPanel(card.getId());
+                if (cardPanel == null) {
+                    cardPanel = new CardPanel(getMatchUI(), card);
+                    cardPanel.setDisplayEnabled(true);
+                } else {
+                    cardPanel.setCard(card);
+                }
+                if (zone == ZoneType.Flashback) {
+                    final ZoneType cardZone = card.getZone();
+                    if (cardZone != null) {
+                        cardPanel.setZoneBanner(cardZone.getTranslatedName().toUpperCase(), cardZone);
+                    }
+                }
+                cardPanels.add(cardPanel);
+            }
+        }
+        setCardPanels(cardPanels);
+        getWindow().setTitle(String.format(title, cardPanels.size()));
     }
 
     private void toggleSorted() {

@@ -116,6 +116,11 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
         int cardHeight;
         int cardSpacingY;
 
+        int bannerSpace = 0;
+        for (final CardPanel panel : this.getCardPanels()) {
+            if (panel.getZoneBannerText() != null) { bannerSpace = CardPanel.ZONE_BANNER_HEIGHT; break; }
+        }
+
         int maxWidth = 0, maxHeight = 0;
         if (this.isVertical && this.maxCardsPerRow <= 0) {
             while (true) {
@@ -127,7 +132,7 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
                 if (this.maxRows > 0) {
                     maxRows = Math.min(this.maxRows, maxRows);
                 }
-                final int availableRowHeight = cardAreaHeight - (CardArea.GUTTER_Y * 2);
+                final int availableRowHeight = cardAreaHeight - (CardArea.GUTTER_Y * 2) - bannerSpace;
                 final int availableCardsPerRow = (int) Math.floor((availableRowHeight - (cardHeight - cardSpacingY))
                         / (double) cardSpacingY);
                 this.actualCardsPerRow = Math.max(availableCardsPerRow,
@@ -164,7 +169,7 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
                 }
                 y += cardSpacingY;
                 maxWidth = Math.round(x) + cardWidth + CardArea.GUTTER_X;
-                maxHeight = Math.max(maxHeight, (y + (cardHeight - cardSpacingY) + CardArea.GUTTER_Y));
+                maxHeight = Math.max(maxHeight, (y + (cardHeight - cardSpacingY) + CardArea.GUTTER_Y + bannerSpace));
                 this.setComponentZOrder(panel, zOrder);
                 if (zOrder > 0) {
                     zOrder--;
@@ -225,7 +230,7 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
                 }
                 x += this.cardSpacingX;
                 maxWidth = Math.max(maxWidth, Math.round(x + (cardWidth - this.cardSpacingX) + CardArea.GUTTER_X) - 1);
-                maxHeight = Math.max(maxHeight, y + (cardHeight - cardSpacingY) + CardArea.GUTTER_Y);
+                maxHeight = Math.max(maxHeight, y + (cardHeight - cardSpacingY) + CardArea.GUTTER_Y + bannerSpace);
                 this.setComponentZOrder(panel, zOrder);
                 zOrder++;
                 rowCount++;

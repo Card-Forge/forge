@@ -98,8 +98,8 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private static final Map<ZoneType, Color> ZONE_COLORS = Map.of(
         ZoneType.Graveyard, new Color(80, 20, 100),
         ZoneType.Exile, new Color(180, 185, 200),
-        ZoneType.Command, new Color(170, 135, 20),
-        ZoneType.Library, new Color(170, 155, 70),
+        ZoneType.Command, new Color(190, 155, 30),
+        ZoneType.Library, new Color(130, 110, 75),
         ZoneType.Sideboard, new Color(60, 60, 80),
         ZoneType.Flashback, new Color(80, 20, 100)
     );
@@ -1003,7 +1003,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         return getCard().toString();
     }
 
-    private static final int ZONE_BANNER_HEIGHT = 16;
+    static final int ZONE_BANNER_HEIGHT = 16;
 
     public final void setCardBounds(final int x, final int y, int width, int height) {
         cardWidth = width;
