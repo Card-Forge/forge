@@ -123,6 +123,7 @@ public class VPrompt implements IVDoc<CPrompt> {
     public void populate() {
     	ForgePreferences prefs = FModel.getPreferences();
         JPanel container = parentCell.getBody();
+        container.removeAll();
 
         // wrap   : 2 columns required for btnOk and btnCancel.
         container.setLayout(new MigLayout("wrap 2, gap 0px!, insets 1px 1px 3px 1px"));
@@ -143,6 +144,8 @@ public class VPrompt implements IVDoc<CPrompt> {
 
         container.add(btnOK, constraints);
         container.add(btnCancel, constraints);
+        container.revalidate();
+        container.repaint();
     }
 
     /* (non-Javadoc)
