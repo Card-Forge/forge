@@ -89,6 +89,12 @@
 {
   &quot;type&quot;: &quot;card&quot;,
   &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Call from the Grave&quot;,
+  &quot;editions&quot;: [ "PAST" ]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
   &quot;cardName&quot;: &quot;Prismatic Dragon&quot;
 },
 {
@@ -131,8 +137,6 @@
     <property name="dialog">[
 {
    &quot;text&quot;: &quot;The barren fortress ahead has been entirely hollowed out, containing only a single resident, the towering demonic entity that stands before you. It seems it can barely move, bound by the remnant wards that still hold despite the fortress's ruined state. You recall ancient tales of a being known as Arzakon, the Doom of Shandalar, that was sealed away milennia ago - it would seem this is that very same being.
-
-You sense there is nothing essential to your quest in this place, but if you wish to test your might against a truly mighty and ancient evil, there is nothing stopping you.
 
 Your manasight stone blazes with power, near-blindingly bright.&quot;,
    &quot;options&quot;: [{

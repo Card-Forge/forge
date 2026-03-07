@@ -26,6 +26,7 @@
 		"Stone"
 	],
 	"enemies": [
+		"Colfenor",
 		"Coram",
 		"Morska",
 		"Loot",
@@ -63,6 +64,7 @@
 		"First Church of Nyx",
 		"Ghirapur Factory",
 		"Ghost Town",
+		"Henge of Ramos",
 		"Kaldheim War Camp",
 		"Karn's Factory",
 		"Morophon's Pool",
