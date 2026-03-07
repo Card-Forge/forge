@@ -67,8 +67,6 @@ import forge.util.*;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
-import org.tinylog.Logger;
-
 import java.util.*;
 import java.util.concurrent.FutureTask;
 import java.util.function.Function;
