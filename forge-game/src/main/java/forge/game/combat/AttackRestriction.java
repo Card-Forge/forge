@@ -4,6 +4,9 @@ import java.util.*;
 
 import forge.game.GameEntity;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityAttackBlockRestrict;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 
@@ -66,12 +69,18 @@ public class AttackRestriction {
         return violations;
     }
 
+    public List<StaticAbility> getStaticViolations(final Map<Card, GameEntity> attackers) {
+        CardCollection others = new CardCollection(attackers.keySet());
+        others.remove(attacker);
+        return StaticAbilityAttackBlockRestrict.attackRestrict(attacker, others);
+    }
+
     public boolean canAttack(final GameEntity defender, final Map<Card, GameEntity> attackers) {
         if (!canAttack(defender)) {
             return false;
         }
 
-        return getViolation(attackers).isEmpty();
+        return getViolation(attackers).isEmpty() && getStaticViolations(attackers).isEmpty();
     }
 
     public Set<AttackRestrictionType> getTypes() {
