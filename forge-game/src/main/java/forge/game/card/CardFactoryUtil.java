@@ -3824,23 +3824,12 @@ public class CardFactoryUtil {
     public static void addStaticAbility(final KeywordInterface inst, final CardState state, final boolean intrinsic) {
         String keyword = inst.getOriginal();
 
-        if (keyword.startsWith("Affinity")) {
-            final String[] k = keyword.split(":");
-            final String t = k[1];
-
-            String desc;
-            if (k.length > 2) {
-                String typeText = k[2];
-                if (typeText.contains(" with "))
-                    desc = typeText.substring(typeText.indexOf(" with ") + 6);
-                else
-                    desc = typeText + "s";
-            } else
-                desc = CardType.getPluralType(t);
+        if (keyword.startsWith("Affinity") && inst instanceof Affinity affinity) {
+            final String t = affinity.getValidType();
 
             StringBuilder sb = new StringBuilder();
             sb.append("Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ AffinityX | EffectZone$ All");
-            sb.append("| Description$ Affinity for ").append(desc);
+            sb.append("| Description$ ").append(affinity.getTitle());
             sb.append(" (").append(inst.getReminderText()).append(")");
             String effect = sb.toString();
 
