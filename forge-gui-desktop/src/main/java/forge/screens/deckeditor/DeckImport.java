@@ -40,7 +40,9 @@ import forge.game.GameType;
 import forge.gui.CardPicturePanel;
 import forge.item.PaperCard;
 import forge.screens.deckeditor.controllers.CDeckEditor;
+import forge.screens.deckeditor.controllers.CEditorConstructed;
 import forge.screens.deckeditor.controllers.CStatisticsImporter;
+import forge.screens.match.controllers.CDetailPicture;
 import forge.screens.deckeditor.views.VStatisticsImporter;
 import forge.toolbox.*;
 import forge.util.Localizer;
@@ -210,6 +212,10 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
             .getMessage("lblUseFormatFilter"), false);
     private final FComboBox<GameFormat> formatDropdown = new FComboBox<>();
 
+    private JPanel optionsPanel;
+    private JPanel closedOptsPanel;
+    private boolean formatAutoSelected = false;
+
     private final DeckImportController controller;
     private final CDeckEditor<TModel> host;
 
@@ -301,7 +307,7 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
 
         // == A. (Closed) Option Panel
         // This component will be used as a Placeholder panel to simulate Show/Hide animation
-        JPanel closedOptsPanel = new JPanel(new MigLayout("insets 10, gap 5, left, w 100%"));
+        this.closedOptsPanel = new JPanel(new MigLayout("insets 10, gap 5, left, w 100%"));
         closedOptsPanel.setVisible(true);
         closedOptsPanel.setOpaque(false);
         final TitledBorder showOptsBorder = new TitledBorder(BorderFactory.createEtchedBorder(),
@@ -311,7 +317,7 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
         closedOptsPanel.add(new JSeparator(JSeparator.HORIZONTAL), "w 100%, hidemode 2");
 
         // == B. (Actual) Options Panel
-        JPanel optionsPanel = new JPanel(new MigLayout("insets 10, gap 5, left, h 150!"));
+        this.optionsPanel = new JPanel(new MigLayout("insets 10, gap 5, left, h 150!"));
         final TitledBorder border = new TitledBorder(BorderFactory.createEtchedBorder(),
                 String.format("\u25BC %s", Localizer.getInstance().getMessage("lblHideOptions")));
         border.setTitleColor(foreColor.getColor());
@@ -522,7 +528,19 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
                 else
                     deck.setName(currentDeckName);
             }
-            host.getDeckController().loadDeck(deck, controller.getImportBehavior() != DeckImportController.ImportBehavior.MERGE);
+            // If the user's format dropdown indicates Commander and the current editor
+            // doesn't support it, switch to a Commander editor before loading.
+            // The format dropdown is auto-set by commander detection (and the options panel
+            // expanded to make it visible), so the user can override before accepting.
+            if (deck.has(DeckSection.Commander) && !host.isSectionImportable(DeckSection.Commander)
+                    && isCommanderFormatSelected()) {
+                CDetailPicture cDetailPicture = CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture();
+                CEditorConstructed commanderEditor = new CEditorConstructed(cDetailPicture, GameType.Commander);
+                CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(commanderEditor);
+                commanderEditor.getDeckController().loadDeck(deck, true);
+            } else {
+                host.getDeckController().loadDeck(deck, controller.getImportBehavior() != DeckImportController.ImportBehavior.MERGE);
+            }
             processWindowEvent(new WindowEvent(DeckImport.this, WindowEvent.WINDOW_CLOSING));
         });
 
@@ -662,6 +680,43 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
             tokens = controller.optimiseCardArtInTokens();
         displayTokens(tokens);
         updateSummaries(tokens);
+
+        // Auto-select Commander format when detected (once per detection — resets when input changes)
+        if (controller.wasCommanderAutoDetected() && controller.hasNoDefaultGameFormat()
+                && !formatAutoSelected) {
+            formatAutoSelected = true;
+            selectCommanderFormat();
+        } else if (!controller.wasCommanderAutoDetected()) {
+            formatAutoSelected = false;
+        }
+    }
+
+    private void selectCommanderFormat() {
+        // Find "Commander" in the format dropdown and select it
+        for (int i = 0; i < formatDropdown.getItemCount(); i++) {
+            GameFormat format = formatDropdown.getItemAt(i);
+            if (format != null && "Commander".equalsIgnoreCase(format.getName())) {
+                formatDropdown.setSelectedIndex(i);
+                break;
+            }
+        }
+        // Enable the format checkbox and dropdown
+        formatSelectionCheck.setSelected(true);
+        formatDropdown.setEnabled(true);
+        // Apply the format to the controller
+        GameFormat selected = formatDropdown.getSelectedItem();
+        if (selected != null)
+            controller.setCurrentGameFormat(selected);
+        // Expand the options panel so the user can see the selection
+        optionsPanel.setVisible(true);
+        closedOptsPanel.setVisible(false);
+    }
+
+    private boolean isCommanderFormatSelected() {
+        if (!formatSelectionCheck.isSelected())
+            return false;
+        GameFormat selected = formatDropdown.getSelectedItem();
+        return selected != null && "Commander".equalsIgnoreCase(selected.getName());
     }
 
     private void displayTokens(final List<DeckRecognizer.Token> tokens) {
