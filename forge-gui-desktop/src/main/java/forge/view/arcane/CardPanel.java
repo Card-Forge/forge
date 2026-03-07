@@ -115,7 +115,11 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private boolean isSelected;
     private boolean hasFlash;
     private CachedCardImage cachedImage;
+    private int groupCount;
+    private Font badgeFont;
+    private int badgeFontCardWidth; // cardWidth when badgeFont was last computed
 
+    private static final Color BADGE_BG_COLOR = new Color(0, 0, 0, 180);
     private static Font smallCounterFont;
     private static Font largeCounterFont;
 
@@ -248,6 +252,13 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     }
     public final void setDisplayEnabled(final boolean displayEnabled0) {
         displayEnabled = displayEnabled0;
+    }
+
+    public int getGroupCount() {
+        return groupCount;
+    }
+    public void setGroupCount(int count) {
+        this.groupCount = count;
     }
 
     public final void setAnimationPanel(final boolean isAnimationPanel0) {
@@ -385,6 +396,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         }
         displayIconOverlay(g, canShow);
+        if (groupCount >= 2) {
+            drawGroupCountBadge(g);
+        }
         if (canShow) {
             drawFoilEffect(g, card, cardXOffset, cardYOffset,
                     cardWidth, cardHeight, Math.round(cardWidth * BLACK_BORDER_SIZE));
@@ -494,6 +508,64 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             titleText.setBounds(imgPos.x + titleX, imgPos.y + titleY + 2, imgSize.width - 2 * titleX, titleH - titleY);
         }
         titleText.setVisible(isVisible);
+    }
+
+    private void drawGroupCountBadge(final Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        if (badgeFont == null || badgeFontCardWidth != cardWidth) {
+            badgeFont = new Font("Dialog", Font.BOLD, Math.max(10, cardWidth / 5));
+            badgeFontCardWidth = cardWidth;
+        }
+
+        String text = "\u00D7" + groupCount;
+        FontMetrics fm = g2d.getFontMetrics(badgeFont);
+
+        int textWidth = fm.stringWidth(text);
+        int textHeight = fm.getAscent();
+        int padX = Math.max(4, cardWidth / 20);
+        int padY = Math.max(2, cardHeight / 30);
+        int badgeWidth = textWidth + padX * 2;
+        int badgeHeight = textHeight + padY * 2;
+        int badgeX = cardXOffset + 2;
+        int badgeY = cardYOffset + 2;
+        int cornerRadius = Math.max(4, cardWidth / 16);
+
+        g2d.setColor(BADGE_BG_COLOR);
+        g2d.fillRoundRect(badgeX, badgeY, badgeWidth, badgeHeight, cornerRadius, cornerRadius);
+
+        g2d.setColor(Color.WHITE);
+        g2d.setFont(badgeFont);
+        g2d.drawString(text, badgeX + padX, badgeY + padY + textHeight);
+    }
+
+    public boolean isBadgeHit(int mouseX, int mouseY) {
+        if (groupCount < 2) {
+            return false;
+        }
+        // Badge is drawn at (cardXOffset+2, cardYOffset+2) in the card's local
+        // coordinate space. Mouse coordinates are container-relative. When the
+        // card is tapped, the graphics are rotated but mouse events are not, so
+        // we must inverse-rotate the mouse point into the card's local frame.
+        int localX = mouseX - getX();
+        int localY = mouseY - getY();
+        if (tappedAngle > 0) {
+            float pivotX = cardXOffset + cardWidth / 2f;
+            float pivotY = cardYOffset + cardHeight - cardWidth / 2f;
+            double cos = Math.cos(-tappedAngle);
+            double sin = Math.sin(-tappedAngle);
+            float dx = localX - pivotX;
+            float dy = localY - pivotY;
+            localX = (int) Math.round(cos * dx - sin * dy + pivotX);
+            localY = (int) Math.round(sin * dx + cos * dy + pivotY);
+        }
+        int badgeX = cardXOffset + 2;
+        int badgeY = cardYOffset + 2;
+        int badgeWidth = Math.max(30, cardWidth / 3);
+        int badgeHeight = Math.max(20, cardHeight / 6);
+        return localX >= badgeX && localX <= badgeX + badgeWidth
+            && localY >= badgeY && localY <= badgeY + badgeHeight;
     }
 
     private void displayIconOverlay(final Graphics g, final boolean canShow) {
