@@ -324,7 +324,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public void updateFlashbackForView() {
-        view.updateFlashbackForPlayer(this);
+        view.updateFlashback(this);
+        game.fireEvent(new GameEventZone(ZoneType.Flashback, this, EventValueChangeType.Added, null));
     }
 
     //get single opponent for player if only one, otherwise returns null

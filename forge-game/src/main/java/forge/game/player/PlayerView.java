@@ -474,16 +474,14 @@ public class PlayerView extends GameEntityView {
             return 0;
 
         for (CardView c : cards) {
-            types.addAll((Collection<? extends CardType.CoreType>) c.getCurrentState().getType().getCoreTypes());
+            types.addAll(c.getCurrentState().getType().getCoreTypes());
         }
 
         return types.size();
     }
 
     public boolean hasDelirium() {
-        if (get(TrackableProperty.HasDelirium) == null)
-            return false;
-        return get(TrackableProperty.HasDelirium);
+        return getZoneTypes(TrackableProperty.Graveyard) >= 4;
     }
 
     private static TrackableProperty getZoneProp(final ZoneType zone) {
@@ -510,26 +508,20 @@ public class PlayerView extends GameEntityView {
         if (prop == null) { return; }
         set(prop, CardView.getCollection(zone.getCards(false)));
 
-        //update delirium
-        if (ZoneType.Graveyard == zone.getZoneType())
-            set(TrackableProperty.HasDelirium, getZoneTypes(TrackableProperty.Graveyard) >= 4);
-
-        //update flashback zone when relevant zones change (includes Battlefield
-        //since permanents entering/leaving can grant play-from-zone abilities)
+        //update flashback zone when relevant zones change
         switch (zone.getZoneType()) {
-        case Battlefield:
-        case Command:
-        case Graveyard:
-        case Library:
-        case Exile:
-            set(TrackableProperty.Flashback, CardView.getCollection(zone.getPlayer().getCardsIn(ZoneType.Flashback)));
-            break;
-        default:
-            break;
+            case Command:
+            case Graveyard:
+            case Library:
+            case Exile:
+                updateFlashback(zone.getPlayer());
+                break;
+            default:
+                break;
         }
     }
 
-    void updateFlashbackForPlayer(Player p) {
+    void updateFlashback(Player p) {
         set(TrackableProperty.Flashback, CardView.getCollection(p.getCardsIn(ZoneType.Flashback)));
     }
 

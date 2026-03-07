@@ -245,15 +245,14 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
     public final void add(SpellAbility sp, SpellAbilityStackInstance si, int id) {
         final Card source = sp.getHostCard();
-        Player activator = sp.getActivatingPlayer();
 
         // if activating player slips through the cracks, assign activating
         // Player to the controller here
-        if (null == activator) {
+        if (sp.getActivatingPlayer() == null) {
             sp.setActivatingPlayer(source.getController());
-            activator = sp.getActivatingPlayer();
             System.out.println(source.getName() + " - activatingPlayer not set before adding to stack.");
         }
+        Player activator = sp.getActivatingPlayer();
 
         // Stop infinite loop. E.g. Scalelord Reckoner mirrormatch with only triggering targets is a draw.
         if (game.getStack().size() > 999) {
@@ -366,7 +365,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         Map<AbilityKey, Object> runParams = AbilityKey.newMap();
 
         if (sp.isSpell() && !sp.isCopied()) {
-            final Card lki = CardCopyService.getLKICopy(sp.getHostCard());
+            final Card lki = CardCopyService.getLKICopy(source);
             runParams.put(AbilityKey.CardLKI, lki);
             thisTurnCast.add(lki);
             sp.getActivatingPlayer().addSpellCastThisTurn();
@@ -399,7 +398,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
         }
 
-        runParams.put(AbilityKey.Activator, sp.getActivatingPlayer());
+        runParams.put(AbilityKey.Activator, activator);
         runParams.put(AbilityKey.SpellAbility, sp);
         runParams.put(AbilityKey.CurrentStormCount, thisTurnCast.size());
         runParams.put(AbilityKey.CurrentCastSpells, Lists.newArrayList(thisTurnCast));
@@ -433,31 +432,31 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 activator.addCycled(sp);
             }
 
-            if (sp.isCrew() && sp.getHostCard().getType().hasSubtype("Vehicle")) {
+            if (sp.isCrew() && source.getType().hasSubtype("Vehicle")) {
                 Iterable<Card> crews = sp.getPaidList("Tapped", true);
                 if (crews != null) {
                     for (Card c : crews) {
-                        Map<AbilityKey, Object> crewParams = AbilityKey.mapFromCard(sp.getHostCard());
+                        Map<AbilityKey, Object> crewParams = AbilityKey.mapFromCard(source);
                         crewParams.put(AbilityKey.Crew, c);
                         game.getTriggerHandler().runTrigger(TriggerType.Crewed, crewParams, false);
                     }
                 }
             }
-            if (sp.isKeyword(Keyword.SADDLE) && sp.getHostCard().getType().hasSubtype("Mount")) {
+            if (sp.isKeyword(Keyword.SADDLE) && source.getType().hasSubtype("Mount")) {
                 Iterable<Card> crews = sp.getPaidList("Tapped", true);
                 if (crews != null) {
                     for (Card c : crews) {
-                        Map<AbilityKey, Object> saddleParams = AbilityKey.mapFromCard(sp.getHostCard());
+                        Map<AbilityKey, Object> saddleParams = AbilityKey.mapFromCard(source);
                         saddleParams.put(AbilityKey.Crew, c);
                         game.getTriggerHandler().runTrigger(TriggerType.Saddled, saddleParams, false);
                     }
                 }
             }
-            if (sp.isKeyword(Keyword.STATION) && (sp.getHostCard().getType().hasSubtype("Spacecraft") || (sp.getHostCard().getType().hasSubtype("Planet")))) {
+            if (sp.isKeyword(Keyword.STATION) && (source.getType().hasSubtype("Spacecraft") || (source.getType().hasSubtype("Planet")))) {
                 Iterable<Card> crews = sp.getPaidList("Tapped", true);
                 if (crews != null) {
                     for (Card c : crews) {
-                        Map<AbilityKey, Object> stationParams = AbilityKey.mapFromCard(sp.getHostCard());
+                        Map<AbilityKey, Object> stationParams = AbilityKey.mapFromCard(source);
                         stationParams.put(AbilityKey.Crew, c);
                         game.getTriggerHandler().runTrigger(TriggerType.Stationed, stationParams, false);
                     }
@@ -514,17 +513,15 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             game.getTriggerHandler().runTrigger(TriggerType.BecomesTargetOnce, runParams, false);
         }
 
-        if (sp.getActivatingPlayer() != null && commitCrimeCheck(sp.getActivatingPlayer(), chosenTargets)) {
-            sp.getActivatingPlayer().commitCrime();
+        if (commitCrimeCheck(activator, chosenTargets)) {
+            activator.commitCrime();
         }
 
         game.fireEvent(new GameEventZone(ZoneType.Stack, sp, EventValueChangeType.Added));
 
-        if (sp.getActivatingPlayer() != null && !game.getCardsPlayerCanActivateInStack().isEmpty()) {
+        if (!game.getCardsPlayerCanActivateInStack().isEmpty()) {
             // This is a bit of a hack that forces the update of externally activatable cards in flashback zone (e.g. Lightning Storm).
-            for (Player p : game.getPlayers()) {
-                p.updateFlashbackForView();
-            }
+            game.getPlayers().forEach(Player::updateFlashbackForView);
         }
     }
 
