@@ -116,21 +116,16 @@ public class CHand implements ICDoc {
 
         synchronized (ordering) {
             ordering.clear();
-
-            final boolean orderByCmc = FModel.getPreferences().getPrefBoolean(FPref.UI_ORDER_HAND);
+            ordering.addAll(cards);
 
             // Sort hand by CMC/color at the UI layer. This duplicates the game-layer sort in
             // PlayerZone.onChanged(), but is necessary because network clients only have CardViews
             // (no access to the game model), and because toggling the preference mid-game needs
             // to take effect immediately without waiting for a zone change event.
-            if (orderByCmc) {
-                final List<CardView> sorted = new ArrayList<>(cards);
-                sorted.sort(Comparator.comparingInt((CardView cv) -> cv.getCurrentState().getManaCost().getCMC())
+            if (FModel.getPreferences().getPrefBoolean(FPref.UI_ORDER_HAND)) {
+                ordering.sort(Comparator.comparingInt((CardView cv) -> cv.getCurrentState().getManaCost().getCMC())
                         .thenComparing(cv -> cv.getCurrentState().getColors().getOrderWeight())
                         .thenComparing(cv -> cv.getCurrentState().getName()));
-                ordering.addAll(sorted);
-            } else {
-                ordering.addAll(cards);
             }
         }
 
@@ -143,8 +138,7 @@ public class CHand implements ICDoc {
                 cardPanel = new CardPanel(matchUI, card);
                 cardPanel.setDisplayEnabled(false);
                 placeholders.add(cardPanel);
-            }
-            else {
+            } else {
                 cardPanel.setCard(card); //ensure card view is updated
             }
             cardPanels.add(cardPanel);

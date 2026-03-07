@@ -238,8 +238,8 @@ public final class LayoutMenu {
         final FScreen screen = Singletons.getControl().getCurrentScreen();
         if (screen != null && screen.isMatchScreen()) {
             final IVTopLevelUI view = screen.getView();
-            if (view instanceof VMatchUI) {
-                for (final VHand h : ((VMatchUI) view).getControl().getHandViews()) {
+            if (view instanceof VMatchUI vmu) {
+                for (final VHand h : vmu.getControl().getHandViews()) {
                     h.getLayoutControl().updateHand();
                 }
             }
