@@ -335,13 +335,6 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             }
         }
 
-        if (this.getCardsInHand() != -1) {
-            // Can handle Library of Alexandria, or Hellbent
-            if (activator.getCardsIn(ZoneType.Hand).size() != this.getCardsInHand()) {
-                return false;
-            }
-        }
-
         if (this.getColorToCheck() != null) {
             if (!host.hasChosenColor(this.getColorToCheck())) {
                 return false;

@@ -5,6 +5,7 @@ import forge.ai.GameState;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.event.GameEvent;
+import org.tinylog.Logger;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
@@ -314,16 +315,15 @@ public class NetGuiGame extends AbstractGuiGame {
 
     @Override
     public void handleGameEvent(GameEvent event) {
-        updateGameView();
-        send(ProtocolMethod.handleGameEvent, event);
+        handleGameEvents(List.of(event));
     }
 
     @Override
     public void handleGameEvents(List<GameEvent> events) {
-        updateGameView();
-        for (GameEvent event : events) {
-            send(ProtocolMethod.handleGameEvent, event);
-        }
+        if (paused) { return; }
+        Logger.info("Sending batch of {} game events", events.size());
+        sender.write(ProtocolMethod.setGameView, getGameView());
+        sender.send(ProtocolMethod.handleGameEvents, events);
     }
 
     @Override
