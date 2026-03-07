@@ -76,10 +76,6 @@ public class PlayerControllerAi extends PlayerController {
         pilotsNonAggroDeck = deck.getName().contains("Control") || Deck.getAverageCMC(deck) > 3;
     }
 
-    public void allowCheatShuffle(boolean value) {
-        brains.allowCheatShuffle(value);
-    }
-
     public void setUseSimulation(boolean value) {
         brains.setUseSimulation(value);
     }
@@ -103,8 +99,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public List<PaperCard> sideboard(Deck deck, GameType gameType, String message) {
-        if (!brains.getGame().getRules().getAISideboardingEnabled()
-            || !deck.has(DeckSection.Sideboard)) {
+        if (!brains.getGame().getRules().getAISideboardingEnabled() || !deck.has(DeckSection.Sideboard)) {
             return null;
         }
 
@@ -1402,7 +1397,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public CardCollectionView cheatShuffle(CardCollectionView list) {
-        return brains.getBoolProperty(AiProps.CHEAT_WITH_MANA_ON_SHUFFLE) ? brains.cheatShuffle(list) : list;
+        return brains.cheatShuffle(list);
     }
 
     @Override
