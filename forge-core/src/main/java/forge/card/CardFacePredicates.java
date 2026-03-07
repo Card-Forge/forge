@@ -93,6 +93,7 @@ public final class CardFacePredicates {
             } else if (!input.getType().hasStringType(k[0])) {
                 return false;
             }
+
             if (k.length > 1) {
                 for (final String m : k[1].split("\\+")) {
                     if (m.contains("ManaCost")) {
@@ -102,7 +103,32 @@ public final class CardFacePredicates {
                         }
                     } else if (m.contains("cmcEQ")) {
                         int i = Integer.parseInt(m.substring(5));
-                        if (!hasCMC(input, i)) return false;
+                        if (!hasCMC(input, i)) {
+                            return false;
+                        }
+                    } else if (m.contains("White") ||
+                        m.contains("Blue") ||
+                        m.contains("Black") ||
+                        m.contains("Red") ||
+                        m.contains("Green")) {
+                        boolean mustHave = !m.startsWith("non");
+                        final String colorName = m.substring(mustHave ? 0 : 3);
+
+                        if (mustHave != hasColor(input, colorName)) {
+                            return false;
+                        }
+                    } else if (m.contains("Colorless")) {
+                        boolean mustBe = !m.startsWith("non");
+
+                        if (mustBe != input.getColor().isColorless()) {
+                            return false;
+                        }
+                    } else if (m.contains("MultiColor")) {
+                        boolean mustBe = !m.startsWith("non");
+
+                        if (mustBe != input.getColor().isMulticolor()) {
+                            return false;
+                        }
                     } else if (!hasProperty(input, m)) {
                         return false;
                     }
@@ -127,6 +153,10 @@ public final class CardFacePredicates {
             return cost != null && cost.getCMC() == value;
         }
 
+        static protected boolean hasColor(ICardFace input, final String colorName) {
+            int desiredColor = MagicColor.fromName(colorName);
+            return input.getColor().hasAnyColor(desiredColor);
+        }
     }
 
     public static Predicate<ICardFace> valid(final String val) {
