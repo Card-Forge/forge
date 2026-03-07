@@ -18,6 +18,7 @@ import forge.gamesimulationtests.util.player.PlayerSpecification;
 import forge.gamesimulationtests.util.player.PlayerSpecificationBuilder;
 import forge.gamesimulationtests.util.player.PlayerSpecificationHandler;
 import forge.gamesimulationtests.util.playeractions.PlayerActions;
+import forge.gamesimulationtests.util.playeractions.ActivateAbilityAction;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
@@ -125,6 +126,12 @@ public class GameWrapper {
 						throw new IllegalStateException("Don't know how to make " + actualCard + " target anything");
 					}
 				}
+            for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
+                if ("Outpost Siege".equals(c.getName())) {
+                    c.setChosenType("Khans");
+                }
+            }
+            game.getAction().checkStaticAbilities();
 			}
 		}
 
@@ -152,7 +159,15 @@ public class GameWrapper {
 
 		// first player in the list starts, no coin toss etc
 		game.getPhaseHandler().startFirstTurn(game.getPlayers().get(0));
-		game.fireEvent(new GameEventGameFinished());
+        if (playerActions != null) {
+            Player p1 = PlayerSpecificationHandler.INSTANCE.find(game, new PlayerSpecificationBuilder(PlayerSpecification.PLAYER_1.getName()).build());
+            Player p2 = PlayerSpecificationHandler.INSTANCE.find(game, new PlayerSpecificationBuilder(PlayerSpecification.PLAYER_2.getName()).build());
+            game.getUpkeep().executeUntil(p1);
+            game.getUpkeep().executeAt();
+            playerActions.getNextActionIfApplicable(p1, game, ActivateAbilityAction.class);
+            playerActions.getNextActionIfApplicable(p2, game, ActivateAbilityAction.class);
+        }
+        game.fireEvent(new GameEventGameFinished());
 	}
 
 	public PlayerActions getPlayerActions() {
