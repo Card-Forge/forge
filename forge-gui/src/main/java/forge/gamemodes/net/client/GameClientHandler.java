@@ -1,5 +1,8 @@
 package forge.gamemodes.net.client;
 
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
+
 import forge.game.*;
 import forge.game.player.PlayerView;
 import forge.gamemodes.net.GameProtocolHandler;
@@ -23,6 +26,8 @@ import java.util.EnumMap;
 import java.util.Iterator;
 
 final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+
     private final FGameClient client;
     private final IGuiGame gui;
     private Tracker tracker;
@@ -162,7 +167,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
     private void replicatePlayerView(final PlayerView newPlayerView) {
         PlayerView existingPlayerView = tracker.getObj(TrackableTypes.PlayerViewType, newPlayerView.getId());
         existingPlayerView.copyChangedProps(newPlayerView);
-        forge.gamemodes.net.NetworkDebugLogger.trace("replicated PlayerView properties - %s", existingPlayerView.toString());
+        netLog.trace("replicated PlayerView properties - {}", existingPlayerView.toString());
     }
 
     @Override

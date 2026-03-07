@@ -1,5 +1,8 @@
 package forge.gamemodes.net;
 
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
+
 import forge.gui.GuiBase;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufOutputStream;
@@ -11,6 +14,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> {
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+
     private static final byte[] LENGTH_PLACEHOLDER = new byte[4];
 
     private final NetworkByteTracker byteTracker;
@@ -49,7 +54,7 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
             byteTracker.recordBytesSent(bytesSent, messageType);
         }
         if (msgSize > 20_000) {
-            NetworkDebugLogger.log("Encoded %d bytes (compressed) for %s", msgSize, msg.getClass().getSimpleName());
+            netLog.info("Encoded {} bytes (compressed) for {}", msgSize, msg.getClass().getSimpleName());
         }
     }
 }

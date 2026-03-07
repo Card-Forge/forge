@@ -1,44 +1,35 @@
 package forge.gamemodes.net;
 
-import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import org.tinylog.Level;
 import org.tinylog.Logger;
 import org.tinylog.TaggedLogger;
 import org.tinylog.ThreadContext;
 
 import java.io.File;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Debug logger for network/delta sync operations.
- * Delegates to tinylog with NETWORK tag for file management, formatting, and concurrency.
+ * Configuration and utilities for network debug logging.
+ * Manages log file routing, cleanup, and helper functions.
  *
- * Log output is routed to both console (INFO+) and per-instance log files (TRACE+)
+ * <p>Call sites log directly via tinylog's {@code TaggedLogger} with the NETWORK tag,
+ * which gives accurate {@code {class-name}} resolution in log output.
+ * This class handles the log file routing setup (thread context keys) and
+ * provides utility methods like {@link #hexDump}, {@link #sanitizePath}, etc.
+ *
+ * <p>Log output is routed to both console (INFO+) and per-instance log files (TRACE+)
  * via the NETWORK-tagged writers defined in tinylog.properties.
  * The {@link NetworkLogWriter} routes file output to per-instance files based on
  * the {@code logfileKey} thread context value.
- *
- * Supports configurable verbosity levels for console vs file output:
- * - TRACE: Per-object/per-property detail (serialization, collection stats, tracker verification)
- * - DEBUG: Diagnostic events (state mismatches, creation tracking, summary stats)
- * - INFO: Normal operation (sync start/end, summaries, game events)
- * - WARN: Potential issues (missing objects, unexpected states)
- * - ERROR: Failures and exceptions
- *
- * Default file level is DEBUG; TRACE is only enabled when explicitly configured.
  */
-public final class NetworkDebugLogger {
+public final class NetworkLogConfig {
 
     private static final TaggedLogger logger = Logger.tag("NETWORK");
 
     private static final String LOG_PREFIX = "network-debug";
-
-    // Configurable file log level — controls gating in facade methods.
-    // The tinylog writer accepts TRACE+; we gate internally for performance.
-    private static volatile Level fileLevel = Level.DEBUG;
 
     // Test mode flag - when true, log filenames include "-test" suffix via ThreadContext
     private static volatile boolean testMode = false;
@@ -46,143 +37,19 @@ public final class NetworkDebugLogger {
     // Batch ID for correlating logs from the same test run
     private static volatile String batchId = null;
 
-    // Whether the logger is enabled (controlled via ForgePreferences)
-    private static volatile boolean enabled = true;
-
     // Global instance suffix for single-JVM test mode — used as fallback when
     // a server thread has no ThreadContext values set. This allows server threads to log
     // to the same per-game file as the test harness thread that called setInstanceSuffix().
     private static volatile String globalInstanceSuffix = null;
 
-    // Track whether system info has been logged for this instance
-    private static final ThreadLocal<Boolean> systemInfoLogged = new ThreadLocal<>();
+    // Timestamp key for normal (non-test) mode, set once on first use
+    private static volatile String normalModeKey = null;
 
     // Cached user home path for sanitization (computed once)
     private static final String USER_HOME = System.getProperty("user.home");
 
-    private NetworkDebugLogger() {
+    private NetworkLogConfig() {
         // Utility class
-    }
-
-    /**
-     * Apply configuration from ForgePreferences.
-     * Called to reload configuration at runtime.
-     */
-    public static void applyConfig() {
-        try {
-            if (FModel.getPreferences() == null) {
-                return;
-            }
-            enabled = FModel.getPreferences().getPrefBoolean(FPref.NET_DEBUG_LOGGER_ENABLED);
-
-            String pref = FModel.getPreferences().getPref(FPref.NET_FILE_LOG_LEVEL);
-            try {
-                fileLevel = Level.valueOf(pref != null ? pref.toUpperCase() : "TRACE");
-            } catch (IllegalArgumentException e) {
-                fileLevel = Level.TRACE;
-            }
-        } catch (Exception e) {
-            // Preferences not initialized — use defaults
-        }
-    }
-
-    // --- Facade methods (public API unchanged) ---
-
-    /**
-     * Log an INFO level message. Normal operation information.
-     */
-    public static void log(String message) {
-        if (!enabled) return;
-        ensureThreadContext();
-        logger.info(message);
-    }
-
-    /**
-     * Log a formatted INFO level message.
-     */
-    public static void log(String format, Object... args) {
-        if (!enabled) return;
-        ensureThreadContext();
-        logger.info(String.format(format, args));
-    }
-
-    /**
-     * Log a DEBUG level message. Detailed tracing information.
-     */
-    public static void debug(String message) {
-        if (!enabled || fileLevel.ordinal() > Level.DEBUG.ordinal()) return;
-        ensureThreadContext();
-        logger.debug(message);
-    }
-
-    /**
-     * Log a formatted DEBUG level message.
-     */
-    public static void debug(String format, Object... args) {
-        if (!enabled || fileLevel.ordinal() > Level.DEBUG.ordinal()) return;
-        ensureThreadContext();
-        logger.debug(String.format(format, args));
-    }
-
-    /**
-     * Log a TRACE level message. Per-object/per-property detail.
-     */
-    public static void trace(String message) {
-        if (!enabled || fileLevel.ordinal() > Level.TRACE.ordinal()) return;
-        ensureThreadContext();
-        logger.trace(message);
-    }
-
-    /**
-     * Log a formatted TRACE level message.
-     */
-    public static void trace(String format, Object... args) {
-        if (!enabled || fileLevel.ordinal() > Level.TRACE.ordinal()) return;
-        ensureThreadContext();
-        logger.trace(String.format(format, args));
-    }
-
-    /**
-     * Log a WARN level message. Potential issues that don't prevent operation.
-     */
-    public static void warn(String message) {
-        if (!enabled) return;
-        ensureThreadContext();
-        logger.warn(message);
-    }
-
-    /**
-     * Log a formatted WARN level message.
-     */
-    public static void warn(String format, Object... args) {
-        if (!enabled) return;
-        ensureThreadContext();
-        logger.warn(String.format(format, args));
-    }
-
-    /**
-     * Log an ERROR level message.
-     * Error messages are logged even when logging is disabled.
-     */
-    public static void error(String message) {
-        ensureThreadContext();
-        logger.error(message);
-    }
-
-    /**
-     * Log a formatted ERROR level message.
-     */
-    public static void error(String format, Object... args) {
-        ensureThreadContext();
-        logger.error(String.format(format, args));
-    }
-
-    /**
-     * Log an ERROR with exception.
-     */
-    public static void error(String message, Throwable t) {
-        ensureThreadContext();
-        logger.error(t, message);
     }
 
     // --- Domain-specific utilities ---
@@ -191,9 +58,7 @@ public final class NetworkDebugLogger {
      * Log a hex dump of bytes at DEBUG level. Useful for debugging serialization issues.
      */
     public static void hexDump(String label, byte[] bytes, int errorPosition) {
-        if (!enabled || fileLevel.ordinal() > Level.DEBUG.ordinal()) return;
         if (bytes == null || bytes.length == 0) return;
-        ensureThreadContext();
 
         StringBuilder sb = new StringBuilder();
         sb.append(label).append("\n");
@@ -270,7 +135,7 @@ public final class NetworkDebugLogger {
      * @return The generated batch ID in format "runYYYYMMDD-HHMMSS"
      */
     public static String generateBatchId() {
-        String timestamp = java.time.LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
         batchId = "run" + timestamp;
         updateLogfileKey();
         return batchId;
@@ -310,16 +175,11 @@ public final class NetworkDebugLogger {
         if (suffix != null) {
             ThreadContext.put("instanceSuffix", suffix);
             // In test mode, also set global suffix so server threads within
-            // the same JVM inherit it via ensureThreadContext()
+            // the same JVM inherit it via NetworkLogWriter's fallback
             if (testMode) {
                 globalInstanceSuffix = suffix;
             }
             updateLogfileKey();
-            // Log system info header on first suffix set for this thread
-            if (systemInfoLogged.get() == null) {
-                logSystemInfo();
-                systemInfoLogged.set(Boolean.TRUE);
-            }
             cleanupOldLogs();
         } else {
             ThreadContext.remove("instanceSuffix");
@@ -348,7 +208,6 @@ public final class NetworkDebugLogger {
         if (suffix != null && suffix.equals(globalInstanceSuffix)) {
             globalInstanceSuffix = null;
         }
-        systemInfoLogged.remove();
         ThreadContext.clear();
     }
 
@@ -370,19 +229,43 @@ public final class NetworkDebugLogger {
     }
 
     /**
+     * Get the global logfile key for threads that have no ThreadContext set.
+     * Used by {@link NetworkLogWriter} as a fallback.
+     * @return the computed logfile key, or null if no routing is configured
+     */
+    static String getGlobalLogfileKey() {
+        // In test mode, use the batch/instance machinery
+        if (testMode && (batchId != null || globalInstanceSuffix != null)) {
+            return computeLogfileKey();
+        }
+        // In normal mode, use timestamp-based key
+        if (normalModeKey == null) {
+            normalModeKey = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
+        }
+        return normalModeKey;
+    }
+
+    /**
      * Compute the composite logfile key from batch ID, instance suffix, and test mode.
      * Uses global fallback for instance suffix in test mode.
      * Must match the key read by {@link NetworkLogWriter}.
      */
     private static String computeLogfileKey() {
+        if (!testMode) {
+            // Normal mode: timestamp-based key
+            if (normalModeKey == null) {
+                normalModeKey = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
+            }
+            return normalModeKey;
+        }
+        // Test mode: batch/instance/suffix machinery
         String batchPart = batchId != null ? batchId : "nobatch";
         String suffix = ThreadContext.get("instanceSuffix");
-        if (suffix == null && testMode) {
+        if (suffix == null) {
             suffix = globalInstanceSuffix;
         }
         String instancePart = suffix != null ? suffix : "default";
-        String testPart = testMode ? "-test" : "";
-        return batchPart + "-" + instancePart + testPart;
+        return batchPart + "-" + instancePart + "-test";
     }
 
     /**
@@ -453,38 +336,5 @@ public final class NetworkDebugLogger {
         } catch (Exception e) {
             // Non-critical — don't let cleanup failures affect logging
         }
-    }
-
-    /**
-     * Ensure ThreadContext is populated on the current thread. In test mode, server threads
-     * that never called setInstanceSuffix() inherit the global suffix so their
-     * log output goes to the correct per-game log file.
-     */
-    private static void ensureThreadContext() {
-        if (testMode && ThreadContext.get("logfileKey") == null && globalInstanceSuffix != null) {
-            ThreadContext.put("instanceSuffix", globalInstanceSuffix);
-            ThreadContext.put("logfileKey", computeLogfileKey());
-        }
-    }
-
-    /**
-     * Log system information header as a DEBUG message.
-     */
-    private static void logSystemInfo() {
-        long pid = ProcessHandle.current().pid();
-        StringBuilder sb = new StringBuilder();
-        sb.append("=".repeat(80)).append("\n");
-        sb.append("Network Debug Log Started\n");
-        if (batchId != null) {
-            sb.append("Batch ID: ").append(batchId).append("\n");
-        }
-        sb.append("PID: ").append(pid).append("\n");
-        String suffix = ThreadContext.get("instanceSuffix");
-        if (suffix != null) {
-            sb.append("Instance: ").append(suffix).append("\n");
-        }
-        sb.append("\n").append(GuiBase.getHWInfo()).append("\n");
-        sb.append("=".repeat(80));
-        logger.debug(sb.toString());
     }
 }

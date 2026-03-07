@@ -1,5 +1,8 @@
 package forge.gamemodes.net;
 
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
+
 import com.google.common.eventbus.Subscribe;
 import forge.game.event.GameEventAttackersDeclared;
 import forge.game.event.GameEventBlockersDeclared;
@@ -14,7 +17,7 @@ import forge.game.event.GameEventTurnPhase;
 
 /**
  * Listener for game events during network play.
- * Logs all significant game actions to NetworkDebugLogger for debugging
+ * Logs all significant game actions to NetworkLogConfig for debugging
  * and analysis of network play sessions.
  *
  * Uses Guava EventBus subscription pattern - subscribe to Game.events via:
@@ -26,6 +29,8 @@ import forge.game.event.GameEventTurnPhase;
  * clear visual separation from network categories like [DeltaSync].
  */
 public class NetworkGameEventListener {
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+
 
     private static final String LOG_PREFIX = "[GAME EVENT]";
 
@@ -33,7 +38,7 @@ public class NetworkGameEventListener {
      * Create a new listener for network game events.
      */
     public NetworkGameEventListener() {
-        NetworkDebugLogger.log("%s Network game event listener initialized", LOG_PREFIX);
+        netLog.info("{} Network game event listener initialized", LOG_PREFIX);
     }
 
     // ====== Turn Events ======
@@ -43,7 +48,7 @@ public class NetworkGameEventListener {
      */
     @Subscribe
     public void handleTurnBegan(GameEventTurnBegan event) {
-        NetworkDebugLogger.log("%s Turn %d began - %s's turn",
+        netLog.info("{} Turn {} began - {}'s turn",
                 LOG_PREFIX, event.turnNumber(), event.turnOwner().getName());
     }
 
@@ -52,7 +57,7 @@ public class NetworkGameEventListener {
      */
     @Subscribe
     public void handlePhaseChange(GameEventTurnPhase event) {
-        NetworkDebugLogger.log("%s %s", LOG_PREFIX, event.toString());
+        netLog.info("{} {}", LOG_PREFIX, event.toString());
     }
 
     // ====== Game Action Events ======
@@ -62,7 +67,7 @@ public class NetworkGameEventListener {
      */
     @Subscribe
     public void handleSpellCast(GameEventSpellAbilityCast event) {
-        NetworkDebugLogger.log("%s %s", LOG_PREFIX, event.toString());
+        netLog.info("{} {}", LOG_PREFIX, event.toString());
     }
 
     /**
@@ -70,7 +75,7 @@ public class NetworkGameEventListener {
      */
     @Subscribe
     public void handleSpellResolved(GameEventSpellResolved event) {
-        NetworkDebugLogger.log("%s Resolved: %s", LOG_PREFIX, event.spell().getHostCard().getName());
+        netLog.info("{} Resolved: {}", LOG_PREFIX, event.spell().getHostCard().getName());
     }
 
     /**
@@ -78,7 +83,7 @@ public class NetworkGameEventListener {
      */
     @Subscribe
     public void handleLandPlayed(GameEventLandPlayed event) {
-        NetworkDebugLogger.log("%s %s", LOG_PREFIX, event.toString());
+        netLog.info("{} {}", LOG_PREFIX, event.toString());
     }
 
     /**
@@ -87,7 +92,7 @@ public class NetworkGameEventListener {
     @Subscribe
     public void handleAttackersDeclared(GameEventAttackersDeclared event) {
         if (!event.attackersMap().isEmpty()) {
-            NetworkDebugLogger.log("%s %s", LOG_PREFIX, event.toString());
+            netLog.info("{} {}", LOG_PREFIX, event.toString());
         }
     }
 
@@ -97,7 +102,7 @@ public class NetworkGameEventListener {
     @Subscribe
     public void handleBlockersDeclared(GameEventBlockersDeclared event) {
         if (!event.blockers().isEmpty()) {
-            NetworkDebugLogger.log("%s %s declared blockers: %s", LOG_PREFIX,
+            netLog.info("{} {} declared blockers: {}", LOG_PREFIX,
                     event.defendingPlayer().getName(), event.blockers());
         }
     }
@@ -107,7 +112,7 @@ public class NetworkGameEventListener {
      */
     @Subscribe
     public void handleLifeChanged(GameEventPlayerLivesChanged event) {
-        NetworkDebugLogger.log("%s %s life: %d -> %d", LOG_PREFIX,
+        netLog.info("{} {} life: {} -> {}", LOG_PREFIX,
                 event.player().getName(), event.oldLives(), event.newLives());
     }
 
@@ -118,7 +123,7 @@ public class NetworkGameEventListener {
      */
     @Subscribe
     public void handleGameFinished(GameEventGameFinished event) {
-        NetworkDebugLogger.log("%s Game finished", LOG_PREFIX);
+        netLog.info("{} Game finished", LOG_PREFIX);
     }
 
     /**
@@ -127,9 +132,9 @@ public class NetworkGameEventListener {
     @Subscribe
     public void handleGameOutcome(GameEventGameOutcome event) {
         if (event.winningPlayerName() != null) {
-            NetworkDebugLogger.log("%s Game outcome: winner = %s", LOG_PREFIX, event.winningPlayerName());
+            netLog.info("{} Game outcome: winner = {}", LOG_PREFIX, event.winningPlayerName());
         } else {
-            NetworkDebugLogger.log("%s Game outcome: draw or no winner", LOG_PREFIX);
+            netLog.info("{} Game outcome: draw or no winner", LOG_PREFIX);
         }
     }
 

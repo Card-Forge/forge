@@ -2,7 +2,8 @@ package forge.gamemodes.net.server;
 
 import forge.gamemodes.net.GameProtocolHandler;
 import forge.gamemodes.net.IRemote;
-import forge.gamemodes.net.NetworkDebugLogger;
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.gamemodes.net.ReplyPool;
 import forge.gui.interfaces.IGuiGame;
@@ -10,6 +11,8 @@ import forge.interfaces.IGameController;
 import io.netty.channel.ChannelHandlerContext;
 
 final class GameServerHandler extends GameProtocolHandler<IGameController> {
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+
 
     private final FServerManager server = FServerManager.getInstance();
 
@@ -52,13 +55,13 @@ final class GameServerHandler extends GameProtocolHandler<IGameController> {
             // Handle resync request
             RemoteClient client = getClient(ctx);
             if (client != null) {
-                NetworkDebugLogger.debug("[DeltaSync] Resync requested by client %d", client.getIndex());
+                netLog.debug("[DeltaSync] Resync requested by client {}", client.getIndex());
                 IGuiGame gui = server.getGui(client.getIndex());
                 if (gui instanceof NetGuiGame netGui) {
-                    NetworkDebugLogger.debug("[DeltaSync] Sending full state to client %d", client.getIndex());
+                    netLog.debug("[DeltaSync] Sending full state to client {}", client.getIndex());
                     netGui.sendFullState();
                 } else {
-                    NetworkDebugLogger.warn("[DeltaSync] GUI is not NetGuiGame, cannot resync");
+                    netLog.warn("[DeltaSync] GUI is not NetGuiGame, cannot resync");
                 }
             }
         }

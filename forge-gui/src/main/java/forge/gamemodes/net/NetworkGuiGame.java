@@ -1,5 +1,8 @@
 package forge.gamemodes.net;
 
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
+
 import forge.game.GameView;
 import forge.card.CardStateName;
 import forge.game.card.CardView;
@@ -31,6 +34,8 @@ import java.util.*;
  * AbstractGuiGame to remain focused on core local game functionality.
  */
 public abstract class NetworkGuiGame extends AbstractGuiGame {
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+
 
     // Track zone changes during delta application for UI refresh
     private final Map<PlayerView, Set<ZoneType>> pendingZoneUpdates = new HashMap<>();
@@ -59,7 +64,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
      */
     @Override
     public void setGameView(final GameView gameView0) {
-        NetworkDebugLogger.log("%s [setGameView] Called with gameView0=%s, existing gameView=%s",
+        netLog.info("{} Called with gameView0={}, existing gameView={}",
                 getLogPrefix(),
                 gameView0 != null ? "non-null" : "null",
                 getGameView() != null ? "non-null" : "null");
@@ -86,7 +91,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
                     for (PlayerView pv : gameView0.getPlayers()) {
                         Tracker t = gameView0.getTracker();
                         PlayerView inTracker = t != null ? t.getObj(TrackableTypes.PlayerViewType, pv.getId()) : null;
-                        NetworkDebugLogger.trace("[setGameView] Initial setup: Player %d hash=%d, inTracker=%b, sameInstance=%b",
+                        netLog.trace("Initial setup: Player {} hash={}, inTracker={}, sameInstance={}",
                                 pv.getId(), System.identityHashCode(pv),
                                 inTracker != null, pv == inTracker);
                     }
@@ -129,7 +134,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
         // Recursively set tracker on all TrackableObjects in the GameView's properties
         java.util.Set<TrackableObject> visited = java.util.Collections.newSetFromMap(new java.util.IdentityHashMap<>());
         setTrackerRecursively(gameView0, tracker, visited);
-        NetworkDebugLogger.log("[EnsureTracker] Set tracker on %d unique objects", visited.size());
+        netLog.info("Set tracker on {} unique objects", visited.size());
 
         // Verify trackers are set on players and their cards
         if (gameView0.getPlayers() != null) {
@@ -149,7 +154,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
                         else cardsWithoutTracker++;
                     }
                 }
-                NetworkDebugLogger.trace("[EnsureTracker] Player %d: hasTracker=%b, cards with tracker=%d, cards without=%d",
+                netLog.trace("Player {}: hasTracker={}, cards with tracker={}, cards without={}",
                     player.getId(), playerHasTracker, cardsWithTracker, cardsWithoutTracker);
             }
         }
@@ -212,14 +217,14 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
 
         Tracker tracker = getGameView().getTracker();
         if (tracker == null) {
-            NetworkDebugLogger.error("[DeltaSync] Cannot apply delta: Tracker is null");
+            netLog.error("[DeltaSync] Cannot apply delta: Tracker is null");
             return;
         }
 
         // Log with game context for easier correlation
         String activePlayerName = getGameView().getPlayerTurn() != null ? getGameView().getPlayerTurn().getName() : "?";
         String phaseName = getGameView().getPhase() != null ? getGameView().getPhase().name() : "?";
-        NetworkDebugLogger.log("[DeltaSync] === START applyDelta seq=%d (Turn %d, %s, Active=%s) ===",
+        netLog.info("[DeltaSync] === START applyDelta seq={} (Turn {}, {}, Active={}) ===",
                 packet.getSequenceNumber(), getGameView().getTurn(), phaseName, activePlayerName);
 
         int newObjectCount = 0;
@@ -246,10 +251,10 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
                         newObjectCount++;
                     }
                 } catch (Exception e) {
-                    NetworkDebugLogger.error("[DeltaSync] Error creating new object " + newObj.getObjectId(), e);
+                    netLog.error("[DeltaSync] Error creating new object {}", newObj.getObjectId(), e);
                 }
             }
-            NetworkDebugLogger.log("[DeltaSync] Created %d new objects (phase 1a)", newObjectCount);
+            netLog.info("[DeltaSync] Created {} new objects (phase 1a)", newObjectCount);
 
             // Phase 1b: Apply properties to all objects (all objects exist for cross-references)
             int propsApplied = 0;
@@ -258,11 +263,11 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
                     applyPropertyMap(pending.getKey(), pending.getValue(), tracker);
                     propsApplied++;
                 } catch (Exception e) {
-                    NetworkDebugLogger.error("[DeltaSync] Error applying properties to object %d: %s",
+                    netLog.error("[DeltaSync] Error applying properties to object {}: {}",
                             pending.getKey().getId(), e.getMessage());
                 }
             }
-            NetworkDebugLogger.trace("[DeltaSync] Applied properties to %d objects (phase 1b)", propsApplied);
+            netLog.trace("[DeltaSync] Applied properties to {} objects (phase 1b)", propsApplied);
         }
 
         // STEP 2: Apply property deltas to existing objects
@@ -279,22 +284,22 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
                     applyPropertyMap(obj, deltaProps, tracker);
                     appliedCount++;
                 } catch (Exception e) {
-                    NetworkDebugLogger.error("[DeltaSync] Error applying delta to object ID=%d type=%d (deltaKey=0x%08X)",
-                            actualObjectId, objectType, deltaKey);
-                    NetworkDebugLogger.error("[DeltaSync] Exception details:", e);
+                    netLog.error("[DeltaSync] Error applying delta to object ID={} type={} (deltaKey={})",
+                            actualObjectId, objectType, String.format("0x%08X", deltaKey));
+                    netLog.error("[DeltaSync] Exception details:", e);
                     skippedCount++;
                 }
             } else {
                 String typeName = getObjectTypeName(objectType);
-                NetworkDebugLogger.warn("[DeltaSync] %s ID=%d (deltaKey=0x%08X) NOT FOUND for delta application",
-                        typeName, actualObjectId, deltaKey);
+                netLog.warn("[DeltaSync] {} ID={} (deltaKey={}) NOT FOUND for delta application",
+                        typeName, actualObjectId, String.format("0x%08X", deltaKey));
                 skippedCount++;
             }
         }
 
         // STEP 3: Handle removed objects
         if (!packet.getRemovedObjectIds().isEmpty()) {
-            NetworkDebugLogger.trace("[DeltaSync] Packet contains %d removed objects", packet.getRemovedObjectIds().size());
+            netLog.trace("[DeltaSync] Packet contains {} removed objects", packet.getRemovedObjectIds().size());
         }
 
         // STEP 4: Refresh UI for any changed zones
@@ -309,7 +314,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
                         update.addZone(zone);
                     }
                     zoneUpdates.add(update);
-                    NetworkDebugLogger.trace("[DeltaSync] UI refresh: player=%d, zones=%s, hash=%d",
+                    netLog.trace("[DeltaSync] UI refresh: player={}, zones={}, hash={}",
                             player.getId(), zones, System.identityHashCode(player));
                 }
             }
@@ -322,10 +327,10 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
         // Log summary with timing
         long elapsed = System.currentTimeMillis() - startTime;
         if (newObjectCount > 0 || appliedCount > 0 || skippedCount > 0) {
-            NetworkDebugLogger.log("[DeltaSync] === END seq=%d (%dms, %d new, %d deltas, %d skipped) ===",
+            netLog.info("[DeltaSync] === END seq={} ({}ms, {} new, {} deltas, {} skipped) ===",
                     packet.getSequenceNumber(), elapsed, newObjectCount, appliedCount, skippedCount);
         } else {
-            NetworkDebugLogger.log("[DeltaSync] === END seq=%d (%dms, no changes) ===",
+            netLog.info("[DeltaSync] === END seq={} ({}ms, no changes) ===",
                     packet.getSequenceNumber(), elapsed);
         }
 
@@ -335,13 +340,13 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
             int clientChecksum = computeStateChecksum(getGameView());
 
             if (serverChecksum != clientChecksum) {
-                NetworkDebugLogger.error("[DeltaSync] CHECKSUM MISMATCH! Server=%d, Client=%d at seq=%d",
+                netLog.error("[DeltaSync] CHECKSUM MISMATCH! Server={}, Client={} at seq={}",
                         serverChecksum, clientChecksum, packet.getSequenceNumber());
                 logChecksumDetails(getGameView(), packet);
                 requestFullStateResync();
                 return; // Don't send ack for corrupted state
             } else {
-                NetworkDebugLogger.log("[DeltaSync] Checksum OK (seq=%d, checksum=%d)",
+                netLog.info("[DeltaSync] Checksum OK (seq={}, checksum={})",
                         packet.getSequenceNumber(), serverChecksum);
             }
         }
@@ -381,7 +386,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
 
                 obj.set(prop, resolved);
             } catch (Exception e) {
-                NetworkDebugLogger.error("[DeltaSync] Error setting property %s on object %d: %s",
+                netLog.error("[DeltaSync] Error setting property {} on object {}: {}",
                         prop, obj.getId(), e.getMessage());
             }
         }
@@ -423,7 +428,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
                     if (cv != null) {
                         coll.add(cv);
                     } else {
-                        NetworkDebugLogger.warn("[DeltaSync] CardView ID=%d not found in tracker during collection resolve", id);
+                        netLog.warn("[DeltaSync] CardView ID={} not found in tracker during collection resolve", id);
                     }
                 }
             }
@@ -440,7 +445,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
                     if (pv != null) {
                         coll.add(pv);
                     } else {
-                        NetworkDebugLogger.warn("[DeltaSync] PlayerView ID=%d not found in tracker during collection resolve", id);
+                        netLog.warn("[DeltaSync] PlayerView ID={} not found in tracker during collection resolve", id);
                     }
                 }
             }
@@ -463,7 +468,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
         if (prop == TrackableProperty.CurrentState) {
             csv = cardView.getCurrentState();
             if (csv == null) {
-                NetworkDebugLogger.warn("[DeltaSync] CurrentState is null for CardView %d, creating with state=%s",
+                netLog.warn("[DeltaSync] CurrentState is null for CardView {}, creating with state={}",
                         cardView.getId(), csvData.state);
                 csv = createCardStateView(cardView, csvData.state);
                 if (csv != null) {
@@ -473,7 +478,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
         } else if (prop == TrackableProperty.AlternateState) {
             csv = cardView.getAlternateState();
             if (csv == null) {
-                NetworkDebugLogger.debug("[DeltaSync] Creating AlternateState for CardView %d with state=%s",
+                netLog.debug("[DeltaSync] Creating AlternateState for CardView {} with state={}",
                         cardView.getId(), csvData.state);
                 csv = createCardStateView(cardView, csvData.state);
                 if (csv != null) {
@@ -506,7 +511,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
                 Object csvValue = entry.getValue();
 
                 if (csvValue instanceof CardStateData) {
-                    NetworkDebugLogger.error("[DeltaSync] Nested CardStateData not supported for property %s", csvProp);
+                    netLog.error("[DeltaSync] Nested CardStateData not supported for property {}", csvProp);
                     continue;
                 }
 
@@ -514,10 +519,10 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
                 csv.set(csvProp, resolved);
                 appliedCount++;
             }
-            NetworkDebugLogger.trace("[DeltaSync] Applied %d/%d properties to CardStateView (state=%s) of CardView %d",
+            netLog.trace("[DeltaSync] Applied {}/{} properties to CardStateView (state={}) of CardView {}",
                     appliedCount, csvData.properties.size(), csvData.state, cardView.getId());
         } else {
-            NetworkDebugLogger.error("[DeltaSync] Failed to get/create CardStateView for property %s on CardView %d",
+            netLog.error("[DeltaSync] Failed to get/create CardStateView for property {} on CardView {}",
                     prop, cardView.getId());
         }
     }
@@ -530,28 +535,28 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
     }
 
     private void logChecksumDetails(GameView gameView, DeltaPacket packet) {
-        NetworkDebugLogger.error("[DeltaSync] Checksum details (client state):");
-        NetworkDebugLogger.error("[DeltaSync]   GameView ID: %d", gameView.getId());
-        NetworkDebugLogger.error("[DeltaSync]   Turn: %d", gameView.getTurn());
-        NetworkDebugLogger.error("[DeltaSync]   Phase: %s", gameView.getPhase() != null ? gameView.getPhase().name() : "null");
+        netLog.error("[DeltaSync] Checksum details (client state):");
+        netLog.error("[DeltaSync]   GameView ID: {}", gameView.getId());
+        netLog.error("[DeltaSync]   Turn: {}", gameView.getTurn());
+        netLog.error("[DeltaSync]   Phase: {}", gameView.getPhase() != null ? gameView.getPhase().name() : "null");
         for (PlayerView player : NetworkChecksumUtil.getSortedPlayers(gameView)) {
             int handSize = player.getHand() != null ? player.getHand().size() : 0;
             int graveyardSize = player.getGraveyard() != null ? player.getGraveyard().size() : 0;
             int battlefieldSize = player.getBattlefield() != null ? player.getBattlefield().size() : 0;
-            NetworkDebugLogger.error("[DeltaSync]   Player %d (%s): Life=%d, Hand=%d, GY=%d, BF=%d",
+            netLog.error("[DeltaSync]   Player {} ({}): Life={}, Hand={}, GY={}, BF={}",
                     player.getId(), player.getName(), player.getLife(),
                     handSize, graveyardSize, battlefieldSize);
         }
-        NetworkDebugLogger.error("[DeltaSync] Compare with server state in host log at seq=%d", packet.getSequenceNumber());
+        netLog.error("[DeltaSync] Compare with server state in host log at seq={}", packet.getSequenceNumber());
     }
 
     private void requestFullStateResync() {
-        NetworkDebugLogger.warn("[DeltaSync] Requesting full state resync from server");
+        netLog.warn("[DeltaSync] Requesting full state resync from server");
         IGameController controller = getGameController();
         if (controller != null) {
             controller.requestResync();
         } else {
-            NetworkDebugLogger.error("[DeltaSync] Cannot request resync: No game controller available");
+            netLog.error("[DeltaSync] Cannot request resync: No game controller available");
         }
     }
 
@@ -569,13 +574,13 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
         // Check if object of the SAME TYPE already exists
         TrackableObject existing = findObjectByTypeAndId(tracker, objectType, objectId);
         if (existing != null) {
-            NetworkDebugLogger.trace("[DeltaSync] %s ID=%d already exists, will apply properties in phase 1b",
+            netLog.trace("[DeltaSync] {} ID={} already exists, will apply properties in phase 1b",
                     typeName, objectId);
             return existing;
         }
 
         if (objectType == DeltaPacket.TYPE_PLAYER_VIEW) {
-            NetworkDebugLogger.warn("[DeltaSync] Creating NEW PlayerView ID=%d - this may cause identity mismatch!", objectId);
+            netLog.warn("[DeltaSync] Creating NEW PlayerView ID={} - this may cause identity mismatch!", objectId);
         }
 
         TrackableObject obj = null;
@@ -583,12 +588,12 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
             case DeltaPacket.TYPE_CARD_VIEW:
                 obj = new CardView(objectId, tracker);
                 tracker.putObj(TrackableTypes.CardViewType, objectId, (CardView) obj);
-                NetworkDebugLogger.trace("[DeltaSync] Created CardView ID=%d, registered in tracker", objectId);
+                netLog.trace("[DeltaSync] Created CardView ID={}, registered in tracker", objectId);
                 break;
             case DeltaPacket.TYPE_PLAYER_VIEW:
                 obj = new PlayerView(objectId, tracker);
                 tracker.putObj(TrackableTypes.PlayerViewType, objectId, (PlayerView) obj);
-                NetworkDebugLogger.debug("[DeltaSync] Created PlayerView ID=%d hash=%d", objectId, System.identityHashCode(obj));
+                netLog.debug("[DeltaSync] Created PlayerView ID={} hash={}", objectId, System.identityHashCode(obj));
                 break;
             case DeltaPacket.TYPE_STACK_ITEM_VIEW:
                 obj = new forge.game.spellability.StackItemView(objectId, tracker);
@@ -604,7 +609,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
                 }
                 break;
             default:
-                NetworkDebugLogger.error("[DeltaSync] Unknown object type: %d", objectType);
+                netLog.error("[DeltaSync] Unknown object type: {}", objectType);
                 return null;
         }
 
@@ -624,7 +629,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
             case DeltaPacket.TYPE_GAME_VIEW:
                 return getGameView();
             default:
-                NetworkDebugLogger.warn("[DeltaSync] Unknown object type %d for object %d", objectType, objectId);
+                netLog.warn("[DeltaSync] Unknown object type {} for object {}", objectType, objectId);
                 return null;
         }
     }
@@ -678,11 +683,11 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
                 Tracker tracker = cardView.getTracker();
                 return (CardStateView) constructor.newInstance(cardView, cardView.getId(), state, tracker);
             } catch (Exception e2) {
-                NetworkDebugLogger.error("[DeltaSync] Failed to create CardStateView via constructor: %s", e2.getMessage());
+                netLog.error("[DeltaSync] Failed to create CardStateView via constructor: {}", e2.getMessage());
                 return null;
             }
         } catch (Exception e) {
-            NetworkDebugLogger.error("[DeltaSync] Failed to create CardStateView: %s", e.getMessage());
+            netLog.error("[DeltaSync] Failed to create CardStateView: {}", e.getMessage());
             return null;
         }
     }
@@ -695,7 +700,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
             GameView newGameView = packet.getGameView();
 
             if (getGameView() != null && getGameView().getTracker() != null) {
-                NetworkDebugLogger.log("[FullStateSync] gameView already exists - using copyChangedProps to preserve object identity");
+                netLog.info("gameView already exists - using copyChangedProps to preserve object identity");
 
                 if (newGameView.getTracker() == null) {
                     Tracker existingTracker = getGameView().getTracker();
@@ -705,9 +710,9 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
 
                 getGameView().copyChangedProps(newGameView);
 
-                NetworkDebugLogger.log("[FullStateSync] Used copyChangedProps - existing PlayerView instances preserved");
+                netLog.info("Used copyChangedProps - existing PlayerView instances preserved");
             } else {
-                NetworkDebugLogger.log("[FullStateSync] No existing gameView - performing fresh initialization");
+                netLog.info("No existing gameView - performing fresh initialization");
 
                 ensureTrackerInitialized(newGameView);
                 newGameView.updateObjLookup();
@@ -724,7 +729,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame {
                         cardCount += countCards(player.getExile());
                         cardCount += countCards(player.getBattlefield());
                     }
-                    NetworkDebugLogger.log("[FullStateSync] After updateObjLookup: %d players, ~%d cards found in zones",
+                    netLog.info("After updateObjLookup: {} players, ~{} cards found in zones",
                             playerCount, cardCount);
                 }
 

@@ -1,5 +1,8 @@
 package forge.gamemodes.net;
 
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
+
 import forge.gui.GuiBase;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
@@ -12,6 +15,8 @@ import java.io.ObjectInputStream;
 import java.io.StreamCorruptedException;
 
 public class CompatibleObjectDecoder extends LengthFieldBasedFrameDecoder {
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+
     private final ClassResolver classResolver;
 
     public CompatibleObjectDecoder(ClassResolver classResolver) {
@@ -40,14 +45,14 @@ public class CompatibleObjectDecoder extends LengthFieldBasedFrameDecoder {
         try {
             var5 = ois.readObject();
         } catch (StreamCorruptedException e) {
-            NetworkDebugLogger.error("Version Mismatch: %s", e.getMessage());
+            netLog.error("Version Mismatch: {}", e.getMessage());
         } finally {
             ois.close();
         }
 
         long elapsed = System.currentTimeMillis() - startMs;
         if (elapsed > 50 || frameSize > 20_000) {
-            NetworkDebugLogger.log("Decoded %s in %d ms (%d bytes compressed)",
+            netLog.info("Decoded {} in {} ms ({} bytes compressed)",
                     var5 != null ? var5.getClass().getSimpleName() : "null", elapsed, frameSize);
         }
 

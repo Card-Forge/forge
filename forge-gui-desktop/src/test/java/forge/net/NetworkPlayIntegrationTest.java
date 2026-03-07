@@ -1,6 +1,8 @@
 package forge.net;
 
-import forge.gamemodes.net.NetworkDebugLogger;
+import forge.gamemodes.net.NetworkLogConfig;
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
 import forge.localinstance.properties.ForgeConstants;
 import forge.deck.Deck;
 import forge.net.analysis.AnalysisResult;
@@ -59,15 +61,16 @@ import java.util.List;
  *       -Drun.stress.tests=true -Dsurefire.failIfNoSpecifiedTests=false
  */
 public class NetworkPlayIntegrationTest {
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
 
-    private static final String LOG_PREFIX = "[NetworkPlayIntegrationTest]";
+
     private static boolean initialized = false;
 
     @BeforeClass
     public static void setUp() {
         if (!initialized) {
             TestUtils.ensureFModelInitialized();
-            NetworkDebugLogger.setTestMode(true);
+            NetworkLogConfig.setTestMode(true);
             initialized = true;
         }
     }
@@ -85,7 +88,7 @@ public class NetworkPlayIntegrationTest {
         Assert.assertTrue(TestDeckLoader.hasPrecons(), "Should have precon decks available");
         int count = TestDeckLoader.getPreconCount();
         Assert.assertTrue(count > 0, "Should have at least one precon deck, found: " + count);
-        NetworkDebugLogger.log("%s Found %d precon decks", LOG_PREFIX, count);
+        netLog.info("Found {} precon decks", count);
     }
 
     @Test(dependsOnMethods = "testDeckLoaderHasPrecons")
@@ -94,23 +97,23 @@ public class NetworkPlayIntegrationTest {
         Assert.assertNotNull(deck, "Deck should not be null");
         int cardCount = deck.getMain().countAll();
         Assert.assertTrue(cardCount >= 40, "Deck should have at least 40 cards, found: " + cardCount);
-        NetworkDebugLogger.log("%s Loaded deck with %d cards", LOG_PREFIX, cardCount);
+        netLog.info("Loaded deck with {} cards", cardCount);
     }
 
     @Test
     public void testServerStartAndStop() {
-        NetworkDebugLogger.log("%s Testing server start/stop...", LOG_PREFIX);
+        netLog.info("Testing server start/stop...");
         var server = forge.gamemodes.net.server.FServerManager.getInstance();
         int port = 55556;
 
         try {
             server.startServer(port);
             Assert.assertTrue(server.isHosting(), "Server should be hosting after start");
-            NetworkDebugLogger.log("%s Server started on port %d", LOG_PREFIX, port);
+            netLog.info("Server started on port {}", port);
         } finally {
             if (server.isHosting()) {
                 server.stopServer();
-                NetworkDebugLogger.log("%s Server stopped", LOG_PREFIX);
+                netLog.info("Server stopped");
             }
         }
     }
@@ -125,8 +128,8 @@ public class NetworkPlayIntegrationTest {
      */
     @Test(timeOut = 60000, description = "True network traffic test with remote client")
     public void testTrueNetworkTraffic() {
-        NetworkDebugLogger.log("%s Starting true network traffic test...", LOG_PREFIX);
-        NetworkDebugLogger.log("%s Using minimal 10-card basic land decks for fast CI execution", LOG_PREFIX);
+        netLog.info("Starting true network traffic test...");
+        netLog.info("Using minimal 10-card basic land decks for fast CI execution");
 
         // Use 10-card basic land decks for fast game completion
         // With 7-card starting hand + 3 draws, game ends when first player decks out
@@ -143,7 +146,7 @@ public class NetworkPlayIntegrationTest {
         // Log bandwidth comparison (skip full analysis for minimal deck games)
         String bandwidthSummary = result.getBandwidthSummary();
         if (bandwidthSummary != null) {
-            NetworkDebugLogger.log("%s %s", LOG_PREFIX, bandwidthSummary);
+            netLog.info("{}", bandwidthSummary);
         }
 
         if (result.success) {
@@ -155,7 +158,7 @@ public class NetworkPlayIntegrationTest {
     @Test(timeOut = 150000, description = "UnifiedNetworkHarness local mode test")
     public void testUnifiedHarnessLocalMode() {
         skipUnlessStressTestsEnabled();
-        NetworkDebugLogger.log("%s Testing UnifiedNetworkHarness local mode...", LOG_PREFIX);
+        netLog.info("Testing UnifiedNetworkHarness local mode...");
 
         // Test local AI mode (no remote clients)
         UnifiedNetworkHarness.GameResult result = new UnifiedNetworkHarness()
@@ -182,11 +185,11 @@ public class NetworkPlayIntegrationTest {
         int gameCount = Integer.getInteger("test.gameCount", 3);
         long timeoutMs = Long.getLong("test.timeoutMs", 300000);
 
-        NetworkDebugLogger.log("%s Sequential config: games=%d, timeout=%dms", LOG_PREFIX, gameCount, timeoutMs);
+        netLog.info("Sequential config: games={}, timeout={}ms", gameCount, timeoutMs);
 
         MultiProcessGameExecutor.ExecutionResult result = ComprehensiveTestExecutor.runSequentialGames(gameCount, timeoutMs);
 
-        NetworkDebugLogger.log("%s Sequential result: %s", LOG_PREFIX, result.toSummary());
+        netLog.info("Sequential result: {}", result.toSummary());
         System.out.println(result.toDetailedReport());
 
         Assert.assertEquals(result.getSuccessCount(), gameCount, "All games should succeed: " + result.toSummary());
@@ -202,12 +205,12 @@ public class NetworkPlayIntegrationTest {
         int gameCount = Integer.getInteger("test.gameCount", 3);
         long timeoutMs = Long.getLong("test.timeoutMs", 300000);
 
-        NetworkDebugLogger.log("%s Parallel config: games=%d, timeout=%dms", LOG_PREFIX, gameCount, timeoutMs);
+        netLog.info("Parallel config: games={}, timeout={}ms", gameCount, timeoutMs);
 
         MultiProcessGameExecutor executor = new MultiProcessGameExecutor(timeoutMs);
         MultiProcessGameExecutor.ExecutionResult result = executor.runGames(gameCount);
 
-        NetworkDebugLogger.log("%s Parallel result: %s", LOG_PREFIX, result.toSummary());
+        netLog.info("Parallel result: {}", result.toSummary());
         System.out.println(result.toDetailedReport());
 
         double expectedSuccessRate = 0.8;
@@ -236,19 +239,19 @@ public class NetworkPlayIntegrationTest {
     @Test(timeOut = 7200000, description = "Comprehensive 100-game delta sync validation")
     public void runComprehensiveDeltaSyncTest() {
         skipUnlessStressTestsEnabled();
-        NetworkDebugLogger.log("%s Starting comprehensive delta sync validation", LOG_PREFIX);
+        netLog.info("Starting comprehensive delta sync validation");
 
         ComprehensiveTestExecutor executor = ComprehensiveTestExecutor.fromSystemProperties();
-        NetworkDebugLogger.log("%s Configuration:\n%s", LOG_PREFIX, executor.getConfigurationSummary());
+        netLog.info("Configuration:\n{}", executor.getConfigurationSummary());
 
-        NetworkDebugLogger.log("%s Executing %d games...", LOG_PREFIX, executor.getTotalGames());
+        netLog.info("Executing {} games...", executor.getTotalGames());
         LocalDateTime testStartTime = LocalDateTime.now();
         long startTime = System.currentTimeMillis();
 
         MultiProcessGameExecutor.ExecutionResult executionResult = executor.execute();
 
         long executionDuration = System.currentTimeMillis() - startTime;
-        NetworkDebugLogger.log("%s Execution completed in %.1f minutes", LOG_PREFIX, executionDuration / 60000.0);
+        netLog.info("Execution completed in {} minutes", String.format("%.1f", executionDuration / 60000.0));
 
         System.out.println("\n" + executionResult.toDetailedReport());
 
@@ -269,7 +272,7 @@ public class NetworkPlayIntegrationTest {
     @Test(timeOut = 1200000, description = "Quick 10-game delta sync validation")
     public void runQuickDeltaSyncTest() {
         skipUnlessStressTestsEnabled();
-        NetworkDebugLogger.log("%s Starting quick delta sync validation (10 games)", LOG_PREFIX);
+        netLog.info("Starting quick delta sync validation (10 games)");
 
         ComprehensiveTestExecutor executor = new ComprehensiveTestExecutor()
                 .twoPlayerGames(5)
@@ -301,7 +304,7 @@ public class NetworkPlayIntegrationTest {
     @Test
     public void analyzeExistingLogs() {
         skipUnlessStressTestsEnabled();
-        NetworkDebugLogger.log("%s Analyzing existing logs...", LOG_PREFIX);
+        netLog.info("Analyzing existing logs...");
 
         File logDir = new File(ForgeConstants.NETWORK_LOGS_DIR);
         NetworkLogAnalyzer analyzer = new NetworkLogAnalyzer();
@@ -317,10 +320,10 @@ public class NetworkPlayIntegrationTest {
             metrics = analyzer.analyzeComprehensiveTestLogs(logDir);
         }
 
-        NetworkDebugLogger.log("%s Found %d log files", LOG_PREFIX, metrics.size());
+        netLog.info("Found {} log files", metrics.size());
 
         if (metrics.isEmpty()) {
-            System.out.println("No comprehensive test logs found in " + NetworkDebugLogger.sanitizePath(logDir.getAbsolutePath()));
+            System.out.println("No comprehensive test logs found in " + NetworkLogConfig.sanitizePath(logDir.getAbsolutePath()));
             return;
         }
 
@@ -339,7 +342,7 @@ public class NetworkPlayIntegrationTest {
         java.nio.file.Path reportPath = logDir.toPath().resolve(filename);
         try {
             java.nio.file.Files.write(reportPath, report.getBytes());
-            System.out.println("Report saved to: " + NetworkDebugLogger.sanitizePath(reportPath.toString()));
+            System.out.println("Report saved to: " + NetworkLogConfig.sanitizePath(reportPath.toString()));
         } catch (IOException e) {
             System.err.println("Failed to save report: " + e.getMessage());
         }
@@ -349,25 +352,25 @@ public class NetworkPlayIntegrationTest {
 
     private void validateComprehensiveResults(MultiProcessGameExecutor.ExecutionResult executionResult,
                                                AnalysisResult analysisResult) {
-        NetworkDebugLogger.log("%s Validating results...", LOG_PREFIX);
+        netLog.info("Validating results...");
 
         // 1. Check success rate >= 90%
         double successRate = executionResult.getSuccessRate() * 100;
-        NetworkDebugLogger.log("%s Success rate: %.1f%% (target: 90%%)", LOG_PREFIX, successRate);
+        netLog.info("Success rate: {}% (target: 90%)", String.format("%.1f", successRate));
         Assert.assertTrue(successRate >= 90.0, String.format("Success rate should be >= 90%%, was %.1f%%", successRate));
 
         // 2. Check bandwidth efficiency
         long totalDeltas = executionResult.getTotalDeltaPackets();
         long totalBytes = executionResult.getTotalBytes();
         double bytesPerPacket = totalDeltas > 0 ? (double) totalBytes / totalDeltas : 0;
-        NetworkDebugLogger.log("%s Bytes per delta packet: %.1f (target: <1000)", LOG_PREFIX, bytesPerPacket);
+        netLog.info("Bytes per delta packet: {} (target: <1000)", String.format("%.1f", bytesPerPacket));
 
         Assert.assertTrue(bytesPerPacket < 1000,
                 String.format("Bytes per delta packet should be < 1000 (efficient), was %.1f", bytesPerPacket));
 
         // 3. Check zero checksum mismatches
         int checksumMismatches = analysisResult.getGamesWithChecksumMismatches();
-        NetworkDebugLogger.log("%s Checksum mismatches: %d (target: 0)", LOG_PREFIX, checksumMismatches);
+        netLog.info("Checksum mismatches: {} (target: 0)", checksumMismatches);
         Assert.assertEquals(checksumMismatches, 0,
                 String.format("Should have zero checksum mismatches, had %d", checksumMismatches));
 
@@ -376,18 +379,18 @@ public class NetworkPlayIntegrationTest {
             double playerSuccessRate = executionResult.getSuccessRateByPlayers(p) * 100;
             int playerGameCount = executionResult.getGameCountByPlayers(p);
             if (playerGameCount > 0) {
-                NetworkDebugLogger.log("%s %d-player success rate: %.1f%% (%d games)", LOG_PREFIX, p, playerSuccessRate, playerGameCount);
+                netLog.info("{}-player success rate: {}% ({} games)", p, String.format("%.1f", playerSuccessRate), playerGameCount);
                 Assert.assertTrue(playerSuccessRate >= 80.0,
                         String.format("%d-player success rate should be >= 80%%, was %.1f%%", p, playerSuccessRate));
             }
         }
 
-        NetworkDebugLogger.log("%s All validation criteria PASSED", LOG_PREFIX);
+        netLog.info("All validation criteria PASSED");
     }
 
     /**
      * Save a report to file using consistent naming with log files.
-     * Uses the batchId from NetworkDebugLogger to keep results files grouped with their logs.
+     * Uses the batchId from NetworkLogConfig to keep results files grouped with their logs.
      * Pattern: network-debug-{batchId}-results.md
      */
     private void saveReportToFile(String report) {
@@ -397,7 +400,7 @@ public class NetworkPlayIntegrationTest {
         }
 
         // Use batchId for consistent naming with log files
-        String batchId = NetworkDebugLogger.getBatchId();
+        String batchId = NetworkLogConfig.getBatchId();
         String filename;
         if (batchId != null) {
             filename = "network-debug-" + batchId + "-results.md";
@@ -411,11 +414,11 @@ public class NetworkPlayIntegrationTest {
 
         try (FileWriter writer = new FileWriter(reportFile)) {
             writer.write(report);
-            String sanitizedPath = NetworkDebugLogger.sanitizePath(reportFile.getAbsolutePath());
-            NetworkDebugLogger.log("%s Report saved to: %s", LOG_PREFIX, sanitizedPath);
+            String sanitizedPath = NetworkLogConfig.sanitizePath(reportFile.getAbsolutePath());
+            netLog.info("Report saved to: {}", sanitizedPath);
             System.out.println("Report saved to: " + sanitizedPath);
         } catch (IOException e) {
-            NetworkDebugLogger.log("%s WARNING: Failed to save report: %s", LOG_PREFIX, e.getMessage());
+            netLog.warn("Failed to save report: {}", e.getMessage());
             System.err.println("WARNING: Failed to save report: " + e.getMessage());
         }
     }

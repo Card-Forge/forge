@@ -2,7 +2,8 @@ package forge.net;
 
 import forge.GuiDesktop;
 import forge.gamemodes.match.HostedMatch;
-import forge.gamemodes.net.NetworkDebugLogger;
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
 import forge.gui.interfaces.IGuiGame;
 import forge.localinstance.skin.FSkinProp;
 import forge.localinstance.skin.ISkinImage;
@@ -22,6 +23,8 @@ import java.util.List;
  * Part of the Headless Full Game Testing infrastructure.
  */
 public class HeadlessGuiDesktop extends GuiDesktop {
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+
 
     // Track the last match for result extraction
     private static volatile HostedMatch lastMatch;
@@ -29,7 +32,7 @@ public class HeadlessGuiDesktop extends GuiDesktop {
     // Flag to track if testing environment message has been logged
     private static boolean testingEnvironmentLogged = false;
 
-    // Note: No static initializer - tests must call NetworkDebugLogger.setTestMode(true)
+    // Note: No static initializer - tests must call NetworkLogConfig.setTestMode(true)
     // AFTER setting GuiBase.setInterface() to avoid initialization order issues.
 
     /**
@@ -55,10 +58,10 @@ public class HeadlessGuiDesktop extends GuiDesktop {
     private static synchronized void logTestingEnvironment() {
         if (!testingEnvironmentLogged) {
             testingEnvironmentLogged = true;
-            NetworkDebugLogger.log("================================================================================");
-            NetworkDebugLogger.log("TESTING ENVIRONMENT - HeadlessGuiDesktop Active");
-            NetworkDebugLogger.log("This log was created from automated test infrastructure.");
-            NetworkDebugLogger.log("================================================================================");
+            netLog.info("================================================================================");
+            netLog.info("TESTING ENVIRONMENT - HeadlessGuiDesktop Active");
+            netLog.info("This log was created from automated test infrastructure.");
+            netLog.info("================================================================================");
         }
     }
 

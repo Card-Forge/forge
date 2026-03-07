@@ -1,6 +1,8 @@
 package forge.net;
 
-import forge.gamemodes.net.NetworkDebugLogger;
+import forge.gamemodes.net.NetworkLogConfig;
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,8 +21,9 @@ import java.util.List;
  * - Sequential: Games run one-by-one in the same JVM (useful for debugging)
  */
 public class ComprehensiveTestExecutor {
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
 
-    private static final String LOG_PREFIX = "[ComprehensiveTestExecutor]";
+
     private static final int BASE_PORT = 58000;
 
     // Default game distribution
@@ -97,10 +100,10 @@ public class ComprehensiveTestExecutor {
     public MultiProcessGameExecutor.ExecutionResult execute() {
         int totalGames = getTotalGames();
         String mode = sequential ? "sequential" : "parallel";
-        NetworkDebugLogger.log("%s Starting comprehensive test: %d total games (%s)", LOG_PREFIX, totalGames, mode);
-        NetworkDebugLogger.log("%s Distribution: %d x 2-player, %d x 3-player, %d x 4-player",
-                LOG_PREFIX, twoPlayerGames, threePlayerGames, fourPlayerGames);
-        NetworkDebugLogger.log("%s Batch size: %d, Timeout: %dms", LOG_PREFIX, parallelBatchSize, gameTimeoutMs);
+        netLog.info("Starting comprehensive test: {} total games ({})", totalGames, mode);
+        netLog.info("Distribution: {} x 2-player, {} x 3-player, {} x 4-player",
+                twoPlayerGames, threePlayerGames, fourPlayerGames);
+        netLog.info("Batch size: {}, Timeout: {}ms", parallelBatchSize, gameTimeoutMs);
 
         long startTime = System.currentTimeMillis();
 
@@ -122,8 +125,8 @@ public class ComprehensiveTestExecutor {
         }
 
         long duration = System.currentTimeMillis() - startTime;
-        NetworkDebugLogger.log("%s Comprehensive test completed in %d ms (%.1f minutes)",
-                LOG_PREFIX, duration, duration / 60000.0);
+        netLog.info("Comprehensive test completed in {} ms ({} minutes)",
+                duration, String.format("%.1f", duration / 60000.0));
 
         return result;
     }
@@ -135,7 +138,7 @@ public class ComprehensiveTestExecutor {
     private MultiProcessGameExecutor.ExecutionResult executeSequentially(int[] playerCounts) {
         ensureFModelInitialized();
 
-        NetworkDebugLogger.log("%s Starting %d sequential games", LOG_PREFIX, playerCounts.length);
+        netLog.info("Starting {} sequential games", playerCounts.length);
 
         MultiProcessGameExecutor.ExecutionResult result = new MultiProcessGameExecutor.ExecutionResult(playerCounts.length);
         int port = BASE_PORT;
@@ -151,14 +154,14 @@ public class ComprehensiveTestExecutor {
             }
 
             String status = gameResult.success ? "SUCCESS" : "FAILED";
-            NetworkDebugLogger.log("%s Game %d (%dp): %s (deltas=%d, turns=%d, winner=%s)",
-                    LOG_PREFIX, i, players, status,
+            netLog.info("Game {} ({}p): {} (deltas={}, turns={}, winner={})",
+                    i, players, status,
                     gameResult.deltaPacketsReceived,
                     gameResult.turnCount,
                     gameResult.winner);
         }
 
-        NetworkDebugLogger.log("%s Sequential execution complete: %s", LOG_PREFIX, result.toSummary());
+        netLog.info("Sequential execution complete: {}", result.toSummary());
         return result;
     }
 
@@ -167,10 +170,10 @@ public class ComprehensiveTestExecutor {
      */
     private UnifiedNetworkHarness.GameResult runSingleGame(int gameIndex, int port, int playerCount) {
         // Set instance-specific log suffix so this game writes to its own log file
-        NetworkDebugLogger.setInstanceSuffix("game" + gameIndex + "-" + playerCount + "p");
+        NetworkLogConfig.setInstanceSuffix("game" + gameIndex + "-" + playerCount + "p");
 
         try {
-            NetworkDebugLogger.log("%s Starting game %d (%d players) on port %d", LOG_PREFIX, gameIndex, playerCount, port);
+            netLog.info("Starting game {} ({} players) on port {}", gameIndex, playerCount, port);
 
             // Use UnifiedNetworkHarness for all player counts
             return new UnifiedNetworkHarness()
@@ -181,7 +184,7 @@ public class ComprehensiveTestExecutor {
                     .execute();
         } finally {
             // Close this game's log file
-            NetworkDebugLogger.closeThreadLogger();
+            NetworkLogConfig.closeThreadLogger();
         }
     }
 

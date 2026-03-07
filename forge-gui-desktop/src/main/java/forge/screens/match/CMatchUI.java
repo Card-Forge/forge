@@ -66,7 +66,8 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
-import forge.gamemodes.net.NetworkDebugLogger;
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.gui.FNetOverlay;
 import forge.gui.FThreads;
@@ -143,6 +144,8 @@ import net.miginfocom.swing.MigLayout;
 public final class CMatchUI
     extends NetworkGuiGame
     implements ICDoc, IMenuProvider {
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+
 
     public static final EnumSet<ZoneType> FLOATING_ZONE_TYPES = EnumSet.of(ZoneType.Library, ZoneType.Graveyard, ZoneType.Exile,
             ZoneType.Flashback, ZoneType.Command, ZoneType.Ante, ZoneType.Sideboard, ZoneType.PlanarDeck,
@@ -291,9 +294,9 @@ public final class CMatchUI
         allHands = sortedPlayers.size() == getLocalPlayerCount();
 
         // Debug logging for network play
-        NetworkDebugLogger.debug("[CMatchUI.initMatch] sortedPlayers count=%d", sortedPlayers.size());
+        netLog.debug("sortedPlayers count={}", sortedPlayers.size());
         for (PlayerView p : sortedPlayers) {
-            NetworkDebugLogger.debug("[CMatchUI.initMatch]   Player ID=%d, hash=%d, isLocal=%b",
+            netLog.debug("  Player ID={}, hash={}, isLocal={}",
                     p.getId(), System.identityHashCode(p), (myPlayers != null && myPlayers.contains(p)));
         }
 
@@ -440,7 +443,7 @@ public final class CMatchUI
             final PlayerView owner = update.getPlayer();
 
             // Debug logging
-            NetworkDebugLogger.debug("[CMatchUI.updateZones] Processing update for player %d, zones=%s, ownerHash=%d",
+            netLog.debug("Processing update for player {}, zones={}, ownerHash={}",
                     owner.getId(), update.getZones(), System.identityHashCode(owner));
 
             boolean setupPlayZone = false, updateHand = false, updateAnte = false, updateZones = false;
@@ -469,7 +472,7 @@ public final class CMatchUI
             }
             final VField vField = getFieldViewFor(owner);
             if(vField == null) {
-                NetworkDebugLogger.error("[CMatchUI.updateZones] ERROR: vField is null for player %d, sortedPlayers.indexOf=%d",
+                netLog.error("ERROR: vField is null for player {}, sortedPlayers.indexOf={}",
                         owner.getId(), sortedPlayers.indexOf(owner));
                 return;
             }
@@ -478,7 +481,7 @@ public final class CMatchUI
             }
             if (updateHand) {
                 final VHand vHand = getHandFor(owner);
-                NetworkDebugLogger.debug("[CMatchUI.updateZones] updateHand for player %d, vHand=%s, handSize=%s",
+                netLog.debug("updateHand for player {}, vHand={}, handSize={}",
                         owner.getId(), (vHand != null ? "exists" : "NULL"),
                         (owner.getHand() != null ? String.valueOf(owner.getHand().size()) : "null"));
                 if (vHand != null) {
@@ -1054,7 +1057,7 @@ public final class CMatchUI
 
     @Override
     public void openView(final TrackableCollection<PlayerView> myPlayers) {
-        NetworkDebugLogger.log("[CMatchUI.openView] Called");
+        netLog.info("Called");
         final GameView gameView = getGameView();
         gameView.getGameLog().addObserver(cLog);
 
@@ -1062,11 +1065,11 @@ public final class CMatchUI
         FCollectionView<PlayerView> players = gameView.getPlayers();
 
         // Debug: Log PlayerView instances from gameView
-        NetworkDebugLogger.debug("[CMatchUI.openView] gameView.getPlayers() count=%d", players.size());
+        netLog.debug("gameView.getPlayers() count={}", players.size());
         for (PlayerView pv : players) {
             Tracker t = pv.getTracker();
             PlayerView inTracker = t != null ? t.getObj(TrackableTypes.PlayerViewType, pv.getId()) : null;
-            NetworkDebugLogger.debug("[CMatchUI.openView]   Player %d: hash=%d, tracker=%s, inTracker=%b, sameInstance=%b",
+            netLog.debug("  Player {}: hash={}, tracker={}, inTracker={}, sameInstance={}",
                     pv.getId(), System.identityHashCode(pv),
                     t != null ? "exists" : "null",
                     inTracker != null,

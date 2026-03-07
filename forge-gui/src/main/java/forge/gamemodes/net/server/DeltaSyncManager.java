@@ -12,7 +12,8 @@ import forge.gamemodes.net.DeltaPacket.CardStateData;
 import forge.gamemodes.net.NetworkChecksumUtil;
 import forge.gamemodes.net.DeltaPacket.NewObjectData;
 import forge.gamemodes.net.FullStatePacket;
-import forge.gamemodes.net.NetworkDebugLogger;
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
@@ -39,6 +40,8 @@ import java.util.concurrent.atomic.AtomicLong;
  * minimal delta packets using property maps (standard Java serialization).
  */
 public class DeltaSyncManager {
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+
     // How often to include a checksum for validation (every N packets)
     private static final int CHECKSUM_INTERVAL = 20;
 
@@ -180,7 +183,7 @@ public class DeltaSyncManager {
                 new HashSet<>(removedObjectIds), checksum, includeChecksum);
 
         if (!newObjects.isEmpty()) {
-            NetworkDebugLogger.log("[DeltaSync] New objects: %d, Deltas: %d, Removed: %d",
+            netLog.info("[DeltaSync] New objects: {}, Deltas: {}, Removed: {}",
                     newObjects.size(), objectDeltas.size(), removedObjectIds.size());
         }
 
@@ -196,7 +199,7 @@ public class DeltaSyncManager {
      */
     private static int makeDeltaKey(int type, int id) {
         if (type < 0 || type > 15) {
-            NetworkDebugLogger.error("[DeltaSync] Invalid object type %d, using 0", type);
+            netLog.error("[DeltaSync] Invalid object type {}, using 0", type);
             type = 0;
         }
         return (type << 28) | (id & 0x0FFFFFFF);
@@ -251,7 +254,7 @@ public class DeltaSyncManager {
             Map<TrackableProperty, Object> allProps = buildFullPropertyMap(obj);
             if (!allProps.isEmpty()) {
                 newObjects.put(deltaKey, new NewObjectData(obj.getId(), objType, allProps));
-                NetworkDebugLogger.trace("[DeltaSync] New object: type=%d id=%d, %d props",
+                netLog.trace("[DeltaSync] New object: type={} id={}, {} props",
                         objType, obj.getId(), allProps.size());
             }
 
@@ -264,7 +267,7 @@ public class DeltaSyncManager {
                 Map<TrackableProperty, Object> delta = buildPropertyMap(obj, dirtyProps);
                 if (!delta.isEmpty()) {
                     objectDeltas.put(deltaKey, delta);
-                    NetworkDebugLogger.trace("[DeltaSync] Delta: type=%d id=%d, %d dirty props",
+                    netLog.trace("[DeltaSync] Delta: type={} id={}, {} dirty props",
                             objType, obj.getId(), delta.size());
                 }
             }
@@ -288,7 +291,7 @@ public class DeltaSyncManager {
             int battlefieldCount = 0;
             for (CardView card : player.getBattlefield()) {
                 if (battlefieldCount++ >= MAX_COLLECTION_SIZE) {
-                    NetworkDebugLogger.warn("[DeltaSync] Max collection size (%d) exceeded on battlefield for player %d",
+                    netLog.warn("[DeltaSync] Max collection size ({}) exceeded on battlefield for player {}",
                         MAX_COLLECTION_SIZE, player.getId());
                     break;
                 }
@@ -307,7 +310,7 @@ public class DeltaSyncManager {
         int cardCount = 0;
         for (CardView card : cards) {
             if (cardCount++ >= MAX_COLLECTION_SIZE) {
-                NetworkDebugLogger.warn("[DeltaSync] Max collection size (%d) exceeded in zone, skipping remaining cards",
+                netLog.warn("[DeltaSync] Max collection size ({}) exceeded in zone, skipping remaining cards",
                     MAX_COLLECTION_SIZE);
                 break;
             }
@@ -323,7 +326,7 @@ public class DeltaSyncManager {
             return;
         }
         if (depth > MAX_ATTACHMENT_DEPTH) {
-            NetworkDebugLogger.warn("[DeltaSync] Max attachment depth (%d) reached for card %d",
+            netLog.warn("[DeltaSync] Max attachment depth ({}) reached for card {}",
                 MAX_ATTACHMENT_DEPTH, card.getId());
             return;
         }
@@ -334,7 +337,7 @@ public class DeltaSyncManager {
             int attachmentCount = 0;
             for (CardView attached : card.getAttachedCards()) {
                 if (attachmentCount++ >= MAX_COLLECTION_SIZE) {
-                    NetworkDebugLogger.warn("[DeltaSync] Max collection size (%d) exceeded for attached cards on card %d",
+                    netLog.warn("[DeltaSync] Max collection size ({}) exceeded for attached cards on card {}",
                         MAX_COLLECTION_SIZE, card.getId());
                     break;
                 }
@@ -491,7 +494,7 @@ public class DeltaSyncManager {
             registerAndMark(gameView.getCombat(), DeltaPacket.TYPE_COMBAT_VIEW);
         }
 
-        NetworkDebugLogger.log("[DeltaSync] Registered consumer %d on %d objects after full state sync",
+        netLog.info("[DeltaSync] Registered consumer {} on {} objects after full state sync",
                 consumerId, registeredObjects.size());
     }
 
@@ -550,17 +553,17 @@ public class DeltaSyncManager {
                                                  int snapshotTurn, int snapshotPhaseOrdinal) {
         String phaseName = snapshotPhaseOrdinal >= 0 ?
                 forge.game.phase.PhaseType.values()[snapshotPhaseOrdinal].name() : "null";
-        NetworkDebugLogger.log("[DeltaSync] Checksum for seq=%d: %d", seq, checksum);
-        NetworkDebugLogger.log("[DeltaSync] Checksum details (server snapshot state):");
-        NetworkDebugLogger.log("[DeltaSync]   GameView ID: %d", gameView.getId());
-        NetworkDebugLogger.log("[DeltaSync]   Turn: %d (snapshot)", snapshotTurn);
-        NetworkDebugLogger.log("[DeltaSync]   Phase: %s (snapshot, current=%s)", phaseName,
+        netLog.info("[DeltaSync] Checksum for seq={}: {}", seq, checksum);
+        netLog.info("[DeltaSync] Checksum details (server snapshot state):");
+        netLog.info("[DeltaSync]   GameView ID: {}", gameView.getId());
+        netLog.info("[DeltaSync]   Turn: {} (snapshot)", snapshotTurn);
+        netLog.info("[DeltaSync]   Phase: {} (snapshot, current={})", phaseName,
                 gameView.getPhase() != null ? gameView.getPhase().name() : "null");
         for (PlayerView player : NetworkChecksumUtil.getSortedPlayers(gameView)) {
             int handSize = player.getHand() != null ? player.getHand().size() : 0;
             int graveyardSize = player.getGraveyard() != null ? player.getGraveyard().size() : 0;
             int battlefieldSize = player.getBattlefield() != null ? player.getBattlefield().size() : 0;
-            NetworkDebugLogger.log("[DeltaSync]   Player %d (%s): Life=%d, Hand=%d, GY=%d, BF=%d",
+            netLog.info("[DeltaSync]   Player {} ({}): Life={}, Hand={}, GY={}, BF={}",
                     player.getId(), player.getName(), player.getLife(),
                     handSize, graveyardSize, battlefieldSize);
         }

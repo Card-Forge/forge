@@ -1,6 +1,8 @@
 package forge.net;
 
-import forge.gamemodes.net.NetworkDebugLogger;
+import forge.gamemodes.net.NetworkLogConfig;
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
 
 /**
  * Standalone runner for comprehensive network game testing.
@@ -25,6 +27,8 @@ import forge.gamemodes.net.NetworkDebugLogger;
  *   RESULT:gameIndex|success|playerCount|deltas|turns|bytes|winner|deck1,deck2,...
  */
 public class ComprehensiveGameRunner {
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+
 
     public static void main(String[] args) {
         if (args.length < 3) {
@@ -74,33 +78,33 @@ public class ComprehensiveGameRunner {
      */
     public static int runGame(int port, int gameIndex, int playerCount, String batchId, int batchNumber) {
         try {
-            // Initialize FModel FIRST - required before NetworkDebugLogger is accessed
+            // Initialize FModel FIRST - required before NetworkLogConfig is accessed
             // because the logger's static initialization chain requires GuiBase.getInterface()
             TestUtils.ensureFModelInitialized();
 
             // Set up logging for this game instance (must be after GuiBase initialization)
-            NetworkDebugLogger.setTestMode(true);
+            NetworkLogConfig.setTestMode(true);
             if (batchId != null) {
-                NetworkDebugLogger.setBatchId(batchId);
+                NetworkLogConfig.setBatchId(batchId);
             }
             // Include batch number in log filename to prevent overwrites across batches
-            NetworkDebugLogger.setInstanceSuffix("batch" + batchNumber + "-game" + gameIndex + "-" + playerCount + "p");
+            NetworkLogConfig.setInstanceSuffix("batch" + batchNumber + "-game" + gameIndex + "-" + playerCount + "p");
 
-            NetworkDebugLogger.log("[ComprehensiveGameRunner] Starting game %d with %d players on port %d",
+            netLog.info("Starting game {} with {} players on port {}",
                     gameIndex, playerCount, port);
 
             // Use UnifiedNetworkHarness for all player counts
             UnifiedNetworkHarness.GameResult result = runGame(port, playerCount);
 
             // Log result
-            NetworkDebugLogger.log("[ComprehensiveGameRunner] Game %d result: success=%s, turns=%d, winner=%s",
+            netLog.info("Game {} result: success={}, turns={}, winner={}",
                     gameIndex, result.success, result.turnCount, result.winner);
 
             // Output result to stdout for parent process to parse
             System.out.println("RESULT:" + formatResult(gameIndex, playerCount, result));
 
             // Close the log file
-            NetworkDebugLogger.closeThreadLogger();
+            NetworkLogConfig.closeThreadLogger();
 
             return result.success ? 0 : 1;
 

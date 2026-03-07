@@ -1,5 +1,6 @@
 package forge.gamemodes.net;
 
+import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
 import org.tinylog.core.LogEntry;
 import org.tinylog.core.LogEntryValue;
@@ -49,6 +50,13 @@ public class NetworkLogWriter extends AbstractFormatPatternWriter {
                 key = contextKey;
             }
         }
+        // Fallback: if thread has no logfileKey, use global key from NetworkLogConfig
+        if (DEFAULT_KEY.equals(key)) {
+            String globalKey = NetworkLogConfig.getGlobalLogfileKey();
+            if (globalKey != null) {
+                key = globalKey;
+            }
+        }
 
         String rendered = render(logEntry);
         BufferedWriter writer = writers.computeIfAbsent(key, this::createWriter);
@@ -87,9 +95,37 @@ public class NetworkLogWriter extends AbstractFormatPatternWriter {
                 dir.mkdirs();
             }
             File file = new File(dir, LOG_PREFIX + key + ".log");
-            return new BufferedWriter(new FileWriter(file, true));
+            boolean isNew = !file.exists() || file.length() == 0;
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
+            if (isNew) {
+                writeSystemInfoHeader(writer, key);
+            }
+            return writer;
         } catch (IOException e) {
             return null;
+        }
+    }
+
+    private void writeSystemInfoHeader(BufferedWriter writer, String key) {
+        try {
+            long pid = ProcessHandle.current().pid();
+            StringBuilder sb = new StringBuilder();
+            sb.append("=".repeat(80)).append("\n");
+            sb.append("Network Debug Log Started\n");
+            sb.append("Log file key: ").append(key).append("\n");
+            sb.append("PID: ").append(pid).append("\n");
+            try {
+                String hwInfo = GuiBase.getHWInfo()
+                        .replace("##########################################", "");
+                sb.append(hwInfo.strip()).append("\n");
+            } catch (Exception e) {
+                sb.append("(hardware info unavailable)\n");
+            }
+            sb.append("=".repeat(80)).append("\n");
+            writer.write(sb.toString());
+            writer.flush();
+        } catch (IOException e) {
+            // Non-critical
         }
     }
 }

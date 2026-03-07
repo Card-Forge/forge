@@ -10,7 +10,9 @@ import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.NetworkByteTracker;
-import forge.gamemodes.net.NetworkDebugLogger;
+import forge.gamemodes.net.NetworkLogConfig;
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
 import forge.gamemodes.net.client.ClientGameLobby;
 import forge.gamemodes.net.server.FServerManager;
 import forge.gamemodes.net.server.ServerGameLobby;
@@ -63,8 +65,9 @@ import java.util.concurrent.atomic.AtomicInteger;
  * </pre>
  */
 public class UnifiedNetworkHarness {
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
 
-    private static final String LOG_PREFIX = "[UnifiedNetworkHarness]";
+
     private static final String[] PLAYER_NAMES = {"Alice (Host AI)", "Bob (Remote)", "Charlie (Remote)", "Diana (Remote)"};
 
     private static final long DEFAULT_CONNECTION_TIMEOUT_MS = 30000;
@@ -233,12 +236,12 @@ public class UnifiedNetworkHarness {
                 slot.setDeck(deck);
                 slot.setIsReady(true);
 
-                NetworkDebugLogger.log("%s Configured slot %d: %s with deck: %s",
-                        LOG_PREFIX, i, PLAYER_NAMES[i], deck.getName());
+                netLog.info("Configured slot {}: {} with deck: {}",
+                        i, PLAYER_NAMES[i], deck.getName());
             }
 
             // 4. Start game
-            NetworkDebugLogger.log("%s Starting local game...", LOG_PREFIX);
+            netLog.info("Starting local game...");
             result.gameStarted = true;
 
             Runnable startRunnable = lobby.startGame();
@@ -262,13 +265,13 @@ public class UnifiedNetworkHarness {
         } catch (Exception e) {
             result.errorMessage = e.getMessage();
             result.exception = e;
-            NetworkDebugLogger.error("%s Local game failed: %s", LOG_PREFIX, e.getMessage());
+            netLog.error("Local game failed: {}", e.getMessage());
             e.printStackTrace();
         } finally {
             cleanup();
         }
 
-        NetworkDebugLogger.log("%s Local game result: %s", LOG_PREFIX, result.toSummary());
+        netLog.info("Local game result: {}", result.toSummary());
         return result;
     }
 
@@ -292,8 +295,8 @@ public class UnifiedNetworkHarness {
             int port = (specifiedPort > 0) ? specifiedPort : PortAllocator.allocatePort();
             result.port = port;
 
-            NetworkDebugLogger.log("%s Starting %d-player game with %d remote clients on port %d",
-                    LOG_PREFIX, playerCount, remoteClientCount, port);
+            netLog.info("Starting {}-player game with {} remote clients on port {}",
+                    playerCount, remoteClientCount, port);
 
             // 1. Start server
             server = FServerManager.getInstance();
@@ -326,23 +329,23 @@ public class UnifiedNetworkHarness {
                     slot.setName(PLAYER_NAMES[0]);
                     slot.setDeck(deck);
                     slot.setIsReady(true);
-                    NetworkDebugLogger.log("%s Slot 0: %s (AI host) with %s",
-                            LOG_PREFIX, PLAYER_NAMES[0], deck.getName());
+                    netLog.info("Slot 0: {} (AI host) with {}",
+                            PLAYER_NAMES[0], deck.getName());
                 } else if (i <= remoteClientCount) {
                     // Remote client slots - stay OPEN, deck pre-loaded
                     slot.setType(LobbySlotType.OPEN);
                     slot.setDeck(deck);
                     slot.setIsReady(false);
-                    NetworkDebugLogger.log("%s Slot %d: OPEN for remote client (deck: %s)",
-                            LOG_PREFIX, i, deck.getName());
+                    netLog.info("Slot {}: OPEN for remote client (deck: {})",
+                            i, deck.getName());
                 } else {
                     // Additional local AI slots
                     slot.setType(LobbySlotType.AI);
                     slot.setName(PLAYER_NAMES[i]);
                     slot.setDeck(deck);
                     slot.setIsReady(true);
-                    NetworkDebugLogger.log("%s Slot %d: %s (AI) with %s",
-                            LOG_PREFIX, i, PLAYER_NAMES[i], deck.getName());
+                    netLog.info("Slot {}: {} (AI) with {}",
+                            i, PLAYER_NAMES[i], deck.getName());
                 }
             }
 
@@ -370,8 +373,8 @@ public class UnifiedNetworkHarness {
             boolean allClientsAttempted = clientsAttemptedLatch.await(connectionTimeoutMs, TimeUnit.MILLISECONDS);
             int connectedCount = successfulConnections.get();
 
-            NetworkDebugLogger.log("%s Connection attempts: %d/%d connected successfully",
-                    LOG_PREFIX, connectedCount, remoteClientCount);
+            netLog.info("Connection attempts: {}/{} connected successfully",
+                    connectedCount, remoteClientCount);
 
             if (!allClientsAttempted) {
                 result.errorMessage = "Client connection timeout - only " + connectedCount + " connected";
@@ -397,7 +400,7 @@ public class UnifiedNetworkHarness {
 
             startRunnable.run();
             result.gameStarted = true;
-            NetworkDebugLogger.log("%s Game started successfully!", LOG_PREFIX);
+            netLog.info("Game started successfully!");
 
             // Swap remote players to AI if enabled
             HostedMatch hostedMatch = HeadlessGuiDesktop.getLastMatch();
@@ -432,13 +435,13 @@ public class UnifiedNetworkHarness {
         } catch (Exception e) {
             result.errorMessage = e.getMessage();
             result.exception = e;
-            NetworkDebugLogger.error("%s Remote game failed: %s", LOG_PREFIX, e.getMessage());
+            netLog.error("Remote game failed: {}", e.getMessage());
             e.printStackTrace();
         } finally {
             cleanup();
         }
 
-        NetworkDebugLogger.log("%s Remote game result: %s", LOG_PREFIX, result.toSummary());
+        netLog.info("Remote game result: {}", result.toSummary());
         return result;
     }
 
@@ -462,17 +465,17 @@ public class UnifiedNetworkHarness {
 
             if (client.connect(connectionTimeoutMs)) {
                 int assignedSlot = client.getAssignedSlot();
-                NetworkDebugLogger.log("%s Client %d (%s) connected to slot %d",
-                        LOG_PREFIX, clientIndex, clientName, assignedSlot);
+                netLog.info("Client {} ({}) connected to slot {}",
+                        clientIndex, clientName, assignedSlot);
 
                 Thread.sleep(500);
                 client.setReady();
-                NetworkDebugLogger.log("%s Client %d (%s) marked ready", LOG_PREFIX, clientIndex, clientName);
+                netLog.info("Client {} ({}) marked ready", clientIndex, clientName);
                 Thread.sleep(200);
 
                 int connectedCount = successfulConnections.incrementAndGet();
-                NetworkDebugLogger.log("%s Client %d ready (%d/%d connected)",
-                        LOG_PREFIX, clientIndex, connectedCount, remoteClientCount);
+                netLog.info("Client {} ready ({}/{} connected)",
+                        clientIndex, connectedCount, remoteClientCount);
 
                 attemptedLatch.countDown();
 
@@ -480,16 +483,16 @@ public class UnifiedNetworkHarness {
                 client.waitForGameStart(gameTimeoutMs);
                 client.waitForGameFinish(gameTimeoutMs);
 
-                NetworkDebugLogger.log("%s Client %d finished: %s",
-                        LOG_PREFIX, clientIndex, client.getMetricsSummary());
+                netLog.info("Client {} finished: {}",
+                        clientIndex, client.getMetricsSummary());
             } else {
-                NetworkDebugLogger.error("%s Client %d (%s) FAILED to connect",
-                        LOG_PREFIX, clientIndex, clientName);
+                netLog.error("Client {} ({}) FAILED to connect",
+                        clientIndex, clientName);
                 attemptedLatch.countDown();
             }
 
         } catch (Exception e) {
-            NetworkDebugLogger.error("%s Client %d error: %s", LOG_PREFIX, clientIndex, e.getMessage());
+            netLog.error("Client {} error: {}", clientIndex, e.getMessage());
             e.printStackTrace();
             attemptedLatch.countDown();
         } finally {
@@ -521,17 +524,17 @@ public class UnifiedNetworkHarness {
         server.setLobbyListener(new ILobbyListener() {
             @Override
             public void update(GameLobbyData state, int slot) {
-                NetworkDebugLogger.log("%s [LobbyListener] Update for slot %d", LOG_PREFIX, slot);
+                netLog.info("Lobby update for slot {}", slot);
             }
 
             @Override
             public void message(String source, String message) {
-                NetworkDebugLogger.log("%s [LobbyListener] Message from %s: %s", LOG_PREFIX, source, message);
+                netLog.info("Lobby message from {}: {}", source, message);
             }
 
             @Override
             public void close() {
-                NetworkDebugLogger.log("%s [LobbyListener] Lobby closed", LOG_PREFIX);
+                netLog.info("Lobby closed");
             }
 
             @Override
@@ -542,11 +545,11 @@ public class UnifiedNetworkHarness {
     }
 
     private void logLobbyState() {
-        NetworkDebugLogger.log("%s Lobby state before game start:", LOG_PREFIX);
+        netLog.info("Lobby state before game start:");
         for (int i = 0; i < lobby.getNumberOfSlots(); i++) {
             LobbySlot slot = lobby.getSlot(i);
-            NetworkDebugLogger.log("%s   Slot %d: type=%s, name=%s, deck=%s, ready=%s",
-                    LOG_PREFIX, i,
+            netLog.info("  Slot {}: type={}, name={}, deck={}, ready={}",
+                    i,
                     slot.getType(),
                     slot.getName(),
                     slot.getDeck() != null ? slot.getDeck().getName() : "null",
@@ -570,7 +573,7 @@ public class UnifiedNetworkHarness {
             if (match != null) {
                 Collection<GameOutcome> outcomes = match.getOutcomes();
                 if (outcomes != null && !outcomes.isEmpty()) {
-                    NetworkDebugLogger.log("%s Game completed after %dms", LOG_PREFIX, waitedMs);
+                    netLog.info("Game completed after {}ms", waitedMs);
                     extractLocalGameResults(result, hostedMatch);
                     result.gameCompleted = true;
                     return;
@@ -586,7 +589,7 @@ public class UnifiedNetworkHarness {
             }
 
             if (waitedMs % 5000 == 0) {
-                NetworkDebugLogger.log("%s Still waiting... %ds", LOG_PREFIX, waitedMs / 1000);
+                netLog.info("Still waiting... {}s", waitedMs / 1000);
             }
         }
 
@@ -644,7 +647,7 @@ public class UnifiedNetworkHarness {
             result.fullStateBytesSent = tracker.getFullStateBytesSent();
             result.deltaPacketCount = tracker.getDeltaPacketCount();
             result.fullStatePacketCount = tracker.getFullStatePacketCount();
-            NetworkDebugLogger.log("%s Network stats: %s", LOG_PREFIX, tracker.getStatsSummary());
+            netLog.info("Network stats: {}", tracker.getStatsSummary());
         }
     }
 
@@ -656,36 +659,36 @@ public class UnifiedNetworkHarness {
                 result.totalDeltaBytes += client.getTotalDeltaBytes();
             }
         }
-        NetworkDebugLogger.log("%s Client metrics: deltas=%d, fullSyncs=%d, bytes=%d",
-                LOG_PREFIX, result.deltaPacketsReceived, result.fullStateSyncsReceived, result.totalDeltaBytes);
+        netLog.info("Client metrics: deltas={}, fullSyncs={}, bytes={}",
+                result.deltaPacketsReceived, result.fullStateSyncsReceived, result.totalDeltaBytes);
     }
 
     private void swapRemotePlayersToAi() {
-        NetworkDebugLogger.log("%s Converting remote players to AI via FServerManager.convertToAI...", LOG_PREFIX);
+        netLog.info("Converting remote players to AI via FServerManager.convertToAI...");
 
         for (int i = 1; i <= remoteClientCount; i++) {
             LobbySlot slot = lobby.getSlot(i);
             String playerName = slot.getName();
             server.convertToAI(i, playerName);
-            NetworkDebugLogger.log("%s   Slot %d (%s): converted to AI via server.convertToAI",
-                    LOG_PREFIX, i, playerName);
+            netLog.info("  Slot {} ({}): converted to AI via server.convertToAI",
+                    i, playerName);
         }
     }
 
     private void logServerInstanceBanner(String scenarioName, int players, int serverPort) {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         String separator = "=".repeat(80);
-        NetworkDebugLogger.log(separator);
-        NetworkDebugLogger.log("SERVER INSTANCE STARTED");
-        NetworkDebugLogger.log("  Scenario: %s", scenarioName);
-        NetworkDebugLogger.log("  Players:  %d (remote clients: %d)", players, remoteClientCount);
-        NetworkDebugLogger.log("  Port:     %d", serverPort);
-        NetworkDebugLogger.log("  Time:     %s", timestamp);
-        NetworkDebugLogger.log(separator);
+        netLog.info(separator);
+        netLog.info("SERVER INSTANCE STARTED");
+        netLog.info("  Scenario: {}", scenarioName);
+        netLog.info("  Players:  {} (remote clients: {})", players, remoteClientCount);
+        netLog.info("  Port:     {}", serverPort);
+        netLog.info("  Time:     {}", timestamp);
+        netLog.info(separator);
     }
 
     private void cleanup() {
-        NetworkDebugLogger.log("%s Cleaning up...", LOG_PREFIX);
+        netLog.info("Cleaning up...");
 
         // Close clients
         synchronized (remoteClients) {
@@ -733,7 +736,7 @@ public class UnifiedNetworkHarness {
         HeadlessGuiDesktop.clearLastMatch();
         lobby = null;
 
-        NetworkDebugLogger.log("%s Cleanup complete", LOG_PREFIX);
+        netLog.info("Cleanup complete");
     }
 
     // ==================== GameResult Inner Class ====================
@@ -819,7 +822,7 @@ public class UnifiedNetworkHarness {
          * @return Bandwidth summary string, or null if log file not available
          */
         public String getBandwidthSummary() {
-            File logFile = NetworkDebugLogger.getCurrentLogFile();
+            File logFile = NetworkLogConfig.getCurrentLogFile();
             if (logFile == null || !logFile.exists()) {
                 return null;
             }
@@ -852,7 +855,7 @@ public class UnifiedNetworkHarness {
          * @return Analysis report string, or null if log file not available
          */
         public String analyzeLogFile() {
-            File logFile = NetworkDebugLogger.getCurrentLogFile();
+            File logFile = NetworkLogConfig.getCurrentLogFile();
             if (logFile == null || !logFile.exists()) {
                 return null;
             }
@@ -892,7 +895,7 @@ public class UnifiedNetworkHarness {
          * Report filename matches the log file with "-analysis.md" suffix.
          */
         private void saveAnalysisReport(String report) {
-            File logFile = NetworkDebugLogger.getCurrentLogFile();
+            File logFile = NetworkLogConfig.getCurrentLogFile();
             if (logFile == null) {
                 return;
             }
@@ -908,9 +911,9 @@ public class UnifiedNetworkHarness {
                 writer.write("```\n");
                 writer.write(report);
                 writer.write("\n```\n");
-                NetworkDebugLogger.log("[GameResult] Analysis report saved to: %s", NetworkDebugLogger.sanitizePath(reportFile.getAbsolutePath()));
+                netLog.info("Analysis report saved to: {}", NetworkLogConfig.sanitizePath(reportFile.getAbsolutePath()));
             } catch (java.io.IOException e) {
-                NetworkDebugLogger.warn("[GameResult] Failed to save analysis report: %s", e.getMessage());
+                netLog.warn("Failed to save analysis report: {}", e.getMessage());
             }
         }
     }

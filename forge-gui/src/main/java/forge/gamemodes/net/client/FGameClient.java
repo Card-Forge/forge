@@ -5,7 +5,8 @@ import forge.game.player.PlayerView;
 import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.CompatibleObjectEncoder;
 import forge.gamemodes.net.ReplyPool;
-import forge.gamemodes.net.NetworkDebugLogger;
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
 import forge.gamemodes.net.event.*;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.ILobbyListener;
@@ -24,6 +25,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 public class FGameClient implements IToServer {
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+
     static final int HEARTBEAT_INTERVAL_SECONDS = Integer.getInteger("forge.net.heartbeatInterval", 15);
     private final IGuiGame clientGui;
     private final String hostname;
@@ -83,13 +86,13 @@ public class FGameClient implements IToServer {
                 try {
                     ch.sync();
                 } catch (final InterruptedException e) {
-                    NetworkDebugLogger.error("Client channel interrupted", e);
+                    netLog.error("Client channel interrupted", e);
                 } finally {
                     group.shutdownGracefully();
                 }
             }).start();
         } catch (final InterruptedException e) {
-            NetworkDebugLogger.error("Client connect interrupted", e);
+            netLog.error("Client connect interrupted", e);
         }
     }
 
@@ -103,7 +106,7 @@ public class FGameClient implements IToServer {
         if (disconnectSimulated) {
             return;
         }
-        NetworkDebugLogger.log("[FGameClient] Client sent %s", event);
+        netLog.info("Client sent {}", event);
         channel.writeAndFlush(event);
     }
 
@@ -113,7 +116,7 @@ public class FGameClient implements IToServer {
      * will detect the silence and close the connection.
      */
     public void simulateDisconnect() {
-        NetworkDebugLogger.debug("[simulateDisconnect] Suspending all network writes.");
+        netLog.debug("Suspending all network writes.");
         disconnectSimulated = true;
         // Remove the IdleStateHandler to stop heartbeats, and add an outbound
         // handler that drops ALL writes (including game replies that bypass
@@ -124,11 +127,11 @@ public class FGameClient implements IToServer {
             channel.pipeline().addFirst("writeBlocker", new ChannelOutboundHandlerAdapter() {
                 @Override
                 public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) {
-                    NetworkDebugLogger.debug("[writeBlocker] Dropped: %s", msg.getClass().getSimpleName());
+                    netLog.debug("Dropped: {}", msg.getClass().getSimpleName());
                     promise.setSuccess();
                 }
             });
-            NetworkDebugLogger.debug("[simulateDisconnect] Pipeline modified: IdleStateHandler removed, writeBlocker added.");
+            netLog.debug("Pipeline modified: IdleStateHandler removed, writeBlocker added.");
         });
     }
 
@@ -191,8 +194,8 @@ public class FGameClient implements IToServer {
 
         @Override
         public void channelInactive(final ChannelHandlerContext ctx) throws Exception {
-            NetworkDebugLogger.log("[ClientDisconnect] Channel became inactive, notifying %d listeners", lobbyListeners.size());
-            NetworkDebugLogger.log("[ClientDisconnect] Remote address was: %s", ctx.channel().remoteAddress());
+            netLog.info("[Disconnect] Channel became inactive, notifying {} listeners", lobbyListeners.size());
+            netLog.info("[Disconnect] Remote address was: {}", ctx.channel().remoteAddress());
             for (final ILobbyListener listener : lobbyListeners) {
                 listener.close();
             }

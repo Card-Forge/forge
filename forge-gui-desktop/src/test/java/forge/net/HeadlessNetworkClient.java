@@ -4,7 +4,8 @@ import forge.game.GameView;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.FullStatePacket;
 import forge.gamemodes.match.GameLobby.GameLobbyData;
-import forge.gamemodes.net.NetworkDebugLogger;
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
 import forge.gamemodes.net.client.ClientGameLobby;
 import forge.gamemodes.net.client.FGameClient;
 import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
@@ -31,8 +32,8 @@ import java.util.concurrent.atomic.AtomicLong;
  * Part of Phase 8 of the automated network testing infrastructure.
  */
 public class HeadlessNetworkClient implements AutoCloseable {
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
 
-    private static final String LOG_PREFIX = "[HeadlessClient]";
 
     private final String username;
     private final String hostname;
@@ -75,7 +76,7 @@ public class HeadlessNetworkClient implements AutoCloseable {
      * @return true if connected successfully
      */
     public boolean connect(long timeoutMs) {
-        NetworkDebugLogger.log("%s Connecting to %s:%d as '%s'", LOG_PREFIX, hostname, port, username);
+        netLog.info("Connecting to {}:{} as '{}'", hostname, port, username);
 
         try {
             // Create GUI implementation that logs delta packets
@@ -97,15 +98,15 @@ public class HeadlessNetworkClient implements AutoCloseable {
             boolean success = connectedLatch.await(timeoutMs, TimeUnit.MILLISECONDS);
             if (success) {
                 connected.set(true);
-                NetworkDebugLogger.log("%s Connected successfully, assigned slot %d",
-                        LOG_PREFIX, assignedSlot.get());
+                netLog.info("Connected successfully, assigned slot {}",
+                        assignedSlot.get());
             } else {
-                NetworkDebugLogger.error("%s Connection timeout after %dms", LOG_PREFIX, timeoutMs);
+                netLog.error("Connection timeout after {}ms", timeoutMs);
             }
             return success;
 
         } catch (Exception e) {
-            NetworkDebugLogger.error("%s Connection failed: %s", LOG_PREFIX, e.getMessage());
+            netLog.error("Connection failed: {}", e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -202,23 +203,23 @@ public class HeadlessNetworkClient implements AutoCloseable {
      */
     public void setReady() {
         if (client != null && connected.get()) {
-            NetworkDebugLogger.log("%s Sending ready status", LOG_PREFIX);
+            netLog.info("Sending ready status");
             UpdateLobbyPlayerEvent event = UpdateLobbyPlayerEvent.isReadyUpdate(true);
             // Apply to local lobby AND send to server
             int slot = assignedSlot.get();
             if (slot >= 0 && lobby != null) {
                 lobby.applyToSlot(slot, event);
-                NetworkDebugLogger.log("%s Applied ready status to local lobby slot %d", LOG_PREFIX, slot);
+                netLog.info("Applied ready status to local lobby slot {}", slot);
             }
             client.send(event);
         } else {
-            NetworkDebugLogger.error("%s Cannot set ready - not connected", LOG_PREFIX);
+            netLog.error("Cannot set ready - not connected");
         }
     }
 
     @Override
     public void close() {
-        NetworkDebugLogger.log("%s Disconnecting", LOG_PREFIX);
+        netLog.info("Disconnecting");
         if (client != null) {
             try {
                 client.close();
@@ -236,8 +237,7 @@ public class HeadlessNetworkClient implements AutoCloseable {
         // Use the packet's own size estimation
         totalDeltaBytes.addAndGet(packet.getApproximateSize());
 
-        NetworkDebugLogger.log("%s Delta packet #%d: deltas=%d, new=%d, removed=%d, estimatedBytes=%d",
-                LOG_PREFIX,
+        netLog.info("Delta packet #{}: deltas={}, new={}, removed={}, estimatedBytes={}",
                 packet.getSequenceNumber(),
                 packet.getObjectDeltas() != null ? packet.getObjectDeltas().size() : 0,
                 packet.getNewObjects() != null ? packet.getNewObjects().size() : 0,
@@ -251,8 +251,7 @@ public class HeadlessNetworkClient implements AutoCloseable {
         gameInProgress.set(true);
         gameStartedLatch.countDown();
 
-        NetworkDebugLogger.log("%s Full state sync: seq=%d, checksum=%d",
-                LOG_PREFIX,
+        netLog.info("Full state sync: seq={}, checksum={}",
                 packet.getSequenceNumber(),
                 packet.getStateChecksum());
     }
@@ -261,8 +260,7 @@ public class HeadlessNetworkClient implements AutoCloseable {
     void onGameEnd() {
         gameInProgress.set(false);
         gameFinishedLatch.countDown();
-        NetworkDebugLogger.log("%s Game ended. Deltas=%d, FullSyncs=%d, TotalBytes=%d",
-                LOG_PREFIX,
+        netLog.info("Game ended. Deltas={}, FullSyncs={}, TotalBytes={}",
                 deltaPacketsReceived.get(),
                 fullStateSyncsReceived.get(),
                 totalDeltaBytes.get());
@@ -289,27 +287,27 @@ public class HeadlessNetworkClient implements AutoCloseable {
                 assignedSlot.set(slot);
                 lobby.setLocalPlayer(slot);
 
-                NetworkDebugLogger.log("%s Lobby update: assigned to slot %d (previous=%d)",
-                        LOG_PREFIX, slot, previousSlot);
+                netLog.info("Lobby update: assigned to slot {} (previous={})",
+                        slot, previousSlot);
 
                 // Signal connected once we have a valid slot assignment
                 if (previousSlot == -1 && slot >= 0) {
                     connectedLatch.countDown();
                 }
             } else {
-                NetworkDebugLogger.log("%s Lobby update: slot not yet assigned (slot=%d)",
-                        LOG_PREFIX, slot);
+                netLog.info("Lobby update: slot not yet assigned (slot={})",
+                        slot);
             }
         }
 
         @Override
         public void message(String source, String message) {
-            NetworkDebugLogger.log("%s Chat: %s: %s", LOG_PREFIX, source, message);
+            netLog.info("Chat: {}: {}", source, message);
         }
 
         @Override
         public void close() {
-            NetworkDebugLogger.log("%s Connection closed by server", LOG_PREFIX);
+            netLog.info("Connection closed by server");
             connected.set(false);
             onGameEnd();
         }
@@ -360,7 +358,7 @@ public class HeadlessNetworkClient implements AutoCloseable {
             synchronized (autoResponseLock) {
                 if (pendingAutoResponse != null && !pendingAutoResponse.isDone()) {
                     pendingAutoResponse.cancel(false);
-                    NetworkDebugLogger.log("[DeltaLoggingGuiGame] Cancelled pending auto-response: %s", reason);
+                    netLog.info("Cancelled pending auto-response: {}", reason);
                 }
                 pendingAutoResponse = null;
             }
@@ -381,14 +379,14 @@ public class HeadlessNetworkClient implements AutoCloseable {
                         if (gameController != null) {
                             action.run();
                         } else {
-                            NetworkDebugLogger.log("[DeltaLoggingGuiGame] Skipping auto-response (no controller): %s", description);
+                            netLog.info("Skipping auto-response (no controller): {}", description);
                         }
                     } catch (Exception e) {
-                        NetworkDebugLogger.error("[DeltaLoggingGuiGame] Error in auto-response '%s': %s", description, e.getMessage());
+                        netLog.error("Error in auto-response '{}': {}", description, e.getMessage());
                     }
                 }, delayMs, TimeUnit.MILLISECONDS);
 
-                NetworkDebugLogger.log("[DeltaLoggingGuiGame] Scheduled auto-response in %dms: %s", delayMs, description);
+                netLog.info("Scheduled auto-response in {}ms: {}", delayMs, description);
             }
         }
 
@@ -415,7 +413,7 @@ public class HeadlessNetworkClient implements AutoCloseable {
             super.setOriginalGameController(view, controller);
             if (controller != null) {
                 this.gameController = controller;
-                NetworkDebugLogger.log("[DeltaLoggingGuiGame] Original game controller set for player: %s",
+                netLog.info("Original game controller set for player: {}",
                         view != null ? view.getName() : "null");
             }
         }
@@ -425,19 +423,19 @@ public class HeadlessNetworkClient implements AutoCloseable {
             super.setGameController(player, controller);
             if (controller != null) {
                 this.gameController = controller;
-                NetworkDebugLogger.log("[DeltaLoggingGuiGame] Game controller set for player: %s",
+                netLog.info("Game controller set for player: {}",
                         player != null ? player.getName() : "null");
             }
         }
 
         @Override
         public void showPromptMessage(forge.game.player.PlayerView playerView, String message) {
-            NetworkDebugLogger.log("[DeltaLoggingGuiGame] Prompt: %s", message);
+            netLog.info("Prompt: {}", message);
 
             // Detect player selection prompts (like "who goes first")
             // These contain "Click on the portrait" in the message
             if (message != null && message.contains("Click on the portrait") && gameController != null) {
-                NetworkDebugLogger.log("[DeltaLoggingGuiGame] Detected player selection prompt, auto-selecting...");
+                netLog.info("Detected player selection prompt, auto-selecting...");
                 scheduleAutoResponse(() -> {
                     // Get the game view and select the first player (or self)
                     GameView gv = getGameView();
@@ -454,10 +452,10 @@ public class HeadlessNetworkClient implements AutoCloseable {
                         if (toSelect == null) {
                             toSelect = gv.getPlayers().iterator().next();
                         }
-                        NetworkDebugLogger.log("[DeltaLoggingGuiGame] Auto-selecting player: %s", toSelect.getName());
+                        netLog.info("Auto-selecting player: {}", toSelect.getName());
                         gameController.selectPlayer(toSelect, null);
                     } else {
-                        NetworkDebugLogger.error("[DeltaLoggingGuiGame] Cannot auto-select player - no game view or players");
+                        netLog.error("Cannot auto-select player - no game view or players");
                     }
                 }, 100, "player selection");
             }
@@ -465,11 +463,11 @@ public class HeadlessNetworkClient implements AutoCloseable {
 
         @Override
         public void updateButtons(forge.game.player.PlayerView owner, boolean okEnabled, boolean cancelEnabled, boolean focusOk) {
-            NetworkDebugLogger.log("[DeltaLoggingGuiGame] updateButtons(ok): okEnabled=%s, cancelEnabled=%s, controller=%s",
+            netLog.info("updateButtons(ok): okEnabled={}, cancelEnabled={}, controller={}",
                     okEnabled, cancelEnabled, gameController != null ? "set" : "null");
             // Auto-respond to button prompts (mulligan, priority, etc.)
             if (gameController != null && okEnabled) {
-                NetworkDebugLogger.log("[DeltaLoggingGuiGame] Auto-clicking OK for player: %s",
+                netLog.info("Auto-clicking OK for player: {}",
                         owner != null ? owner.getName() : "unknown");
                 scheduleAutoResponse(() -> gameController.selectButtonOk(), 50, "click OK button");
             }
@@ -477,12 +475,12 @@ public class HeadlessNetworkClient implements AutoCloseable {
 
         @Override
         public void updateButtons(forge.game.player.PlayerView owner, String label1, String label2, boolean enable1, boolean enable2, boolean focus1) {
-            NetworkDebugLogger.log("[DeltaLoggingGuiGame] updateButtons(labels): '%s'/%s, '%s'/%s, controller=%s",
+            netLog.info("updateButtons(labels): '{}'/{}, '{}'/{}, controller={}",
                     label1, enable1, label2, enable2, gameController != null ? "set" : "null");
             // Auto-respond to labeled button prompts - click first enabled button
             if (gameController != null && (enable1 || enable2)) {
                 String clickTarget = enable1 ? label1 : label2;
-                NetworkDebugLogger.log("[DeltaLoggingGuiGame] Auto-clicking '%s' for player: %s",
+                netLog.info("Auto-clicking '{}' for player: {}",
                         clickTarget, owner != null ? owner.getName() : "unknown");
                 if (enable1) {
                     scheduleAutoResponse(() -> gameController.selectButtonOk(), 50, "click '" + label1 + "'");
@@ -493,7 +491,7 @@ public class HeadlessNetworkClient implements AutoCloseable {
                 // OK is disabled but we may have more cards to select (multi-selection prompt)
                 synchronized (pendingSelectables) {
                     if (selectableIndex < pendingSelectables.size()) {
-                        NetworkDebugLogger.log("[DeltaLoggingGuiGame] OK disabled, selecting next card (%d/%d remaining)",
+                        netLog.info("OK disabled, selecting next card ({}/{} remaining)",
                                 pendingSelectables.size() - selectableIndex, pendingSelectables.size());
                         selectNextCard();
                     }
@@ -530,7 +528,7 @@ public class HeadlessNetworkClient implements AutoCloseable {
                 if (selectableIndex < pendingSelectables.size()) {
                     forge.game.card.CardView card = pendingSelectables.get(selectableIndex);
                     selectableIndex++;
-                    NetworkDebugLogger.log("[DeltaLoggingGuiGame] Auto-selecting card %d/%d: %s",
+                    netLog.info("Auto-selecting card {}/{}: {}",
                             selectableIndex, pendingSelectables.size(), card.getName());
                     scheduleAutoResponse(() -> gameController.selectCard(card, null, null),
                             100, "select card " + card.getName());

@@ -2,7 +2,8 @@ package forge.gamemodes.net.server;
 
 import forge.gamemodes.net.ReplyPool;
 import forge.gamemodes.net.event.IdentifiableNetEvent;
-import forge.gamemodes.net.NetworkDebugLogger;
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
 import forge.gamemodes.net.event.NetEvent;
 import io.netty.channel.Channel;
 
@@ -10,6 +11,8 @@ import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public final class RemoteClient implements IToClient {
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+
 
     /** Special value indicating the client hasn't been assigned a slot yet. */
     public static final int UNASSIGNED_SLOT = -1;
@@ -48,11 +51,11 @@ public final class RemoteClient implements IToClient {
             channel.writeAndFlush(event).sync();
             long elapsed = System.currentTimeMillis() - startMs;
             if (elapsed > 50) {
-                NetworkDebugLogger.log("send() blocked %d ms for %s (event: %s)", elapsed, username, event);
+                netLog.info("send() blocked {} ms for {} (event: {})", elapsed, username, event);
             }
         } catch (Exception e) {
             sendErrors.incrementAndGet();
-            NetworkDebugLogger.error("Network send error for " + username + " (event: " + event + ")", e);
+            netLog.error("Network send error for {} (event: {})", username, event, e);
         }
     }
 

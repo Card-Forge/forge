@@ -1,5 +1,8 @@
 package forge.gamemodes.net;
 
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
+
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.GameView;
@@ -112,6 +115,8 @@ public enum ProtocolMethod {
         }
     }
 
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+
     private final ProtocolMethod.Mode mode;
     private final Class<?> returnType;
     private final Class<?>[] args;
@@ -140,7 +145,7 @@ public enum ProtocolMethod {
             }
             return candidate;
         } catch (final NoSuchMethodException | SecurityException e) {
-            NetworkDebugLogger.warn("Class contains no accessible method named %s", name());
+            netLog.warn("Class contains no accessible method named {}", name());
             return getMethodNoArgs();
         }
     }
@@ -149,7 +154,7 @@ public enum ProtocolMethod {
         try {
             return mode.toInvoke.getMethod(name(), (Class<?>[]) null);
         } catch (final NoSuchMethodException | SecurityException e) {
-            NetworkDebugLogger.warn("Class contains no accessible arg-less method named %s", name());
+            netLog.warn("Class contains no accessible arg-less method named {}", name());
             return null;
         }
     }
@@ -170,11 +175,11 @@ public enum ProtocolMethod {
                 final Class<?> type = this.args[iArg];
                 if (!ReflectionUtil.isInstance(arg, type)) {
                     //throw new InternalError(String.format("Protocol method %s: illegal argument (%d) of type %s, %s expected", name(), iArg, arg.getClass().getName(), type.getName()));
-                    NetworkDebugLogger.error("Protocol method %s: illegal argument (%d) of type %s, %s expected", name(), iArg, arg.getClass().getName(), type.getName());
+                    netLog.error("Protocol method {}: illegal argument ({}) of type {}, {} expected", name(), iArg, arg.getClass().getName(), type.getName());
                 }
             }
         } catch (Exception e) {
-            NetworkDebugLogger.error("Protocol checkArgs exception", e);
+            netLog.error("Protocol checkArgs exception", e);
         }
     }
 
@@ -189,7 +194,7 @@ public enum ProtocolMethod {
         }
         if (!ReflectionUtil.isInstance(value, returnType)) {
             //throw new IllegalStateException(String.format("Protocol method %s: illegal return object type %s returned by client, expected %s", name(), value.getClass().getName(), getReturnType().getName()));
-            NetworkDebugLogger.error("Protocol method %s: illegal return type %s, expected %s", name(), value.getClass().getName(), getReturnType().getName());
+            netLog.error("Protocol method {}: illegal return type {}, expected {}", name(), value.getClass().getName(), getReturnType().getName());
         }
     }
 }

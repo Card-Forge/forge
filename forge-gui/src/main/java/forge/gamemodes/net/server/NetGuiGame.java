@@ -21,7 +21,8 @@ import forge.gamemodes.net.NetworkGuiGame;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.FullStatePacket;
 import forge.gamemodes.net.GameProtocolSender;
-import forge.gamemodes.net.NetworkDebugLogger;
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.gui.control.GameEventForwarder;
 import forge.item.PaperCard;
@@ -40,6 +41,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class NetGuiGame extends NetworkGuiGame {
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+
 
     private final GameProtocolSender sender;
     private final DeltaSyncManager deltaSyncManager;
@@ -148,7 +151,7 @@ public class NetGuiGame extends NetworkGuiGame {
         if (!useDeltaSync || !initialSyncSent) {
             // Fall back to full state sync - add debug logging (only once)
             if (logBandwidth && !fallbackLogged) {
-                NetworkDebugLogger.log("[DeltaSync] Client %d: Fallback to full state - useDeltaSync=%b, initialSyncSent=%b",
+                netLog.info("[DeltaSync] Client {}: Fallback to full state - useDeltaSync={}, initialSyncSent={}",
                     clientIndex, useDeltaSync, initialSyncSent);
                 fallbackLogged = true;
             }
@@ -178,9 +181,9 @@ public class NetGuiGame extends NetworkGuiGame {
                 int savings = fullStateSize > 0 ? (int)((1.0 - (double)deltaSize / fullStateSize) * 100) : 0;
                 int actualSavings = fullStateSize > 0 ? (int)((1.0 - (double)actualNetworkBytes / fullStateSize) * 100) : 0;
 
-                NetworkDebugLogger.log("[DeltaSync] Packet #%d: Approximate=%d bytes, ActualNetwork=%d bytes, FullState=%d bytes",
+                netLog.info("[DeltaSync] Packet #{}: Approximate={} bytes, ActualNetwork={} bytes, FullState={} bytes",
                     deltaPacketCount, deltaSize, actualNetworkBytes, fullStateSize);
-                NetworkDebugLogger.log("[DeltaSync]   Savings: Approximate=%d%%, Actual=%d%% | Cumulative: Approximate=%d, Actual=%d, FullState=%d",
+                netLog.info("[DeltaSync]   Savings: Approximate={}%, Actual={}% | Cumulative: Approximate={}, Actual={}, FullState={}",
                     savings, actualSavings,
                     totalDeltaBytes, networkBytesAfter, totalFullStateBytes);
             }
@@ -566,7 +569,7 @@ public class NetGuiGame extends NetworkGuiGame {
     @Override
     public void handleGameEvents(List<GameEvent> events) {
         if (paused) { return; }
-        NetworkDebugLogger.log("Sending batch of %d: [%s]", events.size(),
+        netLog.info("Sending batch of {}: [{}]", events.size(),
                 events.stream().map(e -> e.getClass().getSimpleName()).collect(Collectors.joining(", ")));
         sender.write(ProtocolMethod.setGameView, getGameView());
         sender.send(ProtocolMethod.handleGameEvents, events);

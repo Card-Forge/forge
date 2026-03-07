@@ -18,7 +18,8 @@
 package forge.gamemodes.match.input;
 
 import forge.game.GameView;
-import forge.gamemodes.net.NetworkDebugLogger;
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
 import forge.player.PlayerControllerHuman;
 
 import java.util.Observable;
@@ -34,6 +35,8 @@ import java.util.concurrent.LinkedBlockingDeque;
  * @version $Id: InputQueue.java 24769 2014-02-09 13:56:04Z Hellfish $
  */
 public class InputQueue extends Observable {
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+
     private final BlockingDeque<InputSynchronized> inputStack = new LinkedBlockingDeque<>();
     private final GameView gameView;
 
@@ -65,15 +68,15 @@ public class InputQueue extends Observable {
     }
 
     public final void clearInputs() {
-        NetworkDebugLogger.trace("[InputQueue] clearInputs() called, stack size = %d", inputStack.size());
+        netLog.trace("clearInputs() called, stack size = {}", inputStack.size());
         int count = 0;
         while(!inputStack.isEmpty()) {
             InputSynchronized inp = inputStack.pop();
-            NetworkDebugLogger.trace("[InputQueue] Stopping input #%d: %s", count, inp.getClass().getSimpleName());
+            netLog.trace("Stopping input #{}: {}", count, inp.getClass().getSimpleName());
             inp.stop();
             count++;
         }
-        NetworkDebugLogger.trace("[InputQueue] clearInputs() done, stopped %d inputs", count);
+        netLog.trace("clearInputs() done, stopped {} inputs", count);
 
         updateObservers();
     }

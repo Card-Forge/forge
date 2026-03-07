@@ -49,7 +49,8 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.match.input.*;
-import forge.gamemodes.net.NetworkDebugLogger;
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.control.FControlGamePlayback;
@@ -90,6 +91,8 @@ import java.util.stream.Collectors;
  * Handles phase skips for now.
  */
 public class PlayerControllerHuman extends PlayerController implements IGameController {
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+
     /**
      * Cards this player may look at right now, for example when searching a
      * library.
@@ -1536,7 +1539,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public List<SpellAbility> chooseSpellAbilityToPlay() {
-        NetworkDebugLogger.trace("[chooseSpellAbilityToPlay] ENTRY for player %s, phase=%s, isGameOver=%b",
+        netLog.trace("ENTRY for player {}, phase={}, isGameOver={}",
                 player.getName(), getGame().getPhaseHandler().getPhase(), getGame().isGameOver());
         final MagicStack stack = getGame().getStack();
 
@@ -1562,14 +1565,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     e.printStackTrace();
                 }
             }
-            NetworkDebugLogger.trace("[chooseSpellAbilityToPlay] Returning null (mayAutoPass) for player %s", player.getName());
+            netLog.trace("Returning null (mayAutoPass) for player {}", player.getName());
             return null;
         }
 
         if (stack.isEmpty()) {
             if (getGui().isUiSetToSkipPhase(getGame().getPhaseHandler().getPlayerTurn().getView(),
                     getGame().getPhaseHandler().getPhase())) {
-                NetworkDebugLogger.trace("[chooseSpellAbilityToPlay] Returning null (skipPhase) for player %s", player.getName());
+                netLog.trace("Returning null (skipPhase) for player {}", player.getName());
                 return null; // avoid prompt for input if stack is empty and
                 // player is set to skip the current phase
             }
@@ -1582,15 +1585,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 } catch (final InterruptedException e) {
                     e.printStackTrace();
                 }
-                NetworkDebugLogger.trace("[chooseSpellAbilityToPlay] Returning null (autoYield) for player %s", player.getName());
+                netLog.trace("Returning null (autoYield) for player {}", player.getName());
                 return null;
             }
         }
 
-        NetworkDebugLogger.trace("[chooseSpellAbilityToPlay] Creating InputPassPriority for player %s", player.getName());
+        netLog.trace("Creating InputPassPriority for player {}", player.getName());
         final InputPassPriority defaultInput = new InputPassPriority(this);
         defaultInput.showAndWait();
-        NetworkDebugLogger.trace("[chooseSpellAbilityToPlay] InputPassPriority returned for player %s, chosenSa=%s", player.getName(), defaultInput.getChosenSa());
+        netLog.trace("InputPassPriority returned for player {}, chosenSa={}", player.getName(), defaultInput.getChosenSa());
         return defaultInput.getChosenSa();
     }
 
