@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.util.*;
+import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 import javax.swing.*;
@@ -146,15 +147,24 @@ public class PlayerDetailsPanel extends JPanel {
         }
     }
 
-    public void setupMouseActions(Function<ZoneType, Runnable> zoneActionFactory, Function<Byte, Boolean> manaAction) {
+    public void setupMouseActions(Function<ZoneType, Runnable> zoneActionFactory,
+                                   BiConsumer<ZoneType, MouseEvent> zoneRightClick,
+                                   Function<Byte, Boolean> manaAction) {
 
         // Detail label listeners
         for(Map.Entry<ZoneType, DetailLabelZone> zoneEntry : zoneLabels.entrySet()) {
-            Runnable action = zoneActionFactory.apply(zoneEntry.getKey());
+            final ZoneType zone = zoneEntry.getKey();
+            Runnable action = zoneActionFactory.apply(zone);
             zoneEntry.getValue().addMouseListener(new FMouseAdapter() {
                 @Override
                 public void onLeftClick(MouseEvent e) {
                     action.run();
+                }
+                @Override
+                public void onRightClick(MouseEvent e) {
+                    if (zoneRightClick != null) {
+                        zoneRightClick.accept(zone, e);
+                    }
                 }
             });
         }

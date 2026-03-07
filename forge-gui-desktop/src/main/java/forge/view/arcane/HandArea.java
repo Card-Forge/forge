@@ -50,12 +50,7 @@ public class HandArea extends CardArea {
 
         this.setDragEnabled(true);
         this.setVertical(true);
-        try {
-            final int maxCards = Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_HAND_MAX_CARDS_PER_ROW));
-            this.setMaxCardsPerRow(maxCards);
-        } catch (final NumberFormatException ignored) {
-            // default 0 = no limit
-        }
+        this.setMaxCardsPerRow(FModel.getPreferences().getPrefInt(FPref.UI_HAND_MAX_CARDS_PER_ROW));
         this.setNoOverlap(FModel.getPreferences().getPrefBoolean(FPref.UI_HAND_NO_OVERLAP));
     }
 

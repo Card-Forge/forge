@@ -24,6 +24,7 @@ import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -44,7 +45,9 @@ import forge.gui.framework.IVDoc;
 import forge.gui.framework.SLayoutConstants;
 import forge.gui.framework.SLayoutIO;
 import forge.gui.framework.SRearrangingUtil;
+import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VZone;
 import forge.toolbox.FMouseAdapter;
@@ -65,6 +68,38 @@ public class FloatingZone extends FloatingCardArea {
         return 40 * player.getId() + zone.hashCode();
     }
 
+    // ========== Tab mode preference ==========
+
+    /** Returns true if the given zone type should open as a docked tab. */
+    public static boolean isTabMode(final ZoneType zone) {
+        final String pref = FModel.getPreferences().getPref(FPref.UI_ZONE_DOCK_ZONES);
+        if (pref == null || pref.isEmpty()) return false;
+        for (final String s : pref.split(",")) {
+            if (s.trim().equals(zone.name())) return true;
+        }
+        return false;
+    }
+
+    /** Sets whether the given zone type should open as a docked tab. */
+    public static void setTabMode(final ZoneType zone, final boolean tabMode) {
+        final ForgePreferences prefs = FModel.getPreferences();
+        final String current = prefs.getPref(FPref.UI_ZONE_DOCK_ZONES);
+        final LinkedHashSet<String> zones = new LinkedHashSet<>();
+        if (current != null && !current.isEmpty()) {
+            for (final String s : current.split(",")) {
+                final String trimmed = s.trim();
+                if (!trimmed.isEmpty()) zones.add(trimmed);
+            }
+        }
+        if (tabMode) {
+            zones.add(zone.name());
+        } else {
+            zones.remove(zone.name());
+        }
+        prefs.setPref(FPref.UI_ZONE_DOCK_ZONES, String.join(",", zones));
+        prefs.save();
+    }
+
     // ========== Floating zone API ==========
 
     public static void showOrHide(final CMatchUI matchUI, final PlayerView player, final ZoneType zone) {
@@ -82,28 +117,50 @@ public class FloatingZone extends FloatingCardArea {
                 docked.setParentCell(null);
             } else {
                 // Was hidden (no parent cell) — re-add as tab on the hand panel's cell
-                DragCell target = null;
-                final IVDoc<? extends ICDoc> handDoc = EDocID.HAND_0.getDoc();
-                if (handDoc != null) {
-                    target = handDoc.getParentCell();
-                }
-                if (target == null) {
-                    final List<DragCell> cells = FView.SINGLETON_INSTANCE.getDragCells();
-                    if (!cells.isEmpty()) {
-                        target = cells.get(0);
-                    }
-                }
-                if (target != null) {
-                    target.addDoc(docked);
-                    target.setSelected(docked);
-                    docked.refresh();
-                }
+                showDockedTab(docked);
             }
+            return;
+        }
+
+        // No existing docked zone — check tab mode preference
+        if (isTabMode(zone)) {
+            showAsTab(matchUI, player, zone);
             return;
         }
 
         final FloatingZone cardArea = _init(matchUI, player, zone);
         cardArea.showOrHideWindow();
+    }
+
+    /** Create a new docked VZone and add it as a tab on the hand panel's cell. */
+    private static void showAsTab(final CMatchUI matchUI, final PlayerView player, final ZoneType zone) {
+        final EDocID docID = EDocID.fromZoneType(zone);
+        if (docID == null) return;
+
+        final VZone vZone = new VZone(matchUI, player, zone);
+        docID.setDoc(vZone);
+        dockedZones.put(getKey(player, zone), vZone);
+        showDockedTab(vZone);
+    }
+
+    /** Add a docked VZone as a tab on the hand panel's cell. */
+    private static void showDockedTab(final VZone vZone) {
+        DragCell target = null;
+        final IVDoc<? extends ICDoc> handDoc = EDocID.HAND_0.getDoc();
+        if (handDoc != null) {
+            target = handDoc.getParentCell();
+        }
+        if (target == null) {
+            final List<DragCell> cells = FView.SINGLETON_INSTANCE.getDragCells();
+            if (!cells.isEmpty()) {
+                target = cells.get(0);
+            }
+        }
+        if (target != null) {
+            target.addDoc(vZone);
+            target.setSelected(vZone);
+            vZone.refresh();
+        }
     }
 
     public static boolean show(final CMatchUI matchUI, final PlayerView player, final ZoneType zone) {
@@ -128,6 +185,24 @@ public class FloatingZone extends FloatingCardArea {
         FThreads.invokeInEdtNowOrLater(cardArea::hideWindow);
 
         return true;
+    }
+
+    /** Close any existing display (docked tab or floating window) for this player/zone. */
+    public static void closeExisting(final CMatchUI matchUI, final PlayerView player, final ZoneType zone) {
+        final int key = getKey(player, zone);
+
+        // Close docked zone if present
+        final VZone docked = dockedZones.get(key);
+        if (docked != null) {
+            removeDocked(docked);
+        }
+
+        // Close floating window if present
+        final FloatingZone floating = floatingAreas.get(key);
+        if (floating != null && floating.isVisible()) {
+            floating.hideWindow();
+            floatingAreas.remove(key);
+        }
     }
 
     private static FloatingZone _init(final CMatchUI matchUI, final PlayerView player, final ZoneType zone) {

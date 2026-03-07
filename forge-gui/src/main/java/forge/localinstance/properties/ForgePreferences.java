@@ -283,6 +283,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         ZONE_LOC_AI_ANTE(""),
         ZONE_LOC_AI_SIDEBOARD(""),
 
+        UI_ZONE_DOCK_ZONES(""),
+
         CHAT_WINDOW_LOC(""),
 
         SHORTCUT_SHOWSTACK ("83"),

@@ -164,7 +164,7 @@ public final class LayoutMenu {
         final JMenu menu = new JMenu(localizer.getMessage("lblHandPanel"));
 
         // Order Hand by CMC and Color
-        final JCheckBoxMenuItem orderHandItem = createStayOpenCheckBox(localizer.getMessage("lblOrderHandByCMC"));
+        final JCheckBoxMenuItem orderHandItem = createStayOpenCheckBox(localizer.getMessage("nlOrderHand"));
         orderHandItem.setState(prefs.getPrefBoolean(FPref.UI_ORDER_HAND));
         orderHandItem.addActionListener(e -> {
             prefs.setPref(FPref.UI_ORDER_HAND, orderHandItem.getState());

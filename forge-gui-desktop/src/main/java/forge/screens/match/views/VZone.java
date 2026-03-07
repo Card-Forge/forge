@@ -23,6 +23,7 @@ import forge.screens.match.controllers.CZone;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.MouseTriggerEvent;
 import forge.view.arcane.CardArea;
+import forge.util.Localizer;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.FloatingZone;
 import net.miginfocom.swing.MigLayout;
@@ -73,6 +74,10 @@ public class VZone implements IVDoc<CZone> {
                     final JMenuItem sortItem = new JMenuItem(sortedByName ? "Unsort" : "Sort by Name");
                     sortItem.addActionListener(ev -> toggleSorted());
                     menu.add(sortItem);
+
+                    final JMenuItem closeItem = new JMenuItem(Localizer.getInstance().getMessage("lblClose"));
+                    closeItem.addActionListener(ev -> FloatingZone.showOrHide(matchUI, player, zone));
+                    menu.add(closeItem);
 
                     menu.show(tab, e.getX(), e.getY());
                 }
