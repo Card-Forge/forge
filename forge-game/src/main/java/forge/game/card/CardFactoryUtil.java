@@ -3824,7 +3824,7 @@ public class CardFactoryUtil {
     public static void addStaticAbility(final KeywordInterface inst, final CardState state, final boolean intrinsic) {
         String keyword = inst.getOriginal();
 
-        if (keyword.startsWith("Affinity") && inst instanceof Affinity affinity) {
+        if (inst instanceof Affinity affinity) {
             final String t = affinity.getValidType();
 
             StringBuilder sb = new StringBuilder();
