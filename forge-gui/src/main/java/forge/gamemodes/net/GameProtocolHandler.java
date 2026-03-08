@@ -29,11 +29,9 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
     public final void channelRead(final ChannelHandlerContext ctx, final Object msg) {
         final String[] catchedError = {""};
         netLog.info("Received: {}", msg);
-        if (msg instanceof ReplyEvent) {
-            final ReplyEvent event = (ReplyEvent) msg;
+        if (msg instanceof ReplyEvent event) {
             getReplyPool(ctx).complete(event.getIndex(), event.getReply());
-        } else if (msg instanceof GuiGameEvent) {
-            final GuiGameEvent event = (GuiGameEvent) msg;
+        } else if (msg instanceof GuiGameEvent event) {
             final ProtocolMethod protocolMethod = event.getMethod();
             final String methodName = protocolMethod.name();
 
