@@ -76,7 +76,7 @@ public final class FServerManager implements IHasNetLog {
         }
     });
 
-    private final Map<Integer, NetGuiGame> playerGuis = new ConcurrentHashMap<>(); // Store NetGuiGame instances for reuse
+    private final Map<Integer, RemoteClientGuiGame> playerGuis = new ConcurrentHashMap<>(); // Store RemoteClientGuiGame instances for reuse
 
     // Network byte tracking for monitoring actual bandwidth usage
     private final forge.gamemodes.net.NetworkByteTracker networkByteTracker =
@@ -334,15 +334,15 @@ public final class FServerManager implements IHasNetLog {
             gui.setNetGame();
             return gui;
         } else if (type == LobbySlotType.REMOTE) {
-            // Check if we already have a stored NetGuiGame for this player
-            NetGuiGame existingGui = playerGuis.get(index);
+            // Check if we already have a stored RemoteClientGuiGame for this player
+            RemoteClientGuiGame existingGui = playerGuis.get(index);
             if (existingGui != null) {
                 return existingGui;
             }
-            // Create a new NetGuiGame and store it
+            // Create a new RemoteClientGuiGame and store it
             for (final RemoteClient client : clients.values()) {
                 if (client.getIndex() == index) {
-                    NetGuiGame newGui = new NetGuiGame(client);
+                    RemoteClientGuiGame newGui = new RemoteClientGuiGame(client);
                     playerGuis.put(index, newGui);
                     return newGui;
                 }
@@ -567,7 +567,7 @@ public final class FServerManager implements IHasNetLog {
         return null;
     }
 
-    private void pauseNetGuiGame(final int slotIndex) {
+    private void pauseRemoteClientGuiGame(final int slotIndex) {
         final HostedMatch hostedMatch = localLobby.getHostedMatch();
         if (hostedMatch == null) { return; }
         final Game game = hostedMatch.getGame();
@@ -575,9 +575,9 @@ public final class FServerManager implements IHasNetLog {
 
         for (final Player p : game.getPlayers()) {
             final IGuiGame gui = hostedMatch.getGuiForPlayer(p);
-            if (gui instanceof NetGuiGame ngg && ngg.getSlotIndex() == slotIndex) {
+            if (gui instanceof RemoteClientGuiGame ngg && ngg.getSlotIndex() == slotIndex) {
                 ngg.pause();
-                netLog.info("[Reconnect] Paused NetGuiGame for slot {} ({})", slotIndex, p.getName());
+                netLog.info("[Reconnect] Paused RemoteClientGuiGame for slot {} ({})", slotIndex, p.getName());
                 return;
             }
         }
@@ -594,8 +594,8 @@ public final class FServerManager implements IHasNetLog {
         // so name matching is unreliable
         for (final Player p : game.getPlayers()) {
             final IGuiGame gui = hostedMatch.getGuiForPlayer(p);
-            if (gui instanceof NetGuiGame netGui && netGui.getSlotIndex() == slotIndex) {
-                netLog.info("[Reconnect] Resuming NetGuiGame for slot {} ({})", slotIndex, p.getName());
+            if (gui instanceof RemoteClientGuiGame netGui && netGui.getSlotIndex() == slotIndex) {
+                netLog.info("[Reconnect] Resuming RemoteClientGuiGame for slot {} ({})", slotIndex, p.getName());
                 netGui.resume();
 
                 // Reset delta sync state — reconnecting client has no prior baseline
@@ -646,7 +646,7 @@ public final class FServerManager implements IHasNetLog {
 
         for (final Player p : game.getPlayers()) {
             final IGuiGame gui = hostedMatch.getGuiForPlayer(p);
-            if (gui instanceof NetGuiGame && ((NetGuiGame) gui).getSlotIndex() == slotIndex) {
+            if (gui instanceof RemoteClientGuiGame && ((RemoteClientGuiGame) gui).getSlotIndex() == slotIndex) {
                 final LobbyPlayerAi aiLobbyPlayer = new LobbyPlayerAi(p.getName(), null);
                 final PlayerControllerAi aiCtrl = new PlayerControllerAi(game, p, aiLobbyPlayer);
                 p.dangerouslySetController(aiCtrl);
@@ -828,8 +828,8 @@ public final class FServerManager implements IHasNetLog {
 
             if (isMatchActive() && client.hasValidSlot()) {
                 // Game is active — enter reconnection mode
-                // Pause the NetGuiGame so sends become no-ops
-                pauseNetGuiGame(playerIndex);
+                // Pause the RemoteClientGuiGame so sends become no-ops
+                pauseRemoteClientGuiGame(playerIndex);
 
                 // Store for reconnection lookup
                 disconnectedClients.put(username, client);

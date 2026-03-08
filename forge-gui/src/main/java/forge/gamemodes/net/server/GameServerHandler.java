@@ -44,7 +44,7 @@ final class GameServerHandler extends GameProtocolHandler<IGameController> imple
             if (client != null) {
                 long sequenceNumber = (Long) args[0];
                 IGuiGame gui = server.getGui(client.getIndex());
-                if (gui instanceof NetGuiGame netGui) {
+                if (gui instanceof RemoteClientGuiGame netGui) {
                     netGui.processAcknowledgment(sequenceNumber, client.getIndex());
                 }
             }
@@ -54,11 +54,11 @@ final class GameServerHandler extends GameProtocolHandler<IGameController> imple
             if (client != null) {
                 netLog.debug("[DeltaSync] Resync requested by client {}", client.getIndex());
                 IGuiGame gui = server.getGui(client.getIndex());
-                if (gui instanceof NetGuiGame netGui) {
+                if (gui instanceof RemoteClientGuiGame netGui) {
                     netLog.debug("[DeltaSync] Sending full state to client {}", client.getIndex());
                     netGui.sendFullState();
                 } else {
-                    netLog.warn("[DeltaSync] GUI is not NetGuiGame, cannot resync");
+                    netLog.warn("[DeltaSync] GUI is not RemoteClientGuiGame, cannot resync");
                 }
             }
         }

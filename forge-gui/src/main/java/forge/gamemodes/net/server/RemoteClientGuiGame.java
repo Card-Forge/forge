@@ -39,7 +39,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class NetGuiGame extends NetworkGuiGame implements IHasNetLog {
+public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
 
     private final GameProtocolSender sender;
     private final DeltaSyncManager deltaSyncManager;
@@ -53,15 +53,10 @@ public class NetGuiGame extends NetworkGuiGame implements IHasNetLog {
     private GameEventForwarder forwarder;
     private boolean flushing;
 
-    public NetGuiGame(final RemoteClient client) {
+    public RemoteClientGuiGame(final RemoteClient client) {
         this.sender = new GameProtocolSender(client);
         this.deltaSyncManager = new DeltaSyncManager();
         this.clientIndex = client.getIndex();
-    }
-
-    @Override
-    protected boolean isServerSide() {
-        return true; // NetGuiGame is the server-side GUI
     }
 
     /** Alias for reconnection code that references slot index. */
@@ -562,7 +557,7 @@ public class NetGuiGame extends NetworkGuiGame implements IHasNetLog {
     @Override
     public String toString() {
         GameView gv = getGameView();
-        return String.format("NetGuiGame[client=%d, deltaSyncEnabled=%b, initialSyncSent=%b, gameView=%s]",
+        return String.format("RemoteClientGuiGame[client=%d, deltaSyncEnabled=%b, initialSyncSent=%b, gameView=%s]",
                 clientIndex, useDeltaSync, initialSyncSent,
                 gv != null ? "GameView@" + Integer.toHexString(System.identityHashCode(gv)) : "null");
     }
