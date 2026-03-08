@@ -1,8 +1,5 @@
 package forge.gamemodes.net;
 
-import org.tinylog.Logger;
-import org.tinylog.TaggedLogger;
-
 import forge.gui.GuiBase;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufOutputStream;
@@ -13,8 +10,7 @@ import net.jpountz.lz4.LZ4BlockOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> {
-    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> implements IHasNetLog {
 
     private static final byte[] LENGTH_PLACEHOLDER = new byte[4];
 

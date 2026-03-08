@@ -1,8 +1,7 @@
 package forge.net;
 
+import forge.gamemodes.net.IHasNetLog;
 import forge.gamemodes.net.NetworkLogConfig;
-import org.tinylog.Logger;
-import org.tinylog.TaggedLogger;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,9 +19,7 @@ import java.util.List;
  * - Parallel: Games run in separate JVM processes (default)
  * - Sequential: Games run one-by-one in the same JVM (useful for debugging)
  */
-public class ComprehensiveTestExecutor {
-    private static final TaggedLogger netLog = Logger.tag("NETWORK");
-
+public class ComprehensiveTestExecutor implements IHasNetLog {
 
     private static final int BASE_PORT = 58000;
 

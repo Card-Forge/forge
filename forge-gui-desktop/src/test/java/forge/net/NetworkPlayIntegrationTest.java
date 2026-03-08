@@ -1,8 +1,7 @@
 package forge.net;
 
+import forge.gamemodes.net.IHasNetLog;
 import forge.gamemodes.net.NetworkLogConfig;
-import org.tinylog.Logger;
-import org.tinylog.TaggedLogger;
 import forge.localinstance.properties.ForgeConstants;
 import forge.deck.Deck;
 import forge.net.analysis.AnalysisResult;
@@ -60,9 +59,7 @@ import java.util.List;
  *       -Dtest.2pGames=50 -Dtest.3pGames=30 -Dtest.4pGames=20 \
  *       -Drun.stress.tests=true -Dsurefire.failIfNoSpecifiedTests=false
  */
-public class NetworkPlayIntegrationTest {
-    private static final TaggedLogger netLog = Logger.tag("NETWORK");
-
+public class NetworkPlayIntegrationTest implements IHasNetLog {
 
     private static boolean initialized = false;
 

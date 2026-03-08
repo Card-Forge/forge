@@ -4,9 +4,8 @@ import com.google.common.collect.Lists;
 import forge.game.player.PlayerView;
 import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.CompatibleObjectEncoder;
+import forge.gamemodes.net.IHasNetLog;
 import forge.gamemodes.net.ReplyPool;
-import org.tinylog.Logger;
-import org.tinylog.TaggedLogger;
 import forge.gamemodes.net.event.*;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.ILobbyListener;
@@ -24,8 +23,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-public class FGameClient implements IToServer {
-    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+public class FGameClient implements IToServer, IHasNetLog {
 
     static final int HEARTBEAT_INTERVAL_SECONDS = Integer.getInteger("forge.net.heartbeatInterval", 15);
     private final IGuiGame clientGui;

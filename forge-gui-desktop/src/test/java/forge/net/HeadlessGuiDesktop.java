@@ -2,8 +2,7 @@ package forge.net;
 
 import forge.GuiDesktop;
 import forge.gamemodes.match.HostedMatch;
-import org.tinylog.Logger;
-import org.tinylog.TaggedLogger;
+import forge.gamemodes.net.IHasNetLog;
 import forge.gui.interfaces.IGuiGame;
 import forge.localinstance.skin.FSkinProp;
 import forge.localinstance.skin.ISkinImage;
@@ -22,9 +21,7 @@ import java.util.List;
  *
  * Part of the Headless Full Game Testing infrastructure.
  */
-public class HeadlessGuiDesktop extends GuiDesktop {
-    private static final TaggedLogger netLog = Logger.tag("NETWORK");
-
+public class HeadlessGuiDesktop extends GuiDesktop implements IHasNetLog {
 
     // Track the last match for result extraction
     private static volatile HostedMatch lastMatch;

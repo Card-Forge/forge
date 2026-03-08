@@ -1,8 +1,7 @@
 package forge.net;
 
+import forge.gamemodes.net.IHasNetLog;
 import forge.gamemodes.net.NetworkLogConfig;
-import org.tinylog.Logger;
-import org.tinylog.TaggedLogger;
 
 /**
  * Standalone runner for comprehensive network game testing.
@@ -26,9 +25,7 @@ import org.tinylog.TaggedLogger;
  * Output format (for parent process parsing):
  *   RESULT:gameIndex|success|playerCount|deltas|turns|bytes|winner|deck1,deck2,...
  */
-public class ComprehensiveGameRunner {
-    private static final TaggedLogger netLog = Logger.tag("NETWORK");
-
+public class ComprehensiveGameRunner implements IHasNetLog {
 
     public static void main(String[] args) {
         if (args.length < 3) {

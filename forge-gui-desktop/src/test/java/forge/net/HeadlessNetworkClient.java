@@ -3,9 +3,8 @@ package forge.net;
 import forge.game.GameView;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.FullStatePacket;
+import forge.gamemodes.net.IHasNetLog;
 import forge.gamemodes.match.GameLobby.GameLobbyData;
-import org.tinylog.Logger;
-import org.tinylog.TaggedLogger;
 import forge.gamemodes.net.client.ClientGameLobby;
 import forge.gamemodes.net.client.FGameClient;
 import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
@@ -31,9 +30,7 @@ import java.util.concurrent.atomic.AtomicLong;
  *
  * Part of Phase 8 of the automated network testing infrastructure.
  */
-public class HeadlessNetworkClient implements AutoCloseable {
-    private static final TaggedLogger netLog = Logger.tag("NETWORK");
-
+public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
 
     private final String username;
     private final String hostname;

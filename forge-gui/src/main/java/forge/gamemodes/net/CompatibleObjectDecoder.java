@@ -1,8 +1,5 @@
 package forge.gamemodes.net;
 
-import org.tinylog.Logger;
-import org.tinylog.TaggedLogger;
-
 import forge.gui.GuiBase;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
@@ -14,8 +11,7 @@ import net.jpountz.lz4.LZ4BlockInputStream;
 import java.io.ObjectInputStream;
 import java.io.StreamCorruptedException;
 
-public class CompatibleObjectDecoder extends LengthFieldBasedFrameDecoder {
-    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+public class CompatibleObjectDecoder extends LengthFieldBasedFrameDecoder implements IHasNetLog {
 
     private final ClassResolver classResolver;
 

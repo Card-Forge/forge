@@ -1,8 +1,5 @@
 package forge.gamemodes.net;
 
-import org.tinylog.Logger;
-import org.tinylog.TaggedLogger;
-
 import forge.game.GameView;
 import forge.card.CardStateName;
 import forge.game.card.CardView;
@@ -33,9 +30,7 @@ import java.util.*;
  * reconnection handling) is contained in this subclass, allowing the base
  * AbstractGuiGame to remain focused on core local game functionality.
  */
-public abstract class NetworkGuiGame extends AbstractGuiGame {
-    private static final TaggedLogger netLog = Logger.tag("NETWORK");
-
+public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetLog {
 
     // Track zone changes during delta application for UI refresh
     private final Map<PlayerView, Set<ZoneType>> pendingZoneUpdates = new HashMap<>();

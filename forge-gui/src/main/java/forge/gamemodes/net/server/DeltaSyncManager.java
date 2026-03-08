@@ -12,8 +12,7 @@ import forge.gamemodes.net.DeltaPacket.CardStateData;
 import forge.gamemodes.net.NetworkChecksumUtil;
 import forge.gamemodes.net.DeltaPacket.NewObjectData;
 import forge.gamemodes.net.FullStatePacket;
-import org.tinylog.Logger;
-import org.tinylog.TaggedLogger;
+import forge.gamemodes.net.IHasNetLog;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
@@ -39,8 +38,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * Tracks changes to TrackableObjects via per-consumer dirty tracking and builds
  * minimal delta packets using property maps (standard Java serialization).
  */
-public class DeltaSyncManager {
-    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+public class DeltaSyncManager implements IHasNetLog {
 
     // How often to include a checksum for validation (every N packets)
     private static final int CHECKSUM_INTERVAL = 20;

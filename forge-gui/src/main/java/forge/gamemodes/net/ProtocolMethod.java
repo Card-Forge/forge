@@ -1,8 +1,5 @@
 package forge.gamemodes.net;
 
-import org.tinylog.Logger;
-import org.tinylog.TaggedLogger;
-
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.GameView;
@@ -31,7 +28,7 @@ import java.util.Map;
 /**
  * The methods that can be sent through this protocol.
  */
-public enum ProtocolMethod {
+public enum ProtocolMethod implements IHasNetLog {
     // Server -> Client
     setGameView         (Mode.SERVER, Void.TYPE, GameView.class),
     openView            (Mode.SERVER, Void.TYPE, TrackableCollection/*PlayerView*/.class),
@@ -114,8 +111,6 @@ public enum ProtocolMethod {
             this.toInvoke = toInvoke;
         }
     }
-
-    private static final TaggedLogger netLog = Logger.tag("NETWORK");
 
     private final ProtocolMethod.Mode mode;
     private final Class<?> returnType;

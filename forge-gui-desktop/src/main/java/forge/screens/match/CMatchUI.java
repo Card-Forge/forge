@@ -66,8 +66,7 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
-import org.tinylog.Logger;
-import org.tinylog.TaggedLogger;
+import forge.gamemodes.net.IHasNetLog;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.gui.FNetOverlay;
 import forge.gui.FThreads;
@@ -143,9 +142,7 @@ import net.miginfocom.swing.MigLayout;
  */
 public final class CMatchUI
     extends NetworkGuiGame
-    implements ICDoc, IMenuProvider {
-    private static final TaggedLogger netLog = Logger.tag("NETWORK");
-
+    implements ICDoc, IMenuProvider, IHasNetLog {
 
     public static final EnumSet<ZoneType> FLOATING_ZONE_TYPES = EnumSet.of(ZoneType.Library, ZoneType.Graveyard, ZoneType.Exile,
             ZoneType.Flashback, ZoneType.Command, ZoneType.Ante, ZoneType.Sideboard, ZoneType.PlanarDeck,

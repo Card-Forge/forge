@@ -1,8 +1,7 @@
 package forge.net;
 
+import forge.gamemodes.net.IHasNetLog;
 import forge.gamemodes.net.NetworkLogConfig;
-import org.tinylog.Logger;
-import org.tinylog.TaggedLogger;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -30,9 +29,7 @@ import java.util.concurrent.atomic.AtomicReference;
  *
  * Supports 2-4 player games with configurable player counts for comprehensive testing.
  */
-public class MultiProcessGameExecutor {
-    private static final TaggedLogger netLog = Logger.tag("NETWORK");
-
+public class MultiProcessGameExecutor implements IHasNetLog {
 
     private static final int BASE_PORT = 58000;
     private static final long DEFAULT_TIMEOUT_MS = 300000; // 5 minutes per game

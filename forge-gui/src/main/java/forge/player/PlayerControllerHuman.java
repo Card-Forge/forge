@@ -49,8 +49,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.match.input.*;
-import org.tinylog.Logger;
-import org.tinylog.TaggedLogger;
+import forge.gamemodes.net.IHasNetLog;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.control.FControlGamePlayback;
@@ -90,8 +89,7 @@ import java.util.stream.Collectors;
  * <p>
  * Handles phase skips for now.
  */
-public class PlayerControllerHuman extends PlayerController implements IGameController {
-    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+public class PlayerControllerHuman extends PlayerController implements IGameController, IHasNetLog {
 
     /**
      * Cards this player may look at right now, for example when searching a

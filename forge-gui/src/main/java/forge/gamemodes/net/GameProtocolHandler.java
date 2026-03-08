@@ -1,8 +1,5 @@
 package forge.gamemodes.net;
 
-import org.tinylog.Logger;
-import org.tinylog.TaggedLogger;
-
 import forge.gamemodes.net.event.GuiGameEvent;
 import forge.gamemodes.net.event.ReplyEvent;
 import forge.gui.FThreads;
@@ -15,9 +12,7 @@ import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapter {
-    private static final TaggedLogger netLog = Logger.tag("NETWORK");
-
+public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapter implements IHasNetLog {
 
     private final boolean runInEdt;
     protected GameProtocolHandler(final boolean runInEdt) {

@@ -1,8 +1,5 @@
 package forge.gamemodes.net;
 
-import org.tinylog.Logger;
-import org.tinylog.TaggedLogger;
-
 import com.google.common.eventbus.Subscribe;
 import forge.game.event.GameEventAttackersDeclared;
 import forge.game.event.GameEventBlockersDeclared;
@@ -28,9 +25,7 @@ import forge.game.event.GameEventTurnPhase;
  * Log output uses the [GAME EVENT] prefix for easy filtering and
  * clear visual separation from network categories like [DeltaSync].
  */
-public class NetworkGameEventListener {
-    private static final TaggedLogger netLog = Logger.tag("NETWORK");
-
+public class NetworkGameEventListener implements IHasNetLog {
 
     private static final String LOG_PREFIX = "[GAME EVENT]";
 

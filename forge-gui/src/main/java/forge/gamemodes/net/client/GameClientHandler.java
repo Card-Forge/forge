@@ -1,11 +1,9 @@
 package forge.gamemodes.net.client;
 
-import org.tinylog.Logger;
-import org.tinylog.TaggedLogger;
-
 import forge.game.*;
 import forge.game.player.PlayerView;
 import forge.gamemodes.net.GameProtocolHandler;
+import forge.gamemodes.net.IHasNetLog;
 import forge.gamemodes.net.IRemote;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.gamemodes.net.ReplyPool;
@@ -25,8 +23,7 @@ import io.netty.channel.ChannelHandlerContext;
 import java.util.EnumMap;
 import java.util.Iterator;
 
-final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
-    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements IHasNetLog {
 
     private final FGameClient client;
     private final IGuiGame gui;

@@ -9,10 +9,9 @@ import forge.gamemodes.match.GameLobby.GameLobbyData;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
+import forge.gamemodes.net.IHasNetLog;
 import forge.gamemodes.net.NetworkByteTracker;
 import forge.gamemodes.net.NetworkLogConfig;
-import org.tinylog.Logger;
-import org.tinylog.TaggedLogger;
 import forge.gamemodes.net.client.ClientGameLobby;
 import forge.gamemodes.net.server.FServerManager;
 import forge.gamemodes.net.server.ServerGameLobby;
@@ -64,9 +63,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  *     .execute();
  * </pre>
  */
-public class UnifiedNetworkHarness {
-    private static final TaggedLogger netLog = Logger.tag("NETWORK");
-
+public class UnifiedNetworkHarness implements IHasNetLog {
 
     private static final String[] PLAYER_NAMES = {"Alice (Host AI)", "Bob (Remote)", "Charlie (Remote)", "Diana (Remote)"};
 

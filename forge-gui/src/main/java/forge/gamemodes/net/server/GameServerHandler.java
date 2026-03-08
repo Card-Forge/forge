@@ -1,18 +1,15 @@
 package forge.gamemodes.net.server;
 
 import forge.gamemodes.net.GameProtocolHandler;
+import forge.gamemodes.net.IHasNetLog;
 import forge.gamemodes.net.IRemote;
-import org.tinylog.Logger;
-import org.tinylog.TaggedLogger;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.gamemodes.net.ReplyPool;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IGameController;
 import io.netty.channel.ChannelHandlerContext;
 
-final class GameServerHandler extends GameProtocolHandler<IGameController> {
-    private static final TaggedLogger netLog = Logger.tag("NETWORK");
-
+final class GameServerHandler extends GameProtocolHandler<IGameController> implements IHasNetLog {
 
     private final FServerManager server = FServerManager.getInstance();
 

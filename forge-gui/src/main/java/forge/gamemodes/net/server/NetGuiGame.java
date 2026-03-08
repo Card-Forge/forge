@@ -21,8 +21,7 @@ import forge.gamemodes.net.NetworkGuiGame;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.FullStatePacket;
 import forge.gamemodes.net.GameProtocolSender;
-import org.tinylog.Logger;
-import org.tinylog.TaggedLogger;
+import forge.gamemodes.net.IHasNetLog;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.gui.control.GameEventForwarder;
 import forge.item.PaperCard;
@@ -40,9 +39,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class NetGuiGame extends NetworkGuiGame {
-    private static final TaggedLogger netLog = Logger.tag("NETWORK");
-
+public class NetGuiGame extends NetworkGuiGame implements IHasNetLog {
 
     private final GameProtocolSender sender;
     private final DeltaSyncManager deltaSyncManager;

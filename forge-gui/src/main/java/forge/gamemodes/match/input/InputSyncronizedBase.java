@@ -1,15 +1,13 @@
 package forge.gamemodes.match.input;
 
-import org.tinylog.Logger;
-import org.tinylog.TaggedLogger;
+import forge.gamemodes.net.IHasNetLog;
 import forge.gui.FThreads;
 import forge.gui.error.BugReporter;
 import forge.player.PlayerControllerHuman;
 
 import java.util.concurrent.CountDownLatch;
 
-public abstract class InputSyncronizedBase extends InputBase implements InputSynchronized {
-    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+public abstract class InputSyncronizedBase extends InputBase implements InputSynchronized, IHasNetLog {
 
     private static final long serialVersionUID = 8756177361251703052L;
     private final CountDownLatch cdlDone;
