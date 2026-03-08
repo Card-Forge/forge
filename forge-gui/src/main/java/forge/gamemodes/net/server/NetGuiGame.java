@@ -131,7 +131,7 @@ public class NetGuiGame extends NetworkGuiGame {
         return sender.sendAndWait(method, args);
     }
 
-    // Bandwidth tracking
+    // Bandwidth tracking — both sides measured via serialize+compress for apples-to-apples comparison
     private long totalDeltaBytes = 0;
     private long totalFullStateBytes = 0;
     private int deltaPacketCount = 0;
@@ -149,7 +149,6 @@ public class NetGuiGame extends NetworkGuiGame {
         }
 
         if (!useDeltaSync || !initialSyncSent) {
-            // Fall back to full state sync - add debug logging (only once)
             if (logBandwidth && !fallbackLogged) {
                 netLog.info("[DeltaSync] Client {}: Fallback to full state - useDeltaSync={}, initialSyncSent={}",
                     clientIndex, useDeltaSync, initialSyncSent);
@@ -162,58 +161,38 @@ public class NetGuiGame extends NetworkGuiGame {
         // Use delta sync
         DeltaPacket delta = deltaSyncManager.collectDeltas(gameView);
         if (delta != null && !delta.isEmpty()) {
-            // Get network byte tracker stats before sending
-            long networkBytesBefore = getActualNetworkBytesSent();
-
             send(ProtocolMethod.applyDelta, delta);
 
-            // Track bandwidth savings with three measurements
             if (logBandwidth) {
-                int deltaSize = delta.getApproximateSize();
-                int fullStateSize = estimateFullStateSize(gameView);
-                long networkBytesAfter = getActualNetworkBytesSent();
-                int actualNetworkBytes = (int)(networkBytesAfter - networkBytesBefore);
+                int deltaSize = measureSerializedSize(delta);
+                int fullStateSize = measureSerializedSize(gameView);
 
                 totalDeltaBytes += deltaSize;
                 totalFullStateBytes += fullStateSize;
                 deltaPacketCount++;
 
                 int savings = fullStateSize > 0 ? (int)((1.0 - (double)deltaSize / fullStateSize) * 100) : 0;
-                int actualSavings = fullStateSize > 0 ? (int)((1.0 - (double)actualNetworkBytes / fullStateSize) * 100) : 0;
 
-                netLog.info("[DeltaSync] Packet #{}: Approximate={} bytes, ActualNetwork={} bytes, FullState={} bytes",
-                    deltaPacketCount, deltaSize, actualNetworkBytes, fullStateSize);
-                netLog.info("[DeltaSync]   Savings: Approximate={}%, Actual={}% | Cumulative: Approximate={}, Actual={}, FullState={}",
-                    savings, actualSavings,
-                    totalDeltaBytes, networkBytesAfter, totalFullStateBytes);
+                netLog.info("[DeltaSync] Packet #{}: Delta={} bytes, FullState={} bytes, Savings={}%",
+                    deltaPacketCount, deltaSize, fullStateSize, savings);
+                netLog.info("[DeltaSync]   Cumulative: Delta={}, FullState={}, Savings={}%",
+                    totalDeltaBytes, totalFullStateBytes,
+                    totalFullStateBytes > 0 ? (int)((1.0 - (double)totalDeltaBytes / totalFullStateBytes) * 100) : 0);
             }
         }
     }
 
     /**
-     * Get actual network bytes sent (including compression and all overhead).
-     * This provides ground truth for comparison with estimated sizes.
-     * @return total bytes actually sent over the network
+     * Measure the serialized+compressed size of an object.
+     * Uses ObjectOutputStream + LZ4 — same pipeline as the network encoder —
+     * so delta and full-state measurements are directly comparable.
      */
-    private long getActualNetworkBytesSent() {
-        try {
-            return FServerManager.getInstance().getNetworkByteTracker().getTotalBytesSent();
-        } catch (Exception e) {
-            return 0;
-        }
-    }
-
-    /**
-     * Estimate the size of a full state sync for comparison purposes.
-     * This uses LZ4 compression (same as the network layer) to provide
-     * an apples-to-apples comparison with actual network bytes.
-     */
-    private int estimateFullStateSize(GameView gameView) {
+    private int measureSerializedSize(Object obj) {
         try {
             java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
             LZ4BlockOutputStream lz4Out = new LZ4BlockOutputStream(baos);
             java.io.ObjectOutputStream oos = new java.io.ObjectOutputStream(lz4Out);
-            oos.writeObject(gameView);
+            oos.writeObject(obj);
             oos.close();
             return baos.size();
         } catch (Exception e) {
@@ -571,7 +550,7 @@ public class NetGuiGame extends NetworkGuiGame {
         if (paused) { return; }
         netLog.info("Sending batch of {}: [{}]", events.size(),
                 events.stream().map(e -> e.getClass().getSimpleName()).collect(Collectors.joining(", ")));
-        sender.write(ProtocolMethod.setGameView, getGameView());
+        updateGameView();
         sender.send(ProtocolMethod.handleGameEvents, events);
     }
 

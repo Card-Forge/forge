@@ -34,10 +34,7 @@ public class NetworkLogAnalyzer {
 
     // Pre-compiled regex patterns for efficiency
     private static final Pattern DELTA_PACKET_PATTERN = Pattern.compile(
-            "\\[DeltaSync\\] Packet #(\\d+): Approximate=(\\d+) bytes, ActualNetwork=(\\d+) bytes, FullState=(\\d+) bytes");
-
-    private static final Pattern SAVINGS_PATTERN = Pattern.compile(
-            "Savings: Approximate=(\\d+)%, Actual=(\\d+)%");
+            "\\[DeltaSync\\] Packet #(\\d+): Delta=(\\d+) bytes, FullState=(\\d+) bytes, Savings=(\\d+)%");
 
     private static final Pattern GAME_OUTCOME_PATTERN = Pattern.compile(
             "\\[GAME EVENT\\] Game outcome: winner = (.+)");
@@ -202,14 +199,12 @@ public class NetworkLogAnalyzer {
         }
 
         // Track packet-level metrics
-        List<Double> approximateSavingsList = new ArrayList<>();
-        List<Double> actualSavingsList = new ArrayList<>();
+        List<Double> savingsList = new ArrayList<>();
         int maxTurn = 0;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(logFile))) {
             String line;
             int packetCount = 0;
-            long totalApproximateBytes = 0;
             long totalDeltaBytes = 0;
             long totalFullStateBytes = 0;
 
@@ -219,26 +214,13 @@ public class NetworkLogAnalyzer {
                 if (packetMatcher.find()) {
                     try {
                         packetCount++;
-                        int packetNum = Integer.parseInt(packetMatcher.group(1));
-                        long approxBytes = Long.parseLong(packetMatcher.group(2));
-                        long actualBytes = Long.parseLong(packetMatcher.group(3));
-                        long fullStateBytes = Long.parseLong(packetMatcher.group(4));
+                        long deltaBytes = Long.parseLong(packetMatcher.group(2));
+                        long fullStateBytes = Long.parseLong(packetMatcher.group(3));
+                        int savings = Integer.parseInt(packetMatcher.group(4));
 
-                        totalApproximateBytes += approxBytes;
-                        totalDeltaBytes += actualBytes;
+                        totalDeltaBytes += deltaBytes;
                         totalFullStateBytes += fullStateBytes;
-
-                        // Look for savings line (usually follows immediately)
-                        String nextLine = reader.readLine();
-                        if (nextLine != null) {
-                            Matcher savingsMatcher = SAVINGS_PATTERN.matcher(nextLine);
-                            if (savingsMatcher.find()) {
-                                double approxSavings = Double.parseDouble(savingsMatcher.group(1));
-                                double actualSavings = Double.parseDouble(savingsMatcher.group(2));
-                                approximateSavingsList.add(approxSavings);
-                                actualSavingsList.add(actualSavings);
-                            }
-                        }
+                        savingsList.add((double) savings);
                     } catch (NumberFormatException e) {
                         // Skip malformed packet line
                     }
@@ -342,7 +324,6 @@ public class NetworkLogAnalyzer {
 
             // Set aggregated metrics
             metrics.setDeltaPacketCount(packetCount);
-            metrics.setTotalApproximateBytes(totalApproximateBytes);
             metrics.setTotalDeltaBytes(totalDeltaBytes);
             metrics.setTotalFullStateBytes(totalFullStateBytes);
             metrics.setTurnCount(maxTurn);

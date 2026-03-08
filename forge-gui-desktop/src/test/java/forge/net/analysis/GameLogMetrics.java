@@ -35,11 +35,10 @@ public class GameLogMetrics {
     private int turnCount;
     private String winner;
 
-    // Delta sync metrics
+    // Delta sync metrics — both measured via serialize+compress for apples-to-apples comparison
     private int deltaPacketCount;
-    private long totalApproximateBytes;  // Estimated delta size from object diffs
-    private long totalDeltaBytes;         // Actual bytes sent over network (ActualNetwork)
-    private long totalFullStateBytes;     // Size if full state was sent
+    private long totalDeltaBytes;         // Serialized+compressed delta size
+    private long totalFullStateBytes;     // Serialized+compressed full GameView size
     // Deck tracking
     private List<String> deckNames = new ArrayList<>();
 
@@ -137,14 +136,6 @@ public class GameLogMetrics {
 
     public void setDeltaPacketCount(int deltaPacketCount) {
         this.deltaPacketCount = deltaPacketCount;
-    }
-
-    public long getTotalApproximateBytes() {
-        return totalApproximateBytes;
-    }
-
-    public void setTotalApproximateBytes(long totalApproximateBytes) {
-        this.totalApproximateBytes = totalApproximateBytes;
     }
 
     public long getTotalDeltaBytes() {
@@ -260,19 +251,15 @@ public class GameLogMetrics {
         // Bandwidth metrics (the key validation data)
         sb.append("Bandwidth Metrics:\n");
         sb.append(String.format("  Delta Packets: %d\n", deltaPacketCount));
-        sb.append(String.format("  Approximate Size: %s\n", TestUtils.formatBytes(totalApproximateBytes)));
-        sb.append(String.format("  ActualNetwork Size: %s\n", TestUtils.formatBytes(totalDeltaBytes)));
+        sb.append(String.format("  Delta Size: %s\n", TestUtils.formatBytes(totalDeltaBytes)));
         sb.append(String.format("  FullState Baseline: %s\n", TestUtils.formatBytes(totalFullStateBytes)));
         sb.append("\n");
 
         // Bandwidth savings (the primary validation metric)
         sb.append("Bandwidth Savings:\n");
-        double actualVsFull = calculateBandwidthSavings();
-        double approxVsFull = totalFullStateBytes > 0 ?
-                100.0 * (1.0 - (double) totalApproximateBytes / totalFullStateBytes) : 0;
-        sb.append(String.format("  ActualNetwork vs FullState: %.1f%% %s\n",
-                actualVsFull, actualVsFull >= 90 ? "(PASS >= 90%)" : "(FAIL < 90%)"));
-        sb.append(String.format("  Approximate vs FullState: %.1f%%\n", approxVsFull));
+        double savings = calculateBandwidthSavings();
+        sb.append(String.format("  Delta vs FullState: %.1f%% %s\n",
+                savings, savings >= 90 ? "(PASS >= 90%)" : "(FAIL < 90%)"));
         if (deltaPacketCount > 0) {
             sb.append(String.format("  Avg bytes per packet: %.0f\n",
                     (double) totalDeltaBytes / deltaPacketCount));

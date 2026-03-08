@@ -30,7 +30,6 @@ public class AnalysisResult {
     private int gamesWithWarnings;
     private int gamesWithChecksumMismatches;
 
-    private long totalApproximateBytes;
     private long totalDeltaBytes;
     private long totalFullStateBytes;
     private double averageBandwidthSavings;
@@ -60,7 +59,6 @@ public class AnalysisResult {
         gamesWithWarnings = (int) allMetrics.stream().filter(m -> !m.getWarnings().isEmpty()).count();
         gamesWithChecksumMismatches = (int) allMetrics.stream().filter(GameLogMetrics::hasChecksumMismatch).count();
 
-        totalApproximateBytes = allMetrics.stream().mapToLong(GameLogMetrics::getTotalApproximateBytes).sum();
         totalDeltaBytes = allMetrics.stream().mapToLong(GameLogMetrics::getTotalDeltaBytes).sum();
         totalFullStateBytes = allMetrics.stream().mapToLong(GameLogMetrics::getTotalFullStateBytes).sum();
 
@@ -256,26 +254,15 @@ public class AnalysisResult {
         sb.append("### Bandwidth Usage Breakdown\n\n");
         sb.append("| Metric | Total | Avg per Game | Description |\n");
         sb.append("|--------|-------|--------------|-------------|\n");
-        long avgApprox = totalGames > 0 ? totalApproximateBytes / totalGames : 0;
         long avgDelta = totalGames > 0 ? totalDeltaBytes / totalGames : 0;
         long avgFull = totalGames > 0 ? totalFullStateBytes / totalGames : 0;
-        sb.append(String.format("| Approximate | %s | %s | Estimated delta size from object diffs |\n",
-                TestUtils.formatBytes(totalApproximateBytes), TestUtils.formatBytes(avgApprox)));
-        sb.append(String.format("| ActualNetwork | %s | %s | Actual bytes sent over network |\n",
+        sb.append(String.format("| Delta | %s | %s | Serialized+compressed delta packets |\n",
                 TestUtils.formatBytes(totalDeltaBytes), TestUtils.formatBytes(avgDelta)));
-        sb.append(String.format("| FullState | %s | %s | Size if full state was sent |\n",
+        sb.append(String.format("| FullState | %s | %s | Serialized+compressed full GameView (baseline) |\n",
                 TestUtils.formatBytes(totalFullStateBytes), TestUtils.formatBytes(avgFull)));
         sb.append("\n");
 
-        // Bandwidth savings calculations
-        double approxVsFull = totalFullStateBytes > 0 ? 100.0 * (1.0 - (double) totalApproximateBytes / totalFullStateBytes) : 0;
-        double actualVsFull = totalFullStateBytes > 0 ? 100.0 * (1.0 - (double) totalDeltaBytes / totalFullStateBytes) : 0;
-        double actualVsApprox = totalApproximateBytes > 0 ? 100.0 * (1.0 - (double) totalDeltaBytes / totalApproximateBytes) : 0;
-        sb.append("**Bandwidth Savings:**\n");
-        sb.append(String.format("- Approximate vs FullState: %.1f%% savings\n", approxVsFull));
-        sb.append(String.format("- ActualNetwork vs FullState: %.1f%% savings\n", actualVsFull));
-        sb.append(String.format("- ActualNetwork vs Approximate: %.1f%% %s (compression effect)\n",
-                Math.abs(actualVsApprox), actualVsApprox >= 0 ? "savings" : "overhead"));
+        sb.append(String.format("**Bandwidth Savings:** %.1f%%\n", averageBandwidthSavings));
         sb.append("\n");
 
         // Results by Player Count
@@ -295,16 +282,16 @@ public class AnalysisResult {
 
             // Bandwidth by player count
             sb.append("### Bandwidth by Player Count\n\n");
-            sb.append("| Players | Games | ActualNetwork | Avg Actual | FullState | Avg FullState | Savings |\n");
-            sb.append("|---------|-------|---------------|------------|-----------|---------------|--------|\n");
+            sb.append("| Players | Games | Delta | Avg Delta | FullState | Avg FullState | Savings |\n");
+            sb.append("|---------|-------|-------|-----------|-----------|---------------|--------|\n");
             for (int p = 2; p <= 4; p++) {
                 PlayerCountStats stats = statsByPlayerCount.get(p);
                 if (stats != null) {
-                    long avgActualPerGame = stats.gameCount > 0 ? stats.totalDeltaBytes / stats.gameCount : 0;
+                    long avgDeltaPerGame = stats.gameCount > 0 ? stats.totalDeltaBytes / stats.gameCount : 0;
                     long avgFullPerGame = stats.gameCount > 0 ? stats.totalFullStateBytes / stats.gameCount : 0;
                     sb.append(String.format("| %d | %d | %s | %s | %s | %s | %.1f%% |\n",
                             p, stats.gameCount,
-                            TestUtils.formatBytes(stats.totalDeltaBytes), TestUtils.formatBytes(avgActualPerGame),
+                            TestUtils.formatBytes(stats.totalDeltaBytes), TestUtils.formatBytes(avgDeltaPerGame),
                             TestUtils.formatBytes(stats.totalFullStateBytes), TestUtils.formatBytes(avgFullPerGame),
                             stats.averageBandwidthSavings));
                 }
@@ -524,7 +511,6 @@ public class AnalysisResult {
         public final double successRate;
         public final double averageTurns;
         public final double averageBandwidthSavings;
-        public final long totalApproximateBytes;
         public final long totalDeltaBytes;
         public final long totalFullStateBytes;
 
@@ -540,7 +526,6 @@ public class AnalysisResult {
                     .average()
                     .orElse(0.0);
 
-            this.totalApproximateBytes = metrics.stream().mapToLong(GameLogMetrics::getTotalApproximateBytes).sum();
             this.totalDeltaBytes = metrics.stream().mapToLong(GameLogMetrics::getTotalDeltaBytes).sum();
             this.totalFullStateBytes = metrics.stream().mapToLong(GameLogMetrics::getTotalFullStateBytes).sum();
 

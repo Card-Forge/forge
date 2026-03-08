@@ -152,6 +152,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             throw new IllegalArgumentException();
         }
 
+        // Network-deserialized PlayerViews have null trackers — set it from gameView
+        // so lookup() can resolve to the tracked instance
+        if (player.getTracker() == null && getGameView() != null && getGameView().getTracker() != null) {
+            player.setTracker(getGameView().getTracker());
+        }
         player = TrackableTypes.PlayerViewType.lookup(player); //ensure we use the correct player
 
         final boolean doSetCurrentPlayer = originalGameControllers.isEmpty();
@@ -168,6 +173,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             throw new IllegalArgumentException();
         }
 
+        // Network-deserialized PlayerViews have null trackers — set it from gameView
+        // so lookup() can resolve to the tracked instance
+        if (player.getTracker() == null && getGameView() != null && getGameView().getTracker() != null) {
+            player.setTracker(getGameView().getTracker());
+        }
         player = TrackableTypes.PlayerViewType.lookup(player); //ensure we use the correct player
 
         if (gameController == null) {

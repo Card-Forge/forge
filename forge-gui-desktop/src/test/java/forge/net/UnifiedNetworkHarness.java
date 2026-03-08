@@ -628,6 +628,18 @@ public class UnifiedNetworkHarness {
                 break;
             }
 
+            // Fail fast if any remote client has disconnected unexpectedly
+            synchronized (remoteClients) {
+                for (HeadlessNetworkClient client : remoteClients) {
+                    if (!client.isConnected()) {
+                        netLog.error("Remote client '{}' disconnected — aborting game",
+                                client.getMetricsSummary());
+                        result.errorMessage = "Remote client disconnected unexpectedly";
+                        return;
+                    }
+                }
+            }
+
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
@@ -817,7 +829,7 @@ public class UnifiedNetworkHarness {
 
         /**
          * Get a concise bandwidth summary from log analysis.
-         * Shows Approximate/ActualNetwork/FullState comparison without full report.
+         * Shows Delta vs FullState comparison without full report.
          *
          * @return Bandwidth summary string, or null if log file not available
          */
@@ -831,17 +843,12 @@ public class UnifiedNetworkHarness {
                 NetworkLogAnalyzer analyzer = new NetworkLogAnalyzer();
                 GameLogMetrics metrics = analyzer.analyzeLogFile(logFile);
 
-                long approx = metrics.getTotalApproximateBytes();
-                long actual = metrics.getTotalDeltaBytes();
+                long delta = metrics.getTotalDeltaBytes();
                 long full = metrics.getTotalFullStateBytes();
+                double savings = full > 0 ? 100.0 * (1.0 - (double) delta / full) : 0;
 
-                double approxSavings = full > 0 ? 100.0 * (1.0 - (double) approx / full) : 0;
-                double actualSavings = full > 0 ? 100.0 * (1.0 - (double) actual / full) : 0;
-
-                return String.format("Bandwidth: Approximate=%s (%.1f%% savings), ActualNetwork=%s (%.1f%% savings), FullState=%s",
-                        TestUtils.formatBytes(approx), approxSavings,
-                        TestUtils.formatBytes(actual), actualSavings,
-                        TestUtils.formatBytes(full));
+                return String.format("Bandwidth: Delta=%s, FullState=%s, Savings=%.1f%%",
+                        TestUtils.formatBytes(delta), TestUtils.formatBytes(full), savings);
             } catch (Exception e) {
                 return "Bandwidth analysis failed: " + e.getMessage();
             }

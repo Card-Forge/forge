@@ -75,7 +75,7 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
                     } catch (final InvocationTargetException e) {
                         //throw new RuntimeException(e.getTargetException());
                         catchedError[0] += (String.format("RuntimeException: %s (GameProtocolHandler.java Line 65)\n", e.getTargetException().toString()));
-                        netLog.error("InvocationTargetException: {}", e.getTargetException().toString());
+                        netLog.error(e.getTargetException(), "InvocationTargetException in {}", methodName);
                     }
                 } else {
                     Serializable reply = null;

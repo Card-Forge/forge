@@ -68,13 +68,20 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
                 if (args.length > 0 && args[0] instanceof GameView) {
                     GameView gameView = (GameView) args[0];
                     // Ensure the incoming gameView has a tracker before setGameView tries to
-                    // copy properties (copyChangedProps requires tracker for collection handling)
+                    // copy properties (copyChangedProps requires tracker for collection handling).
+                    // IMPORTANT: Do NOT manually setTracker on root before updateTrackers —
+                    // updateTrackers checks getTracker()==null and skips objects that already
+                    // have a tracker, so setting root first prevents recursion into children.
                     if (this.tracker != null && gameView.getTracker() == null) {
-                        gameView.setTracker(this.tracker);
-                        // Also update trackers on nested objects
                         updateTrackers(new Object[]{gameView});
                     }
                     gui.setGameView(gameView);
+                    // Replace args with the existing gameView instance so the EDT
+                    // dispatch's identity check (gameView0 == getGameView()) succeeds
+                    // and skips the redundant copyChangedProps. Without this, the IO
+                    // thread and EDT both run copyChangedProps on the same objects,
+                    // causing race conditions and NPEs.
+                    args[0] = gui.getGameView();
                 }
                 break;
             case openView:
