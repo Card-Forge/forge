@@ -30,7 +30,7 @@ public class DeckColors {
 
     public int MAX_COLORS = 2;
 
-    DeckColors() {}
+    public DeckColors() {}
 
     DeckColors(int max_col) {
         // If we want to draft decks that are more than 2 colors, we can change the MAX_COLORS value here.

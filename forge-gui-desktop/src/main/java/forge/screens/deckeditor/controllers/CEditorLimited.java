@@ -17,19 +17,24 @@
  */
 package forge.screens.deckeditor.controllers;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.function.Supplier;
 
 import forge.card.CardEdition;
+import forge.card.ColorSet;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
 import forge.game.GameType;
+import forge.gamemodes.limited.DeckColors;
+import forge.gamemodes.limited.LimitedDeckBuilder;
 import forge.gui.UiCommand;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
@@ -38,6 +43,7 @@ import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.model.FModel;
 import forge.screens.deckeditor.AddBasicLandsDialog;
+import forge.screens.deckeditor.ColorSelectionDialog;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.views.VAllDecks;
 import forge.screens.deckeditor.views.VBrawlDecks;
@@ -51,6 +57,8 @@ import forge.screens.home.sanctioned.CSubmenuSealed;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FComboBox;
 import forge.util.storage.IStorage;
+
+import javax.swing.*;
 
 /**
  * Child controller for limited deck editor UI.
@@ -114,6 +122,8 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
             DeckSection ds = (DeckSection)cb.getSelectedItem();
             setEditorMode(ds);
         });
+
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnAutoBuildLimited().setCommand(() -> onAutoBuildLimitedDeck());
     }
 
     //========== Overridden from ACEditorBase
@@ -286,5 +296,98 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
         if (tinyLeadersDecksParent != null) {
             tinyLeadersDecksParent.addDoc(VTinyLeadersDecks.SINGLETON_INSTANCE);
         }
+    }
+
+    private ColorSet getMostCommonColors() {
+        // Gather all cards from sideboard and main deck (the pool)
+        List<PaperCard> pool = new ArrayList<>();
+        pool.addAll(getHumanDeck().getOrCreate(DeckSection.Sideboard).toFlatList());
+        pool.addAll(getHumanDeck().getMain().toFlatList());
+        int[] colorCounts = new int[5]; // WUBRG order
+        for (PaperCard card : pool) {
+            ColorSet cs = card.getRules().getColor();
+            if (cs.hasWhite()) colorCounts[0]++;
+            if (cs.hasBlue()) colorCounts[1]++;
+            if (cs.hasBlack()) colorCounts[2]++;
+            if (cs.hasRed()) colorCounts[3]++;
+            if (cs.hasGreen()) colorCounts[4]++;
+        }
+        // Find the two most common colors
+        int first = -1, second = -1;
+        for (int i = 0; i < 5; i++) {
+            if (first == -1 || colorCounts[i] > colorCounts[first]) {
+                second = first;
+                first = i;
+            } else if (second == -1 || colorCounts[i] > colorCounts[second]) {
+                second = i;
+            }
+        }
+        byte[] colorMasks = {forge.card.MagicColor.WHITE, forge.card.MagicColor.BLUE, forge.card.MagicColor.BLACK, forge.card.MagicColor.RED, forge.card.MagicColor.GREEN};
+        int mask = 0;
+        if (first != -1 && colorCounts[first] > 0) mask |= colorMasks[first];
+        if (second != -1 && colorCounts[second] > 0) mask |= colorMasks[second];
+        if (mask == 0) mask = 0x1F; // fallback: all colors
+        return ColorSet.fromMask(mask);
+    }
+
+    private void onAutoBuildLimitedDeck() {
+        // Show dialog to ask user for colors
+        Window window = SwingUtilities.getWindowAncestor(VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader());
+        ColorSet defaultColors = getMostCommonColors();
+        ColorSelectionDialog dialog = new ColorSelectionDialog(window, defaultColors);
+        dialog.setVisible(true);
+        if (!dialog.isConfirmed()) {
+            return;
+        }
+        ColorSet chosenColors = dialog.getSelectedColors();
+        // Build deck using LimitedDeckBuilder with forHuman=true
+        List<PaperCard> pool = new ArrayList<>();
+        // Gather all cards from sideboard and main deck (the pool)
+        pool.addAll(getHumanDeck().getOrCreate(DeckSection.Sideboard).toFlatList());
+        pool.addAll(getHumanDeck().getMain().toFlatList());
+        DeckColors deckColors = new DeckColors();
+        java.util.List<Byte> colorBytes = new ArrayList<>();
+        for (forge.card.MagicColor.Color c : chosenColors.getOrderedColors()) {
+            colorBytes.add(c.getColorMask());
+        }
+        deckColors.setColorsByList(colorBytes);
+        LimitedDeckBuilder builder = new LimitedDeckBuilder(pool, deckColors, true);
+        Deck newDeck = builder.buildDeck();
+
+        // Move cards via UI methods
+        CardPool currentMain = getHumanDeck().getMain();
+        CardPool generatedMain = newDeck.getMain();
+
+        // 1. Remove cards from Main that are not in generatedMain (move to sideboard)
+        List<Entry<PaperCard, Integer>> toRemove = new ArrayList<>();
+        for (Entry<PaperCard, Integer> entry : currentMain) {
+            int inGenerated = generatedMain.count(entry.getKey());
+            int inCurrent = entry.getValue();
+            if (inGenerated < inCurrent) {
+                toRemove.add(Map.entry(entry.getKey(), inCurrent - inGenerated));
+            }
+        }
+        for (Entry<PaperCard, Integer> entry : toRemove) {
+            List<Entry<PaperCard, Integer>> single = List.of(entry);
+            onRemoveItems(single, false); // move from main to sideboard
+        }
+
+        // 2. Add cards to Main that are in generatedMain but not enough in currentMain (move from sideboard)
+        List<Entry<PaperCard, Integer>> toAdd = new ArrayList<>();
+        for (Entry<PaperCard, Integer> entry : generatedMain) {
+            int inCurrent = currentMain.count(entry.getKey());
+            int inGenerated = entry.getValue();
+            if (inGenerated > inCurrent) {
+                toAdd.add(Map.entry(entry.getKey(), inGenerated - inCurrent));
+            }
+        }
+        for (Entry<PaperCard, Integer> entry : toAdd) {
+            List<Entry<PaperCard, Integer>> single = List.of(entry);
+            onAddItems(single, false); // move from sideboard to main
+        }
+
+        // UI will update via onAddItems/onRemoveItems
+        resetTables();
+        getDeckController().notifyModelChanged();
     }
 }

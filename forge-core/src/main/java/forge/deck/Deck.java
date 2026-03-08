@@ -697,6 +697,31 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return false;
     }
 
+    /**
+     * Replace this deck's contents with those from another deck.
+     * All sections and metadata are copied.
+     * @param other the deck to copy from
+     */
+    public void copyFrom(Deck other) {
+        // Clear all current sections
+        for (DeckSection section : DeckSection.values()) {
+            CardPool pool = this.get(section);
+            if (pool != null) {
+                pool.clear();
+            }
+        }
+        // Copy all sections from other
+        for (Entry<DeckSection, CardPool> entry : other.parts.entrySet()) {
+            this.getOrCreate(entry.getKey()).addAll(entry.getValue());
+        }
+        // Copy metadata
+        this.setName(other.getName());
+        this.setAiHints(StringUtils.join(other.aiHints, " | "));
+        this.setDraftNotes(other.draftNotes);
+        this.tags.clear();
+        this.tags.addAll(other.tags);
+    }
+
     public static int getAverageCMC(Deck deck) {
         int totalCMC = 0;
         int totalCount = 0;
