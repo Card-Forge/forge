@@ -50,7 +50,7 @@ public class AttackRequirement {
 
         for (final GameEntity defender : possibleDefenders) {
             // use put here because we want to always put it, even if the value is 0
-            defenderSpecific.put(defender, defenderSpecific.getOrDefault(defender, 0) + nAttackAnything);
+            defenderSpecific.merge(defender, nAttackAnything, Integer::sum);
         }
 
         // Remove GameEntities that are no longer on an opposing battlefield or are

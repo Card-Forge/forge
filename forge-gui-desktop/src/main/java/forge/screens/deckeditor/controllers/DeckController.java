@@ -27,6 +27,7 @@ import forge.screens.home.gauntlet.*;
 import forge.screens.home.sanctioned.VSubmenuConstructed;
 import forge.util.ItemPool;
 import forge.util.Localizer;
+import forge.util.StreamUtil;
 import forge.util.storage.IStorage;
 import org.apache.commons.lang3.StringUtils;
 
@@ -35,6 +36,7 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public class DeckController<T extends DeckBase> {
     private T model;
@@ -161,14 +163,7 @@ public class DeckController<T extends DeckBase> {
     }
 
     private Map<String, Integer> groupByName(CardPool section) {
-        Map<String, Integer> result = new HashMap<>();
-        for (Map.Entry<PaperCard, Integer> entry : section) {
-            PaperCard importedCard = entry.getKey();
-            Integer previousCount = result.getOrDefault(importedCard.getName(), 0);
-            int countToAdd = entry.getValue();
-            result.put(importedCard.getName(), countToAdd + previousCount);
-        }
-        return result;
+        return StreamUtil.stream(section).collect(Collectors.groupingBy(ev -> ev.getKey().getName(), Collectors.summingInt(ev -> ev.getValue())));
     }
 
     private void pickFromCatalog(Map<String, Integer> countByName, CardPool catalog, CardPool targetSection) {

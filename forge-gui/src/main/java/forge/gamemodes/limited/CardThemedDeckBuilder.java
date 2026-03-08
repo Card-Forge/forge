@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 
 import com.google.common.collect.Lists;
+import com.google.common.primitives.Ints;
 
 import forge.StaticData;
 import forge.card.CardEdition;
@@ -335,11 +336,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             if(card.getRules().getType().isLand()){
                 continue;
             }
-            if(currentCounts.containsKey(card)){
-                currentCounts.put(card, currentCounts.get(card) + 1);
-            }else{
-                currentCounts.put(card, 1);
-            }
+            currentCounts.merge(card, 1, Integer::sum);
         }
         for(PaperCard card: currentCounts.keySet()){
             if(currentCounts.get(card)==2 || currentCounts.get(card)==3){
@@ -899,50 +896,25 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             rankedColorList.removeAll(keyCardList);
         }*/
 
-        final Map<Integer, Integer> creatureCosts = new HashMap<>();
-        for (int i = 1; i < 7; i++) {
-            creatureCosts.put(i, 0);
-        }
-        deckList.stream().filter(PaperCardPredicates.IS_CREATURE)
-            .mapToInt(c -> c.getRules().getManaCost().getCMC())
-            .map(cmc -> Math.min(Math.max(cmc, 1), 6))
-            .forEach(cmc -> creatureCosts.put(cmc, creatureCosts.get(cmc) + 1));
+        final Map<Integer, Long> creatureCosts = deckList.stream().filter(PaperCardPredicates.IS_CREATURE)
+            .map(c -> Ints.constrainToRange(c.getRules().getManaCost().getCMC(), 1, 6))
+            .collect(Collectors.groupingBy(i -> i, Collectors.counting()));
 
         List<PaperCard> creaturesToAdd = new ArrayList<>();
         for (final PaperCard card : creatures) {
-            int cmc = card.getRules().getManaCost().getCMC();
-            if (cmc < 1) {
-                cmc = 1;
-            } else if (cmc > 6) {
-                cmc = 6;
-            }
-            final Integer currentAtCmc = creatureCosts.get(cmc);
-            boolean willAddCreature = false;
-            if (cmc <= 1 && currentAtCmc < targetCMCs.get(1)) {
-                willAddCreature = true;
-            } else if (cmc == 2 && currentAtCmc < targetCMCs.get(2)) {
-                willAddCreature = true;
-            } else if (cmc == 3 && currentAtCmc < targetCMCs.get(3)) {
-                willAddCreature = true;
-            } else if (cmc == 4 && currentAtCmc < targetCMCs.get(4)) {
-                willAddCreature = true;
-            } else if (cmc == 5 && currentAtCmc < targetCMCs.get(5)) {
-                willAddCreature = true;
-            } else if (cmc >= 6 && currentAtCmc < targetCMCs.get(6)) {
-                willAddCreature = true;
-            }
+            int cmc = Ints.constrainToRange(card.getRules().getManaCost().getCMC(), 1, 6);
 
-            if (willAddCreature) {
+            if (creatureCosts.get(cmc) < targetCMCs.get(cmc)) {
                 creaturesToAdd.add(card);
                 num--;
-                creatureCosts.put(cmc, creatureCosts.get(cmc) + 1);
+                creatureCosts.merge(cmc, 1l, Long::sum);
                 if (logToConsole) {
                     System.out.println(nameForLog+"[" + num + "]:" + card.getName() + " (" + card.getRules().getManaCost() + ")");
                 }
             } else {
                 if (logToConsole) {
                     System.out.println(card.getName() + " not added because CMC " + card.getRules().getManaCost().getCMC()
-                            + " has " + currentAtCmc + " already.");
+                            + " has " + targetCMCs.get(cmc) + " already.");
                 }
             }
             if (num <= 0) {
