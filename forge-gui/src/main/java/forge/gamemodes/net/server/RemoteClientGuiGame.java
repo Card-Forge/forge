@@ -19,7 +19,6 @@ import forge.game.zone.ZoneType;
 import forge.util.Localizer;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.gamemodes.net.DeltaPacket;
-import forge.gamemodes.net.FullStatePacket;
 import forge.gamemodes.net.GameProtocolSender;
 import forge.gamemodes.net.IHasNetLog;
 import forge.gamemodes.net.ProtocolMethod;
@@ -146,7 +145,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
                     clientIndex, useDeltaSync, initialSyncSent);
                 fallbackLogged = true;
             }
-            send(ProtocolMethod.setGameView, gameView);
+            send(ProtocolMethod.setGameView, gameView, -1L);
             return;
         }
 
@@ -202,8 +201,8 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
             return;
         }
 
-        FullStatePacket packet = deltaSyncManager.createFullStatePacket(gameView);
-        send(ProtocolMethod.fullStateSync, packet);
+        long seq = deltaSyncManager.getCurrentSequence();
+        send(ProtocolMethod.setGameView, gameView, seq);
         initialSyncSent = true;
 
         // Register consumer on all objects — per-consumer dirty tracking starts here

@@ -2,7 +2,6 @@ package forge.net;
 
 import forge.game.GameView;
 import forge.gamemodes.net.DeltaPacket;
-import forge.gamemodes.net.FullStatePacket;
 import forge.gamemodes.net.IHasNetLog;
 import forge.gamemodes.match.GameLobby.GameLobbyData;
 import forge.gamemodes.net.client.ClientGameLobby;
@@ -243,14 +242,12 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
     }
 
     // Called by DeltaLoggingGuiGame when full state sync received
-    void onFullStateSyncReceived(FullStatePacket packet) {
+    void onFullStateSyncReceived(long sequenceNumber) {
         fullStateSyncsReceived.incrementAndGet();
         gameInProgress.set(true);
         gameStartedLatch.countDown();
 
-        netLog.info("Full state sync: seq={}, checksum={}",
-                packet.getSequenceNumber(),
-                packet.getStateChecksum());
+        netLog.info("Full state sync: seq={}", sequenceNumber);
     }
 
     // Called by DeltaLoggingGuiGame when game ends
@@ -397,12 +394,14 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
         }
 
         @Override
-        public void fullStateSync(FullStatePacket packet) {
-            // First, process the full state sync (tracker setup, etc.)
-            super.fullStateSync(packet);
+        public void setGameView(forge.game.GameView gameView, long sequenceNumber) {
+            // First, process the game view + ack sync if needed
+            super.setGameView(gameView, sequenceNumber);
 
-            // Then notify the client for logging/verification
-            client.onFullStateSyncReceived(packet);
+            // Notify the client when this is a full state sync (sequenceNumber >= 0)
+            if (sequenceNumber >= 0) {
+                client.onFullStateSyncReceived(sequenceNumber);
+            }
         }
 
         @Override

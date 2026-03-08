@@ -16,7 +16,6 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.net.DeltaPacket;
-import forge.gamemodes.net.FullStatePacket;
 import forge.gui.control.PlaybackSpeed;
 import forge.interfaces.IGameController;
 import forge.item.PaperCard;
@@ -33,6 +32,15 @@ import java.util.Map;
 
 public interface IGuiGame {
     void setGameView(GameView gameView);
+
+    /**
+     * Set the game view with a sequence number for delta sync baseline.
+     * When sequenceNumber >= 0, the client sends ackSync to establish the baseline.
+     * Local games ignore the sequence number.
+     */
+    default void setGameView(GameView gameView, long sequenceNumber) {
+        setGameView(gameView);
+    }
 
     GameView getGameView();
 
@@ -295,13 +303,6 @@ public interface IGuiGame {
      * @param packet the delta packet containing changes
      */
     void applyDelta(DeltaPacket packet);
-
-    /**
-     * Handle a full state synchronization.
-     * Used for initial connection and recovery from desync.
-     * @param packet the full state packet
-     */
-    void fullStateSync(FullStatePacket packet);
 
     /**
      * Set the rememberd actions (for replay/undo support).

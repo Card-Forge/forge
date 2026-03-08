@@ -10,7 +10,6 @@ import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.player.PlayerView;
 import forge.gamemodes.net.DeltaPacket;
-import forge.gamemodes.net.FullStatePacket;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.control.FControlGameEventHandler;
@@ -1006,11 +1005,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public void applyDelta(DeltaPacket packet) {
-        // No-op for local games - network implementation is in NetworkGuiGame
-    }
-
-    @Override
-    public void fullStateSync(FullStatePacket packet) {
         // No-op for local games - network implementation is in NetworkGuiGame
     }
 

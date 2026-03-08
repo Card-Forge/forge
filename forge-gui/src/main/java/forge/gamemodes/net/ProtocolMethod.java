@@ -30,7 +30,7 @@ import java.util.Map;
  */
 public enum ProtocolMethod implements IHasNetLog {
     // Server -> Client
-    setGameView         (Mode.SERVER, Void.TYPE, GameView.class),
+    setGameView         (Mode.SERVER, Void.TYPE, GameView.class, Long.TYPE),
     openView            (Mode.SERVER, Void.TYPE, TrackableCollection/*PlayerView*/.class),
     afterGameEnd        (Mode.SERVER, Void.TYPE),
     showCombat          (Mode.SERVER, Void.TYPE),
@@ -76,7 +76,6 @@ public enum ProtocolMethod implements IHasNetLog {
 
     // Delta sync - Server -> Client
     applyDelta          (Mode.SERVER, Void.TYPE, DeltaPacket.class),
-    fullStateSync       (Mode.SERVER, Void.TYPE, FullStatePacket.class),
 
     // Client -> Server
     // Note: these should all return void, to avoid awkward situations in

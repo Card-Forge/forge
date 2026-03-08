@@ -48,7 +48,7 @@ public class NetworkByteTracker {
             if (messageType.contains("DeltaPacket") || messageType.contains("applyDelta")) {
                 deltaBytesSent.addAndGet(bytes);
                 deltaPacketCount.incrementAndGet();
-            } else if (messageType.contains("FullStatePacket") || messageType.contains("fullStateSync")) {
+            } else if (messageType.contains("GameView") || messageType.contains("setGameView")) {
                 fullStateBytesSent.addAndGet(bytes);
                 fullStatePacketCount.incrementAndGet();
             }

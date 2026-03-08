@@ -669,54 +669,16 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
         }
     }
 
-    // ==================== Full state sync ====================
+    // ==================== Full state sync via setGameView ====================
 
     @Override
-    public void fullStateSync(FullStatePacket packet) {
-        if (packet != null && packet.getGameView() != null) {
-            GameView newGameView = packet.getGameView();
-
-            if (getGameView() != null && getGameView().getTracker() != null) {
-                netLog.info("gameView already exists - using copyChangedProps to preserve object identity");
-
-                if (newGameView.getTracker() == null) {
-                    Tracker existingTracker = getGameView().getTracker();
-                    java.util.Set<TrackableObject> visited = java.util.Collections.newSetFromMap(new java.util.IdentityHashMap<>());
-                    setTrackerRecursively(newGameView, existingTracker, visited);
-                }
-
-                getGameView().copyChangedProps(newGameView);
-
-                netLog.info("Used copyChangedProps - existing PlayerView instances preserved");
-            } else {
-                netLog.info("No existing gameView - performing fresh initialization");
-
-                ensureTrackerInitialized(newGameView);
-                newGameView.updateObjLookup();
-
-                Tracker tracker = newGameView.getTracker();
-                if (tracker != null && newGameView.getPlayers() != null) {
-                    int playerCount = 0;
-                    int cardCount = 0;
-                    for (PlayerView player : newGameView.getPlayers()) {
-                        playerCount++;
-                        for (ZoneType zone : new ZoneType[]{ZoneType.Hand, ZoneType.Graveyard, ZoneType.Library, ZoneType.Exile, ZoneType.Battlefield}) {
-                            cardCount += player.getZoneSize(zone);
-                        }
-                    }
-                    netLog.info("After updateObjLookup: {} players, ~{} cards found in zones",
-                            playerCount, cardCount);
-                }
-
-                setGameView(newGameView);
-            }
-
+    public void setGameView(GameView gameView, long sequenceNumber) {
+        setGameView(gameView);
+        if (sequenceNumber >= 0) {
             IGameController controller = getGameController();
             if (controller != null) {
-                controller.ackSync(packet.getSequenceNumber());
+                controller.ackSync(sequenceNumber);
             }
         }
     }
-
-
 }

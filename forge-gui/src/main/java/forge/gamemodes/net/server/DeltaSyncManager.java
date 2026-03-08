@@ -11,7 +11,6 @@ import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.DeltaPacket.CardStateData;
 import forge.gamemodes.net.NetworkChecksumUtil;
 import forge.gamemodes.net.DeltaPacket.NewObjectData;
-import forge.gamemodes.net.FullStatePacket;
 import forge.gamemodes.net.IHasNetLog;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
@@ -436,7 +435,7 @@ public class DeltaSyncManager implements IHasNetLog {
     // ==================== Object registration ====================
 
     /**
-     * Mark objects as sent and register consumer after initial fullStateSync.
+     * Mark objects as sent and register consumer after initial full state sync.
      * This starts per-consumer dirty tracking for all existing objects.
      */
     public void markObjectsAsSent(GameView gameView) {
@@ -544,11 +543,6 @@ public class DeltaSyncManager implements IHasNetLog {
                     player.getId(), player.getName(), player.getLife(),
                     handSize, graveyardSize, battlefieldSize);
         }
-    }
-
-    public FullStatePacket createFullStatePacket(GameView gameView) {
-        long seq = sequenceNumber.get();
-        return new FullStatePacket(seq, gameView);
     }
 
     public long getCurrentSequence() {
