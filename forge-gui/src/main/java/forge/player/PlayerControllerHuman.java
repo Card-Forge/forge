@@ -3,6 +3,7 @@ package forge.player;
 import com.google.common.collect.*;
 import forge.LobbyPlayer;
 import forge.StaticData;
+import forge.ai.ComputerUtilMana;
 import forge.ai.GameState;
 import forge.ai.PlayerControllerAi;
 import forge.card.*;
@@ -49,6 +50,8 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.match.input.*;
+import forge.gamemodes.net.event.MessageEvent;
+import forge.gamemodes.net.server.FServerManager;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.control.FControlGamePlayback;
@@ -94,7 +97,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      * library.
      */
     private boolean mayLookAtAllCards = false;
-    private boolean disableAutoYields = false;
 
     private IGuiGame gui;
 
@@ -138,13 +140,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return player == null ? null : player.getView();
     }
 
-    public boolean getDisableAutoYields() {
-        return disableAutoYields;
-    }
-    public void setDisableAutoYields(final boolean disableAutoYields0) {
-        disableAutoYields = disableAutoYields0;
-    }
-
     @Override
     public boolean mayLookAtAllCards() {
         return mayLookAtAllCards;
@@ -157,6 +152,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      */
     public void setMayLookAtAllCards(final boolean mayLookAtAllCards) {
         this.mayLookAtAllCards = mayLookAtAllCards;
+    }
+
+    @Override
+    public boolean shouldTrackAvailableActions() {
+        return FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS);
     }
 
     private final ArrayList<Card> tempShownCards = new ArrayList<>();
@@ -958,6 +958,21 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     protected void reveal(final CardCollectionView cards, final ZoneType zone, final PlayerView owner, String message, boolean addSuffix) {
+        // Skip reveal dialog during active yield if "Interrupt on Reveal" is disabled
+        forge.gamemodes.match.YieldMode yieldMode = getGui().getYieldMode(getLocalPlayerView());
+        if (yieldMode != null && yieldMode != forge.gamemodes.match.YieldMode.NONE) {
+            if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_INTERRUPT_ON_REVEAL)) {
+                // Still show the cards temporarily but skip the dialog that requires user input
+                if (!cards.isEmpty()) {
+                    tempShowCards(cards);
+                    TrackableCollection<CardView> collection = CardView.getCollection(cards);
+                    getGui().updateRevealedCards(collection);
+                    endTempShowCards();
+                }
+                return;
+            }
+        }
+
         if (StringUtils.isBlank(message)) {
             message = localizer.getMessage("lblLookCardInPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase());
         } else if (addSuffix) {
@@ -1537,6 +1552,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public List<SpellAbility> chooseSpellAbilityToPlay() {
         final MagicStack stack = getGame().getStack();
 
+        if (FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) {
+            int manaEstimate = ComputerUtilMana.getAvailableManaEstimate(getPlayer());
+            getPlayer().getView().updateHasAvailableActions(getPlayer(), manaEstimate);
+        }
+
         if (mayAutoPass()) {
             // avoid prompting for input if current phase is set to be
             // auto-passed instead posing a short delay if needed to
@@ -1753,6 +1773,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (sa != null && sa.isManaAbility()) {
             getGame().fireEvent(new GameEventAddLog(GameLogEntryType.LAND, message));
         } else {
+            // Skip notification dialog during active yield if "Interrupt on Reveal/Choices" is disabled
+            forge.gamemodes.match.YieldMode yieldMode = getGui().getYieldMode(getLocalPlayerView());
+            if (yieldMode != null && yieldMode != forge.gamemodes.match.YieldMode.NONE) {
+                if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_INTERRUPT_ON_REVEAL)) {
+                    // Log the message but don't show a dialog
+                    getGame().getGameLog().add(GameLogEntryType.INFORMATION, message);
+                    return;
+                }
+            }
+
             if (sa != null && sa.getHostCard() != null && GuiBase.getInterface().isLibgdxPort()) {
                 CardView cardView;
                 IPaperCard iPaperCard = sa.getHostCard().getPaperCard();
@@ -3344,8 +3374,62 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
     }
 
+    // Yield-just-ended detection via mayAutoPass transition (true→false)
+    private boolean wasAutoPassingLastPriority;
+    private boolean yieldJustEndedFlag;
+
+    // Suggestion decline tracking (reset each turn or on stack transition)
+    private final Map<String, Integer> declinedSuggestionTurn = Maps.newHashMap();
+    private boolean lastSeenStackNonEmpty;
+
     public boolean mayAutoPass() {
-        return getGui().mayAutoPass(getLocalPlayerView());
+        boolean result = getGui().mayAutoPass(getLocalPlayerView());
+        // Detect yield ending: was auto-passing last priority, not any more
+        yieldJustEndedFlag = wasAutoPassingLastPriority && !result;
+        wasAutoPassingLastPriority = result;
+        return result;
+    }
+
+    public boolean didYieldJustEnd() {
+        boolean flag = yieldJustEndedFlag;
+        yieldJustEndedFlag = false;
+        return flag;
+    }
+
+    public void onPriorityReceived(boolean stackNonEmpty) {
+        // On stack non-empty → empty transition, clear STACK_YIELD decline if scope is "stack"
+        if (lastSeenStackNonEmpty && !stackNonEmpty) {
+            String scope = FModel.getPreferences().getPref(FPref.YIELD_DECLINE_SCOPE_STACK_YIELD);
+            if ("stack".equals(scope)) {
+                declinedSuggestionTurn.remove("STACK_YIELD");
+            }
+        }
+        lastSeenStackNonEmpty = stackNonEmpty;
+    }
+
+    public void declineSuggestion(String suggestionType) {
+        GameView gv = getGui().getGameView();
+        if (gv == null) return;
+        declinedSuggestionTurn.put(suggestionType, gv.getTurn());
+    }
+
+    public boolean isSuggestionDeclined(String suggestionType) {
+        // Look up the per-type scope pref
+        FPref scopePref = "STACK_YIELD".equals(suggestionType)
+            ? FPref.YIELD_DECLINE_SCOPE_STACK_YIELD
+            : FPref.YIELD_DECLINE_SCOPE_NO_ACTIONS;
+        String scope = FModel.getPreferences().getPref(scopePref);
+        if ("never".equals(scope)) {
+            return true; // Suggestion disabled entirely
+        }
+        if ("always".equals(scope)) {
+            return false; // "Always" means never suppress
+        }
+        // "stack" and "turn" both use turn-number tracking (stack also clears on transition)
+        GameView gv = getGui().getGameView();
+        if (gv == null) return false;
+        Integer turnDeclined = declinedSuggestionTurn.get(suggestionType);
+        return turnDeclined != null && turnDeclined == gv.getTurn();
     }
 
     public void autoPassUntilEndOfTurn() {
@@ -3394,6 +3478,56 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final PlayerZone hand = player.getZone(ZoneType.Hand);
         hand.reorder(getCard(card), index);
         player.updateZoneForView(hand);
+    }
+
+    @Override
+    public void notifyYieldModeChanged(final PlayerView playerView, final forge.gamemodes.match.YieldMode mode) {
+        // Update the server's GUI with the client's yield mode
+        // This syncs yield state from network client to server
+        // Uses FromRemote methods to avoid triggering another notification and to handle
+        // PlayerView tracker mismatch (network PlayerViews have different trackers than server's)
+
+        // If clearing yield, always pass through
+        if (mode != null && mode != forge.gamemodes.match.YieldMode.NONE && !isYieldExperimentalEnabled()) {
+            // Host doesn't have experimental yield enabled — warn the client
+            final FServerManager server = FServerManager.getInstance();
+            if (server != null && server.isHosting()) {
+                server.broadcast(new MessageEvent(
+                    localizer.getMessage("lblYieldHostDisabled", playerView.getName())));
+            }
+
+            // Tell client to disable yield buttons
+            getGui().setHostYieldEnabled(false);
+
+            // UNTIL_END_OF_TURN works via legacy auto-pass, so allow it through
+            if (mode != forge.gamemodes.match.YieldMode.UNTIL_END_OF_TURN) {
+                // Reject experimental-only modes — clear the client's stuck yield state
+                getGui().syncYieldMode(playerView, forge.gamemodes.match.YieldMode.NONE);
+                return;
+            }
+        }
+
+        getGui().setYieldModeFromRemote(playerView, mode);
+    }
+
+    private boolean isYieldExperimentalEnabled() {
+        return FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS);
+    }
+
+    @Override
+    public void notifyAutoYieldChanged(String key, boolean autoYield) {
+        getGui().setShouldAutoYield(key, autoYield);
+    }
+
+    @Override
+    public void notifyTriggerChoiceChanged(int triggerId, int choice) {
+        if (choice > 0) {
+            getGui().setShouldAlwaysAcceptTrigger(triggerId);
+        } else if (choice < 0) {
+            getGui().setShouldAlwaysDeclineTrigger(triggerId);
+        } else {
+            getGui().setShouldAlwaysAskTrigger(triggerId);
+        }
     }
 
     @Override

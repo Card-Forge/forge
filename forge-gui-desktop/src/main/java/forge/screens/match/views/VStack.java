@@ -294,6 +294,7 @@ public class VStack implements IVDoc<CStack> {
                 final String key = item.getKey();
                 final boolean autoYield = controller.getMatchUI().shouldAutoYield(key);
                 controller.getMatchUI().setShouldAutoYield(key, !autoYield);
+                controller.getMatchUI().getGameController().notifyAutoYieldChanged(key, !autoYield);
                 if (!autoYield && controller.getMatchUI().getGameView().peekStack() == item) {
                     //auto-pass priority if ability is on top of stack
                     controller.getMatchUI().getGameController().passPriority();
@@ -305,9 +306,11 @@ public class VStack implements IVDoc<CStack> {
             jmiAlwaysYes.addActionListener(arg0 -> {
                 if (controller.getMatchUI().shouldAlwaysAcceptTrigger(triggerID)) {
                     controller.getMatchUI().setShouldAlwaysAskTrigger(triggerID);
+                    controller.getMatchUI().getGameController().notifyTriggerChoiceChanged(triggerID, 0);
                 }
                 else {
                     controller.getMatchUI().setShouldAlwaysAcceptTrigger(triggerID);
+                    controller.getMatchUI().getGameController().notifyTriggerChoiceChanged(triggerID, 1);
                 }
             });
             add(jmiAlwaysYes);
@@ -316,9 +319,11 @@ public class VStack implements IVDoc<CStack> {
             jmiAlwaysNo.addActionListener(arg0 -> {
                 if (controller.getMatchUI().shouldAlwaysDeclineTrigger(triggerID)) {
                     controller.getMatchUI().setShouldAlwaysAskTrigger(triggerID);
+                    controller.getMatchUI().getGameController().notifyTriggerChoiceChanged(triggerID, 0);
                 }
                 else {
                     controller.getMatchUI().setShouldAlwaysDeclineTrigger(triggerID);
+                    controller.getMatchUI().getGameController().notifyTriggerChoiceChanged(triggerID, -1);
                 }
             });
             add(jmiAlwaysNo);

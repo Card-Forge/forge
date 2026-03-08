@@ -94,6 +94,7 @@ public enum EDocID {
     REPORT_COMBAT (),
     REPORT_DEPENDENCIES (),
     REPORT_LOG (),
+    REPORT_YIELD (),
 
     DEV_MODE (),
     BUTTON_DOCK (),

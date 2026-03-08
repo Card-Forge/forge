@@ -30,6 +30,8 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
 import forge.game.card.CardView;
+import forge.game.player.PlayerView;
+import forge.gamemodes.match.YieldMode;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -65,7 +67,7 @@ public class VPrompt implements IVDoc<CPrompt> {
     private final FScrollPane messageScroller = new FScrollPane(tarMessage, false,
     		ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     private final JLabel lblGames;
-    private CardView card = null ; 
+    private CardView card = null ;
 
     public void setCardView(final CardView card) {
 	this.card = card ;
@@ -75,6 +77,20 @@ public class VPrompt implements IVDoc<CPrompt> {
         @Override
         public void keyPressed(final KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                // Try to cancel yield first if experimental options enabled
+                if (FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) {
+                    if (controller.getMatchUI() != null) {
+                        PlayerView player = controller.getMatchUI().getCurrentPlayer();
+                        if (player != null) {
+                            YieldMode currentYield = controller.getMatchUI().getYieldMode(player);
+                            if (currentYield != null && currentYield != YieldMode.NONE) {
+                                controller.getMatchUI().clearYieldMode(player);
+                                return;
+                            }
+                        }
+                    }
+                }
+                // Existing ESC behavior
                 if (btnCancel.isEnabled()) {
                     if (FModel.getPreferences().getPrefBoolean(FPref.UI_ALLOW_ESC_TO_END_TURN) || !btnCancel.getText().equals("End Turn")) {
                         btnCancel.doClick();
@@ -205,4 +221,5 @@ public class VPrompt implements IVDoc<CPrompt> {
     public JLabel getLblGames() {
         return this.lblGames;
     }
+
 }

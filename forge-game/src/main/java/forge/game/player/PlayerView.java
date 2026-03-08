@@ -7,11 +7,13 @@ import com.google.common.collect.Maps;
 import forge.LobbyPlayer;
 import forge.card.CardType;
 import forge.card.MagicColor;
+import forge.card.mana.ManaCostShard;
 import forge.card.mana.ManaAtom;
 import forge.game.GameEntityView;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CounterType;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.trackable.TrackableCollection;
@@ -548,6 +550,172 @@ public class PlayerView extends GameEntityView {
             mana.put(b, p.getManaPool().getAmountOfColor(b));
         }
         set(TrackableProperty.Mana, mana);
+    }
+
+    public boolean hasAvailableActions() {
+        Boolean val = get(TrackableProperty.HasAvailableActions);
+        return val != null && val;
+    }
+
+    /**
+     * Check if this player has any available actions (playable spells/abilities).
+     * Used for smart yield suggestions in network play.
+     *
+     * @param p the player to check
+     * @param availableMana pre-computed mana estimate (e.g. from ComputerUtilMana.getAvailableManaEstimate)
+     */
+    public void updateHasAvailableActions(Player p, int availableMana) {
+        // Build color profile from floating mana and untapped mana-producing permanents
+        byte availableColors = 0;
+        for (byte color : ManaAtom.MANATYPES) {
+            if (p.getManaPool().getAmountOfColor(color) > 0) {
+                availableColors |= color;
+            }
+        }
+        for (Card card : p.getCardsIn(ZoneType.Battlefield)) {
+            if (availableColors == ManaAtom.ALL_MANA_TYPES) {
+                break; // already have all colors
+            }
+            if (!card.isTapped() && !card.getManaAbilities().isEmpty()) {
+                for (SpellAbility ma : card.getManaAbilities()) {
+                    if (ma.getManaPart() != null) {
+                        String produced = ma.getManaPart().getOrigProduced();
+                        if (produced.contains("Any")) {
+                            availableColors = ManaAtom.ALL_MANA_TYPES;
+                            break;
+                        } else {
+                            for (byte color : ManaAtom.MANATYPES) {
+                                if (ma.getManaPart().canProduce(MagicColor.toShortString(color), ma)) {
+                                    availableColors |= color;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Check hand for playable spells that we can afford
+        for (Card card : p.getCardsIn(ZoneType.Hand)) {
+            for (SpellAbility sa : card.getAllPossibleAbilities(p, true)) {
+                if (sa.isSpell()) {
+                    if (canAffordSpell(sa, availableMana, availableColors) && hasValidTargets(sa)) {
+                        set(TrackableProperty.HasAvailableActions, true);
+                        return;
+                    }
+                } else if (sa.isLandAbility()) {
+                    // Land abilities are already filtered by canPlay() for timing
+                    set(TrackableProperty.HasAvailableActions, true);
+                    return;
+                }
+            }
+        }
+
+        // Check battlefield for non-mana activated abilities we can afford
+        for (Card card : p.getCardsIn(ZoneType.Battlefield)) {
+            for (SpellAbility sa : card.getAllPossibleAbilities(p, true)) {
+                if (!sa.isManaAbility()) {
+                    if (canAffordSpell(sa, availableMana, availableColors) && hasValidTargets(sa)) {
+                        set(TrackableProperty.HasAvailableActions, true);
+                        return;
+                    }
+                }
+            }
+        }
+
+        // Check graveyard, exile, command zone for playable abilities
+        for (ZoneType zone : new ZoneType[]{ZoneType.Graveyard, ZoneType.Exile, ZoneType.Command}) {
+            for (Card card : p.getCardsIn(zone)) {
+                for (SpellAbility sa : card.getAllPossibleAbilities(p, true)) {
+                    if (!sa.isManaAbility()) {
+                        if (canAffordSpell(sa, availableMana, availableColors) && hasValidTargets(sa)) {
+                            set(TrackableProperty.HasAvailableActions, true);
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+
+        set(TrackableProperty.HasAvailableActions, false);
+    }
+
+    /**
+     * Check if a spell/ability can be afforded given available mana count and colors.
+     * Handles hybrid (need any one color) and phyrexian (always payable via life) shards.
+     */
+    private boolean canAffordSpell(SpellAbility sa, int availableMana, byte availableColors) {
+        if (sa.getPayCosts() == null || !sa.getPayCosts().hasManaCost()) {
+            return true; // free ability
+        }
+        forge.card.mana.ManaCost manaCost = sa.getPayCosts().getTotalMana();
+        int cmc = manaCost.getCMC();
+        if (cmc > availableMana) {
+            return false;
+        }
+        // Check colored requirements shard by shard
+        for (ManaCostShard shard : manaCost) {
+            if (shard.isPhyrexian()) {
+                continue; // always payable via life
+            }
+            byte colorMask = shard.getColorMask();
+            if (colorMask == 0) {
+                continue; // generic/colorless
+            }
+            if (shard.isMultiColor()) {
+                // hybrid: need ANY one of the colors
+                if ((colorMask & availableColors) == 0) {
+                    return false;
+                }
+            } else {
+                // mono: need that specific color
+                if ((colorMask & availableColors) != colorMask) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Check if a spell/ability has at least one valid target (or doesn't need targets).
+     */
+    private boolean hasValidTargets(SpellAbility sa) {
+        if (!sa.usesTargeting()) {
+            return true;
+        }
+        return sa.getTargetRestrictions().hasCandidates(sa);
+    }
+
+    /**
+     * Check if player has any mana available (floating or from untapped mana sources).
+     * Used by yield suggestion system to determine if player can cast spells.
+     */
+    public boolean hasManaAvailable() {
+        // Check floating mana
+        for (byte manaType : ManaAtom.MANATYPES) {
+            if (getMana(manaType) > 0) return true;
+        }
+
+        // Check for untapped mana sources (lands, rocks, dorks)
+        FCollectionView<CardView> battlefield = getBattlefield();
+        if (battlefield != null) {
+            for (CardView cv : battlefield) {
+                if (!cv.isTapped() && cv.getCurrentState().origProduceMana() != null) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public boolean willLoseManaAtEndOfPhase() {
+        Boolean val = get(TrackableProperty.WillLoseManaAtEndOfPhase);
+        return val != null && val;
+    }
+    void updateWillLoseManaAtEndOfPhase(Player p) {
+        set(TrackableProperty.WillLoseManaAtEndOfPhase, p.getManaPool().willManaBeLostAtEndOfPhase());
     }
 
     private List<String> getDetailsList() {
