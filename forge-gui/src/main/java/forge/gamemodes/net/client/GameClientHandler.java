@@ -6,6 +6,7 @@ import forge.game.*;
 import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.match.LobbySlot;
+import forge.gamemodes.net.GameEventProxy;
 import forge.gamemodes.net.GameProtocolHandler;
 import forge.gamemodes.net.IRemote;
 import org.tinylog.Logger;
@@ -102,11 +103,24 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
                 client.setGameControllers(myPlayers);
 
                 break;
+            case handleGameEvents:
+                if (this.tracker != null && args.length > 0 && args[0] instanceof List<?>) {
+                    args[0] = GameEventProxy.unwrapAll((List<?>) args[0], this.tracker);
+                }
+                break;
             default:
                 break;
         }
         if (this.tracker != null) {
             updateTrackers(args);
+            // Register all objects from the incoming GameView in the tracker's ID
+            // lookup table synchronously on the IO thread. copyChangedProps() also
+            // does this, but it runs on EDT asynchronously — too late for the
+            // subsequent handleGameEvents.beforeCall which needs to resolve IdRefs.
+            if (protocolMethod == ProtocolMethod.setGameView
+                    && args.length > 0 && args[0] instanceof GameView) {
+                ((GameView) args[0]).updateObjLookup();
+            }
             replicateProps(args);
         }
     }
