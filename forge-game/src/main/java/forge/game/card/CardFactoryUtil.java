@@ -392,8 +392,7 @@ public class CardFactoryUtil {
             // if something has all creature types, but some are excluded, the count might be messed up
 
             for (String creatureType : type.getCreatureTypes()) {
-                Integer count = map.get(creatureType);
-                map.put(creatureType, count == null ? 1 : count + 1);
+                map.merge(creatureType, 1, Integer::sum);
             }
         }
 
@@ -424,8 +423,7 @@ public class CardFactoryUtil {
         for (final Card c : list) {
             // Remove Duplicated types
             for (String creatureType : c.getType().getCreatureTypes()) {
-                Integer count = map.get(creatureType);
-                map.put(creatureType, count == null ? 1 : count + 1);
+                map.merge(creatureType, 1, Integer::sum);
             }
         }
 
@@ -3824,23 +3822,12 @@ public class CardFactoryUtil {
     public static void addStaticAbility(final KeywordInterface inst, final CardState state, final boolean intrinsic) {
         String keyword = inst.getOriginal();
 
-        if (keyword.startsWith("Affinity")) {
-            final String[] k = keyword.split(":");
-            final String t = k[1];
-
-            String desc;
-            if (k.length > 2) {
-                String typeText = k[2];
-                if (typeText.contains(" with "))
-                    desc = typeText.substring(typeText.indexOf(" with ") + 6);
-                else
-                    desc = typeText + "s";
-            } else
-                desc = CardType.getPluralType(t);
+        if (inst instanceof Affinity affinity) {
+            final String t = affinity.getValidType();
 
             StringBuilder sb = new StringBuilder();
             sb.append("Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ AffinityX | EffectZone$ All");
-            sb.append("| Description$ Affinity for ").append(desc);
+            sb.append("| Description$ ").append(affinity.getTitle());
             sb.append(" (").append(inst.getReminderText()).append(")");
             String effect = sb.toString();
 

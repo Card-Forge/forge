@@ -278,9 +278,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             if (newMain != null) {
                 String errMsg;
                 if (newMain.size() < deckMinSize) {
-                    errMsg = TextUtil.concatNoSpace(localizer.getMessage("lblTooFewCardsMainDeck", String.valueOf(deckMinSize)));
+                    errMsg = TextUtil.concatNoSpace(localizer.getMessage("lblTooFewCardsMainDeck", deckMinSize));
                 } else {
-                    errMsg = TextUtil.concatNoSpace(localizer.getMessage("lblTooManyCardsSideboard", String.valueOf(sbMax)));
+                    errMsg = TextUtil.concatNoSpace(localizer.getMessage("lblTooManyCardsSideboard", sbMax));
                 }
                 getGui().showErrorDialog(errMsg, localizer.getMessage("lblInvalidDeck"));
             }
@@ -1216,7 +1216,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         GameEntityViewMap<Card, CardView> gameCacheGrave = GameEntityView.getMap(grave);
         for (int i = 0; i < chosenAmount; i++) {
-            String title = localizer.getMessage("lblExileWhichCard", String.valueOf(i + 1), String.valueOf(chosenAmount));
+            String title = localizer.getMessage("lblExileWhichCard", String.valueOf(i + 1), chosenAmount);
             final CardView nowChosen = getGui().oneOrNone(title, gameCacheGrave.getTrackableKeys());
 
             if (nowChosen == null || !gameCacheGrave.containsKey(nowChosen)) {
@@ -1335,8 +1335,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
 
             for (String type : c.getType().getCreatureTypes()) {
-                Integer count = typesInDeck.getOrDefault(type, 0);
-                typesInDeck.put(type, count + 1);
+                typesInDeck.merge(type, 1, Integer::sum);
             }
             // also take into account abilities that generate tokens
             for (SpellAbility sa : c.getAllSpellAbilities()) {
@@ -1348,8 +1347,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     for (String token : sa.getParam("TokenScript").split(",")) {
                         Card protoType = TokenInfo.getProtoType(token, sa, null);
                         for (String type : protoType.getType().getCreatureTypes()) {
-                            Integer count = typesInDeck.getOrDefault(type, 0);
-                            typesInDeck.put(type, count + 1);
+                            typesInDeck.merge(type, 1, Integer::sum);
                         }
                     }
                 }
@@ -1364,7 +1362,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                             Card protoType = TokenInfo.getProtoType(token, sa, null);
                             for (String type : protoType.getType().getCreatureTypes()) {
                                 Integer count = typesInDeck.getOrDefault(type, 0);
-                                typesInDeck.put(type, count + 1);
+                                typesInDeck.merge(type, 1, Integer::sum);
                             }
                         }
                     }
@@ -1372,8 +1370,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
             // special rule for Fabricate and Servo
             if (c.hasKeyword(Keyword.FABRICATE)) {
-                Integer count = typesInDeck.getOrDefault("Servo", 0);
-                typesInDeck.put("Servo", count + 1);
+                typesInDeck.merge("Servo", 1, Integer::sum);
             }
         }
 
@@ -1624,7 +1621,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
         };
         final String message = localizer.getMessage("lblCleanupPhase") + "\n"
-                + localizer.getMessage("lblSelectCardsToDiscardHandDownMaximum", String.valueOf(nDiscard), String.valueOf(max));
+                + localizer.getMessage("lblSelectCardsToDiscardHandDownMaximum", nDiscard, max);
         inp.setMessage(message);
         inp.setCancelAllowed(false);
         inp.showAndWait();

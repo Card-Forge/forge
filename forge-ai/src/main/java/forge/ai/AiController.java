@@ -67,8 +67,6 @@ import forge.util.*;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
-import org.tinylog.Logger;
-
 import java.util.*;
 import java.util.concurrent.FutureTask;
 import java.util.function.Function;
@@ -95,7 +93,6 @@ public class AiController {
     private final AiCardMemory memory;
     private Combat predictedCombat;
     private Combat predictedCombatNextTurn;
-    private boolean cheatShuffle;
     private boolean useSimulation;
     private SpellAbilityPicker simPicker;
     private int lastAttackAggression;
@@ -108,14 +105,6 @@ public class AiController {
         game = game0;
         memory = new AiCardMemory();
         simPicker = new SpellAbilityPicker(game, player);
-    }
-
-    public boolean canCheatShuffle() {
-        return cheatShuffle;
-    }
-
-    public void allowCheatShuffle(boolean canCheatShuffle) {
-        this.cheatShuffle = canCheatShuffle;
     }
 
     public boolean usesSimulation() {
@@ -1340,11 +1329,6 @@ public class AiController {
                 aiAtk.declareAttackers(combat);
             }
         }
-
-        for (final Card element : combat.getAttackers()) {
-            // tapping of attackers happens after Propaganda is paid for
-            Logger.debug("Computer just assigned " + element.getName() + " as an attacker.");
-        }
     }
 
     private void removeUnpayableAttackers(Combat combat) {
@@ -1399,7 +1383,6 @@ public class AiController {
         CardCollection landsWannaPlay = ComputerUtilAbility.getAvailableLandsToPlay(game, player);
         if (landsWannaPlay != null) {
             landsWannaPlay = filterLandsToPlay(landsWannaPlay);
-            Logger.debug("Computer " + game.getPhaseHandler().getPhase().nameForUi);
             if (landsWannaPlay != null && !landsWannaPlay.isEmpty()) {
                 // TODO search for other land it might want to play?
                 Card land = chooseBestLandToPlay(landsWannaPlay);
@@ -2119,7 +2102,7 @@ public class AiController {
      * @return an array of {@link forge.game.card.Card} objects.
      */
     public CardCollectionView cheatShuffle(CardCollectionView in) {
-        if (in.size() < 20 || !canCheatShuffle()) {
+        if (in.size() < 20 || !getBoolProperty(AiProps.CHEAT_WITH_MANA_ON_SHUFFLE) || !getGame().getRules().isAllowCheatShuffle()) {
             return in;
         }
 
