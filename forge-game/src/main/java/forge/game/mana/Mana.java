@@ -141,7 +141,7 @@ public record Mana(byte color, Card sourceCard, AbilityManaPart manaAbility, Pla
         return this.manaAbility;
     }
 
-    public final Player getPlayer() {
+    public Player getPlayer() {
         return this.player;
     }
 

@@ -8,10 +8,10 @@ public class ManaScrewed extends Achievement {
     public ManaScrewed() {
         super("ManaScrewed", Localizer.getInstance().getMessage("lblManaScrewed"),
             Localizer.getInstance().getMessage("lblWinGameOnlyPlaing"), Integer.MAX_VALUE,
-            Localizer.getInstance().getMessage("lblNLands", String.valueOf(3)), 3,
-            Localizer.getInstance().getMessage("lblNLands", String.valueOf(2)), 2,
-            Localizer.getInstance().getMessage("lblNLands", String.valueOf(1)), 1,
-            Localizer.getInstance().getMessage("lblNLands", String.valueOf(0)), 0
+            Localizer.getInstance().getMessage("lblNLands", 3), 3,
+            Localizer.getInstance().getMessage("lblNLands", 2), 2,
+            Localizer.getInstance().getMessage("lblNLands", 1), 1,
+            Localizer.getInstance().getMessage("lblNLands", 0), 0
         );
     }
 

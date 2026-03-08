@@ -1,10 +1,8 @@
 package forge.deck;
 
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.HashSet;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
 
 import forge.Forge;
 import forge.assets.FImage;
@@ -19,7 +17,6 @@ import forge.menu.FPopupMenu;
 import forge.screens.FScreen;
 import forge.screens.match.MatchController;
 import forge.toolbox.FOptionPane;
-import forge.util.StreamUtil;
 
 public class FDeckViewer extends FScreen {
     private static FDeckViewer deckViewer;
@@ -47,29 +44,7 @@ public class FDeckViewer extends FScreen {
     };
 
     public static void copyDeckToClipboard(Deck deck) {
-        final String nl = System.lineSeparator();
-        final StringBuilder deckList = new StringBuilder();
-        String dName = deck.getName();
-        //fix copying a commander netdeck then importing it again...
-        if (dName.startsWith("[Commander")||dName.contains("Commander"))
-            dName = "";
-        deckList.append(dName == null ? "" : "Deck: "+dName + nl + nl);
-
-        for (DeckSection s : DeckSection.values()) {
-            CardPool cp = deck.get(s);
-            if (cp == null || cp.isEmpty()) {
-                continue;
-            }
-            deckList.append(s.toString()).append(": ");
-            deckList.append(nl);
-
-            for (final Entry<String, Integer> ev: StreamUtil.stream(cp).collect(Collectors.groupingBy(ev -> ev.getKey().getCardName(), TreeMap::new, Collectors.summingInt(ev -> ev.getValue()))).entrySet()) {
-                deckList.append(ev.getValue()).append(" ").append(ev.getKey()).append(nl);
-            }
-            deckList.append(nl);
-        }
-
-        Forge.getClipboard().setContents(deckList.toString());
+        Forge.getClipboard().setContents(deck.generateTextExport());
         FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblDeckListCopiedClipboard", deck.getName()));
     }
 
