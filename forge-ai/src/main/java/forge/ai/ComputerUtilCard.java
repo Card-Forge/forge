@@ -755,8 +755,8 @@ public class ComputerUtilCard {
             return "";
         }
 
-        return list.stream().map(Card::getName)
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+        return list.stream()
+                .collect(Collectors.groupingBy(Card::getName, Collectors.counting()))
                 .entrySet().stream().max(Entry.comparingByValue()).orElse(Map.entry("", 0l)).getKey();
     }
 
