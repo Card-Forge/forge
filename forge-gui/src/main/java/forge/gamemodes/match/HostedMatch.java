@@ -87,7 +87,7 @@ public class HostedMatch {
         gameRules.setOrderCombatants(FModel.getPreferences().getPrefBoolean(FPref.LEGACY_ORDER_COMBATANTS));
         gameRules.setUseGrayText(FModel.getPreferences().getPrefBoolean(FPref.UI_GRAY_INACTIVE_TEXT));
         gameRules.setGamesPerMatch(FModel.getPreferences().getPrefInt(FPref.UI_MATCHES_PER_GAME));
-        // AI specific sideboarding rules
+        gameRules.setAllowCheatShuffle(FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_AI_CHEATS));
         switch (AiProfileUtil.getAISideboardingMode()) {
             case Off:
                 gameRules.setAISideboardingEnabled(false);
