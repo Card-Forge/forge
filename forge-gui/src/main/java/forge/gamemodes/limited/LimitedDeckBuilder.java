@@ -669,13 +669,12 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
     private void addManaCurveCreatures(final Iterable<PaperCard> creatures, int num) {
 
         final Map<Integer, Long> creatureCosts = deckList.stream().filter(PaperCardPredicates.IS_CREATURE)
-            .map(c -> Ints.constrainToRange(c.getRules().getManaCost().getCMC(), 1, 6))
-            .collect(Collectors.groupingBy(i -> i, Collectors.counting()));
+            .collect(Collectors.groupingBy(c -> Ints.constrainToRange(c.getRules().getManaCost().getCMC(), 1, 6), Collectors.counting()));
 
         List<PaperCard> creaturesToAdd = new ArrayList<>();
         for (final PaperCard card : creatures) {
             int cmc = Ints.constrainToRange(card.getRules().getManaCost().getCMC(), 1, 6);
-            if (creatureCosts.get(cmc) < targetCMCs.get(cmc)) {
+            if (creatureCosts.getOrDefault(cmc, 0l) < targetCMCs.get(cmc)) {
                 creaturesToAdd.add(card);
                 num--;
                 creatureCosts.merge(cmc, 1l, Long::sum);
