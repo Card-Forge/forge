@@ -281,7 +281,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
                 } catch (Exception e) {
                     netLog.error("[DeltaSync] Error applying delta to object ID={} type={} (deltaKey={})",
                             actualObjectId, objectType, String.format("0x%08X", deltaKey));
-                    netLog.error("[DeltaSync] Exception details:", e);
+                    netLog.error(e, "[DeltaSync] Exception details:");
                     skippedCount++;
                 }
             } else {
@@ -718,11 +718,9 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
                     int cardCount = 0;
                     for (PlayerView player : newGameView.getPlayers()) {
                         playerCount++;
-                        cardCount += countCards(player.getHand());
-                        cardCount += countCards(player.getGraveyard());
-                        cardCount += countCards(player.getLibrary());
-                        cardCount += countCards(player.getExile());
-                        cardCount += countCards(player.getBattlefield());
+                        for (ZoneType zone : new ZoneType[]{ZoneType.Hand, ZoneType.Graveyard, ZoneType.Library, ZoneType.Exile, ZoneType.Battlefield}) {
+                            cardCount += player.getZoneSize(zone);
+                        }
                     }
                     netLog.info("After updateObjLookup: {} players, ~{} cards found in zones",
                             playerCount, cardCount);
@@ -738,13 +736,5 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
         }
     }
 
-    private int countCards(Iterable<CardView> cards) {
-        if (cards == null) return 0;
-        int count = 0;
-        for (CardView c : cards) {
-            if (c != null) count++;
-        }
-        return count;
-    }
 
 }

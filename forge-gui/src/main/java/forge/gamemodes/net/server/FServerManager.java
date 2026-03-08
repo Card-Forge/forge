@@ -153,7 +153,7 @@ public final class FServerManager implements IHasNetLog {
                 try {
                     ch.sync();
                 } catch (final InterruptedException e) {
-                    netLog.error("Server channel error", e);
+                    netLog.error(e, "Server channel error");
                 } finally {
                     stopServer();
                 }
@@ -164,7 +164,7 @@ public final class FServerManager implements IHasNetLog {
             Runtime.getRuntime().addShutdownHook(shutdownHook);
             isHosting = true;
         } catch (final InterruptedException e) {
-            netLog.error("Server start interrupted", e);
+            netLog.error(e, "Server start interrupted");
         }
     }
 
@@ -390,7 +390,7 @@ public final class FServerManager implements IHasNetLog {
         try {
             return getRoutableAddress(true, false);
         } catch (final Exception e) {
-            netLog.error("Failed to get local address", e);
+            netLog.error(e, "Failed to get local address");
             return "localhost";
         }
     }
@@ -403,13 +403,13 @@ public final class FServerManager implements IHasNetLog {
                     whatismyip.openStream()));
             return in.readLine();
         } catch (IOException e) {
-            netLog.error("Failed to get external address", e);
+            netLog.error(e, "Failed to get external address");
         } finally {
             if (in != null) {
                 try {
                     in.close();
                 } catch (IOException e) {
-                    netLog.error("Failed to close address reader", e);
+                    netLog.error(e, "Failed to close address reader");
                 }
             }
         }
@@ -445,7 +445,7 @@ public final class FServerManager implements IHasNetLog {
                 }
             }, 5000);
         } catch (Exception e) {
-            netLog.error("UPnP mapping error", e);
+            netLog.error(e, "UPnP mapping error");
         }
     }
 

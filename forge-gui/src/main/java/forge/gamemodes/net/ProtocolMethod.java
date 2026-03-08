@@ -174,7 +174,7 @@ public enum ProtocolMethod implements IHasNetLog {
                 }
             }
         } catch (Exception e) {
-            netLog.error("Protocol checkArgs exception", e);
+            netLog.error(e, "Error checking args for protocol method {}", name());
         }
     }
 

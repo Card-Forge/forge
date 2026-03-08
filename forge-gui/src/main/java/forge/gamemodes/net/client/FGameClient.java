@@ -84,13 +84,13 @@ public class FGameClient implements IToServer, IHasNetLog {
                 try {
                     ch.sync();
                 } catch (final InterruptedException e) {
-                    netLog.error("Client channel interrupted", e);
+                    netLog.error(e, "Client channel interrupted");
                 } finally {
                     group.shutdownGracefully();
                 }
             }).start();
         } catch (final InterruptedException e) {
-            netLog.error("Client connect interrupted", e);
+            netLog.error(e, "Client connect interrupted");
         }
     }
 

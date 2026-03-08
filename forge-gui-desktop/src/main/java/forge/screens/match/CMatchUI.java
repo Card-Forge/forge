@@ -290,11 +290,12 @@ public final class CMatchUI
         this.sortedPlayers = sortedPlayers;
         allHands = sortedPlayers.size() == getLocalPlayerCount();
 
-        // Debug logging for network play
-        netLog.debug("sortedPlayers count={}", sortedPlayers.size());
-        for (PlayerView p : sortedPlayers) {
-            netLog.debug("  Player ID={}, hash={}, isLocal={}",
-                    p.getId(), System.identityHashCode(p), (myPlayers != null && myPlayers.contains(p)));
+        if (isNetGame()) {
+            netLog.debug("sortedPlayers count={}", sortedPlayers.size());
+            for (PlayerView p : sortedPlayers) {
+                netLog.debug("  Player ID={}, hash={}, isLocal={}",
+                        p.getId(), System.identityHashCode(p), (myPlayers != null && myPlayers.contains(p)));
+            }
         }
 
         final String[] indices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
@@ -439,9 +440,10 @@ public final class CMatchUI
         for (final PlayerZoneUpdate update : zonesToUpdate) {
             final PlayerView owner = update.getPlayer();
 
-            // Debug logging
-            netLog.debug("Processing update for player {}, zones={}, ownerHash={}",
-                    owner.getId(), update.getZones(), System.identityHashCode(owner));
+            if (isNetGame()) {
+                netLog.debug("Processing update for player {}, zones={}, ownerHash={}",
+                        owner.getId(), update.getZones(), System.identityHashCode(owner));
+            }
 
             boolean setupPlayZone = false, updateHand = false, updateAnte = false, updateZones = false;
             for (final ZoneType zone : update.getZones()) {
@@ -469,7 +471,7 @@ public final class CMatchUI
             }
             final VField vField = getFieldViewFor(owner);
             if(vField == null) {
-                netLog.error("ERROR: vField is null for player {}, sortedPlayers.indexOf={}",
+                netLog.error("vField is null for player {}, sortedPlayers.indexOf={}",
                         owner.getId(), sortedPlayers.indexOf(owner));
                 return;
             }
@@ -478,9 +480,11 @@ public final class CMatchUI
             }
             if (updateHand) {
                 final VHand vHand = getHandFor(owner);
-                netLog.debug("updateHand for player {}, vHand={}, handSize={}",
-                        owner.getId(), (vHand != null ? "exists" : "NULL"),
-                        (owner.getHand() != null ? String.valueOf(owner.getHand().size()) : "null"));
+                if (isNetGame()) {
+                    netLog.debug("updateHand for player {}, vHand={}, handSize={}",
+                            owner.getId(), (vHand != null ? "exists" : "NULL"),
+                            (owner.getHand() != null ? String.valueOf(owner.getHand().size()) : "null"));
+                }
                 if (vHand != null) {
                     vHand.getLayoutControl().updateHand();
                 }
@@ -1054,23 +1058,24 @@ public final class CMatchUI
 
     @Override
     public void openView(final TrackableCollection<PlayerView> myPlayers) {
-        netLog.info("Called");
         final GameView gameView = getGameView();
         gameView.getGameLog().addObserver(cLog);
 
         // Sort players
         FCollectionView<PlayerView> players = gameView.getPlayers();
 
-        // Debug: Log PlayerView instances from gameView
-        netLog.debug("gameView.getPlayers() count={}", players.size());
-        for (PlayerView pv : players) {
-            Tracker t = pv.getTracker();
-            PlayerView inTracker = t != null ? t.getObj(TrackableTypes.PlayerViewType, pv.getId()) : null;
-            netLog.debug("  Player {}: hash={}, tracker={}, inTracker={}, sameInstance={}",
-                    pv.getId(), System.identityHashCode(pv),
-                    t != null ? "exists" : "null",
-                    inTracker != null,
-                    pv == inTracker);
+        if (isNetGame()) {
+            netLog.info("openView called");
+            netLog.debug("gameView.getPlayers() count={}", players.size());
+            for (PlayerView pv : players) {
+                Tracker t = pv.getTracker();
+                PlayerView inTracker = t != null ? t.getObj(TrackableTypes.PlayerViewType, pv.getId()) : null;
+                netLog.debug("  Player {}: hash={}, tracker={}, inTracker={}, sameInstance={}",
+                        pv.getId(), System.identityHashCode(pv),
+                        t != null ? "exists" : "null",
+                        inTracker != null,
+                        pv == inTracker);
+            }
         }
 
         if (players.size() == 2 && myPlayers != null && myPlayers.size() == 1 && myPlayers.get(0).equals(players.get(1))) {
