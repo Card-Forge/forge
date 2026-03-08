@@ -43,10 +43,6 @@ public class DeltaSyncManager implements IHasNetLog {
     // How often to include a checksum for validation (every N packets)
     private static final int CHECKSUM_INTERVAL = 20;
 
-    // Recursion safety limits to prevent stack overflow
-    private static final int MAX_ATTACHMENT_DEPTH = 20;
-    private static final int MAX_COLLECTION_SIZE = 1000;
-
     // Sentinel for properties that should be skipped in network transport
     static final Object SKIP_MARKER = new Object();
 
@@ -140,11 +136,11 @@ public class DeltaSyncManager implements IHasNetLog {
                 collectObjectDelta(stackItem, objectDeltas, newObjects, currentObjectIds);
                 CardView sourceCard = stackItem.getSourceCard();
                 if (sourceCard != null) {
-                    collectCardDelta(sourceCard, objectDeltas, newObjects, currentObjectIds, 0);
+                    collectCardDelta(sourceCard, objectDeltas, newObjects, currentObjectIds);
                 }
                 if (stackItem.getTargetCards() != null) {
                     for (CardView target : stackItem.getTargetCards()) {
-                        collectCardDelta(target, objectDeltas, newObjects, currentObjectIds, 0);
+                        collectCardDelta(target, objectDeltas, newObjects, currentObjectIds);
                     }
                 }
             }
@@ -178,7 +174,7 @@ public class DeltaSyncManager implements IHasNetLog {
         long seq = sequenceNumber.incrementAndGet();
 
         DeltaPacket packet = new DeltaPacket(seq, objectDeltas, newObjects,
-                new HashSet<>(removedObjectIds), checksum, includeChecksum);
+                removedObjectIds, checksum, includeChecksum);
 
         if (!newObjects.isEmpty()) {
             netLog.info("[DeltaSync] New objects: {}, Deltas: {}, Removed: {}",
@@ -286,14 +282,8 @@ public class DeltaSyncManager implements IHasNetLog {
                 collectCardsFromZone(zone, objectDeltas, newObjects, currentObjectIds));
 
         if (player.getBattlefield() != null) {
-            int battlefieldCount = 0;
             for (CardView card : player.getBattlefield()) {
-                if (battlefieldCount++ >= MAX_COLLECTION_SIZE) {
-                    netLog.warn("[DeltaSync] Max collection size ({}) exceeded on battlefield for player {}",
-                        MAX_COLLECTION_SIZE, player.getId());
-                    break;
-                }
-                collectCardDelta(card, objectDeltas, newObjects, currentObjectIds, 0);
+                collectCardDelta(card, objectDeltas, newObjects, currentObjectIds);
             }
         }
     }
@@ -305,41 +295,30 @@ public class DeltaSyncManager implements IHasNetLog {
         if (cards == null) {
             return;
         }
-        int cardCount = 0;
         for (CardView card : cards) {
-            if (cardCount++ >= MAX_COLLECTION_SIZE) {
-                netLog.warn("[DeltaSync] Max collection size ({}) exceeded in zone, skipping remaining cards",
-                    MAX_COLLECTION_SIZE);
-                break;
-            }
-            collectCardDelta(card, objectDeltas, newObjects, currentObjectIds, 0);
+            collectCardDelta(card, objectDeltas, newObjects, currentObjectIds);
         }
     }
 
     private void collectCardDelta(CardView card,
                                   Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
                                   Map<Integer, NewObjectData> newObjects,
-                                  Set<Integer> currentObjectIds, int depth) {
+                                  Set<Integer> currentObjectIds) {
         if (card == null) {
             return;
         }
-        if (depth > MAX_ATTACHMENT_DEPTH) {
-            netLog.warn("[DeltaSync] Max attachment depth ({}) reached for card {}",
-                MAX_ATTACHMENT_DEPTH, card.getId());
+
+        // Skip cards already visited to prevent circular-reference recursion
+        int deltaKey = makeDeltaKey(DeltaPacket.TYPE_CARD_VIEW, card.getId());
+        if (currentObjectIds.contains(deltaKey)) {
             return;
         }
 
         collectObjectDelta(card, objectDeltas, newObjects, currentObjectIds);
 
         if (card.getAttachedCards() != null) {
-            int attachmentCount = 0;
             for (CardView attached : card.getAttachedCards()) {
-                if (attachmentCount++ >= MAX_COLLECTION_SIZE) {
-                    netLog.warn("[DeltaSync] Max collection size ({}) exceeded for attached cards on card {}",
-                        MAX_COLLECTION_SIZE, card.getId());
-                    break;
-                }
-                collectCardDelta(attached, objectDeltas, newObjects, currentObjectIds, depth + 1);
+                collectCardDelta(attached, objectDeltas, newObjects, currentObjectIds);
             }
         }
     }
