@@ -305,15 +305,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         SHORTCUT_PANELTABS("17 84"),
         SHORTCUT_CARDOVERLAYS("17 79"),
 
-        LAST_IMPORTED_CUBE_ID(""),
-
-        // Network debug preferences (previously in separate network.preferences file)
-        NET_BANDWIDTH_LOGGING ("false"),
-        NET_DEBUG_LOGGER_ENABLED ("true"),
-        NET_CONSOLE_LOG_LEVEL ("INFO"),
-        NET_FILE_LOG_LEVEL ("DEBUG"),
-        NET_MAX_LOG_FILES ("10"),
-        NET_LOG_CLEANUP_ENABLED ("true");
+        LAST_IMPORTED_CUBE_ID("");
 
         private final String strDefaultVal;
 

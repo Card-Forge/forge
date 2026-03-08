@@ -1,7 +1,7 @@
 package forge.gamemodes.net;
 
 import forge.localinstance.properties.ForgeConstants;
-import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.localinstance.properties.ForgeNetPreferences.FNetPref;
 import forge.model.FModel;
 import org.tinylog.Logger;
 import org.tinylog.TaggedLogger;
@@ -286,13 +286,13 @@ public final class NetworkLogConfig {
      */
     private static void cleanupOldLogs() {
         try {
-            if (FModel.getPreferences() == null) {
+            if (FModel.getNetPreferences() == null) {
                 return;
             }
-            if (!FModel.getPreferences().getPrefBoolean(FPref.NET_LOG_CLEANUP_ENABLED)) {
+            if (!FModel.getNetPreferences().getPrefBoolean(FNetPref.NET_LOG_CLEANUP_ENABLED)) {
                 return;
             }
-            int maxFiles = FModel.getPreferences().getPrefInt(FPref.NET_MAX_LOG_FILES);
+            int maxFiles = FModel.getNetPreferences().getPrefInt(FNetPref.NET_MAX_LOG_FILES);
             if (maxFiles <= 0) {
                 return;
             }

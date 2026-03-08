@@ -48,7 +48,7 @@ public final class TestUtils {
         // Always ensure runtime test preferences regardless of initialization order —
         // another test class may have initialized FModel before us
         FModel.getPreferences().setPref(FPref.ENFORCE_DECK_LEGALITY, false);
-        FModel.getPreferences().setPref(FPref.NET_BANDWIDTH_LOGGING, true);
+        FModel.getNetPreferences().setPref(ForgeNetPreferences.FNetPref.NET_BANDWIDTH_LOGGING, true);
         FModel.getNetPreferences().setPref(ForgeNetPreferences.FNetPref.UPnP, "NEVER");
     }
 }
