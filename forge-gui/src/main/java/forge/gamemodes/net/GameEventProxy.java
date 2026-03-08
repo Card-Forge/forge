@@ -7,7 +7,6 @@ import forge.trackable.TrackableObject;
 import forge.trackable.TrackableTypes;
 import forge.trackable.TrackableTypes.TrackableType;
 import forge.trackable.Tracker;
-import org.tinylog.Logger;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ import java.util.List;
  * <p>This avoids Java serialization expanding TrackableObject references into
  * the full game state object graph when events are sent over the network.
  */
-public class GameEventProxy implements Serializable {
+public class GameEventProxy implements Serializable, IHasNetLog {
     private static final long serialVersionUID = 1L;
 
     private final byte[] eventData;
@@ -64,7 +63,7 @@ public class GameEventProxy implements Serializable {
             try {
                 result.add(wrap(event));
             } catch (IOException e) {
-                Logger.warn("Failed to wrap {}, sending as-is: {}",
+                netLog.warn("Failed to wrap {}, sending as-is: {}",
                         event.getClass().getSimpleName(), e.getMessage());
                 result.add(event);
             }
@@ -83,7 +82,7 @@ public class GameEventProxy implements Serializable {
                 try {
                     result.add(proxy.unwrap(tracker));
                 } catch (IOException | ClassNotFoundException e) {
-                    Logger.warn("Failed to unwrap GameEventProxy: {}", e.getMessage());
+                    netLog.warn("Failed to unwrap GameEventProxy: {}", e.getMessage());
                 }
             } else if (item instanceof GameEvent event) {
                 result.add(event);
@@ -177,7 +176,7 @@ public class GameEventProxy implements Serializable {
                 if (type != null) {
                     Object resolved = tracker.getObj(type, ref.id);
                     if (resolved == null) {
-                        Logger.debug("Could not resolve {} id={} from Tracker",
+                        netLog.debug("Could not resolve {} id={} from Tracker",
                                 type.getClass().getSimpleName(), ref.id);
                     }
                     return resolved;
