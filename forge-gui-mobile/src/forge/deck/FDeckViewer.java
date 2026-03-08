@@ -1,8 +1,11 @@
 package forge.deck;
 
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.HashSet;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
+
 import forge.Forge;
 import forge.assets.FImage;
 import forge.assets.FSkinImage;
@@ -16,6 +19,7 @@ import forge.menu.FPopupMenu;
 import forge.screens.FScreen;
 import forge.screens.match.MatchController;
 import forge.toolbox.FOptionPane;
+import forge.util.StreamUtil;
 
 public class FDeckViewer extends FScreen {
     private static FDeckViewer deckViewer;
@@ -58,12 +62,9 @@ public class FDeckViewer extends FScreen {
             }
             deckList.append(s.toString()).append(": ");
             deckList.append(nl);
-            Set<String> accounted = new HashSet<>();
-            for (final PaperCard ev : cp.toFlatList()) {
-                if (!accounted.contains(ev.getCardName())) {
-                    deckList.append(cp.countByName(ev.getCardName())).append(" ").append(ev.getCardName()).append(nl); //search for all  instances of that name in the list.
-                    accounted.add(ev.getCardName()); //add the name to the list so it ignores the next time it appears
-                }
+
+            for (final Entry<String, Integer> ev: StreamUtil.stream(cp).collect(Collectors.groupingBy(ev -> ev.getKey().getCardName(), TreeMap::new, Collectors.summingInt(ev -> ev.getValue()))).entrySet()) {
+                deckList.append(ev.getValue()).append(" ").append(ev.getKey()).append(nl);
             }
             deckList.append(nl);
         }

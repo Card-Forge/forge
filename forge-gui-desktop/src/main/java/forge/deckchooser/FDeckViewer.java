@@ -18,6 +18,7 @@ import forge.model.FModel;
 import forge.toolbox.FButton;
 import forge.toolbox.FOptionPane;
 import forge.util.Localizer;
+import forge.util.StreamUtil;
 import forge.view.FDialog;
 import net.miginfocom.swing.MigLayout;
 
@@ -27,8 +28,8 @@ import java.awt.datatransfer.StringSelection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 @SuppressWarnings("serial")
 public class FDeckViewer extends FDialog {
@@ -154,8 +155,6 @@ public class FDeckViewer extends FDialog {
         //fix copying a commander netdeck then importing it again...
         if (dName.startsWith("[Commander")||dName.contains("Commander"))
             dName = "";
-        String cardName;
-        SortedMap<String, Integer> sectionCards;
         deckList.append(dName == null ? "" : "Deck: "+dName + nl + nl);
 
         for (DeckSection s : DeckSection.values()){
@@ -164,18 +163,9 @@ public class FDeckViewer extends FDialog {
                 continue;
             }
             deckList.append(s.toString()).append(": ");
-            sectionCards = new TreeMap<>();
             deckList.append(nl);
-            for (final Entry<PaperCard, Integer> ev : cp) {
-                cardName = ev.getKey().getCardName();
-                if (sectionCards.containsKey(cardName)) {
-                    sectionCards.put(cardName, (int)sectionCards.get(cardName) + ev.getValue());
-                }
-                else {
-                    sectionCards.put(cardName, ev.getValue());
-                }
-            }
-            for (final Entry<String, Integer> ev: sectionCards.entrySet()) {
+
+            for (final Entry<String, Integer> ev: StreamUtil.stream(cp).collect(Collectors.groupingBy(ev -> ev.getKey().getCardName(), TreeMap::new, Collectors.summingInt(ev -> ev.getValue()))).entrySet()) {
                 deckList.append(ev.getValue()).append(" ").append(ev.getKey()).append(nl);
             }
             deckList.append(nl);

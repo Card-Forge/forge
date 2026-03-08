@@ -714,11 +714,7 @@ public class ReplacementHandler {
                 for (Map<AbilityKey, Object> runParams : runParamList) {
                     GameEntity target = (GameEntity) runParams.get(AbilityKey.Affected);
                     Integer damage = (Integer) runParams.get(AbilityKey.DamageAmount);
-                    if (!affected.containsKey(target)) {
-                        affected.put(target, damage);
-                    } else {
-                        affected.put(target, damage + affected.get(target));
-                    }
+                    affected.merge(target, damage, Integer::sum);
                 }
                 shieldMap = decider.getController().divideShield(chosenRE.getHostCard(), affected, shieldAmount);
             }

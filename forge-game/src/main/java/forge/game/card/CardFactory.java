@@ -113,7 +113,7 @@ public class CardFactory {
         if (sourceSA.hasParam("RememberNewCard")) {
             source.addRemembered(copy);
         }
-        
+
         return copy;
     }
 
@@ -703,7 +703,7 @@ public class CardFactory {
                         " ", "_").toLowerCase();
                 state.setImageKey(StaticData.instance().getOtherImageKey(name, host.getSetCode()));
             }
-            
+
             if (cause.hasParam("GainTextOf") && originalState != null) {
                 state.setSetCode(originalState.getSetCode());
                 state.setRarity(originalState.getRarity());

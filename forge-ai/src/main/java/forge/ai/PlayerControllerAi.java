@@ -238,11 +238,7 @@ public class PlayerControllerAi extends PlayerController {
         Map<Byte, Integer> result = new HashMap<>();
         for (int i = 0; i < manaAmount; ++i) {
             Byte chosen = chooseColor("", sa, colorSet);
-            if (result.containsKey(chosen)) {
-                result.put(chosen, result.get(chosen) + 1);
-            } else {
-                result.put(chosen, 1);
-            }
+            result.merge(chosen, 1, Integer::sum);
             if (different) {
                 colorSet = ColorSet.fromMask(colorSet.getColor() - chosen);
             }

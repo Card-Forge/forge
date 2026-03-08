@@ -1333,8 +1333,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
 
             for (String type : c.getType().getCreatureTypes()) {
-                Integer count = typesInDeck.getOrDefault(type, 0);
-                typesInDeck.put(type, count + 1);
+                typesInDeck.merge(type, 1, Integer::sum);
             }
             // also take into account abilities that generate tokens
             for (SpellAbility sa : c.getAllSpellAbilities()) {
@@ -1346,8 +1345,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     for (String token : sa.getParam("TokenScript").split(",")) {
                         Card protoType = TokenInfo.getProtoType(token, sa, null);
                         for (String type : protoType.getType().getCreatureTypes()) {
-                            Integer count = typesInDeck.getOrDefault(type, 0);
-                            typesInDeck.put(type, count + 1);
+                            typesInDeck.merge(type, 1, Integer::sum);
                         }
                     }
                 }
@@ -1362,7 +1360,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                             Card protoType = TokenInfo.getProtoType(token, sa, null);
                             for (String type : protoType.getType().getCreatureTypes()) {
                                 Integer count = typesInDeck.getOrDefault(type, 0);
-                                typesInDeck.put(type, count + 1);
+                                typesInDeck.merge(type, 1, Integer::sum);
                             }
                         }
                     }
@@ -1370,8 +1368,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
             // special rule for Fabricate and Servo
             if (c.hasKeyword(Keyword.FABRICATE)) {
-                Integer count = typesInDeck.getOrDefault("Servo", 0);
-                typesInDeck.put("Servo", count + 1);
+                typesInDeck.merge("Servo", 1, Integer::sum);
             }
         }
 
