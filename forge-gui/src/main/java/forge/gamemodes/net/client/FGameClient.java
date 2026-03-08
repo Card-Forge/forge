@@ -162,8 +162,7 @@ public class FGameClient implements IToServer {
     private class MessageHandler extends ChannelInboundHandlerAdapter {
         @Override
         public void channelRead(final ChannelHandlerContext ctx, final Object msg) throws Exception {
-            if (msg instanceof MessageEvent) {
-                final MessageEvent event = (MessageEvent) msg;
+            if (msg instanceof MessageEvent event) {
                 for (final ILobbyListener listener : lobbyListeners) {
                     listener.message(event.getSource(), event.getMessage());
                 }
@@ -175,9 +174,8 @@ public class FGameClient implements IToServer {
     private class LobbyUpdateHandler extends ChannelInboundHandlerAdapter {
         @Override
         public void channelRead(final ChannelHandlerContext ctx, final Object msg) throws Exception {
-            if (msg instanceof LobbyUpdateEvent) {
+            if (msg instanceof LobbyUpdateEvent event) {
                 for (final ILobbyListener listener : lobbyListeners) {
-                    final LobbyUpdateEvent event = (LobbyUpdateEvent) msg;
                     listener.update(event.getState(), event.getSlot());
                 }
             }
@@ -186,7 +184,7 @@ public class FGameClient implements IToServer {
 
         @Override
         public void userEventTriggered(final ChannelHandlerContext ctx, final Object evt) throws Exception {
-            if (evt instanceof IdleStateEvent && ((IdleStateEvent) evt).state() == IdleState.WRITER_IDLE) {
+            if (evt instanceof IdleStateEvent ise && ise.state() == IdleState.WRITER_IDLE) {
                 ctx.writeAndFlush(new HeartbeatEvent());
             }
             super.userEventTriggered(ctx, evt);
