@@ -8,19 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameEventForwarder {
-    private static final long DEFAULT_FLUSH_INTERVAL_NS = 50_000_000L; // 50ms
+    private static final long FLUSH_INTERVAL_NS = 500_000_000L; // 500ms
     private static final int FLUSH_SIZE_THRESHOLD = 50;
 
     private final IGuiGame gui;
-    private final long flushIntervalNs;
     private final List<GameEvent> pendingEvents = new ArrayList<>();
     private long lastFlushTime = System.nanoTime();
 
-    public GameEventForwarder(IGuiGame gui) { this(gui, DEFAULT_FLUSH_INTERVAL_NS); }
-
-    public GameEventForwarder(IGuiGame gui, long flushIntervalNs) {
+    public GameEventForwarder(IGuiGame gui) {
         this.gui = gui;
-        this.flushIntervalNs = flushIntervalNs;
     }
 
     @Subscribe
@@ -29,7 +25,7 @@ public class GameEventForwarder {
             pendingEvents.add(ev);
         }
         long now = System.nanoTime();
-        boolean timeThreshold = (now - lastFlushTime) >= flushIntervalNs;
+        boolean timeThreshold = (now - lastFlushTime) >= FLUSH_INTERVAL_NS;
         boolean sizeThreshold;
         synchronized (pendingEvents) {
             sizeThreshold = pendingEvents.size() >= FLUSH_SIZE_THRESHOLD;
