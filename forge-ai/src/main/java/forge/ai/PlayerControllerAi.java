@@ -73,7 +73,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     public void setupAutoProfile(Deck deck) {
-        pilotsNonAggroDeck = deck.getName().contains("Control") || Deck.getAverageCMC(deck) > 3;
+        pilotsNonAggroDeck = deck.getName().contains("Control") || deck.getAverageCMC() > 3;
     }
 
     public void setUseSimulation(boolean value) {

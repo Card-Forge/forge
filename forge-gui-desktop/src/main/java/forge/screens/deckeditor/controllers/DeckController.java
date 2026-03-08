@@ -32,7 +32,6 @@ import forge.util.storage.IStorage;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Date;
-import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
@@ -113,7 +112,7 @@ public class DeckController<T extends DeckBase> {
 
         // not the same as before
         Deck currentDeck = view.getHumanDeck();
-        for (DeckSection section: EnumSet.allOf(DeckSection.class)) {
+        for (DeckSection section: DeckSection.values()) {
             if (view.isSectionImportable(section)) {
                 CardPool sectionCards = currentDeck.getOrCreate(section);
                 if (!isInfinite) {
@@ -141,7 +140,7 @@ public class DeckController<T extends DeckBase> {
         CardEdition referenceEdition = StaticData.instance().getEditions().getTheLatestOfAllTheOriginalEditionsOfCardsIn(catalog);
         Date referenceReleaseDate = referenceEdition.getDate();
         Deck result = new Deck();
-        for (DeckSection section: EnumSet.allOf(DeckSection.class)) {
+        for (DeckSection section: DeckSection.values()) {
             if (view.isSectionImportable(section)) {
                 CardPool cards = pickSectionFromCatalog(catalog, deck.getOrCreate(section), referenceReleaseDate);
                 result.putSection(section, cards);
@@ -199,21 +198,8 @@ public class DeckController<T extends DeckBase> {
 
     private HashMap<String, PaperCard> getBasicLandsByName(CardPool sourceSection) {
         HashMap<String, PaperCard> result = new HashMap<>();
-
-        for (Map.Entry<PaperCard, Integer> entry : sourceSection) {
-            PaperCard card = entry.getKey();
-
-            if (!card.getRules().getType().isBasicLand()) {
-                continue;
-            }
-
-            if (result.containsKey(card.getName())) {
-                continue;
-            }
-
-            result.put(card.getName(), card);
-        }
-
+        StreamUtil.stream(sourceSection).filter(pc -> pc.getKey().getRules().getType().isBasicLand())
+                .forEach(pc -> result.putIfAbsent(pc.getKey().getName(), pc.getKey()));
         return result;
     }
 
