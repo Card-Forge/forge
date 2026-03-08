@@ -1,5 +1,7 @@
 package forge.gamemodes.match.input;
 
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
 import forge.gui.FThreads;
 import forge.gui.error.BugReporter;
 import forge.player.PlayerControllerHuman;
@@ -7,6 +9,8 @@ import forge.player.PlayerControllerHuman;
 import java.util.concurrent.CountDownLatch;
 
 public abstract class InputSyncronizedBase extends InputBase implements InputSynchronized {
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+
     private static final long serialVersionUID = 8756177361251703052L;
     private final CountDownLatch cdlDone;
 
@@ -18,11 +22,13 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
     @Override
     public void awaitLatchRelease() {
         FThreads.assertExecutedByEdt(false);
+        netLog.trace("awaitLatchRelease() starting on {}, thread = {}", this.getClass().getSimpleName(), Thread.currentThread().getName());
         try {
             cdlDone.await();
         } catch (final InterruptedException e) {
             BugReporter.reportException(e);
         }
+        netLog.trace("awaitLatchRelease() UNBLOCKED on {}, thread = {}", this.getClass().getSimpleName(), Thread.currentThread().getName());
     }
 
     @Override
@@ -37,6 +43,7 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
 
     @Override
     public final void stop() {
+        netLog.trace("stop() called on {}, latch count before = {}", this.getClass().getSimpleName(), cdlDone.getCount());
         onStop();
 
         // ensure input won't accept any user actions.
@@ -47,6 +54,7 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
             getController().getInputQueue().removeInput(InputSyncronizedBase.this);
         }
         cdlDone.countDown();
+        netLog.trace("stop() done, latch count after = {}", cdlDone.getCount());
     }
 
     protected void onStop() { }

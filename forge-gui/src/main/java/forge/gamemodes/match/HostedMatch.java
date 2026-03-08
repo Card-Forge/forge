@@ -18,6 +18,8 @@ import forge.game.event.IGameEventVisitor;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
+import forge.gamemodes.net.NetworkGameEventListener;
+import forge.gamemodes.net.server.FServerManager;
 import forge.gamemodes.quest.QuestController;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -186,6 +188,12 @@ public class HostedMatch {
         // so it doesn't need a direct event bus subscription here.
         // (It still subscribes to the Match bus for UiEvent sounds like blocker assignment.)
 
+        // Subscribe network game event listener for network play
+        // This logs game actions to NetworkLogConfig for debugging network games
+        if (FServerManager.getInstance().isHosting()) {
+            game.subscribeToEvents(new NetworkGameEventListener());
+        }
+
         final FCollectionView<Player> players = game.getPlayers();
         final String[] avatarIndices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
         final String[] sleeveIndices = FModel.getPreferences().getPref(FPref.UI_SLEEVES).split(",");
@@ -329,6 +337,9 @@ public class HostedMatch {
 
     public Game getGame() {
         return game;
+    }
+    public Match getMatch() {
+        return match;
     }
     public GameView getGameView() {
         return game == null ? null : game.getView();

@@ -5,8 +5,9 @@ import forge.game.player.PlayerView;
 import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.CompatibleObjectEncoder;
 import forge.gamemodes.net.ReplyPool;
-import forge.gamemodes.net.event.*;
 import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
+import forge.gamemodes.net.event.*;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.ILobbyListener;
 import io.netty.bootstrap.Bootstrap;
@@ -24,19 +25,31 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 public class FGameClient implements IToServer {
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+
     static final int HEARTBEAT_INTERVAL_SECONDS = Integer.getInteger("forge.net.heartbeatInterval", 15);
     private final IGuiGame clientGui;
     private final String hostname;
     private final Integer port;
+    private final String username;
     private final List<ILobbyListener> lobbyListeners = Lists.newArrayList();
     private final ReplyPool replies = new ReplyPool();
     private volatile boolean disconnectSimulated;
     private Channel channel;
 
     public FGameClient(String username, String roomKey, IGuiGame clientGui, String hostname, int port) {
+        this.username = username;
         this.clientGui = clientGui;
         this.hostname = hostname;
         this.port = port;
+    }
+
+    /**
+     * Get the username for this client.
+     * @return the username
+     */
+    public String getUsername() {
+        return username;
     }
 
     final IGuiGame getGui() {
@@ -57,7 +70,7 @@ public class FGameClient implements IToServer {
                 public void initChannel(final SocketChannel ch) throws Exception {
                     final ChannelPipeline pipeline = ch.pipeline();
                     pipeline.addLast(
-                            new CompatibleObjectEncoder(),
+                            new CompatibleObjectEncoder(null), // Client doesn't need byte tracking
                             new CompatibleObjectDecoder(9766*1024, ClassResolvers.cacheDisabled(null)),
                             new IdleStateHandler(0, HEARTBEAT_INTERVAL_SECONDS, 0, TimeUnit.SECONDS),
                             new MessageHandler(),
@@ -73,13 +86,13 @@ public class FGameClient implements IToServer {
                 try {
                     ch.sync();
                 } catch (final InterruptedException e) {
-                    Logger.error(e, "Client channel interrupted");
+                    netLog.error("Client channel interrupted", e);
                 } finally {
                     group.shutdownGracefully();
                 }
             }).start();
         } catch (final InterruptedException e) {
-            Logger.error(e, "Client connect interrupted");
+            netLog.error("Client connect interrupted", e);
         }
     }
 
@@ -93,7 +106,7 @@ public class FGameClient implements IToServer {
         if (disconnectSimulated) {
             return;
         }
-        Logger.info("Client sent {}", event);
+        netLog.info("Client sent {}", event);
         channel.writeAndFlush(event);
     }
 
@@ -103,7 +116,7 @@ public class FGameClient implements IToServer {
      * will detect the silence and close the connection.
      */
     public void simulateDisconnect() {
-        Logger.info("[simulateDisconnect] Suspending all network writes.");
+        netLog.debug("Suspending all network writes.");
         disconnectSimulated = true;
         // Remove the IdleStateHandler to stop heartbeats, and add an outbound
         // handler that drops ALL writes (including game replies that bypass
@@ -114,11 +127,11 @@ public class FGameClient implements IToServer {
             channel.pipeline().addFirst("writeBlocker", new ChannelOutboundHandlerAdapter() {
                 @Override
                 public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) {
-                    Logger.info("[writeBlocker] Dropped: {}", msg.getClass().getSimpleName());
+                    netLog.debug("Dropped: {}", msg.getClass().getSimpleName());
                     promise.setSuccess();
                 }
             });
-            Logger.info("[simulateDisconnect] Pipeline modified: IdleStateHandler removed, writeBlocker added.");
+            netLog.debug("Pipeline modified: IdleStateHandler removed, writeBlocker added.");
         });
     }
 
@@ -181,6 +194,8 @@ public class FGameClient implements IToServer {
 
         @Override
         public void channelInactive(final ChannelHandlerContext ctx) throws Exception {
+            netLog.info("[Disconnect] Channel became inactive, notifying {} listeners", lobbyListeners.size());
+            netLog.info("[Disconnect] Remote address was: {}", ctx.channel().remoteAddress());
             for (final ILobbyListener listener : lobbyListeners) {
                 listener.close();
             }

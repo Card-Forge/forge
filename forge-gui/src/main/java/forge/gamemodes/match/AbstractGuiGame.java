@@ -9,6 +9,8 @@ import forge.game.event.GameEvent;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.player.PlayerView;
+import forge.gamemodes.net.DeltaPacket;
+import forge.gamemodes.net.FullStatePacket;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.control.FControlGameEventHandler;
@@ -128,6 +130,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         gameView.copyChangedProps(gameView0);
     }
 
+
     public final IGameController getGameController() {
         return getGameController(getCurrentPlayer());
     }
@@ -149,6 +152,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             throw new IllegalArgumentException();
         }
 
+        // Network-deserialized PlayerViews have null trackers — set it from gameView
+        // so lookup() can resolve to the tracked instance
+        if (player.getTracker() == null && getGameView() != null && getGameView().getTracker() != null) {
+            player.setTracker(getGameView().getTracker());
+        }
         player = TrackableTypes.PlayerViewType.lookup(player); //ensure we use the correct player
 
         final boolean doSetCurrentPlayer = originalGameControllers.isEmpty();
@@ -165,6 +173,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             throw new IllegalArgumentException();
         }
 
+        // Network-deserialized PlayerViews have null trackers — set it from gameView
+        // so lookup() can resolve to the tracked instance
+        if (player.getTracker() == null && getGameView() != null && getGameView().getTracker() != null) {
+            player.setTracker(getGameView().getTracker());
+        }
         player = TrackableTypes.PlayerViewType.lookup(player); //ensure we use the correct player
 
         if (gameController == null) {
@@ -984,7 +997,30 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         daytime = null;
     }
 
-    public void updateDependencies() {        
+    @Override
+    public void updateDependencies() {
     }
     // End of Choice code
+
+    // Delta sync and reconnection default implementations
+
+    @Override
+    public void applyDelta(DeltaPacket packet) {
+        // No-op for local games - network implementation is in NetworkGuiGame
+    }
+
+    @Override
+    public void fullStateSync(FullStatePacket packet) {
+        // No-op for local games - network implementation is in NetworkGuiGame
+    }
+
+    @Override
+    public void setRememberedActions() {
+        // No-op for local games - network implementation is in NetworkGuiGame
+    }
+
+    @Override
+    public void nextRememberedAction() {
+        // No-op for local games - network implementation is in NetworkGuiGame
+    }
 }

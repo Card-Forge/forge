@@ -39,7 +39,7 @@ import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
-import forge.gamemodes.match.AbstractGuiGame;
+import forge.gamemodes.net.NetworkGuiGame;
 import forge.gamemodes.match.HostedMatch;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -71,7 +71,7 @@ import forge.util.ITriggerEvent;
 import forge.util.WaitCallback;
 import forge.util.collect.FCollectionView;
 
-public class MatchController extends AbstractGuiGame {
+public class MatchController extends NetworkGuiGame {
     private MatchController() { }
     public static final MatchController instance = new MatchController();
 

@@ -1,5 +1,8 @@
 package forge.gamemodes.net;
 
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
+
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.GameView;
@@ -11,7 +14,6 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gui.GuiBase;
-import org.tinylog.Logger;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IGameController;
 import forge.localinstance.skin.FSkinProp;
@@ -75,6 +77,10 @@ public enum ProtocolMethod {
     showWaitingTimer    (Mode.SERVER, Void.TYPE, PlayerView.class, String.class),
     handleGameEvents    (Mode.SERVER, Void.TYPE, List.class),
 
+    // Delta sync - Server -> Client
+    applyDelta          (Mode.SERVER, Void.TYPE, DeltaPacket.class),
+    fullStateSync       (Mode.SERVER, Void.TYPE, FullStatePacket.class),
+
     // Client -> Server
     // Note: these should all return void, to avoid awkward situations in
     // which client and server wait for one another's response and block
@@ -92,7 +98,12 @@ public enum ProtocolMethod {
     getActivateDescription    (Mode.CLIENT, String.class, CardView.class),
     concede                   (Mode.CLIENT, Void.TYPE),
     alphaStrike               (Mode.CLIENT, Void.TYPE),
-    reorderHand               (Mode.CLIENT, Void.TYPE, CardView.class, Integer.TYPE);
+    reorderHand               (Mode.CLIENT, Void.TYPE, CardView.class, Integer.TYPE),
+
+    // Delta sync - Client -> Server
+    ackSync                   (Mode.CLIENT, Void.TYPE, Long.TYPE),
+    requestResync             (Mode.CLIENT, Void.TYPE),  // Request full state resync on checksum mismatch
+    ;
 
     private enum Mode {
         SERVER(IGuiGame.class),
@@ -103,6 +114,8 @@ public enum ProtocolMethod {
             this.toInvoke = toInvoke;
         }
     }
+
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
 
     private final ProtocolMethod.Mode mode;
     private final Class<?> returnType;
@@ -132,7 +145,7 @@ public enum ProtocolMethod {
             }
             return candidate;
         } catch (final NoSuchMethodException | SecurityException e) {
-            Logger.warn("Class contains no accessible method named {}", name());
+            netLog.warn("Class contains no accessible method named {}", name());
             return getMethodNoArgs();
         }
     }
@@ -141,7 +154,7 @@ public enum ProtocolMethod {
         try {
             return mode.toInvoke.getMethod(name(), (Class<?>[]) null);
         } catch (final NoSuchMethodException | SecurityException e) {
-            Logger.warn("Class contains no accessible arg-less method named {}", name());
+            netLog.warn("Class contains no accessible arg-less method named {}", name());
             return null;
         }
     }
@@ -162,11 +175,11 @@ public enum ProtocolMethod {
                 final Class<?> type = this.args[iArg];
                 if (!ReflectionUtil.isInstance(arg, type)) {
                     //throw new InternalError(String.format("Protocol method %s: illegal argument (%d) of type %s, %s expected", name(), iArg, arg.getClass().getName(), type.getName()));
-                    Logger.error("Protocol method {}: illegal argument ({}) of type {}, {} expected", name(), iArg, arg.getClass().getName(), type.getName());
+                    netLog.error("Protocol method {}: illegal argument ({}) of type {}, {} expected", name(), iArg, arg.getClass().getName(), type.getName());
                 }
             }
         } catch (Exception e) {
-            Logger.error(e, "Error checking args for protocol method {}", name());
+            netLog.error("Protocol checkArgs exception", e);
         }
     }
 
@@ -181,7 +194,7 @@ public enum ProtocolMethod {
         }
         if (!ReflectionUtil.isInstance(value, returnType)) {
             //throw new IllegalStateException(String.format("Protocol method %s: illegal return object type %s returned by client, expected %s", name(), value.getClass().getName(), getReturnType().getName()));
-            Logger.error("Protocol method {}: illegal return type {} from client, expected {}", name(), value.getClass().getName(), getReturnType().getName());
+            netLog.error("Protocol method {}: illegal return type {}, expected {}", name(), value.getClass().getName(), getReturnType().getName());
         }
     }
 }

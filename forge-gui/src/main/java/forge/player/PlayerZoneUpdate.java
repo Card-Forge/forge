@@ -32,13 +32,13 @@ public class PlayerZoneUpdate implements Serializable {
         return zones;
     }
 
-    void addZone(final ZoneType zone) {
+    public void addZone(final ZoneType zone) {
         if (zone == null) {
             return;
         }
         zones.add(zone);
     }
-    void add(final PlayerZoneUpdate other) {
+    public void add(final PlayerZoneUpdate other) {
         if (other == null) {
             return;
         }

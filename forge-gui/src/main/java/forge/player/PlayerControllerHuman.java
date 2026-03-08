@@ -49,6 +49,8 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.match.input.*;
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.control.FControlGamePlayback;
@@ -89,6 +91,8 @@ import java.util.stream.Collectors;
  * Handles phase skips for now.
  */
 public class PlayerControllerHuman extends PlayerController implements IGameController {
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+
     /**
      * Cards this player may look at right now, for example when searching a
      * library.
@@ -1535,6 +1539,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public List<SpellAbility> chooseSpellAbilityToPlay() {
+        netLog.trace("ENTRY for player {}, phase={}, isGameOver={}",
+                player.getName(), getGame().getPhaseHandler().getPhase(), getGame().isGameOver());
         final MagicStack stack = getGame().getStack();
 
         if (mayAutoPass()) {
@@ -1559,12 +1565,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     e.printStackTrace();
                 }
             }
+            netLog.trace("Returning null (mayAutoPass) for player {}", player.getName());
             return null;
         }
 
         if (stack.isEmpty()) {
             if (getGui().isUiSetToSkipPhase(getGame().getPhaseHandler().getPlayerTurn().getView(),
                     getGame().getPhaseHandler().getPhase())) {
+                netLog.trace("Returning null (skipPhase) for player {}", player.getName());
                 return null; // avoid prompt for input if stack is empty and
                 // player is set to skip the current phase
             }
@@ -1577,12 +1585,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 } catch (final InterruptedException e) {
                     e.printStackTrace();
                 }
+                netLog.trace("Returning null (autoYield) for player {}", player.getName());
                 return null;
             }
         }
 
+        netLog.trace("Creating InputPassPriority for player {}", player.getName());
         final InputPassPriority defaultInput = new InputPassPriority(this);
         defaultInput.showAndWait();
+        netLog.trace("InputPassPriority returned for player {}, chosenSa={}", player.getName(), defaultInput.getChosenSa());
         return defaultInput.getChosenSa();
     }
 
@@ -3485,6 +3496,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean isOrderedZone() {
         return FModel.getPreferences().getPrefBoolean(FPref.UI_ORDER_HAND);
+    }
+
+    @Override
+    public void ackSync(long sequenceNumber) {
+        // No-op for local games - delta sync is only used for network play
+    }
+
+    @Override
+    public void requestResync() {
+        // No-op for local games - resync is only used for network play
     }
 
 }

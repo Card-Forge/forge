@@ -10,12 +10,8 @@ import forge.gamemodes.net.client.ClientGameLobby;
 import forge.gamemodes.net.client.FGameClient;
 import forge.gamemodes.net.server.FServerManager;
 import forge.gamemodes.net.server.ServerGameLobby;
-import forge.gui.GuiBase;
 import forge.interfaces.ILobbyListener;
 import forge.interfaces.IUpdateable;
-import forge.localinstance.properties.ForgeNetPreferences;
-import forge.localinstance.properties.ForgePreferences.FPref;
-import forge.model.FModel;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -35,24 +31,9 @@ import org.testng.annotations.Test;
  */
 public class TestTrueNetworkTraffic {
 
-    private static boolean initialized = false;
-
     @BeforeClass
     public void setUp() {
-        if (!initialized) {
-            if (!(GuiBase.getInterface() instanceof HeadlessGuiDesktop)) {
-                GuiBase.setInterface(new HeadlessGuiDesktop());
-            }
-            FModel.initialize(null, preferences -> {
-                preferences.setPref(FPref.LOAD_CARD_SCRIPTS_LAZILY, false);
-                preferences.setPref(FPref.UI_LANGUAGE, "en-US");
-                preferences.setPref(FPref.ENFORCE_DECK_LEGALITY, false);
-                FModel.getNetPreferences().setPref(ForgeNetPreferences.FNetPref.UPnP, "NEVER");
-                return null;
-            });
-
-            initialized = true;
-        }
+        TestUtils.ensureFModelInitialized();
     }
 
     @Test(timeOut = 60000, description = "True network traffic test with remote client")

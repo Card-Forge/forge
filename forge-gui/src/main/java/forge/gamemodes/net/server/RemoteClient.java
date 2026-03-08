@@ -2,14 +2,17 @@ package forge.gamemodes.net.server;
 
 import forge.gamemodes.net.ReplyPool;
 import forge.gamemodes.net.event.IdentifiableNetEvent;
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
 import forge.gamemodes.net.event.NetEvent;
 import io.netty.channel.Channel;
-import org.tinylog.Logger;
 
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public final class RemoteClient implements IToClient {
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+
 
     /** Special value indicating the client hasn't been assigned a slot yet. */
     public static final int UNASSIGNED_SLOT = -1;
@@ -48,11 +51,11 @@ public final class RemoteClient implements IToClient {
             channel.writeAndFlush(event).sync();
             long elapsed = System.currentTimeMillis() - startMs;
             if (elapsed > 50) {
-                Logger.info("send() blocked {} ms for {} (event: {})", elapsed, username, event);
+                netLog.info("send() blocked {} ms for {} (event: {})", elapsed, username, event);
             }
         } catch (Exception e) {
             sendErrors.incrementAndGet();
-            Logger.error(e, "Network send error for {} (event: {})", username, event);
+            netLog.error("Network send error for {} (event: {})", username, event, e);
         }
     }
 
@@ -90,5 +93,13 @@ public final class RemoteClient implements IToClient {
 
     ReplyPool getReplyPool() {
         return replies;
+    }
+
+    /**
+     * Cancel all pending replies for this client.
+     * This is used when converting a player to AI control to unblock the game thread.
+     */
+    public void cancelPendingReplies() {
+        replies.cancelAll();
     }
 }

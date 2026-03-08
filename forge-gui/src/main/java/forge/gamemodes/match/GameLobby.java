@@ -55,10 +55,6 @@ public abstract class GameLobby implements IHasGameType {
         return hostedMatch != null && hostedMatch.isMatchOver() == false;
     }
 
-    public HostedMatch getHostedMatch() {
-        return hostedMatch;
-    }
-
     public void setListener(final IUpdateable listener) {
         this.listener = listener;
     }
@@ -139,6 +135,10 @@ public abstract class GameLobby implements IHasGameType {
     }
     public GameView getGameView() {
         return hostedMatch.getGameView();
+    }
+
+    public HostedMatch getHostedMatch() {
+        return hostedMatch;
     }
 
     public abstract boolean hasControl();
@@ -526,6 +526,8 @@ public abstract class GameLobby implements IHasGameType {
 
         //if above checks succeed, return runnable that can be used to finish starting game
         return () -> {
+            onGameStarted();
+
             hostedMatch = GuiBase.getInterface().hostMatch();
             hostedMatch.startMatch(GameType.Constructed, variantTypes, players, guis);
 
@@ -537,8 +539,6 @@ public abstract class GameLobby implements IHasGameType {
             }
 
             hostedMatch.gameControllers = gameControllers;
-
-            onGameStarted();
         };
     }
 
