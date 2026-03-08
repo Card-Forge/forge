@@ -115,7 +115,7 @@ WW02 S The Pleasant Taxer @
 CA03 C Unicycling Automaton @
 CB03 C May of the Machine @
 CC03 C May the Mana Be with You @
-CG03a C Garruk's Lost Wolf // Hey, Has Anyone Seen Garruk? @
+CG03a C Garruk's Lost Wolf @
 CG03b C Growing Detective @
 CG03c C Investi-Gate @
 CG03d C Merfolk Surveyor @
@@ -360,7 +360,7 @@ CG07 C Unclaimed Tanadon @
 RA07a R Battle Myrsphere @
 RA07b R Chancellor of the Mulligan @
 RC07a R Call Up Emrakul to Help @
-RC07b R The Battle of Dragon Brothers // Fate Reforged @
+RC07b R The Battle of Dragon Brothers @
 RG07 R The Massive Zatcatl @
 RR07 R Tragda, the Burner @
 RU07a R The Value Knight @
