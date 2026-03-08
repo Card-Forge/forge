@@ -459,7 +459,7 @@ public class NewGameScene extends MenuScene {
                 summaryText.append("Randomizer: Solo Randomizer\n\nAll cards outside of your starting deck will be locked by default. Biomes, cards and equipment unlocks are randomized and can be unlocked by completing various objectives in the game.\n\n");
                 break;
             case networked_archipelago:
-                summaryText.append("Randomizer: Networked Archipelago\n\nAs 'Solo Randomizer' except that unlocks will be distributed through an online Archipelago server. More info at https://archipelago.gg.\nPlease ensure your Archipelago client configured and connected.\nWARNING: Archipelago support is currently unavailable.\n\n");
+                summaryText.append("Randomizer: Networked Archipelago\n\nAs 'Solo Randomizer' except that unlocks will be distributed through an online Archipelago server. More info at https://archipelago.gg.\nPlease ensure your Archipelago client is configured and connected.\nWARNING: Archipelago support is currently unavailable.\n\n");
                 break;
             default:
                 summaryText.append("No summary available for this randomizer.");
