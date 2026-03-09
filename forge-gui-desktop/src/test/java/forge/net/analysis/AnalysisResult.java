@@ -356,15 +356,15 @@ public class AnalysisResult {
                 }
             }
 
-            // Network traffic
+            // Large messages (>20KB threshold logged by CompatibleObjectEncoder)
             if (totalEncodedMessages > 0) {
-                sb.append(String.format("| Total Network Traffic | %s |\n",
-                        TestUtils.formatBytes(totalEncodedBytes)));
-                sb.append(String.format("| Messages Sent | %,d |\n",
+                sb.append(String.format("| Large Messages (>20KB) | %,d |\n",
                         totalEncodedMessages));
-                sb.append(String.format("| Avg Message Size | %s |\n",
+                sb.append(String.format("| Large Message Traffic | %s |\n",
+                        TestUtils.formatBytes(totalEncodedBytes)));
+                sb.append(String.format("| Avg Large Message Size | %s |\n",
                         TestUtils.formatBytes((long) ((double) totalEncodedBytes / totalEncodedMessages))));
-                sb.append(String.format("| Message Size Range | %s - %s |\n",
+                sb.append(String.format("| Large Message Size Range | %s - %s |\n",
                         TestUtils.formatBytes(minEncodedBytes), TestUtils.formatBytes(maxEncodedBytes)));
             }
 
