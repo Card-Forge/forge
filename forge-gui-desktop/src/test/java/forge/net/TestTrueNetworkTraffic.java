@@ -2,6 +2,10 @@ package forge.net;
 
 import forge.deck.Deck;
 import forge.game.Game;
+import forge.game.GameView;
+import forge.game.card.CardView;
+import forge.game.player.PlayerView;
+import forge.game.zone.ZoneType;
 import forge.gamemodes.match.GameLobby.GameLobbyData;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.match.LobbySlot;
@@ -12,6 +16,7 @@ import forge.gamemodes.net.server.FServerManager;
 import forge.gamemodes.net.server.ServerGameLobby;
 import forge.interfaces.ILobbyListener;
 import forge.interfaces.IUpdateable;
+import forge.util.collect.FCollectionView;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -159,13 +164,49 @@ public class TestTrueNetworkTraffic {
             System.out.println("[TestTrueNetworkTraffic] Game completed in " + turnCount + " turns");
             Assert.assertTrue(turnCount > 0, "Game should have at least one turn");
 
-            // 13. Client-side assertions
+            // 13. Client-side assertions — protocol lifecycle
             Assert.assertTrue(clientGui.isOpenViewCalled(),
                 "Client should have received openView over the wire");
             Assert.assertTrue(clientGui.getSetGameViewCount() > 0,
                 "Client should have received setGameView updates (count: " + clientGui.getSetGameViewCount() + ")");
 
-            // 14. Pipeline error assertions
+            // 14. Client GameView state assertions
+            GameView clientGameView = clientGui.getGameView();
+            Assert.assertNotNull(clientGameView.getGameLog(),
+                "Client GameView.getGameLog() must not be null (transient field needs lazy init)");
+            Assert.assertEquals(clientGameView.getPlayers().size(), 2,
+                "Client GameView should have 2 players");
+
+            // 15. Zone consistency — CardViews in zone collections must have matching Zone property
+            ZoneType[] zonesToCheck = {ZoneType.Hand, ZoneType.Battlefield, ZoneType.Graveyard, ZoneType.Library};
+            for (PlayerView pv : clientGameView.getPlayers()) {
+                for (ZoneType zone : zonesToCheck) {
+                    FCollectionView<CardView> cards = pv.getCards(zone);
+                    if (cards == null) continue;
+                    for (CardView cv : cards) {
+                        Assert.assertEquals(cv.getZone(), zone,
+                            "CardView id=" + cv.getId() + " in " + pv.getName() + "'s " + zone +
+                            " has stale zone: " + cv.getZone());
+                    }
+                }
+            }
+
+            // 16. Card visibility — cards in public zones must be visible to all players
+            Iterable<PlayerView> allPlayers = clientGameView.getPlayers();
+            ZoneType[] publicZones = {ZoneType.Battlefield, ZoneType.Graveyard, ZoneType.Exile};
+            for (PlayerView pv : clientGameView.getPlayers()) {
+                for (ZoneType zone : publicZones) {
+                    FCollectionView<CardView> cards = pv.getCards(zone);
+                    if (cards == null) continue;
+                    for (CardView cv : cards) {
+                        Assert.assertTrue(cv.canBeShownToAny(allPlayers),
+                            "CardView id=" + cv.getId() + " in public zone " + zone +
+                            " should be visible but canBeShownToAny returned false");
+                    }
+                }
+            }
+
+            // 17. Pipeline error assertions
             int sendErrors = server.getTotalSendErrors();
             Assert.assertEquals(sendErrors, 0,
                 "Server encountered " + sendErrors + " send error(s) during the game. " +
