@@ -352,6 +352,9 @@ public class HostedMatch {
         game = null;
 
         for (final PlayerControllerHuman humanController : humanControllers) {
+            if (humanController.getGui() instanceof forge.gamemodes.net.server.NetGuiGame ngg) {
+                ngg.shutdownForwarder();
+            }
             humanController.getGui().setGameSpeed(PlaybackSpeed.NORMAL);
             if (FModel.getPreferences().getPref(FPref.UI_AUTO_YIELD_MODE).equals(ForgeConstants.AUTO_YIELD_PER_CARD) || isMatchOver()) {
                 // when autoyielding per card, we need to clear auto yields between games since card IDs change

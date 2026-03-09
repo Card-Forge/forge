@@ -19,6 +19,7 @@ import forge.game.zone.ZoneType;
 import forge.util.Localizer;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.gamemodes.net.DeltaPacket;
+import forge.gamemodes.net.GameEventProxy;
 import forge.gamemodes.net.GameProtocolSender;
 import forge.gamemodes.net.IHasNetLog;
 import forge.gamemodes.net.ProtocolMethod;
@@ -97,6 +98,13 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
 
     public void setForwarder(GameEventForwarder forwarder) {
         this.forwarder = forwarder;
+    }
+
+    public void shutdownForwarder() {
+        if (forwarder != null) {
+            forwarder.shutdown();
+            forwarder = null;
+        }
     }
 
     private void flushPendingEvents() {
@@ -541,8 +549,9 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
         if (paused) { return; }
         netLog.info("Sending batch of {}: [{}]", events.size(),
                 events.stream().map(e -> e.getClass().getSimpleName()).collect(Collectors.joining(", ")));
+        List<Object> proxied = GameEventProxy.wrapAll(events);
         updateGameView();
-        sender.send(ProtocolMethod.handleGameEvents, events);
+        sender.send(ProtocolMethod.handleGameEvents, proxied);
     }
 
     @Override

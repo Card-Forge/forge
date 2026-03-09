@@ -1,7 +1,9 @@
 package forge.gamemodes.net.client;
 
 import forge.game.*;
+import forge.game.card.CardView;
 import forge.game.player.PlayerView;
+import forge.gamemodes.net.GameEventProxy;
 import forge.gamemodes.net.GameProtocolHandler;
 import forge.gamemodes.net.IHasNetLog;
 import forge.gamemodes.net.IRemote;
@@ -22,6 +24,7 @@ import io.netty.channel.ChannelHandlerContext;
 
 import java.util.EnumMap;
 import java.util.Iterator;
+import java.util.List;
 
 final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements IHasNetLog {
 
@@ -99,11 +102,28 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
                 client.setGameControllers(myPlayers);
 
                 break;
+            case handleGameEvents:
+                if (this.tracker != null && args.length > 0 && args[0] instanceof List<?> events) {
+                    args[0] = GameEventProxy.unwrapAll(events, this.tracker);
+                }
+                break;
             default:
                 break;
         }
         if (this.tracker != null) {
             updateTrackers(args);
+            // Register all objects from the incoming GameView in the tracker's ID
+            // lookup table synchronously on the IO thread. copyChangedProps() also
+            // does this, but it runs on EDT asynchronously — too late for the
+            // subsequent handleGameEvents.beforeCall which needs to resolve IdRefs.
+            if (protocolMethod == ProtocolMethod.setGameView && args.length > 0 && args[0] instanceof GameView gv) {
+                gv.updateObjLookup();
+                // updateObjLookup skips objects already in the tracker, so CardViews
+                // registered on the first setGameView become stale (wrong zone, etc.).
+                // Replace tracker entries with incoming server CardViews so that
+                // IdRef resolution in handleGameEvents gets current state.
+                refreshTrackerCardViews(gv);
+            }
             replicateProps(args);
         }
     }
@@ -116,8 +136,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
      */
     private void updateTrackers(final Object[] objs) {
         for (Object obj: objs) {
-            if (obj instanceof TrackableObject) {
-                TrackableObject trackableObject = ((TrackableObject) obj);
+            if (obj instanceof TrackableObject trackableObject) {
                 if (trackableObject.getTracker() == null) {
                     trackableObject.setTracker(this.tracker);
                     // walk the props
@@ -128,8 +147,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
                         }
                     }
                 }
-            } else if (obj instanceof TrackableCollection) {
-                TrackableCollection collection = ((TrackableCollection) obj);
+            } else if (obj instanceof TrackableCollection collection) {
                 Iterator itrCollection = collection.iterator();
                 while (itrCollection.hasNext()) {
                     Object objCollection = itrCollection.next();
@@ -141,14 +159,14 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
 
     private void replicateProps(final Object[] objs) {
         for (Object obj: objs) {
-            if (obj instanceof PlayerView) {
-                replicatePlayerView((PlayerView) obj);
+            if (obj instanceof PlayerView pv) {
+                replicatePlayerView(pv);
             }
-            else if (obj instanceof PlayerZoneUpdate) {
-                replicatePlayerView(((PlayerZoneUpdate) obj).getPlayer());
+            else if (obj instanceof PlayerZoneUpdate pzu) {
+                replicatePlayerView(pzu.getPlayer());
             }
-            else if (obj instanceof PlayerZoneUpdates) {
-                Iterator itrPlayerZoneUpdates = ((PlayerZoneUpdates) obj).iterator();
+            else if (obj instanceof PlayerZoneUpdates pzu) {
+                Iterator itrPlayerZoneUpdates = pzu.iterator();
                 while (itrPlayerZoneUpdates.hasNext()) {
                     PlayerView newPlayerView = ((PlayerZoneUpdate)itrPlayerZoneUpdates.next()).getPlayer();
                     /**
@@ -172,6 +190,33 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
         PlayerView existingPlayerView = tracker.getObj(TrackableTypes.PlayerViewType, newPlayerView.getId());
         existingPlayerView.copyChangedProps(newPlayerView);
         netLog.trace("replicated PlayerView properties - {}", existingPlayerView.toString());
+    }
+
+    /**
+     * Replace tracker CardView entries with incoming server CardViews.
+     * <p>
+     * {@code updateObjLookup()} skips objects already in the tracker, so CardViews
+     * registered on the first {@code setGameView} become stale — their zone, state,
+     * and other properties no longer reflect the server's current game state.
+     * When {@link GameEventProxy} resolves IdRefs from the tracker, it gets these
+     * stale CardViews, causing issues like card-back images in the game log
+     * (the stale zone is Library, so {@code canBeShownTo} returns false).
+     */
+    private void refreshTrackerCardViews(final GameView gv) {
+        if (gv.getPlayers() == null) { return; }
+        for (final PlayerView pv : gv.getPlayers()) {
+            final EnumMap<?, ?> props = pv.getProps();
+            if (props == null) { continue; }
+            for (final Object value : props.values()) {
+                if (value instanceof TrackableCollection<?> collection) {
+                    for (final Object item : collection) {
+                        if (item instanceof CardView cv) {
+                            tracker.putObj(TrackableTypes.CardViewType, cv.getId(), cv);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @Override
