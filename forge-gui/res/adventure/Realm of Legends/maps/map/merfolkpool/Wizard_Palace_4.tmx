@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Tome of the Infinite&quot;, &quot;Wizard Class&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Tome of the Infinite&quot;, &quot;Wizard Class|BLC&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -76,8 +76,8 @@
     <property name="reward">[{
   &quot;type&quot;: &quot;card&quot;,
   &quot;count&quot;: 4,
-  &quot;subTypes&quot;: [ &quot;Instant&quot;, &quot;Sorcery&quot; ], 
-  &quot;rarity&quot; [ &quot;rare&quot;, &quot;mythic rare&quot;]
+  &quot;cardTypes&quot;: [ &quot;Instant&quot;, &quot;Sorcery&quot; ],
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;]
 }]</property>
    </properties>
   </object>
@@ -86,8 +86,8 @@
     <property name="reward">[{
   &quot;type&quot;: &quot;card&quot;,
   &quot;count&quot;: 4,
-  &quot;subTypes&quot;: [ &quot;Instant&quot;, &quot;Sorcery&quot; ], 
-  &quot;rarity&quot; [ &quot;rare&quot;, &quot;mythic rare&quot;]
+  &quot;cardTypes&quot;: [ &quot;Instant&quot;, &quot;Sorcery&quot; ],
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;]
 }]</property>
    </properties>
   </object>
@@ -96,8 +96,8 @@
     <property name="reward">[{
   &quot;type&quot;: &quot;card&quot;,
   &quot;count&quot;: 4,
-  &quot;subTypes&quot;: [ &quot;Enchantment&quot; ], 
-  &quot;rarity&quot; [ &quot;rare&quot;, &quot;mythic rare&quot;]
+  &quot;cardTypes&quot;: [ &quot;Enchantment&quot; ],
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;]
 }]</property>
    </properties>
   </object>
@@ -106,8 +106,8 @@
     <property name="reward">[{
   &quot;type&quot;: &quot;card&quot;,
   &quot;count&quot;: 4,
-  &quot;subTypes&quot;: [ &quot;Enchantment&quot; ], 
-  &quot;rarity&quot; [ &quot;rare&quot;, &quot;mythic rare&quot;]
+  &quot;cardTypes&quot;: [ &quot;Enchantment&quot; ],
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;]
 }]</property>
    </properties>
   </object>
