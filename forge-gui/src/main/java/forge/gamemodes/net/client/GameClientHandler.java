@@ -104,8 +104,8 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
 
                 break;
             case handleGameEvents:
-                if (this.tracker != null && args.length > 0 && args[0] instanceof List<?>) {
-                    args[0] = GameEventProxy.unwrapAll((List<?>) args[0], this.tracker);
+                if (this.tracker != null && args.length > 0 && args[0] instanceof List<?> events) {
+                    args[0] = GameEventProxy.unwrapAll(events, this.tracker);
                 }
                 break;
             default:
@@ -117,9 +117,8 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
             // lookup table synchronously on the IO thread. copyChangedProps() also
             // does this, but it runs on EDT asynchronously — too late for the
             // subsequent handleGameEvents.beforeCall which needs to resolve IdRefs.
-            if (protocolMethod == ProtocolMethod.setGameView
-                    && args.length > 0 && args[0] instanceof GameView) {
-                ((GameView) args[0]).updateObjLookup();
+            if (protocolMethod == ProtocolMethod.setGameView && args.length > 0 && args[0] instanceof GameView gv) {
+                gv.updateObjLookup();
             }
             replicateProps(args);
         }
@@ -261,8 +260,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
      */
     private void updateTrackers(final Object[] objs) {
         for (Object obj: objs) {
-            if (obj instanceof TrackableObject) {
-                TrackableObject trackableObject = ((TrackableObject) obj);
+            if (obj instanceof TrackableObject trackableObject) {
                 if (trackableObject.getTracker() == null) {
                     trackableObject.setTracker(this.tracker);
                     // walk the props
@@ -273,8 +271,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
                         }
                     }
                 }
-            } else if (obj instanceof TrackableCollection) {
-                TrackableCollection collection = ((TrackableCollection) obj);
+            } else if (obj instanceof TrackableCollection collection) {
                 Iterator itrCollection = collection.iterator();
                 while (itrCollection.hasNext()) {
                     Object objCollection = itrCollection.next();
@@ -286,14 +283,14 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
 
     private void replicateProps(final Object[] objs) {
         for (Object obj: objs) {
-            if (obj instanceof PlayerView) {
-                replicatePlayerView((PlayerView) obj);
+            if (obj instanceof PlayerView pv) {
+                replicatePlayerView(pv);
             }
-            else if (obj instanceof PlayerZoneUpdate) {
-                replicatePlayerView(((PlayerZoneUpdate) obj).getPlayer());
+            else if (obj instanceof PlayerZoneUpdate pzu) {
+                replicatePlayerView(pzu.getPlayer());
             }
-            else if (obj instanceof PlayerZoneUpdates) {
-                Iterator itrPlayerZoneUpdates = ((PlayerZoneUpdates) obj).iterator();
+            else if (obj instanceof PlayerZoneUpdates pzu) {
+                Iterator itrPlayerZoneUpdates = pzu.iterator();
                 while (itrPlayerZoneUpdates.hasNext()) {
                     PlayerView newPlayerView = ((PlayerZoneUpdate)itrPlayerZoneUpdates.next()).getPlayer();
                     /**
