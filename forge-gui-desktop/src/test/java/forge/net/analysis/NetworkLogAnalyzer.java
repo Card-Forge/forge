@@ -277,7 +277,7 @@ public class NetworkLogAnalyzer {
             long totalFullStateBytes = 0;
 
             while ((line = reader.readLine()) != null) {
-                // Track first/last timestamp for game duration
+                // Track first/last timestamp for session duration
                 Matcher tsMatcher = LINE_TIMESTAMP_PATTERN.matcher(line);
                 if (tsMatcher.find()) {
                     String ts = tsMatcher.group(1);

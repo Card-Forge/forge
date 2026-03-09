@@ -172,8 +172,10 @@ public class TestTrueNetworkTraffic {
 
             // 14. Client GameView state assertions
             GameView clientGameView = clientGui.getGameView();
-            Assert.assertNotNull(clientGameView.getGameLog(),
-                "Client GameView.getGameLog() must not be null (transient field needs lazy init)");
+            // gameLog is transient — null after deserialization, initialized by CMatchUI.openView
+            // (this test uses a stub GUI, so initGameLog is not called)
+            Assert.assertNull(clientGameView.getGameLog(),
+                "Client GameView.getGameLog() should be null (transient field, not serialized)");
             Assert.assertEquals(clientGameView.getPlayers().size(), 2,
                 "Client GameView should have 2 players");
 

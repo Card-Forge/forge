@@ -936,7 +936,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         localEventHandler.receiveGameEvent(event);
 
         // Feed forwarded events to the local GameLog so remote clients
-        // build their own game log (host populates via EventBus instead)
+        // build their own game log (host populates via EventBus instead).
+        // gameLog is null for deserialized GameViews until openView calls ensureGameLog().
         GameView gv = getGameView();
         if (gv != null) {
             GameLog gameLog = gv.getGameLog();

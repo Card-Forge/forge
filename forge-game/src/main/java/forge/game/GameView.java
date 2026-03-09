@@ -181,10 +181,12 @@ public class GameView extends TrackableObject {
     }
 
     public GameLog getGameLog() {
-        if (gameLog == null) {
-            gameLog = new GameLog();
-        }
         return gameLog;
+    }
+
+    /** Initialize the game log for network-deserialized GameViews (transient field is null after deserialization). */
+    public void initGameLog() {
+        this.gameLog = new GameLog();
     }
 
     public TrackableCollection<CardView> getRevealedCollection() {

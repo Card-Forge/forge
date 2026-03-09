@@ -352,7 +352,7 @@ public class HostedMatch {
         game = null;
 
         for (final PlayerControllerHuman humanController : humanControllers) {
-            if (humanController.getGui() instanceof forge.gamemodes.net.server.NetGuiGame ngg) {
+            if (humanController.getGui() instanceof forge.gamemodes.net.server.RemoteClientGuiGame ngg) {
                 ngg.shutdownForwarder();
             }
             humanController.getGui().setGameSpeed(PlaybackSpeed.NORMAL);

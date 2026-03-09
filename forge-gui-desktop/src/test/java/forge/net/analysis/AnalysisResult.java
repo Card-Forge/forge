@@ -217,7 +217,7 @@ public class AnalysisResult {
         return totalFullStateBytes > 0;
     }
 
-    /** Compute game duration from first/last timestamps across all games. */
+    /** Compute session duration from first/last timestamps across all games. */
     private String computeAggregateDuration() {
         String earliest = null;
         String latest = null;
@@ -342,10 +342,10 @@ public class AnalysisResult {
             sb.append("| Metric | Value |\n");
             sb.append("|--------|-------|\n");
 
-            // Game duration and turns
+            // Session duration and turns
             String duration = computeAggregateDuration();
             if (duration != null) {
-                sb.append(String.format("| Game Duration | %s |\n", duration));
+                sb.append(String.format("| Session Duration | %s |\n", duration));
             }
             if (totalTurns > 0) {
                 if (totalGames == 1) {
