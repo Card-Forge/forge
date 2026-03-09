@@ -94,6 +94,13 @@
     "Yawgmoth's Bargain",
     "Fabled Path of Searo Point",
     "The Rebellious Intelligence",
+    "Cleanse",
+    "Crusade",
+    "Invoke Prejudice",
+    "Imprison",
+    "Jihad",
+    "Pradesh Gypsies",
+    "Stone-Throwing Devils",
     "Worldly Tutor",
     "Enlightened Tutor",
     "Imperial Seal",
@@ -142,15 +149,13 @@
     "2ED",
     "3ED",
     "4ED",
+    "LEG",
     "USG",
     "ULG",
     "UDS",
     "30A",
     "CNS",
-    "CN2",
-    "CMR",
-    "CLB",
-    "CMM"
+    "CN2"
   ],
   "difficulties": [
     {
