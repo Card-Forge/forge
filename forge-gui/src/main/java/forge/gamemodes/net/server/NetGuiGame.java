@@ -65,6 +65,13 @@ public class NetGuiGame extends AbstractGuiGame {
         this.forwarder = forwarder;
     }
 
+    public void shutdownForwarder() {
+        if (forwarder != null) {
+            forwarder.shutdown();
+            forwarder = null;
+        }
+    }
+
     private void flushPendingEvents() {
         if (forwarder != null && !flushing) {
             flushing = true;
