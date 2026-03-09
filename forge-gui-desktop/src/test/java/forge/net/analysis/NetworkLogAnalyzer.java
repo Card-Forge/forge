@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -18,12 +20,16 @@ import java.util.stream.Collectors;
 import forge.gamemodes.net.NetworkLogConfig;
 
 /**
- * Parses network debug log files to extract delta sync metrics and errors.
+ * Parses game log files to extract metrics, errors, and game health data.
+ *
+ * Supports both structured network debug logs (with [DeltaSync] and [GAME EVENT]
+ * prefixes) and generic forge.log / game output formats. Structured patterns are
+ * tried first; generic fallbacks catch games logged without network debug prefixes.
  *
  * Uses single-pass parsing with pre-compiled regex patterns for efficiency.
  * Supports parallel file analysis via parallelStream().
  *
- * Also provides error context extraction for debugging test failures
+ * Also provides error context extraction for debugging failures
  * (formerly in separate LogContextExtractor class).
  */
 public class NetworkLogAnalyzer {
@@ -32,15 +38,50 @@ public class NetworkLogAnalyzer {
     private static final int CONTEXT_LINES_BEFORE = 20;
     private static final int CONTEXT_LINES_AFTER = 5;
 
-    // Pre-compiled regex patterns for efficiency
+    // ==================== Structured (delta sync) patterns ====================
+
     private static final Pattern DELTA_PACKET_PATTERN = Pattern.compile(
             "\\[DeltaSync\\] Packet #(\\d+): Delta=(\\d+) bytes, FullState=(\\d+) bytes, Savings=(\\d+)%");
 
-    private static final Pattern GAME_OUTCOME_PATTERN = Pattern.compile(
+    private static final Pattern GAME_EVENT_OUTCOME_PATTERN = Pattern.compile(
             "\\[GAME EVENT\\] Game outcome: winner = (.+)");
 
-    private static final Pattern TURN_PATTERN = Pattern.compile(
+    private static final Pattern GAME_EVENT_TURN_PATTERN = Pattern.compile(
             "\\[GAME EVENT\\] Turn (\\d+) began");
+
+    // ==================== Generic (forge.log / game output) patterns ====================
+
+    // Fallback turn detection: "Turn N" anywhere in line
+    private static final Pattern GENERIC_TURN_PATTERN = Pattern.compile(
+            "Turn (\\d+)");
+
+    // Fallback winner detection: forge.log format
+    private static final Pattern GENERIC_WINNER_PATTERN = Pattern.compile(
+            "(.+) has won the game|winner=(.+?)(?:,|$|\\s)", Pattern.CASE_INSENSITIVE);
+
+    // Game completion from structured output lines
+    private static final Pattern RESULT_LINE_PATTERN = Pattern.compile(
+            "RESULT:(SUCCESS|FAILURE):(\\d+):(\\d+):(\\d+)");
+
+    // ==================== Network performance patterns ====================
+
+    // "Encoded 95527 bytes (compressed) for GuiGameEvent"
+    private static final Pattern ENCODED_BYTES_PATTERN = Pattern.compile(
+            "Encoded (\\d+) bytes \\(compressed\\)");
+
+    // "send() blocked 214 ms for <player>"
+    private static final Pattern SEND_BLOCKED_PATTERN = Pattern.compile(
+            "send\\(\\) blocked (\\d+) ms");
+
+    // Turn detection from event batch lists: "GameEventTurnBegan" in batch contents
+    private static final Pattern BATCH_TURN_BEGAN_PATTERN = Pattern.compile(
+            "GameEventTurnBegan");
+
+    // Timestamp at start of log line: "23:03:11" or "13:45:35.885"
+    private static final Pattern LINE_TIMESTAMP_PATTERN = Pattern.compile(
+            "^(\\d{2}:\\d{2}:\\d{2})");
+
+    // ==================== Protocol-agnostic patterns ====================
 
     private static final Pattern GAME_COMPLETED_PATTERN = Pattern.compile(
             "Game completed|game finished|Game COMPLETED|isGameOver.*true");
@@ -49,13 +90,21 @@ public class NetworkLogAnalyzer {
             "CHECKSUM MISMATCH|checksum mismatch|desync", Pattern.CASE_INSENSITIVE);
 
     private static final Pattern ERROR_PATTERN = Pattern.compile(
-            "\\[ERROR\\]|ERROR:|Exception|exception", Pattern.CASE_INSENSITIVE);
+            "\\[ERROR\\]|\\bERROR\\b:|Exception|exception", Pattern.CASE_INSENSITIVE);
 
     private static final Pattern TIMEOUT_PATTERN = Pattern.compile(
             "timeout|timed out|time limit exceeded", Pattern.CASE_INSENSITIVE);
 
     private static final Pattern WARN_PATTERN = Pattern.compile(
-            "\\[WARN\\]|WARN:|WARNING:", Pattern.CASE_INSENSITIVE);
+            "\\[WARN\\]|WARN:|WARNING:|Unknown protocol method|Non-serializable", Pattern.CASE_INSENSITIVE);
+
+    // JVM/Netty noise that should be suppressed from warning/error counts
+    private static final Pattern SUPPRESSED_WARN_PATTERN = Pattern.compile(
+            "sun\\.misc\\.Unsafe|io\\.netty|An illegal reflective access|" +
+            "WARNING: An illegal reflective|WARNING: Use --illegal-access|" +
+            "WARNING: All illegal access operations|" +
+            "WARNING: Please consider reporting|" +
+            "netty.*reflective|Epoll\\.isAvailable", Pattern.CASE_INSENSITIVE);
 
     // Patterns for error context extraction
     private static final Pattern PHASE_PATTERN = Pattern.compile(
@@ -88,6 +137,24 @@ public class NetworkLogAnalyzer {
     // - "Client deck loaded:"
     private static final Pattern DECK_NAME_PATTERN = Pattern.compile(
             "(?:deck(?:\\s+loaded)?:|with deck:|Sending deck:|Client deck loaded:)\\s*(.+?)(?:\\s*\\(|$)", Pattern.CASE_INSENSITIVE);
+
+    // ==================== Error Normalization ====================
+
+    /**
+     * Normalize error messages for grouping by removing timestamps, IDs, and other variable data.
+     * Static so it can be used by AnalysisResult and other classes.
+     */
+    public static String normalizeError(String error) {
+        // Remove timestamps like [HH:mm:ss.SSS]
+        String normalized = error.replaceAll("\\[\\d{2}:\\d{2}:\\d{2}\\.\\d{3}\\]", "");
+        // Remove id=NNNNN patterns
+        normalized = normalized.replaceAll("id=\\d+", "id=X");
+        // Remove large numbers (likely IDs or memory addresses)
+        normalized = normalized.replaceAll("\\d{5,}", "NNNN");
+        // Remove file paths (keep just filename)
+        normalized = normalized.replaceAll("[A-Za-z]:[/\\\\][^\\s]+[/\\\\]", "");
+        return normalized.trim();
+    }
 
     // ==================== Error Context Records ====================
 
@@ -186,7 +253,9 @@ public class NetworkLogAnalyzer {
      */
     public GameLogMetrics analyzeLogFile(File logFile) {
         GameLogMetrics metrics = new GameLogMetrics();
-        metrics.setLogFileName(logFile.getName());
+        // Qualify filename with parent directory for batch identification in reports
+        String parentName = logFile.getParentFile() != null ? logFile.getParentFile().getName() : "";
+        metrics.setLogFileName(parentName.isEmpty() ? logFile.getName() : parentName + "/" + logFile.getName());
 
         // Try to extract game index from filename (e.g., "game5" -> 5)
         Matcher indexMatcher = GAME_INDEX_PATTERN.matcher(logFile.getName());
@@ -198,9 +267,8 @@ public class NetworkLogAnalyzer {
             }
         }
 
-        // Track packet-level metrics
-        List<Double> savingsList = new ArrayList<>();
         int maxTurn = 0;
+        int batchTurnCount = 0;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(logFile))) {
             String line;
@@ -209,44 +277,114 @@ public class NetworkLogAnalyzer {
             long totalFullStateBytes = 0;
 
             while ((line = reader.readLine()) != null) {
-                // Delta packet metrics
+                // Track first/last timestamp for game duration
+                Matcher tsMatcher = LINE_TIMESTAMP_PATTERN.matcher(line);
+                if (tsMatcher.find()) {
+                    String ts = tsMatcher.group(1);
+                    if (metrics.getFirstTimestamp() == null) {
+                        metrics.setFirstTimestamp(ts);
+                    }
+                    metrics.setLastTimestamp(ts);
+                }
+
+                // Encoded message sizes
+                Matcher encodedMatcher = ENCODED_BYTES_PATTERN.matcher(line);
+                if (encodedMatcher.find()) {
+                    try {
+                        metrics.recordEncodedMessage(Long.parseLong(encodedMatcher.group(1)));
+                    } catch (NumberFormatException e) {
+                        // skip
+                    }
+                    continue;
+                }
+
+                // send() blocking times
+                Matcher blockedMatcher = SEND_BLOCKED_PATTERN.matcher(line);
+                if (blockedMatcher.find()) {
+                    try {
+                        metrics.recordSendBlocked(Long.parseLong(blockedMatcher.group(1)));
+                    } catch (NumberFormatException e) {
+                        // skip
+                    }
+                    continue;
+                }
+
+                // Turn detection from batch event lists (GameEventTurnBegan)
+                // Used as fallback when no numbered turn lines are present
+                if (BATCH_TURN_BEGAN_PATTERN.matcher(line).find()) {
+                    Matcher turnMatcher = BATCH_TURN_BEGAN_PATTERN.matcher(line);
+                    while (turnMatcher.find()) {
+                        batchTurnCount++;
+                    }
+                }
+
+                // Delta packet metrics (structured logs only)
                 Matcher packetMatcher = DELTA_PACKET_PATTERN.matcher(line);
                 if (packetMatcher.find()) {
                     try {
                         packetCount++;
                         long deltaBytes = Long.parseLong(packetMatcher.group(2));
                         long fullStateBytes = Long.parseLong(packetMatcher.group(3));
-                        int savings = Integer.parseInt(packetMatcher.group(4));
 
                         totalDeltaBytes += deltaBytes;
                         totalFullStateBytes += fullStateBytes;
-                        savingsList.add((double) savings);
                     } catch (NumberFormatException e) {
                         // Skip malformed packet line
                     }
                     continue;
                 }
 
-                // Game outcome
-                Matcher outcomeMatcher = GAME_OUTCOME_PATTERN.matcher(line);
-                if (outcomeMatcher.find()) {
-                    metrics.setWinner(outcomeMatcher.group(1).trim());
+                // Game outcome — try structured pattern first, then generic
+                Matcher eventOutcome = GAME_EVENT_OUTCOME_PATTERN.matcher(line);
+                if (eventOutcome.find()) {
+                    metrics.setWinner(eventOutcome.group(1).trim());
                     metrics.setGameCompleted(true);
                     continue;
                 }
+                Matcher genericWinner = GENERIC_WINNER_PATTERN.matcher(line);
+                if (genericWinner.find()) {
+                    String winner = genericWinner.group(1) != null ? genericWinner.group(1) : genericWinner.group(2);
+                    if (winner != null) {
+                        metrics.setWinner(winner.trim());
+                        metrics.setGameCompleted(true);
+                    }
+                    continue;
+                }
 
-                // Turn tracking
-                Matcher turnMatcher = TURN_PATTERN.matcher(line);
-                if (turnMatcher.find()) {
+                // Structured result line (from multi-process executor output)
+                Matcher resultMatcher = RESULT_LINE_PATTERN.matcher(line);
+                if (resultMatcher.find()) {
+                    metrics.setGameCompleted("SUCCESS".equals(resultMatcher.group(1)));
                     try {
-                        int turn = Integer.parseInt(turnMatcher.group(1));
-                        if (turn > maxTurn) {
-                            maxTurn = turn;
-                        }
+                        metrics.setPlayerCount(Integer.parseInt(resultMatcher.group(2)));
+                        metrics.setTurnCount(Integer.parseInt(resultMatcher.group(3)));
+                        metrics.setSendErrors(Integer.parseInt(resultMatcher.group(4)));
+                    } catch (NumberFormatException e) {
+                        // Skip malformed result line
+                    }
+                    continue;
+                }
+
+                // Turn tracking — try structured pattern first, then generic
+                Matcher eventTurn = GAME_EVENT_TURN_PATTERN.matcher(line);
+                if (eventTurn.find()) {
+                    try {
+                        int turn = Integer.parseInt(eventTurn.group(1));
+                        if (turn > maxTurn) maxTurn = turn;
                     } catch (NumberFormatException e) {
                         // Skip malformed turn line
                     }
                     continue;
+                }
+                Matcher genericTurn = GENERIC_TURN_PATTERN.matcher(line);
+                if (genericTurn.find()) {
+                    try {
+                        int turn = Integer.parseInt(genericTurn.group(1));
+                        if (turn > maxTurn) maxTurn = turn;
+                    } catch (NumberFormatException e) {
+                        // Skip malformed turn line
+                    }
+                    // Don't continue — generic turn pattern is broad, line may match other patterns too
                 }
 
                 // Game completed (alternative patterns)
@@ -306,19 +444,25 @@ public class NetworkLogAnalyzer {
                     continue;
                 }
 
-                // Errors - track first error turn for failure analysis
+                // Errors — suppress JVM/Netty noise before counting
                 if (ERROR_PATTERN.matcher(line).find()) {
-                    metrics.addError(truncateLine(line));
-                    // Record the turn when first error occurred
-                    if (metrics.getFirstErrorTurn() < 0 && maxTurn > 0) {
-                        metrics.setFirstErrorTurn(maxTurn);
+                    if (!SUPPRESSED_WARN_PATTERN.matcher(line).find()) {
+                        String truncated = truncateLine(line);
+                        metrics.addError(truncated);
+                        metrics.incrementErrorCount(normalizeError(truncated));
+                        // Record the turn when first error occurred
+                        if (metrics.getFirstErrorTurn() < 0 && maxTurn > 0) {
+                            metrics.setFirstErrorTurn(maxTurn);
+                        }
                     }
                     continue;
                 }
 
-                // Warnings
+                // Warnings — suppress JVM/Netty noise
                 if (WARN_PATTERN.matcher(line).find()) {
-                    metrics.addWarning(truncateLine(line));
+                    if (!SUPPRESSED_WARN_PATTERN.matcher(line).find()) {
+                        metrics.addWarning(truncateLine(line));
+                    }
                 }
             }
 
@@ -326,15 +470,20 @@ public class NetworkLogAnalyzer {
             metrics.setDeltaPacketCount(packetCount);
             metrics.setTotalDeltaBytes(totalDeltaBytes);
             metrics.setTotalFullStateBytes(totalFullStateBytes);
-            metrics.setTurnCount(maxTurn);
+            // Prefer numbered turn from structured/generic patterns; fall back to batch event count
+            if (maxTurn > 0) {
+                metrics.setTurnCount(maxTurn);
+            } else if (batchTurnCount > 0) {
+                metrics.setTurnCount(batchTurnCount);
+            }
 
             // Determine failure mode based on log content
             metrics.setFailureMode(determineFailureMode(metrics));
 
-            // Extract error context if there are errors
+            // Extract per-type error contexts if there are errors
             if (!metrics.getErrors().isEmpty() || metrics.hasChecksumMismatch()) {
-                ErrorContext context = extractAroundFirstError(logFile);
-                metrics.setErrorContext(context);
+                Map<String, ErrorContext> contexts = extractErrorContexts(logFile);
+                metrics.setErrorContexts(contexts);
             }
 
         } catch (IOException e) {
@@ -414,16 +563,16 @@ public class NetworkLogAnalyzer {
 
     /**
      * Analyze comprehensive test logs (those with "-gameN-Np" suffix).
+     * Supports both subdirectory layout and legacy flat layout.
      *
      * @param logDirectory Directory containing log files
      * @return List of GameLogMetrics for comprehensive test logs
      */
     public List<GameLogMetrics> analyzeComprehensiveTestLogs(File logDirectory) {
-        // Match patterns like:
-        // - Old: network-debug-20260124-105844-21236-game0-4p-test.log
-        // - New: network-debug-run20260127-213221-game0-4p-test.log
-        // - Batched: network-debug-run20260128-064643-batch0-game0-4p-test.log
-        return analyzeDirectory(logDirectory, "network-debug-.*-(?:batch\\d+-)?game\\d+-\\d+p-test\\.log");
+        // Match patterns for:
+        // - Subdirectory layout: network-debug-game0-4p-test.log, network-debug-batch0-game0-4p-test.log
+        // - Legacy flat layout: network-debug-run20260128-064643-batch0-game0-4p-test.log
+        return analyzeDirectory(logDirectory, "network-debug-.*(?:batch\\d+-)?game\\d+-\\d+p-test\\.log");
     }
 
     /**
@@ -460,19 +609,30 @@ public class NetworkLogAnalyzer {
     }
 
     /**
-     * Extract timestamp from log filename.
-     * Supports two formats:
-     * - Old: network-debug-YYYYMMDD-HHMMSS-PID-*.log
-     * - New: network-debug-runYYYYMMDD-HHMMSS-*.log
+     * Extract timestamp from log filename or parent directory.
+     * Supports formats:
+     * - Legacy flat: network-debug-YYYYMMDD-HHMMSS-PID-*.log
+     * - Legacy with run prefix: network-debug-runYYYYMMDD-HHMMSS-*.log
+     * - Subdirectory layout: run20260309-134822/network-debug-batch0-game0-4p-test.log
+     *   (timestamp is in the parent directory name, not the filename)
      */
     private LocalDateTime extractTimestampFromFilename(String filename, DateTimeFormatter formatter) {
-        // Pattern handles both old format (network-debug-20260124-105844-...)
-        // and new format (network-debug-run20260127-213221-...)
+        // Try filename timestamp (legacy formats)
         Pattern timestampPattern = Pattern.compile("network-debug-(?:run)?(\\d{8}-\\d{6})-");
         Matcher matcher = timestampPattern.matcher(filename);
         if (matcher.find()) {
             try {
                 return LocalDateTime.parse(matcher.group(1), formatter);
+            } catch (DateTimeParseException e) {
+                return null;
+            }
+        }
+        // Try parent directory timestamp (subdirectory layout: run20260309-134822/...)
+        Pattern dirPattern = Pattern.compile("run(\\d{8}-\\d{6})/");
+        Matcher dirMatcher = dirPattern.matcher(filename);
+        if (dirMatcher.find()) {
+            try {
+                return LocalDateTime.parse(dirMatcher.group(1), formatter);
             } catch (DateTimeParseException e) {
                 return null;
             }
@@ -517,22 +677,25 @@ public class NetworkLogAnalyzer {
     // ==================== Error Context Extraction Methods ====================
 
     /**
-     * Extract context around the first error in a log file.
+     * Extract context around each unique error type in a log file.
+     * Returns one ErrorContext per normalized error pattern (first occurrence of each).
      *
      * @param logFile The log file to analyze
-     * @return ErrorContext with details, or null if no errors found
+     * @return Map of normalized error pattern to ErrorContext, or empty map if no errors
      */
-    public ErrorContext extractAroundFirstError(File logFile) {
+    public Map<String, ErrorContext> extractErrorContexts(File logFile) {
+        Map<String, ErrorContext> contexts = new LinkedHashMap<>();
         if (logFile == null || !logFile.exists()) {
-            return null;
+            return contexts;
         }
 
         List<String> allLines = new ArrayList<>();
-        int errorLineIndex = -1;
-        String errorMessage = null;
         int currentTurn = 0;
         String currentPhase = null;
         List<String> warningsBefore = new ArrayList<>();
+
+        // Track which normalized errors we've already captured context for
+        java.util.Set<String> seenErrors = new java.util.HashSet<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(logFile))) {
             String line;
@@ -542,13 +705,23 @@ public class NetworkLogAnalyzer {
                 lineNumber++;
                 allLines.add(line);
 
-                // Track turn changes
-                Matcher turnMatcher = TURN_PATTERN.matcher(line);
-                if (turnMatcher.find()) {
+                // Track turn changes (try structured first, then generic)
+                Matcher eventTurn = GAME_EVENT_TURN_PATTERN.matcher(line);
+                if (eventTurn.find()) {
                     try {
-                        currentTurn = Integer.parseInt(turnMatcher.group(1));
+                        currentTurn = Integer.parseInt(eventTurn.group(1));
                     } catch (NumberFormatException e) {
-                        // Skip malformed turn line
+                        // skip
+                    }
+                } else {
+                    Matcher genericTurn = GENERIC_TURN_PATTERN.matcher(line);
+                    if (genericTurn.find()) {
+                        try {
+                            int t = Integer.parseInt(genericTurn.group(1));
+                            if (t > currentTurn) currentTurn = t;
+                        } catch (NumberFormatException e) {
+                            // skip
+                        }
                     }
                 }
 
@@ -563,57 +736,84 @@ public class NetworkLogAnalyzer {
                     }
                 }
 
-                // Track warnings before first error
-                if (errorLineIndex < 0 && WARN_PATTERN.matcher(line).find()) {
+                // Track warnings before errors
+                if (WARN_PATTERN.matcher(line).find() && !SUPPRESSED_WARN_PATTERN.matcher(line).find()) {
                     warningsBefore.add(line);
                     if (warningsBefore.size() > 50) {
                         warningsBefore.remove(0);
                     }
                 }
 
-                // Look for first error
-                if (errorLineIndex < 0 && ERROR_PATTERN.matcher(line).find()) {
-                    errorLineIndex = lineNumber - 1; // 0-indexed
-                    errorMessage = line;
+                // Capture context for each new error type
+                if (ERROR_PATTERN.matcher(line).find() && !SUPPRESSED_WARN_PATTERN.matcher(line).find()) {
+                    String normalized = normalizeError(line);
+                    if (!seenErrors.contains(normalized)) {
+                        seenErrors.add(normalized);
+                        int errorIdx = lineNumber - 1;
+
+                        int startIdx = Math.max(0, errorIdx - CONTEXT_LINES_BEFORE);
+                        int endIdx = Math.min(allLines.size() - 1, errorIdx + CONTEXT_LINES_AFTER);
+
+                        List<String> linesBef = new ArrayList<>();
+                        List<String> linesAft = new ArrayList<>();
+                        for (int i = startIdx; i < errorIdx; i++) {
+                            linesBef.add(allLines.get(i));
+                        }
+                        // linesAfter will be incomplete for current line (we haven't read ahead)
+                        // but that's acceptable — the context before is more valuable
+
+                        List<PlayerState> playerStates = extractPlayerStates(allLines, errorIdx);
+
+                        contexts.put(normalized, new ErrorContext(
+                                logFile.getName(),
+                                lineNumber,
+                                currentTurn,
+                                currentPhase,
+                                playerStates,
+                                linesBef,
+                                linesAft,
+                                new ArrayList<>(warningsBefore),
+                                line
+                        ));
+                    }
                 }
             }
+
+            // Second pass: fill in linesAfter for each context (now that we have all lines)
+            for (Map.Entry<String, ErrorContext> entry : contexts.entrySet()) {
+                ErrorContext ctx = entry.getValue();
+                int errorIdx = ctx.errorLineNumber() - 1; // back to 0-indexed
+                int endIdx = Math.min(allLines.size() - 1, errorIdx + CONTEXT_LINES_AFTER);
+                List<String> linesAft = new ArrayList<>();
+                for (int i = errorIdx + 1; i <= endIdx; i++) {
+                    linesAft.add(allLines.get(i));
+                }
+                if (!linesAft.isEmpty()) {
+                    entry.setValue(new ErrorContext(
+                            ctx.logFileName(), ctx.errorLineNumber(), ctx.turnAtError(),
+                            ctx.phaseAtError(), ctx.playerStates(), ctx.linesBefore(),
+                            linesAft, ctx.warningsBefore(), ctx.errorMessage()
+                    ));
+                }
+            }
+
         } catch (IOException e) {
-            return null;
+            // Return whatever contexts we've collected
         }
 
-        // No error found
-        if (errorLineIndex < 0) {
-            return null;
-        }
+        return contexts;
+    }
 
-        // Extract lines around error
-        int startIndex = Math.max(0, errorLineIndex - CONTEXT_LINES_BEFORE);
-        int endIndex = Math.min(allLines.size() - 1, errorLineIndex + CONTEXT_LINES_AFTER);
-
-        List<String> linesBefore = new ArrayList<>();
-        List<String> linesAfter = new ArrayList<>();
-
-        for (int i = startIndex; i < errorLineIndex; i++) {
-            linesBefore.add(allLines.get(i));
-        }
-        for (int i = errorLineIndex + 1; i <= endIndex; i++) {
-            linesAfter.add(allLines.get(i));
-        }
-
-        // Extract player states from lines around error
-        List<PlayerState> playerStates = extractPlayerStates(allLines, errorLineIndex);
-
-        return new ErrorContext(
-                logFile.getName(),
-                errorLineIndex + 1, // 1-indexed line number
-                currentTurn,
-                currentPhase,
-                playerStates,
-                linesBefore,
-                linesAfter,
-                new ArrayList<>(warningsBefore),
-                errorMessage
-        );
+    /**
+     * Extract context around the first error in a log file.
+     * Convenience method for backward compatibility.
+     *
+     * @param logFile The log file to analyze
+     * @return ErrorContext with details, or null if no errors found
+     */
+    public ErrorContext extractAroundFirstError(File logFile) {
+        Map<String, ErrorContext> contexts = extractErrorContexts(logFile);
+        return contexts.isEmpty() ? null : contexts.values().iterator().next();
     }
 
     /**

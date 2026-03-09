@@ -1,12 +1,14 @@
 package forge.net.analysis;
 
-import forge.net.TestUtils;
-
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Stores per-game metrics extracted from log file analysis.
+ * Supports both delta sync structured logs and generic game logs.
  */
 public class GameLogMetrics {
 
@@ -39,14 +41,31 @@ public class GameLogMetrics {
     private int deltaPacketCount;
     private long totalDeltaBytes;         // Serialized+compressed delta size
     private long totalFullStateBytes;     // Serialized+compressed full GameView size
+
     // Deck tracking
     private List<String> deckNames = new ArrayList<>();
+
+    // Network performance metrics (from Encoded/send() blocked lines)
+    private long totalEncodedBytes;
+    private int encodedMessageCount;
+    private long minEncodedBytes = Long.MAX_VALUE;
+    private long maxEncodedBytes;
+    private int sendBlockedCount;
+    private long totalBlockedMs;
+    private long minBlockedMs = Long.MAX_VALUE;
+    private long maxBlockedMs;
+
+    // Game timing
+    private String firstTimestamp;
+    private String lastTimestamp;
 
     // Error tracking
     private List<String> warnings = new ArrayList<>();
     private List<String> errors = new ArrayList<>();
+    private Map<String, Integer> errorCounts = new HashMap<>();
+    private int sendErrors;
     private boolean hasChecksumMismatch;
-    private NetworkLogAnalyzer.ErrorContext errorContext;
+    private Map<String, NetworkLogAnalyzer.ErrorContext> errorContexts = new LinkedHashMap<>();
 
 
     /**
@@ -58,10 +77,12 @@ public class GameLogMetrics {
     }
 
     /**
-     * Check if this game was successful (completed with no errors).
+     * Check if this game was successful (completed with no critical errors).
+     * Send errors and checksum mismatches are critical failures.
+     * Log-detected errors (e.g. caught exceptions) are tracked but do not affect success.
      */
     public boolean isSuccessful() {
-        return gameCompleted && !hasChecksumMismatch && errors.isEmpty();
+        return gameCompleted && !hasChecksumMismatch && sendErrors == 0;
     }
 
     // Getters and setters
@@ -154,6 +175,39 @@ public class GameLogMetrics {
         this.totalFullStateBytes = totalFullStateBytes;
     }
 
+    // Network performance getters
+
+    public void recordEncodedMessage(long bytes) {
+        encodedMessageCount++;
+        totalEncodedBytes += bytes;
+        if (bytes < minEncodedBytes) minEncodedBytes = bytes;
+        if (bytes > maxEncodedBytes) maxEncodedBytes = bytes;
+    }
+
+    public void recordSendBlocked(long ms) {
+        sendBlockedCount++;
+        totalBlockedMs += ms;
+        if (ms < minBlockedMs) minBlockedMs = ms;
+        if (ms > maxBlockedMs) maxBlockedMs = ms;
+    }
+
+    public long getTotalEncodedBytes() { return totalEncodedBytes; }
+    public int getEncodedMessageCount() { return encodedMessageCount; }
+    public long getMinEncodedBytes() { return encodedMessageCount > 0 ? minEncodedBytes : 0; }
+    public long getMaxEncodedBytes() { return maxEncodedBytes; }
+    public double getAvgEncodedBytes() { return encodedMessageCount > 0 ? (double) totalEncodedBytes / encodedMessageCount : 0; }
+
+    public int getSendBlockedCount() { return sendBlockedCount; }
+    public long getTotalBlockedMs() { return totalBlockedMs; }
+    public long getMinBlockedMs() { return sendBlockedCount > 0 ? minBlockedMs : 0; }
+    public long getMaxBlockedMs() { return maxBlockedMs; }
+    public double getAvgBlockedMs() { return sendBlockedCount > 0 ? (double) totalBlockedMs / sendBlockedCount : 0; }
+
+    public String getFirstTimestamp() { return firstTimestamp; }
+    public void setFirstTimestamp(String ts) { this.firstTimestamp = ts; }
+    public String getLastTimestamp() { return lastTimestamp; }
+    public void setLastTimestamp(String ts) { this.lastTimestamp = ts; }
+
     public List<String> getDeckNames() {
         return deckNames;
     }
@@ -162,6 +216,14 @@ public class GameLogMetrics {
         if (deckName != null && !deckName.isEmpty() && !deckNames.contains(deckName)) {
             deckNames.add(deckName);
         }
+    }
+
+    public int getSendErrors() {
+        return sendErrors;
+    }
+
+    public void setSendErrors(int sendErrors) {
+        this.sendErrors = sendErrors;
     }
 
     public List<String> getWarnings() {
@@ -184,6 +246,16 @@ public class GameLogMetrics {
         }
     }
 
+    /** Increment the occurrence count for a normalized error pattern. No cap. */
+    public void incrementErrorCount(String normalizedError) {
+        errorCounts.merge(normalizedError, 1, Integer::sum);
+    }
+
+    /** Get occurrence counts by normalized error pattern. */
+    public Map<String, Integer> getErrorCounts() {
+        return errorCounts;
+    }
+
     public boolean hasChecksumMismatch() {
         return hasChecksumMismatch;
     }
@@ -192,12 +264,18 @@ public class GameLogMetrics {
         this.hasChecksumMismatch = hasChecksumMismatch;
     }
 
-    public NetworkLogAnalyzer.ErrorContext getErrorContext() {
-        return errorContext;
+    /** Get error contexts keyed by normalized error pattern. */
+    public Map<String, NetworkLogAnalyzer.ErrorContext> getErrorContexts() {
+        return errorContexts;
     }
 
-    public void setErrorContext(NetworkLogAnalyzer.ErrorContext errorContext) {
-        this.errorContext = errorContext;
+    public void setErrorContexts(Map<String, NetworkLogAnalyzer.ErrorContext> errorContexts) {
+        this.errorContexts = errorContexts;
+    }
+
+    /** Get the first error context (convenience for backward compatibility). */
+    public NetworkLogAnalyzer.ErrorContext getErrorContext() {
+        return errorContexts.isEmpty() ? null : errorContexts.values().iterator().next();
     }
 
     @Override
@@ -205,24 +283,23 @@ public class GameLogMetrics {
         return String.format(
                 "GameLogMetrics[file=%s, players=%d, completed=%b, turns=%d, winner=%s, " +
                 "packets=%d, deltaBytes=%d, fullStateBytes=%d, savings=%.1f%%, " +
-                "warnings=%d, errors=%d, checksumMismatch=%b, failureMode=%s, firstErrorTurn=%d]",
+                "sendErrors=%d, warnings=%d, errors=%d, checksumMismatch=%b, failureMode=%s, firstErrorTurn=%d]",
                 logFileName, playerCount, gameCompleted, turnCount, winner,
                 deltaPacketCount, totalDeltaBytes, totalFullStateBytes,
-                calculateBandwidthSavings(), warnings.size(), errors.size(), hasChecksumMismatch,
+                calculateBandwidthSavings(), sendErrors, warnings.size(), errors.size(), hasChecksumMismatch,
                 failureMode, firstErrorTurn);
     }
 
     /**
      * Generate a concise summary report for single-game analysis.
-     * Shows key validation metrics without overwhelming detail.
+     * Adapts content based on whether delta sync data is present.
      */
     public String toSummaryReport() {
         StringBuilder sb = new StringBuilder();
 
-        // Header
         sb.append("\n");
         sb.append("-".repeat(60)).append("\n");
-        sb.append("Delta Sync Analysis Report\n");
+        sb.append("Game Analysis Report\n");
         sb.append("-".repeat(60)).append("\n");
 
         // Status
@@ -233,8 +310,8 @@ public class GameLogMetrics {
                 statusReason = " (checksum mismatch)";
             } else if (!gameCompleted) {
                 statusReason = " (game incomplete)";
-            } else if (!errors.isEmpty()) {
-                statusReason = " (errors detected)";
+            } else if (sendErrors > 0) {
+                statusReason = " (send errors)";
             }
         }
         sb.append(String.format("Status: %s%s\n", status, statusReason));
@@ -248,28 +325,30 @@ public class GameLogMetrics {
         sb.append(String.format("  Winner: %s\n", winner != null ? winner : "none"));
         sb.append("\n");
 
-        // Bandwidth metrics (the key validation data)
-        sb.append("Bandwidth Metrics:\n");
-        sb.append(String.format("  Delta Packets: %d\n", deltaPacketCount));
-        sb.append(String.format("  Delta Size: %s\n", TestUtils.formatBytes(totalDeltaBytes)));
-        sb.append(String.format("  FullState Baseline: %s\n", TestUtils.formatBytes(totalFullStateBytes)));
-        sb.append("\n");
+        // Bandwidth metrics (only if delta sync data present)
+        if (totalFullStateBytes > 0) {
+            sb.append("Bandwidth Metrics:\n");
+            sb.append(String.format("  Delta Packets: %d\n", deltaPacketCount));
+            sb.append(String.format("  Delta Size: %d bytes\n", totalDeltaBytes));
+            sb.append(String.format("  FullState Baseline: %d bytes\n", totalFullStateBytes));
+            sb.append("\n");
 
-        // Bandwidth savings (the primary validation metric)
-        sb.append("Bandwidth Savings:\n");
-        double savings = calculateBandwidthSavings();
-        sb.append(String.format("  Delta vs FullState: %.1f%% %s\n",
-                savings, savings >= 90 ? "(PASS >= 90%)" : "(FAIL < 90%)"));
-        if (deltaPacketCount > 0) {
-            sb.append(String.format("  Avg bytes per packet: %.0f\n",
-                    (double) totalDeltaBytes / deltaPacketCount));
+            sb.append("Bandwidth Savings:\n");
+            double savings = calculateBandwidthSavings();
+            sb.append(String.format("  Delta vs FullState: %.1f%% %s\n",
+                    savings, savings >= 90 ? "(PASS >= 90%)" : "(FAIL < 90%)"));
+            if (deltaPacketCount > 0) {
+                sb.append(String.format("  Avg bytes per packet: %.0f\n",
+                        (double) totalDeltaBytes / deltaPacketCount));
+            }
+            sb.append("\n");
         }
-        sb.append("\n");
 
         // Validation summary
         sb.append("Validation:\n");
         sb.append(String.format("  Checksum Mismatches: %d %s\n",
                 hasChecksumMismatch ? 1 : 0, hasChecksumMismatch ? "(FAIL)" : "(PASS)"));
+        sb.append(String.format("  Send Errors: %d\n", sendErrors));
         sb.append(String.format("  Errors: %d\n", errors.size()));
         sb.append(String.format("  Warnings: %d\n", warnings.size()));
 
@@ -284,6 +363,7 @@ public class GameLogMetrics {
         }
 
         // Error context if available
+        NetworkLogAnalyzer.ErrorContext errorContext = getErrorContext();
         if (errorContext != null && errorContext.errorMessage() != null) {
             sb.append("\n");
             sb.append("Error Context:\n");
@@ -300,10 +380,4 @@ public class GameLogMetrics {
 
         return sb.toString();
     }
-
-
-
-    /**
-     * Represents metrics for a single delta sync packet.
-     */
 }

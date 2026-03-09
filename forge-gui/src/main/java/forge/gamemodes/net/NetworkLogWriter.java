@@ -1,7 +1,6 @@
 package forge.gamemodes.net;
 
 import forge.gui.GuiBase;
-import forge.localinstance.properties.ForgeConstants;
 import org.tinylog.core.LogEntry;
 import org.tinylog.core.LogEntryValue;
 import org.tinylog.writers.AbstractFormatPatternWriter;
@@ -90,7 +89,7 @@ public class NetworkLogWriter extends AbstractFormatPatternWriter {
 
     private BufferedWriter createWriter(String key) {
         try {
-            File dir = new File(ForgeConstants.NETWORK_LOGS_DIR);
+            File dir = NetworkLogConfig.getLogDirectory();
             if (!dir.exists()) {
                 dir.mkdirs();
             }

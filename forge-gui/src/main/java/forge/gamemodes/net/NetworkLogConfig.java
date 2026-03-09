@@ -135,6 +135,9 @@ public final class NetworkLogConfig {
      * @return The generated batch ID in format "runYYYYMMDD-HHMMSS"
      */
     public static String generateBatchId() {
+        if (batchId != null) {
+            return batchId;
+        }
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
         batchId = "run" + timestamp;
         updateLogfileKey();
@@ -212,12 +215,25 @@ public final class NetworkLogConfig {
     }
 
     /**
+     * Get the log subdirectory for the current test run.
+     * In test mode with a batchId, logs go into a subdirectory named after the batchId.
+     * In normal mode, logs go directly into the network logs directory.
+     * @return The directory where log files should be written
+     */
+    public static File getLogDirectory() {
+        File baseDir = new File(ForgeConstants.NETWORK_LOGS_DIR);
+        if (testMode && batchId != null) {
+            return new File(baseDir, batchId);
+        }
+        return baseDir;
+    }
+
+    /**
      * Get the current log file for the active context.
      * @return The current log file, or null if logging not initialized
      */
     public static File getCurrentLogFile() {
-        String logDirPath = ForgeConstants.NETWORK_LOGS_DIR;
-        File logDir = new File(logDirPath);
+        File logDir = getLogDirectory();
         if (!logDir.exists()) return null;
 
         // Must match the NetworkLogWriter file naming pattern
@@ -246,7 +262,9 @@ public final class NetworkLogConfig {
     }
 
     /**
-     * Compute the composite logfile key from batch ID, instance suffix, and test mode.
+     * Compute the composite logfile key from instance suffix and test mode.
+     * In test mode with a batchId, the batchId is used as the subdirectory name
+     * rather than being part of the filename.
      * Uses global fallback for instance suffix in test mode.
      * Must match the key read by {@link NetworkLogWriter}.
      */
@@ -258,14 +276,14 @@ public final class NetworkLogConfig {
             }
             return normalModeKey;
         }
-        // Test mode: batch/instance/suffix machinery
-        String batchPart = batchId != null ? batchId : "nobatch";
+        // Test mode: instance suffix + test marker
+        // The batchId is now the subdirectory name, not part of the filename
         String suffix = ThreadContext.get("instanceSuffix");
         if (suffix == null) {
             suffix = globalInstanceSuffix;
         }
         String instancePart = suffix != null ? suffix : "default";
-        return batchPart + "-" + instancePart + "-test";
+        return instancePart + "-test";
     }
 
     /**
@@ -276,11 +294,12 @@ public final class NetworkLogConfig {
     }
 
     /**
-     * Delete old log files from the network logs directory, respecting:
-     * - Grace period: skip files modified within the last 5 minutes
-     * - Current batch protection: skip files whose name contains the current batchId
-     * - Max file limit from NET_MAX_LOG_FILES preference
+     * Delete old log subdirectories from the network logs directory, respecting:
+     * - Grace period: skip directories modified within the last 5 minutes
+     * - Current batch protection: skip the current batchId subdirectory
+     * - Max directory limit from NET_MAX_LOG_FILES preference
      * - Cleanup can be disabled via NET_LOG_CLEANUP_ENABLED preference
+     * - Also cleans up legacy flat log files (network-debug-*.log)
      *
      * Runs once per setInstanceSuffix() call (same trigger as the old implementation).
      */
@@ -292,8 +311,8 @@ public final class NetworkLogConfig {
             if (!FModel.getNetPreferences().getPrefBoolean(FNetPref.NET_LOG_CLEANUP_ENABLED)) {
                 return;
             }
-            int maxFiles = FModel.getNetPreferences().getPrefInt(FNetPref.NET_MAX_LOG_FILES);
-            if (maxFiles <= 0) {
+            int maxEntries = FModel.getNetPreferences().getPrefInt(FNetPref.NET_MAX_LOG_FILES);
+            if (maxEntries <= 0) {
                 return;
             }
 
@@ -302,39 +321,62 @@ public final class NetworkLogConfig {
                 return;
             }
 
-            File[] logFiles = logDir.listFiles((dir, name) -> name.startsWith(LOG_PREFIX) && name.endsWith(".log"));
-            if (logFiles == null || logFiles.length <= maxFiles) {
+            // Collect log subdirectories (run* pattern) and legacy flat log files
+            File[] entries = logDir.listFiles(f ->
+                    (f.isDirectory() && f.getName().startsWith("run")) ||
+                    (f.isFile() && f.getName().startsWith(LOG_PREFIX) && f.getName().endsWith(".log")));
+            if (entries == null || entries.length <= maxEntries) {
                 return;
             }
 
             // Sort oldest first
-            java.util.Arrays.sort(logFiles, java.util.Comparator.comparingLong(File::lastModified));
+            java.util.Arrays.sort(entries, java.util.Comparator.comparingLong(File::lastModified));
 
             long gracePeriodMs = 5 * 60 * 1000L;
             long now = System.currentTimeMillis();
             String currentBatch = batchId;
             int deleted = 0;
 
-            for (int i = 0; i < logFiles.length - maxFiles; i++) {
-                File f = logFiles[i];
-                // Grace period: skip recently modified files
+            for (int i = 0; i < entries.length - maxEntries; i++) {
+                File f = entries[i];
+                // Grace period: skip recently modified entries
                 if (now - f.lastModified() < gracePeriodMs) {
                     continue;
                 }
-                // Batch protection: skip files from the current batch
-                if (currentBatch != null && f.getName().contains(currentBatch)) {
+                // Batch protection: skip current batch directory
+                if (currentBatch != null && f.getName().equals(currentBatch)) {
                     continue;
                 }
-                if (f.delete()) {
+                if (f.isDirectory()) {
+                    deleteDirectory(f);
+                    deleted++;
+                } else if (f.delete()) {
                     deleted++;
                 }
             }
 
             if (deleted > 0) {
-                logger.debug("Log cleanup: deleted " + deleted + " old log files");
+                logger.debug("Log cleanup: deleted " + deleted + " old log entries");
             }
         } catch (Exception e) {
             // Non-critical — don't let cleanup failures affect logging
         }
+    }
+
+    /**
+     * Recursively delete a directory and its contents.
+     */
+    private static void deleteDirectory(File dir) {
+        File[] files = dir.listFiles();
+        if (files != null) {
+            for (File f : files) {
+                if (f.isDirectory()) {
+                    deleteDirectory(f);
+                } else {
+                    f.delete();
+                }
+            }
+        }
+        dir.delete();
     }
 }

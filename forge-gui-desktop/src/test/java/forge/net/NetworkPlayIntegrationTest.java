@@ -5,7 +5,6 @@ import forge.gamemodes.net.NetworkLogConfig;
 import forge.localinstance.properties.ForgeConstants;
 import forge.deck.Deck;
 import forge.net.analysis.AnalysisResult;
-import forge.net.analysis.GameLogMetrics;
 import forge.net.analysis.NetworkLogAnalyzer;
 
 import org.testng.Assert;
@@ -14,6 +13,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -33,7 +33,7 @@ import java.util.List;
  * - Single-game tests (2): testTrueNetworkTraffic (CI), testUnifiedHarnessLocalMode
  * - Configurable batch tests (2): testConfigurableSequential, testConfigurableParallel
  * - Comprehensive tests (2): runComprehensiveDeltaSyncTest, runQuickDeltaSyncTest
- * - Utility tests (1): analyzeExistingLogs
+ * - Utility tests (1): analyzeLog
  *
  * Usage examples:
  *
@@ -67,7 +67,6 @@ public class NetworkPlayIntegrationTest implements IHasNetLog {
     public static void setUp() {
         if (!initialized) {
             TestUtils.ensureFModelInitialized();
-            NetworkLogConfig.setTestMode(true);
             initialized = true;
         }
     }
@@ -75,6 +74,10 @@ public class NetworkPlayIntegrationTest implements IHasNetLog {
     private static void skipUnlessStressTestsEnabled() {
         if (!"true".equalsIgnoreCase(System.getProperty("run.stress.tests"))) {
             throw new SkipException("Stress tests skipped. Use -Drun.stress.tests=true to run.");
+        }
+        NetworkLogConfig.setTestMode(true);
+        if (NetworkLogConfig.getBatchId() == null) {
+            NetworkLogConfig.generateBatchId();
         }
     }
 
@@ -252,9 +255,10 @@ public class NetworkPlayIntegrationTest implements IHasNetLog {
 
         System.out.println("\n" + executionResult.toDetailedReport());
 
-        // Analyze log files
+        // Analyze log files from the run subdirectory
+        File logSubDir = NetworkLogConfig.getLogDirectory();
         NetworkLogAnalyzer analyzer = new NetworkLogAnalyzer();
-        AnalysisResult analysisResult = analyzer.analyzeComprehensiveTestAndAggregate(new File(ForgeConstants.NETWORK_LOGS_DIR), testStartTime);
+        AnalysisResult analysisResult = analyzer.analyzeComprehensiveTestAndAggregate(logSubDir, testStartTime);
 
         String report = analysisResult.generateReport();
         System.out.println("\n" + "=".repeat(80));
@@ -282,8 +286,9 @@ public class NetworkPlayIntegrationTest implements IHasNetLog {
 
         System.out.println("\n" + executionResult.toDetailedReport());
 
+        File logSubDir = NetworkLogConfig.getLogDirectory();
         NetworkLogAnalyzer analyzer = new NetworkLogAnalyzer();
-        AnalysisResult analysisResult = analyzer.analyzeComprehensiveTestAndAggregate(new File(ForgeConstants.NETWORK_LOGS_DIR), testStartTime);
+        AnalysisResult analysisResult = analyzer.analyzeComprehensiveTestAndAggregate(logSubDir, testStartTime);
 
         String report = analysisResult.generateReport();
         System.out.println("\n" + report);
@@ -294,55 +299,29 @@ public class NetworkPlayIntegrationTest implements IHasNetLog {
     }
 
     /**
-     * Analyze existing logs without running new games.
-     * Useful for testing report generation changes.
-     * Set -Dtest.batchId=20260127-213221 to analyze a specific batch.
+     * Analyze any log file or directory using the CLI analyzer.
+     * Usage:
+     *   mvn -pl forge-gui-desktop -am verify \
+     *       -Dtest="NetworkPlayIntegrationTest#analyzeLog" \
+     *       -Dlog.input="path/to/file.log" \
+     *       -Drun.stress.tests=true -Dsurefire.failIfNoSpecifiedTests=false
+     *
+     * Optional: -Dlog.output="path/to/report.md" (default: network-log-analysis.md in same directory as input)
      */
     @Test
-    public void analyzeExistingLogs() {
+    public void analyzeLog() {
         skipUnlessStressTestsEnabled();
-        netLog.info("Analyzing existing logs...");
+        String input = System.getProperty("log.input");
+        Assert.assertNotNull(input, "Must set -Dlog.input=<file|dir>");
 
-        File logDir = new File(ForgeConstants.NETWORK_LOGS_DIR);
-        NetworkLogAnalyzer analyzer = new NetworkLogAnalyzer();
-
-        String batchId = System.getProperty("test.batchId", "");
-        List<GameLogMetrics> metrics;
-
-        if (!batchId.isEmpty()) {
-            String pattern = "network-debug-run" + batchId + "-(?:batch\\d+-)?game\\d+-\\d+p-test\\.log";
-            System.out.println("Analyzing batch: " + batchId + " (pattern: " + pattern + ")");
-            metrics = analyzer.analyzeDirectory(logDir, pattern);
-        } else {
-            metrics = analyzer.analyzeComprehensiveTestLogs(logDir);
+        String output = System.getProperty("log.output");
+        List<String> args = new ArrayList<>();
+        if (output != null) {
+            args.add("-o");
+            args.add(output);
         }
-
-        netLog.info("Found {} log files", metrics.size());
-
-        if (metrics.isEmpty()) {
-            System.out.println("No comprehensive test logs found in " + NetworkLogConfig.sanitizePath(logDir.getAbsolutePath()));
-            return;
-        }
-
-        AnalysisResult result = analyzer.buildAnalysisResult(metrics);
-        String report = result.generateReport();
-        System.out.println("\n" + report);
-
-        // Use batchId if provided, otherwise timestamp - keep network-debug- prefix for consistency
-        String filename;
-        if (!batchId.isEmpty()) {
-            filename = "network-debug-run" + batchId + "-results.md";
-        } else {
-            String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
-            filename = "network-debug-analysis-" + timestamp + "-results.md";
-        }
-        java.nio.file.Path reportPath = logDir.toPath().resolve(filename);
-        try {
-            java.nio.file.Files.write(reportPath, report.getBytes());
-            System.out.println("Report saved to: " + NetworkLogConfig.sanitizePath(reportPath.toString()));
-        } catch (IOException e) {
-            System.err.println("Failed to save report: " + e.getMessage());
-        }
+        args.add(input);
+        forge.net.analysis.LogAnalyzerCli.main(args.toArray(new String[0]));
     }
 
     // ==================== Helper Methods ====================
