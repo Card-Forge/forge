@@ -26,6 +26,7 @@ Name=Klothys
 1 Cultivate|sta
 1 Curse of Bloodletting|dka
 1 Curse of Opulence|tdc
+1 Darksteel Citadel|dst
 1 Dragonlair Spider|pca
 1 Eidolon of Blossoms|woc
 1 Enchantress's Presence|woc
@@ -49,9 +50,8 @@ Name=Klothys
 1 Harrow|eoc
 1 Herald of the Pantheon|cmm
 1 Kodama's Reach|cmm
-1 Leyline of Combustion|m20
 1 Manglehorn|akh
-13 Mountain|thb
+12 Mountain|thb
 1 Naya Panorama|ncc
 1 Neheb, the Eternal|mkc
 1 Ojer Axonil, Deepest Might|lci
@@ -62,7 +62,7 @@ Name=Klothys
 1 Sawhorn Nemesis|m3c
 1 Setessan Champion|woc
 1 Sheltered Thicket|eoc
-1 Shivan Gorge|dsc
+1 Slagwoods Bridge|mh2
 1 Stomping Ground|eoe
 1 Blasphemous Act|blc
 1 Shatterstorm|atq
@@ -73,6 +73,7 @@ Name=Klothys
 1 Boom|tsr
 1 Decree of Annihilation|scg
 1 Jokulhaups|ice
+1 Ruination|sth
 1 Tectonic Giant|dsc
 1 Temple of Abandon|tdc
 1 Terramorphic Expanse|eoc
