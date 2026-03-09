@@ -185,7 +185,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
         CardView card = event.card();
         ZoneType zoneTo = event.zoneType();
         EventValueChangeType zoneEventMode = event.mode();
-        if (card == null || zoneEventMode != EventValueChangeType.Added || zoneTo != ZoneType.Battlefield || !card.getCurrentState().isLand()) {
+        if (zoneEventMode != EventValueChangeType.Added || zoneTo != ZoneType.Battlefield || !card.getCurrentState().isLand()) {
             return null;
         }
         if (hasSpecificCardEffect(card)) {
