@@ -15,6 +15,7 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.AbstractGuiGame;
+import forge.gamemodes.net.GameEventProxy;
 import forge.gamemodes.net.GameProtocolSender;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.gui.control.GameEventForwarder;
@@ -62,6 +63,13 @@ public class NetGuiGame extends AbstractGuiGame {
 
     public void setForwarder(GameEventForwarder forwarder) {
         this.forwarder = forwarder;
+    }
+
+    public void shutdownForwarder() {
+        if (forwarder != null) {
+            forwarder.shutdown();
+            forwarder = null;
+        }
     }
 
     private void flushPendingEvents() {
@@ -324,8 +332,9 @@ public class NetGuiGame extends AbstractGuiGame {
         if (paused) { return; }
         Logger.info("Sending batch of {}: [{}]", () -> events.size(),
                 () -> events.stream().map(e -> e.getClass().getSimpleName()).collect(Collectors.joining(", ")));
+        List<Object> proxied = GameEventProxy.wrapAll(events);
         sender.write(ProtocolMethod.setGameView, getGameView());
-        sender.send(ProtocolMethod.handleGameEvents, events);
+        sender.send(ProtocolMethod.handleGameEvents, proxied);
     }
 
     @Override

@@ -30,6 +30,7 @@
 		"Wood"
 	],
 	"enemies": [
+		"Colfenor",
 		"Ellivere",
 		"Jyoti",
 		"Kamahl",
@@ -58,6 +59,7 @@
 		"Sacred Elven Grove",
 		"Selesnya Garden",
 		"Simian City",
+		"Simic Breeding Pool",
 		"Slimy Sewers",
 		"Sphinx of Riddles Green",
 		"Squirrel Farm",
