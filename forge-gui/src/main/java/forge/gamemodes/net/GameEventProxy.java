@@ -1,10 +1,7 @@
 package forge.gamemodes.net;
 
-import forge.game.card.CardView;
 import forge.game.event.GameEvent;
-import forge.game.player.PlayerView;
 import forge.trackable.TrackableObject;
-import forge.trackable.TrackableTypes;
 import forge.trackable.TrackableTypes.TrackableType;
 import forge.trackable.Tracker;
 
@@ -97,8 +94,6 @@ public class GameEventProxy implements Serializable, IHasNetLog {
     // Other TrackableObject types (StackItemView, SpellAbilityView, CombatView)
     // are either ephemeral or not reachable from GameView's property graph, so
     // they serialize normally.
-    private static final byte TYPE_CARD_VIEW = 0;
-    private static final byte TYPE_PLAYER_VIEW = 1;
 
     /**
      * Lightweight serializable marker that replaces a TrackableObject reference
@@ -116,26 +111,6 @@ public class GameEventProxy implements Serializable, IHasNetLog {
     }
 
     /**
-     * Returns the type tag for the given TrackableObject, or -1 if unsupported.
-     */
-    private static byte typeTagFor(TrackableObject obj) {
-        if (obj instanceof CardView) return TYPE_CARD_VIEW;
-        if (obj instanceof PlayerView) return TYPE_PLAYER_VIEW;
-        return -1;
-    }
-
-    /**
-     * Returns the TrackableType for the given type tag, for Tracker lookup.
-     */
-    private static TrackableType<?> trackableTypeFor(byte typeTag) {
-        switch (typeTag) {
-            case TYPE_CARD_VIEW: return TrackableTypes.CardViewType;
-            case TYPE_PLAYER_VIEW: return TrackableTypes.PlayerViewType;
-            default: return null;
-        }
-    }
-
-    /**
      * ObjectOutputStream that replaces every TrackableObject with an IdRef.
      */
     private static class IdReplacingOutputStream extends ObjectOutputStream {
@@ -147,9 +122,9 @@ public class GameEventProxy implements Serializable, IHasNetLog {
         @Override
         protected Object replaceObject(Object obj) {
             if (obj instanceof TrackableObject trackable) {
-                byte tag = typeTagFor(trackable);
-                if (tag >= 0) {
-                    return new IdRef(tag, trackable.getId());
+                int tag = DeltaPacket.typeTagFor(trackable);
+                if (tag == DeltaPacket.TYPE_CARD_VIEW || tag == DeltaPacket.TYPE_PLAYER_VIEW) {
+                    return new IdRef((byte) tag, trackable.getId());
                 }
             }
             return obj;
@@ -172,7 +147,7 @@ public class GameEventProxy implements Serializable, IHasNetLog {
         @Override
         protected Object resolveObject(Object obj) {
             if (obj instanceof IdRef ref) {
-                TrackableType<?> type = trackableTypeFor(ref.typeTag);
+                TrackableType<?> type = DeltaPacket.trackableTypeFor(ref.typeTag);
                 if (type != null) {
                     Object resolved = tracker.getObj(type, ref.id);
                     if (resolved == null) {

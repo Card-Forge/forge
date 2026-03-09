@@ -1,9 +1,17 @@
 package forge.gamemodes.net;
 
 import forge.card.CardStateName;
+import forge.game.GameView;
+import forge.game.card.CardView;
+import forge.game.combat.CombatView;
+import forge.game.player.PlayerView;
+import forge.game.spellability.StackItemView;
 import forge.gamemodes.net.server.RemoteClient;
 import forge.gamemodes.net.event.NetEvent;
+import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
+import forge.trackable.TrackableTypes;
+import forge.trackable.TrackableTypes.TrackableType;
 
 import java.io.Serializable;
 import java.util.Collections;
@@ -28,12 +36,33 @@ public final class DeltaPacket implements NetEvent {
     private final int checksum; // For periodic validation
     private final boolean checksumIncluded;
 
-    // Object type constants (shared by NewObjectData and DeltaData)
+    // Object type constants
     public static final int TYPE_CARD_VIEW = 0;
     public static final int TYPE_PLAYER_VIEW = 1;
     public static final int TYPE_STACK_ITEM_VIEW = 2;
     public static final int TYPE_COMBAT_VIEW = 3;
     public static final int TYPE_GAME_VIEW = 4;
+
+    /** Returns the type tag for the given TrackableObject, or -1 if unsupported. */
+    public static int typeTagFor(TrackableObject obj) {
+        if (obj instanceof CardView) return TYPE_CARD_VIEW;
+        if (obj instanceof PlayerView) return TYPE_PLAYER_VIEW;
+        if (obj instanceof StackItemView) return TYPE_STACK_ITEM_VIEW;
+        if (obj instanceof CombatView) return TYPE_COMBAT_VIEW;
+        if (obj instanceof GameView) return TYPE_GAME_VIEW;
+        return -1;
+    }
+
+    /** Returns the TrackableType for the given type tag, or null if unknown. */
+    public static TrackableType<?> trackableTypeFor(int typeTag) {
+        switch (typeTag) {
+            case TYPE_CARD_VIEW: return TrackableTypes.CardViewType;
+            case TYPE_PLAYER_VIEW: return TrackableTypes.PlayerViewType;
+            case TYPE_STACK_ITEM_VIEW: return TrackableTypes.StackItemViewType;
+            case TYPE_COMBAT_VIEW: return TrackableTypes.CombatViewType;
+            default: return null;
+        }
+    }
 
     /**
      * Data holder for serialized CardStateView properties.

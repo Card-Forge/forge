@@ -4,7 +4,6 @@ import forge.game.GameEntityView;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
-import forge.game.combat.CombatView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
 import forge.gamemodes.net.DeltaPacket;
@@ -210,21 +209,6 @@ public class DeltaSyncManager implements IHasNetLog {
         return id;
     }
 
-    private int getObjectType(TrackableObject obj) {
-        if (obj instanceof CardView) {
-            return DeltaPacket.TYPE_CARD_VIEW;
-        } else if (obj instanceof PlayerView) {
-            return DeltaPacket.TYPE_PLAYER_VIEW;
-        } else if (obj instanceof StackItemView) {
-            return DeltaPacket.TYPE_STACK_ITEM_VIEW;
-        } else if (obj instanceof CombatView) {
-            return DeltaPacket.TYPE_COMBAT_VIEW;
-        } else if (obj instanceof GameView) {
-            return DeltaPacket.TYPE_GAME_VIEW;
-        }
-        return DeltaPacket.TYPE_GAME_VIEW;
-    }
-
     // ==================== Delta collection ====================
 
     private void collectObjectDelta(TrackableObject obj,
@@ -235,7 +219,7 @@ public class DeltaSyncManager implements IHasNetLog {
             return;
         }
 
-        int objType = getObjectType(obj);
+        int objType = DeltaPacket.typeTagFor(obj);
         int deltaKey = makeDeltaKey(objType, obj.getId());
         currentObjectIds.add(deltaKey);
 
