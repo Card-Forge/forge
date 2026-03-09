@@ -13,7 +13,6 @@ import forge.util.GuiDisplayUtil;
 import forge.util.Localizer;
 import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
-import org.tinylog.Logger;
 
 import java.util.Set;
 
@@ -91,7 +90,6 @@ public final class GamePlayerUtil {
 
         assert (!profile.isEmpty()); // TODO test instead of assert
 
-        Logger.debug("[AI Preferences] " + name + " using profile " + profile);
         player.setAiProfile(profile);
         player.setAvatarIndex(avatarIndex);
         player.setSleeveIndex(sleeveIndex);

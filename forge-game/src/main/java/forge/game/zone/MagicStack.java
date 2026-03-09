@@ -19,7 +19,6 @@ package forge.game.zone;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import forge.game.*;
@@ -49,6 +48,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -371,30 +371,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             sp.getActivatingPlayer().addSpellCastThisTurn();
 
             // Add expend mana
-            Map<Player, Integer> expendPlayers = Maps.newHashMap();
-            for (Mana m : sp.getPayingMana()) {
-                // TODO this currently assumes that all mana came from your own pool
-                // but with Assist some might belong to another player instead
-                Player manaPayer = sp.getActivatingPlayer();
-                expendPlayers.put(manaPayer, expendPlayers.getOrDefault(manaPayer, 0) + 1);
-            }
+            Map<Player, Long> expendPlayers = sp.getPayingMana().stream().collect(Collectors.groupingBy(Mana::getPlayer, Collectors.counting()));
 
-            for (Entry<Player, Integer> entry : expendPlayers.entrySet()) {
-                Player manaPayer = entry.getKey();
-                int startingMana =  manaPayer.getExpentThisTurn();
-                int totalMana = startingMana + entry.getValue();
-
-                if (totalMana == 0) {
-                    continue;
-                }
-
-                manaPayer.setExpentThisTurn(totalMana);
-                for (int i = startingMana + 1; i <= totalMana; i++) {
-                    Map<AbilityKey, Object> expendParams = AbilityKey.mapFromPlayer(manaPayer);
-                    expendParams.put(AbilityKey.SpellAbility, sp);
-                    expendParams.put(AbilityKey.Amount, i);
-                    game.getTriggerHandler().runTrigger(TriggerType.ManaExpend, expendParams, true);
-                }
+            for (Entry<Player, Long> entry : expendPlayers.entrySet()) {
+                entry.getKey().addExpentThisTurn((int)(long)entry.getValue(), sp);
             }
         }
 
