@@ -158,6 +158,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
 
     private Void processCard(final CardView cardView, final Set<CardView> list) {
+        if (cardView == null) { return null; }
         synchronized (list) {
             list.add(cardView);
         }
@@ -167,7 +168,9 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         if (cards.isEmpty()) { return null; }
 
         synchronized (list) {
-            list.addAll(cards);
+            for (CardView c : cards) {
+                if (c != null) list.add(c);
+            }
         }
         return processEvent();
     }
