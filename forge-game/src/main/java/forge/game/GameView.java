@@ -33,7 +33,7 @@ public class GameView extends TrackableObject {
 
     private final transient Game game; //TODO: Remove this when possible before network support added
     private final transient Match match; //TODO: Remove this when possible before network support added
-    private final transient GameLog gameLog;
+    private transient GameLog gameLog;
 
     public GameView(final Game game) {
         super(game.getId(), game.getTracker());
@@ -181,6 +181,9 @@ public class GameView extends TrackableObject {
     }
 
     public GameLog getGameLog() {
+        if (gameLog == null) {
+            gameLog = new GameLog();
+        }
         return gameLog;
     }
 
