@@ -844,10 +844,11 @@ public class ComputerUtilCard {
             return null;
         }
 
-        return list.stream().flatMap(c -> c.getType().getCoreTypes().stream())
+        Map.Entry<CardType.CoreType, Long> result = list.stream().flatMap(c -> c.getType().getCoreTypes().stream())
                 .filter(valid::contains)
                 .collect(Collectors.groupingBy(s -> s, Collectors.counting()))
-                .entrySet().stream().max(Entry.comparingByValue()).orElse(Map.entry(null, 0l)).getKey();
+                .entrySet().stream().max(Entry.comparingByValue()).orElse(null);
+        return result == null ? null : result.getKey(); // Map.entry doesn't like null key
     }
 
     /**
