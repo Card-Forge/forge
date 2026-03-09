@@ -353,11 +353,28 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
 
                 Object resolved = resolveFromNetwork(prop, value, tracker);
 
+                if (prop == TrackableProperty.Zone && obj instanceof CardView) {
+                    netLog.debug("[DeltaSync] CardView id={} Zone: {} -> {}",
+                            obj.getId(), ((CardView) obj).getZone(), resolved);
+                }
+
                 // Track zone changes for UI refresh
                 if (obj instanceof PlayerView playerView) {
                     ZoneType changedZone = getZoneTypeForProperty(prop);
                     if (changedZone != null) {
                         trackZoneChange(playerView, changedZone);
+                        // Update each CardView's Zone property to match the zone it's now in.
+                        // The server's delta sync sends zone collection changes (e.g. Hand=[id1,id2])
+                        // but does NOT always send per-card Zone property updates. Without this,
+                        // CardView.getZone() returns the stale zone from initial creation (Library),
+                        // causing canBeShownTo() to fail and cards to render as hidden/empty.
+                        if (resolved instanceof TrackableCollection<?> coll) {
+                            for (Object item : coll) {
+                                if (item instanceof CardView cv && cv.getZone() != changedZone) {
+                                    cv.set(TrackableProperty.Zone, changedZone);
+                                }
+                            }
+                        }
                     }
                 }
 
