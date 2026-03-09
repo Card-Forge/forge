@@ -3,6 +3,7 @@ package forge.gamemodes.net.client;
 import com.google.common.collect.Lists;
 import forge.LobbyPlayer;
 import forge.game.*;
+import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.match.LobbySlot;
@@ -119,6 +120,11 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
             // subsequent handleGameEvents.beforeCall which needs to resolve IdRefs.
             if (protocolMethod == ProtocolMethod.setGameView && args.length > 0 && args[0] instanceof GameView gv) {
                 gv.updateObjLookup();
+                // updateObjLookup skips objects already in the tracker, so CardViews
+                // registered on the first setGameView become stale (wrong zone, etc.).
+                // Replace tracker entries with incoming server CardViews so that
+                // IdRef resolution in handleGameEvents gets current state.
+                refreshTrackerCardViews(gv);
             }
             replicateProps(args);
         }
@@ -314,6 +320,33 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
         PlayerView existingPlayerView = tracker.getObj(TrackableTypes.PlayerViewType, newPlayerView.getId());
         existingPlayerView.copyChangedProps(newPlayerView);
         Logger.info("Replicated PlayerView properties - {}", existingPlayerView);
+    }
+
+    /**
+     * Replace tracker CardView entries with incoming server CardViews.
+     * <p>
+     * {@code updateObjLookup()} skips objects already in the tracker, so CardViews
+     * registered on the first {@code setGameView} become stale — their zone, state,
+     * and other properties no longer reflect the server's current game state.
+     * When {@link GameEventProxy} resolves IdRefs from the tracker, it gets these
+     * stale CardViews, causing issues like card-back images in the game log
+     * (the stale zone is Library, so {@code canBeShownTo} returns false).
+     */
+    private void refreshTrackerCardViews(final GameView gv) {
+        if (gv.getPlayers() == null) { return; }
+        for (final PlayerView pv : gv.getPlayers()) {
+            final EnumMap<?, ?> props = pv.getProps();
+            if (props == null) { continue; }
+            for (final Object value : props.values()) {
+                if (value instanceof TrackableCollection<?> collection) {
+                    for (final Object item : collection) {
+                        if (item instanceof CardView cv) {
+                            tracker.putObj(TrackableTypes.CardViewType, cv.getId(), cv);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @Override
