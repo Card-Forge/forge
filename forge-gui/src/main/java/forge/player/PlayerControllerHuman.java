@@ -1608,7 +1608,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (cost.isOnlyManaCost() && cost.getTotalMana().isZero() && isFullControl(FullControlFlag.NoFreeCombatCostHandling)) {
             return true;
         }
-        return HumanPlay.payCostDuringAbilityResolve(this, player, cost, sa, prompt);
+        return PlaySpellAbility.payCostDuringAbilityResolve(this, player, cost, sa, prompt);
     }
 
     @Override
@@ -1956,13 +1956,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         } else if (sa.isKeyword(Keyword.CUMULATIVE_UPKEEP)) {
             prompt = "Cumulative upkeep for " + sa.getHostCard();
         }
-        return HumanPlay.payCostDuringAbilityResolve(this, player, cost, sa, prompt);
+        return PlaySpellAbility.payCostDuringAbilityResolve(this, player, cost, sa, prompt);
     }
 
     @Override
     public boolean payCostDuringRoll(final Cost cost, final SpellAbility sa) {
         // if it's paid by the AI already the human can pay, but it won't change anything
-        return HumanPlay.payCostDuringAbilityResolve(this, player, cost, sa, null);
+        return PlaySpellAbility.payCostDuringAbilityResolve(this, player, cost, sa, null);
     }
 
     // stores saved order for different sets of SpellAbilities
