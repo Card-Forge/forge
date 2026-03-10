@@ -38,7 +38,7 @@ public class Craft extends KeywordWithCost {
             sb.append("Exile ").append(k[2]).append(" from among permanents you control and/or cards in your graveyard");
             reminder = sb.toString();
         } else {
-            CostExile exile = cost.getCostPartByType(CostExile::class);
+            CostExile exile = cost.getCostPartByType(CostExile.class);
             final StringBuilder sb = new StringBuilder();
             int xmin = cost.getCostMana().getXMin();
             if (xmin > 0) {
