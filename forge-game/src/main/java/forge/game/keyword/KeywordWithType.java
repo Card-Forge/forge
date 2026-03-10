@@ -28,20 +28,9 @@ public class KeywordWithType extends KeywordInstance<KeywordWithType> implements
     protected void parse(String details) {
         String k[];
         if (details.contains(":")) {
-            switch (getKeyword()) {
-            case BANDSWITH:
-            case ENCHANT:
-            case HEXPROOF:
-            case LANDWALK:
-                k = details.split(":");
-                type = k[0];
-                descType = k[1];
-                break;
-            default:
-                k = details.split(":");
-                type = k[1];
-                descType = k[0];
-            }
+            k = details.split(":");
+            type = k[0];
+            descType = k[1];
         } else {
             MagicColor.Color color = MagicColor.Color.fromName(details);
             if (color != MagicColor.Color.COLORLESS) {
