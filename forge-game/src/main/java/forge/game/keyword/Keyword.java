@@ -111,7 +111,7 @@ public enum Keyword {
     KICKER("Kicker", Kicker.class, false, "You may pay an additional %s as you cast this spell."),
     JOB_SELECT("Job select", SimpleKeyword.class, false, "When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it."),
     JUMP_START("Jump-start", SimpleKeyword.class, false, "You may cast this card from your graveyard by discarding a card in addition to paying its other costs. Then exile this card."),
-    LANDWALK("Landwalk", KeywordWithType.class, true, "This creature is unblockable as long as defending player controls {1:%s}."),
+    LANDWALK("Landwalk", Landwalk.class, true, "This creature is unblockable as long as defending player controls {1:%s}."),
     LEVEL_UP("Level up", KeywordWithCost.class, false, "%s: Put a level counter on this. Level up only as a sorcery."),
     LIFELINK("Lifelink", SimpleKeyword.class, true, "Damage dealt by this creature also causes its controller to gain that much life."),
     LIVING_METAL("Living metal", SimpleKeyword.class, true, "During your turn, this Vehicle is also a creature."),
