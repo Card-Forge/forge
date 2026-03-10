@@ -107,13 +107,13 @@
                     &quot;text&quot;: &quot;One less monster. Good riddance. Come back if you find another.'&quot;,
 					&quot;action&quot;: [ 
                     {&quot;grantRewards&quot;: [
-                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 500}          
-                      ]
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 500}
+                      ],
                     },
 					{&quot;removeItem&quot;:&quot;Kill Trophy&quot;},
-					&quot;condition&quot;:[{&quot;item&quot;:&quot;Kill Trophy&quot;}], 
-					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
-				},
+				],
+					&quot;condition&quot;: [{&quot;item&quot;:&quot;Kill Trophy&quot;}],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]},
 				{
 					&quot;name&quot;: &quot;Let's talk.&quot;,
 					&quot;text&quot;: &quot;'This cavern's full of monsters. I got pretty badly injured hunting them, but it'd be a shame to just let good trophies go to waste.'&quot;,
