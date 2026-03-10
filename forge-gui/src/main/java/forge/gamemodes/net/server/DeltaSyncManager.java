@@ -291,19 +291,13 @@ public class DeltaSyncManager implements IHasNetLog {
             return;
         }
 
-        // Skip cards already visited to prevent circular-reference recursion
+        // Skip cards already visited to prevent duplicate processing
         int deltaKey = makeDeltaKey(DeltaPacket.TYPE_CARD_VIEW, card.getId());
         if (currentObjectIds.contains(deltaKey)) {
             return;
         }
 
         collectObjectDelta(card, objectDeltas, newObjects, currentObjectIds);
-
-        if (card.getAttachedCards() != null) {
-            for (CardView attached : card.getAttachedCards()) {
-                collectCardDelta(attached, objectDeltas, newObjects, currentObjectIds);
-            }
-        }
     }
 
     private static void forEachNonBattlefieldZone(PlayerView player,
