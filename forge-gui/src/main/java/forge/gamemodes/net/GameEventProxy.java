@@ -29,36 +29,54 @@ public class GameEventProxy implements Serializable, IHasNetLog {
 
     /**
      * Wraps a GameEvent by serializing it with TrackableObject references
-     * replaced by IdRef markers.
+     * replaced by IdRef markers. If a tracker is provided, verifies that
+     * each replaced object is present in the tracker (server-side sanity
+     * check). Returns null if verification fails.
      */
-    public static GameEventProxy wrap(GameEvent event) throws IOException {
+    public static GameEventProxy wrap(GameEvent event, Tracker tracker) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream(256);
-        try (IdReplacingOutputStream out = new IdReplacingOutputStream(baos)) {
+        try (IdReplacingOutputStream out = new IdReplacingOutputStream(baos, tracker)) {
             out.writeObject(event);
+            if (out.hasUnresolvableRefs()) {
+                return null;
+            }
         }
         return new GameEventProxy(baos.toByteArray());
     }
 
     /**
      * Unwraps the proxy by deserializing the event with IdRef markers
-     * resolved to TrackableObjects from the given Tracker.
+     * resolved to TrackableObjects from the given Tracker. Returns null
+     * if any IdRef could not be resolved (the event would have null
+     * fields where TrackableObjects were expected).
      */
     public GameEvent unwrap(Tracker tracker) throws IOException, ClassNotFoundException {
         ByteArrayInputStream bais = new ByteArrayInputStream(eventData);
         try (IdResolvingInputStream in = new IdResolvingInputStream(bais, tracker)) {
-            return (GameEvent) in.readObject();
+            GameEvent event = (GameEvent) in.readObject();
+            if (in.hasUnresolvedRefs()) {
+                return null;
+            }
+            return event;
         }
     }
 
     /**
-     * Wraps a list of events. On failure for any individual event,
-     * keeps the original event as a fallback.
+     * Wraps a list of events. Uses the tracker for server-side sanity
+     * checking: events with unresolvable references are dropped rather
+     * than sent (the client would fail to resolve them too).
      */
-    public static List<Object> wrapAll(List<GameEvent> events) {
+    public static List<Object> wrapAll(List<GameEvent> events, Tracker tracker) {
         List<Object> result = new ArrayList<>(events.size());
         for (GameEvent event : events) {
             try {
-                result.add(wrap(event));
+                GameEventProxy proxy = wrap(event, tracker);
+                if (proxy != null) {
+                    result.add(proxy);
+                } else {
+                    netLog.debug("Dropped {} with unresolvable references",
+                            event.getClass().getSimpleName());
+                }
             } catch (IOException e) {
                 netLog.warn("Failed to wrap {}, sending as-is: {}",
                         event.getClass().getSimpleName(), e.getMessage());
@@ -77,7 +95,12 @@ public class GameEventProxy implements Serializable, IHasNetLog {
         for (Object item : items) {
             if (item instanceof GameEventProxy proxy) {
                 try {
-                    result.add(proxy.unwrap(tracker));
+                    GameEvent event = proxy.unwrap(tracker);
+                    if (event != null) {
+                        result.add(event);
+                    } else {
+                        netLog.debug("Dropped event with unresolved references");
+                    }
                 } catch (IOException | ClassNotFoundException e) {
                     netLog.warn("Failed to unwrap GameEventProxy: {}", e.getMessage());
                 }
@@ -112,11 +135,21 @@ public class GameEventProxy implements Serializable, IHasNetLog {
 
     /**
      * ObjectOutputStream that replaces every TrackableObject with an IdRef.
+     * If a tracker is provided, verifies each ID is resolvable as a
+     * server-side sanity check.
      */
     private static class IdReplacingOutputStream extends ObjectOutputStream {
-        IdReplacingOutputStream(OutputStream out) throws IOException {
+        private final Tracker tracker;
+        private boolean unresolvableRefs;
+
+        IdReplacingOutputStream(OutputStream out, Tracker tracker) throws IOException {
             super(out);
+            this.tracker = tracker;
             enableReplaceObject(true);
+        }
+
+        boolean hasUnresolvableRefs() {
+            return unresolvableRefs;
         }
 
         @Override
@@ -124,6 +157,14 @@ public class GameEventProxy implements Serializable, IHasNetLog {
             if (obj instanceof TrackableObject trackable) {
                 int tag = DeltaPacket.typeTagFor(trackable);
                 if (tag == DeltaPacket.TYPE_CARD_VIEW || tag == DeltaPacket.TYPE_PLAYER_VIEW) {
+                    if (tracker != null) {
+                        TrackableType<?> type = DeltaPacket.trackableTypeFor(tag);
+                        if (type != null && tracker.getObj(type, trackable.getId()) == null) {
+                            netLog.debug("Server-side check: {} id={} not in tracker",
+                                    trackable.getClass().getSimpleName(), trackable.getId());
+                            unresolvableRefs = true;
+                        }
+                    }
                     return new IdRef((byte) tag, trackable.getId());
                 }
             }
@@ -133,15 +174,21 @@ public class GameEventProxy implements Serializable, IHasNetLog {
 
     /**
      * ObjectInputStream that resolves IdRef markers back to TrackableObjects
-     * from the Tracker.
+     * from the Tracker. Tracks whether any resolution failed so callers
+     * can drop damaged events.
      */
     private static class IdResolvingInputStream extends ObjectInputStream {
         private final Tracker tracker;
+        private boolean unresolvedRefs;
 
         IdResolvingInputStream(InputStream in, Tracker tracker) throws IOException {
             super(in);
             this.tracker = tracker;
             enableResolveObject(true);
+        }
+
+        boolean hasUnresolvedRefs() {
+            return unresolvedRefs;
         }
 
         @Override
@@ -153,6 +200,7 @@ public class GameEventProxy implements Serializable, IHasNetLog {
                     if (resolved == null) {
                         netLog.debug("Could not resolve {} id={} from Tracker",
                                 type.getClass().getSimpleName(), ref.id);
+                        unresolvedRefs = true;
                     }
                     return resolved;
                 }

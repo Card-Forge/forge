@@ -2778,6 +2778,16 @@ public class CardFactoryUtil {
             final SpellAbility sa = AbilityFactory.getAbility(sbClass.toString(), card);
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
+        } else if (inst instanceof Craft craft) {
+            // Create return transformed ability string
+            String ab = "AB$ ChangeZone | CostDesc$ " + craft.getTitle() + " | Cost$ Exile<1/CARDNAME> " + craft.getCostString() + " | " +
+                    "Origin$ Exile | Destination$ Battlefield | Transformed$ True | Defined$ CorrectedSelf | " +
+                    "XAnnounceTitle$ " + Localizer.getInstance().getMessage("lblCraft") + " | " +
+                    "SorcerySpeed$ True | StackDescription$ Return this card transformed under its owner's control. " +
+                    "(Craft) | SpellDescription$ (" + inst.getReminderText() + ")";
+            final SpellAbility newSA = AbilityFactory.getAbility(ab, card);
+            newSA.setIntrinsic(intrinsic);
+            inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Dash")) {
             final String[] k = keyword.split(":");
             final Cost dashCost = new Cost(k[1], false);
@@ -2841,7 +2851,7 @@ public class CardFactoryUtil {
             newSA.getRestrictions().setZone(ZoneType.Graveyard);
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
-        } else if (keyword.startsWith("Emerge") && inst instanceof Emerge emerge) {
+        } else if (inst instanceof Emerge emerge) {
             String desc = "(" + emerge.getTitleWithoutCost()  + ")";
 
             final SpellAbility sa = card.getFirstSpellAbilityWithFallback();
@@ -2885,58 +2895,6 @@ public class CardFactoryUtil {
 
             // append to original SA
             origSA.appendSubAbility(newSA);
-        } else if (keyword.startsWith("Craft")) {
-            if (!keyword.contains(":")) {
-                System.err.println("Malformed Craft entry! - Card: " + card.toString());
-                return;
-            }
-            String[] k = keyword.split(":");
-
-            final StringBuilder cd = new StringBuilder();
-            cd.append(k[0]).append(" with ");
-            final Cost kCost = new Cost(k[1], true);
-            boolean plural = false;
-            if (k[1].contains("XMin")) {
-                String cutString = k[1].substring(k[1].indexOf("XMin") + 4);
-                int number = Integer.parseInt(cutString.substring(0, cutString.indexOf(" ")));
-                cd.append(Lang.getNumeral(number)).append(" or more ");
-                plural = true;
-            }
-            if (k.length > 2) {
-                cd.append(k[2].isEmpty() ? "" : k[2] + " ");
-            } else for (CostPart part : kCost.getCostParts()) {
-                if (part instanceof CostExile) {
-                    String amount = part.getAmount();
-                    if (StringUtils.isNumeric(amount)) {
-                        int amt = Integer.parseInt(amount);
-                        if (amt > 1) {
-                            cd.append(Lang.getNumeral(amt)).append(" ");
-                            plural = true;
-                        }
-                    }
-                    String partType = part.getType();
-                    //consume .Other from most partTypes
-                    if (partType.contains(".Other")) partType = partType.replace(".Other", "");
-                    String singNoun = part.getTypeDescription() != null ? part.getTypeDescription() :
-                            CardType.CoreType.isValidEnum(partType) ? partType.toLowerCase() : partType;
-                    if (singNoun.equalsIgnoreCase("Permanent")) break;
-                    String plurNoun = !singNoun.contains(" ") ? Lang.getPlural(singNoun) : singNoun;
-
-                    cd.append(plural ? plurNoun : singNoun).append(" ");
-                    break; // more complicated Craft costs should probably just use k[2] above
-                }
-            }
-            cd.append(kCost.getCostMana() != null ? kCost.getCostMana().toString() : "no mana?");
-
-            // Create return transformed ability string
-            String ab = "AB$ ChangeZone | CostDesc$ " + cd.toString() + " | Cost$ Exile<1/CARDNAME> " + k[1] + " | " +
-                    "Origin$ Exile | Destination$ Battlefield | Transformed$ True | Defined$ CorrectedSelf | " +
-                    "XAnnounceTitle$ " + Localizer.getInstance().getMessage("lblCraft") + " | " +
-                    "SorcerySpeed$ True | StackDescription$ Return this card transformed under its owner's control. " +
-                    "(Craft) | SpellDescription$ (" + inst.getReminderText() + ")";
-            final SpellAbility newSA = AbilityFactory.getAbility(ab, card);
-            newSA.setIntrinsic(intrinsic);
-            inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Equip")) {
             if (!keyword.contains(":")) {
                 System.err.println("Malformed Equip entry! - Card: " + card.toString());
@@ -4013,12 +3971,9 @@ public class CardFactoryUtil {
             String effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.nonArtifact+!SharesColorWith | Secondary$ True " +
                     " | Description$ Intimidate (" + inst.getReminderText() + ")";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
-        } else if (keyword.startsWith("Landwalk")) {
-            final String[] k = keyword.split(":");
-            String valid = k[1];
-            String desc = k[k.length > 2 ? 2 : 1].toLowerCase(Locale.ROOT);
-            String effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidDefender$ Player.controls" + valid +
-                    " | Description$ " + StringUtils.capitalize(desc) + "walk (" + inst.getReminderText() + ")";
+        } else if (inst instanceof Landwalk landwalk) {
+            String effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidDefender$ Player.controls" + landwalk.getValidType() +
+                    " | Description$ " + landwalk.getTitle() + " (" + inst.getReminderText() + ")";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Living metal")) {
             String effect = "Mode$ Continuous | Affected$ Card.Self | AddType$ Creature | Condition$ PlayerTurn | Secondary$ True";

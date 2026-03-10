@@ -29,6 +29,7 @@ import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
+import forge.trackable.Tracker;
 import forge.trackable.TrackableCollection;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
@@ -549,7 +550,8 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
         if (paused) { return; }
         netLog.info("Sending batch of {}: [{}]", events.size(),
                 events.stream().map(e -> e.getClass().getSimpleName()).collect(Collectors.joining(", ")));
-        List<Object> proxied = GameEventProxy.wrapAll(events);
+        Tracker tracker = getGameView() != null ? getGameView().getTracker() : null;
+        List<Object> proxied = GameEventProxy.wrapAll(events, tracker);
         updateGameView();
         sender.send(ProtocolMethod.handleGameEvents, proxied);
     }
