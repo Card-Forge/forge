@@ -45156,6 +45156,71 @@
     "spawnRate": 0
   },
   {
+    "name": "Shroofus",
+    "sprite": "sprites/enemy/aberration/fungus.atlas",
+    "deck": [
+      "decks/legends/shroofus.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Shroofus Sproutsire"
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 50,
+        "addMaxCount": 250
+      },
+      {
+        "type": "shards",
+        "count": 1,
+        "addMaxCount": 5
+      }
+    ],
+    "colors": "G",
+    "spawnRate": 0
+  },
+  {
     "name": "Thelon",
     "sprite": "sprites/enemy/humanoid/elf/druid.atlas",
     "deck": [
@@ -53790,71 +53855,6 @@
       }
     ],
     "colors": "BRG",
-    "spawnRate": 1
-  },
-  {
-    "name": "Kethis",
-    "sprite": "sprites/enemy/humanoid/elf/green_wiz3.atlas",
-    "deck": [
-      "decks/legends/kethis.dck"
-    ],
-    "ai": "",
-    "speed": 45,
-    "life": 20,
-    "rewards": [
-     {
-        "type": "card",
-        "count": 1,
-        "cardName": "Kethis, the Hidden Hand"
-      },
-      {
-        "type": "deckCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-	]
-      },
-      {
-        "type": "randomCard",
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "common",
-          "uncommon"
-	]
-      },
-      {
-        "type": "gold",
-        "count": 50,
-        "addMaxCount": 250
-      },
-      {
-        "type": "shards",
-        "count": 1,
-        "addMaxCount": 5
-      }
-    ],
-    "colors": "WBG",
     "spawnRate": 1
   },
   {
