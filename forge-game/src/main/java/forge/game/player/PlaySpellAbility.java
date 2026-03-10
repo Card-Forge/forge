@@ -39,7 +39,6 @@ import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.TextUtil;
-import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.StringUtils;
 
@@ -133,14 +132,6 @@ public class PlaySpellAbility {
         return true;
     }
 
-    /**
-     * choose optional additional costs. For HUMAN only
-     * @param p
-     *
-     * @param original
-     *            the original sa
-     * @return an ArrayList<SpellAbility>.
-     */
     static SpellAbility chooseOptionalAdditionalCosts(Player p, final SpellAbility original) {
         PlayerController c = p.getController();
 
@@ -157,14 +148,6 @@ public class PlaySpellAbility {
         return GameActionUtil.addOptionalCosts(choosen, list);
     }
 
-    /**
-     * <p>
-     * payCostDuringAbilityResolve.
-     * </p>
-     *
-     * @param cost          a {@link Cost} object.
-     * @param sourceAbility TODO
-     */
     public static boolean payCostDuringAbilityResolve(final PlayerController controller, final Player p, final Cost cost, SpellAbility sourceAbility, String prompt) {
         final Card source = sourceAbility.getHostCard();
         // Only human player pays this way
@@ -182,7 +165,7 @@ public class PlaySpellAbility {
         }
         String orString = getOrStringFromCost(sourceAbility, prompt);
 
-        if (parts.isEmpty() || (costPart.getAmount().equals("0") && parts.size() < 2)) {
+        if (costPart == null || (costPart.getAmount().equals("0") && parts.size() < 2)) {
             return p.getController().confirmPayment(costPart, Localizer.getInstance().getMessage("lblDoYouWantPay") + " {0}?" + orString, sourceAbility);
         }
         // 0 mana costs were slipping through because CostPart.getAmount returns 1
@@ -288,9 +271,8 @@ public class PlaySpellAbility {
                 CardCollection list = CardLists.getValidCards(listView, part.getType().split(";"), p, source, sourceAbility);
 
                 if (sameZone) { // Jötun Grunt
-                    FCollectionView<Player> players = p.getGame().getPlayers();
-                    List<Player> payableZone = new ArrayList<>();
-                    for (Player player : players) {
+                    PlayerCollection payableZone = new PlayerCollection();
+                    for (Player player : p.getGame().getPlayers()) {
                         CardCollectionView enoughType = CardLists.filter(list, CardPredicates.isOwner(player));
                         if (enoughType.size() < amount) {
                             list.removeAll(enoughType);
@@ -300,7 +282,10 @@ public class PlaySpellAbility {
                     }
 
                     String playerChoicePrompt = Localizer.getInstance().getMessage("lblPutCardFromWhoseZone", from.getTranslatedName());
-                    Player chosen = controller.chooseSingleEntityForEffect(players, sourceAbility, playerChoicePrompt, true, null);
+                    Player chosen = controller.chooseSingleEntityForEffect(payableZone, sourceAbility, playerChoicePrompt, true, null);
+
+                    if (chosen == null)
+                        return false;
 
                     CardCollection typeList = CardLists.filter(list, CardPredicates.isOwner(chosen));
 
@@ -340,21 +325,20 @@ public class PlaySpellAbility {
                         return false;
                     }
 
-                    ((CostDiscard)part).payAsDecided(p, PaymentDecision.card(p.getCardsIn(ZoneType.Hand)), sourceAbility, true);
+                    part.payAsDecided(p, PaymentDecision.card(p.getCardsIn(ZoneType.Hand)), sourceAbility, true);
                 } else if ("Random".equals(part.getType())) {
                     if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblWouldYouLikeRandomDiscardTargetCard", amount), sourceAbility)) {
                         return false;
                     }
 
-                    ((CostDiscard)part).payAsDecided(p, PaymentDecision.card(Aggregates.random(p.getCardsIn(ZoneType.Hand), amount)), sourceAbility, true);
+                    part.payAsDecided(p, PaymentDecision.card(Aggregates.random(p.getCardsIn(ZoneType.Hand), amount)), sourceAbility, true);
                 } else {
                     CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType().split(";"), p, source, sourceAbility);
                     boolean hasPaid = payCostPart(controller, p, sourceAbility, hcd.isEffect(), (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lbldiscard") + orString);
                     if (!hasPaid) { return false; }
                 }
             }
-            else if (part instanceof CostReveal) {
-                CostReveal costReveal = (CostReveal) part;
+            else if (part instanceof CostReveal costReveal) {
                 CardCollectionView list = CardLists.getValidCards(p.getCardsIn(costReveal.getRevealFrom()), part.getType().split(";"), p, source, sourceAbility);
                 int amount = part.getAbilityAmount(sourceAbility);
                 boolean hasPaid = payCostPart(controller, p, sourceAbility, hcd.isEffect(), (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblReveal") + orString);
