@@ -3,20 +3,16 @@ package forge.gamemodes.net.server;
 import forge.LobbyPlayer;
 import forge.ai.GameState;
 import forge.deck.CardPool;
-import forge.game.Game;
 import forge.game.GameEntityView;
 import forge.game.event.GameEvent;
 import forge.game.GameView;
 import forge.game.card.CardView;
-import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
-import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
-import forge.util.Localizer;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.GameEventProxy;
@@ -245,96 +241,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
     @Override
     public void showPromptMessage(final PlayerView playerView, final String message) {
         updateGameView();
-        // Enhance generic waiting messages with the actual player name
-        String enhancedMessage = enhanceWaitingMessage(message, playerView);
-        send(ProtocolMethod.showPromptMessage, playerView, enhancedMessage);
-    }
-
-    /**
-     * Enhance generic "Waiting for opponent" messages with the actual player name.
-     * This provides better feedback in multiplayer games by showing exactly who
-     * we're waiting for.
-     *
-     * @param message the original message
-     * @param forPlayer the player this message is being shown to
-     * @return the enhanced message with player name, or the original if not applicable
-     */
-    private String enhanceWaitingMessage(final String message, final PlayerView forPlayer) {
-        if (message == null || message.isEmpty()) {
-            return message;
-        }
-
-        Localizer localizer = Localizer.getInstance();
-        String waitingForOpponent = localizer.getMessage("lblWaitingForOpponent");
-        String yieldingMessage = localizer.getMessage("lblYieldingUntilEndOfTurn");
-
-        // Check if this is a waiting/yielding message that should show player name
-        boolean isWaitingMessage = message.equals(waitingForOpponent);
-        boolean isYieldingMessage = message.equals(yieldingMessage);
-
-        if (!isWaitingMessage && !isYieldingMessage) {
-            return message;
-        }
-
-        // Get the priority player from the Game object
-        GameView gameView = getGameView();
-        if (gameView == null) {
-            return message;
-        }
-
-        Game game = gameView.getGame();
-        if (game == null || game.isGameOver()) {
-            return message;
-        }
-
-        PhaseHandler ph = game.getPhaseHandler();
-        if (ph == null) {
-            return message;
-        }
-
-        Player priorityPlayer = ph.getPriorityPlayer();
-        if (priorityPlayer == null) {
-            // During game setup, use the player whose turn it is
-            priorityPlayer = ph.getPlayerTurn();
-        }
-
-        // During mulligan/setup, both may be null - find the other player(s)
-        if (priorityPlayer == null) {
-            // If forPlayer is known, find someone else
-            if (forPlayer != null) {
-                for (Player p : game.getPlayers()) {
-                    if (p.getView().getId() != forPlayer.getId()) {
-                        priorityPlayer = p;
-                        break;
-                    }
-                }
-            }
-            // If forPlayer is null or we couldn't find anyone, find any player not in our local set
-            if (priorityPlayer == null) {
-                for (Player p : game.getPlayers()) {
-                    if (!isLocalPlayer(p.getView())) {
-                        priorityPlayer = p;
-                        break;
-                    }
-                }
-            }
-        }
-
-        if (priorityPlayer == null) {
-            return message;
-        }
-
-        // Don't enhance if waiting for self (shouldn't happen, but be safe)
-        if (forPlayer != null && priorityPlayer.getView().getId() == forPlayer.getId()) {
-            return message;
-        }
-
-        // Return enhanced message with player name
-        if (isYieldingMessage) {
-            return localizer.getMessage("lblYieldingWaitingForPlayer", priorityPlayer.getName());
-        } else {
-            return localizer.getMessage("lblWaitingForPlayer", priorityPlayer.getName());
-        }
+        send(ProtocolMethod.showPromptMessage, playerView, message);
     }
 
     @Override
