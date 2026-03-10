@@ -139,6 +139,10 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
      * otherwise sends the full game state.
      */
     public void updateGameView() {
+        updateGameView(true);
+    }
+
+    private void updateGameView(boolean flush) {
         GameView gameView = getGameView();
         if (gameView == null) {
             return;
@@ -150,14 +154,22 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
                     clientIndex, useDeltaSync, initialSyncSent);
                 fallbackLogged = true;
             }
-            send(ProtocolMethod.setGameView, gameView, -1L);
+            if (flush) {
+                send(ProtocolMethod.setGameView, gameView, -1L);
+            } else {
+                sender.write(ProtocolMethod.setGameView, gameView, -1L);
+            }
             return;
         }
 
         // Use delta sync
         DeltaPacket delta = deltaSyncManager.collectDeltas(gameView);
         if (delta != null && !delta.isEmpty()) {
-            send(ProtocolMethod.applyDelta, delta);
+            if (flush) {
+                send(ProtocolMethod.applyDelta, delta);
+            } else {
+                sender.write(ProtocolMethod.applyDelta, delta);
+            }
 
             if (logBandwidth) {
                 int deltaSize = measureSerializedSize(delta);
@@ -459,7 +471,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
                 events.stream().map(e -> e.getClass().getSimpleName()).collect(Collectors.joining(", ")));
         Tracker tracker = getGameView() != null ? getGameView().getTracker() : null;
         List<Object> proxied = GameEventProxy.wrapAll(events, tracker);
-        updateGameView();
+        updateGameView(false);
         sender.send(ProtocolMethod.handleGameEvents, proxied);
     }
 
