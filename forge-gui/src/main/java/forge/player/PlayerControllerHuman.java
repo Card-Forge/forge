@@ -2287,11 +2287,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public CardCollectionView chooseCardsForCost(CardCollectionView optionList, SpellAbility sa, CostPartWithList cpl, int amount, String actionName) {
+    public CardCollectionView chooseCardsForCost(CardCollectionView optionList, SpellAbility sa, CostPartWithList cpl, int amount, boolean isOptional, String prompt) {
         InputSelectCardsFromList inp = new InputSelectCardsFromList(this, amount, amount, optionList, sa);
-        String cardDesc = cpl.getDescriptiveType().equalsIgnoreCase("Card") ? "" : cpl.getDescriptiveType();
-        inp.setMessage(Localizer.getInstance().getMessage("lblSelectNSpecifyTypeCardsToAction", cardDesc, actionName));
-        inp.setCancelAllowed(true);
+        inp.setMessage(prompt);
+        inp.setCancelAllowed(isOptional);
 
         inp.showAndWait();
 

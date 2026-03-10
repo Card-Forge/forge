@@ -3,8 +3,7 @@ package forge.player;
 import com.google.common.collect.Iterables;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
-import forge.game.GameEntityView;
-import forge.game.GameEntityViewMap;
+import forge.game.GameActionUtil;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
@@ -15,15 +14,14 @@ import forge.game.mana.ManaRefundService;
 import forge.game.player.PlaySpellAbility;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
-import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityManaConvert;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.input.InputPayMana;
 import forge.gamemodes.match.input.InputPayManaOfCostPayment;
 import forge.gui.FThreads;
-import forge.gui.util.SGuiChoose;
 import forge.util.Aggregates;
+import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
@@ -31,6 +29,7 @@ import forge.util.collect.FCollectionView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 public class HumanPlay {
@@ -157,9 +156,7 @@ public class HumanPlay {
                 }
                 part.payAsDecided(p, pd, sourceAbility, hcd.isEffect());
             }
-            else if (part instanceof CostExile) {
-                CostExile costExile = (CostExile) part;
-
+            else if (part instanceof CostExile costExile) {
                 if ("All".equals(part.getType())) {
                     ZoneType zone = costExile.getFrom().get(0);
                     prompt = ZoneType.Graveyard.equals(zone) ? "lblDoYouWantExileAllCardYouGraveyard" :
@@ -186,30 +183,12 @@ public class HumanPlay {
                         list = list.subList(0, nNeeded);
                         costExile.payAsDecided(p, PaymentDecision.card(list), sourceAbility, hcd.isEffect());
                     } else {
-                        // replace this with input
-                        CardCollection newList = new CardCollection();
-                        GameEntityViewMap<Card, CardView> gameCacheList = GameEntityView.getMap(list);
-                        for (int i = 0; i < nNeeded; i++) {
-                            final CardView cv;
-                            if (!multiFromZones) {
-                                if (mandatory) {
-                                    cv = SGuiChoose.one(Localizer.getInstance().getMessage("lblExileFromZone", fromZones.get(0).getTranslatedName()), gameCacheList.getTrackableKeys());
-                                } else {
-                                    cv = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblExileFromZone", fromZones.get(0).getTranslatedName()), gameCacheList.getTrackableKeys());
-                                }
-                            } else {
-                                if (mandatory) {
-                                    cv = SGuiChoose.one("Update this message in HumanPlay", gameCacheList.getTrackableKeys());
-                                } else {
-                                    cv = SGuiChoose.oneOrNone("Update this message in HumanPlay", gameCacheList.getTrackableKeys());
-                                }
-                            }
-                            if (cv == null || !gameCacheList.containsKey(cv)) {
-                                return false;
-                            }
-                            newList.add(gameCacheList.remove(cv));
-                        }
-                        costExile.payAsDecided(p, PaymentDecision.card(newList), sourceAbility, hcd.isEffect());
+                        List<String> zoneNames = fromZones.stream().map(ZoneType::getTranslatedName).collect(Collectors.toList());
+                        String exilePrompt = Localizer.getInstance().getMessage("lblExileFromZone",Lang.joinHomogenous(zoneNames));
+                        CardCollectionView chosen = controller.chooseCardsForCost(list, sourceAbility, costExile, nNeeded, !mandatory, exilePrompt);
+                        if(chosen == null || chosen.size() < nNeeded)
+                            return false;
+                        costExile.payAsDecided(p, PaymentDecision.card(chosen), sourceAbility, hcd.isEffect());
                     }
                 }
             } else if (part instanceof CostPutCardToLib) {
@@ -235,29 +214,21 @@ public class HumanPlay {
                             payableZone.add(player);
                         }
                     }
-                    GameEntityViewMap<Player, PlayerView> gameCachePlayer = GameEntityView.getMap(payableZone);
-                    PlayerView pv = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblPutCardFromWhoseZone", from.getTranslatedName()), gameCachePlayer.getTrackableKeys());
-                    if (pv == null || !gameCachePlayer.containsKey(pv)) {
-                        return false;
-                    }
-                    Player chosen = gameCachePlayer.get(pv);
 
-                    List<Card> typeList = CardLists.filter(list, CardPredicates.isOwner(chosen));
+                    String playerChoicePrompt = Localizer.getInstance().getMessage("lblPutCardFromWhoseZone", from.getTranslatedName());
+                    Player chosen = controller.chooseSingleEntityForEffect(players, sourceAbility, playerChoicePrompt, true, null);
 
-                    GameEntityViewMap<Card, CardView> gameCacheTypeList = GameEntityView.getMap(typeList);
-                    for (int i = 0; i < amount; i++) {
-                        if (gameCacheTypeList.isEmpty()) {
-                            return false;
-                        }
-                        final CardView cv = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblPutCardToLibrary"), gameCacheTypeList.getTrackableKeys());
-                        if (cv == null || !gameCacheTypeList.containsKey(cv)) {
-                            return false;
-                        }
-                        final Card c = gameCacheTypeList.get(cv);
+                    CardCollection typeList = CardLists.filter(list, CardPredicates.isOwner(chosen));
 
-                        gameCacheTypeList.remove(c);
-                        p.getGame().getAction().moveToLibrary(c, Integer.parseInt(((CostPutCardToLib) part).getLibPos()), null);
-                    }
+                    String cardPrompt = Localizer.getInstance().getMessage("lblPutCardToLibrary");
+                    CardCollectionView cards = controller.chooseCardsForCost(typeList, sourceAbility, (CostPutCardToLib) part, amount, true, cardPrompt);
+
+                    //401.4 - Owner chooses order of cards.
+                    cards = GameActionUtil.orderCardsByTheirOwners(p.getGame(), cards, ZoneType.Library, sourceAbility);
+
+                    int libPosition = Integer.parseInt(((CostPutCardToLib) part).getLibPos());
+                    for(Card c : cards)
+                        p.getGame().getAction().moveToLibrary(c, libPosition, sourceAbility);
                 }
                 else { // Tainted Specter, Gurzigost, etc.
                     boolean hasPaid = payCostPart(controller, p, sourceAbility, hcd.isEffect(), (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblPutIntoLibrary") + orString);
@@ -396,7 +367,8 @@ public class HumanPlay {
         if (list.size() < amount)
             return false; // unable to pay (not enough cards)
 
-        CardCollectionView chosen = controller.chooseCardsForCost(list, sourceAbility, cpl, amount, actionName);
+        String cardDesc = cpl.getDescriptiveType().equalsIgnoreCase("Card") ? "" : cpl.getDescriptiveType();
+        CardCollectionView chosen = controller.chooseCardsForCost(list, sourceAbility, cpl, amount, true, Localizer.getInstance().getMessage("lblSelectNSpecifyTypeCardsToAction", cardDesc, actionName));
         if(chosen == null)
             return false;
 
