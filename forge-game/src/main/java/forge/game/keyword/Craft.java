@@ -40,7 +40,7 @@ public class Craft extends KeywordWithCost {
             int xmin = cost.getCostMana().getXMin();
             if (xmin > 0) {
                 sb.append(Lang.getNumeral(xmin)).append(" or more");
-            } else {
+            } else if (!"1".equals(exile.getAmount())) {
                 sb.append(Lang.getNumeral(Integer.parseInt(exile.getAmount())));
             }
             if (exile.getTypeDescription() != null) {
