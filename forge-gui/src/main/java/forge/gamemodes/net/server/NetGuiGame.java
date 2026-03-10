@@ -23,6 +23,7 @@ import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
+import forge.trackable.Tracker;
 import forge.trackable.TrackableCollection;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
@@ -332,7 +333,8 @@ public class NetGuiGame extends AbstractGuiGame {
         if (paused) { return; }
         Logger.info("Sending batch of {}: [{}]", () -> events.size(),
                 () -> events.stream().map(e -> e.getClass().getSimpleName()).collect(Collectors.joining(", ")));
-        List<Object> proxied = GameEventProxy.wrapAll(events);
+        Tracker tracker = getGameView() != null ? getGameView().getTracker() : null;
+        List<Object> proxied = GameEventProxy.wrapAll(events, tracker);
         sender.write(ProtocolMethod.setGameView, getGameView());
         sender.send(ProtocolMethod.handleGameEvents, proxied);
     }

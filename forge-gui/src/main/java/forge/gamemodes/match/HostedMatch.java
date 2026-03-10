@@ -206,7 +206,6 @@ public class HostedMatch {
                 }
             }
             p.updateAvatar();
-            //sleeve
             p.getLobbyPlayer().setSleeveIndex(rp.getPlayer().getSleeveIndex());
             if (p.getLobbyPlayer().getSleeveIndex() == -1) {
                 if (iPlayer < sleeveIndices.length) {
@@ -217,8 +216,7 @@ public class HostedMatch {
             }
             p.updateSleeve();
 
-            if (p.getController() instanceof PlayerControllerHuman) {
-                final PlayerControllerHuman humanController = (PlayerControllerHuman) p.getController();
+            if (p.getController() instanceof PlayerControllerHuman humanController) {
                 final IGuiGame gui = guis.get(p.getRegisteredPlayer());
                 humanController.setGui(gui);
                 gui.setGameView(null); //clear out game view first so we don't copy into old game view
@@ -234,7 +232,7 @@ public class HostedMatch {
                 }
                 playersPerGui.put(gui, p.getView());
 
-                if (gameControllers != null ) {
+                if (gameControllers != null) {
                     LobbySlot lobbySlot = getLobbySlot(p.getLobbyPlayer());
                     gameControllers.put(lobbySlot, humanController);
                 }
@@ -306,8 +304,8 @@ public class HostedMatch {
     private LobbySlot getLobbySlot(LobbyPlayer lobbyPlayer) {
         for (LobbySlot key: gameControllers.keySet()) {
             IGameController value = gameControllers.get(key);
-            if (value instanceof PlayerControllerHuman) {
-                if (lobbyPlayer == ((PlayerControllerHuman) value).getLobbyPlayer()) {
+            if (value instanceof PlayerControllerHuman pch) {
+                if (lobbyPlayer == pch.getLobbyPlayer()) {
                     return key;
                 }
             }
@@ -319,7 +317,6 @@ public class HostedMatch {
         final PlayerControllerHuman humanController = new WatchLocalGame(game, null, gui);
         registerSpectator(gui, humanController);
     }
-
     public void registerSpectator(final IGuiGame gui, final PlayerControllerHuman humanController) {
         gui.setSpectator(humanController);
         gui.openView(null);
