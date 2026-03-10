@@ -27353,7 +27353,7 @@
 	"ai": "",
 	"spawnRate": 0.1,
 	"boss": true,
-	"scale": 0.5,
+	"scale": 0.65,
 	"bossIntro": "You will be reforged in the Furnace of Glory.",
 	"bossInsult": "You were so eager to spy on my work, I assume you'll appreciate a hands-on demonstration.",
 	"difficulty": 0.5,
