@@ -302,7 +302,10 @@ public class CountersPutAi extends CountersAi {
             return doChargeToOppCtrlCMCLogic(ai, sa);
         } else if (logic.equals("TheOneRing")) {
             return SpecialCardAi.TheOneRing.consider(ai, sa);
+        }else if ("PsychicFrog".equals(logic)) {
+            return SpecialCardAi.PsychicFrog.considerCounterAbility(ai, sa , ph);
         }
+
 
         if (sourceName.equals("Feat of Resistance")) { // sub-ability should take precedence
             CardCollection prot = ProtectAi.getProtectCreatures(ai, sa.getSubAbility());
