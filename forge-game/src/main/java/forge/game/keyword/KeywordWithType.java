@@ -29,7 +29,6 @@ public class KeywordWithType extends KeywordInstance<KeywordWithType> implements
         String k[];
         if (details.contains(":")) {
             switch (getKeyword()) {
-            case AFFINITY:
             case BANDSWITH:
             case ENCHANT:
             case HEXPROOF:
@@ -49,22 +48,12 @@ public class KeywordWithType extends KeywordInstance<KeywordWithType> implements
                 type = "Card." + StringUtils.capitalize(color.getName());
                 descType = color.getName();
             } else {
-                descType = type = details;
-                boolean multiple = switch(getKeyword()) {
-                    case AFFINITY -> true;
-                    default -> false;
-                };
-                descType = Lang.getInstance().buildValidDesc(Arrays.asList(type.split(",")), multiple);
+                type = details;
+                descType = Lang.getInstance().buildValidDesc(Arrays.asList(type.split(",")), false);
             }
         }
 
-        if (descType.equalsIgnoreCase("Outlaw")) {
-            reminderType = "Assassin, Mercenary, Pirate, Rogue, and/or Warlock";
-        } else if (type.equalsIgnoreCase("historic permanent")) {
-            reminderType = "artifact, legendary, and/or Saga permanent";
-        } else {
-            reminderType = descType;
-        }
+        reminderType = descType;
     }
 
     @Override

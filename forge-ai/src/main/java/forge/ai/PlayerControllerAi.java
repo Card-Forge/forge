@@ -73,11 +73,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     public void setupAutoProfile(Deck deck) {
-        pilotsNonAggroDeck = deck.getName().contains("Control") || Deck.getAverageCMC(deck) > 3;
-    }
-
-    public void allowCheatShuffle(boolean value) {
-        brains.allowCheatShuffle(value);
+        pilotsNonAggroDeck = deck.getName().contains("Control") || deck.getAverageCMC() > 3;
     }
 
     public void setUseSimulation(boolean value) {
@@ -103,8 +99,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public List<PaperCard> sideboard(Deck deck, GameType gameType, String message) {
-        if (!brains.getGame().getRules().getAISideboardingEnabled()
-            || !deck.has(DeckSection.Sideboard)) {
+        if (!brains.getGame().getRules().getAISideboardingEnabled() || !deck.has(DeckSection.Sideboard)) {
             return null;
         }
 
@@ -243,11 +238,7 @@ public class PlayerControllerAi extends PlayerController {
         Map<Byte, Integer> result = new HashMap<>();
         for (int i = 0; i < manaAmount; ++i) {
             Byte chosen = chooseColor("", sa, colorSet);
-            if (result.containsKey(chosen)) {
-                result.put(chosen, result.get(chosen) + 1);
-            } else {
-                result.put(chosen, 1);
-            }
+            result.merge(chosen, 1, Integer::sum);
             if (different) {
                 colorSet = ColorSet.fromMask(colorSet.getColor() - chosen);
             }
@@ -860,11 +851,11 @@ public class PlayerControllerAi extends PlayerController {
     private Runnable getDeferredTargetingPlayerRunnable(SpellAbility sa) {
         SpellAbility root = sa;
         while (sa != null) {
-            if (sa.getTargetingPlayer() != null) {
+            if (sa.hasParam("TargetingPlayer") && sa.getTargetingPlayer() != null) {
                 return () -> {
                     SpellAbility cur = root;
                     while (cur != null) {
-                        if (cur.getTargetingPlayer() != null) {
+                        if (cur.hasParam("TargetingPlayer") && cur.getTargetingPlayer() != null) {
                             cur.clearTargets();
                             cur.getTargetingPlayer().getController().chooseTargetsFor(cur);
                             // there's a chance a target gets selected that makes the cost unaffordable
@@ -1402,7 +1393,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public CardCollectionView cheatShuffle(CardCollectionView list) {
-        return brains.getBoolProperty(AiProps.CHEAT_WITH_MANA_ON_SHUFFLE) ? brains.cheatShuffle(list) : list;
+        return brains.cheatShuffle(list);
     }
 
     @Override

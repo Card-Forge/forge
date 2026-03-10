@@ -3,7 +3,9 @@ package forge.game.event;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import forge.game.GameOutcome;
 import forge.game.player.RegisteredPlayer;
@@ -29,18 +31,11 @@ public record GameEventGameOutcome(int lastTurnNumber, List<String> outcomeStrin
         final GameOutcome outcome1 = Iterables.getFirst(history, null);
         if (outcome1 == null) return "";
         final HashMap<RegisteredPlayer, String> players = outcome1.getPlayerNames();
-        final HashMap<RegisteredPlayer, Integer> winCount = new HashMap<>();
-
-        for (final GameOutcome game : history) {
-            RegisteredPlayer player = game.getWinningPlayer();
-            int amount = winCount.getOrDefault(player, 0);
-            winCount.put(player, amount + 1);
-        }
+        final Map<RegisteredPlayer, Long> winCount = history.stream().collect(Collectors.groupingBy(GameOutcome::getWinningPlayer, Collectors.counting()));
 
         final StringBuilder sb = new StringBuilder();
         for (Entry<RegisteredPlayer, String> entry : players.entrySet()) {
-            int amount = winCount.getOrDefault(entry.getKey(), 0);
-            sb.append(entry.getValue()).append(": ").append(amount).append(" ");
+            sb.append(entry.getValue()).append(": ").append(winCount.getOrDefault(entry.getKey(), 0l)).append(" ");
         }
         return sb.toString();
     }

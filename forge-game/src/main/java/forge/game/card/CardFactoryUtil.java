@@ -392,8 +392,7 @@ public class CardFactoryUtil {
             // if something has all creature types, but some are excluded, the count might be messed up
 
             for (String creatureType : type.getCreatureTypes()) {
-                Integer count = map.get(creatureType);
-                map.put(creatureType, count == null ? 1 : count + 1);
+                map.merge(creatureType, 1, Integer::sum);
             }
         }
 
@@ -424,8 +423,7 @@ public class CardFactoryUtil {
         for (final Card c : list) {
             // Remove Duplicated types
             for (String creatureType : c.getType().getCreatureTypes()) {
-                Integer count = map.get(creatureType);
-                map.put(creatureType, count == null ? 1 : count + 1);
+                map.merge(creatureType, 1, Integer::sum);
             }
         }
 
@@ -3228,6 +3226,7 @@ public class CardFactoryUtil {
             sa.setCardState(host.getAlternateState());
             sa.setAlternativeCost(AlternativeCost.MTMtE);
 
+            sa.putParam("Secondary", "True");
             sa.putParam("PrecostDesc", n[0] + " ");
             sa.putParam("CostDesc", convertCost.toString());
             sa.putParam("AfterDescription", "(Converted)");
@@ -3823,23 +3822,12 @@ public class CardFactoryUtil {
     public static void addStaticAbility(final KeywordInterface inst, final CardState state, final boolean intrinsic) {
         String keyword = inst.getOriginal();
 
-        if (keyword.startsWith("Affinity")) {
-            final String[] k = keyword.split(":");
-            final String t = k[1];
-
-            String desc;
-            if (k.length > 2) {
-                String typeText = k[2];
-                if (typeText.contains(" with "))
-                    desc = typeText.substring(typeText.indexOf(" with ") + 6);
-                else
-                    desc = typeText + "s";
-            } else
-                desc = CardType.getPluralType(t);
+        if (inst instanceof Affinity affinity) {
+            final String t = affinity.getValidType();
 
             StringBuilder sb = new StringBuilder();
             sb.append("Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ AffinityX | EffectZone$ All");
-            sb.append("| Description$ Affinity for ").append(desc);
+            sb.append("| Description$ ").append(affinity.getTitle());
             sb.append(" (").append(inst.getReminderText()).append(")");
             String effect = sb.toString();
 
@@ -4163,12 +4151,12 @@ public class CardFactoryUtil {
 
         SpellAbility saExile = AbilityFactory.getAbility(abExile, card);
 
-        String abEffect = "DB$ Effect | RememberObjects$ Self | StaticAbilities$ Play | ForgetOnMoved$ Exile | Duration$ Permanent | ConditionDefined$ Self | ConditionPresent$ Card.!copiedSpell+!token";
+        String abEffect = "DB$ Effect | RememberObjects$ Self | StaticAbilities$ Play | ForgetOnMoved$ Exile | Duration$ Permanent | ConditionDefined$ Self | ConditionPresent$ Card.!copiedSpell+!token | Adventure$ True";
         AbilitySub saEffect = (AbilitySub)AbilityFactory.getAbility(abEffect, card);
 
         StringBuilder sbPlay = new StringBuilder();
         sbPlay.append("Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+!Adventure");
-        sbPlay.append(" | AffectedZone$ Exile | Description$ You may cast the card.");
+        sbPlay.append(" | AffectedZone$ Exile | Description$ You may cast EFFECTSOURCE.");
         saEffect.setSVar("Play", sbPlay.toString());
 
         saExile.setSubAbility(saEffect);

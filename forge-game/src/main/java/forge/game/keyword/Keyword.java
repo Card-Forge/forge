@@ -9,7 +9,7 @@ import java.util.*;
 public enum Keyword {
     UNDEFINED("", SimpleKeyword.class, false, ""),
     ABSORB("Absorb", KeywordWithAmount.class, false, "If a source would deal damage to this creature, prevent %d of that damage."),
-    AFFINITY("Affinity", KeywordWithType.class, false, "This spell costs {1} less to cast for each %s you control."),
+    AFFINITY("Affinity", Affinity.class, false, "This spell costs {1} less to cast for each %s you control."),
     AFFLICT("Afflict", KeywordWithAmount.class, false, "Whenever this creature becomes blocked, defending player loses %d life."),
     AFTERLIFE("Afterlife", KeywordWithAmount.class, false, "When this creature dies, create {%1$d:1/1 white and black Spirit creature token} with flying."),
     AFTERMATH("Aftermath", SimpleKeyword.class, false, "Cast this spell only from your graveyard. Then exile it."),

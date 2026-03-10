@@ -5,6 +5,7 @@ import forge.ai.GameState;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.event.GameEvent;
+import org.tinylog.Logger;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
@@ -14,6 +15,7 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.AbstractGuiGame;
+import forge.gamemodes.net.GameEventProxy;
 import forge.gamemodes.net.GameProtocolSender;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.gui.control.GameEventForwarder;
@@ -28,6 +30,7 @@ import forge.util.ITriggerEvent;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class NetGuiGame extends AbstractGuiGame {
 
@@ -60,6 +63,13 @@ public class NetGuiGame extends AbstractGuiGame {
 
     public void setForwarder(GameEventForwarder forwarder) {
         this.forwarder = forwarder;
+    }
+
+    public void shutdownForwarder() {
+        if (forwarder != null) {
+            forwarder.shutdown();
+            forwarder = null;
+        }
     }
 
     private void flushPendingEvents() {
@@ -314,16 +324,17 @@ public class NetGuiGame extends AbstractGuiGame {
 
     @Override
     public void handleGameEvent(GameEvent event) {
-        updateGameView();
-        send(ProtocolMethod.handleGameEvent, event);
+        handleGameEvents(List.of(event));
     }
 
     @Override
     public void handleGameEvents(List<GameEvent> events) {
-        updateGameView();
-        for (GameEvent event : events) {
-            send(ProtocolMethod.handleGameEvent, event);
-        }
+        if (paused) { return; }
+        Logger.info("Sending batch of {}: [{}]", () -> events.size(),
+                () -> events.stream().map(e -> e.getClass().getSimpleName()).collect(Collectors.joining(", ")));
+        List<Object> proxied = GameEventProxy.wrapAll(events);
+        sender.write(ProtocolMethod.setGameView, getGameView());
+        sender.send(ProtocolMethod.handleGameEvents, proxied);
     }
 
     @Override
