@@ -14125,6 +14125,12 @@
         "itemName": "Glimmerbell Bondband"
       },
       {
+        "type": "item",
+        "count": 1,
+        "probability": 0.6,
+        "itemName": "Kill Trophy"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Illuna, Apex of Wishes"
@@ -14211,6 +14217,12 @@
         "type": "item",
         "count": 1,
         "itemName": "Mamba Bondband"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.6,
+        "itemName": "Kill Trophy"
       },
       {
         "type": "card",
@@ -14302,6 +14314,12 @@
         "itemName": "Raptor Bondband"
       },
       {
+        "type": "item",
+        "count": 1,
+        "probability": 0.6,
+        "itemName": "Kill Trophy"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Vadrok, Apex of Thunder"
@@ -14390,6 +14408,12 @@
         "itemName": "Sabertooth Bondband"
       },
       {
+        "type": "item",
+        "count": 1,
+        "probability": 0.6,
+        "itemName": "Kill Trophy"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Snapdax, Apex of the Hunt"
@@ -14476,6 +14500,12 @@
         "type": "item",
         "count": 1,
         "itemName": "Symbiote Bondband"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.6,
+        "itemName": "Kill Trophy"
       },
       {
         "type": "card",
@@ -43178,6 +43208,12 @@
         "cardName": "Akim, the Soaring Wind"
       },
       {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
+      },
+      {
         "type": "deckCard",
         "count": 1,
         "addMaxCount": 3,
@@ -43241,6 +43277,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Gyruda, Doom of Depths"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
       },
       {
         "type": "deckCard",
@@ -43308,6 +43350,12 @@
         "cardName": "Kaheera, the Orphanguard"
       },
       {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
+      },
+      {
         "type": "deckCard",
         "count": 1,
         "addMaxCount": 3,
@@ -43372,6 +43420,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Kalamax, the Stormsire"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
       },
       {
         "type": "deckCard",
@@ -43441,6 +43495,12 @@
         "cardName": "Kathril, Aspect Warper"
       },
       {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
+      },
+      {
         "type": "deckCard",
         "count": 1,
         "addMaxCount": 3,
@@ -43504,6 +43564,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Keruga, the Macrosage"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
       },
       {
         "type": "deckCard",
@@ -43571,6 +43637,12 @@
         "cardName": "Lurrus of the Dream-Den"
       },
       {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
+      },
+      {
         "type": "deckCard",
         "count": 1,
         "addMaxCount": 3,
@@ -43634,6 +43706,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Obosh, the Preypiercer"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
       },
       {
         "type": "deckCard",
@@ -43702,6 +43780,12 @@
         "cardName": "Umori, the Collector"
       },
       {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
+      },
+      {
         "type": "deckCard",
         "count": 1,
         "addMaxCount": 3,
@@ -43767,6 +43851,12 @@
         "cardName": "Otrimi, the Ever-Playful"
       },
       {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
+      },
+      {
         "type": "deckCard",
         "count": 1,
         "addMaxCount": 3,
@@ -43830,6 +43920,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Tayam, Luminous Enigma"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
       },
       {
         "type": "deckCard",
@@ -43899,6 +43995,12 @@
         "cardName": "Xyris, the Writhing Storm"
       },
       {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
+      },
+      {
         "type": "deckCard",
         "count": 1,
         "addMaxCount": 3,
@@ -43965,6 +44067,12 @@
         "cardName": "Yorion, Sky Nomad"
       },
       {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
+      },
+      {
         "type": "deckCard",
         "count": 1,
         "addMaxCount": 3,
@@ -44028,6 +44136,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Zirda, the Dawnwaker"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
       },
       {
         "type": "deckCard",
@@ -61667,6 +61781,21 @@
   {
     "name": "Vadmir",
     "sprite": "sprites/enemy/humanoid/human/artificer/archaeologist.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Chevill",
+    "sprite": "sprites/enemy/humanoid/human/bandit/banditleader.atlas",
     "deck": [
       "decks/legends/mystery_list.dck"
     ],

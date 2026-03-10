@@ -659,7 +659,13 @@
     "description": "The victory is yours now. Return to the mountain capitol for a reward.",
     "iconName": "VictoryStandard",
     "questItem": true
-  }, 
+  },
+  {
+    "name": "Kill Trophy",
+    "description": "Shows triumph over a monster. Give to Chevill for a reward.",
+    "iconName": "KillTrophy",
+    "questItem": true
+  },
   {
     "name": "Colorless rune",
     "usableOnWorldMap": true,
