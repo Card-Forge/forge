@@ -1,0 +1,38 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Deepwood Menace
+Description=Deepwood Menace unleashes the dangers of the Deepwood. Aggressive creatures and combat tricks crush unprepared opponents.
+Deck Type=constructed
+Set=MMQ
+Image=deepwood_menace.jpg
+[main]
+5 Mountain|MMQ|1
+4 Mountain|MMQ|2
+4 Mountain|MMQ|3
+4 Forest|MMQ|1
+4 Forest|MMQ|2
+3 Forest|MMQ|3
+1 Battle Squadron|MMQ
+2 Cinder Elemental|MMQ
+2 Deepwood Drummer|MMQ
+2 Deepwood Tantiv|MMQ
+3 Deepwood Wolverine|MMQ
+3 Horned Troll|MMQ
+2 Kris Mage|MMQ
+2 Saber Ants|MMQ
+2 Shock Troops|MMQ
+2 Squallmonger|MMQ
+3 Vine Trellis|MMQ
+1 Tiger Claws|MMQ
+1 Lunge|MMQ
+1 Natural Affinity|MMQ
+3 Thunderclap|MMQ
+2 Desert Twister|MMQ
+2 Revive|MMQ
+1 Tranquility|MMQ
+1 Volcanic Wind|MMQ
+[sideboard]

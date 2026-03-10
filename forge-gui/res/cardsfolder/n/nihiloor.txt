@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBChoose | SubAbility$ DBCleanup
 SVar:DBChoose:DB$ ChooseCard | Defined$ You | MinAmount$ 0 | Amount$ 1 | Choices$ Creature.untapped+YouCtrl | ChoiceTitle$ Choose up to one untapped creature you control to tap | ChoiceTitleAppend$ Defined Player.IsRemembered | ChoiceZone$ Battlefield | SubAbility$ DBTap
 SVar:DBTap:DB$ Tap | Defined$ ChosenCard | SubAbility$ DBImmediateTrigger
-SVar:DBImmediateTrigger:DB$ ImmediateTrigger | RememberObjects$ ChosenCard,Player.IsRemembered | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ GE1 | Execute$ TrigGainControl | TrigDescReminderDefined$ Player.IsRemembered | TriggerDescription$ When you do, gain control of target creature that player controls with power less than or equal to the tapped creature's power for as long as you control CARDNAME.
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | RememberObjects$ ChosenCard & Player.IsRemembered | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ GE1 | Execute$ TrigGainControl | TrigDescReminderDefined$ Player.IsRemembered | TriggerDescription$ When you do, gain control of target creature that player controls with power less than or equal to the tapped creature's power for as long as you control CARDNAME.
 SVar:TrigGainControl:DB$ GainControl | ValidTgts$ Creature.powerLEX+ControlledBy DelayTriggerRemembered | LoseControl$ LeavesPlay,LoseControl | TgtPrompt$ Select target creature that opponent controls
 SVar:X:TriggerRemembered$CardPower
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True

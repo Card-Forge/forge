@@ -1,4 +1,4 @@
-Name:Duelist's Flame 
+Name:Duelist's Flame
 ManaCost:X R R
 Types:Instant
 A:SP$ Pump | ValidTgts$ Creature.blocked+YouCtrl | TgtPrompt$ Select target blocked creature you control | NumAtt$ +X | KW$ Trample | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, target blocked creature you control gets +X/+0 and gains trample and "Whenever this creature deals combat damage to a player, look at that many cards from the top of your library. Exile up to one nonland card from among them and put the rest on the bottom of your library in a random order. You may cast the exiled card without paying its mana cost."

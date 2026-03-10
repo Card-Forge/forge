@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="45" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="104">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Swarm of Rats&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="22017" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="6" name="Sub" width="45" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzt1DEKACAMBMH0Nv7/tRJESGEgjeLJDlwZ2CpmAACc0fqcGsXu1azW7WL7btnNS6rdAICc4u+k+Y6fmwdjZwK/
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="45" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzllzEOwjAMRSM2CgMDTD1ape5cAIlbMLFzCy4DZ0GhMv1YduI0SYuEJauhbZwX9ycOzv2nbXZLE6SZ59WYV+ewlzAeL8SDz2+n8UouMWM/vE9xYuORtf3oUhw+LvFxv64H5/el/Er9pX6WebTdwB5i0lzjTmXV+HmetXc1Nus8clg5J+qLM1vyaf0Gufm1+hRmrgvOPFXTksakZ4/GuWcT5z7uw3PVtFxC27TuUCOHrY07pvkS609yba/I4a7JS8yYF9x/PbfXiuaatvi3LM7cj9dQzfglf2uj+66DSzOZmKF2L82Too25fWp+eB3M3ffnYP5oQ9ija/Pm1Ebc62rnR+O9uLS4eL7DM3sNjRCf5vdNGrO32rylmD967r7zTOx8zFSdcA2kMMf+eyE71kTMO/22MmPfGC8xh9YmtUPa8PzIizF4W8qLhTd0xsZ4ZL79An0rCH8=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="45" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztVkFSwzAMDCdsuPCVDgde0MD0gXwhJeEd/QWntMCpbyCesJNFUWzZ5JjMaCZtbGm1klc+PVXVabPNNiu21lXV2Y/WudHw/u7WjdNRLGn4looZ/FyGdUtPb/Bh5QJxXkU8+TsV83P4fnSjvblp3+5mej/4MqwB4/V28oN3iVH7zxrzRfHVDPG/MzGzH86d8Wm4SzAHzplr4G0z+/s5gSeFO4en2v/laO/n/d77NH6ZewwzG8fN6cOL2Kv1i8W3hWvGbvXL+tMp+hH2Bs6+FN5S9bNi/ribW+/nmsganNI57JHrYmdE9ph8Qr4aD2s/jZs0McRb4rhWzoDEGvbWftLZJeyIaclN6pPUj5R28BlkXz3VmGee7D/OTeaPb2xLfct7LecaHMZ8cx7cf5iDoRY4F+Bcq6+s157qiP9K5/nSzNLqfxA8WWYMMHLOjDtHQ2NaAv+yP3o/192cGJgt0MPQoyVco4b3D3p/aHqLWljnIjBzzg3VMffuJLGj31O6oMXh+8Q5kjPyRS6lmFM9w1qjcSy15PF3vdQTnNncc2HlXd7NEDeGl3PTeqcW+lFyR7X0S2xeBWPtaQzr2f+aeK3Wkgb8l7MfKYIX7w==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="45" height="25">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUDAeQIgnBgxXIszMwKAGxAjtCjEkKggcDaEPjg9z7iJWB4QCQ3g119zROhPxKUbo6DwV8hobhezEGhg9iCPG9QHEXqJtB+CErIrwPSgysm0GgjpeBoVecgaFPHFUc2d3OQHofO3b9Aw0+o7kL5O4WtsHr3pEK0PPyKBgFMDBQaePnANlLazBc/TUKyAOj6QE7ALV9RsEoIAQAN7Ia0Q==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="435.333" y="397.333" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="54" template="../../../../common/maps/obj/gold.tx" x="493.991" y="88.765"/>
+  <object id="59" template="../../../../common/maps/obj/enemy.tx" x="181.41" y="157.167">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Nashi"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="60" template="../../../../common/maps/obj/enemy.tx" x="323.963" y="329.526" visible="1">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Karumonix"/>
+    <property name="hidden" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="62" template="../../../../common/maps/obj/booster.tx" x="279.862" y="128.705">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;NEO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NEO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NEO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/enemy.tx" x="289.944" y="164.038">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Sinuous Vermin&quot; ] }"/>
+    <property name="enemy" value="Marrow-Gnawer"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/enemy.tx" x="415.765" y="236.565">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Ashcoat"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="75" template="../../../../common/maps/obj/enemy.tx" x="613.913" y="214.693">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Vren"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/enemy.tx" x="534.385" y="158.5">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Greasefang"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="95,96"/>
+   </properties>
+  </object>
+  <object id="77" template="../../../../common/maps/obj/enemy.tx" x="137.063" y="226.437">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Wick"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="83" template="../../../../common/maps/obj/manashards.tx" x="667.332" y="179.605"/>
+  <object id="84" template="../../../../common/maps/obj/manashards.tx" x="269.211" y="359.241"/>
+  <object id="88" template="../../obj/treasure.tx" x="667.5" y="361">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 15,
+  &quot;cardName&quot;: &quot;Relentless Rats&quot;,
+  &quot;editions&quot;: [ &quot;A25&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/booster.tx" x="303" y="128">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;CHK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;CHK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;CHK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/gold.tx" x="271.75" y="103.75">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/gold.tx" x="266" y="116.25">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/waypoint.tx" x="527.5" y="108"/>
+  <object id="96" template="../../../../common/maps/obj/waypoint.tx" x="533.5" y="247.5"/>
+  <object id="97" template="../../obj/treasure.tx" x="616.5" y="160.5">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 15,
+  &quot;cardName&quot;: &quot;Relentless Rats&quot;,
+  &quot;editions&quot;: [ &quot;A25&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="98" template="../../obj/treasure.tx" x="574" y="110.5">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 15,
+  &quot;cardName&quot;: &quot;Relentless Rats&quot;,
+  &quot;editions&quot;: [ &quot;A25&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="99" template="../../obj/treasure.tx" x="303" y="358.5">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 15,
+  &quot;cardName&quot;: &quot;Rat Colony&quot;,
+  &quot;editions&quot;: [ &quot;DOM&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="100" template="../../obj/treasure.tx" x="95" y="249.5">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 15,
+  &quot;cardName&quot;: &quot;Rat Colony&quot;,
+  &quot;editions&quot;: [ &quot;DOM&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="101" template="../../obj/treasure.tx" x="180" y="112">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 15,
+  &quot;cardName&quot;: &quot;Rat Colony&quot;,
+  &quot;editions&quot;: [ &quot;DOM&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="102" template="../../../../common/maps/obj/dialog.tx" x="550.334" y="346.25" width="16" height="16.3333" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A dank, filthy cave slopes down before you. Chittering can be heard from all around, and in the shadows, you can already see dozens of rats running about - and from the sound of it, thousands more make their nest here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="103" template="../../../../common/maps/obj/enemy.tx" x="641.5" y="279.5">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;A ninja reveals herself from the shadows ahead. 'You've come here to kill, no? Let us talk.'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;The job is done.&quot;,
+                    &quot;text&quot;: &quot;'Excellent job.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Ink-Eyes, Servant of Oni&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;randomCard&quot;, &quot;colors&quot;: [ &quot;Black&quot;], &quot;rarity&quot;: [&quot;Rare&quot;, &quot;Mythic Rare&quot;], &quot;count&quot;: 3 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 1500}              
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 7
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Well, talk then.&quot;,
+					&quot;text&quot;: &quot;'My blade thirsts for vengeance - I have been betrayed by my former kin who hide here. But the blood oath I once swore to them still holds due to their deceptive magic, so I cannot fulfill my revenge alone. Slay the seven and I shall reward you.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;I don't trust you.&quot;,
+					&quot;text&quot;: &quot;She fades back into the shadows, though you can still see her eyes.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Ink-Eyes"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

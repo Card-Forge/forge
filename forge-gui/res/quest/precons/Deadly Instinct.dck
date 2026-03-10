@@ -1,0 +1,29 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Deadly Instinct
+Description=Deadly Instinct embraces dark power. Black creature abilities and removal.
+Deck Type=constructed
+Set=S99
+Image=deadly_instinct.jpg
+[main]
+6 Swamp|S99|1
+6 Swamp|S99|2
+5 Swamp|S99|3
+1 Dakmor Lancer|S99
+2 Dakmor Scorpion|S99
+2 Feral Shadow|S99
+2 Gravedigger|S99
+2 Hollow Dogs|S99
+2 Ravenous Rats|S99
+2 Serpent Warrior|S99
+1 Ancient Craving|S99
+2 Chorus of Woe|S99
+1 Dakmor Plague|S99
+3 Hand of Death|S99
+2 Mind Rot|S99
+1 Soul Feast|S99
+[sideboard]

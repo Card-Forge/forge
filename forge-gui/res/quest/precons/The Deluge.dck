@@ -1,0 +1,44 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=The Deluge
+Description=A green-white deck from Battle Royale featuring big creatures and Land Tax. Spike creatures grow your army to overwhelm opponents.
+Deck Type=constructed
+Set=BRB
+Image=the_deluge.jpg
+[main]
+2 Forest|TMP|1
+2 Forest|TMP|2
+2 Forest|TMP|3
+3 Plains|TMP|1
+3 Plains|TMP|2
+2 Plains|TMP|3
+1 Drifting Meadow|USG
+1 Vec Townships|TMP
+1 Advance Scout|TMP
+1 Angelic Page|USG
+1 Argothian Elder|USG
+1 Armored Pegasus|TMP
+1 Dirtcowl Wurm|TMP
+1 Elvish Lyrist|USG
+1 Master Decoy|TMP
+1 Sanctum Custodian|USG
+1 Sanctum Guardian|USG
+1 Scaled Wurm|ICE
+1 Seasoned Marshal|USG
+1 Soltari Foot Soldier|TMP
+1 Spike Colony|STH
+1 Spike Worker|STH
+1 Giant Growth|ICE
+1 Sandstorm|MIR
+1 Catastrophe|USG
+1 Hurricane|ICE
+1 Fecundity|USG
+1 Fertile Ground|USG
+1 Land Tax|LEG
+1 Pacifism|TMP
+1 Sun Clasp|VIS
+[sideboard]

@@ -4,7 +4,7 @@ import forge.control.FControl;
 import forge.control.FControl.CloseAction;
 import forge.control.KeyboardShortcuts;
 import forge.control.KeyboardShortcuts.Shortcut;
-import forge.game.GameLogEntryType;
+import forge.game.GameLogVerbosity;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -21,6 +21,7 @@ import net.miginfocom.swing.MigLayout;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
+import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -58,6 +59,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FLabel btnContentDirectoryUI = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnContentDirectoryUI")).build();
     private final FLabel btnClearImageCache = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnClearImageCache")).build();
     private final FLabel btnTokenPreviewer = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnTokenPreviewer")).build();
+    private final FLabel btnCustomLogSettings = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("lblCustomLogSettings")).build();
 
     private final FLabel btnPlayerName = new FLabel.Builder().opaque(true).hoverable(true).text("").build();
     private final FLabel btnServerPort = new FLabel.Builder().opaque(true).hoverable(true).text("").build();
@@ -118,6 +120,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbEnableNonLegalCards = new OptionsCheckBox(localizer.getMessage("lblEnableNonLegalCards"));
     private final JCheckBox cbAllowCustomCardsDeckConformance = new OptionsCheckBox(localizer.getMessage("lblAllowCustomCardsInDecks"));
     private final JCheckBox cbUseExperimentalNetworkStream = new OptionsCheckBox(localizer.getMessage("lblExperimentalNetworkCompatibility"));
+    private final JCheckBox cbAiPicker = new OptionsCheckBox(localizer.getMessage("lblAiPickerSettings"));
     private final JCheckBox cbCardArtCoreExpansionsOnlyOpt = new OptionsCheckBox(localizer.getMessage("lblPrefArtExpansionOnly"));
     private final JCheckBox cbSmartCardArtSelectionOpt = new OptionsCheckBox(localizer.getMessage("lblSmartCardArtOpt"));
     private final JCheckBox cbShowDraftRanking = new OptionsCheckBox(localizer.getMessage("lblShowDraftRankingOverlay"));
@@ -125,8 +128,15 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<>();
 
+    // Search functionality
+    private final FTextField txtSearch = new FTextField.Builder()
+            .ghostText(localizer.getMessage("lblSearchPreferences"))
+            .build();
+    private final List<Section> sections = new ArrayList<>();
+    private Timer searchTimer;
+
     // ComboBox items are added in CSubmenuPreferences since this is just the View.
-    private final FComboBoxPanel<GameLogEntryType> cbpGameLogEntryType = new FComboBoxPanel<>(localizer.getMessage("cbpGameLogEntryType")+":");
+    private final FComboBoxPanel<GameLogVerbosity> cbpGameLogEntryType = new FComboBoxPanel<>(localizer.getMessage("cbpGameLogEntryType")+":");
     private final FComboBoxPanel<CloseAction> cbpCloseAction = new FComboBoxPanel<>(localizer.getMessage("cbpCloseAction")+":");
     private final FComboBoxPanel<String> cbpDefaultFontSize = new FComboBoxPanel<>(localizer.getMessage("cbpDefaultFontSize")+":");
     private final FComboBoxPanel<String> cbpCardArtFormat = new FComboBoxPanel<>(localizer.getMessage("cbpCardArtFormat")+":");
@@ -155,13 +165,13 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     VSubmenuPreferences() {
 
         pnlPrefs.setOpaque(false);
-        pnlPrefs.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
+        pnlPrefs.setLayout(new MigLayout("insets 0, gap 0, wrap 2, hidemode 3"));
 
         // Spacing between components is defined here.
         final String sectionConstraints = "w 80%!, h 42px!, gap 25px 0 80px 20px, span 2 1";
         final String titleConstraints = "w 80%!, h 22px!, gap 25px 0 0 0px, span 2 1";
         final String comboBoxConstraints = "w 80%!, h 25px!, gap 25px 0 0 0px, span 2 1";
-        final String descriptionConstraints = "w 80%!, h 22px!, gap 28px 0 0 20px, span 2 1";
+        final String descriptionConstraints = "w 80%!, h pref!, gap 28px 0 0 20px, span 2 1";
 
         pnlPrefs.add(new SectionLabel(localizer.getMessage("Troubleshooting")), sectionConstraints);
 
@@ -177,7 +187,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(btnClearImageCache, twoButtonConstraints1);
         pnlPrefs.add(btnTokenPreviewer, twoButtonConstraints2);
 
-        pnlPrefs.add(new SectionLabel(localizer.getMessage("GeneralConfiguration")), sectionConstraints);
+        // Search bar
+        pnlPrefs.add(getSearchPanel(), "w 80%!, h 28px!, gap 25px 0 30px 40px, span 2 1");
+
+        // First section after search has reduced top gap
+        pnlPrefs.add(new SectionLabel(localizer.getMessage("GeneralConfiguration")), "w 80%!, h 42px!, gap 25px 0 0 20px, span 2 1");
 
         pnlPrefs.add(cbpAutoUpdater, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAutoUpdater")), descriptionConstraints);
@@ -320,7 +334,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlPrefArtExpansionOnly")), descriptionConstraints);
 
         pnlPrefs.add(cbSmartCardArtSelectionOpt, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSmartCardArtOpt")), "w 80%!, h 22px!, gap 28px 0 0 0, span 2 1");
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSmartCardArtOpt")), "w 80%!, h pref!, gap 28px 0 0 0, span 2 1");
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSmartCardArtOptNote")), descriptionConstraints);
 
         //Draft Ranking Overlay
@@ -338,6 +352,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbpGameLogEntryType, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlGameLogEntryType")), descriptionConstraints);
+        pnlPrefs.add(btnCustomLogSettings, "w 25%!, h 30px!, gap 25px 0 0 20px, span 2 1, al left");
 
         pnlPrefs.add(cbpCloseAction, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCloseAction")), descriptionConstraints);
@@ -359,6 +374,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbUseExperimentalNetworkStream, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlExperimentalNetworkCompatibility")), descriptionConstraints);
+
+        pnlPrefs.add(cbAiPicker, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAiPickerSettings")), descriptionConstraints);
 
         // Graphic Options
         pnlPrefs.add(new SectionLabel(localizer.getMessage("GraphicOptions")), sectionConstraints + ", gaptop 2%");
@@ -471,6 +489,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
             pnlPrefs.add(field, "w 25%!");
             shortcutFields.put(s.getPrefKey(), field);
         }
+
+        // Initialize search functionality
+        buildSearchIndex();
+        setupSearchListener();
     }
 
     public void reloadShortcuts() {
@@ -541,7 +563,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     @SuppressWarnings("serial")
     private final class NoteLabel extends SkinnedLabel {
         private NoteLabel(final String txt0) {
-            super(txt0);
+            super("<html>" + txt0 + "</html>");
             this.setFont(FSkin.getItalicFont());
             this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         }
@@ -553,7 +575,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
      * into characters and (dis)assembly of keycode stack.
      */
     @SuppressWarnings("serial")
-    public class KeyboardShortcutField extends SkinnedTextField {
+    public static class KeyboardShortcutField extends SkinnedTextField {
         private String codeString;
 
         /**
@@ -588,6 +610,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
                     FModel.getPreferences().setPref(prefKey, getCodeString());
                     FModel.getPreferences().save();
                     shortcut0.attach();
+                    FControl.instance.getForgeMenu().refresh();
                     KeyboardShortcutField.this.setBackground(Color.white);
                 }
             });
@@ -628,7 +651,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
                 }
             }
 
-            this.setText(StringUtils.join(displayText, ' '));
+            this.setText(StringUtils.join(displayText, '+'));
         }
     }
 
@@ -826,7 +849,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         return cbpLandPlayed;
     }
 
-    public FComboBoxPanel<GameLogEntryType> getGameLogVerbosityComboBoxPanel() {
+    public FComboBoxPanel<GameLogVerbosity> getGameLogVerbosityComboBoxPanel() {
         return cbpGameLogEntryType;
     }
 
@@ -995,6 +1018,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         return cbPreselectPrevAbOrder;
     }
 
+    public final JCheckBox getCbAiPicker() {
+        return cbAiPicker;
+    }
+
     public final FComboBoxPanel<String> getCbpGraveyardOrdering() {
         return cbpGraveyardOrdering;
     }
@@ -1028,6 +1055,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public final FLabel getBtnClearImageCache() { return btnClearImageCache; }
     public final FLabel getBtnTokenPreviewer() { return btnTokenPreviewer; }
+    public FLabel getBtnCustomLogSettings() { return btnCustomLogSettings; }
 
     /* (non-Javadoc)
 		 * @see forge.gui.framework.IVDoc#getDocumentID()
@@ -1085,5 +1113,171 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         p.add(lbl, "aligny top, h 100%, gap 4px 0 0 0");
         p.add(btnServerPort, "aligny top, h 100%, w 200px!");
         return p;
+    }
+
+    private JPanel getSearchPanel() {
+        JPanel p = new JPanel(new MigLayout("insets 0, gap 0!, fillx"));
+        p.setOpaque(false);
+        FLabel lbl = new FLabel.Builder().text(localizer.getMessage("lblSearchPreferencesLabel") + " ").fontSize(12).fontStyle(Font.BOLD).build();
+        p.add(lbl, "aligny center, h 100%, gap 4px 0 0 0");
+        p.add(txtSearch, "aligny center, h 100%, growx, pushx");
+        return p;
+    }
+
+    // ========== Search functionality ==========
+
+    /** Represents a single preference item (control + description) */
+    private static class PreferenceItem {
+        final List<Component> components;  // All components for this preference
+        final String searchText;           // Lowercased text to match against
+
+        PreferenceItem(List<Component> components, String searchText) {
+            this.components = components;
+            this.searchText = searchText.toLowerCase();
+        }
+    }
+
+    /** Represents a section with its header and preference items */
+    private static class Section {
+        final Component header;           // SectionLabel
+        final List<PreferenceItem> items = new ArrayList<>();
+
+        Section(Component header) {
+            this.header = header;
+        }
+    }
+
+    /** Builds the search index by scanning existing panel components */
+    private void buildSearchIndex() {
+        sections.clear();
+        Section currentSection = null;
+        String currentSectionName = "";
+        List<Component> prefComponents = new ArrayList<>();
+        StringBuilder searchText = new StringBuilder();
+
+        for (Component comp : pnlPrefs.getComponents()) {
+            // Skip the search panel (which contains txtSearch)
+            if (comp instanceof JPanel && containsComponent((JPanel) comp, txtSearch)) {
+                continue;
+            }
+
+            if (comp instanceof SectionLabel) {
+                // Finish previous preference if any
+                if (!prefComponents.isEmpty() && currentSection != null) {
+                    currentSection.items.add(new PreferenceItem(new ArrayList<>(prefComponents),
+                            currentSectionName + " " + searchText));
+                    prefComponents.clear();
+                    searchText.setLength(0);
+                }
+
+                // Start new section (skip Troubleshooting - it has action buttons, not preferences)
+                String sectionName = ((SectionLabel) comp).getText();
+                if (!sectionName.equals(localizer.getMessage("Troubleshooting"))) {
+                    currentSection = new Section(comp);
+                    currentSectionName = sectionName;
+                    sections.add(currentSection);
+                } else {
+                    currentSection = null;
+                    currentSectionName = "";
+                }
+            } else if (currentSection != null) {
+                // Start new preference if this is a control component
+                if (isPreferenceControl(comp) && !prefComponents.isEmpty()) {
+                    currentSection.items.add(new PreferenceItem(new ArrayList<>(prefComponents),
+                            currentSectionName + " " + searchText));
+                    prefComponents.clear();
+                    searchText.setLength(0);
+                }
+
+                prefComponents.add(comp);
+                String text = getComponentText(comp);
+                if (!text.isEmpty()) {
+                    if (searchText.length() > 0) searchText.append(" ");
+                    searchText.append(text);
+                }
+            }
+        }
+
+        // Save the last preference
+        if (!prefComponents.isEmpty() && currentSection != null) {
+            currentSection.items.add(new PreferenceItem(new ArrayList<>(prefComponents),
+                    currentSectionName + " " + searchText));
+        }
+    }
+
+    /** Checks if a panel contains a specific component */
+    private boolean containsComponent(JPanel panel, Component target) {
+        for (Component child : panel.getComponents()) {
+            if (child == target) return true;
+        }
+        return false;
+    }
+
+    /** Determines if a component is a preference control (starts a new preference) */
+    private boolean isPreferenceControl(Component comp) {
+        return comp instanceof JCheckBox ||
+               comp instanceof FComboBoxPanel ||
+               comp instanceof JPanel ||  // Player name panel, server port panel
+               (comp instanceof FLabel && ((FLabel) comp).getText() != null &&
+                !((FLabel) comp).getText().isEmpty());  // Keyboard shortcut labels
+    }
+
+    /** Extracts searchable text from a component */
+    private String getComponentText(Component comp) {
+        if (comp instanceof JCheckBox) {
+            return ((JCheckBox) comp).getText();
+        } else if (comp instanceof JLabel) {
+            return ((JLabel) comp).getText();
+        } else if (comp instanceof FComboBoxPanel) {
+            for (Component child : ((FComboBoxPanel<?>) comp).getComponents()) {
+                if (child instanceof JLabel) return ((JLabel) child).getText();
+            }
+        } else if (comp instanceof JPanel) {
+            StringBuilder sb = new StringBuilder();
+            for (Component child : ((JPanel) comp).getComponents()) {
+                String text = getComponentText(child);
+                if (!text.isEmpty()) {
+                    if (sb.length() > 0) sb.append(" ");
+                    sb.append(text);
+                }
+            }
+            return sb.toString();
+        }
+        return "";
+    }
+
+    /** Sets up the search text field listener with debounce */
+    private void setupSearchListener() {
+        searchTimer = new Timer(200, e -> applySearch());
+        searchTimer.setRepeats(false);
+        txtSearch.addChangeListener(new FTextField.ChangeListener() {
+            @Override public void textChanged() { searchTimer.restart(); }
+        });
+    }
+
+    /** Applies the current search filter to show/hide preferences */
+    private void applySearch() {
+        String query = txtSearch.getText().toLowerCase().trim();
+
+        for (Section section : sections) {
+            boolean hasVisibleItem = false;
+
+            for (PreferenceItem item : section.items) {
+                boolean visible = query.isEmpty() || item.searchText.contains(query);
+
+                for (Component comp : item.components) {
+                    comp.setVisible(visible);
+                }
+
+                if (visible) {
+                    hasVisibleItem = true;
+                }
+            }
+
+            section.header.setVisible(hasVisibleItem);
+        }
+
+        pnlPrefs.revalidate();
+        pnlPrefs.repaint();
     }
 }

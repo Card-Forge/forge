@@ -16,7 +16,9 @@ Image=spectral_slam.jpg
 2 Elephant Guide|JUD
 1 Exoskeletal Armor|JUD
 1 Forcemage Advocate|JUD
-12 Forest|ODY
+4 Forest|ODY|1
+4 Forest|ODY|2
+4 Forest|ODY|3
 1 Guided Strike|JUD
 2 Hallowed Healer|ODY
 2 Ironshell Beetle|JUD
@@ -29,7 +31,9 @@ Image=spectral_slam.jpg
 1 Phantom Nantuko|JUD
 4 Phantom Nomad|JUD
 3 Phantom Tiger|JUD
-12 Plains|ODY
+4 Plains|ODY|1
+4 Plains|ODY|2
+4 Plains|ODY|3
 2 Second Thoughts|ODY
 2 Seton's Desire|ODY
 1 Spirit Flare|TOR

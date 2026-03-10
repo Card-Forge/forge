@@ -10,7 +10,6 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
 import forge.card.mana.ManaCostShard;
 import forge.game.*;
 import forge.game.ability.AbilityFactory.AbilityRecordType;
@@ -38,7 +37,6 @@ import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -240,27 +238,17 @@ public class AbilityUtils {
                     cards.add((Card) o);
                 }
             }
-        } else if (defined.equals("DelayTriggerRememberedLKI") && sa instanceof SpellAbility) {
-            SpellAbility root = ((SpellAbility)sa).getRootAbility();
-            if (root != null) {
-                for (Object o : root.getTriggerRemembered()) {
-                    if (o instanceof Card) {
-                        cards.add((Card)o);
-                    }
+        } else if (defined.equals("DelayTriggerRememberedLKI")) {
+            for (Object o : sa.getTriggerRemembered()) {
+                if (o instanceof Card) {
+                    cards.add((Card)o);
                 }
-            } else {
-                System.err.println("Warning: couldn't find trigger SA in the chain of SpellAbility " + sa);
             }
-        } else if (defined.equals("DelayTriggerRemembered") && sa instanceof SpellAbility) {
-            SpellAbility root = ((SpellAbility)sa).getRootAbility();
-            if (root != null) {
-                for (Object o : root.getTriggerRemembered()) {
-                    if (o instanceof Card) {
-                        cards.addAll(addRememberedFromCardState(game, (Card)o));
-                    }
+        } else if (defined.equals("DelayTriggerRemembered")) {
+            for (Object o : sa.getTriggerRemembered()) {
+                if (o instanceof Card) {
+                    cards.addAll(addRememberedFromCardState(game, (Card)o));
                 }
-            } else {
-                System.err.println("Warning: couldn't find trigger SA in the chain of SpellAbility " + sa);
             }
         } else if (defined.equals("RememberedFirst")) {
             Object o = hostCard.getFirstRemembered();
@@ -665,7 +653,7 @@ public class AbilityUtils {
                     count = (Integer) to;
                 }
 
-                val = doXMath(ObjectUtils.firstNonNull(count, 0), m, card, ability);
+                val = doXMath(Objects.requireNonNullElse(count, 0), m, card, ability);
             }
             else if (calcX[0].startsWith("ReplaceCount")) {
                 // ReplaceCount is similar to a regular Count, but just
@@ -675,7 +663,7 @@ public class AbilityUtils {
                 final String m = CardFactoryUtil.extractOperators(calcX[1]);
                 final Integer count = (Integer) root.getReplacingObject(AbilityKey.fromString(l[0]));
 
-                val = doXMath(ObjectUtils.firstNonNull(count, 0), m, card, ability);
+                val = doXMath(Objects.requireNonNullElse(count, 0), m, card, ability);
             } else { // these ones only for handling lists
                 Iterable<Card> list = null;
                 if (calcX[0].startsWith("Targeted")) {
@@ -699,8 +687,7 @@ public class AbilityUtils {
                     }
                 }
                 else if (calcX[0].startsWith("TriggerRemembered")) {
-                    final SpellAbility root = sa.getRootAbility();
-                    list = IterableUtil.filter(root.getTriggerRemembered(), Card.class);
+                    list = IterableUtil.filter(sa.getTriggerRemembered(), Card.class);
                 }
                 else if (calcX[0].startsWith("TriggerObjects")) {
                     final SpellAbility root = sa.getRootAbility();
@@ -1008,12 +995,7 @@ public class AbilityUtils {
                 addPlayer(Lists.newArrayList(originalHost), defined, players);
             }
         } else if (defined.startsWith("DelayTriggerRemembered") && sa instanceof SpellAbility) {
-            SpellAbility root = ((SpellAbility)sa).getRootAbility();
-            if (root != null) {
-                addPlayer(root.getTriggerRemembered(), defined, players);
-            } else {
-                System.err.println("Warning: couldn't find trigger SA in the chain of SpellAbility " + sa);
-            }
+            addPlayer(sa.getTriggerRemembered(), defined, players);
         } else if (defined.startsWith("Triggered") && sa instanceof SpellAbility) {
             String defParsed = defined.endsWith("AndYou") ? defined.substring(0, defined.indexOf("AndYou")) : defined;
             if (defined.endsWith("AndYou")) {
@@ -1450,7 +1432,7 @@ public class AbilityUtils {
         final Card source = sa.getHostCard();
         Cost cost;
         if (unlessCost.equals("ChosenNumber")) {
-            cost = new Cost(new ManaCost(new ManaCostParser(String.valueOf(source.getChosenNumber()))), true);
+            cost = new Cost(new ManaCost(String.valueOf(source.getChosenNumber())), true);
         }
         else if (unlessCost.startsWith("DefinedCost")) {
             CardCollection definedCards = getDefinedCards(source, unlessCost.split("_")[1], sa);
@@ -1725,9 +1707,8 @@ public class AbilityUtils {
                     return sum;
                 }
                 if (sq[0].startsWith("TriggerRememberAmount")) {
-                    SpellAbility root = sa.getRootAbility();
                     int count = 0;
-                    for (final Object o : root.getTriggerRemembered()) {
+                    for (final Object o : sa.getTriggerRemembered()) {
                         if (o instanceof Integer) {
                             count += (Integer) o;
                         }
@@ -1861,7 +1842,7 @@ public class AbilityUtils {
                     }
                     return doXMath(v, expr, c, ctb);
                 }
-                
+
                 // Count$FromNamedAbility[abilityName].<True>.<False>
                 if (sq[0].startsWith("FromNamedAbility")) {
                     String abilityNamed = sq[0].substring(16);
@@ -2102,7 +2083,7 @@ public class AbilityUtils {
             return doXMath(c.getIntensity(true), expr, c, ctb);
         }
 
-        if (sq[0].contains("CardCounters")) {
+        if (sq[0].startsWith("CardCounters")) {
             // CardCounters.ALL to be used for Kinsbaile Borderguard and anything that cares about all counters
             int count = 0;
             if (sq[1].equals("ALL")) count = c.getNumAllCounters();
@@ -2221,7 +2202,7 @@ public class AbilityUtils {
         }
 
         // Count$CardManaCost
-        if (sq[0].contains("CardManaCost")) {
+        if (sq[0].startsWith("CardManaCost")) {
             int cmc = c.getCMC();
 
             if (sq[0].contains("LKI") && !c.isInZone(ZoneType.Stack) && c.getManaCost() != null) {
@@ -2838,20 +2819,8 @@ public class AbilityUtils {
                 : game.getCardsIn(ZoneType.Battlefield);
 
             CardCollection cards = CardLists.getValidCards(cardsInZones, rest, player, c, ctb);
-            final Map<String, Integer> map = Maps.newHashMap();
-            for (final Card card : cards) {
-                // Remove Duplicated types
-                final String name = card.getName();
-                Integer count = map.get(name);
-                map.put(name, count == null ? 1 : count + 1);
-            }
-            int max = 0;
-            for (final Entry<String, Integer> entry : map.entrySet()) {
-                if (max < entry.getValue()) {
-                    max = entry.getValue();
-                }
-            }
-            return max;
+
+            return (int)cards.stream().collect(Collectors.groupingBy(Card::getName, Collectors.counting())).values().stream().mapToLong(v -> v).max().orElse(0);
         }
 
         if (sq[0].startsWith("MostProminentCreatureType")) {
@@ -3198,17 +3167,19 @@ public class AbilityUtils {
         } else if (s[0].contains("Thrice")) {
             return num * 3;
         } else if (s[0].contains("HalfUp")) {
-            return (int) (Math.ceil(num / 2.0));
+            return (int) Math.ceil(num / 2.0);
         } else if (s[0].contains("HalfDown")) {
-            return (int) (Math.floor(num / 2.0));
+            return (int) Math.floor(num / 2.0);
         } else if (s[0].contains("ThirdUp")) {
-            return (int) (Math.ceil(num / 3.0));
+            return (int) Math.ceil(num / 3.0);
         } else if (s[0].contains("ThirdDown")) {
-            return (int) (Math.floor(num / 3.0));
+            return (int) Math.floor(num / 3.0);
         } else if (s[0].contains("Negative")) {
             return num * -1;
         } else if (s[0].contains("Times")) {
             return num * secondaryNum;
+        } else if (s[0].contains("Pow")) {
+            return (int) Math.pow(num, secondaryNum);
         } else if (s[0].contains("DivideEvenlyUp")) {
             if (secondaryNum == 0) {
                 return 0;
@@ -3347,9 +3318,17 @@ public class AbilityUtils {
             int totPlayer = 0;
             String[] parts = l[0].split(" ", 2);
             boolean def = parts[0].equals("Condition");
-            String comparator = !def ? parts[0].substring(9, 11) : "GE";
-            int y = !def ? calculateAmount(source, parts[0].substring(11), ctb) : 1;
+            String comparator = def ? "GE" : parts[0].substring(9, 11);
+            String calc = def ? "1" : parts[0].substring(11);
+            Integer y = null;
+            if (!ctb.getSVar(calc).contains("RelativePlayerUID")) {
+                y = calculateAmount(source, calc, ctb);
+            }
             for (Player p : players) {
+                if (y == null) {
+                    calc = ctb.getSVar(calc).replaceAll("RelativePlayerUID", String.valueOf(p.getId()));
+                    y = calculateAmount(source, calc, ctb);
+                }
                 int x = playerXProperty(p, parts[1], source, ctb);
                 if (Expressions.compare(x, comparator, y)) {
                     totPlayer++;
@@ -3684,6 +3663,16 @@ public class AbilityUtils {
             return doXMath(creatTypes.size(), CardFactoryUtil.extractOperators(def), source, ctb);
         }
 
+        //Per request for custom cards.
+        if (def.startsWith("LandType")) {
+            final Set<String> landTypes = Sets.newHashSet();
+            for (Card card : paidList) {
+                landTypes.addAll(card.getType().getLandTypes());
+            }
+
+            return doXMath(landTypes.size(), CardFactoryUtil.extractOperators(def), source, ctb);
+        }
+
         Function<IntStream, Integer> func;
         String finalDef;
         if (def.startsWith("Least")) {
@@ -3738,47 +3727,8 @@ public class AbilityUtils {
             }
         }
 
-        if (sq[0].contains("InOppYard")) {
-            for (final Player p : opps) {
-                someCards.addAll(p.getCardsIn(ZoneType.Graveyard));
-            }
-        }
-
-        if (sq[0].contains("InOppHand")) {
-            for (final Player p : opps) {
-                someCards.addAll(p.getCardsIn(ZoneType.Hand));
-            }
-        }
-
-        if (sq[0].contains("InChosenHand")) {
-            if (c.hasChosenPlayer()) {
-                someCards.addAll(c.getChosenPlayer().getCardsIn(ZoneType.Hand));
-            }
-        }
-
-        if (sq[0].contains("InRememberedHand")) {
-            if (c.getRemembered() != null) {
-                for (final Object o : c.getRemembered()) {
-                    if (o instanceof Player) {
-                        Player remPlayer = (Player) o;
-                        someCards.addAll(remPlayer.getCardsIn(ZoneType.Hand));
-                    }
-                }
-            }
-        }
-
-        if (sq[0].contains("InChosenYard")) {
-            if (c.hasChosenPlayer()) {
-                someCards.addAll(c.getChosenPlayer().getCardsIn(ZoneType.Graveyard));
-            }
-        }
-
         if (sq[0].contains("OnBattlefield")) {
             someCards.addAll(game.getCardsIn(ZoneType.Battlefield));
-        }
-
-        if (sq[0].contains("InAllYards")) {
-            someCards.addAll(game.getCardsIn(ZoneType.Graveyard));
         }
 
         if (sq[0].contains("SpellsOnStack")) {
@@ -3787,20 +3737,6 @@ public class AbilityUtils {
 
         if (sq[0].contains("InAllHands")) {
             someCards.addAll(game.getCardsIn(ZoneType.Hand));
-        }
-
-        //  Count$InTargetedHand (targeted player's cards in hand)
-        if (sq[0].contains("InTargetedHand")) {
-            for (Player tgtP : getDefinedPlayers(c, "TargetedPlayer", ctb)) {
-                someCards.addAll(tgtP.getCardsIn(ZoneType.Hand));
-            }
-        }
-
-        //  Count$InTargetedLibrary (targeted player's cards in library)
-        if (sq[0].contains("InTargetedLibrary")) {
-            for (Player tgtP : getDefinedPlayers(c, "TargetedPlayer", ctb)) {
-                someCards.addAll(tgtP.getCardsIn(ZoneType.Library));
-            }
         }
 
         // filter lists based on the specified quality

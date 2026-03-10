@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="88">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Hungry Lynx&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzr42Rg6MOC25AwNnl86onB1DJnqNtLrt3E6hu1d9TeUXtH7R3q9pJjJ6nuG6z20qL+BQDfkyFi
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy1VUkSwjAM84lJ4G0U/sZDwvYVXtHS9sKd+uDBceU0bJrhgBtLTiK1RETXQNTE/HeeahrjVLutiHaRIIapfgrz+ujwMdo4173H+Rqez9Y1dxNxHWkibcSNkEKuqflrNLU20mR+dIbbwr20b+4BQWbvAUdX4P5Gk6HvAGl/AnR+CNrzveNdD3xPR7Ne8wyFvSDP12ingM/Kcnn5ZKCcL2mPZr1o232UvCAZ1uv3C/fNPZfw6tO+l2e1/hP9mmzqniV+L6//hLyDfpWXWrzzfvP6eWbvO1HStJ5Ppv+xzv9rfuu7mqyjHplF9x42+Uz6Ocp5jXYHsmLPXOuKt4U7gYwj7SelS3er
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJydVTFOAzEQNAkSiqL0+UHyDERzJyWf4BUkAfETKvgNxfEBlHRR0qaEAka+IeNlbSxGOp1vPZ5d7659IZzxNorvo9g6xxbMfNuPN5N07n7yi/7jg/PbWQi7WUY843eRpycoaX982z+dudd5fF8PQni+iA+B8c0g5a37PS57Tutow9bJvm+n6RpgP48+H4fpOuJhGH2Dp3aNgbB1sOA8akGfsO0uo5055zd910DrdZCx1h14r9CDf/KoSx3mwPbCSvbeOHFBD7oa5+kqvpkDaGh8pXzaHr9zuNR7mp5ttobEX3lpHJvV0phU72Ucn6WMW+ExJ+xLzZG3L0LzQz32DHx4gN32O9CNfH4JugbnUvtV94A46ZPntwbouYWMDw5n3+vBN+8NfbhP8jRnrJdX2xo0wb9rrT5QujtXjgbzR402w9Ue1Hst99+w90Euttx62G1PlnLg8QnW04vJQ82Z/y+8s5Tzwzi8vNHWmf8t8QWMTmfV
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="198.667" y="281" width="38" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/treasure.tx" x="205.955" y="173.576">
+   <properties>
+    <property name="reward">[
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Cat Collector&quot;,
+  &quot;editions&quot;: [ &quot;FDN&quot;]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Attended Healer&quot;,
+  &quot;editions&quot;: [ &quot;ZNR&quot;]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Feline Sovereign&quot;,
+  &quot;editions&quot;: [ &quot;M21&quot;]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Prideful Parent&quot;,
+  &quot;editions&quot;: [ &quot;FDN&quot;]
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Felidar Retreat&quot;,
+  &quot;editions&quot;: [ &quot;FDN&quot;]
+}]</property>
+   </properties>
+  </object>
+  <object id="52" template="../../../../common/maps/obj/gold.tx" x="224.729" y="172.02"/>
+  <object id="56" template="../../../../common/maps/obj/collision.tx" x="-16" y="0" width="16" height="272"/>
+  <object id="57" template="../../../../common/maps/obj/collision.tx" x="480" y="0" width="16" height="272"/>
+  <object id="58" template="../../../../common/maps/obj/collision.tx" x="-16" y="272" width="512" height="16"/>
+  <object id="59" template="../../../../common/maps/obj/collision.tx" x="-16" y="-16" width="512" height="16"/>
+  <object id="62" template="../../../../common/maps/obj/manashards.tx" x="180.828" y="172.879"/>
+  <object id="63" template="../../../../common/maps/obj/enemy.tx" x="207.406" y="144.404">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Trusty Machete|ZEN&quot;, &quot;Leonin Den-Guard|MRD&quot; ] }"/>
+    <property name="enemy" value="Kemba"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="64" template="../../../../common/maps/obj/enemy.tx" x="215.728" y="49.7504">
+   <properties>
+    <property name="enemy" value="Ajani"/>
+    <property name="pursueRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="65" template="../../../../common/maps/obj/enemy.tx" x="174.182" y="112.971" visible="1">
+   <properties>
+    <property name="enemy" value="Jedit"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="speedModifier" type="float" value="15"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="66" template="../../../../common/maps/obj/enemy.tx" x="403.271" y="108.939">
+   <properties>
+    <property name="enemy" value="Arahbo"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="71,72,74"/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/enemy.tx" x="16.2703" y="150.419">
+   <properties>
+    <property name="enemy" value="Rin and Seri"/>
+    <property name="fleeRange" value="30"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="70,69,68,69"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/waypoint.tx" x="108.497" y="47.601"/>
+  <object id="69" template="../../../../common/maps/obj/waypoint.tx" x="24.6925" y="89.8074"/>
+  <object id="70" template="../../../../common/maps/obj/waypoint.tx" x="15.829" y="239.557"/>
+  <object id="71" template="../../../../common/maps/obj/waypoint.tx" x="466.374" y="60.3981"/>
+  <object id="72" template="../../../../common/maps/obj/waypoint.tx" x="383.855" y="127.914"/>
+  <object id="74" template="../../../../common/maps/obj/waypoint.tx" x="318.434" y="225.915"/>
+  <object id="75" template="../../../../common/maps/obj/enemy.tx" x="234.667" y="98.3333" visible="1">
+   <properties>
+    <property name="enemy" value="Qala"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="speedModifier" type="float" value="15"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/dialog.tx" x="165" y="227.25" width="107" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A roiling savannah stretches out before you. A camp sits in the middle of it, leonin warriors patrolling it. A few large cats also wander the outskirts of the area.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="77" template="../../../../common/maps/obj/dialog.tx" x="191" y="36.25" width="66.5" height="18.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The inside of the camp bustles with leonin, sharpening weapons, magically reinforcing armor, and generally tending to camp.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="78" template="../../../../common/maps/obj/scroll.tx" x="408.5" y="67.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;King of the Pride&quot;, &quot;editions&quot;: [ &quot;MH1&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="79" template="../../../../common/maps/obj/scroll.tx" x="41.5" y="64.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Claws Out&quot;, &quot;editions&quot;: [ &quot;FDN&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="80" template="../../../../common/maps/obj/collision.tx" x="174.19" y="221.833" width="19.2869" height="49.6667"/>
+  <object id="81" template="../../../../common/maps/obj/collision.tx" x="238.023" y="220.5" width="19.2869" height="49.6667"/>
+  <object id="82" template="../../../../common/maps/obj/collision.tx" x="288.69" y="160.167" width="14.6202" height="32"/>
+  <object id="83" template="../../../../common/maps/obj/collision.tx" x="129.023" y="159.667" width="14.6202" height="32"/>
+  <object id="84" template="../../../../common/maps/obj/collision.tx" x="288.357" y="32.3333" width="14.6202" height="32"/>
+  <object id="85" template="../../../../common/maps/obj/collision.tx" x="128.69" y="32.6667" width="14.6202" height="32"/>
+  <object id="86" template="../../../../common/maps/obj/collision.tx" x="33.3566" y="20" width="30.2869" height="27.3333"/>
+  <object id="87" template="../../../../common/maps/obj/collision.tx" x="400.857" y="19.3333" width="30.2869" height="27.3333"/>
+ </objectgroup>
+</map>

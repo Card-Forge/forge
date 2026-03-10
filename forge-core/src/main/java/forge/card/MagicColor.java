@@ -1,5 +1,7 @@
 package forge.card;
 
+import java.util.Locale;
+
 import com.google.common.collect.ImmutableList;
 
 import forge.util.ITranslatable;
@@ -135,8 +137,8 @@ public final class MagicColor {
         /** The Basic lands. */
         public static final ImmutableList<String> BASIC_LANDS = ImmutableList.of("Plains", "Island", "Swamp", "Mountain", "Forest");
         public static final ImmutableList<String> SNOW_LANDS = ImmutableList.of("Snow-Covered Plains", "Snow-Covered Island", "Snow-Covered Swamp", "Snow-Covered Mountain", "Snow-Covered Forest");
-        public static final String ANY_COLOR_CONVERSION = "AnyType->AnyColor";
 
+        public static final String ANY_COLOR_CONVERSION = "AnyType->AnyColor";
         public static final String ANY_TYPE_CONVERSION = "AnyType->AnyType";
         /**
          * Private constructor to prevent instantiation.
@@ -146,22 +148,24 @@ public final class MagicColor {
     }
 
     public enum Color implements ITranslatable {
-        WHITE(Constant.WHITE, MagicColor.WHITE, "W", "lblWhite"),
-        BLUE(Constant.BLUE, MagicColor.BLUE, "U", "lblBlue"),
-        BLACK(Constant.BLACK, MagicColor.BLACK, "B", "lblBlack"),
-        RED(Constant.RED, MagicColor.RED, "R", "lblRed"),
-        GREEN(Constant.GREEN, MagicColor.GREEN, "G", "lblGreen"),
-        COLORLESS(Constant.COLORLESS, MagicColor.COLORLESS, "C", "lblColorless");
+        WHITE(Constant.WHITE, MagicColor.WHITE, "W", "Plains", "lblWhite"),
+        BLUE(Constant.BLUE, MagicColor.BLUE, "U", "Island", "lblBlue"),
+        BLACK(Constant.BLACK, MagicColor.BLACK, "B", "Swamp", "lblBlack"),
+        RED(Constant.RED, MagicColor.RED, "R", "Mountain", "lblRed"),
+        GREEN(Constant.GREEN, MagicColor.GREEN, "G", "Forest", "lblGreen"),
+        COLORLESS(Constant.COLORLESS, MagicColor.COLORLESS, "C", null, "lblColorless");
 
         private final String name, shortName, symbol;
+        private final String basicLandType;
         private final String label;
         private final byte colormask;
 
-        Color(String name0, byte colormask0, String shortName, String label) {
+        Color(String name0, byte colormask0, String shortName, String basicLandType, String label) {
             name = name0;
             colormask = colormask0;
             this.shortName = shortName;
             symbol = "{" + shortName + "}";
+            this.basicLandType = basicLandType;
             this.label = label;
         }
 
@@ -176,7 +180,7 @@ public final class MagicColor {
             };
         }
         public static Color fromName(final String color) {
-            return switch (color) {
+            return switch (color.toLowerCase(Locale.ROOT)) {
                 case MagicColor.Constant.WHITE -> WHITE;
                 case MagicColor.Constant.BLUE -> BLUE;
                 case MagicColor.Constant.BLACK -> BLACK;
@@ -192,6 +196,9 @@ public final class MagicColor {
         }
         public String getShortName() {
             return shortName;
+        }
+        public String getBasicLandType() {
+            return basicLandType;
         }
 
         @Override

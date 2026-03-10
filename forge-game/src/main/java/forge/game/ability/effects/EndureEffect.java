@@ -53,6 +53,7 @@ public class EndureEffect extends TokenEffectBase {
         int amount = AbilityUtils.calculateAmount(host, num, sa);
 
         if (amount < 1) {
+            // CR 701.63b
             return;
         }
 

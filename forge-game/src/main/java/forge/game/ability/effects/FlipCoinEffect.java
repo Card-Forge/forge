@@ -181,7 +181,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                     result++;
                 }
             }
-            // until is sequential
+            // CR 705.3 relevant: until is sequential
         }
         while (sa.hasParam("FlipUntilYouLose") && won);
         return result;

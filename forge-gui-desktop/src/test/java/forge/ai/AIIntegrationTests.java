@@ -99,8 +99,8 @@ public class AIIntegrationTests extends AITest {
         // Setup mana
         Card colorlessMana = createCard("Ash Barrens", p);
         Card greenMana = createCard("Forest", p);
-        p.getManaPool().addMana(new Mana((byte) ManaAtom.COLORLESS, colorlessMana, null));
-        p.getManaPool().addMana(new Mana((byte) ManaAtom.GREEN, greenMana, null));
+        p.getManaPool().addMana(new Mana((byte) ManaAtom.COLORLESS, colorlessMana, null, p));
+        p.getManaPool().addMana(new Mana((byte) ManaAtom.GREEN, greenMana, null, p));
         AssertJUnit.assertEquals(2, p.getManaPool().totalMana());
 
         // Put a non-creature card in opponent's graveyard

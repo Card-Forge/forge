@@ -39,7 +39,7 @@ import java.util.function.Predicate;
 public class AdventurePlayer implements Serializable, SaveFileContent {
     public static final int MIN_DECK_COUNT = 10;
     // this is a purely arbitrary limit, could be higher or lower; just meant as some sort of reasonable limit for the user
-    public static final int MAX_DECK_COUNT = 20;
+    private int maxDeckCount = 20;
     // Player profile data.
     private String name;
     private int heroRace;
@@ -103,6 +103,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public int getDeckCount() { return decks.size(); }
 
+    public int getMaxDeckCount() { return maxDeckCount; }
+
     private void clearDecks() {
         decks.clear();
         for (int i = 0; i < MIN_DECK_COUNT; i++)
@@ -123,6 +125,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         maxLife = 20;
         life = 20;
         shards = 0;
+        maxDeckCount = 20;
         clearDecks();
         inventoryItems.clear();
         boostersOwned.clear();
@@ -157,6 +160,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         this.adventureMode = adventureMode;
         announceFantasy = fantasyMode = isFantasy; //Set Chaos mode first.
         announceCustom = usingCustomDeck = isUsingCustomDeck;
+
+        this.maxDeckCount = Config.instance().getConfigData().maxNumberOfDecks; // Get the MAX_DECK_COUNT from the config file
+        // Sanity Check make sure the number is not insane and make sure it is at least 20
+        this.maxDeckCount = Math.max(Math.min(this.maxDeckCount, 99), 20);
 
         clearDecks(); // Reset the empty decks to now already have the commander in the command zone.
         deck = startingDeck;
@@ -562,13 +569,17 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             }
         }
 
+        // Set max deck count to either the value in the config or the current player deck count and then ensure it is bound by 20 and 99
+        this.maxDeckCount = Math.min(Math.max(Math.max(data.containsKey("deckCount") ? data.readInt("deckCount") : 20, Config.instance().getConfigData().maxNumberOfDecks), 20), 99);
+
+
         // Load decks
         // Check if this save has dynamic deck count, use set-count load if not
         boolean hasDynamicDeckCount = data.containsKey("deckCount");
         if (hasDynamicDeckCount) {
             int dynamicDeckCount = data.readInt("deckCount");
             // In case the save had previously saved more decks than the current version allows (in case of the max being lowered)
-            dynamicDeckCount = Math.min(MAX_DECK_COUNT, dynamicDeckCount);
+            dynamicDeckCount = Math.min(maxDeckCount, dynamicDeckCount);
             for (int i = 0; i < dynamicDeckCount; i++){
                 // The first x elements are pre-created
                 if (i < MIN_DECK_COUNT) {
@@ -1473,7 +1484,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
      * @return int - index of new copy slot, or -1 if no slot was available
      */
     public int copyDeck() {
-        for (int i = 0; i < MAX_DECK_COUNT; i++) {
+        for (int i = 0; i < maxDeckCount; i++) {
             if (i >= getDeckCount()) addDeck();
             if (isEmptyDeck(i)) {
                 decks.set(i, (Deck) deck.copyTo(deck.getName() + " (" + Forge.getLocalizer().getMessage("lblCopy") + ")"));
@@ -1540,6 +1551,43 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return copiesUsed;
     }
 
+    public void removeLostCardFromPools(PaperCard card) {
+        if (card.isVeryBasicLand() && !card.isFoil()) {
+            return;
+        }
+
+        int leftInPool = Current.player().getCards().count(card) - 1;
+
+        for (final Deck deck : decks) {
+            int cntInDeck = deck.count(card);
+            int nToRemoveFromThisDeck = cntInDeck - leftInPool;
+            if (nToRemoveFromThisDeck <= 0) {
+                continue;
+            }
+
+            for(DeckSection section : DeckSection.values()) {
+                if (section == DeckSection.Main || deck.get(section) == null) {
+                    continue;
+                }
+                int cntInSection = deck.get(section).count(card);
+                int nToRemoveFromSection = Math.min(cntInSection, nToRemoveFromThisDeck);
+                if (nToRemoveFromSection > 0) {
+                    deck.get(section).remove(card, nToRemoveFromSection);
+                    nToRemoveFromThisDeck -= nToRemoveFromSection;
+                    if (nToRemoveFromThisDeck <= 0) {
+                        break;
+                    }
+                }
+            }
+
+            if (nToRemoveFromThisDeck <= 0) {
+                continue;
+            }
+
+            deck.getMain().remove(card, nToRemoveFromThisDeck);
+        }
+        Current.player().getCards().remove(card, 1);
+    }
 
     public CardPool getCollectionCards(boolean allCards) {
         CardPool collectionCards = new CardPool();

@@ -1,0 +1,17 @@
+Name:Does Machines
+ManaCost:1 U
+Types:Enchantment Class
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When this Class enters, mill two cards, draw two cards, then discard two cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
+K:Class:2:1 U:AddTrigger$ TriggerClassLevel
+SVar:TriggerClassLevel:Mode$ ClassLevelGained | ClassLevel$ 2 | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigChangeZone | Secondary$ True | TriggerDescription$ When this Class becomes level 2, return up to two target artifact cards from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Artifact.YouOwn | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target artifact cards in your graveyard | Origin$ Graveyard | Destination$ Hand
+K:Class:3:4 U:AddTrigger$ TriggerCombat
+SVar:TriggerCombat:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | Secondary$ True | TriggerDescription$ At the beginning of combat on your turn, put three +1/+1 counters on target artifact you control. If it isn't a creature, it becomes a 0/0 Robot creature in addition to its other types.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Artifact.YouCtrl | TgtPrompt$ Select target artifact you control | CounterType$ P1P1 | CounterNum$ 3 | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | ConditionDefined$ Targeted | ConditionPresent$ Card.nonCreature | Power$ 0 | Toughness$ 0 | Types$ Creature,Robot | Duration$ Permanent
+DeckHas:Ability$Counters
+DeckHints:Type$Artifact
+Oracle:(Gain the next level as a sorcery to add its ability.)\nWhen this Class enters, mill two cards, draw two cards, then discard two cards.\n{1}{U}: Level 2\nWhen this Class becomes level 2, return up to two target artifact cards from your graveyard to your hand.\n{4}{U}: Level 3\nAt the beginning of combat on your turn, put three +1/+1 counters on target artifact you control. If it isn't a creature, it becomes a 0/0 Robot creature in addition to its other types.

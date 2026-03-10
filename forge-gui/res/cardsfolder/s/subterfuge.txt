@@ -2,10 +2,10 @@ Name:Subterfuge
 ManaCost:4 U
 Types:Creature Elemental Incarnation
 PT:3/5
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAnimate| TriggerDescription$ When this creature enters, target creature gains flying and "Whenever this creature deals combat damage to a player, draw that many cards" until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAnimate | TriggerDescription$ When this creature enters, target creature gains flying and "Whenever this creature deals combat damage to a player, draw that many cards" until end of turn.
 SVar:TrigAnimate:DB$ Animate | ValidTgts$ Creature | Keywords$ Flying | Triggers$ DealsDamage
 SVar:DealsDamage:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever this creature deals combat damage to a player, draw that many cards.
-SVar:TrigDraw:DB$ Draw | NumCard$ X
+SVar:TrigDraw:DB$ Draw | NumCards$ X
 K:Encore:7 U U
 SVar:X:TriggerCount$DamageAmount
 SVar:PlayMain1:TRUE

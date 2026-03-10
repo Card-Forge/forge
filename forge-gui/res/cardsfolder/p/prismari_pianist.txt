@@ -1,0 +1,12 @@
+Name:Prismari Pianist
+ManaCost:1 R R
+Types:Creature Djinn Bard
+PT:2/1
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast an instant or sorcery spell, create a 1/1 blue and red Elemental creature token. If that spell's mana value is 5 or greater, create three of those tokens instead.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ ur_1_1_elemental
+SVar:BuffedBy:Instant,Sorcery
+SVar:X:Count$Compare Y GE5.3.1
+SVar:Y:TriggeredSpellAbility$CardManaCostLKI
+DeckHints:Type$Instant|Sorcery
+DeckHas:Ability$Token
+Oracle:Whenever you cast an instant or sorcery spell, create a 1/1 blue and red Elemental creature token. If that spell's mana value is 5 or greater, create three of those tokens instead.

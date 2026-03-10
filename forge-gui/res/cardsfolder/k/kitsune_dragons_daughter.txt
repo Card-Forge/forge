@@ -1,0 +1,9 @@
+Name:Kitsune, Dragon's Daughter
+ManaCost:4 U U
+Types:Legendary Creature Fox Warlock Avatar
+PT:6/6
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExchangeControl | OptionalDecider$ You | TriggerDescription$ Whenever NICKNAME enters or deals combat damage to a player, you may exchange control of two other target creatures controlled by different players.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigExchangeControl | TriggerZones$ Battlefield | Secondary$ True | OptionalDecider$ You | TriggerDescription$ Whenever NICKNAME enters or deals combat damage to a player, you may exchange control of two other target creatures controlled by different players.
+SVar:TrigExchangeControl:DB$ ExchangeControl | ValidTgts$ Creature.Other | TargetsWithDifferentControllers$ True | TgtPrompt$ Select another target creature | TargetMin$ 2 | TargetMax$ 2
+Oracle:Vigilance\nWhenever Kitsune enters or deals combat damage to a player, you may exchange control of two other target creatures controlled by different players.

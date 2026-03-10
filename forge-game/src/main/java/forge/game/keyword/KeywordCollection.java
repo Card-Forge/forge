@@ -180,20 +180,9 @@ public class KeywordCollection implements Iterable<KeywordInterface> {
         return view;
     }
 
-    public void applyChanges(Iterable<KeywordsChange> changes) {
-        for (final KeywordsChange ck : changes) {
-            if (ck.isRemoveAllKeywords()) {
-                clear();
-            }
-            else if (ck.getRemoveKeywords() != null) {
-                removeAll(ck.getRemoveKeywords());
-            }
-
-            removeInstances(ck.getRemovedKeywordInstances());
-
-            if (ck.getKeywords() != null) {
-                insertAll(ck.getKeywords());
-            }
+    public void applyChanges(Iterable<IKeywordsChange> changes) {
+        for (final IKeywordsChange ck : changes) {
+            ck.applyKeywords(this);
         }
     }
 

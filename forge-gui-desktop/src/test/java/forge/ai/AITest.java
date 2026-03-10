@@ -62,9 +62,26 @@ public class AITest {
         return resetGame();
     }
 
+    protected void gameLoopUntilNextPhase(Game game) {
+        int maxIterations = 100;
+        int iterations = 0;
+        PhaseType currentPhase = game.getPhaseHandler().getPhase();
+        while (!game.isGameOver() && iterations < maxIterations) {
+            game.getPhaseHandler().mainLoopStep();
+            iterations++;
+            if (!game.getPhaseHandler().is(currentPhase)) {
+                break;
+            }
+        }
+    }
+
     protected int countCardsWithName(Game game, String name) {
+        return countCardsWithName(game, name, ZoneType.Battlefield);
+    }
+
+    protected int countCardsWithName(Game game, String name, ZoneType type) {
         int i = 0;
-        for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
+        for (Card c : game.getCardsIn(type)) {
             if (c.getName().equals(name)) {
                 i++;
             }

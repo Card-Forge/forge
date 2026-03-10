@@ -29,6 +29,7 @@ TokensCode=HHO
 22 M Chaos Wrap @Zoltan Boros
 23 M Seasonal Sequels @Adrián Rodríguez Pérez
 24 M Eggnogger's 'Stache @Arif Wijaya
+25 R Cheer @Alexandr Leskinen
 
 [tokens]
 21★ c_a_treasure_sac @Rachta Lin

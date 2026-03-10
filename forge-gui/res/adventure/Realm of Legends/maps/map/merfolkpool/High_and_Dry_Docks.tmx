@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="94">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Daring Piracy&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" name="dungeon large" tilewidth="16" tileheight="16" tilecount="16384" columns="128">
+  <image source="../../../../common/maps/tileset/dungeon/dungeon_bis.png" width="2048" height="2048"/>
+ </tileset>
+ <tileset firstgid="28289" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="38401" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="6" name="Collision" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4B6YBrrQLuAfoBcv7pxEsa0AITMpZe9npwITC97aRXOhMylpb2UyA9FewmFM70AKfZSszwcCv6lp72gsKVFfTNY/UsPe0fBKBgFIxcAAO7yFUY=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztlj0OwCAIhZ3araMn7eCxesSuhgg+/jRpOjBR+XgI2HqXUn/7pD3nHuYurjVXa86ec1wOSExrfZG40jeZXMR/tHV17v0SdxZX0yOUOeNG9MiImc2lNZkx0Tpr+gHV6uVyWrP1Uj/CRGKhM6PRauFKMxzNRXaGh2ndGz1Tw9W+e5QjMaWZQXeSxON0ev87NCyuV6x6vP3q4a5irdCSoetqc4u8sxFX8kdzX9519Jk=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztkttNxDAQRfNLZ0nEEvIQWwhBAhqgAiqhj928qthvCuBGxJIZXdtjE/aLkY60slZzcmcmy/5LVpVn2T2oQQPanL91+b7eM/oNYAQTmHP+tuzsrQpkAzVoQFvwt67Q9et63f/O6DeAEUxgLvgbm72sI5w3z9xzJ/ZXlfgNatCAtuRvbPYsq8t7CuzvtDrAAEYwgbnks2dZnXkT98dm7/OyvbAeS8DLZm+XmfHty/adZKasR2f10dyQK+tl87KZsv0tlldzQ6Y+Hn9mfXvdegT2QmcauCHmNFnfn7Yegb2w0nyrdJqsxuvM5Nmh5luPDmfIG7NDVmy+Gq92h6zsrLHelHtbS+41xvvQx93b6jIlnXK3Ia/B5/rsv5EunzM0Z5cj5JLzjfVq8vhwZTVeluU3roPHZ2C3l+rS+AypzhSXzTVdKV7fjezhtTMddswn+ev+Pu81PJIv6yrjjg==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AU0BM8W8fAcL2VgeFmK33tTVvPwFDaxsBQBsRXW1HxNRLcUsJLut0wewXbUbFoO+lmkWpvORA/BIb5o3W0tQubvYnAME9aTxs7rrRixmMZ1N7Ha2hjJwgItGPGI8xeXCBDEoKpBZ4A4/LpOkQ4U2JvOQnpOQUYl6nrCdtLKwCz9zGRaZmcvIrP3mQi0rKnBgODlwZ17cUGDjBBMAykAu1Mo5G9C5kRbEYgm4kZUw8MnGZhYNCFYnLtncAB4duzIOwEywPjswxHnKazkm4fDPAC8zA/lrIYZO9ndvx6ybU3mIC52MIYOb4J2fsPqpYRyRxS80MVFvXY7EWPF1iYKTHiNx8kj5xe8OEsNHt7gGmklwPTn/+YGHACkH3/mSBhC/IHSA+Mjwt0yaLytTgZGLQ58fsLG4ClJZC9IDNBGGQvjI0NkwqwlT2w8ECON3z+Jaf8wlb2wOID2V7kuEFPW9jMIKVuwmcvIx7/IgMAPlhuxA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="260" y="479.167" width="48" height="23">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="52" template="../../../../common/maps/obj/gold.tx" x="248.833" y="145.833"/>
+  <object id="54" template="../../../../common/maps/obj/enemy.tx" x="202.001" y="150.583">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Pirate Hat|LCI&quot;, &quot;shipwreck sentry|LCI&quot;]
+}</property>
+    <property name="enemy" value="Admiral Brass"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="55" template="../../../../common/maps/obj/enemy.tx" x="198.666" y="247.667">
+   <properties>
+    <property name="enemy" value="Captain Storm"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="0"/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../common/maps/obj/enemy.tx" x="63.3334" y="416.333">
+   <properties>
+    <property name="enemy" value="Ramirez"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="57" template="../../../../common/maps/obj/enemy.tx" x="272.167" y="401.667">
+   <properties>
+    <property name="enemy" value="Zara"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/enemy.tx" x="319.5" y="341.75">
+   <properties>
+    <property name="enemy" value="Kari Zev"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="59" template="../../../../common/maps/obj/enemy.tx" x="198.5" y="358.833">
+   <properties>
+    <property name="enemy" value="Malcolm and Breeches"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/collision.tx" x="-0.5" y="480.5" width="481" height="16"/>
+  <object id="70" template="../../../../common/maps/obj/collision.tx" x="0" y="-17.5" width="481" height="16"/>
+  <object id="71" template="../../../../common/maps/obj/collision.tx" x="481" y="-19.5415" width="16" height="516.083"/>
+  <object id="72" template="../../../../common/maps/obj/collision.tx" x="-16" y="-19.5415" width="16" height="516.083"/>
+  <object id="74" template="../../../../common/maps/obj/enemy.tx" x="453" y="178.333">
+   <properties>
+    <property name="enemy" value="Sala"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="77" template="../../../../common/maps/obj/booster.tx" x="137.5" y="213.667">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;XLN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;XLN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;XLN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="78" template="../../../../common/maps/obj/gold.tx" x="26.6667" y="386"/>
+  <object id="79" template="../../../../common/maps/obj/gold.tx" x="52" y="386"/>
+  <object id="80" template="../../../../common/maps/obj/gold.tx" x="466.667" y="112"/>
+  <object id="81" template="../../../../common/maps/obj/gold.tx" x="449.333" y="128"/>
+  <object id="82" template="../../../../common/maps/obj/booster.tx" x="271.333" y="147.333">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;RIX&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;RIX&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;RIX&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="83" template="../../../../common/maps/obj/gold.tx" x="304.667" y="337.333"/>
+  <object id="84" template="../../../../common/maps/obj/dialog.tx" x="269.045" y="426.25" width="23.2424" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;You are met by the sound of waves and the sight of the open sea ahead. Pirates bustle about, laughing, drinking, and arguing in a rowdy fashion. You recall a story about High and Dry, a legendary pirate city from the plane of Ixalan. This must be a fragment of that place, cast to this world.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="85" template="../../../../common/maps/obj/dialog.tx" x="191.962" y="177.917" width="32.4924" height="17.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;An old but imposing woman dressed in what is clearly captain's garb calls out to you. 
+
+'Yarr, landlubber! Ye may have roughed up those other ruffians, but if ye think you'll be sinking me, you best start sayin' yer prayers, cause yer about to walk the plank!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="86" template="../../../../common/maps/obj/dialog.tx" x="224.148" y="342.023" width="16.0682" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;HIGH AND DRY DOCKS
+EVERYTHING YE NEED: REST, RECREATION, and REVENGE&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="87" template="../../../../common/maps/obj/collision.tx" x="240.091" y="400.383" width="16" height="81.4163"/>
+  <object id="88" template="../../../../common/maps/obj/collision.tx" x="319" y="415.625" width="16" height="64.083"/>
+  <object id="89" template="../../../../common/maps/obj/collision.tx" x="288.334" y="397.625" width="48.3333" height="19.4163"/>
+  <object id="90" template="../../../../common/maps/obj/collision.tx" x="161.5" y="433.459" width="29" height="28.083"/>
+  <object id="91" template="../../../../common/maps/obj/collision.tx" x="369.5" y="272.459" width="29" height="28.083"/>
+  <object id="92" template="../../../../common/maps/obj/collision.tx" x="434" y="432.959" width="29" height="28.083"/>
+  <object id="93" template="../../../../common/maps/obj/collision.tx" x="254.833" y="395.959" width="15.3333" height="18.4163"/>
+ </objectgroup>
+</map>

@@ -20,6 +20,7 @@ import forge.adventure.data.EffectData;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.RewardData;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.adventure.util.MapDialog;
 import forge.adventure.util.Reward;
@@ -63,6 +64,7 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
     public MapDialog defeatDialog; //Dialog to show on defeat. Overrides standard death (can be removed as an action)
     public EffectData effect; //Battle effect for this enemy. Similar to a player's blessing.
     public String nameOverride = ""; //Override name of this enemy in battles.
+    public String bossInsult = ""; //Override the generated insult text when you are defeated.
     public RewardData[] rewards; //Additional rewards for this enemy.
     public DialogData.ConditionData spawnCondition; //Condition to spawn.
     public LinkedList<MovementBehavior> movementBehaviors = new LinkedList<>();
@@ -440,7 +442,12 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
             return data.getName();
         return nameOverride;
     }
-
+    public String getBossInsult(){
+        return data.bossInsult;
+    }
+    public String getBossIntro(){
+        return data.bossIntro;
+    }
     public Array<Reward> getRewards() {
         Array<Reward> rewards = new Array<>();
         //Collect custom rewards for chaos battles
@@ -503,7 +510,8 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
         if(data.rewards != null) { //Collect standard rewards.
             Deck enemyDeck = Current.latestDeck();
             // By popular demand, remove basic lands from the reward pool.
-            CardPool deckNoBasicLands = enemyDeck.getMain().getFilteredPool(PaperCardPredicates.fromRules(CardRulesPredicates.NOT_BASIC_LAND));
+            CardPool deckNoRestrictedEditions = enemyDeck.getMain().getFilteredPool(PaperCardPredicates.onlyPrintedInEditions(Config.instance().getConfigData().restrictedEditions).negate());
+            CardPool deckNoBasicLands = deckNoRestrictedEditions.getFilteredPool(PaperCardPredicates.fromRules(CardRulesPredicates.NOT_BASIC_LAND));
 
             for (RewardData rdata : data.rewards) {
                 rewards.addAll(rdata.generate(false,  enemyDeck == null ? null : deckNoBasicLands.toFlatList(),true ));

@@ -122,17 +122,17 @@ public enum CounterEnumType implements CounterType {
     DESPAIR("DESPR", 238, 186, 187),
 
     DEVOTION("DEVOT", 255, 111, 255),
-   
+
     DISCOVERY("DISCO", 12, 230, 100),
 
     DIVINITY("DVNTY", 0, 233, 255),
 
     DOOM("DOOM", 255, 104, 118),
-    
+
     DREAD ("DREAD", 205, 170, 240),
 
     DREAM("DREAM", 190, 189, 255),
-    
+
     DUTY("DUTY", 232, 245, 245),
 
     ECHO("ECHO", 225, 180, 255),
@@ -142,11 +142,11 @@ public enum CounterEnumType implements CounterType {
     ELIXIR("ELIXR", 81, 221, 175),
 
     EMBER("EMBER", 247, 52, 43),
-    
+
     EON("EON", 23, 194, 255),
 
     ERUPTION("ERUPTION", 255, 124, 124),
-    
+
     EXPOSURE("EXPOSURE", 50, 180, 30),
 
     EYEBALL("EYE", 184, 202, 201),
@@ -176,7 +176,7 @@ public enum CounterEnumType implements CounterType {
     FIRE("FIRE", 240, 30, 35),
 
     FLAME("FLAME", 255, 143, 43),
-    
+
     FLAVOR("FLAVOR", 208, 152, 97), ///adventure only
 
     FLOOD("FLOOD", 0, 203, 255),
@@ -212,7 +212,7 @@ public enum CounterEnumType implements CounterType {
     HIT("HIT", 255, 245, 195),
 
     HONE("HONE", 51, 227, 255),
-    
+
     HOPE("HOPE", 232, 245, 245),
 
     HOOFPRINT("HOOF", 233, 189, 170),
@@ -226,7 +226,7 @@ public enum CounterEnumType implements CounterType {
     HUSK("HUSK", 227, 212, 173),
 
     ICE("ICE", 0, 239, 255),
-    
+
     IMPOSTOR("IMPO", 173, 194, 255),
 
     INCARNATION("INCRN", 247, 206, 64),
@@ -234,9 +234,9 @@ public enum CounterEnumType implements CounterType {
     INCUBATION("INCBT", 40, 210, 25),
 
     INGREDIENT("INGRD", 180, 50, 145),
-    
+
     INFECTION("INFCT", 0, 230, 66),
-    
+
     INFLUENCE("INFL", 201, 99, 212),
 
     INGENUITY("INGTY", 67, 186, 205),
@@ -292,7 +292,7 @@ public enum CounterEnumType implements CounterType {
     MATRIX("MATRX", 183, 174, 255),
 
     MEMORY("MEMRY", 174, 183, 255),
-    
+
     MIDWAY("MDWAY", 84, 101, 207),
 
     MINE("MINE", 255, 100, 127),
@@ -376,9 +376,9 @@ public enum CounterEnumType implements CounterType {
     REJECTION("REJECT", 212, 235, 242),
 
     REV("REV", 255, 108, 111),
-    
+
     REVIVAL("REVIVL", 130, 230, 50),
-    
+
     RIBBON("RIBBON", 233, 245, 232),
 
     RITUAL("RITUAL", 155, 17, 30),
@@ -398,7 +398,7 @@ public enum CounterEnumType implements CounterType {
     SHRED("SHRED", 255, 165, 152),
 
     SILVER("SILVER", 192, 192, 192),
-    
+
     SKEWER("SKEWER", 202, 192, 156),
 
     SLEEP("SLEEP", 178, 192, 255),
@@ -472,7 +472,7 @@ public enum CounterEnumType implements CounterType {
     WIND("WIND", 0, 236, 255),
 
     WISH("WISH", 255, 85, 206),
-    
+
     WRECK("WRECK", 208, 55, 255),
 
     // Player Counters

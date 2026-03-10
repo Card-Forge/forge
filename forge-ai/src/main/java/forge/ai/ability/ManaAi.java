@@ -180,7 +180,7 @@ public class ManaAi extends SpellAbilityAi {
             String x = host.getSVar("X");
             if ("Count$CardsInYourHand".equals(x) && host.isInZone(ZoneType.Hand)) {
                 searchCMC--; // the spell in hand will be used
-            } else if (x.startsWith("Count$NamedInAllYards") && host.isInZone(ZoneType.Graveyard)) {
+            } else if (x.startsWith("Count$ValidGraveyard Card.named") && host.isInZone(ZoneType.Graveyard)) {
                 searchCMC--; // the spell in graveyard will be used
             }
         }
@@ -269,7 +269,7 @@ public class ManaAi extends SpellAbilityAi {
         Mana test = null;
         if (mp.isEmpty()) {
             // TODO use color from ability
-            test = new Mana((byte) ManaAtom.COLORLESS, source, null);
+            test = new Mana((byte) ManaAtom.COLORLESS, source, null, ai);
             mp.addMana(test, false);
         }
         boolean lose = mp.willManaBeLostAtEndOfPhase();

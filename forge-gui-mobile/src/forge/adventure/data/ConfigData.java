@@ -14,6 +14,7 @@ public class ConfigData {
     public String font;
     public String fontColor;
     public int minDeckSize;
+    public int maxNumberOfDecks;
     public float playerBaseSpeed;
     public String[] colorIds;
     public String[] colorIdNames;

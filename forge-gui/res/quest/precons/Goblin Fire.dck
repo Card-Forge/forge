@@ -1,0 +1,29 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Goblin Fire
+Description=Goblin Fire unleashes destruction. Red goblins and burn spells.
+Deck Type=constructed
+Set=PO2
+Image=goblin_fire.jpg
+[main]
+5 Mountain|PO2
+5 Mountain|PO2
+5 Mountain|PO2
+2 Goblin Cavaliers|PO2
+2 Goblin Firestarter|PO2
+1 Goblin General|PO2
+2 Goblin Glider|PO2
+2 Goblin Matron|PO2
+2 Goblin Piker|PO2
+2 Goblin Raider|PO2
+3 Raging Goblin|PO2
+2 Blaze|PO2
+2 Goblin War Strike|PO2
+1 Relentless Assault|PO2
+3 Volcanic Hammer|PO2
+1 Wildfire|PO2
+[sideboard]

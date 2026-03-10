@@ -7,6 +7,9 @@ import com.google.common.collect.ImmutableList;
 import forge.Forge;
 import forge.Graphics;
 import forge.LobbyPlayer;
+import forge.card.CardRenderer;
+import forge.card.CardRenderer.CardStackPosition;
+import forge.card.CardZoom;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.character.PlayerSprite;
 import forge.adventure.data.*;
@@ -20,6 +23,7 @@ import forge.adventure.util.Current;
 import forge.assets.FBufferedImage;
 import forge.assets.FSkin;
 import forge.deck.*;
+import forge.game.card.CardView;
 import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.player.Player;
@@ -41,6 +45,8 @@ import forge.screens.TransitionScreen;
 import forge.screens.match.MatchController;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
+import forge.toolbox.FCardPanel;
+import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOptionPane;
 import forge.trackable.TrackableCollection;
 import forge.util.Aggregates;
@@ -73,7 +79,6 @@ public class DuelScene extends ForgeScene {
     boolean arenaBattleChallenge = false;
     boolean isArena = false;
     AdventureEventData eventData;
-    private LoadingOverlay matchOverlay;
     final int enemyAvatarKey = 90001;
     final int playerAvatarKey = 90000;
     FOptionPane bossDialogue;
@@ -98,6 +103,8 @@ public class DuelScene extends ForgeScene {
         if (eventData != null)
             eventData.nextOpponent = null;
         boolean winner = false;
+        List<PaperCard> anteWonCards = Collections.emptyList();
+        List<PaperCard> anteLostCards = Collections.emptyList();
         try {
             winner = humanPlayer == hostedMatch.getGame().getMatch().getWinner();
 
@@ -111,42 +118,79 @@ public class DuelScene extends ForgeScene {
                 }
             }
 
-            // Handle ante card transfers
-            if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ANTE)) {
-                GameOutcome.AnteResult anteResult = hostedMatch.getGame().getOutcome()
-                        .getAnteResult(humanPlayer);
-                if (anteResult != null) {
-                    if (anteResult.wonCards != null) {
-                        for (PaperCard card : anteResult.wonCards) {
-                            Current.player().addCard(card);
-                        }
+            // Mostly for ante handling, but also blacker lotus
+            GameOutcome.AnteResult anteResult = hostedMatch.getAnteResult(humanPlayer);
+            if (anteResult != null) {
+                if (eventData != null) {
+                    //In an event. Apply the ante result to the current event deck.
+                    eventData.registeredDeck.getOrCreate(DeckSection.Sideboard).add(anteResult.wonCards);
+                    if(eventData.draftedDeck != null)
+                        eventData.draftedDeck.getOrCreate(DeckSection.Sideboard).add(anteResult.wonCards);
+                    for(PaperCard card : anteResult.lostCards) {
+                        eventData.registeredDeck.removeAnteCard(card);
+                        if(eventData.draftedDeck != null)
+                            eventData.draftedDeck.removeAnteCard(card);
                     }
-                    if (anteResult.lostCards != null) {
-                        for (PaperCard card : anteResult.lostCards) {
-                            Current.player().getCards().remove(card, 1);
-                        }
+                    //Could also add the cards to the opponent's pool, but their games aren't simulated and they never edit their decks.
+                }
+                else {
+                    for (PaperCard card : anteResult.wonCards) {
+                        Current.player().addCard(card);
+                    }
+                    for (PaperCard card : anteResult.lostCards) {
+                        // We could clean this up by trying to combine all the lostCards into a mapping, but good enough for now
+                        Current.player().removeLostCardFromPools(card);
                     }
                 }
+                anteWonCards = new ArrayList<>(anteResult.wonCards);
+                anteLostCards = new ArrayList<>(anteResult.lostCards);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         String enemyName = enemy.getName();
+        String insult = enemy.getBossInsult();
         boolean showMessages = enemy.getData().boss || (enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck());
         Current.player().clearBlessing();
-        if ((chaosBattle || showMessages) && !winner) {
-            final FBufferedImage fb = getFBEnemyAvatar();
-            callbackExit = true;
-            boolean finalWinner = winner;
-            bossDialogue = createFOption(Forge.getLocalizer().getMessage("AdvBossInsult" + Aggregates.randomInt(1, 44)),
-                    enemyName, fb, () -> {
-                        afterGameEnd(enemyName, finalWinner);
-                        exitDuelScene();
-                        fb.dispose();
-                    });
-            FThreads.invokeInEdtNowOrLater(() -> bossDialogue.show());
+
+        boolean finalWinner = winner;
+        boolean isBossLoss = (chaosBattle || showMessages) && !finalWinner;
+        boolean hasAnteResults = !anteWonCards.isEmpty() || !anteLostCards.isEmpty();
+
+        // No popups needed, preserve original behavior
+        if (!hasAnteResults && !isBossLoss) {
+            afterGameEnd(enemyName, finalWinner);
+            return;
+        }
+
+        // Build popup chain: ante results -> boss dialogue -> exit
+        callbackExit = true;
+        Runnable exitChain = () -> {
+            afterGameEnd(enemyName, finalWinner);
+            exitDuelScene();
+        };
+
+        Runnable afterAnte;
+        if (isBossLoss) {
+            afterAnte = () -> {
+                final FBufferedImage fb = getFBEnemyAvatar();
+                String bossInsultMsg = insult != null ? insult
+                        : Forge.getLocalizer().getMessage("AdvBossInsult" + Aggregates.randomInt(1, 44));
+                bossDialogue = createFOption(bossInsultMsg,
+                        enemyName, fb, () -> {
+                            exitChain.run();
+                            fb.dispose();
+                        });
+                FThreads.invokeInEdtNowOrLater(() -> bossDialogue.show());
+            };
         } else {
-            afterGameEnd(enemyName, winner);
+            afterAnte = exitChain;
+        }
+
+        if (hasAnteResults) {
+            showAnteResults(anteWonCards, anteLostCards, afterAnte);
+        } else {
+            afterAnte.run();
         }
     }
 
@@ -179,6 +223,66 @@ public class DuelScene extends ForgeScene {
             if (runnable != null)
                 runnable.run();
         });
+    }
+
+    private void showAnteResults(List<PaperCard> wonCards, List<PaperCard> lostCards, Runnable onDone) {
+        // Show won cards one at a time, then lost cards, then continue
+        showAnteCardsSequentially(wonCards, 0, true, () ->
+            showAnteCardsSequentially(lostCards, 0, false, onDone));
+    }
+
+    private void showAnteCardsSequentially(List<PaperCard> cards, int index, boolean won, Runnable onDone) {
+        if (index >= cards.size()) {
+            onDone.run();
+            return;
+        }
+        PaperCard card = cards.get(index);
+        Runnable next = () -> showAnteCardsSequentially(cards, index + 1, won, onDone);
+        showAnteCardPopup(won ? "Card Gained" : "Card Lost", card, won, next);
+    }
+
+    private void showAnteCardPopup(String title, PaperCard card, boolean won, Runnable onDone) {
+        CardView cardView = CardView.getCardForUi(card);
+
+        FDisplayObject cardDisplay = new FDisplayObject() {
+            @Override
+            public boolean tap(float x, float y, int count) {
+                CardZoom.show(cardView);
+                return true;
+            }
+            @Override
+            public boolean longPress(float x, float y) {
+                CardZoom.show(cardView);
+                return true;
+            }
+            @Override
+            public void draw(Graphics g) {
+                float h = getHeight();
+                float w = h / FCardPanel.ASPECT_RATIO;
+                float xPos = (getWidth() - w) / 2;
+                CardRenderer.drawCard(g, cardView, xPos, 0, w, h, CardStackPosition.Top, true);
+            }
+        };
+        cardDisplay.setHeight(Forge.getScreenHeight() / 3);
+
+        String message = card.getName();
+        List<String> buttons;
+        if (won && eventData == null) {
+            int sellPrice = Current.player().cardSellPrice(card);
+            buttons = sellPrice > 0
+                    ? ImmutableList.of(Forge.getLocalizer().getMessage("lblOK"), "Auto-Sell (" + sellPrice + " gold)")
+                    : ImmutableList.of(Forge.getLocalizer().getMessage("lblOK"));
+        } else {
+            buttons = ImmutableList.of(Forge.getLocalizer().getMessage("lblOK"));
+        }
+
+        FOptionPane popup = new FOptionPane(message, null, title, null, cardDisplay, buttons, 0, result -> {
+            if (won && result == 1) {
+                Current.player().autoSellCards.add(card);
+            }
+            if (onDone != null) onDone.run();
+        });
+        FThreads.invokeInEdtNowOrLater(popup::show);
     }
 
     void addEffects(RegisteredPlayer player, Array<EffectData> effects) {
@@ -401,16 +505,22 @@ public class DuelScene extends ForgeScene {
         hostedMatch.startMatch(rules, appliedVariants, players, guiMap, bossBattle ? MusicPlaylist.BOSS : MusicPlaylist.MATCH);
         MatchController.instance.setGameView(hostedMatch.getGameView());
         boolean showMessages = enemy.getData().boss || (enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck());
+        LoadingOverlay matchOverlay;
         if (chaosBattle || showMessages || isDeckMissing) {
             final FBufferedImage fb = getFBEnemyAvatar();
-            bossDialogue = createFOption(isDeckMissing ? isDeckMissingMsg : Forge.getLocalizer().getMessage("AdvBossIntro" + Aggregates.randomInt(1, 35)),
-                    enemy.getName(), fb, fb::dispose);
+            String Intro = enemy.getBossIntro();
+            if (Intro != null){
+                bossDialogue = createFOption((Intro), enemy.getName(), fb, fb::dispose);
+                }
+                else {
+                bossDialogue = createFOption(isDeckMissing ? isDeckMissingMsg : Forge.getLocalizer().getMessage("AdvBossIntro" + Aggregates.randomInt(1, 35)),
+                enemy.getName(), fb, fb::dispose);
+                }
             matchOverlay = new LoadingOverlay(() -> FThreads.delayInEDT(300, () -> FThreads.invokeInEdtNowOrLater(() ->
-                    bossDialogue.show())), false, true);
+            bossDialogue.show())), false, true);
         } else {
             matchOverlay = new LoadingOverlay(null);
         }
-
         for (final Player p : hostedMatch.getGame().getPlayers()) {
             if (p.getController() instanceof PlayerControllerHuman) {
                 final PlayerControllerHuman humanController = (PlayerControllerHuman) p.getController();
@@ -502,23 +612,14 @@ public class DuelScene extends ForgeScene {
     private String selectAI(String ai) { //Decide opponent AI.
         String AI = ""; //Use user settings if it's null.
         if (ai != null) {
-            switch (ai.toLowerCase()) { //We use this way to ensure capitalization is exact.
+            AI = switch (ai.toLowerCase()) { //We use this way to ensure capitalization is exact.
                 //We don't want misspellings here.
-                case "default":
-                    AI = "Default";
-                    break;
-                case "reckless":
-                    AI = "Reckless";
-                    break;
-                case "cautious":
-                    AI = "Cautious";
-                    break;
-                case "experimental":
-                    AI = "Experimental";
-                    break;
-                default:
-                    AI = ""; //User settings.
-            }
+                case "default" -> "Default";
+                case "reckless" -> "Reckless";
+                case "cautious" -> "Cautious";
+                case "experimental" -> "Experimental";
+                default -> ""; //User settings.
+            };
         }
         return AI;
     }

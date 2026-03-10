@@ -181,7 +181,7 @@ public class AbilityManaPart implements java.io.Serializable {
         for (final String c : afterReplace.split(" ")) {
             if (StringUtils.isNumeric(c)) {
                 for (int i = Integer.parseInt(c); i > 0; i--) {
-                    this.lastManaProduced.add(new Mana((byte) ManaAtom.COLORLESS, source, this));
+                    this.lastManaProduced.add(new Mana((byte) ManaAtom.COLORLESS, source, this, player));
                 }
             } else {
                 byte attemptedMana = MagicColor.fromName(c);
@@ -189,7 +189,7 @@ public class AbilityManaPart implements java.io.Serializable {
                     attemptedMana = (byte)ManaAtom.COLORLESS;
                 }
 
-                this.lastManaProduced.add(new Mana(attemptedMana, source, this));
+                this.lastManaProduced.add(new Mana(attemptedMana, source, this, player));
             }
         }
 
@@ -404,14 +404,6 @@ public class AbilityManaPart implements java.io.Serializable {
                     return true;
                 }
                 if (restriction.endsWith("C") && payment.getCostMana().getMana().getShardCount(ManaCostShard.COLORLESS) > 0) {
-                    return true;
-                }
-                continue;
-            }
-
-            if (restriction.equals("MorphOrManifest")) {
-                if ((sa.isSpell() && sa.getHostCard().isCreature() && sa.isCastFaceDown())
-                        || sa.isManifestUp() || sa.isMorphUp()) {
                     return true;
                 }
                 continue;

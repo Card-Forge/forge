@@ -3,6 +3,7 @@ package forge.gamemodes.net;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.GameView;
+
 import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
@@ -10,6 +11,7 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gui.GuiBase;
+import org.tinylog.Logger;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IGameController;
 import forge.localinstance.skin.FSkinProp;
@@ -38,21 +40,13 @@ public enum ProtocolMethod {
     updateButtons       (Mode.SERVER, Void.TYPE, PlayerView.class, String.class, String.class, Boolean.TYPE, Boolean.TYPE, Boolean.TYPE),
     flashIncorrectAction(Mode.SERVER, Void.TYPE),
     alertUser           (Mode.SERVER, Void.TYPE),
-    updatePhase         (Mode.SERVER, Void.TYPE, Boolean.TYPE),
-    updateTurn          (Mode.SERVER, Void.TYPE, PlayerView.class),
-    updatePlayerControl (Mode.SERVER, Void.TYPE),
     enableOverlay       (Mode.SERVER, Void.TYPE),
     disableOverlay      (Mode.SERVER, Void.TYPE),
     finishGame          (Mode.SERVER, Void.TYPE),
     showManaPool        (Mode.SERVER, Void.TYPE, PlayerView.class),
     hideManaPool        (Mode.SERVER, Void.TYPE, PlayerView.class),
-    updateStack         (Mode.SERVER, Void.TYPE),
-    updateZones         (Mode.SERVER, Void.TYPE, Iterable/*PlayerZoneUpdate*/.class),
     tempShowZones       (Mode.SERVER, Iterable/*PlayerZoneUpdate*/.class, PlayerView.class, Iterable/*PlayerZoneUpdate*/.class),
     hideZones           (Mode.SERVER, Void.TYPE, PlayerView.class, Iterable/*PlayerZoneUpdate*/.class),
-    updateCards         (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class),
-    updateManaPool      (Mode.SERVER, Void.TYPE, Iterable/*PlayerView*/.class),
-    updateLives         (Mode.SERVER, Void.TYPE, Iterable/*PlayerView*/.class),
     setPanelSelection   (Mode.SERVER, Void.TYPE, CardView.class),
     getAbilityToPlay    (Mode.SERVER, SpellAbilityView.class, CardView.class, List/*SpellAbilityView*/.class, ITriggerEvent.class),
     assignCombatDamage  (Mode.SERVER, Map.class, CardView.class, List/*CardView*/.class, Integer.TYPE, GameEntityView.class, Boolean.TYPE, Boolean.TYPE),
@@ -72,13 +66,14 @@ public enum ProtocolMethod {
     setCard             (Mode.SERVER, Void.TYPE, CardView.class),
     setSelectables      (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class),
     clearSelectables    (Mode.SERVER, Void.TYPE),
-    refreshField        (Mode.SERVER, Void.TYPE),
     // TODO case "setPlayerAvatar":
     openZones           (Mode.SERVER, PlayerZoneUpdates.class, PlayerView.class, Collection/*ZoneType*/.class, Map/*PlayerView,Object*/.class, Boolean.TYPE),
     restoreOldZones     (Mode.SERVER, Void.TYPE, PlayerView.class, PlayerZoneUpdates.class),
     isUiSetToSkipPhase  (Mode.SERVER, Boolean.TYPE, PlayerView.class, PhaseType.class),
     setRememberedActions(Mode.SERVER, Void.TYPE),
     nextRememberedAction(Mode.SERVER, Void.TYPE),
+    showWaitingTimer    (Mode.SERVER, Void.TYPE, PlayerView.class, String.class),
+    handleGameEvents    (Mode.SERVER, Void.TYPE, List.class),
 
     // Client -> Server
     // Note: these should all return void, to avoid awkward situations in
@@ -137,7 +132,7 @@ public enum ProtocolMethod {
             }
             return candidate;
         } catch (final NoSuchMethodException | SecurityException e) {
-            System.err.printf("Warning: class contains no accessible method named %s%n", name());
+            Logger.warn("Class contains no accessible method named {}", name());
             return getMethodNoArgs();
         }
     }
@@ -146,7 +141,7 @@ public enum ProtocolMethod {
         try {
             return mode.toInvoke.getMethod(name(), (Class<?>[]) null);
         } catch (final NoSuchMethodException | SecurityException e) {
-            System.err.printf("Warning: class contains no accessible arg-less method named %s%n", name());
+            Logger.warn("Class contains no accessible arg-less method named {}", name());
             return null;
         }
     }
@@ -167,12 +162,11 @@ public enum ProtocolMethod {
                 final Class<?> type = this.args[iArg];
                 if (!ReflectionUtil.isInstance(arg, type)) {
                     //throw new InternalError(String.format("Protocol method %s: illegal argument (%d) of type %s, %s expected", name(), iArg, arg.getClass().getName(), type.getName()));
-                    System.err.printf("InternalError: Protocol method %s: illegal argument (%d) of type %s, %s expected (ProtocolMethod.java)%n", name(), iArg, arg.getClass().getName(), type.getName());
+                    Logger.error("Protocol method {}: illegal argument ({}) of type {}, {} expected", name(), iArg, arg.getClass().getName(), type.getName());
                 }
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+            Logger.error(e, "Error checking args for protocol method {}", name());
         }
     }
 
@@ -181,9 +175,13 @@ public enum ProtocolMethod {
             // If void is expected, any return value is fine
             return;
         }
+        // TODO only fine on disconnect
+        if (value == null) {
+            return;
+        }
         if (!ReflectionUtil.isInstance(value, returnType)) {
             //throw new IllegalStateException(String.format("Protocol method %s: illegal return object type %s returned by client, expected %s", name(), value.getClass().getName(), getReturnType().getName()));
-            System.err.printf("IllegalStateException: Protocol method %s: illegal return object type %s returned by client, expected %s  (ProtocolMethod.java)%n", name(), value.getClass().getName(), getReturnType().getName());
+            Logger.error("Protocol method {}: illegal return type {} from client, expected {}", name(), value.getClass().getName(), getReturnType().getName());
         }
     }
 }

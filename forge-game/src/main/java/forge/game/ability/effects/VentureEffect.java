@@ -3,11 +3,10 @@ package forge.game.ability.effects;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
-import org.apache.commons.lang3.ObjectUtils;
 
 import com.google.common.collect.Lists;
 
@@ -34,7 +33,7 @@ import forge.util.Localizer;
 
 public class VentureEffect extends SpellAbilityEffect {
 
-    private Card getDungeonCard(SpellAbility sa, Player player, Map<AbilityKey, Object> moveParams) {
+    private Card getDungeonCard(SpellAbility sa, Player player) {
         final Game game = player.getGame();
 
         CardCollectionView commandCards = player.getCardsIn(ZoneType.Command);
@@ -68,13 +67,13 @@ public class VentureEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         Card editionHost = sa.getOriginalHost();
 
-        String edition = ObjectUtils.firstNonNull(editionHost, host).getSetCode();
-        edition = ObjectUtils.firstNonNull(StaticData.instance().getCardEdition(edition).getTokenSet(script), edition);
+        String edition = Objects.requireNonNullElse(editionHost, host).getSetCode();
+        edition = Objects.requireNonNullElse(StaticData.instance().getCardEdition(edition).getTokenSet(script), edition);
 
         final Card dungeon = CardFactory.getCard(StaticData.instance().getAllTokens().getToken(script, edition), player, game);
         dungeon.setGamePieceType(GamePieceType.DUNGEON);
 
-        game.getAction().moveToCommand(dungeon, sa, moveParams);
+        game.getAction().moveToCommand(dungeon, sa);
 
         return dungeon;
     }
@@ -89,32 +88,32 @@ public class VentureEffect extends SpellAbilityEffect {
             }
         }
         String [] nextRoomNames = nextRoomParam.split(",");
-        if (nextRoomNames.length > 1) {
-            List<SpellAbility> candidates = new ArrayList<>();
-            for (String nextRoomName : nextRoomNames) {
-                for (final Trigger t : dungeon.getTriggers()) {
-                    SpellAbility roomSA = t.getOverridingAbility();
-                    if (roomSA.getParam("RoomName").equals(nextRoomName)) {
-                        candidates.add(new WrappedAbility(t, roomSA, player));
-                        break;
-                    }
-                }
-            }
-            final String title = Localizer.getInstance().getMessage("lblChooseRoom");
-            SpellAbility chosen = player.getController().chooseSingleSpellForEffect(candidates, sa, title, null);
-            return chosen.getParam("RoomName");
-        } else {
+        if (nextRoomNames.length == 1) {
             return nextRoomNames[0];
         }
+
+        List<SpellAbility> candidates = new ArrayList<>();
+        for (String nextRoomName : nextRoomNames) {
+            for (final Trigger t : dungeon.getTriggers()) {
+                SpellAbility roomSA = t.getOverridingAbility();
+                if (roomSA.getParam("RoomName").equals(nextRoomName)) {
+                    candidates.add(new WrappedAbility(t, roomSA, player));
+                    break;
+                }
+            }
+        }
+        final String title = Localizer.getInstance().getMessage("lblChooseRoom");
+        SpellAbility chosen = player.getController().chooseSingleSpellForEffect(candidates, sa, title, null);
+        return chosen.getParam("RoomName");
     }
 
-    private void ventureIntoDungeon(SpellAbility sa, Player player, Map<AbilityKey, Object> moveParams) {
+    private void ventureIntoDungeon(SpellAbility sa, Player player) {
         if (StaticAbilityCantVenture.cantVenture(player)) {
             return;
         }
 
         final Game game = player.getGame();
-        Card dungeon = getDungeonCard(sa, player, moveParams);
+        Card dungeon = getDungeonCard(sa, player);
         String room = dungeon.getCurrentRoom();
 
         String nextRoom;
@@ -139,15 +138,11 @@ public class VentureEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-        moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
-        moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
-
         for (final Player p : getTargetPlayers(sa)) {
             if (!p.isInGame()) {
                 continue;
             }
-            ventureIntoDungeon(sa, p, moveParams);
+            ventureIntoDungeon(sa, p);
         }
     }
 

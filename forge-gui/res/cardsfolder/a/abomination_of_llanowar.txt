@@ -7,5 +7,6 @@ K:Menace
 S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Elves you control plus the number of Elf cards in your graveyard.
 SVar:X:Count$ValidBattlefield,Graveyard Elf.YouCtrl
 SVar:BuffedBy:Elf
+SVar:NoZeroToughnessAI:True
 DeckNeeds:Type$Elf
 Oracle:Vigilance; menace (This creature can't be blocked except by two or more creatures.)\nAbomination of Llanowar's power and toughness are each equal to the number of Elves you control plus the number of Elf cards in your graveyard.
