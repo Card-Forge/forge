@@ -45,9 +45,9 @@ public class Craft extends KeywordWithCost {
             }
             if (exile.getTypeDescription() != null) {
                 // permanent are skipped in desc
-                if (!"permanent".equals(getTypeDescription())) {
+                if (!"permanent".equals(exile.getTypeDescription())) {
                     sb.append(" ");
-                    sb.append(getTypeDescription());
+                    sb.append(exile.getTypeDescription());
                 }
             } else {
                 sb.append(" ");
