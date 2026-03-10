@@ -72,7 +72,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private final ArrayList<ItemData> inventoryItems = new ArrayList<>();
     private final Array<Deck> boostersOwned = new Array<>();
     private final HashMap<String, Long> equippedItems = new HashMap<>();
-    private final HashMap<Integer, HashMap<String, Long>> deckLoadouts = new HashMap<>();
+    private final ArrayList<HashMap<String, Long>> deckLoadouts = new ArrayList<>();
     private final List<AdventureQuestData> quests = new ArrayList<>();
     private final List<AdventureEventData> events = new ArrayList<>();
     private final Set<PaperCard> unsupportedCards = new HashSet<>();
@@ -131,6 +131,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         inventoryItems.clear();
         boostersOwned.clear();
         equippedItems.clear();
+        deckLoadouts.clear();
         characterFlags.clear();
         questFlags.clear();
         quests.clear();
@@ -215,7 +216,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             boolean bindLoadouts = Config.instance().getSettingData().bindEquipmentLoadoutsToDecks;
             if (switchLoadout && bindLoadouts && slot != selectedDeckIndex) {
                 // Save current loadout to old deck
-                deckLoadouts.put(selectedDeckIndex, new HashMap<>(equippedItems));
+                ensureDeckLoadoutsSize();
+                deckLoadouts.set(selectedDeckIndex, new HashMap<>(equippedItems));
 
                 // Clear current equipment
                 for (ItemData item : inventoryItems) {
@@ -226,8 +228,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                 equippedItems.clear();
 
                 // Restore loadout for new deck (if any)
-                if (deckLoadouts.containsKey(slot)) {
-                    HashMap<String, Long> newLoadout = deckLoadouts.get(slot);
+                HashMap<String, Long> newLoadout = deckLoadouts.get(slot);
+                if (newLoadout != null) {
                     for (Map.Entry<String, Long> entry : newLoadout.entrySet()) {
                         ItemData item = getItemFromInventory(entry.getValue());
                         if (item != null) {
@@ -676,19 +678,20 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
         // Load deck loadouts (equipment tied to each deck)
         for (int i = 0; i < getDeckCount(); i++) {
+            HashMap<String, Long> loadout = null;
             if (data.containsKey("deckLoadout_slots_" + i) && data.containsKey("deckLoadout_items_" + i)) {
                 try {
                     String[] loadoutSlots = (String[]) data.readObject("deckLoadout_slots_" + i);
                     Long[] loadoutItems = (Long[]) data.readObject("deckLoadout_items_" + i);
                     if (loadoutSlots.length == loadoutItems.length) {
-                        HashMap<String, Long> loadout = new HashMap<>();
+                        loadout = new HashMap<>();
                         for (int j = 0; j < loadoutSlots.length; j++) {
                             loadout.put(loadoutSlots[j], loadoutItems[j]);
                         }
-                        deckLoadouts.put(i, loadout);
                     }
                 } catch (Exception ignored) {}
             }
+            deckLoadouts.add(loadout);
         }
 
         // Use false to skip loadout switching during load (equippedItems already loaded correctly above)
@@ -888,10 +891,11 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
         // Save deck loadouts (equipment tied to each deck)
         // First, save current equipment to current deck's loadout
-        deckLoadouts.put(selectedDeckIndex, new HashMap<>(equippedItems));
+        ensureDeckLoadoutsSize();
+        deckLoadouts.set(selectedDeckIndex, new HashMap<>(equippedItems));
         for (int i = 0; i < getDeckCount(); i++) {
-            if (deckLoadouts.containsKey(i)) {
-                HashMap<String, Long> loadout = deckLoadouts.get(i);
+            HashMap<String, Long> loadout = i < deckLoadouts.size() ? deckLoadouts.get(i) : null;
+            if (loadout != null) {
                 ArrayList<String> loadoutSlots = new ArrayList<>();
                 ArrayList<Long> loadoutItems = new ArrayList<>();
                 for (Map.Entry<String, Long> entry : loadout.entrySet()) {
@@ -1532,6 +1536,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
      */
     public void clearDeck() {
         deck = decks.set(selectedDeckIndex, new Deck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
+        ensureDeckLoadoutsSize();
+        deckLoadouts.set(selectedDeckIndex, null);
     }
 
     /**
@@ -1541,10 +1547,14 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         int oldIndex = selectedDeckIndex;
         this.setSelectedDeckSlot(0);
         decks.remove(oldIndex);
+        if (oldIndex < deckLoadouts.size()) {
+            deckLoadouts.remove(oldIndex);
+        }
     }
 
     public void addDeck(){
         decks.add(new Deck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
+        deckLoadouts.add(null);
     }
 
     /**
@@ -1557,11 +1567,21 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             if (i >= getDeckCount()) addDeck();
             if (isEmptyDeck(i)) {
                 decks.set(i, (Deck) deck.copyTo(deck.getName() + " (" + Forge.getLocalizer().getMessage("lblCopy") + ")"));
+                // Copy loadout from source deck to new slot
+                ensureDeckLoadoutsSize();
+                HashMap<String, Long> sourceLoadout = selectedDeckIndex < deckLoadouts.size() ? deckLoadouts.get(selectedDeckIndex) : null;
+                deckLoadouts.set(i, sourceLoadout != null ? new HashMap<>(sourceLoadout) : null);
                 return i;
             }
         }
 
         return -1;
+    }
+
+    private void ensureDeckLoadoutsSize() {
+        while (deckLoadouts.size() < getDeckCount()) {
+            deckLoadouts.add(null);
+        }
     }
 
     public boolean isEmptyDeck(int deckIndex) {
