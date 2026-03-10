@@ -1,10 +1,7 @@
 package forge.game.keyword;
 
 import forge.card.CardType;
-import forge.game.cost.Cost;
 import forge.game.cost.CostExile;
-import forge.game.cost.CostPart;
-import forge.game.cost.CostPartMana;
 
 import forge.util.Lang;
 
