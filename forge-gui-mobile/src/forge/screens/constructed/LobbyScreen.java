@@ -885,6 +885,16 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         return playersScroll;
     }
 
+    protected void setLobbyControlsVisible(boolean visible) {
+        lblPlayers.setVisible(visible);
+        cbPlayerCount.setVisible(visible);
+        lblVariants.setVisible(visible);
+        cbVariants.setVisible(visible);
+        lblGamesInMatch.setVisible(visible);
+        cbGamesInMatch.setVisible(visible);
+        playersScroll.setVisible(visible);
+    }
+
     public void setStartButtonAvailability() {
         if (lobby.isAllowNetworking() && FServerManager.getInstance() != null)
             btnStart.setVisible(FServerManager.getInstance().isHosting());
