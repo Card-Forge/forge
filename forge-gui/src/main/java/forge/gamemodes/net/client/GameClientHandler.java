@@ -62,45 +62,29 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
     protected void beforeCall(final ChannelHandlerContext ctx, final ProtocolMethod protocolMethod, final Object[] args) {
         switch (protocolMethod) {
             case setGameView:
-                // IMPORTANT: Set gameView immediately in the Netty thread so it's available
-                // for subsequent beforeCall handlers (especially openView which needs it).
-                // The actual setGameView method will also run in EDT, but we need it now.
-                if (args.length > 0 && args[0] instanceof GameView) {
-                    GameView gameView = (GameView) args[0];
-                    // Ensure the incoming gameView has a tracker before setGameView tries to
-                    // copy properties (copyChangedProps requires tracker for collection handling).
-                    // IMPORTANT: Do NOT manually setTracker on root before updateTrackers —
-                    // updateTrackers checks getTracker()==null and skips objects that already
-                    // have a tracker, so setting root first prevents recursion into children.
-                    if (this.tracker != null && gameView.getTracker() == null) {
+                if (args.length > 0 && args[0] instanceof GameView gameView) {
+                    if (this.tracker == null) {
+                        this.tracker = new Tracker();
+                        if (gameView.getGameLog() == null) {
+                            gameView.initGameLog();
+                        }
+                    }
+                    if (gameView.getTracker() == null) {
                         updateTrackers(new Object[]{gameView});
                     }
                     gui.setGameView(gameView);
-                    // Replace args with the existing gameView instance so the EDT
-                    // dispatch's identity check (gameView0 == getGameView()) succeeds
-                    // and skips the redundant copyChangedProps. Without this, the IO
-                    // thread and EDT both run copyChangedProps on the same objects,
-                    // causing race conditions and NPEs.
                     args[0] = gui.getGameView();
                 }
                 break;
             case openView:
                 gui.setNetGame();
-                // Use the tracker from the existing server gameView (already initialized
-                // by ensureTrackerInitialized during the first setGameView call).
-                // No need to create a local Match/Game — the server's gameView already
-                // has the correct players and tracker.
-                this.tracker = gui.getGameView().getTracker();
-
-                for (PlayerView myPlayer : (TrackableCollection<PlayerView>) args[0]) {
+                final TrackableCollection<PlayerView> myPlayers = (TrackableCollection<PlayerView>) args[0];
+                for (PlayerView myPlayer : myPlayers) {
                     if (myPlayer.getTracker() == null) {
                         myPlayer.setTracker(this.tracker);
                     }
                 }
-
-                final TrackableCollection<PlayerView> myPlayers = (TrackableCollection<PlayerView>) args[0];
                 client.setGameControllers(myPlayers);
-
                 break;
             case handleGameEvents:
                 if (this.tracker != null && args.length > 0 && args[0] instanceof List<?> events) {

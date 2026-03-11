@@ -1059,11 +1059,6 @@ public final class CMatchUI
     @Override
     public void openView(final TrackableCollection<PlayerView> myPlayers) {
         final GameView gameView = getGameView();
-        // Network-deserialized GameViews have no GameLog (transient field).
-        // Create one so forwarded game events build a client-side log.
-        if (gameView.getGameLog() == null) {
-            gameView.initGameLog();
-        }
         gameView.getGameLog().addObserver(cLog);
 
         // Sort players
