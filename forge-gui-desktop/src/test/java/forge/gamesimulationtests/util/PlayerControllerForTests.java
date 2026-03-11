@@ -688,6 +688,11 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
+    public boolean payManaCost(ManaCostBeingPaid toPay, SpellAbility ability, String prompt, ManaConversionMatrix matrix, boolean effect) {
+        return ComputerUtilMana.payManaCost(toPay, ability, player, effect);
+    }
+
+    @Override
     public CardCollectionView chooseCardsForCost(CardCollectionView optionList, SpellAbility sa, CostPartWithList cpl, int amount, boolean isOptional, String prompt) {
         assert(false);
         //AI does not currently pay costs like this.
