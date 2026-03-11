@@ -85,7 +85,8 @@ public class CField implements ICDoc {
             final Localizer localizer = Localizer.getInstance();
             final JPopupMenu popup = new JPopupMenu();
             final ButtonGroup group = new ButtonGroup();
-            final boolean currentlyTabMode = FloatingZone.isTabMode(zone);
+            final boolean isOwn = matchUI.isLocalPlayer(player);
+            final boolean currentlyTabMode = FloatingZone.isTabMode(zone, isOwn);
 
             final JRadioButtonMenuItem windowItem = new JRadioButtonMenuItem(localizer.getMessage("lblOpenInWindow"));
             final JRadioButtonMenuItem tabItem = new JRadioButtonMenuItem(localizer.getMessage("lblAddTabToHandPanel"));
@@ -96,14 +97,14 @@ public class CField implements ICDoc {
 
             windowItem.addActionListener(evt -> {
                 if (currentlyTabMode) {
-                    FloatingZone.setTabMode(zone, false);
+                    FloatingZone.setTabMode(zone, false, isOwn);
                     FloatingZone.closeExisting(matchUI, player, zone);
                     FloatingZone.showOrHide(matchUI, player, zone);
                 }
             });
             tabItem.addActionListener(evt -> {
                 if (!currentlyTabMode) {
-                    FloatingZone.setTabMode(zone, true);
+                    FloatingZone.setTabMode(zone, true, isOwn);
                     FloatingZone.closeExisting(matchUI, player, zone);
                     FloatingZone.showOrHide(matchUI, player, zone);
                 }

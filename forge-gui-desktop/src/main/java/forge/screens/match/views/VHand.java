@@ -42,6 +42,7 @@ public class VHand implements IVDoc<CHand> {
     private DragCell parentCell;
     private final EDocID docID;
     private final DragTab tab = new DragTab(Localizer.getInstance().getMessage("lblYourHand"));
+    private final PlayerView player;
 
     // Top-level containers
     private final FScrollPane scroller = new FScrollPane(false);
@@ -56,6 +57,7 @@ public class VHand implements IVDoc<CHand> {
      */
     public VHand(final CMatchUI matchUI, final EDocID id0, final PlayerView p) {
         this.hand = new HandArea(matchUI, scroller);
+        this.player = p;
         docID = id0;
         id0.setDoc(this);
 
@@ -133,6 +135,12 @@ public class VHand implements IVDoc<CHand> {
      */
     public HandArea getHandArea() {
         return VHand.this.hand;
+    }
+
+    public void updateTabLabel(final int count) {
+        if (player == null) return;
+        tab.setText(Localizer.getInstance().getMessage("lblPlayerHandN", player.getName(), String.valueOf(count)));
+        tab.setToolTipText(tab.getText());
     }
 
 }

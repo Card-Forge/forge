@@ -22,6 +22,7 @@
   - [Repeatable Sequences (Macros)](#repeatable-sequences-macros)
 - [User Interface](#user-interface)
   - [Layout](#layout)
+  - [Viewing Cards in Different Zones](#viewing-cards-in-different-zones)
   - [Auto-Sort Multiplayer Fields](#auto-sort-multiplayer-fields)
 
 # Downloads
@@ -234,6 +235,21 @@ Layouts are saved as XML files and  adapt to different window sizes and resoluti
 - **Default layouts** ship with Forge and are restored when you select **Revert to Default Layout**.
 - **User layouts** are stored in your Forge user data directory under `preferences/` (e.g., `%APPDATA%/Forge/preferences/match.xml` on Windows).
 - **Tab visibility:** Toggle panel tabs on or off via **Layout > View > Show Panel Tabs**.
+
+## Viewing Cards in Different Zones
+
+Underneath each player's battlefield portrait are zone buttons (hand, library, graveyard, exile, flashback, command, sideboard) with card counts. Clicking a zone button opens that zone's contents for viewing.
+
+**Display modes:** Right-click a zone button to toggle how it opens:
+
+- **Open in Window** — Opens a floating window that can be moved and resized independently. Right-click the window's title bar to toggle alphabetical sorting.
+- **Add Tab to Hand Panel** — Docks the zone as a tab alongside your hand panel, integrated into the main layout. The tab can be dragged to other cells like any other panel.
+
+Your preference is saved per zone and remembered separately for your own zones and opponent zones.
+
+**Drag-to-dock:** A floating zone window can also be docked by dragging its title bar over any cell's tab bar — a blue highlight shows where it will land. Once docked, right-click the tab for an option to undock it back to a floating window.
+
+Docked zones show the card count in the tab title (e.g. "Graveyard (5)").
 
 ## Auto-Sort Multiplayer Fields
 

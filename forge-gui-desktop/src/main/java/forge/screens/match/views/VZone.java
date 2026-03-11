@@ -67,11 +67,12 @@ public class VZone implements IVDoc<CZone> {
                 if (SwingUtilities.isRightMouseButton(e)) {
                     final JPopupMenu menu = new JPopupMenu();
 
-                    final JMenuItem undockItem = new JMenuItem("Undock");
+                    final Localizer localizer = Localizer.getInstance();
+                    final JMenuItem undockItem = new JMenuItem(localizer.getMessage("lblUndock"));
                     undockItem.addActionListener(ev -> FloatingZone.undockZone(VZone.this));
                     menu.add(undockItem);
 
-                    final JMenuItem sortItem = new JMenuItem(sortedByName ? "Unsort" : "Sort by Name");
+                    final JMenuItem sortItem = new JMenuItem(sortedByName ? localizer.getMessage("lblUnsort") : localizer.getMessage("lblSortByName"));
                     sortItem.addActionListener(ev -> toggleSorted());
                     menu.add(sortItem);
 
@@ -121,7 +122,14 @@ public class VZone implements IVDoc<CZone> {
     }
 
     private void updateTabLabel(final int count) {
-        tab.setText(capitalizedName() + " (" + count + ")");
+        final String countStr = String.valueOf(count);
+        String label;
+        if (matchUI.isLocalPlayer(player)) {
+            label = capitalizedName() + " (" + countStr + ")";
+        } else {
+            label = Localizer.getInstance().getMessage("lblPlayerZoneN", player.getName(), capitalizedName(), countStr);
+        }
+        tab.setText(label);
         tab.setToolTipText(tab.getText());
     }
 

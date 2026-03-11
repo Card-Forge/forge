@@ -284,6 +284,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         ZONE_LOC_AI_SIDEBOARD(""),
 
         UI_ZONE_DOCK_ZONES(""),
+        UI_ZONE_DOCK_ZONES_OTHER(""),
 
         CHAT_WINDOW_LOC(""),
 
