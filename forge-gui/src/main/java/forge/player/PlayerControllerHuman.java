@@ -2287,7 +2287,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public boolean payManaCost(ManaCostBeingPaid toPay, SpellAbility ability, String prompt, ManaConversionMatrix matrix, boolean effect) {
+    public boolean applyManaToCost(ManaCostBeingPaid toPay, SpellAbility ability, String prompt, ManaConversionMatrix matrix, boolean effect) {
         InputPayMana inpPayment = new InputPayManaOfCostPayment(this, toPay, ability, player, matrix, effect);
         inpPayment.setMessagePrefix(prompt);
         inpPayment.showAndWait();

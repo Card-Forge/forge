@@ -1229,7 +1229,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public boolean payManaCost(ManaCostBeingPaid toPay, SpellAbility ability, String prompt, ManaConversionMatrix matrix, boolean effect) {
+    public boolean applyManaToCost(ManaCostBeingPaid toPay, SpellAbility ability, String prompt, ManaConversionMatrix matrix, boolean effect) {
         assert(false);
         //Untested placeholder. The AI does not currently pay like this.
         return ComputerUtilMana.payManaCost(toPay, ability, player, effect);

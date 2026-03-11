@@ -498,7 +498,7 @@ public class PlaySpellAbility {
 
             // Input is somehow clearing out the offering card?
 
-            if (!controller.payManaCost(toPay, ability, prompt, matrix, effect)) {
+            if (!controller.applyManaToCost(toPay, ability, prompt, matrix, effect)) {
                 return handleOfferingConvokeAndDelve(ability, cardsToDelve, true);
             }
 
