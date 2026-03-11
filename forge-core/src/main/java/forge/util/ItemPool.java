@@ -200,7 +200,7 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
     public void add(final T item, final int amount) {
         if (item == null || amount <= 0) { return; }
 
-        items.put(item, count(item) + amount);
+        items.merge(item, amount, Integer::sum);
     }
 
     public void addAllFlat(final Iterable<T> itms) {

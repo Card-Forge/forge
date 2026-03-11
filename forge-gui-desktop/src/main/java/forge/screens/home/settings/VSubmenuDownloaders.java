@@ -3,8 +3,6 @@ package forge.screens.home.settings;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Point;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -13,6 +11,7 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import forge.StaticData;
+import forge.gui.GuiBase;
 import forge.gui.SOverlayUtils;
 import forge.gui.UiCommand;
 import forge.gui.framework.DragCell;
@@ -95,8 +94,8 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 //        pnlContent.add(btnDownloadSetPics, constraintsBTN);
 //        pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadSetPics")), constraintsLBL);
 //
-//        pnlContent.add(btnDownloadQuestImages, constraintsBTN);
-//        pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadQuestImages")), constraintsLBL);
+        pnlContent.add(btnDownloadQuestImages, constraintsBTN);
+        pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadQuestImages")), constraintsLBL);
 //
 //        pnlContent.add(btnDownloadAchievementImages, constraintsBTN);
 //        pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadAchievementImages")), constraintsLBL);
@@ -204,7 +203,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         
         final FButton btnClipboardCopy = new FButton(localizer.getMessage("btnCopyToClipboard"));
         btnClipboardCopy.addActionListener(arg0 -> {
-            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(nifSB.toString()), null);
+            GuiBase.getInterface().copyToClipboard(nifSB.toString());
             SOverlayUtils.hideOverlay();
         });
         scr.getParent().add(btnClipboardCopy, "w 200!, h pref+12!, center, gaptop 10");

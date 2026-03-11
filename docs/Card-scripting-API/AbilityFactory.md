@@ -17,7 +17,6 @@ Syntax definitions like the above will use different symbols to separate the var
 >*NOTE:*
 > - these factories are refactored from time to time (often to adapt to new mechanics), so while some entries could be slightly outdated, the base information should still be correct
 > - when in doubt you can always cross-check with the [available APIs](https://github.com/Card-Forge/forge/tree/master/forge-game/src/main/java/forge/game/ability/effects) code
-> - a few factories also have _*All_ variants, these are slowly being phased out
 > - some parameters are only added for very exotic cards, these won't be included here to keep the focus on understanding the general concepts of scripting
 > - a good knowledge of the game rules is often helpful for some of the more complex cases covered
 
@@ -28,6 +27,12 @@ Syntax definitions like the above will use different symbols to separate the var
 `Cost$ {AbilityCost}` is the appropriate way to set the cost of the ability. Currently for spells, any additional costs including the original Mana cost need to appear in the Cost param in the AbilityFactory. For each card that uses it, the order in which the cost is paid will always be the same.
 
 Secondary abilities such as those executed by triggers or replacements (usually) don't need costs. (This is one reason to use DB over AB in these cases.)
+
+`UnlessCost$ <AbilityCost>` allows a player to pay costs to prevent the resolving of the ability.  
+Optionally that behaviour is adjusted with these parameters:
+- `UnlessPayer$ <Defined>` (Default: TargetedController) - for changing which players are included
+- `UnlessSwitched$ True` - the cost has to be paid to resolve the ability instead (usually used to handle "any player may pay ...")
+- `UnlessResolveSubs$ {WhenPaid/WhenNotPaid}` - if the subability resolving should depend on the payment 
 
 Read more about it in [Costs](Costs.md)
 
@@ -68,6 +73,11 @@ Values:
 - UntilEndOfCombat
 - UntilYourNextTurn
 
+## LockInText
+Prevents text-changing effects from affecting the ability.
+
+Only needed if the card text doesn't contain the type/color words but the ability still needs to use them (e.g. "for each color ...").
+
 ## AI params
 * `IsCurse$ True` - for effects that are normally treated positive e.g. Pump
 
@@ -92,7 +102,7 @@ Parameters (all optional):
 - `Colors` - a comma-delimited list of colors to give to the animated being (capitalized and spelled out)  
   - `ChosenColor` accepted
 - `Abilities/Replacements/Triggers/staticAbilities` - a comma-delimited list of SVar names which contain abilities that should be granted to the animated being
-- `RemoveAllAbilities` - Remove all Abilities, Triggers, Statics and Replacement effects
+- `RemoveAllAbilities$ True` - Remove all Abilities, Triggers, Statics and Replacement effects
 - `sVars` - a comma-delimited list of SVars that should be granted to the animated being
 
 ## Attach
@@ -115,7 +125,8 @@ Note that Forge's engine handles this automatically for Aura spells, so adding A
 No own parameters.
 
 ## Bond
-Soulbonding two creatures. Only used internally by the engine.
+Soulbonding two creatures.
+Only used internally by the engine.
 
 ## Branch
 Sometimes, an ability might do certain things when a specific condition is true, and others if not. This can be implemented by using `Branch`.
@@ -133,7 +144,7 @@ SVar:PutLandCreature:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | 
 SVar:X:Count$Valid Enchantment.YouCtrl
 ```
 
-*Note:* sometimes you could also implement this via standard ability Conditions instead, but that requires careful consideration if the relevant property could be changed by one of the applicable effects.
+*Note:* sometimes you could also implement this via standard ability **Conditions** instead, but that requires careful consideration if the relevant property could be changed by one of the applicable effects.
 
 ## Charm
 This AF represents modal effects.
@@ -145,7 +156,7 @@ Parameters:
 
 ## Choices
 AF in this group let the player make choices from all kinds of categories and are often used to chain effects together. However, for common cases many effects already support this directly, e.g. `PutCounter | Choices$`.  
-Besides making the script more concise using such shortcuts usually also helps the AI making better use of the effect.
+Besides making the script more concise using such shortcuts is either required for full rules compliance (i.e. CR 608.2d prevents impossible choices like a creature that can't receive counters) or also helps the AI making better use of the effect.
 
 ### ChooseCard
 
@@ -202,12 +213,12 @@ Parameters:
 Copies a permanent.
 
 Parameters:
-- `NumCopies` (Default: 1) - the number of copies to put onto the battlefield.
+- `NumCopies` (Default: 1) - number of copies to put into play
 - `Keywords` (Optional) - a list of keywords to add to the copies
 
 ### CopySpellAbility
 Parameters:
-- `Num$ {Integer}` (Default: 1)
+- `Num$ {Integer}` (Default: 1) - how many copies to put onto the stack
 
 ## Counter
 Countering Spells or Abilities.
@@ -230,8 +241,8 @@ Put any type of counter on a game object.
 
 Parameters:
 - `CounterType` - specifies the type of counter and should appear in all caps
-- `CounterNum$ {Integer}` (Default: 1) - how many counters will be put on the chosen card
-- `Placer$ {Defined}`
+- `CounterNum$ {Integer}` (Default: 1) - how many counters will be put on the affected object
+- `Placer$ {Defined}` (Default: You)
 - `ETB$ True` - for ETB counters
 
 ### RemoveCounter
@@ -377,13 +388,15 @@ Playing cards as part of another ability. The player may have to make a choice a
 Parameters:
 - `Amount$ {Integer/All}` (Default: 1) - how many cards can be played
 - `Valid` - selection criteria for valid cards from the zone to cast
-- `ValidSA` - applied after Valid, this will filter based on all spells of the cards
+- `ValidSA` - applied after Valid, this will filter based on all abilities of the cards  
+  - this will normally be `Spell...` if the card says "cast" instead of "play"
 - `ValidZone` - the zone to look in to determine the valid cards
 - `Optional$ True` - playing is optional
 - `RememberPlayed$ True` - remember the card played
 - `PlayCost$ {AbilityCost}`
 - `WithoutManaCost$ True` - The card can be cast without its normal mana cost
 - `Controller$ {Defined}` (Default: You) - controller of the ability
+- `CopyCard$ True` - if the spell is cast from a card copy
 
 ## PreventDamage
 

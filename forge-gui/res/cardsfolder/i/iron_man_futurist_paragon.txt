@@ -1,0 +1,9 @@
+Name:Iron Man, Futurist Paragon
+ManaCost:4 U U
+Types:Legendary Artifact Creature Human Hero
+PT:5/5
+K:Flying
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ At the beginning of combat on your turn, target artifact or creature becomes an artifact creature with base power and toughness 5/5 and gains flying.
+SVar:TrigAnimate:DB$ Animate | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | Power$ 5 | Toughness$ 5 | Types$ Artifact,Creature | Keywords$ Flying
+SVar:PlayMain1:TRUE
+Oracle:Flying\nAt the beginning of combat on your turn, target artifact or creature becomes an artifact creature with base power and toughness 5/5 and gains flying.

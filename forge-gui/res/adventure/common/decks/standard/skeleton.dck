@@ -5,7 +5,7 @@ Difficulty=medium
 Description=Mono B Zombie/Skeleton deck with Death Baron and Pontiff of Blight
 Icon=Lex Luthor.jpg
 Deck Type=constructed
-[main]
+[Main]
 4 Blood Scrivener
 4 Death Baron
 2 Diregraf Ghoul
@@ -19,4 +19,4 @@ Deck Type=constructed
 2 Unworthy Dead
 3 Urborg Skeleton
 2 Walking Dead
-[sideboard]
+[Sideboard]

@@ -68,6 +68,7 @@ public class VDev implements IVDoc<CDev>, IDevListener {
     private final DevLabel lblSetLife = new DevLabel(Localizer.getInstance().getMessage("lblSetLife"));
     private final DevLabel lblWinGame = new DevLabel(Localizer.getInstance().getMessage("lblWinGame"));
     private final DevLabel lblCardToBattlefield = new DevLabel(Localizer.getInstance().getMessage("lblCardToBattlefield"));
+    private final DevLabel lblTokenToBattlefield = new DevLabel(Localizer.getInstance().getMessage("lblTokenToBattlefield"));
     private final DevLabel lblExileFromPlay = new DevLabel(Localizer.getInstance().getMessage("lblExileFromPlay"));
     private final DevLabel lblCardToHand = new DevLabel(Localizer.getInstance().getMessage("lblCardToHand"));
     private final DevLabel lblExileFromHand = new DevLabel(Localizer.getInstance().getMessage("lblExileFromHand"));
@@ -105,22 +106,23 @@ public class VDev implements IVDoc<CDev>, IDevListener {
         viewport.add(this.lblCardToGraveyard, halfConstraints);
         viewport.add(this.lblCardToExile, halfConstraintsLeft);
         viewport.add(this.lblCardToBattlefield, halfConstraints);
-        viewport.add(this.lblRemoveFromGame, halfConstraintsLeft);
-        viewport.add(this.lblRepeatAddCard, halfConstraints);
-        viewport.add(this.lblExileFromHand, halfConstraintsLeft);
-        viewport.add(this.lblExileFromPlay, halfConstraints);
-        viewport.add(this.lblSetLife, halfConstraintsLeft);
-        viewport.add(this.lblWinGame, halfConstraints);
-        viewport.add(this.lblAddCounterPermanent, halfConstraintsLeft);
-        viewport.add(this.lblSubCounterPermanent, halfConstraints);
-        viewport.add(this.lblTapPermanent, halfConstraintsLeft);
-        viewport.add(this.lblUntapPermanent, halfConstraints);
-        viewport.add(this.lblRiggedRoll, halfConstraintsLeft);
-        viewport.add(this.lblWalkTo, halfConstraints);
-        viewport.add(this.lblAskAI, halfConstraintsLeft);
+        viewport.add(this.lblTokenToBattlefield, halfConstraintsLeft);
+        viewport.add(this.lblRemoveFromGame, halfConstraints);
+        viewport.add(this.lblRepeatAddCard, halfConstraintsLeft);
+        viewport.add(this.lblExileFromHand, halfConstraints);
+        viewport.add(this.lblExileFromPlay, halfConstraintsLeft);
+        viewport.add(this.lblSetLife, halfConstraints);
+        viewport.add(this.lblWinGame, halfConstraintsLeft);
+        viewport.add(this.lblAddCounterPermanent, halfConstraints);
+        viewport.add(this.lblSubCounterPermanent, halfConstraintsLeft);
+        viewport.add(this.lblTapPermanent, halfConstraints);
+        viewport.add(this.lblUntapPermanent, halfConstraintsLeft);
+        viewport.add(this.lblRiggedRoll, halfConstraints);
+        viewport.add(this.lblWalkTo, halfConstraintsLeft);
+        viewport.add(this.lblAskAI, halfConstraints);
         viewport.add(this.lblAskSimulationAI, halfConstraintsLeft);
-        viewport.add(this.lblSetupGame, halfConstraintsLeft);
-        viewport.add(this.lblDumpGame, halfConstraints);
+        viewport.add(this.lblSetupGame, halfConstraints);
+        viewport.add(this.lblDumpGame, halfConstraintsLeft);
     }
 
     //========= Overridden methods
@@ -230,6 +232,11 @@ public class VDev implements IVDoc<CDev>, IDevListener {
     /** @return {@link forge.screens.match.views.VDev.DevLabel} */
     public final DevLabel getLblCardToBattlefield() {
         return lblCardToBattlefield;
+    }
+
+    /** @return {@link forge.screens.match.views.VDev.DevLabel} */
+    public final DevLabel getLblTokenToBattlefield() {
+        return lblTokenToBattlefield;
     }
 
     /** @return {@link forge.screens.match.views.VDev.DevLabel} */

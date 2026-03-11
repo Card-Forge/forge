@@ -68,11 +68,11 @@ public class ReplacementHandlerTest extends SimulationTest {
         CardTraitChanges changes = new CardTraitChanges(
             null, null, null,
             Lists.newArrayList(re),
-            null, false, false
+            null, null
         );
         creature.addPerpetual(new PerpetualAbilities(timestamp, changes));
         creature.addChangedCardTraits(null, null, null,
-            Lists.newArrayList(re), null, false, false, timestamp, 0);
+            Lists.newArrayList(re), null, null, timestamp, 0);
 
         // Now move the card from hand to battlefield
         // This should NOT cause a StackOverflowError

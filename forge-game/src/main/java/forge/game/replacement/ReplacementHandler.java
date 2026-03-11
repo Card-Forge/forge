@@ -19,11 +19,9 @@ package forge.game.replacement;
 
 import java.util.*;
 
-import com.google.common.base.MoreObjects;
 import forge.game.card.*;
 import forge.game.phase.PhaseType;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
@@ -35,6 +33,7 @@ import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameLogEntryType;
 import forge.game.IHasSVars;
+import forge.game.event.GameEventAddLog;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -227,7 +226,7 @@ public class ReplacementHandler {
         // Log there
         String message = chosenRE.getDescription();
         if (!StringUtils.isEmpty(message)) {
-            game.getGameLog().add(GameLogEntryType.EFFECT_REPLACED, message);
+            game.fireEvent(new GameEventAddLog(GameLogEntryType.EFFECT_REPLACED, message));
         }
 
         // if its updated, try to call event again
@@ -293,8 +292,8 @@ public class ReplacementHandler {
                 tailend = tailend.getSubAbility();
             } while(tailend != null);
 
-            effectSA.setLastStateBattlefield((CardCollectionView) ObjectUtils.firstNonNull(runParams.get(AbilityKey.LastStateBattlefield), game.getLastStateBattlefield()));
-            effectSA.setLastStateGraveyard((CardCollectionView) ObjectUtils.firstNonNull(runParams.get(AbilityKey.LastStateGraveyard), game.getLastStateGraveyard()));
+            effectSA.setLastStateBattlefield((CardCollectionView) Objects.requireNonNullElse(runParams.get(AbilityKey.LastStateBattlefield), game.getLastStateBattlefield()));
+            effectSA.setLastStateGraveyard((CardCollectionView) Objects.requireNonNullElse(runParams.get(AbilityKey.LastStateGraveyard), game.getLastStateGraveyard()));
             if (replacementEffect.isIntrinsic()) {
                 effectSA.setIntrinsic(true);
                 effectSA.changeText();
@@ -311,7 +310,7 @@ public class ReplacementHandler {
                         replacementEffect.getParam("OptionalDecider"), effectSA).get(0);
             }
 
-            String name = MoreObjects.firstNonNull(host.getRenderForUI() ? host.getCardForUi() : null, host).getTranslatedName();
+            String name = Objects.requireNonNullElse(host.getRenderForUI() ? host.getCardForUi() : null, host).getTranslatedName();
             String effectDesc = TextUtil.fastReplace(replacementEffect.getDescription(), "CARDNAME", name);
             final String question = runParams.containsKey(AbilityKey.Card)
                 ? Localizer.getInstance().getMessage("lblApplyCardReplacementEffectToCardConfirm", name, runParams.get(AbilityKey.Card).toString(), effectDesc)
@@ -530,7 +529,7 @@ public class ReplacementHandler {
         if (res != ReplacementResult.NotReplaced) {
             String message = re.getDescription();
             if (!StringUtils.isEmpty(message)) {
-                game.getGameLog().add(GameLogEntryType.EFFECT_REPLACED, message);
+                game.fireEvent(new GameEventAddLog(GameLogEntryType.EFFECT_REPLACED, message));
             }
         }
     }
@@ -715,11 +714,7 @@ public class ReplacementHandler {
                 for (Map<AbilityKey, Object> runParams : runParamList) {
                     GameEntity target = (GameEntity) runParams.get(AbilityKey.Affected);
                     Integer damage = (Integer) runParams.get(AbilityKey.DamageAmount);
-                    if (!affected.containsKey(target)) {
-                        affected.put(target, damage);
-                    } else {
-                        affected.put(target, damage + affected.get(target));
-                    }
+                    affected.merge(target, damage, Integer::sum);
                 }
                 shieldMap = decider.getController().divideShield(chosenRE.getHostCard(), affected, shieldAmount);
             }

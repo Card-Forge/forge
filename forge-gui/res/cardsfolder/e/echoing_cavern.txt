@@ -1,0 +1,9 @@
+Name:Echoing Cavern
+ManaCost:no cost
+Types:Land
+K:ETBReplacement:Other:ChooseCT
+SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters, choose a creature type. | AILogic$ MostProminentInComputerDeckNonToken
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Spell.ChosenType | SpellDescription$ Add one mana of any color. Spend this mana only to cast spells of the chosen type.
+A:AB$ Seek | Cost$ 4 T | Type$ Card.ChosenType | Exhaust$ True | SpellDescription$ Seek a card of the chosen type.
+Oracle:As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast spells of the chosen type.\nExhaust — {4}, {T}: Seek a card of the chosen type.

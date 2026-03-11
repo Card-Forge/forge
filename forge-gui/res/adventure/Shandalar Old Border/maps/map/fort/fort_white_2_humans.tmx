@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="35" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="77">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="35" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="79">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx" />
  </editorsettings>
@@ -149,5 +149,58 @@
     <property name="waypoints" value="69,70" />
    </properties>
   </object>
- <object id="77" template="../../../../../../common/maps/obj/enemy.tx" x="277.606" y="130.186"><properties><property name="enemy" value="The Sainted One" /><property name="threatRange" type="int" value="50" /><property name="effect">{"startBattleWithCard": ["Mox Pearl|LEA", "Rainbow Knights|PAST", "White Knight|LEA"]}</property></properties></object></objectgroup>
+  <object id="77" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="220" y="350" width="120" height="60">
+   <properties>
+    <property name="dialog">[
+    {
+        "condition": [
+            { "checkQuestFlag": "mainQuest" },
+            { "checkCharacterFlag": "dungeonMasterQuestGiven", "not": true }
+        ],
+        "text": "You sense powerful creatures lurking in hidden lairs across Shandalar. Perhaps you should track your progress in clearing them.",
+        "options": [
+            {
+                "name": "(Accept the challenge)",
+                "action": [
+                    {
+                        "issueQuest": "54",
+                        "setCharacterFlag": { "key": "dungeonMasterQuestGiven", "val": 1 }
+                    },
+                    { "deleteMapObject": -1 }
+                ],
+                "text": "[Quest Added: Dungeon Master]"
+            }
+        ]
+    }
+]</property>
+   </properties>
+  </object>
+ <object id="78" template="../../../../../../common/maps/obj/enemy.tx" x="277.606" y="130.186">
+   <properties>
+    <property name="dialog">[
+    {
+        "condition": [
+            { "checkQuestFlag": "mainQuest" },
+            { "checkCharacterFlag": "dungeonMasterQuestGiven", "not": true }
+        ],
+        "text": "You sense this creature is one of many powerful beings lurking in the hidden lairs of Shandalar. Perhaps you should track your progress in clearing them.",
+        "options": [
+            {
+                "name": "(Accept the challenge)",
+                "action": [
+                    {
+                        "issueQuest": "54",
+                        "setCharacterFlag": { "key": "dungeonMasterQuestGiven", "val": 1 }
+                    }
+                ],
+                "text": "[Quest Added: Dungeon Master]"
+            }
+        ]
+    }
+]</property>
+    <property name="effect">{"startBattleWithCard": ["Mox Pearl|LEA", "Rainbow Knights|PAST", "White Knight|LEA"]}</property>
+    <property name="enemy" value="The Sainted One" />
+    <property name="threatRange" type="int" value="50" />
+   </properties>
+  </object></objectgroup>
 </map>

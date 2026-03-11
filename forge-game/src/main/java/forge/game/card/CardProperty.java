@@ -1843,16 +1843,8 @@ public class CardProperty {
             if (!source.isRemembered(card)) {
                 return false;
             }
-        } else if (property.equals("IsNotRemembered")) {
-            if (source.isRemembered(card)) {
-                return false;
-            }
         } else if (property.equals("IsImprinted")) {
             if (!source.hasImprintedCard(card)) {
-                return false;
-            }
-        } else if (property.equals("IsNotImprinted")) {
-            if (source.hasImprintedCard(card)) {
                 return false;
             }
         } else if (property.equals("IsGoaded")) {

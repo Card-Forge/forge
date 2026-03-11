@@ -16,7 +16,7 @@ SVar:PayLife:DB$ LoseLife | LifeAmount$ 10 | Defined$ TargetedOwner | SubAbility
 SVar:TargetToExile2:DB$ ChangeZone | Defined$ Targeted | Origin$ All | Destination$ Exile | SubAbility$ TabletToExile2
 SVar:TabletToExile2:DB$ ChangeZone | Defined$ Self | Origin$ All | Destination$ Exile | SubAbility$ TabletToGraveyard
 SVar:TabletToGraveyard:DB$ ChangeZone | Defined$ Self | Origin$ Exile | Destination$ Graveyard | SubAbility$ DBCleanup
-SVar:Concede:DB$ LosesGame | Defined$ TargetedOwner | SpellDescription$ Concede the game | SubAbility$ TargetToExile3
+SVar:Concede:DB$ LosesGame | Defined$ TargetedOwner | SpellDescription$ Concede the game. (Always an option, especially when life cost can't be paid. Both cards remain exiled with no ownership exchange.) | SubAbility$ TargetToExile3
 SVar:TargetToExile3:DB$ ChangeZone | Defined$ Targeted | Origin$ All | Destination$ Exile | SubAbility$ TabletToExile3
 SVar:TabletToExile3:DB$ ChangeZone | Defined$ Self | Origin$ All | Destination$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

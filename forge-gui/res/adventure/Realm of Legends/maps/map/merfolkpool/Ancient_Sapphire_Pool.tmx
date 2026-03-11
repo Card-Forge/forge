@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="75">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Mox Sapphire|LEA&quot;, &quot;Sapphire Collector&quot;, &quot;Sapphire Medallion|TMP&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzr42Rg6BvFVMEPGKhn1jFWCF7ATpy9lNoNswsfprafibETl92U2EusndjsJtdeUu1EthcWv6TaTY6duOymt73khDU17KRXHGOzk5ppGmQWLjvb0NIUNcstXBjdvjY62jWQfqWlPynBADEUPkU=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNlVkKwjAQhgdasM01isuT9TpV8T56BD2T5xCt762KYIY2OI2TNClR/CEvw0y+WbIAfOqcAGzT7joljOMXhOypaHgz8RtmKF1kzmOZ85XpFWezaRUBbORaR/2+E/Gek87JHHuoeHXLqwjXlodi79KuncuFY9Y99VUWNp4V/VyqPtjqfjj0tI+tyzYDlEutVE8PX9MMfJkon5oVW7+nrv2lKmTMfUAc1U3G72OApeM+IZg6n7ILJh+0HeJwTKW5nEHeroUw2/5J+F76voshpO5LZnirOWGuZdLElG1MPvJn07/Vhan/w8g/DuBSNu7xAkfnPrk=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy9lD0OwjAMhV0x8COxwsR9ehk60bJyIEYmuAV36AlYGajVPtVYeUl/EJ8UpSTte3awIyJSbkWKjcipmUEunOu6fz5383MpsstE9s04ZP16COsT4rjhe15Xf98av3szHhnXh2YR0fZAx3+j+euej/O9aGc9C1BGcrXvxc5bfeBl88+7Pfj6b8S9y7QZr1U7hpD6TxVbN1OBRihnUAViqedbU1/4DTmDqdTE+x/YvFj/2FqeC7RsvmUihlgdj0V9bb/8UtvC7o8QiAf1j5qzd8NQP9sfqud9x9Qx/H0MbB2wXH3vhvoWdy/zDYHzS/UQq2+spzxRp7G7znuw87Y1T3wv3OVbu3JaH09JPeA=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="280.333" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="54" template="../../../../common/maps/obj/enemy.tx" x="227.847" y="118.678">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Thought Reflection|2XM&quot;, &quot;Mind's Dilation|EMN&quot;]
+}</property>
+    <property name="enemy" value="Hakim"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="57" template="../../../../common/maps/obj/enemy.tx" x="425.231" y="108.441">
+   <properties>
+    <property name="enemy" value="Water Elemental"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="67,65,66"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/collision.tx" x="-16" y="-16" width="16" height="304"/>
+  <object id="69" template="../../../../common/maps/obj/collision.tx" x="480" y="-16" width="16" height="304"/>
+  <object id="70" template="../../../../common/maps/obj/collision.tx" x="0" y="-16" width="480" height="16"/>
+  <object id="71" template="../../../../common/maps/obj/collision.tx" x="0" y="272" width="480" height="16"/>
+  <object id="72" template="../../../../common/maps/obj/scroll.tx" x="313" y="153">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Sapphire Collector&quot;, &quot;count&quot;: 1 } ] "/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/scroll.tx" x="125.5" y="161.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Sapphire Medallion&quot;, &quot;editions&quot;: [ &quot;TMP&quot; ], &quot;count&quot;: 1 } ] "/>
+   </properties>
+  </object>
+  <object id="74" template="../../../../common/maps/obj/dialog.tx" x="201.167" y="209.75" width="60.1667" height="10.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The very air in this place is thick with blue mana, overwhelming your mind with swirling ideas. In the pool ahead, a lone wizard stands, the infamous mox sapphire hung around his neck. 
+
+Your manasight stone blazes with power, near-blindingly bright.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

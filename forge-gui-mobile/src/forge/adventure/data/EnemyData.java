@@ -45,6 +45,8 @@ public class EnemyData implements Serializable {
     public String[] questTags = new String[0];
     public float lifetime;
     public int gamesPerMatch = 1;
+    public String bossInsult;
+    public String bossIntro;
 
     public EnemyData() {
     }
@@ -66,6 +68,8 @@ public class EnemyData implements Serializable {
         equipment       = enemyData.equipment;
         colors          = enemyData.colors;
         teamNumber      = enemyData.teamNumber;
+        bossInsult      = enemyData.bossInsult;
+        bossIntro       = enemyData.bossIntro;
         nextEnemy       = enemyData.nextEnemy == null ? null : new EnemyData(enemyData.nextEnemy);
         nameOverride    = enemyData.nameOverride == null ? "" : enemyData.nameOverride;
         questTags       = enemyData.questTags.clone();
@@ -110,6 +114,12 @@ public class EnemyData implements Serializable {
         if (name != null && !name.isEmpty())
             return name;
         return "(Unnamed Enemy)";
+    }
+    public String getBossInsult(){
+        return bossInsult;
+    }
+    public String getBossIntro(){
+        return bossIntro;
     }
 
     public boolean match(EnemyData other) {

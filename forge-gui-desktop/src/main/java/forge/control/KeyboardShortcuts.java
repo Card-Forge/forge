@@ -13,6 +13,7 @@ import javax.swing.ActionMap;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -27,6 +28,7 @@ import forge.screens.home.settings.VSubmenuPreferences.KeyboardShortcutField;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.special.CardZoomer;
 import forge.util.Localizer;
+import forge.view.KeyboardShortcutsDialog;
 
 /** 
  * Consolidates keyboard shortcut assembly into one location
@@ -36,8 +38,14 @@ import forge.util.Localizer;
  * and you're done.
  */
 public class KeyboardShortcuts {
+    private static List<Shortcut> cachedShortcuts;
+
     public static List<Shortcut> getKeyboardShortcuts() {
         return attachKeyboardShortcuts(null);
+    }
+
+    public static List<Shortcut> getCachedShortcuts() {
+        return cachedShortcuts != null ? cachedShortcuts : getKeyboardShortcuts();
     }
 
     /**
@@ -90,6 +98,16 @@ public class KeyboardShortcuts {
                 if (ForgePreferences.DEV_MODE) {
                     SDisplayUtil.showTab(EDocID.DEV_MODE.getDoc());
                 }
+            }
+        };
+
+        /** Undo last action. */
+        final Action actUndo = new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
+                if (matchUI == null) { return; }
+                matchUI.getGameController().undoLastAction();
             }
         };
 
@@ -200,12 +218,52 @@ public class KeyboardShortcuts {
             }
         };
 
+        /** Toggle panel tabs. */
+        final Action actPanelTabs = new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
+                final ForgePreferences prefs = FModel.getPreferences();
+                final boolean showTabs = prefs.getPrefBoolean(FPref.UI_HIDE_GAME_TABS);
+                forge.view.FView.SINGLETON_INSTANCE.refreshAllCellLayouts(showTabs);
+                prefs.setPref(FPref.UI_HIDE_GAME_TABS, !showTabs);
+                prefs.save();
+            }
+        };
+
+        /** Toggle card overlays. */
+        final Action actCardOverlays = new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
+                final ForgePreferences prefs = FModel.getPreferences();
+                final boolean isOverlayEnabled = !prefs.getPrefBoolean(FPref.UI_SHOW_CARD_OVERLAYS);
+                prefs.setPref(FPref.UI_SHOW_CARD_OVERLAYS, isOverlayEnabled);
+                prefs.save();
+                if (matchUI != null) {
+                    matchUI.repaintCardOverlays();
+                }
+            }
+        };
+
+        /** Show keyboard shortcuts dialog. */
+        final Action actShowHotkeys = new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
+                // Defer so the triggering key event is fully consumed before the dialog opens,
+                // preventing it from being captured by a KeyboardShortcutField.
+                SwingUtilities.invokeLater(() -> new KeyboardShortcutsDialog().setVisible(true));
+            }
+        };
+
         final Localizer localizer = Localizer.getInstance();
         //========== Instantiate shortcut objects and add to list.
         list.add(new Shortcut(FPref.SHORTCUT_SHOWSTACK, localizer.getMessage("lblSHORTCUT_SHOWSTACK"), actShowStack, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_SHOWCOMBAT, localizer.getMessage("lblSHORTCUT_SHOWCOMBAT"), actShowCombat, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_SHOWCONSOLE, localizer.getMessage("lblSHORTCUT_SHOWCONSOLE"), actShowConsole, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_SHOWDEV, localizer.getMessage("lblSHORTCUT_SHOWDEV"), actShowDev, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_UNDO, localizer.getMessage("lblSHORTCUT_UNDO"), actUndo, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_CONCEDE, localizer.getMessage("lblSHORTCUT_CONCEDE"), actConcede, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_ENDTURN, localizer.getMessage("lblSHORTCUT_ENDTURN"), actEndTurn, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_ALPHASTRIKE, localizer.getMessage("lblSHORTCUT_ALPHASTRIKE"), actAllAttack, am, im));
@@ -215,6 +273,10 @@ public class KeyboardShortcuts {
         list.add(new Shortcut(FPref.SHORTCUT_MACRO_RECORD, localizer.getMessage("lblSHORTCUT_MACRO_RECORD"), actMacroRecord, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_MACRO_NEXT_ACTION, localizer.getMessage("lblSHORTCUT_MACRO_NEXT_ACTION"), actMacroNextAction, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_CARD_ZOOM, localizer.getMessage("lblSHORTCUT_CARD_ZOOM"), actZoomCard, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_SHOWHOTKEYS, localizer.getMessage("lblSHORTCUT_SHOWHOTKEYS"), actShowHotkeys, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_PANELTABS, localizer.getMessage("lblSHORTCUT_PANELTABS"), actPanelTabs, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_CARDOVERLAYS, localizer.getMessage("lblSHORTCUT_CARDOVERLAYS"), actCardOverlays, am, im));
+        cachedShortcuts = list;
         return list;
     } // End initMatchShortcuts()
 
@@ -296,6 +358,18 @@ public class KeyboardShortcuts {
             actionMap.remove(str);
         }
     } // End class Shortcut
+
+    /**
+     * Returns the KeyStroke currently assigned to a shortcut preference,
+     * or {@code null} if the preference is empty.
+     */
+    public static KeyStroke getKeyStrokeForPref(final FPref pref) {
+        final String str = FModel.getPreferences().getPref(pref);
+        if (str == null || str.isEmpty()) {
+            return null;
+        }
+        return assembleKeystrokes(str.split(" "));
+    }
 
     private static KeyStroke assembleKeystrokes(final String[] keys0) {
         int[] inputEvents = new int[2];

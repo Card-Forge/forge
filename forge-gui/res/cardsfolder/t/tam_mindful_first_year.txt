@@ -2,6 +2,6 @@ Name:Tam, Mindful First-Year
 ManaCost:1 GU
 Types:Legendary Creature Gorgon Wizard
 PT:2/2
-S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Hexproof:Card.CardColors:cardColors | Description$ Each other creature you control has hexproof from each of its colors.
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Hexproof:CardColors | Description$ Each other creature you control has hexproof from each of its colors.
 A:AB$ Animate | Cost$ T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Colors$ All | SpellDescription$ Target creature you control becomes all colors until end of turn.
 Oracle:Each other creature you control has hexproof from each of its colors.\n{T}: Target creature you control becomes all colors until end of turn.

@@ -50,36 +50,23 @@ public class PlayerZone extends Zone {
                 return true;
             }
 
-            if (c.isLand() && !c.mayPlay(c.getController()).isEmpty()) {
+            if (!c.mayPlay(c.getController()).isEmpty()) {
                 return true;
             }
 
-            boolean graveyardCastable = c.hasKeyword(Keyword.FLASHBACK) ||
-                    c.hasKeyword(Keyword.RETRACE) || c.hasKeyword(Keyword.JUMP_START) || c.hasKeyword(Keyword.ESCAPE) ||
-                    c.hasKeyword(Keyword.DISTURB);
-            boolean exileCastable = c.isForetold() || c.isOnAdventure();
+            // Keywords like Flashback/Escape create alternative SAs at play time,
+            // not stored on the card or in the mayPlay map. Check directly.
+            if (PlayerZone.this.is(ZoneType.Graveyard) && (c.hasKeyword(Keyword.FLASHBACK)
+                    || c.hasKeyword(Keyword.RETRACE) || c.hasKeyword(Keyword.JUMP_START)
+                    || c.hasKeyword(Keyword.ESCAPE) || c.hasKeyword(Keyword.DISTURB))) {
+                return true;
+            }
+            if (PlayerZone.this.is(ZoneType.Exile) && (c.isForetold() || c.isOnAdventure())) {
+                return true;
+            }
+
             for (final SpellAbility sa : c.getSpellAbilities()) {
-                final ZoneType restrictZone = sa.getRestrictions().getZone();
-
-                // for mayPlay the restrictZone is null for reasons
-                if (sa.isSpell() && c.mayPlay(sa.getMayPlay()) != null) {
-                    return true;
-                }
-
-                if (PlayerZone.this.is(restrictZone)) {
-                    return true;
-                }
-
-                //todo add brokkos??
-                if (sa.isSpell()
-                        && (graveyardCastable && PlayerZone.this.is(ZoneType.Graveyard))
-                        && restrictZone.equals(ZoneType.Hand)) {
-                    return true;
-                }
-
-                if (sa.isSpell()
-                        && (exileCastable && PlayerZone.this.is(ZoneType.Exile))
-                        && restrictZone.equals(ZoneType.Hand)) {
+                if (PlayerZone.this.is(sa.getRestrictions().getZone())) {
                     return true;
                 }
             }

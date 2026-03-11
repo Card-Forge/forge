@@ -3,7 +3,7 @@ ManaCost:3 W W
 Types:Sorcery
 A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ YouChoose | SubAbility$ SacAllOthers | StackDescription$ SpellDescription | SpellDescription$ For each player, you choose from among the permanents that player controls an artifact, a creature, an enchantment, and a planeswalker. Then each player sacrifices all other nonland permanents they control.
 SVar:YouChoose:DB$ ChooseCard | Defined$ You | Choices$ Permanent | ChooseEach$ Artifact & Creature & Enchantment & Planeswalker | ControlledByPlayer$ Remembered | RememberChosen$ True | Mandatory$ True | Reveal$ True
-SVar:SacAllOthers:DB$ SacrificeAll | ValidCards$ Permanent.nonLand+IsNotRemembered | SubAbility$ DBCleanup | StackDescription$ None
+SVar:SacAllOthers:DB$ SacrificeAll | ValidCards$ Permanent.nonLand+!IsRemembered | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 DeckHas:Ability$Sacrifice

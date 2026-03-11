@@ -1,0 +1,5 @@
+Name:Death in the Family
+ManaCost:1 B
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Creature.cmcLE3 | ValidTgtsDesc$ creature with mana value 3 or less | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature with mana value 3 or less.
+Oracle:Exile target creature with mana value 3 or less.

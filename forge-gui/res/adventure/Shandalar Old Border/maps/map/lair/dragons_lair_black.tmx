@@ -34,20 +34,7 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="50" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" x="197.5" y="220" width="16" height="16">
-   <properties>
-    <property name="hidden" type="bool" value="true"/>
-    <property name="dialog">[
-  {
-    "text": "A mighty dragon slumbers in the depths ahead. Ancient treasure surrounds its lair, but disturbing the beast could prove fatal. Proceed with caution...",
-    "options": [
-      { "name": "(Continue)" }
-    ]
-  }
-]</property>
-   </properties>
-  </object>
-  <object id="51" template="../../../../../../common/maps/obj/enemy.tx" type="enemy" x="167.5" y="139" width="16" height="16">
+  <object id="51" template="../../../../../../common/maps/obj/enemy.tx" type="enemy" x="167.5" y="149" width="16" height="16">
    <properties>
     <property name="enemy" value="Dracur of Shandalar"/>
     <property name="threatRange" type="int" value="0"/>

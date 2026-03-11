@@ -1,5 +1,6 @@
 package forge.game.zone;
 
+import forge.util.ITranslatable;
 import forge.util.Localizer;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.List;
 /**
  * The Enum Zone.
  */
-public enum ZoneType {
+public enum ZoneType implements ITranslatable {
     Hand(true, "lblHandZone"),
     Library(true, "lblLibraryZone"),
     Graveyard(false, "lblGraveyardZone"),
@@ -38,10 +39,10 @@ public enum ZoneType {
     public static final EnumSet<ZoneType> ORDERED_ZONES = EnumSet.of(Library, SchemeDeck, PlanarDeck, AttractionDeck, ContraptionDeck, Hand, Graveyard, Stack);
 
     private final boolean holdsHiddenInfo;
-    private final String zoneName;
-    ZoneType(boolean holdsHidden, String name) {
+    private final String label;
+    ZoneType(boolean holdsHidden, String label) {
         holdsHiddenInfo = holdsHidden;
-        zoneName = Localizer.getInstance().getMessage(name);
+        this.label = label;
     }
 
     public static ZoneType smartValueOf(final String value) {
@@ -94,8 +95,13 @@ public enum ZoneType {
         return DECK_ZONES.contains(this);
     }
 
+    @Override
+    public String getName() {
+        return name();
+    }
+    @Override
     public String getTranslatedName() {
-        return zoneName;
+        return Localizer.getInstance().getMessage(label);
     }
 
     public static boolean isHidden(final String origin) {

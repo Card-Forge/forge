@@ -4,7 +4,7 @@ Types:Creature Skeleton Noble
 PT:2/2
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, exile up to one target card from a graveyard.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Card | TgtPrompt$ Select up to one target card from a graveyard
-K:Adapt:2:1 B
+A:AB$ PutCounter | Cost$ 1 B | Adapt$ 2
 T:Mode$ CounterAddedOnce | ValidCard$ Card.Self | TriggerZones$ Battlefield | CounterType$ P1P1 | Execute$ TrigChangeZone | TriggerDescription$ Whenever one or more +1/+1 counters are put on CARDNAME, put a creature card exiled with CARDNAME onto the battlefield under your control with a finality counter on it. It gains haste. Sacrifice it at the beginning of the next end step.
 SVar:TrigChangeZone:DB$ ChangeZone | ChangeType$ Creature.ExiledWithSource | GainControl$ True | Origin$ Exile | Hidden$ True | Mandatory$ True | RememberChanged$ True | Destination$ Battlefield | WithCountersType$ FINALITY | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Haste | AtEOT$ Sacrifice | SubAbility$ DBCleanup

@@ -1,6 +1,6 @@
 Name:Eclipsed Flamekin
 ManaCost:1 UR UR
-Types:Creature Elemental Scour
+Types:Creature Elemental Scout
 PT:1/4
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDig | TriggerDescription$ When this creature enters, look at the top four cards of your library. You may reveal an Elemental, Island, or Mountain card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
 SVar:TrigDig:DB$ Dig | DigNum$ 4 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Elemental,Island,Mountain | RestRandomOrder$ True

@@ -1550,6 +1550,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 return false;
             if(parentScreen.getCommanderPage().cardManager.getPool().contains(card))
                 return false; //Don't let it be the commander if it already is one.
+            if(!parentScreen.shouldEnforceConformity())
+                return card.getRules().canBeCreature();
             DeckFormat format = parentScreen.editorConfig.getDeckFormat();
             if(format == null)
                 format = DeckFormat.Commander;

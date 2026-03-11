@@ -1,0 +1,6 @@
+Name:Ninja Turtle Spirit Token
+ManaCost:no cost
+Colors:white
+Types:Creature Ninja Turtle Spirit
+PT:1/1
+Oracle:

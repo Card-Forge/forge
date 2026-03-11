@@ -12,7 +12,7 @@ public enum AdventureModes {
     Commander(Forge.getLocalizer().getMessage("lblCommander"));
 
     private final String name;
-    private  String selectionName;
+    private String selectionName;
     private Array<String> modes;
     AdventureModes(String name)
     {
@@ -35,7 +35,7 @@ public enum AdventureModes {
         return selectionName;
     }
 
-    public  Array<String> getModes() {
+    public Array<String> getModes() {
         return modes;
     }
 }

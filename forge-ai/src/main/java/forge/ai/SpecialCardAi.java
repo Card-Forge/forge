@@ -32,6 +32,7 @@ import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.CostPart;
+import forge.game.cost.CostSacrifice;
 import forge.game.keyword.Keyword;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
@@ -46,13 +47,10 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
 import forge.util.*;
-import forge.util.maps.LinkedHashMapToAmount;
-import forge.util.maps.MapToAmount;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Special logic for individual cards
@@ -300,41 +298,153 @@ public class SpecialCardAi {
     }
 
     public static class PithingNeedle {
+        // TODO Build out exclusion list based off cards in my deck and cards that other needles have chosen
         public static String chooseCard(final Player ai, final SpellAbility sa) {
-            // TODO Remove names of cards already named by other Pithing Needles
-            CardCollection oppPerms = CardLists.getValidCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), "Card.OppCtrl+hasNonManaActivatedAbility", ai, sa.getHostCard(), sa);
-            if (!oppPerms.isEmpty()) {
-                return chooseCardFromList(oppPerms).getName();
-            }
+            // TODO Choose cards via deck key cards
 
-            CardCollection visibleZones = CardLists.getValidCards(ai.getOpponents().getCardsIn(Lists.newArrayList(ZoneType.Graveyard, ZoneType.Exile)), "Card.OppCtrl+hasNonmanaAbilities", ai, sa.getHostCard(), sa);
-            if (!visibleZones.isEmpty()) {
-                // If nothing on the battlefield has a nonmana ability choose something
-                return chooseCardFromList(visibleZones).getName();
-            }
 
+            String choice = chooseCardViaScoring(ai, sa);
+            if (choice == null) {
+                return choice;
+            }
             return chooseNonBattlefieldName();
         }
 
-        static public Card chooseCardFromList(CardCollection cardlist) {
-            Card best = ComputerUtilCard.getBestPlaneswalkerAI(cardlist);
-            if (best != null) {
-                // No planeswalkers choose something!
-                return best;
-            }
-
-            best = ComputerUtilCard.getBestCreatureAI(cardlist);
-            if (best == null) {
-                // If nothing on the battlefield has a nonmana ability choose something
-                Collections.shuffle(cardlist);
-                best = cardlist.getFirst();
-            }
-
-            return best;
+        public static String chooseNonBattlefieldName() {
+            return "Liliana of the Veil";
         }
 
-        static public String chooseNonBattlefieldName() {
-            return "Liliana of the Veil";
+
+        public static String chooseCardViaScoring(final Player ai, final SpellAbility sa) {
+            // Look through opponents' known zones (library, hand, graveyard, exile) for dangerous
+            // cards to name with Pithing Needle. Prefer planeswalkers, otherwise any card that
+            // has a non-trigger, non-mana SpellAbility (activated/static abilities that are relevant).
+            final Map<String, Integer> nameToScore = new HashMap<>();
+            boolean skipManaAbilities = sa.getParam("AILogic").equals("PithingNeedle");
+            boolean skipLands = sa.getParam("AILogic").equals("PhyrexianRevoker");
+            boolean knowHand = sa.getParam("AILogic").equals("SorcerousSpyglass");
+
+            for (Player opp : ai.getOpponents()) {
+                for (Card c : opp.getAllCards()) {
+                    if (skipLands && c.isLand()) {
+                        continue;
+                    }
+
+                    String name = c.getName();
+                    int score = 0;
+
+                    for(SpellAbility ab : c.getSpellAbilities()) {
+                        if (!ab.isActivatedAbility()) {
+                            continue;
+                        }
+                        if (skipManaAbilities && ab.isManaAbility()) {
+                            continue;
+                        }
+
+                        // Alter this score based off the APiType
+                        switch (ab.getApi()) {
+                            case Destroy:
+                                score += 20;
+                                break;
+                            case DamageAll:
+                            case DestroyAll:
+                                score += 30;
+                                break;
+                            case WinsGame:
+                            case LosesGame:
+                                score += 50;
+                                break;
+                            case Draw:
+                                score += 10;
+                                break;
+                            case GainControl:
+                            case Play:
+                            case DealDamage:
+                                score += 15;
+                                break;
+                            case ChangeZone:
+                                if (ab.getParam("Destination").equals("Battlefield")) {
+                                    score += 15;
+                                } else {
+                                    score += 5;
+                                }
+                                break;
+                            default:
+                                score += 5;
+                        }
+
+                        score += 10;
+
+                        // GIve higher score to cheaper abilities, as they are more likely to be used and thus worth naming
+                        if (ab.getPayCosts().getCostMana() != null) {
+                            if (ab.getPayCosts().hasXInAnyCostPart()) {
+                                score += 15;
+                            } else {
+                                Integer convertedAmount = ab.getPayCosts().getCostMana().convertAmount();
+                                if (convertedAmount != null) {
+                                    score += Math.max(0, 20 - convertedAmount ^ 2);
+                                }
+                            }
+                        }
+                        if (ab.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
+                            score += 10;
+                        }
+                    }
+
+                    for(StaticAbility st : c.getStaticAbilities()) {
+                        if (st.hasParam("GainsAbilitiesOf") && st.getParamOrDefault("Affected", "Self").contains("Self")) {
+                            score += 10;
+                        }
+
+                        if (st.hasParam("AddAbility") && st.getParamOrDefault("Affected", "Self").contains("Self")) {
+                            score += 10;
+                        }
+                    }
+
+                    if (score == 0) {
+                        continue;
+                    }
+
+                    score += c.isInZone(ZoneType.Battlefield) ? 10 : 0;
+                    if (knowHand && c.isInZone(ZoneType.Hand)) {
+                        score += 5;
+                    }
+
+                    if (nameToScore.containsKey(name)) {
+                        nameToScore.put(name, nameToScore.get(name) + score);
+                    } else {
+                        nameToScore.put(name, score);
+                    }
+                }
+            }
+
+            for (Card n : CardLists.filter(ai.getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Pithing Needle"))) {
+                String named = n.getNamedCard();
+                if (named != null && !named.isEmpty()) {
+                    if (nameToScore.containsKey(named)) {
+                        nameToScore.put(named, nameToScore.get(named) - 10);
+                    } else {
+                        nameToScore.put(named, -10);
+                    }
+                }
+            }
+
+            for (Card c : ai.getAllCards()) {
+                String name = c.getName();
+                int score = c.isInZone(ZoneType.Battlefield) ? -10 : -4;
+
+                if (nameToScore.containsKey(name)) {
+                    nameToScore.put(name, nameToScore.get(name) + score);
+                } else {
+                    nameToScore.put(name, score);
+                }
+            }
+
+            if (nameToScore.isEmpty()) {
+                return null;
+            }
+
+            return nameToScore.entrySet().stream().max(Map.Entry.comparingByValue()).get().getKey();
         }
     }
 
@@ -811,10 +921,7 @@ public class SpecialCardAi {
             List<String> highPriorityNamedCards = Lists.newArrayList("Accumulated Knowledge", "Take Inventory");
 
             // figure out how many of each card we have in deck
-            MapToAmount<String> cardAmount = new LinkedHashMapToAmount<>();
-            for (Card c : lib) {
-                cardAmount.add(c.getName());
-            }
+            Map<String, Long> cardAmount = lib.stream().collect(Collectors.groupingBy(Card::getName, Collectors.counting()));
 
             // Trix: see if we can complete the combo (if it looks like we might win shortly or if we need to get a Donate stat)
             boolean donateComboMightWin = false;

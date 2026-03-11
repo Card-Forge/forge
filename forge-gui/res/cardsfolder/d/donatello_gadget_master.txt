@@ -1,0 +1,9 @@
+Name:Donatello, Gadget Master
+ManaCost:2 U
+Types:Legendary Creature Mutant Ninja Turtle
+PT:3/2
+K:Sneak:1 U
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, create a token that's a copy of target artifact you control.
+SVar:TrigToken:DB$ CopyPermanent | ValidTgts$ Artifact.YouCtrl | TgtPrompt$ Select target artifact you control
+DeckHas:Ability$Token
+Oracle:Sneak {1}{U} (You may cast this spell for {1}{U} if you also return an unblocked attacker you control to hand during the declare blockers step. He enters tapped and attacking.)\nWhenever Donatello deals combat damage to a player, create a token that's a copy of target artifact you control.
