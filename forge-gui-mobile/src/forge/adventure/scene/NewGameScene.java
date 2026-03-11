@@ -2,9 +2,7 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -12,6 +10,7 @@ import com.badlogic.gdx.utils.Array;
 
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
+import forge.adventure.data.ArchipelagoMode;
 import forge.adventure.data.DialogData;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.data.HeroListData;
@@ -39,6 +38,8 @@ public class NewGameScene extends MenuScene {
     TextField selectedName;
     ColorSet[] colorIds;
     CardEdition[] editionIds;
+    ScrollPane scrollPane;
+    private final Table settingGroup;
     private final Image avatarImage;
     private int avatarIndex = 0;
     private final Selector race;
@@ -47,26 +48,37 @@ public class NewGameScene extends MenuScene {
     private final Selector mode;
     private final Selector difficulty;
     private final Selector starterEdition;
-    private final TextraLabel starterEditionLabel;
+    private final Selector enableArchipelago;
     private final Array<String> custom;
+    private final TextraLabel starterEditionLabel;
+    private final TextraLabel raceLabel;
+    private final TextraLabel genderLabel;
+    private final TextraLabel difficultyLabel;
     private final TextraLabel colorLabel;
+    private final TextraLabel modeLabel;
+    private final TextraLabel enableArchipelagoLabel;
     private final ImageButton difficultyHelp;
     private DialogData difficultySummary;
     private final ImageButton modeHelp;
     private DialogData modeSummary;
+    private final ImageButton archipelagoHelp;
+    private DialogData archipelagoSummary;
     private final Random rand = new Random();
 
     private final Array<AdventureModes> modes = new Array<>();
+    private final Array<ArchipelagoMode> archipelagoModes = new Array<>();
 
     private NewGameScene() {
-
         super(Forge.isLandscapeMode() ? "ui/new_game.json" : "ui/new_game_portrait.json");
+
+        settingGroup = new Table();
         gender = ui.findActor("gender");
         selectedName = ui.findActor("nameField");
         generateName();
         avatarImage = ui.findActor("avatarPreview");
         mode = ui.findActor("mode");
         modeHelp = ui.findActor("modeHelp");
+        archipelagoHelp = ui.findActor("archipelagoHelp");
         colorLabel = ui.findActor("colorIdL");
         String colorIdLabel = colorLabel.storedText;
         custom = new Array<>();
@@ -106,7 +118,8 @@ public class NewGameScene extends MenuScene {
             }
             break;
         }
-
+        // Todo: Implement this so it only works on Shandalar and doesn't crash
+        enableArchipelago = ui.findActor("enableArchipelago");
         starterEdition = ui.findActor("starterEdition");
         starterEditionLabel = ui.findActor("starterEditionL");
         String[] starterEditions = Config.instance().starterEditions();
@@ -147,6 +160,8 @@ public class NewGameScene extends MenuScene {
 
         mode.setTextList(modeNames);
         mode.setCurrentIndex(constructedIndex != -1 ? constructedIndex : 0);
+
+        enableArchipelago.setTextList(new String[]{"Disabled", "Enabled", "Archipelago"});
 
         AdventureModes initialMode = modes.get(mode.getCurrentIndex());
         starterEdition.setVisible(initialMode == AdventureModes.Standard);
@@ -216,6 +231,40 @@ public class NewGameScene extends MenuScene {
                 showModeHelp();
             }
         });
+        archipelagoHelp.addListener(new ClickListener() {
+            public void clicked(InputEvent e, float x, float y) {
+                archipelagoHelp();
+            }
+        });
+
+        raceLabel = ui.findActor("raceL");
+        genderLabel = ui.findActor("genderL");
+        difficultyLabel = ui.findActor("difficultyL");
+        modeLabel = ui.findActor("modeL");
+        enableArchipelagoLabel = ui.findActor("enableArchipelagoL");
+
+        addSelectorToScrollGroup(raceLabel, race, null);
+        addSelectorToScrollGroup(genderLabel, gender, null);
+        addSelectorToScrollGroup(difficultyLabel, difficulty, difficultyHelp);
+        addSelectorToScrollGroup(colorLabel, colorId, null);
+        addSelectorToScrollGroup(modeLabel, mode, modeHelp);
+        addSelectorToScrollGroup(enableArchipelagoLabel, enableArchipelago, archipelagoHelp);
+        addSelectorToScrollGroup(starterEditionLabel, starterEdition, null);
+
+        scrollPane = ui.findActor("selectorScroll");
+        scrollPane.setActor(settingGroup);
+        addToSelectable(settingGroup);
+    }
+
+    void addSelectorToScrollGroup(TextraLabel label, Selector selector, ImageButton helpLabel) {
+        settingGroup.row();
+        settingGroup.add(label).left().padLeft(19);
+        if (helpLabel != null) {
+            settingGroup.add(helpLabel).padRight(10);
+        } else {
+            settingGroup.add().width(16);
+        }
+        settingGroup.add(selector).expandX().right().fillX().padRight(40);
     }
 
     // class field
@@ -269,6 +318,12 @@ public class NewGameScene extends MenuScene {
         if (selectedName.getText().isEmpty()) {
             generateName();
         }
+        ArchipelagoMode archipelagoMode;
+        if (enableArchipelago.getCurrentIndex() < ArchipelagoMode.values().length && enableArchipelago.getCurrentIndex() > -1) {
+            archipelagoMode = ArchipelagoMode.values()[enableArchipelago.getCurrentIndex()];
+        } else {
+            archipelagoMode = ArchipelagoMode.disabled;
+        }
         Runnable runnable = () -> {
             started = false;
             //FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_MUSIC, false);
@@ -279,7 +334,7 @@ public class NewGameScene extends MenuScene {
                     colorIds[custom.isEmpty() || !AdventureModes.Custom.equals(modes.get(mode.getCurrentIndex())) ? colorId.getCurrentIndex() : 0],
                     Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
                     modes.get(mode.getCurrentIndex()), colorId.getCurrentIndex(),
-                    editionIds[starterEdition.getCurrentIndex()], 0);//maybe replace with enum
+                    editionIds[starterEdition.getCurrentIndex()], 0 /*maybe replace with enum*/, archipelagoMode);
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
             SoundSystem.instance.changeBackgroundTrack();
             WorldStage.getInstance().enterSpawnPOI();
@@ -388,6 +443,36 @@ public class NewGameScene extends MenuScene {
         loadDialog(difficultySummary);
     }
 
+    private void archipelagoHelp() {
+
+        ArchipelagoMode selectedMode = ArchipelagoMode.values()[enableArchipelago.getCurrentIndex()];
+
+        archipelagoSummary = new DialogData();
+        archipelagoSummary.name = "Summary";
+
+        StringBuilder summaryText = new StringBuilder();
+        switch (selectedMode) {
+            case disabled:
+                summaryText.append("Randomizer: Disabled\n\nNo changes, the regular Adventure mode experience.\n\n");
+                break;
+            case solo_randomizer:
+                summaryText.append("Randomizer: Solo Randomizer\n\nAll cards outside of your starting deck will be locked by default. Biomes, cards and equipment unlocks are randomized and can be unlocked by completing various objectives in the game.\n\n");
+                break;
+            case networked_archipelago:
+                summaryText.append("Randomizer: Networked Archipelago\n\nAs 'Solo Randomizer' except that unlocks will be distributed through an online Archipelago server. More info at https://archipelago.gg.\nPlease ensure your Archipelago client is configured and connected.\nWARNING: Archipelago support is currently unavailable.\n\n");
+                break;
+            default:
+                summaryText.append("No summary available for this randomizer.");
+                break;
+        }
+
+        DialogData dismiss = new DialogData();
+        dismiss.name = "OK";
+        archipelagoSummary.text = summaryText.toString();
+        archipelagoSummary.options = new DialogData[1];
+        archipelagoSummary.options[0] = dismiss;
+        loadDialog(archipelagoSummary);
+    }
     private void showModeHelp() {
 
         AdventureModes selectedMode = modes.get(mode.getCurrentIndex());

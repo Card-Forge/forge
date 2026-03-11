@@ -13,7 +13,6 @@ import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.AdventureDeckEditor;
 import forge.adventure.scene.DeckEditScene;
-import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.GameStage;
 import forge.adventure.stage.MapStage;
 import forge.adventure.stage.WorldStage;
@@ -153,7 +152,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public final Set<PaperCard> favoriteCards = new HashSet<>();
 
     public void create(String n, Deck startingDeck, boolean male, int race, int avatar, boolean isFantasy,
-                       boolean isUsingCustomDeck, DifficultyData difficultyData, AdventureModes adventureMode) {
+                       boolean isUsingCustomDeck, DifficultyData difficultyData, AdventureModes adventureMode, ArchipelagoMode archipelagoMode) {
         clear();
         this.adventureMode = adventureMode;
         announceFantasy = fantasyMode = isFantasy; //Set Chaos mode first.
@@ -165,9 +164,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
         cards.addAllFlat(deck.getAllCardsInASinglePool(true, true).toFlatList());
         ArchipelagoData archipelagoData = ArchipelagoData.getInstance();
-        // Add basic lands so the player doesn't need to unlock them and lock all regions initially
-        archipelagoData.setupFreshSaveFile();
-        // Add all cards to the valid pool of cards in ArchipelagoData
+        // Initial archipelago setup
+        archipelagoData.setupFreshSaveFile(archipelagoMode);
         for (PaperCard card : cards.toFlatList()) {
             archipelagoData.addCardUnlockedByName(card.getCardName());
         }

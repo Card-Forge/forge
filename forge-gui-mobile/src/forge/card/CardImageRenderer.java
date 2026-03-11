@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.ImageKeys;
-import forge.adventure.util.ArchipelagoUtil;
 import forge.assets.*;
 import forge.item.PaperCard;
 import forge.util.*;

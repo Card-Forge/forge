@@ -14,7 +14,6 @@ import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
-import forge.deck.Deck;
 
 public class DeckSelectScene extends UIScene {
     private final IntMap<TextraButton> buttons = new IntMap<>();
