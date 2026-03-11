@@ -663,8 +663,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     // End of Triggers preliminary choice
 
-    // Start of Choice code
-
     /**
      * Convenience for getChoices(message, 0, 1, choices).
      *
@@ -980,9 +978,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     @Override
     public void updateDependencies() {
     }
-    // End of Choice code
-
-    // Delta sync and reconnection default implementations
 
     @Override
     public void applyDelta(DeltaPacket packet) {

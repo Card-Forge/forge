@@ -38,7 +38,6 @@ final class GameServerHandler extends GameProtocolHandler<IGameController> imple
 
     @Override
     protected void beforeCall(final ChannelHandlerContext ctx, final ProtocolMethod protocolMethod, final Object[] args) {
-        // Handle delta sync protocol methods
         if (protocolMethod == ProtocolMethod.ackSync && args.length > 0) {
             RemoteClient client = getClient(ctx);
             if (client != null) {
@@ -49,16 +48,14 @@ final class GameServerHandler extends GameProtocolHandler<IGameController> imple
                 }
             }
         } else if (protocolMethod == ProtocolMethod.requestResync) {
-            // Handle resync request
             RemoteClient client = getClient(ctx);
             if (client != null) {
-                netLog.debug("[DeltaSync] Resync requested by client {}", client.getIndex());
                 IGuiGame gui = server.getGui(client.getIndex());
                 if (gui instanceof RemoteClientGuiGame netGui) {
                     netLog.debug("[DeltaSync] Sending full state to client {}", client.getIndex());
                     netGui.sendFullState();
                 } else {
-                    netLog.warn("[DeltaSync] GUI is not RemoteClientGuiGame, cannot resync");
+                    netLog.warn("[DeltaSync] GUI is not RemoteClientGuiGame, cannot resync client {}", client.getIndex());
                 }
             }
         }

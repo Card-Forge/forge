@@ -297,7 +297,6 @@ public interface IGuiGame {
 
     void setCurrentPlayer(PlayerView player);
 
-    // Delta sync and reconnection methods
     /**
      * Apply a delta update packet to the local game state.
      * @param packet the delta packet containing changes

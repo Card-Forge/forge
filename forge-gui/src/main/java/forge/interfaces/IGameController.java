@@ -46,8 +46,6 @@ public interface IGameController {
 
     void reorderHand(CardView card, int index);
 
-    // Delta sync and reconnection methods (client -> server)
-
     /**
      * Acknowledge receipt of a delta or full state packet.
      * @param sequenceNumber the sequence number being acknowledged
