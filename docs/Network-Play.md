@@ -51,7 +51,7 @@ There is no built-in matchmaking. Network play is designed for playing against p
      - **Remote play:** Verify the host's external IP at [canyouseeme.org](http://canyouseeme.org).
  7. **Client** enters the host's address in the connection dialog and clicks OK.
      - The address format is **`IP:port`** — for example: `192.168.1.50:36743` (local) or `203.0.113.45:36743` (remote).
-     - If the port is omitted, Forge defaults to 36743.
+     - If the port is omitted, Forge defaults to 36743 (=FORGE on older phone keypads).
 8. **Configure the match:**
      - Host selects match type, teams, and game settings.
      - All players select decks, sleeves, and avatars.
