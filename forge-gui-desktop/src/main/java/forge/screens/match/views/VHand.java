@@ -24,6 +24,8 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CHand;
 import forge.toolbox.FScrollPane;
@@ -43,6 +45,8 @@ public class VHand implements IVDoc<CHand> {
     private final EDocID docID;
     private final DragTab tab = new DragTab(Localizer.getInstance().getMessage("lblYourHand"));
     private final PlayerView player;
+    // Delta tracking for "+N new" tab labels. Baseline resets when the tab is viewed.
+    private int baseCount = -1;
 
     // Top-level containers
     private final FScrollPane scroller = new FScrollPane(false);
@@ -137,9 +141,26 @@ public class VHand implements IVDoc<CHand> {
         return VHand.this.hand;
     }
 
+    private boolean isTabVisible() {
+        return parentCell != null && parentCell.getSelected() == this;
+    }
+
     public void updateTabLabel(final int count) {
         if (player == null) return;
-        tab.setText(Localizer.getInstance().getMessage("lblPlayerHand", player.getName()) + " (" + count + ")");
+
+        if (baseCount < 0 || isTabVisible()) {
+            baseCount = count;
+        }
+
+        String label = Localizer.getInstance().getMessage("lblPlayerHand", player.getName());
+
+        final int delta = count - baseCount;
+        if (delta > 0
+                && FModel.getPreferences().getPrefBoolean(FPref.UI_ZONE_TAB_NEW_COUNT)) {
+            label += " (+" + delta + " new)";
+        }
+
+        tab.setText(label);
         tab.setToolTipText(tab.getText());
     }
 
