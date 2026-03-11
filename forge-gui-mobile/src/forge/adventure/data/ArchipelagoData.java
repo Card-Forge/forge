@@ -48,7 +48,7 @@ public class ArchipelagoData implements SaveFileContent {
     private final Set<String> listOfUnlockableItems = new HashSet<>();
     private final int totalAmountOfSetUnlockChecks = 100;
     private final int totalBattlesWonBreakpoint = 3; // Reward for every 3 battles won.
-    private final int totalTownQuestsAndEventsBreakpoint = 2; // Reward for every 4 town events or quests done.
+    private final int totalTownQuestsAndEventsBreakpoint = 2; // Reward for every 2 town events or quests done.
     private final int totalCardsEarnedBreakPoint = 80; // Reward for every 80 unique cards gained.
 
     private enum ARCHIPELAGO_CHECK_TYPES {BATTLES_WON, TOWN_QUESTS_AND_EVENTS_DONE, TOTAL_CARDS_EARNED};
