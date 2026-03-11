@@ -185,6 +185,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_ORDER_HAND("false"),
         UI_HAND_MAX_CARDS_PER_ROW("0"),
         UI_HAND_NO_OVERLAP("false"),
+        UI_ZONE_TAB_NEW_COUNT("false"),
         UI_ENABLE_AI_PICKER("false"),
 
         UI_VIBRATE_ON_LIFE_LOSS("true"),
@@ -284,6 +285,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         ZONE_LOC_AI_SIDEBOARD(""),
 
         UI_ZONE_DOCK_ZONES(""),
+        UI_ZONE_DOCK_ZONES_OTHER(""),
 
         CHAT_WINDOW_LOC(""),
 

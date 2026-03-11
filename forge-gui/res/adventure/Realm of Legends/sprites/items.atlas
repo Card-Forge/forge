@@ -78,6 +78,9 @@ GreenCartouche
 VictoryStandard
   xy: 96, 592
   size: 16, 16
+KillTrophy
+   xy: 112, 816
+   size: 16, 16
 GenerousArmor
   xy: 224, 112
   size: 16, 16
