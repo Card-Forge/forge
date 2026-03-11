@@ -26,12 +26,16 @@
 		"Shell"
 	],
 	"enemies": [
+		"Arna",
 		"Captain Howler",
-		"Shorikai",
+		"Codie",
 		"Eloise",
-		"Morska",
+		"Goro-Goro and Satoru",
 		"Loot",
+		"Morska",
 		"Sevinne",
+		"Shorikai",
+		"Yarok",
 		"Nemesis",
 		"Grand Nemesis"
 	],

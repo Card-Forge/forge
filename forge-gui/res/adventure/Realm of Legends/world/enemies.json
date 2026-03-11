@@ -32615,11 +32615,6 @@
       {
         "type": "card",
         "count": 1,
-        "cardName": "Goro-Goro and Satoru"
-      },
-      {
-        "type": "card",
-        "count": 1,
         "cardName": "Satoru Umezawa"
       },
       {
@@ -32633,7 +32628,7 @@
       },
       {
         "type": "deckCard",
-        "count": 1,
+        "count": 2,
         "addMaxCount": 3,
         "rarity": [
           "common",

@@ -26,8 +26,12 @@
 		"Stone"
 	],
 	"enemies": [
+		"Archelos",
+		"Arna",
+		"Codie",
 		"Colfenor",
 		"Coram",
+		"Goro-Goro and Satoru",
 		"Morska",
 		"Loot",
 		"Sevinne",
@@ -45,6 +49,8 @@
 		"Narci",
 		"Obuun",
 		"Roon",
+		"Yarok",
+		"Yurlok",
 		"Nemesis",
 		"Grand Nemesis"
 	],

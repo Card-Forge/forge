@@ -30,6 +30,7 @@
 		"Wood"
 	],
 	"enemies": [
+		"Archelos",
 		"Azusa",
 		"Baru",
 		"Colfenor",
@@ -48,6 +49,7 @@
 		"Rishkar",
 		"Six",
 		"Yeva",
+		"Yurlok",
 		"Nemesis",
 		"Grand Nemesis"
 	],
