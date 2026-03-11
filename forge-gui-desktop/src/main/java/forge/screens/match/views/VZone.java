@@ -18,6 +18,8 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CZone;
 import forge.toolbox.FScrollPane;
@@ -45,6 +47,8 @@ public class VZone implements IVDoc<CZone> {
     private final PlayerView player;
     private final ZoneType zone;
     private boolean sortedByName = false;
+    // Delta tracking for "+N new" tab labels. Baseline resets when the tab is viewed.
+    private int baseCount = -1;
 
     public VZone(final CMatchUI matchUI, final PlayerView player, final ZoneType zone) {
         this.matchUI = matchUI;
@@ -67,11 +71,12 @@ public class VZone implements IVDoc<CZone> {
                 if (SwingUtilities.isRightMouseButton(e)) {
                     final JPopupMenu menu = new JPopupMenu();
 
-                    final JMenuItem undockItem = new JMenuItem("Undock");
+                    final Localizer localizer = Localizer.getInstance();
+                    final JMenuItem undockItem = new JMenuItem(localizer.getMessage("lblUndock"));
                     undockItem.addActionListener(ev -> FloatingZone.undockZone(VZone.this));
                     menu.add(undockItem);
 
-                    final JMenuItem sortItem = new JMenuItem(sortedByName ? "Unsort" : "Sort by Name");
+                    final JMenuItem sortItem = new JMenuItem(sortedByName ? localizer.getMessage("lblUnsort") : localizer.getMessage("lblSortByName"));
                     sortItem.addActionListener(ev -> toggleSorted());
                     menu.add(sortItem);
 
@@ -120,8 +125,27 @@ public class VZone implements IVDoc<CZone> {
         updateTabLabel(cardPanels.size());
     }
 
+    private boolean isTabVisible() {
+        return parentCell != null && parentCell.getSelected() == this;
+    }
+
     private void updateTabLabel(final int count) {
-        tab.setText(capitalizedName() + " (" + count + ")");
+        if (baseCount < 0 || isTabVisible()) {
+            baseCount = count;
+        }
+
+        String label = capitalizedName();
+        if (!matchUI.isLocalPlayer(player)) {
+            label = player.getName() + " " + label;
+        }
+
+        final int delta = count - baseCount;
+        if (delta > 0
+                && FModel.getPreferences().getPrefBoolean(FPref.UI_ZONE_TAB_NEW_COUNT)) {
+            label += " (+" + delta + " new)";
+        }
+
+        tab.setText(label);
         tab.setToolTipText(tab.getText());
     }
 
