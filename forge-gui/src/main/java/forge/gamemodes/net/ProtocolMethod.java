@@ -73,8 +73,6 @@ public enum ProtocolMethod implements IHasNetLog {
     nextRememberedAction(Mode.SERVER, Void.TYPE),
     showWaitingTimer    (Mode.SERVER, Void.TYPE, PlayerView.class, String.class),
     handleGameEvents    (Mode.SERVER, Void.TYPE, List.class),
-
-    // Delta sync - Server -> Client
     applyDelta          (Mode.SERVER, Void.TYPE, DeltaPacket.class),
 
     // Client -> Server
@@ -95,10 +93,8 @@ public enum ProtocolMethod implements IHasNetLog {
     concede                   (Mode.CLIENT, Void.TYPE),
     alphaStrike               (Mode.CLIENT, Void.TYPE),
     reorderHand               (Mode.CLIENT, Void.TYPE, CardView.class, Integer.TYPE),
-
-    // Delta sync - Client -> Server
     ackSync                   (Mode.CLIENT, Void.TYPE, Long.TYPE),
-    requestResync             (Mode.CLIENT, Void.TYPE),  // Request full state resync on checksum mismatch
+    requestResync             (Mode.CLIENT, Void.TYPE),
     ;
 
     private enum Mode {

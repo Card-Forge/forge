@@ -129,11 +129,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         gameView.copyChangedProps(gameView0);
     }
 
-
     public final IGameController getGameController() {
         return getGameController(getCurrentPlayer());
     }
-
     public final IGameController getGameController(final PlayerView player) {
         if (player == null) {
             return spectator;
@@ -241,10 +239,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             } catch (NullPointerException e) {
                 return true; // return true so it will work as normal
             }
-        } else {
-            if (getGameController().mayLookAtAllCards()) {
-                return true;
-            }
+        } else if (getGameController().mayLookAtAllCards()) {
+            return true;
         }
         return c.canBeShownToAny(getLocalPlayers());
     }
@@ -332,7 +328,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public boolean isGamePaused() {
         return gamePause;
     }
-
     public void setGamePause(boolean pause) {
         gamePause = pause;
     }
@@ -475,7 +470,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                     synchronized (awaitNextInputTimer) {
                         if (awaitNextInputTask != null) {
                             updatePromptForAwait(getCurrentPlayer());
-                            if (GuiBase.isNetworkplay(AbstractGuiGame.this)) {
+                            if (GuiBase.isNetPlay(AbstractGuiGame.this)) {
                                 showWaitingTimer(getCurrentPlayer(), findWaitingForPlayerName(getCurrentPlayer()));
                             }
                             awaitNextInputTask = null;
@@ -959,24 +954,19 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public void updateTurn(PlayerView player) { }
 
     @Override
-    public void updatePlayerControl() {
-    }
+    public void updatePlayerControl() { }
 
     @Override
-    public void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate) {
-    }
+    public void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate) { }
 
     @Override
-    public void updateCards(Iterable<CardView> cards) {
-    }
+    public void updateCards(Iterable<CardView> cards) { }
 
     @Override
-    public void updateManaPool(Iterable<PlayerView> manaPoolUpdate) {
-    }
+    public void updateManaPool(Iterable<PlayerView> manaPoolUpdate) { }
 
     @Override
-    public void updateLives(Iterable<PlayerView> livesUpdate) {
-    }
+    public void updateLives(Iterable<PlayerView> livesUpdate) { }
 
     @Override
     public void afterGameEnd() {

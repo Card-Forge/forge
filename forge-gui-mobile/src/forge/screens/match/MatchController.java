@@ -143,7 +143,7 @@ public class MatchController extends NetworkGuiGame {
 
     @Override
     public void refreshField() {
-        if(!GuiBase.isNetworkplay(this))
+        if(!GuiBase.isNetPlay(this))
             return;
         refreshCardDetails(null);
     }
@@ -182,7 +182,7 @@ public class MatchController extends NetworkGuiGame {
             }
         }
         view = new MatchScreen(playerPanels);
-        if(GuiBase.isNetworkplay(this))
+        if(GuiBase.isNetPlay(this))
             view.resetFields();
         clearSelectables();  //fix uncleared selection
 
@@ -264,7 +264,7 @@ public class MatchController extends NetworkGuiGame {
             }
         }
 
-        if(GuiBase.isNetworkplay(this))
+        if(GuiBase.isNetPlay(this))
             checkStack();
 
         if (ph != null && saveState && ph.isMain()) {

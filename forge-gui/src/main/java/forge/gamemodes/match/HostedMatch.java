@@ -424,8 +424,7 @@ public class HostedMatch {
 
             Runnable switchGameView = () -> {
                 for (final Player p : event.subgame().getPlayers()) {
-                    if (p.getController() instanceof PlayerControllerHuman) {
-                        final PlayerControllerHuman humanController = (PlayerControllerHuman) p.getController();
+                    if (p.getController() instanceof PlayerControllerHuman humanController) {
                         final IGuiGame gui = guis.get(p.getRegisteredPlayer());
                         humanController.setGui(gui);
                         gui.setGameView(null);
@@ -457,8 +456,7 @@ public class HostedMatch {
             final GameView gameView = event.maingame().getView();
             Runnable switchGameView = () -> {
                 for (final Player p : event.maingame().getPlayers()) {
-                    if (p.getController() instanceof PlayerControllerHuman) {
-                        final PlayerControllerHuman humanController = (PlayerControllerHuman) p.getController();
+                    if (p.getController() instanceof PlayerControllerHuman humanController) {
                         final IGuiGame gui = guis.get(p.getRegisteredPlayer());
                         gui.setGameView(null);
                         gui.setGameView(gameView);
