@@ -31,6 +31,7 @@ import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.match.VMatchUI;
 import forge.screens.match.views.VHand;
+import forge.view.arcane.FloatingZone;
 import forge.toolbox.FButton;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FScrollPane;
@@ -82,6 +83,18 @@ public final class LayoutMenu {
         final Localizer localizer = Localizer.getInstance();
         final JMenu menu = new JMenu(localizer.getMessage("lblView"));
         menu.add(getMenuItem_ShowTabs());
+
+        final JCheckBoxMenuItem newCountItem = createStayOpenCheckBox(
+                localizer.getMessage("lblNewCardCountInTab"));
+        newCountItem.setState(prefs.getPrefBoolean(FPref.UI_ZONE_TAB_NEW_COUNT));
+        newCountItem.addActionListener(e -> {
+            prefs.setPref(FPref.UI_ZONE_TAB_NEW_COUNT, newCountItem.getState());
+            prefs.save();
+            FloatingZone.refreshAll();
+            refreshHandCards();
+        });
+        menu.add(newCountItem);
+
         if (currentScreen != null && currentScreen.isMatchScreen()) {
             menu.add(getMenuItem_ShowBackgroundImage());
 
