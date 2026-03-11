@@ -139,7 +139,7 @@ public class VHand implements IVDoc<CHand> {
 
     public void updateTabLabel(final int count) {
         if (player == null) return;
-        tab.setText(Localizer.getInstance().getMessage("lblPlayerHandN", player.getName(), String.valueOf(count)));
+        tab.setText(Localizer.getInstance().getMessage("lblPlayerHand", player.getName()) + " (" + count + ")");
         tab.setToolTipText(tab.getText());
     }
 

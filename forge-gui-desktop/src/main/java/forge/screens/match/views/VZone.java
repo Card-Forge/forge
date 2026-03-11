@@ -122,12 +122,9 @@ public class VZone implements IVDoc<CZone> {
     }
 
     private void updateTabLabel(final int count) {
-        final String countStr = String.valueOf(count);
-        String label;
-        if (matchUI.isLocalPlayer(player)) {
-            label = capitalizedName() + " (" + countStr + ")";
-        } else {
-            label = Localizer.getInstance().getMessage("lblPlayerZoneN", player.getName(), capitalizedName(), countStr);
+        String label = capitalizedName() + " (" + count + ")";
+        if (!matchUI.isLocalPlayer(player)) {
+            label = player.getName() + " " + label;
         }
         tab.setText(label);
         tab.setToolTipText(tab.getText());
