@@ -261,14 +261,8 @@ public class DeltaSyncManager implements IHasNetLog {
 
         collectObjectDelta(player, objectDeltas, newObjects, currentObjectIds);
 
-        forEachNonBattlefieldZone(player, zone ->
+        forEachZone(player, zone ->
                 collectCardsFromZone(zone, objectDeltas, newObjects, currentObjectIds));
-
-        if (player.getBattlefield() != null) {
-            for (CardView card : player.getBattlefield()) {
-                collectCardDelta(card, objectDeltas, newObjects, currentObjectIds);
-            }
-        }
     }
 
     private void collectCardsFromZone(Iterable<CardView> cards,
@@ -300,8 +294,8 @@ public class DeltaSyncManager implements IHasNetLog {
         collectObjectDelta(card, objectDeltas, newObjects, currentObjectIds);
     }
 
-    private static void forEachNonBattlefieldZone(PlayerView player,
-                                                   java.util.function.Consumer<Iterable<CardView>> action) {
+    private static void forEachZone(PlayerView player,
+                                    java.util.function.Consumer<Iterable<CardView>> action) {
         action.accept(player.getHand());
         action.accept(player.getGraveyard());
         action.accept(player.getLibrary());
@@ -311,6 +305,7 @@ public class DeltaSyncManager implements IHasNetLog {
         action.accept(player.getAnte());
         action.accept(player.getSideboard());
         action.accept(player.getCommand());
+        action.accept(player.getBattlefield());
     }
 
     // ==================== Property map building ====================
@@ -467,13 +462,7 @@ public class DeltaSyncManager implements IHasNetLog {
         }
         registerAndMark(player, DeltaPacket.TYPE_PLAYER_VIEW);
 
-        forEachNonBattlefieldZone(player, this::markCardsAsSent);
-
-        if (player.getBattlefield() != null) {
-            for (CardView card : player.getBattlefield()) {
-                markCardAsSent(card);
-            }
-        }
+        forEachZone(player, this::markCardsAsSent);
     }
 
     private void markCardsAsSent(Iterable<CardView> cards) {
