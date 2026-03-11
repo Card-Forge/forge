@@ -819,7 +819,7 @@ public final class FServerManager implements IHasNetLog {
 
             // Cancel any pending replies immediately to unblock game thread
             netLog.info("[Disconnect] Canceling pending replies for disconnected client");
-            client.cancelPendingReplies();
+            client.getReplyPool().cancelAll();
 
             final String username = client.getUsername();
             final int playerIndex = client.getIndex();

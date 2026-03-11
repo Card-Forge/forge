@@ -163,7 +163,7 @@ public class DeltaSyncManager implements IHasNetLog {
         int checksum = 0;
         boolean includeChecksum = packetsSinceLastChecksum >= CHECKSUM_INTERVAL;
         if (includeChecksum) {
-            checksum = computeStateChecksumWithSnapshot(gameView, snapshotTurn, snapshotPhaseOrdinal);
+            checksum = NetworkChecksumUtil.computeStateChecksum(snapshotTurn, snapshotPhaseOrdinal, gameView.getPlayers());
             packetsSinceLastChecksum = 0;
             logChecksumDetailsWithSnapshot(gameView, checksum, sequenceNumber.get() + 1,
                     snapshotTurn, snapshotPhaseOrdinal);
@@ -490,18 +490,9 @@ public class DeltaSyncManager implements IHasNetLog {
             return;
         }
         registerAndMark(card, DeltaPacket.TYPE_CARD_VIEW);
-        if (card.getAttachedCards() != null) {
-            for (CardView attached : card.getAttachedCards()) {
-                markCardAsSent(attached);
-            }
-        }
     }
 
     // ==================== Checksum and validation ====================
-
-    private int computeStateChecksumWithSnapshot(GameView gameView, int snapshotTurn, int snapshotPhaseOrdinal) {
-        return NetworkChecksumUtil.computeStateChecksum(snapshotTurn, snapshotPhaseOrdinal, gameView.getPlayers());
-    }
 
     private void logChecksumDetailsWithSnapshot(GameView gameView, int checksum, long seq,
                                                  int snapshotTurn, int snapshotPhaseOrdinal) {

@@ -988,14 +988,4 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public void applyDelta(DeltaPacket packet) {
         // No-op for local games - network implementation is in NetworkGuiGame
     }
-
-    @Override
-    public void setRememberedActions() {
-        // No-op for local games - network implementation is in NetworkGuiGame
-    }
-
-    @Override
-    public void nextRememberedAction() {
-        // No-op for local games - network implementation is in NetworkGuiGame
-    }
 }

@@ -64,9 +64,7 @@ public final class RemoteClient implements IToClient, IHasNetLog {
     @Override
     public Object sendAndWait(final IdentifiableNetEvent event) throws TimeoutException {
         replies.initialize(event.getId());
-
         send(event);
-
         return replies.get(event.getId());
     }
 
@@ -90,13 +88,5 @@ public final class RemoteClient implements IToClient, IHasNetLog {
 
     ReplyPool getReplyPool() {
         return replies;
-    }
-
-    /**
-     * Cancel all pending replies for this client.
-     * This is used when converting a player to AI control to unblock the game thread.
-     */
-    public void cancelPendingReplies() {
-        replies.cancelAll();
     }
 }

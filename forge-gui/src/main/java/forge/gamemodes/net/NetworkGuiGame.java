@@ -71,9 +71,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
         pendingZoneUpdates.clear();
 
         // STEP 1: Create new objects first (so deltas can reference them)
-        // Two-phase approach for cross-references (Bug #12 fix):
-        // Phase 1a: Create all objects and register in tracker (without properties)
-        // Phase 1b: Apply properties to all objects (now all objects exist for cross-references)
         Map<Integer, NewObjectData> newObjects = packet.getNewObjects();
         List<Map.Entry<TrackableObject, Map<TrackableProperty, Object>>> pendingPropertyApplications = new ArrayList<>();
 
@@ -170,7 +167,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
                     packet.getSequenceNumber(), elapsed);
         }
 
-        // Validate checksum if present (every 20 packets)
         if (packet.hasChecksum()) {
             int serverChecksum = packet.getChecksum();
             int clientChecksum = computeStateChecksum(getGameView());
@@ -180,14 +176,14 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
                         serverChecksum, clientChecksum, packet.getSequenceNumber());
                 logChecksumDetails(getGameView(), packet);
                 requestFullStateResync();
-                return; // Don't send ack for corrupted state
+                // Don't send ack for corrupted state
+                return;
             } else {
                 netLog.info("[DeltaSync] Checksum OK (seq={}, checksum={})",
                         packet.getSequenceNumber(), serverChecksum);
             }
         }
 
-        // Send acknowledgment
         IGameController controller = getGameController();
         if (controller != null) {
             controller.ackSync(packet.getSequenceNumber());

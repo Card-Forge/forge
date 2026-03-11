@@ -304,16 +304,6 @@ public interface IGuiGame {
      */
     void applyDelta(DeltaPacket packet);
 
-    /**
-     * Set the rememberd actions (for replay/undo support).
-     */
-    void setRememberedActions();
-
-    /**
-     * Move to the next remembered action.
-     */
-    void nextRememberedAction();
-
     /** Signal to start a client-side elapsed timer for waiting display. */
     void showWaitingTimer(PlayerView forPlayer, String waitingForPlayerName);
 
