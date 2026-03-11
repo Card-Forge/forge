@@ -153,7 +153,22 @@ public final class FModel {
     private static final Supplier<ItemPool<PaperCard>> attractionPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_ATTRACTION)), PaperCard.class));
     private static final Supplier<ItemPool<PaperCard>> contraptionPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_CONTRAPTION)), PaperCard.class));
 
+    /**
+     * Initialize with optional lazy card loading.
+     * When lazyLoadCards is true, cards are not loaded into memory upfront —
+     * they are loaded on demand via StaticData.attemptToLoadCard().
+     */
+    public static void initialize(final IProgressBar progressBar, Function<ForgePreferences, Void> adjustPrefs,
+                                  boolean lazyLoadCards) {
+        initialize0(progressBar, adjustPrefs, lazyLoadCards);
+    }
+
     public static void initialize(final IProgressBar progressBar, Function<ForgePreferences, Void> adjustPrefs) {
+        initialize0(progressBar, adjustPrefs, false);
+    }
+
+    private static void initialize0(final IProgressBar progressBar, Function<ForgePreferences, Void> adjustPrefs,
+                                    boolean lazyLoadCards) {
         ImageKeys.initializeDirs(
             ForgeConstants.CACHE_CARD_PICS_DIR, ForgeConstants.CACHE_CARD_PICS_SUBDIR,
             ForgeConstants.CACHE_TOKEN_PICS_DIR, ForgeConstants.CACHE_ICON_PICS_DIR,
@@ -201,20 +216,19 @@ public final class FModel {
         loadDynamicGamedata();
 
         // Load card database
-        // Lazy loading currently disabled
         reader = new CardStorageReader(ForgeConstants.CARD_DATA_DIR, progressBarBridge,
-                false);
+                lazyLoadCards);
         tokenReader = new CardStorageReader(ForgeConstants.TOKEN_DATA_DIR, progressBarBridge,
-                false);
+                lazyLoadCards);
 
         try {
-           customReader  = new CardStorageReader(ForgeConstants.USER_CUSTOM_CARDS_DIR, progressBarBridge, false);
+           customReader  = new CardStorageReader(ForgeConstants.USER_CUSTOM_CARDS_DIR, progressBarBridge, lazyLoadCards);
         } catch (Exception e) {
             customReader = null;
         }
 
         try {
-            customTokenReader  = new CardStorageReader(ForgeConstants.USER_CUSTOM_TOKENS_DIR, progressBarBridge, false);
+            customTokenReader  = new CardStorageReader(ForgeConstants.USER_CUSTOM_TOKENS_DIR, progressBarBridge, lazyLoadCards);
         } catch (Exception e) {
             customTokenReader = null;
         }
@@ -237,12 +251,15 @@ public final class FModel {
         ForgePreferences.DEV_MODE = preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
         ForgePreferences.UPLOAD_DRAFT = ForgePreferences.NET_CONN;
 
-        getMagicDb().setStandardPredicate(getFormats().getStandard().getFilterRules());
-        getMagicDb().setPioneerPredicate(getFormats().getPioneer().getFilterRules());
-        getMagicDb().setModernPredicate(getFormats().getModern().getFilterRules());
-        getMagicDb().setCommanderPredicate(getFormats().get("Commander").getFilterRules());
-        getMagicDb().setOathbreakerPredicate(getFormats().get("Oathbreaker").getFilterRules());
-        getMagicDb().setBrawlPredicate(getFormats().get("Brawl").getFilterRules());
+        if (!lazyLoadCards) {
+            // Format predicates and AI profiles load many cards — skip when lazy loading
+            getMagicDb().setStandardPredicate(getFormats().getStandard().getFilterRules());
+            getMagicDb().setPioneerPredicate(getFormats().getPioneer().getFilterRules());
+            getMagicDb().setModernPredicate(getFormats().getModern().getFilterRules());
+            getMagicDb().setCommanderPredicate(getFormats().get("Commander").getFilterRules());
+            getMagicDb().setOathbreakerPredicate(getFormats().get("Oathbreaker").getFilterRules());
+            getMagicDb().setBrawlPredicate(getFormats().get("Brawl").getFilterRules());
+        }
 
         getMagicDb().setFilteredHandsEnabled(preferences.getPrefBoolean(FPref.FILTERED_HANDS));
         try {
@@ -257,20 +274,22 @@ public final class FModel {
             FThreads.invokeInEdtLater(() -> progressBar.setDescription(Localizer.getInstance().getMessage("splash.loading.decks")));
         }
 
-        CardPreferences.load();
-        DeckPreferences.load();
-        ItemManagerConfig.load();
+        if (!lazyLoadCards) {
+            CardPreferences.load();
+            DeckPreferences.load();
+            ItemManagerConfig.load();
 
-        // Preload AI profiles
-        AiProfileUtil.loadAllProfiles(ForgeConstants.AI_PROFILE_DIR);
-        AiProfileUtil.setAiSideboardingMode(AiProfileUtil.AISideboardingMode.normalizedValueOf(getPreferences().getPref(FPref.MATCH_AI_SIDEBOARDING_MODE)));
+            // Preload AI profiles
+            AiProfileUtil.loadAllProfiles(ForgeConstants.AI_PROFILE_DIR);
+            AiProfileUtil.setAiSideboardingMode(AiProfileUtil.AISideboardingMode.normalizedValueOf(getPreferences().getPref(FPref.MATCH_AI_SIDEBOARDING_MODE)));
 
-        // Generate Deck Gen matrix
-        if(getPreferences().getPrefBoolean(FPref.DECKGEN_CARDBASED)) {
-            boolean commanderDeckGenMatrixLoaded=CardRelationMatrixGenerator.initialize();
-            deckGenMatrixLoaded=CardArchetypeLDAGenerator.initialize();
-            if(!commanderDeckGenMatrixLoaded){
-                deckGenMatrixLoaded=false;
+            // Generate Deck Gen matrix
+            if(getPreferences().getPrefBoolean(FPref.DECKGEN_CARDBASED)) {
+                boolean commanderDeckGenMatrixLoaded=CardRelationMatrixGenerator.initialize();
+                deckGenMatrixLoaded=CardArchetypeLDAGenerator.initialize();
+                if(!commanderDeckGenMatrixLoaded){
+                    deckGenMatrixLoaded=false;
+                }
             }
         }
     }

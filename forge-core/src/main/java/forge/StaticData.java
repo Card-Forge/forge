@@ -236,6 +236,8 @@ public class StaticData {
     public void attemptToLoadCard(String cardName, String setCode) {
         CardRules rules = cardReader.attemptToLoadCard(cardName);
         if (rules != null) {
+            System.out.println("[LazyLoad] Loading card: " + cardName
+                    + (setCode != null ? " (" + setCode + ")" : ""));
             if (rules.isVariant()) {
                 variantCards.loadCard(cardName, setCode, rules);
             } else {

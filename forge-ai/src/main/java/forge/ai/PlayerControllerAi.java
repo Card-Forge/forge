@@ -1246,6 +1246,23 @@ public class PlayerControllerAi extends PlayerController {
         return ComputerUtilMana.payManaCost(new Cost(toPay, effect), player, sa, effect);
     }
 
+    /**
+     * Choose which mana ability to activate for payment.
+     * Override in subclasses (e.g. RlPlayerController) to let an external agent decide.
+     * Called from ComputerUtilMana during the mana payment loop.
+     *
+     * @param cost         remaining mana cost being paid
+     * @param sa           spell ability being paid for
+     * @param toPay        specific mana shard needed now
+     * @param manaAbilities available mana abilities to choose from (already filtered)
+     * @param checkCosts   whether to verify ability costs
+     * @return chosen mana ability, or null if none suitable
+     */
+    public SpellAbility chooseManaAbilityForPayment(ManaCostBeingPaid cost, SpellAbility sa,
+            ManaCostShard toPay, Collection<SpellAbility> manaAbilities, boolean checkCosts) {
+        return ComputerUtilMana.chooseManaAbility(cost, sa, player, toPay, manaAbilities, checkCosts);
+    }
+
     @Override
     public boolean payCombatCost(Card c, Cost cost, SpellAbility sa, String prompt) {
         if (ComputerUtil.playNoStack(c.getController(), sa, getGame(), true)) {
