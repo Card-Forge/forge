@@ -31,7 +31,7 @@ public record GameEventGameOutcome(int lastTurnNumber, List<String> outcomeStrin
         final GameOutcome outcome1 = Iterables.getFirst(history, null);
         if (outcome1 == null) return "";
         final HashMap<RegisteredPlayer, String> players = outcome1.getPlayerNames();
-        final Map<RegisteredPlayer, Long> winCount = history.stream().collect(Collectors.groupingBy(GameOutcome::getWinningPlayer, Collectors.counting()));
+        final Map<RegisteredPlayer, Long> winCount = history.stream().filter(go -> go.getWinningPlayer() != null).collect(Collectors.groupingBy(GameOutcome::getWinningPlayer, Collectors.counting()));
 
         final StringBuilder sb = new StringBuilder();
         for (Entry<RegisteredPlayer, String> entry : players.entrySet()) {
