@@ -381,6 +381,60 @@ def stop_servers(procs: list[subprocess.Popen]):
 
 
 # ---------------------------------------------------------------------------
+# Auto-mulligan wrapper
+# ---------------------------------------------------------------------------
+
+def _count_lands(hand):
+    """Count lands in a hand observation array (MAX_HAND, CARD_FEATURES)."""
+    occupied = hand[:, CARD_IDX_NAME_ID] > 0
+    is_land = occupied & ((hand[:, CARD_IDX_TYPE_BITMASK] & TYPE_BIT_LAND) != 0)
+    return int(is_land.sum())
+
+
+class AutoMulligan(gym.Wrapper):
+    """Force mulligan on obviously unplayable hands (0 lands or 5+ lands).
+
+    Intercepts mulligan decisions before the agent sees them. If the hand is
+    unplayable, auto-submits action 1 (mulligan) and advances to the next
+    decision point. The agent only sees keepable hands.
+    """
+
+    MULL_MIN_LANDS = 1
+    MULL_MAX_LANDS = 4   # 5+ lands = auto-mull
+    MAX_MULLIGANS = 4    # stop after 4 mulls (down to 3 cards), let agent keep
+
+    def reset(self, **kwargs):
+        obs, info = self.env.reset(**kwargs)
+        self._mull_count = 0
+        obs, info = self._auto_mull_if_needed(obs, info)
+        return obs, info
+
+    def step(self, action):
+        obs, reward, terminated, truncated, info = self.env.step(action)
+        if not terminated:
+            obs, info = self._auto_mull_if_needed(obs, info)
+        return obs, reward, terminated, truncated, info
+
+    def _auto_mull_if_needed(self, obs, info):
+        """Keep auto-mulling until the hand is playable or game ends."""
+        while info.get("decision_type") == DT_MULLIGAN:
+            land_count = _count_lands(obs["agent_hand"])
+            # Always mull 0-land hands (unplayable no matter the size)
+            if land_count == 0:
+                pass  # force mull below
+            elif self._mull_count >= self.MAX_MULLIGANS:
+                break  # mulled too many times, just keep
+            elif self.MULL_MIN_LANDS <= land_count <= self.MULL_MAX_LANDS:
+                break  # hand is keepable, let the agent decide
+            # Force mulligan (action index 1)
+            obs, reward, terminated, truncated, info = self.env.step(1)
+            self._mull_count += 1
+            if terminated:
+                break
+        return obs, info
+
+
+# ---------------------------------------------------------------------------
 # Reward shaping wrapper
 # ---------------------------------------------------------------------------
 
@@ -391,46 +445,25 @@ class RewardShaping(gym.Wrapper):
       Applied per decision step (damage events happen at specific moments).
     - Board creature presence: +0.01 per creature per turn (not per decision step).
       Only counts creatures (cards with power >= 0, since lands/artifacts have power = -1).
-    - Mulligan penalty: -0.5 for keeping a hand with 0 lands or 5+ lands.
     - Terminal +1/-1 from the base env is preserved unchanged.
     """
 
     LIFE_SCALE = 0.05    # per opponent life point lost
     BOARD_SCALE = 0.01   # per creature per turn (applied once when turn changes)
-    MULL_PENALTY = -0.5  # penalty for keeping unplayable hands
 
     def __init__(self, env: gym.Env):
         super().__init__(env)
         self._prev_opp_life = 20
         self._prev_turn = 0
-        self._pending_mull_obs = None  # hand obs when facing a mulligan decision
 
     def reset(self, **kwargs):
         obs, info = self.env.reset(**kwargs)
         self._prev_opp_life = int(obs["opponent_scalars"][0])
         self._prev_turn = int(obs["game_info"][0])
-        # Check if first decision is a mulligan
-        if info.get("decision_type") == DT_MULLIGAN:
-            self._pending_mull_obs = obs
-        else:
-            self._pending_mull_obs = None
         return obs, info
 
     def step(self, action):
-        # Check if we're resolving a mulligan decision
-        mull_penalty = 0.0
-        if self._pending_mull_obs is not None:
-            if action == 0:  # Keep
-                hand = self._pending_mull_obs["agent_hand"]
-                occupied = hand[:, CARD_IDX_NAME_ID] > 0
-                is_land = occupied & ((hand[:, CARD_IDX_TYPE_BITMASK] & TYPE_BIT_LAND) != 0)
-                land_count = int(is_land.sum())
-                if land_count == 0 or land_count >= 5:
-                    mull_penalty = self.MULL_PENALTY
-            self._pending_mull_obs = None
-
         obs, reward, terminated, truncated, info = self.env.step(action)
-        reward += mull_penalty
 
         if not terminated:
             opp_life = int(obs["opponent_scalars"][0])
@@ -448,12 +481,6 @@ class RewardShaping(gym.Wrapper):
                 num_creatures = int((agent_bf[:, 1] >= 0).sum())
                 reward += self.BOARD_SCALE * num_creatures
                 self._prev_turn = current_turn
-
-            # Track if next decision is a mulligan (for next step)
-            if info.get("decision_type") == DT_MULLIGAN:
-                self._pending_mull_obs = obs
-            else:
-                self._pending_mull_obs = None
 
         return obs, reward, terminated, truncated, info
 
@@ -475,6 +502,7 @@ def make_env(port: int, deck_a: str, deck_b: str, seed: int,
             port=port,
             opponent_model_path=opponent_model_path if opponent_model_path else None,
         )
+        env = AutoMulligan(env)
         if not no_reward_shaping:
             env = RewardShaping(env)
         env = gym.wrappers.RecordEpisodeStatistics(env)
