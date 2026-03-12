@@ -46,7 +46,7 @@ public class MapViewScene extends UIScene {
     private final float maxZoom = 1.2f;
     private final float minZoom = 0.25f;
     private Set<PointOfInterest> bookmark;
-    private int lastMode = 0; // 0=none, 1=details, 2=events, 3=reputation
+    private int lastOverlayMode = 0; // 0=none, 1=details, 2=events, 3=reputation
 
     public static MapViewScene instance() {
         if (object == null)
@@ -167,7 +167,7 @@ public class MapViewScene extends UIScene {
 
 
     public void details() {
-        lastMode = 1;
+        lastOverlayMode = 1;
         TextraButton detailsButton = ui.findActor("details");
         if (detailsButton != null) {
             detailsButton.setVisible(false);
@@ -201,7 +201,7 @@ public class MapViewScene extends UIScene {
     }
 
     public void events() {
-        lastMode = 2;
+        lastOverlayMode = 2;
         TextraButton eventsButton = ui.findActor("events");
         if (eventsButton != null) {
             eventsButton.setVisible(false);
@@ -230,7 +230,7 @@ public class MapViewScene extends UIScene {
     }
 
     public void reputation() {
-        lastMode = 3;
+        lastOverlayMode = 3;
         TextraButton repButton = ui.findActor("reputation");
         if (repButton != null) {
             repButton.setVisible(false);
@@ -260,7 +260,7 @@ public class MapViewScene extends UIScene {
     }
 
     public void names() {
-        lastMode = 0;
+        lastOverlayMode = 0;
         TextraButton namesButton = ui.findActor("names");
         if (namesButton != null) {
             namesButton.setVisible(false);
@@ -376,9 +376,9 @@ public class MapViewScene extends UIScene {
             questButton.setVisible(!labels.isEmpty());
         }
         // Restore last overlay mode
-        if (lastMode == 1) details();
-        else if (lastMode == 2) { details(); events(); }
-        else if (lastMode == 3) { details(); events(); reputation(); }
+        if (lastOverlayMode == 1) details();
+        else if (lastOverlayMode == 2) { details(); events(); }
+        else if (lastOverlayMode == 3) { details(); events(); reputation(); }
 
         super.enter();
     }
