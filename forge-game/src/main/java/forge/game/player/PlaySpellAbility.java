@@ -798,6 +798,8 @@ public class PlaySpellAbility {
                 final String varName = aVar.trim();
                 if ("CreatureType".equals(varName)) {
                     final String choice = pc.chooseSomeType("Creature", ability, CardType.getAllCreatureTypes());
+                    if(choice == null) //No options to choose from?
+                        return false;
                     ability.getHostCard().setChosenType(choice);
                 }
                 if ("ChooseNumber".equals(varName)) {
@@ -809,6 +811,8 @@ public class PlaySpellAbility {
                 }
                 if ("Opponent".equals(varName)) {
                     Player opp = ability.getActivatingPlayer().getController().chooseSingleEntityForEffect(ability.getActivatingPlayer().getOpponents(), ability, Localizer.getInstance().getMessage("lblChooseAnOpponent"), null);
+                    if(opp == null)
+                        return false;
                     ability.getHostCard().setChosenPlayer(opp);
                 }
             }
