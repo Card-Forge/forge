@@ -69,8 +69,6 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
                     if (gameView.getTracker() == null) {
                         updateTrackers(new Object[]{gameView});
                     }
-                    gui.setGameView(gameView);
-                    args[0] = gui.getGameView();
                 }
                 break;
             case openView:
