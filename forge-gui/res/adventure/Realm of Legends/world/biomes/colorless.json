@@ -26,8 +26,12 @@
 		"Stone"
 	],
 	"enemies": [
+		"Archelos",
+		"Arna",
+		"Codie",
 		"Colfenor",
 		"Coram",
+		"Goro-Goro and Satoru",
 		"Morska",
 		"Loot",
 		"Sevinne",
@@ -45,7 +49,10 @@
 		"Narci",
 		"Obuun",
 		"Roon",
-		"Nemesis"
+		"Yarok",
+		"Yurlok",
+		"Nemesis",
+		"Grand Nemesis"
 	],
 	"pointsOfInterest": [
 		"Spawn",
