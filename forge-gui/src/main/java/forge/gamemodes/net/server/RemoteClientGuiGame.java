@@ -247,6 +247,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
 
     @Override
     public void showCombat() {
+        updateGameView();
         send(ProtocolMethod.showCombat);
     }
 

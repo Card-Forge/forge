@@ -267,14 +267,93 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
 
         // CardStateData is handled by the caller before reaching here
 
-        // Warn if this is a type we'd expect to handle but don't
-        if (type == TrackableTypes.StackItemViewType || type == TrackableTypes.CombatViewType
-                || type == TrackableTypes.GenericMapType) {
-            netLog.warn("[DeltaSync] Unhandled property type {} for prop {}, passing through raw value", type, prop);
+        // CombatData → CombatView (reconstruct via addAttackingBand)
+        if (type == TrackableTypes.CombatViewType) {
+            if (value instanceof DeltaPacket.CombatData combatData) {
+                return combatDataToCombatView(combatData, tracker);
+            }
+            netLog.warn("[DeltaSync] Expected CombatData for prop {}, got {}", prop, value.getClass().getSimpleName());
+            return null;
         }
+
+        // Integer ID → StackItemView
+        if (type == TrackableTypes.StackItemViewType) {
+            return tracker.getObj(TrackableTypes.StackItemViewType, (Integer) value);
+        }
+
+        // List<Integer> → TrackableCollection<StackItemView>
+        if (type == TrackableTypes.StackItemViewListType) {
+            List<Integer> ids = (List<Integer>) value;
+            TrackableCollection<forge.game.spellability.StackItemView> coll = new TrackableCollection<>();
+            for (int id : ids) {
+                if (id != -1) {
+                    forge.game.spellability.StackItemView siv = tracker.getObj(TrackableTypes.StackItemViewType, id);
+                    if (siv != null) {
+                        coll.add(siv);
+                    }
+                }
+            }
+            return coll;
+        }
+
+        // CardTypeView is already Serializable — passes through unchanged
 
         // Everything else passes through unchanged (primitives, enums, strings, etc.)
         return value;
+    }
+
+    /**
+     * Convert a CombatData back into a CombatView by resolving IDs and calling addAttackingBand.
+     */
+    private static forge.game.combat.CombatView combatDataToCombatView(DeltaPacket.CombatData data, Tracker tracker) {
+        forge.game.combat.CombatView combat = new forge.game.combat.CombatView(tracker);
+
+        for (int i = 0; i < data.bandAttackerIds.size(); i++) {
+            // Resolve attackers
+            List<CardView> attackers = new ArrayList<>();
+            for (int id : data.bandAttackerIds.get(i)) {
+                CardView cv = tracker.getObj(TrackableTypes.CardViewType, id);
+                if (cv != null) {
+                    attackers.add(cv);
+                }
+            }
+
+            // Resolve defender
+            int[] defRef = data.bandDefenderRefs.get(i);
+            forge.game.GameEntityView defender = defRef[0] == 0
+                    ? tracker.getObj(TrackableTypes.CardViewType, defRef[1])
+                    : tracker.getObj(TrackableTypes.PlayerViewType, defRef[1]);
+
+            // Resolve blockers
+            List<CardView> blockers = null;
+            List<Integer> blockerIds = data.bandBlockerIds.get(i);
+            if (blockerIds != null) {
+                blockers = new ArrayList<>();
+                for (int id : blockerIds) {
+                    CardView cv = tracker.getObj(TrackableTypes.CardViewType, id);
+                    if (cv != null) {
+                        blockers.add(cv);
+                    }
+                }
+            }
+
+            // Resolve planned blockers
+            List<CardView> plannedBlockers = null;
+            List<Integer> plannedIds = data.bandPlannedBlockerIds.get(i);
+            if (plannedIds != null) {
+                plannedBlockers = new ArrayList<>();
+                for (int id : plannedIds) {
+                    CardView cv = tracker.getObj(TrackableTypes.CardViewType, id);
+                    if (cv != null) {
+                        plannedBlockers.add(cv);
+                    }
+                }
+            }
+
+            combat.addAttackingBand(attackers, defender, blockers, plannedBlockers);
+        }
+
+        return combat;
     }
 
     /**
@@ -408,10 +487,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
                 obj = new forge.game.spellability.StackItemView(objectId, tracker);
                 tracker.putObj(TrackableTypes.StackItemViewType, objectId, (forge.game.spellability.StackItemView) obj);
                 break;
-            case DeltaPacket.TYPE_COMBAT_VIEW:
-                obj = new forge.game.combat.CombatView(tracker);
-                tracker.putObj(TrackableTypes.CombatViewType, obj.getId(), (forge.game.combat.CombatView) obj);
-                break;
             case DeltaPacket.TYPE_GAME_VIEW:
                 if (getGameView() != null) {
                     return getGameView();
@@ -433,8 +508,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
                 return tracker.getObj(TrackableTypes.PlayerViewType, objectId);
             case DeltaPacket.TYPE_STACK_ITEM_VIEW:
                 return tracker.getObj(TrackableTypes.StackItemViewType, objectId);
-            case DeltaPacket.TYPE_COMBAT_VIEW:
-                return tracker.getObj(TrackableTypes.CombatViewType, objectId);
             case DeltaPacket.TYPE_GAME_VIEW:
                 return getGameView();
             default:
@@ -448,7 +521,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
             case DeltaPacket.TYPE_CARD_VIEW: return "CardView";
             case DeltaPacket.TYPE_PLAYER_VIEW: return "PlayerView";
             case DeltaPacket.TYPE_STACK_ITEM_VIEW: return "StackItemView";
-            case DeltaPacket.TYPE_COMBAT_VIEW: return "CombatView";
             case DeltaPacket.TYPE_GAME_VIEW: return "GameView";
             default: return "Unknown(type=" + objectType + ")";
         }

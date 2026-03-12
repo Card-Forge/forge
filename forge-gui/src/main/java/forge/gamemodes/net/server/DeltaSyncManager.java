@@ -8,7 +8,10 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.DeltaPacket.CardStateData;
+import forge.gamemodes.net.DeltaPacket.CombatData;
 import forge.gamemodes.net.NetworkChecksumUtil;
+import forge.game.combat.CombatView;
+import forge.util.collect.FCollection;
 
 import forge.gamemodes.net.IHasNetLog;
 import forge.trackable.TrackableCollection;
@@ -144,10 +147,8 @@ public class DeltaSyncManager implements IHasNetLog {
             }
         }
 
-        // Collect changes from combat
-        if (gameView.getCombat() != null) {
-            collectObjectDelta(gameView.getCombat(), objectDeltas, newObjects, currentObjectIds);
-        }
+        // CombatView flows as a property value of GameView (via CombatData),
+        // not as a standalone tracked object — no collectObjectDelta needed.
 
         // Update tracked objects
         sentObjectIds.retainAll(currentObjectIds);
@@ -382,14 +383,95 @@ public class DeltaSyncManager implements IHasNetLog {
             return new CardStateData(csv.getId(), csv.getState(), csvMap);
         }
 
-        // Skip unsupported types (same as current MARKER_SKIP behavior)
-        if (type == TrackableTypes.StackItemViewType || type == TrackableTypes.StackItemViewListType ||
-            type == TrackableTypes.CombatViewType || type == TrackableTypes.KeywordCollectionViewType ||
-            type == TrackableTypes.CardTypeViewType || type == TrackableTypes.IPaperCardType ||
-            type == TrackableTypes.GenericMapType)
-            return SKIP_MARKER;
+        // CombatView → CombatData (band-entry serialization)
+        if (type == TrackableTypes.CombatViewType) {
+            return combatViewToCombatData((CombatView) value);
+        }
+
+        // StackItemView reference → Integer ID
+        if (type == TrackableTypes.StackItemViewType)
+            return ((TrackableObject) value).getId();
+
+        // Collection of StackItemViews → List<Integer> of IDs
+        if (type == TrackableTypes.StackItemViewListType) {
+            TrackableCollection<?> coll = (TrackableCollection<?>) value;
+            List<Integer> ids = new ArrayList<>(coll.size());
+            for (TrackableObject obj : coll) ids.add(obj == null ? -1 : obj.getId());
+            return ids;
+        }
+
+        // CardTypeView, IPaperCard, and KeywordCollectionViewType (runtime value is
+        // ImmutableMultiset<String> on PlayerView, not KeywordCollectionView) are already
+        // Serializable — pass through
+        if (type == TrackableTypes.CardTypeViewType || type == TrackableTypes.IPaperCardType
+                || type == TrackableTypes.KeywordCollectionViewType)
+            return value;
 
         return value;
+    }
+
+    /**
+     * Convert a CombatView into a serializable CombatData by iterating its band entries.
+     */
+    @SuppressWarnings("unchecked")
+    private static CombatData combatViewToCombatData(CombatView combat) {
+        Map<TrackableProperty, Object> props = combat.getProps();
+        Map<FCollection<CardView>, GameEntityView> bandsWithDefenders =
+                (Map<FCollection<CardView>, GameEntityView>) props.get(TrackableProperty.BandsWithDefenders);
+        Map<FCollection<CardView>, FCollection<CardView>> bandsWithBlockers =
+                (Map<FCollection<CardView>, FCollection<CardView>>) props.get(TrackableProperty.BandsWithBlockers);
+        Map<FCollection<CardView>, FCollection<CardView>> bandsWithPlannedBlockers =
+                (Map<FCollection<CardView>, FCollection<CardView>>) props.get(TrackableProperty.BandsWithPlannedBlockers);
+
+        if (bandsWithDefenders == null || bandsWithDefenders.isEmpty()) {
+            return new CombatData(new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        }
+
+        List<List<Integer>> allAttackerIds = new ArrayList<>();
+        List<int[]> allDefenderRefs = new ArrayList<>();
+        List<List<Integer>> allBlockerIds = new ArrayList<>();
+        List<List<Integer>> allPlannedBlockerIds = new ArrayList<>();
+
+        for (Map.Entry<FCollection<CardView>, GameEntityView> entry : bandsWithDefenders.entrySet()) {
+            FCollection<CardView> band = entry.getKey();
+            GameEntityView defender = entry.getValue();
+
+            // Attacker IDs for this band
+            List<Integer> attackerIds = new ArrayList<>();
+            for (CardView attacker : band) {
+                attackerIds.add(attacker.getId());
+            }
+            allAttackerIds.add(attackerIds);
+
+            // Defender reference: {typeMarker, id}
+            allDefenderRefs.add(new int[]{ defender instanceof CardView ? 0 : 1, defender.getId() });
+
+            // Blockers for this band
+            FCollection<CardView> blockers = bandsWithBlockers != null ? bandsWithBlockers.get(band) : null;
+            if (blockers != null && !blockers.isEmpty()) {
+                List<Integer> blockerIds = new ArrayList<>();
+                for (CardView blocker : blockers) {
+                    blockerIds.add(blocker.getId());
+                }
+                allBlockerIds.add(blockerIds);
+            } else {
+                allBlockerIds.add(null);
+            }
+
+            // Planned blockers for this band
+            FCollection<CardView> plannedBlockers = bandsWithPlannedBlockers != null ? bandsWithPlannedBlockers.get(band) : null;
+            if (plannedBlockers != null && !plannedBlockers.isEmpty()) {
+                List<Integer> plannedIds = new ArrayList<>();
+                for (CardView pb : plannedBlockers) {
+                    plannedIds.add(pb.getId());
+                }
+                allPlannedBlockerIds.add(plannedIds);
+            } else {
+                allPlannedBlockerIds.add(null);
+            }
+        }
+
+        return new CombatData(allAttackerIds, allDefenderRefs, allBlockerIds, allPlannedBlockerIds);
     }
 
     // ==================== Object registration ====================
@@ -426,9 +508,7 @@ public class DeltaSyncManager implements IHasNetLog {
             }
         }
 
-        if (gameView.getCombat() != null) {
-            registerAndMark(gameView.getCombat(), DeltaPacket.TYPE_COMBAT_VIEW);
-        }
+        // CombatView flows as a property value of GameView — no standalone registration needed.
 
         netLog.info("[DeltaSync] Registered consumer {} on {} objects after full state sync",
                 consumerId, registeredObjects.size());

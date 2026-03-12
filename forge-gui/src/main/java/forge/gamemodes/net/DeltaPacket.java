@@ -3,7 +3,6 @@ package forge.gamemodes.net;
 import forge.card.CardStateName;
 import forge.game.GameView;
 import forge.game.card.CardView;
-import forge.game.combat.CombatView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
 import forge.gamemodes.net.server.RemoteClient;
@@ -16,6 +15,7 @@ import forge.trackable.TrackableTypes.TrackableType;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,7 +26,7 @@ import java.util.Map;
  * Standard Java serialization handles the maps natively via Netty's ObjectEncoder.
  */
 public final class DeltaPacket implements NetEvent {
-    private static final long serialVersionUID = 4L;
+    private static final long serialVersionUID = 5L;
 
     private final long sequenceNumber;
     private final Map<Integer, Map<TrackableProperty, Object>> objectDeltas; // Changed properties only
@@ -46,7 +46,6 @@ public final class DeltaPacket implements NetEvent {
         if (obj instanceof CardView) return TYPE_CARD_VIEW;
         if (obj instanceof PlayerView) return TYPE_PLAYER_VIEW;
         if (obj instanceof StackItemView) return TYPE_STACK_ITEM_VIEW;
-        if (obj instanceof CombatView) return TYPE_COMBAT_VIEW;
         if (obj instanceof GameView) return TYPE_GAME_VIEW;
         return -1;
     }
@@ -57,7 +56,6 @@ public final class DeltaPacket implements NetEvent {
             case TYPE_CARD_VIEW: return TrackableTypes.CardViewType;
             case TYPE_PLAYER_VIEW: return TrackableTypes.PlayerViewType;
             case TYPE_STACK_ITEM_VIEW: return TrackableTypes.StackItemViewType;
-            case TYPE_COMBAT_VIEW: return TrackableTypes.CombatViewType;
             default: return null;
         }
     }
@@ -77,6 +75,32 @@ public final class DeltaPacket implements NetEvent {
             this.id = id;
             this.state = state;
             this.properties = properties;
+        }
+    }
+
+    /**
+     * Data holder for serialized CombatView state.
+     * Travels inside property maps as the value for CombatViewType properties.
+     * Each entry represents one attacking band with its defender, blockers, and planned blockers.
+     */
+    public static class CombatData implements Serializable {
+        private static final long serialVersionUID = 1L;
+
+        /** Attacker IDs per band. */
+        public final List<List<Integer>> bandAttackerIds;
+        /** Defender reference per band: {typeMarker, id} (0=CardView, 1=PlayerView). */
+        public final List<int[]> bandDefenderRefs;
+        /** Blocker IDs per band (null entry = no blockers). */
+        public final List<List<Integer>> bandBlockerIds;
+        /** Planned blocker IDs per band (null entry = no planned blockers). */
+        public final List<List<Integer>> bandPlannedBlockerIds;
+
+        public CombatData(List<List<Integer>> bandAttackerIds, List<int[]> bandDefenderRefs,
+                          List<List<Integer>> bandBlockerIds, List<List<Integer>> bandPlannedBlockerIds) {
+            this.bandAttackerIds = bandAttackerIds;
+            this.bandDefenderRefs = bandDefenderRefs;
+            this.bandBlockerIds = bandBlockerIds;
+            this.bandPlannedBlockerIds = bandPlannedBlockerIds;
         }
     }
 
