@@ -391,46 +391,25 @@ class RewardShaping(gym.Wrapper):
       Applied per decision step (damage events happen at specific moments).
     - Board creature presence: +0.01 per creature per turn (not per decision step).
       Only counts creatures (cards with power >= 0, since lands/artifacts have power = -1).
-    - Mulligan penalty: -0.5 for keeping a hand with 0 lands or 5+ lands.
     - Terminal +1/-1 from the base env is preserved unchanged.
     """
 
     LIFE_SCALE = 0.05    # per opponent life point lost
     BOARD_SCALE = 0.01   # per creature per turn (applied once when turn changes)
-    MULL_PENALTY = -0.5  # penalty for keeping unplayable hands
 
     def __init__(self, env: gym.Env):
         super().__init__(env)
         self._prev_opp_life = 20
         self._prev_turn = 0
-        self._pending_mull_obs = None  # hand obs when facing a mulligan decision
 
     def reset(self, **kwargs):
         obs, info = self.env.reset(**kwargs)
         self._prev_opp_life = int(obs["opponent_scalars"][0])
         self._prev_turn = int(obs["game_info"][0])
-        # Check if first decision is a mulligan
-        if info.get("decision_type") == DT_MULLIGAN:
-            self._pending_mull_obs = obs
-        else:
-            self._pending_mull_obs = None
         return obs, info
 
     def step(self, action):
-        # Check if we're resolving a mulligan decision
-        mull_penalty = 0.0
-        if self._pending_mull_obs is not None:
-            if action == 0:  # Keep
-                hand = self._pending_mull_obs["agent_hand"]
-                occupied = hand[:, CARD_IDX_NAME_ID] > 0
-                is_land = occupied & ((hand[:, CARD_IDX_TYPE_BITMASK] & TYPE_BIT_LAND) != 0)
-                land_count = int(is_land.sum())
-                if land_count == 0 or land_count >= 5:
-                    mull_penalty = self.MULL_PENALTY
-            self._pending_mull_obs = None
-
         obs, reward, terminated, truncated, info = self.env.step(action)
-        reward += mull_penalty
 
         if not terminated:
             opp_life = int(obs["opponent_scalars"][0])
@@ -448,12 +427,6 @@ class RewardShaping(gym.Wrapper):
                 num_creatures = int((agent_bf[:, 1] >= 0).sum())
                 reward += self.BOARD_SCALE * num_creatures
                 self._prev_turn = current_turn
-
-            # Track if next decision is a mulligan (for next step)
-            if info.get("decision_type") == DT_MULLIGAN:
-                self._pending_mull_obs = obs
-            else:
-                self._pending_mull_obs = None
 
         return obs, reward, terminated, truncated, info
 
