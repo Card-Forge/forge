@@ -237,16 +237,14 @@ public class DeltaSyncManager implements IHasNetLog {
 
             // Clear dirty props since we just sent everything
             obj.getAndClearDirtyProps(consumerId);
-        } else {
+        } else if (obj.hasConsumerChanges(consumerId)) {
             // Existing object — check per-consumer dirty set
-            if (obj.hasConsumerChanges(consumerId)) {
-                EnumSet<TrackableProperty> dirtyProps = obj.getAndClearDirtyProps(consumerId);
-                Map<TrackableProperty, Object> delta = buildPropertyMap(obj, dirtyProps);
-                if (!delta.isEmpty()) {
-                    objectDeltas.put(deltaKey, delta);
-                    netLog.trace("[DeltaSync] Delta: type={} id={}, {} dirty props",
-                            objType, obj.getId(), delta.size());
-                }
+            EnumSet<TrackableProperty> dirtyProps = obj.getAndClearDirtyProps(consumerId);
+            Map<TrackableProperty, Object> delta = buildPropertyMap(obj, dirtyProps);
+            if (!delta.isEmpty()) {
+                objectDeltas.put(deltaKey, delta);
+                netLog.trace("[DeltaSync] Delta: type={} id={}, {} dirty props",
+                        objType, obj.getId(), delta.size());
             }
         }
     }
@@ -398,10 +396,6 @@ public class DeltaSyncManager implements IHasNetLog {
             type == TrackableTypes.GenericMapType)
             return SKIP_MARKER;
 
-        // Everything else passes through — Java serialization handles it natively:
-        // Boolean, Integer, Float, String, ColorSet, ManaCost, CounterType,
-        // List<String>, Set<String>, Map<String,String>, Set<Integer>,
-        // Map<Integer,Integer>, Map<Byte,Integer>, Map<CounterType,Integer>, Enums
         return value;
     }
 

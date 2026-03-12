@@ -317,9 +317,6 @@ public final class FServerManager implements IHasNetLog {
         if (isReady) {
             broadcast(new MessageEvent(String.format("%s is ready (%d/%d players ready)",
                 playerName, readyCount, totalPlayers)));
-            if (readyCount == totalPlayers && totalPlayers > 1) {
-                broadcast(new MessageEvent("All players ready to start game!"));
-            }
         } else {
             broadcast(new MessageEvent(String.format("%s is not ready (%d/%d players ready)",
                 playerName, readyCount, totalPlayers)));

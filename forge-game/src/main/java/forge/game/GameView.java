@@ -223,9 +223,6 @@ public class GameView extends TrackableObject {
     public CombatView getCombat() {
         return get(TrackableProperty.CombatView);
     }
-    public void updateCombatView(CombatView combatView) {
-        set(TrackableProperty.CombatView, combatView);
-    }
 
     void updateCombat(Combat combat) {
         if (combat == null) {
@@ -245,24 +242,7 @@ public class GameView extends TrackableObject {
                     isBlocked ? CardView.getCollection(blockers) : null,
                     CardView.getCollection(blockers));
         }
-        updateCombatView(combatView);
-    }
-
-    public void serialize() {
-        /*try {
-            GameStateSerializer serializer = new GameStateSerializer(filename);
-            game.saveState(serializer);
-            serializer.writeEndOfFile();
-            serializer.bw.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }*/
-    }
-
-    public void deserialize() {
-        /*GameStateDeserializer deserializer = new GameStateDeserializer();
-        deserializer.readObject();*/
+        set(TrackableProperty.CombatView, combatView);
     }
 
     //TODO: Find better ways to make this information available to all GUIs without using the Game class

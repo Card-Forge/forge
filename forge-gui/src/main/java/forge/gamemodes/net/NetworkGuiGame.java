@@ -376,8 +376,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
         }
     }
 
-    // ==================== Checksum validation ====================
-
     private int computeStateChecksum(GameView gameView) {
         int phaseOrdinal = gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1;
         return NetworkChecksumUtil.computeStateChecksum(gameView.getTurn(), phaseOrdinal, gameView.getPlayers());
@@ -409,12 +407,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
         }
     }
 
-    // ==================== Object creation ====================
-
-    /**
-     * Create a new TrackableObject and register it in the Tracker, but do NOT apply properties yet.
-     * Phase 1a of the two-phase object creation process (Bug #12 fix).
-     */
     private TrackableObject createObjectOnly(NewObjectData data, Tracker tracker) {
         int objectId = data.getObjectId();
         int objectType = data.getObjectType();
@@ -494,8 +486,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
         }
     }
 
-    // ==================== Zone tracking ====================
-
     private static ZoneType getZoneTypeForProperty(TrackableProperty prop) {
         switch (prop) {
             case Hand: return ZoneType.Hand;
@@ -514,8 +504,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
     private void trackZoneChange(PlayerView player, ZoneType zone) {
         pendingZoneUpdates.computeIfAbsent(player, k -> EnumSet.noneOf(ZoneType.class)).add(zone);
     }
-
-    // ==================== CardStateView creation ====================
 
     private CardStateView createCardStateView(CardView cardView, CardStateName state) {
         try {
