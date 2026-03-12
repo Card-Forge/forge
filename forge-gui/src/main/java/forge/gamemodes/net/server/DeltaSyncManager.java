@@ -147,9 +147,6 @@ public class DeltaSyncManager implements IHasNetLog {
             }
         }
 
-        // CombatView flows as a property value of GameView (via CombatData),
-        // not as a standalone tracked object — no collectObjectDelta needed.
-
         // Update tracked objects
         sentObjectIds.retainAll(currentObjectIds);
         sentObjectIds.addAll(currentObjectIds);
@@ -383,16 +380,13 @@ public class DeltaSyncManager implements IHasNetLog {
             return new CardStateData(csv.getId(), csv.getState(), csvMap);
         }
 
-        // CombatView → CombatData (band-entry serialization)
         if (type == TrackableTypes.CombatViewType) {
             return combatViewToCombatData((CombatView) value);
         }
 
-        // StackItemView reference → Integer ID
         if (type == TrackableTypes.StackItemViewType)
             return ((TrackableObject) value).getId();
 
-        // Collection of StackItemViews → List<Integer> of IDs
         if (type == TrackableTypes.StackItemViewListType) {
             TrackableCollection<?> coll = (TrackableCollection<?>) value;
             List<Integer> ids = new ArrayList<>(coll.size());
@@ -400,9 +394,7 @@ public class DeltaSyncManager implements IHasNetLog {
             return ids;
         }
 
-        // CardTypeView, IPaperCard, and KeywordCollectionViewType (runtime value is
-        // ImmutableMultiset<String> on PlayerView, not KeywordCollectionView) are already
-        // Serializable — pass through
+        // Already Serializable — pass through
         if (type == TrackableTypes.CardTypeViewType || type == TrackableTypes.IPaperCardType
                 || type == TrackableTypes.KeywordCollectionViewType)
             return value;
@@ -507,8 +499,6 @@ public class DeltaSyncManager implements IHasNetLog {
                 }
             }
         }
-
-        // CombatView flows as a property value of GameView — no standalone registration needed.
 
         netLog.info("[DeltaSync] Registered consumer {} on {} objects after full state sync",
                 consumerId, registeredObjects.size());

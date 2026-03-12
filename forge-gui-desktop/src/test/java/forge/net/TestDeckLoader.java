@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
  * Thin wrapper around existing DeckSerializer for test deck loading.
  * Uses quest precons which are known-good balanced decks.
  *
- * Phase 0.5 of the Automated Network Testing Plan.
  */
 public class TestDeckLoader {
 

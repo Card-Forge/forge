@@ -34,12 +34,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Unified network test harness supporting 2-4 players with configurable remote clients.
- *
- * Consolidates functionality from:
- * - AutomatedGameTestHarness (2p local AI)
- * - NetworkClientTestHarness (2p with 1 remote client)
- * - MultiplayerNetworkScenario (3-4p with remote clients)
+ * Network test harness supporting 2-4 players with configurable remote clients.
  *
  * Configuration via builder pattern:
  * <pre>
@@ -750,12 +745,7 @@ public class UnifiedNetworkHarness implements IHasNetLog {
 
     // ==================== GameResult Inner Class ====================
 
-    /**
-     * Unified result class for all network test configurations.
-     *
-     * Unified result class replacing the separate result types from
-     * the previously distinct harness classes.
-     */
+    /** Result class for all network test configurations. */
     public static class GameResult {
         // Configuration
         public int playerCount;

@@ -44,10 +44,6 @@ public class FGameClient implements IToServer, IHasNetLog {
         this.port = port;
     }
 
-    /**
-     * Get the username for this client.
-     * @return the username
-     */
     public String getUsername() {
         return username;
     }

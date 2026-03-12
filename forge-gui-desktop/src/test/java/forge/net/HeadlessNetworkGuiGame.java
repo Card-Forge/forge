@@ -28,55 +28,34 @@ import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
 
 /**
- * Headless implementation of NetworkGuiGame for automated testing.
- * Extends NetworkGuiGame to get proper delta packet processing,
+ * Headless NetworkGuiGame for automated testing.
+ * Gets proper delta packet processing from NetworkGuiGame
  * while providing minimal implementations for abstract methods.
- *
- * This allows tests to verify that delta sync works correctly
- * on the client side (deserialization, tracker updates, object creation)
- * without requiring a real display.
- *
- * Most GUI methods are no-ops that return safe defaults.
  */
 public class HeadlessNetworkGuiGame extends NetworkGuiGame {
 
-    // Tracking fields for test assertions (used by TestTrueNetworkTraffic)
     private final java.util.concurrent.atomic.AtomicInteger setGameViewCount = new java.util.concurrent.atomic.AtomicInteger(0);
     private volatile boolean openViewCalled = false;
 
     public int getSetGameViewCount() { return setGameViewCount.get(); }
     public boolean isOpenViewCalled() { return openViewCalled; }
 
-    // ========================================
-    // Abstract methods from parent classes
-    // ========================================
-
     @Override
-    protected void updateCurrentPlayer(PlayerView player) {
-        // No-op for headless testing - no UI to update
-    }
+    protected void updateCurrentPlayer(PlayerView player) { }
 
     @Override
     public boolean isUiSetToSkipPhase(PlayerView playerTurn, PhaseType phase) {
-        // For headless testing, don't skip any phases by default
         return false;
     }
 
     @Override
     public PlayerZoneUpdates openZones(PlayerView controller, Collection<ZoneType> zones,
             Map<PlayerView, Object> players, boolean backupLastZones) {
-        // No-op for headless testing
         return null;
     }
 
     @Override
-    public void restoreOldZones(PlayerView playerView, PlayerZoneUpdates playerZoneUpdates) {
-        // No-op for headless testing
-    }
-
-    // ========================================
-    // UI Lifecycle methods
-    // ========================================
+    public void restoreOldZones(PlayerView playerView, PlayerZoneUpdates playerZoneUpdates) { }
 
     @Override
     public void openView(TrackableCollection<PlayerView> myPlayers) {
@@ -89,159 +68,48 @@ public class HeadlessNetworkGuiGame extends NetworkGuiGame {
         setGameViewCount.incrementAndGet();
     }
 
-    @Override
-    public void showCombat() {
-        // No-op
-    }
-
-    @Override
-    public void finishGame() {
-        // No-op
-    }
-
-    // ========================================
-    // Prompts and Messages
-    // ========================================
-
-    @Override
-    public void showPromptMessage(PlayerView playerView, String message) {
-        // No-op - could log if verbose
-    }
-
-    @Override
-    public void showCardPromptMessage(PlayerView playerView, String message, CardView card) {
-        // No-op
-    }
-
-    @Override
-    public void updateButtons(PlayerView owner, String label1, String label2, boolean enable1, boolean enable2, boolean focus1) {
-        // No-op
-    }
-
-    @Override
-    public void flashIncorrectAction() {
-        // No-op
-    }
-
-    @Override
-    public void alertUser() {
-        // No-op
-    }
-
-    // ========================================
-    // Phase/Turn Updates
-    // ========================================
-
-    @Override
-    public void updatePhase(boolean saveState) {
-        // No-op
-    }
-
-    @Override
-    public void updateTurn(PlayerView player) {
-        // No-op
-    }
-
-    @Override
-    public void updatePlayerControl() {
-        // No-op
-    }
-
-    // ========================================
-    // UI Overlays
-    // ========================================
-
-    @Override
-    public void enableOverlay() {
-        // No-op
-    }
-
-    @Override
-    public void disableOverlay() {
-        // No-op
-    }
-
-    @Override
-    public void showManaPool(PlayerView player) {
-        // No-op
-    }
-
-    @Override
-    public void hideManaPool(PlayerView player) {
-        // No-op
-    }
-
-    // ========================================
-    // Zone/Card Updates
-    // ========================================
-
-    @Override
-    public void updateStack() {
-        // No-op
-    }
+    @Override public void showCombat() { }
+    @Override public void finishGame() { }
+    @Override public void showPromptMessage(PlayerView playerView, String message) { }
+    @Override public void showCardPromptMessage(PlayerView playerView, String message, CardView card) { }
+    @Override public void updateButtons(PlayerView owner, String label1, String label2, boolean enable1, boolean enable2, boolean focus1) { }
+    @Override public void flashIncorrectAction() { }
+    @Override public void alertUser() { }
+    @Override public void updatePhase(boolean saveState) { }
+    @Override public void updateTurn(PlayerView player) { }
+    @Override public void updatePlayerControl() { }
+    @Override public void enableOverlay() { }
+    @Override public void disableOverlay() { }
+    @Override public void showManaPool(PlayerView player) { }
+    @Override public void hideManaPool(PlayerView player) { }
+    @Override public void updateStack() { }
 
     @Override
     public Iterable<PlayerZoneUpdate> tempShowZones(PlayerView controller, Iterable<PlayerZoneUpdate> zonesToUpdate) {
         return zonesToUpdate;
     }
 
-    @Override
-    public void hideZones(PlayerView controller, Iterable<PlayerZoneUpdate> zonesToUpdate) {
-        // No-op
-    }
-
-    @Override
-    public void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate) {
-        // No-op
-    }
-
-    @Override
-    public void updateCards(Iterable<CardView> cards) {
-        // No-op
-    }
-
-    // ========================================
-    // Game State
-    // ========================================
+    @Override public void hideZones(PlayerView controller, Iterable<PlayerZoneUpdate> zonesToUpdate) { }
+    @Override public void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate) { }
+    @Override public void updateCards(Iterable<CardView> cards) { }
 
     @Override
     public GameState getGamestate() {
         return null;
     }
 
-    @Override
-    public void updateManaPool(Iterable<PlayerView> manaPoolUpdate) {
-        // No-op
-    }
-
-    @Override
-    public void updateLives(Iterable<PlayerView> livesUpdate) {
-        // No-op
-    }
-
-    @Override
-    public void updateShards(Iterable<PlayerView> shardsUpdate) {
-        // No-op
-    }
-
-    // ========================================
-    // Card Selection/Display
-    // ========================================
-
-    @Override
-    public void setPanelSelection(CardView hostCard) {
-        // No-op
-    }
+    @Override public void updateManaPool(Iterable<PlayerView> manaPoolUpdate) { }
+    @Override public void updateLives(Iterable<PlayerView> livesUpdate) { }
+    @Override public void updateShards(Iterable<PlayerView> shardsUpdate) { }
+    @Override public void setPanelSelection(CardView hostCard) { }
 
     @Override
     public SpellAbilityView getAbilityToPlay(CardView hostCard, List<SpellAbilityView> abilities, ITriggerEvent triggerEvent) {
-        // Return first ability by default (AI would handle this)
         return abilities != null && !abilities.isEmpty() ? abilities.get(0) : null;
     }
 
     @Override
     public Map<CardView, Integer> assignCombatDamage(CardView attacker, List<CardView> blockers, int damage, GameEntityView defender, boolean overrideOrder, boolean maySkip) {
-        // Return default damage assignment
         Map<CardView, Integer> result = new HashMap<>();
         if (blockers != null && !blockers.isEmpty()) {
             result.put(blockers.get(0), damage);
@@ -251,18 +119,10 @@ public class HeadlessNetworkGuiGame extends NetworkGuiGame {
 
     @Override
     public Map<Object, Integer> assignGenericAmount(CardView effectSource, Map<Object, Integer> target, int amount, boolean atLeastOne, String amountLabel) {
-        // Return the input as-is
         return target;
     }
 
-    // ========================================
-    // Dialogs
-    // ========================================
-
-    @Override
-    public void message(String message, String title) {
-        // No-op
-    }
+    @Override public void message(String message, String title) { }
 
     @Override
     public void showErrorDialog(String message, String title) {
@@ -289,13 +149,8 @@ public class HeadlessNetworkGuiGame extends NetworkGuiGame {
         return defaultIsYes;
     }
 
-    // ========================================
-    // Choices
-    // ========================================
-
     @Override
     public <T> List<T> getChoices(String message, int min, int max, List<T> choices, List<T> selected, FSerializableFunction<T, String> display) {
-        // Return minimum required choices from the start of the list
         if (choices == null || choices.isEmpty()) {
             return Collections.emptyList();
         }
@@ -345,17 +200,6 @@ public class HeadlessNetworkGuiGame extends NetworkGuiGame {
         return result;
     }
 
-    // ========================================
-    // Player/Card Settings
-    // ========================================
-
-    @Override
-    public void setCard(CardView card) {
-        // No-op
-    }
-
-    @Override
-    public void setPlayerAvatar(LobbyPlayer player, IHasIcon ihi) {
-        // No-op
-    }
+    @Override public void setCard(CardView card) { }
+    @Override public void setPlayerAvatar(LobbyPlayer player, IHasIcon ihi) { }
 }

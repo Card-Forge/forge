@@ -29,61 +29,36 @@ public class NetworkGameEventListener implements IHasNetLog {
 
     private static final String LOG_PREFIX = "[GAME EVENT]";
 
-    /**
-     * Create a new listener for network game events.
-     */
     public NetworkGameEventListener() {
         netLog.info("{} Network game event listener initialized", LOG_PREFIX);
     }
 
-    // ====== Turn Events ======
-
-    /**
-     * EventBus subscriber method for turn began events.
-     */
     @Subscribe
     public void handleTurnBegan(GameEventTurnBegan event) {
         netLog.info("{} Turn {} began - {}'s turn",
                 LOG_PREFIX, event.turnNumber(), event.turnOwner().getName());
     }
 
-    /**
-     * EventBus subscriber method for phase change events.
-     */
     @Subscribe
     public void handlePhaseChange(GameEventTurnPhase event) {
         netLog.info("{} {}", LOG_PREFIX, event.toString());
     }
 
-    // ====== Game Action Events ======
-
-    /**
-     * EventBus subscriber for spell/ability cast events.
-     */
     @Subscribe
     public void handleSpellCast(GameEventSpellAbilityCast event) {
         netLog.info("{} {}", LOG_PREFIX, event.toString());
     }
 
-    /**
-     * EventBus subscriber for spell resolved events.
-     */
     @Subscribe
     public void handleSpellResolved(GameEventSpellResolved event) {
         netLog.info("{} Resolved: {}", LOG_PREFIX, event.spell().getHostCard().getName());
     }
 
-    /**
-     * EventBus subscriber for land played events.
-     */
     @Subscribe
     public void handleLandPlayed(GameEventLandPlayed event) {
         netLog.info("{} {}", LOG_PREFIX, event.toString());
     }
 
-    /**
-     * EventBus subscriber for attackers declared events.
-     */
     @Subscribe
     public void handleAttackersDeclared(GameEventAttackersDeclared event) {
         if (!event.attackersMap().isEmpty()) {
@@ -91,9 +66,6 @@ public class NetworkGameEventListener implements IHasNetLog {
         }
     }
 
-    /**
-     * EventBus subscriber for blockers declared events.
-     */
     @Subscribe
     public void handleBlockersDeclared(GameEventBlockersDeclared event) {
         if (!event.blockers().isEmpty()) {
@@ -102,28 +74,17 @@ public class NetworkGameEventListener implements IHasNetLog {
         }
     }
 
-    /**
-     * EventBus subscriber for life total changes.
-     */
     @Subscribe
     public void handleLifeChanged(GameEventPlayerLivesChanged event) {
         netLog.info("{} {} life: {} -> {}", LOG_PREFIX,
                 event.player().getName(), event.oldLives(), event.newLives());
     }
 
-    // ====== Game End Events ======
-
-    /**
-     * EventBus subscriber method for game finished events.
-     */
     @Subscribe
     public void handleGameFinished(GameEventGameFinished event) {
         netLog.info("{} Game finished", LOG_PREFIX);
     }
 
-    /**
-     * EventBus subscriber method for game outcome events.
-     */
     @Subscribe
     public void handleGameOutcome(GameEventGameOutcome event) {
         if (event.winningPlayerName() != null) {

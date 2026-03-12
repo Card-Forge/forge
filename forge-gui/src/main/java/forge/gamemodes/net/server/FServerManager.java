@@ -348,10 +348,6 @@ public final class FServerManager implements IHasNetLog {
         return null;
     }
 
-    /**
-     * Clear stored player GUI instances.
-     * Called between games so new GUIs are created for the next game.
-     */
     public void clearPlayerGuis() {
         playerGuis.clear();
     }

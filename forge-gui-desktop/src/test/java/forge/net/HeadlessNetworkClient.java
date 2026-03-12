@@ -27,7 +27,6 @@ import java.util.concurrent.atomic.AtomicLong;
  * - True network traffic measurement
  * - Reconnection testing with real socket disconnect
  *
- * Part of Phase 8 of the automated network testing infrastructure.
  */
 public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
 
@@ -52,45 +51,22 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
     private final AtomicLong fullStateSyncsReceived = new AtomicLong(0);
     private final AtomicLong totalDeltaBytes = new AtomicLong(0);
 
-    /**
-     * Create a new headless network client.
-     *
-     * @param username Player name for this client
-     * @param hostname Server hostname
-     * @param port Server port
-     */
     public HeadlessNetworkClient(String username, String hostname, int port) {
         this.username = username;
         this.hostname = hostname;
         this.port = port;
     }
 
-    /**
-     * Connect to the server and wait for lobby assignment.
-     *
-     * @param timeoutMs Maximum time to wait for connection
-     * @return true if connected successfully
-     */
     public boolean connect(long timeoutMs) {
         netLog.info("Connecting to {}:{} as '{}'", hostname, port, username);
 
         try {
-            // Create GUI implementation that logs delta packets
             guiGame = new DeltaLoggingGuiGame(this);
-
-            // Create client
             client = new FGameClient(username, "0", guiGame, hostname, port);
-
-            // Create lobby
             lobby = new ClientGameLobby();
-
-            // Register lobby listener
             client.addLobbyListener(new ClientLobbyListener());
-
-            // Connect (this sends LoginEvent automatically)
             client.connect();
 
-            // Wait for lobby assignment
             boolean success = connectedLatch.await(timeoutMs, TimeUnit.MILLISECONDS);
             if (success) {
                 connected.set(true);
@@ -108,12 +84,6 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
         }
     }
 
-    /**
-     * Wait for game to start.
-     *
-     * @param timeoutMs Maximum time to wait
-     * @return true if game started
-     */
     public boolean waitForGameStart(long timeoutMs) {
         try {
             return gameStartedLatch.await(timeoutMs, TimeUnit.MILLISECONDS);
@@ -123,12 +93,6 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
         }
     }
 
-    /**
-     * Wait for game to finish.
-     *
-     * @param timeoutMs Maximum time to wait
-     * @return true if game finished
-     */
     public boolean waitForGameFinish(long timeoutMs) {
         try {
             return gameFinishedLatch.await(timeoutMs, TimeUnit.MILLISECONDS);
@@ -138,65 +102,38 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
         }
     }
 
-    /**
-     * Check if this client is connected.
-     */
     public boolean isConnected() {
         return connected.get();
     }
 
-    /**
-     * Check if a game is in progress.
-     */
     public boolean isGameInProgress() {
         return gameInProgress.get();
     }
 
-    /**
-     * Get the slot index assigned to this client.
-     */
     public int getAssignedSlot() {
         return assignedSlot.get();
     }
 
-    /**
-     * Get number of delta packets received.
-     */
     public long getDeltaPacketsReceived() {
         return deltaPacketsReceived.get();
     }
 
-    /**
-     * Get number of full state syncs received.
-     */
     public long getFullStateSyncsReceived() {
         return fullStateSyncsReceived.get();
     }
 
-    /**
-     * Get approximate total delta bytes received.
-     */
     public long getTotalDeltaBytes() {
         return totalDeltaBytes.get();
     }
 
-    /**
-     * Get the lobby for this client.
-     */
     public ClientGameLobby getLobby() {
         return lobby;
     }
 
-    /**
-     * Get the underlying FGameClient.
-     */
     public FGameClient getClient() {
         return client;
     }
 
-    /**
-     * Mark this client as ready in the lobby.
-     */
     public void setReady() {
         if (client != null && connected.get()) {
             netLog.info("Sending ready status");
@@ -226,11 +163,8 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
         connected.set(false);
     }
 
-    // Called by DeltaLoggingGuiGame when delta packet received
     void onDeltaPacketReceived(DeltaPacket packet) {
         deltaPacketsReceived.incrementAndGet();
-
-        // Use the packet's own size estimation
         totalDeltaBytes.addAndGet(packet.getApproximateSize());
 
         netLog.info("Delta packet #{}: deltas={}, new={}, estimatedBytes={}",
@@ -240,7 +174,6 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
                 packet.getApproximateSize());
     }
 
-    // Called by DeltaLoggingGuiGame when full state sync received
     void onFullStateSyncReceived(long sequenceNumber) {
         fullStateSyncsReceived.incrementAndGet();
         gameInProgress.set(true);
@@ -249,7 +182,6 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
         netLog.info("Full state sync: seq={}", sequenceNumber);
     }
 
-    // Called by DeltaLoggingGuiGame when game ends
     void onGameEnd() {
         gameInProgress.set(false);
         gameFinishedLatch.countDown();
@@ -269,12 +201,9 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
 
         @Override
         public void update(GameLobbyData state, int slot) {
-            // Always update the lobby data
             lobby.setData(state);
 
-            // Only update slot assignment if we received a valid slot.
-            // The first LobbyUpdateEvent after connection may have slot=-1 (UNASSIGNED_SLOT)
-            // because the server hasn't processed our LoginEvent yet.
+            // First LobbyUpdateEvent may have slot=-1 before LoginEvent is processed
             if (slot >= 0) {
                 int previousSlot = assignedSlot.get();
                 assignedSlot.set(slot);
@@ -531,21 +460,14 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
             }
         }
 
-        /**
-         * Shutdown the auto-response executor when the game ends.
-         */
         @Override
         public void afterGameEnd() {
             super.afterGameEnd();
-            // Shutdown the executor to clean up resources
             autoResponseExecutor.shutdownNow();
             client.onGameEnd();
         }
     }
 
-    /**
-     * Get a summary of client metrics.
-     */
     public String getMetricsSummary() {
         return String.format("HeadlessClient[%s]: deltas=%d, fullSyncs=%d, bytes=%d, connected=%s, gameInProgress=%s",
                 username,

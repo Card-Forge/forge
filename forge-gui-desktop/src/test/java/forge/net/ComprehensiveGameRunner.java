@@ -79,7 +79,6 @@ public class ComprehensiveGameRunner implements IHasNetLog {
             // because the logger's static initialization chain requires GuiBase.getInterface()
             TestUtils.ensureFModelInitialized();
 
-            // Set up logging for this game instance (must be after GuiBase initialization)
             NetworkLogConfig.setTestMode(true);
             if (batchId != null) {
                 NetworkLogConfig.setBatchId(batchId);
@@ -90,17 +89,12 @@ public class ComprehensiveGameRunner implements IHasNetLog {
             netLog.info("Starting game {} with {} players on port {}",
                     gameIndex, playerCount, port);
 
-            // Use UnifiedNetworkHarness for all player counts
             UnifiedNetworkHarness.GameResult result = runGame(port, playerCount);
 
-            // Log result
             netLog.info("Game {} result: success={}, turns={}, winner={}",
                     gameIndex, result.success, result.turnCount, result.winner);
 
-            // Output result to stdout for parent process to parse
             System.out.println("RESULT:" + formatResult(gameIndex, playerCount, result));
-
-            // Close the log file
             NetworkLogConfig.closeThreadLogger();
 
             return result.success ? 0 : 1;
@@ -112,10 +106,6 @@ public class ComprehensiveGameRunner implements IHasNetLog {
         }
     }
 
-    /**
-     * Run a game using UnifiedNetworkHarness.
-     * All non-host players are remote network clients to test delta sync.
-     */
     private static UnifiedNetworkHarness.GameResult runGame(int port, int playerCount) {
         return new UnifiedNetworkHarness()
                 .playerCount(playerCount)
@@ -125,10 +115,6 @@ public class ComprehensiveGameRunner implements IHasNetLog {
                 .execute();
     }
 
-    /**
-     * Format result for parent process parsing.
-     * Format: gameIndex|success|playerCount|deltas|turns|bytes|winner|deck1,deck2,...
-     */
     private static String formatResult(int gameIndex, int playerCount, UnifiedNetworkHarness.GameResult result) {
         String decksStr = result.deckNames.isEmpty() ? "" : String.join(",", result.deckNames);
         return String.format("%d|%s|%d|%d|%d|%d|%s|%s",

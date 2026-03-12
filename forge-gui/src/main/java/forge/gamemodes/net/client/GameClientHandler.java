@@ -32,9 +32,6 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
     private final IGuiGame gui;
     private Tracker tracker;
 
-    /**
-     * Creates a client-side game handler.
-     */
     public GameClientHandler(final FGameClient client) {
         super(true);
         this.client = client;
@@ -153,20 +150,12 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
                 Iterator itrPlayerZoneUpdates = pzu.iterator();
                 while (itrPlayerZoneUpdates.hasNext()) {
                     PlayerView newPlayerView = ((PlayerZoneUpdate)itrPlayerZoneUpdates.next()).getPlayer();
-                    /**
-                     * FIXME: this should be handled by the original call to updateTrackers
-                     * However, PlayerZoneUpdates aren't a TrackableCollection.
-                     * So, additional logic will be needed. Leaving here for now.
-                     */
+                    // PlayerZoneUpdates aren't a TrackableCollection, so updateTrackers
+                    // doesn't reach them automatically
                     updateTrackers(new Object[]{newPlayerView});
                     replicatePlayerView(newPlayerView);
                 }
             }
-            /*
-            else {
-                System.err.println("replicateProps - did not handle : " + obj.getClass().toString());
-            }
-             */
         }
     }
 

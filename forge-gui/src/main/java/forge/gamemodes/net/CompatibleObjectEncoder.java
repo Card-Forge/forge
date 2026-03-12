@@ -43,7 +43,6 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
         int msgSize = endIdx - startIdx - 4;
         out.setInt(startIdx, msgSize);
 
-        // Track actual bytes sent (including compression and all overhead)
         int bytesSent = endIdx - startIdx;
         if (byteTracker != null) {
             String messageType = msg.getClass().getSimpleName();

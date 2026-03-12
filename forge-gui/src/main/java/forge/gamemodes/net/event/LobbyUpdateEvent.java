@@ -7,7 +7,7 @@ public class LobbyUpdateEvent implements NetEvent {
     private static final long serialVersionUID = 7114918637727047985L;
 
     private final GameLobbyData state;
-    private int slot = RemoteClient.UNASSIGNED_SLOT;  // Default to unassigned
+    private int slot = RemoteClient.UNASSIGNED_SLOT;
     public LobbyUpdateEvent(final GameLobbyData state) {
         this.state = state;
     }

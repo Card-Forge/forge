@@ -16,7 +16,7 @@ public final class RemoteClient implements IToClient, IHasNetLog {
 
     private volatile Channel channel;
     private String username;
-    private int index = UNASSIGNED_SLOT;  // Initialize to -1 to indicate not yet assigned
+    private int index = UNASSIGNED_SLOT;
     private volatile ReplyPool replies = new ReplyPool();
     private final AtomicInteger sendErrors = new AtomicInteger(0);
 

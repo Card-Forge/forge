@@ -181,11 +181,8 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
                             obj.getId(), ((CardView) obj).getZone(), resolved);
                 }
 
-                // Fix per-card Zone property when zone collections change.
-                // Delta sync sends zone collection changes (e.g. Hand=[id1,id2])
-                // but does NOT always send per-card Zone property updates. Without this,
-                // CardView.getZone() returns the stale zone from initial creation (Library),
-                // causing canBeShownTo() to fail and cards to render as hidden/empty.
+                // Sync per-card Zone when zone collections change, otherwise
+                // canBeShownTo() fails and cards render as hidden/empty.
                 if (obj instanceof PlayerView) {
                     ZoneType changedZone = getZoneTypeForProperty(prop);
                     if (changedZone != null && resolved instanceof TrackableCollection<?> coll) {
@@ -265,9 +262,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
             return coll;
         }
 
-        // CardStateData is handled by the caller before reaching here
-
-        // CombatData → CombatView (reconstruct via addAttackingBand)
         if (type == TrackableTypes.CombatViewType) {
             if (value instanceof DeltaPacket.CombatData combatData) {
                 return combatDataToCombatView(combatData, tracker);
@@ -276,12 +270,10 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
             return null;
         }
 
-        // Integer ID → StackItemView
         if (type == TrackableTypes.StackItemViewType) {
             return tracker.getObj(TrackableTypes.StackItemViewType, (Integer) value);
         }
 
-        // List<Integer> → TrackableCollection<StackItemView>
         if (type == TrackableTypes.StackItemViewListType) {
             List<Integer> ids = (List<Integer>) value;
             TrackableCollection<forge.game.spellability.StackItemView> coll = new TrackableCollection<>();
@@ -296,9 +288,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
             return coll;
         }
 
-        // CardTypeView is already Serializable — passes through unchanged
-
-        // Everything else passes through unchanged (primitives, enums, strings, etc.)
         return value;
     }
 
@@ -309,7 +298,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
         forge.game.combat.CombatView combat = new forge.game.combat.CombatView(tracker);
 
         for (int i = 0; i < data.bandAttackerIds.size(); i++) {
-            // Resolve attackers
             List<CardView> attackers = new ArrayList<>();
             for (int id : data.bandAttackerIds.get(i)) {
                 CardView cv = tracker.getObj(TrackableTypes.CardViewType, id);
@@ -318,13 +306,11 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
                 }
             }
 
-            // Resolve defender
             int[] defRef = data.bandDefenderRefs.get(i);
             forge.game.GameEntityView defender = defRef[0] == 0
                     ? tracker.getObj(TrackableTypes.CardViewType, defRef[1])
                     : tracker.getObj(TrackableTypes.PlayerViewType, defRef[1]);
 
-            // Resolve blockers
             List<CardView> blockers = null;
             List<Integer> blockerIds = data.bandBlockerIds.get(i);
             if (blockerIds != null) {
@@ -337,7 +323,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
                 }
             }
 
-            // Resolve planned blockers
             List<CardView> plannedBlockers = null;
             List<Integer> plannedIds = data.bandPlannedBlockerIds.get(i);
             if (plannedIds != null) {
