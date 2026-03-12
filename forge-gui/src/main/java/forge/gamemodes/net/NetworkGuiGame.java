@@ -1,6 +1,7 @@
 package forge.gamemodes.net;
 
 import forge.game.GameView;
+import forge.game.event.GameEvent;
 import forge.card.CardStateName;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
@@ -37,7 +38,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
         }
 
         long startTime = System.currentTimeMillis();
-        boolean phaseChanged = false;
 
         Tracker tracker = getGameView().getTracker();
         if (tracker == null) {
@@ -96,10 +96,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
             int deltaKey = entry.getKey();
             Map<TrackableProperty, Object> deltaProps = entry.getValue();
 
-            if (deltaProps.containsKey(TrackableProperty.Phase) || deltaProps.containsKey(TrackableProperty.PlayerTurn)) {
-                phaseChanged = true;
-            }
-
             int objectType = DeltaSyncManager.getTypeFromDeltaKey(deltaKey);
             int actualObjectId = DeltaSyncManager.getIdFromDeltaKey(deltaKey);
 
@@ -132,8 +128,14 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
                     packet.getSequenceNumber(), elapsed);
         }
 
-        if (phaseChanged) {
-            updatePhase(true);
+        // Forward bundled events AFTER delta is applied — guarantees
+        // getGameView() state is current when event handlers read it.
+        if (packet.hasEvents()) {
+            Tracker tracker2 = getGameView().getTracker();
+            List<GameEvent> unwrapped = GameEventProxy.unwrapAll(packet.getProxiedEvents(), tracker2);
+            for (GameEvent event : unwrapped) {
+                handleGameEvent(event);
+            }
         }
 
         if (packet.hasChecksum()) {

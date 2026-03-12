@@ -107,8 +107,10 @@ public class TrackableTypes {
                                         prop.getType() != TrackableTypes.StackItemViewListType) {
                                     //if object exists already, update its changed properties
                                     existingObj.copyChangedProps(newObj);
-                                    newCollection.replace(i, existingObj);
                                 }
+                                // Always swap deserialized instance with tracker instance
+                                // so the collection uses the same objects that delta sync updates
+                                newCollection.replace(i, existingObj);
                             } else {
                                 //if object is new, cache in object lookup
                                 from.getTracker().putObj(itemType, newObj.getId(), newObj);

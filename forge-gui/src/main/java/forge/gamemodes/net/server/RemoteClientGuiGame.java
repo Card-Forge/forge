@@ -43,6 +43,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
     private final int clientIndex;
     // Delta sync is ENABLED - new objects are now properly handled.
     // New objects are sent with full property data, existing objects only send changed properties.
+    private final Object deltaLock = new Object();
     private boolean useDeltaSync = true;
     private boolean initialSyncSent = false;
     private boolean fallbackLogged = false;  // Prevent duplicate fallback log messages
@@ -162,30 +163,35 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
             return;
         }
 
-        // Use delta sync
-        DeltaPacket delta = deltaSyncManager.collectDeltas(gameView);
-        if (!delta.isEmpty()) {
-            if (flush) {
-                send(ProtocolMethod.applyDelta, delta);
-            } else {
-                sender.write(ProtocolMethod.applyDelta, delta);
-            }
+        // Flush pending events BEFORE collecting deltas — ensures events
+        // get the dirty props bundled with them, and this standalone delta
+        // only picks up whatever changed after the flush.
+        synchronized (deltaLock) {
+            flushPendingEvents();
+            DeltaPacket delta = deltaSyncManager.collectDeltas(gameView);
+            if (!delta.isEmpty()) {
+                if (flush) {
+                    sender.send(ProtocolMethod.applyDelta, delta);
+                } else {
+                    sender.write(ProtocolMethod.applyDelta, delta);
+                }
 
-            if (logBandwidth) {
-                int deltaSize = measureSerializedSize(delta);
-                int fullStateSize = measureSerializedSize(gameView);
+                if (logBandwidth) {
+                    int deltaSize = measureSerializedSize(delta);
+                    int fullStateSize = measureSerializedSize(gameView);
 
-                totalDeltaBytes += deltaSize;
-                totalFullStateBytes += fullStateSize;
-                deltaPacketCount++;
+                    totalDeltaBytes += deltaSize;
+                    totalFullStateBytes += fullStateSize;
+                    deltaPacketCount++;
 
-                int savings = fullStateSize > 0 ? (int)((1.0 - (double)deltaSize / fullStateSize) * 100) : 0;
+                    int savings = fullStateSize > 0 ? (int)((1.0 - (double)deltaSize / fullStateSize) * 100) : 0;
 
-                netLog.info("[DeltaSync] Packet #{}: Delta={} bytes, FullState={} bytes, Savings={}%",
-                    deltaPacketCount, deltaSize, fullStateSize, savings);
-                netLog.info("[DeltaSync]   Cumulative: Delta={}, FullState={}, Savings={}%",
-                    totalDeltaBytes, totalFullStateBytes,
-                    totalFullStateBytes > 0 ? (int)((1.0 - (double)totalDeltaBytes / totalFullStateBytes) * 100) : 0);
+                    netLog.info("[DeltaSync] Packet #{}: Delta={} bytes, FullState={} bytes, Savings={}%",
+                        deltaPacketCount, deltaSize, fullStateSize, savings);
+                    netLog.info("[DeltaSync]   Cumulative: Delta={}, FullState={}, Savings={}%",
+                        totalDeltaBytes, totalFullStateBytes,
+                        totalFullStateBytes > 0 ? (int)((1.0 - (double)totalDeltaBytes / totalFullStateBytes) * 100) : 0);
+                }
             }
         }
     }
@@ -472,8 +478,21 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
                 events.stream().map(e -> e.getClass().getSimpleName()).collect(Collectors.joining(", ")));
         Tracker tracker = getGameView() != null ? getGameView().getTracker() : null;
         List<Object> proxied = GameEventProxy.wrapAll(events, tracker);
-        updateGameView(false);
-        sender.send(ProtocolMethod.handleGameEvents, proxied);
+        if (useDeltaSync && initialSyncSent) {
+            // Bundle events with delta so they're applied atomically:
+            // delta properties first, then events forwarded.
+            GameView gameView = getGameView();
+            if (gameView != null) {
+                synchronized (deltaLock) {
+                    DeltaPacket delta = deltaSyncManager.collectDeltas(gameView);
+                    delta.setProxiedEvents(proxied);
+                    sender.send(ProtocolMethod.applyDelta, delta);
+                }
+            }
+        } else {
+            updateGameView(false);
+            sender.send(ProtocolMethod.handleGameEvents, proxied);
+        }
     }
 
     @Override

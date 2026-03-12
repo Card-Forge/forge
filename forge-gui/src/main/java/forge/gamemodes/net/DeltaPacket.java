@@ -26,13 +26,14 @@ import java.util.Map;
  * Standard Java serialization handles the maps natively via Netty's ObjectEncoder.
  */
 public final class DeltaPacket implements NetEvent {
-    private static final long serialVersionUID = 5L;
+    private static final long serialVersionUID = 6L;
 
     private final long sequenceNumber;
     private final Map<Integer, Map<TrackableProperty, Object>> objectDeltas;
     private final Map<Integer, Map<TrackableProperty, Object>> newObjects;
     private final int checksum;
     private final boolean checksumIncluded;
+    private List<Object> proxiedEvents;
 
     public static final int TYPE_CARD_VIEW = 0;
     public static final int TYPE_PLAYER_VIEW = 1;
@@ -120,8 +121,20 @@ public final class DeltaPacket implements NetEvent {
         return checksumIncluded;
     }
 
+    public void setProxiedEvents(List<Object> events) {
+        this.proxiedEvents = events;
+    }
+
+    public List<Object> getProxiedEvents() {
+        return proxiedEvents;
+    }
+
+    public boolean hasEvents() {
+        return proxiedEvents != null && !proxiedEvents.isEmpty();
+    }
+
     public boolean isEmpty() {
-        return objectDeltas.isEmpty() && newObjects.isEmpty();
+        return objectDeltas.isEmpty() && newObjects.isEmpty() && !hasEvents();
     }
 
     public int getApproximateSize() {
