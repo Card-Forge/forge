@@ -5,7 +5,6 @@ import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
-import forge.game.spellability.StackItemView;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.DeltaPacket.CardStateData;
 import forge.gamemodes.net.DeltaPacket.CombatData;
@@ -117,24 +116,7 @@ public class DeltaSyncManager implements IHasNetLog {
         Map<Integer, Map<TrackableProperty, Object>> newObjects = new HashMap<>();
         Set<Integer> currentObjectIds = new HashSet<>();
 
-        // Collect changes from GameView itself
-        collectObjectDelta(gameView, objectDeltas, newObjects, currentObjectIds);
-
-        // Collect changes from all players
-        if (gameView.getPlayers() != null) {
-            for (PlayerView player : gameView.getPlayers()) {
-                collectPlayerDeltas(player, objectDeltas, newObjects, currentObjectIds);
-            }
-        }
-
-        // Collect changes from the stack
-        if (gameView.getStack() != null) {
-            for (StackItemView stackItem : gameView.getStack()) {
-                collectObjectDelta(stackItem, objectDeltas, newObjects, currentObjectIds);
-                collectObjectDelta(stackItem.getSourceCard(), objectDeltas, newObjects, currentObjectIds);
-                collectCardsFromZone(stackItem.getTargetCards(), objectDeltas, newObjects, currentObjectIds);
-            }
-        }
+        walkAndCollect(gameView, objectDeltas, newObjects, currentObjectIds);
 
         // Update tracked objects
         sentObjectIds.retainAll(currentObjectIds);
@@ -233,44 +215,44 @@ public class DeltaSyncManager implements IHasNetLog {
         }
     }
 
-    private void collectPlayerDeltas(PlayerView player,
-                                     Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
-                                     Map<Integer, Map<TrackableProperty, Object>> newObjects,
-                                     Set<Integer> currentObjectIds) {
-        if (player == null) {
+    /**
+     * Recursively walk the object graph starting from a TrackableObject, collecting deltas.
+     * Discovers children by inspecting property values for TrackableObject/TrackableCollection
+     * references. CombatView and CardStateView are skipped — they are serialized inline as
+     * property values by toNetworkValue(), not as top-level delta objects.
+     */
+    private void walkAndCollect(TrackableObject obj,
+                                Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
+                                Map<Integer, Map<TrackableProperty, Object>> newObjects,
+                                Set<Integer> currentObjectIds) {
+        if (obj == null) {
+            return;
+        }
+        int type = DeltaPacket.typeTagFor(obj);
+        if (type < 0) {
+            return;
+        }
+        int deltaKey = makeDeltaKey(type, obj.getId());
+        if (currentObjectIds.contains(deltaKey)) {
             return;
         }
 
-        collectObjectDelta(player, objectDeltas, newObjects, currentObjectIds);
+        collectObjectDelta(obj, objectDeltas, newObjects, currentObjectIds);
 
-        forEachZone(player, zone ->
-                collectCardsFromZone(zone, objectDeltas, newObjects, currentObjectIds));
-    }
-
-    private void collectCardsFromZone(Iterable<CardView> cards,
-                                      Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
-                                      Map<Integer, Map<TrackableProperty, Object>> newObjects,
-                                      Set<Integer> currentObjectIds) {
-        if (cards == null) {
-            return;
+        Map<TrackableProperty, Object> props = obj.getProps();
+        if (props != null) {
+            for (Object value : props.values()) {
+                if (value instanceof TrackableObject) {
+                    walkAndCollect((TrackableObject) value, objectDeltas, newObjects, currentObjectIds);
+                } else if (value instanceof TrackableCollection) {
+                    for (Object item : (TrackableCollection<?>) value) {
+                        if (item instanceof TrackableObject) {
+                            walkAndCollect((TrackableObject) item, objectDeltas, newObjects, currentObjectIds);
+                        }
+                    }
+                }
+            }
         }
-        for (CardView card : cards) {
-            collectObjectDelta(card, objectDeltas, newObjects, currentObjectIds);
-        }
-    }
-
-    private static void forEachZone(PlayerView player,
-                                    java.util.function.Consumer<Iterable<CardView>> action) {
-        action.accept(player.getHand());
-        action.accept(player.getGraveyard());
-        action.accept(player.getLibrary());
-        action.accept(player.getExile());
-        action.accept(player.getFlashback());
-        action.accept(player.getCommanders());
-        action.accept(player.getAnte());
-        action.accept(player.getSideboard());
-        action.accept(player.getCommand());
-        action.accept(player.getBattlefield());
     }
 
     // ==================== Property map building ====================
@@ -446,28 +428,7 @@ public class DeltaSyncManager implements IHasNetLog {
             return;
         }
 
-        registerAndMark(gameView, DeltaPacket.TYPE_GAME_VIEW);
-
-        if (gameView.getPlayers() != null) {
-            for (PlayerView player : gameView.getPlayers()) {
-                markPlayerObjectsAsSent(player);
-            }
-        }
-
-        if (gameView.getStack() != null) {
-            for (StackItemView stackItem : gameView.getStack()) {
-                registerAndMark(stackItem, DeltaPacket.TYPE_STACK_ITEM_VIEW);
-                CardView sourceCard = stackItem.getSourceCard();
-                if (sourceCard != null) {
-                    markCardAsSent(sourceCard);
-                }
-                if (stackItem.getTargetCards() != null) {
-                    for (CardView target : stackItem.getTargetCards()) {
-                        markCardAsSent(target);
-                    }
-                }
-            }
-        }
+        walkAndMarkAsSent(gameView, new HashSet<>());
 
         netLog.info("[DeltaSync] Registered consumer {} on {} objects after full state sync",
                 consumerId, registeredObjects.size());
@@ -482,29 +443,39 @@ public class DeltaSyncManager implements IHasNetLog {
         obj.getAndClearDirtyProps(consumerId);
     }
 
-    private void markPlayerObjectsAsSent(PlayerView player) {
-        if (player == null) {
+    /**
+     * Recursively walk the object graph starting from a TrackableObject, registering
+     * each for dirty tracking. Same traversal as walkAndCollect but for initial sync.
+     */
+    private void walkAndMarkAsSent(TrackableObject obj, Set<Integer> visited) {
+        if (obj == null) {
             return;
         }
-        registerAndMark(player, DeltaPacket.TYPE_PLAYER_VIEW);
-
-        forEachZone(player, this::markCardsAsSent);
-    }
-
-    private void markCardsAsSent(Iterable<CardView> cards) {
-        if (cards == null) {
+        int type = DeltaPacket.typeTagFor(obj);
+        if (type < 0) {
             return;
         }
-        for (CardView card : cards) {
-            markCardAsSent(card);
-        }
-    }
-
-    private void markCardAsSent(CardView card) {
-        if (card == null) {
+        int deltaKey = makeDeltaKey(type, obj.getId());
+        if (!visited.add(deltaKey)) {
             return;
         }
-        registerAndMark(card, DeltaPacket.TYPE_CARD_VIEW);
+
+        registerAndMark(obj, type);
+
+        Map<TrackableProperty, Object> props = obj.getProps();
+        if (props != null) {
+            for (Object value : props.values()) {
+                if (value instanceof TrackableObject) {
+                    walkAndMarkAsSent((TrackableObject) value, visited);
+                } else if (value instanceof TrackableCollection) {
+                    for (Object item : (TrackableCollection<?>) value) {
+                        if (item instanceof TrackableObject) {
+                            walkAndMarkAsSent((TrackableObject) item, visited);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     // ==================== Checksum and validation ====================
