@@ -41,7 +41,6 @@ import forge.gamesimulationtests.util.player.PlayerSpecification;
 import forge.gamesimulationtests.util.player.PlayerSpecificationHandler;
 import forge.gamesimulationtests.util.playeractions.*;
 import forge.item.PaperCard;
-import forge.player.HumanPlay;
 import forge.util.Aggregates;
 import forge.util.ITriggerEvent;
 import forge.util.MyRandom;
@@ -83,7 +82,7 @@ public class PlayerControllerForTests extends PlayerController {
     public void playSpellAbilityNoStack(SpellAbility effectSA, boolean mayChoseNewTargets) {
         //TODO: eventually (when the real code is refactored) this should be handled normally...
         if (effectSA.getDescription().equals("At the beginning of your upkeep, if you have exactly 1 life, you win the game.")) {//test_104_2b_effect_may_state_that_player_wins_the_game
-            HumanPlay.playSpellAbilityNoStack(null, player, effectSA, !mayChoseNewTargets);
+            PlaySpellAbility.playSpellAbilityNoStack(null, player, effectSA, !mayChoseNewTargets);
             return;
         }
         SpellAbilityAi sai = SpellApiToAi.Converter.get(effectSA.getApi());
@@ -94,7 +93,7 @@ public class PlayerControllerForTests extends PlayerController {
                 (effectSA.getHostCard().getName().equals("Near-Death Experience") && sai instanceof  GameWinAi) ||
                 (effectSA.getHostCard().getName().equals("Final Fortune") && sai instanceof GameLossAi)
         ) {//test_104_3f_if_a_player_would_win_and_lose_simultaneously_he_loses
-            HumanPlay.playSpellAbilityNoStack(null, player, effectSA, !mayChoseNewTargets);
+            PlaySpellAbility.playSpellAbilityNoStack(null, player, effectSA, !mayChoseNewTargets);
             return;
         }
         throw new IllegalStateException("Callers of this method currently assume that it performs extra functionality!");

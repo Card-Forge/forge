@@ -237,7 +237,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void playSpellAbilityNoStack(final SpellAbility effectSA, final boolean canSetupTargets) {
-        HumanPlay.playSpellAbilityNoStack(this, player, effectSA, !canSetupTargets);
+        PlaySpellAbility.playSpellAbilityNoStack(this, player, effectSA, !canSetupTargets);
     }
 
     @Override
@@ -2074,7 +2074,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public boolean playTrigger(final Card host, final WrappedAbility wrapperAbility, final boolean isMandatory) {
-        return HumanPlay.playSpellAbilityNoStack(this, player, wrapperAbility);
+        return PlaySpellAbility.playSpellAbilityNoStack(this, player, wrapperAbility);
     }
 
     @Override
@@ -3010,7 +3010,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                             // controlled by chosen player.
                             sa.setActivatingPlayer(p);
                             sa.setCastFromPlayEffect(true);
-                            HumanPlay.playSaWithoutPayingManaCost(PlayerControllerHuman.this, sa, true);
+                            PlaySpellAbility.playSaWithoutPayingManaCost(PlayerControllerHuman.this, sa, true);
                         }
                         // playSa could fire some triggers
                         getGame().getStack().addAllTriggeredAbilitiesToStack();

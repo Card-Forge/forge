@@ -560,6 +560,27 @@ public class PlaySpellAbility {
         return !manaInputCancelled;
     }
 
+    public static void playSaWithoutPayingManaCost(final PlayerController controller, SpellAbility sa, boolean mayChooseNewTargets) {
+        //FThreads.assertExecutedByEdt(false);
+        final Card source = sa.getHostCard();
+
+        source.setSplitStateToPlayAbility(sa);
+
+        final PlaySpellAbility req = new PlaySpellAbility(controller, sa);
+        req.playAbility(mayChooseNewTargets, true, false);
+    }
+
+    public static boolean playSpellAbilityNoStack(final PlayerController controller, final Player player, final SpellAbility sa) {
+        return playSpellAbilityNoStack(controller, player, sa, false);
+    }
+
+    public static boolean playSpellAbilityNoStack(final PlayerController controller, final Player player, final SpellAbility sa, boolean useOldTargets) {
+        sa.setActivatingPlayer(player);
+
+        final PlaySpellAbility req = new PlaySpellAbility(controller, sa);
+        return req.playAbility(!useOldTargets, false, true);
+    }
+
     public final boolean playAbility(final boolean mayChooseTargets, final boolean isFree, final boolean skipStack) {
         final Player player = ability.getActivatingPlayer();
         final Game game = player.getGame();
