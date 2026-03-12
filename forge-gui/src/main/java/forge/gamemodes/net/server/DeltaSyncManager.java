@@ -138,6 +138,7 @@ public class DeltaSyncManager implements IHasNetLog {
 
         // Update tracked objects
         sentObjectIds.retainAll(currentObjectIds);
+        sentObjectIds.addAll(currentObjectIds);
 
         if (!newObjects.isEmpty()) {
             netLog.info("[DeltaSync] New objects: {}, Deltas: {}", newObjects.size(), objectDeltas.size());
