@@ -345,6 +345,8 @@ public class EventScene extends MenuScene implements IAfterMatch {
                 editDeck.setVisible(false);
                 if (currentEvent.getDraft() != null) {
                     advance.setText("Enter Draft");
+                } else if (currentEvent.format == AdventureEventController.EventFormat.Sealed) {
+                    advance.setText("Create Deck");
                 } else {
                     advance.setText("Select Deck");
                 }
@@ -449,12 +451,17 @@ public class EventScene extends MenuScene implements IAfterMatch {
                 activate(entryDialog); //Entry fee pop-up
 
                 break;
-            case Entered: //Start draft or select deck
+            case Entered: //Start draft, sealed deck tournament, or select deck
                 //Show progress / wait indicator? Draft can take a while to generate
                 switch (currentEvent.format) {
                     case Draft:
                         DraftScene.instance().loadEvent(currentEvent);
                         Forge.switchScene(DraftScene.instance());
+                        break;
+                    case Sealed:
+                        currentEvent.generateEventSealedPool();
+                        DeckEditScene.getInstance().loadEvent(currentEvent);
+                        Forge.switchScene(DeckEditScene.getInstance());
                         break;
                     case Jumpstart:
                         loadMetaDraft();
