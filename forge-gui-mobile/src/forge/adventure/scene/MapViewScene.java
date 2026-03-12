@@ -166,18 +166,26 @@ public class MapViewScene extends UIScene {
     }
 
 
+    private void setOverlayButtonStates(int mode) {
+        String[] buttons = {"details", "events", "reputation", "names"};
+        // Each mode shows only the *next* button in the cycle
+        // mode 0 (none/names): show "details"
+        // mode 1 (details):    show "events"
+        // mode 2 (events):     show "reputation"
+        // mode 3 (reputation): show "names"
+        int activeIndex = mode; // the button to show (wraps: 0->details, 1->events, 2->reputation, 3->names)
+        for (int i = 0; i < buttons.length; i++) {
+            TextraButton btn = ui.findActor(buttons[i]);
+            if (btn != null) {
+                btn.setVisible(i == activeIndex);
+                btn.setDisabled(i != activeIndex);
+            }
+        }
+    }
+
     public void details() {
         lastOverlayMode = 1;
-        TextraButton detailsButton = ui.findActor("details");
-        if (detailsButton != null) {
-            detailsButton.setVisible(false);
-            detailsButton.setDisabled(true);
-        }
-        TextraButton eventButton = ui.findActor("events");
-        if (eventButton != null) {
-            eventButton.setVisible(true);
-            eventButton.setDisabled(false);
-        }
+        setOverlayButtonStates(1);
         List<PointOfInterest> allPois = Current.world().getAllPointOfInterest();
         for (PointOfInterest poi : allPois) {
             for (AdventureEventData data : AdventurePlayer.current().getEvents()) {
@@ -202,16 +210,7 @@ public class MapViewScene extends UIScene {
 
     public void events() {
         lastOverlayMode = 2;
-        TextraButton eventsButton = ui.findActor("events");
-        if (eventsButton != null) {
-            eventsButton.setVisible(false);
-            eventsButton.setDisabled(true);
-        }
-        TextraButton repButton = ui.findActor("reputation");
-        if (repButton != null) {
-            repButton.setVisible(true);
-            repButton.setDisabled(false);
-        }
+        setOverlayButtonStates(2);
         for (TypingLabel detail : details) {
             table.removeActor(detail);
         }
@@ -231,16 +230,7 @@ public class MapViewScene extends UIScene {
 
     public void reputation() {
         lastOverlayMode = 3;
-        TextraButton repButton = ui.findActor("reputation");
-        if (repButton != null) {
-            repButton.setVisible(false);
-            repButton.setDisabled(true);
-        }
-        TextraButton namesButton = ui.findActor("names");
-        if (namesButton != null) {
-            namesButton.setVisible(true);
-            namesButton.setDisabled(false);
-        }
+        setOverlayButtonStates(3);
         for (TypingLabel detail : details) {
             table.removeActor(detail);
         }
@@ -261,16 +251,7 @@ public class MapViewScene extends UIScene {
 
     public void names() {
         lastOverlayMode = 0;
-        TextraButton namesButton = ui.findActor("names");
-        if (namesButton != null) {
-            namesButton.setVisible(false);
-            namesButton.setDisabled(true);
-        }
-        TextraButton detailsButton = ui.findActor("details");
-        if (detailsButton != null) {
-            detailsButton.setVisible(true);
-            detailsButton.setDisabled(false);
-        }
+        setOverlayButtonStates(0);
         for (TypingLabel detail : details) {
             table.removeActor(detail);
         }
@@ -340,26 +321,7 @@ public class MapViewScene extends UIScene {
             label.skipToTheEnd();
         }
 
-        TextraButton detailsButton = ui.findActor("details");
-        if (detailsButton != null) {
-            detailsButton.setVisible(true);
-            detailsButton.setDisabled(false);
-        }
-        TextraButton eventButton = ui.findActor("events");
-        if (eventButton != null) {
-            eventButton.setVisible(false);
-            eventButton.setDisabled(true);
-        }
-        TextraButton repButton = ui.findActor("reputation");
-        if (repButton != null) {
-            repButton.setVisible(false);
-            repButton.setDisabled(true);
-        }
-        TextraButton namesButton = ui.findActor("names");
-        if (namesButton != null) {
-            namesButton.setVisible(false);
-            namesButton.setDisabled(true);
-        }
+        setOverlayButtonStates(0);
         TextraButton zoomInButton = ui.findActor("zoomIn");
         if (zoomInButton != null) {
             zoomInButton.setVisible(true);
@@ -377,8 +339,8 @@ public class MapViewScene extends UIScene {
         }
         // Restore last overlay mode
         if (lastOverlayMode == 1) details();
-        else if (lastOverlayMode == 2) { details(); events(); }
-        else if (lastOverlayMode == 3) { details(); events(); reputation(); }
+        else if (lastOverlayMode == 2) events();
+        else if (lastOverlayMode == 3) reputation();
 
         super.enter();
     }
