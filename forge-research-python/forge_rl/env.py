@@ -17,7 +17,7 @@ MAX_BATTLEFIELD = 20
 MAX_GRAVEYARD = 15
 MAX_EXILE = 10
 MAX_STACK = 10
-CARD_FEATURES = 16
+CARD_FEATURES = 19
 STACK_FEATURES = 8
 MAX_ACTIONS = 256
 NUM_DECISION_TYPES = 15
@@ -29,6 +29,7 @@ _CARD_FIELDS = [
     "tapped", "summoning_sick", "colors_bitmask", "damage",
     "loyalty", "controller_index", "attacking", "blocking",
     "counter_count", "keyword_count", "card_id", "owner_index",
+    "type_bitmask", "keyword_bitmask", "plus_one_counter_count",
 ]
 
 
@@ -235,6 +236,9 @@ class ForgeRlEnv(gym.Env):
                 card.keyword_count,
                 card.card_id,
                 card.owner_index,
+                card.type_bitmask,
+                card.keyword_bitmask,
+                card.plus_one_counter_count,
             ]
         return mat
 

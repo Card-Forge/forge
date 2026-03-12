@@ -17,7 +17,7 @@ import forge.research.proto.StackEntry;
  */
 public class ObservationConverter {
 
-    private static final int CARD_FEATURES = 16;
+    private static final int CARD_FEATURES = 19;
     private static final int STACK_FEATURES = 8;
     private static final int MAX_HAND = 10;
     private static final int MAX_BATTLEFIELD = 20;
@@ -74,6 +74,9 @@ public class ObservationConverter {
             mat[base + 13] = c.getKeywordCount();
             mat[base + 14] = c.getCardId();
             mat[base + 15] = c.getOwnerIndex();
+            mat[base + 16] = c.getTypeBitmask();
+            mat[base + 17] = c.getKeywordBitmask();
+            mat[base + 18] = c.getPlusOneCounterCount();
         }
         return mat;
     }

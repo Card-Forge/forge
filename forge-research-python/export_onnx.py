@@ -93,18 +93,19 @@ class AgentOnnxWrapper(nn.Module):
 
 def make_dummy_inputs(device: torch.device = torch.device("cpu")):
     """Create dummy inputs matching observation shapes (batch=1)."""
+    from train_ppo import CARD_FEATURES, STACK_FEATURES
     return (
         torch.zeros(1, 6, device=device),       # game_info
         torch.zeros(1, 11, device=device),      # agent_scalars
         torch.zeros(1, 11, device=device),      # opponent_scalars
-        torch.full((1, 10, 16), -1, dtype=torch.float32, device=device),  # agent_hand
-        torch.full((1, 20, 16), -1, dtype=torch.float32, device=device),  # agent_battlefield
-        torch.full((1, 20, 16), -1, dtype=torch.float32, device=device),  # opponent_battlefield
-        torch.full((1, 15, 16), -1, dtype=torch.float32, device=device),  # agent_graveyard
-        torch.full((1, 15, 16), -1, dtype=torch.float32, device=device),  # opponent_graveyard
-        torch.full((1, 10, 16), -1, dtype=torch.float32, device=device),  # agent_exile
-        torch.full((1, 10, 16), -1, dtype=torch.float32, device=device),  # opponent_exile
-        torch.full((1, 10, 8), -1, dtype=torch.float32, device=device),   # stack
+        torch.full((1, 10, CARD_FEATURES), -1, dtype=torch.float32, device=device),  # agent_hand
+        torch.full((1, 20, CARD_FEATURES), -1, dtype=torch.float32, device=device),  # agent_battlefield
+        torch.full((1, 20, CARD_FEATURES), -1, dtype=torch.float32, device=device),  # opponent_battlefield
+        torch.full((1, 15, CARD_FEATURES), -1, dtype=torch.float32, device=device),  # agent_graveyard
+        torch.full((1, 15, CARD_FEATURES), -1, dtype=torch.float32, device=device),  # opponent_graveyard
+        torch.full((1, 10, CARD_FEATURES), -1, dtype=torch.float32, device=device),  # agent_exile
+        torch.full((1, 10, CARD_FEATURES), -1, dtype=torch.float32, device=device),  # opponent_exile
+        torch.full((1, 10, STACK_FEATURES), -1, dtype=torch.float32, device=device), # stack
         torch.zeros(1, 15, device=device),      # decision_type
         torch.full((1, 256, 7), -1, dtype=torch.float32, device=device),  # action_features
     )

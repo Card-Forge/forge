@@ -6,6 +6,7 @@ import random
 import socket
 import subprocess
 import time
+from collections import Counter
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
@@ -100,7 +101,7 @@ CARD_ZONES = [
     "agent_graveyard", "opponent_graveyard",
     "agent_exile", "opponent_exile",
 ]
-CARD_FEATURES = 16
+CARD_FEATURES = 19
 STACK_FEATURES = 8
 
 
@@ -133,8 +134,9 @@ class Agent(nn.Module):
         )
 
         # Trunk: 64 (scalars) + 7*32 (cards) + 16 (stack) = 304
+        trunk_input = 64 + 7 * 32 + 16  # 304
         self.trunk = nn.Sequential(
-            layer_init(nn.Linear(304, 256)),
+            layer_init(nn.Linear(trunk_input, 256)),
             nn.ReLU(),
             layer_init(nn.Linear(256, 128)),
             nn.ReLU(),
@@ -230,6 +232,21 @@ OBS_KEYS = [
     "stack", "action_mask",
     "decision_type", "action_features",
 ]
+
+
+DECISION_TYPE_NAMES = [
+    "choose_spell_ability", "declare_attackers", "declare_blockers",
+    "choose_targets", "mulligan", "choose_cards", "confirm_action",
+    "choose_entity", "choose_color", "choose_number", "choose_type",
+    "choose_pile", "choose_mode", "order_cards", "ai_fallback",
+]
+DT_MULLIGAN = 4
+
+# Card feature indices (matching env.py _CARD_FIELDS order)
+CARD_IDX_NAME_ID = 0
+CARD_IDX_CMC = 3
+CARD_IDX_TYPE_BITMASK = 16
+TYPE_BIT_LAND = 1 << 1
 
 
 def obs_to_tensor(obs: dict[str, np.ndarray], device: torch.device) -> dict[str, torch.Tensor]:
@@ -374,25 +391,46 @@ class RewardShaping(gym.Wrapper):
       Applied per decision step (damage events happen at specific moments).
     - Board creature presence: +0.01 per creature per turn (not per decision step).
       Only counts creatures (cards with power >= 0, since lands/artifacts have power = -1).
+    - Mulligan penalty: -0.5 for keeping a hand with 0 lands or 5+ lands.
     - Terminal +1/-1 from the base env is preserved unchanged.
     """
 
     LIFE_SCALE = 0.05    # per opponent life point lost
     BOARD_SCALE = 0.01   # per creature per turn (applied once when turn changes)
+    MULL_PENALTY = -0.5  # penalty for keeping unplayable hands
 
     def __init__(self, env: gym.Env):
         super().__init__(env)
         self._prev_opp_life = 20
         self._prev_turn = 0
+        self._pending_mull_obs = None  # hand obs when facing a mulligan decision
 
     def reset(self, **kwargs):
         obs, info = self.env.reset(**kwargs)
         self._prev_opp_life = int(obs["opponent_scalars"][0])
         self._prev_turn = int(obs["game_info"][0])
+        # Check if first decision is a mulligan
+        if info.get("decision_type") == DT_MULLIGAN:
+            self._pending_mull_obs = obs
+        else:
+            self._pending_mull_obs = None
         return obs, info
 
     def step(self, action):
+        # Check if we're resolving a mulligan decision
+        mull_penalty = 0.0
+        if self._pending_mull_obs is not None:
+            if action == 0:  # Keep
+                hand = self._pending_mull_obs["agent_hand"]
+                occupied = hand[:, CARD_IDX_NAME_ID] > 0
+                is_land = occupied & ((hand[:, CARD_IDX_TYPE_BITMASK] & TYPE_BIT_LAND) != 0)
+                land_count = int(is_land.sum())
+                if land_count == 0 or land_count >= 5:
+                    mull_penalty = self.MULL_PENALTY
+            self._pending_mull_obs = None
+
         obs, reward, terminated, truncated, info = self.env.step(action)
+        reward += mull_penalty
 
         if not terminated:
             opp_life = int(obs["opponent_scalars"][0])
@@ -410,6 +448,12 @@ class RewardShaping(gym.Wrapper):
                 num_creatures = int((agent_bf[:, 1] >= 0).sum())
                 reward += self.BOARD_SCALE * num_creatures
                 self._prev_turn = current_turn
+
+            # Track if next decision is a mulligan (for next step)
+            if info.get("decision_type") == DT_MULLIGAN:
+                self._pending_mull_obs = obs
+            else:
+                self._pending_mull_obs = None
 
         return obs, reward, terminated, truncated, info
 
@@ -565,6 +609,10 @@ def main():
     win_count = 0
     recent_returns = []
 
+    # Decision type & mulligan tracking (reset each update)
+    decision_type_counts = Counter()
+    mulligan_events = []  # [(land_count, action_taken, mulligan_count), ...]
+
     print(f"Starting training: {num_updates} updates, {args.batch_size} batch size")
     start_time = time.time()
 
@@ -592,6 +640,20 @@ def main():
 
             actions[step] = action
             logprobs[step] = logprob
+
+            # Track decision types and mulligan quality
+            for env_i in range(args.num_envs):
+                dt = int(next_obs["decision_type"][env_i].argmax())
+                decision_type_counts[dt] += 1
+
+                if dt == DT_MULLIGAN:
+                    hand = next_obs["agent_hand"][env_i]  # (MAX_HAND, CARD_FEATURES)
+                    occupied = hand[:, CARD_IDX_NAME_ID] > 0
+                    is_land = occupied & ((hand[:, CARD_IDX_TYPE_BITMASK] & TYPE_BIT_LAND) != 0)
+                    land_count = int(is_land.sum())
+                    mulligan_count = int(next_obs["game_info"][env_i][4])
+                    action_taken = int(action[env_i].item())
+                    mulligan_events.append((land_count, action_taken, mulligan_count))
 
             # Step environment
             next_obs, reward, terminated, truncated, infos = envs.step(action.cpu().numpy())
@@ -704,6 +766,42 @@ def main():
         writer.add_scalar("losses/approx_kl", approx_kl.item(), global_step)
         writer.add_scalar("losses/clipfrac", np.mean(clipfracs), global_step)
         writer.add_scalar("losses/explained_variance", explained_var, global_step)
+
+        # Decision type frequency
+        total_decisions = sum(decision_type_counts.values()) or 1
+        for dt_idx, name in enumerate(DECISION_TYPE_NAMES):
+            count = decision_type_counts.get(dt_idx, 0)
+            writer.add_scalar(f"decisions/count_{name}", count, global_step)
+            writer.add_scalar(f"decisions/frac_{name}", count / total_decisions, global_step)
+
+        # Mulligan quality metrics
+        if mulligan_events:
+            actions_taken = [a for _, a, _ in mulligan_events]
+            mull_rate = np.mean(actions_taken)
+            writer.add_scalar("mulligan/overall_mull_rate", mull_rate, global_step)
+            writer.add_scalar("mulligan/num_decisions", len(mulligan_events), global_step)
+
+            # Keep stats
+            keeps = [l for l, a, _ in mulligan_events if a == 0]
+            if keeps:
+                writer.add_scalar("mulligan/avg_lands_when_keeping", np.mean(keeps), global_step)
+
+            # Mulligan rate by land count bucket
+            for lc in range(8):
+                events = [a for l, a, _ in mulligan_events if l == lc]
+                if events:
+                    writer.add_scalar(f"mulligan/mull_rate_{lc}_lands", np.mean(events), global_step)
+
+            # Key buckets: 0 lands and 6+ lands (should both be ~1.0)
+            zero_land = [a for l, a, _ in mulligan_events if l == 0]
+            if zero_land:
+                writer.add_scalar("mulligan/mull_rate_0_lands_highlight", np.mean(zero_land), global_step)
+            six_plus = [a for l, a, _ in mulligan_events if l >= 6]
+            if six_plus:
+                writer.add_scalar("mulligan/mull_rate_6plus_lands_highlight", np.mean(six_plus), global_step)
+
+        decision_type_counts.clear()
+        mulligan_events.clear()
 
         if update % 10 == 0 or update == 1:
             avg_return = np.mean(recent_returns[-100:]) if recent_returns else 0.0
