@@ -7,9 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Unit tests for delta sync components.
@@ -40,18 +38,13 @@ public class DeltaSyncUnitTest {
         props2.put(TrackableProperty.MaxHandSize, 7);
         deltas.put(2, props2);
 
-        Set<Integer> removed = new HashSet<>();
-        removed.add(10);
-        removed.add(20);
-
-        DeltaPacket packet = new DeltaPacket(1L, deltas, new HashMap<>(), removed, 0, false);
+        DeltaPacket packet = new DeltaPacket(1L, deltas, new HashMap<>(), 0, false);
 
         // Header: 8 (seq) + 4 (checksum) = 12 bytes
         // Delta key=1: 4 + 2*50 = 104 bytes
         // Delta key=2: 4 + 3*50 = 154 bytes
-        // Removed: 2 * 4 = 8 bytes
-        // Total: 278 bytes
-        int expectedSize = 12 + (4 + 2 * 50) + (4 + 3 * 50) + (2 * 4);
+        // Total: 270 bytes
+        int expectedSize = 12 + (4 + 2 * 50) + (4 + 3 * 50);
 
         Assert.assertEquals(packet.getApproximateSize(), expectedSize,
             "Delta size calculation should match expected value");
@@ -64,24 +57,24 @@ public class DeltaSyncUnitTest {
         deltaProps.put(TrackableProperty.Name, "Test");
         deltas.put(1, deltaProps);
 
-        Map<Integer, DeltaPacket.NewObjectData> newObjects = new HashMap<>();
+        Map<Integer, Map<TrackableProperty, Object>> newObjects = new HashMap<>();
         Map<TrackableProperty, Object> newProps1 = new HashMap<>();
         newProps1.put(TrackableProperty.Name, "Card1");
         newProps1.put(TrackableProperty.Power, 2);
         newProps1.put(TrackableProperty.Toughness, 3);
-        newObjects.put(100, new DeltaPacket.NewObjectData(100, 0, newProps1));
+        newObjects.put(100, newProps1);
 
         Map<TrackableProperty, Object> newProps2 = new HashMap<>();
         newProps2.put(TrackableProperty.Life, 20);
         newProps2.put(TrackableProperty.Toughness, 0);
         newProps2.put(TrackableProperty.MaxHandSize, 7);
         newProps2.put(TrackableProperty.IsAI, false);
-        newObjects.put(101, new DeltaPacket.NewObjectData(101, 1, newProps2));
+        newObjects.put(101, newProps2);
 
-        DeltaPacket packet = new DeltaPacket(1L, deltas, newObjects, new HashSet<>(), 0, false);
+        DeltaPacket packet = new DeltaPacket(1L, deltas, newObjects, 0, false);
 
-        // Header: 12, Delta: (4+1*50)=54, New 100: (4+4+3*50)=158, New 101: (4+4+4*50)=208
-        int expectedSize = 12 + 54 + 158 + 208;
+        // Header: 12, Delta: (4+1*50)=54, New 100: (4+3*50)=154, New 101: (4+4*50)=204
+        int expectedSize = 12 + 54 + 154 + 204;
 
         Assert.assertEquals(packet.getApproximateSize(), expectedSize,
             "Delta packet with new objects should match expected size");
@@ -89,7 +82,7 @@ public class DeltaSyncUnitTest {
 
     @Test
     public void testEmptyDeltaPacketSize() {
-        DeltaPacket packet = new DeltaPacket(1L, new HashMap<>(), new HashMap<>(), new HashSet<>(), 0, false);
+        DeltaPacket packet = new DeltaPacket(1L, new HashMap<>(), new HashMap<>(), 0, false);
         int size = packet.getApproximateSize();
 
         // Empty packet should just have header: 8 + 4 = 12 bytes

@@ -8,10 +8,8 @@ import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.AbstractGuiGame;
 import forge.gamemodes.net.DeltaPacket.CardStateData;
-import forge.gamemodes.net.DeltaPacket.NewObjectData;
 import forge.gamemodes.net.server.DeltaSyncManager;
 import forge.interfaces.IGameController;
-import forge.player.PlayerZoneUpdate;
 import forge.trackable.Tracker;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
@@ -31,9 +29,6 @@ import java.util.*;
  * AbstractGuiGame to remain focused on core local game functionality.
  */
 public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetLog {
-
-    // Track zone changes during delta application for UI refresh
-    private final Map<PlayerView, Set<ZoneType>> pendingZoneUpdates = new HashMap<>();
 
     @Override
     public void setGameView(final GameView gameView0) {
@@ -67,24 +62,24 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
         int appliedCount = 0;
         int skippedCount = 0;
 
-        // Clear pending zone updates before processing
-        pendingZoneUpdates.clear();
-
         // STEP 1: Create new objects first (so deltas can reference them)
-        Map<Integer, NewObjectData> newObjects = packet.getNewObjects();
+        Map<Integer, Map<TrackableProperty, Object>> newObjects = packet.getNewObjects();
         List<Map.Entry<TrackableObject, Map<TrackableProperty, Object>>> pendingPropertyApplications = new ArrayList<>();
 
         if (!newObjects.isEmpty()) {
             // Phase 1a: Create all objects first (without applying properties)
-            for (NewObjectData newObj : newObjects.values()) {
+            for (Map.Entry<Integer, Map<TrackableProperty, Object>> newEntry : newObjects.entrySet()) {
+                int deltaKey = newEntry.getKey();
+                int objectType = DeltaSyncManager.getTypeFromDeltaKey(deltaKey);
+                int objectId = DeltaSyncManager.getIdFromDeltaKey(deltaKey);
                 try {
-                    TrackableObject created = createObjectOnly(newObj, tracker);
+                    TrackableObject created = createObjectOnly(objectType, objectId, tracker);
                     if (created != null) {
-                        pendingPropertyApplications.add(new AbstractMap.SimpleEntry<>(created, newObj.getProperties()));
+                        pendingPropertyApplications.add(new AbstractMap.SimpleEntry<>(created, newEntry.getValue()));
                         newObjectCount++;
                     }
                 } catch (Exception e) {
-                    netLog.error("[DeltaSync] Error creating new object {}", newObj.getObjectId(), e);
+                    netLog.error("[DeltaSync] Error creating new object type={} id={}", objectType, objectId, e);
                 }
             }
             netLog.info("[DeltaSync] Created {} new objects (phase 1a)", newObjectCount);
@@ -128,33 +123,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
                         typeName, actualObjectId, String.format("0x%08X", deltaKey));
                 skippedCount++;
             }
-        }
-
-        // STEP 3: Handle removed objects
-        if (!packet.getRemovedObjectIds().isEmpty()) {
-            netLog.trace("[DeltaSync] Packet contains {} removed objects", packet.getRemovedObjectIds().size());
-        }
-
-        // STEP 4: Refresh UI for any changed zones
-        if (!pendingZoneUpdates.isEmpty()) {
-            List<PlayerZoneUpdate> zoneUpdates = new ArrayList<>();
-            for (Map.Entry<PlayerView, Set<ZoneType>> entry : pendingZoneUpdates.entrySet()) {
-                PlayerView player = entry.getKey();
-                Set<ZoneType> zones = entry.getValue();
-                if (!zones.isEmpty()) {
-                    PlayerZoneUpdate update = new PlayerZoneUpdate(player, null);
-                    for (ZoneType zone : zones) {
-                        update.addZone(zone);
-                    }
-                    zoneUpdates.add(update);
-                    netLog.trace("[DeltaSync] UI refresh: player={}, zones={}, hash={}",
-                            player.getId(), zones, System.identityHashCode(player));
-                }
-            }
-            if (!zoneUpdates.isEmpty()) {
-                updateZones(zoneUpdates);
-            }
-            pendingZoneUpdates.clear();
         }
 
         // Log summary with timing
@@ -213,21 +181,17 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
                             obj.getId(), ((CardView) obj).getZone(), resolved);
                 }
 
-                // Track zone changes for UI refresh
-                if (obj instanceof PlayerView playerView) {
+                // Fix per-card Zone property when zone collections change.
+                // Delta sync sends zone collection changes (e.g. Hand=[id1,id2])
+                // but does NOT always send per-card Zone property updates. Without this,
+                // CardView.getZone() returns the stale zone from initial creation (Library),
+                // causing canBeShownTo() to fail and cards to render as hidden/empty.
+                if (obj instanceof PlayerView) {
                     ZoneType changedZone = getZoneTypeForProperty(prop);
-                    if (changedZone != null) {
-                        trackZoneChange(playerView, changedZone);
-                        // Update each CardView's Zone property to match the zone it's now in.
-                        // The server's delta sync sends zone collection changes (e.g. Hand=[id1,id2])
-                        // but does NOT always send per-card Zone property updates. Without this,
-                        // CardView.getZone() returns the stale zone from initial creation (Library),
-                        // causing canBeShownTo() to fail and cards to render as hidden/empty.
-                        if (resolved instanceof TrackableCollection<?> coll) {
-                            for (Object item : coll) {
-                                if (item instanceof CardView cv && cv.getZone() != changedZone) {
-                                    cv.set(TrackableProperty.Zone, changedZone);
-                                }
+                    if (changedZone != null && resolved instanceof TrackableCollection<?> coll) {
+                        for (Object item : coll) {
+                            if (item instanceof CardView cv && cv.getZone() != changedZone) {
+                                cv.set(TrackableProperty.Zone, changedZone);
                             }
                         }
                     }
@@ -303,7 +267,13 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
 
         // CardStateData is handled by the caller before reaching here
 
-        // Everything else passes through unchanged
+        // Warn if this is a type we'd expect to handle but don't
+        if (type == TrackableTypes.StackItemViewType || type == TrackableTypes.CombatViewType
+                || type == TrackableTypes.GenericMapType) {
+            netLog.warn("[DeltaSync] Unhandled property type {} for prop {}, passing through raw value", type, prop);
+        }
+
+        // Everything else passes through unchanged (primitives, enums, strings, etc.)
         return value;
     }
 
@@ -407,9 +377,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
         }
     }
 
-    private TrackableObject createObjectOnly(NewObjectData data, Tracker tracker) {
-        int objectId = data.getObjectId();
-        int objectType = data.getObjectType();
+    private TrackableObject createObjectOnly(int objectType, int objectId, Tracker tracker) {
         String typeName = getObjectTypeName(objectType);
 
         // Check if object of the SAME TYPE already exists
@@ -494,15 +462,12 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
             case Battlefield: return ZoneType.Battlefield;
             case Exile: return ZoneType.Exile;
             case Command: return ZoneType.Command;
+            case Commander: return ZoneType.Command;
             case Flashback: return ZoneType.Flashback;
             case Ante: return ZoneType.Ante;
             case Sideboard: return ZoneType.Sideboard;
             default: return null;
         }
-    }
-
-    private void trackZoneChange(PlayerView player, ZoneType zone) {
-        pendingZoneUpdates.computeIfAbsent(player, k -> EnumSet.noneOf(ZoneType.class)).add(zone);
     }
 
     private CardStateView createCardStateView(CardView cardView, CardStateName state) {

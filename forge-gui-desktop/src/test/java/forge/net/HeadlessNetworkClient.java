@@ -233,11 +233,10 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
         // Use the packet's own size estimation
         totalDeltaBytes.addAndGet(packet.getApproximateSize());
 
-        netLog.info("Delta packet #{}: deltas={}, new={}, removed={}, estimatedBytes={}",
+        netLog.info("Delta packet #{}: deltas={}, new={}, estimatedBytes={}",
                 packet.getSequenceNumber(),
                 packet.getObjectDeltas() != null ? packet.getObjectDeltas().size() : 0,
                 packet.getNewObjects() != null ? packet.getNewObjects().size() : 0,
-                packet.getRemovedObjectIds() != null ? packet.getRemovedObjectIds().size() : 0,
                 packet.getApproximateSize());
     }
 

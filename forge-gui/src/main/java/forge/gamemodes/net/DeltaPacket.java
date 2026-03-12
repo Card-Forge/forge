@@ -16,23 +16,21 @@ import forge.trackable.TrackableTypes.TrackableType;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Packet containing delta updates for TrackableObjects.
- * Contains only the changed properties for each object, plus a list of removed object IDs.
+ * Contains changed properties for existing objects and full property maps for new objects.
  * Properties are sent as Map<TrackableProperty, Object> with ID substitution for object references.
+ * Object type and ID are encoded in the composite delta key (upper 4 bits = type, lower 28 bits = ID).
  * Standard Java serialization handles the maps natively via Netty's ObjectEncoder.
  */
 public final class DeltaPacket implements NetEvent {
-    private static final long serialVersionUID = 3L;
+    private static final long serialVersionUID = 4L;
 
     private final long sequenceNumber;
     private final Map<Integer, Map<TrackableProperty, Object>> objectDeltas; // Changed properties only
-    private final Map<Integer, NewObjectData> newObjects; // Full object data for newly created objects
-    private final Set<Integer> removedObjectIds;
+    private final Map<Integer, Map<TrackableProperty, Object>> newObjects; // Full property maps for new objects
     private final int checksum; // For periodic validation
     private final boolean checksumIncluded;
 
@@ -83,50 +81,19 @@ public final class DeltaPacket implements NetEvent {
     }
 
     /**
-     * Data for a newly created object that needs to be sent in full.
-     */
-    public static class NewObjectData implements Serializable {
-        private static final long serialVersionUID = 2L;
-
-        private final int objectId;
-        private final int objectType;
-        private final Map<TrackableProperty, Object> properties; // ALL properties
-
-        public NewObjectData(int objectId, int objectType, Map<TrackableProperty, Object> properties) {
-            this.objectId = objectId;
-            this.objectType = objectType;
-            this.properties = properties;
-        }
-
-        public int getObjectId() {
-            return objectId;
-        }
-
-        public int getObjectType() {
-            return objectType;
-        }
-
-        public Map<TrackableProperty, Object> getProperties() {
-            return properties;
-        }
-    }
-
-    /**
-     * Create a new delta packet with new objects and optional checksum.
+     * Create a new delta packet with optional checksum.
      * @param sequenceNumber monotonically increasing sequence number
      * @param objectDeltas map of composite delta key to property map (changed properties only)
-     * @param newObjects map of composite delta key to full object data (for new objects)
-     * @param removedObjectIds set of composite delta keys that have been removed
+     * @param newObjects map of composite delta key to full property map (for new objects)
      * @param checksum checksum of the full state for validation
      * @param checksumIncluded true if this packet includes a checksum for validation
      */
     public DeltaPacket(long sequenceNumber, Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
-                       Map<Integer, NewObjectData> newObjects, Set<Integer> removedObjectIds,
+                       Map<Integer, Map<TrackableProperty, Object>> newObjects,
                        int checksum, boolean checksumIncluded) {
         this.sequenceNumber = sequenceNumber;
         this.objectDeltas = objectDeltas != null ? new HashMap<>(objectDeltas) : new HashMap<>();
         this.newObjects = newObjects != null ? new HashMap<>(newObjects) : new HashMap<>();
-        this.removedObjectIds = removedObjectIds != null ? new HashSet<>(removedObjectIds) : new HashSet<>();
         this.checksum = checksum;
         this.checksumIncluded = checksumIncluded;
     }
@@ -144,59 +111,41 @@ public final class DeltaPacket implements NetEvent {
     }
 
     /**
-     * Get the set of removed object IDs.
-     * @return unmodifiable set of removed composite delta keys
+     * Get the new objects map (full property maps for newly created objects).
+     * Type and ID are encoded in the composite delta key.
+     * @return unmodifiable map of composite delta key to property map
      */
-    public Set<Integer> getRemovedObjectIds() {
-        return Collections.unmodifiableSet(removedObjectIds);
-    }
-
-    /**
-     * Get the new objects map (full object data for newly created objects).
-     * @return unmodifiable map of composite delta key to NewObjectData
-     */
-    public Map<Integer, NewObjectData> getNewObjects() {
+    public Map<Integer, Map<TrackableProperty, Object>> getNewObjects() {
         return Collections.unmodifiableMap(newObjects);
     }
 
-    /**
-     * Get the checksum for state validation.
-     * @return checksum value, or 0 if not included in this packet
-     */
     public int getChecksum() {
         return checksum;
     }
 
-    /**
-     * Check if this packet contains a checksum for validation.
-     * @return true if checksum is included
-     */
     public boolean hasChecksum() {
         return checksumIncluded;
     }
 
     /**
      * Check if this packet is empty (no changes).
-     * @return true if there are no deltas, no new objects, and no removals
+     * @return true if there are no deltas and no new objects
      */
     public boolean isEmpty() {
-        return objectDeltas.isEmpty() && newObjects.isEmpty() && removedObjectIds.isEmpty();
+        return objectDeltas.isEmpty() && newObjects.isEmpty();
     }
 
     /**
      * Get the approximate size of this packet in bytes.
-     * Estimating Map size is less precise than counting bytes, but still useful for monitoring.
-     * @return approximate size in bytes
      */
     public int getApproximateSize() {
         int size = 8 + 4; // sequenceNumber + checksum
         for (Map<TrackableProperty, Object> delta : objectDeltas.values()) {
             size += 4 + delta.size() * 50; // key + ~50 bytes per property estimate
         }
-        for (NewObjectData newObj : newObjects.values()) {
-            size += 4 + 4 + newObj.getProperties().size() * 50; // objectId + objectType + properties
+        for (Map<TrackableProperty, Object> props : newObjects.values()) {
+            size += 4 + props.size() * 50; // key + properties
         }
-        size += removedObjectIds.size() * 4; // removed IDs
         return size;
     }
 
@@ -207,7 +156,7 @@ public final class DeltaPacket implements NetEvent {
 
     @Override
     public String toString() {
-        return String.format("DeltaPacket[seq=%d, newObjects=%d, deltas=%d, removed=%d, size~%d bytes]",
-                sequenceNumber, newObjects.size(), objectDeltas.size(), removedObjectIds.size(), getApproximateSize());
+        return String.format("DeltaPacket[seq=%d, newObjects=%d, deltas=%d, size~%d bytes]",
+                sequenceNumber, newObjects.size(), objectDeltas.size(), getApproximateSize());
     }
 }

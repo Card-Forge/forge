@@ -9,7 +9,7 @@ import forge.game.spellability.StackItemView;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.DeltaPacket.CardStateData;
 import forge.gamemodes.net.NetworkChecksumUtil;
-import forge.gamemodes.net.DeltaPacket.NewObjectData;
+
 import forge.gamemodes.net.IHasNetLog;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
@@ -115,7 +115,7 @@ public class DeltaSyncManager implements IHasNetLog {
         final int snapshotPhaseOrdinal = gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1;
 
         Map<Integer, Map<TrackableProperty, Object>> objectDeltas = new HashMap<>();
-        Map<Integer, NewObjectData> newObjects = new HashMap<>();
+        Map<Integer, Map<TrackableProperty, Object>> newObjects = new HashMap<>();
         Set<Integer> currentObjectIds = new HashSet<>();
 
         // Collect changes from GameView itself
@@ -149,13 +149,8 @@ public class DeltaSyncManager implements IHasNetLog {
             collectObjectDelta(gameView.getCombat(), objectDeltas, newObjects, currentObjectIds);
         }
 
-        // Detect removed objects — unregister consumer from them
-        Set<Integer> trackedKeysBefore = new HashSet<>(sentObjectIds);
-        trackedKeysBefore.removeAll(currentObjectIds);
-        Set<Integer> removedObjectIds = trackedKeysBefore;
-
         // Update tracked objects
-        sentObjectIds.removeAll(removedObjectIds);
+        sentObjectIds.retainAll(currentObjectIds);
         sentObjectIds.addAll(currentObjectIds);
 
         // Checksum computation
@@ -171,12 +166,10 @@ public class DeltaSyncManager implements IHasNetLog {
 
         long seq = sequenceNumber.incrementAndGet();
 
-        DeltaPacket packet = new DeltaPacket(seq, objectDeltas, newObjects,
-                removedObjectIds, checksum, includeChecksum);
+        DeltaPacket packet = new DeltaPacket(seq, objectDeltas, newObjects, checksum, includeChecksum);
 
         if (!newObjects.isEmpty()) {
-            netLog.info("[DeltaSync] New objects: {}, Deltas: {}, Removed: {}",
-                    newObjects.size(), objectDeltas.size(), removedObjectIds.size());
+            netLog.info("[DeltaSync] New objects: {}, Deltas: {}", newObjects.size(), objectDeltas.size());
         }
 
         return packet;
@@ -213,7 +206,7 @@ public class DeltaSyncManager implements IHasNetLog {
 
     private void collectObjectDelta(TrackableObject obj,
                                     Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
-                                    Map<Integer, NewObjectData> newObjects,
+                                    Map<Integer, Map<TrackableProperty, Object>> newObjects,
                                     Set<Integer> currentObjectIds) {
         if (obj == null) {
             return;
@@ -230,7 +223,7 @@ public class DeltaSyncManager implements IHasNetLog {
 
             Map<TrackableProperty, Object> allProps = buildFullPropertyMap(obj);
             if (!allProps.isEmpty()) {
-                newObjects.put(deltaKey, new NewObjectData(obj.getId(), objType, allProps));
+                newObjects.put(deltaKey, allProps);
                 netLog.trace("[DeltaSync] New object: type={} id={}, {} props",
                         objType, obj.getId(), allProps.size());
             }
@@ -251,7 +244,7 @@ public class DeltaSyncManager implements IHasNetLog {
 
     private void collectPlayerDeltas(PlayerView player,
                                      Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
-                                     Map<Integer, NewObjectData> newObjects,
+                                     Map<Integer, Map<TrackableProperty, Object>> newObjects,
                                      Set<Integer> currentObjectIds) {
         if (player == null) {
             return;
@@ -265,7 +258,7 @@ public class DeltaSyncManager implements IHasNetLog {
 
     private void collectCardsFromZone(Iterable<CardView> cards,
                                       Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
-                                      Map<Integer, NewObjectData> newObjects,
+                                      Map<Integer, Map<TrackableProperty, Object>> newObjects,
                                       Set<Integer> currentObjectIds) {
         if (cards == null) {
             return;
@@ -277,7 +270,7 @@ public class DeltaSyncManager implements IHasNetLog {
 
     private void collectCardDelta(CardView card,
                                   Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
-                                  Map<Integer, NewObjectData> newObjects,
+                                  Map<Integer, Map<TrackableProperty, Object>> newObjects,
                                   Set<Integer> currentObjectIds) {
         if (card == null) {
             return;
