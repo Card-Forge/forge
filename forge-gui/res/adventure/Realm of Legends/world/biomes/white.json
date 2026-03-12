@@ -26,6 +26,8 @@
 		"DarkGras"
 	],
 	"enemies": [
+		"Adeline",
+		"Danitha",
 		"Leinore",
 		"Wyleth",
 		"Aminatou",
@@ -33,7 +35,8 @@
 		"Narci",
 		"Obuun",
 		"Roon",
-		"Nemesis"
+		"Nemesis",
+		"Grand Nemesis"
 	],
 	"pointsOfInterest": [
 		"White Castle",
@@ -50,7 +53,9 @@
 		"Dusk Legion Fortress",
 		"Elesh Norn's Basilica",
 		"Heavenly Sky",
+		"Kenrith's Court",
 		"Leonin Den",
+		"Lorehold Classroom",
 		"Omenport",
 		"Orzhov Basilica",
 		"Spara's Headquarters",

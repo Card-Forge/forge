@@ -324,7 +324,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public void updateFlashbackForView() {
-        view.updateFlashbackForPlayer(this);
+        view.updateFlashback(this);
+        game.fireEvent(new GameEventZone(ZoneType.Flashback, this, EventValueChangeType.Added, null));
     }
 
     //get single opponent for player if only one, otherwise returns null
@@ -2851,7 +2852,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         return commanderCast.getOrDefault(commander, 0);
     }
     public void incCommanderCast(Card commander) {
-        commanderCast.put(commander, getCommanderCast(commander) + 1);
+        commanderCast.merge(commander, 1, Integer::sum);
         getView().updateCommanderCast(this, commander);
         getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
     }
@@ -3940,6 +3941,20 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public void setExpentThisTurn(int v) {
         expentThisTurn = v;
+    }
+
+    public void addExpentThisTurn(int v, SpellAbility sp) {
+        if (v <= 0) {
+            return;
+        }
+        int startingMana = expentThisTurn;
+        int totalMana = expentThisTurn += v;
+        for (int i = startingMana + 1; i <= totalMana; i++) {
+            Map<AbilityKey, Object> expendParams = AbilityKey.mapFromPlayer(this);
+            expendParams.put(AbilityKey.SpellAbility, sp);
+            expendParams.put(AbilityKey.Amount, i);
+            game.getTriggerHandler().runTrigger(TriggerType.ManaExpend, expendParams, true);
+        }
     }
 
     public void visitAttractions(int light) {

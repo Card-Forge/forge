@@ -48,7 +48,7 @@
 
 'Welcome, {var=player_name}! We've been expecting you!' One of the demons says with a smile.
 
-'We have an offer for you. 20,000 gold. One hundred mana shards. Three dozen rare spells. And two unique pieces of magical equipment! A fortune fit for someone as powerful and magnificent as you, {var=player_name}!'&quot;,
+'We have an offer for you. 20,000 gold. One hundred mana shards. Two dozen rare spells. A FORBIDDEN spell. And two unique pieces of magical equipment! A fortune fit for someone as powerful and magnificent as you, {var=player_name}!'&quot;,
        &quot;options&quot;: [
         {
         &quot;name&quot;: &quot;I don't deal with demons. Not interested.&quot;,
@@ -77,12 +77,13 @@
                   {&quot;type&quot;: &quot;shards&quot;, &quot;count&quot;: 100},
                   {&quot;type&quot;: &quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Scroll of Griselbrand&quot;},
                   {&quot;type&quot;: &quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Amulet of Agony&quot;},
+                  {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Demonic Tutor&quot;, &quot;editions&quot;: [&quot;VMA&quot;],
                   {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Griselbrand&quot;,&quot;sourceDeck&quot;: &quot;decks/rewards/Select_SLs.dck&quot;},
                   {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Kothophed, Soul Hoarder&quot;,&quot;sourceDeck&quot;: &quot;decks/rewards/Select_SLs.dck&quot;},
                   {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Demonlord Belzenlok&quot;,&quot;sourceDeck&quot;: &quot;decks/rewards/Select_SLs.dck&quot;},
                   {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Razaketh, the Foulblooded&quot;,&quot;sourceDeck&quot;: &quot;decks/rewards/Select_SLs.dck&quot;},
-                  {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 12, &quot;subTypes&quot;: [&quot;Demon&quot;], &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ] },
-                  {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 20, &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ] }
+                  {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 8, &quot;subTypes&quot;: [&quot;Demon&quot;], &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ] },
+                  {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 12, &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ] }
                   ]},
                 {&quot;deleteMapObject&quot;:103},
                 {&quot;deleteMapObject&quot;:86},

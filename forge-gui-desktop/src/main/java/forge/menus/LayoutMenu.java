@@ -30,6 +30,8 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.match.VMatchUI;
+import forge.screens.match.views.VHand;
+import forge.view.arcane.FloatingZone;
 import forge.toolbox.FButton;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FScrollPane;
@@ -64,6 +66,10 @@ public final class LayoutMenu {
             menu.add(getMenu_ViewOptions());
         }
         menu.add(getMenu_ThemeOptions());
+        if (currentScreen != null && currentScreen.isMatchScreen()) {
+            menu.addSeparator();
+            menu.add(getMenu_HandOptions());
+        }
         menu.addSeparator();
         menu.add(getMenuItem_FullScreen());
         menu.add(getMenuItem_SetWindowSize());
@@ -77,6 +83,18 @@ public final class LayoutMenu {
         final Localizer localizer = Localizer.getInstance();
         final JMenu menu = new JMenu(localizer.getMessage("lblView"));
         menu.add(getMenuItem_ShowTabs());
+
+        final JCheckBoxMenuItem newCountItem = createStayOpenCheckBox(
+                localizer.getMessage("lblNewCardCountInTab"));
+        newCountItem.setState(prefs.getPrefBoolean(FPref.UI_ZONE_TAB_NEW_COUNT));
+        newCountItem.addActionListener(e -> {
+            prefs.setPref(FPref.UI_ZONE_TAB_NEW_COUNT, newCountItem.getState());
+            prefs.save();
+            FloatingZone.refreshAll();
+            refreshHandCards();
+        });
+        menu.add(newCountItem);
+
         if (currentScreen != null && currentScreen.isMatchScreen()) {
             menu.add(getMenuItem_ShowBackgroundImage());
 
@@ -152,6 +170,110 @@ public final class LayoutMenu {
             }
             FView.SINGLETON_INSTANCE.getPnlInsets().repaint();
         };
+    }
+
+    private static JMenu getMenu_HandOptions() {
+        final Localizer localizer = Localizer.getInstance();
+        final JMenu menu = new JMenu(localizer.getMessage("lblHandPanel"));
+
+        // Order Hand by CMC and Color
+        final JCheckBoxMenuItem orderHandItem = createStayOpenCheckBox(localizer.getMessage("nlOrderHand"));
+        orderHandItem.setState(prefs.getPrefBoolean(FPref.UI_ORDER_HAND));
+        orderHandItem.addActionListener(e -> {
+            prefs.setPref(FPref.UI_ORDER_HAND, orderHandItem.getState());
+            prefs.save();
+            refreshHandCards();
+            refreshHandLayout();
+        });
+        menu.add(orderHandItem);
+
+        // Prevent Card Overlap
+        final JCheckBoxMenuItem noOverlapItem = createStayOpenCheckBox(localizer.getMessage("lblPreventCardOverlap"));
+        noOverlapItem.setState(prefs.getPrefBoolean(FPref.UI_HAND_NO_OVERLAP));
+        noOverlapItem.addActionListener(e -> {
+            prefs.setPref(FPref.UI_HAND_NO_OVERLAP, noOverlapItem.getState());
+            prefs.save();
+            refreshHandLayout();
+        });
+        menu.add(noOverlapItem);
+
+        // Limit Cards Per Row — checkbox + slider
+        int currentMax = prefs.getPrefInt(FPref.UI_HAND_MAX_CARDS_PER_ROW);
+        final boolean limitEnabled = currentMax > 0;
+
+        final java.awt.Color bg = javax.swing.UIManager.getColor("PopupMenu.background");
+        final JPanel sliderPanel = new JPanel(new java.awt.BorderLayout());
+        sliderPanel.setBackground(bg);
+
+        final JCheckBoxMenuItem limitItem = createStayOpenCheckBox(localizer.getMessage("lblLimitCardsPerRow"));
+        limitItem.setState(limitEnabled);
+
+        final FSkin.SkinnedSlider slider = new FSkin.SkinnedSlider(javax.swing.SwingConstants.HORIZONTAL, 4, 12,
+                limitEnabled ? currentMax : 8);
+        slider.setMajorTickSpacing(1);
+        slider.setPaintTicks(true);
+        slider.setPaintLabels(true);
+        slider.setSnapToTicks(true);
+        slider.setBackground(bg);
+        slider.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        slider.setFont(FSkin.getFont());
+        slider.setEnabled(limitEnabled);
+
+        limitItem.addActionListener(e -> {
+            final boolean on = limitItem.getState();
+            slider.setEnabled(on);
+            if (on) {
+                prefs.setPref(FPref.UI_HAND_MAX_CARDS_PER_ROW, String.valueOf(slider.getValue()));
+            } else {
+                prefs.setPref(FPref.UI_HAND_MAX_CARDS_PER_ROW, "0");
+            }
+            prefs.save();
+            refreshHandLayout();
+        });
+
+        slider.addChangeListener(e -> {
+            if (limitItem.getState()) {
+                prefs.setPref(FPref.UI_HAND_MAX_CARDS_PER_ROW, String.valueOf(slider.getValue()));
+                prefs.save();
+                refreshHandLayout();
+            }
+        });
+
+        sliderPanel.add(slider, java.awt.BorderLayout.CENTER);
+
+        menu.add(limitItem);
+        menu.add(sliderPanel);
+
+        return menu;
+    }
+
+    private static void refreshHandCards() {
+        final FScreen screen = Singletons.getControl().getCurrentScreen();
+        if (screen != null && screen.isMatchScreen()) {
+            final IVTopLevelUI view = screen.getView();
+            if (view instanceof VMatchUI vmu) {
+                for (final VHand h : vmu.getControl().getHandViews()) {
+                    h.getLayoutControl().updateHand();
+                }
+            }
+        }
+    }
+
+    private static void refreshHandLayout() {
+        final FScreen screen = Singletons.getControl().getCurrentScreen();
+        if (screen != null && screen.isMatchScreen()) {
+            final IVTopLevelUI view = screen.getView();
+            if (view instanceof VMatchUI vmu) {
+                int maxCards = prefs.getPrefInt(FPref.UI_HAND_MAX_CARDS_PER_ROW);
+                final boolean noOverlap = prefs.getPrefBoolean(FPref.UI_HAND_NO_OVERLAP);
+                for (final VHand h : vmu.getControl().getHandViews()) {
+                    h.getHandArea().setMaxCardsPerRow(maxCards);
+                    h.getHandArea().setNoOverlap(noOverlap);
+                    h.getHandArea().doLayout();
+                    h.getHandArea().repaint();
+                }
+            }
+        }
     }
 
     /** Creates a JCheckBoxMenuItem that stays open on click. */
