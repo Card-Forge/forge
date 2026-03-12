@@ -26,4 +26,5 @@ public class SettingData {
     public boolean disableCrackedItems;
     public boolean excludeAlchemyVariants;
     public boolean generateLDADecks;
+    public boolean bindEquipmentLoadoutsToDecks;
 }
