@@ -149,7 +149,12 @@ public class DeltaSyncManager implements IHasNetLog {
 
         // Update tracked objects
         sentObjectIds.retainAll(currentObjectIds);
-        sentObjectIds.addAll(currentObjectIds);
+
+        if (!newObjects.isEmpty()) {
+            netLog.info("[DeltaSync] New objects: {}, Deltas: {}", newObjects.size(), objectDeltas.size());
+        }
+
+        long seq = sequenceNumber.incrementAndGet();
 
         // Checksum computation
         packetsSinceLastChecksum++;
@@ -158,19 +163,11 @@ public class DeltaSyncManager implements IHasNetLog {
         if (includeChecksum) {
             checksum = NetworkChecksumUtil.computeStateChecksum(snapshotTurn, snapshotPhaseOrdinal, gameView.getPlayers());
             packetsSinceLastChecksum = 0;
-            logChecksumDetailsWithSnapshot(gameView, checksum, sequenceNumber.get() + 1,
+            logChecksumDetailsWithSnapshot(gameView, checksum, seq,
                     snapshotTurn, snapshotPhaseOrdinal);
         }
 
-        long seq = sequenceNumber.incrementAndGet();
-
-        DeltaPacket packet = new DeltaPacket(seq, objectDeltas, newObjects, checksum, includeChecksum);
-
-        if (!newObjects.isEmpty()) {
-            netLog.info("[DeltaSync] New objects: {}, Deltas: {}", newObjects.size(), objectDeltas.size());
-        }
-
-        return packet;
+        return new DeltaPacket(seq, objectDeltas, newObjects, checksum, includeChecksum);
     }
 
     // ==================== Object type and key management ====================
