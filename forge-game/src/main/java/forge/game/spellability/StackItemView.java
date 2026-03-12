@@ -97,6 +97,10 @@ public class StackItemView extends TrackableObject implements IHasCardView {
         set(TrackableProperty.OptionalCosts, OptionalCostString);
     }
 
+    public boolean isTrigger() {
+        return getSourceTrigger() > 0;
+    }
+
     public int getSourceTrigger() {
         return get(TrackableProperty.SourceTrigger);
     }

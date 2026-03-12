@@ -1,84 +1,84 @@
 [metadata]
 Name=The Archimandrite
 [Commander]
-1 The Archimandrite|brc
+1 The Archimandrite|BRC
 [Main]
-1 Adarkar Wastes|dmu
-1 Arcane Signet|mic
-1 Azorius Charm|ima
-1 Beacon of Immortality|5dn
-1 Blacksmith's Skill|mh2
-1 Bond of Discipline|war
-1 Boros Charm|gtc
-1 Boros Garrison|dmc
-1 talisman of creativity|tdc
-1 talisman of conviction|tdc
-1 Brightflame|rav
-1 Command Tower|woc
-1 Congregate|usg
-1 elsha, threefold master|tdc
-1 Counterspell|tmp
-1 Decanter of Endless Water|clb
-1 Delusions of Mediocrity|ulg
-1 Denry Klin, Editor in Chief|ncc
-1 Distortion Strike|roe
-1 Dragon-Style Twins|ktk
-1 Elusive Spellfist|dtk
-1 Embercleave|eld
-1 Enlightened Ascetic|ori
-1 Evolving Wilds|ori
-1 Exotic Orchard|woc
-1 Flying Crane Technique|ktk
-1 Githzerai Monk|clb
-1 Grand Arbiter Augustin IV|pj21
-1 Homura, Human Ascendant|sok
-1 Illusions of Grandeur|ice
-1 Imperial Recruiter|a25
-1 Irregular Cohort|mh1
-8 Island|one
-1 Jeskai Ascendancy|2x2
-1 Kabira Crossroads|zen
-1 Leap|sth
-1 Loran of the Third Path|bro
-1 Mantis Rider|ktk
-1 Mistfire Adept|frf
-1 Monastery Mentor|2x2
-7 Mountain|one
-1 Mystic Monastery|ktk
-1 Narset, Enlightened Master|ktk
-1 Negate|dmu
-1 Noble Purpose|mmq
-1 Ojutai Exemplars|dtk
-1 Open into Wonder|akh
-1 Path of Ancestry|cmm
-8 Plains|one
-1 Pristine Talisman|brr
-1 Reliquary Tower|c21
-1 Rest for the Weary|wwk
-1 Rhox Faithmender|m13
-1 Righteous Cause|cmd
-1 Rune-Tail, Kitsune Ascendant|sok
-1 Serra Ascendant|ima
-1 Shadow Rift|tmp
-1 Shivan Reef|dmu
-1 Shu Yun, the Silent Tempest|frf
-1 Skywise Teachings|dtk
-1 Sol Ring|woc
-1 Soltari Monk|tmp
-1 Stratus Dancer|c19
-1 Student of Ojutai|dtk
-1 Suppression Ray|mh3
-1 Swiftfoot Boots|brc
-1 Swiftwater Cliffs|ktk
-1 Taigam, Ojutai Master|c17
-1 Terramorphic Expanse|c19
-1 Tranquil Cove|ktk
-1 True Conviction|ss2
-1 Union of the Third Path|bro
-1 Valiant Changeling|mh1
-1 Venser's Journal|c21
-1 Whirler Rogue|ori
-1 Whispersilk Cloak|c16
-1 Will, Scion of Peace|woe
-1 Wind-Scarred Crag|c17
-1 Zedruu the Greathearted|c16
+1 Adarkar Wastes|DMU
+1 Arcane Signet|MIC
+1 Azorius Charm|IMA
+1 Beacon of Immortality|5DN
+1 Blacksmith's Skill|MH2
+1 Bond of Discipline|WAR
+1 Boros Charm|GTC
+1 Boros Garrison|DMC
+1 Talisman of Creativity|TDC
+1 Talisman of Conviction|TDC
+1 Brightflame|RAV
+1 Command Tower|WOC
+1 Congregate|USG
+1 Elsha, Threefold Master|TDC
+1 Counterspell|TMP
+1 Decanter of Endless Water|CLB
+1 Delusions of Mediocrity|ULG
+1 Denry Klin, Editor in Chief|NCC
+1 Distortion Strike|ROE
+1 Dragon-Style Twins|KTK
+1 Elusive Spellfist|DTK
+1 Embercleave|ELD
+1 Enlightened Ascetic|ORI
+1 Evolving Wilds|ORI
+1 Exotic Orchard|WOC
+1 Flying Crane Technique|KTK
+1 Githzerai Monk|CLB
+1 Grand Arbiter Augustin IV|PJ21
+1 Homura, Human Ascendant|SOK
+1 Illusions of Grandeur|ICE
+1 Imperial Recruiter|A25
+1 Irregular Cohort|MH1
+8 Island|ONE
+1 Jeskai Ascendancy|2X2
+1 Kabira Crossroads|ZEN
+1 Leap|STH
+1 Loran of the Third Path|BRO
+1 Mantis Rider|KTK
+1 Mistfire Adept|FRF
+1 Monastery Mentor|2X2
+7 Mountain|ONE
+1 Mystic Monastery|KTK
+1 Narset, Enlightened Master|KTK
+1 Negate|DMU
+1 Noble Purpose|MMQ
+1 Ojutai Exemplars|DTK
+1 Open into Wonder|AKH
+1 Path of Ancestry|CMM
+8 Plains|ONE
+1 Pristine Talisman|BRR
+1 Reliquary Tower|C21
+1 Rest for the Weary|WWK
+1 Rhox Faithmender|M13
+1 Righteous Cause|CMD
+1 Rune-Tail, Kitsune Ascendant|SOK
+1 Serra Ascendant|IMA
+1 Shadow Rift|TMP
+1 Shivan Reef|DMU
+1 Shu Yun, the Silent Tempest|FRF
+1 Skywise Teachings|DTK
+1 Sol Ring|WOC
+1 Soltari Monk|TMP
+1 Stratus Dancer|C19
+1 Student of Ojutai|DTK
+1 Suppression Ray|MH3
+1 Swiftfoot Boots|BRC
+1 Swiftwater Cliffs|KTK
+1 Taigam, Ojutai Master|C17
+1 Terramorphic Expanse|C19
+1 Tranquil Cove|KTK
+1 True Conviction|SS2
+1 Union of the Third Path|BRO
+1 Valiant Changeling|MH1
+1 Venser's Journal|C21
+1 Whirler Rogue|ORI
+1 Whispersilk Cloak|C16
+1 Will, Scion of Peace|WOE
+1 Wind-Scarred Crag|C17
+1 Zedruu the Greathearted|C16

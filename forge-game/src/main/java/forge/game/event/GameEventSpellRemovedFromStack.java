@@ -1,8 +1,8 @@
 package forge.game.event;
 
-import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityView;
 
-public record GameEventSpellRemovedFromStack(SpellAbility sa) implements GameEvent {
+public record GameEventSpellRemovedFromStack(SpellAbilityView sa) implements GameEvent {
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {

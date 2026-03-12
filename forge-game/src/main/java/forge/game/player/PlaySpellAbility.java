@@ -594,7 +594,7 @@ public class PlaySpellAbility {
 
             if (ability.getApi() == ApiType.Charm) {
                 if (ability.isAnnouncing("X")) {
-                    needX = ability.getPayCosts().hasXInAnyCostPart();
+                    needX = ability.costHasX();
                     // CR 601.4
                     if (!announceValuesLikeX()) {
                         game.clearTopLibsCast(ability);

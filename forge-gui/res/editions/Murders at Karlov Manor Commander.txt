@@ -380,8 +380,8 @@ ScryfallCode=MKC
 13 lightning_rager @Svetlin Velinov
 14 r_3_3_ogre @Paul Bonner
 15 g_2_2_cat @Raoul Vitale
-17 g_1_1_insect @Martina Pilcerova
-18 g_1_1_insect_flying_deathtouch @Martina Pilcerova
+16 g_1_1_insect @Martina Pilcerova
+17 g_1_1_insect_flying_deathtouch @Martina Pilcerova
 18 g_4_4_rhino_warrior @Zoltan Boros
 19 g_1_1_saproling @Sam White
 20 g_1_1_snake @Lars Grant-West

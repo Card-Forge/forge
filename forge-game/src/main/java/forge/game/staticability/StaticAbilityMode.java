@@ -194,6 +194,11 @@ public enum StaticAbilityMode {
     TurnReversed,
     PhaseReversed,
 
+    // StaticAbilityAttackRequirement
+    AttackRequirement,
+
+    // StaticAbilityCountersRemain
+    CountersRemain,
     ;
 
     public static StaticAbilityMode smartValueOf(final String value) {

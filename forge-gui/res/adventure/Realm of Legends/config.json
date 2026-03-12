@@ -18,7 +18,6 @@
     "Magus of the Moon",
     "Harbinger of the Seas",
     "Ruination",
-    "Iona Shield of Emeria",
     "Limited Resources",
     "Constant Mists",
     "Karakas",
@@ -42,24 +41,20 @@
     "Constant Mists",
     "Land Equilibrium",
     "Storage Matrix",
-    "Lutri the Spellchaser",
+    "Lutri, the Spellchaser",
     "Gleemox",
     "Drake Stone",
     "Wrenn and One",
     "Under-Construction Skyscraper",
-    "Temur Elevator",
     "Slumbering Waterways",
-    "Omenpath to Naya",
     "The Heron Moon",
-    "Gobland",
     "Fetching Garden",
     "Mox Poison",
     "Wisedrafter's Will",
+    "Paliano, the High City",
     "New Master of Arms",
     "Halving Season",
     "Questing Cosplayer",
-    "Teferi Druid of Argoth",
-    "Anax and Cymede & Kynaios and Tiro",
     "Call from the Grave",
     "Mise",
     "Black Lotus",
@@ -119,14 +114,15 @@
     "Vampiric Tutor",
     "Wishclaw Talisman",
     "The One Ring",
-    "Emrakul the Aeons Torn",
+    "Emrakul, the Aeons Torn",
     "Ad Nauseum",
     "Bazaar of Baghdad",
     "Library of Alexandria",
     "Yawgmoth's Bargain",
     "Fabled Path of Searo Point",
-    "the legend of arena",
-    "the cinematic phoenix",
+    "the Legend of Arena",
+    "the Cinematic Phoenix",
+    "The Rebellious Intelligence",
     "Aura Shards",
     "Worldly Tutor",
     "Enlightened Tutor",
@@ -225,7 +221,11 @@
       "startItems": [
         "Challenge Coin",
         "Challenge Coin",
-        "Challenge Coin"      
+        "Challenge Coin",
+        "Steel Boots",
+        "Lotus Petal",
+        "Echo Shield",
+        "Steel Armor"    
       ]
     }
     ,{
@@ -250,7 +250,9 @@
       },
    "startItems": [
         "Challenge Coin",
-        "Challenge Coin"
+        "Challenge Coin",
+        "Steel Boots",
+        "Lotus Petal" 
       ]
     },{
       "name": "Hard",

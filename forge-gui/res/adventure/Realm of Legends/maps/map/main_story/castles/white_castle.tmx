@@ -92,7 +92,7 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Crumbling Necropolis&quot;, &quot;Arcane Melee&quot;, &quot;Mirari&quot;]}"/>
     <property name="enemy" value="Jeleva"/>
     <property name="pursueRange" type="int" value="30"/>
     <property name="threatRange" type="int" value="0"/>
@@ -108,7 +108,8 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Opulent Palace&quot;, &quot;Reaper of the Wilds&quot;, &quot;Tam, Mindful First-Year&quot;
+]}</property>
     <property name="enemy" value="Damia"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
@@ -123,7 +124,8 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Tangled Islet&quot;, &quot;Geothermal Bog&quot;, &quot;Fireglass Mentor&quot;, &quot;Biomancer's Familiar&quot;
+]}</property>
     <property name="enemy" value="Thrasios and Vial Smasher"/>
     <property name="pursueRange" type="int" value="30"/>
     <property name="threatRange" type="int" value="0"/>
@@ -139,7 +141,8 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Savage Lands&quot;, &quot;Soul of Windgrace&quot;, &quot;Valakut Exploration&quot;
+]}</property>
     <property name="enemy" value="Lord Windgrace"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
@@ -154,7 +157,8 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Frontier Bivouac&quot;, &quot;Hexing Squelcher|ECL&quot;, &quot;Rattleclaw Mystic&quot;, &quot;Aven Courier&quot;
+]}</property>
     <property name="enemy" value="Animar"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>

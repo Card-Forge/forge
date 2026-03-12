@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="45" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="16" nextobjectid="150">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="45" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="16" nextobjectid="151">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -60,12 +60,13 @@
     <property name="waypoints" value="120,121"/>
    </properties>
   </object>
-  <object id="100" template="../../obj/enemy.tx" x="182.005" y="187.221">
+  <object id="100" template="../../obj/enemy.tx" x="178.149" y="186.67">
    <properties>
     <property name="displayNameOverride" value="The Mother Slime"/>
-    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Slime Boss Effect&quot;]
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;The Mother Slime&quot;]
 }</property>
     <property name="enemy" value="Ooze Boss"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
@@ -157,5 +158,17 @@
   <object id="147" template="../../obj/collision.tx" x="-40.8715" y="202.352" width="40.6127" height="267.092"/>
   <object id="148" template="../../obj/collision.tx" x="430.61" y="186.615" width="48.684" height="28.1816"/>
   <object id="149" template="../../obj/collision.tx" x="589.077" y="146.797" width="87.4262" height="28.1816"/>
+  <object id="150" template="../../obj/enemy.tx" x="178.72" y="186.982">
+   <properties>
+    <property name="displayNameOverride" value="The Mother Slime"/>
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;The Mother Slime&quot;],&quot;startBattleWithCard&quot;: [ &quot;Ravenous Slime&quot;]
+}</property>
+    <property name="enemy" value="Ooze Boss"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

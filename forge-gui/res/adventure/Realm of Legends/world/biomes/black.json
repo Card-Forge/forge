@@ -35,6 +35,17 @@
 		"Anowon",
 		"Chainer",
 		"Coram",
+		"Braids",
+		"Endrek",
+		"Gorex",
+		"Grismold",
+		"Nefarox",
+		"Ratadrabik",
+		"Skullbriar",
+		"Syrix",
+		"The Raven Man",
+		"Vish Kal",
+		"Yuriko",
 		"Nemesis"
 	],
 	"pointsOfInterest": [
@@ -44,6 +55,7 @@
 		"Swamp Town Identity",
 		"Swamp Town",
         "Swamp Town Tribal",
+		"Ancient Jet Hill",
 		"Black Tower of Worship",
 		"Castle Sengir",
 		"Castle Voldaren",
@@ -54,9 +66,13 @@
 		"Haunted Fengraf",
 		"Hidden Dimir Base",
 		"Infernal Scriptorium",
+		"Mycotyrant's Mire",
+		"Old Phyrexia Holdout",
+		"Rat Cave",
+		"Sheoldred's Stronghold",
 		"Sphinx of Riddles Black",
-		"Sultai War Camp"
-
+		"Sultai War Camp",
+		"Xander's Lounge"
 	],
 	"structures": [
 		{

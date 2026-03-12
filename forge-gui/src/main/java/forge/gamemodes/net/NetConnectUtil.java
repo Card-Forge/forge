@@ -86,7 +86,9 @@ public class NetConnectUtil {
             public void send(final NetEvent event) {
                 if (event instanceof MessageEvent) {
                     final MessageEvent message = (MessageEvent) event;
-                    chatInterface.addMessage(new ChatMessage(message.getSource(), message.getMessage()));
+                    if (server.handleCommand(message.getMessage())) {
+                        return;
+                    }
                     server.broadcast(event);
                 }
             }

@@ -3,8 +3,8 @@ size: 480,1008
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none      
-Assassin'sShoes
-  xy: 0, 160
+CutthroatSkirt
+  xy: 80, 464
   size: 16, 16
 GhostRune
   xy: 368, 64
@@ -27,6 +27,57 @@ Jade
 BlueDiamond
   xy: 112, 640
   size: 16, 16
+BowlofAncientBlood
+  xy: 256, 960
+  size: 16, 16
+ArguelsBloodyHelm
+  xy: 112, 336
+  size: 16, 16
+WhiteCartouche
+  xy: 320, 176
+  size: 16, 16
+WardingStatueTorso
+  xy: 32, 576
+  size: 16, 16
+WardingStatueSkirt
+  xy: 16, 576
+  size: 16, 16
+WardingStatueArms
+  xy: 48, 576
+  size: 16, 16
+MaptotheHostages
+  xy: 224, 848
+  size: 16, 16
+TheLuckiestClover
+  xy: 112, 608
+  size: 16, 16
+CheeseofBees
+  xy: 80, 768
+  size: 16, 16
+OneThousandChickens
+  xy: 144, 624
+  size: 16, 16
+BlueCartouche
+  xy: 320, 192
+  size: 16, 16
+EverflowingWateringCan
+  xy: 192, 976
+  size: 16, 16
+BlackCartouche
+  xy: 320, 224
+  size: 16, 16
+TomeofTemporalRepair
+  xy: 112, 688
+  size: 16, 16
+RedCartouche
+  xy: 320, 240
+  size: 16, 16
+GreenCartouche
+  xy: 320, 208
+  size: 16, 16
+VictoryStandard
+  xy: 96, 592
+  size: 16, 16
 GenerousArmor
   xy: 224, 112
   size: 16, 16
@@ -34,13 +85,31 @@ GenerousPants
   xy: 16, 480
   size: 16, 16
 GenerousNecklace
-  xy: 32, 848
+  xy: 144, 800
   size: 16, 16
 GenerousRing
   xy: 128, 912
   size: 16, 16
 GenerousIngot
   xy: 224, 944
+  size: 16, 16
+SpikedRipsaw
+  xy: 304, 736
+  size: 16, 16
+SkyclaveMaul
+  xy: 224, 432
+  size: 16, 16
+Giant'sBracer
+  xy: 16, 272
+  size: 16, 16
+PoetsQuill
+  xy: 192, 768
+  size: 16, 16
+DireFlail
+  xy: 160, 368
+  size: 16, 16
+ChitinousClub
+  xy: 304, 400
   size: 16, 16
 PureSoul
   xy: 176, 800
@@ -81,6 +150,39 @@ MedalVictory
 GhostfireBlade
   xy: 208, 720
   size: 16, 16
+CloakoftheWastes
+  xy: 368, 0
+  size: 16, 16
+OutpostOutfit
+  xy: 288, 80
+  size: 16, 16
+SeafloorShirt
+  xy: 384, 32
+  size: 16, 16
+BogDwellerLeather
+  xy: 304, 96
+  size: 16, 16
+HighlandCloak
+  xy: 64, 0
+  size: 16, 16
+TimberlandShawl
+  xy: 368, 48
+  size: 16, 16
+TokenofBounty
+  xy: 304, 816
+  size: 16, 16
+TokenofInvestigation
+  xy: 448, 64
+  size: 16, 16
+TokenofBlood
+  xy: 80, 528
+  size: 16, 16
+TokenofViolence
+  xy: 240, 944
+  size: 16, 16
+TokenofExploration
+  xy: 288, 896
+  size: 16, 16
 InfernalArmor
   xy: 160, 64
   size: 16, 16
@@ -90,8 +192,8 @@ ThunderLasso
 FleshwrightChaps
   xy: 128, 432
   size: 16, 16
-GisasFavoriteShovel
-  xy: 112, 720
+ThirstingAxe
+  xy: 192, 240
   size: 16, 16
 UtopiaAnklet
   xy: 0, 960
@@ -126,7 +228,7 @@ BrimstoneBoots
 Peddler'sShoes
   xy: 16, 144
   size: 16, 16
-PocketThopter
+SkySkiffTurnkey
   xy: 160, 816
   size: 16, 16
 BloodfireBoots
@@ -156,8 +258,8 @@ DeathsporeShoes
 ObscuraShoes
   xy: 32, 128
   size: 16, 16
-SegovianSandals
-  xy: 16, 112
+AngelicRing
+  xy: 96, 896
   size: 16, 16
 SteelBoots
   xy: 48, 160
@@ -180,7 +282,7 @@ GixianGraft
 ArtificialSliverband
   xy: 64, 976
   size: 16, 16
-Miser'sShoes
+SinuousShoes
   xy: 64, 112
   size: 16, 16
 Caravaneer'sGreaves
@@ -213,8 +315,14 @@ Lookout'sHarness
 BearhideBreeches
   xy: 96, 448
   size: 16, 16
-Purist'sPants
-  xy: 96, 464
+VindicatorGreaves
+  xy: 112, 480
+  size: 16, 16
+MadHat
+  xy: 112, 320
+  size: 16, 16
+FaerieAnklet
+  xy: 32, 960
   size: 16, 16
 TimebugBoots
   xy: 96, 96
@@ -264,7 +372,7 @@ AcidicSliverband
 AnkletoftheEnd
   xy: 128, 928
   size: 16, 16
-HeapSocks
+ScarecrowSocks
   xy: 128, 96
   size: 16, 16
 SpectralSliverband
@@ -456,8 +564,11 @@ TomeofBinding
 VolatilePrayerbook
   xy: 128, 672
   size: 16, 16
-VileSongbook
-  xy: 128, 688
+AmuletofCompleation
+  xy: 128, 816
+  size: 16, 16
+OminousAmulet
+  xy: 32, 848
   size: 16, 16
 PrayerbookofFortunes
   xy: 128, 704
@@ -675,8 +786,8 @@ PetrifiedHead
 BespokeGauntlet
   xy: 80, 288
   size: 16, 16
-DragonBlood
-  xy: 80, 528
+RingofDragonBlood
+  xy: 144,896
   size: 16, 16
 RingofThune
   xy: 80, 912
@@ -708,8 +819,8 @@ SirenSongLyre
 SpidersilkGlove
   xy: 144, 256
   size: 16, 16
-Wolfhunter'sQuiver
-  xy: 144, 560
+FullMoonNecklace
+  xy: 48, 864
   size: 16, 16
 StriderReins
   xy: 144, 576
@@ -768,7 +879,7 @@ ForbiddenRobes
 CabalArmor
   xy: 256, 96
   size: 16, 16
-ArmorofIfnit
+ArmorofIfnir
   xy: 192, 96
   size: 16, 16
 CrystallineArmor

@@ -1,10 +1,15 @@
 package forge.game.event;
 
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.util.Lang;
 import forge.util.TextUtil;
 
-public record GameEventShuffle(Player player) implements GameEvent {
+public record GameEventShuffle(PlayerView player) implements GameEvent {
+
+    public GameEventShuffle(Player player) {
+        this(PlayerView.get(player));
+    }
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {

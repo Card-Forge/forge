@@ -5,7 +5,7 @@ Difficulty=hard
 Description=Mono G Primal Surge deck
 Icon=Suika Ibuki.jpg
 Deck Type=constructed
-[main]
+[Main]
 23 Forest
 1 Gaea's Cradle
 1 Coat of Arms
@@ -20,4 +20,4 @@ Deck Type=constructed
 1 Primal Rage
 4 Rites of Flourishing
 4 Primal Surge
-[sideboard]
+[Sideboard]

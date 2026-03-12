@@ -26,6 +26,7 @@ import com.google.common.collect.Lists;
 
 import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
+import forge.game.GameLogVerbosity;
 import forge.game.GameView;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -68,6 +69,11 @@ public class VLog implements IVDoc<CLog> {
     public VLog(final CLog controller) {
         this.controller = controller;
         gameLog = new GameLogPanel();
+        gameLog.setOnCardHover(card -> {
+            if (!card.isFaceDown()) {
+                controller.getMatchUI().setCard(card);
+            }
+        });
     }
 
     //========== Overridden methods
@@ -134,6 +140,21 @@ public class VLog implements IVDoc<CLog> {
         }
     }
 
+    /**
+     * Re-renders all log entries using the current verbosity preference.
+     * Called when the user changes the log verbosity mid-match.
+     */
+    public void refreshDisplay() {
+        final GameView model = controller.getMatchUI().getGameView();
+        if (model == null) {
+            return;
+        }
+        displayedLogEntries.clear();
+        gameLog.reset();
+        displayNewGameLogEntries(model);
+        refreshLayout();
+    }
+
     private boolean isGameLogConsoleVisible() {
         return parentCell != null && parentCell.getSelected().equals(this);
     }
@@ -173,10 +194,16 @@ public class VLog implements IVDoc<CLog> {
     }
 
     private List<GameLogEntry> getNewGameLogEntries(final GameView model) {
-        final String logEntryType = FModel.getPreferences().getPref(FPref.DEV_LOG_ENTRY_TYPE);
-        final GameLogEntryType logVerbosityFilter = GameLogEntryType.valueOf(logEntryType);
+        final String verbosityPref = FModel.getPreferences().getPref(FPref.DEV_LOG_ENTRY_TYPE);
+        final GameLogVerbosity verbosity = GameLogVerbosity.fromString(verbosityPref);
         if (model != null && model.getGameLog() != null) {
-            final List<GameLogEntry> logEntries = model.getGameLog().getLogEntries(logVerbosityFilter);
+            final List<GameLogEntry> logEntries;
+            if (verbosity == GameLogVerbosity.CUSTOM) {
+                logEntries = model.getGameLog().getLogEntriesForTypes(
+                        FModel.getPreferences().getCustomLogTypes());
+            } else {
+                logEntries = model.getGameLog().getLogEntriesForVerbosity(verbosity);
+            }
             // Set subtraction - remove all log entries from new list which are already displayed.
             logEntries.removeAll(this.displayedLogEntries);
             return logEntries;
@@ -186,8 +213,8 @@ public class VLog implements IVDoc<CLog> {
 
     private void addNewLogEntriesToJPanel(final List<GameLogEntry> newLogEntries) {
         for (final GameLogEntry logEntry : newLogEntries) {
-            gameLog.setTextFont(getJTextAreaFont(logEntry.type));
-            gameLog.addLogEntry(logEntry.message);
+            gameLog.setTextFont(getJTextAreaFont(logEntry.type()));
+            gameLog.addLogEntry(logEntry.message(), logEntry.sourceCard(), controller.getMatchUI().getLocalPlayers());
             this.displayedLogEntries.add(logEntry);
         }
     }
