@@ -164,7 +164,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
 
         // Use delta sync
         DeltaPacket delta = deltaSyncManager.collectDeltas(gameView);
-        if (delta != null && !delta.isEmpty()) {
+        if (!delta.isEmpty()) {
             if (flush) {
                 send(ProtocolMethod.applyDelta, delta);
             } else {

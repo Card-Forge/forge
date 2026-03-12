@@ -109,10 +109,6 @@ public class DeltaSyncManager implements IHasNetLog {
      * Existing objects only send properties dirty for THIS consumer.
      */
     public DeltaPacket collectDeltas(GameView gameView) {
-        if (gameView == null) {
-            return null;
-        }
-
         // Capture checksum-relevant values at the start to avoid race conditions
         final int snapshotTurn = gameView.getTurn();
         final int snapshotPhaseOrdinal = gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1;
@@ -135,15 +131,8 @@ public class DeltaSyncManager implements IHasNetLog {
         if (gameView.getStack() != null) {
             for (StackItemView stackItem : gameView.getStack()) {
                 collectObjectDelta(stackItem, objectDeltas, newObjects, currentObjectIds);
-                CardView sourceCard = stackItem.getSourceCard();
-                if (sourceCard != null) {
-                    collectCardDelta(sourceCard, objectDeltas, newObjects, currentObjectIds);
-                }
-                if (stackItem.getTargetCards() != null) {
-                    for (CardView target : stackItem.getTargetCards()) {
-                        collectCardDelta(target, objectDeltas, newObjects, currentObjectIds);
-                    }
-                }
+                collectObjectDelta(stackItem.getSourceCard(), objectDeltas, newObjects, currentObjectIds);
+                collectCardsFromZone(stackItem.getTargetCards(), objectDeltas, newObjects, currentObjectIds);
             }
         }
 
@@ -209,6 +198,12 @@ public class DeltaSyncManager implements IHasNetLog {
 
         int objType = DeltaPacket.typeTagFor(obj);
         int deltaKey = makeDeltaKey(objType, obj.getId());
+
+        // Skip cards already visited to prevent duplicate processing
+        if (currentObjectIds.contains(deltaKey)) {
+            return;
+        }
+
         currentObjectIds.add(deltaKey);
 
         if (!sentObjectIds.contains(deltaKey)) {
@@ -259,25 +254,8 @@ public class DeltaSyncManager implements IHasNetLog {
             return;
         }
         for (CardView card : cards) {
-            collectCardDelta(card, objectDeltas, newObjects, currentObjectIds);
+            collectObjectDelta(card, objectDeltas, newObjects, currentObjectIds);
         }
-    }
-
-    private void collectCardDelta(CardView card,
-                                  Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
-                                  Map<Integer, Map<TrackableProperty, Object>> newObjects,
-                                  Set<Integer> currentObjectIds) {
-        if (card == null) {
-            return;
-        }
-
-        // Skip cards already visited to prevent duplicate processing
-        int deltaKey = makeDeltaKey(DeltaPacket.TYPE_CARD_VIEW, card.getId());
-        if (currentObjectIds.contains(deltaKey)) {
-            return;
-        }
-
-        collectObjectDelta(card, objectDeltas, newObjects, currentObjectIds);
     }
 
     private static void forEachZone(PlayerView player,
@@ -342,9 +320,7 @@ public class DeltaSyncManager implements IHasNetLog {
         TrackableType<?> type = prop.getType();
 
         // Object references → Integer ID
-        if (type == TrackableTypes.CardViewType)
-            return ((TrackableObject) value).getId();
-        if (type == TrackableTypes.PlayerViewType)
+        if (type == TrackableTypes.CardViewType || type == TrackableTypes.PlayerViewType)
             return ((TrackableObject) value).getId();
 
         // Polymorphic reference → int[]{typeMarker, id}
@@ -390,11 +366,6 @@ public class DeltaSyncManager implements IHasNetLog {
             for (TrackableObject obj : coll) ids.add(obj == null ? -1 : obj.getId());
             return ids;
         }
-
-        // Already Serializable — pass through
-        if (type == TrackableTypes.CardTypeViewType || type == TrackableTypes.IPaperCardType
-                || type == TrackableTypes.KeywordCollectionViewType)
-            return value;
 
         return value;
     }
