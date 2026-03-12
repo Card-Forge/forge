@@ -14,6 +14,7 @@ import forge.util.collect.FCollection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class CharmAi extends SpellAbilityAi {
     @Override
@@ -78,6 +79,22 @@ public class CharmAi extends SpellAbilityAi {
 
         // store the choices so they'll get reused
         sa.setChosenList(chosenList);
+
+        if (chosenList.size() > 1) {
+            // Each mode must target a different player.
+            long uniquePlayerTargets = chosenList.stream()
+                    .filter(ab -> "True".equals(ab.getParam("TargetUnique")))
+                    .map(ab -> ab.getParam("ValidTgts")).filter(Objects::nonNull)
+                    .filter(tgt -> "Player".equals(tgt) || "Opponent".equals(tgt)).count();
+            if (uniquePlayerTargets == num) {
+                Player nextPlayer = ai;
+                for (AbilitySub choosen : chosenList) {
+                    choosen.resetTargets();
+                    choosen.getTargets().add(nextPlayer);
+                    nextPlayer = nextPlayer.getGame().getNextPlayerAfter(nextPlayer);
+                }
+            }
+        }
 
         if (choiceForOpp) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
