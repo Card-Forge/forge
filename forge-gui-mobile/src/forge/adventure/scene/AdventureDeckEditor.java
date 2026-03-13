@@ -672,15 +672,6 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         currentEvent.isDraftComplete = true;
 
-        if (currentEvent.draftedDeck == null) {
-            currentEvent.draftedDeck = new Deck();
-            CardPool pool = currentEvent.registeredDeck.get(DeckSection.Sideboard);
-            if (pool != null) {
-                currentEvent.draftedDeck.getOrCreate(DeckSection.Sideboard).addAll(pool);
-                currentEvent.draftedDeck.setName("Sealed Pool Cards");
-            }
-        }
-
         if (currentEvent.eventStatus == AdventureEventController.EventStatus.Entered) {
             currentEvent.eventStatus = AdventureEventController.EventStatus.Ready;
         }
