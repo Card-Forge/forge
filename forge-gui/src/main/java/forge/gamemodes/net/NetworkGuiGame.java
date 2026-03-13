@@ -131,11 +131,8 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
         // Forward bundled events AFTER delta is applied — guarantees
         // getGameView() state is current when event handlers read it.
         if (packet.hasEvents()) {
-            Tracker tracker2 = getGameView().getTracker();
-            List<GameEvent> unwrapped = GameEventProxy.unwrapAll(packet.getProxiedEvents(), tracker2);
-            for (GameEvent event : unwrapped) {
-                handleGameEvent(event);
-            }
+            List<GameEvent> unwrapped = GameEventProxy.unwrapAll(packet.getProxiedEvents(), tracker);
+            handleGameEvents(unwrapped);
         }
 
         if (packet.hasChecksum()) {
