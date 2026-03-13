@@ -102,14 +102,8 @@ public class TrackableTypes {
                         T newObj = newCollection.get(i);
                         if (newObj != null) {
                             T existingObj = from.getTracker().getObj(itemType, newObj.getId());
-                            if (existingObj != null) {  //fix cards with alternate state/ manifest/ morph/ adventure etc...
-                                if (prop.getType() != TrackableTypes.CardViewCollectionType &&
-                                        prop.getType() != TrackableTypes.StackItemViewListType) {
-                                    //if object exists already, update its changed properties
-                                    existingObj.copyChangedProps(newObj);
-                                }
-                                // Always swap deserialized instance with tracker instance
-                                // so the collection uses the same objects that delta sync updates
+                            if (existingObj != null) {
+                                existingObj.copyChangedProps(newObj);
                                 newCollection.replace(i, existingObj);
                             } else {
                                 //if object is new, cache in object lookup
@@ -192,6 +186,21 @@ public class TrackableTypes {
         @Override
         protected CardStateView getDefaultValue() {
             return null;
+        }
+        @Override
+        protected void copyChangedProps(TrackableObject from, TrackableObject to, TrackableProperty prop) {
+            // CardStateViews share their parent CardView's ID, so multiple states
+            // (CurrentState, AlternateState) have the same (type, id) key. The base
+            // implementation uses tracker.getObj(type, id) which returns the wrong
+            // state. Instead, look up the existing state directly via the property.
+            CardStateView newCsv = from.get(prop);
+            CardStateView existingCsv = to.get(prop);
+            if (newCsv != null && existingCsv != null) {
+                existingCsv.copyChangedProps(newCsv);
+                to.set(prop, existingCsv);
+            } else {
+                to.set(prop, newCsv);
+            }
         }
     };
     public static final TrackableType<CardTypeView> CardTypeViewType = new TrackableType<CardTypeView>() {
