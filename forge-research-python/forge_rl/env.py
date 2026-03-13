@@ -17,20 +17,30 @@ MAX_BATTLEFIELD = 20
 MAX_GRAVEYARD = 15
 MAX_EXILE = 10
 MAX_STACK = 10
-CARD_FEATURES = 19
+NUM_COLOR_BITS = 5       # W, U, B, R, G
+NUM_TYPE_BITS = 7        # Creature, Land, Instant, Sorcery, Enchantment, Artifact, Planeswalker
+NUM_KEYWORD_BITS = 14    # flying, first_strike, ..., flash
+# 12 scalar features + 5 colors + 7 types + 14 keywords = 38
+CARD_FEATURES = 38
 STACK_FEATURES = 8
 MAX_ACTIONS = 256
 NUM_DECISION_TYPES = 15
 ACTION_FEATURES = 7
 
-# Card feature indices (matching proto order)
-_CARD_FIELDS = [
-    "name_id", "power", "toughness", "cmc",
-    "tapped", "summoning_sick", "colors_bitmask", "damage",
-    "loyalty", "controller_index", "attacking", "blocking",
-    "counter_count", "keyword_count", "card_id", "owner_index",
-    "type_bitmask", "keyword_bitmask", "plus_one_counter_count",
-]
+# Card feature layout (after bitmask unpacking):
+#  0: name_id, 1: power, 2: toughness, 3: cmc,
+#  4: tapped, 5: summoning_sick,
+#  6-10: color_white, color_blue, color_black, color_red, color_green,
+#  11: damage, 12: loyalty,
+#  13: attacking, 14: blocking,
+#  15: counter_count,
+#  16-22: is_creature, is_land, is_instant, is_sorcery, is_enchantment, is_artifact, is_planeswalker,
+#  23-36: has_flying, has_first_strike, has_double_strike, has_deathtouch, has_lifelink,
+#         has_trample, has_haste, has_reach, has_vigilance, has_menace,
+#         has_defender, has_hexproof, has_indestructible, has_flash,
+#  37: plus_one_counter_count
+#
+# Dropped (redundant/not learnable): card_id, keyword_count, controller_index, owner_index
 
 
 class ForgeRlEnv(gym.Env):
@@ -72,13 +82,13 @@ class ForgeRlEnv(gym.Env):
             "game_info": spaces.Box(low=-1, high=1000, shape=(6,), dtype=np.int32),
             "agent_scalars": spaces.Box(low=-100, high=1000, shape=(11,), dtype=np.int32),
             "opponent_scalars": spaces.Box(low=-100, high=1000, shape=(11,), dtype=np.int32),
-            "agent_hand": spaces.Box(low=-1, high=100000, shape=(MAX_HAND, CARD_FEATURES), dtype=np.int32),
-            "agent_battlefield": spaces.Box(low=-1, high=100000, shape=(MAX_BATTLEFIELD, CARD_FEATURES), dtype=np.int32),
-            "opponent_battlefield": spaces.Box(low=-1, high=100000, shape=(MAX_BATTLEFIELD, CARD_FEATURES), dtype=np.int32),
-            "agent_graveyard": spaces.Box(low=-1, high=100000, shape=(MAX_GRAVEYARD, CARD_FEATURES), dtype=np.int32),
-            "opponent_graveyard": spaces.Box(low=-1, high=100000, shape=(MAX_GRAVEYARD, CARD_FEATURES), dtype=np.int32),
-            "agent_exile": spaces.Box(low=-1, high=100000, shape=(MAX_EXILE, CARD_FEATURES), dtype=np.int32),
-            "opponent_exile": spaces.Box(low=-1, high=100000, shape=(MAX_EXILE, CARD_FEATURES), dtype=np.int32),
+            "agent_hand": spaces.Box(low=-1, high=100000, shape=(MAX_HAND, CARD_FEATURES), dtype=np.float32),
+            "agent_battlefield": spaces.Box(low=-1, high=100000, shape=(MAX_BATTLEFIELD, CARD_FEATURES), dtype=np.float32),
+            "opponent_battlefield": spaces.Box(low=-1, high=100000, shape=(MAX_BATTLEFIELD, CARD_FEATURES), dtype=np.float32),
+            "agent_graveyard": spaces.Box(low=-1, high=100000, shape=(MAX_GRAVEYARD, CARD_FEATURES), dtype=np.float32),
+            "opponent_graveyard": spaces.Box(low=-1, high=100000, shape=(MAX_GRAVEYARD, CARD_FEATURES), dtype=np.float32),
+            "agent_exile": spaces.Box(low=-1, high=100000, shape=(MAX_EXILE, CARD_FEATURES), dtype=np.float32),
+            "opponent_exile": spaces.Box(low=-1, high=100000, shape=(MAX_EXILE, CARD_FEATURES), dtype=np.float32),
             "stack": spaces.Box(low=-1, high=100000, shape=(MAX_STACK, STACK_FEATURES), dtype=np.int32),
             "action_mask": spaces.Box(low=0, high=1, shape=(MAX_ACTIONS,), dtype=np.int8),
             "decision_type": spaces.Box(low=0, high=1, shape=(NUM_DECISION_TYPES,), dtype=np.int8),
@@ -175,8 +185,9 @@ class ForgeRlEnv(gym.Env):
                 decision_type[dt] = 1
         result["decision_type"] = decision_type
 
-        # Per-action features: [log_name_id, log_card_id, is_pass,
-        #   target_is_player, log_target_name_id, log_target_card_id, target_is_own]
+        # Per-action features: [source_name_id, log_card_id, is_pass,
+        #   target_is_player, target_name_id, log_target_card_id, target_is_own]
+        # source_name_id and target_name_id are raw ints (embedded in the model).
         action_features = np.full((MAX_ACTIONS, ACTION_FEATURES), -1, dtype=np.float32)
         if decision_point and decision_point.legal_actions:
             for action in decision_point.legal_actions:
@@ -186,11 +197,11 @@ class ForgeRlEnv(gym.Env):
                     src_card_id = action.source_card_id
                     is_pass = 1.0 if (src_name_id == 0 and src_card_id == 0) else 0.0
                     action_features[idx] = [
-                        np.log1p(src_name_id),
+                        float(src_name_id),
                         np.log1p(src_card_id),
                         is_pass,
                         1.0 if action.target_is_player else 0.0,
-                        np.log1p(action.target_name_id),
+                        float(action.target_name_id),
                         np.log1p(action.target_card_id),
                         1.0 if action.target_is_own else 0.0,
                     ]
@@ -215,10 +226,13 @@ class ForgeRlEnv(gym.Env):
         ], dtype=np.int32)
 
     def _card_matrix(self, cards, max_cards: int) -> np.ndarray:
-        mat = np.full((max_cards, CARD_FEATURES), -1, dtype=np.int32)
+        mat = np.full((max_cards, CARD_FEATURES), -1, dtype=np.float32)
         for i, card in enumerate(cards):
             if i >= max_cards:
                 break
+            colors = card.colors_bitmask
+            types = card.type_bitmask
+            kw = card.keyword_bitmask
             mat[i] = [
                 card.name_id,
                 card.power,
@@ -226,18 +240,23 @@ class ForgeRlEnv(gym.Env):
                 card.cmc,
                 int(card.tapped),
                 int(card.summoning_sick),
-                card.colors_bitmask,
+                # Colors unpacked: W=bit0, U=bit1, B=bit2, R=bit3, G=bit4
+                (colors >> 0) & 1, (colors >> 1) & 1, (colors >> 2) & 1,
+                (colors >> 3) & 1, (colors >> 4) & 1,
                 card.damage,
                 card.loyalty,
-                card.controller_index,
                 int(card.attacking),
                 int(card.blocking),
                 card.counter_count,
-                card.keyword_count,
-                card.card_id,
-                card.owner_index,
-                card.type_bitmask,
-                card.keyword_bitmask,
+                # Types unpacked
+                (types >> 0) & 1, (types >> 1) & 1, (types >> 2) & 1,
+                (types >> 3) & 1, (types >> 4) & 1, (types >> 5) & 1,
+                (types >> 6) & 1,
+                # Keywords unpacked
+                (kw >> 0) & 1, (kw >> 1) & 1, (kw >> 2) & 1, (kw >> 3) & 1,
+                (kw >> 4) & 1, (kw >> 5) & 1, (kw >> 6) & 1, (kw >> 7) & 1,
+                (kw >> 8) & 1, (kw >> 9) & 1, (kw >> 10) & 1, (kw >> 11) & 1,
+                (kw >> 12) & 1, (kw >> 13) & 1,
                 card.plus_one_counter_count,
             ]
         return mat

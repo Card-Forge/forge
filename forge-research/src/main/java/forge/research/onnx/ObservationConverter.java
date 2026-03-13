@@ -17,7 +17,8 @@ import forge.research.proto.StackEntry;
  */
 public class ObservationConverter {
 
-    private static final int CARD_FEATURES = 19;
+    // 12 scalar + 5 colors + 7 types + 14 keywords = 38
+    private static final int CARD_FEATURES = 38;
     private static final int STACK_FEATURES = 8;
     private static final int MAX_HAND = 10;
     private static final int MAX_BATTLEFIELD = 20;
@@ -58,25 +59,37 @@ public class ObservationConverter {
         for (int i = 0; i < count; i++) {
             CardState c = cards.get(i);
             int base = i * CARD_FEATURES;
+            int colors = c.getColorsBitmask();
+            int types = c.getTypeBitmask();
+            int kw = c.getKeywordBitmask();
+
             mat[base]      = c.getNameId();
             mat[base + 1]  = c.getPower();
             mat[base + 2]  = c.getToughness();
             mat[base + 3]  = c.getCmc();
             mat[base + 4]  = c.getTapped() ? 1f : 0f;
             mat[base + 5]  = c.getSummoningSick() ? 1f : 0f;
-            mat[base + 6]  = c.getColorsBitmask();
-            mat[base + 7]  = c.getDamage();
-            mat[base + 8]  = c.getLoyalty();
-            mat[base + 9]  = c.getControllerIndex();
-            mat[base + 10] = c.getAttacking() ? 1f : 0f;
-            mat[base + 11] = c.getBlocking() ? 1f : 0f;
-            mat[base + 12] = c.getCounterCount();
-            mat[base + 13] = c.getKeywordCount();
-            mat[base + 14] = c.getCardId();
-            mat[base + 15] = c.getOwnerIndex();
-            mat[base + 16] = c.getTypeBitmask();
-            mat[base + 17] = c.getKeywordBitmask();
-            mat[base + 18] = c.getPlusOneCounterCount();
+            // Colors unpacked: W=0, U=1, B=2, R=3, G=4
+            mat[base + 6]  = (colors >> 0) & 1;
+            mat[base + 7]  = (colors >> 1) & 1;
+            mat[base + 8]  = (colors >> 2) & 1;
+            mat[base + 9]  = (colors >> 3) & 1;
+            mat[base + 10] = (colors >> 4) & 1;
+            mat[base + 11] = c.getDamage();
+            mat[base + 12] = c.getLoyalty();
+            mat[base + 13] = c.getAttacking() ? 1f : 0f;
+            mat[base + 14] = c.getBlocking() ? 1f : 0f;
+            mat[base + 15] = c.getCounterCount();
+            // Types unpacked: Creature=0, Land=1, Instant=2, Sorcery=3,
+            //   Enchantment=4, Artifact=5, Planeswalker=6
+            for (int b = 0; b < 7; b++) {
+                mat[base + 16 + b] = (types >> b) & 1;
+            }
+            // Keywords unpacked: flying=0, first_strike=1, ..., flash=13
+            for (int b = 0; b < 14; b++) {
+                mat[base + 23 + b] = (kw >> b) & 1;
+            }
+            mat[base + 37] = c.getPlusOneCounterCount();
         }
         return mat;
     }
@@ -123,11 +136,11 @@ public class ObservationConverter {
             float isPass = (srcNameId == 0 && srcCardId == 0) ? 1f : 0f;
 
             int base = idx * ACTION_FEATURES;
-            mat[base]     = (float) Math.log1p(srcNameId);
+            mat[base]     = srcNameId;  // raw int, embedded in model
             mat[base + 1] = (float) Math.log1p(srcCardId);
             mat[base + 2] = isPass;
             mat[base + 3] = action.getTargetIsPlayer() ? 1f : 0f;
-            mat[base + 4] = (float) Math.log1p(action.getTargetNameId());
+            mat[base + 4] = action.getTargetNameId();  // raw int, embedded in model
             mat[base + 5] = (float) Math.log1p(action.getTargetCardId());
             mat[base + 6] = action.getTargetIsOwn() ? 1f : 0f;
         }

@@ -84,7 +84,7 @@ class AgentOnnxWrapper(nn.Module):
         trunk = self.agent._get_trunk(obs)
 
         # Compute logits (same as get_action_and_value but without masking/sampling)
-        action_enc = self.agent.action_encoder(obs["action_features"])  # (B, 256, 32)
+        action_enc = self.agent._encode_actions(obs["action_features"])  # (B, 256, 32)
         trunk_proj = self.agent.trunk_to_action(trunk)                   # (B, 32)
         logits = torch.einsum('bd,bnd->bn', trunk_proj, action_enc)      # (B, 256)
 

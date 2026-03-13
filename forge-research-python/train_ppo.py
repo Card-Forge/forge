@@ -101,8 +101,10 @@ CARD_ZONES = [
     "agent_graveyard", "opponent_graveyard",
     "agent_exile", "opponent_exile",
 ]
-CARD_FEATURES = 19
+CARD_FEATURES = 38  # 12 scalar + 5 colors + 7 types + 14 keywords
 STACK_FEATURES = 8
+CARD_VOCAB_SIZE = 512   # max unique card names (name_id 0 reserved for padding)
+CARD_EMBED_DIM = 8      # learned embedding dimension per card name
 
 
 def layer_init(layer, std=np.sqrt(2), bias_const=0.0):
@@ -121,9 +123,15 @@ class Agent(nn.Module):
             nn.ReLU(),
         )
 
+        # Card name embedding (name_id → learned vector)
+        # padding_idx=0: name_id=0 maps to zero vector (used for padding)
+        self.card_name_embedding = nn.Embedding(CARD_VOCAB_SIZE, CARD_EMBED_DIM, padding_idx=0)
+
         # Card encoder (shared across all 7 zones)
+        # Input: CARD_EMBED_DIM (embedded name) + CARD_FEATURES - 1 (remaining features, minus raw name_id)
+        card_input_dim = CARD_EMBED_DIM + CARD_FEATURES - 1
         self.card_encoder = nn.Sequential(
-            layer_init(nn.Linear(CARD_FEATURES, 32)),
+            layer_init(nn.Linear(card_input_dim, 32)),
             nn.ReLU(),
         )
 
@@ -133,8 +141,8 @@ class Agent(nn.Module):
             nn.ReLU(),
         )
 
-        # Trunk: 64 (scalars) + 7*32 (cards) + 16 (stack) = 304
-        trunk_input = 64 + 7 * 32 + 16  # 304
+        # Trunk: 64 (scalars) + 7*33 (cards: 32 encoded + 1 count) + 16 (stack) = 311
+        trunk_input = 64 + 7 * 33 + 16  # 311
         self.trunk = nn.Sequential(
             layer_init(nn.Linear(trunk_input, 256)),
             nn.ReLU(),
@@ -143,8 +151,10 @@ class Agent(nn.Module):
         )
 
         # Action encoder: per-action features → embedding
+        # Input: 2 * CARD_EMBED_DIM (source + target name embeddings) + 5 (other features)
+        action_input_dim = 2 * CARD_EMBED_DIM + 5
         self.action_encoder = nn.Sequential(
-            layer_init(nn.Linear(7, 32)),
+            layer_init(nn.Linear(action_input_dim, 32)),
             nn.ReLU(),
         )
         # Project trunk to action embedding space for dot-product scoring
@@ -154,15 +164,33 @@ class Agent(nn.Module):
         self.critic = layer_init(nn.Linear(128, 1), std=1.0)
 
     def _encode_cards(self, card_matrix: torch.Tensor) -> torch.Tensor:
-        """Encode a (batch, max_cards, features) matrix via shared card encoder with mean pooling."""
+        """Encode a (batch, max_cards, features) matrix via shared card encoder.
+
+        Uses mean pooling with card count appended, so the model knows
+        both the average card profile and how many cards are in the zone.
+        Output: (batch, 33) — 32 from encoder + 1 normalized count.
+        """
         # Mask: cards with all -1 are padding
         # Use first feature (name_id) >= 0 as indicator of real card
         valid = (card_matrix[:, :, 0] >= 0).float().unsqueeze(-1)  # (batch, max_cards, 1)
-        encoded = self.card_encoder(card_matrix.float())  # (batch, max_cards, 32)
+
+        # Embed name_id (feature 0), clamp to valid range for padding
+        name_ids = card_matrix[:, :, 0].long().clamp(min=0, max=CARD_VOCAB_SIZE - 1)
+        name_emb = self.card_name_embedding(name_ids)  # (batch, max_cards, CARD_EMBED_DIM)
+
+        # Concat embedding with remaining features (skip feature 0 = raw name_id)
+        other_features = card_matrix[:, :, 1:].float()  # (batch, max_cards, CARD_FEATURES-1)
+        card_input = torch.cat([name_emb, other_features], dim=-1)
+
+        encoded = self.card_encoder(card_input)  # (batch, max_cards, 32)
         encoded = encoded * valid
         count = valid.sum(dim=1).clamp(min=1)  # (batch, 1)
         pooled = encoded.sum(dim=1) / count  # (batch, 32)
-        return pooled
+
+        # Append normalized card count (divide by max zone size for scale)
+        max_cards = card_matrix.shape[1]
+        norm_count = count / max_cards  # (batch, 1)
+        return torch.cat([pooled, norm_count], dim=-1)  # (batch, 33)
 
     def _encode_stack(self, stack_matrix: torch.Tensor) -> torch.Tensor:
         """Encode stack entries with mean pooling."""
@@ -186,18 +214,38 @@ class Agent(nn.Module):
         # Cards (7 zones, shared encoder)
         card_encs = []
         for zone in CARD_ZONES:
-            card_encs.append(self._encode_cards(obs[zone]))  # each (batch, 32)
-        card_enc = torch.cat(card_encs, dim=-1)  # (batch, 224)
+            card_encs.append(self._encode_cards(obs[zone]))  # each (batch, 33)
+        card_enc = torch.cat(card_encs, dim=-1)  # (batch, 231)
 
         # Stack
         stack_enc = self._encode_stack(obs["stack"])  # (batch, 16)
 
         # Trunk
-        combined = torch.cat([scalar_enc, card_enc, stack_enc], dim=-1)  # (batch, 304)
+        combined = torch.cat([scalar_enc, card_enc, stack_enc], dim=-1)  # (batch, 311)
         return self.trunk(combined)
 
     def get_value(self, obs: dict[str, torch.Tensor]) -> torch.Tensor:
         return self.critic(self._get_trunk(obs))
+
+    def _encode_actions(self, action_features: torch.Tensor) -> torch.Tensor:
+        """Encode action features with shared card name embeddings.
+
+        action_features: (B, 256, 7) where indices 0 and 4 are raw name_ids.
+        Returns: (B, 256, 32) encoded actions.
+        """
+        af = action_features.float()
+        # Embed source_name_id (index 0) and target_name_id (index 4)
+        src_name_ids = af[:, :, 0].long().clamp(min=0, max=CARD_VOCAB_SIZE - 1)
+        tgt_name_ids = af[:, :, 4].long().clamp(min=0, max=CARD_VOCAB_SIZE - 1)
+        src_emb = self.card_name_embedding(src_name_ids)  # (B, 256, CARD_EMBED_DIM)
+        tgt_emb = self.card_name_embedding(tgt_name_ids)  # (B, 256, CARD_EMBED_DIM)
+
+        # Other features: indices 1,2,3,5,6 (5 features)
+        other = torch.cat([af[:, :, 1:4], af[:, :, 5:7]], dim=-1)  # (B, 256, 5)
+
+        # Concatenate: src_emb + other + tgt_emb
+        combined = torch.cat([src_emb, other, tgt_emb], dim=-1)  # (B, 256, 21)
+        return self.action_encoder(combined)  # (B, 256, 32)
 
     def get_action_and_value(
         self,
@@ -207,8 +255,8 @@ class Agent(nn.Module):
         trunk = self._get_trunk(obs)
 
         # Attention-style actor: dot product of trunk projection and action embeddings
-        action_enc = self.action_encoder(obs["action_features"].float())  # (B, 256, 32)
-        trunk_proj = self.trunk_to_action(trunk)                           # (B, 32)
+        action_enc = self._encode_actions(obs["action_features"])  # (B, 256, 32)
+        trunk_proj = self.trunk_to_action(trunk)                    # (B, 32)
         logits = torch.einsum('bd,bnd->bn', trunk_proj, action_enc)        # (B, 256)
 
         mask = obs["action_mask"]
@@ -242,11 +290,10 @@ DECISION_TYPE_NAMES = [
 ]
 DT_MULLIGAN = 4
 
-# Card feature indices (matching env.py _CARD_FIELDS order)
+# Card feature indices (matching env.py unpacked layout)
 CARD_IDX_NAME_ID = 0
 CARD_IDX_CMC = 3
-CARD_IDX_TYPE_BITMASK = 16
-TYPE_BIT_LAND = 1 << 1
+CARD_IDX_IS_LAND = 17  # unpacked from type_bitmask
 
 
 def obs_to_tensor(obs: dict[str, np.ndarray], device: torch.device) -> dict[str, torch.Tensor]:
@@ -622,7 +669,7 @@ def main():
                 if dt == DT_MULLIGAN:
                     hand = next_obs["agent_hand"][env_i]  # (MAX_HAND, CARD_FEATURES)
                     occupied = hand[:, CARD_IDX_NAME_ID] > 0
-                    is_land = occupied & ((hand[:, CARD_IDX_TYPE_BITMASK] & TYPE_BIT_LAND) != 0)
+                    is_land = occupied & (hand[:, CARD_IDX_IS_LAND] > 0)
                     land_count = int(is_land.sum())
                     mulligan_count = int(next_obs["game_info"][env_i][4])
                     action_taken = int(action[env_i].item())
