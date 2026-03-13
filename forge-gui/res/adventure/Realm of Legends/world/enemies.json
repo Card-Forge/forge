@@ -10788,7 +10788,7 @@
   },
   {
     "name": "Urabrask",
-    "sprite": "sprites/enemy/aberration/furnacetormentor.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/furnacetormentor.atlas",
     "deck": [
       "decks/legends/urabrask.dck"
     ],
@@ -29351,7 +29351,7 @@
   },
   {
     "name": "Greven",
-    "sprite": "sprites/enemy/aberration/furnacetormentor.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/furnacetormentor.atlas",
     "deck": [
       "decks/legends/greven.dck"
     ],
