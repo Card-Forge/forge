@@ -35,17 +35,6 @@ public class AdventureEventController implements Serializable {
                     .filter(e -> e.name().equalsIgnoreCase(name))
                     .findFirst().orElse(null);
         }
-
-        @Override
-        public String toString() {
-            switch(this) {
-                case Sealed: return "Sealed Deck";
-                case Jumpstart: return "Jumpstart";
-                case Draft: return "Draft";
-                case Constructed: return "Constructed";
-                default: return name();
-            }
-        }
     }
 
     public enum EventStyle {
@@ -98,12 +87,7 @@ public class AdventureEventController implements Serializable {
                 random.nextInt(10) <= 2) {
             e = new AdventureEventData(eventSeed, EventFormat.Jumpstart);
         } else {
-            if (random.nextInt(4) == 3) {
-                // Experimental: 1 out of 4 chance for it to be a Sealed Deck event
-                e = new AdventureEventData(eventSeed, EventFormat.Sealed);
-            } else {
-                e = new AdventureEventData(eventSeed, EventFormat.Draft);
-            }
+            e = new AdventureEventData(eventSeed, EventFormat.Draft);
         }
 
         if (e.cardBlock == null) {

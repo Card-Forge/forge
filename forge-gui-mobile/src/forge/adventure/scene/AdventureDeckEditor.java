@@ -37,10 +37,7 @@ import forge.util.ItemPool;
 import forge.util.Localizer;
 import forge.util.Utils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -255,22 +252,6 @@ public class AdventureDeckEditor extends FDeckEditor {
                                 new AdventureDeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.ADVENTURE_SIDEBOARD)
                         };
 
-                }
-            }
-            if (event.format == AdventureEventController.EventFormat.Sealed) {
-                switch (event.eventStatus) {
-                    case Available:
-                        return null;
-                    case Started:
-                    case Completed:
-                    case Abandoned:
-                    case Ready:
-                    case Entered:
-                    default:
-                        return new DeckEditorPage[]{
-                                new AdventureDeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.DRAFT_POOL),
-                                new AdventureDeckSectionPage(DeckSection.Main, ItemManagerConfig.DRAFT_POOL)
-                        };
                 }
             }
             if (event.format == AdventureEventController.EventFormat.Jumpstart) {
@@ -645,18 +626,7 @@ public class AdventureDeckEditor extends FDeckEditor {
         AdventureEventData currentEvent = getCurrentEvent();
         if (currentEvent == null)
             return false;
-
-        // For Draft events, check if drafting is in progress
-        if (currentEvent.format == AdventureEventController.EventFormat.Draft) {
-            return currentEvent.draft != null && !currentEvent.isDraftComplete;
-        }
-        // For Sealed events, we're "drafting" until the deck is built
-        // FIXME: This "pollutes" isDrafting with an unrelated (Sealed) functionality, but I'm not sure how to make this cleaner...
-        else if (currentEvent.format == AdventureEventController.EventFormat.Sealed) {
-            return currentEvent.eventStatus == AdventureEventController.EventStatus.Entered;
-        }
-
-        return false;
+        return currentEvent.draft != null && !currentEvent.isDraftComplete;
     }
 
     public static AdventureEventData currentEvent; //TODO: Remove. Should just get this from the controller.
@@ -684,25 +654,6 @@ public class AdventureDeckEditor extends FDeckEditor {
         }
         if (currentEvent.eventStatus == AdventureEventController.EventStatus.Entered) {
             currentEvent.eventStatus = AdventureEventController.EventStatus.Ready;
-        }
-    }
-
-    private void completeSealed() {
-        AdventureEventData currentEvent = getCurrentEvent();
-        if (currentEvent == null)
-            return;
-
-        currentEvent.isDraftComplete = true;
-        currentEvent.eventStatus = AdventureEventController.EventStatus.Ready;
-
-        // Store a copy of the sealed pool for rewards
-        if (currentEvent.draftedDeck == null) {
-            currentEvent.draftedDeck = new Deck();
-            CardPool pool = currentEvent.registeredDeck.get(DeckSection.Sideboard);
-            if (pool != null) {
-                currentEvent.draftedDeck.getOrCreate(DeckSection.Sideboard).addAll(pool);
-                currentEvent.draftedDeck.setName("Sealed Pool Cards");
-            }
         }
     }
 
@@ -909,11 +860,6 @@ public class AdventureDeckEditor extends FDeckEditor {
             return true;
         if (!currentEvent.eventRules.allowsAddBasicLands)
             return false;
-        if (currentEvent.format == AdventureEventController.EventFormat.Sealed) {
-            return currentEvent.eventStatus == AdventureEventController.EventStatus.Entered ||
-                    currentEvent.eventStatus == AdventureEventController.EventStatus.Ready ||
-                    currentEvent.eventStatus == AdventureEventController.EventStatus.Started;
-        }
         if (isDrafting())
             return false;
         if (currentEvent.eventStatus == AdventureEventController.EventStatus.Entered
@@ -964,31 +910,10 @@ public class AdventureDeckEditor extends FDeckEditor {
         }
 
         Localizer localizer = Forge.getLocalizer();
-
-        AdventureEventData currentEvent = getCurrentEvent();
-        boolean isSealedEvent = currentEvent != null &&
-                currentEvent.format == AdventureEventController.EventFormat.Sealed &&
-                currentEvent.eventStatus == AdventureEventController.EventStatus.Entered;
-        boolean hasValidDeck = getDeck().getMain().countAll() >= 40;
-
-        // For Sealed events with valid deck, go straight to completion
-        if (isSealedEvent && hasValidDeck) {
-            // Complete the sealed event and close
-            completeSealed();
-            resolveClose(canCloseCallback, true);
-            return;
-        }
-
         if (isDrafting()) {
-            FOptionPane.showConfirmDialog(localizer.getMessage("lblEndAdventureEventConfirm"),
-                    localizer.getMessage("lblLeaveDraft"),
-                    localizer.getMessage("lblLeave"),
-                    localizer.getMessage("lblCancel"),
-                    false, result -> resolveClose(canCloseCallback, result == true));
+            FOptionPane.showConfirmDialog(localizer.getMessage("lblEndAdventureEventConfirm"), localizer.getMessage("lblLeaveDraft"), localizer.getMessage("lblLeave"), localizer.getMessage("lblCancel"), false, result -> resolveClose(canCloseCallback, result == true));
             return;
-        }
-
-        else if (getEditorConfig().isLimited() || getDeck().isEmpty()) {
+        } else if (getEditorConfig().isLimited() || getDeck().isEmpty()) {
             resolveClose(canCloseCallback, true);
             return;
         }
@@ -999,6 +924,7 @@ public class AdventureDeckEditor extends FDeckEditor {
             deckError = getEditorConfig().getDeckFormat().getDeckConformanceProblem(getDeck());
 
             if (deckError != null) {
+                //Allow the player to close the editor with an invalid deck, but warn them that cards may be swapped out.
                 String warning = localizer.getMessage("lblAdventureDeckError", deckError);
                 FOptionPane.showConfirmDialog(warning, localizer.getMessage("lblInvalidDeck"), false, result -> resolveClose(canCloseCallback, result == true));
                 return;
@@ -1011,16 +937,8 @@ public class AdventureDeckEditor extends FDeckEditor {
     private void resolveClose(final Consumer<Boolean> canCloseCallback, boolean result) {
         if (result) {
             Current.player().newCards.clear();
-
-            AdventureEventData currentEvent = getCurrentEvent();
-            if (currentEvent != null) {
-                if (isDrafting()) {
-                    if (currentEvent.format == AdventureEventController.EventFormat.Draft) {
-                        System.out.println("Abandoning Draft event");
-                        currentEvent.eventStatus = AdventureEventController.EventStatus.Abandoned;
-                    }
-                }
-            }
+            if (isDrafting())
+                getCurrentEvent().eventStatus = AdventureEventController.EventStatus.Abandoned;
         }
         if (canCloseCallback != null)
             canCloseCallback.accept(result);
