@@ -1,0 +1,14 @@
+Name:MagicConsecrated Sphinx
+ManaCost:4 U U
+Types:Creature Sphinx
+PT:4/6
+K:Flying
+T:Mode$ Drawn | ValidCard$ Card.OppOwn | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ Whenever an opponent draws a card, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBFriends,DBCards,DBPrizes,DBSleep | ChoiceRestriction$ ThisGame | CharmNum$ 1
+SVar:DBFriends:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_gamer | TokenOwner$ You | SpellDescription$ Make Friends — Create a 1/1 colorless Gamer creature token.
+SVar:DBCards:DB$ Investigate | SpellDescription$ Find Cards — Investigate.
+SVar:DBPrizes:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ Win Prize Tickets — Create a Treasure token.
+SVar:DBSleep:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBReturn | RememberChanged$ True | SpellDescription$ Go to Sleep — Exile this creature, then return it to the battlefield under its owner's control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Flying\nWhenever an opponent draws a card, choose one that hasn't been chosen —\nMake Friends — Create a 1/1 colorless Gamer creature token.\nFind Cards — Investigate.\nWin Prize Tickets — Create a Treasure token.\nGo to Sleep — Exile this creature, then return it to the battlefield under its owner's control.
