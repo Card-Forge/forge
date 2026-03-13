@@ -673,7 +673,6 @@ public class AdventureDeckEditor extends FDeckEditor {
         System.out.println("Completing Sealed event");
         currentEvent.isDraftComplete = true;
 
-        // Sealed-specific: make sure draftedDeck is set for rewards
         if (currentEvent.draftedDeck == null) {
             currentEvent.draftedDeck = new Deck();
             CardPool pool = currentEvent.registeredDeck.get(DeckSection.Sideboard);
