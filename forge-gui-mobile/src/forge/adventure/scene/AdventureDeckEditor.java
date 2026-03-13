@@ -651,15 +651,11 @@ public class AdventureDeckEditor extends FDeckEditor {
             return;
         currentEvent.isDraftComplete = true;
 
-        // Only do draft-specific things if this is actually a draft
-        // TODO: this is currently reused for Sealed Deck, maybe worth splitting into its own method?
-        if (currentEvent.format == AdventureEventController.EventFormat.Draft) {
-            Deck[] opponentDecks = currentEvent.getDraft().getComputerDecks();
-            for (int i = 0; i < currentEvent.participants.length && i < opponentDecks.length; i++) {
-                currentEvent.participants[i].setDeck(opponentDecks[i]);
-            }
-            currentEvent.draftedDeck = (Deck) currentEvent.registeredDeck.copyTo("Draft Deck");
+        Deck[] opponentDecks = currentEvent.getDraft().getComputerDecks();
+        for (int i = 0; i < currentEvent.participants.length && i < opponentDecks.length; i++) {
+            currentEvent.participants[i].setDeck(opponentDecks[i]);
         }
+        currentEvent.draftedDeck = (Deck) currentEvent.registeredDeck.copyTo("Draft Deck");
 
         if (allowAddBasic()) {
             showAddBasicLandsDialog();
@@ -668,6 +664,33 @@ public class AdventureDeckEditor extends FDeckEditor {
         }
         if (currentEvent.eventStatus == AdventureEventController.EventStatus.Entered) {
             currentEvent.eventStatus = AdventureEventController.EventStatus.Ready;
+        }
+    }
+
+    public void completeSealed() {
+        AdventureEventData currentEvent = getCurrentEvent();
+        if (currentEvent == null)
+            return;
+
+        System.out.println("Completing Sealed event");
+        currentEvent.isDraftComplete = true;
+
+        // Sealed-specific: make sure draftedDeck is set for rewards
+        if (currentEvent.draftedDeck == null) {
+            currentEvent.draftedDeck = new Deck();
+            CardPool pool = currentEvent.registeredDeck.get(DeckSection.Sideboard);
+            if (pool != null) {
+                currentEvent.draftedDeck.getOrCreate(DeckSection.Sideboard).addAll(pool);
+                currentEvent.draftedDeck.setName("Sealed Pool Cards");
+            }
+        }
+
+        if (currentEvent.eventStatus == AdventureEventController.EventStatus.Entered) {
+            currentEvent.eventStatus = AdventureEventController.EventStatus.Ready;
+        }
+
+        if (allowAddBasic()) {
+            showAddBasicLandsDialog();
         }
     }
 
@@ -946,8 +969,7 @@ public class AdventureDeckEditor extends FDeckEditor {
                 });
                 return;
             } else {
-                currentEvent.isDraftComplete = true;
-                currentEvent.eventStatus = AdventureEventController.EventStatus.Ready;
+                completeSealed();
                 resolveClose(canCloseCallback, true);
                 return;
             }
