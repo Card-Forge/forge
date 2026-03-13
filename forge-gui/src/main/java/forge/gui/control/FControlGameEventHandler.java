@@ -231,7 +231,10 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventPlayerControl ev) {
-        if (humanController != null) {
+        if (ev.newLobbyPlayerName() == null) {
+            // game end: must restore original
+            matchController.setGameController(ev.player(), null);
+        } else if (humanController != null) {
             final PlayerControllerHuman newController = ev.newControllerIsHuman() ? humanController : null;
             matchController.setGameController(ev.player(), newController);
         }

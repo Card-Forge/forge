@@ -1843,7 +1843,7 @@ public class AbilityUtils {
                     }
                     return doXMath(v, expr, c, ctb);
                 }
-                
+
                 // Count$FromNamedAbility[abilityName].<True>.<False>
                 if (sq[0].startsWith("FromNamedAbility")) {
                     String abilityNamed = sq[0].substring(16);
@@ -2820,20 +2820,8 @@ public class AbilityUtils {
                 : game.getCardsIn(ZoneType.Battlefield);
 
             CardCollection cards = CardLists.getValidCards(cardsInZones, rest, player, c, ctb);
-            final Map<String, Integer> map = Maps.newHashMap();
-            for (final Card card : cards) {
-                // Remove Duplicated types
-                final String name = card.getName();
-                Integer count = map.get(name);
-                map.put(name, count == null ? 1 : count + 1);
-            }
-            int max = 0;
-            for (final Entry<String, Integer> entry : map.entrySet()) {
-                if (max < entry.getValue()) {
-                    max = entry.getValue();
-                }
-            }
-            return max;
+
+            return (int)cards.stream().collect(Collectors.groupingBy(Card::getName, Collectors.counting())).values().stream().mapToLong(v -> v).max().orElse(0);
         }
 
         if (sq[0].startsWith("MostProminentCreatureType")) {

@@ -127,7 +127,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
             for (Entry<Player, Integer> ev : chooseMap.entrySet()) {
                 int num = ev.getValue();
                 Player player = ev.getKey();
-                sb.append(Localizer.getInstance().getMessage("lblPlayerChoseNum", player.getName(), String.valueOf(num)));
+                sb.append(Localizer.getInstance().getMessage("lblPlayerChoseNum", player.getName(), num));
                 sb.append("\r\n");
                 if (num > highest) {
                     highestNum.clear();

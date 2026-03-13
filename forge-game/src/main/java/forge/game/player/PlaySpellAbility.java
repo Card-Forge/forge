@@ -249,7 +249,7 @@ public class PlaySpellAbility {
                         return false;
                     }
                     if (!multiFromZones && fromZones.get(0).equals(ZoneType.Library)) {
-                        if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantExileNCardsFromYourLibrary", String.valueOf(nNeeded)), sourceAbility)) {
+                        if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantExileNCardsFromYourLibrary", nNeeded), sourceAbility)) {
                             return false;
                         }
                         list = list.subList(0, nNeeded);
@@ -365,7 +365,7 @@ public class PlaySpellAbility {
                 CounterType counterType = CounterEnumType.ENERGY;
                 int amount = part.getAbilityAmount(sourceAbility);
 
-                if (!mandatory && !p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantSpendNTargetTypeCounter", String.valueOf(amount), counterType.getName()), sourceAbility)) {
+                if (!mandatory && !p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantSpendNTargetTypeCounter", amount, counterType.getName()), sourceAbility)) {
                     return false;
                 }
 

@@ -2,7 +2,6 @@ package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import forge.ai.*;
 import forge.card.CardType;
 import forge.card.MagicColor;
@@ -32,6 +31,8 @@ import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 public class ChangeZoneAi extends SpellAbilityAi {
     /*
@@ -1948,39 +1949,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 });
             }
 
-            CardCollectionView graveyardList = aiPlayer.getGame().getCardsIn(ZoneType.Graveyard);
-            Set<CardType.CoreType> presentTypes = new HashSet<>();
-            for (Card inGrave : graveyardList) {
-                for(CardType.CoreType type : inGrave.getType().getCoreTypes()) {
-                    presentTypes.add(type);
-                }
-            }
-
-            final Map<CardType.CoreType, Integer> typesInDeck = Maps.newHashMap();
-            for (final Card c : scanList) {
-                for (CardType.CoreType ct : c.getType().getCoreTypes()) {
-                    if (presentTypes.contains(ct)) {
-                        Integer count = typesInDeck.get(ct);
-                        if (count == null) {
-                            count = 0;
-                        }
-                        typesInDeck.put(ct, count + 1);
-                    }
-                }
-            }
-            int max = 0;
-            CardType.CoreType maxType = CardType.CoreType.Land;
-
-            for (final Map.Entry<CardType.CoreType, Integer> entry : typesInDeck.entrySet()) {
-                final CardType.CoreType type = entry.getKey();
-
-                if (max < entry.getValue()) {
-                    max = entry.getValue();
-                    maxType = type;
-                }
-            }
-
-            final CardType.CoreType determinedMaxType = maxType;
+            Set<CardType.CoreType> presentTypes = aiPlayer.getGame().getCardsIn(ZoneType.Graveyard).stream().flatMap(inGrave -> inGrave.getType().getCoreTypes().stream()).collect(Collectors.toSet());
+            final CardType.CoreType determinedMaxType = scanList.stream().flatMap(c -> c.getType().getCoreTypes().stream()).filter(presentTypes::contains)
+                    .collect(Collectors.groupingBy(ct -> ct, Collectors.counting()))
+                    .entrySet().stream().max(Entry.comparingByValue()).orElse(Map.entry(CardType.CoreType.Land, 0l)).getKey();
             CardCollection preferredList = CardLists.filter(fetchList, card -> card.getType().hasType(determinedMaxType));
             CardCollection preferredOppList = CardLists.filter(preferredList, CardPredicates.isControlledByAnyOf(aiPlayer.getOpponents()));
 

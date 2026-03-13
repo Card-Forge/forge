@@ -181,10 +181,14 @@
    <properties>
     <property name="reward">[
   {
-    "type": "item",
-    "count": 1,
-    "probability": 1,
-    "itemName": "Lightbringers Boots"
+    "type": "randomCard",
+    "colors": [ "Black" ],
+    "count": 3
+  },
+  {
+    "type": "gold",
+    "count": 50,
+    "addMaxCount": 100
   }
 ]</property>
     <property name="spawn.Easy" type="bool" value="true" />

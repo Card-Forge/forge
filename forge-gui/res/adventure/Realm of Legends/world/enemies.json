@@ -10970,7 +10970,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Water of Vigor"
+        "itemName": "Prayerbook of Vigor"
       },
       {
         "type": "card",
@@ -14125,6 +14125,12 @@
         "itemName": "Glimmerbell Bondband"
       },
       {
+        "type": "item",
+        "count": 1,
+        "probability": 0.6,
+        "itemName": "Kill Trophy"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Illuna, Apex of Wishes"
@@ -14211,6 +14217,12 @@
         "type": "item",
         "count": 1,
         "itemName": "Mamba Bondband"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.6,
+        "itemName": "Kill Trophy"
       },
       {
         "type": "card",
@@ -14302,6 +14314,12 @@
         "itemName": "Raptor Bondband"
       },
       {
+        "type": "item",
+        "count": 1,
+        "probability": 0.6,
+        "itemName": "Kill Trophy"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Vadrok, Apex of Thunder"
@@ -14390,6 +14408,12 @@
         "itemName": "Sabertooth Bondband"
       },
       {
+        "type": "item",
+        "count": 1,
+        "probability": 0.6,
+        "itemName": "Kill Trophy"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Snapdax, Apex of the Hunt"
@@ -14476,6 +14500,12 @@
         "type": "item",
         "count": 1,
         "itemName": "Symbiote Bondband"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.6,
+        "itemName": "Kill Trophy"
       },
       {
         "type": "card",
@@ -24568,72 +24598,6 @@
     "spawnRate": 0
   },
   {
-    "name": "Flubs",
-    "sprite": "sprites/enemy/humanoid/viashino/pikelizard.atlas",
-    "deck": [
-      "decks/legends/flubs.dck"
-    ],
-    "ai": "",
-    "speed": 60,
-    "scale": 1,
-    "life": 30,
-    "rewards": [
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Flubs, the Fool"
-      },
-      {
-        "type": "deckCard",
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "common",
-	        "uncommon"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-	]
-      },
-      {
-        "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "common",
-	        "uncommon"
-	]
-      },
-      {
-        "type": "gold",
-        "count": 100,
-        "addMaxCount": 1000
-      },
-      {
-        "type": "shards",
-        "count": 5,
-        "addMaxCount": 15
-      }
-    ],
-    "colors": "URG",
-    "spawnRate": 0
-  },
-  {
     "name": "Glarb",
     "sprite": "sprites/enemy/humanoid/viashino/battler_2.atlas",
     "deck": [
@@ -32651,11 +32615,6 @@
       {
         "type": "card",
         "count": 1,
-        "cardName": "Goro-Goro and Satoru"
-      },
-      {
-        "type": "card",
-        "count": 1,
         "cardName": "Satoru Umezawa"
       },
       {
@@ -32669,7 +32628,7 @@
       },
       {
         "type": "deckCard",
-        "count": 1,
+        "count": 2,
         "addMaxCount": 3,
         "rarity": [
           "common",
@@ -43244,6 +43203,12 @@
         "cardName": "Akim, the Soaring Wind"
       },
       {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
+      },
+      {
         "type": "deckCard",
         "count": 1,
         "addMaxCount": 3,
@@ -43307,6 +43272,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Gyruda, Doom of Depths"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
       },
       {
         "type": "deckCard",
@@ -43374,6 +43345,12 @@
         "cardName": "Kaheera, the Orphanguard"
       },
       {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
+      },
+      {
         "type": "deckCard",
         "count": 1,
         "addMaxCount": 3,
@@ -43438,6 +43415,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Kalamax, the Stormsire"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
       },
       {
         "type": "deckCard",
@@ -43507,6 +43490,12 @@
         "cardName": "Kathril, Aspect Warper"
       },
       {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
+      },
+      {
         "type": "deckCard",
         "count": 1,
         "addMaxCount": 3,
@@ -43570,6 +43559,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Keruga, the Macrosage"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
       },
       {
         "type": "deckCard",
@@ -43637,6 +43632,12 @@
         "cardName": "Lurrus of the Dream-Den"
       },
       {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
+      },
+      {
         "type": "deckCard",
         "count": 1,
         "addMaxCount": 3,
@@ -43700,6 +43701,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Obosh, the Preypiercer"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
       },
       {
         "type": "deckCard",
@@ -43768,6 +43775,12 @@
         "cardName": "Umori, the Collector"
       },
       {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
+      },
+      {
         "type": "deckCard",
         "count": 1,
         "addMaxCount": 3,
@@ -43833,6 +43846,12 @@
         "cardName": "Otrimi, the Ever-Playful"
       },
       {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
+      },
+      {
         "type": "deckCard",
         "count": 1,
         "addMaxCount": 3,
@@ -43896,6 +43915,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Tayam, Luminous Enigma"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
       },
       {
         "type": "deckCard",
@@ -43965,6 +43990,12 @@
         "cardName": "Xyris, the Writhing Storm"
       },
       {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
+      },
+      {
         "type": "deckCard",
         "count": 1,
         "addMaxCount": 3,
@@ -44031,6 +44062,12 @@
         "cardName": "Yorion, Sky Nomad"
       },
       {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
+      },
+      {
         "type": "deckCard",
         "count": 1,
         "addMaxCount": 3,
@@ -44094,6 +44131,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Zirda, the Dawnwaker"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
       },
       {
         "type": "deckCard",
@@ -45153,6 +45196,71 @@
       }
     ],
     "colors": "WBG",
+    "spawnRate": 0
+  },
+  {
+    "name": "Shroofus",
+    "sprite": "sprites/enemy/aberration/fungus.atlas",
+    "deck": [
+      "decks/legends/shroofus.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Shroofus Sproutsire"
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 50,
+        "addMaxCount": 250
+      },
+      {
+        "type": "shards",
+        "count": 1,
+        "addMaxCount": 5
+      }
+    ],
+    "colors": "G",
     "spawnRate": 0
   },
   {
@@ -51789,7 +51897,7 @@
         "addMaxCount": 15
       }
     ],
-    "spawnRate": 0.5
+    "spawnRate": 0.4
   },   
   {
     "name": "Grand Nemesis",
@@ -51849,7 +51957,7 @@
         "count": 1
       }
     ],
-    "spawnRate": 0.5
+    "spawnRate": 0.2
   },   
   {
     "name": "Archelos",
@@ -53790,71 +53898,6 @@
       }
     ],
     "colors": "BRG",
-    "spawnRate": 1
-  },
-  {
-    "name": "Kethis",
-    "sprite": "sprites/enemy/humanoid/elf/green_wiz3.atlas",
-    "deck": [
-      "decks/legends/kethis.dck"
-    ],
-    "ai": "",
-    "speed": 45,
-    "life": 20,
-    "rewards": [
-     {
-        "type": "card",
-        "count": 1,
-        "cardName": "Kethis, the Hidden Hand"
-      },
-      {
-        "type": "deckCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-	]
-      },
-      {
-        "type": "randomCard",
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "common",
-          "uncommon"
-	]
-      },
-      {
-        "type": "gold",
-        "count": 50,
-        "addMaxCount": 250
-      },
-      {
-        "type": "shards",
-        "count": 1,
-        "addMaxCount": 5
-      }
-    ],
-    "colors": "WBG",
     "spawnRate": 1
   },
   {
@@ -61733,6 +61776,21 @@
   {
     "name": "Vadmir",
     "sprite": "sprites/enemy/humanoid/human/artificer/archaeologist.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Chevill",
+    "sprite": "sprites/enemy/humanoid/human/bandit/banditleader.atlas",
     "deck": [
       "decks/legends/mystery_list.dck"
     ],
