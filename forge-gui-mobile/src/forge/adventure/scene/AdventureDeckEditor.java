@@ -670,7 +670,6 @@ public class AdventureDeckEditor extends FDeckEditor {
         if (currentEvent == null)
             return;
 
-        System.out.println("Completing Sealed event");
         currentEvent.isDraftComplete = true;
 
         if (currentEvent.draftedDeck == null) {
