@@ -41,7 +41,8 @@ public class NetworkLogAnalyzer {
     // ==================== Structured (delta sync) patterns ====================
 
     private static final Pattern DELTA_PACKET_PATTERN = Pattern.compile(
-            "\\[DeltaSync\\] Packet #(\\d+): Delta=(\\d+) bytes, FullState=(\\d+) bytes, Savings=(\\d+)%");
+            "\\[DeltaSync\\] Packet #(\\d+): Delta=(\\d+) bytes, FullState=(\\d+) bytes, Savings=(\\d+)%" +
+            "(?:, StateOnlyDelta=(\\d+) bytes, StateOnlyFull=(\\d+) bytes)?");
 
     private static final Pattern GAME_EVENT_OUTCOME_PATTERN = Pattern.compile(
             "\\[GAME EVENT\\] Game outcome: winner = (.+)");
@@ -275,6 +276,8 @@ public class NetworkLogAnalyzer {
             int packetCount = 0;
             long totalDeltaBytes = 0;
             long totalFullStateBytes = 0;
+            long stateOnlyDeltaBytes = 0;
+            long stateOnlyFullBytes = 0;
 
             while ((line = reader.readLine()) != null) {
                 // Track first/last timestamp for session duration
@@ -328,6 +331,18 @@ public class NetworkLogAnalyzer {
 
                         totalDeltaBytes += deltaBytes;
                         totalFullStateBytes += fullStateBytes;
+
+                        // State-only metrics (present when events are bundled)
+                        String soDelta = packetMatcher.group(5);
+                        String soFull = packetMatcher.group(6);
+                        if (soDelta != null && soFull != null) {
+                            stateOnlyDeltaBytes += Long.parseLong(soDelta);
+                            stateOnlyFullBytes += Long.parseLong(soFull);
+                        } else {
+                            // No events bundled — state-only equals total
+                            stateOnlyDeltaBytes += deltaBytes;
+                            stateOnlyFullBytes += fullStateBytes;
+                        }
                     } catch (NumberFormatException e) {
                         // Skip malformed packet line
                     }
@@ -470,6 +485,8 @@ public class NetworkLogAnalyzer {
             metrics.setDeltaPacketCount(packetCount);
             metrics.setTotalDeltaBytes(totalDeltaBytes);
             metrics.setTotalFullStateBytes(totalFullStateBytes);
+            metrics.setStateOnlyDeltaBytes(stateOnlyDeltaBytes);
+            metrics.setStateOnlyFullBytes(stateOnlyFullBytes);
             // Prefer numbered turn from structured/generic patterns; fall back to batch event count
             if (maxTurn > 0) {
                 metrics.setTurnCount(maxTurn);

@@ -339,10 +339,10 @@ public class NetworkPlayIntegrationTest implements IHasNetLog {
         long totalDeltas = executionResult.getTotalDeltaPackets();
         long totalBytes = executionResult.getTotalBytes();
         double bytesPerPacket = totalDeltas > 0 ? (double) totalBytes / totalDeltas : 0;
-        netLog.info("Bytes per delta packet: {} (target: <1000)", String.format("%.1f", bytesPerPacket));
+        netLog.info("Bytes per delta packet: {} (target: <2000)", String.format("%.1f", bytesPerPacket));
 
-        Assert.assertTrue(bytesPerPacket < 1000,
-                String.format("Bytes per delta packet should be < 1000 (efficient), was %.1f", bytesPerPacket));
+        Assert.assertTrue(bytesPerPacket < 2000,
+                String.format("Bytes per delta packet should be < 2000 (efficient), was %.1f", bytesPerPacket));
 
         // 3. Check zero checksum mismatches
         int checksumMismatches = analysisResult.getGamesWithChecksumMismatches();

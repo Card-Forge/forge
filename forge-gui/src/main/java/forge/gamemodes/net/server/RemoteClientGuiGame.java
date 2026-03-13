@@ -487,6 +487,29 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
                     DeltaPacket delta = deltaSyncManager.collectDeltas(gameView);
                     delta.setProxiedEvents(proxied);
                     sender.send(ProtocolMethod.applyDelta, delta);
+
+                    if (logBandwidth) {
+                        int deltaSize = measureSerializedSize(delta);
+                        int eventsSize = measureSerializedSize(proxied);
+                        int stateOnlyFullSize = measureSerializedSize(gameView);
+                        // Baseline: gameView + events sent separately (legacy protocol)
+                        int fullStateSize = stateOnlyFullSize + eventsSize;
+                        // State-only delta: strip events from delta to isolate state sync efficiency
+                        DeltaPacket stateOnly = delta.withoutEvents();
+                        int stateOnlyDeltaSize = measureSerializedSize(stateOnly);
+
+                        totalDeltaBytes += deltaSize;
+                        totalFullStateBytes += fullStateSize;
+                        deltaPacketCount++;
+
+                        int savings = fullStateSize > 0 ? (int)((1.0 - (double)deltaSize / fullStateSize) * 100) : 0;
+
+                        netLog.info("[DeltaSync] Packet #{}: Delta={} bytes, FullState={} bytes, Savings={}%, StateOnlyDelta={} bytes, StateOnlyFull={} bytes",
+                            deltaPacketCount, deltaSize, fullStateSize, savings, stateOnlyDeltaSize, stateOnlyFullSize);
+                        netLog.info("[DeltaSync]   Cumulative: Delta={}, FullState={}, Savings={}%",
+                            totalDeltaBytes, totalFullStateBytes,
+                            totalFullStateBytes > 0 ? (int)((1.0 - (double)totalDeltaBytes / totalFullStateBytes) * 100) : 0);
+                    }
                 }
             }
         } else {

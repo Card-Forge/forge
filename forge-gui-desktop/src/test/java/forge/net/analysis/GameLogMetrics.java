@@ -39,8 +39,10 @@ public class GameLogMetrics {
 
     // Delta sync metrics — both measured via serialize+compress for apples-to-apples comparison
     private int deltaPacketCount;
-    private long totalDeltaBytes;         // Serialized+compressed delta size
-    private long totalFullStateBytes;     // Serialized+compressed full GameView size
+    private long totalDeltaBytes;         // Serialized+compressed delta size (including events)
+    private long totalFullStateBytes;     // Serialized+compressed full GameView + events size
+    private long stateOnlyDeltaBytes;    // Delta size excluding events
+    private long stateOnlyFullBytes;     // Full GameView size excluding events
 
     // Deck tracking
     private List<String> deckNames = new ArrayList<>();
@@ -173,6 +175,22 @@ public class GameLogMetrics {
 
     public void setTotalFullStateBytes(long totalFullStateBytes) {
         this.totalFullStateBytes = totalFullStateBytes;
+    }
+
+    public long getStateOnlyDeltaBytes() {
+        return stateOnlyDeltaBytes;
+    }
+
+    public void setStateOnlyDeltaBytes(long stateOnlyDeltaBytes) {
+        this.stateOnlyDeltaBytes = stateOnlyDeltaBytes;
+    }
+
+    public long getStateOnlyFullBytes() {
+        return stateOnlyFullBytes;
+    }
+
+    public void setStateOnlyFullBytes(long stateOnlyFullBytes) {
+        this.stateOnlyFullBytes = stateOnlyFullBytes;
     }
 
     // Network performance getters

@@ -36,6 +36,9 @@ public class AnalysisResult {
     private long totalDeltaBytes;
     private long totalFullStateBytes;
     private double averageBandwidthSavings;
+    private long stateOnlyDeltaBytes;
+    private long stateOnlyFullBytes;
+    private double stateOnlySavings;
     private int totalTurns;
     private double averageTurns;
     private Set<String> uniqueDeckNames;
@@ -81,6 +84,12 @@ public class AnalysisResult {
 
         if (totalFullStateBytes > 0) {
             averageBandwidthSavings = 100.0 * (1.0 - (double) totalDeltaBytes / totalFullStateBytes);
+        }
+
+        stateOnlyDeltaBytes = allMetrics.stream().mapToLong(GameLogMetrics::getStateOnlyDeltaBytes).sum();
+        stateOnlyFullBytes = allMetrics.stream().mapToLong(GameLogMetrics::getStateOnlyFullBytes).sum();
+        if (stateOnlyFullBytes > 0) {
+            stateOnlySavings = 100.0 * (1.0 - (double) stateOnlyDeltaBytes / stateOnlyFullBytes);
         }
 
         totalTurns = allMetrics.stream()
@@ -389,17 +398,38 @@ public class AnalysisResult {
         // Delta Sync Bandwidth (only if delta sync data present)
         if (hasDeltaSyncData()) {
             sb.append("### Delta Sync Bandwidth\n\n");
-            sb.append("| Metric | Total | Avg per Game | Description |\n");
-            sb.append("|--------|-------|--------------|-------------|\n");
+            sb.append("| Metric | Total | Avg per Game |\n");
+            sb.append("|--------|-------|--------------|\n");
             long avgDelta = totalGames > 0 ? totalDeltaBytes / totalGames : 0;
             long avgFull = totalGames > 0 ? totalFullStateBytes / totalGames : 0;
-            sb.append(String.format("| Delta | %s | %s | Serialized+compressed delta packets |\n",
+            sb.append(String.format("| **Delta** | **%s** | **%s** |\n",
                     TestUtils.formatBytes(totalDeltaBytes), TestUtils.formatBytes(avgDelta)));
-            sb.append(String.format("| FullState | %s | %s | Serialized+compressed full GameView (baseline) |\n",
+            if (stateOnlyFullBytes > 0) {
+                long avgSoDelta = totalGames > 0 ? stateOnlyDeltaBytes / totalGames : 0;
+                long eventsDelta = totalDeltaBytes - stateOnlyDeltaBytes;
+                long avgEventsDelta = totalGames > 0 ? eventsDelta / totalGames : 0;
+                sb.append(String.format("| \u00a0\u00a0\u00a0State only | %s | %s |\n",
+                        TestUtils.formatBytes(stateOnlyDeltaBytes), TestUtils.formatBytes(avgSoDelta)));
+                sb.append(String.format("| \u00a0\u00a0\u00a0Events | %s | %s |\n",
+                        TestUtils.formatBytes(eventsDelta), TestUtils.formatBytes(avgEventsDelta)));
+            }
+            sb.append(String.format("| **FullState** | **%s** | **%s** |\n",
                     TestUtils.formatBytes(totalFullStateBytes), TestUtils.formatBytes(avgFull)));
+            if (stateOnlyFullBytes > 0) {
+                long avgSoFull = totalGames > 0 ? stateOnlyFullBytes / totalGames : 0;
+                long eventsFull = totalFullStateBytes - stateOnlyFullBytes;
+                long avgEventsFull = totalGames > 0 ? eventsFull / totalGames : 0;
+                sb.append(String.format("| \u00a0\u00a0\u00a0State only | %s | %s |\n",
+                        TestUtils.formatBytes(stateOnlyFullBytes), TestUtils.formatBytes(avgSoFull)));
+                sb.append(String.format("| \u00a0\u00a0\u00a0Events | %s | %s |\n",
+                        TestUtils.formatBytes(eventsFull), TestUtils.formatBytes(avgEventsFull)));
+            }
             sb.append("\n");
-            sb.append(String.format("**Bandwidth Savings:** %.1f%%\n", averageBandwidthSavings));
-            sb.append("\n");
+            sb.append(String.format("**Savings (overall):** %.1f%%", averageBandwidthSavings));
+            if (stateOnlyFullBytes > 0) {
+                sb.append(String.format(" | **State only:** %.1f%%", stateOnlySavings));
+            }
+            sb.append("\n\n");
         }
 
         // Results by Player Count (batch tests only)

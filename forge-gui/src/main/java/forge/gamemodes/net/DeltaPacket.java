@@ -133,6 +133,11 @@ public final class DeltaPacket implements NetEvent {
         return proxiedEvents != null && !proxiedEvents.isEmpty();
     }
 
+    /** Return a shallow copy without proxied events, for state-only size measurement. */
+    public DeltaPacket withoutEvents() {
+        return new DeltaPacket(sequenceNumber, objectDeltas, newObjects, checksum, checksumIncluded);
+    }
+
     public boolean isEmpty() {
         return objectDeltas.isEmpty() && newObjects.isEmpty() && !hasEvents();
     }
