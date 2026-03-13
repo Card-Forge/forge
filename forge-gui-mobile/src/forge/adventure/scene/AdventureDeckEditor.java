@@ -652,6 +652,7 @@ public class AdventureDeckEditor extends FDeckEditor {
         currentEvent.isDraftComplete = true;
 
         // Only do draft-specific things if this is actually a draft
+        // TODO: this is currently reused for Sealed Deck, maybe worth splitting into its own method?
         if (currentEvent.format == AdventureEventController.EventFormat.Draft) {
             Deck[] opponentDecks = currentEvent.getDraft().getComputerDecks();
             for (int i = 0; i < currentEvent.participants.length && i < opponentDecks.length; i++) {
@@ -660,15 +661,13 @@ public class AdventureDeckEditor extends FDeckEditor {
             currentEvent.draftedDeck = (Deck) currentEvent.registeredDeck.copyTo("Draft Deck");
         }
 
-        // For any event type, if we're in Entered state, we're now Ready
-        if (currentEvent.eventStatus == AdventureEventController.EventStatus.Entered) {
-            currentEvent.eventStatus = AdventureEventController.EventStatus.Ready;
-        }
-
         if (allowAddBasic()) {
             showAddBasicLandsDialog();
             //Might be annoying if you haven't pruned your deck yet, but best to remind player that
             //this probably needs to be done since it's there since it's not normally part of Adventure
+        }
+        if (currentEvent.eventStatus == AdventureEventController.EventStatus.Entered) {
+            currentEvent.eventStatus = AdventureEventController.EventStatus.Ready;
         }
     }
 
