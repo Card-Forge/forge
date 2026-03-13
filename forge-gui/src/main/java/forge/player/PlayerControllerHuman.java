@@ -610,7 +610,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         if (useSelectCardsInput(optionList, sa)) {
-            final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<>(this, isOptional ? 0 : 1, 1,
+            final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<>(this, 1, 1,
                     optionList, sa);
             input.setCancelAllowed(isOptional);
             input.setMessage(MessageUtil.formatMessage(title, player, targetedPlayer));
