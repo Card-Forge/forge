@@ -628,6 +628,9 @@ def main():
     episode_count = 0
     win_count = 0
     recent_returns = []
+    recent_turns = []
+    recent_agent_life = []
+    recent_opp_life = []
 
     # Decision type & mulligan tracking (reset each update)
     decision_type_counts = Counter()
@@ -696,6 +699,20 @@ def main():
 
                         writer.add_scalar("charts/episodic_return", ep_return, global_step)
                         writer.add_scalar("charts/episodic_length", ep_length, global_step)
+
+                        # Life totals from terminal obs (agent_scalars[0] = life)
+                        agent_life = float(next_obs["agent_scalars"][i][0])
+                        opp_life = float(next_obs["opponent_scalars"][i][0])
+                        recent_agent_life.append(agent_life)
+                        recent_opp_life.append(opp_life)
+                        writer.add_scalar("charts/agent_life_at_end", agent_life, global_step)
+                        writer.add_scalar("charts/opponent_life_at_end", opp_life, global_step)
+
+                        # Turns per game from game_result (batched by _add_info)
+                        if "game_result" in infos and infos.get("_game_result", np.zeros(args.num_envs, dtype=bool))[i]:
+                            turns = int(infos["game_result"]["turns_played"][i])
+                            recent_turns.append(turns)
+                            writer.add_scalar("charts/turns_per_game", turns, global_step)
 
         # --- GAE ---
         with torch.no_grad():
@@ -780,6 +797,16 @@ def main():
         writer.add_scalar("charts/win_rate", win_rate, global_step)
         writer.add_scalar("charts/episodes", episode_count, global_step)
         writer.add_scalar("charts/SPS", sps, global_step)
+
+        # Smoothed game metrics (last 100 episodes)
+        if recent_returns:
+            writer.add_scalar("charts/avg_return_100", np.mean(recent_returns[-100:]), global_step)
+        if recent_turns:
+            writer.add_scalar("charts/avg_turns_per_game_100", np.mean(recent_turns[-100:]), global_step)
+        if recent_agent_life:
+            writer.add_scalar("charts/avg_agent_life_at_end_100", np.mean(recent_agent_life[-100:]), global_step)
+        if recent_opp_life:
+            writer.add_scalar("charts/avg_opponent_life_at_end_100", np.mean(recent_opp_life[-100:]), global_step)
         writer.add_scalar("losses/policy_loss", pg_loss.item(), global_step)
         writer.add_scalar("losses/value_loss", v_loss.item(), global_step)
         writer.add_scalar("losses/entropy", entropy_loss.item(), global_step)
