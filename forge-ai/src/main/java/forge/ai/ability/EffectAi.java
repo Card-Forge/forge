@@ -150,6 +150,23 @@ public class EffectAi extends SpellAbilityAi {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
                 randomReturn = true;
+            } else if (logic.equals("SecretTunnel")) {
+                randomReturn = false;
+                if (phase.is(PhaseType.COMBAT_BEGIN, ai)) {
+                    for (String s : CardFactoryUtil.getMostProminentCreatureType(ai.getCreaturesInPlay())) {
+                        CardCollection typedCards = CardLists.filter(ai.getCreaturesInPlay(), CardPredicates.isType(s));
+                        if (typedCards.size() >= 2) {
+                            Card tgt1 = typedCards.get(0);
+                            Card tgt2 = typedCards.get(1);
+                            if (ComputerUtilCard.doesCreatureAttackAI(ai, tgt1) || ComputerUtilCard.doesCreatureAttackAI(ai, tgt2)) {
+                                sa.getTargets().add(tgt1);
+                                sa.getTargets().add(tgt2);
+                                randomReturn = true;
+                                break;
+                            }
+                        }
+                    }
+                }
             } else if (logic.equals("WillCastCreature") && ai.isAI()) {
                 AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
                 SpellAbility saCreature = aic.predictSpellToCastInMain2(ApiType.PermanentNoncreature);
