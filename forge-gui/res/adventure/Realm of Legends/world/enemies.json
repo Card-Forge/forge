@@ -51897,7 +51897,7 @@
         "addMaxCount": 15
       }
     ],
-    "spawnRate": 0.5
+    "spawnRate": 0.4
   },   
   {
     "name": "Grand Nemesis",
@@ -51957,7 +51957,7 @@
         "count": 1
       }
     ],
-    "spawnRate": 0.5
+    "spawnRate": 0.2
   },   
   {
     "name": "Archelos",
