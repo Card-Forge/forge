@@ -1,5 +1,8 @@
 package forge.game.player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Lightweight value object representing a team identity.
  * Currently wraps an int id (negative means unassigned/FFA).
@@ -10,6 +13,7 @@ public final class Team {
 
     private final int id;
     private final String name;
+    private final List<Player> members = new ArrayList<>();
 
     // Shared life values for teams (mutable)
     private int startingLife = 20;
@@ -73,5 +77,13 @@ public final class Team {
     @Override
     public int hashCode() {
         return Integer.hashCode(id);
+    }
+
+    public void addPlayer(Player player) {
+        members.add(player);
+    }
+
+    public List<Player> getMembers() {
+        return members;
     }
 }

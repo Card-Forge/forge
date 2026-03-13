@@ -275,9 +275,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (game != null) {
             newTeam = game.getOrCreateTeam(iTeam);
         } else {
+            // If Game is null we're in trouble
             newTeam = Team.of(iTeam);
         }
         this.team = newTeam;
+        this.team.addPlayer(this);
         // If shared team life is enabled, initialize or sync life values
         if (game != null && game.getRules().useSharedTeamLife() && this.team != null && this.team != Team.UNASSIGNED) {
             if (!this.team.isStartingLifeInitialized()) {
@@ -291,28 +293,28 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
     }
 
-    public final Team getTeamObject() {
-        return team;
-    }
-
-    public final void setTeamObject(final Team t) {
-        if (t == null) {
-            this.team = Team.UNASSIGNED;
-        } else if (game != null) {
-            this.team = game.getOrCreateTeam(t.getId());
-        } else {
-            this.team = t;
-        }
-        // Sync life to team if shared life enabled
-        if (game != null && game.getRules().useSharedTeamLife() && this.team != null && this.team != Team.UNASSIGNED) {
-            if (!this.team.isStartingLifeInitialized()) {
-                this.team.setStartingLife(this.startingLife);
-                this.team.setLife(this.startingLife);
-            }
-            this.life = this.team.getLife();
-            view.updateLife(this);
-        }
-    }
+//    public final Team getTeamObject() {
+//        return team;
+//    }
+//
+//    public final void setTeamObject(final Team t) {
+//        if (t == null) {
+//            this.team = Team.UNASSIGNED;
+//        } else if (game != null) {
+//            this.team = game.getOrCreateTeam(t.getId());
+//        } else {
+//            this.team = t;
+//        }
+//        // Sync life to team if shared life enabled
+//        if (game != null && game.getRules().useSharedTeamLife() && this.team != null && this.team != Team.UNASSIGNED) {
+//            if (!this.team.isStartingLifeInitialized()) {
+//                this.team.setStartingLife(this.startingLife);
+//                this.team.setLife(this.startingLife);
+//            }
+//            this.life = this.team.getLife();
+//            view.updateLife(this);
+//        }
+//    }
 
     public boolean isArchenemy() {
         return getZone(ZoneType.SchemeDeck).size() > 0; //Only the archenemy has schemes.
@@ -470,6 +472,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final boolean setLife(final int newLife, final SpellAbility sa) {
         boolean change = false;
+
         // rule 119.5
         if (life > newLife) {
             change = loseLife(life - newLife, false, false) > 0;
@@ -477,9 +480,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         else if (newLife > life) {
             change = gainLife(newLife - life, sa == null ? null : sa.getHostCard(), sa);
         }
-        else { // life == newLife
-            change = false;
-        }
+        // life == newLife is not a change, so do nothing
         return change;
     }
 
@@ -497,11 +498,10 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
             // sync this player's life to the team
             this.life = team.getLife();
-            view.updateLife(this);
         } else {
             life = startLife;
-            view.updateLife(this);
         }
+        view.updateLife(this);
     }
 
     public final int getLife() {
@@ -527,7 +527,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             team.setLife(oldTeamLife + delta);
             final int newTeamLife = team.getLife();
             // sync teammates' life and update views & fire per-player life-changed events
-            for (final Player p : getTeamMates(true)) {
+            for (final Player p : team.getMembers()) {
                 p.life = newTeamLife;
                 p.view.updateLife(p);
                 game.fireEvent(new GameEventPlayerLivesChanged(p, oldTeamLife, newTeamLife));
