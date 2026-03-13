@@ -675,10 +675,6 @@ public class AdventureDeckEditor extends FDeckEditor {
         if (currentEvent.eventStatus == AdventureEventController.EventStatus.Entered) {
             currentEvent.eventStatus = AdventureEventController.EventStatus.Ready;
         }
-
-        if (allowAddBasic()) {
-            showAddBasicLandsDialog();
-        }
     }
 
     private static final FileHandle deckIcon = Config.instance().getFile("ui/maindeck.png");
