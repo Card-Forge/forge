@@ -927,21 +927,13 @@ public class PlayerControllerAi extends PlayerController {
      * @see forge.game.player.PlayerController#chooseFlipResult(forge.Card, forge.game.player.Player, java.lang.String[], boolean)
      */
     @Override
-    public boolean chooseFlipResult(SpellAbility sa, Player flipper, boolean[] results, boolean call) {
+    public boolean chooseFlipResult(SpellAbility sa, Player flipper, boolean call) {
         if (call) {
             // Win if possible
-            boolean result = false;
-            for (boolean s : results) {
-                if (s) {
-                    result = s;
-                    break;
-                }
-            }
-            return result;
+            return true;
         } else {
             // heads or tails, AI doesn't know which is better now
-            int i = MyRandom.getRandom().nextInt(results.length);
-            return results[i];
+            return MyRandom.getRandom().nextBoolean();
         }
     }
 

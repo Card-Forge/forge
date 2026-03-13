@@ -1690,20 +1690,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public boolean chooseFlipResult(final SpellAbility sa, final Player flipper, final boolean[] results,
-                                    final boolean call) {
-        final String[] labelsSrc = call ? new String[]{localizer.getMessage("lblHeads"), localizer.getMessage("lblTails")}
-                : new String[]{localizer.getMessage("lblWinTheFlip"), localizer.getMessage("lblLoseTheFlip")};
-        final List<String> sortedResults = new ArrayList<String>();
-        for (boolean result : results) {
-            sortedResults.add(labelsSrc[result ? 0 : 1]);
-        }
-
-        Collections.sort(sortedResults);
-        if (!call) {
-            Collections.reverse(sortedResults);
-        }
-        return getGui().one(sa.getHostCard().getDisplayName() + " - " + localizer.getMessage("lblChooseAResult"), sortedResults).equals(labelsSrc[0]);
+    public boolean chooseFlipResult(final SpellAbility sa, final Player flipper, final boolean call) {
+        final List<String> labelsSrc = call ? List.of(localizer.getMessage("lblHeads"), localizer.getMessage("lblTails"))
+                : List.of(localizer.getMessage("lblWinTheFlip"), localizer.getMessage("lblLoseTheFlip"));
+        return getGui().one(sa.getHostCard().getDisplayName() + " - " + localizer.getMessage("lblChooseAResult"), labelsSrc).equals(labelsSrc.get(0));
     }
 
     @Override

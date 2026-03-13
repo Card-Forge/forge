@@ -453,7 +453,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public boolean chooseFlipResult(SpellAbility sa, Player flipper, boolean[] results, boolean call) {
+    public boolean chooseFlipResult(SpellAbility sa, Player flipper, boolean call) {
         return true;
     }
 
