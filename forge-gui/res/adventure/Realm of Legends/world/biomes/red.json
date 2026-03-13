@@ -26,15 +26,20 @@
 		"Gravel"
 	],
 	"enemies": [
+		"Averna",
 		"Chishiro",
 		"Firesong and Sunspeaker",
 		"Kalemne",
+		"Karona",
 		"Laelia",
+		"Lynde",
 		"Ghired",
+		"Orthion",
 		"Shanid",
 		"Leori",
 		"Shattergang Brothers",
 		"Tor Wauki",
+		"Zurzoth",
 		"Nemesis",
 		"Grand Nemesis"
 	],
