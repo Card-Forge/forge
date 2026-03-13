@@ -186,11 +186,11 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
 
     @Override
     public void channelActive(final ChannelHandlerContext ctx) {
-        // Don't use send() here, as this.channel is not yet set!
         String loginName = client.getUsername();
         if (loginName == null || loginName.isEmpty()) {
             loginName = FModel.getPreferences().getPref(FPref.PLAYER_NAME);
         }
+        // Don't use send() here, as this.channel is not yet set!
         ctx.channel().writeAndFlush(new LoginEvent(
                 loginName,
                 Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",")[0]),

@@ -995,7 +995,7 @@ public class CardView extends GameEntityView {
     }
     public String getBackSideName() { return get(TrackableProperty.BackSideName); }
 
-    CardStateView createAlternateState(final CardStateName state0) {
+    public CardStateView createAlternateState(final CardStateName state0) {
         return new CardStateView(getId(), state0, tracker);
     }
 

@@ -14,7 +14,6 @@ import forge.trackable.TrackableTypes.TrackableType;
 
 import java.io.Serializable;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,8 +37,7 @@ public final class DeltaPacket implements NetEvent {
     public static final int TYPE_CARD_VIEW = 0;
     public static final int TYPE_PLAYER_VIEW = 1;
     public static final int TYPE_STACK_ITEM_VIEW = 2;
-    public static final int TYPE_COMBAT_VIEW = 3;
-    public static final int TYPE_GAME_VIEW = 4;
+    public static final int TYPE_GAME_VIEW = 3;
 
     public static int typeTagFor(TrackableObject obj) {
         if (obj instanceof CardView) return TYPE_CARD_VIEW;
@@ -102,8 +100,8 @@ public final class DeltaPacket implements NetEvent {
                        Map<Integer, Map<TrackableProperty, Object>> newObjects,
                        int checksum, boolean checksumIncluded) {
         this.sequenceNumber = sequenceNumber;
-        this.objectDeltas = objectDeltas != null ? new HashMap<>(objectDeltas) : new HashMap<>();
-        this.newObjects = newObjects != null ? new HashMap<>(newObjects) : new HashMap<>();
+        this.objectDeltas = objectDeltas != null ? objectDeltas : Collections.emptyMap();
+        this.newObjects = newObjects != null ? newObjects : Collections.emptyMap();
         this.checksum = checksum;
         this.checksumIncluded = checksumIncluded;
     }

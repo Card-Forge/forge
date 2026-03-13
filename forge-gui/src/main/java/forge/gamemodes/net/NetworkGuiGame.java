@@ -2,7 +2,6 @@ package forge.gamemodes.net;
 
 import forge.game.GameView;
 import forge.game.event.GameEvent;
-import forge.card.CardStateName;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
@@ -152,10 +151,14 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
             }
         }
 
-        if (packet.getSequenceNumber() >= 0) {
+        ackSync(packet.getSequenceNumber());
+    }
+
+    private void ackSync(long seqNum) {
+        if (seqNum >= 0) {
             IGameController controller = getGameController();
             if (controller != null) {
-                controller.ackSync(packet.getSequenceNumber());
+                controller.ackSync(seqNum);
             }
         }
     }
@@ -355,36 +358,28 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
             if (csv == null) {
                 netLog.warn("[DeltaSync] CurrentState is null for CardView {}, creating with state={}",
                         cardView.getId(), csvData.state);
-                csv = createCardStateView(cardView, csvData.state);
-                if (csv != null) {
-                    cardView.set(TrackableProperty.CurrentState, csv);
-                }
+                csv = cardView.createAlternateState(csvData.state);
+                cardView.set(TrackableProperty.CurrentState, csv);
             }
         } else if (prop == TrackableProperty.AlternateState) {
             csv = cardView.getAlternateState();
             if (csv == null) {
                 netLog.debug("[DeltaSync] Creating AlternateState for CardView {} with state={}",
                         cardView.getId(), csvData.state);
-                csv = createCardStateView(cardView, csvData.state);
-                if (csv != null) {
-                    cardView.set(TrackableProperty.AlternateState, csv);
-                }
+                csv = cardView.createAlternateState(csvData.state);
+                cardView.set(TrackableProperty.CurrentState, csv);
             }
         } else if (prop == TrackableProperty.LeftSplitState) {
             csv = cardView.getLeftSplitState();
             if (csv == null) {
-                csv = createCardStateView(cardView, csvData.state);
-                if (csv != null) {
-                    cardView.set(TrackableProperty.LeftSplitState, csv);
-                }
+                csv = cardView.createAlternateState(csvData.state);
+                cardView.set(TrackableProperty.CurrentState, csv);
             }
         } else if (prop == TrackableProperty.RightSplitState) {
             csv = cardView.getRightSplitState();
             if (csv == null) {
-                csv = createCardStateView(cardView, csvData.state);
-                if (csv != null) {
-                    cardView.set(TrackableProperty.RightSplitState, csv);
-                }
+                csv = cardView.createAlternateState(csvData.state);
+                cardView.set(TrackableProperty.CurrentState, csv);
             }
         }
 
@@ -529,40 +524,11 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
         }
     }
 
-    private CardStateView createCardStateView(CardView cardView, CardStateName state) {
-        try {
-            java.lang.reflect.Method createMethod = CardView.class.getDeclaredMethod(
-                    "createAlternateState", CardStateName.class);
-            createMethod.setAccessible(true);
-            return (CardStateView) createMethod.invoke(cardView, state);
-        } catch (NoSuchMethodException e) {
-            try {
-                Class<?> csvClass = Class.forName("forge.game.card.CardView$CardStateView");
-                java.lang.reflect.Constructor<?> constructor = csvClass.getDeclaredConstructor(
-                        CardView.class, int.class, CardStateName.class, Tracker.class);
-                constructor.setAccessible(true);
-                Tracker tracker = cardView.getTracker();
-                return (CardStateView) constructor.newInstance(cardView, cardView.getId(), state, tracker);
-            } catch (Exception e2) {
-                netLog.error("[DeltaSync] Failed to create CardStateView via constructor: {}", e2.getMessage());
-                return null;
-            }
-        } catch (Exception e) {
-            netLog.error("[DeltaSync] Failed to create CardStateView: {}", e.getMessage());
-            return null;
-        }
-    }
-
     // ==================== Full state sync via setGameView ====================
 
     @Override
     public void setGameView(GameView gameView, long sequenceNumber) {
         setGameView(gameView);
-        if (sequenceNumber >= 0) {
-            IGameController controller = getGameController();
-            if (controller != null) {
-                controller.ackSync(sequenceNumber);
-            }
-        }
+        ackSync(sequenceNumber);
     }
 }
