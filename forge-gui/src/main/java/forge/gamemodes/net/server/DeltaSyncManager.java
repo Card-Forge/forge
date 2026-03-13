@@ -173,21 +173,9 @@ public class DeltaSyncManager implements IHasNetLog {
 
     private void collectObjectDelta(TrackableObject obj,
                                     Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
-                                    Map<Integer, Map<TrackableProperty, Object>> newObjects,
-                                    Set<Integer> currentObjectIds) {
-        if (obj == null) {
-            return;
-        }
-
+                                    Map<Integer, Map<TrackableProperty, Object>> newObjects) {
         int objType = DeltaPacket.typeTagFor(obj);
         int deltaKey = makeDeltaKey(objType, obj.getId());
-
-        // Skip cards already visited to prevent duplicate processing
-        if (currentObjectIds.contains(deltaKey)) {
-            return;
-        }
-
-        currentObjectIds.add(deltaKey);
 
         if (!sentObjectIds.contains(deltaKey)) {
             // New object — register consumer and build full property map
@@ -236,8 +224,9 @@ public class DeltaSyncManager implements IHasNetLog {
         if (currentObjectIds.contains(deltaKey)) {
             return;
         }
+        currentObjectIds.add(deltaKey);
 
-        collectObjectDelta(obj, objectDeltas, newObjects, currentObjectIds);
+        collectObjectDelta(obj, objectDeltas, newObjects);
 
         Map<TrackableProperty, Object> props = obj.getProps();
         if (props != null) {
