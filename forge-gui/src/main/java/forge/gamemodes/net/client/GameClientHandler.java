@@ -24,7 +24,6 @@ import io.netty.channel.ChannelHandlerContext;
 
 import java.util.EnumMap;
 import java.util.Iterator;
-import java.util.List;
 
 final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements IHasNetLog {
 
@@ -80,11 +79,6 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
                     }
                 }
                 client.setGameControllers(myPlayers);
-                break;
-            case handleGameEvents:
-                if (this.tracker != null && args.length > 0 && args[0] instanceof List<?> events) {
-                    args[0] = GameEventProxy.unwrapAll(events, this.tracker);
-                }
                 break;
             default:
                 break;

@@ -91,6 +91,13 @@ public final class DeltaPacket implements NetEvent {
         }
     }
 
+    /** Create an events-only DeltaPacket with no state deltas (seq=-1 means no ack needed). */
+    public static DeltaPacket eventsOnly(List<Object> proxiedEvents) {
+        DeltaPacket packet = new DeltaPacket(-1L, null, null, 0, false);
+        packet.setProxiedEvents(proxiedEvents);
+        return packet;
+    }
+
     public DeltaPacket(long sequenceNumber, Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
                        Map<Integer, Map<TrackableProperty, Object>> newObjects,
                        int checksum, boolean checksumIncluded) {

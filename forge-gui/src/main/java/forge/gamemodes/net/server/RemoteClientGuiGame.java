@@ -514,7 +514,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
             }
         } else {
             updateGameView(false);
-            sender.send(ProtocolMethod.handleGameEvents, proxied);
+            sender.send(ProtocolMethod.applyDelta, DeltaPacket.eventsOnly(proxied));
         }
     }
 

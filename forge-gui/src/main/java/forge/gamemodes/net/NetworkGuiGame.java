@@ -152,9 +152,11 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
             }
         }
 
-        IGameController controller = getGameController();
-        if (controller != null) {
-            controller.ackSync(packet.getSequenceNumber());
+        if (packet.getSequenceNumber() >= 0) {
+            IGameController controller = getGameController();
+            if (controller != null) {
+                controller.ackSync(packet.getSequenceNumber());
+            }
         }
     }
 
