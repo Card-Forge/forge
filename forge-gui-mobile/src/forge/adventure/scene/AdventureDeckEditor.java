@@ -37,7 +37,10 @@ import forge.util.ItemPool;
 import forge.util.Localizer;
 import forge.util.Utils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -253,6 +256,11 @@ public class AdventureDeckEditor extends FDeckEditor {
                         };
 
                 }
+            } else if (event.format == AdventureEventController.EventFormat.Sealed) {
+                return new DeckEditorPage[]{
+                        new AdventureDeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.DRAFT_POOL),
+                        new AdventureDeckSectionPage(DeckSection.Main, ItemManagerConfig.DRAFT_POOL)
+                };
             }
             if (event.format == AdventureEventController.EventFormat.Jumpstart) {
                 return new DeckEditorPage[]{
@@ -642,18 +650,25 @@ public class AdventureDeckEditor extends FDeckEditor {
         if (currentEvent == null)
             return;
         currentEvent.isDraftComplete = true;
-        Deck[] opponentDecks = currentEvent.getDraft().getComputerDecks();
-        for (int i = 0; i < currentEvent.participants.length && i < opponentDecks.length; i++) {
-            currentEvent.participants[i].setDeck(opponentDecks[i]);
+
+        // Only do draft-specific things if this is actually a draft
+        if (currentEvent.format == AdventureEventController.EventFormat.Draft) {
+            Deck[] opponentDecks = currentEvent.getDraft().getComputerDecks();
+            for (int i = 0; i < currentEvent.participants.length && i < opponentDecks.length; i++) {
+                currentEvent.participants[i].setDeck(opponentDecks[i]);
+            }
+            currentEvent.draftedDeck = (Deck) currentEvent.registeredDeck.copyTo("Draft Deck");
         }
-        currentEvent.draftedDeck = (Deck) currentEvent.registeredDeck.copyTo("Draft Deck");
+
+        // For any event type, if we're in Entered state, we're now Ready
+        if (currentEvent.eventStatus == AdventureEventController.EventStatus.Entered) {
+            currentEvent.eventStatus = AdventureEventController.EventStatus.Ready;
+        }
+
         if (allowAddBasic()) {
             showAddBasicLandsDialog();
             //Might be annoying if you haven't pruned your deck yet, but best to remind player that
             //this probably needs to be done since it's there since it's not normally part of Adventure
-        }
-        if (currentEvent.eventStatus == AdventureEventController.EventStatus.Entered) {
-            currentEvent.eventStatus = AdventureEventController.EventStatus.Ready;
         }
     }
 
@@ -910,6 +925,36 @@ public class AdventureDeckEditor extends FDeckEditor {
         }
 
         Localizer localizer = Forge.getLocalizer();
+        AdventureEventData currentEvent = getCurrentEvent();
+
+        // Sealed Deck
+        boolean isSealedEvent = currentEvent != null &&
+                currentEvent.format == AdventureEventController.EventFormat.Sealed &&
+                currentEvent.eventStatus == AdventureEventController.EventStatus.Entered;
+        if (isSealedEvent) {
+            if (getDeck().getMain().countAll() < 40) {
+                FOptionPane.showConfirmDialog(localizer.getMessage("lblEndAdventureEventConfirm"),
+                        localizer.getMessage("lblLeaveDraft"),
+                        localizer.getMessage("lblLeave"),
+                        localizer.getMessage("lblCancel"),
+                        false, result -> {
+                    if (result) {
+                        currentEvent.eventStatus = AdventureEventController.EventStatus.Abandoned;
+                        resolveClose(canCloseCallback, true);
+                    } else {
+                        canCloseCallback.accept(false);
+                    }
+                });
+                return;
+            } else {
+                currentEvent.isDraftComplete = true;
+                currentEvent.eventStatus = AdventureEventController.EventStatus.Ready;
+                resolveClose(canCloseCallback, true);
+                return;
+            }
+        }
+
+        // Booster Draft
         if (isDrafting()) {
             FOptionPane.showConfirmDialog(localizer.getMessage("lblEndAdventureEventConfirm"), localizer.getMessage("lblLeaveDraft"), localizer.getMessage("lblLeave"), localizer.getMessage("lblCancel"), false, result -> resolveClose(canCloseCallback, result == true));
             return;

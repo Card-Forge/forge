@@ -345,6 +345,8 @@ public class EventScene extends MenuScene implements IAfterMatch {
                 editDeck.setVisible(false);
                 if (currentEvent.getDraft() != null) {
                     advance.setText("Enter Draft");
+                } else if (currentEvent.format == AdventureEventController.EventFormat.Sealed) {
+                    advance.setText("Create Deck");
                 } else {
                     advance.setText("Select Deck");
                 }
@@ -455,6 +457,12 @@ public class EventScene extends MenuScene implements IAfterMatch {
                     case Draft:
                         DraftScene.instance().loadEvent(currentEvent);
                         Forge.switchScene(DraftScene.instance());
+                        break;
+                    case Sealed:
+                        // Generate the sealed pool and go straight to deck editor
+                        currentEvent.generateSealedPool();
+                        DeckEditScene.getInstance().loadEvent(currentEvent);
+                        Forge.switchScene(DeckEditScene.getInstance());
                         break;
                     case Jumpstart:
                         loadMetaDraft();
