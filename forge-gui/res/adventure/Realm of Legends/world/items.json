@@ -659,7 +659,13 @@
     "description": "The victory is yours now. Return to the mountain capitol for a reward.",
     "iconName": "VictoryStandard",
     "questItem": true
-  }, 
+  },
+  {
+    "name": "Kill Trophy",
+    "description": "Shows triumph over a monster. Give to Chevill for a reward.",
+    "iconName": "KillTrophy",
+    "questItem": true
+  },
   {
     "name": "Colorless rune",
     "usableOnWorldMap": true,
@@ -3453,7 +3459,7 @@
       "iconName": "TruthButcher'sArmor",
       "effect": {
         "changeStartCards": 4,
-        "lifeModifier": -12
+        "lifeModifier": -16
     }
   },
     {
@@ -3501,7 +3507,7 @@
       "cost": 6000,
       "effect": {
         "changeStartCards": 2,
-        "lifeModifier": -7
+        "lifeModifier": -10
     }
   },
     {
@@ -3538,7 +3544,7 @@
       "cost": 1000,
       "effect": {
         "changeStartCards": 2,
-        "lifeModifier": -10
+        "lifeModifier": -13
     }
   },
     {
@@ -4059,7 +4065,7 @@
     "equipmentSlot": "Body",
     "iconName": "ReliquaryRobes",
     "effect": {
-        "lifeModifier": -7,
+        "lifeModifier": -10,
         "startBattleWithCard": [
         "Reliquary Tower|C14"
      ]
