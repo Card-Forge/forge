@@ -45200,7 +45200,7 @@
   },
   {
     "name": "Shroofus",
-    "sprite": "sprites/enemy/aberration/fungus.atlas",
+    "sprite": "sprites/enemy/plant/fungus.atlas",
     "deck": [
       "decks/legends/shroofus.dck"
     ],
