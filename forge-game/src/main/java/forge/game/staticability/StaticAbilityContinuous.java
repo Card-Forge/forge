@@ -882,6 +882,9 @@ public final class StaticAbilityContinuous {
                     int v = AbilityUtils.calculateAmount(hostCard, params.get("CanBlockAmount"), stAb, true);
                     affectedCard.addCanBlockAdditional(v, se.getTimestamp());
                 }
+                if (params.containsKey("LethalDamageByPower")) {
+                    affectedCard.addLethalDamageByPower(se.getTimestamp());
+                }
             }
 
             if (controllerMayPlay && (mayPlayLimit == null || stAb.getMayPlayTurn() < mayPlayLimit)) {
