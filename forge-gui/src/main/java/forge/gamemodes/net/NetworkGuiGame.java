@@ -398,7 +398,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
 
     private int computeStateChecksum(GameView gameView) {
         int phaseOrdinal = gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1;
-        return NetworkChecksumUtil.computeStateChecksum(gameView.getTurn(), phaseOrdinal, gameView.getPlayers());
+        return NetworkChecksumUtil.computeStateChecksum(gameView.getTurn(), phaseOrdinal, gameView);
     }
 
     private void logChecksumDetails(GameView gameView, DeltaPacket packet) {
@@ -415,6 +415,9 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
                     handSize, graveyardSize, battlefieldSize);
         }
         netLog.error("[DeltaSync] Compare with server state in host log at seq={}", packet.getSequenceNumber());
+        int phaseOrdinal = gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1;
+        netLog.error("[DeltaSync] Client breakdown: {}",
+                NetworkChecksumUtil.computeChecksumBreakdown(gameView.getTurn(), phaseOrdinal, gameView));
     }
 
     private void requestFullStateResync() {

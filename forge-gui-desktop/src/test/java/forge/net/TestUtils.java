@@ -1,5 +1,6 @@
 package forge.net;
 
+import forge.gamemodes.net.NetworkChecksumUtil;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeNetPreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -50,5 +51,8 @@ public final class TestUtils {
         FModel.getPreferences().setPref(FPref.ENFORCE_DECK_LEGALITY, false);
         FModel.getNetPreferences().setPref(ForgeNetPreferences.FNetPref.NET_BANDWIDTH_LOGGING, true);
         FModel.getNetPreferences().setPref(ForgeNetPreferences.FNetPref.UPnP, "NEVER");
+
+        // Enable deep checksum for batch tests to catch GUI state desyncs
+        NetworkChecksumUtil.setDeepChecksumEnabled(true);
     }
 }

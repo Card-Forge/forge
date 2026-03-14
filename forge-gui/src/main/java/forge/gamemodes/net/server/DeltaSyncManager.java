@@ -111,7 +111,7 @@ public class DeltaSyncManager implements IHasNetLog {
         int checksum = 0;
         boolean includeChecksum = packetsSinceLastChecksum >= CHECKSUM_INTERVAL;
         if (includeChecksum) {
-            checksum = NetworkChecksumUtil.computeStateChecksum(snapshotTurn, snapshotPhaseOrdinal, gameView.getPlayers());
+            checksum = NetworkChecksumUtil.computeStateChecksum(snapshotTurn, snapshotPhaseOrdinal, gameView);
             packetsSinceLastChecksum = 0;
             logChecksumDetailsWithSnapshot(gameView, checksum, seq,
                     snapshotTurn, snapshotPhaseOrdinal);
@@ -487,6 +487,8 @@ public class DeltaSyncManager implements IHasNetLog {
                     player.getId(), player.getName(), player.getLife(),
                     handSize, graveyardSize, battlefieldSize);
         }
+        netLog.info("[DeltaSync] Server breakdown: {}",
+                NetworkChecksumUtil.computeChecksumBreakdown(snapshotTurn, snapshotPhaseOrdinal, gameView));
     }
 
     public long getCurrentSequence() {
