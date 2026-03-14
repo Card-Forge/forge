@@ -96,7 +96,7 @@ public class DeltaSyncManager implements IHasNetLog {
 
         walkAndCollect(gameView, objectDeltas, newObjects, currentObjectIds);
 
-        // Update tracked objects
+        // Update tracked objects — prune IDs for removed objects
         sentObjectIds.retainAll(currentObjectIds);
         sentObjectIds.addAll(currentObjectIds);
 
@@ -169,6 +169,9 @@ public class DeltaSyncManager implements IHasNetLog {
 
             // Clear dirty props since we just sent everything
             obj.getAndClearDirtyProps(consumerId);
+            if (obj instanceof CardView) {
+                ensureCardStateConsumers((CardView) obj);
+            }
         } else if (!registeredObjects.contains(obj)) {
             // Replacement instance — same ID but different object (e.g. zone change
             // creates a new Card+CardView via copyCard). Transfer consumer registration
@@ -191,8 +194,23 @@ public class DeltaSyncManager implements IHasNetLog {
                 netLog.trace("[DeltaSync] Replaced instance: type={} id={}, {} props",
                         objType, obj.getId(), allProps.size());
             }
+            if (obj instanceof CardView) {
+                ensureCardStateConsumers((CardView) obj);
+            }
+        } else if (obj instanceof CardView) {
+            // CardView: check own dirty props AND CardStateView dirty props
+            EnumSet<TrackableProperty> dirtyProps = obj.hasConsumerChanges(consumerId)
+                    ? obj.getAndClearDirtyProps(consumerId)
+                    : EnumSet.noneOf(TrackableProperty.class);
+            Map<TrackableProperty, Object> delta = dirtyProps.isEmpty()
+                    ? new EnumMap<>(TrackableProperty.class)
+                    : buildPropertyMap(obj, dirtyProps);
+            mergeCardStateDirtyProps((CardView) obj, delta);
+            if (!delta.isEmpty()) {
+                objectDeltas.put(deltaKey, delta);
+            }
         } else if (obj.hasConsumerChanges(consumerId)) {
-            // Existing object — check per-consumer dirty set
+            // Existing non-CardView object — standard per-consumer dirty set
             EnumSet<TrackableProperty> dirtyProps = obj.getAndClearDirtyProps(consumerId);
             Map<TrackableProperty, Object> delta = buildPropertyMap(obj, dirtyProps);
             if (!delta.isEmpty()) {
@@ -203,11 +221,52 @@ public class DeltaSyncManager implements IHasNetLog {
         }
     }
 
+    // ==================== CardStateView dirty tracking ====================
+
+    private void ensureCardStateConsumer(CardStateView csv) {
+        if (csv != null && !registeredObjects.contains(csv)) {
+            csv.registerConsumer(consumerId);
+            registeredObjects.add(csv);
+            csv.getAndClearDirtyProps(consumerId);
+        }
+    }
+
+    private void ensureCardStateConsumers(CardView card) {
+        ensureCardStateConsumer(card.getCurrentState());
+        ensureCardStateConsumer(card.getAlternateState());
+    }
+
+    private void mergeCardStateDirtyProps(CardView card, Map<TrackableProperty, Object> delta) {
+        mergeOneStateDirtyProps(card.getCurrentState(), TrackableProperty.CurrentState, delta);
+        mergeOneStateDirtyProps(card.getAlternateState(), TrackableProperty.AlternateState, delta);
+    }
+
+    private void mergeOneStateDirtyProps(CardStateView csv, TrackableProperty prop,
+                                          Map<TrackableProperty, Object> delta) {
+        if (csv == null || !csv.hasConsumerChanges(consumerId)) return;
+        if (delta.containsKey(prop)) return; // Full state already included from CardView dirty set
+        EnumSet<TrackableProperty> dirtyProps = csv.getAndClearDirtyProps(consumerId);
+        if (dirtyProps.isEmpty()) return;
+
+        Map<TrackableProperty, Object> csvMap = new EnumMap<>(TrackableProperty.class);
+        Map<TrackableProperty, Object> csvProps = csv.getProps();
+        for (TrackableProperty dirtyProp : dirtyProps) {
+            Object netVal = toNetworkValue(dirtyProp, csvProps.get(dirtyProp));
+            if (netVal != SKIP_MARKER) {
+                csvMap.put(dirtyProp, netVal);
+            }
+        }
+        if (!csvMap.isEmpty()) {
+            delta.put(prop, new CardStateData(csv.getId(), csv.getState(), csvMap));
+        }
+    }
+
     /**
      * Recursively walk the object graph starting from a TrackableObject, collecting deltas.
      * Discovers children by inspecting property values for TrackableObject/TrackableCollection
-     * references. CombatView and CardStateView are skipped — they are serialized inline as
-     * property values by toNetworkValue(), not as top-level delta objects.
+     * references. CombatView is serialized inline by toNetworkValue(). CardStateViews are not
+     * top-level delta objects but get per-consumer dirty tracking registered here so their
+     * property changes can be merged into the parent CardView's delta.
      */
     private void walkAndCollect(TrackableObject obj,
                                 Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
@@ -218,6 +277,11 @@ public class DeltaSyncManager implements IHasNetLog {
         }
         int type = DeltaPacket.typeTagFor(obj);
         if (type < 0) {
+            // CardStateViews aren't top-level delta objects, but need consumer
+            // registration so their per-property dirty tracking works
+            if (obj instanceof CardStateView) {
+                ensureCardStateConsumer((CardStateView) obj);
+            }
             return;
         }
         int deltaKey = makeDeltaKey(type, obj.getId());
@@ -442,6 +506,9 @@ public class DeltaSyncManager implements IHasNetLog {
         }
         int type = DeltaPacket.typeTagFor(obj);
         if (type < 0) {
+            if (obj instanceof CardStateView) {
+                ensureCardStateConsumer((CardStateView) obj);
+            }
             return;
         }
         int deltaKey = makeDeltaKey(type, obj.getId());

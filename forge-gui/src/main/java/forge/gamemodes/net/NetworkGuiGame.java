@@ -356,19 +356,19 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
                 netLog.debug("[DeltaSync] Creating AlternateState for CardView {} with state={}",
                         cardView.getId(), csvData.state);
                 csv = cardView.createAlternateState(csvData.state);
-                cardView.set(TrackableProperty.CurrentState, csv);
+                cardView.set(TrackableProperty.AlternateState, csv);
             }
         } else if (prop == TrackableProperty.LeftSplitState) {
             csv = cardView.getLeftSplitState();
             if (csv == null) {
                 csv = cardView.createAlternateState(csvData.state);
-                cardView.set(TrackableProperty.CurrentState, csv);
+                cardView.set(TrackableProperty.LeftSplitState, csv);
             }
         } else if (prop == TrackableProperty.RightSplitState) {
             csv = cardView.getRightSplitState();
             if (csv == null) {
                 csv = cardView.createAlternateState(csvData.state);
-                cardView.set(TrackableProperty.CurrentState, csv);
+                cardView.set(TrackableProperty.RightSplitState, csv);
             }
         }
 
