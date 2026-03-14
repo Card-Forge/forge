@@ -2,7 +2,9 @@ package forge.itemmanager;
 
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.util.*;
 import java.util.Map.Entry;
@@ -479,6 +481,13 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         @Override
         public final void paint(final Graphics g) {
             super.paint(g);
+
+            // Improve scaling quality
+            if (g instanceof Graphics2D g2d) {
+                g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+            }
 
             FSkin.drawImage(g, /*overActionIndex == 0 ? icoDeleteOver : */icoDelete, 0, 0, imgSize, imgSize);
             FSkin.drawImage(g, /*overActionIndex == 0 ? icoDeleteOver : */icoEdit, imgSize - 1, -1, imgSize, imgSize);
