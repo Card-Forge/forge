@@ -2087,6 +2087,12 @@
         "probability": 1,
         "count": 10,
         "addMaxCount": 10
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Manasight Amulet"
       }
     ],
     "colors": "GR",
@@ -6063,6 +6069,12 @@
         "probability": 0.7,
         "count": 15,
         "addMaxCount": 85
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Lucky Clover"
       }
     ],
     "colors": "R",
@@ -14335,6 +14347,12 @@
         "probability": 0.3,
         "count": 10,
         "addMaxCount": 90
+      },
+      {
+        "type": "item",
+        "probability": 0.05,
+        "count": 1,
+        "itemName": "Tome of the Vault"
       }
     ],
     "colors": "B",
@@ -15398,6 +15416,12 @@
         "probability": 1,
         "count": 10,
         "addMaxCount": 10
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Celestial Sword"
       }
     ],
     "colors": "W",
@@ -17565,7 +17589,8 @@
       {
         "type": "item",
         "probability": 0.5,
-        "itemName": "Diamond Kaleidoscope"
+        "itemName": "Diamond Kaleidoscope",
+        "count": 1
       }
     ],
     "colors": "W",
@@ -18581,62 +18606,6 @@
       "Swarm",
       "Construct",
       "IdentityColorless"
-    ],
-    "boss": true
-  },
-  {
-    "name": "Mighty Djinn",
-    "sprite": "sprites/enemy/elemental/genie.atlas",
-    "deck": [
-      "decks/miniboss/mighty_djinn.dck"
-    ],
-    "ai": "",
-    "flying": true,
-    "spawnRate": 0,
-    "difficulty": 0.1,
-    "speed": 5,
-    "scale": 0.6,
-    "life": 25,
-    "rewards": [
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 3,
-        "addMaxCount": 7,
-        "colors": [
-          "Blue"
-        ],
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "gold",
-        "probability": 0.7,
-        "count": 50,
-        "addMaxCount": 95
-      },
-      {
-        "type": "shards",
-        "probability": 1,
-        "count": 10,
-        "addMaxCount": 10
-      },
-      {
-        "type": "item",
-        "probability": 1,
-        "count": 1,
-        "itemName": "Cursed Lamp"
-      }
-    ],
-    "colors": "U",
-    "questTags": [
-      "Flying",
-      "Humanoid",
-      "Elemental",
-      "Wind",
-      "IdentityBlue",
-      "Djinn"
     ],
     "boss": true
   },
@@ -23340,6 +23309,12 @@
         "probability": 1,
         "count": 5,
         "addMaxCount": 10
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Tome of the Portal"
       }
     ],
     "colors": "B",
@@ -24963,6 +24938,12 @@
         "probability": 1,
         "count": 10,
         "addMaxCount": 10
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Power Armor Greaves"
       }
     ],
     "colors": "U",
@@ -25346,7 +25327,8 @@
       },
       {
         "type": "item",
-        "itemName": "Attendant's Prayerbook"
+        "itemName": "Attendant's Prayerbook",
+        "count": 1
       },
       {
         "type": "shards",
@@ -26678,6 +26660,12 @@
           "Uncommon",
           "Rare"
         ]
+      },
+      {
+        "type": "item",
+        "probability": 0.05,
+        "count": 1,
+        "itemName": "Tome of the Vault"
       }
     ],
     "colors": "B",
@@ -26711,6 +26699,12 @@
         "type": "randomCard",
         "count": 2,
         "addMaxCount": 8
+      },
+      {
+        "type": "item",
+        "probability": 0.05,
+        "count": 1,
+        "itemName": "Tome of the Vault"
       }
     ],
     "colors": "BR",
@@ -28087,6 +28081,12 @@
         "type": "landSketchbookShop",
         "probability": 0.05,
         "count": 1
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Shield of the Hivelord"
       }
     ],
     "colors": "GRW",
@@ -29774,6 +29774,12 @@
         "probability": 1,
         "count": 1,
         "cardName": "Clone|3ED"
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Tome of the Trove"
       }
     ],
     "colors": "U",
@@ -29833,6 +29839,12 @@
         "probability": 1,
         "count": 1,
         "cardName": "Plow Under|UDS"
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Grovetender's Robes"
       }
     ],
     "colors": "G",
@@ -32856,7 +32868,8 @@
       },
       {
         "type": "item",
-        "itemName": "Copper Angel's Axe"
+        "itemName": "Copper Angel's Axe",
+        "count": 1
       }
     ]
   },
@@ -32875,19 +32888,23 @@
     "rewards": [
       {
         "type": "card",
-        "cardName": "Márton Stromgald|ICE"
+        "cardName": "Márton Stromgald|ICE",
+        "count": 1
       },
       {
         "type": "card",
-        "cardName": "Mogg Infestation|STH"
+        "cardName": "Mogg Infestation|STH",
+        "count": 1
       },
       {
         "type": "card",
-        "cardName": "Insurrection|ONS"
+        "cardName": "Insurrection|ONS",
+        "count": 1
       },
       {
         "type": "card",
-        "cardName": "Goblin Marshal|UDS"
+        "cardName": "Goblin Marshal|UDS",
+        "count": 1
       },
       {
         "type": "shards",
@@ -32899,7 +32916,8 @@
       },
       {
         "type": "item",
-        "itemName": "Ebony Horseshoe"
+        "itemName": "Ebony Horseshoe",
+        "count": 1
       }
     ]
   },
@@ -33002,7 +33020,8 @@
       },
       {
         "type": "item",
-        "itemName": "Serrated Quiver"
+        "itemName": "Serrated Quiver",
+        "count": 1
       }
     ]
   },
@@ -33106,7 +33125,8 @@
       },
       {
         "type": "item",
-        "itemName": "Ring of Infestation"
+        "itemName": "Ring of Infestation",
+        "count": 1
       }
     ]
   },
@@ -33153,7 +33173,8 @@
       },
       {
         "type": "item",
-        "itemName": "Ivy Seer's Tome"
+        "itemName": "Ivy Seer's Tome",
+        "count": 1
       }
     ]
   },
@@ -33172,19 +33193,23 @@
     "rewards": [
       {
         "type": "card",
-        "cardName": "Multani, Maro-Sorcerer|ULG"
+        "cardName": "Multani, Maro-Sorcerer|ULG",
+        "count": 1
       },
       {
         "type": "card",
-        "cardName": "Greater Good|USG"
+        "cardName": "Greater Good|USG",
+        "count": 1
       },
       {
         "type": "card",
-        "cardName": "Sylvan Library|LEG"
+        "cardName": "Sylvan Library|LEG",
+        "count": 1
       },
       {
         "type": "card",
-        "cardName": "Forgotten Ancient|SCG"
+        "cardName": "Forgotten Ancient|SCG",
+        "count": 1
       },
       {
         "type": "shards",
@@ -33196,7 +33221,8 @@
       },
       {
         "type": "item",
-        "itemName": "Mask of Multani"
+        "itemName": "Mask of Multani",
+        "count": 1
       }
     ]
   },
@@ -33292,7 +33318,8 @@
       },
       {
         "type": "item",
-        "itemName": "Purgatory Priest's Robes"
+        "itemName": "Purgatory Priest's Robes",
+        "count": 1
       }
     ]
   },
@@ -33339,7 +33366,8 @@
       },
       {
         "type": "item",
-        "itemName": "Paladin's Shield"
+        "itemName": "Paladin's Shield",
+        "count": 1
       }
     ]
   },
@@ -33435,7 +33463,8 @@
       },
       {
         "type": "item",
-        "itemName": "Serpent Ring"
+        "itemName": "Serpent Ring",
+        "count": 1
       }
     ]
   },
@@ -33482,7 +33511,8 @@
       },
       {
         "type": "item",
-        "itemName": "Barrin's Robes"
+        "itemName": "Barrin's Robes",
+        "count": 1
       }
     ]
   },
@@ -33529,7 +33559,8 @@
       },
       {
         "type": "item",
-        "itemName": "Rayne's Writ"
+        "itemName": "Rayne's Writ",
+        "count": 1
       }
     ]
   },
@@ -35839,7 +35870,8 @@
       {
         "type": "item",
         "probability": 1,
-        "itemName": "Guard's Shield"
+        "itemName": "Guard's Shield",
+        "count": 1
       },
       {
         "type": "gold",
@@ -35909,7 +35941,8 @@
       {
         "type": "item",
         "probability": 1,
-        "itemName": "Miller's Shoes"
+        "itemName": "Miller's Shoes",
+        "count": 1
       },
       {
         "type": "gold",
@@ -36086,6 +36119,12 @@
         "probability": 0.3,
         "count": 10,
         "addMaxCount": 90
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Shield of the Hivelord"
       }
     ],
     "colors": "RG",
@@ -36142,7 +36181,8 @@
       {
         "type": "item",
         "probability": 1,
-        "itemName": "Torturer's Hood"
+        "itemName": "Torturer's Hood",
+        "count": 1
       },
       {
         "type": "card",

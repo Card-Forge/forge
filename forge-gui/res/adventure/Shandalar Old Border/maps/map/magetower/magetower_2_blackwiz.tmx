@@ -33,9 +33,6 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <properties>
-   <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [&quot;Throne of Bone|LEA&quot;]}" />
-  </properties>
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="274.665" width="48" height="16">
    <properties>
     <property name="teleport" value="" />
