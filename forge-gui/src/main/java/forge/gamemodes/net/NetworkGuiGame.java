@@ -436,7 +436,29 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
         // Check if object of the SAME TYPE already exists
         TrackableObject existing = findObjectByTypeAndId(tracker, objectType, objectId);
         if (existing != null) {
-            netLog.trace("[DeltaSync] {} ID={} already exists, will apply properties in phase 1b",
+            // This is a replacement instance (same ID, new server-side object after e.g.
+            // zone change). Clear non-structural properties so applyPropertyMap starts
+            // from a clean slate — otherwise stale values (counters, attacking, etc.)
+            // persist from the previous instance.
+            Map<TrackableProperty, Object> props = existing.getProps();
+            if (objectType == DeltaPacket.TYPE_CARD_VIEW) {
+                // Keep CardStateView references but clear their properties too —
+                // applyCardStateData only sets properties in the delta, so stale
+                // values (Power, Toughness, etc.) would persist otherwise.
+                props.keySet().removeIf(p ->
+                        p != TrackableProperty.CurrentState &&
+                        p != TrackableProperty.AlternateState &&
+                        p != TrackableProperty.LeftSplitState &&
+                        p != TrackableProperty.RightSplitState);
+                CardView cardView = (CardView) existing;
+                clearCardStateProps(cardView.getCurrentState());
+                clearCardStateProps(cardView.getAlternateState());
+                clearCardStateProps(cardView.getLeftSplitState());
+                clearCardStateProps(cardView.getRightSplitState());
+            } else {
+                props.clear();
+            }
+            netLog.trace("[DeltaSync] {} ID={} already exists (replaced), cleared stale props",
                     typeName, objectId);
             return existing;
         }
@@ -472,6 +494,15 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
         }
 
         return obj;
+    }
+
+    private void clearCardStateProps(CardStateView csv) {
+        if (csv != null) {
+            Map<TrackableProperty, Object> csvProps = csv.getProps();
+            if (csvProps != null) {
+                csvProps.clear();
+            }
+        }
     }
 
     private TrackableObject findObjectByTypeAndId(Tracker tracker, int objectType, int objectId) {

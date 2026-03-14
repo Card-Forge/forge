@@ -175,22 +175,32 @@ public class DeltaSyncManager implements IHasNetLog {
         } else if (!registeredObjects.contains(obj)) {
             // Replacement instance — same ID but different object (e.g. zone change
             // creates a new Card+CardView via copyCard). Transfer consumer registration
-            // to the new instance and send full state since we can't diff against the old.
+            // to the new instance and send full state.
+            // Sent via newObjects so the client can clear stale properties on the
+            // existing object before applying the new state.
+            CardView oldCardView = null;
             Iterator<TrackableObject> it = registeredObjects.iterator();
             while (it.hasNext()) {
                 TrackableObject old = it.next();
                 if (DeltaPacket.typeTagFor(old) == objType && old.getId() == obj.getId()) {
+                    if (old instanceof CardView) {
+                        oldCardView = (CardView) old;
+                    }
                     old.unregisterConsumer(consumerId);
                     it.remove();
                     break;
                 }
+            }
+            // Clean up old CardStateViews AFTER iterator loop to avoid CME
+            if (oldCardView != null) {
+                unregisterOldCardStateViews(oldCardView);
             }
             obj.registerConsumer(consumerId);
             registeredObjects.add(obj);
             Map<TrackableProperty, Object> allProps = buildFullPropertyMap(obj);
             obj.getAndClearDirtyProps(consumerId);
             if (!allProps.isEmpty()) {
-                objectDeltas.put(deltaKey, allProps);
+                newObjects.put(deltaKey, allProps);
                 netLog.trace("[DeltaSync] Replaced instance: type={} id={}, {} props",
                         objType, obj.getId(), allProps.size());
             }
@@ -234,6 +244,18 @@ public class DeltaSyncManager implements IHasNetLog {
     private void ensureCardStateConsumers(CardView card) {
         ensureCardStateConsumer(card.getCurrentState());
         ensureCardStateConsumer(card.getAlternateState());
+    }
+
+    /** Unregisters CurrentState and AlternateState only — these are the states tracked by ensureCardStateConsumers. */
+    private void unregisterOldCardStateViews(CardView oldCard) {
+        CardStateView cs = oldCard.getCurrentState();
+        if (cs != null && registeredObjects.remove(cs)) {
+            cs.unregisterConsumer(consumerId);
+        }
+        CardStateView as = oldCard.getAlternateState();
+        if (as != null && registeredObjects.remove(as)) {
+            as.unregisterConsumer(consumerId);
+        }
     }
 
     private void mergeCardStateDirtyProps(CardView card, Map<TrackableProperty, Object> delta) {

@@ -191,7 +191,8 @@ public class PlayerView extends GameEntityView {
         return 0;
     }
     void updateCounters(Player p) {
-        set(TrackableProperty.Counters, p.getCounters());
+        // Defensive copy: same mutable-reference issue as CardView.updateCounters
+        set(TrackableProperty.Counters, new HashMap<>(p.getCounters()));
     }
 
     public boolean getIsExtraTurn() {
@@ -387,19 +388,16 @@ public class PlayerView extends GameEntityView {
     }
 
     void updateCommanderCast(Player p, Card c) {
-        Map<Integer, Integer> map = get(TrackableProperty.CommanderCast);
-        if (map == null) {
-            map = Maps.newHashMap();
-        }
+        // Create a new map so TrackableObject.set() can detect the change via equals()
+        Map<Integer, Integer> oldMap = get(TrackableProperty.CommanderCast);
+        Map<Integer, Integer> map = oldMap != null ? new HashMap<>(oldMap) : new HashMap<>();
         map.put(c.getId(), p.getCommanderCast(c));
         set(TrackableProperty.CommanderCast, map);
     }
 
     void updateMergedCommanderCast(Player p, Card target, Card commander) {
-        Map<Integer, Integer> map = get(TrackableProperty.CommanderCast);
-        if (map == null) {
-            map = Maps.newHashMap();
-        }
+        Map<Integer, Integer> oldMap = get(TrackableProperty.CommanderCast);
+        Map<Integer, Integer> map = oldMap != null ? new HashMap<>(oldMap) : new HashMap<>();
         map.put(target.getId(), p.getCommanderCast(commander));
         set(TrackableProperty.CommanderCast, map);
     }
