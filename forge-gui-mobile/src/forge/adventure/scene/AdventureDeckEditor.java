@@ -665,18 +665,6 @@ public class AdventureDeckEditor extends FDeckEditor {
         }
     }
 
-    public void completeSealed() {
-        AdventureEventData currentEvent = getCurrentEvent();
-        if (currentEvent == null)
-            return;
-
-        currentEvent.isDraftComplete = true;
-
-        if (currentEvent.eventStatus == AdventureEventController.EventStatus.Entered) {
-            currentEvent.eventStatus = AdventureEventController.EventStatus.Ready;
-        }
-    }
-
     private static final FileHandle deckIcon = Config.instance().getFile("ui/maindeck.png");
     private static final FImage MAIN_DECK_ICON = deckIcon.exists() ? new FImage() {
         @Override
@@ -932,33 +920,6 @@ public class AdventureDeckEditor extends FDeckEditor {
         Localizer localizer = Forge.getLocalizer();
         AdventureEventData currentEvent = getCurrentEvent();
 
-        // Sealed Deck
-        boolean isSealedEvent = currentEvent != null &&
-                currentEvent.format == AdventureEventController.EventFormat.Sealed &&
-                currentEvent.eventStatus == AdventureEventController.EventStatus.Entered;
-        if (isSealedEvent) {
-            if (getDeck().getMain().countAll() < 40) {
-                FOptionPane.showConfirmDialog(localizer.getMessage("lblEndAdventureEventConfirm"),
-                        localizer.getMessage("lblLeaveDraft"),
-                        localizer.getMessage("lblLeave"),
-                        localizer.getMessage("lblCancel"),
-                        false, result -> {
-                    if (result) {
-                        currentEvent.eventStatus = AdventureEventController.EventStatus.Abandoned;
-                        resolveClose(canCloseCallback, true);
-                    } else {
-                        canCloseCallback.accept(false);
-                    }
-                });
-                return;
-            } else {
-                completeSealed();
-                resolveClose(canCloseCallback, true);
-                return;
-            }
-        }
-
-        // Booster Draft
         if (isDrafting()) {
             FOptionPane.showConfirmDialog(localizer.getMessage("lblEndAdventureEventConfirm"), localizer.getMessage("lblLeaveDraft"), localizer.getMessage("lblLeave"), localizer.getMessage("lblCancel"), false, result -> resolveClose(canCloseCallback, result == true));
             return;

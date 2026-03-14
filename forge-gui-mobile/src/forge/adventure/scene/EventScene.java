@@ -27,6 +27,7 @@ import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
 import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.gui.FThreads;
 import forge.screens.TransitionScreen;
 import forge.util.MyRandom;
@@ -216,6 +217,11 @@ public class EventScene extends MenuScene implements IAfterMatch {
     }
 
     private void refresh() {
+        if (currentEvent.format == AdventureEventController.EventFormat.Sealed) {
+            // in Sealed events, there is no draft table and no pack selection as such
+            metaDraftTable.setVisible(false);
+        }
+
         if (metaDraftTable.isVisible()) {
             scrollContainer = metaDraftTable;
             headerTable.clear();
@@ -423,6 +429,14 @@ public class EventScene extends MenuScene implements IAfterMatch {
         GameHUD.getInstance().updateBGM();
         scrollContainer.clear();
 
+        // TODO: should this be moved elsewhere?
+        if (currentEvent != null &&
+                currentEvent.format == AdventureEventController.EventFormat.Sealed &&
+                currentEvent.eventStatus == AdventureEventController.EventStatus.Entered &&
+                currentEvent.registeredDeck.getMain().countAll() >= 40) {
+                currentEvent.eventStatus = AdventureEventController.EventStatus.Ready;
+        }
+
         if (money != null) {
             WorldSave.getCurrentSave().getPlayer().onGoldChange(() -> money.setText("[+Gold] [BLACK]" + AdventurePlayer.current().getGold()));
         }
@@ -459,8 +473,9 @@ public class EventScene extends MenuScene implements IAfterMatch {
                         Forge.switchScene(DraftScene.instance());
                         break;
                     case Sealed:
-                        // Generate the sealed pool and go straight to deck editor
-                        currentEvent.generateSealedPool();
+                        if (currentEvent.registeredDeck.get(DeckSection.Sideboard) == null) {
+                            currentEvent.generateSealedPool();
+                        }
                         DeckEditScene.getInstance().loadEvent(currentEvent);
                         Forge.switchScene(DeckEditScene.getInstance());
                         break;

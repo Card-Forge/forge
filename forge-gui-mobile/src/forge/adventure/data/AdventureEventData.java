@@ -382,6 +382,8 @@ public class AdventureEventData implements Serializable {
                 participant.setDeck(aiDeck);
             }
 
+            eventStatus = AdventureEventController.EventStatus.Entered;
+
         } catch (Exception e) {
             System.err.println("Error generating Sealed pool: " + e.getMessage());
         }
