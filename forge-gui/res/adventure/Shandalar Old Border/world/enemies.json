@@ -2087,6 +2087,12 @@
         "probability": 1,
         "count": 10,
         "addMaxCount": 10
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Manasight Amulet"
       }
     ],
     "colors": "GR",
@@ -6063,6 +6069,12 @@
         "probability": 0.7,
         "count": 15,
         "addMaxCount": 85
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Lucky Clover"
       }
     ],
     "colors": "R",
@@ -14335,6 +14347,12 @@
         "probability": 0.3,
         "count": 10,
         "addMaxCount": 90
+      },
+      {
+        "type": "item",
+        "probability": 0.05,
+        "count": 1,
+        "itemName": "Tome of the Vault"
       }
     ],
     "colors": "B",
@@ -15398,6 +15416,12 @@
         "probability": 1,
         "count": 10,
         "addMaxCount": 10
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Celestial Sword"
       }
     ],
     "colors": "W",
@@ -23285,6 +23309,12 @@
         "probability": 1,
         "count": 5,
         "addMaxCount": 10
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Tome of the Portal"
       }
     ],
     "colors": "B",
@@ -24908,6 +24938,12 @@
         "probability": 1,
         "count": 10,
         "addMaxCount": 10
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Power Armor Greaves"
       }
     ],
     "colors": "U",
@@ -26624,6 +26660,12 @@
           "Uncommon",
           "Rare"
         ]
+      },
+      {
+        "type": "item",
+        "probability": 0.05,
+        "count": 1,
+        "itemName": "Tome of the Vault"
       }
     ],
     "colors": "B",
@@ -26657,6 +26699,12 @@
         "type": "randomCard",
         "count": 2,
         "addMaxCount": 8
+      },
+      {
+        "type": "item",
+        "probability": 0.05,
+        "count": 1,
+        "itemName": "Tome of the Vault"
       }
     ],
     "colors": "BR",
@@ -28033,6 +28081,12 @@
         "type": "landSketchbookShop",
         "probability": 0.05,
         "count": 1
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Shield of the Hivelord"
       }
     ],
     "colors": "GRW",
@@ -29720,6 +29774,12 @@
         "probability": 1,
         "count": 1,
         "cardName": "Clone|3ED"
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Tome of the Trove"
       }
     ],
     "colors": "U",
@@ -29779,6 +29839,12 @@
         "probability": 1,
         "count": 1,
         "cardName": "Plow Under|UDS"
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Grovetender's Robes"
       }
     ],
     "colors": "G",
@@ -36053,6 +36119,12 @@
         "probability": 0.3,
         "count": 10,
         "addMaxCount": 90
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Shield of the Hivelord"
       }
     ],
     "colors": "RG",
