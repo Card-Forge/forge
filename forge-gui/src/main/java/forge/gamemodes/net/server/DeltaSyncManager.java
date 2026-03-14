@@ -24,6 +24,7 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.HashSet;
 import java.util.IdentityHashMap;
 import java.util.List;
@@ -168,6 +169,28 @@ public class DeltaSyncManager implements IHasNetLog {
 
             // Clear dirty props since we just sent everything
             obj.getAndClearDirtyProps(consumerId);
+        } else if (!registeredObjects.contains(obj)) {
+            // Replacement instance — same ID but different object (e.g. zone change
+            // creates a new Card+CardView via copyCard). Transfer consumer registration
+            // to the new instance and send full state since we can't diff against the old.
+            Iterator<TrackableObject> it = registeredObjects.iterator();
+            while (it.hasNext()) {
+                TrackableObject old = it.next();
+                if (DeltaPacket.typeTagFor(old) == objType && old.getId() == obj.getId()) {
+                    old.unregisterConsumer(consumerId);
+                    it.remove();
+                    break;
+                }
+            }
+            obj.registerConsumer(consumerId);
+            registeredObjects.add(obj);
+            Map<TrackableProperty, Object> allProps = buildFullPropertyMap(obj);
+            obj.getAndClearDirtyProps(consumerId);
+            if (!allProps.isEmpty()) {
+                objectDeltas.put(deltaKey, allProps);
+                netLog.trace("[DeltaSync] Replaced instance: type={} id={}, {} props",
+                        objType, obj.getId(), allProps.size());
+            }
         } else if (obj.hasConsumerChanges(consumerId)) {
             // Existing object — check per-consumer dirty set
             EnumSet<TrackableProperty> dirtyProps = obj.getAndClearDirtyProps(consumerId);

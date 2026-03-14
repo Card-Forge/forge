@@ -30,6 +30,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
     private final FGameClient client;
     private final IGuiGame gui;
     private Tracker tracker;
+    private boolean deltaSyncActive = false;
 
     public GameClientHandler(final FGameClient client) {
         super(true);
@@ -56,6 +57,9 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
     @SuppressWarnings("unchecked")
     @Override
     protected void beforeCall(final ChannelHandlerContext ctx, final ProtocolMethod protocolMethod, final Object[] args) {
+        if (protocolMethod == ProtocolMethod.applyDelta) {
+            deltaSyncActive = true;
+        }
         switch (protocolMethod) {
             case setGameView:
                 if (args.length > 0 && args[0] instanceof GameView gameView) {
@@ -152,6 +156,9 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
     }
 
     private void replicatePlayerView(final PlayerView newPlayerView) {
+        if (deltaSyncActive) {
+            return; // Delta sync manages state — don't overwrite from protocol snapshots
+        }
         PlayerView existingPlayerView = tracker.getObj(TrackableTypes.PlayerViewType, newPlayerView.getId());
         existingPlayerView.copyChangedProps(newPlayerView);
         netLog.trace("replicated PlayerView properties - {}", existingPlayerView.toString());
