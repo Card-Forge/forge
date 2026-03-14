@@ -185,7 +185,8 @@ public class ComputerUtilMana {
                     }
 
                     // sources were previously sorted, so add their index to connect those values to some degree
-                    preOrder += abilities.indexOf(ability1) - abilities.indexOf(ability2);
+                    // This has been disabled because it makes the AI more likely to sacrifice lands than use creatures for mana
+                    // preOrder += abilities.indexOf(ability1) - abilities.indexOf(ability2);
 
                     return preOrder;
                 }

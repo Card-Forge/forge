@@ -10788,7 +10788,7 @@
   },
   {
     "name": "Urabrask",
-    "sprite": "sprites/enemy/aberration/furnacetormentor.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/furnacetormentor.atlas",
     "deck": [
       "decks/legends/urabrask.dck"
     ],
@@ -29351,7 +29351,7 @@
   },
   {
     "name": "Greven",
-    "sprite": "sprites/enemy/aberration/furnacetormentor.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/furnacetormentor.atlas",
     "deck": [
       "decks/legends/greven.dck"
     ],
@@ -45200,7 +45200,7 @@
   },
   {
     "name": "Shroofus",
-    "sprite": "sprites/enemy/aberration/fungus.atlas",
+    "sprite": "sprites/enemy/plant/fungus.atlas",
     "deck": [
       "decks/legends/shroofus.dck"
     ],
@@ -51897,7 +51897,7 @@
         "addMaxCount": 15
       }
     ],
-    "spawnRate": 0.5
+    "spawnRate": 0.4
   },   
   {
     "name": "Grand Nemesis",
@@ -51957,7 +51957,7 @@
         "count": 1
       }
     ],
-    "spawnRate": 0.5
+    "spawnRate": 0.2
   },   
   {
     "name": "Archelos",
