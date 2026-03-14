@@ -918,7 +918,6 @@ public class AdventureDeckEditor extends FDeckEditor {
         }
 
         Localizer localizer = Forge.getLocalizer();
-        AdventureEventData currentEvent = getCurrentEvent();
 
         if (isDrafting()) {
             FOptionPane.showConfirmDialog(localizer.getMessage("lblEndAdventureEventConfirm"), localizer.getMessage("lblLeaveDraft"), localizer.getMessage("lblLeave"), localizer.getMessage("lblCancel"), false, result -> resolveClose(canCloseCallback, result == true));
