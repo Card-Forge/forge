@@ -2067,22 +2067,131 @@ public class ComputerUtil {
         return false;
     }
 
-    public static int scoreHand(CardCollectionView handList, Player ai, int cardsToReturn) {
+    public static List<CardCollectionView> combinationsWithRemoved(CardCollectionView handList, int cardsToReturn) {
+        int handSize = handList.size();
+        int keepCount = handSize - cardsToReturn;
+
+        // Tracks which cards are in the current kept combination.
+        // Starts as [0, 1, ..., keepCount-1] and advances lexicographically
+        // through all C(handSize, keepCount) combinations.
+        int[] indices = new int[keepCount];
+        for (int i = 0; i < keepCount; i++) {
+            indices[i] = i;
+        }
+
+        // Keyed on sorted card names to deduplicate combinations involving multiple
+        // copies of the same card, e.g. keeping [Lightning Bolt, Island] is the same
+        // regardless of which Island was picked.
+        Set<String> seen = new HashSet<>();
+        List<CardCollectionView> result = new ArrayList<>();
+
+        do {
+            CardCollection kept = new CardCollection();
+            for (int idx : indices) {
+                kept.add(handList.get(idx));
+            }
+
+            // Only add to combinations if we haven't seen this already.
+            String key = kept.stream().map(Card::getName).sorted().toList().toString();
+            if (seen.add(key)) {
+                CardCollection removed = new CardCollection(handList);
+                removed.removeAll(kept);
+                result.add(removed);
+            }
+        } while (advanceIndices(indices, handSize));
+
+        return result;
+    }
+
+    // Advances indices to the next combination in lexicographic order.
+    // Returns false if all combinations have been exhausted.
+    // e.g. with handSize=7, keepCount=3: [2, 5, 6] -> [3, 4, 5] -> [3, 4, 6] -> ... -> [4, 5, 6] -> false
+    private static boolean advanceIndices(int[] indices, int handSize) {
+        int keepCount = indices.length;
+
+        // Find the rightmost index that can still be incremented
+        // (index at position i has max value of handSize - keepCount + i)
+        int i = keepCount - 1;
+        while (i >= 0 && indices[i] == handSize - keepCount + i) {
+            i--;
+        }
+        if (i < 0) return false;
+
+        // Increment that index, then reset everything to its right to be consecutive
+        indices[i]++;
+        for (int j = i + 1; j < keepCount; j++) {
+            indices[j] = indices[j - 1] + 1;
+        }
+        return true;
+    }
+
+    public static CardCollectionView chooseBestCardsToReturn(Player mulliganingPlayer, CardCollectionView hand, int cardsToReturn) {
+        if (cardsToReturn > hand.size()) {
+            throw new IllegalArgumentException("chooseBestCardsToReturn: requested " + cardsToReturn +
+                    " cards to return, but hand only contains " + hand.size() + " cards for player " + mulliganingPlayer);
+        }
+
+        // Nothing to return, keep the full hand
+        if (cardsToReturn == 0) {
+            return CardCollection.EMPTY;
+        }
+
+        // Returning everything, no need to evaluate
+        if (cardsToReturn == hand.size()) {
+            return hand;
+        }
+
+        // Generate every possible set of cards we could return to the library,
+        // then find the one that leaves the best remaining hand
+        List<CardCollectionView> candidateRemovals = combinationsWithRemoved(hand, cardsToReturn);
+
+        CardCollectionView bestRemoval = null;
+        int bestScore = Integer.MIN_VALUE;
+        int bestRemovalCmc = Integer.MIN_VALUE;
+
+        for (CardCollectionView removal : candidateRemovals) {
+            // Compute what the hand would look like after returning these cards
+            CardCollection keptHand = new CardCollection(hand);
+            keptHand.removeAll(removal);
+
+            // Score the kept hand: pass 0 for cardsToReturn since keptHand is already the final hand
+            int score = scoreHand(keptHand, mulliganingPlayer, 0);
+            int removalCmc = removal.stream()
+                    .mapToInt(c -> c.getManaCost().getCMC())
+                    .sum();
+
+            if (score > bestScore ||
+                    (score == bestScore && removalCmc > bestRemovalCmc)) { // On equally good choices, mulligan more expensive.
+                bestScore = score;
+                bestRemoval = removal;
+                bestRemovalCmc = removalCmc;
+            }
+        }
+
+        return bestRemoval != null ? bestRemoval : CardCollection.EMPTY;
+    }
+
+    public static int scoreHand(CardCollectionView handList, Player player, int cardsToReturn) {
         // TODO Improve hand scoring in relation to cards to return.
         // If final hand size is 5, score a hand based on what that 5 would be.
         // Or if this is really really fast, determine what the 5 would be based on scoring
         // All of the possibilities
 
-        final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+        int mulliganThreshold = 4; // Sensible default for humans
+        if (player.getController() instanceof PlayerControllerAi) {
+            AiController aic = ((PlayerControllerAi) player.getController()).getAi();
+            mulliganThreshold = aic.getIntProperty(AiProps.MULLIGAN_THRESHOLD);
+        }
+
         int currentHandSize = handList.size();
         int finalHandSize = currentHandSize - cardsToReturn;
 
         // don't mulligan when already too low
-        if (finalHandSize < aic.getIntProperty(AiProps.MULLIGAN_THRESHOLD)) {
+        if (finalHandSize < mulliganThreshold) {
             return finalHandSize;
         }
 
-        CardCollectionView library = ai.getCardsIn(ZoneType.Library);
+        CardCollectionView library = player.getCardsIn(ZoneType.Library);
         int landsInDeck = CardLists.count(library, CardPredicates.LANDS);
 
         // no land deck, can't do anything better
@@ -2105,14 +2214,16 @@ public class ComputerUtil {
             score += 10;
         }
 
-        final CardCollectionView castables = CardLists.filter(handList, c -> c.getManaCost().getCMC() <= 0 || c.getManaCost().getCMC() <= landSize);
+        // Don't count lands as castables.
+        final CardCollectionView castables = CardLists.filter(handList, c ->
+                !c.isLand() && (c.getManaCost().getCMC() <= 0 || c.getManaCost().getCMC() <= landSize));
 
         score += castables.size() * 2;
 
         // Improve score for perceived mana efficiency of the hand
 
         // if at mulligan threshold, and we have any lands accept the hand
-        if (handSize == aic.getIntProperty(AiProps.MULLIGAN_THRESHOLD) && landSize > 0) {
+        if ((handSize == mulliganThreshold) && landSize > 0) {
             return score;
         }
 
