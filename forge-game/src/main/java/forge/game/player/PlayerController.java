@@ -88,6 +88,15 @@ public abstract class PlayerController {
         return false;
     }
 
+    /**
+     * Whether to compute available actions for yield suggestions.
+     * Returns false by default (AI players, test controllers).
+     * Human players override to check preferences.
+     */
+    public boolean shouldTrackAvailableActions() {
+        return false;
+    }
+
     public Game getGame() { return gameView.getGame(); }
     public Match getMatch() { return gameView.getMatch(); }
     public Player getPlayer() { return player; }
