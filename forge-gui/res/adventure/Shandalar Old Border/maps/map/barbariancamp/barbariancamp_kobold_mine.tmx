@@ -48,33 +48,99 @@
   <object id="115" template="../../../../../../common/maps/obj/gold.tx" x="315.713" y="81.5369" />
   <object id="141" template="../../../../../../common/maps/obj/treasure.tx" x="272.842" y="82.1053">
    <properties>
-    <property name="reward">[{
-  "type": "randomCard",
-  "count": 1,
-  "rarity": [ "rare" ],
-  "colors": [ "colorID" ]
-},{
-  "type": "randomCard",
-  "count": 4,
-  "rarity": [ "uncommon" ],
-  "addMaxCount": 2
-}]</property>
+    <property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.3,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.56,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.6,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.34,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.16,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.04,
+    "count": 3,
+    "addMaxCount": 3
+  }
+]</property>
     <property name="spawn.Hard" type="bool" value="false" />
    </properties>
   </object>
   <object id="142" template="../../../../../../common/maps/obj/treasure.tx" x="100.176" y="78.4386">
    <properties>
-    <property name="reward">[{
-  "type": "randomCard",
-  "count": 1,
-  "rarity": [ "rare" ],
-  "colors": [ "colorID" ]
-},{
-  "type": "randomCard",
-  "count": 4,
-  "rarity": [ "uncommon" ],
-  "addMaxCount": 2
-}]</property>
+    <property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.005,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.03,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.175,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.45,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.84,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.51,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property>
     <property name="spawn.Hard" type="bool" value="false" />
    </properties>
   </object>

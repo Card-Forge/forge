@@ -41,14 +41,118 @@
     <property name="teleport" value="" />
    </properties>
   </object>
-  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="272.275" y="29.7137" />
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="272.275" y="29.7137"><properties><property name="reward">[
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Intrepid Hero|USG"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Soltari Champion|STH"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Catapult Master|ONS"
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.7,
+    "count": 4,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.6,
+    "count": 4,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.4,
+    "count": 4,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.2,
+    "count": 4,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.08,
+    "count": 4,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.02,
+    "count": 4,
+    "addMaxCount": 3
+  }
+]</property></properties></object>
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="47.8847" y="236.881">
    <properties>
     <property name="enemy" value="Archer" />
     <property name="threatRange" type="int" value="40" />
    </properties>
   </object>
-  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="167.426" y="31.0356" />
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="167.426" y="31.0356"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.7,
+    "count": 4,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.6,
+    "count": 4,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.4,
+    "count": 4,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.2,
+    "count": 4,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.08,
+    "count": 4,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.02,
+    "count": 4,
+    "addMaxCount": 3
+  }
+]</property></properties></object>
   <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="222.052" y="31.1389" />
   <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="354.296" y="369.678">
    <properties>
@@ -155,8 +259,8 @@
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Daru Encampment|ONS&quot;,&quot;Kjeldoran Outpost|ALL&quot;,&quot;Mobilization|ONS&quot;,&quot;Icatian Lieutenant|FEM&quot;]}" />
     <property name="enemy" value="Baron Von Gant" />
-    <property name="threatRange" type="int" value="40" />
-   </properties>
+    <property name="threatRange" type="int" value="100" />
+   <property name="speedModifier" type="float" value="20" /></properties>
   </object>
   <object id="76" template="../../../../../../common/maps/obj/waypoint.tx" x="159.966" y="322.475" />
   <object id="77" template="../../../../../../common/maps/obj/waypoint.tx" x="322.475" y="358.251" />
