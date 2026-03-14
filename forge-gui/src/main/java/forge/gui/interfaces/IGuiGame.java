@@ -35,7 +35,6 @@ public interface IGuiGame {
 
     /**
      * Set the game view with a sequence number for delta sync baseline.
-     * When sequenceNumber >= 0, the client sends ackSync to establish the baseline.
      * Local games ignore the sequence number.
      */
     default void setGameView(GameView gameView, long sequenceNumber) {

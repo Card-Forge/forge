@@ -143,7 +143,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
                         serverChecksum, clientChecksum, packet.getSequenceNumber());
                 logChecksumDetails(getGameView(), packet);
                 requestFullStateResync();
-                // Don't send ack for corrupted state
                 return;
             } else {
                 netLog.info("[DeltaSync] Checksum OK (seq={}, checksum={})",
@@ -151,16 +150,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
             }
         }
 
-        ackSync(packet.getSequenceNumber());
-    }
-
-    private void ackSync(long seqNum) {
-        if (seqNum >= 0) {
-            IGameController controller = getGameController();
-            if (controller != null) {
-                controller.ackSync(seqNum);
-            }
-        }
     }
 
     /**
@@ -529,6 +518,5 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
     @Override
     public void setGameView(GameView gameView, long sequenceNumber) {
         setGameView(gameView);
-        ackSync(sequenceNumber);
     }
 }

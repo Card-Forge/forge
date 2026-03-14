@@ -122,11 +122,6 @@ public class NetGameController implements IGameController {
     }
 
     @Override
-    public void ackSync(final long sequenceNumber) {
-        send(ProtocolMethod.ackSync, sequenceNumber);
-    }
-
-    @Override
     public void requestResync() {
         send(ProtocolMethod.requestResync);
     }

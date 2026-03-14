@@ -3494,11 +3494,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public void ackSync(long sequenceNumber) {
-        // No-op for local games - delta sync is only used for network play
-    }
-
-    @Override
     public void requestResync() {
         // No-op for local games - resync is only used for network play
     }

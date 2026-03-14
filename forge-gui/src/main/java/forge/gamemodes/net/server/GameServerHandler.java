@@ -38,16 +38,7 @@ final class GameServerHandler extends GameProtocolHandler<IGameController> imple
 
     @Override
     protected void beforeCall(final ChannelHandlerContext ctx, final ProtocolMethod protocolMethod, final Object[] args) {
-        if (protocolMethod == ProtocolMethod.ackSync && args.length > 0) {
-            RemoteClient client = getClient(ctx);
-            if (client != null) {
-                long sequenceNumber = (Long) args[0];
-                IGuiGame gui = server.getGui(client.getIndex());
-                if (gui instanceof RemoteClientGuiGame netGui) {
-                    netGui.processAcknowledgment(sequenceNumber, client.getIndex());
-                }
-            }
-        } else if (protocolMethod == ProtocolMethod.requestResync) {
+        if (protocolMethod == ProtocolMethod.requestResync) {
             RemoteClient client = getClient(ctx);
             if (client != null) {
                 IGuiGame gui = server.getGui(client.getIndex());

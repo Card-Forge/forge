@@ -92,7 +92,6 @@ public enum ProtocolMethod implements IHasNetLog {
     concede                   (Mode.CLIENT, Void.TYPE),
     alphaStrike               (Mode.CLIENT, Void.TYPE),
     reorderHand               (Mode.CLIENT, Void.TYPE, CardView.class, Integer.TYPE),
-    ackSync                   (Mode.CLIENT, Void.TYPE, Long.TYPE),
     requestResync             (Mode.CLIENT, Void.TYPE),
     ;
 

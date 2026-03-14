@@ -85,15 +85,6 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
         deltaSyncManager.reset();
     }
 
-    /**
-     * Process a sync acknowledgment from the client.
-     * @param sequenceNumber the acknowledged sequence number
-     * @param clientIndex the client's player index
-     */
-    public void processAcknowledgment(long sequenceNumber, int clientIndex) {
-        deltaSyncManager.processAcknowledgment(clientIndex, sequenceNumber);
-    }
-
     public void setForwarder(GameEventForwarder forwarder) {
         this.forwarder = forwarder;
     }

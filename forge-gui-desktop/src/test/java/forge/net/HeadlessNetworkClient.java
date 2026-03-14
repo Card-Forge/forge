@@ -323,7 +323,6 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
 
         @Override
         public void setGameView(forge.game.GameView gameView, long sequenceNumber) {
-            // First, process the game view + ack sync if needed
             super.setGameView(gameView, sequenceNumber);
 
             // Notify the client when this is a full state sync (sequenceNumber >= 0)

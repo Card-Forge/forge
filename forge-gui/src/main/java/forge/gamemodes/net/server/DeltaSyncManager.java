@@ -51,8 +51,6 @@ public class DeltaSyncManager implements IHasNetLog {
 
     private final int consumerId = NEXT_CONSUMER_ID.getAndIncrement();
     private final AtomicLong sequenceNumber = new AtomicLong(0);
-    private final Map<Integer, Long> clientAcknowledgedSeq = new ConcurrentHashMap<>();
-
     // Objects that have been fully sent to the client (initial sync done)
     // Objects not in this set need full serialization when first encountered
     private final Set<Integer> sentObjectIds = ConcurrentHashMap.newKeySet();
@@ -77,29 +75,8 @@ public class DeltaSyncManager implements IHasNetLog {
         registeredObjects.clear();
 
         sequenceNumber.set(0);
-        clientAcknowledgedSeq.clear();
         sentObjectIds.clear();
         packetsSinceLastChecksum = 0;
-    }
-
-    /**
-     * Process an acknowledgment from a client.
-     */
-    public void processAcknowledgment(int clientIndex, long acknowledgedSeq) {
-        clientAcknowledgedSeq.compute(clientIndex, (k, v) -> {
-            if (v == null) return acknowledgedSeq;
-            return Math.max(v, acknowledgedSeq);
-        });
-    }
-
-    /**
-     * Get the minimum acknowledged sequence across all clients.
-     */
-    public long getMinAcknowledgedSequence() {
-        return clientAcknowledgedSeq.values().stream()
-                .mapToLong(Long::longValue)
-                .min()
-                .orElse(0L);
     }
 
     /**
@@ -493,14 +470,4 @@ public class DeltaSyncManager implements IHasNetLog {
         return sequenceNumber.get();
     }
 
-    /**
-     * Check if a client needs a full resync.
-     */
-    public boolean needsFullResync(int clientIndex) {
-        Long acked = clientAcknowledgedSeq.get(clientIndex);
-        if (acked == null) {
-            return true;
-        }
-        return (sequenceNumber.get() - acked) > 100;
-    }
 }

@@ -1,7 +1,6 @@
 package forge.net;
 
 import forge.gamemodes.net.DeltaPacket;
-import forge.gamemodes.net.server.DeltaSyncManager;
 import forge.trackable.TrackableProperty;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -14,7 +13,6 @@ import java.util.Map;
  *
  * Tests individual classes used by the delta sync system:
  * - DeltaPacket - size calculation formula
- * - DeltaSyncManager - client tracking and sequence management
  * - NetworkByteTracker - enable/disable behavior
  *
  * These are fast unit tests that don't involve actual network I/O.
@@ -87,41 +85,6 @@ public class DeltaSyncUnitTest {
 
         // Empty packet should just have header: 8 + 4 = 12 bytes
         Assert.assertEquals(size, 12, "Empty delta packet should be exactly 12 bytes (header only)");
-    }
-
-    // ==================== Delta Sync Manager Tests ====================
-
-    @Test
-    public void testDeltaSyncManagerAcknowledgment() {
-        DeltaSyncManager manager = new DeltaSyncManager();
-
-        manager.processAcknowledgment(0, 0L);
-        manager.processAcknowledgment(1, 0L);
-
-        // Client 0 acknowledges sequence 5
-        manager.processAcknowledgment(0, 5L);
-        Assert.assertEquals(manager.getMinAcknowledgedSequence(), 0L); // Client 1 still at 0
-
-        // Client 1 acknowledges sequence 3
-        manager.processAcknowledgment(1, 3L);
-        Assert.assertEquals(manager.getMinAcknowledgedSequence(), 3L); // Min of 5 and 3
-
-        // Client 1 catches up
-        manager.processAcknowledgment(1, 10L);
-        Assert.assertEquals(manager.getMinAcknowledgedSequence(), 5L); // Min of 5 and 10
-    }
-
-    @Test
-    public void testNeedsFullResync() {
-        DeltaSyncManager manager = new DeltaSyncManager();
-
-        manager.processAcknowledgment(0, 0L);
-
-        // New client should not need resync initially
-        Assert.assertFalse(manager.needsFullResync(0));
-
-        // Unregistered client should need resync
-        Assert.assertTrue(manager.needsFullResync(99));
     }
 
     // ==================== Network Byte Tracker Tests ====================
