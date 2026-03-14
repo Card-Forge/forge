@@ -13,6 +13,7 @@ import forge.game.combat.CombatView;
 import forge.util.collect.FCollection;
 
 import forge.gamemodes.net.IHasNetLog;
+import forge.trackable.Tracker;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
@@ -86,6 +87,16 @@ public class DeltaSyncManager implements IHasNetLog {
      * Existing objects only send properties dirty for THIS consumer.
      */
     public DeltaPacket collectDeltas(GameView gameView) {
+        return collectDeltas(gameView, true);
+    }
+
+    /**
+     * @param allowChecksum if false, skip checksum computation and don't count
+     *                      toward the checksum interval. Used by handleGameEvents()
+     *                      which may run on the scheduler daemon thread where live
+     *                      game state can race with game thread mutations.
+     */
+    public DeltaPacket collectDeltas(GameView gameView, boolean allowChecksum) {
         // Capture checksum-relevant values at the start to avoid race conditions
         final int snapshotTurn = gameView.getTurn();
         final int snapshotPhaseOrdinal = gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1;
@@ -106,15 +117,18 @@ public class DeltaSyncManager implements IHasNetLog {
 
         long seq = sequenceNumber.incrementAndGet();
 
-        // Checksum computation
-        packetsSinceLastChecksum++;
+        // Checksum computation — only when state is known to be stable
         int checksum = 0;
-        boolean includeChecksum = packetsSinceLastChecksum >= CHECKSUM_INTERVAL;
-        if (includeChecksum) {
-            checksum = NetworkChecksumUtil.computeStateChecksum(snapshotTurn, snapshotPhaseOrdinal, gameView);
-            packetsSinceLastChecksum = 0;
-            logChecksumDetailsWithSnapshot(gameView, checksum, seq,
-                    snapshotTurn, snapshotPhaseOrdinal);
+        boolean includeChecksum = false;
+        if (allowChecksum) {
+            packetsSinceLastChecksum++;
+            includeChecksum = packetsSinceLastChecksum >= CHECKSUM_INTERVAL;
+            if (includeChecksum) {
+                checksum = NetworkChecksumUtil.computeStateChecksum(snapshotTurn, snapshotPhaseOrdinal, gameView);
+                packetsSinceLastChecksum = 0;
+                logChecksumDetailsWithSnapshot(gameView, checksum, seq,
+                        snapshotTurn, snapshotPhaseOrdinal);
+            }
         }
 
         return new DeltaPacket(seq, objectDeltas, newObjects, checksum, includeChecksum);
@@ -178,6 +192,7 @@ public class DeltaSyncManager implements IHasNetLog {
             // to the new instance and send full state.
             // Sent via newObjects so the client can clear stale properties on the
             // existing object before applying the new state.
+
             CardView oldCardView = null;
             Iterator<TrackableObject> it = registeredObjects.iterator();
             while (it.hasNext()) {
@@ -198,6 +213,17 @@ public class DeltaSyncManager implements IHasNetLog {
             obj.registerConsumer(consumerId);
             registeredObjects.add(obj);
             Map<TrackableProperty, Object> allProps = buildFullPropertyMap(obj);
+            // Merge properties delayed by tracker freeze (Zone, Sickness, etc.)
+            // that haven't been written to the props map yet
+            Tracker tracker = obj.getTracker();
+            if (tracker != null && tracker.isFrozen()) {
+                for (Map.Entry<TrackableProperty, Object> entry : tracker.getDelayedPropsFor(obj).entrySet()) {
+                    Object netVal = toNetworkValue(entry.getKey(), entry.getValue());
+                    if (netVal != SKIP_MARKER) {
+                        allProps.put(entry.getKey(), netVal);
+                    }
+                }
+            }
             obj.getAndClearDirtyProps(consumerId);
             if (!allProps.isEmpty()) {
                 newObjects.put(deltaKey, allProps);
@@ -209,7 +235,8 @@ public class DeltaSyncManager implements IHasNetLog {
             }
         } else if (obj instanceof CardView) {
             // CardView: check own dirty props AND CardStateView dirty props
-            EnumSet<TrackableProperty> dirtyProps = obj.hasConsumerChanges(consumerId)
+            boolean hasDirty = obj.hasConsumerChanges(consumerId);
+            EnumSet<TrackableProperty> dirtyProps = hasDirty
                     ? obj.getAndClearDirtyProps(consumerId)
                     : EnumSet.noneOf(TrackableProperty.class);
             Map<TrackableProperty, Object> delta = dirtyProps.isEmpty()
@@ -308,6 +335,14 @@ public class DeltaSyncManager implements IHasNetLog {
         }
         int deltaKey = makeDeltaKey(type, obj.getId());
         if (currentObjectIds.contains(deltaKey)) {
+            // Same deltaKey seen earlier this pass (e.g. stale CardView in Commander
+            // property walked before current CardView in Battlefield zone collection).
+            // If this is a different Java instance not yet tracked, let it through for
+            // replacement detection in collectObjectDelta.
+            if (registeredObjects.contains(obj)) {
+                return;
+            }
+            collectObjectDelta(obj, objectDeltas, newObjects);
             return;
         }
         currentObjectIds.add(deltaKey);
