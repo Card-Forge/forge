@@ -43,12 +43,15 @@
   - [Tutorial: creating a custom card](Card-scripting-API/Creating-a-Custom-Card.md)
 
 - Development
+  - [Contributing](../CONTRIBUTING.md)
   - [IntelliJ Setup](Development/IntelliJ-setup/IntelliJ-setup.md)
   - [Snapshots & Releases](Development/Snapshots-and-Releases.md)
   - [Android Builds](Development/Android-Builds.md)
   - [Dev Mode](Development/DevMode.md)
   - [Ownership](Development/ownership.md)
   - [Docker Container](docker-setup.md)
+  - [Code Review Guidelines](Development/Guidelines.md)
+  - [Architecture Reference](Development/Architecture.md)
 
 - Customization & Themes
   - [Skins](Skins.md)
