@@ -95,7 +95,7 @@ public class FDeckViewer extends FDialog {
             this.sections.add(entry.getKey());
         }
         this.currentSection = DeckSection.Main;
-        updateCaption();
+        this.cardManager.setCaption(deck.getName() + " - ");
 
         this.lblFlipcard.setIcon(FSkin.getIcon(FSkinProp.ICO_FLIPCARD));
         this.lblFlipcard.setVisible(false);
@@ -150,6 +150,20 @@ public class FDeckViewer extends FDialog {
         this.add(this.btnClose, "w 120px!, h 26px!, ax right");
 
         this.cardManager.setup(ItemManagerConfig.DECK_VIEWER);
+        if (this.sections.size() > 1) {
+            for (DeckSection section : this.sections) {
+                this.cardManager.getCbxSection().addItem(section);
+            }
+            this.cardManager.getCbxSection().setSelectedItem(this.currentSection);
+            this.cardManager.getCbxSection().addActionListener(arg0 -> {
+                DeckSection selected = (DeckSection) cardManager.getCbxSection().getSelectedItem();
+                if (selected != null && selected != currentSection) {
+                    currentSection = selected;
+                    cardManager.setPool(deck.get(currentSection));
+                }
+            });
+            this.cardManager.getCbxSection().setVisible(true);
+        }
         this.setDefaultFocus(this.cardManager.getCurrentView().getComponent());
 
         FMouseAdapter mouseListener = new FMouseAdapter() {
@@ -191,12 +205,8 @@ public class FDeckViewer extends FDialog {
         int index = sections.indexOf(currentSection);
         index = (index + 1) % sections.size();
         currentSection = sections.get(index);
+        this.cardManager.getCbxSection().setSelectedItem(currentSection);
         this.cardManager.setPool(this.deck.get(currentSection));
-        updateCaption();
-    }
-
-    private void updateCaption() {
-        this.cardManager.setCaption(deck.getName() + " - " + currentSection.name());
     }
 
     private void copyToClipboard() {
