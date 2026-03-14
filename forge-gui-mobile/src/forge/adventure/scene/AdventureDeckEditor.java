@@ -261,8 +261,7 @@ public class AdventureDeckEditor extends FDeckEditor {
                         new AdventureDeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.DRAFT_POOL),
                         new AdventureDeckSectionPage(DeckSection.Main, ItemManagerConfig.DRAFT_POOL)
                 };
-            }
-            if (event.format == AdventureEventController.EventFormat.Jumpstart) {
+            } else if (event.format == AdventureEventController.EventFormat.Jumpstart) {
                 return new DeckEditorPage[]{
                         new AdventureDeckSectionPage(DeckSection.Main, ItemManagerConfig.DRAFT_POOL),
                         new AdventureDeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.SIDEBOARD)};
