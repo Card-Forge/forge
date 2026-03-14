@@ -505,8 +505,10 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
             case Battlefield: return ZoneType.Battlefield;
             case Exile: return ZoneType.Exile;
             case Command: return ZoneType.Command;
-            case Commander: return ZoneType.Command;
-            case Flashback: return ZoneType.Flashback;
+            // Commander is a list of commander cards — they may be in any zone, not just Command
+            case Commander: return null;
+            // Flashback is a virtual zone — cards in it keep their real zone (Graveyard, Command, etc.)
+            case Flashback: return null;
             case Ante: return ZoneType.Ante;
             case Sideboard: return ZoneType.Sideboard;
             default: return null;
