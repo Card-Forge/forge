@@ -10,6 +10,7 @@ import forge.gamemodes.net.IRemote;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.gamemodes.net.ReplyPool;
 import forge.gamemodes.net.event.LoginEvent;
+import forge.gamemodes.net.server.RemoteClientGuiGame;
 import forge.gui.interfaces.IGuiGame;
 import forge.util.BuildInfo;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -30,7 +31,6 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
     private final FGameClient client;
     private final IGuiGame gui;
     private Tracker tracker;
-    private boolean deltaSyncActive = false;
 
     public GameClientHandler(final FGameClient client) {
         super(true);
@@ -57,9 +57,6 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
     @SuppressWarnings("unchecked")
     @Override
     protected void beforeCall(final ChannelHandlerContext ctx, final ProtocolMethod protocolMethod, final Object[] args) {
-        if (protocolMethod == ProtocolMethod.applyDelta) {
-            deltaSyncActive = true;
-        }
         switch (protocolMethod) {
             case setGameView:
                 if (args.length > 0 && args[0] instanceof GameView gameView) {
@@ -156,7 +153,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
     }
 
     private void replicatePlayerView(final PlayerView newPlayerView) {
-        if (deltaSyncActive) {
+        if (RemoteClientGuiGame.useDeltaSync) {
             return; // Delta sync manages state — don't overwrite from protocol snapshots
         }
         PlayerView existingPlayerView = tracker.getObj(TrackableTypes.PlayerViewType, newPlayerView.getId());

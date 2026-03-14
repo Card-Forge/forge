@@ -513,10 +513,4 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
         }
     }
 
-    // ==================== Full state sync via setGameView ====================
-
-    @Override
-    public void setGameView(GameView gameView, long sequenceNumber) {
-        setGameView(gameView);
-    }
 }

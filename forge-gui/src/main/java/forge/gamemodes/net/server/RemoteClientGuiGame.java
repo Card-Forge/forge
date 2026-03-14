@@ -44,7 +44,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
     // Delta sync is ENABLED - new objects are now properly handled.
     // New objects are sent with full property data, existing objects only send changed properties.
     private final Object deltaLock = new Object();
-    private boolean useDeltaSync = true;
+    public static boolean useDeltaSync = true;
     private boolean initialSyncSent = false;
     private boolean fallbackLogged = false;  // Prevent duplicate fallback log messages
     private volatile boolean paused;
